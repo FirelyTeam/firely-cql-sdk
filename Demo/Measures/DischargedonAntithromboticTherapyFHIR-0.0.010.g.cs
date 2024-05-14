@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -46,7 +48,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
     internal Lazy<IEnumerable<MedicationRequest>> __Antithrombotic_Therapy_at_Discharge;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
+    internal Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
@@ -87,7 +89,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
         __Antithrombotic_Therapy_at_Discharge = new Lazy<IEnumerable<MedicationRequest>>(this.Antithrombotic_Therapy_at_Discharge_Value);
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
@@ -226,7 +228,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -260,7 +262,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return ab_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), g_);
 			var i_ = this.Medical_Reason();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			CqlConcept k_(CodeableConcept X)
@@ -269,7 +271,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return ac_;
 			};
-			var l_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), k_);
+			var l_ = context.Operators.Select<CodeableConcept, CqlConcept>((NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>), k_);
 			var m_ = this.Patient_Refusal();
 			var n_ = context.Operators.ConceptsInValueSet(l_, m_);
 			var o_ = context.Operators.Or(j_, n_);
@@ -287,24 +289,24 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return al_;
 			};
-			var r_ = context.Operators.WhereOrNull<CodeableConcept>((NoAntithromboticDischarge?.Category as IEnumerable<CodeableConcept>), q_);
-			var s_ = context.Operators.ExistsInList<CodeableConcept>(r_);
+			var r_ = context.Operators.Where<CodeableConcept>((NoAntithromboticDischarge?.Category as IEnumerable<CodeableConcept>), q_);
+			var s_ = context.Operators.Exists<CodeableConcept>(r_);
 			var t_ = context.Operators.And(p_, s_);
-			var u_ = context.Operators.Convert<string>(NoAntithromboticDischarge?.StatusElement);
+			var u_ = FHIRHelpers_4_0_001.ToString(NoAntithromboticDischarge?.StatusElement);
 			var v_ = new string[]
 			{
 				"completed",
 				"cancelled",
 			};
-			var w_ = context.Operators.InList<string>(u_, (v_ as IEnumerable<string>));
+			var w_ = context.Operators.In<string>(u_, (v_ as IEnumerable<string>));
 			var x_ = context.Operators.And(t_, w_);
-			var y_ = context.Operators.Convert<string>(NoAntithromboticDischarge?.IntentElement);
+			var y_ = FHIRHelpers_4_0_001.ToString(NoAntithromboticDischarge?.IntentElement);
 			var z_ = context.Operators.Equal(y_, "order");
 			var aa_ = context.Operators.And(x_, z_);
 
 			return aa_;
 		};
-		var d_ = context.Operators.WhereOrNull<MedicationRequest>(b_, c_);
+		var d_ = context.Operators.Where<MedicationRequest>(b_, c_);
 
 		return d_;
 	}
@@ -323,18 +325,18 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			{
 				var i_ = FHIRHelpers_4_0_001.ToDateTime(NoDischargeAntithrombotic?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_0_001.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.In<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};
-			var f_ = context.Operators.WhereOrNull<MedicationRequest>(d_, e_);
+			var f_ = context.Operators.Where<MedicationRequest>(d_, e_);
 			Encounter g_(MedicationRequest NoDischargeAntithrombotic) => 
 				IschemicStrokeEncounter;
-			var h_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -365,24 +367,24 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return aa_;
 			};
-			var i_ = context.Operators.WhereOrNull<CodeableConcept>((Pharmacological?.Category as IEnumerable<CodeableConcept>), h_);
-			var j_ = context.Operators.ExistsInList<CodeableConcept>(i_);
+			var i_ = context.Operators.Where<CodeableConcept>((Pharmacological?.Category as IEnumerable<CodeableConcept>), h_);
+			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
-			var l_ = context.Operators.Convert<string>(Pharmacological?.StatusElement);
+			var l_ = FHIRHelpers_4_0_001.ToString(Pharmacological?.StatusElement);
 			var m_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var n_ = context.Operators.InList<string>(l_, (m_ as IEnumerable<string>));
+			var n_ = context.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 			var o_ = context.Operators.And(k_, n_);
-			var p_ = context.Operators.Convert<string>(Pharmacological?.IntentElement);
+			var p_ = FHIRHelpers_4_0_001.ToString(Pharmacological?.IntentElement);
 			var q_ = context.Operators.Equal(p_, "order");
 			var r_ = context.Operators.And(o_, q_);
 
 			return r_;
 		};
-		var d_ = context.Operators.WhereOrNull<MedicationRequest>(b_, c_);
+		var d_ = context.Operators.Where<MedicationRequest>(b_, c_);
 
 		return d_;
 	}
@@ -401,18 +403,18 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			{
 				var i_ = FHIRHelpers_4_0_001.ToDateTime(DischargePharmacological?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_0_001.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.In<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};
-			var f_ = context.Operators.WhereOrNull<MedicationRequest>(d_, e_);
+			var f_ = context.Operators.Where<MedicationRequest>(d_, e_);
 			Encounter g_(MedicationRequest DischargePharmacological) => 
 				IschemicStrokeEncounter;
-			var h_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -480,24 +482,24 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 				return aa_;
 			};
-			var i_ = context.Operators.WhereOrNull<CodeableConcept>((Antithrombotic?.Category as IEnumerable<CodeableConcept>), h_);
-			var j_ = context.Operators.ExistsInList<CodeableConcept>(i_);
+			var i_ = context.Operators.Where<CodeableConcept>((Antithrombotic?.Category as IEnumerable<CodeableConcept>), h_);
+			var j_ = context.Operators.Exists<CodeableConcept>(i_);
 			var k_ = context.Operators.And(g_, j_);
-			var l_ = context.Operators.Convert<string>(Antithrombotic?.StatusElement);
+			var l_ = FHIRHelpers_4_0_001.ToString(Antithrombotic?.StatusElement);
 			var m_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var n_ = context.Operators.InList<string>(l_, (m_ as IEnumerable<string>));
+			var n_ = context.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 			var o_ = context.Operators.And(k_, n_);
-			var p_ = context.Operators.Convert<string>(Antithrombotic?.IntentElement);
+			var p_ = FHIRHelpers_4_0_001.ToString(Antithrombotic?.IntentElement);
 			var q_ = context.Operators.Equal(p_, "order");
 			var r_ = context.Operators.And(o_, q_);
 
 			return r_;
 		};
-		var d_ = context.Operators.WhereOrNull<MedicationRequest>(b_, c_);
+		var d_ = context.Operators.Where<MedicationRequest>(b_, c_);
 
 		return d_;
 	}
@@ -516,18 +518,18 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			{
 				var i_ = FHIRHelpers_4_0_001.ToDateTime(DischargeAntithrombotic?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_0_001.ToInterval(IschemicStrokeEncounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.In<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};
-			var f_ = context.Operators.WhereOrNull<MedicationRequest>(d_, e_);
+			var f_ = context.Operators.Where<MedicationRequest>(d_, e_);
 			Encounter g_(MedicationRequest DischargeAntithrombotic) => 
 				IschemicStrokeEncounter;
-			var h_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -547,7 +549,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	private IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -555,7 +557,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+	public IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()

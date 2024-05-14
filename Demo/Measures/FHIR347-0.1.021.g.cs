@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -73,7 +75,7 @@ public class FHIR347_0_1_021
     internal Lazy<bool?> __Initial_Population_3;
     internal Lazy<bool?> __Denominator_3;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
+    internal Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Has_Allergy_to_Statin;
@@ -151,7 +153,7 @@ public class FHIR347_0_1_021
         __Initial_Population_3 = new Lazy<bool?>(this.Initial_Population_3_Value);
         __Denominator_3 = new Lazy<bool?>(this.Denominator_3_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Has_Allergy_to_Statin = new Lazy<bool?>(this.Has_Allergy_to_Statin_Value);
@@ -489,7 +491,7 @@ public class FHIR347_0_1_021
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -524,7 +526,7 @@ public class FHIR347_0_1_021
 
 			return ai_;
 		};
-		var p_ = context.Operators.WhereOrNull<Condition>(n_, o_);
+		var p_ = context.Operators.Where<Condition>(n_, o_);
 		var q_ = this.PCI();
 		var r_ = context.Operators.RetrieveByValueSet<Procedure>(q_, null);
 		var s_ = this.CABG_Surgeries();
@@ -543,13 +545,13 @@ public class FHIR347_0_1_021
 			var al_ = this.Measurement_Period();
 			var am_ = context.Operators.End(al_);
 			var an_ = context.Operators.Before(ak_, am_, null);
-			var ao_ = context.Operators.Convert<string>(ASCVDProcedure?.StatusElement);
+			var ao_ = FHIRHelpers_4_0_001.ToString(ASCVDProcedure?.StatusElement);
 			var ap_ = context.Operators.Equal(ao_, "completed");
 			var aq_ = context.Operators.And(an_, ap_);
 
 			return aq_;
 		};
-		var ac_ = context.Operators.WhereOrNull<Procedure>(aa_, ab_);
+		var ac_ = context.Operators.Where<Procedure>(aa_, ab_);
 		var ad_ = context.Operators.ListUnion<object>((p_ as IEnumerable<object>), (ac_ as IEnumerable<object>));
 
 		return ad_;
@@ -589,13 +591,13 @@ public class FHIR347_0_1_021
 			var z_ = this.Measurement_Period();
 			var aa_ = FHIRHelpers_4_0_001.ToInterval(ValidEncounter?.Period);
 			var ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, aa_, null);
-			var ac_ = context.Operators.Convert<string>(ValidEncounter?.StatusElement);
+			var ac_ = FHIRHelpers_4_0_001.ToString(ValidEncounter?.StatusElement);
 			var ad_ = context.Operators.Equal(ac_, "finished");
 			var ae_ = context.Operators.And(ab_, ad_);
 
 			return ae_;
 		};
-		var y_ = context.Operators.WhereOrNull<Encounter>(w_, x_);
+		var y_ = context.Operators.Where<Encounter>(w_, x_);
 
 		return y_;
 	}
@@ -607,9 +609,9 @@ public class FHIR347_0_1_021
 	private bool? Initial_Population_1_Value()
 	{
 		var a_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-		var b_ = context.Operators.ExistsInList<object>(a_);
+		var b_ = context.Operators.Exists<object>(a_);
 		var c_ = this.Qualifying_Encounter_during_Measurement_Period();
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 		var e_ = context.Operators.And(b_, d_);
 
 		return e_;
@@ -637,7 +639,7 @@ public class FHIR347_0_1_021
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.CalculateAgeAt(b_, d_, "year");
-		var f_ = context.Operators.GreaterOrEqual(e_, (int?)20);
+		var f_ = context.Operators.GreaterOrEqual(e_, 20);
 
 		return f_;
 	}
@@ -661,7 +663,7 @@ public class FHIR347_0_1_021
 			var k_ = context.Operators.End(j_);
 			var l_ = context.Operators.Before(i_, k_, null);
 			var m_ = context.Operators.And(g_, l_);
-			var n_ = context.Operators.Convert<string>(LDL?.StatusElement);
+			var n_ = FHIRHelpers_4_0_001.ToString(LDL?.StatusElement);
 			var o_ = new string[]
 			{
 				"final",
@@ -669,12 +671,12 @@ public class FHIR347_0_1_021
 				"corrected",
 				"appended",
 			};
-			var p_ = context.Operators.InList<string>(n_, (o_ as IEnumerable<string>));
+			var p_ = context.Operators.In<string>(n_, (o_ as IEnumerable<string>));
 			var q_ = context.Operators.And(m_, p_);
 
 			return q_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -697,7 +699,7 @@ public class FHIR347_0_1_021
 
 			return i_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
@@ -712,10 +714,10 @@ public class FHIR347_0_1_021
 		var b_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
 		var c_ = this.Hypercholesterolemia_Diagnosis();
 		var d_ = context.Operators.ListUnion<object>((b_ as IEnumerable<object>), (c_ as IEnumerable<object>));
-		var e_ = context.Operators.ExistsInList<object>(d_);
+		var e_ = context.Operators.Exists<object>(d_);
 		var f_ = context.Operators.And(a_, e_);
 		var g_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-		var h_ = context.Operators.ExistsInList<object>(g_);
+		var h_ = context.Operators.Exists<object>(g_);
 		var i_ = context.Operators.Not(h_);
 		var j_ = context.Operators.And(f_, i_);
 
@@ -730,7 +732,7 @@ public class FHIR347_0_1_021
 	{
 		var a_ = this.Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD();
 		var b_ = this.Qualifying_Encounter_during_Measurement_Period();
-		var c_ = context.Operators.ExistsInList<Encounter>(b_);
+		var c_ = context.Operators.Exists<Encounter>(b_);
 		var d_ = context.Operators.And(a_, c_);
 
 		return d_;
@@ -763,8 +765,8 @@ public class FHIR347_0_1_021
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -780,20 +782,20 @@ public class FHIR347_0_1_021
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.CalculateAgeAt(b_, d_, "year");
-		var f_ = context.Operators.Interval((int?)40, (int?)75, true, true);
-		var g_ = context.Operators.ElementInInterval<int?>(e_, f_, null);
+		var f_ = context.Operators.Interval(40, 75, true, true);
+		var g_ = context.Operators.In<int?>(e_, f_, null);
 		var h_ = this.Has_Diabetes_Diagnosis();
 		var i_ = context.Operators.And(g_, h_);
 		var j_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-		var k_ = context.Operators.ExistsInList<object>(j_);
+		var k_ = context.Operators.Exists<object>(j_);
 		var l_ = context.Operators.Not(k_);
 		var m_ = context.Operators.And(i_, l_);
 		var n_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
-		var o_ = context.Operators.ExistsInList<Observation>(n_);
+		var o_ = context.Operators.Exists<Observation>(n_);
 		var p_ = context.Operators.Not(o_);
 		var q_ = context.Operators.And(m_, p_);
 		var r_ = this.Hypercholesterolemia_Diagnosis();
-		var s_ = context.Operators.ExistsInList<Condition>(r_);
+		var s_ = context.Operators.Exists<Condition>(r_);
 		var t_ = context.Operators.Not(s_);
 		var u_ = context.Operators.And(q_, t_);
 
@@ -808,7 +810,7 @@ public class FHIR347_0_1_021
 	{
 		var a_ = this.Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia();
 		var b_ = this.Qualifying_Encounter_during_Measurement_Period();
-		var c_ = context.Operators.ExistsInList<Encounter>(b_);
+		var c_ = context.Operators.Exists<Encounter>(b_);
 		var d_ = context.Operators.And(a_, c_);
 
 		return d_;
@@ -840,7 +842,7 @@ public class FHIR347_0_1_021
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	private IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -848,7 +850,7 @@ public class FHIR347_0_1_021
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+	public IEnumerable<Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -887,8 +889,8 @@ public class FHIR347_0_1_021
 
 			return j_;
 		};
-		var d_ = context.Operators.WhereOrNull<AllergyIntolerance>(b_, c_);
-		var e_ = context.Operators.ExistsInList<AllergyIntolerance>(d_);
+		var d_ = context.Operators.Where<AllergyIntolerance>(b_, c_);
+		var e_ = context.Operators.Exists<AllergyIntolerance>(d_);
 
 		return e_;
 	}
@@ -910,23 +912,23 @@ public class FHIR347_0_1_021
 			var z_ = this.Measurement_Period();
 			var aa_ = context.Operators.End(z_);
 			var ab_ = context.Operators.SameOrBefore(y_, aa_, null);
-			var ac_ = context.Operators.Convert<string>(PalliativeOrHospiceCareOrder?.StatusElement);
+			var ac_ = FHIRHelpers_4_0_001.ToString(PalliativeOrHospiceCareOrder?.StatusElement);
 			var ad_ = new string[]
 			{
 				"active",
 				"on-hold",
 				"completed",
 			};
-			var ae_ = context.Operators.InList<string>(ac_, (ad_ as IEnumerable<string>));
+			var ae_ = context.Operators.In<string>(ac_, (ad_ as IEnumerable<string>));
 			var af_ = context.Operators.And(ab_, ae_);
-			var ag_ = context.Operators.Convert<string>(PalliativeOrHospiceCareOrder?.IntentElement);
+			var ag_ = FHIRHelpers_4_0_001.ToString(PalliativeOrHospiceCareOrder?.IntentElement);
 			var ah_ = context.Operators.Equal(ag_, "order");
 			var ai_ = context.Operators.And(af_, ah_);
 
 			return ai_;
 		};
-		var g_ = context.Operators.WhereOrNull<ServiceRequest>(e_, f_);
-		var h_ = context.Operators.ExistsInList<ServiceRequest>(g_);
+		var g_ = context.Operators.Where<ServiceRequest>(e_, f_);
+		var h_ = context.Operators.Exists<ServiceRequest>(g_);
 		var j_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		var l_ = context.Operators.RetrieveByValueSet<Procedure>(c_, null);
 		var m_ = context.Operators.ListUnion<Procedure>(j_, l_);
@@ -937,14 +939,14 @@ public class FHIR347_0_1_021
 			var al_ = this.Measurement_Period();
 			var am_ = context.Operators.End(al_);
 			var an_ = context.Operators.SameOrBefore(ak_, am_, null);
-			var ao_ = context.Operators.Convert<string>(PalliativeOrHospiceCarePerformed?.StatusElement);
+			var ao_ = FHIRHelpers_4_0_001.ToString(PalliativeOrHospiceCarePerformed?.StatusElement);
 			var ap_ = context.Operators.Equal(ao_, "completed");
 			var aq_ = context.Operators.And(an_, ap_);
 
 			return aq_;
 		};
-		var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
-		var p_ = context.Operators.ExistsInList<Procedure>(o_);
+		var o_ = context.Operators.Where<Procedure>(m_, n_);
+		var p_ = context.Operators.Exists<Procedure>(o_);
 		var q_ = context.Operators.Or(h_, p_);
 		var r_ = this.Encounter_for_palliative_care();
 		var s_ = context.Operators.ToList<CqlCode>(r_);
@@ -956,14 +958,14 @@ public class FHIR347_0_1_021
 			var at_ = this.Measurement_Period();
 			var au_ = context.Operators.End(at_);
 			var av_ = context.Operators.SameOrBefore(as_, au_, null);
-			var aw_ = context.Operators.Convert<string>(PalliativeEncounter?.StatusElement);
+			var aw_ = FHIRHelpers_4_0_001.ToString(PalliativeEncounter?.StatusElement);
 			var ax_ = context.Operators.Equal(aw_, "finished");
 			var ay_ = context.Operators.And(av_, ax_);
 
 			return ay_;
 		};
-		var v_ = context.Operators.WhereOrNull<Encounter>(t_, u_);
-		var w_ = context.Operators.ExistsInList<Encounter>(v_);
+		var v_ = context.Operators.Where<Encounter>(t_, u_);
+		var w_ = context.Operators.Exists<Encounter>(v_);
 		var x_ = context.Operators.Or(q_, w_);
 
 		return x_;
@@ -991,8 +993,8 @@ public class FHIR347_0_1_021
 
 			return n_;
 		};
-		var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Condition>(j_);
+		var j_ = context.Operators.Where<Condition>(h_, i_);
+		var k_ = context.Operators.Exists<Condition>(j_);
 
 		return k_;
 	}
@@ -1015,8 +1017,8 @@ public class FHIR347_0_1_021
 
 			return j_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -1037,8 +1039,8 @@ public class FHIR347_0_1_021
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -1055,12 +1057,12 @@ public class FHIR347_0_1_021
 		{
 			var f_ = FHIRHelpers_4_0_001.ToDateTime(StatinReaction?.DateElement);
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.ElementInInterval<CqlDateTime>(f_, g_, null);
+			var h_ = context.Operators.In<CqlDateTime>(f_, g_, null);
 
 			return h_;
 		};
-		var d_ = context.Operators.WhereOrNull<AdverseEvent>(b_, c_);
-		var e_ = context.Operators.ExistsInList<AdverseEvent>(d_);
+		var d_ = context.Operators.Where<AdverseEvent>(b_, c_);
+		var e_ = context.Operators.Exists<AdverseEvent>(d_);
 
 		return e_;
 	}
@@ -1108,8 +1110,8 @@ public class FHIR347_0_1_021
 
 			return n_;
 		};
-		var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Condition>(j_);
+		var j_ = context.Operators.Where<Condition>(h_, i_);
+		var k_ = context.Operators.Exists<Condition>(j_);
 
 		return k_;
 	}
@@ -1138,22 +1140,22 @@ public class FHIR347_0_1_021
 		{
 			var t_ = FHIRHelpers_4_0_001.ToDateTime(StatinOrdered?.AuthoredOnElement);
 			var u_ = this.Measurement_Period();
-			var v_ = context.Operators.ElementInInterval<CqlDateTime>(t_, u_, null);
-			var w_ = context.Operators.Convert<string>(StatinOrdered?.StatusElement);
+			var v_ = context.Operators.In<CqlDateTime>(t_, u_, null);
+			var w_ = FHIRHelpers_4_0_001.ToString(StatinOrdered?.StatusElement);
 			var x_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var y_ = context.Operators.InList<string>(w_, (x_ as IEnumerable<string>));
+			var y_ = context.Operators.In<string>(w_, (x_ as IEnumerable<string>));
 			var z_ = context.Operators.And(v_, y_);
-			var aa_ = context.Operators.Convert<string>(StatinOrdered?.IntentElement);
+			var aa_ = FHIRHelpers_4_0_001.ToString(StatinOrdered?.IntentElement);
 			var ab_ = context.Operators.Equal(aa_, "order");
 			var ac_ = context.Operators.And(z_, ab_);
 
 			return ac_;
 		};
-		var s_ = context.Operators.WhereOrNull<MedicationRequest>(q_, r_);
+		var s_ = context.Operators.Where<MedicationRequest>(q_, r_);
 
 		return s_;
 	}
@@ -1186,10 +1188,10 @@ public class FHIR347_0_1_021
 
 				return ae_;
 			};
-			var u_ = context.Operators.WhereOrNull<Dosage>(ActiveStatin?.DosageInstruction, t_);
+			var u_ = context.Operators.Where<Dosage>(ActiveStatin?.DosageInstruction, t_);
 			Timing v_(Dosage @this) => 
 				@this?.Timing;
-			var w_ = context.Operators.SelectOrNull<Dosage, Timing>(u_, v_);
+			var w_ = context.Operators.Select<Dosage, Timing>(u_, v_);
 			bool? x_(Timing T)
 			{
 				object af_()
@@ -1213,20 +1215,20 @@ public class FHIR347_0_1_021
 
 				return ai_;
 			};
-			var y_ = context.Operators.WhereOrNull<Timing>(w_, x_);
-			var z_ = context.Operators.ExistsInList<Timing>(y_);
-			var aa_ = context.Operators.Convert<string>(ActiveStatin?.StatusElement);
+			var y_ = context.Operators.Where<Timing>(w_, x_);
+			var z_ = context.Operators.Exists<Timing>(y_);
+			var aa_ = FHIRHelpers_4_0_001.ToString(ActiveStatin?.StatusElement);
 			var ab_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var ac_ = context.Operators.InList<string>(aa_, (ab_ as IEnumerable<string>));
+			var ac_ = context.Operators.In<string>(aa_, (ab_ as IEnumerable<string>));
 			var ad_ = context.Operators.And(z_, ac_);
 
 			return ad_;
 		};
-		var s_ = context.Operators.WhereOrNull<MedicationRequest>(q_, r_);
+		var s_ = context.Operators.Where<MedicationRequest>(q_, r_);
 
 		return s_;
 	}
@@ -1238,9 +1240,9 @@ public class FHIR347_0_1_021
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Statin_Therapy_Ordered_during_Measurement_Period();
-		var b_ = context.Operators.ExistsInList<MedicationRequest>(a_);
+		var b_ = context.Operators.Exists<MedicationRequest>(a_);
 		var c_ = this.Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period();
-		var d_ = context.Operators.ExistsInList<MedicationRequest>(c_);
+		var d_ = context.Operators.Exists<MedicationRequest>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 
 		return e_;

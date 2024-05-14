@@ -14,12 +14,14 @@ using Hl7.Cql.ValueSets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Compiler;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -28,18 +30,23 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// </summary>
     internal class CSharpLibrarySetToStreamsWriter
     {
+        private const string TuplesNamespace = "Tuples";
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
+        private readonly CSharpCodeWriterOptions _options;
 
         /// <summary>
         /// Creates an instance.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
+        /// <param name="options">The options <see cref="CSharpCodeWriterOptions"/></param>
         /// <param name="typeResolver">The <see cref="TypeResolver"/> to use to include namespaces and aliases from.</param>
         public CSharpLibrarySetToStreamsWriter(
             ILogger<CSharpLibrarySetToStreamsWriter> logger,
+            IOptions<CSharpCodeWriterOptions> options,
             TypeResolver typeResolver)
         {
             _logger = logger;
+            _options = options.Value;
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
@@ -61,6 +68,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var hashSet = new HashSet<string>
             {
                 nameof(System),
+                TuplesNamespace,
                 typeof(Enumerable).Namespace!, // System.Linq
                 typeof(ICollection<>).Namespace!, // System.Collections.Generic
                 typeof(CqlContext).Namespace!,
@@ -68,6 +76,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 typeof(CqlDeclarationAttribute).Namespace!,
                 typeof(IValueSetFacade).Namespace!,
                 typeof(Iso8601.DateIso8601).Namespace!,
+                typeof(PropertyInfo).Namespace!,
             };
 
             foreach (var @using in typeResolver.ModelNamespaces)
@@ -192,7 +201,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
                 int indentLevel = 0;
-                WriteUsings(writer);
+                WriteUsings(writer, isForTuple:false);
 
                 // Namespace
                 if (!string.IsNullOrWhiteSpace(Namespace))
@@ -362,13 +371,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (tupleType == null!)
                     continue;
 
+                Debug.Assert(tupleType.Namespace == TuplesNamespace, $"If Tuples are expected to be in the {TuplesNamespace} namespace.");
                 var tupleLibraryName = Path.Combine(tupleType.Namespace!, tupleType.Name);
                 var stream = callbacks.GetStreamForLibraryName(tupleLibraryName);
                 if (stream == null!)
                     continue;
 
                 using var writer = new StreamWriter(stream, leaveOpen: true);
-                WriteUsings(writer);
+                WriteUsings(writer, isForTuple: true);
                 var indentLevel = 0;
                 writer.WriteLine();
                 writer.WriteLine(indentLevel, $"namespace {tupleType.Namespace}");
@@ -444,7 +454,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 new LocalVariableDeduper()
             );
 
-            var expressionConverter = new ExpressionConverter(libraryName);
+            var expressionConverter = new ExpressionConverter(libraryName, _options.TypeFormat);
 
             // Skip CqlContext
             var parameters = overload.Parameters.Skip(1);
@@ -495,7 +505,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 //      writer.WriteLine();
             }
         }
-        
+
         private static void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
         {
             if (tags != null)
@@ -510,10 +520,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteUsings(TextWriter writer)
+        private void WriteUsings(TextWriter writer, bool isForTuple)
         {
-            foreach (var @using in _usings.Distinct())
+            foreach (var @using in _usings)
             {
+                if (isForTuple && @using == TuplesNamespace)
+                    continue;
+
                 writer.WriteLine($"using {@using};");
             }
             foreach (var @using in _aliasedUsings)

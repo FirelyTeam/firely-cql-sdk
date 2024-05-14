@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -30,12 +32,12 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<bool?> __Has_Encounter_during_Measurement_Period;
-    internal Lazy<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK> __First_Referral_during_First_10_Months_of_Measurement_Period;
+    internal Lazy<Tuple_BSbViOJDfcWMTEFJacdbUQAMC> __First_Referral_during_First_10_Months_of_Measurement_Period;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop;
     internal Lazy<bool?> __Numerator;
@@ -60,12 +62,12 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Has_Encounter_during_Measurement_Period = new Lazy<bool?>(this.Has_Encounter_during_Measurement_Period_Value);
-        __First_Referral_during_First_10_Months_of_Measurement_Period = new Lazy<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(this.First_Referral_during_First_10_Months_of_Measurement_Period_Value);
+        __First_Referral_during_First_10_Months_of_Measurement_Period = new Lazy<Tuple_BSbViOJDfcWMTEFJacdbUQAMC>(this.First_Referral_during_First_10_Months_of_Measurement_Period_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop = new Lazy<bool?>(this.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
@@ -144,13 +146,12 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("CRLReceiptofSpecialistReportFHIR-0.2.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("CRLReceiptofSpecialistReportFHIR-0.2.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -160,7 +161,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -199,8 +200,8 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return z_;
 		};
-		var s_ = context.Operators.WhereOrNull<Encounter>(q_, r_);
-		var t_ = context.Operators.ExistsInList<Encounter>(s_);
+		var s_ = context.Operators.Where<Encounter>(q_, r_);
+		var t_ = context.Operators.Exists<Encounter>(s_);
 
 		return t_;
 	}
@@ -209,7 +210,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	public bool? Has_Encounter_during_Measurement_Period() => 
 		__Has_Encounter_during_Measurement_Period.Value;
 
-	private Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK First_Referral_during_First_10_Months_of_Measurement_Period_Value()
+	private Tuple_BSbViOJDfcWMTEFJacdbUQAMC First_Referral_during_First_10_Months_of_Measurement_Period_Value()
 	{
 		var a_ = this.Referral();
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
@@ -222,7 +223,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 				"active",
 				"completed",
 			};
-			var m_ = context.Operators.InList<string>(k_, (l_ as IEnumerable<string>));
+			var m_ = context.Operators.In<string>(k_, (l_ as IEnumerable<string>));
 			var n_ = context.Operators.Convert<Code<RequestIntent>>(ReferralOrder?.IntentElement?.Value);
 			var o_ = context.Operators.Equal(n_, "order");
 			var p_ = context.Operators.And(m_, o_);
@@ -230,20 +231,20 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			var r_ = this.Measurement_Period();
 			var s_ = context.Operators.Start(r_);
 			var u_ = context.Operators.Start(r_);
-			var v_ = context.Operators.ComponentFrom(u_, "year");
-			var w_ = context.Operators.Date(v_, (int?)10, (int?)31);
+			var v_ = context.Operators.DateTimeComponentFrom(u_, "year");
+			var w_ = context.Operators.Date(v_, 10, 31);
 			var x_ = context.Operators.ConvertDateToDateTime(w_);
 			var y_ = context.Operators.Interval(s_, x_, true, true);
-			var z_ = context.Operators.ElementInInterval<CqlDateTime>(q_, y_, "day");
+			var z_ = context.Operators.In<CqlDateTime>(q_, y_, "day");
 			var aa_ = context.Operators.And(p_, z_);
 
 			return aa_;
 		};
-		var d_ = context.Operators.WhereOrNull<ServiceRequest>(b_, c_);
-		Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK e_(ServiceRequest ReferralOrder)
+		var d_ = context.Operators.Where<ServiceRequest>(b_, c_);
+		Tuple_BSbViOJDfcWMTEFJacdbUQAMC e_(ServiceRequest ReferralOrder)
 		{
 			var ab_ = context.Operators.Convert<CqlDateTime>(ReferralOrder?.AuthoredOnElement);
-			var ac_ = new Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK
+			var ac_ = new Tuple_BSbViOJDfcWMTEFJacdbUQAMC
 			{
 				ID = ReferralOrder?.IdElement?.Value,
 				AuthorDate = ab_,
@@ -251,17 +252,17 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return ac_;
 		};
-		var f_ = context.Operators.SelectOrNull<ServiceRequest, Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(d_, e_);
-		object g_(Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK @this) => 
+		var f_ = context.Operators.Select<ServiceRequest, Tuple_BSbViOJDfcWMTEFJacdbUQAMC>(d_, e_);
+		object g_(Tuple_BSbViOJDfcWMTEFJacdbUQAMC @this) => 
 			@this?.AuthorDate;
-		var h_ = context.Operators.ListSortBy<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
-		var i_ = context.Operators.FirstOfList<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(h_);
+		var h_ = context.Operators.SortBy<Tuple_BSbViOJDfcWMTEFJacdbUQAMC>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+		var i_ = context.Operators.First<Tuple_BSbViOJDfcWMTEFJacdbUQAMC>(h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("First Referral during First 10 Months of Measurement Period")]
-	public Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK First_Referral_during_First_10_Months_of_Measurement_Period() => 
+	public Tuple_BSbViOJDfcWMTEFJacdbUQAMC First_Referral_during_First_10_Months_of_Measurement_Period() => 
 		__First_Referral_during_First_10_Months_of_Measurement_Period.Value;
 
 	private bool? Initial_Population_Value()
@@ -289,7 +290,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	public bool? Denominator() => 
 		__Denominator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -297,10 +298,10 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -308,10 +309,10 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -319,7 +320,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -342,7 +343,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 			return c_;
 		};
-		var b_ = context.Operators.SelectOrNull<ResourceReference, string>((task?.BasedOn as IEnumerable<ResourceReference>), a_);
+		var b_ = context.Operators.Select<ResourceReference, string>((task?.BasedOn as IEnumerable<ResourceReference>), a_);
 
 		return b_;
 	}
@@ -354,14 +355,14 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 		IEnumerable<Task> c_(Task ConsultantReportObtained)
 		{
 			var f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
-			var g_ = new Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK[]
+			var g_ = new Tuple_BSbViOJDfcWMTEFJacdbUQAMC[]
 			{
 				f_,
 			};
-			bool? h_(Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK FirstReferral)
+			bool? h_(Tuple_BSbViOJDfcWMTEFJacdbUQAMC FirstReferral)
 			{
 				var l_ = this.TaskGetRequestID(ConsultantReportObtained);
-				var m_ = context.Operators.InList<string>(FirstReferral?.ID, l_);
+				var m_ = context.Operators.In<string>(FirstReferral?.ID, l_);
 				var n_ = FHIRHelpers_4_3_000.ToInterval(ConsultantReportObtained?.ExecutionPeriod);
 				var o_ = context.Operators.End(n_);
 				var p_ = context.Operators.After(o_, FirstReferral?.AuthorDate, null);
@@ -371,20 +372,20 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 				var t_ = context.Operators.And(q_, s_);
 				var v_ = context.Operators.End(n_);
 				var w_ = this.Measurement_Period();
-				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, "day");
+				var x_ = context.Operators.In<CqlDateTime>(v_, w_, "day");
 				var y_ = context.Operators.And(t_, x_);
 
 				return y_;
 			};
-			var i_ = context.Operators.WhereOrNull<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK>(g_, h_);
-			Task j_(Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK FirstReferral) => 
+			var i_ = context.Operators.Where<Tuple_BSbViOJDfcWMTEFJacdbUQAMC>(g_, h_);
+			Task j_(Tuple_BSbViOJDfcWMTEFJacdbUQAMC FirstReferral) => 
 				ConsultantReportObtained;
-			var k_ = context.Operators.SelectOrNull<Tuples.Tuple_BQRHOWGHNMjBJPPZJZXVMjCPK, Task>(i_, j_);
+			var k_ = context.Operators.Select<Tuple_BSbViOJDfcWMTEFJacdbUQAMC, Task>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Task, Task>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Task>(d_);
+		var d_ = context.Operators.SelectMany<Task, Task>(b_, c_);
+		var e_ = context.Operators.Exists<Task>(d_);
 
 		return e_;
 	}

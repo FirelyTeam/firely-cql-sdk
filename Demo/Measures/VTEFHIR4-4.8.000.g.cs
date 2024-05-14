@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -52,13 +54,12 @@ public class VTEFHIR4_4_8_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -68,7 +69,7 @@ public class VTEFHIR4_4_8_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -89,7 +90,7 @@ public class VTEFHIR4_4_8_000
 
 				return o_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((f_?.Type as IEnumerable<CodeableConcept>), g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((f_?.Type as IEnumerable<CodeableConcept>), g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
@@ -99,7 +100,7 @@ public class VTEFHIR4_4_8_000
 
 			return n_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
 		object c_(Encounter.LocationComponent @this)
 		{
 			var p_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
@@ -107,8 +108,8 @@ public class VTEFHIR4_4_8_000
 
 			return q_;
 		};
-		var d_ = context.Operators.ListSortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
-		var e_ = context.Operators.FirstOfList<Encounter.LocationComponent>(d_);
+		var d_ = context.Operators.SortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
+		var e_ = context.Operators.First<Encounter.LocationComponent>(d_);
 
 		return e_;
 	}

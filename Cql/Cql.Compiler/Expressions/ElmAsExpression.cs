@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System;
 using System.Linq.Expressions;
 
 namespace Hl7.Cql.Compiler.Expressions
@@ -19,11 +26,10 @@ namespace Hl7.Cql.Compiler.Expressions
         public override Expression Reduce()
         {
             if (AsType!.IsValueType)
-                return Convert(Expression, AsType);
-            else if (Expression is ConstantExpression ce && ce.Value == null)
+                return Expression.NewAssignToTypeExpression(AsType);
+            if (Expression is ConstantExpression { Value: null })
                 return Constant(null, AsType);
-            else
-                return TypeAs(Expression, AsType);
+            return Expression.NewTypeAsExpression(AsType);
         }
         protected override Expression VisitChildren(ExpressionVisitor visitor) =>
             Update(visitor.Visit(Expression));

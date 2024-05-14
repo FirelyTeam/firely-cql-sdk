@@ -1,15 +1,19 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
-using Hl7.Cql.Operators;
-using Hl7.Cql.Primitives;
 using Microsoft.CodeAnalysis.CSharp;
 using Expression = System.Linq.Expressions.Expression;
 using F = Hl7.Fhir.Model;
@@ -17,7 +21,7 @@ using F = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Compiler;
 
-partial class ExpressionBuilder
+partial class ExpressionBuilderContext
 {
     // Yeah, hardwired to FHIR 4.0.1 for now.
     private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
@@ -37,42 +41,12 @@ partial class ExpressionBuilder
         return KnownErrors.TryGetValue((source, to), out correctedTo);
     }
 
-    protected static bool IsInterval(Type t, out Type? elementType)
-    {
-        if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(CqlInterval<>))
-        {
-            elementType = t.GetGenericArguments()[0];
-            return true;
-        }
-        elementType = null;
-        return false;
-    }
-
-    internal static MethodCallExpression CallCreateValueSetFacade(Expression operand)
-    {
-        var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
-        var call = Expression.Call(CqlContextExpressions.Operators_PropertyExpression, createFacadeMethod, operand);
-
-        return call;
-    }
-
-    protected static ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
-    {
-        if (!precisionSpecified)
-            return CqlContextExpressions.NullString_ConstantExpression;
-
-        var name = Enum.GetName(elmPrecision)!.ToLowerInvariant();
-        var ce = Expression.Constant(name, typeof(string));
-        return ce;
-    }
-
-    private static LambdaExpression NotImplemented(
-        ExpressionBuilder ctx,
+    private LambdaExpression NotImplemented(
         string nav,
         Type[] signature,
         Type returnType)
     {
-        var parameters = signature.SelectToArray((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, ctx) + index));
+        var parameters = signature.SelectToArray((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, this) + index));
         var ctor = ConstructorInfos.NotImplementedException;
         var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
         var @throw = Expression.Throw(@new, returnType);
@@ -84,25 +58,6 @@ partial class ExpressionBuilder
         //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
         //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
         return lambda;
-    }
-
-    protected internal static PropertyInfo? GetProperty(Type type, string name, TypeResolver typeResolver)
-    {
-        if (type.IsGenericType)
-        {
-            var gtd = type.GetGenericTypeDefinition();
-            if (gtd == typeof(Nullable<>))
-            {
-                if (string.Equals(name, "value", StringComparison.OrdinalIgnoreCase))
-                {
-                    var valueMember = type.GetProperty("Value");
-                    return valueMember;
-                }
-            }
-        }
-
-        var member = typeResolver.GetProperty(type, name);
-        return member;
     }
 
     protected static Type GetFuncType(Type[] funcTypeParameters) =>
@@ -165,7 +120,7 @@ partial class ExpressionBuilder
                 targetNullTypeArg: Nullable.GetUnderlyingType(targetType)) switch
             {
                 // Only targetType is nullable
-                (exprNullTypeArg: null, targetNullTypeArg: not null) => Expression.Convert(expression, targetType),
+                (exprNullTypeArg: null, targetNullTypeArg: not null) => expression.NewAssignToTypeExpression(targetType),
 
                 // Both are nullable or not nullable
                 ({ } exprNullTypeArg, targetNullTypeArg: null) => Expression.Coalesce(expression, Expression.Default(exprNullTypeArg)),
@@ -180,13 +135,10 @@ partial class ExpressionBuilder
     {
         if (before.Type.IsValueType)
             return before;
-        else
-        {
-            return new NullConditionalMemberExpression(before, member);
-        }
+        return new NullConditionalMemberExpression(before, member);
     }
 
-    internal static string TypeNameToIdentifier(Type type, ExpressionBuilder? ctx)
+    private static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx = null)
     {
         var typeName = type.Name.ToLowerInvariant();
         if (type.IsGenericType)
@@ -212,15 +164,6 @@ partial class ExpressionBuilder
         }
 
         return NormalizeIdentifier(typeName!)!;
-    }
-
-    private static bool IsEnum(Type type)
-    {
-        if (type.IsEnum)
-            return true;
-        if (type.IsNullable() && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
-            return true;
-        return false;
     }
 
     protected interface IPopToken : IDisposable

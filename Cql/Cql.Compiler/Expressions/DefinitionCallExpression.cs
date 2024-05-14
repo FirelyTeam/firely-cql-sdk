@@ -6,12 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Runtime;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Expressions
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
@@ -57,7 +57,7 @@ namespace Hl7.Cql.Compiler
             };
 
             var index = MakeIndex(Definitions, itemProperty, indices);
-            var asFunc = TypeAs(index, DefinitionType);
+            var asFunc = index.NewTypeAsExpression(DefinitionType);
             var invoke = Invoke(asFunc, CqlContextParameter);
 
             return invoke;

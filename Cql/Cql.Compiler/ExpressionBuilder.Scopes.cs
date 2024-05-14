@@ -13,11 +13,9 @@ using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Expression = System.Linq.Expressions.Expression;
 
-using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
-
 namespace Hl7.Cql.Compiler
 {
-    internal partial class ExpressionBuilder
+    partial class ExpressionBuilderContext
     {
         protected IReadOnlyDictionary<string, (Expression expr, Elm.Element element)> Scopes
         {
@@ -74,7 +72,7 @@ namespace Hl7.Cql.Compiler
             var scopes = new Dictionary<string, (Expression, Elm.Element)>(peek.scopes ?? ReadOnlyDictionary<string, (Expression, Elm.Element)>.Empty);
             alias ??= peek.impliedAlias;
 
-            if (_libraryDefinitionBuilderSettings.AllowScopeRedefinition)
+            if (_expressionBuilderSettings.AllowScopeRedefinition)
             {
                 foreach (var (expr, element) in kvps)
                 {
@@ -95,7 +93,7 @@ namespace Hl7.Cql.Compiler
 
                     if (!scopes.TryAdd(normalizedIdentifier, element))
                         throw this.NewExpressionBuildingException(
-                            $"Scope {expr}, normalized to {NormalizeIdentifier(expr)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_libraryDefinitionBuilderSettings.AllowScopeRedefinition)} to true");
+                            $"Scope {expr}, normalized to {NormalizeIdentifier(expr)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_expressionBuilderSettings.AllowScopeRedefinition)} to true");
                 }
             }
 
@@ -108,10 +106,10 @@ namespace Hl7.Cql.Compiler
 
         private readonly record struct PopScopesToken : IPopToken
         {
-            private readonly ExpressionBuilder _owner;
+            private readonly ExpressionBuilderContext _owner;
             private readonly object? _prevId;
 
-            public PopScopesToken(ExpressionBuilder owner, object? prevId)
+            public PopScopesToken(ExpressionBuilderContext owner, object? prevId)
             {
                 _owner = owner;
                 _prevId = prevId;

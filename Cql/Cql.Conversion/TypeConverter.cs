@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -11,6 +11,8 @@ using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Conversion
 {
@@ -29,7 +31,7 @@ namespace Hl7.Cql.Conversion
         /// </summary>
         object? Convert(object? instance, Type to);
     }
-    
+
     /// <summary>
     /// Converts CQL model types to .NET types, and vice versa.
     /// </summary>
@@ -37,7 +39,7 @@ namespace Hl7.Cql.Conversion
     {
         private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> _converters
             = new();
-        
+
         private readonly List<ITypeConverterEntry> _customConverters = [];
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace Hl7.Cql.Conversion
         internal TypeConverter()
         {
         }
-        
+
         /// <summary>
         /// Creates a default instance that provides some default conversions.
         /// </summary>
@@ -55,7 +57,7 @@ namespace Hl7.Cql.Conversion
             new TypeConverter()
                 .ConvertNetTypes()
                 .ConvertsIsoToCqlPrimitives();
-        
+
         /// <summary>
         /// Returns <see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.
         /// </summary>
@@ -72,7 +74,7 @@ namespace Hl7.Cql.Conversion
             else
                 return false;
         }
-        
+
         /// <summary>
         /// Performs the conversion of <paramref name="from"/> to <typeparamref name="T"/>.
         /// </summary>
@@ -106,7 +108,7 @@ namespace Hl7.Cql.Conversion
             else
                     throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
         }
-        
+
         /// <summary>
         /// Adds a new function for converting <paramref name="from"/> to <paramref name="to"/>.
         /// </summary>
@@ -123,10 +125,10 @@ namespace Hl7.Cql.Conversion
             }
             if (toDictionary.TryGetValue(to, out _))
                 throw new ArgumentException($"Conversion from {from} to {to} is already defined.");
-            else 
+            else
                 toDictionary.Add(to, conversion);
         }
-        
+
         /// <summary>
         /// Adds a new converter function.
         /// </summary>
@@ -152,7 +154,7 @@ namespace Hl7.Cql.Conversion
             else toDictionary.Add(typeof(TTo), x => conversion((TFrom)x)!);
         }
 
-       
+
         /// <summary>
         /// Provides utility for converting common .NET types that don't have implicit conversions defined, e.g. <see cref="string"/> and <see cref="Uri"/>.
         /// </summary>
@@ -180,6 +182,36 @@ namespace Hl7.Cql.Conversion
             AddConversion<CqlDateTime, DateIso8601>(cqlDateTime => cqlDateTime.DateOnly.Value);
             AddConversion<CqlTime, TimeIso8601>(cqlTime => cqlTime.Value);
             return this;
+        }
+
+        internal virtual void LogAllConverters(ILogger<TypeConverter> logger)
+        {
+            TypeFormatterOptions o = new(
+                HideNamespaces: true,
+                PreferKeywords: false);
+
+            string TypeToString(Type t) =>
+                string.Concat(
+                    t.Namespace!
+                     .Replace("Hl7.Fhir.Model", "fhir ")
+                     .Replace("Hl7.Cql.Primitives", "cql ")
+                     .Replace("Hl7.Cql.Iso8601", "iso8601 ")
+                     .Replace("System", "sys "),
+                    t switch
+                    {
+                        { IsEnum: true }      => "enum ",
+                        { IsValueType: true } => "struct ",
+                        _                     => ""
+                    },
+                    t.WriteCSharp(o).ToString()!);
+
+            var lines = string.Concat(
+                _converters
+                    .SelectMany(kv => kv.Value, ((kvFrom, kvTo) => (From:kvFrom.Key, To:kvTo.Key)))
+                    .Select(t => $"\n\t* {TypeToString(t.From)} --> {TypeToString(t.To)}")
+                    .Order()
+            );
+            logger.LogDebug("TypeConverter has the following conversions defined:{lines}", lines);
         }
 
     }

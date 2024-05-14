@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -67,9 +69,9 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
     internal Lazy<bool?> __Numerator_2;
     internal Lazy<bool?> __Numerator_3;
     internal Lazy<bool?> __Denominator_Exclusion;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -133,9 +135,9 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
         __Numerator_2 = new Lazy<bool?>(this.Numerator_2_Value);
         __Numerator_3 = new Lazy<bool?>(this.Numerator_3_Value);
         __Denominator_Exclusion = new Lazy<bool?>(this.Denominator_Exclusion_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -410,13 +412,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR-0.0.001", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR-0.0.001", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -426,7 +427,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -448,7 +449,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return aw_;
 			};
-			var as_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, ar_);
+			var as_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, ar_);
 			bool? at_(CqlConcept T)
 			{
 				var ax_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_();
@@ -457,12 +458,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return az_;
 			};
-			var au_ = context.Operators.WhereOrNull<CqlConcept>(as_, at_);
-			var av_ = context.Operators.ExistsInList<CqlConcept>(au_);
+			var au_ = context.Operators.Where<CqlConcept>(as_, at_);
+			var av_ = context.Operators.Exists<CqlConcept>(au_);
 
 			return av_;
 		};
-		var e_ = context.Operators.WhereOrNull<Encounter>(c_, d_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
 		var f_ = context.Operators.ListUnion<Encounter>(b_, e_);
 		bool? h_(Encounter E)
 		{
@@ -472,7 +473,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return bf_;
 			};
-			var bb_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, ba_);
+			var bb_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, ba_);
 			bool? bc_(CqlConcept T)
 			{
 				var bg_ = this.Health_behavior_intervention__individual__face_to_face__initial_30_minutes();
@@ -481,12 +482,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return bi_;
 			};
-			var bd_ = context.Operators.WhereOrNull<CqlConcept>(bb_, bc_);
-			var be_ = context.Operators.ExistsInList<CqlConcept>(bd_);
+			var bd_ = context.Operators.Where<CqlConcept>(bb_, bc_);
+			var be_ = context.Operators.Exists<CqlConcept>(bd_);
 
 			return be_;
 		};
-		var i_ = context.Operators.WhereOrNull<Encounter>(c_, h_);
+		var i_ = context.Operators.Where<Encounter>(c_, h_);
 		var j_ = this.Occupational_Therapy_Evaluation();
 		var k_ = context.Operators.RetrieveByValueSet<Encounter>(j_, null);
 		var l_ = context.Operators.ListUnion<Encounter>(i_, k_);
@@ -528,7 +529,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 			return bm_;
 		};
-		var aq_ = context.Operators.WhereOrNull<Encounter>(ao_, ap_);
+		var aq_ = context.Operators.Where<Encounter>(ao_, ap_);
 
 		return aq_;
 	}
@@ -555,7 +556,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return ah_;
 			};
-			var ad_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, ac_);
+			var ad_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, ac_);
 			bool? ae_(CqlConcept T)
 			{
 				var ai_ = this.Unlisted_preventive_medicine_service();
@@ -564,12 +565,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return ak_;
 			};
-			var af_ = context.Operators.WhereOrNull<CqlConcept>(ad_, ae_);
-			var ag_ = context.Operators.ExistsInList<CqlConcept>(af_);
+			var af_ = context.Operators.Where<CqlConcept>(ad_, ae_);
+			var ag_ = context.Operators.Exists<CqlConcept>(af_);
 
 			return ag_;
 		};
-		var j_ = context.Operators.WhereOrNull<Encounter>(h_, i_);
+		var j_ = context.Operators.Where<Encounter>(h_, i_);
 		var k_ = context.Operators.ListUnion<Encounter>(g_, j_);
 		var l_ = context.Operators.ListUnion<Encounter>(e_, k_);
 		var m_ = this.Preventive_Care_Services_Individual_Counseling();
@@ -582,7 +583,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return aq_;
 			};
-			var am_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(E?.Type, al_);
+			var am_ = context.Operators.Select<CodeableConcept, CqlConcept>(E?.Type, al_);
 			bool? an_(CqlConcept T)
 			{
 				var ar_ = this.Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure();
@@ -591,12 +592,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 				return at_;
 			};
-			var ao_ = context.Operators.WhereOrNull<CqlConcept>(am_, an_);
-			var ap_ = context.Operators.ExistsInList<CqlConcept>(ao_);
+			var ao_ = context.Operators.Where<CqlConcept>(am_, an_);
+			var ap_ = context.Operators.Exists<CqlConcept>(ao_);
 
 			return ap_;
 		};
-		var q_ = context.Operators.WhereOrNull<Encounter>(h_, p_);
+		var q_ = context.Operators.Where<Encounter>(h_, p_);
 		var r_ = context.Operators.ListUnion<Encounter>(n_, q_);
 		var s_ = context.Operators.ListUnion<Encounter>(l_, r_);
 		var t_ = this.Nutrition_Services();
@@ -615,7 +616,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 			return ax_;
 		};
-		var ab_ = context.Operators.WhereOrNull<Encounter>(z_, aa_);
+		var ab_ = context.Operators.Where<Encounter>(z_, aa_);
 
 		return ab_;
 	}
@@ -632,12 +633,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)12);
+		var g_ = context.Operators.GreaterOrEqual(f_, 12);
 		var h_ = this.Qualifying_Visit_During_Measurement_Period();
-		var i_ = context.Operators.CountOrNull<Encounter>(h_);
-		var j_ = context.Operators.GreaterOrEqual(i_, (int?)2);
+		var i_ = context.Operators.Count<Encounter>(h_);
+		var j_ = context.Operators.GreaterOrEqual(i_, 2);
 		var k_ = this.Preventive_Visit_During_Measurement_Period();
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var l_ = context.Operators.Exists<Encounter>(k_);
 		var m_ = context.Operators.Or(j_, l_);
 		var n_ = context.Operators.And(g_, m_);
 
@@ -673,7 +674,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -682,8 +683,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 			return s_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = new Observation[]
 		{
 			h_,
@@ -696,8 +697,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 			return v_;
 		};
-		var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<Observation>(k_);
+		var k_ = context.Operators.Where<Observation>(i_, j_);
+		var l_ = context.Operators.SingletonFrom<Observation>(k_);
 
 		return l_;
 	}
@@ -745,7 +746,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
 			var q_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
@@ -754,8 +755,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 			return s_;
 		};
-		var g_ = context.Operators.ListSortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.LastOfList<Observation>(g_);
+		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = new Observation[]
 		{
 			h_,
@@ -768,8 +769,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 			return v_;
 		};
-		var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
-		var l_ = context.Operators.SingleOrNull<Observation>(k_);
+		var k_ = context.Operators.Where<Observation>(i_, j_);
+		var l_ = context.Operators.SingletonFrom<Observation>(k_);
 
 		return l_;
 	}
@@ -812,7 +813,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 			return u_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		var f_ = this.Tobacco_abuse_counseling();
 		var g_ = context.Operators.ToList<CqlCode>(f_);
 		var h_ = context.Operators.RetrieveByCodes<Condition>(g_, null);
@@ -826,11 +827,11 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var aa_ = context.Operators.Subtract(y_, z_);
 			var ac_ = context.Operators.End(x_);
 			var ad_ = context.Operators.Interval(aa_, ac_, true, true);
-			var ae_ = context.Operators.ElementInInterval<CqlDateTime>(w_, ad_, "day");
+			var ae_ = context.Operators.In<CqlDateTime>(w_, ad_, "day");
 
 			return ae_;
 		};
-		var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
+		var j_ = context.Operators.Where<Condition>(h_, i_);
 		var k_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
@@ -856,11 +857,11 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(i_, p_, "day");
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
 			return q_;
 		};
-		var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 
 		return h_;
 	}
@@ -885,11 +886,11 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			var m_ = context.Operators.Subtract(k_, l_);
 			var o_ = context.Operators.End(j_);
 			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.ElementInInterval<CqlDateTime>(i_, p_, "day");
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
 			return q_;
 		};
-		var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 
 		return h_;
 	}
@@ -901,12 +902,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private bool? Numerator_2_Value()
 	{
 		var a_ = this.Tobacco_Cessation_Counseling_Given();
-		var b_ = context.Operators.ExistsInList<object>(a_);
+		var b_ = context.Operators.Exists<object>(a_);
 		var c_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered();
-		var d_ = context.Operators.ExistsInList<MedicationRequest>(c_);
+		var d_ = context.Operators.Exists<MedicationRequest>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 		var f_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation();
-		var g_ = context.Operators.ExistsInList<MedicationRequest>(f_);
+		var g_ = context.Operators.Exists<MedicationRequest>(f_);
 		var h_ = context.Operators.Or(e_, g_);
 
 		return h_;
@@ -923,12 +924,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var c_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User();
 		var d_ = context.Operators.Not((bool?)(c_ is null));
 		var e_ = this.Tobacco_Cessation_Counseling_Given();
-		var f_ = context.Operators.ExistsInList<object>(e_);
+		var f_ = context.Operators.Exists<object>(e_);
 		var g_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered();
-		var h_ = context.Operators.ExistsInList<MedicationRequest>(g_);
+		var h_ = context.Operators.Exists<MedicationRequest>(g_);
 		var i_ = context.Operators.Or(f_, h_);
 		var j_ = this.Active_Pharmacotherapy_for_Tobacco_Cessation();
-		var k_ = context.Operators.ExistsInList<MedicationRequest>(j_);
+		var k_ = context.Operators.Exists<MedicationRequest>(j_);
 		var l_ = context.Operators.Or(i_, k_);
 		var m_ = context.Operators.And(d_, l_);
 		var n_ = context.Operators.Or(b_, m_);
@@ -951,7 +952,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	public bool? Denominator_Exclusion() => 
 		__Denominator_Exclusion.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -959,10 +960,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -970,10 +971,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -981,7 +982,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

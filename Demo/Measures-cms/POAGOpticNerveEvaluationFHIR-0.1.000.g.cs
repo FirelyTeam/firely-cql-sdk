@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -34,9 +36,9 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
     internal Lazy<CqlCode[]> __ActCode;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter_During_Measurement_Period;
     internal Lazy<IEnumerable<Encounter>> __Primary_Open_Angle_Glaucoma_Encounter;
@@ -73,9 +75,9 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
         __ActCode = new Lazy<CqlCode[]>(this.ActCode_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounter_During_Measurement_Period = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_During_Measurement_Period_Value);
         __Primary_Open_Angle_Glaucoma_Encounter = new Lazy<IEnumerable<Encounter>>(this.Primary_Open_Angle_Glaucoma_Encounter_Value);
@@ -207,13 +209,12 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("POAGOpticNerveEvaluationFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("POAGOpticNerveEvaluationFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -223,7 +224,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -232,7 +233,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -240,10 +241,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -251,10 +252,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -262,7 +263,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -308,7 +309,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 			return aa_;
 		};
-		var p_ = context.Operators.WhereOrNull<Encounter>(n_, o_);
+		var p_ = context.Operators.Where<Encounter>(n_, o_);
 
 		return p_;
 	}
@@ -348,14 +349,14 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return ad_;
 			};
-			var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
+			var g_ = context.Operators.Where<Condition>(e_, f_);
 			Encounter h_(Condition PrimaryOpenAngleGlaucoma) => 
 				ValidQualifyingEncounter;
-			var i_ = context.Operators.SelectOrNull<Condition, Encounter>(g_, h_);
+			var i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
 			return i_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -372,9 +373,9 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)18);
+		var g_ = context.Operators.GreaterOrEqual(f_, 18);
 		var h_ = this.Primary_Open_Angle_Glaucoma_Encounter();
-		var i_ = context.Operators.ExistsInList<Encounter>(h_);
+		var i_ = context.Operators.Exists<Encounter>(h_);
 		var j_ = context.Operators.And(g_, i_);
 
 		return j_;
@@ -408,33 +409,35 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			{
 				var o_ = context.Operators.Convert<CqlDateTime>(CupToDiscExamNotPerformed?.IssuedElement?.Value);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var q_ = context.Operators.ElementInInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
-			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
+			var l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamNotPerformed;
-			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation CupToDiscExamNotPerformed)
 		{
 			bool? r_(Extension @this)
 			{
-				var aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				var aa_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				var ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+				var ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-				return aa_;
+				return ac_;
 			};
-			var s_ = context.Operators.WhereOrNull<Extension>(((CupToDiscExamNotPerformed is DomainResource)
+			var s_ = context.Operators.Where<Extension>(((CupToDiscExamNotPerformed is DomainResource)
 					? ((CupToDiscExamNotPerformed as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.SingleOrNull<DataType>(u_);
+			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
+			var v_ = context.Operators.SingletonFrom<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 			var y_ = this.Medical_Reason();
@@ -442,7 +445,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 			return z_;
 		};
-		var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
+		var i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
@@ -464,33 +467,35 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			{
 				var o_ = context.Operators.Convert<CqlDateTime>(OpticDiscExamNotPerformed?.IssuedElement?.Value);
 				var p_ = FHIRHelpers_4_3_000.ToInterval(EncounterWithPOAG?.Period);
-				var q_ = context.Operators.ElementInInterval<CqlDateTime>(o_, p_, null);
+				var q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 
 				return q_;
 			};
-			var l_ = context.Operators.WhereOrNull<Encounter>(j_, k_);
+			var l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamNotPerformed;
-			var n_ = context.Operators.SelectOrNull<Encounter, Observation>(l_, m_);
+			var n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
-		var g_ = context.Operators.SelectManyOrNull<Observation, Observation>(e_, f_);
+		var g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation OpticDiscExamNotPerformed)
 		{
 			bool? r_(Extension @this)
 			{
-				var aa_ = context.Operators.Equal(@this?.Url, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				var aa_ = context.Operators.Convert<FhirUri>(@this?.Url);
+				var ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+				var ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-				return aa_;
+				return ac_;
 			};
-			var s_ = context.Operators.WhereOrNull<Extension>(((OpticDiscExamNotPerformed is DomainResource)
+			var s_ = context.Operators.Where<Extension>(((OpticDiscExamNotPerformed is DomainResource)
 					? ((OpticDiscExamNotPerformed as DomainResource).Extension)
 					: null), r_);
 			DataType t_(Extension @this) => 
 				@this?.Value;
-			var u_ = context.Operators.SelectOrNull<Extension, DataType>(s_, t_);
-			var v_ = context.Operators.SingleOrNull<DataType>(u_);
+			var u_ = context.Operators.Select<Extension, DataType>(s_, t_);
+			var v_ = context.Operators.SingletonFrom<DataType>(u_);
 			var w_ = context.Operators.Convert<CodeableConcept>(v_);
 			var x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 			var y_ = this.Medical_Reason();
@@ -498,7 +503,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 			return z_;
 		};
-		var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
+		var i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
@@ -510,9 +515,9 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private bool? Denominator_Exceptions_Value()
 	{
 		var a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 		var c_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.Or(b_, d_);
 
 		return e_;
@@ -538,14 +543,14 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return o_;
 			};
-			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
+			var i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamPerformed;
-			var k_ = context.Operators.SelectOrNull<Encounter, Observation>(i_, j_);
+			var k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
+		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		bool? e_(Observation CupToDiscExamPerformed)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToValue(CupToDiscExamPerformed?.Value);
@@ -558,12 +563,12 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var u_ = context.Operators.InList<string>(s_, (t_ as IEnumerable<string>));
+			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			var v_ = context.Operators.And(q_, u_);
 
 			return v_;
 		};
-		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+		var f_ = context.Operators.Where<Observation>(d_, e_);
 
 		return f_;
 	}
@@ -588,14 +593,14 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return o_;
 			};
-			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
+			var i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamPerformed;
-			var k_ = context.Operators.SelectOrNull<Encounter, Observation>(i_, j_);
+			var k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(b_, c_);
+		var d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		bool? e_(Observation OpticDiscExamPerformed)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToValue(OpticDiscExamPerformed?.Value);
@@ -608,12 +613,12 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var u_ = context.Operators.InList<string>(s_, (t_ as IEnumerable<string>));
+			var u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			var v_ = context.Operators.And(q_, u_);
 
 			return v_;
 		};
-		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
+		var f_ = context.Operators.Where<Observation>(d_, e_);
 
 		return f_;
 	}
@@ -625,9 +630,9 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Cup_to_Disc_Ratio_Performed_with_Result();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 		var c_ = this.Optic_Disc_Exam_Performed_with_Result();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.And(b_, d_);
 
 		return e_;

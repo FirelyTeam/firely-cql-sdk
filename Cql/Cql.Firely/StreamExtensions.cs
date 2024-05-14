@@ -27,13 +27,5 @@ namespace Hl7.Cql.Fhir
 
         public static T ParseFhir<T>(this Stream stream) => JsonSerializer.Deserialize<T>(stream, Options)
                                                             ?? throw new ArgumentException($"Unable to deserialize this stream as {typeof(T).Name}");
-        public static ValueTask<T> ParseFhirAsync<T>(this Stream stream) =>
-            JsonSerializer.DeserializeAsync<T>(stream, Options)!;
-        public static void WriteFhir<T>(this Stream stream, T fhir) =>
-            JsonSerializer.Serialize<T>(stream, fhir, Options);
-        public static string ToJson<T>(this T fhir) =>
-            JsonSerializer.Serialize<T>(fhir, Options);
-
-
     }
 }

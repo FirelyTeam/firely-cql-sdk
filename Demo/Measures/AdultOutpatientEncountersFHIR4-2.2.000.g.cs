@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -106,7 +108,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -133,7 +135,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 		var n_ = context.Operators.ListUnion<Encounter>(k_, m_);
 		bool? o_(Encounter ValidEncounter)
 		{
-			var q_ = context.Operators.Convert<string>(ValidEncounter?.StatusElement);
+			var q_ = FHIRHelpers_4_0_001.ToString(ValidEncounter?.StatusElement);
 			var r_ = context.Operators.Equal(q_, "finished");
 			var s_ = this.Measurement_Period();
 			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ValidEncounter?.Period as object));
@@ -142,7 +144,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 
 			return v_;
 		};
-		var p_ = context.Operators.WhereOrNull<Encounter>(n_, o_);
+		var p_ = context.Operators.Where<Encounter>(n_, o_);
 
 		return p_;
 	}

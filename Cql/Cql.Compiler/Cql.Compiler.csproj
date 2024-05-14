@@ -13,8 +13,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(Configuration)' == 'Debug' " >
-		<PackageReference Include="Dumpify" Version="0.6.5"  />
+	<ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<PackageReference Include="Dumpify" Version="0.6.5" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,8 +37,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="CqlOperatorsBinding.*.cs">
-			<DependentUpon>CqlOperatorsBinding.cs</DependentUpon>
+		<Compile Update="CqlOperatorsBinder.*.cs">
+			<DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
 		</Compile>
 		<Compile Update="ExpressionBuilder.*.cs">
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>

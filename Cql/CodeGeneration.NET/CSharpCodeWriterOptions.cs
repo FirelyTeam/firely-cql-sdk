@@ -1,4 +1,11 @@
-﻿using System.IO;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System.IO;
 using Microsoft.Extensions.Configuration;
 
 namespace Hl7.Cql.CodeGeneration.NET;
@@ -20,6 +27,12 @@ public class CSharpCodeWriterOptions
     public DirectoryInfo? OutDirectory { get; set; }
 
     internal const string ArgNameOutDirectory = "--cs";
+    internal const string ArgNameTypeFormat = "--cs-typeformat";
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to prefer 'var' over explicit types.
+    /// </summary>
+    public CSharpCodeWriterTypeFormat TypeFormat { get; set; }
 
     /// <summary>
     /// Binds the configuration values to the CSharpResourceWriterOptions object.
@@ -40,4 +53,20 @@ public class CSharpCodeWriterOptions
             return string.IsNullOrWhiteSpace(path) ? null : new DirectoryInfo(Path.GetFullPath(path));
         }
     }
+}
+
+/// <summary>
+/// How to format types in C# output
+/// </summary>
+public enum CSharpCodeWriterTypeFormat
+{
+    /// <summary>
+    /// Use 'var' over explicit types.
+    /// </summary>
+    Var,
+
+    /// <summary>
+    /// Use explicit types.
+    /// </summary>
+    Explicit
 }

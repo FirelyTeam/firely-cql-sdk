@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -250,13 +252,12 @@ public class AHAOverall_2_6_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("AHAOverall-2.6.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("AHAOverall-2.6.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -266,7 +267,7 @@ public class AHAOverall_2_6_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -305,8 +306,8 @@ public class AHAOverall_2_6_000
 
 			return y_;
 		};
-		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var c_ = context.Operators.Where<Condition>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 		var e_ = context.Operators.Not((bool?)(d_ is null));
 
 		return e_;
@@ -351,14 +352,14 @@ public class AHAOverall_2_6_000
 
 				return ac_;
 			};
-			var v_ = context.Operators.WhereOrNull<Condition>(t_, u_);
+			var v_ = context.Operators.Where<Condition>(t_, u_);
 			Encounter w_(Condition HeartFailure) => 
 				QualifyingEncounter;
-			var x_ = context.Operators.SelectOrNull<Condition, Encounter>(v_, w_);
+			var x_ = context.Operators.Select<Condition, Encounter>(v_, w_);
 
 			return x_;
 		};
-		var p_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(n_, o_);
+		var p_ = context.Operators.SelectMany<Encounter, Encounter>(n_, o_);
 		bool? q_(Encounter QualifyingEncounter)
 		{
 			var ad_ = this.Measurement_Period();
@@ -369,7 +370,7 @@ public class AHAOverall_2_6_000
 
 			return ah_;
 		};
-		var r_ = context.Operators.WhereOrNull<Encounter>(p_, q_);
+		var r_ = context.Operators.Where<Encounter>(p_, q_);
 
 		return r_;
 	}
@@ -395,12 +396,12 @@ public class AHAOverall_2_6_000
 				"amended",
 				"corrected",
 			};
-			var t_ = context.Operators.InList<string>(r_, (s_ as IEnumerable<string>));
+			var t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
 			var u_ = context.Operators.And(p_, t_);
 
 			return u_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 		var e_ = this.Moderate_or_Severe_LVSD();
 		var f_ = context.Operators.RetrieveByValueSet<Condition>(e_, null);
 		var g_ = context.Operators.ListUnion<object>((d_ as IEnumerable<object>), (f_ as IEnumerable<object>));
@@ -415,8 +416,8 @@ public class AHAOverall_2_6_000
 
 			return x_;
 		};
-		var l_ = context.Operators.WhereOrNull<Condition>(j_, k_);
-		var m_ = context.Operators.ListUnion<object>((g_ as IEnumerable<object>), (l_ as IEnumerable<object>));
+		var l_ = context.Operators.Where<Condition>(j_, k_);
+		var m_ = context.Operators.ListUnion<object>(g_, (l_ as IEnumerable<object>));
 
 		return m_;
 	}
@@ -444,14 +445,14 @@ public class AHAOverall_2_6_000
 
 				return p_;
 			};
-			var f_ = context.Operators.WhereOrNull<object>(d_, e_);
+			var f_ = context.Operators.Where<object>(d_, e_);
 			Encounter g_(object LVSDFindings) => 
 				HFOutpatientEncounter;
-			var h_ = context.Operators.SelectOrNull<object, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -479,22 +480,22 @@ public class AHAOverall_2_6_000
 
 				return s_;
 			};
-			var j_ = context.Operators.WhereOrNull<Encounter>(h_, i_);
+			var j_ = context.Operators.Where<Encounter>(h_, i_);
 			Condition k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				HeartTransplantComplications;
-			var l_ = context.Operators.SelectOrNull<Encounter, Condition>(j_, k_);
+			var l_ = context.Operators.Select<Encounter, Condition>(j_, k_);
 
 			return l_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Condition, Condition>(b_, c_);
+		var d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
 		bool? e_(Condition HeartTransplantComplications)
 		{
 			var t_ = this.isConfirmedActiveDiagnosis(HeartTransplantComplications);
 
 			return t_;
 		};
-		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Condition>(f_);
+		var f_ = context.Operators.Where<Condition>(d_, e_);
+		var g_ = context.Operators.Exists<Condition>(f_);
 
 		return g_;
 	}
@@ -521,22 +522,23 @@ public class AHAOverall_2_6_000
 
 				return r_;
 			};
-			var j_ = context.Operators.WhereOrNull<Encounter>(h_, i_);
+			var j_ = context.Operators.Where<Encounter>(h_, i_);
 			Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				LVADOutpatient;
-			var l_ = context.Operators.SelectOrNull<Encounter, Procedure>(j_, k_);
+			var l_ = context.Operators.Select<Encounter, Procedure>(j_, k_);
 
 			return l_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(b_, c_);
+		var d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure LVADOutpatient)
 		{
-			var s_ = context.Operators.EnumEqualsString(LVADOutpatient?.StatusElement?.Value, "completed");
+			var s_ = context.Operators.Convert<string>(LVADOutpatient?.StatusElement?.Value);
+			var t_ = context.Operators.Equal(s_, "completed");
 
-			return s_;
+			return t_;
 		};
-		var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Procedure>(f_);
+		var f_ = context.Operators.Where<Procedure>(d_, e_);
+		var g_ = context.Operators.Exists<Procedure>(f_);
 
 		return g_;
 	}
@@ -564,22 +566,22 @@ public class AHAOverall_2_6_000
 
 				return s_;
 			};
-			var j_ = context.Operators.WhereOrNull<Encounter>(h_, i_);
+			var j_ = context.Operators.Where<Encounter>(h_, i_);
 			Condition k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				LVADComplications;
-			var l_ = context.Operators.SelectOrNull<Encounter, Condition>(j_, k_);
+			var l_ = context.Operators.Select<Encounter, Condition>(j_, k_);
 
 			return l_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Condition, Condition>(b_, c_);
+		var d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
 		bool? e_(Condition LVADComplications)
 		{
 			var t_ = this.isConfirmedActiveDiagnosis(LVADComplications);
 
 			return t_;
 		};
-		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Condition>(f_);
+		var f_ = context.Operators.Where<Condition>(d_, e_);
+		var g_ = context.Operators.Exists<Condition>(f_);
 
 		return g_;
 	}
@@ -617,7 +619,7 @@ public class AHAOverall_2_6_000
 
 			return x_;
 		};
-		var s_ = context.Operators.WhereOrNull<Encounter>(q_, r_);
+		var s_ = context.Operators.Where<Encounter>(q_, r_);
 
 		return s_;
 	}
@@ -634,7 +636,7 @@ public class AHAOverall_2_6_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, (int?)18);
+		var g_ = context.Operators.GreaterOrEqual(f_, 18);
 		var h_ = this.Qualifying_Outpatient_Encounter_During_Measurement_Period();
 		IEnumerable<Encounter> i_(Encounter Encounter1)
 		{
@@ -646,18 +648,18 @@ public class AHAOverall_2_6_000
 
 				return v_;
 			};
-			var r_ = context.Operators.WhereOrNull<Encounter>(p_, q_);
+			var r_ = context.Operators.Where<Encounter>(p_, q_);
 			Encounter s_(Encounter Encounter2) => 
 				Encounter1;
-			var t_ = context.Operators.SelectOrNull<Encounter, Encounter>(r_, s_);
+			var t_ = context.Operators.Select<Encounter, Encounter>(r_, s_);
 
 			return t_;
 		};
-		var j_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Encounter>(j_);
+		var j_ = context.Operators.SelectMany<Encounter, Encounter>(h_, i_);
+		var k_ = context.Operators.Exists<Encounter>(j_);
 		var l_ = context.Operators.And(g_, k_);
 		var m_ = this.Heart_Failure_Outpatient_Encounter();
-		var n_ = context.Operators.ExistsInList<Encounter>(m_);
+		var n_ = context.Operators.Exists<Encounter>(m_);
 		var o_ = context.Operators.And(l_, n_);
 
 		return o_;
@@ -685,22 +687,23 @@ public class AHAOverall_2_6_000
 
 				return r_;
 			};
-			var j_ = context.Operators.WhereOrNull<Encounter>(h_, i_);
+			var j_ = context.Operators.Where<Encounter>(h_, i_);
 			Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				HeartTransplant;
-			var l_ = context.Operators.SelectOrNull<Encounter, Procedure>(j_, k_);
+			var l_ = context.Operators.Select<Encounter, Procedure>(j_, k_);
 
 			return l_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(b_, c_);
+		var d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure HeartTransplant)
 		{
-			var s_ = context.Operators.EnumEqualsString(HeartTransplant?.StatusElement?.Value, "completed");
+			var s_ = context.Operators.Convert<string>(HeartTransplant?.StatusElement?.Value);
+			var t_ = context.Operators.Equal(s_, "completed");
 
-			return s_;
+			return t_;
 		};
-		var f_ = context.Operators.WhereOrNull<Procedure>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Procedure>(f_);
+		var f_ = context.Operators.Where<Procedure>(d_, e_);
+		var g_ = context.Operators.Exists<Procedure>(f_);
 
 		return g_;
 	}
@@ -717,14 +720,14 @@ public class AHAOverall_2_6_000
 		{
 			var e_ = context.Operators.Convert<CqlDateTime>(Order?.AuthoredOnElement);
 			var f_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
-			var g_ = context.Operators.ElementInInterval<CqlDateTime>(e_, f_, "day");
+			var g_ = context.Operators.In<CqlDateTime>(e_, f_, "day");
 			var h_ = context.Operators.Convert<string>(Order?.StatusElement?.Value);
 			var i_ = new string[]
 			{
 				"active",
 				"completed",
 			};
-			var j_ = context.Operators.InList<string>(h_, (i_ as IEnumerable<string>));
+			var j_ = context.Operators.In<string>(h_, (i_ as IEnumerable<string>));
 			var k_ = context.Operators.And(g_, j_);
 			var l_ = context.Operators.Convert<string>(Order?.IntentElement?.Value);
 			var m_ = new string[]
@@ -735,7 +738,7 @@ public class AHAOverall_2_6_000
 				"filler-order",
 				"instance-order",
 			};
-			var n_ = context.Operators.InList<string>(l_, (m_ as IEnumerable<string>));
+			var n_ = context.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 			var o_ = context.Operators.And(k_, n_);
 			var p_ = context.Operators.IsTrue(Order?.DoNotPerformElement?.Value);
 			var q_ = context.Operators.Not(p_);
@@ -743,8 +746,8 @@ public class AHAOverall_2_6_000
 
 			return r_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}
@@ -763,8 +766,8 @@ public class AHAOverall_2_6_000
 
 			return i_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}
@@ -793,139 +796,140 @@ public class AHAOverall_2_6_000
 					var l_ = QICoreCommon_2_0_000.toInterval(k_);
 					var m_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
 					var n_ = context.Operators.OverlapsAfter(l_, m_, "day");
-					var o_ = context.Operators.EnumEqualsString(((Event as Procedure)?.StatusElement)?.Value, "completed");
-					var p_ = context.Operators.And(n_, o_);
+					var o_ = context.Operators.Convert<string>(((Event as Procedure)?.StatusElement)?.Value);
+					var p_ = context.Operators.Equal(o_, "completed");
+					var q_ = context.Operators.And(n_, p_);
 
-					return p_;
+					return q_;
 				}
 				else if (Event is AllergyIntolerance)
 				{
-					var q_ = FHIRHelpers_4_3_000.ToValue((Event as AllergyIntolerance)?.Onset);
-					var r_ = QICoreCommon_2_0_000.toInterval(q_);
-					var s_ = context.Operators.Start(r_);
-					var t_ = context.Operators.Convert<CqlDateTime>((Event as AllergyIntolerance)?.LastOccurrenceElement);
-					var u_ = context.Operators.Interval(s_, t_, true, true);
-					var v_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
-					var w_ = context.Operators.OverlapsAfter(u_, v_, "day");
-					var x_ = FHIRHelpers_4_3_000.ToConcept((Event as AllergyIntolerance)?.ClinicalStatus);
-					var y_ = QICoreCommon_2_0_000.allergy_active();
-					var z_ = context.Operators.ConvertCodeToConcept(y_);
-					var aa_ = context.Operators.Equivalent(x_, z_);
-					var ab_ = context.Operators.And(w_, aa_);
-					var ac_ = FHIRHelpers_4_3_000.ToConcept((Event as AllergyIntolerance)?.VerificationStatus);
-					var ad_ = QICoreCommon_2_0_000.allergy_unconfirmed();
-					var ae_ = context.Operators.ConvertCodeToConcept(ad_);
-					var af_ = context.Operators.Equivalent(ac_, ae_);
-					var ah_ = QICoreCommon_2_0_000.allergy_refuted();
-					var ai_ = context.Operators.ConvertCodeToConcept(ah_);
-					var aj_ = context.Operators.Equivalent(ac_, ai_);
-					var ak_ = context.Operators.Or(af_, aj_);
-					var am_ = this.allergy_entered_in_error();
-					var an_ = context.Operators.ConvertCodeToConcept(am_);
-					var ao_ = context.Operators.Equivalent(ac_, an_);
-					var ap_ = context.Operators.Or(ak_, ao_);
-					var aq_ = context.Operators.Not(ap_);
-					var ar_ = context.Operators.And(ab_, aq_);
+					var r_ = FHIRHelpers_4_3_000.ToValue((Event as AllergyIntolerance)?.Onset);
+					var s_ = QICoreCommon_2_0_000.toInterval(r_);
+					var t_ = context.Operators.Start(s_);
+					var u_ = context.Operators.Convert<CqlDateTime>((Event as AllergyIntolerance)?.LastOccurrenceElement);
+					var v_ = context.Operators.Interval(t_, u_, true, true);
+					var w_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
+					var x_ = context.Operators.OverlapsAfter(v_, w_, "day");
+					var y_ = FHIRHelpers_4_3_000.ToConcept((Event as AllergyIntolerance)?.ClinicalStatus);
+					var z_ = QICoreCommon_2_0_000.allergy_active();
+					var aa_ = context.Operators.ConvertCodeToConcept(z_);
+					var ab_ = context.Operators.Equivalent(y_, aa_);
+					var ac_ = context.Operators.And(x_, ab_);
+					var ad_ = FHIRHelpers_4_3_000.ToConcept((Event as AllergyIntolerance)?.VerificationStatus);
+					var ae_ = QICoreCommon_2_0_000.allergy_unconfirmed();
+					var af_ = context.Operators.ConvertCodeToConcept(ae_);
+					var ag_ = context.Operators.Equivalent(ad_, af_);
+					var ai_ = QICoreCommon_2_0_000.allergy_refuted();
+					var aj_ = context.Operators.ConvertCodeToConcept(ai_);
+					var ak_ = context.Operators.Equivalent(ad_, aj_);
+					var al_ = context.Operators.Or(ag_, ak_);
+					var an_ = this.allergy_entered_in_error();
+					var ao_ = context.Operators.ConvertCodeToConcept(an_);
+					var ap_ = context.Operators.Equivalent(ad_, ao_);
+					var aq_ = context.Operators.Or(al_, ap_);
+					var ar_ = context.Operators.Not(aq_);
+					var as_ = context.Operators.And(ac_, ar_);
 
-					return ar_;
+					return as_;
 				}
 				else if (Event is MedicationRequest)
 				{
-					var as_ = context.Operators.LateBoundProperty<object>(Event, "dosageInstruction");
-					var at_ = new object[]
+					var at_ = context.Operators.LateBoundProperty<object>(Event, "dosageInstruction");
+					var au_ = new object[]
 					{
-						as_,
+						at_,
 					};
-					bool? au_(object @this)
+					bool? av_(object @this)
 					{
-						var cf_ = context.Operators.LateBoundProperty<object>(@this, "timing");
-						var cg_ = context.Operators.Not((bool?)(cf_ is null));
-
-						return cg_;
-					};
-					var av_ = context.Operators.WhereOrNull<object>(at_, au_);
-					object aw_(object @this)
-					{
-						var ch_ = context.Operators.LateBoundProperty<object>(@this, "timing");
+						var cg_ = context.Operators.LateBoundProperty<object>(@this, "timing");
+						var ch_ = context.Operators.Not((bool?)(cg_ is null));
 
 						return ch_;
 					};
-					var ax_ = context.Operators.SelectOrNull<object, object>(av_, aw_);
-					var ay_ = context.Operators.SingleOrNull<object>(ax_);
-					var az_ = new object[]
+					var aw_ = context.Operators.Where<object>(au_, av_);
+					object ax_(object @this)
 					{
-						ay_,
-					};
-					bool? ba_(object @this)
-					{
-						var ci_ = context.Operators.LateBoundProperty<object>(@this, "repeat");
-						var cj_ = context.Operators.Not((bool?)(ci_ is null));
+						var ci_ = context.Operators.LateBoundProperty<object>(@this, "timing");
 
-						return cj_;
+						return ci_;
 					};
-					var bb_ = context.Operators.WhereOrNull<object>(az_, ba_);
-					object bc_(object @this)
+					var ay_ = context.Operators.Select<object, object>(aw_, ax_);
+					var az_ = context.Operators.SingletonFrom<object>(ay_);
+					var ba_ = new object[]
 					{
-						var ck_ = context.Operators.LateBoundProperty<object>(@this, "repeat");
+						az_,
+					};
+					bool? bb_(object @this)
+					{
+						var cj_ = context.Operators.LateBoundProperty<object>(@this, "repeat");
+						var ck_ = context.Operators.Not((bool?)(cj_ is null));
 
 						return ck_;
 					};
-					var bd_ = context.Operators.SelectOrNull<object, object>(bb_, bc_);
-					var be_ = context.Operators.SingleOrNull<object>(bd_);
-					var bf_ = new object[]
+					var bc_ = context.Operators.Where<object>(ba_, bb_);
+					object bd_(object @this)
 					{
-						be_,
-					};
-					bool? bg_(object @this)
-					{
-						var cl_ = context.Operators.LateBoundProperty<object>(@this, "bounds");
-						var cm_ = FHIRHelpers_4_3_000.ToValue(cl_);
-						var cn_ = context.Operators.Not((bool?)(cm_ is null));
+						var cl_ = context.Operators.LateBoundProperty<object>(@this, "repeat");
 
-						return cn_;
+						return cl_;
 					};
-					var bh_ = context.Operators.WhereOrNull<object>(bf_, bg_);
-					object bi_(object @this)
+					var be_ = context.Operators.Select<object, object>(bc_, bd_);
+					var bf_ = context.Operators.SingletonFrom<object>(be_);
+					var bg_ = new object[]
 					{
-						var co_ = context.Operators.LateBoundProperty<object>(@this, "bounds");
-						var cp_ = FHIRHelpers_4_3_000.ToValue(co_);
+						bf_,
+					};
+					bool? bh_(object @this)
+					{
+						var cm_ = context.Operators.LateBoundProperty<object>(@this, "bounds");
+						var cn_ = FHIRHelpers_4_3_000.ToValue(cm_);
+						var co_ = context.Operators.Not((bool?)(cn_ is null));
 
-						return cp_;
+						return co_;
 					};
-					var bj_ = context.Operators.SelectOrNull<object, object>(bh_, bi_);
-					var bk_ = context.Operators.SingleOrNull<object>(bj_);
-					var bl_ = new object[]
+					var bi_ = context.Operators.Where<object>(bg_, bh_);
+					object bj_(object @this)
 					{
-						bk_,
-					};
-					CqlInterval<CqlDateTime> bm_(object DoseTime)
-					{
-						var cq_ = QICoreCommon_2_0_000.toInterval(DoseTime);
+						var cp_ = context.Operators.LateBoundProperty<object>(@this, "bounds");
+						var cq_ = FHIRHelpers_4_3_000.ToValue(cp_);
 
 						return cq_;
 					};
-					var bn_ = context.Operators.SelectOrNull<object, CqlInterval<CqlDateTime>>(bl_, bm_);
-					var bo_ = context.Operators.Collapse(bn_, null);
-					object bp_(CqlInterval<CqlDateTime> @this)
+					var bk_ = context.Operators.Select<object, object>(bi_, bj_);
+					var bl_ = context.Operators.SingletonFrom<object>(bk_);
+					var bm_ = new object[]
 					{
-						var cr_ = context.Operators.Start(@this);
+						bl_,
+					};
+					CqlInterval<CqlDateTime> bn_(object DoseTime)
+					{
+						var cr_ = QICoreCommon_2_0_000.toInterval(DoseTime);
 
 						return cr_;
 					};
-					var bq_ = context.Operators.ListSortBy<CqlInterval<CqlDateTime>>(bo_, bp_, System.ComponentModel.ListSortDirection.Ascending);
-					var br_ = context.Operators.FirstOfList<CqlInterval<CqlDateTime>>(bq_);
-					var bs_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
-					var bt_ = context.Operators.OverlapsAfter(br_, bs_, "day");
-					var bu_ = context.Operators.Convert<string>(((Event as MedicationRequest)?.StatusElement)?.Value);
-					var bv_ = new string[]
+					var bo_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(bm_, bn_);
+					var bp_ = context.Operators.Collapse(bo_, null);
+					object bq_(CqlInterval<CqlDateTime> @this)
+					{
+						var cs_ = context.Operators.Start(@this);
+
+						return cs_;
+					};
+					var br_ = context.Operators.SortBy<CqlInterval<CqlDateTime>>(bp_, bq_, System.ComponentModel.ListSortDirection.Ascending);
+					var bs_ = context.Operators.First<CqlInterval<CqlDateTime>>(br_);
+					var bt_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
+					var bu_ = context.Operators.OverlapsAfter(bs_, bt_, "day");
+					var bv_ = context.Operators.Convert<string>(((Event as MedicationRequest)?.StatusElement)?.Value);
+					var bw_ = new string[]
 					{
 						"active",
 						"completed",
 					};
-					var bw_ = context.Operators.InList<string>(bu_, (bv_ as IEnumerable<string>));
-					var bx_ = context.Operators.And(bt_, bw_);
-					var by_ = context.Operators.Convert<string>(((Event as MedicationRequest)?.IntentElement)?.Value);
-					var bz_ = new string[]
+					var bx_ = context.Operators.In<string>(bv_, (bw_ as IEnumerable<string>));
+					var by_ = context.Operators.And(bu_, bx_);
+					var bz_ = context.Operators.Convert<string>(((Event as MedicationRequest)?.IntentElement)?.Value);
+					var ca_ = new string[]
 					{
 						"order",
 						"original-order",
@@ -933,42 +937,42 @@ public class AHAOverall_2_6_000
 						"filler-order",
 						"instance-order",
 					};
-					var ca_ = context.Operators.InList<string>(by_, (bz_ as IEnumerable<string>));
-					var cb_ = context.Operators.And(bx_, ca_);
-					var cc_ = context.Operators.IsTrue(((Event as MedicationRequest)?.DoNotPerformElement)?.Value);
-					var cd_ = context.Operators.Not(cc_);
-					var ce_ = context.Operators.And(cb_, cd_);
+					var cb_ = context.Operators.In<string>(bz_, (ca_ as IEnumerable<string>));
+					var cc_ = context.Operators.And(by_, cb_);
+					var cd_ = context.Operators.IsTrue(((Event as MedicationRequest)?.DoNotPerformElement)?.Value);
+					var ce_ = context.Operators.Not(cd_);
+					var cf_ = context.Operators.And(cc_, ce_);
 
-					return ce_;
+					return cf_;
 				}
 				else if (Event is Observation)
 				{
-					var cs_ = FHIRHelpers_4_3_000.ToValue((Event as Observation)?.Effective);
-					var ct_ = QICoreCommon_2_0_000.toInterval(cs_);
-					var cu_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
-					var cv_ = context.Operators.OverlapsAfter(ct_, cu_, "day");
-					var cw_ = context.Operators.Convert<string>(((Event as Observation)?.StatusElement)?.Value);
-					var cx_ = new string[]
+					var ct_ = FHIRHelpers_4_3_000.ToValue((Event as Observation)?.Effective);
+					var cu_ = QICoreCommon_2_0_000.toInterval(ct_);
+					var cv_ = FHIRHelpers_4_3_000.ToInterval(ModerateOrSevereLVSDHFOutpatientEncounter?.Period);
+					var cw_ = context.Operators.OverlapsAfter(cu_, cv_, "day");
+					var cx_ = context.Operators.Convert<string>(((Event as Observation)?.StatusElement)?.Value);
+					var cy_ = new string[]
 					{
 						"final",
 						"amended",
 						"corrected",
 					};
-					var cy_ = context.Operators.InList<string>(cw_, (cx_ as IEnumerable<string>));
-					var cz_ = context.Operators.And(cv_, cy_);
+					var cz_ = context.Operators.In<string>(cx_, (cy_ as IEnumerable<string>));
+					var da_ = context.Operators.And(cw_, cz_);
 
-					return cz_;
+					return da_;
 				}
 				else
 				{
-					return (bool?)false;
+					return false;
 				};
 			};
 
 			return e_();
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}

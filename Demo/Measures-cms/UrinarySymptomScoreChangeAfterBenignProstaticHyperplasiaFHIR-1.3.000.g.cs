@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -39,11 +41,11 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
     internal Lazy<bool?> __Has_Qualifying_Encounter;
     internal Lazy<Condition> __Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_or_After_Start_of_Measurement_Period;
     internal Lazy<bool?> __Has_Qualifying_BPH_Diagnosis;
-    internal Lazy<IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>> __Documented_IPSS_Assessment_Result;
-    internal Lazy<IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>> __AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result;
-    internal Lazy<IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>> __Urinary_Symptom_Score_Assessment;
-    internal Lazy<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> __Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis;
-    internal Lazy<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> __Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis;
+    internal Lazy<IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>> __Documented_IPSS_Assessment_Result;
+    internal Lazy<IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>> __AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result;
+    internal Lazy<IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>> __Urinary_Symptom_Score_Assessment;
+    internal Lazy<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> __Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis;
+    internal Lazy<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> __Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
     internal Lazy<IEnumerable<Condition>> __Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis;
@@ -55,9 +57,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
     internal Lazy<int?> __Urinary_Symptom_Score_Change;
     internal Lazy<bool?> __Has_Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3;
     internal Lazy<bool?> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -89,11 +91,11 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
         __Has_Qualifying_Encounter = new Lazy<bool?>(this.Has_Qualifying_Encounter_Value);
         __Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_or_After_Start_of_Measurement_Period = new Lazy<Condition>(this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_or_After_Start_of_Measurement_Period_Value);
         __Has_Qualifying_BPH_Diagnosis = new Lazy<bool?>(this.Has_Qualifying_BPH_Diagnosis_Value);
-        __Documented_IPSS_Assessment_Result = new Lazy<IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>>(this.Documented_IPSS_Assessment_Result_Value);
-        __AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result = new Lazy<IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>>(this.AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result_Value);
-        __Urinary_Symptom_Score_Assessment = new Lazy<IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>>(this.Urinary_Symptom_Score_Assessment_Value);
-        __Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis = new Lazy<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(this.Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis_Value);
-        __Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis = new Lazy<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis_Value);
+        __Documented_IPSS_Assessment_Result = new Lazy<IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>>(this.Documented_IPSS_Assessment_Result_Value);
+        __AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result = new Lazy<IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>>(this.AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result_Value);
+        __Urinary_Symptom_Score_Assessment = new Lazy<IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>>(this.Urinary_Symptom_Score_Assessment_Value);
+        __Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis = new Lazy<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(this.Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis_Value);
+        __Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis = new Lazy<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
         __Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis = new Lazy<IEnumerable<Condition>>(this.Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis_Value);
@@ -105,9 +107,9 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
         __Urinary_Symptom_Score_Change = new Lazy<int?>(this.Urinary_Symptom_Score_Change_Value);
         __Has_Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3 = new Lazy<bool?>(this.Has_Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -252,13 +254,12 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR-1.3.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR-1.3.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -268,7 +269,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -280,9 +281,10 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	private bool? Patient_is_Male_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "male");
+		var b_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
+		var c_ = context.Operators.Equal(b_, "male");
 
-		return b_;
+		return c_;
 	}
 
     [CqlDeclaration("Patient is Male")]
@@ -309,8 +311,8 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 			return p_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Encounter>(d_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
+		var e_ = context.Operators.Exists<Encounter>(d_);
 
 		return e_;
 	}
@@ -349,8 +351,8 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 			return y_;
 		};
-		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var c_ = context.Operators.Where<Condition>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 		var e_ = context.Operators.Not((bool?)(d_ is null));
 
 		return e_;
@@ -371,13 +373,13 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			var n_ = context.Operators.Subtract(l_, m_);
 			var p_ = context.Operators.End(k_);
 			var q_ = context.Operators.Interval(n_, p_, true, true);
-			var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, "day");
+			var r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 			var s_ = this.isConfirmedActiveDiagnosis(NewBPHDiagnosis);
 			var t_ = context.Operators.And(r_, s_);
 
 			return t_;
 		};
-		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
+		var e_ = context.Operators.Where<Condition>(c_, d_);
 		object f_(Condition @this)
 		{
 			var u_ = FHIRHelpers_4_3_000.ToValue(@this?.Onset);
@@ -386,8 +388,8 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 			return w_;
 		};
-		var g_ = context.Operators.ListSortBy<Condition>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var h_ = context.Operators.FirstOfList<Condition>(g_);
+		var g_ = context.Operators.SortBy<Condition>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = context.Operators.First<Condition>(g_);
 
 		return h_;
 	}
@@ -408,7 +410,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	public bool? Has_Qualifying_BPH_Diagnosis() => 
 		__Has_Qualifying_BPH_Diagnosis.Value;
 
-	private IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> Documented_IPSS_Assessment_Result_Value()
+	private IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> Documented_IPSS_Assessment_Result_Value()
 	{
 		var a_ = this.International_Prostate_Symptom_Score__IPSS_();
 		var b_ = context.Operators.ToList<CqlCode>(a_);
@@ -423,15 +425,15 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				"amended",
 				"corrected",
 			};
-			var k_ = context.Operators.InList<string>(i_, (j_ as IEnumerable<string>));
+			var k_ = context.Operators.In<string>(i_, (j_ as IEnumerable<string>));
 			var l_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Value);
 			var m_ = context.Operators.Not((bool?)(l_ is null));
 			var n_ = context.Operators.And(k_, m_);
 
 			return n_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
-		Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI f_(Observation IPSSAssessment)
+		var e_ = context.Operators.Where<Observation>(c_, d_);
+		Tuple_FEhXCQIARONAMcaVTeUbFAGFB f_(Observation IPSSAssessment)
 		{
 			object o_()
 			{
@@ -481,7 +483,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			};
 			var p_ = QICoreCommon_2_0_000.earliest(o_());
 			var q_ = FHIRHelpers_4_3_000.ToValue(IPSSAssessment?.Value);
-			var r_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI
+			var r_ = new Tuple_FEhXCQIARONAMcaVTeUbFAGFB
 			{
 				effectiveDatetime = p_,
 				valueInteger = (int?)q_,
@@ -489,16 +491,16 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 			return r_;
 		};
-		var g_ = context.Operators.SelectOrNull<Observation, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(e_, f_);
+		var g_ = context.Operators.Select<Observation, Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(e_, f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Documented IPSS Assessment Result")]
-	public IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> Documented_IPSS_Assessment_Result() => 
+	public IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> Documented_IPSS_Assessment_Result() => 
 		__Documented_IPSS_Assessment_Result.Value;
 
-	private IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result_Value()
+	private IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result_Value()
 	{
 		var a_ = this.American_Urological_Association_Symptom_Index__AUASI_();
 		var b_ = context.Operators.ToList<CqlCode>(a_);
@@ -511,7 +513,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 				return u_;
 			};
-			var i_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(AUASIAssessment?.Category, h_);
+			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>(AUASIAssessment?.Category, h_);
 			bool? j_(CqlConcept AUASIAssessmentCategory)
 			{
 				var v_ = this.survey();
@@ -520,8 +522,8 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 				return x_;
 			};
-			var k_ = context.Operators.WhereOrNull<CqlConcept>(i_, j_);
-			var l_ = context.Operators.ExistsInList<CqlConcept>(k_);
+			var k_ = context.Operators.Where<CqlConcept>(i_, j_);
+			var l_ = context.Operators.Exists<CqlConcept>(k_);
 			var m_ = context.Operators.Convert<Code<ObservationStatus>>(AUASIAssessment?.StatusElement?.Value);
 			var n_ = context.Operators.Convert<string>(m_);
 			var o_ = new string[]
@@ -530,7 +532,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				"amended",
 				"corrected",
 			};
-			var p_ = context.Operators.InList<string>(n_, (o_ as IEnumerable<string>));
+			var p_ = context.Operators.In<string>(n_, (o_ as IEnumerable<string>));
 			var q_ = context.Operators.And(l_, p_);
 			var r_ = FHIRHelpers_4_3_000.ToValue(AUASIAssessment?.Value);
 			var s_ = context.Operators.Not((bool?)(r_ is null));
@@ -538,8 +540,8 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 			return t_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
-		Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI f_(Observation AUASIAssessment)
+		var e_ = context.Operators.Where<Observation>(c_, d_);
+		Tuple_FEhXCQIARONAMcaVTeUbFAGFB f_(Observation AUASIAssessment)
 		{
 			object y_()
 			{
@@ -695,7 +697,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 					return cp_;
 				};
-				var be_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(QOLAssessment?.Category, bd_);
+				var be_ = context.Operators.Select<CodeableConcept, CqlConcept>(QOLAssessment?.Category, bd_);
 				bool? bf_(CqlConcept QOLAssessmentCategory)
 				{
 					var cq_ = this.survey();
@@ -704,8 +706,8 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 					return cs_;
 				};
-				var bg_ = context.Operators.WhereOrNull<CqlConcept>(be_, bf_);
-				var bh_ = context.Operators.ExistsInList<CqlConcept>(bg_);
+				var bg_ = context.Operators.Where<CqlConcept>(be_, bf_);
+				var bh_ = context.Operators.Exists<CqlConcept>(bg_);
 				var bi_ = context.Operators.And(bc_, bh_);
 				var bj_ = context.Operators.Convert<Code<ObservationStatus>>(QOLAssessment?.StatusElement?.Value);
 				var bk_ = context.Operators.Convert<string>(bj_);
@@ -715,7 +717,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					"amended",
 					"corrected",
 				};
-				var bm_ = context.Operators.InList<string>(bk_, (bl_ as IEnumerable<string>));
+				var bm_ = context.Operators.In<string>(bk_, (bl_ as IEnumerable<string>));
 				var bn_ = context.Operators.And(bi_, bm_);
 				var bo_ = FHIRHelpers_4_3_000.ToValue(QOLAssessment?.Value);
 				var bp_ = context.Operators.Not((bool?)(bo_ is null));
@@ -723,7 +725,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 				return bq_;
 			};
-			var af_ = context.Operators.WhereOrNull<Observation>(ad_, ae_);
+			var af_ = context.Operators.Where<Observation>(ad_, ae_);
 			object ag_(Observation @this)
 			{
 				object ct_()
@@ -776,11 +778,11 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 				return cu_;
 			};
-			var ah_ = context.Operators.ListSortBy<Observation>(af_, ag_, System.ComponentModel.ListSortDirection.Ascending);
-			var ai_ = context.Operators.LastOfList<Observation>(ah_);
+			var ah_ = context.Operators.SortBy<Observation>(af_, ag_, System.ComponentModel.ListSortDirection.Ascending);
+			var ai_ = context.Operators.Last<Observation>(ah_);
 			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_?.Value);
 			var ak_ = context.Operators.Add((int?)aa_, (int?)aj_);
-			var al_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI
+			var al_ = new Tuple_FEhXCQIARONAMcaVTeUbFAGFB
 			{
 				effectiveDatetime = z_,
 				valueInteger = ak_,
@@ -788,32 +790,32 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 			return al_;
 		};
-		var g_ = context.Operators.SelectOrNull<Observation, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(e_, f_);
+		var g_ = context.Operators.Select<Observation, Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(e_, f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("AUA Symptom Index and Quality of Life Assessment Result")]
-	public IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result() => 
+	public IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result() => 
 		__AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result.Value;
 
-	private IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> Urinary_Symptom_Score_Assessment_Value()
+	private IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> Urinary_Symptom_Score_Assessment_Value()
 	{
 		var a_ = this.Documented_IPSS_Assessment_Result();
 		var b_ = this.AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result();
-		var c_ = context.Operators.ListUnion<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(a_, b_);
+		var c_ = context.Operators.ListUnion<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Urinary Symptom Score Assessment")]
-	public IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> Urinary_Symptom_Score_Assessment() => 
+	public IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> Urinary_Symptom_Score_Assessment() => 
 		__Urinary_Symptom_Score_Assessment.Value;
 
-	private Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis_Value()
+	private Tuple_FEhXCQIARONAMcaVTeUbFAGFB Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis_Value()
 	{
 		var a_ = this.Urinary_Symptom_Score_Assessment();
-		IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> b_(Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI USSAssessment)
+		IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> b_(Tuple_FEhXCQIARONAMcaVTeUbFAGFB USSAssessment)
 		{
 			var g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_or_After_Start_of_Measurement_Period();
 			var h_ = new Condition[]
@@ -828,37 +830,37 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var q_ = context.Operators.Quantity(1m, "month");
 				var r_ = context.Operators.Add(p_, q_);
 				var s_ = context.Operators.Interval(n_, r_, true, true);
-				var t_ = context.Operators.ElementInInterval<CqlDateTime>(USSAssessment?.effectiveDatetime, s_, "day");
+				var t_ = context.Operators.In<CqlDateTime>(USSAssessment?.effectiveDatetime, s_, "day");
 				var v_ = context.Operators.Start(m_);
 				var w_ = context.Operators.Not((bool?)(v_ is null));
 				var x_ = context.Operators.And(t_, w_);
 
 				return x_;
 			};
-			var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
-			Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI k_(Condition InitialBPHDiagnosis) => 
+			var j_ = context.Operators.Where<Condition>(h_, i_);
+			Tuple_FEhXCQIARONAMcaVTeUbFAGFB k_(Condition InitialBPHDiagnosis) => 
 				USSAssessment;
-			var l_ = context.Operators.SelectOrNull<Condition, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(j_, k_);
+			var l_ = context.Operators.Select<Condition, Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(a_, b_);
-		object d_(Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI @this) => 
+		var c_ = context.Operators.SelectMany<Tuple_FEhXCQIARONAMcaVTeUbFAGFB, Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(a_, b_);
+		object d_(Tuple_FEhXCQIARONAMcaVTeUbFAGFB @this) => 
 			@this?.effectiveDatetime;
-		var e_ = context.Operators.ListSortBy<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
-		var f_ = context.Operators.FirstOfList<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(e_);
+		var e_ = context.Operators.SortBy<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
+		var f_ = context.Operators.First<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Urinary Symptom Score Within 1 Month after Initial BPH Diagnosis")]
-	public Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis() => 
+	public Tuple_FEhXCQIARONAMcaVTeUbFAGFB Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis() => 
 		__Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis.Value;
 
-	private Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis_Value()
+	private Tuple_FEhXCQIARONAMcaVTeUbFAGFB Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis_Value()
 	{
 		var a_ = this.Urinary_Symptom_Score_Assessment();
-		IEnumerable<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> b_(Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI USSAssessment)
+		IEnumerable<Tuple_FEhXCQIARONAMcaVTeUbFAGFB> b_(Tuple_FEhXCQIARONAMcaVTeUbFAGFB USSAssessment)
 		{
 			var g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_or_After_Start_of_Measurement_Period();
 			var h_ = new Condition[]
@@ -870,29 +872,29 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var m_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
 				var n_ = context.Operators.Start(m_);
 				var o_ = context.Operators.DurationBetween(n_, USSAssessment?.effectiveDatetime, "month");
-				var p_ = context.Operators.Interval((int?)6, (int?)12, true, true);
-				var q_ = context.Operators.ElementInInterval<int?>(o_, p_, null);
+				var p_ = context.Operators.Interval(6, 12, true, true);
+				var q_ = context.Operators.In<int?>(o_, p_, null);
 
 				return q_;
 			};
-			var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
-			Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI k_(Condition InitialBPHDiagnosis) => 
+			var j_ = context.Operators.Where<Condition>(h_, i_);
+			Tuple_FEhXCQIARONAMcaVTeUbFAGFB k_(Condition InitialBPHDiagnosis) => 
 				USSAssessment;
-			var l_ = context.Operators.SelectOrNull<Condition, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(j_, k_);
+			var l_ = context.Operators.Select<Condition, Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(a_, b_);
-		object d_(Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI @this) => 
+		var c_ = context.Operators.SelectMany<Tuple_FEhXCQIARONAMcaVTeUbFAGFB, Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(a_, b_);
+		object d_(Tuple_FEhXCQIARONAMcaVTeUbFAGFB @this) => 
 			@this?.effectiveDatetime;
-		var e_ = context.Operators.ListSortBy<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
-		var f_ = context.Operators.LastOfList<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(e_);
+		var e_ = context.Operators.SortBy<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
+		var f_ = context.Operators.Last<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Urinary Symptom Score 6 to 12 Months After Initial BPH Diagnosis")]
-	public Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis() => 
+	public Tuple_FEhXCQIARONAMcaVTeUbFAGFB Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis() => 
 		__Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis.Value;
 
 	private bool? Initial_Population_Value()
@@ -948,28 +950,28 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var s_ = context.Operators.Quantity(1m, "year");
 				var t_ = context.Operators.Add(r_, s_);
 				var u_ = context.Operators.Interval(p_, t_, true, true);
-				var v_ = context.Operators.ElementInInterval<CqlDateTime>(n_, u_, "day");
+				var v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
 				var x_ = context.Operators.Start(o_);
 				var y_ = context.Operators.Not((bool?)(x_ is null));
 				var z_ = context.Operators.And(v_, y_);
 
 				return z_;
 			};
-			var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
+			var j_ = context.Operators.Where<Condition>(h_, i_);
 			Condition k_(Condition InitialBPHDiagnosis) => 
 				UrinaryRetention;
-			var l_ = context.Operators.SelectOrNull<Condition, Condition>(j_, k_);
+			var l_ = context.Operators.Select<Condition, Condition>(j_, k_);
 
 			return l_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Condition, Condition>(b_, c_);
+		var d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
 		bool? e_(Condition UrinaryRetention)
 		{
 			var aa_ = this.isConfirmedActiveDiagnosis(UrinaryRetention);
 
 			return aa_;
 		};
-		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
+		var f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
@@ -999,22 +1001,22 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				var r_ = context.Operators.Quantity(31m, "days");
 				var s_ = context.Operators.Add(q_, r_);
 				var t_ = context.Operators.Interval(o_, s_, true, true);
-				var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
+				var u_ = context.Operators.In<CqlDateTime>(m_, t_, null);
 				var v_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(InHospitalServices?.StatusElement?.Value);
 				var w_ = context.Operators.Equal(v_, "finished");
 				var x_ = context.Operators.And(u_, w_);
 
 				return x_;
 			};
-			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
+			var i_ = context.Operators.Where<Encounter>(g_, h_);
 			Condition j_(Encounter InHospitalServices) => 
 				InitialBPHDiagnosis;
-			var k_ = context.Operators.SelectOrNull<Encounter, Condition>(i_, j_);
+			var k_ = context.Operators.Select<Encounter, Condition>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Condition, Condition>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<Condition>(d_);
+		var d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<Condition>(d_);
 
 		return e_;
 	}
@@ -1030,11 +1032,11 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		IEnumerable<Condition> c_(Condition MorbidObesity)
 		{
 			var e_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis();
-			var f_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI[]
+			var f_ = new Tuple_FEhXCQIARONAMcaVTeUbFAGFB[]
 			{
 				e_,
 			};
-			bool? g_(Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FollowUpUSSAssessment)
+			bool? g_(Tuple_FEhXCQIARONAMcaVTeUbFAGFB FollowUpUSSAssessment)
 			{
 				var k_ = QICoreCommon_2_0_000.prevalenceInterval(MorbidObesity);
 				var l_ = this.Measurement_Period();
@@ -1047,14 +1049,14 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 				return s_;
 			};
-			var h_ = context.Operators.WhereOrNull<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(f_, g_);
-			Condition i_(Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FollowUpUSSAssessment) => 
+			var h_ = context.Operators.Where<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(f_, g_);
+			Condition i_(Tuple_FEhXCQIARONAMcaVTeUbFAGFB FollowUpUSSAssessment) => 
 				MorbidObesity;
-			var j_ = context.Operators.SelectOrNull<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI, Condition>(h_, i_);
+			var j_ = context.Operators.Select<Tuple_FEhXCQIARONAMcaVTeUbFAGFB, Condition>(h_, i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Condition, Condition>(b_, c_);
+		var d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
 
 		return d_;
 	}
@@ -1069,11 +1071,11 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		IEnumerable<Observation> b_(Observation BMIExam)
 		{
 			var g_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis();
-			var h_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI[]
+			var h_ = new Tuple_FEhXCQIARONAMcaVTeUbFAGFB[]
 			{
 				g_,
 			};
-			bool? i_(Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FollowUpUSSAssessment)
+			bool? i_(Tuple_FEhXCQIARONAMcaVTeUbFAGFB FollowUpUSSAssessment)
 			{
 				var m_ = context.Operators.Convert<Quantity>(BMIExam?.Value);
 				var n_ = FHIRHelpers_4_3_000.ToQuantity(m_);
@@ -1086,12 +1088,12 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					"amended",
 					"corrected",
 				};
-				var s_ = context.Operators.InList<string>(q_, (r_ as IEnumerable<string>));
+				var s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
 				var t_ = context.Operators.And(p_, s_);
 				var u_ = FHIRHelpers_4_3_000.ToValue(BMIExam?.Effective);
 				var v_ = QICoreCommon_2_0_000.earliest(u_);
 				var w_ = this.Measurement_Period();
-				var x_ = context.Operators.ElementInInterval<CqlDateTime>(v_, w_, "day");
+				var x_ = context.Operators.In<CqlDateTime>(v_, w_, "day");
 				var y_ = context.Operators.And(t_, x_);
 				var aa_ = QICoreCommon_2_0_000.earliest(u_);
 				var ab_ = context.Operators.SameOrBefore(aa_, FollowUpUSSAssessment?.effectiveDatetime, null);
@@ -1099,14 +1101,14 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 				return ac_;
 			};
-			var j_ = context.Operators.WhereOrNull<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(h_, i_);
-			Observation k_(Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI FollowUpUSSAssessment) => 
+			var j_ = context.Operators.Where<Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(h_, i_);
+			Observation k_(Tuple_FEhXCQIARONAMcaVTeUbFAGFB FollowUpUSSAssessment) => 
 				BMIExam;
-			var l_ = context.Operators.SelectOrNull<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI, Observation>(j_, k_);
+			var l_ = context.Operators.Select<Tuple_FEhXCQIARONAMcaVTeUbFAGFB, Observation>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Observation, Observation>(a_, b_);
+		var c_ = context.Operators.SelectMany<Observation, Observation>(a_, b_);
 		CqlDateTime d_(Observation BMIExam)
 		{
 			var ad_ = FHIRHelpers_4_3_000.ToValue(BMIExam?.Effective);
@@ -1114,8 +1116,8 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 			return ae_;
 		};
-		var e_ = context.Operators.SelectOrNull<Observation, CqlDateTime>(c_, d_);
-		var f_ = context.Operators.ExistsInList<CqlDateTime>(e_);
+		var e_ = context.Operators.Select<Observation, CqlDateTime>(c_, d_);
+		var f_ = context.Operators.Exists<CqlDateTime>(e_);
 
 		return f_;
 	}
@@ -1127,7 +1129,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	private bool? Has_Morbid_Obesity_Diagnosis_or_BMI_Exam_Result__Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment_Value()
 	{
 		var a_ = this.Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 		var c_ = this.Has_BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment();
 		var d_ = context.Operators.Or(b_, c_);
 
@@ -1141,7 +1143,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	private bool? Denominator_Exclusions_Value()
 	{
 		var a_ = this.Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 		var c_ = this.Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization();
 		var d_ = context.Operators.Not((bool?)(c_ is null));
 		var e_ = context.Operators.Or(b_, d_);
@@ -1158,19 +1160,19 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	private int? Urinary_Symptom_Score_Change_Value()
 	{
 		var a_ = this.Urinary_Symptom_Score_Within_1_Month_after_Initial_BPH_Diagnosis();
-		var b_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI[]
+		var b_ = new Tuple_FEhXCQIARONAMcaVTeUbFAGFB[]
 		{
 			a_,
 		};
 		var c_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis();
-		var d_ = new Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI[]
+		var d_ = new Tuple_FEhXCQIARONAMcaVTeUbFAGFB[]
 		{
 			c_,
 		};
-		var e_ = context.Operators.CrossJoin<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI, Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>(b_, d_);
-		Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI f_(ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI> _valueTuple)
+		var e_ = context.Operators.CrossJoin<Tuple_FEhXCQIARONAMcaVTeUbFAGFB, Tuple_FEhXCQIARONAMcaVTeUbFAGFB>(b_, d_);
+		Tuple_CPEBTJDNSaPXTSLKggUTZJaJL f_(ValueTuple<Tuple_FEhXCQIARONAMcaVTeUbFAGFB,Tuple_FEhXCQIARONAMcaVTeUbFAGFB> _valueTuple)
 		{
-			var k_ = new Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI
+			var k_ = new Tuple_CPEBTJDNSaPXTSLKggUTZJaJL
 			{
 				FirstUSSAssessment = _valueTuple.Item1,
 				FollowUpUSSAssessment = _valueTuple.Item2,
@@ -1178,15 +1180,15 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 			return k_;
 		};
-		var g_ = context.Operators.SelectOrNull<ValueTuple<Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI,Tuples.Tuple_HHCMSSZgDEUSHVCefGhfGYQZI>, Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI>(e_, f_);
-		int? h_(Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI tuple_faeshvmwygmybalajitzuecdi)
+		var g_ = context.Operators.Select<ValueTuple<Tuple_FEhXCQIARONAMcaVTeUbFAGFB,Tuple_FEhXCQIARONAMcaVTeUbFAGFB>, Tuple_CPEBTJDNSaPXTSLKggUTZJaJL>(e_, f_);
+		int? h_(Tuple_CPEBTJDNSaPXTSLKggUTZJaJL tuple_cpebtjdnsapxtslkggutzjajl)
 		{
-			var l_ = context.Operators.Subtract(tuple_faeshvmwygmybalajitzuecdi.FirstUSSAssessment?.valueInteger, tuple_faeshvmwygmybalajitzuecdi.FollowUpUSSAssessment?.valueInteger);
+			var l_ = context.Operators.Subtract(tuple_cpebtjdnsapxtslkggutzjajl.FirstUSSAssessment?.valueInteger, tuple_cpebtjdnsapxtslkggutzjajl.FollowUpUSSAssessment?.valueInteger);
 
 			return l_;
 		};
-		var i_ = context.Operators.SelectOrNull<Tuples.Tuple_FAESHVMWYGMYBALaJITZUecdI, int?>(g_, h_);
-		var j_ = context.Operators.SingleOrNull<int?>(i_);
+		var i_ = context.Operators.Select<Tuple_CPEBTJDNSaPXTSLKggUTZJaJL, int?>(g_, h_);
+		var j_ = context.Operators.SingletonFrom<int?>(i_);
 
 		return j_;
 	}
@@ -1204,12 +1206,12 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		};
 		bool? c_(int? USSImprovement)
 		{
-			var g_ = context.Operators.GreaterOrEqual(USSImprovement, (int?)3);
+			var g_ = context.Operators.GreaterOrEqual(USSImprovement, 3);
 
 			return g_;
 		};
-		var d_ = context.Operators.WhereOrNull<int?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<int?>(d_);
+		var d_ = context.Operators.Where<int?>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<int?>(d_);
 		var f_ = context.Operators.Not((bool?)(e_ is null));
 
 		return f_;
@@ -1230,7 +1232,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	public bool? Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1238,10 +1240,10 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1249,10 +1251,10 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1260,7 +1262,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

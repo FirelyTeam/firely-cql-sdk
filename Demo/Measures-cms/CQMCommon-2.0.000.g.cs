@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -104,13 +106,12 @@ public class CQMCommon_2_0_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("CQMCommon-2.0.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("CQMCommon-2.0.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -120,7 +121,7 @@ public class CQMCommon_2_0_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -140,12 +141,12 @@ public class CQMCommon_2_0_000
 			var g_ = FHIRHelpers_4_3_000.ToInterval(EncounterInpatient?.Period);
 			var h_ = context.Operators.End(g_);
 			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.ElementInInterval<CqlDateTime>(h_, i_, "day");
+			var j_ = context.Operators.In<CqlDateTime>(h_, i_, "day");
 			var k_ = context.Operators.And(f_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
@@ -210,7 +211,7 @@ public class CQMCommon_2_0_000
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.Start(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);
-			var s_ = context.Operators.ElementInInterval<CqlDateTime>(k_, r_, null);
+			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.Start(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -218,7 +219,7 @@ public class CQMCommon_2_0_000
 
 			return x_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 		object e_(Encounter @this)
 		{
 			var y_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -226,8 +227,8 @@ public class CQMCommon_2_0_000
 
 			return z_;
 		};
-		var f_ = context.Operators.ListSortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-		var g_ = context.Operators.LastOfList<Encounter>(f_);
+		var f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+		var g_ = context.Operators.Last<Encounter>(f_);
 
 		return g_;
 	}
@@ -250,7 +251,7 @@ public class CQMCommon_2_0_000
 			var o_ = context.Operators.Subtract(m_, n_);
 			var q_ = context.Operators.Start(l_);
 			var r_ = context.Operators.Interval(o_, q_, true, true);
-			var s_ = context.Operators.ElementInInterval<CqlDateTime>(k_, r_, null);
+			var s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
 			var u_ = context.Operators.Start(l_);
 			var v_ = context.Operators.Not((bool?)(u_ is null));
 			var w_ = context.Operators.And(s_, v_);
@@ -258,7 +259,7 @@ public class CQMCommon_2_0_000
 
 			return x_;
 		};
-		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
+		var d_ = context.Operators.Where<Encounter>(b_, c_);
 		object e_(Encounter @this)
 		{
 			var y_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -266,8 +267,8 @@ public class CQMCommon_2_0_000
 
 			return z_;
 		};
-		var f_ = context.Operators.ListSortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-		var g_ = context.Operators.LastOfList<Encounter>(f_);
+		var f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+		var g_ = context.Operators.Last<Encounter>(f_);
 
 		return g_;
 	}
@@ -306,8 +307,8 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(d_);
+		var d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
 		return e_;
 	}
@@ -345,8 +346,8 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(d_);
+		var d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
 		return e_;
 	}
@@ -376,7 +377,7 @@ public class CQMCommon_2_0_000
 						(EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
 						(TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
 					};
-					var h_ = context.Operators.FlattenList<Encounter.LocationComponent>((g_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
+					var h_ = context.Operators.Flatten<Encounter.LocationComponent>((g_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
 					return h_;
 				};
@@ -384,8 +385,8 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<IEnumerable<Encounter.LocationComponent>>(d_);
+		var d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
 
 		return e_;
 	}
@@ -414,7 +415,7 @@ public class CQMCommon_2_0_000
 						(EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
 						(TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
 					};
-					var h_ = context.Operators.FlattenList<Encounter.LocationComponent>((g_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
+					var h_ = context.Operators.Flatten<Encounter.LocationComponent>((g_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
 					return h_;
 				};
@@ -422,8 +423,8 @@ public class CQMCommon_2_0_000
 
 			return f_();
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<IEnumerable<Encounter.LocationComponent>>(d_);
+		var d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
 
 		return e_;
 	}
@@ -504,8 +505,8 @@ public class CQMCommon_2_0_000
 
 			return h_;
 		};
-		var c_ = context.Operators.ListSortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
-		var d_ = context.Operators.FirstOfList<Encounter.LocationComponent>(c_);
+		var c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
+		var d_ = context.Operators.First<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_3_000.ToInterval(d_?.Period);
 		var f_ = context.Operators.Start(e_);
 
@@ -524,8 +525,8 @@ public class CQMCommon_2_0_000
 
 			return h_;
 		};
-		var c_ = context.Operators.ListSortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
-		var d_ = context.Operators.FirstOfList<Encounter.LocationComponent>(c_);
+		var c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
+		var d_ = context.Operators.First<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_3_000.ToInterval(d_?.Period);
 		var f_ = context.Operators.Start(e_);
 
@@ -545,8 +546,8 @@ public class CQMCommon_2_0_000
 
 			return h_;
 		};
-		var c_ = context.Operators.ListSortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
-		var d_ = context.Operators.LastOfList<Encounter.LocationComponent>(c_);
+		var c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
+		var d_ = context.Operators.Last<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_3_000.ToInterval(d_?.Period);
 		var f_ = context.Operators.End(e_);
 
@@ -565,8 +566,8 @@ public class CQMCommon_2_0_000
 
 			return h_;
 		};
-		var c_ = context.Operators.ListSortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
-		var d_ = context.Operators.LastOfList<Encounter.LocationComponent>(c_);
+		var c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
+		var d_ = context.Operators.Last<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_3_000.ToInterval(d_?.Period);
 		var f_ = context.Operators.End(e_);
 
@@ -586,8 +587,8 @@ public class CQMCommon_2_0_000
 
 			return f_;
 		};
-		var c_ = context.Operators.WhereOrNull<Location>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Location>(c_);
+		var c_ = context.Operators.Where<Location>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<Location>(c_);
 
 		return d_;
 	}
@@ -606,14 +607,14 @@ public class CQMCommon_2_0_000
 
 				return l_;
 			};
-			var i_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(g_?.Type, h_);
+			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>(g_?.Type, h_);
 			var j_ = this.Emergency_Department_Visit();
 			var k_ = context.Operators.ConceptsInValueSet(i_, j_);
 
 			return k_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter.LocationComponent>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Encounter.LocationComponent>(c_);
+		var c_ = context.Operators.Where<Encounter.LocationComponent>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_3_000.ToInterval(d_?.Period);
 		var f_ = context.Operators.Start(e_);
 
@@ -634,14 +635,14 @@ public class CQMCommon_2_0_000
 
 				return l_;
 			};
-			var i_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(g_?.Type, h_);
+			var i_ = context.Operators.Select<CodeableConcept, CqlConcept>(g_?.Type, h_);
 			var j_ = this.Emergency_Department_Visit();
 			var k_ = context.Operators.ConceptsInValueSet(i_, j_);
 
 			return k_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter.LocationComponent>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Encounter.LocationComponent>(c_);
+		var c_ = context.Operators.Where<Encounter.LocationComponent>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(c_);
 		var e_ = FHIRHelpers_4_3_000.ToInterval(d_?.Period);
 		var f_ = context.Operators.Start(e_);
 
@@ -687,7 +688,7 @@ public class CQMCommon_2_0_000
 						var ez_ = context.Operators.Subtract(ex_, ey_);
 						var fb_ = context.Operators.Start(ew_);
 						var fc_ = context.Operators.Interval(ez_, fb_, true, true);
-						var fd_ = context.Operators.ElementInInterval<CqlDateTime>(ev_, fc_, null);
+						var fd_ = context.Operators.In<CqlDateTime>(ev_, fc_, null);
 						var ff_ = context.Operators.Start(ew_);
 						var fg_ = context.Operators.Not((bool?)(ff_ is null));
 						var fh_ = context.Operators.And(fd_, fg_);
@@ -695,7 +696,7 @@ public class CQMCommon_2_0_000
 
 						return fi_;
 					};
-					var dh_ = context.Operators.WhereOrNull<Encounter>(df_, dg_);
+					var dh_ = context.Operators.Where<Encounter>(df_, dg_);
 					object di_(Encounter @this)
 					{
 						var fj_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -703,8 +704,8 @@ public class CQMCommon_2_0_000
 
 						return fk_;
 					};
-					var dj_ = context.Operators.ListSortBy<Encounter>(dh_, di_, System.ComponentModel.ListSortDirection.Ascending);
-					var dk_ = context.Operators.LastOfList<Encounter>(dj_);
+					var dj_ = context.Operators.SortBy<Encounter>(dh_, di_, System.ComponentModel.ListSortDirection.Ascending);
+					var dk_ = context.Operators.Last<Encounter>(dj_);
 					var dl_ = FHIRHelpers_4_3_000.ToInterval(dk_?.Period);
 					var dm_ = context.Operators.Start(dl_);
 					var dn_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -724,7 +725,7 @@ public class CQMCommon_2_0_000
 						var fs_ = context.Operators.Subtract(fq_, fr_);
 						var fu_ = context.Operators.Start(fp_);
 						var fv_ = context.Operators.Interval(fs_, fu_, true, true);
-						var fw_ = context.Operators.ElementInInterval<CqlDateTime>(fo_, fv_, null);
+						var fw_ = context.Operators.In<CqlDateTime>(fo_, fv_, null);
 						var fy_ = context.Operators.Start(fp_);
 						var fz_ = context.Operators.Not((bool?)(fy_ is null));
 						var ga_ = context.Operators.And(fw_, fz_);
@@ -732,7 +733,7 @@ public class CQMCommon_2_0_000
 
 						return gb_;
 					};
-					var du_ = context.Operators.WhereOrNull<Encounter>(ds_, dt_);
+					var du_ = context.Operators.Where<Encounter>(ds_, dt_);
 					object dv_(Encounter @this)
 					{
 						var gc_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -740,13 +741,13 @@ public class CQMCommon_2_0_000
 
 						return gd_;
 					};
-					var dw_ = context.Operators.ListSortBy<Encounter>(du_, dv_, System.ComponentModel.ListSortDirection.Ascending);
-					var dx_ = context.Operators.LastOfList<Encounter>(dw_);
+					var dw_ = context.Operators.SortBy<Encounter>(du_, dv_, System.ComponentModel.ListSortDirection.Ascending);
+					var dx_ = context.Operators.Last<Encounter>(dw_);
 					var dy_ = FHIRHelpers_4_3_000.ToInterval(dx_?.Period);
 					var dz_ = context.Operators.Start(dy_);
 					var eb_ = context.Operators.Start(dn_);
 					var ec_ = context.Operators.Interval(dq_, (dz_ ?? eb_), true, true);
-					var ed_ = context.Operators.ElementInInterval<CqlDateTime>(dd_, ec_, null);
+					var ed_ = context.Operators.In<CqlDateTime>(dd_, ec_, null);
 					var ef_ = context.Operators.RetrieveByValueSet<Encounter>(de_, null);
 					bool? eg_(Encounter LastObs)
 					{
@@ -760,7 +761,7 @@ public class CQMCommon_2_0_000
 						var gl_ = context.Operators.Subtract(gj_, gk_);
 						var gn_ = context.Operators.Start(gi_);
 						var go_ = context.Operators.Interval(gl_, gn_, true, true);
-						var gp_ = context.Operators.ElementInInterval<CqlDateTime>(gh_, go_, null);
+						var gp_ = context.Operators.In<CqlDateTime>(gh_, go_, null);
 						var gr_ = context.Operators.Start(gi_);
 						var gs_ = context.Operators.Not((bool?)(gr_ is null));
 						var gt_ = context.Operators.And(gp_, gs_);
@@ -768,7 +769,7 @@ public class CQMCommon_2_0_000
 
 						return gu_;
 					};
-					var eh_ = context.Operators.WhereOrNull<Encounter>(ef_, eg_);
+					var eh_ = context.Operators.Where<Encounter>(ef_, eg_);
 					object ei_(Encounter @this)
 					{
 						var gv_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -776,8 +777,8 @@ public class CQMCommon_2_0_000
 
 						return gw_;
 					};
-					var ej_ = context.Operators.ListSortBy<Encounter>(eh_, ei_, System.ComponentModel.ListSortDirection.Ascending);
-					var ek_ = context.Operators.LastOfList<Encounter>(ej_);
+					var ej_ = context.Operators.SortBy<Encounter>(eh_, ei_, System.ComponentModel.ListSortDirection.Ascending);
+					var ek_ = context.Operators.Last<Encounter>(ej_);
 					var el_ = FHIRHelpers_4_3_000.ToInterval(ek_?.Period);
 					var em_ = context.Operators.Start(el_);
 					var eo_ = context.Operators.Start(dn_);
@@ -787,7 +788,7 @@ public class CQMCommon_2_0_000
 
 					return er_;
 				};
-				var ap_ = context.Operators.WhereOrNull<Encounter>(an_, ao_);
+				var ap_ = context.Operators.Where<Encounter>(an_, ao_);
 				object aq_(Encounter @this)
 				{
 					var gx_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -795,8 +796,8 @@ public class CQMCommon_2_0_000
 
 					return gy_;
 				};
-				var ar_ = context.Operators.ListSortBy<Encounter>(ap_, aq_, System.ComponentModel.ListSortDirection.Ascending);
-				var as_ = context.Operators.LastOfList<Encounter>(ar_);
+				var ar_ = context.Operators.SortBy<Encounter>(ap_, aq_, System.ComponentModel.ListSortDirection.Ascending);
+				var as_ = context.Operators.Last<Encounter>(ar_);
 				var at_ = FHIRHelpers_4_3_000.ToInterval(as_?.Period);
 				var au_ = context.Operators.Start(at_);
 				var av_ = this.Observation_Services();
@@ -813,7 +814,7 @@ public class CQMCommon_2_0_000
 					var hg_ = context.Operators.Subtract(he_, hf_);
 					var hi_ = context.Operators.Start(hd_);
 					var hj_ = context.Operators.Interval(hg_, hi_, true, true);
-					var hk_ = context.Operators.ElementInInterval<CqlDateTime>(hc_, hj_, null);
+					var hk_ = context.Operators.In<CqlDateTime>(hc_, hj_, null);
 					var hm_ = context.Operators.Start(hd_);
 					var hn_ = context.Operators.Not((bool?)(hm_ is null));
 					var ho_ = context.Operators.And(hk_, hn_);
@@ -821,7 +822,7 @@ public class CQMCommon_2_0_000
 
 					return hp_;
 				};
-				var ay_ = context.Operators.WhereOrNull<Encounter>(aw_, ax_);
+				var ay_ = context.Operators.Where<Encounter>(aw_, ax_);
 				object az_(Encounter @this)
 				{
 					var hq_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -829,8 +830,8 @@ public class CQMCommon_2_0_000
 
 					return hr_;
 				};
-				var ba_ = context.Operators.ListSortBy<Encounter>(ay_, az_, System.ComponentModel.ListSortDirection.Ascending);
-				var bb_ = context.Operators.LastOfList<Encounter>(ba_);
+				var ba_ = context.Operators.SortBy<Encounter>(ay_, az_, System.ComponentModel.ListSortDirection.Ascending);
+				var bb_ = context.Operators.Last<Encounter>(ba_);
 				var bc_ = FHIRHelpers_4_3_000.ToInterval(bb_?.Period);
 				var bd_ = context.Operators.Start(bc_);
 				var be_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -858,7 +859,7 @@ public class CQMCommon_2_0_000
 						var jr_ = context.Operators.Subtract(jp_, jq_);
 						var jt_ = context.Operators.Start(jo_);
 						var ju_ = context.Operators.Interval(jr_, jt_, true, true);
-						var jv_ = context.Operators.ElementInInterval<CqlDateTime>(jn_, ju_, null);
+						var jv_ = context.Operators.In<CqlDateTime>(jn_, ju_, null);
 						var jx_ = context.Operators.Start(jo_);
 						var jy_ = context.Operators.Not((bool?)(jx_ is null));
 						var jz_ = context.Operators.And(jv_, jy_);
@@ -866,7 +867,7 @@ public class CQMCommon_2_0_000
 
 						return ka_;
 					};
-					var hz_ = context.Operators.WhereOrNull<Encounter>(hx_, hy_);
+					var hz_ = context.Operators.Where<Encounter>(hx_, hy_);
 					object ia_(Encounter @this)
 					{
 						var kb_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -874,8 +875,8 @@ public class CQMCommon_2_0_000
 
 						return kc_;
 					};
-					var ib_ = context.Operators.ListSortBy<Encounter>(hz_, ia_, System.ComponentModel.ListSortDirection.Ascending);
-					var ic_ = context.Operators.LastOfList<Encounter>(ib_);
+					var ib_ = context.Operators.SortBy<Encounter>(hz_, ia_, System.ComponentModel.ListSortDirection.Ascending);
+					var ic_ = context.Operators.Last<Encounter>(ib_);
 					var id_ = FHIRHelpers_4_3_000.ToInterval(ic_?.Period);
 					var ie_ = context.Operators.Start(id_);
 					var if_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -895,7 +896,7 @@ public class CQMCommon_2_0_000
 						var kk_ = context.Operators.Subtract(ki_, kj_);
 						var km_ = context.Operators.Start(kh_);
 						var kn_ = context.Operators.Interval(kk_, km_, true, true);
-						var ko_ = context.Operators.ElementInInterval<CqlDateTime>(kg_, kn_, null);
+						var ko_ = context.Operators.In<CqlDateTime>(kg_, kn_, null);
 						var kq_ = context.Operators.Start(kh_);
 						var kr_ = context.Operators.Not((bool?)(kq_ is null));
 						var ks_ = context.Operators.And(ko_, kr_);
@@ -903,7 +904,7 @@ public class CQMCommon_2_0_000
 
 						return kt_;
 					};
-					var im_ = context.Operators.WhereOrNull<Encounter>(ik_, il_);
+					var im_ = context.Operators.Where<Encounter>(ik_, il_);
 					object in_(Encounter @this)
 					{
 						var ku_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -911,13 +912,13 @@ public class CQMCommon_2_0_000
 
 						return kv_;
 					};
-					var io_ = context.Operators.ListSortBy<Encounter>(im_, in_, System.ComponentModel.ListSortDirection.Ascending);
-					var ip_ = context.Operators.LastOfList<Encounter>(io_);
+					var io_ = context.Operators.SortBy<Encounter>(im_, in_, System.ComponentModel.ListSortDirection.Ascending);
+					var ip_ = context.Operators.Last<Encounter>(io_);
 					var iq_ = FHIRHelpers_4_3_000.ToInterval(ip_?.Period);
 					var ir_ = context.Operators.Start(iq_);
 					var it_ = context.Operators.Start(if_);
 					var iu_ = context.Operators.Interval(ii_, (ir_ ?? it_), true, true);
-					var iv_ = context.Operators.ElementInInterval<CqlDateTime>(hv_, iu_, null);
+					var iv_ = context.Operators.In<CqlDateTime>(hv_, iu_, null);
 					var ix_ = context.Operators.RetrieveByValueSet<Encounter>(hw_, null);
 					bool? iy_(Encounter LastObs)
 					{
@@ -931,7 +932,7 @@ public class CQMCommon_2_0_000
 						var ld_ = context.Operators.Subtract(lb_, lc_);
 						var lf_ = context.Operators.Start(la_);
 						var lg_ = context.Operators.Interval(ld_, lf_, true, true);
-						var lh_ = context.Operators.ElementInInterval<CqlDateTime>(kz_, lg_, null);
+						var lh_ = context.Operators.In<CqlDateTime>(kz_, lg_, null);
 						var lj_ = context.Operators.Start(la_);
 						var lk_ = context.Operators.Not((bool?)(lj_ is null));
 						var ll_ = context.Operators.And(lh_, lk_);
@@ -939,7 +940,7 @@ public class CQMCommon_2_0_000
 
 						return lm_;
 					};
-					var iz_ = context.Operators.WhereOrNull<Encounter>(ix_, iy_);
+					var iz_ = context.Operators.Where<Encounter>(ix_, iy_);
 					object ja_(Encounter @this)
 					{
 						var ln_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -947,8 +948,8 @@ public class CQMCommon_2_0_000
 
 						return lo_;
 					};
-					var jb_ = context.Operators.ListSortBy<Encounter>(iz_, ja_, System.ComponentModel.ListSortDirection.Ascending);
-					var jc_ = context.Operators.LastOfList<Encounter>(jb_);
+					var jb_ = context.Operators.SortBy<Encounter>(iz_, ja_, System.ComponentModel.ListSortDirection.Ascending);
+					var jc_ = context.Operators.Last<Encounter>(jb_);
 					var jd_ = FHIRHelpers_4_3_000.ToInterval(jc_?.Period);
 					var je_ = context.Operators.Start(jd_);
 					var jg_ = context.Operators.Start(if_);
@@ -958,7 +959,7 @@ public class CQMCommon_2_0_000
 
 					return jj_;
 				};
-				var bl_ = context.Operators.WhereOrNull<Encounter>(bj_, bk_);
+				var bl_ = context.Operators.Where<Encounter>(bj_, bk_);
 				object bm_(Encounter @this)
 				{
 					var lp_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -966,8 +967,8 @@ public class CQMCommon_2_0_000
 
 					return lq_;
 				};
-				var bn_ = context.Operators.ListSortBy<Encounter>(bl_, bm_, System.ComponentModel.ListSortDirection.Ascending);
-				var bo_ = context.Operators.LastOfList<Encounter>(bn_);
+				var bn_ = context.Operators.SortBy<Encounter>(bl_, bm_, System.ComponentModel.ListSortDirection.Ascending);
+				var bo_ = context.Operators.Last<Encounter>(bn_);
 				var bp_ = FHIRHelpers_4_3_000.ToInterval(bo_?.Period);
 				var bq_ = context.Operators.Start(bp_);
 				var bs_ = context.Operators.RetrieveByValueSet<Encounter>(av_, null);
@@ -983,7 +984,7 @@ public class CQMCommon_2_0_000
 					var ly_ = context.Operators.Subtract(lw_, lx_);
 					var ma_ = context.Operators.Start(lv_);
 					var mb_ = context.Operators.Interval(ly_, ma_, true, true);
-					var mc_ = context.Operators.ElementInInterval<CqlDateTime>(lu_, mb_, null);
+					var mc_ = context.Operators.In<CqlDateTime>(lu_, mb_, null);
 					var me_ = context.Operators.Start(lv_);
 					var mf_ = context.Operators.Not((bool?)(me_ is null));
 					var mg_ = context.Operators.And(mc_, mf_);
@@ -991,7 +992,7 @@ public class CQMCommon_2_0_000
 
 					return mh_;
 				};
-				var bu_ = context.Operators.WhereOrNull<Encounter>(bs_, bt_);
+				var bu_ = context.Operators.Where<Encounter>(bs_, bt_);
 				object bv_(Encounter @this)
 				{
 					var mi_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -999,13 +1000,13 @@ public class CQMCommon_2_0_000
 
 					return mj_;
 				};
-				var bw_ = context.Operators.ListSortBy<Encounter>(bu_, bv_, System.ComponentModel.ListSortDirection.Ascending);
-				var bx_ = context.Operators.LastOfList<Encounter>(bw_);
+				var bw_ = context.Operators.SortBy<Encounter>(bu_, bv_, System.ComponentModel.ListSortDirection.Ascending);
+				var bx_ = context.Operators.Last<Encounter>(bw_);
 				var by_ = FHIRHelpers_4_3_000.ToInterval(bx_?.Period);
 				var bz_ = context.Operators.Start(by_);
 				var cb_ = context.Operators.Start(be_);
 				var cc_ = context.Operators.Interval(bh_, (bq_ ?? (bz_ ?? cb_)), true, true);
-				var cd_ = context.Operators.ElementInInterval<CqlDateTime>(al_, cc_, null);
+				var cd_ = context.Operators.In<CqlDateTime>(al_, cc_, null);
 				var cf_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
 				bool? cg_(Encounter LastED)
 				{
@@ -1027,7 +1028,7 @@ public class CQMCommon_2_0_000
 						var oj_ = context.Operators.Subtract(oh_, oi_);
 						var ol_ = context.Operators.Start(og_);
 						var om_ = context.Operators.Interval(oj_, ol_, true, true);
-						var on_ = context.Operators.ElementInInterval<CqlDateTime>(of_, om_, null);
+						var on_ = context.Operators.In<CqlDateTime>(of_, om_, null);
 						var op_ = context.Operators.Start(og_);
 						var oq_ = context.Operators.Not((bool?)(op_ is null));
 						var or_ = context.Operators.And(on_, oq_);
@@ -1035,7 +1036,7 @@ public class CQMCommon_2_0_000
 
 						return os_;
 					};
-					var mr_ = context.Operators.WhereOrNull<Encounter>(mp_, mq_);
+					var mr_ = context.Operators.Where<Encounter>(mp_, mq_);
 					object ms_(Encounter @this)
 					{
 						var ot_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1043,8 +1044,8 @@ public class CQMCommon_2_0_000
 
 						return ou_;
 					};
-					var mt_ = context.Operators.ListSortBy<Encounter>(mr_, ms_, System.ComponentModel.ListSortDirection.Ascending);
-					var mu_ = context.Operators.LastOfList<Encounter>(mt_);
+					var mt_ = context.Operators.SortBy<Encounter>(mr_, ms_, System.ComponentModel.ListSortDirection.Ascending);
+					var mu_ = context.Operators.Last<Encounter>(mt_);
 					var mv_ = FHIRHelpers_4_3_000.ToInterval(mu_?.Period);
 					var mw_ = context.Operators.Start(mv_);
 					var mx_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1064,7 +1065,7 @@ public class CQMCommon_2_0_000
 						var pc_ = context.Operators.Subtract(pa_, pb_);
 						var pe_ = context.Operators.Start(oz_);
 						var pf_ = context.Operators.Interval(pc_, pe_, true, true);
-						var pg_ = context.Operators.ElementInInterval<CqlDateTime>(oy_, pf_, null);
+						var pg_ = context.Operators.In<CqlDateTime>(oy_, pf_, null);
 						var pi_ = context.Operators.Start(oz_);
 						var pj_ = context.Operators.Not((bool?)(pi_ is null));
 						var pk_ = context.Operators.And(pg_, pj_);
@@ -1072,7 +1073,7 @@ public class CQMCommon_2_0_000
 
 						return pl_;
 					};
-					var ne_ = context.Operators.WhereOrNull<Encounter>(nc_, nd_);
+					var ne_ = context.Operators.Where<Encounter>(nc_, nd_);
 					object nf_(Encounter @this)
 					{
 						var pm_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1080,13 +1081,13 @@ public class CQMCommon_2_0_000
 
 						return pn_;
 					};
-					var ng_ = context.Operators.ListSortBy<Encounter>(ne_, nf_, System.ComponentModel.ListSortDirection.Ascending);
-					var nh_ = context.Operators.LastOfList<Encounter>(ng_);
+					var ng_ = context.Operators.SortBy<Encounter>(ne_, nf_, System.ComponentModel.ListSortDirection.Ascending);
+					var nh_ = context.Operators.Last<Encounter>(ng_);
 					var ni_ = FHIRHelpers_4_3_000.ToInterval(nh_?.Period);
 					var nj_ = context.Operators.Start(ni_);
 					var nl_ = context.Operators.Start(mx_);
 					var nm_ = context.Operators.Interval(na_, (nj_ ?? nl_), true, true);
-					var nn_ = context.Operators.ElementInInterval<CqlDateTime>(mn_, nm_, null);
+					var nn_ = context.Operators.In<CqlDateTime>(mn_, nm_, null);
 					var np_ = context.Operators.RetrieveByValueSet<Encounter>(mo_, null);
 					bool? nq_(Encounter LastObs)
 					{
@@ -1100,7 +1101,7 @@ public class CQMCommon_2_0_000
 						var pv_ = context.Operators.Subtract(pt_, pu_);
 						var px_ = context.Operators.Start(ps_);
 						var py_ = context.Operators.Interval(pv_, px_, true, true);
-						var pz_ = context.Operators.ElementInInterval<CqlDateTime>(pr_, py_, null);
+						var pz_ = context.Operators.In<CqlDateTime>(pr_, py_, null);
 						var qb_ = context.Operators.Start(ps_);
 						var qc_ = context.Operators.Not((bool?)(qb_ is null));
 						var qd_ = context.Operators.And(pz_, qc_);
@@ -1108,7 +1109,7 @@ public class CQMCommon_2_0_000
 
 						return qe_;
 					};
-					var nr_ = context.Operators.WhereOrNull<Encounter>(np_, nq_);
+					var nr_ = context.Operators.Where<Encounter>(np_, nq_);
 					object ns_(Encounter @this)
 					{
 						var qf_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1116,8 +1117,8 @@ public class CQMCommon_2_0_000
 
 						return qg_;
 					};
-					var nt_ = context.Operators.ListSortBy<Encounter>(nr_, ns_, System.ComponentModel.ListSortDirection.Ascending);
-					var nu_ = context.Operators.LastOfList<Encounter>(nt_);
+					var nt_ = context.Operators.SortBy<Encounter>(nr_, ns_, System.ComponentModel.ListSortDirection.Ascending);
+					var nu_ = context.Operators.Last<Encounter>(nt_);
 					var nv_ = FHIRHelpers_4_3_000.ToInterval(nu_?.Period);
 					var nw_ = context.Operators.Start(nv_);
 					var ny_ = context.Operators.Start(mx_);
@@ -1127,7 +1128,7 @@ public class CQMCommon_2_0_000
 
 					return ob_;
 				};
-				var ch_ = context.Operators.WhereOrNull<Encounter>(cf_, cg_);
+				var ch_ = context.Operators.Where<Encounter>(cf_, cg_);
 				object ci_(Encounter @this)
 				{
 					var qh_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1135,8 +1136,8 @@ public class CQMCommon_2_0_000
 
 					return qi_;
 				};
-				var cj_ = context.Operators.ListSortBy<Encounter>(ch_, ci_, System.ComponentModel.ListSortDirection.Ascending);
-				var ck_ = context.Operators.LastOfList<Encounter>(cj_);
+				var cj_ = context.Operators.SortBy<Encounter>(ch_, ci_, System.ComponentModel.ListSortDirection.Ascending);
+				var ck_ = context.Operators.Last<Encounter>(cj_);
 				var cl_ = FHIRHelpers_4_3_000.ToInterval(ck_?.Period);
 				var cm_ = context.Operators.Start(cl_);
 				var co_ = context.Operators.RetrieveByValueSet<Encounter>(av_, null);
@@ -1152,7 +1153,7 @@ public class CQMCommon_2_0_000
 					var qq_ = context.Operators.Subtract(qo_, qp_);
 					var qs_ = context.Operators.Start(qn_);
 					var qt_ = context.Operators.Interval(qq_, qs_, true, true);
-					var qu_ = context.Operators.ElementInInterval<CqlDateTime>(qm_, qt_, null);
+					var qu_ = context.Operators.In<CqlDateTime>(qm_, qt_, null);
 					var qw_ = context.Operators.Start(qn_);
 					var qx_ = context.Operators.Not((bool?)(qw_ is null));
 					var qy_ = context.Operators.And(qu_, qx_);
@@ -1160,7 +1161,7 @@ public class CQMCommon_2_0_000
 
 					return qz_;
 				};
-				var cq_ = context.Operators.WhereOrNull<Encounter>(co_, cp_);
+				var cq_ = context.Operators.Where<Encounter>(co_, cp_);
 				object cr_(Encounter @this)
 				{
 					var ra_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1168,8 +1169,8 @@ public class CQMCommon_2_0_000
 
 					return rb_;
 				};
-				var cs_ = context.Operators.ListSortBy<Encounter>(cq_, cr_, System.ComponentModel.ListSortDirection.Ascending);
-				var ct_ = context.Operators.LastOfList<Encounter>(cs_);
+				var cs_ = context.Operators.SortBy<Encounter>(cq_, cr_, System.ComponentModel.ListSortDirection.Ascending);
+				var ct_ = context.Operators.Last<Encounter>(cs_);
 				var cu_ = FHIRHelpers_4_3_000.ToInterval(ct_?.Period);
 				var cv_ = context.Operators.Start(cu_);
 				var cx_ = context.Operators.Start(be_);
@@ -1178,7 +1179,7 @@ public class CQMCommon_2_0_000
 
 				return cz_;
 			};
-			var h_ = context.Operators.WhereOrNull<Encounter>(f_, g_);
+			var h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
 				var rc_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1186,8 +1187,8 @@ public class CQMCommon_2_0_000
 
 				return rd_;
 			};
-			var j_ = context.Operators.ListSortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
-			var k_ = context.Operators.LastOfList<Encounter>(j_);
+			var j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
+			var k_ = context.Operators.Last<Encounter>(j_);
 			var l_ = FHIRHelpers_4_3_000.ToInterval(k_?.Period);
 			var m_ = context.Operators.Start(l_);
 			var n_ = this.Emergency_Department_Visit();
@@ -1212,7 +1213,7 @@ public class CQMCommon_2_0_000
 					var td_ = context.Operators.Subtract(tb_, tc_);
 					var tf_ = context.Operators.Start(ta_);
 					var tg_ = context.Operators.Interval(td_, tf_, true, true);
-					var th_ = context.Operators.ElementInInterval<CqlDateTime>(sz_, tg_, null);
+					var th_ = context.Operators.In<CqlDateTime>(sz_, tg_, null);
 					var tj_ = context.Operators.Start(ta_);
 					var tk_ = context.Operators.Not((bool?)(tj_ is null));
 					var tl_ = context.Operators.And(th_, tk_);
@@ -1220,7 +1221,7 @@ public class CQMCommon_2_0_000
 
 					return tm_;
 				};
-				var rl_ = context.Operators.WhereOrNull<Encounter>(rj_, rk_);
+				var rl_ = context.Operators.Where<Encounter>(rj_, rk_);
 				object rm_(Encounter @this)
 				{
 					var tn_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1228,8 +1229,8 @@ public class CQMCommon_2_0_000
 
 					return to_;
 				};
-				var rn_ = context.Operators.ListSortBy<Encounter>(rl_, rm_, System.ComponentModel.ListSortDirection.Ascending);
-				var ro_ = context.Operators.LastOfList<Encounter>(rn_);
+				var rn_ = context.Operators.SortBy<Encounter>(rl_, rm_, System.ComponentModel.ListSortDirection.Ascending);
+				var ro_ = context.Operators.Last<Encounter>(rn_);
 				var rp_ = FHIRHelpers_4_3_000.ToInterval(ro_?.Period);
 				var rq_ = context.Operators.Start(rp_);
 				var rr_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1249,7 +1250,7 @@ public class CQMCommon_2_0_000
 					var tw_ = context.Operators.Subtract(tu_, tv_);
 					var ty_ = context.Operators.Start(tt_);
 					var tz_ = context.Operators.Interval(tw_, ty_, true, true);
-					var ua_ = context.Operators.ElementInInterval<CqlDateTime>(ts_, tz_, null);
+					var ua_ = context.Operators.In<CqlDateTime>(ts_, tz_, null);
 					var uc_ = context.Operators.Start(tt_);
 					var ud_ = context.Operators.Not((bool?)(uc_ is null));
 					var ue_ = context.Operators.And(ua_, ud_);
@@ -1257,7 +1258,7 @@ public class CQMCommon_2_0_000
 
 					return uf_;
 				};
-				var ry_ = context.Operators.WhereOrNull<Encounter>(rw_, rx_);
+				var ry_ = context.Operators.Where<Encounter>(rw_, rx_);
 				object rz_(Encounter @this)
 				{
 					var ug_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1265,13 +1266,13 @@ public class CQMCommon_2_0_000
 
 					return uh_;
 				};
-				var sa_ = context.Operators.ListSortBy<Encounter>(ry_, rz_, System.ComponentModel.ListSortDirection.Ascending);
-				var sb_ = context.Operators.LastOfList<Encounter>(sa_);
+				var sa_ = context.Operators.SortBy<Encounter>(ry_, rz_, System.ComponentModel.ListSortDirection.Ascending);
+				var sb_ = context.Operators.Last<Encounter>(sa_);
 				var sc_ = FHIRHelpers_4_3_000.ToInterval(sb_?.Period);
 				var sd_ = context.Operators.Start(sc_);
 				var sf_ = context.Operators.Start(rr_);
 				var sg_ = context.Operators.Interval(ru_, (sd_ ?? sf_), true, true);
-				var sh_ = context.Operators.ElementInInterval<CqlDateTime>(rh_, sg_, null);
+				var sh_ = context.Operators.In<CqlDateTime>(rh_, sg_, null);
 				var sj_ = context.Operators.RetrieveByValueSet<Encounter>(ri_, null);
 				bool? sk_(Encounter LastObs)
 				{
@@ -1285,7 +1286,7 @@ public class CQMCommon_2_0_000
 					var up_ = context.Operators.Subtract(un_, uo_);
 					var ur_ = context.Operators.Start(um_);
 					var us_ = context.Operators.Interval(up_, ur_, true, true);
-					var ut_ = context.Operators.ElementInInterval<CqlDateTime>(ul_, us_, null);
+					var ut_ = context.Operators.In<CqlDateTime>(ul_, us_, null);
 					var uv_ = context.Operators.Start(um_);
 					var uw_ = context.Operators.Not((bool?)(uv_ is null));
 					var ux_ = context.Operators.And(ut_, uw_);
@@ -1293,7 +1294,7 @@ public class CQMCommon_2_0_000
 
 					return uy_;
 				};
-				var sl_ = context.Operators.WhereOrNull<Encounter>(sj_, sk_);
+				var sl_ = context.Operators.Where<Encounter>(sj_, sk_);
 				object sm_(Encounter @this)
 				{
 					var uz_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1301,8 +1302,8 @@ public class CQMCommon_2_0_000
 
 					return va_;
 				};
-				var sn_ = context.Operators.ListSortBy<Encounter>(sl_, sm_, System.ComponentModel.ListSortDirection.Ascending);
-				var so_ = context.Operators.LastOfList<Encounter>(sn_);
+				var sn_ = context.Operators.SortBy<Encounter>(sl_, sm_, System.ComponentModel.ListSortDirection.Ascending);
+				var so_ = context.Operators.Last<Encounter>(sn_);
 				var sp_ = FHIRHelpers_4_3_000.ToInterval(so_?.Period);
 				var sq_ = context.Operators.Start(sp_);
 				var ss_ = context.Operators.Start(rr_);
@@ -1312,7 +1313,7 @@ public class CQMCommon_2_0_000
 
 				return sv_;
 			};
-			var q_ = context.Operators.WhereOrNull<Encounter>(o_, p_);
+			var q_ = context.Operators.Where<Encounter>(o_, p_);
 			object r_(Encounter @this)
 			{
 				var vb_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1320,8 +1321,8 @@ public class CQMCommon_2_0_000
 
 				return vc_;
 			};
-			var s_ = context.Operators.ListSortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
-			var t_ = context.Operators.LastOfList<Encounter>(s_);
+			var s_ = context.Operators.SortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
+			var t_ = context.Operators.Last<Encounter>(s_);
 			var u_ = FHIRHelpers_4_3_000.ToInterval(t_?.Period);
 			var v_ = context.Operators.Start(u_);
 			var w_ = this.Observation_Services();
@@ -1338,7 +1339,7 @@ public class CQMCommon_2_0_000
 				var vk_ = context.Operators.Subtract(vi_, vj_);
 				var vm_ = context.Operators.Start(vh_);
 				var vn_ = context.Operators.Interval(vk_, vm_, true, true);
-				var vo_ = context.Operators.ElementInInterval<CqlDateTime>(vg_, vn_, null);
+				var vo_ = context.Operators.In<CqlDateTime>(vg_, vn_, null);
 				var vq_ = context.Operators.Start(vh_);
 				var vr_ = context.Operators.Not((bool?)(vq_ is null));
 				var vs_ = context.Operators.And(vo_, vr_);
@@ -1346,7 +1347,7 @@ public class CQMCommon_2_0_000
 
 				return vt_;
 			};
-			var z_ = context.Operators.WhereOrNull<Encounter>(x_, y_);
+			var z_ = context.Operators.Where<Encounter>(x_, y_);
 			object aa_(Encounter @this)
 			{
 				var vu_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1354,8 +1355,8 @@ public class CQMCommon_2_0_000
 
 				return vv_;
 			};
-			var ab_ = context.Operators.ListSortBy<Encounter>(z_, aa_, System.ComponentModel.ListSortDirection.Ascending);
-			var ac_ = context.Operators.LastOfList<Encounter>(ab_);
+			var ab_ = context.Operators.SortBy<Encounter>(z_, aa_, System.ComponentModel.ListSortDirection.Ascending);
+			var ac_ = context.Operators.Last<Encounter>(ab_);
 			var ad_ = FHIRHelpers_4_3_000.ToInterval(ac_?.Period);
 			var ae_ = context.Operators.Start(ad_);
 			var af_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1365,8 +1366,8 @@ public class CQMCommon_2_0_000
 
 			return aj_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -1409,7 +1410,7 @@ public class CQMCommon_2_0_000
 						var ez_ = context.Operators.Subtract(ex_, ey_);
 						var fb_ = context.Operators.Start(ew_);
 						var fc_ = context.Operators.Interval(ez_, fb_, true, true);
-						var fd_ = context.Operators.ElementInInterval<CqlDateTime>(ev_, fc_, null);
+						var fd_ = context.Operators.In<CqlDateTime>(ev_, fc_, null);
 						var ff_ = context.Operators.Start(ew_);
 						var fg_ = context.Operators.Not((bool?)(ff_ is null));
 						var fh_ = context.Operators.And(fd_, fg_);
@@ -1417,7 +1418,7 @@ public class CQMCommon_2_0_000
 
 						return fi_;
 					};
-					var dh_ = context.Operators.WhereOrNull<Encounter>(df_, dg_);
+					var dh_ = context.Operators.Where<Encounter>(df_, dg_);
 					object di_(Encounter @this)
 					{
 						var fj_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1425,8 +1426,8 @@ public class CQMCommon_2_0_000
 
 						return fk_;
 					};
-					var dj_ = context.Operators.ListSortBy<Encounter>(dh_, di_, System.ComponentModel.ListSortDirection.Ascending);
-					var dk_ = context.Operators.LastOfList<Encounter>(dj_);
+					var dj_ = context.Operators.SortBy<Encounter>(dh_, di_, System.ComponentModel.ListSortDirection.Ascending);
+					var dk_ = context.Operators.Last<Encounter>(dj_);
 					var dl_ = FHIRHelpers_4_3_000.ToInterval(dk_?.Period);
 					var dm_ = context.Operators.Start(dl_);
 					var dn_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1446,7 +1447,7 @@ public class CQMCommon_2_0_000
 						var fs_ = context.Operators.Subtract(fq_, fr_);
 						var fu_ = context.Operators.Start(fp_);
 						var fv_ = context.Operators.Interval(fs_, fu_, true, true);
-						var fw_ = context.Operators.ElementInInterval<CqlDateTime>(fo_, fv_, null);
+						var fw_ = context.Operators.In<CqlDateTime>(fo_, fv_, null);
 						var fy_ = context.Operators.Start(fp_);
 						var fz_ = context.Operators.Not((bool?)(fy_ is null));
 						var ga_ = context.Operators.And(fw_, fz_);
@@ -1454,7 +1455,7 @@ public class CQMCommon_2_0_000
 
 						return gb_;
 					};
-					var du_ = context.Operators.WhereOrNull<Encounter>(ds_, dt_);
+					var du_ = context.Operators.Where<Encounter>(ds_, dt_);
 					object dv_(Encounter @this)
 					{
 						var gc_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1462,13 +1463,13 @@ public class CQMCommon_2_0_000
 
 						return gd_;
 					};
-					var dw_ = context.Operators.ListSortBy<Encounter>(du_, dv_, System.ComponentModel.ListSortDirection.Ascending);
-					var dx_ = context.Operators.LastOfList<Encounter>(dw_);
+					var dw_ = context.Operators.SortBy<Encounter>(du_, dv_, System.ComponentModel.ListSortDirection.Ascending);
+					var dx_ = context.Operators.Last<Encounter>(dw_);
 					var dy_ = FHIRHelpers_4_3_000.ToInterval(dx_?.Period);
 					var dz_ = context.Operators.Start(dy_);
 					var eb_ = context.Operators.Start(dn_);
 					var ec_ = context.Operators.Interval(dq_, (dz_ ?? eb_), true, true);
-					var ed_ = context.Operators.ElementInInterval<CqlDateTime>(dd_, ec_, null);
+					var ed_ = context.Operators.In<CqlDateTime>(dd_, ec_, null);
 					var ef_ = context.Operators.RetrieveByValueSet<Encounter>(de_, null);
 					bool? eg_(Encounter LastObs)
 					{
@@ -1482,7 +1483,7 @@ public class CQMCommon_2_0_000
 						var gl_ = context.Operators.Subtract(gj_, gk_);
 						var gn_ = context.Operators.Start(gi_);
 						var go_ = context.Operators.Interval(gl_, gn_, true, true);
-						var gp_ = context.Operators.ElementInInterval<CqlDateTime>(gh_, go_, null);
+						var gp_ = context.Operators.In<CqlDateTime>(gh_, go_, null);
 						var gr_ = context.Operators.Start(gi_);
 						var gs_ = context.Operators.Not((bool?)(gr_ is null));
 						var gt_ = context.Operators.And(gp_, gs_);
@@ -1490,7 +1491,7 @@ public class CQMCommon_2_0_000
 
 						return gu_;
 					};
-					var eh_ = context.Operators.WhereOrNull<Encounter>(ef_, eg_);
+					var eh_ = context.Operators.Where<Encounter>(ef_, eg_);
 					object ei_(Encounter @this)
 					{
 						var gv_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1498,8 +1499,8 @@ public class CQMCommon_2_0_000
 
 						return gw_;
 					};
-					var ej_ = context.Operators.ListSortBy<Encounter>(eh_, ei_, System.ComponentModel.ListSortDirection.Ascending);
-					var ek_ = context.Operators.LastOfList<Encounter>(ej_);
+					var ej_ = context.Operators.SortBy<Encounter>(eh_, ei_, System.ComponentModel.ListSortDirection.Ascending);
+					var ek_ = context.Operators.Last<Encounter>(ej_);
 					var el_ = FHIRHelpers_4_3_000.ToInterval(ek_?.Period);
 					var em_ = context.Operators.Start(el_);
 					var eo_ = context.Operators.Start(dn_);
@@ -1509,7 +1510,7 @@ public class CQMCommon_2_0_000
 
 					return er_;
 				};
-				var ap_ = context.Operators.WhereOrNull<Encounter>(an_, ao_);
+				var ap_ = context.Operators.Where<Encounter>(an_, ao_);
 				object aq_(Encounter @this)
 				{
 					var gx_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1517,8 +1518,8 @@ public class CQMCommon_2_0_000
 
 					return gy_;
 				};
-				var ar_ = context.Operators.ListSortBy<Encounter>(ap_, aq_, System.ComponentModel.ListSortDirection.Ascending);
-				var as_ = context.Operators.LastOfList<Encounter>(ar_);
+				var ar_ = context.Operators.SortBy<Encounter>(ap_, aq_, System.ComponentModel.ListSortDirection.Ascending);
+				var as_ = context.Operators.Last<Encounter>(ar_);
 				var at_ = FHIRHelpers_4_3_000.ToInterval(as_?.Period);
 				var au_ = context.Operators.Start(at_);
 				var av_ = this.Observation_Services();
@@ -1535,7 +1536,7 @@ public class CQMCommon_2_0_000
 					var hg_ = context.Operators.Subtract(he_, hf_);
 					var hi_ = context.Operators.Start(hd_);
 					var hj_ = context.Operators.Interval(hg_, hi_, true, true);
-					var hk_ = context.Operators.ElementInInterval<CqlDateTime>(hc_, hj_, null);
+					var hk_ = context.Operators.In<CqlDateTime>(hc_, hj_, null);
 					var hm_ = context.Operators.Start(hd_);
 					var hn_ = context.Operators.Not((bool?)(hm_ is null));
 					var ho_ = context.Operators.And(hk_, hn_);
@@ -1543,7 +1544,7 @@ public class CQMCommon_2_0_000
 
 					return hp_;
 				};
-				var ay_ = context.Operators.WhereOrNull<Encounter>(aw_, ax_);
+				var ay_ = context.Operators.Where<Encounter>(aw_, ax_);
 				object az_(Encounter @this)
 				{
 					var hq_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1551,8 +1552,8 @@ public class CQMCommon_2_0_000
 
 					return hr_;
 				};
-				var ba_ = context.Operators.ListSortBy<Encounter>(ay_, az_, System.ComponentModel.ListSortDirection.Ascending);
-				var bb_ = context.Operators.LastOfList<Encounter>(ba_);
+				var ba_ = context.Operators.SortBy<Encounter>(ay_, az_, System.ComponentModel.ListSortDirection.Ascending);
+				var bb_ = context.Operators.Last<Encounter>(ba_);
 				var bc_ = FHIRHelpers_4_3_000.ToInterval(bb_?.Period);
 				var bd_ = context.Operators.Start(bc_);
 				var be_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1580,7 +1581,7 @@ public class CQMCommon_2_0_000
 						var jr_ = context.Operators.Subtract(jp_, jq_);
 						var jt_ = context.Operators.Start(jo_);
 						var ju_ = context.Operators.Interval(jr_, jt_, true, true);
-						var jv_ = context.Operators.ElementInInterval<CqlDateTime>(jn_, ju_, null);
+						var jv_ = context.Operators.In<CqlDateTime>(jn_, ju_, null);
 						var jx_ = context.Operators.Start(jo_);
 						var jy_ = context.Operators.Not((bool?)(jx_ is null));
 						var jz_ = context.Operators.And(jv_, jy_);
@@ -1588,7 +1589,7 @@ public class CQMCommon_2_0_000
 
 						return ka_;
 					};
-					var hz_ = context.Operators.WhereOrNull<Encounter>(hx_, hy_);
+					var hz_ = context.Operators.Where<Encounter>(hx_, hy_);
 					object ia_(Encounter @this)
 					{
 						var kb_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1596,8 +1597,8 @@ public class CQMCommon_2_0_000
 
 						return kc_;
 					};
-					var ib_ = context.Operators.ListSortBy<Encounter>(hz_, ia_, System.ComponentModel.ListSortDirection.Ascending);
-					var ic_ = context.Operators.LastOfList<Encounter>(ib_);
+					var ib_ = context.Operators.SortBy<Encounter>(hz_, ia_, System.ComponentModel.ListSortDirection.Ascending);
+					var ic_ = context.Operators.Last<Encounter>(ib_);
 					var id_ = FHIRHelpers_4_3_000.ToInterval(ic_?.Period);
 					var ie_ = context.Operators.Start(id_);
 					var if_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1617,7 +1618,7 @@ public class CQMCommon_2_0_000
 						var kk_ = context.Operators.Subtract(ki_, kj_);
 						var km_ = context.Operators.Start(kh_);
 						var kn_ = context.Operators.Interval(kk_, km_, true, true);
-						var ko_ = context.Operators.ElementInInterval<CqlDateTime>(kg_, kn_, null);
+						var ko_ = context.Operators.In<CqlDateTime>(kg_, kn_, null);
 						var kq_ = context.Operators.Start(kh_);
 						var kr_ = context.Operators.Not((bool?)(kq_ is null));
 						var ks_ = context.Operators.And(ko_, kr_);
@@ -1625,7 +1626,7 @@ public class CQMCommon_2_0_000
 
 						return kt_;
 					};
-					var im_ = context.Operators.WhereOrNull<Encounter>(ik_, il_);
+					var im_ = context.Operators.Where<Encounter>(ik_, il_);
 					object in_(Encounter @this)
 					{
 						var ku_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1633,13 +1634,13 @@ public class CQMCommon_2_0_000
 
 						return kv_;
 					};
-					var io_ = context.Operators.ListSortBy<Encounter>(im_, in_, System.ComponentModel.ListSortDirection.Ascending);
-					var ip_ = context.Operators.LastOfList<Encounter>(io_);
+					var io_ = context.Operators.SortBy<Encounter>(im_, in_, System.ComponentModel.ListSortDirection.Ascending);
+					var ip_ = context.Operators.Last<Encounter>(io_);
 					var iq_ = FHIRHelpers_4_3_000.ToInterval(ip_?.Period);
 					var ir_ = context.Operators.Start(iq_);
 					var it_ = context.Operators.Start(if_);
 					var iu_ = context.Operators.Interval(ii_, (ir_ ?? it_), true, true);
-					var iv_ = context.Operators.ElementInInterval<CqlDateTime>(hv_, iu_, null);
+					var iv_ = context.Operators.In<CqlDateTime>(hv_, iu_, null);
 					var ix_ = context.Operators.RetrieveByValueSet<Encounter>(hw_, null);
 					bool? iy_(Encounter LastObs)
 					{
@@ -1653,7 +1654,7 @@ public class CQMCommon_2_0_000
 						var ld_ = context.Operators.Subtract(lb_, lc_);
 						var lf_ = context.Operators.Start(la_);
 						var lg_ = context.Operators.Interval(ld_, lf_, true, true);
-						var lh_ = context.Operators.ElementInInterval<CqlDateTime>(kz_, lg_, null);
+						var lh_ = context.Operators.In<CqlDateTime>(kz_, lg_, null);
 						var lj_ = context.Operators.Start(la_);
 						var lk_ = context.Operators.Not((bool?)(lj_ is null));
 						var ll_ = context.Operators.And(lh_, lk_);
@@ -1661,7 +1662,7 @@ public class CQMCommon_2_0_000
 
 						return lm_;
 					};
-					var iz_ = context.Operators.WhereOrNull<Encounter>(ix_, iy_);
+					var iz_ = context.Operators.Where<Encounter>(ix_, iy_);
 					object ja_(Encounter @this)
 					{
 						var ln_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1669,8 +1670,8 @@ public class CQMCommon_2_0_000
 
 						return lo_;
 					};
-					var jb_ = context.Operators.ListSortBy<Encounter>(iz_, ja_, System.ComponentModel.ListSortDirection.Ascending);
-					var jc_ = context.Operators.LastOfList<Encounter>(jb_);
+					var jb_ = context.Operators.SortBy<Encounter>(iz_, ja_, System.ComponentModel.ListSortDirection.Ascending);
+					var jc_ = context.Operators.Last<Encounter>(jb_);
 					var jd_ = FHIRHelpers_4_3_000.ToInterval(jc_?.Period);
 					var je_ = context.Operators.Start(jd_);
 					var jg_ = context.Operators.Start(if_);
@@ -1680,7 +1681,7 @@ public class CQMCommon_2_0_000
 
 					return jj_;
 				};
-				var bl_ = context.Operators.WhereOrNull<Encounter>(bj_, bk_);
+				var bl_ = context.Operators.Where<Encounter>(bj_, bk_);
 				object bm_(Encounter @this)
 				{
 					var lp_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1688,8 +1689,8 @@ public class CQMCommon_2_0_000
 
 					return lq_;
 				};
-				var bn_ = context.Operators.ListSortBy<Encounter>(bl_, bm_, System.ComponentModel.ListSortDirection.Ascending);
-				var bo_ = context.Operators.LastOfList<Encounter>(bn_);
+				var bn_ = context.Operators.SortBy<Encounter>(bl_, bm_, System.ComponentModel.ListSortDirection.Ascending);
+				var bo_ = context.Operators.Last<Encounter>(bn_);
 				var bp_ = FHIRHelpers_4_3_000.ToInterval(bo_?.Period);
 				var bq_ = context.Operators.Start(bp_);
 				var bs_ = context.Operators.RetrieveByValueSet<Encounter>(av_, null);
@@ -1705,7 +1706,7 @@ public class CQMCommon_2_0_000
 					var ly_ = context.Operators.Subtract(lw_, lx_);
 					var ma_ = context.Operators.Start(lv_);
 					var mb_ = context.Operators.Interval(ly_, ma_, true, true);
-					var mc_ = context.Operators.ElementInInterval<CqlDateTime>(lu_, mb_, null);
+					var mc_ = context.Operators.In<CqlDateTime>(lu_, mb_, null);
 					var me_ = context.Operators.Start(lv_);
 					var mf_ = context.Operators.Not((bool?)(me_ is null));
 					var mg_ = context.Operators.And(mc_, mf_);
@@ -1713,7 +1714,7 @@ public class CQMCommon_2_0_000
 
 					return mh_;
 				};
-				var bu_ = context.Operators.WhereOrNull<Encounter>(bs_, bt_);
+				var bu_ = context.Operators.Where<Encounter>(bs_, bt_);
 				object bv_(Encounter @this)
 				{
 					var mi_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1721,13 +1722,13 @@ public class CQMCommon_2_0_000
 
 					return mj_;
 				};
-				var bw_ = context.Operators.ListSortBy<Encounter>(bu_, bv_, System.ComponentModel.ListSortDirection.Ascending);
-				var bx_ = context.Operators.LastOfList<Encounter>(bw_);
+				var bw_ = context.Operators.SortBy<Encounter>(bu_, bv_, System.ComponentModel.ListSortDirection.Ascending);
+				var bx_ = context.Operators.Last<Encounter>(bw_);
 				var by_ = FHIRHelpers_4_3_000.ToInterval(bx_?.Period);
 				var bz_ = context.Operators.Start(by_);
 				var cb_ = context.Operators.Start(be_);
 				var cc_ = context.Operators.Interval(bh_, (bq_ ?? (bz_ ?? cb_)), true, true);
-				var cd_ = context.Operators.ElementInInterval<CqlDateTime>(al_, cc_, null);
+				var cd_ = context.Operators.In<CqlDateTime>(al_, cc_, null);
 				var cf_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
 				bool? cg_(Encounter LastED)
 				{
@@ -1749,7 +1750,7 @@ public class CQMCommon_2_0_000
 						var oj_ = context.Operators.Subtract(oh_, oi_);
 						var ol_ = context.Operators.Start(og_);
 						var om_ = context.Operators.Interval(oj_, ol_, true, true);
-						var on_ = context.Operators.ElementInInterval<CqlDateTime>(of_, om_, null);
+						var on_ = context.Operators.In<CqlDateTime>(of_, om_, null);
 						var op_ = context.Operators.Start(og_);
 						var oq_ = context.Operators.Not((bool?)(op_ is null));
 						var or_ = context.Operators.And(on_, oq_);
@@ -1757,7 +1758,7 @@ public class CQMCommon_2_0_000
 
 						return os_;
 					};
-					var mr_ = context.Operators.WhereOrNull<Encounter>(mp_, mq_);
+					var mr_ = context.Operators.Where<Encounter>(mp_, mq_);
 					object ms_(Encounter @this)
 					{
 						var ot_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1765,8 +1766,8 @@ public class CQMCommon_2_0_000
 
 						return ou_;
 					};
-					var mt_ = context.Operators.ListSortBy<Encounter>(mr_, ms_, System.ComponentModel.ListSortDirection.Ascending);
-					var mu_ = context.Operators.LastOfList<Encounter>(mt_);
+					var mt_ = context.Operators.SortBy<Encounter>(mr_, ms_, System.ComponentModel.ListSortDirection.Ascending);
+					var mu_ = context.Operators.Last<Encounter>(mt_);
 					var mv_ = FHIRHelpers_4_3_000.ToInterval(mu_?.Period);
 					var mw_ = context.Operators.Start(mv_);
 					var mx_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1786,7 +1787,7 @@ public class CQMCommon_2_0_000
 						var pc_ = context.Operators.Subtract(pa_, pb_);
 						var pe_ = context.Operators.Start(oz_);
 						var pf_ = context.Operators.Interval(pc_, pe_, true, true);
-						var pg_ = context.Operators.ElementInInterval<CqlDateTime>(oy_, pf_, null);
+						var pg_ = context.Operators.In<CqlDateTime>(oy_, pf_, null);
 						var pi_ = context.Operators.Start(oz_);
 						var pj_ = context.Operators.Not((bool?)(pi_ is null));
 						var pk_ = context.Operators.And(pg_, pj_);
@@ -1794,7 +1795,7 @@ public class CQMCommon_2_0_000
 
 						return pl_;
 					};
-					var ne_ = context.Operators.WhereOrNull<Encounter>(nc_, nd_);
+					var ne_ = context.Operators.Where<Encounter>(nc_, nd_);
 					object nf_(Encounter @this)
 					{
 						var pm_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1802,13 +1803,13 @@ public class CQMCommon_2_0_000
 
 						return pn_;
 					};
-					var ng_ = context.Operators.ListSortBy<Encounter>(ne_, nf_, System.ComponentModel.ListSortDirection.Ascending);
-					var nh_ = context.Operators.LastOfList<Encounter>(ng_);
+					var ng_ = context.Operators.SortBy<Encounter>(ne_, nf_, System.ComponentModel.ListSortDirection.Ascending);
+					var nh_ = context.Operators.Last<Encounter>(ng_);
 					var ni_ = FHIRHelpers_4_3_000.ToInterval(nh_?.Period);
 					var nj_ = context.Operators.Start(ni_);
 					var nl_ = context.Operators.Start(mx_);
 					var nm_ = context.Operators.Interval(na_, (nj_ ?? nl_), true, true);
-					var nn_ = context.Operators.ElementInInterval<CqlDateTime>(mn_, nm_, null);
+					var nn_ = context.Operators.In<CqlDateTime>(mn_, nm_, null);
 					var np_ = context.Operators.RetrieveByValueSet<Encounter>(mo_, null);
 					bool? nq_(Encounter LastObs)
 					{
@@ -1822,7 +1823,7 @@ public class CQMCommon_2_0_000
 						var pv_ = context.Operators.Subtract(pt_, pu_);
 						var px_ = context.Operators.Start(ps_);
 						var py_ = context.Operators.Interval(pv_, px_, true, true);
-						var pz_ = context.Operators.ElementInInterval<CqlDateTime>(pr_, py_, null);
+						var pz_ = context.Operators.In<CqlDateTime>(pr_, py_, null);
 						var qb_ = context.Operators.Start(ps_);
 						var qc_ = context.Operators.Not((bool?)(qb_ is null));
 						var qd_ = context.Operators.And(pz_, qc_);
@@ -1830,7 +1831,7 @@ public class CQMCommon_2_0_000
 
 						return qe_;
 					};
-					var nr_ = context.Operators.WhereOrNull<Encounter>(np_, nq_);
+					var nr_ = context.Operators.Where<Encounter>(np_, nq_);
 					object ns_(Encounter @this)
 					{
 						var qf_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1838,8 +1839,8 @@ public class CQMCommon_2_0_000
 
 						return qg_;
 					};
-					var nt_ = context.Operators.ListSortBy<Encounter>(nr_, ns_, System.ComponentModel.ListSortDirection.Ascending);
-					var nu_ = context.Operators.LastOfList<Encounter>(nt_);
+					var nt_ = context.Operators.SortBy<Encounter>(nr_, ns_, System.ComponentModel.ListSortDirection.Ascending);
+					var nu_ = context.Operators.Last<Encounter>(nt_);
 					var nv_ = FHIRHelpers_4_3_000.ToInterval(nu_?.Period);
 					var nw_ = context.Operators.Start(nv_);
 					var ny_ = context.Operators.Start(mx_);
@@ -1849,7 +1850,7 @@ public class CQMCommon_2_0_000
 
 					return ob_;
 				};
-				var ch_ = context.Operators.WhereOrNull<Encounter>(cf_, cg_);
+				var ch_ = context.Operators.Where<Encounter>(cf_, cg_);
 				object ci_(Encounter @this)
 				{
 					var qh_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1857,8 +1858,8 @@ public class CQMCommon_2_0_000
 
 					return qi_;
 				};
-				var cj_ = context.Operators.ListSortBy<Encounter>(ch_, ci_, System.ComponentModel.ListSortDirection.Ascending);
-				var ck_ = context.Operators.LastOfList<Encounter>(cj_);
+				var cj_ = context.Operators.SortBy<Encounter>(ch_, ci_, System.ComponentModel.ListSortDirection.Ascending);
+				var ck_ = context.Operators.Last<Encounter>(cj_);
 				var cl_ = FHIRHelpers_4_3_000.ToInterval(ck_?.Period);
 				var cm_ = context.Operators.Start(cl_);
 				var co_ = context.Operators.RetrieveByValueSet<Encounter>(av_, null);
@@ -1874,7 +1875,7 @@ public class CQMCommon_2_0_000
 					var qq_ = context.Operators.Subtract(qo_, qp_);
 					var qs_ = context.Operators.Start(qn_);
 					var qt_ = context.Operators.Interval(qq_, qs_, true, true);
-					var qu_ = context.Operators.ElementInInterval<CqlDateTime>(qm_, qt_, null);
+					var qu_ = context.Operators.In<CqlDateTime>(qm_, qt_, null);
 					var qw_ = context.Operators.Start(qn_);
 					var qx_ = context.Operators.Not((bool?)(qw_ is null));
 					var qy_ = context.Operators.And(qu_, qx_);
@@ -1882,7 +1883,7 @@ public class CQMCommon_2_0_000
 
 					return qz_;
 				};
-				var cq_ = context.Operators.WhereOrNull<Encounter>(co_, cp_);
+				var cq_ = context.Operators.Where<Encounter>(co_, cp_);
 				object cr_(Encounter @this)
 				{
 					var ra_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1890,8 +1891,8 @@ public class CQMCommon_2_0_000
 
 					return rb_;
 				};
-				var cs_ = context.Operators.ListSortBy<Encounter>(cq_, cr_, System.ComponentModel.ListSortDirection.Ascending);
-				var ct_ = context.Operators.LastOfList<Encounter>(cs_);
+				var cs_ = context.Operators.SortBy<Encounter>(cq_, cr_, System.ComponentModel.ListSortDirection.Ascending);
+				var ct_ = context.Operators.Last<Encounter>(cs_);
 				var cu_ = FHIRHelpers_4_3_000.ToInterval(ct_?.Period);
 				var cv_ = context.Operators.Start(cu_);
 				var cx_ = context.Operators.Start(be_);
@@ -1900,7 +1901,7 @@ public class CQMCommon_2_0_000
 
 				return cz_;
 			};
-			var h_ = context.Operators.WhereOrNull<Encounter>(f_, g_);
+			var h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
 				var rc_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1908,8 +1909,8 @@ public class CQMCommon_2_0_000
 
 				return rd_;
 			};
-			var j_ = context.Operators.ListSortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
-			var k_ = context.Operators.LastOfList<Encounter>(j_);
+			var j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
+			var k_ = context.Operators.Last<Encounter>(j_);
 			var l_ = FHIRHelpers_4_3_000.ToInterval(k_?.Period);
 			var m_ = context.Operators.Start(l_);
 			var n_ = this.Emergency_Department_Visit();
@@ -1934,7 +1935,7 @@ public class CQMCommon_2_0_000
 					var td_ = context.Operators.Subtract(tb_, tc_);
 					var tf_ = context.Operators.Start(ta_);
 					var tg_ = context.Operators.Interval(td_, tf_, true, true);
-					var th_ = context.Operators.ElementInInterval<CqlDateTime>(sz_, tg_, null);
+					var th_ = context.Operators.In<CqlDateTime>(sz_, tg_, null);
 					var tj_ = context.Operators.Start(ta_);
 					var tk_ = context.Operators.Not((bool?)(tj_ is null));
 					var tl_ = context.Operators.And(th_, tk_);
@@ -1942,7 +1943,7 @@ public class CQMCommon_2_0_000
 
 					return tm_;
 				};
-				var rl_ = context.Operators.WhereOrNull<Encounter>(rj_, rk_);
+				var rl_ = context.Operators.Where<Encounter>(rj_, rk_);
 				object rm_(Encounter @this)
 				{
 					var tn_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1950,8 +1951,8 @@ public class CQMCommon_2_0_000
 
 					return to_;
 				};
-				var rn_ = context.Operators.ListSortBy<Encounter>(rl_, rm_, System.ComponentModel.ListSortDirection.Ascending);
-				var ro_ = context.Operators.LastOfList<Encounter>(rn_);
+				var rn_ = context.Operators.SortBy<Encounter>(rl_, rm_, System.ComponentModel.ListSortDirection.Ascending);
+				var ro_ = context.Operators.Last<Encounter>(rn_);
 				var rp_ = FHIRHelpers_4_3_000.ToInterval(ro_?.Period);
 				var rq_ = context.Operators.Start(rp_);
 				var rr_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -1971,7 +1972,7 @@ public class CQMCommon_2_0_000
 					var tw_ = context.Operators.Subtract(tu_, tv_);
 					var ty_ = context.Operators.Start(tt_);
 					var tz_ = context.Operators.Interval(tw_, ty_, true, true);
-					var ua_ = context.Operators.ElementInInterval<CqlDateTime>(ts_, tz_, null);
+					var ua_ = context.Operators.In<CqlDateTime>(ts_, tz_, null);
 					var uc_ = context.Operators.Start(tt_);
 					var ud_ = context.Operators.Not((bool?)(uc_ is null));
 					var ue_ = context.Operators.And(ua_, ud_);
@@ -1979,7 +1980,7 @@ public class CQMCommon_2_0_000
 
 					return uf_;
 				};
-				var ry_ = context.Operators.WhereOrNull<Encounter>(rw_, rx_);
+				var ry_ = context.Operators.Where<Encounter>(rw_, rx_);
 				object rz_(Encounter @this)
 				{
 					var ug_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -1987,13 +1988,13 @@ public class CQMCommon_2_0_000
 
 					return uh_;
 				};
-				var sa_ = context.Operators.ListSortBy<Encounter>(ry_, rz_, System.ComponentModel.ListSortDirection.Ascending);
-				var sb_ = context.Operators.LastOfList<Encounter>(sa_);
+				var sa_ = context.Operators.SortBy<Encounter>(ry_, rz_, System.ComponentModel.ListSortDirection.Ascending);
+				var sb_ = context.Operators.Last<Encounter>(sa_);
 				var sc_ = FHIRHelpers_4_3_000.ToInterval(sb_?.Period);
 				var sd_ = context.Operators.Start(sc_);
 				var sf_ = context.Operators.Start(rr_);
 				var sg_ = context.Operators.Interval(ru_, (sd_ ?? sf_), true, true);
-				var sh_ = context.Operators.ElementInInterval<CqlDateTime>(rh_, sg_, null);
+				var sh_ = context.Operators.In<CqlDateTime>(rh_, sg_, null);
 				var sj_ = context.Operators.RetrieveByValueSet<Encounter>(ri_, null);
 				bool? sk_(Encounter LastObs)
 				{
@@ -2007,7 +2008,7 @@ public class CQMCommon_2_0_000
 					var up_ = context.Operators.Subtract(un_, uo_);
 					var ur_ = context.Operators.Start(um_);
 					var us_ = context.Operators.Interval(up_, ur_, true, true);
-					var ut_ = context.Operators.ElementInInterval<CqlDateTime>(ul_, us_, null);
+					var ut_ = context.Operators.In<CqlDateTime>(ul_, us_, null);
 					var uv_ = context.Operators.Start(um_);
 					var uw_ = context.Operators.Not((bool?)(uv_ is null));
 					var ux_ = context.Operators.And(ut_, uw_);
@@ -2015,7 +2016,7 @@ public class CQMCommon_2_0_000
 
 					return uy_;
 				};
-				var sl_ = context.Operators.WhereOrNull<Encounter>(sj_, sk_);
+				var sl_ = context.Operators.Where<Encounter>(sj_, sk_);
 				object sm_(Encounter @this)
 				{
 					var uz_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2023,8 +2024,8 @@ public class CQMCommon_2_0_000
 
 					return va_;
 				};
-				var sn_ = context.Operators.ListSortBy<Encounter>(sl_, sm_, System.ComponentModel.ListSortDirection.Ascending);
-				var so_ = context.Operators.LastOfList<Encounter>(sn_);
+				var sn_ = context.Operators.SortBy<Encounter>(sl_, sm_, System.ComponentModel.ListSortDirection.Ascending);
+				var so_ = context.Operators.Last<Encounter>(sn_);
 				var sp_ = FHIRHelpers_4_3_000.ToInterval(so_?.Period);
 				var sq_ = context.Operators.Start(sp_);
 				var ss_ = context.Operators.Start(rr_);
@@ -2034,7 +2035,7 @@ public class CQMCommon_2_0_000
 
 				return sv_;
 			};
-			var q_ = context.Operators.WhereOrNull<Encounter>(o_, p_);
+			var q_ = context.Operators.Where<Encounter>(o_, p_);
 			object r_(Encounter @this)
 			{
 				var vb_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2042,8 +2043,8 @@ public class CQMCommon_2_0_000
 
 				return vc_;
 			};
-			var s_ = context.Operators.ListSortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
-			var t_ = context.Operators.LastOfList<Encounter>(s_);
+			var s_ = context.Operators.SortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
+			var t_ = context.Operators.Last<Encounter>(s_);
 			var u_ = FHIRHelpers_4_3_000.ToInterval(t_?.Period);
 			var v_ = context.Operators.Start(u_);
 			var w_ = this.Observation_Services();
@@ -2060,7 +2061,7 @@ public class CQMCommon_2_0_000
 				var vk_ = context.Operators.Subtract(vi_, vj_);
 				var vm_ = context.Operators.Start(vh_);
 				var vn_ = context.Operators.Interval(vk_, vm_, true, true);
-				var vo_ = context.Operators.ElementInInterval<CqlDateTime>(vg_, vn_, null);
+				var vo_ = context.Operators.In<CqlDateTime>(vg_, vn_, null);
 				var vq_ = context.Operators.Start(vh_);
 				var vr_ = context.Operators.Not((bool?)(vq_ is null));
 				var vs_ = context.Operators.And(vo_, vr_);
@@ -2068,7 +2069,7 @@ public class CQMCommon_2_0_000
 
 				return vt_;
 			};
-			var z_ = context.Operators.WhereOrNull<Encounter>(x_, y_);
+			var z_ = context.Operators.Where<Encounter>(x_, y_);
 			object aa_(Encounter @this)
 			{
 				var vu_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2076,8 +2077,8 @@ public class CQMCommon_2_0_000
 
 				return vv_;
 			};
-			var ab_ = context.Operators.ListSortBy<Encounter>(z_, aa_, System.ComponentModel.ListSortDirection.Ascending);
-			var ac_ = context.Operators.LastOfList<Encounter>(ab_);
+			var ab_ = context.Operators.SortBy<Encounter>(z_, aa_, System.ComponentModel.ListSortDirection.Ascending);
+			var ac_ = context.Operators.Last<Encounter>(ab_);
 			var ad_ = FHIRHelpers_4_3_000.ToInterval(ac_?.Period);
 			var ae_ = context.Operators.Start(ad_);
 			var af_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2087,8 +2088,8 @@ public class CQMCommon_2_0_000
 
 			return aj_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -2126,7 +2127,7 @@ public class CQMCommon_2_0_000
 					var ca_ = context.Operators.Subtract(by_, bz_);
 					var cc_ = context.Operators.Start(bx_);
 					var cd_ = context.Operators.Interval(ca_, cc_, true, true);
-					var ce_ = context.Operators.ElementInInterval<CqlDateTime>(bw_, cd_, null);
+					var ce_ = context.Operators.In<CqlDateTime>(bw_, cd_, null);
 					var cg_ = context.Operators.Start(bx_);
 					var ch_ = context.Operators.Not((bool?)(cg_ is null));
 					var ci_ = context.Operators.And(ce_, ch_);
@@ -2134,7 +2135,7 @@ public class CQMCommon_2_0_000
 
 					return cj_;
 				};
-				var ai_ = context.Operators.WhereOrNull<Encounter>(ag_, ah_);
+				var ai_ = context.Operators.Where<Encounter>(ag_, ah_);
 				object aj_(Encounter @this)
 				{
 					var ck_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2142,8 +2143,8 @@ public class CQMCommon_2_0_000
 
 					return cl_;
 				};
-				var ak_ = context.Operators.ListSortBy<Encounter>(ai_, aj_, System.ComponentModel.ListSortDirection.Ascending);
-				var al_ = context.Operators.LastOfList<Encounter>(ak_);
+				var ak_ = context.Operators.SortBy<Encounter>(ai_, aj_, System.ComponentModel.ListSortDirection.Ascending);
+				var al_ = context.Operators.Last<Encounter>(ak_);
 				var am_ = FHIRHelpers_4_3_000.ToInterval(al_?.Period);
 				var an_ = context.Operators.Start(am_);
 				var ao_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2163,7 +2164,7 @@ public class CQMCommon_2_0_000
 					var ct_ = context.Operators.Subtract(cr_, cs_);
 					var cv_ = context.Operators.Start(cq_);
 					var cw_ = context.Operators.Interval(ct_, cv_, true, true);
-					var cx_ = context.Operators.ElementInInterval<CqlDateTime>(cp_, cw_, null);
+					var cx_ = context.Operators.In<CqlDateTime>(cp_, cw_, null);
 					var cz_ = context.Operators.Start(cq_);
 					var da_ = context.Operators.Not((bool?)(cz_ is null));
 					var db_ = context.Operators.And(cx_, da_);
@@ -2171,7 +2172,7 @@ public class CQMCommon_2_0_000
 
 					return dc_;
 				};
-				var av_ = context.Operators.WhereOrNull<Encounter>(at_, au_);
+				var av_ = context.Operators.Where<Encounter>(at_, au_);
 				object aw_(Encounter @this)
 				{
 					var dd_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2179,13 +2180,13 @@ public class CQMCommon_2_0_000
 
 					return de_;
 				};
-				var ax_ = context.Operators.ListSortBy<Encounter>(av_, aw_, System.ComponentModel.ListSortDirection.Ascending);
-				var ay_ = context.Operators.LastOfList<Encounter>(ax_);
+				var ax_ = context.Operators.SortBy<Encounter>(av_, aw_, System.ComponentModel.ListSortDirection.Ascending);
+				var ay_ = context.Operators.Last<Encounter>(ax_);
 				var az_ = FHIRHelpers_4_3_000.ToInterval(ay_?.Period);
 				var ba_ = context.Operators.Start(az_);
 				var bc_ = context.Operators.Start(ao_);
 				var bd_ = context.Operators.Interval(ar_, (ba_ ?? bc_), true, true);
-				var be_ = context.Operators.ElementInInterval<CqlDateTime>(ae_, bd_, null);
+				var be_ = context.Operators.In<CqlDateTime>(ae_, bd_, null);
 				var bg_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 				bool? bh_(Encounter LastObs)
 				{
@@ -2199,7 +2200,7 @@ public class CQMCommon_2_0_000
 					var dm_ = context.Operators.Subtract(dk_, dl_);
 					var do_ = context.Operators.Start(dj_);
 					var dp_ = context.Operators.Interval(dm_, do_, true, true);
-					var dq_ = context.Operators.ElementInInterval<CqlDateTime>(di_, dp_, null);
+					var dq_ = context.Operators.In<CqlDateTime>(di_, dp_, null);
 					var ds_ = context.Operators.Start(dj_);
 					var dt_ = context.Operators.Not((bool?)(ds_ is null));
 					var du_ = context.Operators.And(dq_, dt_);
@@ -2207,7 +2208,7 @@ public class CQMCommon_2_0_000
 
 					return dv_;
 				};
-				var bi_ = context.Operators.WhereOrNull<Encounter>(bg_, bh_);
+				var bi_ = context.Operators.Where<Encounter>(bg_, bh_);
 				object bj_(Encounter @this)
 				{
 					var dw_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2215,8 +2216,8 @@ public class CQMCommon_2_0_000
 
 					return dx_;
 				};
-				var bk_ = context.Operators.ListSortBy<Encounter>(bi_, bj_, System.ComponentModel.ListSortDirection.Ascending);
-				var bl_ = context.Operators.LastOfList<Encounter>(bk_);
+				var bk_ = context.Operators.SortBy<Encounter>(bi_, bj_, System.ComponentModel.ListSortDirection.Ascending);
+				var bl_ = context.Operators.Last<Encounter>(bk_);
 				var bm_ = FHIRHelpers_4_3_000.ToInterval(bl_?.Period);
 				var bn_ = context.Operators.Start(bm_);
 				var bp_ = context.Operators.Start(ao_);
@@ -2226,7 +2227,7 @@ public class CQMCommon_2_0_000
 
 				return bs_;
 			};
-			var h_ = context.Operators.WhereOrNull<Encounter>(f_, g_);
+			var h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
 				var dy_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2234,8 +2235,8 @@ public class CQMCommon_2_0_000
 
 				return dz_;
 			};
-			var j_ = context.Operators.ListSortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
-			var k_ = context.Operators.LastOfList<Encounter>(j_);
+			var j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
+			var k_ = context.Operators.Last<Encounter>(j_);
 			var l_ = FHIRHelpers_4_3_000.ToInterval(k_?.Period);
 			var m_ = context.Operators.Start(l_);
 			var n_ = this.Observation_Services();
@@ -2252,7 +2253,7 @@ public class CQMCommon_2_0_000
 				var eh_ = context.Operators.Subtract(ef_, eg_);
 				var ej_ = context.Operators.Start(ee_);
 				var ek_ = context.Operators.Interval(eh_, ej_, true, true);
-				var el_ = context.Operators.ElementInInterval<CqlDateTime>(ed_, ek_, null);
+				var el_ = context.Operators.In<CqlDateTime>(ed_, ek_, null);
 				var en_ = context.Operators.Start(ee_);
 				var eo_ = context.Operators.Not((bool?)(en_ is null));
 				var ep_ = context.Operators.And(el_, eo_);
@@ -2260,7 +2261,7 @@ public class CQMCommon_2_0_000
 
 				return eq_;
 			};
-			var q_ = context.Operators.WhereOrNull<Encounter>(o_, p_);
+			var q_ = context.Operators.Where<Encounter>(o_, p_);
 			object r_(Encounter @this)
 			{
 				var er_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2268,8 +2269,8 @@ public class CQMCommon_2_0_000
 
 				return es_;
 			};
-			var s_ = context.Operators.ListSortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
-			var t_ = context.Operators.LastOfList<Encounter>(s_);
+			var s_ = context.Operators.SortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
+			var t_ = context.Operators.Last<Encounter>(s_);
 			var u_ = FHIRHelpers_4_3_000.ToInterval(t_?.Period);
 			var v_ = context.Operators.Start(u_);
 			var w_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2279,8 +2280,8 @@ public class CQMCommon_2_0_000
 
 			return aa_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -2317,7 +2318,7 @@ public class CQMCommon_2_0_000
 					var ca_ = context.Operators.Subtract(by_, bz_);
 					var cc_ = context.Operators.Start(bx_);
 					var cd_ = context.Operators.Interval(ca_, cc_, true, true);
-					var ce_ = context.Operators.ElementInInterval<CqlDateTime>(bw_, cd_, null);
+					var ce_ = context.Operators.In<CqlDateTime>(bw_, cd_, null);
 					var cg_ = context.Operators.Start(bx_);
 					var ch_ = context.Operators.Not((bool?)(cg_ is null));
 					var ci_ = context.Operators.And(ce_, ch_);
@@ -2325,7 +2326,7 @@ public class CQMCommon_2_0_000
 
 					return cj_;
 				};
-				var ai_ = context.Operators.WhereOrNull<Encounter>(ag_, ah_);
+				var ai_ = context.Operators.Where<Encounter>(ag_, ah_);
 				object aj_(Encounter @this)
 				{
 					var ck_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2333,8 +2334,8 @@ public class CQMCommon_2_0_000
 
 					return cl_;
 				};
-				var ak_ = context.Operators.ListSortBy<Encounter>(ai_, aj_, System.ComponentModel.ListSortDirection.Ascending);
-				var al_ = context.Operators.LastOfList<Encounter>(ak_);
+				var ak_ = context.Operators.SortBy<Encounter>(ai_, aj_, System.ComponentModel.ListSortDirection.Ascending);
+				var al_ = context.Operators.Last<Encounter>(ak_);
 				var am_ = FHIRHelpers_4_3_000.ToInterval(al_?.Period);
 				var an_ = context.Operators.Start(am_);
 				var ao_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2354,7 +2355,7 @@ public class CQMCommon_2_0_000
 					var ct_ = context.Operators.Subtract(cr_, cs_);
 					var cv_ = context.Operators.Start(cq_);
 					var cw_ = context.Operators.Interval(ct_, cv_, true, true);
-					var cx_ = context.Operators.ElementInInterval<CqlDateTime>(cp_, cw_, null);
+					var cx_ = context.Operators.In<CqlDateTime>(cp_, cw_, null);
 					var cz_ = context.Operators.Start(cq_);
 					var da_ = context.Operators.Not((bool?)(cz_ is null));
 					var db_ = context.Operators.And(cx_, da_);
@@ -2362,7 +2363,7 @@ public class CQMCommon_2_0_000
 
 					return dc_;
 				};
-				var av_ = context.Operators.WhereOrNull<Encounter>(at_, au_);
+				var av_ = context.Operators.Where<Encounter>(at_, au_);
 				object aw_(Encounter @this)
 				{
 					var dd_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2370,13 +2371,13 @@ public class CQMCommon_2_0_000
 
 					return de_;
 				};
-				var ax_ = context.Operators.ListSortBy<Encounter>(av_, aw_, System.ComponentModel.ListSortDirection.Ascending);
-				var ay_ = context.Operators.LastOfList<Encounter>(ax_);
+				var ax_ = context.Operators.SortBy<Encounter>(av_, aw_, System.ComponentModel.ListSortDirection.Ascending);
+				var ay_ = context.Operators.Last<Encounter>(ax_);
 				var az_ = FHIRHelpers_4_3_000.ToInterval(ay_?.Period);
 				var ba_ = context.Operators.Start(az_);
 				var bc_ = context.Operators.Start(ao_);
 				var bd_ = context.Operators.Interval(ar_, (ba_ ?? bc_), true, true);
-				var be_ = context.Operators.ElementInInterval<CqlDateTime>(ae_, bd_, null);
+				var be_ = context.Operators.In<CqlDateTime>(ae_, bd_, null);
 				var bg_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 				bool? bh_(Encounter LastObs)
 				{
@@ -2390,7 +2391,7 @@ public class CQMCommon_2_0_000
 					var dm_ = context.Operators.Subtract(dk_, dl_);
 					var do_ = context.Operators.Start(dj_);
 					var dp_ = context.Operators.Interval(dm_, do_, true, true);
-					var dq_ = context.Operators.ElementInInterval<CqlDateTime>(di_, dp_, null);
+					var dq_ = context.Operators.In<CqlDateTime>(di_, dp_, null);
 					var ds_ = context.Operators.Start(dj_);
 					var dt_ = context.Operators.Not((bool?)(ds_ is null));
 					var du_ = context.Operators.And(dq_, dt_);
@@ -2398,7 +2399,7 @@ public class CQMCommon_2_0_000
 
 					return dv_;
 				};
-				var bi_ = context.Operators.WhereOrNull<Encounter>(bg_, bh_);
+				var bi_ = context.Operators.Where<Encounter>(bg_, bh_);
 				object bj_(Encounter @this)
 				{
 					var dw_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2406,8 +2407,8 @@ public class CQMCommon_2_0_000
 
 					return dx_;
 				};
-				var bk_ = context.Operators.ListSortBy<Encounter>(bi_, bj_, System.ComponentModel.ListSortDirection.Ascending);
-				var bl_ = context.Operators.LastOfList<Encounter>(bk_);
+				var bk_ = context.Operators.SortBy<Encounter>(bi_, bj_, System.ComponentModel.ListSortDirection.Ascending);
+				var bl_ = context.Operators.Last<Encounter>(bk_);
 				var bm_ = FHIRHelpers_4_3_000.ToInterval(bl_?.Period);
 				var bn_ = context.Operators.Start(bm_);
 				var bp_ = context.Operators.Start(ao_);
@@ -2417,7 +2418,7 @@ public class CQMCommon_2_0_000
 
 				return bs_;
 			};
-			var h_ = context.Operators.WhereOrNull<Encounter>(f_, g_);
+			var h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
 				var dy_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2425,8 +2426,8 @@ public class CQMCommon_2_0_000
 
 				return dz_;
 			};
-			var j_ = context.Operators.ListSortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
-			var k_ = context.Operators.LastOfList<Encounter>(j_);
+			var j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
+			var k_ = context.Operators.Last<Encounter>(j_);
 			var l_ = FHIRHelpers_4_3_000.ToInterval(k_?.Period);
 			var m_ = context.Operators.Start(l_);
 			var n_ = this.Observation_Services();
@@ -2443,7 +2444,7 @@ public class CQMCommon_2_0_000
 				var eh_ = context.Operators.Subtract(ef_, eg_);
 				var ej_ = context.Operators.Start(ee_);
 				var ek_ = context.Operators.Interval(eh_, ej_, true, true);
-				var el_ = context.Operators.ElementInInterval<CqlDateTime>(ed_, ek_, null);
+				var el_ = context.Operators.In<CqlDateTime>(ed_, ek_, null);
 				var en_ = context.Operators.Start(ee_);
 				var eo_ = context.Operators.Not((bool?)(en_ is null));
 				var ep_ = context.Operators.And(el_, eo_);
@@ -2451,7 +2452,7 @@ public class CQMCommon_2_0_000
 
 				return eq_;
 			};
-			var q_ = context.Operators.WhereOrNull<Encounter>(o_, p_);
+			var q_ = context.Operators.Where<Encounter>(o_, p_);
 			object r_(Encounter @this)
 			{
 				var er_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2459,8 +2460,8 @@ public class CQMCommon_2_0_000
 
 				return es_;
 			};
-			var s_ = context.Operators.ListSortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
-			var t_ = context.Operators.LastOfList<Encounter>(s_);
+			var s_ = context.Operators.SortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
+			var t_ = context.Operators.Last<Encounter>(s_);
 			var u_ = FHIRHelpers_4_3_000.ToInterval(t_?.Period);
 			var v_ = context.Operators.Start(u_);
 			var w_ = FHIRHelpers_4_3_000.ToInterval(Visit?.Period);
@@ -2470,8 +2471,8 @@ public class CQMCommon_2_0_000
 
 			return aa_;
 		};
-		var c_ = context.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(c_);
+		var c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
@@ -2511,7 +2512,7 @@ public class CQMCommon_2_0_000
 
 				return o_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(f_?.Type, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(f_?.Type, g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
@@ -2521,7 +2522,7 @@ public class CQMCommon_2_0_000
 
 			return n_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
 		object c_(Encounter.LocationComponent @this)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2529,8 +2530,8 @@ public class CQMCommon_2_0_000
 
 			return q_;
 		};
-		var d_ = context.Operators.ListSortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
-		var e_ = context.Operators.FirstOfList<Encounter.LocationComponent>(d_);
+		var d_ = context.Operators.SortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
+		var e_ = context.Operators.First<Encounter.LocationComponent>(d_);
 
 		return e_;
 	}
@@ -2548,7 +2549,7 @@ public class CQMCommon_2_0_000
 
 				return o_;
 			};
-			var h_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(f_?.Type, g_);
+			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>(f_?.Type, g_);
 			var i_ = this.Intensive_Care_Unit();
 			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
 			var k_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
@@ -2558,7 +2559,7 @@ public class CQMCommon_2_0_000
 
 			return n_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
 		object c_(Encounter.LocationComponent @this)
 		{
 			var p_ = FHIRHelpers_4_3_000.ToInterval(@this?.Period);
@@ -2566,8 +2567,8 @@ public class CQMCommon_2_0_000
 
 			return q_;
 		};
-		var d_ = context.Operators.ListSortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
-		var e_ = context.Operators.FirstOfList<Encounter.LocationComponent>(d_);
+		var d_ = context.Operators.SortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
+		var e_ = context.Operators.First<Encounter.LocationComponent>(d_);
 
 		return e_;
 	}
@@ -2587,12 +2588,12 @@ public class CQMCommon_2_0_000
 
 				return h_;
 			};
-			var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-			var f_ = context.Operators.SingleOrNull<Condition>(e_);
+			var e_ = context.Operators.Where<Condition>(c_, d_);
+			var f_ = context.Operators.SingletonFrom<Condition>(e_);
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 
 		return b_;
 	}
@@ -2611,12 +2612,12 @@ public class CQMCommon_2_0_000
 
 				return h_;
 			};
-			var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
-			var f_ = context.Operators.SingleOrNull<Condition>(e_);
+			var e_ = context.Operators.Where<Condition>(c_, d_);
+			var f_ = context.Operators.SingletonFrom<Condition>(e_);
 
 			return f_;
 		};
-		var b_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 
 		return b_;
 	}
@@ -2634,8 +2635,8 @@ public class CQMCommon_2_0_000
 
 			return f_;
 		};
-		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var c_ = context.Operators.Where<Condition>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 
 		return d_;
 	}
@@ -2652,8 +2653,8 @@ public class CQMCommon_2_0_000
 
 			return f_;
 		};
-		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Condition>(c_);
+		var c_ = context.Operators.Where<Condition>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<Condition>(c_);
 
 		return d_;
 	}
@@ -2665,11 +2666,11 @@ public class CQMCommon_2_0_000
 	{
 		bool? a_(Encounter.DiagnosisComponent D)
 		{
-			var f_ = context.Operators.Equal(D?.RankElement?.Value, (int?)1);
+			var f_ = context.Operators.Equal(D?.RankElement?.Value, 1);
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 		Condition c_(Encounter.DiagnosisComponent PD)
 		{
 			var g_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
@@ -2680,13 +2681,13 @@ public class CQMCommon_2_0_000
 
 				return l_;
 			};
-			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
-			var j_ = context.Operators.SingleOrNull<Condition>(i_);
+			var i_ = context.Operators.Where<Condition>(g_, h_);
+			var j_ = context.Operators.SingletonFrom<Condition>(i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<Condition>(d_);
+		var d_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<Condition>(d_);
 
 		return e_;
 	}
@@ -2697,11 +2698,11 @@ public class CQMCommon_2_0_000
 	{
 		bool? a_(Encounter.DiagnosisComponent D)
 		{
-			var f_ = context.Operators.Equal(D?.RankElement?.Value, (int?)1);
+			var f_ = context.Operators.Equal(D?.RankElement?.Value, 1);
 
 			return f_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 		Condition c_(Encounter.DiagnosisComponent PD)
 		{
 			var g_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
@@ -2712,13 +2713,13 @@ public class CQMCommon_2_0_000
 
 				return l_;
 			};
-			var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
-			var j_ = context.Operators.SingleOrNull<Condition>(i_);
+			var i_ = context.Operators.Where<Condition>(g_, h_);
+			var j_ = context.Operators.SingletonFrom<Condition>(i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, Condition>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<Condition>(d_);
+		var d_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<Condition>(d_);
 
 		return e_;
 	}
@@ -2735,8 +2736,8 @@ public class CQMCommon_2_0_000
 
 			return f_;
 		};
-		var c_ = context.Operators.WhereOrNull<Location>(a_, b_);
-		var d_ = context.Operators.SingleOrNull<Location>(c_);
+		var c_ = context.Operators.Where<Location>(a_, b_);
+		var d_ = context.Operators.SingletonFrom<Location>(c_);
 
 		return d_;
 	}
@@ -2772,8 +2773,8 @@ public class CQMCommon_2_0_000
 
 					return m_;
 				};
-				var h_ = context.Operators.WhereOrNull<Medication>(f_, g_);
-				var i_ = context.Operators.SingleOrNull<Medication>(h_);
+				var h_ = context.Operators.Where<Medication>(f_, g_);
+				var i_ = context.Operators.SingletonFrom<Medication>(h_);
 				var j_ = FHIRHelpers_4_3_000.ToConcept(i_?.Code);
 
 				return j_;
@@ -2813,8 +2814,8 @@ public class CQMCommon_2_0_000
 
 					return m_;
 				};
-				var h_ = context.Operators.WhereOrNull<Medication>(f_, g_);
-				var i_ = context.Operators.SingleOrNull<Medication>(h_);
+				var h_ = context.Operators.Where<Medication>(f_, g_);
+				var i_ = context.Operators.SingletonFrom<Medication>(h_);
 				var j_ = FHIRHelpers_4_3_000.ToConcept(i_?.Code);
 
 				return j_;

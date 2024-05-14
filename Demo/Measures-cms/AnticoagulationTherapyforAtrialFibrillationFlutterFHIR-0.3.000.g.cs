@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -41,9 +43,9 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     internal Lazy<IEnumerable<Encounter>> __Numerator;
     internal Lazy<IEnumerable<MedicationRequest>> __Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge;
     internal Lazy<IEnumerable<Encounter>> __Denominator_Exceptions;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -79,9 +81,9 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
         __Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge = new Lazy<IEnumerable<MedicationRequest>>(this.Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge_Value);
         __Denominator_Exceptions = new Lazy<IEnumerable<Encounter>>(this.Denominator_Exceptions_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -184,13 +186,12 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR-0.3.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR-0.3.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -200,7 +201,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -229,131 +230,132 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, null);
 			bool? n_(Procedure AtrialAblationProcedure)
 			{
-				var q_ = context.Operators.EnumEqualsString(AtrialAblationProcedure?.StatusElement?.Value, "completed");
-				var r_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationProcedure?.Performed);
-				var s_ = QICoreCommon_2_0_000.toInterval(r_);
-				var t_ = context.Operators.Start(s_);
-				var u_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				var v_ = context.Operators.Start(u_);
-				var w_ = context.Operators.Before(t_, v_, null);
-				var x_ = context.Operators.And(q_, w_);
+				var q_ = context.Operators.Convert<string>(AtrialAblationProcedure?.StatusElement?.Value);
+				var r_ = context.Operators.Equal(q_, "completed");
+				var s_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationProcedure?.Performed);
+				var t_ = QICoreCommon_2_0_000.toInterval(s_);
+				var u_ = context.Operators.Start(t_);
+				var v_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
+				var w_ = context.Operators.Start(v_);
+				var x_ = context.Operators.Before(u_, w_, null);
+				var y_ = context.Operators.And(r_, x_);
 
-				return x_;
+				return y_;
 			};
-			var o_ = context.Operators.WhereOrNull<Procedure>(m_, n_);
-			var p_ = context.Operators.ExistsInList<Procedure>(o_);
+			var o_ = context.Operators.Where<Procedure>(m_, n_);
+			var p_ = context.Operators.Exists<Procedure>(o_);
 
 			return p_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter IschemicStrokeEncounter)
 		{
-			var y_ = this.History_of_Atrial_Ablation();
-			var z_ = context.Operators.RetrieveByValueSet<Condition>(y_, null);
-			bool? aa_(Condition AtrialAblationDiagnosis)
+			var z_ = this.History_of_Atrial_Ablation();
+			var aa_ = context.Operators.RetrieveByValueSet<Condition>(z_, null);
+			bool? ab_(Condition AtrialAblationDiagnosis)
 			{
-				var ae_ = FHIRHelpers_4_3_000.ToConcept(AtrialAblationDiagnosis?.VerificationStatus);
-				var af_ = context.Operators.Not((bool?)(ae_ is null));
-				var ah_ = QICoreCommon_2_0_000.confirmed();
-				var ai_ = context.Operators.ConvertCodeToConcept(ah_);
-				var aj_ = context.Operators.Equivalent(ae_, ai_);
-				var ak_ = context.Operators.And(af_, aj_);
-				var al_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationDiagnosis?.Onset);
-				var am_ = QICoreCommon_2_0_000.toInterval(al_);
-				var an_ = context.Operators.Start(am_);
-				var ao_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				var ap_ = context.Operators.Start(ao_);
-				var aq_ = context.Operators.Before(an_, ap_, null);
-				var ar_ = context.Operators.And(ak_, aq_);
+				var af_ = FHIRHelpers_4_3_000.ToConcept(AtrialAblationDiagnosis?.VerificationStatus);
+				var ag_ = context.Operators.Not((bool?)(af_ is null));
+				var ai_ = QICoreCommon_2_0_000.confirmed();
+				var aj_ = context.Operators.ConvertCodeToConcept(ai_);
+				var ak_ = context.Operators.Equivalent(af_, aj_);
+				var al_ = context.Operators.And(ag_, ak_);
+				var am_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationDiagnosis?.Onset);
+				var an_ = QICoreCommon_2_0_000.toInterval(am_);
+				var ao_ = context.Operators.Start(an_);
+				var ap_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
+				var aq_ = context.Operators.Start(ap_);
+				var ar_ = context.Operators.Before(ao_, aq_, null);
+				var as_ = context.Operators.And(al_, ar_);
 
-				return ar_;
+				return as_;
 			};
-			var ab_ = context.Operators.WhereOrNull<Condition>(z_, aa_);
-			Encounter ac_(Condition AtrialAblationDiagnosis) => 
+			var ac_ = context.Operators.Where<Condition>(aa_, ab_);
+			Encounter ad_(Condition AtrialAblationDiagnosis) => 
 				IschemicStrokeEncounter;
-			var ad_ = context.Operators.SelectOrNull<Condition, Encounter>(ab_, ac_);
+			var ae_ = context.Operators.Select<Condition, Encounter>(ac_, ad_);
 
-			return ad_;
+			return ae_;
 		};
-		var f_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, e_);
+		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
 		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
 		IEnumerable<Encounter> i_(Encounter IschemicStrokeEncounter)
 		{
-			var as_ = this.History_of_Atrial_Ablation();
-			var at_ = context.Operators.RetrieveByValueSet<Observation>(as_, null);
-			bool? au_(Observation AtrialAblationObservation)
+			var at_ = this.History_of_Atrial_Ablation();
+			var au_ = context.Operators.RetrieveByValueSet<Observation>(at_, null);
+			bool? av_(Observation AtrialAblationObservation)
 			{
-				var ay_ = context.Operators.Convert<Code<ObservationStatus>>(AtrialAblationObservation?.StatusElement?.Value);
-				var az_ = context.Operators.Convert<string>(ay_);
-				var ba_ = new string[]
+				var az_ = context.Operators.Convert<Code<ObservationStatus>>(AtrialAblationObservation?.StatusElement?.Value);
+				var ba_ = context.Operators.Convert<string>(az_);
+				var bb_ = new string[]
 				{
 					"final",
 					"amended",
 					"corrected",
 				};
-				var bb_ = context.Operators.InList<string>(az_, (ba_ as IEnumerable<string>));
-				object bc_()
+				var bc_ = context.Operators.In<string>(ba_, (bb_ as IEnumerable<string>));
+				object bd_()
 				{
-					bool bi_()
-					{
-						var bl_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
-						var bm_ = bl_ is CqlDateTime;
-
-						return bm_;
-					};
 					bool bj_()
 					{
-						var bn_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
-						var bo_ = bn_ is CqlInterval<CqlDateTime>;
+						var bm_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bn_ = bm_ is CqlDateTime;
 
-						return bo_;
+						return bn_;
 					};
 					bool bk_()
 					{
-						var bp_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
-						var bq_ = bp_ is CqlDateTime;
+						var bo_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bp_ = bo_ is CqlInterval<CqlDateTime>;
 
-						return bq_;
+						return bp_;
 					};
-					if (bi_())
+					bool bl_()
 					{
-						var br_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var bq_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+						var br_ = bq_ is CqlDateTime;
 
-						return ((br_ as CqlDateTime) as object);
-					}
-					else if (bj_())
+						return br_;
+					};
+					if (bj_())
 					{
 						var bs_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
 
-						return ((bs_ as CqlInterval<CqlDateTime>) as object);
+						return ((bs_ as CqlDateTime) as object);
 					}
 					else if (bk_())
 					{
 						var bt_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
 
-						return ((bt_ as CqlDateTime) as object);
+						return ((bt_ as CqlInterval<CqlDateTime>) as object);
+					}
+					else if (bl_())
+					{
+						var bu_ = FHIRHelpers_4_3_000.ToValue(AtrialAblationObservation?.Effective);
+
+						return ((bu_ as CqlDateTime) as object);
 					}
 					else
 					{
 						return null;
 					};
 				};
-				var bd_ = QICoreCommon_2_0_000.earliest(bc_());
-				var be_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
-				var bf_ = context.Operators.End(be_);
-				var bg_ = context.Operators.SameOrBefore(bd_, bf_, null);
-				var bh_ = context.Operators.And(bb_, bg_);
+				var be_ = QICoreCommon_2_0_000.earliest(bd_());
+				var bf_ = FHIRHelpers_4_3_000.ToInterval(IschemicStrokeEncounter?.Period);
+				var bg_ = context.Operators.End(bf_);
+				var bh_ = context.Operators.SameOrBefore(be_, bg_, null);
+				var bi_ = context.Operators.And(bc_, bh_);
 
-				return bh_;
+				return bi_;
 			};
-			var av_ = context.Operators.WhereOrNull<Observation>(at_, au_);
-			Encounter aw_(Observation AtrialAblationObservation) => 
+			var aw_ = context.Operators.Where<Observation>(au_, av_);
+			Encounter ax_(Observation AtrialAblationObservation) => 
 				IschemicStrokeEncounter;
-			var ax_ = context.Operators.SelectOrNull<Observation, Encounter>(av_, aw_);
+			var ay_ = context.Operators.Select<Observation, Encounter>(aw_, ax_);
 
-			return ax_;
+			return ay_;
 		};
-		var j_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, i_);
+		var j_ = context.Operators.SelectMany<Encounter, Encounter>(a_, i_);
 		var k_ = context.Operators.ListUnion<Encounter>(g_, j_);
 
 		return k_;
@@ -388,14 +390,14 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 				return aa_;
 			};
-			var k_ = context.Operators.WhereOrNull<Condition>(i_, j_);
+			var k_ = context.Operators.Where<Condition>(i_, j_);
 			Encounter l_(Condition AtrialFibrillationFlutter) => 
 				IschemicStrokeEncounter;
-			var m_ = context.Operators.SelectOrNull<Condition, Encounter>(k_, l_);
+			var m_ = context.Operators.Select<Condition, Encounter>(k_, l_);
 
 			return m_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 		bool? e_(Encounter IschemicStrokeEncounter)
 		{
 			var ab_ = CQMCommon_2_0_000.encounterDiagnosis(IschemicStrokeEncounter);
@@ -407,12 +409,12 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 				return ah_;
 			};
-			var ad_ = context.Operators.WhereOrNull<Condition>(ab_, ac_);
-			var ae_ = context.Operators.ExistsInList<Condition>(ad_);
+			var ad_ = context.Operators.Where<Condition>(ab_, ac_);
+			var ae_ = context.Operators.Exists<Condition>(ad_);
 
 			return ae_;
 		};
-		var f_ = context.Operators.WhereOrNull<Encounter>(a_, e_);
+		var f_ = context.Operators.Where<Encounter>(a_, e_);
 		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
 
 		return g_;
@@ -450,18 +452,18 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
-				var p_ = context.Operators.ElementInInterval<CqlDateTime>((l_ ?? n_), o_, null);
+				var p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};
-			var f_ = context.Operators.WhereOrNull<object>(d_, e_);
+			var f_ = context.Operators.Where<object>(d_, e_);
 			Encounter g_(object ComfortMeasure) => 
 				Encounter;
-			var h_ = context.Operators.SelectOrNull<object, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -496,7 +498,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 			return aa_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		var d_ = this.Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter();
 		var e_ = context.Operators.ListUnion<Encounter>(c_, d_);
 
@@ -527,7 +529,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					"active",
 					"completed",
 				};
-				var r_ = context.Operators.InList<string>(p_, (q_ as IEnumerable<string>));
+				var r_ = context.Operators.In<string>(p_, (q_ as IEnumerable<string>));
 				var s_ = context.Operators.And(o_, r_);
 				var t_ = context.Operators.Convert<string>(DischargeAnticoagulant?.IntentElement?.Value);
 				var u_ = new string[]
@@ -538,26 +540,26 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					"filler-order",
 					"instance-order",
 				};
-				var v_ = context.Operators.InList<string>(t_, (u_ as IEnumerable<string>));
+				var v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
 				var w_ = context.Operators.And(s_, v_);
 				var x_ = context.Operators.IsTrue(DischargeAnticoagulant?.DoNotPerformElement?.Value);
 				var y_ = context.Operators.Not(x_);
 				var z_ = context.Operators.And(w_, y_);
 				var aa_ = context.Operators.Convert<CqlDateTime>(DischargeAnticoagulant?.AuthoredOnElement);
 				var ab_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
-				var ac_ = context.Operators.ElementInInterval<CqlDateTime>(aa_, ab_, null);
+				var ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, null);
 				var ad_ = context.Operators.And(z_, ac_);
 
 				return ad_;
 			};
-			var j_ = context.Operators.WhereOrNull<MedicationRequest>(h_, i_);
+			var j_ = context.Operators.Where<MedicationRequest>(h_, i_);
 			Encounter k_(MedicationRequest DischargeAnticoagulant) => 
 				Encounter;
-			var l_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(j_, k_);
+			var l_ = context.Operators.Select<MedicationRequest, Encounter>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -578,7 +580,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 				return v_;
 			};
-			var f_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, e_);
+			var f_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, e_);
 			var g_ = this.Medical_Reason_For_Not_Providing_Treatment();
 			var h_ = context.Operators.ConceptsInValueSet(f_, g_);
 			CqlConcept i_(CodeableConcept @this)
@@ -587,7 +589,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 				return w_;
 			};
-			var j_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, i_);
+			var j_ = context.Operators.Select<CodeableConcept, CqlConcept>(NoAnticoagulant?.ReasonCode, i_);
 			var k_ = this.Patient_Refusal();
 			var l_ = context.Operators.ConceptsInValueSet(j_, k_);
 			var m_ = context.Operators.Or(h_, l_);
@@ -604,12 +606,12 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				"filler-order",
 				"instance-order",
 			};
-			var t_ = context.Operators.InList<string>(r_, (s_ as IEnumerable<string>));
+			var t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
 			var u_ = context.Operators.And(q_, t_);
 
 			return u_;
 		};
-		var d_ = context.Operators.WhereOrNull<MedicationRequest>(b_, c_);
+		var d_ = context.Operators.Where<MedicationRequest>(b_, c_);
 
 		return d_;
 	}
@@ -628,18 +630,18 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			{
 				var i_ = context.Operators.Convert<CqlDateTime>(NoDischargeAnticoagulant?.AuthoredOnElement);
 				var j_ = FHIRHelpers_4_3_000.ToInterval(Encounter?.Period);
-				var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, null);
+				var k_ = context.Operators.In<CqlDateTime>(i_, j_, null);
 
 				return k_;
 			};
-			var f_ = context.Operators.WhereOrNull<MedicationRequest>(d_, e_);
+			var f_ = context.Operators.Where<MedicationRequest>(d_, e_);
 			Encounter g_(MedicationRequest NoDischargeAnticoagulant) => 
 				Encounter;
-			var h_ = context.Operators.SelectOrNull<MedicationRequest, Encounter>(f_, g_);
+			var h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -648,7 +650,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 	public IEnumerable<Encounter> Denominator_Exceptions() => 
 		__Denominator_Exceptions.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -656,10 +658,10 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -667,10 +669,10 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -678,7 +680,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

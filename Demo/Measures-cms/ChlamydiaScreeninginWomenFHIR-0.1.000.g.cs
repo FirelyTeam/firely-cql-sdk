@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -48,9 +50,9 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
     internal Lazy<CqlCode[]> __SNOMEDCT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounters;
     internal Lazy<bool?> __Has_Assessments_Identifying_Sexual_Activity;
@@ -111,9 +113,9 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
         __SNOMEDCT = new Lazy<CqlCode[]>(this.SNOMEDCT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounters = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounters_Value);
         __Has_Assessments_Identifying_Sexual_Activity = new Lazy<bool?>(this.Has_Assessments_Identifying_Sexual_Activity_Value);
@@ -377,13 +379,12 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("ChlamydiaScreeninginWomenFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("ChlamydiaScreeninginWomenFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -393,7 +394,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -402,7 +403,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -410,10 +411,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -421,10 +422,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -432,7 +433,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -481,7 +482,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return ad_;
 		};
-		var z_ = context.Operators.WhereOrNull<Encounter>(x_, y_);
+		var z_ = context.Operators.Where<Encounter>(x_, y_);
 
 		return z_;
 	}
@@ -527,13 +528,13 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					return x_;
 				};
 			};
-			var o_ = context.Operators.IntervalSameOrBefore(m_, n_(), null);
+			var o_ = context.Operators.SameOrBefore(m_, n_(), null);
 			var p_ = context.Operators.And(k_, o_);
 
 			return p_;
 		};
-		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Observation>(f_);
+		var f_ = context.Operators.Where<Observation>(d_, e_);
+		var g_ = context.Operators.Exists<Observation>(f_);
 
 		return g_;
 	}
@@ -560,8 +561,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return n_;
 		};
-		var j_ = context.Operators.WhereOrNull<Condition>(h_, i_);
-		var k_ = context.Operators.ExistsInList<Condition>(j_);
+		var j_ = context.Operators.Where<Condition>(h_, i_);
+		var k_ = context.Operators.Exists<Condition>(j_);
 
 		return k_;
 	}
@@ -588,8 +589,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return r_;
 		};
-		var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
-		var i_ = context.Operators.ExistsInList<MedicationRequest>(h_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+		var i_ = context.Operators.Exists<MedicationRequest>(h_);
 
 		return i_;
 	}
@@ -614,8 +615,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return m_;
 		};
-		var h_ = context.Operators.WhereOrNull<MedicationRequest>(f_, g_);
-		var i_ = context.Operators.ExistsInList<MedicationRequest>(h_);
+		var h_ = context.Operators.Where<MedicationRequest>(f_, g_);
+		var i_ = context.Operators.Exists<MedicationRequest>(h_);
 
 		return i_;
 	}
@@ -644,8 +645,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return p_;
 		};
-		var k_ = context.Operators.WhereOrNull<ServiceRequest>(i_, j_);
-		var l_ = context.Operators.ExistsInList<ServiceRequest>(k_);
+		var k_ = context.Operators.Where<ServiceRequest>(i_, j_);
+		var l_ = context.Operators.Exists<ServiceRequest>(k_);
 
 		return l_;
 	}
@@ -668,8 +669,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return l_;
 		};
-		var e_ = context.Operators.WhereOrNull<ServiceRequest>(c_, d_);
-		var f_ = context.Operators.ExistsInList<ServiceRequest>(e_);
+		var e_ = context.Operators.Where<ServiceRequest>(c_, d_);
+		var f_ = context.Operators.Exists<ServiceRequest>(e_);
 		var g_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy();
 		var h_ = context.Operators.Or(f_, g_);
 
@@ -694,8 +695,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<ServiceRequest>(c_, d_);
-		var f_ = context.Operators.ExistsInList<ServiceRequest>(e_);
+		var e_ = context.Operators.Where<ServiceRequest>(c_, d_);
+		var f_ = context.Operators.Exists<ServiceRequest>(e_);
 
 		return f_;
 	}
@@ -718,8 +719,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
 	}
@@ -736,29 +737,30 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)16, (int?)24, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
-		var j_ = context.Operators.EnumEqualsString(a_?.GenderElement?.Value, "female");
-		var k_ = context.Operators.And(h_, j_);
-		var l_ = this.Qualifying_Encounters();
-		var m_ = context.Operators.ExistsInList<Encounter>(l_);
-		var n_ = context.Operators.And(k_, m_);
-		var o_ = this.Has_Assessments_Identifying_Sexual_Activity();
-		var p_ = this.Has_Diagnoses_Identifying_Sexual_Activity();
-		var q_ = context.Operators.Or(o_, p_);
-		var r_ = this.Has_Active_Contraceptive_Medications();
-		var s_ = context.Operators.Or(q_, r_);
-		var t_ = this.Has_Ordered_Contraceptive_Medications();
-		var u_ = context.Operators.Or(s_, t_);
-		var v_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity();
-		var w_ = context.Operators.Or(u_, v_);
-		var x_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity();
-		var y_ = context.Operators.Or(w_, x_);
-		var z_ = this.Has_Procedures_Identifying_Sexual_Activity();
-		var aa_ = context.Operators.Or(y_, z_);
-		var ab_ = context.Operators.And(n_, aa_);
+		var g_ = context.Operators.Interval(16, 24, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
+		var j_ = context.Operators.Convert<string>(a_?.GenderElement?.Value);
+		var k_ = context.Operators.Equal(j_, "female");
+		var l_ = context.Operators.And(h_, k_);
+		var m_ = this.Qualifying_Encounters();
+		var n_ = context.Operators.Exists<Encounter>(m_);
+		var o_ = context.Operators.And(l_, n_);
+		var p_ = this.Has_Assessments_Identifying_Sexual_Activity();
+		var q_ = this.Has_Diagnoses_Identifying_Sexual_Activity();
+		var r_ = context.Operators.Or(p_, q_);
+		var s_ = this.Has_Active_Contraceptive_Medications();
+		var t_ = context.Operators.Or(r_, s_);
+		var u_ = this.Has_Ordered_Contraceptive_Medications();
+		var v_ = context.Operators.Or(t_, u_);
+		var w_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity();
+		var x_ = context.Operators.Or(v_, w_);
+		var y_ = this.Has_Diagnostic_Studies_Identifying_Sexual_Activity();
+		var z_ = context.Operators.Or(x_, y_);
+		var aa_ = this.Has_Procedures_Identifying_Sexual_Activity();
+		var ab_ = context.Operators.Or(z_, aa_);
+		var ac_ = context.Operators.And(o_, ab_);
 
-		return ab_;
+		return ac_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -799,7 +801,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var ac_ = context.Operators.Quantity(6m, "days");
 				var ad_ = context.Operators.Add(ab_, ac_);
 				var ae_ = context.Operators.Interval(y_, ad_, true, true);
-				var af_ = context.Operators.ElementInInterval<CqlDateTime>(v_, ae_, "day");
+				var af_ = context.Operators.In<CqlDateTime>(v_, ae_, "day");
 				var ah_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 				var ai_ = context.Operators.End(ah_);
 				var aj_ = context.Operators.Not((bool?)(ai_ is null));
@@ -811,14 +813,14 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 				return ap_;
 			};
-			var q_ = context.Operators.WhereOrNull<ServiceRequest>(o_, p_);
+			var q_ = context.Operators.Where<ServiceRequest>(o_, p_);
 			ServiceRequest r_(ServiceRequest XrayOrder) => 
 				PregnancyTest;
-			var s_ = context.Operators.SelectOrNull<ServiceRequest, ServiceRequest>(q_, r_);
+			var s_ = context.Operators.Select<ServiceRequest, ServiceRequest>(q_, r_);
 
 			return s_;
 		};
-		var e_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(c_, d_);
+		var e_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(c_, d_);
 		var g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var h_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(g_);
 		IEnumerable<ServiceRequest> i_(ServiceRequest PregnancyTestOrder)
@@ -841,7 +843,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				var bj_ = context.Operators.Quantity(6m, "days");
 				var bk_ = context.Operators.Add(bi_, bj_);
 				var bl_ = context.Operators.Interval(bf_, bk_, true, true);
-				var bm_ = context.Operators.ElementInInterval<CqlDateTime>(bc_, bl_, "day");
+				var bm_ = context.Operators.In<CqlDateTime>(bc_, bl_, "day");
 				var bo_ = QICoreCommon_2_0_000.ToInterval((bd_ as object));
 				var bp_ = context.Operators.End(bo_);
 				var bq_ = context.Operators.Not((bool?)(bp_ is null));
@@ -853,16 +855,16 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 				return bw_;
 			};
-			var ax_ = context.Operators.WhereOrNull<MedicationRequest>(av_, aw_);
+			var ax_ = context.Operators.Where<MedicationRequest>(av_, aw_);
 			ServiceRequest ay_(MedicationRequest AccutaneOrder) => 
 				PregnancyTestOrder;
-			var az_ = context.Operators.SelectOrNull<MedicationRequest, ServiceRequest>(ax_, ay_);
+			var az_ = context.Operators.Select<MedicationRequest, ServiceRequest>(ax_, ay_);
 
 			return az_;
 		};
-		var j_ = context.Operators.SelectManyOrNull<ServiceRequest, ServiceRequest>(h_, i_);
+		var j_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(h_, i_);
 		var k_ = context.Operators.ListUnion<ServiceRequest>(e_, j_);
-		var l_ = context.Operators.ExistsInList<ServiceRequest>(k_);
+		var l_ = context.Operators.Exists<ServiceRequest>(k_);
 
 		return l_;
 	}
@@ -960,15 +962,15 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			};
 			var h_ = QICoreCommon_2_0_000.Latest(g_());
 			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.ElementInInterval<CqlDateTime>(h_, i_, "day");
+			var j_ = context.Operators.In<CqlDateTime>(h_, i_, "day");
 			var k_ = FHIRHelpers_4_3_000.ToValue(ChlamydiaTest?.Value);
 			var l_ = context.Operators.Not((bool?)(k_ is null));
 			var m_ = context.Operators.And(j_, l_);
 
 			return m_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Observation>(e_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
+		var f_ = context.Operators.Exists<Observation>(e_);
 
 		return f_;
 	}
@@ -985,8 +987,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)16, (int?)20, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(16, 20, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}
@@ -1003,8 +1005,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)21, (int?)24, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(21, 24, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}

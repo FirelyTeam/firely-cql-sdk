@@ -1,4 +1,11 @@
-﻿using System.Linq.Expressions;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -14,19 +21,19 @@ namespace Hl7.Cql.Packaging;
 internal class CqlToResourcePackagingPipeline
 {
     protected readonly ResourcePackager _resourcePackager;
-    protected readonly LibraryDefinitionsBuilder _LibraryDefinitionsBuilder;
+    protected readonly LibrarySetExpressionBuilder _LibrarySetExpressionBuilder;
     protected readonly AssemblyCompiler _assemblyCompiler;
     protected readonly CqlToResourcePackagingOptions _options;
 
     public CqlToResourcePackagingPipeline(
         IOptions<CqlToResourcePackagingOptions> options,
         ResourcePackager resourcePackager,
-        LibraryDefinitionsBuilder libraryDefinitionsBuilder,
+        LibrarySetExpressionBuilder librarySetExpressionBuilder,
         AssemblyCompiler assemblyCompiler)
     {
         _options = options.Value;
         _resourcePackager = resourcePackager;
-        _LibraryDefinitionsBuilder = libraryDefinitionsBuilder;
+        _LibrarySetExpressionBuilder = librarySetExpressionBuilder;
         _assemblyCompiler = assemblyCompiler;
     }
 
@@ -122,7 +129,7 @@ internal class CqlToResourcePackagingPipeline
         _assemblyCompiler.Compile(librarySet, definitions);
 
     protected virtual void BuildExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
-        _LibraryDefinitionsBuilder.ProcessLibrarySet(librarySet, definitions);
+        _LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
 
     protected virtual LibrarySet LoadElmFiles()
     {

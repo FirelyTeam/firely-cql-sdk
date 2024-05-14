@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -86,9 +88,9 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
     internal Lazy<IEnumerable<Procedure>> __Denominator;
     internal Lazy<IEnumerable<Procedure>> __Denominator_Exclusions;
     internal Lazy<IEnumerable<Procedure>> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -167,9 +169,9 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
         __Denominator = new Lazy<IEnumerable<Procedure>>(this.Denominator_Value);
         __Denominator_Exclusions = new Lazy<IEnumerable<Procedure>>(this.Denominator_Exclusions_Value);
         __Numerator = new Lazy<IEnumerable<Procedure>>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -667,13 +669,12 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("Cataracts2040BCVAwithin90DaysFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("Cataracts2040BCVAwithin90DaysFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -683,7 +684,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -709,12 +710,13 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var o_ = context.Operators.Subtract(m_, n_);
 			var p_ = context.Operators.SameOrBefore(k_, o_, null);
 			var q_ = context.Operators.And(h_, p_);
-			var r_ = context.Operators.EnumEqualsString(CataractSurgery?.StatusElement?.Value, "completed");
-			var s_ = context.Operators.And(q_, r_);
+			var r_ = context.Operators.Convert<string>(CataractSurgery?.StatusElement?.Value);
+			var s_ = context.Operators.Equal(r_, "completed");
+			var t_ = context.Operators.And(q_, s_);
 
-			return s_;
+			return t_;
 		};
-		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
+		var d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
@@ -734,11 +736,11 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-			var j_ = context.Operators.GreaterOrEqual(i_, (int?)18);
+			var j_ = context.Operators.GreaterOrEqual(i_, 18);
 
 			return j_;
 		};
-		var c_ = context.Operators.WhereOrNull<Procedure>(a_, b_);
+		var c_ = context.Operators.Where<Procedure>(a_, b_);
 
 		return c_;
 	}
@@ -938,14 +940,14 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 				return fu_;
 			};
-			var fm_ = context.Operators.WhereOrNull<Condition>(fk_, fl_);
+			var fm_ = context.Operators.Where<Condition>(fk_, fl_);
 			Procedure fn_(Condition ComorbidDiagnosis) => 
 				CataractSurgeryPerformed;
-			var fo_ = context.Operators.SelectOrNull<Condition, Procedure>(fm_, fn_);
+			var fo_ = context.Operators.Select<Condition, Procedure>(fm_, fn_);
 
 			return fo_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(a_, b_);
+		var c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
 
 		return c_;
 	}
@@ -978,7 +980,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				var w_ = context.Operators.Quantity(90m, "days");
 				var x_ = context.Operators.Add(v_, w_);
 				var y_ = context.Operators.Interval(s_, x_, false, true);
-				var z_ = context.Operators.ElementInInterval<CqlDateTime>(p_, y_, "day");
+				var z_ = context.Operators.In<CqlDateTime>(p_, y_, "day");
 				var ab_ = QICoreCommon_2_0_000.toInterval(q_);
 				var ac_ = context.Operators.End(ab_);
 				var ad_ = context.Operators.Not((bool?)(ac_ is null));
@@ -992,7 +994,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 					"corrected",
 					"preliminary",
 				};
-				var ai_ = context.Operators.InList<string>(ag_, (ah_ as IEnumerable<string>));
+				var ai_ = context.Operators.In<string>(ag_, (ah_ as IEnumerable<string>));
 				var aj_ = context.Operators.And(ae_, ai_);
 				var ak_ = FHIRHelpers_4_3_000.ToValue(VisualAcuityExamPerformed?.Value);
 				var al_ = this.Visual_Acuity_20_40_or_Better();
@@ -1001,14 +1003,14 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 				return an_;
 			};
-			var k_ = context.Operators.WhereOrNull<Observation>(i_, j_);
+			var k_ = context.Operators.Where<Observation>(i_, j_);
 			Procedure l_(Observation VisualAcuityExamPerformed) => 
 				CataractSurgeryPerformed;
-			var m_ = context.Operators.SelectOrNull<Observation, Procedure>(k_, l_);
+			var m_ = context.Operators.Select<Observation, Procedure>(k_, l_);
 
 			return m_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Procedure, Procedure>(a_, b_);
+		var c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
 
 		return c_;
 	}
@@ -1017,7 +1019,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	public IEnumerable<Procedure> Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1025,10 +1027,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1036,10 +1038,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1047,7 +1049,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System;
 using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -17,7 +24,7 @@ internal abstract class CqlFactoryBase
 
     protected ILoggerFactory LoggerFactory { get; }
 
-    protected virtual ILogger<T> Logger<T>() => Transient(LoggerFactory.CreateLogger<T>);
+    protected virtual ILogger<T> Logger<T>() => Singleton(LoggerFactory.CreateLogger<T>);
 
     protected virtual IOptions<T> Options<T>(T options) where T : class => Singleton(() => Microsoft.Extensions.Options.Options.Create(options));
 

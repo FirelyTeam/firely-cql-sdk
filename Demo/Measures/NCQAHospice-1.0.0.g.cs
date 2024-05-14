@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -78,7 +80,7 @@ public class NCQAHospice_1_0_0
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -100,8 +102,8 @@ public class NCQAHospice_1_0_0
 
 			return p_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 		var g_ = this.Hospice_Encounter();
 		var h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
 		var i_ = NCQAStatus_1_0_0.Finished_Encounter(h_);
@@ -113,8 +115,8 @@ public class NCQAHospice_1_0_0
 
 			return s_;
 		};
-		var k_ = context.Operators.WhereOrNull<Encounter>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Encounter>(k_);
+		var k_ = context.Operators.Where<Encounter>(i_, j_);
+		var l_ = context.Operators.Exists<Encounter>(k_);
 		var m_ = context.Operators.Or(f_, l_);
 
 		return m_;

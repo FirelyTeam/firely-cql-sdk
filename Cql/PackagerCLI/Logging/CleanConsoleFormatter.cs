@@ -1,4 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
@@ -33,7 +40,7 @@ internal sealed class CleanConsoleFormatter : ConsoleFormatter
             options.NoColor
                 ? ("", "")
                 : (GetForegroundColorEscapeCode(logLevelConsoleColor), DefaultForegroundColor);
-        textWriter.WriteLine($"{escLogLevelForegroundColor}{logLevelText.ToUpperInvariant()}{escDefaultForegroundColor}: {message}");
+        textWriter.WriteLine($"____\n{escLogLevelForegroundColor}{logLevelText.ToUpperInvariant()}{escDefaultForegroundColor}: {message}");
     }
 
     private static (string logLevelText, ConsoleColor logLevelConsoleColor) GetLogLevelString(LogLevel logLevel) =>

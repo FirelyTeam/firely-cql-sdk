@@ -33,7 +33,7 @@ namespace Hl7.Cql.Runtime
 
         #region Distinct
 
-        public IEnumerable<T>? ListDistinct<T>(IEnumerable<T> source)
+        public IEnumerable<T>? Distinct<T>(IEnumerable<T> source)
         {
             if (source == null)
                 return null;
@@ -49,7 +49,7 @@ namespace Hl7.Cql.Runtime
                         nullAdded = true;
                     }
                 }
-                else if (!Enumerable.Contains(result!, item!, EqualityComparer!))
+                else if (!result!.Contains(item!, EqualityComparer!))
                 {
                     result.Add(item!);
                 }
@@ -170,7 +170,7 @@ namespace Hl7.Cql.Runtime
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns></returns>
-        public bool? ExistsInList<T>(IEnumerable<T> list)
+        public bool? Exists<T>(IEnumerable<T> list)
         {
             if (list == null) return false;
 
@@ -188,7 +188,7 @@ namespace Hl7.Cql.Runtime
 
         #region Expand
 
-        public IEnumerable<CqlInterval<CqlDate?>>? ExpandList(IEnumerable<CqlInterval<CqlDate?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<CqlDate?>>? Expand(IEnumerable<CqlInterval<CqlDate?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -329,7 +329,7 @@ namespace Hl7.Cql.Runtime
             }
             return expanded;
         }
-        public IEnumerable<CqlInterval<CqlDateTime?>>? ExpandList(IEnumerable<CqlInterval<CqlDateTime?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<CqlDateTime?>>? Expand(IEnumerable<CqlInterval<CqlDateTime?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -520,7 +520,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlInterval<CqlTime?>>? ExpandList(IEnumerable<CqlInterval<CqlTime?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<CqlTime?>>? Expand(IEnumerable<CqlInterval<CqlTime?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -676,7 +676,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlInterval<decimal?>>? ExpandList(IEnumerable<CqlInterval<decimal?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<decimal?>>? Expand(IEnumerable<CqlInterval<decimal?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -724,7 +724,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlInterval<int?>>? ExpandList(IEnumerable<CqlInterval<int?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<int?>>? Expand(IEnumerable<CqlInterval<int?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -772,7 +772,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlInterval<long?>>? ExpandList(IEnumerable<CqlInterval<long?>?>? argument, CqlQuantity? per)
+        public IEnumerable<CqlInterval<long?>>? Expand(IEnumerable<CqlInterval<long?>?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -831,7 +831,7 @@ namespace Hl7.Cql.Runtime
         /// <typeparam name="T"></typeparam>
         /// <param name="argument"></param>
         /// <returns></returns>
-        public IEnumerable<T>? FlattenList<T>(IEnumerable<IEnumerable<T>> argument)
+        public IEnumerable<T>? Flatten<T>(IEnumerable<IEnumerable<T>> argument)
         {
             if (argument == null) return null;
             else
@@ -863,7 +863,7 @@ namespace Hl7.Cql.Runtime
 
         #region First
 
-        public T? FirstOfList<T>(IEnumerable<T> enumerable)
+        public T? First<T>(IEnumerable<T> enumerable)
         {
             if (enumerable == null)
             {
@@ -886,7 +886,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region In
-        public bool? InList<T>(T element, IEnumerable<T> argument)
+        public bool? In<T>(T element, IEnumerable<T> argument)
         {
             if ((object)element! == null)
                 return null;
@@ -951,40 +951,37 @@ namespace Hl7.Cql.Runtime
 
         #endregion
 
-        #region Indexer
+        #region AtIndex
 
-        public T ListElementAt<T>(IEnumerable<T>? source, int? index)
+        public T? Indexer<T>(IEnumerable<T>? source, int? index)
         {
             if (source == null || index == null)
-                return (T)(object)null!;
+                return default;
+
             if (index.Value < 0)
-                return (T)(object)null!;
-            else if (source is IList<T> list)
+                return default;
+
+            if (source is IList<T> list)
             {
                 if (index >= list.Count)
-                    return (T)(object)null!;
+                    return default;
+
                 return list[index.Value];
             }
-            else
-            {
-                var tList = source
-                    .Skip(index.Value)
-                    .Take(1)
-                    .ToList();
-                if (tList.Count == 1)
-                    return tList[0];
-                else return (T)(object)null!;
-            }
+
+            return source.ElementAtOrDefault(index.Value);
         }
 
 
         #endregion
 
-        #region ListIndexOf
-        public int? ListIndexOf<T>(IEnumerable<T>? list, T element)
+        #region IndexOf
+
+        public int? IndexOf<T>(IEnumerable<T>? list, T element)
         {
             if (list == null || element == null)
                 return null;
+
             int i = 0;
             foreach (T t in list)
             {
@@ -994,6 +991,7 @@ namespace Hl7.Cql.Runtime
             }
             return -1;
         }
+
         #endregion
 
         #region Intersect
@@ -1015,7 +1013,7 @@ namespace Hl7.Cql.Runtime
 
         #region Last
 
-        public T? LastOfList<T>(IEnumerable<T> enumerable)
+        public T? Last<T>(IEnumerable<T> enumerable)
         {
             if (enumerable == null)
             {
@@ -1037,12 +1035,26 @@ namespace Hl7.Cql.Runtime
 
         #region Length
 
-        public int? ListLength<T>(IEnumerable<T> list)
+        public int? Length(string argument)
         {
-            if (list == null) return null;
-            if (list is IList<T> l)
-                return l.Count;
-            return list.Count();
+            var length = argument switch
+            {
+                null => 0,
+                _    => argument.Length
+            };
+            return length;
+        }
+
+        public int? Length<T>(IEnumerable<T>? list)
+        {
+            int? length = list switch
+            {
+                null                                                 => null,
+                string s                                             => Length(s),
+                { } l when l.TryGetNonEnumeratedCount(out var count) => count,
+                _                                                    => list.Count()
+            };
+            return length;
         }
 
         #endregion
@@ -1088,7 +1100,7 @@ namespace Hl7.Cql.Runtime
 
         #region Singleton From
 
-        public T? SingleOrNull<T>(IEnumerable<T>? source)
+        public T? SingletonFrom<T>(IEnumerable<T>? source)
         {
             if (source == null)
                 return (T?)(object?)null;
@@ -1136,7 +1148,7 @@ namespace Hl7.Cql.Runtime
                     .ToList();
         }
 
-        public IEnumerable<T>? ListTail<T>(IEnumerable<T> argument)
+        public IEnumerable<T>? Tail<T>(IEnumerable<T> argument)
         {
             if (argument == null)
                 return null;
@@ -1218,7 +1230,7 @@ namespace Hl7.Cql.Runtime
             else throw new NotSupportedException($"Unknown sort order {order}");
         }
 
-        public IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order)
+        public IEnumerable<T>? SortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order)
         {
             if (source == null)
                 return null;

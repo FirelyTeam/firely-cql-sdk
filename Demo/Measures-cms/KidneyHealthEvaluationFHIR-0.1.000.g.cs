@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -52,9 +54,9 @@ public class KidneyHealthEvaluationFHIR_0_1_000
     internal Lazy<bool?> __Denominator_Exclusions;
     internal Lazy<bool?> __Has_Kidney_Panel_Performed_During_Measurement_Period;
     internal Lazy<bool?> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -102,9 +104,9 @@ public class KidneyHealthEvaluationFHIR_0_1_000
         __Denominator_Exclusions = new Lazy<bool?>(this.Denominator_Exclusions_Value);
         __Has_Kidney_Panel_Performed_During_Measurement_Period = new Lazy<bool?>(this.Has_Kidney_Panel_Performed_During_Measurement_Period_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -319,13 +321,12 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("KidneyHealthEvaluationFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("KidneyHealthEvaluationFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -335,7 +336,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -361,8 +362,8 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 			return m_;
 		};
-		var d_ = context.Operators.WhereOrNull<Condition>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Condition>(d_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -404,8 +405,8 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 			return ac_;
 		};
-		var v_ = context.Operators.WhereOrNull<Encounter>(t_, u_);
-		var w_ = context.Operators.ExistsInList<Encounter>(v_);
+		var v_ = context.Operators.Where<Encounter>(t_, u_);
+		var w_ = context.Operators.Exists<Encounter>(v_);
 
 		return w_;
 	}
@@ -422,8 +423,8 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)18, (int?)85, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(18, 85, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = this.Has_Active_Diabetes_Overlaps_Measurement_Period();
 		var j_ = context.Operators.And(h_, i_);
 		var k_ = this.Has_Outpatient_Visit_During_Measurement_Period();
@@ -467,7 +468,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 			return o_;
 		};
-		var g_ = context.Operators.WhereOrNull<Condition>(e_, f_);
+		var g_ = context.Operators.Where<Condition>(e_, f_);
 
 		return g_;
 	}
@@ -479,7 +480,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private bool? Denominator_Exclusions_Value()
 	{
 		var a_ = this.Has_CKD_Stage_5_or_ESRD_Diagnosis_Overlaps_Measurement_Period();
-		var b_ = context.Operators.ExistsInList<Condition>(a_);
+		var b_ = context.Operators.Exists<Condition>(a_);
 		var c_ = Hospice_6_9_000.Has_Hospice_Services();
 		var d_ = context.Operators.Or(b_, c_);
 		var e_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period();
@@ -513,13 +514,13 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var v_ = context.Operators.InList<string>(t_, (u_ as IEnumerable<string>));
+			var v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
 			var w_ = context.Operators.And(r_, v_);
 
 			return w_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
-		var e_ = context.Operators.ExistsInList<Observation>(d_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
+		var e_ = context.Operators.Exists<Observation>(d_);
 		var f_ = this.Urine_Albumin_Creatinine_Ratio();
 		var g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
 		bool? h_(Observation uACRTest)
@@ -539,13 +540,13 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			};
-			var ah_ = context.Operators.InList<string>(af_, (ag_ as IEnumerable<string>));
+			var ah_ = context.Operators.In<string>(af_, (ag_ as IEnumerable<string>));
 			var ai_ = context.Operators.And(ad_, ah_);
 
 			return ai_;
 		};
-		var i_ = context.Operators.WhereOrNull<Observation>(g_, h_);
-		var j_ = context.Operators.ExistsInList<Observation>(i_);
+		var i_ = context.Operators.Where<Observation>(g_, h_);
+		var j_ = context.Operators.Exists<Observation>(i_);
 		var k_ = context.Operators.And(e_, j_);
 
 		return k_;
@@ -566,7 +567,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	public bool? Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -574,10 +575,10 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -585,10 +586,10 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -596,7 +597,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

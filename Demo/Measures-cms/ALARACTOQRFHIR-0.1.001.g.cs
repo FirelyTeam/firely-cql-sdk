@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -31,9 +33,9 @@ public class ALARACTOQRFHIR_0_1_001
     internal Lazy<IEnumerable<Observation>> __Denominator;
     internal Lazy<IEnumerable<Observation>> __Denominator_Exclusion;
     internal Lazy<IEnumerable<Observation>> __Numerator;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -58,9 +60,9 @@ public class ALARACTOQRFHIR_0_1_001
         __Denominator = new Lazy<IEnumerable<Observation>>(this.Denominator_Value);
         __Denominator_Exclusion = new Lazy<IEnumerable<Observation>>(this.Denominator_Exclusion_Value);
         __Numerator = new Lazy<IEnumerable<Observation>>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -119,13 +121,12 @@ public class ALARACTOQRFHIR_0_1_001
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("ALARACTOQRFHIR-0.1.001", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("ALARACTOQRFHIR-0.1.001", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -135,7 +136,7 @@ public class ALARACTOQRFHIR_0_1_001
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -160,12 +161,12 @@ public class ALARACTOQRFHIR_0_1_001
 			var m_ = context.Operators.Start(f_);
 			var n_ = context.Operators.DateFrom(m_);
 			var o_ = context.Operators.CalculateAgeAt(k_, n_, "year");
-			var p_ = context.Operators.GreaterOrEqual(o_, (int?)18);
+			var p_ = context.Operators.GreaterOrEqual(o_, 18);
 			var q_ = context.Operators.And(i_, p_);
 
 			return q_;
 		};
-		var e_ = context.Operators.WhereOrNull<Observation>(c_, d_);
+		var e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
@@ -190,14 +191,14 @@ public class ALARACTOQRFHIR_0_1_001
 
 				return o_;
 			};
-			var i_ = context.Operators.WhereOrNull<Encounter>(g_, h_);
+			var i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter InpatientEncounter) => 
 				CTScan;
-			var k_ = context.Operators.SelectOrNull<Encounter, Observation>(i_, j_);
+			var k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectManyOrNull<Observation, Observation>(a_, c_);
+		var d_ = context.Operators.SelectMany<Observation, Observation>(a_, c_);
 		var e_ = context.Operators.ListExcept<Observation>(a_, d_);
 
 		return e_;
@@ -222,15 +223,15 @@ public class ALARACTOQRFHIR_0_1_001
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
+		var b_ = context.Operators.Where<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
 
 			return (m_ as CqlQuantity)?.value;
 		};
-		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<decimal?>(d_);
+		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
 
 		return e_;
 	}
@@ -250,15 +251,15 @@ public class ALARACTOQRFHIR_0_1_001
 
 			return l_;
 		};
-		var b_ = context.Operators.WhereOrNull<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
+		var b_ = context.Operators.Where<Observation.ComponentComponent>((Obs?.Component as IEnumerable<Observation.ComponentComponent>), a_);
 		decimal? c_(Observation.ComponentComponent C)
 		{
 			var m_ = FHIRHelpers_4_3_000.ToValue(C?.Value);
 
 			return (m_ as CqlQuantity)?.value;
 		};
-		var d_ = context.Operators.SelectOrNull<Observation.ComponentComponent, decimal?>(b_, c_);
-		var e_ = context.Operators.SingleOrNull<decimal?>(d_);
+		var d_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(b_, c_);
+		var e_ = context.Operators.SingletonFrom<decimal?>(d_);
 
 		return e_;
 	}
@@ -279,7 +280,7 @@ public class ALARACTOQRFHIR_0_1_001
 
 			return k_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}
@@ -300,15 +301,15 @@ public class ALARACTOQRFHIR_0_1_001
 
 				return j_;
 			};
-			var f_ = context.Operators.WhereOrNull<CqlCode>(((d_ as CqlConcept)?.codes as IEnumerable<CqlCode>), e_);
+			var f_ = context.Operators.Where<CqlCode>(((d_ as CqlConcept)?.codes as IEnumerable<CqlCode>), e_);
 			string g_(CqlCode @this) => 
 				@this?.code;
-			var h_ = context.Operators.SelectOrNull<CqlCode, string>(f_, g_);
+			var h_ = context.Operators.Select<CqlCode, string>(f_, g_);
 			var i_ = context.Operators.ListContains<string>(h_, "FULLBODY");
 
 			return i_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}
@@ -327,10 +328,10 @@ public class ALARACTOQRFHIR_0_1_001
 
 			return m_;
 		};
-		var c_ = context.Operators.WhereOrNull<CqlCode>(((a_ as CqlConcept)?.codes as IEnumerable<CqlCode>), b_);
+		var c_ = context.Operators.Where<CqlCode>(((a_ as CqlConcept)?.codes as IEnumerable<CqlCode>), b_);
 		string d_(CqlCode @this) => 
 			@this?.code;
-		var e_ = context.Operators.SelectOrNull<CqlCode, string>(c_, d_);
+		var e_ = context.Operators.Select<CqlCode, string>(c_, d_);
 		var f_ = context.Operators.ListContains<string>(e_, code);
 		var g_ = this.Global_Noise_Value(Obs);
 		var h_ = context.Operators.GreaterOrEqual(g_, noiseThreshold);
@@ -345,62 +346,62 @@ public class ALARACTOQRFHIR_0_1_001
     [CqlDeclaration("CT Scan Qualifies")]
 	public bool? CT_Scan_Qualifies(Observation IP)
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal((int?)64);
-		var b_ = context.Operators.ConvertIntegerToDecimal((int?)598);
+		var a_ = context.Operators.ConvertIntegerToDecimal(64);
+		var b_ = context.Operators.ConvertIntegerToDecimal(598);
 		var c_ = this.Qualifies(IP, "ABDOPEL LD", a_, b_);
-		var d_ = context.Operators.ConvertIntegerToDecimal((int?)29);
-		var e_ = context.Operators.ConvertIntegerToDecimal((int?)644);
+		var d_ = context.Operators.ConvertIntegerToDecimal(29);
+		var e_ = context.Operators.ConvertIntegerToDecimal(644);
 		var f_ = this.Qualifies(IP, "ABDOPEL RT", d_, e_);
 		var g_ = context.Operators.Or(c_, f_);
-		var i_ = context.Operators.ConvertIntegerToDecimal((int?)1260);
+		var i_ = context.Operators.ConvertIntegerToDecimal(1260);
 		var j_ = this.Qualifies(IP, "ABDOPEL HD", d_, i_);
 		var k_ = context.Operators.Or(g_, j_);
-		var l_ = context.Operators.ConvertIntegerToDecimal((int?)55);
-		var m_ = context.Operators.ConvertIntegerToDecimal((int?)93);
+		var l_ = context.Operators.ConvertIntegerToDecimal(55);
+		var m_ = context.Operators.ConvertIntegerToDecimal(93);
 		var n_ = this.Qualifies(IP, "CARDIAC LD", l_, m_);
 		var o_ = context.Operators.Or(k_, n_);
-		var p_ = context.Operators.ConvertIntegerToDecimal((int?)32);
-		var q_ = context.Operators.ConvertIntegerToDecimal((int?)576);
+		var p_ = context.Operators.ConvertIntegerToDecimal(32);
+		var q_ = context.Operators.ConvertIntegerToDecimal(576);
 		var r_ = this.Qualifies(IP, "CARDIAC RT", p_, q_);
 		var s_ = context.Operators.Or(o_, r_);
-		var u_ = context.Operators.ConvertIntegerToDecimal((int?)377);
+		var u_ = context.Operators.ConvertIntegerToDecimal(377);
 		var v_ = this.Qualifies(IP, "CHEST LD", l_, u_);
 		var w_ = context.Operators.Or(s_, v_);
-		var x_ = context.Operators.ConvertIntegerToDecimal((int?)49);
+		var x_ = context.Operators.ConvertIntegerToDecimal(49);
 		var z_ = this.Qualifies(IP, "CHEST RT", x_, u_);
 		var aa_ = context.Operators.Or(w_, z_);
-		var ac_ = context.Operators.ConvertIntegerToDecimal((int?)1282);
+		var ac_ = context.Operators.ConvertIntegerToDecimal(1282);
 		var ad_ = this.Qualifies(IP, "CHEST-CARDIAC HD", x_, ac_);
 		var ae_ = context.Operators.Or(aa_, ad_);
-		var af_ = context.Operators.ConvertIntegerToDecimal((int?)115);
-		var ag_ = context.Operators.ConvertIntegerToDecimal((int?)582);
+		var af_ = context.Operators.ConvertIntegerToDecimal(115);
+		var ag_ = context.Operators.ConvertIntegerToDecimal(582);
 		var ah_ = this.Qualifies(IP, "HEAD LD", af_, ag_);
 		var ai_ = context.Operators.Or(ae_, ah_);
-		var ak_ = context.Operators.ConvertIntegerToDecimal((int?)1025);
+		var ak_ = context.Operators.ConvertIntegerToDecimal(1025);
 		var al_ = this.Qualifies(IP, "HEAD RT", af_, ak_);
 		var am_ = context.Operators.Or(ai_, al_);
-		var ao_ = context.Operators.ConvertIntegerToDecimal((int?)1832);
+		var ao_ = context.Operators.ConvertIntegerToDecimal(1832);
 		var ap_ = this.Qualifies(IP, "HEAD HD", af_, ao_);
 		var aq_ = context.Operators.Or(am_, ap_);
-		var ar_ = context.Operators.ConvertIntegerToDecimal((int?)73);
-		var as_ = context.Operators.ConvertIntegerToDecimal((int?)320);
+		var ar_ = context.Operators.ConvertIntegerToDecimal(73);
+		var as_ = context.Operators.ConvertIntegerToDecimal(320);
 		var at_ = this.Qualifies(IP, "EXTREMITIES", ar_, as_);
 		var au_ = context.Operators.Or(aq_, at_);
-		var av_ = context.Operators.ConvertIntegerToDecimal((int?)25);
+		var av_ = context.Operators.ConvertIntegerToDecimal(25);
 		var ax_ = this.Qualifies(IP, "NECK-CSPINE", av_, i_);
 		var ay_ = context.Operators.Or(au_, ax_);
 		var bb_ = this.Qualifies(IP, "TSPINE-LSPINE", av_, i_);
 		var bc_ = context.Operators.Or(ay_, bb_);
-		var be_ = context.Operators.ConvertIntegerToDecimal((int?)1637);
+		var be_ = context.Operators.ConvertIntegerToDecimal(1637);
 		var bf_ = this.Qualifies(IP, "CAP", d_, be_);
 		var bg_ = context.Operators.Or(bc_, bf_);
-		var bi_ = context.Operators.ConvertIntegerToDecimal((int?)2520);
+		var bi_ = context.Operators.ConvertIntegerToDecimal(2520);
 		var bj_ = this.Qualifies(IP, "TLSPINE", av_, bi_);
 		var bk_ = context.Operators.Or(bg_, bj_);
-		var bm_ = context.Operators.ConvertIntegerToDecimal((int?)2285);
+		var bm_ = context.Operators.ConvertIntegerToDecimal(2285);
 		var bn_ = this.Qualifies(IP, "HEADNECK RT", av_, bm_);
 		var bo_ = context.Operators.Or(bk_, bn_);
-		var bq_ = context.Operators.ConvertIntegerToDecimal((int?)3092);
+		var bq_ = context.Operators.ConvertIntegerToDecimal(3092);
 		var br_ = this.Qualifies(IP, "HEADNECK HD", av_, bq_);
 		var bs_ = context.Operators.Or(bo_, br_);
 
@@ -416,7 +417,7 @@ public class ALARACTOQRFHIR_0_1_001
 
 			return d_;
 		};
-		var c_ = context.Operators.WhereOrNull<Observation>(a_, b_);
+		var c_ = context.Operators.Where<Observation>(a_, b_);
 
 		return c_;
 	}
@@ -425,7 +426,7 @@ public class ALARACTOQRFHIR_0_1_001
 	public IEnumerable<Observation> Numerator() => 
 		__Numerator.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -433,10 +434,10 @@ public class ALARACTOQRFHIR_0_1_001
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -444,10 +445,10 @@ public class ALARACTOQRFHIR_0_1_001
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -455,7 +456,7 @@ public class ALARACTOQRFHIR_0_1_001
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

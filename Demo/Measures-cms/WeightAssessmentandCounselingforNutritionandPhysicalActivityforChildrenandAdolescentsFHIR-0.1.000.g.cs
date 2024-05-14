@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -52,9 +54,9 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
     internal Lazy<CqlCode[]> __ObservationCategoryCodes;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter;
     internal Lazy<bool?> __Initial_Population;
@@ -114,9 +116,9 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
         __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounter = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
@@ -407,13 +409,12 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -423,7 +424,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -432,7 +433,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -440,10 +441,10 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -451,10 +452,10 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -462,7 +463,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -508,7 +509,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return aa_;
 		};
-		var w_ = context.Operators.WhereOrNull<Encounter>(u_, v_);
+		var w_ = context.Operators.Where<Encounter>(u_, v_);
 
 		return w_;
 	}
@@ -525,10 +526,10 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)3, (int?)17, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(3, 17, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = this.Qualifying_Encounter();
-		var j_ = context.Operators.ExistsInList<Encounter>(i_);
+		var j_ = context.Operators.Exists<Encounter>(i_);
 		var k_ = context.Operators.And(h_, j_);
 
 		return k_;
@@ -562,7 +563,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return h_;
 		};
-		var e_ = context.Operators.WhereOrNull<Condition>(c_, d_);
+		var e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
@@ -575,7 +576,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	{
 		var a_ = Hospice_6_9_000.Has_Hospice_Services();
 		var b_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period();
-		var c_ = context.Operators.ExistsInList<Condition>(b_);
+		var c_ = context.Operators.Exists<Condition>(b_);
 		var d_ = context.Operators.Or(a_, c_);
 
 		return d_;
@@ -602,7 +603,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -628,7 +629,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -654,7 +655,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return l_;
 		};
-		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
+		var d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -666,12 +667,12 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	private bool? Numerator_1_Value()
 	{
 		var a_ = this.BMI_Percentile_in_Measurement_Period();
-		var b_ = context.Operators.ExistsInList<Observation>(a_);
+		var b_ = context.Operators.Exists<Observation>(a_);
 		var c_ = this.Height_in_Measurement_Period();
-		var d_ = context.Operators.ExistsInList<Observation>(c_);
+		var d_ = context.Operators.Exists<Observation>(c_);
 		var e_ = context.Operators.And(b_, d_);
 		var f_ = this.Weight_in_Measurement_Period();
-		var g_ = context.Operators.ExistsInList<Observation>(f_);
+		var g_ = context.Operators.Exists<Observation>(f_);
 		var h_ = context.Operators.And(e_, g_);
 
 		return h_;
@@ -695,8 +696,8 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
 	}
@@ -719,8 +720,8 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 			return j_;
 		};
-		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
-		var f_ = context.Operators.ExistsInList<Procedure>(e_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
+		var f_ = context.Operators.Exists<Procedure>(e_);
 
 		return f_;
 	}
@@ -737,8 +738,8 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)3, (int?)11, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(3, 11, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}
@@ -755,8 +756,8 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval((int?)12, (int?)17, true, true);
-		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var g_ = context.Operators.Interval(12, 17, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
 		return h_;
 	}

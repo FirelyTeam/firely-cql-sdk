@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -43,40 +43,39 @@ namespace Hl7.Cql.Runtime
 
         #endregion
 
-        #region Indexer
-        public string? StringIndexer(string? argument, int? index)
+        #region AtIndex
+
+        public string? Indexer(string? argument, int? index)
         {
-            if (argument == null || index == null)
+            if (argument == null || index == null || index < 0 || index >= argument.Length)
                 return null;
-            if (index < 0 || index >= argument.Length)
+
+            var value = argument[index.Value];
+            return value.ToString();
+        }
+
+        #endregion
+
+        #region IndexOf
+
+        public int? PositionOf(string? pattern, string? argument)
+        {
+            if (argument == null || pattern == null)
                 return null;
-            else
-            {
-                var value = argument[index.Value];
-                return value.ToString();
-            }
+
+            return argument.IndexOf(pattern);
         }
 
         #endregion
 
         #region LastPositionOf
+
         public int? LastPositionOf(string? argument, string? pattern)
         {
             if (pattern == null || argument == null)
                 return null;
             else
                 return argument.LastIndexOf(pattern);
-        }
-
-        #endregion
-
-        #region Length
-        public int? StringLength(string argument)
-        {
-            if (argument == null)
-                return 0;
-            else
-                return argument.Length;
         }
 
         #endregion
@@ -106,14 +105,7 @@ namespace Hl7.Cql.Runtime
                 else return false;
             }
         }
-        #endregion
 
-        #region PositionOf
-        public int? PositionOf(string pattern, string argument)
-        {
-            if (argument == null || pattern == null) return null;
-            else return argument.IndexOf(pattern);
-        }
         #endregion
 
         #region ReplaceMatches

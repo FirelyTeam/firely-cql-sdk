@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -89,7 +89,7 @@ namespace Hl7.Cql.Runtime
         /// </remarks>
         /// <seealso cref="CqlComparers"/>
         public ICqlComparer Comparer { get; set; }
-        
+
         /// <summary>
         /// Gets the implementation of <see cref="IValueSetDictionary"/> to use.
         /// </summary>
@@ -98,17 +98,16 @@ namespace Hl7.Cql.Runtime
 
         public TypeResolver TypeResolver { get; }
         public TypeConverter TypeConverter { get; }
-        
+
         /// <summary>
         /// Gets the implementation of <see cref="IDataSource"/> used to implement retrieve methods.
         /// </summary>
         public IDataSource DataSource { get; }
         public CqlDateTime NowValue { get; }
 
-        internal IEqualityComparer<object> EqualityComparer { get; private set; }
-        internal IComparer<object> DataComparer { get; private set; }
-
-        internal ICqlComparer EnumComparer { get; private set; }
+        internal IEqualityComparer<object> EqualityComparer { get; }
+        internal IComparer<object> DataComparer { get; }
+        internal ICqlComparer EnumComparer { get; }
 
         /// <summary>
         /// Raised when the <see cref="ICqlOperators.Message{T}(T, string, string, string)"/> method is called in a CQL library.
@@ -154,25 +153,25 @@ namespace Hl7.Cql.Runtime
             return source;
         }
 
-        public IEnumerable<R>? SelectOrNull<T, R>(IEnumerable<T?>? source, Func<T?, R> select) =>
+        public IEnumerable<R>? Select<T, R>(IEnumerable<T?>? source, Func<T?, R> select) =>
             source?.Select(select).ToList();
 
-        public IEnumerable<TResult>? SelectManyOrNull<TSource, TResult>(IEnumerable<TSource>? source,
+        public IEnumerable<TResult>? SelectMany<TSource, TResult>(IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> collectionSelector) =>
             source?.Where(t => t != null)
                 .SelectMany(t => collectionSelector(t) ?? [])?
                 .ToList();
 
-        public IEnumerable<TResult>? SelectManyResultsOrNull<TSource, TCollection, TResult>(IEnumerable<TSource>? source,
+        public IEnumerable<TResult>? SelectManyResults<TSource, TCollection, TResult>(IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TCollection>> collectionSelector,
             Func<TSource, TCollection, TResult> resultSelector) =>
             source == null ? null : source!.SelectMany(collectionSelector!, resultSelector!).ToList();
 
 
-        public IEnumerable<T>? WhereOrNull<T>(IEnumerable<T>? source, Func<T, bool?> lambda) =>
+        public IEnumerable<T>? Where<T>(IEnumerable<T>? source, Func<T, bool?> lambda) =>
             source == null ? null : source.Where(x => lambda(x) ?? false).ToList();
 
-        public TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
+        public TAccumulate? Aggregate<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
         public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);

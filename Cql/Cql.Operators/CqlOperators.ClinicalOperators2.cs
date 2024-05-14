@@ -97,35 +97,6 @@ namespace Hl7.Cql.Runtime
         }
         #endregion
 
-        #region In (CodeSystem)
-
-        public bool? CodeInCodeSystem(string? code, CqlCodeSystem? codesystem)
-        {
-            throw new NotImplementedException();
-        }
-        public bool? CodeInCodeSystem(CqlCode? code, CqlCodeSystem? codesystem)
-        {
-            throw new NotImplementedException();
-        }
-        public bool? CodeInCodeSystem(CqlConcept? code, CqlCodeSystem? codesystem)
-        {
-            throw new NotImplementedException();
-        }
-        public bool? CodeInCodeSystem(IEnumerable<CqlCode?>? code, CqlCodeSystem? codesystem)
-        {
-            throw new NotImplementedException();
-        }
-        public bool? CodeInCodeSystem(IEnumerable<string?>? code, CqlCodeSystem? codesystem)
-        {
-            throw new NotImplementedException();
-        }
-        public bool? CodeInCodeSystem(IEnumerable<CqlConcept?>? code, CqlCodeSystem? codesystem)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
         #region In (ValueSet)
 
         public bool? StringInValueSet(string? code, CqlValueSet? valueSet)

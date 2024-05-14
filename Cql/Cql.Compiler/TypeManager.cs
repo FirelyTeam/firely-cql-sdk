@@ -9,9 +9,11 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 
 namespace Hl7.Cql.Compiler
@@ -69,7 +71,7 @@ namespace Hl7.Cql.Compiler
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
             TupleTypeList = [];
-            Hasher = new Hasher();
+            Hasher = Hasher.Instance;
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
             Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             TupleTypeNamespace = tupleTypeNamespace;
@@ -131,29 +133,12 @@ namespace Hl7.Cql.Compiler
             }
         }
 
+        private static readonly TypeFormatterOptions? TypeToCSharpStringOptions = new(PreferKeywords: true, HideNamespaces: true);
+
         internal static string PrettyTypeName(Type type)
         {
-            string typeName = type.Name;
-            if (type.IsGenericType)
-            {
-                if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-                {
-                    typeName = Nullable.GetUnderlyingType(type)!.Name;
-                }
-                else
-                {
-                    if (type.IsGenericType)
-                    {
-                        var tildeIndex = type.Name.IndexOf('`');
-                        var rootName = type.Name.Substring(0, tildeIndex);
-                        var genericArgumentNames = type.GetGenericArguments()
-                            .Select(PrettyTypeName);
-                        var prettyName = $"{rootName}{string.Join("", genericArgumentNames)}";
-                        typeName = prettyName;
-                    }
-                }
-            }
-            return typeName;
+            string result = type.WriteCSharp(TypeToCSharpStringOptions).ToString()!;
+            return result;
         }
     }
 }

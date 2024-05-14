@@ -102,20 +102,20 @@ namespace Hl7.Cql.Runtime
 
         #region After
 
-        public bool? IntervalAfterInterval(CqlInterval<int?>? left, CqlInterval<int?>? right, string? precision) =>
+        public bool? After(CqlInterval<int?>? left, CqlInterval<int?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision) =>
+        public bool? After(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision) =>
+        public bool? After(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
+        public bool? After(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
 
-        public bool? IntervalAfterInterval(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right, string? precision) =>
+        public bool? After(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
+        public bool? After(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision) =>
+        public bool? After(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
 
         private bool? IntervalAfterIntervalHelper<T>(CqlInterval<T?>? left, CqlInterval<T?>? right, string? precision,
@@ -131,19 +131,19 @@ namespace Hl7.Cql.Runtime
             return after > 0;
         }
 
-        public bool? IntervalAfterElement(CqlInterval<int?>? left, int? right, string? precision) =>
+        public bool? After(CqlInterval<int?>? left, int? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<long?>? left, long? right, string? precision) =>
+        public bool? After(CqlInterval<long?>? left, long? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
+        public bool? After(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
+        public bool? After(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
+        public bool? After(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
+        public bool? After(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
+        public bool? After(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
         public bool? IntervalAfterElementHelper<T>(CqlInterval<T>? left, T right, string? precision,
             Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
@@ -169,19 +169,19 @@ namespace Hl7.Cql.Runtime
             return after > 0;
         }
 
-        public bool? ElementAfterInterval(int? left, CqlInterval<int?>? right, string? precision) =>
+        public bool? After(int? left, CqlInterval<int?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(long? left, CqlInterval<long?>? right, string? precision) =>
+        public bool? After(long? left, CqlInterval<long?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(decimal? left, CqlInterval<decimal?>? right, string? precision) =>
+        public bool? After(decimal? left, CqlInterval<decimal?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(CqlQuantity? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
+        public bool? After(CqlQuantity? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(CqlDate? left, CqlInterval<CqlDate?>? right, string? precision) =>
+        public bool? After(CqlDate? left, CqlInterval<CqlDate?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(CqlDateTime? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
+        public bool? After(CqlDateTime? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(CqlTime? left, CqlInterval<CqlTime?>? right, string? precision) =>
+        public bool? After(CqlTime? left, CqlInterval<CqlTime?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
         public bool? ElementAfterIntervalHelper<T>(T left, CqlInterval<T>? right, string? precision,
             Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
@@ -211,19 +211,19 @@ namespace Hl7.Cql.Runtime
 
         #region Before
 
-        public bool? IntervalBeforeInterval(CqlInterval<int?>? left, CqlInterval<int?>? right, string? precision) =>
+        public bool? Before(CqlInterval<int?>? left, CqlInterval<int?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision) =>
+        public bool? Before(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision) =>
+        public bool? Before(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
 
         private bool? IntervalBeforeIntervalHelper<T>(CqlInterval<T?>? left, CqlInterval<T?>? right, string? precision,
@@ -240,19 +240,19 @@ namespace Hl7.Cql.Runtime
             return before < 0;
         }
 
-        public bool? IntervalBeforeElement(CqlInterval<int?>? left, int? right, string? precision) =>
+        public bool? Before(CqlInterval<int?>? left, int? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<long?>? left, long? right, string? precision) =>
+        public bool? Before(CqlInterval<long?>? left, long? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
+        public bool? Before(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
 
         public bool? IntervalBeforeElementHelper<T>(CqlInterval<T>? left, T right, string? precision,
@@ -279,19 +279,19 @@ namespace Hl7.Cql.Runtime
             return before < 0;
         }
 
-        public bool? ElementBeforeInterval(int? left, CqlInterval<int?>? right, string? precision) =>
+        public bool? Before(int? left, CqlInterval<int?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(long? left, CqlInterval<long?>? right, string? precision) =>
+        public bool? Before(long? left, CqlInterval<long?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(decimal? left, CqlInterval<decimal?>? right, string? precision) =>
+        public bool? Before(decimal? left, CqlInterval<decimal?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(CqlQuantity? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
+        public bool? Before(CqlQuantity? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(CqlDate? left, CqlInterval<CqlDate?>? right, string? precision) =>
+        public bool? Before(CqlDate? left, CqlInterval<CqlDate?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(CqlDateTime? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
+        public bool? Before(CqlDateTime? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(CqlTime? left, CqlInterval<CqlTime?>? right, string? precision) =>
+        public bool? Before(CqlTime? left, CqlInterval<CqlTime?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
         public bool? ElementBeforeIntervalHelper<T>(T left, CqlInterval<T>? right, string? precision,
             Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
@@ -353,7 +353,7 @@ namespace Hl7.Cql.Runtime
                 return new CqlInterval<T?>[0];
 
             // need null check on i because i!.low! causes HL7 unit test TestCollapseNull_Test to fail since i is null
-            var queue = ListSortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending)?.ToList();
+            var queue = SortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending)?.ToList();
             if (queue is null || queue.Count == 0) return null;
 
             CqlInterval<T?>? TryCombine(CqlInterval<T?>? x, CqlInterval<T?>? y)
@@ -647,7 +647,7 @@ namespace Hl7.Cql.Runtime
 
         #region Expand
 
-        public IEnumerable<CqlDate>? ExpandInterval(CqlInterval<CqlDate>? argument, CqlQuantity? per)
+        public IEnumerable<CqlDate>? Expand(CqlInterval<CqlDate>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -773,7 +773,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlDateTime>? ExpandInterval(CqlInterval<CqlDateTime>? argument, CqlQuantity? per)
+        public IEnumerable<CqlDateTime>? Expand(CqlInterval<CqlDateTime>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -949,7 +949,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlTime>? ExpandInterval(CqlInterval<CqlTime>? argument, CqlQuantity? per)
+        public IEnumerable<CqlTime>? Expand(CqlInterval<CqlTime>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1089,7 +1089,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<decimal?>? ExpandInterval(CqlInterval<decimal?>? argument, CqlQuantity? per)
+        public IEnumerable<decimal?>? Expand(CqlInterval<decimal?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1125,7 +1125,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<int?>? ExpandInterval(CqlInterval<int?>? argument, CqlQuantity? per)
+        public IEnumerable<int?>? Expand(CqlInterval<int?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1163,7 +1163,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<long?>? ExpandInterval(CqlInterval<long?>? argument, CqlQuantity? per)
+        public IEnumerable<long?>? Expand(CqlInterval<long?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1204,7 +1204,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region In
-        public bool? ElementInInterval<T>(T t, CqlInterval<T>? interval, string? precision)
+        public bool? In<T>(T t, CqlInterval<T>? interval, string? precision)
         {
             if (t == null) return null;
             if (interval == null) return false;
@@ -1230,7 +1230,7 @@ namespace Hl7.Cql.Runtime
 
         #region Includes
         public bool? IntervalIncludesElement<T>(CqlInterval<T>? interval, T t, string? precision) =>
-            ElementInInterval(t, interval, precision);
+            In(t, interval, precision);
 
         public bool? IntervalIncludesInterval<T>(CqlInterval<T>? larger, CqlInterval<T>? smaller, string precision)
         {
@@ -1599,7 +1599,7 @@ namespace Hl7.Cql.Runtime
 
         #region Same As
 
-        public bool? IntervalSameAs<T>(CqlInterval<T> @this, CqlInterval<T> other, string? precision)
+        public bool? SameAs<T>(CqlInterval<T> @this, CqlInterval<T> other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1611,16 +1611,16 @@ namespace Hl7.Cql.Runtime
 
         #region On/Same Or After
 
-        public bool? IntervalSameOrAfter(CqlInterval<int?> @this, CqlInterval<int?> other)
+        public bool? SameOrAfter(CqlInterval<int?> @this, CqlInterval<int?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrAfter(CqlInterval<long?> @this, CqlInterval<long?> other)
+        public bool? SameOrAfter(CqlInterval<long?> @this, CqlInterval<long?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrAfter(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
+        public bool? SameOrAfter(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrAfter(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
+        public bool? SameOrAfter(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
 
-        public bool? IntervalSameOrAfter(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
+        public bool? SameOrAfter(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1647,10 +1647,10 @@ namespace Hl7.Cql.Runtime
             if (boundaryHit)
                 return true;
 
-            return IntervalAfterInterval(thisClosed, otherClosed, precision);
+            return After(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrAfter(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
+        public bool? SameOrAfter(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1677,10 +1677,10 @@ namespace Hl7.Cql.Runtime
             if (boundaryHit)
                 return true;
 
-            return IntervalAfterInterval(thisClosed, otherClosed, precision);
+            return After(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrAfter(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
+        public bool? SameOrAfter(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1708,7 +1708,7 @@ namespace Hl7.Cql.Runtime
             if (boundaryHit)
                 return true;
 
-            return IntervalAfterInterval(thisClosed, otherClosed, precision);
+            return After(thisClosed, otherClosed, precision);
         }
 
         private bool? IntervalSameOrAfterHelper<T>(CqlInterval<T>? @this,
@@ -1737,15 +1737,15 @@ namespace Hl7.Cql.Runtime
 
         #region On/Same Or Before
 
-        public bool? IntervalSameOrBefore(CqlInterval<int?> @this, CqlInterval<int?> other)
+        public bool? SameOrBefore(CqlInterval<int?> @this, CqlInterval<int?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<long?> @this, CqlInterval<long?> other)
+        public bool? SameOrBefore(CqlInterval<long?> @this, CqlInterval<long?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
+        public bool? SameOrBefore(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
+        public bool? SameOrBefore(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
+        public bool? SameOrBefore(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1771,10 +1771,10 @@ namespace Hl7.Cql.Runtime
             var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
-            return IntervalBeforeInterval(thisClosed, otherClosed, precision);
+            return Before(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrBefore(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
+        public bool? SameOrBefore(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1800,10 +1800,10 @@ namespace Hl7.Cql.Runtime
             var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
-            return IntervalBeforeInterval(thisClosed, otherClosed, precision);
+            return Before(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrBefore(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
+        public bool? SameOrBefore(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1829,7 +1829,7 @@ namespace Hl7.Cql.Runtime
             var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
-            return IntervalBeforeInterval(thisClosed, otherClosed, precision);
+            return Before(thisClosed, otherClosed, precision);
         }
 
 

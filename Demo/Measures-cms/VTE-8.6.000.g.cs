@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -90,7 +92,7 @@ public class VTE_8_6_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -119,13 +121,13 @@ public class VTE_8_6_000
 
 				return s_;
 			};
-			var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
-			var g_ = context.Operators.ExistsInList<Condition>(f_);
+			var f_ = context.Operators.Where<Condition>(d_, e_);
+			var g_ = context.Operators.Exists<Condition>(f_);
 			var h_ = context.Operators.Not(g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -145,11 +147,11 @@ public class VTE_8_6_000
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
 			var k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
-			var l_ = context.Operators.GreaterOrEqual(k_, (int?)18);
+			var l_ = context.Operators.GreaterOrEqual(k_, 18);
 
 			return l_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		var d_ = this.Admission_without_VTE_or_Obstetrical_Conditions();
 		var e_ = context.Operators.ListIntersect<Encounter>(c_, d_);
 

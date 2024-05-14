@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -100,20 +100,20 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region Date and Time Component From
-        public int? ComponentFrom(CqlDate? argument, string? precision)
+        public int? DateTimeComponentFrom(CqlDate? argument, string? precision)
         {
             if (argument == null || precision == null)
                 return null;
             else return argument.Component(precision);
         }
-        public int? ComponentFrom(CqlDateTime? argument, string? precision)
+        public int? DateTimeComponentFrom(CqlDateTime? argument, string? precision)
         {
             if (argument == null || precision == null)
                 return null;
             else return argument.Component(precision);
         }
 
-        public int? ComponentFrom(CqlTime? argument, string? precision)
+        public int? DateTimeComponentFrom(CqlTime? argument, string? precision)
         {
             if (argument == null || precision == null)
                 return null;
@@ -135,7 +135,7 @@ namespace Hl7.Cql.Runtime
             return argument.DateOnly;
         }
 
-        public CqlTime? TimeFrom(CqlDateTime? argument)
+        public CqlTime? TimeComponent(CqlDateTime? argument)
         {
             if (argument == null)
                 return null;

@@ -1,36 +1,26 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-internal partial class LibraryExpressionBuilder
+partial class LibraryExpressionBuilderContext
 {
-    private readonly ILogger<LibraryExpressionBuilder> _logger;
-    private readonly LibraryDefinitionBuilderSettings _libraryDefinitionBuilderSettings;
-    private readonly OperatorBinding _operatorBinding;
-    private readonly TypeManager _typeManager;
-    private readonly ILoggerFactory _loggerFactory;
-    private readonly TypeConverter _typeConverter;
-
-    public Library Library { get; }
-
-    public string LibraryKey => Library.NameAndVersion()!;
-
-    public bool AllowUnresolvedExternals => _libraryDefinitionBuilderSettings.AllowUnresolvedExternals;
-
-    public ExpressionBuilder CreateExpressionBuilder() =>
-        new(_loggerFactory.CreateLogger<ExpressionBuilder>(), _operatorBinding, _typeManager, _typeConverter, _libraryDefinitionBuilderSettings, this);
-
     #region Definitions
 
+    /// <inheritdoc />
     public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
 
     private void AddLibraryDefinitionsFromIncludes()
@@ -86,6 +76,7 @@ internal partial class LibraryExpressionBuilder
 
     private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
 
+    /// <inheritdoc />
     public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
         _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
 
@@ -98,7 +89,7 @@ internal partial class LibraryExpressionBuilder
         _codesByCodeSystemName.Add(codeSystemName!, codings);
         return codings;
     }
-    public LibrarySetExpressionBuilder? LibrarySetContext { get; }
+    public ILibrarySetExpressionBuilderContext? LibrarySetContext { get; }
 
     #endregion
 
@@ -148,7 +139,8 @@ internal partial class LibraryExpressionBuilder
         }
     }
 
-    public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)]out string? url)
+    /// <inheritdoc />
+    public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)] out string? url)
     {
         var libraryName = GetNameAndVersionFromAlias(codeSystemRef.libraryName);
         return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);

@@ -1,4 +1,11 @@
-﻿using Hl7.Cql.CodeGeneration.NET;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging.PostProcessors;
@@ -14,8 +21,8 @@ namespace Hl7.Cql.Packaging;
 internal class CqlPackagerFactory : CqlCompilerFactory
 {
     public CqlToResourcePackagingOptions CqlToResourcePackagingOptions { get; }
-    public CSharpCodeWriterOptions? CSharpCodeWriterOptions { get; }
-    public FhirResourceWriterOptions? FhirResourceWriterOptions { get; }
+    public CSharpCodeWriterOptions CSharpCodeWriterOptions { get; }
+    public FhirResourceWriterOptions FhirResourceWriterOptions { get; }
 
     public CqlPackagerFactory(
         ILoggerFactory loggerFactory,
@@ -25,21 +32,25 @@ internal class CqlPackagerFactory : CqlCompilerFactory
         FhirResourceWriterOptions? fhirResourceWriterOptions = default) : base(loggerFactory, cacheSize)
     {
         CqlToResourcePackagingOptions = cqlToResourcePackagingOptions ?? new();
-        CSharpCodeWriterOptions = cSharpCodeWriterOptions;
-        FhirResourceWriterOptions = fhirResourceWriterOptions;
+        CSharpCodeWriterOptions = cSharpCodeWriterOptions ?? new();
+        FhirResourceWriterOptions = fhirResourceWriterOptions ?? new();
     }
 
     public virtual CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper => Singleton(NewCqlTypeToFhirTypeMapper);
     protected virtual CqlTypeToFhirTypeMapper NewCqlTypeToFhirTypeMapper() => new(TypeResolver);
 
     public virtual CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => Singleton(NewCSharpLibrarySetToStreamsWriter);
-    protected virtual CSharpLibrarySetToStreamsWriter NewCSharpLibrarySetToStreamsWriter() => new(Logger<CSharpLibrarySetToStreamsWriter>(), TypeResolver);
+    protected virtual CSharpLibrarySetToStreamsWriter NewCSharpLibrarySetToStreamsWriter() => new(
+        Logger<CSharpLibrarySetToStreamsWriter>(),
+        Options(CSharpCodeWriterOptions),
+        TypeResolver);
 
     public virtual CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => Singleton(NewCSharpCodeStreamPostProcessorOrNull);
     protected virtual CSharpCodeStreamPostProcessor? NewCSharpCodeStreamPostProcessorOrNull() =>
         CSharpCodeWriterOptions is { OutDirectory: { } } opt
             ? NewWriteToFileCSharpCodeStreamPostProcessor(opt)
             : default(CSharpCodeStreamPostProcessor);
+
     protected virtual WriteToFileCSharpCodeStreamPostProcessor NewWriteToFileCSharpCodeStreamPostProcessor(
         CSharpCodeWriterOptions opt) =>
         new(Options(opt), Logger<WriteToFileCSharpCodeStreamPostProcessor>());
@@ -62,5 +73,5 @@ internal class CqlPackagerFactory : CqlCompilerFactory
 
     public CqlToResourcePackagingPipeline CqlToResourcePackagingPipeline => Singleton(NewCqlToResourcePackagingPipeline);
     protected virtual CqlToResourcePackagingPipeline NewCqlToResourcePackagingPipeline() =>
-        new(Options(CqlToResourcePackagingOptions), ResourcePackager, LibraryDefinitionsBuilder, AssemblyCompiler);
+        new(Options(CqlToResourcePackagingOptions), ResourcePackager, LibrarySetExpressionBuilder, AssemblyCompiler);
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -45,24 +47,24 @@ public class NCQAEncounter_1_0_0
 	{
 		FhirString a_(Encounter.DiagnosisComponent D) => 
 			D?.Condition?.ReferenceElement;
-		var b_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, FhirString>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, FhirString>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
 		bool? c_(FhirString CRef)
 		{
 			bool? f_(Condition C)
 			{
-				var i_ = context.Operators.Convert<string>(C?.IdElement);
-				var j_ = context.Operators.Convert<string>(CRef);
+				var i_ = FHIRHelpers_4_0_001.ToString(C?.IdElement);
+				var j_ = FHIRHelpers_4_0_001.ToString(CRef);
 				var k_ = NCQAFHIRBase_1_0_0.GetId(j_);
 				var l_ = context.Operators.Equal(i_, k_);
 
 				return l_;
 			};
-			var g_ = context.Operators.WhereOrNull<Condition>(Conditions, f_);
-			var h_ = context.Operators.ExistsInList<Condition>(g_);
+			var g_ = context.Operators.Where<Condition>(Conditions, f_);
+			var h_ = context.Operators.Exists<Condition>(g_);
 
 			return h_;
 		};
-		var d_ = context.Operators.SelectOrNull<FhirString, bool?>(b_, c_);
+		var d_ = context.Operators.Select<FhirString, bool?>(b_, c_);
 		var e_ = context.Operators.AnyTrue(d_);
 
 		return e_;
@@ -75,12 +77,12 @@ public class NCQAEncounter_1_0_0
 		{
 			var h_ = context.Operators.Convert<Integer>(D?.RankElement);
 			var i_ = FHIRHelpers_4_0_001.ToInteger(h_);
-			var j_ = context.Operators.Equal(i_, (int?)1);
+			var j_ = context.Operators.Equal(i_, 1);
 
 			return j_;
 		};
-		var b_ = context.Operators.WhereOrNull<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
-		var c_ = context.Operators.SingleOrNull<Encounter.DiagnosisComponent>(b_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var c_ = context.Operators.SingletonFrom<Encounter.DiagnosisComponent>(b_);
 		var d_ = new Encounter.DiagnosisComponent[]
 		{
 			c_,
@@ -89,20 +91,20 @@ public class NCQAEncounter_1_0_0
 		{
 			bool? k_(Condition C)
 			{
-				var n_ = context.Operators.Convert<string>(C?.IdElement);
-				var o_ = context.Operators.Convert<string>(PrincipalDiagnosis?.Condition?.ReferenceElement);
+				var n_ = FHIRHelpers_4_0_001.ToString(C?.IdElement);
+				var o_ = FHIRHelpers_4_0_001.ToString(PrincipalDiagnosis?.Condition?.ReferenceElement);
 				var p_ = NCQAFHIRBase_1_0_0.GetId(o_);
 				var q_ = context.Operators.Equal(n_, p_);
 
 				return q_;
 			};
-			var l_ = context.Operators.WhereOrNull<Condition>(Conditions, k_);
-			var m_ = context.Operators.ExistsInList<Condition>(l_);
+			var l_ = context.Operators.Where<Condition>(Conditions, k_);
+			var m_ = context.Operators.Exists<Condition>(l_);
 
 			return m_;
 		};
-		var f_ = context.Operators.SelectOrNull<Encounter.DiagnosisComponent, bool?>(d_, e_);
-		var g_ = context.Operators.SingleOrNull<bool?>(f_);
+		var f_ = context.Operators.Select<Encounter.DiagnosisComponent, bool?>(d_, e_);
+		var g_ = context.Operators.SingletonFrom<bool?>(f_);
 
 		return g_;
 	}
@@ -115,12 +117,12 @@ public class NCQAEncounter_1_0_0
 		{
 			var e_ = NCQAFHIRBase_1_0_0.Normalize_Interval((EncounterPeriod?.Period as object));
 			var f_ = context.Operators.End(e_);
-			var g_ = context.Operators.ElementInInterval<CqlDateTime>(f_, timeperiod, null);
+			var g_ = context.Operators.In<CqlDateTime>(f_, timeperiod, null);
 
 			return g_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
-		var d_ = context.Operators.ExistsInList<Encounter>(c_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
+		var d_ = context.Operators.Exists<Encounter>(c_);
 
 		return d_;
 	}
@@ -139,7 +141,7 @@ public class NCQAEncounter_1_0_0
 
 			return h_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -161,7 +163,7 @@ public class NCQAEncounter_1_0_0
 
 			return l_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -180,7 +182,7 @@ public class NCQAEncounter_1_0_0
 
 			return h_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}

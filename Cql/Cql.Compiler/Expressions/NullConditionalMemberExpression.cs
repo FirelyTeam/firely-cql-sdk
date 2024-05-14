@@ -9,8 +9,9 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Expressions
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
@@ -28,8 +29,8 @@ namespace Hl7.Cql.Compiler
                 throw new ArgumentException("Expression is not applicable to static member access");
 
             MemberExpression = expression;
-            var isNullableType = !MemberExpression.Type.IsValueType || Nullable.GetUnderlyingType(MemberExpression.Type) is not null;
-            resultType = isNullableType ? MemberExpression.Type : typeof(Nullable<>).MakeGenericType(MemberExpression.Type);
+
+            resultType = MemberExpression.Type.MakeNullable();
         }
 
         public NullConditionalMemberExpression(Expression expression, MemberInfo member) :
@@ -47,8 +48,10 @@ namespace Hl7.Cql.Compiler
             var objectVariable = Variable(MemberExpression.Expression!.Type);
             Expression notNull(Expression expression) => NotEqual(expression, Constant(null, MemberExpression.Expression.Type));
 
-            Expression nullableMemberExpression = (MemberExpression.Type != resultType) ?
-                    Convert(MemberExpression, resultType) : MemberExpression;
+            Expression nullableMemberExpression = (MemberExpression.Type != resultType)
+                ? MemberExpression.NewAssignToTypeExpression(resultType)
+                : MemberExpression;
+
             var block = Block(new[] { objectVariable },
                 Assign(objectVariable, MemberExpression.Expression!),
                 Condition(notNull(objectVariable), nullableMemberExpression, Default(resultType)));
@@ -70,8 +73,7 @@ namespace Hl7.Cql.Compiler
 
             if (expression != MemberExpression.Expression)
                 return new NullConditionalMemberExpression(MemberExpression.Update(expression));
-            else
-                return this;
+            return this;
         }
     }
 }

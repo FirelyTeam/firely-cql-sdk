@@ -1,4 +1,11 @@
-﻿using Hl7.Cql.CodeGeneration.NET;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Logging;
@@ -10,7 +17,6 @@ internal class PackagerCliProgram
 {
     private readonly OptionsConsoleDumper _optionsConsoleDumper;
     private readonly ILogger<PackagerCliProgram> _logger;
-    private readonly ProgramCqlPackagerFactory _packagerCliFactory;
     private readonly CqlToResourcePackagingPipeline _pipeline;
 
     public PackagerCliProgram(
@@ -22,7 +28,6 @@ internal class PackagerCliProgram
         _logger = logger;
         _optionsConsoleDumper = optionsConsoleDumper;
         _pipeline = packagerCliFactory.CqlToResourcePackagingPipeline;
-        _packagerCliFactory = packagerCliFactory;
     }
 
     public int Run()

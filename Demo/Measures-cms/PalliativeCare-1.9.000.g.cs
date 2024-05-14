@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -113,7 +115,7 @@ public class PalliativeCare_1_9_000
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -137,8 +139,8 @@ public class PalliativeCare_1_9_000
 
 			return ae_;
 		};
-		var f_ = context.Operators.WhereOrNull<Observation>(d_, e_);
-		var g_ = context.Operators.ExistsInList<Observation>(f_);
+		var f_ = context.Operators.Where<Observation>(d_, e_);
+		var g_ = context.Operators.Exists<Observation>(f_);
 		var h_ = this.Palliative_Care_Diagnosis();
 		var i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
 		bool? j_(Condition PalliativeDiagnosis)
@@ -149,8 +151,8 @@ public class PalliativeCare_1_9_000
 
 			return ah_;
 		};
-		var k_ = context.Operators.WhereOrNull<Condition>(i_, j_);
-		var l_ = context.Operators.ExistsInList<Condition>(k_);
+		var k_ = context.Operators.Where<Condition>(i_, j_);
+		var l_ = context.Operators.Exists<Condition>(k_);
 		var m_ = context.Operators.Or(g_, l_);
 		var n_ = this.Palliative_Care_Encounter();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
@@ -164,8 +166,8 @@ public class PalliativeCare_1_9_000
 
 			return al_;
 		};
-		var r_ = context.Operators.WhereOrNull<Encounter>(p_, q_);
-		var s_ = context.Operators.ExistsInList<Encounter>(r_);
+		var r_ = context.Operators.Where<Encounter>(p_, q_);
+		var s_ = context.Operators.Exists<Encounter>(r_);
 		var t_ = context.Operators.Or(m_, s_);
 		var u_ = this.Palliative_Care_Intervention();
 		var v_ = context.Operators.RetrieveByValueSet<Procedure>(u_, null);
@@ -179,8 +181,8 @@ public class PalliativeCare_1_9_000
 
 			return ap_;
 		};
-		var y_ = context.Operators.WhereOrNull<Procedure>(w_, x_);
-		var z_ = context.Operators.ExistsInList<Procedure>(y_);
+		var y_ = context.Operators.Where<Procedure>(w_, x_);
+		var z_ = context.Operators.Exists<Procedure>(y_);
 		var aa_ = context.Operators.Or(t_, z_);
 
 		return aa_;

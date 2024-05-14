@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -490,24 +497,32 @@ public class DefinitionDictionary<T> where T : class
         {
             for (int i = 0; i < parameterTypes.Length; i++)
             {
+                var parameterType = parameterTypes[i];
+                var signatureType = signature[i];
+
                 // this parameter's type matches the signature's type exactly; add nothing to the score
-                if (parameterTypes[i] == signature[i])
+                if (parameterType == signatureType)
                     continue;
+
                 // parameterTypes[i] is derived from signature[i]
-                else if (signature[i].IsAssignableFrom(parameterTypes[i]))
+                if (signatureType.IsAssignableFrom(parameterType))
                 {
-                    var baseType = parameterTypes[i].BaseType;
+                    var baseType = parameterType.BaseType;
                     var distanceP = 1;
-                    while (baseType != null && baseType != signature[i])
+                    while (baseType != null && baseType != signatureType)
                     {
                         distanceP += 1;
                         baseType = baseType.BaseType;
                     }
                     distance += distanceP;
                 }
+                else if (parameterType == typeof(object)) //@ TODO: Choice type?
+                {
+                    distance += 7;
+                }
                 else if (conversionCheck is not null)
                 {
-                    if (conversionCheck(parameterTypes[i], signature[i]))
+                    if (conversionCheck(parameterType, signatureType))
                         distance += 5;
                     else
                         return null;

@@ -1,6 +1,12 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System.Collections.Generic;
 using System.Linq.Expressions;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
@@ -10,25 +16,49 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
-partial class LibraryExpressionBuilder
+internal class LibraryExpressionBuilder
 {
+    internal readonly ILogger<LibraryExpressionBuilder> _logger;
+    internal readonly ExpressionBuilder _expressionBuilder;
+
     public LibraryExpressionBuilder(
-        ILoggerFactory loggerFactory,
-        OperatorBinding operatorBinding,
-        TypeManager typeManager,
-        TypeConverter typeConverter,
+        ILogger<LibraryExpressionBuilder> logger,
+        ExpressionBuilder expressionBuilder)
+    {
+        _logger = logger;
+        _expressionBuilder = expressionBuilder;
+    }
+
+    public DefinitionDictionary<LambdaExpression> ProcessLibrary(
         Library library,
-        LibraryDefinitionBuilderSettings libraryDefinitionBuilderSettings,
+        DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
+        ILibrarySetExpressionBuilderContext? libsCtx = null)
+    {
+        LibraryExpressionBuilderContext ctx = new(this, library, libraryDefinitions ?? new(), libsCtx);
+        return ctx.ProcessLibrary();
+    }
+}
+
+internal partial class LibraryExpressionBuilderContext
+{
+    private readonly ILogger<LibraryExpressionBuilder> _logger;
+    private readonly ExpressionBuilder _expressionBuilder;
+
+    /// <inheritdoc />
+    public Library Library { get; }
+
+    /// <inheritdoc />
+    public string LibraryKey => Library.NameAndVersion()!;
+
+    public LibraryExpressionBuilderContext(
+        LibraryExpressionBuilder builder,
+        Library library,
         DefinitionDictionary<LambdaExpression> libraryDefinitions,
-        LibrarySetExpressionBuilder? libsCtx = null)
+        ILibrarySetExpressionBuilderContext? libsCtx = null)
     {
         // External Services
-        _libraryDefinitionBuilderSettings = libraryDefinitionBuilderSettings;
-        _operatorBinding = operatorBinding;
-        _typeManager = typeManager;
-        _loggerFactory = loggerFactory;
-        _typeConverter = typeConverter;
-        _logger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
+        _logger = builder._logger;
+        _expressionBuilder = builder._expressionBuilder;
 
         // External State
         LibraryDefinitions = libraryDefinitions;
@@ -51,7 +81,7 @@ partial class LibraryExpressionBuilder
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    CreateExpressionBuilder().ProcessIncludes(includeDef);
+                    _expressionBuilder.ProcessIncludes(this, includeDef);
                 }
 
                 AddLibraryDefinitionsFromIncludes();
@@ -62,7 +92,7 @@ partial class LibraryExpressionBuilder
             {
                 foreach (var valueSetDef in valueSetDefs)
                 {
-                    CreateExpressionBuilder().ProcessValueSetDef(valueSetDef);
+                    _expressionBuilder.ProcessValueSetDef(this, valueSetDef);
                 }
             }
 
@@ -72,7 +102,7 @@ partial class LibraryExpressionBuilder
 
                 foreach (var codeDef in codeDefs)
                 {
-                    CreateExpressionBuilder().ProcessCodeDef(codeDef, foundCodeNameCodeSystemUrls);
+                    _expressionBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
                 }
             }
 
@@ -80,7 +110,7 @@ partial class LibraryExpressionBuilder
             {
                 foreach (var codeSystemDef in codeSystemDefs)
                 {
-                    CreateExpressionBuilder().ProcessCodeSystemDef(codeSystemDef);
+                    _expressionBuilder.ProcessCodeSystemDef(this, codeSystemDef);
                 }
             }
 
@@ -88,7 +118,7 @@ partial class LibraryExpressionBuilder
             {
                 foreach (var conceptDef in conceptDefs)
                 {
-                    CreateExpressionBuilder().ProcessConceptDef(conceptDef);
+                    _expressionBuilder.ProcessConceptDef(this, conceptDef);
                 }
             }
 
@@ -96,7 +126,7 @@ partial class LibraryExpressionBuilder
             {
                 foreach (var parameterDef in parameterDefs)
                 {
-                    CreateExpressionBuilder().ProcessParameterDef(parameterDef);
+                    _expressionBuilder.ProcessParameterDef(this, parameterDef);
                 }
             }
 
@@ -104,11 +134,11 @@ partial class LibraryExpressionBuilder
             {
                 foreach (var expressionDef in expressionDefs)
                 {
-                    CreateExpressionBuilder().ProcessExpressionDef(expressionDef);
+                    _expressionBuilder.ProcessExpressionDef(this, expressionDef);
                 }
             }
 
             return LibraryDefinitions;
         });
-
 }
+

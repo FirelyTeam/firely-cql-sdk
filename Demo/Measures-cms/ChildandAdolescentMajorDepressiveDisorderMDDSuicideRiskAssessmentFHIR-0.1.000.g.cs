@@ -1,4 +1,5 @@
 ﻿using System;
+using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -6,6 +7,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
+using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -37,9 +39,9 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
     internal Lazy<CqlCode[]> __ICD10CM;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>> __SDE_Payer;
-    internal Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB> __SDE_Race;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
+    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Major_Depressive_Disorder_Encounter;
     internal Lazy<IEnumerable<Encounter>> __Initial_Population;
@@ -74,9 +76,9 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
         __ICD10CM = new Lazy<CqlCode[]>(this.ICD10CM_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Major_Depressive_Disorder_Encounter = new Lazy<IEnumerable<Encounter>>(this.Major_Depressive_Disorder_Encounter_Value);
         __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
@@ -241,13 +243,12 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context.Operators.DateTime((int?)2025, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var d_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var e_ = context.Operators.Interval(b_, d_, true, false);
-		var f_ = context.ResolveParameter("ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR-0.1.000", "Measurement Period", e_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR-0.1.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)f_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -257,7 +258,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -266,7 +267,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -274,10 +275,10 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Ethnicity() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer_Value()
+	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -285,10 +286,10 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_GDKRbfOIHhLGieQSVDEMIaDPX> SDE_Payer() => 
+	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race_Value()
+	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -296,7 +297,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuples.Tuple_DMgHTLENEHBHWJISQgKZGZVMB SDE_Race() => 
+	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -345,7 +346,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 				return ap_;
 			};
-			var ac_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>(ValidEncounter?.ReasonCode, ab_);
+			var ac_ = context.Operators.Select<CodeableConcept, CqlConcept>(ValidEncounter?.ReasonCode, ab_);
 			var ad_ = this.Major_Depressive_Disorder_Active();
 			var ae_ = context.Operators.ConceptsInValueSet(ac_, ad_);
 			var af_ = CQMCommon_2_0_000.EncounterDiagnosis(ValidEncounter);
@@ -357,8 +358,8 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 				return as_;
 			};
-			var ah_ = context.Operators.WhereOrNull<Condition>(af_, ag_);
-			var ai_ = context.Operators.ExistsInList<Condition>(ah_);
+			var ah_ = context.Operators.Where<Condition>(af_, ag_);
+			var ai_ = context.Operators.Exists<Condition>(ah_);
 			var aj_ = context.Operators.Or(ae_, ai_);
 			var ak_ = context.Operators.And(aa_, aj_);
 			var al_ = this.Measurement_Period();
@@ -368,7 +369,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 			return ao_;
 		};
-		var y_ = context.Operators.WhereOrNull<Encounter>(w_, x_);
+		var y_ = context.Operators.Where<Encounter>(w_, x_);
 
 		return y_;
 	}
@@ -388,17 +389,17 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			var g_ = context.Operators.Start(f_);
 			var h_ = context.Operators.DateFrom(g_);
 			var i_ = context.Operators.CalculateAgeAt(e_, h_, "year");
-			var j_ = context.Operators.GreaterOrEqual(i_, (int?)6);
+			var j_ = context.Operators.GreaterOrEqual(i_, 6);
 			var l_ = context.Operators.Convert<CqlDate>(d_?.BirthDateElement?.Value);
 			var n_ = context.Operators.Start(f_);
 			var o_ = context.Operators.DateFrom(n_);
 			var p_ = context.Operators.CalculateAgeAt(l_, o_, "year");
-			var q_ = context.Operators.LessOrEqual(p_, (int?)16);
+			var q_ = context.Operators.LessOrEqual(p_, 16);
 			var r_ = context.Operators.And(j_, q_);
 
 			return r_;
 		};
-		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
+		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -428,23 +429,24 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			var f_ = context.Operators.RetrieveByCodes<Procedure>(e_, null);
 			bool? g_(Procedure SuicideRiskAssessment)
 			{
-				var k_ = context.Operators.EnumEqualsString(SuicideRiskAssessment?.StatusElement?.Value, "completed");
-				var l_ = FHIRHelpers_4_3_000.ToInterval(MDDEncounter?.Period);
-				var m_ = FHIRHelpers_4_3_000.ToValue(SuicideRiskAssessment?.Performed);
-				var n_ = QICoreCommon_2_0_000.ToInterval(m_);
-				var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, null);
-				var p_ = context.Operators.And(k_, o_);
+				var k_ = context.Operators.Convert<string>(SuicideRiskAssessment?.StatusElement?.Value);
+				var l_ = context.Operators.Equal(k_, "completed");
+				var m_ = FHIRHelpers_4_3_000.ToInterval(MDDEncounter?.Period);
+				var n_ = FHIRHelpers_4_3_000.ToValue(SuicideRiskAssessment?.Performed);
+				var o_ = QICoreCommon_2_0_000.ToInterval(n_);
+				var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, null);
+				var q_ = context.Operators.And(l_, p_);
 
-				return p_;
+				return q_;
 			};
-			var h_ = context.Operators.WhereOrNull<Procedure>(f_, g_);
+			var h_ = context.Operators.Where<Procedure>(f_, g_);
 			Encounter i_(Procedure SuicideRiskAssessment) => 
 				MDDEncounter;
-			var j_ = context.Operators.SelectOrNull<Procedure, Encounter>(h_, i_);
+			var j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
 			return j_;
 		};
-		var c_ = context.Operators.SelectManyOrNull<Encounter, Encounter>(a_, b_);
+		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
