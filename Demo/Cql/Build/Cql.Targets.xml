@@ -34,7 +34,6 @@
 		BeforeTargets="PreBuildEvent">
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) CQL to ELM))" Importance="High" />
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) $(JavaCommandArgs)))" Importance="High" />
-		<Exec Command="$(JavaCommandArgs)"/>
 		<Exec Command="$(JavaCommandArgs)" ConsoleToMSBuild="true">
 			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
 			</Exec>
