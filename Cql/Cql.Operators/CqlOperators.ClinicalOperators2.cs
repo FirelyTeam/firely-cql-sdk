@@ -165,7 +165,7 @@ namespace Hl7.Cql.Runtime
         }
         #endregion
 
-        public IEnumerable<CqlCode> ResolveValueSet(CqlValueSet valueSet) => ExpandValueSet(valueSet);
+        public IEnumerable<CqlCode> ResolveValueSet(CqlValueSet valueSet) => CreateValueSetFacade(valueSet);
 
     }
 }

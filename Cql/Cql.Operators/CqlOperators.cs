@@ -177,7 +177,7 @@ namespace Hl7.Cql.Runtime
             TAccumulate? seed) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
-        public IValueSetFacade ExpandValueSet(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);
+        public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);
 
 
         public object NotSupported() => throw new NotSupportedException();

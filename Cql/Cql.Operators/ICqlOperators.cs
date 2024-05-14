@@ -24,7 +24,7 @@ namespace Hl7.Cql.Operators
     {
         ICqlComparer Comparer { get; }
 
-        IValueSetFacade ExpandValueSet(CqlValueSet valueSet);
+        IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
 
         T? Convert<T>(object? from);
 

@@ -353,7 +353,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var a_ = context.Operators.RetrieveByValueSet<Claim>(null, null);
 		var b_ = NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(a_);
 		var c_ = this.Advanced_Illness();
-		var d_ = context.Operators.ExpandValueSet(c_);
+		var d_ = context.Operators.CreateValueSetFacade(c_);
 		var e_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(b_?.NonacuteInpatientDischarge, (IEnumerable<CqlCode>)d_);
 		bool? f_(CqlInterval<CqlDateTime> DischargeWithDiagnosis)
 		{
@@ -512,7 +512,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var a_ = context.Operators.RetrieveByValueSet<Claim>(null, null);
 		var b_ = NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(a_);
 		var c_ = this.Advanced_Illness();
-		var d_ = context.Operators.ExpandValueSet(c_);
+		var d_ = context.Operators.CreateValueSetFacade(c_);
 		var e_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(b_?.AcuteInpatientDischarge, (IEnumerable<CqlCode>)d_);
 		bool? f_(CqlInterval<CqlDateTime> InpatientDischarge)
 		{
