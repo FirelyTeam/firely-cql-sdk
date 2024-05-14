@@ -1,6 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-	<Import Project="..\cql-demo.props" />
-	<Import Project="Build\Elm.Targets.xml" />
-	
-</Project>

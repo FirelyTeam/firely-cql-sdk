@@ -26,7 +26,7 @@ namespace CLI
                 Console.Error.WriteLine("Missing required parameter: --d");
                 return ShowHelp();
             }
-            var dataFile = new FileInfo(dArg);
+            var dataFile = new FileInfo(dArg!);
             using var dataStream = dataFile.OpenRead();
             var bundle = dataStream.ParseFhir<Bundle>();
 
