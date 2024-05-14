@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project>
+
+	<PropertyGroup>
+		<LibrarySet>Demo</LibrarySet>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<ProjectIntermediateOutput>$(IntermediateOutputPath)</ProjectIntermediateOutput>
+	</PropertyGroup>
+
+	<Import Project="../../Cql/Build/Cql.Targets.xml" />
+
+	<!-- override the CqlDirectory property. Needs to be after import above
+	<PropertyGroup>
+		<CqlDirectory>"E:\Source\Repos2\ecqm-content-qicore-2024\input\cql"</CqlDirectory>
+	</PropertyGroup>-->
+
+</Project>

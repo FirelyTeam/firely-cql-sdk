@@ -1,0 +1,15 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+
+	<!-- Shared properties. $LibrarySet comes from respective measure project-->
+	<PropertyGroup>
+		<LibrarySetRoot>$(SolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
+		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
+		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
+		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
+		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
+	</PropertyGroup>
+	<PropertyGroup>
+		<Box>==============================================&#10;Text&#10;==============================================</Box>
+	</PropertyGroup>
+</Project>
