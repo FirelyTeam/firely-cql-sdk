@@ -1,10 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<Import Project="..\cql-demo.props" />
-	<Import Project="Build\Cql.Targets.xml" />
-	
+	<Import Project="Build\Mvn.Targets.xml" />
+
 	<ItemGroup>
-	  <Folder Include="Build\target\" />
-	  <Folder Include="Build\target\dependency\" />
+	  <ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
 	</ItemGroup>
+
+	<PropertyGroup>
+		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Resource Include="Build\pom.xml" />
+	</ItemGroup>
+
 </Project>
