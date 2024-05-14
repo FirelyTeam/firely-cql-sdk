@@ -1,41 +1,101 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Project>
+<Project TreatAsLocalProperty="CqlDirectory">
+	<Import Project="Common.props" />
+
+	<!-- Turn off visual studio msbuild automatics -->
 	<PropertyGroup>
-		<!-- If you change the version here, you also need to update it in the pom.xml file -->
-		<CqlToElmCliVersion>3.1.0</CqlToElmCliVersion>
+		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
+		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+	</PropertyGroup>	
+	
+	<Target Name="StartMessage"
+			BeforeTargets="PreBuildEvent">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
+	</Target>
+
+	<!-- CQL to ELM -->
+	<ItemGroup>
+		<CqlFiles Include="$(CqlDirectory)/*.cql" />	
+	</ItemGroup>
+
+	<PropertyGroup>
+		<JavaCommand>java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory</JavaCommand>
+		<ClassPath>-classpath $(TargetDependencies)/* org.cqframework.cql.cql2elm.cli.Main</ClassPath>
+		<JavaOutputFile>$(MSBuildProjectDirectory)/elm-build.log</JavaOutputFile>
+		<JavaArgs>-input $(CqlDirectory) -f JSON -output $(ElmDirectory) -locators true -result-types true -signatures All</JavaArgs>
+		<JavaCommandArgs>$(JavaCommand) $(ClassPath) $(JavaArgs)</JavaCommandArgs>
 	</PropertyGroup>
 
+	<Target Name="CQLtoELM"
+	         DependsOnTargets="StartMessage"
+			 Inputs="@(CqlFiles)"
+			 Outputs="@(CqlFiles->'$(ElmDirectory)/%(FileName).json')"
+	Condition="'$(LibrarySet)'!=''"
+		BeforeTargets="PreBuildEvent">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) CQL to ELM))" Importance="High" />
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) $(JavaCommandArgs)))" Importance="High" />
+		<Exec Command="$(JavaCommandArgs)"/>
+		<Exec Command="$(JavaCommandArgs)" ConsoleToMSBuild="true">
+			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />			
+			</Exec>			
+		<WriteLinesToFile
+            File="$(JavaOutputFile)"
+            Lines="@(OutputOfExec)"
+            Overwrite="true"
+            Encoding="Unicode"/>
+	</Target>
+	
 	<ItemGroup>
-		<ElmFiles Include="$(SolutionDir)\LibrarySets\Demo\Cql\*.json" />
-		<ElmFiles Include="$(SolutionDir)\LibrarySets\CMS\Cql\*.json" />
+		<ElmFiles Include="$(ElmDirectory)/*.json"/>
 	</ItemGroup>
-
-	<ItemGroup>
-		<JarDependencies Include="$(ProjectDir)\Build\target\dependency\*.jar" />
-	</ItemGroup>
-
-	<Target
-		Name="Download CQL to ELM CLI via Maven"
-		Inputs="Build\pom.xml"
-		Outputs="Build\target\dependency\cql-to-elm-cli-$(CqlToElmCliVersion).jar">
-		<Exec Command="mvn -f Build\pom.xml dependency:copy-dependencies" />
-	</Target>
-
-	<Target Name="CQL to ELM"
-	        DependsOnTargets="Download CQL to ELM CLI via Maven"
-	        AfterTargets="Build">
-		<Message Text="Converting CQL to ELM"/>
-		<Exec Command='java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.Main -input "$(SolutionDir)\LibrarySets\Demo\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\Demo\Elm" -locators true -result-types true -signatures All'/>
-		<Exec Command='java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.Main -input "$(SolutionDir)\LibrarySets\CMS\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\CMS\Elm" -locators true -result-types true -signatures All'/>
-	</Target>
-
-	<Target Name="Delete JAR Dependencies" AfterTargets="Clean">
-		<Message Text="Deleting JAR Dependencies..." />
-		<Delete Files="@(JarDependencies)" />
-	</Target>
-
-	<Target Name="Delete ELM" AfterTargets="Clean">
-		<Message Text="Deleting ELM files..." />
+	
+	<Target Name="Delete Elm" AfterTargets="Clean">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Elm files...))" Importance="High" />
 		<Delete Files="@(ElmFiles)" />
 	</Target>
+
+	<!-- ELM to CSharp -->
+	<PropertyGroup>
+		<CSharpDirectory>$(MSBuildProjectDirectory)</CSharpDirectory>
+	</PropertyGroup>
+
+	<Target Name="GenerateCSharp"
+			DependsOnTargets="CQLtoELM"
+			BeforeTargets="PreBuildEvent">
+		<PropertyGroup>
+			<PackagerCLI>$(SolutionDir)Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+			<OverrideUtc>--override-utc-date-time "1970-01-01T00:00:00Z"</OverrideUtc>
+			<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
+			<PackagerCLIArgs> $(OverrideUtc) --canonical-root-url $(CanonicalRootUrl) --elm $(ElmDirectory) --cql $(CqlDirectory) --cs $(CSharpDirectory) --fhir $(ResourcesDirectory)</PackagerCLIArgs>
+			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand>
+		</PropertyGroup>
+
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Converting ELM to CSharp&#10;$(PackagerCLICommand)))" Importance="High" />
+		<Exec Command='$(PackagerCLICommand)' />
+
+		<ItemGroup>
+			<!-- Keep relative path else complains about duplicates-->
+			<CSharpFiles Include="**/*.cs" />
+			<Compile Include="@(CSharpFiles)" Exclude="@(Compile)" KeepDuplicates="false"/>
+		</ItemGroup>
+	</Target>
+	
+	<ItemGroup>
+		<CSharpFiles Include="**/*.cs" />
+	</ItemGroup>
+
+	<Target Name="Delete CSharp" AfterTargets="Clean">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting CSharp files...))" Importance="High" />
+		<Delete Files="@(CSharpFiles)" />
+	</Target>
+
+	<ItemGroup>
+		<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
+	</ItemGroup>
+
+	<Target Name="Delete Resources" AfterTargets="Clean">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Resource files...))" Importance="High" />
+		<Delete Files="@(ResourceFiles)" />
+	</Target>
+
 </Project>
