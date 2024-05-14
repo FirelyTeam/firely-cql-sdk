@@ -26,9 +26,7 @@ namespace CLI
                 Console.Error.WriteLine("Missing required parameter: --d");
                 return ShowHelp();
             }
-#pragma warning disable CS8604 // Possible null reference argument.
-            var dataFile = new FileInfo(dArg);
-#pragma warning restore CS8604 // Possible null reference argument.
+            var dataFile = new FileInfo(dArg!);
             using var dataStream = dataFile.OpenRead();
             var bundle = dataStream.ParseFhir<Bundle>();
 
