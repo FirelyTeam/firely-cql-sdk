@@ -12,8 +12,8 @@
 		<ProjectReference Include="..\Cql\Cql.csproj" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 	</ItemGroup>
-	
+
 	<Import Project="Build/Build.Targets.xml" />
-	
+
 
 </Project>

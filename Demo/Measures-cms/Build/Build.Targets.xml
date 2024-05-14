@@ -4,12 +4,12 @@
 	<PropertyGroup>
 		<LibrarySet>CMS</LibrarySet>
 	</PropertyGroup>
-		
+
 	<Import Project="../../Cql/Build/Cql.Targets.xml" />
-	
+
 	<!-- override the CqlDirectory property. Needs to be after import above
 	<PropertyGroup>
 		<CqlDirectory>"E:\Source\Repos2\ecqm-content-qicore-2024\input\cql"</CqlDirectory>
 	</PropertyGroup>-->
-	
+
 </Project>

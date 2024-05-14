@@ -14,7 +14,7 @@
 			BeforeTargets="PreBuildEvent">
 		<Message Text="$(Box.Replace(Text, Starting MVN))" Importance="High" />
 	</Target>
-	
+
 	<ItemGroup>
 		<Folder Include="$(TargetDependencies)" />
 	</ItemGroup>
@@ -34,7 +34,7 @@
             Overwrite="true"
             Encoding="Unicode"/>
 	</Target>
-	
+
 	<ItemGroup>
 		<JarDependencies Include="$(TargetDependencies)/*.jar" />
 	</ItemGroup>

@@ -6,7 +6,7 @@
 		<LibrarySetRoot>$(SolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
-		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>	
+		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 	</PropertyGroup>
 	<PropertyGroup>

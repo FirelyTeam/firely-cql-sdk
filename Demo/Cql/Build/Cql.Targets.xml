@@ -6,8 +6,8 @@
 	<PropertyGroup>
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-	</PropertyGroup>	
-	
+	</PropertyGroup>
+
 	<Target Name="StartMessage"
 			BeforeTargets="PreBuildEvent">
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
@@ -15,7 +15,7 @@
 
 	<!-- CQL to ELM -->
 	<ItemGroup>
-		<CqlFiles Include="$(CqlDirectory)/*.cql" />	
+		<CqlFiles Include="$(CqlDirectory)/*.cql" />
 	</ItemGroup>
 
 	<PropertyGroup>
@@ -36,19 +36,19 @@
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) $(JavaCommandArgs)))" Importance="High" />
 		<Exec Command="$(JavaCommandArgs)"/>
 		<Exec Command="$(JavaCommandArgs)" ConsoleToMSBuild="true">
-			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />			
-			</Exec>			
+			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
+			</Exec>
 		<WriteLinesToFile
             File="$(JavaOutputFile)"
             Lines="@(OutputOfExec)"
             Overwrite="true"
             Encoding="Unicode"/>
 	</Target>
-	
+
 	<ItemGroup>
 		<ElmFiles Include="$(ElmDirectory)/*.json"/>
 	</ItemGroup>
-	
+
 	<Target Name="Delete Elm" AfterTargets="Clean">
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Elm files...))" Importance="High" />
 		<Delete Files="@(ElmFiles)" />
@@ -79,7 +79,7 @@
 			<Compile Include="@(CSharpFiles)" Exclude="@(Compile)" KeepDuplicates="false"/>
 		</ItemGroup>
 	</Target>
-	
+
 	<ItemGroup>
 		<CSharpFiles Include="**/*.cs" />
 	</ItemGroup>
