@@ -319,6 +319,11 @@ namespace Hl7.Cql.Compiler
                         Tuple e            => Tuple(e),
                         Union e            => Union(e),
                         ValueSetRef e      => ValueSetRef(e),
+
+                        // NOTE: Do not rename ICqlOperators.CreateValueSetFacade to ExpandValueSet
+                        ExpandValueSet e => _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.CreateValueSetFacade), TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
+
+                        // All other Elm types matches on type name to the ICqlOperators method name
                         _ => _cqlOperatorsBinder.BindToMethod(element.GetType().Name, TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
                         //@formatter:on
                     };
@@ -363,6 +368,7 @@ namespace Hl7.Cql.Compiler
                     End or
                     Exists or
                     Exp or
+                    ExpandValueSet or
                     Flatten or
                     Floor or
                     IsFalse or
@@ -392,7 +398,6 @@ namespace Hl7.Cql.Compiler
                     EndsWith or
                     Equal or
                     Expand or
-                    ExpandValueSet or
                     Greater or
                     GreaterOrEqual or
                     HighBoundary or
