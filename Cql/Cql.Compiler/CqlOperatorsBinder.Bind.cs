@@ -11,8 +11,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Security;
+using System.Text;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Operators;
 using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
 
@@ -22,29 +23,7 @@ namespace Hl7.Cql.Compiler;
 #pragma warning disable CS1591
 internal partial class CqlOperatorsBinder
 {
-    private static readonly MethodAndParametersByParamCountByName
-        ICqlOperatorsMethods =
-            typeof(ICqlOperators)
-                .GetMethods(BindingFlags.Instance | BindingFlags.Public)
-                .Select(method => (method, parameters:method.GetParameters()))
-                .GroupBy(g => g.method.Name)
-                .ToDictionary(
-                    g => g.Key,
-                    g =>
-                        g.GroupBy(g2 => g2.parameters.Length)
-                         .ToDictionary(
-                             g2 => g2.Key,
-                             g2 => g2.ToArray())
-                         .AsReadOnly())
-                .AsReadOnly();
-
-    private static readonly TypeFormatterOptions TypeFormatterOptions = new(PreferKeywords:true, HideNamespaces:true);
-
-    private static readonly MethodFormatterOptions CSharpWriteMethodOptions = new (
-        methodFormat: method => $"\n\t* {method.Name}({method.Parameters})",
-        parameterFormatting: new (
-            parameterFormat: parameter => $"{parameter.Type}",
-            typeFormatting: TypeFormatterOptions));
+    private static readonly CqlOperatorsMethodsCache ICqlOperatorsMethods = new();
 
     ///  <summary>
     ///
@@ -69,15 +48,21 @@ internal partial class CqlOperatorsBinder
     ///
     ///  </summary>
     ///  <param name="methodName">The exact method name to bind to. When there are overloads, the correct method will be resolved.</param>
-    ///  <param name="arguments">When an overload exists, returns the arguments that can be provided to this method. Conversions may be included to allow this.</param>
+    ///  <param name="methodArguments">When an overload exists, returns the arguments that can be provided to this method. Conversions may be included to allow this.</param>
+    ///  <param name="genericTypeArguments">When binding to a generic method definition, these are the type arguments.</param>
     ///  <param name="throwError">Whether to throw an error if no method overload could be found. This is the default behavior. Otherwise, returns the tuple with method as null.</param>
     ///  <exception cref="ArgumentException">If no method overload is discovered, and if <paramref name="throwError"/> is <c>true</c>.</exception>
     private (MethodInfo? method, Expression[] arguments) ResolveMethodInfoWithPotentialArgumentConversions(
         string methodName,
-        Expression[] arguments,
+        Expression[] methodArguments,
+        Type[] genericTypeArguments,
         bool throwError = true)
     {
-        (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates = ResolveMethodInfosWithPotentialArgumentConversions(methodName, arguments).ToArray();
+        if (_logger.IsEnabled(LogLevel.Debug))
+            _logger.LogDebug("Resolving method overload for {input}", new StringBuilder().AppendCSharp(methodName, methodArguments, genericTypeArguments, Defaults.MethodCSharpFormat));
+
+        (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates =
+            ResolveMethodInfosWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments).ToArray();
 
         var candidate = candidates switch
         {
@@ -90,10 +75,32 @@ internal partial class CqlOperatorsBinder
         {
             if (throwError)
             {
-                throw new ArgumentException(
-                    NoCandidatesErrorMessage(),
-                    nameof(methodName));
+                throw new CannotBindToCqlOperatorError(
+                    methodName,
+                    methodArguments,
+                    genericTypeArguments,
+                    ICqlOperatorsMethods.GetMethodsByName(methodName),
+                    Defaults.MethodCSharpFormat)
+                    .ToException();
             }
+        }
+
+        if (_logger.IsEnabled(LogLevel.Debug))
+        {
+            MethodCSharpFormat methodCSharpFormat =
+                Defaults.MethodCSharpFormat with
+                {
+                    ParameterFormat = Defaults.MethodCSharpFormat.ParameterFormat with
+                    {
+                        // Show the parameter type, and conversion method
+                        ParameterFormat = t => $"{t.Type} as {candidate.conversionMethods[t.Position].ToString()}"
+                    }
+                };
+
+            _logger.LogDebug(
+                "Resolved with score {score} to method overload {candidate}",
+                Score(candidate!),
+                new StringBuilder().AppendCSharp(candidate.method!, methodCSharpFormat));
         }
 
         return (candidate.method, candidate.arguments);
@@ -101,20 +108,29 @@ internal partial class CqlOperatorsBinder
         (MethodInfo? method, Expression[] arguments, TypeConversion[] conversionMethods) PickCandidate(
             (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates)
         {
-            if (arguments.Length > 0)
+            if (methodArguments.Length > 0)
             {
-                var scoredCandidates = candidates
-                    .SelectToArray(candidate => (candidate, score:Score(candidate)));
+                var scoredCandidates = candidates.SelectToArray(candidate => (candidate, score:Score(candidate)));
                 Array.Sort(scoredCandidates, (a, b) => a.score.CompareTo(b.score));
 
-                var inputText = InputMethodAndParametersToString();
-                var scoredCandidatesText = string.Concat(
-                    scoredCandidates.Select(t => $"{t.candidate.method.WriteCSharp(CSharpWriteMethodOptions)} ({t.score})"));
+                StringBuilder sbInput = new();
+                sbInput.Append(Defaults.NextItem);
+                sbInput.AppendCSharp(methodName, methodArguments, genericTypeArguments);
+
+                StringBuilder sbCandidatesAndScore = new();
+                foreach (var ((method, methodArguments, _), score) in scoredCandidates)
+                {
+                    sbCandidatesAndScore.Append(Defaults.NextItem);
+                    sbCandidatesAndScore.AppendCSharp(method.Name, methodArguments, genericTypeArguments);
+                    sbCandidatesAndScore.Append(" (");
+                    sbCandidatesAndScore.Append(score);
+                    sbCandidatesAndScore.Append(')');
+                }
 
                 _logger?.LogDebug(
-                    "Multiple candidates found for method {input}\nPicking the top item with lowest score: {candidatesAndScore}",
-                    inputText,
-                    scoredCandidatesText);
+                    "Multiple candidates found for method:{input}\nPicking the top item with lowest score: {candidatesAndScore}",
+                    sbInput,
+                    sbCandidatesAndScore);
 
                 return scoredCandidates[0].candidate;
             }
@@ -122,58 +138,83 @@ internal partial class CqlOperatorsBinder
             throw new InvalidOperationException("");
         }
 
-        string NoCandidatesErrorMessage()
-        {
-            var inputText = InputMethodAndParametersToString();
-
-            var overloadsText =
-                string.Concat(
-                    ICqlOperatorsMethods
-                        .GetMethodsByName(methodName)
-                        .Select(t => t.method.WriteCSharp(CSharpWriteMethodOptions))
-                );
-            return $$"""
-                     Mo suitable method could be bound on:{{inputText}}
-                     from the following method overloads:{{overloadsText}}
-                     """;
-        }
-
-        string InputMethodAndParametersToString() =>
-            $"{methodName} ({arguments.SelectToArray(a => a.Type.WriteCSharp(CSharpWriteMethodOptions.ParameterFormatterOptions.TypeFormatterOptions))})";
-
         double Score((MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods) candidate)
         {
-            var score = candidate.conversionMethods
-                         .Where(cm => cm > TypeConversion.NoMatch)
-                         .Select(cm => (double)cm)
-                         .Average();
+            var score =
+                PadWhenEmpty( // Cannot get average of empty list
+                    candidate
+                        .conversionMethods
+                        .Where(cm => cm > TypeConversion.NoMatch)
+                        .Select(cm => (double)cm),
+                    padWhenEmpty: (double)TypeConversion.ExactType)
+                    .Average();
             return score;
+        }
+
+        static IEnumerable<T> PadWhenEmpty<T>(IEnumerable<T> source, T padWhenEmpty)
+        {
+            using var enumerator = source.GetEnumerator();
+            if (!enumerator.MoveNext())
+                yield return padWhenEmpty;
+            else
+            {
+                do
+                {
+                    yield return enumerator.Current;
+                } while (enumerator.MoveNext());
+            }
         }
     }
 
     private IEnumerable<(MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)>
         ResolveMethodInfosWithPotentialArgumentConversions(
             string methodName,
-            Expression[] arguments)
+            Expression[] arguments,
+            Type[] genericTypeArguments)
     {
         Expression[] args = arguments; // So we don't modify the original array
 
+        if (genericTypeArguments.Length > 0)
+        {
+            var methods = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, args.Length);
+            foreach (var method in methods)
+            {
+                if (method.IsGenericMethodDefinition
+                    && method.GetGenericArguments().Length == genericTypeArguments.Length)
+                {
+                    var genericMethod = method.MakeGenericMethod(genericTypeArguments);
+                    var parameters = genericMethod.GetParameters();
+
+                    if (TryBindArguments(
+                            parameters,
+                            out var genericMethodArgs,
+                            out var conversions))
+                    {
+                        yield return (genericMethod, genericMethodArgs, conversions);
+                        break;
+                    }
+                }
+            }
+            yield break;
+        }
+
         for (int i = 0; i < 2; i++) // Try twice, first with all arguments, then without the last one
         {
-            var methodsWithParameters = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, args.Length);
+            var methods = ICqlOperatorsMethods.GetMethodsByNameAndParamCount(methodName, args.Length);
 
             if (args.Length == 0)
             {
                 // No conversions, find method without parameters
-                foreach (var (method, _) in methodsWithParameters)
+                foreach (var method in methods)
                 {
                     yield return (method, [], []);
                 }
                 break;
             }
 
-            foreach (var (method, methodParameters) in methodsWithParameters)
+            foreach (var method in methods)
             {
+                var methodParameters = method.GetParameters();
                 if (method is not { IsGenericMethodDefinition: true })
                 {
                     // Non-generic method
@@ -188,10 +229,20 @@ internal partial class CqlOperatorsBinder
                          argIndexForGenericMethod
                              ++) // Try to get generic type from argument up to the second one
                     {
-                        if (!args[argIndexForGenericMethod].Type.IsGenericType)
+                        Type? genericTypeArg = null;
+                        var argType = args[argIndexForGenericMethod].Type;
+                        var parameterType = methodParameters[i].ParameterType;
+                        var argIsGeneric = argType.IsGenericType;
+                        var paramIsGeneric = parameterType.IsGenericMethodParameter;
+
+                        if (paramIsGeneric && !argIsGeneric)
+                            genericTypeArg = argType; // Already a generic argument, try again
+                        else if (argIsGeneric)
+                            genericTypeArg = argType.GetGenericArguments().Single();
+
+                        if (genericTypeArg is null)
                             continue; // Not a generic argument, try again
 
-                        var genericTypeArg = args[argIndexForGenericMethod].Type.GetGenericArguments().Single();
                         MethodInfo genericMethod;
                         try
                         {
@@ -202,9 +253,15 @@ internal partial class CqlOperatorsBinder
                             // Generic type argument is not valid for this method due to constraints
                             continue;
                         }
-                        if (TryBindArguments(genericMethod.GetParameters(), out var genericMethodArgs,
-                                             out var conversions))
+
+                        if (TryBindArguments(
+                                genericMethod.GetParameters(),
+                                out var genericMethodArgs,
+                                out var conversions))
+                        {
                             yield return (genericMethod, genericMethodArgs, conversions);
+                            break;
+                        }
                     }
                 }
             }
@@ -226,7 +283,8 @@ internal partial class CqlOperatorsBinder
 
             for (int i = 0; i < args.Length; i++)
             {
-                if (!TryConvert(args[i], parameters[i].ParameterType, out var t))
+                Type to = parameters[i].ParameterType;
+                if (!TryConvert(args[i], to, out var t))
                     return false;
 
                 (bindArgs[i], bindConversions[i]) = t;
@@ -245,10 +303,4 @@ internal partial class CqlOperatorsBinder
         MethodInfo method,
         params Expression[] expressions) =>
         Expression.Call(CqlExpressions.Operators_PropertyExpression, method, expressions);
-
-    private static MethodCallExpression BindToGenericMethod(
-        string methodName,
-        Type[] genericTypeArguments,
-        params Expression[] arguments) =>
-        Expression.Call(CqlExpressions.Operators_PropertyExpression, methodName, genericTypeArguments, arguments);
 }

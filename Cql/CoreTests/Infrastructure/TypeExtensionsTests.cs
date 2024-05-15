@@ -47,11 +47,11 @@ public class TypeExtensionsTests
 
         Assert.AreEqual(
             expected: (StructType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, StructType));
 
         Assert.AreEqual(
             expected: (ReferenceType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, ReferenceType));
 
         Assert.AreEqual(
             expected: (NullableEnumType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
@@ -59,15 +59,15 @@ public class TypeExtensionsTests
 
         Assert.AreEqual(
             expected: (EnumType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, EnumType));
 
         Assert.AreEqual(
             expected: (GenericDefinitionType.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, GenericDefinitionType));
 
         Assert.AreEqual(
             expected: (GenericStructTypeDefinition.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
-            actual: (false, null));
+            actual: (false, GenericStructTypeDefinition));
 
         Assert.AreEqual(
             expected: (NullableGenericStructTypeDefinition.IsNullableValueType(underlyingType: out underlyingType), underlyingType),
@@ -245,10 +245,18 @@ public class TypeExtensionsTests
     {
         void Method();
 
-        IList<int> Join(
+        IList<int> NonGenericMethod(
             int a,
             int b,
             int c);
+
+        IList<T> GenericMethod<T1, T2, T3, T>(
+            T1 a,
+            T2[] b,
+            IEnumerable<T3>[] c)
+            where T1: struct, IComparable
+            where T2: notnull, new()
+            where T3: class, new();
     }
 
     public abstract class MyGenericClassBase<T> :  IGenericInterface<T>
@@ -277,5 +285,8 @@ public readonly record struct EmptyStruct
         public readonly record struct Nested2 { }
 
         public readonly record struct GenericNested2<T1,T2> { }
+
+        public delegate TOut NestedFunc<in TIn, out TOut>(TIn input)
+            where TIn: notnull;
     };
 }

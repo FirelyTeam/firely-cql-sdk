@@ -1,4 +1,6 @@
-﻿/*
+﻿
+
+/*
  * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -6,6 +8,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System;
+using System.Threading;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
@@ -24,8 +27,11 @@ internal class CqlCompilerFactory :
 {
     protected int? CacheSize { get; }
 
-    public CqlCompilerFactory(ILoggerFactory loggerFactory, int? cacheSize = null) :
-        base(loggerFactory: loggerFactory) =>
+    public CqlCompilerFactory(
+        ILoggerFactory loggerFactory,
+        CancellationToken cancellationToken = default,
+        int ? cacheSize = null) :
+        base(loggerFactory, cancellationToken) =>
         CacheSize = cacheSize;
 
 
@@ -36,8 +42,10 @@ internal class CqlCompilerFactory :
     public virtual TypeConverter TypeConverter => Singleton(fn: NewTypeConverter);
     protected virtual TypeConverter NewTypeConverter()
     {
-        var converter = FhirTypeConverter.Create(ModelInspector, CacheSize);
-        converter.LogAllConverters(Logger<TypeConverter>());
+        var converter = FhirTypeConverter
+                .Create(ModelInspector, CacheSize)
+                .UseLogger(Logger<TypeConverter>());
+        converter.CaptureAvailableConverters();
         return converter;
     }
 
@@ -80,11 +88,12 @@ internal class CqlCompilerFactory :
     public virtual ExpressionBuilder ExpressionBuilder => Singleton(fn: NewExpressionBuilder);
 
     protected virtual ExpressionBuilder NewExpressionBuilder() =>
-        new(Logger<ExpressionBuilder>(),
-            cqlOperatorsBinder: CqlOperatorsBinder,
-            typeManager: TypeManager,
-            typeConverter: TypeConverter,
-            typeResolver: TypeResolver,
-            cqlContextBinder: CqlContextBinder,
-            expressionBuilderSettings: Singleton(fn: NewLibraryDefinitionBuilderSettings));
+        new ExpressionBuilder(
+            Logger<ExpressionBuilder>(),
+            Singleton(fn: NewLibraryDefinitionBuilderSettings),
+            CqlOperatorsBinder,
+            TypeManager,
+            TypeConverter,
+            TypeResolver,
+            CqlContextBinder);
 }

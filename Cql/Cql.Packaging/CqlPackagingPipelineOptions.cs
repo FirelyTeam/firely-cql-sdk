@@ -23,6 +23,9 @@ internal partial class CqlToResourcePackagingOptions
     public const string ArgNameForce = "--f";
     public bool Force { get; set; } // TODO: There are no usages for this, Remove or implement!
 
+    public const string ArgNameDontClearLog = "--log-dont-clear";
+    public bool DontClearLog { get; set; }  // Internal use only!
+
     public const string ArgNameCanonicalRootUrl = "--canonical-root-url";
     public Uri? CanonicalRootUrl { get; set; }
 }

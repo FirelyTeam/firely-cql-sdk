@@ -28,6 +28,9 @@ namespace Hl7.Cql.Packager;
 
 public class Program
 {
+    private static IDictionary<string, string> SwitchMappings { get; }
+
+
     public static int Main(string[] args)
     {
 #if DEBUG // Latest Visual Studio can't handle the $(SolutionDir) args in the launchSettings!!
@@ -57,37 +60,15 @@ public class Program
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder()
             .ConfigureAppConfiguration((context, config) => ConfigureAppConfiguration(config, args))
-            .ConfigureLogging((context, logging) => ConfigureLogging(logging))
+            .ConfigureLogging((context, logging) => ConfigureLogging(context, logging))
             .ConfigureServices((context, services) => ConfigureServices(context, services));
-
-    private static IDictionary<string, string> BuildSwitchMappings()
-    {
-        const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
-        const string CSharpResourceWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
-        const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
-
-        return new SortedDictionary<string, string>
-        {
-            // @formatter:off
-            [CqlToResourcePackagingOptions.ArgNameElmDirectory]     = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
-            [CqlToResourcePackagingOptions.ArgNameCqlDirectory]     = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
-            [CqlToResourcePackagingOptions.ArgNameDebug]            = PackageSection + nameof(CqlToResourcePackagingOptions.Debug),
-            [CqlToResourcePackagingOptions.ArgNameForce]            = PackageSection + nameof(CqlToResourcePackagingOptions.Force),
-            [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
-
-            [CSharpCodeWriterOptions.ArgNameOutDirectory]           = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
-            [CSharpCodeWriterOptions.ArgNameTypeFormat]             = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.TypeFormat),
-
-            [FhirResourceWriterOptions.ArgNameOutDirectory]         = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
-            [FhirResourceWriterOptions.ArgNameOverrideDate]         = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
-            // @formatter:on
-        };
-    }
 
     private static string Usage { get; }
 
     static Program()
     {
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+        SwitchMappings = BuildSwitchMappings();
         Usage = $"""
                  Packager CLI Usage:
 
@@ -107,16 +88,40 @@ public class Program
                      {"", -26-19-1} If omitted the current date time will be used.
                  """;
         static string Optional(string s) => $"[{s}]";
+
+        static IDictionary<string, string> BuildSwitchMappings()
+        {
+            const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
+            const string CSharpResourceWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
+            const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
+
+            return new SortedDictionary<string, string>
+            {
+                // @formatter:off
+                [CqlToResourcePackagingOptions.ArgNameElmDirectory] = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
+                [CqlToResourcePackagingOptions.ArgNameCqlDirectory] = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
+                [CqlToResourcePackagingOptions.ArgNameDebug] = PackageSection + nameof(CqlToResourcePackagingOptions.Debug),
+                [CqlToResourcePackagingOptions.ArgNameForce] = PackageSection + nameof(CqlToResourcePackagingOptions.Force),
+                [CqlToResourcePackagingOptions.ArgNameDontClearLog] = PackageSection + nameof(CqlToResourcePackagingOptions.DontClearLog),
+                [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
+
+                [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+                [CSharpCodeWriterOptions.ArgNameTypeFormat] = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.TypeFormat),
+
+                [FhirResourceWriterOptions.ArgNameOutDirectory] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
+                [FhirResourceWriterOptions.ArgNameOverrideDate] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
+                // @formatter:on
+            };
+        }
     }
 
 
     private static void ConfigureAppConfiguration(IConfigurationBuilder config, string[] args)
     {
-        IDictionary<string, string> switchMappings = BuildSwitchMappings();
-        config.AddCommandLine(args, switchMappings);
+        config.AddCommandLine(args, SwitchMappings);
     }
 
-    private static void ConfigureLogging(ILoggingBuilder logging)
+    private static void ConfigureLogging(HostBuilderContext context, ILoggingBuilder logging)
     {
         logging.ClearProviders();
 
@@ -130,7 +135,11 @@ public class Program
         });
 
         var logFile = Path.Combine(".", "build.log");
-        File.Delete(logFile);
+
+        bool shouldClearLog = !context.Configuration.GetValue<bool>(SwitchMappings[CqlToResourcePackagingOptions.ArgNameDontClearLog]);
+        if (shouldClearLog)
+            File.Delete(logFile);
+
         Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
             .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)

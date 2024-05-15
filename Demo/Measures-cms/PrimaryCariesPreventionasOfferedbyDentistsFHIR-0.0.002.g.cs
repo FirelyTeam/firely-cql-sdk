@@ -37,9 +37,9 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
     internal Lazy<bool?> __Stratification_1;
     internal Lazy<bool?> __Stratification_2;
     internal Lazy<bool?> __Stratification_3;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -69,9 +69,9 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
         __Stratification_1 = new Lazy<bool?>(this.Stratification_1_Value);
         __Stratification_2 = new Lazy<bool?>(this.Stratification_2_Value);
         __Stratification_3 = new Lazy<bool?>(this.Stratification_3_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -166,10 +166,11 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		bool? d_(Encounter ValidEncounter)
 		{
 			var f_ = this.Measurement_Period();
-			var g_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, g_, "day");
+			var g_ = ValidEncounter?.Period;
+			var h_ = FHIRHelpers_4_3_000.ToInterval(g_);
+			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
 
-			return h_;
+			return i_;
 		};
 		var e_ = context.Operators.Where<Encounter>(c_, d_);
 
@@ -230,23 +231,25 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		var c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure FluorideApplication)
 		{
-			var j_ = FHIRHelpers_4_3_000.ToValue(FluorideApplication?.Performed);
-			var k_ = QICoreCommon_2_0_000.toInterval(j_);
-			var l_ = context.Operators.End(k_);
-			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.In<CqlDateTime>(l_, m_, "day");
+			var j_ = FluorideApplication?.Performed;
+			var k_ = FHIRHelpers_4_3_000.ToValue(j_);
+			var l_ = QICoreCommon_2_0_000.toInterval(k_);
+			var m_ = context.Operators.End(l_);
+			var n_ = this.Measurement_Period();
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
 
-			return n_;
+			return o_;
 		};
 		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlDate f_(Procedure FluorideApplication)
 		{
-			var o_ = FHIRHelpers_4_3_000.ToValue(FluorideApplication?.Performed);
-			var p_ = QICoreCommon_2_0_000.toInterval(o_);
-			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.DateFrom(q_);
+			var p_ = FluorideApplication?.Performed;
+			var q_ = FHIRHelpers_4_3_000.ToValue(p_);
+			var r_ = QICoreCommon_2_0_000.toInterval(q_);
+			var s_ = context.Operators.End(r_);
+			var t_ = context.Operators.DateFrom(s_);
 
-			return r_;
+			return t_;
 		};
 		var g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
 		var h_ = context.Operators.Count<CqlDate>(g_);
@@ -313,7 +316,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	public bool? Stratification_3() => 
 		__Stratification_3.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -321,10 +324,10 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -332,10 +335,10 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -343,7 +346,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

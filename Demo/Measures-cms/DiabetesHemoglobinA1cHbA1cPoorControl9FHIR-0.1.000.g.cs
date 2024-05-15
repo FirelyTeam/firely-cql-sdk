@@ -25,9 +25,9 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
     internal Lazy<CqlValueSet> __HbA1c_Laboratory_Test;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
@@ -58,9 +58,9 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
         __HbA1c_Laboratory_Test = new Lazy<CqlValueSet>(this.HbA1c_Laboratory_Test_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
@@ -128,7 +128,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -136,10 +136,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -147,10 +147,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -158,7 +158,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -245,47 +245,53 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			{
 				bool m_()
 				{
-					var p_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
-					var q_ = p_ is CqlDateTime;
+					var p_ = RecentHbA1c?.Effective;
+					var q_ = FHIRHelpers_4_3_000.ToValue(p_);
+					var r_ = q_ is CqlDateTime;
 
-					return q_;
+					return r_;
 				};
 				bool n_()
 				{
-					var r_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
-					var s_ = r_ is CqlInterval<CqlDateTime>;
-
-					return s_;
-				};
-				bool o_()
-				{
-					var t_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
-					var u_ = t_ is CqlDateTime;
+					var s_ = RecentHbA1c?.Effective;
+					var t_ = FHIRHelpers_4_3_000.ToValue(s_);
+					var u_ = t_ is CqlInterval<CqlDateTime>;
 
 					return u_;
 				};
+				bool o_()
+				{
+					var v_ = RecentHbA1c?.Effective;
+					var w_ = FHIRHelpers_4_3_000.ToValue(v_);
+					var x_ = w_ is CqlDateTime;
+
+					return x_;
+				};
 				if (m_())
 				{
-					var v_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
+					var y_ = RecentHbA1c?.Effective;
+					var z_ = FHIRHelpers_4_3_000.ToValue(y_);
 
-					return ((v_ as CqlDateTime) as object);
+					return ((z_ as CqlDateTime) as object);
 				}
 				else if (n_())
 				{
-					var w_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
+					var aa_ = RecentHbA1c?.Effective;
+					var ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
 
-					return ((w_ as CqlInterval<CqlDateTime>) as object);
+					return ((ab_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (o_())
 				{
-					var x_ = FHIRHelpers_4_3_000.ToValue(RecentHbA1c?.Effective);
+					var ac_ = RecentHbA1c?.Effective;
+					var ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 
-					return ((x_ as CqlDateTime) as object);
+					return ((ad_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var j_ = QICoreCommon_2_0_000.Latest(i_());
 			var k_ = this.Measurement_Period();
@@ -296,11 +302,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			var y_ = FHIRHelpers_4_3_000.ToValue(@this?.Effective);
-			var z_ = QICoreCommon_2_0_000.ToInterval(y_);
-			var aa_ = context.Operators.Start(z_);
+			var ae_ = @this?.Effective;
+			var af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
+			var ah_ = context.Operators.Start(ag_);
 
-			return aa_;
+			return ah_;
 		};
 		var g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		var h_ = context.Operators.Last<Observation>(g_);
@@ -351,47 +358,53 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			{
 				bool l_()
 				{
-					var o_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
-					var p_ = o_ is CqlDateTime;
+					var o_ = NoHbA1c?.Effective;
+					var p_ = FHIRHelpers_4_3_000.ToValue(o_);
+					var q_ = p_ is CqlDateTime;
 
-					return p_;
+					return q_;
 				};
 				bool m_()
 				{
-					var q_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
-					var r_ = q_ is CqlInterval<CqlDateTime>;
-
-					return r_;
-				};
-				bool n_()
-				{
-					var s_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
-					var t_ = s_ is CqlDateTime;
+					var r_ = NoHbA1c?.Effective;
+					var s_ = FHIRHelpers_4_3_000.ToValue(r_);
+					var t_ = s_ is CqlInterval<CqlDateTime>;
 
 					return t_;
 				};
+				bool n_()
+				{
+					var u_ = NoHbA1c?.Effective;
+					var v_ = FHIRHelpers_4_3_000.ToValue(u_);
+					var w_ = v_ is CqlDateTime;
+
+					return w_;
+				};
 				if (l_())
 				{
-					var u_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
+					var x_ = NoHbA1c?.Effective;
+					var y_ = FHIRHelpers_4_3_000.ToValue(x_);
 
-					return ((u_ as CqlDateTime) as object);
+					return ((y_ as CqlDateTime) as object);
 				}
 				else if (m_())
 				{
-					var v_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
+					var z_ = NoHbA1c?.Effective;
+					var aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
-					return ((v_ as CqlInterval<CqlDateTime>) as object);
+					return ((aa_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (n_())
 				{
-					var w_ = FHIRHelpers_4_3_000.ToValue(NoHbA1c?.Effective);
+					var ab_ = NoHbA1c?.Effective;
+					var ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
-					return ((w_ as CqlDateTime) as object);
+					return ((ac_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
-				};
+				}
 			};
 			var i_ = QICoreCommon_2_0_000.Latest(h_());
 			var j_ = this.Measurement_Period();

@@ -39,9 +39,9 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
     internal Lazy<CqlValueSet> __Telephone_Visits;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter;
     internal Lazy<bool?> __Initial_Population;
@@ -79,9 +79,9 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
         __Telephone_Visits = new Lazy<CqlValueSet>(this.Telephone_Visits_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounter = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
@@ -254,7 +254,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -262,10 +262,10 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -273,10 +273,10 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -284,7 +284,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -348,11 +348,12 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 		bool? at_(Encounter ValidEncounter)
 		{
 			var av_ = this.Measurement_Period();
-			var aw_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var ax_ = QICoreCommon_2_0_000.ToInterval((aw_ as object));
-			var ay_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ax_, "day");
+			var aw_ = ValidEncounter?.Period;
+			var ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
+			var ay_ = QICoreCommon_2_0_000.ToInterval((ax_ as object));
+			var az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ay_, "day");
 
-			return ay_;
+			return az_;
 		};
 		var au_ = context.Operators.Where<Encounter>(as_, at_);
 
@@ -413,11 +414,12 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 		bool? d_(Observation FallsScreening)
 		{
 			var g_ = this.Measurement_Period();
-			var h_ = FHIRHelpers_4_3_000.ToValue(FallsScreening?.Effective);
-			var i_ = QICoreCommon_2_0_000.ToInterval(h_);
-			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
+			var h_ = FallsScreening?.Effective;
+			var i_ = FHIRHelpers_4_3_000.ToValue(h_);
+			var j_ = QICoreCommon_2_0_000.ToInterval(i_);
+			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
-			return j_;
+			return k_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 		var f_ = context.Operators.Exists<Observation>(e_);

@@ -131,7 +131,15 @@ namespace Hl7.Cql.CodeGeneration.NET
                     sb.Append(ConvertExpression(indent + 1, childStatement));
                 }
 
-                sb.AppendLine(";");
+                switch (childStatement)
+                {
+                    case CaseWhenThenExpression:
+                        sb.AppendLine("");
+                        break;
+                    default:
+                        sb.AppendLine(";");
+                        break;
+                }
                 isFirstStatement = false;
             }
 
@@ -547,7 +555,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static readonly ObjectIDGenerator Gen = new();
 #pragma warning restore SYSLIB0050 // Type or member is obsolete
 
-        private static readonly TypeFormatterOptions? TypeToCSharpStringOptions = new(PreferKeywords: true, HideNamespaces: true);
+        private static readonly TypeCSharpFormat? TypeToCSharpStringOptions = new(UseKeywords: true, NoNamespaces: true);
 
         private static string ParamName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
 
@@ -636,7 +644,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public static string PrettyTypeName(Type type)
         {
-            string result = type.WriteCSharp(TypeToCSharpStringOptions).ToString()!;
+            string result = type.ToCSharpString(TypeToCSharpStringOptions);
             return result;
         }
 

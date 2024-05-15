@@ -14,7 +14,9 @@ namespace Hl7.Cql.Abstractions.Infrastructure;
 
 internal static class EnumerableExtensions
 {
-    public static void AddRange<T>(this ICollection<T> target, IEnumerable<T> source)
+    public static void AddRange<T>(
+        this ICollection<T> target,
+        IEnumerable<T> source)
     {
         switch (target)
         {

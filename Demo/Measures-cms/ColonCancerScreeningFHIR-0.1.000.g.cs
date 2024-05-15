@@ -30,9 +30,9 @@ public class ColonCancerScreeningFHIR_0_1_000
     internal Lazy<CqlValueSet> __Total_Colectomy;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
@@ -72,9 +72,9 @@ public class ColonCancerScreeningFHIR_0_1_000
         __Total_Colectomy = new Lazy<CqlValueSet>(this.Total_Colectomy_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
@@ -186,7 +186,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -194,10 +194,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -205,10 +205,10 @@ public class ColonCancerScreeningFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -216,7 +216,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -293,14 +293,15 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure Colectomy)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToValue(Colectomy?.Performed);
-			var g_ = QICoreCommon_2_0_000.ToInterval(f_);
-			var h_ = context.Operators.End(g_);
-			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.SameOrBefore(h_, j_, "day");
+			var f_ = Colectomy?.Performed;
+			var g_ = FHIRHelpers_4_3_000.ToValue(f_);
+			var h_ = QICoreCommon_2_0_000.ToInterval(g_);
+			var i_ = context.Operators.End(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.End(j_);
+			var l_ = context.Operators.SameOrBefore(i_, k_, "day");
 
-			return k_;
+			return l_;
 		};
 		var e_ = context.Operators.Where<Procedure>(c_, d_);
 
@@ -341,60 +342,67 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var c_ = Status_1_6_000.Final_Lab_Observation(b_);
 		bool? d_(Observation FecalOccultResult)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Value);
-			var g_ = context.Operators.Not((bool?)(f_ is null));
-			object h_()
+			var f_ = FecalOccultResult?.Value;
+			var g_ = FHIRHelpers_4_3_000.ToValue(f_);
+			var h_ = context.Operators.Not((bool?)(g_ is null));
+			object i_()
 			{
-				bool m_()
-				{
-					var p_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
-					var q_ = p_ is CqlDateTime;
-
-					return q_;
-				};
 				bool n_()
 				{
-					var r_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
-					var s_ = r_ is CqlInterval<CqlDateTime>;
+					var q_ = FecalOccultResult?.Effective;
+					var r_ = FHIRHelpers_4_3_000.ToValue(q_);
+					var s_ = r_ is CqlDateTime;
 
 					return s_;
 				};
 				bool o_()
 				{
-					var t_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
-					var u_ = t_ is CqlDateTime;
+					var t_ = FecalOccultResult?.Effective;
+					var u_ = FHIRHelpers_4_3_000.ToValue(t_);
+					var v_ = u_ is CqlInterval<CqlDateTime>;
 
-					return u_;
+					return v_;
 				};
-				if (m_())
+				bool p_()
 				{
-					var v_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+					var w_ = FecalOccultResult?.Effective;
+					var x_ = FHIRHelpers_4_3_000.ToValue(w_);
+					var y_ = x_ is CqlDateTime;
 
-					return ((v_ as CqlDateTime) as object);
-				}
-				else if (n_())
+					return y_;
+				};
+				if (n_())
 				{
-					var w_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+					var z_ = FecalOccultResult?.Effective;
+					var aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
-					return ((w_ as CqlInterval<CqlDateTime>) as object);
+					return ((aa_ as CqlDateTime) as object);
 				}
 				else if (o_())
 				{
-					var x_ = FHIRHelpers_4_3_000.ToValue(FecalOccultResult?.Effective);
+					var ab_ = FecalOccultResult?.Effective;
+					var ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
-					return ((x_ as CqlDateTime) as object);
+					return ((ac_ as CqlInterval<CqlDateTime>) as object);
+				}
+				else if (p_())
+				{
+					var ad_ = FecalOccultResult?.Effective;
+					var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+
+					return ((ae_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
-				};
+				}
 			};
-			var i_ = QICoreCommon_2_0_000.Latest(h_());
-			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
-			var l_ = context.Operators.And(g_, k_);
+			var j_ = QICoreCommon_2_0_000.Latest(i_());
+			var k_ = this.Measurement_Period();
+			var l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
+			var m_ = context.Operators.And(h_, l_);
 
-			return l_;
+			return m_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 
@@ -412,65 +420,72 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var c_ = Status_1_6_000.Final_Lab_Observation(b_);
 		bool? d_(Observation sDNATest)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Value);
-			var g_ = context.Operators.Not((bool?)(f_ is null));
-			object h_()
+			var f_ = sDNATest?.Value;
+			var g_ = FHIRHelpers_4_3_000.ToValue(f_);
+			var h_ = context.Operators.Not((bool?)(g_ is null));
+			object i_()
 			{
-				bool s_()
-				{
-					var v_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
-					var w_ = v_ is CqlDateTime;
-
-					return w_;
-				};
 				bool t_()
 				{
-					var x_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
-					var y_ = x_ is CqlInterval<CqlDateTime>;
+					var w_ = sDNATest?.Effective;
+					var x_ = FHIRHelpers_4_3_000.ToValue(w_);
+					var y_ = x_ is CqlDateTime;
 
 					return y_;
 				};
 				bool u_()
 				{
-					var z_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
-					var aa_ = z_ is CqlDateTime;
+					var z_ = sDNATest?.Effective;
+					var aa_ = FHIRHelpers_4_3_000.ToValue(z_);
+					var ab_ = aa_ is CqlInterval<CqlDateTime>;
 
-					return aa_;
+					return ab_;
 				};
-				if (s_())
+				bool v_()
 				{
-					var ab_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+					var ac_ = sDNATest?.Effective;
+					var ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
+					var ae_ = ad_ is CqlDateTime;
 
-					return ((ab_ as CqlDateTime) as object);
-				}
-				else if (t_())
+					return ae_;
+				};
+				if (t_())
 				{
-					var ac_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+					var af_ = sDNATest?.Effective;
+					var ag_ = FHIRHelpers_4_3_000.ToValue(af_);
 
-					return ((ac_ as CqlInterval<CqlDateTime>) as object);
+					return ((ag_ as CqlDateTime) as object);
 				}
 				else if (u_())
 				{
-					var ad_ = FHIRHelpers_4_3_000.ToValue(sDNATest?.Effective);
+					var ah_ = sDNATest?.Effective;
+					var ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 
-					return ((ad_ as CqlDateTime) as object);
+					return ((ai_ as CqlInterval<CqlDateTime>) as object);
+				}
+				else if (v_())
+				{
+					var aj_ = sDNATest?.Effective;
+					var ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
+
+					return ((ak_ as CqlDateTime) as object);
 				}
 				else
 				{
 					return null;
-				};
+				}
 			};
-			var i_ = QICoreCommon_2_0_000.Latest(h_());
-			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.Quantity(2m, "years");
-			var m_ = context.Operators.Subtract(k_, l_);
-			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
-			var r_ = context.Operators.And(g_, q_);
+			var j_ = QICoreCommon_2_0_000.Latest(i_());
+			var k_ = this.Measurement_Period();
+			var l_ = context.Operators.Start(k_);
+			var m_ = context.Operators.Quantity(2m, "years");
+			var n_ = context.Operators.Subtract(l_, m_);
+			var p_ = context.Operators.End(k_);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
+			var r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
+			var s_ = context.Operators.And(h_, r_);
 
-			return r_;
+			return s_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 
@@ -488,18 +503,19 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure FlexibleSigmoidoscopy)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToValue(FlexibleSigmoidoscopy?.Performed);
-			var g_ = QICoreCommon_2_0_000.ToInterval(f_);
-			var h_ = context.Operators.End(g_);
-			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity(4m, "years");
-			var l_ = context.Operators.Subtract(j_, k_);
-			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
+			var f_ = FlexibleSigmoidoscopy?.Performed;
+			var g_ = FHIRHelpers_4_3_000.ToValue(f_);
+			var h_ = QICoreCommon_2_0_000.ToInterval(g_);
+			var i_ = context.Operators.End(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.Quantity(4m, "years");
+			var m_ = context.Operators.Subtract(k_, l_);
+			var o_ = context.Operators.End(j_);
+			var p_ = context.Operators.Interval(m_, o_, true, true);
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
-			return p_;
+			return q_;
 		};
 		var e_ = context.Operators.Where<Procedure>(c_, d_);
 
@@ -517,18 +533,19 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var c_ = Status_1_6_000.Final_Observation(b_);
 		bool? d_(Observation Colonography)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToValue(Colonography?.Effective);
-			var g_ = QICoreCommon_2_0_000.ToInterval(f_);
-			var h_ = context.Operators.End(g_);
-			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity(4m, "years");
-			var l_ = context.Operators.Subtract(j_, k_);
-			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
+			var f_ = Colonography?.Effective;
+			var g_ = FHIRHelpers_4_3_000.ToValue(f_);
+			var h_ = QICoreCommon_2_0_000.ToInterval(g_);
+			var i_ = context.Operators.End(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.Quantity(4m, "years");
+			var m_ = context.Operators.Subtract(k_, l_);
+			var o_ = context.Operators.End(j_);
+			var p_ = context.Operators.Interval(m_, o_, true, true);
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
-			return p_;
+			return q_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 
@@ -546,18 +563,19 @@ public class ColonCancerScreeningFHIR_0_1_000
 		var c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure Colonoscopy)
 		{
-			var f_ = FHIRHelpers_4_3_000.ToValue(Colonoscopy?.Performed);
-			var g_ = QICoreCommon_2_0_000.ToInterval(f_);
-			var h_ = context.Operators.End(g_);
-			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.Quantity(9m, "years");
-			var l_ = context.Operators.Subtract(j_, k_);
-			var n_ = context.Operators.End(i_);
-			var o_ = context.Operators.Interval(l_, n_, true, true);
-			var p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
+			var f_ = Colonoscopy?.Performed;
+			var g_ = FHIRHelpers_4_3_000.ToValue(f_);
+			var h_ = QICoreCommon_2_0_000.ToInterval(g_);
+			var i_ = context.Operators.End(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.Start(j_);
+			var l_ = context.Operators.Quantity(9m, "years");
+			var m_ = context.Operators.Subtract(k_, l_);
+			var o_ = context.Operators.End(j_);
+			var p_ = context.Operators.Interval(m_, o_, true, true);
+			var q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
-			return p_;
+			return q_;
 		};
 		var e_ = context.Operators.Where<Procedure>(c_, d_);
 

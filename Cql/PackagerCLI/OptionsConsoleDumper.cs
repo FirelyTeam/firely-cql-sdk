@@ -64,8 +64,10 @@ internal class OptionsConsoleDumper
 
         void WriteLine(string s)
         {
-            sb?.AppendLine(s);
-            Console.WriteLine(s);
+            if (sb is not null)
+                sb.AppendLine(s);
+            else
+                Console.WriteLine(s);
         }
     }
 

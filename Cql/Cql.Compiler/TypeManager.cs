@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -89,7 +88,7 @@ namespace Hl7.Cql.Compiler
         {
             var hashInput = string.Join("+", elementInfo
                 .OrderBy(k => k.Key)
-                .Select(kvp => $"{kvp.Key}:{PrettyTypeName(kvp.Value)}"));
+                .Select(kvp => $"{kvp.Key}:{kvp.Value.ToCSharpString()}"));
             var tupleId = Hasher.Hash(hashInput);
             var ns = TupleTypeNamespace;
             return $"Tuple_{tupleId}";
@@ -131,14 +130,6 @@ namespace Hl7.Cql.Compiler
                 setIL.Emit(OpCodes.Ret);
                 propertyBuilder.SetSetMethod(set);
             }
-        }
-
-        private static readonly TypeFormatterOptions? TypeToCSharpStringOptions = new(PreferKeywords: true, HideNamespaces: true);
-
-        internal static string PrettyTypeName(Type type)
-        {
-            string result = type.WriteCSharp(TypeToCSharpStringOptions).ToString()!;
-            return result;
         }
     }
 }

@@ -45,24 +45,30 @@ public class NCQAEncounter_1_0_0
     [CqlDeclaration("Encounter Has Diagnosis")]
 	public bool? Encounter_Has_Diagnosis(Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
-		FhirString a_(Encounter.DiagnosisComponent D) => 
-			D?.Condition?.ReferenceElement;
-		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, FhirString>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		FhirString a_(Encounter.DiagnosisComponent D)
+		{
+			var f_ = D?.Condition;
+			var g_ = f_?.ReferenceElement;
+
+			return g_;
+		};
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, FhirString>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
 		bool? c_(FhirString CRef)
 		{
-			bool? f_(Condition C)
+			bool? h_(Condition C)
 			{
-				var i_ = FHIRHelpers_4_0_001.ToString(C?.IdElement);
-				var j_ = FHIRHelpers_4_0_001.ToString(CRef);
-				var k_ = NCQAFHIRBase_1_0_0.GetId(j_);
-				var l_ = context.Operators.Equal(i_, k_);
+				var k_ = C?.IdElement;
+				var l_ = FHIRHelpers_4_0_001.ToString(k_);
+				var m_ = FHIRHelpers_4_0_001.ToString(CRef);
+				var n_ = NCQAFHIRBase_1_0_0.GetId(m_);
+				var o_ = context.Operators.Equal(l_, n_);
 
-				return l_;
+				return o_;
 			};
-			var g_ = context.Operators.Where<Condition>(Conditions, f_);
-			var h_ = context.Operators.Exists<Condition>(g_);
+			var i_ = context.Operators.Where<Condition>(Conditions, h_);
+			var j_ = context.Operators.Exists<Condition>(i_);
 
-			return h_;
+			return j_;
 		};
 		var d_ = context.Operators.Select<FhirString, bool?>(b_, c_);
 		var e_ = context.Operators.AnyTrue(d_);
@@ -75,13 +81,14 @@ public class NCQAEncounter_1_0_0
 	{
 		bool? a_(Encounter.DiagnosisComponent D)
 		{
-			var h_ = context.Operators.Convert<Integer>(D?.RankElement);
-			var i_ = FHIRHelpers_4_0_001.ToInteger(h_);
-			var j_ = context.Operators.Equal(i_, 1);
+			var h_ = D?.RankElement;
+			var i_ = context.Operators.Convert<Integer>(h_);
+			var j_ = FHIRHelpers_4_0_001.ToInteger(i_);
+			var k_ = context.Operators.Equal(j_, 1);
 
-			return j_;
+			return k_;
 		};
-		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
 		var c_ = context.Operators.SingletonFrom<Encounter.DiagnosisComponent>(b_);
 		var d_ = new Encounter.DiagnosisComponent[]
 		{
@@ -89,21 +96,24 @@ public class NCQAEncounter_1_0_0
 		};
 		bool? e_(Encounter.DiagnosisComponent PrincipalDiagnosis)
 		{
-			bool? k_(Condition C)
+			bool? l_(Condition C)
 			{
-				var n_ = FHIRHelpers_4_0_001.ToString(C?.IdElement);
-				var o_ = FHIRHelpers_4_0_001.ToString(PrincipalDiagnosis?.Condition?.ReferenceElement);
-				var p_ = NCQAFHIRBase_1_0_0.GetId(o_);
-				var q_ = context.Operators.Equal(n_, p_);
+				var o_ = C?.IdElement;
+				var p_ = FHIRHelpers_4_0_001.ToString(o_);
+				var q_ = PrincipalDiagnosis?.Condition;
+				var r_ = q_?.ReferenceElement;
+				var s_ = FHIRHelpers_4_0_001.ToString(r_);
+				var t_ = NCQAFHIRBase_1_0_0.GetId(s_);
+				var u_ = context.Operators.Equal(p_, t_);
 
-				return q_;
+				return u_;
 			};
-			var l_ = context.Operators.Where<Condition>(Conditions, k_);
-			var m_ = context.Operators.Exists<Condition>(l_);
+			var m_ = context.Operators.Where<Condition>(Conditions, l_);
+			var n_ = context.Operators.Exists<Condition>(m_);
 
-			return m_;
+			return n_;
 		};
-		var f_ = context.Operators.Select<Encounter.DiagnosisComponent, bool?>(d_, e_);
+		var f_ = context.Operators.Select<Encounter.DiagnosisComponent, bool?>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 		var g_ = context.Operators.SingletonFrom<bool?>(f_);
 
 		return g_;
@@ -115,11 +125,12 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Enc);
 		bool? b_(Encounter EncounterPeriod)
 		{
-			var e_ = NCQAFHIRBase_1_0_0.Normalize_Interval((EncounterPeriod?.Period as object));
-			var f_ = context.Operators.End(e_);
-			var g_ = context.Operators.In<CqlDateTime>(f_, timeperiod, null);
+			var e_ = EncounterPeriod?.Period;
+			var f_ = NCQAFHIRBase_1_0_0.Normalize_Interval((e_ as object));
+			var g_ = context.Operators.End(f_);
+			var h_ = context.Operators.In<CqlDateTime>(g_, timeperiod, null);
 
-			return g_;
+			return h_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		var d_ = context.Operators.Exists<Encounter>(c_);
@@ -133,13 +144,14 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
 		bool? b_(Encounter E)
 		{
-			var d_ = context.Operators.Not((bool?)(E?.Class is null));
-			var e_ = FHIRHelpers_4_0_001.ToCode(E?.Class);
-			var f_ = NCQATerminology_1_0_0.@virtual();
-			var g_ = context.Operators.Equivalent(e_, f_);
-			var h_ = context.Operators.And(d_, g_);
+			var d_ = E?.Class;
+			var e_ = context.Operators.Not((bool?)(d_ is null));
+			var g_ = FHIRHelpers_4_0_001.ToCode(d_);
+			var h_ = NCQATerminology_1_0_0.@virtual();
+			var i_ = context.Operators.Equivalent(g_, h_);
+			var j_ = context.Operators.And(e_, i_);
 
-			return h_;
+			return j_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -152,16 +164,18 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
 		bool? b_(Encounter E)
 		{
-			var d_ = context.Operators.Not((bool?)(E?.Class is null));
-			var e_ = FHIRHelpers_4_0_001.ToCode(E?.Class);
-			var f_ = NCQATerminology_1_0_0.ambulatory();
-			var g_ = context.Operators.Equivalent(e_, f_);
-			var i_ = NCQATerminology_1_0_0.home_health();
-			var j_ = context.Operators.Equivalent(e_, i_);
-			var k_ = context.Operators.Or(g_, j_);
-			var l_ = context.Operators.And(d_, k_);
+			var d_ = E?.Class;
+			var e_ = context.Operators.Not((bool?)(d_ is null));
+			var g_ = FHIRHelpers_4_0_001.ToCode(d_);
+			var h_ = NCQATerminology_1_0_0.ambulatory();
+			var i_ = context.Operators.Equivalent(g_, h_);
+			var k_ = FHIRHelpers_4_0_001.ToCode(d_);
+			var l_ = NCQATerminology_1_0_0.home_health();
+			var m_ = context.Operators.Equivalent(k_, l_);
+			var n_ = context.Operators.Or(i_, m_);
+			var o_ = context.Operators.And(e_, n_);
 
-			return l_;
+			return o_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 
@@ -174,13 +188,14 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
 		bool? b_(Encounter E)
 		{
-			var d_ = context.Operators.Not((bool?)(E?.Class is null));
-			var e_ = FHIRHelpers_4_0_001.ToCode(E?.Class);
-			var f_ = NCQATerminology_1_0_0.ambulatory();
-			var g_ = context.Operators.Equivalent(e_, f_);
-			var h_ = context.Operators.And(d_, g_);
+			var d_ = E?.Class;
+			var e_ = context.Operators.Not((bool?)(d_ is null));
+			var g_ = FHIRHelpers_4_0_001.ToCode(d_);
+			var h_ = NCQATerminology_1_0_0.ambulatory();
+			var i_ = context.Operators.Equivalent(g_, h_);
+			var j_ = context.Operators.And(e_, i_);
 
-			return h_;
+			return j_;
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 

@@ -83,30 +83,35 @@ public class VTEFHIR4_4_8_000
 	{
 		bool? a_(Encounter.LocationComponent HospitalLocation)
 		{
-			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(HospitalLocation?.Location);
-			CqlConcept g_(CodeableConcept X)
+			var f_ = HospitalLocation?.Location;
+			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(f_);
+			var h_ = g_?.Type;
+			CqlConcept i_(CodeableConcept X)
 			{
-				var o_ = FHIRHelpers_4_0_001.ToConcept(X);
+				var s_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-				return o_;
+				return s_;
 			};
-			var h_ = context.Operators.Select<CodeableConcept, CqlConcept>((f_?.Type as IEnumerable<CodeableConcept>), g_);
-			var i_ = this.Intensive_Care_Unit();
-			var j_ = context.Operators.ConceptsInValueSet(h_, i_);
-			var k_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
-			var l_ = FHIRHelpers_4_0_001.ToInterval(HospitalLocation?.Period);
-			var m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, l_, null);
-			var n_ = context.Operators.And(j_, m_);
+			var j_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_);
+			var k_ = this.Intensive_Care_Unit();
+			var l_ = context.Operators.ConceptsInValueSet(j_, k_);
+			var m_ = Encounter?.Period;
+			var n_ = FHIRHelpers_4_0_001.ToInterval(m_);
+			var o_ = HospitalLocation?.Period;
+			var p_ = FHIRHelpers_4_0_001.ToInterval(o_);
+			var q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, p_, null);
+			var r_ = context.Operators.And(l_, q_);
 
-			return n_;
+			return r_;
 		};
-		var b_ = context.Operators.Where<Encounter.LocationComponent>((Encounter?.Location as IEnumerable<Encounter.LocationComponent>), a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)Encounter?.Location, a_);
 		object c_(Encounter.LocationComponent @this)
 		{
-			var p_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
-			var q_ = context.Operators.Start(p_);
+			var t_ = @this?.Period;
+			var u_ = FHIRHelpers_4_0_001.ToInterval(t_);
+			var v_ = context.Operators.Start(u_);
 
-			return q_;
+			return v_;
 		};
 		var d_ = context.Operators.SortBy<Encounter.LocationComponent>(b_, c_, System.ComponentModel.ListSortDirection.Ascending);
 		var e_ = context.Operators.First<Encounter.LocationComponent>(d_);

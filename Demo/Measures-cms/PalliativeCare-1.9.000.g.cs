@@ -132,12 +132,13 @@ public class PalliativeCare_1_9_000
 		var d_ = Status_1_6_000.isAssessmentPerformed(c_);
 		bool? e_(Observation PalliativeAssessment)
 		{
-			var ab_ = FHIRHelpers_4_3_000.ToValue(PalliativeAssessment?.Effective);
-			var ac_ = QICoreCommon_2_0_000.toInterval(ab_);
-			var ad_ = this.Measurement_Period();
-			var ae_ = context.Operators.Overlaps(ac_, ad_, "day");
+			var ab_ = PalliativeAssessment?.Effective;
+			var ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
+			var ad_ = QICoreCommon_2_0_000.toInterval(ac_);
+			var ae_ = this.Measurement_Period();
+			var af_ = context.Operators.Overlaps(ad_, ae_, "day");
 
-			return ae_;
+			return af_;
 		};
 		var f_ = context.Operators.Where<Observation>(d_, e_);
 		var g_ = context.Operators.Exists<Observation>(f_);
@@ -145,11 +146,11 @@ public class PalliativeCare_1_9_000
 		var i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
 		bool? j_(Condition PalliativeDiagnosis)
 		{
-			var af_ = QICoreCommon_2_0_000.prevalenceInterval(PalliativeDiagnosis);
-			var ag_ = this.Measurement_Period();
-			var ah_ = context.Operators.Overlaps(af_, ag_, "day");
+			var ag_ = QICoreCommon_2_0_000.prevalenceInterval(PalliativeDiagnosis);
+			var ah_ = this.Measurement_Period();
+			var ai_ = context.Operators.Overlaps(ag_, ah_, "day");
 
-			return ah_;
+			return ai_;
 		};
 		var k_ = context.Operators.Where<Condition>(i_, j_);
 		var l_ = context.Operators.Exists<Condition>(k_);
@@ -159,12 +160,13 @@ public class PalliativeCare_1_9_000
 		var p_ = Status_1_6_000.isEncounterPerformed(o_);
 		bool? q_(Encounter PalliativeEncounter)
 		{
-			var ai_ = FHIRHelpers_4_3_000.ToInterval(PalliativeEncounter?.Period);
-			var aj_ = QICoreCommon_2_0_000.toInterval((ai_ as object));
-			var ak_ = this.Measurement_Period();
-			var al_ = context.Operators.Overlaps(aj_, ak_, "day");
+			var aj_ = PalliativeEncounter?.Period;
+			var ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
+			var al_ = QICoreCommon_2_0_000.toInterval((ak_ as object));
+			var am_ = this.Measurement_Period();
+			var an_ = context.Operators.Overlaps(al_, am_, "day");
 
-			return al_;
+			return an_;
 		};
 		var r_ = context.Operators.Where<Encounter>(p_, q_);
 		var s_ = context.Operators.Exists<Encounter>(r_);
@@ -174,12 +176,13 @@ public class PalliativeCare_1_9_000
 		var w_ = Status_1_6_000.isInterventionPerformed(v_);
 		bool? x_(Procedure PalliativeIntervention)
 		{
-			var am_ = FHIRHelpers_4_3_000.ToValue(PalliativeIntervention?.Performed);
-			var an_ = QICoreCommon_2_0_000.toInterval(am_);
-			var ao_ = this.Measurement_Period();
-			var ap_ = context.Operators.Overlaps(an_, ao_, "day");
+			var ao_ = PalliativeIntervention?.Performed;
+			var ap_ = FHIRHelpers_4_3_000.ToValue(ao_);
+			var aq_ = QICoreCommon_2_0_000.toInterval(ap_);
+			var ar_ = this.Measurement_Period();
+			var as_ = context.Operators.Overlaps(aq_, ar_, "day");
 
-			return ap_;
+			return as_;
 		};
 		var y_ = context.Operators.Where<Procedure>(w_, x_);
 		var z_ = context.Operators.Exists<Procedure>(y_);

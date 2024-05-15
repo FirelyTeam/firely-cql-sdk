@@ -45,9 +45,9 @@ public class DiabetesEyeExamFHIR_0_0_001
     internal Lazy<IEnumerable<Observation>> __Retinal_Exam_in_Measurement_Period;
     internal Lazy<IEnumerable<Observation>> __Retinal_Exam_in_Measurement_Period_or_Year_Prior;
     internal Lazy<bool?> __Numerator;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>> __SDE_Payer;
-    internal Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj> __SDE_Race;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
+    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -88,9 +88,9 @@ public class DiabetesEyeExamFHIR_0_0_001
         __Retinal_Exam_in_Measurement_Period = new Lazy<IEnumerable<Observation>>(this.Retinal_Exam_in_Measurement_Period_Value);
         __Retinal_Exam_in_Measurement_Period_or_Year_Prior = new Lazy<IEnumerable<Observation>>(this.Retinal_Exam_in_Measurement_Period_or_Year_Prior_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_FCiIaGHASIIbfXNJKRgLLXbgj>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -270,10 +270,11 @@ public class DiabetesEyeExamFHIR_0_0_001
 		bool? v_(Encounter ValidEncounters)
 		{
 			var x_ = this.Measurement_Period();
-			var y_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounters?.Period);
-			var z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, y_, "day");
+			var y_ = ValidEncounters?.Period;
+			var z_ = FHIRHelpers_4_3_000.ToInterval(y_);
+			var aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
 
-			return z_;
+			return aa_;
 		};
 		var w_ = context.Operators.Where<Encounter>(u_, v_);
 
@@ -376,11 +377,12 @@ public class DiabetesEyeExamFHIR_0_0_001
 		bool? d_(Observation RetinalExam)
 		{
 			var f_ = this.Measurement_Period();
-			var g_ = FHIRHelpers_4_3_000.ToValue(RetinalExam?.Effective);
-			var h_ = QICoreCommon_2_0_000.toInterval(g_);
-			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+			var g_ = RetinalExam?.Effective;
+			var h_ = FHIRHelpers_4_3_000.ToValue(g_);
+			var i_ = QICoreCommon_2_0_000.toInterval(h_);
+			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
 
-			return i_;
+			return j_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 
@@ -404,11 +406,12 @@ public class DiabetesEyeExamFHIR_0_0_001
 			var i_ = context.Operators.Subtract(g_, h_);
 			var k_ = context.Operators.End(f_);
 			var l_ = context.Operators.Interval(i_, k_, true, true);
-			var m_ = FHIRHelpers_4_3_000.ToValue(RetinalExam?.Effective);
-			var n_ = QICoreCommon_2_0_000.toInterval(m_);
-			var o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, "day");
+			var m_ = RetinalExam?.Effective;
+			var n_ = FHIRHelpers_4_3_000.ToValue(m_);
+			var o_ = QICoreCommon_2_0_000.toInterval(n_);
+			var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
 
-			return o_;
+			return p_;
 		};
 		var e_ = context.Operators.Where<Observation>(c_, d_);
 
@@ -438,7 +441,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 	public bool? Numerator() => 
 		__Numerator.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -446,10 +449,10 @@ public class DiabetesEyeExamFHIR_0_0_001
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Ethnicity() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer_Value()
+	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -457,10 +460,10 @@ public class DiabetesEyeExamFHIR_0_0_001
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_COIQfKYbbjLZSGAMXWaFObiSa> SDE_Payer() => 
+	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race_Value()
+	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -468,7 +471,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_FCiIaGHASIIbfXNJKRgLLXbgj SDE_Race() => 
+	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

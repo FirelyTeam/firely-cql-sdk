@@ -38,26 +38,26 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((period is null))
 			{
-				CqlInterval<CqlDateTime> b_ = null;
-
-				return b_;
+				return null;
 			}
 			else if ((period?.StartElement is null))
 			{
-				var c_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
-				var d_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
-				var e_ = context.Operators.Interval(c_, d_, false, true);
+				var b_ = period?.StartElement;
+				var c_ = context.Operators.Convert<CqlDateTime>(b_);
+				var d_ = period?.EndElement;
+				var e_ = context.Operators.Convert<CqlDateTime>(d_);
+				var f_ = context.Operators.Interval(c_, e_, false, true);
 
-				return e_;
+				return f_;
 			}
 			else
 			{
-				var f_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
-				var g_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
-				var h_ = context.Operators.Interval(f_, g_, true, true);
+				var g_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
+				var h_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
+				var i_ = context.Operators.Interval(g_, h_, true, true);
 
-				return h_;
-			};
+				return i_;
+			}
 		};
 
 		return a_();
@@ -72,81 +72,87 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((quantity is null))
 			{
-				CqlInterval<CqlQuantity> b_ = null;
-
-				return b_;
+				return null;
 			}
 			else
 			{
-				CqlInterval<CqlQuantity> c_()
+				CqlInterval<CqlQuantity> b_()
 				{
+					bool c_()
+					{
+						var g_ = quantity?.ComparatorElement;
+						var h_ = g_?.Value;
+						var i_ = context.Operators.Convert<string>(h_);
+						var j_ = context.Operators.Equal(i_, "<");
+
+						return (j_ ?? false);
+					};
 					bool d_()
 					{
-						var h_ = context.Operators.Convert<string>(quantity?.ComparatorElement?.Value);
-						var i_ = context.Operators.Equal(h_, "<");
+						var k_ = quantity?.ComparatorElement;
+						var l_ = k_?.Value;
+						var m_ = context.Operators.Convert<string>(l_);
+						var n_ = context.Operators.Equal(m_, "<=");
 
-						return (i_ ?? false);
+						return (n_ ?? false);
 					};
 					bool e_()
 					{
-						var j_ = context.Operators.Convert<string>(quantity?.ComparatorElement?.Value);
-						var k_ = context.Operators.Equal(j_, "<=");
+						var o_ = quantity?.ComparatorElement;
+						var p_ = o_?.Value;
+						var q_ = context.Operators.Convert<string>(p_);
+						var r_ = context.Operators.Equal(q_, ">=");
 
-						return (k_ ?? false);
+						return (r_ ?? false);
 					};
 					bool f_()
 					{
-						var l_ = context.Operators.Convert<string>(quantity?.ComparatorElement?.Value);
-						var m_ = context.Operators.Equal(l_, ">=");
+						var s_ = quantity?.ComparatorElement;
+						var t_ = s_?.Value;
+						var u_ = context.Operators.Convert<string>(t_);
+						var v_ = context.Operators.Equal(u_, ">");
 
-						return (m_ ?? false);
+						return (v_ ?? false);
 					};
-					bool g_()
+					if (c_())
 					{
-						var n_ = context.Operators.Convert<string>(quantity?.ComparatorElement?.Value);
-						var o_ = context.Operators.Equal(n_, ">");
+						var w_ = this.ToQuantityIgnoringComparator(quantity);
+						var x_ = context.Operators.Interval(null, w_, true, false);
 
-						return (o_ ?? false);
-					};
-					if (d_())
+						return x_;
+					}
+					else if (d_())
 					{
-						var p_ = this.ToQuantityIgnoringComparator(quantity);
-						var q_ = context.Operators.Interval(null, p_, true, false);
+						var y_ = this.ToQuantityIgnoringComparator(quantity);
+						var z_ = context.Operators.Interval(null, y_, true, true);
 
-						return q_;
+						return z_;
 					}
 					else if (e_())
 					{
-						var r_ = this.ToQuantityIgnoringComparator(quantity);
-						var s_ = context.Operators.Interval(null, r_, true, true);
+						var aa_ = this.ToQuantityIgnoringComparator(quantity);
+						var ab_ = context.Operators.Interval(aa_, null, true, true);
 
-						return s_;
+						return ab_;
 					}
 					else if (f_())
 					{
-						var t_ = this.ToQuantityIgnoringComparator(quantity);
-						var u_ = context.Operators.Interval(t_, null, true, true);
+						var ac_ = this.ToQuantityIgnoringComparator(quantity);
+						var ad_ = context.Operators.Interval(ac_, null, false, true);
 
-						return u_;
-					}
-					else if (g_())
-					{
-						var v_ = this.ToQuantityIgnoringComparator(quantity);
-						var w_ = context.Operators.Interval(v_, null, false, true);
-
-						return w_;
+						return ad_;
 					}
 					else
 					{
-						var x_ = this.ToQuantity(quantity);
-						var z_ = context.Operators.Interval(x_, x_, true, true);
+						var ae_ = this.ToQuantity(quantity);
+						var ag_ = context.Operators.Interval(ae_, ae_, true, true);
 
-						return z_;
-					};
+						return ag_;
+					}
 				};
 
-				return c_();
-			};
+				return b_();
+			}
 		};
 
 		return a_();
@@ -160,18 +166,16 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((range is null))
 			{
-				CqlInterval<CqlQuantity> b_ = null;
-
-				return b_;
+				return null;
 			}
 			else
 			{
-				var c_ = this.ToQuantity(range?.Low);
-				var d_ = this.ToQuantity(range?.High);
-				var e_ = context.Operators.Interval(c_, d_, true, true);
+				var b_ = this.ToQuantity(range?.Low);
+				var c_ = this.ToQuantity(range?.High);
+				var d_ = context.Operators.Interval(b_, c_, true, true);
 
-				return e_;
-			};
+				return d_;
+			}
 		};
 
 		return a_();
@@ -219,7 +223,7 @@ public class FHIRHelpers_4_3_000
 			else
 			{
 				return unit;
-			};
+			}
 		};
 
 		return a_();
@@ -235,12 +239,22 @@ public class FHIRHelpers_4_3_000
 		{
 			bool b_()
 			{
-				var c_ = context.Operators.Equal(quantity?.SystemElement?.Value, "http://unitsofmeasure.org");
-				var d_ = context.Operators.Or((bool?)(quantity?.SystemElement is null), c_);
-				var e_ = context.Operators.Equal(quantity?.SystemElement?.Value, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-				var f_ = context.Operators.Or(d_, e_);
+				var d_ = quantity?.ComparatorElement;
+				var e_ = context.Operators.Not((bool?)(d_ is null));
 
-				return (f_ ?? false);
+				return (e_ ?? false);
+			};
+			bool c_()
+			{
+				var f_ = quantity?.SystemElement;
+				var h_ = f_?.Value;
+				var i_ = context.Operators.Equal(h_, "http://unitsofmeasure.org");
+				var j_ = context.Operators.Or((bool?)(f_ is null), i_);
+				var l_ = f_?.Value;
+				var m_ = context.Operators.Equal(l_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
+				var n_ = context.Operators.Or(j_, m_);
+
+				return (n_ ?? false);
 			};
 			if ((quantity is null))
 			{
@@ -250,30 +264,36 @@ public class FHIRHelpers_4_3_000
 			{
 				return null;
 			}
-			else if ((context.Operators.Not((bool?)(quantity?.ComparatorElement is null)) ?? false))
-			{
-				var g_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
-
-				return (g_ as CqlQuantity);
-			}
 			else if (b_())
 			{
-				var h_ = this.ToCalendarUnit(((quantity?.CodeElement?.Value ?? quantity?.UnitElement?.Value) ?? "1"));
+				var o_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
 
-				return new CqlQuantity(quantity?.ValueElement?.Value, h_);
+				return (o_ as CqlQuantity);
+			}
+			else if (c_())
+			{
+				var p_ = quantity?.ValueElement;
+				var q_ = p_?.Value;
+				var r_ = quantity?.CodeElement;
+				var s_ = r_?.Value;
+				var t_ = quantity?.UnitElement;
+				var u_ = t_?.Value;
+				var v_ = this.ToCalendarUnit(((s_ ?? u_) ?? "1"));
+
+				return new CqlQuantity(q_, v_);
 			}
 			else
 			{
-				var i_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", (quantity?.UnitElement?.Value ?? ""));
-				var j_ = context.Operators.Concatenate((i_ ?? ""), " (");
-				var k_ = context.Operators.Concatenate((j_ ?? ""), (quantity?.SystemElement?.Value ?? ""));
-				var l_ = context.Operators.Concatenate((k_ ?? ""), "|");
-				var m_ = context.Operators.Concatenate((l_ ?? ""), (quantity?.CodeElement?.Value ?? ""));
-				var n_ = context.Operators.Concatenate((m_ ?? ""), ")");
-				var o_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", n_);
+				var w_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", (quantity?.UnitElement?.Value ?? ""));
+				var x_ = context.Operators.Concatenate((w_ ?? ""), " (");
+				var y_ = context.Operators.Concatenate((x_ ?? ""), (quantity?.SystemElement?.Value ?? ""));
+				var z_ = context.Operators.Concatenate((y_ ?? ""), "|");
+				var aa_ = context.Operators.Concatenate((z_ ?? ""), (quantity?.CodeElement?.Value ?? ""));
+				var ab_ = context.Operators.Concatenate((aa_ ?? ""), ")");
+				var ac_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ab_);
 
-				return (o_ as CqlQuantity);
-			};
+				return (ac_ as CqlQuantity);
+			}
 		};
 
 		return a_();
@@ -289,12 +309,15 @@ public class FHIRHelpers_4_3_000
 		{
 			bool b_()
 			{
-				var c_ = context.Operators.Equal(quantity?.SystemElement?.Value, "http://unitsofmeasure.org");
-				var d_ = context.Operators.Or((bool?)(quantity?.SystemElement is null), c_);
-				var e_ = context.Operators.Equal(quantity?.SystemElement?.Value, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
-				var f_ = context.Operators.Or(d_, e_);
+				var c_ = quantity?.SystemElement;
+				var e_ = c_?.Value;
+				var f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
+				var g_ = context.Operators.Or((bool?)(c_ is null), f_);
+				var i_ = c_?.Value;
+				var j_ = context.Operators.Equal(i_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
+				var k_ = context.Operators.Or(g_, j_);
 
-				return (f_ ?? false);
+				return (k_ ?? false);
 			};
 			if ((quantity is null))
 			{
@@ -306,22 +329,28 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (b_())
 			{
-				var g_ = this.ToCalendarUnit(((quantity?.CodeElement?.Value ?? quantity?.UnitElement?.Value) ?? "1"));
+				var l_ = quantity?.ValueElement;
+				var m_ = l_?.Value;
+				var n_ = quantity?.CodeElement;
+				var o_ = n_?.Value;
+				var p_ = quantity?.UnitElement;
+				var q_ = p_?.Value;
+				var r_ = this.ToCalendarUnit(((o_ ?? q_) ?? "1"));
 
-				return new CqlQuantity(quantity?.ValueElement?.Value, g_);
+				return new CqlQuantity(m_, r_);
 			}
 			else
 			{
-				var h_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", (quantity?.UnitElement?.Value ?? ""));
-				var i_ = context.Operators.Concatenate((h_ ?? ""), " (");
-				var j_ = context.Operators.Concatenate((i_ ?? ""), (quantity?.SystemElement?.Value ?? ""));
-				var k_ = context.Operators.Concatenate((j_ ?? ""), "|");
-				var l_ = context.Operators.Concatenate((k_ ?? ""), (quantity?.CodeElement?.Value ?? ""));
-				var m_ = context.Operators.Concatenate((l_ ?? ""), ")");
-				var n_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", m_);
+				var s_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", (quantity?.UnitElement?.Value ?? ""));
+				var t_ = context.Operators.Concatenate((s_ ?? ""), " (");
+				var u_ = context.Operators.Concatenate((t_ ?? ""), (quantity?.SystemElement?.Value ?? ""));
+				var v_ = context.Operators.Concatenate((u_ ?? ""), "|");
+				var w_ = context.Operators.Concatenate((v_ ?? ""), (quantity?.CodeElement?.Value ?? ""));
+				var x_ = context.Operators.Concatenate((w_ ?? ""), ")");
+				var y_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", x_);
 
-				return (n_ as CqlQuantity);
-			};
+				return (y_ as CqlQuantity);
+			}
 		};
 
 		return a_();
@@ -343,7 +372,7 @@ public class FHIRHelpers_4_3_000
 				var c_ = this.ToQuantity(ratio?.Denominator);
 
 				return new CqlRatio(b_, c_);
-			};
+			}
 		};
 
 		return a_();
@@ -351,10 +380,22 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("ToCode")]
     [CqlTag("description", "Converts the given FHIR [Coding](https://hl7.org/fhir/datatypes.html#Coding) value to a CQL Code.")]
-	public CqlCode ToCode(Coding coding) => 
-		((coding is null)
-			? null
-			: (new CqlCode(coding?.CodeElement?.Value, coding?.SystemElement?.Value, coding?.VersionElement?.Value, coding?.DisplayElement?.Value)));
+	public CqlCode ToCode(Coding coding)
+	{
+		CqlCode a_()
+		{
+			if ((coding is null))
+			{
+				return null;
+			}
+			else
+			{
+				return new CqlCode(coding?.CodeElement?.Value, coding?.SystemElement?.Value, coding?.VersionElement?.Value, coding?.DisplayElement?.Value);
+			}
+		};
+
+		return a_();
+	}
 
     [CqlDeclaration("ToConcept")]
     [CqlTag("description", "Converts the given FHIR [CodeableConcept](https://hl7.org/fhir/datatypes.html#CodeableConcept) value to a CQL Concept.")]
@@ -374,10 +415,10 @@ public class FHIRHelpers_4_3_000
 
 					return d_;
 				};
-				var c_ = context.Operators.Select<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), b_);
+				var c_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)concept?.Coding, b_);
 
 				return new CqlConcept(c_, concept?.TextElement?.Value);
-			};
+			}
 		};
 
 		return a_();
@@ -401,7 +442,7 @@ public class FHIRHelpers_4_3_000
 				};
 
 				return b_;
-			};
+			}
 		};
 
 		return a_();
@@ -429,7 +470,7 @@ public class FHIRHelpers_4_3_000
 				};
 
 				return c_;
-			};
+			}
 		};
 
 		return a_();
@@ -448,154 +489,186 @@ public class FHIRHelpers_4_3_000
 		{
 			if (value is Base64Binary)
 			{
-				var b_ = context.Operators.Convert<string>((value as Base64Binary)?.Value);
-
-				return (b_ as object);
-			}
-			else if (value is FhirBoolean)
-			{
-				return (value as FhirBoolean)?.Value;
-			}
-			else if (value is Canonical)
-			{
-				return ((value as Canonical)?.Value as object);
-			}
-			else if (value is Code)
-			{
-				return ((value as Code)?.Value as object);
-			}
-			else if (value is Date)
-			{
-				var c_ = context.Operators.ConvertStringToDate((value as Date)?.Value);
+				var b_ = (value as Base64Binary)?.Value;
+				var c_ = context.Operators.Convert<string>(b_);
 
 				return (c_ as object);
 			}
-			else if (value is FhirDateTime)
+			else if (value is FhirBoolean)
 			{
-				var d_ = context.Operators.Convert<CqlDateTime>((value as FhirDateTime));
+				var d_ = (value as FhirBoolean)?.Value;
 
-				return (d_ as object);
+				return d_;
 			}
-			else if (value is FhirDecimal)
+			else if (value is Canonical)
 			{
-				return (value as FhirDecimal)?.Value;
-			}
-			else if (value is Id)
-			{
-				return ((value as Id)?.Value as object);
-			}
-			else if (value is Instant)
-			{
-				var e_ = context.Operators.Convert<CqlDateTime>((value as Instant)?.Value);
+				var e_ = (value as Canonical)?.Value;
 
 				return (e_ as object);
 			}
-			else if (value is Integer)
+			else if (value is Code)
 			{
-				return (value as Integer)?.Value;
-			}
-			else if (value is Markdown)
-			{
-				return ((value as Markdown)?.Value as object);
-			}
-			else if (value is Oid)
-			{
-				return ((value as Oid)?.Value as object);
-			}
-			else if (value is Integer)
-			{
-				return (value as Integer)?.Value;
-			}
-			else if (value is FhirString)
-			{
-				return ((value as FhirString)?.Value as object);
-			}
-			else if (value is Time)
-			{
-				var f_ = context.Operators.ConvertStringToTime((value as Time)?.Value);
+				var f_ = (value as Code)?.Value;
 
 				return (f_ as object);
 			}
-			else if (value is Integer)
+			else if (value is Date)
 			{
-				return (value as Integer)?.Value;
-			}
-			else if (value is FhirUri)
-			{
-				return ((value as FhirUri)?.Value as object);
-			}
-			else if (value is FhirUrl)
-			{
-				return ((value as FhirUrl)?.Value as object);
-			}
-			else if (value is Uuid)
-			{
-				return ((value as Uuid)?.Value as object);
-			}
-			else if (value is Age)
-			{
-				var g_ = this.ToQuantity(((value as Age) as Quantity));
-
-				return (g_ as object);
-			}
-			else if (value is CodeableConcept)
-			{
-				var h_ = this.ToConcept((value as CodeableConcept));
+				var g_ = (value as Date)?.Value;
+				var h_ = context.Operators.ConvertStringToDate(g_);
 
 				return (h_ as object);
 			}
-			else if (value is Coding)
+			else if (value is FhirDateTime)
 			{
-				var i_ = this.ToCode((value as Coding));
+				var i_ = context.Operators.Convert<CqlDateTime>((value as FhirDateTime));
 
 				return (i_ as object);
 			}
-			else if (value is Count)
+			else if (value is FhirDecimal)
 			{
-				var j_ = this.ToQuantity(((value as Count) as Quantity));
+				var j_ = (value as FhirDecimal)?.Value;
 
-				return (j_ as object);
+				return j_;
 			}
-			else if (value is Distance)
+			else if (value is Id)
 			{
-				var k_ = this.ToQuantity(((value as Distance) as Quantity));
+				var k_ = (value as Id)?.Value;
 
 				return (k_ as object);
 			}
-			else if (value is Duration)
+			else if (value is Instant)
 			{
-				var l_ = this.ToQuantity(((value as Duration) as Quantity));
-
-				return (l_ as object);
-			}
-			else if (value is Quantity)
-			{
-				var m_ = this.ToQuantity((value as Quantity));
+				var l_ = (value as Instant)?.Value;
+				var m_ = context.Operators.Convert<CqlDateTime>(l_);
 
 				return (m_ as object);
 			}
-			else if (value is Range)
+			else if (value is Integer)
 			{
-				var n_ = this.ToInterval((value as Range));
+				var n_ = (value as Integer)?.Value;
 
-				return (n_ as object);
+				return n_;
 			}
-			else if (value is Period)
+			else if (value is Markdown)
 			{
-				var o_ = this.ToInterval((value as Period));
+				var o_ = (value as Markdown)?.Value;
 
 				return (o_ as object);
 			}
-			else if (value is Ratio)
+			else if (value is Oid)
 			{
-				var p_ = this.ToRatio((value as Ratio));
+				var p_ = (value as Oid)?.Value;
 
 				return (p_ as object);
+			}
+			else if (value is Integer)
+			{
+				var q_ = (value as Integer)?.Value;
+
+				return q_;
+			}
+			else if (value is FhirString)
+			{
+				var r_ = (value as FhirString)?.Value;
+
+				return (r_ as object);
+			}
+			else if (value is Time)
+			{
+				var s_ = (value as Time)?.Value;
+				var t_ = context.Operators.ConvertStringToTime(s_);
+
+				return (t_ as object);
+			}
+			else if (value is Integer)
+			{
+				var u_ = (value as Integer)?.Value;
+
+				return u_;
+			}
+			else if (value is FhirUri)
+			{
+				var v_ = (value as FhirUri)?.Value;
+
+				return (v_ as object);
+			}
+			else if (value is FhirUrl)
+			{
+				var w_ = (value as FhirUrl)?.Value;
+
+				return (w_ as object);
+			}
+			else if (value is Uuid)
+			{
+				var x_ = (value as Uuid)?.Value;
+
+				return (x_ as object);
+			}
+			else if (value is Age)
+			{
+				var y_ = this.ToQuantity((Quantity)(value as Age));
+
+				return (y_ as object);
+			}
+			else if (value is CodeableConcept)
+			{
+				var z_ = this.ToConcept((value as CodeableConcept));
+
+				return (z_ as object);
+			}
+			else if (value is Coding)
+			{
+				var aa_ = this.ToCode((value as Coding));
+
+				return (aa_ as object);
+			}
+			else if (value is Count)
+			{
+				var ab_ = this.ToQuantity((Quantity)(value as Count));
+
+				return (ab_ as object);
+			}
+			else if (value is Distance)
+			{
+				var ac_ = this.ToQuantity((Quantity)(value as Distance));
+
+				return (ac_ as object);
+			}
+			else if (value is Duration)
+			{
+				var ad_ = this.ToQuantity((Quantity)(value as Duration));
+
+				return (ad_ as object);
+			}
+			else if (value is Quantity)
+			{
+				var ae_ = this.ToQuantity((value as Quantity));
+
+				return (ae_ as object);
+			}
+			else if (value is Range)
+			{
+				var af_ = this.ToInterval((value as Range));
+
+				return (af_ as object);
+			}
+			else if (value is Period)
+			{
+				var ag_ = this.ToInterval((value as Period));
+
+				return (ag_ as object);
+			}
+			else if (value is Ratio)
+			{
+				var ah_ = this.ToRatio((value as Ratio));
+
+				return (ah_ as object);
 			}
 			else
 			{
 				return value;
-			};
+			}
 		};
 
 		return a_();

@@ -47,7 +47,7 @@ namespace Hl7.Cql.Operators
         bool? After(object? left, object? right, string? precision);
         int? Age(string precision);
         int? AgeAt(CqlDate? asOf, string precision);
-        TAccumulate? Aggregate<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
+        TAccumulate? Aggregate<TSource, TAccumulate>(IEnumerable<TSource?>? source, Func<TAccumulate?, TSource?, TAccumulate?> lambda, TAccumulate? seed);
         bool? AllTrue(IEnumerable<bool?> argument);
         bool? AllTrue(IEnumerable<Lazy<bool?>> argument);
         bool? And(bool? left, bool? right);
@@ -335,7 +335,7 @@ namespace Hl7.Cql.Operators
         decimal? LowBoundary(decimal? input, int? precision);
         string? Lower(string argument);
         bool? Matches(string source, string pattern);
-        T Maximum<T>();
+        T MaxValue<T>();
         T Max<T>(IEnumerable<T>? items);
         decimal? Median(IEnumerable<decimal?> source);
         int? Median(IEnumerable<int?> source);
@@ -365,7 +365,7 @@ namespace Hl7.Cql.Operators
 
         event EventHandler<MessageEventArgs>? MessageReceived;
 
-        T Minimum<T>();
+        T MinValue<T>();
         T Min<T>(IEnumerable<T>? items);
         T Mode<T>(IEnumerable<T>? typedSource);
         CqlQuantity? Modulo(CqlQuantity left, CqlQuantity right);

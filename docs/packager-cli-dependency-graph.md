@@ -236,4 +236,3 @@ classDiagram
     TypeResolver ..> TypeManager : injected
 ```
 
-

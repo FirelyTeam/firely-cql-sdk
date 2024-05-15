@@ -394,7 +394,7 @@ namespace Hl7.Cql.Runtime
         };
 
 
-        public T Maximum<T>() => (T)MaxValues[typeof(T)];
+        public T MaxValue<T>() => (T)MaxValues[typeof(T)];
 
         #endregion
 
@@ -414,7 +414,7 @@ namespace Hl7.Cql.Runtime
             { typeof(CqlTime), CqlTime.MinValue },
         };
 
-        public T Minimum<T>() => (T)MinValues[typeof(T)];
+        public T MinValue<T>() => (T)MinValues[typeof(T)];
 
         #endregion
 

@@ -26,10 +26,12 @@ internal class CqlPackagerFactory : CqlCompilerFactory
 
     public CqlPackagerFactory(
         ILoggerFactory loggerFactory,
+        CancellationToken cancellationToken = default,
         int cacheSize = 0,
         CqlToResourcePackagingOptions? cqlToResourcePackagingOptions = default,
         CSharpCodeWriterOptions? cSharpCodeWriterOptions = default,
-        FhirResourceWriterOptions? fhirResourceWriterOptions = default) : base(loggerFactory, cacheSize)
+        FhirResourceWriterOptions? fhirResourceWriterOptions = default)
+        : base(loggerFactory, cancellationToken, cacheSize)
     {
         CqlToResourcePackagingOptions = cqlToResourcePackagingOptions ?? new();
         CSharpCodeWriterOptions = cSharpCodeWriterOptions ?? new();
@@ -53,25 +55,42 @@ internal class CqlPackagerFactory : CqlCompilerFactory
 
     protected virtual WriteToFileCSharpCodeStreamPostProcessor NewWriteToFileCSharpCodeStreamPostProcessor(
         CSharpCodeWriterOptions opt) =>
-        new(Options(opt), Logger<WriteToFileCSharpCodeStreamPostProcessor>());
+        new WriteToFileCSharpCodeStreamPostProcessor(
+            Options(opt),
+            Logger<WriteToFileCSharpCodeStreamPostProcessor>());
 
     public virtual FhirResourcePostProcessor? FhirResourcePostProcessor => Singleton(NewFhirResourcePostProcessorOrNull);
     protected virtual FhirResourcePostProcessor? NewFhirResourcePostProcessorOrNull() =>
         FhirResourceWriterOptions is { OutDirectory: {} } opt
             ? NewWriteToFileFhirResourcePostProcessor(opt)
             : default(FhirResourcePostProcessor);
+
     protected virtual WriteToFileFhirResourcePostProcessor NewWriteToFileFhirResourcePostProcessor(
         FhirResourceWriterOptions opt) =>
-        new(Options(opt), Logger<WriteToFileFhirResourcePostProcessor>());
+        new WriteToFileFhirResourcePostProcessor(
+            Options(opt),
+            Logger<WriteToFileFhirResourcePostProcessor>());
 
 
     public AssemblyCompiler AssemblyCompiler => Singleton(NewAssemblyCompiler);
-    protected virtual AssemblyCompiler NewAssemblyCompiler() => new(CSharpLibrarySetToStreamsWriter, TypeManager, CSharpCodeStreamPostProcessor);
+    protected virtual AssemblyCompiler NewAssemblyCompiler() =>
+        new AssemblyCompiler(
+            CSharpLibrarySetToStreamsWriter,
+            TypeManager,
+            CSharpCodeStreamPostProcessor);
 
     public ResourcePackager ResourcePackager => Singleton(NewResourcePackager);
-    protected virtual ResourcePackager NewResourcePackager() => new(TypeResolver, FhirResourcePostProcessor);
+    protected virtual ResourcePackager NewResourcePackager() =>
+        new ResourcePackager(
+            TypeResolver,
+            FhirResourcePostProcessor);
 
     public CqlToResourcePackagingPipeline CqlToResourcePackagingPipeline => Singleton(NewCqlToResourcePackagingPipeline);
     protected virtual CqlToResourcePackagingPipeline NewCqlToResourcePackagingPipeline() =>
-        new(Options(CqlToResourcePackagingOptions), ResourcePackager, LibrarySetExpressionBuilder, AssemblyCompiler);
+        new CqlToResourcePackagingPipeline(
+            Logger<CqlToResourcePackagingPipeline>(),
+            Options(CqlToResourcePackagingOptions),
+            ResourcePackager,
+            LibrarySetExpressionBuilder,
+            AssemblyCompiler);
 }

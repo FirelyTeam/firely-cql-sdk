@@ -50,18 +50,16 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((period is null))
 			{
-				CqlInterval<CqlDateTime> b_ = null;
-
-				return b_;
+				return null;
 			}
 			else
 			{
-				var c_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
-				var d_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
-				var e_ = context.Operators.Interval(c_, d_, true, true);
+				var b_ = context.Operators.Convert<CqlDateTime>(period?.StartElement);
+				var c_ = context.Operators.Convert<CqlDateTime>(period?.EndElement);
+				var d_ = context.Operators.Interval(b_, c_, true, true);
 
-				return e_;
-			};
+				return d_;
+			}
 		};
 
 		return a_();
@@ -74,28 +72,38 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((range is null))
 			{
-				CqlInterval<CqlQuantity> b_ = null;
-
-				return b_;
+				return null;
 			}
 			else
 			{
-				var c_ = this.ToQuantity(range?.Low);
-				var d_ = this.ToQuantity(range?.High);
-				var e_ = context.Operators.Interval(c_, d_, true, true);
+				var b_ = this.ToQuantity(range?.Low);
+				var c_ = this.ToQuantity(range?.High);
+				var d_ = context.Operators.Interval(b_, c_, true, true);
 
-				return e_;
-			};
+				return d_;
+			}
 		};
 
 		return a_();
 	}
 
     [CqlDeclaration("ToQuantity")]
-	public CqlQuantity ToQuantity(Quantity quantity) => 
-		((quantity is null)
-			? null
-			: (new CqlQuantity(quantity?.ValueElement?.Value, quantity?.UnitElement?.Value)));
+	public CqlQuantity ToQuantity(Quantity quantity)
+	{
+		CqlQuantity a_()
+		{
+			if ((quantity is null))
+			{
+				return null;
+			}
+			else
+			{
+				return new CqlQuantity(quantity?.ValueElement?.Value, quantity?.UnitElement?.Value);
+			}
+		};
+
+		return a_();
+	}
 
     [CqlDeclaration("ToRatio")]
 	public CqlRatio ToRatio(Ratio ratio)
@@ -112,17 +120,29 @@ public class FHIRHelpers_4_0_001
 				var c_ = this.ToQuantity(ratio?.Denominator);
 
 				return new CqlRatio(b_, c_);
-			};
+			}
 		};
 
 		return a_();
 	}
 
     [CqlDeclaration("ToCode")]
-	public CqlCode ToCode(Coding coding) => 
-		((coding is null)
-			? null
-			: (new CqlCode(coding?.CodeElement?.Value, coding?.SystemElement?.Value, coding?.VersionElement?.Value, coding?.DisplayElement?.Value)));
+	public CqlCode ToCode(Coding coding)
+	{
+		CqlCode a_()
+		{
+			if ((coding is null))
+			{
+				return null;
+			}
+			else
+			{
+				return new CqlCode(coding?.CodeElement?.Value, coding?.SystemElement?.Value, coding?.VersionElement?.Value, coding?.DisplayElement?.Value);
+			}
+		};
+
+		return a_();
+	}
 
     [CqlDeclaration("ToConcept")]
 	public CqlConcept ToConcept(CodeableConcept concept)
@@ -141,10 +161,10 @@ public class FHIRHelpers_4_0_001
 
 					return d_;
 				};
-				var c_ = context.Operators.Select<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), b_);
+				var c_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)concept?.Coding, b_);
 
 				return new CqlConcept(c_, concept?.TextElement?.Value);
-			};
+			}
 		};
 
 		return a_();

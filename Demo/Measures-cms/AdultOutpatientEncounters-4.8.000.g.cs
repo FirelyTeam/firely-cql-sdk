@@ -165,11 +165,12 @@ public class AdultOutpatientEncounters_4_8_000
 		bool? v_(Encounter ValidEncounter)
 		{
 			var x_ = this.Measurement_Period();
-			var y_ = FHIRHelpers_4_3_000.ToInterval(ValidEncounter?.Period);
-			var z_ = QICoreCommon_2_0_000.toInterval((y_ as object));
-			var aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
+			var y_ = ValidEncounter?.Period;
+			var z_ = FHIRHelpers_4_3_000.ToInterval(y_);
+			var aa_ = QICoreCommon_2_0_000.toInterval((z_ as object));
+			var ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, aa_, "day");
 
-			return aa_;
+			return ab_;
 		};
 		var w_ = context.Operators.Where<Encounter>(u_, v_);
 

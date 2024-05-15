@@ -14,6 +14,7 @@
 	  <ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 		<InternalsVisibleTo Include="Hl7.Cql.Conversion" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.MultiPackager" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Model" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Runtime" Key="$(LibraryPKHash)" />

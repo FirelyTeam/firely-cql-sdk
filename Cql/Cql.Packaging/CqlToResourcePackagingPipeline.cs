@@ -13,6 +13,7 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using static System.FormattableString;
 
@@ -24,14 +25,17 @@ internal class CqlToResourcePackagingPipeline
     protected readonly LibrarySetExpressionBuilder _LibrarySetExpressionBuilder;
     protected readonly AssemblyCompiler _assemblyCompiler;
     protected readonly CqlToResourcePackagingOptions _options;
+    protected readonly ILogger<CqlToResourcePackagingPipeline> _logger;
 
     public CqlToResourcePackagingPipeline(
+        ILogger<CqlToResourcePackagingPipeline> logger,
         IOptions<CqlToResourcePackagingOptions> options,
         ResourcePackager resourcePackager,
         LibrarySetExpressionBuilder librarySetExpressionBuilder,
         AssemblyCompiler assemblyCompiler)
     {
         _options = options.Value;
+        _logger = logger;
         _resourcePackager = resourcePackager;
         _LibrarySetExpressionBuilder = librarySetExpressionBuilder;
         _assemblyCompiler = assemblyCompiler;
@@ -66,6 +70,8 @@ internal class CqlToResourcePackagingPipeline
         }
         catch (Exception e)
         {
+            _logger.LogWarning(e, "Error while building expressions.");
+
             var librarySetReplacement = new LibrarySet();
             librarySetReplacement.AddLibraries(definitions.Libraries.Select(lib => librarySet.GetLibrary(lib, true)!));
             librarySet = librarySetReplacement;
@@ -83,6 +89,8 @@ internal class CqlToResourcePackagingPipeline
         }
         catch (Exception e)
         {
+            _logger.LogWarning(e, "Error while compiling expressions.");
+
             throw new CqlToResourcePackagingPipelineErrors(
                 ExpressionBuildingException: expressionBuildingExceptionInfo?.SourceException,
                 AssemblyCompilingException: e).ToException();

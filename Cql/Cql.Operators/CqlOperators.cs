@@ -171,7 +171,10 @@ namespace Hl7.Cql.Runtime
         public IEnumerable<T>? Where<T>(IEnumerable<T>? source, Func<T, bool?> lambda) =>
             source == null ? null : source.Where(x => lambda(x) ?? false).ToList();
 
-        public TAccumulate? Aggregate<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
+        public TAccumulate? Aggregate<TSource, TAccumulate>(
+            IEnumerable<TSource?>? source,
+            Func<TAccumulate?, TSource?, TAccumulate?> lambda,
+            TAccumulate? seed) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
         public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);

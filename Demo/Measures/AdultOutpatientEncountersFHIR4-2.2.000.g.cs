@@ -135,14 +135,16 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 		var n_ = context.Operators.ListUnion<Encounter>(k_, m_);
 		bool? o_(Encounter ValidEncounter)
 		{
-			var q_ = FHIRHelpers_4_0_001.ToString(ValidEncounter?.StatusElement);
-			var r_ = context.Operators.Equal(q_, "finished");
-			var s_ = this.Measurement_Period();
-			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ValidEncounter?.Period as object));
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, t_, null);
-			var v_ = context.Operators.And(r_, u_);
+			var q_ = ValidEncounter?.StatusElement;
+			var r_ = FHIRHelpers_4_0_001.ToString(q_);
+			var s_ = context.Operators.Equal(r_, "finished");
+			var t_ = this.Measurement_Period();
+			var u_ = ValidEncounter?.Period;
+			var v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((u_ as object));
+			var w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
+			var x_ = context.Operators.And(s_, w_);
 
-			return v_;
+			return x_;
 		};
 		var p_ = context.Operators.Where<Encounter>(n_, o_);
 

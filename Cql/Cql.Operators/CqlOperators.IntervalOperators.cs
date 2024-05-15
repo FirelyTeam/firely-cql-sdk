@@ -157,7 +157,7 @@ namespace Hl7.Cql.Runtime
             if (low == null)
             {
                 if (left.lowClosed ?? false)
-                    low = Minimum<T>();
+                    low = MinValue<T>();
                 else
                     return null;
             }
@@ -195,7 +195,7 @@ namespace Hl7.Cql.Runtime
             if (high == null)
             {
                 if (right.highClosed ?? false)
-                    high = Maximum<T>();
+                    high = MaxValue<T>();
                 else
                     return null;
             }
@@ -267,7 +267,7 @@ namespace Hl7.Cql.Runtime
             if (high == null)
             {
                 if (left.highClosed ?? false)
-                    high = Maximum<T>();
+                    high = MaxValue<T>();
                 else
                     return null;
             }
@@ -305,7 +305,7 @@ namespace Hl7.Cql.Runtime
             if (low == null)
             {
                 if (right.lowClosed ?? false)
-                    low = Minimum<T>();
+                    low = MinValue<T>();
                 else
                     return null;
             }
@@ -438,14 +438,14 @@ namespace Hl7.Cql.Runtime
             if (low == null)
             {
                 if (argument.lowClosed ?? false)
-                    low = Minimum<T>();
+                    low = MinValue<T>();
                 else
                     return null;
             }
             if (high == null)
             {
                 if (argument.highClosed ?? false)
-                    high = Maximum<T>();
+                    high = MaxValue<T>();
                 else
                     return null;
             }
@@ -482,7 +482,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<int?>();
+                return argument.high ?? MaxValue<int?>();
             else return Predecessor(argument.high);
         }
 
@@ -499,7 +499,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<long?>();
+                return argument.high ?? MaxValue<long?>();
             else return Predecessor(argument.high);
         }
         public decimal? End(CqlInterval<decimal?>? argument)
@@ -515,7 +515,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<decimal?>();
+                return argument.high ?? MaxValue<decimal?>();
             else return Predecessor(argument.high);
         }
         public CqlQuantity? End(CqlInterval<CqlQuantity?>? argument)
@@ -531,7 +531,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<CqlQuantity?>();
+                return argument.high ?? MaxValue<CqlQuantity?>();
             else return Predecessor(argument.high);
         }
 
@@ -548,7 +548,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<CqlDate?>();
+                return argument.high ?? MaxValue<CqlDate?>();
             else return Predecessor(argument.high);
         }
         public CqlDateTime? End(CqlInterval<CqlDateTime?>? argument)
@@ -564,7 +564,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<CqlDateTime?>();
+                return argument.high ?? MaxValue<CqlDateTime?>();
             else return Predecessor(argument.high);
         }
         public CqlTime? End(CqlInterval<CqlTime?>? argument)
@@ -580,7 +580,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<CqlTime?>();
+                return argument.high ?? MaxValue<CqlTime?>();
             else return Predecessor(argument.high);
         }
 
@@ -1218,8 +1218,8 @@ namespace Hl7.Cql.Runtime
             // For closed interval boundaries, if the interval boundary is null, the result of the boundary comparison is considered true.
             var lowClosed = interval.lowClosed ?? false;
             var highClosed = interval.highClosed ?? false;
-            var lowCompare = Compare(t, interval.low ?? Minimum<T>()!, precision) ?? (lowClosed ? 0 : null);
-            var highCompare = Compare(t, interval.high ?? Maximum<T>()!, precision) ?? (highClosed ? 0 : null);
+            var lowCompare = Compare(t, interval.low ?? MinValue<T>()!, precision) ?? (lowClosed ? 0 : null);
+            var highCompare = Compare(t, interval.high ?? MaxValue<T>()!, precision) ?? (highClosed ? 0 : null);
 
             var low = lowClosed ? lowCompare >= 0 : lowCompare > 0;
             var high = highClosed ? highCompare <= 0 : highCompare < 0;
@@ -1237,8 +1237,8 @@ namespace Hl7.Cql.Runtime
             if (larger == null || smaller == null)
                 return null;
 
-            var lowCompare = Compare(larger.low ?? Minimum<T>()!, smaller.low ?? Minimum<T>()!, precision);
-            var highCompare = Compare(larger.high ?? Maximum<T>()!, smaller.high ?? Maximum<T>()!, precision);
+            var lowCompare = Compare(larger.low ?? MinValue<T>()!, smaller.low ?? MinValue<T>()!, precision);
+            var highCompare = Compare(larger.high ?? MaxValue<T>()!, smaller.high ?? MaxValue<T>()!, precision);
             //var smallerSelfCompare = rtx.Compare(smaller.Low ?? Minimum<T>(), smaller.High ?? Maximum<T>(), precision);
 
             // From docs: If smaller is point interval, and exactly on the boundary of either side of larger, null
@@ -1265,10 +1265,10 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null) return null;
 
-            var leftLow = left.low ?? Minimum<T>();
-            var leftHigh = left.high ?? Maximum<T>();
-            var rightLow = right.low ?? Minimum<T>();
-            var rightHigh = right.high ?? Maximum<T>();
+            var leftLow = left.low ?? MinValue<T>();
+            var leftHigh = left.high ?? MaxValue<T>();
+            var rightLow = right.low ?? MinValue<T>();
+            var rightHigh = right.high ?? MaxValue<T>();
             if (Compare(leftLow!, rightHigh!, null) > 0 || Compare(rightLow!, leftHigh!, null) > 0) return null;
             else
             {
@@ -1879,8 +1879,8 @@ namespace Hl7.Cql.Runtime
                 return null;
             left = toClosed!(left!)!;
             right = toClosed!(right!)!;
-            if (Compare(left.high ?? Maximum<T>()!, right.low ?? Minimum<T>()!, precision) >= 0
-                && Compare(left.low ?? Minimum<T>()!, right.high ?? Maximum<T>()!, precision) <= 0)
+            if (Compare(left.high ?? MaxValue<T>()!, right.low ?? MinValue<T>()!, precision) >= 0
+                && Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) <= 0)
                 return true;
             else
                 return false;
@@ -1913,8 +1913,8 @@ namespace Hl7.Cql.Runtime
                 return null;
             left = toClosed(left!)!;
             right = toClosed(right!)!;
-            if (Compare(left.low ?? Maximum<T>()!, right.high ?? Minimum<T>()!, precision) <= 0
-                && Compare(left.high ?? Minimum<T>()!, right.high ?? Maximum<T>()!, precision) > 0)
+            if (Compare(left.low ?? MaxValue<T>()!, right.high ?? MinValue<T>()!, precision) <= 0
+                && Compare(left.high ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) > 0)
                 return true;
             else
                 return false;
@@ -1946,8 +1946,8 @@ namespace Hl7.Cql.Runtime
             left = toClosed(left);
             right = toClosed(right);
 
-            if (Compare(left!.high ?? Maximum<T>()!, right!.low ?? Minimum<T>()!, precision) >= 0
-                && Compare(left.low ?? Minimum<T>()!, right.low ?? Minimum<T>()!, precision) < 0)
+            if (Compare(left!.high ?? MaxValue<T>()!, right!.low ?? MinValue<T>()!, precision) >= 0
+                && Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision) < 0)
                 return true;
             else
                 return false;
@@ -1971,12 +1971,12 @@ namespace Hl7.Cql.Runtime
             if (right == null)
                 return false;
 
-            var min = Minimum<T>()!;
+            var min = MinValue<T>()!;
 
             var low = Compare(left!.low ?? min!, right.low ?? min, precision);
             if (low < 0)
                 return false;
-            var max = Maximum<T>()!;
+            var max = MaxValue<T>()!;
             var high = Compare(left.high ?? max, right.high ?? max, precision);
             if (high > 0)
                 return false;
@@ -2104,30 +2104,30 @@ namespace Hl7.Cql.Runtime
 
         public int? IntervalSize(CqlInterval<int?>? argument)
         {
-            var minimum = Minimum<int>();
+            var minimum = MinValue<int>();
             var pointSize = Subtract(Successor(minimum), minimum);
             var closed = ToClosed(argument);
             if (closed == null) return default(int);
-            return Add(Subtract(closed.high ?? Maximum<int>(), closed.low ?? Minimum<int>()), pointSize);
+            return Add(Subtract(closed.high ?? MaxValue<int>(), closed.low ?? MinValue<int>()), pointSize);
         }
 
         public decimal? IntervalSize(CqlInterval<decimal?>? argument)
         {
-            var minimum = Minimum<decimal>();
+            var minimum = MinValue<decimal>();
             var pointSize = Subtract(Successor(minimum), minimum);
             var closed = ToClosed(argument);
             if (closed == null)
                 return default(decimal);
-            return Add(Subtract(closed.high ?? Maximum<decimal>(), closed.low ?? Minimum<decimal>()), pointSize);
+            return Add(Subtract(closed.high ?? MaxValue<decimal>(), closed.low ?? MinValue<decimal>()), pointSize);
         }
         public long? IntervalSize(CqlInterval<long?>? argument)
         {
-            var minimum = Minimum<long>();
+            var minimum = MinValue<long>();
             var pointSize = Subtract(Successor(minimum), minimum);
             var closed = ToClosed(argument);
             if (closed == null)
                 return default(long);
-            return Add(Subtract(closed.high ?? Maximum<long>(), closed.low ?? Minimum<long>()), pointSize);
+            return Add(Subtract(closed.high ?? MaxValue<long>(), closed.low ?? MinValue<long>()), pointSize);
         }
 
         #endregion
@@ -2147,7 +2147,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<int?>();
+                return argument.low ?? MinValue<int?>();
             else return Successor(argument.low);
         }
         public long? Start(CqlInterval<long?>? argument)
@@ -2163,7 +2163,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<long?>();
+                return argument.low ?? MinValue<long?>();
             else return Successor(argument.low);
         }
         public decimal? Start(CqlInterval<decimal?>? argument)
@@ -2179,7 +2179,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<decimal?>();
+                return argument.low ?? MinValue<decimal?>();
             else return Successor(argument.low);
         }
         public CqlQuantity? Start(CqlInterval<CqlQuantity?>? argument)
@@ -2195,7 +2195,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<CqlQuantity?>();
+                return argument.low ?? MinValue<CqlQuantity?>();
             else return Successor(argument.low);
         }
 
@@ -2212,7 +2212,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<CqlDate?>();
+                return argument.low ?? MinValue<CqlDate?>();
             else return Successor(argument.low);
         }
         public CqlDateTime? Start(CqlInterval<CqlDateTime?>? argument)
@@ -2228,7 +2228,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<CqlDateTime?>();
+                return argument.low ?? MinValue<CqlDateTime?>();
             else return Successor(argument.low);
         }
         public CqlTime? Start(CqlInterval<CqlTime?>? argument)
@@ -2244,7 +2244,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<CqlTime?>();
+                return argument.low ?? MinValue<CqlTime?>();
             else return Successor(argument.low);
         }
 
