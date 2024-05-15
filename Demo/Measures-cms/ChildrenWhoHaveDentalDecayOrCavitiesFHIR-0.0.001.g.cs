@@ -168,7 +168,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
+		var a_ = new CqlCode[]
 		{
 			new CqlCode("45755-6", "http://loinc.org", null, null),
 		};
@@ -182,7 +182,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
+		var a_ = new CqlCode[]
 		{
 			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
 			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
@@ -198,10 +198,10 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-		object d_ = context.ResolveParameter("ChildrenWhoHaveDentalDecayOrCavitiesFHIR-0.0.001", "Measurement Period", c_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("ChildrenWhoHaveDentalDecayOrCavitiesFHIR-0.0.001", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -212,8 +212,8 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -224,19 +224,19 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		CqlValueSet a_ = this.Clinical_Oral_Evaluation();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
+		var a_ = this.Clinical_Oral_Evaluation();
+		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		var c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter ValidEncounter)
 		{
-			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
-			Period g_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
-			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+			var f_ = this.Measurement_Period();
+			var g_ = ValidEncounter?.Period;
+			var h_ = FHIRHelpers_4_3_000.ToInterval(g_);
+			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
 
 			return i_;
 		};
-		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -247,21 +247,19 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private bool? Initial_Population_Value()
 	{
-		Patient a_ = this.Patient();
-		Date b_ = a_?.BirthDateElement;
-		string c_ = b_?.Value;
-		CqlDate d_ = context.Operators.Convert<CqlDate>(c_);
-		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-		CqlDateTime f_ = context.Operators.Start(e_);
-		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-		CqlInterval<int?> i_ = context.Operators.Interval(1, 20, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
-		IEnumerable<Encounter> k_ = this.Qualifying_Encounters();
-		bool? l_ = context.Operators.Exists<Encounter>(k_);
-		bool? m_ = context.Operators.And(j_, l_);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.Start(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval(1, 20, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
+		var i_ = this.Qualifying_Encounters();
+		var j_ = context.Operators.Exists<Encounter>(i_);
+		var k_ = context.Operators.And(h_, j_);
 
-		return m_;
+		return k_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -270,7 +268,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private bool? Denominator_Value()
 	{
-		bool? a_ = this.Initial_Population();
+		var a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -281,7 +279,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
+		var a_ = Hospice_6_9_000.Has_Hospice_Services();
 
 		return a_;
 	}
@@ -292,18 +290,18 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private bool? Numerator_Value()
 	{
-		CqlValueSet a_ = this.Dental_Caries();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		var a_ = this.Dental_Caries();
+		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition DentalCaries)
 		{
-			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.prevalenceInterval(DentalCaries);
-			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			bool? h_ = context.Operators.Overlaps(f_, g_, null);
+			var f_ = QICoreCommon_2_0_000.prevalenceInterval(DentalCaries);
+			var g_ = this.Measurement_Period();
+			var h_ = context.Operators.Overlaps(f_, g_, null);
 
 			return h_;
 		};
-		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
-		bool? e_ = context.Operators.Exists<Condition>(d_);
+		var d_ = context.Operators.Where<Condition>(b_, c_);
+		var e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -314,7 +312,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -325,7 +323,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -336,7 +334,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -347,7 +345,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private CqlCode SDE_Sex_Value()
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
