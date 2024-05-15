@@ -8,6 +8,7 @@
 
 using CommandLine;
 using Dumpify;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace CLI_cms.Helpers;
 internal class CommandLineOptions
@@ -22,8 +23,14 @@ internal class CommandLineOptions
 
     public string LibraryName => Library.Split('-')[0];
     public string LibraryVersion => Library.Split('-')[1];
-    public string TestRootDirectory => Path.Join(AppContext.BaseDirectory, "Measures");
-    public string ValueSetDirectory => Path.Join(TestRootDirectory, Library, "ValueSet");
+    private static DirectoryInfo FindProjectDirectory() =>
+        new DirectoryInfo(Directory.GetCurrentDirectory())
+            .FindParentDirectoryContaining("*.csproj")
+        ?? throw new DirectoryNotFoundException("Cannot find the parent directory containing the project file.");
+
+    public string TestRootDirectory => Path.Join(FindProjectDirectory().FullName, "Measures");
+
+    public string ValueSetsDirectory => Path.Join(TestRootDirectory, Library, "ValueSets");
 
     [Option('r', "resourceDirectory", HelpText = "The directory where the library resources are stored.")]
     public string ResourceDirectory
@@ -56,7 +63,7 @@ internal class CommandLineOptions
 
         foreach (var directory in new string[] {
             options.TestRootDirectory,
-            options.ValueSetDirectory,
+            options.ValueSetsDirectory,
             options.ResourceDirectory,
             options.TestCaseDirectory })
         {
@@ -91,7 +98,7 @@ internal class CommandLineOptions
             AssemblySource,
             TestCaseDirectory,
             ResourceDirectory,
-            ValueSetDirectory
+            ValueSetDirectory = ValueSetsDirectory
         }.DumpConsole("Options");
     }
 }

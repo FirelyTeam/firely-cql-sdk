@@ -42,7 +42,7 @@ namespace Test
         {
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
-            var dir = LibrarySetsDirs.Demo.ResourcesDir;// new DirectoryInfo("Resources");
+            var dir = LibrarySetsDirs.Demo.ResourcesDir;
             var asmContext = LoadResources(dir, lib, version);
 
             var patientEverything = new Bundle();   // Add data

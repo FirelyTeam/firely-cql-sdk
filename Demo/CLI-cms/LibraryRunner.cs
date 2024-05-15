@@ -88,7 +88,7 @@ internal static class LibraryRunner
         Type libraryType = ResolveLibraryType(opt, assembly) ?? throw new ArgumentException($"Uknown library: {opt.Library}");
 
         Console.WriteLine("Loading value sets");
-        IValueSetDictionary valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetDirectory));
+        IValueSetDictionary valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetsDirectory));
 
         Console.WriteLine("Loading test case bundle");
         Bundle patientBundle = ResourceHelper.LoadBundle(opt.TestCaseBundleFile);
