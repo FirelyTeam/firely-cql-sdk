@@ -447,7 +447,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
-             var simplifyNullConditionalMemberExpression = _options.TypeFormat == CSharpCodeWriterTypeFormat.Var;
+            var simplifyNullConditionalMemberExpression = _options.TypeFormat == CSharpCodeWriterTypeFormat.Var;
             var visitedBody = Transform(
                 overload.Body,
                 new RedundantCastsTransformer(),
