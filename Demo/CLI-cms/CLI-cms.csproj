@@ -9,8 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="Dumpify" Version="0.6.5"  />
+    <PackageReference Include="Dumpify" Version="0.6.5" />
   </ItemGroup>
 
 
