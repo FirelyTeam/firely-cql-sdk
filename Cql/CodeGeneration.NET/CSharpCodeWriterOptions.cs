@@ -6,12 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System.IO;
+using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Microsoft.Extensions.Configuration;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Represents the options for the CSharpResourceWriter.
+/// Represents the options for the <see cref="CSharpCodeStreamPostProcessor"/>.
 /// </summary>
 public class CSharpCodeWriterOptions
 
@@ -19,7 +20,7 @@ public class CSharpCodeWriterOptions
     /// <summary>
     /// The name of the config setting.
     /// </summary>
-    internal const string ConfigSection = "CSharpResourceWriter";
+    internal const string ConfigSection = "CSharpCodeWriter";
 
     /// <summary>
     /// Gets or sets the output directory.
@@ -35,10 +36,10 @@ public class CSharpCodeWriterOptions
     public CSharpCodeWriterTypeFormat TypeFormat { get; set; }
 
     /// <summary>
-    /// Binds the configuration values to the CSharpResourceWriterOptions object.
+    /// Binds the configuration values to the <see cref="CSharpCodeWriterOptions"/> object.
     /// </summary>
-    /// <param name="opt">The CSharpResourceWriterOptions object to bind the configuration values to.</param>
-    /// <param name="config">The IConfiguration object containing the configuration values.</param>
+    /// <param name="opt">The <see cref="CSharpCodeWriterOptions"/> object to bind the configuration values to.</param>
+    /// <param name="config">The <see cref="IConfiguration"/> object containing the configuration values.</param>
     public static void BindConfig(CSharpCodeWriterOptions opt, IConfiguration config)
     {
         var section = config.GetSection(ConfigSection);

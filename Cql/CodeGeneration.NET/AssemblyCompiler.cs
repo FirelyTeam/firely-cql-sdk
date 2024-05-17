@@ -32,12 +32,15 @@ namespace Hl7.Cql.CodeGeneration.NET
         private readonly CSharpLibrarySetToStreamsWriter _cSharpLibrarySetToStreamsWriter;
         private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
+        private readonly AssemblyDataPostProcessor? _assemblyDataPostProcessor;
 
         public AssemblyCompiler(
             CSharpLibrarySetToStreamsWriter cSharpLibrarySetToStreamsWriter,
             TypeManager typeManager,
-            CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null)
+            CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null,
+            AssemblyDataPostProcessor? assemblyDataPostProcessor = null)
         {
+            _assemblyDataPostProcessor = assemblyDataPostProcessor;
             _cSharpLibrarySetToStreamsWriter = cSharpLibrarySetToStreamsWriter;
             _typeManager = typeManager;
             _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
@@ -104,13 +107,16 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 .Select(item => (item.libraryName, item.stream));
                         var tupleAssembly = CompileTuples(tupleStreams, _referencesLazy.Value);
                         results.Add("TupleTypes", tupleAssembly);
+                        _assemblyDataPostProcessor?.ProcessAssemblyData("TupleTypes", tupleAssembly);
                         AssemblyData[] additionalReferences = [tupleAssembly];
 
                         // Compile Libraries
                         foreach (var (libraryName, stream, _) in items.Where(item => !item.isTuple))
                         {
                             var library = librarySet.GetLibrary(libraryName)!;
-                            CompileNode(stream, results, librarySet, library, _referencesLazy.Value, additionalReferences);
+                            var libraryAssembly = CompileNode(stream, results, librarySet, library, _referencesLazy.Value, additionalReferences);
+                            results.Add(library.NameAndVersion()!, libraryAssembly);
+                            _assemblyDataPostProcessor?.ProcessAssemblyData(library.NameAndVersion()!, libraryAssembly);
                         }
                         break;
                 }
@@ -187,7 +193,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 
-        private static void CompileNode(
+        private static AssemblyData CompileNode(
             Stream sourceCodeStream,
             Dictionary<string, AssemblyData> assemblies,
             LibrarySet librarySet,
@@ -265,7 +271,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             var bytes = codeStream.ToArray();
             var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.NameAndVersion()!, sourceCode } });
-            assemblies.Add(library.NameAndVersion()!, asmData);
+            return asmData;
         }
 
 
