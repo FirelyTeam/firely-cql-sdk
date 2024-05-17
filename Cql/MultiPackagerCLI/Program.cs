@@ -25,6 +25,7 @@ foreach ((string librarySetSubDir, string measuresSubDir) in iteration)
                         --elm "{solutionDir}/LibrarySets/{librarySetSubDir}/Elm"
                         --cql "{solutionDir}/LibrarySets/{librarySetSubDir}/Cql"
                         --fhir "{solutionDir}/LibrarySets/{librarySetSubDir}/Resources"
+                        --dll "{solutionDir}/LibrarySets/{librarySetSubDir}/Assemblies"
                         --cs "{solutionDir}/Demo/{measuresSubDir}"
                         --cs-typeformat {csTypeFormat}
                         --f true
