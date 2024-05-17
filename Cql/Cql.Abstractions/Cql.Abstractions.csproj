@@ -19,6 +19,7 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Operators" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Api" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 	</ItemGroup>

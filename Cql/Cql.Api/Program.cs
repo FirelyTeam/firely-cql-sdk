@@ -4,6 +4,7 @@ using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
+using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Options;
 
 internal class Program
@@ -14,7 +15,12 @@ internal class Program
 
         // Add services to the container.
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ForFhir(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+                options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+            }); 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

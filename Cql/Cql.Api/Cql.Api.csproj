@@ -13,13 +13,28 @@
 
   <ItemGroup>
     <PackageReference Include="Hl7.Fhir.R4" Version="5.7.0" />
+    <PackageReference Include="Hl7.Fhir.Serialization" Version="4.3.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
+    <ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
     <ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
+    <ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
     <ProjectReference Include="..\Cql.CqlToElm\Cql.CqlToElm.csproj" />
     <ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
+    <ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />
+    <ProjectReference Include="..\Cql.Logging\Cql.Logging.csproj" />
+    <ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+    <ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
+    <ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
+    <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+    <ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+    <ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
+    <ProjectReference Include="..\CqlToElmTests\CqlToElmTests.csproj" />
+    <ProjectReference Include="..\Cql\Cql.csproj" />
+    <ProjectReference Include="..\Elm\Elm.csproj" />
   </ItemGroup>
 
 </Project>
