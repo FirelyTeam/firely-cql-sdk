@@ -23,7 +23,7 @@ internal readonly record struct LibraryPackageCallbacks
     private readonly Action<Resource>? _afterPackageMutator;
     private readonly Func<Resource, string>? _buildUrlFromResource;
 
-    public string BuildUrlFromResource(Resource resource) => 
+    public string BuildUrlFromResource(Resource resource) =>
         _buildUrlFromResource?.Invoke(resource) ?? "#";
 
     public void MutateResource(Resource resource) =>
