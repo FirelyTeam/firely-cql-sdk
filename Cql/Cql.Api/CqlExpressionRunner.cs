@@ -97,67 +97,6 @@ namespace Hl7.Cql.Api
                 });
                 result.Parameter.AddRange(ConvertToFhirDataType(expressionValue!, "return")!);
 
-                //Check if they provided an expectation
-                if (cqlExpectation != null)
-                {
-                    // Build and validate the CQL expectation
-                    var expectation = Expression(cqlExpectation);
-                    var expectationErrors = expectation.GetErrors();
-                    if (expectationErrors.Any())
-                    {
-                        var issues = expressionErrors.Select(s => new IssueComponent()
-                        {
-                            Code = IssueType.Invalid,
-                            Severity = IssueSeverity.Error,
-                            Details = new CodeableConcept()
-                            {
-                                Text = s.message
-                            },
-                            ElementId = "expectation"
-                        });
-                        outcome.Issue.AddRange(issues);
-                        result.Parameter.Add(new Parameters.ParameterComponent()
-                        {
-                            Resource = outcome
-                        });
-                        return result;
-                    }
-
-                    // Evaluate the CQL expectation
-                    var expectationValue = _expressionBuilder.Lambda(expectation).Compile().DynamicInvoke(_cqlContext);
-                    outcome.Issue.Add(new IssueComponent()
-                    {
-                        Code = IssueType.Informational,
-                        Severity = IssueSeverity.Information,
-                        Details = new CodeableConcept()
-                        {
-                            Text = $"Executed CQL Expression: {cqlExpectation}"
-                        }
-                    });
-                    result.Parameter.AddRange(ConvertToFhirDataType(expectationValue!, "expected")!);
-
-                    // Compare the CQL expression and expectation
-                    Elm.Expression equal = Equals(expression, expectation);
-                    var equalLambda = _expressionBuilder.Lambda(equal);
-                    var equalDelegate = equalLambda.Compile();
-                    var equalResult = (bool?)equalDelegate.DynamicInvoke(_cqlContext);
-
-                    outcome.Issue.Add(new IssueComponent()
-                    {
-                        Code = IssueType.Informational,
-                        Severity = IssueSeverity.Information,
-                        Details = new CodeableConcept()
-                        {
-                            Text = $"Compared CQL Expression: {cqlExpectation} | Expectation: {cqlExpectation}"
-                        }
-                    });
-                    result.Parameter.Add(new Parameters.ParameterComponent()
-                    {
-                        Name = "equal",
-                        Value = new FhirBoolean(equalResult)
-                    });
-
-                }
                 result.Parameter.Add(new Parameters.ParameterComponent()
                 {
                     Resource = outcome
@@ -193,7 +132,11 @@ namespace Hl7.Cql.Api
             try
             {
                 var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
-                var cqlType = expressionResult.GetType();
+                if (expressionResult is null) 
+                {
+                    return new[] { CreateDataMissingParameter() };
+                }
+                var cqlType = expressionResult!.GetType();
                 var typeEntry = crosswalk.TypeEntryFor(cqlType);
                 if (typeEntry is null)
                     throw new InvalidOperationException($"Unable to find FHIR type for CQL type {cqlType}");
@@ -362,7 +305,24 @@ namespace Hl7.Cql.Api
             }
             return thisParam;
         }
+
+        private static ParameterComponent CreateDataMissingParameter()
+        {
+
+            return new ParameterComponent
+            {
+                Name = "return",
+                Value = new Extension
+                {
+                    Url = "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+                    Value = new Hl7.Fhir.Model.Code("null result")
+                }
+            };
+
+
+        }
     }
+    
 
 
 }
