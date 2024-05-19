@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
@@ -10,13 +11,35 @@ namespace Hl7.Cql.Elm.Serialization;
 
 internal class AbstractClassConverterFactory : JsonConverterFactory
 {
+    public static void SkipNext()
+    {
+        SkipOnce = true;
+    }
+
+    [ThreadStatic]
+    private static bool SkipOnce;
+
     public override bool CanConvert(Type typeToConvert)
     {
-        if(!typeToConvert.IsAbstract)
+        if (SkipOnce)
+        {
+            SkipOnce = false;
             return false;
+        }
+
+        if (typeToConvert == typeof(AliasedQuerySource)) return false;
 
         var xmlattrs = typeToConvert.GetCustomAttributes<XmlIncludeAttribute>(false);
-        return xmlattrs.Any();
+        if (xmlattrs.Any()) return true;
+
+        if (typeToConvert.BaseType is { } baseType && baseType != typeof(Element))
+        {
+            xmlattrs = baseType.GetCustomAttributes<XmlIncludeAttribute>(false)
+                .Where(ca => ca.Type == typeToConvert);
+            return xmlattrs.Any();
+        }
+
+        return false;
     }
 
     public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
@@ -32,21 +55,20 @@ internal class AbstractClassConverter<T> : JsonConverter<T> where T : class
     {
         var statedType = ScanReaderForInstanceType(ref reader);
 
-        if(statedType is null)
+        if(statedType is null && typeToConvert.IsAbstract)
             throw new JsonException("Could not find the 'type' property in the JSON object.");
 
-        var concreteType = typeToConvert.Name == statedType ? typeToConvert : findSubtype(statedType);
+        var concreteType = typeToConvert.Name == statedType || statedType == null
+            ? typeToConvert
+            : findSubtype(statedType);
 
         if(concreteType is null)
             throw new JsonException($"There is no {nameof(XmlIncludeAttribute)} on type {typeToConvert} for " +
                                     $" the specified type '{concreteType}'.");
 
-        if (concreteType == typeToConvert)
-        {
-            return JsonSerializer.Deserialize<T>(ref reader, options);
-        }
-        else
-            return (T?)JsonSerializer.Deserialize(ref reader, concreteType, options);
+        AbstractClassConverterFactory.SkipNext();
+
+        return (T?)JsonSerializer.Deserialize(ref reader, concreteType, options);
 
         Type? findSubtype(string name) =>
             typeToConvert.GetCustomAttributes<XmlIncludeAttribute>(false)
@@ -81,8 +103,9 @@ internal class AbstractClassConverter<T> : JsonConverter<T> where T : class
 
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
-        var nestedOptions = new JsonSerializerOptions(options);
-        nestedOptions.TypeInfoResolver = new PolymorphicTypeResolver();
-        JsonSerializer.Serialize(writer, value, value.GetType(), nestedOptions);
+        throw new NotImplementedException();
+        // var nestedOptions = new JsonSerializerOptions(options);
+        // nestedOptions.TypeInfoResolver = new PolymorphicTypeResolver();
+        // JsonSerializer.Serialize(writer, value, value.GetType(), nestedOptions);
     }
 }

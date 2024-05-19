@@ -12,31 +12,20 @@ internal class NsSubclassConverter : JsonConverter
 {
     public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
-        using var ms = new StringWriter();
-        using var stringWriter = new JsonTextWriter(ms);
-
         SkipOnce = true;
-        serializer.Serialize(stringWriter, value);
-
-        stringWriter.Flush();
-        var objString = ms.ToString();
-
-        // Sorry, I have no idea why this bit gets appended. Just removing it now, it is getting late.
-        objString = objString.Replace("}null}", "}}");
-        var parsedObject = JObject.Parse(objString);
-        parsedObject.AddFirst(new JProperty("type", value is not null ? value.GetType().Name : JValue.CreateNull()));
-
-        parsedObject.WriteTo(writer);
+        serializer.Serialize(writer, value);
     }
 
     public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
+        var c = serializer.ContractResolver.ResolveContract(objectType);
+
         var parsedObject = JToken.Load(reader);
         var typeToken = parsedObject["type"];
         var statedType = typeToken?.ToString();
 
         if (statedType == null && objectType.IsAbstract)
-                throw new JsonException("Could not find the 'type' property in the JSON object.");
+                throw new JsonException("Expected a 'type' property in the JSON object.");
 
         var concreteType = objectType.Name == statedType || statedType is null
             ? objectType
@@ -68,10 +57,11 @@ internal class NsSubclassConverter : JsonConverter
             return false;
         }
 
-
         var xmlattrs = objectType.GetCustomAttributes<XmlIncludeAttribute>(false);
         if (xmlattrs.Any()) return true;
 
+        // The ELM json representation does not include the type of the object everwhere,
+        // especially not in direct subclasses of Element (I hope).
         if (objectType.BaseType is { } baseType && baseType != typeof(Element))
         {
             xmlattrs = baseType.GetCustomAttributes<XmlIncludeAttribute>(false)
@@ -80,6 +70,18 @@ internal class NsSubclassConverter : JsonConverter
         }
 
         return false;
+    }
+
+    private bool isPolymorphicViaXmlInclude(Type t)
+    {
+        // Some types have a *public* property "type" of their own, magically,
+        // the polymorphic types in the ELM json representation do not.
+        if(t.GetProperty("type") != null) return false;
+
+        var xmlattrs = t.GetCustomAttributes<XmlIncludeAttribute>(false);
+        if (xmlattrs.Any()) return true;
+
+        return t.BaseType is not null && isPolymorphicViaXmlInclude(t.BaseType);
     }
 
     [ThreadStatic]

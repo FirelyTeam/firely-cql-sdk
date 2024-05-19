@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using Hl7.Cql.Elm.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CoreTests
 {
@@ -12,23 +13,26 @@ namespace CoreTests
         [TestMethod]
         public void Elm_Deserialize_TupleElementDefinition()
         {
-            // var json =
-            // @"{
-            //         ""type"" : ""TupleElementDefinition"",
-            //         ""elementType"" :
-            //         {
-            //             ""type"" : ""NamedTypeSpecifier"",
-            //             ""name"" : ""{urn:hl7-org:elm-types:r1}Integer""
-            //         }
-            // }";
-            // var ted = JsonSerializer.Deserialize<TupleElementDefinition>(json, Library.JsonSerializerOptions);
-            // Assert.IsNull(ted.type, "type is a TypeSpecifier, not a string and strict mode is off.");
-            // Assert.IsNotNull(ted.elementType);
-            // Assert.IsInstanceOfType(ted.elementType, typeof(NamedTypeSpecifier));
-            // var nts = (NamedTypeSpecifier)ted.elementType;
-            // Assert.IsNotNull(nts.name);
-            // Assert.AreEqual("{urn:hl7-org:elm-types:r1}Integer", nts.name.Name);
+            const string json = """
+                                {
+                                     "type" : "TupleElementDefinition",
+                                     "elementType" : 
+                                     {
+                                         "type": "NamedTypeSpecifier",
+                                         "name": "{urn:hl7-org:elm-types:r1}Integer"
+                                     }
+                                }
+                                """;
 
+            var serializer = JsonSerializer.Create();
+            var ted = serializer.Deserialize<TupleElementDefinition>(new JsonTextReader(new StringReader(json)));
+
+            Assert.IsNull(ted.type, "type is a TypeSpecifier, not a string and strict mode is off.");
+            Assert.IsNotNull(ted.elementType);
+            Assert.IsInstanceOfType(ted.elementType, typeof(NamedTypeSpecifier));
+            var nts = (NamedTypeSpecifier)ted.elementType;
+            Assert.IsNotNull(nts.name);
+            Assert.AreEqual("{urn:hl7-org:elm-types:r1}Integer", nts.name.Name);
         }
 
         [TestMethod]
@@ -82,37 +86,10 @@ namespace CoreTests
         [TestMethod]
         public void Elm_Deseriailze_FhirHelpers()
         {
-            var settings = new JsonSerializerSettings();
-            settings.Converters.Add(new NsLibraryConverter());
-            settings.Converters.Add(new NsSubclassConverter());
-            settings.Converters.Add(new NsDefArrayConverter());
-            settings.Converters.Add(new NsXmlQualifiedNameConverter());
-            settings.Converters.Add(new NsNarrativeConverter());
-            settings.NullValueHandling = NullValueHandling.Ignore;
-            settings.DefaultValueHandling = DefaultValueHandling.Ignore;
-            settings.MissingMemberHandling = MissingMemberHandling.Error;
-            var jser = JsonSerializer.Create(settings);
-
             var fi = new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json");
-            using var fs = fi.OpenText();
-            using var jr = new JsonTextReader(fs);
+            var lib = Library.LoadFromJson(fi);
 
-            var o = jser.Deserialize<Library>(jr);
-
-            using var sw = new StringWriter();
-            using var jw = new JsonTextWriter(sw);
-            jser.Serialize(jw, o);
-            jw.Flush();
-
-            var elm = sw.ToString();
-
-            // var options = Library.JsonSerializerOptions;
-            //
-            // Library lib = JsonSerializer.Deserialize<Library>(fs, options);
-            //
-            // var elm = JsonSerializer.Serialize(lib, options);
-
-
+            var elm = lib.SerializeToJson();
         }
     }
 }

@@ -13,8 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Hl7.Cql.Elm
 {
@@ -24,9 +23,27 @@ namespace Hl7.Cql.Elm
         public const string XmlMimeType = "application/elm+xml";
         public const string LibraryNodeProperty = "Library";
 
-        public static readonly JsonSerializerOptions JsonSerializerOptions = GetSerializerOptions(false);
-        public static readonly JsonSerializerOptions JsonSerializerOptionsStrict = GetSerializerOptions(true);
+        // public static readonly JsonSerializerOptions JsonSerializerOptions = GetSerializerOptions(false);
+        // public static readonly JsonSerializerOptions JsonSerializerOptionsStrict = GetSerializerOptions(true);
 
+        internal static readonly JsonSerializerSettings JsonSerializerSettings = new()
+            {
+                Converters = new List<JsonConverter>()
+                    {
+                        new NsLibraryConverter(),
+                        new NsSubclassConverter(),
+                        new NsDefArrayConverter(),
+                        new NsXmlQualifiedNameConverter(),
+                        new NsNarrativeConverter()
+                    },
+
+                    NullValueHandling = NullValueHandling.Ignore,
+                    DefaultValueHandling = DefaultValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Error,
+                    ContractResolver = new NsTypeDiscriminatorContractResolver()
+            };
+
+        [JsonIgnore]
         public string? NameAndVersion
         {
             get
@@ -39,6 +56,7 @@ namespace Hl7.Cql.Elm
             }
         }
 
+        [JsonIgnore]
         public string? Name
         {
             get
@@ -49,6 +67,7 @@ namespace Hl7.Cql.Elm
             }
         }
 
+        [JsonIgnore]
         public string? Version
         {
             get
@@ -59,6 +78,7 @@ namespace Hl7.Cql.Elm
             }
         }
 
+        /*
         private static JsonSerializerOptions GetSerializerOptions(bool strict)
         {
             var options = new JsonSerializerOptions()
@@ -68,15 +88,19 @@ namespace Hl7.Cql.Elm
 
             options.Converters.Add(new LibraryJsonConverter());
             options.Converters.Add(new TopLevelDefinitionConverterFactory());
-            //options.Converters.Add(new AbstractClassConverterFactory());
+            options.Converters.Add(new AbstractClassConverterFactory());
             //options.AddPolymorphicConverters(strict);
             options.Converters.Add(new XmlQualifiedNameConverter());
             options.Converters.Add(new JsonStringEnumConverter());
 
-            options.TypeInfoResolver = new PolymorphicTypeResolver();
+            //options.TypeInfoResolver = new PolymorphicTypeResolver();
             return options;
         }
+        */
 
+        /// <summary>
+        /// Loads a library from a JSON file.
+        /// </summary>
         public static Library LoadFromJson(FileInfo file)
         {
             if (!file.Exists)
@@ -84,9 +108,68 @@ namespace Hl7.Cql.Elm
             using var stream = file.OpenRead();
             return LoadFromJson(stream);
         }
-        public static Library LoadFromJson(Stream stream) =>
-            JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
-                throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}");
+
+        // public static Library LoadFromJson(Stream stream) =>
+        //     JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
+        //         throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}");
+
+        /// <summary>
+        /// Loads a library from a stream containing JSON.
+        /// </summary>
+        public static Library LoadFromJson(Stream stream)
+        {
+            var serializer = JsonSerializer.Create(JsonSerializerSettings);
+            using var sr = new StreamReader(stream);
+            using var jr = new JsonTextReader(sr);
+            return serializer.Deserialize<Library>(jr)!;
+        }
+
+        /// <summary>
+        /// Loads a library from a JSON string.
+        /// </summary>
+        public static Library ParseFromJson(string json)
+        {
+            var serializer = JsonSerializer.Create(JsonSerializerSettings);
+
+            using var sr = new StringReader(json);
+            using var jr = new JsonTextReader(sr);
+            return serializer.Deserialize<Library>(jr)!;
+        }
+
+        public string SerializeToJson(bool writeIndented = true)
+        {
+            var settings = new JsonSerializerSettings(JsonSerializerSettings)
+            {
+                Formatting = writeIndented ? Formatting.Indented : Formatting.None
+            };
+            var serializer = JsonSerializer.Create(settings);
+
+            using var sw = new StringWriter();
+            using var jw = new JsonTextWriter(sw);
+            serializer.Serialize(jw, this);
+            jw.Flush();
+
+            return sw.ToString();
+        }
+
+        /// <summary>
+        /// Writes this library in JSON format to <paramref name="stream"/>.
+        /// </summary>
+        /// <param name="stream">A writable stream.</param>
+        /// <param name="writeIndented">If <see langword="true" />, formats the JSON with indenting.</param>
+        public void WriteJson(Stream stream, bool writeIndented = true)
+        {
+            var settings = new JsonSerializerSettings(JsonSerializerSettings)
+            {
+                Formatting = writeIndented ? Formatting.Indented : Formatting.None
+            };
+            var serializer = JsonSerializer.Create(settings);
+
+            using var sw = new StreamWriter(stream);
+            serializer.Serialize(sw, this);
+            sw.Flush();
+        }
+
 
         /// <summary>
         /// Get a flat list of ELM libraries included in the set of libraries passed in. 
@@ -102,22 +185,6 @@ namespace Hl7.Cql.Elm
                 .Select(p => p!)
                 .ToArray();
             return elmLibraries;
-        }
-
-        /// <summary>
-        /// Writes this library in JSON format to <paramref name="stream"/>.
-        /// </summary>
-        /// <param name="stream">A writable stream.</param>
-        /// <param name="writeIndented">If <see langword="true" />, formats the JSON with indenting.</param>
-        public void WriteJson(Stream stream, bool writeIndented = true)
-        {
-            var options = GetSerializerOptions(false);
-            if (writeIndented)
-                options.WriteIndented = true;
-            else
-                options.WriteIndented = false;
-            JsonSerializer.Serialize(stream, this, options);
-
         }
 
         internal static DirectedGraph GetIncludedLibraries(IEnumerable<Library> libraries)

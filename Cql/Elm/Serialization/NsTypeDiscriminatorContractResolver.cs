@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -18,12 +16,13 @@ internal class NsTypeDiscriminatorContractResolver : DefaultContractResolver {
 
         Debug.WriteLine(type.Name);
 
-        var xmlattrs = type.GetCustomAttributes<XmlIncludeAttribute>(false);
-
-        if (xmlattrs.Any())
+        if (type.IsAssignableTo(typeof(Elm.Element)))
         {
-            var feeClassProperty = CreateTypeDiscriminatorProperty(type);
-            baseList.Add(feeClassProperty);
+            if (baseList.SingleOrDefault(p => p.PropertyName == "type") is { } existing)
+                baseList.Remove(existing);
+
+            var typeDiscriminatorProperty = CreateTypeDiscriminatorProperty(type);
+            baseList.Add(typeDiscriminatorProperty);
         }
 
         return baseList;
@@ -37,7 +36,7 @@ internal class NsTypeDiscriminatorContractResolver : DefaultContractResolver {
             ValueProvider = new DiscriminatorValueProvider(),
             AttributeProvider = null,
             Readable = true,
-            Writable = true,
+            Writable = false,
             ShouldSerialize = _ => true
         };
     }
@@ -46,7 +45,7 @@ internal class NsTypeDiscriminatorContractResolver : DefaultContractResolver {
         public object GetValue(object target) => target.GetType().Name;
         public void SetValue(object target, object? value)
         {
-            throw new NotSupportedException("Setting the discriminator value is not supported.");
+           throw new NotSupportedException("Setting the discriminator value is not supported.");
         }
     }
 

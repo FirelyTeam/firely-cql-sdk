@@ -373,6 +373,7 @@ Hl7.Cql.Elm.Library
 Hl7.Cql.Elm.Library.Library() -> void
 Hl7.Cql.Elm.Library.Name.get -> string?
 Hl7.Cql.Elm.Library.NameAndVersion.get -> string?
+Hl7.Cql.Elm.Library.SerializeToJson(bool writeIndented = true) -> string!
 Hl7.Cql.Elm.Library.Version.get -> string?
 Hl7.Cql.Elm.Library.WriteJson(System.IO.Stream! stream, bool writeIndented = true) -> void
 Hl7.Cql.Elm.List
@@ -768,6 +769,7 @@ static Hl7.Cql.Elm.Library.GetIncludedElmLibraries(System.Collections.Generic.IE
 static Hl7.Cql.Elm.ExtensionMethods.Signature(this Hl7.Cql.Elm.FunctionDef! def) -> string!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.Library.ParseFromJson(string! json) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.FunctionDef![]! functions) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.IDefinitionElement![]! elements) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
@@ -797,8 +799,6 @@ static Hl7.Cql.Elm.TypeSpecifierExtensions.IsOrderedType(this Hl7.Cql.Elm.TypeSp
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToIntervalType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToListType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.ListTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToNamedType(this System.Xml.XmlQualifiedName! qname) -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static readonly Hl7.Cql.Elm.Library.JsonSerializerOptions -> System.Text.Json.JsonSerializerOptions!
-static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.Json.JsonSerializerOptions!
 ~Hl7.Cql.Elm.Aggregate.initialValue.get -> Hl7.Cql.Elm.Expression
 ~Hl7.Cql.Elm.Aggregate.initialValue.set -> void
 ~Hl7.Cql.Elm.Aggregate.iteration.get -> Hl7.Cql.Elm.Expression
