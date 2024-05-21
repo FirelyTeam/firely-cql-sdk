@@ -65,7 +65,7 @@ namespace Hl7.Cql.Packaging
                 {
                     if (node.Value.Properties != null)
                     {
-                        if (node.Value.Properties.TryGetValue(libraryProperty, out object libObject)
+                        if (node.Value.Properties.TryGetValue(libraryProperty, out object? libObject)
                             && libObject is FhirLibrary library)
                         {
                             yield return library;
@@ -81,7 +81,7 @@ namespace Hl7.Cql.Packaging
 
         [UsedImplicitly]
         public static DirectedGraph GetDependencies(
-            this FhirLibrary library, 
+            this FhirLibrary library,
             DirectoryInfo directory) =>
             library.GetDependencies(id =>
             {

@@ -23,6 +23,13 @@ classDiagram
 
         class WriteToFileCSharpCodeStreamPostProcessor {
         }
+
+        class AssemblyDataPostProcessor {
+            ProcessAssemblyData(name : string, assemblyData : AssemblyData) void
+        }
+
+        class WriteToFileAssemblyDataPostProcessor {
+        }
     }
 
     namespace Expression_Building {
@@ -94,10 +101,12 @@ classDiagram
     CqlOperatorsBinder --> OperatorsBinder : inherits
     CqlContextBinder --> ContextBinder : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
+    WriteToFileAssemblyDataPostProcessor --> AssemblyDataPostProcessor : inherits
     WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
     %% Injected Dependencies
 
+    AssemblyDataPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpCodeStreamPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
     TypeManager ..> AssemblyCompiler : injected

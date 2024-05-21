@@ -1,11 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Microsoft.CodeAnalysis;
 
-var solutionDir = new DirectoryInfo(Environment.CurrentDirectory);
-while (!File.Exists(Path.Combine(solutionDir!.FullName, "CqlAndDemo.sln")))
-    solutionDir = solutionDir.Parent;
+var solutionDir = new DirectoryInfo(Environment.CurrentDirectory)
+    .FindParentDirectoryContaining("CqlAndDemo.sln")!;
 
 CSharpCodeWriterTypeFormat csTypeFormat = CSharpCodeWriterTypeFormat.Var;
 (string subDir, string measureSubDir)[] iteration = [
@@ -25,6 +25,7 @@ foreach ((string librarySetSubDir, string measuresSubDir) in iteration)
                         --elm "{solutionDir}/LibrarySets/{librarySetSubDir}/Elm"
                         --cql "{solutionDir}/LibrarySets/{librarySetSubDir}/Cql"
                         --fhir "{solutionDir}/LibrarySets/{librarySetSubDir}/Resources"
+                        --dll "{solutionDir}/LibrarySets/{librarySetSubDir}/Assemblies"
                         --cs "{solutionDir}/Demo/{measuresSubDir}"
                         --cs-typeformat {csTypeFormat}
                         --f true
