@@ -7,9 +7,11 @@
  */
 
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Task = System.Threading.Tasks.Task;
 
 namespace Hl7.Cql.CodeGeneration.NET.PostProcessors;
 
@@ -17,6 +19,7 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
 {
     private readonly AssemblyDataWriterOptions _assemblyDataWriterOptions;
     private readonly ILogger<WriteToFileAssemblyDataPostProcessor> _logger;
+    private readonly Task _initTask;
 
     public WriteToFileAssemblyDataPostProcessor(
         IOptions<AssemblyDataWriterOptions> assemblyDataWriterOptions,
@@ -24,16 +27,54 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
     {
         _logger = logger;
         _assemblyDataWriterOptions = assemblyDataWriterOptions.Value;
+        _initTask = InitAsync();
+    }
+
+    private async Task InitAsync()
+    {
+        await Task.Yield();
+
+        var directory = GetOutDirectory();
+        if (Directory.Exists(directory))
+        {
+            var filesWrittenFile = GetFilesDataFileFullName(directory);
+            var filesWritten = await File.ReadAllLinesAsync(filesWrittenFile);
+            _logger.LogInformation("Deleting {count} previous Assembly files", filesWritten.Length);
+
+            filesWritten.AsParallel().ForAll(path =>
+            {
+                _logger.LogInformation("Deleting previous Assembly file: {path}", path);
+                File.Delete(path);
+            });
+
+            _logger.LogInformation("Deleting file record of previous Assembly files: {path}", filesWrittenFile);
+            File.Delete(filesWrittenFile);
+        }
+        Directory.CreateDirectory(directory);
     }
 
     public override void ProcessAssemblyData(string name, AssemblyData assemblyData)
     {
-        var file = new FileInfo($"{Path.Combine(_assemblyDataWriterOptions.OutDirectory!.FullName, name)}.dll");
-        _logger.LogInformation("Writing Assembly file: '{file}'", file.FullName);
+        _initTask.Wait();
 
-        file.Directory!.Create();
-        File.WriteAllBytes(file.FullName, assemblyData.Binary);
+        var directory = GetOutDirectory();
+        var assemblyFile = GetAssemblyDllFileFullName(name, directory);
+        var filesWrittenFile = GetFilesDataFileFullName(directory);
+
+        _logger.LogInformation("Writing Assembly file: '{file}'", assemblyFile);
+
+        File.AppendAllLines(filesWrittenFile, [name]);
+        File.WriteAllBytes(assemblyFile, assemblyData.Binary);
     }
+
+    private string GetOutDirectory() =>
+        _assemblyDataWriterOptions.OutDirectory!.FullName;
+
+    private static string GetFilesDataFileFullName(string directory) =>
+        Path.Combine(directory, "_files.dat");
+
+    private static string GetAssemblyDllFileFullName(string name, string directory) =>
+        Path.Combine(directory, $"{name}.dll");
 
     public override void ProcessReferenceAssembly(Assembly referenceAssembly)
     {
