@@ -21,8 +21,8 @@ Hl7.Cql.Runtime.DefinitionDictionary<T>.ContainsKey(string? libraryName, string!
 Hl7.Cql.Runtime.DefinitionDictionary<T>.ContainsKey(string? libraryName, string! definition, System.Type![]! signature) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.ContainsLibrary(string! libraryName) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.DefinitionDictionary() -> void
-Hl7.Cql.Runtime.DefinitionDictionary<T>.DefinitionsForLibrary(string? libraryName) -> System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, System.Collections.Generic.List<(System.Type![]! Signature, T! T)>!>>!
-Hl7.Cql.Runtime.DefinitionDictionary<T>.Libraries.get -> System.Collections.Generic.IEnumerable<string!>!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.DefinitionsForLibrary(string? libraryName) -> System.Collections.Generic.IReadOnlyDictionary<string!, System.Collections.Generic.List<(System.Type![]! Signature, T! T)>!>!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.Libraries.get -> System.Collections.Generic.IReadOnlyCollection<string!>!
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Merge(params Hl7.Cql.Runtime.DefinitionDictionary<T!>![]! dictionaries) -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Merge(string! libKey, System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, System.Collections.Generic.List<(System.Type![]!, T!)>!>>! expressions) -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, string! definition, params System.Type![]! signature].get -> T!

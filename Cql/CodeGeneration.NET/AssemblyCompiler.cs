@@ -10,6 +10,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Microsoft.CodeAnalysis;
@@ -100,6 +101,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                         break;
 
                     case NET.CSharpSourceCodeStep.OnDone:
+                        if (_assemblyDataPostProcessor != null)
+                            foreach (var referenceAssembly in _referencesLazy.Value)
+                                _assemblyDataPostProcessor.ProcessReferenceAssembly(referenceAssembly);
+
+
                         // Compile Tuples
                         var tupleStreams =
                             items
@@ -107,7 +113,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 .Select(item => (item.libraryName, item.stream));
                         var tupleAssembly = CompileTuples(tupleStreams, _referencesLazy.Value);
                         results.Add("TupleTypes", tupleAssembly);
-                        _assemblyDataPostProcessor?.ProcessAssemblyData("TupleTypes", tupleAssembly);
+                        _assemblyDataPostProcessor?.ProcessAssemblyData("Tuples", tupleAssembly);
                         AssemblyData[] additionalReferences = [tupleAssembly];
 
                         // Compile Libraries

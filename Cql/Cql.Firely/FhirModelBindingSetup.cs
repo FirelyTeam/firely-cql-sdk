@@ -38,9 +38,12 @@ namespace Hl7.Cql.Fhir
             _options = options ?? FhirModelBindingOptions.Default;
 
             Comparers = new CqlComparers();
+
+            var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, _options.LRUCacheSize);
+
             Operators = CqlOperators.Create(
                     TypeResolver,
-                    FhirTypeConverter.Create(ModelInfo.ModelInspector, _options.LRUCacheSize),
+                    typeConverter,
                     dataSource,
                     Comparers,
                     valuesets,

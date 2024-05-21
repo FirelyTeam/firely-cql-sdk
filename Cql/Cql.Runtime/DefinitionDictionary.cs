@@ -258,7 +258,7 @@ public class DefinitionDictionary<T> where T : class
     /// <summary>
     /// Gets the libraries defined in this dictionary.
     /// </summary>
-    public IEnumerable<string> Libraries => ExpressionsByLibrary.Keys;
+    public IReadOnlyCollection<string> Libraries => ExpressionsByLibrary.Keys;
 
     /// <summary>
     /// Gets key-value pairs of definitions and their values.
@@ -266,14 +266,12 @@ public class DefinitionDictionary<T> where T : class
     /// <param name="libraryName">The name of the library.</param>
     /// <returns>Key-value pairs of definitions and their values.</returns>
     /// <exception cref="ArgumentException">If <paramref name="libraryName"/> does not exist in the dictionary.</exception>
-    public IEnumerable<KeyValuePair<string, List<(Type[] Signature, T T)>>> DefinitionsForLibrary(string? libraryName)
+    public IReadOnlyDictionary<string, List<(Type[] Signature, T T)>> DefinitionsForLibrary(string? libraryName)
     {
         libraryName ??= string.Empty;
-        if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
-        {
-            return library;
-        }
-        else throw new ArgumentException($"No library {libraryName} exists", nameof(libraryName));
+        return ExpressionsByLibrary.TryGetValue(libraryName, out var library)
+                   ? library
+                   : throw new ArgumentException($"No library {libraryName} exists", nameof(libraryName));
     }
 
     /// <summary>

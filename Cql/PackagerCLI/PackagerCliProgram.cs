@@ -68,12 +68,12 @@ internal class ProgramCqlPackagerFactory : CqlPackagerFactory
         IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions,
         IOptions<AssemblyDataWriterOptions> assemblyDataWriterOptions)
         : base(loggerFactory,
-               hostLifetime.ApplicationStopping,
                cacheSize: 0,
-               cqlToResourcePackagingOptions.Value,
-               cSharpCodeWriterOptions.Value,
-               fhirResourceWriterOptions.Value,
-               assemblyDataWriterOptions.Value)
+               cqlToResourcePackagingOptions: cqlToResourcePackagingOptions.Value,
+               cSharpCodeWriterOptions: cSharpCodeWriterOptions.Value,
+               fhirResourceWriterOptions: fhirResourceWriterOptions.Value,
+               assemblyDataWriterOptions: assemblyDataWriterOptions.Value,
+               cancellationToken: hostLifetime.ApplicationStopping)
     {
     }
 }

@@ -27,12 +27,12 @@ internal class CqlPackagerFactory : CqlCompilerFactory
 
     public CqlPackagerFactory(
         ILoggerFactory loggerFactory,
-        CancellationToken cancellationToken = default,
         int cacheSize = 0,
         CqlToResourcePackagingOptions? cqlToResourcePackagingOptions = default,
         CSharpCodeWriterOptions? cSharpCodeWriterOptions = default,
         FhirResourceWriterOptions? fhirResourceWriterOptions = default,
-        AssemblyDataWriterOptions? assemblyDataWriterOptions = default)
+        AssemblyDataWriterOptions? assemblyDataWriterOptions = default,
+        CancellationToken cancellationToken = default)
         : base(loggerFactory, cancellationToken, cacheSize)
     {
         AssemblyDataWriterOptions = assemblyDataWriterOptions;

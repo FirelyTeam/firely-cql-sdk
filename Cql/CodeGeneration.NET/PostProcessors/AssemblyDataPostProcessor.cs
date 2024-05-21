@@ -6,9 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Reflection;
+
 namespace Hl7.Cql.CodeGeneration.NET.PostProcessors;
 
 internal abstract class AssemblyDataPostProcessor
 {
     public abstract void ProcessAssemblyData(string name, AssemblyData assemblyData);
+    public abstract void ProcessReferenceAssembly(Assembly referenceAssembly);
 }

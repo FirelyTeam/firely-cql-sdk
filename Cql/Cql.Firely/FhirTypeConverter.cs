@@ -395,27 +395,26 @@ namespace Hl7.Cql.Fhir
 
             void addEnumConversion(Type enumType)
             {
-                var codeType = typeof(M.Code<>).MakeGenericType(enumType);
+                var codeOfEnumType = typeof(M.Code<>).MakeGenericType(enumType);
                 var nullableEnumType = typeof(Nullable<>).MakeGenericType(enumType);
 
-                //converter.AddConversion(codeType, typeof(CqlCode), (code) =>
-                //{
-                //    var systemAndCode = (M.ISystemAndCode)code;
-                //    return new CqlCode(systemAndCode.Code, systemAndCode.System);
-                //});
-                //converter.AddConversion(codeType, nullableEnumType, (code) => code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
-                //converter.AddConversion(enumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);
-
-                converter.AddConversion(nullableEnumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);
-
-                converter.AddConversion(codeType, typeof(string), (code) =>
+                converter.AddConversion(codeOfEnumType, typeof(CqlCode), (code) =>
+                {
+                    var systemAndCode = (M.ISystemAndCode)code;
+                    return new CqlCode(systemAndCode.Code, systemAndCode.System);
+                });
+                converter.AddConversion(codeOfEnumType, nullableEnumType, (code) => code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
+                converter.AddConversion(codeOfEnumType, typeof(string), (code) =>
                 {
                     var systemAndCode = (M.ISystemAndCode)code;
                     return systemAndCode.Code;
                 });
 
-                converter.AddConversion(nullableEnumType, typeof(string), (@enum) =>
-                    Enum.GetName(nullableEnumType, @enum) ?? throw new InvalidOperationException($"Did not find enum member {@enum} on type {nullableEnumType}."));
+
+                converter.AddConversion(nullableEnumType, codeOfEnumType, enumValue => Activator.CreateInstance(codeOfEnumType, enumValue)!);
+                converter.AddConversion(nullableEnumType, typeof(string), (@enum) => Enum.GetName(nullableEnumType, @enum) ?? throw new InvalidOperationException($"Did not find enum member {@enum} on type {nullableEnumType}."));
+
+                converter.AddConversion(enumType, codeOfEnumType, enumValue => Activator.CreateInstance(codeOfEnumType, enumValue)!);
             }
             return converter;
         }

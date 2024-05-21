@@ -67,6 +67,13 @@ internal class CqlToResourcePackagingPipeline
         try
         {
             BuildExpressions(librarySet, definitions);
+
+            // Important: Do not enumerate the libraryset by getting its Count until after processing.
+            if (librarySet.Count == 0)
+            {
+                _logger.LogWarning("Nothing to do, since no ELM libraries were found.");
+                return Array.Empty<Resource>();
+            }
         }
         catch (Exception e)
         {

@@ -7,6 +7,7 @@
  */
 
 using System.IO;
+using System.Reflection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -31,8 +32,16 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
         _logger.LogInformation("Writing Assembly file: '{file}'", file.FullName);
 
         file.Directory!.Create();
-        using var streamOut = file.OpenWrite();
-        streamOut.SetLength(0); // Clears out previous contents
-        streamOut.Write(assemblyData.Binary, 0, assemblyData.Binary.Length);
+        File.WriteAllBytes(file.FullName, assemblyData.Binary);
+    }
+
+    public override void ProcessReferenceAssembly(Assembly referenceAssembly)
+    {
+        _ = referenceAssembly;
+        // var file = new FileInfo($"{Path.Combine(_assemblyDataWriterOptions.OutDirectory!.FullName, referenceAssembly.GetName().Name!)}.dll");
+        // _logger.LogInformation("Writing Reference Assembly file: '{file}'", file.FullName);
+        //
+        // file.Directory!.Create();
+        // File.Copy(referenceAssembly.Location, file.FullName, true);
     }
 }
