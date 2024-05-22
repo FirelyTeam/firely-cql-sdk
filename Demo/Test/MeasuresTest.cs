@@ -146,11 +146,10 @@ namespace Test
             ILoggerFactory logFactory,
             int cacheSize)
         {
+            using var cts = new CancellationTokenSource();
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
-
-            using var cts = new CancellationTokenSource();
-            CqlPackagerFactory factory = new CqlPackagerFactory(logFactory, cts.Token, cacheSize);
+            CqlPackagerFactory factory = new CqlPackagerFactory(logFactory, cacheSize, cancellationToken:cts.Token);
             var definitions = factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             var assemblyData = factory.AssemblyCompiler.Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");

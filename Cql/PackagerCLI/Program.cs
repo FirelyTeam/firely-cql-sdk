@@ -34,9 +34,8 @@ public class Program
     public static int Main(string[] args)
     {
 #if DEBUG // Latest Visual Studio can't handle the $(SolutionDir) args in the launchSettings!!
-        var dir = new DirectoryInfo(Environment.CurrentDirectory);
-        while (!File.Exists(Path.Combine(dir!.FullName, "CqlAndDemo.sln")))
-            dir = dir.Parent;
+        var dir = new DirectoryInfo(Environment.CurrentDirectory)
+            .FindParentDirectoryContaining("CqlAndDemo.sln")!;
 
         args = args.SelectToArray(arg =>
         {
@@ -76,23 +75,26 @@ public class Program
 
                      {CqlToResourcePackagingOptions.ArgNameElmDirectory,-26} {"<directory>", -19} Library root directory
                      {CqlToResourcePackagingOptions.ArgNameCqlDirectory,-26} {"<directory>", -19} CQL root directory
-                     {Optional(FhirResourceWriterOptions.ArgNameOutDirectory),-26} {"<file|directory>", -19} Resource location, either file name or directory
-                     {Optional(CSharpCodeWriterOptions.ArgNameOutDirectory),-26} {"<file|directory>",-19} C# output location, either file name or directory
+                     {Optional(FhirResourceWriterOptions.ArgNameOutDirectory),-26} {"<directory>", -19} Resource directory
+                     {Optional(CSharpCodeWriterOptions.ArgNameOutDirectory),-26} {"<directory>",-19} C# output directory
                      {Optional(CSharpCodeWriterOptions.ArgNameTypeFormat),-26} {"<var|explicit>",-19} Whether to use var or explicit types in the C# output
+                     {Optional(AssemblyDataWriterOptions.ArgNameOutDirectory),-26}{"<directory>",-19} DLL output directory
                      {Optional(CqlToResourcePackagingOptions.ArgNameDebug),-26} {"<true|false>",-19} Produce as a debug assembly
-                     {Optional(CqlToResourcePackagingOptions.ArgNameForce),-26} {"<true|false>",-19} Force an overwrite even if the output file already exists
                      {Optional(CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl),-26} {"<url>",-19} The root url used for the resource canonical.
                      {"", -26-19-1} If omitted a '#' will be used.
                      {Optional(FhirResourceWriterOptions.ArgNameOverrideDate),-26} {"<ISO8601-date-time>",-19} The UTC date to override in the generated FHIR resource libraries.
                      {"", -26-19-1} (example: 2000-12-31T23:59:59.99Z)
                      {"", -26-19-1} If omitted the current date time will be used.
                  """;
+                     // {Optional(CqlToResourcePackagingOptions.ArgNameForce),-26} {"<true|false>",-19} Force an overwrite even if the output file already exists
+
         static string Optional(string s) => $"[{s}]";
 
         static IDictionary<string, string> BuildSwitchMappings()
         {
             const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
-            const string CSharpResourceWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
+            const string CSharpCodeWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
+            const string AssemblyDataWriterSection = AssemblyDataWriterOptions.ConfigSection + ":";
             const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
             return new SortedDictionary<string, string>
@@ -105,8 +107,10 @@ public class Program
                 [CqlToResourcePackagingOptions.ArgNameDontClearLog] = PackageSection + nameof(CqlToResourcePackagingOptions.DontClearLog),
                 [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
-                [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
-                [CSharpCodeWriterOptions.ArgNameTypeFormat] = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.TypeFormat),
+                [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+                [CSharpCodeWriterOptions.ArgNameTypeFormat] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.TypeFormat),
+
+                [AssemblyDataWriterOptions.ArgNameOutDirectory] = AssemblyDataWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
 
                 [FhirResourceWriterOptions.ArgNameOutDirectory] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
                 [FhirResourceWriterOptions.ArgNameOverrideDate] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
@@ -193,6 +197,11 @@ public class Program
         services
             .AddOptions<CSharpCodeWriterOptions>()
             .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
+            .ValidateOnStart();
+
+        services
+            .AddOptions<AssemblyDataWriterOptions>()
+            .Configure<IConfiguration>(AssemblyDataWriterOptions.BindConfig)
             .ValidateOnStart();
     }
 

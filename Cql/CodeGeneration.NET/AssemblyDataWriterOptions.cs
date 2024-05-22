@@ -5,6 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
 using System.IO;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Microsoft.Extensions.Configuration;
@@ -12,35 +13,28 @@ using Microsoft.Extensions.Configuration;
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Represents the options for the <see cref="CSharpCodeStreamPostProcessor"/>.
+/// Represents the options for the <see cref="AssemblyDataPostProcessor"/>.
 /// </summary>
-public class CSharpCodeWriterOptions
-
+public class AssemblyDataWriterOptions
 {
     /// <summary>
     /// The name of the config setting.
     /// </summary>
-    internal const string ConfigSection = "CSharpCodeWriter";
+    internal const string ConfigSection = "AssemblyDataWriter";
 
     /// <summary>
     /// Gets or sets the output directory.
     /// </summary>
     public DirectoryInfo? OutDirectory { get; set; }
 
-    internal const string ArgNameOutDirectory = "--cs";
-    internal const string ArgNameTypeFormat = "--cs-typeformat";
+    internal const string ArgNameOutDirectory = "--dll";
 
     /// <summary>
-    /// Gets or sets a value indicating whether to prefer 'var' over explicit types.
+    /// Binds the configuration values to the <see cref="AssemblyDataWriterOptions"/> object.
     /// </summary>
-    public CSharpCodeWriterTypeFormat TypeFormat { get; set; }
-
-    /// <summary>
-    /// Binds the configuration values to the <see cref="CSharpCodeWriterOptions"/> object.
-    /// </summary>
-    /// <param name="opt">The <see cref="CSharpCodeWriterOptions"/> object to bind the configuration values to.</param>
+    /// <param name="opt">The <see cref="AssemblyDataWriterOptions"/> object to bind the configuration values to.</param>
     /// <param name="config">The <see cref="IConfiguration"/> object containing the configuration values.</param>
-    public static void BindConfig(CSharpCodeWriterOptions opt, IConfiguration config)
+    public static void BindConfig(AssemblyDataWriterOptions opt, IConfiguration config)
     {
         var section = config.GetSection(ConfigSection);
         section.Bind(opt);
@@ -54,20 +48,4 @@ public class CSharpCodeWriterOptions
             return string.IsNullOrWhiteSpace(path) ? null : new DirectoryInfo(Path.GetFullPath(path));
         }
     }
-}
-
-/// <summary>
-/// How to format types in C# output
-/// </summary>
-public enum CSharpCodeWriterTypeFormat
-{
-    /// <summary>
-    /// Use 'var' over explicit types.
-    /// </summary>
-    Var,
-
-    /// <summary>
-    /// Use explicit types.
-    /// </summary>
-    Explicit
 }
