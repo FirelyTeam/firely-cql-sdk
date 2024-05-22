@@ -1,8 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.1.0",
+         "translatorVersion" : "3.10.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "signatureLevel" : "Overloads",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -16,11 +17,13 @@
       "usings" : {
          "def" : [ {
             "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
          }, {
             "locator" : "3:1-3:28",
             "localIdentifier" : "QICore",
-            "uri" : "http://hl7.org/fhir"
+            "uri" : "http://hl7.org/fhir",
+            "annotation" : [ ]
          } ]
       },
       "includes" : {
@@ -28,22 +31,26 @@
             "locator" : "5:1-5:52",
             "localIdentifier" : "CQMCommon",
             "path" : "CQMCommon",
-            "version" : "2.0.000"
+            "version" : "2.0.000",
+            "annotation" : [ ]
          }, {
             "locator" : "6:1-6:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.3.000",
+            "annotation" : [ ]
          }, {
             "locator" : "7:1-7:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.0.000",
+            "annotation" : [ ]
          }, {
             "locator" : "8:1-8:61",
             "localIdentifier" : "SDE",
             "path" : "SupplementalDataElements",
-            "version" : "3.4.000"
+            "version" : "3.4.000",
+            "annotation" : [ ]
          } ]
       },
       "parameters" : {
@@ -51,11 +58,14 @@
             "locator" : "35:1-36:66",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "resultTypeSpecifier" : {
                "type" : "IntervalTypeSpecifier",
+               "annotation" : [ ],
                "pointType" : {
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                  "type" : "NamedTypeSpecifier"
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
                }
             },
             "default" : {
@@ -63,100 +73,124 @@
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
+               "annotation" : [ ],
                "resultTypeSpecifier" : {
                   "type" : "IntervalTypeSpecifier",
+                  "annotation" : [ ],
                   "pointType" : {
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                     "type" : "NamedTypeSpecifier"
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
                   }
                },
                "low" : {
                   "locator" : "36:20-36:41",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2025",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "month" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "day" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "hour" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "minute" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "second" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "millisecond" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   }
                },
                "high" : {
                   "locator" : "36:44-36:65",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2026",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "month" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "day" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "hour" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "minute" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "second" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   },
                   "millisecond" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
-                     "type" : "Literal"
+                     "type" : "Literal",
+                     "annotation" : [ ]
                   }
                }
             },
             "parameterTypeSpecifier" : {
                "locator" : "35:32-35:49",
                "type" : "IntervalTypeSpecifier",
+               "annotation" : [ ],
                "resultTypeSpecifier" : {
+                  "localId" : "253",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
+                     "localId" : "254",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -165,7 +199,8 @@
                   "locator" : "35:41-35:48",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                  "type" : "NamedTypeSpecifier"
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
                }
             }
          } ]
@@ -176,13 +211,15 @@
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "SNOMEDCT",
             "id" : "http://snomed.info/sct",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "11:1-11:50",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "CPT",
             "id" : "http://www.ama-assn.org/go/cpt",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          } ]
       },
       "valueSets" : {
@@ -191,85 +228,113 @@
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Annual Wellness Visit",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "14:1-14:116",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Face-to-Face Interaction",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "15:1-15:95",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "HIV",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "16:1-16:106",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "HIV Viral Load",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1002",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "17:1-17:116",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Home Healthcare Services",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "18:1-18:104",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Office Visit",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "19:1-19:115",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Outpatient Consultation",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "20:1-20:152",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Preventive Care Services Established Office Visit, 18 and Up",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "21:1-21:148",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Preventive Care Services Initial Office Visit, 18 and Up",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "22:1-22:122",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Preventive Care Services Other",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1030",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "23:1-23:147",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Preventive Care Services, Initial Office Visit, 0 to 17",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "24:1-24:142",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Preventive Care, Established Office Visit, 0 to 17",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "25:1-25:111",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Telehealth Services",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1031",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          }, {
             "locator" : "26:1-26:108",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Telephone Visits",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "codeSystem" : [ ]
          } ]
       },
       "codes" : {
@@ -280,10 +345,12 @@
             "id" : "260988000",
             "display" : "Below threshold level (qualifier value)",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "28:66-28:75",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "SNOMEDCT"
+               "name" : "SNOMEDCT",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "29:1-29:107",
@@ -292,17 +359,20 @@
             "id" : "260415000",
             "display" : "Not detected (qualifier value)",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "29:57-29:66",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "SNOMEDCT"
+               "name" : "SNOMEDCT",
+               "annotation" : [ ]
             }
          } ]
       },
       "contexts" : {
          "def" : [ {
             "locator" : "38:1-38:15",
-            "name" : "Patient"
+            "name" : "Patient",
+            "annotation" : [ ]
          } ]
       },
       "statements" : {
@@ -310,13 +380,21 @@
             "locator" : "38:1-38:15",
             "name" : "Patient",
             "context" : "Patient",
+            "annotation" : [ ],
             "expression" : {
                "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : {
                   "locator" : "38:1-38:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
@@ -325,35 +403,37 @@
             "name" : "Has Active HIV Diagnosis Before or in First 90 Days of Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "locator" : "56:3-57:120",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
-               "signature" : [ {
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "name" : "{http://hl7.org/fhir}Condition",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               } ],
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : {
                   "locator" : "56:10-57:120",
                   "type" : "Query",
+                  "annotation" : [ ],
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
                      "elementType" : {
                         "name" : "{http://hl7.org/fhir}Condition",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }
                   },
                   "source" : [ {
                      "locator" : "56:10-56:35",
                      "alias" : "HIVDx",
+                     "annotation" : [ ],
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
                         "elementType" : {
                            "name" : "{http://hl7.org/fhir}Condition",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         }
                      },
                      "expression" : {
@@ -363,11 +443,14 @@
                         "codeProperty" : "code",
                         "codeComparator" : "in",
                         "type" : "Retrieve",
+                        "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
                            "elementType" : {
                               "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }
                         },
                         "codes" : {
@@ -375,87 +458,93 @@
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "HIV",
                            "preserve" : true,
-                           "type" : "ValueSetRef"
-                        }
+                           "type" : "ValueSetRef",
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ],
+                  "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
                      "locator" : "57:5-57:120",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "Before",
+                     "annotation" : [ ],
                      "signature" : [ {
                         "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }, {
                         "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      } ],
                      "operand" : [ {
                         "locator" : "57:57-57:62",
                         "type" : "Start",
-                        "signature" : [ {
-                           "type" : "IntervalTypeSpecifier",
-                           "pointType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        } ],
+                        "annotation" : [ ],
+                        "signature" : [ ],
                         "operand" : {
                            "locator" : "57:11-57:55",
                            "name" : "ToPrevalenceInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
+                           "annotation" : [ ],
                            "resultTypeSpecifier" : {
                               "type" : "IntervalTypeSpecifier",
+                              "annotation" : [ ],
                               "pointType" : {
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }
                            },
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "locator" : "57:49-57:53",
                               "resultTypeName" : "{http://hl7.org/fhir}Condition",
                               "name" : "HIVDx",
-                              "type" : "AliasRef"
+                              "type" : "AliasRef",
+                              "annotation" : [ ]
                            } ]
                         }
                      }, {
                         "locator" : "57:78-57:120",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Add",
+                        "annotation" : [ ],
                         "signature" : [ {
                            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         }, {
                            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         } ],
                         "operand" : [ {
                            "locator" : "57:80-57:108",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
-                           "signature" : [ {
-                              "type" : "IntervalTypeSpecifier",
-                              "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           } ],
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "locator" : "57:89-57:108",
                               "name" : "Measurement Period",
                               "type" : "ParameterRef",
+                              "annotation" : [ ],
                               "resultTypeSpecifier" : {
                                  "type" : "IntervalTypeSpecifier",
+                                 "annotation" : [ ],
                                  "pointType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               }
                            }
@@ -464,7 +553,8 @@
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "value" : 90,
                            "unit" : "days",
-                           "type" : "Quantity"
+                           "type" : "Quantity",
+                           "annotation" : [ ]
                         } ]
                      } ]
                   }
@@ -476,175 +566,131 @@
             "name" : "Has Qualifying Encounter During First 240 Days of Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "locator" : "72:3-83:132",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
+               "annotation" : [ ],
                "signature" : [ {
                   "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
                   "elementType" : {
                      "name" : "{http://hl7.org/fhir}Encounter",
-                     "type" : "NamedTypeSpecifier"
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
                   }
                } ],
                "operand" : {
                   "locator" : "72:10-83:132",
                   "type" : "Query",
+                  "annotation" : [ ],
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
                      "elementType" : {
                         "name" : "{http://hl7.org/fhir}Encounter",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }
                   },
                   "source" : [ {
                      "locator" : "72:10-82:79",
                      "alias" : "QualifyingEncounter",
+                     "annotation" : [ ],
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
                         "elementType" : {
                            "name" : "{http://hl7.org/fhir}Encounter",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         }
                      },
                      "expression" : {
                         "locator" : "72:10-82:59",
                         "type" : "Union",
+                        "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
                            "elementType" : {
                               "name" : "{http://hl7.org/fhir}Encounter",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }
                         },
-                        "signature" : [ {
-                           "type" : "ListTypeSpecifier",
-                           "elementType" : {
-                              "name" : "{http://hl7.org/fhir}Encounter",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        }, {
-                           "type" : "ListTypeSpecifier",
-                           "elementType" : {
-                              "name" : "{http://hl7.org/fhir}Encounter",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        } ],
+                        "signature" : [ ],
                         "operand" : [ {
                            "locator" : "72:12-81:43",
                            "type" : "Union",
+                           "annotation" : [ ],
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
                               "elementType" : {
                                  "name" : "{http://hl7.org/fhir}Encounter",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }
                            },
-                           "signature" : [ {
-                              "type" : "ListTypeSpecifier",
-                              "elementType" : {
-                                 "name" : "{http://hl7.org/fhir}Encounter",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           }, {
-                              "type" : "ListTypeSpecifier",
-                              "elementType" : {
-                                 "name" : "{http://hl7.org/fhir}Encounter",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           } ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "locator" : "72:12-79:82",
                               "type" : "Union",
+                              "annotation" : [ ],
                               "resultTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
                                  "elementType" : {
                                     "name" : "{http://hl7.org/fhir}Encounter",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               },
-                              "signature" : [ {
-                                 "type" : "ListTypeSpecifier",
-                                 "elementType" : {
-                                    "name" : "{http://hl7.org/fhir}Encounter",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              }, {
-                                 "type" : "ListTypeSpecifier",
-                                 "elementType" : {
-                                    "name" : "{http://hl7.org/fhir}Encounter",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              } ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "locator" : "72:12-77:87",
                                  "type" : "Union",
+                                 "annotation" : [ ],
                                  "resultTypeSpecifier" : {
                                     "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
                                     "elementType" : {
                                        "name" : "{http://hl7.org/fhir}Encounter",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }
                                  },
-                                 "signature" : [ {
-                                    "type" : "ListTypeSpecifier",
-                                    "elementType" : {
-                                       "name" : "{http://hl7.org/fhir}Encounter",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 }, {
-                                    "type" : "ListTypeSpecifier",
-                                    "elementType" : {
-                                       "name" : "{http://hl7.org/fhir}Encounter",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 } ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "locator" : "72:12-75:51",
                                     "type" : "Union",
+                                    "annotation" : [ ],
                                     "resultTypeSpecifier" : {
                                        "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
                                        "elementType" : {
                                           "name" : "{http://hl7.org/fhir}Encounter",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     },
-                                    "signature" : [ {
-                                       "type" : "ListTypeSpecifier",
-                                       "elementType" : {
-                                          "name" : "{http://hl7.org/fhir}Encounter",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    }, {
-                                       "type" : "ListTypeSpecifier",
-                                       "elementType" : {
-                                          "name" : "{http://hl7.org/fhir}Encounter",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    } ],
+                                    "signature" : [ ],
                                     "operand" : [ {
                                        "locator" : "72:12-73:50",
                                        "type" : "Union",
+                                       "annotation" : [ ],
                                        "resultTypeSpecifier" : {
                                           "type" : "ListTypeSpecifier",
+                                          "annotation" : [ ],
                                           "elementType" : {
                                              "name" : "{http://hl7.org/fhir}Encounter",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }
                                        },
-                                       "signature" : [ {
-                                          "type" : "ListTypeSpecifier",
-                                          "elementType" : {
-                                             "name" : "{http://hl7.org/fhir}Encounter",
-                                             "type" : "NamedTypeSpecifier"
-                                          }
-                                       }, {
-                                          "type" : "ListTypeSpecifier",
-                                          "elementType" : {
-                                             "name" : "{http://hl7.org/fhir}Encounter",
-                                             "type" : "NamedTypeSpecifier"
-                                          }
-                                       } ],
+                                       "signature" : [ ],
                                        "operand" : [ {
                                           "locator" : "72:12-72:40",
                                           "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -652,11 +698,14 @@
                                           "codeProperty" : "type",
                                           "codeComparator" : "in",
                                           "type" : "Retrieve",
+                                          "annotation" : [ ],
                                           "resultTypeSpecifier" : {
                                              "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
                                              "elementType" : {
                                                 "name" : "{http://hl7.org/fhir}Encounter",
-                                                "type" : "NamedTypeSpecifier"
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
                                              }
                                           },
                                           "codes" : {
@@ -664,8 +713,13 @@
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                              "name" : "Office Visit",
                                              "preserve" : true,
-                                             "type" : "ValueSetRef"
-                                          }
+                                             "type" : "ValueSetRef",
+                                             "annotation" : [ ]
+                                          },
+                                          "include" : [ ],
+                                          "codeFilter" : [ ],
+                                          "dateFilter" : [ ],
+                                          "otherFilter" : [ ]
                                        }, {
                                           "locator" : "73:11-73:50",
                                           "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -673,11 +727,14 @@
                                           "codeProperty" : "type",
                                           "codeComparator" : "in",
                                           "type" : "Retrieve",
+                                          "annotation" : [ ],
                                           "resultTypeSpecifier" : {
                                              "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
                                              "elementType" : {
                                                 "name" : "{http://hl7.org/fhir}Encounter",
-                                                "type" : "NamedTypeSpecifier"
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
                                              }
                                           },
                                           "codes" : {
@@ -685,24 +742,18 @@
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                              "name" : "Outpatient Consultation",
                                              "preserve" : true,
-                                             "type" : "ValueSetRef"
-                                          }
+                                             "type" : "ValueSetRef",
+                                             "annotation" : [ ]
+                                          },
+                                          "include" : [ ],
+                                          "codeFilter" : [ ],
+                                          "dateFilter" : [ ],
+                                          "otherFilter" : [ ]
                                        } ]
                                     }, {
                                        "type" : "Union",
-                                       "signature" : [ {
-                                          "type" : "ListTypeSpecifier",
-                                          "elementType" : {
-                                             "name" : "{http://hl7.org/fhir}Encounter",
-                                             "type" : "NamedTypeSpecifier"
-                                          }
-                                       }, {
-                                          "type" : "ListTypeSpecifier",
-                                          "elementType" : {
-                                             "name" : "{http://hl7.org/fhir}Encounter",
-                                             "type" : "NamedTypeSpecifier"
-                                          }
-                                       } ],
+                                       "annotation" : [ ],
+                                       "signature" : [ ],
                                        "operand" : [ {
                                           "locator" : "74:11-74:48",
                                           "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -710,11 +761,14 @@
                                           "codeProperty" : "type",
                                           "codeComparator" : "in",
                                           "type" : "Retrieve",
+                                          "annotation" : [ ],
                                           "resultTypeSpecifier" : {
                                              "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
                                              "elementType" : {
                                                 "name" : "{http://hl7.org/fhir}Encounter",
-                                                "type" : "NamedTypeSpecifier"
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
                                              }
                                           },
                                           "codes" : {
@@ -722,8 +776,13 @@
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                              "name" : "Annual Wellness Visit",
                                              "preserve" : true,
-                                             "type" : "ValueSetRef"
-                                          }
+                                             "type" : "ValueSetRef",
+                                             "annotation" : [ ]
+                                          },
+                                          "include" : [ ],
+                                          "codeFilter" : [ ],
+                                          "dateFilter" : [ ],
+                                          "otherFilter" : [ ]
                                        }, {
                                           "locator" : "75:11-75:51",
                                           "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -731,11 +790,14 @@
                                           "codeProperty" : "type",
                                           "codeComparator" : "in",
                                           "type" : "Retrieve",
+                                          "annotation" : [ ],
                                           "resultTypeSpecifier" : {
                                              "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
                                              "elementType" : {
                                                 "name" : "{http://hl7.org/fhir}Encounter",
-                                                "type" : "NamedTypeSpecifier"
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
                                              }
                                           },
                                           "codes" : {
@@ -743,25 +805,19 @@
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                              "name" : "Face-to-Face Interaction",
                                              "preserve" : true,
-                                             "type" : "ValueSetRef"
-                                          }
+                                             "type" : "ValueSetRef",
+                                             "annotation" : [ ]
+                                          },
+                                          "include" : [ ],
+                                          "codeFilter" : [ ],
+                                          "dateFilter" : [ ],
+                                          "otherFilter" : [ ]
                                        } ]
                                     } ]
                                  }, {
                                     "type" : "Union",
-                                    "signature" : [ {
-                                       "type" : "ListTypeSpecifier",
-                                       "elementType" : {
-                                          "name" : "{http://hl7.org/fhir}Encounter",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    }, {
-                                       "type" : "ListTypeSpecifier",
-                                       "elementType" : {
-                                          "name" : "{http://hl7.org/fhir}Encounter",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    } ],
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
                                     "operand" : [ {
                                        "locator" : "76:11-76:51",
                                        "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -769,11 +825,14 @@
                                        "codeProperty" : "type",
                                        "codeComparator" : "in",
                                        "type" : "Retrieve",
+                                       "annotation" : [ ],
                                        "resultTypeSpecifier" : {
                                           "type" : "ListTypeSpecifier",
+                                          "annotation" : [ ],
                                           "elementType" : {
                                              "name" : "{http://hl7.org/fhir}Encounter",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }
                                        },
                                        "codes" : {
@@ -781,8 +840,13 @@
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Home Healthcare Services",
                                           "preserve" : true,
-                                          "type" : "ValueSetRef"
-                                       }
+                                          "type" : "ValueSetRef",
+                                          "annotation" : [ ]
+                                       },
+                                       "include" : [ ],
+                                       "codeFilter" : [ ],
+                                       "dateFilter" : [ ],
+                                       "otherFilter" : [ ]
                                     }, {
                                        "locator" : "77:11-77:87",
                                        "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -790,11 +854,14 @@
                                        "codeProperty" : "type",
                                        "codeComparator" : "in",
                                        "type" : "Retrieve",
+                                       "annotation" : [ ],
                                        "resultTypeSpecifier" : {
                                           "type" : "ListTypeSpecifier",
+                                          "annotation" : [ ],
                                           "elementType" : {
                                              "name" : "{http://hl7.org/fhir}Encounter",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }
                                        },
                                        "codes" : {
@@ -802,25 +869,19 @@
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Preventive Care Services Established Office Visit, 18 and Up",
                                           "preserve" : true,
-                                          "type" : "ValueSetRef"
-                                       }
+                                          "type" : "ValueSetRef",
+                                          "annotation" : [ ]
+                                       },
+                                       "include" : [ ],
+                                       "codeFilter" : [ ],
+                                       "dateFilter" : [ ],
+                                       "otherFilter" : [ ]
                                     } ]
                                  } ]
                               }, {
                                  "type" : "Union",
-                                 "signature" : [ {
-                                    "type" : "ListTypeSpecifier",
-                                    "elementType" : {
-                                       "name" : "{http://hl7.org/fhir}Encounter",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 }, {
-                                    "type" : "ListTypeSpecifier",
-                                    "elementType" : {
-                                       "name" : "{http://hl7.org/fhir}Encounter",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 } ],
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "locator" : "78:11-78:83",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -828,11 +889,14 @@
                                     "codeProperty" : "type",
                                     "codeComparator" : "in",
                                     "type" : "Retrieve",
+                                    "annotation" : [ ],
                                     "resultTypeSpecifier" : {
                                        "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
                                        "elementType" : {
                                           "name" : "{http://hl7.org/fhir}Encounter",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     },
                                     "codes" : {
@@ -840,8 +904,13 @@
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Preventive Care Services Initial Office Visit, 18 and Up",
                                        "preserve" : true,
-                                       "type" : "ValueSetRef"
-                                    }
+                                       "type" : "ValueSetRef",
+                                       "annotation" : [ ]
+                                    },
+                                    "include" : [ ],
+                                    "codeFilter" : [ ],
+                                    "dateFilter" : [ ],
+                                    "otherFilter" : [ ]
                                  }, {
                                     "locator" : "79:11-79:82",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -849,11 +918,14 @@
                                     "codeProperty" : "type",
                                     "codeComparator" : "in",
                                     "type" : "Retrieve",
+                                    "annotation" : [ ],
                                     "resultTypeSpecifier" : {
                                        "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
                                        "elementType" : {
                                           "name" : "{http://hl7.org/fhir}Encounter",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     },
                                     "codes" : {
@@ -861,25 +933,19 @@
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Preventive Care Services, Initial Office Visit, 0 to 17",
                                        "preserve" : true,
-                                       "type" : "ValueSetRef"
-                                    }
+                                       "type" : "ValueSetRef",
+                                       "annotation" : [ ]
+                                    },
+                                    "include" : [ ],
+                                    "codeFilter" : [ ],
+                                    "dateFilter" : [ ],
+                                    "otherFilter" : [ ]
                                  } ]
                               } ]
                            }, {
                               "type" : "Union",
-                              "signature" : [ {
-                                 "type" : "ListTypeSpecifier",
-                                 "elementType" : {
-                                    "name" : "{http://hl7.org/fhir}Encounter",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              }, {
-                                 "type" : "ListTypeSpecifier",
-                                 "elementType" : {
-                                    "name" : "{http://hl7.org/fhir}Encounter",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              } ],
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "locator" : "80:11-80:77",
                                  "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -887,11 +953,14 @@
                                  "codeProperty" : "type",
                                  "codeComparator" : "in",
                                  "type" : "Retrieve",
+                                 "annotation" : [ ],
                                  "resultTypeSpecifier" : {
                                     "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
                                     "elementType" : {
                                        "name" : "{http://hl7.org/fhir}Encounter",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }
                                  },
                                  "codes" : {
@@ -899,8 +968,13 @@
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Preventive Care, Established Office Visit, 0 to 17",
                                     "preserve" : true,
-                                    "type" : "ValueSetRef"
-                                 }
+                                    "type" : "ValueSetRef",
+                                    "annotation" : [ ]
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
                               }, {
                                  "locator" : "81:11-81:43",
                                  "dataType" : "{http://hl7.org/fhir}Encounter",
@@ -908,11 +982,14 @@
                                  "codeProperty" : "type",
                                  "codeComparator" : "in",
                                  "type" : "Retrieve",
+                                 "annotation" : [ ],
                                  "resultTypeSpecifier" : {
                                     "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
                                     "elementType" : {
                                        "name" : "{http://hl7.org/fhir}Encounter",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }
                                  },
                                  "codes" : {
@@ -920,8 +997,13 @@
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Telephone Visits",
                                     "preserve" : true,
-                                    "type" : "ValueSetRef"
-                                 }
+                                    "type" : "ValueSetRef",
+                                    "annotation" : [ ]
+                                 },
+                                 "include" : [ ],
+                                 "codeFilter" : [ ],
+                                 "dateFilter" : [ ],
+                                 "otherFilter" : [ ]
                               } ]
                            } ]
                         }, {
@@ -931,11 +1013,14 @@
                            "codeProperty" : "type",
                            "codeComparator" : "in",
                            "type" : "Retrieve",
+                           "annotation" : [ ],
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
+                              "annotation" : [ ],
                               "elementType" : {
                                  "name" : "{http://hl7.org/fhir}Encounter",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }
                            },
                            "codes" : {
@@ -943,79 +1028,80 @@
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Preventive Care Services Other",
                               "preserve" : true,
-                              "type" : "ValueSetRef"
-                           }
+                              "type" : "ValueSetRef",
+                              "annotation" : [ ]
+                           },
+                           "include" : [ ],
+                           "codeFilter" : [ ],
+                           "dateFilter" : [ ],
+                           "otherFilter" : [ ]
                         } ]
                      }
                   } ],
+                  "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
                      "locator" : "83:5-83:132",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "IncludedIn",
-                     "signature" : [ {
-                        "type" : "IntervalTypeSpecifier",
-                        "pointType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }, {
-                        "type" : "IntervalTypeSpecifier",
-                        "pointType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ],
+                     "annotation" : [ ],
+                     "signature" : [ ],
                      "operand" : [ {
                         "locator" : "83:11-83:36",
                         "name" : "ToInterval",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
+                        "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "IntervalTypeSpecifier",
+                           "annotation" : [ ],
                            "pointType" : {
                               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }
                         },
+                        "signature" : [ ],
                         "operand" : [ {
                            "path" : "period",
                            "scope" : "QualifyingEncounter",
-                           "type" : "Property"
+                           "type" : "Property",
+                           "annotation" : [ ]
                         } ]
                      }, {
                         "locator" : "83:52-83:132",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
+                        "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "IntervalTypeSpecifier",
+                           "annotation" : [ ],
                            "pointType" : {
                               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }
                         },
                         "low" : {
                            "locator" : "83:61-83:89",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
-                           "signature" : [ {
-                              "type" : "IntervalTypeSpecifier",
-                              "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           } ],
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "locator" : "83:70-83:89",
                               "name" : "Measurement Period",
                               "type" : "ParameterRef",
+                              "annotation" : [ ],
                               "resultTypeSpecifier" : {
                                  "type" : "IntervalTypeSpecifier",
+                                 "annotation" : [ ],
                                  "pointType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               }
                            }
@@ -1024,33 +1110,34 @@
                            "locator" : "83:92-83:131",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Add",
+                           "annotation" : [ ],
                            "signature" : [ {
                               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            } ],
                            "operand" : [ {
                               "locator" : "83:92-83:120",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Start",
-                              "signature" : [ {
-                                 "type" : "IntervalTypeSpecifier",
-                                 "pointType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              } ],
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "locator" : "83:101-83:120",
                                  "name" : "Measurement Period",
                                  "type" : "ParameterRef",
+                                 "annotation" : [ ],
                                  "resultTypeSpecifier" : {
                                     "type" : "IntervalTypeSpecifier",
+                                    "annotation" : [ ],
                                     "pointType" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }
                                  }
                               }
@@ -1059,7 +1146,8 @@
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 240,
                               "unit" : "days",
-                              "type" : "Quantity"
+                              "type" : "Quantity",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -1072,27 +1160,25 @@
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "locator" : "60:3-61:78",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
-               "signature" : [ {
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               } ],
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : [ {
                   "locator" : "60:3-60:77",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Has Active HIV Diagnosis Before or in First 90 Days of Measurement Period",
-                  "type" : "ExpressionRef"
+                  "type" : "ExpressionRef",
+                  "annotation" : [ ]
                }, {
                   "locator" : "61:9-61:78",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Has Qualifying Encounter During First 240 Days of Measurement Period",
-                  "type" : "ExpressionRef"
+                  "type" : "ExpressionRef",
+                  "annotation" : [ ]
                } ]
             }
          }, {
@@ -1101,33 +1187,42 @@
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "locator" : "41:3-41:22",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "Initial Population",
-               "type" : "ExpressionRef"
+               "type" : "ExpressionRef",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "43:1-44:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "resultTypeSpecifier" : {
                "type" : "TupleTypeSpecifier",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "codes",
+                  "annotation" : [ ],
                   "elementType" : {
                      "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
                      "elementType" : {
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }
                   }
                }, {
                   "name" : "display",
+                  "annotation" : [ ],
                   "elementType" : {
                      "name" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "NamedTypeSpecifier"
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
                   }
                } ]
             },
@@ -1136,22 +1231,29 @@
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
+               "annotation" : [ ],
                "resultTypeSpecifier" : {
                   "type" : "TupleTypeSpecifier",
+                  "annotation" : [ ],
                   "element" : [ {
                      "name" : "codes",
+                     "annotation" : [ ],
                      "elementType" : {
                         "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
                         "elementType" : {
                            "name" : "{urn:hl7-org:elm-types:r1}Code",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         }
                      }
                   }, {
                      "name" : "display",
+                     "annotation" : [ ],
                      "elementType" : {
                         "name" : "{urn:hl7-org:elm-types:r1}String",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }
                   } ]
                }
@@ -1161,23 +1263,31 @@
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
                "elementType" : {
                   "type" : "TupleTypeSpecifier",
+                  "annotation" : [ ],
                   "element" : [ {
                      "name" : "code",
+                     "annotation" : [ ],
                      "elementType" : {
                         "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }
                   }, {
                      "name" : "period",
+                     "annotation" : [ ],
                      "elementType" : {
                         "type" : "IntervalTypeSpecifier",
+                        "annotation" : [ ],
                         "pointType" : {
                            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         }
                      }
                   } ]
@@ -1188,23 +1298,31 @@
                "name" : "SDE Payer",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
+               "annotation" : [ ],
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
                   "elementType" : {
                      "type" : "TupleTypeSpecifier",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "code",
+                        "annotation" : [ ],
                         "elementType" : {
                            "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "period",
+                        "annotation" : [ ],
                         "elementType" : {
                            "type" : "IntervalTypeSpecifier",
+                           "annotation" : [ ],
                            "pointType" : {
                               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -1216,22 +1334,29 @@
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "resultTypeSpecifier" : {
                "type" : "TupleTypeSpecifier",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "codes",
+                  "annotation" : [ ],
                   "elementType" : {
                      "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
                      "elementType" : {
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }
                   }
                }, {
                   "name" : "display",
+                  "annotation" : [ ],
                   "elementType" : {
                      "name" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "NamedTypeSpecifier"
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
                   }
                } ]
             },
@@ -1240,22 +1365,29 @@
                "name" : "SDE Race",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
+               "annotation" : [ ],
                "resultTypeSpecifier" : {
                   "type" : "TupleTypeSpecifier",
+                  "annotation" : [ ],
                   "element" : [ {
                      "name" : "codes",
+                     "annotation" : [ ],
                      "elementType" : {
                         "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
                         "elementType" : {
                            "name" : "{urn:hl7-org:elm-types:r1}Code",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         }
                      }
                   }, {
                      "name" : "display",
+                     "annotation" : [ ],
                      "elementType" : {
                         "name" : "{urn:hl7-org:elm-types:r1}String",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }
                   } ]
                }
@@ -1266,12 +1398,14 @@
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "locator" : "53:3-53:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",
                "libraryName" : "SDE",
-               "type" : "ExpressionRef"
+               "type" : "ExpressionRef",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "63:1-67:3",
@@ -1279,35 +1413,37 @@
             "name" : "Most Recent Viral Load Test During Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "locator" : "64:3-67:3",
                "resultTypeName" : "{http://hl7.org/fhir}Observation",
                "type" : "Last",
-               "signature" : [ {
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "name" : "{http://hl7.org/fhir}Observation",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               } ],
+               "annotation" : [ ],
+               "signature" : [ ],
                "source" : {
                   "locator" : "64:8-66:59",
                   "type" : "Query",
+                  "annotation" : [ ],
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
                      "elementType" : {
                         "name" : "{http://hl7.org/fhir}Observation",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }
                   },
                   "source" : [ {
                      "locator" : "64:8-64:50",
                      "alias" : "ViralLoad",
+                     "annotation" : [ ],
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
                         "elementType" : {
                            "name" : "{http://hl7.org/fhir}Observation",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         }
                      },
                      "expression" : {
@@ -1317,11 +1453,14 @@
                         "codeProperty" : "code",
                         "codeComparator" : "in",
                         "type" : "Retrieve",
+                        "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
                            "elementType" : {
                               "name" : "{http://hl7.org/fhir}Observation",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }
                         },
                         "codes" : {
@@ -1329,24 +1468,34 @@
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "HIV Viral Load",
                            "preserve" : true,
-                           "type" : "ValueSetRef"
-                        }
+                           "type" : "ValueSetRef",
+                           "annotation" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ],
+                  "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
                      "locator" : "65:7-65:89",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "In",
+                     "annotation" : [ ],
                      "signature" : [ {
                         "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }, {
                         "type" : "IntervalTypeSpecifier",
+                        "annotation" : [ ],
                         "pointType" : {
                            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         }
                      } ],
                      "operand" : [ {
@@ -1355,320 +1504,410 @@
                         "name" : "Latest",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
-                        "signature" : [ {
-                           "type" : "ChoiceTypeSpecifier",
-                           "choice" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "type" : "IntervalTypeSpecifier",
-                              "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           }, {
-                              "type" : "IntervalTypeSpecifier",
-                              "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           } ]
-                        } ],
+                        "annotation" : [ ],
+                        "signature" : [ ],
                         "operand" : [ {
                            "type" : "Case",
+                           "annotation" : [ ],
                            "caseItem" : [ {
+                              "annotation" : [ ],
                               "when" : {
                                  "isType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Is",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "locator" : "65:35-65:53",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "annotation" : [ ],
                                     "resultTypeSpecifier" : {
                                        "type" : "ChoiceTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "type" : [ ],
                                        "choice" : [ {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }, {
                                           "type" : "IntervalTypeSpecifier",
+                                          "annotation" : [ ],
                                           "pointType" : {
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }
                                        }, {
                                           "name" : "{http://hl7.org/fhir}Timing",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }, {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        } ]
                                     },
+                                    "signature" : [ ],
                                     "operand" : [ {
                                        "path" : "effective",
                                        "scope" : "ViralLoad",
-                                       "type" : "Property"
+                                       "type" : "Property",
+                                       "annotation" : [ ]
                                     } ]
                                  }
                               },
                               "then" : {
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "As",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
                                     "operand" : {
                                        "locator" : "65:35-65:53",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "annotation" : [ ],
                                        "resultTypeSpecifier" : {
                                           "type" : "ChoiceTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "type" : [ ],
                                           "choice" : [ {
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }, {
                                              "type" : "IntervalTypeSpecifier",
+                                             "annotation" : [ ],
                                              "pointType" : {
                                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                "type" : "NamedTypeSpecifier"
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
                                              }
                                           }, {
                                              "name" : "{http://hl7.org/fhir}Timing",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }, {
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           } ]
                                        },
+                                       "signature" : [ ],
                                        "operand" : [ {
                                           "path" : "effective",
                                           "scope" : "ViralLoad",
-                                          "type" : "Property"
+                                          "type" : "Property",
+                                          "annotation" : [ ]
                                        } ]
                                     }
                                  },
                                  "asTypeSpecifier" : {
                                     "type" : "ChoiceTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "type" : [ ],
                                     "choice" : [ {
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }, {
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
                                        "pointType" : {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
                                        "pointType" : {
                                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     } ]
                                  }
                               }
                            }, {
+                              "annotation" : [ ],
                               "when" : {
                                  "type" : "Is",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "locator" : "65:35-65:53",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "annotation" : [ ],
                                     "resultTypeSpecifier" : {
                                        "type" : "ChoiceTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "type" : [ ],
                                        "choice" : [ {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }, {
                                           "type" : "IntervalTypeSpecifier",
+                                          "annotation" : [ ],
                                           "pointType" : {
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }
                                        }, {
                                           "name" : "{http://hl7.org/fhir}Timing",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }, {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        } ]
                                     },
+                                    "signature" : [ ],
                                     "operand" : [ {
                                        "path" : "effective",
                                        "scope" : "ViralLoad",
-                                       "type" : "Property"
+                                       "type" : "Property",
+                                       "annotation" : [ ]
                                     } ]
                                  },
                                  "isTypeSpecifier" : {
                                     "type" : "IntervalTypeSpecifier",
+                                    "annotation" : [ ],
                                     "pointType" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }
                                  }
                               },
                               "then" : {
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "type" : "As",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
                                     "operand" : {
                                        "locator" : "65:35-65:53",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "annotation" : [ ],
                                        "resultTypeSpecifier" : {
                                           "type" : "ChoiceTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "type" : [ ],
                                           "choice" : [ {
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }, {
                                              "type" : "IntervalTypeSpecifier",
+                                             "annotation" : [ ],
                                              "pointType" : {
                                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                "type" : "NamedTypeSpecifier"
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
                                              }
                                           }, {
                                              "name" : "{http://hl7.org/fhir}Timing",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }, {
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           } ]
                                        },
+                                       "signature" : [ ],
                                        "operand" : [ {
                                           "path" : "effective",
                                           "scope" : "ViralLoad",
-                                          "type" : "Property"
+                                          "type" : "Property",
+                                          "annotation" : [ ]
                                        } ]
                                     },
                                     "asTypeSpecifier" : {
                                        "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
                                        "pointType" : {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     }
                                  },
                                  "asTypeSpecifier" : {
                                     "type" : "ChoiceTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "type" : [ ],
                                     "choice" : [ {
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }, {
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
                                        "pointType" : {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
                                        "pointType" : {
                                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     } ]
                                  }
                               }
                            }, {
+                              "annotation" : [ ],
                               "when" : {
                                  "isType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Is",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "locator" : "65:35-65:53",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
+                                    "annotation" : [ ],
                                     "resultTypeSpecifier" : {
                                        "type" : "ChoiceTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "type" : [ ],
                                        "choice" : [ {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }, {
                                           "type" : "IntervalTypeSpecifier",
+                                          "annotation" : [ ],
                                           "pointType" : {
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }
                                        }, {
                                           "name" : "{http://hl7.org/fhir}Timing",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }, {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        } ]
                                     },
+                                    "signature" : [ ],
                                     "operand" : [ {
                                        "path" : "effective",
                                        "scope" : "ViralLoad",
-                                       "type" : "Property"
+                                       "type" : "Property",
+                                       "annotation" : [ ]
                                     } ]
                                  }
                               },
                               "then" : {
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "As",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
                                     "operand" : {
                                        "locator" : "65:35-65:53",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
+                                       "annotation" : [ ],
                                        "resultTypeSpecifier" : {
                                           "type" : "ChoiceTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "type" : [ ],
                                           "choice" : [ {
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }, {
                                              "type" : "IntervalTypeSpecifier",
+                                             "annotation" : [ ],
                                              "pointType" : {
                                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                "type" : "NamedTypeSpecifier"
+                                                "type" : "NamedTypeSpecifier",
+                                                "annotation" : [ ]
                                              }
                                           }, {
                                              "name" : "{http://hl7.org/fhir}Timing",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           }, {
                                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
+                                             "type" : "NamedTypeSpecifier",
+                                             "annotation" : [ ]
                                           } ]
                                        },
+                                       "signature" : [ ],
                                        "operand" : [ {
                                           "path" : "effective",
                                           "scope" : "ViralLoad",
-                                          "type" : "Property"
+                                          "type" : "Property",
+                                          "annotation" : [ ]
                                        } ]
                                     }
                                  },
                                  "asTypeSpecifier" : {
                                     "type" : "ChoiceTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "type" : [ ],
                                     "choice" : [ {
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }, {
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
                                        "pointType" : {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
                                        "pointType" : {
                                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     } ]
                                  }
@@ -1676,25 +1915,34 @@
                            } ],
                            "else" : {
                               "type" : "Null",
+                              "annotation" : [ ],
                               "resultTypeSpecifier" : {
                                  "type" : "ChoiceTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "type" : [ ],
                                  "choice" : [ {
                                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }, {
                                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }, {
                                     "type" : "IntervalTypeSpecifier",
+                                    "annotation" : [ ],
                                     "pointType" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }
                                  }, {
                                     "type" : "IntervalTypeSpecifier",
+                                    "annotation" : [ ],
                                     "pointType" : {
                                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }
                                  } ]
                               }
@@ -1704,97 +1952,86 @@
                         "locator" : "65:70-65:89",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
+                        "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "IntervalTypeSpecifier",
+                           "annotation" : [ ],
                            "pointType" : {
                               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
                   },
                   "sort" : {
                      "locator" : "66:7-66:59",
+                     "annotation" : [ ],
                      "by" : [ {
                         "locator" : "66:15-66:59",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "direction" : "asc",
                         "type" : "ByExpression",
+                        "annotation" : [ ],
                         "expression" : {
                            "locator" : "66:15-66:59",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
-                           "signature" : [ {
-                              "type" : "IntervalTypeSpecifier",
-                              "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           } ],
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "locator" : "66:24-66:59",
                               "name" : "ToInterval",
                               "libraryName" : "QICoreCommon",
                               "type" : "FunctionRef",
+                              "annotation" : [ ],
                               "resultTypeSpecifier" : {
                                  "type" : "IntervalTypeSpecifier",
+                                 "annotation" : [ ],
                                  "pointType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               },
-                              "signature" : [ {
-                                 "type" : "ChoiceTypeSpecifier",
-                                 "choice" : [ {
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "pointType" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 }, {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "pointType" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 }, {
-                                    "name" : "{http://hl7.org/fhir}Timing",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ]
-                              } ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "locator" : "66:50-66:58",
                                  "name" : "ToValue",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
+                                 "annotation" : [ ],
                                  "resultTypeSpecifier" : {
                                     "type" : "ChoiceTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "type" : [ ],
                                     "choice" : [ {
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }, {
                                        "type" : "IntervalTypeSpecifier",
+                                       "annotation" : [ ],
                                        "pointType" : {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
+                                          "type" : "NamedTypeSpecifier",
+                                          "annotation" : [ ]
                                        }
                                     }, {
                                        "name" : "{http://hl7.org/fhir}Timing",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     }, {
                                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
                                     } ]
                                  },
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "name" : "effective",
-                                    "type" : "IdentifierRef"
+                                    "type" : "IdentifierRef",
+                                    "annotation" : [ ]
                                  } ]
                               } ]
                            }
@@ -1809,98 +2046,113 @@
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "locator" : "86:3-88:103",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
-               "signature" : [ {
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               } ],
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : [ {
                   "locator" : "86:3-87:112",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
-                  "signature" : [ {
-                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "NamedTypeSpecifier"
-                  }, {
-                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "NamedTypeSpecifier"
-                  } ],
+                  "annotation" : [ ],
+                  "signature" : [ ],
                   "operand" : [ {
                      "locator" : "86:3-86:83",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Less",
+                     "annotation" : [ ],
                      "signature" : [ {
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }, {
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      } ],
                      "operand" : [ {
                         "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "As",
+                        "annotation" : [ ],
+                        "signature" : [ ],
                         "operand" : {
                            "locator" : "86:3-86:63",
                            "name" : "ToValue",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "annotation" : [ ],
                            "resultTypeSpecifier" : {
                               "type" : "ChoiceTypeSpecifier",
+                              "annotation" : [ ],
+                              "type" : [ ],
                               "choice" : [ {
                                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "type" : "IntervalTypeSpecifier",
+                                 "annotation" : [ ],
                                  "pointType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Ratio",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{http://hl7.org/fhir}SampledData",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "type" : "IntervalTypeSpecifier",
+                                 "annotation" : [ ],
                                  "pointType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            },
+                           "signature" : [ ],
                            "operand" : [ {
                               "path" : "value",
                               "type" : "Property",
+                              "annotation" : [ ],
                               "source" : {
                                  "locator" : "86:3-86:57",
                                  "resultTypeName" : "{http://hl7.org/fhir}Observation",
                                  "name" : "Most Recent Viral Load Test During Measurement Period",
-                                 "type" : "ExpressionRef"
+                                 "type" : "ExpressionRef",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -1909,92 +2161,120 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "value" : 200,
                         "unit" : "{copies}/mL",
-                        "type" : "Quantity"
+                        "type" : "Quantity",
+                        "annotation" : [ ]
                      } ]
                   }, {
                      "locator" : "87:8-87:112",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equivalent",
+                     "annotation" : [ ],
                      "signature" : [ {
                         "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      }, {
                         "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      } ],
                      "operand" : [ {
                         "asType" : "{urn:hl7-org:elm-types:r1}Concept",
                         "type" : "As",
+                        "annotation" : [ ],
+                        "signature" : [ ],
                         "operand" : {
                            "locator" : "87:8-87:68",
                            "name" : "ToValue",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
+                           "annotation" : [ ],
                            "resultTypeSpecifier" : {
                               "type" : "ChoiceTypeSpecifier",
+                              "annotation" : [ ],
+                              "type" : [ ],
                               "choice" : [ {
                                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "type" : "IntervalTypeSpecifier",
+                                 "annotation" : [ ],
                                  "pointType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Ratio",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{http://hl7.org/fhir}SampledData",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}Time",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }, {
                                  "type" : "IntervalTypeSpecifier",
+                                 "annotation" : [ ],
                                  "pointType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            },
+                           "signature" : [ ],
                            "operand" : [ {
                               "path" : "value",
                               "type" : "Property",
+                              "annotation" : [ ],
                               "source" : {
                                  "locator" : "87:8-87:62",
                                  "resultTypeName" : "{http://hl7.org/fhir}Observation",
                                  "name" : "Most Recent Viral Load Test During Measurement Period",
-                                 "type" : "ExpressionRef"
+                                 "type" : "ExpressionRef",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
                      }, {
                         "type" : "ToConcept",
+                        "annotation" : [ ],
                         "signature" : [ {
                            "name" : "{urn:hl7-org:elm-types:r1}Code",
-                           "type" : "NamedTypeSpecifier"
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
                         } ],
                         "operand" : {
                            "locator" : "87:72-87:112",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                            "name" : "Below threshold level (qualifier value)",
-                           "type" : "CodeRef"
+                           "type" : "CodeRef",
+                           "annotation" : [ ]
                         }
                      } ]
                   } ]
@@ -2002,86 +2282,113 @@
                   "locator" : "88:8-88:103",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Equivalent",
+                  "annotation" : [ ],
                   "signature" : [ {
                      "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                     "type" : "NamedTypeSpecifier"
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
                   }, {
                      "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                     "type" : "NamedTypeSpecifier"
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
                   } ],
                   "operand" : [ {
                      "asType" : "{urn:hl7-org:elm-types:r1}Concept",
                      "type" : "As",
+                     "annotation" : [ ],
+                     "signature" : [ ],
                      "operand" : {
                         "locator" : "88:8-88:68",
                         "name" : "ToValue",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
+                        "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "ChoiceTypeSpecifier",
+                           "annotation" : [ ],
+                           "type" : [ ],
                            "choice" : [ {
                               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "name" : "{urn:hl7-org:elm-types:r1}String",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "type" : "IntervalTypeSpecifier",
+                              "annotation" : [ ],
                               "pointType" : {
                                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }
                            }, {
                               "name" : "{urn:hl7-org:elm-types:r1}Ratio",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "name" : "{http://hl7.org/fhir}SampledData",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "name" : "{urn:hl7-org:elm-types:r1}Time",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
                            }, {
                               "type" : "IntervalTypeSpecifier",
+                              "annotation" : [ ],
                               "pointType" : {
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "type" : "NamedTypeSpecifier"
+                                 "type" : "NamedTypeSpecifier",
+                                 "annotation" : [ ]
                               }
                            } ]
                         },
+                        "signature" : [ ],
                         "operand" : [ {
                            "path" : "value",
                            "type" : "Property",
+                           "annotation" : [ ],
                            "source" : {
                               "locator" : "88:8-88:62",
                               "resultTypeName" : "{http://hl7.org/fhir}Observation",
                               "name" : "Most Recent Viral Load Test During Measurement Period",
-                              "type" : "ExpressionRef"
+                              "type" : "ExpressionRef",
+                              "annotation" : [ ]
                            }
                         } ]
                      }
                   }, {
                      "type" : "ToConcept",
+                     "annotation" : [ ],
                      "signature" : [ {
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "NamedTypeSpecifier",
+                        "annotation" : [ ]
                      } ],
                      "operand" : {
                         "locator" : "88:72-88:103",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                         "name" : "Not detected (qualifier value)",
-                        "type" : "CodeRef"
+                        "type" : "CodeRef",
+                        "annotation" : [ ]
                      }
                   } ]
                } ]

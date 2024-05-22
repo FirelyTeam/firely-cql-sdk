@@ -19,10 +19,10 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<JavaCommand>java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory</JavaCommand>
+		<JavaCommand>java</JavaCommand>
 		<ClassPath>-classpath $(TargetDependencies)/* org.cqframework.cql.cql2elm.cli.Main</ClassPath>
 		<JavaOutputFile>$(MSBuildProjectDirectory)/elm-build.log</JavaOutputFile>
-		<JavaArgs>-input $(CqlDirectory) -f JSON -output $(ElmDirectory) -locators true -result-types true -signatures All</JavaArgs>
+		<JavaArgs>-input $(CqlDirectory) -f JSON -output $(ElmDirectory) -locators true -result-types true -signatures Overloads</JavaArgs>
 		<JavaCommandArgs>$(JavaCommand) $(ClassPath) $(JavaArgs)</JavaCommandArgs>
 	</PropertyGroup>
 

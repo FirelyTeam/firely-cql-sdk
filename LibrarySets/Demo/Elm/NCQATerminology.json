@@ -1,8 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.1.0",
+         "translatorVersion" : "3.10.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "signatureLevel" : "Overloads",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -16,12 +17,14 @@
       "usings" : {
          "def" : [ {
             "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
          }, {
             "locator" : "3:1-3:26",
             "localIdentifier" : "FHIR",
             "uri" : "http://hl7.org/fhir",
-            "version" : "4.0.1"
+            "version" : "4.0.1",
+            "annotation" : [ ]
          } ]
       },
       "includes" : {
@@ -29,7 +32,8 @@
             "locator" : "5:1-5:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.0.001"
+            "version" : "4.0.001",
+            "annotation" : [ ]
          } ]
       },
       "codeSystems" : {
@@ -38,103 +42,120 @@
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "LOINC",
             "id" : "http://loinc.org",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "8:1-8:47",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "SNOMEDCT",
             "id" : "http://snomed.info/sct",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "9:1-9:56",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "RoleCode",
             "id" : "http://hl7.org/fhir/v3/RoleCode",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "10:1-10:83",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "Diagnosis Role",
             "id" : "http://terminology.hl7.org/CodeSystem/diagnosis-role",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "11:1-11:82",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "RequestIntent",
             "id" : "http://terminology.hl7.org/CodeSystem/request-intent",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "12:1-12:106",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "MedicationRequestCategory",
             "id" : "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "13:1-13:101",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "ConditionClinicalStatusCodes",
             "id" : "http://terminology.hl7.org/CodeSystem/condition-clinical",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "14:1-14:109",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "ConditionVerificationStatusCodes",
             "id" : "http://terminology.hl7.org/CodeSystem/condition-verification",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "15:1-15:119",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "AllergyIntoleranceClinicalStatusCodes",
             "id" : "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "16:1-16:127",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "AllergyIntoleranceVerificationStatusCodes",
             "id" : "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "17:1-17:83",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "AllergyIntoleranceType",
             "id" : "http://hl7.org/fhir/allergy-intolerance-type",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "18:1-18:91",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "AllergyIntoleranceCategory",
             "id" : "http://hl7.org/fhir/allergy-intolerance-category",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "19:1-19:95",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "ConditionCategoryCodes",
             "id" : "http://terminology.hl7.org/CodeSystem/condition-category",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "20:1-20:75",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "claim-type",
             "id" : "http://terminology.hl7.org/CodeSystem/claim-type",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "21:1-21:89",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "ActEncounterCodes",
             "id" : "http://terminology.hl7.org/ValueSet/v3-ActEncounterCode",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "22:1-22:88",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "coverage-type",
             "id" : "http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          }, {
             "locator" : "23:1-23:76",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "IdentifierType",
             "id" : "http://terminology.hl7.org/CodeSystem/v2-0203",
-            "accessLevel" : "Public"
+            "accessLevel" : "Public",
+            "annotation" : [ ]
          } ]
       },
       "codes" : {
@@ -144,10 +165,12 @@
             "name" : "problem-list-item",
             "id" : "problem-list-item",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "27:52-27:75",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionCategoryCodes"
+               "name" : "ConditionCategoryCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "28:1-28:79",
@@ -155,10 +178,12 @@
             "name" : "encounter-diagnosis",
             "id" : "encounter-diagnosis",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "28:56-28:79",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionCategoryCodes"
+               "name" : "ConditionCategoryCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "31:1-31:59",
@@ -166,10 +191,12 @@
             "name" : "active",
             "id" : "active",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "31:30-31:59",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionClinicalStatusCodes"
+               "name" : "ConditionClinicalStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "32:1-32:67",
@@ -177,10 +204,12 @@
             "name" : "recurrence",
             "id" : "recurrence",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "32:38-32:67",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionClinicalStatusCodes"
+               "name" : "ConditionClinicalStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "33:1-33:61",
@@ -188,10 +217,12 @@
             "name" : "relapse",
             "id" : "relapse",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "33:32-33:61",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionClinicalStatusCodes"
+               "name" : "ConditionClinicalStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "34:1-34:63",
@@ -199,10 +230,12 @@
             "name" : "inactive",
             "id" : "inactive",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "34:34-34:63",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionClinicalStatusCodes"
+               "name" : "ConditionClinicalStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "35:1-35:65",
@@ -210,10 +243,12 @@
             "name" : "remission",
             "id" : "remission",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "35:36-35:65",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionClinicalStatusCodes"
+               "name" : "ConditionClinicalStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "36:1-36:63",
@@ -221,10 +256,12 @@
             "name" : "resolved",
             "id" : "resolved",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "36:34-36:63",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionClinicalStatusCodes"
+               "name" : "ConditionClinicalStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "39:1-39:73",
@@ -232,10 +269,12 @@
             "name" : "unconfirmed",
             "id" : "unconfirmed",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "39:40-39:73",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionVerificationStatusCodes"
+               "name" : "ConditionVerificationStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "40:1-40:73",
@@ -243,10 +282,12 @@
             "name" : "provisional",
             "id" : "provisional",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "40:40-40:73",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionVerificationStatusCodes"
+               "name" : "ConditionVerificationStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "41:1-41:75",
@@ -254,10 +295,12 @@
             "name" : "differential",
             "id" : "differential",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "41:42-41:75",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionVerificationStatusCodes"
+               "name" : "ConditionVerificationStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "42:1-42:69",
@@ -265,10 +308,12 @@
             "name" : "confirmed",
             "id" : "confirmed",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "42:36-42:69",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionVerificationStatusCodes"
+               "name" : "ConditionVerificationStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "43:1-43:65",
@@ -276,10 +321,12 @@
             "name" : "refuted",
             "id" : "refuted",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "43:32-43:65",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionVerificationStatusCodes"
+               "name" : "ConditionVerificationStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "44:1-44:83",
@@ -287,10 +334,12 @@
             "name" : "entered-in-error",
             "id" : "entered-in-error",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "44:50-44:83",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ConditionVerificationStatusCodes"
+               "name" : "ConditionVerificationStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "47:1-47:76",
@@ -298,10 +347,12 @@
             "name" : "allergy-active",
             "id" : "active",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "47:38-47:76",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceClinicalStatusCodes"
+               "name" : "AllergyIntoleranceClinicalStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "48:1-48:80",
@@ -309,10 +360,12 @@
             "name" : "allergy-inactive",
             "id" : "inactive",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "48:42-48:80",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceClinicalStatusCodes"
+               "name" : "AllergyIntoleranceClinicalStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "49:1-49:80",
@@ -320,10 +373,12 @@
             "name" : "allergy-resolved",
             "id" : "resolved",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "49:42-49:80",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceClinicalStatusCodes"
+               "name" : "AllergyIntoleranceClinicalStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "52:1-52:90",
@@ -331,10 +386,12 @@
             "name" : "allergy-unconfirmed",
             "id" : "unconfirmed",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "52:48-52:90",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceVerificationStatusCodes"
+               "name" : "AllergyIntoleranceVerificationStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "53:1-53:86",
@@ -342,10 +399,12 @@
             "name" : "allergy-confirmed",
             "id" : "confirmed",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "53:44-53:86",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceVerificationStatusCodes"
+               "name" : "AllergyIntoleranceVerificationStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "54:1-54:82",
@@ -353,10 +412,12 @@
             "name" : "allergy-refuted",
             "id" : "refuted",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "54:40-54:82",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceVerificationStatusCodes"
+               "name" : "AllergyIntoleranceVerificationStatusCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "57:1-57:53",
@@ -364,10 +425,12 @@
             "name" : "food",
             "id" : "food",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "57:26-57:53",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceCategory"
+               "name" : "AllergyIntoleranceCategory",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "58:1-58:65",
@@ -375,10 +438,12 @@
             "name" : "medication",
             "id" : "medication",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "58:38-58:65",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceCategory"
+               "name" : "AllergyIntoleranceCategory",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "59:1-59:67",
@@ -386,10 +451,12 @@
             "name" : "environment",
             "id" : "environment",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "59:40-59:67",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceCategory"
+               "name" : "AllergyIntoleranceCategory",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "60:1-60:61",
@@ -397,10 +464,12 @@
             "name" : "biologic",
             "id" : "biologic",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "60:34-60:61",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceCategory"
+               "name" : "AllergyIntoleranceCategory",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "63:1-63:55",
@@ -408,10 +477,12 @@
             "name" : "Allergy",
             "id" : "allergy",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "63:32-63:55",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceType"
+               "name" : "AllergyIntoleranceType",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "64:1-64:63",
@@ -419,10 +490,12 @@
             "name" : "Intolerance",
             "id" : "intolerance",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "64:40-64:63",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "AllergyIntoleranceType"
+               "name" : "AllergyIntoleranceType",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "67:1-67:62",
@@ -430,10 +503,12 @@
             "name" : "Inpatient",
             "id" : "inpatient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "67:36-67:62",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "MedicationRequestCategory"
+               "name" : "MedicationRequestCategory",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "68:1-68:64",
@@ -441,10 +516,12 @@
             "name" : "Outpatient",
             "id" : "outpatient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "68:38-68:64",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "MedicationRequestCategory"
+               "name" : "MedicationRequestCategory",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "69:1-69:62",
@@ -452,10 +529,12 @@
             "name" : "Community",
             "id" : "community",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "69:36-69:62",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "MedicationRequestCategory"
+               "name" : "MedicationRequestCategory",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "70:1-70:62",
@@ -463,10 +542,12 @@
             "name" : "Discharge",
             "id" : "discharge",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "70:36-70:62",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "MedicationRequestCategory"
+               "name" : "MedicationRequestCategory",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "73:1-73:45",
@@ -474,10 +555,12 @@
             "name" : "Pharmacy",
             "id" : "pharmacy",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "73:34-73:45",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "claim-type"
+               "name" : "claim-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "74:1-74:55",
@@ -485,10 +568,12 @@
             "name" : "Institutional",
             "id" : "institutional",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "74:44-74:55",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "claim-type"
+               "name" : "claim-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "75:1-75:53",
@@ -496,10 +581,12 @@
             "name" : "Professional",
             "id" : "professional",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "75:42-75:53",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "claim-type"
+               "name" : "claim-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "76:1-76:37",
@@ -507,10 +594,12 @@
             "name" : "Oral",
             "id" : "oral",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "76:26-76:37",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "claim-type"
+               "name" : "claim-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "77:1-77:41",
@@ -518,10 +607,12 @@
             "name" : "Vision",
             "id" : "vision",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "77:30-77:41",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "claim-type"
+               "name" : "claim-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "80:1-80:45",
@@ -529,10 +620,12 @@
             "name" : "virtual",
             "id" : "VR",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "80:27-80:45",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ActEncounterCodes"
+               "name" : "ActEncounterCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "81:1-81:49",
@@ -540,10 +633,12 @@
             "name" : "ambulatory",
             "id" : "AMB",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "81:31-81:49",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ActEncounterCodes"
+               "name" : "ActEncounterCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "82:1-82:49",
@@ -551,10 +646,12 @@
             "name" : "home health",
             "id" : "HH",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "82:31-82:49",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ActEncounterCodes"
+               "name" : "ActEncounterCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "83:1-83:60",
@@ -562,10 +659,12 @@
             "name" : "inpatient non-acute",
             "id" : "NONAC",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "83:42-83:60",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ActEncounterCodes"
+               "name" : "ActEncounterCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "84:1-84:49",
@@ -573,10 +672,12 @@
             "name" : "emergency",
             "id" : "EMER",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "84:31-84:49",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ActEncounterCodes"
+               "name" : "ActEncounterCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "85:1-85:56",
@@ -584,10 +685,12 @@
             "name" : "inpatient acute",
             "id" : "ACUTE",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "85:38-85:56",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "ActEncounterCodes"
+               "name" : "ActEncounterCodes",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "88:1-88:50",
@@ -595,10 +698,12 @@
             "name" : "drug policy",
             "id" : "DRUGPOL",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "88:36-88:50",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "coverage-type"
+               "name" : "coverage-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "89:1-89:59",
@@ -606,10 +711,12 @@
             "name" : "mental health policy",
             "id" : "MENTPOL",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "89:45-89:59",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "coverage-type"
+               "name" : "coverage-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "90:1-90:56",
@@ -617,10 +724,12 @@
             "name" : "managed care policy",
             "id" : "MCPOL",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "90:42-90:56",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "coverage-type"
+               "name" : "coverage-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "91:1-91:65",
@@ -628,10 +737,12 @@
             "name" : "subsidized health program",
             "id" : "SUBSIDIZ",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "91:51-91:65",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "coverage-type"
+               "name" : "coverage-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "92:1-92:60",
@@ -639,10 +750,12 @@
             "name" : "retiree health program",
             "id" : "RETIRE",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "92:46-92:60",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "coverage-type"
+               "name" : "coverage-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "93:1-93:58",
@@ -650,10 +763,12 @@
             "name" : "substance use policy",
             "id" : "SUBPOL",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "93:44-93:58",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "coverage-type"
+               "name" : "coverage-type",
+               "annotation" : [ ]
             }
          }, {
             "locator" : "96:1-96:51",
@@ -661,10 +776,12 @@
             "name" : "Provider number",
             "id" : "PRN",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "codeSystem" : {
                "locator" : "96:36-96:51",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "IdentifierType"
+               "name" : "IdentifierType",
+               "annotation" : [ ]
             }
          } ]
       }
