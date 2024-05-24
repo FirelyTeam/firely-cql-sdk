@@ -121,7 +121,7 @@ namespace Hl7.Cql.Packaging
                 case CqlPrimitiveType.Boolean:
                     return new CqlTypeToFhirMapping(FHIRAllTypes.Boolean, cqlType);
                 case CqlPrimitiveType.Code:
-                    return new CqlTypeToFhirMapping(FHIRAllTypes.Code, cqlType);
+                    return new CqlTypeToFhirMapping(FHIRAllTypes.Coding, cqlType);
                 case CqlPrimitiveType.CodeSystem:
                     return new CqlTypeToFhirMapping(FHIRAllTypes.CodeSystem, cqlType);
                 case CqlPrimitiveType.Concept:
