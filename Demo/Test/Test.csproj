@@ -48,4 +48,19 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Inputs\Bundles\95029_fail.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Inputs\Bundles\95029_pass.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Inputs\ValueSets\2.16.840.1.113883.3.464.1004.1148.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Inputs\ValueSets\2.16.840.1.113883.3.464.1004.1168.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using System.Diagnostics;
 using System.Runtime.Loader;
@@ -8,22 +9,24 @@ using CoreTests;
 using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
+using Test.Deck;
 
 namespace Test
 {
     [TestClass]
-    public class MeasuresTest
+    public class MeasuresTest : TestBase
     {
-        private readonly IDictionary<string, object> MY2023 =
+        private readonly IDictionary<string, object> MY2022 =
             new Dictionary<string, object>
             {
                 {
                     "Measurement Period",
                     new CqlInterval<CqlDateTime>(
-                        new CqlDateTime(2023, 1, 1, 0, 0, 0, 0, 0, 0),
-                        new CqlDateTime(2023, 12, 31, 0, 0, 0, 0, 0, 0),
+                        new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
+                        new CqlDateTime(2022, 12, 31, 0, 0, 0, 0, 0, 0),
                         true,
-                        true)
+                        true
+                    )
                 }
             };
 
@@ -31,28 +34,66 @@ namespace Test
         public void BCSEHEDIS2022_Numerator()
         {
             var patientEverything = new Bundle();  // add some data
-            var context = FhirCqlContext.ForBundle(patientEverything, MY2023);
+            var context = FhirCqlContext.ForBundle(patientEverything, MY2022);
             var bcs = new BCSEHEDISMY2022_1_0_0(context);
             var numerator = bcs.Numerator();
             Assert.IsFalse(numerator);
         }
 
         [TestMethod]
-        public void BCSEHEDIS2022_Numerator_FromResource()
+        public void BCSEHEDIS2022_Numerator_FromResource_Passed()
+        {
+            var lib = "BCSEHEDISMY2022";
+            var version = "1.0.0";
+            var dir = new DirectoryInfo("Resources");
+            var asmContext = LoadResources(dir, lib, version);
+
+            byte[] byteArray = File.ReadAllBytes("Inputs/Bundles/95029_pass.json");
+            using var stream = new MemoryStream(byteArray);
+            var patientBundle = LoadBundle(stream);
+
+            var directory = new DirectoryInfo("Inputs/ValueSets");
+            var valueSets = LoadValueSets(directory);// Add valuesets
+
+            var context = FhirCqlContext.ForBundle(patientBundle, MY2022, valueSets);
+
+            var results = asmContext.Run(lib, version, context);
+
+            Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
+            Assert.IsInstanceOfType(numerator, typeof(bool?));
+            Assert.IsTrue((bool?)numerator);
+
+            var lib2 = new BCSEHEDISMY2022_1_0_0(context);
+            var num = lib2.Numerator();
+            Assert.IsTrue((bool?)num);
+        }
+
+        [TestMethod]
+        public void BCSEHEDIS2022_Numerator_FromResource_Fail()
         {
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
             var dir = LibrarySetsDirs.Demo.ResourcesDir;
             var asmContext = LoadResources(dir, lib, version);
 
-            var patientEverything = new Bundle();   // Add data
-            var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
-            var context = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
+            byte[] byteArray = File.ReadAllBytes("Inputs/Bundles/95029_fail.json");
+            using var stream = new MemoryStream(byteArray);
+            var patientBundle = LoadBundle(stream);
+
+            var directory = new DirectoryInfo("Inputs/ValueSets");
+            var valueSets = LoadValueSets(directory);// Add valuesets
+
+            var context = FhirCqlContext.ForBundle(patientBundle, MY2022, valueSets);
 
             var results = asmContext.Run(lib, version, context);
+
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
+
+            var lib2 = new BCSEHEDISMY2022_1_0_0(context);
+            var num = lib2.Numerator();
+            Assert.IsFalse((bool?)num);
         }
 
         [TestMethod]
@@ -66,7 +107,7 @@ namespace Test
 
             var patientEverything = new Bundle();  // Add some data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
-            var context = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
+            var context = FhirCqlContext.ForBundle(patientEverything, MY2022, valueSets);
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -82,7 +123,7 @@ namespace Test
 
             // Run a second time with a (presumably) different bundle.
             var bundle2 = new Bundle();
-            context = FhirCqlContext.ForBundle(bundle2, MY2023, valueSets);
+            context = FhirCqlContext.ForBundle(bundle2, MY2022, valueSets);
             stopwatch.Restart();
             results = asmContext.Run(lib, version, context);
             elapsed = stopwatch.Elapsed;

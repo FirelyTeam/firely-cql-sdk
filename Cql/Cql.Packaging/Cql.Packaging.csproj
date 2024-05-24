@@ -44,5 +44,4 @@
 	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
 	  </Compile>
 	</ItemGroup>
-
 </Project>
