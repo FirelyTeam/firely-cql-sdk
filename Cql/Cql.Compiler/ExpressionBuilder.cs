@@ -417,17 +417,17 @@ namespace Hl7.Cql.Compiler
                     DurationBetween or
                     Ends or
                     In or
-                    Elm.Meets or
-                    Elm.MeetsAfter or
-                    Elm.MeetsBefore or
-                    Elm.Overlaps or
-                    Elm.OverlapsAfter or
-                    Elm.OverlapsBefore or
+                    Meets or
+                    MeetsAfter or
+                    MeetsBefore or
+                    Overlaps or
+                    OverlapsAfter or
+                    OverlapsBefore or
                     Round or
                     SameAs or
                     SameOrAfter or
                     SameOrBefore or
-                    Elm.Starts => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
+                    Starts => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
 
                 AllTrue or
                     AnyTrue or
