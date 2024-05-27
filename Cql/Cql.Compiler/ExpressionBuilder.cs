@@ -292,15 +292,9 @@ namespace Hl7.Cql.Compiler
                         IsNull e           => IsNull(e),
                         List e             => List(e),
                         Literal e          => Literal(e),
-                        Meets e            => Meets(e),
-                        MeetsAfter e       => MeetsAfter(e),
-                        MeetsBefore e      => MeetsBefore(e),
                         Message e          => Message(e),
                         Null e             => NullExpression.ForType(TypeFor(e)!),
                         OperandRef e       => OperandRef(e),
-                        Overlaps e         => Overlaps(e),
-                        OverlapsAfter e    => OverlapsAfter(e),
-                        OverlapsBefore e   => OverlapsBefore(e),
                         ParameterRef e     => ParameterRef(e),
                         AnyInValueSet e    => ProcessValueSet(e.valueset, e.codes, isList: true),
                         InValueSet e       => ProcessValueSet(e.valueset!, e.code, isList: false),
@@ -408,7 +402,6 @@ namespace Hl7.Cql.Compiler
                     Successor or
                     TimezoneOffsetFrom or
                     ToList or
-                    ToList or
                     Truncate or
                     TruncatedDivide or
                     Upper or
@@ -424,6 +417,12 @@ namespace Hl7.Cql.Compiler
                     DurationBetween or
                     Ends or
                     In or
+                    Elm.Meets or
+                    Elm.MeetsAfter or
+                    Elm.MeetsBefore or
+                    Elm.Overlaps or
+                    Elm.OverlapsAfter or
+                    Elm.OverlapsBefore or
                     Round or
                     SameAs or
                     SameOrAfter or
@@ -1537,121 +1536,6 @@ namespace Hl7.Cql.Compiler
                 if (right.Type.IsCqlInterval(out var rightPointType))
                 {
                     return BindCqlOperator(nameof(ICqlOperators.IntervalIntersect), left, right);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression? Meets(Meets e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.Meets), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression? MeetsAfter(MeetsAfter e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.MeetsAfter), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression? MeetsBefore(MeetsBefore e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.MeetsBefore), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression Overlaps(Overlaps e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.Overlaps), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression OverlapsBefore(OverlapsBefore e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.OverlapsBefore), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression OverlapsAfter(OverlapsAfter e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.OverlapsAfter), left, right, precision);
                 }
 
                 throw new NotImplementedException().WithContext(this);

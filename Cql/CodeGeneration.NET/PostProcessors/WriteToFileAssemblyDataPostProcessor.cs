@@ -38,17 +38,20 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
         if (Directory.Exists(directory))
         {
             var filesWrittenFile = GetFilesDataFileFullName(directory);
-            var filesWritten = await File.ReadAllLinesAsync(filesWrittenFile);
-            _logger.LogInformation("Deleting {count} previous Assembly files", filesWritten.Length);
-
-            filesWritten.AsParallel().ForAll(path =>
+            if (File.Exists(filesWrittenFile))
             {
-                _logger.LogInformation("Deleting previous Assembly file: {path}", path);
-                File.Delete(path);
-            });
+                var filesWritten = await File.ReadAllLinesAsync(filesWrittenFile);
+                _logger.LogInformation("Deleting {count} previous Assembly files", filesWritten.Length);
 
-            _logger.LogInformation("Deleting file record of previous Assembly files: {path}", filesWrittenFile);
-            File.Delete(filesWrittenFile);
+                filesWritten.AsParallel().ForAll(path =>
+                {
+                    _logger.LogInformation("Deleting previous Assembly file: {path}", path);
+                    File.Delete(path);
+                });
+
+                _logger.LogInformation("Deleting file record of previous Assembly files: {path}", filesWrittenFile);
+                File.Delete(filesWrittenFile);
+            }
         }
         Directory.CreateDirectory(directory);
     }
