@@ -995,7 +995,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region Intersect
-        public IEnumerable<T>? ListIntersect<T>(IEnumerable<T>? left, IEnumerable<T>? right)
+        public IEnumerable<T>? Intersect<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
             if (left == null || right == null)
                 return null;

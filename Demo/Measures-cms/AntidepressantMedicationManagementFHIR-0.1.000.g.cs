@@ -479,7 +479,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 				var ah_ = this.Measurement_Period();
 				var ai_ = context.Operators.End(ah_);
 				var aj_ = context.Operators.Interval(ag_, ai_, true, true);
-				var ak_ = context.Operators.IntervalIntersect<CqlDateTime>((Meds as CqlInterval<CqlDateTime>), aj_);
+				var ak_ = context.Operators.Intersect<CqlDateTime>((Meds as CqlInterval<CqlDateTime>), aj_);
 
 				return ak_;
 			};
@@ -519,7 +519,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var l_ = context.Operators.Quantity(114m, "days");
 			var m_ = context.Operators.Add(j_, l_);
 			var n_ = context.Operators.Interval(j_, m_, true, true);
-			var o_ = context.Operators.IntervalIntersect<CqlDate>(i_, n_);
+			var o_ = context.Operators.Intersect<CqlDate>(i_, n_);
 
 			return o_;
 		};
@@ -570,7 +570,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			var l_ = context.Operators.Quantity(231m, "days");
 			var m_ = context.Operators.Add(j_, l_);
 			var n_ = context.Operators.Interval(j_, m_, true, true);
-			var o_ = context.Operators.IntervalIntersect<CqlDate>(i_, n_);
+			var o_ = context.Operators.Intersect<CqlDate>(i_, n_);
 
 			return o_;
 		};

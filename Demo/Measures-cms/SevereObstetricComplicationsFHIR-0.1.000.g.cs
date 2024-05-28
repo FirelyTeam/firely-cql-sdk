@@ -1092,7 +1092,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	{
 		var a_ = this.Stratification_Encounter();
 		var b_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions();
-		var c_ = context.Operators.ListIntersect<Encounter>(a_, b_);
+		var c_ = context.Operators.Intersect<Encounter>(a_, b_);
 
 		return c_;
 	}

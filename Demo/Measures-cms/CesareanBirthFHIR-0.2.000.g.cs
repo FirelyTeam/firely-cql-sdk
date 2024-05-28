@@ -991,7 +991,7 @@ public class CesareanBirthFHIR_0_2_000
 	{
 		var a_ = this.Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks();
 		var b_ = this.Encounter_with_Singleton_Delivery();
-		var c_ = context.Operators.ListIntersect<Encounter>(a_, b_);
+		var c_ = context.Operators.Intersect<Encounter>(a_, b_);
 		bool? d_(Encounter SingletonEncounterGE37Weeks)
 		{
 			var f_ = this.lastGravida(SingletonEncounterGE37Weeks);

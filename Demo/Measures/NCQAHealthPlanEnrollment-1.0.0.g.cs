@@ -58,7 +58,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			var l_ = context.Operators.Start(participationPeriod);
 			var m_ = context.Operators.End(participationPeriod);
 			var n_ = context.Operators.Interval(l_, m_, true, true);
-			var o_ = context.Operators.IntervalIntersect<CqlDate>(k_, n_);
+			var o_ = context.Operators.Intersect<CqlDate>(k_, n_);
 
 			return o_;
 		};

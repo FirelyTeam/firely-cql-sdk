@@ -159,7 +159,7 @@ public class VTE_8_6_000
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		var d_ = this.Admission_without_VTE_or_Obstetrical_Conditions();
-		var e_ = context.Operators.ListIntersect<Encounter>(c_, d_);
+		var e_ = context.Operators.Intersect<Encounter>(c_, d_);
 
 		return e_;
 	}

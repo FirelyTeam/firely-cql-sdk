@@ -270,7 +270,7 @@ namespace Hl7.Cql.Operators
         bool? IntervalIncludedIn<T>(CqlInterval<T>? smaller, CqlInterval<T>? larger, string precision);
         bool? IntervalIncludesElement<T>(CqlInterval<T>? interval, T t, string? precision);
         bool? IntervalIncludesInterval<T>(CqlInterval<T>? larger, CqlInterval<T>? smaller, string precision);
-        CqlInterval<T>? IntervalIntersect<T>(CqlInterval<T>? left, CqlInterval<T>? right);
+        CqlInterval<T>? Intersect<T>(CqlInterval<T>? left, CqlInterval<T>? right);
         bool? IntervalProperlyIncludedInInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string precision);
         bool? IntervalProperlyIncludesElement(CqlInterval<CqlDate>? left, CqlDate right, string precision);
         bool? IntervalProperlyIncludesElement(CqlInterval<CqlDateTime>? left, CqlDateTime right, string precision);
@@ -315,7 +315,7 @@ namespace Hl7.Cql.Operators
         bool? ListIncludesElement<T>(IEnumerable<T>? left, T right);
         bool? ListIncludesList<T>(IEnumerable<T>? left, IEnumerable<T> right);
         int? IndexOf<T>(IEnumerable<T>? list, T element);
-        IEnumerable<T>? ListIntersect<T>(IEnumerable<T>? left, IEnumerable<T>? right);
+        IEnumerable<T>? Intersect<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListProperlyIncludedInList<T>(IEnumerable<T>? left, IEnumerable<T> right);

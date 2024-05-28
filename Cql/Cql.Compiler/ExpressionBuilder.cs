@@ -283,7 +283,7 @@ namespace Hl7.Cql.Compiler
                         IncludedIn e       => IncludedIn(e),
                         Includes e         => Includes(e),
                         Instance e         => Instance(e),
-                        Intersect e        => Intersect(e),
+                        // Intersect e        => Intersect(e),
                         Is e               => Is(e),
                         IsNull e           => IsNull(e),
                         List e             => List(e),
@@ -377,6 +377,7 @@ namespace Hl7.Cql.Compiler
                     HighBoundary or
                     Implies or
                     Indexer or
+                    Intersect or
                     IsFalse or
                     IsTrue or
                     Length or
@@ -1514,27 +1515,6 @@ namespace Hl7.Cql.Compiler
 
             }
 
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression Intersect(Intersect e)
-        {
-            var left = TranslateArg(e.operand![0]!);
-            var right = TranslateArg(e.operand![1]!);
-            if (_typeResolver.IsListType(left.Type))
-            {
-                return BindCqlOperator(nameof(ICqlOperators.ListIntersect), left, right);
-            }
-
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    return BindCqlOperator(nameof(ICqlOperators.IntervalIntersect), left, right);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
             throw new NotImplementedException().WithContext(this);
         }
 
