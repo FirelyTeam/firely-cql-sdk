@@ -480,14 +480,13 @@ namespace Hl7.Cql.Compiler
             object?[] Collapse(Collapse e)
             {
                 var operand = TranslateArg(e.operand![0]!);
-                if (_typeResolver.GetListElementType(operand.Type, throwError: false) is {} elementType
-                    && elementType.IsCqlInterval(out var pointType))
+                if (_typeResolver.GetListElementCqlIntervalPointType(operand.Type) is {})
                 {
-                    object precision = NullExpression.String;
-                    if (e.operand is [_, Quantity quantity, ..])
+                    object precision = e.operand switch
                     {
-                        precision = quantity.unit;
-                    }
+                        [_, Quantity quantity, ..] => quantity.unit,
+                        _                          => NullExpression.String
+                    };
 
                     return [operand, precision];
                 }
@@ -506,9 +505,13 @@ namespace Hl7.Cql.Compiler
                             right = ChangeType(right, leftType);
                         }
                         else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {leftType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                        return [left, right, e.precisionOrNull];
                     }
 
-                    return [left, right, e.precisionOrNull];
+                    if (left.Type.IsCqlInterval(out _))
+                    {
+                        return [left, right, e.precisionOrNull];
+                    }
                 }
                 throw this.NewExpressionBuildingException($"Contains expects two arguments, but got {e.operand.Length}");
             }
@@ -522,9 +525,9 @@ namespace Hl7.Cql.Compiler
                         && leftListElemType == rightListElemType)
                         return [left, right];
 
-                    if (left.Type.IsCqlInterval(out var leftIntvType)
-                        && right.Type.IsCqlInterval(out var rightIntvType)
-                        && leftIntvType == rightIntvType)
+                    if (left.Type.IsCqlInterval(out var leftPointType)
+                        && right.Type.IsCqlInterval(out var rightPointType)
+                        && leftPointType == rightPointType)
                         return [left, right];
                 }
                 throw this.NewExpressionBuildingException($"Union expects two arguments of the same list or interval type.");
@@ -2416,4 +2419,16 @@ namespace Hl7.Cql.Compiler
     }
 
     #endregion
+
+    file static class LocalExtensions
+    {
+        public static Type? GetListElementCqlIntervalPointType(
+            this TypeResolver typeResolver,
+            Type type) =>
+            typeResolver.GetListElementType(type, throwError:false) is { } elementType
+            && elementType.IsCqlInterval(out var pointType)
+                ? pointType
+                : null;
+    }
+
 }
