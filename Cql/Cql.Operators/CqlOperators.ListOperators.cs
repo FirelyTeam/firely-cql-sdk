@@ -105,7 +105,7 @@ namespace Hl7.Cql.Runtime
 
         #region Equivalent
 
-        public bool? ListEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
+        public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
             if (left == null)
             {
@@ -1067,7 +1067,7 @@ namespace Hl7.Cql.Runtime
 
         #region Not Equivalent
 
-        public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !ListEquivalent(left, right);
+        public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !Equivalent(left, right);
 
         #endregion
 

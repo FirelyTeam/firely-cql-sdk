@@ -872,7 +872,7 @@ public class Exam130FHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var af_ = context.Operators.ListEquivalent<string>(ad_, (ae_ as IEnumerable<string>));
+				var af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
 
 				return af_;
 			};
@@ -952,7 +952,7 @@ public class Exam130FHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var af_ = context.Operators.ListEquivalent<string>(ad_, (ae_ as IEnumerable<string>));
+				var af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
 
 				return af_;
 			};
@@ -1023,7 +1023,7 @@ public class Exam130FHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var aa_ = context.Operators.ListEquivalent<string>(y_, (z_ as IEnumerable<string>));
+				var aa_ = context.Operators.Equivalent<string>(y_, (z_ as IEnumerable<string>));
 				var ab_ = context.Operators.Not(aa_);
 
 				return ab_;
@@ -1249,7 +1249,7 @@ public class Exam130FHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var ap_ = context.Operators.ListEquivalent<string>(an_, (ao_ as IEnumerable<string>));
+				var ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
 
 				return ap_;
 			};
@@ -1337,7 +1337,7 @@ public class Exam130FHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var ap_ = context.Operators.ListEquivalent<string>(an_, (ao_ as IEnumerable<string>));
+				var ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
 
 				return ap_;
 			};
@@ -1416,7 +1416,7 @@ public class Exam130FHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var ak_ = context.Operators.ListEquivalent<string>(ai_, (aj_ as IEnumerable<string>));
+				var ak_ = context.Operators.Equivalent<string>(ai_, (aj_ as IEnumerable<string>));
 				var al_ = context.Operators.Not(ak_);
 
 				return al_;

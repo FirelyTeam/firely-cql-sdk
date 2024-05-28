@@ -309,7 +309,7 @@ namespace Hl7.Cql.Operators
         IEnumerable<T>? Distinct<T>(IEnumerable<T> source);
         T? Indexer<T>(IEnumerable<T>? source, int? index);
         bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right);
-        bool? ListEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
+        bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         IEnumerable<T>? Except<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         bool? ListIncludedInList<T>(IEnumerable<T>? left, IEnumerable<T> right);
         bool? ListIncludesElement<T>(IEnumerable<T>? left, T right);

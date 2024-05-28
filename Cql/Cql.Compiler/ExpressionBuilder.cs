@@ -496,16 +496,18 @@ namespace Hl7.Cql.Compiler
 
             object?[] Contains(Contains e)
             {
-                if (TranslateArgs(e.operand) is [{ }left, { } right])
+                if (TranslateArgs(e.operand) is [{ }left, { } right, ..])
                 {
-                    if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftType
-                        && leftType != right.Type)
+                    if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftType)
                     {
-                        if (leftType.IsAssignableFrom(right.Type))
+                        if (leftType != right.Type)
                         {
-                            right = ChangeType(right, leftType);
+                            if (leftType.IsAssignableFrom(right.Type))
+                            {
+                                right = ChangeType(right, leftType);
+                            }
+                            else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {leftType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                         }
-                        else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {leftType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                         return [left, right, e.precisionOrNull];
                     }
 
@@ -519,7 +521,7 @@ namespace Hl7.Cql.Compiler
 
             object?[] Union(Union e)
             {
-                if (TranslateArgs(e.operand) is [{ } left, { } right])
+                if (TranslateArgs(e.operand) is [{ } left, { } right, ..])
                 {
                     if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
                         && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
@@ -1425,7 +1427,7 @@ namespace Hl7.Cql.Compiler
                 return Expression.Constant(false, typeof(bool?));
             }
 
-            return BindCqlOperator(nameof(ICqlOperators.ListEquivalent), left, right);
+            return BindCqlOperator(nameof(ICqlOperators.Equivalent), left, right);
         }
     }
 
