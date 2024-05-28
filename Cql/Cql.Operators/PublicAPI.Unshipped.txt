@@ -106,6 +106,14 @@ Hl7.Cql.Operators.ICqlOperators.Comparer.get -> Hl7.Cql.Abstractions.ICqlCompare
 Hl7.Cql.Operators.ICqlOperators.Concatenate(string? left, string? right) -> string?
 Hl7.Cql.Operators.ICqlOperators.ConceptInValueSet(Hl7.Cql.Primitives.CqlConcept? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ConceptsInValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlConcept?>? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, decimal? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlDate? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, Hl7.Cql.Primitives.CqlDateTime? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, Hl7.Cql.Primitives.CqlQuantity? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlTime? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<int?>? left, int? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<long?>? left, long? right, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Contains<T>(System.Collections.Generic.IEnumerable<T>! list, T item) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Convert<T>(object? from) -> T?
 Hl7.Cql.Operators.ICqlOperators.ConvertBooleanToDecimal(bool? b) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.ConvertBooleanToInteger(bool? b) -> int?
@@ -247,13 +255,6 @@ Hl7.Cql.Operators.ICqlOperators.Interval(Hl7.Cql.Primitives.CqlQuantity? low, Hl
 Hl7.Cql.Operators.ICqlOperators.Interval(Hl7.Cql.Primitives.CqlTime? low, Hl7.Cql.Primitives.CqlTime? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>?
 Hl7.Cql.Operators.ICqlOperators.Interval(int? low, int? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<int?>?
 Hl7.Cql.Operators.ICqlOperators.Interval(long? low, long? high, bool? lowClosed, bool? highClosed) -> Hl7.Cql.Primitives.CqlInterval<long?>?
-Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, decimal? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlDate? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDateTime?>? left, Hl7.Cql.Primitives.CqlDateTime? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? left, Hl7.Cql.Primitives.CqlQuantity? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlTime? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<int?>? left, int? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IntervalContains(Hl7.Cql.Primitives.CqlInterval<long?>? left, long? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalIncludedIn<T>(Hl7.Cql.Primitives.CqlInterval<T>? smaller, Hl7.Cql.Primitives.CqlInterval<T>? larger, string! precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalIncludesElement<T>(Hl7.Cql.Primitives.CqlInterval<T>? interval, T t, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IntervalIncludesInterval<T>(Hl7.Cql.Primitives.CqlInterval<T>? larger, Hl7.Cql.Primitives.CqlInterval<T>? smaller, string! precision) -> bool?
@@ -279,7 +280,6 @@ Hl7.Cql.Operators.ICqlOperators.Length(string! argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Length<T>(System.Collections.Generic.IEnumerable<T>? list) -> int?
 Hl7.Cql.Operators.ICqlOperators.Less(object? left, object? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.LessOrEqual(object? left, object? right) -> bool?
-Hl7.Cql.Operators.ICqlOperators.ListContains<T>(System.Collections.Generic.IEnumerable<T>! list, T item) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListEqual<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListEquivalent<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ListIncludedInList<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>! right) -> bool?

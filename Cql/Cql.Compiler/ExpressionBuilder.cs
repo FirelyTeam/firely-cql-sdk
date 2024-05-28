@@ -273,7 +273,7 @@ namespace Hl7.Cql.Compiler
                         ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
                         Coalesce e         => Coalesce(e),
                         // Collapse e         => Collapse(e),
-                        Contains e         => Contains(e),
+                        // Contains e         => Contains(e),
                         Equivalent e       => Equivalent(e),
                         FunctionRef e      => FunctionRef(e),
                         AliasRef e         => GetScopeExpression(e.name!),
@@ -482,41 +482,37 @@ namespace Hl7.Cql.Compiler
             object?[] Collapse(Collapse e)
             {
                 var operand = TranslateArg(e.operand![0]!);
-                if (_typeResolver.IsListType(operand.Type))
+                if (_typeResolver.GetListElementType(operand.Type, throwError: false) is {} elementType
+                    && elementType.IsCqlInterval(out var pointType))
                 {
-                    var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
-                    if (elementType.IsCqlInterval(out var pointType))
+                    object precision = NullExpression.String;
+                    if (e.operand is [_, Quantity quantity, ..])
                     {
-                        var precision = NullExpression.String;
-                        if (e.operand.Length > 1 && e.operand[1] is Quantity quant)
-                        {
-                            precision = Expression.Constant(quant.unit, typeof(string));
-                        }
-
-                        return [operand, precision];
+                        precision = quantity.unit;
                     }
+
+                    return [operand, precision];
                 }
                 throw this.NewExpressionBuildingException($"Collapse expects a list of intervals, but got {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)}");
             }
 
             object?[] Contains(Contains e)
             {
-                var operand = TranslateArg(e.operand![0]!);
-                if (_typeResolver.IsListType(operand.Type))
+                if (TranslateArgs(e.operand) is [{ }left, { } right])
                 {
-                    var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
-                    if (elementType.IsCqlInterval(out var pointType))
+                    if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftType
+                        && leftType != right.Type)
                     {
-                        var precision = NullExpression.String;
-                        if (e.operand.Length > 1 && e.operand[1] is Quantity quant)
+                        if (leftType.IsAssignableFrom(right.Type))
                         {
-                            precision = Expression.Constant(quant.unit, typeof(string));
+                            right = ChangeType(right, leftType);
                         }
-
-                        return [operand, precision];
+                        else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {leftType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                     }
+
+                    return [left, right, e.precisionOrNull];
                 }
-                throw this.NewExpressionBuildingException($"Collapse expects a list of intervals, but got {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                throw this.NewExpressionBuildingException($"Contains expects two arguments, but got {e.operand.Length}");
             }
         }
 
@@ -1448,33 +1444,6 @@ namespace Hl7.Cql.Compiler
 
     partial class ExpressionBuilderContext
     {
-        private Expression Contains(Contains e)
-        {
-            var left = TranslateArg(e!.operand![0]!);
-            var right = TranslateArg(e.operand[1]!);
-            var precision = ((IGetPrecision)e).precisionOrNull;
-            if (_typeResolver.IsListType(left.Type))
-            {
-                var elementType = _typeResolver.GetListElementType(left.Type, throwError: true)!;
-                if (elementType != right.Type)
-                {
-                    if (elementType.IsAssignableFrom(right.Type))
-                    {
-                        right = ChangeType(right, elementType);
-                    }
-                    else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {elementType.ToCSharpString(Defaults.TypeCSharpFormat)}");
-                }
-
-                return BindCqlOperator(nameof(ICqlOperators.ListContains), left, right);
-            }
-
-            if (left.Type.IsCqlInterval(out var pointType))
-            {
-                return BindCqlOperator(nameof(ICqlOperators.IntervalContains), left, right, precision);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
         protected Expression? Includes(Includes e)
         {
             var left = TranslateArg(e.operand![0]);

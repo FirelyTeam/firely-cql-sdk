@@ -20,7 +20,7 @@ namespace Hl7.Cql.Runtime
     internal partial class CqlOperators
     {
         #region Contains
-        public bool? ListContains<T>(IEnumerable<T> list, T item)
+        public bool? Contains<T>(IEnumerable<T> list, T item)
         {
             if (list == null) return false;
             if (item == null) return null;

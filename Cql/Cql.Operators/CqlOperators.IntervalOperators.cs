@@ -407,20 +407,20 @@ namespace Hl7.Cql.Runtime
 
         #region Contains
 
-        public bool? IntervalContains(CqlInterval<int?>? left, int? right, string? precision) =>
+        public bool? Contains(CqlInterval<int?>? left, int? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<long?>? left, long? right, string? precision) =>
+        public bool? Contains(CqlInterval<long?>? left, long? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
+        public bool? Contains(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
 
-        public bool? IntervalContains(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
 
         public bool? IntervalContainsHelper<T>(CqlInterval<T?>? argument, T point, string? precision,

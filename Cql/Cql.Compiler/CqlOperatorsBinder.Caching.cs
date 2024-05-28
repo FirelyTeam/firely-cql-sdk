@@ -7,7 +7,9 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Dumpify;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 
@@ -22,7 +24,9 @@ internal partial class CqlOperatorsBinder
         public CqlOperatorsMethodsCache()
         {
             foreach (var methodInfo in typeof(ICqlOperators)
-                         .GetMethods(BindingFlags.Instance | BindingFlags.Public))
+                         .GetMethods(BindingFlags.Instance | BindingFlags.Public)
+                         .OrderBy(m => m.Name)
+                         .ThenBy(m => m.GetParameters().Length))
             {
                 var methodName = methodInfo.Name;
                 var parameterCount = methodInfo.GetParameters().Length;
@@ -33,8 +37,8 @@ internal partial class CqlOperatorsBinder
 
         public IReadOnlyCollection<MethodInfo> GetMethodsByName(string methodName) =>
             _methods.TryGetValue((methodName, null), out var methods)
-        ? methods
-        : [];
+                ? methods
+                : [];
 
         public IReadOnlyCollection<MethodInfo> GetMethodsByNameAndParamCount(
             string methodName,

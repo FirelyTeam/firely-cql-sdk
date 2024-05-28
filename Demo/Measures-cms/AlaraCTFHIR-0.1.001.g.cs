@@ -362,7 +362,7 @@ public class AlaraCTFHIR_0_1_001
 				return o_;
 			};
 			var k_ = context.Operators.Select<CqlCode, string>(i_, j_);
-			var l_ = context.Operators.ListContains<string>(k_, "FULLBODY");
+			var l_ = context.Operators.Contains<string>(k_, "FULLBODY");
 
 			return l_;
 		};
@@ -395,7 +395,7 @@ public class AlaraCTFHIR_0_1_001
 			return o_;
 		};
 		var e_ = context.Operators.Select<CqlCode, string>(c_, d_);
-		var f_ = context.Operators.ListContains<string>(e_, code);
+		var f_ = context.Operators.Contains<string>(e_, code);
 		var g_ = this.Global_Noise_Value(Obs);
 		var h_ = context.Operators.GreaterOrEqual(g_, noiseThreshold);
 		var i_ = this.Size_Adjusted_Value(Obs);
