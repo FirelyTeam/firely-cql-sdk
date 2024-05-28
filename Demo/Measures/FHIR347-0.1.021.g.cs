@@ -506,16 +506,16 @@ public class FHIR347_0_1_021
 		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Cerebrovascular_Disease__Stroke__TIA();
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.ListUnion<Condition>(b_, d_);
+		var e_ = context.Operators.Union<Condition>(b_, d_);
 		var f_ = this.Atherosclerosis_and_Peripheral_Arterial_Disease();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
 		var h_ = this.Ischemic_Heart_Disease_or_Other_Related_Diagnoses();
 		var i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
-		var j_ = context.Operators.ListUnion<Condition>(g_, i_);
-		var k_ = context.Operators.ListUnion<Condition>(e_, j_);
+		var j_ = context.Operators.Union<Condition>(g_, i_);
+		var k_ = context.Operators.Union<Condition>(e_, j_);
 		var l_ = this.Stable_and_Unstable_Angina();
 		var m_ = context.Operators.RetrieveByValueSet<Condition>(l_, null);
-		var n_ = context.Operators.ListUnion<Condition>(k_, m_);
+		var n_ = context.Operators.Union<Condition>(k_, m_);
 		bool? o_(Condition ASCVDDiagnosis)
 		{
 			var ae_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ASCVDDiagnosis);
@@ -531,13 +531,13 @@ public class FHIR347_0_1_021
 		var r_ = context.Operators.RetrieveByValueSet<Procedure>(q_, null);
 		var s_ = this.CABG_Surgeries();
 		var t_ = context.Operators.RetrieveByValueSet<Procedure>(s_, null);
-		var u_ = context.Operators.ListUnion<Procedure>(r_, t_);
+		var u_ = context.Operators.Union<Procedure>(r_, t_);
 		var v_ = this.Carotid_Intervention();
 		var w_ = context.Operators.RetrieveByValueSet<Procedure>(v_, null);
 		var x_ = this.CABG__PCI_Procedure();
 		var y_ = context.Operators.RetrieveByValueSet<Procedure>(x_, null);
-		var z_ = context.Operators.ListUnion<Procedure>(w_, y_);
-		var aa_ = context.Operators.ListUnion<Procedure>(u_, z_);
+		var z_ = context.Operators.Union<Procedure>(w_, y_);
+		var aa_ = context.Operators.Union<Procedure>(u_, z_);
 		bool? ab_(Procedure ASCVDProcedure)
 		{
 			var aj_ = ASCVDProcedure?.Performed;
@@ -554,7 +554,7 @@ public class FHIR347_0_1_021
 			return as_;
 		};
 		var ac_ = context.Operators.Where<Procedure>(aa_, ab_);
-		var ad_ = context.Operators.ListUnion<object>((p_ as IEnumerable<object>), (ac_ as IEnumerable<object>));
+		var ad_ = context.Operators.Union<object>((p_ as IEnumerable<object>), (ac_ as IEnumerable<object>));
 
 		return ad_;
 	}
@@ -569,25 +569,25 @@ public class FHIR347_0_1_021
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Office_Visit();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Outpatient_Consultation();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Outpatient_Encounters_for_Preventive_Care();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Preventive_Care_Services___Other();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		var r_ = this.Preventive_Care_Services_Individual_Counseling();
 		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
 		var t_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.ListUnion<Encounter>(s_, u_);
-		var w_ = context.Operators.ListUnion<Encounter>(q_, v_);
+		var v_ = context.Operators.Union<Encounter>(s_, u_);
+		var w_ = context.Operators.Union<Encounter>(q_, v_);
 		bool? x_(Encounter ValidEncounter)
 		{
 			var z_ = this.Measurement_Period();
@@ -720,7 +720,7 @@ public class FHIR347_0_1_021
 		var a_ = this.Patients_Age_20_or_Older_at_Start_of_Measurement_Period();
 		var b_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
 		var c_ = this.Hypercholesterolemia_Diagnosis();
-		var d_ = context.Operators.ListUnion<object>((b_ as IEnumerable<object>), (c_ as IEnumerable<object>));
+		var d_ = context.Operators.Union<object>((b_ as IEnumerable<object>), (c_ as IEnumerable<object>));
 		var e_ = context.Operators.Exists<object>(d_);
 		var f_ = context.Operators.And(a_, e_);
 		var g_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
@@ -913,7 +913,7 @@ public class FHIR347_0_1_021
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var c_ = this.Palliative_or_Hospice_Care();
 		var d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(c_, null);
-		var e_ = context.Operators.ListUnion<ServiceRequest>(b_, d_);
+		var e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		bool? f_(ServiceRequest PalliativeOrHospiceCareOrder)
 		{
 			var y_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
@@ -942,7 +942,7 @@ public class FHIR347_0_1_021
 		var h_ = context.Operators.Exists<ServiceRequest>(g_);
 		var j_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		var l_ = context.Operators.RetrieveByValueSet<Procedure>(c_, null);
-		var m_ = context.Operators.ListUnion<Procedure>(j_, l_);
+		var m_ = context.Operators.Union<Procedure>(j_, l_);
 		bool? n_(Procedure PalliativeOrHospiceCarePerformed)
 		{
 			var am_ = PalliativeOrHospiceCarePerformed?.Performed;
@@ -996,10 +996,10 @@ public class FHIR347_0_1_021
 		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Hepatitis_B();
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.ListUnion<Condition>(b_, d_);
+		var e_ = context.Operators.Union<Condition>(b_, d_);
 		var f_ = this.Liver_Disease();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-		var h_ = context.Operators.ListUnion<Condition>(e_, g_);
+		var h_ = context.Operators.Union<Condition>(e_, g_);
 		bool? i_(Condition HepatitisLiverDisease)
 		{
 			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(HepatitisLiverDisease);
@@ -1114,10 +1114,10 @@ public class FHIR347_0_1_021
 		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Breastfeeding();
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.ListUnion<Condition>(b_, d_);
+		var e_ = context.Operators.Union<Condition>(b_, d_);
 		var f_ = this.Rhabdomyolysis();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-		var h_ = context.Operators.ListUnion<Condition>(e_, g_);
+		var h_ = context.Operators.Union<Condition>(e_, g_);
 		bool? i_(Condition ExclusionDiagnosis)
 		{
 			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ExclusionDiagnosis);
@@ -1141,17 +1141,17 @@ public class FHIR347_0_1_021
 		var a_ = this.Low_Intensity_Statin_Therapy();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = this.Moderate_Intensity_Statin_Therapy();
 		var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
 		var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var j_ = context.Operators.ListUnion<MedicationRequest>(g_, i_);
-		var k_ = context.Operators.ListUnion<MedicationRequest>(e_, j_);
+		var j_ = context.Operators.Union<MedicationRequest>(g_, i_);
+		var k_ = context.Operators.Union<MedicationRequest>(e_, j_);
 		var l_ = this.High_Intensity_Statin_Therapy();
 		var m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
 		var o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var p_ = context.Operators.ListUnion<MedicationRequest>(m_, o_);
-		var q_ = context.Operators.ListUnion<MedicationRequest>(k_, p_);
+		var p_ = context.Operators.Union<MedicationRequest>(m_, o_);
+		var q_ = context.Operators.Union<MedicationRequest>(k_, p_);
 		bool? r_(MedicationRequest StatinOrdered)
 		{
 			var t_ = StatinOrdered?.AuthoredOnElement;
@@ -1188,17 +1188,17 @@ public class FHIR347_0_1_021
 		var a_ = this.Low_Intensity_Statin_Therapy();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = this.Moderate_Intensity_Statin_Therapy();
 		var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
 		var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var j_ = context.Operators.ListUnion<MedicationRequest>(g_, i_);
-		var k_ = context.Operators.ListUnion<MedicationRequest>(e_, j_);
+		var j_ = context.Operators.Union<MedicationRequest>(g_, i_);
+		var k_ = context.Operators.Union<MedicationRequest>(e_, j_);
 		var l_ = this.High_Intensity_Statin_Therapy();
 		var m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
 		var o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var p_ = context.Operators.ListUnion<MedicationRequest>(m_, o_);
-		var q_ = context.Operators.ListUnion<MedicationRequest>(k_, p_);
+		var p_ = context.Operators.Union<MedicationRequest>(m_, o_);
+		var q_ = context.Operators.Union<MedicationRequest>(k_, p_);
 		bool? r_(MedicationRequest ActiveStatin)
 		{
 			var t_ = ActiveStatin?.DosageInstruction;

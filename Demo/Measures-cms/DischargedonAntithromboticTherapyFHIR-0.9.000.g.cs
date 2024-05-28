@@ -205,7 +205,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 	{
 		var a_ = TJCOverall_8_11_000.Ischemic_Stroke_Encounters_with_Discharge_Disposition();
 		var b_ = this.Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Ischemic_Stroke();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -222,7 +222,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			var d_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke();
 			var e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
 			var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
-			var h_ = context.Operators.ListUnion<MedicationRequest>(e_, g_);
+			var h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest DischargeAntithrombotic)
 			{
 				var m_ = DischargeAntithrombotic?.AuthoredOnElement;
@@ -254,7 +254,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 		var a_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest Antithrombotic)
 		{
 			var h_ = QICoreCommon_2_0_000.isCommunity(Antithrombotic);
@@ -305,7 +305,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 		var a_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest NoAntithromboticDischarge)
 		{
 			var h_ = NoAntithromboticDischarge?.ReasonCode;
@@ -394,7 +394,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 		var a_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest Pharmacological)
 		{
 			var h_ = QICoreCommon_2_0_000.isCommunity(Pharmacological);
@@ -476,7 +476,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 	{
 		var a_ = this.Encounter_with_Documented_Reason_for_No_Antithrombotic_At_Discharge();
 		var b_ = this.Encounter_with_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}

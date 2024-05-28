@@ -190,7 +190,7 @@ public class SupplementalDataElements_3_4_000
 				return ax_;
 			};
 			var ad_ = context.Operators.Select<DataType, CqlCode>(ab_, ac_);
-			var ae_ = context.Operators.ValueSetUnion((x_ as IEnumerable<CqlCode>), ad_);
+			var ae_ = context.Operators.Union<CqlCode>((x_ as IEnumerable<CqlCode>), ad_);
 			bool? af_(Extension @this)
 			{
 				var ay_ = @this?.Url;
@@ -350,7 +350,7 @@ public class SupplementalDataElements_3_4_000
 				return ax_;
 			};
 			var ab_ = context.Operators.Select<DataType, CqlCode>(z_, aa_);
-			var ac_ = context.Operators.ValueSetUnion(v_, ab_);
+			var ac_ = context.Operators.Union<CqlCode>(v_, ab_);
 			bool? ad_(Extension @this)
 			{
 				var ay_ = @this?.Url;

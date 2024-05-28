@@ -21,7 +21,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "simpleSortDesc":
 		///	( ({4, 5, 1, 6, 2, 1}) sL sort desc ) = {6, 5, 4, 2, 1, 1}
@@ -35,7 +35,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "simpleSortStringAsc":
 		///	( ({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort asc ) = {'Armadillo', 'Wolf', 'aardvark', 'alligator', 'back', 'iguana', 'zebra'}
@@ -49,7 +49,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "simpleSortStringDesc":
 		///	( ({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort desc ) = {'zebra', 'iguana', 'back', 'alligator', 'aardvark', 'Wolf', 'Armadillo'}
@@ -81,7 +81,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SortDatesDesc":
 		///	( ({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort desc ) = {DateTime(2012, 10, 5, 10), DateTime(2012, 10, 5), DateTime(2012, 1, 1, 12), DateTime(2012, 1, 1)}
@@ -96,7 +96,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ContainsABNullHasNull":
 		///	( { 'a', 'b', null } contains null ) = null
@@ -110,7 +110,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "ContainsNullFirst":
 		///	( { null, 'b', 'c' } contains 'a' ) = false
@@ -124,7 +124,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ContainsABCHasA":
 		///	( { 'a', 'b', 'c' } contains 'a' ) = true
@@ -138,7 +138,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ContainsJan2012True":
 		///	( { DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 1, 1) } contains DateTime(2012, 1, 1) ) = true
@@ -152,7 +152,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ContainsJan2012False":
 		///	( { DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 1) } contains DateTime(2012, 1, 1) ) = false
@@ -166,7 +166,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ContainsTimeTrue":
 		///	( { @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 } contains @T05:59:59.999 ) = true
@@ -180,7 +180,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ContainsTimeFalse":
 		///	( { @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 } contains @T08:59:59.999 ) = false
@@ -194,7 +194,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ContainsNullLeft":
 		///	( null contains 'a' ) = false
@@ -208,7 +208,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DescendentsEmptyList":
 		///	( (null).descendents() ) = null
@@ -222,7 +222,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "DistinctEmptyList":
 		///	( distinct {} ) = {}
@@ -236,7 +236,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DistinctNullNullNull":
 		///	( ( ( distinct { null, null, null } ) = { null } ) ) = null
@@ -250,7 +250,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "DistinctANullANull":
 		///	( distinct { 'a', null, 'a', null} ) = {'a', null}
@@ -264,7 +264,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Distinct112233":
 		///	( distinct { 1, 1, 2, 2, 3, 3} ) = {1,2,3}
@@ -278,7 +278,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Distinct123123":
 		///	( distinct { 1, 2, 3, 1, 2, 3} ) = {1,2,3}
@@ -292,7 +292,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DistinctAABBCC":
 		///	( distinct { 'a', 'a', 'b', 'b', 'c', 'c'} ) = {'a','b','c'}
@@ -306,7 +306,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DistinctABCABC":
 		///	( distinct { 'a', 'b', 'c', 'a', 'b', 'c'} ) = {'a','b','c'}
@@ -320,7 +320,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DistinctDateTime":
 		///	( distinct { DateTime(2012, 10, 5), DateTime(2012, 1, 1), DateTime(2012, 1, 1)} ) = { DateTime(2012, 10, 5), DateTime(2012, 1, 1)}
@@ -334,7 +334,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DistinctTime":
 		///	( distinct { @T15:59:59.999, @T20:59:59.999 } ) = { @T15:59:59.999, @T20:59:59.999 }
@@ -348,7 +348,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EqualNullNull":
 		///	( {null} = {null} ) = null
@@ -362,7 +362,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "EqualEmptyListNull":
 		///	( {} = null ) = null
@@ -376,7 +376,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "EqualNullEmptyList":
 		///	( null = {} ) = null
@@ -390,7 +390,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "EqualEmptyListAndEmptyList":
 		///	( {} = {} ) = true
@@ -404,7 +404,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Equal12And123":
 		///	( { 1, 2 } = { 1, 2, 3 } ) = false
@@ -418,7 +418,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Equal123And12":
 		///	( { 1, 2, 3 } = { 1, 2 } ) = false
@@ -432,7 +432,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Equal123And123":
 		///	( { 1, 2, 3 } = { 1, 2, 3 } ) = true
@@ -446,7 +446,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EqualDateTimeTrue":
 		///	( {DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} = {DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} ) = true
@@ -460,7 +460,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EqualDateTimeFalse":
 		///	( {DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} = {DateTime(2012, 1, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} ) = false
@@ -474,7 +474,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EqualTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:59.999, @T20:59:59.999 } ) = true
@@ -488,7 +488,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EqualTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:59.999 } = { @T10:59:59.999, @T20:59:59.999, @T20:59:59.999 } ) = false
@@ -502,7 +502,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ExceptEmptyListAndEmptyList":
 		///	( {} except {} ) = {}
@@ -516,7 +516,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Except1234And23":
 		///	( { 1, 2, 3, 4 } except { 2, 3 } ) = { 1, 4 }
@@ -530,7 +530,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Except23And1234":
 		///	( { 2, 3 } except { 1, 2, 3, 4 } ) = {}
@@ -544,7 +544,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ExceptDateTimeList":
 		///	( { DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2010, 1, 1)} except {DateTime(2014, 12, 10), DateTime(2010, 1, 1) } ) = {@2012-05-10}
@@ -558,7 +558,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ExceptTimeList":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } except { @T20:59:59.999, @T12:59:59.999 } ) = {@T15:59:59.999}
@@ -572,7 +572,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ExceptNullRight":
 		///	( { 1, 4 } except null ) = {1, 4}
@@ -586,7 +586,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ExistsEmpty":
 		///	( Exists({}) ) = false
@@ -600,7 +600,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ExistsListNull":
 		///	( Exists({ null }) ) = false
@@ -614,7 +614,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Exists1":
 		///	( Exists({ 1 }) ) = true
@@ -628,7 +628,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Exists12":
 		///	( Exists({ 1, 2 }) ) = true
@@ -642,7 +642,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ExistsDateTime":
 		///	( Exists({ DateTime(2012, 5, 10), DateTime(2014, 12, 10) }) ) = true
@@ -656,7 +656,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ExistsTime":
 		///	( Exists({ @T15:59:59.999, @T20:59:59.999 }) ) = true
@@ -670,7 +670,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ExistsNull":
 		///	( Exists(null) ) = false
@@ -684,7 +684,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FlattenEmpty":
 		///	( Flatten({{},{}}) ) = {}
@@ -698,7 +698,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FlattenListNullAndNull":
 		///	( Flatten({{null}, {null}}) = {null, null} ) = null
@@ -712,7 +712,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "FlattenList12And34":
 		///	( Flatten({{1,2}, {3,4}}) ) = {1,2,3,4}
@@ -726,7 +726,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FlattenDateTime":
 		///	( Flatten({ {DateTime(2012, 5, 10)}, {DateTime(2014, 12, 10)} }) ) = { DateTime(2012, 5, 10), DateTime(2014, 12, 10) }
@@ -740,7 +740,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FlattenTime":
 		///	( Flatten({ {@T15:59:59.999}, {@T20:59:59.999} }) ) = { @T15:59:59.999, @T20:59:59.999 }
@@ -754,7 +754,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FirstEmpty":
 		///	( First({}) ) = null
@@ -768,7 +768,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "FirstNull1":
 		///	( First({ null, 1 }) ) = null
@@ -782,7 +782,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "First1Null":
 		///	( First({ 1, null }) ) = 1
@@ -796,7 +796,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "First12":
 		///	( First({ 1, 2 }) ) = 1
@@ -810,7 +810,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FirstDateTime":
 		///	( First({ DateTime(2012, 5, 10), DateTime(2014, 12, 10) }) ) = DateTime(2012, 5, 10)
@@ -824,7 +824,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FirstTime":
 		///	( First({ @T15:59:59.999, @T20:59:59.999 }) ) = @T15:59:59.999
@@ -838,7 +838,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "InNullEmpty":
 		///	( null in {} ) = null
@@ -852,7 +852,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "InNullAnd1Null":
 		///	( null in { 1, null } ) = null
@@ -866,7 +866,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "In1Null":
 		///	( 1 in null ) = false
@@ -880,7 +880,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "In1And12":
 		///	( 1 in { 1, 2 } ) = true
@@ -894,7 +894,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "In3And12":
 		///	( 3 in { 1, 2 } ) = false
@@ -908,7 +908,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "InDateTimeTrue":
 		///	( DateTime(2012, 5, 10) in { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) } ) = true
@@ -922,7 +922,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "InDateTimeFalse":
 		///	( DateTime(2012, 6, 10) in { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) } ) = false
@@ -936,7 +936,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "InTimeTrue":
 		///	( @T15:59:59.999 in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = true
@@ -950,7 +950,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "InTimeFalse":
 		///	( @T16:59:59.999 in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = false
@@ -964,7 +964,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludesEmptyAndEmpty":
 		///	( {} includes {} ) = true
@@ -978,7 +978,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludesListNullAndListNull":
 		///	( {null} includes {null} ) = true
@@ -993,7 +993,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Includes123AndEmpty":
 		///	( {1, 2, 3} includes {} ) = true
@@ -1007,7 +1007,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Includes123And2":
 		///	( {1, 2, 3} includes {2} ) = true
@@ -1021,7 +1021,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Includes123And4":
 		///	( {1, 2, 3} includes {4} ) = false
@@ -1035,7 +1035,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludesDateTimeTrue":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} includes {DateTime(2012, 5, 10)} ) = true
@@ -1049,7 +1049,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludesDateTimeFalse":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} includes {DateTime(2012, 5, 11)} ) = false
@@ -1063,7 +1063,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludesTimeTrue":
 		///	( { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } includes @T15:59:59.999 ) = true
@@ -1077,7 +1077,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludesTimeFalse":
 		///	( { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } includes @T16:59:59.999 ) = false
@@ -1091,7 +1091,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludesNullLeft":
 		///	( null includes {2} ) = null
@@ -1105,7 +1105,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludesNullRight":
 		///	( {'s', 'a', 'm'} includes null ) = null
@@ -1119,7 +1119,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedInEmptyAndEmpty":
 		///	( {} included in {} ) = true
@@ -1133,7 +1133,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedInListNullAndListNull":
 		///	( { null } included in { null } ) = true
@@ -1148,7 +1148,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedInEmptyAnd123":
 		///	( {} included in { 1, 2, 3 } ) = true
@@ -1162,7 +1162,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedIn2And123":
 		///	( { 2 } included in { 1, 2, 3 } ) = true
@@ -1176,7 +1176,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedIn4And123":
 		///	( { 4 } included in { 1, 2, 3 } ) = false
@@ -1190,7 +1190,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedInDateTimeTrue":
 		///	( { DateTime(2012, 5, 10)} included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = true
@@ -1204,7 +1204,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedInDateTimeFalse":
 		///	( {DateTime(2012, 5, 11)} included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = false
@@ -1218,7 +1218,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedInTimeTrue":
 		///	( @T15:59:59.999 included in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = true
@@ -1232,7 +1232,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedInTimeFalse":
 		///	( @T16:59:59.999 included in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = false
@@ -1246,7 +1246,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedInNullLeft":
 		///	( null included in {2} ) = null
@@ -1260,7 +1260,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IncludedInNullRight":
 		///	( {'s', 'a', 'm'} included in null ) = null
@@ -1288,7 +1288,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "Indexer0Of12":
 		///	( { 1, 2 }[0] ) = 1
@@ -1302,7 +1302,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Indexer1Of12":
 		///	( { 1, 2 }[1] ) = 2
@@ -1316,7 +1316,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Indexer2Of12":
 		///	( { 1, 2 }[2] ) = null
@@ -1330,7 +1330,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerNeg1Of12":
 		///	( { 1, 2 }[-1] ) = null
@@ -1344,7 +1344,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerDateTime":
 		///	( { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }[1] ) = DateTime(2012, 5, 10)
@@ -1358,7 +1358,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerTime":
 		///	( { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }[1] ) = @T15:59:59.999
@@ -1372,7 +1372,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexOfEmptyNull":
 		///	( IndexOf({}, null) ) = null
@@ -1386,7 +1386,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexOfNullEmpty":
 		///	( IndexOf(null, {}) ) = null
@@ -1400,7 +1400,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexOfNullIn1Null":
 		///	( IndexOf({ 1, null }, null) ) = null
@@ -1414,7 +1414,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexOf1In12":
 		///	( IndexOf({ 1, 2 }, 1) ) = 0
@@ -1428,7 +1428,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexOf2In12":
 		///	( IndexOf({ 1, 2 }, 2) ) = 1
@@ -1442,7 +1442,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexOf3In12":
 		///	( IndexOf({ 1, 2 }, 3) ) = -1
@@ -1456,7 +1456,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexOfDateTime":
 		///	( IndexOf({ DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }, DateTime(2014, 12, 10)) ) = 2
@@ -1470,7 +1470,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexOfTime":
 		///	( IndexOf({ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }, @T15:59:59.999) ) = 1
@@ -1484,7 +1484,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IntersectEmptyListAndEmptyList":
 		///	( {} intersect {} ) = {}
@@ -1498,7 +1498,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Intersect1234And23":
 		///	( { 1, 2, 3, 4 } intersect { 2, 3 } ) = { 2, 3 }
@@ -1512,7 +1512,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Intersect23And1234":
 		///	( {2, 3} intersect { 1, 2, 3, 4 } ) = { 2, 3 }
@@ -1526,7 +1526,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IntersectDateTime":
 		///	( { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) } intersect { DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2000, 5, 5) } ) = {@2012-05-10, @2014-12-10}
@@ -1540,7 +1540,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IntersectTime":
 		///	( { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } intersect { @T01:29:15.156, @T15:59:59.999, @T20:59:59.999 } ) = {@T15:59:59.999, @T20:59:59.999}
@@ -1554,7 +1554,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LastEmpty":
 		///	( Last({}) ) = null
@@ -1568,7 +1568,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "LastNull1":
 		///	( Last({null, 1}) ) = 1
@@ -1582,7 +1582,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Last1Null":
 		///	( Last({1, null}) ) = null
@@ -1596,7 +1596,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "Last12":
 		///	( Last({1, 2}) ) = 2
@@ -1610,7 +1610,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LastDateTime":
 		///	( Last({DateTime(2012, 5, 10), DateTime(2014, 12, 10)}) ) = DateTime(2014, 12, 10)
@@ -1624,7 +1624,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LastTime":
 		///	( Last({ @T15:59:59.999, @T20:59:59.999 }) ) = @T20:59:59.999
@@ -1638,7 +1638,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LengthEmptyList":
 		///	( Length({}) ) = 0
@@ -1652,7 +1652,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LengthNull1":
 		///	( Length({null, 1}) ) = 2
@@ -1666,7 +1666,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Length1Null":
 		///	( Length({1, null}) ) = 2
@@ -1680,7 +1680,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Length12":
 		///	( Length({1, 2}) ) = 2
@@ -1694,7 +1694,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LengthDateTime":
 		///	( Length({DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)}) ) = 3
@@ -1708,7 +1708,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LengthTime":
 		///	( Length({ @T15:59:59.999, @T20:59:59.999, @T15:59:59.999, @T20:59:59.999, @T15:59:59.999, @T20:59:59.999 }) ) = 6
@@ -1722,7 +1722,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LengthNullList":
 		///	( Length(null as String) ) = 0
@@ -1736,7 +1736,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentEmptyAndEmpty":
 		///	( {} ~ {} ) = true
@@ -1750,7 +1750,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentABCAndABC":
 		///	( { 'a', 'b', 'c' } ~ { 'a', 'b', 'c' } ) = true
@@ -1764,7 +1764,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentABCAndAB":
 		///	( { 'a', 'b', 'c' } ~ { 'a', 'b' } ) = false
@@ -1778,7 +1778,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentABCAnd123":
 		///	( { 'a', 'b', 'c' } ~ { 1, 2, 3 } ) = false
@@ -1792,7 +1792,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Equivalent123AndABC":
 		///	( { 1, 2, 3 } ~ { 'a', 'b', 'c' } ) = false
@@ -1806,7 +1806,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Equivalent123AndString123":
 		///	( { 1, 2, 3 } ~ { '1', '2', '3' } ) = false
@@ -1820,7 +1820,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentDateTimeTrue":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null} ) = true
@@ -1834,7 +1834,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentDateTimeNull":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null} ) = false
@@ -1848,7 +1848,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentDateTimeFalse":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 1)} ) = false
@@ -1862,7 +1862,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999 } ~ { @T15:59:59.999, @T20:59:59.999 } ) = true
@@ -1876,7 +1876,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentTimeNull":
 		///	( { @T15:59:59.999, @T20:59:59.999 } ~ { @T15:59:59.999, @T20:59:59.999, null } ) = false
@@ -1890,7 +1890,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EquivalentTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999 } ~ { @T15:59:59.999, @T20:59:59.995 } ) = false
@@ -1904,7 +1904,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EmptyIsNotNull":
 		///	( ( {} is not null ) ) = true
@@ -1918,7 +1918,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqualEmptyAndEmpty":
 		///	( {} != {} ) = false
@@ -1932,7 +1932,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqualABCAndABC":
 		///	( { 'a', 'b', 'c' } != { 'a', 'b', 'c' } ) = false
@@ -1946,7 +1946,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqualABCAndAB":
 		///	( { 'a', 'b', 'c' } != { 'a', 'b' } ) = true
@@ -1960,7 +1960,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqualABCAnd123":
 		///	( { 'a', 'b', 'c' } != { 1, 2, 3 } ) = true
@@ -1974,7 +1974,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqual123AndABC":
 		///	( { 1, 2, 3 } != { 'a', 'b', 'c' } ) = true
@@ -1988,7 +1988,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqual123AndString123":
 		///	( { 1, 2, 3 } != { '1', '2', '3' } ) = true
@@ -2002,7 +2002,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqualDateTimeTrue":
 		///	( {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} != {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 1, 0, 0, 0, 0)} ) = true
@@ -2016,7 +2016,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqualDateTimeFalse":
 		///	( {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} != {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} ) = false
@@ -2030,7 +2030,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqualTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:59.999 } ) = true
@@ -2044,7 +2044,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotEqualTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:49.999 } ) = false
@@ -2058,7 +2058,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperContainsNullRightFalse":
 		///	( {'s', 'u', 'n'} properly includes null ) = false
@@ -2072,7 +2072,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperContainsNullRightTrue":
 		///	( {'s', 'u', 'n', null} properly includes null ) = true
@@ -2087,7 +2087,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperContainsTimeTrue":
 		///	( { @T15:59:59, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59 ) = true
@@ -2101,7 +2101,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperContainsTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59 ) = false
@@ -2115,7 +2115,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperInNullRightFalse":
 		///	( null properly included in {'s', 'u', 'n'} ) = false
@@ -2129,7 +2129,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperInNullRightTrue":
 		///	( null properly included in {'s', 'u', 'n', null} ) = true
@@ -2144,7 +2144,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperInTimeTrue":
 		///	( @T15:59:59 properly included in { @T15:59:59, @T20:59:59.999, @T20:59:49.999 } ) = true
@@ -2158,7 +2158,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperInTimeFalse":
 		///	( @T15:59:59 properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } ) = false
@@ -2172,7 +2172,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludesEmptyAndEmpty":
 		///	( {} properly includes {} ) = false
@@ -2186,7 +2186,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludesListNullAndListNull":
 		///	( {null} properly includes {null} ) = false
@@ -2200,7 +2200,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludes123AndEmpty":
 		///	( {1, 2, 3} properly includes {} ) = true
@@ -2214,7 +2214,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludes123And2":
 		///	( {1, 2, 3} properly includes {2} ) = true
@@ -2228,7 +2228,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludes123And4":
 		///	( {1, 2, 3} properly includes {4} ) = false
@@ -2242,7 +2242,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludesDateTimeTrue":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly includes {DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = true
@@ -2256,7 +2256,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludesDateTimeFalse":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly includes {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = false
@@ -2270,7 +2270,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludesTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes { @T15:59:59.999, @T20:59:59.999 } ) = true
@@ -2284,7 +2284,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludesTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes { @T15:59:59.999, @T20:59:59.999, @T14:59:22.999 } ) = false
@@ -2298,7 +2298,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperlyIncludesNullLeft":
 		///	( null properly includes {2} ) = null
@@ -2312,7 +2312,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludedInEmptyAndEmpty":
 		///	( {} properly included in {} ) = false
@@ -2326,7 +2326,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludedInListNullAndListNull":
 		///	( {null} properly included in {null} ) = false
@@ -2340,7 +2340,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludedInEmptyAnd123":
 		///	( {} properly included in {1, 2, 3} ) = true
@@ -2354,7 +2354,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludedIn2And123":
 		///	( {2} properly included in {1, 2, 3} ) = true
@@ -2368,7 +2368,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludedIn4And123":
 		///	( {4} properly included in {1, 2, 3} ) = false
@@ -2382,7 +2382,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludedInDateTimeTrue":
 		///	( {DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = true
@@ -2396,7 +2396,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludedInDateTimeFalse":
 		///	( {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ) = false
@@ -2410,7 +2410,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludedInTimeTrue":
 		///	( { @T15:59:59.999, @T20:59:59.999 } properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } ) = true
@@ -2424,7 +2424,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperIncludedInTimeFalse":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T14:59:22.999 } properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } ) = false
@@ -2438,7 +2438,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ProperlyIncludedInNulRight":
 		///	( {'s', 'u', 'n'} properly included in null ) = null
@@ -2452,7 +2452,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SingletonFromEmpty":
 		///	( singleton from {} ) = null
@@ -2466,7 +2466,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SingletonFromListNull":
 		///	( singleton from {null} ) = null
@@ -2480,7 +2480,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SingletonFrom1":
 		///	( singleton from { 1 } ) = 1
@@ -2494,7 +2494,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SingletonFromDateTime":
 		///	( singleton from { DateTime(2012, 5, 10) } ) = DateTime(2012, 5, 10)
@@ -2508,7 +2508,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SingletonFromTime":
 		///	( singleton from { @T15:59:59.999 } ) = @T15:59:59.999
@@ -2522,7 +2522,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SkipNull":
 		///	( Skip(null, 3) ) = null
@@ -2536,7 +2536,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SkipEven":
 		///	( Skip({1,2,3,4,5}, 2) ) = {3, 4, 5}
@@ -2550,7 +2550,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SkipOdd":
 		///	( Skip({1,2,3,4,5}, 3) ) = {4, 5}
@@ -2564,7 +2564,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SkipNone":
 		///	( Skip({1,2,3,4,5}, 0) ) = {1,2,3,4,5}
@@ -2578,7 +2578,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SkipAll":
 		///	( Skip({1,2,3,4,5}, 5) ) = {}
@@ -2592,7 +2592,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TailNull":
 		///	( Tail(null) ) = null
@@ -2606,7 +2606,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "TailEven":
 		///	( Tail({1,2,3,4}) ) = {2,3,4}
@@ -2620,7 +2620,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TailOdd":
 		///	( Tail({1,2,3,4,5}) ) = {2,3,4,5}
@@ -2634,7 +2634,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TailEmpty":
 		///	( Tail({}) ) = {}
@@ -2648,7 +2648,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TailOneElement":
 		///	( Tail({1}) ) = {}
@@ -2662,7 +2662,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TakeNull":
 		///	( Take(null, 3) ) = null
@@ -2676,7 +2676,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "TakeNullEmpty":
 		///	( Take({1,2,3}, null as Integer) ) = {}
@@ -2690,7 +2690,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TakeEmpty":
 		///	( Take({1,2,3}, 0) ) = {}
@@ -2704,7 +2704,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TakeEven":
 		///	( Take({1,2,3,4}, 2) ) = {1, 2}
@@ -2718,7 +2718,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TakeOdd":
 		///	( Take({1,2,3,4}, 3) ) = {1, 2, 3}
@@ -2732,7 +2732,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TakeAll":
 		///	( Take({1,2,3,4}, 4) ) = {1, 2, 3, 4}
@@ -2746,7 +2746,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "UnionEmptyAndEmpty":
 		///	( {} union {} ) = {}
@@ -2760,7 +2760,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "UnionListNullAndListNull":
 		///	(  ( ( { null } union { null } ) = {null} ) = null ) = null
@@ -2774,7 +2774,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "Union123AndEmpty":
 		///	( { 1, 2, 3 } union {} ) = {1, 2, 3}
@@ -2788,7 +2788,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Union123And2":
 		///	( { 1, 2, 3 } union { 2 } ) = {1, 2, 3 }
@@ -2802,7 +2802,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Union123And4":
 		///	( { 1, 2, 3 } union { 4 } ) = {1, 2, 3, 4}
@@ -2816,7 +2816,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "UnionDateTime":
 		///	( { DateTime(2001, 9, 11)} union {DateTime(2012, 5, 10), DateTime(2014, 12, 10) } ) = {@2001-09-11, @2012-05-10, @2014-12-10}
@@ -2830,7 +2830,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "UnionTime":
 		///	( { @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } union { @T10:59:59.999 } ) = {@T15:59:59.999, @T20:59:59.999, @T12:59:59.999, @T10:59:59.999}
@@ -2844,7 +2844,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "intList":
 		///	( { 3, 2, 1 } ) = {3, 2, 1}
@@ -2858,7 +2858,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "decimalList":
 		///	( { 3.8, 2.4, 1.9 } ) = {3.8, 2.4, 1.9}
@@ -2872,7 +2872,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "quantityList":
 		///	( { 19.99 'lbs', 17.33 'lbs', 10.66 'lbs' } ) = {19.99 'lbs', 17.33 'lbs', 10.66 'lbs'}
@@ -2886,7 +2886,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "dateTimeList":
 		///	( { DateTime(2016), DateTime(2015), DateTime(2010) } ) = {@2016, @2015, @2010}
@@ -2900,7 +2900,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "timeList":
 		///	( { @T15:59:59.999, @T15:12:59.999, @T15:12:13.999 } ) = {@T15:59:59.999, @T15:12:59.999, @T15:12:13.999}
@@ -2914,7 +2914,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+

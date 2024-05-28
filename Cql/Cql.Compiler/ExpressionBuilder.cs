@@ -257,9 +257,7 @@ namespace Hl7.Cql.Compiler
                     {
                         //@formatter:off
                         Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."),
-                        // Expand e           => BindCqlOperator(nameof(ICqlOperators.Expand), e.operand[..2]),
                         Flatten e          => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
-                        // Width e            => BindCqlOperator(nameof(ICqlOperators.Width), e.operand),
                         Negate e           => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(nameof(ICqlOperators.Negate), e.operand), e.resultTypeSpecifier),
                         As e               => As(e),
                         Case e             => Case(e),
@@ -274,16 +272,7 @@ namespace Hl7.Cql.Compiler
                         ToLong e           => ChangeType(e.operand!, typeof(long?)),
                         ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
                         Coalesce e         => Coalesce(e),
-                        CodeRef e          => CodeRef(e),
-                        CodeSystemRef e    => CodeSystemRef(e),
-                        Collapse e         => Collapse(e),
-                        ConceptRef e       => ConceptRef(e),
-                        Contains e         => Contains(e),
-                        Ends e             => Ends(e),
                         Equivalent e       => Equivalent(e),
-                        Except e           => Except(e),
-                        FunctionRef e      => FunctionRef(e),
-                        ExpressionRef e    => ExpressionRef(e),
                         AliasRef e         => GetScopeExpression(e.name!),
                         QueryLetRef e      => GetScopeExpression(e.name!),
                         IdentifierRef e    => IdentifierRef(e),
@@ -291,34 +280,34 @@ namespace Hl7.Cql.Compiler
                         IncludedIn e       => IncludedIn(e),
                         Includes e         => Includes(e),
                         Instance e         => Instance(e),
-                        Intersect e        => Intersect(e),
                         Is e               => Is(e),
                         IsNull e           => IsNull(e),
                         List e             => List(e),
                         Literal e          => Literal(e),
-                        Meets e            => Meets(e),
-                        MeetsAfter e       => MeetsAfter(e),
-                        MeetsBefore e      => MeetsBefore(e),
                         Message e          => Message(e),
                         Null e             => NullExpression.ForType(TypeFor(e)!),
                         OperandRef e       => OperandRef(e),
-                        Overlaps e         => Overlaps(e),
-                        OverlapsAfter e    => OverlapsAfter(e),
-                        OverlapsBefore e   => OverlapsBefore(e),
-                        ParameterRef e     => ParameterRef(e),
-                        AnyInValueSet e    => ProcessValueSet(e.valueset, e.codes, isList: true),
-                        InValueSet e       => ProcessValueSet(e.valueset!, e.code, isList: false),
                         ProperContains e   => ProperContains(e),
                         ProperIn e         => ProperIn(e),
                         ProperIncludedIn e => ProperIncludedIn(e),
                         ProperIncludes e   => ProperIncludes(e),
                         Property e         => Property(e),
                         Query e            => Query(e),
-                        Retrieve e         => Retrieve(e),
-                        Starts e           => Starts(e),
                         Tuple e            => Tuple(e),
-                        Union e            => Union(e),
+
+                        // InvokeDefinedFunctionThroughRuntimeContext
+                        FunctionRef e      => FunctionRef(e),
+
+                        // InvokeDefinitionThroughRuntimeContext
+                        CodeRef e          => CodeRef(e),
+                        CodeSystemRef e    => CodeSystemRef(e),
+                        ConceptRef e       => ConceptRef(e),
+                        ExpressionRef e    => ExpressionRef(e),
+                        AnyInValueSet e    => ProcessValueSet(e.valueset, e.codes, isList: true),
+                        InValueSet e       => ProcessValueSet(e.valueset!, e.code, isList: false),
+                        Retrieve e         => Retrieve(e),
                         ValueSetRef e      => ValueSetRef(e),
+                        ParameterRef e     => ParameterRef(e),
 
                         // NOTE: Do not rename ICqlOperators.CreateValueSetFacade to ExpandValueSet
                         ExpandValueSet e => _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.CreateValueSetFacade), TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
@@ -353,7 +342,11 @@ namespace Hl7.Cql.Compiler
             {
                 //@formatter:off
                 Abs or
+                    Add or
+                    And or
                     Ceiling or
+                    Concatenate or
+                    ConvertQuantity or
                     ConvertsToBoolean or
                     ConvertsToDate or
                     ConvertsToDateTime or
@@ -365,72 +358,78 @@ namespace Hl7.Cql.Compiler
                     ConvertsToTime or
                     DateFrom or
                     Distinct or
+                    Divide or
                     End or
+                    EndsWith or
+                    Equal or
+                    Elm.Equivalent or
                     Exists or
+                    Except or
                     Exp or
+                    Expand or
                     ExpandValueSet or
                     Flatten or
                     Floor or
-                    IsFalse or
-                    IsTrue or
-                    Length or
-                    Ln or
-                    Lower or
-                    Not or
-                    NotEqual or
-                    PointFrom or
-                    Precision or
-                    Predecessor or
-                    SingletonFrom or
-                    Start or
-                    Successor or
-                    TimezoneOffsetFrom or
-                    ToList or
-                    Truncate or
-                    Upper or
-                    Width or
-                    Negate or
-                    Add or
-                    And or
-                    Concatenate or
-                    ConvertQuantity or
-                    Divide or
-                    EndsWith or
-                    Equal or
-                    Expand or
                     Greater or
                     GreaterOrEqual or
                     HighBoundary or
                     Implies or
                     Indexer or
+                    Intersect or
+                    IsFalse or
+                    IsTrue or
+                    Length or
                     Less or
                     LessOrEqual or
+                    Ln or
                     Log or
                     LowBoundary or
+                    Lower or
                     Matches or
                     Modulo or
                     Multiply or
+                    Negate or
+                    Not or
+                    NotEqual or
                     Or or
+                    PointFrom or
                     Power or
+                    Precision or
+                    Predecessor or
                     ReplaceMatches or
+                    SingletonFrom or
+                    Start or
                     StartsWith or
                     Subtract or
+                    Successor or
+                    TimezoneOffsetFrom or
                     ToList or
+                    Truncate or
                     TruncatedDivide or
+                    Upper or
+                    Width or
                     Xor => ((IGetOperands)element).operands,
 
                 CalculateAge or
-                        DateTimeComponentFrom or
-                        After or
-                        Before or
-                        CalculateAgeAt or
-                        DifferenceBetween or
-                        DurationBetween or
-                        In or
-                        Round or
-                        SameAs or
-                        SameOrAfter or
-                        SameOrBefore => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
+                    DateTimeComponentFrom or
+                    After or
+                    Before or
+                    CalculateAgeAt or
+                    DifferenceBetween or
+                    DurationBetween or
+                    Ends or
+                    In or
+                    Meets or
+                    MeetsAfter or
+                    MeetsBefore or
+                    Overlaps or
+                    OverlapsAfter or
+                    OverlapsBefore or
+                    Round or
+                    SameAs or
+                    SameOrAfter or
+                    SameOrBefore or
+                    Starts => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
 
                 AllTrue or
                     AnyTrue or
@@ -457,6 +456,10 @@ namespace Hl7.Cql.Compiler
                     TimeOfDay or
                     Today => [],
 
+                Collapse e => Collapse(e),
+                Contains e => Contains(e),
+                Union e => Union(e),
+
                 Combine e => [((IGetSource)element).source, e.separator],
                 IndexOf e => [((IGetSource)element).source, e.element],
                 Slice e => [((IGetSource)element).source, e.startIndex, e.endIndex],
@@ -475,6 +478,64 @@ namespace Hl7.Cql.Compiler
             };
             return args;
             // ReSharper restore CoVariantArrayConversion
+
+            object?[] Collapse(Collapse e)
+            {
+                var operand = TranslateArg(e.operand![0]!);
+                if (_typeResolver.GetListElementCqlIntervalPointType(operand.Type) is {})
+                {
+                    object precision = e.operand switch
+                    {
+                        [_, Quantity quantity, ..] => quantity.unit,
+                        _                          => NullExpression.String
+                    };
+
+                    return [operand, precision];
+                }
+                throw this.NewExpressionBuildingException($"Collapse expects a list of intervals, but got {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)}");
+            }
+
+            object?[] Contains(Contains e)
+            {
+                if (TranslateArgs(e.operand) is [{ }left, { } right, ..])
+                {
+                    if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftType)
+                    {
+                        if (leftType != right.Type)
+                        {
+                            if (leftType.IsAssignableFrom(right.Type))
+                            {
+                                right = ChangeType(right, leftType);
+                            }
+                            else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {leftType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                        }
+                        return [left, right, e.precisionOrNull];
+                    }
+
+                    if (left.Type.IsCqlInterval(out _))
+                    {
+                        return [left, right, e.precisionOrNull];
+                    }
+                }
+                throw this.NewExpressionBuildingException($"Contains expects two arguments, but got {e.operand.Length}");
+            }
+
+            object?[] Union(Union e)
+            {
+                if (TranslateArgs(e.operand) is [{ } left, { } right, ..])
+                {
+                    if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
+                        && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
+                        && leftListElemType == rightListElemType)
+                        return [left, right];
+
+                    if (left.Type.IsCqlInterval(out var leftPointType)
+                        && right.Type.IsCqlInterval(out var rightPointType)
+                        && leftPointType == rightPointType)
+                        return [left, right];
+                }
+                throw this.NewExpressionBuildingException($"Union expects two arguments of the same list or interval type.");
+            }
         }
 
         protected Expression? Mutate(Element op, Expression? expression) =>
@@ -615,6 +676,7 @@ namespace Hl7.Cql.Compiler
             var type = _typeResolver.CodeType.MakeArrayType();
             return InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.libraryName, type);
         }
+
         protected Expression ConceptRef(ConceptRef conceptRef)
         {
             if (string.IsNullOrWhiteSpace(conceptRef.name))
@@ -641,7 +703,7 @@ namespace Hl7.Cql.Compiler
                     if (enumValueValue.Type == instanceType)
                         return enumValueValue;
 
-                    if (enumValueValue.Type == typeof(string)) //@ TODO: Cast
+                    if (enumValueValue.Type == typeof(string)) //@ TODO: Cast - Instance
                     {
                         var parseMethod = typeof(Enum)
                                             .GetMethods()
@@ -885,6 +947,8 @@ namespace Hl7.Cql.Compiler
             var type = _typeResolver.ResolveType(lit.valueType.Name) ?? throw this.NewExpressionBuildingException($"Cannot resolve type for {lit.valueType}");
 
 
+
+
             var (value, convertedType) = ConvertLiteral(lit, type);
 
             // var result = _operatorBinding.ConvertToType(Expression.Constant(value), convertedType);
@@ -899,7 +963,7 @@ namespace Hl7.Cql.Compiler
             return Expression.Constant(value, convertedType);
         }
 
-        protected (object?, Type) ConvertLiteral(Literal lit, Type? type) //@ TODO: Cast
+        protected (object?, Type) ConvertLiteral(Literal lit, Type? type) //@ TODO: Cast - ConvertLiteral
         {
             if (type == null)
                 throw new NotImplementedException().WithContext(this);
@@ -914,7 +978,7 @@ namespace Hl7.Cql.Compiler
 
                 try
                 {
-                    var converted = Convert.ChangeType(lit.value, underlyingType, CultureInfo.InvariantCulture); //@ TODO: Cast
+                    var converted = Convert.ChangeType(lit.value, underlyingType, CultureInfo.InvariantCulture); //@ TODO: Cast - ConvertLiteral
                     return (converted, underlyingType);
                 }
                 catch (OverflowException)
@@ -928,7 +992,7 @@ namespace Hl7.Cql.Compiler
 
             if (typeof(IConvertible).IsAssignableFrom(type))
             {
-                var converted = Convert.ChangeType(lit.value, type, CultureInfo.InvariantCulture); //@ TODO: Cast
+                var converted = Convert.ChangeType(lit.value, type, CultureInfo.InvariantCulture); //@ TODO: Cast - ConvertLiteral
                 return (converted, type);
             }
 
@@ -1347,24 +1411,17 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Equivalent(Equivalent eqv)
         {
-            var left = TranslateArg(eqv.operand[0]);
-            var right = TranslateArg(eqv.operand[1]);
-            if (!_typeResolver.IsListType(left.Type))
-                return BindCqlOperator(nameof(ICqlOperators.Equivalent), left, right);
-
-            var leftElementType = _typeResolver.GetListElementType(left.Type);
-            if (!_typeResolver.IsListType(right.Type))
-                throw new NotImplementedException().WithContext(this);
-
-            var rightElementType = _typeResolver.GetListElementType(right.Type);
-            if (leftElementType != rightElementType)
+            if (TranslateArgs(eqv.operands) is [{ } left, { } right]
+                && _typeResolver.GetListElementType(left.Type, throwError:false) is { } leftType
+                && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightType
+                && leftType != rightType)
             {
                 // This appears in the CQL tests:
                 //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
                 return Expression.Constant(false, typeof(bool?));
             }
 
-            return BindCqlOperator(nameof(ICqlOperators.ListEquivalent), left, right);
+            return BindCqlOperator(nameof(ICqlOperators.Equivalent), GetBindArgs(eqv));
         }
     }
 
@@ -1376,11 +1433,13 @@ namespace Hl7.Cql.Compiler
     {
         private Expression Message(Message e)
         {
-            var source = TranslateArg(e.source!);
             var condition = TranslateArg(e.condition!);
+
+            var source = TranslateArg(e.source!);
             var code = TranslateArg(e.code!);
             var severity = TranslateArg(e.severity!);
             var message = TranslateArg(e.message!);
+
             if (source is ConstantExpression { Value: null } constant)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.
@@ -1403,95 +1462,6 @@ namespace Hl7.Cql.Compiler
 
     partial class ExpressionBuilderContext
     {
-        private Expression Collapse(Collapse e)
-        {
-            var operand = TranslateArg(e.operand![0]!);
-            if (_typeResolver.IsListType(operand.Type))
-            {
-                var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
-                if (elementType.IsCqlInterval(out var pointType))
-                {
-                    var precision = NullExpression.String;
-                    if (e.operand.Length > 1 && e.operand[1] is Quantity quant)
-                    {
-                        precision = Expression.Constant(quant.unit, typeof(string));
-                    }
-
-                    return BindCqlOperator(nameof(ICqlOperators.Collapse), operand, precision);
-                }
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression Contains(Contains e)
-        {
-            var left = TranslateArg(e!.operand![0]!);
-            var right = TranslateArg(e.operand[1]!);
-            var precision = ((IGetPrecision)e).precisionOrNull;
-            if (_typeResolver.IsListType(left.Type))
-            {
-                var elementType = _typeResolver.GetListElementType(left.Type, throwError: true)!;
-                if (elementType != right.Type)
-                {
-                    if (elementType.IsAssignableFrom(right.Type))
-                    {
-                        right = ChangeType(right, elementType);
-                    }
-                    else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {elementType.ToCSharpString(Defaults.TypeCSharpFormat)}");
-                }
-
-                return BindCqlOperator(nameof(ICqlOperators.ListContains), left, right);
-            }
-
-            if (left.Type.IsCqlInterval(out var pointType))
-            {
-                return BindCqlOperator(nameof(ICqlOperators.IntervalContains), left, right, precision);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression? Ends(Ends e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            var precision = ((IGetPrecision)e).precisionOrNull;
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    return BindCqlOperator(nameof(ICqlOperators.Ends), left, right, precision);
-
-                }
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression Except(Except e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (_typeResolver.IsListType(left.Type) && _typeResolver.IsListType(right.Type))
-            {
-                return BindCqlOperator(nameof(ICqlOperators.ListExcept), left, right);
-            }
-
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    return BindCqlOperator(nameof(ICqlOperators.IntervalExcept), left, right);
-
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
         protected Expression? Includes(Includes e)
         {
             var left = TranslateArg(e.operand![0]);
@@ -1562,142 +1532,6 @@ namespace Hl7.Cql.Compiler
 
             }
 
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression Intersect(Intersect e)
-        {
-            var left = TranslateArg(e.operand![0]!);
-            var right = TranslateArg(e.operand![1]!);
-            if (_typeResolver.IsListType(left.Type))
-            {
-                return BindCqlOperator(nameof(ICqlOperators.ListIntersect), left, right);
-            }
-
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    return BindCqlOperator(nameof(ICqlOperators.IntervalIntersect), left, right);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression? Meets(Meets e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.Meets), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression? MeetsAfter(MeetsAfter e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.MeetsAfter), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression? MeetsBefore(MeetsBefore e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.MeetsBefore), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression Overlaps(Overlaps e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.Overlaps), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression OverlapsBefore(OverlapsBefore e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.OverlapsBefore), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        private Expression OverlapsAfter(OverlapsAfter e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.OverlapsAfter), left, right, precision);
-                }
-
-                throw new NotImplementedException().WithContext(this);
-            }
             throw new NotImplementedException().WithContext(this);
         }
 
@@ -1805,53 +1639,6 @@ namespace Hl7.Cql.Compiler
                     throw this.NewExpressionBuildingException();
                 var precision = ((IGetPrecision)e).precisionOrNull;
                 return BindCqlOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), left, right, precision);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-        protected Expression? Starts(Starts e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    var precision = ((IGetPrecision)e).precisionOrNull;
-                    return BindCqlOperator(nameof(ICqlOperators.Starts), left, right, precision);
-
-                }
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-
-        protected Expression Union(Union e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (_typeResolver.IsListType(left.Type))
-            {
-                var leftElementType = _typeResolver.GetListElementType(left.Type)!;
-                if (_typeResolver.IsListType(right.Type))
-                {
-                    var rightElementType = _typeResolver.GetListElementType(right.Type)!;
-                    if (leftElementType != rightElementType)
-                        throw this.NewExpressionBuildingException($"Union requires both operands to be of the same type, " +
-                                                                  $"but left is {leftElementType.Name} and right is {rightElementType.Name}.");
-                    return BindCqlOperator(nameof(ICqlOperators.ListUnion), left, right);
-                }
-            }
-            else if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    return BindCqlOperator(nameof(ICqlOperators.IntervalUnion), left, right);
-                }
             }
             throw new NotImplementedException().WithContext(this);
         }
@@ -1975,7 +1762,7 @@ namespace Hl7.Cql.Compiler
                             var selectManyCall = BindCqlOperator(nameof(ICqlOperators.SelectMany), @return, selectManyLambda);
                             if (relationship is Without)
                             {
-                                var callExcept = BindCqlOperator(nameof(ICqlOperators.ListExcept), @return, selectManyCall);
+                                var callExcept = BindCqlOperator(nameof(ICqlOperators.Except), @return, selectManyCall);
                                 @return = callExcept;
                             }
                             else
@@ -2438,11 +2225,11 @@ namespace Hl7.Cql.Compiler
 
     #endregion
 
-    #region TypeOperators
+    #region Type Operators
 
     partial class ExpressionBuilderContext
     {
-        protected Expression As(As @as) // @TODO: Cast
+        protected Expression As(As @as) //@ TODO: Cast - As
         {
             if (@as.operand is List list)
             {
@@ -2454,13 +2241,16 @@ namespace Hl7.Cql.Compiler
                         var type = TypeFor(@as.asTypeSpecifier!);
                         if (_typeResolver.IsListType(type))
                         {
-                            var listElementType = _typeResolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
+                            var listElementType = _typeResolver.GetListElementType(type) ??
+                                                  throw this.NewExpressionBuildingException(
+                                                      $"{type} was expected to be a list type.");
                             var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
                             var elmAs = new ElmAsExpression(newArray, type);
                             return elmAs;
                         }
 
-                        throw this.NewExpressionBuildingException("Cannot use as operator on a list if the as type is not also a list type.");
+                        throw this.NewExpressionBuildingException(
+                            "Cannot use as operator on a list if the as type is not also a list type.");
                     }
                 }
             }
@@ -2498,14 +2288,16 @@ namespace Hl7.Cql.Compiler
                 var operand = TranslateArg(@as.operand);
                 if (!type.IsAssignableTo(operand.Type))
                 {
-                    _logger.LogWarning(FormatMessage($"Potentially unsafe cast from {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to type {type.ToCSharpString(Defaults.TypeCSharpFormat)}", @as.operand));
+                    _logger.LogWarning(FormatMessage(
+                                           $"Potentially unsafe cast from {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to type {type.ToCSharpString(Defaults.TypeCSharpFormat)}",
+                                           @as.operand));
                 }
 
                 return new ElmAsExpression(operand, type);
             }
         }
 
-        protected Expression Is(Is @is) // @TODO: Cast
+        protected Expression Is(Is @is) // @TODO: Cast - Is
         {
             var op = TranslateArg(@is.operand!);
             Type? type = null;
@@ -2513,36 +2305,51 @@ namespace Hl7.Cql.Compiler
             {
                 if (@is.isTypeSpecifier is ChoiceTypeSpecifier choice)
                 {
-                    var firstChoiceType = TypeFor(choice.choice[0]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                    var firstChoiceType = TypeFor(choice.choice[0]) ??
+                                          throw this.NewExpressionBuildingException(
+                                              $"Could not resolve type for Is expression");
                     Expression result = op.NewTypeIsExpression(firstChoiceType);
                     for (int i = 1; i < choice.choice.Length; i++)
                     {
-                        var cti = TypeFor(choice.choice[i]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                        var cti = TypeFor(choice.choice[i]) ??
+                                  throw this.NewExpressionBuildingException(
+                                      $"Could not resolve type for Is expression");
                         var ie = op.NewTypeIsExpression(cti);
                         result = Expression.Or(result, ie);
                     }
+
                     var ta = result.NewTypeAsExpression<bool?>();
                     return ta;
                 }
 
-                type = TypeFor(@is.isTypeSpecifier) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                type = TypeFor(@is.isTypeSpecifier) ??
+                       throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
             }
             else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
             {
-                type = _typeResolver.ResolveType(@is.isType.Name) ?? throw this.NewExpressionBuildingException($"Could not resolve type {@is.isType.Name}");
+                type = _typeResolver.ResolveType(@is.isType.Name) ??
+                       throw this.NewExpressionBuildingException($"Could not resolve type {@is.isType.Name}");
             }
 
             if (type == null)
-                throw this.NewExpressionBuildingException($"Could not identify Is type specifer via {nameof(@is.isTypeSpecifier)} or {nameof(@is.isType)}.");
+                throw this.NewExpressionBuildingException(
+                    $"Could not identify Is type specifer via {nameof(@is.isTypeSpecifier)} or {nameof(@is.isType)}.");
 
             var isExpression = op.NewTypeIsExpression(type);
             var nullable = isExpression.NewTypeAsExpression<bool?>();
             return nullable;
         }
+    }
 
+    #endregion
+
+    #region ChangeType
+
+    partial class ExpressionBuilderContext
+    {
         private Expression ChangeType(
             Expression expr,
-            TypeSpecifier? typeSpecifier) // @TODO: Cast
+            TypeSpecifier? typeSpecifier) // @TODO: Cast - ChangeType
         {
             if (typeSpecifier is null)
                 return expr;
@@ -2560,11 +2367,11 @@ namespace Hl7.Cql.Compiler
         private Expression ChangeType(
             Element element,
             Type outputType)
-            => ChangeType(TranslateArg(element), outputType); // @TODO: Cast
+            => ChangeType(TranslateArg(element), outputType); // @TODO: Cast - ChangeType
 
         private Expression ChangeType(
             Expression input,
-            Type outputType) // @TODO: Cast
+            Type outputType) // @TODO: Cast - ChangeType
         {
             var (expression, typeConversion) = input.TryNewAssignToTypeExpression(outputType, false);
             if (typeConversion != TypeConversion.NoMatch)
@@ -2603,4 +2410,16 @@ namespace Hl7.Cql.Compiler
     }
 
     #endregion
+
+    file static class LocalExtensions
+    {
+        public static Type? GetListElementCqlIntervalPointType(
+            this TypeResolver typeResolver,
+            Type type) =>
+            typeResolver.GetListElementType(type, throwError:false) is { } elementType
+            && elementType.IsCqlInterval(out var pointType)
+                ? pointType
+                : null;
+    }
+
 }

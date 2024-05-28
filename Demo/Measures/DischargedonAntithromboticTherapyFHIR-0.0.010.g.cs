@@ -440,7 +440,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		var a_ = this.Encounter_With_No_Antithrombotic_At_Discharge();
 		var b_ = this.Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -453,7 +453,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		var a_ = TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounters_with_Discharge_Disposition();
 		var b_ = TJCOverallFHIR_1_8_000.Encounter_with_Comfort_Measures_during_Hospitalization();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}

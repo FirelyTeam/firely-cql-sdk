@@ -330,7 +330,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		var b_ = this.Hypoglycemics_Treatment_Medications();
 		var c_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(b_, null);
 		var e_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(b_, null);
-		var f_ = context.Operators.ListUnion<MedicationAdministration>(c_, e_);
+		var f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 		var g_ = context.Operators.CrossJoin<Tuple_GPLfQTPONQabPZigKbYFERDVQ, MedicationAdministration>(a_, f_);
 		Tuple_CLXCRdeeSPOVHRdOZOXQZeIEB h_(ValueTuple<Tuple_GPLfQTPONQabPZigKbYFERDVQ, MedicationAdministration> _valueTuple)
 		{
@@ -424,9 +424,9 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 	{
 		var a_ = this.Qualifying_Encounters_With_Existing_Diabetes_Diagnosis();
 		var b_ = this.Qualifying_Encounters_With_Hypoglycemic_Medication();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 		var d_ = this.Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab();
-		var e_ = context.Operators.ListUnion<Encounter>(c_, d_);
+		var e_ = context.Operators.Union<Encounter>(c_, d_);
 
 		return e_;
 	}

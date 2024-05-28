@@ -400,4 +400,5 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 
 # We don't include Resources, because compiling the same C# code does not generate a deterministic binary, so it becomes very noise when they are included in the Resources
 /LibrarySets/**/Resources/*.*
+*.bak
 *.dat

@@ -440,36 +440,36 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			return bl_;
 		};
 		var e_ = context.Operators.Where<Encounter>(c_, d_);
-		var f_ = context.Operators.ListUnion<Encounter>(b_, e_);
+		var f_ = context.Operators.Union<Encounter>(b_, e_);
 		var h_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var i_ = this.Home_Healthcare_Services();
 		var j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, null);
-		var k_ = context.Operators.ListUnion<Encounter>(h_, j_);
-		var l_ = context.Operators.ListUnion<Encounter>(f_, k_);
+		var k_ = context.Operators.Union<Encounter>(h_, j_);
+		var l_ = context.Operators.Union<Encounter>(f_, k_);
 		var m_ = this.Initial_Hospital_Observation_Care();
 		var n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
 		var o_ = this.Medical_Disability_Exam();
 		var p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
-		var q_ = context.Operators.ListUnion<Encounter>(n_, p_);
-		var r_ = context.Operators.ListUnion<Encounter>(l_, q_);
+		var q_ = context.Operators.Union<Encounter>(n_, p_);
+		var r_ = context.Operators.Union<Encounter>(l_, q_);
 		var s_ = this.Observation();
 		var t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, null);
 		var u_ = this.Office_Visit();
 		var v_ = context.Operators.RetrieveByValueSet<Encounter>(u_, null);
-		var w_ = context.Operators.ListUnion<Encounter>(t_, v_);
-		var x_ = context.Operators.ListUnion<Encounter>(r_, w_);
+		var w_ = context.Operators.Union<Encounter>(t_, v_);
+		var x_ = context.Operators.Union<Encounter>(r_, w_);
 		var y_ = this.Telephone_Visits();
 		var z_ = context.Operators.RetrieveByValueSet<Encounter>(y_, null);
 		var aa_ = this.Online_Assessments();
 		var ab_ = context.Operators.RetrieveByValueSet<Encounter>(aa_, null);
-		var ac_ = context.Operators.ListUnion<Encounter>(z_, ab_);
-		var ad_ = context.Operators.ListUnion<Encounter>(x_, ac_);
+		var ac_ = context.Operators.Union<Encounter>(z_, ab_);
+		var ad_ = context.Operators.Union<Encounter>(x_, ac_);
 		var ae_ = this.Outpatient_Consultation();
 		var af_ = context.Operators.RetrieveByValueSet<Encounter>(ae_, null);
 		var ag_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
 		var ah_ = context.Operators.RetrieveByValueSet<Encounter>(ag_, null);
-		var ai_ = context.Operators.ListUnion<Encounter>(af_, ah_);
-		var aj_ = context.Operators.ListUnion<Encounter>(ad_, ai_);
+		var ai_ = context.Operators.Union<Encounter>(af_, ah_);
+		var aj_ = context.Operators.Union<Encounter>(ad_, ai_);
 		var ak_ = this.Preventive_Care_Services_Group_Counseling();
 		var al_ = context.Operators.RetrieveByValueSet<Encounter>(ak_, null);
 		bool? an_(Encounter E)
@@ -496,20 +496,20 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			return bv_;
 		};
 		var ao_ = context.Operators.Where<Encounter>(c_, an_);
-		var ap_ = context.Operators.ListUnion<Encounter>(al_, ao_);
-		var aq_ = context.Operators.ListUnion<Encounter>(aj_, ap_);
+		var ap_ = context.Operators.Union<Encounter>(al_, ao_);
+		var aq_ = context.Operators.Union<Encounter>(aj_, ap_);
 		var ar_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
 		var as_ = context.Operators.RetrieveByValueSet<Encounter>(ar_, null);
 		var at_ = this.Preventive_Care_Services_Individual_Counseling();
 		var au_ = context.Operators.RetrieveByValueSet<Encounter>(at_, null);
-		var av_ = context.Operators.ListUnion<Encounter>(as_, au_);
-		var aw_ = context.Operators.ListUnion<Encounter>(aq_, av_);
+		var av_ = context.Operators.Union<Encounter>(as_, au_);
+		var aw_ = context.Operators.Union<Encounter>(aq_, av_);
 		var ax_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var ay_ = context.Operators.RetrieveByValueSet<Encounter>(ax_, null);
 		var az_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
 		var ba_ = context.Operators.RetrieveByValueSet<Encounter>(az_, null);
-		var bb_ = context.Operators.ListUnion<Encounter>(ay_, ba_);
-		var bc_ = context.Operators.ListUnion<Encounter>(aw_, bb_);
+		var bb_ = context.Operators.Union<Encounter>(ay_, ba_);
+		var bc_ = context.Operators.Union<Encounter>(aw_, bb_);
 		var bd_ = Status_1_6_000.Finished_Encounter(bc_);
 		bool? be_(Encounter ValidEncounter)
 		{
@@ -538,7 +538,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var d_ = this.Antibiotic_Medications_for_Pharyngitis();
 			var e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
 			var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
-			var h_ = context.Operators.ListUnion<MedicationRequest>(e_, g_);
+			var h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			var i_ = Status_1_6_000.Active_Medication(h_);
 			bool? j_(MedicationRequest AntibioticOrdered)
 			{
@@ -581,7 +581,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Acute_Tonsillitis();
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.ListUnion<Condition>(b_, d_);
+		var e_ = context.Operators.Union<Condition>(b_, d_);
 		var f_ = Status_1_6_000.Active_Condition(e_);
 
 		return f_;
@@ -695,17 +695,17 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		var c_ = this.Antibiotic_Medications_for_Pharyngitis();
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(c_, null);
 		var f_ = context.Operators.RetrieveByValueSet<MedicationRequest>(c_, null);
-		var g_ = context.Operators.ListUnion<MedicationRequest>(d_, f_);
+		var g_ = context.Operators.Union<MedicationRequest>(d_, f_);
 		var h_ = Antibiotic_1_5_000.Has_Antibiotic_Medication_History(b_, g_);
-		var i_ = context.Operators.ListUnion<Encounter>(a_, h_);
+		var i_ = context.Operators.Union<Encounter>(a_, h_);
 		var k_ = this.Competing_Conditions_for_Respiratory_Conditions();
 		var l_ = context.Operators.RetrieveByValueSet<Condition>(k_, null);
 		var m_ = Antibiotic_1_5_000.Has_Competing_Diagnosis_History(b_, l_);
 		var o_ = this.Comorbid_Conditions_for_Respiratory_Conditions();
 		var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
 		var q_ = Antibiotic_1_5_000.Has_Comorbid_Condition_History(b_, p_);
-		var r_ = context.Operators.ListUnion<Encounter>(m_, q_);
-		var s_ = context.Operators.ListUnion<Encounter>(i_, r_);
+		var r_ = context.Operators.Union<Encounter>(m_, q_);
+		var s_ = context.Operators.Union<Encounter>(i_, r_);
 
 		return s_;
 	}

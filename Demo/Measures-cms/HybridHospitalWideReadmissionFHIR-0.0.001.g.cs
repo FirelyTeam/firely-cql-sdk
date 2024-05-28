@@ -305,7 +305,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var f_ = context.Operators.RetrieveByValueSet<Coverage>(e_, null);
 			var g_ = this.Medicare_Advantage_payer();
 			var h_ = context.Operators.RetrieveByValueSet<Coverage>(g_, null);
-			var i_ = context.Operators.ListUnion<Coverage>(f_, h_);
+			var i_ = context.Operators.Union<Coverage>(f_, h_);
 			bool? j_(Coverage MedicarePayer)
 			{
 				var n_ = CQMCommon_2_0_000.hospitalizationWithObservationAndOutpatientSurgeryService(InpatientEncounter);

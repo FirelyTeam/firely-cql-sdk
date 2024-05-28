@@ -856,7 +856,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 	{
 		var a_ = this.Documented_IPSS_Assessment_Result();
 		var b_ = this.AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result();
-		var c_ = context.Operators.ListUnion<Tuple_GNNDVIQPcTANSdLebhBKYIdga>(a_, b_);
+		var c_ = context.Operators.Union<Tuple_GNNDVIQPcTANSdLebhBKYIdga>(a_, b_);
 
 		return c_;
 	}

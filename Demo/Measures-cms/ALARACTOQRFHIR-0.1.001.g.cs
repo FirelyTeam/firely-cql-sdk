@@ -203,7 +203,7 @@ public class ALARACTOQRFHIR_0_1_001
 			return k_;
 		};
 		var d_ = context.Operators.SelectMany<Observation, Observation>(a_, c_);
-		var e_ = context.Operators.ListExcept<Observation>(a_, d_);
+		var e_ = context.Operators.Except<Observation>(a_, d_);
 
 		return e_;
 	}
@@ -327,7 +327,7 @@ public class ALARACTOQRFHIR_0_1_001
 				return n_;
 			};
 			var j_ = context.Operators.Select<CqlCode, string>(h_, i_);
-			var k_ = context.Operators.ListContains<string>(j_, "FULLBODY");
+			var k_ = context.Operators.Contains<string>(j_, "FULLBODY");
 
 			return k_;
 		};
@@ -359,7 +359,7 @@ public class ALARACTOQRFHIR_0_1_001
 			return o_;
 		};
 		var e_ = context.Operators.Select<CqlCode, string>(c_, d_);
-		var f_ = context.Operators.ListContains<string>(e_, code);
+		var f_ = context.Operators.Contains<string>(e_, code);
 		var g_ = this.Global_Noise_Value(Obs);
 		var h_ = context.Operators.GreaterOrEqual(g_, noiseThreshold);
 		var i_ = this.Size_Adjusted_Value(Obs);

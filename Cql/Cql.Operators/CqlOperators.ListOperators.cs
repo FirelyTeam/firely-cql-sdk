@@ -20,7 +20,7 @@ namespace Hl7.Cql.Runtime
     internal partial class CqlOperators
     {
         #region Contains
-        public bool? ListContains<T>(IEnumerable<T> list, T item)
+        public bool? Contains<T>(IEnumerable<T> list, T item)
         {
             if (list == null) return false;
             if (item == null) return null;
@@ -105,7 +105,7 @@ namespace Hl7.Cql.Runtime
 
         #region Equivalent
 
-        public bool? ListEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
+        public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
             if (left == null)
             {
@@ -141,7 +141,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region Except
-        public IEnumerable<T>? ListExcept<T>(IEnumerable<T>? left, IEnumerable<T>? right)
+        public IEnumerable<T>? Except<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
             if (left == null)
                 return right;
@@ -995,7 +995,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region Intersect
-        public IEnumerable<T>? ListIntersect<T>(IEnumerable<T>? left, IEnumerable<T>? right)
+        public IEnumerable<T>? Intersect<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
             if (left == null || right == null)
                 return null;
@@ -1067,7 +1067,7 @@ namespace Hl7.Cql.Runtime
 
         #region Not Equivalent
 
-        public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !ListEquivalent(left, right);
+        public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !Equivalent(left, right);
 
         #endregion
 
@@ -1170,7 +1170,7 @@ namespace Hl7.Cql.Runtime
 
         #region Union
 
-        public IEnumerable<T>? ListUnion<T>(IEnumerable<T>? left, IEnumerable<T>? right)
+        public IEnumerable<T>? Union<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
             if (left == null)
                 return right;

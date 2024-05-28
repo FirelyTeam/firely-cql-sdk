@@ -550,9 +550,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		bool? b_(Encounter QualifyingEncounter)
 		{
 			var f_ = this.Encounter_with_Malnutrition_Risk_Screening();
-			var g_ = context.Operators.ListContains<Encounter>(f_, QualifyingEncounter);
+			var g_ = context.Operators.Contains<Encounter>(f_, QualifyingEncounter);
 			var h_ = this.Encounter_with_Hospital_Dietitian_Referral();
-			var i_ = context.Operators.ListContains<Encounter>(h_, QualifyingEncounter);
+			var i_ = context.Operators.Contains<Encounter>(h_, QualifyingEncounter);
 			var j_ = context.Operators.Or(g_, i_);
 
 			return j_;
@@ -636,7 +636,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		bool? b_(Encounter QualifyingEncounter)
 		{
 			var f_ = this.Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk();
-			var g_ = context.Operators.ListContains<Encounter>(f_, QualifyingEncounter);
+			var g_ = context.Operators.Contains<Encounter>(f_, QualifyingEncounter);
 			var h_ = this.Encounter_with_Hospital_Dietitian_Referral();
 			var i_ = context.Operators.Exists<Encounter>(h_);
 			var j_ = context.Operators.Not(i_);
@@ -723,9 +723,9 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		bool? b_(Encounter QualifyingEncounter)
 		{
 			var f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk();
-			var g_ = context.Operators.ListContains<Encounter>(f_, QualifyingEncounter);
+			var g_ = context.Operators.Contains<Encounter>(f_, QualifyingEncounter);
 			var h_ = this.Encounter_with_Hospital_Dietitian_Referral();
-			var i_ = context.Operators.ListContains<Encounter>(h_, QualifyingEncounter);
+			var i_ = context.Operators.Contains<Encounter>(h_, QualifyingEncounter);
 			var j_ = context.Operators.Or(g_, i_);
 
 			return j_;
@@ -1036,7 +1036,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
     [CqlDeclaration("Measure Observation 1")]
 	public int? Measure_Observation_1(Encounter MalnutritionRiskScreening) => 
-		((context.Operators.ListContains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral(), MalnutritionRiskScreening) ?? false)
+		((context.Operators.Contains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral(), MalnutritionRiskScreening) ?? false)
 			? 1
 			: 0);
 
@@ -1048,14 +1048,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool b_()
 			{
 				var d_ = this.Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral();
-				var e_ = context.Operators.ListContains<Encounter>(d_, NutritionAssessment);
+				var e_ = context.Operators.Contains<Encounter>(d_, NutritionAssessment);
 
 				return (e_ ?? false);
 			};
 			bool c_()
 			{
 				var f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral();
-				var g_ = context.Operators.ListContains<Encounter>(f_, NutritionAssessment);
+				var g_ = context.Operators.Contains<Encounter>(f_, NutritionAssessment);
 
 				return (g_ ?? false);
 			};
@@ -1065,7 +1065,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			}
 			else if (c_())
 			{
-				return ((context.Operators.ListContains<Encounter>(this.Encounter_with_Nutrition_Assessment_and_Identified_Status(), NutritionAssessment) ?? false)
+				return ((context.Operators.Contains<Encounter>(this.Encounter_with_Nutrition_Assessment_and_Identified_Status(), NutritionAssessment) ?? false)
 					? 1
 					: 0);
 			}
@@ -1086,14 +1086,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool b_()
 			{
 				var d_ = this.Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral();
-				var e_ = context.Operators.ListContains<Encounter>(d_, MalnutritionDiagonsis);
+				var e_ = context.Operators.Contains<Encounter>(d_, MalnutritionDiagonsis);
 
 				return (e_ ?? false);
 			};
 			bool c_()
 			{
 				var f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral();
-				var g_ = context.Operators.ListContains<Encounter>(f_, MalnutritionDiagonsis);
+				var g_ = context.Operators.Contains<Encounter>(f_, MalnutritionDiagonsis);
 
 				return (g_ ?? false);
 			};
@@ -1108,7 +1108,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					bool i_()
 					{
 						var j_ = this.Encounter_with_Malnutrition_Diagnosis();
-						var k_ = context.Operators.ListContains<Encounter>(j_, MalnutritionDiagonsis);
+						var k_ = context.Operators.Contains<Encounter>(j_, MalnutritionDiagonsis);
 
 						return (k_ ?? false);
 					};
@@ -1119,14 +1119,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							bool m_()
 							{
 								var o_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished();
-								var p_ = context.Operators.ListContains<Encounter>(o_, MalnutritionDiagonsis);
+								var p_ = context.Operators.Contains<Encounter>(o_, MalnutritionDiagonsis);
 
 								return (p_ ?? false);
 							};
 							bool n_()
 							{
 								var q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished();
-								var r_ = context.Operators.ListContains<Encounter>(q_, MalnutritionDiagonsis);
+								var r_ = context.Operators.Contains<Encounter>(q_, MalnutritionDiagonsis);
 
 								return (r_ ?? false);
 							};
@@ -1171,14 +1171,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool b_()
 			{
 				var d_ = this.Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral();
-				var e_ = context.Operators.ListContains<Encounter>(d_, NutritionCarePlan);
+				var e_ = context.Operators.Contains<Encounter>(d_, NutritionCarePlan);
 
 				return (e_ ?? false);
 			};
 			bool c_()
 			{
 				var f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral();
-				var g_ = context.Operators.ListContains<Encounter>(f_, NutritionCarePlan);
+				var g_ = context.Operators.Contains<Encounter>(f_, NutritionCarePlan);
 
 				return (g_ ?? false);
 			};
@@ -1193,7 +1193,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					bool i_()
 					{
 						var j_ = this.Encounter_with_Nutrition_Care_Plan();
-						var k_ = context.Operators.ListContains<Encounter>(j_, NutritionCarePlan);
+						var k_ = context.Operators.Contains<Encounter>(j_, NutritionCarePlan);
 
 						return (k_ ?? false);
 					};
@@ -1204,14 +1204,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							bool m_()
 							{
 								var o_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished();
-								var p_ = context.Operators.ListContains<Encounter>(o_, NutritionCarePlan);
+								var p_ = context.Operators.Contains<Encounter>(o_, NutritionCarePlan);
 
 								return (p_ ?? false);
 							};
 							bool n_()
 							{
 								var q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished();
-								var r_ = context.Operators.ListContains<Encounter>(q_, NutritionCarePlan);
+								var r_ = context.Operators.Contains<Encounter>(q_, NutritionCarePlan);
 
 								return (r_ ?? false);
 							};
@@ -1275,12 +1275,12 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool b_()
 			{
 				var d_ = this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral();
-				var e_ = context.Operators.ListContains<Encounter>(d_, QualifyingEncounter);
+				var e_ = context.Operators.Contains<Encounter>(d_, QualifyingEncounter);
 				var f_ = this.Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk();
-				var g_ = context.Operators.ListContains<Encounter>(f_, QualifyingEncounter);
+				var g_ = context.Operators.Contains<Encounter>(f_, QualifyingEncounter);
 				var h_ = context.Operators.And(e_, g_);
 				var i_ = this.Encounter_with_Hospital_Dietitian_Referral();
-				var j_ = context.Operators.ListContains<Encounter>(i_, QualifyingEncounter);
+				var j_ = context.Operators.Contains<Encounter>(i_, QualifyingEncounter);
 				var k_ = context.Operators.Not(j_);
 				var l_ = context.Operators.And(h_, k_);
 
@@ -1289,18 +1289,18 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool c_()
 			{
 				var m_ = this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral();
-				var n_ = context.Operators.ListContains<Encounter>(m_, QualifyingEncounter);
+				var n_ = context.Operators.Contains<Encounter>(m_, QualifyingEncounter);
 				var o_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk();
-				var p_ = context.Operators.ListContains<Encounter>(o_, QualifyingEncounter);
+				var p_ = context.Operators.Contains<Encounter>(o_, QualifyingEncounter);
 				var q_ = context.Operators.And(n_, p_);
 				var r_ = this.Encounter_with_Hospital_Dietitian_Referral();
-				var s_ = context.Operators.ListContains<Encounter>(r_, QualifyingEncounter);
+				var s_ = context.Operators.Contains<Encounter>(r_, QualifyingEncounter);
 				var t_ = context.Operators.Or(q_, s_);
 				var u_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished();
-				var v_ = context.Operators.ListContains<Encounter>(u_, QualifyingEncounter);
+				var v_ = context.Operators.Contains<Encounter>(u_, QualifyingEncounter);
 				var w_ = context.Operators.And(t_, v_);
 				var x_ = this.Encounter_with_Nutrition_Assessment_and_Identified_Status();
-				var y_ = context.Operators.ListContains<Encounter>(x_, QualifyingEncounter);
+				var y_ = context.Operators.Contains<Encounter>(x_, QualifyingEncounter);
 				var z_ = context.Operators.Not(y_);
 				var aa_ = context.Operators.Or(w_, z_);
 

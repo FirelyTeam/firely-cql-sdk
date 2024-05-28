@@ -465,7 +465,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			return aw_;
 		};
 		var e_ = context.Operators.Where<Encounter>(c_, d_);
-		var f_ = context.Operators.ListUnion<Encounter>(b_, e_);
+		var f_ = context.Operators.Union<Encounter>(b_, e_);
 		bool? h_(Encounter E)
 		{
 			var bb_ = E?.Type;
@@ -492,35 +492,35 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var i_ = context.Operators.Where<Encounter>(c_, h_);
 		var j_ = this.Occupational_Therapy_Evaluation();
 		var k_ = context.Operators.RetrieveByValueSet<Encounter>(j_, null);
-		var l_ = context.Operators.ListUnion<Encounter>(i_, k_);
-		var m_ = context.Operators.ListUnion<Encounter>(f_, l_);
+		var l_ = context.Operators.Union<Encounter>(i_, k_);
+		var m_ = context.Operators.Union<Encounter>(f_, l_);
 		var n_ = this.Office_Visit();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
 		var p_ = this.Ophthalmological_Services();
 		var q_ = context.Operators.RetrieveByValueSet<Encounter>(p_, null);
-		var r_ = context.Operators.ListUnion<Encounter>(o_, q_);
-		var s_ = context.Operators.ListUnion<Encounter>(m_, r_);
+		var r_ = context.Operators.Union<Encounter>(o_, q_);
+		var s_ = context.Operators.Union<Encounter>(m_, r_);
 		var t_ = this.Physical_Therapy_Evaluation();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
 		var v_ = this.Psych_Visit_Diagnostic_Evaluation();
 		var w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, null);
-		var x_ = context.Operators.ListUnion<Encounter>(u_, w_);
-		var y_ = context.Operators.ListUnion<Encounter>(s_, x_);
+		var x_ = context.Operators.Union<Encounter>(u_, w_);
+		var y_ = context.Operators.Union<Encounter>(s_, x_);
 		var z_ = this.Psych_Visit_Psychotherapy();
 		var aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
 		var ab_ = this.Psychoanalysis();
 		var ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, null);
-		var ad_ = context.Operators.ListUnion<Encounter>(aa_, ac_);
-		var ae_ = context.Operators.ListUnion<Encounter>(y_, ad_);
+		var ad_ = context.Operators.Union<Encounter>(aa_, ac_);
+		var ae_ = context.Operators.Union<Encounter>(y_, ad_);
 		var af_ = this.Speech_and_Hearing_Evaluation();
 		var ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 		var ah_ = this.Telephone_Visits();
 		var ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, null);
-		var aj_ = context.Operators.ListUnion<Encounter>(ag_, ai_);
-		var ak_ = context.Operators.ListUnion<Encounter>(ae_, aj_);
+		var aj_ = context.Operators.Union<Encounter>(ag_, ai_);
+		var ak_ = context.Operators.Union<Encounter>(ae_, aj_);
 		var al_ = this.Online_Assessments();
 		var am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, null);
-		var an_ = context.Operators.ListUnion<Encounter>(ak_, am_);
+		var an_ = context.Operators.Union<Encounter>(ak_, am_);
 		var ao_ = Status_1_6_000.isEncounterPerformed(an_);
 		bool? ap_(Encounter OfficeBasedEncounter)
 		{
@@ -547,7 +547,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care_Services_Group_Counseling();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
@@ -575,8 +575,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			return ah_;
 		};
 		var j_ = context.Operators.Where<Encounter>(h_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(g_, j_);
-		var l_ = context.Operators.ListUnion<Encounter>(e_, k_);
+		var k_ = context.Operators.Union<Encounter>(g_, j_);
+		var l_ = context.Operators.Union<Encounter>(e_, k_);
 		var m_ = this.Preventive_Care_Services_Individual_Counseling();
 		var n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
 		bool? p_(Encounter E)
@@ -603,14 +603,14 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			return ar_;
 		};
 		var q_ = context.Operators.Where<Encounter>(h_, p_);
-		var r_ = context.Operators.ListUnion<Encounter>(n_, q_);
-		var s_ = context.Operators.ListUnion<Encounter>(l_, r_);
+		var r_ = context.Operators.Union<Encounter>(n_, q_);
+		var s_ = context.Operators.Union<Encounter>(l_, r_);
 		var t_ = this.Nutrition_Services();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
 		var v_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, null);
-		var x_ = context.Operators.ListUnion<Encounter>(u_, w_);
-		var y_ = context.Operators.ListUnion<Encounter>(s_, x_);
+		var x_ = context.Operators.Union<Encounter>(u_, w_);
+		var y_ = context.Operators.Union<Encounter>(s_, x_);
 		var z_ = Status_1_6_000.isEncounterPerformed(y_);
 		bool? aa_(Encounter PreventiveEncounter)
 		{
@@ -845,7 +845,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			return af_;
 		};
 		var j_ = context.Operators.Where<Condition>(h_, i_);
-		var k_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
+		var k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -859,7 +859,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var a_ = this.Tobacco_Use_Cessation_Pharmacotherapy();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = Status_1_6_000.isMedicationOrder(e_);
 		bool? g_(MedicationRequest CessationPharmacotherapyOrdered)
 		{
@@ -889,7 +889,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		var a_ = this.Tobacco_Use_Cessation_Pharmacotherapy();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = Status_1_6_000.isMedicationActive(e_);
 		bool? g_(MedicationRequest TakingCessationPharmacotherapy)
 		{

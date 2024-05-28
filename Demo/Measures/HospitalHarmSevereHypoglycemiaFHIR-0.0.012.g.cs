@@ -279,7 +279,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 		var a_ = this.Hypoglycemics_Severe_Hypoglycemia();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationAdministration>(b_, d_);
+		var e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration HypoMedication)
 		{
 			var h_ = HypoMedication?.StatusElement;
@@ -504,7 +504,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 				return cu_;
 			};
 			var m_ = context.Operators.SelectMany<Observation, Observation>(k_, l_);
-			var n_ = context.Operators.ListExcept<Observation>(g_, m_);
+			var n_ = context.Operators.Except<Observation>(g_, m_);
 			bool? o_(Observation BloodGlucoseLab)
 			{
 				var eh_ = BloodGlucoseLab?.Effective;

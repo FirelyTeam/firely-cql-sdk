@@ -628,7 +628,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Office_Visit();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? g_(Encounter E)
 		{
@@ -656,11 +656,11 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var h_ = context.Operators.Where<Encounter>(f_, g_);
 		var i_ = this.Telephone_Visits();
 		var j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, null);
-		var k_ = context.Operators.ListUnion<Encounter>(h_, j_);
-		var l_ = context.Operators.ListUnion<Encounter>(e_, k_);
+		var k_ = context.Operators.Union<Encounter>(h_, j_);
+		var l_ = context.Operators.Union<Encounter>(e_, k_);
 		var m_ = this.Online_Assessments();
 		var n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
-		var o_ = context.Operators.ListUnion<Encounter>(l_, n_);
+		var o_ = context.Operators.Union<Encounter>(l_, n_);
 		var p_ = Status_1_6_000.isEncounterPerformed(o_);
 		bool? q_(Encounter ValidEncounters)
 		{

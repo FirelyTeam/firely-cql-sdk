@@ -531,7 +531,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Telephone_Visits();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		bool? f_(Encounter TelehealthEncounter)
 		{
 			var h_ = TelehealthEncounter?.StatusElement;
@@ -582,7 +582,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var j_ = this.Telehealth_Services();
-		var k_ = context.Operators.ListUnion<Encounter>(i_, j_);
+		var k_ = context.Operators.Union<Encounter>(i_, j_);
 		var l_ = context.Operators.Exists<Encounter>(k_);
 		var m_ = context.Operators.And(h_, l_);
 
@@ -872,7 +872,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var af_ = context.Operators.ListEquivalent<string>(ad_, (ae_ as IEnumerable<string>));
+				var af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
 
 				return af_;
 			};
@@ -952,7 +952,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var af_ = context.Operators.ListEquivalent<string>(ad_, (ae_ as IEnumerable<string>));
+				var af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
 
 				return af_;
 			};
@@ -1023,7 +1023,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var aa_ = context.Operators.ListEquivalent<string>(y_, (z_ as IEnumerable<string>));
+				var aa_ = context.Operators.Equivalent<string>(y_, (z_ as IEnumerable<string>));
 				var ab_ = context.Operators.Not(aa_);
 
 				return ab_;
@@ -1249,7 +1249,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var ap_ = context.Operators.ListEquivalent<string>(an_, (ao_ as IEnumerable<string>));
+				var ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
 
 				return ap_;
 			};
@@ -1337,7 +1337,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var ap_ = context.Operators.ListEquivalent<string>(an_, (ao_ as IEnumerable<string>));
+				var ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
 
 				return ap_;
 			};
@@ -1416,7 +1416,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 				{
 					"laboratory",
 				};
-				var ak_ = context.Operators.ListEquivalent<string>(ai_, (aj_ as IEnumerable<string>));
+				var ak_ = context.Operators.Equivalent<string>(ai_, (aj_ as IEnumerable<string>));
 				var al_ = context.Operators.Not(ak_);
 
 				return al_;

@@ -262,7 +262,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var a_ = this.Frailty_Device();
 		var b_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<DeviceRequest>(b_, d_);
+		var e_ = context.Operators.Union<DeviceRequest>(b_, d_);
 		var f_ = Status_1_6_000.isDeviceOrder(e_);
 		bool? g_(DeviceRequest FrailtyDeviceOrder)
 		{
@@ -362,13 +362,13 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Observation();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Emergency_Department_Evaluation_and_Management_Visit();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Nonacute_Inpatient();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = Status_1_6_000.isEncounterPerformed(k_);
 		bool? m_(Encounter OutpatientEncounter)
 		{
@@ -499,7 +499,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var a_ = this.Dementia_Medications();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = Status_1_6_000.isMedicationActive(e_);
 		bool? g_(MedicationRequest DementiaMedication)
 		{

@@ -206,19 +206,19 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Home_Healthcare_Services();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Telephone_Visits();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Online_Assessments();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		var r_ = Status_1_6_000.isEncounterPerformed(q_);
 		bool? s_(Encounter ValidEncounters)
 		{
@@ -305,7 +305,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			return v_;
 		};
 		var i_ = context.Operators.Where<Condition>(g_, h_);
-		var j_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (i_ as IEnumerable<object>));
+		var j_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (i_ as IEnumerable<object>));
 
 		return j_;
 	}

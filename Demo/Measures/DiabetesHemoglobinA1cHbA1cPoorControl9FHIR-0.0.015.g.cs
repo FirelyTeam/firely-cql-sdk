@@ -330,7 +330,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var j_ = this.Telehealth_Services();
-		var k_ = context.Operators.ListUnion<Encounter>(i_, j_);
+		var k_ = context.Operators.Union<Encounter>(i_, j_);
 		var l_ = context.Operators.Exists<Encounter>(k_);
 		var m_ = context.Operators.And(h_, l_);
 		var n_ = this.Diabetes();

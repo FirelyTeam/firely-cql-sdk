@@ -293,19 +293,19 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Observation();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.ED();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Telephone_Visits();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Online_Assessments();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Nonacute_Inpatient();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		var r_ = NCQAStatus_1_0_0.Finished_Encounter(q_);
 		bool? s_(Encounter OutpatientEncounter)
 		{
@@ -396,7 +396,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			{
 				var c_ = this.Outpatient_Encounters_with_Advanced_Illness();
 				var d_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness();
-				var e_ = context.Operators.ListUnion<CqlDate>(c_, d_);
+				var e_ = context.Operators.Union<CqlDate>(c_, d_);
 				var f_ = context.Operators.Not((bool?)(e_ is null));
 
 				return (f_ ?? false);
@@ -405,7 +405,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			{
 				var g_ = this.Outpatient_Encounters_with_Advanced_Illness();
 				var h_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness();
-				var i_ = context.Operators.ListUnion<CqlDate>(g_, h_);
+				var i_ = context.Operators.Union<CqlDate>(g_, h_);
 
 				return i_;
 			}
@@ -545,7 +545,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var a_ = this.Dementia_Medications();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationDispense>(b_, d_);
+		var e_ = context.Operators.Union<MedicationDispense>(b_, d_);
 		var f_ = NCQAStatus_1_0_0.Dispensed_Medication(e_);
 		bool? g_(MedicationDispense DementiaMedDispensed)
 		{

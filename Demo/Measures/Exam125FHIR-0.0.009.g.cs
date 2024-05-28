@@ -292,7 +292,7 @@ public class Exam125FHIR_0_0_009
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Telephone_Visits();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		bool? f_(Encounter TelehealthEncounter)
 		{
 			var h_ = TelehealthEncounter?.StatusElement;
@@ -346,7 +346,7 @@ public class Exam125FHIR_0_0_009
 		var l_ = context.Operators.And(h_, k_);
 		var m_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var n_ = this.Telehealth_Services();
-		var o_ = context.Operators.ListUnion<Encounter>(m_, n_);
+		var o_ = context.Operators.Union<Encounter>(m_, n_);
 		var p_ = context.Operators.Exists<Encounter>(o_);
 		var q_ = context.Operators.And(l_, p_);
 
@@ -390,7 +390,7 @@ public class Exam125FHIR_0_0_009
 			return n_;
 		};
 		var f_ = context.Operators.Where<Condition>(d_, e_);
-		var g_ = context.Operators.ListUnion<Condition>(b_, f_);
+		var g_ = context.Operators.Union<Condition>(b_, f_);
 		bool? h_(Condition RightMastectomy)
 		{
 			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(RightMastectomy);
@@ -460,7 +460,7 @@ public class Exam125FHIR_0_0_009
 			return n_;
 		};
 		var f_ = context.Operators.Where<Condition>(d_, e_);
-		var g_ = context.Operators.ListUnion<Condition>(b_, f_);
+		var g_ = context.Operators.Union<Condition>(b_, f_);
 		bool? h_(Condition LeftMastectomy)
 		{
 			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(LeftMastectomy);

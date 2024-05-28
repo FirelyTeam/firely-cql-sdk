@@ -252,7 +252,7 @@ namespace CoreTests
             var rc = GetNewContext();
             var fcq = rc.Operators;
 
-            var contains = fcq.IntervalContains(interval, five, null);
+            var contains = fcq.Contains(interval, five, null);
             Assert.IsNull(contains);
         }
 
@@ -268,7 +268,7 @@ namespace CoreTests
             var rc = GetNewContext();
             var fcq = rc.Operators;
 
-            var contains = fcq.IntervalContains(interval, five, null);
+            var contains = fcq.Contains(interval, five, null);
             Assert.IsTrue(contains ?? false);
         }
 
@@ -284,7 +284,7 @@ namespace CoreTests
             var rc = GetNewContext();
             var fcq = rc.Operators;
 
-            var contains = fcq.IntervalContains(interval, five, null);
+            var contains = fcq.Contains(interval, five, null);
             Assert.IsNull(contains);
         }
 
@@ -300,7 +300,7 @@ namespace CoreTests
             var rc = GetNewContext();
             var fcq = rc.Operators;
 
-            var contains = fcq.IntervalContains(interval, five, null);
+            var contains = fcq.Contains(interval, five, null);
             Assert.IsTrue(contains ?? false);
         }
 
@@ -316,7 +316,7 @@ namespace CoreTests
             var rc = GetNewContext();
             var fcq = rc.Operators;
 
-            var contains = fcq.IntervalContains(interval, five, null);
+            var contains = fcq.Contains(interval, five, null);
             Assert.IsNotNull(contains);
             Assert.IsTrue((contains ?? false) == false);
         }

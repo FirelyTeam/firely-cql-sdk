@@ -431,7 +431,7 @@ public class BCSEHEDISMY2022_1_0_0
 			return v_;
 		};
 		var h_ = context.Operators.Where<Procedure>(f_, g_);
-		var i_ = context.Operators.ListUnion<Procedure>(c_, h_);
+		var i_ = context.Operators.Union<Procedure>(c_, h_);
 		var j_ = this.Clinical_Unilateral_Mastectomy();
 		var k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
 		var l_ = NCQAStatus_1_0_0.Completed_Procedure(k_);
@@ -451,7 +451,7 @@ public class BCSEHEDISMY2022_1_0_0
 			return ab_;
 		};
 		var n_ = context.Operators.Where<Procedure>(l_, m_);
-		var o_ = context.Operators.ListUnion<Procedure>(i_, n_);
+		var o_ = context.Operators.Union<Procedure>(i_, n_);
 		bool? p_(Procedure RightMastectomyProcedure)
 		{
 			var ad_ = RightMastectomyProcedure?.Performed;
@@ -520,7 +520,7 @@ public class BCSEHEDISMY2022_1_0_0
 			return v_;
 		};
 		var h_ = context.Operators.Where<Procedure>(f_, g_);
-		var i_ = context.Operators.ListUnion<Procedure>(c_, h_);
+		var i_ = context.Operators.Union<Procedure>(c_, h_);
 		var j_ = this.Clinical_Unilateral_Mastectomy();
 		var k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
 		var l_ = NCQAStatus_1_0_0.Completed_Procedure(k_);
@@ -540,7 +540,7 @@ public class BCSEHEDISMY2022_1_0_0
 			return ab_;
 		};
 		var n_ = context.Operators.Where<Procedure>(l_, m_);
-		var o_ = context.Operators.ListUnion<Procedure>(i_, n_);
+		var o_ = context.Operators.Union<Procedure>(i_, n_);
 		bool? p_(Procedure LeftMastectomyProcedure)
 		{
 			var ad_ = LeftMastectomyProcedure?.Performed;
@@ -609,7 +609,7 @@ public class BCSEHEDISMY2022_1_0_0
 			return v_;
 		};
 		var h_ = context.Operators.Where<Procedure>(f_, g_);
-		var i_ = context.Operators.ListUnion<Procedure>(c_, h_);
+		var i_ = context.Operators.Union<Procedure>(c_, h_);
 		var j_ = this.Clinical_Unilateral_Mastectomy();
 		var k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
 		var l_ = NCQAStatus_1_0_0.Completed_Procedure(k_);
@@ -629,7 +629,7 @@ public class BCSEHEDISMY2022_1_0_0
 			return ab_;
 		};
 		var n_ = context.Operators.Where<Procedure>(l_, m_);
-		var o_ = context.Operators.ListUnion<Procedure>(i_, n_);
+		var o_ = context.Operators.Union<Procedure>(i_, n_);
 		bool? p_(Procedure BilateralMastectomyPerformed)
 		{
 			var ad_ = BilateralMastectomyPerformed?.Performed;

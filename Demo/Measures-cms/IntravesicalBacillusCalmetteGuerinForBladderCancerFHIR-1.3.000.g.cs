@@ -748,7 +748,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var a_ = this.BCG_Bacillus_Calmette_Guerin_for_Urology_Care();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationAdministration>(b_, d_);
+		var e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		IEnumerable<MedicationAdministration> f_(MedicationAdministration BCGNotGiven)
 		{
 			var j_ = this.First_Bladder_Cancer_Staging_Procedure();
@@ -871,7 +871,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var a_ = this.BCG_Bacillus_Calmette_Guerin_for_Urology_Care();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationAdministration>(b_, d_);
+		var e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		IEnumerable<MedicationAdministration> f_(MedicationAdministration BCG)
 		{
 			var m_ = this.First_Bladder_Cancer_Staging_Procedure();
@@ -1058,7 +1058,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var a_ = this.Immunosuppressive_Drugs_for_Urology_Care();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_(MedicationRequest ImmunosuppressiveDrugs)
 		{
 			var h_ = this.First_Bladder_Cancer_Staging_Procedure();
@@ -1163,10 +1163,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Immunocompromised_Conditions();
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.ListUnion<Condition>(b_, d_);
+		var e_ = context.Operators.Union<Condition>(b_, d_);
 		var f_ = this.Mixed_histology_urothelial_cell_carcinoma_for_Urology_Care();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-		var h_ = context.Operators.ListUnion<Condition>(e_, g_);
+		var h_ = context.Operators.Union<Condition>(e_, g_);
 		IEnumerable<Condition> i_(Condition ExclusionDiagnosis)
 		{
 			var n_ = this.First_Bladder_Cancer_Staging_Procedure();
@@ -1215,7 +1215,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		var a_ = this.Chemotherapy_Agents_for_Advanced_Cancer();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_(MedicationRequest ExclusionMed)
 		{
 			var s_ = this.First_Bladder_Cancer_Staging_Procedure();
@@ -1333,7 +1333,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return cn_;
 		};
 		var p_ = context.Operators.Where<Procedure>(n_, o_);
-		var q_ = context.Operators.ListUnion<object>((i_ as IEnumerable<object>), (p_ as IEnumerable<object>));
+		var q_ = context.Operators.Union<object>((i_ as IEnumerable<object>), (p_ as IEnumerable<object>));
 		var r_ = context.Operators.Exists<object>(q_);
 
 		return r_;

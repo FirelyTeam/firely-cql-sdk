@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace CoreTests;

@@ -407,20 +407,20 @@ namespace Hl7.Cql.Runtime
 
         #region Contains
 
-        public bool? IntervalContains(CqlInterval<int?>? left, int? right, string? precision) =>
+        public bool? Contains(CqlInterval<int?>? left, int? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<long?>? left, long? right, string? precision) =>
+        public bool? Contains(CqlInterval<long?>? left, long? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
+        public bool? Contains(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
 
-        public bool? IntervalContains(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
 
         public bool? IntervalContainsHelper<T>(CqlInterval<T?>? argument, T point, string? precision,
@@ -601,19 +601,19 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region Except
-        public CqlInterval<int?>? IntervalExcept(CqlInterval<int?>? left, CqlInterval<int?>? right) =>
+        public CqlInterval<int?>? Except(CqlInterval<int?>? left, CqlInterval<int?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<long?>? IntervalExcept(CqlInterval<long?>? left, CqlInterval<long?>? right) =>
+        public CqlInterval<long?>? Except(CqlInterval<long?>? left, CqlInterval<long?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<decimal?>? IntervalExcept(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right) =>
+        public CqlInterval<decimal?>? Except(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<CqlQuantity?>? IntervalExcept(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right) =>
+        public CqlInterval<CqlQuantity?>? Except(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<CqlDate?>? IntervalExcept(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right) =>
+        public CqlInterval<CqlDate?>? Except(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<CqlDateTime?>? IntervalExcept(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right) =>
+        public CqlInterval<CqlDateTime?>? Except(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<CqlTime?>? IntervalExcept(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right) =>
+        public CqlInterval<CqlTime?>? Except(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
         public CqlInterval<T?>? IntervalExceptHelper<T>(CqlInterval<T?>? left, CqlInterval<T?>? right,
             Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
@@ -1261,7 +1261,7 @@ namespace Hl7.Cql.Runtime
 
         #region Intersect
 
-        public CqlInterval<T>? IntervalIntersect<T>(CqlInterval<T>? left, CqlInterval<T>? right)
+        public CqlInterval<T>? Intersect<T>(CqlInterval<T>? left, CqlInterval<T>? right)
         {
             if (left == null || right == null) return null;
 
@@ -2265,7 +2265,7 @@ namespace Hl7.Cql.Runtime
 
         #region Union
 
-        public CqlInterval<T>? IntervalUnion<T>(CqlInterval<T>? left, CqlInterval<T>? right)
+        public CqlInterval<T>? Union<T>(CqlInterval<T>? left, CqlInterval<T>? right)
         {
             if (left == null || right == null) return null;
             else

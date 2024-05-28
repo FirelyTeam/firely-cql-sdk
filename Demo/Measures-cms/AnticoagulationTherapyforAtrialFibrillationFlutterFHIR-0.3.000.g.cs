@@ -286,7 +286,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			return ai_;
 		};
 		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
-		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
+		var g_ = context.Operators.Union<Encounter>(c_, f_);
 		IEnumerable<Encounter> i_(Encounter IschemicStrokeEncounter)
 		{
 			var bb_ = this.History_of_Atrial_Ablation();
@@ -373,7 +373,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			return bg_;
 		};
 		var j_ = context.Operators.SelectMany<Encounter, Encounter>(a_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(g_, j_);
+		var k_ = context.Operators.Union<Encounter>(g_, j_);
 
 		return k_;
 	}
@@ -437,7 +437,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			return ai_;
 		};
 		var f_ = context.Operators.Where<Encounter>(a_, e_);
-		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
+		var g_ = context.Operators.Union<Encounter>(c_, f_);
 
 		return g_;
 	}
@@ -450,7 +450,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 	{
 		var a_ = this.Encounter_with_a_History_of_Atrial_Ablation();
 		var b_ = this.Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -534,7 +534,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		};
 		var c_ = context.Operators.Where<Encounter>(a_, b_);
 		var d_ = this.Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter();
-		var e_ = context.Operators.ListUnion<Encounter>(c_, d_);
+		var e_ = context.Operators.Union<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -551,7 +551,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			var d_ = this.Anticoagulant_Therapy();
 			var e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
 			var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
-			var h_ = context.Operators.ListUnion<MedicationRequest>(e_, g_);
+			var h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest DischargeAnticoagulant)
 			{
 				var m_ = QICoreCommon_2_0_000.isCommunity(DischargeAnticoagulant);

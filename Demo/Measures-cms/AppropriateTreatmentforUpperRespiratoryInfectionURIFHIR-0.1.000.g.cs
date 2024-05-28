@@ -371,43 +371,43 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Home_Healthcare_Services();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Initial_Hospital_Observation_Care();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Medical_Disability_Exam();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Observation();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Office_Visit();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		var r_ = this.Outpatient_Consultation();
 		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
 		var t_ = this.Preventive_Care_Services_Group_Counseling();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.ListUnion<Encounter>(s_, u_);
-		var w_ = context.Operators.ListUnion<Encounter>(q_, v_);
+		var v_ = context.Operators.Union<Encounter>(s_, u_);
+		var w_ = context.Operators.Union<Encounter>(q_, v_);
 		var x_ = this.Preventive_Care_Services_Individual_Counseling();
 		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
 		var z_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
 		var aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
-		var ab_ = context.Operators.ListUnion<Encounter>(y_, aa_);
-		var ac_ = context.Operators.ListUnion<Encounter>(w_, ab_);
+		var ab_ = context.Operators.Union<Encounter>(y_, aa_);
+		var ac_ = context.Operators.Union<Encounter>(w_, ab_);
 		var ad_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
 		var ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 		var af_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
 		var ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
-		var ah_ = context.Operators.ListUnion<Encounter>(ae_, ag_);
-		var ai_ = context.Operators.ListUnion<Encounter>(ac_, ah_);
+		var ah_ = context.Operators.Union<Encounter>(ae_, ag_);
+		var ai_ = context.Operators.Union<Encounter>(ac_, ah_);
 		var aj_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var ak_ = context.Operators.RetrieveByValueSet<Encounter>(aj_, null);
 		var al_ = this.Telephone_Visits();
 		var am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, null);
-		var an_ = context.Operators.ListUnion<Encounter>(ak_, am_);
-		var ao_ = context.Operators.ListUnion<Encounter>(ai_, an_);
+		var an_ = context.Operators.Union<Encounter>(ak_, am_);
+		var ao_ = context.Operators.Union<Encounter>(ai_, an_);
 		var ap_ = this.Online_Assessments();
 		var aq_ = context.Operators.RetrieveByValueSet<Encounter>(ap_, null);
 		var ar_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
@@ -435,8 +435,8 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			return be_;
 		};
 		var at_ = context.Operators.Where<Encounter>(ar_, as_);
-		var au_ = context.Operators.ListUnion<Encounter>(aq_, at_);
-		var av_ = context.Operators.ListUnion<Encounter>(ao_, au_);
+		var au_ = context.Operators.Union<Encounter>(aq_, at_);
+		var av_ = context.Operators.Union<Encounter>(ao_, au_);
 		var aw_ = Status_1_6_000.Finished_Encounter(av_);
 		bool? ax_(Encounter ValidEncounter)
 		{
@@ -572,17 +572,17 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		var c_ = this.Comorbid_Conditions_for_Respiratory_Conditions();
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
 		var e_ = Antibiotic_1_5_000.Has_Comorbid_Condition_History(b_, d_);
-		var f_ = context.Operators.ListUnion<Encounter>(a_, e_);
+		var f_ = context.Operators.Union<Encounter>(a_, e_);
 		var h_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection();
 		var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(h_, null);
 		var k_ = context.Operators.RetrieveByValueSet<MedicationRequest>(h_, null);
-		var l_ = context.Operators.ListUnion<MedicationRequest>(i_, k_);
+		var l_ = context.Operators.Union<MedicationRequest>(i_, k_);
 		var m_ = Antibiotic_1_5_000.Has_Antibiotic_Medication_History(b_, l_);
 		var o_ = this.Competing_Conditions_for_Respiratory_Conditions();
 		var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
 		var q_ = Antibiotic_1_5_000.Has_Competing_Diagnosis_History(b_, p_);
-		var r_ = context.Operators.ListUnion<Encounter>(m_, q_);
-		var s_ = context.Operators.ListUnion<Encounter>(f_, r_);
+		var r_ = context.Operators.Union<Encounter>(m_, q_);
+		var s_ = context.Operators.Union<Encounter>(f_, r_);
 
 		return s_;
 	}
@@ -599,7 +599,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var h_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection();
 			var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(h_, null);
 			var k_ = context.Operators.RetrieveByValueSet<MedicationRequest>(h_, null);
-			var l_ = context.Operators.ListUnion<MedicationRequest>(i_, k_);
+			var l_ = context.Operators.Union<MedicationRequest>(i_, k_);
 			bool? m_(MedicationRequest OrderedAntibiotic)
 			{
 				var q_ = OrderedAntibiotic?.AuthoredOnElement;
@@ -631,7 +631,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			return p_;
 		};
 		var d_ = context.Operators.SelectMany<Encounter, Encounter>(a_, c_);
-		var e_ = context.Operators.ListExcept<Encounter>(a_, d_);
+		var e_ = context.Operators.Except<Encounter>(a_, d_);
 		Encounter f_(Encounter EncounterWithURI) => 
 			EncounterWithURI;
 		var g_ = context.Operators.Select<Encounter, Encounter>(e_, f_);

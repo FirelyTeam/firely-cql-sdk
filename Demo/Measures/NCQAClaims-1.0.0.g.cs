@@ -69,11 +69,11 @@ public class NCQAClaims_1_0_0
 			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var e_ = d_?.codes;
 			var f_ = NCQATerminology_1_0_0.Professional();
-			var g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
+			var g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 			var i_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var j_ = i_?.codes;
 			var k_ = NCQATerminology_1_0_0.Institutional();
-			var l_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
+			var l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
 			var m_ = context.Operators.Or(g_, l_);
 
 			return m_;
@@ -92,7 +92,7 @@ public class NCQAClaims_1_0_0
 			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var e_ = d_?.codes;
 			var f_ = NCQATerminology_1_0_0.Pharmacy();
-			var g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
+			var g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
 			return g_;
 		};
@@ -110,11 +110,11 @@ public class NCQAClaims_1_0_0
 			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var e_ = d_?.codes;
 			var f_ = NCQATerminology_1_0_0.Professional();
-			var g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
+			var g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 			var i_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var j_ = i_?.codes;
 			var k_ = NCQATerminology_1_0_0.Institutional();
-			var l_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
+			var l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
 			var m_ = context.Operators.Or(g_, l_);
 
 			return m_;
@@ -133,7 +133,7 @@ public class NCQAClaims_1_0_0
 			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var e_ = d_?.codes;
 			var f_ = NCQATerminology_1_0_0.Pharmacy();
-			var g_ = context.Operators.ListContains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
+			var g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
 			return g_;
 		};
@@ -3513,7 +3513,7 @@ public class NCQAClaims_1_0_0
 					return bz_;
 				};
 				var bk_ = context.Operators.SelectMany<Claim, Claim>(bd_, bj_);
-				var bl_ = context.Operators.ListExcept<Claim>(bd_, bk_);
+				var bl_ = context.Operators.Except<Claim>(bd_, bk_);
 				var bm_ = new Tuple_eaabEEMNTgcTCVVWQFDOgRNO
 				{
 					InpatientDischarge = bd_,

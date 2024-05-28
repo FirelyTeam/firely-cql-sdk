@@ -762,7 +762,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? g_(Encounter E)
 		{
@@ -790,17 +790,17 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var h_ = context.Operators.Where<Encounter>(f_, g_);
 		var i_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, null);
-		var k_ = context.Operators.ListUnion<Encounter>(h_, j_);
-		var l_ = context.Operators.ListUnion<Encounter>(e_, k_);
+		var k_ = context.Operators.Union<Encounter>(h_, j_);
+		var l_ = context.Operators.Union<Encounter>(e_, k_);
 		var m_ = this.Outpatient_Consultation();
 		var n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
 		var o_ = this.Online_Assessments();
 		var p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
-		var q_ = context.Operators.ListUnion<Encounter>(n_, p_);
-		var r_ = context.Operators.ListUnion<Encounter>(l_, q_);
+		var q_ = context.Operators.Union<Encounter>(n_, p_);
+		var r_ = context.Operators.Union<Encounter>(l_, q_);
 		var s_ = this.Telephone_Visits();
 		var t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, null);
-		var u_ = context.Operators.ListUnion<Encounter>(r_, t_);
+		var u_ = context.Operators.Union<Encounter>(r_, t_);
 		bool? v_(Encounter ValidEncounters)
 		{
 			var ah_ = this.Measurement_Period();
@@ -1086,7 +1086,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var f_ = this.Aromatase_Inhibitors();
 		var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
 		var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var j_ = context.Operators.ListUnion<MedicationRequest>(g_, i_);
+		var j_ = context.Operators.Union<MedicationRequest>(g_, i_);
 		var k_ = Status_1_6_000.Active_Medication(j_);
 		bool? l_(MedicationRequest AromataseInhibitorActive)
 		{
@@ -1100,10 +1100,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return am_;
 		};
 		var m_ = context.Operators.Where<MedicationRequest>(k_, l_);
-		var n_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (m_ as IEnumerable<object>));
+		var n_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (m_ as IEnumerable<object>));
 		var p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
 		var r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var s_ = context.Operators.ListUnion<MedicationRequest>(p_, r_);
+		var s_ = context.Operators.Union<MedicationRequest>(p_, r_);
 		var t_ = Status_1_6_000.Active_or_Completed_Medication_Request(s_);
 		bool? u_(MedicationRequest AromataseInhibitorOrder)
 		{
@@ -1138,9 +1138,9 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return ar_;
 		};
 		var v_ = context.Operators.Where<MedicationRequest>(t_, u_);
-		var w_ = context.Operators.ListUnion<object>(n_, (v_ as IEnumerable<object>));
+		var w_ = context.Operators.Union<object>(n_, (v_ as IEnumerable<object>));
 		var x_ = this.Parent_History_of_Hip_Fracture_Assessment();
-		var y_ = context.Operators.ListUnion<object>(w_, (x_ as IEnumerable<object>));
+		var y_ = context.Operators.Union<object>(w_, (x_ as IEnumerable<object>));
 		var z_ = context.Operators.Exists<object>(y_);
 
 		return z_;
@@ -1155,7 +1155,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var a_ = this.Glucocorticoids__oral_only_();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = Status_1_6_000.Active_Medication(e_);
 		bool? g_(MedicationRequest OralGlucocorticoid)
 		{
@@ -1180,7 +1180,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var x_ = context.Operators.End(w_);
 			var y_ = context.Operators.DateFrom(x_);
 			var z_ = context.Operators.Interval(v_, y_, true, true);
-			var aa_ = context.Operators.IntervalIntersect<CqlDate>(r_, z_);
+			var aa_ = context.Operators.Intersect<CqlDate>(r_, z_);
 
 			return aa_;
 		};
@@ -1295,7 +1295,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var m_ = context.Operators.Where<Procedure>(k_, l_);
 		var n_ = this.Unilateral_Oophorectomy_Right();
 		var o_ = context.Operators.RetrieveByValueSet<Procedure>(n_, null);
-		var p_ = context.Operators.ListUnion<Procedure>(m_, o_);
+		var p_ = context.Operators.Union<Procedure>(m_, o_);
 		var q_ = this.ProcedureInPatientHistory(p_);
 		var r_ = context.Operators.Exists<Procedure>(q_);
 		var t_ = context.Operators.RetrieveByValueSet<Procedure>(j_, null);
@@ -1325,7 +1325,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var v_ = context.Operators.Where<Procedure>(t_, u_);
 		var w_ = this.Unilateral_Oophorectomy_Left();
 		var x_ = context.Operators.RetrieveByValueSet<Procedure>(w_, null);
-		var y_ = context.Operators.ListUnion<Procedure>(v_, x_);
+		var y_ = context.Operators.Union<Procedure>(v_, x_);
 		var z_ = this.ProcedureInPatientHistory(y_);
 		var aa_ = context.Operators.Exists<Procedure>(z_);
 		var ab_ = context.Operators.And(r_, aa_);
@@ -1344,10 +1344,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		var c_ = this.Kidney_Transplant();
 		var d_ = context.Operators.RetrieveByValueSet<Procedure>(c_, null);
-		var e_ = context.Operators.ListUnion<Procedure>(b_, d_);
+		var e_ = context.Operators.Union<Procedure>(b_, d_);
 		var f_ = this.Bone_Marrow_Transplant();
 		var g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
-		var h_ = context.Operators.ListUnion<Procedure>(e_, g_);
+		var h_ = context.Operators.Union<Procedure>(e_, g_);
 		var i_ = this.ProcedureInPatientHistory(h_);
 		var j_ = context.Operators.Exists<Procedure>(i_);
 
@@ -1365,61 +1365,61 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		var c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
 		var d_ = this.Malabsorption_Syndromes();
 		var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
-		var f_ = context.Operators.ListUnion<Condition>(c_, e_);
+		var f_ = context.Operators.Union<Condition>(c_, e_);
 		var g_ = this.Chronic_Malnutrition();
 		var h_ = context.Operators.RetrieveByValueSet<Condition>(g_, null);
 		var i_ = this.Chronic_Liver_Disease();
 		var j_ = context.Operators.RetrieveByValueSet<Condition>(i_, null);
-		var k_ = context.Operators.ListUnion<Condition>(h_, j_);
-		var l_ = context.Operators.ListUnion<Condition>(f_, k_);
+		var k_ = context.Operators.Union<Condition>(h_, j_);
+		var l_ = context.Operators.Union<Condition>(f_, k_);
 		var m_ = this.Rheumatoid_Arthritis();
 		var n_ = context.Operators.RetrieveByValueSet<Condition>(m_, null);
 		var o_ = this.Hyperthyroidism();
 		var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
-		var q_ = context.Operators.ListUnion<Condition>(n_, p_);
-		var r_ = context.Operators.ListUnion<Condition>(l_, q_);
+		var q_ = context.Operators.Union<Condition>(n_, p_);
+		var r_ = context.Operators.Union<Condition>(l_, q_);
 		var s_ = this.Type_1_Diabetes();
 		var t_ = context.Operators.RetrieveByValueSet<Condition>(s_, null);
 		var u_ = this.End_Stage_Renal_Disease();
 		var v_ = context.Operators.RetrieveByValueSet<Condition>(u_, null);
-		var w_ = context.Operators.ListUnion<Condition>(t_, v_);
-		var x_ = context.Operators.ListUnion<Condition>(r_, w_);
+		var w_ = context.Operators.Union<Condition>(t_, v_);
+		var x_ = context.Operators.Union<Condition>(r_, w_);
 		var y_ = this.Osteogenesis_Imperfecta();
 		var z_ = context.Operators.RetrieveByValueSet<Condition>(y_, null);
 		var aa_ = this.Ankylosing_Spondylitis();
 		var ab_ = context.Operators.RetrieveByValueSet<Condition>(aa_, null);
-		var ac_ = context.Operators.ListUnion<Condition>(z_, ab_);
-		var ad_ = context.Operators.ListUnion<Condition>(x_, ac_);
+		var ac_ = context.Operators.Union<Condition>(z_, ab_);
+		var ad_ = context.Operators.Union<Condition>(x_, ac_);
 		var ae_ = this.Psoriatic_Arthritis();
 		var af_ = context.Operators.RetrieveByValueSet<Condition>(ae_, null);
 		var ag_ = this.Ehlers_Danlos_Syndrome();
 		var ah_ = context.Operators.RetrieveByValueSet<Condition>(ag_, null);
-		var ai_ = context.Operators.ListUnion<Condition>(af_, ah_);
-		var aj_ = context.Operators.ListUnion<Condition>(ad_, ai_);
+		var ai_ = context.Operators.Union<Condition>(af_, ah_);
+		var aj_ = context.Operators.Union<Condition>(ad_, ai_);
 		var ak_ = this.Cushings_Syndrome();
 		var al_ = context.Operators.RetrieveByValueSet<Condition>(ak_, null);
 		var am_ = this.Hyperparathyroidism();
 		var an_ = context.Operators.RetrieveByValueSet<Condition>(am_, null);
-		var ao_ = context.Operators.ListUnion<Condition>(al_, an_);
-		var ap_ = context.Operators.ListUnion<Condition>(aj_, ao_);
+		var ao_ = context.Operators.Union<Condition>(al_, an_);
+		var ap_ = context.Operators.Union<Condition>(aj_, ao_);
 		var aq_ = this.Marfans_Syndrome();
 		var ar_ = context.Operators.RetrieveByValueSet<Condition>(aq_, null);
 		var as_ = this.Lupus();
 		var at_ = context.Operators.RetrieveByValueSet<Condition>(as_, null);
-		var au_ = context.Operators.ListUnion<Condition>(ar_, at_);
-		var av_ = context.Operators.ListUnion<Condition>(ap_, au_);
+		var au_ = context.Operators.Union<Condition>(ar_, at_);
+		var av_ = context.Operators.Union<Condition>(ap_, au_);
 		var aw_ = this.Multiple_Myeloma();
 		var ax_ = context.Operators.RetrieveByValueSet<Condition>(aw_, null);
 		var ay_ = this.Premature_Menopause();
 		var az_ = context.Operators.RetrieveByValueSet<Condition>(ay_, null);
-		var ba_ = context.Operators.ListUnion<Condition>(ax_, az_);
-		var bb_ = context.Operators.ListUnion<Condition>(av_, ba_);
+		var ba_ = context.Operators.Union<Condition>(ax_, az_);
+		var bb_ = context.Operators.Union<Condition>(av_, ba_);
 		var bc_ = this.Eating_Disorders();
 		var bd_ = context.Operators.RetrieveByValueSet<Condition>(bc_, null);
 		var be_ = this.Amenorrhea();
 		var bf_ = context.Operators.RetrieveByValueSet<Condition>(be_, null);
-		var bg_ = context.Operators.ListUnion<Condition>(bd_, bf_);
-		var bh_ = context.Operators.ListUnion<Condition>(bb_, bg_);
+		var bg_ = context.Operators.Union<Condition>(bd_, bf_);
+		var bh_ = context.Operators.Union<Condition>(bb_, bg_);
 		var bi_ = this.DiagnosisInPatientHistory(bh_);
 		var bj_ = context.Operators.Exists<Condition>(bi_);
 		var bk_ = context.Operators.Or(a_, bj_);
@@ -1530,7 +1530,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return aj_;
 		};
 		var l_ = context.Operators.Where<Observation>(j_, k_);
-		var m_ = context.Operators.ListUnion<Observation>(f_, l_);
+		var m_ = context.Operators.Union<Observation>(f_, l_);
 		var n_ = this.Osteoporosis_Index_of_Risk_panel();
 		var o_ = context.Operators.ToList<CqlCode>(n_);
 		var p_ = context.Operators.RetrieveByCodes<Observation>(o_, null);
@@ -1559,8 +1559,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return ar_;
 		};
 		var y_ = context.Operators.Where<Observation>(w_, x_);
-		var z_ = context.Operators.ListUnion<Observation>(s_, y_);
-		var aa_ = context.Operators.ListUnion<Observation>(m_, z_);
+		var z_ = context.Operators.Union<Observation>(s_, y_);
+		var aa_ = context.Operators.Union<Observation>(m_, z_);
 		bool? ab_(Observation RiskAssessment)
 		{
 			var as_ = RiskAssessment?.Effective;

@@ -58,7 +58,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			var l_ = context.Operators.Start(participationPeriod);
 			var m_ = context.Operators.End(participationPeriod);
 			var n_ = context.Operators.Interval(l_, m_, true, true);
-			var o_ = context.Operators.IntervalIntersect<CqlDate>(k_, n_);
+			var o_ = context.Operators.Intersect<CqlDate>(k_, n_);
 
 			return o_;
 		};
@@ -123,7 +123,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 	{
 		var a_ = this.Collapsed_Coverage_Intervals(collapsedI);
 		var b_ = this.Collapsed_Coverage_Adjacent_Intervals(adjacentI);
-		var c_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(a_, b_);
+		var c_ = context.Operators.Union<CqlInterval<CqlDate>>(a_, b_);
 		var d_ = NCQACQLBase_1_0_0.Collapse_Date_Interval_Workaround(c_);
 
 		return d_;
