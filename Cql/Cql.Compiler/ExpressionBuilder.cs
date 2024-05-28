@@ -272,7 +272,7 @@ namespace Hl7.Cql.Compiler
                         ToLong e           => ChangeType(e.operand!, typeof(long?)),
                         ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
                         Coalesce e         => Coalesce(e),
-                        Collapse e         => Collapse(e),
+                        // Collapse e         => Collapse(e),
                         Contains e         => Contains(e),
                         Equivalent e       => Equivalent(e),
                         FunctionRef e      => FunctionRef(e),
@@ -457,6 +457,9 @@ namespace Hl7.Cql.Compiler
                     TimeOfDay or
                     Today => [],
 
+                Collapse e => Collapse(e),
+                Contains e => Contains(e),
+
                 Combine e => [((IGetSource)element).source, e.separator],
                 IndexOf e => [((IGetSource)element).source, e.element],
                 Slice e => [((IGetSource)element).source, e.startIndex, e.endIndex],
@@ -475,6 +478,46 @@ namespace Hl7.Cql.Compiler
             };
             return args;
             // ReSharper restore CoVariantArrayConversion
+
+            object?[] Collapse(Collapse e)
+            {
+                var operand = TranslateArg(e.operand![0]!);
+                if (_typeResolver.IsListType(operand.Type))
+                {
+                    var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
+                    if (elementType.IsCqlInterval(out var pointType))
+                    {
+                        var precision = NullExpression.String;
+                        if (e.operand.Length > 1 && e.operand[1] is Quantity quant)
+                        {
+                            precision = Expression.Constant(quant.unit, typeof(string));
+                        }
+
+                        return [operand, precision];
+                    }
+                }
+                throw this.NewExpressionBuildingException($"Collapse expects a list of intervals, but got {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)}");
+            }
+
+            object?[] Contains(Contains e)
+            {
+                var operand = TranslateArg(e.operand![0]!);
+                if (_typeResolver.IsListType(operand.Type))
+                {
+                    var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
+                    if (elementType.IsCqlInterval(out var pointType))
+                    {
+                        var precision = NullExpression.String;
+                        if (e.operand.Length > 1 && e.operand[1] is Quantity quant)
+                        {
+                            precision = Expression.Constant(quant.unit, typeof(string));
+                        }
+
+                        return [operand, precision];
+                    }
+                }
+                throw this.NewExpressionBuildingException($"Collapse expects a list of intervals, but got {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)}");
+            }
         }
 
         protected Expression? Mutate(Element op, Expression? expression) =>
@@ -1405,26 +1448,6 @@ namespace Hl7.Cql.Compiler
 
     partial class ExpressionBuilderContext
     {
-        private Expression Collapse(Collapse e)
-        {
-            var operand = TranslateArg(e.operand![0]!);
-            if (_typeResolver.IsListType(operand.Type))
-            {
-                var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
-                if (elementType.IsCqlInterval(out var pointType))
-                {
-                    var precision = NullExpression.String;
-                    if (e.operand.Length > 1 && e.operand[1] is Quantity quant)
-                    {
-                        precision = Expression.Constant(quant.unit, typeof(string));
-                    }
-
-                    return BindCqlOperator(nameof(ICqlOperators.Collapse), operand, precision);
-                }
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
         private Expression Contains(Contains e)
         {
             var left = TranslateArg(e!.operand![0]!);
