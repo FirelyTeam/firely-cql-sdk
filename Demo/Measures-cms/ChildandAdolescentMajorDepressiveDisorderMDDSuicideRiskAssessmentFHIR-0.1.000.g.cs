@@ -317,25 +317,25 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Outpatient_Consultation();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Psych_Visit_Diagnostic_Evaluation();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Psych_Visit_for_Family_Psychotherapy();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Psych_Visit_Psychotherapy();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Psychoanalysis();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		var r_ = this.Group_Psychotherapy();
 		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
 		var t_ = this.Telehealth_Services();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.ListUnion<Encounter>(s_, u_);
-		var w_ = context.Operators.ListUnion<Encounter>(q_, v_);
+		var v_ = context.Operators.Union<Encounter>(s_, u_);
+		var w_ = context.Operators.Union<Encounter>(q_, v_);
 		bool? x_(Encounter ValidEncounter)
 		{
 			var z_ = ValidEncounter?.StatusElement;

@@ -272,8 +272,6 @@ namespace Hl7.Cql.Compiler
                         ToLong e           => ChangeType(e.operand!, typeof(long?)),
                         ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
                         Coalesce e         => Coalesce(e),
-                        // Collapse e         => Collapse(e),
-                        // Contains e         => Contains(e),
                         Equivalent e       => Equivalent(e),
                         FunctionRef e      => FunctionRef(e),
                         AliasRef e         => GetScopeExpression(e.name!),
@@ -283,7 +281,6 @@ namespace Hl7.Cql.Compiler
                         IncludedIn e       => IncludedIn(e),
                         Includes e         => Includes(e),
                         Instance e         => Instance(e),
-                        // Intersect e        => Intersect(e),
                         Is e               => Is(e),
                         IsNull e           => IsNull(e),
                         List e             => List(e),
@@ -299,7 +296,6 @@ namespace Hl7.Cql.Compiler
                         Property e         => Property(e),
                         Query e            => Query(e),
                         Tuple e            => Tuple(e),
-                        Union e            => Union(e),
 
                         // InvokeDefinitionThroughRuntimeContext
                         CodeRef e          => CodeRef(e),
@@ -460,6 +456,7 @@ namespace Hl7.Cql.Compiler
 
                 Collapse e => Collapse(e),
                 Contains e => Contains(e),
+                Union e => Union(e),
 
                 Combine e => [((IGetSource)element).source, e.separator],
                 IndexOf e => [((IGetSource)element).source, e.element],
@@ -514,6 +511,23 @@ namespace Hl7.Cql.Compiler
                     return [left, right, e.precisionOrNull];
                 }
                 throw this.NewExpressionBuildingException($"Contains expects two arguments, but got {e.operand.Length}");
+            }
+
+            object?[] Union(Union e)
+            {
+                if (TranslateArgs(e.operand) is [{ } left, { } right])
+                {
+                    if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
+                        && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
+                        && leftListElemType == rightListElemType)
+                        return [left, right];
+
+                    if (left.Type.IsCqlInterval(out var leftIntvType)
+                        && right.Type.IsCqlInterval(out var rightIntvType)
+                        && leftIntvType == rightIntvType)
+                        return [left, right];
+                }
+                throw this.NewExpressionBuildingException($"Union expects two arguments of the same list or interval type.");
             }
         }
 
@@ -1627,7 +1641,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression Union(Union e)
+        protected Expression UnionX(Union e)
         {
             var left = TranslateArg(e.operand![0]);
             var right = TranslateArg(e.operand![1]);
@@ -1640,7 +1654,7 @@ namespace Hl7.Cql.Compiler
                     if (leftElementType != rightElementType)
                         throw this.NewExpressionBuildingException($"Union requires both operands to be of the same type, " +
                                                                   $"but left is {leftElementType.Name} and right is {rightElementType.Name}.");
-                    return BindCqlOperator(nameof(ICqlOperators.ListUnion), left, right);
+                    return BindCqlOperator(nameof(ICqlOperators.Union), left, right);
                 }
             }
             else if (left.Type.IsCqlInterval(out var leftPointType))
@@ -1649,7 +1663,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw this.NewExpressionBuildingException();
-                    return BindCqlOperator(nameof(ICqlOperators.IntervalUnion), left, right);
+                    return BindCqlOperator(nameof(ICqlOperators.Union), left, right);
                 }
             }
             throw new NotImplementedException().WithContext(this);

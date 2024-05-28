@@ -811,7 +811,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var d_ = this.Follow_up_4_6_months__finding_();
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, null);
-		var g_ = context.Operators.ListUnion<ServiceRequest>(c_, f_);
+		var g_ = context.Operators.Union<ServiceRequest>(c_, f_);
 		bool? h_(ServiceRequest FollowUp)
 		{
 			var j_ = FollowUp?.IntentElement;
@@ -836,16 +836,16 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var c_ = this.Weight_Reduction_Recommended();
 		var d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(c_, null);
-		var e_ = context.Operators.ListUnion<ServiceRequest>(b_, d_);
+		var e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		var f_ = this.Dietary_Recommendations();
 		var g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
 		var h_ = this.Recommendation_to_Increase_Physical_Activity();
 		var i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, null);
-		var j_ = context.Operators.ListUnion<ServiceRequest>(g_, i_);
-		var k_ = context.Operators.ListUnion<ServiceRequest>(e_, j_);
+		var j_ = context.Operators.Union<ServiceRequest>(g_, i_);
+		var k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		var l_ = this.Referral_or_Counseling_for_Alcohol_Consumption();
 		var m_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, null);
-		var n_ = context.Operators.ListUnion<ServiceRequest>(k_, m_);
+		var n_ = context.Operators.Union<ServiceRequest>(k_, m_);
 		bool? o_(ServiceRequest NonPharmaInterventions)
 		{
 			var q_ = NonPharmaInterventions?.IntentElement;
@@ -963,7 +963,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			return ah_;
 		};
 		var h_ = context.Operators.SelectMany<Encounter, Encounter>(a_, g_);
-		var i_ = context.Operators.ListUnion<Encounter>(e_, h_);
+		var i_ = context.Operators.Union<Encounter>(e_, h_);
 
 		return i_;
 	}
@@ -1516,7 +1516,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		};
 		var d_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(b_, c_);
 		var e_ = this.Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading();
-		var f_ = context.Operators.ListUnion<ServiceRequest>(d_, e_);
+		var f_ = context.Operators.Union<ServiceRequest>(d_, e_);
 
 		return f_;
 	}
@@ -1830,10 +1830,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var d_ = this.EKG_study();
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, null);
-		var g_ = context.Operators.ListUnion<ServiceRequest>(c_, f_);
+		var g_ = context.Operators.Union<ServiceRequest>(c_, f_);
 		var h_ = this.Laboratory_Tests_for_Hypertension();
 		var i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, null);
-		var j_ = context.Operators.ListUnion<ServiceRequest>(g_, i_);
+		var j_ = context.Operators.Union<ServiceRequest>(g_, i_);
 		bool? k_(ServiceRequest EKGLab)
 		{
 			var m_ = EKGLab?.IntentElement;
@@ -1952,7 +1952,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			return v_;
 		};
 		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
-		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
+		var g_ = context.Operators.Union<Encounter>(c_, f_);
 
 		return g_;
 	}
@@ -2283,7 +2283,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var ap_ = this.Pharmacologic_Therapy_for_Hypertension();
 			var aq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
 			var as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
-			var at_ = context.Operators.ListUnion<MedicationRequest>(aq_, as_);
+			var at_ = context.Operators.Union<MedicationRequest>(aq_, as_);
 			bool? au_(MedicationRequest Medications)
 			{
 				var ay_ = Medications?.AuthoredOnElement;
@@ -2359,7 +2359,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			return v_;
 		};
 		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
-		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
+		var g_ = context.Operators.Union<Encounter>(c_, f_);
 
 		return g_;
 	}
@@ -2372,13 +2372,13 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	{
 		var a_ = this.Encounter_with_Normal_Blood_Pressure_Reading();
 		var b_ = this.Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 		var d_ = this.Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions();
 		var e_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions();
-		var f_ = context.Operators.ListUnion<Encounter>(d_, e_);
-		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
+		var f_ = context.Operators.Union<Encounter>(d_, e_);
+		var g_ = context.Operators.Union<Encounter>(c_, f_);
 		var h_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions();
-		var i_ = context.Operators.ListUnion<Encounter>(g_, h_);
+		var i_ = context.Operators.Union<Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -2398,7 +2398,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var g_ = this.Diastolic_blood_pressure();
 			var h_ = context.Operators.ToList<CqlCode>(g_);
 			var i_ = context.Operators.RetrieveByCodes<Observation>(h_, null);
-			var j_ = context.Operators.ListUnion<Observation>(f_, i_);
+			var j_ = context.Operators.Union<Observation>(f_, i_);
 			bool? k_(Observation NoBPScreen)
 			{
 				var o_ = NoBPScreen?.IssuedElement;
@@ -2486,27 +2486,27 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var a_ = this.Lifestyle_Recommendation();
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<ServiceRequest>(b_, d_);
+		var e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		var f_ = this.Weight_Reduction_Recommended();
 		var g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
 		var i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
-		var j_ = context.Operators.ListUnion<ServiceRequest>(g_, i_);
-		var k_ = context.Operators.ListUnion<ServiceRequest>(e_, j_);
+		var j_ = context.Operators.Union<ServiceRequest>(g_, i_);
+		var k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		var l_ = this.Dietary_Recommendations();
 		var m_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, null);
 		var o_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, null);
-		var p_ = context.Operators.ListUnion<ServiceRequest>(m_, o_);
-		var q_ = context.Operators.ListUnion<ServiceRequest>(k_, p_);
+		var p_ = context.Operators.Union<ServiceRequest>(m_, o_);
+		var q_ = context.Operators.Union<ServiceRequest>(k_, p_);
 		var r_ = this.Recommendation_to_Increase_Physical_Activity();
 		var s_ = context.Operators.RetrieveByValueSet<ServiceRequest>(r_, null);
 		var u_ = context.Operators.RetrieveByValueSet<ServiceRequest>(r_, null);
-		var v_ = context.Operators.ListUnion<ServiceRequest>(s_, u_);
-		var w_ = context.Operators.ListUnion<ServiceRequest>(q_, v_);
+		var v_ = context.Operators.Union<ServiceRequest>(s_, u_);
+		var w_ = context.Operators.Union<ServiceRequest>(q_, v_);
 		var x_ = this.Referral_or_Counseling_for_Alcohol_Consumption();
 		var y_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, null);
 		var aa_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, null);
-		var ab_ = context.Operators.ListUnion<ServiceRequest>(y_, aa_);
-		var ac_ = context.Operators.ListUnion<ServiceRequest>(w_, ab_);
+		var ab_ = context.Operators.Union<ServiceRequest>(y_, aa_);
+		var ac_ = context.Operators.Union<ServiceRequest>(w_, ab_);
 		bool? ad_(ServiceRequest NonPharmIntervention)
 		{
 			bool? af_(Extension @this)
@@ -2558,12 +2558,12 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var d_ = this.EKG_study();
 		var e_ = context.Operators.ToList<CqlCode>(d_);
 		var f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, null);
-		var g_ = context.Operators.ListUnion<ServiceRequest>(c_, f_);
+		var g_ = context.Operators.Union<ServiceRequest>(c_, f_);
 		var h_ = this.Laboratory_Tests_for_Hypertension();
 		var i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, null);
 		var k_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, null);
-		var l_ = context.Operators.ListUnion<ServiceRequest>(i_, k_);
-		var m_ = context.Operators.ListUnion<ServiceRequest>(g_, l_);
+		var l_ = context.Operators.Union<ServiceRequest>(i_, k_);
+		var m_ = context.Operators.Union<ServiceRequest>(g_, l_);
 		bool? n_(ServiceRequest LabECGNotDone)
 		{
 			bool? p_(Extension @this)
@@ -2607,15 +2607,15 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<ServiceRequest>(b_, d_);
+		var e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		var f_ = this.Follow_up_2_3_months__finding_();
 		var g_ = context.Operators.ToList<CqlCode>(f_);
 		var h_ = context.Operators.RetrieveByCodes<ServiceRequest>(g_, null);
 		var i_ = this.Follow_up_4_6_months__finding_();
 		var j_ = context.Operators.ToList<CqlCode>(i_);
 		var k_ = context.Operators.RetrieveByCodes<ServiceRequest>(j_, null);
-		var l_ = context.Operators.ListUnion<ServiceRequest>(h_, k_);
-		var m_ = context.Operators.ListUnion<ServiceRequest>(e_, l_);
+		var l_ = context.Operators.Union<ServiceRequest>(h_, k_);
+		var m_ = context.Operators.Union<ServiceRequest>(e_, l_);
 		bool? n_(ServiceRequest SecondHTNDeclinedReferralAndFollowUp)
 		{
 			bool? t_(Extension @this)
@@ -2652,9 +2652,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		};
 		var o_ = context.Operators.Where<ServiceRequest>(m_, n_);
 		var p_ = this.Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered();
-		var q_ = context.Operators.ListUnion<ServiceRequest>(o_, p_);
+		var q_ = context.Operators.Union<ServiceRequest>(o_, p_);
 		var r_ = this.NonPharmacological_Intervention_Not_Ordered();
-		var s_ = context.Operators.ListUnion<ServiceRequest>(q_, r_);
+		var s_ = context.Operators.Union<ServiceRequest>(q_, r_);
 
 		return s_;
 	}
@@ -2668,12 +2668,12 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<ServiceRequest>(b_, d_);
+		var e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		var f_ = this.Follow_Up_Within_4_Weeks();
 		var g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
 		var i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
-		var j_ = context.Operators.ListUnion<ServiceRequest>(g_, i_);
-		var k_ = context.Operators.ListUnion<ServiceRequest>(e_, j_);
+		var j_ = context.Operators.Union<ServiceRequest>(g_, i_);
+		var k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		bool? l_(ServiceRequest SecondHTN140Over90ReferralFollowUpNotDone)
 		{
 			bool? z_(Extension @this)
@@ -2712,7 +2712,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		var n_ = this.Pharmacologic_Therapy_for_Hypertension();
 		var o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
 		var q_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
-		var r_ = context.Operators.ListUnion<MedicationRequest>(o_, q_);
+		var r_ = context.Operators.Union<MedicationRequest>(o_, q_);
 		bool? s_(MedicationRequest MedicationRequestNotOrdered)
 		{
 			var as_ = MedicationRequestNotOrdered?.StatusElement;
@@ -2723,11 +2723,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			return av_;
 		};
 		var t_ = context.Operators.Where<MedicationRequest>(r_, s_);
-		var u_ = context.Operators.ListUnion<object>((m_ as IEnumerable<object>), (t_ as IEnumerable<object>));
+		var u_ = context.Operators.Union<object>((m_ as IEnumerable<object>), (t_ as IEnumerable<object>));
 		var v_ = this.Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered();
-		var w_ = context.Operators.ListUnion<object>(u_, (v_ as IEnumerable<object>));
+		var w_ = context.Operators.Union<object>(u_, (v_ as IEnumerable<object>));
 		var x_ = this.NonPharmacological_Intervention_Not_Ordered();
-		var y_ = context.Operators.ListUnion<object>(w_, (x_ as IEnumerable<object>));
+		var y_ = context.Operators.Union<object>(w_, (x_ as IEnumerable<object>));
 
 		return y_;
 	}
@@ -2744,15 +2744,15 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			var x_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
 			var y_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, null);
 			var aa_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, null);
-			var ab_ = context.Operators.ListUnion<ServiceRequest>(y_, aa_);
+			var ab_ = context.Operators.Union<ServiceRequest>(y_, aa_);
 			var ac_ = this.Follow_up_2_3_months__finding_();
 			var ad_ = context.Operators.ToList<CqlCode>(ac_);
 			var ae_ = context.Operators.RetrieveByCodes<ServiceRequest>(ad_, null);
 			var af_ = this.Follow_up_4_6_months__finding_();
 			var ag_ = context.Operators.ToList<CqlCode>(af_);
 			var ah_ = context.Operators.RetrieveByCodes<ServiceRequest>(ag_, null);
-			var ai_ = context.Operators.ListUnion<ServiceRequest>(ae_, ah_);
-			var aj_ = context.Operators.ListUnion<ServiceRequest>(ab_, ai_);
+			var ai_ = context.Operators.Union<ServiceRequest>(ae_, ah_);
+			var aj_ = context.Operators.Union<ServiceRequest>(ab_, ai_);
 			bool? ak_(ServiceRequest ElevatedBPDeclinedInterventions)
 			{
 				bool? ao_(Extension @this)
@@ -2822,19 +2822,19 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			return br_;
 		};
 		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
-		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
+		var g_ = context.Operators.Union<Encounter>(c_, f_);
 		var h_ = this.Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80();
 		IEnumerable<Encounter> i_(Encounter FirstHTNEncounter)
 		{
 			var bx_ = this.Follow_Up_Within_4_Weeks();
 			var by_ = context.Operators.RetrieveByValueSet<ServiceRequest>(bx_, null);
 			var ca_ = context.Operators.RetrieveByValueSet<ServiceRequest>(bx_, null);
-			var cb_ = context.Operators.ListUnion<ServiceRequest>(by_, ca_);
+			var cb_ = context.Operators.Union<ServiceRequest>(by_, ca_);
 			var cc_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
 			var cd_ = context.Operators.RetrieveByValueSet<ServiceRequest>(cc_, null);
 			var cf_ = context.Operators.RetrieveByValueSet<ServiceRequest>(cc_, null);
-			var cg_ = context.Operators.ListUnion<ServiceRequest>(cd_, cf_);
-			var ch_ = context.Operators.ListUnion<ServiceRequest>(cb_, cg_);
+			var cg_ = context.Operators.Union<ServiceRequest>(cd_, cf_);
+			var ch_ = context.Operators.Union<ServiceRequest>(cb_, cg_);
 			bool? ci_(ServiceRequest FirstHTNDeclinedInterventions)
 			{
 				bool? cm_(Extension @this)
@@ -2904,8 +2904,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			return dp_;
 		};
 		var m_ = context.Operators.SelectMany<Encounter, Encounter>(h_, l_);
-		var n_ = context.Operators.ListUnion<Encounter>(j_, m_);
-		var o_ = context.Operators.ListUnion<Encounter>(g_, n_);
+		var n_ = context.Operators.Union<Encounter>(j_, m_);
+		var o_ = context.Operators.Union<Encounter>(g_, n_);
 		var p_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89();
 		IEnumerable<Encounter> q_(Encounter SecondHTNEncounter)
 		{
@@ -2950,8 +2950,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			return ej_;
 		};
 		var u_ = context.Operators.SelectMany<Encounter, Encounter>(s_, t_);
-		var v_ = context.Operators.ListUnion<Encounter>(r_, u_);
-		var w_ = context.Operators.ListUnion<Encounter>(o_, v_);
+		var v_ = context.Operators.Union<Encounter>(r_, u_);
+		var w_ = context.Operators.Union<Encounter>(o_, v_);
 
 		return w_;
 	}
@@ -2964,7 +2964,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	{
 		var a_ = this.Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement();
 		var b_ = this.Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}

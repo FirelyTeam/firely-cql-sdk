@@ -279,7 +279,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 		var a_ = this.Hypoglycemics_Severe_Hypoglycemia();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationAdministration>(b_, d_);
+		var e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration HypoMedication)
 		{
 			var h_ = HypoMedication?.StatusElement;

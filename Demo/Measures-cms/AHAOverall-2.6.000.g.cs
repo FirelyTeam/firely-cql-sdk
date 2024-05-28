@@ -332,16 +332,16 @@ public class AHAOverall_2_6_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Home_Healthcare_Services();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Nursing_Facility_Visit();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Office_Visit();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Outpatient_Consultation();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = context.Operators.ListUnion<Encounter>(k_, m_);
+		var n_ = context.Operators.Union<Encounter>(k_, m_);
 		IEnumerable<Encounter> o_(Encounter QualifyingEncounter)
 		{
 			var s_ = this.Heart_Failure();
@@ -413,7 +413,7 @@ public class AHAOverall_2_6_000
 		var d_ = context.Operators.Where<Observation>(b_, c_);
 		var e_ = this.Moderate_or_Severe_LVSD();
 		var f_ = context.Operators.RetrieveByValueSet<Condition>(e_, null);
-		var g_ = context.Operators.ListUnion<object>((d_ as IEnumerable<object>), (f_ as IEnumerable<object>));
+		var g_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (f_ as IEnumerable<object>));
 		var h_ = this.Left_ventricular_systolic_dysfunction__disorder_();
 		var i_ = context.Operators.ToList<CqlCode>(h_);
 		var j_ = context.Operators.RetrieveByCodes<Condition>(i_, null);
@@ -427,7 +427,7 @@ public class AHAOverall_2_6_000
 			return ab_;
 		};
 		var l_ = context.Operators.Where<Condition>(j_, k_);
-		var m_ = context.Operators.ListUnion<object>(g_, (l_ as IEnumerable<object>));
+		var m_ = context.Operators.Union<object>(g_, (l_ as IEnumerable<object>));
 
 		return m_;
 	}
@@ -615,19 +615,19 @@ public class AHAOverall_2_6_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Home_Healthcare_Services();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Nursing_Facility_Visit();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Office_Visit();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Outpatient_Consultation();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Patient_Provider_Interaction();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		bool? r_(Encounter ValidEncounter)
 		{
 			var t_ = this.Measurement_Period();

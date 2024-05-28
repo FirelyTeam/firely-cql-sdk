@@ -1131,7 +1131,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			{
 				f_,
 			};
-			var h_ = context.Operators.ListUnion<CqlInterval<CqlDateTime>>(R, (g_ as IEnumerable<CqlInterval<CqlDateTime>>));
+			var h_ = context.Operators.Union<CqlInterval<CqlDateTime>>(R, (g_ as IEnumerable<CqlInterval<CqlDateTime>>));
 
 			return h_;
 		};
@@ -1206,7 +1206,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 		};
 		var h_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(f_, g_);
 		var i_ = this.RolloutIntervals(h_);
-		var j_ = context.Operators.ListUnion<CqlInterval<CqlDateTime>>(d_, i_);
+		var j_ = context.Operators.Union<CqlInterval<CqlDateTime>>(d_, i_);
 		var k_ = this.CumulativeDuration(j_);
 
 		return k_;

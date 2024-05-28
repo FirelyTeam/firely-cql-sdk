@@ -614,7 +614,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	{
 		var a_ = this.ED_Encounter_with_Encounter_Diagnosis_of_STEMI();
 		var b_ = this.ED_Encounter_with_Diagnosis_of_STEMI();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -749,19 +749,19 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
 			var f_ = this.Malignant_Intracranial_Neoplasm_Group();
 			var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-			var h_ = context.Operators.ListUnion<Condition>(e_, g_);
+			var h_ = context.Operators.Union<Condition>(e_, g_);
 			var i_ = this.Cerebral_Vascular_Lesion();
 			var j_ = context.Operators.RetrieveByValueSet<Condition>(i_, null);
 			var k_ = this.Dementia();
 			var l_ = context.Operators.RetrieveByValueSet<Condition>(k_, null);
-			var m_ = context.Operators.ListUnion<Condition>(j_, l_);
-			var n_ = context.Operators.ListUnion<Condition>(h_, m_);
+			var m_ = context.Operators.Union<Condition>(j_, l_);
+			var n_ = context.Operators.Union<Condition>(h_, m_);
 			var o_ = this.Pregnancy_ICD10_SNOMEDCT();
 			var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
 			var q_ = this.Allergy_to_thrombolytics();
 			var r_ = context.Operators.RetrieveByValueSet<Condition>(q_, null);
-			var s_ = context.Operators.ListUnion<Condition>(p_, r_);
-			var t_ = context.Operators.ListUnion<Condition>(n_, s_);
+			var s_ = context.Operators.Union<Condition>(p_, r_);
+			var t_ = context.Operators.Union<Condition>(n_, s_);
 			bool? u_(Condition ActiveExclusionDx)
 			{
 				var y_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveExclusionDx);
@@ -795,7 +795,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var d_ = this.Oral_Anticoagulant_Medications();
 			var e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
 			var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
-			var h_ = context.Operators.ListUnion<MedicationRequest>(e_, g_);
+			var h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest OralAnticoagulant)
 			{
 				var m_ = OralAnticoagulant?.StatusElement;
@@ -842,10 +842,10 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
 			var f_ = this.Neurologic_impairment();
 			var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-			var h_ = context.Operators.ListUnion<Condition>(e_, g_);
+			var h_ = context.Operators.Union<Condition>(e_, g_);
 			var i_ = this.Cardiopulmonary_Arrest();
 			var j_ = context.Operators.RetrieveByValueSet<Condition>(i_, null);
-			var k_ = context.Operators.ListUnion<Condition>(h_, j_);
+			var k_ = context.Operators.Union<Condition>(h_, j_);
 			bool? l_(Condition ExclusionDiagnosis)
 			{
 				var p_ = QICoreCommon_2_0_000.prevalenceInterval(ExclusionDiagnosis);
@@ -945,7 +945,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, null);
 			var f_ = this.Insertion_or_Replacement_of_Mechanical_Circulatory_Assist_Device();
 			var g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
-			var h_ = context.Operators.ListUnion<Procedure>(e_, g_);
+			var h_ = context.Operators.Union<Procedure>(e_, g_);
 			bool? i_(Procedure AirwayProcedure)
 			{
 				var m_ = AirwayProcedure?.Performed;
@@ -1004,13 +1004,13 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
 			var f_ = this.Closed_Head_and_Facial_Trauma();
 			var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-			var h_ = context.Operators.ListUnion<Condition>(e_, g_);
+			var h_ = context.Operators.Union<Condition>(e_, g_);
 			var i_ = this.Active_Peptic_Ulcer();
 			var j_ = context.Operators.RetrieveByValueSet<Condition>(i_, null);
 			var k_ = this.Cardiopulmonary_Arrest();
 			var l_ = context.Operators.RetrieveByValueSet<Condition>(k_, null);
-			var m_ = context.Operators.ListUnion<Condition>(j_, l_);
-			var n_ = context.Operators.ListUnion<Condition>(h_, m_);
+			var m_ = context.Operators.Union<Condition>(j_, l_);
+			var n_ = context.Operators.Union<Condition>(h_, m_);
 			bool? o_(Condition ExclusionCondition)
 			{
 				var s_ = QICoreCommon_2_0_000.prevalenceInterval(ExclusionCondition);
@@ -1119,23 +1119,23 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	{
 		var a_ = this.Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter();
 		var b_ = this.Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 		var d_ = this.Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter();
 		var e_ = this.Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter();
-		var f_ = context.Operators.ListUnion<Encounter>(d_, e_);
-		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
+		var f_ = context.Operators.Union<Encounter>(d_, e_);
+		var g_ = context.Operators.Union<Encounter>(c_, f_);
 		var h_ = this.Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start();
 		var i_ = this.Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter();
-		var j_ = context.Operators.ListUnion<Encounter>(h_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(g_, j_);
+		var j_ = context.Operators.Union<Encounter>(h_, i_);
+		var k_ = context.Operators.Union<Encounter>(g_, j_);
 		var l_ = this.Intubation_or_Mechanical_Circulatory_Assist_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start();
 		var m_ = this.Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter();
-		var n_ = context.Operators.ListUnion<Encounter>(l_, m_);
-		var o_ = context.Operators.ListUnion<Encounter>(k_, n_);
+		var n_ = context.Operators.Union<Encounter>(l_, m_);
+		var o_ = context.Operators.Union<Encounter>(k_, n_);
 		var p_ = this.Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter();
 		var q_ = this.ED_Encounter_with_Discharge_Disposition_as_Patient_Expired();
-		var r_ = context.Operators.ListUnion<Encounter>(p_, q_);
-		var s_ = context.Operators.ListUnion<Encounter>(o_, r_);
+		var r_ = context.Operators.Union<Encounter>(p_, q_);
+		var s_ = context.Operators.Union<Encounter>(o_, r_);
 
 		return s_;
 	}
@@ -1181,7 +1181,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			var d_ = this.Fibrinolytic_Therapy();
 			var e_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(d_, null);
 			var g_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(d_, null);
-			var h_ = context.Operators.ListUnion<MedicationAdministration>(e_, g_);
+			var h_ = context.Operators.Union<MedicationAdministration>(e_, g_);
 			bool? i_(MedicationAdministration Fibrinolytic)
 			{
 				var m_ = Fibrinolytic?.StatusElement;
@@ -1305,9 +1305,9 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	{
 		var a_ = this.Fibrinolytic_Therapy_within_30_Minutes_of_Arrival();
 		var b_ = this.PCI_within_90_Minutes_of_Arrival();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 		var d_ = this.ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival();
-		var e_ = context.Operators.ListUnion<Encounter>(c_, d_);
+		var e_ = context.Operators.Union<Encounter>(c_, d_);
 
 		return e_;
 	}

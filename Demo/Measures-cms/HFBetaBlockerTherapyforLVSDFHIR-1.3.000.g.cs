@@ -343,7 +343,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var a_ = this.Beta_Blocker_Therapy_for_LVSD();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest BetaBlockerOrdered)
 		{
 			var i_ = AHAOverall_2_6_000.isOrderedDuringHeartFailureOutpatientEncounter(BetaBlockerOrdered);
@@ -388,7 +388,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var a_ = this.Beta_Blocker_Therapy_for_LVSD();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest ActiveBetaBlocker)
 		{
 			var i_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((ActiveBetaBlocker as object));
@@ -666,7 +666,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Intolerance_to_Beta_Blocker_Therapy();
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.ListUnion<Condition>(b_, d_);
+		var e_ = context.Operators.Union<Condition>(b_, d_);
 		bool? f_(Condition BetaBlockerAllergyOrIntoleranceDiagnosis)
 		{
 			var i_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((BetaBlockerAllergyOrIntoleranceDiagnosis as object));
@@ -726,7 +726,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		var c_ = this.Substance_with_beta_adrenergic_receptor_antagonist_mechanism_of_action__substance_();
 		var d_ = context.Operators.ToList<CqlCode>(c_);
 		var e_ = context.Operators.RetrieveByCodes<AllergyIntolerance>(d_, null);
-		var f_ = context.Operators.ListUnion<AllergyIntolerance>(b_, e_);
+		var f_ = context.Operators.Union<AllergyIntolerance>(b_, e_);
 		bool? g_(AllergyIntolerance BetaBlockerAllergyIntolerance)
 		{
 			var j_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((BetaBlockerAllergyIntolerance as object));

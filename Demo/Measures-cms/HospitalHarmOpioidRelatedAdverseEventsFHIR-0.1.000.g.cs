@@ -248,7 +248,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		var a_ = this.Opioids__All();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationAdministration>(b_, d_);
+		var e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration Opioids)
 		{
 			var h_ = Opioids?.StatusElement;
@@ -362,7 +362,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		var a_ = this.Opioid_Antagonist();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationAdministration>(b_, d_);
+		var e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration AntagonistGiven)
 		{
 			var h_ = AntagonistGiven?.StatusElement;

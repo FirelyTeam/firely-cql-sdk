@@ -418,7 +418,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	{
 		var a_ = this.Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Indicator();
 		var b_ = this.Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Skin_Exam_within_First_72_Hours();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -544,7 +544,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	{
 		var a_ = this.Encounter_with_Stage_2__3__4__or_Unstageable_Pressure_Injury_Present_on_Admission_by_POA_Indicator();
 		var b_ = this.Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA_by_Skin_Exam_within_24_Hours();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -586,9 +586,9 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	{
 		var a_ = this.Encounter_with_Deep_Tissue_Pressure_Injury_POA();
 		var b_ = this.Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 		var d_ = this.Encounter_with_Diagnosis_of_COVID19_Infection();
-		var e_ = context.Operators.ListUnion<Encounter>(c_, d_);
+		var e_ = context.Operators.Union<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -734,7 +734,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	{
 		var a_ = this.Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA_by_Indicator();
 		var b_ = this.Encounter_with_New_Deep_Tissue_Pressure_Injury_by_Skin_Exam_after_First_72_Hours();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -880,7 +880,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	{
 		var a_ = this.Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA_by_Indicator();
 		var b_ = this.Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_by_Skin_Exam_after_First_24_Hours();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -893,7 +893,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	{
 		var a_ = this.Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA();
 		var b_ = this.Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}

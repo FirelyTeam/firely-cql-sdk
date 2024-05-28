@@ -449,7 +449,7 @@ public class NCQACQLBase_1_0_0
 			{
 				var bj_ = calculations?.frontgaps;
 				var bk_ = calculations?.endgap;
-				var bl_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(bj_, bk_);
+				var bl_ = context.Operators.Union<CqlInterval<CqlDate>>(bj_, bk_);
 				var bm_ = this.Collapse_Date_Interval_Workaround(bl_);
 
 				return bm_;
@@ -597,7 +597,7 @@ public class NCQACQLBase_1_0_0
 			{
 				var bj_ = calculations?.frontgaps;
 				var bk_ = calculations?.endgap;
-				var bl_ = context.Operators.ListUnion<CqlInterval<CqlDateTime>>(bj_, bk_);
+				var bl_ = context.Operators.Union<CqlInterval<CqlDateTime>>(bj_, bk_);
 				var bm_ = this.Collapse_DateTime_Interval_Workaround(bl_);
 
 				return bm_;

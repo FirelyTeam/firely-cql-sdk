@@ -295,7 +295,7 @@ namespace Hl7.Cql.Operators
         decimal? IntervalSize(CqlInterval<decimal?>? argument);
         int? IntervalSize(CqlInterval<int?>? argument);
         long? IntervalSize(CqlInterval<long?>? argument);
-        CqlInterval<T>? IntervalUnion<T>(CqlInterval<T>? left, CqlInterval<T>? right);
+        CqlInterval<T>? Union<T>(CqlInterval<T>? left, CqlInterval<T>? right);
         bool? IsFalse(bool? b);
         bool? IsNull<T>(T value) where T : class;
         bool? IsNullValue<T>(T? value) where T : struct;
@@ -326,7 +326,7 @@ namespace Hl7.Cql.Operators
         IEnumerable<T>? SortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order);
         IEnumerable<T>? Tail<T>(IEnumerable<T> argument);
         IEnumerable<T>? ListTake<T>(IEnumerable<T> argument, int? number);
-        IEnumerable<T>? ListUnion<T>(IEnumerable<T>? left, IEnumerable<T>? right);
+        IEnumerable<T>? Union<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         decimal? Ln(decimal? argument);
         decimal? Log(decimal? argument, decimal? @base);
         CqlDate? LowBoundary(CqlDate? input, int? precision);

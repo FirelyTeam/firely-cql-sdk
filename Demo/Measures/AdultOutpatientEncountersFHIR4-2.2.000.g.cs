@@ -123,16 +123,16 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Annual_Wellness_Visit();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Home_Healthcare_Services();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = context.Operators.ListUnion<Encounter>(k_, m_);
+		var n_ = context.Operators.Union<Encounter>(k_, m_);
 		bool? o_(Encounter ValidEncounter)
 		{
 			var q_ = ValidEncounter?.StatusElement;

@@ -283,16 +283,16 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Ophthalmological_Services();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Outpatient_Consultation();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Nursing_Facility_Visit();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Care_Services_in_Long_Term_Residential_Facility();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = context.Operators.ListUnion<Encounter>(k_, m_);
+		var n_ = context.Operators.Union<Encounter>(k_, m_);
 		bool? o_(Encounter QualifyingEncounter)
 		{
 			var q_ = this.Measurement_Period();
@@ -409,7 +409,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		var a_ = this.Cup_to_Disc_Ratio();
 		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var e_ = context.Operators.ListUnion<Observation>(b_, d_);
+		var e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation CupToDiscExamNotPerformed)
 		{
 			var j_ = this.Primary_Open_Angle_Glaucoma_Encounter();
@@ -475,7 +475,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		var a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
 		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var e_ = context.Operators.ListUnion<Observation>(b_, d_);
+		var e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation OpticDiscExamNotPerformed)
 		{
 			var j_ = this.Primary_Open_Angle_Glaucoma_Encounter();

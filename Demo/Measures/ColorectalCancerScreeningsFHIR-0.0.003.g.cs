@@ -531,7 +531,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Telephone_Visits();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		bool? f_(Encounter TelehealthEncounter)
 		{
 			var h_ = TelehealthEncounter?.StatusElement;
@@ -582,7 +582,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		var h_ = context.Operators.In<int?>(f_, g_, null);
 		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
 		var j_ = this.Telehealth_Services();
-		var k_ = context.Operators.ListUnion<Encounter>(i_, j_);
+		var k_ = context.Operators.Union<Encounter>(i_, j_);
 		var l_ = context.Operators.Exists<Encounter>(k_);
 		var m_ = context.Operators.And(h_, l_);
 

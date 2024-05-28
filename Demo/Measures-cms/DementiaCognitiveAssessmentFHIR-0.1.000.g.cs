@@ -266,28 +266,28 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Nursing_Facility_Visit();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Care_Services_in_Long_Term_Residential_Facility();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Home_Healthcare_Services();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Psych_Visit_Psychotherapy();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Behavioral_Neuropsych_Assessment();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		var r_ = this.Occupational_Therapy_Evaluation();
 		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
 		var t_ = this.Office_Visit();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.ListUnion<Encounter>(s_, u_);
-		var w_ = context.Operators.ListUnion<Encounter>(q_, v_);
+		var v_ = context.Operators.Union<Encounter>(s_, u_);
+		var w_ = context.Operators.Union<Encounter>(q_, v_);
 		var x_ = this.Outpatient_Consultation();
 		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
-		var z_ = context.Operators.ListUnion<Encounter>(w_, y_);
+		var z_ = context.Operators.Union<Encounter>(w_, y_);
 
 		return z_;
 	}
@@ -356,7 +356,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		var a_ = this.Encounter_to_Assess_Cognition();
 		var b_ = this.Patient_Provider_Interaction();
 		var c_ = context.Operators.RetrieveByValueSet<Encounter>(b_, null);
-		var d_ = context.Operators.ListUnion<Encounter>(a_, c_);
+		var d_ = context.Operators.Union<Encounter>(a_, c_);
 		bool? e_(Encounter ValidEncounter)
 		{
 			var g_ = this.Measurement_Period();
@@ -413,7 +413,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		var c_ = this.Cognitive_Assessment();
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
-		var e_ = context.Operators.ListUnion<Observation>(b_, d_);
+		var e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation CognitiveAssessment)
 		{
 			var j_ = this.Dementia_Encounter_During_Measurement_Period();
@@ -495,7 +495,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		var c_ = this.Cognitive_Assessment();
 		var d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
-		var e_ = context.Operators.ListUnion<Observation>(b_, d_);
+		var e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation NoCognitiveAssessment)
 		{
 			var j_ = this.Dementia_Encounter_During_Measurement_Period();

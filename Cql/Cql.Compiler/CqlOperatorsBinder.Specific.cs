@@ -56,7 +56,7 @@ partial class CqlOperatorsBinder
         return call;
     }
 
-    private Expression ListUnion(
+    private Expression Union(
         Expression left,
         Expression right)
     {
@@ -77,7 +77,7 @@ partial class CqlOperatorsBinder
             }
         }
 
-        return BindToBestMethodOverload(nameof(ICqlOperators.ListUnion), [left, right], []);
+        return BindToBestMethodOverload(nameof(ICqlOperators.Union), [left, right], []);
     }
 
     private Expression ResolveValueSet(Expression expression)

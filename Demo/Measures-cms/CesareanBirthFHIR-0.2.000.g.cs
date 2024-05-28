@@ -335,9 +335,9 @@ public class CesareanBirthFHIR_0_2_000
 	{
 		var a_ = this.Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks();
 		var b_ = this.Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 		var d_ = this.Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding();
-		var e_ = context.Operators.ListUnion<Encounter>(c_, d_);
+		var e_ = context.Operators.Union<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -1950,7 +1950,7 @@ public class CesareanBirthFHIR_0_2_000
 	{
 		var a_ = this.Encounter_with_Abnormal_Presentation();
 		var b_ = this.Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}

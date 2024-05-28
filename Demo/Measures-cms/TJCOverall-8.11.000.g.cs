@@ -370,7 +370,7 @@ public class TJCOverall_8_11_000
 			return af_;
 		};
 		var h_ = context.Operators.Where<Procedure>(f_, g_);
-		var i_ = context.Operators.ListUnion<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
+		var i_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
 
 		return i_;
 	}

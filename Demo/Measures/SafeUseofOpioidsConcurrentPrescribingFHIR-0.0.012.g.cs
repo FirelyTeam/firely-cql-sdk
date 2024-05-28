@@ -229,11 +229,11 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var d_ = this.Schedule_II_and_III_Opioid_Medications();
 			var e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
 			var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
-			var h_ = context.Operators.ListUnion<MedicationRequest>(e_, g_);
+			var h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			var i_ = this.Schedule_IV_Benzodiazepines();
 			var j_ = context.Operators.RetrieveByValueSet<MedicationRequest>(i_, null);
 			var l_ = context.Operators.RetrieveByValueSet<MedicationRequest>(i_, null);
-			var m_ = context.Operators.ListUnion<MedicationRequest>(j_, l_);
+			var m_ = context.Operators.Union<MedicationRequest>(j_, l_);
 			bool? n_(MedicationRequest Medications)
 			{
 				var u_ = Medications?.Category;
@@ -252,7 +252,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				return x_;
 			};
 			var o_ = context.Operators.Where<MedicationRequest>(m_, n_);
-			var p_ = context.Operators.ListUnion<MedicationRequest>(h_, o_);
+			var p_ = context.Operators.Union<MedicationRequest>(h_, o_);
 			bool? q_(MedicationRequest OpioidOrBenzodiazepineDischargeMedication)
 			{
 				var ac_ = OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement;
@@ -417,7 +417,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			return an_;
 		};
 		var h_ = context.Operators.SelectMany<Encounter, Encounter>(f_, g_);
-		var i_ = context.Operators.ListUnion<Encounter>(c_, h_);
+		var i_ = context.Operators.Union<Encounter>(c_, h_);
 
 		return i_;
 	}

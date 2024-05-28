@@ -453,25 +453,25 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Home_Healthcare_Services();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		var r_ = this.Telephone_Visits();
 		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
 		var t_ = this.Online_Assessments();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.ListUnion<Encounter>(s_, u_);
-		var w_ = context.Operators.ListUnion<Encounter>(q_, v_);
+		var v_ = context.Operators.Union<Encounter>(s_, u_);
+		var w_ = context.Operators.Union<Encounter>(q_, v_);
 		var x_ = Status_1_6_000.Finished_Encounter(w_);
 		bool? y_(Encounter ValidEncounters)
 		{
@@ -552,10 +552,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.HIV();
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.ListUnion<Condition>(b_, d_);
+		var e_ = context.Operators.Union<Condition>(b_, d_);
 		var f_ = this.Complications_of_Pregnancy__Childbirth_and_the_Puerperium();
 		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-		var h_ = context.Operators.ListUnion<Condition>(e_, g_);
+		var h_ = context.Operators.Union<Condition>(e_, g_);
 		bool? i_(Condition SexualActivityDiagnosis)
 		{
 			var l_ = QICoreCommon_2_0_000.ToPrevalenceInterval(SexualActivityDiagnosis);
@@ -579,7 +579,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var a_ = this.Contraceptive_Medications();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = Status_1_6_000.Active_Medication(e_);
 		bool? g_(MedicationRequest ActiveContraceptives)
 		{
@@ -611,7 +611,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var a_ = this.Contraceptive_Medications();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = Status_1_6_000.Active_or_Completed_Medication_Request(e_);
 		bool? g_(MedicationRequest OrderedContraceptives)
 		{
@@ -639,10 +639,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var c_ = this.Lab_Tests_During_Pregnancy();
 		var d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(c_, null);
-		var e_ = context.Operators.ListUnion<ServiceRequest>(b_, d_);
+		var e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		var f_ = this.Lab_Tests_for_Sexually_Transmitted_Infections();
 		var g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
-		var h_ = context.Operators.ListUnion<ServiceRequest>(e_, g_);
+		var h_ = context.Operators.Union<ServiceRequest>(e_, g_);
 		var i_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(h_);
 		bool? j_(ServiceRequest LabOrders)
 		{
@@ -845,7 +845,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			var av_ = this.Isotretinoin();
 			var aw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
 			var ay_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
-			var az_ = context.Operators.ListUnion<MedicationRequest>(aw_, ay_);
+			var az_ = context.Operators.Union<MedicationRequest>(aw_, ay_);
 			var ba_ = Status_1_6_000.Active_or_Completed_Medication_Request(az_);
 			bool? bb_(MedicationRequest AccutaneOrder)
 			{
@@ -885,7 +885,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			return be_;
 		};
 		var j_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(h_, i_);
-		var k_ = context.Operators.ListUnion<ServiceRequest>(e_, j_);
+		var k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		var l_ = context.Operators.Exists<ServiceRequest>(k_);
 
 		return l_;

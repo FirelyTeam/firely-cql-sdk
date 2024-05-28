@@ -852,13 +852,13 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Home_Healthcare_Services();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? m_(Encounter E)
 		{
@@ -886,11 +886,11 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var n_ = context.Operators.Where<Encounter>(l_, m_);
 		var o_ = this.Online_Assessments();
 		var p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
-		var q_ = context.Operators.ListUnion<Encounter>(n_, p_);
-		var r_ = context.Operators.ListUnion<Encounter>(k_, q_);
+		var q_ = context.Operators.Union<Encounter>(n_, p_);
+		var r_ = context.Operators.Union<Encounter>(k_, q_);
 		var s_ = this.Telephone_Visits();
 		var t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, null);
-		var u_ = context.Operators.ListUnion<Encounter>(r_, t_);
+		var u_ = context.Operators.Union<Encounter>(r_, t_);
 		var v_ = Status_1_6_000.Finished_Encounter(u_);
 		bool? w_(Encounter ValidEncounters)
 		{
@@ -1194,7 +1194,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return ao_;
 		};
 		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.ListUnion<CqlDate>(g_, n_);
+		var o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -1252,7 +1252,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine();
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.ListUnion<Condition>(b_, d_);
+		var e_ = context.Operators.Union<Condition>(b_, d_);
 		var f_ = Status_1_6_000.Active_Condition(e_);
 		bool? g_(Condition DTaPConditions)
 		{
@@ -1331,7 +1331,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return ao_;
 		};
 		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.ListUnion<CqlDate>(g_, n_);
+		var o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -1465,7 +1465,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return w_;
 		};
 		var j_ = context.Operators.Where<Procedure>(h_, i_);
-		var k_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
+		var k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -1629,7 +1629,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return ao_;
 		};
 		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.ListUnion<CqlDate>(g_, n_);
+		var o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -1696,7 +1696,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return ao_;
 		};
 		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.ListUnion<CqlDate>(g_, n_);
+		var o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -1709,7 +1709,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		var a_ = this.Hib_3_Dose_Immunizations_or_Procedures();
 		var b_ = this.Hib_4_Dose_Immunizations_or_Procedures();
-		var c_ = context.Operators.ListUnion<CqlDate>(a_, b_);
+		var c_ = context.Operators.Union<CqlDate>(a_, b_);
 
 		return c_;
 	}
@@ -1871,7 +1871,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return ao_;
 		};
 		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.ListUnion<CqlDate>(g_, n_);
+		var o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -2019,7 +2019,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
 		var d_ = this.Hepatitis_B();
 		var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
-		var f_ = context.Operators.ListUnion<Condition>(c_, e_);
+		var f_ = context.Operators.Union<Condition>(c_, e_);
 		var g_ = Status_1_6_000.Active_Condition(f_);
 		bool? h_(Condition HepBConditions)
 		{
@@ -2072,7 +2072,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return w_;
 		};
 		var j_ = context.Operators.Where<Procedure>(h_, i_);
-		var k_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
+		var k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -2088,7 +2088,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var c_ = this.Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder_();
 		var d_ = context.Operators.ToList<CqlCode>(c_);
 		var e_ = context.Operators.RetrieveByCodes<Condition>(d_, null);
-		var f_ = context.Operators.ListUnion<Condition>(b_, e_);
+		var f_ = context.Operators.Union<Condition>(b_, e_);
 		var g_ = Status_1_6_000.Active_Condition(f_);
 		bool? h_(Condition VaricellaZoster)
 		{
@@ -2167,7 +2167,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return ao_;
 		};
 		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.ListUnion<CqlDate>(g_, n_);
+		var o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -2276,7 +2276,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return w_;
 		};
 		var j_ = context.Operators.Where<Procedure>(h_, i_);
-		var k_ = context.Operators.ListUnion<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
+		var k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -2292,7 +2292,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		var c_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder_();
 		var d_ = context.Operators.ToList<CqlCode>(c_);
 		var e_ = context.Operators.RetrieveByCodes<Condition>(d_, null);
-		var f_ = context.Operators.ListUnion<Condition>(b_, e_);
+		var f_ = context.Operators.Union<Condition>(b_, e_);
 		var g_ = Status_1_6_000.Active_Condition(f_);
 		bool? h_(Condition HepatitisADiagnosis)
 		{
@@ -2372,7 +2372,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return ap_;
 		};
 		var o_ = context.Operators.Select<Procedure, CqlDate>(m_, n_);
-		var p_ = context.Operators.ListUnion<CqlDate>(h_, o_);
+		var p_ = context.Operators.Union<CqlDate>(h_, o_);
 
 		return p_;
 	}
@@ -2439,7 +2439,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return ao_;
 		};
 		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.ListUnion<CqlDate>(g_, n_);
+		var o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -2452,7 +2452,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		var a_ = this.Rotavirus_2_Dose_Immunizations_or_Procedures();
 		var b_ = this.Rotavirus_3_Dose_Immunizations_or_Procedures();
-		var c_ = context.Operators.ListUnion<CqlDate>(a_, b_);
+		var c_ = context.Operators.Union<CqlDate>(a_, b_);
 
 		return c_;
 	}
@@ -2638,7 +2638,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return ax_;
 		};
 		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.ListUnion<CqlDate>(g_, n_);
+		var o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -2742,7 +2742,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return as_;
 		};
 		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.ListUnion<CqlDate>(g_, n_);
+		var o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}

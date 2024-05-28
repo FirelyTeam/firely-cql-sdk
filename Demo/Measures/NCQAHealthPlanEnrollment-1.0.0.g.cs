@@ -123,7 +123,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 	{
 		var a_ = this.Collapsed_Coverage_Intervals(collapsedI);
 		var b_ = this.Collapsed_Coverage_Adjacent_Intervals(adjacentI);
-		var c_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(a_, b_);
+		var c_ = context.Operators.Union<CqlInterval<CqlDate>>(a_, b_);
 		var d_ = NCQACQLBase_1_0_0.Collapse_Date_Interval_Workaround(c_);
 
 		return d_;

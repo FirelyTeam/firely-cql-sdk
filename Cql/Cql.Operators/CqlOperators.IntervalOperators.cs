@@ -2265,7 +2265,7 @@ namespace Hl7.Cql.Runtime
 
         #region Union
 
-        public CqlInterval<T>? IntervalUnion<T>(CqlInterval<T>? left, CqlInterval<T>? right)
+        public CqlInterval<T>? Union<T>(CqlInterval<T>? left, CqlInterval<T>? right)
         {
             if (left == null || right == null) return null;
             else

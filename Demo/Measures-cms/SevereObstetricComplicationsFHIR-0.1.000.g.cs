@@ -814,9 +814,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	{
 		var a_ = this.Delivery_Encounters_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_20_Weeks();
 		var b_ = this.Delivery_Encounters_with_Estimated_Gestational_Age_Assessment_Greater_than_or_Equal_to_20_Weeks();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 		var d_ = this.Delivery_Encounters_with_Gestational_Age_Greater_than_or_Equal_to_20_Weeks_Based_on_Coding();
-		var e_ = context.Operators.ListUnion<Encounter>(c_, d_);
+		var e_ = context.Operators.Union<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -967,9 +967,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	{
 		var a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Diagnosis_or_Procedure_Excluding_Blood_Transfusion();
 		var b_ = this.Delivery_Encounters_with_Expiration();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 		var d_ = this.Delivery_Encounters_with_Blood_Transfusion();
-		var e_ = context.Operators.ListUnion<Encounter>(c_, d_);
+		var e_ = context.Operators.Union<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -1079,7 +1079,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	{
 		var a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Diagnosis_or_Procedure_Excluding_Blood_Transfusion();
 		var b_ = this.Delivery_Encounters_with_Expiration();
-		var c_ = context.Operators.ListUnion<Encounter>(a_, b_);
+		var c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
@@ -1763,7 +1763,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			return aa_;
 		};
 		var f_ = context.Operators.Where<Encounter>(a_, e_);
-		var g_ = context.Operators.ListUnion<Encounter>(c_, f_);
+		var g_ = context.Operators.Union<Encounter>(c_, f_);
 
 		return g_;
 	}

@@ -226,7 +226,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var a_ = this.Dementia_Medications();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest DementiaMed)
 		{
 			var h_ = DementiaMed?.StatusElement;
@@ -263,7 +263,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Nursing_Facility_Visit();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		bool? f_(Encounter LongTermFacilityEncounter)
 		{
 			var j_ = LongTermFacilityEncounter?.StatusElement;
@@ -302,13 +302,13 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Observation();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Emergency_Department_Visit();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Nonacute_Inpatient();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		bool? l_(Encounter Outpatient)
 		{
 			var p_ = Outpatient?.StatusElement;
@@ -463,7 +463,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	{
 		var a_ = this.Long_Term_Care_Overlapping_Periods();
 		var b_ = this.Long_Term_Care_Adjacent_Periods();
-		var c_ = context.Operators.ListUnion<CqlInterval<CqlDateTime>>(a_, b_);
+		var c_ = context.Operators.Union<CqlInterval<CqlDateTime>>(a_, b_);
 		var d_ = context.Operators.Collapse(c_, null);
 		int? e_(CqlInterval<CqlDateTime> LTCPeriods)
 		{
@@ -542,7 +542,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var a_ = this.Frailty_Device();
 		var b_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<DeviceRequest>(b_, d_);
+		var e_ = context.Operators.Union<DeviceRequest>(b_, d_);
 		bool? f_(DeviceRequest FrailtyDeviceOrder)
 		{
 			var ag_ = FrailtyDeviceOrder?.StatusElement;

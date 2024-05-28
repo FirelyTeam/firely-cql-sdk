@@ -556,10 +556,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Telephone_Visits();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Online_Assessments();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = context.Operators.ListUnion<Encounter>(e_, g_);
+		var h_ = context.Operators.Union<Encounter>(e_, g_);
 		var i_ = Status_1_6_000.Finished_Encounter(h_);
 		bool? j_(Encounter ValidEncounter)
 		{

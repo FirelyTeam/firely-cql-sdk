@@ -421,7 +421,7 @@ public class TJCOverallFHIR_1_8_000
 			return p_;
 		};
 		var h_ = context.Operators.Where<Procedure>(f_, g_);
-		var i_ = context.Operators.ListUnion<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
+		var i_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
 
 		return i_;
 	}

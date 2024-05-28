@@ -285,7 +285,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		var a_ = this.Antidepressant_Medication();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationDispense>(b_, d_);
+		var e_ = context.Operators.Union<MedicationDispense>(b_, d_);
 		var f_ = Status_1_6_000.Dispensed_Medication(e_);
 		bool? g_(MedicationDispense Antidepressant)
 		{
@@ -366,31 +366,31 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Home_Healthcare_Services();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Annual_Wellness_Visit();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Nursing_Facility_Visit();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		var r_ = this.Psych_Visit_Diagnostic_Evaluation();
 		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
 		var t_ = this.Psych_Visit_Psychotherapy();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.ListUnion<Encounter>(s_, u_);
-		var w_ = context.Operators.ListUnion<Encounter>(q_, v_);
+		var v_ = context.Operators.Union<Encounter>(s_, u_);
+		var w_ = context.Operators.Union<Encounter>(q_, v_);
 		var x_ = this.Telephone_Visits();
 		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
 		var z_ = this.Online_Assessments();
 		var aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
-		var ab_ = context.Operators.ListUnion<Encounter>(y_, aa_);
-		var ac_ = context.Operators.ListUnion<Encounter>(w_, ab_);
+		var ab_ = context.Operators.Union<Encounter>(y_, aa_);
+		var ac_ = context.Operators.Union<Encounter>(w_, ab_);
 		bool? ad_(Encounter ValidEncounter)
 		{
 			var af_ = ValidEncounter?.Period;
@@ -456,7 +456,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		var b_ = this.Antidepressant_Medication();
 		var c_ = context.Operators.RetrieveByValueSet<MedicationRequest>(b_, null);
 		var e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(b_, null);
-		var f_ = context.Operators.ListUnion<MedicationRequest>(c_, e_);
+		var f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 		var g_ = Status_1_6_000.Active_Medication(f_);
 		bool? h_(MedicationRequest ActiveAntidepressant)
 		{
@@ -510,7 +510,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		var a_ = this.Antidepressant_Medication();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationDispense>(b_, d_);
+		var e_ = context.Operators.Union<MedicationDispense>(b_, d_);
 		var f_ = Status_1_6_000.Dispensed_Medication(e_);
 		CqlInterval<CqlDate> g_(MedicationDispense Antidepressant)
 		{
@@ -561,7 +561,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		var a_ = this.Antidepressant_Medication();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationDispense>(b_, d_);
+		var e_ = context.Operators.Union<MedicationDispense>(b_, d_);
 		var f_ = Status_1_6_000.Dispensed_Medication(e_);
 		CqlInterval<CqlDate> g_(MedicationDispense Antidepressant)
 		{

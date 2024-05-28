@@ -269,7 +269,6 @@ Hl7.Cql.Operators.ICqlOperators.IntervalProperlyIncludesInterval<T>(Hl7.Cql.Prim
 Hl7.Cql.Operators.ICqlOperators.IntervalSize(Hl7.Cql.Primitives.CqlInterval<decimal?>? argument) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.IntervalSize(Hl7.Cql.Primitives.CqlInterval<int?>? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.IntervalSize(Hl7.Cql.Primitives.CqlInterval<long?>? argument) -> long?
-Hl7.Cql.Operators.ICqlOperators.IntervalUnion<T>(Hl7.Cql.Primitives.CqlInterval<T>? left, Hl7.Cql.Primitives.CqlInterval<T>? right) -> Hl7.Cql.Primitives.CqlInterval<T>?
 Hl7.Cql.Operators.ICqlOperators.IsFalse(bool? b) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IsNull<T>(T! value) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IsNullValue<T>(T? value) -> bool?
@@ -294,7 +293,6 @@ Hl7.Cql.Operators.ICqlOperators.ListProperlyIncludesList<T>(System.Collections.G
 Hl7.Cql.Operators.ICqlOperators.ListSkip<T>(System.Collections.Generic.IEnumerable<T>! argument, int? number) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.ListSort<T>(System.Collections.Generic.IEnumerable<T>? source, System.ComponentModel.ListSortDirection order) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.ListTake<T>(System.Collections.Generic.IEnumerable<T>! argument, int? number) -> System.Collections.Generic.IEnumerable<T>?
-Hl7.Cql.Operators.ICqlOperators.ListUnion<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.Ln(decimal? argument) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Log(decimal? argument, decimal? base) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.LowBoundary(decimal? input, int? precision) -> decimal?
@@ -492,6 +490,8 @@ Hl7.Cql.Operators.ICqlOperators.TruncatedDivide(decimal? left, decimal? right) -
 Hl7.Cql.Operators.ICqlOperators.TruncatedDivide(Hl7.Cql.Primitives.CqlQuantity? left, Hl7.Cql.Primitives.CqlQuantity? right) -> Hl7.Cql.Primitives.CqlQuantity?
 Hl7.Cql.Operators.ICqlOperators.TruncatedDivide(int? left, int? right) -> int?
 Hl7.Cql.Operators.ICqlOperators.TruncatedDivide(long? left, long? right) -> long?
+Hl7.Cql.Operators.ICqlOperators.Union<T>(Hl7.Cql.Primitives.CqlInterval<T>? left, Hl7.Cql.Primitives.CqlInterval<T>? right) -> Hl7.Cql.Primitives.CqlInterval<T>?
+Hl7.Cql.Operators.ICqlOperators.Union<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> System.Collections.Generic.IEnumerable<T>?
 Hl7.Cql.Operators.ICqlOperators.Upper(string! argument) -> string?
 Hl7.Cql.Operators.ICqlOperators.ValueSetUnion(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? left, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? right) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>?
 Hl7.Cql.Operators.ICqlOperators.Variance(System.Collections.Generic.IEnumerable<decimal?>? argument) -> decimal?

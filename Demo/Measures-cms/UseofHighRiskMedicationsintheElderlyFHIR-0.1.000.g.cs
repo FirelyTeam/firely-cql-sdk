@@ -742,31 +742,31 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Ophthalmologic_Services();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Discharge_Services_Nursing_Facility();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Nursing_Facility_Visit();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Care_Services_in_Long_Term_Residential_Facility();
 		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.ListUnion<Encounter>(m_, o_);
-		var q_ = context.Operators.ListUnion<Encounter>(k_, p_);
+		var p_ = context.Operators.Union<Encounter>(m_, o_);
+		var q_ = context.Operators.Union<Encounter>(k_, p_);
 		var r_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
 		var t_ = this.Annual_Wellness_Visit();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.ListUnion<Encounter>(s_, u_);
-		var w_ = context.Operators.ListUnion<Encounter>(q_, v_);
+		var v_ = context.Operators.Union<Encounter>(s_, u_);
+		var w_ = context.Operators.Union<Encounter>(q_, v_);
 		var x_ = this.Home_Healthcare_Services();
 		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
 		var z_ = this.Telephone_Visits();
 		var aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
-		var ab_ = context.Operators.ListUnion<Encounter>(y_, aa_);
-		var ac_ = context.Operators.ListUnion<Encounter>(w_, ab_);
+		var ab_ = context.Operators.Union<Encounter>(y_, aa_);
+		var ac_ = context.Operators.Union<Encounter>(w_, ab_);
 		var ad_ = this.Online_Assessments();
 		var ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 		var af_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
@@ -794,8 +794,8 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			return ar_;
 		};
 		var ah_ = context.Operators.Where<Encounter>(af_, ag_);
-		var ai_ = context.Operators.ListUnion<Encounter>(ae_, ah_);
-		var aj_ = context.Operators.ListUnion<Encounter>(ac_, ai_);
+		var ai_ = context.Operators.Union<Encounter>(ae_, ah_);
+		var aj_ = context.Operators.Union<Encounter>(ac_, ai_);
 		bool? ak_(Encounter ValidEncounters)
 		{
 			var aw_ = this.Measurement_Period();
@@ -941,98 +941,98 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var a_ = this.Anticholinergics__first_generation_antihistamines();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = this.More_Than_One_Order(e_);
 		var g_ = this.Anticholinergics__anti_Parkinson_agents();
 		var h_ = context.Operators.RetrieveByValueSet<MedicationRequest>(g_, null);
 		var j_ = context.Operators.RetrieveByValueSet<MedicationRequest>(g_, null);
-		var k_ = context.Operators.ListUnion<MedicationRequest>(h_, j_);
+		var k_ = context.Operators.Union<MedicationRequest>(h_, j_);
 		var l_ = this.More_Than_One_Order(k_);
-		var m_ = context.Operators.ListUnion<MedicationRequest>(f_, l_);
+		var m_ = context.Operators.Union<MedicationRequest>(f_, l_);
 		var n_ = this.Antispasmodics();
 		var o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
 		var q_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
-		var r_ = context.Operators.ListUnion<MedicationRequest>(o_, q_);
+		var r_ = context.Operators.Union<MedicationRequest>(o_, q_);
 		var s_ = this.More_Than_One_Order(r_);
 		var t_ = this.Antithrombotic();
 		var u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
 		var w_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
-		var x_ = context.Operators.ListUnion<MedicationRequest>(u_, w_);
+		var x_ = context.Operators.Union<MedicationRequest>(u_, w_);
 		var y_ = this.More_Than_One_Order(x_);
-		var z_ = context.Operators.ListUnion<MedicationRequest>(s_, y_);
-		var aa_ = context.Operators.ListUnion<MedicationRequest>(m_, z_);
+		var z_ = context.Operators.Union<MedicationRequest>(s_, y_);
+		var aa_ = context.Operators.Union<MedicationRequest>(m_, z_);
 		var ab_ = this.Cardiovascular__alpha_agonists__central();
 		var ac_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ab_, null);
 		var ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ab_, null);
-		var af_ = context.Operators.ListUnion<MedicationRequest>(ac_, ae_);
+		var af_ = context.Operators.Union<MedicationRequest>(ac_, ae_);
 		var ag_ = this.More_Than_One_Order(af_);
 		var ah_ = this.Cardiovascular__other();
 		var ai_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ah_, null);
 		var ak_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ah_, null);
-		var al_ = context.Operators.ListUnion<MedicationRequest>(ai_, ak_);
+		var al_ = context.Operators.Union<MedicationRequest>(ai_, ak_);
 		var am_ = this.More_Than_One_Order(al_);
-		var an_ = context.Operators.ListUnion<MedicationRequest>(ag_, am_);
-		var ao_ = context.Operators.ListUnion<MedicationRequest>(aa_, an_);
+		var an_ = context.Operators.Union<MedicationRequest>(ag_, am_);
+		var ao_ = context.Operators.Union<MedicationRequest>(aa_, an_);
 		var ap_ = this.Central_nervous_system__antidepressants();
 		var aq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
 		var as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
-		var at_ = context.Operators.ListUnion<MedicationRequest>(aq_, as_);
+		var at_ = context.Operators.Union<MedicationRequest>(aq_, as_);
 		var au_ = this.More_Than_One_Order(at_);
 		var av_ = this.Central_nervous_system__barbiturates();
 		var aw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
 		var ay_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, null);
-		var az_ = context.Operators.ListUnion<MedicationRequest>(aw_, ay_);
+		var az_ = context.Operators.Union<MedicationRequest>(aw_, ay_);
 		var ba_ = this.More_Than_One_Order(az_);
-		var bb_ = context.Operators.ListUnion<MedicationRequest>(au_, ba_);
-		var bc_ = context.Operators.ListUnion<MedicationRequest>(ao_, bb_);
+		var bb_ = context.Operators.Union<MedicationRequest>(au_, ba_);
+		var bc_ = context.Operators.Union<MedicationRequest>(ao_, bb_);
 		var bd_ = this.Central_nervous_system__vasodilators();
 		var be_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bd_, null);
 		var bg_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bd_, null);
-		var bh_ = context.Operators.ListUnion<MedicationRequest>(be_, bg_);
+		var bh_ = context.Operators.Union<MedicationRequest>(be_, bg_);
 		var bi_ = this.More_Than_One_Order(bh_);
 		var bj_ = this.Central_nervous_system__other();
 		var bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bj_, null);
 		var bm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bj_, null);
-		var bn_ = context.Operators.ListUnion<MedicationRequest>(bk_, bm_);
+		var bn_ = context.Operators.Union<MedicationRequest>(bk_, bm_);
 		var bo_ = this.More_Than_One_Order(bn_);
-		var bp_ = context.Operators.ListUnion<MedicationRequest>(bi_, bo_);
-		var bq_ = context.Operators.ListUnion<MedicationRequest>(bc_, bp_);
+		var bp_ = context.Operators.Union<MedicationRequest>(bi_, bo_);
+		var bq_ = context.Operators.Union<MedicationRequest>(bc_, bp_);
 		var br_ = this.Endocrine_system__estrogens_with_or_without_progestins();
 		var bs_ = context.Operators.RetrieveByValueSet<MedicationRequest>(br_, null);
 		var bu_ = context.Operators.RetrieveByValueSet<MedicationRequest>(br_, null);
-		var bv_ = context.Operators.ListUnion<MedicationRequest>(bs_, bu_);
+		var bv_ = context.Operators.Union<MedicationRequest>(bs_, bu_);
 		var bw_ = this.More_Than_One_Order(bv_);
 		var bx_ = this.Endocrine_system__sulfonylureas__long_duration();
 		var by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bx_, null);
 		var ca_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bx_, null);
-		var cb_ = context.Operators.ListUnion<MedicationRequest>(by_, ca_);
+		var cb_ = context.Operators.Union<MedicationRequest>(by_, ca_);
 		var cc_ = this.More_Than_One_Order(cb_);
-		var cd_ = context.Operators.ListUnion<MedicationRequest>(bw_, cc_);
-		var ce_ = context.Operators.ListUnion<MedicationRequest>(bq_, cd_);
+		var cd_ = context.Operators.Union<MedicationRequest>(bw_, cc_);
+		var ce_ = context.Operators.Union<MedicationRequest>(bq_, cd_);
 		var cf_ = this.Endocrine_system__other();
 		var cg_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cf_, null);
 		var ci_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cf_, null);
-		var cj_ = context.Operators.ListUnion<MedicationRequest>(cg_, ci_);
+		var cj_ = context.Operators.Union<MedicationRequest>(cg_, ci_);
 		var ck_ = this.More_Than_One_Order(cj_);
 		var cl_ = this.Nonbenzodiazepine_hypnotics();
 		var cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
 		var co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
-		var cp_ = context.Operators.ListUnion<MedicationRequest>(cm_, co_);
+		var cp_ = context.Operators.Union<MedicationRequest>(cm_, co_);
 		var cq_ = this.More_Than_One_Order(cp_);
-		var cr_ = context.Operators.ListUnion<MedicationRequest>(ck_, cq_);
-		var cs_ = context.Operators.ListUnion<MedicationRequest>(ce_, cr_);
+		var cr_ = context.Operators.Union<MedicationRequest>(ck_, cq_);
+		var cs_ = context.Operators.Union<MedicationRequest>(ce_, cr_);
 		var ct_ = this.Pain_medications__skeletal_muscle_relaxants();
 		var cu_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ct_, null);
 		var cw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ct_, null);
-		var cx_ = context.Operators.ListUnion<MedicationRequest>(cu_, cw_);
+		var cx_ = context.Operators.Union<MedicationRequest>(cu_, cw_);
 		var cy_ = this.More_Than_One_Order(cx_);
 		var cz_ = this.Pain_medications__other();
 		var da_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cz_, null);
 		var dc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cz_, null);
-		var dd_ = context.Operators.ListUnion<MedicationRequest>(da_, dc_);
+		var dd_ = context.Operators.Union<MedicationRequest>(da_, dc_);
 		var de_ = this.More_Than_One_Order(dd_);
-		var df_ = context.Operators.ListUnion<MedicationRequest>(cy_, de_);
-		var dg_ = context.Operators.ListUnion<MedicationRequest>(cs_, df_);
+		var df_ = context.Operators.Union<MedicationRequest>(cy_, de_);
+		var dg_ = context.Operators.Union<MedicationRequest>(cs_, df_);
 
 		return dg_;
 	}
@@ -1123,7 +1123,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var a_ = this.Anti_Infectives__other();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = this.More_Than_One_Order(e_);
 		decimal? g_(MedicationRequest AntiInfectives)
 		{
@@ -1474,7 +1474,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var a_ = this.Reserpine();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest ReserpineOrdered)
 		{
 			var ad_ = this.Average_Daily_Dose(ReserpineOrdered);
@@ -1489,7 +1489,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var j_ = this.Digoxin();
 		var k_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, null);
 		var m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, null);
-		var n_ = context.Operators.ListUnion<MedicationRequest>(k_, m_);
+		var n_ = context.Operators.Union<MedicationRequest>(k_, m_);
 		bool? o_(MedicationRequest DigoxinOrdered)
 		{
 			var ag_ = this.Average_Daily_Dose(DigoxinOrdered);
@@ -1505,7 +1505,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var t_ = this.Doxepin();
 		var u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
 		var w_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, null);
-		var x_ = context.Operators.ListUnion<MedicationRequest>(u_, w_);
+		var x_ = context.Operators.Union<MedicationRequest>(u_, w_);
 		bool? y_(MedicationRequest DoxepinOrdered)
 		{
 			var aj_ = this.Average_Daily_Dose(DoxepinOrdered);
@@ -1547,7 +1547,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var a_ = this.Antipsychotic();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = this.More_Than_One_Order(e_);
 		var g_ = context.Operators.Exists<MedicationRequest>(f_);
 
@@ -1563,7 +1563,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var a_ = this.Antipsychotic();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = Status_1_6_000.Active_or_Completed_Medication_Request(e_);
 		bool? g_(MedicationRequest AntipsychoticMedication)
 		{
@@ -1598,7 +1598,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var a_ = this.Benzodiazepine();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = this.More_Than_One_Order(e_);
 		var g_ = context.Operators.Exists<MedicationRequest>(f_);
 
@@ -1614,7 +1614,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var a_ = this.Benzodiazepine();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = Status_1_6_000.Active_or_Completed_Medication_Request(e_);
 		bool? g_(MedicationRequest BenzodiazepineMedication)
 		{
@@ -1651,7 +1651,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
 		var d_ = this.Bipolar_Disorder();
 		var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
-		var f_ = context.Operators.ListUnion<Condition>(c_, e_);
+		var f_ = context.Operators.Union<Condition>(c_, e_);
 		bool? g_(Condition AntipsychoticTreatedDiagnoses)
 		{
 			var ag_ = QICoreCommon_2_0_000.ToPrevalenceInterval(AntipsychoticTreatedDiagnoses);
@@ -1674,16 +1674,16 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		var n_ = context.Operators.RetrieveByValueSet<Condition>(m_, null);
 		var o_ = this.REM_Sleep_Behavior_Disorder();
 		var p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
-		var q_ = context.Operators.ListUnion<Condition>(n_, p_);
+		var q_ = context.Operators.Union<Condition>(n_, p_);
 		var r_ = this.Benzodiazepine_Withdrawal();
 		var s_ = context.Operators.RetrieveByValueSet<Condition>(r_, null);
 		var t_ = this.Alcohol_Withdrawal();
 		var u_ = context.Operators.RetrieveByValueSet<Condition>(t_, null);
-		var v_ = context.Operators.ListUnion<Condition>(s_, u_);
-		var w_ = context.Operators.ListUnion<Condition>(q_, v_);
+		var v_ = context.Operators.Union<Condition>(s_, u_);
+		var w_ = context.Operators.Union<Condition>(q_, v_);
 		var x_ = this.Generalized_Anxiety_Disorder();
 		var y_ = context.Operators.RetrieveByValueSet<Condition>(x_, null);
-		var z_ = context.Operators.ListUnion<Condition>(w_, y_);
+		var z_ = context.Operators.Union<Condition>(w_, y_);
 		bool? aa_(Condition BenzodiazepineTreatedDiagnoses)
 		{
 			var ao_ = QICoreCommon_2_0_000.ToPrevalenceInterval(BenzodiazepineTreatedDiagnoses);

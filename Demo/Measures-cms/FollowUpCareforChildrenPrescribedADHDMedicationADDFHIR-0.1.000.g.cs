@@ -472,44 +472,44 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var a_ = this.Atomoxetine();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = this.Clonidine();
 		var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
 		var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var j_ = context.Operators.ListUnion<MedicationRequest>(g_, i_);
-		var k_ = context.Operators.ListUnion<MedicationRequest>(e_, j_);
+		var j_ = context.Operators.Union<MedicationRequest>(g_, i_);
+		var k_ = context.Operators.Union<MedicationRequest>(e_, j_);
 		var l_ = this.Dexmethylphenidate();
 		var m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
 		var o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var p_ = context.Operators.ListUnion<MedicationRequest>(m_, o_);
-		var q_ = context.Operators.ListUnion<MedicationRequest>(k_, p_);
+		var p_ = context.Operators.Union<MedicationRequest>(m_, o_);
+		var q_ = context.Operators.Union<MedicationRequest>(k_, p_);
 		var r_ = this.Dextroamphetamine();
 		var s_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
 		var u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
-		var v_ = context.Operators.ListUnion<MedicationRequest>(s_, u_);
-		var w_ = context.Operators.ListUnion<MedicationRequest>(q_, v_);
+		var v_ = context.Operators.Union<MedicationRequest>(s_, u_);
+		var w_ = context.Operators.Union<MedicationRequest>(q_, v_);
 		var x_ = this.Lisdexamfetamine();
 		var y_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
 		var aa_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
-		var ab_ = context.Operators.ListUnion<MedicationRequest>(y_, aa_);
-		var ac_ = context.Operators.ListUnion<MedicationRequest>(w_, ab_);
+		var ab_ = context.Operators.Union<MedicationRequest>(y_, aa_);
+		var ac_ = context.Operators.Union<MedicationRequest>(w_, ab_);
 		var ad_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 		var ae_ = context.Operators.ToList<CqlCode>(ad_);
 		var af_ = context.Operators.RetrieveByCodes<MedicationRequest>(ae_, null);
 		var ah_ = context.Operators.ToList<CqlCode>(ad_);
 		var ai_ = context.Operators.RetrieveByCodes<MedicationRequest>(ah_, null);
-		var aj_ = context.Operators.ListUnion<MedicationRequest>(af_, ai_);
-		var ak_ = context.Operators.ListUnion<MedicationRequest>(ac_, aj_);
+		var aj_ = context.Operators.Union<MedicationRequest>(af_, ai_);
+		var ak_ = context.Operators.Union<MedicationRequest>(ac_, aj_);
 		var al_ = this.Methylphenidate();
 		var am_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
 		var ao_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
-		var ap_ = context.Operators.ListUnion<MedicationRequest>(am_, ao_);
-		var aq_ = context.Operators.ListUnion<MedicationRequest>(ak_, ap_);
+		var ap_ = context.Operators.Union<MedicationRequest>(am_, ao_);
+		var aq_ = context.Operators.Union<MedicationRequest>(ak_, ap_);
 		var ar_ = this.Guanfacine();
 		var as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
 		var au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		var av_ = context.Operators.ListUnion<MedicationRequest>(as_, au_);
-		var aw_ = context.Operators.ListUnion<MedicationRequest>(aq_, av_);
+		var av_ = context.Operators.Union<MedicationRequest>(as_, au_);
+		var aw_ = context.Operators.Union<MedicationRequest>(aq_, av_);
 		bool? ax_(MedicationRequest ADHDMedications)
 		{
 			var df_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ADHDMedications);
@@ -523,37 +523,37 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var ay_ = context.Operators.Where<MedicationRequest>(aw_, ax_);
 		var ba_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var bc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var bd_ = context.Operators.ListUnion<MedicationRequest>(ba_, bc_);
+		var bd_ = context.Operators.Union<MedicationRequest>(ba_, bc_);
 		var bf_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
 		var bh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var bi_ = context.Operators.ListUnion<MedicationRequest>(bf_, bh_);
-		var bj_ = context.Operators.ListUnion<MedicationRequest>(bd_, bi_);
+		var bi_ = context.Operators.Union<MedicationRequest>(bf_, bh_);
+		var bj_ = context.Operators.Union<MedicationRequest>(bd_, bi_);
 		var bl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
 		var bn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var bo_ = context.Operators.ListUnion<MedicationRequest>(bl_, bn_);
-		var bp_ = context.Operators.ListUnion<MedicationRequest>(bj_, bo_);
+		var bo_ = context.Operators.Union<MedicationRequest>(bl_, bn_);
+		var bp_ = context.Operators.Union<MedicationRequest>(bj_, bo_);
 		var br_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
 		var bt_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
-		var bu_ = context.Operators.ListUnion<MedicationRequest>(br_, bt_);
-		var bv_ = context.Operators.ListUnion<MedicationRequest>(bp_, bu_);
+		var bu_ = context.Operators.Union<MedicationRequest>(br_, bt_);
+		var bv_ = context.Operators.Union<MedicationRequest>(bp_, bu_);
 		var bx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
 		var bz_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
-		var ca_ = context.Operators.ListUnion<MedicationRequest>(bx_, bz_);
-		var cb_ = context.Operators.ListUnion<MedicationRequest>(bv_, ca_);
+		var ca_ = context.Operators.Union<MedicationRequest>(bx_, bz_);
+		var cb_ = context.Operators.Union<MedicationRequest>(bv_, ca_);
 		var cd_ = context.Operators.ToList<CqlCode>(ad_);
 		var ce_ = context.Operators.RetrieveByCodes<MedicationRequest>(cd_, null);
 		var cg_ = context.Operators.ToList<CqlCode>(ad_);
 		var ch_ = context.Operators.RetrieveByCodes<MedicationRequest>(cg_, null);
-		var ci_ = context.Operators.ListUnion<MedicationRequest>(ce_, ch_);
-		var cj_ = context.Operators.ListUnion<MedicationRequest>(cb_, ci_);
+		var ci_ = context.Operators.Union<MedicationRequest>(ce_, ch_);
+		var cj_ = context.Operators.Union<MedicationRequest>(cb_, ci_);
 		var cl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
 		var cn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
-		var co_ = context.Operators.ListUnion<MedicationRequest>(cl_, cn_);
-		var cp_ = context.Operators.ListUnion<MedicationRequest>(cj_, co_);
+		var co_ = context.Operators.Union<MedicationRequest>(cl_, cn_);
+		var cp_ = context.Operators.Union<MedicationRequest>(cj_, co_);
 		var cr_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
 		var ct_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		var cu_ = context.Operators.ListUnion<MedicationRequest>(cr_, ct_);
-		var cv_ = context.Operators.ListUnion<MedicationRequest>(cp_, cu_);
+		var cu_ = context.Operators.Union<MedicationRequest>(cr_, ct_);
+		var cv_ = context.Operators.Union<MedicationRequest>(cp_, cu_);
 		bool? cw_(MedicationRequest ADHDMedications)
 		{
 			var dk_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ADHDMedications);
@@ -570,44 +570,44 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			var dp_ = this.Atomoxetine();
 			var dq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, null);
 			var ds_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, null);
-			var dt_ = context.Operators.ListUnion<MedicationRequest>(dq_, ds_);
+			var dt_ = context.Operators.Union<MedicationRequest>(dq_, ds_);
 			var du_ = this.Clonidine();
 			var dv_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, null);
 			var dx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, null);
-			var dy_ = context.Operators.ListUnion<MedicationRequest>(dv_, dx_);
-			var dz_ = context.Operators.ListUnion<MedicationRequest>(dt_, dy_);
+			var dy_ = context.Operators.Union<MedicationRequest>(dv_, dx_);
+			var dz_ = context.Operators.Union<MedicationRequest>(dt_, dy_);
 			var ea_ = this.Dexmethylphenidate();
 			var eb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, null);
 			var ed_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, null);
-			var ee_ = context.Operators.ListUnion<MedicationRequest>(eb_, ed_);
-			var ef_ = context.Operators.ListUnion<MedicationRequest>(dz_, ee_);
+			var ee_ = context.Operators.Union<MedicationRequest>(eb_, ed_);
+			var ef_ = context.Operators.Union<MedicationRequest>(dz_, ee_);
 			var eg_ = this.Dextroamphetamine();
 			var eh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, null);
 			var ej_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, null);
-			var ek_ = context.Operators.ListUnion<MedicationRequest>(eh_, ej_);
-			var el_ = context.Operators.ListUnion<MedicationRequest>(ef_, ek_);
+			var ek_ = context.Operators.Union<MedicationRequest>(eh_, ej_);
+			var el_ = context.Operators.Union<MedicationRequest>(ef_, ek_);
 			var em_ = this.Lisdexamfetamine();
 			var en_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, null);
 			var ep_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, null);
-			var eq_ = context.Operators.ListUnion<MedicationRequest>(en_, ep_);
-			var er_ = context.Operators.ListUnion<MedicationRequest>(el_, eq_);
+			var eq_ = context.Operators.Union<MedicationRequest>(en_, ep_);
+			var er_ = context.Operators.Union<MedicationRequest>(el_, eq_);
 			var es_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 			var et_ = context.Operators.ToList<CqlCode>(es_);
 			var eu_ = context.Operators.RetrieveByCodes<MedicationRequest>(et_, null);
 			var ew_ = context.Operators.ToList<CqlCode>(es_);
 			var ex_ = context.Operators.RetrieveByCodes<MedicationRequest>(ew_, null);
-			var ey_ = context.Operators.ListUnion<MedicationRequest>(eu_, ex_);
-			var ez_ = context.Operators.ListUnion<MedicationRequest>(er_, ey_);
+			var ey_ = context.Operators.Union<MedicationRequest>(eu_, ex_);
+			var ez_ = context.Operators.Union<MedicationRequest>(er_, ey_);
 			var fa_ = this.Methylphenidate();
 			var fb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, null);
 			var fd_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, null);
-			var fe_ = context.Operators.ListUnion<MedicationRequest>(fb_, fd_);
-			var ff_ = context.Operators.ListUnion<MedicationRequest>(ez_, fe_);
+			var fe_ = context.Operators.Union<MedicationRequest>(fb_, fd_);
+			var ff_ = context.Operators.Union<MedicationRequest>(ez_, fe_);
 			var fg_ = this.Guanfacine();
 			var fh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, null);
 			var fj_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, null);
-			var fk_ = context.Operators.ListUnion<MedicationRequest>(fh_, fj_);
-			var fl_ = context.Operators.ListUnion<MedicationRequest>(ff_, fk_);
+			var fk_ = context.Operators.Union<MedicationRequest>(fh_, fj_);
+			var fl_ = context.Operators.Union<MedicationRequest>(ff_, fk_);
 			bool? fm_(MedicationRequest ActiveADHDMedication)
 			{
 				var fq_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ActiveADHDMedication);
@@ -705,13 +705,13 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Home_Healthcare_Services();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		bool? l_(Encounter ValidEncounters)
 		{
 			var n_ = this.IPSD();
@@ -929,13 +929,13 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Initial_Hospital_Observation_Care();
 		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var e_ = context.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care_Services_Group_Counseling();
 		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Behavioral_Health_Follow_up_Visit();
 		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
-		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var j_ = context.Operators.Union<Encounter>(g_, i_);
+		var k_ = context.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Preventive_Care_Services_Individual_Counseling();
 		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Psychotherapy_and_Pharmacologic_Management();
@@ -966,29 +966,29 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			return ar_;
 		};
 		var q_ = context.Operators.Where<Encounter>(o_, p_);
-		var r_ = context.Operators.ListUnion<Encounter>(m_, q_);
-		var s_ = context.Operators.ListUnion<Encounter>(k_, r_);
+		var r_ = context.Operators.Union<Encounter>(m_, q_);
+		var s_ = context.Operators.Union<Encounter>(k_, r_);
 		var t_ = this.Outpatient_Consultation();
 		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
 		var v_ = this.Home_Healthcare_Services();
 		var w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, null);
-		var x_ = context.Operators.ListUnion<Encounter>(u_, w_);
-		var y_ = context.Operators.ListUnion<Encounter>(s_, x_);
+		var x_ = context.Operators.Union<Encounter>(u_, w_);
+		var y_ = context.Operators.Union<Encounter>(s_, x_);
 		var z_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
 		var aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
 		var ab_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
 		var ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, null);
-		var ad_ = context.Operators.ListUnion<Encounter>(aa_, ac_);
-		var ae_ = context.Operators.ListUnion<Encounter>(y_, ad_);
+		var ad_ = context.Operators.Union<Encounter>(aa_, ac_);
+		var ae_ = context.Operators.Union<Encounter>(y_, ad_);
 		var af_ = this.Psych_Visit_Diagnostic_Evaluation();
 		var ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
 		var ah_ = this.Psych_Visit_Psychotherapy();
 		var ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, null);
-		var aj_ = context.Operators.ListUnion<Encounter>(ag_, ai_);
-		var ak_ = context.Operators.ListUnion<Encounter>(ae_, aj_);
+		var aj_ = context.Operators.Union<Encounter>(ag_, ai_);
+		var ak_ = context.Operators.Union<Encounter>(ae_, aj_);
 		var al_ = this.Telephone_Visits();
 		var am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, null);
-		var an_ = context.Operators.ListUnion<Encounter>(ak_, am_);
+		var an_ = context.Operators.Union<Encounter>(ak_, am_);
 
 		return an_;
 	}
@@ -1042,7 +1042,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var a_ = this.Atomoxetine();
 		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.ListUnion<MedicationRequest>(b_, d_);
+		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD f_(MedicationRequest AtomoxetineMed)
 		{
 			var dt_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(AtomoxetineMed);
@@ -1082,7 +1082,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var o_ = this.Clonidine();
 		var p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
 		var r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
-		var s_ = context.Operators.ListUnion<MedicationRequest>(p_, r_);
+		var s_ = context.Operators.Union<MedicationRequest>(p_, r_);
 		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD t_(MedicationRequest ClonidineMed)
 		{
 			var eb_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ClonidineMed);
@@ -1119,11 +1119,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		};
 		var aa_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(y_, z_);
 		var ab_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(aa_);
-		var ac_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(n_, ab_);
+		var ac_ = context.Operators.Union<CqlInterval<CqlDate>>(n_, ab_);
 		var ad_ = this.Dexmethylphenidate();
 		var ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
 		var ag_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
-		var ah_ = context.Operators.ListUnion<MedicationRequest>(ae_, ag_);
+		var ah_ = context.Operators.Union<MedicationRequest>(ae_, ag_);
 		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD ai_(MedicationRequest DexmethylphenidateMed)
 		{
 			var ej_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DexmethylphenidateMed);
@@ -1163,7 +1163,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var ar_ = this.Dextroamphetamine();
 		var as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
 		var au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		var av_ = context.Operators.ListUnion<MedicationRequest>(as_, au_);
+		var av_ = context.Operators.Union<MedicationRequest>(as_, au_);
 		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD aw_(MedicationRequest DextroamphetamineMed)
 		{
 			var er_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DextroamphetamineMed);
@@ -1200,12 +1200,12 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		};
 		var bd_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(bb_, bc_);
 		var be_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bd_);
-		var bf_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(aq_, be_);
-		var bg_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(ac_, bf_);
+		var bf_ = context.Operators.Union<CqlInterval<CqlDate>>(aq_, be_);
+		var bg_ = context.Operators.Union<CqlInterval<CqlDate>>(ac_, bf_);
 		var bh_ = this.Lisdexamfetamine();
 		var bi_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
 		var bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
-		var bl_ = context.Operators.ListUnion<MedicationRequest>(bi_, bk_);
+		var bl_ = context.Operators.Union<MedicationRequest>(bi_, bk_);
 		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD bm_(MedicationRequest LisdexamfetamineMed)
 		{
 			var ez_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(LisdexamfetamineMed);
@@ -1245,7 +1245,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var bv_ = this.Methylphenidate();
 		var bw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
 		var by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
-		var bz_ = context.Operators.ListUnion<MedicationRequest>(bw_, by_);
+		var bz_ = context.Operators.Union<MedicationRequest>(bw_, by_);
 		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD ca_(MedicationRequest MethylphenidateMed)
 		{
 			var fh_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethylphenidateMed);
@@ -1282,12 +1282,12 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		};
 		var ch_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(cf_, cg_);
 		var ci_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ch_);
-		var cj_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(bu_, ci_);
-		var ck_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(bg_, cj_);
+		var cj_ = context.Operators.Union<CqlInterval<CqlDate>>(bu_, ci_);
+		var ck_ = context.Operators.Union<CqlInterval<CqlDate>>(bg_, cj_);
 		var cl_ = this.Guanfacine();
 		var cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
 		var co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
-		var cp_ = context.Operators.ListUnion<MedicationRequest>(cm_, co_);
+		var cp_ = context.Operators.Union<MedicationRequest>(cm_, co_);
 		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD cq_(MedicationRequest GuanfacineMed)
 		{
 			var fp_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(GuanfacineMed);
@@ -1329,7 +1329,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		var db_ = context.Operators.RetrieveByCodes<MedicationRequest>(da_, null);
 		var dd_ = context.Operators.ToList<CqlCode>(cz_);
 		var de_ = context.Operators.RetrieveByCodes<MedicationRequest>(dd_, null);
-		var df_ = context.Operators.ListUnion<MedicationRequest>(db_, de_);
+		var df_ = context.Operators.Union<MedicationRequest>(db_, de_);
 		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD dg_(MedicationRequest MethamphetamineMed)
 		{
 			var fx_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethamphetamineMed);
@@ -1366,8 +1366,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		};
 		var dn_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(dl_, dm_);
 		var do_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(dn_);
-		var dp_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(cy_, do_);
-		var dq_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(ck_, dp_);
+		var dp_ = context.Operators.Union<CqlInterval<CqlDate>>(cy_, do_);
+		var dq_ = context.Operators.Union<CqlInterval<CqlDate>>(ck_, dp_);
 		CqlInterval<CqlDate> dr_(CqlInterval<CqlDate> ADHDMedication)
 		{
 			var gf_ = this.IPSD();

@@ -1170,7 +1170,7 @@ namespace Hl7.Cql.Runtime
 
         #region Union
 
-        public IEnumerable<T>? ListUnion<T>(IEnumerable<T>? left, IEnumerable<T>? right)
+        public IEnumerable<T>? Union<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
             if (left == null)
                 return right;
