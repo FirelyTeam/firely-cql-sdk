@@ -273,7 +273,6 @@ namespace Hl7.Cql.Compiler
                         ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
                         Coalesce e         => Coalesce(e),
                         Equivalent e       => Equivalent(e),
-                        FunctionRef e      => FunctionRef(e),
                         AliasRef e         => GetScopeExpression(e.name!),
                         QueryLetRef e      => GetScopeExpression(e.name!),
                         IdentifierRef e    => IdentifierRef(e),
@@ -288,7 +287,6 @@ namespace Hl7.Cql.Compiler
                         Message e          => Message(e),
                         Null e             => NullExpression.ForType(TypeFor(e)!),
                         OperandRef e       => OperandRef(e),
-
                         ProperContains e   => ProperContains(e),
                         ProperIn e         => ProperIn(e),
                         ProperIncludedIn e => ProperIncludedIn(e),
@@ -296,6 +294,9 @@ namespace Hl7.Cql.Compiler
                         Property e         => Property(e),
                         Query e            => Query(e),
                         Tuple e            => Tuple(e),
+
+                        // InvokeDefinedFunctionThroughRuntimeContext
+                        FunctionRef e      => FunctionRef(e),
 
                         // InvokeDefinitionThroughRuntimeContext
                         CodeRef e          => CodeRef(e),
@@ -672,6 +673,7 @@ namespace Hl7.Cql.Compiler
             var type = _typeResolver.CodeType.MakeArrayType();
             return InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.libraryName, type);
         }
+
         protected Expression ConceptRef(ConceptRef conceptRef)
         {
             if (string.IsNullOrWhiteSpace(conceptRef.name))
@@ -1435,11 +1437,13 @@ namespace Hl7.Cql.Compiler
     {
         private Expression Message(Message e)
         {
-            var source = TranslateArg(e.source!);
             var condition = TranslateArg(e.condition!);
+
+            var source = TranslateArg(e.source!);
             var code = TranslateArg(e.code!);
             var severity = TranslateArg(e.severity!);
             var message = TranslateArg(e.message!);
+
             if (source is ConstantExpression { Value: null } constant)
             {
                 // create an explicit "null as object" so the generic type can be inferred in source code.
@@ -1639,35 +1643,6 @@ namespace Hl7.Cql.Compiler
                     throw this.NewExpressionBuildingException();
                 var precision = ((IGetPrecision)e).precisionOrNull;
                 return BindCqlOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), left, right, precision);
-            }
-            throw new NotImplementedException().WithContext(this);
-        }
-
-
-        protected Expression UnionX(Union e)
-        {
-            var left = TranslateArg(e.operand![0]);
-            var right = TranslateArg(e.operand![1]);
-            if (_typeResolver.IsListType(left.Type))
-            {
-                var leftElementType = _typeResolver.GetListElementType(left.Type)!;
-                if (_typeResolver.IsListType(right.Type))
-                {
-                    var rightElementType = _typeResolver.GetListElementType(right.Type)!;
-                    if (leftElementType != rightElementType)
-                        throw this.NewExpressionBuildingException($"Union requires both operands to be of the same type, " +
-                                                                  $"but left is {leftElementType.Name} and right is {rightElementType.Name}.");
-                    return BindCqlOperator(nameof(ICqlOperators.Union), left, right);
-                }
-            }
-            else if (left.Type.IsCqlInterval(out var leftPointType))
-            {
-                if (right.Type.IsCqlInterval(out var rightPointType))
-                {
-                    if (leftPointType != rightPointType)
-                        throw this.NewExpressionBuildingException();
-                    return BindCqlOperator(nameof(ICqlOperators.Union), left, right);
-                }
             }
             throw new NotImplementedException().WithContext(this);
         }
@@ -2254,7 +2229,7 @@ namespace Hl7.Cql.Compiler
 
     #endregion
 
-    #region TypeOperators
+    #region Type Operators
 
     partial class ExpressionBuilderContext
     {
@@ -2270,13 +2245,16 @@ namespace Hl7.Cql.Compiler
                         var type = TypeFor(@as.asTypeSpecifier!);
                         if (_typeResolver.IsListType(type))
                         {
-                            var listElementType = _typeResolver.GetListElementType(type) ?? throw this.NewExpressionBuildingException($"{type} was expected to be a list type.");
+                            var listElementType = _typeResolver.GetListElementType(type) ??
+                                                  throw this.NewExpressionBuildingException(
+                                                      $"{type} was expected to be a list type.");
                             var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
                             var elmAs = new ElmAsExpression(newArray, type);
                             return elmAs;
                         }
 
-                        throw this.NewExpressionBuildingException("Cannot use as operator on a list if the as type is not also a list type.");
+                        throw this.NewExpressionBuildingException(
+                            "Cannot use as operator on a list if the as type is not also a list type.");
                     }
                 }
             }
@@ -2314,7 +2292,9 @@ namespace Hl7.Cql.Compiler
                 var operand = TranslateArg(@as.operand);
                 if (!type.IsAssignableTo(operand.Type))
                 {
-                    _logger.LogWarning(FormatMessage($"Potentially unsafe cast from {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to type {type.ToCSharpString(Defaults.TypeCSharpFormat)}", @as.operand));
+                    _logger.LogWarning(FormatMessage(
+                                           $"Potentially unsafe cast from {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to type {type.ToCSharpString(Defaults.TypeCSharpFormat)}",
+                                           @as.operand));
                 }
 
                 return new ElmAsExpression(operand, type);
@@ -2329,33 +2309,48 @@ namespace Hl7.Cql.Compiler
             {
                 if (@is.isTypeSpecifier is ChoiceTypeSpecifier choice)
                 {
-                    var firstChoiceType = TypeFor(choice.choice[0]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                    var firstChoiceType = TypeFor(choice.choice[0]) ??
+                                          throw this.NewExpressionBuildingException(
+                                              $"Could not resolve type for Is expression");
                     Expression result = op.NewTypeIsExpression(firstChoiceType);
                     for (int i = 1; i < choice.choice.Length; i++)
                     {
-                        var cti = TypeFor(choice.choice[i]) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                        var cti = TypeFor(choice.choice[i]) ??
+                                  throw this.NewExpressionBuildingException(
+                                      $"Could not resolve type for Is expression");
                         var ie = op.NewTypeIsExpression(cti);
                         result = Expression.Or(result, ie);
                     }
+
                     var ta = result.NewTypeAsExpression<bool?>();
                     return ta;
                 }
 
-                type = TypeFor(@is.isTypeSpecifier) ?? throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
+                type = TypeFor(@is.isTypeSpecifier) ??
+                       throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
             }
             else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
             {
-                type = _typeResolver.ResolveType(@is.isType.Name) ?? throw this.NewExpressionBuildingException($"Could not resolve type {@is.isType.Name}");
+                type = _typeResolver.ResolveType(@is.isType.Name) ??
+                       throw this.NewExpressionBuildingException($"Could not resolve type {@is.isType.Name}");
             }
 
             if (type == null)
-                throw this.NewExpressionBuildingException($"Could not identify Is type specifer via {nameof(@is.isTypeSpecifier)} or {nameof(@is.isType)}.");
+                throw this.NewExpressionBuildingException(
+                    $"Could not identify Is type specifer via {nameof(@is.isTypeSpecifier)} or {nameof(@is.isType)}.");
 
             var isExpression = op.NewTypeIsExpression(type);
             var nullable = isExpression.NewTypeAsExpression<bool?>();
             return nullable;
         }
+    }
 
+    #endregion
+
+    #region ChangeType
+
+    partial class ExpressionBuilderContext
+    {
         private Expression ChangeType(
             Expression expr,
             TypeSpecifier? typeSpecifier) // @TODO: Cast - ChangeType
