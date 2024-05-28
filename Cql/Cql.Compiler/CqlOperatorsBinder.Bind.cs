@@ -100,7 +100,7 @@ internal partial class CqlOperatorsBinder
             _logger.LogDebug(
                 "Resolved with score {score} to method overload {candidate}",
                 Score(candidate!),
-                new StringBuilder().AppendCSharp(candidate.method!, methodCSharpFormat));
+                candidate.method?.ToCSharpString(methodCSharpFormat));
         }
 
         return (candidate.method, candidate.arguments);

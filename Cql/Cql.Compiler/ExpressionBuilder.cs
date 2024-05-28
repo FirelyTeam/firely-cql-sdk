@@ -362,6 +362,7 @@ namespace Hl7.Cql.Compiler
                     End or
                     EndsWith or
                     Equal or
+                    Elm.Equivalent or
                     Exists or
                     Except or
                     Exp or
@@ -1410,24 +1411,17 @@ namespace Hl7.Cql.Compiler
     {
         protected Expression Equivalent(Equivalent eqv)
         {
-            var left = TranslateArg(eqv.operand[0]);
-            var right = TranslateArg(eqv.operand[1]);
-            if (!_typeResolver.IsListType(left.Type))
-                return BindCqlOperator(nameof(ICqlOperators.Equivalent), left, right);
-
-            var leftElementType = _typeResolver.GetListElementType(left.Type);
-            if (!_typeResolver.IsListType(right.Type))
-                throw new NotImplementedException().WithContext(this);
-
-            var rightElementType = _typeResolver.GetListElementType(right.Type);
-            if (leftElementType != rightElementType)
+            if (TranslateArgs(eqv.operands) is [{ } left, { } right]
+                && _typeResolver.GetListElementType(left.Type, throwError:false) is { } leftType
+                && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightType
+                && leftType != rightType)
             {
                 // This appears in the CQL tests:
                 //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
                 return Expression.Constant(false, typeof(bool?));
             }
 
-            return BindCqlOperator(nameof(ICqlOperators.Equivalent), left, right);
+            return BindCqlOperator(nameof(ICqlOperators.Equivalent), GetBindArgs(eqv));
         }
     }
 
