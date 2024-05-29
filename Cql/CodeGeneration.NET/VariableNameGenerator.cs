@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         public VariableNameGenerator(IEnumerable<ParameterExpression> reserved, string postfix = "") :
             this(reserved.Where(p => p.Name is not null).Select(p => p.Name!), postfix)
         {
-            // Nothing           
+            // Nothing
         }
 
         internal VariableNameGenerator(List<char> state, IEnumerable<string>? reserved = null, string postfix = "")
@@ -102,26 +102,26 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             if (string.IsNullOrEmpty(identifier))
                 return null;
-            
+
             if (identifier.StartsWith('$'))
                 identifier = identifier[1..];
 
             identifier = identifier.Replace("\"",string.Empty);
             identifier = identifier.Replace("'",string.Empty);
             identifier = identifier.Replace("&","and");
-            
+
             // If we start with an invalid character for the start position, add an underscore
-            if (!SyntaxFacts.IsIdentifierStartCharacter(identifier[0]) && 
+            if (!SyntaxFacts.IsIdentifierStartCharacter(identifier[0]) &&
                 SyntaxFacts.IsIdentifierPartCharacter(identifier[0]))
                 identifier = "_" + identifier;
 
             // go over the string and replace all characters that are not allowed in an identifier
             var replaced = identifier.Select(c => SyntaxFacts.IsIdentifierPartCharacter(c) ? c : '_');
             identifier = string.Concat(replaced);
-            
+
             if (SyntaxFacts.GetKeywordKind(identifier) != SyntaxKind.None)
                 identifier = $"@{identifier}";
-            
+
             return identifier;
         }
 

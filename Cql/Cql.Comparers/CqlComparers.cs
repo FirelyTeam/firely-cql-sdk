@@ -1,7 +1,7 @@
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -82,8 +82,8 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <summary>
-        /// Registers a comparer for the generic type definition <see cref="Type"/>.  
-        /// Generic type definitions can be specified by omitting type parameters but preserving commas to indicate number of generic type arguments, 
+        /// Registers a comparer for the generic type definition <see cref="Type"/>.
+        /// Generic type definitions can be specified by omitting type parameters but preserving commas to indicate number of generic type arguments,
         /// e.g. <code>typeof(IDictionary&lt;&gt;>)</code>.
         /// They can also be acquired via <see cref="Type.GetGenericTypeDefinition()"/>.
         /// </summary>

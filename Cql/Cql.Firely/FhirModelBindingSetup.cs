@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -26,7 +26,7 @@ namespace Hl7.Cql.Fhir
     internal class FhirModelBindingSetup : ModelBindingSetup
     {
         /// <summary>
-        /// Creates a model binding for the .NET SDK POCO's given the default 
+        /// Creates a model binding for the .NET SDK POCO's given the default
         /// <see cref="FhirModelBindingOptions"/>.
         /// </summary>
         public FhirModelBindingSetup(
@@ -64,7 +64,7 @@ namespace Hl7.Cql.Fhir
         }
 
         /// <summary>
-        /// Creates a model binding for the .NET SDK POCO's with the default 
+        /// Creates a model binding for the .NET SDK POCO's with the default
         /// <see cref="FhirModelBindingOptions"/>.
         /// </summary>
         public FhirModelBindingSetup(

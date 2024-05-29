@@ -20,7 +20,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyDateTime":
 		///	( DateTime(2012, 4, 4) ) = @2012-04-04
@@ -34,7 +34,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTime":
 		///	( @T09:00:00.000 ) = @T09:00:00.000
@@ -48,7 +48,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyInterval":
 		///	( Interval[2, 7] ) = Interval[2, 7]
@@ -62,7 +62,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyList":
 		///	( {1, 2, 3} ) = {1, 2, 3}
@@ -76,7 +76,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyTuple":
 		///	( Tuple { id: 5, name: 'Chris'} ) = Tuple { id: 5, name: 'Chris'}
@@ -90,7 +90,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AnyString":
 		///	( Tuple { id: 5, name: 'Chris'}.name ) = 'Chris'
@@ -104,7 +104,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeNull":
 		///	( DateTime(null) ) = null
@@ -118,7 +118,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeProper":
 		///	( DateTime(2016, 7, 7, 6, 25, 33, 910) ) = @2016-07-07T06:25:33.910
@@ -132,7 +132,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeIncomplete":
 		///	( DateTime(2015, 2, 10) ) = @2015-02-10
@@ -146,7 +146,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeUncertain":
 		///	( days between DateTime(2015, 2, 10) and DateTime(2015, 3) ) = Interval [ 19, 49 ]
@@ -161,7 +161,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeMin":
 		///	( DateTime(0001, 1, 1, 0, 0, 0, 0) ) = @0001-01-01T00:00:00.000
@@ -175,7 +175,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeMax":
 		///	( DateTime(9999, 12, 31, 23, 59, 59, 999) ) = @9999-12-31T23:59:59.999
@@ -189,7 +189,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "QuantityTest":
 		///	( 150.2 'lbs' ) = 150.2 'lbs'
@@ -203,7 +203,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "QuantityTest2":
 		///	( 2.5589 'eskimo kisses' ) = 2.5589 'eskimo kisses'
@@ -217,7 +217,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "QuantityFractionalTooBig":
 		///	( 5.999999999 'g' ) = 5.999999999 'g'
@@ -231,7 +231,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StringTestEscapeQuotes":
 		///	( '\'I start with a single quote and end with a double quote\"' ) = '\u0027I start with a single quote and end with a double quote\u0022'
@@ -245,7 +245,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StringUnicodeTest":
 		///	( '\u0048\u0069' ) = 'Hi'
@@ -259,7 +259,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TimeProper":
 		///	( @T10:25:12.863 ) = @T10:25:12.863
@@ -273,7 +273,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TimeAllMax":
 		///	( @T23:59:59.999 ) = @T23:59:59.999
@@ -287,7 +287,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TimeAllMin":
 		///	( @T00:00:00.000 ) = @T00:00:00.000
@@ -301,7 +301,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+

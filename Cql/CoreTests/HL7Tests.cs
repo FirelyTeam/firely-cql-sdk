@@ -19,7 +19,7 @@ namespace CoreTests
         public const string NotSupported = "Not supported";
         public const string BadTest = "Test is nonsensical";
 
-        private static ILoggerFactory LoggerFactory { get; } = 
+        private static ILoggerFactory LoggerFactory { get; } =
             Microsoft.Extensions.Logging.LoggerFactory
             .Create(logging => logging.AddDebug());
 
