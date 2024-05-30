@@ -26,6 +26,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Binary = binary;
             SourceCode = sourceCode;
         }
+
         /// <summary>
         /// Gets the binary data for the <see cref="Assembly"/>.
         /// </summary>
