@@ -67,7 +67,7 @@ internal static class LibraryRunner
 
         //* 2nd try */
         //var asmContext = ResourceHelper.LoadResources(new DirectoryInfo(opt.LibraryDirectory), opt.LibraryName, opt.LibraryVersion);
-        var assembly = Assembly.Load("Measures-cms");
+        var assembly = Assembly.Load("Measures.CMS");
         RunShared(opt, assembly);
 
         // var json = JsonSerializer.Serialize(values,
