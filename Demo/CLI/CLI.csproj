@@ -17,7 +17,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
-		<ProjectReference Include="..\Measures\Measures.csproj" />
+		<ProjectReference Include="..\Measures.Demo\Measures.Demo.csproj" />
 	</ItemGroup>
 
 

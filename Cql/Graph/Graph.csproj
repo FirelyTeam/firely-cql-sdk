@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -13,7 +13,7 @@
 		<PackageReference Include="System.Text.Json" Version="8.0.3" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="Test" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Test.Measures.Demo" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Elm" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />

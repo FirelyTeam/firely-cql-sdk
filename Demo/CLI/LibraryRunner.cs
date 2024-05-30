@@ -61,7 +61,7 @@ namespace CLI
             var name = parts[0];
             var version = parts[1];
 
-            var type = typeof(FHIRHelpers_4_0_001).Assembly
+            var type = Assembly.Load("Measures.Demo")
                 .GetTypes()
                 .SingleOrDefault(t =>
                 {

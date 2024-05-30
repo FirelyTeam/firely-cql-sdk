@@ -9,8 +9,8 @@ var solutionDir = new DirectoryInfo(Environment.CurrentDirectory)
 
 CSharpCodeWriterTypeFormat csTypeFormat = CSharpCodeWriterTypeFormat.Var;
 (string subDir, string measureSubDir)[] iteration = [
-    ("Demo", "Measures"),
-    ("CMS", "Measures-cms")
+    ("Demo", "Measures.Demo"),
+    ("CMS", "Measures.CMS")
 ];
 
 bool first = true;
@@ -26,7 +26,7 @@ foreach ((string librarySetSubDir, string measuresSubDir) in iteration)
                         --cql "{solutionDir}/LibrarySets/{librarySetSubDir}/Cql"
                         --fhir "{solutionDir}/LibrarySets/{librarySetSubDir}/Resources"
                         --dll "{solutionDir}/LibrarySets/{librarySetSubDir}/Assemblies"
-                        --cs "{solutionDir}/Demo/{measuresSubDir}"
+                        --cs "{solutionDir}/Demo/{measuresSubDir}/CSharp"
                         --cs-typeformat {csTypeFormat}
                         --f true
                         {(first ? "" : "--log-dont-clear true")}
