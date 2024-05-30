@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "CLI-cms": {
+    "CLI.CMS": {
       "commandName": "Project",
       "commandLineArgs": "-l AlaraCTFHIR-0.1.001 -t 1d5593d0-f513-46f6-8c2d-538685a61185 -a Project -r \"$(SolutionDir)LibrarySets\\CMS\\Resources\""
     }

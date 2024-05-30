@@ -21,7 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
-    <ProjectReference Include="..\Measures-cms\Measures-cms.csproj" />
+    <ProjectReference Include="..\Measures.CMS\Measures.CMS.csproj" />
   </ItemGroup>
 
 </Project>

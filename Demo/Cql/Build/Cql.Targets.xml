@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Project TreatAsLocalProperty="CqlDirectory">
+<Project>
 	<Import Project="Common.props" />
 
 	<!-- Turn off visual studio msbuild automatics -->
@@ -55,7 +55,7 @@
 
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
-		<CSharpDirectory>$(MSBuildProjectDirectory)</CSharpDirectory>
+		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
@@ -74,13 +74,13 @@
 
 		<ItemGroup>
 			<!-- Keep relative path else complains about duplicates-->
-			<CSharpFiles Include="**/*.cs" />
+			<CSharpFiles Include="CSharp/**/*.cs" />
 			<Compile Include="@(CSharpFiles)" Exclude="@(Compile)" KeepDuplicates="false"/>
 		</ItemGroup>
 	</Target>
 
 	<ItemGroup>
-		<CSharpFiles Include="**/*.cs" />
+		<CSharpFiles Include="CSharp/**/*.cs" />
 	</ItemGroup>
 
 	<Target Name="Delete CSharp" AfterTargets="Clean">
