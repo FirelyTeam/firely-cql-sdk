@@ -20,7 +20,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueAndFalse":
 		///	( true and false ) = false
@@ -34,7 +34,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueAndNull":
 		///	( true and null ) = null
@@ -48,7 +48,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseAndTrue":
 		///	( false and true ) = false
@@ -62,7 +62,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseAndFalse":
 		///	( false and false ) = false
@@ -76,7 +76,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseAndNull":
 		///	( false and null ) = false
@@ -90,7 +90,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NullAndTrue":
 		///	( null and true ) = null
@@ -104,7 +104,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "NullAndFalse":
 		///	( null and false ) = false
@@ -118,7 +118,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NullAndNull":
 		///	( null and null ) = null
@@ -132,7 +132,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueImpliesTrue":
 		///	( true implies true ) = true
@@ -147,7 +147,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueImpliesFalse":
 		///	( true implies false ) = false
@@ -162,7 +162,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueImpliesNull":
 		///	( true implies null ) = null
@@ -177,7 +177,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseImpliesTrue":
 		///	( false implies true ) = true
@@ -192,7 +192,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseImpliesFalse":
 		///	( false implies false ) = true
@@ -207,7 +207,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseImpliesNull":
 		///	( false implies null ) = true
@@ -222,7 +222,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NullImpliesTrue":
 		///	( null implies true ) = true
@@ -237,7 +237,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NullImpliesFalse":
 		///	( null implies false ) = null
@@ -252,7 +252,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "NullImpliesNull":
 		///	( null implies null ) = null
@@ -267,7 +267,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "NotTrue":
 		///	( not true ) = false
@@ -281,7 +281,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotFalse":
 		///	( not false ) = true
@@ -295,7 +295,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NotNull":
 		///	( not null ) = null
@@ -309,7 +309,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueOrTrue":
 		///	( true or true ) = true
@@ -323,7 +323,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueOrFalse":
 		///	( true or false ) = true
@@ -337,7 +337,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueOrNull":
 		///	( true or null ) = true
@@ -351,7 +351,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseOrTrue":
 		///	( false or true ) = true
@@ -365,7 +365,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseOrFalse":
 		///	( false or false ) = false
@@ -379,7 +379,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseOrNull":
 		///	( false or null ) = null
@@ -393,7 +393,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "NullOrTrue":
 		///	( null or true ) = true
@@ -407,7 +407,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "NullOrFalse":
 		///	( null or false ) = null
@@ -421,7 +421,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "NullOrNull":
 		///	( null or null ) = null
@@ -435,7 +435,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueXorTrue":
 		///	( true xor true ) = false
@@ -449,7 +449,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueXorFalse":
 		///	( true xor false ) = true
@@ -463,7 +463,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TrueXorNull":
 		///	( true xor null ) = null
@@ -477,7 +477,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseXorTrue":
 		///	( false xor true ) = true
@@ -491,7 +491,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseXorFalse":
 		///	( false xor false ) = false
@@ -505,7 +505,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "FalseXorNull":
 		///	( false xor null ) = null
@@ -519,7 +519,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "NullXorTrue":
 		///	( null xor true ) = null
@@ -533,7 +533,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "NullXorFalse":
 		///	( null xor false ) = null
@@ -547,7 +547,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "NullXorNull":
 		///	( null xor null ) = null
@@ -561,7 +561,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
     }
 }
-                
+

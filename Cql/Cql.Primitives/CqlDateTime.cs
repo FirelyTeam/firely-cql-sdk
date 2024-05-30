@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -322,9 +322,9 @@ namespace Hl7.Cql.Primitives
         /// <param name="other">An object to compare with this instance.</param>
         /// <param name="precision">The specified precision, or <see langword="null"/>.</param>
         /// <returns>
-        /// A value that indicates the relative order of the objects being compared.  
-        /// If the value is less than zero, this object is less than <paramref name="other"/>.  
-        /// If the value is zero, this object is equal to <paramref name="other"/>.  
+        /// A value that indicates the relative order of the objects being compared.
+        /// If the value is less than zero, this object is less than <paramref name="other"/>.
+        /// If the value is zero, this object is equal to <paramref name="other"/>.
         /// If the value is greater than zero, this object is greater than <paramref name="other"/>.
         /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
         /// </returns>
@@ -397,7 +397,7 @@ namespace Hl7.Cql.Primitives
                         else return yearComparison;
                     }
                 // When comparing DateTime values with different timezone offsets, implementations should normalize
-                // to the timezone offset of the evaluation request timestamp, but only when the comparison precision is hours, minutes, seconds, or milliseconds.               
+                // to the timezone offset of the evaluation request timestamp, but only when the comparison precision is hours, minutes, seconds, or milliseconds.
                 // https://cql.hl7.org/09-b-cqlreference.html#before
                 // It doesn't actually have to be the request timezone; the dates just have to be in the same (any) timezone.
                 // Tests demonstrate that when one datetime has a timezone specified and the other does not,

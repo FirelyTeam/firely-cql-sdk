@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -26,9 +26,9 @@ namespace Hl7.Cql.Abstractions
         /// <param name="other">An object to compare with this instance.</param>
         /// <param name="precision">The specified precision, or <see langword="null"/>.</param>
         /// <returns>
-        /// A value that indicates the relative order of the objects being compared.  
-        /// If the value is less than zero, this object is less than <paramref name="other"/>.  
-        /// If the value is zero, this object is equal to <paramref name="other"/>.  
+        /// A value that indicates the relative order of the objects being compared.
+        /// If the value is less than zero, this object is less than <paramref name="other"/>.
+        /// If the value is zero, this object is equal to <paramref name="other"/>.
         /// If the value is greater than zero, this object is greater than <paramref name="other"/>.
         /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
         /// </returns>

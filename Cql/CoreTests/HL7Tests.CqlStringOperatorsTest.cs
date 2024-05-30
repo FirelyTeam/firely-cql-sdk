@@ -20,7 +20,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "CombineEmptyList":
 		///	( Combine({}) ) = ''
@@ -34,7 +34,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CombineABC":
 		///	( Combine({'a', 'b', 'c'}) ) = 'abc'
@@ -48,7 +48,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CombineABCSepDash":
 		///	( Combine({'a', 'b', 'c'}, '-') ) = 'a-b-c'
@@ -62,7 +62,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ConcatenateNullNull":
 		///	( Concatenate(null, null) ) = null
@@ -76,7 +76,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "ConcatenateANull":
 		///	( Concatenate('a', null) ) = null
@@ -90,7 +90,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "ConcatenateNullB":
 		///	( Concatenate(null, 'b') ) = null
@@ -104,7 +104,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "ConcatenateAB":
 		///	( Concatenate('a', 'b') ) = 'ab'
@@ -118,7 +118,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ConcatenateABWithAdd":
 		///	( 'a' + 'b' ) = 'ab'
@@ -132,7 +132,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EndsWithNull":
 		///	( EndsWith(null, null) ) = null
@@ -146,7 +146,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "EndsWithTrue":
 		///	( EndsWith('Chris Schuler is the man!!', 'n!!') ) = true
@@ -160,7 +160,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "EndsWithFalse":
 		///	( EndsWith('Chris Schuler is the man!!', 'n!') ) = false
@@ -174,7 +174,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerNullNull":
 		///	( Indexer(null as String, null) ) = null
@@ -188,7 +188,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerANull":
 		///	( Indexer('a', null) ) = null
@@ -202,7 +202,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerNull1String":
 		///	( Indexer(null as String, 1) ) = null
@@ -216,7 +216,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerAB0":
 		///	( Indexer('ab', 0) ) = 'a'
@@ -230,7 +230,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerAB1":
 		///	( Indexer('ab', 1) ) = 'b'
@@ -244,7 +244,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerAB2":
 		///	( Indexer('ab', 2) ) = null
@@ -258,7 +258,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "IndexerABNeg1":
 		///	( Indexer('ab', -1) ) = null
@@ -272,7 +272,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "LastPositionOfNull":
 		///	( LastPositionOf(null, null) ) = null
@@ -286,7 +286,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "LastPositionOfNull1":
 		///	( LastPositionOf(null, 'hi') ) = null
@@ -300,7 +300,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "LastPositionOfNull2":
 		///	( LastPositionOf('hi', null) ) = null
@@ -314,7 +314,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "LastPositionOf1":
 		///	( LastPositionOf('hi', 'Ohio is the place to be!') ) = 1
@@ -328,7 +328,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LastPositionOf2":
 		///	( LastPositionOf('hi', 'Say hi to Ohio!') ) = 11
@@ -342,7 +342,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LengthNullString":
 		///	( Length(null as String) ) = 0
@@ -356,7 +356,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LengthEmptyString":
 		///	( Length('') ) = 0
@@ -370,7 +370,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LengthA":
 		///	( Length('a') ) = 1
@@ -384,7 +384,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LengthAB":
 		///	( Length('ab') ) = 2
@@ -398,7 +398,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LowerNull":
 		///	( Lower(null) ) = null
@@ -412,7 +412,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "LowerEmpty":
 		///	( Lower('') ) = ''
@@ -426,7 +426,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LowerA":
 		///	( Lower('A') ) = 'a'
@@ -440,7 +440,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LowerB":
 		///	( Lower('b') ) = 'b'
@@ -454,7 +454,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "LowerAB":
 		///	( Lower('Ab') ) = 'ab'
@@ -468,7 +468,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MatchesNull":
 		///	( Matches('Not all who wander are lost', null) ) = null
@@ -482,7 +482,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "MatchesNumberFalse":
 		///	( Matches('Not all who wander are lost', '.*\\d+') ) = false
@@ -496,7 +496,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MatchesNumberTrue":
 		///	( Matches('Not all who wander are lost - circa 2017', '.*\\d+') ) = true
@@ -510,7 +510,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MatchesAllTrue":
 		///	( Matches('Not all who wander are lost', '.*') ) = true
@@ -524,7 +524,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MatchesWordsAndSpacesTrue":
 		///	( Matches('Not all who wander are lost', '[\\w|\\s]+') ) = true
@@ -538,7 +538,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MatchesWordsAndSpacesFalse":
 		///	( Matches('Not all who wander are lost - circa 2017', '[\\w]+') ) = false
@@ -552,7 +552,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MatchesNotWords":
 		///	( Matches('   ', '\\W+') ) = true
@@ -566,7 +566,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "MatchesWhiteSpace":
 		///	( Matches(' \n\t', '\\s+') ) = true
@@ -580,7 +580,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "PositionOfNullNull":
 		///	( PositionOf(null, null) ) = null
@@ -594,7 +594,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "PositionOfANull":
 		///	( PositionOf('a', null) ) = null
@@ -608,7 +608,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "PositionOfNullA":
 		///	( PositionOf(null, 'a') ) = null
@@ -622,7 +622,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "PositionOfAInAB":
 		///	( PositionOf('a', 'ab') ) = 0
@@ -636,7 +636,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "PositionOfBInAB":
 		///	( PositionOf('b', 'ab') ) = 1
@@ -650,7 +650,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "PositionOfCInAB":
 		///	( PositionOf('c', 'ab') ) = -1
@@ -664,7 +664,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ReplaceMatchesNull":
 		///	( ReplaceMatches('Not all who wander are lost', null, 'But I am...') ) = null
@@ -678,7 +678,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "ReplaceMatchesAll":
 		///	( ReplaceMatches('Not all who wander are lost', 'Not all who wander are lost', 'But still waters run deep') ) = 'But still waters run deep'
@@ -692,7 +692,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ReplaceMatchesMany":
 		///	( ReplaceMatches('Who put the bop in the bop she bop she bop?', 'bop', 'bang') ) = 'Who put the bang in the bang she bang she bang?'
@@ -706,7 +706,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ReplaceMatchesSpaces":
 		///	( ReplaceMatches('All that glitters is not gold', '\\s', '$') ) = 'All$that$glitters$is$not$gold'
@@ -720,7 +720,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SplitNullNull":
 		///	( Split(null, null) ) = null
@@ -734,7 +734,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SplitNullComma":
 		///	( Split(null, ',') ) = null
@@ -748,7 +748,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SplitABNull":
 		///	( Split('a,b', null) ) = {'a,b'}
@@ -762,7 +762,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SplitABDash":
 		///	( Split('a,b', '-') ) = {'a,b'}
@@ -776,7 +776,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SplitABComma":
 		///	( Split('a,b', ',') ) = {'a','b'}
@@ -790,7 +790,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StartsWithNull":
 		///	( StartsWith(null, null) ) = null
@@ -804,7 +804,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "StartsWithNull1":
 		///	( StartsWith('hi', null) ) = null
@@ -818,7 +818,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "StartsWithNull2":
 		///	( StartsWith(null, 'hi') ) = null
@@ -832,7 +832,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "StartsWithTrue1":
 		///	( StartsWith('Breathe deep the gathering gloom', 'Bre') ) = true
@@ -846,7 +846,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StartsWithFalse1":
 		///	( StartsWith('Breathe deep the gathering gloom', 'bre') ) = false
@@ -860,7 +860,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringNullNull":
 		///	( Substring(null, null) ) = null
@@ -874,7 +874,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringANull":
 		///	( Substring('a', null) ) = null
@@ -888,7 +888,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringNull1":
 		///	( Substring(null, 1) ) = null
@@ -902,7 +902,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringAB0":
 		///	( Substring('ab', 0) ) = 'ab'
@@ -916,7 +916,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringAB1":
 		///	( Substring('ab', 1) ) = 'b'
@@ -930,7 +930,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringAB2":
 		///	( Substring('ab', 2) ) = null
@@ -944,7 +944,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringABNeg1":
 		///	( Substring('ab', -1) ) = null
@@ -958,7 +958,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringAB0To1":
 		///	( Substring('ab', 0, 1) ) = 'a'
@@ -972,7 +972,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringABC1To1":
 		///	( Substring('abc', 1, 1) ) = 'b'
@@ -986,7 +986,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "SubstringAB0To3":
 		///	( Substring('ab', 0, 3) ) = 'ab'
@@ -1000,7 +1000,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "UpperNull":
 		///	( Upper(null) ) = null
@@ -1014,7 +1014,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "UpperEmpty":
 		///	( Upper('') ) = ''
@@ -1028,7 +1028,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "UpperA":
 		///	( Upper('a') ) = 'A'
@@ -1042,7 +1042,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "UpperB":
 		///	( Upper('B') ) = 'B'
@@ -1056,7 +1056,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "UpperAB":
 		///	( Upper('aB') ) = 'AB'
@@ -1070,7 +1070,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "QuantityToString":
 		///	( ToString(125 'cm') ) = '125cm'
@@ -1084,7 +1084,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeToString1":
 		///	( ToString(DateTime(2000, 1, 1)) ) = '2000-01-01'
@@ -1098,7 +1098,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeToString2":
 		///	( ToString(DateTime(2000, 1, 1, 15, 25, 25, 300)) ) = '2000-01-01T15:25:25.300'
@@ -1132,7 +1132,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TimeToString1":
 		///	( ToString(@T09:30:01.003) ) = '09:30:01.003'
@@ -1146,7 +1146,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+

@@ -20,7 +20,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TestMessageWarn":
 		///	( Message(2, true, '200', 'Warning', 'You have been warned!') ) = 2
@@ -34,7 +34,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TestMessageTrace":
 		///	( Message({3, 4, 5}, true, '300', 'Trace', 'This is a trace') ) = {3, 4, 5}
@@ -48,7 +48,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+

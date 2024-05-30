@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             var replacementDictionary = new Dictionary<ParameterExpression, ParameterExpression>(replacements);
 
             // Since the variables can be nested deeply, we'll go deeper using this visitor. In the mean time,
-            // when we encounter new Blocks with new duplicates, we'll gather those too, resulting in a 
+            // when we encounter new Blocks with new duplicates, we'll gather those too, resulting in a
             // stack of replacements that are only applicable to the current syntactical scope and deeper.
             _replacementStack.Push(replacementDictionary);
             var visitedLocals = node.Variables.Select(v => (ParameterExpression)Visit(v)).Distinct();

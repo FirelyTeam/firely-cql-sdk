@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -35,7 +35,7 @@ namespace Hl7.Cql.Primitives
         {
             if(low is null && high is null)
                 throw new ArgumentNullException(nameof(low), "Low and high cannot both be null.");
-            
+
             this.low = low!;
             this.high = high!;
             this.lowClosed = lowClosed;

@@ -49,7 +49,7 @@ namespace Hl7.Cql.Elm
         {
             if (typeToConvert.IsArray)
             {
-                var elementType = typeToConvert.GetElementType() 
+                var elementType = typeToConvert.GetElementType()
                     ?? throw new JsonException($"Type to convert claims to be an array but has no element type");
                 var type = typeof(PolymorphicArrayJsonConverter<>).MakeGenericType(elementType);
                 var instance = (JsonConverter)Activator.CreateInstance(type, StrictParams)!;

@@ -20,7 +20,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CastAsQuantity":
 		///	( cast 45.5 'g' as Quantity ) = 45.5 'g'
@@ -34,7 +34,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "AsDateTime":
 		///	( DateTime(2014, 01, 01) as DateTime ) = @2014-01-01
@@ -48,7 +48,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IntegerToDecimal":
 		///	( convert 5 to Decimal ) = 5.0
@@ -62,7 +62,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IntegerToString":
 		///	( convert 5 to String ) = '5'
@@ -76,7 +76,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StringToDateTime":
 		///	( convert '2014-01-01' to DateTime ) = @2014-01-01
@@ -90,7 +90,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StringToTime":
 		///	( convert 'T14:30:00.0' to Time ) = @T14:30:00.000
@@ -104,7 +104,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IntegerIsInteger":
 		///	( 5 is Integer ) = true
@@ -118,7 +118,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StringIsInteger":
 		///	( '5' is Integer ) = false
@@ -132,7 +132,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StringNoToBoolean":
 		///	( ToBoolean('NO') ) = false
@@ -146,10 +146,10 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CodeToConcept1":
-		///	( ToConcept(Code { code: '8480-6' }) ) = 
+		///	( ToConcept(Code { code: '8480-6' }) ) =
 		///				Concept {
 		///					codes: Code { code: '8480-6' }
 		///				}
@@ -163,7 +163,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToDateTime1":
 		///	( ToDateTime('2014-01-01') ) = @2014-01-01
@@ -177,7 +177,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToDateTime2":
 		///	( ToDateTime('2014-01-01T12:05') ) = @2014-01-01T12:05
@@ -191,7 +191,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToDateTime3":
 		///	( ToDateTime('2014-01-01T12:05:05.955') ) = @2014-01-01T12:05:05.955
@@ -205,7 +205,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToDateTime4":
 		///	( ToDateTime('2014-01-01T12:05:05.955+01:30') ) = @2014-01-01T12:05:05.955
@@ -219,7 +219,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToDateTime5":
 		///	( ToDateTime('2014-01-01T12:05:05.955-01:15') ) = @2014-01-01T12:05:05.955
@@ -233,7 +233,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToDateTime6":
 		///	( ToDateTime('2014-01-01T12:05:05.955Z') ) = @2014-01-01T12:05:05.955
@@ -247,7 +247,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "String25D5ToDecimal":
 		///	( ToDecimal('+25.5') ) = 25.5
@@ -261,7 +261,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "StringNeg25ToInteger":
 		///	( ToInteger('-25') ) = -25
@@ -275,7 +275,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "String5D5CMToQuantity":
 		///	( ToQuantity('5.5 cm') ) = 5.5'cm'
@@ -289,7 +289,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IntegerNeg5ToString":
 		///	( ToString(-5) ) = '-5'
@@ -303,7 +303,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Decimal18D55ToString":
 		///	( ToString(18.55) ) = '18.55'
@@ -317,7 +317,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "Quantity5D5CMToString":
 		///	( ToString(5.5 'cm') ) = '5.5cm'
@@ -331,7 +331,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "BooleanTrueToString":
 		///	( ToString(true) ) = 'true'
@@ -345,7 +345,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToTime1":
 		///	( ToTime('T14:30:00.0') ) = @T14:30:00.000
@@ -359,7 +359,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToTime2":
 		///	( ToTime('T14:30:00.0+05:30') ) = @T14:30:00.000
@@ -373,7 +373,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToTime3":
 		///	( ToTime('T14:30:00.0-05:45') ) = @T14:30:00.000
@@ -387,7 +387,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "ToTime4":
 		///	( ToTime('T14:30:00.0Z') ) = @T14:30:00.000
@@ -401,7 +401,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+

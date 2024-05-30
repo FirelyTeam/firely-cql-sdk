@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -22,7 +22,7 @@ namespace Hl7.Cql.Primitives
 
         /// <summary>
         /// Returns the number of boundaries crossed for the specified precision between this and the argument.
-        /// If this is after the second argument, the result is negative. 
+        /// If this is after the second argument, the result is negative.
         /// The result of this operation is always an integer; any fractional boundaries are dropped.
         /// </summary>
         /// <remarks>
@@ -152,7 +152,7 @@ namespace Hl7.Cql.Primitives
                             if (secondDto.DayOfYear < 60)
                                 return yearDiff - 1;
 
-                            // equals or is after 
+                            // equals or is after
                             return yearDiff;
                         }
 
