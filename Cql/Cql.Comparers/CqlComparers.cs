@@ -149,8 +149,22 @@ namespace Hl7.Cql.Comparers
             else if (y == null)
                 return null;
 
+            bool xySwapped = false;
             var xType = x.GetType();
-            ICqlComparer? comparer = null;
+            var yType = y.GetType();
+            if (xType != yType)
+            {
+                // if x and y are not the same type, we prioritize them based on the following order:
+                // 1. If only one type is in the System namespace, we prioritize the other type
+                if (xType.Namespace == "System" && yType.Namespace != "System")
+                {
+                    xySwapped = true;
+                    (x,y) = (y, x);
+                    (xType, yType) = (yType, xType);
+                }
+            }
+
+            ICqlComparer ? comparer = null;
             if (Comparers.TryGetValue(xType, out ICqlComparer? c))
             {
                 comparer = c;
@@ -180,6 +194,7 @@ namespace Hl7.Cql.Comparers
             if (comparer != null)
             {
                 var result = comparer.Compare(x, y, precision);
+                if (xySwapped) result = -result;
                 return result;
             }
             else

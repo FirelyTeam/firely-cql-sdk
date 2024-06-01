@@ -28,6 +28,8 @@ namespace CoreTests
 
         private static CqlPackagerFactory Factory = new(LoggerFactory);
 
+        private CqlContext GetNewContext() => FhirCqlContext.WithDataSource();
+
         [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
         {
@@ -107,8 +109,6 @@ namespace CoreTests
             Assert.AreEqual("2022-01-01", minus2pt5Months.ToString());
 
         }
-
-        private CqlContext GetNewContext() => FhirCqlContext.WithDataSource();
 
         [TestMethod]
         public void CqlDateTime_Subtract_Day_and_Days()
