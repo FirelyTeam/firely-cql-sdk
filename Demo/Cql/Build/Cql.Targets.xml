@@ -56,16 +56,27 @@
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
 		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+
+		<!-- Comment out these if you don't need them -->
+		<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
+		<CSharpTypeFormat>explicit</CSharpTypeFormat>	<!--CSharpTypeFormat: explicit|var -->
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
 			DependsOnTargets="CQLtoELM"
 			BeforeTargets="PreBuildEvent">
 		<PropertyGroup>
-			<PackagerCLI>$(SolutionDir)Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
-			<OverrideUtc>--override-utc-date-time "1970-01-01T00:00:00Z"</OverrideUtc>
-			<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
-			<PackagerCLIArgs> $(OverrideUtc) --canonical-root-url $(CanonicalRootUrl) --elm $(ElmDirectory) --cql $(CqlDirectory) --cs $(CSharpDirectory) --fhir $(ResourcesDirectory)</PackagerCLIArgs>
+			<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+
+			<!-- Leave these alone, they are automatically picked up from the properties above -->
+			<PackagerCLIArgs Condition="'$(OverrideUtcDateTime)'!=''">$(PackagerCLIArgs) --override-utc-date-time "$(1970-01-01T00:00:00Z)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(CanonicalRootUrl)'!=''">$(PackagerCLIArgs) --canonical-root-url "$(CanonicalRootUrl)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(ElmDirectory)'!=''">$(PackagerCLIArgs) --elm "$(ElmDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(CqlDirectory)'!=''">$(PackagerCLIArgs) --cql "$(CqlDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(CSharpDirectory)'!=''">$(PackagerCLIArgs) --cs "$(CSharpDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(CSharpTypeFormat)'!=''">$(PackagerCLIArgs) --cs-typeformat "$(CSharpTypeFormat)"</PackagerCLIArgs>
+			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand> -->
 			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand>
 		</PropertyGroup>
 
