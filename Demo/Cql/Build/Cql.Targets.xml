@@ -36,7 +36,7 @@
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) $(JavaCommandArgs)))" Importance="High" />
 		<Exec Command="$(JavaCommandArgs)" ConsoleToMSBuild="true">
 			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
-			</Exec>
+		</Exec>
 		<WriteLinesToFile
             File="$(JavaOutputFile)"
             Lines="@(OutputOfExec)"
@@ -59,7 +59,8 @@
 
 		<!-- Comment out these if you don't need them -->
 		<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
-		<CSharpTypeFormat>explicit</CSharpTypeFormat>	<!--CSharpTypeFormat: explicit|var -->
+		<CSharpTypeFormat>explicit</CSharpTypeFormat>
+		<!--CSharpTypeFormat: explicit|var -->
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
