@@ -84,326 +84,278 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
     #endregion
 
-    /// <seealso cref="Clinical_Oral_Evaluation"/>
 	private CqlValueSet Clinical_Oral_Evaluation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", null);
 
-    /// <seealso cref="Clinical_Oral_Evaluation_Value"/>
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]
 	public CqlValueSet Clinical_Oral_Evaluation() => 
 		__Clinical_Oral_Evaluation.Value;
 
-    /// <seealso cref="Discharged_to_Health_Care_Facility_for_Hospice_Care"/>
 	private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
 
-    /// <seealso cref="Discharged_to_Health_Care_Facility_for_Hospice_Care_Value"/>
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
 	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care() => 
 		__Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
 
-    /// <seealso cref="Discharged_to_Home_for_Hosice_Care"/>
 	private CqlValueSet Discharged_to_Home_for_Hosice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
 
-    /// <seealso cref="Discharged_to_Home_for_Hosice_Care_Value"/>
     [CqlDeclaration("Discharged to Home for Hosice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
 	public CqlValueSet Discharged_to_Home_for_Hosice_Care() => 
 		__Discharged_to_Home_for_Hosice_Care.Value;
 
-    /// <seealso cref="Encounter_Inpatient"/>
 	private CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
-    /// <seealso cref="Encounter_Inpatient_Value"/>
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
 	public CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-    /// <seealso cref="Fluoride_Varnish_Application_for_Children"/>
 	private CqlValueSet Fluoride_Varnish_Application_for_Children_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002", null);
 
-    /// <seealso cref="Fluoride_Varnish_Application_for_Children_Value"/>
     [CqlDeclaration("Fluoride Varnish Application for Children")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002")]
 	public CqlValueSet Fluoride_Varnish_Application_for_Children() => 
 		__Fluoride_Varnish_Application_for_Children.Value;
 
-    /// <seealso cref="Hospice_care_ambulatory"/>
 	private CqlValueSet Hospice_care_ambulatory_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", null);
 
-    /// <seealso cref="Hospice_care_ambulatory_Value"/>
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
 	public CqlValueSet Hospice_care_ambulatory() => 
 		__Hospice_care_ambulatory.Value;
 
-    /// <seealso cref="Measurement_Period"/>
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-		object d_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyDentistsFHIR-0.0.002", "Measurement Period", c_);
+		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		var c_ = context.Operators.Interval(a_, b_, true, false);
+		var d_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyDentistsFHIR-0.0.002", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
 
-    /// <seealso cref="Measurement_Period_Value"/>
     [CqlDeclaration("Measurement Period")]
 	public CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-    /// <seealso cref="Patient"/>
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
-    /// <seealso cref="Patient_Value"/>
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
 		__Patient.Value;
 
-    /// <seealso cref="Qualifying_Encounters"/>
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		CqlValueSet a_ = this.Clinical_Oral_Evaluation();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
+		var a_ = this.Clinical_Oral_Evaluation();
+		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		var c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter ValidEncounter)
 		{
-			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
-			Period g_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
-			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+			var f_ = this.Measurement_Period();
+			var g_ = ValidEncounter?.Period;
+			var h_ = FHIRHelpers_4_3_000.ToInterval(g_);
+			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
 
 			return i_;
 		};
-		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
+		var e_ = context.Operators.Where<Encounter>(c_, d_);
 
 		return e_;
 	}
 
-    /// <seealso cref="Qualifying_Encounters_Value"/>
     [CqlDeclaration("Qualifying Encounters")]
 	public IEnumerable<Encounter> Qualifying_Encounters() => 
 		__Qualifying_Encounters.Value;
 
-    /// <seealso cref="Initial_Population"/>
 	private bool? Initial_Population_Value()
 	{
-		Patient a_ = this.Patient();
-		Date b_ = a_?.BirthDateElement;
-		string c_ = b_?.Value;
-		CqlDate d_ = context.Operators.Convert<CqlDate>(c_);
-		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-		CqlDateTime f_ = context.Operators.Start(e_);
-		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-		CqlInterval<int?> i_ = context.Operators.Interval(1, 20, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
-		IEnumerable<Encounter> k_ = this.Qualifying_Encounters();
-		bool? l_ = context.Operators.Exists<Encounter>(k_);
-		bool? m_ = context.Operators.And(j_, l_);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.Start(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval(1, 20, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
+		var i_ = this.Qualifying_Encounters();
+		var j_ = context.Operators.Exists<Encounter>(i_);
+		var k_ = context.Operators.And(h_, j_);
 
-		return m_;
+		return k_;
 	}
 
-    /// <seealso cref="Initial_Population_Value"/>
     [CqlDeclaration("Initial Population")]
 	public bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-    /// <seealso cref="Denominator"/>
 	private bool? Denominator_Value()
 	{
-		bool? a_ = this.Initial_Population();
+		var a_ = this.Initial_Population();
 
 		return a_;
 	}
 
-    /// <seealso cref="Denominator_Value"/>
     [CqlDeclaration("Denominator")]
 	public bool? Denominator() => 
 		__Denominator.Value;
 
-    /// <seealso cref="Denominator_Exclusions"/>
 	private bool? Denominator_Exclusions_Value()
 	{
-		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
+		var a_ = Hospice_6_9_000.Has_Hospice_Services();
 
 		return a_;
 	}
 
-    /// <seealso cref="Denominator_Exclusions_Value"/>
     [CqlDeclaration("Denominator Exclusions")]
 	public bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-    /// <seealso cref="Numerator"/>
 	private bool? Numerator_Value()
 	{
-		CqlValueSet a_ = this.Fluoride_Varnish_Application_for_Children();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		IEnumerable<Procedure> c_ = Status_1_6_000.isProcedurePerformed(b_);
+		var a_ = this.Fluoride_Varnish_Application_for_Children();
+		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		var c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure FluorideApplication)
 		{
-			DataType j_ = FluorideApplication?.Performed;
-			object k_ = FHIRHelpers_4_3_000.ToValue(j_);
-			CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(k_);
-			CqlDateTime m_ = context.Operators.End(l_);
-			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
-			bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
+			var j_ = FluorideApplication?.Performed;
+			var k_ = FHIRHelpers_4_3_000.ToValue(j_);
+			var l_ = QICoreCommon_2_0_000.toInterval(k_);
+			var m_ = context.Operators.End(l_);
+			var n_ = this.Measurement_Period();
+			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
 
 			return o_;
 		};
-		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
+		var e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlDate f_(Procedure FluorideApplication)
 		{
-			DataType p_ = FluorideApplication?.Performed;
-			object q_ = FHIRHelpers_4_3_000.ToValue(p_);
-			CqlInterval<CqlDateTime> r_ = QICoreCommon_2_0_000.toInterval(q_);
-			CqlDateTime s_ = context.Operators.End(r_);
-			CqlDate t_ = context.Operators.DateFrom(s_);
+			var p_ = FluorideApplication?.Performed;
+			var q_ = FHIRHelpers_4_3_000.ToValue(p_);
+			var r_ = QICoreCommon_2_0_000.toInterval(q_);
+			var s_ = context.Operators.End(r_);
+			var t_ = context.Operators.DateFrom(s_);
 
 			return t_;
 		};
-		IEnumerable<CqlDate> g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
-		int? h_ = context.Operators.Count<CqlDate>(g_);
-		bool? i_ = context.Operators.GreaterOrEqual(h_, 2);
+		var g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
+		var h_ = context.Operators.Count<CqlDate>(g_);
+		var i_ = context.Operators.GreaterOrEqual(h_, 2);
 
 		return i_;
 	}
 
-    /// <seealso cref="Numerator_Value"/>
     [CqlDeclaration("Numerator")]
 	public bool? Numerator() => 
 		__Numerator.Value;
 
-    /// <seealso cref="Stratification_1"/>
 	private bool? Stratification_1_Value()
 	{
-		Patient a_ = this.Patient();
-		Date b_ = a_?.BirthDateElement;
-		string c_ = b_?.Value;
-		CqlDate d_ = context.Operators.Convert<CqlDate>(c_);
-		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-		CqlDateTime f_ = context.Operators.Start(e_);
-		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-		CqlInterval<int?> i_ = context.Operators.Interval(1, 5, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.Start(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval(1, 5, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
-		return j_;
+		return h_;
 	}
 
-    /// <seealso cref="Stratification_1_Value"/>
     [CqlDeclaration("Stratification 1")]
 	public bool? Stratification_1() => 
 		__Stratification_1.Value;
 
-    /// <seealso cref="Stratification_2"/>
 	private bool? Stratification_2_Value()
 	{
-		Patient a_ = this.Patient();
-		Date b_ = a_?.BirthDateElement;
-		string c_ = b_?.Value;
-		CqlDate d_ = context.Operators.Convert<CqlDate>(c_);
-		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-		CqlDateTime f_ = context.Operators.Start(e_);
-		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-		CqlInterval<int?> i_ = context.Operators.Interval(6, 12, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.Start(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval(6, 12, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
-		return j_;
+		return h_;
 	}
 
-    /// <seealso cref="Stratification_2_Value"/>
     [CqlDeclaration("Stratification 2")]
 	public bool? Stratification_2() => 
 		__Stratification_2.Value;
 
-    /// <seealso cref="Stratification_3"/>
 	private bool? Stratification_3_Value()
 	{
-		Patient a_ = this.Patient();
-		Date b_ = a_?.BirthDateElement;
-		string c_ = b_?.Value;
-		CqlDate d_ = context.Operators.Convert<CqlDate>(c_);
-		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-		CqlDateTime f_ = context.Operators.Start(e_);
-		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-		CqlInterval<int?> i_ = context.Operators.Interval(13, 20, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		var a_ = this.Patient();
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.Start(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval(13, 20, true, true);
+		var h_ = context.Operators.In<int?>(f_, g_, null);
 
-		return j_;
+		return h_;
 	}
 
-    /// <seealso cref="Stratification_3_Value"/>
     [CqlDeclaration("Stratification 3")]
 	public bool? Stratification_3() => 
 		__Stratification_3.Value;
 
-    /// <seealso cref="SDE_Ethnicity"/>
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
-    /// <seealso cref="SDE_Ethnicity_Value"/>
     [CqlDeclaration("SDE Ethnicity")]
 	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-    /// <seealso cref="SDE_Payer"/>
 	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
-    /// <seealso cref="SDE_Payer_Value"/>
     [CqlDeclaration("SDE Payer")]
 	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-    /// <seealso cref="SDE_Race"/>
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
-    /// <seealso cref="SDE_Race_Value"/>
     [CqlDeclaration("SDE Race")]
 	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
 		__SDE_Race.Value;
 
-    /// <seealso cref="SDE_Sex"/>
 	private CqlCode SDE_Sex_Value()
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
 
-    /// <seealso cref="SDE_Sex_Value"/>
     [CqlDeclaration("SDE Sex")]
 	public CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
