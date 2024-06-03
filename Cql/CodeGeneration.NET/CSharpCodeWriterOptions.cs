@@ -22,12 +22,13 @@ public class CSharpCodeWriterOptions
     /// </summary>
     internal const string ConfigSection = "CSharpCodeWriter";
 
+    internal const string ArgNameOutDirectory = "--cs";
+
     /// <summary>
     /// Gets or sets the output directory.
     /// </summary>
     public DirectoryInfo? OutDirectory { get; set; }
 
-    internal const string ArgNameOutDirectory = "--cs";
     internal const string ArgNameTypeFormat = "--cs-typeformat";
 
     /// <summary>

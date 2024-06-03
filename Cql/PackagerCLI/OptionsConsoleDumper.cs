@@ -40,12 +40,12 @@ internal class OptionsConsoleDumper
 
         WriteLine("PackageCLI");
         WriteLine("- Environment -----------------------------------");
-        WriteLine($"{"Current Directory",-38} : {Environment.CurrentDirectory}");
+        WriteLine($"{"Current Directory",-45} : {Environment.CurrentDirectory}");
         WriteLine("- Arguments Provided ----------------------------");
         (string name, object? value)[] values = new[]
         {
-            ArgFor(_options.Force),
-            ArgFor(_options.Debug),
+            // ArgFor(_options.Force),
+            ArgFor(_options.LogDebugEnabled),
             ArgFor("Resource, CanonicalRootUrl", _options.CanonicalRootUrl),
             ArgFor("Cql, InDirectory", _options.CqlDirectory),
             ArgFor("Elm, InDirectory", _options.ElmDirectory),
@@ -57,7 +57,7 @@ internal class OptionsConsoleDumper
         .ToArray();
 
         foreach (var (name, value) in values)
-            WriteLine($"{name,-38} : {value}");
+            WriteLine($"{name,-45} : {value}");
 
         if (sb is not null)
             _logger.LogInformation("{options}", sb.ToString());
