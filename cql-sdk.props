@@ -30,6 +30,19 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
+
+		<!--
+		JetBrains.Annotations help reduce false positive warnings, explicitly declare purity and nullability in your code,
+		deal with implicit usages of members, support special semantics of APIs in ASP.NET and XAML frameworks and
+		otherwise increase accuracy of JetBrains Rider and ReSharper code inspections.
+
+		All usages of JetBrains.Annotations attributes are erased from metadata by default, which means no actual binary
+		reference to 'JetBrains.Annotations.dll' assembly is produced. If you need to preserve these attributes in
+		metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
+		see more: https://www.nuget.org/packages/JetBrains.Annotations/
+		-->
+		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
 	</ItemGroup>
 
 	<PropertyGroup>
@@ -83,6 +96,4 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
 	</ItemGroup>
 
-=======
->>>>>>> Merged 1.0 changes + moved reference to package api analyzers to props file
 </Project>

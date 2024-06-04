@@ -43,11 +43,13 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
                 var filesWritten = await File.ReadAllLinesAsync(filesWrittenFile);
                 _logger.LogInformation("Deleting {count} previous Assembly files", filesWritten.Length);
 
-                filesWritten.AsParallel().ForAll(path =>
-                {
-                    _logger.LogInformation("Deleting previous Assembly file: {path}", path);
-                    File.Delete(path);
-                });
+                filesWritten
+                    .AsParallel()
+                    .ForAll(path =>
+                    {
+                        _logger.LogInformation("Deleting previous Assembly file: {path}", path);
+                        File.Delete(path);
+                    });
 
                 _logger.LogInformation("Deleting file record of previous Assembly files: {path}", filesWrittenFile);
                 File.Delete(filesWrittenFile);
