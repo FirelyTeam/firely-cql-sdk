@@ -29,7 +29,7 @@ namespace CLI.Helpers
 
         public string LibraryFile => Path.Combine(ResourcesDirectory, $"{Library}.json");
 
-        public AssemblySource AssemblySource { get; set; } = AssemblySource.Unspecified;
+        public AssemblySource AssemblySource { get; private set; } = AssemblySource.Unspecified;
 
         [Option('a', "assemblyPath", HelpText = "The path of the assembly.")]
         public string AssemblyPath { get; set; } = "";
@@ -40,7 +40,7 @@ namespace CLI.Helpers
         [Option('t', "outputType", HelpText = "The output type for results.")]
         public ResultsType ResultsType { get; set; } = ResultsType.Unspecified;
 
-        public string OutputFile { get; set; } = "";
+        public string OutputFile { get; private set; } = "";
 
         public static void EnsureValidOptions(CommandLineOptions options)
         {

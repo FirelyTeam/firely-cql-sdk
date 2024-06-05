@@ -2,20 +2,13 @@
 using Dumpify;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using Hl7.Fhir.Utility;
 using Hl7.FhirPath.Sprache;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Immutable;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 
 namespace CLI
@@ -23,13 +16,15 @@ namespace CLI
     internal class LibraryRunner
     {
         private readonly CommandLineOptions _opts;
-        private readonly StreamWriter _writer;     
+        private readonly StreamWriter? _writer;     
 
         public LibraryRunner(CommandLineOptions options)
         {
             _opts = options;
-            _writer = new StreamWriter(options.OutputFile, true);
-
+            if (!string.IsNullOrEmpty(_opts.OutputFile))
+            {
+                _writer = new StreamWriter(options.OutputFile, true);
+            }
         }
         
         public void RunWithMeasuresProject()
@@ -258,18 +253,18 @@ namespace CLI
 
         private void WriteResultsAsText(string testPatient, Dictionary<string, object> patientResults)
         {
-            _writer.WriteLine(testPatient);
+            _writer?.WriteLine(testPatient);
             WritePatientResults(patientResults);
-            _writer.WriteLine();
-            _writer.Flush();
+            _writer?.WriteLine();
+            _writer?.Flush();
         }
 
         private void WriteResultsAsNdjson(string testPatient, Dictionary<string, object> patientResults)
         {
             patientResults.Add("SourceFile", testPatient);
             var json = JsonSerializer.Serialize(patientResults, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
-            _writer.WriteLine(json);
-            _writer.Flush();
+            _writer?.WriteLine(json);
+            _writer?.Flush();
         }
 
         private void WritePatientResults(Dictionary<string, object> patientResults)
@@ -277,7 +272,7 @@ namespace CLI
             foreach (var result in patientResults)
             {
                 var json = JsonSerializer.Serialize(result.Value, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
-                _writer.WriteLine($"{result.Key} : {json}");
+                _writer?.WriteLine($"{result.Key} : {json}");
             }
         }
     }   

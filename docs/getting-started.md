@@ -67,7 +67,7 @@ we can now invoke the defined functions in the measure:
 1. Directly call the generated measure. This is shown in `BCSEHEDIS2022_Numerator`. Calling a CQL expression directly requires the measures to be known in advance as a pre-compiled assembly.
 
 1. Dynamically load the packaged `Library` resources and invoke the CQL expressions dynamically. This is shown in `BCSEHEDIS2022_Numerator_FromResource`.
-1. Dynamically load ELM files, compile them and then run the expressions within the measure. This is shown in `BCSEHEDIS2022_Numerator_FromElm`.
+2. Dynamically load ELM files, compile them and then run the expressions within the measure. This is shown in `BCSEHEDIS2022_Numerator_FromElm`.
 
 > When using the "direct" approach, we are constructing an instance of the whole measure, and then invoking the individual expressions. The results of these expressions are cached, to speed up processing when they are called repeatedly. This means that manipulating the parameters or the Bundle contents will not change the outcome of the expressions anymore, and you will have to create a new instance of the generated measure to force re-calculation. 
 

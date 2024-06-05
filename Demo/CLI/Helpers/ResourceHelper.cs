@@ -8,14 +8,11 @@
 using Dumpify;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Graph;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using System.IO;
-using System.Reflection.Metadata;
 using System.Runtime.Loader;
 using System.Text.Json;
 using static Hl7.Fhir.Model.Parameters;
