@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
-	<Import Project="Common.props" />
 
 	<!-- Turn off visual studio msbuild automatics -->
 	<PropertyGroup>
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 	</PropertyGroup>
 
 	<Target Name="StartMessage"
@@ -30,10 +30,16 @@
 	         DependsOnTargets="StartMessage"
 			 Inputs="@(CqlFiles)"
 			 Outputs="@(CqlFiles->'$(ElmDirectory)/%(FileName).json')"
-	Condition="'$(LibrarySet)'!=''"
+		Condition="'$(LibrarySet)'!=''"
 		BeforeTargets="PreBuildEvent">
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) CQL to ELM))" Importance="High" />
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) $(JavaCommandArgs)))" Importance="High" />
+
+		<ItemGroup>
+			<ElmFiles Include="$(ElmDirectory)/*.json"/>
+		</ItemGroup>
+		<Delete Files="@(ElmFiles)" />
+
 		<Exec Command="$(JavaCommandArgs)" ConsoleToMSBuild="true">
 			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
 		</Exec>
@@ -42,13 +48,17 @@
             Lines="@(OutputOfExec)"
             Overwrite="true"
             Encoding="Unicode"/>
+		<!-- Set a property to indicate that the task ran -->
+		<CreateProperty Value="true">
+			<Output TaskParameter="ValueSetByTask" PropertyName="CQLtoElmRan" />
+		</CreateProperty>
+
 	</Target>
 
-	<ItemGroup>
-		<ElmFiles Include="$(ElmDirectory)/*.json"/>
-	</ItemGroup>
-
 	<Target Name="Delete Elm" AfterTargets="Clean">
+		<ItemGroup>
+			<ElmFiles Include="$(ElmDirectory)/*.json"/>
+		</ItemGroup>
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Elm files...))" Importance="High" />
 		<Delete Files="@(ElmFiles)" />
 	</Target>
@@ -65,9 +75,10 @@
 
 	<Target Name="GenerateCSharp"
 			DependsOnTargets="CQLtoELM"
+			Condition="'$(CQLtoElmRan)'=='true'"
 			BeforeTargets="PreBuildEvent">
 		<PropertyGroup>
-			<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+			<PackagerCLI>$(SolutionDir)Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 
 			<!-- Leave these alone, they are automatically picked up from the properties above -->
 			<PackagerCLIArgs Condition="'$(OverrideUtcDateTime)'!=''">$(PackagerCLIArgs) --override-utc-date-time "$(1970-01-01T00:00:00Z)"</PackagerCLIArgs>
@@ -80,7 +91,14 @@
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand> -->
 			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand>
 		</PropertyGroup>
-
+		<!-- Remove assets about to be created to avoid duplicates when editing/renaming CQL files -->
+		<ItemGroup>			
+			<!-- Keep relative path else complains about duplicates in msbuild meta tracking-->
+			<CSharpFiles Include="CSharp/**/*.cs" />
+			<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
+		</ItemGroup>
+		<Delete Files="@(CSharpFiles)" />
+		<Delete Files="@(ResourceFiles)" />
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) Converting ELM to CSharp&#10;$(PackagerCLICommand)))" Importance="High" />
 		<Exec Command='$(PackagerCLICommand)' />
 
@@ -89,6 +107,18 @@
 			<CSharpFiles Include="CSharp/**/*.cs" />
 			<Compile Include="@(CSharpFiles)" Exclude="@(Compile)" KeepDuplicates="false"/>
 		</ItemGroup>
+
+		<!-- Touch CQL files if error so build will try again-->
+		<OnError ExecuteTargets="TouchFiles" />
+	</Target>
+
+	<Target Name="TouchFiles">
+		<Touch
+            Files="@(CqlFiles)">
+			<Output
+                TaskParameter="TouchedFiles"
+                ItemName="FilesTouched"/>
+		</Touch>
 	</Target>
 
 	<ItemGroup>
@@ -109,4 +139,21 @@
 		<Delete Files="@(ResourceFiles)" />
 	</Target>
 
+	<ItemGroup>
+		<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
+	</ItemGroup>
+
+	<Target Name="Delete Resources" AfterTargets="Clean">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Resource files...))" Importance="High" />
+		<Delete Files="@(ResourceFiles)" />
+	</Target>
+
+	<ItemGroup>
+		<ResultsFiles Include="$(TestResultsDirectory)/*.*" />
+	</ItemGroup>
+
+	<Target Name="Delete Results" AfterTargets="Clean">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Results files...))" Importance="High" />
+		<RemoveDir Directories="$(TestResultsDirectory)" />
+	</Target>
 </Project>

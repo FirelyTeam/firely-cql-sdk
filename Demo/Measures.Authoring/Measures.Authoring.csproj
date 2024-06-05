@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\cql-demo.props" />
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
+		<ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
+		<ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
+		<ProjectReference Include="..\CLI\CLI.csproj" />
+		<ProjectReference Include="..\Cql\Cql.csproj" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+	</ItemGroup>
+
+
+	<PropertyGroup>
+		<LibrarySet>Measures.Authoring</LibrarySet>
+		<CqlDirectory>$(MSBuildProjectDirectory)/input/cql</CqlDirectory>
+		<ElmDirectory>$(MSBuildProjectDirectory)/Elm</ElmDirectory>
+		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
+		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
+  </ItemGroup>
+	
+	<Import Project="../Cql/Build/Cql.Targets.xml" />
+
+	<ItemGroup>
+		<Content Include="input/**">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+		<Content Remove="input/tests/results" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Resources/*.*">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+</Project>

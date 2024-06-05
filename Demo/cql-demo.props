@@ -24,6 +24,10 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	</PropertyGroup>
 
+	<!-- ignore sdk warnings -->
+	<PropertyGroup>
+		<NoWarn>CS1591</NoWarn>
+	</PropertyGroup>
 
 	<!-- Compiler settings -->
 	<PropertyGroup>
@@ -34,6 +38,10 @@
 		<Configurations>Debug;Release;</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Box>==============================================&#10;Text&#10;==============================================</Box>
 	</PropertyGroup>
 
 </Project>

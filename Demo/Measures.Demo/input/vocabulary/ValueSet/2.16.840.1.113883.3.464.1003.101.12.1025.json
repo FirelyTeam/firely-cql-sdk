@@ -1,0 +1,54 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.464.1003.101.12.1025",
+  "meta": {
+    "versionId": "17",
+    "lastUpdated": "2023-12-21T17:43:03.000-05:00",
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/computable-valueset-cqfm", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+    "valueDate": "2017-05-04"
+  } ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1025"
+  } ],
+  "version": "20170504",
+  "name": "PreventiveCareServicesEstablishedOfficeVisit18AndUp",
+  "title": "Preventive Care Services Established Office Visit, 18 and Up",
+  "status": "active",
+  "experimental": false,
+  "date": "2017-05-04T01:00:13-04:00",
+  "publisher": "NCQA PHEMUR",
+  "expansion": {
+    "identifier": "urn:uuid:461bd3eb-4205-4804-9009-0c2a7dd1989b",
+    "timestamp": "2024-05-29T18:03:23-04:00",
+    "total": 3,
+    "offset": 0,
+    "parameter": [ {
+      "name": "count",
+      "valueInteger": 1000
+    }, {
+      "name": "offset",
+      "valueInteger": 0
+    } ],
+    "contains": [ {
+      "system": "http://www.ama-assn.org/go/cpt",
+      "version": "2024",
+      "code": "99395",
+      "display": "Periodic comprehensive preventive medicine reevaluation and management of an individual including an age and gender appropriate history, examination, counseling/anticipatory guidance/risk factor reduction interventions, and the ordering of laboratory/diagnostic procedures, established patient; 18-39 years"
+    }, {
+      "system": "http://www.ama-assn.org/go/cpt",
+      "version": "2024",
+      "code": "99396",
+      "display": "Periodic comprehensive preventive medicine reevaluation and management of an individual including an age and gender appropriate history, examination, counseling/anticipatory guidance/risk factor reduction interventions, and the ordering of laboratory/diagnostic procedures, established patient; 40-64 years"
+    }, {
+      "system": "http://www.ama-assn.org/go/cpt",
+      "version": "2024",
+      "code": "99397",
+      "display": "Periodic comprehensive preventive medicine reevaluation and management of an individual including an age and gender appropriate history, examination, counseling/anticipatory guidance/risk factor reduction interventions, and the ordering of laboratory/diagnostic procedures, established patient; 65 years and older"
+    } ]
+  }
+}

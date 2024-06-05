@@ -1,0 +1,43 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.464.1003.101.12.1086",
+  "meta": {
+    "versionId": "6",
+    "lastUpdated": "2023-12-21T17:43:03.000-05:00",
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/computable-valueset-cqfm", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-author",
+    "valueString": "NCQA PHEMUR Author"
+  }, {
+    "url": "http://hl7.org/fhir/StructureDefinition/resource-lastReviewDate",
+    "valueDate": "2024-02-02"
+  }, {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+    "valueDate": "2019-03-15"
+  } ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1086"
+  } ],
+  "version": "20190315",
+  "name": "Observation",
+  "title": "Observation",
+  "status": "retired",
+  "experimental": false,
+  "date": "2019-03-15T01:00:14-04:00",
+  "publisher": "NCQA PHEMUR",
+  "jurisdiction": [ {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+      "valueCode": "unknown"
+    } ]
+  } ],
+  "purpose": "(Clinical Focus: The purpose of this value set is to represent concepts for encounters for observation stays.),(Data Element Scope: This value set may use a model element related to Encounter.),(Inclusion Criteria: Includes concepts that represent an encounter for comprehensive history, evaluation, and management of a patient in an observation care setting.),(Exclusion Criteria: Excludes concepts that represent an encounter not representative of observation care, including critical care and ED visits.)",
+  "compose": {
+    "include": [ {
+      "valueSet": [ "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1275" ]
+    } ]
+  }
+}

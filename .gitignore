@@ -402,3 +402,7 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 /LibrarySets/**/Resources/*.*
 *.bak
 *.dat
+#remove results generated from vs-code CQL extension
+/Demo/**/input/tests/results/*.*
+#remove global.json for testing dotnet sdk updates
+global.json

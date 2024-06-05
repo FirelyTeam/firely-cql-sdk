@@ -4,9 +4,13 @@
       "commandName": "Project",
       "commandLineArgs": "--l BCSEHEDISMY2022-1.0.0 --d Data\\95085.json"
     },
-    "AdultOE": {
+    "AdultOE_FromResources": {
       "commandName": "Project",
-      "commandLineArgs": "--l AdultOutpatientEncountersFHIR4-2.2.000 --d Data\\encounter.json"
+      "commandLineArgs": "--l AdultOutpatientEncountersFHIR4-2.2.000 --d $(SolutionDir)Demo/Measures.Demo/input/tests --v $(SolutionDir)Demo/Measures.Demo/input/vocabulary/valueset --r $(SolutionDir)LibrarySets/Demo/Resources"
+    },
+    "AdultOE_FromProject": {
+      "commandName": "Project",
+      "commandLineArgs": "--l AdultOutpatientEncountersFHIR4-2.2.000 --d $(SolutionDir)Demo/Measures.Demo/input/tests --v $(SolutionDir)Demo/Measures.Demo/input/vocabulary/valueset --a $(SolutionDir)Demo/Measures.Demo/$(OutDir)Measures.Demo.dll"
     }
   }
 }
