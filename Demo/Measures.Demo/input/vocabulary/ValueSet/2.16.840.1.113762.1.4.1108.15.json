@@ -1,0 +1,53 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1108.15",
+  "meta": {
+    "versionId": "39",
+    "lastUpdated": "2024-02-07T01:03:02.000-05:00",
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/computable-valueset-cqfm", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+    "valueDate": "2024-02-07"
+  } ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:oid:2.16.840.1.113762.1.4.1108.15"
+  } ],
+  "version": "20240207",
+  "name": "HospiceCareAmbulatory",
+  "title": "Hospice Care Ambulatory",
+  "status": "active",
+  "date": "2024-02-07T01:03:02-05:00",
+  "publisher": "NCQA PHEMUR",
+  "expansion": {
+    "identifier": "urn:uuid:64b8a494-0f7c-4740-bc8b-5151de48f2fe",
+    "timestamp": "2024-05-29T18:03:18-04:00",
+    "total": 3,
+    "offset": 0,
+    "parameter": [ {
+      "name": "count",
+      "valueInteger": 1000
+    }, {
+      "name": "offset",
+      "valueInteger": 0
+    } ],
+    "contains": [ {
+      "system": "http://snomed.info/sct",
+      "version": "http://snomed.info/sct/731000124108/version/20240301",
+      "code": "170935008",
+      "display": "Full care by hospice (finding)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "http://snomed.info/sct/731000124108/version/20240301",
+      "code": "170936009",
+      "display": "Shared care - hospice and general practitioner (finding)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "http://snomed.info/sct/731000124108/version/20240301",
+      "code": "385763009",
+      "display": "Hospice care (regime/therapy)"
+    } ]
+  }
+}

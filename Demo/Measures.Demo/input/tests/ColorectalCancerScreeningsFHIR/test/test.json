@@ -1,0 +1,187 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "lastUpdated": "2023-11-08T13:48:23.141-05:00"
+  },
+  "type": "transaction",
+  "timestamp": "2023-11-08T13:48:23.141-05:00",
+  "entry": [
+    {
+      "fullUrl": "Patient/test",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "test",
+        "active": true,
+        "name": [
+          {
+            "family": "Almeida",
+            "given": [
+              "Nate",
+              "A."
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1967-11-06"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/test"
+      }
+    },
+    {
+      "fullUrl": "Encounter/test",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "test",
+        "meta": {
+          "versionId": "f448116f-12c2-4d57-a305-771f89b0c7c6",
+          "lastUpdated": "2023-11-06T19:53:19.452+00:00"
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://www.nlm.nih.gov/research/umls/hcpcs",
+                "code": "G0438",
+                "display": "Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/test"
+        },
+        "period": {
+          "start": "2023-09-09T09:00:00Z",
+          "end": "2023-09-09T10:00:00Z"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/test"
+      }
+    },
+    {
+      "fullUrl": "Observation/test-fobt-1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "test-fobt-1",
+        "meta": {
+          "versionId": "6a9f36c8-aaa7-4fb0-891c-44710145b1e8",
+          "lastUpdated": "2023-11-08T18:46:22.723+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2335-8",
+              "display": "Hemoglobin.gastrointestinal [Presence] in Stool"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/test"
+        },
+        "effectiveDateTime": "2023-03-10T08:30:00Z",
+        "valueString": "Negative"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/test-fobt-1"
+      }
+    },
+    {
+      "fullUrl": "Observation/test-fobt-2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "test-fobt-2",
+        "meta": {
+          "versionId": "6a9f36c8-aaa7-4fb0-891c-44710145b1e8",
+          "lastUpdated": "2023-11-08T18:46:22.723+00:00"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2335-8",
+              "display": "Hemoglobin.gastrointestinal [Presence] in Stool"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/test"
+        },
+        "effectiveDateTime": "2023-02-10T08:30:00Z",
+        "valueString": "Positive"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/test-fobt-2"
+      }
+    },
+    {
+      "fullUrl": "Procedure/Procedure-4",
+      "resource": {
+        "resourceType": "Procedure",
+        "id": "Procedure-4",
+        "meta": {
+          "versionId": "6a9f36c8-aaa7-4fb0-891c-44710145b1e8",
+          "lastUpdated": "2023-11-08T18:46:22.723+00:00"
+        },
+        "extension": [ {
+          "url": "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded",
+          "valueDateTime": "2025-01-01T01:00:00.000Z"
+        } ],
+        "status": "completed",
+        "code": {
+          "coding": [ {
+            "system": "http://snomed.info/sct",
+            "code": "1209098000",
+            "display": "Fiberoptic colonoscopy with biopsy of lesion of colon (procedure)"
+          } ]
+        },
+        "subject": {
+          "reference": "Patient/test"
+        },
+        "performedPeriod": {
+          "start": "2021-04-01T01:00:00.000Z",
+          "end": "2021-04-01T01:15:00.000Z"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Procedure/Procedure-4"
+      }
+    }
+  ]
+}

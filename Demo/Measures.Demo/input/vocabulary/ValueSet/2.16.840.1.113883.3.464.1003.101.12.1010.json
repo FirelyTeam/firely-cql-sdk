@@ -1,0 +1,69 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.464.1003.101.12.1010",
+  "meta": {
+    "versionId": "29",
+    "lastUpdated": "2023-12-21T17:43:03.000-05:00",
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/computable-valueset-cqfm", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+    "valueDate": "2021-09-28"
+  } ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:oid:2.16.840.1.113883.3.464.1003.101.12.1010"
+  } ],
+  "version": "20210928",
+  "name": "EmergencyDepartmentEvaluationAndManagementVisit",
+  "title": "Emergency Department Evaluation and Management Visit",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-03-03T18:46:01-05:00",
+  "publisher": "NCQA PHEMUR",
+  "expansion": {
+    "identifier": "urn:uuid:24cc5142-a001-43be-8f41-438af2cfa35c",
+    "timestamp": "2024-05-29T18:03:30-04:00",
+    "total": 6,
+    "offset": 0,
+    "parameter": [ {
+      "name": "count",
+      "valueInteger": 1000
+    }, {
+      "name": "offset",
+      "valueInteger": 0
+    } ],
+    "contains": [ {
+      "system": "http://snomed.info/sct",
+      "version": "http://snomed.info/sct/731000124108/version/20240301",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    }, {
+      "system": "http://www.ama-assn.org/go/cpt",
+      "version": "2024",
+      "code": "99281",
+      "display": "Emergency department visit for the evaluation and management of a patient that may not require the presence of a physician or other qualified health care professional"
+    }, {
+      "system": "http://www.ama-assn.org/go/cpt",
+      "version": "2024",
+      "code": "99282",
+      "display": "Emergency department visit for the evaluation and management of a patient, which requires a medically appropriate history and/or examination and straightforward medical decision making"
+    }, {
+      "system": "http://www.ama-assn.org/go/cpt",
+      "version": "2024",
+      "code": "99283",
+      "display": "Emergency department visit for the evaluation and management of a patient, which requires a medically appropriate history and/or examination and low level of medical decision making"
+    }, {
+      "system": "http://www.ama-assn.org/go/cpt",
+      "version": "2024",
+      "code": "99284",
+      "display": "Emergency department visit for the evaluation and management of a patient, which requires a medically appropriate history and/or examination and moderate level of medical decision making"
+    }, {
+      "system": "http://www.ama-assn.org/go/cpt",
+      "version": "2024",
+      "code": "99285",
+      "display": "Emergency department visit for the evaluation and management of a patient, which requires a medically appropriate history and/or examination and high level of medical decision making"
+    } ]
+  }
+}

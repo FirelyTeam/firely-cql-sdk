@@ -1,0 +1,44 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1111.143",
+  "meta": {
+    "versionId": "26",
+    "lastUpdated": "2023-12-21T17:43:03.000-05:00",
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/computable-valueset-cqfm", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+    "valueDate": "2021-06-11"
+  } ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:oid:2.16.840.1.113762.1.4.1111.143"
+  } ],
+  "version": "20210611",
+  "name": "ObservationServices",
+  "title": "Observation Services",
+  "status": "active",
+  "experimental": false,
+  "date": "2021-06-11T01:02:23-04:00",
+  "publisher": "TJC EH Steward",
+  "expansion": {
+    "identifier": "urn:uuid:7635a725-0e75-4b28-ab79-36d9ad4f1fac",
+    "timestamp": "2024-05-29T18:03:29-04:00",
+    "total": 1,
+    "offset": 0,
+    "parameter": [ {
+      "name": "count",
+      "valueInteger": 1000
+    }, {
+      "name": "offset",
+      "valueInteger": 0
+    } ],
+    "contains": [ {
+      "system": "http://snomed.info/sct",
+      "version": "http://snomed.info/sct/731000124108/version/20240301",
+      "code": "448951000124107",
+      "display": "Admission to observation unit (procedure)"
+    } ]
+  }
+}

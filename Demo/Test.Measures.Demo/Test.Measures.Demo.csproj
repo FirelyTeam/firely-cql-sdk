@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
     <ProjectReference Include="..\..\Cql\Cql\Cql.csproj" />

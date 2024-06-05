@@ -1,12 +1,16 @@
 {
   "profiles": {
-    "Measures": {
+    "BCSEHEDISMY2022-1.0.0": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:64313;http://localhost:64318"
+      "commandLineArgs": "--l BCSEHEDISMY2022-1.0.0"
+    },
+    "AdultOutpatientEncountersFHIR4-2.2.000": {
+      "commandName": "Project",
+      "commandLineArgs": "--l AdultOutpatientEncountersFHIR4-2.2.000"
+    },
+    "ColorectalCancerScreeningsFHIR-0.0.003": {
+      "commandName": "Project",
+      "commandLineArgs": "--l ColorectalCancerScreeningsFHIR-0.0.003"
     }
   }
 }

@@ -1,70 +1,69 @@
-﻿using Hl7.Fhir.Model;
-using Microsoft.Extensions.Configuration;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using CLI.Helpers;
+using CommandLine;
 
-namespace CLI
+namespace CLI;
+
+public class Program
 {
-    internal class Program
+
+    public static void Main(string[] args)
     {
-        public static int Main(string[] args)
+        try
         {
-            var config = new ConfigurationBuilder()
-                            .AddCommandLine(args)
-                            .Build();
-            if (config["?"] is not null || config["help"] is not null)
-                return ShowHelp();
-
-            var lArg = config["l"] ?? config["lib"] ?? config["library"];
-            if (string.IsNullOrEmpty(lArg))
-            {
-                Console.Error.WriteLine("Missing required parameter: --l");
-                return ShowHelp();
-            }
-
-            var dArg = config["d"] ?? config["data"];
-            if (string.IsNullOrEmpty(lArg))
-            {
-                Console.Error.WriteLine("Missing required parameter: --d");
-                return ShowHelp();
-            }
-            var dataFile = new FileInfo(dArg!);
-            using var dataStream = dataFile.OpenRead();
-            var bundle = dataStream.ParseFhir<Bundle>();
-
-            var oArg = config["o"] ?? config["out"];
-            TextWriter? output = null;
-            bool disposeOutput = false;
-            if (!string.IsNullOrEmpty(oArg))
-            {
-                var outFile = new FileInfo(oArg);
-                var fs = new FileStream(outFile.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
-                output = new StreamWriter(fs);
-            }
-            else
-            {
-                output = Console.Out;
-                disposeOutput = true;
-            }
-
-            LibraryRunner.Run(lArg, bundle, output);
-
-            if (disposeOutput && output != null)
-            {
-                output.Dispose();
-            }
-
-            return 0;
+            Parser.Default.ParseArguments<CommandLineOptions>(args)
+                .WithParsed(RunCommand)
+                .WithNotParsed(HandleErrors);
+            Console.WriteLine($"Exit code: {(int)ExitCode.Success}");
+            //Environment.Exit((int)ExitCode.Success);
         }
-
-        private static int ShowHelp()
+        catch (InvalidOperationException invalidOptionException)
         {
-            Console.WriteLine();
-            Console.WriteLine("Measures CLI example");
-            Console.WriteLine();
-            Console.WriteLine($"\t--d\t\tData bundle");
-            Console.WriteLine($"\t--l\t\tLibrary name");
-            Console.WriteLine($"\t[--o]\t\tOutput file name; if not specified, use console");
-            Console.WriteLine();
-            return -1;
+            Console.WriteLine(invalidOptionException);
+            Console.WriteLine($"Exit code: {(int)ExitCode.InvalidOptions}");
+            Environment.Exit((int)ExitCode.InvalidOptions);
         }
+        catch (ArgumentException argumentException)
+        {
+            Console.WriteLine(argumentException);
+            Console.WriteLine($"Exit code: {(int)ExitCode.ArgumentException}");
+            Environment.Exit((int)ExitCode.InvalidOptions);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception);
+            Console.WriteLine($"Exit code: {(int)ExitCode.UnknownError}");
+            Environment.Exit((int)ExitCode.UnknownError);
+        }
+    }
+
+    private static void RunCommand(CommandLineOptions options)
+    {
+        CommandLineOptions.EnsureValidOptions(options);
+        options.DumpConsole();
+        var libraryRunner = new LibraryRunner(options);
+
+        switch (options.AssemblySource)
+        {
+            case AssemblySource.Resource:
+                libraryRunner.RunWithResources();
+                break;
+            default:
+            case AssemblySource.Project:
+                libraryRunner.RunWithMeasuresProject();
+                break;
+        }
+    }
+
+    static void HandleErrors(IEnumerable<Error> errs)
+    {
+        //throw new InvalidOperationException("Invalid command line arguments.");
+        Environment.Exit((int)ExitCode.InvalidOptions);
     }
 }

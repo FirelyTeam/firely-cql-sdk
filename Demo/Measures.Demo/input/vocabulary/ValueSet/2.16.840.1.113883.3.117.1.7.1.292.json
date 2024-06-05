@@ -1,0 +1,44 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.117.1.7.1.292",
+  "meta": {
+    "versionId": "34",
+    "lastUpdated": "2023-12-21T17:43:03.000-05:00",
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/computable-valueset-cqfm", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+    "valueDate": "2021-06-11"
+  } ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:oid:2.16.840.1.113883.3.117.1.7.1.292"
+  } ],
+  "version": "20210611",
+  "name": "EmergencyDepartmentVisit",
+  "title": "Emergency Department Visit",
+  "status": "active",
+  "experimental": false,
+  "date": "2021-06-11T01:02:23-04:00",
+  "publisher": "TJC EH Steward",
+  "expansion": {
+    "identifier": "urn:uuid:6177d671-0731-4c61-bfd3-2fb939b8b148",
+    "timestamp": "2024-05-29T18:03:29-04:00",
+    "total": 1,
+    "offset": 0,
+    "parameter": [ {
+      "name": "count",
+      "valueInteger": 1000
+    }, {
+      "name": "offset",
+      "valueInteger": 0
+    } ],
+    "contains": [ {
+      "system": "http://snomed.info/sct",
+      "version": "http://snomed.info/sct/731000124108/version/20240301",
+      "code": "4525004",
+      "display": "Emergency department patient visit (procedure)"
+    } ]
+  }
+}

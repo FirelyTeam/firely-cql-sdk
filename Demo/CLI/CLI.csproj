@@ -8,16 +8,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="ValueSets\*.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="Data\*.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
-		<ProjectReference Include="..\Measures.Demo\Measures.Demo.csproj" />
+		<ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
 	</ItemGroup>
 
 
@@ -26,14 +18,8 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+		<PackageReference Include="CommandLineParser" Version="2.9.1" />		
+		<PackageReference Include="Dumpify" Version="0.6.5" />	
 	</ItemGroup>
-
-
-	<ItemGroup>
-	  <None Update="Data\*.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	</ItemGroup>
-
 
 </Project>

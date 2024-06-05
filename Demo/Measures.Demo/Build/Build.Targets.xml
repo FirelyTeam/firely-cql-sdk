@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Project>
-
-	<PropertyGroup>
-		<LibrarySet>Demo</LibrarySet>
-	</PropertyGroup>
-
-	<Import Project="../../Cql/Build/Cql.Targets.xml" />
-</Project>

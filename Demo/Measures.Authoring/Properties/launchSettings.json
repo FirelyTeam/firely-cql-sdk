@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "ParametersExample": {
+      "commandName": "Project",
+      "commandLineArgs": "--l ParametersExample-0.0.1"
+    },
+    "MultipleResourcesExample": {
+      "commandName": "Project",
+      "commandLineArgs": "--l MultipleResourcesExample-0.0.1"
+    },
+    "DocumentationofCurrentMedicationsFHIR-0.2.000": {
+      "commandName": "Project",
+      "commandLineArgs": "--l DocumentationofCurrentMedicationsFHIR-0.2.000"
+    }
+  }
+}
