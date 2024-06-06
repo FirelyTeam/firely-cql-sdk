@@ -4,12 +4,8 @@
   "meta": {
     "versionId": "46",
     "lastUpdated": "2023-12-21T17:43:03.000-05:00",
-    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/computable-valueset-cqfm", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset" ]
   },
-  "extension": [ {
-    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
-    "valueDate": "2021-02-20"
-  } ],
   "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834",
   "identifier": [ {
     "system": "urn:ietf:rfc:3986",
@@ -18,6 +14,7 @@
   "version": "20210220",
   "name": "EncounterToDocumentMedications",
   "title": "Encounter to Document Medications",
+  "description": "Encounter to Document Medications",
   "status": "active",
   "experimental": false,
   "date": "2022-03-03T18:46:01-05:00",
