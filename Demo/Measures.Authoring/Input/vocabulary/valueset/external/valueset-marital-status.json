@@ -18,8 +18,10 @@
   "version": "4.0.0",
   "name": "Marital Status Codes",
   "title": "MaritalStatus",
+  "description": "Marital Status Codes",
   "status": "active",
   "experimental": false,
+  "publisher": "Me",
   "date": "2018-12-14T01:14:32+00:00",
   "expansion": {
     "identifier": "urn:uuid:239279b7-49a9-4e5b-a9c3-c1653cf6ffd8",
