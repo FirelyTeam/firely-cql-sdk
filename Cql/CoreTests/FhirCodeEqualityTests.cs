@@ -56,12 +56,55 @@ public class CqlContextOperatorTests
 		// Assert
 		isEqual.Should().BeTrue();
 	}
+    [TestMethod]
+    public void Equal_ConceptAtLeastOneCodeMatch_MustEqual()
+    {
+        // Arrange
+        var rtx = GetNewContext();
 
-	#endregion
+        var divorcedCode = new CqlCode[]
+        {
+            new CqlCode("D", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
+        };
 
-	#region Convert
+        var divorcedConcept = new CqlConcept((divorcedCode as IEnumerable<CqlCode>), "Divorced Concept");
 
-	[TestMethod]
+        var notMarriedCode = new CqlCode[]
+        {
+            new CqlCode("L", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
+            new CqlCode("D", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
+        };
+
+        var notMarriedConcept = new CqlConcept((notMarriedCode as IEnumerable<CqlCode>), "Not Married Concept");
+
+
+        // Act
+        //This should work according to https://cql.hl7.org/02-authorsguide.html#comparison-operators
+        //Quote: For Concept values, equivalence means the values have at least one equivalent code.
+        //commented items that crash.
+        var isEqualLessOnLeftConcept = rtx.Operators.Equivalent(divorcedConcept, notMarriedConcept);
+        //var isEqualLessOnRightConcept = rtx.Operators.Equivalent(notMarriedConcept, divorcedConcept);
+
+        // Assert
+        isEqualLessOnLeftConcept.Should().BeTrue();
+        //isEqualLessOnRighConcept.Should().BeTrue();
+
+
+        // Act
+        //Unclear if these should work from documentation
+        //var isEqualLessOnLeftCode = rtx.Operators.Equivalent(divorcedCode, notMarriedConcept);
+        //var isEqualLessOnRightCode = rtx.Operators.Equivalent(notMarriedConcept, divorcedCode);
+
+        // Assert
+        //isEqualLessOnLeftCode.Should().BeTrue();
+        //isEqualLessOnRightCode.Should().BeTrue();
+    }
+
+    #endregion
+
+    #region Convert
+
+    [TestMethod]
 	public void Convert_FhirCodeToString_MustReturnValueFromEnumLiteral()
 	{
 		// Arrange
