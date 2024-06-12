@@ -1,11 +1,14 @@
-// /*
-//  * Copyright (c) 2024, NCQA and contributors
-//  * See the file CONTRIBUTORS for details.
-//  *
-//  * This file is licensed under the BSD 3-Clause license
-//  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
-//  */
+/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
 
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using FluentAssertions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
@@ -14,14 +17,15 @@ namespace ArchitectureTests;
 [TestClass]
 public class CodeFormattingTests
 {
-	private static DirectoryInfo _solutionDir;
-	private static IEnumerable<FileInfo> _allCSharpFilesUnderSolutionDir;
+	private static DirectoryInfo _solutionDir = null!;
+	private static IEnumerable<FileInfo> _allCSharpFilesUnderSolutionDir = null!;
 
 	[ClassInitialize]
 	public static void ClassInitialize(TestContext context)
 	{
-		_solutionDir = new DirectoryInfo(context.TestRunDirectory)
-			.FindParentDirectoryContaining("*.sln");
+		_solutionDir = context.TestRunDirectory is { } ts
+			               ? new DirectoryInfo(ts).FindParentDirectoryContaining("*.sln")!
+			               : null!;
 
 		_solutionDir
 			.Should()

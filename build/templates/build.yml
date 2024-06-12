@@ -48,7 +48,7 @@ jobs:
     condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'false'))
 
   - task: DotNetCoreCLI@2
-    displayName: 'dotnet test UnitTests'
+    displayName: 'dotnet test *Tests'
     inputs:
       command: test
       projects: '**/*Tests/*Tests.csproj'
