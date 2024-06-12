@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using FluentAssertions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ArchitectureTests;
 
