@@ -83,7 +83,7 @@ internal class ResourceHelper
         var binaries = new[]
         {
             tupleFs.ParseFhir<Binary>()
-        };     
+        };
 
         binaries.LoadAssemblies(asmContext);
         return asmContext;
@@ -131,7 +131,7 @@ internal class ResourceHelper
             var cqltype = parameter.Value.GetType();
             var typeEntry = crosswalk.TypeEntryFor(cqltype);
             var converted = ConvertParameterToCqlModel(parameter, typeEntry);
-            parametersConverted.Add(parameter.Name, converted!);         
+            parametersConverted.Add(parameter.Name, converted!);
         }
 
         parametersConverted.DumpConsole("Input Parameters");

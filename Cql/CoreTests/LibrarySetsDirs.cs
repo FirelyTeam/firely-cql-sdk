@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
 using System;
 using System.IO;
 using Hl7.Cql.Abstractions.Infrastructure;
@@ -6,7 +14,7 @@ namespace CoreTests;
 
 internal static class LibrarySetsDirs
 {
-    private static DirectoryInfo SolutionDir { get; } = GetDir();
+    public static DirectoryInfo SolutionDir { get; } = GetDir();
 
     public static class Demo
     {

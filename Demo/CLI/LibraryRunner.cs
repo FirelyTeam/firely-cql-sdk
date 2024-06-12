@@ -16,7 +16,7 @@ namespace CLI
     internal class LibraryRunner
     {
         private readonly CommandLineOptions _opts;
-        private readonly StreamWriter? _writer;     
+        private readonly StreamWriter? _writer;
 
         public LibraryRunner(CommandLineOptions options)
         {
@@ -26,7 +26,7 @@ namespace CLI
                 _writer = new StreamWriter(options.OutputFile, true);
             }
         }
-        
+
         public void RunWithMeasuresProject()
         {
             //used for debugging with breakpoints in Measures.* project
@@ -212,7 +212,7 @@ namespace CLI
 
                     var json2 = JsonSerializer.Serialize(value, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
                     Console.WriteLine($"{declName} : {json2} \n");
-                    
+
                 }
                 catch (Exception e)
                 {
@@ -228,7 +228,7 @@ namespace CLI
         }
         #endregion Processing Patients
 
-        #region Writing Output     
+        #region Writing Output
         private void WriteResults(string testPatient, Dictionary<string, object> patientResults)
         {
             if (string.IsNullOrEmpty(_opts.OutputFile))
@@ -275,7 +275,7 @@ namespace CLI
                 _writer?.WriteLine($"{result.Key} : {json}");
             }
         }
-    }   
+    }
     #endregion Writing Output
 
 

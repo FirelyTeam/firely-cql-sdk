@@ -81,7 +81,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packaging", "Packaging", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiPackagerCLI", "Cql\MultiPackagerCLI\MultiPackagerCLI.csproj", "{B574B177-48B2-455B-BEF8-B7D6DB5C3015}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Measures.Authoring", "Demo\Measures.Authoring\Measures.Authoring.csproj", "{C5C0F7CF-D0A4-41F5-B426-D99F40EC0379}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Measures.Authoring", "Demo\Measures.Authoring\Measures.Authoring.csproj", "{C5C0F7CF-D0A4-41F5-B426-D99F40EC0379}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTests", "Cql\ArchitectureTests\ArchitectureTests.csproj", "{9AF91C9C-3377-4E3C-BDFB-1C2C2100AF50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -246,6 +248,12 @@ Global
 		{C5C0F7CF-D0A4-41F5-B426-D99F40EC0379}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
 		{C5C0F7CF-D0A4-41F5-B426-D99F40EC0379}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5C0F7CF-D0A4-41F5-B426-D99F40EC0379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AF91C9C-3377-4E3C-BDFB-1C2C2100AF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AF91C9C-3377-4E3C-BDFB-1C2C2100AF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AF91C9C-3377-4E3C-BDFB-1C2C2100AF50}.FullDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AF91C9C-3377-4E3C-BDFB-1C2C2100AF50}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
+		{9AF91C9C-3377-4E3C-BDFB-1C2C2100AF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AF91C9C-3377-4E3C-BDFB-1C2C2100AF50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -283,9 +291,10 @@ Global
 		{97D67019-21A7-4591-A216-1B76BD0E68A4} = {4B5D75F5-E2FC-4CCB-90EF-6DC4A0193032}
 		{B574B177-48B2-455B-BEF8-B7D6DB5C3015} = {97D67019-21A7-4591-A216-1B76BD0E68A4}
 		{C5C0F7CF-D0A4-41F5-B426-D99F40EC0379} = {B00E560D-AE0C-48E1-9013-57115AF05F41}
+		{9AF91C9C-3377-4E3C-BDFB-1C2C2100AF50} = {314A4A1E-1671-4F4C-BA1F-DEE73D584677}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		FileExplorer = |build\|docs\|LibrarySets\
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
+		FileExplorer = |build\|docs\|LibrarySets\
 	EndGlobalSection
 EndGlobal

@@ -36,7 +36,7 @@ namespace Hl7.Cql.Compiler.Expressions
         public NullConditionalMemberExpression(Expression expression, MemberInfo member) :
             this(MakeMemberAccess(expression, member))
         {
-            // Nothing	
+            // Nothing
         }
 
         public override bool CanReduce => true;
