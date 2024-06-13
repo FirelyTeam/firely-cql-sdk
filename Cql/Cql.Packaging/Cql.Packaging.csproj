@@ -20,7 +20,6 @@
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-		<ProjectReference Include="..\Graph\Graph.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
