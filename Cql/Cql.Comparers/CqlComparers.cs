@@ -31,15 +31,29 @@ namespace Hl7.Cql.Comparers
         {
             // C# erases nullability for constant ints in some cases, e.g. literals, so we need comparers for both, even though
             // all values in CQL should be considered nullable
-            Comparers.TryAdd(typeof(int?), new DefaultCqlComparer<int>());
-            Comparers.TryAdd(typeof(int), new DefaultCqlComparer<int>());
-            Comparers.TryAdd(typeof(long?), new DefaultCqlComparer<long>());
-            Comparers.TryAdd(typeof(long), new DefaultCqlComparer<long>());
-            Comparers.TryAdd(typeof(string), new StringCqlComparer(StringComparer.Ordinal));
-            Comparers.TryAdd(typeof(decimal?), new DecimalCqlComparer());
-            Comparers.TryAdd(typeof(decimal), new DecimalCqlComparer());
-            Comparers.TryAdd(typeof(bool?), new DefaultCqlComparer<bool>());
-            Comparers.TryAdd(typeof(bool), new DefaultCqlComparer<bool>());
+            var intCqlComparer = new DefaultCqlComparer<int>();
+            Comparers.TryAdd(typeof(int?), intCqlComparer);
+            Comparers.TryAdd(typeof(int), intCqlComparer);
+
+            var longCqlComparer = new DefaultCqlComparer<long>();
+            Comparers.TryAdd(typeof(long?), longCqlComparer);
+            Comparers.TryAdd(typeof(long), longCqlComparer);
+
+            var stringCqlComparer = new StringCqlComparer(StringComparer.Ordinal);
+            Comparers.TryAdd(typeof(string), stringCqlComparer);
+
+            var charCqlComparer = new CharCqlComparer(stringCqlComparer);
+            Comparers.TryAdd(typeof(char), charCqlComparer);
+            Comparers.TryAdd(typeof(char?), charCqlComparer);
+
+            var decimalCqlComparer = new DecimalCqlComparer();
+            Comparers.TryAdd(typeof(decimal?), decimalCqlComparer);
+            Comparers.TryAdd(typeof(decimal), decimalCqlComparer);
+
+            var boolCqlComparer = new DefaultCqlComparer<bool>();
+            Comparers.TryAdd(typeof(bool?), boolCqlComparer);
+            Comparers.TryAdd(typeof(bool), boolCqlComparer);
+
             Comparers.TryAdd(typeof(IEnumerable), new ListEqualComparer(this));
             Comparers.TryAdd(typeof(CqlQuantity), new CqlQuantityCqlComparer(this, this));
             Comparers.TryAdd(typeof(CqlConcept), new CqlConceptCqlComparer(this));
@@ -47,10 +61,14 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
-
             Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this));
 
-            ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) => (ICqlComparer)Activator.CreateInstance(typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!), @this)!);
+            ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) =>
+            {
+                var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
+                var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, @this)!;
+                return cqlComparer;
+            });
         }
 
 
