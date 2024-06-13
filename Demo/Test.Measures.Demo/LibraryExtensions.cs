@@ -1,5 +1,4 @@
-﻿using Hl7.Cql.Graph;
-using Hl7.Fhir.Model;
+﻿using Hl7.Fhir.Model;
 using JetBrains.Annotations;
 using Hl7.Cql.Fhir;
 using FhirLibrary = Hl7.Fhir.Model.Library;

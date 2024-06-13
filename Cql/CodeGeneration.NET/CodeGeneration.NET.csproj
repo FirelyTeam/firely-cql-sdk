@@ -19,7 +19,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
-		<ProjectReference Include="..\Graph\Graph.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
