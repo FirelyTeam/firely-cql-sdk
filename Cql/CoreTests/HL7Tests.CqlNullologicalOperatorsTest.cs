@@ -20,7 +20,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CoalesceNullA":
 		///	( Coalesce(null, 'a') ) = 'a'
@@ -34,7 +34,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CoalesceEmptyList":
 		///	( Coalesce({}) ) = null
@@ -48,7 +48,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summary>
 		///define "CoalesceListFirstA":
 		///	( Coalesce({'a', null, null}) ) = 'a'
@@ -62,7 +62,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CoalesceListLastA":
 		///	( Coalesce({null, null, 'a'}) ) = 'a'
@@ -76,7 +76,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CoalesceFirstList":
 		///	( Coalesce({'a'},null, null) ) = {'a'}
@@ -90,7 +90,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "CoalesceLastList":
 		///	( Coalesce(null, null, {'a'}) ) = {'a'}
@@ -104,7 +104,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeCoalesce":
 		///	( Coalesce(null, null, DateTime(2012, 5, 18)) ) = DateTime(2012, 5, 18)
@@ -118,7 +118,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "DateTimeListCoalesce":
 		///	( Coalesce({ null, null, DateTime(2012, 5, 18) }) ) = DateTime(2012, 5, 18)
@@ -132,7 +132,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TimeCoalesce":
 		///	( Coalesce(null, null, @T05:15:33.556) ) = @T05:15:33.556
@@ -146,7 +146,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "TimeListCoalesce":
 		///	( Coalesce({ null, null, @T05:15:33.556 }) ) = @T05:15:33.556
@@ -160,7 +160,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsNullTrue":
 		///	( IsNull(null) ) = true
@@ -174,7 +174,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsNullFalseEmptyString":
 		///	( IsNull('') ) = false
@@ -188,7 +188,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsNullAlsoFalseAbcString":
 		///	( IsNull('abc') ) = false
@@ -202,7 +202,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsNullAlsoFalseNumber1":
 		///	( IsNull(1) ) = false
@@ -216,7 +216,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsNullAlsoFalseNumberZero":
 		///	( IsNull(0) ) = false
@@ -230,7 +230,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsFalseFalse":
 		///	( IsFalse(false) ) = true
@@ -244,7 +244,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsFalseTrue":
 		///	( IsFalse(true) ) = false
@@ -258,7 +258,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsFalseNull":
 		///	( IsFalse(null) ) = false
@@ -272,7 +272,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsTrueTrue":
 		///	( IsTrue(true) ) = true
@@ -286,7 +286,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsTrueFalse":
 		///	( IsTrue(false) ) = false
@@ -300,7 +300,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summary>
 		///define "IsTrueNull":
 		///	( IsTrue(null) ) = false
@@ -314,7 +314,7 @@ namespace CoreTests
             var result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+

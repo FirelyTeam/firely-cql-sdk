@@ -1,0 +1,752 @@
+﻿TypeConverter conversions usage (510 unused, and 241 used. 751 in total):
+	    2. [_] cql CqlDate --> fhir Date
+	    3. [_] cql CqlDate --> fhir FhirDateTime
+	    4. [_] cql CqlDate --> iso8601 DateIso8601
+	    5. [_] cql CqlDateTime --> fhir FhirDateTime
+	    6. [_] cql CqlDateTime --> iso8601 DateIso8601
+	    7. [_] cql CqlDateTime --> iso8601 DateTimeIso8601
+	    8. [_] cql CqlInterval<CqlDate> --> fhir Period
+	    9. [_] cql CqlInterval<CqlDateTime> --> fhir Period
+	   10. [_] cql CqlInterval<CqlQuantity> --> fhir Range
+	   11. [_] cql CqlInterval<Decimal?> --> fhir Range
+	   12. [_] cql CqlInterval<Int32?> --> fhir Range
+	   13. [_] cql CqlQuantity --> fhir Quantity
+	   14. [_] cql CqlRatio --> fhir Ratio
+	   15. [_] cql CqlTime --> fhir Time
+	   16. [_] cql CqlTime --> iso8601 TimeIso8601
+	   17. [_] fhir Canonical --> sys String
+	   18. [_] fhir Code --> sys String
+	   19. [_] fhir Code<Account.AccountStatus> --> sys String
+	   20. [_] fhir Code<ActionCardinalityBehavior> --> sys String
+	   21. [_] fhir Code<ActionConditionKind> --> sys String
+	   22. [_] fhir Code<ActionGroupingBehavior> --> sys String
+	   23. [_] fhir Code<ActionParticipantType> --> sys String
+	   24. [_] fhir Code<ActionPrecheckBehavior> --> sys String
+	   25. [_] fhir Code<ActionRelationshipType> --> sys String
+	   26. [_] fhir Code<ActionRequiredBehavior> --> sys String
+	   27. [_] fhir Code<ActionSelectionBehavior> --> sys String
+	   28. [_] fhir Code<ActivityDefinition.RequestResourceType> --> sys String
+	   29. [_] fhir Code<Address.AddressType> --> sys String
+	   30. [_] fhir Code<Address.AddressUse> --> sys String
+	   31. [_] fhir Code<AdministrativeGender> --> sys String
+	   32. [_] fhir Code<AdverseEvent.AdverseEventActuality> --> sys String
+	   33. [_] fhir Code<AdverseEvent.AdverseEventOutcome> --> sys String
+	   34. [_] fhir Code<AdverseEvent.AdverseEventSeverity> --> sys String
+	   35. [_] fhir Code<AllergyIntolerance.AllergyIntoleranceCategory> --> sys String
+	   36. [_] fhir Code<AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes> --> sys String
+	   37. [_] fhir Code<AllergyIntolerance.AllergyIntoleranceCriticality> --> sys String
+	   38. [_] fhir Code<AllergyIntolerance.AllergyIntoleranceSeverity> --> sys String
+	   39. [_] fhir Code<AllergyIntolerance.AllergyIntoleranceType> --> sys String
+	   40. [_] fhir Code<AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes> --> sys String
+	   41. [_] fhir Code<Appointment.AppointmentStatus> --> sys String
+	   42. [_] fhir Code<Appointment.ParticipantRequired> --> sys String
+	   43. [_] fhir Code<AuditEvent.AuditEventAction> --> sys String
+	   44. [_] fhir Code<AuditEvent.AuditEventAgentNetworkType> --> sys String
+	   45. [_] fhir Code<AuditEvent.AuditEventOutcome> --> sys String
+	   46. [_] fhir Code<BindingStrength> --> sys String
+	   47. [_] fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> --> sys String
+	   48. [_] fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> --> sys String
+	   49. [_] fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> --> sys String
+	   50. [_] fhir Code<Bundle.BundleType> --> sys String
+	   51. [_] fhir Code<Bundle.HTTPVerb> --> sys String
+	   52. [_] fhir Code<Bundle.LinkRelationTypes> --> sys String
+	   53. [_] fhir Code<Bundle.SearchEntryMode> --> sys String
+	   54. [_] fhir Code<CapabilityStatement.ConditionalDeleteStatus> --> sys String
+	   55. [_] fhir Code<CapabilityStatement.ConditionalReadStatus> --> sys String
+	   56. [_] fhir Code<CapabilityStatement.DocumentMode> --> sys String
+	   57. [_] fhir Code<CapabilityStatement.EventCapabilityMode> --> sys String
+	   58. [_] fhir Code<CapabilityStatement.ReferenceHandlingPolicy> --> sys String
+	   59. [_] fhir Code<CapabilityStatement.ResourceVersionPolicy> --> sys String
+	   60. [_] fhir Code<CapabilityStatement.RestfulCapabilityMode> --> sys String
+	   61. [_] fhir Code<CapabilityStatement.SystemRestfulInteraction> --> sys String
+	   62. [_] fhir Code<CapabilityStatement.TypeRestfulInteraction> --> sys String
+	   63. [_] fhir Code<CapabilityStatementKind> --> sys String
+	   64. [_] fhir Code<CarePlan.CarePlanActivityKind> --> sys String
+	   65. [_] fhir Code<CarePlan.CarePlanActivityStatus> --> sys String
+	   66. [_] fhir Code<CarePlan.CarePlanIntent> --> sys String
+	   67. [_] fhir Code<CareTeam.CareTeamStatus> --> sys String
+	   68. [_] fhir Code<CatalogEntry.CatalogEntryRelationType> --> sys String
+	   69. [_] fhir Code<ChargeItem.ChargeItemStatus> --> sys String
+	   70. [_] fhir Code<ClaimProcessingCodes> --> sys String
+	   71. [_] fhir Code<ClaimUseCode> --> sys String
+	   72. [_] fhir Code<ClinicalImpression.ClinicalImpressionStatus> --> sys String
+	   73. [_] fhir Code<CodeSystem.CodeSystemHierarchyMeaning> --> sys String
+	   74. [_] fhir Code<CodeSystem.PropertyType> --> sys String
+	   75. [_] fhir Code<CodeSystemContentMode> --> sys String
+	   76. [_] fhir Code<CompartmentType> --> sys String
+	   77. [_] fhir Code<Composition.CompositionAttestationMode> --> sys String
+	   78. [_] fhir Code<Composition.V3ConfidentialityClassification> --> sys String
+	   79. [_] fhir Code<CompositionStatus> --> sys String
+	   80. [_] fhir Code<ConceptMap.ConceptMapGroupUnmappedMode> --> sys String
+	   81. [_] fhir Code<ConceptMapEquivalence> --> sys String
+	   82. [_] fhir Code<Condition.ConditionClinicalStatusCodes> --> sys String
+	   83. [_] fhir Code<Condition.ConditionVerificationStatus> --> sys String
+	   84. [_] fhir Code<Consent.ConsentDataMeaning> --> sys String
+	   85. [_] fhir Code<Consent.ConsentProvisionType> --> sys String
+	   86. [_] fhir Code<Consent.ConsentState> --> sys String
+	   87. [_] fhir Code<ConstraintSeverity> --> sys String
+	   88. [_] fhir Code<ContactPoint.ContactPointSystem> --> sys String
+	   89. [_] fhir Code<ContactPoint.ContactPointUse> --> sys String
+	   90. [_] fhir Code<Contract.ContractResourcePublicationStatusCodes> --> sys String
+	   91. [_] fhir Code<Contract.ContractResourceStatusCodes> --> sys String
+	   92. [_] fhir Code<Contributor.ContributorType> --> sys String
+	   93. [_] fhir Code<CoverageEligibilityRequest.EligibilityRequestPurpose> --> sys String
+	   94. [_] fhir Code<CoverageEligibilityResponse.EligibilityResponsePurpose> --> sys String
+	   95. [_] fhir Code<DataRequirement.SortDirection> --> sys String
+	   96. [_] fhir Code<DaysOfWeek> --> sys String
+	   97. [_] fhir Code<DetectedIssue.DetectedIssueSeverity> --> sys String
+	   98. [_] fhir Code<Device.FHIRDeviceStatus> --> sys String
+	   99. [_] fhir Code<Device.UDIEntryType> --> sys String
+	  100. [_] fhir Code<DeviceMetric.DeviceMetricCalibrationState> --> sys String
+	  101. [_] fhir Code<DeviceMetric.DeviceMetricCalibrationType> --> sys String
+	  102. [_] fhir Code<DeviceMetric.DeviceMetricCategory> --> sys String
+	  103. [_] fhir Code<DeviceMetric.DeviceMetricColor> --> sys String
+	  104. [_] fhir Code<DeviceMetric.DeviceMetricOperationalStatus> --> sys String
+	  105. [_] fhir Code<DeviceNameType> --> sys String
+	  106. [_] fhir Code<DeviceUseStatement.DeviceUseStatementStatus> --> sys String
+	  107. [_] fhir Code<DiagnosticReport.DiagnosticReportStatus> --> sys String
+	  108. [_] fhir Code<DocumentReferenceStatus> --> sys String
+	  109. [_] fhir Code<DocumentRelationshipType> --> sys String
+	  110. [_] fhir Code<EffectEvidenceSynthesis.ExposureStateCode> --> sys String
+	  111. [_] fhir Code<ElementDefinition.AdditionalBindingPurposeVS> --> sys String
+	  112. [_] fhir Code<ElementDefinition.AggregationMode> --> sys String
+	  113. [_] fhir Code<ElementDefinition.DiscriminatorType> --> sys String
+	  114. [_] fhir Code<ElementDefinition.PropertyRepresentation> --> sys String
+	  115. [_] fhir Code<ElementDefinition.ReferenceVersionRules> --> sys String
+	  116. [_] fhir Code<ElementDefinition.SlicingRules> --> sys String
+	  117. [_] fhir Code<Encounter.EncounterLocationStatus> --> sys String
+	  119. [_] fhir Code<Endpoint.EndpointStatus> --> sys String
+	  120. [_] fhir Code<EpisodeOfCare.EpisodeOfCareStatus> --> sys String
+	  121. [_] fhir Code<EventStatus> --> sys String
+	  122. [_] fhir Code<ExampleScenario.ExampleScenarioActorType> --> sys String
+	  123. [_] fhir Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> --> sys String
+	  124. [_] fhir Code<FamilyMemberHistory.FamilyHistoryStatus> --> sys String
+	  125. [_] fhir Code<FHIRAllTypes> --> sys String
+	  126. [_] fhir Code<FHIRDefinedType> --> sys String
+	  127. [_] fhir Code<FHIRVersion> --> sys String
+	  128. [_] fhir Code<FilterOperator> --> sys String
+	  129. [_] fhir Code<FinancialResourceStatusCodes> --> sys String
+	  130. [_] fhir Code<Flag.FlagStatus> --> sys String
+	  131. [_] fhir Code<Goal.GoalLifecycleStatus> --> sys String
+	  132. [_] fhir Code<GraphDefinition.GraphCompartmentRule> --> sys String
+	  133. [_] fhir Code<GraphDefinition.GraphCompartmentUse> --> sys String
+	  134. [_] fhir Code<Group.GroupType> --> sys String
+	  135. [_] fhir Code<GroupMeasureCode> --> sys String
+	  136. [_] fhir Code<GuidanceResponse.GuidanceResponseStatus> --> sys String
+	  137. [_] fhir Code<HumanName.NameUse> --> sys String
+	  138. [_] fhir Code<Identifier.IdentifierUse> --> sys String
+	  139. [_] fhir Code<ImagingStudy.ImagingStudyStatus> --> sys String
+	  140. [_] fhir Code<Immunization.ImmunizationStatusCodes> --> sys String
+	  141. [_] fhir Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> --> sys String
+	  142. [_] fhir Code<ImplementationGuide.GuidePageGeneration> --> sys String
+	  143. [_] fhir Code<ImplementationGuide.GuideParameterCode> --> sys String
+	  144. [_] fhir Code<ImplementationGuide.SPDXLicense> --> sys String
+	  145. [_] fhir Code<InsurancePlan.BenefitCostApplicability> --> sys String
+	  146. [_] fhir Code<Invoice.InvoiceStatus> --> sys String
+	  147. [_] fhir Code<InvoicePriceComponentType> --> sys String
+	  148. [_] fhir Code<Linkage.LinkageType> --> sys String
+	  149. [_] fhir Code<List.ListStatus> --> sys String
+	  150. [_] fhir Code<ListMode> --> sys String
+	  151. [_] fhir Code<Location.LocationMode> --> sys String
+	  152. [_] fhir Code<Location.LocationStatus> --> sys String
+	  153. [_] fhir Code<MeasureImprovementNotation> --> sys String
+	  154. [_] fhir Code<MeasureReport.MeasureReportStatus> --> sys String
+	  155. [_] fhir Code<MeasureReport.MeasureReportType> --> sys String
+	  156. [_] fhir Code<Medication.MedicationStatusCodes> --> sys String
+	  159. [_] fhir Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> --> sys String
+	  160. [_] fhir Code<MedicationRequest.MedicationRequestIntent> --> sys String
+	  161. [_] fhir Code<MedicationRequest.MedicationrequestStatus> --> sys String
+	  162. [_] fhir Code<MedicationStatement.MedicationStatusCodes> --> sys String
+	  163. [_] fhir Code<MessageDefinition.MessageSignificanceCategory> --> sys String
+	  164. [_] fhir Code<MessageHeader.ResponseType> --> sys String
+	  165. [_] fhir Code<MessageheaderResponseRequest> --> sys String
+	  166. [_] fhir Code<MolecularSequence.OrientationType> --> sys String
+	  167. [_] fhir Code<MolecularSequence.QualityType> --> sys String
+	  168. [_] fhir Code<MolecularSequence.RepositoryType> --> sys String
+	  169. [_] fhir Code<MolecularSequence.SequenceType> --> sys String
+	  170. [_] fhir Code<MolecularSequence.StrandType> --> sys String
+	  171. [_] fhir Code<Money.Currencies> --> sys String
+	  172. [_] fhir Code<NamingSystem.NamingSystemIdentifierType> --> sys String
+	  173. [_] fhir Code<NamingSystem.NamingSystemType> --> sys String
+	  174. [_] fhir Code<Narrative.NarrativeStatus> --> sys String
+	  175. [_] fhir Code<NoteType> --> sys String
+	  176. [_] fhir Code<ObservationDefinition.ObservationDataType> --> sys String
+	  177. [_] fhir Code<ObservationDefinition.ObservationRangeCategory> --> sys String
+	  179. [_] fhir Code<OperationDefinition.OperationKind> --> sys String
+	  180. [_] fhir Code<OperationOutcome.IssueSeverity> --> sys String
+	  181. [_] fhir Code<OperationOutcome.IssueType> --> sys String
+	  182. [_] fhir Code<OperationParameterUse> --> sys String
+	  183. [_] fhir Code<ParticipationStatus> --> sys String
+	  184. [_] fhir Code<Patient.LinkType> --> sys String
+	  185. [_] fhir Code<Person.IdentityAssuranceLevel> --> sys String
+	  186. [_] fhir Code<Provenance.ProvenanceEntityRole> --> sys String
+	  187. [_] fhir Code<PublicationStatus> --> sys String
+	  188. [_] fhir Code<Quantity.QuantityComparator> --> sys String
+	  189. [_] fhir Code<Questionnaire.EnableWhenBehavior> --> sys String
+	  190. [_] fhir Code<Questionnaire.QuestionnaireItemOperator> --> sys String
+	  191. [_] fhir Code<Questionnaire.QuestionnaireItemType> --> sys String
+	  192. [_] fhir Code<QuestionnaireResponse.QuestionnaireResponseStatus> --> sys String
+	  193. [_] fhir Code<RelatedArtifact.RelatedArtifactType> --> sys String
+	  195. [_] fhir Code<RequestPriority> --> sys String
+	  197. [_] fhir Code<ResearchElementDefinition.ResearchElementType> --> sys String
+	  198. [_] fhir Code<ResearchStudy.ResearchStudyStatus> --> sys String
+	  199. [_] fhir Code<ResearchSubject.ResearchSubjectStatus> --> sys String
+	  200. [_] fhir Code<ResourceType> --> sys String
+	  201. [_] fhir Code<SearchParameter.SearchComparator> --> sys String
+	  202. [_] fhir Code<SearchParameter.SearchModifierCode> --> sys String
+	  203. [_] fhir Code<SearchParameter.XPathUsageType> --> sys String
+	  204. [_] fhir Code<SearchParamType> --> sys String
+	  205. [_] fhir Code<Slot.SlotStatus> --> sys String
+	  206. [_] fhir Code<Specimen.SpecimenStatus> --> sys String
+	  207. [_] fhir Code<SpecimenDefinition.SpecimenContainedPreference> --> sys String
+	  208. [_] fhir Code<StructureDefinition.ExtensionContextType> --> sys String
+	  209. [_] fhir Code<StructureDefinition.StructureDefinitionKind> --> sys String
+	  210. [_] fhir Code<StructureDefinition.TypeDerivationRule> --> sys String
+	  211. [_] fhir Code<StructureMap.StructureMapContextType> --> sys String
+	  212. [_] fhir Code<StructureMap.StructureMapGroupTypeMode> --> sys String
+	  213. [_] fhir Code<StructureMap.StructureMapInputMode> --> sys String
+	  214. [_] fhir Code<StructureMap.StructureMapModelMode> --> sys String
+	  215. [_] fhir Code<StructureMap.StructureMapSourceListMode> --> sys String
+	  216. [_] fhir Code<StructureMap.StructureMapTargetListMode> --> sys String
+	  217. [_] fhir Code<StructureMap.StructureMapTransform> --> sys String
+	  218. [_] fhir Code<Subscription.SubscriptionChannelType> --> sys String
+	  219. [_] fhir Code<Subscription.SubscriptionStatus> --> sys String
+	  220. [_] fhir Code<Substance.FHIRSubstanceStatus> --> sys String
+	  221. [_] fhir Code<SupplyDelivery.SupplyDeliveryStatus> --> sys String
+	  222. [_] fhir Code<SupplyDelivery.SupplyItemType> --> sys String
+	  223. [_] fhir Code<SupplyRequest.SupplyRequestStatus> --> sys String
+	  224. [_] fhir Code<Task.TaskIntent> --> sys String
+	  225. [_] fhir Code<Task.TaskStatus> --> sys String
+	  226. [_] fhir Code<TerminologyCapabilities.CodeSearchSupport> --> sys String
+	  227. [_] fhir Code<TestReport.TestReportActionResult> --> sys String
+	  228. [_] fhir Code<TestReport.TestReportParticipantType> --> sys String
+	  229. [_] fhir Code<TestReport.TestReportResult> --> sys String
+	  230. [_] fhir Code<TestReport.TestReportStatus> --> sys String
+	  231. [_] fhir Code<TestScript.AssertionDirectionType> --> sys String
+	  232. [_] fhir Code<TestScript.AssertionOperatorType> --> sys String
+	  233. [_] fhir Code<TestScript.AssertionResponseTypes> --> sys String
+	  234. [_] fhir Code<TestScript.TestScriptRequestMethodCode> --> sys String
+	  235. [_] fhir Code<Timing.EventTiming> --> sys String
+	  237. [_] fhir Code<TriggerDefinition.TriggerType> --> sys String
+	  238. [_] fhir Code<VariableTypeCode> --> sys String
+	  239. [_] fhir Code<VerificationResult.StatusCode> --> sys String
+	  240. [_] fhir Code<VisionPrescription.VisionBase> --> sys String
+	  241. [_] fhir Code<VisionPrescription.VisionEyes> --> sys String
+	  243. [_] fhir Date --> cql CqlDate
+	  244. [_] fhir Date --> cql CqlDateTime
+	  245. [_] fhir Date --> sys String
+	  246. [_] fhir FhirBoolean --> sys struct Boolean?
+	  247. [_] fhir FhirDateTime --> cql CqlDate
+	  249. [_] fhir FhirDateTime --> sys String
+	  250. [_] fhir FhirDecimal --> sys struct Decimal?
+	  251. [_] fhir FhirString --> sys String
+	  252. [_] fhir FhirUri --> sys String
+	  253. [_] fhir FhirUrl --> sys String
+	  254. [_] fhir Id --> sys String
+	  255. [_] fhir Instant --> cql CqlDateTime
+	  256. [_] fhir Instant --> sys struct DateTimeOffset?
+	  257. [_] fhir Integer --> fhir PositiveInt
+	  258. [_] fhir Integer --> fhir UnsignedInt
+	  259. [_] fhir Integer --> sys struct Int32?
+	  260. [_] fhir Markdown --> sys String
+	  261. [_] fhir Parameters.ParameterComponent --> cql CqlDate
+	  262. [_] fhir Parameters.ParameterComponent --> cql CqlDateTime
+	  263. [_] fhir Parameters.ParameterComponent --> cql CqlInterval<CqlDate>
+	  264. [_] fhir Parameters.ParameterComponent --> cql CqlInterval<CqlDateTime>
+	  265. [_] fhir Parameters.ParameterComponent --> cql CqlInterval<CqlQuantity>
+	  266. [_] fhir Parameters.ParameterComponent --> cql CqlInterval<Decimal?>
+	  267. [_] fhir Parameters.ParameterComponent --> cql CqlInterval<Int32?>
+	  268. [_] fhir Parameters.ParameterComponent --> cql CqlQuantity
+	  269. [_] fhir Parameters.ParameterComponent --> cql CqlTime
+	  270. [_] fhir Parameters.ParameterComponent --> fhir Integer
+	  271. [_] fhir Parameters.ParameterComponent --> fhir PositiveInt
+	  272. [_] fhir Parameters.ParameterComponent --> fhir UnsignedInt
+	  273. [_] fhir Parameters.ParameterComponent --> sys String
+	  274. [_] fhir Parameters.ParameterComponent --> sys struct Boolean?
+	  275. [_] fhir Parameters.ParameterComponent --> sys struct DateTimeOffset?
+	  276. [_] fhir Parameters.ParameterComponent --> sys struct Decimal?
+	  277. [_] fhir Parameters.ParameterComponent --> sys struct Int32?
+	  278. [_] fhir Period --> cql CqlInterval<CqlDate>
+	  279. [_] fhir Period --> cql CqlInterval<CqlDateTime>
+	  280. [_] fhir PositiveInt --> fhir Integer
+	  281. [_] fhir PositiveInt --> sys String
+	  282. [_] fhir Quantity --> cql CqlQuantity
+	  283. [_] fhir Quantity --> fhir Age
+	  284. [_] fhir Quantity --> sys struct Decimal?
+	  285. [_] fhir Quantity --> sys struct Int32?
+	  286. [_] fhir Range --> cql CqlInterval<CqlQuantity>
+	  287. [_] fhir Range --> cql CqlInterval<Decimal?>
+	  288. [_] fhir Range --> cql CqlInterval<Int32?>
+	  289. [_] fhir Time --> cql CqlTime
+	  290. [_] fhir Time --> sys String
+	  291. [_] fhir UnsignedInt --> fhir Integer
+	  292. [_] fhir UnsignedInt --> sys String
+	  293. [_] iso8601 DateIso8601 --> cql CqlDate
+	  294. [_] iso8601 DateIso8601 --> cql CqlDateTime
+	  295. [_] iso8601 DateTimeIso8601 --> cql CqlDateTime
+	  296. [_] iso8601 TimeIso8601 --> cql CqlTime
+	  300. [_] sys String --> cql CqlTime
+	  302. [_] sys String --> sys Uri
+	  303. [_] sys struct Account.AccountStatus? --> fhir Code<Account.AccountStatus>
+	  305. [_] sys struct ActionCardinalityBehavior? --> fhir Code<ActionCardinalityBehavior>
+	  307. [_] sys struct ActionConditionKind? --> fhir Code<ActionConditionKind>
+	  309. [_] sys struct ActionGroupingBehavior? --> fhir Code<ActionGroupingBehavior>
+	  311. [_] sys struct ActionParticipantType? --> fhir Code<ActionParticipantType>
+	  313. [_] sys struct ActionPrecheckBehavior? --> fhir Code<ActionPrecheckBehavior>
+	  315. [_] sys struct ActionRelationshipType? --> fhir Code<ActionRelationshipType>
+	  317. [_] sys struct ActionRequiredBehavior? --> fhir Code<ActionRequiredBehavior>
+	  319. [_] sys struct ActionSelectionBehavior? --> fhir Code<ActionSelectionBehavior>
+	  321. [_] sys struct ActivityDefinition.RequestResourceType? --> fhir Code<ActivityDefinition.RequestResourceType>
+	  323. [_] sys struct Address.AddressType? --> fhir Code<Address.AddressType>
+	  325. [_] sys struct Address.AddressUse? --> fhir Code<Address.AddressUse>
+	  327. [_] sys struct AdministrativeGender? --> fhir Code<AdministrativeGender>
+	  331. [_] sys struct AdverseEvent.AdverseEventOutcome? --> fhir Code<AdverseEvent.AdverseEventOutcome>
+	  332. [_] sys struct AdverseEvent.AdverseEventOutcome? --> sys String
+	  333. [_] sys struct AdverseEvent.AdverseEventSeverity? --> fhir Code<AdverseEvent.AdverseEventSeverity>
+	  334. [_] sys struct AdverseEvent.AdverseEventSeverity? --> sys String
+	  335. [_] sys struct AllergyIntolerance.AllergyIntoleranceCategory? --> fhir Code<AllergyIntolerance.AllergyIntoleranceCategory>
+	  337. [_] sys struct AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes? --> fhir Code<AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes>
+	  338. [_] sys struct AllergyIntolerance.AllergyIntoleranceClinicalStatusCodes? --> sys String
+	  339. [_] sys struct AllergyIntolerance.AllergyIntoleranceCriticality? --> fhir Code<AllergyIntolerance.AllergyIntoleranceCriticality>
+	  341. [_] sys struct AllergyIntolerance.AllergyIntoleranceSeverity? --> fhir Code<AllergyIntolerance.AllergyIntoleranceSeverity>
+	  343. [_] sys struct AllergyIntolerance.AllergyIntoleranceType? --> fhir Code<AllergyIntolerance.AllergyIntoleranceType>
+	  345. [_] sys struct AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes? --> fhir Code<AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes>
+	  346. [_] sys struct AllergyIntolerance.AllergyIntoleranceVerificationStatusCodes? --> sys String
+	  347. [_] sys struct Appointment.AppointmentStatus? --> fhir Code<Appointment.AppointmentStatus>
+	  349. [_] sys struct Appointment.ParticipantRequired? --> fhir Code<Appointment.ParticipantRequired>
+	  351. [_] sys struct AuditEvent.AuditEventAction? --> fhir Code<AuditEvent.AuditEventAction>
+	  353. [_] sys struct AuditEvent.AuditEventAgentNetworkType? --> fhir Code<AuditEvent.AuditEventAgentNetworkType>
+	  355. [_] sys struct AuditEvent.AuditEventOutcome? --> fhir Code<AuditEvent.AuditEventOutcome>
+	  357. [_] sys struct BindingStrength? --> fhir Code<BindingStrength>
+	  359. [_] sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? --> fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory>
+	  361. [_] sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? --> fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus>
+	  363. [_] sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? --> fhir Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale>
+	  365. [_] sys struct Bundle.BundleType? --> fhir Code<Bundle.BundleType>
+	  367. [_] sys struct Bundle.HTTPVerb? --> fhir Code<Bundle.HTTPVerb>
+	  369. [_] sys struct Bundle.LinkRelationTypes? --> fhir Code<Bundle.LinkRelationTypes>
+	  370. [_] sys struct Bundle.LinkRelationTypes? --> sys String
+	  371. [_] sys struct Bundle.SearchEntryMode? --> fhir Code<Bundle.SearchEntryMode>
+	  373. [_] sys struct CapabilityStatement.ConditionalDeleteStatus? --> fhir Code<CapabilityStatement.ConditionalDeleteStatus>
+	  375. [_] sys struct CapabilityStatement.ConditionalReadStatus? --> fhir Code<CapabilityStatement.ConditionalReadStatus>
+	  377. [_] sys struct CapabilityStatement.DocumentMode? --> fhir Code<CapabilityStatement.DocumentMode>
+	  379. [_] sys struct CapabilityStatement.EventCapabilityMode? --> fhir Code<CapabilityStatement.EventCapabilityMode>
+	  381. [_] sys struct CapabilityStatement.ReferenceHandlingPolicy? --> fhir Code<CapabilityStatement.ReferenceHandlingPolicy>
+	  383. [_] sys struct CapabilityStatement.ResourceVersionPolicy? --> fhir Code<CapabilityStatement.ResourceVersionPolicy>
+	  385. [_] sys struct CapabilityStatement.RestfulCapabilityMode? --> fhir Code<CapabilityStatement.RestfulCapabilityMode>
+	  387. [_] sys struct CapabilityStatement.SystemRestfulInteraction? --> fhir Code<CapabilityStatement.SystemRestfulInteraction>
+	  389. [_] sys struct CapabilityStatement.TypeRestfulInteraction? --> fhir Code<CapabilityStatement.TypeRestfulInteraction>
+	  391. [_] sys struct CapabilityStatementKind? --> fhir Code<CapabilityStatementKind>
+	  393. [_] sys struct CarePlan.CarePlanActivityKind? --> fhir Code<CarePlan.CarePlanActivityKind>
+	  395. [_] sys struct CarePlan.CarePlanActivityStatus? --> fhir Code<CarePlan.CarePlanActivityStatus>
+	  397. [_] sys struct CarePlan.CarePlanIntent? --> fhir Code<CarePlan.CarePlanIntent>
+	  399. [_] sys struct CareTeam.CareTeamStatus? --> fhir Code<CareTeam.CareTeamStatus>
+	  401. [_] sys struct CatalogEntry.CatalogEntryRelationType? --> fhir Code<CatalogEntry.CatalogEntryRelationType>
+	  403. [_] sys struct ChargeItem.ChargeItemStatus? --> fhir Code<ChargeItem.ChargeItemStatus>
+	  405. [_] sys struct ClaimProcessingCodes? --> fhir Code<ClaimProcessingCodes>
+	  407. [_] sys struct ClaimUseCode? --> fhir Code<ClaimUseCode>
+	  409. [_] sys struct ClinicalImpression.ClinicalImpressionStatus? --> fhir Code<ClinicalImpression.ClinicalImpressionStatus>
+	  411. [_] sys struct CodeSystem.CodeSystemHierarchyMeaning? --> fhir Code<CodeSystem.CodeSystemHierarchyMeaning>
+	  413. [_] sys struct CodeSystem.PropertyType? --> fhir Code<CodeSystem.PropertyType>
+	  415. [_] sys struct CodeSystemContentMode? --> fhir Code<CodeSystemContentMode>
+	  417. [_] sys struct CompartmentType? --> fhir Code<CompartmentType>
+	  419. [_] sys struct Composition.CompositionAttestationMode? --> fhir Code<Composition.CompositionAttestationMode>
+	  421. [_] sys struct Composition.V3ConfidentialityClassification? --> fhir Code<Composition.V3ConfidentialityClassification>
+	  423. [_] sys struct CompositionStatus? --> fhir Code<CompositionStatus>
+	  425. [_] sys struct ConceptMap.ConceptMapGroupUnmappedMode? --> fhir Code<ConceptMap.ConceptMapGroupUnmappedMode>
+	  427. [_] sys struct ConceptMapEquivalence? --> fhir Code<ConceptMapEquivalence>
+	  429. [_] sys struct Condition.ConditionClinicalStatusCodes? --> fhir Code<Condition.ConditionClinicalStatusCodes>
+	  430. [_] sys struct Condition.ConditionClinicalStatusCodes? --> sys String
+	  431. [_] sys struct Condition.ConditionVerificationStatus? --> fhir Code<Condition.ConditionVerificationStatus>
+	  432. [_] sys struct Condition.ConditionVerificationStatus? --> sys String
+	  433. [_] sys struct Consent.ConsentDataMeaning? --> fhir Code<Consent.ConsentDataMeaning>
+	  435. [_] sys struct Consent.ConsentProvisionType? --> fhir Code<Consent.ConsentProvisionType>
+	  437. [_] sys struct Consent.ConsentState? --> fhir Code<Consent.ConsentState>
+	  439. [_] sys struct ConstraintSeverity? --> fhir Code<ConstraintSeverity>
+	  441. [_] sys struct ContactPoint.ContactPointSystem? --> fhir Code<ContactPoint.ContactPointSystem>
+	  443. [_] sys struct ContactPoint.ContactPointUse? --> fhir Code<ContactPoint.ContactPointUse>
+	  445. [_] sys struct Contract.ContractResourcePublicationStatusCodes? --> fhir Code<Contract.ContractResourcePublicationStatusCodes>
+	  447. [_] sys struct Contract.ContractResourceStatusCodes? --> fhir Code<Contract.ContractResourceStatusCodes>
+	  449. [_] sys struct Contributor.ContributorType? --> fhir Code<Contributor.ContributorType>
+	  451. [_] sys struct CoverageEligibilityRequest.EligibilityRequestPurpose? --> fhir Code<CoverageEligibilityRequest.EligibilityRequestPurpose>
+	  453. [_] sys struct CoverageEligibilityResponse.EligibilityResponsePurpose? --> fhir Code<CoverageEligibilityResponse.EligibilityResponsePurpose>
+	  455. [_] sys struct DataRequirement.SortDirection? --> fhir Code<DataRequirement.SortDirection>
+	  457. [_] sys struct DateTimeOffset --> cql CqlDateTime
+	  459. [_] sys struct DaysOfWeek? --> fhir Code<DaysOfWeek>
+	  461. [_] sys struct DetectedIssue.DetectedIssueSeverity? --> fhir Code<DetectedIssue.DetectedIssueSeverity>
+	  463. [_] sys struct Device.FHIRDeviceStatus? --> fhir Code<Device.FHIRDeviceStatus>
+	  465. [_] sys struct Device.UDIEntryType? --> fhir Code<Device.UDIEntryType>
+	  467. [_] sys struct DeviceMetric.DeviceMetricCalibrationState? --> fhir Code<DeviceMetric.DeviceMetricCalibrationState>
+	  469. [_] sys struct DeviceMetric.DeviceMetricCalibrationType? --> fhir Code<DeviceMetric.DeviceMetricCalibrationType>
+	  471. [_] sys struct DeviceMetric.DeviceMetricCategory? --> fhir Code<DeviceMetric.DeviceMetricCategory>
+	  473. [_] sys struct DeviceMetric.DeviceMetricColor? --> fhir Code<DeviceMetric.DeviceMetricColor>
+	  475. [_] sys struct DeviceMetric.DeviceMetricOperationalStatus? --> fhir Code<DeviceMetric.DeviceMetricOperationalStatus>
+	  477. [_] sys struct DeviceNameType? --> fhir Code<DeviceNameType>
+	  479. [_] sys struct DeviceUseStatement.DeviceUseStatementStatus? --> fhir Code<DeviceUseStatement.DeviceUseStatementStatus>
+	  481. [_] sys struct DiagnosticReport.DiagnosticReportStatus? --> fhir Code<DiagnosticReport.DiagnosticReportStatus>
+	  483. [_] sys struct DocumentReferenceStatus? --> fhir Code<DocumentReferenceStatus>
+	  485. [_] sys struct DocumentRelationshipType? --> fhir Code<DocumentRelationshipType>
+	  487. [_] sys struct EffectEvidenceSynthesis.ExposureStateCode? --> fhir Code<EffectEvidenceSynthesis.ExposureStateCode>
+	  489. [_] sys struct ElementDefinition.AdditionalBindingPurposeVS? --> fhir Code<ElementDefinition.AdditionalBindingPurposeVS>
+	  490. [_] sys struct ElementDefinition.AdditionalBindingPurposeVS? --> sys String
+	  491. [_] sys struct ElementDefinition.AggregationMode? --> fhir Code<ElementDefinition.AggregationMode>
+	  493. [_] sys struct ElementDefinition.DiscriminatorType? --> fhir Code<ElementDefinition.DiscriminatorType>
+	  495. [_] sys struct ElementDefinition.PropertyRepresentation? --> fhir Code<ElementDefinition.PropertyRepresentation>
+	  497. [_] sys struct ElementDefinition.ReferenceVersionRules? --> fhir Code<ElementDefinition.ReferenceVersionRules>
+	  499. [_] sys struct ElementDefinition.SlicingRules? --> fhir Code<ElementDefinition.SlicingRules>
+	  501. [_] sys struct Encounter.EncounterLocationStatus? --> fhir Code<Encounter.EncounterLocationStatus>
+	  505. [_] sys struct Endpoint.EndpointStatus? --> fhir Code<Endpoint.EndpointStatus>
+	  507. [_] sys struct EpisodeOfCare.EpisodeOfCareStatus? --> fhir Code<EpisodeOfCare.EpisodeOfCareStatus>
+	  511. [_] sys struct ExampleScenario.ExampleScenarioActorType? --> fhir Code<ExampleScenario.ExampleScenarioActorType>
+	  513. [_] sys struct ExplanationOfBenefit.ExplanationOfBenefitStatus? --> fhir Code<ExplanationOfBenefit.ExplanationOfBenefitStatus>
+	  515. [_] sys struct FamilyMemberHistory.FamilyHistoryStatus? --> fhir Code<FamilyMemberHistory.FamilyHistoryStatus>
+	  517. [_] sys struct FHIRAllTypes? --> fhir Code<FHIRAllTypes>
+	  519. [_] sys struct FHIRDefinedType? --> fhir Code<FHIRDefinedType>
+	  521. [_] sys struct FHIRVersion? --> fhir Code<FHIRVersion>
+	  523. [_] sys struct FilterOperator? --> fhir Code<FilterOperator>
+	  525. [_] sys struct FinancialResourceStatusCodes? --> fhir Code<FinancialResourceStatusCodes>
+	  527. [_] sys struct Flag.FlagStatus? --> fhir Code<Flag.FlagStatus>
+	  529. [_] sys struct Goal.GoalLifecycleStatus? --> fhir Code<Goal.GoalLifecycleStatus>
+	  531. [_] sys struct GraphDefinition.GraphCompartmentRule? --> fhir Code<GraphDefinition.GraphCompartmentRule>
+	  533. [_] sys struct GraphDefinition.GraphCompartmentUse? --> fhir Code<GraphDefinition.GraphCompartmentUse>
+	  535. [_] sys struct Group.GroupType? --> fhir Code<Group.GroupType>
+	  537. [_] sys struct GroupMeasureCode? --> fhir Code<GroupMeasureCode>
+	  539. [_] sys struct GuidanceResponse.GuidanceResponseStatus? --> fhir Code<GuidanceResponse.GuidanceResponseStatus>
+	  541. [_] sys struct HumanName.NameUse? --> fhir Code<HumanName.NameUse>
+	  543. [_] sys struct Identifier.IdentifierUse? --> fhir Code<Identifier.IdentifierUse>
+	  545. [_] sys struct ImagingStudy.ImagingStudyStatus? --> fhir Code<ImagingStudy.ImagingStudyStatus>
+	  547. [_] sys struct Immunization.ImmunizationStatusCodes? --> fhir Code<Immunization.ImmunizationStatusCodes>
+	  549. [_] sys struct ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? --> fhir Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes>
+	  551. [_] sys struct ImplementationGuide.GuidePageGeneration? --> fhir Code<ImplementationGuide.GuidePageGeneration>
+	  553. [_] sys struct ImplementationGuide.GuideParameterCode? --> fhir Code<ImplementationGuide.GuideParameterCode>
+	  555. [_] sys struct ImplementationGuide.SPDXLicense? --> fhir Code<ImplementationGuide.SPDXLicense>
+	  557. [_] sys struct InsurancePlan.BenefitCostApplicability? --> fhir Code<InsurancePlan.BenefitCostApplicability>
+	  558. [_] sys struct InsurancePlan.BenefitCostApplicability? --> sys String
+	  559. [_] sys struct Invoice.InvoiceStatus? --> fhir Code<Invoice.InvoiceStatus>
+	  561. [_] sys struct InvoicePriceComponentType? --> fhir Code<InvoicePriceComponentType>
+	  563. [_] sys struct Linkage.LinkageType? --> fhir Code<Linkage.LinkageType>
+	  565. [_] sys struct List.ListStatus? --> fhir Code<List.ListStatus>
+	  567. [_] sys struct ListMode? --> fhir Code<ListMode>
+	  569. [_] sys struct Location.LocationMode? --> fhir Code<Location.LocationMode>
+	  571. [_] sys struct Location.LocationStatus? --> fhir Code<Location.LocationStatus>
+	  573. [_] sys struct MeasureImprovementNotation? --> fhir Code<MeasureImprovementNotation>
+	  574. [_] sys struct MeasureImprovementNotation? --> sys String
+	  575. [_] sys struct MeasureReport.MeasureReportStatus? --> fhir Code<MeasureReport.MeasureReportStatus>
+	  577. [_] sys struct MeasureReport.MeasureReportType? --> fhir Code<MeasureReport.MeasureReportType>
+	  579. [_] sys struct Medication.MedicationStatusCodes? --> fhir Code<Medication.MedicationStatusCodes>
+	  585. [_] sys struct MedicationKnowledge.MedicationKnowledgeStatusCodes? --> fhir Code<MedicationKnowledge.MedicationKnowledgeStatusCodes>
+	  587. [_] sys struct MedicationRequest.MedicationRequestIntent? --> fhir Code<MedicationRequest.MedicationRequestIntent>
+	  589. [_] sys struct MedicationRequest.MedicationrequestStatus? --> fhir Code<MedicationRequest.MedicationrequestStatus>
+	  591. [_] sys struct MedicationStatement.MedicationStatusCodes? --> fhir Code<MedicationStatement.MedicationStatusCodes>
+	  593. [_] sys struct MessageDefinition.MessageSignificanceCategory? --> fhir Code<MessageDefinition.MessageSignificanceCategory>
+	  595. [_] sys struct MessageHeader.ResponseType? --> fhir Code<MessageHeader.ResponseType>
+	  597. [_] sys struct MessageheaderResponseRequest? --> fhir Code<MessageheaderResponseRequest>
+	  599. [_] sys struct MolecularSequence.OrientationType? --> fhir Code<MolecularSequence.OrientationType>
+	  601. [_] sys struct MolecularSequence.QualityType? --> fhir Code<MolecularSequence.QualityType>
+	  603. [_] sys struct MolecularSequence.RepositoryType? --> fhir Code<MolecularSequence.RepositoryType>
+	  605. [_] sys struct MolecularSequence.SequenceType? --> fhir Code<MolecularSequence.SequenceType>
+	  607. [_] sys struct MolecularSequence.StrandType? --> fhir Code<MolecularSequence.StrandType>
+	  609. [_] sys struct Money.Currencies? --> fhir Code<Money.Currencies>
+	  611. [_] sys struct NamingSystem.NamingSystemIdentifierType? --> fhir Code<NamingSystem.NamingSystemIdentifierType>
+	  613. [_] sys struct NamingSystem.NamingSystemType? --> fhir Code<NamingSystem.NamingSystemType>
+	  615. [_] sys struct Narrative.NarrativeStatus? --> fhir Code<Narrative.NarrativeStatus>
+	  617. [_] sys struct NoteType? --> fhir Code<NoteType>
+	  619. [_] sys struct ObservationDefinition.ObservationDataType? --> fhir Code<ObservationDefinition.ObservationDataType>
+	  621. [_] sys struct ObservationDefinition.ObservationRangeCategory? --> fhir Code<ObservationDefinition.ObservationRangeCategory>
+	  625. [_] sys struct OperationDefinition.OperationKind? --> fhir Code<OperationDefinition.OperationKind>
+	  627. [_] sys struct OperationOutcome.IssueSeverity? --> fhir Code<OperationOutcome.IssueSeverity>
+	  629. [_] sys struct OperationOutcome.IssueType? --> fhir Code<OperationOutcome.IssueType>
+	  631. [_] sys struct OperationParameterUse? --> fhir Code<OperationParameterUse>
+	  633. [_] sys struct ParticipationStatus? --> fhir Code<ParticipationStatus>
+	  635. [_] sys struct Patient.LinkType? --> fhir Code<Patient.LinkType>
+	  637. [_] sys struct Person.IdentityAssuranceLevel? --> fhir Code<Person.IdentityAssuranceLevel>
+	  639. [_] sys struct Provenance.ProvenanceEntityRole? --> fhir Code<Provenance.ProvenanceEntityRole>
+	  641. [_] sys struct PublicationStatus? --> fhir Code<PublicationStatus>
+	  643. [_] sys struct Quantity.QuantityComparator? --> fhir Code<Quantity.QuantityComparator>
+	  645. [_] sys struct Questionnaire.EnableWhenBehavior? --> fhir Code<Questionnaire.EnableWhenBehavior>
+	  647. [_] sys struct Questionnaire.QuestionnaireItemOperator? --> fhir Code<Questionnaire.QuestionnaireItemOperator>
+	  649. [_] sys struct Questionnaire.QuestionnaireItemType? --> fhir Code<Questionnaire.QuestionnaireItemType>
+	  651. [_] sys struct QuestionnaireResponse.QuestionnaireResponseStatus? --> fhir Code<QuestionnaireResponse.QuestionnaireResponseStatus>
+	  653. [_] sys struct RelatedArtifact.RelatedArtifactType? --> fhir Code<RelatedArtifact.RelatedArtifactType>
+	  657. [_] sys struct RequestPriority? --> fhir Code<RequestPriority>
+	  661. [_] sys struct ResearchElementDefinition.ResearchElementType? --> fhir Code<ResearchElementDefinition.ResearchElementType>
+	  663. [_] sys struct ResearchStudy.ResearchStudyStatus? --> fhir Code<ResearchStudy.ResearchStudyStatus>
+	  665. [_] sys struct ResearchSubject.ResearchSubjectStatus? --> fhir Code<ResearchSubject.ResearchSubjectStatus>
+	  667. [_] sys struct ResourceType? --> fhir Code<ResourceType>
+	  669. [_] sys struct SearchParameter.SearchComparator? --> fhir Code<SearchParameter.SearchComparator>
+	  671. [_] sys struct SearchParameter.SearchModifierCode? --> fhir Code<SearchParameter.SearchModifierCode>
+	  673. [_] sys struct SearchParameter.XPathUsageType? --> fhir Code<SearchParameter.XPathUsageType>
+	  675. [_] sys struct SearchParamType? --> fhir Code<SearchParamType>
+	  677. [_] sys struct Slot.SlotStatus? --> fhir Code<Slot.SlotStatus>
+	  679. [_] sys struct Specimen.SpecimenStatus? --> fhir Code<Specimen.SpecimenStatus>
+	  681. [_] sys struct SpecimenDefinition.SpecimenContainedPreference? --> fhir Code<SpecimenDefinition.SpecimenContainedPreference>
+	  683. [_] sys struct StructureDefinition.ExtensionContextType? --> fhir Code<StructureDefinition.ExtensionContextType>
+	  685. [_] sys struct StructureDefinition.StructureDefinitionKind? --> fhir Code<StructureDefinition.StructureDefinitionKind>
+	  687. [_] sys struct StructureDefinition.TypeDerivationRule? --> fhir Code<StructureDefinition.TypeDerivationRule>
+	  689. [_] sys struct StructureMap.StructureMapContextType? --> fhir Code<StructureMap.StructureMapContextType>
+	  691. [_] sys struct StructureMap.StructureMapGroupTypeMode? --> fhir Code<StructureMap.StructureMapGroupTypeMode>
+	  693. [_] sys struct StructureMap.StructureMapInputMode? --> fhir Code<StructureMap.StructureMapInputMode>
+	  695. [_] sys struct StructureMap.StructureMapModelMode? --> fhir Code<StructureMap.StructureMapModelMode>
+	  697. [_] sys struct StructureMap.StructureMapSourceListMode? --> fhir Code<StructureMap.StructureMapSourceListMode>
+	  699. [_] sys struct StructureMap.StructureMapTargetListMode? --> fhir Code<StructureMap.StructureMapTargetListMode>
+	  701. [_] sys struct StructureMap.StructureMapTransform? --> fhir Code<StructureMap.StructureMapTransform>
+	  703. [_] sys struct Subscription.SubscriptionChannelType? --> fhir Code<Subscription.SubscriptionChannelType>
+	  705. [_] sys struct Subscription.SubscriptionStatus? --> fhir Code<Subscription.SubscriptionStatus>
+	  707. [_] sys struct Substance.FHIRSubstanceStatus? --> fhir Code<Substance.FHIRSubstanceStatus>
+	  709. [_] sys struct SupplyDelivery.SupplyDeliveryStatus? --> fhir Code<SupplyDelivery.SupplyDeliveryStatus>
+	  711. [_] sys struct SupplyDelivery.SupplyItemType? --> fhir Code<SupplyDelivery.SupplyItemType>
+	  712. [_] sys struct SupplyDelivery.SupplyItemType? --> sys String
+	  713. [_] sys struct SupplyRequest.SupplyRequestStatus? --> fhir Code<SupplyRequest.SupplyRequestStatus>
+	  715. [_] sys struct Task.TaskIntent? --> fhir Code<Task.TaskIntent>
+	  719. [_] sys struct TerminologyCapabilities.CodeSearchSupport? --> fhir Code<TerminologyCapabilities.CodeSearchSupport>
+	  721. [_] sys struct TestReport.TestReportActionResult? --> fhir Code<TestReport.TestReportActionResult>
+	  723. [_] sys struct TestReport.TestReportParticipantType? --> fhir Code<TestReport.TestReportParticipantType>
+	  725. [_] sys struct TestReport.TestReportResult? --> fhir Code<TestReport.TestReportResult>
+	  727. [_] sys struct TestReport.TestReportStatus? --> fhir Code<TestReport.TestReportStatus>
+	  729. [_] sys struct TestScript.AssertionDirectionType? --> fhir Code<TestScript.AssertionDirectionType>
+	  731. [_] sys struct TestScript.AssertionOperatorType? --> fhir Code<TestScript.AssertionOperatorType>
+	  733. [_] sys struct TestScript.AssertionResponseTypes? --> fhir Code<TestScript.AssertionResponseTypes>
+	  735. [_] sys struct TestScript.TestScriptRequestMethodCode? --> fhir Code<TestScript.TestScriptRequestMethodCode>
+	  737. [_] sys struct Timing.EventTiming? --> fhir Code<Timing.EventTiming>
+	  741. [_] sys struct TriggerDefinition.TriggerType? --> fhir Code<TriggerDefinition.TriggerType>
+	  743. [_] sys struct VariableTypeCode? --> fhir Code<VariableTypeCode>
+	  745. [_] sys struct VerificationResult.StatusCode? --> fhir Code<VerificationResult.StatusCode>
+	  747. [_] sys struct VisionPrescription.VisionBase? --> fhir Code<VisionPrescription.VisionBase>
+	  749. [_] sys struct VisionPrescription.VisionEyes? --> fhir Code<VisionPrescription.VisionEyes>
+	  751. [_] sys Uri --> sys String
+	    1. [x] cql CqlDate --> cql CqlDateTime
+	  118. [x] fhir Code<Encounter.EncounterStatus> --> sys String
+	  157. [x] fhir Code<MedicationAdministration.MedicationAdministrationStatusCodes> --> sys String
+	  158. [x] fhir Code<MedicationDispense.MedicationDispenseStatusCodes> --> sys String
+	  178. [x] fhir Code<ObservationStatus> --> sys String
+	  194. [x] fhir Code<RequestIntent> --> sys String
+	  196. [x] fhir Code<RequestStatus> --> sys String
+	  236. [x] fhir Code<Timing.UnitsOfTime> --> sys String
+	  242. [x] fhir DataType --> sys String
+	  248. [x] fhir FhirDateTime --> cql CqlDateTime
+	  297. [x] sys Byte[] --> sys String
+	  298. [x] sys String --> cql CqlDate
+	  299. [x] sys String --> cql CqlDateTime
+	  301. [x] sys String --> fhir FhirUri
+	  304. [x] sys struct Account.AccountStatus? --> sys String
+	  306. [x] sys struct ActionCardinalityBehavior? --> sys String
+	  308. [x] sys struct ActionConditionKind? --> sys String
+	  310. [x] sys struct ActionGroupingBehavior? --> sys String
+	  312. [x] sys struct ActionParticipantType? --> sys String
+	  314. [x] sys struct ActionPrecheckBehavior? --> sys String
+	  316. [x] sys struct ActionRelationshipType? --> sys String
+	  318. [x] sys struct ActionRequiredBehavior? --> sys String
+	  320. [x] sys struct ActionSelectionBehavior? --> sys String
+	  322. [x] sys struct ActivityDefinition.RequestResourceType? --> sys String
+	  324. [x] sys struct Address.AddressType? --> sys String
+	  326. [x] sys struct Address.AddressUse? --> sys String
+	  328. [x] sys struct AdministrativeGender? --> sys String
+	  329. [x] sys struct AdverseEvent.AdverseEventActuality? --> fhir Code<AdverseEvent.AdverseEventActuality>
+	  330. [x] sys struct AdverseEvent.AdverseEventActuality? --> sys String
+	  336. [x] sys struct AllergyIntolerance.AllergyIntoleranceCategory? --> sys String
+	  340. [x] sys struct AllergyIntolerance.AllergyIntoleranceCriticality? --> sys String
+	  342. [x] sys struct AllergyIntolerance.AllergyIntoleranceSeverity? --> sys String
+	  344. [x] sys struct AllergyIntolerance.AllergyIntoleranceType? --> sys String
+	  348. [x] sys struct Appointment.AppointmentStatus? --> sys String
+	  350. [x] sys struct Appointment.ParticipantRequired? --> sys String
+	  352. [x] sys struct AuditEvent.AuditEventAction? --> sys String
+	  354. [x] sys struct AuditEvent.AuditEventAgentNetworkType? --> sys String
+	  356. [x] sys struct AuditEvent.AuditEventOutcome? --> sys String
+	  358. [x] sys struct BindingStrength? --> sys String
+	  360. [x] sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? --> sys String
+	  362. [x] sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? --> sys String
+	  364. [x] sys struct BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? --> sys String
+	  366. [x] sys struct Bundle.BundleType? --> sys String
+	  368. [x] sys struct Bundle.HTTPVerb? --> sys String
+	  372. [x] sys struct Bundle.SearchEntryMode? --> sys String
+	  374. [x] sys struct CapabilityStatement.ConditionalDeleteStatus? --> sys String
+	  376. [x] sys struct CapabilityStatement.ConditionalReadStatus? --> sys String
+	  378. [x] sys struct CapabilityStatement.DocumentMode? --> sys String
+	  380. [x] sys struct CapabilityStatement.EventCapabilityMode? --> sys String
+	  382. [x] sys struct CapabilityStatement.ReferenceHandlingPolicy? --> sys String
+	  384. [x] sys struct CapabilityStatement.ResourceVersionPolicy? --> sys String
+	  386. [x] sys struct CapabilityStatement.RestfulCapabilityMode? --> sys String
+	  388. [x] sys struct CapabilityStatement.SystemRestfulInteraction? --> sys String
+	  390. [x] sys struct CapabilityStatement.TypeRestfulInteraction? --> sys String
+	  392. [x] sys struct CapabilityStatementKind? --> sys String
+	  394. [x] sys struct CarePlan.CarePlanActivityKind? --> sys String
+	  396. [x] sys struct CarePlan.CarePlanActivityStatus? --> sys String
+	  398. [x] sys struct CarePlan.CarePlanIntent? --> sys String
+	  400. [x] sys struct CareTeam.CareTeamStatus? --> sys String
+	  402. [x] sys struct CatalogEntry.CatalogEntryRelationType? --> sys String
+	  404. [x] sys struct ChargeItem.ChargeItemStatus? --> sys String
+	  406. [x] sys struct ClaimProcessingCodes? --> sys String
+	  408. [x] sys struct ClaimUseCode? --> sys String
+	  410. [x] sys struct ClinicalImpression.ClinicalImpressionStatus? --> sys String
+	  412. [x] sys struct CodeSystem.CodeSystemHierarchyMeaning? --> sys String
+	  414. [x] sys struct CodeSystem.PropertyType? --> sys String
+	  416. [x] sys struct CodeSystemContentMode? --> sys String
+	  418. [x] sys struct CompartmentType? --> sys String
+	  420. [x] sys struct Composition.CompositionAttestationMode? --> sys String
+	  422. [x] sys struct Composition.V3ConfidentialityClassification? --> sys String
+	  424. [x] sys struct CompositionStatus? --> sys String
+	  426. [x] sys struct ConceptMap.ConceptMapGroupUnmappedMode? --> sys String
+	  428. [x] sys struct ConceptMapEquivalence? --> sys String
+	  434. [x] sys struct Consent.ConsentDataMeaning? --> sys String
+	  436. [x] sys struct Consent.ConsentProvisionType? --> sys String
+	  438. [x] sys struct Consent.ConsentState? --> sys String
+	  440. [x] sys struct ConstraintSeverity? --> sys String
+	  442. [x] sys struct ContactPoint.ContactPointSystem? --> sys String
+	  444. [x] sys struct ContactPoint.ContactPointUse? --> sys String
+	  446. [x] sys struct Contract.ContractResourcePublicationStatusCodes? --> sys String
+	  448. [x] sys struct Contract.ContractResourceStatusCodes? --> sys String
+	  450. [x] sys struct Contributor.ContributorType? --> sys String
+	  452. [x] sys struct CoverageEligibilityRequest.EligibilityRequestPurpose? --> sys String
+	  454. [x] sys struct CoverageEligibilityResponse.EligibilityResponsePurpose? --> sys String
+	  456. [x] sys struct DataRequirement.SortDirection? --> sys String
+	  458. [x] sys struct DateTimeOffset? --> cql CqlDateTime
+	  460. [x] sys struct DaysOfWeek? --> sys String
+	  462. [x] sys struct DetectedIssue.DetectedIssueSeverity? --> sys String
+	  464. [x] sys struct Device.FHIRDeviceStatus? --> sys String
+	  466. [x] sys struct Device.UDIEntryType? --> sys String
+	  468. [x] sys struct DeviceMetric.DeviceMetricCalibrationState? --> sys String
+	  470. [x] sys struct DeviceMetric.DeviceMetricCalibrationType? --> sys String
+	  472. [x] sys struct DeviceMetric.DeviceMetricCategory? --> sys String
+	  474. [x] sys struct DeviceMetric.DeviceMetricColor? --> sys String
+	  476. [x] sys struct DeviceMetric.DeviceMetricOperationalStatus? --> sys String
+	  478. [x] sys struct DeviceNameType? --> sys String
+	  480. [x] sys struct DeviceUseStatement.DeviceUseStatementStatus? --> sys String
+	  482. [x] sys struct DiagnosticReport.DiagnosticReportStatus? --> sys String
+	  484. [x] sys struct DocumentReferenceStatus? --> sys String
+	  486. [x] sys struct DocumentRelationshipType? --> sys String
+	  488. [x] sys struct EffectEvidenceSynthesis.ExposureStateCode? --> sys String
+	  492. [x] sys struct ElementDefinition.AggregationMode? --> sys String
+	  494. [x] sys struct ElementDefinition.DiscriminatorType? --> sys String
+	  496. [x] sys struct ElementDefinition.PropertyRepresentation? --> sys String
+	  498. [x] sys struct ElementDefinition.ReferenceVersionRules? --> sys String
+	  500. [x] sys struct ElementDefinition.SlicingRules? --> sys String
+	  502. [x] sys struct Encounter.EncounterLocationStatus? --> sys String
+	  503. [x] sys struct Encounter.EncounterStatus? --> fhir Code<Encounter.EncounterStatus>
+	  504. [x] sys struct Encounter.EncounterStatus? --> sys String
+	  506. [x] sys struct Endpoint.EndpointStatus? --> sys String
+	  508. [x] sys struct EpisodeOfCare.EpisodeOfCareStatus? --> sys String
+	  509. [x] sys struct EventStatus? --> fhir Code<EventStatus>
+	  510. [x] sys struct EventStatus? --> sys String
+	  512. [x] sys struct ExampleScenario.ExampleScenarioActorType? --> sys String
+	  514. [x] sys struct ExplanationOfBenefit.ExplanationOfBenefitStatus? --> sys String
+	  516. [x] sys struct FamilyMemberHistory.FamilyHistoryStatus? --> sys String
+	  518. [x] sys struct FHIRAllTypes? --> sys String
+	  520. [x] sys struct FHIRDefinedType? --> sys String
+	  522. [x] sys struct FHIRVersion? --> sys String
+	  524. [x] sys struct FilterOperator? --> sys String
+	  526. [x] sys struct FinancialResourceStatusCodes? --> sys String
+	  528. [x] sys struct Flag.FlagStatus? --> sys String
+	  530. [x] sys struct Goal.GoalLifecycleStatus? --> sys String
+	  532. [x] sys struct GraphDefinition.GraphCompartmentRule? --> sys String
+	  534. [x] sys struct GraphDefinition.GraphCompartmentUse? --> sys String
+	  536. [x] sys struct Group.GroupType? --> sys String
+	  538. [x] sys struct GroupMeasureCode? --> sys String
+	  540. [x] sys struct GuidanceResponse.GuidanceResponseStatus? --> sys String
+	  542. [x] sys struct HumanName.NameUse? --> sys String
+	  544. [x] sys struct Identifier.IdentifierUse? --> sys String
+	  546. [x] sys struct ImagingStudy.ImagingStudyStatus? --> sys String
+	  548. [x] sys struct Immunization.ImmunizationStatusCodes? --> sys String
+	  550. [x] sys struct ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? --> sys String
+	  552. [x] sys struct ImplementationGuide.GuidePageGeneration? --> sys String
+	  554. [x] sys struct ImplementationGuide.GuideParameterCode? --> sys String
+	  556. [x] sys struct ImplementationGuide.SPDXLicense? --> sys String
+	  560. [x] sys struct Invoice.InvoiceStatus? --> sys String
+	  562. [x] sys struct InvoicePriceComponentType? --> sys String
+	  564. [x] sys struct Linkage.LinkageType? --> sys String
+	  566. [x] sys struct List.ListStatus? --> sys String
+	  568. [x] sys struct ListMode? --> sys String
+	  570. [x] sys struct Location.LocationMode? --> sys String
+	  572. [x] sys struct Location.LocationStatus? --> sys String
+	  576. [x] sys struct MeasureReport.MeasureReportStatus? --> sys String
+	  578. [x] sys struct MeasureReport.MeasureReportType? --> sys String
+	  580. [x] sys struct Medication.MedicationStatusCodes? --> sys String
+	  581. [x] sys struct MedicationAdministration.MedicationAdministrationStatusCodes? --> fhir Code<MedicationAdministration.MedicationAdministrationStatusCodes>
+	  582. [x] sys struct MedicationAdministration.MedicationAdministrationStatusCodes? --> sys String
+	  583. [x] sys struct MedicationDispense.MedicationDispenseStatusCodes? --> fhir Code<MedicationDispense.MedicationDispenseStatusCodes>
+	  584. [x] sys struct MedicationDispense.MedicationDispenseStatusCodes? --> sys String
+	  586. [x] sys struct MedicationKnowledge.MedicationKnowledgeStatusCodes? --> sys String
+	  588. [x] sys struct MedicationRequest.MedicationRequestIntent? --> sys String
+	  590. [x] sys struct MedicationRequest.MedicationrequestStatus? --> sys String
+	  592. [x] sys struct MedicationStatement.MedicationStatusCodes? --> sys String
+	  594. [x] sys struct MessageDefinition.MessageSignificanceCategory? --> sys String
+	  596. [x] sys struct MessageHeader.ResponseType? --> sys String
+	  598. [x] sys struct MessageheaderResponseRequest? --> sys String
+	  600. [x] sys struct MolecularSequence.OrientationType? --> sys String
+	  602. [x] sys struct MolecularSequence.QualityType? --> sys String
+	  604. [x] sys struct MolecularSequence.RepositoryType? --> sys String
+	  606. [x] sys struct MolecularSequence.SequenceType? --> sys String
+	  608. [x] sys struct MolecularSequence.StrandType? --> sys String
+	  610. [x] sys struct Money.Currencies? --> sys String
+	  612. [x] sys struct NamingSystem.NamingSystemIdentifierType? --> sys String
+	  614. [x] sys struct NamingSystem.NamingSystemType? --> sys String
+	  616. [x] sys struct Narrative.NarrativeStatus? --> sys String
+	  618. [x] sys struct NoteType? --> sys String
+	  620. [x] sys struct ObservationDefinition.ObservationDataType? --> sys String
+	  622. [x] sys struct ObservationDefinition.ObservationRangeCategory? --> sys String
+	  623. [x] sys struct ObservationStatus? --> fhir Code<ObservationStatus>
+	  624. [x] sys struct ObservationStatus? --> sys String
+	  626. [x] sys struct OperationDefinition.OperationKind? --> sys String
+	  628. [x] sys struct OperationOutcome.IssueSeverity? --> sys String
+	  630. [x] sys struct OperationOutcome.IssueType? --> sys String
+	  632. [x] sys struct OperationParameterUse? --> sys String
+	  634. [x] sys struct ParticipationStatus? --> sys String
+	  636. [x] sys struct Patient.LinkType? --> sys String
+	  638. [x] sys struct Person.IdentityAssuranceLevel? --> sys String
+	  640. [x] sys struct Provenance.ProvenanceEntityRole? --> sys String
+	  642. [x] sys struct PublicationStatus? --> sys String
+	  644. [x] sys struct Quantity.QuantityComparator? --> sys String
+	  646. [x] sys struct Questionnaire.EnableWhenBehavior? --> sys String
+	  648. [x] sys struct Questionnaire.QuestionnaireItemOperator? --> sys String
+	  650. [x] sys struct Questionnaire.QuestionnaireItemType? --> sys String
+	  652. [x] sys struct QuestionnaireResponse.QuestionnaireResponseStatus? --> sys String
+	  654. [x] sys struct RelatedArtifact.RelatedArtifactType? --> sys String
+	  655. [x] sys struct RequestIntent? --> fhir Code<RequestIntent>
+	  656. [x] sys struct RequestIntent? --> sys String
+	  658. [x] sys struct RequestPriority? --> sys String
+	  659. [x] sys struct RequestStatus? --> fhir Code<RequestStatus>
+	  660. [x] sys struct RequestStatus? --> sys String
+	  662. [x] sys struct ResearchElementDefinition.ResearchElementType? --> sys String
+	  664. [x] sys struct ResearchStudy.ResearchStudyStatus? --> sys String
+	  666. [x] sys struct ResearchSubject.ResearchSubjectStatus? --> sys String
+	  668. [x] sys struct ResourceType? --> sys String
+	  670. [x] sys struct SearchParameter.SearchComparator? --> sys String
+	  672. [x] sys struct SearchParameter.SearchModifierCode? --> sys String
+	  674. [x] sys struct SearchParameter.XPathUsageType? --> sys String
+	  676. [x] sys struct SearchParamType? --> sys String
+	  678. [x] sys struct Slot.SlotStatus? --> sys String
+	  680. [x] sys struct Specimen.SpecimenStatus? --> sys String
+	  682. [x] sys struct SpecimenDefinition.SpecimenContainedPreference? --> sys String
+	  684. [x] sys struct StructureDefinition.ExtensionContextType? --> sys String
+	  686. [x] sys struct StructureDefinition.StructureDefinitionKind? --> sys String
+	  688. [x] sys struct StructureDefinition.TypeDerivationRule? --> sys String
+	  690. [x] sys struct StructureMap.StructureMapContextType? --> sys String
+	  692. [x] sys struct StructureMap.StructureMapGroupTypeMode? --> sys String
+	  694. [x] sys struct StructureMap.StructureMapInputMode? --> sys String
+	  696. [x] sys struct StructureMap.StructureMapModelMode? --> sys String
+	  698. [x] sys struct StructureMap.StructureMapSourceListMode? --> sys String
+	  700. [x] sys struct StructureMap.StructureMapTargetListMode? --> sys String
+	  702. [x] sys struct StructureMap.StructureMapTransform? --> sys String
+	  704. [x] sys struct Subscription.SubscriptionChannelType? --> sys String
+	  706. [x] sys struct Subscription.SubscriptionStatus? --> sys String
+	  708. [x] sys struct Substance.FHIRSubstanceStatus? --> sys String
+	  710. [x] sys struct SupplyDelivery.SupplyDeliveryStatus? --> sys String
+	  714. [x] sys struct SupplyRequest.SupplyRequestStatus? --> sys String
+	  716. [x] sys struct Task.TaskIntent? --> sys String
+	  717. [x] sys struct Task.TaskStatus? --> fhir Code<Task.TaskStatus>
+	  718. [x] sys struct Task.TaskStatus? --> sys String
+	  720. [x] sys struct TerminologyCapabilities.CodeSearchSupport? --> sys String
+	  722. [x] sys struct TestReport.TestReportActionResult? --> sys String
+	  724. [x] sys struct TestReport.TestReportParticipantType? --> sys String
+	  726. [x] sys struct TestReport.TestReportResult? --> sys String
+	  728. [x] sys struct TestReport.TestReportStatus? --> sys String
+	  730. [x] sys struct TestScript.AssertionDirectionType? --> sys String
+	  732. [x] sys struct TestScript.AssertionOperatorType? --> sys String
+	  734. [x] sys struct TestScript.AssertionResponseTypes? --> sys String
+	  736. [x] sys struct TestScript.TestScriptRequestMethodCode? --> sys String
+	  738. [x] sys struct Timing.EventTiming? --> sys String
+	  739. [x] sys struct Timing.UnitsOfTime? --> fhir Code<Timing.UnitsOfTime>
+	  740. [x] sys struct Timing.UnitsOfTime? --> sys String
+	  742. [x] sys struct TriggerDefinition.TriggerType? --> sys String
+	  744. [x] sys struct VariableTypeCode? --> sys String
+	  746. [x] sys struct VerificationResult.StatusCode? --> sys String
+	  748. [x] sys struct VisionPrescription.VisionBase? --> sys String
+	  750. [x] sys struct VisionPrescription.VisionEyes? --> sys String

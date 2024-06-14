@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Expressions;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
@@ -17,10 +16,13 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    internal class ExpressionConverter(string libraryName)
+    internal class ExpressionConverter(
+        string libraryName,
+        CSharpCodeWriterTypeFormat typeFormat)
     {
         public string ConvertExpression(int indent, Expression expression, bool leadingIndent = true)
         {
@@ -116,7 +118,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 if (ReferenceEquals(childStatement, lastExpression))
                 {
-                    if (childStatement is not 
+                    if (childStatement is not
                         (CaseWhenThenExpression or UnaryExpression { NodeType: ExpressionType.Throw }))
                     {
                         if (!isFirstStatement) sb.AppendLine();
@@ -129,7 +131,15 @@ namespace Hl7.Cql.CodeGeneration.NET
                     sb.Append(ConvertExpression(indent + 1, childStatement));
                 }
 
-                sb.AppendLine(";");
+                switch (childStatement)
+                {
+                    case CaseWhenThenExpression:
+                        sb.AppendLine("");
+                        break;
+                    default:
+                        sb.AppendLine(";");
+                        break;
+                }
                 isFirstStatement = false;
             }
 
@@ -545,6 +555,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static readonly ObjectIDGenerator Gen = new();
 #pragma warning restore SYSLIB0050 // Type or member is obsolete
 
+        private static readonly TypeCSharpFormat? TypeToCSharpStringOptions = new(UseKeywords: true, NoNamespaces: true);
+
         private static string ParamName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
 
         private string ConvertBinaryExpression(int indent, string leadingIndentString, BinaryExpression binary)
@@ -559,8 +571,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return ConvertLocalFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
 
                 var rightCode = ConvertExpression(indent, right, false);
+
                 string typeDeclaration = "var";
-                if (rightCode is "null" or "default")
+                if (typeFormat is CSharpCodeWriterTypeFormat.Explicit || rightCode is "null" or "default")
                     typeDeclaration = PrettyTypeName(left.Type);
 
                 var assignment = $"{leadingIndentString}{typeDeclaration} {ParamName(parameter)} = {rightCode}";
@@ -631,55 +644,8 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public static string PrettyTypeName(Type type)
         {
-            string typeName = type.Name;
-            if (type == typeof(int))
-                return "int";
-            else if (type == typeof(bool))
-                return "bool";
-            else if (type == typeof(decimal))
-                return "decimal";
-            else if (type == typeof(float))
-                return "float";
-            else if (type == typeof(double))
-                return "double";
-            else if (type == typeof(string))
-                return "string";
-            else if (type == typeof(object))
-                return "object";
-            if (type.IsGenericType)
-            {
-                if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-                {
-                    typeName = $"{PrettyTypeName(Nullable.GetUnderlyingType(type)!)}?";
-                }
-                else
-                {
-                    if (type.IsGenericType)
-                    {
-                        var tildeIndex = type.Name.IndexOf('`');
-                        var rootName = type.Name.Substring(0, tildeIndex);
-                        var genericArgumentNames = type.GetGenericArguments()
-                            .Select(PrettyTypeName);
-                        var prettyName = $"{rootName}<{string.Join(",", genericArgumentNames)}>";
-                        typeName = prettyName;
-                    }
-                }
-            }
-            if (type.IsNested)
-            {
-                typeName = $"{PrettyTypeName(type.DeclaringType!)}.{typeName}";
-            }
-            if (typeName.StartsWith("Tuple_"))
-            {
-                return $"{type.Namespace}.{typeName}";
-            }
-            else if (type.IsArray)
-            {
-                var elementType = type.GetElementType() ??
-                    throw new InvalidOperationException($"Unable to get array element type for {type.FullName}");
-                return $"{PrettyTypeName(elementType)}[]";
-            }
-            else return typeName;
+            string result = type.ToCSharpString(TypeToCSharpStringOptions);
+            return result;
         }
 
         private static string Parenthesize(string term)
@@ -689,7 +655,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             return term.ToCharArray().Any(char.IsWhiteSpace) ? $"({term})" : term;
         }
-        
+
         private static string EscapeKeywords(string symbol)
         {
             var keyword = SyntaxFacts.GetKeywordKind(symbol);

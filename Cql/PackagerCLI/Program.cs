@@ -1,4 +1,11 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System.Diagnostics;
 using System.Globalization;
@@ -21,12 +28,14 @@ namespace Hl7.Cql.Packager;
 
 public class Program
 {
+    private static IDictionary<string, string> SwitchMappings { get; }
+
+
     public static int Main(string[] args)
     {
 #if DEBUG // Latest Visual Studio can't handle the $(SolutionDir) args in the launchSettings!!
-        var dir = new DirectoryInfo(Environment.CurrentDirectory);
-        while (!File.Exists(Path.Combine(dir!.FullName, "CqlAndDemo.sln")))
-            dir = dir.Parent;
+        var dir = new DirectoryInfo(Environment.CurrentDirectory)
+            .FindParentDirectoryContaining("CqlAndDemo.sln")!;
 
         args = args.SelectToArray(arg =>
         {
@@ -44,69 +53,93 @@ public class Program
 
         var hostBuilder = CreateHostBuilder(args);
 
-        return Run(hostBuilder);
+        try
+        {
+            return Run(hostBuilder);
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder()
             .ConfigureAppConfiguration((context, config) => ConfigureAppConfiguration(config, args))
-            .ConfigureLogging((context, logging) => ConfigureLogging(logging))
+            .ConfigureLogging((context, logging) => ConfigureLogging(context, logging))
             .ConfigureServices((context, services) => ConfigureServices(context, services));
 
-    private static IDictionary<string, string> BuildSwitchMappings()
+    private static string Usage { get; }
+
+    static Program()
     {
-        const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
-        const string CSharpResourceWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
-        const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+        SwitchMappings = BuildSwitchMappings();
+        Usage = $"""
+                 Packager CLI Usage:
 
-        return new SortedDictionary<string, string>
+                     {"-?|-h|-help",-26} Show this help
+
+                     {CqlToResourcePackagingOptions.ArgNameElmDirectory,-26} {"<directory>",-19} Required: Library root directory
+                     {CqlToResourcePackagingOptions.ArgNameCqlDirectory,-26} {"<directory>",-19} Required: CQL root directory
+                     {Optional(FhirResourceWriterOptions.ArgNameOutDirectory),-26} {"<directory>",-19} Resource directory
+                     {Optional(CSharpCodeWriterOptions.ArgNameOutDirectory),-26} {"<directory>",-19} C# output directory
+                     {Optional(CSharpCodeWriterOptions.ArgNameTypeFormat),-26} {"<var|explicit>",-19} Whether to use var (default) or explicit types in the C# output
+                     {Optional(AssemblyDataWriterOptions.ArgNameOutDirectory),-26}{"<directory>",-19} DLL output directory
+                     {Optional(CqlToResourcePackagingOptions.ArgNameLogDebugEnabled),-26} {"<true|false>",-19} Enable debug logging or not (default)
+                     {Optional(CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl),-26} {"<url>",-19} The root url used for the resource canonical
+                     {"",-26 - 19 - 1} If omitted a '#' will be used
+                     {Optional(FhirResourceWriterOptions.ArgNameOverrideDate),-26} {"<ISO8601-date-time>",-19} The UTC date to override in the generated FHIR resource libraries
+                     {"",-26 - 19 - 1} (example: 2000-12-31T23:59:59.99Z)
+                     {"",-26 - 19 - 1} If omitted the current date time will be used
+                 """;
+
+        static string Optional(string s) => $"[{s}]";
+
+        static IDictionary<string, string> BuildSwitchMappings()
         {
-            // @formatter:off
-            [CqlToResourcePackagingOptions.ArgNameElmDirectory]     = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
-            [CqlToResourcePackagingOptions.ArgNameCqlDirectory]     = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
-            [CqlToResourcePackagingOptions.ArgNameDebug]            = PackageSection + nameof(CqlToResourcePackagingOptions.Debug),
-            [CqlToResourcePackagingOptions.ArgNameForce]            = PackageSection + nameof(CqlToResourcePackagingOptions.Force),
-            [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
+            const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
+            const string CSharpCodeWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
+            const string AssemblyDataWriterSection = AssemblyDataWriterOptions.ConfigSection + ":";
+            const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
-            [CSharpCodeWriterOptions.ArgNameOutDirectory]           = CSharpResourceWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+            return new SortedDictionary<string, string>
+            {
+                // @formatter:off
+                [CqlToResourcePackagingOptions.ArgNameElmDirectory] = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
+                [CqlToResourcePackagingOptions.ArgNameCqlDirectory] = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
+                [CqlToResourcePackagingOptions.ArgNameLogDebugEnabled] = PackageSection + nameof(CqlToResourcePackagingOptions.LogDebugEnabled),
+                [CqlToResourcePackagingOptions.ArgNameLogDontClear] = PackageSection + nameof(CqlToResourcePackagingOptions.DontLogClear),
+                [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
-            [FhirResourceWriterOptions.ArgNameOutDirectory]         = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
-            [FhirResourceWriterOptions.ArgNameOverrideDate]         = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
-            // @formatter:on
-        };
+                [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+                [CSharpCodeWriterOptions.ArgNameTypeFormat] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.TypeFormat),
+
+                [AssemblyDataWriterOptions.ArgNameOutDirectory] = AssemblyDataWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+
+                [FhirResourceWriterOptions.ArgNameOutDirectory] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
+                [FhirResourceWriterOptions.ArgNameOverrideDate] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
+                // @formatter:on
+            };
+        }
     }
-
-    private const string Usage =
-        """
-        Packager CLI Usage:
-
-            -?|-h|-help                                Show this help
-
-            --elm                  <directory>         Library root directory
-            --cql                  <directory>         CQL root directory
-            [--fhir]               <file|directory>    Resource location, either file name or directory
-            [--cs]                 <file|directory>    C# output location, either file name or directory
-            [--d]                  <true|false>        Produce as a debug assembly
-            [--f]                  <true|false>        Force an overwrite even if the output file already exists
-            [--canonical-root-url] <url>               The root url used for the resource canonical.
-                                                       If omitted a '#' will be used.
-            [--fhir-override-date] <ISO8601-date-time> The UTC date to override in the generated FHIR resource libraries.
-                                                       (example: 2000-12-31T23:59:59.99Z)
-                                                       If omitted the current date time will be used.
-        """;
 
 
     private static void ConfigureAppConfiguration(IConfigurationBuilder config, string[] args)
     {
-        IDictionary<string, string> switchMappings = BuildSwitchMappings();
-        config.AddCommandLine(args, switchMappings);
+        config.AddCommandLine(args, SwitchMappings);
     }
 
-    private static void ConfigureLogging(ILoggingBuilder logging)
+    private static void ConfigureLogging(HostBuilderContext context, ILoggingBuilder logging)
     {
         logging.ClearProviders();
 
-        var minLogLevel = Debugger.IsAttached ? LogLevel.Trace : LogLevel.Information;
+        bool enableDebugLogging = Debugger.IsAttached;
+        enableDebugLogging = enableDebugLogging || context.Configuration.GetValue<bool>(SwitchMappings[CqlToResourcePackagingOptions.ArgNameLogDebugEnabled]);
+        var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;
+
+        bool shouldClearLog = !context.Configuration.GetValue<bool>(SwitchMappings[CqlToResourcePackagingOptions.ArgNameLogDontClear]);
+
         logging.AddFilter(level => level >= minLogLevel);
 
         logging.AddCleanConsole(opt =>
@@ -115,13 +148,19 @@ public class Program
         });
 
         var logFile = Path.Combine(".", "build.log");
-        File.Delete(logFile);
+
+        if (shouldClearLog)
+            File.WriteAllText(logFile, ""); // Create or clear the log file
+                                            //File.Delete(logFile);
+        else
+            File.OpenText(logFile).Close(); // Touch the file
+
         Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
             .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)
             .WriteTo.File(
                 logFile,
-                outputTemplate: "{Level:u4}: {Message:lj}{NewLine}{Exception}",
+                outputTemplate: "____{NewLine}{Level:u4}: {Message:lj}{NewLine}{Exception}",
                 formatProvider: CultureInfo.InvariantCulture)
             .CreateLogger();
         logging.AddSerilog();
@@ -131,13 +170,20 @@ public class Program
         logLevel switch
         {
             // @formatter: off
-            /* 0 */ LogLevel.Trace       => /* 0 */ LogEventLevel.Verbose,
-            /* 1 */ LogLevel.Debug       => /* 1 */ LogEventLevel.Debug,
-            /* 2 */ LogLevel.Information => /* 2 */ LogEventLevel.Information,
-            /* 3 */ LogLevel.Warning     => /* 3 */ LogEventLevel.Warning,
-            /* 4 */ LogLevel.Error       => /* 4 */ LogEventLevel.Error,
-            /* 5 */ LogLevel.Critical    => /* 5 */ LogEventLevel.Fatal,
-            /* 6 */ LogLevel.None        => /* n/a */ null,
+            /* 0 */
+            LogLevel.Trace => /* 0 */ LogEventLevel.Verbose,
+            /* 1 */
+            LogLevel.Debug => /* 1 */ LogEventLevel.Debug,
+            /* 2 */
+            LogLevel.Information => /* 2 */ LogEventLevel.Information,
+            /* 3 */
+            LogLevel.Warning => /* 3 */ LogEventLevel.Warning,
+            /* 4 */
+            LogLevel.Error => /* 4 */ LogEventLevel.Error,
+            /* 5 */
+            LogLevel.Critical => /* 5 */ LogEventLevel.Fatal,
+            /* 6 */
+            LogLevel.None => /* n/a */ null,
             // @formatter: on
             _ => throw new UnsupportedSwitchCaseError(logLevel, typeof(LogLevel).FullName).ToException(),
         };
@@ -169,6 +215,11 @@ public class Program
         services
             .AddOptions<CSharpCodeWriterOptions>()
             .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
+            .ValidateOnStart();
+
+        services
+            .AddOptions<AssemblyDataWriterOptions>()
+            .Configure<IConfiguration>(AssemblyDataWriterOptions.BindConfig)
             .ValidateOnStart();
     }
 

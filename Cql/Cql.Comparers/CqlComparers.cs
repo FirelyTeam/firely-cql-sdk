@@ -1,7 +1,7 @@
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -31,15 +31,29 @@ namespace Hl7.Cql.Comparers
         {
             // C# erases nullability for constant ints in some cases, e.g. literals, so we need comparers for both, even though
             // all values in CQL should be considered nullable
-            Comparers.TryAdd(typeof(int?), new DefaultCqlComparer<int>());
-            Comparers.TryAdd(typeof(int), new DefaultCqlComparer<int>());
-            Comparers.TryAdd(typeof(long?), new DefaultCqlComparer<long>());
-            Comparers.TryAdd(typeof(long), new DefaultCqlComparer<long>());
-            Comparers.TryAdd(typeof(string), new StringCqlComparer(StringComparer.Ordinal));
-            Comparers.TryAdd(typeof(decimal?), new DecimalCqlComparer());
-            Comparers.TryAdd(typeof(decimal), new DecimalCqlComparer());
-            Comparers.TryAdd(typeof(bool?), new DefaultCqlComparer<bool>());
-            Comparers.TryAdd(typeof(bool), new DefaultCqlComparer<bool>());
+            var intCqlComparer = new DefaultCqlComparer<int>();
+            Comparers.TryAdd(typeof(int?), intCqlComparer);
+            Comparers.TryAdd(typeof(int), intCqlComparer);
+
+            var longCqlComparer = new DefaultCqlComparer<long>();
+            Comparers.TryAdd(typeof(long?), longCqlComparer);
+            Comparers.TryAdd(typeof(long), longCqlComparer);
+
+            var stringCqlComparer = new StringCqlComparer(StringComparer.Ordinal);
+            Comparers.TryAdd(typeof(string), stringCqlComparer);
+
+            var charCqlComparer = new CharCqlComparer(stringCqlComparer);
+            Comparers.TryAdd(typeof(char), charCqlComparer);
+            Comparers.TryAdd(typeof(char?), charCqlComparer);
+
+            var decimalCqlComparer = new DecimalCqlComparer();
+            Comparers.TryAdd(typeof(decimal?), decimalCqlComparer);
+            Comparers.TryAdd(typeof(decimal), decimalCqlComparer);
+
+            var boolCqlComparer = new DefaultCqlComparer<bool>();
+            Comparers.TryAdd(typeof(bool?), boolCqlComparer);
+            Comparers.TryAdd(typeof(bool), boolCqlComparer);
+
             Comparers.TryAdd(typeof(IEnumerable), new ListEqualComparer(this));
             Comparers.TryAdd(typeof(CqlQuantity), new CqlQuantityCqlComparer(this, this));
             Comparers.TryAdd(typeof(CqlConcept), new CqlConceptCqlComparer(this));
@@ -47,10 +61,14 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
-
             Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this));
 
-            ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) => (ICqlComparer)Activator.CreateInstance(typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!), @this)!);
+            ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) =>
+            {
+                var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
+                var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, @this)!;
+                return cqlComparer;
+            });
         }
 
 
@@ -82,8 +100,8 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <summary>
-        /// Registers a comparer for the generic type definition <see cref="Type"/>.  
-        /// Generic type definitions can be specified by omitting type parameters but preserving commas to indicate number of generic type arguments, 
+        /// Registers a comparer for the generic type definition <see cref="Type"/>.
+        /// Generic type definitions can be specified by omitting type parameters but preserving commas to indicate number of generic type arguments,
         /// e.g. <code>typeof(IDictionary&lt;&gt;>)</code>.
         /// They can also be acquired via <see cref="Type.GetGenericTypeDefinition()"/>.
         /// </summary>
@@ -149,8 +167,22 @@ namespace Hl7.Cql.Comparers
             else if (y == null)
                 return null;
 
+            bool xySwapped = false;
             var xType = x.GetType();
-            ICqlComparer? comparer = null;
+            var yType = y.GetType();
+            if (xType != yType)
+            {
+                // if x and y are not the same type, we prioritize them based on the following order:
+                // 1. If only one type is in the System namespace, we prioritize the other type
+                if (xType.Namespace == "System" && yType.Namespace != "System")
+                {
+                    xySwapped = true;
+                    (x,y) = (y, x);
+                    (xType, yType) = (yType, xType);
+                }
+            }
+
+            ICqlComparer ? comparer = null;
             if (Comparers.TryGetValue(xType, out ICqlComparer? c))
             {
                 comparer = c;
@@ -180,6 +212,7 @@ namespace Hl7.Cql.Comparers
             if (comparer != null)
             {
                 var result = comparer.Compare(x, y, precision);
+                if (xySwapped) result = -result;
                 return result;
             }
             else

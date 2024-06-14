@@ -1,4 +1,18 @@
-﻿using Microsoft.Extensions.Logging;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
@@ -14,7 +28,7 @@ internal sealed class CleanConsoleFormatterOptionsInternal : ConsoleFormatterOpt
     public CleanConsoleFormatterOptions Options { get; } = new();
 }
 
-internal sealed class CleanConsoleFormatter : ConsoleFormatter
+internal sealed partial class CleanConsoleFormatter : ConsoleFormatter
 {
     private readonly IOptionsMonitor<CleanConsoleFormatterOptionsInternal> _optionsMonitor;
     public const string FormatterName = "NoCategory";
@@ -25,16 +39,72 @@ internal sealed class CleanConsoleFormatter : ConsoleFormatter
 
     public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider? scopeProvider, TextWriter textWriter)
     {
-        var options = _optionsMonitor.CurrentValue.Options;
-
-        var message = logEntry.Formatter(logEntry.State, logEntry.Exception);
+        var message = GetFormatterMessage(logEntry);
         var (logLevelText, logLevelConsoleColor) = GetLogLevelString(logEntry.LogLevel);
-        var (escLogLevelForegroundColor, escDefaultForegroundColor) = 
-            options.NoColor
+        var (escLogLevelForegroundColor, escDefaultForegroundColor) =
+            NoColor
                 ? ("", "")
                 : (GetForegroundColorEscapeCode(logLevelConsoleColor), DefaultForegroundColor);
-        textWriter.WriteLine($"{escLogLevelForegroundColor}{logLevelText.ToUpperInvariant()}{escDefaultForegroundColor}: {message}");
+        textWriter.WriteLine($"____\n{escLogLevelForegroundColor}{logLevelText.ToUpperInvariant()}{escDefaultForegroundColor}: {message}");
+        if (logEntry.Exception is not null)
+            textWriter.WriteLine(logEntry.Exception.ToString());
     }
+
+    private bool NoColor => _optionsMonitor.CurrentValue.Options.NoColor;
+
+    [GeneratedRegex("""\{(?<tagName>[^:,}]+)(?<rest>[^}]*)\}""", RegexOptions.Compiled)]
+    private static partial Regex ExtractTagsRegex();
+
+
+
+    private string GetFormatterMessage<TState>(LogEntry<TState> logEntry)
+    {
+        if (NoColor)
+        {
+            var noColorMessage = logEntry.Formatter(logEntry.State, logEntry.Exception);
+            return noColorMessage;
+        }
+
+        var state = (IReadOnlyCollection<KeyValuePair<string, object?>>)logEntry.State!;
+        var last = state.Last();
+        Debug.Assert(last.Key == "{OriginalFormat}");
+        var originalFormat = (string)last.Value!;
+
+        if (state.Count == 1)
+            return originalFormat; // Nothing to format, return as is
+
+        var colorFormat = GetOrdinalStringFormat(state, originalFormat);
+        var colorMessage = string.Format(CultureInfo.InvariantCulture, colorFormat, state.SelectToArray(s => s.Value));
+        return colorMessage;
+    }
+
+
+    private readonly ConcurrentDictionary<string, string> _colorFormatsByOriginalFormat = new();
+
+    private string GetOrdinalStringFormat(
+        IReadOnlyCollection<KeyValuePair<string, object?>> state,
+        string originalFormat) =>
+        _colorFormatsByOriginalFormat.GetOrAdd(
+            originalFormat,
+            _ =>
+            {
+                int i = 0;
+                Dictionary<string, (int i, object? val)> dictionary = state.ToDictionary(kv => kv.Key, kv => (i: i++, val: kv.Value));
+                string finalFormat = ExtractTagsRegex().Replace(originalFormat, m =>
+                {
+                    var tagName = m.Groups["tagName"].Value;
+                    var rest = m.Groups["rest"].Value;
+                    if (dictionary.TryGetValue(tagName, out var kv))
+                    {
+                        bool isString = kv.val is string or StringBuilder or StringWriter;
+                        var foregroundColorEscapeCode = GetForegroundColorEscapeCode(isString ? ConsoleColor.Cyan : ConsoleColor.Magenta);
+                        return $"{foregroundColorEscapeCode}{{{kv.i}{rest}}}{DefaultForegroundColor}";
+                    }
+                    return m.Value;
+                });
+
+                return finalFormat;
+            });
 
     private static (string logLevelText, ConsoleColor logLevelConsoleColor) GetLogLevelString(LogLevel logLevel) =>
         logLevel switch

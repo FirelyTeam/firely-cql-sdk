@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -11,6 +11,8 @@ using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Conversion
 {
@@ -29,24 +31,35 @@ namespace Hl7.Cql.Conversion
         /// </summary>
         object? Convert(object? instance, Type to);
     }
-    
+
     /// <summary>
     /// Converts CQL model types to .NET types, and vice versa.
     /// </summary>
-    public class TypeConverter
+    public class TypeConverter : IDisposable
     {
         private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> _converters
             = new();
-        
         private readonly List<ITypeConverterEntry> _customConverters = [];
+        private readonly HashSet<string> _conversionsAvailable = new();
+        private readonly HashSet<string> _conversionsUsed = new();
+        private ILogger<TypeConverter>? _logger;
+
+        /// <summary>
+        /// Add a logger to the TypeConverter.
+        /// </summary>
+        internal TypeConverter UseLogger(ILogger<TypeConverter> logger)
+        {
+            _logger = logger;
+            return this;
+        }
 
         /// <summary>
         /// Creates a TypeConverter with an empty set of conversions.
         /// </summary>
-        internal TypeConverter()
+        private TypeConverter()
         {
         }
-        
+
         /// <summary>
         /// Creates a default instance that provides some default conversions.
         /// </summary>
@@ -55,7 +68,7 @@ namespace Hl7.Cql.Conversion
             new TypeConverter()
                 .ConvertNetTypes()
                 .ConvertsIsoToCqlPrimitives();
-        
+
         /// <summary>
         /// Returns <see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.
         /// </summary>
@@ -65,14 +78,21 @@ namespace Hl7.Cql.Conversion
         internal bool CanConvert(Type from, Type to)
         {
             if (_customConverters.SingleOrDefault(converter => converter.Handles(from, to)) is not null)
+            {
+                _conversionsUsed.Add(TypesToString((from, to)));
                 return true;
-            else if (_converters.TryGetValue(from, out var toDictionary) &&
-                        toDictionary.TryGetValue(to, out _))
+            }
+
+            if (_converters.TryGetValue(from, out var toDictionary) &&
+                toDictionary.TryGetValue(to, out _))
+            {
+                _conversionsUsed.Add(TypesToString((from, to)));
                 return true;
-            else
-                return false;
+            }
+
+            return false;
         }
-        
+
         /// <summary>
         /// Performs the conversion of <paramref name="from"/> to <typeparamref name="T"/>.
         /// </summary>
@@ -93,18 +113,23 @@ namespace Hl7.Cql.Conversion
         /// <exception cref="InvalidOperationException">If no conversion is defined.</exception>
         public object? Convert(object? from, Type to)
         {
-            if (from is null) return null;
+            if (from is null)
+                return null;
+
             var fromType = from.GetType();
-            
+            if (fromType.IsAssignableTo(to))
+                return from;
+
             if(_customConverters.SingleOrDefault(converter => converter.Handles(fromType, to)) is {} subConverter)
                 return subConverter.Convert(from, to);
-            else if (_converters.TryGetValue(fromType, out var toDictionary) &&
-                     toDictionary.TryGetValue(to, out Func<object, object>? convert))
-                    return convert(from);
-            else
-                    throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
+
+            if (_converters.TryGetValue(fromType, out var toDictionary) &&
+                toDictionary.TryGetValue(to, out Func<object, object>? convert))
+                return convert(from);
+
+            throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
         }
-        
+
         /// <summary>
         /// Adds a new function for converting <paramref name="from"/> to <paramref name="to"/>.
         /// </summary>
@@ -121,10 +146,10 @@ namespace Hl7.Cql.Conversion
             }
             if (toDictionary.TryGetValue(to, out _))
                 throw new ArgumentException($"Conversion from {from} to {to} is already defined.");
-            else 
+            else
                 toDictionary.Add(to, conversion);
         }
-        
+
         /// <summary>
         /// Adds a new converter function.
         /// </summary>
@@ -150,7 +175,7 @@ namespace Hl7.Cql.Conversion
             else toDictionary.Add(typeof(TTo), x => conversion((TFrom)x)!);
         }
 
-       
+
         /// <summary>
         /// Provides utility for converting common .NET types that don't have implicit conversions defined, e.g. <see cref="string"/> and <see cref="Uri"/>.
         /// </summary>
@@ -180,5 +205,64 @@ namespace Hl7.Cql.Conversion
             return this;
         }
 
+        internal virtual void CaptureAvailableConverters()
+        {
+            if (_logger is null)
+                return;
+
+            _conversionsAvailable.AddRange(
+                _converters
+                    .SelectMany(kv => kv.Value, ((kvFrom, kvTo) => (From: kvFrom.Key, To: kvTo.Key)))
+                    .Select(TypesToString));
+        }
+
+        private void LogFinalConverters()
+        {
+            if (_logger is null)
+                return;
+
+            var lines = string.Concat(
+                _conversionsAvailable
+                    .Order()
+                    .Select((line,i) => (line,i:i+1,used: _conversionsUsed.Contains(line)))
+                    .OrderBy(o => o.used).ThenBy(o => o.i)
+                    .Select(t => $"\n\t{t.i,5}. {(t.used ? "[x]" : "[_]")} {t.line}"));
+
+            _logger.LogDebug(
+                "TypeConverter conversions usage ({unusedCount} unused, and {usedCount} used. {totalCount} in total):{lines}",
+                _conversionsAvailable.Count - _conversionsUsed.Count,
+                _conversionsUsed.Count,
+                _conversionsAvailable.Count,
+                lines);
+        }
+
+        private static readonly TypeCSharpFormat TypeCSharpFormat = new(
+            NoNamespaces: true,
+            UseKeywords: false);
+
+        private static string TypesToString((Type From, Type To) t) =>
+            $"{TypeToString(t.From)} --> {TypeToString(t.To)}";
+
+        private static string TypeToString(Type t) =>
+            string.Concat(
+                t.Namespace!
+                 .Replace("Hl7.Fhir.Model", "fhir ")
+                 .Replace("Hl7.Cql.Primitives", "cql ")
+                 .Replace("Hl7.Cql.Iso8601", "iso8601 ")
+                 .Replace("System", "sys "),
+                t switch
+                {
+                    { IsEnum: true }      => "enum ",
+                    { IsValueType: true } => "struct ",
+                    _                     => ""
+                },
+                t.ToCSharpString(TypeCSharpFormat));
+
+        /// <inheritdoc />
+        void IDisposable.Dispose()
+        {
+            // if (_logger is not null)
+            //     LogFinalConverters();
+        }
     }
 }

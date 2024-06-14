@@ -1,0 +1,17 @@
+{
+  "resourceType": "Patient",
+  "id": "patient3",
+  "active": true,
+  "gender": "male",
+  "birthDate": "1988-12-10",
+  "maritalStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+        "code": "D",
+        "display": "Divorced"
+      }
+    ]
+  },
+  "deceasedBoolean": false
+}

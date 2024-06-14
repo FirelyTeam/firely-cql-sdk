@@ -19,7 +19,7 @@ namespace CoreTests
         public const string NotSupported = "Not supported";
         public const string BadTest = "Test is nonsensical";
 
-        private static ILoggerFactory LoggerFactory { get; } = 
+        private static ILoggerFactory LoggerFactory { get; } =
             Microsoft.Extensions.Logging.LoggerFactory
             .Create(logging => logging.AddDebug());
 
@@ -42,7 +42,7 @@ namespace CoreTests
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
-            var libraryExpressionBuilder = NewLibraryDefinitionsBuilder();
+            var libraryExpressionBuilder = NewLibraryExpressionBuilder();
             var definitions = libraryExpressionBuilder.ProcessLibrary(fhirHelpersPackage);
             LambdasByTestName.Lambdas.Merge(definitions);
 
@@ -62,9 +62,9 @@ namespace CoreTests
             Context = FhirCqlContext.WithDataSource(delegates: allDelegates);
         }
 
-        private static LibraryDefinitionsBuilder NewLibraryDefinitionsBuilder()
+        private static LibraryExpressionBuilder NewLibraryExpressionBuilder()
         {
-            return new CqlCompilerFactory(LoggerFactory).LibraryDefinitionsBuilder;
+            return new CqlCompilerFactory(LoggerFactory).LibraryExpressionBuilder;
         }
 
         internal static CqlContext Context;

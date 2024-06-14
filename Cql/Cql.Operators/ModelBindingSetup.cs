@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -28,7 +28,7 @@ namespace Hl7.Cql.Operators
         public abstract TypeConverter TypeConverter { get; }
 
         /// <summary>
-        /// Gets the comparers for the model. 
+        /// Gets the comparers for the model.
         /// </summary>
         public abstract CqlComparers Comparers { get; }
 

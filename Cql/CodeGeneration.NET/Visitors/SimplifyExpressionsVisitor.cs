@@ -6,13 +6,15 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Expressions;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using BinaryExpression = System.Linq.Expressions.BinaryExpression;
+using Expression = System.Linq.Expressions.Expression;
+using UnaryExpression = System.Linq.Expressions.UnaryExpression;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
@@ -59,6 +61,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return DoVisit(node);
         }
 
+        public bool SimplifyNullConditionalMemberExpression { get; init; }
+
         private Expression DoVisit(Expression node)
         {
             // This visit will, by default, call `simplify()` on every
@@ -74,7 +78,11 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 NewExpression or
                 MemberExpression or
                 ElmAsExpression or
-                NullConditionalMemberExpression => base.Visit(node),
+                DefaultExpression
+                => base.Visit(node),
+
+                NullConditionalMemberExpression when SimplifyNullConditionalMemberExpression
+                => base.Visit(node),
 
                 // These expressions require special handling
                 ConditionalExpression cond => VisitConditional(cond),
@@ -224,7 +232,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         protected Expression VisitCaseWhenThenExpression(CaseWhenThenExpression node)
         {
             // The final else case is treated just like the when/then
-            var elseVisitor = new SimplifyExpressionsVisitor();
+            var elseVisitor = Clone();
             var visitedElse = elseVisitor.Visit(node.ElseCase);
 
             var caseStatementBlockVisitor = new SimplifyExpressionsVisitor();
@@ -266,5 +274,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 }
             }
         }
+
+        private SimplifyExpressionsVisitor Clone() => new()
+        {
+            SimplifyNullConditionalMemberExpression = SimplifyNullConditionalMemberExpression
+        };
     }
 }

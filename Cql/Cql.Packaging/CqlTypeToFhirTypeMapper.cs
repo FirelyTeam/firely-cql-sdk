@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -11,6 +11,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using System.Reflection;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Packaging
 {
@@ -120,7 +121,7 @@ namespace Hl7.Cql.Packaging
                 case CqlPrimitiveType.Boolean:
                     return new CqlTypeToFhirMapping(FHIRAllTypes.Boolean, cqlType);
                 case CqlPrimitiveType.Code:
-                    return new CqlTypeToFhirMapping(FHIRAllTypes.Code, cqlType);
+                    return new CqlTypeToFhirMapping(FHIRAllTypes.Coding, cqlType);
                 case CqlPrimitiveType.CodeSystem:
                     return new CqlTypeToFhirMapping(FHIRAllTypes.CodeSystem, cqlType);
                 case CqlPrimitiveType.Concept:
@@ -328,7 +329,7 @@ namespace Hl7.Cql.Packaging
                 _ => element.resultTypeName != null ? TypeEntryFor(element.resultTypeName.Name) : TypeEntryFor(element.resultTypeSpecifier)
             };
         }
-        private bool IsOrImplementsIEnumerableOfT(Type type) => TypeResolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
+        private bool IsOrImplementsIEnumerableOfT(Type type) => type.IsImplementingGenericTypeDefinition(typeof(IEnumerable<>));
 
         private FHIRAllTypes? PrimitiveToFhir(Type type)
         {

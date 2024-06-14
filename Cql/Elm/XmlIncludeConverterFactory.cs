@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
@@ -42,7 +49,7 @@ namespace Hl7.Cql.Elm
         {
             if (typeToConvert.IsArray)
             {
-                var elementType = typeToConvert.GetElementType() 
+                var elementType = typeToConvert.GetElementType()
                     ?? throw new JsonException($"Type to convert claims to be an array but has no element type");
                 var type = typeof(PolymorphicArrayJsonConverter<>).MakeGenericType(elementType);
                 var instance = (JsonConverter)Activator.CreateInstance(type, StrictParams)!;

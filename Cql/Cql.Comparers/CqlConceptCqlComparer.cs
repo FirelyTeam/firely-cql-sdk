@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -39,8 +39,9 @@ namespace Hl7.Cql.Comparers
                 return xCodes.Length - yCodes.Length;
             for (int i = 0; i < xCodes.Length; i++)
             {
-                var xCode = xCodes[i];
-                var yCode = yCodes[i];
+                // Remark: ElementAtOrDefault(i) is used to handle the case where the two arrays are not the same length
+                var xCode = xCodes.ElementAtOrDefault(i);
+                var yCode = yCodes.ElementAtOrDefault(i);
                 var compare = CodeComparer.Compare(xCode, yCode, precision);
                 if (compare != 0)
                     return compare;
@@ -67,8 +68,9 @@ namespace Hl7.Cql.Comparers
 
             for (int i = 0; i < xCodes.Length; i++)
             {
-                var xCode = xCodes[i];
-                var yCode = yCodes[i];
+                // Remark: ElementAtOrDefault(i) is used to handle the case where the two arrays are not the same length
+                var xCode = xCodes.ElementAtOrDefault(i);
+                var yCode = yCodes.ElementAtOrDefault(i);
                 var equivalent = CodeComparer.Equivalent(xCode, yCode, precision);
                 if (equivalent)
                     return true;

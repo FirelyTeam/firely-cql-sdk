@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\cql-demo.props" />
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\Cql\CoreTests\LibrarySetsDirs.cs" Link="LibrarySetsDirs.cs" />
+    <Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="DirectoryInfoExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
+    <ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
+    <ProjectReference Include="..\..\Cql\Cql\Cql.csproj" />
+    <ProjectReference Include="..\Measures.Demo\Measures.Demo.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <SignAssembly>True</SignAssembly>
+    <DelaySign>true</DelaySign>
+    <AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile>
+    <IncludeSymbols>True</IncludeSymbols>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <LibraryPKHash>00240000048000009400000006020000002400005253413100040000010001006d866cf0363db3976082a2439c420bd942b78243c0ce6c289f3c07d6901ecf149c38bafc12167f6eba7618b288e5327a7e4ab554c9a294ae6c68d7455b6562f846455b6bfdde68542a7046a632f1730a1647f2d365f8a25f73860c14d1428e7319df673e2d3212fa535f310c52a7c7ec17de772cb49961f4ea195fa4ea601dcd</LibraryPKHash>
+  </PropertyGroup>
+
+</Project>

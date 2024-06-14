@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -251,7 +258,7 @@ public class DefinitionDictionary<T> where T : class
     /// <summary>
     /// Gets the libraries defined in this dictionary.
     /// </summary>
-    public IEnumerable<string> Libraries => ExpressionsByLibrary.Keys;
+    public IReadOnlyCollection<string> Libraries => ExpressionsByLibrary.Keys;
 
     /// <summary>
     /// Gets key-value pairs of definitions and their values.
@@ -259,14 +266,12 @@ public class DefinitionDictionary<T> where T : class
     /// <param name="libraryName">The name of the library.</param>
     /// <returns>Key-value pairs of definitions and their values.</returns>
     /// <exception cref="ArgumentException">If <paramref name="libraryName"/> does not exist in the dictionary.</exception>
-    public IEnumerable<KeyValuePair<string, List<(Type[] Signature, T T)>>> DefinitionsForLibrary(string? libraryName)
+    public IReadOnlyDictionary<string, List<(Type[] Signature, T T)>> DefinitionsForLibrary(string? libraryName)
     {
         libraryName ??= string.Empty;
-        if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
-        {
-            return library;
-        }
-        else throw new ArgumentException($"No library {libraryName} exists", nameof(libraryName));
+        return ExpressionsByLibrary.TryGetValue(libraryName, out var library)
+                   ? library
+                   : throw new ArgumentException($"No library {libraryName} exists", nameof(libraryName));
     }
 
     /// <summary>
@@ -490,24 +495,32 @@ public class DefinitionDictionary<T> where T : class
         {
             for (int i = 0; i < parameterTypes.Length; i++)
             {
+                var parameterType = parameterTypes[i];
+                var signatureType = signature[i];
+
                 // this parameter's type matches the signature's type exactly; add nothing to the score
-                if (parameterTypes[i] == signature[i])
+                if (parameterType == signatureType)
                     continue;
+
                 // parameterTypes[i] is derived from signature[i]
-                else if (signature[i].IsAssignableFrom(parameterTypes[i]))
+                if (signatureType.IsAssignableFrom(parameterType))
                 {
-                    var baseType = parameterTypes[i].BaseType;
+                    var baseType = parameterType.BaseType;
                     var distanceP = 1;
-                    while (baseType != null && baseType != signature[i])
+                    while (baseType != null && baseType != signatureType)
                     {
                         distanceP += 1;
                         baseType = baseType.BaseType;
                     }
                     distance += distanceP;
                 }
+                else if (parameterType == typeof(object)) //@ TODO: Choice type?
+                {
+                    distance += 7;
+                }
                 else if (conversionCheck is not null)
                 {
-                    if (conversionCheck(parameterTypes[i], signature[i]))
+                    if (conversionCheck(parameterType, signatureType))
                         distance += 5;
                     else
                         return null;

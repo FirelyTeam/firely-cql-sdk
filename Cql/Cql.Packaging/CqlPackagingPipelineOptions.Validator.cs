@@ -42,7 +42,7 @@ partial class CqlToResourcePackagingOptions
                 return true;
             }
 
-            void AddError(string message) => 
+            void AddError(string message) =>
                 (builder ??= new()).AddError(message);
         }
     }

@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -15,7 +15,7 @@ using System;
 namespace Hl7.Cql.Comparers
 {
     /// <summary>
-    /// A comparer that compares to <see cref="CqlQuantity"/> instances, possibly by normalizing their values 
+    /// A comparer that compares to <see cref="CqlQuantity"/> instances, possibly by normalizing their values
     /// using the UCUM system.
     /// </summary>
     internal class CqlQuantityCqlComparer : ICqlComparer<CqlQuantity>, ICqlComparer
@@ -52,7 +52,7 @@ namespace Hl7.Cql.Comparers
             }
             else
             {
-                // If no direct comparison is possible, normalize the units using UCUM and 
+                // If no direct comparison is possible, normalize the units using UCUM and
                 // redo the comparison.
                 if (x.TryCanonicalize(out var left) && y.TryCanonicalize(out var right))
                 {

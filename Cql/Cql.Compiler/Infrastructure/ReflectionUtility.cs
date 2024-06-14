@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -72,17 +79,10 @@ internal static class ReflectionUtility
     /// <param name="fnToMethodCall">The expression representing the method call.</param>
     /// <param name="expression">The expression string.</param>
     /// <returns>The generic method definition.</returns>
-    public static MethodInfo GenericDefinitionMethodOf(
+    public static MethodInfo GenericMethodDefinitionOf(
         Expression<Action> fnToMethodCall,
         [CallerArgumentExpression(nameof(fnToMethodCall))] string expression = "") =>
         (MethodOf(fnToMethodCall, expression)
             ?.GetGenericMethodDefinition())
             ?? throw new InvalidOperationException($"Expression is not a generic method: '{expression}'.");
-
-    /// <summary>
-    /// Checks if the specified type is nullable.
-    /// </summary>
-    /// <param name="type">The type to check.</param>
-    /// <returns>True if the type is nullable, false otherwise.</returns>
-    public static bool IsNullable(this Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 }

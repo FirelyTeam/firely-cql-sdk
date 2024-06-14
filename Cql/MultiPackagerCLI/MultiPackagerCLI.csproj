@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\cql-sdk.props" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Hl7.Cql.MultiPackager</RootNamespace>
+    <AssemblyName>Hl7.Cql.MultiPackager</AssemblyName>
+    <Product>Developer tool to package all library sets. Not to be released as a tool.</Product>
+    <Description>.NET developer tool that packages multiple sets of CQL, ELM and build outputs into a FHIR Library resources.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PackagerCLI\PackagerCLI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(OutputPath)\build.log" Link="build.log" />
+  </ItemGroup>
+
+</Project>

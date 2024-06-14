@@ -1,11 +1,12 @@
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Diagnostics;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Fhir.Comparers;
@@ -49,11 +50,39 @@ namespace Hl7.Cql.Fhir
             {
                 var codeType = type.GetGenericArguments()[0];
                 var comparerType = typeof(CodeComparer<>).MakeGenericType(codeType);
-                var comparer = (ICqlComparer)Activator.CreateInstance(comparerType, _comparers)!;
-                return comparer;
+                var codeComparer = (ICqlComparer)Activator.CreateInstance(comparerType, _comparers)!;
+                var codeStringComparer = new CodeStringComparer(codeComparer);
+                return codeStringComparer;
             });
 
             return comparers;
+        }
+
+        private class CodeStringComparer(ICqlComparer inner) : CqlComparerDecorator(inner)
+        {
+            public override int? Compare(
+                object? x,
+                object? y,
+                string? precision)
+            {
+                // We always expect x to be a Code<T> but we only need the ObjectValue on the non-generic base type PrimitiveType.
+                if (x is PrimitiveType xCode && y is string yString)
+                {
+                    if (precision != null)
+                        throw new InvalidOperationException(
+                            $"Precision '{precision}' is not supported for comparing Code<T> to string.");
+
+                    return StringComparer.Ordinal.Compare(xCode.ObjectValue, yString);
+                }
+
+                return base.Compare(x, y, precision);
+            }
+
+            public override bool? Equals(
+                object? x,
+                object? y,
+                string? precision) =>
+                throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
         }
 
         /// <summary>

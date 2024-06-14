@@ -14,7 +14,7 @@ namespace CoreTests
             var json =
             @"{
                     ""type"" : ""TupleElementDefinition"",
-                    ""elementType"" : 
+                    ""elementType"" :
                     {
                         ""type"" : ""NamedTypeSpecifier"",
                         ""name"" : ""{urn:hl7-org:elm-types:r1}Integer""
@@ -36,8 +36,8 @@ namespace CoreTests
             var json = @"
             {
                 ""type"" : ""TupleTypeSpecifier"",
-                ""element"" : 
-                 [ 
+                ""element"" :
+                 [
                     {
                       ""type"" : ""TupleElementDefinition"",
                       ""elementType"" : {
@@ -45,7 +45,7 @@ namespace CoreTests
                         ""name"" : ""{urn:hl7-org:elm-types:r1}Integer""
                           },
                   ""name"" : ""Id""
-                }, 
+                },
                 {
                   ""type"" : ""TupleElementDefinition"",
                   ""elementType"" : {

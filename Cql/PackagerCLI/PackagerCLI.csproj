@@ -30,6 +30,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<InternalsVisibleTo Include="Hl7.Cql.MultiPackager" Key="$(LibraryPKHash)" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 	</ItemGroup>
@@ -41,10 +45,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="CqlPackagingPipelineOptions.Binding.cs">
-	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlPackagingPipelineOptions.Validator.cs">
+	  <Compile Update="CqlPackagingPipelineOptions.*.cs">
 	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
 	  </Compile>
 	</ItemGroup>

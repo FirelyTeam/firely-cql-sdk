@@ -18,8 +18,8 @@
       "Cql\\Cql.ValueSets\\Cql.ValueSets.csproj",
       "Cql\\Cql\\Cql.csproj",
       "Cql\\Elm\\Elm.csproj",
-      "Cql\\Graph\\Graph.csproj",
       "Cql\\Iso8601\\Iso8601.csproj",
+      "Cql\\MultiPackagerCLI\\MultiPackagerCLI.csproj",
       "Cql\\PackagerCLI\\PackagerCLI.csproj"
     ]
   }

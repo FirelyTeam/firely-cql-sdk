@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project>	
+	<!-- Download MVN Dependencies -->
+	<PropertyGroup>
+		<!-- If you change the version here, you also need to update it in the pom.xml file -->		
+		<CqlToElmCliVersion>3.1.0</CqlToElmCliVersion>
+		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
+		<PomXmlPath>$(MSBuildThisFileDirectory)pom.xml</PomXmlPath>
+		<Today>$([System.DateTime]::Now.ToString('yyyy-MM-dd-HH-mm-ss-fff'))</Today>
+		<MvnBuildLog>$(MSBuildProjectDirectory)/mvn-build.log</MvnBuildLog>
+	</PropertyGroup>
+
+	<Target Name="DisplayMessages"
+			BeforeTargets="PreBuildEvent">
+		<Message Text="$(Box.Replace(Text, Starting MVN))" Importance="High" />
+	</Target>
+
+	<ItemGroup>
+		<Folder Include="$(TargetDependencies)" />
+	</ItemGroup>
+
+	<Target
+		Name="Download CQL to ELM CLI via Maven"
+		Inputs="$(PomXmlPath)"
+		Outputs="$(TargetDependencies)/cql-to-elm-cli-$(CqlToElmCliVersion).jar"
+		BeforeTargets="PreBuildEvent">
+		<Message Text="$(Box.Replace(Text, Downloading CQL to ELM CLI via Maven))" Importance="High" />
+		<Exec Command="mvn -f $(PomXmlPath) dependency:copy-dependencies" ConsoleToMSBuild="true" EchoOff="true">
+			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
+		</Exec>
+		<WriteLinesToFile
+            File="$(MvnBuildLog)"
+            Lines="@(OutputOfExec)"
+            Overwrite="true"
+            Encoding="Unicode"/>
+	</Target>
+
+	<ItemGroup>
+		<JarDependencies Include="$(TargetDependencies)/*.jar" />
+	</ItemGroup>
+
+	<Target Name="Delete JAR Dependencies" AfterTargets="Clean">
+		<Message Text="$(Box.Replace(Text, Deleting JAR Dependencies...))" Importance="High" />
+		<Exec Command="mvn clean -f $(PomXmlPath)" />
+		<Delete Files="@(JarDependencies)" />
+	</Target>
+
+
+</Project>

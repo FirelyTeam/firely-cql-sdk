@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -102,20 +102,20 @@ namespace Hl7.Cql.Runtime
 
         #region After
 
-        public bool? IntervalAfterInterval(CqlInterval<int?>? left, CqlInterval<int?>? right, string? precision) =>
+        public bool? After(CqlInterval<int?>? left, CqlInterval<int?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision) =>
+        public bool? After(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision) =>
+        public bool? After(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
+        public bool? After(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
 
-        public bool? IntervalAfterInterval(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right, string? precision) =>
+        public bool? After(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
+        public bool? After(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterInterval(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision) =>
+        public bool? After(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision) =>
             IntervalAfterIntervalHelper(left, right, precision, ToClosed);
 
         private bool? IntervalAfterIntervalHelper<T>(CqlInterval<T?>? left, CqlInterval<T?>? right, string? precision,
@@ -131,19 +131,19 @@ namespace Hl7.Cql.Runtime
             return after > 0;
         }
 
-        public bool? IntervalAfterElement(CqlInterval<int?>? left, int? right, string? precision) =>
+        public bool? After(CqlInterval<int?>? left, int? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<long?>? left, long? right, string? precision) =>
+        public bool? After(CqlInterval<long?>? left, long? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
+        public bool? After(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
+        public bool? After(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
+        public bool? After(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
+        public bool? After(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalAfterElement(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
+        public bool? After(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
             IntervalAfterElementHelper(left, right, precision, ToClosed);
         public bool? IntervalAfterElementHelper<T>(CqlInterval<T>? left, T right, string? precision,
             Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
@@ -157,7 +157,7 @@ namespace Hl7.Cql.Runtime
             if (low == null)
             {
                 if (left.lowClosed ?? false)
-                    low = Minimum<T>();
+                    low = MinValue<T>();
                 else
                     return null;
             }
@@ -169,19 +169,19 @@ namespace Hl7.Cql.Runtime
             return after > 0;
         }
 
-        public bool? ElementAfterInterval(int? left, CqlInterval<int?>? right, string? precision) =>
+        public bool? After(int? left, CqlInterval<int?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(long? left, CqlInterval<long?>? right, string? precision) =>
+        public bool? After(long? left, CqlInterval<long?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(decimal? left, CqlInterval<decimal?>? right, string? precision) =>
+        public bool? After(decimal? left, CqlInterval<decimal?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(CqlQuantity? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
+        public bool? After(CqlQuantity? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(CqlDate? left, CqlInterval<CqlDate?>? right, string? precision) =>
+        public bool? After(CqlDate? left, CqlInterval<CqlDate?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(CqlDateTime? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
+        public bool? After(CqlDateTime? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementAfterInterval(CqlTime? left, CqlInterval<CqlTime?>? right, string? precision) =>
+        public bool? After(CqlTime? left, CqlInterval<CqlTime?>? right, string? precision) =>
             ElementAfterIntervalHelper(left, right, precision, ToClosed);
         public bool? ElementAfterIntervalHelper<T>(T left, CqlInterval<T>? right, string? precision,
             Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
@@ -195,7 +195,7 @@ namespace Hl7.Cql.Runtime
             if (high == null)
             {
                 if (right.highClosed ?? false)
-                    high = Maximum<T>();
+                    high = MaxValue<T>();
                 else
                     return null;
             }
@@ -211,19 +211,19 @@ namespace Hl7.Cql.Runtime
 
         #region Before
 
-        public bool? IntervalBeforeInterval(CqlInterval<int?>? left, CqlInterval<int?>? right, string? precision) =>
+        public bool? Before(CqlInterval<int?>? left, CqlInterval<int?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision) =>
+        public bool? Before(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision) =>
+        public bool? Before(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeInterval(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision) =>
             IntervalBeforeIntervalHelper(left, right, precision, ToClosed);
 
         private bool? IntervalBeforeIntervalHelper<T>(CqlInterval<T?>? left, CqlInterval<T?>? right, string? precision,
@@ -240,19 +240,19 @@ namespace Hl7.Cql.Runtime
             return before < 0;
         }
 
-        public bool? IntervalBeforeElement(CqlInterval<int?>? left, int? right, string? precision) =>
+        public bool? Before(CqlInterval<int?>? left, int? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<long?>? left, long? right, string? precision) =>
+        public bool? Before(CqlInterval<long?>? left, long? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
+        public bool? Before(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
-        public bool? IntervalBeforeElement(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
+        public bool? Before(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
             IntervalBeforeElementHelper(left, right, precision, ToClosed);
 
         public bool? IntervalBeforeElementHelper<T>(CqlInterval<T>? left, T right, string? precision,
@@ -267,7 +267,7 @@ namespace Hl7.Cql.Runtime
             if (high == null)
             {
                 if (left.highClosed ?? false)
-                    high = Maximum<T>();
+                    high = MaxValue<T>();
                 else
                     return null;
             }
@@ -279,19 +279,19 @@ namespace Hl7.Cql.Runtime
             return before < 0;
         }
 
-        public bool? ElementBeforeInterval(int? left, CqlInterval<int?>? right, string? precision) =>
+        public bool? Before(int? left, CqlInterval<int?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(long? left, CqlInterval<long?>? right, string? precision) =>
+        public bool? Before(long? left, CqlInterval<long?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(decimal? left, CqlInterval<decimal?>? right, string? precision) =>
+        public bool? Before(decimal? left, CqlInterval<decimal?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(CqlQuantity? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
+        public bool? Before(CqlQuantity? left, CqlInterval<CqlQuantity?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(CqlDate? left, CqlInterval<CqlDate?>? right, string? precision) =>
+        public bool? Before(CqlDate? left, CqlInterval<CqlDate?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(CqlDateTime? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
+        public bool? Before(CqlDateTime? left, CqlInterval<CqlDateTime?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
-        public bool? ElementBeforeInterval(CqlTime? left, CqlInterval<CqlTime?>? right, string? precision) =>
+        public bool? Before(CqlTime? left, CqlInterval<CqlTime?>? right, string? precision) =>
             ElementBeforeIntervalHelper(left, right, precision, ToClosed);
         public bool? ElementBeforeIntervalHelper<T>(T left, CqlInterval<T>? right, string? precision,
             Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
@@ -305,7 +305,7 @@ namespace Hl7.Cql.Runtime
             if (low == null)
             {
                 if (right.lowClosed ?? false)
-                    low = Minimum<T>();
+                    low = MinValue<T>();
                 else
                     return null;
             }
@@ -353,7 +353,7 @@ namespace Hl7.Cql.Runtime
                 return new CqlInterval<T?>[0];
 
             // need null check on i because i!.low! causes HL7 unit test TestCollapseNull_Test to fail since i is null
-            var queue = ListSortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending)?.ToList();
+            var queue = SortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending)?.ToList();
             if (queue is null || queue.Count == 0) return null;
 
             CqlInterval<T?>? TryCombine(CqlInterval<T?>? x, CqlInterval<T?>? y)
@@ -407,20 +407,20 @@ namespace Hl7.Cql.Runtime
 
         #region Contains
 
-        public bool? IntervalContains(CqlInterval<int?>? left, int? right, string? precision) =>
+        public bool? Contains(CqlInterval<int?>? left, int? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<long?>? left, long? right, string? precision) =>
+        public bool? Contains(CqlInterval<long?>? left, long? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
+        public bool? Contains(CqlInterval<decimal?>? left, decimal? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlQuantity?>? left, CqlQuantity? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
 
-        public bool? IntervalContains(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlDate?>? left, CqlDate? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlDateTime?>? left, CqlDateTime? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
-        public bool? IntervalContains(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
+        public bool? Contains(CqlInterval<CqlTime?>? left, CqlTime? right, string? precision) =>
             IntervalContainsHelper(left, right, precision, ToClosed);
 
         public bool? IntervalContainsHelper<T>(CqlInterval<T?>? argument, T point, string? precision,
@@ -438,14 +438,14 @@ namespace Hl7.Cql.Runtime
             if (low == null)
             {
                 if (argument.lowClosed ?? false)
-                    low = Minimum<T>();
+                    low = MinValue<T>();
                 else
                     return null;
             }
             if (high == null)
             {
                 if (argument.highClosed ?? false)
-                    high = Maximum<T>();
+                    high = MaxValue<T>();
                 else
                     return null;
             }
@@ -482,7 +482,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<int?>();
+                return argument.high ?? MaxValue<int?>();
             else return Predecessor(argument.high);
         }
 
@@ -499,7 +499,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<long?>();
+                return argument.high ?? MaxValue<long?>();
             else return Predecessor(argument.high);
         }
         public decimal? End(CqlInterval<decimal?>? argument)
@@ -515,7 +515,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<decimal?>();
+                return argument.high ?? MaxValue<decimal?>();
             else return Predecessor(argument.high);
         }
         public CqlQuantity? End(CqlInterval<CqlQuantity?>? argument)
@@ -531,7 +531,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<CqlQuantity?>();
+                return argument.high ?? MaxValue<CqlQuantity?>();
             else return Predecessor(argument.high);
         }
 
@@ -548,7 +548,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<CqlDate?>();
+                return argument.high ?? MaxValue<CqlDate?>();
             else return Predecessor(argument.high);
         }
         public CqlDateTime? End(CqlInterval<CqlDateTime?>? argument)
@@ -564,7 +564,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<CqlDateTime?>();
+                return argument.high ?? MaxValue<CqlDateTime?>();
             else return Predecessor(argument.high);
         }
         public CqlTime? End(CqlInterval<CqlTime?>? argument)
@@ -580,7 +580,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (highClosed)
-                return argument.high ?? Maximum<CqlTime?>();
+                return argument.high ?? MaxValue<CqlTime?>();
             else return Predecessor(argument.high);
         }
 
@@ -601,19 +601,19 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region Except
-        public CqlInterval<int?>? IntervalExcept(CqlInterval<int?>? left, CqlInterval<int?>? right) =>
+        public CqlInterval<int?>? Except(CqlInterval<int?>? left, CqlInterval<int?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<long?>? IntervalExcept(CqlInterval<long?>? left, CqlInterval<long?>? right) =>
+        public CqlInterval<long?>? Except(CqlInterval<long?>? left, CqlInterval<long?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<decimal?>? IntervalExcept(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right) =>
+        public CqlInterval<decimal?>? Except(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<CqlQuantity?>? IntervalExcept(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right) =>
+        public CqlInterval<CqlQuantity?>? Except(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<CqlDate?>? IntervalExcept(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right) =>
+        public CqlInterval<CqlDate?>? Except(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<CqlDateTime?>? IntervalExcept(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right) =>
+        public CqlInterval<CqlDateTime?>? Except(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
-        public CqlInterval<CqlTime?>? IntervalExcept(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right) =>
+        public CqlInterval<CqlTime?>? Except(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right) =>
             IntervalExceptHelper(left, right, ToClosed);
         public CqlInterval<T?>? IntervalExceptHelper<T>(CqlInterval<T?>? left, CqlInterval<T?>? right,
             Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
@@ -647,7 +647,7 @@ namespace Hl7.Cql.Runtime
 
         #region Expand
 
-        public IEnumerable<CqlDate>? ExpandInterval(CqlInterval<CqlDate>? argument, CqlQuantity? per)
+        public IEnumerable<CqlDate>? Expand(CqlInterval<CqlDate>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -773,7 +773,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlDateTime>? ExpandInterval(CqlInterval<CqlDateTime>? argument, CqlQuantity? per)
+        public IEnumerable<CqlDateTime>? Expand(CqlInterval<CqlDateTime>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -949,7 +949,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<CqlTime>? ExpandInterval(CqlInterval<CqlTime>? argument, CqlQuantity? per)
+        public IEnumerable<CqlTime>? Expand(CqlInterval<CqlTime>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1089,7 +1089,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<decimal?>? ExpandInterval(CqlInterval<decimal?>? argument, CqlQuantity? per)
+        public IEnumerable<decimal?>? Expand(CqlInterval<decimal?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1125,7 +1125,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<int?>? ExpandInterval(CqlInterval<int?>? argument, CqlQuantity? per)
+        public IEnumerable<int?>? Expand(CqlInterval<int?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1163,7 +1163,7 @@ namespace Hl7.Cql.Runtime
 
             return expanded;
         }
-        public IEnumerable<long?>? ExpandInterval(CqlInterval<long?>? argument, CqlQuantity? per)
+        public IEnumerable<long?>? Expand(CqlInterval<long?>? argument, CqlQuantity? per)
         {
             if (argument == null)
                 return null;
@@ -1204,7 +1204,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region In
-        public bool? ElementInInterval<T>(T t, CqlInterval<T>? interval, string? precision)
+        public bool? In<T>(T t, CqlInterval<T>? interval, string? precision)
         {
             if (t == null) return null;
             if (interval == null) return false;
@@ -1218,8 +1218,8 @@ namespace Hl7.Cql.Runtime
             // For closed interval boundaries, if the interval boundary is null, the result of the boundary comparison is considered true.
             var lowClosed = interval.lowClosed ?? false;
             var highClosed = interval.highClosed ?? false;
-            var lowCompare = Compare(t, interval.low ?? Minimum<T>()!, precision) ?? (lowClosed ? 0 : null);
-            var highCompare = Compare(t, interval.high ?? Maximum<T>()!, precision) ?? (highClosed ? 0 : null);
+            var lowCompare = Compare(t, interval.low ?? MinValue<T>()!, precision) ?? (lowClosed ? 0 : null);
+            var highCompare = Compare(t, interval.high ?? MaxValue<T>()!, precision) ?? (highClosed ? 0 : null);
 
             var low = lowClosed ? lowCompare >= 0 : lowCompare > 0;
             var high = highClosed ? highCompare <= 0 : highCompare < 0;
@@ -1230,15 +1230,15 @@ namespace Hl7.Cql.Runtime
 
         #region Includes
         public bool? IntervalIncludesElement<T>(CqlInterval<T>? interval, T t, string? precision) =>
-            ElementInInterval(t, interval, precision);
+            In(t, interval, precision);
 
         public bool? IntervalIncludesInterval<T>(CqlInterval<T>? larger, CqlInterval<T>? smaller, string precision)
         {
             if (larger == null || smaller == null)
                 return null;
 
-            var lowCompare = Compare(larger.low ?? Minimum<T>()!, smaller.low ?? Minimum<T>()!, precision);
-            var highCompare = Compare(larger.high ?? Maximum<T>()!, smaller.high ?? Maximum<T>()!, precision);
+            var lowCompare = Compare(larger.low ?? MinValue<T>()!, smaller.low ?? MinValue<T>()!, precision);
+            var highCompare = Compare(larger.high ?? MaxValue<T>()!, smaller.high ?? MaxValue<T>()!, precision);
             //var smallerSelfCompare = rtx.Compare(smaller.Low ?? Minimum<T>(), smaller.High ?? Maximum<T>(), precision);
 
             // From docs: If smaller is point interval, and exactly on the boundary of either side of larger, null
@@ -1261,14 +1261,14 @@ namespace Hl7.Cql.Runtime
 
         #region Intersect
 
-        public CqlInterval<T>? IntervalIntersect<T>(CqlInterval<T>? left, CqlInterval<T>? right)
+        public CqlInterval<T>? Intersect<T>(CqlInterval<T>? left, CqlInterval<T>? right)
         {
             if (left == null || right == null) return null;
 
-            var leftLow = left.low ?? Minimum<T>();
-            var leftHigh = left.high ?? Maximum<T>();
-            var rightLow = right.low ?? Minimum<T>();
-            var rightHigh = right.high ?? Maximum<T>();
+            var leftLow = left.low ?? MinValue<T>();
+            var leftHigh = left.high ?? MaxValue<T>();
+            var rightLow = right.low ?? MinValue<T>();
+            var rightHigh = right.high ?? MaxValue<T>();
             if (Compare(leftLow!, rightHigh!, null) > 0 || Compare(rightLow!, leftHigh!, null) > 0) return null;
             else
             {
@@ -1599,7 +1599,7 @@ namespace Hl7.Cql.Runtime
 
         #region Same As
 
-        public bool? IntervalSameAs<T>(CqlInterval<T> @this, CqlInterval<T> other, string? precision)
+        public bool? SameAs<T>(CqlInterval<T> @this, CqlInterval<T> other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1611,16 +1611,16 @@ namespace Hl7.Cql.Runtime
 
         #region On/Same Or After
 
-        public bool? IntervalSameOrAfter(CqlInterval<int?> @this, CqlInterval<int?> other)
+        public bool? SameOrAfter(CqlInterval<int?> @this, CqlInterval<int?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrAfter(CqlInterval<long?> @this, CqlInterval<long?> other)
+        public bool? SameOrAfter(CqlInterval<long?> @this, CqlInterval<long?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrAfter(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
+        public bool? SameOrAfter(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrAfter(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
+        public bool? SameOrAfter(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
             => IntervalSameOrAfterHelper(@this, other, null, ToClosed);
 
-        public bool? IntervalSameOrAfter(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
+        public bool? SameOrAfter(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1647,10 +1647,10 @@ namespace Hl7.Cql.Runtime
             if (boundaryHit)
                 return true;
 
-            return IntervalAfterInterval(thisClosed, otherClosed, precision);
+            return After(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrAfter(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
+        public bool? SameOrAfter(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1677,10 +1677,10 @@ namespace Hl7.Cql.Runtime
             if (boundaryHit)
                 return true;
 
-            return IntervalAfterInterval(thisClosed, otherClosed, precision);
+            return After(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrAfter(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
+        public bool? SameOrAfter(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1708,7 +1708,7 @@ namespace Hl7.Cql.Runtime
             if (boundaryHit)
                 return true;
 
-            return IntervalAfterInterval(thisClosed, otherClosed, precision);
+            return After(thisClosed, otherClosed, precision);
         }
 
         private bool? IntervalSameOrAfterHelper<T>(CqlInterval<T>? @this,
@@ -1737,15 +1737,15 @@ namespace Hl7.Cql.Runtime
 
         #region On/Same Or Before
 
-        public bool? IntervalSameOrBefore(CqlInterval<int?> @this, CqlInterval<int?> other)
+        public bool? SameOrBefore(CqlInterval<int?> @this, CqlInterval<int?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<long?> @this, CqlInterval<long?> other)
+        public bool? SameOrBefore(CqlInterval<long?> @this, CqlInterval<long?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
+        public bool? SameOrBefore(CqlInterval<decimal?> @this, CqlInterval<decimal?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
+        public bool? SameOrBefore(CqlInterval<CqlQuantity?> @this, CqlInterval<CqlQuantity?> other)
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
-        public bool? IntervalSameOrBefore(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
+        public bool? SameOrBefore(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1771,10 +1771,10 @@ namespace Hl7.Cql.Runtime
             var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
-            return IntervalBeforeInterval(thisClosed, otherClosed, precision);
+            return Before(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrBefore(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
+        public bool? SameOrBefore(CqlInterval<CqlDateTime?>? @this, CqlInterval<CqlDateTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1800,10 +1800,10 @@ namespace Hl7.Cql.Runtime
             var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
-            return IntervalBeforeInterval(thisClosed, otherClosed, precision);
+            return Before(thisClosed, otherClosed, precision);
         }
 
-        public bool? IntervalSameOrBefore(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
+        public bool? SameOrBefore(CqlInterval<CqlTime?>? @this, CqlInterval<CqlTime?>? other, string? precision)
         {
             if (@this == null || other == null)
                 return null;
@@ -1829,7 +1829,7 @@ namespace Hl7.Cql.Runtime
             var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
-            return IntervalBeforeInterval(thisClosed, otherClosed, precision);
+            return Before(thisClosed, otherClosed, precision);
         }
 
 
@@ -1879,8 +1879,8 @@ namespace Hl7.Cql.Runtime
                 return null;
             left = toClosed!(left!)!;
             right = toClosed!(right!)!;
-            if (Compare(left.high ?? Maximum<T>()!, right.low ?? Minimum<T>()!, precision) >= 0
-                && Compare(left.low ?? Minimum<T>()!, right.high ?? Maximum<T>()!, precision) <= 0)
+            if (Compare(left.high ?? MaxValue<T>()!, right.low ?? MinValue<T>()!, precision) >= 0
+                && Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) <= 0)
                 return true;
             else
                 return false;
@@ -1913,8 +1913,8 @@ namespace Hl7.Cql.Runtime
                 return null;
             left = toClosed(left!)!;
             right = toClosed(right!)!;
-            if (Compare(left.low ?? Maximum<T>()!, right.high ?? Minimum<T>()!, precision) <= 0
-                && Compare(left.high ?? Minimum<T>()!, right.high ?? Maximum<T>()!, precision) > 0)
+            if (Compare(left.low ?? MaxValue<T>()!, right.high ?? MinValue<T>()!, precision) <= 0
+                && Compare(left.high ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) > 0)
                 return true;
             else
                 return false;
@@ -1946,8 +1946,8 @@ namespace Hl7.Cql.Runtime
             left = toClosed(left);
             right = toClosed(right);
 
-            if (Compare(left!.high ?? Maximum<T>()!, right!.low ?? Minimum<T>()!, precision) >= 0
-                && Compare(left.low ?? Minimum<T>()!, right.low ?? Minimum<T>()!, precision) < 0)
+            if (Compare(left!.high ?? MaxValue<T>()!, right!.low ?? MinValue<T>()!, precision) >= 0
+                && Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision) < 0)
                 return true;
             else
                 return false;
@@ -1971,12 +1971,12 @@ namespace Hl7.Cql.Runtime
             if (right == null)
                 return false;
 
-            var min = Minimum<T>()!;
+            var min = MinValue<T>()!;
 
             var low = Compare(left!.low ?? min!, right.low ?? min, precision);
             if (low < 0)
                 return false;
-            var max = Maximum<T>()!;
+            var max = MaxValue<T>()!;
             var high = Compare(left.high ?? max, right.high ?? max, precision);
             if (high > 0)
                 return false;
@@ -2104,30 +2104,30 @@ namespace Hl7.Cql.Runtime
 
         public int? IntervalSize(CqlInterval<int?>? argument)
         {
-            var minimum = Minimum<int>();
+            var minimum = MinValue<int>();
             var pointSize = Subtract(Successor(minimum), minimum);
             var closed = ToClosed(argument);
             if (closed == null) return default(int);
-            return Add(Subtract(closed.high ?? Maximum<int>(), closed.low ?? Minimum<int>()), pointSize);
+            return Add(Subtract(closed.high ?? MaxValue<int>(), closed.low ?? MinValue<int>()), pointSize);
         }
 
         public decimal? IntervalSize(CqlInterval<decimal?>? argument)
         {
-            var minimum = Minimum<decimal>();
+            var minimum = MinValue<decimal>();
             var pointSize = Subtract(Successor(minimum), minimum);
             var closed = ToClosed(argument);
             if (closed == null)
                 return default(decimal);
-            return Add(Subtract(closed.high ?? Maximum<decimal>(), closed.low ?? Minimum<decimal>()), pointSize);
+            return Add(Subtract(closed.high ?? MaxValue<decimal>(), closed.low ?? MinValue<decimal>()), pointSize);
         }
         public long? IntervalSize(CqlInterval<long?>? argument)
         {
-            var minimum = Minimum<long>();
+            var minimum = MinValue<long>();
             var pointSize = Subtract(Successor(minimum), minimum);
             var closed = ToClosed(argument);
             if (closed == null)
                 return default(long);
-            return Add(Subtract(closed.high ?? Maximum<long>(), closed.low ?? Minimum<long>()), pointSize);
+            return Add(Subtract(closed.high ?? MaxValue<long>(), closed.low ?? MinValue<long>()), pointSize);
         }
 
         #endregion
@@ -2147,7 +2147,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<int?>();
+                return argument.low ?? MinValue<int?>();
             else return Successor(argument.low);
         }
         public long? Start(CqlInterval<long?>? argument)
@@ -2163,7 +2163,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<long?>();
+                return argument.low ?? MinValue<long?>();
             else return Successor(argument.low);
         }
         public decimal? Start(CqlInterval<decimal?>? argument)
@@ -2179,7 +2179,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<decimal?>();
+                return argument.low ?? MinValue<decimal?>();
             else return Successor(argument.low);
         }
         public CqlQuantity? Start(CqlInterval<CqlQuantity?>? argument)
@@ -2195,7 +2195,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<CqlQuantity?>();
+                return argument.low ?? MinValue<CqlQuantity?>();
             else return Successor(argument.low);
         }
 
@@ -2212,7 +2212,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<CqlDate?>();
+                return argument.low ?? MinValue<CqlDate?>();
             else return Successor(argument.low);
         }
         public CqlDateTime? Start(CqlInterval<CqlDateTime?>? argument)
@@ -2228,7 +2228,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<CqlDateTime?>();
+                return argument.low ?? MinValue<CqlDateTime?>();
             else return Successor(argument.low);
         }
         public CqlTime? Start(CqlInterval<CqlTime?>? argument)
@@ -2244,7 +2244,7 @@ namespace Hl7.Cql.Runtime
                 return null;
 
             if (isLowClosed)
-                return argument.low ?? Minimum<CqlTime?>();
+                return argument.low ?? MinValue<CqlTime?>();
             else return Successor(argument.low);
         }
 
@@ -2265,7 +2265,7 @@ namespace Hl7.Cql.Runtime
 
         #region Union
 
-        public CqlInterval<T>? IntervalUnion<T>(CqlInterval<T>? left, CqlInterval<T>? right)
+        public CqlInterval<T>? Union<T>(CqlInterval<T>? left, CqlInterval<T>? right)
         {
             if (left == null || right == null) return null;
             else

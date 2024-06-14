@@ -1,0 +1,370 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "3.1.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "ParametersExample",
+         "version" : "0.0.1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "locator" : "3:1-3:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1"
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "locator" : "5:1-5:37",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.3.000"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "locator" : "9:1-9:43",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "AgeThreshold",
+            "accessLevel" : "Public",
+            "default" : {
+               "locator" : "9:42-9:43",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+               "value" : "30",
+               "type" : "Literal"
+            },
+            "parameterTypeSpecifier" : {
+               "locator" : "9:26-9:32",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "name" : "{urn:hl7-org:elm-types:r1}Integer",
+               "type" : "NamedTypeSpecifier"
+            }
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "locator" : "7:1-7:72",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Marital Status",
+            "id" : "http://hl7.org/fhir/ValueSet/marital-status",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "11:1-11:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "11:1-11:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "11:1-11:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "locator" : "13:1-14:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "name" : "CurrentDate",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "14:3-14:9",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+               "type" : "Today"
+            }
+         }, {
+            "locator" : "16:1-21:45",
+            "resultTypeName" : "{http://hl7.org/fhir}Patient",
+            "name" : "Patient Filter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "17:3-21:45",
+               "resultTypeName" : "{http://hl7.org/fhir}Patient",
+               "type" : "Query",
+               "source" : [ {
+                  "locator" : "17:3-17:11",
+                  "resultTypeName" : "{http://hl7.org/fhir}Patient",
+                  "alias" : "P",
+                  "expression" : {
+                     "locator" : "17:3-17:9",
+                     "resultTypeName" : "{http://hl7.org/fhir}Patient",
+                     "name" : "Patient",
+                     "type" : "ExpressionRef"
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "18:5-21:45",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "And",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "operand" : [ {
+                     "locator" : "18:11-20:25",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "locator" : "18:11-19:26",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "And",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : [ {
+                           "locator" : "18:11-18:27",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Equal",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
+                           "operand" : [ {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}AdministrativeGender",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : [ {
+                                 "locator" : "18:11-18:18",
+                                 "resultTypeName" : "{http://hl7.org/fhir}AdministrativeGender",
+                                 "path" : "gender",
+                                 "scope" : "P",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "locator" : "18:22-18:27",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "male",
+                              "type" : "Literal"
+                           } ]
+                        }, {
+                           "locator" : "19:11-19:26",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "IsTrue",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
+                           "operand" : {
+                              "name" : "ToBoolean",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}boolean",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : [ {
+                                 "locator" : "19:11-19:18",
+                                 "resultTypeName" : "{http://hl7.org/fhir}boolean",
+                                 "path" : "active",
+                                 "scope" : "P",
+                                 "type" : "Property"
+                              } ]
+                           }
+                        } ]
+                     }, {
+                        "locator" : "20:11-20:25",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Not",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : {
+                           "name" : "ToBoolean",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}boolean",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
+                           "operand" : [ {
+                              "asType" : "{http://hl7.org/fhir}boolean",
+                              "type" : "As",
+                              "operand" : {
+                                 "locator" : "20:14-20:25",
+                                 "path" : "deceased",
+                                 "scope" : "P",
+                                 "type" : "Property",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ChoiceTypeSpecifier",
+                                    "choice" : [ {
+                                       "name" : "{http://hl7.org/fhir}boolean",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}dateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ]
+                                 }
+                              }
+                           } ]
+                        }
+                     } ]
+                  }, {
+                     "locator" : "21:11-21:45",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "InValueSet",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "code" : {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}CodeableConcept",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : [ {
+                           "locator" : "21:11-21:25",
+                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                           "path" : "maritalStatus",
+                           "scope" : "P",
+                           "type" : "Property"
+                        } ]
+                     },
+                     "valueset" : {
+                        "locator" : "21:30-21:45",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "name" : "Marital Status",
+                        "preserve" : true
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "23:1-24:28",
+            "resultTypeName" : "{http://hl7.org/fhir}date",
+            "name" : "Patient Birthdate",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "24:3-24:28",
+               "resultTypeName" : "{http://hl7.org/fhir}date",
+               "path" : "birthDate",
+               "type" : "Property",
+               "source" : {
+                  "locator" : "24:3-24:18",
+                  "resultTypeName" : "{http://hl7.org/fhir}Patient",
+                  "name" : "Patient Filter",
+                  "type" : "ExpressionRef"
+               }
+            }
+         }, {
+            "locator" : "26:1-27:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "Patient Age in Years",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "27:3-27:53",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "precision" : "Year",
+               "type" : "DurationBetween",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "name" : "ToDate",
+                  "libraryName" : "FHIRHelpers",
+                  "type" : "FunctionRef",
+                  "signature" : [ {
+                     "name" : "{http://hl7.org/fhir}date",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "operand" : [ {
+                     "locator" : "27:17-27:35",
+                     "resultTypeName" : "{http://hl7.org/fhir}date",
+                     "name" : "Patient Birthdate",
+                     "type" : "ExpressionRef"
+                  } ]
+               }, {
+                  "locator" : "27:41-27:53",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                  "name" : "CurrentDate",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "locator" : "29:1-30:41",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Patient Older Than AgeThreshold",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "30:3-30:41",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Greater",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "locator" : "30:3-30:24",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "name" : "Patient Age in Years",
+                  "type" : "ExpressionRef"
+               }, {
+                  "locator" : "30:28-30:41",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "name" : "AgeThreshold",
+                  "type" : "ParameterRef"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

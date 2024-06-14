@@ -15,6 +15,10 @@ VSWorkspaceState.json
 *.snk
 .idea/
 
+# ReSharper Settings
+*.DotSettings
+*.DotSettings.user
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -396,3 +400,11 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 
 # We don't include Resources, because compiling the same C# code does not generate a deterministic binary, so it becomes very noise when they are included in the Resources
 /LibrarySets/**/Resources/*.*
+*.bak
+*.dat
+#remove results generated from vs-code CQL extension
+/Demo/**/input/tests/results/*.*
+#remove resources generated measures projects
+/Demo/**/Resources/*.*
+#remove global.json for testing dotnet sdk updates
+global.json

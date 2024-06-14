@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
 
@@ -10,7 +9,7 @@ namespace CoreTests
     [TestClass]
     public class XmlTests
     {
-        [DynamicData(nameof(LoadXmlTests), DynamicDataSourceType.Method, 
+        [DynamicData(nameof(LoadXmlTests), DynamicDataSourceType.Method,
             DynamicDataDisplayName = nameof(DisplayName))]
         [TestMethod]
         public void RunXml(TestSchema.Group group, TestSchema.Test test)

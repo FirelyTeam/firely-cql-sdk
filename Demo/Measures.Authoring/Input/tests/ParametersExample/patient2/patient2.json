@@ -1,0 +1,17 @@
+{
+  "resourceType": "Patient",
+  "id": "patient2",
+  "active": true,
+  "gender": "male",
+  "birthDate": "1975-04-15",
+  "maritalStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+        "code": "S",
+        "display": "Never Married"
+      }
+    ]
+  },
+  "deceasedBoolean": false
+}

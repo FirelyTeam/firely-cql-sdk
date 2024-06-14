@@ -1,8 +1,8 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -67,7 +67,7 @@ namespace Hl7.Cql.Iso8601
 
         /// <summary>
         /// Gets this time represented as a <see cref="DateTimeOffset"/>.
-        /// This value is the result of adding <see cref="TimeSpan"/> to <see cref="BaseDateTime"/>.        
+        /// This value is the result of adding <see cref="TimeSpan"/> to <see cref="BaseDateTime"/>.
         /// </summary>
         /// <remarks>
         /// <para>

@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.Compiler.Expressions
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
@@ -27,8 +27,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (When == when && Then == then)
                     return this;
-                else
-                    return new WhenThenCase(when, then);
+                return new WhenThenCase(when, then);
             }
         }
 
@@ -63,9 +62,9 @@ namespace Hl7.Cql.Compiler
                 if (then.Type != els.Type)
                 {
                     if (then.Type.IsAssignableFrom(els.Type))
-                        els = Convert(els, then.Type);
+                        els = els.NewAssignToTypeExpression(then.Type);
                     else if (els.Type.IsAssignableFrom(then.Type))
-                        then = Convert(then, els.Type);
+                        then = then.NewAssignToTypeExpression(els.Type);
                     // Else: expect Condition factory below to fail.
                 }
 
@@ -82,10 +81,9 @@ namespace Hl7.Cql.Compiler
 
         public Expression Update(IReadOnlyCollection<WhenThenCase> whenThenCases, Expression elseCase)
         {
-            if (Enumerable.SequenceEqual(WhenThenCases, whenThenCases) && ElseCase == elseCase)
+            if (WhenThenCases.SequenceEqual(whenThenCases) && ElseCase == elseCase)
                 return this;
-            else
-                return new CaseWhenThenExpression(whenThenCases, elseCase);
+            return new CaseWhenThenExpression(whenThenCases, elseCase);
         }
 
         public override Type Type => ElseCase.Type;

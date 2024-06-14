@@ -1,4 +1,11 @@
-﻿using System.Linq.Expressions;
+﻿/*
+ * Copyright (c) 2024, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -6,6 +13,7 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using static System.FormattableString;
 
@@ -14,19 +22,22 @@ namespace Hl7.Cql.Packaging;
 internal class CqlToResourcePackagingPipeline
 {
     protected readonly ResourcePackager _resourcePackager;
-    protected readonly LibraryDefinitionsBuilder _LibraryDefinitionsBuilder;
+    protected readonly LibrarySetExpressionBuilder _LibrarySetExpressionBuilder;
     protected readonly AssemblyCompiler _assemblyCompiler;
     protected readonly CqlToResourcePackagingOptions _options;
+    protected readonly ILogger<CqlToResourcePackagingPipeline> _logger;
 
     public CqlToResourcePackagingPipeline(
+        ILogger<CqlToResourcePackagingPipeline> logger,
         IOptions<CqlToResourcePackagingOptions> options,
         ResourcePackager resourcePackager,
-        LibraryDefinitionsBuilder libraryDefinitionsBuilder,
+        LibrarySetExpressionBuilder librarySetExpressionBuilder,
         AssemblyCompiler assemblyCompiler)
     {
         _options = options.Value;
+        _logger = logger;
         _resourcePackager = resourcePackager;
-        _LibraryDefinitionsBuilder = libraryDefinitionsBuilder;
+        _LibrarySetExpressionBuilder = librarySetExpressionBuilder;
         _assemblyCompiler = assemblyCompiler;
     }
 
@@ -56,9 +67,18 @@ internal class CqlToResourcePackagingPipeline
         try
         {
             BuildExpressions(librarySet, definitions);
+
+            // Important: Do not enumerate the libraryset by getting its Count until after processing.
+            if (librarySet.Count == 0)
+            {
+                _logger.LogWarning("Nothing to do, since no ELM libraries were found.");
+                return Array.Empty<Resource>();
+            }
         }
         catch (Exception e)
         {
+            _logger.LogWarning(e, "Error while building expressions.");
+
             var librarySetReplacement = new LibrarySet();
             librarySetReplacement.AddLibraries(definitions.Libraries.Select(lib => librarySet.GetLibrary(lib, true)!));
             librarySet = librarySetReplacement;
@@ -76,6 +96,8 @@ internal class CqlToResourcePackagingPipeline
         }
         catch (Exception e)
         {
+            _logger.LogWarning(e, "Error while compiling expressions.");
+
             throw new CqlToResourcePackagingPipelineErrors(
                 ExpressionBuildingException: expressionBuildingExceptionInfo?.SourceException,
                 AssemblyCompilingException: e).ToException();
@@ -122,7 +144,7 @@ internal class CqlToResourcePackagingPipeline
         _assemblyCompiler.Compile(librarySet, definitions);
 
     protected virtual void BuildExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
-        _LibraryDefinitionsBuilder.ProcessLibrarySet(librarySet, definitions);
+        _LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
 
     protected virtual LibrarySet LoadElmFiles()
     {

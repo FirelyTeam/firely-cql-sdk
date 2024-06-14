@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -11,7 +11,7 @@ using System;
 namespace Hl7.Cql.Abstractions
 {
     /// <summary>
-    /// Representation of a @tag=value in CQL 
+    /// Representation of a @tag=value in CQL
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
     public class CqlTagAttribute : Attribute

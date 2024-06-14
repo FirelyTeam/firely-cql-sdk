@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -24,8 +24,11 @@ namespace Hl7.Cql.Packaging
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public static IDictionary<string, object?> Run(this AssemblyLoadContext assemblyContext,
-            string library, string version, CqlContext ctx)
+        public static IDictionary<string, object?> Run(
+            this AssemblyLoadContext assemblyContext,
+            string library,
+            string version,
+            CqlContext ctx)
         {
             using (var scope = assemblyContext.EnterContextualReflection())
             {
@@ -49,8 +52,10 @@ namespace Hl7.Cql.Packaging
             throw new ArgumentException($"Cannot find type for library {library}, version {version}");
         }
 
-        internal static Assembly? AssemblyFor(this AssemblyLoadContext assemblyContext,
-            string library, string version)
+        internal static Assembly? AssemblyFor(
+            this AssemblyLoadContext assemblyContext,
+            string library,
+            string version)
         {
             foreach (var asm in assemblyContext.Assemblies)
             {
