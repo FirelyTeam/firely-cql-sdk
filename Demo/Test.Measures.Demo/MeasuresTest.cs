@@ -104,7 +104,6 @@ namespace Test
             using var fs = libFile.OpenRead();
             var library = fs.ParseFhir<Library>();
             var allLibs = library.GetDependenciesAndSelf(dir);
-            var dependencies = allLibs.Skip(0);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             allLibs.LoadAssemblies(asmContext);
 
