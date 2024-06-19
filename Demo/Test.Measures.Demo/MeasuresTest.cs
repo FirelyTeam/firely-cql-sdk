@@ -8,6 +8,7 @@ using CoreTests;
 using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
+using CLI.Helpers;
 
 namespace Test
 {
@@ -102,8 +103,7 @@ namespace Test
             var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
             using var fs = libFile.OpenRead();
             var library = fs.ParseFhir<Library>();
-            var dependencies = library.GetDependencies(dir);
-            var allLibs = dependencies.AllLibraries();
+            var allLibs = library.GetDependenciesAndSelf(dir);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             allLibs.LoadAssemblies(asmContext);
 
@@ -114,7 +114,7 @@ namespace Test
                 tupleFs.ParseFhir<Binary>()
             };
 
-            binaries.LoadAssembles(asmContext);
+            binaries.LoadAssemblies(asmContext);
             return asmContext;
         }
 

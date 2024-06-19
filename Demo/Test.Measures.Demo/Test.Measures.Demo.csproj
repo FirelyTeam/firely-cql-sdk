@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="..\..\Cql\CoreTests\LibrarySetsDirs.cs" Link="LibrarySetsDirs.cs" />
     <Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="DirectoryInfoExtensions.cs" />
+    <Compile Include="..\CLI\Helpers\LibraryExtensions.cs" Link="LibraryExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
