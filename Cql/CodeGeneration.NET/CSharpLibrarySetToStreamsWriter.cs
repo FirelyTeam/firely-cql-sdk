@@ -152,7 +152,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     callbacks.Step(tuple.name, tuple.stream, isTuple: true);
                 }
 
-                foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks))
+                foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks, hasTuples:tupleTypes.Any()))
                 {
                     streamsToDispose.Add(tuple.stream);
                     callbacks.Step(tuple.name, tuple.stream, isTuple: false);
@@ -172,7 +172,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         private IEnumerable<(string name, Stream stream)> WriteLibraries(
             DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
-            CSharpSourceCodeWriterCallbacks callbacks)
+            CSharpSourceCodeWriterCallbacks callbacks,
+            bool hasTuples)
         {
             if (!librarySet.Any())
             {
@@ -201,7 +202,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
                 int indentLevel = 0;
-                WriteUsings(writer, isForTuple:false);
+                WriteUsings(writer, emitTupleNamespace:hasTuples);
 
                 // Namespace
                 if (!string.IsNullOrWhiteSpace(Namespace))
@@ -378,7 +379,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     continue;
 
                 using var writer = new StreamWriter(stream, leaveOpen: true);
-                WriteUsings(writer, isForTuple: true);
+                WriteUsings(writer, emitTupleNamespace: false);
                 var indentLevel = 0;
                 writer.WriteLine();
                 writer.WriteLine(indentLevel, $"namespace {tupleType.Namespace}");
@@ -525,11 +526,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteUsings(TextWriter writer, bool isForTuple)
+        private void WriteUsings(TextWriter writer, bool emitTupleNamespace)
         {
             foreach (var @using in _usings)
             {
-                if (isForTuple && @using == TuplesNamespace)
+                if (!emitTupleNamespace && @using == TuplesNamespace)
                     continue;
 
                 writer.WriteLine($"using {@using};");
