@@ -60,11 +60,13 @@ define "DateTimeMin":
 define "DateTimeMax":
   DateTime(9999, 12, 31, 23, 59, 59, 999)= @9999-12-31T23:59:59.999
 
+// 'lbs' was a unit of measure that is not defined, compiling to ELM failed. using 'kg' instead
 define "QuantityTest":
-  150.2 'lbs' = 150.2 'lbs'
+  150.2 'kg' = 150.2 'kg'
 
-define "QuantityTest2":
-  2.5589 'eskimo kisses' = 2.5589 'eskimo kisses'
+// 'eskimo kisses' is a unit of measure that is not in the UCUM standard, compiling to ELM failed
+//define "QuantityTest2":
+//  2.5589 'eskimo kisses' = 2.5589 'eskimo kisses'
 
 define "QuantityFractionalTooBig":
   5.999999999 'g' = 5.999999999 'g'

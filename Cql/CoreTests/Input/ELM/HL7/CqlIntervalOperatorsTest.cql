@@ -66,6 +66,10 @@ define "QuantityIntervalAfterPointFalse":
 define "DateTimeAfterTrue":
   ( Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)]after DateTime(2011, 12, 31)) = true
 
+define "DateTimeIntervalHighPrecisionOverlapsDateTimeIntervalLowPrecision":
+  Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 1, 0, 0, 0, 0)]
+  overlaps Interval[DateTime(2012, 1, 1), DateTime(2012, 12, 31)] = true
+
 define "DateTimeAfterFalse":
   ( Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)]after DateTime(2012, 12, 31)) = false
 
@@ -229,27 +233,27 @@ define "TimeContainsFalse":
   ( Interval[@T01:59:59.999, @T10:59:59.999]contains @T15:59:59.999 ) = false
 
 define "IntegerIntervalEnd":
-  ( 
+  (
     end of Interval[1, 10]
   ) = 10
 
 define "DecimalIntervalEnd":
-  ( 
+  (
     end of Interval[1.0, 10.0]
   ) = 10.0
 
 define "QuantityIntervalEnd":
-  ( 
+  (
     end of Interval[1.0 'g', 10.0 'g']
   ) = 10.0 'g'
 
 define "DateTimeIntervalEnd":
-  ( 
+  (
     end of Interval[@2016-05-01T00:00:00.000, @2016-05-02T00:00:00.000]
   ) = @2016-05-02T00:00:00.000
 
 define "TimeIntervalEnd":
-  ( 
+  (
     end of Interval[@T00:00:00.000, @T23:59:59.599]
   ) = @T23:59:59.599
 

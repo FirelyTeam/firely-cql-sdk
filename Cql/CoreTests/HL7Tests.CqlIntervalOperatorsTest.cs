@@ -3368,10 +3368,26 @@ namespace CoreTests
         }
 
         /// <summary>
+        ///define "DateTimeIntervalHighPrecisionOverlapsDateTimeIntervalLowPrecision":
+        ///	Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 1, 1, 0, 0, 0, 0)]
+        /// overlaps Interval[DateTime(2012, 1, 1), DateTime(2012, 12, 31)] = true
+        /// </summary>
+        [Ignore("The result is not as expected. The reference engine returns false, but the expected result is true.")]
+		[TestCategory("CqlIntervalOperatorsTest")]
+        [TestMethod]
+        public void DateTimeIntervalHighPrecisionOverlapsDateTimeIntervalLowPrecision_Test()
+        {
+	        var lambda = LambdasByTestName["CqlIntervalOperatorsTest", "DateTimeIntervalHighPrecisionOverlapsDateTimeIntervalLowPrecision"];
+	        var function = (Func<CqlContext, bool?>)lambda.Compile();
+	        var result = function(Context);
+	        Assert.AreEqual(true, result);
+        }
+
+		/// <summary>
 		///define "DateTimeOverlapsTrue":
 		///	( Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] ) = true
 		/// </summary>
-        [TestCategory("CqlIntervalOperatorsTest")]
+		[TestCategory("CqlIntervalOperatorsTest")]
         [TestMethod]
         public void DateTimeOverlapsTrue_Test()
         {
