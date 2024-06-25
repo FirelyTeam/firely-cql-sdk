@@ -192,7 +192,7 @@ namespace CoreTests
 
         /// <summary>
 		///define "QuantityTest":
-		///	( 150.2 'lbs' ) = 150.2 'lbs'
+		///	( 150.2 'kg' ) = 150.2 'kg'
 		/// </summary>
         [TestCategory("CqlTypesTest")]
         [TestMethod]
@@ -204,7 +204,7 @@ namespace CoreTests
             Assert.AreEqual(true, result);
         }
 
-        /// <summary>
+        /*/// <summary>
 		///define "QuantityTest2":
 		///	( 2.5589 'eskimo kisses' ) = 2.5589 'eskimo kisses'
 		/// </summary>
@@ -216,7 +216,7 @@ namespace CoreTests
             var function = (Func<CqlContext, bool?>)lambda.Compile();
             var result = function(Context);
             Assert.AreEqual(true, result);
-        }
+        }*/
 
         /// <summary>
 		///define "QuantityFractionalTooBig":

@@ -664,8 +664,9 @@ define "intList":
 define "decimalList":
   { 3.8, 2.4, 1.9 } = { 3.8, 2.4, 1.9 }
 
+// 'lbs' is not a known unit, so the following will did not compile to ELM. using kg instead
 define "quantityList":
-  { 19.99 'lbs', 17.33 'lbs', 10.66 'lbs' } = { 19.99 'lbs', 17.33 'lbs', 10.66 'lbs' }
+  { 19.99 'kg', 17.33 'kg', 10.66 'kg' } = { 19.99 'kg', 17.33 'kg', 10.66 'kg' }
 
 define "dateTimeList":
   { DateTime(2016), DateTime(2015), DateTime(2010)} = { @2016, @2015, @2010 }

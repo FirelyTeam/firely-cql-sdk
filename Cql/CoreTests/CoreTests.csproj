@@ -34,6 +34,16 @@
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<LibrarySet>CoreTests.HL7</LibrarySet>
+		<CqlDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</CqlDirectory>
+		<ElmDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</ElmDirectory>
+		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
+		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
+	</PropertyGroup>
+
+	<Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
+
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
