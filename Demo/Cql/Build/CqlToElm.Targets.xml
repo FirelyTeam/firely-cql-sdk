@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project>
+
+	<!-- Turn off visual studio msbuild automatics -->
+	<PropertyGroup>
+		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
+		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
+	</PropertyGroup>
+
+	<Target Name="StartMessage"
+			BeforeTargets="PreBuildEvent">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
+	</Target>
+
+	<!-- CQL to ELM -->
+	<ItemGroup>
+		<CqlFiles Include="$(CqlDirectory)/*.cql" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<JavaCommand>java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory</JavaCommand>
+		<ClassPath>-classpath $(TargetDependencies)/* org.cqframework.cql.cql2elm.cli.Main</ClassPath>
+		<JavaOutputFile>$(MSBuildProjectDirectory)/elm-build.log</JavaOutputFile>
+		<JavaArgs>-input $(CqlDirectory) -f JSON -output $(ElmDirectory) -locators true -result-types true -signatures All</JavaArgs>
+		<JavaCommandArgs>$(JavaCommand) $(ClassPath) $(JavaArgs)</JavaCommandArgs>
+	</PropertyGroup>
+
+	<Target Name="CQLtoELM"
+	         DependsOnTargets="StartMessage"
+			 Inputs="@(CqlFiles)"
+			 Outputs="@(CqlFiles->'$(ElmDirectory)/%(FileName).json')"
+		Condition="'$(LibrarySet)'!=''"
+		BeforeTargets="PreBuildEvent">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) CQL to ELM))" Importance="High" />
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) $(JavaCommandArgs)))" Importance="High" />
+
+		<ItemGroup>
+			<ElmFiles Include="$(ElmDirectory)/*.json"/>
+		</ItemGroup>
+		<Delete Files="@(ElmFiles)" />
+
+		<Exec Command="$(JavaCommandArgs)" ConsoleToMSBuild="true">
+			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
+		</Exec>
+		<WriteLinesToFile
+            File="$(JavaOutputFile)"
+            Lines="@(OutputOfExec)"
+            Overwrite="true"
+            Encoding="Unicode"/>
+		<!-- Set a property to indicate that the task ran -->
+		<CreateProperty Value="true">
+			<Output TaskParameter="ValueSetByTask" PropertyName="CQLtoElmRan" />
+		</CreateProperty>
+
+	</Target>
+
+	<Target Name="Delete Elm" AfterTargets="Clean">
+		<ItemGroup>
+			<ElmFiles Include="$(ElmDirectory)/*.json"/>
+		</ItemGroup>
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Elm files...))" Importance="High" />
+		<Delete Files="@(ElmFiles)" />
+	</Target>
+
+</Project>
