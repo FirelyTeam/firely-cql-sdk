@@ -16,6 +16,7 @@ internal class NsTypeDiscriminatorContractResolver : DefaultContractResolver {
 
         Debug.WriteLine(type.Name);
 
+        //if (NsSubclassConverter.IsPartOfAnnotatedSubclassHierarchy(type))
         if (type.IsAssignableTo(typeof(Elm.Element)))
         {
             if (baseList.SingleOrDefault(p => p.PropertyName == "type") is { } existing)

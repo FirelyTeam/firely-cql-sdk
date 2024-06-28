@@ -21,12 +21,11 @@ internal class TopLevelDefinitionConverterFactory : JsonConverterFactory
 
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        if (!typeToConvert.IsArray)
-            throw new InvalidOperationException("This converter only handles specific array types.");
+        var element = typeToConvert.GetElementType() ??
+                      throw new InvalidOperationException("This converter only handles array types.");
 
-        var element = typeToConvert.GetElementType()!;
-        var type = typeof(DefArrayConverter<>).MakeGenericType(element);
-        var instance = (JsonConverter)Activator.CreateInstance(type)!;
+        var type = typeof(PolymorphicArrayJsonConverter<>).MakeGenericType(element);
+        var instance = (JsonConverter)Activator.CreateInstance(type, args: false)!;
         return instance;
     }
 }

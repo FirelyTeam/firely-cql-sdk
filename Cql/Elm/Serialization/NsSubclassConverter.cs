@@ -18,8 +18,6 @@ internal class NsSubclassConverter : JsonConverter
 
     public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
     {
-        var c = serializer.ContractResolver.ResolveContract(objectType);
-
         var parsedObject = JToken.Load(reader);
         var typeToken = parsedObject["type"];
         var statedType = typeToken?.ToString();
@@ -49,6 +47,10 @@ internal class NsSubclassConverter : JsonConverter
 
     }
 
+    public static bool IsPartOfAnnotatedSubclassHierarchy(Type type) =>
+        type.GetCustomAttributes<XmlIncludeAttribute>(false).Any() ||
+            (type.BaseType != null && type.BaseType != typeof(Element) && IsPartOfAnnotatedSubclassHierarchy(type.BaseType));
+
     public override bool CanConvert(Type objectType)
     {
         if (SkipOnce)
@@ -57,32 +59,9 @@ internal class NsSubclassConverter : JsonConverter
             return false;
         }
 
-        var xmlattrs = objectType.GetCustomAttributes<XmlIncludeAttribute>(false);
-        if (xmlattrs.Any()) return true;
-
-        // The ELM json representation does not include the type of the object everwhere,
-        // especially not in direct subclasses of Element (I hope).
-        if (objectType.BaseType is { } baseType && baseType != typeof(Element))
-        {
-            xmlattrs = baseType.GetCustomAttributes<XmlIncludeAttribute>(false)
-                .Where(ca => ca.Type == objectType);
-            return xmlattrs.Any();
-        }
-
-        return false;
+        return IsPartOfAnnotatedSubclassHierarchy(objectType);
     }
 
-    private bool isPolymorphicViaXmlInclude(Type t)
-    {
-        // Some types have a *public* property "type" of their own, magically,
-        // the polymorphic types in the ELM json representation do not.
-        if(t.GetProperty("type") != null) return false;
-
-        var xmlattrs = t.GetCustomAttributes<XmlIncludeAttribute>(false);
-        if (xmlattrs.Any()) return true;
-
-        return t.BaseType is not null && isPolymorphicViaXmlInclude(t.BaseType);
-    }
 
     [ThreadStatic]
     private static bool SkipOnce;

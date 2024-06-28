@@ -18,8 +18,8 @@ namespace Hl7.Cql.Elm {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
-    [System.SerializableAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm:r1")]
     [System.Xml.Serialization.XmlRootAttribute("library", Namespace="urn:hl7-org:elm:r1", IsNullable=false)]
     public partial class Library : Element {
@@ -225,6 +225,7 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
+        [System.Text.Json.Serialization.JsonPropertyName("value")]
         public string[] Text {
             get {
                 return this.textField;

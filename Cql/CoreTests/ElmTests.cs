@@ -84,12 +84,13 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void Elm_Deseriailze_FhirHelpers()
+        public void Elm_Deserialize_FhirHelpers()
         {
-            var fi = new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json");
-            var lib = Library.LoadFromJson(fi);
+            var originalElm = File.ReadAllText(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json");
+            var lib = Library.DeserializeFromJsonSTJ(originalElm);
+            var elm = lib.SerializeToJsonSTJ();
 
-            var elm = lib.SerializeToJson();
+            // TODO: compare originalElm to elm.
         }
     }
 }

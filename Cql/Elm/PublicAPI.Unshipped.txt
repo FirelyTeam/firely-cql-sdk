@@ -452,6 +452,10 @@ Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier() -> void
 Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier(string! uri, string! name) -> void
 Hl7.Cql.Elm.Narrative
 Hl7.Cql.Elm.Narrative.Narrative() -> void
+Hl7.Cql.Elm.Narrative.r.get -> string?
+Hl7.Cql.Elm.Narrative.r.set -> void
+Hl7.Cql.Elm.Narrative.s.get -> Hl7.Cql.Elm.Narrative![]?
+Hl7.Cql.Elm.Narrative.s.set -> void
 Hl7.Cql.Elm.NaryExpression
 Hl7.Cql.Elm.NaryExpression.NaryExpression() -> void
 Hl7.Cql.Elm.Negate
