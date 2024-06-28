@@ -1,0 +1,202 @@
+{
+  "resourceType": "Bundle",
+  "id": "95029_pass",
+  "entry": [
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Observation/obs-observation-1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-observation-1",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "supplemental"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "1"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.ama-assn.org/go/cpt",
+              "code": "77066"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "95014"
+        },
+        "effectivePeriod": {
+          "start": "2022-11-09T00:00:00.000-05:00",
+          "end": "2022-11-09T00:00:00.000-05:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Patient/95029_pass",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "95029_pass",
+        "extension": [
+          {
+            "extension": [
+              {
+                "url": "ombCategory",
+                "valueCoding": {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-NullFlavor",
+                  "code": "ASKU"
+                }
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race"
+          },
+          {
+            "extension": [
+              {
+                "url": "ombCategory",
+                "valueCoding": {
+                  "system": "http://terminology.hl7.org/CodeSystem/v3-NullFlavor",
+                  "code": "ASKU"
+                }
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity"
+          },
+          {
+            "url": "https://ncqa.org/fhir/StructureDefinition/ext-patient.spoken.language-datasource",
+            "valueCoding": {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-language-datasource",
+              "code": "Health Plan Direct"
+            }
+          },
+          {
+            "url": "https://ncqa.org/fhir/StructureDefinition/ext-patient.written.language-datasource",
+            "valueCoding": {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-language-datasource",
+              "code": "Health Plan Direct"
+            }
+          },
+          {
+            "extension": [
+              {
+                "url": "language",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "https://ncqa.org/fhir/ValueSet/hedis-language",
+                      "code": "en"
+                    }
+                  ]
+                }
+              },
+              {
+                "url": "preferred",
+                "valueBoolean": true
+              }
+            ],
+            "url": "https://ncqa.org/fhir/StructureDefinition/ext-patient-other-communication"
+          },
+          {
+            "url": "https://ncqa.org/fhir/StructureDefinition/ext-patient.other.language-datasource",
+            "valueCoding": {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-language-datasource",
+              "code": "Health Plan Direct"
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "use": "official",
+            "system": "urn:oid:2.16.840.1.113883.3.464.1005.1",
+            "value": "95029_pass"
+          },
+          {
+            "system": "source-line-number",
+            "value": "29"
+          },
+          {
+            "system": "source-record",
+            "value": "member-gm"
+          }
+        ],
+        "name": [
+          {
+            "family": "PLastName",
+            "given": [
+              "PFirstName",
+              "P."
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "9999999999"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1965-06-10",
+        "address": [
+          {
+            "line": [
+              "Address1",
+              "Address2"
+            ],
+            "city": "City",
+            "state": "AB",
+            "postalCode": "99999"
+          }
+        ],
+        "communication": [
+          {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/patient-preferenceType",
+                "valueCoding": {
+                  "system": "http://hl7.org/fhir/ValueSet/language-preference-type",
+                  "code": "verbal"
+                }
+              }
+            ],
+            "language": {
+              "coding": [
+                {
+                  "system": "https://ncqa.org/fhir/ValueSet/hedis-language",
+                  "code": "en"
+                }
+              ]
+            },
+            "preferred": true
+          },
+          {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/patient-preferenceType",
+                "valueCoding": {
+                  "system": "http://hl7.org/fhir/ValueSet/language-preference-type",
+                  "code": "written"
+                }
+              }
+            ],
+            "language": {
+              "coding": [
+                {
+                  "system": "https://ncqa.org/fhir/ValueSet/hedis-language",
+                  "code": "en"
+                }
+              ]
+            },
+            "preferred": true
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using System.Diagnostics;
 using System.Runtime.Loader;
@@ -9,11 +10,12 @@ using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using CLI.Helpers;
+using Test.Deck;
 
 namespace Test
 {
     [TestClass]
-    public class MeasuresTest
+    public class MeasuresTest : TestBase
     {
         private readonly IDictionary<string, object> MY2023 =
             new Dictionary<string, object>
@@ -39,7 +41,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void BCSEHEDIS2022_Numerator_FromResource()
+        public void BCSEHEDIS2022_Numerator_FromResource_Passed()
         {
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
@@ -51,9 +53,14 @@ namespace Test
             var context = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
             var results = asmContext.Run(lib, version, context);
+
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
+
+            var lib2 = new BCSEHEDISMY2022_1_0_0(context);
+            var num = lib2.Numerator();
+            Assert.IsFalse((bool?)num);
         }
 
         [TestMethod]
