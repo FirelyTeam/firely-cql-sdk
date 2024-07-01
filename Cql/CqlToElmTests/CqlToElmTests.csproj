@@ -3,9 +3,9 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<NoWarn>CS1591;CS0618</NoWarn>
-		<TargetFramework>net7.0</TargetFramework>
 	</PropertyGroup>
 
 	<ItemGroup>
