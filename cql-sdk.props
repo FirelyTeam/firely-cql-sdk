@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.8.1</FirelySdkVersion>
+		<FirelySdkVersion>5.7.0</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Compiler settings -->
@@ -50,8 +50,8 @@
 		<Optimize>false</Optimize>
 		<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
 		<LibraryPKHash></LibraryPKHash>
-	</PropertyGroup>	
-	
+	</PropertyGroup>
+
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<SignAssembly>True</SignAssembly>
 		<DelaySign>true</DelaySign>
