@@ -225,7 +225,6 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Text.Json.Serialization.JsonPropertyName("value")]
         public string[] Text {
             get {
                 return this.textField;

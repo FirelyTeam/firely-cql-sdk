@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -7,6 +9,7 @@ using System.Text.Json.Serialization;
 using Hl7.Cql.Elm.Serialization;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using System.Text.Json.Serialization.Metadata;
 
 namespace Hl7.Cql.Elm;
 
@@ -23,36 +26,69 @@ public partial class Library
         {
             MaxDepth = int.MaxValue,
             WriteIndented = indented,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
             UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
-
         };
 
         options.Converters.Add(new TopLevelDefinitionConverterFactory());
         options.Converters.Add(new XmlQualifiedNameConverter());
         options.Converters.Add(new JsonStringEnumConverter());
 
-        options.TypeInfoResolver = new PolymorphicTypeResolver();
+        options.TypeInfoResolver = new PolymorphicTypeResolver()
+                .WithAddedModifier(modifyNarrative)
+                .WithAddedModifier(DoNotSerializeDefaultValues);
+            ;
         return options;
     }
 
-    // private static JsonSerializerOptions GetDeserializerOptions()
-    // {
-    //     var options = new JsonSerializerOptions
-    //     {
-    //         MaxDepth = int.MaxValue,
-    //         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-    //         UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
-    //     };
-    //
-    //     options.Converters.Add(new TopLevelDefinitionConverterFactory());
-    //     options.Converters.Add(new XmlQualifiedNameConverter());
-    //     options.Converters.Add(new JsonStringEnumConverter());
-    //
-    //     options.TypeInfoResolver = new PolymorphicTypeResolver();
-    //     return options;
-    // }
+    private static void DoNotSerializeDefaultValues(JsonTypeInfo ti)
+    {
+        foreach (var prop in ti.Properties)
+        {
+            // if (prop.AttributeProvider?.GetCustomAttributes(typeof(DefaultValueAttribute), false).FirstOrDefault() is DefaultValueAttribute attr)
+            //     prop.ShouldSerialize = (_, v) => v is not null && (prop.PropertyType.IsEnum || ti.Type == typeof(Interval) || !Equals(v, attr.Value));
+            // else
+            //     prop.ShouldSerialize = (_, v) =>  v is not null;
+            //prop.ShouldSerialize = (_, v) =>  v is not null && (prop.PropertyType.IsEnum || !Equals(v,GetDefaultValue(prop.PropertyType)));
+            // prop.ShouldSerialize = (_, v) => v is not null &&
+            //                                 (prop.PropertyType.IsEnum ||
+            //                                 (defaultAttr != null && !Equals(v, defaultAttr.Value)) ||
+            //                                 (defaultAttr == null && !Equals(v,GetDefaultValue(prop.PropertyType)))
+            //                                 );
 
+            prop.ShouldSerialize = shouldSerialize;
+
+            bool shouldSerialize(object parent, object? value)
+            {
+                if (value is null) return false;
+                if (prop.PropertyType.IsEnum) return true;
+
+                if (ti.Type == typeof(Interval)) return true;
+
+                var defaultAttr = prop.AttributeProvider?
+                    .GetCustomAttributes(typeof(DefaultValueAttribute), false)
+                    .FirstOrDefault() as DefaultValueAttribute;
+
+                var defaultValue = defaultAttr?.Value ?? getDefaultValue(prop.PropertyType);
+
+                return !Equals(value, defaultValue);
+            }
+
+            static object? getDefaultValue(Type type) {
+                return type.IsValueType ? Activator.CreateInstance(type) : null;
+            }
+        }
+    }
+
+    private static void modifyNarrative(JsonTypeInfo ti)
+    {
+        // Make sure Narrative.Text is serialized as "value" in the json, not as "Text"
+        if (ti.Type != typeof(Narrative)) return;
+
+        var valueProp = ti.Properties.FirstOrDefault(p => p.Name == "Text");
+
+        if (valueProp != null)
+            valueProp.Name = "value";
+    }
 
     public string SerializeToJsonSTJ(bool writeIndented = true)
     {
@@ -67,59 +103,53 @@ public partial class Library
         var options = GetSerializerOptions(false);
 
         var node = JsonNode.Parse(json);
-        visit(node!);
+        Visit(node!);
 
         var container = JsonSerializer.Deserialize<LibraryContainer>(node, options)!;
         return container.library;
     }
 
-    static void reorder(JsonObject o)
+    private static void Reorder(JsonObject o)
     {
-        if (o.TryGetPropertyValue("type", out var typeProp) && o.First().Value != typeProp)
-        {
-            var children = o.ToList();
-            o.Clear();
+        if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
 
-            o.Add("type", typeProp);
-            foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
-        }
+        var children = o.ToList();
+        o.Clear();
+
+        o.Add("type", typeProp);
+        foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
     }
 
-    static void visit(JsonNode a)
+    private static void Visit(JsonNode a)
     {
         switch(a)
         {
             case JsonObject jo:
-                reorder(jo);
-                foreach (var child in jo.Select(o => o.Value).Where(o => o != null)) visit(child!);
+                Reorder(jo);
+                foreach (var child in jo.Select(o => o.Value).Where(o => o != null)) Visit(child!);
                 break;
             case JsonArray ja:
-                foreach(var element in ja.Where(o => o != null)) visit(element!);
-                break;
-            default:
+                foreach(var element in ja.Where(o => o != null)) Visit(element!);
                 break;
         }
     }
 
-
-    private static JsonSerializerOptions GetDeserializerOptions(bool strict, bool indented)
+    internal static readonly JsonSerializerSettings JsonSerializerSettings = new()
     {
-        var options = new JsonSerializerOptions
+        Converters = new List<Newtonsoft.Json.JsonConverter>()
         {
-            MaxDepth = int.MaxValue,
-            WriteIndented = indented
-        };
+            new NsLibraryConverter(),
+            new NsSubclassConverter(),
+            new NsDefArrayConverter(),
+            new NsXmlQualifiedNameConverter(),
+            new NsNarrativeConverter()
+        },
 
-        options.Converters.Add(new LibraryJsonConverter());
-        options.Converters.Add(new TopLevelDefinitionConverterFactory());
-        options.Converters.Add(new AbstractClassConverterFactory());
-        //options.AddPolymorphicConverters(strict);
-        options.Converters.Add(new XmlQualifiedNameConverter());
-        options.Converters.Add(new JsonStringEnumConverter());
-
-        //options.TypeInfoResolver = new PolymorphicTypeResolver();
-        return options;
-    }
+        NullValueHandling = NullValueHandling.Ignore,
+        DefaultValueHandling = DefaultValueHandling.Ignore,
+        MissingMemberHandling = MissingMemberHandling.Error,
+        ContractResolver = new NsTypeDiscriminatorContractResolver()
+    };
 
 
     /// <summary>

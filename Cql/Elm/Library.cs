@@ -13,8 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using JsonConverter = System.Text.Json.Serialization.JsonConverter;
+using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 //using Newtonsoft.Json;
 
@@ -29,24 +29,9 @@ namespace Hl7.Cql.Elm
         // public static readonly JsonSerializerOptions JsonSerializerOptions = GetSerializerOptions(false);
         // public static readonly JsonSerializerOptions JsonSerializerOptionsStrict = GetSerializerOptions(true);
 
-        internal static readonly JsonSerializerSettings JsonSerializerSettings = new()
-            {
-                Converters = new List<Newtonsoft.Json.JsonConverter>()
-                    {
-                        new NsLibraryConverter(),
-                        new NsSubclassConverter(),
-                        new NsDefArrayConverter(),
-                        new NsXmlQualifiedNameConverter(),
-                        new NsNarrativeConverter()
-                    },
 
-                    NullValueHandling = NullValueHandling.Ignore,
-                    DefaultValueHandling = DefaultValueHandling.Ignore,
-                    MissingMemberHandling = MissingMemberHandling.Error,
-                    ContractResolver = new NsTypeDiscriminatorContractResolver()
-            };
-
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
+        [XmlIgnore]
         public string? NameAndVersion
         {
             get
@@ -59,7 +44,8 @@ namespace Hl7.Cql.Elm
             }
         }
 
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
+        [XmlIgnore]
         public string? Name
         {
             get
@@ -70,7 +56,8 @@ namespace Hl7.Cql.Elm
             }
         }
 
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
+        [XmlIgnore]
         public string? Version
         {
             get
