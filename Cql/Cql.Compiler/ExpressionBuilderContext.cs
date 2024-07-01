@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
@@ -21,7 +20,7 @@ namespace Hl7.Cql.Compiler
     /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.Build"/>.
     /// </summary>
     /// <remarks>
-    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, elm.Element, ExpressionBuilderContext)"/>.
+    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
     /// </remarks>
     internal class ExpressionBuilderContext
     {
@@ -50,7 +49,7 @@ namespace Hl7.Cql.Compiler
         }
 
         private ExpressionBuilderContext(ExpressionBuilderContext other,
-            Dictionary<string, (Expression, elm.Element)> scopes) : this(other)
+            Dictionary<string, (Expression, Elm.Element)> scopes) : this(other)
         {
             Scopes = scopes;
         }
@@ -70,7 +69,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the parent of the context's current expression.
         /// </summary>
-        public elm.Element? Parent
+        public Elm.Element? Parent
         {
             get
             {
@@ -123,7 +122,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal string? ImpliedAlias { get; private set; } = null;
 
-        private readonly IList<elm.Element> Predecessors = new List<elm.Element>();
+        private readonly IList<Elm.Element> Predecessors = new List<Elm.Element>();
 
         internal static string? NormalizeIdentifier(string? identifier)
         {
@@ -168,7 +167,7 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.", nameof(elmAlias));
         }
 
-        internal (Expression, elm.Element) GetScope(string elmAlias)
+        internal (Expression, Elm.Element) GetScope(string elmAlias)
         {
             var normalized = NormalizeIdentifier(elmAlias!)!;
             if (Scopes.TryGetValue(normalized, out var expression))
@@ -181,7 +180,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private IDictionary<string, (Expression, elm.Element)> Scopes { get; } = new Dictionary<string, (Expression, elm.Element)>();
+        private IDictionary<string, (Expression, Elm.Element)> Scopes { get; } = new Dictionary<string, (Expression, Elm.Element)>();
 
 
         internal bool HasScope(string elmAlias) => Scopes.ContainsKey(elmAlias);
@@ -190,9 +189,9 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Creates a copy with the scopes provided.
         /// </summary>
-        internal ExpressionBuilderContext WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
+        internal ExpressionBuilderContext WithScopes(params KeyValuePair<string, (Expression, Elm.Element)>[] kvps)
         {
-            var scopes = new Dictionary<string, (Expression, elm.Element)>(Scopes);
+            var scopes = new Dictionary<string, (Expression, Elm.Element)>(Scopes);
             if (Builder.Settings.AllowScopeRedefinition)
             {
                 foreach (var kvp in kvps)
@@ -223,9 +222,9 @@ namespace Hl7.Cql.Compiler
             return subContext;
         }
 
-        internal ExpressionBuilderContext WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
+        internal ExpressionBuilderContext WithImpliedAlias(string aliasName, Expression linqExpression, Elm.Element elmExpression)
         {
-            var subContext = WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
+            var subContext = WithScopes(new KeyValuePair<string, (Expression, Elm.Element)>(aliasName, (linqExpression, elmExpression)));
             subContext.ImpliedAlias = aliasName;
 
             return subContext;
@@ -234,25 +233,25 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Clones this ExpressionBuilderContext, adding the current context as a predecessor.
         /// </summary>
-        internal ExpressionBuilderContext Deeper(elm.Element expression)
+        internal ExpressionBuilderContext Deeper(Elm.Element expression)
         {
             var subContext = new ExpressionBuilderContext(this);
             subContext.Predecessors.Add(expression);
             return subContext;
         }
 
-        internal void LogWarning(string message, elm.Element? expression = null)
+        internal void LogWarning(string message, Elm.Element? expression = null)
         {
             Builder.Logger.LogWarning(FormatMessage(message, expression));
         }
 
-        internal void LogError(string message, elm.Element? element = null)
+        internal void LogError(string message, Elm.Element? element = null)
         {
             Builder.Logger.LogError(FormatMessage(message, element));
         }
 
 
-        internal string FormatMessage(string message, elm.Element? element)
+        internal string FormatMessage(string message, Elm.Element? element)
         {
             var locator = element?.locator;
             if (!string.IsNullOrWhiteSpace(locator))

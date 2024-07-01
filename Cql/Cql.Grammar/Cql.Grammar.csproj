@@ -3,14 +3,13 @@
     <Import Project="..\..\cql-sdk.props"/>
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>Hl7.Cql.CqlToElm.Grammar</AssemblyName>
         <RootNamespace>Hl7.Cql.CqlToElm.Grammar</RootNamespace>
         <NoWarn>RS0016</NoWarn>
     </PropertyGroup>
-    
+
     <ItemGroup>
         <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1"/>
         <AssemblyAttribute Include="System.CLSCompliantAttribute">
@@ -24,11 +23,11 @@
     Antlr4 package reference and Antlr4 build tasks are commented out. We have included
     the generated files in the repository so that the project can be built without
     needing to run the ANTLR4 build tasks.
-    
-    If the grammar changes, the generated files will need to be updated. Uncomment the 
+
+    If the grammar changes, the generated files will need to be updated. Uncomment the
     lines below, run the build in Visual Studio, copy the generated files from the
-    obj/debug directory and then commit the updated generated files. 
-        
+    obj/debug directory and then commit the updated generated files.
+
     <ItemGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
         <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1"/>
         <PackageReference Include="Antlr4BuildTasks" Version="12.8" PrivateAssets="All"/>

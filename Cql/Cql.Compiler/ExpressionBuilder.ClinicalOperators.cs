@@ -14,21 +14,20 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
 
-        protected Expression CalculateAge(elm.CalculateAge e, ExpressionBuilderContext ctx)
+        protected Expression CalculateAge(Elm.CalculateAge e, ExpressionBuilderContext ctx)
         {
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand!, ctx);
             return OperatorBinding.Bind(CqlOperator.CalculateAge, ctx.RuntimeContextParameter, birthDate, units);
         }
 
-        protected Expression CalculateAgeAt(elm.CalculateAgeAt e, ExpressionBuilderContext ctx)
+        protected Expression CalculateAgeAt(Elm.CalculateAgeAt e, ExpressionBuilderContext ctx)
         {
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand![0], ctx);
@@ -37,7 +36,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression InValueSet(elm.InValueSet e, ExpressionBuilderContext ctx)
+        protected Expression InValueSet(Elm.InValueSet e, ExpressionBuilderContext ctx)
         {
             var code = TranslateExpression(e.code!, ctx);
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
@@ -57,7 +56,7 @@ namespace Hl7.Cql.Compiler
             else throw new NotImplementedException();
         }
 
-        private Expression AnyInValueSet(elm.AnyInValueSet e, ExpressionBuilderContext ctx)
+        private Expression AnyInValueSet(Elm.AnyInValueSet e, ExpressionBuilderContext ctx)
         {
             var codes = TranslateExpression(e.codes!, ctx);
             if (!IsOrImplementsIEnumerableOfT(codes.Type))
@@ -80,7 +79,7 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        public Expression ExpandValueSet(elm.ExpandValueSet e, ExpressionBuilderContext ctx)
+        public Expression ExpandValueSet(Elm.ExpandValueSet e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             var call = CallCreateValueSetFacade(ctx, operand);

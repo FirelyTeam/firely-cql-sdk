@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using elm = Hl7.Cql.Elm;
 
 
 namespace Hl7.Cql.Compiler
@@ -67,7 +66,7 @@ namespace Hl7.Cql.Compiler
             TupleTypeNamespace = tupleTypeNamespace;
         }
 
-        internal Type? TypeFor(elm.Element element,
+        internal Type? TypeFor(Elm.Element element,
             ExpressionBuilderContext context,
             bool throwIfNotFound = true)
         {
@@ -76,17 +75,17 @@ namespace Hl7.Cql.Compiler
             else if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
                 return Resolver.ResolveType(element!.resultTypeName!.Name)
                     ?? throw new ArgumentException("Cannot resolve type for expression");
-            else if (element is elm.ExpressionDef def && def.expression != null)
+            else if (element is Elm.ExpressionDef def && def.expression != null)
             {
                 var type = TypeFor(def.expression, context, false);
                 if (type == null)
                 {
-                    if (def.expression is elm.SingletonFrom singleton)
+                    if (def.expression is Elm.SingletonFrom singleton)
                     {
                         type = TypeFor(singleton, context, false);
                         if (type == null)
                         {
-                            if (singleton.operand is elm.Retrieve retrieve && retrieve.dataType != null)
+                            if (singleton.operand is Elm.Retrieve retrieve && retrieve.dataType != null)
                             {
                                 type = Resolver.ResolveType(retrieve.dataType.Name);
                                 if (type != null)
@@ -97,7 +96,7 @@ namespace Hl7.Cql.Compiler
                     }
                 }
             }
-            else if (element is elm.Property propertyExpression && !string.IsNullOrWhiteSpace(propertyExpression.path))
+            else if (element is Elm.Property propertyExpression && !string.IsNullOrWhiteSpace(propertyExpression.path))
             {
                 Type? sourceType = null;
                 if (propertyExpression.source != null)
@@ -115,12 +114,12 @@ namespace Hl7.Cql.Compiler
                     else return typeof(object); // this is likely a choice
                 }
             }
-            else if (element is elm.AliasRef aliasRef && !string.IsNullOrWhiteSpace(aliasRef.name))
+            else if (element is Elm.AliasRef aliasRef && !string.IsNullOrWhiteSpace(aliasRef.name))
             {
                 var scope = context.GetScope(aliasRef.name);
                 return scope.Item1.Type;
             }
-            else if (element is elm.OperandRef operandRef && !string.IsNullOrWhiteSpace(operandRef.name))
+            else if (element is Elm.OperandRef operandRef && !string.IsNullOrWhiteSpace(operandRef.name))
             {
                 context.Operands.TryGetValue(operandRef.name, out var operand);
                 if (operand != null)
@@ -131,7 +130,7 @@ namespace Hl7.Cql.Compiler
             else return null;
         }
 
-        internal Type TypeFor(elm.TypeSpecifier resultTypeSpecifier,
+        internal Type TypeFor(Elm.TypeSpecifier resultTypeSpecifier,
             ExpressionBuilderContext context)
         {
             if (resultTypeSpecifier == null) return typeof(object);
@@ -163,7 +162,7 @@ namespace Hl7.Cql.Compiler
                 var enumerableOfElementType = typeof(IEnumerable<>).MakeGenericType(elementType);
                 return enumerableOfElementType;
             }
-            else if (resultTypeSpecifier is elm.TupleTypeSpecifier tuple)
+            else if (resultTypeSpecifier is Elm.TupleTypeSpecifier tuple)
             {
                 // witnessed in ELM:
                 //"type" : "TupleTypeSpecifier",
@@ -222,7 +221,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        internal Type TupleTypeFor(elm.Tuple tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
+        internal Type TupleTypeFor(Elm.Tuple tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
         {
             var elements = tuple.element;
 
