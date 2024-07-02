@@ -7,7 +7,6 @@
  */
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-using Hl7.Cql.Elm.Serialization;
 using Hl7.Cql.Graph;
 using System;
 using System.Collections.Generic;
@@ -16,8 +15,6 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
-//using Newtonsoft.Json;
-
 namespace Hl7.Cql.Elm
 {
     public partial class Library
@@ -25,10 +22,6 @@ namespace Hl7.Cql.Elm
         public const string JsonMimeType = "application/elm+json";
         public const string XmlMimeType = "application/elm+xml";
         public const string LibraryNodeProperty = "Library";
-
-        // public static readonly JsonSerializerOptions JsonSerializerOptions = GetSerializerOptions(false);
-        // public static readonly JsonSerializerOptions JsonSerializerOptionsStrict = GetSerializerOptions(true);
-
 
         [JsonIgnore]
         [XmlIgnore]

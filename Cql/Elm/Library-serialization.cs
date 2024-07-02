@@ -3,40 +3,48 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using Hl7.Cql.Elm.Serialization;
-using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 using System.Text.Json.Serialization.Metadata;
+using System.Xml.Serialization;
+using InvalidOperationException = System.InvalidOperationException;
 
 namespace Hl7.Cql.Elm;
 
 #pragma warning disable CS1591
 
-
+// The property should be 'library', not 'Library', to match the JSON structure.
 internal record LibraryContainer(Library library);
 
 public partial class Library
 {
-    private static JsonSerializerOptions GetSerializerOptions(bool indented)
+    private static JsonSerializerOptions JsonSerializerOptions =
+        BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
+    private static JsonSerializerOptions JsonDeserializerOptions =
+        BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
+
+    private static JsonSerializerOptions BuildSerializerOptions(bool allowOldStyleTypeDiscriminators = false)
     {
         var options = new JsonSerializerOptions
         {
             MaxDepth = int.MaxValue,
-            WriteIndented = indented,
             UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
         };
 
-        options.Converters.Add(new TopLevelDefinitionConverterFactory());
+        options.Converters.Add(new TopLevelDefinitionConverterFactory(allowOldStyleTypeDiscriminators));
         options.Converters.Add(new XmlQualifiedNameConverter());
         options.Converters.Add(new JsonStringEnumConverter());
 
-        options.TypeInfoResolver = new PolymorphicTypeResolver()
-                .WithAddedModifier(modifyNarrative)
-                .WithAddedModifier(DoNotSerializeDefaultValues);
-            ;
+        options.TypeInfoResolver = new PolymorphicTypeResolver(allowOldStyleTypeDiscriminators)
+            .WithAddedModifier(ModifyNarrative)
+            .WithAddedModifier(DoNotSerializeDefaultValues);
+
+        if(allowOldStyleTypeDiscriminators)
+            options.TypeInfoResolver = options.TypeInfoResolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
+
         return options;
     }
 
@@ -44,17 +52,6 @@ public partial class Library
     {
         foreach (var prop in ti.Properties)
         {
-            // if (prop.AttributeProvider?.GetCustomAttributes(typeof(DefaultValueAttribute), false).FirstOrDefault() is DefaultValueAttribute attr)
-            //     prop.ShouldSerialize = (_, v) => v is not null && (prop.PropertyType.IsEnum || ti.Type == typeof(Interval) || !Equals(v, attr.Value));
-            // else
-            //     prop.ShouldSerialize = (_, v) =>  v is not null;
-            //prop.ShouldSerialize = (_, v) =>  v is not null && (prop.PropertyType.IsEnum || !Equals(v,GetDefaultValue(prop.PropertyType)));
-            // prop.ShouldSerialize = (_, v) => v is not null &&
-            //                                 (prop.PropertyType.IsEnum ||
-            //                                 (defaultAttr != null && !Equals(v, defaultAttr.Value)) ||
-            //                                 (defaultAttr == null && !Equals(v,GetDefaultValue(prop.PropertyType)))
-            //                                 );
-
             prop.ShouldSerialize = shouldSerialize;
 
             bool shouldSerialize(object parent, object? value)
@@ -79,7 +76,7 @@ public partial class Library
         }
     }
 
-    private static void modifyNarrative(JsonTypeInfo ti)
+    private static void ModifyNarrative(JsonTypeInfo ti)
     {
         // Make sure Narrative.Text is serialized as "value" in the json, not as "Text"
         if (ti.Type != typeof(Narrative)) return;
@@ -90,90 +87,27 @@ public partial class Library
             valueProp.Name = "value";
     }
 
-    public string SerializeToJsonSTJ(bool writeIndented = true)
+    private static void AllowOldStyleTypeDiscriminators(JsonTypeInfo ti)
     {
-        var options = GetSerializerOptions(writeIndented);
+        bool isElmNodeOutsideInheritanceStructure =
+            ti.PolymorphismOptions is null &&
+            ti.Kind == JsonTypeInfoKind.Object &&
+            ti.Type.GetCustomAttributes(typeof(XmlTypeAttribute), false).Length != 0;
 
-        var container = new LibraryContainer(this);
-        return JsonSerializer.Serialize(container, options);
-    }
+        if (isElmNodeOutsideInheritanceStructure)
+            addTypeProperty(ti, ti.Type.Name);
 
-    public static Library DeserializeFromJsonSTJ(string json)
-    {
-        var options = GetSerializerOptions(false);
-
-        var node = JsonNode.Parse(json);
-        Visit(node!);
-
-        var container = JsonSerializer.Deserialize<LibraryContainer>(node, options)!;
-        return container.library;
-    }
-
-    private static void Reorder(JsonObject o)
-    {
-        if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
-
-        var children = o.ToList();
-        o.Clear();
-
-        o.Add("type", typeProp);
-        foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
-    }
-
-    private static void Visit(JsonNode a)
-    {
-        switch(a)
+        static void addTypeProperty(JsonTypeInfo ti, string expected)
         {
-            case JsonObject jo:
-                Reorder(jo);
-                foreach (var child in jo.Select(o => o.Value).Where(o => o != null)) Visit(child!);
-                break;
-            case JsonArray ja:
-                foreach(var element in ja.Where(o => o != null)) Visit(element!);
-                break;
+            var typeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
+            typeProp.ShouldSerialize = (_, _) => false;
+            typeProp.Set = (_, value) =>
+                {
+                    if( (string?)value != expected)
+                        throw new JsonException("Library's type property should always be 'Library'.");
+                };
+            ti.Properties.Add(typeProp);
         }
-    }
-
-    internal static readonly JsonSerializerSettings JsonSerializerSettings = new()
-    {
-        Converters = new List<Newtonsoft.Json.JsonConverter>()
-        {
-            new NsLibraryConverter(),
-            new NsSubclassConverter(),
-            new NsDefArrayConverter(),
-            new NsXmlQualifiedNameConverter(),
-            new NsNarrativeConverter()
-        },
-
-        NullValueHandling = NullValueHandling.Ignore,
-        DefaultValueHandling = DefaultValueHandling.Ignore,
-        MissingMemberHandling = MissingMemberHandling.Error,
-        ContractResolver = new NsTypeDiscriminatorContractResolver()
-    };
-
-
-    /// <summary>
-    /// Loads a library from a JSON file.
-    /// </summary>
-    public static Library LoadFromJson(FileInfo file)
-    {
-        if (!file.Exists)
-            throw new ArgumentException($"File {file.FullName} does not exist.");
-        using var stream = file.OpenRead();
-        return LoadFromJson(stream);
-    }
-
-    // public static Library LoadFromJson(Stream stream) =>
-    //     JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
-    //         throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}");
-
-    /// <summary>
-    /// Loads a library from a stream containing JSON.
-    /// </summary>
-    public static Library LoadFromJson(Stream stream)
-    {
-        using var sr = new StreamReader(stream);
-        return LoadFromJson(sr);
     }
 
 
@@ -182,39 +116,102 @@ public partial class Library
     /// </summary>
     public static Library ParseFromJson(string json)
     {
-        var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
+        var node = JsonNode.Parse(json) ??
+                   throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
 
-        using var sr = new StringReader(json);
-        using var jr = new JsonTextReader(sr);
-        return serializer.Deserialize<Library>(jr)!;
+        return LoadFromJson(node);
     }
-
 
     /// <summary>
     /// Loads a library from a stream containing JSON.
     /// </summary>
-    public static Library LoadFromJson(TextReader reader)
+    public static Library LoadFromJson(Stream stream)
     {
-        var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
-        using var jr = new JsonTextReader(reader);
-        return serializer.Deserialize<Library>(jr)!;
+        var node = JsonNode.Parse(stream) ??
+                   throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
+
+        return LoadFromJson(node);
+    }
+
+    /// <summary>
+    /// Loads a library from a JSON file.
+    /// </summary>
+    public static Library LoadFromJson(FileInfo file)
+    {
+        if (!file.Exists)
+            throw new ArgumentException($"File {file.FullName} does not exist.");
+
+        using var stream = file.OpenRead();
+        return LoadFromJson(stream);
     }
 
 
+    private static Library LoadFromJson(JsonNode node)
+    {
+        // Note that we need to reorder the JSON object to ensure that the "type" property is the first property,
+        // for which we need to visit the entire object. It is possible to avoid this by first inspecting the
+        // compiler tool and version that generated the ELM, so we know whether the compiler tool is known to
+        // generate the "type" property first. Also, this will make sure the "type" property is only used for
+        // string, if it is used differently, the property is upgraded to "resultTypeSpecifier".
+        CorrectLegacyConstructs(node!);
+
+        var container = node.Deserialize<LibraryContainer>(JsonDeserializerOptions)!;
+        return container.library;
+    }
+
+    private static void CorrectLegacyConstructs(JsonNode a)
+    {
+        switch(a)
+        {
+            case JsonObject jo:
+                reorder(jo);
+                fixType(jo);
+                foreach (var child in jo.Select(o => o.Value).Where(o => o != null)) CorrectLegacyConstructs(child!);
+                break;
+            case JsonArray ja:
+                foreach(var element in ja.Where(o => o != null)) CorrectLegacyConstructs(element!);
+                break;
+        }
+
+        static void reorder(JsonObject o)
+        {
+            if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
+
+            var children = o.ToList();
+            o.Clear();
+
+            o.Add("type", typeProp);
+            foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
+        }
+
+        static void fixType(JsonObject o)
+        {
+            if (!o.TryGetPropertyValue("type", out var typeProp)) return;
+
+            if (typeProp!.GetValueKind() == JsonValueKind.Object)
+            {
+                o.Remove("type");
+                o.Add("resultTypeSpecifier", typeProp.AsObject());
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// Serializes this library to a JSON string.
+    /// </summary>
     public string SerializeToJson(bool writeIndented = true)
     {
-        var settings = new JsonSerializerSettings(JsonSerializerSettings)
+        // I hope (and think) this will clone the original options,
+        // including all cached metadata, otherwise serialization will be a
+        // lot slower than it should be.
+        var options = new JsonSerializerOptions(JsonSerializerOptions)
         {
-            Formatting = writeIndented ? Formatting.Indented : Formatting.None
+            WriteIndented = writeIndented
         };
-        var serializer = Newtonsoft.Json.JsonSerializer.Create(settings);
 
-        using var sw = new StringWriter();
-        using var jw = new JsonTextWriter(sw);
-        serializer.Serialize(jw, this);
-        jw.Flush();
-
-        return sw.ToString();
+        var container = new LibraryContainer(this);
+        return JsonSerializer.Serialize(container, options);
     }
 
     /// <summary>
@@ -224,15 +221,13 @@ public partial class Library
     /// <param name="writeIndented">If <see langword="true" />, formats the JSON with indenting.</param>
     public void WriteJson(Stream stream, bool writeIndented = true)
     {
-        var settings = new JsonSerializerSettings(JsonSerializerSettings)
+        var options = new JsonSerializerOptions(JsonSerializerOptions)
         {
-            Formatting = writeIndented ? Formatting.Indented : Formatting.None
+            WriteIndented = writeIndented
         };
-        var serializer = Newtonsoft.Json.JsonSerializer.Create(settings);
 
-        using var sw = new StreamWriter(stream);
-        serializer.Serialize(sw, this);
-        sw.Flush();
+        var container = new LibraryContainer(this);
+        JsonSerializer.Serialize(stream, container, options);
     }
 
 }

@@ -6,6 +6,11 @@ namespace Hl7.Cql.Elm.Serialization;
 
 internal class TopLevelDefinitionConverterFactory : JsonConverterFactory
 {
+    public TopLevelDefinitionConverterFactory(bool allowOldStyleTypeDiscriminators = false)
+    {
+        AllowOldStyleTypeDiscriminators = allowOldStyleTypeDiscriminators;
+    }
+
     public override bool CanConvert(Type typeToConvert)
     {
         return typeToConvert == typeof(UsingDef[]) ||
@@ -25,7 +30,9 @@ internal class TopLevelDefinitionConverterFactory : JsonConverterFactory
                       throw new InvalidOperationException("This converter only handles array types.");
 
         var type = typeof(PolymorphicArrayJsonConverter<>).MakeGenericType(element);
-        var instance = (JsonConverter)Activator.CreateInstance(type, args: false)!;
+        var instance = (JsonConverter)Activator.CreateInstance(type, args: AllowOldStyleTypeDiscriminators)!;
         return instance;
     }
+
+    public bool AllowOldStyleTypeDiscriminators { get; }
 }

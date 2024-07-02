@@ -8,7 +8,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -16,32 +15,38 @@ namespace Hl7.Cql.Elm.Serialization
 {
     internal class PolymorphicArrayJsonConverter<T> : JsonConverter<T[]>
     {
-        public bool Strict { get; } = false;
-
-        public PolymorphicArrayJsonConverter(bool strict)
+        public PolymorphicArrayJsonConverter(bool allowOldStyleDefinitionTypeDiscriminators = false)
         {
-            Strict = strict;
+            AllowOldStyleDefinitionTypeDiscriminators = allowOldStyleDefinitionTypeDiscriminators;
         }
+
+        public bool AllowOldStyleDefinitionTypeDiscriminators { get; }
 
         public override T[]? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            var isDef = reader.TokenType == JsonTokenType.StartObject && reader.Read() &&
-                        reader.TokenType == JsonTokenType.PropertyName &&
+            var atProp = reader.TokenType == JsonTokenType.StartObject &&
+                         reader.Read() && reader.TokenType == JsonTokenType.PropertyName;
+            if (!atProp)
+                incorrect();
+
+            // Ignore old-style type annotations, if allowed to
+            if (AllowOldStyleDefinitionTypeDiscriminators && reader.GetString() == "type")
+            {
+                if(!reader.Read() && reader.TokenType == JsonTokenType.String)
+                    incorrect();
+
+                if (reader.GetString()?.StartsWith("Library$") != true)
+                    incorrect();
+
+                reader.Read(); // next property
+            }
+
+            var isDef = reader.TokenType == JsonTokenType.PropertyName &&
                         reader.GetString() == "def" && reader.Read() &&
                         reader.TokenType == JsonTokenType.StartArray && reader.Read();
 
             if (!isDef)
-            {
-                if (Strict)
-                    throw new JsonException($"Invalid token {Encoding.UTF8.GetString(reader.ValueSpan)} at position {reader.TokenStartIndex}; not an object.");
-                else
-                {
-#if DEBUG_SERIALIZATION
-                System.Diagnostics.Debug.WriteLine($"Skipping token {Encoding.UTF8.GetString(reader.ValueSpan)} at position {reader.TokenStartIndex}; not an object.");
-#endif
-                    return null;
-                }
-            }
+                incorrect();
 
             var elements = new List<T>();
             var elementType = typeToConvert.GetElementType()
@@ -57,9 +62,11 @@ namespace Hl7.Cql.Elm.Serialization
             }
 
             if (!reader.Read() || reader.TokenType != JsonTokenType.EndObject)
-                throw new JsonException($"Unexpected end of object at position {reader.TokenStartIndex}.");;
+                incorrect();
 
             return elements.ToArray();
+
+            static void incorrect() => throw new JsonException("A definition must be JSON object with a single 'def' property.");
         }
 
         public override void Write(Utf8JsonWriter writer, T[] value, JsonSerializerOptions options)
