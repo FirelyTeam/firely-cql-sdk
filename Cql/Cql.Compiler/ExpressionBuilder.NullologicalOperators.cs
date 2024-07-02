@@ -11,13 +11,12 @@ using Hl7.Cql.Abstractions;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression Coalesce(elm.Coalesce ce, ExpressionBuilderContext ctx)
+        protected Expression Coalesce(Elm.Coalesce ce, ExpressionBuilderContext ctx)
         {
             var operands = ce.operand!
                 .Select(op => TranslateExpression(op, ctx))
@@ -53,7 +52,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression IsNull(elm.IsNull isn, ExpressionBuilderContext ctx)
+        protected Expression IsNull(Elm.IsNull isn, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(isn.operand!, ctx);
             if (operand.Type.IsValueType && IsNullable(operand.Type) == false)
@@ -66,11 +65,11 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression? IsFalse(elm.IsFalse e, ExpressionBuilderContext ctx) =>
+        protected Expression? IsFalse(Elm.IsFalse e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.IsFalse, e, ctx);
 
 
-        protected Expression? IsTrue(elm.IsTrue e, ExpressionBuilderContext ctx) =>
+        protected Expression? IsTrue(Elm.IsTrue e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.IsTrue, e, ctx);
 
 

@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -17,7 +17,9 @@ namespace Hl7.Cql.Elm
 {
     internal static class Initializers
     {
+#pragma warning disable SYSLIB0050 // ObjectIDGenerator is obsolete!
         private static readonly ObjectIDGenerator _idGenerator = new();
+#pragma warning restore SYSLIB0050
 
         public static string NextId(object context) => _idGenerator.GetId(context, out _)
                 .ToString(CultureInfo.InvariantCulture);

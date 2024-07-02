@@ -94,17 +94,17 @@ namespace CoreTests
             if (actual is JsonValue actualValue)
             {
                 if (expectedValue.ToString() != actualValue.ToString())
-                    return [$"Expected value '{expectedValue}', but found actual value '{actualValue}' at {actual.GetPath()}."];
+                    return new List<string> { $"Expected value '{expectedValue}', but found actual value '{actualValue}' at {actual.GetPath()}." };
             }
             else
-                return [$"Expected value, but found '{actual.GetType()}' at {actual.GetPath()}."];
+                return new List<string> { $"Expected value, but found '{actual.GetType()}' at {actual.GetPath()}." };
 
-            return [];
+            return new List<string>();
         }
 
         private List<string> CompareArray(JsonNode actual, JsonArray expectedArray)
         {
-            List<string> result = [];
+            List<string> result = new List<string>();
 
             if (actual is JsonArray actualArray)
             {
@@ -127,7 +127,7 @@ namespace CoreTests
 
         private List<string> CompareObject(JsonNode actual, JsonObject expectedObj)
         {
-            List<string> result = [];
+            List<string> result = new List<string>();
 
             if (actual is JsonObject)
             {

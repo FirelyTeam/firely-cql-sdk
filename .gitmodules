@@ -1,0 +1,3 @@
+[submodule "Cql/CqlToElmTests/cql-tests"]
+	path = Cql/CqlToElmTests/cql-tests
+	url = https://github.com/cqframework/cql-tests

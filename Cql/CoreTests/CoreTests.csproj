@@ -6,8 +6,6 @@
 		<IsPackable>false</IsPackable>
 		<Nullable>disable</Nullable>
 		<NoWarn>CS1591;CS0618</NoWarn>
-		<TargetFramework>net7.0</TargetFramework>
-		<LangVersion>12</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -16,8 +14,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-		<PackageReference Include="MSTest.TestFramework" Version="3.2.0" />
-		<PackageReference Include="MSTest.TestAdapter" Version="3.2.0" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.3.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.3.1" />
 		<PackageReference Include="coverlet.collector" Version="6.0.2" />
 		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
@@ -34,7 +32,7 @@
 		<ProjectReference Include="..\ELM\ELM.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -47,9 +45,6 @@
 		</None>
 		<None Update="Input\ValueSets\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Input\ELM\Libs\FHIRHelpers-scratch.json">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 </Project>

@@ -10,13 +10,12 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        private Expression Collapse(elm.Collapse e, ExpressionBuilderContext ctx)
+        private Expression Collapse(Elm.Collapse e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand![0]!, ctx);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
@@ -25,7 +24,7 @@ namespace Hl7.Cql.Compiler
                 if (IsInterval(elementType, out var pointType))
                 {
                     var precision = Expression.Constant(null, typeof(string));
-                    if (e.operand.Length > 1 && e.operand[1] is elm.Quantity quant)
+                    if (e.operand.Length > 1 && e.operand[1] is Elm.Quantity quant)
                     {
                         precision = Expression.Constant(quant.unit, typeof(string));
                     }
@@ -35,7 +34,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        private Expression Contains(elm.Contains e, ExpressionBuilderContext ctx)
+        private Expression Contains(Elm.Contains e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e!.operand![0]!, ctx);
             var right = TranslateExpression(e.operand[1]!, ctx);
@@ -62,10 +61,10 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        private Expression End(elm.End e, ExpressionBuilderContext ctx) =>
+        private Expression End(Elm.End e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.IntervalEnd, e, ctx);
 
-        private Expression? Ends(elm.Ends e, ExpressionBuilderContext ctx)
+        private Expression? Ends(Elm.Ends e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -83,7 +82,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression Except(elm.Except e, ExpressionBuilderContext ctx)
+        protected Expression Except(Elm.Except e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -105,14 +104,14 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression? Expand(elm.Expand e, ExpressionBuilderContext ctx)
+        protected Expression? Expand(Elm.Expand e, ExpressionBuilderContext ctx)
         {
             var source = TranslateExpression(e!.operand![0]!, ctx);
             var quantity = TranslateExpression(e!.operand![1]!, ctx);
             return OperatorBinding.Bind(CqlOperator.Expand, ctx.RuntimeContextParameter, source, quantity);
         }
 
-        protected Expression In(elm.In e, ExpressionBuilderContext ctx)
+        protected Expression In(Elm.In e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0]!, ctx);
             var right = TranslateExpression(e.operand![1]!, ctx);
@@ -131,7 +130,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression? Includes(elm.Includes e, ExpressionBuilderContext ctx)
+        protected Expression? Includes(Elm.Includes e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -168,7 +167,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression IncludedIn(elm.IncludedIn e, ExpressionBuilderContext ctx)
+        protected Expression IncludedIn(Elm.IncludedIn e, ExpressionBuilderContext ctx)
         {
 
             var left = TranslateExpression(e.operand![0], ctx);
@@ -206,7 +205,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression Intersect(elm.Intersect e, ExpressionBuilderContext ctx)
+        protected Expression Intersect(Elm.Intersect e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0]!, ctx);
             var right = TranslateExpression(e.operand![1]!, ctx);
@@ -225,7 +224,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression? Meets(elm.Meets e, ExpressionBuilderContext ctx)
+        protected Expression? Meets(Elm.Meets e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -243,7 +242,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        private Expression? MeetsAfter(elm.MeetsAfter e, ExpressionBuilderContext ctx)
+        private Expression? MeetsAfter(Elm.MeetsAfter e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -261,7 +260,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        private Expression? MeetsBefore(elm.MeetsBefore e, ExpressionBuilderContext ctx)
+        private Expression? MeetsBefore(Elm.MeetsBefore e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -280,7 +279,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression Overlaps(elm.Overlaps e, ExpressionBuilderContext ctx)
+        protected Expression Overlaps(Elm.Overlaps e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -298,7 +297,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        private Expression OverlapsBefore(elm.OverlapsBefore e, ExpressionBuilderContext ctx)
+        private Expression OverlapsBefore(Elm.OverlapsBefore e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -316,7 +315,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        private Expression OverlapsAfter(elm.OverlapsAfter e, ExpressionBuilderContext ctx)
+        private Expression OverlapsAfter(Elm.OverlapsAfter e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -337,10 +336,10 @@ namespace Hl7.Cql.Compiler
 
 
 
-        protected Expression? PointFrom(elm.PointFrom e, ExpressionBuilderContext ctx) =>
+        protected Expression? PointFrom(Elm.PointFrom e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.PointFrom, e, ctx);
 
-        protected Expression? ProperIncludes(elm.ProperIncludes e, ExpressionBuilderContext ctx)
+        protected Expression? ProperIncludes(Elm.ProperIncludes e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -373,7 +372,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression? ProperIncludedIn(elm.ProperIncludedIn e, ExpressionBuilderContext ctx)
+        protected Expression? ProperIncludedIn(Elm.ProperIncludedIn e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -404,7 +403,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        private Expression? ProperIn(elm.ProperIn e, ExpressionBuilderContext ctx)
+        private Expression? ProperIn(Elm.ProperIn e, ExpressionBuilderContext ctx)
         {
             var element = TranslateExpression(e.operand![0], ctx);
             var intervalOrList = TranslateExpression(e.operand![1], ctx);
@@ -420,7 +419,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression? ProperContains(elm.ProperContains e, ExpressionBuilderContext ctx)
+        protected Expression? ProperContains(Elm.ProperContains e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -452,11 +451,11 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression Start(elm.Start start, ExpressionBuilderContext ctx) =>
+        protected Expression Start(Elm.Start start, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.IntervalStart, start, ctx);
 
 
-        protected Expression? Starts(elm.Starts e, ExpressionBuilderContext ctx)
+        protected Expression? Starts(Elm.Starts e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -475,7 +474,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression Union(elm.Union e, ExpressionBuilderContext ctx)
+        protected Expression Union(Elm.Union e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -502,7 +501,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression? Width(elm.Width e, ExpressionBuilderContext ctx) =>
+        protected Expression? Width(Elm.Width e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Width, e, ctx);
     }
 }

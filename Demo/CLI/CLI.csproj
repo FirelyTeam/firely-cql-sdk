@@ -2,19 +2,19 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
 		<EmbeddedResource Include="ValueSets\*.json" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<EmbeddedResource Include="Data\*.json" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Measures\Measures.csproj" />

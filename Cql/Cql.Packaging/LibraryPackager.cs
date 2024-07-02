@@ -22,7 +22,6 @@ using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Runtime.Loader;
 using System.Text;
-using elm = Hl7.Cql.Elm;
 using Library = Hl7.Fhir.Model.Library;
 
 namespace Hl7.Cql.Packaging
@@ -39,13 +38,13 @@ namespace Hl7.Cql.Packaging
             TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
         }
 
-        public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
+        public static IDictionary<string, Elm.Library> LoadLibraries(DirectoryInfo elmDir)
         {
-            var dict = new ConcurrentDictionary<string, elm.Library>();
+            var dict = new ConcurrentDictionary<string, Elm.Library>();
             var files = elmDir.GetFiles("*.json", SearchOption.AllDirectories);
             Parallel.ForEach(files, file =>
             {
-                var library = elm.Library.LoadFromJson(file);
+                var library = Elm.Library.LoadFromJson(file);
                 if (library?.NameAndVersion != null)
                 {
                     dict.TryAdd(library.NameAndVersion, library);
@@ -146,8 +145,8 @@ namespace Hl7.Cql.Packaging
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
 
             var elmLibraries = packageGraph.Nodes.Values
-                .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
-                .OfType<elm.Library>()
+                .Select(node => node.Properties?[Elm.Library.LibraryNodeProperty] as Elm.Library)
+                .OfType<Elm.Library>()
                 // Processing this deterministically to reduce different exceptions when running this repeatedly
                 .OrderBy(lib => lib.NameAndVersion)
                 .ToArray();
@@ -283,13 +282,13 @@ namespace Hl7.Cql.Packaging
             AssemblyData assembly,
             CqlTypeToFhirTypeMapper typeCrosswalk,
             Func<Resource, string> canon,
-            elm.Library? elmLibrary = null)
+            Elm.Library? elmLibrary = null)
         {
             if (elmFile.Exists)
             {
                 if (elmLibrary is null)
                 {
-                    elmLibrary = elm.Library.LoadFromJson(elmFile);
+                    elmLibrary = Elm.Library.LoadFromJson(elmFile);
                     if (elmLibrary is null)
                         throw new ArgumentException($"File at {elmFile.FullName} is not valid ELM");
                 }
@@ -297,7 +296,7 @@ namespace Hl7.Cql.Packaging
                 var attachment = new Attachment
                 {
                     ElementId = $"{elmLibrary.NameAndVersion}+elm",
-                    ContentType = elm.Library.JsonMimeType,
+                    ContentType = Elm.Library.JsonMimeType,
                     Data = bytes,
                 };
                 var library = new Hl7.Fhir.Model.Library();
@@ -320,7 +319,7 @@ namespace Hl7.Cql.Packaging
                 if (outParams is not null)
                     parameters.AddRange(outParams);
                 var valueSetParameterDefinitions = new List<ParameterDefinition>();
-                foreach (var valueSet in elmLibrary.valueSets ?? Enumerable.Empty<elm.ValueSetDef>())
+                foreach (var valueSet in elmLibrary.valueSets ?? Enumerable.Empty<Elm.ValueSetDef>())
                 {
                     var valueSetParameter = new ParameterDefinition
                     {
@@ -333,7 +332,7 @@ namespace Hl7.Cql.Packaging
                 parameters.AddRange(valueSetParameterDefinitions);
                 library.Parameter = parameters.Count > 0 ? parameters : null!;
 
-                foreach (var include in elmLibrary?.includes ?? Enumerable.Empty<elm.IncludeDef>())
+                foreach (var include in elmLibrary?.includes ?? Enumerable.Empty<Elm.IncludeDef>())
                 {
                     var includeId = $"{include.path}-{include.version}";
                     library.RelatedArtifact.Add(new RelatedArtifact
@@ -458,7 +457,7 @@ namespace Hl7.Cql.Packaging
                 };
             }
 
-            if (definition.accessLevel == elm.AccessModifier.Private)
+            if (definition.accessLevel == Elm.AccessModifier.Private)
             {
                 parameterDefinition.Extension.Add(new Extension
                 {

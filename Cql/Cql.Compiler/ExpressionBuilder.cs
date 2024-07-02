@@ -20,7 +20,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Operators;
-using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
 using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
@@ -31,7 +30,7 @@ namespace Hl7.Cql.Compiler
     internal record ExpressionBuilderOptions(bool EmitStackTraces = false, bool IgnoreElmErrorAnnotations = true);
 
     /// <summary>
-    /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
+    /// The ExpressionBuilder translates ELM <see cref="Elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>
     internal partial class ExpressionBuilder
     {
@@ -261,7 +260,7 @@ namespace Hl7.Cql.Compiler
 
                 if (Library.parameters != null)
                 {
-                    foreach (var parameter in Library.parameters ?? Enumerable.Empty<elm.ParameterDef>())
+                    foreach (var parameter in Library.parameters ?? Enumerable.Empty<Elm.ParameterDef>())
                     {
                         if (definitions.ContainsKey(null, parameter.name!))
                             throw new InvalidOperationException($"There is already a definition named {parameter.name}");
@@ -294,7 +293,7 @@ namespace Hl7.Cql.Compiler
                     }
                 }
 
-                foreach (var def in Library.statements ?? Enumerable.Empty<elm.ExpressionDef>())
+                foreach (var def in Library.statements ?? Enumerable.Empty<Elm.ExpressionDef>())
                 {
                     if (def.expression != null)
                     {
@@ -406,7 +405,7 @@ namespace Hl7.Cql.Compiler
         /// <param name="lambdas">Existing lambdas, required if <paramref name="expression"/> contains any references to other ELM definitions</param>
         /// <param name="ctx">If <paramref name="expression"/> requires contextual scope, provide it via an <see cref="ExpressionBuilderContext"/>.</param>
         [Obsolete("This will not be available in future versions of the SDK.")]
-        public LambdaExpression Lambda(elm.Expression expression,
+        public LambdaExpression Lambda(Elm.Expression expression,
             DefinitionDictionary<LambdaExpression>? lambdas = null,
             ExpressionBuilderContext? ctx = null)
         {
@@ -419,7 +418,7 @@ namespace Hl7.Cql.Compiler
             return lambda;
         }
 
-        protected internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
+        protected internal Expression TranslateExpression(Elm.Element op, ExpressionBuilderContext ctx)
         {
             ctx = ctx.Deeper(op);
             Expression? expression = op switch
@@ -459,7 +458,7 @@ namespace Hl7.Cql.Compiler
                 ConvertsToTime ce => ConvertsToTime(ce, ctx),
                 Count ce => Count(ce, ctx),
                 DateFrom dfe => DateFrom(dfe, ctx),
-                elm.DateTime dt => DateTime(dt, ctx),
+                Elm.DateTime dt => DateTime(dt, ctx),
                 Date d => Date(d, ctx),
                 DateTimeComponentFrom dtcf => DateTimeComponentFrom(dtcf, ctx),
                 Descendents desc => Descendents(desc, ctx),
@@ -588,7 +587,7 @@ namespace Hl7.Cql.Compiler
                 ToTime e => ToTime(e, ctx),
                 Truncate trunc => Truncate(trunc, ctx),
                 TruncatedDivide div => TruncatedDivide(div, ctx),
-                elm.Tuple tu => Tuple(tu, ctx),
+                Elm.Tuple tu => Tuple(tu, ctx),
                 Union ue => Union(ue, ctx),
                 ValueSetRef vsre => ValueSetRef(vsre, ctx),
                 Variance variance => Variance(variance, ctx),
@@ -605,7 +604,7 @@ namespace Hl7.Cql.Compiler
             return expression!;
         }
 
-        protected Expression BinaryOperator(CqlOperator @operator, elm.BinaryExpression be, ExpressionBuilderContext ctx)
+        protected Expression BinaryOperator(CqlOperator @operator, Elm.BinaryExpression be, ExpressionBuilderContext ctx)
         {
             var lhsExpression = TranslateExpression(be.operand![0], ctx);
             var rhsExpression = TranslateExpression(be.operand![1], ctx);
@@ -613,7 +612,7 @@ namespace Hl7.Cql.Compiler
             return call;
         }
 
-        protected Expression UnaryOperator(CqlOperator @operator, elm.UnaryExpression unary, ExpressionBuilderContext ctx)
+        protected Expression UnaryOperator(CqlOperator @operator, Elm.UnaryExpression unary, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(unary.operand!, ctx);
             var resultType = unary.resultTypeSpecifier != null
@@ -631,7 +630,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression NaryOperator(CqlOperator @operator, elm.NaryExpression ne, ExpressionBuilderContext ctx)
+        protected Expression NaryOperator(CqlOperator @operator, Elm.NaryExpression ne, ExpressionBuilderContext ctx)
         {
             var operators = ne.operand
                 .Select(op => TranslateExpression(op, ctx))
@@ -899,7 +898,7 @@ namespace Hl7.Cql.Compiler
             // The combinations will be stored in a tuple whose fields are named by source alias.
             // we will then create an expression that creates this cross-product of tuples,
             // and use that as the singular query source for subsequent parts of the query.
-            var tupleSpecifier = new elm.TupleTypeSpecifier
+            var tupleSpecifier = new Elm.TupleTypeSpecifier
             {
                 element = query.source.Select(source => new TupleElementDefinition
                 {
@@ -997,7 +996,7 @@ namespace Hl7.Cql.Compiler
 
                 if (query.let != null)
                 {
-                    var letScopes = new KeyValuePair<string, (Expression, elm.Expression)>[query.let.Length];
+                    var letScopes = new KeyValuePair<string, (Expression, Elm.Expression)>[query.let.Length];
                     for (int i = 0; i < query.let.Length; i++)
                     {
                         var let = query.let[i];
@@ -1013,7 +1012,7 @@ namespace Hl7.Cql.Compiler
 
             if (query.aggregate != null)
             {
-                if (query.aggregate is elm.AggregateClause)
+                if (query.aggregate is Elm.AggregateClause)
                 {
                     var parameterName = TypeNameToIdentifier(elementType, ctx);
                     var sourceParameter = Expression.Parameter(multiSourceTupleType, parameterName);
@@ -1172,12 +1171,12 @@ namespace Hl7.Cql.Compiler
             return expr;
         }
 
-        protected Expression Tuple(elm.Tuple tuple, ExpressionBuilderContext ctx)
+        protected Expression Tuple(Elm.Tuple tuple, ExpressionBuilderContext ctx)
         {
             Type tupleType;
             if (tuple.resultTypeSpecifier != null)
             {
-                if (tuple.resultTypeSpecifier is elm.TupleTypeSpecifier tupleTypeSpecifier)
+                if (tuple.resultTypeSpecifier is Elm.TupleTypeSpecifier tupleTypeSpecifier)
                 {
                     tupleType = TypeManager.TupleTypeFor(tupleTypeSpecifier, ctx);
                 }
@@ -1209,7 +1208,7 @@ namespace Hl7.Cql.Compiler
         {
             if (list.resultTypeSpecifier == null)
                 throw new ArgumentException($"List is missing a result type specifier.", nameof(list));
-            if (list.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
+            if (list.resultTypeSpecifier is Elm.ListTypeSpecifier listTypeSpecifier)
             {
 
                 var elementType = TypeManager.TypeFor(listTypeSpecifier.elementType, ctx);
@@ -1806,9 +1805,9 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                if (retrieve.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
+                if (retrieve.resultTypeSpecifier is Elm.ListTypeSpecifier listTypeSpecifier)
                 {
-                    cqlRetrieveResultType = listTypeSpecifier.elementType is elm.NamedTypeSpecifier nts ? nts.name.Name : null;
+                    cqlRetrieveResultType = listTypeSpecifier.elementType is Elm.NamedTypeSpecifier nts ? nts.name.Name : null;
                     sourceElementType = TypeManager.TypeFor(listTypeSpecifier.elementType, ctx);
                 }
                 else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.");
@@ -2244,7 +2243,7 @@ namespace Hl7.Cql.Compiler
                 expression = CoalesceNullableValueType(expression);
             return expression;
         }
-        protected Expression CrossJoin(elm.AliasedQuerySource[] sources, Type tupleType, ExpressionBuilderContext ctx)
+        protected Expression CrossJoin(Elm.AliasedQuerySource[] sources, Type tupleType, ExpressionBuilderContext ctx)
         {
 
             //var a = new int[] { 1, 2, 3 };
