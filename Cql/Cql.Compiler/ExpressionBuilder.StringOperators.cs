@@ -10,14 +10,13 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
 
-        protected Expression? Combine(elm.Combine e, ExpressionBuilderContext ctx)
+        protected Expression? Combine(Elm.Combine e, ExpressionBuilderContext ctx)
         {
             var source = TranslateExpression(e.source!, ctx);
             var operand = e.separator == null
@@ -27,13 +26,13 @@ namespace Hl7.Cql.Compiler
             return call;
         }
 
-        protected Expression Concatenate(elm.Concatenate e, ExpressionBuilderContext ctx) =>
+        protected Expression Concatenate(Elm.Concatenate e, ExpressionBuilderContext ctx) =>
             NaryOperator(CqlOperator.Concatenate, e, ctx);
 
-        protected Expression? EndsWith(elm.EndsWith e, ExpressionBuilderContext ctx) =>
+        protected Expression? EndsWith(Elm.EndsWith e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.EndsWith, e, ctx);
 
-        protected Expression Indexer(elm.Indexer e, ExpressionBuilderContext ctx)
+        protected Expression Indexer(Elm.Indexer e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e!.operand![0]!, ctx);
             var right = TranslateExpression(e!.operand![1]!, ctx);
@@ -48,14 +47,14 @@ namespace Hl7.Cql.Compiler
             else throw new NotImplementedException();
         }
 
-        protected Expression? LastPositionOf(elm.LastPositionOf e, ExpressionBuilderContext ctx)
+        protected Expression? LastPositionOf(Elm.LastPositionOf e, ExpressionBuilderContext ctx)
         {
             var @string = TranslateExpression(e!.@string!, ctx);
             var pattern = TranslateExpression(e!.pattern!, ctx);
             return OperatorBinding.Bind(CqlOperator.LastPositionOf, ctx.RuntimeContextParameter, @string, pattern);
         }
 
-        protected Expression? Length(elm.Length len, ExpressionBuilderContext ctx)
+        protected Expression? Length(Elm.Length len, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(len.operand!, ctx);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
@@ -69,13 +68,13 @@ namespace Hl7.Cql.Compiler
             else throw new NotImplementedException();
         }
 
-        protected Expression? Lower(elm.Lower e, ExpressionBuilderContext ctx) =>
+        protected Expression? Lower(Elm.Lower e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Lower, e, ctx);
 
-        protected Expression? Matches(elm.Matches e, ExpressionBuilderContext ctx) =>
+        protected Expression? Matches(Elm.Matches e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Matches, e, ctx);
 
-        protected Expression PositionOf(elm.PositionOf e, ExpressionBuilderContext ctx)
+        protected Expression PositionOf(Elm.PositionOf e, ExpressionBuilderContext ctx)
         {
             var @string = TranslateExpression(e!.@string!, ctx);
             var pattern = TranslateExpression(e!.pattern!, ctx);
@@ -83,7 +82,7 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        protected Expression? ReplaceMatches(elm.ReplaceMatches e, ExpressionBuilderContext ctx)
+        protected Expression? ReplaceMatches(Elm.ReplaceMatches e, ExpressionBuilderContext ctx)
         {
             var source = TranslateExpression(e.operand![0]!, ctx);
             var pattern = TranslateExpression(e.operand![1]!, ctx);
@@ -91,17 +90,17 @@ namespace Hl7.Cql.Compiler
             return OperatorBinding.Bind(CqlOperator.ReplaceMatches, ctx.RuntimeContextParameter, source, pattern, substitution);
         }
 
-        protected Expression Split(elm.Split e, ExpressionBuilderContext ctx)
+        protected Expression Split(Elm.Split e, ExpressionBuilderContext ctx)
         {
             var stringToSplit = TranslateExpression(e.stringToSplit!, ctx);
             var separator = TranslateExpression(e.separator!, ctx);
             return OperatorBinding.Bind(CqlOperator.Split, ctx.RuntimeContextParameter, stringToSplit, separator);
         }
 
-        protected Expression? StartsWith(elm.StartsWith e, ExpressionBuilderContext ctx) =>
+        protected Expression? StartsWith(Elm.StartsWith e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.StartsWith, e, ctx);
 
-        protected Expression? Substring(elm.Substring e, ExpressionBuilderContext ctx)
+        protected Expression? Substring(Elm.Substring e, ExpressionBuilderContext ctx)
         {
             var stringToSub = TranslateExpression(e!.stringToSub!, ctx);
             var startIndex = TranslateExpression(e!.startIndex!, ctx);
@@ -111,7 +110,7 @@ namespace Hl7.Cql.Compiler
             return OperatorBinding.Bind(CqlOperator.Substring, ctx.RuntimeContextParameter, stringToSub, startIndex, length);
         }
 
-        protected Expression? Upper(elm.Upper e, ExpressionBuilderContext ctx) =>
+        protected Expression? Upper(Elm.Upper e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Upper, e, ctx);
 
 

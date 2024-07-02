@@ -578,7 +578,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				var dm_ = context.Operators.Concatenate("Unknown unit ", (period?.unit ?? ""));
 				var dn_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUnit", dl_, dm_);
 
-				return (decimal?)dn_;
+				return (dn_ as decimal?);
 			};
 		};
 
@@ -600,7 +600,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				var c_ = context.Operators.Concatenate("Unknown frequency code ", (frequency?.code ?? ""));
 				var d_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", b_, c_);
 
-				return (decimal?)d_;
+				return (d_ as decimal?);
 			};
 		};
 

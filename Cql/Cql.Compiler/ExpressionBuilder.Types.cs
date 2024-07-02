@@ -1,12 +1,11 @@
 ﻿using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        private Expression IntervalExpression(elm.Interval ie, ExpressionBuilderContext ctx)
+        private Expression IntervalExpression(Elm.Interval ie, ExpressionBuilderContext ctx)
         {
             var lowClosed = ie.lowClosedExpression != null
                 ? TranslateExpression(ie.lowClosedExpression, ctx)
@@ -23,13 +22,13 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        private Expression Ratio(elm.Ratio re, ExpressionBuilderContext ctx)
+        private Expression Ratio(Elm.Ratio re, ExpressionBuilderContext ctx)
         {
-            var numExpr = new elm.Quantity();
+            var numExpr = new Elm.Quantity();
             numExpr.value = re.numerator!.value;
             numExpr.unit = re.numerator!.unit;
 
-            var denomExpr = new elm.Quantity();
+            var denomExpr = new Elm.Quantity();
             denomExpr.value = re.denominator!.value;
             denomExpr.unit = re.denominator!.unit;
 
@@ -39,7 +38,7 @@ namespace Hl7.Cql.Compiler
             return OperatorBinding.Bind(CqlOperator.Ratio, ctx.RuntimeContextParameter, numExprTranslated, denomExprTranslated);
         }
 
-        private Expression Quantity(elm.Quantity quantityExpression, ExpressionBuilderContext ctx) =>
+        private Expression Quantity(Elm.Quantity quantityExpression, ExpressionBuilderContext ctx) =>
             OperatorBinding.Bind(CqlOperator.Quantity, ctx.RuntimeContextParameter,
                 Expression.Constant(quantityExpression.value, typeof(decimal?)),
                 Expression.Constant(quantityExpression.unit, typeof(string)),

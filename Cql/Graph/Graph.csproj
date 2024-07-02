@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="$(ProjectPath)..\..\cql-sdk.props" />
+	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Graph</AssemblyName>
@@ -20,4 +20,3 @@
 	</ItemGroup>
 
 </Project>
-
