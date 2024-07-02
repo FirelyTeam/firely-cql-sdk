@@ -75,9 +75,7 @@ namespace Hl7.Cql.Packaging
             return asmContext;
         }
 
-#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
         public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
-#pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
           string lib,
           string version,
           LogLevel logLevel = LogLevel.Error,

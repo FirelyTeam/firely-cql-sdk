@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+﻿/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -174,4 +173,3 @@ namespace Hl7.Cql.Runtime
 
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

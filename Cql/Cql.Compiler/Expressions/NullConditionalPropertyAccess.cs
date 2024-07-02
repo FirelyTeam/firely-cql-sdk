@@ -12,7 +12,6 @@ using System.Reflection;
 
 namespace Hl7.Cql.Compiler
 {
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
     /// <summary>
     /// This custom expression represents the null conditional expression in CQL (which looks like a?.b in C#).

@@ -3,9 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<IsPackable>false</IsPackable>
-	</PropertyGroup>
-
-	<PropertyGroup>
+    <NoWarn>$(NoWarn);1591</NoWarn>
 		<FirelySdkVersion>5.8.1</FirelySdkVersion>
 	</PropertyGroup>
 

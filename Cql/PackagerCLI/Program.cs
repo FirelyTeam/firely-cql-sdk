@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-using Hl7.Cql.Packaging;
+﻿using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
