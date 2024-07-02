@@ -6,8 +6,6 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using FluentAssertions;
-using Newtonsoft.Json;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace CoreTests
 {
@@ -17,49 +15,18 @@ namespace CoreTests
         [TestMethod]
         public void Elm_Deseriailze_TupleTypeSpecifier()
         {
-            // var json = @"
-            // {
-            //     ""type"" : ""TupleTypeSpecifier"",
-            //     ""element"" :
-            //      [
-            //         {
-            //           ""type"" : ""TupleElementDefinition"",
-            //           ""elementType"" : {
-            //             ""type"" : ""NamedTypeSpecifier"",
-            //             ""name"" : ""{urn:hl7-org:elm-types:r1}Integer""
-            //               },
-            //       ""name"" : ""Id""
-            //     },
-            //     {
-            //       ""type"" : ""TupleElementDefinition"",
-            //       ""elementType"" : {
-            //         ""type"" : ""NamedTypeSpecifier"",
-            //         ""name"" : ""{urn:hl7-org:elm-types:r1}String""
-            //       },
-            //       ""name"" : ""Name""
-            //     } ]
-            //   }";
-            //
-            // var ts = JsonSerializer.Deserialize<TypeSpecifier>(json, Library.JsonSerializerOptions);
-            // Assert.IsInstanceOfType(ts, typeof(TupleTypeSpecifier));
-            // var tts = (TupleTypeSpecifier)ts;
-            // Assert.IsNotNull(tts.element);
-            // Assert.AreEqual(2, tts.element.Length);
-            // var ted1 = tts.element[0];
-            // Assert.IsNull(ted1.type, "type is a TypeSpecifier, not a string and strict mode is off.");
-            // Assert.IsNotNull(ted1.elementType);
-            // Assert.IsInstanceOfType(ted1.elementType, typeof(NamedTypeSpecifier));
-            // var nts = (NamedTypeSpecifier)ted1.elementType;
-            // Assert.IsNotNull(nts.name);
-            // Assert.AreEqual("{urn:hl7-org:elm-types:r1}Integer", nts.name.Name);
-            //
-            // var ted2 = tts.element[1];
-            // Assert.IsNull(ted2.type, "type is a TypeSpecifier, not a string and strict mode is off.");
-            // Assert.IsNotNull(ted2.elementType);
-            // Assert.IsInstanceOfType(ted2.elementType, typeof(NamedTypeSpecifier));
-            // nts = (NamedTypeSpecifier)ted2.elementType;
-            // Assert.IsNotNull(nts.name);
-            // Assert.AreEqual("{urn:hl7-org:elm-types:r1}String", nts.name.Name);
+            var json = @"
+            {
+                ""type"" : ""ChoiceTypeSpecifier"",
+                ""choice"" : [ {
+                  ""type"" : ""NamedTypeSpecifier"",
+                  ""name"" : ""{http://hl7.org/fhir}CodeableConcept""  } ]                 
+            }";
+
+            var options = Library.BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
+            var ts = JsonSerializer.Deserialize<ChoiceTypeSpecifier>(json, options);
+            var cts = ts.Should().BeOfType<ChoiceTypeSpecifier>().Subject;
+            cts.choice.Should().HaveCount(1);
         }
 
         [TestMethod]
@@ -94,7 +61,10 @@ namespace CoreTests
             if (actual is JsonValue actualValue)
             {
                 if (expectedValue.ToString() != actualValue.ToString())
-                    return new List<string> { $"Expected value '{expectedValue}', but found actual value '{actualValue}' at {actual.GetPath()}." };
+                    return new List<string>
+                    {
+                        $"Expected value '{expectedValue}', but found actual value '{actualValue}' at {actual.GetPath()}."
+                    };
             }
             else
                 return new List<string> { $"Expected value, but found '{actual.GetType()}' at {actual.GetPath()}." };
@@ -140,7 +110,8 @@ namespace CoreTests
                     }
                     else
                     {
-                        result.Add($"Expected key '{key}' (value '{expectedObj[key]}') not found in actual object. At {actual.GetPath()}.");
+                        result.Add(
+                            $"Expected key '{key}' (value '{expectedObj[key]}') not found in actual object. At {actual.GetPath()}.");
                     }
                 }
 

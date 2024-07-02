@@ -26,7 +26,7 @@ public partial class Library
     private static JsonSerializerOptions JsonDeserializerOptions =
         BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
 
-    private static JsonSerializerOptions BuildSerializerOptions(bool allowOldStyleTypeDiscriminators = false)
+    internal static JsonSerializerOptions BuildSerializerOptions(bool allowOldStyleTypeDiscriminators = false)
     {
         var options = new JsonSerializerOptions
         {
