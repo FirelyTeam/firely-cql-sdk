@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-internal class ExpressionBuilder
+internal partial class ExpressionBuilder
 {
     internal readonly CqlOperatorsBinder _cqlOperatorsBinder;
     internal readonly CqlContextBinder _cqlContextBinder;

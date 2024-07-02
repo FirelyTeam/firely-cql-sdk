@@ -16,6 +16,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Elm.Serialization;
 
 namespace Hl7.Cql.Elm;
 

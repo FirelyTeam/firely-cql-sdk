@@ -35,15 +35,12 @@ namespace Hl7.Cql.Comparers
             else if (y == null)
                 return 1;
 
-            var onlyNull = true;
-            var notEmpty = false;
             var lit = x!.GetEnumerator();
             var rit = y!.GetEnumerator();
             while (lit.MoveNext())
             {
                 if (!rit.MoveNext())
                     return 1;
-                notEmpty = true;
                 var lv = lit.Current;
                 var rv = rit.Current;
                 if (lv == null)
@@ -53,7 +50,6 @@ namespace Hl7.Cql.Comparers
                 else if (rv == null) return 1;
                 else
                 {
-                    onlyNull = false;
                     var compare = ElementComparer.Compare(lv!, rv!, null);
                     if (compare != 0)
                         return compare;
@@ -62,10 +58,7 @@ namespace Hl7.Cql.Comparers
             if (rit.MoveNext()) // the 2nd list is longer than the 1st.
                 return 1;
 
-            if (notEmpty && onlyNull)
-                return -1;
-            else
-                return 0;
+            return 0;
         }
 
         public bool? Equals(object? x, object? y, string? precision = null) =>

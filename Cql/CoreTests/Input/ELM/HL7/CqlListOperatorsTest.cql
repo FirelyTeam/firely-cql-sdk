@@ -669,7 +669,7 @@ define "quantityList":
   { 19.99 'kg', 17.33 'kg', 10.66 'kg' } = { 19.99 'kg', 17.33 'kg', 10.66 'kg' }
 
 define "dateTimeList":
-  { DateTime(2016), DateTime(2015), DateTime(2010)} = { @2016, @2015, @2010 }
+  { DateTime(2016), DateTime(2015), DateTime(2010)} = { @2016T, @2015T, @2010T }
 
 define "timeList":
   { @T15:59:59.999, @T15:12:59.999, @T15:12:13.999 } = { @T15:59:59.999, @T15:12:59.999, @T15:12:13.999 }

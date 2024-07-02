@@ -6,6 +6,7 @@
 		<IsPackable>false</IsPackable>
 		<Nullable>disable</Nullable>
 		<NoWarn>CS1591</NoWarn>
+		<!-- merge <NoWarn>CS1591;CS0618</NoWarn> -->
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks> <!-- Unsafe needed in order to test CSharpFormatter on pointer types -->
 	</PropertyGroup>
 
@@ -60,11 +61,5 @@
 		<None Update="Input\ValueSets\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update="HL7Tests.*.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
 	</ItemGroup>
 </Project>

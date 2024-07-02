@@ -1,0 +1,44 @@
+﻿#nullable enable
+Hl7.Cql.CqlToElm.CqlToElmOptions
+Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.CqlToElmOptions() -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.EnableIntervalDemotion.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.EnableIntervalDemotion.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.EnableIntervalPromotion.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.EnableIntervalPromotion.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListDemotion.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListDemotion.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListPromotion.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListPromotion.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.Input.get -> string?
+Hl7.Cql.CqlToElm.CqlToElmOptions.Input.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.LongsRequireSuffix.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.LongsRequireSuffix.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.get -> string?
+Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelVersion.get -> string?
+Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelVersion.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateIntervals.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateIntervals.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.set -> void
+Hl7.Cql.CqlToElm.IModelProvider
+Hl7.Cql.CqlToElm.IModelProvider.Add(Hl7.Cql.Model.ModelInfo! model) -> Hl7.Cql.CqlToElm.IModelProvider!
+Hl7.Cql.CqlToElm.IModelProvider.TryGetConversionFunctionName(string! fromQualifiedTypeName, string! toQualifiedTypeName, out string? conversionFunctionName) -> bool
+Hl7.Cql.CqlToElm.IModelProvider.TryGetConversionFunctions(string! fromQualifiedTypeName, out (string! To, string! Function)[]? conversions) -> bool
+Hl7.Cql.CqlToElm.IModelProvider.TryGetModelFromName(string! name, out Hl7.Cql.Model.ModelInfo? model, string? version = null) -> bool
+Hl7.Cql.CqlToElm.IModelProvider.TryGetModelFromUri(string! uri, out Hl7.Cql.Model.ModelInfo? model, string? version = null) -> bool
+Hl7.Cql.CqlToElm.ModelProvider
+static Hl7.Cql.CqlToElm.ModelProvider.GetBaseType(Hl7.Cql.CqlToElm.IModelProvider! provider, Hl7.Cql.Elm.TypeSpecifier! type) -> Hl7.Cql.Elm.NamedTypeSpecifier?
+static Hl7.Cql.CqlToElm.ModelProvider.GetModelFromName(this Hl7.Cql.CqlToElm.IModelProvider! provider, string! name, string? version = null) -> Hl7.Cql.Model.ModelInfo!
+static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ChoiceTypeSpecifier! cts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.ChoiceTypeSpecifier!
+static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.IntervalTypeSpecifier! its, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
+static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ListTypeSpecifier! lts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.ListTypeSpecifier!
+static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.NamedTypeSpecifier! nts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ParameterTypeSpecifier! pts) -> Hl7.Cql.Elm.ParameterTypeSpecifier!
+static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TupleTypeSpecifier! tts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TupleTypeSpecifier!
+static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TupleTypeSpecifierElement! ttse, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TupleElementDefinition!
+static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TypeSpecifier! ts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TypeSpecifier!
+static Hl7.Cql.CqlToElm.ModelProvider.TryGetTypeInfoFor(this Hl7.Cql.Model.ModelInfo! model, string! name, out Hl7.Cql.Model.TypeInfo? result) -> bool
+static readonly Hl7.Cql.CqlToElm.CqlToElmOptions.Default -> Hl7.Cql.CqlToElm.CqlToElmOptions!
