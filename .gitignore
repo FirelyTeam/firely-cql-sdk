@@ -394,3 +394,9 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 /Demo/Elm/build.txt
 /Demo/Cql/Build/target/**/*.*
 /Demo/build.txt
+
+# JetBrains 
+.idea
+
+# MacOS X 
+.DS_Store
