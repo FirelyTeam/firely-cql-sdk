@@ -898,6 +898,8 @@ static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.J
 ~Hl7.Cql.Elm.CqlToElmError.targetIncludeLibrarySystem.set -> void
 ~Hl7.Cql.Elm.CqlToElmError.targetIncludeLibraryVersionId.get -> string
 ~Hl7.Cql.Elm.CqlToElmError.targetIncludeLibraryVersionId.set -> void
+~Hl7.Cql.Elm.CqlToElmInfo.signatureLevel.get -> string
+~Hl7.Cql.Elm.CqlToElmInfo.signatureLevel.set -> void
 ~Hl7.Cql.Elm.CqlToElmInfo.translatorOptions.get -> string
 ~Hl7.Cql.Elm.CqlToElmInfo.translatorOptions.set -> void
 ~Hl7.Cql.Elm.CqlToElmInfo.translatorVersion.get -> string
