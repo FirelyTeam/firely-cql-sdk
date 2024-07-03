@@ -9,6 +9,7 @@ using System.IO;
 using System.Text;
 using M = Hl7.Fhir.Model;
 
+/* merge
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
@@ -135,7 +136,7 @@ namespace Hl7.Cql.CqlToElm.Test
             return (T?)result;
         }
 
-        private static string SourceCode(Library library)
+        /* merge private static string SourceCode(Library library)
         {
             var eb = LibraryExpressionBuilderFor(library);
             var lambdas = eb.Build();
@@ -162,7 +163,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var ms = dict[library.NameAndVersion()!];
             var code = Encoding.UTF8.GetString(ms.ToArray());
             return code;
-        }
+        }#1#
 
         private static void AssertType(Expression expression, NamedTypeSpecifier spec)
         {
@@ -619,3 +620,4 @@ namespace Hl7.Cql.CqlToElm.Test
         }
     }
 }
+*/

@@ -134,7 +134,7 @@ partial class ExpressionBuilderContext
         };
 
     [DebuggerStepThrough]
-    private Expression TranslateArg<TArg>(TArg? arg) =>
+    internal Expression TranslateArg<TArg>(TArg? arg) =>
         arg switch
         {
             Expression expression => expression,

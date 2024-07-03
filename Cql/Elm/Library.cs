@@ -135,6 +135,18 @@ public partial class Library
         return library;
     }
 
+    /// <summary>
+    /// Writes this library in JSON format to <paramref name="stream"/>.
+    /// </summary>
+    /// <param name="stream">A writable stream.</param>
+    /// <param name="writeIndented">If <see langword="true" />, formats the JSON with indenting.</param>
+    public void WriteJson(Stream stream, bool writeIndented = true)
+    {
+        var options = GetSerializerOptions(false);
+        options.WriteIndented = writeIndented;
+        JsonSerializer.Serialize(stream, this, options);
+    }
+
     public static IEqualityComparer<Library> EqualityComparerByNameAndVersion { get; } =
         EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion(true)!);
 

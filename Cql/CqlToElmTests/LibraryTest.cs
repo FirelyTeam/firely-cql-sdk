@@ -743,7 +743,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private concept Name: { ""code1"", ""code2"", ""code3"" } display 'My concept'
             ");
             var lib = LibraryExpressionBuilderFor(library);
-            _ = lib.Build();
+            _ = lib.ProcessLibrary(library);
         }
 
 
