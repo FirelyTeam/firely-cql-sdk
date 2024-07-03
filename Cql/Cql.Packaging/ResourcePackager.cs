@@ -16,6 +16,7 @@ using Hl7.Fhir.Model;
 using FhirLibrary = Hl7.Fhir.Model.Library;
 using Annotation = Hl7.Cql.Elm.Annotation;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
+using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Packaging;
 
@@ -206,7 +207,7 @@ internal class ResourcePackager
         var library = new FhirLibrary();
         library.Content.Add(attachment);
         library.Type = LogicLibraryCodeableConcept;
-        string libraryId = $"{elmLibrary!.NameAndVersion()}";
+        string libraryId = $"{elmLibrary!.identifier.id}";
         library.Id = libraryId!;
         library.Version = elmLibrary!.identifier?.version!;
         library.Name = elmLibrary!.identifier?.id!;
@@ -240,11 +241,12 @@ internal class ResourcePackager
 
         foreach (var include in elmLibrary?.includes ?? [])
         {
-            var includeId = $"{include.path}-{include.version}";
+            string includeVersionString = string.IsNullOrEmpty(include.version) ? string.Empty : $"|{include.version}";
+            string includeIdMaybeVersion = $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}Library/{include.path}{includeVersionString}";
             library.RelatedArtifact.Add(new RelatedArtifact
             {
                 Type = RelatedArtifact.RelatedArtifactType.DependsOn,
-                Resource = includeId,
+                Resource = includeIdMaybeVersion,
             });
         }
 
