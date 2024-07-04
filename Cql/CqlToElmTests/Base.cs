@@ -57,14 +57,12 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
         {
-
             Services = ServiceCollection(options).BuildServiceProvider();
 
-            var lib = new Library
-            {
-                identifier = new VersionedIdentifier { id = "Lambdas", version = "1.0.0" }
-            };
-            LibraryExpressionBuilder = LibraryExpressionBuilderFor(lib);
+            var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
+            var cqlCompilerFactory = new CqlCompilerFactory(loggerFactory, cancellationToken: default, cacheSize: default);
+            var libraryExpressionBuilder = cqlCompilerFactory.LibraryExpressionBuilder;
+            LibraryExpressionBuilder = libraryExpressionBuilder;
         }
 
 
@@ -72,7 +70,7 @@ namespace Hl7.Cql.CqlToElm.Test
         protected virtual Library ConvertLibrary(IServiceProvider services, string cql) =>
             services.GetRequiredService<CqlToElmConverter>().ConvertLibrary(cql);
 
-       
+
         internal static Library MakeLibrary(string cql, params string[] expectedErrors)
         {
             var library = ConvertLibrary(cql);
@@ -105,31 +103,19 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static T? Run<T>(Expression expression, CqlContext? ctx = null) =>
             (T?)Run(expression, ctx);
 
-        internal static object? Run(Library library,
+        internal static object? Run(
+            Library library,
             Func<DefinitionDictionary<Delegate>, CqlContext> ctxFactory,
             string definition,
             params object[] args)
         {
-            var eb = LibraryExpressionBuilderFor(library);
+            var eb = LibraryExpressionBuilder;
             var lambdas = eb.ProcessLibrary(library);
             var delegates = lambdas.CompileAll();
             var dg = delegates[library.NameAndVersion(), definition];
             var ctx = ctxFactory(delegates);
             var result = dg.DynamicInvoke(new[] { ctx }.Concat(args).ToArray());
             return result;
-        }
-
-        internal static LibraryExpressionBuilder LibraryExpressionBuilderFor(Library lib)
-        {
-            var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
-            var cqlCompilerFactory = new CqlCompilerFactory(loggerFactory, cancellationToken: default, cacheSize: default);
-            return cqlCompilerFactory.LibraryExpressionBuilder;
-            // var tr = FhirTypeResolver.Default;
-            // var tc = FhirTypeConverter.Default;
-            // var tm = new TypeManager(tr);
-            // var binding = new CqlOperatorsBinding(tr, tc);
-            // var expressionBuilder = new LibraryExpressionBuilder(binding, tm, lib, logger);
-            // return expressionBuilder;
         }
 
         public void AssertResult<T>(Expression be, T expected)
@@ -254,7 +240,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private ""{memberName}"": {expression}");
         }
 
-        protected Library ExpectErrorsForExpression(string expression, 
+        protected Library ExpectErrorsForExpression(string expression,
             params string[] expectedErrors)
         {
             return MakeLibrary($@"

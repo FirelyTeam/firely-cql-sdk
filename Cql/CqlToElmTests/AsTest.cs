@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var nts = (NamedTypeSpecifier)@as.asTypeSpecifier;
                 Assert.AreEqual($"{{{SystemUri}}}Vocabulary", nts.name?.Name);
 
-                var eb = LibraryExpressionBuilderFor(library);
+                var eb = LibraryExpressionBuilder;
                 var delegates = eb.ProcessLibrary(library).CompileAll();
                 var dg = delegates["AsTest-1.0.0", "ValueSet_As_Vocabulary"];
                 var ctx = FhirCqlContext.ForBundle(delegates: delegates);

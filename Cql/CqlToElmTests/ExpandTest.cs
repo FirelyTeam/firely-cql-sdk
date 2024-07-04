@@ -33,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var lib = CreateLibraryForExpression("expand { Interval [1, 10] } per 2");
             var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
         }
-            
+
 
         [TestMethod]
         public void Expand_List_Interval()

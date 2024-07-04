@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static T? Run<T>(Library library, string member, Hl7.Fhir.Model.Bundle? bundle = null)
         {
-            var eb = LibraryExpressionBuilderFor(library);
+            var eb = GetLibraryExpressionBuilder(library);
             var lambdas = eb.Build();
             var delegates = lambdas.CompileAll();
             var dg = delegates[library.NameAndVersion, member];
@@ -138,7 +138,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         /* merge private static string SourceCode(Library library)
         {
-            var eb = LibraryExpressionBuilderFor(library);
+            var eb = GetLibraryExpressionBuilder(library);
             var lambdas = eb.Build();
             var writerLogger = LoggerFactory
                  .Create(logging => logging.AddDebug())
