@@ -550,6 +550,10 @@
 			<expression>Length(null as List&lt;Any&gt;)</expression>
 			<output>0</output>
 		</test>
+		<test name="LengthNullString">
+			<expression>Length(null as String)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Equivalent">
 		<test name="EquivalentEmptyAndEmpty">

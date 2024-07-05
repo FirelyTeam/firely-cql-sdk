@@ -34,8 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
         private static ElmFactory ElmFactory = Services.GetRequiredService<ElmFactory>();
 
 
-        [DynamicData(nameof(GetTests), DynamicDataSourceType.Method,
-            DynamicDataDisplayName = nameof(DisplayName))]
+        [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]
         [TestMethod]
         public void Run(TestCase testCase)
         {

@@ -25,5 +25,14 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = Run<int?>(length);
             result.Should().BeNull();
         }
+
+        [TestMethod]
+        public void LengthNullList()
+        {
+            var library = CreateLibraryForExpression("Length(null as List<Integer>)");
+            var length = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Length>();
+            var result = Run<int?>(length);
+            result.Should().Be(0);
+        }
     }
 }
