@@ -219,13 +219,16 @@ partial class ExpressionBuilderContext
                         && expression?.Type != null
                         && resultType != expression!.Type)
                     {
-                        _logger.LogDebug(
-                             "Changing result type from {fromType} to {toType} for {elementType} {elementLocator}",
-                             expression!.Type.ToCSharpString(Defaults.TypeCSharpFormat),
-                             resultType.ToCSharpString(Defaults.TypeCSharpFormat),
-                             element.GetType().Name,
-                             element.locator);
-                        expression = ChangeType(expression, resultType);
+                        if (_cqlOperatorsBinder.TryConvert(expression, resultType, out var result))
+                        {
+                            _logger.LogDebug(
+                                "Changing expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
+                                element.GetType().Name,
+                                element.locator,
+                                resultType.ToCSharpString(Defaults.TypeCSharpFormat),
+                                expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
+                            expression = result.arg;
+                        }
                     }
                 }
 
