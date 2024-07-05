@@ -2139,7 +2139,13 @@ partial class ExpressionBuilderContext
                                               throw this.NewExpressionBuildingException(
                                                   $"{type} was expected to be a list type.");
                         var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
-                        var elmAs = new ElmAsExpression(newArray, type);
+                        var elmAs = new ElmAsExpression(newArray, type, @as.strict);
+                        return elmAs;
+                    }
+                    else if (type == _typeResolver.AnyType) // handles untyped empty lists whose type is Any
+                    {
+                        var newArray = Expression.NewArrayBounds(_typeResolver.AnyType, Expression.Constant(0));
+                        var elmAs = new ElmAsExpression(newArray, type, @as.strict);
                         return elmAs;
                     }
 
@@ -2158,13 +2164,13 @@ partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!);
                     var defaultExpression = Expression.Default(type);
-                    return new ElmAsExpression(defaultExpression, type);
+                    return new ElmAsExpression(defaultExpression, type, @as.strict);
                 }
                 else
                 {
                     var type = TypeFor(@as.asTypeSpecifier!);
                     var operand = TranslateArg(@as.operand!);
-                    return new ElmAsExpression(operand, type);
+                    return new ElmAsExpression(operand, type, @as.strict);
                 }
             }
         }
@@ -2187,7 +2193,7 @@ partial class ExpressionBuilderContext
                                        @as.operand));
             }
 
-            return new ElmAsExpression(operand, type);
+            return new ElmAsExpression(operand, type, @as.strict);
         }
     }
 

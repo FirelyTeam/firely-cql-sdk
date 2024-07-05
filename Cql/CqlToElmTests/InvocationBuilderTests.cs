@@ -109,7 +109,7 @@ namespace Hl7.Cql.CqlToElm.Test
             result.Compatible.Should().BeFalse();
             Assert.IsTrue(result.HasTooManyArguments);
         }
-        
+
         [TestMethod]
         public void MatchSimpleGeneric()
         {
