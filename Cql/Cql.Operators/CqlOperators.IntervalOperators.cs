@@ -628,11 +628,11 @@ namespace Hl7.Cql.Runtime
                 var overlapsAfter = OverlapsAfterHelper(left, right, null, toClosed);
                 if (overlapsBefore == true && overlapsAfter == false)
                 {
-                    return new CqlInterval<T?>(left.low, right.low, left.lowClosed, !right.lowClosed);
+                    return toClosed(new CqlInterval<T?>(left.low, right.low, left.lowClosed, !right.lowClosed));
                 }
                 if (overlapsAfter == true && overlapsBefore == false)
                 {
-                    return new CqlInterval<T?>(right.high, left.high, !right.highClosed, left.highClosed);
+                    return toClosed(new CqlInterval<T?>(right.high, left.high, !right.highClosed, left.highClosed));
                 }
                 return null;
             }

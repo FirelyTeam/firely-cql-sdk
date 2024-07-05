@@ -223,26 +223,36 @@ internal partial class CqlOperatorsBinder
                 }
                 else
                 {
-                    // Generic method, figure out the generic type by the first two arguments
-                    for (int argIndexForGenericMethod = 0;
-                         argIndexForGenericMethod < Math.Min(args.Length, 2);
-                         argIndexForGenericMethod
-                             ++) // Try to get generic type from argument up to the second one
+                    IEnumerable<Type> GetGenericTypeArgs()
                     {
-                        Type? genericTypeArg = null;
-                        var argType = args[argIndexForGenericMethod].Type;
-                        var parameterType = methodParameters[i].ParameterType;
-                        var argIsGeneric = argType.IsGenericType;
-                        var paramIsGeneric = parameterType.IsGenericMethodParameter;
+                        for (int argIndexForGenericMethod = 0;
+                             argIndexForGenericMethod < Math.Min(args.Length, 2);
+                             argIndexForGenericMethod++) // Try to get generic type from argument up to the second one
+                        {
+                            var argType = args[argIndexForGenericMethod].Type;
+                            var parameterType = methodParameters[i].ParameterType;
+                            var argIsGeneric = argType.IsGenericType;
+                            var paramIsGeneric = parameterType.IsGenericMethodParameter;
 
-                        if (paramIsGeneric && !argIsGeneric)
-                            genericTypeArg = argType; // Already a generic argument, try again
-                        else if (argIsGeneric)
-                            genericTypeArg = argType.GetGenericArguments().Single();
+                            if (paramIsGeneric && !argIsGeneric)
+                                yield return argType; // Already a generic argument, try again
+                            else if (argIsGeneric)
+                            {
+                                yield return argType;
+                                yield return argType.GetGenericArguments().Single();
+                            }
+                        }
+                    }
 
-                        if (genericTypeArg is null)
-                            continue; // Not a generic argument, try again
+                    var genericTypeArgs =
+                        GetGenericTypeArgs()
+#if DEBUG
+                            .ToArray() // Helps debugging
+#endif
+                        ;
 
+                    foreach (var genericTypeArg in genericTypeArgs)
+                    {
                         MethodInfo genericMethod;
                         try
                         {
