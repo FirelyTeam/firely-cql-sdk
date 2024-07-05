@@ -211,6 +211,24 @@ partial class ExpressionBuilderContext
                     //@formatter:on
                 };
 
+                if (element.resultTypeName != null || element.resultTypeSpecifier != null)
+                {
+                    var resultType = TypeFor(element, false);
+                    if (
+                        resultType != null
+                        && expression?.Type != null
+                        && resultType != expression!.Type)
+                    {
+                        _logger.LogDebug(
+                             "Changing result type from {fromType} to {toType} for {elementType} {elementLocator}",
+                             expression!.Type.ToCSharpString(Defaults.TypeCSharpFormat),
+                             resultType.ToCSharpString(Defaults.TypeCSharpFormat),
+                             element.GetType().Name,
+                             element.locator);
+                        expression = ChangeType(expression, resultType);
+                    }
+                }
+
                 expression = Mutate(element, expression);
                 return expression!;
             }

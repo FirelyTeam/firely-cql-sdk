@@ -1693,7 +1693,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var ceiling = input.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Ceiling>();
             var output = CreateLibraryForExpression("1");
             var literal = output.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            var context = FhirCqlContext.ForBundle();
+            // var context = FhirCqlContext.ForBundle();
             var equalsOverload = InvocationBuilder.MatchSignature(SystemLibrary.Equal, new Expression[] { ceiling, literal });
             equalsOverload.Compatible.Should().BeTrue();
             var invokeEquals = InvocationBuilder.Invoke(equalsOverload, null);

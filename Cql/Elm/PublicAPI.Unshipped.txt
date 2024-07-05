@@ -390,6 +390,7 @@ Hl7.Cql.Elm.Library
 Hl7.Cql.Elm.Library.GetVersionedIdentifier(bool throwError = true) -> Hl7.Cql.Elm.VersionedIdentifier?
 Hl7.Cql.Elm.Library.Library() -> void
 Hl7.Cql.Elm.Library.NameAndVersion(bool throwError = true) -> string?
+Hl7.Cql.Elm.Library.WriteJson(System.IO.Stream! stream, bool writeIndented = true) -> void
 Hl7.Cql.Elm.List
 Hl7.Cql.Elm.List.List() -> void
 Hl7.Cql.Elm.ListTypeSpecifier
