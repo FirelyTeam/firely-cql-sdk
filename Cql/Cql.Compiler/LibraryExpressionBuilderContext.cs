@@ -70,6 +70,8 @@ internal partial class LibraryExpressionBuilderContext
                 }
             }
 
+            AddCodeSystemRefs(Library);
+
             if (Library.codes is { Length: > 0 } codeDefs)
             {
                 HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();

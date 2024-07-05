@@ -126,15 +126,15 @@ partial class LibraryExpressionBuilderContext
         }
 
         AddCodeSystemRefs(Library);
+    }
 
-        void AddCodeSystemRefs(Library library)
+    private void AddCodeSystemRefs(Library library)
+    {
+        if (library.codeSystems is { Length: > 0 } codeSystemDefs)
         {
-            if (library.codeSystems is { Length: > 0 } codeSystemDefs)
+            foreach (var codeSystemDef in codeSystemDefs)
             {
-                foreach (var codeSystemDef in codeSystemDefs)
-                {
-                    _codeSystemIdsByCodeSystemRefs.Add(new(library.NameAndVersion()!, codeSystemDef.name), codeSystemDef.id);
-                }
+                _codeSystemIdsByCodeSystemRefs.Add(new(library.NameAndVersion()!, codeSystemDef.name), codeSystemDef.id);
             }
         }
     }
