@@ -3598,7 +3598,7 @@ namespace CoreTests
             Assert.IsNotNull(meets);
             Assert.IsTrue(meets ?? false);
 
-            // Interval[null, 2022-12-31] meets Interval[2024-01-01, null] returns false 
+            // Interval[null, 2022-12-31] meets Interval[2024-01-01, null] returns false
             meets = rtx.Operators.Meets(
                 new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
                 new CqlInterval<CqlDate>(new CqlDate(2023, 7, 1), null, true, true),
