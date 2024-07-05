@@ -179,7 +179,7 @@ public class NCQAClaims_1_0_0
 				{
 					if ((ClaimofInterest is null))
 					{
-						return null;
+						return (null as IEnumerable<Claim.ItemComponent>);
 					}
 					else
 					{
@@ -277,7 +277,7 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return null;
+							return (null as Tuple_GDUUTAIXZafehWFjcGfNKBcTd);
 						}
 					};
 
@@ -334,7 +334,7 @@ public class NCQAClaims_1_0_0
 				{
 					if ((ClaimofInterest is null))
 					{
-						return null;
+						return (null as IEnumerable<Claim.ItemComponent>);
 					}
 					else
 					{
@@ -462,7 +462,7 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return null;
+							return (null as Tuple_GDUUTAIXZafehWFjcGfNKBcTd);
 						}
 					};
 
@@ -516,7 +516,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithDiagnosis?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{
@@ -630,7 +630,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_CWDDWHRXGADEbdaKXCdKbgEfg);
 					}
 				};
 				var aq_ = new Tuple_CWDDWHRXGADEbdaKXCdKbgEfg[]
@@ -830,7 +830,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return null;
+									return (null as CqlInterval<CqlDateTime>);
 								}
 							};
 							var be_ = new Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN
@@ -906,7 +906,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return null;
+									return (null as Tuple_GGLURZZjYLMjhaMLVbjKOcMAY);
 								}
 							};
 
@@ -978,7 +978,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithDiagnosis?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{
@@ -1200,7 +1200,7 @@ public class NCQAClaims_1_0_0
 							}
 							else
 							{
-								return null;
+								return (null as Tuple_GDUUTAIXZafehWFjcGfNKBcTd);
 							}
 						};
 
@@ -1488,7 +1488,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return null;
+									return (null as Tuple_GDUUTAIXZafehWFjcGfNKBcTd);
 								}
 							};
 
@@ -1552,7 +1552,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithDiagnosis?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{
@@ -1645,7 +1645,7 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return null;
+							return (null as Tuple_CWDDWHRXGADEbdaKXCdKbgEfg);
 						}
 					};
 
@@ -2116,7 +2116,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 					}
 				};
 				var av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
@@ -2167,7 +2167,7 @@ public class NCQAClaims_1_0_0
 				};
 				if (k_())
 				{
-					return null;
+					return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 				}
 				else
 				{
@@ -2554,7 +2554,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 					}
 				};
 				var av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
@@ -2605,7 +2605,7 @@ public class NCQAClaims_1_0_0
 				};
 				if (g_())
 				{
-					return null;
+					return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 				}
 				else
 				{
@@ -2883,7 +2883,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 					}
 				};
 				var av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
@@ -2934,7 +2934,7 @@ public class NCQAClaims_1_0_0
 				};
 				if (g_())
 				{
-					return null;
+					return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 				}
 				else
 				{
@@ -3179,7 +3179,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return null;
+									return (null as CqlInterval<CqlDate>);
 								}
 							};
 
@@ -3197,7 +3197,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV);
 					}
 				};
 				var av_ = new Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV[]
@@ -3248,7 +3248,7 @@ public class NCQAClaims_1_0_0
 				};
 				if (g_())
 				{
-					return null;
+					return (null as Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV);
 				}
 				else
 				{
@@ -3372,7 +3372,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithInpatientStay?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{
@@ -3412,7 +3412,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithInpatientStay?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{

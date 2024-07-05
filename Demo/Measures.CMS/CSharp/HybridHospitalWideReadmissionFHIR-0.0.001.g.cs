@@ -471,7 +471,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var x_ = new Tuple_GIbILVAdXLLNYBgcQIEiUiKaK
 			{
 				EncounterId = e_,
-				FirstTemperatureResult = n_,
+				FirstTemperatureResult = (n_ as CqlQuantity),
 				Timing = w_,
 			};
 
@@ -595,7 +595,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var x_ = new Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ
 			{
 				EncounterId = e_,
-				FirstHeartRateResult = n_,
+				FirstHeartRateResult = (n_ as CqlQuantity),
 				Timing = w_,
 			};
 
@@ -1835,7 +1835,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var x_ = new Tuple_CYbMQaXdPgTVSLXJSHHNTbhVM
 			{
 				EncounterId = e_,
-				FirstRespRateResult = n_,
+				FirstRespRateResult = (n_ as CqlQuantity),
 				Timing = w_,
 			};
 
@@ -2862,7 +2862,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			var x_ = new Tuple_HDVhZFAYAdGHPZJWcDFSNFGPd
 			{
 				EncounterId = e_,
-				FirstResult = n_,
+				FirstResult = (n_ as CqlQuantity),
 				Timing = w_,
 			};
 

@@ -50,7 +50,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((period is null))
 			{
-				return null;
+				return (null as CqlInterval<CqlDateTime>);
 			}
 			else
 			{
@@ -72,7 +72,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((range is null))
 			{
-				return null;
+				return (null as CqlInterval<CqlQuantity>);
 			}
 			else
 			{

@@ -38,7 +38,7 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((period is null))
 			{
-				return null;
+				return (null as CqlInterval<CqlDateTime>);
 			}
 			else if ((period?.StartElement is null))
 			{
@@ -72,7 +72,7 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((quantity is null))
 			{
-				return null;
+				return (null as CqlInterval<CqlQuantity>);
 			}
 			else
 			{
@@ -166,7 +166,7 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((range is null))
 			{
-				return null;
+				return (null as CqlInterval<CqlQuantity>);
 			}
 			else
 			{
@@ -667,7 +667,7 @@ public class FHIRHelpers_4_3_000
 			}
 			else
 			{
-				return value;
+				return (value as object);
 			}
 		};
 

@@ -664,7 +664,7 @@ public class NCQACQLBase_1_0_0
 			};
 			if (r_())
 			{
-				return null;
+				return (null as CqlInterval<CqlDate>);
 			}
 			else
 			{
@@ -1210,7 +1210,7 @@ public class NCQACQLBase_1_0_0
 			};
 			if (t_())
 			{
-				return null;
+				return (null as CqlInterval<CqlDateTime>);
 			}
 			else
 			{

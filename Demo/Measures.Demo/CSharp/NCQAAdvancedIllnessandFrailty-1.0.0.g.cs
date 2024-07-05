@@ -423,7 +423,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			}
 			else
 			{
-				return null;
+				return (null as IEnumerable<CqlDate>);
 			}
 		};
 

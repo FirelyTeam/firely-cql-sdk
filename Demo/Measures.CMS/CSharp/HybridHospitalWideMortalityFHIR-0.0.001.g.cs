@@ -456,7 +456,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			var x_ = new Tuple_GIbILVAdXLLNYBgcQIEiUiKaK
 			{
 				EncounterId = e_,
-				FirstTemperatureResult = n_,
+				FirstTemperatureResult = (n_ as CqlQuantity),
 				Timing = w_,
 			};
 
@@ -580,7 +580,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			var x_ = new Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ
 			{
 				EncounterId = e_,
-				FirstHeartRateResult = n_,
+				FirstHeartRateResult = (n_ as CqlQuantity),
 				Timing = w_,
 			};
 
