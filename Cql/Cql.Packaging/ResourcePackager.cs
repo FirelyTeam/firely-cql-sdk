@@ -250,6 +250,16 @@ internal class ResourcePackager
             });
         }
 
+        var cqlOptions = CqlToElmInfoToFhir(elmLibrary!, typeCrosswalk);
+        if (cqlOptions!.Any())
+        {
+            var p = new Parameters();
+            p.Id = "options";
+            p.Parameter.AddRange(cqlOptions!);
+            library.Contained = new();
+            library.Contained.Add(p);
+        }
+
         if (cqlFile!.Exists)
         {
             var cqlBytes = File.ReadAllBytes(cqlFile.FullName);
@@ -287,6 +297,46 @@ internal class ResourcePackager
             }
         }
         return library;
+    }
+    private static void AddParameterIfNotNull(List<Parameters.ParameterComponent> parameters, string name, string? value)
+    {   //TODO: use mapper when values in CqlToElmInfo results anything but strings
+        if (!string.IsNullOrEmpty(value))
+        {
+            parameters.Add(new Parameters.ParameterComponent { Name = name, Value = new FhirString(value) });
+        }
+    }
+
+    private static IEnumerable<Parameters.ParameterComponent>? CqlToElmInfoToFhir(Elm.Library elmLibrary, CqlTypeToFhirTypeMapper typeCrosswalk)
+    {     
+        var parameters = new List<Parameters.ParameterComponent>();
+        foreach (var annotation in elmLibrary?.annotation ?? [])
+        {
+            if (annotation is CqlToElmInfo cqlOptions)
+            {                
+                // translatorVersion
+                AddParameterIfNotNull(parameters, nameof(cqlOptions.translatorVersion), cqlOptions.translatorVersion);
+
+                // translatorOptions
+                if (!string.IsNullOrEmpty(cqlOptions.translatorOptions))
+                {
+                    var optionArray = cqlOptions.translatorOptions.Split(',');
+                    foreach (string item in optionArray)
+                    {
+                        AddParameterIfNotNull(parameters, "option", item);
+                    }
+                }
+
+                // signatureLevel
+                AddParameterIfNotNull(parameters, nameof(cqlOptions.signatureLevel), cqlOptions.signatureLevel);
+
+                // compatibilityLevel
+                AddParameterIfNotNull(parameters, "compatibilityLevel", "1.5");
+
+                // format
+                AddParameterIfNotNull(parameters, "format", "JSON");
+            }
+        }
+        return parameters;
     }
 
     private static readonly CodeableConcept LogicLibraryCodeableConcept = new()
