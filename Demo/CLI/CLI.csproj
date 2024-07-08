@@ -22,13 +22,4 @@
 		<PackageReference Include="Dumpify" Version="0.6.5" />
 	</ItemGroup>
 
-
-	<!-- merge? 
-	<ItemGroup>
-		<None Update="Data\*.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-	-->
-
 </Project>
