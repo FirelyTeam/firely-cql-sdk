@@ -7,9 +7,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Hl7.Cql.Runtime;
 using M = Hl7.Fhir.Model;
 
-/* merge
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
@@ -126,17 +126,18 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static T? Run<T>(Library library, string member, Hl7.Fhir.Model.Bundle? bundle = null)
         {
-            var eb = GetLibraryExpressionBuilder(library);
-            var lambdas = eb.Build();
+            var eb = LibraryExpressionBuilder;
+            var lambdas = eb.ProcessLibrary(library);
             var delegates = lambdas.CompileAll();
-            var dg = delegates[library.NameAndVersion, member];
+            var dg = delegates[library.NameAndVersion()!, member];
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: delegates);
             var result = dg.DynamicInvoke(ctx);
             Assert.IsInstanceOfType(result, typeof(T));
             return (T?)result;
         }
 
-        /* merge private static string SourceCode(Library library)
+        /*
+        private static string SourceCode(Library library)
         {
             var eb = GetLibraryExpressionBuilder(library);
             var lambdas = eb.Build();
@@ -163,7 +164,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var ms = dict[library.NameAndVersion()!];
             var code = Encoding.UTF8.GetString(ms.ToArray());
             return code;
-        }#1#
+        }
+        */
 
         private static void AssertType(Expression expression, NamedTypeSpecifier spec)
         {
@@ -620,4 +622,3 @@ namespace Hl7.Cql.CqlToElm.Test
         }
     }
 }
-*/
