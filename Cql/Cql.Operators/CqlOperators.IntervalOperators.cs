@@ -1485,10 +1485,11 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            if (Compare(left.low!, right.high!, precision) == 0)
+            else if (left.low == null && right.high == null)
+                return false;
+            else if (Compare(left.low!, right.high!, precision) == 0)
                 return true;
-
-            if ((left.lowClosed ?? false) && (right.highClosed ?? false) && Compare(predecessor(left.low)!, right.high!, precision) == 0)
+            else if ((left.lowClosed ?? false) && (right.highClosed ?? false) && Compare(predecessor(left.low)!, right.high!, precision) == 0)
                 return true;
 
             return false;
@@ -1591,13 +1592,13 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            if (Compare(left.high!, right.low!, precision) == 0)
+            else if (left.high == null && right.low == null)
+                return false;
+            else if (Compare(left.high!, right.low!, precision) == 0)
                 return true;
-
-            if ((right.lowClosed ?? false) && (left.highClosed ?? false) && Compare(left.high!, predecessor(right.low)!, precision) == 0)
+            else if ((right.lowClosed ?? false) && (left.highClosed ?? false) && Compare(left.high!, predecessor(right.low)!, precision) == 0)
                 return true;
-
-            return false;
+            else return false;
         }
 
         #endregion
@@ -2008,9 +2009,9 @@ namespace Hl7.Cql.Runtime
             if (low < 0)
                 return false;
             if (high > 0)
-                return false;
-            // interval is a unit interval containing only the point
-            if (low == 0 && high == 0)
+                return false;                                        
+            // an element is only properly contained if it is not equal to either endpoint
+            if (low == 0 || high == 0)
                 return false;
             return true;
         }
