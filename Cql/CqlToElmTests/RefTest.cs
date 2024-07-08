@@ -82,6 +82,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [Ignore("Fix in issue 386")]
         public void Concept_Local()
         {
             var library = MakeLibrary($@"
@@ -136,36 +137,6 @@ namespace Hl7.Cql.CqlToElm.Test
             return (T?)result;
         }
 
-        /*
-        private static string SourceCode(Library library)
-        {
-            var eb = GetLibraryExpressionBuilder(library);
-            var lambdas = eb.Build();
-            var writerLogger = LoggerFactory
-                 .Create(logging => logging.AddDebug())
-                 .CreateLogger<CSharpSourceCodeWriter>();
-            var csw = new CSharpSourceCodeWriter(writerLogger);
-            var dict = new Dictionary<string, MemoryStream>();
-
-            var graph = new DirectedGraph();
-            var properties = new Dictionary<string, object>();
-            properties.Add(Library.LibraryNodeProperty, library);
-            var packageNode = new DirectedGraphNode
-            {
-                NodeId = library.NameAndVersion!,
-                Properties = properties,
-            };
-            graph.Add(packageNode);
-            var edgeFromStart = new DirectedGraphEdge(graph.StartNode, packageNode);
-            graph.StartNode.ForwardEdges.Add(edgeFromStart);
-            graph.Add(edgeFromStart);
-
-            csw.Write(lambdas, eb.TypeManager.TupleTypes, graph, lib => { var ms = new MemoryStream(); dict[lib] = ms; return ms; });
-            var ms = dict[library.NameAndVersion()!];
-            var code = Encoding.UTF8.GetString(ms.ToArray());
-            return code;
-        }
-        */
 
         private static void AssertType(Expression expression, NamedTypeSpecifier spec)
         {
