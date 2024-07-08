@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
@@ -32,12 +33,21 @@ partial class CqlOperatorsBinder
         if (result.conversion != TypeConversion.NoMatch)
             return true;
 
-        if (!_typeConverter.CanConvert(from, to))
-            return false;
+        if (CqlOperators.ConversionFunctionName(from, to) is { } functionName)
+        {
+            var convertMethod = BindToBestMethodOverload(functionName, [expression], []);
+            result = (convertMethod, TypeConversion.OperatorConvert);
+            return true;
+        }
 
-        var bindToGenericMethod = BindToBestMethodOverload(nameof(ICqlOperators.Convert), [expression.NewAssignToTypeExpression<object>()], [to]);
-        result = (bindToGenericMethod, TypeConversion.OperatorConvert);
-        return true;
+        if (_typeConverter.CanConvert(from, to))
+        {
+            var bindToGenericMethod = BindToBestMethodOverload(nameof(ICqlOperators.Convert), [expression.NewAssignToTypeExpression<object>()], [to]);
+            result = (bindToGenericMethod, TypeConversion.OperatorConvert);
+            return true;
+        }
+
+        return false;
     }
 
     private MethodCallExpression BindToBestMethodOverload(

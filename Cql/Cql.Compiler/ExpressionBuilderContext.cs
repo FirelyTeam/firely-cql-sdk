@@ -229,6 +229,15 @@ partial class ExpressionBuilderContext
                                 expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
                             expression = result.arg;
                         }
+                        else
+                        {
+                            _logger.LogDebug(
+                                "Failed to change expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
+                                element.GetType().Name,
+                                element.locator,
+                                resultType.ToCSharpString(Defaults.TypeCSharpFormat),
+                                expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
+                        }
                     }
                 }
 
