@@ -7,6 +7,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler.Expressions;
@@ -35,27 +36,37 @@ partial class CqlOperatorsBinder
 
         if (CqlOperators.ConversionFunctionName(from, to) is { } functionName)
         {
-            var convertMethod = BindToBestMethodOverload(functionName, [expression], []);
-            result = (convertMethod, TypeConversion.OperatorConvert);
-            return true;
+            var convertMethod = BindToBestMethodOverload(functionName, [expression], [], throwError: false);
+            if (convertMethod != null)
+            {
+                result = (convertMethod, TypeConversion.OperatorConvert);
+                return true;
+            }
         }
 
         if (_typeConverter.CanConvert(from, to))
         {
-            var bindToGenericMethod = BindToBestMethodOverload(nameof(ICqlOperators.Convert), [expression.NewAssignToTypeExpression<object>()], [to]);
-            result = (bindToGenericMethod, TypeConversion.OperatorConvert);
-            return true;
+            var bindToGenericMethod = BindToBestMethodOverload(nameof(ICqlOperators.Convert), [expression.NewAssignToTypeExpression<object>()], [to], false);
+            if (bindToGenericMethod != null)
+            {
+                result = (bindToGenericMethod, TypeConversion.OperatorConvert);
+                return true;
+            }
         }
 
         return false;
     }
 
-    private MethodCallExpression BindToBestMethodOverload(
+    private MethodCallExpression? BindToBestMethodOverload(
         string methodName,
         Expression[] methodArguments,
-        Type[] genericTypeArguments)
+        Type[] genericTypeArguments,
+        bool throwError=true)
     {
-        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments);
+        var (methodInfo, convertedArgs) = ResolveMethodInfoWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments, throwError);
+        if ((methodInfo, throwError) is (null, false))
+            return null;
+
         try
         {
             var call = Expression.Call(CqlExpressions.Operators_PropertyExpression, methodInfo!, convertedArgs);
@@ -63,7 +74,9 @@ partial class CqlOperatorsBinder
         }
         catch (Exception e)
         {
-            throw new CannotBindToCqlOperatorError(methodName, methodArguments, genericTypeArguments, ICqlOperatorsMethods.GetMethodsByName(methodName)).ToException(e);
+            if (throwError)
+                throw new CannotBindToCqlOperatorError(methodName, methodArguments, genericTypeArguments, ICqlOperatorsMethods.GetMethodsByName(methodName)).ToException(e);
+            return null;
         }
     }
 
