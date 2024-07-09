@@ -82,7 +82,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        [Ignore("Fix in issue 386")]
         public void Concept_Local()
         {
             var library = MakeLibrary($@"

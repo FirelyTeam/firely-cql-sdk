@@ -606,8 +606,8 @@ partial class ExpressionBuilderContext
         if (string.IsNullOrWhiteSpace(conceptRef.name))
             throw this.NewExpressionBuildingException("The concept ref has no name.");
 
-        var type = _typeResolver.CodeType.MakeArrayType();
-        return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, type);
+        var conceptType = TypeFor(conceptRef)!;
+        return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, conceptType);
     }
 
     protected Expression Instance(Instance ine)
