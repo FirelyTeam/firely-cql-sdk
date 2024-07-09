@@ -11,6 +11,14 @@
     "DocumentationofCurrentMedicationsFHIR-0.2.000": {
       "commandName": "Project",
       "commandLineArgs": "--l DocumentationofCurrentMedicationsFHIR-0.2.000"
+    },
+    "WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR-0.1.000": {
+      "commandName": "Project",
+      "commandLineArgs": "--l WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR-0.1.000"
+    },
+    "AnticoagulationTherapyforAtrialFibrillationFlutterFHIR-0.3.000": {
+      "commandName": "Project",
+      "commandLineArgs": "--l AnticoagulationTherapyforAtrialFibrillationFlutterFHIR-0.3.000"
     }
   }
 }

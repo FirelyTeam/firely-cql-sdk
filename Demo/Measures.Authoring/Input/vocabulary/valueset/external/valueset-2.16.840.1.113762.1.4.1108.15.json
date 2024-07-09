@@ -1,0 +1,48 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113762.1.4.1108.15",
+  "meta": {
+    "versionId": "29",
+    "lastUpdated": "2023-01-18T01:03:05.000-05:00",
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+    "valueDate": "2023-01-18"
+  } ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:oid:2.16.840.1.113762.1.4.1108.15"
+  } ],
+  "version": "20230118",
+  "name": "Hospice Care Ambulatory",
+  "title": "Hospice Care Ambulatory",
+  "status": "active",
+  "date": "2023-01-18T01:03:05-05:00",
+  "publisher": "NCQA PHEMUR",
+  "expansion": {
+    "identifier": "urn:uuid:4af03661-15c2-49fb-9352-5bcab62ada45",
+    "timestamp": "2023-12-13T14:18:02-05:00",
+    "total": 2,
+    "offset": 0,
+    "parameter": [ {
+      "name": "count",
+      "valueInteger": 1000
+    }, {
+      "name": "offset",
+      "valueInteger": 0
+    } ],
+    "contains": [ {
+      "system": "http://snomed.info/sct",
+      "version": "http://snomed.info/sct/731000124108/version/20230901",
+      "code": "385763009",
+      "display": "Hospice care (regime/therapy)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "http://snomed.info/sct/731000124108/version/20230901",
+      "code": "385765002",
+      "display": "Hospice care management (procedure)"
+    } ]
+  }
+}

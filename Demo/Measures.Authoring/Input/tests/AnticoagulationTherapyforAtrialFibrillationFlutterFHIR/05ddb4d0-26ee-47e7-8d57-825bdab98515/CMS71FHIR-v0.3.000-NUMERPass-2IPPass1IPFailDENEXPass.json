@@ -1,0 +1,792 @@
+{
+  "resourceType": "Bundle",
+  "id": "633c9d040968f8012250fcaf",
+  "type": "transaction",
+  "entry": [ {
+    "fullUrl": "https://madie.cms.gov/Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515",
+    "resource": {
+      "resourceType": "Patient",
+      "id": "05ddb4d0-26ee-47e7-8d57-825bdab98515",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" ]
+      },
+      "text": {
+        "status": "generated",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><div class=\"hapiHeaderText\">2IPPass1IPFail DENEXPass <b>NUMERPASSX1 </b></div><table class=\"hapiPropertyTable\"><tbody><tr><td>Identifier</td><td>52c14de634122f39abfbd9ffaa41bc27</td></tr><tr><td>Date of birth</td><td><span>23 May 1954</span></td></tr></tbody></table></div>"
+      },
+      "extension": [ {
+        "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
+        "extension": [ {
+          "url": "ombCategory",
+          "valueCoding": {
+            "system": "urn:oid:2.16.840.1.113883.6.238",
+            "code": "1002-5",
+            "display": "American Indian or Alaska Native",
+            "userSelected": true
+          }
+        }, {
+          "url": "text",
+          "valueString": "American Indian or Alaska Native"
+        } ]
+      }, {
+        "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity",
+        "extension": [ {
+          "url": "ombCategory",
+          "valueCoding": {
+            "system": "urn:oid:2.16.840.1.113883.6.238",
+            "code": "2135-2",
+            "display": "Hispanic or Latino",
+            "userSelected": true
+          }
+        }, {
+          "url": "text",
+          "valueString": "Hispanic or Latino"
+        } ]
+      } ],
+      "identifier": [ {
+        "type": {
+          "coding": [ {
+            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+            "code": "MR"
+          } ]
+        },
+        "system": "https://bonnie-fhir.healthit.gov/",
+        "value": "633c9d040968f8012250fcaf"
+      } ],
+      "active": true,
+      "name": [ {
+        "use": "usual",
+        "family": "NUMERPassX1",
+        "given": [ "2IPPass1IPFail DENEXPass" ]
+      } ],
+      "gender": "female",
+      "birthDate": "1954-05-23"
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Encounter/5c953f96b848462de0ae406d",
+    "resource": {
+      "resourceType": "Encounter",
+      "id": "5c953f96b848462de0ae406d",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" ]
+      },
+      "status": "finished",
+      "class": {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "IMP",
+        "display": "inpatient encounter"
+      },
+      "type": [ {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "code": "32485007"
+        } ]
+      } ],
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "period": {
+        "start": "2025-11-20T08:00:00.000Z",
+        "end": "2025-11-24T08:15:00.000Z"
+      },
+      "length": {
+        "value": 4.0,
+        "unit": "days"
+      },
+      "diagnosis": [ {
+        "condition": {
+          "reference": "Condition/ischemic-stroke-19a4"
+        },
+        "rank": 1
+      } ]
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Encounter/5c953f96b848462de0ae406d"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Encounter/5e309320ef08fe00001553e0",
+    "resource": {
+      "resourceType": "Encounter",
+      "id": "5e309320ef08fe00001553e0",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" ]
+      },
+      "status": "finished",
+      "class": {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "IMP",
+        "display": "inpatient encounter"
+      },
+      "type": [ {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "code": "183452005"
+        } ]
+      } ],
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "period": {
+        "start": "2025-10-28T08:00:00.000Z",
+        "end": "2025-10-30T08:15:00.000Z"
+      },
+      "diagnosis": [ {
+        "condition": {
+          "reference": "Condition/atrial-ablation-19a5"
+        },
+        "use": {
+          "coding": [ {
+            "system": "http://www.icd10data.com/icd10pcs",
+            "code": "02560ZZ",
+            "display": "Destruction of Right Atrium, Open Approach",
+            "userSelected": true
+          } ]
+        },
+        "rank": 2
+      } ]
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Encounter/5e309320ef08fe00001553e0"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Encounter/5e30973bef08fe0000155769",
+    "resource": {
+      "resourceType": "Encounter",
+      "id": "5e30973bef08fe0000155769",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" ]
+      },
+      "status": "finished",
+      "class": {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "IMP",
+        "display": "inpatient encounter"
+      },
+      "type": [ {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "code": "183452005"
+        } ]
+      } ],
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "period": {
+        "start": "2025-09-03T08:00:00.000Z",
+        "end": "2025-09-07T08:15:00.000Z"
+      },
+      "length": {
+        "value": 4.0,
+        "unit": "days"
+      },
+      "diagnosis": [ {
+        "condition": {
+          "reference": "condition/atrial-ablation-19a5"
+        },
+        "use": {
+          "coding": [ {
+            "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+            "code": "02560ZZ",
+            "display": "Destruction of Right Atrium, Open Approach"
+          } ]
+        }
+      }, {
+        "condition": {
+          "reference": "Condition/atrial-fibrillation-flutter-19a7"
+        },
+        "use": {
+          "coding": [ {
+            "system": "http://snomed.info/sct",
+            "version": "2021-09",
+            "code": "425615007",
+            "display": "Chronic atrial flutter (disorder)",
+            "userSelected": true
+          } ]
+        }
+      }, {
+        "condition": {
+          "reference": "Condition/ischemic-stroke-19a8"
+        },
+        "use": {
+          "coding": [ {
+            "system": "http://snomed.info/sct",
+            "version": "2021-09",
+            "code": "230692004",
+            "display": "Infarction - precerebral (disorder)",
+            "userSelected": true
+          } ]
+        },
+        "rank": 1
+      } ]
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Encounter/5e30973bef08fe0000155769"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/ServiceRequest/5e309a40ef08fe0000155922",
+    "resource": {
+      "resourceType": "ServiceRequest",
+      "id": "5e309a40ef08fe0000155922",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest" ]
+      },
+      "status": "active",
+      "intent": "order",
+      "code": {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "code": "133918004"
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "authoredOn": "2025-11-20T08:00:00.000+00:00"
+    },
+    "request": {
+      "method": "PUT",
+      "url": "ServiceRequest/5e309a40ef08fe0000155922"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/MedicationRequest/5c953f96b848462de0ae406f",
+    "resource": {
+      "resourceType": "MedicationRequest",
+      "id": "5c953f96b848462de0ae406f",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" ]
+      },
+      "status": "active",
+      "intent": "order",
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+          "code": "discharge",
+          "display": "Discharge",
+          "userSelected": true
+        } ]
+      } ],
+      "medicationCodeableConcept": {
+        "coding": [ {
+          "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+          "code": "308351"
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "authoredOn": "2025-11-24T08:00:00.000+00:00",
+      "requester": {
+        "reference": "Practitioner/example"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "MedicationRequest/5c953f96b848462de0ae406f"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/MedicationRequest/5e30936eef08fe0000155444",
+    "resource": {
+      "resourceType": "MedicationRequest",
+      "id": "5e30936eef08fe0000155444",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest" ]
+      },
+      "status": "active",
+      "intent": "order",
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+          "code": "community",
+          "display": "Community",
+          "userSelected": true
+        } ]
+      } ],
+      "medicationCodeableConcept": {
+        "coding": [ {
+          "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+          "version": "2022-01",
+          "code": "1114198",
+          "display": "rivaroxaban 10 MG Oral Tablet",
+          "userSelected": true
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "authoredOn": "2025-09-07T08:00:00.000+00:00",
+      "requester": {
+        "reference": "Practitioner/example"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "MedicationRequest/5e30936eef08fe0000155444"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Coverage/5f2c53d01c76ba5c996057ad",
+    "resource": {
+      "resourceType": "Coverage",
+      "id": "5f2c53d01c76ba5c996057ad",
+      "status": "active",
+      "beneficiary": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "period": {
+        "start": "1954-05-23T08:00:00.000Z"
+      },
+      "payor": [ {
+        "reference": "Organization/Org-123456"
+      } ]
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Coverage/5f2c53d01c76ba5c996057ad"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Procedure/5c953f96b848462de0ae4070",
+    "resource": {
+      "resourceType": "Procedure",
+      "id": "5c953f96b848462de0ae4070",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure" ]
+      },
+      "extension": [ {
+        "url": "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded",
+        "valueDateTime": "2025-11-19T09:35:00-04:00"
+      } ],
+      "status": "completed",
+      "code": {
+        "coding": [ {
+          "system": "http://www.cms.gov/Medicare/Coding/ICD10",
+          "code": "02560ZZ"
+        }, {
+          "system": "http://snomed.info/sct",
+          "code": "175095005"
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "performedPeriod": {
+        "start": "2025-11-20T06:00:00.000Z",
+        "end": "2025-11-20T07:15:00.000Z"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Procedure/5c953f96b848462de0ae4070"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Condition/ischemic-stroke-19a4",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "ischemic-stroke-19a4",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" ]
+      },
+      "clinicalStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+          "code": "active"
+        } ]
+      },
+      "verificationStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed"
+        } ]
+      },
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+          "code": "encounter-diagnosis",
+          "display": "Encounter Diagnosis"
+        } ]
+      } ],
+      "code": {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "version": "2021-09",
+          "code": "111297002",
+          "display": "Nonparalytic stroke (disorder)",
+          "userSelected": true
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "recordedDate": "2025-10-13T08:00:00.000+00:00"
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/ischemic-stroke-19a4"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Condition/atrial-ablation-19a5",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "atrial-ablation-19a5",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" ]
+      },
+      "clinicalStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+          "code": "active"
+        } ]
+      },
+      "verificationStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed"
+        } ]
+      },
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+          "code": "encounter-diagnosis",
+          "display": "Encounter Diagnosis"
+        } ]
+      } ],
+      "code": {
+        "coding": [ {
+          "system": "http://www.icd10data.com/icd10pcs",
+          "version": "2022",
+          "code": "02560ZZ",
+          "display": "Destruction of Right Atrium, Open Approach",
+          "userSelected": true
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "recordedDate": "2025-10-13T08:00:00.000+00:00"
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/atrial-ablation-19a5"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Condition/ischemic-stroke-19a6",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "ischemic-stroke-19a6",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" ]
+      },
+      "clinicalStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+          "code": "active"
+        } ]
+      },
+      "verificationStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed"
+        } ]
+      },
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+          "code": "encounter-diagnosis",
+          "display": "Encounter Diagnosis"
+        } ]
+      } ],
+      "code": {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "version": "2021-09",
+          "code": "111297002",
+          "display": "Nonparalytic stroke (disorder)",
+          "userSelected": true
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "recordedDate": "2025-10-13T08:00:00.000+00:00"
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/ischemic-stroke-19a6"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Condition/atrial-fibrillation-flutter-19a7",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "atrial-fibrillation-flutter-19a7",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" ]
+      },
+      "clinicalStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+          "code": "active"
+        } ]
+      },
+      "verificationStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed"
+        } ]
+      },
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+          "code": "encounter-diagnosis",
+          "display": "Encounter Diagnosis"
+        } ]
+      } ],
+      "code": {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "version": "2021-09",
+          "code": "120041000119109",
+          "display": "Atrial fibrillation with rapid ventricular response (disorder)",
+          "userSelected": true
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "recordedDate": "2025-10-13T08:00:00.000+00:00"
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/atrial-fibrillation-flutter-19a7"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Condition/ischemic-stroke-19a8",
+    "resource": {
+      "resourceType": "Condition",
+      "id": "ischemic-stroke-19a8",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition" ]
+      },
+      "clinicalStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+          "code": "active"
+        } ]
+      },
+      "verificationStatus": {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed"
+        } ]
+      },
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+          "code": "encounter-diagnosis",
+          "display": "Encounter Diagnosis"
+        } ]
+      } ],
+      "code": {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "version": "2021-09",
+          "code": "111297002",
+          "display": "Nonparalytic stroke (disorder)",
+          "userSelected": true
+        } ]
+      },
+      "subject": {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      },
+      "recordedDate": "2025-10-13T08:00:00.000+00:00"
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Condition/ischemic-stroke-19a8"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Organization/123456",
+    "resource": {
+      "resourceType": "Organization",
+      "id": "Org-123456",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-organization" ]
+      },
+      "identifier": [ {
+        "use": "temp",
+        "system": "urn:oid:2.16.840.1.113883.4.4",
+        "value": "21-3259825"
+      } ],
+      "active": true,
+      "type": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+          "code": "pay",
+          "display": "Payer"
+        } ]
+      } ],
+      "name": "Blue Cross Blue Shield of Texas",
+      "telecom": [ {
+        "system": "phone",
+        "value": "(+1) 972-766-6900"
+      } ],
+      "address": [ {
+        "use": "billing",
+        "type": "postal",
+        "line": [ "P.O. Box 660044" ],
+        "city": "Dallas",
+        "state": "TX",
+        "postalCode": "75266-0044",
+        "country": "USA"
+      } ]
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Organization/Org-123456"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Practitioner/practitioner-123456",
+    "resource": {
+      "resourceType": "Practitioner",
+      "id": "practitioner-123456",
+      "identifier": [ {
+        "system": "http://hl7.org/fhir/sid/us-npi",
+        "value": "123456"
+      } ],
+      "name": [ {
+        "family": "Evil",
+        "prefix": [ "Dr" ]
+      } ]
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Practitioner/practitioner-123456"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/MeasureReport/0447fc3c-0298-4e8f-b60e-bfa64cb13499",
+    "resource": {
+      "resourceType": "MeasureReport",
+      "id": "0447fc3c-0298-4e8f-b60e-bfa64cb13499",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/test-case-cqfm" ]
+      },
+      "contained": [ {
+        "resourceType": "Parameters",
+        "id": "ad9e893f-fb89-410e-acfd-1bafea20ae41-parameters",
+        "parameter": [ {
+          "name": "subject",
+          "valueString": "05ddb4d0-26ee-47e7-8d57-825bdab98515"
+        } ]
+      } ],
+      "extension": [ {
+        "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-inputParameters",
+        "valueReference": {
+          "reference": "#ad9e893f-fb89-410e-acfd-1bafea20ae41-parameters"
+        }
+      }, {
+        "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-testCaseDescription",
+        "valueMarkdown": "Pt. discharged on anticoagulant, starts during encounter 1. Encounter 2 has admitting diagnosis with rank 2. Encounter 3 satisfies IPP and Denom. \n"
+      } ],
+      "modifierExtension": [ {
+        "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-isTestCase",
+        "valueBoolean": true
+      } ],
+      "status": "complete",
+      "type": "individual",
+      "measure": "https://madie.cms.gov/Measure/AnticoagulationTherapyforAtrialFibrillationFlutterFHIR",
+      "period": {
+        "start": "2025-01-01",
+        "end": "2025-12-31"
+      },
+      "group": [ {
+        "population": [ {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "initial-population",
+              "display": "Initial Population"
+            } ]
+          },
+          "count": 2
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "denominator",
+              "display": "Denominator"
+            } ]
+          },
+          "count": 2
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "denominator-exclusion",
+              "display": "Denominator Exclusion"
+            } ]
+          },
+          "count": 1
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "numerator",
+              "display": "Numerator"
+            } ]
+          },
+          "count": 1
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "denominator-exception",
+              "display": "Denominator Exception"
+            } ]
+          },
+          "count": 0
+        } ]
+      } ],
+      "evaluatedResource": [ {
+        "reference": "Patient/05ddb4d0-26ee-47e7-8d57-825bdab98515"
+      }, {
+        "reference": "Encounter/5c953f96b848462de0ae406d"
+      }, {
+        "reference": "Encounter/5e309320ef08fe00001553e0"
+      }, {
+        "reference": "Encounter/5e30973bef08fe0000155769"
+      }, {
+        "reference": "ServiceRequest/5e309a40ef08fe0000155922"
+      }, {
+        "reference": "MedicationRequest/5c953f96b848462de0ae406f"
+      }, {
+        "reference": "MedicationRequest/5e30936eef08fe0000155444"
+      }, {
+        "reference": "Coverage/5f2c53d01c76ba5c996057ad"
+      }, {
+        "reference": "Procedure/5c953f96b848462de0ae4070"
+      }, {
+        "reference": "Condition/ischemic-stroke-19a4"
+      }, {
+        "reference": "Condition/atrial-ablation-19a5"
+      }, {
+        "reference": "Condition/ischemic-stroke-19a6"
+      }, {
+        "reference": "Condition/atrial-fibrillation-flutter-19a7"
+      }, {
+        "reference": "Condition/ischemic-stroke-19a8"
+      }, {
+        "reference": "Organization/Org-123456"
+      }, {
+        "reference": "Practitioner/practitioner-123456"
+      } ]
+    },
+    "request": {
+      "method": "PUT",
+      "url": "MeasureReport/0447fc3c-0298-4e8f-b60e-bfa64cb13499"
+    }
+  } ]
+}

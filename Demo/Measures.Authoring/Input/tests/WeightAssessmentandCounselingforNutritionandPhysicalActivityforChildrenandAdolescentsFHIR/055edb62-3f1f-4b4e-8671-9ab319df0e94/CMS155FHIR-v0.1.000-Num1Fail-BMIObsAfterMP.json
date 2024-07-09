@@ -1,0 +1,376 @@
+{
+  "resourceType": "Bundle",
+  "id": "Patient-11-Num1Pass-BMIObsAfterMP",
+  "type": "transaction",
+  "entry": [ {
+    "fullUrl": "https://madie.cms.gov/Patient/055edb62-3f1f-4b4e-8671-9ab319df0e94",
+    "resource": {
+      "resourceType": "Patient",
+      "id": "055edb62-3f1f-4b4e-8671-9ab319df0e94",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient" ]
+      },
+      "extension": [ {
+        "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
+        "extension": [ {
+          "url": "ombCategory",
+          "valueCoding": {
+            "system": "urn:oid:2.16.840.1.113883.6.238",
+            "code": "2028-9",
+            "display": "Asian"
+          }
+        }, {
+          "url": "text",
+          "valueString": "Asian"
+        } ]
+      }, {
+        "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity",
+        "extension": [ {
+          "url": "ombCategory",
+          "valueCoding": {
+            "system": "urn:oid:2.16.840.1.113883.6.238",
+            "code": "2135-2",
+            "display": "Hispanic or Latino"
+          }
+        }, {
+          "url": "text",
+          "valueString": "Hispanic or Latino"
+        } ]
+      } ],
+      "identifier": [ {
+        "system": "http://hospital.smarthealthit.org",
+        "value": "999999995"
+      } ],
+      "name": [ {
+        "family": "Bertha",
+        "given": [ "Betty" ]
+      } ],
+      "gender": "female",
+      "birthDate": "2008-12-31"
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Patient/055edb62-3f1f-4b4e-8671-9ab319df0e94"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Encounter/Encounter-11",
+    "resource": {
+      "resourceType": "Encounter",
+      "id": "Encounter-11",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter" ]
+      },
+      "status": "finished",
+      "class": {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+        "code": "AMB",
+        "display": "ambulatory"
+      },
+      "type": [ {
+        "coding": [ {
+          "system": "http://snomed.info/sct",
+          "code": "185317003",
+          "display": "Telephone encounter (procedure)"
+        } ]
+      } ],
+      "subject": {
+        "reference": "Patient/055edb62-3f1f-4b4e-8671-9ab319df0e94"
+      },
+      "period": {
+        "start": "2025-01-02T01:00:00.000Z",
+        "end": "2025-01-02T01:15:00.000Z"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Encounter/Encounter-11"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Observation/Observation-11",
+    "resource": {
+      "resourceType": "Observation",
+      "id": "Observation-11",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/bmi" ]
+      },
+      "status": "final",
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "vital-signs",
+          "display": "Vital Signs"
+        } ],
+        "text": "Vital Signs"
+      } ],
+      "code": {
+        "coding": [ {
+          "system": "http://loinc.org",
+          "code": "39156-5",
+          "display": "Body mass index (BMI) [Ratio]"
+        } ],
+        "text": "BMI"
+      },
+      "subject": {
+        "reference": "Patient/055edb62-3f1f-4b4e-8671-9ab319df0e94"
+      },
+      "effectiveDateTime": "2026-01-01T00:00:00.000Z",
+      "valueQuantity": {
+        "value": 16.2,
+        "unit": "kg/m2",
+        "system": "http://unitsofmeasure.org",
+        "code": "kg/m2"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Observation/Observation-11"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Observation/Observation-12",
+    "resource": {
+      "resourceType": "Observation",
+      "id": "Observation-12",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/bodyheight" ]
+      },
+      "status": "final",
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "vital-signs",
+          "display": "Vital Signs"
+        } ],
+        "text": "Vital Signs"
+      } ],
+      "code": {
+        "coding": [ {
+          "system": "http://loinc.org",
+          "code": "8302-2",
+          "display": "Body height"
+        } ],
+        "text": "Height"
+      },
+      "subject": {
+        "reference": "Patient/055edb62-3f1f-4b4e-8671-9ab319df0e94"
+      },
+      "effectiveDateTime": "2025-01-02T00:00:00.000Z",
+      "valueQuantity": {
+        "value": 111.506,
+        "unit": "cm",
+        "system": "http://unitsofmeasure.org",
+        "code": "cm"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Observation/Observation-12"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/Observation/Observation-13",
+    "resource": {
+      "resourceType": "Observation",
+      "id": "Observation-13",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/StructureDefinition/bodyweight" ]
+      },
+      "status": "final",
+      "category": [ {
+        "coding": [ {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "vital-signs",
+          "display": "Vital Signs"
+        } ],
+        "text": "Vital Signs"
+      } ],
+      "code": {
+        "coding": [ {
+          "system": "http://loinc.org",
+          "code": "29463-7",
+          "display": "Body weight"
+        } ],
+        "text": "Weight"
+      },
+      "subject": {
+        "reference": "Patient/055edb62-3f1f-4b4e-8671-9ab319df0e94"
+      },
+      "effectiveDateTime": "2025-01-02T00:00:00.000Z",
+      "valueQuantity": {
+        "value": 20.09414,
+        "unit": "kg",
+        "system": "http://unitsofmeasure.org",
+        "code": "kg"
+      }
+    },
+    "request": {
+      "method": "PUT",
+      "url": "Observation/Observation-13"
+    }
+  }, {
+    "fullUrl": "https://madie.cms.gov/MeasureReport/1ccc50a4-2d3e-4811-8b8b-536d51264052",
+    "resource": {
+      "resourceType": "MeasureReport",
+      "id": "1ccc50a4-2d3e-4811-8b8b-536d51264052",
+      "meta": {
+        "profile": [ "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/test-case-cqfm" ]
+      },
+      "contained": [ {
+        "resourceType": "Parameters",
+        "id": "622c7999-bd9a-42dd-a952-841f3d240ced-parameters",
+        "parameter": [ {
+          "name": "subject",
+          "valueString": "055edb62-3f1f-4b4e-8671-9ab319df0e94"
+        } ]
+      } ],
+      "extension": [ {
+        "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-inputParameters",
+        "valueReference": {
+          "reference": "#622c7999-bd9a-42dd-a952-841f3d240ced-parameters"
+        }
+      }, {
+        "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-testCaseDescription",
+        "valueMarkdown": "Body-height and body-weight observations are during the measurement period. BMI observation is after the measurement period."
+      } ],
+      "modifierExtension": [ {
+        "url": "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-isTestCase",
+        "valueBoolean": true
+      } ],
+      "status": "complete",
+      "type": "individual",
+      "measure": "https://madie.cms.gov/Measure/WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR",
+      "period": {
+        "start": "2025-01-01",
+        "end": "2025-12-31"
+      },
+      "group": [ {
+        "population": [ {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "initial-population",
+              "display": "Initial Population"
+            } ]
+          },
+          "count": 1
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "denominator",
+              "display": "Denominator"
+            } ]
+          },
+          "count": 1
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "denominator-exclusion",
+              "display": "Denominator Exclusion"
+            } ]
+          },
+          "count": 0
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "numerator",
+              "display": "Numerator"
+            } ]
+          },
+          "count": 0
+        } ]
+      }, {
+        "population": [ {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "initial-population",
+              "display": "Initial Population"
+            } ]
+          },
+          "count": 1
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "denominator",
+              "display": "Denominator"
+            } ]
+          },
+          "count": 1
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "denominator-exclusion",
+              "display": "Denominator Exclusion"
+            } ]
+          },
+          "count": 0
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "numerator",
+              "display": "Numerator"
+            } ]
+          },
+          "count": 0
+        } ]
+      }, {
+        "population": [ {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "initial-population",
+              "display": "Initial Population"
+            } ]
+          },
+          "count": 1
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "denominator",
+              "display": "Denominator"
+            } ]
+          },
+          "count": 1
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "denominator-exclusion",
+              "display": "Denominator Exclusion"
+            } ]
+          },
+          "count": 0
+        }, {
+          "code": {
+            "coding": [ {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-population",
+              "code": "numerator",
+              "display": "Numerator"
+            } ]
+          },
+          "count": 0
+        } ]
+      } ],
+      "evaluatedResource": [ {
+        "reference": "Patient/055edb62-3f1f-4b4e-8671-9ab319df0e94"
+      }, {
+        "reference": "Encounter/Encounter-11"
+      }, {
+        "reference": "Observation/Observation-11"
+      }, {
+        "reference": "Observation/Observation-12"
+      }, {
+        "reference": "Observation/Observation-13"
+      } ]
+    },
+    "request": {
+      "method": "PUT",
+      "url": "MeasureReport/1ccc50a4-2d3e-4811-8b8b-536d51264052"
+    }
+  } ]
+}

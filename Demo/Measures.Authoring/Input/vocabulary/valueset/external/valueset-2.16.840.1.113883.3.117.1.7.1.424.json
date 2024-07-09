@@ -1,0 +1,50 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.117.1.7.1.424",
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "2.16.840.1.113883.3.117.1.7.1.424"
+  } ],
+  "version": "20210220",
+  "name": "NonelectiveInpatientEncounter",
+  "title": "Nonelective Inpatient Encounter",
+  "status": "active",
+  "experimental": false,
+  "publisher": "NLM",
+  "expansion": {
+    "identifier": "20230504",
+    "timestamp": "2023-08-02T11:13:52-06:00",
+    "contains": [ {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "183452005",
+      "display": "Emergency hospital admission (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "32485007",
+      "display": "Hospital admission (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "183452005",
+      "display": "Emergency hospital admission (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "32485007",
+      "display": "Hospital admission (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "183452005",
+      "display": "Emergency hospital admission (procedure)"
+    }, {
+      "system": "http://snomed.info/sct",
+      "version": "2022-09",
+      "code": "32485007",
+      "display": "Hospital admission (procedure)"
+    } ]
+  }
+}
