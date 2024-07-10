@@ -149,7 +149,7 @@ namespace Hl7.Cql.Packaging
                         case CqlPrimitiveType.Decimal:
                             return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Decimal));
                         case CqlPrimitiveType.Integer:
-                            return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Decimal));
+                            return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Integer));
                         case CqlPrimitiveType.Quantity:
                             return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Quantity));
                         case CqlPrimitiveType.Ratio:
@@ -196,6 +196,14 @@ namespace Hl7.Cql.Packaging
         /// <returns>the Type mapping, or null</returns>
         public CqlTypeToFhirMapping? TypeEntryFor(Type type)
         {
+            if (type.IsPrimitive || type.IsValueType || type == typeof(string))
+            {
+                var fhirType = PrimitiveToFhir(type);
+                if (fhirType == null) return null;
+
+                return TypeEntryFor(fhirType.Value);
+            }
+
             var fhirTypeName = ModelInspector.GetFhirTypeNameForType(type);
             if (fhirTypeName is not null)
             {
@@ -226,17 +234,12 @@ namespace Hl7.Cql.Packaging
             if (IsOrImplementsIEnumerableOfT(type))
             {
                 var elementType = TypeResolver.GetListElementType(type);
+                if (elementType is null)
+                    return null;
                 var elementEntry = TypeEntryFor(elementType!);
                 if (elementEntry is null)
                     return null;
                 return TypeEntryFor(CqlPrimitiveType.List, elementEntry);
-            }
-            if (type.IsPrimitive || type.IsValueType || type == typeof(string))
-            {
-                var fhirType = PrimitiveToFhir(type);
-                if (fhirType == null) return null;
-
-                return TypeEntryFor(fhirType.Value);
             }
 
             return null;
@@ -317,9 +320,14 @@ namespace Hl7.Cql.Packaging
         /// </summary>
         /// <param name="element">the ELM element</param>
         /// <returns>the Type mapping, or null</returns>
-        public CqlTypeToFhirMapping? TypeEntryFor(Elm.Element element) =>
-            TypeEntryFor(element.resultTypeSpecifier);
-
+        public CqlTypeToFhirMapping? TypeEntryFor(Elm.Element element)
+        {
+            return element switch
+            {
+                Elm.Literal literal => TypeEntryFor(literal.valueType.Name),
+                _ => element.resultTypeName != null ? TypeEntryFor(element.resultTypeName.Name) : TypeEntryFor(element.resultTypeSpecifier)
+            };
+        }
         private bool IsOrImplementsIEnumerableOfT(Type type) => TypeResolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 
         private FHIRAllTypes? PrimitiveToFhir(Type type)

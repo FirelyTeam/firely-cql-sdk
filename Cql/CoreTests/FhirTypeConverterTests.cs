@@ -30,6 +30,91 @@ namespace CoreTests
         }
 
         [TestMethod]
+
+        public void ConvertParameters_Markdown()
+        {
+            var parameter = new ParameterComponent()
+            {
+                Name = "param1",
+                Value = new Hl7.Fhir.Model.Markdown("hi")
+            };
+            var converted = FhirTypeConverter.Convert<string>(parameter);
+            Assert.AreEqual(converted,"hi");
+        }
+
+        [TestMethod]
+        public void ConvertParameters_Instant()
+        {
+            var parameter = new ParameterComponent()
+            {
+                Name = "param1",
+                Value = new Hl7.Fhir.Model.Instant(new DateTimeOffset(new DateTime(2024, 12, 31, 12, 10, 10))),
+            };
+
+            var converted = FhirTypeConverter.Convert<CqlDateTime>(parameter);
+
+            Assert.IsNotNull(converted);
+
+            Assert.IsTrue(converted is CqlDateTime);
+
+            Assert.AreEqual(2024, converted.Value.Year);
+            Assert.AreEqual(12, converted.Value.Month);
+            Assert.AreEqual(31, converted.Value.Day);
+            Assert.AreEqual(12, converted.Value.Hour);
+            Assert.AreEqual(10, converted.Value.Minute);
+            Assert.AreEqual(10, converted.Value.Second);
+        }
+
+        [TestMethod]
+        public void ConvertParameters_FhirUrl()
+        {
+            var parameter = new ParameterComponent()
+            {
+                Name = "param1",
+                Value = new FhirUrl("hi"),
+            };
+            var converted = FhirTypeConverter.Convert<string>(parameter);
+
+            Assert.AreEqual(converted, "hi");
+        }
+
+        [TestMethod]
+        public void ConvertParameters_Integer_To_UnsignedInt()
+        {
+            var parameter = new ParameterComponent()
+            {
+                Name = "param1",
+                Value = new Integer(1),
+            };
+            var converted = FhirTypeConverter.Convert<UnsignedInt>(parameter);
+            Assert.AreEqual(1,converted.Value);
+        }
+
+        [TestMethod]
+        public void ConvertParameters_Integer_To_PositiveInt()
+        {
+            var parameter = new ParameterComponent()
+            {
+                Name = "param1",
+                Value = new Integer(1),
+            };
+            var converted = FhirTypeConverter.Convert<PositiveInt>(parameter);
+            Assert.AreEqual(1, converted.Value);
+        }
+
+        [TestMethod]
+        public void ConvertParameters_Code()
+        {
+            var parameter = new ParameterComponent()
+            {
+                Name = "param1",
+                Value = new Code("hi"),
+            };
+            var converted = FhirTypeConverter.Convert<string>(parameter);
+            Assert.AreEqual("hi", converted);
+        }
+
+        [TestMethod]
         public void ConvertParameters_String()
         {
             var parameter = new ParameterComponent()
@@ -450,6 +535,10 @@ namespace CoreTests
             Assert.AreEqual(1, isoDateTime.Hour);
             Assert.AreEqual(1, isoDateTime.Minute);
             Assert.AreEqual(1, isoDateTime.Second);
+
+            var nullDateTime = new FhirDateTime(null);
+            var nullConverted = FhirTypeConverter.Convert<CqlDateTime>(nullDateTime);
+            Assert.IsNull(nullConverted);
         }
 
 
@@ -675,6 +764,25 @@ namespace CoreTests
             Assert.IsNull(end.Minute);
             Assert.IsNull(end.Second);
             Assert.IsNull(end.Millisecond);
+        }
+
+        [TestMethod]
+        public void ConvertFhirDateTime_CqlDate()
+        {
+            var date = new FhirDateTime(2022, 1, 1, 1, 1, 1, TimeSpan.Zero);
+            var converted = FhirTypeConverter.Convert<CqlDate>(date);
+
+            Assert.IsNotNull(converted);
+            var isoDateTime = converted.Value;
+            Assert.IsNotNull(isoDateTime);
+
+            Assert.AreEqual(2022, isoDateTime.Year);
+            Assert.AreEqual(1, isoDateTime.Month);
+            Assert.AreEqual(1, isoDateTime.Day);
+
+            var nullDateTime = new FhirDateTime(null);
+            var nullConverted = FhirTypeConverter.Convert<CqlDateTime>(nullDateTime);
+            Assert.IsNull(nullConverted);
         }
     }
 }

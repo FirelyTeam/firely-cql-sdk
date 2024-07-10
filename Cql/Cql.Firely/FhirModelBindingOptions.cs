@@ -39,5 +39,10 @@ namespace Hl7.Cql.Fhir
             /// </summary>
             Equivalent
         }
+
+        /// <summary>
+        /// The size of the LRU cache to use for the resource packager.
+        /// </summary>
+        public int LRUCacheSize { get; init; } = 10000;
     }
 }

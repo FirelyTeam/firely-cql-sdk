@@ -63,9 +63,9 @@ public class NCQAFHIRBase_1_0_0
 			else if (onset is Period)
 			{
 				var e_ = context.Operators.LateBoundProperty<FhirDateTime>(onset, "start");
-				var f_ = context.Operators.ConvertStringToDateTime(e_?.Value);
+				var f_ = context.Operators.Convert<CqlDateTime>(e_);
 				var g_ = context.Operators.LateBoundProperty<FhirDateTime>(onset, "end");
-				var h_ = context.Operators.ConvertStringToDateTime(g_?.Value);
+				var h_ = context.Operators.Convert<CqlDateTime>(g_);
 				var i_ = context.Operators.Interval(f_, h_, true, true);
 
 				return i_;
@@ -257,9 +257,9 @@ public class NCQAFHIRBase_1_0_0
 			else if (abatement is Period)
 			{
 				var e_ = context.Operators.LateBoundProperty<FhirDateTime>(abatement, "start");
-				var f_ = context.Operators.ConvertStringToDateTime(e_?.Value);
+				var f_ = context.Operators.Convert<CqlDateTime>(e_);
 				var g_ = context.Operators.LateBoundProperty<FhirDateTime>(abatement, "end");
-				var h_ = context.Operators.ConvertStringToDateTime(g_?.Value);
+				var h_ = context.Operators.Convert<CqlDateTime>(g_);
 				var i_ = context.Operators.Interval(f_, h_, true, true);
 
 				return i_;
@@ -472,9 +472,9 @@ public class NCQAFHIRBase_1_0_0
 			else if (choice is Period)
 			{
 				var j_ = context.Operators.LateBoundProperty<FhirDateTime>(choice, "start");
-				var k_ = context.Operators.ConvertStringToDateTime(j_?.Value);
+				var k_ = context.Operators.Convert<CqlDateTime>(j_);
 				var l_ = context.Operators.LateBoundProperty<FhirDateTime>(choice, "end");
-				var m_ = context.Operators.ConvertStringToDateTime(l_?.Value);
+				var m_ = context.Operators.Convert<CqlDateTime>(l_);
 				var n_ = context.Operators.Interval(k_, m_, true, true);
 
 				return n_;

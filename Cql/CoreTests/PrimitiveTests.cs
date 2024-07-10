@@ -49,7 +49,7 @@ namespace CoreTests
         [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
         {
-            var baseDate = new CqlDateTime("1960");
+            Assert.IsTrue(CqlDateTime.TryParse("1960", out var baseDate));
             Assert.AreEqual(DateTimePrecision.Year, baseDate.Value.Precision);
             var plusOneYear = baseDate.Add(new CqlQuantity(1m, "year"));
             Assert.AreEqual(DateTimePrecision.Year, plusOneYear.Value.Precision);
@@ -85,7 +85,7 @@ namespace CoreTests
         [TestMethod]
         public void CqlDateTime_Add_Month()
         {
-            var baseDate = new CqlDateTime("2022-01-01");
+            Assert.IsTrue(CqlDateTime.TryParse("2022-01-01", out var baseDate));
 
             var plus1Month = baseDate.Add(new CqlQuantity(1m, "month"));
             Assert.AreEqual(DateTimePrecision.Day, plus1Month.Value.Precision);
@@ -107,7 +107,7 @@ namespace CoreTests
         [TestMethod]
         public void CqlDateTime_Subtract_Month()
         {
-            var baseDate = new CqlDateTime("2022-03-01");
+            Assert.IsTrue(CqlDateTime.TryParse("2022-03-01", out var baseDate));
 
             var minus1Month = baseDate.Subtract(new CqlQuantity(1m, "month"));
             Assert.AreEqual(DateTimePrecision.Day, minus1Month.Value.Precision);
@@ -162,68 +162,98 @@ namespace CoreTests
         [TestMethod]
         public void CqlDateTime_BoundariesBetween_Months()
         {
-            DateTimeIso8601 startDate = "2020-02-29";
-            var boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-04-01"), "month");
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-02-29", out var startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-04-01", out var cqlStartDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-03-31", out var cqlEndDate));
+            var boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "month");
             Assert.AreEqual(2, boundariesBetween);
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-03-31"), "month");
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlEndDate, "month");
             Assert.AreEqual(1, boundariesBetween);
 
-            startDate = "2020-03-01";
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-04-30"), "month");
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-03-01", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-04-30", out cqlStartDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-03-31", out cqlEndDate));
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "month");
             Assert.AreEqual(1, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-03-31"), "month");
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlEndDate, "month");
             Assert.AreEqual(0, boundariesBetween);
         }
         [TestMethod]
         public void CqlDateTime_BoundariesBetween_Years()
         {
-            DateTimeIso8601 startDate = "2020-02-29";
-            var boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2021-02-28"), "year");
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-02-29", out var startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2021-02-28", out var cqlStartDate));
+            var boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "year");
             Assert.AreEqual(1, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2022-01-01"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2022-01-01", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "year");
             Assert.AreEqual(2, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(new CqlDateTime("2020-03-31"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2020-03-31", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlStartDate, "year");
             Assert.AreEqual(0, boundariesBetween);
         }
 
         [TestMethod]
         public void CqlDateTime_WholeCalendarPeriodsBetween_Years()
         {
-            DateTimeIso8601 startDate = "2020-02-29";
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-02-29", out var startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-06-30", out var cqlStartDate));
 
-            var boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2020-06-30"), "year");
+            var boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(0, boundariesBetween);
 
-
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-02-28"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-02-28", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(0, boundariesBetween); // 1 full year occurs on mar 1, not feb 28
 
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-03-01"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-03-01", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(1, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-06-30"), "year");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-06-30", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(1, boundariesBetween);
+
+            Assert.IsTrue(DateTimeIso8601.TryParse("2008-04-11", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2024-04-10", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
+            Assert.AreEqual(15, boundariesBetween);
+
+            // leap year
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-04-11", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2023-05-11", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
+            Assert.AreEqual(3, boundariesBetween);
+
+            // leap day
+            Assert.IsTrue(DateTimeIso8601.TryParse("2003-03-01", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2024-02-29", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
+            Assert.AreEqual(20, boundariesBetween);
         }
 
         [TestMethod]
         public void CqlDateTime_WholeCalendarPeriodsBetween_Months()
         {
-            DateTimeIso8601 startDate = "2020-02-29";
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-02-29", out var startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2020-06-30", out var cqlStartDate));
 
-            var boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2020-06-30"), "month");
+            var boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "month");
             Assert.AreEqual(4, boundariesBetween);
 
-
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-02-28"), "month");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-02-28", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "month");
             Assert.AreEqual(11, boundariesBetween); // 1 full year occurs on mar 1, not feb 28
 
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-03-01"), "month");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-03-01", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "month");
             Assert.AreEqual(12, boundariesBetween);
 
-            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(new CqlDateTime("2021-06-30"), "month");
+            Assert.IsTrue(CqlDateTime.TryParse("2021-06-30", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "month");
             Assert.AreEqual(16, boundariesBetween);
 
         }

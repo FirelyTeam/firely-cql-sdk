@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-  <PackageReference Include="Hl7.Fhir.R4" Version="5.3.0" />    
     <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
     <ProjectReference Include="..\..\Cql\Cql\Cql.csproj" />
@@ -30,6 +29,21 @@
 
   <ItemGroup>
     <None Update="Resources\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Inputs\Bundles\95029_fail.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Inputs\Bundles\95029_pass.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Inputs\ValueSets\2.16.840.1.113883.3.464.1004.1148.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Inputs\ValueSets\2.16.840.1.113883.3.464.1004.1168.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

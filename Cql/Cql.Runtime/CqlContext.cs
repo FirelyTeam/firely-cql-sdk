@@ -91,11 +91,11 @@ namespace Hl7.Cql.Runtime
         public object? ResolveParameter(string libraryNameAndVersion, string parameterName, object? defaultValue)
         {
             var fullyQualified = $"{libraryNameAndVersion}{ParameterDelimiter}{parameterName}";
-            if (Parameters.ContainsKey(fullyQualified))
-                return Parameters[fullyQualified];
+            if (Parameters.TryGetValue(fullyQualified, out var parameter))
+                return parameter;
 
-            if (Parameters.ContainsKey(parameterName))
-                return Parameters[parameterName];
+            if (Parameters.TryGetValue(parameterName, out var resolveParameter))
+                return resolveParameter;
 
             return defaultValue;
         }
