@@ -19,6 +19,9 @@ Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Cql.Primitives.CqlPri
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Fhir.Model.FHIRAllTypes fhirType) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(string? name) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(System.Type! type) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
+Hl7.Cql.Packaging.DataRequirementsAnalyzer
+Hl7.Cql.Packaging.DataRequirementsAnalyzer.Analyze() -> System.Collections.Generic.ICollection<Hl7.Fhir.Model.DataRequirement!>!
+Hl7.Cql.Packaging.DataRequirementsAnalyzer.DataRequirementsAnalyzer(Hl7.Cql.Elm.Library! library) -> void
 Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions
 Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.FhirResourceWriterOptions() -> void
 Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?

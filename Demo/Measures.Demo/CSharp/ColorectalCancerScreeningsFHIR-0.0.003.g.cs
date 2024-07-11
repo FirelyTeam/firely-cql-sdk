@@ -557,7 +557,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private int? Age_at_start_of_Measurement_Period_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -573,7 +573,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -693,7 +693,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		var k_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var l_ = context.Operators.Or(j_, k_);
 		var m_ = this.Patient();
-		var n_ = context.Operators.Convert<CqlDate>(m_?.BirthDateElement?.Value);
+		var n_ = context.Operators.ConvertStringToDate(m_?.BirthDateElement?.Value);
 		var o_ = this.Measurement_Period();
 		var p_ = context.Operators.Start(o_);
 		var q_ = context.Operators.DateFrom(p_);

@@ -37,7 +37,7 @@ public partial class Library
         if (IsValidated)
             return;
 
-        NameAndVersion(throwError: true);
+        _ = NameAndVersion(throwError: true);
 
         if (includes is { Length: > 0 } includeDefs)
         {
