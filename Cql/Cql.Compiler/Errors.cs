@@ -17,15 +17,37 @@ internal readonly record struct LibraryIncludeDefUnresolvedError(Library Library
     public string GetMessage() => $"Library has an include definition that did not resolve to a target library in the set. Library Identifier: '{Library}', IncludeDef: '{IncludeDef}'";
 }
 
+internal readonly record struct LibraryHasDuplicateDefinition(Library Library, IDefinitionElement Def) : ILibraryError
+{
+    public string GetMessage() => $"Library has multiple {Def.GetType()}s with the same name. Library Identifier: '{Library}', Name: '{Def.Name}'.";
+}
+
+internal readonly record struct LibraryDefinitionHasNoName(Library Library, IDefinitionElement Def) : ILibraryError
+{
+    public string GetMessage() => $"Library has an {Def.GetType()} element without a name. Library Identifier: '{Library}', Name: '{Def.Name}'.";
+}
+
 internal readonly record struct LibraryIdentifierMustBeUniqueError(Library Library) : ILibraryError
 {
     public string GetMessage() => $"Library did not have a unique name and version in the set. Duplicate Identifier: '{Library}'";
 }
 
-internal readonly record struct LibraryAliasUnresolvedError(Library Library) : ILibraryError
+internal readonly record struct LibraryDoesNotAppearAsADependencyError(Library Library) : ILibraryError
 {
     public string GetMessage() => $"Could not resolve alias from the Library name and version. Library Identifier: '{Library}'";
 }
+
+internal readonly record struct LibraryAliasUnresolvedError(Library Library, string Alias) : ILibraryError
+{
+    public string GetMessage() => $"Could not resolve alias in the library. Library Identifier: '{Library}', alias: '{Alias}'.";
+}
+
+internal readonly record struct UnresolvedReferenceError(Library Library, IReferenceElement re) : ILibraryError
+{
+    public string GetMessage() => $"Cannot resolve {re.GetType().Name} with name {re.name}. Library Identifier: '{Library}'.";
+}
+
+
 
 internal readonly record struct ExpressionBuildingError : ICqlError
 {

@@ -42,6 +42,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     private static readonly (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries)
         EmptyCached = (EmptySet<Library>.Instance, Array.Empty<Library>());
 
+    private LibrarySetDefinitionCache _librarySetDefinitionCache;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="LibrarySet"/> class.
     /// </summary>
@@ -55,6 +57,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         _libraryInfosByKey = new Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)>();
         AsReadOnlyDictionary = new ReadOnlyDictionaryAdapter(this);
         AddLibraries(libraries);
+
+        _librarySetDefinitionCache = new LibrarySetDefinitionCache(this);
     }
 
     /// <exception cref="KeyNotFoundError">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
@@ -213,11 +217,14 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// <param name="lib">The name of the library to load.</param>
     /// <param name="version">The version of the library to load.</param>
     /// <returns>A collection of loaded libraries, including the specified library and its dependencies.</returns>
+    /// <remarks>Supply the name of the library in <paramref name="lib"/>, not the name of the file.</remarks>
     public IReadOnlyCollection<Library> LoadLibraryAndDependencies(
         DirectoryInfo elmDirectory,
         string lib,
         string version = "")
     {
+        if(lib.EndsWith(".cql")) lib = lib[..^4];
+
         List<Library> libraries = [];
         List<(string lib, string version)> librariesToLoad = [(lib, version)];
 
@@ -264,6 +271,36 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     internal string MermaidDiagram => this.BuildMermaidFlowChart(
         getNextItems: lib => GetLibraryDependencies(lib.NameAndVersion(false)),
         formatItem: lib => lib.NameAndVersion(false) ?? "???");
+
+    /// <summary>
+    /// Given a reference that appears in a library, this method will attempt to resolve the definition.
+    /// </summary>
+    /// <param name="refContext">The library where <paramref name="reference"/> was found.</param>
+    /// <param name="reference">The reference to resolve</param>
+    /// <param name="def">The resolved definition, or null if resolution failed.</param>
+    /// <typeparam name="TDefinition">The type of definition to resolve.</typeparam>
+    internal bool TryResolveDefinition<TDefinition>(
+        Library refContext,
+        IReferenceElement reference,
+        [NotNullWhen(true)] out TDefinition? def)
+        where TDefinition : IDefinitionElement =>
+        _librarySetDefinitionCache.TryResolveDefinition(refContext, reference, out def);
+
+    /// <summary>
+    /// Given a reference that appears in a library, this method will attempt to resolve the definition.
+    /// </summary>
+    /// <param name="refContext">The library where the reference was found.</param>
+    /// <param name="name">The name of the definition to resolve.</param>
+    /// <param name="libraryAlias">Qualifier alias for the name, or null if unqualified.</param>
+    /// <param name="def">The resolved definition, or null if resolution failed.</param>
+    /// <typeparam name="TDefinition">The type of definition to resolve.</typeparam>
+    internal bool TryResolveDefinition<TDefinition>(
+        Library refContext,
+        string name,
+        string? libraryAlias,
+        [NotNullWhen(true)] out TDefinition? def)
+        where TDefinition : IDefinitionElement =>
+        _librarySetDefinitionCache.TryResolveDefinition(refContext, name, libraryAlias, out def);
 
     /// <summary>
     /// Returns this LibrarySet as a <see cref="T:IReadOnlyDictionary{string,Library}"/>

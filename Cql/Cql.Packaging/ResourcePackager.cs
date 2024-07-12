@@ -107,7 +107,7 @@ internal class ResourcePackager
                 librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
 
                 // Analyze datarequirements and add to the FHIR Library resource.
-                var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(library);
+                var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, library);
                 var dataRequirements = dataRequirementsAnalyzer.Analyze();
                 fhirLibrary.DataRequirement.AddRange(dataRequirements);
 

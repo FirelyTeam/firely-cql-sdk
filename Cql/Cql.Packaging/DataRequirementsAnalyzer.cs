@@ -6,10 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Elm;
+using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Compiler;
+using Elm = Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using Hl7.Fhir.Model;
-using Expression = Hl7.Cql.Elm.Expression;
-using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Packaging;
 
@@ -22,97 +23,192 @@ namespace Hl7.Cql.Packaging;
 /// Resources used by the retrieves. There's much more to it, as can be glanced
 /// from the public Java version here: https://github.com/cqframework/clinical_quality_language/blob/master/Src/java/elm-fhir/src/main/java/org/cqframework/cql/elm/requirements/fhir/DataRequirementsProcessor.java
 /// </remarks>
-public class DataRequirementsAnalyzer
+public class DataRequirementsAnalyzer(Hl7.Cql.Compiler.LibrarySet librarySet, Elm.Library library)
 {
-    private readonly Library _library;
-
-    /// <summary>
-    /// Initializes the analyzer to use a single Library as input.
-    /// </summary>
-    public DataRequirementsAnalyzer(Library library)
-    {
-        _library = library;
-    }
-
     /// <summary>
     /// Visits the ELM in the LibrarySet and extracts the DataRequirements from it.
     /// </summary>
-    public ICollection<DataRequirement> Analyze()
+    public IReadOnlyCollection<DataRequirement> Analyze()
     {
-        var state = new RetrieveAnalyzer();
+        var result = new List<DataRequirement>();
 
-        var walker = new ElmTreeWalker(state.Visit);
-        walker.Walk(_library);
+        var walker = new Elm.ElmTreeWalker(n => Visit(result, n));
+        walker.Walk(library);
 
-        return state.DataRequirements;
+        return result;
     }
-}
 
-file class RetrieveAnalyzer
-{
-    public ICollection<DataRequirement> DataRequirements { get; } = [];
-
-    public bool Visit(object node)
+    private bool Visit(
+        List<DataRequirement> result,
+        object node)
     {
-        if (node is not Retrieve retrieve) return false;
+        // Function toDataRequirement in the above Java file
+        if (node is not Elm.Retrieve retrieve) return false;
 
         var dr = new DataRequirement();
 
         // Get the resource type the requirement is for.
-        var (_, resourceType) = retrieve.dataType.ToNamedType();
-        var knownType = ModelInfo.FhirTypeNameToFhirType(resourceType);
-        if (knownType is null) return true;  // Not a known FHIR type, so we can't do anything with it.
-
+        var (_, resourceType) = retrieve.dataType;
+        var knownType = Hl7.Fhir.Model.ModelInfo.FhirTypeNameToFhirType(resourceType);
+        if (knownType is null) return true; // Not a known FHIR type, so we can't do anything with it.
         dr.Type = knownType;
 
+        // Set the id attribute of the data requirement if it will be referenced from an included retrieve
+        if (retrieve.localId is not null && retrieve.include is { Length: > 0 } includes)
+            dr.ElementId = includes.Any(i => i.includeFrom is not null) ? retrieve.localId : null;
+
+        // Set profile if specified
+        if (retrieve.templateId is not null)
+            dr.ProfileElement = [new Canonical(retrieve.templateId)];
+
+        // Collect must supports
+        HashSet<string> ps = [];
+
         // Set code path if specified
-        if (retrieve.codeProperty is not null)
+        if (retrieve.codeProperty is { } codeProperty)
         {
-            dr.CodeFilter.Add(ToCodeFilterComponent(retrieve.codeProperty, retrieve.codes));
+            dr.CodeFilter.Add(
+                ToCodeFilterComponent(library, codeProperty, retrieve.codes));
+
+            ps.Add(codeProperty);
         }
 
+        // Add any additional code filters
+        if (retrieve.codeFilter is not null)
+        {
+            foreach (var cfe in retrieve.codeFilter)
+            {
+                dr.CodeFilter
+                  .Add(ToCodeFilterComponent(library, cfe.property, cfe.value));
+            }
+        }
+
+        // Add any properties as mustSupport items
+        dr.MustSupportElement = [..ps.Select(s => new FhirString(s))];
+
         // Only add the requirement if we don't already have it.
-        if(DataRequirements.All(r => !isSame(r, dr)))
-            DataRequirements.Add(dr);
+        if (!result.Any(r => r.IsExactly(dr)))
+            result.Add(dr);
 
         return true;
-
-        bool isSame(DataRequirement l, DataRequirement r) =>
-            l.Type == r.Type && r.CodeFilter.IsExactly(dr.CodeFilter);
     }
 
-    private static DataRequirement.CodeFilterComponent ToCodeFilterComponent(string property, Expression value)
+    private static string ToReference(Elm.ValueSetDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
+ //   private static string ToReference(Elm.CodeSystemDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
+
+    private DataRequirement.CodeFilterComponent ToCodeFilterComponent(
+        Elm.Library context,
+        string property,
+        Elm.Expression value)
     {
         DataRequirement.CodeFilterComponent cfc = new()
         {
             Path = property
         };
 
-        // // TODO: Support retrieval when the target is a CodeSystemRef
-        //
-        // if (value instanceof ValueSetRef) {
-        //     ValueSetRef vsr = (ValueSetRef) value;
-        //     VersionedIdentifier declaredLibraryIdentifier = getDeclaredLibraryIdentifier(vsr, libraryIdentifier);
-        //     cfc.setValueSet(toReference(context.resolveValueSetRef(declaredLibraryIdentifier, vsr)));
-        // }
-        //
-        // if (value instanceof org.hl7.elm.r1.ToList) {
-        //     org.hl7.elm.r1.ToList toList = (org.hl7.elm.r1.ToList) value;
-        //     resolveCodeFilterCodes(context, libraryIdentifier, cfc, toList.getOperand());
-        // }
-        //
-        // if (value instanceof org.hl7.elm.r1.List) {
-        //     org.hl7.elm.r1.List codeList = (org.hl7.elm.r1.List) value;
-        //     for (Expression e : codeList.getElement()) {
-        //         resolveCodeFilterCodes(context, libraryIdentifier, cfc, e);
-        //     }
-        // }
-
-        // TODO: no system???
-        if (value is Literal l)
-            cfc.Code.Add(new Coding {  Code = l.value });
+        // TODO: Support retrieval when the target is a CodeSystemRef
+        switch (value)
+        {
+            case Elm.ValueSetRef vsr:
+                if (librarySet.TryResolveDefinition<Elm.ValueSetDef>(context, vsr, out var vsd))
+                    cfc.ValueSet = ToReference(vsd);
+                else
+                    throw new UnresolvedReferenceError(context, vsr).ToException();
+                break;
+            case Elm.ToList toList:
+                cfc.Code.AddRange(ResolveCodeFilterCodes(toList.operand));
+                break;
+            case Elm.List codeList:
+                cfc.Code.AddRange(codeList.element.SelectMany(ResolveCodeFilterCodes));
+                break;
+            case Elm.Literal l:
+                // TODO: no system???
+                cfc.Code.Add(new Coding { Code = l.value });
+                break;
+            default:
+                throw new NotSupportedException($"Unexpected Elm expression of type {value.GetType()} in code filter.");
+        }
 
         return cfc;
     }
 
+    private List<Coding> ResolveCodeFilterCodes(
+        Elm.Expression toListOperand)
+    {
+        return toListOperand switch
+        {
+            Elm.CodeRef codeRef       => [BuildCoding(codeRef)],
+            Elm.Code code             => [BuildCoding(code)],
+            Elm.ConceptRef conceptRef => BuildCodeableConcept(conceptRef).Coding,
+            Elm.Concept concept       => BuildCodeableConcept(concept).Coding,
+            Elm.Literal literal =>
+                // TODO: no system???
+                [
+                    new Coding { Code = literal.value }
+                ],
+            _ => throw new NotSupportedException(
+                     $"Unexpected Elm expression of type {toListOperand.GetType()} in code filter codes.")
+        };
+    }
+
+    private CodeableConcept BuildCodeableConcept(Elm.ConceptRef conceptRef)
+    {
+        if (librarySet.TryResolveDefinition<Elm.ConceptDef>(library, conceptRef, out var cd))
+            return BuildCodeableConcept(cd.display, cd.code);
+
+        throw new UnresolvedReferenceError(library, conceptRef).ToException();
+    }
+
+    private CodeableConcept BuildCodeableConcept(Elm.Concept concept)
+        => BuildCodeableConcept(concept.display, concept.code);
+
+    private CodeableConcept BuildCodeableConcept(string display, Elm.CodeRef[] codes)
+    {
+        var codings = codes.Select(BuildCoding).ToList();
+
+        return new CodeableConcept
+        {
+            Coding = codings,
+            Text = display
+        };
+    }
+
+    private CodeableConcept BuildCodeableConcept(string display, Elm.Code[] codes)
+    {
+        var codings = codes.Select(BuildCoding).ToList();
+
+        return new CodeableConcept
+        {
+            Coding = codings,
+            Text = display
+        };
+    }
+
+    private Coding BuildCoding(Elm.CodeRef codeRef)
+    {
+        if (librarySet.TryResolveDefinition<Elm.CodeDef>(library, codeRef, out var cd))
+            return BuildCoding(cd.id, cd.codeSystem, cd.display);
+        else
+            throw new UnresolvedReferenceError(library, codeRef).ToException();
+    }
+
+    private Coding BuildCoding(Elm.Code code) => BuildCoding(code.code, code.system, code.display);
+
+    private Coding BuildCoding(
+        string code,
+        Elm.CodeSystemRef codeSystemRef,
+        string display)
+    {
+        if (librarySet.TryResolveDefinition<Elm.CodeSystemDef>(library, codeSystemRef, out var csd))
+        {
+            return new Coding
+            {
+                Code = code,
+                System = csd.id,
+                Display = display
+            };
+        }
+
+        throw new UnresolvedReferenceError(library, codeSystemRef).ToException();
+    }
 }

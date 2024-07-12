@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
-using System.Runtime.InteropServices;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
@@ -36,9 +35,9 @@ partial class LibraryExpressionBuilderContext
 
         void AddDefinitions(Library library)
         {
-            string libraryName = library.NameAndVersion(true)!;
+            string libraryName = library.NameAndVersion()!;
             if (!HasAliasForNameAndVersion(libraryName))
-                throw new LibraryAliasUnresolvedError(library).ToException();
+                throw new LibraryDoesNotAppearAsADependencyError(library).ToException();
 
             if (LibrarySetContext!.LibrarySetDefinitions.TryGetDefinitionsForLibrary(
                     libraryName,

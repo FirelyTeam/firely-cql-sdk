@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -14,6 +14,13 @@ using System.Xml;
 
 namespace Hl7.Cql.Elm
 {
+    /// <summary>
+    /// Represents an ELM element that is used a a reference to a definition in a library.
+    /// </summary>
+    internal interface IReferenceElement : IGetName
+    {
+    }
+
     /// <summary>
     /// Represents an ELM Element that is used as a definition in a library or other resolution scope.
     /// </summary>
@@ -201,7 +208,7 @@ namespace Hl7.Cql.Elm
             TypeSpecifier aliasType;
             if (resultTypeSpecifier is ListTypeSpecifier list)
                 aliasType = list.elementType;
-            else 
+            else
                 aliasType = resultTypeSpecifier;
             if (aliasType is null)
                 throw new InvalidOperationException($"Alias type is null");
@@ -269,7 +276,7 @@ namespace Hl7.Cql.Elm
             if (functions.Any(f => f.resultTypeSpecifier is null))
                 throw new ArgumentException("At least one function is missing a result type specifier.");
             var accessLevel = functions.Select(fd => fd.accessLevel).Min(); // public < private; any public overload makes this public
-            return new OverloadedFunctionDef(functions, names[0], accessLevel);       
+            return new OverloadedFunctionDef(functions, names[0], accessLevel);
         }
 
         public static OverloadedFunctionDef Create(params IDefinitionElement[] elements)
@@ -296,8 +303,8 @@ namespace Hl7.Cql.Elm
         public string Name { get; }
         public AccessModifier Access { get; }
 
-        private OverloadedFunctionDef(FunctionDef[] functions, 
-            string name, 
+        private OverloadedFunctionDef(FunctionDef[] functions,
+            string name,
             AccessModifier access)
         {
             Functions = functions;
