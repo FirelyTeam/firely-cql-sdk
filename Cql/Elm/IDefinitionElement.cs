@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -17,6 +17,11 @@ using System.Xml;
 
 namespace Hl7.Cql.Elm
 {
+    /// <summary>
+    /// Represents an ELM element that is used a a reference to a definition in a library.
+    /// </summary>
+    internal interface IReferenceElement : IGetName;
+
     /// <summary>
     /// Represents an ELM Element that is used as a definition in a library or other resolution scope.
     /// </summary>
