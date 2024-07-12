@@ -38,8 +38,6 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Run(TestCase testCase)
         {
-            if (!testCase.TestName.Contains("Ceiling1D"))
-                return;
             if (SkippedTests.DoesNotCompile.TryGetValue(testCase.TestName, out var reason))
                 Assert.Inconclusive($"Case {testCase.Category}: {testCase.TestName} skipped: {reason}");
             var expression = Expression(testCase.Expression);
