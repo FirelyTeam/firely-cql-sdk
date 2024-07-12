@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             co.ValidateLiterals = false;
             co.AllowNullIntervals = true;
-            co.LongsRequireSuffix = false; // promote test values of 2147483648 to longs so LibraryExpressionBuilder doesn't throw
+            co.LongsRequireSuffix = false; // promote test values of 2147483648 to longs so ExpressionBuilder doesn't throw
             co.EnableListPromotion = true;
             co.EnableListDemotion = true;
             co.EnableIntervalPromotion = true;

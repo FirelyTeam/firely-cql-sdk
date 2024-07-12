@@ -16,10 +16,19 @@ namespace Hl7.Cql.CqlToElm
 
         public static Expression Ref(this ISymbolScope symbolScope, MessageProvider messaging, string? libraryAlias, string identifier)
         {
-            var success = TryResolveIdentifier(symbolScope, libraryAlias, identifier, out var result);
+            var success = TryResolveSymbol(symbolScope, libraryAlias, identifier, out var result);
             if (success)
             {
-                return result!.ToRef(libraryAlias);
+                try
+                {
+                    return result!.ToRef(libraryAlias);
+                }
+                catch (InvalidOperationException io) 
+                {
+                    if (io.Message == "ValueFactory attempted to access the Value property of this instance.")
+                        return MakeErrorReference(libraryAlias, identifier, messaging.CannotResolveCircularReference());
+                    else throw;
+                }
             }
             else
             {
@@ -39,7 +48,7 @@ namespace Hl7.Cql.CqlToElm
 
         public static bool TryGetLibraryNameFromLocalAlias(this ISymbolScope symbolScope, string libraryAlias, out string? libraryName)
         {
-            if (symbolScope.TryResolveIdentifier(null, libraryAlias, out var ele) && ele is IncludeDefSymbol ids)
+            if (symbolScope.TryResolveSymbol(null, libraryAlias, out var ele) && ele is ReferencedLibrary ids)
             {
                 libraryName = ids!.path;
                 return true;
@@ -54,7 +63,7 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>True if the identifier was found, false otherwise. <paramref name="result"/> will contain the reference
         /// to the definition in the <see cref="ISymbolScope"/> on success or an <see cref="IdentifierRef"/> with an error 
         /// annotation otherwise.</returns>
-        public static bool TryResolveIdentifier(this ISymbolScope symbolScope, string? libraryName, string identifier, out IDefinitionElement? result)
+        public static bool TryResolveSymbol(this ISymbolScope symbolScope, string? libraryName, string identifier, out IDefinitionElement? result)
         {
             result = null;
             if (libraryName is null)
@@ -65,9 +74,9 @@ namespace Hl7.Cql.CqlToElm
             {
                 if (symbolScope.TryResolveSymbol(libraryName, out var library))
                 {
-                    if (library is IncludeDefSymbol includeDef)
+                    if (library is ReferencedLibrary referencedLibrary)
                     {
-                        return includeDef.Library.TryResolveSymbol(identifier, out result);
+                        return referencedLibrary.Symbols.TryResolveSymbol(identifier, out result);
                     }
                 }
             }

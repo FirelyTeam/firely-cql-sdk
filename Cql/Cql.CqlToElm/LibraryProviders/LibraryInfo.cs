@@ -3,7 +3,7 @@ using System;
 
 namespace Hl7.Cql.CqlToElm.LibraryProviders
 {
-    internal record LibraryInfo(VersionedIdentifier? VersionedIdentifier, Library? Library, string MimeType)
+    internal record LibraryInfo(VersionedIdentifier? VersionedIdentifier, LibraryBuilder? Library, string MimeType)
     {
         // https://www.iana.org/assignments/media-types/application/elm+json
         public const string ElmJsonMimeType = "application/elm+json";

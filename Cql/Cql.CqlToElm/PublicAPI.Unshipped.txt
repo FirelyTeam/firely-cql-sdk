@@ -2,6 +2,10 @@
 Hl7.Cql.CqlToElm.CqlToElmOptions
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.AllowScopeRedefinition.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.AllowScopeRedefinition.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.AssumeInputExtensions.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.AssumeInputExtensions.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.CqlToElmOptions() -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.EnableIntervalDemotion.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.EnableIntervalDemotion.set -> void
@@ -25,6 +29,7 @@ Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.set -> void
 Hl7.Cql.CqlToElm.IModelProvider
 Hl7.Cql.CqlToElm.IModelProvider.Add(Hl7.Cql.Model.ModelInfo! model) -> Hl7.Cql.CqlToElm.IModelProvider!
+Hl7.Cql.CqlToElm.IModelProvider.AllTypes.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Model.TypeInfo!>!
 Hl7.Cql.CqlToElm.IModelProvider.TryGetConversionFunctionName(string! fromQualifiedTypeName, string! toQualifiedTypeName, out string? conversionFunctionName) -> bool
 Hl7.Cql.CqlToElm.IModelProvider.TryGetConversionFunctions(string! fromQualifiedTypeName, out (string! To, string! Function)[]? conversions) -> bool
 Hl7.Cql.CqlToElm.IModelProvider.TryGetModelFromName(string! name, out Hl7.Cql.Model.ModelInfo? model, string? version = null) -> bool

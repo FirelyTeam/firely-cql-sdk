@@ -204,22 +204,55 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var terms = context.expression();
             var lhs = Visit(terms[0]);
             var rhs = Visit(terms[1]);
+            
             Expression expression;
             if (context.GetChild(1).GetText() == "in")
             {
                 var precision = Precision(context.dateTimePrecisionSpecifier());
                 var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
-                var match = InvocationBuilder.MatchSignature(SystemLibrary.In, args);
-                expression = InvocationBuilder.Invoke(match);
+                if (rhs.resultTypeSpecifier == SystemTypes.ValueSetType)
+                {
+                    var match = InvocationBuilder.MatchSignature(SystemLibrary.AnyInValueSet, args);
+                    if (match.Compatible)
+                        expression = InvocationBuilder.Invoke(match);
+                    else {
+                        var anyIn = new AnyInValueSet
+                        {
+                            codes = lhs
+                        }
+                        .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.AnyInValueSet.Name, lhs, rhs))
+                        .WithResultType(SystemTypes.BooleanType);
+                        if (rhs is ValueSetRef vr)
+                            anyIn.valueset = vr;
+                        else anyIn.valuesetExpression = rhs;
+                        expression = anyIn;
+                    }
+                }
+                else
+                {
+                    var match = InvocationBuilder.MatchSignature(SystemLibrary.In, args);
+                    if (match.Compatible)
+                        expression = InvocationBuilder.Invoke(match);
+                    else
+                        expression = new In { operand = new[] { lhs, rhs } }
+                            .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.In.Name, lhs, rhs))
+                            .WithResultType(SystemTypes.BooleanType);
+                }
             }
             else
             {
                 var match = InvocationBuilder.MatchSignature(SystemLibrary.Contains, new[] { lhs, rhs });
-                expression = InvocationBuilder.Invoke(match);
+                if (match.Compatible)
+                    expression = InvocationBuilder.Invoke(match);
+                else
+                    expression = new Contains { operand = new[] { lhs, rhs } }
+                        .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.Contains.Name, lhs, rhs))
+                        .WithResultType(SystemTypes.BooleanType);
             }
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
+
         }
 
         // expression ('|' | 'union' | 'intersect' | 'except') expression 

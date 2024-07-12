@@ -2,6 +2,7 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
@@ -11,23 +12,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor : Visitor<Expression>
     {
-        public ExpressionVisitor(IModelProvider provider,
-            IOptions<CqlToElmOptions> options,
-            LibraryBuilder libraryBuilder,
-            TypeSpecifierVisitor typeSpecifierVisitor,
-            LocalIdentifierProvider localIdentifierProvider,
-            InvocationBuilder invocationBuilder,
-            CoercionProvider coercionProvider,
-            ElmFactory elmFactory,
-            MessageProvider messageProvider) : base(localIdentifierProvider, invocationBuilder)
+        public ExpressionVisitor(IServiceProvider services, LibraryBuilder builder)
         {
-            ModelProvider = provider;
-            LibraryBuilder = libraryBuilder;
-            TypeSpecifierVisitor = typeSpecifierVisitor;
-            CoercionProvider = coercionProvider;
-            ElmFactory = elmFactory;
-            Messaging = messageProvider;
-            Options = options.Value;
+            LibraryBuilder = builder;
+            ModelProvider = services.GetRequiredService<IModelProvider>();
+            CoercionProvider = services.GetRequiredService<CoercionProvider>();
+            ElmFactory = services.GetRequiredService<ElmFactory>();
+            Messaging = services.GetRequiredService<MessageProvider>(); 
+            Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
+            TypeSpecifierVisitor = new TypeSpecifierVisitor(services, builder);
+            InvocationBuilder = services.GetRequiredService<InvocationBuilder>();
         }
 
 
@@ -39,7 +33,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private CoercionProvider CoercionProvider { get; }
         private ElmFactory ElmFactory { get; }
         private MessageProvider Messaging { get; }
+        private InvocationBuilder InvocationBuilder { get; }
+
         #endregion
+
+        internal string NextId() => LibraryBuilder.NextId();
+
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
         // TODO: make a system function & validate it
@@ -90,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 // The validation framework is static and can't accept configuration options :(
                 if (Options.ValidateIntervals ?? false)
                 {
-                    if (intervalSelector.Function.resultTypeSpecifier is IntervalTypeSpecifier intervalType)
+                    if (intervalSelector.Function.ResultTypeSpecifier is IntervalTypeSpecifier intervalType)
                     {
                         var pointType = intervalType.pointType;
                         if (pointType.IsOrderedType())

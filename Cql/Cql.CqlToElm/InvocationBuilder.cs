@@ -55,7 +55,7 @@ namespace Hl7.Cql.CqlToElm
             if (!result.Compatible)
             {
                 return expression
-                    .AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments))
+                    .AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments))
                     .WithResultType(SystemTypes.AnyType);
             }
             else
@@ -81,10 +81,10 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(result.Function, null, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments));
+                expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
             if (result.Function is SystemFunction systemFunction)
                 expression = systemFunction.Validate(expression);
-            var newResultType = ReplaceGenericType(result.Function.resultTypeSpecifier, result.GenericInferences);
+            var newResultType = ReplaceGenericType(result.Function.ResultTypeSpecifier, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);
         }
@@ -96,16 +96,18 @@ namespace Hl7.Cql.CqlToElm
         /// <param name="library">The libary in which this function is defined, or <see langword="null"/> if the function is colocated within the same library as the invocation site.</param>
         /// <param name="arguments">The arguments to invoke.</param>
         /// <returns>The invocation of the best-matching overload.</returns>
-        internal Expression Invoke(FunctionDef function, string? library, params Expression[] arguments)
+        internal Expression Invoke(IHasSignature function, string? library, params Expression[] arguments)
         {
+            if (function is SystemFunction systemFunction && systemFunction.Invoker is not null)
+                return systemFunction.Invoker(this, arguments);
             var result = MatchSignature(function, arguments);
             var newArguments = result.Arguments
                 .Select(cr => cr.Result)
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(function, null, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error ?? Messaging.CouldNotResolveFunction(result.Function.name, arguments));
-            var newResultType = ReplaceGenericType(function.resultTypeSpecifier, result.GenericInferences);
+                expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
+            var newResultType = ReplaceGenericType(function.ResultTypeSpecifier, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);
         }
@@ -125,10 +127,8 @@ namespace Hl7.Cql.CqlToElm
             else
             {
                 var expression = ElmFactory.CreateElmNode(result.Function, null, args);
-                if (result.Error is not null)
-                    expression.AddError(result.Error);
-                else
-                    expression.AddError(Messaging.CouldNotResolveFunction(result.Function.name, result.Arguments.Select(a => a.Result).ToArray()));
+                if (!result.Compatible)
+                    expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, result.Arguments.Select(a => a.Result).ToArray()));
                 return expression;
             }
         }
@@ -138,9 +138,9 @@ namespace Hl7.Cql.CqlToElm
 
         private static readonly System.Collections.ObjectModel.ReadOnlyDictionary<string, TypeSpecifier> EmptyInferences = new(new Dictionary<string, TypeSpecifier>());
 
-        internal SignatureMatchResult MatchSignature(FunctionDef candidate, params Expression[] arguments)
+        internal SignatureMatchResult MatchSignature(IHasSignature candidate, params Expression[] arguments)
         {
-            var operands = candidate.operand ?? Array.Empty<OperandDef>();
+            var operands = candidate.Operands.ToArray() ?? Array.Empty<OperandDef>();
             var operandTypes = operands.Select(op => op.operandTypeSpecifier).ToArray();
             var flags = SignatureMatchFlags.None;
             int requiredArgumentCount = operands.Length;
@@ -152,10 +152,11 @@ namespace Hl7.Cql.CqlToElm
                 flags |= SignatureMatchFlags.TooFewArguments;
             if (flags > SignatureMatchFlags.None)
             {
+                // too many or too few arguments; issue could not resolve error
                 var conversionResults = arguments
                     .Select(arg => new CoercionResult<Expression>(arg, CoercionCost.ExactMatch))
                     .ToArray();
-                return new SignatureMatchResult(candidate, conversionResults, EmptyInferences, flags);
+                return new SignatureMatchResult(candidate, conversionResults, EmptyInferences, flags, ()=> Messaging.CouldNotResolveFunction(candidate.Name, arguments));
             }
             // doing this to make debugging easier
             CoercionResult<Expression>[]? newOperands = null;
@@ -189,12 +190,12 @@ namespace Hl7.Cql.CqlToElm
             }
             if (newOperands != null && genericInferences != null)
             {
-                return new SignatureMatchResult(candidate, newOperands, genericInferences, flags);
+                return new SignatureMatchResult(candidate, newOperands, genericInferences, flags, () => null);
             }
             else if (anyInference != null)
             {
                 newOperands = ReplaceGenericArguments(operandTypes, arguments, anyInference);
-                return new SignatureMatchResult(candidate, newOperands, anyInference, flags);
+                return new SignatureMatchResult(candidate, newOperands, anyInference, flags, ()=>null);
             }
             else
             {
@@ -204,9 +205,8 @@ namespace Hl7.Cql.CqlToElm
                     newOperands[i] = CoercionProvider.Coerce(arguments[i], operandTypes[i]);
                 }
                 string? error = null;
-                if (newOperands.Any(op => op.Cost == CoercionCost.Incompatible))
-                    error = Messaging.CouldNotResolveFunction(candidate.name, arguments);
-                return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, error);
+
+                return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, ()=>error);
             }
         }
 
@@ -303,7 +303,7 @@ namespace Hl7.Cql.CqlToElm
                 firstMatch.Arguments,
                 firstMatch.GenericInferences,
                 firstMatch.Flags,
-                Messaging.CouldNotResolveFunction(firstMatch.Function.name, arguments));
+                ()=>Messaging.CouldNotResolveFunction(firstMatch.Function.Name, arguments));
             return result;
 
             //bool infersAny(SignatureMatchResult result) =>
@@ -339,7 +339,7 @@ namespace Hl7.Cql.CqlToElm
                             cheapest[0].Arguments,
                             cheapest[0].GenericInferences,
                             cheapest[0].Flags | SignatureMatchFlags.Ambiguous,
-                            errorSb.ToString());
+                            ()=>errorSb.ToString());
                         return true;
                     }
                 }

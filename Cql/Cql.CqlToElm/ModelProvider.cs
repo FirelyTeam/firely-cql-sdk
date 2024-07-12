@@ -1,6 +1,8 @@
 ﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
@@ -200,6 +202,18 @@ namespace Hl7.Cql.CqlToElm
             return type;
         }
 
+        internal static IEnumerable<TypeInfo> FindDerivedTypes(this IModelProvider provider, ClassInfo baseType)
+        {
+            var qualified = $"{baseType.@namespace}.{baseType.name}";
+            foreach(var type in provider.AllTypes)
+            {
+                if (type.baseType is not null && 
+                    baseType.identifier is not null && 
+                    type.baseType == qualified)
+                    yield return type;
+            }
+        }
+
         internal static string? Name(this TypeInfo t) => t switch
         {
             ClassInfo ci => ci.name,
@@ -254,7 +268,7 @@ namespace Hl7.Cql.CqlToElm
         {
             if (type is Elm.NamedTypeSpecifier nts)
             {
-                var (model, typeInfo) = provider.FindTypeInfoByNamedType(nts);
+                var (_, typeInfo) = provider.FindTypeInfoByNamedType(nts);
 
                 var subtypeBaseTypeName = typeInfo!.baseType;
 

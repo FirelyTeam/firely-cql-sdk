@@ -41,6 +41,16 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void FlattenCapitalF()
+        {
+            var library = MakeLibrary(@"
+                library ListTest version '1.0.0'
+
+                define private FlattenEmpty: Flatten({{},{}})
+            ");
+        }
+
+        [TestMethod]
         public void FlattenListNullAndNull()
         {
             var lib = CreateLibraryForExpression("Flatten({{null}, {null}})");
@@ -52,5 +62,21 @@ namespace Hl7.Cql.CqlToElm.Test
             var eqr = Run<bool?>(equal); // {null, null}
             eqr.Should().BeTrue();
         }
+        [TestMethod]
+        public void FlattenListOfValueSet()
+        {
+            var library = MakeLibrary(@"
+                library FlattenValueSets version '1.0.0'
+
+                valueset ""One"": 'https://hl7.org/one'
+                valueset ""Two"": 'https://hl7.org/two'
+
+                define f: Flatten({""One"", ""Two""})
+            ");
+            var flatten = library.Should()
+                .BeACorrectlyInitializedLibraryWithStatementOfType<Flatten>();
+            flatten.Should().HaveType(SystemTypes.CodeType.ToListType());
+        }
+
     }
 }

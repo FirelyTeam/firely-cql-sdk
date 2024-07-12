@@ -20,13 +20,13 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var services = ServiceCollection().BuildServiceProvider();
             var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var foo = MakeLibrary(services, @"
+            var foo = MakeLibraryBuilder(services,  @"
                 library Foo version '1.0.0'
 
                 define F: 'foo'
             ");
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.identifier!.id, foo.identifier!.version, foo);
+            libraryProvider.Libraries.Add(foo.Identifier.id, foo.Identifier.version, foo);
 
             var bar = MakeLibrary(services, @"
                 library Bar version '1.0.0'
@@ -45,13 +45,13 @@ namespace Hl7.Cql.CqlToElm.Test
             var services = ServiceCollection().BuildServiceProvider();
             var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
 
-            var foo = MakeLibrary(services, @"
+            var foo = MakeLibraryBuilder(services, @"
                 library Foo version '1.0.0'
 
                 define F: 'foo'
             ");
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.identifier!.id, foo.identifier!.version, foo);
+            libraryProvider.Libraries.Add(foo.Identifier!.id, foo.Identifier!.version, foo);
 
             MakeLibrary(services, @"
                 library Bar version '1.0.0'
@@ -67,13 +67,13 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var services = ServiceCollection().BuildServiceProvider();
             var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var foo = MakeLibrary(services, @"
+            var foo = MakeLibraryBuilder(services, @"
                 library Foo version '1.0.0'
 
                 define function Foo(): 'foo'
             ");
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.identifier!.id, foo.identifier!.version, foo);
+            libraryProvider.Libraries.Add(foo.Identifier!.id, foo.Identifier!.version, foo);
 
             var bar = MakeLibrary(services, @"
                 library Bar version '1.0.0'
@@ -91,13 +91,13 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var services = ServiceCollection().BuildServiceProvider();
             var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var foo = MakeLibrary(services, @"
+            var foo = MakeLibraryBuilder(services, @"
                 library Foo version '1.0.0'
 
                 define function Foo(): 'foo'
             ");
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.identifier!.id, foo.identifier!.version, foo);
+            libraryProvider.Libraries.Add(foo.Identifier!.id, foo.Identifier!.version, foo);
 
             MakeLibrary(services, @"
                 library Bar version '1.0.0'

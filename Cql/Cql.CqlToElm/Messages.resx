@@ -152,6 +152,18 @@
     <value>Found multiple libraries with name '{0}'.</value>
     <comment>{0} = library name</comment>
   </data>
+  <data name="FunctionRedefined" xml:space="preserve">
+    <value>A function named {0} with the same type of arguments is already defined in this library.</value>
+    <comment>{0} = unquoted identifier</comment>
+  </data>
+  <data name="IdentifierAlreadyInScope" xml:space="preserve">
+    <value>Identifier {0} is already in use in this scope.</value>
+    <comment>{0} = identifer name unquoted</comment>
+  </data>
+  <data name="IdentifierAlreadyInUse" xml:space="preserve">
+    <value>Identifier {0} is already in use in this library.</value>
+    <comment>{0} = unquoted identifier</comment>
+  </data>
   <data name="Latest" xml:space="preserve">
     <value>latest</value>
     <comment>The word "latest"</comment>
