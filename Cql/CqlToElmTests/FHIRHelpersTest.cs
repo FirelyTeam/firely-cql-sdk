@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
+using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -103,5 +105,37 @@ namespace Hl7.Cql.CqlToElm.Test
             var delegates = lambdas.CompileAll();
         }
 
+        [TestMethod]
+        public void FHIRHelpers_Coding_To_ListCodes()
+        {
+            var services = ServiceCollection().BuildServiceProvider();
+            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
+            using var scope = services.CreateScope();
+            AddFHIRHelpers(libraryProvider, scope);
+            var lib = MakeLibrary(services, @"
+                library Test version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                valueset ""VS"" : 'http://snomed.info/sct'
+
+                include FHIRHelpers version '4.0.1' called FHIRHelpers
+
+                define function inTest(condition FHIR.Condition, codes List<Code>): 
+                    condition.code.coding in ""VS""
+            ");
+            lib.statements.Should().HaveCount(1);
+            var fd = lib.statements[0].Should().BeOfType<FunctionDef>().Subject;
+            var body = fd.expression;
+            var any = body.Should().BeOfType<AnyInValueSet>().Subject;
+            any.codes.Should().NotBeNull();
+            any.codes.resultTypeSpecifier.Should().NotBeNull();
+            any.codes.resultTypeSpecifier.Should().Be(SystemTypes.CodeType.ToListType());
+            any.codes.Should().BeOfType<Query>();
+            any.valueset.Should().NotBeNull();
+            any.valueset.name.Should().Be("VS");
+            any.resultTypeSpecifier.Should().NotBeNull();
+            any.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+        }
     }
 }

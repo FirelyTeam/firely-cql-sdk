@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
             return false;
         }
 
-        public bool TryGet(string id, string? version, out T? t)
+        public bool TryGet(string id, string? version, [NotNullWhen(true)] out T? t)
         {
             if (Versions.TryGetValue(id, out var versions))
             {
@@ -41,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                 {
                     if (ts.Count == 1)
                     {
-                        t = ts[0];
+                        t = ts[0]!;
                         return true;
                     }
                 }

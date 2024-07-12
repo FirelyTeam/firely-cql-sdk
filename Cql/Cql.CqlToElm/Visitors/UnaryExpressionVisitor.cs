@@ -296,13 +296,28 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var expression = context.GetChild(0).GetText() switch
             {
                 "distinct" => InvocationBuilder.Invoke(SystemLibrary.Distinct, operand),
-                "flatten" => InvocationBuilder.Invoke(SystemLibrary.Flatten, operand),
+                "flatten" => handleFlatten(operand),
                 _ => throw new NotImplementedException(),
             };
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
+
+            Expression handleFlatten(Expression operand)
+            {
+                // there is special logic for handling a List<ValueSet>
+                if (operand.resultTypeSpecifier == SystemTypes.ValueSetType.ToListType())
+                {
+                    var result = CoercionProvider.Coerce(operand, SystemTypes.CodeType.ToListType().ToListType());
+                    if (!result.Success)
+                        throw new InvalidOperationException($"Coercion provider declined to convert List<ValueSet> to List<List<Code>>");
+                    return InvocationBuilder.Invoke(SystemLibrary.Flatten, result.Result);
+                }
+                return InvocationBuilder.Invoke(SystemLibrary.Flatten, operand);
+            }
         }
+
+
 
     }
 }

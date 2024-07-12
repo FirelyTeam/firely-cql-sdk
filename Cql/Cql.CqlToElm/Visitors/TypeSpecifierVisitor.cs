@@ -1,6 +1,10 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using NotNullWhenAttribute = System.Diagnostics.CodeAnalysis.NotNullWhenAttribute;
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -10,14 +14,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public LibraryBuilder LibraryBuilder { get; }
         public MessageProvider Messaging { get; }
 
-        public TypeSpecifierVisitor(
-            LibraryBuilder libraryBuilder,
-            LocalIdentifierProvider localIdentifierProvider,
-            InvocationBuilder invocationBuilder,
-            MessageProvider messaging) : base(localIdentifierProvider, invocationBuilder)
+        public TypeSpecifierVisitor(IServiceProvider services,
+            LibraryBuilder libraryBuilder)
         {
             LibraryBuilder = libraryBuilder;
-            Messaging = messaging;
+            Messaging = services.GetRequiredService<MessageProvider>();
         }
 
         //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
@@ -87,13 +88,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return result.WithLocator(context.Locator());
         }
 
-        private bool TryResolveNamedTypeSpecifier(SymbolTable symbolTable,
+        private bool TryResolveNamedTypeSpecifier(ISymbolScope scope,
             string? libraryName,
             string typeName,
             out NamedTypeSpecifier? namedType,
             out string? error)
         {
-            var success = TryResolveType(symbolTable, libraryName, typeName, out var result, out error);
+            var success = TryResolveType(scope, libraryName, typeName, out var result, out error);
             namedType = result?.ToNamedType();
             return success;
         }
@@ -103,7 +104,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             ? new ModelType(s.Model, typeInfo!) 
             : null;
 
-        private bool TryResolveType(SymbolTable symbolTable,
+        private bool TryResolveType(ISymbolScope scope,
             string? libraryName,
             string typeName,
             out ModelType? result,
@@ -112,7 +113,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // If the typename is qualified with a library name, only look in the specified model library.
             if (libraryName is not null)
             {
-                if (symbolTable.TryResolveSymbol(libraryName, out var model))
+                if (scope.TryResolveSymbol(libraryName, out var model))
                 {
                     if (model is UsingDefSymbol usingDef)
                     {
@@ -132,13 +133,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return error is null;
             }
 
+            var usings = scope.OfType<UsingDefSymbol>();
             // Else, go over all used models to find it. This could mean we find an ambiguous match.
-            return TryGetMatchingTypes(symbolTable, typeName, out result, out error);
+            return TryGetMatchingTypes(usings, typeName, out result, out error);
         }
 
-        internal bool TryGetMatchingTypes(SymbolTable symbolTable, string typeName, [NotNullWhen(true)] out ModelType? result, out string? error)
+        internal bool TryGetMatchingTypes(IEnumerable<UsingDefSymbol> usingDefs, 
+            string typeName, [NotNullWhen(true)] out ModelType? result, out string? error)
         {
-            var usingDefs = symbolTable.Symbols.OfType<UsingDefSymbol>().ToArray();
             var matches = usingDefs.Select(include => (include, modelType: GetModelType(include, typeName)))
                     .Where(r => r.modelType is not null).ToList();
             if (matches.Count == 1)

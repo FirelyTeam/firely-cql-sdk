@@ -7,8 +7,12 @@
  */
 
 using Hl7.Cql.Elm;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using static Hl7.Cql.Elm.SystemTypes;
 
 namespace Hl7.Cql.CqlToElm.Builtin
@@ -16,117 +20,65 @@ namespace Hl7.Cql.CqlToElm.Builtin
     /// <summary>
     /// A Library that represents all the functions defined in the CQL spec.
     /// </summary>
-    internal class SystemLibrary : Library
+    internal class SystemLibrary : Library, ISymbolScope
     {
         public SystemLibrary()
         {
             identifier = new VersionedIdentifier() { id = SystemModelPrefix, version = SystemModelVersion };
-            statements = expressions;
+
+            var fields = typeof(SystemLibrary)
+                .GetFields(BindingFlags.Public | BindingFlags.Static)
+                .Where(field => typeof(IDefinitionElement).IsAssignableFrom(field.FieldType));
+            foreach (var field in fields)
+            {
+                var value = field.GetValue(null) as IDefinitionElement;
+#if DEBUG
+                if (value is null)
+                    throw new InvalidOperationException();
+#endif
+                symbols.Add(value.Name, value);
+            }
+        }
+        private readonly Dictionary<string, IDefinitionElement> symbols = new();
+
+        public ISymbolScope? Parent => null;
+
+        public bool TryAdd(IDefinitionElement symbol) => throw new NotSupportedException($"Symbols cannot be added to the System scope.");
+
+        public bool TryResolveSymbol(string identifier, [NotNullWhen(true)] out IDefinitionElement? symbol) =>
+            symbols.TryGetValue(identifier, out symbol);
+
+        public bool TryResolveFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
+        {
+            if (symbols.TryGetValue(identifier, out var local) && local is IFunctionElement function)
+            {
+                symbol = function;
+                return true;
+            }
+            symbol = null;
+            return false;
         }
 
-        // Only symbols with function-like usage should be added to the symbol table.
-        // Otherwise, if all symbols were added, then functions like Add(1, 2) would resolve in this table,
-        // but that syntax is not recognized by the cql-to-elm reference implementation.
-        //
-        // Per Bryn, all operators should be 
-        public SymbolTable Symbols = new SymbolTable(null,
-            Abs,
-            Avg,
-            AllTrue,
-            AnyTrue,
-            Ceiling,
-            Coalesce,
-            Combine,
-            Concatenate, // has three usages: +, &, and function usage in spec & tests
-            Count,
-            Date,
-            DateTime,
-            Descendants,
-            EndsWith,
-            Exists,
-            Exp,
-            First,
-            Flatten,
-            Floor,
-            HighBoundary,
-            Indexer, // functional usage supported in reference implementation but not mentioned in spec
-            IndexOf,
-            IsFalse,
-            IsNull,
-            IsTrue,
-            Last,
-            LastPositionOf,
-            Length,
-            ListEquivalent,
-            Ln,
-            Log,
-            LowBoundary,
-            Lower,
-            Matches,
-            Max,
-            Median,
-            Message,
-            Min,
-            Mode,
-            Now,
-            PopulationStdDev,
-            PopulationVariance,
-            PositionOf,
-            Power, // has both operator and function usage in spec & tests
-            Precision,
-            ReplaceMatches,
-            Round,
-            Skip,
-            Split,
-            StartsWith,
-            StdDev,
-            Substring,
-            Sum,
-            Take,
-            Tail,
-            Time,
-            TimeOfDay,
-            ToBoolean,
-            ToConcept,
-            ToDateTime,
-            ToDecimal,
-            ToInteger,
-            Today,
-            ToStringFunction,
-            ToQuantity,
-            ToTime,
-            Truncate,
-            Upper,
-            Variance);
+        public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
+        {
+            // there are no fluent functions in the system library
+            symbol = null;
+            return false;
+        }
 
-        public bool IsSystemFunction(string name, params TypeSpecifier[] operands) =>
-            operands?.Length switch
-            {
-                0 => expressions
-                        .OfType<ExpressionDef>()
-                        .Any(ed => ed.name == name),
-                > 0 => expressions
-                    .OfType<FunctionDef>()
-                    .Any(fd => fd.name == name
-                        && fd.operand?.Length == operands.Length
-                        && fd.operand
-                            .Select(op => op.resultTypeSpecifier)
-                            .Zip(operands, (x, y) => x == y)
-                            .All(x => x)),
-                _ => false
-            };
 
-        private static readonly ExpressionDef[] expressions = typeof(SystemLibrary)
-                .GetFields(System.Reflection.BindingFlags.Static)
-                .Where(field => typeof(ExpressionDef).IsAssignableFrom(field.FieldType))
-                .Select(field => field.GetValue(null))
-                .Cast<ExpressionDef>()
-                .ToArray();
+        public ISymbolScope EnterScope() => throw new NotSupportedException($"You cannot enter a scope from the System scope.");
+
+        public IEnumerator<IDefinitionElement> GetEnumerator() => symbols.Values.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public IEnumerable<ReferencedLibrary> ReferencedLibraries => Enumerable.Empty<ReferencedLibrary>();
 
         private static SystemFunction<T> nullary<T>(TypeSpecifier result) where T : Expression =>
             new(EmptyOperands, result, typeof(T).Name);
-        private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : Expression =>
-            new(new[] { argument }, result, name ?? typeof(T).Name);
+        private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null,
+            Func<InvocationBuilder, Expression[], Expression>? invoker = null) where T : Expression =>
+            new(new[] { argument }, result, name ?? typeof(T).Name, invoker: invoker);
         private static SystemFunction<T> unaryWithPrecision<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : Expression =>
             new(new[] { argument, StringType }, result, name ?? typeof(T).Name, 1);
         private static SystemFunction<T> binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : Expression =>
@@ -139,6 +91,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             new(Enumerable.Range(0, operandCount).Select(i => operandType).ToArray(), result, typeof(T).Name, requiredParameterCount);
         private static SystemFunction<T> aggregate<T>(TypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
             new(new[] { source.ToListType() }, result, typeof(T).Name);
+
         public static readonly TypeSpecifier[] EmptyOperands = System.Array.Empty<TypeSpecifier>();
 
         private static readonly ParameterTypeSpecifier T = new ParameterTypeSpecifier { parameterName = nameof(T) };
@@ -155,26 +108,24 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<AllTrue> AllTrue = aggregate<AllTrue>(BooleanType, BooleanType);
         public static SystemFunction<And> And = binary<And>(BooleanType, BooleanType, BooleanType);
         public static SystemFunction<AnyTrue> AnyTrue = aggregate<AnyTrue>(BooleanType, BooleanType);
+        public static OverloadedFunctionDef AnyInValueSet = binary<AnyInValueSet>(T, ValueSetType, BooleanType).For(T, StringType.ToListType(), CodeType.ToListType(), ConceptType.ToListType());
         public static OverloadedFunctionDef Avg = aggregate<Avg>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef Between = nary<Between>(new[] { T, T, T }, 3, BooleanType).For(T, OrderedTypes.ToArray());
         public static SystemFunction<Case> Case = new SystemFunction<Case>(new TypeSpecifier[] { BooleanType, T, T }, T);
         public static OverloadedFunctionDef Ceiling = unary<Ceiling>(T, T).For(T, NumericTypes);
         public static OverloadedFunctionDef Coalesce = nary<Coalesce>(new[] { T, T, T, T, T }, 2, T).Combine(unary<Coalesce>(T.ToListType(), T));
-        public static SystemFunction<ToConcept> CodeToConcept = unary<ToConcept>(CodeType, ConceptType);
         public static SystemFunction<Combine> Combine = nary<Combine>(new TypeSpecifier[] { StringType.ToListType(), StringType }, 1, StringType);
         public static SystemFunction<Concatenate> Concatenate = binary<Concatenate>(StringType, StringType, StringType);
         public static OverloadedFunctionDef Contains = OverloadedFunctionDef.Create(binary<Contains>(T.ToListType(), T, BooleanType), binary<Contains>(T.ToIntervalType(), T, BooleanType));
         public static SystemFunction<Count> Count = aggregate<Count>(T, IntegerType);
         public static SystemFunction<Date> Date = nary<Date>(IntegerType, 3, 1, DateType);
         public static SystemFunction<DateFrom> DateFrom = unary<DateFrom>(DateTimeType, DateType);
-        public static SystemFunction<DateTime> DateTime = nary<DateTime>(new[] { IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, DecimalType }, 1, DateTimeType);
-        public static SystemFunction<ToDateTime> DateToDateTime = unary<ToDateTime>(DateType, DateTimeType);
-        public static SystemFunction<ToQuantity> DecimalToQuantity = unary<ToQuantity>(DecimalType, QuantityType);
+        public static SystemFunction<Elm.DateTime> DateTime = nary<Elm.DateTime>(new[] { IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, DecimalType }, 1, DateTimeType);
         public static SystemFunction<Descendents> Descendants = unary<Descendents>(AnyType, AnyType, "descendents").MakeFluent(); // this is always called like <any>.descendents()
         public static OverloadedFunctionDef DifferenceBetween = binaryWithPrecision<DifferenceBetween>(T, T, IntegerType)
             .ValidateWith(Validators.Validate)
             .For(T, DateType, DateTimeType, TimeType);
-        public static SystemFunction<Distinct> Distinct = unary<Distinct>(T.ToListType(), T.ToListType());
+        public static SystemFunction<Distinct> Distinct = unary<Distinct>(T.ToListType(), T.ToListType(), "distinct");
         public static OverloadedFunctionDef Divide = binary<Divide>(T, T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef DurationBetween = binaryWithPrecision<DurationBetween>(T, T, IntegerType)
             .ValidateWith(Validators.Validate)
@@ -184,7 +135,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<EndsWith> EndsWith = binary<EndsWith>(StringType, StringType, BooleanType);
         public static OverloadedFunctionDef Equal = binary<Equal>(T, T, BooleanType).WithListAndIntervalVariants(T);
         public static OverloadedFunctionDef Equivalent = binary<Equivalent>(T, T, BooleanType).WithListAndIntervalVariants(T);
-        public static SystemFunction<Equivalent> ListEquivalent = binary<Equivalent>(T.ToListType(), T.ToListType(), BooleanType);
         public static OverloadedFunctionDef Except = binary<Except>(T.ToIntervalType(), T.ToIntervalType(), T.ToIntervalType()).For(T, IntervalPointTypes.ToArray())
             .Combine(binary<Except>(T.ToListType(), T.ToListType(), T.ToListType()));
         public static SystemFunction<Exists> Exists = unary<Exists>(T.ToListType(), BooleanType);
@@ -195,7 +145,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
             binary<Expand>(T.ToIntervalType(), QuantityType, T.ToListType())
                 .For(T, DecimalType, QuantityType, DateType, DateTimeType, TimeType));
         public static SystemFunction<First> First = unary<First>(T.ToListType(), T);
-        public static SystemFunction<Flatten> Flatten = unary<Flatten>(T.ToListType().ToListType(), T.ToListType());
+        public static SystemFunction<Flatten> Flatten = unary<Flatten>(T.ToListType().ToListType(), T.ToListType(),
+            invoker: Invokers.Flatten);           
         public static OverloadedFunctionDef Floor = unary<Floor>(T, T).For(T, NumericTypes);
         public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
@@ -209,9 +160,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             binaryWithPrecision<Includes>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static SystemFunction<Indexer> Indexer = binary<Indexer>(StringType, IntegerType, StringType);
         public static SystemFunction<IndexOf> IndexOf = binary<IndexOf>(T.ToListType(), T, IntegerType);
-        public static SystemFunction<ToDecimal> IntegerToDecimal = unary<ToDecimal>(IntegerType, DecimalType);
         public static SystemFunction<ToLong> IntegerToLong = unary<ToLong>(IntegerType, LongType);
-        public static SystemFunction<ToQuantity> IntegerToQuantity = unary<ToQuantity>(IntegerType, QuantityType);
         public static OverloadedFunctionDef Intersect = binary<Intersect>(T.ToIntervalType(), T.ToIntervalType(), T.ToIntervalType()).For(T, IntervalPointTypes.ToArray())
             .Combine(binary<Intersect>(T.ToListType(), T.ToListType(), T.ToListType()));
         public static OverloadedFunctionDef Interval = nary<Interval>(new TypeSpecifier[] { T, T, BooleanType, BooleanType, }, 4, T.ToIntervalType())
@@ -224,12 +173,10 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Last> Last = unary<Last>(T.ToListType(), T);
         public static SystemFunction<LastPositionOf> LastPositionOf = binary<LastPositionOf>(StringType, StringType, IntegerType);
         public static OverloadedFunctionDef Length = unary<Length>(T.ToListType(), IntegerType)
-            .Combine(unary<Length>(SystemTypes.StringType, IntegerType));
+            .Combine(unary<Length>(StringType, IntegerType));
         public static OverloadedFunctionDef Less = binary<Less>(T, T, BooleanType).For(T, OrderedTypes.ToArray());
         public static OverloadedFunctionDef LessOrEqual = binary<LessOrEqual>(T, T, BooleanType).For(T, OrderedTypes.ToArray());
         public static SystemFunction<Ln> Ln = unary<Ln>(DecimalType, DecimalType);
-        public static SystemFunction<ToDecimal> LongToDecimal = unary<ToDecimal>(LongType, DecimalType);
-        public static SystemFunction<ToQuantity> LongToQuantity = unary<ToQuantity>(LongType, QuantityType);
         public static SystemFunction<Log> Log = binary<Log>(DecimalType, DecimalType, DecimalType);
         public static SystemFunction<Lower> Lower = unary<Lower>(StringType, StringType);
         public static OverloadedFunctionDef LowBoundary = binary<LowBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
@@ -353,4 +300,20 @@ namespace Hl7.Cql.CqlToElm.Builtin
         }
     }
 
+    internal static class Invokers
+    {
+        public static Expression Flatten(InvocationBuilder builder, Expression[] args)
+        {
+            var operand = args[0];
+            // there is special logic for handling a List<ValueSet>
+            if (operand.resultTypeSpecifier == ValueSetType.ToListType())
+            {
+                var result = builder.CoercionProvider.Coerce(operand, CodeType.ToListType().ToListType());
+                if (!result.Success)
+                    throw new InvalidOperationException($"Coercion provider declined to convert List<ValueSet> to List<List<Code>>");
+                return builder.Invoke(SystemLibrary.Flatten, result.Result);
+            }
+            return builder.Invoke(SystemLibrary.Flatten, operand);
+        }
+    }
 }

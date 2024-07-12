@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.CqlToElm.Scopes;
 using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
@@ -10,23 +11,50 @@ namespace Hl7.Cql.CqlToElm
     {
         private static readonly VersionedIdentifier schemaIdentifier = new() { id = "urn:hl7-org:elm", version = "r1" };
 
-        public LibraryBuilder(SystemLibrary systemLibrary)
+        /// <summary>
+        /// Creates a new instance from an existing library.  Its symbol table will be populated with its existing definitions.
+        /// </summary>
+        public static LibraryBuilder CreateFromExisting(Library library) => throw new NotImplementedException();
+        // TODO: this is a really leaky abstraction.  Identifier shouldn't be unset.
+        public LibraryBuilder(SystemLibrary systemLibrary, LocalIdentifierProvider localIdentifierProvider)
         {
-            CurrentScope = SymbolTable;
             Identifier = new VersionedIdentifier() { id = "unset", version = "0.0.0" };
-            SystemScope = systemLibrary.Symbols;
+            SymbolTable = new LibrarySymbolTable(Identifier, systemLibrary);
+            CurrentScope = SymbolTable;
+            LocalIdentifierProvider = localIdentifierProvider;
+        }
+
+        public LibraryBuilder(VersionedIdentifier identifier, SystemLibrary systemLibrary, LocalIdentifierProvider localIdentifierProvider)
+        {
+            Identifier = identifier;
+            SymbolTable = new LibrarySymbolTable(Identifier, systemLibrary);
+            CurrentScope = SymbolTable;
+            LocalIdentifierProvider = localIdentifierProvider;
         }
 
         public VersionedIdentifier Identifier { get; set; }
-
-
+        public LocalIdentifierProvider LocalIdentifierProvider { get; }
+        internal string NextId() => LocalIdentifierProvider.Next();
         /// <summary>
         /// Builds a library from the current state of the builder.
         /// </summary>
         public Library Build()
         {
-            var symbols = SymbolTable.Symbols;
-
+            var symbols = SymbolTable;
+            var expressionDefs = symbols.OfType<ExpressionDef>()
+                .Concat(symbols.OfType<DeferredExpressionDef>().Select(dd => dd.Resolve()));
+            var functionDefs = symbols.OfType<FunctionDef>()
+                .Concat(symbols.OfType<OverloadedFunctionDef>()
+                    .SelectMany(od => od.Functions.Select(f => f switch
+                    {
+                        FunctionDef fd => fd,
+                        DeferredFunctionDef dfd => dfd.Resolve(),
+                        _ => throw new NotSupportedException("Unknown function element type")
+                    })))
+                .Concat(symbols.OfType<DeferredFunctionDef>().Select(dfd => dfd.Resolve()));
+            var statements = expressionDefs
+                .Concat(functionDefs)
+                .ToArray();
             return new Library
             {
                 identifier = Identifier,
@@ -39,17 +67,16 @@ namespace Hl7.Cql.CqlToElm
                 codes = symbols.OfType<CodeDef>().ToArray(),
                 concepts = symbols.OfType<ConceptDef>().ToArray(),
                 contexts = symbols.OfType<ContextDef>().ToArray(),
-                statements = symbols.OfType<ExpressionDef>().ToArray(),
+                statements = statements,
                 annotation = errors.ToArray()
             };
         }
 
         private readonly List<CqlToElmError> errors = new();
 
-        public SymbolTable SymbolTable { get; } = new(null);  // we're a top-level scope
+        public LibrarySymbolTable SymbolTable { get; }
 
         public ISymbolScope CurrentScope { get; private set; }
-        public ISymbolScope SystemScope { get; }
 
         public void AddError(string message, ErrorType errorType) =>
             errors.Add(new CqlToElmError()

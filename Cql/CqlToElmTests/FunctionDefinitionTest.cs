@@ -3,8 +3,10 @@ using System.IO;
 using Antlr4.Runtime;
 using FluentAssertions;
 using Hl7.Cql.CqlToElm.Grammar;
+using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -154,5 +156,115 @@ namespace Hl7.Cql.CqlToElm.Test
             define b: a",
             "Cannot resolve reference to expression or function a because it results in a circular reference.");
         }
+
+        [TestMethod]
+        public void CallsFluentOnMember()
+        {
+            var lib = MakeLibrary(@"
+            library FuncTest version '1.0.0'
+            
+            using FHIR version '4.0.1'
+
+            define fluent function ""To date interval""(period FHIR.Period):
+                Interval[date from start of period, date from end of period]
+
+            define fluent function ""Interval""(coverage FHIR.Coverage):
+                (coverage.period as FHIR.Period).""To date interval""()
+            ");
+            lib.GetErrors().Should().BeEmpty();
+        }
+        [TestMethod]
+        public void CallsFluentOnMember_AcrossLibrary()
+        {
+            var services = ServiceCollection().BuildServiceProvider();
+            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
+            var fluentLib = MakeLibraryBuilder(services, @"
+                library FluentLib version '1.0.0'
+            
+                using FHIR version '4.0.1'
+
+                define fluent function ""To date interval""(period FHIR.Period):
+                    Interval[date from start of period, date from end of period]
+            ");
+            libraryProvider.Libraries.Add("FluentLib", "1.0.0", fluentLib);
+            var testLib = MakeLibrary(services, @"
+            library FuncTest version '1.0.0'
+            
+            using FHIR version '4.0.1'
+            
+            include FluentLib version '1.0.0'
+
+            define fluent function ""Interval""(coverage FHIR.Coverage):
+                (coverage.period as FHIR.Period).""To date interval""()
+            ");
+            testLib.GetErrors().Should().BeEmpty();
+            testLib.statements.Should().NotBeNull();
+            testLib.statements.Should().HaveCount(1);
+            var subject = testLib.statements[0].Should().BeOfType<FunctionDef>().Subject;
+
+
+        }
+
+        [TestMethod]
+        public void BirthdatePlusAge()
+        {
+            var services = ServiceCollection().BuildServiceProvider();
+            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
+            using var scope = services.CreateScope();
+            AddFHIRHelpers(libraryProvider, scope);
+            var lib = MakeLibrary(services, @"
+                library Test version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                include FHIRHelpers version '4.0.1'
+
+                define function f(patient FHIR.Patient, condition FHIR.Condition):
+                  patient.birthDate + (condition.onset as FHIR.Age)
+            ");
+            var add = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Add>();
+            add.operand.Should().HaveCount(2);
+            var toDate = add.operand[0].Should().BeOfType<FunctionRef>().Subject;
+            Assert.AreEqual("FHIRHelpers", toDate.libraryName);
+            Assert.AreEqual("ToDate", toDate.name);
+            Assert.AreEqual(1, toDate.operand?.Length);
+            Assert.AreEqual(SystemTypes.DateType, toDate.resultTypeSpecifier);
+            var toQuantity = add.operand[1].Should().BeOfType<FunctionRef>().Subject;
+            Assert.AreEqual("FHIRHelpers", toQuantity.libraryName);
+            Assert.AreEqual("ToQuantity", toQuantity.name);
+            Assert.AreEqual(1, toQuantity.operand?.Length);
+            Assert.AreEqual(SystemTypes.QuantityType, toQuantity.resultTypeSpecifier);
+        }
+
+        [TestMethod]
+        public void ComplexCaseStatement()
+        {
+            var lib = MakeLibrary(@"
+                library FuncTest version '1.0.0'
+            
+                using FHIR version '4.0.1'
+
+                define fluent function ""Onset date""(condition FHIR.Condition, birthDate Date):
+                case
+                    when condition is null or condition.onset is null then 
+                        null
+                    when condition.onset is FHIR.dateTime then 
+                        date from (condition.onset as FHIR.dateTime)
+                    when condition.onset is FHIR.Period then 
+                        date from start of (condition.onset as FHIR.Period)
+                    when condition.onset is FHIR.Age and birthDate is not null then 
+                        birthDate + (condition.onset as FHIR.Age)
+                    when condition.onset is Range and birthDate is not null then 
+                        birthDate + (condition.onset as FHIR.Range).low
+                    else 
+                        null
+                end            
+            ");
+            var cs = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
+            cs.Should().HaveType(SystemTypes.DateType);
+
+        }
+
+
     }
 }

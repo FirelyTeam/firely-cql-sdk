@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize(co =>
         {
-            co.AllowNullIntervals = true;
+            co.AllowNullIntervals = true;   
         });
 #pragma warning restore IDE0060 // Remove unused parameter
 
