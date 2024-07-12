@@ -199,6 +199,21 @@ Hl7.Cql.Elm.DateTimePrecision.Month = 1 -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.DateTimePrecision.Second = 6 -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.DateTimePrecision.Week = 2 -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.DateTimePrecision.Year = 0 -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DeferredDefinition<T>
+Hl7.Cql.Elm.DeferredDefinition<T>.Access.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.DeferredDefinition<T>.AddError(Hl7.Cql.Elm.CqlToElmError! error) -> Hl7.Cql.Elm.IDefinitionElement!
+Hl7.Cql.Elm.DeferredDefinition<T>.DeferredDefinition(string! name, Hl7.Cql.Elm.AccessModifier access, System.Func<T>! resolve) -> void
+Hl7.Cql.Elm.DeferredDefinition<T>.Definition.get -> System.Lazy<T>!
+Hl7.Cql.Elm.DeferredDefinition<T>.Name.get -> string!
+Hl7.Cql.Elm.DeferredDefinition<T>.Resolve() -> T
+Hl7.Cql.Elm.DeferredDefinition<T>.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
+Hl7.Cql.Elm.DeferredExpressionDef
+Hl7.Cql.Elm.DeferredExpressionDef.DeferredExpressionDef(string! name, Hl7.Cql.Elm.AccessModifier access, System.Func<Hl7.Cql.Elm.ExpressionDef!>! resolve) -> void
+Hl7.Cql.Elm.DeferredFunctionDef
+Hl7.Cql.Elm.DeferredFunctionDef.DeferredFunctionDef(Hl7.Cql.Elm.AccessModifier access, bool fluent, string! name, Hl7.Cql.Elm.OperandDef![]! operand, System.Func<Hl7.Cql.Elm.FunctionDef!>! resolve) -> void
+Hl7.Cql.Elm.DeferredFunctionDef.Fluent.get -> bool
+Hl7.Cql.Elm.DeferredFunctionDef.Operands.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.OperandDef!>!
+Hl7.Cql.Elm.DeferredFunctionDef.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier!
 Hl7.Cql.Elm.Descendents
 Hl7.Cql.Elm.Descendents.Descendents() -> void
 Hl7.Cql.Elm.DifferenceBetween
@@ -280,11 +295,14 @@ Hl7.Cql.Elm.FunctionDef.external.get -> bool
 Hl7.Cql.Elm.FunctionDef.external.set -> void
 Hl7.Cql.Elm.FunctionDef.externalSpecified.get -> bool
 Hl7.Cql.Elm.FunctionDef.externalSpecified.set -> void
+Hl7.Cql.Elm.FunctionDef.Fluent.get -> bool
 Hl7.Cql.Elm.FunctionDef.fluent.get -> bool
 Hl7.Cql.Elm.FunctionDef.fluent.set -> void
 Hl7.Cql.Elm.FunctionDef.fluentSpecified.get -> bool
 Hl7.Cql.Elm.FunctionDef.fluentSpecified.set -> void
 Hl7.Cql.Elm.FunctionDef.FunctionDef() -> void
+Hl7.Cql.Elm.FunctionDef.Operands.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.OperandDef!>!
+Hl7.Cql.Elm.FunctionDef.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier!
 Hl7.Cql.Elm.FunctionRef
 Hl7.Cql.Elm.FunctionRef.FunctionRef() -> void
 Hl7.Cql.Elm.FunctionRef.operands.get -> Hl7.Cql.Elm.Expression![]!
@@ -302,9 +320,17 @@ Hl7.Cql.Elm.IDefinitionElement.AddError(Hl7.Cql.Elm.CqlToElmError! error) -> Hl7
 Hl7.Cql.Elm.IDefinitionElement.Name.get -> string!
 Hl7.Cql.Elm.IDefinitionElement.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
 Hl7.Cql.Elm.IdentifierRef
+Hl7.Cql.Elm.IdentifierRef.Access.get -> Hl7.Cql.Elm.AccessModifier
 Hl7.Cql.Elm.IdentifierRef.IdentifierRef() -> void
+Hl7.Cql.Elm.IdentifierRef.Name.get -> string!
+Hl7.Cql.Elm.IdentifierRef.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
 Hl7.Cql.Elm.If
 Hl7.Cql.Elm.If.If() -> void
+Hl7.Cql.Elm.IFunctionElement
+Hl7.Cql.Elm.IHasSignature
+Hl7.Cql.Elm.IHasSignature.Fluent.get -> bool
+Hl7.Cql.Elm.IHasSignature.Operands.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.OperandDef!>!
+Hl7.Cql.Elm.IHasSignature.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier!
 Hl7.Cql.Elm.Implies
 Hl7.Cql.Elm.Implies.Implies() -> void
 Hl7.Cql.Elm.In
@@ -513,6 +539,8 @@ Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.get -> bool
 Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.set -> void
 Hl7.Cql.Elm.OverloadedFunctionDef
 Hl7.Cql.Elm.OverloadedFunctionDef.Access.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.OverloadedFunctionDef.Add(Hl7.Cql.Elm.FunctionDef! function) -> Hl7.Cql.Elm.OverloadedFunctionDef!
+Hl7.Cql.Elm.OverloadedFunctionDef.Functions.get -> System.Collections.Generic.IReadOnlyList<Hl7.Cql.Elm.IHasSignature!>!
 Hl7.Cql.Elm.OverloadedFunctionDef.Name.get -> string!
 Hl7.Cql.Elm.ParameterDef
 Hl7.Cql.Elm.ParameterDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
@@ -803,6 +831,8 @@ static Hl7.Cql.Elm.Library.EqualityComparerByNameAndVersion.get -> System.Collec
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream, string? originalFilePath = null) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.OverloadedFunctionDef.CanCombine(params Hl7.Cql.Elm.IFunctionElement![]! elements) -> bool
+static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.IFunctionElement![]! elements) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.CodeSystemType -> Hl7.Cql.Elm.NamedTypeSpecifier!
