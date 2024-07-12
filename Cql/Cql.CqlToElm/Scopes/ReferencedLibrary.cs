@@ -1,62 +1,41 @@
-﻿using Hl7.Cql.Elm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Hl7.Cql.CqlToElm.Scopes;
+using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm
 {
     /// <summary>
-    /// Allows resolution of definition from a pre-existing ("already compiled") ELM Library.
+    /// A class extends <see cref="IncludeDef"/> with an actual reference to a Library, so it can function as a symbol table
+    /// to resolve identifiers within the included library.
     /// </summary>
-    internal class ReferencedLibrary : ISymbolScope
+    internal class ReferencedLibrary : IncludeDef, IDefinitionElement
     {
-        public ReferencedLibrary(Library source)
+        public ReferencedLibrary(string localIdentifier, VersionedIdentifier id, LibrarySymbolTable symbols)
         {
-            Source = source;
-
-            symbols = new(loadLibrary);
+            this.localIdentifier = localIdentifier;
+            path = symbols.LibraryIdentifier.id;
+            version = symbols.LibraryIdentifier.version;
+            Id = id;
+            Symbols = symbols;
         }
+        public VersionedIdentifier Id { get; }
+        public ISymbolScope Symbols { get; }
 
-        public Library Source { get; }
-
-        public ISymbolScope? Parent => symbols.Value.Parent;
-
-        private readonly Lazy<SymbolTable> symbols;
-
-        private SymbolTable loadLibrary()
-        {
-            // A library is a top-level construct, so no parent scope.
-            var result = new SymbolTable(null);
-
-            add(Source.parameters);
-            add(Source.codeSystems);
-            add(Source.valueSets);
-            add(Source.codes);
-            add(Source.concepts);
-            add(Source.contexts);
-            add(Source.statements);
-
-            return result;
-
-            void add(IEnumerable<IDefinitionElement> symbols)
-            {
-                if (symbols is null) return;
-
-                foreach (var symbol in symbols.Where(s => s.IsVisible(AccessModifier.Public)))
-                {
-                    if (!result.TryAdd(symbol))
-                        throw new InvalidOperationException($"Duplicate symbol {symbol.Name} in library {Source.NameAndVersion}.");
-                }
-            }
-
-        }
-
-        public bool TryAdd(IDefinitionElement symbol) => throw new NotSupportedException("A referenced library is read-only, it cannot be added to.");
-
-        public bool TryResolveSymbol(string identifier, out IDefinitionElement? symbol) =>
-            symbols.Value.TryResolveSymbol(identifier, out symbol);
-
-        public ISymbolScope EnterScope() => new SymbolTable(this);
+        public Expression ToRef(string? _) => new IncludeRef(this);
     }
 
+    /// <summary>
+    /// This class is used to represent a reference to an included library. Although it does not exist in ELM officially,
+    /// we introduce it here to allow the term parsing rules to return a reference to the included library, which we can then
+    /// handle in the higher-level parsing rules. This class is not supposed to be externally visible, so should never be serialized
+    /// into an ELM library.
+    /// </summary>
+    internal class IncludeRef : Expression
+    {
+        public IncludeRef(ReferencedLibrary includeDef)
+        {
+            IncludeDef = includeDef;
+        }
+
+        public ReferencedLibrary IncludeDef { get; }
+    }
 }

@@ -47,12 +47,20 @@ namespace Hl7.Cql.Elm.Serialization
 
         private static T? CreateInstance(Type instanceType, ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
+            bool notIgnored(PropertyInfo p)
+            {
+                var attr = p.GetCustomAttribute<JsonIgnoreAttribute>();
+                return attr is null;
+            }
+
             var t = (T)Activator.CreateInstance(instanceType)!;
+
             var properties = instanceType.GetProperties(
                 BindingFlags.Public
                 | BindingFlags.Instance
                 | BindingFlags.GetProperty
                 | BindingFlags.SetProperty)
+                .Where(notIgnored)
                 .ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
             var valuePropertiesRead = properties
                 .Values

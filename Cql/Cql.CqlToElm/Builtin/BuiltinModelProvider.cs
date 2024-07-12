@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -20,10 +21,15 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
         private Dictionary<string, Dictionary<string, string>> ConversionFunctions { get; } = new();
 
+        // TODO: test with multiple versions of the same model; maybe don't support that
+        public IEnumerable<TypeInfo> AllTypes => ModelsByUriAndVersion.Values
+            .SelectMany(versions => versions.Values
+                .SelectMany(model => model.typeInfo));
+
         public IModelProvider Add(ModelInfo model)
         {
             if (model.requiredModelInfo is not null)
-                checkRequiredModels(model.name, model.requiredModelInfo);
+                CheckRequiredModels(model.name, model.requiredModelInfo);
 
             if (!ModelsByUriAndVersion.TryGetValue(model.url, out var modelsByVersion))
             {
@@ -33,19 +39,40 @@ namespace Hl7.Cql.CqlToElm.Builtin
             modelsByVersion!.Add(model.version, model);
             foreach(var conversionInfo in model.conversionInfo ?? Enumerable.Empty<ConversionInfo>())
             {
-                if (!ConversionFunctions.TryGetValue(conversionInfo.fromType, out var toFunctions))
+                var fromTypes = Enumerable.Empty<TypeInfo>();
+                if (model.TryGetTypeInfoFor(conversionInfo.fromType, out var fromType)
+                    && fromType is ClassInfo fromClass)
                 {
-                    toFunctions = new();
-                    ConversionFunctions.Add(conversionInfo.fromType, toFunctions);
+                    // FHIR has simple types like Quantity which have derived types like Age.
+                    // There is a conversion from FHIR.Quantity to System.Quantity,
+                    // but none for Age.  Nevertheless, the conversion should be called.
+                    fromTypes = new[] { fromType };
+                    var derived = this.FindDerivedTypes(fromClass).ToArray();
+                    if (derived.Length > 0)
+                    {
+                        fromTypes = fromTypes.Concat(derived);
+                    }
                 }
-                if (!toFunctions.ContainsKey(conversionInfo.toType))
-                    toFunctions.Add(conversionInfo.toType, conversionInfo.functionName);
-                else throw new InvalidOperationException($"The conversion from {conversionInfo.fromType} to {conversionInfo.toType} is already defined by {conversionInfo.functionName}");
+
+                foreach (var ft in fromTypes.OfType<ClassInfo>())
+                {
+                    var qualified = $"{ft.@namespace}.{ft.name}";
+                    if (!ConversionFunctions.TryGetValue(qualified, out var toFunctions))
+                    {
+                        toFunctions = new();
+                        ConversionFunctions.Add(qualified, toFunctions);
+                    }
+                    if (!toFunctions.ContainsKey(conversionInfo.toType))
+                    {
+                        toFunctions.Add(conversionInfo.toType, conversionInfo.functionName);
+                    }
+                    else throw new InvalidOperationException($"The conversion from {conversionInfo.fromType} to {conversionInfo.toType} is already defined by {conversionInfo.functionName}");
+                }
             }
             return this;
         }
 
-        private void checkRequiredModels(string name, Model.ModelSpecifier[] requiredModelInfo)
+        private void CheckRequiredModels(string name, Model.ModelSpecifier[] requiredModelInfo)
         {
             foreach (var requiredModel in requiredModelInfo)
             {

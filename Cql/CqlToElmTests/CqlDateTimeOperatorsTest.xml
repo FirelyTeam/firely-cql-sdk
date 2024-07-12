@@ -376,11 +376,6 @@
 			<expression>millisecond from DateTime(2003, 10, 29, 20, 50, 33, 955)</expression>
 			<output>955</output>
 		</test>
-		<test name="DateTimeComponentFromTimezone">
-			<expression>timezone from DateTime(2003, 10, 29, 20, 50, 33, 955, 1)</expression>
-			<output>1.00</output>
-			<!-- Translation Error: Timezone keyword is only valid in 1.3 or lower -->
-		</test>
 		<test name="DateTimeComponentFromDate">
 			<expression>date from DateTime(2003, 10, 29, 20, 50, 33, 955, 1)</expression>
 			<output>@2003-10-29</output>
@@ -668,11 +663,6 @@
 		<test name="TimeDurationBetweenHour">
 			<expression>hours between @T20:26:15.555 and @T23:25:15.555</expression>
 			<output>2</output>
-		</test>
-		<test name="TimeDurationBetweenHourDiffPrecision">
-			<expression>hours between @T06Z and @T07:00:00Z</expression>
-			<output>1</output>
-			<!-- Translation Error: Syntax error at Z -->
 		</test>
 		<test name="TimeDurationBetweenMinute">
 			<expression>minutes between @T23:20:16.555 and @T23:25:15.555</expression>

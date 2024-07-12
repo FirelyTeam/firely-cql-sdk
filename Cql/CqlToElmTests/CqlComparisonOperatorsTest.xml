@@ -93,6 +93,10 @@
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'John' }</expression>
 			<output>false</output>
 		</test>
+		<test name="TupleEqMissingFieldIsNull">
+			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : null }</expression>
+			<output>null</output>
+		</test>
 		<test name="TupleEqDateTimeTrue">
 			<expression>Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) }</expression>
 			<output>true</output>
@@ -133,6 +137,10 @@
 			<expression>@2014-01-25T14:30:14.559+01:00 = @2014-01-25T14:30:14.559+01:00</expression>
 			<output>true</output>
 		</test>
+		<test name="DateTimeDayCompare">
+			<expression>@2022-02-22T00:00:00.000-05:00 same day as @2022-02-22T04:59:00.000Z</expression>
+			<output>true</output>
+		</test>
 		<test name="TimeEq10A10A">
 			<expression>@T10:00:00.000 = @T10:00:00.000</expression>
 			<output>true</output>
@@ -166,6 +174,10 @@
 		<test name="GreaterDecZNeg1">
 			<expression>0.0 &gt; -1.0</expression>
 			<output>true</output>
+		</test>
+		<test name="GreaterDec1Int2">
+			<expression>1.0 &gt; 2</expression>
+			<output>false</output>
 		</test>
 		<test name="GreaterCM0CM0">
 			<expression>0'cm' &gt; 0'cm'</expression>
@@ -266,6 +278,10 @@
 		<test name="GreaterOrEqualDecZNeg1">
 			<expression>0.0 &gt;= -1.0</expression>
 			<output>true</output>
+		</test>
+		<test name="GreaterOrEqualDec1Int2">
+			<expression>1.0 &gt;= 2</expression>
+			<output>false</output>
 		</test>
 		<test name="GreaterOrEqualCM0CM0">
 			<expression>0'cm' &gt;= 0'cm'</expression>
@@ -375,6 +391,10 @@
 			<expression>0.0 &lt; -1.0</expression>
 			<output>false</output>
 		</test>
+		<test name="LessDec1Int2">
+			<expression>1.0 &lt; 2</expression>
+			<output>true</output>
+		</test>
 		<test name="LessCM0CM0">
 			<expression>0'cm' &lt; 0'cm'</expression>
 			<output>false</output>
@@ -474,6 +494,10 @@
 		<test name="LessOrEqualDecZNeg1">
 			<expression>0.0 &lt;= -1.0</expression>
 			<output>false</output>
+		</test>
+		<test name="LessOrEqualDec1Int2">
+			<expression>1.0 &lt;= 2</expression>
+			<output>true</output>
 		</test>
 		<test name="LessOrEqualCM0CM0">
 			<expression>0'cm' &lt;= 0'cm'</expression>
@@ -742,6 +766,10 @@
 		<test name="TupleNotEqJohn1John2">
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'John' }</expression>
 			<output>true</output>
+		</test>
+		<test name="TupleNotEqMissingFieldIsNull">
+			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 1, Name : null }</expression>
+			<output>null</output>
 		</test>
 		<test name="DateTimeNotEqTodayToday">
 			<expression>Today() != Today()</expression>

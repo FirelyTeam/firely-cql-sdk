@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -33,9 +35,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Action<IModelProvider>? models = null) =>
             new ServiceCollection()
                 .AddModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
-                .AddVisitors()
                 .AddSystem()
-                .AddLocalIdProvider()
                 .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
                 .AddMessaging()
                 .AddLogging(builder => builder
@@ -48,7 +48,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private class TestLibraryProvider : ILibraryProvider
         {
-            public bool TryResolveLibrary(string libraryName, string? version, out Library? library, out string? error)
+            public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? library, out string? error)
             {
                 (library, error) = (null, null);
                 return false;
@@ -92,7 +92,19 @@ namespace Hl7.Cql.CqlToElm.Test
 
             return library;
         }
+        internal LibraryBuilder MakeLibraryBuilder(IServiceProvider services, string cql, params string[] expectedErrors)
+        {
+            using var scope = services.CreateScope();
+            var builder = services.GetRequiredService<CqlToElmConverter>()
+                .GetBuilder(cql, scope);
+            var lib = builder.Build();
+            if (expectedErrors.Any())
+                lib.ShouldReportError(expectedErrors);
+            else
+                lib.ShouldSucceed();
 
+            return builder;
+        }
         internal static object? Run(Expression expression, CqlContext? ctx = null)
         {
             var lambda = LibraryExpressionBuilder.Lambda(expression);
@@ -256,6 +268,15 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private ""{memberName}"": {expression}");
             return lib.statements[0].expression;
+        }
+
+        internal static void AddFHIRHelpers(MemoryLibraryProvider provider,
+            IServiceScope scope,
+            string path = @"Input\FHIRHelpers-4.0.1.cql")
+        {
+            var text = File.ReadAllText(path);
+            var builder = DefaultConverter.GetBuilder(text, scope);
+            provider.Libraries.Add("FHIRHelpers", "4.0.1", builder);
         }
 
     }

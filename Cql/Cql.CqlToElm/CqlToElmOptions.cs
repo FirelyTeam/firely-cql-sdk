@@ -22,6 +22,19 @@
 
         /// <summary>
         /// <para>
+        /// When <see langword="true"/>, files in the <see cref="Input"/> path with a .cql extension will be treated as CQL source files
+        /// and files with a .json or .xml extension will be treated as ELM libraries.  All other files will be ignored.
+        /// When <see langword="false"/>, all files in <see cref="Input"/> will be analyzed to determine which type of artifact it is.
+        /// The default value is <see langword="true"/>.
+        /// </para>
+        /// <para>
+        /// Setting this value to <see langword="false"/> can have a significant adverse performance impact for paths with many files.
+        /// </para>
+        /// </summary>
+        public bool? AssumeInputExtensions { get; set; } = true;
+
+        /// <summary>
+        /// <para>
         /// Sets the default URI of the ELM model that will be automatically included
         /// as a <code>using</code> directive, using the local identifer <code>System</code>.
         /// </para>
@@ -128,5 +141,19 @@
         /// </remarks>
         /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
         public bool? EnableListDemotion { get; set; } = false;
+
+        /// <summary>
+        /// <para>
+        /// When <see langword="true"/>, redefining a previously defined identifier will be allowed, for example:
+        /// <code>
+        /// from [Condition] c let x: c.onset, x: c.abatement return x
+        /// </code>
+        /// </para>
+        /// <para>
+        /// When <see langword="false"/>, an error will occur.
+        /// The default value is <see langword="false"/>.
+        /// </para>
+        /// </summary>
+        public bool? AllowScopeRedefinition { get; set; } = false;
     }
 }

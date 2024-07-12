@@ -142,6 +142,33 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A function named {0} with the same type of arguments is already defined in this library..
+        /// </summary>
+        internal static string FunctionRedefined {
+            get {
+                return ResourceManager.GetString("FunctionRedefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identifier {0} is already in use in this scope..
+        /// </summary>
+        internal static string IdentifierAlreadyInScope {
+            get {
+                return ResourceManager.GetString("IdentifierAlreadyInScope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identifier {0} is already in use in this library..
+        /// </summary>
+        internal static string IdentifierAlreadyInUse {
+            get {
+                return ResourceManager.GetString("IdentifierAlreadyInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to latest.
         /// </summary>
         internal static string Latest {

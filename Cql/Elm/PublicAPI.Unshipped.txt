@@ -221,9 +221,6 @@ Hl7.Cql.Elm.DurationBetween.precisionSpecified.get -> bool
 Hl7.Cql.Elm.DurationBetween.precisionSpecified.set -> void
 Hl7.Cql.Elm.Element
 Hl7.Cql.Elm.Element.Element() -> void
-Hl7.Cql.Elm.ElmTreeWalker
-Hl7.Cql.Elm.ElmTreeWalker.ElmTreeWalker(System.Func<object!, bool>! visitor, params System.Type![]! additionalTypes) -> void
-Hl7.Cql.Elm.ElmTreeWalker.Walk(object? root) -> void
 Hl7.Cql.Elm.End
 Hl7.Cql.Elm.End.End() -> void
 Hl7.Cql.Elm.Ends
@@ -516,7 +513,6 @@ Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.get -> bool
 Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.set -> void
 Hl7.Cql.Elm.OverloadedFunctionDef
 Hl7.Cql.Elm.OverloadedFunctionDef.Access.get -> Hl7.Cql.Elm.AccessModifier
-Hl7.Cql.Elm.OverloadedFunctionDef.Functions.get -> Hl7.Cql.Elm.FunctionDef![]!
 Hl7.Cql.Elm.OverloadedFunctionDef.Name.get -> string!
 Hl7.Cql.Elm.ParameterDef
 Hl7.Cql.Elm.ParameterDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
@@ -807,8 +803,6 @@ static Hl7.Cql.Elm.Library.EqualityComparerByNameAndVersion.get -> System.Collec
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream, string? originalFilePath = null) -> Hl7.Cql.Elm.Library!
-static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.FunctionDef![]! functions) -> Hl7.Cql.Elm.OverloadedFunctionDef!
-static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.IDefinitionElement![]! elements) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.CodeSystemType -> Hl7.Cql.Elm.NamedTypeSpecifier!

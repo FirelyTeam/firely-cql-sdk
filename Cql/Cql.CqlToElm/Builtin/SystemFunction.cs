@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
-    internal abstract class SystemFunction: FunctionDef
+    internal abstract class SystemFunction: FunctionDef, IHasSignature
     {
         public abstract Type ElmNodeType { get; }
         public abstract int? RequiredParameterCount { get; protected set; }
@@ -25,6 +25,15 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// <param name="element">The element to validate.</param>
         public abstract TElement Validate<TElement>(TElement element)
             where TElement : Element;
+
+        /// <summary>
+        /// When provided, invokes the function.  Otherwise, default invocation behavior will be used.
+        /// </summary>
+        /// <remarks>
+        /// A handful of system functions have seemingly one-off behavior that can't be handled with standard invocation logic.
+        /// Those functions specify their own logic.
+        /// </remarks>
+        public Func<InvocationBuilder, Expression[], Expression>? Invoker { get; set; }
 
         /// <summary>
         /// Return a string like "first", "second", "third", etc. for the given position of the argument.
@@ -76,7 +85,10 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private SystemFunction()
         {
         }
-        public SystemFunction(IEnumerable<TypeSpecifier> operands, TypeSpecifier resultType, string? name = null, int? requiredParameterCount = null)
+        public SystemFunction(IEnumerable<TypeSpecifier> operands, TypeSpecifier resultType, 
+            string? name = null, 
+            int? requiredParameterCount = null,
+            Func<InvocationBuilder, Expression[], Expression>? invoker = null)
         {
             this.name = name ?? typeof(T).Name;
             expression = null;
@@ -97,6 +109,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 .ToArray();
 
             RequiredParameterCount = requiredParameterCount;
+            Invoker = invoker;
         }
 
         /// <summary>

@@ -285,15 +285,5 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return versionedIdentifier;
         }
-
-        // referentialIdentifier typeSpecifier;
-        public static OperandDef Parse(this cqlParser.OperandDefinitionContext context, TypeSpecifierVisitor typeSpecVisitor)
-        {
-            var identifier = context.referentialIdentifier().Parse();
-            var type = typeSpecVisitor.Visit(context.typeSpecifier());
-
-            var od = new OperandDef() { name = identifier, operandTypeSpecifier = type };
-            return od.WithLocator(context.Locator()).WithResultType(type);
-        }
     }
 }

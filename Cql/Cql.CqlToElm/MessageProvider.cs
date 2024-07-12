@@ -39,7 +39,11 @@ namespace Hl7.Cql.CqlToElm
         public string ExpressionCannotBeLibraryRef(string library) =>
             string.Format(Culture, Messages.ExpressionCannotBeLibraryRef, library);
         public string FoundMultipleLibraries(string name) =>
-            string.Format(Culture, Messages.FoundMultipleLibraries, name);
+            string.Format(Culture, Messages.FoundMultipleLibraries, name);        
+        public string IdentifierAlreadyInUse(string name) =>
+            string.Format(Culture, Messages.IdentifierAlreadyInUse, name);
+        public string IdentifierAlreadyInScope(string name) =>
+            string.Format(Culture, Messages.IdentifierAlreadyInScope, name);
         public string NamedTypeRequiredInContext() => Messages.NamedTypeRequiredInContext;
         public string TypeCannotBeCast(TypeSpecifier from, TypeSpecifier to) =>
             string.Format(Culture, Messages.TypeCannotBeCast, from, to);

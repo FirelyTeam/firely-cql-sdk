@@ -49,18 +49,22 @@ namespace Hl7.Cql.CqlToElm
         /// <exception cref="ArgumentException">if <paramref name="cql"/> is empty.</exception>
         public Library ConvertLibrary(string cql)
         {
-            using var cqlLibrary = new StringReader(cql);
             using var scope = Services.CreateScope();
+            var builder = GetBuilder(cql, scope);
+            var lib = builder.Build();
+            if (lib.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
+                Logger.LogWarning("Parsed ELM tree contains errors.");
+            return lib;
+        }
 
-            var visitor = scope.ServiceProvider.GetRequiredService<LibraryVisitor>();
-
+        internal LibraryBuilder GetBuilder(string cql, IServiceScope scope)
+        {
+            using var cqlLibrary = new StringReader(cql);
+            var visitor = new LibraryVisitor(scope.ServiceProvider);
             try
             {
-                var library = visitor.Visit(ParseLibrary(cqlLibrary));
-                if (library.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
-                    Logger.LogWarning("Parsed ELM tree contains errors.");
-
-                return library;
+                var builder = visitor.Visit(ParseLibrary(cqlLibrary));
+                return builder;
             }
             catch (Exception e)
             {
@@ -68,6 +72,7 @@ namespace Hl7.Cql.CqlToElm
                 throw;
             }
         }
+
 
         internal static cqlParser.LibraryContext ParseLibrary(TextReader cqlLibrary)
         {

@@ -3,7 +3,6 @@ using FluentAssertions.Types;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NuGet.Frameworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +29,8 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static Null Null() => new Null().WithResultType(SystemTypes.AnyType);
+        private static Null Null(TypeSpecifier type) => new Null().WithResultType(type);
+
         private static Literal String(string value = "") => ElmFactory.Literal(value);
         private static Literal Integer(int value = 1) => ElmFactory.Literal(value); private static Interval Interval(Expression low, Expression high) => new Interval { low = low, high = high }.WithResultType(low.resultTypeSpecifier.ToIntervalType());
 
@@ -39,7 +40,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static Elm.Tuple Tuple(params (string name, Expression value)[] tuple) =>
             new Elm.Tuple { element = tuple.Select(t => new TupleElement { name = t.name, value = t.value }).ToArray() }
-            .WithResultType(TupleType(tuple.Select(t=>(t.name, t.value.resultTypeSpecifier)).ToArray()));
+            .WithResultType(TupleType(tuple.Select(t => (t.name, t.value.resultTypeSpecifier)).ToArray()));
         private static TypeSpecifier TupleType(params (string name, TypeSpecifier type)[] tuple) =>
             new TupleTypeSpecifier { element = tuple.Select(t => new TupleElementDefinition { name = t.name, elementType = t.type }).ToArray() };
 
@@ -236,7 +237,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ListIntervalIntegerToListIntervalDecimal()
         {
-            var expression = List(SystemTypes.IntegerType.ToIntervalType(), 
+            var expression = List(SystemTypes.IntegerType.ToIntervalType(),
                 Interval(Integer(1), Integer(2)));
             var result = CoercionProvider.Coerce(expression,
                 SystemTypes.DecimalType.ToIntervalType().ToListType());
@@ -255,5 +256,62 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(result.Success);
             Assert.AreEqual(CoercionCost.ImplicitToSimpleType, result.Cost);
         }
+
+        [TestMethod]
+        public void ValueSetToListCode()
+        {
+            var expression = ValueSet();
+            var result = CoercionProvider.Coerce(expression,
+                SystemTypes.CodeType.ToListType());
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(CoercionCost.ImplicitToClassType, result.Cost);
+        }
+
+        [TestMethod]
+        public void ListValueSetToListListCodes()
+        {
+            var expression = List(SystemTypes.ValueSetType, ValueSet(), ValueSet());
+            var llc = SystemTypes.CodeType.ToListType().ToListType();
+            var result = CoercionProvider.Coerce(expression, llc);
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(CoercionCost.ImplicitToClassType, result.Cost);
+            Assert.AreEqual(llc, result.Result.resultTypeSpecifier);
+        }
+
+        [TestMethod]
+        public void FhirAgeToQuantity()
+        {
+            // This conversion is defined
+            // <conversionInfo functionName="FHIRHelpers.ToQuantity" fromType="FHIR.Quantity" toType="System.Quantity"/>
+            // Age is a subtype of FHIR.Quantity
+
+            var qnts = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Quantity") };
+            var result = CoercionProvider.Coerce(Null(qnts), SystemTypes.QuantityType);
+            Assert.IsTrue(result.Success);
+
+            var ageNts = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Age") };
+            result = CoercionProvider.Coerce(Null(ageNts), SystemTypes.QuantityType);
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(CoercionCost.ImplicitToClassType, result.Cost);
+            Assert.IsInstanceOfType(result.Result, typeof(FunctionRef));
+            var fr = (FunctionRef)result.Result;
+        }
+
+        [TestMethod]
+        public void FhirDateToSystemDate()
+        {
+            var fdt = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}date") };
+            var cost = CoercionProvider.GetCoercionCost(fdt, SystemTypes.DateType);
+            Assert.AreEqual(CoercionCost.ImplicitToSimpleType, cost);
+            var result = CoercionProvider.Coerce(Null(fdt), SystemTypes.DateType);
+            Assert.IsInstanceOfType(result.Result, typeof(FunctionRef));
+            var fr = (FunctionRef)result.Result;
+            Assert.AreEqual("FHIRHelpers", fr.libraryName);
+            Assert.AreEqual("ToDate", fr.name);
+            Assert.AreEqual(1, fr.operand?.Length);
+            Assert.IsInstanceOfType(fr.operand![0], typeof(Null));
+            Assert.AreEqual(SystemTypes.DateType, fr.resultTypeSpecifier);
+        }
+      
     }
 }

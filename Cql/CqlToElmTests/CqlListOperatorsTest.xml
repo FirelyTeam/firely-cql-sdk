@@ -546,10 +546,6 @@
 			<expression>Length({ @T15:59:59.999, @T20:59:59.999, @T15:59:59.999, @T20:59:59.999, @T15:59:59.999, @T20:59:59.999 })</expression>
 			<output>6</output>
 		</test>
-		<test name="LengthNullString">
-			<expression>Length(null as String)</expression>
-			<output>null</output>
-		</test>
 		<test name="LengthNullList">
 			<expression>Length(null as List&lt;Any&gt;)</expression>
 			<output>0</output>

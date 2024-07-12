@@ -30,7 +30,6 @@ namespace Hl7.Cql.Primitives
         /// <param name="high">The high value.</param>
         /// <param name="lowClosed">Whether this value is closed on its low end.</param>
         /// <param name="highClosed">Whether this value is closed on its high end.</param>
-        /// <exception cref="ArgumentNullException">If both <paramref name="low"/> and <paramref name="high"/> are null.</exception>
         public CqlInterval(T? low, T? high, bool lowClosed, bool highClosed)
         {
             this.low = low!;
