@@ -221,9 +221,6 @@ Hl7.Cql.Elm.DurationBetween.precisionSpecified.get -> bool
 Hl7.Cql.Elm.DurationBetween.precisionSpecified.set -> void
 Hl7.Cql.Elm.Element
 Hl7.Cql.Elm.Element.Element() -> void
-Hl7.Cql.Elm.ElmTreeWalker
-Hl7.Cql.Elm.ElmTreeWalker.ElmTreeWalker(System.Func<object!, bool>! visitor, params System.Type![]! additionalTypes) -> void
-Hl7.Cql.Elm.ElmTreeWalker.Walk(object? root) -> void
 Hl7.Cql.Elm.End
 Hl7.Cql.Elm.End.End() -> void
 Hl7.Cql.Elm.Ends
