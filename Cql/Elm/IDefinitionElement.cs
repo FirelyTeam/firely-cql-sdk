@@ -12,6 +12,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Xml;
 
 namespace Hl7.Cql.Elm
@@ -61,8 +62,10 @@ namespace Hl7.Cql.Elm
 
     public partial class ValueSetDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ValueSetRef
@@ -76,8 +79,10 @@ namespace Hl7.Cql.Elm
 
     public partial class CodeSystemDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new CodeSystemRef
@@ -91,8 +96,10 @@ namespace Hl7.Cql.Elm
 
     public partial class ConceptDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ConceptRef
@@ -107,8 +114,10 @@ namespace Hl7.Cql.Elm
 
     public partial class CodeDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new CodeRef
@@ -125,6 +134,7 @@ namespace Hl7.Cql.Elm
     {
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ParameterRef
@@ -139,8 +149,10 @@ namespace Hl7.Cql.Elm
 
     public partial class ExpressionDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ExpressionRef
@@ -155,14 +167,19 @@ namespace Hl7.Cql.Elm
 
     public partial class FunctionDef : IFunctionElement, IHasSignature
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
+        [JsonIgnore]
         public IEnumerable<OperandDef> Operands => operand ?? Enumerable.Empty<OperandDef>();
 
+        [JsonIgnore]
         public TypeSpecifier ResultTypeSpecifier => resultTypeSpecifier!;
 
+        [JsonIgnore]
         public bool Fluent => fluentSpecified && fluent;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
@@ -181,10 +198,13 @@ namespace Hl7.Cql.Elm
     {
         // ContextDefs are represented by expressions with the same name in the symbol table,
         // so for ContextDefs themselves, we will return an "unresolvable" name.
+        [JsonIgnore]
         string IDefinitionElement.Name => $"$context:{this.name}";
 
+        [JsonIgnore]
         public bool IsUnfiltered => name == "Unfiltered";
 
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
         // Since there is no way to reference a context definition, we will throw an exception
@@ -198,8 +218,10 @@ namespace Hl7.Cql.Elm
 
     public partial class OperandDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new OperandRef
@@ -213,8 +235,10 @@ namespace Hl7.Cql.Elm
 
     public partial class AliasedQuerySource : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => alias;
 
         Expression IDefinitionElement.ToRef(string? libraryName)
@@ -236,8 +260,10 @@ namespace Hl7.Cql.Elm
 
     public partial class LetClause : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => identifier;
 
         Expression IDefinitionElement.ToRef(string? _) => new QueryLetRef
@@ -251,8 +277,10 @@ namespace Hl7.Cql.Elm
 
     public partial class UsingDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => localIdentifier;
 
         Expression IDefinitionElement.ToRef(string? _) =>
@@ -267,7 +295,10 @@ namespace Hl7.Cql.Elm
     /// </summary>
     partial class IdentifierRef : IDefinitionElement
     {
+        [JsonIgnore]
         public AccessModifier Access => AccessModifier.Private;
+
+        [JsonIgnore]
         public string Name => name;
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
@@ -277,8 +308,10 @@ namespace Hl7.Cql.Elm
 
     public partial class IncludeDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => localIdentifier;
 
         Expression IDefinitionElement.ToRef(string? _) =>
@@ -342,9 +375,13 @@ namespace Hl7.Cql.Elm
 
 
         private readonly List<IHasSignature> _functions;
+        [JsonIgnore]
         public IReadOnlyList<IHasSignature> Functions => _functions!.AsReadOnly();
 
+        [JsonIgnore]
         public string Name { get; }
+
+        [JsonIgnore]
         public AccessModifier Access { get; }
 
         private OverloadedFunctionDef(IEnumerable<IHasSignature> functions,
@@ -377,8 +414,11 @@ namespace Hl7.Cql.Elm
     public abstract class DeferredDefinition<T> : IDefinitionElement
         where T : IDefinitionElement
     {
+        [JsonIgnore]
         public string Name { get; }
+        [JsonIgnore]
         public AccessModifier Access { get; }
+        [JsonIgnore]
         protected Lazy<T> Definition { get; }
         public T Resolve() => Definition.Value;
 
@@ -417,11 +457,13 @@ namespace Hl7.Cql.Elm
             Fluent = fluent;
             Operands = operand;
         }
+
         // the signature has to be known initially without resolution.
+        [JsonIgnore]
         public IEnumerable<OperandDef> Operands { get; }
+        [JsonIgnore]
         public bool Fluent { get; }
-
+        [JsonIgnore]
         public TypeSpecifier ResultTypeSpecifier => Resolve().ResultTypeSpecifier;
-
     }
 }
