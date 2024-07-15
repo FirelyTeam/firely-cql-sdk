@@ -845,13 +845,13 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Initial_Population_1_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Intake_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.GreaterOrEqual(f_, 6);
-		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var i_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var k_ = context.Operators.End(c_);
 		var l_ = context.Operators.DateFrom(k_);
 		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
@@ -1442,13 +1442,13 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Initial_Population_2_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Intake_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
 		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 		var g_ = context.Operators.GreaterOrEqual(f_, 6);
-		var i_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var i_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var k_ = context.Operators.End(c_);
 		var l_ = context.Operators.DateFrom(k_);
 		var m_ = context.Operators.CalculateAgeAt(i_, l_, "year");

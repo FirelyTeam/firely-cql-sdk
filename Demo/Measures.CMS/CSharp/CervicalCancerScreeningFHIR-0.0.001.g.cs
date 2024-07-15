@@ -242,7 +242,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -423,7 +423,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			object j_()
 			{
 				bool ad_()

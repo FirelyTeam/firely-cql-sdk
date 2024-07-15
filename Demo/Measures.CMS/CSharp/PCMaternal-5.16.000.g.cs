@@ -169,7 +169,7 @@ public class PCMaternal_5_16_000
 			var d_ = this.Patient();
 			var e_ = d_?.BirthDateElement;
 			var f_ = e_?.Value;
-			var g_ = context.Operators.Convert<CqlDate>(f_);
+			var g_ = context.Operators.ConvertStringToDate(f_);
 			var h_ = InpatientEncounter?.Period;
 			var i_ = FHIRHelpers_4_3_000.ToInterval(h_);
 			var j_ = context.Operators.Start(i_);

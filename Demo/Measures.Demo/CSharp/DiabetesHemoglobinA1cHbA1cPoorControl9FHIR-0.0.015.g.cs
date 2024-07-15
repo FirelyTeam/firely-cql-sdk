@@ -321,7 +321,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -489,7 +489,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var b_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var c_ = context.Operators.Or(a_, b_);
 		var d_ = this.Patient();
-		var e_ = context.Operators.Convert<CqlDate>(d_?.BirthDateElement?.Value);
+		var e_ = context.Operators.ConvertStringToDate(d_?.BirthDateElement?.Value);
 		var f_ = this.Measurement_Period();
 		var g_ = context.Operators.Start(f_);
 		var h_ = context.Operators.DateFrom(g_);

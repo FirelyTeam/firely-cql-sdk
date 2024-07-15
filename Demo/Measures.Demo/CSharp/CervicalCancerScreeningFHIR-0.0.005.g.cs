@@ -315,7 +315,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -492,7 +492,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var n_ = this.Patient();
 			var o_ = n_?.BirthDateElement;
 			var p_ = o_?.Value;
-			var q_ = context.Operators.Convert<CqlDate>(p_);
+			var q_ = context.Operators.ConvertStringToDate(p_);
 			var r_ = HPVTest?.Effective;
 			var s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(r_);
 			var t_ = context.Operators.Start(s_);
@@ -640,7 +640,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var h_ = this.Patient();
 			var i_ = h_?.BirthDateElement;
 			var j_ = i_?.Value;
-			var k_ = context.Operators.Convert<CqlDate>(j_);
+			var k_ = context.Operators.ConvertStringToDate(j_);
 			var l_ = HPVTest?.Effective;
 			var m_ = this.toInterval(l_);
 			var n_ = context.Operators.Start(m_);
