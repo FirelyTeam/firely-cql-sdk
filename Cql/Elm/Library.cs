@@ -37,7 +37,7 @@ public partial class Library
         if (IsValidated)
             return;
 
-        NameAndVersion(throwError: true);
+        _ = NameAndVersion(throwError: true);
 
         if (includes is { Length: > 0 } includeDefs)
         {
@@ -82,7 +82,7 @@ public partial class Library
         if (elmFile2.Exists)
             return LoadFromJson(elmFile2, validate);
 
-        throw new FileNotFoundException("File does not exist.", elmFile.FullName);
+        throw new FileNotFoundException($"File {elmFile.FullName} does not exist.", elmFile.FullName);
     }
 
     /// <exception cref="FileNotFoundException"></exception>
@@ -94,7 +94,7 @@ public partial class Library
         bool validate = true)
     {
         if (!file.Exists)
-            throw new FileNotFoundException("File does not exist.", file.FullName);
+            throw new FileNotFoundException($"File {file.FullName} does not exist.", file.FullName);
 
         using var stream = file.OpenRead();
         var library = LoadFromJson(stream, file.FullName);
