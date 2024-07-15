@@ -32,6 +32,14 @@
 		<ProjectReference Include="..\Cql.CqlToElm\Cql.CqlToElm.csproj" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<LibrarySet>CqlToElmTests</LibrarySet>
+		<CqlDirectory>$(MSBuildProjectDirectory)/input</CqlDirectory>
+		<ElmDirectory>$(MSBuildProjectDirectory)/input</ElmDirectory>
+	</PropertyGroup>
+
+	<Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
+
 	<ItemGroup>
 		<None Update="Input\FHIRHelpers-4.0.1.cql">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
