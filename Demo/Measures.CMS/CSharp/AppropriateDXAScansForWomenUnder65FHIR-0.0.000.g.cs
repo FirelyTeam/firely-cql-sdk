@@ -823,7 +823,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -869,7 +869,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var m_ = BMIRatio?.Value;
 			var n_ = context.Operators.Convert<Quantity>(m_);
 			var o_ = FHIRHelpers_4_3_000.ToQuantity(n_);
-			var p_ = context.Operators.Not((bool?)(o_ is null));
+			var p_ = context.Operators.Not((bool?)((o_ as CqlQuantity) is null));
 			var q_ = context.Operators.And(l_, p_);
 
 			return q_;
@@ -907,7 +907,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			var g_ = context.Operators.Convert<Quantity>(f_);
 			var h_ = FHIRHelpers_4_3_000.ToQuantity(g_);
 			var i_ = context.Operators.Quantity(20m, "kg/m2");
-			var j_ = context.Operators.LessOrEqual(h_, i_);
+			var j_ = context.Operators.LessOrEqual((h_ as CqlQuantity), i_);
 
 			return j_;
 		};
@@ -1138,9 +1138,9 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			return ar_;
 		};
 		var v_ = context.Operators.Where<MedicationRequest>(t_, u_);
-		var w_ = context.Operators.Union<object>(n_, (v_ as IEnumerable<object>));
+		var w_ = context.Operators.Union<object>((n_ as IEnumerable<object>), (v_ as IEnumerable<object>));
 		var x_ = this.Parent_History_of_Hip_Fracture_Assessment();
-		var y_ = context.Operators.Union<object>(w_, (x_ as IEnumerable<object>));
+		var y_ = context.Operators.Union<object>((w_ as IEnumerable<object>), (x_ as IEnumerable<object>));
 		var z_ = context.Operators.Exists<object>(y_);
 
 		return z_;
@@ -1525,7 +1525,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		{
 			var ah_ = ORAI?.Value;
 			var ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
-			var aj_ = context.Operators.GreaterOrEqual((int?)ai_, 9);
+			var aj_ = context.Operators.GreaterOrEqual((ai_ as int?), 9);
 
 			return aj_;
 		};

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
@@ -126,14 +127,22 @@ partial class LibraryExpressionBuilderContext
         }
 
         AddCodeSystemRefs(Library);
+    }
 
-        void AddCodeSystemRefs(Library library)
+    private void AddCodeSystemRefs(Library library)
+    {
+        if (library.codeSystems is { Length: > 0 } codeSystemDefs)
         {
-            if (library.codeSystems is { Length: > 0 } codeSystemDefs)
+            foreach (var codeSystemDef in codeSystemDefs)
             {
-                foreach (var codeSystemDef in codeSystemDefs)
+                var libraryNameAndName = new LibraryNameAndName(library.NameAndVersion()!, codeSystemDef.name);
+                var newValue = codeSystemDef.id;
+                if (!_codeSystemIdsByCodeSystemRefs.TryAdd(libraryNameAndName, newValue))
                 {
-                    _codeSystemIdsByCodeSystemRefs.Add(new(library.NameAndVersion()!, codeSystemDef.name), codeSystemDef.id);
+                    var previousValue = _codeSystemIdsByCodeSystemRefs[libraryNameAndName];
+                    if (previousValue != newValue)
+                        throw this.NewExpressionBuildingException(
+                            $"A code system '{libraryNameAndName}' was previously added with value '{previousValue}', and it cannot accept a different value '{newValue}'.");
                 }
             }
         }

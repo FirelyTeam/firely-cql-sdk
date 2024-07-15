@@ -27840,13 +27840,13 @@
                } ]
             }
          }, {
-            "locator" : "671:1-672:77",
+            "locator" : "671:1-672:80",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "dateTimeList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "672:3-672:77",
+               "locator" : "672:3-672:80",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Equal",
                "signature" : [ {
@@ -27919,63 +27919,43 @@
                      }
                   } ]
                }, {
-                  "type" : "Query",
-                  "source" : [ {
-                     "alias" : "X",
-                     "expression" : {
-                        "locator" : "672:55-672:77",
-                        "type" : "List",
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}Date",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        },
-                        "element" : [ {
-                           "locator" : "672:57-672:61",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "Date",
-                           "year" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2016",
-                              "type" : "Literal"
-                           }
-                        }, {
-                           "locator" : "672:64-672:68",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "Date",
-                           "year" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2015",
-                              "type" : "Literal"
-                           }
-                        }, {
-                           "locator" : "672:71-672:75",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "Date",
-                           "year" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2010",
-                              "type" : "Literal"
-                           }
-                        } ]
+                  "locator" : "672:55-672:80",
+                  "type" : "List",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
                      }
-                  } ],
-                  "return" : {
-                     "distinct" : false,
-                     "expression" : {
-                        "type" : "ToDateTime",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : {
-                           "name" : "X",
-                           "type" : "AliasRef"
-                        }
+                  },
+                  "element" : [ {
+                     "locator" : "672:57-672:62",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "year" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2016",
+                        "type" : "Literal"
                      }
-                  }
+                  }, {
+                     "locator" : "672:65-672:70",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "year" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2015",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "locator" : "672:73-672:78",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "year" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2010",
+                        "type" : "Literal"
+                     }
+                  } ]
                } ]
             }
          }, {

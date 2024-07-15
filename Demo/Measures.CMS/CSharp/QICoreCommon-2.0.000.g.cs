@@ -1317,7 +1317,7 @@ public class QICoreCommon_2_0_000
 			var i_ = E?.Value;
 			var j_ = FHIRHelpers_4_3_000.ToValue(i_);
 
-			return (bool?)j_;
+			return (j_ as bool?);
 		};
 		var d_ = context.Operators.Select<Extension, bool?>(b_, c_);
 		var e_ = context.Operators.SingletonFrom<bool?>(d_);
@@ -1461,7 +1461,7 @@ public class QICoreCommon_2_0_000
 			}
 			else
 			{
-				return null;
+				return (null as CqlInterval<CqlDateTime>);
 			}
 		};
 
@@ -1603,7 +1603,7 @@ public class QICoreCommon_2_0_000
 			}
 			else
 			{
-				return null;
+				return (null as CqlInterval<CqlDateTime>);
 			}
 		};
 
@@ -1806,7 +1806,7 @@ public class QICoreCommon_2_0_000
 			}
 			else
 			{
-				return null;
+				return (null as CqlInterval<CqlDateTime>);
 			}
 		};
 
@@ -2008,7 +2008,7 @@ public class QICoreCommon_2_0_000
 			}
 			else
 			{
-				return null;
+				return (null as CqlInterval<CqlDateTime>);
 			}
 		};
 

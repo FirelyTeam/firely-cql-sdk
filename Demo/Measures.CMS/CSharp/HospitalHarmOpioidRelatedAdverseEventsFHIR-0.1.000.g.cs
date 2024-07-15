@@ -214,7 +214,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			var e_ = this.Patient();
 			var f_ = e_?.BirthDateElement;
 			var g_ = f_?.Value;
-			var h_ = context.Operators.Convert<CqlDate>(g_);
+			var h_ = context.Operators.ConvertStringToDate(g_);
 			var i_ = InpatientEncounter?.Period;
 			var j_ = FHIRHelpers_4_3_000.ToInterval(i_);
 			var k_ = context.Operators.Start(j_);

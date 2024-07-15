@@ -64,6 +64,8 @@ internal static class ExpressionExtensions
             }
         }
 
+
+
         var isAssignableTo =
             expression.Type == typeof(object) // Choice?
             || expression.Type.IsAssignableTo(type);

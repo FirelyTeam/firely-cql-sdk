@@ -658,7 +658,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	private bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -676,7 +676,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var q_ = context.Operators.Exists<MedicationRequest>(p_);
 		var r_ = context.Operators.Or(o_, q_);
 		var s_ = context.Operators.And(j_, r_);
-		var u_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var u_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var w_ = context.Operators.Start(c_);
 		var x_ = context.Operators.DateFrom(w_);
 		var y_ = context.Operators.CalculateAgeAt(u_, x_, "year");
@@ -694,7 +694,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	private bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);

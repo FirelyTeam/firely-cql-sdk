@@ -423,7 +423,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			}
 			else
 			{
-				return null;
+				return (null as IEnumerable<CqlDate>);
 			}
 		};
 
@@ -578,7 +578,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -595,7 +595,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var p_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
 		var q_ = context.Operators.Or(o_, p_);
 		var r_ = context.Operators.And(j_, q_);
-		var t_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var t_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var v_ = context.Operators.End(c_);
 		var w_ = context.Operators.DateFrom(v_);
 		var x_ = context.Operators.CalculateAgeAt(t_, w_, "year");
@@ -613,7 +613,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);

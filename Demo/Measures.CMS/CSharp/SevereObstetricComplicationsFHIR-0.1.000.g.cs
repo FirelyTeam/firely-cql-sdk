@@ -2097,7 +2097,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			var x_ = new Tuple_HOiMaDjifIOTXXFShNKiWLBLV
 			{
 				EncounterId = e_,
-				FirstHRResult = n_,
+				FirstHRResult = (n_ as CqlQuantity),
 				Timing = w_,
 			};
 

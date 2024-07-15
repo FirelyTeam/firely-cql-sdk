@@ -74,7 +74,7 @@ public class NCQAFHIRBase_1_0_0
 			}
 			else if (onset is FhirString)
 			{
-				var j_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute an interval from a String value");
+				var j_ = context.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
 
 				return j_;
 			}
@@ -119,7 +119,7 @@ public class NCQAFHIRBase_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as CqlInterval<CqlDate>);
 					}
 				};
 				var l_ = context.Operators.ConvertDateToDateTime(k_()?.low);
@@ -162,7 +162,7 @@ public class NCQAFHIRBase_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as CqlInterval<CqlDate>);
 					}
 				};
 				var n_ = context.Operators.ConvertDateToDateTime(m_()?.high);
@@ -205,7 +205,7 @@ public class NCQAFHIRBase_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as CqlInterval<CqlDate>);
 					}
 				};
 				CqlInterval<CqlDate> p_()
@@ -247,7 +247,7 @@ public class NCQAFHIRBase_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as CqlInterval<CqlDate>);
 					}
 				};
 				var q_ = context.Operators.Interval(l_, n_, o_()?.lowClosed, p_()?.highClosed);
@@ -283,7 +283,7 @@ public class NCQAFHIRBase_1_0_0
 			}
 			else if (abatement is FhirString)
 			{
-				var j_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute an interval from a String value");
+				var j_ = context.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
 
 				return j_;
 			}
@@ -328,7 +328,7 @@ public class NCQAFHIRBase_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as CqlInterval<CqlDate>);
 					}
 				};
 				var l_ = context.Operators.ConvertDateToDateTime(k_()?.low);
@@ -371,7 +371,7 @@ public class NCQAFHIRBase_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as CqlInterval<CqlDate>);
 					}
 				};
 				var n_ = context.Operators.ConvertDateToDateTime(m_()?.high);
@@ -414,7 +414,7 @@ public class NCQAFHIRBase_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as CqlInterval<CqlDate>);
 					}
 				};
 				CqlInterval<CqlDate> p_()
@@ -456,7 +456,7 @@ public class NCQAFHIRBase_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as CqlInterval<CqlDate>);
 					}
 				};
 				var q_ = context.Operators.Interval(l_, n_, o_()?.lowClosed, p_()?.highClosed);
@@ -623,19 +623,19 @@ public class NCQAFHIRBase_1_0_0
 			}
 			else if (choice is Timing)
 			{
-				var en_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute a single interval from a Timing type");
+				var en_ = context.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute a single interval from a Timing type");
 
 				return en_;
 			}
 			else if (choice is FhirString)
 			{
-				var eo_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute an interval from a String value");
+				var eo_ = context.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
 
 				return eo_;
 			}
 			else
 			{
-				return null;
+				return (null as CqlInterval<CqlDateTime>);
 			}
 		};
 
@@ -719,10 +719,10 @@ public class NCQAFHIRBase_1_0_0
 					var ae_ = AnchorList?.AnchorIndex;
 					var af_ = context.Operators.Indexer<CqlDate>(ad_, ae_);
 					var ag_ = context.Operators.Quantity(1m, "day");
-					var ah_ = context.Operators.Add(af_, ag_);
+					var ah_ = context.Operators.Add((af_ as CqlDate), ag_);
 					var ak_ = context.Operators.Indexer<CqlDate>(ad_, ae_);
 					var al_ = context.Operators.Quantity(30m, "days");
-					var am_ = context.Operators.Add(ak_, al_);
+					var am_ = context.Operators.Add((ak_ as CqlDate), al_);
 					var an_ = context.Operators.Interval(ah_, am_, true, true);
 					var ao_ = context.Operators.In<CqlDate>(X, an_, null);
 					var ap_ = context.Operators.Not(ao_);
@@ -733,7 +733,7 @@ public class NCQAFHIRBase_1_0_0
 				var x_ = context.Operators.Add(s_, 1);
 				var y_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 				{
-					NextDate = t_,
+					NextDate = (t_ as CqlDate),
 					NewList = v_,
 					IndexofNewDate = x_,
 				};
@@ -768,10 +768,10 @@ public class NCQAFHIRBase_1_0_0
 								var bj_ = FirstList?.IndexofNewDate;
 								var bk_ = context.Operators.Indexer<CqlDate>(bi_, bj_);
 								var bl_ = context.Operators.Quantity(1m, "day");
-								var bm_ = context.Operators.Add(bk_, bl_);
+								var bm_ = context.Operators.Add((bk_ as CqlDate), bl_);
 								var bp_ = context.Operators.Indexer<CqlDate>(bi_, bj_);
 								var bq_ = context.Operators.Quantity(30m, "days");
-								var br_ = context.Operators.Add(bp_, bq_);
+								var br_ = context.Operators.Add((bp_ as CqlDate), bq_);
 								var bs_ = context.Operators.Interval(bm_, br_, true, true);
 								var bt_ = context.Operators.In<CqlDate>(X, bs_, null);
 								var bu_ = context.Operators.Not(bt_);
@@ -782,7 +782,7 @@ public class NCQAFHIRBase_1_0_0
 							var bc_ = context.Operators.Add(aw_, 1);
 							var bd_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 							{
-								NextDate = ax_,
+								NextDate = (ax_ as CqlDate),
 								NewList = ba_,
 								IndexofNewDate = bc_,
 							};
@@ -817,10 +817,10 @@ public class NCQAFHIRBase_1_0_0
 											var co_ = SecondList?.IndexofNewDate;
 											var cp_ = context.Operators.Indexer<CqlDate>(cn_, co_);
 											var cq_ = context.Operators.Quantity(1m, "day");
-											var cr_ = context.Operators.Add(cp_, cq_);
+											var cr_ = context.Operators.Add((cp_ as CqlDate), cq_);
 											var cu_ = context.Operators.Indexer<CqlDate>(cn_, co_);
 											var cv_ = context.Operators.Quantity(30m, "days");
-											var cw_ = context.Operators.Add(cu_, cv_);
+											var cw_ = context.Operators.Add((cu_ as CqlDate), cv_);
 											var cx_ = context.Operators.Interval(cr_, cw_, true, true);
 											var cy_ = context.Operators.In<CqlDate>(X, cx_, null);
 											var cz_ = context.Operators.Not(cy_);
@@ -831,7 +831,7 @@ public class NCQAFHIRBase_1_0_0
 										var ch_ = context.Operators.Add(cb_, 1);
 										var ci_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 										{
-											NextDate = cc_,
+											NextDate = (cc_ as CqlDate),
 											NewList = cf_,
 											IndexofNewDate = ch_,
 										};
@@ -866,10 +866,10 @@ public class NCQAFHIRBase_1_0_0
 														var dt_ = ThirdList?.IndexofNewDate;
 														var du_ = context.Operators.Indexer<CqlDate>(ds_, dt_);
 														var dv_ = context.Operators.Quantity(1m, "day");
-														var dw_ = context.Operators.Add(du_, dv_);
+														var dw_ = context.Operators.Add((du_ as CqlDate), dv_);
 														var dz_ = context.Operators.Indexer<CqlDate>(ds_, dt_);
 														var ea_ = context.Operators.Quantity(30m, "days");
-														var eb_ = context.Operators.Add(dz_, ea_);
+														var eb_ = context.Operators.Add((dz_ as CqlDate), ea_);
 														var ec_ = context.Operators.Interval(dw_, eb_, true, true);
 														var ed_ = context.Operators.In<CqlDate>(X, ec_, null);
 														var ee_ = context.Operators.Not(ed_);
@@ -880,7 +880,7 @@ public class NCQAFHIRBase_1_0_0
 													var dm_ = context.Operators.Add(dg_, 1);
 													var dn_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 													{
-														NextDate = dh_,
+														NextDate = (dh_ as CqlDate),
 														NewList = dk_,
 														IndexofNewDate = dm_,
 													};
@@ -915,10 +915,10 @@ public class NCQAFHIRBase_1_0_0
 																	var ey_ = FourthList?.IndexofNewDate;
 																	var ez_ = context.Operators.Indexer<CqlDate>(ex_, ey_);
 																	var fa_ = context.Operators.Quantity(1m, "day");
-																	var fb_ = context.Operators.Add(ez_, fa_);
+																	var fb_ = context.Operators.Add((ez_ as CqlDate), fa_);
 																	var fe_ = context.Operators.Indexer<CqlDate>(ex_, ey_);
 																	var ff_ = context.Operators.Quantity(30m, "days");
-																	var fg_ = context.Operators.Add(fe_, ff_);
+																	var fg_ = context.Operators.Add((fe_ as CqlDate), ff_);
 																	var fh_ = context.Operators.Interval(fb_, fg_, true, true);
 																	var fi_ = context.Operators.In<CqlDate>(X, fh_, null);
 																	var fj_ = context.Operators.Not(fi_);
@@ -929,7 +929,7 @@ public class NCQAFHIRBase_1_0_0
 																var er_ = context.Operators.Add(el_, 1);
 																var es_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 																{
-																	NextDate = em_,
+																	NextDate = (em_ as CqlDate),
 																	NewList = ep_,
 																	IndexofNewDate = er_,
 																};
@@ -964,10 +964,10 @@ public class NCQAFHIRBase_1_0_0
 																				var gd_ = FifthList?.IndexofNewDate;
 																				var ge_ = context.Operators.Indexer<CqlDate>(gc_, gd_);
 																				var gf_ = context.Operators.Quantity(1m, "day");
-																				var gg_ = context.Operators.Add(ge_, gf_);
+																				var gg_ = context.Operators.Add((ge_ as CqlDate), gf_);
 																				var gj_ = context.Operators.Indexer<CqlDate>(gc_, gd_);
 																				var gk_ = context.Operators.Quantity(30m, "days");
-																				var gl_ = context.Operators.Add(gj_, gk_);
+																				var gl_ = context.Operators.Add((gj_ as CqlDate), gk_);
 																				var gm_ = context.Operators.Interval(gg_, gl_, true, true);
 																				var gn_ = context.Operators.In<CqlDate>(X, gm_, null);
 																				var go_ = context.Operators.Not(gn_);
@@ -978,7 +978,7 @@ public class NCQAFHIRBase_1_0_0
 																			var fw_ = context.Operators.Add(fq_, 1);
 																			var fx_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 																			{
-																				NextDate = fr_,
+																				NextDate = (fr_ as CqlDate),
 																				NewList = fu_,
 																				IndexofNewDate = fw_,
 																			};
@@ -1013,10 +1013,10 @@ public class NCQAFHIRBase_1_0_0
 																							var hi_ = SixthList?.IndexofNewDate;
 																							var hj_ = context.Operators.Indexer<CqlDate>(hh_, hi_);
 																							var hk_ = context.Operators.Quantity(1m, "day");
-																							var hl_ = context.Operators.Add(hj_, hk_);
+																							var hl_ = context.Operators.Add((hj_ as CqlDate), hk_);
 																							var ho_ = context.Operators.Indexer<CqlDate>(hh_, hi_);
 																							var hp_ = context.Operators.Quantity(30m, "days");
-																							var hq_ = context.Operators.Add(ho_, hp_);
+																							var hq_ = context.Operators.Add((ho_ as CqlDate), hp_);
 																							var hr_ = context.Operators.Interval(hl_, hq_, true, true);
 																							var hs_ = context.Operators.In<CqlDate>(X, hr_, null);
 																							var ht_ = context.Operators.Not(hs_);
@@ -1027,7 +1027,7 @@ public class NCQAFHIRBase_1_0_0
 																						var hb_ = context.Operators.Add(gv_, 1);
 																						var hc_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 																						{
-																							NextDate = gw_,
+																							NextDate = (gw_ as CqlDate),
 																							NewList = gz_,
 																							IndexofNewDate = hb_,
 																						};
@@ -1062,10 +1062,10 @@ public class NCQAFHIRBase_1_0_0
 																										var in_ = SeventhList?.IndexofNewDate;
 																										var io_ = context.Operators.Indexer<CqlDate>(im_, in_);
 																										var ip_ = context.Operators.Quantity(1m, "day");
-																										var iq_ = context.Operators.Add(io_, ip_);
+																										var iq_ = context.Operators.Add((io_ as CqlDate), ip_);
 																										var it_ = context.Operators.Indexer<CqlDate>(im_, in_);
 																										var iu_ = context.Operators.Quantity(30m, "days");
-																										var iv_ = context.Operators.Add(it_, iu_);
+																										var iv_ = context.Operators.Add((it_ as CqlDate), iu_);
 																										var iw_ = context.Operators.Interval(iq_, iv_, true, true);
 																										var ix_ = context.Operators.In<CqlDate>(X, iw_, null);
 																										var iy_ = context.Operators.Not(ix_);
@@ -1076,7 +1076,7 @@ public class NCQAFHIRBase_1_0_0
 																									var ig_ = context.Operators.Add(ia_, 1);
 																									var ih_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 																									{
-																										NextDate = ib_,
+																										NextDate = (ib_ as CqlDate),
 																										NewList = ie_,
 																										IndexofNewDate = ig_,
 																									};
@@ -1111,10 +1111,10 @@ public class NCQAFHIRBase_1_0_0
 																													var js_ = EighthList?.IndexofNewDate;
 																													var jt_ = context.Operators.Indexer<CqlDate>(jr_, js_);
 																													var ju_ = context.Operators.Quantity(1m, "day");
-																													var jv_ = context.Operators.Add(jt_, ju_);
+																													var jv_ = context.Operators.Add((jt_ as CqlDate), ju_);
 																													var jy_ = context.Operators.Indexer<CqlDate>(jr_, js_);
 																													var jz_ = context.Operators.Quantity(30m, "days");
-																													var ka_ = context.Operators.Add(jy_, jz_);
+																													var ka_ = context.Operators.Add((jy_ as CqlDate), jz_);
 																													var kb_ = context.Operators.Interval(jv_, ka_, true, true);
 																													var kc_ = context.Operators.In<CqlDate>(X, kb_, null);
 																													var kd_ = context.Operators.Not(kc_);
@@ -1125,7 +1125,7 @@ public class NCQAFHIRBase_1_0_0
 																												var jl_ = context.Operators.Add(jf_, 1);
 																												var jm_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 																												{
-																													NextDate = jg_,
+																													NextDate = (jg_ as CqlDate),
 																													NewList = jj_,
 																													IndexofNewDate = jl_,
 																												};
@@ -1160,10 +1160,10 @@ public class NCQAFHIRBase_1_0_0
 																																var kx_ = NinethList?.IndexofNewDate;
 																																var ky_ = context.Operators.Indexer<CqlDate>(kw_, kx_);
 																																var kz_ = context.Operators.Quantity(1m, "day");
-																																var la_ = context.Operators.Add(ky_, kz_);
+																																var la_ = context.Operators.Add((ky_ as CqlDate), kz_);
 																																var ld_ = context.Operators.Indexer<CqlDate>(kw_, kx_);
 																																var le_ = context.Operators.Quantity(30m, "days");
-																																var lf_ = context.Operators.Add(ld_, le_);
+																																var lf_ = context.Operators.Add((ld_ as CqlDate), le_);
 																																var lg_ = context.Operators.Interval(la_, lf_, true, true);
 																																var lh_ = context.Operators.In<CqlDate>(X, lg_, null);
 																																var li_ = context.Operators.Not(lh_);
@@ -1174,7 +1174,7 @@ public class NCQAFHIRBase_1_0_0
 																															var kq_ = context.Operators.Add(kk_, 1);
 																															var kr_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 																															{
-																																NextDate = kl_,
+																																NextDate = (kl_ as CqlDate),
 																																NewList = ko_,
 																																IndexofNewDate = kq_,
 																															};
@@ -1209,10 +1209,10 @@ public class NCQAFHIRBase_1_0_0
 																																			var mc_ = TenthList?.IndexofNewDate;
 																																			var md_ = context.Operators.Indexer<CqlDate>(mb_, mc_);
 																																			var me_ = context.Operators.Quantity(1m, "day");
-																																			var mf_ = context.Operators.Add(md_, me_);
+																																			var mf_ = context.Operators.Add((md_ as CqlDate), me_);
 																																			var mi_ = context.Operators.Indexer<CqlDate>(mb_, mc_);
 																																			var mj_ = context.Operators.Quantity(30m, "days");
-																																			var mk_ = context.Operators.Add(mi_, mj_);
+																																			var mk_ = context.Operators.Add((mi_ as CqlDate), mj_);
 																																			var ml_ = context.Operators.Interval(mf_, mk_, true, true);
 																																			var mm_ = context.Operators.In<CqlDate>(X, ml_, null);
 																																			var mn_ = context.Operators.Not(mm_);
@@ -1223,7 +1223,7 @@ public class NCQAFHIRBase_1_0_0
 																																		var lv_ = context.Operators.Add(lp_, 1);
 																																		var lw_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 																																		{
-																																			NextDate = lq_,
+																																			NextDate = (lq_ as CqlDate),
 																																			NewList = lt_,
 																																			IndexofNewDate = lv_,
 																																		};
@@ -1258,10 +1258,10 @@ public class NCQAFHIRBase_1_0_0
 																																						var nd_ = EleventhList?.IndexofNewDate;
 																																						var ne_ = context.Operators.Indexer<CqlDate>(nc_, nd_);
 																																						var nf_ = context.Operators.Quantity(1m, "day");
-																																						var ng_ = context.Operators.Add(ne_, nf_);
+																																						var ng_ = context.Operators.Add((ne_ as CqlDate), nf_);
 																																						var nj_ = context.Operators.Indexer<CqlDate>(nc_, nd_);
 																																						var nk_ = context.Operators.Quantity(30m, "days");
-																																						var nl_ = context.Operators.Add(nj_, nk_);
+																																						var nl_ = context.Operators.Add((nj_ as CqlDate), nk_);
 																																						var nm_ = context.Operators.Interval(ng_, nl_, true, true);
 																																						var nn_ = context.Operators.In<CqlDate>(X, nm_, null);
 																																						var no_ = context.Operators.Not(nn_);
@@ -1272,7 +1272,7 @@ public class NCQAFHIRBase_1_0_0
 																																					var na_ = context.Operators.Add(mu_, 1);
 																																					var nb_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
 																																					{
-																																						NextDate = mv_,
+																																						NextDate = (mv_ as CqlDate),
 																																						NewList = my_,
 																																						IndexofNewDate = na_,
 																																					};

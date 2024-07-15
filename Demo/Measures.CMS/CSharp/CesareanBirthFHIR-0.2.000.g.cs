@@ -525,7 +525,7 @@ public class CesareanBirthFHIR_0_2_000
 		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
-		return (int?)i_;
+		return (i_ as int?);
 	}
 
     [CqlDeclaration("lastParity")]
@@ -678,7 +678,7 @@ public class CesareanBirthFHIR_0_2_000
 		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
-		return (int?)i_;
+		return (i_ as int?);
 	}
 
     [CqlDeclaration("lastHistoryPretermBirth")]
@@ -831,7 +831,7 @@ public class CesareanBirthFHIR_0_2_000
 		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
-		return (int?)i_;
+		return (i_ as int?);
 	}
 
     [CqlDeclaration("lastHistoryTermBirth")]
@@ -984,7 +984,7 @@ public class CesareanBirthFHIR_0_2_000
 		var h_ = context.Operators.Last<Observation>(g_);
 		var i_ = FHIRHelpers_4_3_000.ToValue(h_?.Value);
 
-		return (int?)i_;
+		return (i_ as int?);
 	}
 
 	private IEnumerable<Encounter> Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births_Value()

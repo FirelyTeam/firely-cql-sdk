@@ -505,7 +505,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			var v_ = new Tuple_GNNDVIQPcTANSdLebhBKYIdga
 			{
 				effectiveDatetime = s_,
-				valueInteger = (int?)u_,
+				valueInteger = (u_ as int?),
 			};
 
 			return v_;
@@ -834,7 +834,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			var an_ = context.Operators.Last<Observation>(am_);
 			var ao_ = an_?.Value;
 			var ap_ = FHIRHelpers_4_3_000.ToValue(ao_);
-			var aq_ = context.Operators.Add((int?)af_, (int?)ap_);
+			var aq_ = context.Operators.Add((af_ as int?), (ap_ as int?));
 			var ar_ = new Tuple_GNNDVIQPcTANSdLebhBKYIdga
 			{
 				effectiveDatetime = ad_,

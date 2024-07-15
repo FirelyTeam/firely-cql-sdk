@@ -628,11 +628,11 @@ namespace Hl7.Cql.Runtime
                 var overlapsAfter = OverlapsAfterHelper(left, right, null, toClosed);
                 if (overlapsBefore == true && overlapsAfter == false)
                 {
-                    return new CqlInterval<T?>(left.low, right.low, left.lowClosed, !right.lowClosed);
+                    return toClosed(new CqlInterval<T?>(left.low, right.low, left.lowClosed, !right.lowClosed));
                 }
                 if (overlapsAfter == true && overlapsBefore == false)
                 {
-                    return new CqlInterval<T?>(right.high, left.high, !right.highClosed, left.highClosed);
+                    return toClosed(new CqlInterval<T?>(right.high, left.high, !right.highClosed, left.highClosed));
                 }
                 return null;
             }
@@ -1239,15 +1239,14 @@ namespace Hl7.Cql.Runtime
 
             var lowCompare = Compare(larger.low ?? MinValue<T>()!, smaller.low ?? MinValue<T>()!, precision);
             var highCompare = Compare(larger.high ?? MaxValue<T>()!, smaller.high ?? MaxValue<T>()!, precision);
-            //var smallerSelfCompare = rtx.Compare(smaller.Low ?? Minimum<T>(), smaller.High ?? Maximum<T>(), precision);
-
-            // From docs: If smaller is point interval, and exactly on the boundary of either side of larger, null
-            //if (smallerSelfCompare == 0 && (lowCompare == 0 || highCompare == 0)) return null;
-
-            if (lowCompare <= 0 && highCompare >= 0)
-                return true;
-            else
-                return false;
+            return (lowCompare, highCompare) switch
+            {
+                (null, null)  => null,
+                (_, null)     => null,
+                (null, _)     => null,
+                ( <= 0, >= 0) => true,
+                (_, _)        => false
+            };
         }
 
         #endregion
@@ -1263,7 +1262,13 @@ namespace Hl7.Cql.Runtime
 
         public CqlInterval<T>? Intersect<T>(CqlInterval<T>? left, CqlInterval<T>? right)
         {
-            if (left == null || right == null) return null;
+            if (left == null
+               || right == null
+               || left.low == null
+               || left.high == null
+               || right.low == null
+               || right.high == null)
+                return null;
 
             var leftLow = left.low ?? MinValue<T>();
             var leftHigh = left.high ?? MaxValue<T>();
@@ -1480,10 +1485,11 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            if (Compare(left.low!, right.high!, precision) == 0)
+            else if (left.low == null && right.high == null)
+                return false;
+            else if (Compare(left.low!, right.high!, precision) == 0)
                 return true;
-
-            if ((left.lowClosed ?? false) && (right.highClosed ?? false) && Compare(predecessor(left.low)!, right.high!, precision) == 0)
+            else if ((left.lowClosed ?? false) && (right.highClosed ?? false) && Compare(predecessor(left.low)!, right.high!, precision) == 0)
                 return true;
 
             return false;
@@ -1586,13 +1592,13 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            if (Compare(left.high!, right.low!, precision) == 0)
+            else if (left.high == null && right.low == null)
+                return false;
+            else if (Compare(left.high!, right.low!, precision) == 0)
                 return true;
-
-            if ((right.lowClosed ?? false) && (left.highClosed ?? false) && Compare(left.high!, predecessor(right.low)!, precision) == 0)
+            else if ((right.lowClosed ?? false) && (left.highClosed ?? false) && Compare(left.high!, predecessor(right.low)!, precision) == 0)
                 return true;
-
-            return false;
+            else return false;
         }
 
         #endregion
@@ -1968,8 +1974,12 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null)
                 return null;
-            if (right == null)
-                return false;
+            else if (left.low == null && left.high == null)
+                return null;
+            else if (right == null)
+                return null;
+            else if (right.low == null && right.high == null)
+                return null;
 
             var min = MinValue<T>()!;
 
@@ -1986,12 +1996,8 @@ namespace Hl7.Cql.Runtime
             return true;
         }
 
-
         public bool? IntervalProperlyIncludesInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string precision) =>
             IntervalProperlyIncludedInInterval(right, left, precision);
-
-
-
 
         public bool? ElementProperlyIncludedInInterval<T>(T left, CqlInterval<T>? right)
         {
@@ -2003,9 +2009,9 @@ namespace Hl7.Cql.Runtime
             if (low < 0)
                 return false;
             if (high > 0)
-                return false;
-            // interval is a unit interval containing only the point
-            if (low == 0 && high == 0)
+                return false;                                        
+            // an element is only properly contained if it is not equal to either endpoint
+            if (low == 0 || high == 0)
                 return false;
             return true;
         }
@@ -2064,12 +2070,12 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null || right.low == null || right.high == null)
                 return null;
 
-
             if (precision == null && (SamePrecision(left, right.high) == false || SamePrecision(left, right.low) == false))
                 return null;
+
             else if (GreaterOrSamePrecision(left, precision) == false
-                    || GreaterOrSamePrecision(right.low, precision) == false
-                    || GreaterOrSamePrecision(right.high, precision) == false)
+                     || GreaterOrSamePrecision(right.low, precision) == false
+                     || GreaterOrSamePrecision(right.high, precision) == false)
                 return null;
 
             var low = Compare(left, right.low, precision);
@@ -2078,8 +2084,8 @@ namespace Hl7.Cql.Runtime
                 return false;
             if (high > 0)
                 return false;
-            // interval is a unit interval containing only the point
-            if (low == 0 && high == 0)
+            // properly contains requires the element not equal either endpoint
+            if (low == 0 || high == 0)
                 return false;
             return true;
         }

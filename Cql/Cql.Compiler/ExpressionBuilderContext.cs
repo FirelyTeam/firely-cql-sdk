@@ -134,7 +134,7 @@ partial class ExpressionBuilderContext
         };
 
     [DebuggerStepThrough]
-    private Expression TranslateArg<TArg>(TArg? arg) =>
+    internal Expression TranslateArg<TArg>(TArg? arg) =>
         arg switch
         {
             Expression expression => expression,
@@ -210,6 +210,36 @@ partial class ExpressionBuilderContext
                     _ => _cqlOperatorsBinder.BindToMethod(element.GetType().Name, TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
                     //@formatter:on
                 };
+
+                if (element.resultTypeName != null || element.resultTypeSpecifier != null)
+                {
+                    var resultType = TypeFor(element, false);
+                    if (
+                        resultType != null
+                        && expression?.Type != null
+                        && resultType != expression!.Type)
+                    {
+                        if (_cqlOperatorsBinder.TryConvert(expression, resultType, out var result))
+                        {
+                            _logger.LogDebug(
+                                "Changing expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
+                                element.GetType().Name,
+                                element.locator,
+                                resultType.ToCSharpString(Defaults.TypeCSharpFormat),
+                                expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
+                            expression = result.arg;
+                        }
+                        else
+                        {
+                            _logger.LogDebug(
+                                "Failed to change expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
+                                element.GetType().Name,
+                                element.locator,
+                                resultType.ToCSharpString(Defaults.TypeCSharpFormat),
+                                expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
+                        }
+                    }
+                }
 
                 expression = Mutate(element, expression);
                 return expression!;
@@ -576,8 +606,8 @@ partial class ExpressionBuilderContext
         if (string.IsNullOrWhiteSpace(conceptRef.name))
             throw this.NewExpressionBuildingException("The concept ref has no name.");
 
-        var type = _typeResolver.CodeType.MakeArrayType();
-        return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, type);
+        var conceptType = TypeFor(conceptRef)!;
+        return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, conceptType);
     }
 
     protected Expression Instance(Instance ine)
@@ -2139,7 +2169,13 @@ partial class ExpressionBuilderContext
                                               throw this.NewExpressionBuildingException(
                                                   $"{type} was expected to be a list type.");
                         var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
-                        var elmAs = new ElmAsExpression(newArray, type);
+                        var elmAs = new ElmAsExpression(newArray, type, @as.strict);
+                        return elmAs;
+                    }
+                    else if (type == _typeResolver.AnyType) // handles untyped empty lists whose type is Any
+                    {
+                        var newArray = Expression.NewArrayBounds(_typeResolver.AnyType, Expression.Constant(0));
+                        var elmAs = new ElmAsExpression(newArray, type, @as.strict);
                         return elmAs;
                     }
 
@@ -2158,13 +2194,13 @@ partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!);
                     var defaultExpression = Expression.Default(type);
-                    return new ElmAsExpression(defaultExpression, type);
+                    return new ElmAsExpression(defaultExpression, type, @as.strict);
                 }
                 else
                 {
                     var type = TypeFor(@as.asTypeSpecifier!);
                     var operand = TranslateArg(@as.operand!);
-                    return new ElmAsExpression(operand, type);
+                    return new ElmAsExpression(operand, type, @as.strict);
                 }
             }
         }
@@ -2187,7 +2223,7 @@ partial class ExpressionBuilderContext
                                        @as.operand));
             }
 
-            return new ElmAsExpression(operand, type);
+            return new ElmAsExpression(operand, type, @as.strict);
         }
     }
 

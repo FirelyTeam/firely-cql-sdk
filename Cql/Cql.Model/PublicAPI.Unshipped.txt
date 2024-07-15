@@ -70,6 +70,7 @@ Hl7.Cql.Model.ParameterTypeSpecifier
 Hl7.Cql.Model.ParameterTypeSpecifier.ParameterTypeSpecifier() -> void
 Hl7.Cql.Model.ProfileInfo
 Hl7.Cql.Model.ProfileInfo.ProfileInfo() -> void
+Hl7.Cql.Model.QualifiedName
 Hl7.Cql.Model.RelationshipInfo
 Hl7.Cql.Model.RelationshipInfo.RelationshipInfo() -> void
 Hl7.Cql.Model.SearchInfo
@@ -94,10 +95,16 @@ Hl7.Cql.Model.TupleTypeSpecifierElement
 Hl7.Cql.Model.TupleTypeSpecifierElement.TupleTypeSpecifierElement() -> void
 Hl7.Cql.Model.TypeInfo
 Hl7.Cql.Model.TypeInfo.TypeInfo() -> void
+Hl7.Cql.Model.TypeInfoHelpers
 Hl7.Cql.Model.TypeParameterInfo
 Hl7.Cql.Model.TypeParameterInfo.TypeParameterInfo() -> void
 Hl7.Cql.Model.TypeSpecifier
 Hl7.Cql.Model.TypeSpecifier.TypeSpecifier() -> void
+static Hl7.Cql.Model.QualifiedName.Deconstruct(this System.Xml.XmlQualifiedName! qname, out string! uri, out string! name) -> void
+static Hl7.Cql.Model.QualifiedName.MakeQualifiedTypeName(string! url, string! typeName) -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Model.QualifiedName.MakeQualifiedTypeName(this Hl7.Cql.Model.ModelInfo! model, string! typeName) -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Model.TypeInfoHelpers.GetNameFromTypeInfo(this Hl7.Cql.Model.TypeInfo! typeInfo) -> string?
+static readonly Hl7.Cql.Model.QualifiedName.QualifiedNameRegEx -> System.Text.RegularExpressions.Regex!
 ~Hl7.Cql.Model.BindingInfo.description.get -> string
 ~Hl7.Cql.Model.BindingInfo.description.set -> void
 ~Hl7.Cql.Model.BindingInfo.name.get -> string

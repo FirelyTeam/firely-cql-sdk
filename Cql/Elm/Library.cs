@@ -16,6 +16,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Elm.Serialization;
 
 namespace Hl7.Cql.Elm;
 
@@ -132,6 +133,18 @@ public partial class Library
 
         library.OriginalFilePath = originalFilePath;
         return library;
+    }
+
+    /// <summary>
+    /// Writes this library in JSON format to <paramref name="stream"/>.
+    /// </summary>
+    /// <param name="stream">A writable stream.</param>
+    /// <param name="writeIndented">If <see langword="true" />, formats the JSON with indenting.</param>
+    public void WriteJson(Stream stream, bool writeIndented = true)
+    {
+        var options = GetSerializerOptions(false);
+        options.WriteIndented = writeIndented;
+        JsonSerializer.Serialize(stream, this, options);
     }
 
     public static IEqualityComparer<Library> EqualityComparerByNameAndVersion { get; } =

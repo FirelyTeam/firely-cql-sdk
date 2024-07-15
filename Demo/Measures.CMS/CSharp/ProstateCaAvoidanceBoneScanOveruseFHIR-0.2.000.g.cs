@@ -606,7 +606,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			var am_ = LastGleasonScore?.Value;
 			var an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			var ao_ = context.Operators.LessOrEqual((int?)an_, 6);
+			var ao_ = context.Operators.LessOrEqual((an_ as int?), 6);
 
 			return ao_;
 		};

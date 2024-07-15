@@ -75,9 +75,9 @@ namespace Hl7.Cql.Compiler
             {
                 // @formatter:off
                 "Convert"           => BindConvert(args[0], args[1]),
-                "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type]),
-                "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!)),
-                "Message"           => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type]),
+                "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
+                "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!))!,
+                "Message"           => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type])!,
                 "Coalesce"          => Coalesce(args[0]),
                 "Flatten"           => Flatten(args[0]),
                 "InList"            => InList(args[0], args[1]),
@@ -90,9 +90,9 @@ namespace Hl7.Cql.Compiler
                 "SelectManyResults" => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),
                 "SortBy"            => SortBy(args[0], args[1], args[2]),
                 "Where"             => Where(args[0], args[1]),
-                "ToList"            => ToList(args) ?? BindToBestMethodOverload(methodName, args, typeArgs),
-                "Width"             => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs),
-                _                   => BindToBestMethodOverload(methodName, args, typeArgs),
+                "ToList"            => ToList(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
+                "Width"             => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
+                _                   => BindToBestMethodOverload(methodName, args, typeArgs)!,
                 // @formatter:om
             };
             return result;

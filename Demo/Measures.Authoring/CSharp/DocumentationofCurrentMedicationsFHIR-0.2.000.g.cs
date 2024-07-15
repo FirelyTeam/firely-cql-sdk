@@ -279,46 +279,47 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 			{
 				bool? k_(Extension @this)
 				{
-					var ae_ = @this?.Url;
-					var af_ = context.Operators.Convert<FhirUri>(ae_);
-					var ag_ = FHIRHelpers_4_3_000.ToString(af_);
-					var ah_ = context.Operators.Equal(ag_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					var af_ = @this?.Url;
+					var ag_ = context.Operators.Convert<FhirUri>(af_);
+					var ah_ = FHIRHelpers_4_3_000.ToString(ag_);
+					var ai_ = context.Operators.Equal(ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return ah_;
+					return ai_;
 				};
 				var l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MedicationsNotDocumented is DomainResource)
 						? ((MedicationsNotDocumented as DomainResource).Extension)
 						: null), k_);
 				DataType m_(Extension @this)
 				{
-					var ai_ = @this?.Value;
-
-					return ai_;
-				};
-				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
-				var o_ = context.Operators.SingletonFrom<DataType>(n_);
-				var p_ = context.Operators.Convert<CqlDateTime>(o_);
-				var q_ = QualifyingEncounter?.Period;
-				var r_ = FHIRHelpers_4_3_000.ToInterval(q_);
-				var s_ = context.Operators.In<CqlDateTime>(p_, r_, null);
-				var t_ = MedicationsNotDocumented?.StatusElement;
-				var u_ = t_?.Value;
-				var v_ = context.Operators.Convert<string>(u_);
-				var w_ = context.Operators.Equal(v_, "not-done");
-				var x_ = context.Operators.And(s_, w_);
-				var y_ = MedicationsNotDocumented?.ReasonCode;
-				CqlConcept z_(CodeableConcept @this)
-				{
-					var aj_ = FHIRHelpers_4_3_000.ToConcept(@this);
+					var aj_ = @this?.Value;
 
 					return aj_;
 				};
-				var aa_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)y_, z_);
-				var ab_ = this.Medical_Reason();
-				var ac_ = context.Operators.ConceptsInValueSet(aa_, ab_);
-				var ad_ = context.Operators.And(x_, ac_);
+				var n_ = context.Operators.Select<Extension, DataType>(l_, m_);
+				var o_ = context.Operators.SingletonFrom<DataType>(n_);
+				var p_ = context.Operators.Convert<FhirDateTime>(o_);
+				var q_ = context.Operators.Convert<CqlDateTime>(p_);
+				var r_ = QualifyingEncounter?.Period;
+				var s_ = FHIRHelpers_4_3_000.ToInterval(r_);
+				var t_ = context.Operators.In<CqlDateTime>(q_, s_, null);
+				var u_ = MedicationsNotDocumented?.StatusElement;
+				var v_ = u_?.Value;
+				var w_ = context.Operators.Convert<string>(v_);
+				var x_ = context.Operators.Equal(w_, "not-done");
+				var y_ = context.Operators.And(t_, x_);
+				var z_ = MedicationsNotDocumented?.ReasonCode;
+				CqlConcept aa_(CodeableConcept @this)
+				{
+					var ak_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return ad_;
+					return ak_;
+				};
+				var ab_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)z_, aa_);
+				var ac_ = this.Medical_Reason();
+				var ad_ = context.Operators.ConceptsInValueSet(ab_, ac_);
+				var ae_ = context.Operators.And(y_, ad_);
+
+				return ae_;
 			};
 			var h_ = context.Operators.Where<Procedure>(f_, g_);
 			Encounter i_(Procedure MedicationsNotDocumented) => 

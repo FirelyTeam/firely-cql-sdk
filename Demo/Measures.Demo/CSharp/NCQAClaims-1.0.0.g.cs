@@ -179,7 +179,7 @@ public class NCQAClaims_1_0_0
 				{
 					if ((ClaimofInterest is null))
 					{
-						return null;
+						return (null as IEnumerable<Claim.ItemComponent>);
 					}
 					else
 					{
@@ -260,13 +260,13 @@ public class NCQAClaims_1_0_0
 								return bi_;
 							};
 							var bc_ = context.Operators.Select<Claim.ItemComponent, DataType>(ba_, bb_);
-							CqlInterval<CqlDateTime> bd_(DataType NormalDate)
+							CqlInterval<CqlDateTime> bd_(object NormalDate)
 							{
 								var bj_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 								return bj_;
 							};
-							var be_ = context.Operators.Select<DataType, CqlInterval<CqlDateTime>>(bc_, bd_);
+							var be_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)bc_, bd_);
 							var bf_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
 							{
 								Claim = ax_,
@@ -277,7 +277,7 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return null;
+							return (null as Tuple_GDUUTAIXZafehWFjcGfNKBcTd);
 						}
 					};
 
@@ -334,7 +334,7 @@ public class NCQAClaims_1_0_0
 				{
 					if ((ClaimofInterest is null))
 					{
-						return null;
+						return (null as IEnumerable<Claim.ItemComponent>);
 					}
 					else
 					{
@@ -370,21 +370,21 @@ public class NCQAClaims_1_0_0
 								return aw_;
 							};
 							var ah_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(af_, ag_);
-							bool? ai_(DataType @this)
+							bool? ai_(object @this)
 							{
 								var ax_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 								var ay_ = context.Operators.Not((bool?)(ax_ is null));
 
 								return ay_;
 							};
-							var aj_ = context.Operators.Where<DataType>(ah_, ai_);
-							object ak_(DataType @this)
+							var aj_ = context.Operators.Where<object>((IEnumerable<object>)ah_, ai_);
+							object ak_(object @this)
 							{
 								var az_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 								return az_;
 							};
-							var al_ = context.Operators.Select<DataType, object>(aj_, ak_);
+							var al_ = context.Operators.Select<object, object>(aj_, ak_);
 							var am_ = context.Operators.FlattenLateBoundList(al_);
 							bool? an_(object HeaderCode)
 							{
@@ -445,13 +445,13 @@ public class NCQAClaims_1_0_0
 								return bt_;
 							};
 							var bn_ = context.Operators.Select<Claim.ItemComponent, DataType>(bl_, bm_);
-							CqlInterval<CqlDateTime> bo_(DataType NormalDate)
+							CqlInterval<CqlDateTime> bo_(object NormalDate)
 							{
 								var bu_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 								return bu_;
 							};
-							var bp_ = context.Operators.Select<DataType, CqlInterval<CqlDateTime>>(bn_, bo_);
+							var bp_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)bn_, bo_);
 							var bq_ = new Tuple_GDUUTAIXZafehWFjcGfNKBcTd
 							{
 								Claim = bi_,
@@ -462,7 +462,7 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return null;
+							return (null as Tuple_GDUUTAIXZafehWFjcGfNKBcTd);
 						}
 					};
 
@@ -516,7 +516,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithDiagnosis?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{
@@ -539,21 +539,21 @@ public class NCQAClaims_1_0_0
 							return ah_;
 						};
 						var w_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(u_, v_);
-						bool? x_(DataType @this)
+						bool? x_(object @this)
 						{
 							var ai_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 							var aj_ = context.Operators.Not((bool?)(ai_ is null));
 
 							return aj_;
 						};
-						var y_ = context.Operators.Where<DataType>(w_, x_);
-						object z_(DataType @this)
+						var y_ = context.Operators.Where<object>((IEnumerable<object>)w_, x_);
+						object z_(object @this)
 						{
 							var ak_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 							return ak_;
 						};
-						var aa_ = context.Operators.Select<DataType, object>(y_, z_);
+						var aa_ = context.Operators.Select<object, object>(y_, z_);
 						var ab_ = context.Operators.FlattenLateBoundList(aa_);
 						bool? ac_(object HeaderCode)
 						{
@@ -630,7 +630,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_CWDDWHRXGADEbdaKXCdKbgEfg);
 					}
 				};
 				var aq_ = new Tuple_CWDDWHRXGADEbdaKXCdKbgEfg[]
@@ -830,7 +830,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return null;
+									return (null as CqlInterval<CqlDateTime>);
 								}
 							};
 							var be_ = new Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN
@@ -879,13 +879,13 @@ public class NCQAClaims_1_0_0
 										return er_;
 									};
 									var ei_ = context.Operators.Select<Claim.ItemComponent, DataType>(eg_, eh_);
-									CqlInterval<CqlDateTime> ej_(DataType NormalDate)
+									CqlInterval<CqlDateTime> ej_(object NormalDate)
 									{
 										var es_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 										return es_;
 									};
-									var ek_ = context.Operators.Select<DataType, CqlInterval<CqlDateTime>>(ei_, ej_);
+									var ek_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)ei_, ej_);
 									var el_ = ItemCalculation?.CoveredDays;
 									CqlInterval<CqlDateTime> em_(Tuple_HDUYFgZGRCJCdTeEcMSVCMQNN d)
 									{
@@ -906,7 +906,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return null;
+									return (null as Tuple_GGLURZZjYLMjhaMLVbjKOcMAY);
 								}
 							};
 
@@ -978,7 +978,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithDiagnosis?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{
@@ -1001,21 +1001,21 @@ public class NCQAClaims_1_0_0
 							return ak_;
 						};
 						var z_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(x_, y_);
-						bool? aa_(DataType @this)
+						bool? aa_(object @this)
 						{
 							var al_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 							var am_ = context.Operators.Not((bool?)(al_ is null));
 
 							return am_;
 						};
-						var ab_ = context.Operators.Where<DataType>(z_, aa_);
-						object ac_(DataType @this)
+						var ab_ = context.Operators.Where<object>((IEnumerable<object>)z_, aa_);
+						object ac_(object @this)
 						{
 							var an_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 							return an_;
 						};
-						var ad_ = context.Operators.Select<DataType, object>(ab_, ac_);
+						var ad_ = context.Operators.Select<object, object>(ab_, ac_);
 						var ae_ = context.Operators.FlattenLateBoundList(ad_);
 						bool? af_(object HeaderCode)
 						{
@@ -1079,21 +1079,21 @@ public class NCQAClaims_1_0_0
 									return ck_;
 								};
 								var bl_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(bj_, bk_);
-								bool? bm_(DataType @this)
+								bool? bm_(object @this)
 								{
 									var cl_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 									var cm_ = context.Operators.Not((bool?)(cl_ is null));
 
 									return cm_;
 								};
-								var bn_ = context.Operators.Where<DataType>(bl_, bm_);
-								object bo_(DataType @this)
+								var bn_ = context.Operators.Where<object>((IEnumerable<object>)bl_, bm_);
+								object bo_(object @this)
 								{
 									var cn_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 									return cn_;
 								};
-								var bp_ = context.Operators.Select<DataType, object>(bn_, bo_);
+								var bp_ = context.Operators.Select<object, object>(bn_, bo_);
 								var bq_ = context.Operators.FlattenLateBoundList(bp_);
 								bool? br_(object ProcedureHeaderCode)
 								{
@@ -1200,7 +1200,7 @@ public class NCQAClaims_1_0_0
 							}
 							else
 							{
-								return null;
+								return (null as Tuple_GDUUTAIXZafehWFjcGfNKBcTd);
 							}
 						};
 
@@ -1339,21 +1339,21 @@ public class NCQAClaims_1_0_0
 								return bo_;
 							};
 							var as_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(aq_, ar_);
-							bool? at_(DataType @this)
+							bool? at_(object @this)
 							{
 								var bp_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 								var bq_ = context.Operators.Not((bool?)(bp_ is null));
 
 								return bq_;
 							};
-							var au_ = context.Operators.Where<DataType>(as_, at_);
-							object av_(DataType @this)
+							var au_ = context.Operators.Where<object>((IEnumerable<object>)as_, at_);
+							object av_(object @this)
 							{
 								var br_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 								return br_;
 							};
-							var aw_ = context.Operators.Select<DataType, object>(au_, av_);
+							var aw_ = context.Operators.Select<object, object>(au_, av_);
 							var ax_ = context.Operators.FlattenLateBoundList(aw_);
 							bool? ay_(object HeaderCode)
 							{
@@ -1488,7 +1488,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return null;
+									return (null as Tuple_GDUUTAIXZafehWFjcGfNKBcTd);
 								}
 							};
 
@@ -1552,7 +1552,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithDiagnosis?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{
@@ -1645,7 +1645,7 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return null;
+							return (null as Tuple_CWDDWHRXGADEbdaKXCdKbgEfg);
 						}
 					};
 
@@ -1878,21 +1878,21 @@ public class NCQAClaims_1_0_0
 				return ap_;
 			};
 			var v_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(t_, u_);
-			bool? w_(DataType @this)
+			bool? w_(object @this)
 			{
 				var aq_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 				var ar_ = context.Operators.Not((bool?)(aq_ is null));
 
 				return ar_;
 			};
-			var x_ = context.Operators.Where<DataType>(v_, w_);
-			object y_(DataType @this)
+			var x_ = context.Operators.Where<object>((IEnumerable<object>)v_, w_);
+			object y_(object @this)
 			{
 				var as_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 				return as_;
 			};
-			var z_ = context.Operators.Select<DataType, object>(x_, y_);
+			var z_ = context.Operators.Select<object, object>(x_, y_);
 			var aa_ = context.Operators.FlattenLateBoundList(z_);
 			bool? ab_(object DiagnosisCode)
 			{
@@ -2116,7 +2116,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 					}
 				};
 				var av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
@@ -2167,7 +2167,7 @@ public class NCQAClaims_1_0_0
 				};
 				if (k_())
 				{
-					return null;
+					return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 				}
 				else
 				{
@@ -2261,21 +2261,21 @@ public class NCQAClaims_1_0_0
 				return ap_;
 			};
 			var v_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(t_, u_);
-			bool? w_(DataType @this)
+			bool? w_(object @this)
 			{
 				var aq_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 				var ar_ = context.Operators.Not((bool?)(aq_ is null));
 
 				return ar_;
 			};
-			var x_ = context.Operators.Where<DataType>(v_, w_);
-			object y_(DataType @this)
+			var x_ = context.Operators.Where<object>((IEnumerable<object>)v_, w_);
+			object y_(object @this)
 			{
 				var as_ = context.Operators.LateBoundProperty<object>(@this, "coding");
 
 				return as_;
 			};
-			var z_ = context.Operators.Select<DataType, object>(x_, y_);
+			var z_ = context.Operators.Select<object, object>(x_, y_);
 			var aa_ = context.Operators.FlattenLateBoundList(z_);
 			bool? ab_(object DiagnosisCode)
 			{
@@ -2554,7 +2554,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 					}
 				};
 				var av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
@@ -2605,7 +2605,7 @@ public class NCQAClaims_1_0_0
 				};
 				if (g_())
 				{
-					return null;
+					return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 				}
 				else
 				{
@@ -2883,7 +2883,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 					}
 				};
 				var av_ = new Tuple_FCOUVKRRWVHcKiBDUdGgLciKR[]
@@ -2934,7 +2934,7 @@ public class NCQAClaims_1_0_0
 				};
 				if (g_())
 				{
-					return null;
+					return (null as Tuple_FCOUVKRRWVHcKiBDUdGgLciKR);
 				}
 				else
 				{
@@ -3179,7 +3179,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return null;
+									return (null as CqlInterval<CqlDate>);
 								}
 							};
 
@@ -3197,7 +3197,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return null;
+						return (null as Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV);
 					}
 				};
 				var av_ = new Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV[]
@@ -3248,7 +3248,7 @@ public class NCQAClaims_1_0_0
 				};
 				if (g_())
 				{
-					return null;
+					return (null as Tuple_BLVTIIcLeMgJUGiVJJYUcPQPV);
 				}
 				else
 				{
@@ -3372,7 +3372,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithInpatientStay?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{
@@ -3412,7 +3412,7 @@ public class NCQAClaims_1_0_0
 			{
 				if ((ClaimWithInpatientStay?.MedicalClaim is null))
 				{
-					return null;
+					return (null as IEnumerable<Claim>);
 				}
 				else
 				{
@@ -3880,9 +3880,9 @@ public class NCQAClaims_1_0_0
 				return ah_;
 			};
 			var o_ = context.Operators.Select<Claim.ItemComponent, DataType>(m_, n_);
-			ResourceReference p_(DataType l) => 
+			ResourceReference p_(object l) => 
 				(l as ResourceReference);
-			var q_ = context.Operators.Select<DataType, ResourceReference>(o_, p_);
+			var q_ = context.Operators.Select<object, ResourceReference>((IEnumerable<object>)o_, p_);
 			bool? s_(Claim.ItemComponent i)
 			{
 				var ai_ = i?.SequenceElement;
@@ -3908,7 +3908,7 @@ public class NCQAClaims_1_0_0
 				return ao_;
 			};
 			var x_ = context.Operators.Select<Claim.ItemComponent, DataType>(v_, w_);
-			string y_(DataType l)
+			string y_(object l)
 			{
 				var ap_ = (l as ResourceReference)?.ReferenceElement;
 				var aq_ = new FhirString[]
@@ -3927,7 +3927,7 @@ public class NCQAClaims_1_0_0
 
 				return at_;
 			};
-			var z_ = context.Operators.Select<DataType, string>(x_, y_);
+			var z_ = context.Operators.Select<object, string>((IEnumerable<object>)x_, y_);
 			var aa_ = new Tuple_GJMDOdSNREDHVIihMZIJLUYXV
 			{
 				SingleItem = (IEnumerable<Claim.ItemComponent>)h_,

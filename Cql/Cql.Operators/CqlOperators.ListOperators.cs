@@ -1039,7 +1039,7 @@ namespace Hl7.Cql.Runtime
         {
             var length = argument switch
             {
-                null => 0,
+                null => default(int?), // tested by LengthNullString
                 _    => argument.Length
             };
             return length;
@@ -1049,7 +1049,7 @@ namespace Hl7.Cql.Runtime
         {
             int? length = list switch
             {
-                null                                                 => null,
+                null                                                 => 0, // tested by LengthNullList
                 string s                                             => Length(s),
                 { } l when l.TryGetNonEnumeratedCount(out var count) => count,
                 _                                                    => list.Count()

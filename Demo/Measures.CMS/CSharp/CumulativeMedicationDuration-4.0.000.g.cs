@@ -948,7 +948,7 @@ public class CumulativeMedicationDuration_4_0_000
 				var gs_ = context.Operators.Concatenate("Unknown unit ", (period?.unit ?? ""));
 				var gt_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUnit", gr_, gs_);
 
-				return (decimal?)gt_;
+				return (gt_ as decimal?);
 			}
 		};
 
@@ -1535,7 +1535,7 @@ public class CumulativeMedicationDuration_4_0_000
 				var fn_ = context.Operators.Concatenate("Unknown frequency code ", (frequency?.code ?? ""));
 				var fo_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", fm_, fn_);
 
-				return (decimal?)fo_;
+				return (fo_ as decimal?);
 			}
 		};
 
@@ -1797,7 +1797,7 @@ public class CumulativeMedicationDuration_4_0_000
 				}
 				else
 				{
-					return null;
+					return (null as CqlInterval<CqlDate>);
 				}
 			};
 
@@ -1962,7 +1962,7 @@ public class CumulativeMedicationDuration_4_0_000
 				}
 				else
 				{
-					return null;
+					return (null as CqlInterval<CqlDate>);
 				}
 			};
 
@@ -2029,7 +2029,7 @@ public class CumulativeMedicationDuration_4_0_000
 				}
 				else
 				{
-					return null;
+					return (null as CqlInterval<CqlDate>);
 				}
 			};
 
@@ -2121,7 +2121,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 			return h_;
 		};
-		var b_ = context.Operators.Aggregate<CqlInterval<CqlDate>, IEnumerable<CqlInterval<CqlDate>>>(intervals, a_, null);
+		var b_ = context.Operators.Aggregate<CqlInterval<CqlDate>, IEnumerable<CqlInterval<CqlDate>>>(intervals, a_, (null as IEnumerable<CqlInterval<CqlDate>>));
 
 		return b_;
 	}
@@ -2145,7 +2145,7 @@ public class CumulativeMedicationDuration_4_0_000
 			}
 			else
 			{
-				return null;
+				return (null as CqlInterval<CqlDate>);
 			}
 		};
 

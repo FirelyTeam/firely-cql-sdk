@@ -15,9 +15,12 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-		<PackageReference Include="MSTest.TestFramework" Version="3.3.1" />
-		<PackageReference Include="MSTest.TestAdapter" Version="3.3.1" />
-		<PackageReference Include="coverlet.collector" Version="6.0.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+		<PackageReference Include="coverlet.collector" Version="6.0.0">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 		<PackageReference Remove="Microsoft.CodeAnalysis.PublicApiAnalyzers" />
@@ -54,17 +57,8 @@
 		<None Include="Input\ELM\Test\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Include="Input\Xml\*.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="Input\ValueSets\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update="HL7Tests.*.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
 	</ItemGroup>
 </Project>

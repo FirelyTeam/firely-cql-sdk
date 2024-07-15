@@ -38,8 +38,8 @@
 			<PackagerCLIArgs Condition="'$(CSharpDirectory)'!=''">$(PackagerCLIArgs) --cs "$(CSharpDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CSharpTypeFormat)'!=''">$(PackagerCLIArgs) --cs-typeformat "$(CSharpTypeFormat)"</PackagerCLIArgs>
-			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand> -->
-			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand>
+			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand>
+			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>
 		<!-- Remove assets about to be created to avoid duplicates when editing/renaming CQL files -->
 		<ItemGroup>
