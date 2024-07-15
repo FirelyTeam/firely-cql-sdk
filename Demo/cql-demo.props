@@ -5,7 +5,7 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.7.0</FirelySdkVersion>
+		<FirelySdkVersion>5.8.2</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Solution-wide properties for NuGet packaging -->
