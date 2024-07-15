@@ -391,7 +391,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			var d_ = this.Patient();
 			var e_ = d_?.BirthDateElement;
 			var f_ = e_?.Value;
-			var g_ = context.Operators.Convert<CqlDate>(f_);
+			var g_ = context.Operators.ConvertStringToDate(f_);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
@@ -399,7 +399,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			var l_ = context.Operators.GreaterOrEqual(k_, 6);
 			var n_ = d_?.BirthDateElement;
 			var o_ = n_?.Value;
-			var p_ = context.Operators.Convert<CqlDate>(o_);
+			var p_ = context.Operators.ConvertStringToDate(o_);
 			var r_ = context.Operators.Start(h_);
 			var s_ = context.Operators.DateFrom(r_);
 			var t_ = context.Operators.CalculateAgeAt(p_, s_, "year");

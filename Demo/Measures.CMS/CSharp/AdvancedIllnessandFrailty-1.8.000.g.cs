@@ -539,7 +539,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -564,7 +564,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -579,7 +579,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		var n_ = this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period();
 		var o_ = context.Operators.Or(m_, n_);
 		var p_ = context.Operators.And(j_, o_);
-		var r_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var r_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var t_ = context.Operators.End(c_);
 		var u_ = context.Operators.DateFrom(t_);
 		var v_ = context.Operators.CalculateAgeAt(r_, u_, "year");
@@ -597,7 +597,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.DateFrom(d_);
