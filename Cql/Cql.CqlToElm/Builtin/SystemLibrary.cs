@@ -36,7 +36,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 if (value is null)
                     throw new InvalidOperationException();
 #endif
-                symbols.Add(value.Name, value);
+                symbols.Add(value!.Name, value);
             }
         }
         private readonly Dictionary<string, IDefinitionElement> symbols = new();
