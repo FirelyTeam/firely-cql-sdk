@@ -71,39 +71,47 @@ internal partial class CqlOperatorsBinder
             _          => PickCandidate(candidates)
         };
 
-        if (candidate.method is null)
+        switch (candidate.method, throwError)
         {
-            if (throwError)
-            {
-                throw new CannotBindToCqlOperatorError(
-                    methodName,
-                    methodArguments,
-                    genericTypeArguments,
-                    ICqlOperatorsMethods.GetMethodsByName(methodName),
-                    Defaults.MethodCSharpFormat)
-                    .ToException();
-            }
-        }
-
-        if (_logger.IsEnabled(LogLevel.Debug))
-        {
-            MethodCSharpFormat methodCSharpFormat =
-                Defaults.MethodCSharpFormat with
+            case (method: not null, _):
+                if (_logger.IsEnabled(LogLevel.Debug))
                 {
-                    ParameterFormat = Defaults.MethodCSharpFormat.ParameterFormat with
-                    {
-                        // Show the parameter type, and conversion method
-                        ParameterFormat = t => $"{t.Type} as {candidate.conversionMethods[t.Position].ToString()}"
-                    }
-                };
+                    MethodCSharpFormat methodCSharpFormat =
+                        Defaults.MethodCSharpFormat with
+                        {
+                            ParameterFormat = Defaults.MethodCSharpFormat.ParameterFormat with
+                            {
+                                // Show the parameter type, and conversion method
+                                ParameterFormat = t => $"{t.Type} as {candidate.conversionMethods[t.Position].ToString()}"
+                            }
+                        };
 
-            _logger.LogDebug(
-                "Resolved with score {score} to method overload {candidate}",
-                Score(candidate!),
-                candidate.method?.ToCSharpString(methodCSharpFormat));
+                    _logger.LogDebug(
+                        "Resolved with score {score} to method overload {candidate}",
+                        Score(candidate!),
+                        candidate.method?.ToCSharpString(methodCSharpFormat));
+                }
+
+                return (candidate.method, candidate.arguments);
+
+            case (method: null, throwError: true):
+                throw new CannotBindToCqlOperatorError(
+                        methodName,
+                        methodArguments,
+                        genericTypeArguments,
+                        ICqlOperatorsMethods.GetMethodsByName(methodName),
+                        Defaults.MethodCSharpFormat)
+                    .ToException();
+
+            case (method: null, throwError: false):
+                // if (_logger.IsEnabled(LogLevel.Debug))
+                // {
+                //     _logger.LogDebug(
+                //         "No overloads found trying to resolve method for {input}",
+                //         new StringBuilder().AppendCSharp(methodName, methodArguments, genericTypeArguments, Defaults.MethodCSharpFormat));
+                // }
+                return default;
         }
-
-        return (candidate.method, candidate.arguments);
 
         (MethodInfo? method, Expression[] arguments, TypeConversion[] conversionMethods) PickCandidate(
             (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates)

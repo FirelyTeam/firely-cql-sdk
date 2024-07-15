@@ -371,7 +371,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			var j_ = this.Patient();
 			var k_ = j_?.BirthDateElement;
 			var l_ = k_?.Value;
-			var m_ = context.Operators.Convert<CqlDate>(l_);
+			var m_ = context.Operators.ConvertStringToDate(l_);
 			var o_ = FHIRHelpers_4_3_000.ToInterval(e_);
 			var p_ = context.Operators.Start(o_);
 			var q_ = context.Operators.DateFrom(p_);

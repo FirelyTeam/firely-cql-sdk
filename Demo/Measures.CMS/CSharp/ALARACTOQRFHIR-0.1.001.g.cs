@@ -160,7 +160,7 @@ public class ALARACTOQRFHIR_0_1_001
 			var k_ = this.Patient();
 			var l_ = k_?.BirthDateElement;
 			var m_ = l_?.Value;
-			var n_ = context.Operators.Convert<CqlDate>(m_);
+			var n_ = context.Operators.ConvertStringToDate(m_);
 			var p_ = context.Operators.Start(f_);
 			var q_ = context.Operators.DateFrom(p_);
 			var r_ = context.Operators.CalculateAgeAt(n_, q_, "year");

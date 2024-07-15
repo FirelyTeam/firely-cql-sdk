@@ -638,7 +638,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
@@ -791,7 +791,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
@@ -821,7 +821,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
@@ -851,7 +851,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);

@@ -147,7 +147,7 @@ public class VTE_8_6_000
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			var j_ = InpatientEncounter?.Period;
 			var k_ = FHIRHelpers_4_3_000.ToInterval(j_);
 			var l_ = context.Operators.Start(k_);

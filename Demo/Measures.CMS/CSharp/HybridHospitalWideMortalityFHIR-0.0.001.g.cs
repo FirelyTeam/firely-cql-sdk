@@ -303,7 +303,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				var v_ = this.Patient();
 				var w_ = v_?.BirthDateElement;
 				var x_ = w_?.Value;
-				var y_ = context.Operators.Convert<CqlDate>(x_);
+				var y_ = context.Operators.ConvertStringToDate(x_);
 				var z_ = InpatientEncounter?.Period;
 				var aa_ = FHIRHelpers_4_3_000.ToInterval(z_);
 				var ab_ = context.Operators.Start(aa_);
