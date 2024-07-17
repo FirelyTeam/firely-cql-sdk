@@ -1,10 +1,12 @@
 ﻿/*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
+
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,11 +16,6 @@ namespace Hl7.Cql.Elm.Serialization
 {
     internal class XmlQualifiedNameConverter : JsonConverter<XmlQualifiedName>
     {
-        public override bool CanConvert(Type typeToConvert)
-        {
-            return base.CanConvert(typeToConvert);
-        }
-
         public override XmlQualifiedName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.String)

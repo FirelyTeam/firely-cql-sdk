@@ -55,7 +55,6 @@ Hl7.Cql.Elm.Before.precisionSpecified.get -> bool
 Hl7.Cql.Elm.Before.precisionSpecified.set -> void
 Hl7.Cql.Elm.BinaryExpression
 Hl7.Cql.Elm.BinaryExpression.BinaryExpression() -> void
-Hl7.Cql.Elm.BinaryExpression.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.ByColumn
 Hl7.Cql.Elm.ByColumn.ByColumn() -> void
 Hl7.Cql.Elm.ByDirection
@@ -287,7 +286,6 @@ Hl7.Cql.Elm.FunctionDef.fluentSpecified.set -> void
 Hl7.Cql.Elm.FunctionDef.FunctionDef() -> void
 Hl7.Cql.Elm.FunctionRef
 Hl7.Cql.Elm.FunctionRef.FunctionRef() -> void
-Hl7.Cql.Elm.FunctionRef.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.GeometricMean
 Hl7.Cql.Elm.GeometricMean.GeometricMean() -> void
 Hl7.Cql.Elm.Greater
@@ -387,6 +385,7 @@ Hl7.Cql.Elm.Library
 Hl7.Cql.Elm.Library.GetVersionedIdentifier(bool throwError = true) -> Hl7.Cql.Elm.VersionedIdentifier?
 Hl7.Cql.Elm.Library.Library() -> void
 Hl7.Cql.Elm.Library.NameAndVersion(bool throwError = true) -> string?
+Hl7.Cql.Elm.Library.SerializeToJson(bool writeIndented = true) -> string!
 Hl7.Cql.Elm.Library.WriteJson(System.IO.Stream! stream, bool writeIndented = true) -> void
 Hl7.Cql.Elm.List
 Hl7.Cql.Elm.List.List() -> void
@@ -467,9 +466,12 @@ Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier() -> void
 Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier(string! uri, string! name) -> void
 Hl7.Cql.Elm.Narrative
 Hl7.Cql.Elm.Narrative.Narrative() -> void
+Hl7.Cql.Elm.Narrative.r.get -> string?
+Hl7.Cql.Elm.Narrative.r.set -> void
+Hl7.Cql.Elm.Narrative.s.get -> Hl7.Cql.Elm.Narrative![]?
+Hl7.Cql.Elm.Narrative.s.set -> void
 Hl7.Cql.Elm.NaryExpression
 Hl7.Cql.Elm.NaryExpression.NaryExpression() -> void
-Hl7.Cql.Elm.NaryExpression.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.Negate
 Hl7.Cql.Elm.Negate.Negate() -> void
 Hl7.Cql.Elm.Not
@@ -594,7 +596,6 @@ Hl7.Cql.Elm.ReturnClause.distinct.get -> bool
 Hl7.Cql.Elm.ReturnClause.distinct.set -> void
 Hl7.Cql.Elm.ReturnClause.ReturnClause() -> void
 Hl7.Cql.Elm.Round
-Hl7.Cql.Elm.Round.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.Round.precisionOrNull.get -> object?
 Hl7.Cql.Elm.Round.Round() -> void
 Hl7.Cql.Elm.SameAs
@@ -674,7 +675,6 @@ Hl7.Cql.Elm.SystemTypes
 Hl7.Cql.Elm.Tag
 Hl7.Cql.Elm.Tag.Tag() -> void
 Hl7.Cql.Elm.TernaryExpression
-Hl7.Cql.Elm.TernaryExpression.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.TernaryExpression.TernaryExpression() -> void
 Hl7.Cql.Elm.Time
 Hl7.Cql.Elm.Time.Time() -> void
@@ -734,7 +734,6 @@ Hl7.Cql.Elm.TypeSpecifier
 Hl7.Cql.Elm.TypeSpecifier.TypeSpecifier() -> void
 Hl7.Cql.Elm.TypeSpecifierExtensions
 Hl7.Cql.Elm.UnaryExpression
-Hl7.Cql.Elm.UnaryExpression.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.UnaryExpression.UnaryExpression() -> void
 Hl7.Cql.Elm.Union
 Hl7.Cql.Elm.Union.Union() -> void
@@ -803,7 +802,8 @@ static Hl7.Cql.Elm.Library.ComparerByNameAndVersion.get -> System.Collections.Ge
 static Hl7.Cql.Elm.Library.EqualityComparerByNameAndVersion.get -> System.Collections.Generic.IEqualityComparer<Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library!
-static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream, string? originalFilePath = null) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream, bool validate = true, string? originalFilePath = null) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.Library.ParseFromJson(string! json, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.FunctionDef![]! functions) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.IDefinitionElement![]! elements) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
@@ -833,8 +833,6 @@ static Hl7.Cql.Elm.TypeSpecifierExtensions.IsOrderedType(this Hl7.Cql.Elm.TypeSp
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToIntervalType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToListType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.ListTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToNamedType(this System.Xml.XmlQualifiedName! qname) -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static readonly Hl7.Cql.Elm.Library.JsonSerializerOptions -> System.Text.Json.JsonSerializerOptions!
-static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.Json.JsonSerializerOptions!
 ~Hl7.Cql.Elm.Aggregate.initialValue.get -> Hl7.Cql.Elm.Expression
 ~Hl7.Cql.Elm.Aggregate.initialValue.set -> void
 ~Hl7.Cql.Elm.Aggregate.iteration.get -> Hl7.Cql.Elm.Expression

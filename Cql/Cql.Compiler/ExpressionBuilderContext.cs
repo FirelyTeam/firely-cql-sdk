@@ -1335,7 +1335,9 @@ partial class ExpressionBuilderContext
 {
     protected Expression Equivalent(Equivalent eqv)
     {
-        if (TranslateArgs(eqv.operands) is [{ } left, { } right]
+        IGetOperands eqvAsOperands = eqv;
+
+        if (TranslateArgs(eqvAsOperands.operands) is [{ } left, { } right]
             && _typeResolver.GetListElementType(left.Type, throwError:false) is { } leftType
             && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightType
             && leftType != rightType)

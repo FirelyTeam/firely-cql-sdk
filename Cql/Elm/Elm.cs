@@ -10,6 +10,8 @@
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
+using System.Xml.Serialization;
+
 // ReSharper disable InconsistentNaming
 
 namespace Hl7.Cql.Elm;
@@ -134,6 +136,7 @@ partial class IncludeDef : IGetLibraryName
 {
     /// <inheritdoc />
     [JsonIgnore]
+    [XmlIgnore]
     public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
 }
 
@@ -381,28 +384,28 @@ internal interface IUnaryOperator
 partial class FunctionRef : IGetOperands
 {
     /// <inheritdoc />
-    public Expression[] operands => operand;
+    Expression[] IGetOperands.operands => operand;
     /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Nary;
 }
 partial class NaryExpression : IGetOperands
 {
     /// <inheritdoc />
-    public Expression[] operands => operand;
+    Expression[] IGetOperands.operands => operand;
     /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Nary;
 }
 partial class TernaryExpression : IGetOperands
 {
     /// <inheritdoc />
-    public Expression[] operands => operand;
+    Expression[] IGetOperands.operands => operand;
     /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Ternary;
 }
 partial class BinaryExpression : IGetOperands
 {
     /// <inheritdoc />
-    public Expression[] operands => operand;
+    Expression[] IGetOperands.operands => operand;
     /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Binary;
 }
@@ -410,7 +413,7 @@ partial class BinaryExpression : IGetOperands
 partial class UnaryExpression : IGetOperands, IUnaryOperator
 {
     /// <inheritdoc />
-    public Expression[] operands => [operand];
+    Expression[] IGetOperands.operands => [operand];
     /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Unary;
 }
@@ -418,7 +421,7 @@ partial class UnaryExpression : IGetOperands, IUnaryOperator
 partial class Round : IGetOperands, IUnaryOperator
 {
     /// <inheritdoc />
-    public Expression[] operands => [operand];
+    Expression[] IGetOperands.operands => [operand];
     /// <inheritdoc />
     Arity IGetOperands.arity => Arity.Unary;
 }
