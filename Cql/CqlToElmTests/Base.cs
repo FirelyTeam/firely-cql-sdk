@@ -32,19 +32,16 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         protected static IServiceCollection ServiceCollection(Action<CqlToElmOptions>? options = null,
-            Action<IModelProvider>? models = null) =>
+            Action<IModelProvider>? models = null,
+            Type? libraryProviderType = null) =>
             new ServiceCollection()
-                .AddModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
                 .AddSystem()
+                .AddModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
                 .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
                 .AddMessaging()
                 .AddLogging(builder => builder
                     .AddConsole())
-                .AddTransient<InvocationBuilder>()
-                .AddSingleton<CoercionProvider>()
-                .AddSingleton<ElmFactory>()
-                .AddSingleton<ILibraryProvider, MemoryLibraryProvider>()
-                .AddScoped<CqlToElmConverter>();
+                .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider));
 
         private class TestLibraryProvider : ILibraryProvider
         {

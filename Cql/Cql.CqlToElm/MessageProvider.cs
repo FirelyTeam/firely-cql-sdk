@@ -20,6 +20,19 @@ namespace Hl7.Cql.CqlToElm
 
         public CultureInfo Culture { get; }
 
+        public string CallIsAmbiguous(string name, Expression[] arguments, SignatureMatchResult[] others) {
+            var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
+            // match cql-to-elm reference implementation (Java) error messages
+            var errorSb = new StringBuilder();
+            errorSb.AppendLine(string.Format(Culture, Messages.CallIsAmbiguous, name, argTypeString));
+            foreach (var match in others)
+            {
+                var matchTypeString = string.Join(", ", match.Arguments.Select(od => od.Result.resultTypeSpecifier.ToString()));
+                errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {name}({matchTypeString})");
+            }
+            return errorSb.ToString();
+        }
+
         public string CannotResolveCircularReference() =>
              Messages.CannotResolveCircularReference;
         public string CouldNotResolveContextName(string contextName, params string[] modelNames) =>

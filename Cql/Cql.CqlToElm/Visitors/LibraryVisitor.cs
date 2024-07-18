@@ -117,7 +117,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else
                 {
                     error ??= Messaging.UnableToResolveLibrary(libraryName, version);
-                    var errorInclude = new ReferencedLibrary(localIdentifier, vi, new Scopes.LibrarySymbolTable(vi, null));
+                    var errorInclude = new ReferencedLibrary(localIdentifier, vi, new Scopes.SymbolTable(vi.ToString()!, null));
                     return errorInclude
                         .AddError(error!)
                         .WithLocator(context.Locator());
@@ -316,11 +316,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                 if (functionBody is not null)
                 {
+                    var scopeName = $"{identifier}({operands.Select(op => op.resultTypeSpecifier.ToString())})";
                     // Enter a new scope for the function body, so that the operands are visible
-                    using (LibraryBuilder.EnterScope())
+                    using (var scope = LibraryBuilder.EnterStatementScope(scopeName))
                     {
                         foreach (var operand in operands)
-                            LibraryBuilder.CurrentScope.TryAdd(operand);
+                            scope.TryAdd(operand);
 
                         // Visit the function body, which will add the expression to the functionDef
                         functionDef.expression = ExpressionVisitor.Visit(functionBody.expression());
@@ -375,6 +376,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 List<string> definedContexts = new();
 
                 var table = LibraryBuilder.SymbolTable;
+
+
 
                 // Go over the statements in order, since they can be interleaved
                 // with context statements, which become active immediately.

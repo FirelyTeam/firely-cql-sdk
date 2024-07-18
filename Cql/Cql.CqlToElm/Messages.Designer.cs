@@ -61,6 +61,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Call to operator {0}({1}) is ambiguous with:.
+        /// </summary>
+        internal static string CallIsAmbiguous {
+            get {
+                return ResourceManager.GetString("CallIsAmbiguous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot resolve reference to expression or function a because it results in a circular reference..
         /// </summary>
         internal static string CannotResolveCircularReference {

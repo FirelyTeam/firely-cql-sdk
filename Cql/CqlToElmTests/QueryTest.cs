@@ -246,5 +246,41 @@ namespace Hl7.Cql.CqlToElm.Test
                 ");
             //", "Identifier x is already in use in this scope.");
         }
+
+        [TestMethod]
+        public void Claims_Query()
+        {
+            var lib = MakeLibrary(@"
+                library Claims version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define q:
+                    from [Claim] singleClaim
+                        with singleClaim.careTeam careTeam 
+                        such that careTeam.provider is FHIR.Reference 
+                        and (careTeam.provider as FHIR.Reference).reference is null
+            ");
+            var q = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            var with = q.relationship[0].Should().BeOfType<With>().Subject;
+            var property = with.expression.Should().BeOfType<Property>().Subject;
+        }
+
+        [TestMethod]
+        public void Return_Query()
+        {
+            var lib = MakeLibrary(@"
+                library Claims version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define q:
+                    [ExplanationOfBenefit] eob return eob.careTeam singleClaimCareTeam where true
+            ");
+            var q = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            q.resultTypeSpecifier.Should().BeOfType<ListTypeSpecifier>();
+            ((ListTypeSpecifier)q.resultTypeSpecifier).elementType.Should().BeOfType<ListTypeSpecifier>();
+        }
+
     }
 }

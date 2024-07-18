@@ -73,11 +73,22 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>True if the member was found, false otherwise.</returns>
         public static bool TryGetElement(this IModelProvider provider, ClassInfo ci, string elementName, out ClassInfoElement? element)
         {
-            var types = GetBaseTypes(provider, ci);
-            var allElements = types.OfType<ClassInfo>().SelectMany(ci => ci.element ?? Array.Empty<ClassInfoElement>());
-            element = allElements.SingleOrDefault(ele => ele.name == elementName);
-
-            return element is not null;
+            element = getElement(ci);
+            if (element is not null)
+                return true;
+            else
+            {
+                var types = GetBaseTypes(provider, ci).OfType<ClassInfo>();
+                foreach (var t in types)
+                {
+                    element = getElement(t);
+                    if (element is not null)
+                        return true;
+                }
+                return false;
+            }
+            ClassInfoElement? getElement(ClassInfo c) =>
+                c.element?.SingleOrDefault(ele => ele.name == elementName);
         }
  
         private static readonly Regex UriPrefixedTypeName = new Regex("{(?'uri'\\S+)}(?'name'\\S+)", RegexOptions.Compiled);

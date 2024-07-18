@@ -326,20 +326,11 @@ namespace Hl7.Cql.CqlToElm
                     }
                     else if (cheapest.Length > 0)
                     {
-                        var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
-                        // match cql-to-elm reference implementation (Java) error messages
-                        var errorSb = new StringBuilder();
-                        errorSb.AppendLine(CultureInfo.InvariantCulture, $"Call to operator {overloadedFunction.Name}({argTypeString}) is ambiguous with:");
-                        foreach (var match in cheapest)
-                        {
-                            var matchTypeString = string.Join(", ", match.Arguments.Select(od => od.Result.resultTypeSpecifier.ToString()));
-                            errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {overloadedFunction.Name}({matchTypeString})");
-                        }
                         result = new(cheapest[0].Function,
                             cheapest[0].Arguments,
                             cheapest[0].GenericInferences,
                             cheapest[0].Flags | SignatureMatchFlags.Ambiguous,
-                            ()=>errorSb.ToString());
+                            ()=> Messaging.CallIsAmbiguous(overloadedFunction.Name, arguments, cheapest));
                         return true;
                     }
                 }

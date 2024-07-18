@@ -125,6 +125,12 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return this;
         }
 
+        public SystemFunction<T> InvokeWith(Func<InvocationBuilder, Expression[], Expression> invoker)
+        {
+            Invoker = invoker;
+            return this;
+        }
+
         public override TElement Validate<TElement>(TElement element)
         {
             if (element is T t)

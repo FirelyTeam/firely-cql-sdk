@@ -3,6 +3,7 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -299,6 +300,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 "flatten" => handleFlatten(operand),
                 _ => throw new NotImplementedException(),
             };
+            if (expression.GetErrors().Any())
+            {
+            }
             return expression
                 .WithId()
                 .WithLocator(context.Locator());

@@ -63,7 +63,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
             return false;
         }
 
-        public void Add(string id, string version, T t)
+        public void Add(string id, string? version, T t)
         {
             version ??= string.Empty;
             if (!Versions.TryGetValue(id, out var versions))

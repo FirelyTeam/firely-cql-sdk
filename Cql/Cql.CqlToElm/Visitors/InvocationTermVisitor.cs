@@ -14,39 +14,36 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // (qualifierExpression '.')* referentialIdentifier
         public override Expression VisitQualifiedIdentifierExpression([NotNull] cqlParser.QualifiedIdentifierExpressionContext context)
         {
-            var terms = context.qualifierExpression();
-            Expression? left = null;
-            if (terms.Length > 0)
+            var qualifiers = context.qualifierExpression();
+            Expression? expression = null;
+            if (qualifiers.Length > 0)
             {
-                for (int i = 0; i < terms.Length; i++)
+                var term = qualifiers[0].referentialIdentifier().Parse();
+                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
+                    expression = symbol.ToRef(null);
+                else return new IdentifierRef
                 {
-                    var term = terms[i].referentialIdentifier().Parse();
-                    left = handleTerm(left, term);
-                }
-            }
-            var final = context.referentialIdentifier().Parse();
-            var expression = handleTerm(left, final);
-            return expression ?? throw new NotImplementedException();
-            Expression? handleTerm(Expression? left, string term)
-            {
-                if (left is OperandRef or)
-                {
-                    left = navigateIntoType(or, term);
-                }
-                else if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
-                {
-                    left = symbol switch
-                    {
-                        OperandDef operand => new OperandRef { name = operand.name }.WithResultType(operand.resultTypeSpecifier),
-                        ValueSetDef valueSet => new ValueSetRef { name = valueSet.name }.WithResultType(SystemTypes.ValueSetType),
-                        CodeDef code => new CodeRef { name = code.name }.WithResultType(SystemTypes.CodeType),
-                        ConceptDef concept => new ConceptRef { name = concept.name }.WithResultType(SystemTypes.ConceptType),
-                        null => throw new NotImplementedException($"Don't know how to handle null symbol"),
-                        _ => throw new NotImplementedException($"Don't know how to handle symbol {symbol!.GetType()}")
-                    };
-                }
+                    name = term,
+                }.AddError(Messaging.CouldNotResolveInCurrent(term));
 
-                return left;
+                for(int i = 1; i < qualifiers.Length; i++)
+                {
+                    term = qualifiers[i].referentialIdentifier().Parse();
+                    expression = navigateIntoType(expression, term);
+                }
+                var refId = context.referentialIdentifier().Parse();
+                expression = navigateIntoType(expression, refId);
+                return expression;
+            }
+            else
+            {
+                var term = context.referentialIdentifier().Parse();
+                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
+                    return symbol.ToRef(null);
+                else return new IdentifierRef
+                {
+                    name = term,
+                }.AddError(Messaging.CouldNotResolveInCurrent(term));
             }
         }
 

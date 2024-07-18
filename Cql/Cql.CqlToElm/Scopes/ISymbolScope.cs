@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Elm;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -6,6 +7,8 @@ namespace Hl7.Cql.CqlToElm
 {
     internal interface ISymbolScope: IEnumerable<IDefinitionElement>
     {
+        string Name { get; }
+
         /// <summary>
         /// The enclosing scope, if any.
         /// </summary>
@@ -44,6 +47,10 @@ namespace Hl7.Cql.CqlToElm
         /// Creates a child scope for which this scope is its <see cref="Parent"/>.
         /// </summary>
         /// <returns>A new scope whose <see cref="Parent"/> is this scope.</returns>
-        ISymbolScope EnterScope();
+        ISymbolScope EnterScope(string name);
+    }
+
+    internal interface IDisposableScope: ISymbolScope, IDisposable
+    {
     }
 }

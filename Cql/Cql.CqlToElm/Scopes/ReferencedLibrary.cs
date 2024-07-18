@@ -9,11 +9,11 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     internal class ReferencedLibrary : IncludeDef, IDefinitionElement
     {
-        public ReferencedLibrary(string localIdentifier, VersionedIdentifier id, LibrarySymbolTable symbols)
+        public ReferencedLibrary(string localIdentifier, VersionedIdentifier id, SymbolTable symbols)
         {
             this.localIdentifier = localIdentifier;
-            path = symbols.LibraryIdentifier.id;
-            version = symbols.LibraryIdentifier.version;
+            path = id.id;
+            version = id.version;
             Id = id;
             Symbols = symbols;
         }

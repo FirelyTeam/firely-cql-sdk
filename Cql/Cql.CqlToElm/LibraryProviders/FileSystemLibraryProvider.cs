@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
@@ -25,6 +26,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
             StreamInspector streamInspector,
             IServiceProvider services)
         {
+            System.Diagnostics.Debug.WriteLine($"[{nameof(FileSystemLibraryProvider)}] Creating new instance.");
             var rootDirectory = options.Value.Input switch
             {
                 { } => new DirectoryInfo(options.Value.Input),
@@ -38,6 +40,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
             Services = services;
             Configuration = options.Value;
             Libraries = new(); // make case sensitivity configurable?
+            LibrariesByFile = new();
             ScanDirectory();
         }
 
@@ -55,7 +58,10 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                         && li is not null
                         && li.VersionedIdentifier is not null)
                     {
-                        Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, (file, li.Library));
+                        var info = new LibraryInfo(file, li.Library);
+                        Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, info);
+                        LibrariesByFile.Add(file, info);
+                        
                     }
                 }
                 var jsonFiles = RootDirectory.GetFiles("*.json", SearchOption.AllDirectories);
@@ -67,7 +73,9 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                         && li is not null
                         && li.VersionedIdentifier is not null)
                     {
-                        Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, (file, li.Library));
+                        var info = new LibraryInfo(file, li.Library);
+                        Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, info);
+                        LibrariesByFile.Add(file, info);
                     }
                 }
                 var xmlFiles = RootDirectory.GetFiles("*.json", SearchOption.AllDirectories);
@@ -79,7 +87,9 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                         && li is not null
                         && li.VersionedIdentifier is not null)
                     {
-                        Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, (file, li.Library));
+                        var info = new LibraryInfo(file, li.Library);
+                        Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, info);
+                        LibrariesByFile.Add(file, info);
                     }
                 }
             }
@@ -94,7 +104,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                         && li is not null
                         && li.VersionedIdentifier is not null)
                     {
-                        Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, (file, li.Library));
+                        Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, new LibraryInfo(file, li.Library));
                     }
                 }
             }
@@ -106,7 +116,44 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
         public IServiceProvider Services { get; }
         private CqlToElmOptions Configuration { get; }
 
-        private VersionedIdentifierDictionary<(FileInfo file, LibraryBuilder? library)> Libraries { get; }
+
+        private class LibraryInfo
+        {
+            public LibraryInfo(FileInfo file, LibraryBuilder? library)
+            {
+                this.file = file;
+                this.library = library;
+            }
+            public FileInfo file { get; set; }
+            public LibraryBuilder? library { get; set; }
+        }
+
+        private Dictionary<FileInfo, LibraryInfo> LibrariesByFile { get; }
+        private VersionedIdentifierDictionary<LibraryInfo> Libraries { get; }
+
+        public bool TryAddLibrary(string libraryName, string? version, FileInfo location, LibraryBuilder library)
+        {
+            if (TryResolveLibrary(libraryName, version, out _, out _))
+                return false;
+            var info = new LibraryInfo(new FileInfo("in-memory"), library);
+            Libraries.Add(libraryName, version, info);
+            LibrariesByFile.Add(location, info);
+            return true;
+        }
+
+        public bool TryResolveLibrary(FileInfo file, [NotNullWhen(true)] out LibraryBuilder? libraryBuilder)
+        {
+            if (LibrariesByFile.TryGetValue(file, out var li))
+            {
+                if (li.library is not null)
+                {
+                    libraryBuilder = li.library;
+                    return true;
+                }
+            }
+            libraryBuilder = null;
+            return false;
+        }
 
         public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? library, out string? error)
         {
@@ -116,11 +163,13 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                     library = lib.library;
                 else
                 {
+                    System.Diagnostics.Debug.WriteLine($"[{nameof(FileSystemLibraryProvider)}] Converting {lib.file}");
                     using var stream = lib.file.OpenRead();
                     var sr = new StreamReader(stream);
                     var cql = sr.ReadToEnd();
                     using var scope = Services.CreateScope();
                     library = Converter.GetBuilder(cql, scope);
+                    lib.library = library;
                 }
                 error = null;
                 return true;

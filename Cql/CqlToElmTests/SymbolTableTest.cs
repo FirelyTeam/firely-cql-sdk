@@ -27,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Add_Local_Expression()
         {
             const string name = "simple expression";
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             st.TryAdd(new ExpressionDef { name = name }).Should().BeTrue();
             st.TryResolveSymbol(name, out var resolved).Should().BeTrue();
             resolved.Should().NotBe(null);
@@ -38,7 +38,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Add_Local_Function()
         {
             const string name = "simple function";
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.BooleanType, name);
             st.TryAdd(f1).Should().BeTrue();
             st.TryResolveSymbol(name, out var resolved).Should().BeTrue();
@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Add_Fluent_Function()
         {
             const string name = "fluent function";
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.BooleanType, name);
             f1.fluent = true;
             f1.fluentSpecified = true;
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Add_Overload()
         {
             const string name = "f";
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.BooleanType, name);
             var f2 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.DecimalType }, SystemTypes.BooleanType, name);
             st.TryAdd(f1).Should().BeTrue();
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Add_Function_To_Expression()
         {
             const string name = "simple expression";
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             st.TryAdd(new ExpressionDef { name = name }).Should().BeTrue();
             st.TryResolveSymbol(name, out var resolved).Should().BeTrue();
             resolved.Should().NotBe(null);
@@ -105,7 +105,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Add_Expression_To_Expression()
         {
             const string name = "simple expression";
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             st.TryAdd(new ExpressionDef { name = name }).Should().BeTrue();
             st.TryResolveSymbol(name, out var resolved).Should().BeTrue();
             resolved.Should().NotBe(null);
@@ -120,7 +120,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             // define a: true
             // define function b(a integer): a
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             st.TryAdd(new ExpressionDef { name = "a" });
             var function = new FunctionDef
             {
@@ -128,7 +128,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 operand = new[] { new OperandDef { name = "a", operandTypeSpecifier = SystemTypes.IntegerType } }
             }.WithResultType(SystemTypes.IntegerType);
             st.TryAdd(function).Should().Be(true);
-            var bodyScope = st.EnterScope();
+            var bodyScope = st.EnterScope("body");
             bodyScope.TryAdd(function.operand[0]);
             bodyScope.TryResolveSymbol("a", out var resolved).Should().BeTrue();
             resolved.Should().BeOfType<OperandDef>();
@@ -138,14 +138,14 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Resolve_Operand_With_Same_Name_As_Function()
         {
             //define function g(g Integer):  g
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             var function = new FunctionDef
             {
                 name = "g",
                 operand = new[] { new OperandDef { name = "g", operandTypeSpecifier = SystemTypes.IntegerType } }
             }.WithResultType(SystemTypes.IntegerType);
             st.TryAdd(function).Should().Be(true);
-            var bodyScope = st.EnterScope();
+            var bodyScope = st.EnterScope("body");
             bodyScope.TryAdd(function.operand[0]);
             bodyScope.TryResolveSymbol("g", out var resolved).Should().BeTrue();
             resolved.Should().BeOfType<OperandDef>();
@@ -155,7 +155,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Resolve_System_Operator()
         {
             // call add from parent lib (System)
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             st.TryResolveSymbol("Add", out var resolved).Should().BeTrue();
             resolved.Should().BeOfType<OverloadedFunctionDef>();
         }
@@ -164,7 +164,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Resolve_Local_System_Operator()
         {
             //define function Add(a Code, b Code): true
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             var function = new FunctionDef
             {
                 name = "Add",
@@ -187,7 +187,7 @@ namespace Hl7.Cql.CqlToElm.Test
             //define function Add(a Integer, b Integer):  a* b
             //define callAdd: Add(2, 3)
             // callAdd should be 6
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             var function = new FunctionDef
             {
                 name = "Add",
@@ -241,7 +241,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // with any existing overloads.
             SystemLibrary.TryResolveFunction("Add", out var sysAdd).Should().BeTrue();
             var sysAddOverload = sysAdd.Should().BeOfType<OverloadedFunctionDef>().Subject;
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             var function = new FunctionDef
             {
                 name = "Add",
@@ -270,7 +270,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // should be the local one.
             SystemLibrary.TryResolveFunction("Add", out var sysAdd).Should().BeTrue();
             var sysAddOverload = sysAdd.Should().BeOfType<OverloadedFunctionDef>().Subject;
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             var function = new FunctionDef
             {
                 name = "Add",
@@ -295,7 +295,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ResolveFluent_Local()
         {
-            var st = new LibrarySymbolTable(TestId, SystemLibrary);
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
             var function = new FunctionDef
             {
                 name = "Add",

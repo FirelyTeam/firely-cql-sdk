@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Xml;
 using static Hl7.Cql.Elm.SystemTypes;
 
 namespace Hl7.Cql.CqlToElm.Builtin
@@ -41,6 +42,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         }
         private readonly Dictionary<string, IDefinitionElement> symbols = new();
 
+        public string Name => "System";
+
         public ISymbolScope? Parent => null;
 
         public bool TryAdd(IDefinitionElement symbol) => throw new NotSupportedException($"Symbols cannot be added to the System scope.");
@@ -67,15 +70,15 @@ namespace Hl7.Cql.CqlToElm.Builtin
         }
 
 
-        public ISymbolScope EnterScope() => throw new NotSupportedException($"You cannot enter a scope from the System scope.");
+        public ISymbolScope EnterScope(string name) => throw new NotSupportedException($"You cannot enter a scope from the System scope.");
 
         public IEnumerator<IDefinitionElement> GetEnumerator() => symbols.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public IEnumerable<ReferencedLibrary> ReferencedLibraries => Enumerable.Empty<ReferencedLibrary>();
 
-        private static SystemFunction<T> nullary<T>(TypeSpecifier result) where T : Expression =>
-            new(EmptyOperands, result, typeof(T).Name);
+        private static SystemFunction<T> nullary<T>(TypeSpecifier result, string? name = null) where T : Expression =>
+            new(EmptyOperands, result, name ?? typeof(T).Name);
         private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null,
             Func<InvocationBuilder, Expression[], Expression>? invoker = null) where T : Expression =>
             new(new[] { argument }, result, name ?? typeof(T).Name, invoker: invoker);
@@ -105,14 +108,67 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Add = binary<Add>(T, T, T).For(T, new[] { IntegerType, LongType, DecimalType, QuantityType })
             .Combine(binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType))
             .Combine(binary<Concatenate>(StringType, StringType, StringType, "Add"));
+
+        public static SystemFunction<Elm.CalculateAge> AgeInYears = nullary<Elm.CalculateAge>(IntegerType, "AgeInYears")
+            .InvokeWith(Invokers.AgeInYears);
+        public static SystemFunction<Elm.CalculateAge> AgeInMonths = nullary<Elm.CalculateAge>(IntegerType, "AgeInMonths")
+            .InvokeWith(Invokers.AgeInMonths);
+        public static SystemFunction<Elm.CalculateAge> AgeInWeeks = nullary<Elm.CalculateAge>(IntegerType, "AgeInWeeks")
+            .InvokeWith(Invokers.AgeInWeeks);
+        public static SystemFunction<Elm.CalculateAge> AgeInDays = nullary<Elm.CalculateAge>(IntegerType, "AgeInDays")
+            .InvokeWith(Invokers.AgeInDays);
+        public static SystemFunction<Elm.CalculateAge> AgeInHours = nullary<Elm.CalculateAge>(IntegerType, "AgeInHours")
+            .InvokeWith(Invokers.AgeInHours);
+        public static SystemFunction<Elm.CalculateAge> AgeInMinutes = nullary<Elm.CalculateAge>(IntegerType, "AgeInMinutes")
+            .InvokeWith(Invokers.AgeInMinutes);
+        public static SystemFunction<Elm.CalculateAge> AgeInSeconds = nullary<Elm.CalculateAge>(IntegerType, "AgeInSeconds")
+            .InvokeWith(Invokers.AgeInSeconds);
+
+        public static OverloadedFunctionDef AgeInYearsAt = unary<Elm.CalculateAgeAt>(T, IntegerType, "AgeInYearsAt")
+            .InvokeWith(Invokers.AgeInYearsAt)
+            .For(T, DateType, DateTimeType);
+        public static OverloadedFunctionDef AgeInMonthsAt = unary<Elm.CalculateAgeAt>(T, IntegerType, "AgeInMonthsAt")
+            .InvokeWith(Invokers.AgeInMonthsAt)
+            .For(T, DateType, DateTimeType);
+        public static OverloadedFunctionDef AgeInWeeksAt = unary<Elm.CalculateAgeAt>(T, IntegerType, "AgeInWeeksAt")
+            .InvokeWith(Invokers.AgeInWeeksAt)
+            .For(T, DateType, DateTimeType);
+        public static OverloadedFunctionDef AgeInDaysAt = unary<Elm.CalculateAgeAt>(T, IntegerType, "AgeInDaysAt")
+            .InvokeWith(Invokers.AgeInDaysAt)
+            .For(T, DateType, DateTimeType);
+        public static SystemFunction<Elm.CalculateAgeAt> AgeInHoursAt = binary<Elm.CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "AgeInHoursAt")
+            .InvokeWith(Invokers.AgeInHoursAt);
+        public static SystemFunction<Elm.CalculateAgeAt> AgeInMinutesAt = binary<Elm.CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "AgeInMinutesAt")
+            .InvokeWith(Invokers.AgeInMinutesAt);
+        public static SystemFunction<Elm.CalculateAgeAt> AgeInSecondsAt = binary<Elm.CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "AgeInSecondsAt")
+            .InvokeWith(Invokers.AgeInSecondsAt);
+
+
         public static SystemFunction<AllTrue> AllTrue = aggregate<AllTrue>(BooleanType, BooleanType);
         public static SystemFunction<And> And = binary<And>(BooleanType, BooleanType, BooleanType);
         public static SystemFunction<AnyTrue> AnyTrue = aggregate<AnyTrue>(BooleanType, BooleanType);
         public static OverloadedFunctionDef AnyInValueSet = binary<AnyInValueSet>(T, ValueSetType, BooleanType).For(T, StringType.ToListType(), CodeType.ToListType(), ConceptType.ToListType());
         public static OverloadedFunctionDef Avg = aggregate<Avg>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef Between = nary<Between>(new[] { T, T, T }, 3, BooleanType).For(T, OrderedTypes.ToArray());
+
+        public static OverloadedFunctionDef CalculateAgeInYears = unary<Elm.CalculateAge>(T, IntegerType, "CalculateAgeInYears").For(T, DateType, DateTimeType);
+        public static OverloadedFunctionDef CalculateAgeInMonths = unary<Elm.CalculateAge>(T, IntegerType, "CalculateAgeInMonths").For(T, DateType, DateTimeType);
+        public static OverloadedFunctionDef CalculateAgeInWeeks = unary<Elm.CalculateAge>(T, IntegerType, "CalculateAgeInWeeks").For(T, DateType, DateTimeType);
+        public static OverloadedFunctionDef CalculateAgeInDays = unary<Elm.CalculateAge>(T, IntegerType, "CalculateAgeInDays").For(T, DateType, DateTimeType);
+        public static SystemFunction<Elm.CalculateAge> CalculateAgeInHours = unary<Elm.CalculateAge>(DateTimeType, IntegerType, "CalculateAgeInHours");
+        public static SystemFunction<Elm.CalculateAge> CalculateAgeInMinutes = unary<Elm.CalculateAge>(DateTimeType, IntegerType, "CalculateAgeInMinutes");
+        public static SystemFunction<Elm.CalculateAge> CalculateAgeInSeconds = unary<Elm.CalculateAge>(DateTimeType, IntegerType, "CalculateAgeInSeconds");
+
+        public static OverloadedFunctionDef CalculateAgeInYearsAt = binary<CalculateAgeAt>(T, T, IntegerType, "CalculateAgeInYearsAt").For(T, DateType, DateTimeType);
+        public static OverloadedFunctionDef CalculateAgeInMonthsAt = binary<CalculateAgeAt>(T, T, IntegerType, "CalculateAgeInMonthsAt").For(T, DateType, DateTimeType);
+        public static OverloadedFunctionDef CalculateAgeInWeeksAt = binary<CalculateAgeAt>(T, T, IntegerType, "CalculateAgeInWeeksAt").For(T, DateType, DateTimeType);
+        public static OverloadedFunctionDef CalculateAgeInDaysAt = binary<CalculateAgeAt>(T, T, IntegerType, "CalculateAgeInDaysAt").For(T, DateType, DateTimeType);
+        public static SystemFunction<CalculateAgeAt> CalculateAgeInHoursAt = binary<CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "CalculateAgeInHoursAt");
+        public static SystemFunction<CalculateAgeAt> CalculateAgeInMinutesAt = binary<CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "CalculateAgeInMinutesAt");
+        public static SystemFunction<CalculateAgeAt> CalculateAgeInSecondsAt = binary<CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "CalculateAgeInSecondsAt");
+
         public static SystemFunction<Case> Case = new SystemFunction<Case>(new TypeSpecifier[] { BooleanType, T, T }, T);
-        public static OverloadedFunctionDef Ceiling = unary<Ceiling>(T, T).For(T, NumericTypes);
+        public static SystemFunction<Ceiling> Ceiling = unary<Ceiling>(DecimalType, IntegerType);
         public static OverloadedFunctionDef Coalesce = nary<Coalesce>(new[] { T, T, T, T, T }, 2, T).Combine(unary<Coalesce>(T.ToListType(), T));
         public static SystemFunction<Combine> Combine = nary<Combine>(new TypeSpecifier[] { StringType.ToListType(), StringType }, 1, StringType);
         public static SystemFunction<Concatenate> Concatenate = binary<Concatenate>(StringType, StringType, StringType);
@@ -146,8 +202,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 .For(T, DecimalType, QuantityType, DateType, DateTimeType, TimeType));
         public static SystemFunction<First> First = unary<First>(T.ToListType(), T);
         public static SystemFunction<Flatten> Flatten = unary<Flatten>(T.ToListType().ToListType(), T.ToListType(),
-            invoker: Invokers.Flatten);           
-        public static OverloadedFunctionDef Floor = unary<Floor>(T, T).For(T, NumericTypes);
+            invoker: Invokers.Flatten);
+        public static SystemFunction<Floor> Floor = unary<Floor>(DecimalType, IntegerType);
         public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
         public static OverloadedFunctionDef In = binaryWithPrecision<In>(T, T.ToIntervalType(), BooleanType).For(T, OrderedTypes.ToArray())
@@ -302,6 +358,67 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
     internal static class Invokers
     {
+        private static readonly NamedTypeSpecifier FhirPatientType = new NamedTypeSpecifier
+        {
+            name = new XmlQualifiedName("{http://hl7.org/fhir}Patient"),
+            resultTypeName = new XmlQualifiedName("{http://hl7.org/fhir}Patient")
+        };
+        private static readonly NamedTypeSpecifier FhirDateType = new NamedTypeSpecifier
+        {
+            name = new XmlQualifiedName("{http://hl7.org/fhir}date"),
+            resultTypeName = new XmlQualifiedName("{http://hl7.org/fhir}date")
+        };
+        private static readonly NamedTypeSpecifier FhirDateTimeType = new NamedTypeSpecifier
+        {
+            name = new XmlQualifiedName("{http://hl7.org/fhir}dateTime"),
+            resultTypeName = new XmlQualifiedName("{http://hl7.org/fhir}dateTime")
+        };
+        private static readonly Elm.Property PatientBirthDate = new Elm.Property
+        {
+            path = "birthDate",
+            source = new Elm.ExpressionRef { name = "Patient" }.WithResultType(FhirPatientType)
+        }.WithResultType(FhirDateType);
+        private static readonly Elm.ToDateTime PatientBirthDateTime = new Elm.ToDateTime
+        {
+            operand = PatientBirthDate,
+        }.WithResultType(DateTimeType);
+
+        private static Expression BirthDateExpressionFor(Expression arg) =>
+            arg.resultTypeSpecifier == DateTimeType || arg.resultTypeSpecifier == FhirDateTimeType
+                ? PatientBirthDateTime
+                : PatientBirthDate;
+
+        public static Expression AgeInYearsAt(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInYearsAt, BirthDateExpressionFor(args[0]), args[0]);
+        public static Expression AgeInMonthsAt(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInMonthsAt, BirthDateExpressionFor(args[0]), args[0]);
+        public static Expression AgeInDaysAt(InvocationBuilder builder, Expression[] args) =>
+             builder.Invoke(SystemLibrary.CalculateAgeInDaysAt, BirthDateExpressionFor(args[0]), args[0]);
+        public static Expression AgeInWeeksAt(InvocationBuilder builder, Expression[] args) =>
+             builder.Invoke(SystemLibrary.CalculateAgeInWeeksAt, BirthDateExpressionFor(args[0]), args[0]);
+        public static Expression AgeInHoursAt(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInHoursAt, BirthDateExpressionFor(args[0]), args[0]);
+        public static Expression AgeInMinutesAt(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInMinutesAt, BirthDateExpressionFor(args[0]), args[0]);
+        public static Expression AgeInSecondsAt(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInSecondsAt, BirthDateExpressionFor(args[0]), args[0]);
+
+        public static Expression AgeInYears(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInYears, PatientBirthDate);
+        public static Expression AgeInMonths(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInMonths, PatientBirthDate);
+        public static Expression AgeInWeeks(InvocationBuilder builder, Expression[] args) =>
+              builder.Invoke(SystemLibrary.CalculateAgeInWeeks, PatientBirthDate);
+        public static Expression AgeInDays(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInDays, PatientBirthDate);
+        public static Expression AgeInHours(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInHours, PatientBirthDateTime);
+        public static Expression AgeInMinutes(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInMinutes, PatientBirthDateTime);
+        public static Expression AgeInSeconds(InvocationBuilder builder, Expression[] args) =>
+            builder.Invoke(SystemLibrary.CalculateAgeInSeconds, PatientBirthDateTime);
+
+
         public static Expression Flatten(InvocationBuilder builder, Expression[] args)
         {
             var operand = args[0];

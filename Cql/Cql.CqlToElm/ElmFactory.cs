@@ -29,6 +29,8 @@ namespace Hl7.Cql.CqlToElm
             {
                 AggregateExpression ae => Populate(ae, arguments),
                 AnyInValueSet vs => Populate(vs, arguments),
+                CalculateAge ca => Populate(hasSignature.Name, ca, arguments),
+                CalculateAgeAt caa => Populate(hasSignature.Name, caa, arguments),
                 Combine combine => Populate(combine, arguments),
                 Between between => Populate(between, arguments),
                 Date d => Populate(d, arguments),
@@ -218,6 +220,40 @@ namespace Hl7.Cql.CqlToElm
             else binary.operand = arguments;
             return binary;
         }
+
+        internal CalculateAge Populate(string name, CalculateAge ca, Expression[] arguments)
+        {
+            ca.precision = name switch
+            {
+                nameof(SystemLibrary.CalculateAgeInYears) or nameof(SystemLibrary.AgeInYears) => DateTimePrecision.Year,
+                nameof(SystemLibrary.CalculateAgeInMonths) or nameof(SystemLibrary.AgeInMonths) => DateTimePrecision.Month,
+                nameof(SystemLibrary.CalculateAgeInWeeks) or nameof(SystemLibrary.AgeInWeeks) => DateTimePrecision.Week,
+                nameof(SystemLibrary.CalculateAgeInDays) or nameof(SystemLibrary.AgeInDays) => DateTimePrecision.Day,
+                nameof(SystemLibrary.CalculateAgeInHours) or nameof(SystemLibrary.AgeInHours) => DateTimePrecision.Hour,
+                nameof(SystemLibrary.CalculateAgeInMinutes) or nameof(SystemLibrary.AgeInMinutes) => DateTimePrecision.Minute,
+                nameof(SystemLibrary.CalculateAgeInSeconds) or nameof(SystemLibrary.AgeInSeconds) => DateTimePrecision.Second,
+                _ => throw new ArgumentException($"Could not determine precision for Age function {name}.")
+            };
+            ca.precisionSpecified = true;
+            return ca;
+        }
+        internal CalculateAgeAt Populate(string name, CalculateAgeAt caa, Expression[] arguments)
+        {
+            caa.precision = name switch
+            {
+                nameof(SystemLibrary.CalculateAgeInYearsAt) or nameof(SystemLibrary.AgeInYearsAt) => DateTimePrecision.Year,
+                nameof(SystemLibrary.CalculateAgeInMonthsAt) or nameof(SystemLibrary.AgeInMonthsAt) => DateTimePrecision.Month,
+                nameof(SystemLibrary.CalculateAgeInWeeksAt) or nameof(SystemLibrary.AgeInWeeksAt) => DateTimePrecision.Week,
+                nameof(SystemLibrary.CalculateAgeInDaysAt) or nameof(SystemLibrary.AgeInDaysAt) => DateTimePrecision.Day,
+                nameof(SystemLibrary.CalculateAgeInHoursAt) or nameof(SystemLibrary.AgeInHoursAt) => DateTimePrecision.Hour,
+                nameof(SystemLibrary.CalculateAgeInMinutesAt) or nameof(SystemLibrary.AgeInMinutesAt) => DateTimePrecision.Minute,
+                nameof(SystemLibrary.CalculateAgeInSecondsAt) or nameof(SystemLibrary.AgeInSecondsAt) => DateTimePrecision.Second,
+                _ => throw new ArgumentException($"Could not determine precision for Age function {name}.")
+            };
+            caa.precisionSpecified = true;
+            return caa;
+        }
+
         internal Combine Populate(Combine combine, Expression[] arguments)
         {
             combine.source = arguments[0];

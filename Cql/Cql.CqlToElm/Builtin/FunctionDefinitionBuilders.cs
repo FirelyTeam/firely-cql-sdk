@@ -69,6 +69,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }
             var newReturnType = InvocationBuilder.ReplaceGenericType(baseFunctionDef.resultTypeSpecifier, replacements);
             var overload = baseFunctionDef.CreateOverload(newOperands, newReturnType);
+            overload.Invoker = baseFunctionDef.Invoker;
             return overload;
         }
 

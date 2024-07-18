@@ -11,20 +11,23 @@ using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Scopes
 {
-    internal class LibrarySymbolTable : ISymbolScope
+    internal class SymbolTable : ISymbolScope
     {
-        public LibrarySymbolTable(VersionedIdentifier libraryId, ISymbolScope? parent)
+        public SymbolTable(string name, ISymbolScope? parent)
         {
-            LibraryIdentifier = libraryId;
+            Name = name;
             Parent = parent;
         }
         private Dictionary<string, IDefinitionElement> LocalSymbols { get; } = new();
 
-        public VersionedIdentifier LibraryIdentifier { get; }
+        public string Name { get; }
 
         public ISymbolScope? Parent { get; }
 
-        public ISymbolScope EnterScope() => new LibrarySymbolTable(LibraryIdentifier, this);
+        public ISymbolScope EnterScope(string name) {
+            System.Diagnostics.Debug.WriteLine($"Entering scope {name}");
+            return new SymbolTable(name, this);
+        }
 
         public bool TryAdd(IDefinitionElement symbol)
         {
@@ -244,7 +247,5 @@ namespace Hl7.Cql.CqlToElm.Scopes
 
         public IEnumerator<IDefinitionElement> GetEnumerator() => LocalSymbols.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-
     }
 }

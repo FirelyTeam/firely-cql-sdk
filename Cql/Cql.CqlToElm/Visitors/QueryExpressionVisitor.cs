@@ -21,14 +21,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 source = source,
             };
             TypeSpecifier returnType;
-            var scope = LibraryBuilder.EnterScope();
+            using (var scope = LibraryBuilder.EnterScope($"Query {context.Locator()}"))
             {
                 foreach (var qs in source)
                 {
-                    LibraryBuilder.CurrentScope.TryAdd(qs);
+                    if (scope.TryResolveSymbol(qs.alias, out var existing))
+                    {
+                    }
+                    scope.TryAdd(qs);
                 }
                 var hasScalarSource = source.All(s => s.resultTypeSpecifier is not ListTypeSpecifier);
-                query.let = handleLetClause(context.letClause());
+                query.let = handleLetClause(context.letClause(), scope);
                 query.relationship = handleRelationship(context.queryInclusionClause());
                 var @return = handleReturn(context.returnClause(), hasScalarSource);
                 if (@return?.resultTypeSpecifier is null)
@@ -56,7 +59,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithId()
                 .WithLocator(context.Locator())
                 .WithResultType(returnType);
-            LetClause[] handleLetClause(cqlParser.LetClauseContext letClauseContext)
+
+            LetClause[] handleLetClause(cqlParser.LetClauseContext letClauseContext, ISymbolScope scope)
             {
                 if (letClauseContext is not null)
                 {
@@ -74,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         }
                         .WithLocator(item.Locator())
                         .WithResultType(expr.resultTypeSpecifier);
-                        if (!LibraryBuilder.CurrentScope.TryAdd(letClause))
+                        if (!scope.TryAdd(letClause))
                         {
                             // TODO: figure out how to handle scope redefinition gracefully
                         }
@@ -105,10 +109,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         if (withClause is not null)
                         {
                             Expression? suchThat = null;
-                            using (var scope = LibraryBuilder.EnterScope())
+                            using (var scope = LibraryBuilder.EnterScope($"With {withClause.Locator()}"))
                             {
                                 // add the with alias to scope while visiting the such that.
-                                if (LibraryBuilder.CurrentScope.TryAdd(aqs))
+                                if (scope.TryAdd(aqs))
                                 {
                                     suchThat = Visit(withClause.expression());
                                     rcs[i] = new With
@@ -144,7 +148,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     items = sortClauseCtx.sortByItem()?.Select(ctx =>
                     {
-                        using (LibraryBuilder.EnterScope())
+                        using (var scope = LibraryBuilder.EnterScope($"Sort {ctx.Locator()}"))
                         {
                             var thisType = returnType switch
                             {
@@ -152,7 +156,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 _ => returnType
                             };
                             var @this = new IdentifierRef { name = "$this" }.WithResultType(thisType);
-                            LibraryBuilder.CurrentScope.TryAdd(@this);
+                            scope.TryAdd(@this);
                             var termExpression = Visit(ctx.expressionTerm());
                             var byExpression = new ByExpression()
                             {
