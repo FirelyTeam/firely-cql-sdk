@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AmbiguousTypeName" xml:space="preserve">
+    <value>The type {0} is ambiguous between {1}.</value>
+    <comment>{0} = unquoted type name, {1} comma separated qualified name e.g. Model.Type</comment>
+  </data>
   <data name="CallIsAmbiguous" xml:space="preserve">
     <value>Call to operator {0}({1}) is ambiguous with:</value>
     <comment>{0} = operator name, {1} = comma delimited type names</comment>

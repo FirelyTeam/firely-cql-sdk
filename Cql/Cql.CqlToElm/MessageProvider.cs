@@ -20,6 +20,9 @@ namespace Hl7.Cql.CqlToElm
 
         public CultureInfo Culture { get; }
 
+        public string AmbiguousType(string name, params string[] modelNames)
+            => string.Format(Culture, Messages.AmbiguousTypeName, name, string.Join(", ", modelNames));
+
         public string CallIsAmbiguous(string name, Expression[] arguments, SignatureMatchResult[] others) {
             var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
             // match cql-to-elm reference implementation (Java) error messages

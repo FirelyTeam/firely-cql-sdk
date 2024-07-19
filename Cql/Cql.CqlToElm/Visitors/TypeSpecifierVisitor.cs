@@ -2,6 +2,7 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,12 +14,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
     {
         public LibraryBuilder LibraryBuilder { get; }
         public MessageProvider Messaging { get; }
+        public CqlToElmOptions Options { get; }
 
         public TypeSpecifierVisitor(IServiceProvider services,
             LibraryBuilder libraryBuilder)
         {
             LibraryBuilder = libraryBuilder;
             Messaging = services.GetRequiredService<MessageProvider>();
+            Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
         }
 
         //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
@@ -148,6 +151,34 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 result = matches[0].modelType!;
                 error = null;
                 return true;
+            }
+            else if (matches.Count == 2)
+            {
+                var behavior = Options.AmbiguousTypeBehavior ?? AmbiguousTypeBehavior.Error;
+                if (behavior == AmbiguousTypeBehavior.PreferSystem)
+                {
+                    var systemMatches = matches.Where(m => m.include.Model.name == "System").ToArray();
+                    if (systemMatches.Length == 1)
+                    {
+                        result = systemMatches[0].modelType!;
+                        error = null;
+                        return true;
+                    }
+                }
+                else if (behavior == AmbiguousTypeBehavior.PreferModel)
+                {
+                    var systemMatches = matches.Where(m => m.include.Model.name != "System").ToArray();
+                    if (systemMatches.Length == 1)
+                    {
+                        result = systemMatches[0].modelType!;
+                        error = null;
+                        return true;
+                    }
+                }
+                result = null;
+                error = Messaging.AmbiguousType(typeName, matches.Select(m => $"{m.include.Model.name}.{typeName}").ToArray());
+                return false;
+
             }
             if (matches.Count > 1)
             {

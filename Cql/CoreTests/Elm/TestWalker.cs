@@ -56,7 +56,7 @@ namespace CoreTests.Elm
         {
             var result = new ResultBuilder();
 
-            var walker = new ElmTreeWalker(result.Visitor, typeof(string));
+            var walker = new ElmTreeWalker(result.Visitor, null, typeof(string));
             walker.Walk(lib);
 
             result.Strings.Should().BeEquivalentTo("Literal hi", "hi", "A", "typeParam", "Foo");
@@ -67,7 +67,7 @@ namespace CoreTests.Elm
         {
             var result = new ResultBuilder();
 
-            var walker = new ElmTreeWalker(result.VisitorThatHandlesTupleElementDefinition, typeof(string));
+            var walker = new ElmTreeWalker(result.VisitorThatHandlesTupleElementDefinition, null, typeof(string));
             walker.Walk(lib);
 
             result.Strings.Should().BeEquivalentTo("Literal hi", "hi", "Foo");

@@ -248,13 +248,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
                 convert.operand = expression;
                 return convert
+                    .WithId()
                     .WithLocator(context.Locator());
             }
             else
             {
-                var unitContext = Visit(context.unit());
+                var unit = context.unit();
+                DateTimePrecision dtp;
+                if (unit.dateTimePrecision() is { } dtpc)
+                    dtp = dtpc.Parse();
+                else if (unit.pluralDateTimePrecision() is { } pdtpc)
+                    dtp = pdtpc.Parse();
+                else
+                    throw new InvalidOperationException("Syntax error; expected unit.");
+                var literal = ElmFactory.Literal(dtp);
+                return new ConvertQuantity { operand = [expression, literal] }
+                    .WithId()
+                    .WithLocator(context.Locator())
+                    .WithResultType(SystemTypes.QuantityType);
             }
-            throw new NotImplementedException();
         }
 
         public override Expression VisitTimeUnitExpressionTerm([NotNull] cqlParser.TimeUnitExpressionTermContext context)

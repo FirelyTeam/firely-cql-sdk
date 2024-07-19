@@ -155,5 +155,34 @@
         /// </para>
         /// </summary>
         public bool? AllowScopeRedefinition { get; set; } = false;
+
+        /// <summary>
+        /// <para>
+        /// Sets the behavior when two models have the same type name.  In this situation, one of three behaviors is possible.
+        /// Note that in the event that three or more matching types are available, the behavior will always be to issue an error.
+        /// </para>
+        /// <para>
+        /// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
+        /// </para>
+        /// </summary>
+        public AmbiguousTypeBehavior? AmbiguousTypeBehavior { get; set; } = CqlToElm.AmbiguousTypeBehavior.Error;
+    }
+    /// <summary>
+    /// Sets the behavior when two models have the same type name. 
+    /// </summary>
+    public enum AmbiguousTypeBehavior
+    {
+        /// <summary>
+        /// Issues an error when an ambiguous type is encountered.
+        /// </summary>
+        Error,
+        /// <summary>
+        /// Chooses the system type, e.g. System.Quantity.
+        /// </summary>
+        PreferSystem,
+        /// <summary>
+        /// Chooses the model type, e.g. FHIR.Quantity.
+        /// </summary>
+        PreferModel
     }
 }

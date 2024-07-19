@@ -37,6 +37,7 @@ namespace Hl7.Cql.CqlToElm
                 Elm.DateTime dt => Populate(dt, arguments),
                 IndexOf io => Populate(io, arguments),
                 Interval interval => Populate(interval, arguments),
+                InValueSet ivs => Populate(ivs, arguments),
                 LastPositionOf lpo => Populate(lpo, arguments),
                 Message msg => Populate(msg, arguments),
                 NaryExpression ne => Populate(ne, arguments),
@@ -76,7 +77,27 @@ namespace Hl7.Cql.CqlToElm
                 valueSpecified = true,
                 unit = unit
             }.WithResultType(SystemTypes.QuantityType);
-                
+        internal Literal Literal(DateTimePrecision value)
+        {
+            var ucum = value switch
+            {
+                DateTimePrecision.Year => "a",
+                DateTimePrecision.Month => "mo",
+                DateTimePrecision.Week => "wk",
+                DateTimePrecision.Day => "d",
+                DateTimePrecision.Hour => "h",
+                DateTimePrecision.Minute => "min",
+                DateTimePrecision.Second => "s",
+                DateTimePrecision.Millisecond => "ms",
+                _ => null,
+            };
+            if (ucum is not null)
+                return new Literal { value = ucum }.WithResultType(SystemTypes.StringType);
+            else 
+                return new Literal { value = Enum.GetName(value) }
+                    .AddError(Messaging.NamedTypeRequiredInContext())
+                    .WithResultType(SystemTypes.StringType);
+        }
 
 
         private Literal Literal(string value, NamedTypeSpecifier namedType) =>
@@ -346,6 +367,18 @@ namespace Hl7.Cql.CqlToElm
             else interval.highClosedExpression = arguments[2];
             
             return interval;
+        }
+
+        internal InValueSet Populate(InValueSet inValueSet, Expression[] arguments)
+        {
+            if (arguments.Length != 2)
+                throw new ArgumentException($"Expected 2 argument, but got {arguments.Length}.", nameof(arguments));
+            inValueSet.code = arguments[0];
+            if (arguments[1] is ValueSetRef vr)
+                inValueSet.valueset = vr;
+            else
+                inValueSet.valuesetExpression = arguments[1];
+            return inValueSet;
         }
 
         internal IHasSource Populate(IHasSource hasSource, Expression[] arguments)

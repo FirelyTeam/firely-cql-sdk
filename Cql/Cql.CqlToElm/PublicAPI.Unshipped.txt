@@ -1,9 +1,15 @@
 ﻿#nullable enable
+Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
+Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.Error = 0 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
+Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.PreferModel = 2 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
+Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.PreferSystem = 1 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.CqlToElmOptions
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowScopeRedefinition.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowScopeRedefinition.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.AmbiguousTypeBehavior.get -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior?
+Hl7.Cql.CqlToElm.CqlToElmOptions.AmbiguousTypeBehavior.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.AssumeInputExtensions.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.AssumeInputExtensions.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.CqlToElmOptions() -> void

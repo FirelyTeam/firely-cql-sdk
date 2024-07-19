@@ -13,16 +13,21 @@ using Hl7.Cql.Compiler;
 namespace Hl7.Cql.CqlToElm.Test;
 
 [TestClass]
-public class FilesTest: Base
+public class FilesTest : Base
 {
     // change to a path containing CQL; can include subdirectories.
     public const string Path = "C:\\Code\\Ncqa.HT.Firely\\Hedis2023\\Cql\\input";
 
     [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-    public static void Initialize(TestContext context) {
-        var sc = ServiceCollection(opt => opt.Input = Path,
-            libraryProviderType: typeof(FileSystemLibraryProvider));
+    public static void Initialize(TestContext context)
+    {
+        var sc = ServiceCollection(opt =>
+        {
+            opt.Input = Path;
+            opt.AmbiguousTypeBehavior = AmbiguousTypeBehavior.PreferModel; // match the ref implementation behavior
+        },
+        libraryProviderType: typeof(FileSystemLibraryProvider));
         Services = sc.BuildServiceProvider();
 
         var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
@@ -36,7 +41,8 @@ public class FilesTest: Base
 
     private void TestLibrary(FileInfo fileInfo)
     {
-        if (!LibraryProvider.TryResolveLibrary(fileInfo, out var _)) {
+        if (!LibraryProvider.TryResolveLibrary(fileInfo, out var _))
+        {
             System.Diagnostics.Debug.WriteLine($"Processing {fileInfo.FullName}");
             var cql = File.ReadAllText(fileInfo.FullName);
             var builder = MakeLibraryBuilder(Services, cql);
@@ -52,6 +58,9 @@ public class FilesTest: Base
         }
     }
 
+    [TestMethod]
+    public void SingleFile() => TestLibrary(new FileInfo(@"C:\Code\Ncqa.HT.Firely\Hedis2023\Cql\input\libs\topical\Stratification\Stratification-2023.0.0.cql"));
+
     [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]
     [TestMethod]
     public void Run(FileInfo file)
@@ -66,14 +75,14 @@ public class FilesTest: Base
 
     public static IEnumerable<object[]> GetTests()
     {
-        foreach(var f in GetFiles(new DirectoryInfo(Path)))
+        foreach (var f in GetFiles(new DirectoryInfo(Path)))
             yield return new object[] { f };
-        IEnumerable <FileInfo> GetFiles(DirectoryInfo dir)
+        IEnumerable<FileInfo> GetFiles(DirectoryInfo dir)
         {
-            foreach(var file in dir.EnumerateFiles("*.cql"))
+            foreach (var file in dir.EnumerateFiles("*.cql"))
                 yield return file;
-            foreach(var subdir in dir.EnumerateDirectories())
-                foreach(var f in GetFiles(subdir))
+            foreach (var subdir in dir.EnumerateDirectories())
+                foreach (var f in GetFiles(subdir))
                     yield return f;
         }
     }

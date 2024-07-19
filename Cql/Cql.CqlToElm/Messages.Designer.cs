@@ -61,6 +61,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The type {0} is ambiguous between {1}..
+        /// </summary>
+        internal static string AmbiguousTypeName {
+            get {
+                return ResourceManager.GetString("AmbiguousTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Call to operator {0}({1}) is ambiguous with:.
         /// </summary>
         internal static string CallIsAmbiguous {

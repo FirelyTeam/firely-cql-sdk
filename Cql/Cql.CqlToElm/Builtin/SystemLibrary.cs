@@ -221,6 +221,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             .Combine(binary<Intersect>(T.ToListType(), T.ToListType(), T.ToListType()));
         public static OverloadedFunctionDef Interval = nary<Interval>(new TypeSpecifier[] { T, T, BooleanType, BooleanType, }, 4, T.ToIntervalType())
             .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType);
+        public static OverloadedFunctionDef InValueSet = binary<InValueSet>(T, ValueSetType, BooleanType).For(T, StringType, CodeType, ConceptType);
         public static SystemFunction<IsFalse> IsFalse = unary<IsFalse>(BooleanType, BooleanType);
         public static SystemFunction<IsNull> IsNull = unary<IsNull>(AnyType, BooleanType);
         public static SystemFunction<IsTrue> IsTrue = unary<IsTrue>(BooleanType, BooleanType);
@@ -263,6 +264,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
         public static OverloadedFunctionDef Precision = unary<Precision>(T, IntegerType).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Predecessor> Predecessor = unary<Predecessor>(T, T);
+        public static OverloadedFunctionDef Product = aggregate<Product>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static OverloadedFunctionDef ProperBetween = nary<ProperBetween>(new[] { T, T, T }, 3, BooleanType).For(T, OrderedTypes.ToArray());
         public static OverloadedFunctionDef ProperIn = OverloadedFunctionDef.Create(binaryWithPrecision<ProperIn>(T, T.ToIntervalType(), BooleanType), binaryWithPrecision<ProperIn>(T, T.ToListType(), BooleanType));
         public static OverloadedFunctionDef ProperIncludedIn = OverloadedFunctionDef.Create(binary<ProperIncludedIn>(T.ToListType(), T.ToListType(), BooleanType), binaryWithPrecision<ProperIncludedIn>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));

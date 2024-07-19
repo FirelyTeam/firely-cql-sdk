@@ -251,22 +251,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
                 if (rhs.resultTypeSpecifier == SystemTypes.ValueSetType)
                 {
-                    var match = InvocationBuilder.MatchSignature(SystemLibrary.AnyInValueSet, args);
-                    if (match.Compatible)
-                        expression = InvocationBuilder.Invoke(match);
-                    else
+                    return lhs.resultTypeSpecifier switch
                     {
-                        var anyIn = new AnyInValueSet
-                        {
-                            codes = lhs
-                        }
-                        .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.AnyInValueSet.Name, lhs, rhs))
-                        .WithResultType(SystemTypes.BooleanType);
-                        if (rhs is ValueSetRef vr)
-                            anyIn.valueset = vr;
-                        else anyIn.valuesetExpression = rhs;
-                        expression = anyIn;
-                    }
+                        ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.AnyInValueSet, lhs, rhs),
+                        _ => InvocationBuilder.Invoke(SystemLibrary.InValueSet, lhs, rhs),
+                    };
                 }
                 else
                 {

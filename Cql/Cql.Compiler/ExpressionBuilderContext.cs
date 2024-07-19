@@ -265,128 +265,16 @@ partial class ExpressionBuilderContext
         object?[] args = element switch
         {
             //@formatter:off
-            Abs or
-                Add or
-                And or
-                Ceiling or
-                Concatenate or
-                ConvertQuantity or
-                ConvertsToBoolean or
-                ConvertsToDate or
-                ConvertsToDateTime or
-                ConvertsToDecimal or
-                ConvertsToInteger or
-                ConvertsToLong or
-                ConvertsToQuantity or
-                ConvertsToString or
-                ConvertsToTime or
-                DateFrom or
-                Distinct or
-                Divide or
-                End or
-                EndsWith or
-                Equal or
-                Elm.Equivalent or
-                Exists or
-                Except or
-                Exp or
-                Expand or
-                ExpandValueSet or
-                Flatten or
-                Floor or
-                Greater or
-                GreaterOrEqual or
-                HighBoundary or
-                Implies or
-                Indexer or
-                Intersect or
-                IsFalse or
-                IsTrue or
-                Length or
-                Less or
-                LessOrEqual or
-                Ln or
-                Log or
-                LowBoundary or
-                Lower or
-                Matches or
-                Modulo or
-                Multiply or
-                Negate or
-                Not or
-                NotEqual or
-                Or or
-                PointFrom or
-                Power or
-                Precision or
-                Predecessor or
-                ReplaceMatches or
-                SingletonFrom or
-                Start or
-                StartsWith or
-                Subtract or
-                Successor or
-                TimezoneOffsetFrom or
-                ToList or
-                Truncate or
-                TruncatedDivide or
-                Upper or
-                Width or
-                Xor => ((IGetOperands)element).operands,
 
-            CalculateAge or
-                DateTimeComponentFrom or
-                After or
-                Before or
-                CalculateAgeAt or
-                DifferenceBetween or
-                DurationBetween or
-                Ends or
-                In or
-                Meets or
-                MeetsAfter or
-                MeetsBefore or
-                Overlaps or
-                OverlapsAfter or
-                OverlapsBefore or
-                Round or
-                SameAs or
-                SameOrAfter or
-                SameOrBefore or
-                Starts => [.. ((IGetOperands)element).operands, ((IGetPrecision)element).precisionOrNull],
+            // ORDER MATTERS.
 
-            AllTrue or
-                AnyTrue or
-                Avg or
-                Descendents or
-                Count or
-                First or
-                GeometricMean or
-                Last or
-                Max or
-                Median or
-                Min or
-                Mode or
-                PopulationStdDev or
-                PopulationVariance or
-                Product or
-                StdDev or
-                Sum or
-                Variance => [((IGetSource)element).source],
-
-            MinValue or
-                MaxValue or
-                Now or
-                TimeOfDay or
-                Today => [],
-
+            // special cases
             Collapse e => Collapse(e),
             Contains e => Contains(e),
-            Union e    => Union(e),
-
-            Combine e => [((IGetSource)element).source, e.separator],
-            IndexOf e => [((IGetSource)element).source, e.element],
-            Slice e => [((IGetSource)element).source, e.startIndex, e.endIndex],
+            Union e => Union(e),
+            Combine e => [e.source, e.separator],
+            IndexOf e => [e.source, e.element],
+            Slice e => [e.source, e.startIndex, e.endIndex],
             Date e => [e.year, e.month, e.day],
             DateTime e => [e.year, e.month, e.day, e.hour, e.minute, e.second, e.millisecond, e.timezoneOffset],
             Interval e => [e.low, e.high, (object)e.lowClosedExpression ?? e.lowClosed, (object)e.highClosedExpression ?? e.highClosed],
@@ -394,9 +282,24 @@ partial class ExpressionBuilderContext
             PositionOf e => [e.pattern, e.@string],
             Quantity e => [e.value, e.unit], // http://unitsofmeasure.org
             Ratio e => [e.numerator, e.denominator],
+            Round r => [r.operand, r.precision],
             Split e => [e.stringToSplit, e.separator],
             Substring e => [e.stringToSub, e.startIndex, e.length],
             Time e => [e.hour, e.minute, e.second, e.millisecond],
+            MinValue or MaxValue => [], // type is a generic type arg
+
+            // special expression types
+            UnaryWithPrecision uwp => [uwp.operand, uwp.GetPrecision()],
+            NaryWithPrecision nwp => [.. nwp.operand, nwp.GetPrecision()],
+            IHasSource hs => [hs.source],
+
+            // common expression types
+            Elm.UnaryExpression unary => [unary.operand],
+            Elm.BinaryExpression binary => binary.operand,
+            TernaryExpression ternary => ternary.operand,
+            NaryExpression nary => nary.operand,
+            OperatorExpression => [], // nullaries, but all others too.  handle last.
+
             _ => throw this.NewExpressionBuildingException($"Cannot get arguments for element {element.GetType().FullName}.")
             //@formatter:on
         };
@@ -433,12 +336,12 @@ partial class ExpressionBuilderContext
                         }
                         else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {leftType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                     }
-                    return [left, right, e.precisionOrNull];
+                    return [left, right, e.GetPrecision()];
                 }
 
                 if (left.Type.IsCqlInterval(out _))
                 {
-                    return [left, right, e.precisionOrNull];
+                    return [left, right, e.GetPrecision()];
                 }
             }
             throw this.NewExpressionBuildingException($"Contains expects two arguments, but got {e.operand.Length}");
@@ -1332,7 +1235,7 @@ partial class ExpressionBuilderContext
 {
     protected Expression Equivalent(Equivalent eqv)
     {
-        if (TranslateArgs(eqv.operands) is [{ } left, { } right]
+        if (TranslateArgs(eqv.operand) is [{ } left, { } right]
             && _typeResolver.GetListElementType(left.Type, throwError:false) is { } leftType
             && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightType
             && leftType != rightType)
@@ -1407,12 +1310,12 @@ partial class ExpressionBuilderContext
         {
             if (right.Type.IsCqlInterval(out var pointType))
             {
-                var precision = ((IGetPrecision)e).precisionOrNull;
+                var precision = ((IGetPrecision)e).GetPrecision();
                 return BindCqlOperator(nameof(ICqlOperators.IntervalIncludesInterval), left, right, precision);
             }
             else
             {
-                var precision = ((IGetPrecision)e).precisionOrNull;
+                var precision = ((IGetPrecision)e).GetPrecision();
                 return BindCqlOperator(nameof(ICqlOperators.IntervalIncludesElement), left, right, precision);
             }
         }
@@ -1441,12 +1344,12 @@ partial class ExpressionBuilderContext
 
         if (left.Type.IsCqlInterval(out var leftPointType) && right.Type.IsCqlInterval(out var rightPointType))
         {
-            var precision = ((IGetPrecision)e).precisionOrNull;
+            var precision = ((IGetPrecision)e).GetPrecision();
             return BindCqlOperator(nameof(ICqlOperators.IntervalIncludesInterval), right, left, precision);
         }
         if (right.Type.IsCqlInterval(out var pointType))
         {
-            var precision = ((IGetPrecision)e).precisionOrNull;
+            var precision = ((IGetPrecision)e).GetPrecision();
             if (left.Type != pointType)
                 throw this.NewExpressionBuildingException();
             return BindCqlOperator(nameof(ICqlOperators.IntervalIncludesElement), right, left, precision);
@@ -1462,7 +1365,7 @@ partial class ExpressionBuilderContext
         var right = TranslateArg(e.operand![1]);
         if (left.Type.IsCqlInterval(out var leftPointType))
         {
-            var precision = ((IGetPrecision)e).precisionOrNull;
+            var precision = ((IGetPrecision)e).GetPrecision();
             if (right.Type.IsCqlInterval(out var rightPointType))
             {
                 return BindCqlOperator(nameof(ICqlOperators.IntervalProperlyIncludesInterval), left, right, precision);
@@ -1494,7 +1397,7 @@ partial class ExpressionBuilderContext
         {
             if (right.Type.IsCqlInterval(out var rightPointType))
             {
-                var precision = ((IGetPrecision)e).precisionOrNull;
+                var precision = ((IGetPrecision)e).GetPrecision();
                 return BindCqlOperator(nameof(ICqlOperators.IntervalProperlyIncludesInterval), right, left, precision);
             }
         }
@@ -1511,7 +1414,7 @@ partial class ExpressionBuilderContext
         }
         else if (right.Type.IsCqlInterval(out var rightPointType))
         {
-            var precision = ((IGetPrecision)e).precisionOrNull;
+            var precision = ((IGetPrecision)e).GetPrecision();
             return BindCqlOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), right, left, precision);
         }
         throw new NotImplementedException().WithContext(this);
@@ -1523,7 +1426,7 @@ partial class ExpressionBuilderContext
         var intervalOrList = TranslateArg(e.operand![1]);
         if (intervalOrList.Type.IsCqlInterval(out var pointType))
         {
-            var precision = ((IGetPrecision)e).precisionOrNull;
+            var precision = ((IGetPrecision)e).GetPrecision();
             return BindCqlOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), intervalOrList, element, precision);
         }
 
@@ -1558,7 +1461,7 @@ partial class ExpressionBuilderContext
         {
             if (leftPointType != right.Type)
                 throw this.NewExpressionBuildingException();
-            var precision = ((IGetPrecision)e).precisionOrNull;
+            var precision = ((IGetPrecision)e).GetPrecision();
             return BindCqlOperator(nameof(ICqlOperators.IntervalProperlyIncludesElement), left, right, precision);
         }
         throw new NotImplementedException().WithContext(this);

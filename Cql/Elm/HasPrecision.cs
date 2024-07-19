@@ -6,43 +6,50 @@ using System.Threading.Tasks;
 
 namespace Hl7.Cql.Elm
 {
+
     internal interface IHasPrecision
     {
         DateTimePrecision precision { get; set; }
         bool precisionSpecified { get; set; }
     }
-    partial class After : IHasPrecision { }
-    partial class Before : IHasPrecision { }
-    partial class CalculateAge : IHasPrecision { }
-    partial class CalculateAgeAt : IHasPrecision { }
-    partial class Contains : IHasPrecision { }
-    partial class DateTimeComponentFrom : IHasPrecision { }
-    partial class DifferenceBetween : IHasPrecision { }
-    partial class DurationBetween : IHasPrecision { }
-    partial class Ends : IHasPrecision { }
-    partial class In : IHasPrecision { }
-    partial class IncludedIn: IHasPrecision { }
-    partial class Includes : IHasPrecision { }
-    partial class Meets : IHasPrecision { }
-    partial class MeetsAfter : IHasPrecision { }
-    partial class MeetsBefore : IHasPrecision { }
-    partial class Overlaps : IHasPrecision { }
-    partial class OverlapsAfter : IHasPrecision { }
-    partial class OverlapsBefore : IHasPrecision { }
-    partial class ProperContains : IHasPrecision { }
-    partial class ProperIn : IHasPrecision { }
-    partial class ProperIncludedIn : IHasPrecision { }
-    partial class ProperIncludes : IHasPrecision { }
-    partial class SameAs : IHasPrecision { }
-    partial class SameOrBefore : IHasPrecision { }
-    partial class SameOrAfter : IHasPrecision { }
-    partial class Starts : IHasPrecision { }
-
     internal interface IHasPrecisionExpression
     {
         Expression precision { get; set; }
     }
-
+    internal interface UnaryWithPrecision : IHasPrecision, IGetPrecision
+    {
+        Expression operand { get; }
+    }
+    internal interface NaryWithPrecision: IHasPrecision, IGetPrecision
+    {
+        Expression[] operand { get; }
+    }
+    partial class After : NaryWithPrecision { }
+    partial class Before : NaryWithPrecision { }
+    partial class CalculateAge : IHasPrecision { }
+    partial class CalculateAgeAt : NaryWithPrecision { }
+    partial class Contains : NaryWithPrecision { }
+    partial class DateTimeComponentFrom : UnaryWithPrecision { }
+    partial class DifferenceBetween : NaryWithPrecision { }
+    partial class DurationBetween : NaryWithPrecision { }
+    partial class Ends : NaryWithPrecision { }
+    partial class In : NaryWithPrecision { }
+    partial class IncludedIn: NaryWithPrecision { }
+    partial class Includes : NaryWithPrecision { }
+    partial class Meets : NaryWithPrecision { }
+    partial class MeetsAfter : NaryWithPrecision { }
+    partial class MeetsBefore : NaryWithPrecision { }
+    partial class Overlaps : NaryWithPrecision { }
+    partial class OverlapsAfter : NaryWithPrecision { }
+    partial class OverlapsBefore : NaryWithPrecision { }
+    partial class ProperContains : NaryWithPrecision { }
+    partial class ProperIn : NaryWithPrecision { }
+    partial class ProperIncludedIn : NaryWithPrecision { }
+    partial class ProperIncludes : NaryWithPrecision { }
+    partial class SameAs : NaryWithPrecision { }
+    partial class SameOrBefore : NaryWithPrecision { }
+    partial class SameOrAfter : NaryWithPrecision { }
+    partial class Starts : NaryWithPrecision { }
     partial class  Round: IHasPrecisionExpression {}
 
 
