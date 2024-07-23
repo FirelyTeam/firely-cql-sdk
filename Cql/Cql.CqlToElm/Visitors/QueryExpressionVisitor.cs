@@ -33,8 +33,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var hasScalarSource = source.All(s => s.resultTypeSpecifier is not ListTypeSpecifier);
                 query.let = handleLetClause(context.letClause(), scope);
                 query.relationship = handleRelationship(context.queryInclusionClause());
-                var @return = handleReturn(context.returnClause(), hasScalarSource);
-                if (@return?.resultTypeSpecifier is null)
+                if (context.returnClause() is { } returnClause) {
+                    var @return = handleReturn(returnClause, hasScalarSource);
+                    returnType = @return.resultTypeSpecifier;
+                    query.@return = @return;
+                }
+                else if (context.aggregateClause() is { } aggregateClause)
+                {
+                    var aggregate = handleAggregate(scope, aggregateClause);
+                    returnType = aggregate.resultTypeSpecifier;
+                    query.aggregate = aggregate;
+
+                }
+                else // neither return nor aggregate specified
                 {
                     if (source.Length == 1)
                     {
@@ -45,9 +56,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     else
                         returnType = SystemTypes.AnyType.ToListType();
                 }
-                else
-                    returnType = @return.resultTypeSpecifier;
-                query.@return = @return;
             }
             // sorting operates on the values being returned, and nothing in the main query scope,
             // such as the retrieve aliases, are allowed to be in scope in the sort statement
@@ -196,10 +204,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithLocator(sortClauseCtx.Locator());
             }
 
-            ReturnClause? handleReturn(cqlParser.ReturnClauseContext? returnClauseCtx, bool isScalarSource)
+            ReturnClause handleReturn(cqlParser.ReturnClauseContext returnClauseCtx,
+                bool isScalarSource)
             {
-                if (returnClauseCtx is null)
-                    return null;
                 var expression = Visit(returnClauseCtx);
                 var rc = new ReturnClause
                 {
@@ -242,6 +249,46 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return source
                     .WithLocator(ctx.Locator())
                     .WithResultType(expression.resultTypeSpecifier);
+            }
+
+            AggregateClause handleAggregate(ISymbolScope queryScope, cqlParser.AggregateClauseContext acCtx)
+            {
+                var aggregate = new AggregateClause();
+                var identifier = acCtx.identifier().Parse();
+                aggregate.identifier = identifier;
+                if (acCtx.children.Count > 1 && acCtx.children[1].GetText() == "distinct")
+                    aggregate.distinct = true;
+
+                var let = new LetClause {  identifier = identifier };
+                if (acCtx.startingClause() is { } startingCtx)
+                {
+                    Expression starting;
+                    if (startingCtx.simpleLiteral() is { } sl)
+                        starting = Visit(sl);
+                    else if (startingCtx.expression() is { } expr)
+                        starting = Visit(expr);
+                    else
+                        throw new InvalidOperationException("Starting clause must have a simple literal or expression");
+
+                    aggregate.starting = starting;
+                    let.expression = starting;
+                    let.WithResultType(starting.resultTypeSpecifier);
+                }
+                else
+                {
+                    let.expression = new Null().WithResultType(SystemTypes.AnyType);
+                    let.WithResultType(SystemTypes.AnyType);
+                }
+
+                using (var aggregateScope = queryScope.EnterScope($"Aggregate Clause {acCtx.Locator()}"))
+                {
+                    aggregateScope.TryAdd(let);
+                    aggregate.expression = Visit(acCtx.expression());
+                }
+
+                return aggregate
+                    .WithLocator(acCtx.Locator())
+                    .WithResultType(aggregate.expression.resultTypeSpecifier);
             }
         }
 

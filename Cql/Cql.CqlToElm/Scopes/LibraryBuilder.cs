@@ -88,17 +88,17 @@ namespace Hl7.Cql.CqlToElm
         /// the new FunctionDef to inherit scope values it shouldn't.
         /// </summary>
         /// <returns></returns>
-        public IDisposableScope EnterStatementScope(string statement) =>
-            new DisposableScope(this, SymbolTable.EnterScope(statement));
+        public ISymbolScope EnterStatementScope(string statement) =>
+            new LibraryBuilderSubscope(this, SymbolTable.EnterScope(statement));
 
      
-        public IDisposableScope EnterScope(string reason) => 
-            new DisposableScope(this, CurrentScope.EnterScope(reason));
+        public ISymbolScope EnterScope(string reason) => 
+            new LibraryBuilderSubscope(this, CurrentScope.EnterScope(reason));
 
         [DebuggerDisplay("{Name,nq}")]
-        private class DisposableScope : IDisposableScope, ISymbolScope
+        private class LibraryBuilderSubscope : ISymbolScope
         {
-            public DisposableScope(LibraryBuilder builder, ISymbolScope newScope)
+            public LibraryBuilderSubscope(LibraryBuilder builder, ISymbolScope newScope)
             {
                 ReturnScope = builder.CurrentScope;
                 builder.CurrentScope = newScope;
@@ -119,12 +119,12 @@ namespace Hl7.Cql.CqlToElm
 
             public void Dispose()
             {
-                Debug.WriteLine($"Exiting scope {CurrentScope.Name}");
+                //Debug.WriteLine($"Exiting scope {CurrentScope.Name}");
                 Builder.CurrentScope = ReturnScope;
             }
 
             public ISymbolScope EnterScope(string name) =>
-                new DisposableScope(Builder, CurrentScope.EnterScope(name));
+                new LibraryBuilderSubscope(Builder, CurrentScope.EnterScope(name));
 
             public IEnumerator<IDefinitionElement> GetEnumerator()
             {

@@ -2038,9 +2038,14 @@ partial class ExpressionBuilderContext
             var resultParameter = Expression.Parameter(resultType, resultAlias);
             using (PushScopes(ImpliedAlias, KeyValuePair.Create(resultAlias!, ((Expression)resultParameter, (Element)queryAggregate))))
             {
-                var startingValue = TranslateArg(queryAggregate.starting!);
                 var lambdaBody = TranslateArg(queryAggregate.expression!);
+                // when starting is not present, it is a null literal typed as Any (object).
+                // cast the null to the expression type.
+                var startingValue = ChangeType(TranslateArg(queryAggregate.starting!), lambdaBody.Type);
+                if (queryAggregate.distinct)
+                    @return = _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.Distinct), [@return], [resultType]);
                 var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
+
                 return BindCqlOperator(nameof(ICqlOperators.Aggregate), @return, lambda, startingValue);
             }
         }

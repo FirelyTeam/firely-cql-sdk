@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -282,5 +283,96 @@ namespace Hl7.Cql.CqlToElm.Test
             ((ListTypeSpecifier)q.resultTypeSpecifier).elementType.Should().BeOfType<ListTypeSpecifier>();
         }
 
+
+        [TestMethod]
+        public void Aggregate_Factorial()
+        {
+            var lib = MakeLibrary(@"
+                library Claims version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define FactorialOfFive:
+                  ({ 1, 2, 3, 4, 5 }) Num
+                    aggregate Result starting 1: Result * Num
+            ");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.aggregate.identifier.Should().Be("Result");
+            query.aggregate.expression.Should().NotBeNull();
+            query.aggregate.expression.Should().BeOfType<Multiply>();
+            query.aggregate.Should().NotBeNull();
+            query.aggregate.Should().HaveType(SystemTypes.IntegerType);
+            query.Should().HaveType(SystemTypes.IntegerType);
+            var result = Run<int>(query);
+            result.Should().Be(120);
+            
+        }
+
+        [TestMethod]
+        public void Aggregate_Factorial_Distinct()
+        {
+            var lib = MakeLibrary(@"
+                library Claims version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define FactorialOfFive:
+                  ({ 1, 2, 2, 3, 3, 4, 4, 5, 5 }) Num
+                    aggregate distinct Result starting 1: Result * Num
+            ");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.aggregate.identifier.Should().Be("Result");
+            query.aggregate.expression.Should().NotBeNull();
+            query.aggregate.expression.Should().BeOfType<Multiply>();
+            query.aggregate.Should().NotBeNull();
+            query.aggregate.Should().HaveType(SystemTypes.IntegerType);
+            query.Should().HaveType(SystemTypes.IntegerType);
+            var result = Run<int?>(query);
+            result.Should().Be(120);
+        }
+
+        [TestMethod]
+        public void Aggregate_Factorial_No_Starting()
+        {
+            var lib = MakeLibrary(@"
+                library Claims version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define FactorialOfFive:
+                  ({ 1, 2, 3, 4, 5 }) Num
+                    aggregate Result: Result * Num
+            ");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.aggregate.identifier.Should().Be("Result");
+            query.aggregate.expression.Should().NotBeNull();
+            query.aggregate.expression.Should().BeOfType<Multiply>();
+            query.aggregate.Should().NotBeNull();
+            query.aggregate.Should().HaveType(SystemTypes.IntegerType);
+            query.Should().HaveType(SystemTypes.IntegerType);
+            var result = Run<int?>(query);
+            result.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Aggregate_List_Accumulator()
+        {
+            var lib = MakeLibrary(@"
+                library Claims version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define fluent function ""Collapse direct transfers""(intervals List<Interval<System.Date>>):
+                    from (Skip(intervals,1)) interval
+                        aggregate result starting ( {First(intervals)} as List<Interval<System.Date>> ):
+                            if start of interval in Interval[ Last(result).high, Last(result).high + 1 day ]
+                             then flatten({ (result) r where r !~ Last(result), 
+                                            { Interval[Last(result).low, interval.high] } 
+                                        })
+                            else flatten({result, {interval}})
+                ");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.Should().HaveType(SystemTypes.DateType.ToIntervalType().ToListType());
+        }
     }
 }

@@ -60,6 +60,9 @@ namespace Hl7.Cql.CqlToElm
             return result;
         }
 
+        internal Null Null(TypeSpecifier type) =>
+            new Null().WithResultType(type);
+
         internal Literal Literal(int value) => 
             Literal(value.ToString(CultureInfo.InvariantCulture), SystemTypes.IntegerType);
         internal Literal Literal(long value) =>
@@ -98,7 +101,6 @@ namespace Hl7.Cql.CqlToElm
                     .AddError(Messaging.NamedTypeRequiredInContext())
                     .WithResultType(SystemTypes.StringType);
         }
-
 
         private Literal Literal(string value, NamedTypeSpecifier namedType) =>
             new Literal

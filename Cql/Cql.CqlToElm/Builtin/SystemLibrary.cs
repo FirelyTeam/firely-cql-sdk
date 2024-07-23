@@ -46,6 +46,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
         public ISymbolScope? Parent => null;
 
+        public void Dispose() { } // do nothing
+
         public bool TryAdd(IDefinitionElement symbol) => throw new NotSupportedException($"Symbols cannot be added to the System scope.");
 
         public bool TryResolveSymbol(string identifier, [NotNullWhen(true)] out IDefinitionElement? symbol) =>
@@ -170,6 +172,10 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Case> Case = new SystemFunction<Case>(new TypeSpecifier[] { BooleanType, T, T }, T);
         public static SystemFunction<Ceiling> Ceiling = unary<Ceiling>(DecimalType, IntegerType);
         public static OverloadedFunctionDef Coalesce = nary<Coalesce>(new[] { T, T, T, T, T }, 2, T).Combine(unary<Coalesce>(T.ToListType(), T));
+        public static OverloadedFunctionDef Collapse = unary<Collapse>(T.ToIntervalType().ToListType(), T.ToIntervalType().ToListType())
+                .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType)
+                .Combine(binary<Collapse>(T.ToIntervalType().ToListType(), QuantityType, T.ToIntervalType().ToListType())
+                    .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType));
         public static SystemFunction<Combine> Combine = nary<Combine>(new TypeSpecifier[] { StringType.ToListType(), StringType }, 1, StringType);
         public static SystemFunction<Concatenate> Concatenate = binary<Concatenate>(StringType, StringType, StringType);
         public static OverloadedFunctionDef Contains = OverloadedFunctionDef.Create(binary<Contains>(T.ToListType(), T, BooleanType), binary<Contains>(T.ToIntervalType(), T, BooleanType));
@@ -197,9 +203,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Exp> Exp = unary<Exp>(DecimalType, DecimalType);
         public static OverloadedFunctionDef Expand = OverloadedFunctionDef.Create(
             binary<Expand>(T.ToIntervalType().ToListType(), QuantityType, T.ToIntervalType().ToListType())
-                .For(T, DecimalType, QuantityType, DateType, DateTimeType, TimeType),
+                .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType),
             binary<Expand>(T.ToIntervalType(), QuantityType, T.ToListType())
-                .For(T, DecimalType, QuantityType, DateType, DateTimeType, TimeType));
+                .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType));
         public static SystemFunction<First> First = unary<First>(T.ToListType(), T);
         public static SystemFunction<Flatten> Flatten = unary<Flatten>(T.ToListType().ToListType(), T.ToListType(),
             invoker: Invokers.Flatten);
@@ -207,6 +213,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
         public static OverloadedFunctionDef In = binaryWithPrecision<In>(T, T.ToIntervalType(), BooleanType).For(T, OrderedTypes.ToArray())
+            .Combine(binary<In>(T.ToIntervalType(), T.ToIntervalType(), BooleanType).For(T, IntervalPointTypes.ToArray()))
             .Combine(binary<In>(T, T.ToListType(), BooleanType));
         public static OverloadedFunctionDef IncludedIn = OverloadedFunctionDef.Create(binary<IncludedIn>(T.ToListType(), T.ToListType(), BooleanType), binaryWithPrecision<IncludedIn>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static OverloadedFunctionDef Includes = OverloadedFunctionDef.Create(

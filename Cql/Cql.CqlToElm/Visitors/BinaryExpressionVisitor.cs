@@ -4,6 +4,7 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -299,6 +300,30 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
             var result = InvocationBuilder.Invoke(function, left, right);
             return result
+                .WithId()
+                .WithLocator(context.Locator());
+        }
+
+        //  ('expand' | 'collapse') expression ('per' (dateTimePrecision | expression))?
+        public override Expression VisitSetAggregateExpressionTerm([NotNull] cqlParser.SetAggregateExpressionTermContext context)
+        {
+            var keyword = Keyword.Parse(context.GetChild(0));
+            var dtp = context.dateTimePrecision()?.GetText();
+            var expressions = context.expression().Select(Visit).ToArray();
+            var function = keyword switch
+            {
+                CqlKeyword.Expand => SystemLibrary.Expand,
+                CqlKeyword.Collapse => SystemLibrary.Collapse,
+                _ => throw new InvalidOperationException($"Expecting collapse or expand, but found {keyword}")
+            };
+            var arguments = dtp switch
+            {
+                { } units => [.. expressions, ElmFactory.Quantity(1, units)],
+                _ when expressions.Length is 1 => [.. expressions, ElmFactory.Null(SystemTypes.QuantityType)],
+                _ when expressions.Length is 2 => expressions,
+                _ => throw new InvalidOperationException($"Expecting 1 or 2 arguments, but found {expressions.Length}")
+            };
+            return InvocationBuilder.Invoke(function, arguments)
                 .WithId()
                 .WithLocator(context.Locator());
         }

@@ -85,8 +85,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
             //TODO: Might need ErrorTypeSpecifier here
             if (result is null)
                 result = SystemTypes.AnyType; //new NamedTypeSpecifier($"urn:cql-unknown-type:{libraryName}", typeName);
-            if (error is not null) 
-                result!.AddError(error);
+
+            // Create a new instance of this NTS so errors & locators can be attached.
+            result = new NamedTypeSpecifier
+            {
+                name = new System.Xml.XmlQualifiedName(result.name.Name),
+            };
+
+            if (error is not null)
+                result.AddError(error);
             
             return result.WithLocator(context.Locator());
         }

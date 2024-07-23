@@ -165,7 +165,7 @@
         /// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
         /// </para>
         /// </summary>
-        public AmbiguousTypeBehavior? AmbiguousTypeBehavior { get; set; } = CqlToElm.AmbiguousTypeBehavior.Error;
+        public AmbiguousTypeBehavior? AmbiguousTypeBehavior { get; set; } = CqlToElm.AmbiguousTypeBehavior.PreferModel;
     }
     /// <summary>
     /// Sets the behavior when two models have the same type name. 

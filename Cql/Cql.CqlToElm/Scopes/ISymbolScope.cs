@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal interface ISymbolScope: IEnumerable<IDefinitionElement>
+    internal interface ISymbolScope: IEnumerable<IDefinitionElement>, IDisposable
     {
         string Name { get; }
 
@@ -48,9 +48,5 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         /// <returns>A new scope whose <see cref="Parent"/> is this scope.</returns>
         ISymbolScope EnterScope(string name);
-    }
-
-    internal interface IDisposableScope: ISymbolScope, IDisposable
-    {
     }
 }

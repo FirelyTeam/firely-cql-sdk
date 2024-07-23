@@ -25,9 +25,11 @@ namespace Hl7.Cql.CqlToElm.Scopes
         public ISymbolScope? Parent { get; }
 
         public ISymbolScope EnterScope(string name) {
-            System.Diagnostics.Debug.WriteLine($"Entering scope {name}");
+            //System.Diagnostics.Debug.WriteLine($"Entering scope {name}");
             return new SymbolTable(name, this);
         }
+        public void Dispose() { } // do nothing
+
 
         public bool TryAdd(IDefinitionElement symbol)
         {

@@ -59,7 +59,7 @@ public class FilesTest : Base
     }
 
     [TestMethod]
-    public void SingleFile() => TestLibrary(new FileInfo(@"C:\Code\Ncqa.HT.Firely\Hedis2023\Cql\input\libs\topical\Stratification\Stratification-2023.0.0.cql"));
+    public void SingleFile() => TestLibrary(new FileInfo(@"C:\Code\Ncqa.HT.Firely\Hedis2023\Cql\input\measures\ENP\ENP_Details-2023.0.0.cql"));
 
     [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]
     [TestMethod]
