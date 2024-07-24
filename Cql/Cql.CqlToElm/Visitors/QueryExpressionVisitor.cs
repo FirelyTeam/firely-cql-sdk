@@ -170,7 +170,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             {
                                 expression = termExpression,
                             };
-                            if (Enum.TryParse<SortDirection>(ctx.sortDirection().GetText(), out var direction))
+                            var sd = ctx.sortDirection()?.GetText() ?? "asc";
+                            if (Enum.TryParse<SortDirection>(sd, out var direction))
                             {
                                 byExpression.direction = direction;
                                 byExpression.directionSpecified = true;
@@ -242,7 +243,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var source = new AliasedQuerySource()
                 {
                     expression = expression,
-                    alias = ctx.alias().GetText()
+                    alias = ctx.alias().identifier().Parse(),
                 };
                 if (expression.resultTypeSpecifier is null)
                     throw new InvalidOperationException($"Expression has a null result type specifier");

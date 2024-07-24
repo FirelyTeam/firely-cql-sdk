@@ -109,6 +109,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                             .WithLocator(context.Locator())
                                             .WithResultType(type);
                                 }
+                                else if (classElement.elementTypeSpecifier is Model.ListTypeSpecifier { } listTypeSpecifier)
+                                {
+                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(listTypeSpecifier.elementType, out var elt))
+                                        elementType = elt.ToListType();
+                                    else
+                                        return new Instance()
+                                            .AddError($"The named type '{listTypeSpecifier.elementType}' for element {elementName} could not be resolved to any model type.")
+                                            .WithLocator(context.Locator())
+                                            .WithResultType(type);
+                                }
+                                else if (classElement.elementTypeSpecifier is Model.ChoiceTypeSpecifier { } choiceTypeSpecifier)
+                                {
+                                    var ct = choiceTypeSpecifier.choice.Select(c => c.ToElm(ModelProvider)).ToArray();
+                                    elementType = new Elm.ChoiceTypeSpecifier { choice = ct };
+                                }
                                 else if (classElement.elementType is not null)
                                 {
                                     if (ModelProvider.TryGetTypeSpecifierForQualifiedName(classElement.elementType, out var ent))
@@ -172,6 +187,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // expressionTerm '.' qualifiedInvocation
         public override Expression VisitInvocationExpressionTerm([NotNull] cqlParser.InvocationExpressionTermContext context)
         {
+            if (context.expressionTerm()?.GetText() == "\"EOB\"")
+            {
+
+            }
             var left = Visit(context.expressionTerm());
             if (left is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,

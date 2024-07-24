@@ -13,7 +13,7 @@ namespace Hl7.Cql.CqlToElm
     {
         internal static bool TryGetTypeSpecifierForQualifiedName(this IModelProvider provider,
             string qualifiedName,
-            out Elm.NamedTypeSpecifier? type)
+            [NotNullWhen(true)] out Elm.NamedTypeSpecifier? type)
         {
             var (model, name) = splitTypeName(qualifiedName);
             if (string.IsNullOrEmpty(model))

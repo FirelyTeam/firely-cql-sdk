@@ -187,7 +187,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef DifferenceBetween = binaryWithPrecision<DifferenceBetween>(T, T, IntegerType)
             .ValidateWith(Validators.Validate)
             .For(T, DateType, DateTimeType, TimeType);
-        public static SystemFunction<Distinct> Distinct = unary<Distinct>(T.ToListType(), T.ToListType(), "distinct");
+        public static SystemFunction<Distinct> Distinct = unary<Distinct>(T.ToListType(), T.ToListType());
         public static OverloadedFunctionDef Divide = binary<Divide>(T, T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef DurationBetween = binaryWithPrecision<DurationBetween>(T, T, IntegerType)
             .ValidateWith(Validators.Validate)

@@ -3,6 +3,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections;
@@ -76,6 +77,55 @@ namespace Hl7.Cql.CqlToElm.Test
             var flatten = library.Should()
                 .BeACorrectlyInitializedLibraryWithStatementOfType<Flatten>();
             flatten.Should().HaveType(SystemTypes.CodeType.ToListType());
+        }
+
+        [TestMethod]
+        public void FlattenChoiceType()
+        {
+            var library = MakeLibrary(@"
+                library ListTest version '1.0.0'
+
+                define choice:
+                  if ( day from Today() mod 2 = 0 ) then 'hello' 
+                    else 1
+
+                define private f:
+                  flatten ( { { choice }, { choice } } )
+            ");
+            var choiceType = library.statements[0].expression.resultTypeSpecifier;
+            choiceType.Should().BeOfType<ChoiceTypeSpecifier>();
+            var flatten = library.statements[1].expression.Should().BeOfType<Flatten>().Subject;
+            flatten.Should().HaveType(choiceType.ToListType());
+        }
+
+        [TestMethod]
+        public void FlattenMixedChoiceType()
+        {
+
+            // requires list promotion
+            var library = MakeLibrary(@"
+                library Test version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define g:
+                  flatten ( null as List<Choice<System.Boolean, List<FHIR.Claim>>>)
+            ", "Could not resolve call to operator Flatten with signature (List<Choice<Boolean, List<{http://hl7.org/fhir}Claim>>>).");
+
+            var services = ServiceCollection(opt =>
+            {
+                opt.EnableListPromotion = true;
+            }).BuildServiceProvider();
+
+            // no errors
+            library = MakeLibraryBuilder(services, @"
+                library Test version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define g:
+                  flatten ( null as List<Choice<System.Boolean, List<FHIR.Claim>>>)
+            ").Build();
         }
 
     }
