@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -151,7 +150,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertNullConditionalMemberExpression(string indentString, NullConditionalMemberExpression nullp)
         {
-            return $"{indentString}{Parenthesize(ConvertExpression(0, nullp.MemberExpression.Expression!))}?.{nullp.MemberExpression.Member.Name}";
+            var convertExpression = ConvertExpression(0, nullp.MemberExpression.Expression!);
+            bool shouldHaveNullProp = true;//!IsTupleType(nullp.MemberExpression.Expression!.Type);
+            var memberName = nullp.MemberExpression.Member.Name;
+            return $"{indentString}{Parenthesize(convertExpression)}{(shouldHaveNullProp?"?":"")}.{memberName}";
         }
 
         private static string ConvertConstantExpression(Type constantType, object? value, string? identString = "")
@@ -336,11 +338,27 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertMemberInitExpression(int indent, string leadingIndentString, MemberInitExpression memberInit)
         {
+            if (IsTupleType(memberInit.Type))
+            {
+                var memberValues =
+                    memberInit.Bindings
+                              .Cast<MemberAssignment>()
+                              .Select(memberAssignment => ConvertExpression(0, memberAssignment.Expression, false))
+                              .ToArray() switch
+                    {
+                        [{ } single] => [single, "default(nint)"],
+                        var p => p,
+                    };
+                var tupleAssignmentCode = $"({string.Join(", ", memberValues)
+                })";
+                return tupleAssignmentCode;
+            }
+
             var memberInitSb = new StringBuilder();
             memberInitSb.Append(leadingIndentString);
-            var arrayType = PrettyTypeName(memberInit.Type);
+            var typeName = PrettyTypeName(memberInit.Type);
 #pragma warning disable CA1305 // Specify IFormatProvider
-            memberInitSb.AppendLine($"new {arrayType}");
+            memberInitSb.AppendLine($"new {typeName}");
 #pragma warning restore CA1305 // Specify IFormatProvider
             var braceIndent = IndentString(indent);
             memberInitSb.Append(braceIndent);
@@ -419,7 +437,6 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var arguments = @new.Arguments.Select(a => ConvertExpression(0, a));
             var argString = string.Join(", ", arguments);
-
             var newSb = new StringBuilder();
             newSb.Append(CultureInfo.InvariantCulture, $"{leadingIndentString}new {PrettyTypeName(@new.Type)}");
             newSb.Append(CultureInfo.InvariantCulture, $"({argString})");
@@ -560,14 +577,28 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public static TextWriterFormattableString FormatTypePart(ITypeNameCSharpFormatContext ctx)
         {
-            if (ctx.TypePartInfo.Name.StartsWith("Tuple_"))
+            if (IsTupleType(ctx.TypePartInfo))
                 return FormatTypeAsTuple(ctx.TypePartInfo);
 
             return ctx.Name;
+
+            static TextWriterFormattableString FormatTypeAsTuple(Type tupleType)
+            {
+                var props =
+                    tupleType
+                            .GetProperties()
+                            .Select(p => (TypeName:p.PropertyType.ToCSharpString(TypeToCSharpStringOptions), p.Name))
+                            .ToArray() switch
+                        {
+                            [{} single] => [single, ("nint", "_")],
+                            var p => p
+                        };
+                return $"({string.Join(", ", props.Select(p => $"{p.TypeName} {p.Name}"))})?";
+            }
         }
 
-        private static TextWriterFormattableString FormatTypeAsTuple(Type tupleType) =>
-            $"({string.Join(", ", tupleType.GetProperties().Select(p => $"{p.PropertyType.ToCSharpString(TypeToCSharpStringOptions)} {p.Name}"))})";
+        private static bool IsTupleType(Type type) =>
+            type.Name.StartsWith("Tuple_");
 
         private static string ParamName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
 
@@ -659,9 +690,6 @@ namespace Hl7.Cql.CodeGeneration.NET
         public static string PrettyTypeName(Type type)
         {
             string result = type.ToCSharpString(TypeToCSharpStringOptions);
-            if (_types.Add(result))
-                File.AppendAllLines("c:\\temp\\types.txt", [result]);
-
             return result;
         }
 

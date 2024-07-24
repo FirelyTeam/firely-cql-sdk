@@ -26,7 +26,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
     internal Lazy<CqlValueSet> __Race;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<(CodeableConcept code, Period period)>> __SDE_Payer;
+    internal Lazy<IEnumerable<(CodeableConcept code, Period period)?>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
@@ -43,7 +43,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
         __Race = new Lazy<CqlValueSet>(this.Race_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<(CodeableConcept code, Period period)>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CodeableConcept code, Period period)?>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
@@ -166,29 +166,25 @@ public class SupplementalDataElementsFHIR4_2_0_000
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CodeableConcept code, Period period)> SDE_Payer_Value()
+	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
 		CqlValueSet a_ = this.Payer();
 		IEnumerable<Coverage> b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
-		(CodeableConcept code, Period period) c_(Coverage Payer)
+		(CodeableConcept code, Period period)? c_(Coverage Payer)
 		{
 			CodeableConcept e_ = Payer?.Type;
 			Period f_ = Payer?.Period;
-			(CodeableConcept code, Period period) g_ = new (CodeableConcept code, Period period)
-			{
-				code = e_,
-				period = f_,
-			};
+			(CodeableConcept code, Period period)? g_ = (e_, f_);
 
 			return g_;
 		};
-		IEnumerable<(CodeableConcept code, Period period)> d_ = context.Operators.Select<Coverage, (CodeableConcept code, Period period)>(b_, c_);
+		IEnumerable<(CodeableConcept code, Period period)?> d_ = context.Operators.Select<Coverage, (CodeableConcept code, Period period)?>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CodeableConcept code, Period period)> SDE_Payer() => 
+	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()

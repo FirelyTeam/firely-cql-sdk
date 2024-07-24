@@ -350,11 +350,11 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness_Value()
 	{
 		IEnumerable<Claim> a_ = context.Operators.RetrieveByValueSet<Claim>(null, null);
-		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge) b_ = NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(a_);
+		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(a_);
 		IEnumerable<Claim> c_ = b_?.NonacuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness();
 		IValueSetFacade e_ = context.Operators.CreateValueSetFacade(d_);
-		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod) f_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(c_, (IEnumerable<CqlCode>)e_);
+		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(c_, (IEnumerable<CqlCode>)e_);
 		IEnumerable<CqlInterval<CqlDateTime>> g_ = f_?.ServicePeriod;
 		bool? h_(CqlInterval<CqlDateTime> DischargeWithDiagnosis)
 		{
@@ -439,29 +439,25 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	{
 		IEnumerable<CqlDate> a_ = this.Outpatient_Encounters_or_Discharges_with_Advanced_Illness();
 		IEnumerable<ValueTuple<CqlDate, CqlDate>> c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
-		(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2) d_(ValueTuple<CqlDate, CqlDate> _valueTuple)
+		(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? d_(ValueTuple<CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2) k_ = new (CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)
-			{
-				OutpatientVisit1 = _valueTuple.Item1,
-				OutpatientVisit2 = _valueTuple.Item2,
-			};
+			(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
-		IEnumerable<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)> e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, (CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)>(c_, d_);
-		bool? f_((CqlDate OutpatientVisit1, CqlDate OutpatientVisit2) tuple_cmsergtjgkisksqucnzwkeggv)
+		IEnumerable<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, (CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(c_, d_);
+		bool? f_((CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv)
 		{
 			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
-			CqlDate m_ = context.Operators.Add(tuple_cmsergtjgkisksqucnzwkeggv.OutpatientVisit1, l_);
-			bool? n_ = context.Operators.SameOrAfter(tuple_cmsergtjgkisksqucnzwkeggv.OutpatientVisit2, m_, null);
+			CqlDate m_ = context.Operators.Add(tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1, l_);
+			bool? n_ = context.Operators.SameOrAfter(tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit2, m_, null);
 
 			return n_;
 		};
-		IEnumerable<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)> g_ = context.Operators.Where<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)>(e_, f_);
-		CqlDate h_((CqlDate OutpatientVisit1, CqlDate OutpatientVisit2) tuple_cmsergtjgkisksqucnzwkeggv) => 
-			tuple_cmsergtjgkisksqucnzwkeggv.OutpatientVisit1;
-		IEnumerable<CqlDate> i_ = context.Operators.Select<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2), CqlDate>(g_, h_);
+		IEnumerable<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> g_ = context.Operators.Where<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(e_, f_);
+		CqlDate h_((CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv) => 
+			tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1;
+		IEnumerable<CqlDate> i_ = context.Operators.Select<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?, CqlDate>(g_, h_);
 		bool? j_ = context.Operators.Exists<CqlDate>(i_);
 
 		return j_;
@@ -511,11 +507,11 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private bool? Acute_Inpatient_Discharge_with_Advanced_Illness_Value()
 	{
 		IEnumerable<Claim> a_ = context.Operators.RetrieveByValueSet<Claim>(null, null);
-		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge) b_ = NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(a_);
+		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(a_);
 		IEnumerable<Claim> c_ = b_?.AcuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness();
 		IValueSetFacade e_ = context.Operators.CreateValueSetFacade(d_);
-		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod) f_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(c_, (IEnumerable<CqlCode>)e_);
+		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(c_, (IEnumerable<CqlCode>)e_);
 		IEnumerable<CqlInterval<CqlDateTime>> g_ = f_?.ServicePeriod;
 		bool? h_(CqlInterval<CqlDateTime> InpatientDischarge)
 		{
