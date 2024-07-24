@@ -16,7 +16,7 @@ using System.Text;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
-internal static class CSharpFormatterrExtensions
+internal static class CSharpFormatterExtensions
 {
     public static string? GetCSharpKeyword(this Type t)
     {
@@ -229,19 +229,7 @@ internal record TypeCSharpFormat(
 
         void WriteName()
         {
-            TypeNameFormat(new TypeNameCSharpFormatContext(type, this)).WriteTo(textWriter);
-            /*
-            string name = hideNamespaces ? type.Name : (type.FullName ?? type.Name);
-            if (name.IndexOf('`') is var i and >= 0)
-            {
-                //TypeNameFormat(new TypeNameCSharpFormatContext(type, this)).WriteTo(textWriter);
-                textWriter.Write(name[..i]);
-            }
-            else
-            {
-                textWriter.Write(name);
-            }
-            */
+            TypeNameFormat(new TypeNameCSharpFormatContext(type, this with {NoNamespaces = hideNamespaces})).WriteTo(textWriter);
         }
     }
 }
