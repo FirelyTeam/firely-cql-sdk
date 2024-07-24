@@ -8,7 +8,7 @@ updates:
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
     ignore:
       - dependency-name: "xunit"
         update-types: ["version-update:semver-patch"]
@@ -19,4 +19,14 @@ updates:
       - dependency-name: MSTest.TestAdapter
         update-types: ["version-update:semver-patch"]
       - dependency-name: MSTest.TestFramework
+        update-types: ["version-update:semver-patch"]
+      - dependency-name: Microsoft.CodeAnalysis.PublicApiAnalyzers 
+        update-types: ["version-update:semver-patch"]
+      - dependency-name: JetBrains.Annotations
+        update-types: ["version-update:semver-patch"]
+      - dependency-name: Microsoft.Extensions.Logging.Abstractions
+        update-types: ["version-update:semver-patch"]
+      - dependency-name: Microsoft.Extensions.Options
+        update-types: ["version-update:semver-patch"]
+      - dependency-name: coverlet.collector
         update-types: ["version-update:semver-patch"]
