@@ -11,6 +11,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -555,7 +556,18 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static readonly ObjectIDGenerator Gen = new();
 #pragma warning restore SYSLIB0050 // Type or member is obsolete
 
-        private static readonly TypeCSharpFormat? TypeToCSharpStringOptions = new(UseKeywords: true, NoNamespaces: true);
+        private static readonly TypeCSharpFormat? TypeToCSharpStringOptions = new(UseKeywords: true, NoNamespaces: true, TypeNameFormat: FormatTypePart);
+
+        public static TextWriterFormattableString FormatTypePart(ITypeNameCSharpFormatContext ctx)
+        {
+            if (ctx.TypePartInfo.Name.StartsWith("Tuple_"))
+                return FormatTypeAsTuple(ctx.TypePartInfo);
+
+            return ctx.Name;
+        }
+
+        private static TextWriterFormattableString FormatTypeAsTuple(Type tupleType) =>
+            $"({string.Join(", ", tupleType.GetProperties().Select(p => $"{p.PropertyType.ToCSharpString(TypeToCSharpStringOptions)} {p.Name}"))})";
 
         private static string ParamName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
 
@@ -642,9 +654,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                 return method.Name;
         }
 
+        private static readonly HashSet<string> _types = new();
+
         public static string PrettyTypeName(Type type)
         {
             string result = type.ToCSharpString(TypeToCSharpStringOptions);
+            if (_types.Add(result))
+                File.AppendAllLines("c:\\temp\\types.txt", [result]);
+
             return result;
         }
 

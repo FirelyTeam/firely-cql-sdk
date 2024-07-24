@@ -146,13 +146,14 @@ namespace Hl7.Cql.CodeGeneration.NET
             callbacks ??= new();
             try
             {
-                foreach (var tuple in WriteTupleTypes(tupleTypes, callbacks))
-                {
-                    streamsToDispose.Add(tuple.stream);
-                    callbacks.Step(tuple.name, tuple.stream, isTuple: true);
-                }
+                // foreach (var tuple in WriteTupleTypes(tupleTypes, callbacks))
+                // {
+                //     streamsToDispose.Add(tuple.stream);
+                //     callbacks.Step(tuple.name, tuple.stream, isTuple: true);
+                // }
 
-                foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks, hasTuples:tupleTypes.Any()))
+                //foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks, hasTuples:tupleTypes.Any()))
+                foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks, hasTuples:false))
                 {
                     streamsToDispose.Add(tuple.stream);
                     callbacks.Step(tuple.name, tuple.stream, isTuple: false);
@@ -508,7 +509,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
                 writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
-                //      writer.WriteLine();
             }
         }
 

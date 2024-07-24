@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -36,7 +35,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>> __SDE_Payer;
+    internal Lazy<IEnumerable<(CodeableConcept code, Period period)>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounters;
@@ -76,7 +75,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CodeableConcept code, Period period)>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounters = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounters_Value);
@@ -189,7 +188,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 		};
@@ -203,10 +202,10 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.005", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.005", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -217,8 +216,8 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -229,7 +228,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private IEnumerable<Coding> SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
+		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -238,20 +237,20 @@ public class CervicalCancerScreeningFHIR_0_0_005
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer_Value()
+	private IEnumerable<(CodeableConcept code, Period period)> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+		IEnumerable<(CodeableConcept code, Period period)> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer() => 
+	public IEnumerable<(CodeableConcept code, Period period)> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
+		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 
 		return a_;
 	}
@@ -262,7 +261,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 
 		return a_;
 	}
@@ -273,37 +272,37 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.Union<Encounter>(b_, d_);
-		var f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Home_Healthcare_Services();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.Union<Encounter>(g_, i_);
-		var k_ = context.Operators.Union<Encounter>(e_, j_);
-		var l_ = this.Telephone_Visits();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = this.Online_Assessments();
-		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.Union<Encounter>(m_, o_);
-		var q_ = context.Operators.Union<Encounter>(k_, p_);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Home_Healthcare_Services();
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+		CqlValueSet l_ = this.Telephone_Visits();
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		CqlValueSet n_ = this.Online_Assessments();
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		bool? r_(Encounter ValidEncounter)
 		{
-			var t_ = ValidEncounter?.StatusElement;
-			var u_ = FHIRHelpers_4_0_001.ToString(t_);
-			var v_ = context.Operators.Equal(u_, "finished");
-			var w_ = this.Measurement_Period();
-			var x_ = ValidEncounter?.Period;
-			var y_ = FHIRHelpers_4_0_001.ToInterval(x_);
-			var z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, y_, null);
-			var aa_ = context.Operators.And(v_, z_);
+			Code<Encounter.EncounterStatus> t_ = ValidEncounter?.StatusElement;
+			string u_ = FHIRHelpers_4_0_001.ToString(t_);
+			bool? v_ = context.Operators.Equal(u_, "finished");
+			CqlInterval<CqlDateTime> w_ = this.Measurement_Period();
+			Period x_ = ValidEncounter?.Period;
+			CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_0_001.ToInterval(x_);
+			bool? z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, y_, null);
+			bool? aa_ = context.Operators.And(v_, z_);
 
 			return aa_;
 		};
-		var s_ = context.Operators.Where<Encounter>(q_, r_);
+		IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
 
 		return s_;
 	}
@@ -314,22 +313,25 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval(23, 64, true, false);
-		var h_ = context.Operators.In<int?>(f_, g_, null);
-		var j_ = FHIRHelpers_4_0_001.ToString(a_?.GenderElement);
-		var k_ = context.Operators.Equal(j_, "female");
-		var l_ = context.Operators.And(h_, k_);
-		var m_ = this.Qualifying_Encounters();
-		var n_ = context.Operators.Exists<Encounter>(m_);
-		var o_ = context.Operators.And(l_, n_);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context.Operators.Start(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		CqlInterval<int?> i_ = context.Operators.Interval(23, 64, true, false);
+		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		Code<AdministrativeGender> l_ = a_?.GenderElement;
+		string m_ = FHIRHelpers_4_0_001.ToString(l_);
+		bool? n_ = context.Operators.Equal(m_, "female");
+		bool? o_ = context.Operators.And(j_, n_);
+		IEnumerable<Encounter> p_ = this.Qualifying_Encounters();
+		bool? q_ = context.Operators.Exists<Encounter>(p_);
+		bool? r_ = context.Operators.And(o_, q_);
 
-		return o_;
+		return r_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -338,7 +340,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -349,38 +351,38 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private IEnumerable<object> Absence_of_Cervix_Value()
 	{
-		var a_ = this.Hysterectomy_with_No_Residual_Cervix();
-		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		CqlValueSet a_ = this.Hysterectomy_with_No_Residual_Cervix();
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? c_(Procedure NoCervixProcedure)
 		{
-			var j_ = NoCervixProcedure?.StatusElement;
-			var k_ = FHIRHelpers_4_0_001.ToString(j_);
-			var l_ = context.Operators.Equal(k_, "completed");
-			var m_ = NoCervixProcedure?.Performed;
-			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(m_);
-			var o_ = context.Operators.End(n_);
-			var p_ = this.Measurement_Period();
-			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.SameOrBefore(o_, q_, null);
-			var s_ = context.Operators.And(l_, r_);
+			Code<EventStatus> j_ = NoCervixProcedure?.StatusElement;
+			string k_ = FHIRHelpers_4_0_001.ToString(j_);
+			bool? l_ = context.Operators.Equal(k_, "completed");
+			DataType m_ = NoCervixProcedure?.Performed;
+			CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(m_);
+			CqlDateTime o_ = context.Operators.End(n_);
+			CqlInterval<CqlDateTime> p_ = this.Measurement_Period();
+			CqlDateTime q_ = context.Operators.End(p_);
+			bool? r_ = context.Operators.SameOrBefore(o_, q_, null);
+			bool? s_ = context.Operators.And(l_, r_);
 
 			return s_;
 		};
-		var d_ = context.Operators.Where<Procedure>(b_, c_);
-		var e_ = this.Congenital_or_Acquired_Absence_of_Cervix();
-		var f_ = context.Operators.RetrieveByValueSet<Condition>(e_, null);
+		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
+		CqlValueSet e_ = this.Congenital_or_Acquired_Absence_of_Cervix();
+		IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(e_, null);
 		bool? g_(Condition NoCervixDiagnosis)
 		{
-			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(NoCervixDiagnosis);
-			var u_ = context.Operators.Start(t_);
-			var v_ = this.Measurement_Period();
-			var w_ = context.Operators.End(v_);
-			var x_ = context.Operators.SameOrBefore(u_, w_, null);
+			CqlInterval<CqlDateTime> t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(NoCervixDiagnosis);
+			CqlDateTime u_ = context.Operators.Start(t_);
+			CqlInterval<CqlDateTime> v_ = this.Measurement_Period();
+			CqlDateTime w_ = context.Operators.End(v_);
+			bool? x_ = context.Operators.SameOrBefore(u_, w_, null);
 
 			return x_;
 		};
-		var h_ = context.Operators.Where<Condition>(f_, g_);
-		var i_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
+		IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
+		IEnumerable<object> i_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
 
 		return i_;
 	}
@@ -391,12 +393,12 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = HospiceFHIR4_2_3_000.Has_Hospice();
-		var b_ = this.Absence_of_Cervix();
-		var c_ = context.Operators.Exists<object>(b_);
-		var d_ = context.Operators.Or(a_, c_);
-		var e_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
-		var f_ = context.Operators.Or(d_, e_);
+		bool? a_ = HospiceFHIR4_2_3_000.Has_Hospice();
+		IEnumerable<object> b_ = this.Absence_of_Cervix();
+		bool? c_ = context.Operators.Exists<object>(b_);
+		bool? d_ = context.Operators.Or(a_, c_);
+		bool? e_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
+		bool? f_ = context.Operators.Or(d_, e_);
 
 		return f_;
 	}
@@ -407,52 +409,52 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private IEnumerable<Observation> Cervical_Cytology_Within_3_Years_Value()
 	{
-		var a_ = this.Pap_Test();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		CqlValueSet a_ = this.Pap_Test();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation CervicalCytology)
 		{
-			var e_ = CervicalCytology?.StatusElement;
-			var f_ = FHIRHelpers_4_0_001.ToString(e_);
-			var g_ = new string[]
+			Code<ObservationStatus> e_ = CervicalCytology?.StatusElement;
+			string f_ = FHIRHelpers_4_0_001.ToString(e_);
+			string[] g_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
-			var i_ = CervicalCytology?.Category;
+			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			List<CodeableConcept> i_ = CervicalCytology?.Category;
 			bool? j_(CodeableConcept CervicalCytologyCategory)
 			{
-				var af_ = this.laboratory();
-				var ag_ = FHIRHelpers_4_0_001.ToConcept(CervicalCytologyCategory);
-				var ah_ = ag_?.codes;
-				var ai_ = context.Operators.In<CqlCode>(af_, (IEnumerable<CqlCode>)ah_);
+				CqlCode af_ = this.laboratory();
+				CqlConcept ag_ = FHIRHelpers_4_0_001.ToConcept(CervicalCytologyCategory);
+				CqlCode[] ah_ = ag_?.codes;
+				bool? ai_ = context.Operators.In<CqlCode>(af_, (IEnumerable<CqlCode>)ah_);
 
 				return ai_;
 			};
-			var k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
-			var l_ = context.Operators.Exists<CodeableConcept>(k_);
-			var m_ = context.Operators.And(h_, l_);
-			var n_ = CervicalCytology?.Effective;
-			var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(n_);
-			var p_ = this.Measurement_Period();
-			var q_ = context.Operators.End(p_);
-			var r_ = context.Operators.Quantity(3m, "years");
-			var s_ = context.Operators.Subtract(q_, r_);
-			var u_ = context.Operators.End(p_);
-			var v_ = context.Operators.Interval(s_, u_, true, true);
-			var w_ = context.Operators.In<CqlDateTime>(o_, v_, null);
-			var y_ = context.Operators.End(p_);
-			var z_ = context.Operators.Not((bool?)(y_ is null));
-			var aa_ = context.Operators.And(w_, z_);
-			var ab_ = context.Operators.And(m_, aa_);
-			var ac_ = CervicalCytology?.Value;
-			var ad_ = context.Operators.Not((bool?)(ac_ is null));
-			var ae_ = context.Operators.And(ab_, ad_);
+			IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
+			bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
+			bool? m_ = context.Operators.And(h_, l_);
+			DataType n_ = CervicalCytology?.Effective;
+			CqlDateTime o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(n_);
+			CqlInterval<CqlDateTime> p_ = this.Measurement_Period();
+			CqlDateTime q_ = context.Operators.End(p_);
+			CqlQuantity r_ = context.Operators.Quantity(3m, "years");
+			CqlDateTime s_ = context.Operators.Subtract(q_, r_);
+			CqlDateTime u_ = context.Operators.End(p_);
+			CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_, u_, true, true);
+			bool? w_ = context.Operators.In<CqlDateTime>(o_, v_, null);
+			CqlDateTime y_ = context.Operators.End(p_);
+			bool? z_ = context.Operators.Not((bool?)(y_ is null));
+			bool? aa_ = context.Operators.And(w_, z_);
+			bool? ab_ = context.Operators.And(m_, aa_);
+			DataType ac_ = CervicalCytology?.Value;
+			bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
+			bool? ae_ = context.Operators.And(ab_, ad_);
 
 			return ae_;
 		};
-		var d_ = context.Operators.Where<Observation>(b_, c_);
+		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -463,62 +465,62 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older_Value()
 	{
-		var a_ = this.HPV_Test();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		CqlValueSet a_ = this.HPV_Test();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation HPVTest)
 		{
-			var e_ = HPVTest?.StatusElement;
-			var f_ = FHIRHelpers_4_0_001.ToString(e_);
-			var g_ = new string[]
+			Code<ObservationStatus> e_ = HPVTest?.StatusElement;
+			string f_ = FHIRHelpers_4_0_001.ToString(e_);
+			string[] g_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
-			var i_ = HPVTest?.Category;
+			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			List<CodeableConcept> i_ = HPVTest?.Category;
 			bool? j_(CodeableConcept HPVTestCategory)
 			{
-				var aq_ = this.laboratory();
-				var ar_ = FHIRHelpers_4_0_001.ToConcept(HPVTestCategory);
-				var as_ = ar_?.codes;
-				var at_ = context.Operators.In<CqlCode>(aq_, (IEnumerable<CqlCode>)as_);
+				CqlCode aq_ = this.laboratory();
+				CqlConcept ar_ = FHIRHelpers_4_0_001.ToConcept(HPVTestCategory);
+				CqlCode[] as_ = ar_?.codes;
+				bool? at_ = context.Operators.In<CqlCode>(aq_, (IEnumerable<CqlCode>)as_);
 
 				return at_;
 			};
-			var k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
-			var l_ = context.Operators.Exists<CodeableConcept>(k_);
-			var m_ = context.Operators.And(h_, l_);
-			var n_ = this.Patient();
-			var o_ = n_?.BirthDateElement;
-			var p_ = o_?.Value;
-			var q_ = context.Operators.ConvertStringToDate(p_);
-			var r_ = HPVTest?.Effective;
-			var s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(r_);
-			var t_ = context.Operators.Start(s_);
-			var u_ = context.Operators.DateFrom(t_);
-			var v_ = context.Operators.CalculateAgeAt(q_, u_, "year");
-			var w_ = context.Operators.GreaterOrEqual(v_, 30);
-			var x_ = context.Operators.And(m_, w_);
-			var z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(r_);
-			var aa_ = this.Measurement_Period();
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.Quantity(5m, "years");
-			var ad_ = context.Operators.Subtract(ab_, ac_);
-			var af_ = context.Operators.End(aa_);
-			var ag_ = context.Operators.Interval(ad_, af_, true, true);
-			var ah_ = context.Operators.In<CqlDateTime>(z_, ag_, null);
-			var aj_ = context.Operators.End(aa_);
-			var ak_ = context.Operators.Not((bool?)(aj_ is null));
-			var al_ = context.Operators.And(ah_, ak_);
-			var am_ = context.Operators.And(x_, al_);
-			var an_ = HPVTest?.Value;
-			var ao_ = context.Operators.Not((bool?)(an_ is null));
-			var ap_ = context.Operators.And(am_, ao_);
+			IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
+			bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
+			bool? m_ = context.Operators.And(h_, l_);
+			Patient n_ = this.Patient();
+			Date o_ = n_?.BirthDateElement;
+			string p_ = o_?.Value;
+			CqlDate q_ = context.Operators.ConvertStringToDate(p_);
+			DataType r_ = HPVTest?.Effective;
+			CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(r_);
+			CqlDateTime t_ = context.Operators.Start(s_);
+			CqlDate u_ = context.Operators.DateFrom(t_);
+			int? v_ = context.Operators.CalculateAgeAt(q_, u_, "year");
+			bool? w_ = context.Operators.GreaterOrEqual(v_, 30);
+			bool? x_ = context.Operators.And(m_, w_);
+			CqlDateTime z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(r_);
+			CqlInterval<CqlDateTime> aa_ = this.Measurement_Period();
+			CqlDateTime ab_ = context.Operators.End(aa_);
+			CqlQuantity ac_ = context.Operators.Quantity(5m, "years");
+			CqlDateTime ad_ = context.Operators.Subtract(ab_, ac_);
+			CqlDateTime af_ = context.Operators.End(aa_);
+			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ad_, af_, true, true);
+			bool? ah_ = context.Operators.In<CqlDateTime>(z_, ag_, null);
+			CqlDateTime aj_ = context.Operators.End(aa_);
+			bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
+			bool? al_ = context.Operators.And(ah_, ak_);
+			bool? am_ = context.Operators.And(x_, al_);
+			DataType an_ = HPVTest?.Value;
+			bool? ao_ = context.Operators.Not((bool?)(an_ is null));
+			bool? ap_ = context.Operators.And(am_, ao_);
 
 			return ap_;
 		};
-		var d_ = context.Operators.Where<Observation>(b_, c_);
+		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -529,11 +531,11 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Cervical_Cytology_Within_3_Years();
-		var b_ = context.Operators.Exists<Observation>(a_);
-		var c_ = this.HPV_Test_Within_5_Years_for_Women_Age_30_and_Older();
-		var d_ = context.Operators.Exists<Observation>(c_);
-		var e_ = context.Operators.Or(b_, d_);
+		IEnumerable<Observation> a_ = this.Cervical_Cytology_Within_3_Years();
+		bool? b_ = context.Operators.Exists<Observation>(a_);
+		IEnumerable<Observation> c_ = this.HPV_Test_Within_5_Years_for_Women_Age_30_and_Older();
+		bool? d_ = context.Operators.Exists<Observation>(c_);
+		bool? e_ = context.Operators.Or(b_, d_);
 
 		return e_;
 	}
@@ -545,73 +547,75 @@ public class CervicalCancerScreeningFHIR_0_0_005
     [CqlDeclaration("isComplete")]
 	public bool? isComplete(Observation observation)
 	{
-		var a_ = FHIRHelpers_4_0_001.ToString(observation?.StatusElement);
-		var b_ = new string[]
+		Code<ObservationStatus> a_ = observation?.StatusElement;
+		string b_ = FHIRHelpers_4_0_001.ToString(a_);
+		string[] c_ = new string[]
 		{
 			"final",
 			"amended",
 			"corrected",
 		};
-		var c_ = context.Operators.In<string>(a_, (b_ as IEnumerable<string>));
+		bool? d_ = context.Operators.In<string>(b_, (c_ as IEnumerable<string>));
 
-		return c_;
+		return d_;
 	}
 
     [CqlDeclaration("isLaboratoryTest")]
 	public bool? isLaboratoryTest(Observation observation)
 	{
-		bool? a_(CodeableConcept category)
+		List<CodeableConcept> a_ = observation?.Category;
+		bool? b_(CodeableConcept category)
 		{
-			var d_ = this.laboratory();
-			var e_ = FHIRHelpers_4_0_001.ToConcept(category);
-			var f_ = e_?.codes;
-			var g_ = context.Operators.In<CqlCode>(d_, (IEnumerable<CqlCode>)f_);
+			CqlCode e_ = this.laboratory();
+			CqlConcept f_ = FHIRHelpers_4_0_001.ToConcept(category);
+			CqlCode[] g_ = f_?.codes;
+			bool? h_ = context.Operators.In<CqlCode>(e_, (IEnumerable<CqlCode>)g_);
 
-			return g_;
+			return h_;
 		};
-		var b_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)observation?.Category, a_);
-		var c_ = context.Operators.Exists<CodeableConcept>(b_);
+		IEnumerable<CodeableConcept> c_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)a_, b_);
+		bool? d_ = context.Operators.Exists<CodeableConcept>(c_);
 
-		return c_;
+		return d_;
 	}
 
     [CqlDeclaration("latest")]
 	public CqlDateTime latest(object choice)
 	{
-		var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(choice);
+		CqlDateTime a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(choice);
 
 		return a_;
 	}
 
 	private IEnumerable<Observation> Cervical_Cytology_Within_3_Years__2__Value()
 	{
-		var a_ = this.Pap_Test();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		CqlValueSet a_ = this.Pap_Test();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation CervicalCytology)
 		{
-			var e_ = this.isComplete(CervicalCytology);
-			var f_ = this.isLaboratoryTest(CervicalCytology);
-			var g_ = context.Operators.And(e_, f_);
-			var h_ = CervicalCytology?.Effective;
-			var i_ = this.latest(h_);
-			var j_ = this.Measurement_Period();
-			var k_ = context.Operators.End(j_);
-			var l_ = context.Operators.Quantity(3m, "years");
-			var m_ = context.Operators.Subtract(k_, l_);
-			var o_ = context.Operators.End(j_);
-			var p_ = context.Operators.Interval(m_, o_, true, true);
-			var q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
-			var s_ = context.Operators.End(j_);
-			var t_ = context.Operators.Not((bool?)(s_ is null));
-			var u_ = context.Operators.And(q_, t_);
-			var v_ = context.Operators.And(g_, u_);
-			var w_ = CervicalCytology?.Value;
-			var x_ = context.Operators.Not((bool?)(w_ is null));
-			var y_ = context.Operators.And(v_, x_);
+			bool? e_ = this.isComplete(CervicalCytology);
+			bool? f_ = this.isLaboratoryTest(CervicalCytology);
+			bool? g_ = context.Operators.And(e_, f_);
+			DataType h_ = CervicalCytology?.Effective;
+			CqlDateTime i_ = this.latest(h_);
+			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
+			CqlDateTime k_ = context.Operators.End(j_);
+			CqlQuantity l_ = context.Operators.Quantity(3m, "years");
+			CqlDateTime m_ = context.Operators.Subtract(k_, l_);
+			CqlDateTime o_ = context.Operators.End(j_);
+			CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
+			bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
+			CqlDateTime s_ = context.Operators.End(j_);
+			bool? t_ = context.Operators.Not((bool?)(s_ is null));
+			bool? u_ = context.Operators.And(q_, t_);
+			bool? v_ = context.Operators.And(g_, u_);
+			DataType w_ = CervicalCytology?.Value;
+			bool? x_ = context.Operators.Not((bool?)(w_ is null));
+			bool? y_ = context.Operators.And(v_, x_);
 
 			return y_;
 		};
-		var d_ = context.Operators.Where<Observation>(b_, c_);
+		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
@@ -623,50 +627,50 @@ public class CervicalCancerScreeningFHIR_0_0_005
     [CqlDeclaration("toInterval")]
 	public CqlInterval<CqlDateTime> toInterval(object choice)
 	{
-		var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(choice);
+		CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(choice);
 
 		return a_;
 	}
 
 	private IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older__2__Value()
 	{
-		var a_ = this.HPV_Test();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		CqlValueSet a_ = this.HPV_Test();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation HPVTest)
 		{
-			var e_ = this.isComplete(HPVTest);
-			var f_ = this.isLaboratoryTest(HPVTest);
-			var g_ = context.Operators.And(e_, f_);
-			var h_ = this.Patient();
-			var i_ = h_?.BirthDateElement;
-			var j_ = i_?.Value;
-			var k_ = context.Operators.ConvertStringToDate(j_);
-			var l_ = HPVTest?.Effective;
-			var m_ = this.toInterval(l_);
-			var n_ = context.Operators.Start(m_);
-			var o_ = context.Operators.DateFrom(n_);
-			var p_ = context.Operators.CalculateAgeAt(k_, o_, "year");
-			var q_ = context.Operators.GreaterOrEqual(p_, 30);
-			var r_ = context.Operators.And(g_, q_);
-			var t_ = this.latest(l_);
-			var u_ = this.Measurement_Period();
-			var v_ = context.Operators.End(u_);
-			var w_ = context.Operators.Quantity(5m, "years");
-			var x_ = context.Operators.Subtract(v_, w_);
-			var z_ = context.Operators.End(u_);
-			var aa_ = context.Operators.Interval(x_, z_, true, true);
-			var ab_ = context.Operators.In<CqlDateTime>(t_, aa_, null);
-			var ad_ = context.Operators.End(u_);
-			var ae_ = context.Operators.Not((bool?)(ad_ is null));
-			var af_ = context.Operators.And(ab_, ae_);
-			var ag_ = context.Operators.And(r_, af_);
-			var ah_ = HPVTest?.Value;
-			var ai_ = context.Operators.Not((bool?)(ah_ is null));
-			var aj_ = context.Operators.And(ag_, ai_);
+			bool? e_ = this.isComplete(HPVTest);
+			bool? f_ = this.isLaboratoryTest(HPVTest);
+			bool? g_ = context.Operators.And(e_, f_);
+			Patient h_ = this.Patient();
+			Date i_ = h_?.BirthDateElement;
+			string j_ = i_?.Value;
+			CqlDate k_ = context.Operators.ConvertStringToDate(j_);
+			DataType l_ = HPVTest?.Effective;
+			CqlInterval<CqlDateTime> m_ = this.toInterval(l_);
+			CqlDateTime n_ = context.Operators.Start(m_);
+			CqlDate o_ = context.Operators.DateFrom(n_);
+			int? p_ = context.Operators.CalculateAgeAt(k_, o_, "year");
+			bool? q_ = context.Operators.GreaterOrEqual(p_, 30);
+			bool? r_ = context.Operators.And(g_, q_);
+			CqlDateTime t_ = this.latest(l_);
+			CqlInterval<CqlDateTime> u_ = this.Measurement_Period();
+			CqlDateTime v_ = context.Operators.End(u_);
+			CqlQuantity w_ = context.Operators.Quantity(5m, "years");
+			CqlDateTime x_ = context.Operators.Subtract(v_, w_);
+			CqlDateTime z_ = context.Operators.End(u_);
+			CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
+			bool? ab_ = context.Operators.In<CqlDateTime>(t_, aa_, null);
+			CqlDateTime ad_ = context.Operators.End(u_);
+			bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+			bool? af_ = context.Operators.And(ab_, ae_);
+			bool? ag_ = context.Operators.And(r_, af_);
+			DataType ah_ = HPVTest?.Value;
+			bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+			bool? aj_ = context.Operators.And(ag_, ai_);
 
 			return aj_;
 		};
-		var d_ = context.Operators.Where<Observation>(b_, c_);
+		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}

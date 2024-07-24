@@ -25,7 +25,7 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Contains a set of libraries ordered topologically.
 /// </summary>
-[DebuggerDisplay("LibrarySet (Nodes:{_libraryInfosByKey.Count}, Edges:{GetEdgesCount()})")]
+[DebuggerDisplay("LibrarySet {Name}")]
 public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<string, Library>
 {
     /// <summary>
