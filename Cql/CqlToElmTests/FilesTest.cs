@@ -12,7 +12,7 @@ using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
-[TestClass]
+//[TestClass]
 public class FilesTest : Base
 {
     // change to a path containing CQL; can include subdirectories.

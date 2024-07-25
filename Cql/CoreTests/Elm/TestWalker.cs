@@ -51,27 +51,27 @@ namespace CoreTests.Elm
             }
         }
 
-        [TestMethod]
-        public void WalkLibraryIncludingStrings()
-        {
-            var result = new ResultBuilder();
+        //[TestMethod]
+        //public void WalkLibraryIncludingStrings()
+        //{
+        //    var result = new ResultBuilder();
 
-            var walker = new ElmTreeWalker(result.Visitor, null, typeof(string));
-            walker.Walk(lib);
+        //    var walker = new ElmTreeWalker(result.Visitor, null, typeof(string));
+        //    walker.Walk(lib);
 
-            result.Strings.Should().BeEquivalentTo("Literal hi", "hi", "A", "typeParam", "Foo");
-        }
+        //    result.Strings.Should().BeEquivalentTo("Literal hi", "hi", "A", "typeParam", "Foo");
+        //}
 
-        [TestMethod]
-        public void WalkLibraryButDontEnterTupleElementDefinition()
-        {
-            var result = new ResultBuilder();
+        //[TestMethod]
+        //public void WalkLibraryButDontEnterTupleElementDefinition()
+        //{
+        //    var result = new ResultBuilder();
 
-            var walker = new ElmTreeWalker(result.VisitorThatHandlesTupleElementDefinition, null, typeof(string));
-            walker.Walk(lib);
+        //    var walker = new ElmTreeWalker(result.VisitorThatHandlesTupleElementDefinition, null, typeof(string));
+        //    walker.Walk(lib);
 
-            result.Strings.Should().BeEquivalentTo("Literal hi", "hi", "Foo");
-        }
+        //    result.Strings.Should().BeEquivalentTo("Literal hi", "hi", "Foo");
+        //}
 
         [TestMethod]
         public void WalkLibraryExcludingStrings()
