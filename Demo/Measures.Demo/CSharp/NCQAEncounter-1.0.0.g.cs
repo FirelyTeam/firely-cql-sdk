@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -47,17 +46,17 @@ public class NCQAEncounter_1_0_0
 	{
 		FhirString a_(Encounter.DiagnosisComponent D)
 		{
-			var f_ = D?.Condition;
-			var g_ = f_?.ReferenceElement;
+			var f_ = D.Condition;
+			var g_ = f_.ReferenceElement;
 
 			return g_;
 		};
-		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, FhirString>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
+		var b_ = context.Operators.Select<Encounter.DiagnosisComponent, FhirString>((IEnumerable<Encounter.DiagnosisComponent>)Encounter.Diagnosis, a_);
 		bool? c_(FhirString CRef)
 		{
 			bool? h_(Condition C)
 			{
-				var k_ = C?.IdElement;
+				var k_ = C.IdElement;
 				var l_ = FHIRHelpers_4_0_001.ToString(k_);
 				var m_ = FHIRHelpers_4_0_001.ToString(CRef);
 				var n_ = NCQAFHIRBase_1_0_0.GetId(m_);
@@ -81,14 +80,14 @@ public class NCQAEncounter_1_0_0
 	{
 		bool? a_(Encounter.DiagnosisComponent D)
 		{
-			var h_ = D?.RankElement;
+			var h_ = D.RankElement;
 			var i_ = context.Operators.Convert<Integer>(h_);
 			var j_ = FHIRHelpers_4_0_001.ToInteger(i_);
 			var k_ = context.Operators.Equal(j_, 1);
 
 			return k_;
 		};
-		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)Encounter?.Diagnosis, a_);
+		var b_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)Encounter.Diagnosis, a_);
 		var c_ = context.Operators.SingletonFrom<Encounter.DiagnosisComponent>(b_);
 		var d_ = new Encounter.DiagnosisComponent[]
 		{
@@ -98,10 +97,10 @@ public class NCQAEncounter_1_0_0
 		{
 			bool? l_(Condition C)
 			{
-				var o_ = C?.IdElement;
+				var o_ = C.IdElement;
 				var p_ = FHIRHelpers_4_0_001.ToString(o_);
-				var q_ = PrincipalDiagnosis?.Condition;
-				var r_ = q_?.ReferenceElement;
+				var q_ = PrincipalDiagnosis.Condition;
+				var r_ = q_.ReferenceElement;
 				var s_ = FHIRHelpers_4_0_001.ToString(r_);
 				var t_ = NCQAFHIRBase_1_0_0.GetId(s_);
 				var u_ = context.Operators.Equal(p_, t_);
@@ -125,7 +124,7 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Enc);
 		bool? b_(Encounter EncounterPeriod)
 		{
-			var e_ = EncounterPeriod?.Period;
+			var e_ = EncounterPeriod.Period;
 			var f_ = NCQAFHIRBase_1_0_0.Normalize_Interval((e_ as object));
 			var g_ = context.Operators.End(f_);
 			var h_ = context.Operators.In<CqlDateTime>(g_, timeperiod, null);
@@ -144,7 +143,7 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
 		bool? b_(Encounter E)
 		{
-			var d_ = E?.Class;
+			var d_ = E.Class;
 			var e_ = context.Operators.Not((bool?)(d_ is null));
 			var g_ = FHIRHelpers_4_0_001.ToCode(d_);
 			var h_ = NCQATerminology_1_0_0.@virtual();
@@ -164,7 +163,7 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
 		bool? b_(Encounter E)
 		{
-			var d_ = E?.Class;
+			var d_ = E.Class;
 			var e_ = context.Operators.Not((bool?)(d_ is null));
 			var g_ = FHIRHelpers_4_0_001.ToCode(d_);
 			var h_ = NCQATerminology_1_0_0.ambulatory();
@@ -188,7 +187,7 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
 		bool? b_(Encounter E)
 		{
-			var d_ = E?.Class;
+			var d_ = E.Class;
 			var e_ = context.Operators.Not((bool?)(d_ is null));
 			var g_ = FHIRHelpers_4_0_001.ToCode(d_);
 			var h_ = NCQATerminology_1_0_0.ambulatory();

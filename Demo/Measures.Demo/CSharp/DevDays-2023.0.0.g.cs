@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -111,8 +110,8 @@ public class DevDays_2023_0_0
 		var a_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 		bool? b_(Condition c)
 		{
-			var d_ = c?.Code;
-			var e_ = d_?.Coding;
+			var d_ = c.Code;
+			var e_ = d_.Coding;
 			bool? f_(Coding coding)
 			{
 				var n_ = FHIRHelpers_4_0_001.ToCode(coding);
@@ -123,7 +122,7 @@ public class DevDays_2023_0_0
 			};
 			var g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			var h_ = context.Operators.Exists<Coding>(g_);
-			var i_ = c?.Onset;
+			var i_ = c.Onset;
 			var j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.In<CqlDateTime>(j_, k_, null);
@@ -145,8 +144,8 @@ public class DevDays_2023_0_0
 		var a_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 		bool? b_(Condition c)
 		{
-			var d_ = c?.Code;
-			var e_ = d_?.Coding;
+			var d_ = c.Code;
+			var e_ = d_.Coding;
 			bool? f_(Coding coding)
 			{
 				var n_ = FHIRHelpers_4_0_001.ToCode(coding);
@@ -157,7 +156,7 @@ public class DevDays_2023_0_0
 			};
 			var g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			var h_ = context.Operators.Exists<Coding>(g_);
-			var i_ = c?.Onset;
+			var i_ = c.Onset;
 			var j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.In<CqlDateTime>(j_, k_, null);

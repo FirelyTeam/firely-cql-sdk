@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -144,7 +143,7 @@ public class PalliativeCareFHIR_0_6_000
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		bool? d_(Observation PalliativeAssessment)
 		{
-			var s_ = PalliativeAssessment?.StatusElement;
+			var s_ = PalliativeAssessment.StatusElement;
 			var t_ = FHIRHelpers_4_0_001.ToString(s_);
 			var u_ = new string[]
 			{
@@ -153,12 +152,12 @@ public class PalliativeCareFHIR_0_6_000
 				"corrected",
 			};
 			var v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
-			var w_ = PalliativeAssessment?.Category;
+			var w_ = PalliativeAssessment.Category;
 			bool? x_(CodeableConcept PalliativeAssessmentCategory)
 			{
 				var ag_ = this.survey();
 				var ah_ = FHIRHelpers_4_0_001.ToConcept(PalliativeAssessmentCategory);
-				var ai_ = ah_?.codes;
+				var ai_ = ah_.codes;
 				var aj_ = context.Operators.In<CqlCode>(ag_, (IEnumerable<CqlCode>)ai_);
 
 				return aj_;
@@ -166,7 +165,7 @@ public class PalliativeCareFHIR_0_6_000
 			var y_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)w_, x_);
 			var z_ = context.Operators.Exists<CodeableConcept>(y_);
 			var aa_ = context.Operators.And(v_, z_);
-			var ab_ = PalliativeAssessment?.Effective;
+			var ab_ = PalliativeAssessment.Effective;
 			var ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ab_);
 			var ad_ = this.Measurement_Period();
 			var ae_ = context.Operators.Overlaps(ac_, ad_, null);
@@ -180,10 +179,10 @@ public class PalliativeCareFHIR_0_6_000
 		var h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
 		bool? i_(Encounter PalliativeEncounter)
 		{
-			var ak_ = PalliativeEncounter?.StatusElement;
+			var ak_ = PalliativeEncounter.StatusElement;
 			var al_ = FHIRHelpers_4_0_001.ToString(ak_);
 			var am_ = context.Operators.Equal(al_, "finished");
-			var an_ = PalliativeEncounter?.Period;
+			var an_ = PalliativeEncounter.Period;
 			var ao_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((an_ as object));
 			var ap_ = this.Measurement_Period();
 			var aq_ = context.Operators.Overlaps(ao_, ap_, null);
@@ -198,7 +197,7 @@ public class PalliativeCareFHIR_0_6_000
 		var n_ = context.Operators.RetrieveByValueSet<Procedure>(m_, null);
 		bool? o_(Procedure PalliativeIntervention)
 		{
-			var as_ = PalliativeIntervention?.StatusElement;
+			var as_ = PalliativeIntervention.StatusElement;
 			var at_ = FHIRHelpers_4_0_001.ToString(as_);
 			var au_ = new string[]
 			{
@@ -206,7 +205,7 @@ public class PalliativeCareFHIR_0_6_000
 				"in-progress",
 			};
 			var av_ = context.Operators.In<string>(at_, (au_ as IEnumerable<string>));
-			var aw_ = PalliativeIntervention?.Performed;
+			var aw_ = PalliativeIntervention.Performed;
 			var ax_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aw_);
 			var ay_ = this.Measurement_Period();
 			var az_ = context.Operators.Overlaps(ax_, ay_, null);

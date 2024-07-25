@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -135,11 +134,11 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 		var n_ = context.Operators.Union<Encounter>(k_, m_);
 		bool? o_(Encounter ValidEncounter)
 		{
-			var q_ = ValidEncounter?.StatusElement;
+			var q_ = ValidEncounter.StatusElement;
 			var r_ = FHIRHelpers_4_0_001.ToString(q_);
 			var s_ = context.Operators.Equal(r_, "finished");
 			var t_ = this.Measurement_Period();
-			var u_ = ValidEncounter?.Period;
+			var u_ = ValidEncounter.Period;
 			var v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((u_ as object));
 			var w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
 			var x_ = context.Operators.And(s_, w_);

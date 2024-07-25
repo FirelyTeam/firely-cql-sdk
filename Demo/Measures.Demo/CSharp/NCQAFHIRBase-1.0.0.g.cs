@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -85,11 +84,11 @@ public class NCQAFHIRBase_1_0_0
 					if (onset is Age)
 					{
 						var r_ = this.Patient();
-						var s_ = r_?.BirthDateElement;
+						var s_ = r_.BirthDateElement;
 						var t_ = FHIRHelpers_4_0_001.ToDate(s_);
 						var u_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(onset as Age));
 						var v_ = context.Operators.Add(t_, u_);
-						var x_ = r_?.BirthDateElement;
+						var x_ = r_.BirthDateElement;
 						var y_ = FHIRHelpers_4_0_001.ToDate(x_);
 						var aa_ = context.Operators.Add(y_, u_);
 						var ab_ = context.Operators.Quantity(1m, "year");
@@ -101,14 +100,14 @@ public class NCQAFHIRBase_1_0_0
 					else if (onset is Range)
 					{
 						var ae_ = this.Patient();
-						var af_ = ae_?.BirthDateElement;
+						var af_ = ae_.BirthDateElement;
 						var ag_ = FHIRHelpers_4_0_001.ToDate(af_);
-						var ah_ = (onset as Range)?.Low;
+						var ah_ = (onset as Range).Low;
 						var ai_ = FHIRHelpers_4_0_001.ToQuantity(ah_);
 						var aj_ = context.Operators.Add(ag_, ai_);
-						var al_ = ae_?.BirthDateElement;
+						var al_ = ae_.BirthDateElement;
 						var am_ = FHIRHelpers_4_0_001.ToDate(al_);
-						var an_ = (onset as Range)?.High;
+						var an_ = (onset as Range).High;
 						var ao_ = FHIRHelpers_4_0_001.ToQuantity(an_);
 						var ap_ = context.Operators.Add(am_, ao_);
 						var aq_ = context.Operators.Quantity(1m, "year");
@@ -122,17 +121,17 @@ public class NCQAFHIRBase_1_0_0
 						return (null as CqlInterval<CqlDate>);
 					}
 				};
-				var l_ = context.Operators.ConvertDateToDateTime(k_()?.low);
+				var l_ = context.Operators.ConvertDateToDateTime(k_().low);
 				CqlInterval<CqlDate> m_()
 				{
 					if (onset is Age)
 					{
 						var at_ = this.Patient();
-						var au_ = at_?.BirthDateElement;
+						var au_ = at_.BirthDateElement;
 						var av_ = FHIRHelpers_4_0_001.ToDate(au_);
 						var aw_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(onset as Age));
 						var ax_ = context.Operators.Add(av_, aw_);
-						var az_ = at_?.BirthDateElement;
+						var az_ = at_.BirthDateElement;
 						var ba_ = FHIRHelpers_4_0_001.ToDate(az_);
 						var bc_ = context.Operators.Add(ba_, aw_);
 						var bd_ = context.Operators.Quantity(1m, "year");
@@ -144,14 +143,14 @@ public class NCQAFHIRBase_1_0_0
 					else if (onset is Range)
 					{
 						var bg_ = this.Patient();
-						var bh_ = bg_?.BirthDateElement;
+						var bh_ = bg_.BirthDateElement;
 						var bi_ = FHIRHelpers_4_0_001.ToDate(bh_);
-						var bj_ = (onset as Range)?.Low;
+						var bj_ = (onset as Range).Low;
 						var bk_ = FHIRHelpers_4_0_001.ToQuantity(bj_);
 						var bl_ = context.Operators.Add(bi_, bk_);
-						var bn_ = bg_?.BirthDateElement;
+						var bn_ = bg_.BirthDateElement;
 						var bo_ = FHIRHelpers_4_0_001.ToDate(bn_);
-						var bp_ = (onset as Range)?.High;
+						var bp_ = (onset as Range).High;
 						var bq_ = FHIRHelpers_4_0_001.ToQuantity(bp_);
 						var br_ = context.Operators.Add(bo_, bq_);
 						var bs_ = context.Operators.Quantity(1m, "year");
@@ -165,17 +164,17 @@ public class NCQAFHIRBase_1_0_0
 						return (null as CqlInterval<CqlDate>);
 					}
 				};
-				var n_ = context.Operators.ConvertDateToDateTime(m_()?.high);
+				var n_ = context.Operators.ConvertDateToDateTime(m_().high);
 				CqlInterval<CqlDate> o_()
 				{
 					if (onset is Age)
 					{
 						var bv_ = this.Patient();
-						var bw_ = bv_?.BirthDateElement;
+						var bw_ = bv_.BirthDateElement;
 						var bx_ = FHIRHelpers_4_0_001.ToDate(bw_);
 						var by_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(onset as Age));
 						var bz_ = context.Operators.Add(bx_, by_);
-						var cb_ = bv_?.BirthDateElement;
+						var cb_ = bv_.BirthDateElement;
 						var cc_ = FHIRHelpers_4_0_001.ToDate(cb_);
 						var ce_ = context.Operators.Add(cc_, by_);
 						var cf_ = context.Operators.Quantity(1m, "year");
@@ -187,14 +186,14 @@ public class NCQAFHIRBase_1_0_0
 					else if (onset is Range)
 					{
 						var ci_ = this.Patient();
-						var cj_ = ci_?.BirthDateElement;
+						var cj_ = ci_.BirthDateElement;
 						var ck_ = FHIRHelpers_4_0_001.ToDate(cj_);
-						var cl_ = (onset as Range)?.Low;
+						var cl_ = (onset as Range).Low;
 						var cm_ = FHIRHelpers_4_0_001.ToQuantity(cl_);
 						var cn_ = context.Operators.Add(ck_, cm_);
-						var cp_ = ci_?.BirthDateElement;
+						var cp_ = ci_.BirthDateElement;
 						var cq_ = FHIRHelpers_4_0_001.ToDate(cp_);
-						var cr_ = (onset as Range)?.High;
+						var cr_ = (onset as Range).High;
 						var cs_ = FHIRHelpers_4_0_001.ToQuantity(cr_);
 						var ct_ = context.Operators.Add(cq_, cs_);
 						var cu_ = context.Operators.Quantity(1m, "year");
@@ -213,11 +212,11 @@ public class NCQAFHIRBase_1_0_0
 					if (onset is Age)
 					{
 						var cx_ = this.Patient();
-						var cy_ = cx_?.BirthDateElement;
+						var cy_ = cx_.BirthDateElement;
 						var cz_ = FHIRHelpers_4_0_001.ToDate(cy_);
 						var da_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(onset as Age));
 						var db_ = context.Operators.Add(cz_, da_);
-						var dd_ = cx_?.BirthDateElement;
+						var dd_ = cx_.BirthDateElement;
 						var de_ = FHIRHelpers_4_0_001.ToDate(dd_);
 						var dg_ = context.Operators.Add(de_, da_);
 						var dh_ = context.Operators.Quantity(1m, "year");
@@ -229,14 +228,14 @@ public class NCQAFHIRBase_1_0_0
 					else if (onset is Range)
 					{
 						var dk_ = this.Patient();
-						var dl_ = dk_?.BirthDateElement;
+						var dl_ = dk_.BirthDateElement;
 						var dm_ = FHIRHelpers_4_0_001.ToDate(dl_);
-						var dn_ = (onset as Range)?.Low;
+						var dn_ = (onset as Range).Low;
 						var do_ = FHIRHelpers_4_0_001.ToQuantity(dn_);
 						var dp_ = context.Operators.Add(dm_, do_);
-						var dr_ = dk_?.BirthDateElement;
+						var dr_ = dk_.BirthDateElement;
 						var ds_ = FHIRHelpers_4_0_001.ToDate(dr_);
-						var dt_ = (onset as Range)?.High;
+						var dt_ = (onset as Range).High;
 						var du_ = FHIRHelpers_4_0_001.ToQuantity(dt_);
 						var dv_ = context.Operators.Add(ds_, du_);
 						var dw_ = context.Operators.Quantity(1m, "year");
@@ -250,7 +249,7 @@ public class NCQAFHIRBase_1_0_0
 						return (null as CqlInterval<CqlDate>);
 					}
 				};
-				var q_ = context.Operators.Interval(l_, n_, o_()?.lowClosed, p_()?.highClosed);
+				var q_ = context.Operators.Interval(l_, n_, o_().lowClosed, p_().highClosed);
 
 				return q_;
 			}
@@ -294,11 +293,11 @@ public class NCQAFHIRBase_1_0_0
 					if (abatement is Age)
 					{
 						var r_ = this.Patient();
-						var s_ = r_?.BirthDateElement;
+						var s_ = r_.BirthDateElement;
 						var t_ = FHIRHelpers_4_0_001.ToDate(s_);
 						var u_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(abatement as Age));
 						var v_ = context.Operators.Add(t_, u_);
-						var x_ = r_?.BirthDateElement;
+						var x_ = r_.BirthDateElement;
 						var y_ = FHIRHelpers_4_0_001.ToDate(x_);
 						var aa_ = context.Operators.Add(y_, u_);
 						var ab_ = context.Operators.Quantity(1m, "year");
@@ -310,14 +309,14 @@ public class NCQAFHIRBase_1_0_0
 					else if (abatement is Range)
 					{
 						var ae_ = this.Patient();
-						var af_ = ae_?.BirthDateElement;
+						var af_ = ae_.BirthDateElement;
 						var ag_ = FHIRHelpers_4_0_001.ToDate(af_);
-						var ah_ = (abatement as Range)?.Low;
+						var ah_ = (abatement as Range).Low;
 						var ai_ = FHIRHelpers_4_0_001.ToQuantity(ah_);
 						var aj_ = context.Operators.Add(ag_, ai_);
-						var al_ = ae_?.BirthDateElement;
+						var al_ = ae_.BirthDateElement;
 						var am_ = FHIRHelpers_4_0_001.ToDate(al_);
-						var an_ = (abatement as Range)?.High;
+						var an_ = (abatement as Range).High;
 						var ao_ = FHIRHelpers_4_0_001.ToQuantity(an_);
 						var ap_ = context.Operators.Add(am_, ao_);
 						var aq_ = context.Operators.Quantity(1m, "year");
@@ -331,17 +330,17 @@ public class NCQAFHIRBase_1_0_0
 						return (null as CqlInterval<CqlDate>);
 					}
 				};
-				var l_ = context.Operators.ConvertDateToDateTime(k_()?.low);
+				var l_ = context.Operators.ConvertDateToDateTime(k_().low);
 				CqlInterval<CqlDate> m_()
 				{
 					if (abatement is Age)
 					{
 						var at_ = this.Patient();
-						var au_ = at_?.BirthDateElement;
+						var au_ = at_.BirthDateElement;
 						var av_ = FHIRHelpers_4_0_001.ToDate(au_);
 						var aw_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(abatement as Age));
 						var ax_ = context.Operators.Add(av_, aw_);
-						var az_ = at_?.BirthDateElement;
+						var az_ = at_.BirthDateElement;
 						var ba_ = FHIRHelpers_4_0_001.ToDate(az_);
 						var bc_ = context.Operators.Add(ba_, aw_);
 						var bd_ = context.Operators.Quantity(1m, "year");
@@ -353,14 +352,14 @@ public class NCQAFHIRBase_1_0_0
 					else if (abatement is Range)
 					{
 						var bg_ = this.Patient();
-						var bh_ = bg_?.BirthDateElement;
+						var bh_ = bg_.BirthDateElement;
 						var bi_ = FHIRHelpers_4_0_001.ToDate(bh_);
-						var bj_ = (abatement as Range)?.Low;
+						var bj_ = (abatement as Range).Low;
 						var bk_ = FHIRHelpers_4_0_001.ToQuantity(bj_);
 						var bl_ = context.Operators.Add(bi_, bk_);
-						var bn_ = bg_?.BirthDateElement;
+						var bn_ = bg_.BirthDateElement;
 						var bo_ = FHIRHelpers_4_0_001.ToDate(bn_);
-						var bp_ = (abatement as Range)?.High;
+						var bp_ = (abatement as Range).High;
 						var bq_ = FHIRHelpers_4_0_001.ToQuantity(bp_);
 						var br_ = context.Operators.Add(bo_, bq_);
 						var bs_ = context.Operators.Quantity(1m, "year");
@@ -374,17 +373,17 @@ public class NCQAFHIRBase_1_0_0
 						return (null as CqlInterval<CqlDate>);
 					}
 				};
-				var n_ = context.Operators.ConvertDateToDateTime(m_()?.high);
+				var n_ = context.Operators.ConvertDateToDateTime(m_().high);
 				CqlInterval<CqlDate> o_()
 				{
 					if (abatement is Age)
 					{
 						var bv_ = this.Patient();
-						var bw_ = bv_?.BirthDateElement;
+						var bw_ = bv_.BirthDateElement;
 						var bx_ = FHIRHelpers_4_0_001.ToDate(bw_);
 						var by_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(abatement as Age));
 						var bz_ = context.Operators.Add(bx_, by_);
-						var cb_ = bv_?.BirthDateElement;
+						var cb_ = bv_.BirthDateElement;
 						var cc_ = FHIRHelpers_4_0_001.ToDate(cb_);
 						var ce_ = context.Operators.Add(cc_, by_);
 						var cf_ = context.Operators.Quantity(1m, "year");
@@ -396,14 +395,14 @@ public class NCQAFHIRBase_1_0_0
 					else if (abatement is Range)
 					{
 						var ci_ = this.Patient();
-						var cj_ = ci_?.BirthDateElement;
+						var cj_ = ci_.BirthDateElement;
 						var ck_ = FHIRHelpers_4_0_001.ToDate(cj_);
-						var cl_ = (abatement as Range)?.Low;
+						var cl_ = (abatement as Range).Low;
 						var cm_ = FHIRHelpers_4_0_001.ToQuantity(cl_);
 						var cn_ = context.Operators.Add(ck_, cm_);
-						var cp_ = ci_?.BirthDateElement;
+						var cp_ = ci_.BirthDateElement;
 						var cq_ = FHIRHelpers_4_0_001.ToDate(cp_);
-						var cr_ = (abatement as Range)?.High;
+						var cr_ = (abatement as Range).High;
 						var cs_ = FHIRHelpers_4_0_001.ToQuantity(cr_);
 						var ct_ = context.Operators.Add(cq_, cs_);
 						var cu_ = context.Operators.Quantity(1m, "year");
@@ -422,11 +421,11 @@ public class NCQAFHIRBase_1_0_0
 					if (abatement is Age)
 					{
 						var cx_ = this.Patient();
-						var cy_ = cx_?.BirthDateElement;
+						var cy_ = cx_.BirthDateElement;
 						var cz_ = FHIRHelpers_4_0_001.ToDate(cy_);
 						var da_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(abatement as Age));
 						var db_ = context.Operators.Add(cz_, da_);
-						var dd_ = cx_?.BirthDateElement;
+						var dd_ = cx_.BirthDateElement;
 						var de_ = FHIRHelpers_4_0_001.ToDate(dd_);
 						var dg_ = context.Operators.Add(de_, da_);
 						var dh_ = context.Operators.Quantity(1m, "year");
@@ -438,14 +437,14 @@ public class NCQAFHIRBase_1_0_0
 					else if (abatement is Range)
 					{
 						var dk_ = this.Patient();
-						var dl_ = dk_?.BirthDateElement;
+						var dl_ = dk_.BirthDateElement;
 						var dm_ = FHIRHelpers_4_0_001.ToDate(dl_);
-						var dn_ = (abatement as Range)?.Low;
+						var dn_ = (abatement as Range).Low;
 						var do_ = FHIRHelpers_4_0_001.ToQuantity(dn_);
 						var dp_ = context.Operators.Add(dm_, do_);
-						var dr_ = dk_?.BirthDateElement;
+						var dr_ = dk_.BirthDateElement;
 						var ds_ = FHIRHelpers_4_0_001.ToDate(dr_);
-						var dt_ = (abatement as Range)?.High;
+						var dt_ = (abatement as Range).High;
 						var du_ = FHIRHelpers_4_0_001.ToQuantity(dt_);
 						var dv_ = context.Operators.Add(ds_, du_);
 						var dw_ = context.Operators.Quantity(1m, "year");
@@ -459,7 +458,7 @@ public class NCQAFHIRBase_1_0_0
 						return (null as CqlInterval<CqlDate>);
 					}
 				};
-				var q_ = context.Operators.Interval(l_, n_, o_()?.lowClosed, p_()?.highClosed);
+				var q_ = context.Operators.Interval(l_, n_, o_().lowClosed, p_().highClosed);
 
 				return q_;
 			}
@@ -471,9 +470,9 @@ public class NCQAFHIRBase_1_0_0
     [CqlDeclaration("Prevalence Period")]
 	public CqlInterval<CqlDateTime> Prevalence_Period(Condition condition)
 	{
-		var a_ = this.Normalize_Onset(condition?.Onset);
+		var a_ = this.Normalize_Onset(condition.Onset);
 		var b_ = context.Operators.Start(a_);
-		var c_ = this.Normalize_Abatement(condition?.Abatement);
+		var c_ = this.Normalize_Abatement(condition.Abatement);
 		var d_ = context.Operators.End(c_);
 		var e_ = context.Operators.Interval(b_, d_, true, true);
 
@@ -521,46 +520,46 @@ public class NCQAFHIRBase_1_0_0
 			else if (choice is Age)
 			{
 				var r_ = this.Patient();
-				var s_ = r_?.BirthDateElement;
+				var s_ = r_.BirthDateElement;
 				var t_ = FHIRHelpers_4_0_001.ToDate(s_);
 				var u_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(choice as Age));
 				var v_ = context.Operators.Add(t_, u_);
-				var x_ = r_?.BirthDateElement;
+				var x_ = r_.BirthDateElement;
 				var y_ = FHIRHelpers_4_0_001.ToDate(x_);
 				var aa_ = context.Operators.Add(y_, u_);
 				var ab_ = context.Operators.Quantity(1m, "year");
 				var ac_ = context.Operators.Add(aa_, ab_);
 				var ad_ = context.Operators.Interval(v_, ac_, true, false);
-				var ae_ = ad_?.low;
+				var ae_ = ad_.low;
 				var af_ = context.Operators.ConvertDateToDateTime(ae_);
-				var ah_ = r_?.BirthDateElement;
+				var ah_ = r_.BirthDateElement;
 				var ai_ = FHIRHelpers_4_0_001.ToDate(ah_);
 				var ak_ = context.Operators.Add(ai_, u_);
-				var am_ = r_?.BirthDateElement;
+				var am_ = r_.BirthDateElement;
 				var an_ = FHIRHelpers_4_0_001.ToDate(am_);
 				var ap_ = context.Operators.Add(an_, u_);
 				var ar_ = context.Operators.Add(ap_, ab_);
 				var as_ = context.Operators.Interval(ak_, ar_, true, false);
-				var at_ = as_?.high;
+				var at_ = as_.high;
 				var au_ = context.Operators.ConvertDateToDateTime(at_);
-				var aw_ = r_?.BirthDateElement;
+				var aw_ = r_.BirthDateElement;
 				var ax_ = FHIRHelpers_4_0_001.ToDate(aw_);
 				var az_ = context.Operators.Add(ax_, u_);
-				var bb_ = r_?.BirthDateElement;
+				var bb_ = r_.BirthDateElement;
 				var bc_ = FHIRHelpers_4_0_001.ToDate(bb_);
 				var be_ = context.Operators.Add(bc_, u_);
 				var bg_ = context.Operators.Add(be_, ab_);
 				var bh_ = context.Operators.Interval(az_, bg_, true, false);
-				var bi_ = bh_?.lowClosed;
-				var bk_ = r_?.BirthDateElement;
+				var bi_ = bh_.lowClosed;
+				var bk_ = r_.BirthDateElement;
 				var bl_ = FHIRHelpers_4_0_001.ToDate(bk_);
 				var bn_ = context.Operators.Add(bl_, u_);
-				var bp_ = r_?.BirthDateElement;
+				var bp_ = r_.BirthDateElement;
 				var bq_ = FHIRHelpers_4_0_001.ToDate(bp_);
 				var bs_ = context.Operators.Add(bq_, u_);
 				var bu_ = context.Operators.Add(bs_, ab_);
 				var bv_ = context.Operators.Interval(bn_, bu_, true, false);
-				var bw_ = bv_?.highClosed;
+				var bw_ = bv_.highClosed;
 				var bx_ = context.Operators.Interval(af_, au_, bi_, bw_);
 
 				return bx_;
@@ -568,55 +567,55 @@ public class NCQAFHIRBase_1_0_0
 			else if (choice is Range)
 			{
 				var by_ = this.Patient();
-				var bz_ = by_?.BirthDateElement;
+				var bz_ = by_.BirthDateElement;
 				var ca_ = FHIRHelpers_4_0_001.ToDate(bz_);
-				var cb_ = (choice as Range)?.Low;
+				var cb_ = (choice as Range).Low;
 				var cc_ = FHIRHelpers_4_0_001.ToQuantity(cb_);
 				var cd_ = context.Operators.Add(ca_, cc_);
-				var cf_ = by_?.BirthDateElement;
+				var cf_ = by_.BirthDateElement;
 				var cg_ = FHIRHelpers_4_0_001.ToDate(cf_);
-				var ch_ = (choice as Range)?.High;
+				var ch_ = (choice as Range).High;
 				var ci_ = FHIRHelpers_4_0_001.ToQuantity(ch_);
 				var cj_ = context.Operators.Add(cg_, ci_);
 				var ck_ = context.Operators.Quantity(1m, "year");
 				var cl_ = context.Operators.Add(cj_, ck_);
 				var cm_ = context.Operators.Interval(cd_, cl_, true, false);
-				var cn_ = cm_?.low;
+				var cn_ = cm_.low;
 				var co_ = context.Operators.ConvertDateToDateTime(cn_);
-				var cq_ = by_?.BirthDateElement;
+				var cq_ = by_.BirthDateElement;
 				var cr_ = FHIRHelpers_4_0_001.ToDate(cq_);
 				var ct_ = FHIRHelpers_4_0_001.ToQuantity(cb_);
 				var cu_ = context.Operators.Add(cr_, ct_);
-				var cw_ = by_?.BirthDateElement;
+				var cw_ = by_.BirthDateElement;
 				var cx_ = FHIRHelpers_4_0_001.ToDate(cw_);
 				var cz_ = FHIRHelpers_4_0_001.ToQuantity(ch_);
 				var da_ = context.Operators.Add(cx_, cz_);
 				var dc_ = context.Operators.Add(da_, ck_);
 				var dd_ = context.Operators.Interval(cu_, dc_, true, false);
-				var de_ = dd_?.high;
+				var de_ = dd_.high;
 				var df_ = context.Operators.ConvertDateToDateTime(de_);
-				var dh_ = by_?.BirthDateElement;
+				var dh_ = by_.BirthDateElement;
 				var di_ = FHIRHelpers_4_0_001.ToDate(dh_);
 				var dk_ = FHIRHelpers_4_0_001.ToQuantity(cb_);
 				var dl_ = context.Operators.Add(di_, dk_);
-				var dn_ = by_?.BirthDateElement;
+				var dn_ = by_.BirthDateElement;
 				var do_ = FHIRHelpers_4_0_001.ToDate(dn_);
 				var dq_ = FHIRHelpers_4_0_001.ToQuantity(ch_);
 				var dr_ = context.Operators.Add(do_, dq_);
 				var dt_ = context.Operators.Add(dr_, ck_);
 				var du_ = context.Operators.Interval(dl_, dt_, true, false);
-				var dv_ = du_?.lowClosed;
-				var dx_ = by_?.BirthDateElement;
+				var dv_ = du_.lowClosed;
+				var dx_ = by_.BirthDateElement;
 				var dy_ = FHIRHelpers_4_0_001.ToDate(dx_);
 				var ea_ = FHIRHelpers_4_0_001.ToQuantity(cb_);
 				var eb_ = context.Operators.Add(dy_, ea_);
-				var ed_ = by_?.BirthDateElement;
+				var ed_ = by_.BirthDateElement;
 				var ee_ = FHIRHelpers_4_0_001.ToDate(ed_);
 				var eg_ = FHIRHelpers_4_0_001.ToQuantity(ch_);
 				var eh_ = context.Operators.Add(ee_, eg_);
 				var ej_ = context.Operators.Add(eh_, ck_);
 				var ek_ = context.Operators.Interval(eb_, ej_, true, false);
-				var el_ = ek_?.highClosed;
+				var el_ = ek_.highClosed;
 				var em_ = context.Operators.Interval(co_, df_, dv_, el_);
 
 				return em_;
@@ -675,7 +674,7 @@ public class NCQAFHIRBase_1_0_0
 		VSet;
 
     [CqlDeclaration("First Dates per 31 Day Periods")]
-	public Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe First_Dates_per_31_Day_Periods(IEnumerable<CqlDate> DateList)
+	public (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? First_Dates_per_31_Day_Periods(IEnumerable<CqlDate> DateList)
 	{
 		CqlDate a_(CqlDate d) => 
 			d;
@@ -688,27 +687,20 @@ public class NCQAFHIRBase_1_0_0
 			return k_;
 		};
 		var e_ = context.Operators.Where<CqlDate>(c_, d_);
-		var f_ = new Tuple_CfANiScMYDdVZFgRERKJQEVca
-		{
-			SortedDates = e_,
-		};
-		var g_ = new Tuple_CfANiScMYDdVZFgRERKJQEVca[]
+		var f_ = (e_, default(nint));
+		var g_ = new (IEnumerable<CqlDate> SortedDates, nint _)?[]
 		{
 			f_,
 		};
-		Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe h_(Tuple_CfANiScMYDdVZFgRERKJQEVca SortedDates)
+		(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? h_((IEnumerable<CqlDate> SortedDates, nint _)? SortedDates)
 		{
 			var l_ = SortedDates?.SortedDates;
-			var m_ = new Tuple_CWPhjaWHbfdjhVAPZiRhbJcgZ
-			{
-				SortedList = l_,
-				AnchorIndex = 0,
-			};
-			var n_ = new Tuple_CWPhjaWHbfdjhVAPZiRhbJcgZ[]
+			var m_ = (l_, 0);
+			var n_ = new (IEnumerable<CqlDate> SortedList, int? AnchorIndex)?[]
 			{
 				m_,
 			};
-			Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe o_(Tuple_CWPhjaWHbfdjhVAPZiRhbJcgZ AnchorList)
+			(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? o_((IEnumerable<CqlDate> SortedList, int? AnchorIndex)? AnchorList)
 			{
 				var r_ = AnchorList?.SortedList;
 				var s_ = AnchorList?.AnchorIndex;
@@ -731,19 +723,14 @@ public class NCQAFHIRBase_1_0_0
 				};
 				var v_ = context.Operators.Where<CqlDate>(DateList, u_);
 				var x_ = context.Operators.Add(s_, 1);
-				var y_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-				{
-					NextDate = (t_ as CqlDate),
-					NewList = v_,
-					IndexofNewDate = x_,
-				};
-				var z_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+				var y_ = ((t_ as CqlDate), v_, x_);
+				var z_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 				{
 					y_,
 				};
-				Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe aa_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe FirstList)
+				(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? aa_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? FirstList)
 				{
-					Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe aq_()
+					(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? aq_()
 					{
 						bool ar_()
 						{
@@ -780,19 +767,14 @@ public class NCQAFHIRBase_1_0_0
 							};
 							var ba_ = context.Operators.Where<CqlDate>(av_, az_);
 							var bc_ = context.Operators.Add(aw_, 1);
-							var bd_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-							{
-								NextDate = (ax_ as CqlDate),
-								NewList = ba_,
-								IndexofNewDate = bc_,
-							};
-							var be_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+							var bd_ = ((ax_ as CqlDate), ba_, bc_);
+							var be_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 							{
 								bd_,
 							};
-							Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe bf_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe SecondList)
+							(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bf_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? SecondList)
 							{
-								Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe bv_()
+								(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bv_()
 								{
 									bool bw_()
 									{
@@ -829,19 +811,14 @@ public class NCQAFHIRBase_1_0_0
 										};
 										var cf_ = context.Operators.Where<CqlDate>(ca_, ce_);
 										var ch_ = context.Operators.Add(cb_, 1);
-										var ci_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-										{
-											NextDate = (cc_ as CqlDate),
-											NewList = cf_,
-											IndexofNewDate = ch_,
-										};
-										var cj_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+										var ci_ = ((cc_ as CqlDate), cf_, ch_);
+										var cj_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 										{
 											ci_,
 										};
-										Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe ck_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe ThirdList)
+										(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ck_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ThirdList)
 										{
-											Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe da_()
+											(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? da_()
 											{
 												bool db_()
 												{
@@ -878,19 +855,14 @@ public class NCQAFHIRBase_1_0_0
 													};
 													var dk_ = context.Operators.Where<CqlDate>(df_, dj_);
 													var dm_ = context.Operators.Add(dg_, 1);
-													var dn_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-													{
-														NextDate = (dh_ as CqlDate),
-														NewList = dk_,
-														IndexofNewDate = dm_,
-													};
-													var do_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+													var dn_ = ((dh_ as CqlDate), dk_, dm_);
+													var do_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 													{
 														dn_,
 													};
-													Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe dp_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe FourthList)
+													(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dp_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? FourthList)
 													{
-														Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe ef_()
+														(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ef_()
 														{
 															bool eg_()
 															{
@@ -927,19 +899,14 @@ public class NCQAFHIRBase_1_0_0
 																};
 																var ep_ = context.Operators.Where<CqlDate>(ek_, eo_);
 																var er_ = context.Operators.Add(el_, 1);
-																var es_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-																{
-																	NextDate = (em_ as CqlDate),
-																	NewList = ep_,
-																	IndexofNewDate = er_,
-																};
-																var et_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+																var es_ = ((em_ as CqlDate), ep_, er_);
+																var et_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 																{
 																	es_,
 																};
-																Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe eu_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe FifthList)
+																(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? eu_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? FifthList)
 																{
-																	Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe fk_()
+																	(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fk_()
 																	{
 																		bool fl_()
 																		{
@@ -976,19 +943,14 @@ public class NCQAFHIRBase_1_0_0
 																			};
 																			var fu_ = context.Operators.Where<CqlDate>(fp_, ft_);
 																			var fw_ = context.Operators.Add(fq_, 1);
-																			var fx_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-																			{
-																				NextDate = (fr_ as CqlDate),
-																				NewList = fu_,
-																				IndexofNewDate = fw_,
-																			};
-																			var fy_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+																			var fx_ = ((fr_ as CqlDate), fu_, fw_);
+																			var fy_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 																			{
 																				fx_,
 																			};
-																			Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe fz_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe SixthList)
+																			(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fz_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? SixthList)
 																			{
-																				Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe gp_()
+																				(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? gp_()
 																				{
 																					bool gq_()
 																					{
@@ -1025,19 +987,14 @@ public class NCQAFHIRBase_1_0_0
 																						};
 																						var gz_ = context.Operators.Where<CqlDate>(gu_, gy_);
 																						var hb_ = context.Operators.Add(gv_, 1);
-																						var hc_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-																						{
-																							NextDate = (gw_ as CqlDate),
-																							NewList = gz_,
-																							IndexofNewDate = hb_,
-																						};
-																						var hd_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+																						var hc_ = ((gw_ as CqlDate), gz_, hb_);
+																						var hd_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 																						{
 																							hc_,
 																						};
-																						Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe he_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe SeventhList)
+																						(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? he_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? SeventhList)
 																						{
-																							Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe hu_()
+																							(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hu_()
 																							{
 																								bool hv_()
 																								{
@@ -1074,19 +1031,14 @@ public class NCQAFHIRBase_1_0_0
 																									};
 																									var ie_ = context.Operators.Where<CqlDate>(hz_, id_);
 																									var ig_ = context.Operators.Add(ia_, 1);
-																									var ih_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-																									{
-																										NextDate = (ib_ as CqlDate),
-																										NewList = ie_,
-																										IndexofNewDate = ig_,
-																									};
-																									var ii_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+																									var ih_ = ((ib_ as CqlDate), ie_, ig_);
+																									var ii_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 																									{
 																										ih_,
 																									};
-																									Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe ij_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe EighthList)
+																									(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ij_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? EighthList)
 																									{
-																										Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe iz_()
+																										(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? iz_()
 																										{
 																											bool ja_()
 																											{
@@ -1123,19 +1075,14 @@ public class NCQAFHIRBase_1_0_0
 																												};
 																												var jj_ = context.Operators.Where<CqlDate>(je_, ji_);
 																												var jl_ = context.Operators.Add(jf_, 1);
-																												var jm_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-																												{
-																													NextDate = (jg_ as CqlDate),
-																													NewList = jj_,
-																													IndexofNewDate = jl_,
-																												};
-																												var jn_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+																												var jm_ = ((jg_ as CqlDate), jj_, jl_);
+																												var jn_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 																												{
 																													jm_,
 																												};
-																												Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe jo_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe NinethList)
+																												(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? jo_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? NinethList)
 																												{
-																													Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe ke_()
+																													(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ke_()
 																													{
 																														bool kf_()
 																														{
@@ -1172,19 +1119,14 @@ public class NCQAFHIRBase_1_0_0
 																															};
 																															var ko_ = context.Operators.Where<CqlDate>(kj_, kn_);
 																															var kq_ = context.Operators.Add(kk_, 1);
-																															var kr_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-																															{
-																																NextDate = (kl_ as CqlDate),
-																																NewList = ko_,
-																																IndexofNewDate = kq_,
-																															};
-																															var ks_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+																															var kr_ = ((kl_ as CqlDate), ko_, kq_);
+																															var ks_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 																															{
 																																kr_,
 																															};
-																															Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe kt_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe TenthList)
+																															(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? kt_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? TenthList)
 																															{
-																																Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe lj_()
+																																(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? lj_()
 																																{
 																																	bool lk_()
 																																	{
@@ -1221,19 +1163,14 @@ public class NCQAFHIRBase_1_0_0
 																																		};
 																																		var lt_ = context.Operators.Where<CqlDate>(lo_, ls_);
 																																		var lv_ = context.Operators.Add(lp_, 1);
-																																		var lw_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-																																		{
-																																			NextDate = (lq_ as CqlDate),
-																																			NewList = lt_,
-																																			IndexofNewDate = lv_,
-																																		};
-																																		var lx_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe[]
+																																		var lw_ = ((lq_ as CqlDate), lt_, lv_);
+																																		var lx_ = new (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[]
 																																		{
 																																			lw_,
 																																		};
-																																		Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe ly_(Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe EleventhList)
+																																		(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ly_((CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? EleventhList)
 																																		{
-																																			Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe mo_()
+																																			(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? mo_()
 																																			{
 																																				bool mp_()
 																																				{
@@ -1270,12 +1207,7 @@ public class NCQAFHIRBase_1_0_0
 																																					};
 																																					var my_ = context.Operators.Where<CqlDate>(mt_, mx_);
 																																					var na_ = context.Operators.Add(mu_, 1);
-																																					var nb_ = new Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe
-																																					{
-																																						NextDate = (mv_ as CqlDate),
-																																						NewList = my_,
-																																						IndexofNewDate = na_,
-																																					};
+																																					var nb_ = ((mv_ as CqlDate), my_, na_);
 
 																																					return nb_;
 																																				}
@@ -1283,8 +1215,8 @@ public class NCQAFHIRBase_1_0_0
 
 																																			return mo_();
 																																		};
-																																		var lz_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)lx_, ly_);
-																																		var ma_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(lz_);
+																																		var lz_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)lx_), ly_);
+																																		var ma_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(lz_);
 
 																																		return ma_;
 																																	}
@@ -1292,8 +1224,8 @@ public class NCQAFHIRBase_1_0_0
 
 																																return lj_();
 																															};
-																															var ku_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)ks_, kt_);
-																															var kv_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ku_);
+																															var ku_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)ks_), kt_);
+																															var kv_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ku_);
 
 																															return kv_;
 																														}
@@ -1301,8 +1233,8 @@ public class NCQAFHIRBase_1_0_0
 
 																													return ke_();
 																												};
-																												var jp_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)jn_, jo_);
-																												var jq_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(jp_);
+																												var jp_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)jn_), jo_);
+																												var jq_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(jp_);
 
 																												return jq_;
 																											}
@@ -1310,8 +1242,8 @@ public class NCQAFHIRBase_1_0_0
 
 																										return iz_();
 																									};
-																									var ik_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)ii_, ij_);
-																									var il_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ik_);
+																									var ik_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)ii_), ij_);
+																									var il_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ik_);
 
 																									return il_;
 																								}
@@ -1319,8 +1251,8 @@ public class NCQAFHIRBase_1_0_0
 
 																							return hu_();
 																						};
-																						var hf_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)hd_, he_);
-																						var hg_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(hf_);
+																						var hf_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)hd_), he_);
+																						var hg_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(hf_);
 
 																						return hg_;
 																					}
@@ -1328,8 +1260,8 @@ public class NCQAFHIRBase_1_0_0
 
 																				return gp_();
 																			};
-																			var ga_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)fy_, fz_);
-																			var gb_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ga_);
+																			var ga_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)fy_), fz_);
+																			var gb_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ga_);
 
 																			return gb_;
 																		}
@@ -1337,8 +1269,8 @@ public class NCQAFHIRBase_1_0_0
 
 																	return fk_();
 																};
-																var ev_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)et_, eu_);
-																var ew_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ev_);
+																var ev_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)et_), eu_);
+																var ew_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ev_);
 
 																return ew_;
 															}
@@ -1346,8 +1278,8 @@ public class NCQAFHIRBase_1_0_0
 
 														return ef_();
 													};
-													var dq_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)do_, dp_);
-													var dr_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(dq_);
+													var dq_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)do_), dp_);
+													var dr_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(dq_);
 
 													return dr_;
 												}
@@ -1355,8 +1287,8 @@ public class NCQAFHIRBase_1_0_0
 
 											return da_();
 										};
-										var cl_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)cj_, ck_);
-										var cm_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(cl_);
+										var cl_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)cj_), ck_);
+										var cm_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(cl_);
 
 										return cm_;
 									}
@@ -1364,8 +1296,8 @@ public class NCQAFHIRBase_1_0_0
 
 								return bv_();
 							};
-							var bg_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)be_, bf_);
-							var bh_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(bg_);
+							var bg_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)be_), bf_);
+							var bh_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(bg_);
 
 							return bh_;
 						}
@@ -1373,18 +1305,18 @@ public class NCQAFHIRBase_1_0_0
 
 					return aq_();
 				};
-				var ab_ = context.Operators.Select<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>)z_, aa_);
-				var ac_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(ab_);
+				var ab_ = context.Operators.Select<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)z_), aa_);
+				var ac_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ab_);
 
 				return ac_;
 			};
-			var p_ = context.Operators.Select<Tuple_CWPhjaWHbfdjhVAPZiRhbJcgZ, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_CWPhjaWHbfdjhVAPZiRhbJcgZ>)n_, o_);
-			var q_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(p_);
+			var p_ = context.Operators.Select<(IEnumerable<CqlDate> SortedList, int? AnchorIndex)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(IEnumerable<CqlDate> SortedList, int? AnchorIndex)?>)n_), o_);
+			var q_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(p_);
 
 			return q_;
 		};
-		var i_ = context.Operators.Select<Tuple_CfANiScMYDdVZFgRERKJQEVca, Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>((IEnumerable<Tuple_CfANiScMYDdVZFgRERKJQEVca>)g_, h_);
-		var j_ = context.Operators.SingletonFrom<Tuple_BGjDKhZUjGDUZgiFYQFiFVWOe>(i_);
+		var i_ = context.Operators.Select<(IEnumerable<CqlDate> SortedDates, nint _)?, (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(((IEnumerable<(IEnumerable<CqlDate> SortedDates, nint _)?>)g_), h_);
+		var j_ = context.Operators.SingletonFrom<(CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(i_);
 
 		return j_;
 	}

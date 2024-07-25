@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -83,9 +82,9 @@ public class VTEFHIR4_4_8_000
 	{
 		bool? a_(Encounter.LocationComponent HospitalLocation)
 		{
-			var f_ = HospitalLocation?.Location;
+			var f_ = HospitalLocation.Location;
 			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(f_);
-			var h_ = g_?.Type;
+			var h_ = g_.Type;
 			CqlConcept i_(CodeableConcept X)
 			{
 				var s_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -95,19 +94,19 @@ public class VTEFHIR4_4_8_000
 			var j_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_);
 			var k_ = this.Intensive_Care_Unit();
 			var l_ = context.Operators.ConceptsInValueSet(j_, k_);
-			var m_ = Encounter?.Period;
+			var m_ = Encounter.Period;
 			var n_ = FHIRHelpers_4_0_001.ToInterval(m_);
-			var o_ = HospitalLocation?.Period;
+			var o_ = HospitalLocation.Period;
 			var p_ = FHIRHelpers_4_0_001.ToInterval(o_);
 			var q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, p_, null);
 			var r_ = context.Operators.And(l_, q_);
 
 			return r_;
 		};
-		var b_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)Encounter?.Location, a_);
+		var b_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)Encounter.Location, a_);
 		object c_(Encounter.LocationComponent @this)
 		{
-			var t_ = @this?.Period;
+			var t_ = @this.Period;
 			var u_ = FHIRHelpers_4_0_001.ToInterval(t_);
 			var v_ = context.Operators.Start(u_);
 
@@ -124,7 +123,7 @@ public class VTEFHIR4_4_8_000
 	{
 		var a_ = this.FirstInpatientIntensiveCareUnit(Encounter);
 
-		return a_?.Period;
+		return a_.Period;
 	}
 
     [CqlDeclaration("StartOfFirstICU")]
@@ -154,7 +153,7 @@ public class VTEFHIR4_4_8_000
 		var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(Encounter);
 		var b_ = context.Operators.Start(a_);
 		var c_ = context.Operators.DateFrom(b_);
-		var d_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+		var d_ = FHIRHelpers_4_0_001.ToInterval(Encounter.Period);
 		var e_ = context.Operators.Start(d_);
 		var f_ = context.Operators.DateFrom(e_);
 		var g_ = context.Operators.Quantity(1m, "day");

@@ -16,12 +16,13 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class ExpressionToCSharpConverter(
         string libraryName,
-        CSharpCodeWriterTypeFormat typeFormat,
+        IOptions<CSharpCodeWriterOptions> csharpCodeWriterOptions,
         TypeToCSharpConverter typeToCSharpConverter)
     {
         public string ConvertExpression(int indent, Expression expression, bool leadingIndent = true)
@@ -151,7 +152,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         private string ConvertNullConditionalMemberExpression(string indentString, NullConditionalMemberExpression nullp)
         {
             var convertExpression = ConvertExpression(0, nullp.MemberExpression.Expression!);
-            bool shouldHaveNullProp = true;//!ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);
+            //bool shouldHaveNullProp = typeToCSharpConverter.ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);// true;//!ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);
+            bool shouldHaveNullProp = true;
             var memberName = nullp.MemberExpression.Member.Name;
             return $"{indentString}{Parenthesize(convertExpression)}{(shouldHaveNullProp?"?":"")}.{memberName}";
         }
@@ -589,7 +591,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var rightCode = ConvertExpression(indent, right, false);
 
                 string typeDeclaration = "var";
-                if (typeFormat is CSharpCodeWriterTypeFormat.Explicit || rightCode is "null" or "default")
+                if (UseExplicitTypeFormat || rightCode is "null" or "default")
                     typeDeclaration = typeToCSharpConverter.ToCSharp(left.Type);
 
                 var assignment = $"{leadingIndentString}{typeDeclaration} {ParamName(parameter)} = {rightCode}";
@@ -607,6 +609,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                 return binaryString;
             }
         }
+
+        private bool UseExplicitTypeFormat => csharpCodeWriterOptions.Value.TypeFormat is CSharpCodeWriterTypeFormat.Explicit;
 
         private static string BinaryOperatorFor(ExpressionType nodeType) => nodeType switch
         {

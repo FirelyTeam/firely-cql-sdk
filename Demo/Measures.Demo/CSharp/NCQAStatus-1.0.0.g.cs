@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -57,7 +56,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(AllergyIntolerance A)
 		{
-			var c_ = A?.ClinicalStatus;
+			var c_ = A.ClinicalStatus;
 			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var e_ = NCQATerminology_1_0_0.allergy_active();
 			var f_ = context.Operators.ConvertCodeToConcept(e_);
@@ -75,7 +74,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Condition C)
 		{
-			var c_ = C?.ClinicalStatus;
+			var c_ = C.ClinicalStatus;
 			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var e_ = NCQATerminology_1_0_0.active();
 			var f_ = context.Operators.ConvertCodeToConcept(e_);
@@ -93,7 +92,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Encounter E)
 		{
-			var c_ = E?.StatusElement;
+			var c_ = E.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
 			var e_ = context.Operators.Equal(d_, "finished");
 
@@ -109,7 +108,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Immunization I)
 		{
-			var c_ = I?.StatusElement;
+			var c_ = I.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
 			var e_ = context.Operators.Equal(d_, "completed");
 
@@ -125,7 +124,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationDispense M)
 		{
-			var c_ = M?.StatusElement;
+			var c_ = M.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
 			var e_ = context.Operators.Equal(d_, "completed");
 
@@ -141,7 +140,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationRequest M)
 		{
-			var c_ = M?.StatusElement;
+			var c_ = M.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
 			var e_ = new string[]
 			{
@@ -161,7 +160,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = P?.StatusElement;
+			var c_ = P.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
 			var e_ = context.Operators.Equal(d_, "completed");
 
@@ -177,7 +176,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			var c_ = P?.StatusElement;
+			var c_ = P.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
 			var e_ = new string[]
 			{

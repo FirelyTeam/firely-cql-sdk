@@ -32,7 +32,7 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         private const string TuplesNamespace = "Tuples";
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
-        private readonly CSharpCodeWriterOptions _options;
+        private readonly IOptions<CSharpCodeWriterOptions> _options;
         private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
         public CSharpLibrarySetToStreamsWriter(
@@ -43,7 +43,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             _logger = logger;
             _typeToCSharpConverter = typeToCSharpConverter;
-            _options = options.Value;
+            _options = options;
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
@@ -446,7 +446,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
-            var simplifyNullConditionalMemberExpression = _options.TypeFormat == CSharpCodeWriterTypeFormat.Var;
+            var simplifyNullConditionalMemberExpression = _options.Value.TypeFormat == CSharpCodeWriterTypeFormat.Var;
             var visitedBody = Transform(
                 overload.Body,
                 new RedundantCastsTransformer(),
@@ -458,7 +458,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 new LocalVariableDeduper(_typeToCSharpConverter)
             );
 
-            var expressionConverter = new ExpressionToCSharpConverter(libraryName, _options.TypeFormat, _typeToCSharpConverter);
+            var expressionConverter = new ExpressionToCSharpConverter(libraryName, _options, _typeToCSharpConverter);
 
             // Skip CqlContext
             var parameters = overload.Parameters.Skip(1);

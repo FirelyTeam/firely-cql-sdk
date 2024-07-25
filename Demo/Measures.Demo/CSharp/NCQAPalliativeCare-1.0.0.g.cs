@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -102,7 +101,7 @@ public class NCQAPalliativeCare_1_0_0
 		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation PalliativeAssessment)
 		{
-			var ab_ = PalliativeAssessment?.Effective;
+			var ab_ = PalliativeAssessment.Effective;
 			var ac_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ab_);
 			var ad_ = context.Operators.Start(ac_);
 			var ae_ = context.Operators.DateFrom(ad_);
@@ -126,7 +125,7 @@ public class NCQAPalliativeCare_1_0_0
 		var h_ = NCQAStatus_1_0_0.Finished_Encounter(g_);
 		bool? i_(Encounter PalliativeEncounter)
 		{
-			var aq_ = PalliativeEncounter?.Period;
+			var aq_ = PalliativeEncounter.Period;
 			var ar_ = NCQAFHIRBase_1_0_0.Normalize_Interval((aq_ as object));
 			var as_ = context.Operators.Start(ar_);
 			var at_ = context.Operators.DateFrom(as_);
@@ -151,7 +150,7 @@ public class NCQAPalliativeCare_1_0_0
 		var o_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(n_);
 		bool? p_(Procedure PalliativeIntervention)
 		{
-			var bf_ = PalliativeIntervention?.Performed;
+			var bf_ = PalliativeIntervention.Performed;
 			var bg_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bf_);
 			var bh_ = context.Operators.Start(bg_);
 			var bi_ = context.Operators.DateFrom(bh_);

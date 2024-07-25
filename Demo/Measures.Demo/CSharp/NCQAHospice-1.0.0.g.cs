@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -96,7 +95,7 @@ public class NCQAHospice_1_0_0
 		var c_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(b_);
 		bool? d_(Procedure HospiceInt)
 		{
-			var n_ = HospiceInt?.Performed;
+			var n_ = HospiceInt.Performed;
 			var o_ = NCQAFHIRBase_1_0_0.Normalize_Interval(n_);
 			var p_ = this.Measurement_Period();
 			var q_ = context.Operators.Overlaps(o_, p_, null);
@@ -110,7 +109,7 @@ public class NCQAHospice_1_0_0
 		var i_ = NCQAStatus_1_0_0.Finished_Encounter(h_);
 		bool? j_(Encounter HospiceEnc)
 		{
-			var r_ = HospiceEnc?.Period;
+			var r_ = HospiceEnc.Period;
 			var s_ = NCQAFHIRBase_1_0_0.Normalize_Interval((r_ as object));
 			var t_ = this.Measurement_Period();
 			var u_ = context.Operators.Overlaps(s_, t_, null);
