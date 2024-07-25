@@ -16,6 +16,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -152,8 +153,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         private string ConvertNullConditionalMemberExpression(string indentString, NullConditionalMemberExpression nullp)
         {
             var convertExpression = ConvertExpression(0, nullp.MemberExpression.Expression!);
-            //bool shouldHaveNullProp = typeToCSharpConverter.ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);// true;//!ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);
-            bool shouldHaveNullProp = true;
+            bool shouldHaveNullProp = typeToCSharpConverter.ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);// true;//!ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);
+            //bool shouldHaveNullProp = true;
             var memberName = nullp.MemberExpression.Member.Name;
             return $"{indentString}{Parenthesize(convertExpression)}{(shouldHaveNullProp?"?":"")}.{memberName}";
         }
@@ -447,7 +448,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertMemberExpression(string leadingIndentString, MemberExpression me)
         {
-            var nullProp = me.Expression is not null && Nullable.GetUnderlyingType(me.Expression.Type) != null ? "?" : "";
+            var nullProp = typeToCSharpConverter.GetMemberAccessNullabilityOperator(me.Expression?.Type);
             var @object = me.Expression is not null ? ConvertExpression(0, me.Expression) : typeToCSharpConverter.ToCSharp(me.Member.DeclaringType!);
             var memberName = EscapeKeywords(me.Member.Name);
             var nullCoalesce = $"{@object}{nullProp}.{memberName}";

@@ -59,7 +59,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
 	public CqlValueSet Ethnicity() => 
-		__Ethnicity.Value;
+		__Ethnicity?.Value;
 
 	private CqlValueSet ONC_Administrative_Sex_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
@@ -67,7 +67,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
 	public CqlValueSet ONC_Administrative_Sex() => 
-		__ONC_Administrative_Sex.Value;
+		__ONC_Administrative_Sex?.Value;
 
 	private CqlValueSet Payer_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
@@ -75,7 +75,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
     [CqlDeclaration("Payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
 	public CqlValueSet Payer() => 
-		__Payer.Value;
+		__Payer?.Value;
 
 	private CqlValueSet Race_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
@@ -83,19 +83,19 @@ public class SupplementalDataElementsFHIR4_2_0_000
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
 	public CqlValueSet Race() => 
-		__Race.Value;
+		__Race?.Value;
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context?.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient.Value;
+		__Patient?.Value;
 
 	private IEnumerable<Coding> SDE_Ethnicity_Value()
 	{
@@ -112,7 +112,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			{
 				var n_ = this.Patient();
 
-				return ((IEnumerable<Extension>)(n_ as DomainResource).Extension);
+				return ((IEnumerable<Extension>)(n_ as DomainResource)?.Extension);
 			}
 			else
 			{
@@ -122,54 +122,54 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		bool? b_(Extension Extension)
 		{
 			var o_ = Extension.Url;
-			var p_ = context.Operators.Convert<FhirUri>(o_);
+			var p_ = context?.Operators.Convert<FhirUri>(o_);
 			var q_ = FHIRHelpers_4_0_001.ToString(p_);
-			var r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+			var r_ = context?.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
 			return r_;
 		};
-		var c_ = context.Operators.Where<Extension>(a_(), b_);
+		var c_ = context?.Operators.Where<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension)
 		{
 			var s_ = Extension.Extension;
 
 			return (IEnumerable<Extension>)s_;
 		};
-		var e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
-		var f_ = context.Operators.Flatten<Extension>(e_);
+		var e_ = context?.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
+		var f_ = context?.Operators.Flatten<Extension>(e_);
 		bool? g_(Extension E)
 		{
 			var t_ = E.Url;
-			var u_ = context.Operators.Convert<FhirUri>(t_);
+			var u_ = context?.Operators.Convert<FhirUri>(t_);
 			var v_ = FHIRHelpers_4_0_001.ToString(u_);
-			var w_ = context.Operators.Equal(v_, "ombCategory");
-			var y_ = context.Operators.Convert<FhirUri>(t_);
+			var w_ = context?.Operators.Equal(v_, "ombCategory");
+			var y_ = context?.Operators.Convert<FhirUri>(t_);
 			var z_ = FHIRHelpers_4_0_001.ToString(y_);
-			var aa_ = context.Operators.Equal(z_, "detailed");
-			var ab_ = context.Operators.Or(w_, aa_);
+			var aa_ = context?.Operators.Equal(z_, "detailed");
+			var ab_ = context?.Operators.Or(w_, aa_);
 
 			return ab_;
 		};
-		var h_ = context.Operators.Where<Extension>(f_, g_);
+		var h_ = context?.Operators.Where<Extension>(f_, g_);
 		Coding i_(Extension E)
 		{
 			var ac_ = E.Value;
 
 			return (ac_ as Coding);
 		};
-		var j_ = context.Operators.Select<Extension, Coding>(h_, i_);
+		var j_ = context?.Operators.Select<Extension, Coding>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
 	public IEnumerable<Coding> SDE_Ethnicity() => 
-		__SDE_Ethnicity.Value;
+		__SDE_Ethnicity?.Value;
 
 	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
 		var a_ = this.Payer();
-		var b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Coverage>(a_, null);
 		(CodeableConcept code, Period period)? c_(Coverage Payer)
 		{
 			var e_ = Payer.Type;
@@ -178,14 +178,14 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 			return g_;
 		};
-		var d_ = context.Operators.Select<Coverage, (CodeableConcept code, Period period)?>(b_, c_);
+		var d_ = context?.Operators.Select<Coverage, (CodeableConcept code, Period period)?>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("SDE Payer")]
 	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
-		__SDE_Payer.Value;
+		__SDE_Payer?.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
 	{
@@ -202,7 +202,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			{
 				var n_ = this.Patient();
 
-				return ((IEnumerable<Extension>)(n_ as DomainResource).Extension);
+				return ((IEnumerable<Extension>)(n_ as DomainResource)?.Extension);
 			}
 			else
 			{
@@ -212,49 +212,49 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		bool? b_(Extension Extension)
 		{
 			var o_ = Extension.Url;
-			var p_ = context.Operators.Convert<FhirUri>(o_);
+			var p_ = context?.Operators.Convert<FhirUri>(o_);
 			var q_ = FHIRHelpers_4_0_001.ToString(p_);
-			var r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+			var r_ = context?.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
 			return r_;
 		};
-		var c_ = context.Operators.Where<Extension>(a_(), b_);
+		var c_ = context?.Operators.Where<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension)
 		{
 			var s_ = Extension.Extension;
 
 			return (IEnumerable<Extension>)s_;
 		};
-		var e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
-		var f_ = context.Operators.Flatten<Extension>(e_);
+		var e_ = context?.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
+		var f_ = context?.Operators.Flatten<Extension>(e_);
 		bool? g_(Extension E)
 		{
 			var t_ = E.Url;
-			var u_ = context.Operators.Convert<FhirUri>(t_);
+			var u_ = context?.Operators.Convert<FhirUri>(t_);
 			var v_ = FHIRHelpers_4_0_001.ToString(u_);
-			var w_ = context.Operators.Equal(v_, "ombCategory");
-			var y_ = context.Operators.Convert<FhirUri>(t_);
+			var w_ = context?.Operators.Equal(v_, "ombCategory");
+			var y_ = context?.Operators.Convert<FhirUri>(t_);
 			var z_ = FHIRHelpers_4_0_001.ToString(y_);
-			var aa_ = context.Operators.Equal(z_, "detailed");
-			var ab_ = context.Operators.Or(w_, aa_);
+			var aa_ = context?.Operators.Equal(z_, "detailed");
+			var ab_ = context?.Operators.Or(w_, aa_);
 
 			return ab_;
 		};
-		var h_ = context.Operators.Where<Extension>(f_, g_);
+		var h_ = context?.Operators.Where<Extension>(f_, g_);
 		Coding i_(Extension E)
 		{
 			var ac_ = E.Value;
 
 			return (ac_ as Coding);
 		};
-		var j_ = context.Operators.Select<Extension, Coding>(h_, i_);
+		var j_ = context?.Operators.Select<Extension, Coding>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("SDE Race")]
 	public IEnumerable<Coding> SDE_Race() => 
-		__SDE_Race.Value;
+		__SDE_Race?.Value;
 
 	private CqlCode SDE_Sex_Value()
 	{
@@ -265,7 +265,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 				var d_ = this.Patient();
 				var e_ = d_.GenderElement;
 				var f_ = FHIRHelpers_4_0_001.ToString(e_);
-				var g_ = context.Operators.Equal(f_, "male");
+				var g_ = context?.Operators.Equal(f_, "male");
 
 				return (g_ ?? false);
 			};
@@ -274,7 +274,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 				var h_ = this.Patient();
 				var i_ = h_.GenderElement;
 				var j_ = FHIRHelpers_4_0_001.ToString(i_);
-				var k_ = context.Operators.Equal(j_, "female");
+				var k_ = context?.Operators.Equal(j_, "female");
 
 				return (k_ ?? false);
 			};
@@ -297,6 +297,6 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
     [CqlDeclaration("SDE Sex")]
 	public CqlCode SDE_Sex() => 
-		__SDE_Sex.Value;
+		__SDE_Sex?.Value;
 
 }

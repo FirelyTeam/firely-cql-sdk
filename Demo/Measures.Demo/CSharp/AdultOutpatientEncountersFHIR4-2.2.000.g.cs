@@ -59,7 +59,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
 	public CqlValueSet Annual_Wellness_Visit() => 
-		__Annual_Wellness_Visit.Value;
+		__Annual_Wellness_Visit?.Value;
 
 	private CqlValueSet Home_Healthcare_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
@@ -67,7 +67,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
 	public CqlValueSet Home_Healthcare_Services() => 
-		__Home_Healthcare_Services.Value;
+		__Home_Healthcare_Services?.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
@@ -75,7 +75,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
 	public CqlValueSet Office_Visit() => 
-		__Office_Visit.Value;
+		__Office_Visit?.Value;
 
 	private CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
@@ -83,7 +83,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
 	public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up() => 
-		__Preventive_Care_Services___Established_Office_Visit__18_and_Up.Value;
+		__Preventive_Care_Services___Established_Office_Visit__18_and_Up?.Value;
 
 	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
@@ -91,7 +91,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
 	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
-		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
+		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up?.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
@@ -102,56 +102,56 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 
     [CqlDeclaration("Measurement Period")]
 	public CqlInterval<CqlDateTime> Measurement_Period() => 
-		__Measurement_Period.Value;
+		__Measurement_Period?.Value;
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context?.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient.Value;
+		__Patient?.Value;
 
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Annual_Wellness_Visit();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.Union<Encounter>(b_, d_);
+		var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		var e_ = context?.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.Union<Encounter>(g_, i_);
-		var k_ = context.Operators.Union<Encounter>(e_, j_);
+		var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		var j_ = context?.Operators.Union<Encounter>(g_, i_);
+		var k_ = context?.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Home_Healthcare_Services();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = context.Operators.Union<Encounter>(k_, m_);
+		var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		var n_ = context?.Operators.Union<Encounter>(k_, m_);
 		bool? o_(Encounter ValidEncounter)
 		{
 			var q_ = ValidEncounter.StatusElement;
 			var r_ = FHIRHelpers_4_0_001.ToString(q_);
-			var s_ = context.Operators.Equal(r_, "finished");
+			var s_ = context?.Operators.Equal(r_, "finished");
 			var t_ = this.Measurement_Period();
 			var u_ = ValidEncounter.Period;
 			var v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((u_ as object));
-			var w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
-			var x_ = context.Operators.And(s_, w_);
+			var w_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
+			var x_ = context?.Operators.And(s_, w_);
 
 			return x_;
 		};
-		var p_ = context.Operators.Where<Encounter>(n_, o_);
+		var p_ = context?.Operators.Where<Encounter>(n_, o_);
 
 		return p_;
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
 	public IEnumerable<Encounter> Qualifying_Encounters() => 
-		__Qualifying_Encounters.Value;
+		__Qualifying_Encounters?.Value;
 
 }

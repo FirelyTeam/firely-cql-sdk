@@ -181,7 +181,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
 	public CqlValueSet Annual_Wellness_Visit() => 
-		__Annual_Wellness_Visit.Value;
+		__Annual_Wellness_Visit?.Value;
 
 	private CqlValueSet Atherosclerosis_and_Peripheral_Arterial_Disease_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.21", null);
@@ -189,7 +189,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Atherosclerosis and Peripheral Arterial Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.21")]
 	public CqlValueSet Atherosclerosis_and_Peripheral_Arterial_Disease() => 
-		__Atherosclerosis_and_Peripheral_Arterial_Disease.Value;
+		__Atherosclerosis_and_Peripheral_Arterial_Disease?.Value;
 
 	private CqlValueSet Breastfeeding_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.73", null);
@@ -197,7 +197,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Breastfeeding")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.73")]
 	public CqlValueSet Breastfeeding() => 
-		__Breastfeeding.Value;
+		__Breastfeeding?.Value;
 
 	private CqlValueSet CABG_Surgeries_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.694", null);
@@ -205,7 +205,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("CABG Surgeries")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.694")]
 	public CqlValueSet CABG_Surgeries() => 
-		__CABG_Surgeries.Value;
+		__CABG_Surgeries?.Value;
 
 	private CqlValueSet CABG__PCI_Procedure_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1138.566", null);
@@ -213,7 +213,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("CABG, PCI Procedure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1138.566")]
 	public CqlValueSet CABG__PCI_Procedure() => 
-		__CABG__PCI_Procedure.Value;
+		__CABG__PCI_Procedure?.Value;
 
 	private CqlValueSet Carotid_Intervention_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.204", null);
@@ -221,7 +221,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Carotid Intervention")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.204")]
 	public CqlValueSet Carotid_Intervention() => 
-		__Carotid_Intervention.Value;
+		__Carotid_Intervention?.Value;
 
 	private CqlValueSet Cerebrovascular_Disease__Stroke__TIA_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.44", null);
@@ -229,7 +229,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Cerebrovascular Disease, Stroke, TIA")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.44")]
 	public CqlValueSet Cerebrovascular_Disease__Stroke__TIA() => 
-		__Cerebrovascular_Disease__Stroke__TIA.Value;
+		__Cerebrovascular_Disease__Stroke__TIA?.Value;
 
 	private CqlValueSet Diabetes_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", null);
@@ -237,7 +237,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
 	public CqlValueSet Diabetes() => 
-		__Diabetes.Value;
+		__Diabetes?.Value;
 
 	private CqlValueSet End_Stage_Renal_Disease_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", null);
@@ -245,7 +245,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("End Stage Renal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353")]
 	public CqlValueSet End_Stage_Renal_Disease() => 
-		__End_Stage_Renal_Disease.Value;
+		__End_Stage_Renal_Disease?.Value;
 
 	private CqlValueSet Hepatitis_A_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1024", null);
@@ -253,7 +253,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Hepatitis A")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1024")]
 	public CqlValueSet Hepatitis_A() => 
-		__Hepatitis_A.Value;
+		__Hepatitis_A?.Value;
 
 	private CqlValueSet Hepatitis_B_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.269", null);
@@ -261,7 +261,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Hepatitis B")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.269")]
 	public CqlValueSet Hepatitis_B() => 
-		__Hepatitis_B.Value;
+		__Hepatitis_B?.Value;
 
 	private CqlValueSet High_Intensity_Statin_Therapy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1572", null);
@@ -269,7 +269,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("High Intensity Statin Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1572")]
 	public CqlValueSet High_Intensity_Statin_Therapy() => 
-		__High_Intensity_Statin_Therapy.Value;
+		__High_Intensity_Statin_Therapy?.Value;
 
 	private CqlValueSet Hospice_Care_Ambulatory_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", null);
@@ -277,7 +277,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Hospice Care Ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584")]
 	public CqlValueSet Hospice_Care_Ambulatory() => 
-		__Hospice_Care_Ambulatory.Value;
+		__Hospice_Care_Ambulatory?.Value;
 
 	private CqlValueSet Hypercholesterolemia_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.100", null);
@@ -285,7 +285,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Hypercholesterolemia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.100")]
 	public CqlValueSet Hypercholesterolemia() => 
-		__Hypercholesterolemia.Value;
+		__Hypercholesterolemia?.Value;
 
 	private CqlValueSet Ischemic_Heart_Disease_or_Other_Related_Diagnoses_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.46", null);
@@ -293,7 +293,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Ischemic Heart Disease or Other Related Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.46")]
 	public CqlValueSet Ischemic_Heart_Disease_or_Other_Related_Diagnoses() => 
-		__Ischemic_Heart_Disease_or_Other_Related_Diagnoses.Value;
+		__Ischemic_Heart_Disease_or_Other_Related_Diagnoses?.Value;
 
 	private CqlValueSet LDL_Cholesterol_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1573", null);
@@ -301,7 +301,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("LDL Cholesterol")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1573")]
 	public CqlValueSet LDL_Cholesterol() => 
-		__LDL_Cholesterol.Value;
+		__LDL_Cholesterol?.Value;
 
 	private CqlValueSet Liver_Disease_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.42", null);
@@ -309,7 +309,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Liver Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.42")]
 	public CqlValueSet Liver_Disease() => 
-		__Liver_Disease.Value;
+		__Liver_Disease?.Value;
 
 	private CqlValueSet Low_Intensity_Statin_Therapy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1574", null);
@@ -317,7 +317,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Low Intensity Statin Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1574")]
 	public CqlValueSet Low_Intensity_Statin_Therapy() => 
-		__Low_Intensity_Statin_Therapy.Value;
+		__Low_Intensity_Statin_Therapy?.Value;
 
 	private CqlValueSet Moderate_Intensity_Statin_Therapy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1575", null);
@@ -325,7 +325,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Moderate Intensity Statin Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1575")]
 	public CqlValueSet Moderate_Intensity_Statin_Therapy() => 
-		__Moderate_Intensity_Statin_Therapy.Value;
+		__Moderate_Intensity_Statin_Therapy?.Value;
 
 	private CqlValueSet Myocardial_Infarction_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.403", null);
@@ -333,7 +333,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Myocardial Infarction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.403")]
 	public CqlValueSet Myocardial_Infarction() => 
-		__Myocardial_Infarction.Value;
+		__Myocardial_Infarction?.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
@@ -341,7 +341,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
 	public CqlValueSet Office_Visit() => 
-		__Office_Visit.Value;
+		__Office_Visit?.Value;
 
 	private CqlValueSet Outpatient_Consultation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
@@ -349,7 +349,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
 	public CqlValueSet Outpatient_Consultation() => 
-		__Outpatient_Consultation.Value;
+		__Outpatient_Consultation?.Value;
 
 	private CqlValueSet Outpatient_Encounters_for_Preventive_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1576", null);
@@ -357,7 +357,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Outpatient Encounters for Preventive Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1576")]
 	public CqlValueSet Outpatient_Encounters_for_Preventive_Care() => 
-		__Outpatient_Encounters_for_Preventive_Care.Value;
+		__Outpatient_Encounters_for_Preventive_Care?.Value;
 
 	private CqlValueSet Palliative_Care_Encounter_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1575", null);
@@ -365,7 +365,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1575")]
 	public CqlValueSet Palliative_Care_Encounter() => 
-		__Palliative_Care_Encounter.Value;
+		__Palliative_Care_Encounter?.Value;
 
 	private CqlValueSet Palliative_or_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", null);
@@ -373,7 +373,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Palliative or Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579")]
 	public CqlValueSet Palliative_or_Hospice_Care() => 
-		__Palliative_or_Hospice_Care.Value;
+		__Palliative_or_Hospice_Care?.Value;
 
 	private CqlValueSet PCI_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.67", null);
@@ -381,7 +381,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("PCI")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.67")]
 	public CqlValueSet PCI() => 
-		__PCI.Value;
+		__PCI?.Value;
 
 	private CqlValueSet Pregnancy_or_Other_Related_Diagnoses_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1623", null);
@@ -389,7 +389,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Pregnancy or Other Related Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1623")]
 	public CqlValueSet Pregnancy_or_Other_Related_Diagnoses() => 
-		__Pregnancy_or_Other_Related_Diagnoses.Value;
+		__Pregnancy_or_Other_Related_Diagnoses?.Value;
 
 	private CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
@@ -397,7 +397,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
 	public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up() => 
-		__Preventive_Care_Services___Established_Office_Visit__18_and_Up.Value;
+		__Preventive_Care_Services___Established_Office_Visit__18_and_Up?.Value;
 
 	private CqlValueSet Preventive_Care_Services___Other_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1030", null);
@@ -405,7 +405,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Preventive Care Services - Other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1030")]
 	public CqlValueSet Preventive_Care_Services___Other() => 
-		__Preventive_Care_Services___Other.Value;
+		__Preventive_Care_Services___Other?.Value;
 
 	private CqlValueSet Preventive_Care_Services_Individual_Counseling_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", null);
@@ -413,7 +413,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Preventive Care Services-Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
 	public CqlValueSet Preventive_Care_Services_Individual_Counseling() => 
-		__Preventive_Care_Services_Individual_Counseling.Value;
+		__Preventive_Care_Services_Individual_Counseling?.Value;
 
 	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
@@ -421,7 +421,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
 	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
-		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
+		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up?.Value;
 
 	private CqlValueSet Rhabdomyolysis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.102", null);
@@ -429,7 +429,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Rhabdomyolysis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.102")]
 	public CqlValueSet Rhabdomyolysis() => 
-		__Rhabdomyolysis.Value;
+		__Rhabdomyolysis?.Value;
 
 	private CqlValueSet Stable_and_Unstable_Angina_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.47", null);
@@ -437,7 +437,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Stable and Unstable Angina")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.47")]
 	public CqlValueSet Stable_and_Unstable_Angina() => 
-		__Stable_and_Unstable_Angina.Value;
+		__Stable_and_Unstable_Angina?.Value;
 
 	private CqlValueSet Statin_Allergen_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.42", null);
@@ -445,7 +445,7 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Statin Allergen")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.42")]
 	public CqlValueSet Statin_Allergen() => 
-		__Statin_Allergen.Value;
+		__Statin_Allergen?.Value;
 
 	private CqlValueSet Statin_Associated_Muscle_Symptoms_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.85", null);
@@ -453,14 +453,14 @@ public class FHIR347_0_1_021
     [CqlDeclaration("Statin Associated Muscle Symptoms")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.85")]
 	public CqlValueSet Statin_Associated_Muscle_Symptoms() => 
-		__Statin_Associated_Muscle_Symptoms.Value;
+		__Statin_Associated_Muscle_Symptoms?.Value;
 
 	private CqlCode Encounter_for_palliative_care_Value() => 
 		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null);
 
     [CqlDeclaration("Encounter for palliative care")]
 	public CqlCode Encounter_for_palliative_care() => 
-		__Encounter_for_palliative_care.Value;
+		__Encounter_for_palliative_care?.Value;
 
 	private CqlCode[] ICD10CM_Value()
 	{
@@ -474,7 +474,7 @@ public class FHIR347_0_1_021
 
     [CqlDeclaration("ICD10CM")]
 	public CqlCode[] ICD10CM() => 
-		__ICD10CM.Value;
+		__ICD10CM?.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
@@ -485,144 +485,144 @@ public class FHIR347_0_1_021
 
     [CqlDeclaration("Measurement Period")]
 	public CqlInterval<CqlDateTime> Measurement_Period() => 
-		__Measurement_Period.Value;
+		__Measurement_Period?.Value;
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context?.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient.Value;
+		__Patient?.Value;
 
 	private IEnumerable<object> ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period_Value()
 	{
 		var a_ = this.Myocardial_Infarction();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Cerebrovascular_Disease__Stroke__TIA();
-		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.Union<Condition>(b_, d_);
+		var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, null);
+		var e_ = context?.Operators.Union<Condition>(b_, d_);
 		var f_ = this.Atherosclerosis_and_Peripheral_Arterial_Disease();
-		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
+		var g_ = context?.Operators.RetrieveByValueSet<Condition>(f_, null);
 		var h_ = this.Ischemic_Heart_Disease_or_Other_Related_Diagnoses();
-		var i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
-		var j_ = context.Operators.Union<Condition>(g_, i_);
-		var k_ = context.Operators.Union<Condition>(e_, j_);
+		var i_ = context?.Operators.RetrieveByValueSet<Condition>(h_, null);
+		var j_ = context?.Operators.Union<Condition>(g_, i_);
+		var k_ = context?.Operators.Union<Condition>(e_, j_);
 		var l_ = this.Stable_and_Unstable_Angina();
-		var m_ = context.Operators.RetrieveByValueSet<Condition>(l_, null);
-		var n_ = context.Operators.Union<Condition>(k_, m_);
+		var m_ = context?.Operators.RetrieveByValueSet<Condition>(l_, null);
+		var n_ = context?.Operators.Union<Condition>(k_, m_);
 		bool? o_(Condition ASCVDDiagnosis)
 		{
 			var ae_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ASCVDDiagnosis);
-			var af_ = context.Operators.Start(ae_);
+			var af_ = context?.Operators.Start(ae_);
 			var ag_ = this.Measurement_Period();
-			var ah_ = context.Operators.End(ag_);
-			var ai_ = context.Operators.Before(af_, ah_, null);
+			var ah_ = context?.Operators.End(ag_);
+			var ai_ = context?.Operators.Before(af_, ah_, null);
 
 			return ai_;
 		};
-		var p_ = context.Operators.Where<Condition>(n_, o_);
+		var p_ = context?.Operators.Where<Condition>(n_, o_);
 		var q_ = this.PCI();
-		var r_ = context.Operators.RetrieveByValueSet<Procedure>(q_, null);
+		var r_ = context?.Operators.RetrieveByValueSet<Procedure>(q_, null);
 		var s_ = this.CABG_Surgeries();
-		var t_ = context.Operators.RetrieveByValueSet<Procedure>(s_, null);
-		var u_ = context.Operators.Union<Procedure>(r_, t_);
+		var t_ = context?.Operators.RetrieveByValueSet<Procedure>(s_, null);
+		var u_ = context?.Operators.Union<Procedure>(r_, t_);
 		var v_ = this.Carotid_Intervention();
-		var w_ = context.Operators.RetrieveByValueSet<Procedure>(v_, null);
+		var w_ = context?.Operators.RetrieveByValueSet<Procedure>(v_, null);
 		var x_ = this.CABG__PCI_Procedure();
-		var y_ = context.Operators.RetrieveByValueSet<Procedure>(x_, null);
-		var z_ = context.Operators.Union<Procedure>(w_, y_);
-		var aa_ = context.Operators.Union<Procedure>(u_, z_);
+		var y_ = context?.Operators.RetrieveByValueSet<Procedure>(x_, null);
+		var z_ = context?.Operators.Union<Procedure>(w_, y_);
+		var aa_ = context?.Operators.Union<Procedure>(u_, z_);
 		bool? ab_(Procedure ASCVDProcedure)
 		{
 			var aj_ = ASCVDProcedure.Performed;
 			var ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aj_);
-			var al_ = context.Operators.Start(ak_);
+			var al_ = context?.Operators.Start(ak_);
 			var am_ = this.Measurement_Period();
-			var an_ = context.Operators.End(am_);
-			var ao_ = context.Operators.Before(al_, an_, null);
+			var an_ = context?.Operators.End(am_);
+			var ao_ = context?.Operators.Before(al_, an_, null);
 			var ap_ = ASCVDProcedure.StatusElement;
 			var aq_ = FHIRHelpers_4_0_001.ToString(ap_);
-			var ar_ = context.Operators.Equal(aq_, "completed");
-			var as_ = context.Operators.And(ao_, ar_);
+			var ar_ = context?.Operators.Equal(aq_, "completed");
+			var as_ = context?.Operators.And(ao_, ar_);
 
 			return as_;
 		};
-		var ac_ = context.Operators.Where<Procedure>(aa_, ab_);
-		var ad_ = context.Operators.Union<object>((p_ as IEnumerable<object>), (ac_ as IEnumerable<object>));
+		var ac_ = context?.Operators.Where<Procedure>(aa_, ab_);
+		var ad_ = context?.Operators.Union<object>((p_ as IEnumerable<object>), (ac_ as IEnumerable<object>));
 
 		return ad_;
 	}
 
     [CqlDeclaration("ASCVD Diagnosis or Procedure before End of Measurement Period")]
 	public IEnumerable<object> ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period() => 
-		__ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period.Value;
+		__ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period?.Value;
 
 	private IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period_Value()
 	{
 		var a_ = this.Annual_Wellness_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		var c_ = this.Office_Visit();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.Union<Encounter>(b_, d_);
+		var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		var e_ = context?.Operators.Union<Encounter>(b_, d_);
 		var f_ = this.Outpatient_Consultation();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		var h_ = this.Outpatient_Encounters_for_Preventive_Care();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.Union<Encounter>(g_, i_);
-		var k_ = context.Operators.Union<Encounter>(e_, j_);
+		var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		var j_ = context?.Operators.Union<Encounter>(g_, i_);
+		var k_ = context?.Operators.Union<Encounter>(e_, j_);
 		var l_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, null);
 		var n_ = this.Preventive_Care_Services___Other();
-		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.Union<Encounter>(m_, o_);
-		var q_ = context.Operators.Union<Encounter>(k_, p_);
+		var o_ = context?.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		var p_ = context?.Operators.Union<Encounter>(m_, o_);
+		var q_ = context?.Operators.Union<Encounter>(k_, p_);
 		var r_ = this.Preventive_Care_Services_Individual_Counseling();
-		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
+		var s_ = context?.Operators.RetrieveByValueSet<Encounter>(r_, null);
 		var t_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.Union<Encounter>(s_, u_);
-		var w_ = context.Operators.Union<Encounter>(q_, v_);
+		var u_ = context?.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		var v_ = context?.Operators.Union<Encounter>(s_, u_);
+		var w_ = context?.Operators.Union<Encounter>(q_, v_);
 		bool? x_(Encounter ValidEncounter)
 		{
 			var z_ = this.Measurement_Period();
 			var aa_ = ValidEncounter.Period;
 			var ab_ = FHIRHelpers_4_0_001.ToInterval(aa_);
-			var ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, null);
+			var ac_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, null);
 			var ad_ = ValidEncounter.StatusElement;
 			var ae_ = FHIRHelpers_4_0_001.ToString(ad_);
-			var af_ = context.Operators.Equal(ae_, "finished");
-			var ag_ = context.Operators.And(ac_, af_);
+			var af_ = context?.Operators.Equal(ae_, "finished");
+			var ag_ = context?.Operators.And(ac_, af_);
 
 			return ag_;
 		};
-		var y_ = context.Operators.Where<Encounter>(w_, x_);
+		var y_ = context?.Operators.Where<Encounter>(w_, x_);
 
 		return y_;
 	}
 
     [CqlDeclaration("Qualifying Encounter during Measurement Period")]
 	public IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period() => 
-		__Qualifying_Encounter_during_Measurement_Period.Value;
+		__Qualifying_Encounter_during_Measurement_Period?.Value;
 
 	private bool? Initial_Population_1_Value()
 	{
 		var a_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-		var b_ = context.Operators.Exists<object>(a_);
+		var b_ = context?.Operators.Exists<object>(a_);
 		var c_ = this.Qualifying_Encounter_during_Measurement_Period();
-		var d_ = context.Operators.Exists<Encounter>(c_);
-		var e_ = context.Operators.And(b_, d_);
+		var d_ = context?.Operators.Exists<Encounter>(c_);
+		var e_ = context?.Operators.And(b_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Initial Population 1")]
 	public bool? Initial_Population_1() => 
-		__Initial_Population_1.Value;
+		__Initial_Population_1?.Value;
 
 	private bool? Denominator_1_Value()
 	{
@@ -633,41 +633,41 @@ public class FHIR347_0_1_021
 
     [CqlDeclaration("Denominator 1")]
 	public bool? Denominator_1() => 
-		__Denominator_1.Value;
+		__Denominator_1?.Value;
 
 	private bool? Patients_Age_20_or_Older_at_Start_of_Measurement_Period_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDateTime(a_.BirthDateElement.Value);
+		var b_ = context?.Operators.ConvertStringToDateTime(a_.BirthDateElement.Value);
 		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.CalculateAgeAt(b_, d_, "year");
-		var f_ = context.Operators.GreaterOrEqual(e_, 20);
+		var d_ = context?.Operators.Start(c_);
+		var e_ = context?.Operators.CalculateAgeAt(b_, d_, "year");
+		var f_ = context?.Operators.GreaterOrEqual(e_, 20);
 
 		return f_;
 	}
 
     [CqlDeclaration("Patients Age 20 or Older at Start of Measurement Period")]
 	public bool? Patients_Age_20_or_Older_at_Start_of_Measurement_Period() => 
-		__Patients_Age_20_or_Older_at_Start_of_Measurement_Period.Value;
+		__Patients_Age_20_or_Older_at_Start_of_Measurement_Period?.Value;
 
 	private IEnumerable<Observation> LDL_Result_Greater_Than_or_Equal_To_190_Value()
 	{
 		var a_ = this.LDL_Cholesterol();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation LDL)
 		{
 			var e_ = LDL.Value;
 			var f_ = FHIRHelpers_4_0_001.ToQuantity((e_ as Quantity));
-			var g_ = context.Operators.Quantity(190m, "mg/dL");
-			var h_ = context.Operators.GreaterOrEqual(f_, g_);
+			var g_ = context?.Operators.Quantity(190m, "mg/dL");
+			var h_ = context?.Operators.GreaterOrEqual(f_, g_);
 			var i_ = LDL.Effective;
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(i_);
-			var k_ = context.Operators.Start(j_);
+			var k_ = context?.Operators.Start(j_);
 			var l_ = this.Measurement_Period();
-			var m_ = context.Operators.End(l_);
-			var n_ = context.Operators.Before(k_, m_, null);
-			var o_ = context.Operators.And(h_, n_);
+			var m_ = context?.Operators.End(l_);
+			var n_ = context?.Operators.Before(k_, m_, null);
+			var o_ = context?.Operators.And(h_, n_);
 			var p_ = LDL.StatusElement;
 			var q_ = FHIRHelpers_4_0_001.ToString(p_);
 			var r_ = new string[]
@@ -677,76 +677,76 @@ public class FHIR347_0_1_021
 				"corrected",
 				"appended",
 			};
-			var s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
-			var t_ = context.Operators.And(o_, s_);
+			var s_ = context?.Operators.In<string>(q_, (r_ as IEnumerable<string>));
+			var t_ = context?.Operators.And(o_, s_);
 
 			return t_;
 		};
-		var d_ = context.Operators.Where<Observation>(b_, c_);
+		var d_ = context?.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("LDL Result Greater Than or Equal To 190")]
 	public IEnumerable<Observation> LDL_Result_Greater_Than_or_Equal_To_190() => 
-		__LDL_Result_Greater_Than_or_Equal_To_190.Value;
+		__LDL_Result_Greater_Than_or_Equal_To_190?.Value;
 
 	private IEnumerable<Condition> Hypercholesterolemia_Diagnosis_Value()
 	{
 		var a_ = this.Hypercholesterolemia();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition Hypercholesterolemia)
 		{
 			var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Hypercholesterolemia);
-			var f_ = context.Operators.Start(e_);
+			var f_ = context?.Operators.Start(e_);
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.End(g_);
-			var i_ = context.Operators.Before(f_, h_, null);
+			var h_ = context?.Operators.End(g_);
+			var i_ = context?.Operators.Before(f_, h_, null);
 
 			return i_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
+		var d_ = context?.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Hypercholesterolemia Diagnosis")]
 	public IEnumerable<Condition> Hypercholesterolemia_Diagnosis() => 
-		__Hypercholesterolemia_Diagnosis.Value;
+		__Hypercholesterolemia_Diagnosis?.Value;
 
 	private bool? Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD_Value()
 	{
 		var a_ = this.Patients_Age_20_or_Older_at_Start_of_Measurement_Period();
 		var b_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
 		var c_ = this.Hypercholesterolemia_Diagnosis();
-		var d_ = context.Operators.Union<object>((b_ as IEnumerable<object>), (c_ as IEnumerable<object>));
-		var e_ = context.Operators.Exists<object>(d_);
-		var f_ = context.Operators.And(a_, e_);
+		var d_ = context?.Operators.Union<object>((b_ as IEnumerable<object>), (c_ as IEnumerable<object>));
+		var e_ = context?.Operators.Exists<object>(d_);
+		var f_ = context?.Operators.And(a_, e_);
 		var g_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-		var h_ = context.Operators.Exists<object>(g_);
-		var i_ = context.Operators.Not(h_);
-		var j_ = context.Operators.And(f_, i_);
+		var h_ = context?.Operators.Exists<object>(g_);
+		var i_ = context?.Operators.Not(h_);
+		var j_ = context?.Operators.And(f_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Patients Age 20 Years and Older with LDL Cholesterol Result Greater than or Equal to 190 or Hypercholesterolemia without ASCVD")]
 	public bool? Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD() => 
-		__Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD.Value;
+		__Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD?.Value;
 
 	private bool? Initial_Population_2_Value()
 	{
 		var a_ = this.Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD();
 		var b_ = this.Qualifying_Encounter_during_Measurement_Period();
-		var c_ = context.Operators.Exists<Encounter>(b_);
-		var d_ = context.Operators.And(a_, c_);
+		var c_ = context?.Operators.Exists<Encounter>(b_);
+		var d_ = context?.Operators.And(a_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Initial Population 2")]
 	public bool? Initial_Population_2() => 
-		__Initial_Population_2.Value;
+		__Initial_Population_2?.Value;
 
 	private bool? Denominator_2_Value()
 	{
@@ -757,74 +757,74 @@ public class FHIR347_0_1_021
 
     [CqlDeclaration("Denominator 2")]
 	public bool? Denominator_2() => 
-		__Denominator_2.Value;
+		__Denominator_2?.Value;
 
 	private bool? Has_Diabetes_Diagnosis_Value()
 	{
 		var a_ = this.Diabetes();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition Diabetes)
 		{
 			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.Overlaps(f_, g_, null);
+			var h_ = context?.Operators.Overlaps(f_, g_, null);
 
 			return h_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
-		var e_ = context.Operators.Exists<Condition>(d_);
+		var d_ = context?.Operators.Where<Condition>(b_, c_);
+		var e_ = context?.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Has Diabetes Diagnosis")]
 	public bool? Has_Diabetes_Diagnosis() => 
-		__Has_Diabetes_Diagnosis.Value;
+		__Has_Diabetes_Diagnosis?.Value;
 
 	private bool? Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDateTime(a_.BirthDateElement.Value);
+		var b_ = context?.Operators.ConvertStringToDateTime(a_.BirthDateElement.Value);
 		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.CalculateAgeAt(b_, d_, "year");
-		var f_ = context.Operators.Interval(40, 75, true, true);
-		var g_ = context.Operators.In<int?>(e_, f_, null);
+		var d_ = context?.Operators.Start(c_);
+		var e_ = context?.Operators.CalculateAgeAt(b_, d_, "year");
+		var f_ = context?.Operators.Interval(40, 75, true, true);
+		var g_ = context?.Operators.In<int?>(e_, f_, null);
 		var h_ = this.Has_Diabetes_Diagnosis();
-		var i_ = context.Operators.And(g_, h_);
+		var i_ = context?.Operators.And(g_, h_);
 		var j_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-		var k_ = context.Operators.Exists<object>(j_);
-		var l_ = context.Operators.Not(k_);
-		var m_ = context.Operators.And(i_, l_);
+		var k_ = context?.Operators.Exists<object>(j_);
+		var l_ = context?.Operators.Not(k_);
+		var m_ = context?.Operators.And(i_, l_);
 		var n_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
-		var o_ = context.Operators.Exists<Observation>(n_);
-		var p_ = context.Operators.Not(o_);
-		var q_ = context.Operators.And(m_, p_);
+		var o_ = context?.Operators.Exists<Observation>(n_);
+		var p_ = context?.Operators.Not(o_);
+		var q_ = context?.Operators.And(m_, p_);
 		var r_ = this.Hypercholesterolemia_Diagnosis();
-		var s_ = context.Operators.Exists<Condition>(r_);
-		var t_ = context.Operators.Not(s_);
-		var u_ = context.Operators.And(q_, t_);
+		var s_ = context?.Operators.Exists<Condition>(r_);
+		var t_ = context?.Operators.Not(s_);
+		var u_ = context?.Operators.And(q_, t_);
 
 		return u_;
 	}
 
     [CqlDeclaration("Patients Age 40 to 75 Years with Diabetes without ASCVD or LDL Greater than 190 or Hypercholesterolemia")]
 	public bool? Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia() => 
-		__Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia.Value;
+		__Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia?.Value;
 
 	private bool? Initial_Population_3_Value()
 	{
 		var a_ = this.Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia();
 		var b_ = this.Qualifying_Encounter_during_Measurement_Period();
-		var c_ = context.Operators.Exists<Encounter>(b_);
-		var d_ = context.Operators.And(a_, c_);
+		var c_ = context?.Operators.Exists<Encounter>(b_);
+		var d_ = context?.Operators.And(a_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Initial Population 3")]
 	public bool? Initial_Population_3() => 
-		__Initial_Population_3.Value;
+		__Initial_Population_3?.Value;
 
 	private bool? Denominator_3_Value()
 	{
@@ -835,7 +835,7 @@ public class FHIR347_0_1_021
 
     [CqlDeclaration("Denominator 3")]
 	public bool? Denominator_3() => 
-		__Denominator_3.Value;
+		__Denominator_3?.Value;
 
 	private IEnumerable<Coding> SDE_Ethnicity_Value()
 	{
@@ -846,7 +846,7 @@ public class FHIR347_0_1_021
 
     [CqlDeclaration("SDE Ethnicity")]
 	public IEnumerable<Coding> SDE_Ethnicity() => 
-		__SDE_Ethnicity.Value;
+		__SDE_Ethnicity?.Value;
 
 	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
@@ -857,7 +857,7 @@ public class FHIR347_0_1_021
 
     [CqlDeclaration("SDE Payer")]
 	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
-		__SDE_Payer.Value;
+		__SDE_Payer?.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
 	{
@@ -868,7 +868,7 @@ public class FHIR347_0_1_021
 
     [CqlDeclaration("SDE Race")]
 	public IEnumerable<Coding> SDE_Race() => 
-		__SDE_Race.Value;
+		__SDE_Race?.Value;
 
 	private CqlCode SDE_Sex_Value()
 	{
@@ -879,47 +879,47 @@ public class FHIR347_0_1_021
 
     [CqlDeclaration("SDE Sex")]
 	public CqlCode SDE_Sex() => 
-		__SDE_Sex.Value;
+		__SDE_Sex?.Value;
 
 	private bool? Has_Allergy_to_Statin_Value()
 	{
 		var a_ = this.Statin_Allergen();
-		var b_ = context.Operators.RetrieveByValueSet<AllergyIntolerance>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<AllergyIntolerance>(a_, null);
 		bool? c_(AllergyIntolerance StatinAllergy)
 		{
 			var f_ = StatinAllergy.Onset;
 			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(f_);
-			var h_ = context.Operators.Start(g_);
+			var h_ = context?.Operators.Start(g_);
 			var i_ = this.Measurement_Period();
-			var j_ = context.Operators.End(i_);
-			var k_ = context.Operators.Before(h_, j_, null);
+			var j_ = context?.Operators.End(i_);
+			var k_ = context?.Operators.Before(h_, j_, null);
 
 			return k_;
 		};
-		var d_ = context.Operators.Where<AllergyIntolerance>(b_, c_);
-		var e_ = context.Operators.Exists<AllergyIntolerance>(d_);
+		var d_ = context?.Operators.Where<AllergyIntolerance>(b_, c_);
+		var e_ = context?.Operators.Exists<AllergyIntolerance>(d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Has Allergy to Statin")]
 	public bool? Has_Allergy_to_Statin() => 
-		__Has_Allergy_to_Statin.Value;
+		__Has_Allergy_to_Statin?.Value;
 
 	private bool? Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care_Value()
 	{
 		var a_ = this.Hospice_Care_Ambulatory();
-		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		var c_ = this.Palliative_or_Hospice_Care();
-		var d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(c_, null);
-		var e_ = context.Operators.Union<ServiceRequest>(b_, d_);
+		var d_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(c_, null);
+		var e_ = context?.Operators.Union<ServiceRequest>(b_, d_);
 		bool? f_(ServiceRequest PalliativeOrHospiceCareOrder)
 		{
 			var y_ = PalliativeOrHospiceCareOrder.AuthoredOnElement;
 			var z_ = FHIRHelpers_4_0_001.ToDateTime(y_);
 			var aa_ = this.Measurement_Period();
-			var ab_ = context.Operators.End(aa_);
-			var ac_ = context.Operators.SameOrBefore(z_, ab_, null);
+			var ab_ = context?.Operators.End(aa_);
+			var ac_ = context?.Operators.SameOrBefore(z_, ab_, null);
 			var ad_ = PalliativeOrHospiceCareOrder.StatusElement;
 			var ae_ = FHIRHelpers_4_0_001.ToString(ad_);
 			var af_ = new string[]
@@ -928,235 +928,235 @@ public class FHIR347_0_1_021
 				"on-hold",
 				"completed",
 			};
-			var ag_ = context.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
-			var ah_ = context.Operators.And(ac_, ag_);
+			var ag_ = context?.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
+			var ah_ = context?.Operators.And(ac_, ag_);
 			var ai_ = PalliativeOrHospiceCareOrder.IntentElement;
 			var aj_ = FHIRHelpers_4_0_001.ToString(ai_);
-			var ak_ = context.Operators.Equal(aj_, "order");
-			var al_ = context.Operators.And(ah_, ak_);
+			var ak_ = context?.Operators.Equal(aj_, "order");
+			var al_ = context?.Operators.And(ah_, ak_);
 
 			return al_;
 		};
-		var g_ = context.Operators.Where<ServiceRequest>(e_, f_);
-		var h_ = context.Operators.Exists<ServiceRequest>(g_);
-		var j_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		var l_ = context.Operators.RetrieveByValueSet<Procedure>(c_, null);
-		var m_ = context.Operators.Union<Procedure>(j_, l_);
+		var g_ = context?.Operators.Where<ServiceRequest>(e_, f_);
+		var h_ = context?.Operators.Exists<ServiceRequest>(g_);
+		var j_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		var l_ = context?.Operators.RetrieveByValueSet<Procedure>(c_, null);
+		var m_ = context?.Operators.Union<Procedure>(j_, l_);
 		bool? n_(Procedure PalliativeOrHospiceCarePerformed)
 		{
 			var am_ = PalliativeOrHospiceCarePerformed.Performed;
 			var an_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(am_);
-			var ao_ = context.Operators.Start(an_);
+			var ao_ = context?.Operators.Start(an_);
 			var ap_ = this.Measurement_Period();
-			var aq_ = context.Operators.End(ap_);
-			var ar_ = context.Operators.SameOrBefore(ao_, aq_, null);
+			var aq_ = context?.Operators.End(ap_);
+			var ar_ = context?.Operators.SameOrBefore(ao_, aq_, null);
 			var as_ = PalliativeOrHospiceCarePerformed.StatusElement;
 			var at_ = FHIRHelpers_4_0_001.ToString(as_);
-			var au_ = context.Operators.Equal(at_, "completed");
-			var av_ = context.Operators.And(ar_, au_);
+			var au_ = context?.Operators.Equal(at_, "completed");
+			var av_ = context?.Operators.And(ar_, au_);
 
 			return av_;
 		};
-		var o_ = context.Operators.Where<Procedure>(m_, n_);
-		var p_ = context.Operators.Exists<Procedure>(o_);
-		var q_ = context.Operators.Or(h_, p_);
+		var o_ = context?.Operators.Where<Procedure>(m_, n_);
+		var p_ = context?.Operators.Exists<Procedure>(o_);
+		var q_ = context?.Operators.Or(h_, p_);
 		var r_ = this.Encounter_for_palliative_care();
-		var s_ = context.Operators.ToList<CqlCode>(r_);
-		var t_ = context.Operators.RetrieveByCodes<Encounter>(s_, null);
+		var s_ = context?.Operators.ToList<CqlCode>(r_);
+		var t_ = context?.Operators.RetrieveByCodes<Encounter>(s_, null);
 		bool? u_(Encounter PalliativeEncounter)
 		{
 			var aw_ = PalliativeEncounter.Period;
 			var ax_ = FHIRHelpers_4_0_001.ToInterval(aw_);
-			var ay_ = context.Operators.Start(ax_);
+			var ay_ = context?.Operators.Start(ax_);
 			var az_ = this.Measurement_Period();
-			var ba_ = context.Operators.End(az_);
-			var bb_ = context.Operators.SameOrBefore(ay_, ba_, null);
+			var ba_ = context?.Operators.End(az_);
+			var bb_ = context?.Operators.SameOrBefore(ay_, ba_, null);
 			var bc_ = PalliativeEncounter.StatusElement;
 			var bd_ = FHIRHelpers_4_0_001.ToString(bc_);
-			var be_ = context.Operators.Equal(bd_, "finished");
-			var bf_ = context.Operators.And(bb_, be_);
+			var be_ = context?.Operators.Equal(bd_, "finished");
+			var bf_ = context?.Operators.And(bb_, be_);
 
 			return bf_;
 		};
-		var v_ = context.Operators.Where<Encounter>(t_, u_);
-		var w_ = context.Operators.Exists<Encounter>(v_);
-		var x_ = context.Operators.Or(q_, w_);
+		var v_ = context?.Operators.Where<Encounter>(t_, u_);
+		var w_ = context?.Operators.Exists<Encounter>(v_);
+		var x_ = context?.Operators.Or(q_, w_);
 
 		return x_;
 	}
 
     [CqlDeclaration("Has Order or Receiving Hospice Care or Palliative Care")]
 	public bool? Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care() => 
-		__Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care.Value;
+		__Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care?.Value;
 
 	private bool? Has_Hepatitis_or_Liver_Disease_Diagnosis_Value()
 	{
 		var a_ = this.Hepatitis_A();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Hepatitis_B();
-		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.Union<Condition>(b_, d_);
+		var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, null);
+		var e_ = context?.Operators.Union<Condition>(b_, d_);
 		var f_ = this.Liver_Disease();
-		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-		var h_ = context.Operators.Union<Condition>(e_, g_);
+		var g_ = context?.Operators.RetrieveByValueSet<Condition>(f_, null);
+		var h_ = context?.Operators.Union<Condition>(e_, g_);
 		bool? i_(Condition HepatitisLiverDisease)
 		{
 			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(HepatitisLiverDisease);
 			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.Overlaps(l_, m_, null);
+			var n_ = context?.Operators.Overlaps(l_, m_, null);
 
 			return n_;
 		};
-		var j_ = context.Operators.Where<Condition>(h_, i_);
-		var k_ = context.Operators.Exists<Condition>(j_);
+		var j_ = context?.Operators.Where<Condition>(h_, i_);
+		var k_ = context?.Operators.Exists<Condition>(j_);
 
 		return k_;
 	}
 
     [CqlDeclaration("Has Hepatitis or Liver Disease Diagnosis")]
 	public bool? Has_Hepatitis_or_Liver_Disease_Diagnosis() => 
-		__Has_Hepatitis_or_Liver_Disease_Diagnosis.Value;
+		__Has_Hepatitis_or_Liver_Disease_Diagnosis?.Value;
 
 	private bool? Has_Statin_Associated_Muscle_Symptoms_Value()
 	{
 		var a_ = this.Statin_Associated_Muscle_Symptoms();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition StatinMuscleSymptom)
 		{
 			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(StatinMuscleSymptom);
-			var g_ = context.Operators.Start(f_);
+			var g_ = context?.Operators.Start(f_);
 			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.End(h_);
-			var j_ = context.Operators.Before(g_, i_, null);
+			var i_ = context?.Operators.End(h_);
+			var j_ = context?.Operators.Before(g_, i_, null);
 
 			return j_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
-		var e_ = context.Operators.Exists<Condition>(d_);
+		var d_ = context?.Operators.Where<Condition>(b_, c_);
+		var e_ = context?.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Has Statin Associated Muscle Symptoms")]
 	public bool? Has_Statin_Associated_Muscle_Symptoms() => 
-		__Has_Statin_Associated_Muscle_Symptoms.Value;
+		__Has_Statin_Associated_Muscle_Symptoms?.Value;
 
 	private bool? Has_ESRD_Diagnosis_Value()
 	{
 		var a_ = this.End_Stage_Renal_Disease();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition ESRD)
 		{
 			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ESRD);
 			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.Overlaps(f_, g_, null);
+			var h_ = context?.Operators.Overlaps(f_, g_, null);
 
 			return h_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
-		var e_ = context.Operators.Exists<Condition>(d_);
+		var d_ = context?.Operators.Where<Condition>(b_, c_);
+		var e_ = context?.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Has ESRD Diagnosis")]
 	public bool? Has_ESRD_Diagnosis() => 
-		__Has_ESRD_Diagnosis.Value;
+		__Has_ESRD_Diagnosis?.Value;
 
 	private bool? Has_Adverse_Reaction_to_Statin_Value()
 	{
 		var a_ = this.Statin_Allergen();
-		var b_ = context.Operators.RetrieveByValueSet<AdverseEvent>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<AdverseEvent>(a_, null);
 		bool? c_(AdverseEvent StatinReaction)
 		{
 			var f_ = StatinReaction.DateElement;
 			var g_ = FHIRHelpers_4_0_001.ToDateTime(f_);
 			var h_ = this.Measurement_Period();
-			var i_ = context.Operators.In<CqlDateTime>(g_, h_, null);
+			var i_ = context?.Operators.In<CqlDateTime>(g_, h_, null);
 
 			return i_;
 		};
-		var d_ = context.Operators.Where<AdverseEvent>(b_, c_);
-		var e_ = context.Operators.Exists<AdverseEvent>(d_);
+		var d_ = context?.Operators.Where<AdverseEvent>(b_, c_);
+		var e_ = context?.Operators.Exists<AdverseEvent>(d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Has Adverse Reaction to Statin")]
 	public bool? Has_Adverse_Reaction_to_Statin() => 
-		__Has_Adverse_Reaction_to_Statin.Value;
+		__Has_Adverse_Reaction_to_Statin?.Value;
 
 	private bool? Denominator_Exceptions_Value()
 	{
 		var a_ = this.Has_Allergy_to_Statin();
 		var b_ = this.Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care();
-		var c_ = context.Operators.Or(a_, b_);
+		var c_ = context?.Operators.Or(a_, b_);
 		var d_ = this.Has_Hepatitis_or_Liver_Disease_Diagnosis();
-		var e_ = context.Operators.Or(c_, d_);
+		var e_ = context?.Operators.Or(c_, d_);
 		var f_ = this.Has_Statin_Associated_Muscle_Symptoms();
-		var g_ = context.Operators.Or(e_, f_);
+		var g_ = context?.Operators.Or(e_, f_);
 		var h_ = this.Has_ESRD_Diagnosis();
-		var i_ = context.Operators.Or(g_, h_);
+		var i_ = context?.Operators.Or(g_, h_);
 		var j_ = this.Has_Adverse_Reaction_to_Statin();
-		var k_ = context.Operators.Or(i_, j_);
+		var k_ = context?.Operators.Or(i_, j_);
 
 		return k_;
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
 	public bool? Denominator_Exceptions() => 
-		__Denominator_Exceptions.Value;
+		__Denominator_Exceptions?.Value;
 
 	private bool? Denominator_Exclusions_Value()
 	{
 		var a_ = this.Pregnancy_or_Other_Related_Diagnoses();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		var c_ = this.Breastfeeding();
-		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.Union<Condition>(b_, d_);
+		var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, null);
+		var e_ = context?.Operators.Union<Condition>(b_, d_);
 		var f_ = this.Rhabdomyolysis();
-		var g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
-		var h_ = context.Operators.Union<Condition>(e_, g_);
+		var g_ = context?.Operators.RetrieveByValueSet<Condition>(f_, null);
+		var h_ = context?.Operators.Union<Condition>(e_, g_);
 		bool? i_(Condition ExclusionDiagnosis)
 		{
 			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ExclusionDiagnosis);
 			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.Overlaps(l_, m_, null);
+			var n_ = context?.Operators.Overlaps(l_, m_, null);
 
 			return n_;
 		};
-		var j_ = context.Operators.Where<Condition>(h_, i_);
-		var k_ = context.Operators.Exists<Condition>(j_);
+		var j_ = context?.Operators.Where<Condition>(h_, i_);
+		var k_ = context?.Operators.Exists<Condition>(j_);
 
 		return k_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
 	public bool? Denominator_Exclusions() => 
-		__Denominator_Exclusions.Value;
+		__Denominator_Exclusions?.Value;
 
 	private IEnumerable<MedicationRequest> Statin_Therapy_Ordered_during_Measurement_Period_Value()
 	{
 		var a_ = this.Low_Intensity_Statin_Therapy();
-		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
+		var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context?.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = this.Moderate_Intensity_Statin_Therapy();
-		var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var j_ = context.Operators.Union<MedicationRequest>(g_, i_);
-		var k_ = context.Operators.Union<MedicationRequest>(e_, j_);
+		var g_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		var i_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		var j_ = context?.Operators.Union<MedicationRequest>(g_, i_);
+		var k_ = context?.Operators.Union<MedicationRequest>(e_, j_);
 		var l_ = this.High_Intensity_Statin_Therapy();
-		var m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var p_ = context.Operators.Union<MedicationRequest>(m_, o_);
-		var q_ = context.Operators.Union<MedicationRequest>(k_, p_);
+		var m_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		var o_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		var p_ = context?.Operators.Union<MedicationRequest>(m_, o_);
+		var q_ = context?.Operators.Union<MedicationRequest>(k_, p_);
 		bool? r_(MedicationRequest StatinOrdered)
 		{
 			var t_ = StatinOrdered.AuthoredOnElement;
 			var u_ = FHIRHelpers_4_0_001.ToDateTime(t_);
 			var v_ = this.Measurement_Period();
-			var w_ = context.Operators.In<CqlDateTime>(u_, v_, null);
+			var w_ = context?.Operators.In<CqlDateTime>(u_, v_, null);
 			var x_ = StatinOrdered.StatusElement;
 			var y_ = FHIRHelpers_4_0_001.ToString(x_);
 			var z_ = new string[]
@@ -1164,58 +1164,58 @@ public class FHIR347_0_1_021
 				"active",
 				"completed",
 			};
-			var aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
-			var ab_ = context.Operators.And(w_, aa_);
+			var aa_ = context?.Operators.In<string>(y_, (z_ as IEnumerable<string>));
+			var ab_ = context?.Operators.And(w_, aa_);
 			var ac_ = StatinOrdered.IntentElement;
 			var ad_ = FHIRHelpers_4_0_001.ToString(ac_);
-			var ae_ = context.Operators.Equal(ad_, "order");
-			var af_ = context.Operators.And(ab_, ae_);
+			var ae_ = context?.Operators.Equal(ad_, "order");
+			var af_ = context?.Operators.And(ab_, ae_);
 
 			return af_;
 		};
-		var s_ = context.Operators.Where<MedicationRequest>(q_, r_);
+		var s_ = context?.Operators.Where<MedicationRequest>(q_, r_);
 
 		return s_;
 	}
 
     [CqlDeclaration("Statin Therapy Ordered during Measurement Period")]
 	public IEnumerable<MedicationRequest> Statin_Therapy_Ordered_during_Measurement_Period() => 
-		__Statin_Therapy_Ordered_during_Measurement_Period.Value;
+		__Statin_Therapy_Ordered_during_Measurement_Period?.Value;
 
 	private IEnumerable<MedicationRequest> Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period_Value()
 	{
 		var a_ = this.Low_Intensity_Statin_Therapy();
-		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		var e_ = context.Operators.Union<MedicationRequest>(b_, d_);
+		var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var e_ = context?.Operators.Union<MedicationRequest>(b_, d_);
 		var f_ = this.Moderate_Intensity_Statin_Therapy();
-		var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		var j_ = context.Operators.Union<MedicationRequest>(g_, i_);
-		var k_ = context.Operators.Union<MedicationRequest>(e_, j_);
+		var g_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		var i_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		var j_ = context?.Operators.Union<MedicationRequest>(g_, i_);
+		var k_ = context?.Operators.Union<MedicationRequest>(e_, j_);
 		var l_ = this.High_Intensity_Statin_Therapy();
-		var m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		var p_ = context.Operators.Union<MedicationRequest>(m_, o_);
-		var q_ = context.Operators.Union<MedicationRequest>(k_, p_);
+		var m_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		var o_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		var p_ = context?.Operators.Union<MedicationRequest>(m_, o_);
+		var q_ = context?.Operators.Union<MedicationRequest>(k_, p_);
 		bool? r_(MedicationRequest ActiveStatin)
 		{
 			var t_ = ActiveStatin.DosageInstruction;
 			bool? u_(Dosage @this)
 			{
 				var ag_ = @this.Timing;
-				var ah_ = context.Operators.Not((bool?)(ag_ is null));
+				var ah_ = context?.Operators.Not((bool?)(ag_ is null));
 
 				return ah_;
 			};
-			var v_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)t_, u_);
+			var v_ = context?.Operators.Where<Dosage>((IEnumerable<Dosage>)t_, u_);
 			Timing w_(Dosage @this)
 			{
 				var ai_ = @this.Timing;
 
 				return ai_;
 			};
-			var x_ = context.Operators.Select<Dosage, Timing>(v_, w_);
+			var x_ = context?.Operators.Select<Dosage, Timing>(v_, w_);
 			bool? y_(Timing T)
 			{
 				object aj_()
@@ -1257,12 +1257,12 @@ public class FHIR347_0_1_021
 				};
 				var ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aj_());
 				var al_ = this.Measurement_Period();
-				var am_ = context.Operators.Overlaps(ak_, al_, null);
+				var am_ = context?.Operators.Overlaps(ak_, al_, null);
 
 				return am_;
 			};
-			var z_ = context.Operators.Where<Timing>(x_, y_);
-			var aa_ = context.Operators.Exists<Timing>(z_);
+			var z_ = context?.Operators.Where<Timing>(x_, y_);
+			var aa_ = context?.Operators.Exists<Timing>(z_);
 			var ab_ = ActiveStatin.StatusElement;
 			var ac_ = FHIRHelpers_4_0_001.ToString(ab_);
 			var ad_ = new string[]
@@ -1270,33 +1270,33 @@ public class FHIR347_0_1_021
 				"active",
 				"completed",
 			};
-			var ae_ = context.Operators.In<string>(ac_, (ad_ as IEnumerable<string>));
-			var af_ = context.Operators.And(aa_, ae_);
+			var ae_ = context?.Operators.In<string>(ac_, (ad_ as IEnumerable<string>));
+			var af_ = context?.Operators.And(aa_, ae_);
 
 			return af_;
 		};
-		var s_ = context.Operators.Where<MedicationRequest>(q_, r_);
+		var s_ = context?.Operators.Where<MedicationRequest>(q_, r_);
 
 		return s_;
 	}
 
     [CqlDeclaration("Prescribed Statin Therapy Any Time during Measurement Period")]
 	public IEnumerable<MedicationRequest> Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period() => 
-		__Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period.Value;
+		__Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period?.Value;
 
 	private bool? Numerator_Value()
 	{
 		var a_ = this.Statin_Therapy_Ordered_during_Measurement_Period();
-		var b_ = context.Operators.Exists<MedicationRequest>(a_);
+		var b_ = context?.Operators.Exists<MedicationRequest>(a_);
 		var c_ = this.Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period();
-		var d_ = context.Operators.Exists<MedicationRequest>(c_);
-		var e_ = context.Operators.Or(b_, d_);
+		var d_ = context?.Operators.Exists<MedicationRequest>(c_);
+		var e_ = context?.Operators.Or(b_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Numerator")]
 	public bool? Numerator() => 
-		__Numerator.Value;
+		__Numerator?.Value;
 
 }

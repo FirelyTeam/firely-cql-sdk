@@ -41,15 +41,15 @@ public class NCQAStatus_1_0_0
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context?.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient.Value;
+		__Patient?.Value;
 
     [CqlDeclaration("Active Allergy")]
 	public IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
@@ -59,12 +59,12 @@ public class NCQAStatus_1_0_0
 			var c_ = A.ClinicalStatus;
 			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var e_ = NCQATerminology_1_0_0.allergy_active();
-			var f_ = context.Operators.ConvertCodeToConcept(e_);
-			var g_ = context.Operators.Equal(d_, f_);
+			var f_ = context?.Operators.ConvertCodeToConcept(e_);
+			var g_ = context?.Operators.Equal(d_, f_);
 
 			return g_;
 		};
-		var b_ = context.Operators.Where<AllergyIntolerance>(Allergy, a_);
+		var b_ = context?.Operators.Where<AllergyIntolerance>(Allergy, a_);
 
 		return b_;
 	}
@@ -77,12 +77,12 @@ public class NCQAStatus_1_0_0
 			var c_ = C.ClinicalStatus;
 			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			var e_ = NCQATerminology_1_0_0.active();
-			var f_ = context.Operators.ConvertCodeToConcept(e_);
-			var g_ = context.Operators.Equal(d_, f_);
+			var f_ = context?.Operators.ConvertCodeToConcept(e_);
+			var g_ = context?.Operators.Equal(d_, f_);
 
 			return g_;
 		};
-		var b_ = context.Operators.Where<Condition>(Condition, a_);
+		var b_ = context?.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
@@ -94,11 +94,11 @@ public class NCQAStatus_1_0_0
 		{
 			var c_ = E.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
-			var e_ = context.Operators.Equal(d_, "finished");
+			var e_ = context?.Operators.Equal(d_, "finished");
 
 			return e_;
 		};
-		var b_ = context.Operators.Where<Encounter>(Enc, a_);
+		var b_ = context?.Operators.Where<Encounter>(Enc, a_);
 
 		return b_;
 	}
@@ -110,11 +110,11 @@ public class NCQAStatus_1_0_0
 		{
 			var c_ = I.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
-			var e_ = context.Operators.Equal(d_, "completed");
+			var e_ = context?.Operators.Equal(d_, "completed");
 
 			return e_;
 		};
-		var b_ = context.Operators.Where<Immunization>(Immunization, a_);
+		var b_ = context?.Operators.Where<Immunization>(Immunization, a_);
 
 		return b_;
 	}
@@ -126,11 +126,11 @@ public class NCQAStatus_1_0_0
 		{
 			var c_ = M.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
-			var e_ = context.Operators.Equal(d_, "completed");
+			var e_ = context?.Operators.Equal(d_, "completed");
 
 			return e_;
 		};
-		var b_ = context.Operators.Where<MedicationDispense>(Med, a_);
+		var b_ = context?.Operators.Where<MedicationDispense>(Med, a_);
 
 		return b_;
 	}
@@ -146,11 +146,11 @@ public class NCQAStatus_1_0_0
 			{
 				"completed",
 			};
-			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context?.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
-		var b_ = context.Operators.Where<MedicationRequest>(Med, a_);
+		var b_ = context?.Operators.Where<MedicationRequest>(Med, a_);
 
 		return b_;
 	}
@@ -162,11 +162,11 @@ public class NCQAStatus_1_0_0
 		{
 			var c_ = P.StatusElement;
 			var d_ = FHIRHelpers_4_0_001.ToString(c_);
-			var e_ = context.Operators.Equal(d_, "completed");
+			var e_ = context?.Operators.Equal(d_, "completed");
 
 			return e_;
 		};
-		var b_ = context.Operators.Where<Procedure>(Proc, a_);
+		var b_ = context?.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
@@ -183,11 +183,11 @@ public class NCQAStatus_1_0_0
 				"completed",
 				"in-progress",
 			};
-			var f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
+			var f_ = context?.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
 		};
-		var b_ = context.Operators.Where<Procedure>(Proc, a_);
+		var b_ = context?.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
