@@ -16,13 +16,13 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    internal class ExpressionConverter(
+    internal class ExpressionToCSharpConverter(
         string libraryName,
-        CSharpCodeWriterTypeFormat typeFormat)
+        CSharpCodeWriterTypeFormat typeFormat,
+        TypeToCSharpConverter typeToCSharpConverter)
     {
         public string ConvertExpression(int indent, Expression expression, bool leadingIndent = true)
         {
@@ -151,16 +151,16 @@ namespace Hl7.Cql.CodeGeneration.NET
         private string ConvertNullConditionalMemberExpression(string indentString, NullConditionalMemberExpression nullp)
         {
             var convertExpression = ConvertExpression(0, nullp.MemberExpression.Expression!);
-            bool shouldHaveNullProp = true;//!IsTupleType(nullp.MemberExpression.Expression!.Type);
+            bool shouldHaveNullProp = true;//!ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);
             var memberName = nullp.MemberExpression.Member.Name;
             return $"{indentString}{Parenthesize(convertExpression)}{(shouldHaveNullProp?"?":"")}.{memberName}";
         }
 
-        private static string ConvertConstantExpression(Type constantType, object? value, string? identString = "")
+        private string ConvertConstantExpression(Type constantType, object? value, string? identString = "")
         {
             return $"{identString}{formatValue(constantType, value)}";
 
-            static string formatValue(Type constantType, object? value)
+            string formatValue(Type constantType, object? value)
             {
                 if (value == default)
                 {
@@ -183,7 +183,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     else if (constantType == typeof(decimal?))
                         return ((decimal?)value).Value.ToString(CultureInfo.InvariantCulture) + "m";
                     else if (typeof(Type).IsAssignableFrom(constantType))
-                        return $"typeof({PrettyTypeName((Type)value)})";
+                        return $"typeof({typeToCSharpConverter.ToCSharp((Type)value)})";
                     else
                     {
                         var str = value.ToString()!;
@@ -216,8 +216,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                 { Object: not null } => $"{Parenthesize(ConvertExpression(indent, call.Object, false))}.",
                 { Method.IsStatic: true } ext when ext.Method.IsExtensionMethod() =>
                         $"{Parenthesize(ConvertExpression(indent, call.Arguments[0], false))}.",
-                { Method.IsStatic: true } => $"{PrettyTypeName(call.Method.DeclaringType!)}.",
-                _ => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
+                { Method.IsStatic: true } => $"{typeToCSharpConverter.ToCSharp(call.Method.DeclaringType!)}.",
+                _                         => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
             };
 
             sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}");
@@ -254,10 +254,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             return sb.ToString();
         }
 
-        private static string ConvertDefaultExpression(string leadingIndentString, DefaultExpression de)
+        private string ConvertDefaultExpression(string leadingIndentString, DefaultExpression de)
         {
             var isNullableType = !de.Type.IsValueType || Nullable.GetUnderlyingType(de.Type) is not null;
-            var defaultExpression = isNullableType ? "null" : $"default({PrettyTypeName(de.Type)})";
+            var defaultExpression = isNullableType ? "null" : $"default({typeToCSharpConverter.ToCSharp(de.Type)})";
             return $"{leadingIndentString}{defaultExpression}";
         }
 
@@ -266,7 +266,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             if (typeBinary.NodeType == ExpressionType.TypeIs)
             {
                 var left = ConvertExpression(indent, typeBinary.Expression, false);
-                var type = PrettyTypeName(typeBinary.TypeOperand);
+                var type = typeToCSharpConverter.ToCSharp(typeBinary.TypeOperand);
                 var @is = $"{left} is {type}";
                 return @is;
             }
@@ -288,7 +288,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             conditionalSb.Append(CultureInfo.InvariantCulture, $"{IndentString(indent + 1)}: {ifFalse})");
 
             if (ce.IfTrue.Type != ce.Type || ce.IfFalse.Type != ce.Type)
-                return $"(({PrettyTypeName(ce.Type)}){conditionalSb})";
+                return $"(({typeToCSharpConverter.ToCSharp(ce.Type)}){conditionalSb})";
             else
                 return conditionalSb.ToString();
         }
@@ -338,7 +338,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertMemberInitExpression(int indent, string leadingIndentString, MemberInitExpression memberInit)
         {
-            if (IsTupleType(memberInit.Type))
+            if (typeToCSharpConverter.ShouldUseTupleType(memberInit.Type))
             {
                 var memberValues =
                     memberInit.Bindings
@@ -356,7 +356,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var memberInitSb = new StringBuilder();
             memberInitSb.Append(leadingIndentString);
-            var typeName = PrettyTypeName(memberInit.Type);
+            var typeName = typeToCSharpConverter.ToCSharp(memberInit.Type);
 #pragma warning disable CA1305 // Specify IFormatProvider
             memberInitSb.AppendLine($"new {typeName}");
 #pragma warning restore CA1305 // Specify IFormatProvider
@@ -396,7 +396,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var newArraySb = new StringBuilder();
                         newArraySb.Append(leadingIndentString);
 
-                        var arrayType = PrettyTypeName(newArray.Type);
+                        var arrayType = typeToCSharpConverter.ToCSharp(newArray.Type);
 
 #pragma warning disable CA1305 // Specify IFormatProvider
                         newArraySb.AppendLine($"new {arrayType}");
@@ -420,7 +420,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var newArraySb = new StringBuilder();
                         newArraySb.Append(leadingIndentString);
-                        var arrayType = PrettyTypeName(newArray.Type.GetElementType()!);
+                        var arrayType = typeToCSharpConverter.ToCSharp(newArray.Type.GetElementType()!);
                         var size = ConvertExpression(0, newArray.Expressions[0], false);
 #pragma warning disable CA1305 // Specify IFormatProvider
                         newArraySb.AppendLine($"new {arrayType}[{size}]");
@@ -438,7 +438,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var arguments = @new.Arguments.Select(a => ConvertExpression(0, a));
             var argString = string.Join(", ", arguments);
             var newSb = new StringBuilder();
-            newSb.Append(CultureInfo.InvariantCulture, $"{leadingIndentString}new {PrettyTypeName(@new.Type)}");
+            newSb.Append(CultureInfo.InvariantCulture, $"{leadingIndentString}new {typeToCSharpConverter.ToCSharp(@new.Type)}");
             newSb.Append(CultureInfo.InvariantCulture, $"({argString})");
             return newSb.ToString();
         }
@@ -446,7 +446,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private string ConvertMemberExpression(string leadingIndentString, MemberExpression me)
         {
             var nullProp = me.Expression is not null && Nullable.GetUnderlyingType(me.Expression.Type) != null ? "?" : "";
-            var @object = me.Expression is not null ? ConvertExpression(0, me.Expression) : PrettyTypeName(me.Member.DeclaringType!);
+            var @object = me.Expression is not null ? ConvertExpression(0, me.Expression) : typeToCSharpConverter.ToCSharp(me.Member.DeclaringType!);
             var memberName = EscapeKeywords(me.Member.Name);
             var nullCoalesce = $"{@object}{nullProp}.{memberName}";
             return $"{leadingIndentString}{nullCoalesce}";
@@ -458,7 +458,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
 
-            var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => $"{PrettyTypeName(p.Type)} {EscapeKeywords(p.Name!)}"))})";
+            var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => $"{typeToCSharpConverter.ToCSharp(p.Type)} {EscapeKeywords(p.Name!)}"))})";
             lambdaSb.Append(lambdaParameters);
 
             if (lambda.Body is BlockExpression)
@@ -485,7 +485,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var funcSb = new StringBuilder();
             funcSb.Append(leadingIndentString);
-            funcSb.Append(PrettyTypeName(function.ReturnType) + " ");
+            funcSb.Append(typeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
             funcSb.Append(name);
 
             var lambda = ConvertLambdaExpression(indent, "", function, functionMode: true);
@@ -499,7 +499,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var funcSb = new StringBuilder();
 
             funcSb.Append(indent, specifiers + " ");
-            funcSb.Append(PrettyTypeName(function.ReturnType) + " ");
+            funcSb.Append(typeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
             funcSb.Append(name);
 
             var lambda = ConvertLambdaExpression(indent, "", function, functionMode: true);
@@ -553,7 +553,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ExpressionType.TypeAs:
                     {
                         var operand = ConvertExpression(indent, strippedUnary.Operand, false);
-                        var typeName = PrettyTypeName(strippedUnary.Type);
+                        var typeName = typeToCSharpConverter.ToCSharp(strippedUnary.Type);
                         var code = strippedUnary.NodeType == ExpressionType.TypeAs ?
                             $"{leadingIndentString}{Parenthesize($"{operand} as {typeName}")}" :
                             $"{leadingIndentString}{Parenthesize($"({typeName}){operand}")}";
@@ -573,33 +573,6 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static readonly ObjectIDGenerator Gen = new();
 #pragma warning restore SYSLIB0050 // Type or member is obsolete
 
-        private static readonly TypeCSharpFormat? TypeToCSharpStringOptions = new(UseKeywords: true, NoNamespaces: true, TypeNameFormat: FormatTypePart);
-
-        public static TextWriterFormattableString FormatTypePart(ITypeNameCSharpFormatContext ctx)
-        {
-            if (IsTupleType(ctx.TypePartInfo))
-                return FormatTypeAsTuple(ctx.TypePartInfo);
-
-            return ctx.Name;
-
-            static TextWriterFormattableString FormatTypeAsTuple(Type tupleType)
-            {
-                var props =
-                    tupleType
-                            .GetProperties()
-                            .Select(p => (TypeName:p.PropertyType.ToCSharpString(TypeToCSharpStringOptions), p.Name))
-                            .ToArray() switch
-                        {
-                            [{} single] => [single, ("nint", "_")],
-                            var p => p
-                        };
-                return $"({string.Join(", ", props.Select(p => $"{p.TypeName} {p.Name}"))})?";
-            }
-        }
-
-        private static bool IsTupleType(Type type) =>
-            type.Name.StartsWith("Tuple_");
-
         private static string ParamName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
 
         private string ConvertBinaryExpression(int indent, string leadingIndentString, BinaryExpression binary)
@@ -617,7 +590,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 string typeDeclaration = "var";
                 if (typeFormat is CSharpCodeWriterTypeFormat.Explicit || rightCode is "null" or "default")
-                    typeDeclaration = PrettyTypeName(left.Type);
+                    typeDeclaration = typeToCSharpConverter.ToCSharp(left.Type);
 
                 var assignment = $"{leadingIndentString}{typeDeclaration} {ParamName(parameter)} = {rightCode}";
                 return assignment;
@@ -674,23 +647,15 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string IndentString(int indent) => new('\t', indent);
 
-        private static string PrettyMethodName(MethodBase method)
+        private string PrettyMethodName(MethodBase method)
         {
             if (method.IsGenericMethod)
             {
-                var genericArgs = string.Join(", ", method.GetGenericArguments().Select(PrettyTypeName));
+                var genericArgs = string.Join(", ", method.GetGenericArguments().Select(type => typeToCSharpConverter.ToCSharp(type)));
                 return $"{method.Name}<{genericArgs}>";
             }
             else
                 return method.Name;
-        }
-
-        private static readonly HashSet<string> _types = new();
-
-        public static string PrettyTypeName(Type type)
-        {
-            string result = type.ToCSharpString(TypeToCSharpStringOptions);
-            return result;
         }
 
         private static string Parenthesize(string term)

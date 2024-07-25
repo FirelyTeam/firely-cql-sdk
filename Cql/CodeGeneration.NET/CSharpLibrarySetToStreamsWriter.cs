@@ -33,19 +33,16 @@ namespace Hl7.Cql.CodeGeneration.NET
         private const string TuplesNamespace = "Tuples";
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
         private readonly CSharpCodeWriterOptions _options;
+        private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
-        /// <param name="options">The options <see cref="CSharpCodeWriterOptions"/></param>
-        /// <param name="typeResolver">The <see cref="TypeResolver"/> to use to include namespaces and aliases from.</param>
         public CSharpLibrarySetToStreamsWriter(
             ILogger<CSharpLibrarySetToStreamsWriter> logger,
             IOptions<CSharpCodeWriterOptions> options,
-            TypeResolver typeResolver)
+            TypeResolver typeResolver,
+            TypeToCSharpConverter typeToCSharpConverter)
         {
             _logger = logger;
+            _typeToCSharpConverter = typeToCSharpConverter;
             _options = options.Value;
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
@@ -310,7 +307,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
                         var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
-                        var returnType = ExpressionConverter.PrettyTypeName(overload.Item2.ReturnType);
+                        var returnType = _typeToCSharpConverter.ToCSharp(overload.Item2.ReturnType);
                         var privateMethodName = PrivateMethodNameFor(methodName!);
                         writer.WriteLine(indentLevel, $"{cachedValueName} = new Lazy<{returnType}>(this.{privateMethodName});");
                     }
@@ -349,7 +346,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
                         var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
-                        var returnType = ExpressionConverter.PrettyTypeName(overload.T.ReturnType);
+                        var returnType = _typeToCSharpConverter.ToCSharp(overload.T.ReturnType);
                         writer.WriteLine(indentLevel, $"{accessModifier} Lazy<{returnType}> {cachedValueName};");
                     }
                 }
@@ -458,10 +455,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                     SimplifyNullConditionalMemberExpression = simplifyNullConditionalMemberExpression
                 },
                 new RenameVariablesVisitor(vng),
-                new LocalVariableDeduper()
+                new LocalVariableDeduper(_typeToCSharpConverter)
             );
 
-            var expressionConverter = new ExpressionConverter(libraryName, _options.TypeFormat);
+            var expressionConverter = new ExpressionToCSharpConverter(libraryName, _options.TypeFormat, _typeToCSharpConverter);
 
             // Skip CqlContext
             var parameters = overload.Parameters.Skip(1);
@@ -544,14 +541,14 @@ namespace Hl7.Cql.CodeGeneration.NET
         private void WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
         {
             writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
-            writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {ExpressionConverter.PrettyTypeName(tupleType.BaseType!)}");
+            writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {_typeToCSharpConverter.ToCSharp(tupleType.BaseType!)}");
             writer.WriteLine(indentLevel, "{");
 
             indentLevel++;
             foreach (var property in tupleType.GetProperties())
             {
                 var normalizedName = VariableNameGenerator.NormalizeIdentifier(property.Name);
-                var propertyType = ExpressionConverter.PrettyTypeName(property.PropertyType);
+                var propertyType = _typeToCSharpConverter.ToCSharp(property.PropertyType);
                 var cqlDeclarationAttribute = property.GetCustomAttribute<CqlDeclarationAttribute>();
                 if (cqlDeclarationAttribute != null)
                 {
