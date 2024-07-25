@@ -515,7 +515,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
@@ -651,7 +651,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
@@ -659,7 +659,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var n_ = context.Operators.GreaterOrEqual(m_, 3);
 			var p_ = f_?.BirthDateElement;
 			var q_ = p_?.Value;
-			var r_ = context.Operators.Convert<CqlDate>(q_);
+			var r_ = context.Operators.ConvertStringToDate(q_);
 			var t_ = context.Operators.Start(j_);
 			var u_ = context.Operators.DateFrom(t_);
 			var v_ = context.Operators.CalculateAgeAt(r_, u_, "year");
@@ -688,7 +688,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
@@ -718,7 +718,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			var f_ = this.Patient();
 			var g_ = f_?.BirthDateElement;
 			var h_ = g_?.Value;
-			var i_ = context.Operators.Convert<CqlDate>(h_);
+			var i_ = context.Operators.ConvertStringToDate(h_);
 			var j_ = this.Measurement_Period();
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);

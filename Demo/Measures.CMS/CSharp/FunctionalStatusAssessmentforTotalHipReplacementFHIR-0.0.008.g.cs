@@ -751,7 +751,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		var c_ = context.Operators.Exists<Procedure>(b_);
 		var d_ = context.Operators.And(a_, c_);
 		var e_ = this.Patient();
-		var f_ = context.Operators.Convert<CqlDate>(e_?.BirthDateElement?.Value);
+		var f_ = context.Operators.ConvertStringToDate(e_?.BirthDateElement?.Value);
 		var g_ = this.Measurement_Period();
 		var h_ = context.Operators.Start(g_);
 		var i_ = context.Operators.DateFrom(h_);

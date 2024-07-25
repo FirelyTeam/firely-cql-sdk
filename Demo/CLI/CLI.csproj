@@ -19,7 +19,7 @@
 		<PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
 		<PackageReference Include="CommandLineParser" Version="2.9.1" />
-		<PackageReference Include="Dumpify" Version="0.6.5" />
+		<PackageReference Include="Dumpify" Version="0.6.6" />
 	</ItemGroup>
 
 </Project>

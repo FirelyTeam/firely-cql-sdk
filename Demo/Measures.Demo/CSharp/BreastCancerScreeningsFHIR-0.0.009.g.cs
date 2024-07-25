@@ -318,7 +318,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	private int? Age_at_start_of_Measurement_Period_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -334,7 +334,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
 		var c_ = this.Measurement_Period();
 		var d_ = context.Operators.Start(c_);
 		var e_ = context.Operators.DateFrom(d_);
@@ -583,7 +583,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var t_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var u_ = context.Operators.Or(s_, t_);
 		var v_ = this.Patient();
-		var w_ = context.Operators.Convert<CqlDate>(v_?.BirthDateElement?.Value);
+		var w_ = context.Operators.ConvertStringToDate(v_?.BirthDateElement?.Value);
 		var x_ = this.Measurement_Period();
 		var y_ = context.Operators.Start(x_);
 		var z_ = context.Operators.DateFrom(y_);

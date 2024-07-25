@@ -616,7 +616,7 @@ public class HybridHWRFHIR_1_3_005
 			var z_ = this.Patient();
 			var aa_ = z_?.BirthDateElement;
 			var ab_ = aa_?.Value;
-			var ac_ = context.Operators.Convert<CqlDate>(ab_);
+			var ac_ = context.Operators.ConvertStringToDate(ab_);
 			var ae_ = FHIRHelpers_4_0_001.ToInterval(t_);
 			var af_ = context.Operators.Start(ae_);
 			var ag_ = context.Operators.DateFrom(af_);

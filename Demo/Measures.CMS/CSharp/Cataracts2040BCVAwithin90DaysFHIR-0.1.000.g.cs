@@ -737,7 +737,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			var d_ = this.Patient();
 			var e_ = d_?.BirthDateElement;
 			var f_ = e_?.Value;
-			var g_ = context.Operators.Convert<CqlDate>(f_);
+			var g_ = context.Operators.ConvertStringToDate(f_);
 			var h_ = this.Measurement_Period();
 			var i_ = context.Operators.Start(h_);
 			var j_ = context.Operators.DateFrom(i_);
