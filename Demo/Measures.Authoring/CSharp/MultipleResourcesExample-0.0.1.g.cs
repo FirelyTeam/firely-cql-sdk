@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -56,7 +55,7 @@ public class MultipleResourcesExample_0_0_1
     [CqlDeclaration("Lung Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
 	public CqlValueSet Lung_Cancer() => 
-		__Lung_Cancer.Value;
+		__Lung_Cancer?.Value;
 
 	private CqlValueSet Condition_Clinical_Status_Value() => 
 		new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", null);
@@ -64,88 +63,86 @@ public class MultipleResourcesExample_0_0_1
     [CqlDeclaration("Condition Clinical Status")]
     [CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical")]
 	public CqlValueSet Condition_Clinical_Status() => 
-		__Condition_Clinical_Status.Value;
+		__Condition_Clinical_Status?.Value;
 
 	private CqlCode Tobacco_Smoking_Status_Value() => 
 		new CqlCode("72166-2", "http://loinc.org", null, null);
 
     [CqlDeclaration("Tobacco Smoking Status")]
 	public CqlCode Tobacco_Smoking_Status() => 
-		__Tobacco_Smoking_Status.Value;
+		__Tobacco_Smoking_Status?.Value;
 
 	private CqlCode[] LOINC_Value()
 	{
-		var a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = /* ARR1 */ [
 			new CqlCode("72166-2", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
 
     [CqlDeclaration("LOINC")]
 	public CqlCode[] LOINC() => 
-		__LOINC.Value;
+		__LOINC?.Value;
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context?.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient.Value;
+		__Patient?.Value;
 
 	private IEnumerable<Observation> Smoking_status_observation_Value()
 	{
-		var a_ = this.Tobacco_Smoking_Status();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		CqlCode a_ = this.Tobacco_Smoking_Status();
+		IEnumerable<CqlCode> b_ = context?.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context?.Operators.RetrieveByCodes<Observation>(b_, null);
 		bool? d_(Observation O)
 		{
-			var f_ = O?.StatusElement;
-			var g_ = FHIRHelpers_4_3_000.ToString(f_);
-			var h_ = new string[]
-			{
+			Code<ObservationStatus> f_ = O.StatusElement;
+			string g_ = FHIRHelpers_4_3_000.ToString(f_);
+			string[] h_ = /* ARR1 */ [
 				"final",
 				"amended",
-			};
-			var i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
+			];
+			bool? i_ = context?.Operators.In<string>(g_, (h_ as IEnumerable<string>));
 
 			return i_;
 		};
-		var e_ = context.Operators.Where<Observation>(c_, d_);
+		IEnumerable<Observation> e_ = context?.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Smoking status observation")]
 	public IEnumerable<Observation> Smoking_status_observation() => 
-		__Smoking_status_observation.Value;
+		__Smoking_status_observation?.Value;
 
 	private IEnumerable<Condition> Lung_cancer_diagnosis_Value()
 	{
-		var a_ = this.Lung_Cancer();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlValueSet a_ = this.Lung_Cancer();
+		IEnumerable<Condition> b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition C)
 		{
-			var e_ = C?.ClinicalStatus;
-			var f_ = FHIRHelpers_4_3_000.ToConcept(e_);
-			var g_ = this.Condition_Clinical_Status();
-			var h_ = context.Operators.ConceptInValueSet(f_, g_);
+			CodeableConcept e_ = C.ClinicalStatus;
+			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(e_);
+			CqlValueSet g_ = this.Condition_Clinical_Status();
+			bool? h_ = context?.Operators.ConceptInValueSet(f_, g_);
 
 			return h_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
+		IEnumerable<Condition> d_ = context?.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Lung cancer diagnosis")]
 	public IEnumerable<Condition> Lung_cancer_diagnosis() => 
-		__Lung_cancer_diagnosis.Value;
+		__Lung_cancer_diagnosis?.Value;
 
 }

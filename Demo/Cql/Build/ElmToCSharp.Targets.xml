@@ -19,7 +19,7 @@
 
 		<!-- Comment out these if you don't need them -->
 		<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
-		<CSharpTypeFormat>var</CSharpTypeFormat>
+		<CSharpTypeFormat>explicit</CSharpTypeFormat>
 		<!--CSharpTypeFormat: explicit|var -->
 	</PropertyGroup>
 

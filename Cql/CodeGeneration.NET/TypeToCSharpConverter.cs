@@ -7,6 +7,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.Extensions.Options;
@@ -29,17 +30,26 @@ internal class TypeToCSharpConverter
         if (!ShouldUseTupleType(ctx.TypePartInfo))
             return ctx.Name;
 
-        var props =
-            ctx.TypePartInfo
-               .GetProperties()
-               .Select(p => (TypeName:p.PropertyType.ToCSharpString(_typeCSharpFormat), p.Name))
-               .ToArray() switch
-            {
-                [{} single] => [single, ("nint", "_")],
-                var p       => p
-            };
-        TextWriterFormattableString formatTypeNameAsTuple = $"({string.Join(", ", props.Select(p => $"{p.TypeName} {p.Name}"))})?";
+        TextWriterFormattableString formatTypeNameAsTuple = $"({
+            string.Join(
+                ", ",
+                GetTupleProperties(ctx.TypePartInfo)
+                    .Select(p => $"{p.Type.ToCSharpString(_typeCSharpFormat)} {p.Name}"))
+        })?"; // Notice we have to treat it as a nullable type to be consistent with the original tuple types.
         return formatTypeNameAsTuple;
+    }
+
+    public IEnumerable<(Type Type, string Name)> GetTupleProperties(Type type)
+    {
+        var length = type.GetProperties().Length;
+        for (var i = 0; i < length; i++)
+        {
+            var prop = type.GetProperties()[i];
+            yield return (prop.PropertyType, prop.Name);
+        }
+
+        if (length == 1)
+            yield return (typeof(nint), "_");
     }
 
     public bool ShouldUseTupleType(Type type) =>

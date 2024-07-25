@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -45,9 +44,9 @@ public class DiabetesEyeExamFHIR_0_0_001
     internal Lazy<IEnumerable<Observation>> __Retinal_Exam_in_Measurement_Period;
     internal Lazy<IEnumerable<Observation>> __Retinal_Exam_in_Measurement_Period_or_Year_Prior;
     internal Lazy<bool?> __Numerator;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -88,9 +87,9 @@ public class DiabetesEyeExamFHIR_0_0_001
         __Retinal_Exam_in_Measurement_Period = new Lazy<IEnumerable<Observation>>(this.Retinal_Exam_in_Measurement_Period_Value);
         __Retinal_Exam_in_Measurement_Period_or_Year_Prior = new Lazy<IEnumerable<Observation>>(this.Retinal_Exam_in_Measurement_Period_or_Year_Prior_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -112,7 +111,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
 	public CqlValueSet Annual_Wellness_Visit() => 
-		__Annual_Wellness_Visit.Value;
+		__Annual_Wellness_Visit?.Value;
 
 	private CqlValueSet Diabetes_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", null);
@@ -120,7 +119,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
 	public CqlValueSet Diabetes() => 
-		__Diabetes.Value;
+		__Diabetes?.Value;
 
 	private CqlValueSet Diabetic_Retinopathy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", null);
@@ -128,7 +127,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Diabetic Retinopathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327")]
 	public CqlValueSet Diabetic_Retinopathy() => 
-		__Diabetic_Retinopathy.Value;
+		__Diabetic_Retinopathy?.Value;
 
 	private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
@@ -136,7 +135,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
 	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care() => 
-		__Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
+		__Discharged_to_Health_Care_Facility_for_Hospice_Care?.Value;
 
 	private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
@@ -144,7 +143,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
 	public CqlValueSet Discharged_to_Home_for_Hospice_Care() => 
-		__Discharged_to_Home_for_Hospice_Care.Value;
+		__Discharged_to_Home_for_Hospice_Care?.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
@@ -152,7 +151,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
 	public CqlValueSet Encounter_Inpatient() => 
-		__Encounter_Inpatient.Value;
+		__Encounter_Inpatient?.Value;
 
 	private CqlValueSet Home_Healthcare_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
@@ -160,7 +159,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
 	public CqlValueSet Home_Healthcare_Services() => 
-		__Home_Healthcare_Services.Value;
+		__Home_Healthcare_Services?.Value;
 
 	private CqlValueSet Hospice_Care_Ambulatory_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", null);
@@ -168,7 +167,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Hospice Care Ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
 	public CqlValueSet Hospice_Care_Ambulatory() => 
-		__Hospice_Care_Ambulatory.Value;
+		__Hospice_Care_Ambulatory?.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
@@ -176,7 +175,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
 	public CqlValueSet Office_Visit() => 
-		__Office_Visit.Value;
+		__Office_Visit?.Value;
 
 	private CqlValueSet Ophthalmological_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", null);
@@ -184,7 +183,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
 	public CqlValueSet Ophthalmological_Services() => 
-		__Ophthalmological_Services.Value;
+		__Ophthalmological_Services?.Value;
 
 	private CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
@@ -192,7 +191,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
 	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up() => 
-		__Preventive_Care_Services_Established_Office_Visit__18_and_Up.Value;
+		__Preventive_Care_Services_Established_Office_Visit__18_and_Up?.Value;
 
 	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
@@ -200,7 +199,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
 	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
-		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
+		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up?.Value;
 
 	private CqlValueSet Retinal_or_Dilated_Eye_Exam_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.115.12.1088", null);
@@ -208,7 +207,7 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Retinal or Dilated Eye Exam")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.115.12.1088")]
 	public CqlValueSet Retinal_or_Dilated_Eye_Exam() => 
-		__Retinal_or_Dilated_Eye_Exam.Value;
+		__Retinal_or_Dilated_Eye_Exam?.Value;
 
 	private CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
@@ -216,273 +215,275 @@ public class DiabetesEyeExamFHIR_0_0_001
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
 	public CqlValueSet Telephone_Visits() => 
-		__Telephone_Visits.Value;
+		__Telephone_Visits?.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("DiabetesEyeExamFHIR-0.0.001", "Measurement Period", c_);
+		CqlDateTime a_ = context?.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context?.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context?.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("DiabetesEyeExamFHIR-0.0.001", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
 	public CqlInterval<CqlDateTime> Measurement_Period() => 
-		__Measurement_Period.Value;
+		__Measurement_Period?.Value;
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context?.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient.Value;
+		__Patient?.Value;
 
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Annual_Wellness_Visit();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.Union<Encounter>(b_, d_);
-		var f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.Union<Encounter>(g_, i_);
-		var k_ = context.Operators.Union<Encounter>(e_, j_);
-		var l_ = this.Home_Healthcare_Services();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = this.Ophthalmological_Services();
-		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.Union<Encounter>(m_, o_);
-		var q_ = context.Operators.Union<Encounter>(k_, p_);
-		var r_ = this.Telephone_Visits();
-		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
-		var t_ = context.Operators.Union<Encounter>(q_, s_);
-		var u_ = Status_1_6_000.isEncounterPerformed(t_);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Annual_Wellness_Visit();
+		IEnumerable<Encounter> d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context?.Operators.Union<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context?.Operators.Union<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context?.Operators.Union<Encounter>(e_, j_);
+		CqlValueSet l_ = this.Home_Healthcare_Services();
+		IEnumerable<Encounter> m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		CqlValueSet n_ = this.Ophthalmological_Services();
+		IEnumerable<Encounter> o_ = context?.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> p_ = context?.Operators.Union<Encounter>(m_, o_);
+		IEnumerable<Encounter> q_ = context?.Operators.Union<Encounter>(k_, p_);
+		CqlValueSet r_ = this.Telephone_Visits();
+		IEnumerable<Encounter> s_ = context?.Operators.RetrieveByValueSet<Encounter>(r_, null);
+		IEnumerable<Encounter> t_ = context?.Operators.Union<Encounter>(q_, s_);
+		IEnumerable<Encounter> u_ = Status_1_6_000.isEncounterPerformed(t_);
 		bool? v_(Encounter ValidEncounters)
 		{
-			var x_ = this.Measurement_Period();
-			var y_ = ValidEncounters?.Period;
-			var z_ = FHIRHelpers_4_3_000.ToInterval(y_);
-			var aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
+			CqlInterval<CqlDateTime> x_ = this.Measurement_Period();
+			Period y_ = ValidEncounters.Period;
+			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
+			bool? aa_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
 
 			return aa_;
 		};
-		var w_ = context.Operators.Where<Encounter>(u_, v_);
+		IEnumerable<Encounter> w_ = context?.Operators.Where<Encounter>(u_, v_);
 
 		return w_;
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
 	public IEnumerable<Encounter> Qualifying_Encounters() => 
-		__Qualifying_Encounters.Value;
+		__Qualifying_Encounters?.Value;
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.End(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval(18, 75, true, true);
-		var h_ = context.Operators.In<int?>(f_, g_, null);
-		var i_ = this.Qualifying_Encounters();
-		var j_ = context.Operators.Exists<Encounter>(i_);
-		var k_ = context.Operators.And(h_, j_);
-		var l_ = this.Diabetes();
-		var m_ = context.Operators.RetrieveByValueSet<Condition>(l_, null);
-		bool? n_(Condition Diabetes)
+		Patient a_ = this.Patient();
+		Date b_ = a_.BirthDateElement;
+		string c_ = b_.Value;
+		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context?.Operators.End(e_);
+		CqlDate g_ = context?.Operators.DateFrom(f_);
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		CqlInterval<int?> i_ = context?.Operators.Interval(18, 75, true, true);
+		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
+		IEnumerable<Encounter> k_ = this.Qualifying_Encounters();
+		bool? l_ = context?.Operators.Exists<Encounter>(k_);
+		bool? m_ = context?.Operators.And(j_, l_);
+		CqlValueSet n_ = this.Diabetes();
+		IEnumerable<Condition> o_ = context?.Operators.RetrieveByValueSet<Condition>(n_, null);
+		bool? p_(Condition Diabetes)
 		{
-			var r_ = QICoreCommon_2_0_000.prevalenceInterval(Diabetes);
-			var s_ = this.Measurement_Period();
-			var t_ = context.Operators.Overlaps(r_, s_, null);
+			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.prevalenceInterval(Diabetes);
+			CqlInterval<CqlDateTime> u_ = this.Measurement_Period();
+			bool? v_ = context?.Operators.Overlaps(t_, u_, null);
 
-			return t_;
+			return v_;
 		};
-		var o_ = context.Operators.Where<Condition>(m_, n_);
-		var p_ = context.Operators.Exists<Condition>(o_);
-		var q_ = context.Operators.And(k_, p_);
+		IEnumerable<Condition> q_ = context?.Operators.Where<Condition>(o_, p_);
+		bool? r_ = context?.Operators.Exists<Condition>(q_);
+		bool? s_ = context?.Operators.And(m_, r_);
 
-		return q_;
+		return s_;
 	}
 
     [CqlDeclaration("Initial Population")]
 	public bool? Initial_Population() => 
-		__Initial_Population.Value;
+		__Initial_Population?.Value;
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
 
     [CqlDeclaration("Denominator")]
 	public bool? Denominator() => 
-		__Denominator.Value;
+		__Denominator?.Value;
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = Hospice_6_9_000.Has_Hospice_Services();
-		var b_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty();
-		var c_ = context.Operators.Or(a_, b_);
-		var d_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home();
-		var e_ = context.Operators.Or(c_, d_);
-		var f_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period();
-		var g_ = context.Operators.Or(e_, f_);
+		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
+		bool? b_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty();
+		bool? c_ = context?.Operators.Or(a_, b_);
+		bool? d_ = AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home();
+		bool? e_ = context?.Operators.Or(c_, d_);
+		bool? f_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period();
+		bool? g_ = context?.Operators.Or(e_, f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
 	public bool? Denominator_Exclusions() => 
-		__Denominator_Exclusions.Value;
+		__Denominator_Exclusions?.Value;
 
 	private bool? Diabetic_Retinopathy_Overlapping_Measurement_Period_Value()
 	{
-		var a_ = this.Diabetic_Retinopathy();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlValueSet a_ = this.Diabetic_Retinopathy();
+		IEnumerable<Condition> b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition Retinopathy)
 		{
-			var f_ = QICoreCommon_2_0_000.prevalenceInterval(Retinopathy);
-			var g_ = this.Measurement_Period();
-			var h_ = context.Operators.Overlaps(f_, g_, null);
+			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.prevalenceInterval(Retinopathy);
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
+			bool? h_ = context?.Operators.Overlaps(f_, g_, null);
 
 			return h_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
-		var e_ = context.Operators.Exists<Condition>(d_);
+		IEnumerable<Condition> d_ = context?.Operators.Where<Condition>(b_, c_);
+		bool? e_ = context?.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Diabetic Retinopathy Overlapping Measurement Period")]
 	public bool? Diabetic_Retinopathy_Overlapping_Measurement_Period() => 
-		__Diabetic_Retinopathy_Overlapping_Measurement_Period.Value;
+		__Diabetic_Retinopathy_Overlapping_Measurement_Period?.Value;
 
 	private IEnumerable<Observation> Retinal_Exam_in_Measurement_Period_Value()
 	{
-		var a_ = this.Retinal_or_Dilated_Eye_Exam();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = Status_1_6_000.isAssessmentPerformed(b_);
+		CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam();
+		IEnumerable<Observation> b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> c_ = Status_1_6_000.isAssessmentPerformed(b_);
 		bool? d_(Observation RetinalExam)
 		{
-			var f_ = this.Measurement_Period();
-			var g_ = RetinalExam?.Effective;
-			var h_ = FHIRHelpers_4_3_000.ToValue(g_);
-			var i_ = QICoreCommon_2_0_000.toInterval(h_);
-			var j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
+			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
+			DataType g_ = RetinalExam.Effective;
+			object h_ = FHIRHelpers_4_3_000.ToValue(g_);
+			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.toInterval(h_);
+			bool? j_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
 
 			return j_;
 		};
-		var e_ = context.Operators.Where<Observation>(c_, d_);
+		IEnumerable<Observation> e_ = context?.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Retinal Exam in Measurement Period")]
 	public IEnumerable<Observation> Retinal_Exam_in_Measurement_Period() => 
-		__Retinal_Exam_in_Measurement_Period.Value;
+		__Retinal_Exam_in_Measurement_Period?.Value;
 
 	private IEnumerable<Observation> Retinal_Exam_in_Measurement_Period_or_Year_Prior_Value()
 	{
-		var a_ = this.Retinal_or_Dilated_Eye_Exam();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = Status_1_6_000.isAssessmentPerformed(b_);
+		CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam();
+		IEnumerable<Observation> b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> c_ = Status_1_6_000.isAssessmentPerformed(b_);
 		bool? d_(Observation RetinalExam)
 		{
-			var f_ = this.Measurement_Period();
-			var g_ = context.Operators.Start(f_);
-			var h_ = context.Operators.Quantity(1m, "year");
-			var i_ = context.Operators.Subtract(g_, h_);
-			var k_ = context.Operators.End(f_);
-			var l_ = context.Operators.Interval(i_, k_, true, true);
-			var m_ = RetinalExam?.Effective;
-			var n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			var o_ = QICoreCommon_2_0_000.toInterval(n_);
-			var p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
+			CqlDateTime g_ = context?.Operators.Start(f_);
+			CqlQuantity h_ = context?.Operators.Quantity(1m, "year");
+			CqlDateTime i_ = context?.Operators.Subtract(g_, h_);
+			CqlDateTime k_ = context?.Operators.End(f_);
+			CqlInterval<CqlDateTime> l_ = context?.Operators.Interval(i_, k_, true, true);
+			DataType m_ = RetinalExam.Effective;
+			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
+			bool? p_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
 
 			return p_;
 		};
-		var e_ = context.Operators.Where<Observation>(c_, d_);
+		IEnumerable<Observation> e_ = context?.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Retinal Exam in Measurement Period or Year Prior")]
 	public IEnumerable<Observation> Retinal_Exam_in_Measurement_Period_or_Year_Prior() => 
-		__Retinal_Exam_in_Measurement_Period_or_Year_Prior.Value;
+		__Retinal_Exam_in_Measurement_Period_or_Year_Prior?.Value;
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period();
-		var b_ = this.Retinal_Exam_in_Measurement_Period();
-		var c_ = context.Operators.Exists<Observation>(b_);
-		var d_ = context.Operators.And(a_, c_);
-		var f_ = context.Operators.Not(a_);
-		var g_ = this.Retinal_Exam_in_Measurement_Period_or_Year_Prior();
-		var h_ = context.Operators.Exists<Observation>(g_);
-		var i_ = context.Operators.And(f_, h_);
-		var j_ = context.Operators.Or(d_, i_);
+		bool? a_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period();
+		IEnumerable<Observation> b_ = this.Retinal_Exam_in_Measurement_Period();
+		bool? c_ = context?.Operators.Exists<Observation>(b_);
+		bool? d_ = context?.Operators.And(a_, c_);
+		bool? f_ = context?.Operators.Not(a_);
+		IEnumerable<Observation> g_ = this.Retinal_Exam_in_Measurement_Period_or_Year_Prior();
+		bool? h_ = context?.Operators.Exists<Observation>(g_);
+		bool? i_ = context?.Operators.And(f_, h_);
+		bool? j_ = context?.Operators.Or(d_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Numerator")]
 	public bool? Numerator() => 
-		__Numerator.Value;
+		__Numerator?.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
-		__SDE_Ethnicity.Value;
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+		__SDE_Ethnicity?.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
-		__SDE_Payer.Value;
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+		__SDE_Payer?.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
-		__SDE_Race.Value;
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+		__SDE_Race?.Value;
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
 	public CqlCode SDE_Sex() => 
-		__SDE_Sex.Value;
+		__SDE_Sex?.Value;
 
 }

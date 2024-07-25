@@ -343,17 +343,18 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             if (typeToCSharpConverter.ShouldUseTupleType(memberInit.Type))
             {
-                var memberValues =
-                    memberInit.Bindings
-                              .Cast<MemberAssignment>()
-                              .Select(memberAssignment => ConvertExpression(0, memberAssignment.Expression, false))
-                              .ToArray() switch
-                    {
-                        [{ } single] => [single, "default(nint)"],
-                        var p => p,
-                    };
-                var tupleAssignmentCode = $"({string.Join(", ", memberValues)
-                })";
+                var memberAssignmentsByMemberName = memberInit.Bindings
+                                           .Cast<MemberAssignment>()
+                                           .ToDictionary(
+                                               ma => ma.Member.Name,
+                                               ma => ConvertExpression(0, ma.Expression, false));
+
+                var memberValues = typeToCSharpConverter
+                                   .GetTupleProperties(memberInit.Type)
+                                   .Select(p => memberAssignmentsByMemberName.GetValueOrDefault(p.Name, "default"))
+                                   .ToArray();
+
+                var tupleAssignmentCode = $"({string.Join(", ", memberValues)})";
                 return tupleAssignmentCode;
             }
 
@@ -397,16 +398,17 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ExpressionType.NewArrayInit:
                     {
                         var newArraySb = new StringBuilder();
-                        newArraySb.Append(leadingIndentString);
-
-                        var arrayType = typeToCSharpConverter.ToCSharp(newArray.Type);
-
-#pragma warning disable CA1305 // Specify IFormatProvider
-                        newArraySb.AppendLine($"new {arrayType}");
-#pragma warning restore CA1305 // Specify IFormatProvider
+//                         newArraySb.Append(leadingIndentString);
+//
+//                         var arrayType = typeToCSharpConverter.ToCSharp(newArray.Type);
+//
+// #pragma warning disable CA1305 // Specify IFormatProvider
+//                         newArraySb.AppendLine($"/* ARR1 */ new {arrayType}");
+// #pragma warning restore CA1305 // Specify IFormatProvider
                         var braceIndent = IndentString(indent);
-                        newArraySb.Append(braceIndent);
-                        newArraySb.AppendLine("{");
+                        // newArraySb.Append(braceIndent);
+                        newArraySb.AppendLine("/* ARR1 */ [");
+                        // newArraySb.AppendLine("{");
 
                         foreach (var expr in newArray.Expressions)
                         {
@@ -416,7 +418,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                         }
 
                         newArraySb.Append(braceIndent);
-                        newArraySb.Append('}');
+                        newArraySb.Append(']');
+                        // newArraySb.Append('}');
                         return newArraySb.ToString();
                     }
                 case ExpressionType.NewArrayBounds:
@@ -426,7 +429,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var arrayType = typeToCSharpConverter.ToCSharp(newArray.Type.GetElementType()!);
                         var size = ConvertExpression(0, newArray.Expressions[0], false);
 #pragma warning disable CA1305 // Specify IFormatProvider
-                        newArraySb.AppendLine($"new {arrayType}[{size}]");
+                        newArraySb.AppendLine($"/* ARR2 */ new {arrayType}[{size}]");
 #pragma warning restore CA1305 // Specify IFormatProvider
                         return newArraySb.ToString();
                     }

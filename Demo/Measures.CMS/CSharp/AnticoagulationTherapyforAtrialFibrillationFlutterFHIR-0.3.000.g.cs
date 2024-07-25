@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -43,9 +42,9 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     internal Lazy<IEnumerable<Encounter>> __Numerator;
     internal Lazy<IEnumerable<MedicationRequest>> __Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge;
     internal Lazy<IEnumerable<Encounter>> __Denominator_Exceptions;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -81,9 +80,9 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
         __Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge = new Lazy<IEnumerable<MedicationRequest>>(this.Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge_Value);
         __Denominator_Exceptions = new Lazy<IEnumerable<Encounter>>(this.Denominator_Exceptions_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -102,7 +101,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Anticoagulant Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200")]
 	public CqlValueSet Anticoagulant_Therapy() => 
-		__Anticoagulant_Therapy.Value;
+		__Anticoagulant_Therapy?.Value;
 
 	private CqlValueSet Atrial_Ablation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203", null);
@@ -110,7 +109,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Atrial Ablation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203")]
 	public CqlValueSet Atrial_Ablation() => 
-		__Atrial_Ablation.Value;
+		__Atrial_Ablation?.Value;
 
 	private CqlValueSet Atrial_Fibrillation_or_Flutter_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202", null);
@@ -118,7 +117,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Atrial Fibrillation or Flutter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202")]
 	public CqlValueSet Atrial_Fibrillation_or_Flutter() => 
-		__Atrial_Fibrillation_or_Flutter.Value;
+		__Atrial_Fibrillation_or_Flutter?.Value;
 
 	private CqlValueSet Discharge_To_Acute_Care_Facility_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
@@ -126,7 +125,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
 	public CqlValueSet Discharge_To_Acute_Care_Facility() => 
-		__Discharge_To_Acute_Care_Facility.Value;
+		__Discharge_To_Acute_Care_Facility?.Value;
 
 	private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
@@ -134,7 +133,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
 	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care() => 
-		__Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
+		__Discharged_to_Health_Care_Facility_for_Hospice_Care?.Value;
 
 	private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
@@ -142,7 +141,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
 	public CqlValueSet Discharged_to_Home_for_Hospice_Care() => 
-		__Discharged_to_Home_for_Hospice_Care.Value;
+		__Discharged_to_Home_for_Hospice_Care?.Value;
 
 	private CqlValueSet History_of_Atrial_Ablation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76", null);
@@ -150,7 +149,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("History of Atrial Ablation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76")]
 	public CqlValueSet History_of_Atrial_Ablation() => 
-		__History_of_Atrial_Ablation.Value;
+		__History_of_Atrial_Ablation?.Value;
 
 	private CqlValueSet Left_Against_Medical_Advice_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
@@ -158,7 +157,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Left Against Medical Advice")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308")]
 	public CqlValueSet Left_Against_Medical_Advice() => 
-		__Left_Against_Medical_Advice.Value;
+		__Left_Against_Medical_Advice?.Value;
 
 	private CqlValueSet Medical_Reason_For_Not_Providing_Treatment_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", null);
@@ -166,7 +165,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Medical Reason For Not Providing Treatment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473")]
 	public CqlValueSet Medical_Reason_For_Not_Providing_Treatment() => 
-		__Medical_Reason_For_Not_Providing_Treatment.Value;
+		__Medical_Reason_For_Not_Providing_Treatment?.Value;
 
 	private CqlValueSet Patient_Expired_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
@@ -174,7 +173,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
 	public CqlValueSet Patient_Expired() => 
-		__Patient_Expired.Value;
+		__Patient_Expired?.Value;
 
 	private CqlValueSet Patient_Refusal_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
@@ -182,172 +181,171 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     [CqlDeclaration("Patient Refusal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93")]
 	public CqlValueSet Patient_Refusal() => 
-		__Patient_Refusal.Value;
+		__Patient_Refusal?.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR-0.3.000", "Measurement Period", c_);
+		CqlDateTime a_ = context?.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context?.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context?.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR-0.3.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
 	public CqlInterval<CqlDateTime> Measurement_Period() => 
-		__Measurement_Period.Value;
+		__Measurement_Period?.Value;
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context?.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient.Value;
+		__Patient?.Value;
 
 	private IEnumerable<Encounter> Initial_Population_Value()
 	{
-		var a_ = TJCOverall_8_11_000.Encounter_with_Principal_Diagnosis_and_Age();
+		IEnumerable<Encounter> a_ = TJCOverall_8_11_000.Encounter_with_Principal_Diagnosis_and_Age();
 
 		return a_;
 	}
 
     [CqlDeclaration("Initial Population")]
 	public IEnumerable<Encounter> Initial_Population() => 
-		__Initial_Population.Value;
+		__Initial_Population?.Value;
 
 	private IEnumerable<Encounter> Encounter_with_a_History_of_Atrial_Ablation_Value()
 	{
-		var a_ = TJCOverall_8_11_000.Ischemic_Stroke_Encounter();
+		IEnumerable<Encounter> a_ = TJCOverall_8_11_000.Ischemic_Stroke_Encounter();
 		bool? b_(Encounter IschemicStrokeEncounter)
 		{
-			var l_ = this.Atrial_Ablation();
-			var m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, null);
+			CqlValueSet l_ = this.Atrial_Ablation();
+			IEnumerable<Procedure> m_ = context?.Operators.RetrieveByValueSet<Procedure>(l_, null);
 			bool? n_(Procedure AtrialAblationProcedure)
 			{
-				var q_ = AtrialAblationProcedure?.StatusElement;
-				var r_ = q_?.Value;
-				var s_ = context.Operators.Convert<string>(r_);
-				var t_ = context.Operators.Equal(s_, "completed");
-				var u_ = AtrialAblationProcedure?.Performed;
-				var v_ = FHIRHelpers_4_3_000.ToValue(u_);
-				var w_ = QICoreCommon_2_0_000.toInterval(v_);
-				var x_ = context.Operators.Start(w_);
-				var y_ = IschemicStrokeEncounter?.Period;
-				var z_ = FHIRHelpers_4_3_000.ToInterval(y_);
-				var aa_ = context.Operators.Start(z_);
-				var ab_ = context.Operators.Before(x_, aa_, null);
-				var ac_ = context.Operators.And(t_, ab_);
+				Code<EventStatus> q_ = AtrialAblationProcedure.StatusElement;
+				EventStatus? r_ = q_.Value;
+				string s_ = context?.Operators.Convert<string>(r_);
+				bool? t_ = context?.Operators.Equal(s_, "completed");
+				DataType u_ = AtrialAblationProcedure.Performed;
+				object v_ = FHIRHelpers_4_3_000.ToValue(u_);
+				CqlInterval<CqlDateTime> w_ = QICoreCommon_2_0_000.toInterval(v_);
+				CqlDateTime x_ = context?.Operators.Start(w_);
+				Period y_ = IschemicStrokeEncounter.Period;
+				CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
+				CqlDateTime aa_ = context?.Operators.Start(z_);
+				bool? ab_ = context?.Operators.Before(x_, aa_, null);
+				bool? ac_ = context?.Operators.And(t_, ab_);
 
 				return ac_;
 			};
-			var o_ = context.Operators.Where<Procedure>(m_, n_);
-			var p_ = context.Operators.Exists<Procedure>(o_);
+			IEnumerable<Procedure> o_ = context?.Operators.Where<Procedure>(m_, n_);
+			bool? p_ = context?.Operators.Exists<Procedure>(o_);
 
 			return p_;
 		};
-		var c_ = context.Operators.Where<Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context?.Operators.Where<Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter IschemicStrokeEncounter)
 		{
-			var ad_ = this.History_of_Atrial_Ablation();
-			var ae_ = context.Operators.RetrieveByValueSet<Condition>(ad_, null);
+			CqlValueSet ad_ = this.History_of_Atrial_Ablation();
+			IEnumerable<Condition> ae_ = context?.Operators.RetrieveByValueSet<Condition>(ad_, null);
 			bool? af_(Condition AtrialAblationDiagnosis)
 			{
-				var aj_ = AtrialAblationDiagnosis?.VerificationStatus;
-				var ak_ = FHIRHelpers_4_3_000.ToConcept(aj_);
-				var al_ = context.Operators.Not((bool?)(ak_ is null));
-				var an_ = FHIRHelpers_4_3_000.ToConcept(aj_);
-				var ao_ = QICoreCommon_2_0_000.confirmed();
-				var ap_ = context.Operators.ConvertCodeToConcept(ao_);
-				var aq_ = context.Operators.Equivalent(an_, ap_);
-				var ar_ = context.Operators.And(al_, aq_);
-				var as_ = AtrialAblationDiagnosis?.Onset;
-				var at_ = FHIRHelpers_4_3_000.ToValue(as_);
-				var au_ = QICoreCommon_2_0_000.toInterval(at_);
-				var av_ = context.Operators.Start(au_);
-				var aw_ = IschemicStrokeEncounter?.Period;
-				var ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
-				var ay_ = context.Operators.Start(ax_);
-				var az_ = context.Operators.Before(av_, ay_, null);
-				var ba_ = context.Operators.And(ar_, az_);
+				CodeableConcept aj_ = AtrialAblationDiagnosis.VerificationStatus;
+				CqlConcept ak_ = FHIRHelpers_4_3_000.ToConcept(aj_);
+				bool? al_ = context?.Operators.Not((bool?)(ak_ is null));
+				CqlConcept an_ = FHIRHelpers_4_3_000.ToConcept(aj_);
+				CqlCode ao_ = QICoreCommon_2_0_000.confirmed();
+				CqlConcept ap_ = context?.Operators.ConvertCodeToConcept(ao_);
+				bool? aq_ = context?.Operators.Equivalent(an_, ap_);
+				bool? ar_ = context?.Operators.And(al_, aq_);
+				DataType as_ = AtrialAblationDiagnosis.Onset;
+				object at_ = FHIRHelpers_4_3_000.ToValue(as_);
+				CqlInterval<CqlDateTime> au_ = QICoreCommon_2_0_000.toInterval(at_);
+				CqlDateTime av_ = context?.Operators.Start(au_);
+				Period aw_ = IschemicStrokeEncounter.Period;
+				CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
+				CqlDateTime ay_ = context?.Operators.Start(ax_);
+				bool? az_ = context?.Operators.Before(av_, ay_, null);
+				bool? ba_ = context?.Operators.And(ar_, az_);
 
 				return ba_;
 			};
-			var ag_ = context.Operators.Where<Condition>(ae_, af_);
+			IEnumerable<Condition> ag_ = context?.Operators.Where<Condition>(ae_, af_);
 			Encounter ah_(Condition AtrialAblationDiagnosis) => 
 				IschemicStrokeEncounter;
-			var ai_ = context.Operators.Select<Condition, Encounter>(ag_, ah_);
+			IEnumerable<Encounter> ai_ = context?.Operators.Select<Condition, Encounter>(ag_, ah_);
 
 			return ai_;
 		};
-		var f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
-		var g_ = context.Operators.Union<Encounter>(c_, f_);
+		IEnumerable<Encounter> f_ = context?.Operators.SelectMany<Encounter, Encounter>(a_, e_);
+		IEnumerable<Encounter> g_ = context?.Operators.Union<Encounter>(c_, f_);
 		IEnumerable<Encounter> i_(Encounter IschemicStrokeEncounter)
 		{
-			var bb_ = this.History_of_Atrial_Ablation();
-			var bc_ = context.Operators.RetrieveByValueSet<Observation>(bb_, null);
+			CqlValueSet bb_ = this.History_of_Atrial_Ablation();
+			IEnumerable<Observation> bc_ = context?.Operators.RetrieveByValueSet<Observation>(bb_, null);
 			bool? bd_(Observation AtrialAblationObservation)
 			{
-				var bh_ = AtrialAblationObservation?.StatusElement;
-				var bi_ = bh_?.Value;
-				var bj_ = context.Operators.Convert<Code<ObservationStatus>>(bi_);
-				var bk_ = context.Operators.Convert<string>(bj_);
-				var bl_ = new string[]
-				{
+				Code<ObservationStatus> bh_ = AtrialAblationObservation.StatusElement;
+				ObservationStatus? bi_ = bh_.Value;
+				Code<ObservationStatus> bj_ = context?.Operators.Convert<Code<ObservationStatus>>(bi_);
+				string bk_ = context?.Operators.Convert<string>(bj_);
+				string[] bl_ = /* ARR1 */ [
 					"final",
 					"amended",
 					"corrected",
-				};
-				var bm_ = context.Operators.In<string>(bk_, (bl_ as IEnumerable<string>));
+				];
+				bool? bm_ = context?.Operators.In<string>(bk_, (bl_ as IEnumerable<string>));
 				object bn_()
 				{
 					bool bu_()
 					{
-						var bx_ = AtrialAblationObservation?.Effective;
-						var by_ = FHIRHelpers_4_3_000.ToValue(bx_);
-						var bz_ = by_ is CqlDateTime;
+						DataType bx_ = AtrialAblationObservation.Effective;
+						object by_ = FHIRHelpers_4_3_000.ToValue(bx_);
+						bool bz_ = by_ is CqlDateTime;
 
 						return bz_;
 					};
 					bool bv_()
 					{
-						var ca_ = AtrialAblationObservation?.Effective;
-						var cb_ = FHIRHelpers_4_3_000.ToValue(ca_);
-						var cc_ = cb_ is CqlInterval<CqlDateTime>;
+						DataType ca_ = AtrialAblationObservation.Effective;
+						object cb_ = FHIRHelpers_4_3_000.ToValue(ca_);
+						bool cc_ = cb_ is CqlInterval<CqlDateTime>;
 
 						return cc_;
 					};
 					bool bw_()
 					{
-						var cd_ = AtrialAblationObservation?.Effective;
-						var ce_ = FHIRHelpers_4_3_000.ToValue(cd_);
-						var cf_ = ce_ is CqlDateTime;
+						DataType cd_ = AtrialAblationObservation.Effective;
+						object ce_ = FHIRHelpers_4_3_000.ToValue(cd_);
+						bool cf_ = ce_ is CqlDateTime;
 
 						return cf_;
 					};
 					if (bu_())
 					{
-						var cg_ = AtrialAblationObservation?.Effective;
-						var ch_ = FHIRHelpers_4_3_000.ToValue(cg_);
+						DataType cg_ = AtrialAblationObservation.Effective;
+						object ch_ = FHIRHelpers_4_3_000.ToValue(cg_);
 
 						return ((ch_ as CqlDateTime) as object);
 					}
 					else if (bv_())
 					{
-						var ci_ = AtrialAblationObservation?.Effective;
-						var cj_ = FHIRHelpers_4_3_000.ToValue(ci_);
+						DataType ci_ = AtrialAblationObservation.Effective;
+						object cj_ = FHIRHelpers_4_3_000.ToValue(ci_);
 
 						return ((cj_ as CqlInterval<CqlDateTime>) as object);
 					}
 					else if (bw_())
 					{
-						var ck_ = AtrialAblationObservation?.Effective;
-						var cl_ = FHIRHelpers_4_3_000.ToValue(ck_);
+						DataType ck_ = AtrialAblationObservation.Effective;
+						object cl_ = FHIRHelpers_4_3_000.ToValue(ck_);
 
 						return ((cl_ as CqlDateTime) as object);
 					}
@@ -356,389 +354,386 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 						return null;
 					}
 				};
-				var bo_ = QICoreCommon_2_0_000.earliest(bn_());
-				var bp_ = IschemicStrokeEncounter?.Period;
-				var bq_ = FHIRHelpers_4_3_000.ToInterval(bp_);
-				var br_ = context.Operators.End(bq_);
-				var bs_ = context.Operators.SameOrBefore(bo_, br_, null);
-				var bt_ = context.Operators.And(bm_, bs_);
+				CqlDateTime bo_ = QICoreCommon_2_0_000.earliest(bn_());
+				Period bp_ = IschemicStrokeEncounter.Period;
+				CqlInterval<CqlDateTime> bq_ = FHIRHelpers_4_3_000.ToInterval(bp_);
+				CqlDateTime br_ = context?.Operators.End(bq_);
+				bool? bs_ = context?.Operators.SameOrBefore(bo_, br_, null);
+				bool? bt_ = context?.Operators.And(bm_, bs_);
 
 				return bt_;
 			};
-			var be_ = context.Operators.Where<Observation>(bc_, bd_);
+			IEnumerable<Observation> be_ = context?.Operators.Where<Observation>(bc_, bd_);
 			Encounter bf_(Observation AtrialAblationObservation) => 
 				IschemicStrokeEncounter;
-			var bg_ = context.Operators.Select<Observation, Encounter>(be_, bf_);
+			IEnumerable<Encounter> bg_ = context?.Operators.Select<Observation, Encounter>(be_, bf_);
 
 			return bg_;
 		};
-		var j_ = context.Operators.SelectMany<Encounter, Encounter>(a_, i_);
-		var k_ = context.Operators.Union<Encounter>(g_, j_);
+		IEnumerable<Encounter> j_ = context?.Operators.SelectMany<Encounter, Encounter>(a_, i_);
+		IEnumerable<Encounter> k_ = context?.Operators.Union<Encounter>(g_, j_);
 
 		return k_;
 	}
 
     [CqlDeclaration("Encounter with a History of Atrial Ablation")]
 	public IEnumerable<Encounter> Encounter_with_a_History_of_Atrial_Ablation() => 
-		__Encounter_with_a_History_of_Atrial_Ablation.Value;
+		__Encounter_with_a_History_of_Atrial_Ablation?.Value;
 
 	private IEnumerable<Encounter> Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter_Value()
 	{
-		var a_ = TJCOverall_8_11_000.Ischemic_Stroke_Encounter();
+		IEnumerable<Encounter> a_ = TJCOverall_8_11_000.Ischemic_Stroke_Encounter();
 		IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
 		{
-			var h_ = this.Atrial_Fibrillation_or_Flutter();
-			var i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
+			CqlValueSet h_ = this.Atrial_Fibrillation_or_Flutter();
+			IEnumerable<Condition> i_ = context?.Operators.RetrieveByValueSet<Condition>(h_, null);
 			bool? j_(Condition AtrialFibrillationFlutter)
 			{
-				var n_ = AtrialFibrillationFlutter?.VerificationStatus;
-				var o_ = FHIRHelpers_4_3_000.ToConcept(n_);
-				var p_ = context.Operators.Not((bool?)(o_ is null));
-				var r_ = FHIRHelpers_4_3_000.ToConcept(n_);
-				var s_ = QICoreCommon_2_0_000.confirmed();
-				var t_ = context.Operators.ConvertCodeToConcept(s_);
-				var u_ = context.Operators.Equivalent(r_, t_);
-				var v_ = context.Operators.And(p_, u_);
-				var w_ = AtrialFibrillationFlutter?.Onset;
-				var x_ = FHIRHelpers_4_3_000.ToValue(w_);
-				var y_ = QICoreCommon_2_0_000.toInterval(x_);
-				var z_ = context.Operators.Start(y_);
-				var aa_ = IschemicStrokeEncounter?.Period;
-				var ab_ = FHIRHelpers_4_3_000.ToInterval(aa_);
-				var ac_ = context.Operators.End(ab_);
-				var ad_ = context.Operators.SameOrBefore(z_, ac_, null);
-				var ae_ = context.Operators.And(v_, ad_);
+				CodeableConcept n_ = AtrialFibrillationFlutter.VerificationStatus;
+				CqlConcept o_ = FHIRHelpers_4_3_000.ToConcept(n_);
+				bool? p_ = context?.Operators.Not((bool?)(o_ is null));
+				CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept(n_);
+				CqlCode s_ = QICoreCommon_2_0_000.confirmed();
+				CqlConcept t_ = context?.Operators.ConvertCodeToConcept(s_);
+				bool? u_ = context?.Operators.Equivalent(r_, t_);
+				bool? v_ = context?.Operators.And(p_, u_);
+				DataType w_ = AtrialFibrillationFlutter.Onset;
+				object x_ = FHIRHelpers_4_3_000.ToValue(w_);
+				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(x_);
+				CqlDateTime z_ = context?.Operators.Start(y_);
+				Period aa_ = IschemicStrokeEncounter.Period;
+				CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_3_000.ToInterval(aa_);
+				CqlDateTime ac_ = context?.Operators.End(ab_);
+				bool? ad_ = context?.Operators.SameOrBefore(z_, ac_, null);
+				bool? ae_ = context?.Operators.And(v_, ad_);
 
 				return ae_;
 			};
-			var k_ = context.Operators.Where<Condition>(i_, j_);
+			IEnumerable<Condition> k_ = context?.Operators.Where<Condition>(i_, j_);
 			Encounter l_(Condition AtrialFibrillationFlutter) => 
 				IschemicStrokeEncounter;
-			var m_ = context.Operators.Select<Condition, Encounter>(k_, l_);
+			IEnumerable<Encounter> m_ = context?.Operators.Select<Condition, Encounter>(k_, l_);
 
 			return m_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context?.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 		bool? e_(Encounter IschemicStrokeEncounter)
 		{
-			var af_ = CQMCommon_2_0_000.encounterDiagnosis(IschemicStrokeEncounter);
+			IEnumerable<Condition> af_ = CQMCommon_2_0_000.encounterDiagnosis(IschemicStrokeEncounter);
 			bool? ag_(Condition EncounterDiagnosis)
 			{
-				var aj_ = EncounterDiagnosis?.Code;
-				var ak_ = FHIRHelpers_4_3_000.ToConcept(aj_);
-				var al_ = this.Atrial_Fibrillation_or_Flutter();
-				var am_ = context.Operators.ConceptInValueSet(ak_, al_);
+				CodeableConcept aj_ = EncounterDiagnosis.Code;
+				CqlConcept ak_ = FHIRHelpers_4_3_000.ToConcept(aj_);
+				CqlValueSet al_ = this.Atrial_Fibrillation_or_Flutter();
+				bool? am_ = context?.Operators.ConceptInValueSet(ak_, al_);
 
 				return am_;
 			};
-			var ah_ = context.Operators.Where<Condition>(af_, ag_);
-			var ai_ = context.Operators.Exists<Condition>(ah_);
+			IEnumerable<Condition> ah_ = context?.Operators.Where<Condition>(af_, ag_);
+			bool? ai_ = context?.Operators.Exists<Condition>(ah_);
 
 			return ai_;
 		};
-		var f_ = context.Operators.Where<Encounter>(a_, e_);
-		var g_ = context.Operators.Union<Encounter>(c_, f_);
+		IEnumerable<Encounter> f_ = context?.Operators.Where<Encounter>(a_, e_);
+		IEnumerable<Encounter> g_ = context?.Operators.Union<Encounter>(c_, f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Encounter with Prior or Present Diagnosis of Atrial Fibrillation or Flutter")]
 	public IEnumerable<Encounter> Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter() => 
-		__Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter.Value;
+		__Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter?.Value;
 
 	private IEnumerable<Encounter> Denominator_Value()
 	{
-		var a_ = this.Encounter_with_a_History_of_Atrial_Ablation();
-		var b_ = this.Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter();
-		var c_ = context.Operators.Union<Encounter>(a_, b_);
+		IEnumerable<Encounter> a_ = this.Encounter_with_a_History_of_Atrial_Ablation();
+		IEnumerable<Encounter> b_ = this.Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter();
+		IEnumerable<Encounter> c_ = context?.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Denominator")]
 	public IEnumerable<Encounter> Denominator() => 
-		__Denominator.Value;
+		__Denominator?.Value;
 
 	private IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter_Value()
 	{
-		var a_ = this.Denominator();
+		IEnumerable<Encounter> a_ = this.Denominator();
 		IEnumerable<Encounter> b_(Encounter Encounter)
 		{
-			var d_ = TJCOverall_8_11_000.Intervention_Comfort_Measures();
+			IEnumerable<object> d_ = TJCOverall_8_11_000.Intervention_Comfort_Measures();
 			bool? e_(object ComfortMeasure)
 			{
-				var i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-				var j_ = FHIRHelpers_4_3_000.ToValue(i_);
-				var k_ = QICoreCommon_2_0_000.toInterval(j_);
-				var l_ = context.Operators.Start(k_);
-				var m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
-				var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
-				var o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
-				var p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, null);
+				object i_ = context?.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+				object j_ = FHIRHelpers_4_3_000.ToValue(i_);
+				CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.toInterval(j_);
+				CqlDateTime l_ = context?.Operators.Start(k_);
+				object m_ = context?.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
+				CqlDateTime n_ = context?.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
+				CqlInterval<CqlDateTime> o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
+				bool? p_ = context?.Operators.In<CqlDateTime>((l_ ?? n_), o_, null);
 
 				return p_;
 			};
-			var f_ = context.Operators.Where<object>(d_, e_);
+			IEnumerable<object> f_ = context?.Operators.Where<object>(d_, e_);
 			Encounter g_(object ComfortMeasure) => 
 				Encounter;
-			var h_ = context.Operators.Select<object, Encounter>(f_, g_);
+			IEnumerable<Encounter> h_ = context?.Operators.Select<object, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context?.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Comfort Measures during Hospitalization for Patients with Documented Atrial Fibrillation or Flutter")]
 	public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter() => 
-		__Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter.Value;
+		__Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter?.Value;
 
 	private IEnumerable<Encounter> Denominator_Exclusions_Value()
 	{
-		var a_ = this.Denominator();
+		IEnumerable<Encounter> a_ = this.Denominator();
 		bool? b_(Encounter Encounter)
 		{
-			var f_ = Encounter?.StatusElement;
-			var g_ = f_?.Value;
-			var h_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(g_);
-			var i_ = context.Operators.Equal(h_, "finished");
-			var j_ = Encounter?.Hospitalization;
-			var k_ = j_?.DischargeDisposition;
-			var l_ = FHIRHelpers_4_3_000.ToConcept(k_);
-			var m_ = this.Discharge_To_Acute_Care_Facility();
-			var n_ = context.Operators.ConceptInValueSet(l_, m_);
-			var p_ = j_?.DischargeDisposition;
-			var q_ = FHIRHelpers_4_3_000.ToConcept(p_);
-			var r_ = this.Left_Against_Medical_Advice();
-			var s_ = context.Operators.ConceptInValueSet(q_, r_);
-			var t_ = context.Operators.Or(n_, s_);
-			var v_ = j_?.DischargeDisposition;
-			var w_ = FHIRHelpers_4_3_000.ToConcept(v_);
-			var x_ = this.Patient_Expired();
-			var y_ = context.Operators.ConceptInValueSet(w_, x_);
-			var z_ = context.Operators.Or(t_, y_);
-			var ab_ = j_?.DischargeDisposition;
-			var ac_ = FHIRHelpers_4_3_000.ToConcept(ab_);
-			var ad_ = this.Discharged_to_Home_for_Hospice_Care();
-			var ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
-			var af_ = context.Operators.Or(z_, ae_);
-			var ah_ = j_?.DischargeDisposition;
-			var ai_ = FHIRHelpers_4_3_000.ToConcept(ah_);
-			var aj_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
-			var ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
-			var al_ = context.Operators.Or(af_, ak_);
-			var am_ = context.Operators.And(i_, al_);
+			Code<Encounter.EncounterStatus> f_ = Encounter.StatusElement;
+			Encounter.EncounterStatus? g_ = f_.Value;
+			Code<Encounter.EncounterStatus> h_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(g_);
+			bool? i_ = context?.Operators.Equal(h_, "finished");
+			Encounter.HospitalizationComponent j_ = Encounter.Hospitalization;
+			CodeableConcept k_ = j_.DischargeDisposition;
+			CqlConcept l_ = FHIRHelpers_4_3_000.ToConcept(k_);
+			CqlValueSet m_ = this.Discharge_To_Acute_Care_Facility();
+			bool? n_ = context?.Operators.ConceptInValueSet(l_, m_);
+			CodeableConcept p_ = j_.DischargeDisposition;
+			CqlConcept q_ = FHIRHelpers_4_3_000.ToConcept(p_);
+			CqlValueSet r_ = this.Left_Against_Medical_Advice();
+			bool? s_ = context?.Operators.ConceptInValueSet(q_, r_);
+			bool? t_ = context?.Operators.Or(n_, s_);
+			CodeableConcept v_ = j_.DischargeDisposition;
+			CqlConcept w_ = FHIRHelpers_4_3_000.ToConcept(v_);
+			CqlValueSet x_ = this.Patient_Expired();
+			bool? y_ = context?.Operators.ConceptInValueSet(w_, x_);
+			bool? z_ = context?.Operators.Or(t_, y_);
+			CodeableConcept ab_ = j_.DischargeDisposition;
+			CqlConcept ac_ = FHIRHelpers_4_3_000.ToConcept(ab_);
+			CqlValueSet ad_ = this.Discharged_to_Home_for_Hospice_Care();
+			bool? ae_ = context?.Operators.ConceptInValueSet(ac_, ad_);
+			bool? af_ = context?.Operators.Or(z_, ae_);
+			CodeableConcept ah_ = j_.DischargeDisposition;
+			CqlConcept ai_ = FHIRHelpers_4_3_000.ToConcept(ah_);
+			CqlValueSet aj_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
+			bool? ak_ = context?.Operators.ConceptInValueSet(ai_, aj_);
+			bool? al_ = context?.Operators.Or(af_, ak_);
+			bool? am_ = context?.Operators.And(i_, al_);
 
 			return am_;
 		};
-		var c_ = context.Operators.Where<Encounter>(a_, b_);
-		var d_ = this.Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter();
-		var e_ = context.Operators.Union<Encounter>(c_, d_);
+		IEnumerable<Encounter> c_ = context?.Operators.Where<Encounter>(a_, b_);
+		IEnumerable<Encounter> d_ = this.Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter();
+		IEnumerable<Encounter> e_ = context?.Operators.Union<Encounter>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
 	public IEnumerable<Encounter> Denominator_Exclusions() => 
-		__Denominator_Exclusions.Value;
+		__Denominator_Exclusions?.Value;
 
 	private IEnumerable<Encounter> Numerator_Value()
 	{
-		var a_ = this.Denominator();
+		IEnumerable<Encounter> a_ = this.Denominator();
 		IEnumerable<Encounter> b_(Encounter Encounter)
 		{
-			var d_ = this.Anticoagulant_Therapy();
-			var e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
-			var g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
-			var h_ = context.Operators.Union<MedicationRequest>(e_, g_);
+			CqlValueSet d_ = this.Anticoagulant_Therapy();
+			IEnumerable<MedicationRequest> e_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
+			IEnumerable<MedicationRequest> g_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
+			IEnumerable<MedicationRequest> h_ = context?.Operators.Union<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest DischargeAnticoagulant)
 			{
-				var m_ = QICoreCommon_2_0_000.isCommunity(DischargeAnticoagulant);
-				var n_ = QICoreCommon_2_0_000.isDischarge(DischargeAnticoagulant);
-				var o_ = context.Operators.Or(m_, n_);
-				var p_ = DischargeAnticoagulant?.StatusElement;
-				var q_ = p_?.Value;
-				var r_ = context.Operators.Convert<string>(q_);
-				var s_ = new string[]
-				{
+				bool? m_ = QICoreCommon_2_0_000.isCommunity(DischargeAnticoagulant);
+				bool? n_ = QICoreCommon_2_0_000.isDischarge(DischargeAnticoagulant);
+				bool? o_ = context?.Operators.Or(m_, n_);
+				Code<MedicationRequest.MedicationrequestStatus> p_ = DischargeAnticoagulant.StatusElement;
+				MedicationRequest.MedicationrequestStatus? q_ = p_.Value;
+				string r_ = context?.Operators.Convert<string>(q_);
+				string[] s_ = /* ARR1 */ [
 					"active",
 					"completed",
-				};
-				var t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
-				var u_ = context.Operators.And(o_, t_);
-				var v_ = DischargeAnticoagulant?.IntentElement;
-				var w_ = v_?.Value;
-				var x_ = context.Operators.Convert<string>(w_);
-				var y_ = new string[]
-				{
+				];
+				bool? t_ = context?.Operators.In<string>(r_, (s_ as IEnumerable<string>));
+				bool? u_ = context?.Operators.And(o_, t_);
+				Code<MedicationRequest.MedicationRequestIntent> v_ = DischargeAnticoagulant.IntentElement;
+				MedicationRequest.MedicationRequestIntent? w_ = v_.Value;
+				string x_ = context?.Operators.Convert<string>(w_);
+				string[] y_ = /* ARR1 */ [
 					"order",
 					"original-order",
 					"reflex-order",
 					"filler-order",
 					"instance-order",
-				};
-				var z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
-				var aa_ = context.Operators.And(u_, z_);
-				var ab_ = DischargeAnticoagulant?.DoNotPerformElement;
-				var ac_ = ab_?.Value;
-				var ad_ = context.Operators.IsTrue(ac_);
-				var ae_ = context.Operators.Not(ad_);
-				var af_ = context.Operators.And(aa_, ae_);
-				var ag_ = DischargeAnticoagulant?.AuthoredOnElement;
-				var ah_ = context.Operators.Convert<CqlDateTime>(ag_);
-				var ai_ = Encounter?.Period;
-				var aj_ = FHIRHelpers_4_3_000.ToInterval(ai_);
-				var ak_ = context.Operators.In<CqlDateTime>(ah_, aj_, null);
-				var al_ = context.Operators.And(af_, ak_);
+				];
+				bool? z_ = context?.Operators.In<string>(x_, (y_ as IEnumerable<string>));
+				bool? aa_ = context?.Operators.And(u_, z_);
+				FhirBoolean ab_ = DischargeAnticoagulant.DoNotPerformElement;
+				bool? ac_ = ab_.Value;
+				bool? ad_ = context?.Operators.IsTrue(ac_);
+				bool? ae_ = context?.Operators.Not(ad_);
+				bool? af_ = context?.Operators.And(aa_, ae_);
+				FhirDateTime ag_ = DischargeAnticoagulant.AuthoredOnElement;
+				CqlDateTime ah_ = context?.Operators.Convert<CqlDateTime>(ag_);
+				Period ai_ = Encounter.Period;
+				CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(ai_);
+				bool? ak_ = context?.Operators.In<CqlDateTime>(ah_, aj_, null);
+				bool? al_ = context?.Operators.And(af_, ak_);
 
 				return al_;
 			};
-			var j_ = context.Operators.Where<MedicationRequest>(h_, i_);
+			IEnumerable<MedicationRequest> j_ = context?.Operators.Where<MedicationRequest>(h_, i_);
 			Encounter k_(MedicationRequest DischargeAnticoagulant) => 
 				Encounter;
-			var l_ = context.Operators.Select<MedicationRequest, Encounter>(j_, k_);
+			IEnumerable<Encounter> l_ = context?.Operators.Select<MedicationRequest, Encounter>(j_, k_);
 
 			return l_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context?.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Numerator")]
 	public IEnumerable<Encounter> Numerator() => 
-		__Numerator.Value;
+		__Numerator?.Value;
 
 	private IEnumerable<MedicationRequest> Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge_Value()
 	{
-		var a_ = this.Anticoagulant_Therapy();
-		var b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		CqlValueSet a_ = this.Anticoagulant_Therapy();
+		IEnumerable<MedicationRequest> b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		bool? c_(MedicationRequest NoAnticoagulant)
 		{
-			var e_ = NoAnticoagulant?.ReasonCode;
+			List<CodeableConcept> e_ = NoAnticoagulant.ReasonCode;
 			CqlConcept f_(CodeableConcept @this)
 			{
-				var z_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return z_;
 			};
-			var g_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)e_, f_);
-			var h_ = this.Medical_Reason_For_Not_Providing_Treatment();
-			var i_ = context.Operators.ConceptsInValueSet(g_, h_);
+			IEnumerable<CqlConcept> g_ = context?.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)e_, f_);
+			CqlValueSet h_ = this.Medical_Reason_For_Not_Providing_Treatment();
+			bool? i_ = context?.Operators.ConceptsInValueSet(g_, h_);
 			CqlConcept k_(CodeableConcept @this)
 			{
-				var aa_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept aa_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return aa_;
 			};
-			var l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)e_, k_);
-			var m_ = this.Patient_Refusal();
-			var n_ = context.Operators.ConceptsInValueSet(l_, m_);
-			var o_ = context.Operators.Or(i_, n_);
-			var p_ = QICoreCommon_2_0_000.isCommunity(NoAnticoagulant);
-			var q_ = QICoreCommon_2_0_000.isDischarge(NoAnticoagulant);
-			var r_ = context.Operators.Or(p_, q_);
-			var s_ = context.Operators.And(o_, r_);
-			var t_ = NoAnticoagulant?.IntentElement;
-			var u_ = t_?.Value;
-			var v_ = context.Operators.Convert<string>(u_);
-			var w_ = new string[]
-			{
+			IEnumerable<CqlConcept> l_ = context?.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)e_, k_);
+			CqlValueSet m_ = this.Patient_Refusal();
+			bool? n_ = context?.Operators.ConceptsInValueSet(l_, m_);
+			bool? o_ = context?.Operators.Or(i_, n_);
+			bool? p_ = QICoreCommon_2_0_000.isCommunity(NoAnticoagulant);
+			bool? q_ = QICoreCommon_2_0_000.isDischarge(NoAnticoagulant);
+			bool? r_ = context?.Operators.Or(p_, q_);
+			bool? s_ = context?.Operators.And(o_, r_);
+			Code<MedicationRequest.MedicationRequestIntent> t_ = NoAnticoagulant.IntentElement;
+			MedicationRequest.MedicationRequestIntent? u_ = t_.Value;
+			string v_ = context?.Operators.Convert<string>(u_);
+			string[] w_ = /* ARR1 */ [
 				"order",
 				"original-order",
 				"reflex-order",
 				"filler-order",
 				"instance-order",
-			};
-			var x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
-			var y_ = context.Operators.And(s_, x_);
+			];
+			bool? x_ = context?.Operators.In<string>(v_, (w_ as IEnumerable<string>));
+			bool? y_ = context?.Operators.And(s_, x_);
 
 			return y_;
 		};
-		var d_ = context.Operators.Where<MedicationRequest>(b_, c_);
+		IEnumerable<MedicationRequest> d_ = context?.Operators.Where<MedicationRequest>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Documented Reason for Not Giving Anticoagulant at Discharge")]
 	public IEnumerable<MedicationRequest> Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge() => 
-		__Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge.Value;
+		__Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge?.Value;
 
 	private IEnumerable<Encounter> Denominator_Exceptions_Value()
 	{
-		var a_ = this.Denominator();
+		IEnumerable<Encounter> a_ = this.Denominator();
 		IEnumerable<Encounter> b_(Encounter Encounter)
 		{
-			var d_ = this.Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge();
+			IEnumerable<MedicationRequest> d_ = this.Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge();
 			bool? e_(MedicationRequest NoDischargeAnticoagulant)
 			{
-				var i_ = NoDischargeAnticoagulant?.AuthoredOnElement;
-				var j_ = context.Operators.Convert<CqlDateTime>(i_);
-				var k_ = Encounter?.Period;
-				var l_ = FHIRHelpers_4_3_000.ToInterval(k_);
-				var m_ = context.Operators.In<CqlDateTime>(j_, l_, null);
+				FhirDateTime i_ = NoDischargeAnticoagulant.AuthoredOnElement;
+				CqlDateTime j_ = context?.Operators.Convert<CqlDateTime>(i_);
+				Period k_ = Encounter.Period;
+				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
+				bool? m_ = context?.Operators.In<CqlDateTime>(j_, l_, null);
 
 				return m_;
 			};
-			var f_ = context.Operators.Where<MedicationRequest>(d_, e_);
+			IEnumerable<MedicationRequest> f_ = context?.Operators.Where<MedicationRequest>(d_, e_);
 			Encounter g_(MedicationRequest NoDischargeAnticoagulant) => 
 				Encounter;
-			var h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
+			IEnumerable<Encounter> h_ = context?.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
 			return h_;
 		};
-		var c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+		IEnumerable<Encounter> c_ = context?.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
 	public IEnumerable<Encounter> Denominator_Exceptions() => 
-		__Denominator_Exceptions.Value;
+		__Denominator_Exceptions?.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
-		__SDE_Ethnicity.Value;
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+		__SDE_Ethnicity?.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
-		__SDE_Payer.Value;
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+		__SDE_Payer?.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
-		__SDE_Race.Value;
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+		__SDE_Race?.Value;
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
 	public CqlCode SDE_Sex() => 
-		__SDE_Sex.Value;
+		__SDE_Sex?.Value;
 
 }
