@@ -26,7 +26,7 @@ namespace Hl7.Cql.Elm
     }
     partial class After : NaryWithPrecision { }
     partial class Before : NaryWithPrecision { }
-    partial class CalculateAge : IHasPrecision { }
+    partial class CalculateAge : UnaryWithPrecision { }
     partial class CalculateAgeAt : NaryWithPrecision { }
     partial class Contains : NaryWithPrecision { }
     partial class DateTimeComponentFrom : UnaryWithPrecision { }

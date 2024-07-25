@@ -106,6 +106,12 @@ partial class ExpressionBuilderContext
         params TArg?[] args) =>
         _cqlOperatorsBinder.BindToMethod(methodName, TranslateArgs(args), NoTypes);
 
+    private Expression BindCqlOperator<TArg>(
+        string methodName,
+        TArg?[] args,
+        Type[] typeArgs) =>
+         _cqlOperatorsBinder.BindToMethod(methodName, TranslateArgs(args), typeArgs);
+
     [DebuggerStepThrough]
     private Type[] TranslateTypes<TType>(params TType?[] args) =>
         args switch
@@ -1705,7 +1711,8 @@ partial class ExpressionBuilderContext
     private Expression DemoteSourceListToSingleton(Expression source)
     {
         // Do not inline this method, so that we can clearly see the pairing with the call to PromoteSourceSingletonToList
-        return BindCqlOperator(nameof(ICqlOperators.SingletonFrom), source);
+        var typeArg = _typeResolver.GetListElementType(source.Type, true);
+        return BindCqlOperator(nameof(ICqlOperators.SingletonFrom), [source], [typeArg!]);
     }
 
     private (Expression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(Expression source)

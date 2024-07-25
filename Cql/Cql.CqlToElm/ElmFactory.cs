@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Xml;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -95,21 +96,28 @@ namespace Hl7.Cql.CqlToElm
                 _ => null,
             };
             if (ucum is not null)
-                return new Literal { value = ucum }.WithResultType(SystemTypes.StringType);
-            else 
-                return new Literal { value = Enum.GetName(value) }
-                    .AddError(Messaging.NamedTypeRequiredInContext())
-                    .WithResultType(SystemTypes.StringType);
+                return new Literal
+                {
+                    value = ucum,
+                    valueType = new XmlQualifiedName(SystemTypes.StringType.name.Name),
+                }
+                .WithResultType(SystemTypes.StringType);
+            else
+                return new Literal
+                {
+                    value = Enum.GetName(value),
+                    valueType = new XmlQualifiedName(SystemTypes.StringType.name.Name),
+                }
+                .WithResultType(SystemTypes.StringType)
+                .AddError(Messaging.NamedTypeRequiredInContext());
         }
 
         private Literal Literal(string value, NamedTypeSpecifier namedType) =>
             new Literal
             {
                 value = value,
-                valueType = namedType.name,
-                resultTypeName = namedType.name,
-                resultTypeSpecifier = namedType,
-            };
+                valueType = new XmlQualifiedName(namedType.name.Name),
+            }.WithResultType(namedType);
 
         internal Expression If(Expression condition, Expression then, Expression @else)
         {
@@ -258,6 +266,7 @@ namespace Hl7.Cql.CqlToElm
                 _ => throw new ArgumentException($"Could not determine precision for Age function {name}.")
             };
             ca.precisionSpecified = true;
+            ca.operand = arguments[0];
             return ca;
         }
         internal CalculateAgeAt Populate(string name, CalculateAgeAt caa, Expression[] arguments)
@@ -274,6 +283,7 @@ namespace Hl7.Cql.CqlToElm
                 _ => throw new ArgumentException($"Could not determine precision for Age function {name}.")
             };
             caa.precisionSpecified = true;
+            caa.operand = arguments;
             return caa;
         }
 
