@@ -11,7 +11,6 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class CSharpCodeWriterOptions
 {
-
     internal partial class Validator : IValidateOptions<CSharpCodeWriterOptions>
     {
         public ValidateOptionsResult Validate(string? name, CSharpCodeWriterOptions options)
