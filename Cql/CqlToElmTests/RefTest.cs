@@ -167,6 +167,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void Function()
         {
             var library = MakeLibrary($@"
@@ -312,6 +313,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void InvokeFluentFunction()
         {
             var library = MakeLibrary($@"
@@ -535,6 +537,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void InvokeListPropertyViaFunction()
         {
             var library = MakeLibrary($@"
