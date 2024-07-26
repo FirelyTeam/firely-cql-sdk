@@ -758,7 +758,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("433621000124101", "http://snomed.info/sct", null, null),
 			new CqlCode("428321000124101", "http://snomed.info/sct", null, null),
@@ -780,7 +780,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlCode[] CPT_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("99211", "http://www.ama-assn.org/go/cpt", null, null),
 		};
@@ -794,7 +794,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlCode[] CVX_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("119", "http://hl7.org/fhir/sid/cvx", null, null),
 		};
@@ -808,7 +808,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlCode[] ICD10_Value()
 	{
-		var a_ = new CqlCode[]
+		CqlCode[] a_ = new CqlCode[]
 		{
 			new CqlCode("3E0234Z", "http://www.cms.gov/Medicare/Coding/ICD10", null, null),
 		};
@@ -822,10 +822,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("ChildhoodImmunizationStatusFHIR-0.1.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("ChildhoodImmunizationStatusFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -836,8 +836,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -848,61 +848,61 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Home_Healthcare_Services();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.Union<Encounter>(b_, d_);
-		var f_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.Union<Encounter>(g_, i_);
-		var k_ = context.Operators.Union<Encounter>(e_, j_);
-		var l_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Home_Healthcare_Services();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+		IEnumerable<Encounter> l_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? m_(Encounter E)
 		{
-			var y_ = E?.Type;
+			List<CodeableConcept> y_ = E?.Type;
 			CqlConcept z_(CodeableConcept @this)
 			{
-				var ae_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return ae_;
 			};
-			var aa_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)y_, z_);
+			IEnumerable<CqlConcept> aa_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)y_, z_);
 			bool? ab_(CqlConcept T)
 			{
-				var af_ = this.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional();
-				var ag_ = context.Operators.ConvertCodeToConcept(af_);
-				var ah_ = context.Operators.Equivalent(T, ag_);
+				CqlCode af_ = this.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional();
+				CqlConcept ag_ = context.Operators.ConvertCodeToConcept(af_);
+				bool? ah_ = context.Operators.Equivalent(T, ag_);
 
 				return ah_;
 			};
-			var ac_ = context.Operators.Where<CqlConcept>(aa_, ab_);
-			var ad_ = context.Operators.Exists<CqlConcept>(ac_);
+			IEnumerable<CqlConcept> ac_ = context.Operators.Where<CqlConcept>(aa_, ab_);
+			bool? ad_ = context.Operators.Exists<CqlConcept>(ac_);
 
 			return ad_;
 		};
-		var n_ = context.Operators.Where<Encounter>(l_, m_);
-		var o_ = this.Online_Assessments();
-		var p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
-		var q_ = context.Operators.Union<Encounter>(n_, p_);
-		var r_ = context.Operators.Union<Encounter>(k_, q_);
-		var s_ = this.Telephone_Visits();
-		var t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, null);
-		var u_ = context.Operators.Union<Encounter>(r_, t_);
-		var v_ = Status_1_6_000.Finished_Encounter(u_);
+		IEnumerable<Encounter> n_ = context.Operators.Where<Encounter>(l_, m_);
+		CqlValueSet o_ = this.Online_Assessments();
+		IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
+		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(n_, p_);
+		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(k_, q_);
+		CqlValueSet s_ = this.Telephone_Visits();
+		IEnumerable<Encounter> t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, null);
+		IEnumerable<Encounter> u_ = context.Operators.Union<Encounter>(r_, t_);
+		IEnumerable<Encounter> v_ = Status_1_6_000.Finished_Encounter(u_);
 		bool? w_(Encounter ValidEncounters)
 		{
-			var ai_ = this.Measurement_Period();
-			var aj_ = ValidEncounters?.Period;
-			var ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
-			var al_ = QICoreCommon_2_0_000.ToInterval((ak_ as object));
-			var am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ai_, al_, "day");
+			CqlInterval<CqlDateTime> ai_ = this.Measurement_Period();
+			Period aj_ = ValidEncounters?.Period;
+			CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
+			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.ToInterval((ak_ as object));
+			bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ai_, al_, "day");
 
 			return am_;
 		};
-		var x_ = context.Operators.Where<Encounter>(v_, w_);
+		IEnumerable<Encounter> x_ = context.Operators.Where<Encounter>(v_, w_);
 
 		return x_;
 	}
@@ -913,18 +913,20 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.End(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Equal(f_, 2);
-		var h_ = this.Qualifying_Encounters();
-		var i_ = context.Operators.Exists<Encounter>(h_);
-		var j_ = context.Operators.And(g_, i_);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context.Operators.End(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		bool? i_ = context.Operators.Equal(h_, 2);
+		IEnumerable<Encounter> j_ = this.Qualifying_Encounters();
+		bool? k_ = context.Operators.Exists<Encounter>(j_);
+		bool? l_ = context.Operators.And(i_, k_);
 
-		return j_;
+		return l_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -933,7 +935,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -944,12 +946,14 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlDate Date_of_Second_Birthday_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = context.Operators.Quantity(2m, "years");
-		var d_ = context.Operators.Add(b_, c_);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlQuantity e_ = context.Operators.Quantity(2m, "years");
+		CqlDate f_ = context.Operators.Add(d_, e_);
 
-		return d_;
+		return f_;
 	}
 
     [CqlDeclaration("Date of Second Birthday")]
@@ -958,14 +962,16 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlInterval<CqlDate> First_Two_Years_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = context.Operators.ConvertDateToDateTime(b_);
-		var d_ = context.Operators.DateFrom(c_);
-		var e_ = this.Date_of_Second_Birthday();
-		var f_ = context.Operators.Interval(d_, e_, true, true);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlDateTime e_ = context.Operators.ConvertDateToDateTime(d_);
+		CqlDate f_ = context.Operators.DateFrom(e_);
+		CqlDate g_ = this.Date_of_Second_Birthday();
+		CqlInterval<CqlDate> h_ = context.Operators.Interval(f_, g_, true, true);
 
-		return f_;
+		return h_;
 	}
 
     [CqlDeclaration("First Two Years")]
@@ -974,21 +980,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Has_Severe_Combined_Immunodeficiency_Value()
 	{
-		var a_ = this.Severe_Combined_Immunodeficiency();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = Status_1_6_000.Active_Condition(b_);
+		CqlValueSet a_ = this.Severe_Combined_Immunodeficiency();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition SevereImmuneDisorder)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(SevereImmuneDisorder);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(SevereImmuneDisorder);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var e_ = context.Operators.Where<Condition>(c_, d_);
-		var f_ = context.Operators.Exists<Condition>(e_);
+		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
+		bool? f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -999,21 +1005,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Has_Immunodeficiency_Value()
 	{
-		var a_ = this.Disorders_of_the_Immune_System();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = Status_1_6_000.Active_Condition(b_);
+		CqlValueSet a_ = this.Disorders_of_the_Immune_System();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition ImmuneDisorder)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(ImmuneDisorder);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(ImmuneDisorder);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var e_ = context.Operators.Where<Condition>(c_, d_);
-		var f_ = context.Operators.Exists<Condition>(e_);
+		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
+		bool? f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -1024,21 +1030,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Has_HIV_Value()
 	{
-		var a_ = this.HIV();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = Status_1_6_000.Active_Condition(b_);
+		CqlValueSet a_ = this.HIV();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition HIV)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(HIV);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(HIV);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var e_ = context.Operators.Where<Condition>(c_, d_);
-		var f_ = context.Operators.Exists<Condition>(e_);
+		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
+		bool? f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -1049,21 +1055,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Value()
 	{
-		var a_ = this.Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = Status_1_6_000.Active_Condition(b_);
+		CqlValueSet a_ = this.Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition LymphaticMalignantNeoplasm)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(LymphaticMalignantNeoplasm);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(LymphaticMalignantNeoplasm);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var e_ = context.Operators.Where<Condition>(c_, d_);
-		var f_ = context.Operators.Exists<Condition>(e_);
+		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
+		bool? f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -1074,21 +1080,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Has_Intussusception_Value()
 	{
-		var a_ = this.Intussusception();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = Status_1_6_000.Active_Condition(b_);
+		CqlValueSet a_ = this.Intussusception();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition IntussusceptionDisorder)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(IntussusceptionDisorder);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(IntussusceptionDisorder);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var e_ = context.Operators.Where<Condition>(c_, d_);
-		var f_ = context.Operators.Exists<Condition>(e_);
+		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
+		bool? f_ = context.Operators.Exists<Condition>(e_);
 
 		return f_;
 	}
@@ -1099,17 +1105,17 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = Hospice_6_9_000.Has_Hospice_Services();
-		var b_ = this.Has_Severe_Combined_Immunodeficiency();
-		var c_ = context.Operators.Or(a_, b_);
-		var d_ = this.Has_Immunodeficiency();
-		var e_ = context.Operators.Or(c_, d_);
-		var f_ = this.Has_HIV();
-		var g_ = context.Operators.Or(e_, f_);
-		var h_ = this.Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia();
-		var i_ = context.Operators.Or(g_, h_);
-		var j_ = this.Has_Intussusception();
-		var k_ = context.Operators.Or(i_, j_);
+		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
+		bool? b_ = this.Has_Severe_Combined_Immunodeficiency();
+		bool? c_ = context.Operators.Or(a_, b_);
+		bool? d_ = this.Has_Immunodeficiency();
+		bool? e_ = context.Operators.Or(c_, d_);
+		bool? f_ = this.Has_HIV();
+		bool? g_ = context.Operators.Or(e_, f_);
+		bool? h_ = this.Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia();
+		bool? i_ = context.Operators.Or(g_, h_);
+		bool? j_ = this.Has_Intussusception();
+		bool? k_ = context.Operators.Or(i_, j_);
 
 		return k_;
 	}
@@ -1120,16 +1126,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = context.Operators.ConvertDateToDateTime(b_);
-		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.Quantity(42m, "days");
-		var f_ = context.Operators.Add(d_, e_);
-		var g_ = this.Date_of_Second_Birthday();
-		var h_ = context.Operators.Interval(f_, g_, true, true);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlDateTime e_ = context.Operators.ConvertDateToDateTime(d_);
+		CqlDate f_ = context.Operators.DateFrom(e_);
+		CqlQuantity g_ = context.Operators.Quantity(42m, "days");
+		CqlDate h_ = context.Operators.Add(f_, g_);
+		CqlDate i_ = this.Date_of_Second_Birthday();
+		CqlInterval<CqlDate> j_ = context.Operators.Interval(h_, i_, true, true);
 
-		return h_;
+		return j_;
 	}
 
     [CqlDeclaration("Vaccine Administration Interval - 42 Days up to 2 Years Old")]
@@ -1138,63 +1146,63 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures_Value()
 	{
-		var a_ = this.DTaP_Vaccine();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.DTaP_Vaccine();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization DTaPVaccination)
 		{
-			var p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var q_ = DTaPVaccination?.Occurrence;
-			var r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			var s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
+			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType q_ = DTaPVaccination?.Occurrence;
+			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
+			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization DTaPVaccination)
 		{
-			var v_ = DTaPVaccination?.Occurrence;
-			var w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			var x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-			var y_ = CQMCommon_2_0_000.ToDateInterval(x_);
-			var z_ = context.Operators.Start(y_);
-			var aa_ = context.Operators.ConvertDateToDateTime(z_);
-			var ab_ = context.Operators.DateFrom(aa_);
+			DataType v_ = DTaPVaccination?.Occurrence;
+			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
+			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
+			CqlDate z_ = context.Operators.Start(y_);
+			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
 		};
-		var g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
-		var h_ = this.DTaP_Vaccine_Administered();
-		var i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
-		var j_ = Status_1_6_000.Completed_Procedure(i_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
+		CqlValueSet h_ = this.DTaP_Vaccine_Administered();
+		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
+		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure DTaPProcedure)
 		{
-			var ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var ad_ = DTaPProcedure?.Performed;
-			var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-			var af_ = QICoreCommon_2_0_000.ToInterval(ae_);
-			var ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			var ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
+			CqlInterval<CqlDate> ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType ad_ = DTaPProcedure?.Performed;
+			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
+			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
-		var l_ = context.Operators.Where<Procedure>(j_, k_);
+		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure DTaPProcedure)
 		{
-			var ai_ = DTaPProcedure?.Performed;
-			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-			var ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
-			var al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
-			var am_ = context.Operators.Start(al_);
-			var an_ = context.Operators.ConvertDateToDateTime(am_);
-			var ao_ = context.Operators.DateFrom(an_);
+			DataType ai_ = DTaPProcedure?.Performed;
+			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
+			CqlInterval<CqlDate> al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
+			CqlDate am_ = context.Operators.Start(al_);
+			CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
 		};
-		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.Union<CqlDate>(g_, n_);
+		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
+		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -1205,11 +1213,11 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Four_DTaP_Vaccinations_Value()
 	{
-		var a_ = this.DTaP_Immunizations_or_Procedures();
-		var e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
+		IEnumerable<CqlDate> a_ = this.DTaP_Immunizations_or_Procedures();
+		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>> e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
 		Tuple_EMDhFLcFhWVERAVVNfLAZYXJi f_(ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			var l_ = new Tuple_EMDhFLcFhWVERAVVNfLAZYXJi
+			Tuple_EMDhFLcFhWVERAVVNfLAZYXJi l_ = new Tuple_EMDhFLcFhWVERAVVNfLAZYXJi
 			{
 				DTaPVaccination1 = _valueTuple.Item1,
 				DTaPVaccination2 = _valueTuple.Item2,
@@ -1219,25 +1227,25 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, Tuple_EMDhFLcFhWVERAVVNfLAZYXJi>(e_, f_);
+		IEnumerable<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi> g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, Tuple_EMDhFLcFhWVERAVVNfLAZYXJi>(e_, f_);
 		bool? h_(Tuple_EMDhFLcFhWVERAVVNfLAZYXJi tuple_emdhflcfhwveravvnflazyxji)
 		{
-			var m_ = context.Operators.Quantity(1m, "day");
-			var n_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination1, m_);
-			var o_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination2, n_, "day");
-			var q_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination2, m_);
-			var r_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination3, q_, "day");
-			var s_ = context.Operators.And(o_, r_);
-			var u_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination3, m_);
-			var v_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination4, u_, "day");
-			var w_ = context.Operators.And(s_, v_);
+			CqlQuantity m_ = context.Operators.Quantity(1m, "day");
+			CqlDate n_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination1, m_);
+			bool? o_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination2, n_, "day");
+			CqlDate q_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination2, m_);
+			bool? r_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination3, q_, "day");
+			bool? s_ = context.Operators.And(o_, r_);
+			CqlDate u_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination3, m_);
+			bool? v_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination4, u_, "day");
+			bool? w_ = context.Operators.And(s_, v_);
 
 			return w_;
 		};
-		var i_ = context.Operators.Where<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi>(g_, h_);
+		IEnumerable<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi> i_ = context.Operators.Where<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi>(g_, h_);
 		CqlDate j_(Tuple_EMDhFLcFhWVERAVVNfLAZYXJi tuple_emdhflcfhwveravvnflazyxji) => 
 			tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination1;
-		var k_ = context.Operators.Select<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi, CqlDate>(i_, j_);
+		IEnumerable<CqlDate> k_ = context.Operators.Select<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi, CqlDate>(i_, j_);
 
 		return k_;
 	}
@@ -1248,23 +1256,23 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> DTaP_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Anaphylactic_Reaction_to_DTaP_Vaccine();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = this.Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine();
-		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = context.Operators.Union<Condition>(b_, d_);
-		var f_ = Status_1_6_000.Active_Condition(e_);
+		CqlValueSet a_ = this.Anaphylactic_Reaction_to_DTaP_Vaccine();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlValueSet c_ = this.Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine();
+		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
+		IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
+		IEnumerable<Condition> f_ = Status_1_6_000.Active_Condition(e_);
 		bool? g_(Condition DTaPConditions)
 		{
-			var i_ = QICoreCommon_2_0_000.ToPrevalenceInterval(DTaPConditions);
-			var j_ = context.Operators.Start(i_);
-			var k_ = context.Operators.DateFrom(j_);
-			var l_ = this.First_Two_Years();
-			var m_ = context.Operators.In<CqlDate>(k_, l_, "day");
+			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToPrevalenceInterval(DTaPConditions);
+			CqlDateTime j_ = context.Operators.Start(i_);
+			CqlDate k_ = context.Operators.DateFrom(j_);
+			CqlInterval<CqlDate> l_ = this.First_Two_Years();
+			bool? m_ = context.Operators.In<CqlDate>(k_, l_, "day");
 
 			return m_;
 		};
-		var h_ = context.Operators.Where<Condition>(f_, g_);
+		IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
 
 		return h_;
 	}
@@ -1275,63 +1283,63 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Polio_Immunizations_or_Procedures_Value()
 	{
-		var a_ = this.Inactivated_Polio_Vaccine__IPV_();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Inactivated_Polio_Vaccine__IPV_();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization PolioVaccination)
 		{
-			var p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var q_ = PolioVaccination?.Occurrence;
-			var r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			var s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
+			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType q_ = PolioVaccination?.Occurrence;
+			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
+			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization PolioVaccination)
 		{
-			var v_ = PolioVaccination?.Occurrence;
-			var w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			var x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-			var y_ = CQMCommon_2_0_000.ToDateInterval(x_);
-			var z_ = context.Operators.Start(y_);
-			var aa_ = context.Operators.ConvertDateToDateTime(z_);
-			var ab_ = context.Operators.DateFrom(aa_);
+			DataType v_ = PolioVaccination?.Occurrence;
+			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
+			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
+			CqlDate z_ = context.Operators.Start(y_);
+			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
 		};
-		var g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
-		var h_ = this.Inactivated_Polio_Vaccine__IPV__Administered();
-		var i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
-		var j_ = Status_1_6_000.Completed_Procedure(i_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
+		CqlValueSet h_ = this.Inactivated_Polio_Vaccine__IPV__Administered();
+		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
+		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure PolioProcedure)
 		{
-			var ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var ad_ = PolioProcedure?.Performed;
-			var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-			var af_ = QICoreCommon_2_0_000.ToInterval(ae_);
-			var ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			var ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
+			CqlInterval<CqlDate> ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType ad_ = PolioProcedure?.Performed;
+			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
+			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
-		var l_ = context.Operators.Where<Procedure>(j_, k_);
+		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure PolioProcedure)
 		{
-			var ai_ = PolioProcedure?.Performed;
-			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-			var ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
-			var al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
-			var am_ = context.Operators.Start(al_);
-			var an_ = context.Operators.ConvertDateToDateTime(am_);
-			var ao_ = context.Operators.DateFrom(an_);
+			DataType ai_ = PolioProcedure?.Performed;
+			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
+			CqlInterval<CqlDate> al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
+			CqlDate am_ = context.Operators.Start(al_);
+			CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
 		};
-		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.Union<CqlDate>(g_, n_);
+		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
+		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -1342,11 +1350,11 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Three_Polio_Vaccinations_Value()
 	{
-		var a_ = this.Polio_Immunizations_or_Procedures();
-		var d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
+		IEnumerable<CqlDate> a_ = this.Polio_Immunizations_or_Procedures();
+		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
 		Tuple_CNGHaZROXaJTHPICcbIaJbRXV e_(ValueTuple<CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			var k_ = new Tuple_CNGHaZROXaJTHPICcbIaJbRXV
+			Tuple_CNGHaZROXaJTHPICcbIaJbRXV k_ = new Tuple_CNGHaZROXaJTHPICcbIaJbRXV
 			{
 				PolioVaccination1 = _valueTuple.Item1,
 				PolioVaccination2 = _valueTuple.Item2,
@@ -1355,22 +1363,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, Tuple_CNGHaZROXaJTHPICcbIaJbRXV>(d_, e_);
+		IEnumerable<Tuple_CNGHaZROXaJTHPICcbIaJbRXV> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, Tuple_CNGHaZROXaJTHPICcbIaJbRXV>(d_, e_);
 		bool? g_(Tuple_CNGHaZROXaJTHPICcbIaJbRXV tuple_cnghazroxajthpiccbiajbrxv)
 		{
-			var l_ = context.Operators.Quantity(1m, "day");
-			var m_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination1, l_);
-			var n_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination2, m_, "day");
-			var p_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination2, l_);
-			var q_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination3, p_, "day");
-			var r_ = context.Operators.And(n_, q_);
+			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
+			CqlDate m_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination1, l_);
+			bool? n_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination2, m_, "day");
+			CqlDate p_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination2, l_);
+			bool? q_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination3, p_, "day");
+			bool? r_ = context.Operators.And(n_, q_);
 
 			return r_;
 		};
-		var h_ = context.Operators.Where<Tuple_CNGHaZROXaJTHPICcbIaJbRXV>(f_, g_);
+		IEnumerable<Tuple_CNGHaZROXaJTHPICcbIaJbRXV> h_ = context.Operators.Where<Tuple_CNGHaZROXaJTHPICcbIaJbRXV>(f_, g_);
 		CqlDate i_(Tuple_CNGHaZROXaJTHPICcbIaJbRXV tuple_cnghazroxajthpiccbiajbrxv) => 
 			tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination1;
-		var j_ = context.Operators.Select<Tuple_CNGHaZROXaJTHPICcbIaJbRXV, CqlDate>(h_, i_);
+		IEnumerable<CqlDate> j_ = context.Operators.Select<Tuple_CNGHaZROXaJTHPICcbIaJbRXV, CqlDate>(h_, i_);
 
 		return j_;
 	}
@@ -1381,21 +1389,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Polio_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
-		var d_ = Status_1_6_000.Active_Condition(c_);
+		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
+		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition PolioConditions)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(PolioConditions);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(PolioConditions);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var f_ = context.Operators.Where<Condition>(d_, e_);
+		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
@@ -1406,14 +1414,16 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlDate Date_of_First_Birthday_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = context.Operators.ConvertDateToDateTime(b_);
-		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.Quantity(1m, "year");
-		var f_ = context.Operators.Add(d_, e_);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlDateTime e_ = context.Operators.ConvertDateToDateTime(d_);
+		CqlDate f_ = context.Operators.DateFrom(e_);
+		CqlQuantity g_ = context.Operators.Quantity(1m, "year");
+		CqlDate h_ = context.Operators.Add(f_, g_);
 
-		return f_;
+		return h_;
 	}
 
     [CqlDeclaration("Date of First Birthday")]
@@ -1422,9 +1432,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday_Value()
 	{
-		var a_ = this.Date_of_First_Birthday();
-		var b_ = this.Date_of_Second_Birthday();
-		var c_ = context.Operators.Interval(a_, b_, true, true);
+		CqlDate a_ = this.Date_of_First_Birthday();
+		CqlDate b_ = this.Date_of_Second_Birthday();
+		CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, true, true);
 
 		return c_;
 	}
@@ -1435,37 +1445,37 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<object> One_MMR_Vaccination_Value()
 	{
-		var a_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization MMRVaccination)
 		{
-			var l_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
-			var m_ = MMRVaccination?.Occurrence;
-			var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
-			var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
-			var p_ = CQMCommon_2_0_000.ToDateInterval(o_);
-			var q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, null);
+			CqlInterval<CqlDate> l_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
+			DataType m_ = MMRVaccination?.Occurrence;
+			CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDate> p_ = CQMCommon_2_0_000.ToDateInterval(o_);
+			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, null);
 
 			return q_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
-		var f_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine_Administered();
-		var g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
-		var h_ = Status_1_6_000.Completed_Procedure(g_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
+		CqlValueSet f_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine_Administered();
+		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
+		IEnumerable<Procedure> h_ = Status_1_6_000.Completed_Procedure(g_);
 		bool? i_(Procedure MMRProcedure)
 		{
-			var r_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
-			var s_ = MMRProcedure?.Performed;
-			var t_ = FHIRHelpers_4_3_000.ToValue(s_);
-			var u_ = QICoreCommon_2_0_000.ToInterval(t_);
-			var v_ = CQMCommon_2_0_000.ToDateInterval(u_);
-			var w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, null);
+			CqlInterval<CqlDate> r_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
+			DataType s_ = MMRProcedure?.Performed;
+			object t_ = FHIRHelpers_4_3_000.ToValue(s_);
+			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_);
+			CqlInterval<CqlDate> v_ = CQMCommon_2_0_000.ToDateInterval(u_);
+			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, null);
 
 			return w_;
 		};
-		var j_ = context.Operators.Where<Procedure>(h_, i_);
-		var k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
+		IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
+		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -1476,21 +1486,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> MMR_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
-		var d_ = Status_1_6_000.Active_Condition(c_);
+		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
+		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition MMRConditions)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(MMRConditions);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(MMRConditions);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var f_ = context.Operators.Where<Condition>(d_, e_);
+		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
@@ -1501,20 +1511,20 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Measles_Indicators_Value()
 	{
-		var a_ = this.Measles();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = Status_1_6_000.Active_Condition(b_);
+		CqlValueSet a_ = this.Measles();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition MeaslesDiagnosis)
 		{
-			var f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(MeaslesDiagnosis);
-			var g_ = context.Operators.Start(f_);
-			var h_ = context.Operators.DateFrom(g_);
-			var i_ = this.First_Two_Years();
-			var j_ = context.Operators.In<CqlDate>(h_, i_, "day");
+			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(MeaslesDiagnosis);
+			CqlDateTime g_ = context.Operators.Start(f_);
+			CqlDate h_ = context.Operators.DateFrom(g_);
+			CqlInterval<CqlDate> i_ = this.First_Two_Years();
+			bool? j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
-		var e_ = context.Operators.Where<Condition>(c_, d_);
+		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
@@ -1525,20 +1535,20 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Mumps_Indicators_Value()
 	{
-		var a_ = this.Mumps();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = Status_1_6_000.Active_Condition(b_);
+		CqlValueSet a_ = this.Mumps();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition MumpsDiagnosis)
 		{
-			var f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(MumpsDiagnosis);
-			var g_ = context.Operators.Start(f_);
-			var h_ = context.Operators.DateFrom(g_);
-			var i_ = this.First_Two_Years();
-			var j_ = context.Operators.In<CqlDate>(h_, i_, "day");
+			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(MumpsDiagnosis);
+			CqlDateTime g_ = context.Operators.Start(f_);
+			CqlDate h_ = context.Operators.DateFrom(g_);
+			CqlInterval<CqlDate> i_ = this.First_Two_Years();
+			bool? j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
-		var e_ = context.Operators.Where<Condition>(c_, d_);
+		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
@@ -1549,20 +1559,20 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Rubella_Indicators_Value()
 	{
-		var a_ = this.Rubella();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = Status_1_6_000.Active_Condition(b_);
+		CqlValueSet a_ = this.Rubella();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition RubellaDiagnosis)
 		{
-			var f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(RubellaDiagnosis);
-			var g_ = context.Operators.Start(f_);
-			var h_ = context.Operators.DateFrom(g_);
-			var i_ = this.First_Two_Years();
-			var j_ = context.Operators.In<CqlDate>(h_, i_, "day");
+			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(RubellaDiagnosis);
+			CqlDateTime g_ = context.Operators.Start(f_);
+			CqlDate h_ = context.Operators.DateFrom(g_);
+			CqlInterval<CqlDate> i_ = this.First_Two_Years();
+			bool? j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
-		var e_ = context.Operators.Where<Condition>(c_, d_);
+		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
@@ -1573,63 +1583,63 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures_Value()
 	{
-		var a_ = this.Hib_Vaccine__3_dose_schedule_();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Hib_Vaccine__3_dose_schedule_();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization ThreeDoseHibVaccine)
 		{
-			var p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var q_ = ThreeDoseHibVaccine?.Occurrence;
-			var r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			var s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
+			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType q_ = ThreeDoseHibVaccine?.Occurrence;
+			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
+			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization ThreeDoseHibVaccine)
 		{
-			var v_ = ThreeDoseHibVaccine?.Occurrence;
-			var w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			var x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-			var y_ = CQMCommon_2_0_000.ToDateInterval(x_);
-			var z_ = context.Operators.Start(y_);
-			var aa_ = context.Operators.ConvertDateToDateTime(z_);
-			var ab_ = context.Operators.DateFrom(aa_);
+			DataType v_ = ThreeDoseHibVaccine?.Occurrence;
+			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
+			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
+			CqlDate z_ = context.Operators.Start(y_);
+			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
 		};
-		var g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
-		var h_ = this.Hib_Vaccine__3_dose_schedule__Administered();
-		var i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
-		var j_ = Status_1_6_000.Completed_Procedure(i_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
+		CqlValueSet h_ = this.Hib_Vaccine__3_dose_schedule__Administered();
+		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
+		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure ThreeDoseHibProcedure)
 		{
-			var ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var ad_ = ThreeDoseHibProcedure?.Performed;
-			var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-			var af_ = QICoreCommon_2_0_000.ToInterval(ae_);
-			var ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			var ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
+			CqlInterval<CqlDate> ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType ad_ = ThreeDoseHibProcedure?.Performed;
+			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
+			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
-		var l_ = context.Operators.Where<Procedure>(j_, k_);
+		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure ThreeDoseHibProcedure)
 		{
-			var ai_ = ThreeDoseHibProcedure?.Performed;
-			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-			var ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
-			var al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
-			var am_ = context.Operators.Start(al_);
-			var an_ = context.Operators.ConvertDateToDateTime(am_);
-			var ao_ = context.Operators.DateFrom(an_);
+			DataType ai_ = ThreeDoseHibProcedure?.Performed;
+			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
+			CqlInterval<CqlDate> al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
+			CqlDate am_ = context.Operators.Start(al_);
+			CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
 		};
-		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.Union<CqlDate>(g_, n_);
+		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
+		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -1640,63 +1650,63 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures_Value()
 	{
-		var a_ = this.Hib_Vaccine__4_dose_schedule_();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Hib_Vaccine__4_dose_schedule_();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization HibVaccine)
 		{
-			var p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var q_ = HibVaccine?.Occurrence;
-			var r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			var s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
+			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType q_ = HibVaccine?.Occurrence;
+			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
+			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization HibVaccine)
 		{
-			var v_ = HibVaccine?.Occurrence;
-			var w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			var x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-			var y_ = CQMCommon_2_0_000.ToDateInterval(x_);
-			var z_ = context.Operators.Start(y_);
-			var aa_ = context.Operators.ConvertDateToDateTime(z_);
-			var ab_ = context.Operators.DateFrom(aa_);
+			DataType v_ = HibVaccine?.Occurrence;
+			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
+			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
+			CqlDate z_ = context.Operators.Start(y_);
+			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
 		};
-		var g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
-		var h_ = this.Hib_Vaccine__4_dose_schedule__Administered();
-		var i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
-		var j_ = Status_1_6_000.Completed_Procedure(i_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
+		CqlValueSet h_ = this.Hib_Vaccine__4_dose_schedule__Administered();
+		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
+		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure HibProcedure)
 		{
-			var ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var ad_ = HibProcedure?.Performed;
-			var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-			var af_ = QICoreCommon_2_0_000.ToInterval(ae_);
-			var ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			var ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
+			CqlInterval<CqlDate> ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType ad_ = HibProcedure?.Performed;
+			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
+			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
-		var l_ = context.Operators.Where<Procedure>(j_, k_);
+		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure HibProcedure)
 		{
-			var ai_ = HibProcedure?.Performed;
-			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-			var ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
-			var al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
-			var am_ = context.Operators.Start(al_);
-			var an_ = context.Operators.ConvertDateToDateTime(am_);
-			var ao_ = context.Operators.DateFrom(an_);
+			DataType ai_ = HibProcedure?.Performed;
+			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
+			CqlInterval<CqlDate> al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
+			CqlDate am_ = context.Operators.Start(al_);
+			CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
 		};
-		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.Union<CqlDate>(g_, n_);
+		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
+		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -1707,9 +1717,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations_Value()
 	{
-		var a_ = this.Hib_3_Dose_Immunizations_or_Procedures();
-		var b_ = this.Hib_4_Dose_Immunizations_or_Procedures();
-		var c_ = context.Operators.Union<CqlDate>(a_, b_);
+		IEnumerable<CqlDate> a_ = this.Hib_3_Dose_Immunizations_or_Procedures();
+		IEnumerable<CqlDate> b_ = this.Hib_4_Dose_Immunizations_or_Procedures();
+		IEnumerable<CqlDate> c_ = context.Operators.Union<CqlDate>(a_, b_);
 
 		return c_;
 	}
@@ -1720,28 +1730,28 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> All_Hib_Vaccinations_Value()
 	{
-		var a_ = this.Hib_3_or_4_Dose_Immunizations();
+		IEnumerable<CqlDate> a_ = this.Hib_3_or_4_Dose_Immunizations();
 		IEnumerable<CqlDate> c_(CqlDate AllHibDoses1)
 		{
-			var f_ = this.Hib_3_or_4_Dose_Immunizations();
+			IEnumerable<CqlDate> f_ = this.Hib_3_or_4_Dose_Immunizations();
 			bool? g_(CqlDate AllHibDoses2)
 			{
-				var k_ = context.Operators.Quantity(1m, "day");
-				var l_ = context.Operators.Subtract(AllHibDoses2, k_);
-				var m_ = context.Operators.Interval(l_, AllHibDoses2, false, false);
-				var n_ = context.Operators.In<CqlDate>(AllHibDoses1, m_, null);
+				CqlQuantity k_ = context.Operators.Quantity(1m, "day");
+				CqlDate l_ = context.Operators.Subtract(AllHibDoses2, k_);
+				CqlInterval<CqlDate> m_ = context.Operators.Interval(l_, AllHibDoses2, false, false);
+				bool? n_ = context.Operators.In<CqlDate>(AllHibDoses1, m_, null);
 
 				return n_;
 			};
-			var h_ = context.Operators.Where<CqlDate>(f_, g_);
+			IEnumerable<CqlDate> h_ = context.Operators.Where<CqlDate>(f_, g_);
 			CqlDate i_(CqlDate AllHibDoses2) => 
 				AllHibDoses1;
-			var j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
+			IEnumerable<CqlDate> j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectMany<CqlDate, CqlDate>(a_, c_);
-		var e_ = context.Operators.Except<CqlDate>(a_, d_);
+		IEnumerable<CqlDate> d_ = context.Operators.SelectMany<CqlDate, CqlDate>(a_, c_);
+		IEnumerable<CqlDate> e_ = context.Operators.Except<CqlDate>(a_, d_);
 
 		return e_;
 	}
@@ -1752,34 +1762,34 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Has_Appropriate_Number_of_Hib_Immunizations_Value()
 	{
-		var a_ = this.All_Hib_Vaccinations();
+		IEnumerable<CqlDate> a_ = this.All_Hib_Vaccinations();
 		bool? b_(CqlDate HibImmunization)
 		{
-			var e_ = this.Hib_4_Dose_Immunizations_or_Procedures();
-			var f_ = context.Operators.Count<CqlDate>(e_);
-			var g_ = context.Operators.Greater(f_, 0);
-			var h_ = this.All_Hib_Vaccinations();
+			IEnumerable<CqlDate> e_ = this.Hib_4_Dose_Immunizations_or_Procedures();
+			int? f_ = context.Operators.Count<CqlDate>(e_);
+			bool? g_ = context.Operators.Greater(f_, 0);
+			IEnumerable<CqlDate> h_ = this.All_Hib_Vaccinations();
 			CqlDate i_(CqlDate HibVaccinations) => 
 				HibVaccinations;
-			var j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
-			var k_ = context.Operators.Distinct<CqlDate>(j_);
-			var l_ = context.Operators.Count<CqlDate>(k_);
-			var m_ = context.Operators.GreaterOrEqual(l_, 4);
-			var n_ = context.Operators.And(g_, m_);
-			var p_ = context.Operators.Count<CqlDate>(e_);
-			var q_ = context.Operators.Greater(p_, 0);
-			var r_ = context.Operators.IsFalse(q_);
-			var u_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
-			var v_ = context.Operators.Distinct<CqlDate>(u_);
-			var w_ = context.Operators.Count<CqlDate>(v_);
-			var x_ = context.Operators.GreaterOrEqual(w_, 3);
-			var y_ = context.Operators.And(r_, x_);
-			var z_ = context.Operators.Or(n_, y_);
+			IEnumerable<CqlDate> j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
+			IEnumerable<CqlDate> k_ = context.Operators.Distinct<CqlDate>(j_);
+			int? l_ = context.Operators.Count<CqlDate>(k_);
+			bool? m_ = context.Operators.GreaterOrEqual(l_, 4);
+			bool? n_ = context.Operators.And(g_, m_);
+			int? p_ = context.Operators.Count<CqlDate>(e_);
+			bool? q_ = context.Operators.Greater(p_, 0);
+			bool? r_ = context.Operators.IsFalse(q_);
+			IEnumerable<CqlDate> u_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
+			IEnumerable<CqlDate> v_ = context.Operators.Distinct<CqlDate>(u_);
+			int? w_ = context.Operators.Count<CqlDate>(v_);
+			bool? x_ = context.Operators.GreaterOrEqual(w_, 3);
+			bool? y_ = context.Operators.And(r_, x_);
+			bool? z_ = context.Operators.Or(n_, y_);
 
 			return z_;
 		};
-		var c_ = context.Operators.Where<CqlDate>(a_, b_);
-		var d_ = context.Operators.Exists<CqlDate>(c_);
+		IEnumerable<CqlDate> c_ = context.Operators.Where<CqlDate>(a_, b_);
+		bool? d_ = context.Operators.Exists<CqlDate>(c_);
 
 		return d_;
 	}
@@ -1790,21 +1800,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Hib_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Anaphylaxis_due_to_Haemophilus_influenzae_type_b_vaccine__disorder_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
-		var d_ = Status_1_6_000.Active_Condition(c_);
+		CqlCode a_ = this.Anaphylaxis_due_to_Haemophilus_influenzae_type_b_vaccine__disorder_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
+		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition HibReaction)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(HibReaction);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(HibReaction);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var f_ = context.Operators.Where<Condition>(d_, e_);
+		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
@@ -1815,63 +1825,63 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures_Value()
 	{
-		var a_ = this.Hepatitis_B_Vaccine();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Hepatitis_B_Vaccine();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization HepatitisBVaccination)
 		{
-			var p_ = this.First_Two_Years();
-			var q_ = HepatitisBVaccination?.Occurrence;
-			var r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			var s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
+			CqlInterval<CqlDate> p_ = this.First_Two_Years();
+			DataType q_ = HepatitisBVaccination?.Occurrence;
+			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
+			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization HepatitisBVaccination)
 		{
-			var v_ = HepatitisBVaccination?.Occurrence;
-			var w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			var x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-			var y_ = CQMCommon_2_0_000.ToDateInterval(x_);
-			var z_ = context.Operators.Start(y_);
-			var aa_ = context.Operators.ConvertDateToDateTime(z_);
-			var ab_ = context.Operators.DateFrom(aa_);
+			DataType v_ = HepatitisBVaccination?.Occurrence;
+			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
+			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
+			CqlDate z_ = context.Operators.Start(y_);
+			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
 		};
-		var g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
-		var h_ = this.Hepatitis_B_Vaccine_Administered();
-		var i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
-		var j_ = Status_1_6_000.Completed_Procedure(i_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
+		CqlValueSet h_ = this.Hepatitis_B_Vaccine_Administered();
+		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
+		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure HepatitisBProcedure)
 		{
-			var ac_ = this.First_Two_Years();
-			var ad_ = HepatitisBProcedure?.Performed;
-			var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-			var af_ = QICoreCommon_2_0_000.ToInterval(ae_);
-			var ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			var ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
+			CqlInterval<CqlDate> ac_ = this.First_Two_Years();
+			DataType ad_ = HepatitisBProcedure?.Performed;
+			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
+			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
-		var l_ = context.Operators.Where<Procedure>(j_, k_);
+		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure HepatitisBProcedure)
 		{
-			var ai_ = HepatitisBProcedure?.Performed;
-			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-			var ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
-			var al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
-			var am_ = context.Operators.Start(al_);
-			var an_ = context.Operators.ConvertDateToDateTime(am_);
-			var ao_ = context.Operators.DateFrom(an_);
+			DataType ai_ = HepatitisBProcedure?.Performed;
+			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
+			CqlInterval<CqlDate> al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
+			CqlDate am_ = context.Operators.Start(al_);
+			CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
 		};
-		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.Union<CqlDate>(g_, n_);
+		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
+		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -1882,11 +1892,11 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations_Value()
 	{
-		var a_ = this.Hepatitis_B_Immunizations_or_Procedures();
-		var d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
+		IEnumerable<CqlDate> a_ = this.Hepatitis_B_Immunizations_or_Procedures();
+		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
 		Tuple_EZTgahAUWGgSdGaDCgQNNIPGW e_(ValueTuple<CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			var k_ = new Tuple_EZTgahAUWGgSdGaDCgQNNIPGW
+			Tuple_EZTgahAUWGgSdGaDCgQNNIPGW k_ = new Tuple_EZTgahAUWGgSdGaDCgQNNIPGW
 			{
 				HepatitisBVaccination1 = _valueTuple.Item1,
 				HepatitisBVaccination2 = _valueTuple.Item2,
@@ -1895,22 +1905,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, Tuple_EZTgahAUWGgSdGaDCgQNNIPGW>(d_, e_);
+		IEnumerable<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, Tuple_EZTgahAUWGgSdGaDCgQNNIPGW>(d_, e_);
 		bool? g_(Tuple_EZTgahAUWGgSdGaDCgQNNIPGW tuple_eztgahauwggsdgadcgqnnipgw)
 		{
-			var l_ = context.Operators.Quantity(1m, "day");
-			var m_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination1, l_);
-			var n_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination2, m_, "day");
-			var p_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination2, l_);
-			var q_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination3, p_, "day");
-			var r_ = context.Operators.And(n_, q_);
+			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
+			CqlDate m_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination1, l_);
+			bool? n_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination2, m_, "day");
+			CqlDate p_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination2, l_);
+			bool? q_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination3, p_, "day");
+			bool? r_ = context.Operators.And(n_, q_);
 
 			return r_;
 		};
-		var h_ = context.Operators.Where<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW>(f_, g_);
+		IEnumerable<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW> h_ = context.Operators.Where<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW>(f_, g_);
 		CqlDate i_(Tuple_EZTgahAUWGgSdGaDCgQNNIPGW tuple_eztgahauwggsdgadcgqnnipgw) => 
 			tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination1;
-		var j_ = context.Operators.Select<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW, CqlDate>(h_, i_);
+		IEnumerable<CqlDate> j_ = context.Operators.Select<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW, CqlDate>(h_, i_);
 
 		return j_;
 	}
@@ -1921,46 +1931,46 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> NewBorn_Vaccine_Requirement_Value()
 	{
-		var a_ = this.Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Procedure>(b_, null);
-		var d_ = Status_1_6_000.Completed_Procedure(c_);
+		CqlCode a_ = this.Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Procedure> c_ = context.Operators.RetrieveByCodes<Procedure>(b_, null);
+		IEnumerable<Procedure> d_ = Status_1_6_000.Completed_Procedure(c_);
 		bool? e_(Procedure NewBornVaccine)
 		{
-			var i_ = this.Patient();
-			var j_ = i_?.BirthDateElement;
-			var k_ = j_?.Value;
-			var l_ = context.Operators.ConvertStringToDate(k_);
-			var m_ = context.Operators.ConvertDateToDateTime(l_);
-			var n_ = context.Operators.DateFrom(m_);
-			var p_ = i_?.BirthDateElement;
-			var q_ = p_?.Value;
-			var r_ = context.Operators.ConvertStringToDate(q_);
-			var s_ = context.Operators.ConvertDateToDateTime(r_);
-			var t_ = context.Operators.DateFrom(s_);
-			var u_ = context.Operators.Quantity(7m, "days");
-			var v_ = context.Operators.Add(t_, u_);
-			var w_ = context.Operators.Interval(n_, v_, true, true);
-			var x_ = NewBornVaccine?.Performed;
-			var y_ = FHIRHelpers_4_3_000.ToValue(x_);
-			var z_ = QICoreCommon_2_0_000.ToInterval(y_);
-			var aa_ = CQMCommon_2_0_000.ToDateInterval(z_);
-			var ab_ = context.Operators.IntervalIncludesInterval<CqlDate>(w_, aa_, "day");
+			Patient i_ = this.Patient();
+			Date j_ = i_?.BirthDateElement;
+			string k_ = j_?.Value;
+			CqlDate l_ = context.Operators.ConvertStringToDate(k_);
+			CqlDateTime m_ = context.Operators.ConvertDateToDateTime(l_);
+			CqlDate n_ = context.Operators.DateFrom(m_);
+			Date p_ = i_?.BirthDateElement;
+			string q_ = p_?.Value;
+			CqlDate r_ = context.Operators.ConvertStringToDate(q_);
+			CqlDateTime s_ = context.Operators.ConvertDateToDateTime(r_);
+			CqlDate t_ = context.Operators.DateFrom(s_);
+			CqlQuantity u_ = context.Operators.Quantity(7m, "days");
+			CqlDate v_ = context.Operators.Add(t_, u_);
+			CqlInterval<CqlDate> w_ = context.Operators.Interval(n_, v_, true, true);
+			DataType x_ = NewBornVaccine?.Performed;
+			object y_ = FHIRHelpers_4_3_000.ToValue(x_);
+			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.ToInterval(y_);
+			CqlInterval<CqlDate> aa_ = CQMCommon_2_0_000.ToDateInterval(z_);
+			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDate>(w_, aa_, "day");
 
 			return ab_;
 		};
-		var f_ = context.Operators.Where<Procedure>(d_, e_);
+		IEnumerable<Procedure> f_ = context.Operators.Where<Procedure>(d_, e_);
 		CqlDate g_(Procedure NewBornVaccine)
 		{
-			var ac_ = NewBornVaccine?.Performed;
-			var ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			var ae_ = QICoreCommon_2_0_000.ToInterval(ad_);
-			var af_ = context.Operators.Start(ae_);
-			var ag_ = context.Operators.DateFrom(af_);
+			DataType ac_ = NewBornVaccine?.Performed;
+			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_);
+			CqlDateTime af_ = context.Operators.Start(ae_);
+			CqlDate ag_ = context.Operators.DateFrom(af_);
 
 			return ag_;
 		};
-		var h_ = context.Operators.Select<Procedure, CqlDate>(f_, g_);
+		IEnumerable<CqlDate> h_ = context.Operators.Select<Procedure, CqlDate>(f_, g_);
 
 		return h_;
 	}
@@ -1971,12 +1981,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement_Value()
 	{
-		var a_ = this.Hepatitis_B_Immunizations_or_Procedures();
-		var c_ = this.NewBorn_Vaccine_Requirement();
-		var d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, c_);
+		IEnumerable<CqlDate> a_ = this.Hepatitis_B_Immunizations_or_Procedures();
+		IEnumerable<CqlDate> c_ = this.NewBorn_Vaccine_Requirement();
+		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, c_);
 		Tuple_HDfaMbZGBWDPFETGQNFbceEeg e_(ValueTuple<CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			var k_ = new Tuple_HDfaMbZGBWDPFETGQNFbceEeg
+			Tuple_HDfaMbZGBWDPFETGQNFbceEeg k_ = new Tuple_HDfaMbZGBWDPFETGQNFbceEeg
 			{
 				HepatitisBVaccination1 = _valueTuple.Item1,
 				HepatitisBVaccination2 = _valueTuple.Item2,
@@ -1985,25 +1995,25 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 			return k_;
 		};
-		var f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, Tuple_HDfaMbZGBWDPFETGQNFbceEeg>(d_, e_);
+		IEnumerable<Tuple_HDfaMbZGBWDPFETGQNFbceEeg> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, Tuple_HDfaMbZGBWDPFETGQNFbceEeg>(d_, e_);
 		bool? g_(Tuple_HDfaMbZGBWDPFETGQNFbceEeg tuple_hdfambzgbwdpfetgqnfbceeeg)
 		{
-			var l_ = context.Operators.Quantity(1m, "day");
-			var m_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination1, l_);
-			var n_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination2, m_, "day");
-			var p_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg.NewBornVaccine3, l_);
-			var q_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination1, p_, "day");
-			var r_ = context.Operators.And(n_, q_);
-			var t_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg.NewBornVaccine3, l_);
-			var u_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination2, t_, "day");
-			var v_ = context.Operators.And(r_, u_);
+			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
+			CqlDate m_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination1, l_);
+			bool? n_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination2, m_, "day");
+			CqlDate p_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg.NewBornVaccine3, l_);
+			bool? q_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination1, p_, "day");
+			bool? r_ = context.Operators.And(n_, q_);
+			CqlDate t_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg.NewBornVaccine3, l_);
+			bool? u_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination2, t_, "day");
+			bool? v_ = context.Operators.And(r_, u_);
 
 			return v_;
 		};
-		var h_ = context.Operators.Where<Tuple_HDfaMbZGBWDPFETGQNFbceEeg>(f_, g_);
+		IEnumerable<Tuple_HDfaMbZGBWDPFETGQNFbceEeg> h_ = context.Operators.Where<Tuple_HDfaMbZGBWDPFETGQNFbceEeg>(f_, g_);
 		CqlDate i_(Tuple_HDfaMbZGBWDPFETGQNFbceEeg tuple_hdfambzgbwdpfetgqnfbceeeg) => 
 			tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination1;
-		var j_ = context.Operators.Select<Tuple_HDfaMbZGBWDPFETGQNFbceEeg, CqlDate>(h_, i_);
+		IEnumerable<CqlDate> j_ = context.Operators.Select<Tuple_HDfaMbZGBWDPFETGQNFbceEeg, CqlDate>(h_, i_);
 
 		return j_;
 	}
@@ -2014,24 +2024,24 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Hepatitis_B_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Anaphylaxis_due_to_Hepatitis_B_vaccine__disorder_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
-		var d_ = this.Hepatitis_B();
-		var e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
-		var f_ = context.Operators.Union<Condition>(c_, e_);
-		var g_ = Status_1_6_000.Active_Condition(f_);
+		CqlCode a_ = this.Anaphylaxis_due_to_Hepatitis_B_vaccine__disorder_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
+		CqlValueSet d_ = this.Hepatitis_B();
+		IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
+		IEnumerable<Condition> f_ = context.Operators.Union<Condition>(c_, e_);
+		IEnumerable<Condition> g_ = Status_1_6_000.Active_Condition(f_);
 		bool? h_(Condition HepBConditions)
 		{
-			var j_ = QICoreCommon_2_0_000.ToPrevalenceInterval(HepBConditions);
-			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.DateFrom(k_);
-			var m_ = this.First_Two_Years();
-			var n_ = context.Operators.In<CqlDate>(l_, m_, "day");
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToPrevalenceInterval(HepBConditions);
+			CqlDateTime k_ = context.Operators.Start(j_);
+			CqlDate l_ = context.Operators.DateFrom(k_);
+			CqlInterval<CqlDate> m_ = this.First_Two_Years();
+			bool? n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
-		var i_ = context.Operators.Where<Condition>(g_, h_);
+		IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 
 		return i_;
 	}
@@ -2042,37 +2052,37 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<object> One_Chicken_Pox_Vaccination_Value()
 	{
-		var a_ = this.Varicella_Zoster_Vaccine__VZV_();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Varicella_Zoster_Vaccine__VZV_();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization ChickenPoxVaccination)
 		{
-			var l_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
-			var m_ = ChickenPoxVaccination?.Occurrence;
-			var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
-			var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
-			var p_ = CQMCommon_2_0_000.ToDateInterval(o_);
-			var q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, null);
+			CqlInterval<CqlDate> l_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
+			DataType m_ = ChickenPoxVaccination?.Occurrence;
+			CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDate> p_ = CQMCommon_2_0_000.ToDateInterval(o_);
+			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, null);
 
 			return q_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
-		var f_ = this.Varicella_Zoster_Vaccine__VZV__Administered();
-		var g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
-		var h_ = Status_1_6_000.Completed_Procedure(g_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
+		CqlValueSet f_ = this.Varicella_Zoster_Vaccine__VZV__Administered();
+		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
+		IEnumerable<Procedure> h_ = Status_1_6_000.Completed_Procedure(g_);
 		bool? i_(Procedure ChickenPoxProcedure)
 		{
-			var r_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
-			var s_ = ChickenPoxProcedure?.Performed;
-			var t_ = FHIRHelpers_4_3_000.ToValue(s_);
-			var u_ = QICoreCommon_2_0_000.ToInterval(t_);
-			var v_ = CQMCommon_2_0_000.ToDateInterval(u_);
-			var w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, null);
+			CqlInterval<CqlDate> r_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
+			DataType s_ = ChickenPoxProcedure?.Performed;
+			object t_ = FHIRHelpers_4_3_000.ToValue(s_);
+			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_);
+			CqlInterval<CqlDate> v_ = CQMCommon_2_0_000.ToDateInterval(u_);
+			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, null);
 
 			return w_;
 		};
-		var j_ = context.Operators.Where<Procedure>(h_, i_);
-		var k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
+		IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
+		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -2083,24 +2093,24 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Varicella_Zoster_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Varicella_Zoster();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = this.Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder_();
-		var d_ = context.Operators.ToList<CqlCode>(c_);
-		var e_ = context.Operators.RetrieveByCodes<Condition>(d_, null);
-		var f_ = context.Operators.Union<Condition>(b_, e_);
-		var g_ = Status_1_6_000.Active_Condition(f_);
+		CqlValueSet a_ = this.Varicella_Zoster();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlCode c_ = this.Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder_();
+		IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
+		IEnumerable<Condition> e_ = context.Operators.RetrieveByCodes<Condition>(d_, null);
+		IEnumerable<Condition> f_ = context.Operators.Union<Condition>(b_, e_);
+		IEnumerable<Condition> g_ = Status_1_6_000.Active_Condition(f_);
 		bool? h_(Condition VaricellaZoster)
 		{
-			var j_ = QICoreCommon_2_0_000.ToPrevalenceInterval(VaricellaZoster);
-			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.DateFrom(k_);
-			var m_ = this.First_Two_Years();
-			var n_ = context.Operators.In<CqlDate>(l_, m_, "day");
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToPrevalenceInterval(VaricellaZoster);
+			CqlDateTime k_ = context.Operators.Start(j_);
+			CqlDate l_ = context.Operators.DateFrom(k_);
+			CqlInterval<CqlDate> m_ = this.First_Two_Years();
+			bool? n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
-		var i_ = context.Operators.Where<Condition>(g_, h_);
+		IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 
 		return i_;
 	}
@@ -2111,63 +2121,63 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures_Value()
 	{
-		var a_ = this.Pneumococcal_Conjugate_Vaccine();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Pneumococcal_Conjugate_Vaccine();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization PneumococcalVaccination)
 		{
-			var p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var q_ = PneumococcalVaccination?.Occurrence;
-			var r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			var s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
+			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType q_ = PneumococcalVaccination?.Occurrence;
+			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
+			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization PneumococcalVaccination)
 		{
-			var v_ = PneumococcalVaccination?.Occurrence;
-			var w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			var x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-			var y_ = CQMCommon_2_0_000.ToDateInterval(x_);
-			var z_ = context.Operators.Start(y_);
-			var aa_ = context.Operators.ConvertDateToDateTime(z_);
-			var ab_ = context.Operators.DateFrom(aa_);
+			DataType v_ = PneumococcalVaccination?.Occurrence;
+			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
+			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
+			CqlDate z_ = context.Operators.Start(y_);
+			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
 		};
-		var g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
-		var h_ = this.Pneumococcal_Conjugate_Vaccine_Administered();
-		var i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
-		var j_ = Status_1_6_000.Completed_Procedure(i_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
+		CqlValueSet h_ = this.Pneumococcal_Conjugate_Vaccine_Administered();
+		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
+		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure PneumococcalProcedure)
 		{
-			var ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var ad_ = PneumococcalProcedure?.Performed;
-			var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-			var af_ = QICoreCommon_2_0_000.ToInterval(ae_);
-			var ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			var ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
+			CqlInterval<CqlDate> ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType ad_ = PneumococcalProcedure?.Performed;
+			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
+			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
-		var l_ = context.Operators.Where<Procedure>(j_, k_);
+		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure PneumococcalProcedure)
 		{
-			var ai_ = PneumococcalProcedure?.Performed;
-			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-			var ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
-			var al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
-			var am_ = context.Operators.Start(al_);
-			var an_ = context.Operators.ConvertDateToDateTime(am_);
-			var ao_ = context.Operators.DateFrom(an_);
+			DataType ai_ = PneumococcalProcedure?.Performed;
+			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
+			CqlInterval<CqlDate> al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
+			CqlDate am_ = context.Operators.Start(al_);
+			CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
 		};
-		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.Union<CqlDate>(g_, n_);
+		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
+		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -2178,11 +2188,11 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations_Value()
 	{
-		var a_ = this.Pneumococcal_Conjugate_Immunizations_or_Procedures();
-		var e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
+		IEnumerable<CqlDate> a_ = this.Pneumococcal_Conjugate_Immunizations_or_Procedures();
+		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>> e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
 		Tuple_DdPDeOJhPYESfHGCOcBNOiPPP f_(ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			var l_ = new Tuple_DdPDeOJhPYESfHGCOcBNOiPPP
+			Tuple_DdPDeOJhPYESfHGCOcBNOiPPP l_ = new Tuple_DdPDeOJhPYESfHGCOcBNOiPPP
 			{
 				PneumococcalVaccination1 = _valueTuple.Item1,
 				PneumococcalVaccination2 = _valueTuple.Item2,
@@ -2192,25 +2202,25 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 			return l_;
 		};
-		var g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, Tuple_DdPDeOJhPYESfHGCOcBNOiPPP>(e_, f_);
+		IEnumerable<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP> g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, Tuple_DdPDeOJhPYESfHGCOcBNOiPPP>(e_, f_);
 		bool? h_(Tuple_DdPDeOJhPYESfHGCOcBNOiPPP tuple_ddpdeojhpyesfhgcocbnoippp)
 		{
-			var m_ = context.Operators.Quantity(1m, "day");
-			var n_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination1, m_);
-			var o_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination2, n_, "day");
-			var q_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination2, m_);
-			var r_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination3, q_, "day");
-			var s_ = context.Operators.And(o_, r_);
-			var u_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination3, m_);
-			var v_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination4, u_, "day");
-			var w_ = context.Operators.And(s_, v_);
+			CqlQuantity m_ = context.Operators.Quantity(1m, "day");
+			CqlDate n_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination1, m_);
+			bool? o_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination2, n_, "day");
+			CqlDate q_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination2, m_);
+			bool? r_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination3, q_, "day");
+			bool? s_ = context.Operators.And(o_, r_);
+			CqlDate u_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination3, m_);
+			bool? v_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination4, u_, "day");
+			bool? w_ = context.Operators.And(s_, v_);
 
 			return w_;
 		};
-		var i_ = context.Operators.Where<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP>(g_, h_);
+		IEnumerable<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP> i_ = context.Operators.Where<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP>(g_, h_);
 		CqlDate j_(Tuple_DdPDeOJhPYESfHGCOcBNOiPPP tuple_ddpdeojhpyesfhgcocbnoippp) => 
 			tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination1;
-		var k_ = context.Operators.Select<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP, CqlDate>(i_, j_);
+		IEnumerable<CqlDate> k_ = context.Operators.Select<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP, CqlDate>(i_, j_);
 
 		return k_;
 	}
@@ -2221,21 +2231,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
-		var d_ = Status_1_6_000.Active_Condition(c_);
+		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
+		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition PneumococcalReaction)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(PneumococcalReaction);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(PneumococcalReaction);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var f_ = context.Operators.Where<Condition>(d_, e_);
+		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
@@ -2246,37 +2256,37 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<object> One_Hepatitis_A_Vaccinations_Value()
 	{
-		var a_ = this.Hepatitis_A_Vaccine();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Hepatitis_A_Vaccine();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization HepatitisAVaccination)
 		{
-			var l_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
-			var m_ = HepatitisAVaccination?.Occurrence;
-			var n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
-			var o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
-			var p_ = CQMCommon_2_0_000.ToDateInterval(o_);
-			var q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, null);
+			CqlInterval<CqlDate> l_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
+			DataType m_ = HepatitisAVaccination?.Occurrence;
+			CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDate> p_ = CQMCommon_2_0_000.ToDateInterval(o_);
+			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, null);
 
 			return q_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
-		var f_ = this.Hepatitis_A_Vaccine_Administered();
-		var g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
-		var h_ = Status_1_6_000.Completed_Procedure(g_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
+		CqlValueSet f_ = this.Hepatitis_A_Vaccine_Administered();
+		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
+		IEnumerable<Procedure> h_ = Status_1_6_000.Completed_Procedure(g_);
 		bool? i_(Procedure HepatitisAProcedure)
 		{
-			var r_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
-			var s_ = HepatitisAProcedure?.Performed;
-			var t_ = FHIRHelpers_4_3_000.ToValue(s_);
-			var u_ = QICoreCommon_2_0_000.ToInterval(t_);
-			var v_ = CQMCommon_2_0_000.ToDateInterval(u_);
-			var w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, null);
+			CqlInterval<CqlDate> r_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
+			DataType s_ = HepatitisAProcedure?.Performed;
+			object t_ = FHIRHelpers_4_3_000.ToValue(s_);
+			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_);
+			CqlInterval<CqlDate> v_ = CQMCommon_2_0_000.ToDateInterval(u_);
+			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, null);
 
 			return w_;
 		};
-		var j_ = context.Operators.Where<Procedure>(h_, i_);
-		var k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
+		IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
+		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -2287,24 +2297,24 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Hepatitis_A_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Hepatitis_A();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder_();
-		var d_ = context.Operators.ToList<CqlCode>(c_);
-		var e_ = context.Operators.RetrieveByCodes<Condition>(d_, null);
-		var f_ = context.Operators.Union<Condition>(b_, e_);
-		var g_ = Status_1_6_000.Active_Condition(f_);
+		CqlValueSet a_ = this.Hepatitis_A();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlCode c_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder_();
+		IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
+		IEnumerable<Condition> e_ = context.Operators.RetrieveByCodes<Condition>(d_, null);
+		IEnumerable<Condition> f_ = context.Operators.Union<Condition>(b_, e_);
+		IEnumerable<Condition> g_ = Status_1_6_000.Active_Condition(f_);
 		bool? h_(Condition HepatitisADiagnosis)
 		{
-			var j_ = QICoreCommon_2_0_000.ToPrevalenceInterval(HepatitisADiagnosis);
-			var k_ = context.Operators.Start(j_);
-			var l_ = context.Operators.DateFrom(k_);
-			var m_ = this.First_Two_Years();
-			var n_ = context.Operators.In<CqlDate>(l_, m_, "day");
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToPrevalenceInterval(HepatitisADiagnosis);
+			CqlDateTime k_ = context.Operators.Start(j_);
+			CqlDate l_ = context.Operators.DateFrom(k_);
+			CqlInterval<CqlDate> m_ = this.First_Two_Years();
+			bool? n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
-		var i_ = context.Operators.Where<Condition>(g_, h_);
+		IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 
 		return i_;
 	}
@@ -2315,64 +2325,64 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures_Value()
 	{
-		var a_ = this.rotavirus__live__monovalent_vaccine();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Immunization>(b_, null);
-		var d_ = Status_1_6_000.Completed_Immunization(c_);
+		CqlCode a_ = this.rotavirus__live__monovalent_vaccine();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Immunization> c_ = context.Operators.RetrieveByCodes<Immunization>(b_, null);
+		IEnumerable<Immunization> d_ = Status_1_6_000.Completed_Immunization(c_);
 		bool? e_(Immunization TwoDoseRotavirusVaccine)
 		{
-			var q_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var r_ = TwoDoseRotavirusVaccine?.Occurrence;
-			var s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-			var t_ = QICoreCommon_2_0_000.ToInterval((s_ as object));
-			var u_ = CQMCommon_2_0_000.ToDateInterval(t_);
-			var v_ = context.Operators.IntervalIncludesInterval<CqlDate>(q_, u_, "day");
+			CqlInterval<CqlDate> q_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType r_ = TwoDoseRotavirusVaccine?.Occurrence;
+			CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
+			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.ToInterval((s_ as object));
+			CqlInterval<CqlDate> u_ = CQMCommon_2_0_000.ToDateInterval(t_);
+			bool? v_ = context.Operators.IntervalIncludesInterval<CqlDate>(q_, u_, "day");
 
 			return v_;
 		};
-		var f_ = context.Operators.Where<Immunization>(d_, e_);
+		IEnumerable<Immunization> f_ = context.Operators.Where<Immunization>(d_, e_);
 		CqlDate g_(Immunization TwoDoseRotavirusVaccine)
 		{
-			var w_ = TwoDoseRotavirusVaccine?.Occurrence;
-			var x_ = context.Operators.LateBoundProperty<CqlDateTime>(w_, "value");
-			var y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
-			var z_ = CQMCommon_2_0_000.ToDateInterval(y_);
-			var aa_ = context.Operators.Start(z_);
-			var ab_ = context.Operators.ConvertDateToDateTime(aa_);
-			var ac_ = context.Operators.DateFrom(ab_);
+			DataType w_ = TwoDoseRotavirusVaccine?.Occurrence;
+			CqlDateTime x_ = context.Operators.LateBoundProperty<CqlDateTime>(w_, "value");
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDate> z_ = CQMCommon_2_0_000.ToDateInterval(y_);
+			CqlDate aa_ = context.Operators.Start(z_);
+			CqlDateTime ab_ = context.Operators.ConvertDateToDateTime(aa_);
+			CqlDate ac_ = context.Operators.DateFrom(ab_);
 
 			return ac_;
 		};
-		var h_ = context.Operators.Select<Immunization, CqlDate>(f_, g_);
-		var i_ = this.Rotavirus_Vaccine__2_dose_schedule__Administered();
-		var j_ = context.Operators.RetrieveByValueSet<Procedure>(i_, null);
-		var k_ = Status_1_6_000.Completed_Procedure(j_);
+		IEnumerable<CqlDate> h_ = context.Operators.Select<Immunization, CqlDate>(f_, g_);
+		CqlValueSet i_ = this.Rotavirus_Vaccine__2_dose_schedule__Administered();
+		IEnumerable<Procedure> j_ = context.Operators.RetrieveByValueSet<Procedure>(i_, null);
+		IEnumerable<Procedure> k_ = Status_1_6_000.Completed_Procedure(j_);
 		bool? l_(Procedure TwoDoseRotavirusProcedure)
 		{
-			var ad_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var ae_ = TwoDoseRotavirusProcedure?.Performed;
-			var af_ = FHIRHelpers_4_3_000.ToValue(ae_);
-			var ag_ = QICoreCommon_2_0_000.ToInterval(af_);
-			var ah_ = CQMCommon_2_0_000.ToDateInterval(ag_);
-			var ai_ = context.Operators.IntervalIncludesInterval<CqlDate>(ad_, ah_, "day");
+			CqlInterval<CqlDate> ad_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType ae_ = TwoDoseRotavirusProcedure?.Performed;
+			object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+			CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.ToInterval(af_);
+			CqlInterval<CqlDate> ah_ = CQMCommon_2_0_000.ToDateInterval(ag_);
+			bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDate>(ad_, ah_, "day");
 
 			return ai_;
 		};
-		var m_ = context.Operators.Where<Procedure>(k_, l_);
+		IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>(k_, l_);
 		CqlDate n_(Procedure TwoDoseRotavirusProcedure)
 		{
-			var aj_ = TwoDoseRotavirusProcedure?.Performed;
-			var ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
-			var al_ = QICoreCommon_2_0_000.ToInterval(ak_);
-			var am_ = CQMCommon_2_0_000.ToDateInterval(al_);
-			var an_ = context.Operators.Start(am_);
-			var ao_ = context.Operators.ConvertDateToDateTime(an_);
-			var ap_ = context.Operators.DateFrom(ao_);
+			DataType aj_ = TwoDoseRotavirusProcedure?.Performed;
+			object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
+			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.ToInterval(ak_);
+			CqlInterval<CqlDate> am_ = CQMCommon_2_0_000.ToDateInterval(al_);
+			CqlDate an_ = context.Operators.Start(am_);
+			CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
+			CqlDate ap_ = context.Operators.DateFrom(ao_);
 
 			return ap_;
 		};
-		var o_ = context.Operators.Select<Procedure, CqlDate>(m_, n_);
-		var p_ = context.Operators.Union<CqlDate>(h_, o_);
+		IEnumerable<CqlDate> o_ = context.Operators.Select<Procedure, CqlDate>(m_, n_);
+		IEnumerable<CqlDate> p_ = context.Operators.Union<CqlDate>(h_, o_);
 
 		return p_;
 	}
@@ -2383,63 +2393,63 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures_Value()
 	{
-		var a_ = this.Rotavirus_Vaccine__3_dose_schedule_();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Rotavirus_Vaccine__3_dose_schedule_();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization ThreeDoseRotavirusVaccine)
 		{
-			var p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var q_ = ThreeDoseRotavirusVaccine?.Occurrence;
-			var r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			var s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
+			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType q_ = ThreeDoseRotavirusVaccine?.Occurrence;
+			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
+			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization ThreeDoseRotavirusVaccine)
 		{
-			var v_ = ThreeDoseRotavirusVaccine?.Occurrence;
-			var w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			var x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-			var y_ = CQMCommon_2_0_000.ToDateInterval(x_);
-			var z_ = context.Operators.Start(y_);
-			var aa_ = context.Operators.ConvertDateToDateTime(z_);
-			var ab_ = context.Operators.DateFrom(aa_);
+			DataType v_ = ThreeDoseRotavirusVaccine?.Occurrence;
+			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
+			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
+			CqlDate z_ = context.Operators.Start(y_);
+			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
 		};
-		var g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
-		var h_ = this.Rotavirus_Vaccine__3_dose_schedule__Administered();
-		var i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
-		var j_ = Status_1_6_000.Completed_Procedure(i_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
+		CqlValueSet h_ = this.Rotavirus_Vaccine__3_dose_schedule__Administered();
+		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
+		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure ThreeDoseRotavirusAdministered)
 		{
-			var ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var ad_ = ThreeDoseRotavirusAdministered?.Performed;
-			var ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-			var af_ = QICoreCommon_2_0_000.ToInterval(ae_);
-			var ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			var ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
+			CqlInterval<CqlDate> ac_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType ad_ = ThreeDoseRotavirusAdministered?.Performed;
+			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
+			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
-		var l_ = context.Operators.Where<Procedure>(j_, k_);
+		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure ThreeDoseRotavirusAdministered)
 		{
-			var ai_ = ThreeDoseRotavirusAdministered?.Performed;
-			var aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-			var ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
-			var al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
-			var am_ = context.Operators.Start(al_);
-			var an_ = context.Operators.ConvertDateToDateTime(am_);
-			var ao_ = context.Operators.DateFrom(an_);
+			DataType ai_ = ThreeDoseRotavirusAdministered?.Performed;
+			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_);
+			CqlInterval<CqlDate> al_ = CQMCommon_2_0_000.ToDateInterval(ak_);
+			CqlDate am_ = context.Operators.Start(al_);
+			CqlDateTime an_ = context.Operators.ConvertDateToDateTime(am_);
+			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
 		};
-		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.Union<CqlDate>(g_, n_);
+		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
+		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -2450,9 +2460,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations_Value()
 	{
-		var a_ = this.Rotavirus_2_Dose_Immunizations_or_Procedures();
-		var b_ = this.Rotavirus_3_Dose_Immunizations_or_Procedures();
-		var c_ = context.Operators.Union<CqlDate>(a_, b_);
+		IEnumerable<CqlDate> a_ = this.Rotavirus_2_Dose_Immunizations_or_Procedures();
+		IEnumerable<CqlDate> b_ = this.Rotavirus_3_Dose_Immunizations_or_Procedures();
+		IEnumerable<CqlDate> c_ = context.Operators.Union<CqlDate>(a_, b_);
 
 		return c_;
 	}
@@ -2463,28 +2473,28 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> All_Rotavirus_Vaccinations_Value()
 	{
-		var a_ = this.Rotavirus_2_or_3_Dose_Immunizations();
+		IEnumerable<CqlDate> a_ = this.Rotavirus_2_or_3_Dose_Immunizations();
 		IEnumerable<CqlDate> c_(CqlDate AllRotavirusDoses1)
 		{
-			var f_ = this.Rotavirus_2_or_3_Dose_Immunizations();
+			IEnumerable<CqlDate> f_ = this.Rotavirus_2_or_3_Dose_Immunizations();
 			bool? g_(CqlDate AllRotavirusDoses2)
 			{
-				var k_ = context.Operators.Quantity(1m, "day");
-				var l_ = context.Operators.Subtract(AllRotavirusDoses2, k_);
-				var m_ = context.Operators.Interval(l_, AllRotavirusDoses2, false, false);
-				var n_ = context.Operators.In<CqlDate>(AllRotavirusDoses1, m_, null);
+				CqlQuantity k_ = context.Operators.Quantity(1m, "day");
+				CqlDate l_ = context.Operators.Subtract(AllRotavirusDoses2, k_);
+				CqlInterval<CqlDate> m_ = context.Operators.Interval(l_, AllRotavirusDoses2, false, false);
+				bool? n_ = context.Operators.In<CqlDate>(AllRotavirusDoses1, m_, null);
 
 				return n_;
 			};
-			var h_ = context.Operators.Where<CqlDate>(f_, g_);
+			IEnumerable<CqlDate> h_ = context.Operators.Where<CqlDate>(f_, g_);
 			CqlDate i_(CqlDate AllRotavirusDoses2) => 
 				AllRotavirusDoses1;
-			var j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
+			IEnumerable<CqlDate> j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
 
 			return j_;
 		};
-		var d_ = context.Operators.SelectMany<CqlDate, CqlDate>(a_, c_);
-		var e_ = context.Operators.Except<CqlDate>(a_, d_);
+		IEnumerable<CqlDate> d_ = context.Operators.SelectMany<CqlDate, CqlDate>(a_, c_);
+		IEnumerable<CqlDate> e_ = context.Operators.Except<CqlDate>(a_, d_);
 
 		return e_;
 	}
@@ -2495,34 +2505,34 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Has_Appropriate_Number_of_Rotavirus_Immunizations_Value()
 	{
-		var a_ = this.All_Rotavirus_Vaccinations();
+		IEnumerable<CqlDate> a_ = this.All_Rotavirus_Vaccinations();
 		bool? b_(CqlDate RotavirusImmunization)
 		{
-			var e_ = this.Rotavirus_3_Dose_Immunizations_or_Procedures();
-			var f_ = context.Operators.Count<CqlDate>(e_);
-			var g_ = context.Operators.Greater(f_, 0);
-			var h_ = this.All_Rotavirus_Vaccinations();
+			IEnumerable<CqlDate> e_ = this.Rotavirus_3_Dose_Immunizations_or_Procedures();
+			int? f_ = context.Operators.Count<CqlDate>(e_);
+			bool? g_ = context.Operators.Greater(f_, 0);
+			IEnumerable<CqlDate> h_ = this.All_Rotavirus_Vaccinations();
 			CqlDate i_(CqlDate RotavirusVaccinations) => 
 				RotavirusVaccinations;
-			var j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
-			var k_ = context.Operators.Distinct<CqlDate>(j_);
-			var l_ = context.Operators.Count<CqlDate>(k_);
-			var m_ = context.Operators.GreaterOrEqual(l_, 3);
-			var n_ = context.Operators.And(g_, m_);
-			var p_ = context.Operators.Count<CqlDate>(e_);
-			var q_ = context.Operators.Greater(p_, 0);
-			var r_ = context.Operators.IsFalse(q_);
-			var u_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
-			var v_ = context.Operators.Distinct<CqlDate>(u_);
-			var w_ = context.Operators.Count<CqlDate>(v_);
-			var x_ = context.Operators.GreaterOrEqual(w_, 2);
-			var y_ = context.Operators.And(r_, x_);
-			var z_ = context.Operators.Or(n_, y_);
+			IEnumerable<CqlDate> j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
+			IEnumerable<CqlDate> k_ = context.Operators.Distinct<CqlDate>(j_);
+			int? l_ = context.Operators.Count<CqlDate>(k_);
+			bool? m_ = context.Operators.GreaterOrEqual(l_, 3);
+			bool? n_ = context.Operators.And(g_, m_);
+			int? p_ = context.Operators.Count<CqlDate>(e_);
+			bool? q_ = context.Operators.Greater(p_, 0);
+			bool? r_ = context.Operators.IsFalse(q_);
+			IEnumerable<CqlDate> u_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
+			IEnumerable<CqlDate> v_ = context.Operators.Distinct<CqlDate>(u_);
+			int? w_ = context.Operators.Count<CqlDate>(v_);
+			bool? x_ = context.Operators.GreaterOrEqual(w_, 2);
+			bool? y_ = context.Operators.And(r_, x_);
+			bool? z_ = context.Operators.Or(n_, y_);
 
 			return z_;
 		};
-		var c_ = context.Operators.Where<CqlDate>(a_, b_);
-		var d_ = context.Operators.Exists<CqlDate>(c_);
+		IEnumerable<CqlDate> c_ = context.Operators.Where<CqlDate>(a_, b_);
+		bool? d_ = context.Operators.Exists<CqlDate>(c_);
 
 		return d_;
 	}
@@ -2533,21 +2543,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Rotavirus_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Anaphylaxis_due_to_rotavirus_vaccine__disorder_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
-		var d_ = Status_1_6_000.Active_Condition(c_);
+		CqlCode a_ = this.Anaphylaxis_due_to_rotavirus_vaccine__disorder_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
+		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition RotavirusConditions)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(RotavirusConditions);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(RotavirusConditions);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var f_ = context.Operators.Where<Condition>(d_, e_);
+		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
@@ -2558,16 +2568,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = context.Operators.ConvertDateToDateTime(b_);
-		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.Quantity(180m, "days");
-		var f_ = context.Operators.Add(d_, e_);
-		var g_ = this.Date_of_Second_Birthday();
-		var h_ = context.Operators.Interval(f_, g_, true, true);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlDateTime e_ = context.Operators.ConvertDateToDateTime(d_);
+		CqlDate f_ = context.Operators.DateFrom(e_);
+		CqlQuantity g_ = context.Operators.Quantity(180m, "days");
+		CqlDate h_ = context.Operators.Add(f_, g_);
+		CqlDate i_ = this.Date_of_Second_Birthday();
+		CqlInterval<CqlDate> j_ = context.Operators.Interval(h_, i_, true, true);
 
-		return h_;
+		return j_;
 	}
 
     [CqlDeclaration("Vaccine Administration Interval - 180 Days up to 2 Years Old")]
@@ -2576,69 +2588,69 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures_Value()
 	{
-		var a_ = this.Child_Influenza_Immunization_Administered();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Child_Influenza_Immunization_Administered();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization InfluenzaVaccine)
 		{
-			var p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
-			var q_ = InfluenzaVaccine?.Occurrence;
-			var r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			var s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
-			var t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			var u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
+			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
+			DataType q_ = InfluenzaVaccine?.Occurrence;
+			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
+			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization InfluenzaVaccine)
 		{
-			var v_ = InfluenzaVaccine?.Occurrence;
-			var w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			var x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
-			var y_ = CQMCommon_2_0_000.ToDateInterval(x_);
-			var z_ = context.Operators.Start(y_);
-			var aa_ = context.Operators.ConvertDateToDateTime(z_);
-			var ab_ = context.Operators.DateFrom(aa_);
+			DataType v_ = InfluenzaVaccine?.Occurrence;
+			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
+			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
+			CqlDate z_ = context.Operators.Start(y_);
+			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
 		};
-		var g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
-		var h_ = this.Child_Influenza_Vaccine_Administered();
-		var i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
-		var j_ = Status_1_6_000.Completed_Procedure(i_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
+		CqlValueSet h_ = this.Child_Influenza_Vaccine_Administered();
+		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
+		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure InfluenzaAdministration)
 		{
-			var ac_ = this.Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old();
-			var ad_ = ac_?.low;
-			var ae_ = context.Operators.ConvertDateToDateTime(ad_);
-			var ag_ = ac_?.high;
-			var ah_ = context.Operators.ConvertDateToDateTime(ag_);
-			var aj_ = ac_?.lowClosed;
-			var al_ = ac_?.highClosed;
-			var am_ = context.Operators.Interval(ae_, ah_, aj_, al_);
-			var an_ = InfluenzaAdministration?.Performed;
-			var ao_ = FHIRHelpers_4_3_000.ToValue(an_);
-			var ap_ = QICoreCommon_2_0_000.ToInterval(ao_);
-			var aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(am_, ap_, "day");
+			CqlInterval<CqlDate> ac_ = this.Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old();
+			CqlDate ad_ = ac_?.low;
+			CqlDateTime ae_ = context.Operators.ConvertDateToDateTime(ad_);
+			CqlDate ag_ = ac_?.high;
+			CqlDateTime ah_ = context.Operators.ConvertDateToDateTime(ag_);
+			bool? aj_ = ac_?.lowClosed;
+			bool? al_ = ac_?.highClosed;
+			CqlInterval<CqlDateTime> am_ = context.Operators.Interval(ae_, ah_, aj_, al_);
+			DataType an_ = InfluenzaAdministration?.Performed;
+			object ao_ = FHIRHelpers_4_3_000.ToValue(an_);
+			CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_0_000.ToInterval(ao_);
+			bool? aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(am_, ap_, "day");
 
 			return aq_;
 		};
-		var l_ = context.Operators.Where<Procedure>(j_, k_);
+		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure InfluenzaAdministration)
 		{
-			var ar_ = InfluenzaAdministration?.Performed;
-			var as_ = FHIRHelpers_4_3_000.ToValue(ar_);
-			var at_ = QICoreCommon_2_0_000.ToInterval(as_);
-			var au_ = CQMCommon_2_0_000.ToDateInterval(at_);
-			var av_ = context.Operators.Start(au_);
-			var aw_ = context.Operators.ConvertDateToDateTime(av_);
-			var ax_ = context.Operators.DateFrom(aw_);
+			DataType ar_ = InfluenzaAdministration?.Performed;
+			object as_ = FHIRHelpers_4_3_000.ToValue(ar_);
+			CqlInterval<CqlDateTime> at_ = QICoreCommon_2_0_000.ToInterval(as_);
+			CqlInterval<CqlDate> au_ = CQMCommon_2_0_000.ToDateInterval(at_);
+			CqlDate av_ = context.Operators.Start(au_);
+			CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(av_);
+			CqlDate ax_ = context.Operators.DateFrom(aw_);
 
 			return ax_;
 		};
-		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.Union<CqlDate>(g_, n_);
+		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
+		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -2649,11 +2661,11 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> Two_Influenza_Vaccinations_Value()
 	{
-		var a_ = this.Influenza_Immunizations_or_Procedures();
-		var c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
+		IEnumerable<CqlDate> a_ = this.Influenza_Immunizations_or_Procedures();
+		IEnumerable<ValueTuple<CqlDate, CqlDate>> c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
 		Tuple_BZhFLeRDagbPQMNheVJcUNfNQ d_(ValueTuple<CqlDate, CqlDate> _valueTuple)
 		{
-			var j_ = new Tuple_BZhFLeRDagbPQMNheVJcUNfNQ
+			Tuple_BZhFLeRDagbPQMNheVJcUNfNQ j_ = new Tuple_BZhFLeRDagbPQMNheVJcUNfNQ
 			{
 				FluVaccination1 = _valueTuple.Item1,
 				FluVaccination2 = _valueTuple.Item2,
@@ -2661,19 +2673,19 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 			return j_;
 		};
-		var e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, Tuple_BZhFLeRDagbPQMNheVJcUNfNQ>(c_, d_);
+		IEnumerable<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ> e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, Tuple_BZhFLeRDagbPQMNheVJcUNfNQ>(c_, d_);
 		bool? f_(Tuple_BZhFLeRDagbPQMNheVJcUNfNQ tuple_bzhflerdagbpqmnhevjcunfnq)
 		{
-			var k_ = context.Operators.Quantity(1m, "day");
-			var l_ = context.Operators.Add(tuple_bzhflerdagbpqmnhevjcunfnq.FluVaccination1, k_);
-			var m_ = context.Operators.SameOrAfter(tuple_bzhflerdagbpqmnhevjcunfnq.FluVaccination2, l_, "day");
+			CqlQuantity k_ = context.Operators.Quantity(1m, "day");
+			CqlDate l_ = context.Operators.Add(tuple_bzhflerdagbpqmnhevjcunfnq.FluVaccination1, k_);
+			bool? m_ = context.Operators.SameOrAfter(tuple_bzhflerdagbpqmnhevjcunfnq.FluVaccination2, l_, "day");
 
 			return m_;
 		};
-		var g_ = context.Operators.Where<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ>(e_, f_);
+		IEnumerable<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ> g_ = context.Operators.Where<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ>(e_, f_);
 		CqlDate h_(Tuple_BZhFLeRDagbPQMNheVJcUNfNQ tuple_bzhflerdagbpqmnhevjcunfnq) => 
 			tuple_bzhflerdagbpqmnhevjcunfnq.FluVaccination1;
-		var i_ = context.Operators.Select<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ, CqlDate>(g_, h_);
+		IEnumerable<CqlDate> i_ = context.Operators.Select<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ, CqlDate>(g_, h_);
 
 		return i_;
 	}
@@ -2684,65 +2696,65 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<CqlDate> LAIV_Vaccinations_Value()
 	{
-		var a_ = this.Influenza_Virus_LAIV_Immunization();
-		var b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
-		var c_ = Status_1_6_000.Completed_Immunization(b_);
+		CqlValueSet a_ = this.Influenza_Virus_LAIV_Immunization();
+		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, null);
+		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization LAIVVaccine)
 		{
-			var p_ = this.Date_of_Second_Birthday();
-			var r_ = context.Operators.Interval(p_, p_, true, true);
-			var s_ = LAIVVaccine?.Occurrence;
-			var t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-			var u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
-			var v_ = CQMCommon_2_0_000.ToDateInterval(u_);
-			var w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, "day");
+			CqlDate p_ = this.Date_of_Second_Birthday();
+			CqlInterval<CqlDate> r_ = context.Operators.Interval(p_, p_, true, true);
+			DataType s_ = LAIVVaccine?.Occurrence;
+			CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
+			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
+			CqlInterval<CqlDate> v_ = CQMCommon_2_0_000.ToDateInterval(u_);
+			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, "day");
 
 			return w_;
 		};
-		var e_ = context.Operators.Where<Immunization>(c_, d_);
+		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization LAIVVaccine)
 		{
-			var x_ = LAIVVaccine?.Occurrence;
-			var y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-			var z_ = QICoreCommon_2_0_000.ToInterval((y_ as object));
-			var aa_ = CQMCommon_2_0_000.ToDateInterval(z_);
-			var ab_ = context.Operators.Start(aa_);
-			var ac_ = context.Operators.ConvertDateToDateTime(ab_);
-			var ad_ = context.Operators.DateFrom(ac_);
+			DataType x_ = LAIVVaccine?.Occurrence;
+			CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
+			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.ToInterval((y_ as object));
+			CqlInterval<CqlDate> aa_ = CQMCommon_2_0_000.ToDateInterval(z_);
+			CqlDate ab_ = context.Operators.Start(aa_);
+			CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(ab_);
+			CqlDate ad_ = context.Operators.DateFrom(ac_);
 
 			return ad_;
 		};
-		var g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
-		var h_ = this.Influenza_Virus_LAIV_Procedure();
-		var i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
-		var j_ = Status_1_6_000.Completed_Procedure(i_);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
+		CqlValueSet h_ = this.Influenza_Virus_LAIV_Procedure();
+		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, null);
+		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure InfluenzaAdministration)
 		{
-			var ae_ = this.Date_of_Second_Birthday();
-			var ag_ = context.Operators.Interval(ae_, ae_, true, true);
-			var ah_ = InfluenzaAdministration?.Performed;
-			var ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
-			var aj_ = QICoreCommon_2_0_000.ToInterval(ai_);
-			var ak_ = CQMCommon_2_0_000.ToDateInterval(aj_);
-			var al_ = context.Operators.IntervalIncludesInterval<CqlDate>(ag_, ak_, "day");
+			CqlDate ae_ = this.Date_of_Second_Birthday();
+			CqlInterval<CqlDate> ag_ = context.Operators.Interval(ae_, ae_, true, true);
+			DataType ah_ = InfluenzaAdministration?.Performed;
+			object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
+			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.ToInterval(ai_);
+			CqlInterval<CqlDate> ak_ = CQMCommon_2_0_000.ToDateInterval(aj_);
+			bool? al_ = context.Operators.IntervalIncludesInterval<CqlDate>(ag_, ak_, "day");
 
 			return al_;
 		};
-		var l_ = context.Operators.Where<Procedure>(j_, k_);
+		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure InfluenzaAdministration)
 		{
-			var am_ = InfluenzaAdministration?.Performed;
-			var an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			var ao_ = QICoreCommon_2_0_000.ToInterval(an_);
-			var ap_ = CQMCommon_2_0_000.ToDateInterval(ao_);
-			var aq_ = context.Operators.Start(ap_);
-			var ar_ = context.Operators.ConvertDateToDateTime(aq_);
-			var as_ = context.Operators.DateFrom(ar_);
+			DataType am_ = InfluenzaAdministration?.Performed;
+			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
+			CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.ToInterval(an_);
+			CqlInterval<CqlDate> ap_ = CQMCommon_2_0_000.ToDateInterval(ao_);
+			CqlDate aq_ = context.Operators.Start(ap_);
+			CqlDateTime ar_ = context.Operators.ConvertDateToDateTime(aq_);
+			CqlDate as_ = context.Operators.DateFrom(ar_);
 
 			return as_;
 		};
-		var n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
-		var o_ = context.Operators.Union<CqlDate>(g_, n_);
+		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
+		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
 		return o_;
 	}
@@ -2753,11 +2765,11 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Value()
 	{
-		var a_ = this.LAIV_Vaccinations();
-		var b_ = context.Operators.Exists<CqlDate>(a_);
-		var c_ = this.Influenza_Immunizations_or_Procedures();
-		var d_ = context.Operators.Exists<CqlDate>(c_);
-		var e_ = context.Operators.And(b_, d_);
+		IEnumerable<CqlDate> a_ = this.LAIV_Vaccinations();
+		bool? b_ = context.Operators.Exists<CqlDate>(a_);
+		IEnumerable<CqlDate> c_ = this.Influenza_Immunizations_or_Procedures();
+		bool? d_ = context.Operators.Exists<CqlDate>(c_);
+		bool? e_ = context.Operators.And(b_, d_);
 
 		return e_;
 	}
@@ -2768,21 +2780,21 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Condition> Influenza_Numerator_Inclusion_Conditions_Value()
 	{
-		var a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder_();
-		var b_ = context.Operators.ToList<CqlCode>(a_);
-		var c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
-		var d_ = Status_1_6_000.Active_Condition(c_);
+		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder_();
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, null);
+		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition InfluenzaConditions)
 		{
-			var g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(InfluenzaConditions);
-			var h_ = context.Operators.Start(g_);
-			var i_ = context.Operators.DateFrom(h_);
-			var j_ = this.First_Two_Years();
-			var k_ = context.Operators.In<CqlDate>(i_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.ToPrevalenceInterval(InfluenzaConditions);
+			CqlDateTime h_ = context.Operators.Start(g_);
+			CqlDate i_ = context.Operators.DateFrom(h_);
+			CqlInterval<CqlDate> j_ = this.First_Two_Years();
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
-		var f_ = context.Operators.Where<Condition>(d_, e_);
+		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
@@ -2793,77 +2805,77 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Four_DTaP_Vaccinations();
-		var b_ = context.Operators.Exists<CqlDate>(a_);
-		var c_ = this.DTaP_Numerator_Inclusion_Conditions();
-		var d_ = context.Operators.Exists<Condition>(c_);
-		var e_ = context.Operators.Or(b_, d_);
-		var f_ = this.Three_Polio_Vaccinations();
-		var g_ = context.Operators.Exists<CqlDate>(f_);
-		var h_ = this.Polio_Numerator_Inclusion_Conditions();
-		var i_ = context.Operators.Exists<Condition>(h_);
-		var j_ = context.Operators.Or(g_, i_);
-		var k_ = context.Operators.And(e_, j_);
-		var l_ = this.One_MMR_Vaccination();
-		var m_ = context.Operators.Exists<object>(l_);
-		var n_ = this.MMR_Numerator_Inclusion_Conditions();
-		var o_ = context.Operators.Exists<Condition>(n_);
-		var p_ = context.Operators.Or(m_, o_);
-		var q_ = this.Measles_Indicators();
-		var r_ = context.Operators.Exists<Condition>(q_);
-		var s_ = this.Mumps_Indicators();
-		var t_ = context.Operators.Exists<Condition>(s_);
-		var u_ = context.Operators.And(r_, t_);
-		var v_ = this.Rubella_Indicators();
-		var w_ = context.Operators.Exists<Condition>(v_);
-		var x_ = context.Operators.And(u_, w_);
-		var y_ = context.Operators.Or(p_, x_);
-		var z_ = context.Operators.And(k_, y_);
-		var aa_ = this.Has_Appropriate_Number_of_Hib_Immunizations();
-		var ab_ = this.Hib_Numerator_Inclusion_Conditions();
-		var ac_ = context.Operators.Exists<Condition>(ab_);
-		var ad_ = context.Operators.Or(aa_, ac_);
-		var ae_ = context.Operators.And(z_, ad_);
-		var af_ = this.Three_Hepatitis_B_Vaccinations();
-		var ag_ = context.Operators.Exists<CqlDate>(af_);
-		var ah_ = this.Meets_HepB_Vaccination_Requirement();
-		var ai_ = context.Operators.Exists<CqlDate>(ah_);
-		var aj_ = this.Hepatitis_B_Numerator_Inclusion_Conditions();
-		var ak_ = context.Operators.Exists<Condition>(aj_);
-		var al_ = context.Operators.Or(ai_, ak_);
-		var am_ = context.Operators.Or(ag_, al_);
-		var an_ = context.Operators.And(ae_, am_);
-		var ao_ = this.One_Chicken_Pox_Vaccination();
-		var ap_ = context.Operators.Exists<object>(ao_);
-		var aq_ = this.Varicella_Zoster_Numerator_Inclusion_Conditions();
-		var ar_ = context.Operators.Exists<Condition>(aq_);
-		var as_ = context.Operators.Or(ap_, ar_);
-		var at_ = context.Operators.And(an_, as_);
-		var au_ = this.Four_Pneumococcal_Conjugate_Vaccinations();
-		var av_ = context.Operators.Exists<CqlDate>(au_);
-		var aw_ = this.Pneumococcal_Conjugate_Numerator_Inclusion_Conditions();
-		var ax_ = context.Operators.Exists<Condition>(aw_);
-		var ay_ = context.Operators.Or(av_, ax_);
-		var az_ = context.Operators.And(at_, ay_);
-		var ba_ = this.One_Hepatitis_A_Vaccinations();
-		var bb_ = context.Operators.Exists<object>(ba_);
-		var bc_ = this.Hepatitis_A_Numerator_Inclusion_Conditions();
-		var bd_ = context.Operators.Exists<Condition>(bc_);
-		var be_ = context.Operators.Or(bb_, bd_);
-		var bf_ = context.Operators.And(az_, be_);
-		var bg_ = this.Has_Appropriate_Number_of_Rotavirus_Immunizations();
-		var bh_ = this.Rotavirus_Numerator_Inclusion_Conditions();
-		var bi_ = context.Operators.Exists<Condition>(bh_);
-		var bj_ = context.Operators.Or(bg_, bi_);
-		var bk_ = context.Operators.And(bf_, bj_);
-		var bl_ = this.Two_Influenza_Vaccinations();
-		var bm_ = context.Operators.Exists<CqlDate>(bl_);
-		var bn_ = this.Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination();
-		var bo_ = context.Operators.Or(bm_, bn_);
-		var bp_ = this.Influenza_Numerator_Inclusion_Conditions();
-		var bq_ = context.Operators.Exists<Condition>(bp_);
-		var br_ = context.Operators.Or(bo_, bq_);
-		var bs_ = context.Operators.And(bk_, br_);
+		IEnumerable<CqlDate> a_ = this.Four_DTaP_Vaccinations();
+		bool? b_ = context.Operators.Exists<CqlDate>(a_);
+		IEnumerable<Condition> c_ = this.DTaP_Numerator_Inclusion_Conditions();
+		bool? d_ = context.Operators.Exists<Condition>(c_);
+		bool? e_ = context.Operators.Or(b_, d_);
+		IEnumerable<CqlDate> f_ = this.Three_Polio_Vaccinations();
+		bool? g_ = context.Operators.Exists<CqlDate>(f_);
+		IEnumerable<Condition> h_ = this.Polio_Numerator_Inclusion_Conditions();
+		bool? i_ = context.Operators.Exists<Condition>(h_);
+		bool? j_ = context.Operators.Or(g_, i_);
+		bool? k_ = context.Operators.And(e_, j_);
+		IEnumerable<object> l_ = this.One_MMR_Vaccination();
+		bool? m_ = context.Operators.Exists<object>(l_);
+		IEnumerable<Condition> n_ = this.MMR_Numerator_Inclusion_Conditions();
+		bool? o_ = context.Operators.Exists<Condition>(n_);
+		bool? p_ = context.Operators.Or(m_, o_);
+		IEnumerable<Condition> q_ = this.Measles_Indicators();
+		bool? r_ = context.Operators.Exists<Condition>(q_);
+		IEnumerable<Condition> s_ = this.Mumps_Indicators();
+		bool? t_ = context.Operators.Exists<Condition>(s_);
+		bool? u_ = context.Operators.And(r_, t_);
+		IEnumerable<Condition> v_ = this.Rubella_Indicators();
+		bool? w_ = context.Operators.Exists<Condition>(v_);
+		bool? x_ = context.Operators.And(u_, w_);
+		bool? y_ = context.Operators.Or(p_, x_);
+		bool? z_ = context.Operators.And(k_, y_);
+		bool? aa_ = this.Has_Appropriate_Number_of_Hib_Immunizations();
+		IEnumerable<Condition> ab_ = this.Hib_Numerator_Inclusion_Conditions();
+		bool? ac_ = context.Operators.Exists<Condition>(ab_);
+		bool? ad_ = context.Operators.Or(aa_, ac_);
+		bool? ae_ = context.Operators.And(z_, ad_);
+		IEnumerable<CqlDate> af_ = this.Three_Hepatitis_B_Vaccinations();
+		bool? ag_ = context.Operators.Exists<CqlDate>(af_);
+		IEnumerable<CqlDate> ah_ = this.Meets_HepB_Vaccination_Requirement();
+		bool? ai_ = context.Operators.Exists<CqlDate>(ah_);
+		IEnumerable<Condition> aj_ = this.Hepatitis_B_Numerator_Inclusion_Conditions();
+		bool? ak_ = context.Operators.Exists<Condition>(aj_);
+		bool? al_ = context.Operators.Or(ai_, ak_);
+		bool? am_ = context.Operators.Or(ag_, al_);
+		bool? an_ = context.Operators.And(ae_, am_);
+		IEnumerable<object> ao_ = this.One_Chicken_Pox_Vaccination();
+		bool? ap_ = context.Operators.Exists<object>(ao_);
+		IEnumerable<Condition> aq_ = this.Varicella_Zoster_Numerator_Inclusion_Conditions();
+		bool? ar_ = context.Operators.Exists<Condition>(aq_);
+		bool? as_ = context.Operators.Or(ap_, ar_);
+		bool? at_ = context.Operators.And(an_, as_);
+		IEnumerable<CqlDate> au_ = this.Four_Pneumococcal_Conjugate_Vaccinations();
+		bool? av_ = context.Operators.Exists<CqlDate>(au_);
+		IEnumerable<Condition> aw_ = this.Pneumococcal_Conjugate_Numerator_Inclusion_Conditions();
+		bool? ax_ = context.Operators.Exists<Condition>(aw_);
+		bool? ay_ = context.Operators.Or(av_, ax_);
+		bool? az_ = context.Operators.And(at_, ay_);
+		IEnumerable<object> ba_ = this.One_Hepatitis_A_Vaccinations();
+		bool? bb_ = context.Operators.Exists<object>(ba_);
+		IEnumerable<Condition> bc_ = this.Hepatitis_A_Numerator_Inclusion_Conditions();
+		bool? bd_ = context.Operators.Exists<Condition>(bc_);
+		bool? be_ = context.Operators.Or(bb_, bd_);
+		bool? bf_ = context.Operators.And(az_, be_);
+		bool? bg_ = this.Has_Appropriate_Number_of_Rotavirus_Immunizations();
+		IEnumerable<Condition> bh_ = this.Rotavirus_Numerator_Inclusion_Conditions();
+		bool? bi_ = context.Operators.Exists<Condition>(bh_);
+		bool? bj_ = context.Operators.Or(bg_, bi_);
+		bool? bk_ = context.Operators.And(bf_, bj_);
+		IEnumerable<CqlDate> bl_ = this.Two_Influenza_Vaccinations();
+		bool? bm_ = context.Operators.Exists<CqlDate>(bl_);
+		bool? bn_ = this.Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination();
+		bool? bo_ = context.Operators.Or(bm_, bn_);
+		IEnumerable<Condition> bp_ = this.Influenza_Numerator_Inclusion_Conditions();
+		bool? bq_ = context.Operators.Exists<Condition>(bp_);
+		bool? br_ = context.Operators.Or(bo_, bq_);
+		bool? bs_ = context.Operators.And(bk_, br_);
 
 		return bs_;
 	}
@@ -2874,7 +2886,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -2885,7 +2897,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -2896,7 +2908,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -2907,7 +2919,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
