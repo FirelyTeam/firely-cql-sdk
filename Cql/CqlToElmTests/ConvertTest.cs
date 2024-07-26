@@ -53,5 +53,20 @@ namespace Hl7.Cql.CqlToElm.Test
             var toConcept = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToConcept>();
             var result = Run<CqlConcept>(toConcept);
         }
+
+        [TestMethod]
+        public void Convert_Quantity_To_Weeks()
+        {
+            var lib = MakeLibrary(@"
+
+                library Test version '1.0.0'
+
+                define function f(q Quantity):
+                    convert q to weeks
+            ");
+            lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ConvertQuantity>();
+
+        }
+
     }
 }

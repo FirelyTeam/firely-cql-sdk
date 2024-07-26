@@ -8,8 +8,11 @@
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Xml;
 
 namespace Hl7.Cql.Elm
@@ -44,10 +47,25 @@ namespace Hl7.Cql.Elm
         IDefinitionElement AddError(CqlToElmError error);
     }
 
+    /// <summary>
+    /// Represents a function-typed element.
+    /// </summary>
+    public interface IFunctionElement : IDefinitionElement
+    {
+    }
+    public interface IHasSignature : IFunctionElement
+    {
+        IEnumerable<OperandDef> Operands { get; }
+        TypeSpecifier ResultTypeSpecifier { get; }
+        bool Fluent { get; }
+    }
+
     public partial class ValueSetDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ValueSetRef
@@ -61,8 +79,10 @@ namespace Hl7.Cql.Elm
 
     public partial class CodeSystemDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new CodeSystemRef
@@ -76,8 +96,10 @@ namespace Hl7.Cql.Elm
 
     public partial class ConceptDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ConceptRef
@@ -92,8 +114,10 @@ namespace Hl7.Cql.Elm
 
     public partial class CodeDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new CodeRef
@@ -110,6 +134,7 @@ namespace Hl7.Cql.Elm
     {
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ParameterRef
@@ -124,8 +149,10 @@ namespace Hl7.Cql.Elm
 
     public partial class ExpressionDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ExpressionRef
@@ -138,11 +165,22 @@ namespace Hl7.Cql.Elm
 
     }
 
-    public partial class FunctionDef : IDefinitionElement
+    public partial class FunctionDef : IFunctionElement, IHasSignature
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => accessLevel;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
+
+        [JsonIgnore]
+        public IEnumerable<OperandDef> Operands => operand ?? Enumerable.Empty<OperandDef>();
+
+        [JsonIgnore]
+        public TypeSpecifier ResultTypeSpecifier => resultTypeSpecifier!;
+
+        [JsonIgnore]
+        public bool Fluent => fluentSpecified && fluent;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
 
@@ -160,10 +198,13 @@ namespace Hl7.Cql.Elm
     {
         // ContextDefs are represented by expressions with the same name in the symbol table,
         // so for ContextDefs themselves, we will return an "unresolvable" name.
-        string IDefinitionElement.Name => $"_context_{this.name}_";
+        [JsonIgnore]
+        string IDefinitionElement.Name => $"$context:{this.name}";
 
+        [JsonIgnore]
         public bool IsUnfiltered => name == "Unfiltered";
 
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
         // Since there is no way to reference a context definition, we will throw an exception
@@ -177,8 +218,10 @@ namespace Hl7.Cql.Elm
 
     public partial class OperandDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => name;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new OperandRef
@@ -192,8 +235,10 @@ namespace Hl7.Cql.Elm
 
     public partial class AliasedQuerySource : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => alias;
 
         Expression IDefinitionElement.ToRef(string? libraryName)
@@ -201,7 +246,7 @@ namespace Hl7.Cql.Elm
             TypeSpecifier aliasType;
             if (resultTypeSpecifier is ListTypeSpecifier list)
                 aliasType = list.elementType;
-            else 
+            else
                 aliasType = resultTypeSpecifier;
             if (aliasType is null)
                 throw new InvalidOperationException($"Alias type is null");
@@ -215,8 +260,10 @@ namespace Hl7.Cql.Elm
 
     public partial class LetClause : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => identifier;
 
         Expression IDefinitionElement.ToRef(string? _) => new QueryLetRef
@@ -230,8 +277,10 @@ namespace Hl7.Cql.Elm
 
     public partial class UsingDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => localIdentifier;
 
         Expression IDefinitionElement.ToRef(string? _) =>
@@ -241,10 +290,28 @@ namespace Hl7.Cql.Elm
 
     }
 
+    /// <summary>
+    /// An identifier that resolves to an <see cref="IdentifierRef"/>.  Used for special $this variables e.g. in queries.
+    /// </summary>
+    partial class IdentifierRef : IDefinitionElement
+    {
+        [JsonIgnore]
+        public AccessModifier Access => AccessModifier.Private;
+
+        [JsonIgnore]
+        public string Name => name;
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
+        public Expression ToRef(string? libraryName) => this;
+    }
+
     public partial class IncludeDef : IDefinitionElement
     {
+        [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
+        [JsonIgnore]
         string IDefinitionElement.Name => localIdentifier;
 
         Expression IDefinitionElement.ToRef(string? _) =>
@@ -257,52 +324,81 @@ namespace Hl7.Cql.Elm
     /// <summary>
     /// Defines a function with multiple overloads.
     /// </summary>
-    public sealed class OverloadedFunctionDef: IDefinitionElement
+    public sealed class OverloadedFunctionDef : IFunctionElement
     {
-        public static OverloadedFunctionDef Create(params FunctionDef[] functions)
+        /// <summary>
+        /// Returns true if these elements can be combined into a single overload; false otherwise.
+        /// </summary>
+        public static bool CanCombine(params IFunctionElement[] elements)
         {
-            if (functions.Length < 2)
-                throw new ArgumentException($"Overloads must have at least two functions provided.", nameof(functions));
-            var names = functions.Select(fd => fd.name).Distinct().ToArray();
-            if (names.Length > 1)
-                throw new ArgumentException($"All functions in an overload must have the same name. Found {string.Join(", ", names)}", nameof(functions));
-            if (functions.Any(f => f.resultTypeSpecifier is null))
-                throw new ArgumentException("At least one function is missing a result type specifier.");
-            var accessLevel = functions.Select(fd => fd.accessLevel).Min(); // public < private; any public overload makes this public
-            return new OverloadedFunctionDef(functions, names[0], accessLevel);       
+            for (int i = 0; i < elements.Length; i++)
+                if (elements[i] is not IHasSignature && elements[i] is not OverloadedFunctionDef)
+                    return false;
+            if (elements.Select(e => e.Name).Distinct().Count() != 1)
+                return false;
+            var allFunctions = elements
+                  .OfType<OverloadedFunctionDef>()
+                  .SelectMany(ofd => ofd.Functions)
+                  .Concat(elements.OfType<IHasSignature>())
+                  .ToArray();
+            var distinctSignatures = new List<TypeSpecifier[]>();
+            // TODO: make this better than O(n2)
+            foreach (var function in allFunctions)
+            {
+                var opTypes = function.Operands
+                    .Select(op => op.operandTypeSpecifier)
+                    .ToArray();
+                if (distinctSignatures.Any(sig => opTypes.SequenceEqual(sig)))
+                    return false;
+                else
+                    distinctSignatures.Add(opTypes);
+            }
+            return true;
         }
 
-        public static OverloadedFunctionDef Create(params IDefinitionElement[] elements)
+        /// <summary>
+        /// Creates an overloaded function from <paramref name="elements"/>.
+        /// </summary>
+        /// <exception cref="ArgumentException">If <see cref="CanCombine"/> returns false.</exception>
+        public static OverloadedFunctionDef Create(params IFunctionElement[] elements)
         {
-#if DEBUG
-            for (int i = 0; i < elements.Length; i++)
-                if (elements[i] is not FunctionDef && elements[i] is not OverloadedFunctionDef)
-                    throw new ArgumentException($"Only functions and overloads can be passed to this method.", nameof(elements));
-            if (elements.Select(e => e.Name).Distinct().Count() != 1)
-                throw new ArgumentException($"All functions should have the same name.", nameof(elements));
-#endif
             var allFunctions = elements
                 .OfType<OverloadedFunctionDef>()
                 .SelectMany(ofd => ofd.Functions)
-                .Concat(elements.OfType<FunctionDef>())
+                .Concat(elements.OfType<IHasSignature>())
                 .ToArray();
-            var overload = Create(allFunctions);
-            return overload;
+            if (!CanCombine(allFunctions))
+                throw new ArgumentException("Cannot combine these functions.", nameof(elements));
+            var accessLevel = allFunctions.Select(f => f.Access).Min(); // public < private; any public overload makes this public
+            return new OverloadedFunctionDef(allFunctions, allFunctions[0].Name, accessLevel);
         }
 
 
-        public FunctionDef[] Functions { get; }
+        private readonly List<IHasSignature> _functions;
+        [JsonIgnore]
+        public IReadOnlyList<IHasSignature> Functions => _functions!.AsReadOnly();
 
+        [JsonIgnore]
         public string Name { get; }
+
+        [JsonIgnore]
         public AccessModifier Access { get; }
 
-        private OverloadedFunctionDef(FunctionDef[] functions, 
-            string name, 
+        private OverloadedFunctionDef(IEnumerable<IHasSignature> functions,
+            string name,
             AccessModifier access)
         {
-            Functions = functions;
+            _functions = functions.ToList();
             Name = name;
             Access = access;
+        }
+
+        public OverloadedFunctionDef Add(FunctionDef function)
+        {
+            if (function.name != Name)
+                throw new InvalidOperationException($"All functions should have the same name.");
+            _functions.Add(function);
+            return this;
         }
 
         Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
@@ -310,5 +406,64 @@ namespace Hl7.Cql.Elm
         internal FunctionRef ToRef(string? libraryName) => throw new NotSupportedException($"Refs cannot be created until the overload is resolved.");
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => throw new NotSupportedException("An overloaded def cannot have an error.");
+    }
+
+    /// <summary>
+    /// Defines a deferred symbol that will be resolved later.
+    /// </summary>
+    public abstract class DeferredDefinition<T> : IDefinitionElement
+        where T : IDefinitionElement
+    {
+        [JsonIgnore]
+        public string Name { get; }
+        [JsonIgnore]
+        public AccessModifier Access { get; }
+        [JsonIgnore]
+        protected Lazy<T> Definition { get; }
+        public T Resolve() => Definition.Value;
+
+
+        public DeferredDefinition(string name, AccessModifier access, Func<T> resolve)
+        {
+            Name = name;
+            Access = access;
+            Definition = new Lazy<T>(resolve);
+        }
+
+        public IDefinitionElement AddError(CqlToElmError error) => Definition.Value.AddError(error);
+
+        public Expression ToRef(string? libraryName) => Resolve().ToRef(libraryName);
+    }
+    /// <summary>
+    /// Defines a deferred expression (define).
+    /// </summary>
+    public sealed class DeferredExpressionDef : DeferredDefinition<ExpressionDef>
+    {
+        public DeferredExpressionDef(string name, AccessModifier access, Func<ExpressionDef> resolve) : base(name, access, resolve)
+        {
+        }
+    }
+    /// <summary>
+    /// Defines a deferred expression (define).
+    /// </summary>
+    public sealed class DeferredFunctionDef : DeferredDefinition<FunctionDef>, IFunctionElement, IHasSignature
+    {
+        public DeferredFunctionDef(AccessModifier access,
+            bool fluent,
+            string name,
+            OperandDef[] operand,
+            Func<FunctionDef> resolve) : base(name, access, resolve)
+        {
+            Fluent = fluent;
+            Operands = operand;
+        }
+
+        // the signature has to be known initially without resolution.
+        [JsonIgnore]
+        public IEnumerable<OperandDef> Operands { get; }
+        [JsonIgnore]
+        public bool Fluent { get; }
+        [JsonIgnore]
+        public TypeSpecifier ResultTypeSpecifier => Resolve().ResultTypeSpecifier;
     }
 }

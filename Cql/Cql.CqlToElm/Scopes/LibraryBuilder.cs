@@ -1,7 +1,11 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.CqlToElm.Scopes;
 using Hl7.Cql.Elm;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
@@ -10,23 +14,42 @@ namespace Hl7.Cql.CqlToElm
     {
         private static readonly VersionedIdentifier schemaIdentifier = new() { id = "urn:hl7-org:elm", version = "r1" };
 
-        public LibraryBuilder(SystemLibrary systemLibrary)
+        /// <summary>
+        /// Creates a new instance from an existing library.  Its symbol table will be populated with its existing definitions.
+        /// </summary>
+        public static LibraryBuilder CreateFromExisting(Library library) => throw new NotImplementedException();
+
+        public LibraryBuilder(VersionedIdentifier identifier, SystemLibrary systemLibrary, LocalIdentifierProvider localIdentifierProvider)
         {
+            Identifier = identifier;
+            SymbolTable = new SymbolTable(Identifier.ToString()!, systemLibrary);
             CurrentScope = SymbolTable;
-            Identifier = new VersionedIdentifier() { id = "unset", version = "0.0.0" };
-            SystemScope = systemLibrary.Symbols;
+            LocalIdentifierProvider = localIdentifierProvider;
         }
 
         public VersionedIdentifier Identifier { get; set; }
-
-
+        public LocalIdentifierProvider LocalIdentifierProvider { get; }
+        internal string NextId() => LocalIdentifierProvider.Next();
         /// <summary>
         /// Builds a library from the current state of the builder.
         /// </summary>
         public Library Build()
         {
-            var symbols = SymbolTable.Symbols;
-
+            var symbols = SymbolTable;
+            var expressionDefs = symbols.OfType<ExpressionDef>()
+                .Concat(symbols.OfType<DeferredExpressionDef>().Select(dd => dd.Resolve()));
+            var functionDefs = symbols.OfType<FunctionDef>()
+                .Concat(symbols.OfType<OverloadedFunctionDef>()
+                    .SelectMany(od => od.Functions.Select(f => f switch
+                    {
+                        FunctionDef fd => fd,
+                        DeferredFunctionDef dfd => dfd.Resolve(),
+                        _ => throw new NotSupportedException("Unknown function element type")
+                    })))
+                .Concat(symbols.OfType<DeferredFunctionDef>().Select(dfd => dfd.Resolve()));
+            var statements = expressionDefs
+                .Concat(functionDefs)
+                .ToArray();
             return new Library
             {
                 identifier = Identifier,
@@ -39,17 +62,16 @@ namespace Hl7.Cql.CqlToElm
                 codes = symbols.OfType<CodeDef>().ToArray(),
                 concepts = symbols.OfType<ConceptDef>().ToArray(),
                 contexts = symbols.OfType<ContextDef>().ToArray(),
-                statements = symbols.OfType<ExpressionDef>().ToArray(),
+                statements = statements,
                 annotation = errors.ToArray()
             };
         }
 
         private readonly List<CqlToElmError> errors = new();
 
-        public SymbolTable SymbolTable { get; } = new(null);  // we're a top-level scope
+        public SymbolTable SymbolTable { get; }
 
         public ISymbolScope CurrentScope { get; private set; }
-        public ISymbolScope SystemScope { get; }
 
         public void AddError(string message, ErrorType errorType) =>
             errors.Add(new CqlToElmError()
@@ -60,31 +82,79 @@ namespace Hl7.Cql.CqlToElm
             });
 
         /// <summary>
-        /// Enters a scope which is exited when the return value of this method is disposed.
+        /// Enters a scope that is directly descended from this Library's root scope.
+        /// This can be used, e.g. while evaluating function definitions to ensure that
+        /// building a FunctionDef while in the midst of building another one does not allow
+        /// the new FunctionDef to inherit scope values it shouldn't.
         /// </summary>
-        /// <param name="newScope">The new scope to enter, or <see langword="null"/>.  If null, this builder's current scope will be entered via <see cref="ISymbolScope.EnterScope"/>.</param>
-        /// <returns>An <see cref="IDisposable"/> which upon disposable exits the new scope.</returns>
-        public IDisposable EnterScope(ISymbolScope? newScope = null) => 
-            new DisposableScope(this, newScope ?? CurrentScope.EnterScope());
+        /// <returns></returns>
+        public ISymbolScope EnterStatementScope(string statement) =>
+            new LibraryBuilderSubscope(this, SymbolTable.EnterScope(statement));
 
-        private void ExitScope()
-        {
-            if (CurrentScope.Parent is null)
-                throw new InvalidOperationException("Tried to pop a scope while already at the root scope.");
+     
+        public ISymbolScope EnterScope(string reason) => 
+            new LibraryBuilderSubscope(this, CurrentScope.EnterScope(reason));
 
-            CurrentScope = CurrentScope.Parent;
-        }
-        private class DisposableScope : IDisposable
+        [DebuggerDisplay("{Name,nq}")]
+        private class LibraryBuilderSubscope : ISymbolScope
         {
-            public DisposableScope(LibraryBuilder builder, ISymbolScope newScope)
+            public LibraryBuilderSubscope(LibraryBuilder builder, ISymbolScope newScope)
             {
+                ReturnScope = builder.CurrentScope;
                 builder.CurrentScope = newScope;
                 Builder = builder;
             }
 
             public LibraryBuilder Builder { get; }
 
-            public void Dispose() => Builder.ExitScope();
+            public ISymbolScope ReturnScope { get; init; }
+
+            public ISymbolScope? Parent => CurrentScope.Parent;
+
+            public IEnumerable<ReferencedLibrary> ReferencedLibraries => CurrentScope.ReferencedLibraries;
+
+            public string Name => CurrentScope.Name;
+
+            private ISymbolScope CurrentScope => Builder.CurrentScope;
+
+            public void Dispose()
+            {
+                //Debug.WriteLine($"Exiting scope {CurrentScope.Name}");
+                Builder.CurrentScope = ReturnScope;
+            }
+
+            public ISymbolScope EnterScope(string name) =>
+                new LibraryBuilderSubscope(Builder, CurrentScope.EnterScope(name));
+
+            public IEnumerator<IDefinitionElement> GetEnumerator()
+            {
+                return CurrentScope.GetEnumerator();
+            }
+
+            public bool TryAdd(IDefinitionElement symbol)
+            {
+                return CurrentScope.TryAdd(symbol);
+            }
+
+            public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
+            {
+                return CurrentScope.TryResolveFluentFunction(identifier, out symbol);
+            }
+
+            public bool TryResolveFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
+            {
+                return CurrentScope.TryResolveFunction(identifier, out symbol);
+            }
+
+            public bool TryResolveSymbol(string identifier, [NotNullWhen(true)] out IDefinitionElement? symbol)
+            {
+                return CurrentScope.TryResolveSymbol(identifier, out symbol);
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return ((IEnumerable)CurrentScope).GetEnumerator();
+            }
         }
     }
 }

@@ -6,18 +6,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal abstract class Visitor<T> : cqlBaseVisitor<T>
     {
-        protected Visitor(LocalIdentifierProvider localIdentifierProvider, 
-            InvocationBuilder invocationBuilder) : base()
-        {
-            LocalIdentifierProvider = localIdentifierProvider;
-            InvocationBuilder = invocationBuilder;
-        }
-
-        public LocalIdentifierProvider LocalIdentifierProvider { get; }
-        public InvocationBuilder InvocationBuilder { get; }
-
-        protected string NextId() => LocalIdentifierProvider.Next();
-
         protected static string FormatLocator(int startLine, int startCol, int endLine, int endCol) =>
             $"{startLine}:{startCol}-{endLine}:{endCol}";
 

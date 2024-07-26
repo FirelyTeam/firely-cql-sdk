@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Hl7.Cql.CqlToElm.Visitors;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.CqlToElm.LibraryProviders
 {
@@ -24,13 +25,17 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                 case '{' when FromJson(stream) is { identifier: not null } lib:
                     {
                         // From ELM in json format - read the info straight from the ELM
-                        libraryInfo = new LibraryInfo(lib.identifier, lib, LibraryInfo.ElmJsonMimeType);
+                        libraryInfo = new LibraryInfo(lib.identifier, 
+                            LibraryBuilder.CreateFromExisting(lib),
+                            LibraryInfo.ElmJsonMimeType);
                         return true;
                     }
                 case '<' when FromXml(stream) is { identifier: not null } lib:
                     {
                         // From ELM in XML format - read the info straight from the ELM
-                        libraryInfo = new LibraryInfo(lib.identifier, lib, LibraryInfo.ElmXmlMimeType);
+                        libraryInfo = new LibraryInfo(lib.identifier, 
+                            LibraryBuilder.CreateFromExisting(lib),
+                            LibraryInfo.ElmXmlMimeType);
                         return true;
                     }
                 case var _ when FromCql(sr) is { } vi:
@@ -46,6 +51,59 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                         return false;
                     }
             }
+        }
+
+        internal bool TryCql(Stream stream, [NotNullWhen(true)] out LibraryInfo? libraryInfo)
+        {
+            using var sr = new StreamReader(stream);
+            var vi = FromCql(sr);
+            if (vi is { })
+            {
+                libraryInfo = new LibraryInfo(vi, null, LibraryInfo.CqlMimeType);
+                return true;
+            }
+            else
+            {
+                libraryInfo = null;
+                return false;
+            }
+        }
+        internal bool TryJsonLibrary(Stream stream, [NotNullWhen(true)] out LibraryInfo? libraryInfo)
+        {
+            using var sr = new StreamReader(stream);
+            var first = PeekFirstNonWhitespaceCharacter(sr);
+            if (first == '{')
+            {
+                var lib = FromJson(stream);
+                if (lib is { identifier: not null })
+                {
+                    libraryInfo = new LibraryInfo(lib.identifier,
+                        LibraryBuilder.CreateFromExisting(lib), 
+                        LibraryInfo.ElmJsonMimeType);
+                    return true;
+                }
+            }
+            libraryInfo = null;
+            return false;
+        }
+
+        internal bool TryXmlLibrary(Stream stream, [NotNullWhen(true)] out LibraryInfo? libraryInfo)
+        {
+            using var sr = new StreamReader(stream);
+            var first = PeekFirstNonWhitespaceCharacter(sr);
+            if (first == '<')
+            {
+                var lib = FromXml(stream);
+                if (lib is { identifier: not null })
+                {
+                    libraryInfo = new LibraryInfo(lib.identifier, 
+                        LibraryBuilder.CreateFromExisting(lib),
+                        LibraryInfo.ElmXmlMimeType);
+                    return true;
+                }
+            }
+            libraryInfo = null;
+            return false;
         }
 
         internal static Library? FromJson(Stream stream)

@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -36,13 +37,16 @@ namespace Hl7.Cql.CqlToElm.Test
             var overload = genericFunction.For(generic,
                 SystemTypes.IntegerType,
                 SystemTypes.DecimalType);
-            Assert.AreEqual(2, overload.Functions.Length);
-            var first = overload.Functions[0];
-            Assert.AreEqual(1, first.operand.Length);
-            Assert.AreEqual(SystemTypes.IntegerType, first.operand[0].operandTypeSpecifier);
-            var second = overload.Functions[1];
-            Assert.AreEqual(1, second.operand.Length);
-            Assert.AreEqual(SystemTypes.DecimalType, second.operand[0].operandTypeSpecifier);
+            var fns = overload.Functions.ToArray();
+            Assert.AreEqual(2, fns.Length);
+            var first = fns[0];
+            var fo = first.Operands.ToArray();
+            Assert.AreEqual(1, fo.Length);
+            Assert.AreEqual(SystemTypes.IntegerType, fo[0].operandTypeSpecifier);
+            var second = fns[1];
+            var so = second.Operands.ToArray();
+            Assert.AreEqual(1, so.Length);
+            Assert.AreEqual(SystemTypes.DecimalType, so[0].operandTypeSpecifier);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Hl7.Cql.Elm
     partial class CqlToElmError
     {
     }
-    
+
     [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
     partial class Interval
     {
@@ -54,7 +54,7 @@ namespace Hl7.Cql.Elm
                 int.Parse(value, CultureInfo.InvariantCulture).ToString($"D{digits}", CultureInfo.InvariantCulture);
         }
 
-        
+
     }
 
 
@@ -68,7 +68,7 @@ namespace Hl7.Cql.Elm
     partial class FunctionDef
     {
         private string GetDebuggerDisplay() =>
-            $"{name}({string.Join(", ", operand?.Select(o => o.resultTypeSpecifier) ?? Enumerable.Empty<TypeSpecifier>())})";
+            $"{name}({string.Join(", ", operand?.Select(o => o.operandTypeSpecifier) ?? Enumerable.Empty<TypeSpecifier>())})";
     }
 
     [DebuggerDisplay($"{{{nameof(name)}}} {{{nameof(operandTypeSpecifier)}}}")]

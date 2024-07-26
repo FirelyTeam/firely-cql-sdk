@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private Integer_As_Decimal: 1 as System.Decimal
             ", "Expression of type*");
-
+           
         }
 
         [TestMethod]
