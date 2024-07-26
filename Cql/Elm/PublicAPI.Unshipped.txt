@@ -318,7 +318,6 @@ Hl7.Cql.Elm.IDefinitionElement.AddError(Hl7.Cql.Elm.CqlToElmError! error) -> Hl7
 Hl7.Cql.Elm.IDefinitionElement.Name.get -> string!
 Hl7.Cql.Elm.IDefinitionElement.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
 Hl7.Cql.Elm.IdentifierRef
-Hl7.Cql.Elm.IdentifierRef.Access.get -> Hl7.Cql.Elm.AccessModifier
 Hl7.Cql.Elm.IdentifierRef.IdentifierRef() -> void
 Hl7.Cql.Elm.IdentifierRef.Name.get -> string!
 Hl7.Cql.Elm.IdentifierRef.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
