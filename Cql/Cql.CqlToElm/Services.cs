@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
+using Hl7.Cql.CqlToElm.Scopes;
 using Hl7.Cql.CqlToElm.Visitors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,18 +31,6 @@ namespace Hl7.Cql.CqlToElm
             builder.AddInMemoryCollection(kvps);
             return builder;
         }
-
-        public static IServiceCollection AddVisitors(this IServiceCollection services)
-        {
-            services.AddScoped<ExpressionVisitor>();
-            services.AddScoped<LibraryVisitor>();
-            services.AddScoped<DefinitionVisitor>();
-            services.AddScoped<TypeSpecifierVisitor>();
-            return services;
-        }
-
-        public static IServiceCollection AddLocalIdProvider(this IServiceCollection services) =>
-            services.AddScoped<LocalIdentifierProvider>();
 
         public static IServiceCollection AddModels(this IServiceCollection services,
             Action<IModelProvider> builder)
@@ -77,8 +66,8 @@ namespace Hl7.Cql.CqlToElm
                 .AddSingleton<ElmFactory>()
                 .AddSingleton<SystemLibrary>()
                 .AddSingleton<StreamInspector>()
-                .AddScoped<LibraryBuilder>()
-                .AddTransient<InvocationBuilder>();
+                .AddSingleton<InvocationBuilder>()
+                .AddTransient<LocalIdentifierProvider>();
 
         public static IServiceCollection AddMessaging(this IServiceCollection services, CultureInfo? culture = null) =>
             services.AddSingleton(new MessageProvider(culture ?? CultureInfo.InvariantCulture));

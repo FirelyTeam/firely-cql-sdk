@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,12 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
     /// </summary>
     internal class MemoryLibraryProvider : ILibraryProvider
     {
-        public VersionedIdentifierDictionary<Library> Libraries { get; } = new();
-        public bool TryResolveLibrary(string libraryName, string? version, out Library? library, out string? error)
+        public VersionedIdentifierDictionary<LibraryBuilder> Libraries { get; } = new();
+
+        public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? library, out string? error)
         {
-            if (Libraries.TryGet(libraryName, version, out var lib))
+            if (Libraries.TryGet(libraryName, version, out library))
             {
-                library = lib;
                 error = null;
                 return true;
             }

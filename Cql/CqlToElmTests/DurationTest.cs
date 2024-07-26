@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -281,6 +282,100 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private Duration_Between_Months: duration in weeks between null and null
             ", "Call to operator DurationBetween(Any, Any, String) is ambiguous with*");
+
+        [TestMethod]
+        public void Duration_In_Days()
+        {
+            var lib = MakeLibrary(@"
+                library DurationTest version '1.0.0'
+
+                define d: duration in days of Interval[@2023-01-01, @2023-01-31]
+            ");
+            var db = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DurationBetween>();
+            db.operand.Should().HaveCount(2);
+            var start = db.operand[0].Should().BeOfType<Start>().Subject;
+            var si = start.operand.Should().BeOfType<Interval>().Subject;
+            var sdl = si.low.Should().BeOfType<Date>().Subject;
+            sdl.year.Should().BeLiteralInteger(2023);
+            sdl.month.Should().BeLiteralInteger(1);
+            sdl.day.Should().BeLiteralInteger(1);
+            var sdh = si.high.Should().BeOfType<Date>().Subject;
+            sdh.year.Should().BeLiteralInteger(2023);
+            sdh.month.Should().BeLiteralInteger(1);
+            sdh.day.Should().BeLiteralInteger(31);
+
+            var end = db.operand[1].Should().BeOfType<End>().Subject;
+            var ei = end.operand.Should().BeOfType<Interval>().Subject;
+            var edl = ei.low.Should().BeOfType<Date>().Subject;
+            edl.year.Should().BeLiteralInteger(2023);
+            edl.month.Should().BeLiteralInteger(1);
+            edl.day.Should().BeLiteralInteger(1);
+            var edh = ei.high.Should().BeOfType<Date>().Subject;
+            edh.year.Should().BeLiteralInteger(2023);
+            edh.month.Should().BeLiteralInteger(1);
+            edh.day.Should().BeLiteralInteger(31);
+        }
+
+        [TestMethod]
+        public void Duration_In_Days_MixedPrecision()
+        {
+            var lib = MakeLibrary(@"
+                library DurationTest version '1.0.0'
+
+                define d: duration in days of Interval[@2023-01-01, @2023-01-31T12:30:45]
+            ");
+            var db = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DurationBetween>();
+            db.operand.Should().HaveCount(2);
+            var start = db.operand[0].Should().BeOfType<Start>().Subject;
+            var si = start.operand.Should().BeOfType<Interval>().Subject;
+            si.Should().HaveType(SystemTypes.DateTimeType.ToIntervalType());
+            var end = db.operand[1].Should().BeOfType<End>().Subject;
+            var ei = end.operand.Should().BeOfType<Interval>().Subject;
+            ei.Should().HaveType(SystemTypes.DateTimeType.ToIntervalType());
+        }
+
+        [TestMethod]
+        public void Duration_In_Days_NonInterval()
+        {
+            var lib = MakeLibrary(@"
+                library DurationTest version '1.0.0'
+
+                define d: duration in days of 1
+            ", "Could not resolve call to operator DurationBetween with signature (Integer, Integer, String).");
+        }
+
+        [TestMethod]
+        public void Difference_In_Years()
+        {
+            var lib = MakeLibrary(@"
+                library DurationTest version '1.0.0'
+
+                define d: difference in years of Interval[@2023-01-01, @2023-01-31]
+            ");
+            var db = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DifferenceBetween>();
+            db.operand.Should().HaveCount(2);
+            var start = db.operand[0].Should().BeOfType<Start>().Subject;
+            var si = start.operand.Should().BeOfType<Interval>().Subject;
+            var sdl = si.low.Should().BeOfType<Date>().Subject;
+            sdl.year.Should().BeLiteralInteger(2023);
+            sdl.month.Should().BeLiteralInteger(1);
+            sdl.day.Should().BeLiteralInteger(1);
+            var sdh = si.high.Should().BeOfType<Date>().Subject;
+            sdh.year.Should().BeLiteralInteger(2023);
+            sdh.month.Should().BeLiteralInteger(1);
+            sdh.day.Should().BeLiteralInteger(31);
+
+            var end = db.operand[1].Should().BeOfType<End>().Subject;
+            var ei = end.operand.Should().BeOfType<Interval>().Subject;
+            var edl = ei.low.Should().BeOfType<Date>().Subject;
+            edl.year.Should().BeLiteralInteger(2023);
+            edl.month.Should().BeLiteralInteger(1);
+            edl.day.Should().BeLiteralInteger(1);
+            var edh = ei.high.Should().BeOfType<Date>().Subject;
+            edh.year.Should().BeLiteralInteger(2023);
+            edh.month.Should().BeLiteralInteger(1);
+            edh.day.Should().BeLiteralInteger(31);
+        }
 
     }
 }

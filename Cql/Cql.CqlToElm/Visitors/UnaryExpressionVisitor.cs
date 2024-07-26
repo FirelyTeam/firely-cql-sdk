@@ -3,6 +3,7 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -247,13 +248,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
                 convert.operand = expression;
                 return convert
+                    .WithId()
                     .WithLocator(context.Locator());
             }
             else
             {
-                var unitContext = Visit(context.unit());
+                var unit = context.unit();
+                DateTimePrecision dtp;
+                if (unit.dateTimePrecision() is { } dtpc)
+                    dtp = dtpc.Parse();
+                else if (unit.pluralDateTimePrecision() is { } pdtpc)
+                    dtp = pdtpc.Parse();
+                else
+                    throw new InvalidOperationException("Syntax error; expected unit.");
+                var literal = ElmFactory.Literal(dtp);
+                return new ConvertQuantity { operand = [expression, literal] }
+                    .WithId()
+                    .WithLocator(context.Locator())
+                    .WithResultType(SystemTypes.QuantityType);
             }
-            throw new NotImplementedException();
         }
 
         public override Expression VisitTimeUnitExpressionTerm([NotNull] cqlParser.TimeUnitExpressionTermContext context)
@@ -296,13 +309,31 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var expression = context.GetChild(0).GetText() switch
             {
                 "distinct" => InvocationBuilder.Invoke(SystemLibrary.Distinct, operand),
-                "flatten" => InvocationBuilder.Invoke(SystemLibrary.Flatten, operand),
+                "flatten" => handleFlatten(operand),
                 _ => throw new NotImplementedException(),
             };
+            if (expression.GetErrors().Any())
+            {
+            }
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
+
+            Expression handleFlatten(Expression operand)
+            {
+                // there is special logic for handling a List<ValueSet>
+                if (operand.resultTypeSpecifier == SystemTypes.ValueSetType.ToListType())
+                {
+                    var result = CoercionProvider.Coerce(operand, SystemTypes.CodeType.ToListType().ToListType());
+                    if (!result.Success)
+                        throw new InvalidOperationException($"Coercion provider declined to convert List<ValueSet> to List<List<Code>>");
+                    return InvocationBuilder.Invoke(SystemLibrary.Flatten, result.Result);
+                }
+                return InvocationBuilder.Invoke(SystemLibrary.Flatten, operand);
+            }
         }
+
+
 
     }
 }

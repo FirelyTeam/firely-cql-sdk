@@ -61,6 +61,24 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The type {0} is ambiguous between {1}..
+        /// </summary>
+        internal static string AmbiguousTypeName {
+            get {
+                return ResourceManager.GetString("AmbiguousTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Call to operator {0}({1}) is ambiguous with:.
+        /// </summary>
+        internal static string CallIsAmbiguous {
+            get {
+                return ResourceManager.GetString("CallIsAmbiguous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot resolve reference to expression or function a because it results in a circular reference..
         /// </summary>
         internal static string CannotResolveCircularReference {
@@ -138,6 +156,33 @@ namespace Hl7.Cql.CqlToElm {
         internal static string FoundMultipleLibraries {
             get {
                 return ResourceManager.GetString("FoundMultipleLibraries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A function named {0} with the same type of arguments is already defined in this library..
+        /// </summary>
+        internal static string FunctionRedefined {
+            get {
+                return ResourceManager.GetString("FunctionRedefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identifier {0} is already in use in this scope..
+        /// </summary>
+        internal static string IdentifierAlreadyInScope {
+            get {
+                return ResourceManager.GetString("IdentifierAlreadyInScope", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identifier {0} is already in use in this library..
+        /// </summary>
+        internal static string IdentifierAlreadyInUse {
+            get {
+                return ResourceManager.GetString("IdentifierAlreadyInUse", resourceCulture);
             }
         }
         

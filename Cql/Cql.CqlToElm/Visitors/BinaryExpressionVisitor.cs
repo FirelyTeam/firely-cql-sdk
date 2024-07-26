@@ -4,6 +4,7 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -32,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var invocation = @operator switch
             {
-                "+"  => InvocationBuilder.Invoke(SystemLibrary.Add, lhs, rhs),
+                "+" => InvocationBuilder.Invoke(SystemLibrary.Add, lhs, rhs),
                 "-" => InvocationBuilder.Invoke(SystemLibrary.Subtract, lhs, rhs),
                 "&" => InvocationBuilder.Invoke(SystemLibrary.Concatenate, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
@@ -49,6 +50,45 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //     | ('duration' 'in')? pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm      #durationBetweenExpression
         public override Expression VisitDurationBetweenExpression([NotNull] cqlParser.DurationBetweenExpressionContext context) =>
             VisitBinaryWithPrecision(SystemLibrary.DurationBetween, context, context.pluralDateTimePrecision(), context.expressionTerm());
+
+
+        // | 'duration' 'in' pluralDateTimePrecision 'of' expressionTerm                   #durationExpressionTerm
+        public override Expression VisitDurationExpressionTerm([NotNull] cqlParser.DurationExpressionTermContext context) =>
+             handleDurationDifference(context.pluralDateTimePrecision(), context.expressionTerm(), SystemLibrary.DurationBetween)
+                .WithLocator(context.Locator());
+
+        // | 'difference' 'in' pluralDateTimePrecision 'of' expressionTerm                   #durationExpressionTerm
+        public override Expression VisitDifferenceExpressionTerm([NotNull] cqlParser.DifferenceExpressionTermContext context) =>
+             handleDurationDifference(context.pluralDateTimePrecision(), context.expressionTerm(), SystemLibrary.DifferenceBetween)
+                .WithLocator(context.Locator());
+
+        private Expression handleDurationDifference(cqlParser.PluralDateTimePrecisionContext precisionContext, cqlParser.ExpressionTermContext expressionTerms, OverloadedFunctionDef systemFunction)
+        {
+            var precision = Precision(precisionContext);
+            var operand = Visit(expressionTerms);
+            Expression lhs, rhs;
+            if (operand.resultTypeSpecifier is IntervalTypeSpecifier { })
+            {
+                lhs = InvocationBuilder.Invoke(SystemLibrary.Start, operand);
+                rhs = InvocationBuilder.Invoke(SystemLibrary.End, operand);
+            }
+            else
+            {
+                // this will result in an error condition
+                lhs = operand;
+                rhs = operand;
+            }
+            var expression = precision switch
+            {
+                { } => InvocationBuilder.Invoke(systemFunction, lhs, rhs, precision),
+                _ => InvocationBuilder.Invoke(systemFunction, lhs, rhs),
+            };
+            return expression
+                .WithId();
+               
+        }
+
+
 
 
         // | expression ('=' | '!=' | '~' | '!~') expression                                               #equalityExpression
@@ -204,22 +244,45 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var terms = context.expression();
             var lhs = Visit(terms[0]);
             var rhs = Visit(terms[1]);
+
             Expression expression;
             if (context.GetChild(1).GetText() == "in")
             {
                 var precision = Precision(context.dateTimePrecisionSpecifier());
                 var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
-                var match = InvocationBuilder.MatchSignature(SystemLibrary.In, args);
-                expression = InvocationBuilder.Invoke(match);
+                if (rhs.resultTypeSpecifier == SystemTypes.ValueSetType)
+                {
+                    return lhs.resultTypeSpecifier switch
+                    {
+                        ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.AnyInValueSet, lhs, rhs),
+                        _ => InvocationBuilder.Invoke(SystemLibrary.InValueSet, lhs, rhs),
+                    };
+                }
+                else
+                {
+                    var match = InvocationBuilder.MatchSignature(SystemLibrary.In, args);
+                    if (match.Compatible)
+                        expression = InvocationBuilder.Invoke(match);
+                    else
+                        expression = new In { operand = new[] { lhs, rhs } }
+                            .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.In.Name, lhs, rhs))
+                            .WithResultType(SystemTypes.BooleanType);
+                }
             }
             else
             {
                 var match = InvocationBuilder.MatchSignature(SystemLibrary.Contains, new[] { lhs, rhs });
-                expression = InvocationBuilder.Invoke(match);
+                if (match.Compatible)
+                    expression = InvocationBuilder.Invoke(match);
+                else
+                    expression = new Contains { operand = new[] { lhs, rhs } }
+                        .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.Contains.Name, lhs, rhs))
+                        .WithResultType(SystemTypes.BooleanType);
             }
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
+
         }
 
         // expression ('|' | 'union' | 'intersect' | 'except') expression 
@@ -237,6 +300,30 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
             var result = InvocationBuilder.Invoke(function, left, right);
             return result
+                .WithId()
+                .WithLocator(context.Locator());
+        }
+
+        //  ('expand' | 'collapse') expression ('per' (dateTimePrecision | expression))?
+        public override Expression VisitSetAggregateExpressionTerm([NotNull] cqlParser.SetAggregateExpressionTermContext context)
+        {
+            var keyword = Keyword.Parse(context.GetChild(0));
+            var dtp = context.dateTimePrecision()?.GetText();
+            var expressions = context.expression().Select(Visit).ToArray();
+            var function = keyword switch
+            {
+                CqlKeyword.Expand => SystemLibrary.Expand,
+                CqlKeyword.Collapse => SystemLibrary.Collapse,
+                _ => throw new InvalidOperationException($"Expecting collapse or expand, but found {keyword}")
+            };
+            var arguments = dtp switch
+            {
+                { } units => [.. expressions, ElmFactory.Quantity(1, units)],
+                _ when expressions.Length is 1 => [.. expressions, ElmFactory.Null(SystemTypes.QuantityType)],
+                _ when expressions.Length is 2 => expressions,
+                _ => throw new InvalidOperationException($"Expecting 1 or 2 arguments, but found {expressions.Length}")
+            };
+            return InvocationBuilder.Invoke(function, arguments)
                 .WithId()
                 .WithLocator(context.Locator());
         }

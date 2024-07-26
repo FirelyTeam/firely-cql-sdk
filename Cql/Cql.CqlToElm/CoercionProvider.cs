@@ -43,7 +43,7 @@ namespace Hl7.Cql.CqlToElm
                         new(ChangeIntervalType(expression, fi, ti), cost),
                     (ListTypeSpecifier fl, ListTypeSpecifier tl, not CoercionCost.ExactMatch) =>
                         new(ChangeListType(expression, fl, tl), cost),
-                    (_,_,_) => cost switch
+                    (_, _, _) => cost switch
                     {
                         CoercionCost.ExactMatch => new(expression, cost),
                         // Usually, it is a non-strict As, which has the effect of retyping the expression.
@@ -81,40 +81,49 @@ namespace Hl7.Cql.CqlToElm
                 }.WithResultType(type);
             }
 
-            Expression ImplicitCastToSimple(Expression expression, TypeSpecifier type)
+            Expression ImplicitCastToSimple(Expression expression, TypeSpecifier to)
             {
+                var fr = FunctionRefForModelConversion(expression.resultTypeSpecifier, to);
+                if (fr is not null)
+                {
+                    fr.operand = new[] { expression };
+                    fr.WithResultType(to);
+                    return fr;
+                }
                 Expression convert;
-                if (type == SystemTypes.BooleanType)
+                if (to == SystemTypes.BooleanType)
                     convert = new ToBoolean { operand = expression };
-                else if (type == SystemTypes.IntegerType)
+                else if (to == SystemTypes.IntegerType)
                     convert = new ToInteger { operand = expression };
-                else if (type == SystemTypes.LongType)
+                else if (to == SystemTypes.LongType)
                     convert = new ToLong { operand = expression };
-                else if (type == SystemTypes.DecimalType)
+                else if (to == SystemTypes.DecimalType)
                     convert = new ToDecimal { operand = expression };
-                else if (type == SystemTypes.StringType)
+                else if (to == SystemTypes.StringType)
                     convert = new ToString { operand = expression };
                 else
+                {
                     convert = new As
                     {
                         operand = expression,
-                        asTypeSpecifier = type,
-                        asType = type is NamedTypeSpecifier nts ? nts.name : null
+                        asTypeSpecifier = to,
+                        asType = to is NamedTypeSpecifier nts ? nts.name : null
                     };
+                }
                 return convert
                     .WithLocator(expression.locator)
-                    .WithResultType(type);
+                    .WithResultType(to);
             }
 
             Expression ImplicitCastToClass(Expression expression, TypeSpecifier to)
             {
-                if (expression.resultTypeSpecifier is IntervalTypeSpecifier fromInterval
-                    && to is IntervalTypeSpecifier toInterval)
+                var fr = FunctionRefForModelConversion(expression.resultTypeSpecifier, to);
+                if (fr is not null)
                 {
-
+                    fr.operand = new[] { expression };
+                    fr.WithResultType(to);
+                    return fr;
                 }
-
-
                 Expression convert;
                 if (to == SystemTypes.QuantityType)
                     convert = new ToQuantity { operand = expression };
@@ -128,24 +137,17 @@ namespace Hl7.Cql.CqlToElm
                     convert = new ToConcept { operand = expression };
                 else if (to == SystemTypes.RatioType)
                     convert = new ToRatio { operand = expression };
+                // valueset to list<code>; https://cql.hl7.org/04-logicalspecification.html#expandvalueset
+                else if (expression.resultTypeSpecifier == SystemTypes.ValueSetType && to == SystemTypes.CodeType.ToListType())
+                    convert = new ExpandValueSet { operand = expression }.WithResultType(SystemTypes.CodeType.ToListType());
                 else
                 {
-                    var fr = FunctionRefForModelConversion(expression.resultTypeSpecifier, to);
-                    if (fr is not null)
+                    convert = new As
                     {
-                        fr.operand = new[] { expression };
-                        fr.WithResultType(to);
-                        return fr;
-                    }
-                    else
-                    {
-                        convert = new As
-                        {
-                            operand = expression,
-                            asTypeSpecifier = to,
-                            asType = to is NamedTypeSpecifier nts ? nts.name : null
-                        };
-                    }
+                        operand = expression,
+                        asTypeSpecifier = to,
+                        asType = to is NamedTypeSpecifier nts ? nts.name : null
+                    };
                 }
                 return convert
                     .WithLocator(expression.locator)
@@ -369,7 +371,9 @@ namespace Hl7.Cql.CqlToElm
             else if (from == SystemTypes.CodeType
                 && to == SystemTypes.ConceptType)
                 return true;
-
+            else if (from == SystemTypes.ValueSetType
+                && to == SystemTypes.CodeType.ToListType())
+                return true;
             else if (HasImplicitConversionThroughModel(from, to))
                 return true;
             return false;

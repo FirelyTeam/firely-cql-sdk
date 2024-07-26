@@ -41,7 +41,6 @@
 		<Configurations>Debug;Release;FullDebug</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<WarningsNotAsErrors>RS0016</WarningsNotAsErrors>
 		<NoWarn>RS0026</NoWarn>  <!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
 	</PropertyGroup>
 
@@ -74,9 +73,9 @@
 		metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
-		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+		<PackageReference Include="JetBrains.Annotations" Version="2024.2.0" />
 
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24318.1" PrivateAssets="All" />
 	</ItemGroup>
 
 </Project>
