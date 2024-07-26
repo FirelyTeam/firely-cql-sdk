@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -607,7 +606,7 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (value is Age)
 			{
-				var y_ = this.ToQuantity((Quantity)(value as Age));
+				var y_ = this.ToQuantity((value as Age));
 
 				return (y_ as object);
 			}
@@ -625,19 +624,19 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (value is Count)
 			{
-				var ab_ = this.ToQuantity((Quantity)(value as Count));
+				var ab_ = this.ToQuantity((value as Count));
 
 				return (ab_ as object);
 			}
 			else if (value is Distance)
 			{
-				var ac_ = this.ToQuantity((Quantity)(value as Distance));
+				var ac_ = this.ToQuantity((value as Distance));
 
 				return (ac_ as object);
 			}
 			else if (value is Duration)
 			{
-				var ad_ = this.ToQuantity((Quantity)(value as Duration));
+				var ad_ = this.ToQuantity((value as Duration));
 
 				return (ad_ as object);
 			}
