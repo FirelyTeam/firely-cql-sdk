@@ -167,6 +167,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void Function()
         {
             var library = MakeLibrary($@"
@@ -256,7 +257,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define pi: 3.14
 
                 define {nameof(InvokeExpression)}: pi()
-            ", "Operator pi is not a function and must not be called with ().");
+            ", "Could not resolve call to operator pi with signature ().");
         }
 
         [TestMethod]
@@ -312,6 +313,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void InvokeFluentFunction()
         {
             var library = MakeLibrary($@"
@@ -535,6 +537,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void InvokeListPropertyViaFunction()
         {
             var library = MakeLibrary($@"

@@ -1,23 +1,18 @@
 ﻿using Hl7.Cql.Elm;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal interface ISymbolScope
+    internal interface ISymbolScope: IEnumerable<IDefinitionElement>, IDisposable
     {
-        ///// <summary>
-        ///// The name of the scope, used for error messages, e.g. when resolution results in ambiguous matches.
-        ///// </summary>
-        //string Name { get; }
+        string Name { get; }
 
         /// <summary>
         /// The enclosing scope, if any.
         /// </summary>
         ISymbolScope? Parent { get; }
-
-        ///// <summary>
-        ///// Returns all symbols registered in this scope.
-        ///// </summary>
-        //IEnumerable<IDefinitionElement> Symbols { get; }
 
         /// <summary>
         /// Adds a symbol to the scope.
@@ -25,24 +20,33 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>true if the symbol was added, false if it already existed in the symbol table.</returns>
         bool TryAdd(IDefinitionElement symbol);
 
-        ///// <summary>
-        ///// Adds a nested scope to the symbol table. A nested scope is a scope that is defined within the current scope,
-        ///// and the current scope will try to resolve symbols both in itself and the nested scope(s).
-        ///// </summary>
-        ///// <remarks>If resolution finds the same symbol identifier in the scope and nested scopes, resolution will fail
-        ///// and report a message about the ambiguous match.</remarks>
-        //bool TryAddNestedScope(ISymbolScope scope);
-
         /// <summary>
-        /// Looks in the scope and its nested scopes and returns all symbols that match the identifier and access modifier.
+        /// Looks in the scope and its parent scopes and returns all symbols that match the identifier and access modifier.
         /// </summary>
         /// <returns>A list of symbols found, including the (nested) scope it was found in.</returns>
-        bool TryResolveSymbol(string identifier, out IDefinitionElement? symbol);
+        bool TryResolveSymbol(string identifier, [NotNullWhen(true)] out IDefinitionElement? symbol);
+
+        /// <summary>
+        /// Looks in the scope and its parent scopes and returns all functions that match the identifier and access modifier.
+        /// </summary>
+        /// <returns>A list of functions found, including the (nested) scope it was found in.</returns>
+        bool TryResolveFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol);
+
+        /// <summary>
+        /// Looks in scope and parent scopes for fluent functions.  This function will look into referenced libraries in any scope
+        /// to identify fluent functions also.
+        /// </summary>
+        bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol);
+
+        /// <summary>
+        /// Gets any referenced libraries in this scope, including those in <see cref="Parent"/> if defined.
+        /// </summary>
+        IEnumerable<ReferencedLibrary> ReferencedLibraries { get; }
 
         /// <summary>
         /// Creates a child scope for which this scope is its <see cref="Parent"/>.
         /// </summary>
         /// <returns>A new scope whose <see cref="Parent"/> is this scope.</returns>
-        ISymbolScope EnterScope();
+        ISymbolScope EnterScope(string name);
     }
 }

@@ -212,10 +212,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("AntidepressantMedicationManagementFHIR-0.1.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("AntidepressantMedicationManagementFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -226,8 +226,8 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -238,11 +238,11 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private CqlDateTime April_30_of_the_Measurement_Period_Value()
 	{
-		var a_ = this.Measurement_Period();
-		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.ConvertIntegerToDecimal(0);
-		var e_ = context.Operators.DateTime(c_, 4, 30, 23, 59, 59, 0, d_);
+		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
+		CqlDateTime b_ = context.Operators.Start(a_);
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		decimal? d_ = context.Operators.ConvertIntegerToDecimal(0);
+		CqlDateTime e_ = context.Operators.DateTime(c_, 4, 30, 23, 59, 59, 0, d_);
 
 		return e_;
 	}
@@ -253,12 +253,12 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period_Value()
 	{
-		var a_ = this.Measurement_Period();
-		var b_ = context.Operators.Start(a_);
-		var c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-		var d_ = context.Operators.Subtract(c_, 1);
-		var e_ = context.Operators.ConvertIntegerToDecimal(0);
-		var f_ = context.Operators.DateTime(d_, 5, 1, 0, 0, 0, 0, e_);
+		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
+		CqlDateTime b_ = context.Operators.Start(a_);
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		int? d_ = context.Operators.Subtract(c_, 1);
+		decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+		CqlDateTime f_ = context.Operators.DateTime(d_, 5, 1, 0, 0, 0, 0, e_);
 
 		return f_;
 	}
@@ -269,9 +269,9 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Intake_Period_Value()
 	{
-		var a_ = this.May_1_of_the_Year_Prior_to_the_Measurement_Period();
-		var b_ = this.April_30_of_the_Measurement_Period();
-		var c_ = context.Operators.Interval(a_, b_, true, true);
+		CqlDateTime a_ = this.May_1_of_the_Year_Prior_to_the_Measurement_Period();
+		CqlDateTime b_ = this.April_30_of_the_Measurement_Period();
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
 
 		return c_;
 	}
@@ -282,46 +282,47 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private CqlDate Earliest_Antidepressant_Dispensed_During_Intake_Period_Value()
 	{
-		var a_ = this.Antidepressant_Medication();
-		var b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var e_ = context.Operators.Union<MedicationDispense>(b_, d_);
-		var f_ = Status_1_6_000.Dispensed_Medication(e_);
+		CqlValueSet a_ = this.Antidepressant_Medication();
+		IEnumerable<MedicationDispense> b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
+		IEnumerable<MedicationDispense> d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
+		IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
+		IEnumerable<MedicationDispense> f_ = Status_1_6_000.Dispensed_Medication(e_);
 		bool? g_(MedicationDispense Antidepressant)
 		{
-			var n_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
-			var o_ = context.Operators.Start(n_);
-			var p_ = context.Operators.ConvertDateToDateTime(o_);
-			var q_ = this.Intake_Period();
-			var r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
+			CqlInterval<CqlDate> o_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
+			CqlDate p_ = context.Operators.Start(o_);
+			CqlDateTime q_ = context.Operators.ConvertDateToDateTime(p_);
+			CqlInterval<CqlDateTime> r_ = this.Intake_Period();
+			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
 
-			return r_;
+			return s_;
 		};
-		var h_ = context.Operators.Where<MedicationDispense>(f_, g_);
+		IEnumerable<MedicationDispense> h_ = context.Operators.Where<MedicationDispense>(f_, g_);
 		Tuple_BZDEAYEYEiNadHNdHhSIPXaDL i_(MedicationDispense Antidepressant)
 		{
-			var s_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
-			var t_ = context.Operators.Start(s_);
-			var u_ = context.Operators.ConvertDateToDateTime(t_);
-			var v_ = context.Operators.DateFrom(u_);
-			var w_ = new Tuple_BZDEAYEYEiNadHNdHhSIPXaDL
+			CqlInterval<CqlDate> t_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
+			CqlDate u_ = context.Operators.Start(t_);
+			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
+			CqlDate w_ = context.Operators.DateFrom(v_);
+			Tuple_BZDEAYEYEiNadHNdHhSIPXaDL x_ = new Tuple_BZDEAYEYEiNadHNdHhSIPXaDL
 			{
-				AntidepressantDate = v_,
+				AntidepressantDate = w_,
 			};
-
-			return w_;
-		};
-		var j_ = context.Operators.Select<MedicationDispense, Tuple_BZDEAYEYEiNadHNdHhSIPXaDL>(h_, i_);
-		object k_(Tuple_BZDEAYEYEiNadHNdHhSIPXaDL @this)
-		{
-			var x_ = @this?.AntidepressantDate;
 
 			return x_;
 		};
-		var l_ = context.Operators.SortBy<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-		var m_ = context.Operators.First<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL>(l_);
+		IEnumerable<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL> j_ = context.Operators.Select<MedicationDispense, Tuple_BZDEAYEYEiNadHNdHhSIPXaDL>(h_, i_);
+		object k_(Tuple_BZDEAYEYEiNadHNdHhSIPXaDL @this)
+		{
+			CqlDate y_ = @this?.AntidepressantDate;
 
-		return m_?.AntidepressantDate;
+			return y_;
+		};
+		IEnumerable<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL> l_ = context.Operators.SortBy<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+		Tuple_BZDEAYEYEiNadHNdHhSIPXaDL m_ = context.Operators.First<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL>(l_);
+		CqlDate n_ = m_?.AntidepressantDate;
+
+		return n_;
 	}
 
     [CqlDeclaration("Earliest Antidepressant Dispensed During Intake Period")]
@@ -330,28 +331,28 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private bool? Has_Initial_Major_Depression_Diagnosis_Value()
 	{
-		var a_ = this.Major_Depression();
-		var b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		CqlValueSet a_ = this.Major_Depression();
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition MajorDepression)
 		{
-			var f_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
-			var g_ = context.Operators.Not((bool?)(f_ is null));
-			var h_ = QICoreCommon_2_0_000.ToPrevalenceInterval(MajorDepression);
-			var i_ = context.Operators.Start(h_);
-			var j_ = context.Operators.DateFrom(i_);
-			var l_ = context.Operators.Quantity(60m, "days");
-			var m_ = context.Operators.Subtract(f_, l_);
-			var p_ = context.Operators.Add(f_, l_);
-			var q_ = context.Operators.Interval(m_, p_, true, true);
-			var r_ = context.Operators.In<CqlDate>(j_, q_, null);
-			var t_ = context.Operators.Not((bool?)(f_ is null));
-			var u_ = context.Operators.And(r_, t_);
-			var v_ = context.Operators.And(g_, u_);
+			CqlDate f_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
+			bool? g_ = context.Operators.Not((bool?)(f_ is null));
+			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToPrevalenceInterval(MajorDepression);
+			CqlDateTime i_ = context.Operators.Start(h_);
+			CqlDate j_ = context.Operators.DateFrom(i_);
+			CqlQuantity l_ = context.Operators.Quantity(60m, "days");
+			CqlDate m_ = context.Operators.Subtract(f_, l_);
+			CqlDate p_ = context.Operators.Add(f_, l_);
+			CqlInterval<CqlDate> q_ = context.Operators.Interval(m_, p_, true, true);
+			bool? r_ = context.Operators.In<CqlDate>(j_, q_, null);
+			bool? t_ = context.Operators.Not((bool?)(f_ is null));
+			bool? u_ = context.Operators.And(r_, t_);
+			bool? v_ = context.Operators.And(g_, u_);
 
 			return v_;
 		};
-		var d_ = context.Operators.Where<Condition>(b_, c_);
-		var e_ = context.Operators.Exists<Condition>(d_);
+		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
+		bool? e_ = context.Operators.Exists<Condition>(d_);
 
 		return e_;
 	}
@@ -362,54 +363,54 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.Union<Encounter>(b_, d_);
-		var f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Home_Healthcare_Services();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.Union<Encounter>(g_, i_);
-		var k_ = context.Operators.Union<Encounter>(e_, j_);
-		var l_ = this.Annual_Wellness_Visit();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = this.Nursing_Facility_Visit();
-		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.Union<Encounter>(m_, o_);
-		var q_ = context.Operators.Union<Encounter>(k_, p_);
-		var r_ = this.Psych_Visit_Diagnostic_Evaluation();
-		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
-		var t_ = this.Psych_Visit_Psychotherapy();
-		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.Union<Encounter>(s_, u_);
-		var w_ = context.Operators.Union<Encounter>(q_, v_);
-		var x_ = this.Telephone_Visits();
-		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
-		var z_ = this.Online_Assessments();
-		var aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
-		var ab_ = context.Operators.Union<Encounter>(y_, aa_);
-		var ac_ = context.Operators.Union<Encounter>(w_, ab_);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Home_Healthcare_Services();
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+		CqlValueSet l_ = this.Annual_Wellness_Visit();
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		CqlValueSet n_ = this.Nursing_Facility_Visit();
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
+		CqlValueSet r_ = this.Psych_Visit_Diagnostic_Evaluation();
+		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
+		CqlValueSet t_ = this.Psych_Visit_Psychotherapy();
+		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
+		IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
+		CqlValueSet x_ = this.Telephone_Visits();
+		IEnumerable<Encounter> y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
+		CqlValueSet z_ = this.Online_Assessments();
+		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
+		IEnumerable<Encounter> ab_ = context.Operators.Union<Encounter>(y_, aa_);
+		IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(w_, ab_);
 		bool? ad_(Encounter ValidEncounter)
 		{
-			var af_ = ValidEncounter?.Period;
-			var ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
-			var ah_ = QICoreCommon_2_0_000.ToInterval((ag_ as object));
-			var ai_ = context.Operators.Start(ah_);
-			var aj_ = context.Operators.DateFrom(ai_);
-			var ak_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
-			var al_ = context.Operators.Quantity(60m, "days");
-			var am_ = context.Operators.Subtract(ak_, al_);
-			var ap_ = context.Operators.Add(ak_, al_);
-			var aq_ = context.Operators.Interval(am_, ap_, true, true);
-			var ar_ = context.Operators.In<CqlDate>(aj_, aq_, null);
-			var at_ = context.Operators.Not((bool?)(ak_ is null));
-			var au_ = context.Operators.And(ar_, at_);
+			Period af_ = ValidEncounter?.Period;
+			CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
+			CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_0_000.ToInterval((ag_ as object));
+			CqlDateTime ai_ = context.Operators.Start(ah_);
+			CqlDate aj_ = context.Operators.DateFrom(ai_);
+			CqlDate ak_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
+			CqlQuantity al_ = context.Operators.Quantity(60m, "days");
+			CqlDate am_ = context.Operators.Subtract(ak_, al_);
+			CqlDate ap_ = context.Operators.Add(ak_, al_);
+			CqlInterval<CqlDate> aq_ = context.Operators.Interval(am_, ap_, true, true);
+			bool? ar_ = context.Operators.In<CqlDate>(aj_, aq_, null);
+			bool? at_ = context.Operators.Not((bool?)(ak_ is null));
+			bool? au_ = context.Operators.And(ar_, at_);
 
 			return au_;
 		};
-		var ae_ = context.Operators.Where<Encounter>(ac_, ad_);
+		IEnumerable<Encounter> ae_ = context.Operators.Where<Encounter>(ac_, ad_);
 
 		return ae_;
 	}
@@ -420,19 +421,21 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = this.April_30_of_the_Measurement_Period();
-		var d_ = context.Operators.DateFrom(c_);
-		var e_ = context.Operators.CalculateAgeAt(b_, d_, "year");
-		var f_ = context.Operators.GreaterOrEqual(e_, 18);
-		var g_ = this.Has_Initial_Major_Depression_Diagnosis();
-		var h_ = context.Operators.And(f_, g_);
-		var i_ = this.Qualifying_Encounters();
-		var j_ = context.Operators.Exists<Encounter>(i_);
-		var k_ = context.Operators.And(h_, j_);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlDateTime e_ = this.April_30_of_the_Measurement_Period();
+		CqlDate f_ = context.Operators.DateFrom(e_);
+		int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
+		bool? h_ = context.Operators.GreaterOrEqual(g_, 18);
+		bool? i_ = this.Has_Initial_Major_Depression_Diagnosis();
+		bool? j_ = context.Operators.And(h_, i_);
+		IEnumerable<Encounter> k_ = this.Qualifying_Encounters();
+		bool? l_ = context.Operators.Exists<Encounter>(k_);
+		bool? m_ = context.Operators.And(j_, l_);
 
-		return k_;
+		return m_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -441,7 +444,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -452,51 +455,51 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = Hospice_6_9_000.Has_Hospice_Services();
-		var b_ = this.Antidepressant_Medication();
-		var c_ = context.Operators.RetrieveByValueSet<MedicationRequest>(b_, null);
-		var e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(b_, null);
-		var f_ = context.Operators.Union<MedicationRequest>(c_, e_);
-		var g_ = Status_1_6_000.Active_Medication(f_);
+		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
+		CqlValueSet b_ = this.Antidepressant_Medication();
+		IEnumerable<MedicationRequest> c_ = context.Operators.RetrieveByValueSet<MedicationRequest>(b_, null);
+		IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(b_, null);
+		IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
+		IEnumerable<MedicationRequest> g_ = Status_1_6_000.Active_Medication(f_);
 		bool? h_(MedicationRequest ActiveAntidepressant)
 		{
-			var l_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
-			var m_ = context.Operators.Not((bool?)(l_ is null));
-			var n_ = ActiveAntidepressant?.DosageInstruction;
-			var o_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
-			var p_ = o_?.Timing;
-			var q_ = p_?.Repeat;
-			var r_ = q_?.Bounds;
-			var s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			var t_ = new object[]
+			CqlDate l_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
+			bool? m_ = context.Operators.Not((bool?)(l_ is null));
+			List<Dosage> n_ = ActiveAntidepressant?.DosageInstruction;
+			Dosage o_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
+			Timing p_ = o_?.Timing;
+			Timing.RepeatComponent q_ = p_?.Repeat;
+			DataType r_ = q_?.Bounds;
+			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
+			object[] t_ = new object[]
 			{
 				s_,
 			};
 			CqlInterval<CqlDateTime> u_(object Meds)
 			{
-				var af_ = this.Intake_Period();
-				var ag_ = context.Operators.Start(af_);
-				var ah_ = this.Measurement_Period();
-				var ai_ = context.Operators.End(ah_);
-				var aj_ = context.Operators.Interval(ag_, ai_, true, true);
-				var ak_ = context.Operators.Intersect<CqlDateTime>((Meds as CqlInterval<CqlDateTime>), aj_);
+				CqlInterval<CqlDateTime> af_ = this.Intake_Period();
+				CqlDateTime ag_ = context.Operators.Start(af_);
+				CqlInterval<CqlDateTime> ah_ = this.Measurement_Period();
+				CqlDateTime ai_ = context.Operators.End(ah_);
+				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ag_, ai_, true, true);
+				CqlInterval<CqlDateTime> ak_ = context.Operators.Intersect<CqlDateTime>((Meds as CqlInterval<CqlDateTime>), aj_);
 
 				return ak_;
 			};
-			var v_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)t_, u_);
-			var w_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(v_);
-			var x_ = CQMCommon_2_0_000.ToDateInterval(w_);
-			var z_ = context.Operators.Quantity(105m, "days");
-			var aa_ = context.Operators.Subtract(l_, z_);
-			var ac_ = context.Operators.Interval(aa_, l_, true, false);
-			var ad_ = context.Operators.Overlaps(x_, ac_, null);
-			var ae_ = context.Operators.And(m_, ad_);
+			IEnumerable<CqlInterval<CqlDateTime>> v_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)t_, u_);
+			CqlInterval<CqlDateTime> w_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(v_);
+			CqlInterval<CqlDate> x_ = CQMCommon_2_0_000.ToDateInterval(w_);
+			CqlQuantity z_ = context.Operators.Quantity(105m, "days");
+			CqlDate aa_ = context.Operators.Subtract(l_, z_);
+			CqlInterval<CqlDate> ac_ = context.Operators.Interval(aa_, l_, true, false);
+			bool? ad_ = context.Operators.Overlaps(x_, ac_, null);
+			bool? ae_ = context.Operators.And(m_, ad_);
 
 			return ae_;
 		};
-		var i_ = context.Operators.Where<MedicationRequest>(g_, h_);
-		var j_ = context.Operators.Exists<MedicationRequest>(i_);
-		var k_ = context.Operators.Or(a_, j_);
+		IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
+		bool? j_ = context.Operators.Exists<MedicationRequest>(i_);
+		bool? k_ = context.Operators.Or(a_, j_);
 
 		return k_;
 	}
@@ -507,23 +510,23 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD_Value()
 	{
-		var a_ = this.Antidepressant_Medication();
-		var b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var e_ = context.Operators.Union<MedicationDispense>(b_, d_);
-		var f_ = Status_1_6_000.Dispensed_Medication(e_);
+		CqlValueSet a_ = this.Antidepressant_Medication();
+		IEnumerable<MedicationDispense> b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
+		IEnumerable<MedicationDispense> d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
+		IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
+		IEnumerable<MedicationDispense> f_ = Status_1_6_000.Dispensed_Medication(e_);
 		CqlInterval<CqlDate> g_(MedicationDispense Antidepressant)
 		{
-			var i_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
-			var j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
-			var l_ = context.Operators.Quantity(114m, "days");
-			var m_ = context.Operators.Add(j_, l_);
-			var n_ = context.Operators.Interval(j_, m_, true, true);
-			var o_ = context.Operators.Intersect<CqlDate>(i_, n_);
+			CqlInterval<CqlDate> i_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
+			CqlDate j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
+			CqlQuantity l_ = context.Operators.Quantity(114m, "days");
+			CqlDate m_ = context.Operators.Add(j_, l_);
+			CqlInterval<CqlDate> n_ = context.Operators.Interval(j_, m_, true, true);
+			CqlInterval<CqlDate> o_ = context.Operators.Intersect<CqlDate>(i_, n_);
 
 			return o_;
 		};
-		var h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
+		IEnumerable<CqlInterval<CqlDate>> h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
 
 		return h_;
 	}
@@ -534,9 +537,9 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days_Value()
 	{
-		var a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD();
-		var b_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(a_);
-		var c_ = context.Operators.GreaterOrEqual(b_, 84);
+		IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD();
+		int? b_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(a_);
+		bool? c_ = context.Operators.GreaterOrEqual(b_, 84);
 
 		return c_;
 	}
@@ -547,7 +550,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private bool? Numerator_1_Value()
 	{
-		var a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days();
+		bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days();
 
 		return a_;
 	}
@@ -558,23 +561,23 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD_Value()
 	{
-		var a_ = this.Antidepressant_Medication();
-		var b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
-		var e_ = context.Operators.Union<MedicationDispense>(b_, d_);
-		var f_ = Status_1_6_000.Dispensed_Medication(e_);
+		CqlValueSet a_ = this.Antidepressant_Medication();
+		IEnumerable<MedicationDispense> b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
+		IEnumerable<MedicationDispense> d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, null);
+		IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
+		IEnumerable<MedicationDispense> f_ = Status_1_6_000.Dispensed_Medication(e_);
 		CqlInterval<CqlDate> g_(MedicationDispense Antidepressant)
 		{
-			var i_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
-			var j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
-			var l_ = context.Operators.Quantity(231m, "days");
-			var m_ = context.Operators.Add(j_, l_);
-			var n_ = context.Operators.Interval(j_, m_, true, true);
-			var o_ = context.Operators.Intersect<CqlDate>(i_, n_);
+			CqlInterval<CqlDate> i_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
+			CqlDate j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
+			CqlQuantity l_ = context.Operators.Quantity(231m, "days");
+			CqlDate m_ = context.Operators.Add(j_, l_);
+			CqlInterval<CqlDate> n_ = context.Operators.Interval(j_, m_, true, true);
+			CqlInterval<CqlDate> o_ = context.Operators.Intersect<CqlDate>(i_, n_);
 
 			return o_;
 		};
-		var h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
+		IEnumerable<CqlInterval<CqlDate>> h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
 
 		return h_;
 	}
@@ -585,9 +588,9 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days_Value()
 	{
-		var a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD();
-		var b_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(a_);
-		var c_ = context.Operators.GreaterOrEqual(b_, 180);
+		IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD();
+		int? b_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(a_);
+		bool? c_ = context.Operators.GreaterOrEqual(b_, 180);
 
 		return c_;
 	}
@@ -598,7 +601,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private bool? Numerator_2_Value()
 	{
-		var a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days();
+		bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days();
 
 		return a_;
 	}
@@ -609,7 +612,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
@@ -620,7 +623,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
@@ -631,7 +634,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
@@ -642,7 +645,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}

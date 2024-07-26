@@ -20,6 +20,22 @@ namespace Hl7.Cql.CqlToElm
 
         public CultureInfo Culture { get; }
 
+        public string AmbiguousType(string name, params string[] modelNames)
+            => string.Format(Culture, Messages.AmbiguousTypeName, name, string.Join(", ", modelNames));
+
+        public string CallIsAmbiguous(string name, Expression[] arguments, SignatureMatchResult[] others) {
+            var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
+            // match cql-to-elm reference implementation (Java) error messages
+            var errorSb = new StringBuilder();
+            errorSb.AppendLine(string.Format(Culture, Messages.CallIsAmbiguous, name, argTypeString));
+            foreach (var match in others)
+            {
+                var matchTypeString = string.Join(", ", match.Arguments.Select(od => od.Result.resultTypeSpecifier.ToString()));
+                errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {name}({matchTypeString})");
+            }
+            return errorSb.ToString();
+        }
+
         public string CannotResolveCircularReference() =>
              Messages.CannotResolveCircularReference;
         public string CouldNotResolveContextName(string contextName, params string[] modelNames) =>
@@ -39,7 +55,11 @@ namespace Hl7.Cql.CqlToElm
         public string ExpressionCannotBeLibraryRef(string library) =>
             string.Format(Culture, Messages.ExpressionCannotBeLibraryRef, library);
         public string FoundMultipleLibraries(string name) =>
-            string.Format(Culture, Messages.FoundMultipleLibraries, name);
+            string.Format(Culture, Messages.FoundMultipleLibraries, name);        
+        public string IdentifierAlreadyInUse(string name) =>
+            string.Format(Culture, Messages.IdentifierAlreadyInUse, name);
+        public string IdentifierAlreadyInScope(string name) =>
+            string.Format(Culture, Messages.IdentifierAlreadyInScope, name);
         public string NamedTypeRequiredInContext() => Messages.NamedTypeRequiredInContext;
         public string TypeCannotBeCast(TypeSpecifier from, TypeSpecifier to) =>
             string.Format(Culture, Messages.TypeCannotBeCast, from, to);

@@ -20,15 +20,21 @@ namespace Hl7.Cql.CqlToElm.Test
         public static T BeACorrectlyInitializedLibraryWithStatementOfType<T>(this ObjectAssertions l,
             bool requireLocalId = true)
         {
-            var library = l.Subject.Should().BeOfType<Library>().Subject;
-            library.statements.Should().HaveCount(1);
+
+            var library = l.Subject switch
+            {
+                LibraryBuilder lb => lb.Build(),
+                Library li => li,
+                _ => null
+            };
+            library.Should().NotBeNull();
+            library!.statements.Should().HaveCount(1);
             if (requireLocalId)
                 library.statements[0].expression.localId.Should().NotBeNull();
             library.statements[0].expression.locator.Should().NotBeNull();
 
             return library.statements[0].expression.Should().BeOfType<T>().Subject;
         }
-
 
         public static void BeLiteralString(this ObjectAssertions l, string value)
         {
@@ -79,7 +85,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public static void HaveType(this ObjectAssertions l, TypeSpecifier type)
         {
-            if (l.Subject is Expression subject)
+            if (l.Subject is Element subject)
             {
                 subject.resultTypeSpecifier.Should().Be(type);
                 if (type is NamedTypeSpecifier nts)

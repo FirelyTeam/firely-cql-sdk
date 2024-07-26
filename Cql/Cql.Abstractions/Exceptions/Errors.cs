@@ -5,6 +5,9 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
+using System;
+
 namespace Hl7.Cql.Abstractions.Exceptions;
 
 internal readonly record struct KeyNotFoundError(string Key, string? TypeName = null) : ICqlError
@@ -23,7 +26,10 @@ internal readonly record struct CouldNotDeserializeFileError(string? FilePath = 
                                   + FilePath is {Length:>0} filePath ? $" Path: '{filePath}'" : "";
 }
 
-internal readonly record struct CouldNotValidateFileError(string FilePath, string? TypeName = null) : ICqlError
+internal readonly record struct CouldNotValidateLibraryError(string? FilePath, string? TypeName = null) : ICqlError
 {
-    public string GetMessage() => $"Could not validate {TypeName ?? "Object"}. Path: '{FilePath}'";
+    public string GetMessage() => $"Could not validate {TypeName ?? "Object"}. " +
+                                  (FilePath is not null
+                                      ? $"Path: '{FilePath}'"
+                                      : string.Empty);
 }

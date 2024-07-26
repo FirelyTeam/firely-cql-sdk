@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.CqlToElm.Grammar;
+﻿using Antlr4.Runtime.Misc;
+using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using System;
@@ -203,13 +204,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitNumberLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.NumberLiteralContext context)
         {
             var value = context.GetText();
+            var literal = ParseNumberLiteral(value);
+            return literal
+                .WithLocator(context.Locator());
+        }
+
+        private Expression ParseNumberLiteral(string value)
+        {
             var literal = new Literal
             {
                 value = value,
             };
-
-            NamedTypeSpecifier? typeSpecifier = null;
-
+            NamedTypeSpecifier typeSpecifier;
             if (DecimalExpression.IsMatch(value))
             {
                 var abs = value;
@@ -244,7 +250,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             literal.valueType = typeSpecifier.name;
             return literal
-                .WithLocator(context.Locator())
                 .WithResultType(typeSpecifier);
         }
 
@@ -492,6 +497,26 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }.WithLocator(context.Locator()).WithResultType(resultType);
 
             return tuple;
+        }
+
+        public override Expression VisitSimpleNumberLiteral([NotNull] cqlParser.SimpleNumberLiteralContext context)
+        {
+            var value = context.GetText();
+            var literal = ParseNumberLiteral(value);
+            return literal
+                .WithLocator(context.Locator());
+        }
+
+        public override Expression VisitSimpleStringLiteral([NotNull] cqlParser.SimpleStringLiteralContext context)
+        {
+            var value = context.STRING().ParseString();
+
+            var literal = new Literal
+            {
+                value = value,
+                valueType = SystemTypes.StringType.name,
+            }.WithLocator(context.Locator()).WithResultType(SystemTypes.StringType);
+            return literal;
         }
 
     }

@@ -25,7 +25,7 @@ internal readonly record struct CannotBindToCqlOperatorError(
     public string GetMessage()
     {
         StringBuilder sb = new();
-        sb.Append("Mo suitable method could be bound from:");
+        sb.Append("No suitable method could be bound from:");
         sb.Append(Defaults.NextItem);
         sb.AppendCSharp(MethodName, MethodArguments, GenericTypeArguments, MethodCSharpFormat);
         if (AvailableMethods.Count > 0)

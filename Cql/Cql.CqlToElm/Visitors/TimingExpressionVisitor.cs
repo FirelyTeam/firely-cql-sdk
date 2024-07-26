@@ -42,127 +42,78 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var kw1 = context.GetChild(1).GetText();
 
             var properly = kw0 == "properly" || kw1 == "properly";
+            var lhsPointType = PointType(lhs.resultTypeSpecifier);
 
-            if (kw0 == "starts")
+            lhs = kw0 switch
             {
-                var lhsPointType = PointType(lhs.resultTypeSpecifier);
-                lhs = new Start
-                {
-                    operand = lhs,
-                    localId = NextId(),
-                    locator = context.GetChild(0).Locator()!,
-                    resultTypeSpecifier = lhsPointType,
-                    resultTypeName = lhsPointType?.resultTypeName
-                };
-            }
-            else if (kw0 == "ends")
-            {
-                var lhsPointType = PointType(lhs.resultTypeSpecifier);
-                lhs = new End
-                {
-                    operand = lhs,
-                    localId = NextId(),
-                    locator = context.GetChild(0).Locator()!,
-                    resultTypeSpecifier = lhsPointType,
-                    resultTypeName = lhsPointType?.resultTypeName
-                };
-            }
-            else if (kw1 == "occurs")
-            {
-                throw new NotImplementedException("Within with an 'occurs' is not yet implemented.");
-            }
-
+                "starts" => InvocationBuilder.Invoke(SystemLibrary.Start, lhs),
+                "ends" => InvocationBuilder.Invoke(SystemLibrary.End, lhs),
+                "occurs" => throw new NotImplementedException("Occurs is not supported yet"),
+                _ => lhs
+            };
             var (value, unit) = context.quantity().Parse();
 
-            var quantity = new Quantity
+            var quantity = ElmFactory.Quantity(value, unit);
+
+            var kwLast = context.children[^1].GetText();
+
+            var rhsClosed = properly ? ElmFactory.Literal(false) : ElmFactory.Literal(true);
+
+            if (rhs.resultTypeSpecifier is IntervalTypeSpecifier)
             {
-                localId = NextId(),
-                locator = context.quantity().Locator(),
-                value = value,
-                valueSpecified = true,
-                unit = unit,
-            }.WithResultType(SystemTypes.QuantityType);
-
-            var startEnd = context.children[^1].GetText();
-
-            if (startEnd == "start")
-            {
-                var rhsPointType = PointType(rhs.resultTypeSpecifier);
-                rhs = new Start
+                if (kwLast == "start" || kwLast == "end")
                 {
-                    operand = rhs,
-                    localId = NextId(),
-                    locator = context.GetChild(0).Locator()!,
-                    resultTypeSpecifier = rhsPointType,
-                    resultTypeName = rhsPointType?.resultTypeName
-                };
-            }
-            else if (startEnd == "end")
-            {
-                var rhsPointType = PointType(rhs.resultTypeSpecifier);
-                rhs = new End
-                {
-                    operand = rhs,
-                    localId = NextId(),
-                    locator = context.GetChild(0).Locator()!,
-                    resultTypeSpecifier = rhsPointType,
-                    resultTypeName = rhsPointType?.resultTypeName
-                };
-            }
-
-            if (properly)
-            {
-                var subtract = new Subtract
-                {
-                    operand = new[] { rhs, quantity },
-                    localId = NextId(),
-                    locator = rhs.locator,
-                    resultTypeSpecifier = rhs.resultTypeSpecifier,
-                    resultTypeName = rhs.resultTypeName,
-                };
-
-                var add = new Add
-                {
-                    operand = new[] { rhs, quantity },
-                    localId = NextId(),
-                    locator = rhs.locator,
-                    resultTypeSpecifier = rhs.resultTypeSpecifier,
-                    resultTypeName = rhs.resultTypeName,
-                };
-
-                rhs = new Hl7.Cql.Elm.Interval
-                {
-                    low = subtract,
-                    high = add,
-                    lowClosed = false,
-                    highClosed = false,
-                    localId = NextId(),
-                    locator = rhs.locator,
-                    resultTypeSpecifier = subtract.resultTypeSpecifier!.ToIntervalType(),
-                };
-
-                if (lhs is Elm.Interval)
-                {
-                    rhs = new Elm.ToList
+                    var intervalArgs = kwLast switch
                     {
-                        localId = NextId(),
-                        locator = rhs.locator,
-                        resultTypeSpecifier = lhs.resultTypeSpecifier!.ToListType(),
-                        operand = rhs,
+                        "start" => new[]
+                        {
+                        InvocationBuilder.Invoke(SystemLibrary.Subtract,
+                            [InvocationBuilder.Invoke(SystemLibrary.Start, rhs), quantity]),
+                        InvocationBuilder.Invoke(SystemLibrary.Add,
+                            [InvocationBuilder.Invoke(SystemLibrary.Start, rhs), quantity]),
+                        rhsClosed,
+                        rhsClosed,
+                    },
+                        "end" => new[]
+                        {
+                        InvocationBuilder.Invoke(SystemLibrary.Subtract,
+                            [InvocationBuilder.Invoke(SystemLibrary.End, rhs), quantity]),
+                        InvocationBuilder.Invoke(SystemLibrary.Add,
+                            [InvocationBuilder.Invoke(SystemLibrary.End, rhs), quantity]),
+                        rhsClosed,
+                        rhsClosed,
+                    },
+                        _ => null // impossible
                     };
+                    rhs = InvocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
                 }
-
-                var @in = new In
+                else
                 {
-                    localId = NextId(),
-                    locator = context.Locator(),
-                    operand = new[] { lhs, rhs },
-                }.WithResultType(SystemTypes.BooleanType);
-
-                return @in;
+                    var intervalArgs = new[]
+                    {
+                        InvocationBuilder.Invoke(SystemLibrary.Subtract,
+                            [InvocationBuilder.Invoke(SystemLibrary.Start, rhs), quantity]),
+                        InvocationBuilder.Invoke(SystemLibrary.Add,
+                            [InvocationBuilder.Invoke(SystemLibrary.End, rhs), quantity]),
+                        rhsClosed,
+                        rhsClosed,
+                };
+                    rhs = InvocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
+                }
             }
             else
-                throw new NotImplementedException("Properly within is not yet implemented.");
+            {
+                var intervalArgs = new[]
+                {
+                    rhs, rhs, ElmFactory.Literal(true), ElmFactory.Literal(true),
+                };
+                rhs = InvocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
+            }
+
+            var @in = (In)InvocationBuilder.Invoke(SystemLibrary.In, lhs, rhs);
+            return @in
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         private Expression HandleIncludedIn(cqlParser.IncludedInIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
