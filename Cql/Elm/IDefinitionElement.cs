@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -411,24 +411,21 @@ namespace Hl7.Cql.Elm
     /// <summary>
     /// Defines a deferred symbol that will be resolved later.
     /// </summary>
-    public abstract class DeferredDefinition<T> : IDefinitionElement
+    public abstract class DeferredDefinition<T>
+        (string name, AccessModifier access, Func<T> resolve) : IDefinitionElement
         where T : IDefinitionElement
     {
         [JsonIgnore]
-        public string Name { get; }
+        public string Name { get; } = name;
+
         [JsonIgnore]
-        public AccessModifier Access { get; }
+        public AccessModifier Access { get; } = access;
+
         [JsonIgnore]
-        protected Lazy<T> Definition { get; }
+        protected Lazy<T> Definition { get; } = new(resolve);
+
         public T Resolve() => Definition.Value;
 
-
-        public DeferredDefinition(string name, AccessModifier access, Func<T> resolve)
-        {
-            Name = name;
-            Access = access;
-            Definition = new Lazy<T>(resolve);
-        }
 
         public IDefinitionElement AddError(CqlToElmError error) => Definition.Value.AddError(error);
 
@@ -437,32 +434,27 @@ namespace Hl7.Cql.Elm
     /// <summary>
     /// Defines a deferred expression (define).
     /// </summary>
-    public sealed class DeferredExpressionDef : DeferredDefinition<ExpressionDef>
-    {
-        public DeferredExpressionDef(string name, AccessModifier access, Func<ExpressionDef> resolve) : base(name, access, resolve)
-        {
-        }
-    }
+    public sealed class DeferredExpressionDef(string name, AccessModifier access, Func<ExpressionDef> resolve)
+        : DeferredDefinition<ExpressionDef>(name, access, resolve);
     /// <summary>
     /// Defines a deferred expression (define).
     /// </summary>
-    public sealed class DeferredFunctionDef : DeferredDefinition<FunctionDef>, IFunctionElement, IHasSignature
+    public sealed class DeferredFunctionDef
+    (
+        AccessModifier access,
+        bool fluent,
+        string name,
+        OperandDef[] operand,
+        Func<FunctionDef> resolve)
+        : DeferredDefinition<FunctionDef>(name, access, resolve), IHasSignature
     {
-        public DeferredFunctionDef(AccessModifier access,
-            bool fluent,
-            string name,
-            OperandDef[] operand,
-            Func<FunctionDef> resolve) : base(name, access, resolve)
-        {
-            Fluent = fluent;
-            Operands = operand;
-        }
-
         // the signature has to be known initially without resolution.
         [JsonIgnore]
-        public IEnumerable<OperandDef> Operands { get; }
+        public IEnumerable<OperandDef> Operands { get; } = operand;
+
         [JsonIgnore]
-        public bool Fluent { get; }
+        public bool Fluent { get; } = fluent;
+
         [JsonIgnore]
         public TypeSpecifier ResultTypeSpecifier => Resolve().ResultTypeSpecifier;
     }
