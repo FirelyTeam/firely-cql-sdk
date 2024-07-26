@@ -1,5 +1,7 @@
 ﻿using Hl7.Cql.Model;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.CqlToElm
@@ -58,5 +60,9 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>True if at least one function is defined; otherwise, false.</returns>
         bool TryGetConversionFunctions(string fromQualifiedTypeName, [NotNullWhen(true)] out (string To, string Function)[]? conversions);
 
+        /// <summary>
+        /// Ges all types known across all models.
+        /// </summary>
+        IEnumerable<TypeInfo> AllTypes { get; }
     }
 }

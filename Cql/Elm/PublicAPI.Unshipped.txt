@@ -13,7 +13,6 @@ Hl7.Cql.Elm.After
 Hl7.Cql.Elm.After.After() -> void
 Hl7.Cql.Elm.After.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.After.precision.set -> void
-Hl7.Cql.Elm.After.precisionOrNull.get -> object?
 Hl7.Cql.Elm.After.precisionSpecified.get -> bool
 Hl7.Cql.Elm.After.precisionSpecified.set -> void
 Hl7.Cql.Elm.Aggregate
@@ -50,12 +49,10 @@ Hl7.Cql.Elm.Before
 Hl7.Cql.Elm.Before.Before() -> void
 Hl7.Cql.Elm.Before.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.Before.precision.set -> void
-Hl7.Cql.Elm.Before.precisionOrNull.get -> object?
 Hl7.Cql.Elm.Before.precisionSpecified.get -> bool
 Hl7.Cql.Elm.Before.precisionSpecified.set -> void
 Hl7.Cql.Elm.BinaryExpression
 Hl7.Cql.Elm.BinaryExpression.BinaryExpression() -> void
-Hl7.Cql.Elm.BinaryExpression.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.ByColumn
 Hl7.Cql.Elm.ByColumn.ByColumn() -> void
 Hl7.Cql.Elm.ByDirection
@@ -66,14 +63,12 @@ Hl7.Cql.Elm.CalculateAge
 Hl7.Cql.Elm.CalculateAge.CalculateAge() -> void
 Hl7.Cql.Elm.CalculateAge.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.CalculateAge.precision.set -> void
-Hl7.Cql.Elm.CalculateAge.precisionOrNull.get -> object?
 Hl7.Cql.Elm.CalculateAge.precisionSpecified.get -> bool
 Hl7.Cql.Elm.CalculateAge.precisionSpecified.set -> void
 Hl7.Cql.Elm.CalculateAgeAt
 Hl7.Cql.Elm.CalculateAgeAt.CalculateAgeAt() -> void
 Hl7.Cql.Elm.CalculateAgeAt.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.CalculateAgeAt.precision.set -> void
-Hl7.Cql.Elm.CalculateAgeAt.precisionOrNull.get -> object?
 Hl7.Cql.Elm.CalculateAgeAt.precisionSpecified.get -> bool
 Hl7.Cql.Elm.CalculateAgeAt.precisionSpecified.set -> void
 Hl7.Cql.Elm.CanConvert
@@ -129,7 +124,6 @@ Hl7.Cql.Elm.Contains
 Hl7.Cql.Elm.Contains.Contains() -> void
 Hl7.Cql.Elm.Contains.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.Contains.precision.set -> void
-Hl7.Cql.Elm.Contains.precisionOrNull.get -> object?
 Hl7.Cql.Elm.Contains.precisionSpecified.get -> bool
 Hl7.Cql.Elm.Contains.precisionSpecified.set -> void
 Hl7.Cql.Elm.ContextDef
@@ -187,7 +181,6 @@ Hl7.Cql.Elm.DateTimeComponentFrom
 Hl7.Cql.Elm.DateTimeComponentFrom.DateTimeComponentFrom() -> void
 Hl7.Cql.Elm.DateTimeComponentFrom.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.DateTimeComponentFrom.precision.set -> void
-Hl7.Cql.Elm.DateTimeComponentFrom.precisionOrNull.get -> object?
 Hl7.Cql.Elm.DateTimeComponentFrom.precisionSpecified.get -> bool
 Hl7.Cql.Elm.DateTimeComponentFrom.precisionSpecified.set -> void
 Hl7.Cql.Elm.DateTimePrecision
@@ -205,7 +198,6 @@ Hl7.Cql.Elm.DifferenceBetween
 Hl7.Cql.Elm.DifferenceBetween.DifferenceBetween() -> void
 Hl7.Cql.Elm.DifferenceBetween.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.DifferenceBetween.precision.set -> void
-Hl7.Cql.Elm.DifferenceBetween.precisionOrNull.get -> object?
 Hl7.Cql.Elm.DifferenceBetween.precisionSpecified.get -> bool
 Hl7.Cql.Elm.DifferenceBetween.precisionSpecified.set -> void
 Hl7.Cql.Elm.Distinct
@@ -216,7 +208,6 @@ Hl7.Cql.Elm.DurationBetween
 Hl7.Cql.Elm.DurationBetween.DurationBetween() -> void
 Hl7.Cql.Elm.DurationBetween.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.DurationBetween.precision.set -> void
-Hl7.Cql.Elm.DurationBetween.precisionOrNull.get -> object?
 Hl7.Cql.Elm.DurationBetween.precisionSpecified.get -> bool
 Hl7.Cql.Elm.DurationBetween.precisionSpecified.set -> void
 Hl7.Cql.Elm.Element
@@ -227,7 +218,6 @@ Hl7.Cql.Elm.Ends
 Hl7.Cql.Elm.Ends.Ends() -> void
 Hl7.Cql.Elm.Ends.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.Ends.precision.set -> void
-Hl7.Cql.Elm.Ends.precisionOrNull.get -> object?
 Hl7.Cql.Elm.Ends.precisionSpecified.get -> bool
 Hl7.Cql.Elm.Ends.precisionSpecified.set -> void
 Hl7.Cql.Elm.EndsWith
@@ -287,7 +277,6 @@ Hl7.Cql.Elm.FunctionDef.fluentSpecified.set -> void
 Hl7.Cql.Elm.FunctionDef.FunctionDef() -> void
 Hl7.Cql.Elm.FunctionRef
 Hl7.Cql.Elm.FunctionRef.FunctionRef() -> void
-Hl7.Cql.Elm.FunctionRef.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.GeometricMean
 Hl7.Cql.Elm.GeometricMean.GeometricMean() -> void
 Hl7.Cql.Elm.Greater
@@ -311,7 +300,6 @@ Hl7.Cql.Elm.In
 Hl7.Cql.Elm.In.In() -> void
 Hl7.Cql.Elm.In.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.In.precision.set -> void
-Hl7.Cql.Elm.In.precisionOrNull.get -> object?
 Hl7.Cql.Elm.In.precisionSpecified.get -> bool
 Hl7.Cql.Elm.In.precisionSpecified.set -> void
 Hl7.Cql.Elm.IncludeDef
@@ -323,7 +311,6 @@ Hl7.Cql.Elm.IncludedIn
 Hl7.Cql.Elm.IncludedIn.IncludedIn() -> void
 Hl7.Cql.Elm.IncludedIn.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.IncludedIn.precision.set -> void
-Hl7.Cql.Elm.IncludedIn.precisionOrNull.get -> object?
 Hl7.Cql.Elm.IncludedIn.precisionSpecified.get -> bool
 Hl7.Cql.Elm.IncludedIn.precisionSpecified.set -> void
 Hl7.Cql.Elm.IncludeElement
@@ -336,7 +323,6 @@ Hl7.Cql.Elm.Includes
 Hl7.Cql.Elm.Includes.Includes() -> void
 Hl7.Cql.Elm.Includes.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.Includes.precision.set -> void
-Hl7.Cql.Elm.Includes.precisionOrNull.get -> object?
 Hl7.Cql.Elm.Includes.precisionSpecified.get -> bool
 Hl7.Cql.Elm.Includes.precisionSpecified.set -> void
 Hl7.Cql.Elm.InCodeSystem
@@ -432,21 +418,18 @@ Hl7.Cql.Elm.Meets
 Hl7.Cql.Elm.Meets.Meets() -> void
 Hl7.Cql.Elm.Meets.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.Meets.precision.set -> void
-Hl7.Cql.Elm.Meets.precisionOrNull.get -> object?
 Hl7.Cql.Elm.Meets.precisionSpecified.get -> bool
 Hl7.Cql.Elm.Meets.precisionSpecified.set -> void
 Hl7.Cql.Elm.MeetsAfter
 Hl7.Cql.Elm.MeetsAfter.MeetsAfter() -> void
 Hl7.Cql.Elm.MeetsAfter.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.MeetsAfter.precision.set -> void
-Hl7.Cql.Elm.MeetsAfter.precisionOrNull.get -> object?
 Hl7.Cql.Elm.MeetsAfter.precisionSpecified.get -> bool
 Hl7.Cql.Elm.MeetsAfter.precisionSpecified.set -> void
 Hl7.Cql.Elm.MeetsBefore
 Hl7.Cql.Elm.MeetsBefore.MeetsBefore() -> void
 Hl7.Cql.Elm.MeetsBefore.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.MeetsBefore.precision.set -> void
-Hl7.Cql.Elm.MeetsBefore.precisionOrNull.get -> object?
 Hl7.Cql.Elm.MeetsBefore.precisionSpecified.get -> bool
 Hl7.Cql.Elm.MeetsBefore.precisionSpecified.set -> void
 Hl7.Cql.Elm.Message
@@ -469,7 +452,6 @@ Hl7.Cql.Elm.Narrative
 Hl7.Cql.Elm.Narrative.Narrative() -> void
 Hl7.Cql.Elm.NaryExpression
 Hl7.Cql.Elm.NaryExpression.NaryExpression() -> void
-Hl7.Cql.Elm.NaryExpression.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.Negate
 Hl7.Cql.Elm.Negate.Negate() -> void
 Hl7.Cql.Elm.Not
@@ -494,26 +476,22 @@ Hl7.Cql.Elm.Overlaps
 Hl7.Cql.Elm.Overlaps.Overlaps() -> void
 Hl7.Cql.Elm.Overlaps.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.Overlaps.precision.set -> void
-Hl7.Cql.Elm.Overlaps.precisionOrNull.get -> object?
 Hl7.Cql.Elm.Overlaps.precisionSpecified.get -> bool
 Hl7.Cql.Elm.Overlaps.precisionSpecified.set -> void
 Hl7.Cql.Elm.OverlapsAfter
 Hl7.Cql.Elm.OverlapsAfter.OverlapsAfter() -> void
 Hl7.Cql.Elm.OverlapsAfter.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.OverlapsAfter.precision.set -> void
-Hl7.Cql.Elm.OverlapsAfter.precisionOrNull.get -> object?
 Hl7.Cql.Elm.OverlapsAfter.precisionSpecified.get -> bool
 Hl7.Cql.Elm.OverlapsAfter.precisionSpecified.set -> void
 Hl7.Cql.Elm.OverlapsBefore
 Hl7.Cql.Elm.OverlapsBefore.OverlapsBefore() -> void
 Hl7.Cql.Elm.OverlapsBefore.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.OverlapsBefore.precision.set -> void
-Hl7.Cql.Elm.OverlapsBefore.precisionOrNull.get -> object?
 Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.get -> bool
 Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.set -> void
 Hl7.Cql.Elm.OverloadedFunctionDef
 Hl7.Cql.Elm.OverloadedFunctionDef.Access.get -> Hl7.Cql.Elm.AccessModifier
-Hl7.Cql.Elm.OverloadedFunctionDef.Functions.get -> Hl7.Cql.Elm.FunctionDef![]!
 Hl7.Cql.Elm.OverloadedFunctionDef.Name.get -> string!
 Hl7.Cql.Elm.ParameterDef
 Hl7.Cql.Elm.ParameterDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
@@ -542,28 +520,24 @@ Hl7.Cql.Elm.Product.Product() -> void
 Hl7.Cql.Elm.ProperContains
 Hl7.Cql.Elm.ProperContains.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.ProperContains.precision.set -> void
-Hl7.Cql.Elm.ProperContains.precisionOrNull.get -> object?
 Hl7.Cql.Elm.ProperContains.precisionSpecified.get -> bool
 Hl7.Cql.Elm.ProperContains.precisionSpecified.set -> void
 Hl7.Cql.Elm.ProperContains.ProperContains() -> void
 Hl7.Cql.Elm.ProperIn
 Hl7.Cql.Elm.ProperIn.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.ProperIn.precision.set -> void
-Hl7.Cql.Elm.ProperIn.precisionOrNull.get -> object?
 Hl7.Cql.Elm.ProperIn.precisionSpecified.get -> bool
 Hl7.Cql.Elm.ProperIn.precisionSpecified.set -> void
 Hl7.Cql.Elm.ProperIn.ProperIn() -> void
 Hl7.Cql.Elm.ProperIncludedIn
 Hl7.Cql.Elm.ProperIncludedIn.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.ProperIncludedIn.precision.set -> void
-Hl7.Cql.Elm.ProperIncludedIn.precisionOrNull.get -> object?
 Hl7.Cql.Elm.ProperIncludedIn.precisionSpecified.get -> bool
 Hl7.Cql.Elm.ProperIncludedIn.precisionSpecified.set -> void
 Hl7.Cql.Elm.ProperIncludedIn.ProperIncludedIn() -> void
 Hl7.Cql.Elm.ProperIncludes
 Hl7.Cql.Elm.ProperIncludes.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.ProperIncludes.precision.set -> void
-Hl7.Cql.Elm.ProperIncludes.precisionOrNull.get -> object?
 Hl7.Cql.Elm.ProperIncludes.precisionSpecified.get -> bool
 Hl7.Cql.Elm.ProperIncludes.precisionSpecified.set -> void
 Hl7.Cql.Elm.ProperIncludes.ProperIncludes() -> void
@@ -594,27 +568,22 @@ Hl7.Cql.Elm.ReturnClause.distinct.get -> bool
 Hl7.Cql.Elm.ReturnClause.distinct.set -> void
 Hl7.Cql.Elm.ReturnClause.ReturnClause() -> void
 Hl7.Cql.Elm.Round
-Hl7.Cql.Elm.Round.operands.get -> Hl7.Cql.Elm.Expression![]!
-Hl7.Cql.Elm.Round.precisionOrNull.get -> object?
 Hl7.Cql.Elm.Round.Round() -> void
 Hl7.Cql.Elm.SameAs
 Hl7.Cql.Elm.SameAs.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.SameAs.precision.set -> void
-Hl7.Cql.Elm.SameAs.precisionOrNull.get -> object?
 Hl7.Cql.Elm.SameAs.precisionSpecified.get -> bool
 Hl7.Cql.Elm.SameAs.precisionSpecified.set -> void
 Hl7.Cql.Elm.SameAs.SameAs() -> void
 Hl7.Cql.Elm.SameOrAfter
 Hl7.Cql.Elm.SameOrAfter.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.SameOrAfter.precision.set -> void
-Hl7.Cql.Elm.SameOrAfter.precisionOrNull.get -> object?
 Hl7.Cql.Elm.SameOrAfter.precisionSpecified.get -> bool
 Hl7.Cql.Elm.SameOrAfter.precisionSpecified.set -> void
 Hl7.Cql.Elm.SameOrAfter.SameOrAfter() -> void
 Hl7.Cql.Elm.SameOrBefore
 Hl7.Cql.Elm.SameOrBefore.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.SameOrBefore.precision.set -> void
-Hl7.Cql.Elm.SameOrBefore.precisionOrNull.get -> object?
 Hl7.Cql.Elm.SameOrBefore.precisionSpecified.get -> bool
 Hl7.Cql.Elm.SameOrBefore.precisionSpecified.set -> void
 Hl7.Cql.Elm.SameOrBefore.SameOrBefore() -> void
@@ -650,7 +619,6 @@ Hl7.Cql.Elm.Start.Start() -> void
 Hl7.Cql.Elm.Starts
 Hl7.Cql.Elm.Starts.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.Starts.precision.set -> void
-Hl7.Cql.Elm.Starts.precisionOrNull.get -> object?
 Hl7.Cql.Elm.Starts.precisionSpecified.get -> bool
 Hl7.Cql.Elm.Starts.precisionSpecified.set -> void
 Hl7.Cql.Elm.Starts.Starts() -> void
@@ -674,7 +642,6 @@ Hl7.Cql.Elm.SystemTypes
 Hl7.Cql.Elm.Tag
 Hl7.Cql.Elm.Tag.Tag() -> void
 Hl7.Cql.Elm.TernaryExpression
-Hl7.Cql.Elm.TernaryExpression.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.TernaryExpression.TernaryExpression() -> void
 Hl7.Cql.Elm.Time
 Hl7.Cql.Elm.Time.Time() -> void
@@ -734,7 +701,6 @@ Hl7.Cql.Elm.TypeSpecifier
 Hl7.Cql.Elm.TypeSpecifier.TypeSpecifier() -> void
 Hl7.Cql.Elm.TypeSpecifierExtensions
 Hl7.Cql.Elm.UnaryExpression
-Hl7.Cql.Elm.UnaryExpression.operands.get -> Hl7.Cql.Elm.Expression![]!
 Hl7.Cql.Elm.UnaryExpression.UnaryExpression() -> void
 Hl7.Cql.Elm.Union
 Hl7.Cql.Elm.Union.Union() -> void
@@ -804,8 +770,6 @@ static Hl7.Cql.Elm.Library.EqualityComparerByNameAndVersion.get -> System.Collec
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream, string? originalFilePath = null) -> Hl7.Cql.Elm.Library!
-static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.FunctionDef![]! functions) -> Hl7.Cql.Elm.OverloadedFunctionDef!
-static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.IDefinitionElement![]! elements) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.CodeSystemType -> Hl7.Cql.Elm.NamedTypeSpecifier!

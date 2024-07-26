@@ -5,14 +5,17 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal record SignatureMatchResult(FunctionDef Function,
+
+
+    internal record SignatureMatchResult(IHasSignature Function,
         CoercionResult<Expression>[] Arguments,
-        IDictionary<string, TypeSpecifier> GenericInferences, SignatureMatchFlags Flags = SignatureMatchFlags.None,
-        string? Error = null)
+        IDictionary<string, TypeSpecifier> GenericInferences, 
+        SignatureMatchFlags Flags,
+        Func<string?> Error)
     {
         public CoercionCost MostExpensive => Arguments.Length == 0 ? CoercionCost.ExactMatch : Arguments.Max(op => op.Cost);
         public int TotalCost => Arguments.Sum(op => (int)op.Cost);
-        public bool Compatible => Error is null && Flags == SignatureMatchFlags.None && Arguments.All(op => op.Cost != CoercionCost.Incompatible);
+        public bool Compatible => Flags == SignatureMatchFlags.None && Arguments.All(op => op.Cost != CoercionCost.Incompatible);
         public bool HasTooFewArguments => Flags.HasFlag(SignatureMatchFlags.TooFewArguments);
         public bool HasTooManyArguments => Flags.HasFlag(SignatureMatchFlags.TooManyArguments);
         public bool IsAmbiguous => Flags.HasFlag(SignatureMatchFlags.Ambiguous);

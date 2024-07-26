@@ -9,43 +9,41 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    // TODO: remove state variable (LeftExpression)
     internal partial class ExpressionVisitor
     {
         // (qualifierExpression '.')* referentialIdentifier
         public override Expression VisitQualifiedIdentifierExpression([NotNull] cqlParser.QualifiedIdentifierExpressionContext context)
         {
-            var terms = context.qualifierExpression();
-            Expression? left = null;
-            if (terms.Length > 0)
+            var qualifiers = context.qualifierExpression();
+            Expression? expression = null;
+            if (qualifiers.Length > 0)
             {
-                for (int i = 0; i < terms.Length; i++)
+                var term = qualifiers[0].referentialIdentifier().Parse();
+                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
+                    expression = symbol.ToRef(null);
+                else return new IdentifierRef
                 {
-                    var term = terms[i].referentialIdentifier().Parse();
-                    left = handleTerm(left, term);
+                    name = term,
+                }.AddError(Messaging.CouldNotResolveInCurrent(term));
+
+                for(int i = 1; i < qualifiers.Length; i++)
+                {
+                    term = qualifiers[i].referentialIdentifier().Parse();
+                    expression = navigateIntoType(expression, term);
                 }
+                var refId = context.referentialIdentifier().Parse();
+                expression = navigateIntoType(expression, refId);
+                return expression;
             }
-            var final = context.referentialIdentifier().Parse();
-            var expression = handleTerm(left, final);
-            return expression ?? throw new NotImplementedException();
-            Expression? handleTerm(Expression? left, string term)
+            else
             {
-                if (left is OperandRef or)
+                var term = context.referentialIdentifier().Parse();
+                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
+                    return symbol.ToRef(null);
+                else return new IdentifierRef
                 {
-                    left = navigateIntoType(or, term);
-                }
-                else if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
-                {
-                    left = symbol switch
-                    {
-                        OperandDef operand => new OperandRef { name = operand.name }.WithResultType(operand.resultTypeSpecifier),
-                        ValueSetDef valueSet => new ValueSetRef {  name = valueSet.name }.WithResultType(SystemTypes.ValueSetType),
-                        null => throw new NotImplementedException($"Don't know how to handle null symbol"),
-                        _ => throw new NotImplementedException($"Don't know how to handle symbol {symbol!.GetType()}")
-                    };
-                }
-                   
-                return left;
+                    name = term,
+                }.AddError(Messaging.CouldNotResolveInCurrent(term));
             }
         }
 
@@ -111,6 +109,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                             .WithLocator(context.Locator())
                                             .WithResultType(type);
                                 }
+                                else if (classElement.elementTypeSpecifier is Model.ListTypeSpecifier { } listTypeSpecifier)
+                                {
+                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(listTypeSpecifier.elementType, out var elt))
+                                        elementType = elt.ToListType();
+                                    else
+                                        return new Instance()
+                                            .AddError($"The named type '{listTypeSpecifier.elementType}' for element {elementName} could not be resolved to any model type.")
+                                            .WithLocator(context.Locator())
+                                            .WithResultType(type);
+                                }
+                                else if (classElement.elementTypeSpecifier is Model.ChoiceTypeSpecifier { } choiceTypeSpecifier)
+                                {
+                                    var ct = choiceTypeSpecifier.choice.Select(c => c.ToElm(ModelProvider)).ToArray();
+                                    elementType = new Elm.ChoiceTypeSpecifier { choice = ct };
+                                }
                                 else if (classElement.elementType is not null)
                                 {
                                     if (ModelProvider.TryGetTypeSpecifierForQualifiedName(classElement.elementType, out var ent))
@@ -171,48 +184,54 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithResultType(type);
         }
 
-        // This expression is used when constructing paths from left to right when parsing an invocation term.
-        // It is set to the result of parsing the path so far, and then used to construct the next step in the path.
-        private Expression? LeftExpressionTerm;
-
         // expressionTerm '.' qualifiedInvocation
         public override Expression VisitInvocationExpressionTerm([NotNull] cqlParser.InvocationExpressionTermContext context)
         {
-            var lexpr = Visit(context.expressionTerm());
-            if (lexpr is UsingRef ur)
+            if (context.expressionTerm()?.GetText() == "\"EOB\"")
+            {
+
+            }
+            var left = Visit(context.expressionTerm());
+            if (left is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
                     "A reference to a type is unexpected at this point.").WithLocator(context.Locator());
 
-            LeftExpressionTerm = lexpr;
-
-            var rexpr = Visit(context.qualifiedInvocation());
-
-            return rexpr.WithLocator(context.Locator());
-        }
-
-        //  : referentialIdentifier             #qualifiedMemberInvocation
-        public override Expression VisitQualifiedMemberInvocation([NotNull] cqlParser.QualifiedMemberInvocationContext context)
-        {
-            if (LeftExpressionTerm is null)
-                throw new InvalidOperationException("LeftExpressionTerm is null, but should have been set by the invocation expression term.");
-
-            var memberName = context.referentialIdentifier().Parse();
-
-            // Slightly confusing, but the "member invocation" is syntactically equivalent to the invocation of an expression
-            // qualified by a libraryname (XXX.y), so this rule needs to handle both.
-            if (LeftExpressionTerm is IncludeRef ir)
+            var invocation = context.GetChild(2) switch
             {
-                var libraryName = ir.IncludeDef.localIdentifier;
-                return LibraryBuilder.CurrentScope
-                    .Ref(Messaging, libraryName, memberName)
-                    .WithLocator(context.Locator());
+                cqlParser.QualifiedMemberInvocationContext memberCtx => memberInvocation(memberCtx),
+                cqlParser.QualifiedFunctionInvocationContext functionCtx => functionInvocation(functionCtx.qualifiedFunction()),
+                _ => throw new InvalidOperationException($"Unexpected token following '.' in rule expressionTerm")
+            };
+            return invocation;
+
+            Expression memberInvocation(cqlParser.QualifiedMemberInvocationContext memberCtx)
+            {
+                var memberName = memberCtx.referentialIdentifier().Parse();
+                if (left is IncludeRef ir)
+                {
+                    var libraryName = ir.IncludeDef.localIdentifier;
+                    return LibraryBuilder.CurrentScope
+                        .Ref(Messaging, libraryName, memberName)
+                        .WithLocator(context.Locator());
+                }
+                else
+                {
+                    return navigateIntoType(left, memberName)
+                        .WithLocator(context.Locator());
+                }
             }
-
-            // Left side is not a library name, so we must assume we are dealing with a true member invocation,
-            // also known as a Property
-            else
+            Expression functionInvocation(cqlParser.QualifiedFunctionContext functionCtx)
             {
-                return navigateIntoType(LeftExpressionTerm, memberName).WithLocator(context.Locator());
+                var locator = functionCtx.Locator();
+                var functionName = functionCtx.identifierOrFunctionIdentifier().Parse();
+                var @params = functionCtx.paramList()?.expression().Select(Visit)?.ToArray() ?? Array.Empty<Expression>();
+                var invocation = left switch
+                {
+                    IncludeRef ir => createFunctionInvocation(ir.IncludeDef.localIdentifier, functionName, @params, fluent: false, locator),
+                    { } => createFunctionInvocation(null, functionName, new[] { left }.Concat(@params).ToArray(), fluent: true, locator),
+                    _ => throw new InvalidOperationException($"Left side of invocation expression term is null.")
+                };
+                return invocation;
             }
         }
 
@@ -333,40 +352,27 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
         }
 
-        //  : identifierOrFunctionIdentifier '(' paramList? ')'
-        public override Expression VisitQualifiedFunction([NotNull] cqlParser.QualifiedFunctionContext context)
-        {
-            if (LeftExpressionTerm is null)
-                throw new InvalidOperationException("LeftExpressionTerm is null, but should have been set by the invocation expression term.");
 
-            var functionName = context.identifierOrFunctionIdentifier().Parse();
-            var paramList = ParseParamList(context.paramList());
-
-            // Slightly confusing, but the "fluent function invocation" is syntactically equivalent to the invocation of a function
-            // qualified by a libraryname (XXX.y), so this rule needs to handle both.
-            if (LeftExpressionTerm is IncludeRef ir)
-            {
-                var libraryName = ir.IncludeDef.localIdentifier;
-                return createFunctionInvocation(libraryName, functionName, paramList, fluent: false).WithLocator(context.Locator());
-            }
-
-            // Left side is not a library name, so we must assume we are dealing with a fluent function invocation.
-            else
-            {
-                // Add left side of expression as first parameter.
-                var allParameters = paramList.Prepend(LeftExpressionTerm).ToArray();
-                return createFunctionInvocation(null, functionName, allParameters, fluent: true).WithLocator(context.Locator());
-            }
-        }
 
         // : referentialIdentifier             #memberInvocation
         public override Expression VisitMemberInvocation([NotNull] cqlParser.MemberInvocationContext context)
         {
             var identifier = context.referentialIdentifier().Parse();
-            if (!LibraryBuilder.CurrentScope.TryResolveIdentifier(null, identifier, out var def))
+            if (!LibraryBuilder.CurrentScope.TryResolveSymbol(null, identifier, out var def))
             {
-                if (LibraryBuilder.CurrentScope.TryResolveIdentifier(null, "$this", out var @this))
-                    return navigateIntoType(@this!.ToRef(null), identifier);
+                if (LibraryBuilder.CurrentScope.TryResolveSymbol(null, "$this", out var @this))
+                {
+                    var propertyExpression = navigateIntoType(@this!.ToRef(null), identifier);
+                    // in a query context, when a property doesn't exist on $this, a could not resolve
+                    // error is issued instead of a "member not found" error.
+                    if (@this.Name == "$this" && propertyExpression.GetErrors()?.Length > 0)
+                        return new AliasRef { name = identifier }
+                            .AddError(Messaging.CouldNotResolveInCurrent(identifier))
+                            .WithLocator(context.Locator())
+                            .WithResultType(SystemTypes.AnyType);
+                    else
+                        return propertyExpression;
+                }
             }
             var @ref = LibraryBuilder.CurrentScope!
                 .Ref(Messaging, null, identifier)
@@ -387,39 +393,62 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var funcName = context.referentialIdentifier().Parse();
             var paramList = ParseParamList(context.paramList());
-            return createFunctionInvocation(null, funcName, paramList, fluent: false).WithLocator(context.Locator());
+            return createFunctionInvocation(null, funcName, paramList, fluent: false, context.Locator());
         }
 
-        private Expression createFunctionInvocation(string? libraryName, string funcName, Expression[] paramList, bool fluent)
+        private Expression createFunctionInvocation(string? libraryName, string funcName, Expression[] paramList, bool fluent, string locator)
         {
-            IDefinitionElement? symbolDef = null;
-
-            var inScope = LibraryBuilder.CurrentScope.TryResolveIdentifier(libraryName, funcName, out var scopeDef);
-            var inSystemScope = LibraryBuilder.SystemScope.TryResolveIdentifier(libraryName, funcName, out var systemDef);
-            if (inScope)
+            IFunctionElement? symbolDef = null;
+            // in some contexts, e.g. query sort statements like this:
+            //
+            // define fluent function foo(i Integer): i
+            // define q: ({ 2,1}) sL sort by foo() asc
+            //
+            // we have to test the existence of $this.foo() first.
+            // If it exists, it takes precedence over other matching non-fluent functions (for some reason).
+            if (LibraryBuilder.CurrentScope.TryResolveSymbol("$this", out var @this))
             {
-                if (inSystemScope)
-                    symbolDef = OverloadedFunctionDef.Create(scopeDef!, systemDef!);
-                else
-                    symbolDef = scopeDef;
+                if (LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
+                {
+                    var fluentParams = new Expression[] { @this.ToRef(null) }.Concat(paramList).ToArray();
+                    var result = symbolDef switch
+                    {
+                        IHasSignature ihs => InvocationBuilder.MatchSignature(ihs, fluentParams),
+                        OverloadedFunctionDef ov => InvocationBuilder.MatchSignature(ov, fluentParams),
+                        _ => null
+                    };
+                    if (result?.Compatible ?? false)
+                        return invoke(result.Function, null, fluentParams, true);
+                }
             }
-            else if (inSystemScope)
-                symbolDef = systemDef;
-
-            // All 3 of error cases in this 
-            return symbolDef switch
+            if (fluent)
             {
-                OverloadedFunctionDef overloadedDef => initializeOverload(overloadedDef, libraryName, paramList, fluent),
-                FunctionDef function => initializeFunctionRef(function, libraryName, paramList, fluent),
-                ExpressionDef => error($"Operator {funcName} is not a function and must not be called with ()."),
-                _ => unresolved()
-            };
+                if (!LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
+                    return unresolved();
+            }
+            else if (libraryName is null)
+            {
+                if (!LibraryBuilder.CurrentScope.TryResolveFunction(funcName, out symbolDef))
+                    return unresolved();
 
-            FunctionRef error(string msg) => new FunctionRef { name = funcName, operand = paramList }
-                .WithResultType(SystemTypes.AnyType)
-                .AddError(msg);
+            }
+            else if (libraryName is not null)
+            {
+                if (LibraryBuilder.CurrentScope.TryResolveSymbol(libraryName, out var usingSymbol))
+                {
+                    if (usingSymbol is ReferencedLibrary refLib)
+                    {
+                        if (!refLib.Symbols.TryResolveFunction(funcName, out symbolDef))
+                            return unresolved();
+                    }
+                    else
+                        return unresolved();
+                }
+            }
+            return invoke(symbolDef, libraryName, paramList, fluent);
             FunctionRef unresolved() => new FunctionRef { name = funcName, operand = paramList }
                     .WithResultType(SystemTypes.AnyType)
+                    .WithLocator(locator)
                     .AddError(Messaging.CouldNotResolveFunction(funcName, paramList));
             Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] arguments, bool fluent)
             {
@@ -430,7 +459,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     funcRef.AddError($"Function '{funcDef.name}' is called fluently, but its definition is not marked as fluent.");
                 if (funcRef.resultTypeSpecifier is null)
                     throw new InvalidOperationException($"Missing result type specifier");
-                return funcRef;
+                return funcRef.WithLocator(locator);
             }
             Expression initializeOverload(OverloadedFunctionDef function, string? libraryName, Expression[] arguments, bool fluent)
             {
@@ -438,9 +467,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 if (result.Compatible)
                 {
                     var expression = InvocationBuilder.Invoke(result.Function, libraryName, arguments);
-                    if (fluent && !result.Function.fluent)
-                        expression.AddError($"Function '{result.Function.name}' is called fluently, but its definition is not marked as fluent.");
-                    return expression;
+                    if (fluent && !result.Function.Fluent)
+                        expression.AddError($"Function '{result.Function.Name}' is called fluently, but its definition is not marked as fluent.");
+                    return expression.WithLocator(locator);
                 }
                 else
                     return new FunctionRef()
@@ -449,9 +478,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         libraryName = libraryName,
                     }
                     .WithResultType(SystemTypes.AnyType)
-                    .AddError(result.Error ?? throw new InvalidOperationException($"No compatible overload was found, but no error message was populated."));
+                    .WithLocator(locator)
+                    .AddError(result.Error() ?? throw new InvalidOperationException($"No compatible overload was found, but no error message was populated."));
+            }
+
+            Expression invoke(IFunctionElement? symbolDef, string? libraryName, Expression[] paramList, bool fluent)
+            {
+                return symbolDef switch
+                {
+                    OverloadedFunctionDef overloadedDef => initializeOverload(overloadedDef, libraryName, paramList, fluent),
+                    FunctionDef function => initializeFunctionRef(function, libraryName, paramList, fluent),
+                    DeferredFunctionDef dfd => initializeFunctionRef(dfd.Resolve(), libraryName, paramList, fluent),
+                    _ => unresolved()
+                };
             }
         }
+
+
 
 
 
