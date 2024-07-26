@@ -7,7 +7,7 @@ using Microsoft.CodeAnalysis;
 var solutionDir = new DirectoryInfo(Environment.CurrentDirectory)
 	.FindParentDirectoryContaining("CqlAndDemo.sln")!;
 
-CSharpCodeWriterTypeFormat csTypeFormat = CSharpCodeWriterTypeFormat.Var;
+CSharpCodeWriterTypeFormat csTypeFormat = CSharpCodeWriterTypeFormat.Explicit;
 (string subDir, string measureSubDir)[] iteration = [
 	("Demo", "Measures.Demo"),
 	("CMS", "Measures.CMS")
