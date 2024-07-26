@@ -194,10 +194,10 @@ partial class ExpressionRef : IReferenceElement { }
 partial class IdentifierRef : IReferenceElement { }
 partial class InstanceElement : IGetName { }
 partial class OperandDef : IGetName { }
-partial class OperandRef : IGetName { }
+partial class OperandRef : IReferenceElement { }
 partial class ParameterDef: IGetName { }
 partial class ParameterRef: IReferenceElement { }
-partial class QueryLetRef: IReferenceElement { }
+partial class QueryLetRef: IGetName { }
 partial class Tag: IGetName { }
 partial class TupleElement: IGetName { }
 partial class TupleElementDefinition: IGetName { }

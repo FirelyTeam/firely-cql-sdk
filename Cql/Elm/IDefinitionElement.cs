@@ -14,11 +14,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace Hl7.Cql.Elm
 {
     /// <summary>
-    /// Represents an ELM element that is used a a reference to a definition in a library.
+    /// Represents an ELM element that is used as a reference to a definition in a library.
     /// </summary>
     internal interface IReferenceElement : IGetName
     {
@@ -181,12 +182,15 @@ namespace Hl7.Cql.Elm
         string IDefinitionElement.Name => name;
 
         [JsonIgnore]
+        [XmlIgnore]
         public IEnumerable<OperandDef> Operands => operand ?? Enumerable.Empty<OperandDef>();
 
         [JsonIgnore]
+        [XmlIgnore]
         public TypeSpecifier ResultTypeSpecifier => resultTypeSpecifier!;
 
         [JsonIgnore]
+        [XmlIgnore]
         public bool Fluent => fluentSpecified && fluent;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
@@ -209,6 +213,7 @@ namespace Hl7.Cql.Elm
         string IDefinitionElement.Name => $"$context:{this.name}";
 
         [JsonIgnore]
+        [XmlIgnore]
         public bool IsUnfiltered => name == "Unfiltered";
 
         [JsonIgnore]
@@ -303,9 +308,10 @@ namespace Hl7.Cql.Elm
     partial class IdentifierRef : IDefinitionElement
     {
         [JsonIgnore]
-        public AccessModifier Access => AccessModifier.Private;
+        AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
         [JsonIgnore]
+        [XmlIgnore]
         public string Name => name;
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
@@ -382,13 +388,17 @@ namespace Hl7.Cql.Elm
 
 
         private readonly List<IHasSignature> _functions;
+
         [JsonIgnore]
+        [XmlIgnore]
         public IReadOnlyList<IHasSignature> Functions => _functions!.AsReadOnly();
 
         [JsonIgnore]
+        [XmlIgnore]
         public string Name { get; }
 
         [JsonIgnore]
+        [XmlIgnore]
         public AccessModifier Access { get; }
 
         private OverloadedFunctionDef(IEnumerable<IHasSignature> functions,
@@ -423,12 +433,15 @@ namespace Hl7.Cql.Elm
         where T : IDefinitionElement
     {
         [JsonIgnore]
+        [XmlIgnore]
         public string Name { get; } = name;
 
         [JsonIgnore]
+        [XmlIgnore]
         public AccessModifier Access { get; } = access;
 
         [JsonIgnore]
+        [XmlIgnore]
         protected Lazy<T> Definition { get; } = new(resolve);
 
         public T Resolve() => Definition.Value;
@@ -457,12 +470,15 @@ namespace Hl7.Cql.Elm
     {
         // the signature has to be known initially without resolution.
         [JsonIgnore]
+        [XmlIgnore]
         public IEnumerable<OperandDef> Operands { get; } = operand;
 
         [JsonIgnore]
+        [XmlIgnore]
         public bool Fluent { get; } = fluent;
 
         [JsonIgnore]
+        [XmlIgnore]
         public TypeSpecifier ResultTypeSpecifier => Resolve().ResultTypeSpecifier;
     }
 }
