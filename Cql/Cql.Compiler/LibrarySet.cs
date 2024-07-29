@@ -214,19 +214,20 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// Loads the specified library and its dependencies from the specified directory.
     /// </summary>
     /// <param name="elmDirectory">The directory containing the ELM files.</param>
-    /// <param name="lib">The name of the library to load.</param>
+    /// <param name="libraryPath">The name of the library to load.</param>
     /// <param name="version">The version of the library to load.</param>
     /// <returns>A collection of loaded libraries, including the specified library and its dependencies.</returns>
-    /// <remarks>Supply the name of the library in <paramref name="lib"/>, not the name of the file.</remarks>
+    /// <remarks>Supply the name of the library in <paramref name="libraryPath"/>, not the name of the file.</remarks>
     public IReadOnlyCollection<Library> LoadLibraryAndDependencies(
         DirectoryInfo elmDirectory,
-        string lib,
+        string libraryPath,
         string version = "")
     {
-        if(lib.EndsWith(".cql")) lib = lib[..^4];
+        if (Path.GetExtension(libraryPath).Equals(".cql", StringComparison.InvariantCultureIgnoreCase))
+            libraryPath = Path.GetFileNameWithoutExtension(libraryPath);
 
         List<Library> libraries = [];
-        List<(string lib, string version)> librariesToLoad = [(lib, version)];
+        List<(string lib, string version)> librariesToLoad = [(libraryPath, version)];
 
         while (librariesToLoad.Any())
         {
