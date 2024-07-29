@@ -10,6 +10,8 @@
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
+using System.Xml.Serialization;
+
 // ReSharper disable InconsistentNaming
 
 namespace Hl7.Cql.Elm;
@@ -134,6 +136,7 @@ partial class IncludeDef : IGetLibraryName
 {
     /// <inheritdoc />
     [JsonIgnore]
+    [XmlIgnore]
     public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
 }
 
