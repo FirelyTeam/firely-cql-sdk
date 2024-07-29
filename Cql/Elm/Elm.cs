@@ -9,7 +9,6 @@
 
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
@@ -142,6 +141,15 @@ partial class IncludeDef : IGetLibraryName
     public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
 }
 
+partial class Element
+{
+    /// <summary>
+    /// Returns the type of the element, either from resultTypeSpecifier or resultTypeName.
+    /// </summary>
+    public virtual TypeSpecifier? GetTypeSpecifier() =>
+        resultTypeSpecifier ?? resultTypeName?.ToNamedType();
+}
+
 partial class CodeRef : IGetLibraryName { }
 partial class CodeSystemRef : IGetLibraryName { }
 partial class ConceptRef : IGetLibraryName { }
@@ -193,7 +201,12 @@ partial class ExpressionDef : IGetName { }
 partial class ExpressionRef : IReferenceElement { }
 partial class IdentifierRef : IReferenceElement { }
 partial class InstanceElement : IGetName { }
-partial class OperandDef : IGetName { }
+partial class OperandDef : IGetName
+{
+    /// <inheritdoc />
+    public override TypeSpecifier? GetTypeSpecifier() =>
+        operandTypeSpecifier ?? operandType?.ToNamedType() ?? base.GetTypeSpecifier();
+}
 partial class OperandRef : IReferenceElement { }
 partial class ParameterDef: IGetName { }
 partial class ParameterRef: IReferenceElement { }

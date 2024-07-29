@@ -73,6 +73,7 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
             Index(cache.GetIndexForType<ValueSetDef>(), library, library.valueSets);
             Index(cache.GetIndexForType<CodeDef>(), library, library.codes);
             Index(cache.GetIndexForType<ConceptDef>(), library, library.concepts);
+            Index(cache.GetIndexForType<ExpressionDef>(), library, library.statements);
 
             return cache;
         }
@@ -80,7 +81,6 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
         public bool TryResolveDefinition<T>(string name, [NotNullWhen(true)] out T? def)
             where T : IDefinitionElement =>
             GetIndexForType<T>().TryGetValue(name, out def);
-
 
         private LibraryCache()
         {
@@ -106,10 +106,26 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
 
             foreach (var definition in definitions)
             {
-                if (!result.TryAdd(
+                if (result.TryAdd(
                         definition.Name ?? throw new LibraryDefinitionHasNoName(library, definition).ToException(),
-                        definition))
+                        definition)) continue;
+
+                // We have a duplicate, this is ok for ExpressionDefs (=overloads), otherwise report
+                // an error.
+                if (definition is not ExpressionDef expr || result[definition.Name] is not ExpressionDef existing)
                     throw new LibraryHasDuplicateDefinition(library, definition).ToException();
+
+                if (existing is MethodGroup methodGroup)
+                {
+                    // We have another overload for a MethodGroup, add it to the method group.
+                    methodGroup.Methods.Add(expr);
+                }
+                else
+                {
+                    // We have the first overload, convert the ExpressionDef to a MethodGroup
+                    var newGroup = new MethodGroup(definition.Name, [existing]);
+                    result[definition.Name] = (T)(object)newGroup;
+                }
             }
         }
     }

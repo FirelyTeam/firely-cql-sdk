@@ -10,11 +10,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.Elm
 {
     public static class ExtensionMethods
     {
+        internal static TypeSpecifier[] GetSignature(this IHasSignature hasSignature) =>
+            hasSignature.Operands.Select(o =>
+                                             o.GetTypeSpecifier() ??
+                                             throw new UntypedOperandError(hasSignature, o).ToException()
+                                         ).ToArray();
+
+        /// <summary>
+        /// Compares two signatures for exact equality, based on the Equals of the TypeSpecifier.
+        /// </summary>
+        internal static bool ExactlyMatches(this TypeSpecifier[] me, TypeSpecifier[] signature)
+        {
+            return me.Length == signature.Length &&
+                   me.Zip(signature, (l,r) => r.Equals(l)).All(r => r);
+        }
+
         /// <summary>
         /// Determines whether a given symbol is visible for the kind of access given in <paramref name="access"/>.
         /// </summary>
@@ -35,7 +51,7 @@ namespace Hl7.Cql.Elm
             visitor.Walk(node);
             return allErrors.ToArray();
 
-            bool nodeFilter(PropertyInfo property)
+            static bool nodeFilter(PropertyInfo property)
             {
                 var type = property.PropertyType;
                 if (type.IsAssignableTo(typeof(Element)))
