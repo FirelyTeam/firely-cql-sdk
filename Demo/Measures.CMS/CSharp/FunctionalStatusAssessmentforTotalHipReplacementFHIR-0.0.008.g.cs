@@ -610,7 +610,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
-		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, null);
 		int? d_ = context.Operators.Subtract(c_, 1);
 		decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
 		CqlDateTime f_ = context.Operators.DateTime(d_, 11, 1, 0, 0, 0, 0, e_);
@@ -671,7 +671,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			Period ah_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_3_000.ToInterval(ah_);
 			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval((ai_ as object));
-			bool? ak_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ag_, aj_, "day");
+			bool? ak_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ag_, aj_, null);
 
 			return ak_;
 		};
@@ -689,7 +689,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
-		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, null);
 		int? d_ = context.Operators.Subtract(c_, 2);
 		decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
 		CqlDateTime f_ = context.Operators.DateTime(d_, 11, 1, 0, 0, 0, 0, e_);
@@ -705,7 +705,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
-		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, null);
 		int? d_ = context.Operators.Subtract(c_, 1);
 		decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
 		CqlDateTime f_ = context.Operators.DateTime(d_, 10, 31, 23, 59, 59, 0, e_);
@@ -731,7 +731,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlDateTime j_ = this.November_1_Two_Years_Prior_to_the_Measurement_Period();
 			CqlDateTime k_ = this.October_31_Year_Prior_to_the_Measurement_Period();
 			CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_, true, true);
-			bool? m_ = context.Operators.In<CqlDateTime>(i_, l_, "day");
+			bool? m_ = context.Operators.In<CqlDateTime>(i_, l_, null);
 
 			return m_;
 		};
@@ -757,7 +757,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		CqlInterval<CqlDateTime> i_ = this.Measurement_Period();
 		CqlDateTime j_ = context.Operators.Start(i_);
 		CqlDate k_ = context.Operators.DateFrom(j_);
-		int? l_ = context.Operators.CalculateAgeAt(h_, k_, "year");
+		int? l_ = context.Operators.CalculateAgeAt(h_, k_, null);
 		bool? m_ = context.Operators.GreaterOrEqual(l_, 19);
 		bool? n_ = context.Operators.And(d_, m_);
 
@@ -865,7 +865,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				DataType o_ = PartialTHAProcedure?.Performed;
 				object p_ = FHIRHelpers_4_3_000.ToValue(o_);
 				CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.toInterval(p_);
-				bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, "day");
+				bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, null);
 
 				return r_;
 			};
@@ -902,7 +902,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				DataType o_ = RevisionTHAProcedure?.Performed;
 				object p_ = FHIRHelpers_4_3_000.ToValue(o_);
 				CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.toInterval(p_);
-				bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, "day");
+				bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, null);
 
 				return r_;
 			};
@@ -1022,7 +1022,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlDateTime ae_ = context.Operators.Start(ad_);
 				CqlDateTime ag_ = context.Operators.Add(ae_, z_);
 				CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(aa_, ag_, true, true);
-				bool? ai_ = context.Operators.In<CqlDateTime>(u_, ah_, "day");
+				bool? ai_ = context.Operators.In<CqlDateTime>(u_, ah_, null);
 				bool? aj_ = context.Operators.And(q_, ai_);
 
 				return aj_;
@@ -1065,7 +1065,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlQuantity s_ = context.Operators.Quantity(300m, "days");
 			CqlDate t_ = context.Operators.Add(r_, s_);
 			CqlInterval<CqlDate> u_ = context.Operators.Interval(m_, t_, true, true);
-			bool? v_ = context.Operators.In<CqlDate>(h_, u_, "day");
+			bool? v_ = context.Operators.In<CqlDate>(h_, u_, null);
 
 			return v_;
 		};
@@ -1155,7 +1155,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval(ai_);
 			CqlDateTime ak_ = context.Operators.Start(aj_);
 			CqlDate al_ = context.Operators.DateFrom(ak_);
-			bool? am_ = context.Operators.SameAs(ag_, al_, "day");
+			bool? am_ = context.Operators.SameAs(ag_, al_, null);
 			DataType an_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSSport?.Value;
 			object ao_ = FHIRHelpers_4_3_000.ToValue(an_);
 			bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
@@ -1169,7 +1169,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> ay_ = QICoreCommon_2_0_000.toInterval(ax_);
 			CqlDateTime az_ = context.Operators.Start(ay_);
 			CqlDate ba_ = context.Operators.DateFrom(az_);
-			bool? bb_ = context.Operators.SameAs(av_, ba_, "day");
+			bool? bb_ = context.Operators.SameAs(av_, ba_, null);
 			bool? bc_ = context.Operators.And(aq_, bb_);
 			DataType bd_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSActivityScore?.Value;
 			object be_ = FHIRHelpers_4_3_000.ToValue(bd_);
@@ -1184,7 +1184,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_0_000.toInterval(bn_);
 			CqlDateTime bp_ = context.Operators.Start(bo_);
 			CqlDate bq_ = context.Operators.DateFrom(bp_);
-			bool? br_ = context.Operators.SameAs(bl_, bq_, "day");
+			bool? br_ = context.Operators.SameAs(bl_, bq_, null);
 			bool? bs_ = context.Operators.And(bg_, br_);
 			DataType bt_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSSymptoms?.Value;
 			object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
@@ -1199,7 +1199,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> ce_ = QICoreCommon_2_0_000.toInterval(cd_);
 			CqlDateTime cf_ = context.Operators.Start(ce_);
 			CqlDate cg_ = context.Operators.DateFrom(cf_);
-			bool? ch_ = context.Operators.SameAs(cb_, cg_, "day");
+			bool? ch_ = context.Operators.SameAs(cb_, cg_, null);
 			bool? ci_ = context.Operators.And(bw_, ch_);
 			DataType cj_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSPain?.Value;
 			object ck_ = FHIRHelpers_4_3_000.ToValue(cj_);
@@ -1295,7 +1295,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlInterval<CqlDate> ah_ = context.Operators.Interval(InitialHipAssessmentHOOS, ag_, true, true);
 				bool? ai_ = ah_?.highClosed;
 				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(v_, aa_, ae_, ai_);
-				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, "day");
+				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, null);
 				bool? al_ = context.Operators.Not((bool?)(InitialHipAssessmentHOOS is null));
 				bool? am_ = context.Operators.And(ak_, al_);
 
@@ -1324,7 +1324,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlQuantity ba_ = context.Operators.Quantity(425m, "days");
 				CqlDate bb_ = context.Operators.Add(az_, ba_);
 				CqlInterval<CqlDate> bc_ = context.Operators.Interval(ax_, bb_, true, true);
-				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, "day");
+				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, null);
 
 				return bd_;
 			};
@@ -1412,7 +1412,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlInterval<CqlDate> ah_ = context.Operators.Interval(InitialHipAssessment, ag_, true, true);
 				bool? ai_ = ah_?.highClosed;
 				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(v_, aa_, ae_, ai_);
-				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, "day");
+				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, null);
 				bool? al_ = context.Operators.Not((bool?)(InitialHipAssessment is null));
 				bool? am_ = context.Operators.And(ak_, al_);
 
@@ -1441,7 +1441,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlQuantity ba_ = context.Operators.Quantity(425m, "days");
 				CqlDate bb_ = context.Operators.Add(az_, ba_);
 				CqlInterval<CqlDate> bc_ = context.Operators.Interval(ax_, bb_, true, true);
-				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, "day");
+				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, null);
 
 				return bd_;
 			};
@@ -1494,7 +1494,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> v_ = QICoreCommon_2_0_000.toInterval(u_);
 			CqlDateTime w_ = context.Operators.Start(v_);
 			CqlDate x_ = context.Operators.DateFrom(w_);
-			bool? y_ = context.Operators.SameAs(s_, x_, "day");
+			bool? y_ = context.Operators.SameAs(s_, x_, null);
 			DataType z_ = tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10PhysicalScore?.Value;
 			object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
@@ -1571,7 +1571,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlInterval<CqlDate> ah_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, ag_, true, true);
 				bool? ai_ = ah_?.highClosed;
 				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(v_, aa_, ae_, ai_);
-				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, "day");
+				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, null);
 				bool? al_ = context.Operators.Not((bool?)(InitialHipAssessmentPROMIS10 is null));
 				bool? am_ = context.Operators.And(ak_, al_);
 
@@ -1600,7 +1600,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlQuantity ba_ = context.Operators.Quantity(425m, "days");
 				CqlDate bb_ = context.Operators.Add(az_, ba_);
 				CqlInterval<CqlDate> bc_ = context.Operators.Interval(ax_, bb_, true, true);
-				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, "day");
+				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, null);
 
 				return bd_;
 			};
@@ -1653,7 +1653,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> v_ = QICoreCommon_2_0_000.toInterval(u_);
 			CqlDateTime w_ = context.Operators.Start(v_);
 			CqlDate x_ = context.Operators.DateFrom(w_);
-			bool? y_ = context.Operators.SameAs(s_, x_, "day");
+			bool? y_ = context.Operators.SameAs(s_, x_, null);
 			DataType z_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Value;
 			object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
@@ -1730,7 +1730,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlInterval<CqlDate> ah_ = context.Operators.Interval(InitialHipAssessmentOblique, ag_, true, true);
 				bool? ai_ = ah_?.highClosed;
 				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(v_, aa_, ae_, ai_);
-				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, "day");
+				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, null);
 				bool? al_ = context.Operators.Not((bool?)(InitialHipAssessmentOblique is null));
 				bool? am_ = context.Operators.And(ak_, al_);
 
@@ -1759,7 +1759,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlQuantity ba_ = context.Operators.Quantity(425m, "days");
 				CqlDate bb_ = context.Operators.Add(az_, ba_);
 				CqlInterval<CqlDate> bc_ = context.Operators.Interval(ax_, bb_, true, true);
-				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, "day");
+				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, null);
 
 				return bd_;
 			};
@@ -1812,7 +1812,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> v_ = QICoreCommon_2_0_000.toInterval(u_);
 			CqlDateTime w_ = context.Operators.Start(v_);
 			CqlDate x_ = context.Operators.DateFrom(w_);
-			bool? y_ = context.Operators.SameAs(s_, x_, "day");
+			bool? y_ = context.Operators.SameAs(s_, x_, null);
 			DataType z_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Value;
 			object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
@@ -1889,7 +1889,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlInterval<CqlDate> ah_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, ag_, true, true);
 				bool? ai_ = ah_?.highClosed;
 				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(v_, aa_, ae_, ai_);
-				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, "day");
+				bool? ak_ = context.Operators.In<CqlDateTime>(q_, aj_, null);
 				bool? al_ = context.Operators.Not((bool?)(InitialHipAssessmentOrthogonal is null));
 				bool? am_ = context.Operators.And(ak_, al_);
 
@@ -1918,7 +1918,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				CqlQuantity ba_ = context.Operators.Quantity(425m, "days");
 				CqlDate bb_ = context.Operators.Add(az_, ba_);
 				CqlInterval<CqlDate> bc_ = context.Operators.Interval(ax_, bb_, true, true);
-				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, "day");
+				bool? bd_ = context.Operators.In<CqlDate>(at_, bc_, null);
 
 				return bd_;
 			};

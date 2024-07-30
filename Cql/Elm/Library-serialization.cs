@@ -70,7 +70,7 @@ public partial class Library
     /// </summary>
     public static Library LoadFromJson(Stream stream, bool validate = true, string? originalFilePath = null)
     {
-        var node = JsonNode.Parse(stream) ??
+        var node = JsonNode.Parse(stream, documentOptions: JsonDocumentOptions) ??
                    throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
 
         originalFilePath ??= stream switch
@@ -179,16 +179,26 @@ public partial class Library
     }
 
 
-        private static JsonSerializerOptions JsonSerializerOptions =
-        BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
-    private static JsonSerializerOptions JsonDeserializerOptions =
-        BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
+    private const int MaxDepth = 4096; // int.MaxValue is not a good idea
+    private static JsonSerializerOptions JsonSerializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
+    private static JsonSerializerOptions JsonDeserializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
+    private static JsonDocumentOptions JsonDocumentOptions = BuildJsonDocumentOptions();
+
+    private static JsonDocumentOptions BuildJsonDocumentOptions()
+    {
+        var options = new JsonDocumentOptions()
+        {
+            MaxDepth = MaxDepth,
+        };
+
+        return options;
+    }
 
     internal static JsonSerializerOptions BuildSerializerOptions(bool allowOldStyleTypeDiscriminators = false)
     {
         var options = new JsonSerializerOptions
         {
-            MaxDepth = int.MaxValue,
+            MaxDepth = MaxDepth,
             UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
         };
 

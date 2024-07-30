@@ -174,7 +174,7 @@ public class PCMaternal_5_16_000
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.ToInterval(h_);
 			CqlDateTime j_ = context.Operators.Start(i_);
 			CqlDate k_ = context.Operators.DateFrom(j_);
-			int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
+			int? l_ = context.Operators.CalculateAgeAt(g_, k_, null);
 			CqlInterval<int?> m_ = context.Operators.Interval(8, 65, true, false);
 			bool? n_ = context.Operators.In<int?>(l_, m_, null);
 
@@ -771,7 +771,7 @@ public class PCMaternal_5_16_000
 	{
 		CqlDateTime a_ = this.lastTimeOfDelivery(TheEncounter);
 		CqlDateTime b_ = this.lastEstimatedDeliveryDate(TheEncounter);
-		int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
+		int? c_ = context.Operators.DifferenceBetween(a_, b_, null);
 		int? d_ = context.Operators.Subtract(280, c_);
 		int? e_ = context.Operators.TruncatedDivide(d_, 7);
 
@@ -939,7 +939,7 @@ public class PCMaternal_5_16_000
 				}
 			};
 			CqlDateTime ag_ = QICoreCommon_2_0_000.earliest(af_());
-			bool? ai_ = context.Operators.SameAs(ag_, l_, "day");
+			bool? ai_ = context.Operators.SameAs(ag_, l_, null);
 			object aj_()
 			{
 				bool cd_()

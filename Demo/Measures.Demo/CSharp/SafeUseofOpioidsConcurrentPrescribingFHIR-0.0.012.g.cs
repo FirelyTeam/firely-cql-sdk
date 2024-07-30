@@ -203,7 +203,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.ToInterval(h_);
 			CqlDateTime j_ = context.Operators.Start(i_);
 			CqlDate k_ = context.Operators.DateFrom(j_);
-			int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
+			int? l_ = context.Operators.CalculateAgeAt(g_, k_, null);
 			bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
 			Code<Encounter.EncounterStatus> n_ = EncounterInpatient?.StatusElement;
 			string o_ = FHIRHelpers_4_0_001.ToString(n_);

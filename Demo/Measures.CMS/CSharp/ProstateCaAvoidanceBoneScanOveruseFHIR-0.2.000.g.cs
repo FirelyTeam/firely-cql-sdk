@@ -316,7 +316,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			CqlInterval<CqlDateTime> e_ = QICoreCommon_2_0_000.prevalenceInterval(ProstateCancer);
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
-			bool? g_ = context.Operators.Overlaps(e_, f_, "day");
+			bool? g_ = context.Operators.Overlaps(e_, f_, null);
 			bool? h_ = QICoreCommon_2_0_000.isProblemListItem(ProstateCancer);
 			bool? i_ = QICoreCommon_2_0_000.isHealthConcern(ProstateCancer);
 			bool? j_ = context.Operators.Or(h_, i_);
@@ -500,7 +500,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.toInterval(i_);
 			CqlDateTime k_ = context.Operators.End(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
-			bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
+			bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
 			Code<EventStatus> n_ = ProstateCancerTreatment?.StatusElement;
 			EventStatus? o_ = n_?.Value;
 			string p_ = context.Operators.Convert<string>(o_);

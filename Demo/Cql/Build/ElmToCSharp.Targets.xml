@@ -6,6 +6,8 @@
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
+		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
 	</PropertyGroup>
 
 	<Target Name="StartMessage"
@@ -27,7 +29,8 @@
 			Condition="'$(CQLtoElmRan)'=='true'"
 			BeforeTargets="PreBuildEvent">
 		<PropertyGroup>
-			<PackagerCLI>$(SolutionDir)Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+			<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+			<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 
 			<!-- Leave these alone, they are automatically picked up from the properties above -->
 			<PackagerCLIArgs Condition="'$(OverrideUtcDateTime)'!=''">$(PackagerCLIArgs) --override-utc-date-time "$(1970-01-01T00:00:00Z)"</PackagerCLIArgs>
