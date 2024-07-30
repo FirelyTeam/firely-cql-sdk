@@ -22,6 +22,8 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+		<CqlSolutionDir>$(MSBuildThisFileDirectory)/../</CqlSolutionDir>
 	</PropertyGroup>
 
 	<!-- ignore sdk warnings -->
