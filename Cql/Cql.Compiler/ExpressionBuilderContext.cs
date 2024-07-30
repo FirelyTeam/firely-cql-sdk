@@ -1079,8 +1079,8 @@ partial class ExpressionBuilderContext
     {
         Expression[] operands = TranslateArgs(op.operand);
 
-        var resultType = op.resultTypeSpecifier ?? op.resultTypeName?.ToNamedType() ??
-                         throw new InvalidOperationException($"FunctionRef {op.libraryName + "." + op.name} has no result type specifier or result type name.");
+        var resultType = op.GetTypeSpecifier() ??
+                         throw this.NewExpressionBuildingException($"FunctionRef {op.libraryName + "." + op.name} has no result type specifier or result type name.");
 
         var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, resultType);
         return invoke;
@@ -1146,11 +1146,6 @@ partial class ExpressionBuilderContext
         Expression[] arguments,
         TypeSpecifier returnType)
     {
-        // NOTE: Reverted back (by commenting out the code below) to the old implementation (below that),
-        // because the new one is not working in https://github.com/FirelyTeam/firely-cql-sdk/issues/422
-        //
-        // TODO: To fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397
-
         string libraryName = _libraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
                              ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
@@ -1160,26 +1155,8 @@ partial class ExpressionBuilderContext
                                  .ToArray();
         var funcType = convertedArguments.Select(a=>a.Type).Append(rtt).ToArray();
         Type definitionType = GetFuncType(funcType);
-        return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
 
-        // string libraryName = _libraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
-        //                      ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
-        //
-        // var argumentTypes = arguments.SelectToArray(a => a.Type);
-        // var selected = _libraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
-        // Type definitionType = GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
-        // var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
-        //
-        // // all functions still take the bundle and context parameters, plus whatver the operands
-        // // to the actual function are.
-        // var convertedArguments = arguments
-        //                          .Select((arg, i) => ChangeType(arg, parameterTypes[i]))
-        //                          .Prepend(CqlExpressions.ParameterExpression)
-        //                          .ToArray();
-        //
-        // return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
-        //
-        // bool CheckConversion(Type from, Type to) => _typeConverter.CanConvert(from, to);
+        return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
     }
 
     protected Expression InvokeDefinitionThroughRuntimeContext(

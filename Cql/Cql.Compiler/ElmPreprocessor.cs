@@ -18,7 +18,7 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 /// <remarks>For now, this means ensuring all FunctionRefs have a resultTypeSpecifier,
 /// but more will follow.</remarks>
-internal class ElmPreprocessor
+internal static class ElmPreprocessor
 {
     public static void Process(Library library, LibrarySet librarySet)
     {

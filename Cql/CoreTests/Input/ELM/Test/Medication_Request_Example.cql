@@ -2,7 +2,7 @@ library MedicationRequestExample version '0.1.001'
 
 using FHIR version '4.0.1'
 
-include FHIRHelpers version '4.0.1' called FHIRHelpers
+include FHIRHelpers version '4.0.001' called FHIRHelpers
 
 define function "MedicationRequestResource"(medicationRequest MedicationRequest):
     medicationRequest m
