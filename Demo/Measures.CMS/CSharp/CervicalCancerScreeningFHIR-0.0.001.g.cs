@@ -225,7 +225,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			Period v_ = ValidEncounters.Period;
 			CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_3_000.ToInterval(v_);
 			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval((w_ as object));
-			bool? y_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(u_, x_, "day");
+			bool? y_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(u_, x_, null);
 
 			return y_;
 		};
@@ -247,7 +247,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(24, 64, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 		Code<AdministrativeGender> l_ = a_.GenderElement;
@@ -399,7 +399,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			CqlDateTime k_ = context?.Operators.Subtract(i_, j_);
 			CqlDateTime m_ = context?.Operators.End(h_);
 			CqlInterval<CqlDateTime> n_ = context?.Operators.Interval(k_, m_, true, true);
-			bool? o_ = context?.Operators.In<CqlDateTime>(g_, n_, "day");
+			bool? o_ = context?.Operators.In<CqlDateTime>(g_, n_, null);
 			DataType p_ = CervicalCytology.Value;
 			object q_ = FHIRHelpers_4_3_000.ToValue(p_);
 			bool? r_ = context?.Operators.Not((bool?)(q_ is null));
@@ -481,7 +481,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			};
 			CqlDateTime k_ = QICoreCommon_2_0_000.latest(j_());
 			CqlDate l_ = context?.Operators.DateFrom(k_);
-			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, "year");
+			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, null);
 			bool? n_ = context?.Operators.GreaterOrEqual(m_, 30);
 			object o_()
 			{
@@ -542,7 +542,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			CqlDateTime t_ = context?.Operators.Subtract(r_, s_);
 			CqlDateTime v_ = context?.Operators.End(q_);
 			CqlInterval<CqlDateTime> w_ = context?.Operators.Interval(t_, v_, true, true);
-			bool? x_ = context?.Operators.In<CqlDateTime>(p_, w_, "day");
+			bool? x_ = context?.Operators.In<CqlDateTime>(p_, w_, null);
 			bool? y_ = context?.Operators.And(n_, x_);
 			DataType z_ = HPVTest.Value;
 			object aa_ = FHIRHelpers_4_3_000.ToValue(z_);

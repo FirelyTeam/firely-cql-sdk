@@ -271,7 +271,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 			CqlInterval<CqlDateTime> x_ = this.Measurement_Period();
 			Period y_ = ValidEncounters.Period;
 			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
-			bool? aa_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
+			bool? aa_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, null);
 
 			return aa_;
 		};
@@ -293,7 +293,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(18, 75, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 		IEnumerable<Encounter> k_ = this.Qualifying_Encounters();
@@ -381,7 +381,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 			DataType g_ = RetinalExam.Effective;
 			object h_ = FHIRHelpers_4_3_000.ToValue(g_);
 			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.toInterval(h_);
-			bool? j_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
+			bool? j_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, null);
 
 			return j_;
 		};
@@ -410,7 +410,7 @@ public class DiabetesEyeExamFHIR_0_0_001
 			DataType m_ = RetinalExam.Effective;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
-			bool? p_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+			bool? p_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, null);
 
 			return p_;
 		};

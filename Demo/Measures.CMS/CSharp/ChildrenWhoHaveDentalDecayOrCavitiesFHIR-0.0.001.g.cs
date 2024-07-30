@@ -229,7 +229,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
 			Period g_ = ValidEncounter.Period;
 			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
-			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, null);
 
 			return i_;
 		};
@@ -251,7 +251,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(1, 20, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 		IEnumerable<Encounter> k_ = this.Qualifying_Encounters();

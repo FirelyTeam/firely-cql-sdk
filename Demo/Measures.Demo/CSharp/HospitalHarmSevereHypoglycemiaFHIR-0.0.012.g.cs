@@ -258,7 +258,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 			CqlDateTime g_ = context?.Operators.ConvertStringToDateTime(f_);
 			CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(InpatientEncounter);
 			CqlDateTime i_ = context?.Operators.Start(h_);
-			int? j_ = context?.Operators.CalculateAgeAt(g_, i_, "year");
+			int? j_ = context?.Operators.CalculateAgeAt(g_, i_, null);
 			bool? k_ = context?.Operators.GreaterOrEqual(j_, 18);
 
 			return k_;

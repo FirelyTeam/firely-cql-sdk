@@ -488,7 +488,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	{
 		CqlDateTime a_ = context?.Operators.Start(Value);
 		CqlDateTime b_ = context?.Operators.End(Value);
-		int? c_ = context?.Operators.DifferenceBetween(a_, b_, "day");
+		int? c_ = context?.Operators.DifferenceBetween(a_, b_, null);
 
 		return c_;
 	}

@@ -147,7 +147,7 @@ public class ParametersExample_0_0_1
 		Date a_ = this.Patient_Birthdate();
 		CqlDate b_ = FHIRHelpers_4_3_000.ToDate(a_);
 		CqlDate c_ = this.CurrentDate();
-		int? d_ = context?.Operators.DurationBetween(b_, c_, "year");
+		int? d_ = context?.Operators.DurationBetween(b_, c_, null);
 
 		return d_;
 	}

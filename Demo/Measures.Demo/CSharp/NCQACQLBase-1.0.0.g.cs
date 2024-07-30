@@ -605,7 +605,7 @@ public class NCQACQLBase_1_0_0
 				{
 					CqlDate l_ = context?.Operators.Start(I);
 					CqlDate m_ = context?.Operators.End(I);
-					int? n_ = context?.Operators.DurationBetween(l_, m_, "day");
+					int? n_ = context?.Operators.DurationBetween(l_, m_, null);
 					int? o_ = context?.Operators.Add(n_, 1);
 					int?[] p_ = /* ARR1 */ [
 						o_,
@@ -640,7 +640,7 @@ public class NCQACQLBase_1_0_0
 				{
 					CqlDate aa_ = context?.Operators.Start(I);
 					CqlDate ab_ = context?.Operators.End(I);
-					int? ac_ = context?.Operators.DurationBetween(aa_, ab_, "day");
+					int? ac_ = context?.Operators.DurationBetween(aa_, ab_, null);
 					int? ad_ = context?.Operators.Add(ac_, 1);
 					int?[] ae_ = /* ARR1 */ [
 						ad_,
@@ -684,7 +684,7 @@ public class NCQACQLBase_1_0_0
 				{
 					CqlDate bd_ = context?.Operators.Start(I);
 					CqlDate be_ = context?.Operators.End(I);
-					int? bf_ = context?.Operators.DurationBetween(bd_, be_, "day");
+					int? bf_ = context?.Operators.DurationBetween(bd_, be_, null);
 					int? bg_ = context?.Operators.Add(bf_, 1);
 					int?[] bh_ = /* ARR1 */ [
 						bg_,
@@ -710,7 +710,7 @@ public class NCQACQLBase_1_0_0
 				{
 					CqlDate bl_ = context?.Operators.Start(I);
 					CqlDate bm_ = context?.Operators.End(I);
-					int? bn_ = context?.Operators.DurationBetween(bl_, bm_, "day");
+					int? bn_ = context?.Operators.DurationBetween(bl_, bm_, null);
 					int? bo_ = context?.Operators.Add(bn_, 1);
 					int?[] bp_ = /* ARR1 */ [
 						bo_,
@@ -732,7 +732,7 @@ public class NCQACQLBase_1_0_0
 				(CqlInterval<CqlDate> interval, int? days)? aw_ = context?.Operators.First<(CqlInterval<CqlDate> interval, int? days)?>(av_);
 				CqlInterval<CqlDate> ax_ = aw_?.interval;
 				CqlDate ay_ = context?.Operators.End(ax_);
-				int? az_ = context?.Operators.DurationBetween(ar_, ay_, "day");
+				int? az_ = context?.Operators.DurationBetween(ar_, ay_, null);
 				int? ba_ = context?.Operators.Add(az_, 1);
 				int?[] bb_ = /* ARR1 */ [
 					ba_,
@@ -794,13 +794,13 @@ public class NCQACQLBase_1_0_0
 	public CqlInterval<CqlDateTime> DateTime_Interval_Set_Nulls_to_Zero(CqlInterval<CqlDateTime> interval)
 	{
 		CqlDateTime a_ = context?.Operators.Start(interval);
-		int? b_ = context?.Operators.DateTimeComponentFrom(a_, "year");
+		int? b_ = context?.Operators.DateTimeComponentFrom(a_, null);
 		int? c_()
 		{
 			bool v_()
 			{
 				CqlDateTime w_ = context?.Operators.Start(interval);
-				int? x_ = context?.Operators.DateTimeComponentFrom(w_, "month");
+				int? x_ = context?.Operators.DateTimeComponentFrom(w_, null);
 
 				return (x_ is null);
 			};
@@ -811,7 +811,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime y_ = context?.Operators.Start(interval);
-				int? z_ = context?.Operators.DateTimeComponentFrom(y_, "month");
+				int? z_ = context?.Operators.DateTimeComponentFrom(y_, null);
 
 				return z_;
 			}
@@ -821,7 +821,7 @@ public class NCQACQLBase_1_0_0
 			bool aa_()
 			{
 				CqlDateTime ab_ = context?.Operators.Start(interval);
-				int? ac_ = context?.Operators.DateTimeComponentFrom(ab_, "day");
+				int? ac_ = context?.Operators.DateTimeComponentFrom(ab_, null);
 
 				return (ac_ is null);
 			};
@@ -832,7 +832,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime ad_ = context?.Operators.Start(interval);
-				int? ae_ = context?.Operators.DateTimeComponentFrom(ad_, "day");
+				int? ae_ = context?.Operators.DateTimeComponentFrom(ad_, null);
 
 				return ae_;
 			}
@@ -842,7 +842,7 @@ public class NCQACQLBase_1_0_0
 			bool af_()
 			{
 				CqlDateTime ag_ = context?.Operators.Start(interval);
-				int? ah_ = context?.Operators.DateTimeComponentFrom(ag_, "hour");
+				int? ah_ = context?.Operators.DateTimeComponentFrom(ag_, null);
 
 				return (ah_ is null);
 			};
@@ -853,7 +853,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime ai_ = context?.Operators.Start(interval);
-				int? aj_ = context?.Operators.DateTimeComponentFrom(ai_, "hour");
+				int? aj_ = context?.Operators.DateTimeComponentFrom(ai_, null);
 
 				return aj_;
 			}
@@ -863,7 +863,7 @@ public class NCQACQLBase_1_0_0
 			bool ak_()
 			{
 				CqlDateTime al_ = context?.Operators.Start(interval);
-				int? am_ = context?.Operators.DateTimeComponentFrom(al_, "minute");
+				int? am_ = context?.Operators.DateTimeComponentFrom(al_, null);
 
 				return (am_ is null);
 			};
@@ -874,7 +874,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime an_ = context?.Operators.Start(interval);
-				int? ao_ = context?.Operators.DateTimeComponentFrom(an_, "minute");
+				int? ao_ = context?.Operators.DateTimeComponentFrom(an_, null);
 
 				return ao_;
 			}
@@ -884,7 +884,7 @@ public class NCQACQLBase_1_0_0
 			bool ap_()
 			{
 				CqlDateTime aq_ = context?.Operators.Start(interval);
-				int? ar_ = context?.Operators.DateTimeComponentFrom(aq_, "second");
+				int? ar_ = context?.Operators.DateTimeComponentFrom(aq_, null);
 
 				return (ar_ is null);
 			};
@@ -895,7 +895,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime as_ = context?.Operators.Start(interval);
-				int? at_ = context?.Operators.DateTimeComponentFrom(as_, "second");
+				int? at_ = context?.Operators.DateTimeComponentFrom(as_, null);
 
 				return at_;
 			}
@@ -905,7 +905,7 @@ public class NCQACQLBase_1_0_0
 			bool au_()
 			{
 				CqlDateTime av_ = context?.Operators.Start(interval);
-				int? aw_ = context?.Operators.DateTimeComponentFrom(av_, "millisecond");
+				int? aw_ = context?.Operators.DateTimeComponentFrom(av_, null);
 
 				return (aw_ is null);
 			};
@@ -916,19 +916,19 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime ax_ = context?.Operators.Start(interval);
-				int? ay_ = context?.Operators.DateTimeComponentFrom(ax_, "millisecond");
+				int? ay_ = context?.Operators.DateTimeComponentFrom(ax_, null);
 
 				return ay_;
 			}
 		};
 		CqlDateTime i_ = context?.Operators.End(interval);
-		int? j_ = context?.Operators.DateTimeComponentFrom(i_, "year");
+		int? j_ = context?.Operators.DateTimeComponentFrom(i_, null);
 		int? k_()
 		{
 			bool az_()
 			{
 				CqlDateTime ba_ = context?.Operators.End(interval);
-				int? bb_ = context?.Operators.DateTimeComponentFrom(ba_, "month");
+				int? bb_ = context?.Operators.DateTimeComponentFrom(ba_, null);
 
 				return (bb_ is null);
 			};
@@ -939,7 +939,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime bc_ = context?.Operators.End(interval);
-				int? bd_ = context?.Operators.DateTimeComponentFrom(bc_, "month");
+				int? bd_ = context?.Operators.DateTimeComponentFrom(bc_, null);
 
 				return bd_;
 			}
@@ -949,7 +949,7 @@ public class NCQACQLBase_1_0_0
 			bool be_()
 			{
 				CqlDateTime bf_ = context?.Operators.End(interval);
-				int? bg_ = context?.Operators.DateTimeComponentFrom(bf_, "day");
+				int? bg_ = context?.Operators.DateTimeComponentFrom(bf_, null);
 
 				return (bg_ is null);
 			};
@@ -960,7 +960,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime bh_ = context?.Operators.End(interval);
-				int? bi_ = context?.Operators.DateTimeComponentFrom(bh_, "day");
+				int? bi_ = context?.Operators.DateTimeComponentFrom(bh_, null);
 
 				return bi_;
 			}
@@ -970,7 +970,7 @@ public class NCQACQLBase_1_0_0
 			bool bj_()
 			{
 				CqlDateTime bk_ = context?.Operators.End(interval);
-				int? bl_ = context?.Operators.DateTimeComponentFrom(bk_, "hour");
+				int? bl_ = context?.Operators.DateTimeComponentFrom(bk_, null);
 
 				return (bl_ is null);
 			};
@@ -981,7 +981,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime bm_ = context?.Operators.End(interval);
-				int? bn_ = context?.Operators.DateTimeComponentFrom(bm_, "hour");
+				int? bn_ = context?.Operators.DateTimeComponentFrom(bm_, null);
 
 				return bn_;
 			}
@@ -991,7 +991,7 @@ public class NCQACQLBase_1_0_0
 			bool bo_()
 			{
 				CqlDateTime bp_ = context?.Operators.End(interval);
-				int? bq_ = context?.Operators.DateTimeComponentFrom(bp_, "minute");
+				int? bq_ = context?.Operators.DateTimeComponentFrom(bp_, null);
 
 				return (bq_ is null);
 			};
@@ -1002,7 +1002,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime br_ = context?.Operators.End(interval);
-				int? bs_ = context?.Operators.DateTimeComponentFrom(br_, "minute");
+				int? bs_ = context?.Operators.DateTimeComponentFrom(br_, null);
 
 				return bs_;
 			}
@@ -1012,7 +1012,7 @@ public class NCQACQLBase_1_0_0
 			bool bt_()
 			{
 				CqlDateTime bu_ = context?.Operators.End(interval);
-				int? bv_ = context?.Operators.DateTimeComponentFrom(bu_, "second");
+				int? bv_ = context?.Operators.DateTimeComponentFrom(bu_, null);
 
 				return (bv_ is null);
 			};
@@ -1023,7 +1023,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime bw_ = context?.Operators.End(interval);
-				int? bx_ = context?.Operators.DateTimeComponentFrom(bw_, "second");
+				int? bx_ = context?.Operators.DateTimeComponentFrom(bw_, null);
 
 				return bx_;
 			}
@@ -1033,7 +1033,7 @@ public class NCQACQLBase_1_0_0
 			bool by_()
 			{
 				CqlDateTime bz_ = context?.Operators.End(interval);
-				int? ca_ = context?.Operators.DateTimeComponentFrom(bz_, "millisecond");
+				int? ca_ = context?.Operators.DateTimeComponentFrom(bz_, null);
 
 				return (ca_ is null);
 			};
@@ -1044,7 +1044,7 @@ public class NCQACQLBase_1_0_0
 			else
 			{
 				CqlDateTime cb_ = context?.Operators.End(interval);
-				int? cc_ = context?.Operators.DateTimeComponentFrom(cb_, "millisecond");
+				int? cc_ = context?.Operators.DateTimeComponentFrom(cb_, null);
 
 				return cc_;
 			}
@@ -1105,7 +1105,7 @@ public class NCQACQLBase_1_0_0
 					CqlInterval<CqlDateTime> l_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
 					CqlDateTime m_ = context?.Operators.Start(l_);
 					CqlDateTime o_ = context?.Operators.End(l_);
-					int? p_ = context?.Operators.DurationBetween(m_, o_, "day");
+					int? p_ = context?.Operators.DurationBetween(m_, o_, null);
 					int? q_ = context?.Operators.Add(p_, 1);
 					int?[] r_ = /* ARR1 */ [
 						q_,
@@ -1141,7 +1141,7 @@ public class NCQACQLBase_1_0_0
 					CqlInterval<CqlDateTime> ac_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
 					CqlDateTime ad_ = context?.Operators.Start(ac_);
 					CqlDateTime af_ = context?.Operators.End(ac_);
-					int? ag_ = context?.Operators.DurationBetween(ad_, af_, "day");
+					int? ag_ = context?.Operators.DurationBetween(ad_, af_, null);
 					int? ah_ = context?.Operators.Add(ag_, 1);
 					int?[] ai_ = /* ARR1 */ [
 						ah_,
@@ -1186,7 +1186,7 @@ public class NCQACQLBase_1_0_0
 					CqlInterval<CqlDateTime> bj_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
 					CqlDateTime bk_ = context?.Operators.Start(bj_);
 					CqlDateTime bm_ = context?.Operators.End(bj_);
-					int? bn_ = context?.Operators.DurationBetween(bk_, bm_, "day");
+					int? bn_ = context?.Operators.DurationBetween(bk_, bm_, null);
 					int? bo_ = context?.Operators.Add(bn_, 1);
 					int?[] bp_ = /* ARR1 */ [
 						bo_,
@@ -1214,7 +1214,7 @@ public class NCQACQLBase_1_0_0
 					CqlInterval<CqlDateTime> bt_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
 					CqlDateTime bu_ = context?.Operators.Start(bt_);
 					CqlDateTime bw_ = context?.Operators.End(bt_);
-					int? bx_ = context?.Operators.DurationBetween(bu_, bw_, "day");
+					int? bx_ = context?.Operators.DurationBetween(bu_, bw_, null);
 					int? by_ = context?.Operators.Add(bx_, 1);
 					int?[] bz_ = /* ARR1 */ [
 						by_,
@@ -1237,7 +1237,7 @@ public class NCQACQLBase_1_0_0
 				CqlInterval<CqlDateTime> bc_ = bb_?.interval;
 				CqlInterval<CqlDateTime> bd_ = this.DateTime_Interval_Set_Nulls_to_Zero(bc_);
 				CqlDateTime be_ = context?.Operators.End(bd_);
-				int? bf_ = context?.Operators.DurationBetween(aw_, be_, "day");
+				int? bf_ = context?.Operators.DurationBetween(aw_, be_, null);
 				int? bg_ = context?.Operators.Add(bf_, 1);
 				int?[] bh_ = /* ARR1 */ [
 					bg_,
@@ -1298,29 +1298,29 @@ public class NCQACQLBase_1_0_0
     [CqlDeclaration("Convert To UTC DateTime")]
 	public CqlDateTime Convert_To_UTC_DateTime(CqlDate d)
 	{
-		int? a_ = context?.Operators.DateTimeComponentFrom(d, "year");
+		int? a_ = context?.Operators.DateTimeComponentFrom(d, null);
 		int? b_()
 		{
-			if ((context?.Operators.DateTimeComponentFrom(d, "month") is null))
+			if ((context?.Operators.DateTimeComponentFrom(d, null) is null))
 			{
 				return 0;
 			}
 			else
 			{
-				int? i_ = context?.Operators.DateTimeComponentFrom(d, "month");
+				int? i_ = context?.Operators.DateTimeComponentFrom(d, null);
 
 				return i_;
 			}
 		};
 		int? c_()
 		{
-			if ((context?.Operators.DateTimeComponentFrom(d, "day") is null))
+			if ((context?.Operators.DateTimeComponentFrom(d, null) is null))
 			{
 				return 0;
 			}
 			else
 			{
-				int? j_ = context?.Operators.DateTimeComponentFrom(d, "day");
+				int? j_ = context?.Operators.DateTimeComponentFrom(d, null);
 
 				return j_;
 			}

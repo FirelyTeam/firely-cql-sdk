@@ -206,7 +206,7 @@ public class AlaraCTFHIR_0_1_001
 			string m_ = l_.Value;
 			CqlDateTime n_ = context?.Operators.ConvertStringToDateTime(m_);
 			CqlDateTime p_ = context?.Operators.Start(f_);
-			int? q_ = context?.Operators.CalculateAgeAt(n_, p_, "year");
+			int? q_ = context?.Operators.CalculateAgeAt(n_, p_, null);
 			bool? r_ = context?.Operators.GreaterOrEqual(q_, 18);
 			bool? s_ = context?.Operators.And(j_, r_);
 

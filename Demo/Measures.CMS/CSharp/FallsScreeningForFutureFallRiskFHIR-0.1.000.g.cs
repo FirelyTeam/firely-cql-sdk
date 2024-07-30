@@ -350,7 +350,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 			Period aw_ = ValidEncounter.Period;
 			CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
 			CqlInterval<CqlDateTime> ay_ = QICoreCommon_2_0_000.ToInterval((ax_ as object));
-			bool? az_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ay_, "day");
+			bool? az_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ay_, null);
 
 			return az_;
 		};
@@ -372,7 +372,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context?.Operators.GreaterOrEqual(h_, 65);
 		IEnumerable<Encounter> j_ = this.Qualifying_Encounter();
 		bool? k_ = context?.Operators.Exists<Encounter>(j_);
@@ -418,7 +418,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 			DataType h_ = FallsScreening.Effective;
 			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
 			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(i_);
-			bool? k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
+			bool? k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, null);
 
 			return k_;
 		};

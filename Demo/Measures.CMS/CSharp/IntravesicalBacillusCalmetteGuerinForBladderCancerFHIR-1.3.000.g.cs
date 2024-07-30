@@ -456,10 +456,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				CqlDateTime s_ = context?.Operators.Start(r_);
 				CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.prevalenceInterval(BladderCancer);
 				CqlDateTime u_ = context?.Operators.Start(t_);
-				bool? v_ = context?.Operators.SameOrBefore(s_, u_, "day");
+				bool? v_ = context?.Operators.SameOrBefore(s_, u_, null);
 				object x_ = FHIRHelpers_4_3_000.ToValue(p_);
 				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(x_);
-				bool? aa_ = context?.Operators.Overlaps(y_, t_, "day");
+				bool? aa_ = context?.Operators.Overlaps(y_, t_, null);
 				bool? ab_ = context?.Operators.And(v_, aa_);
 
 				return ab_;
@@ -505,7 +505,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context?.Operators.Start(a_);
-		int? c_ = context?.Operators.DateTimeComponentFrom(b_, "year");
+		int? c_ = context?.Operators.DateTimeComponentFrom(b_, null);
 		int? d_ = context?.Operators.Subtract(c_, 1);
 		decimal? e_ = context?.Operators.ConvertIntegerToDecimal(0);
 		CqlDateTime f_ = context?.Operators.DateTime(d_, 7, 1, 0, 0, 0, 0, e_);
@@ -521,7 +521,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context?.Operators.Start(a_);
-		int? c_ = context?.Operators.DateTimeComponentFrom(b_, "year");
+		int? c_ = context?.Operators.DateTimeComponentFrom(b_, null);
 		decimal? d_ = context?.Operators.ConvertIntegerToDecimal(0);
 		CqlDateTime e_ = context?.Operators.DateTime(c_, 6, 30, 23, 59, 59, 0, d_);
 
@@ -546,7 +546,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			DataType i_ = FirstBladderCancerStaging.Performed;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.toInterval(j_);
-			bool? l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, "day");
+			bool? l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, null);
 
 			return l_;
 		};
@@ -574,7 +574,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			DataType i_ = FirstBladderCancerStaging.Performed;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.toInterval(j_);
-			bool? l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, "day");
+			bool? l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, null);
 
 			return l_;
 		};

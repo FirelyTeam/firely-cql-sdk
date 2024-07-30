@@ -561,7 +561,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 
 		return h_;
 	}
@@ -579,7 +579,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(51, 75, true, false);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 		IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
@@ -701,7 +701,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 		CqlDateTime r_ = context?.Operators.Start(q_);
 		CqlDate s_ = context?.Operators.DateFrom(r_);
-		int? t_ = context?.Operators.CalculateAgeAt(p_, s_, "year");
+		int? t_ = context?.Operators.CalculateAgeAt(p_, s_, null);
 		bool? u_ = context?.Operators.GreaterOrEqual(t_, 65);
 		bool? v_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
 		bool? w_ = context?.Operators.And(u_, v_);
@@ -959,7 +959,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 			DataType q_ = FecalOccult.Effective;
 			CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(q_);
 			CqlInterval<CqlDateTime> s_ = this.Measurement_Period();
-			bool? t_ = context?.Operators.In<CqlDateTime>(r_, s_, "day");
+			bool? t_ = context?.Operators.In<CqlDateTime>(r_, s_, null);
 			bool? u_ = context?.Operators.And(p_, t_);
 
 			return u_;
@@ -1029,7 +1029,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 			DataType l_ = FecalOccult.Effective;
 			CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
-			bool? o_ = context?.Operators.In<CqlDateTime>(m_, n_, "day");
+			bool? o_ = context?.Operators.In<CqlDateTime>(m_, n_, null);
 			bool? p_ = context?.Operators.And(k_, o_);
 
 			return p_;
@@ -1064,7 +1064,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 			DataType m_ = FecalOccult.Effective;
 			CqlDateTime n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(m_);
 			CqlInterval<CqlDateTime> o_ = this.Measurement_Period();
-			bool? p_ = context?.Operators.In<CqlDateTime>(n_, o_, "day");
+			bool? p_ = context?.Operators.In<CqlDateTime>(n_, o_, null);
 			bool? q_ = context?.Operators.And(l_, p_);
 
 			return q_;
@@ -1337,7 +1337,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 			CqlDateTime v_ = context?.Operators.Subtract(t_, u_);
 			CqlDateTime x_ = context?.Operators.End(s_);
 			CqlInterval<CqlDateTime> y_ = context?.Operators.Interval(v_, x_, true, true);
-			bool? z_ = context?.Operators.In<CqlDateTime>(r_, y_, "day");
+			bool? z_ = context?.Operators.In<CqlDateTime>(r_, y_, null);
 			CqlDateTime ab_ = context?.Operators.End(s_);
 			bool? ac_ = context?.Operators.Not((bool?)(ab_ is null));
 			bool? ad_ = context?.Operators.And(z_, ac_);
@@ -1415,7 +1415,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 			CqlDateTime q_ = context?.Operators.Subtract(o_, p_);
 			CqlDateTime s_ = context?.Operators.End(n_);
 			CqlInterval<CqlDateTime> t_ = context?.Operators.Interval(q_, s_, true, true);
-			bool? u_ = context?.Operators.In<CqlDateTime>(m_, t_, "day");
+			bool? u_ = context?.Operators.In<CqlDateTime>(m_, t_, null);
 			CqlDateTime w_ = context?.Operators.End(n_);
 			bool? x_ = context?.Operators.Not((bool?)(w_ is null));
 			bool? y_ = context?.Operators.And(u_, x_);
@@ -1458,7 +1458,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 			CqlDateTime r_ = context?.Operators.Subtract(p_, q_);
 			CqlDateTime t_ = context?.Operators.End(o_);
 			CqlInterval<CqlDateTime> u_ = context?.Operators.Interval(r_, t_, true, true);
-			bool? v_ = context?.Operators.In<CqlDateTime>(n_, u_, "day");
+			bool? v_ = context?.Operators.In<CqlDateTime>(n_, u_, null);
 			CqlDateTime x_ = context?.Operators.End(o_);
 			bool? y_ = context?.Operators.Not((bool?)(x_ is null));
 			bool? z_ = context?.Operators.And(v_, y_);

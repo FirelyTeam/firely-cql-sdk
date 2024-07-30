@@ -636,7 +636,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context?.Operators.Start(j_);
 			CqlDate l_ = context?.Operators.DateFrom(k_);
-			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, "year");
+			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, null);
 			bool? n_ = context?.Operators.GreaterOrEqual(m_, 3);
 
 			return n_;
@@ -757,7 +757,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			CqlDateTime v_ = context?.Operators.End(u_);
 			CqlDateTime x_ = context?.Operators.Add(v_, r_);
 			CqlInterval<CqlDateTime> y_ = context?.Operators.Interval(s_, x_, true, true);
-			bool? z_ = context?.Operators.In<CqlDateTime>(n_, y_, "day");
+			bool? z_ = context?.Operators.In<CqlDateTime>(n_, y_, null);
 
 			return z_;
 		};
@@ -785,7 +785,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context?.Operators.Start(j_);
 			CqlDate l_ = context?.Operators.DateFrom(k_);
-			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, "year");
+			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, null);
 			CqlInterval<int?> n_ = context?.Operators.Interval(3, 17, true, true);
 			bool? o_ = context?.Operators.In<int?>(m_, n_, null);
 
@@ -815,7 +815,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context?.Operators.Start(j_);
 			CqlDate l_ = context?.Operators.DateFrom(k_);
-			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, "year");
+			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, null);
 			CqlInterval<int?> n_ = context?.Operators.Interval(18, 64, true, true);
 			bool? o_ = context?.Operators.In<int?>(m_, n_, null);
 
@@ -845,7 +845,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context?.Operators.Start(j_);
 			CqlDate l_ = context?.Operators.DateFrom(k_);
-			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, "year");
+			int? m_ = context?.Operators.CalculateAgeAt(i_, l_, null);
 			bool? n_ = context?.Operators.GreaterOrEqual(m_, 65);
 
 			return n_;

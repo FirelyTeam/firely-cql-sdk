@@ -379,7 +379,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			CqlDateTime p_ = context?.Operators.End(o_);
 			CqlQuantity q_ = context?.Operators.Quantity(1m, "day");
 			CqlDateTime r_ = context?.Operators.Add(p_, q_);
-			bool? s_ = context?.Operators.SameOrAfter(m_, r_, "day");
+			bool? s_ = context?.Operators.SameOrAfter(m_, r_, null);
 
 			return s_;
 		};
@@ -460,7 +460,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		{
 			CqlDateTime h_ = context?.Operators.Start(LTCPeriods);
 			CqlDateTime i_ = context?.Operators.End(LTCPeriods);
-			int? j_ = context?.Operators.DurationBetween(h_, i_, "day");
+			int? j_ = context?.Operators.DurationBetween(h_, i_, null);
 
 			return j_;
 		};
@@ -652,7 +652,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(65, 79, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 		bool? k_ = this.Has_Criteria_Indicating_Frailty();
@@ -671,7 +671,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		CqlDate y_ = context?.Operators.ConvertStringToDate(x_);
 		CqlDateTime aa_ = context?.Operators.Start(e_);
 		CqlDate ab_ = context?.Operators.DateFrom(aa_);
-		int? ac_ = context?.Operators.CalculateAgeAt(y_, ab_, "year");
+		int? ac_ = context?.Operators.CalculateAgeAt(y_, ab_, null);
 		bool? ad_ = context?.Operators.GreaterOrEqual(ac_, 80);
 		bool? af_ = context?.Operators.And(ad_, k_);
 		bool? ag_ = context?.Operators.Or(u_, af_);
@@ -692,7 +692,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context?.Operators.GreaterOrEqual(h_, 65);
 		bool? j_ = this.Has_Criteria_Indicating_Frailty();
 		bool? k_ = context?.Operators.And(i_, j_);

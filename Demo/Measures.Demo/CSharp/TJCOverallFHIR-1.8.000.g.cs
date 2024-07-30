@@ -250,7 +250,7 @@ public class TJCOverallFHIR_1_8_000
 			CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_0_001.ToInterval(e_);
 			CqlDateTime k_ = context?.Operators.End(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
-			bool? m_ = context?.Operators.In<CqlDateTime>(k_, l_, "day");
+			bool? m_ = context?.Operators.In<CqlDateTime>(k_, l_, null);
 			bool? n_ = context?.Operators.And(h_, m_);
 
 			return n_;
@@ -306,7 +306,7 @@ public class TJCOverallFHIR_1_8_000
 				Period m_ = AllStrokeEncounter.Period;
 				CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.ToInterval(m_);
 				CqlDateTime o_ = context?.Operators.Start(n_);
-				int? p_ = context?.Operators.CalculateAgeAt(l_, o_, "year");
+				int? p_ = context?.Operators.CalculateAgeAt(l_, o_, null);
 				bool? q_ = context?.Operators.GreaterOrEqual(p_, 18);
 
 				return q_;

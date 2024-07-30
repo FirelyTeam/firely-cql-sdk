@@ -391,14 +391,14 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			CqlDateTime i_ = context?.Operators.Start(h_);
 			CqlDate j_ = context?.Operators.DateFrom(i_);
-			int? k_ = context?.Operators.CalculateAgeAt(g_, j_, "year");
+			int? k_ = context?.Operators.CalculateAgeAt(g_, j_, null);
 			bool? l_ = context?.Operators.GreaterOrEqual(k_, 6);
 			Date n_ = d_.BirthDateElement;
 			string o_ = n_.Value;
 			CqlDate p_ = context?.Operators.ConvertStringToDate(o_);
 			CqlDateTime r_ = context?.Operators.Start(h_);
 			CqlDate s_ = context?.Operators.DateFrom(r_);
-			int? t_ = context?.Operators.CalculateAgeAt(p_, s_, "year");
+			int? t_ = context?.Operators.CalculateAgeAt(p_, s_, null);
 			bool? u_ = context?.Operators.LessOrEqual(t_, 16);
 			bool? v_ = context?.Operators.And(l_, u_);
 

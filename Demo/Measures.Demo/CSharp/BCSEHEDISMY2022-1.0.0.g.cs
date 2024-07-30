@@ -258,7 +258,7 @@ public class BCSEHEDISMY2022_1_0_0
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context?.Operators.Start(a_);
-		int? c_ = context?.Operators.DateTimeComponentFrom(b_, "year");
+		int? c_ = context?.Operators.DateTimeComponentFrom(b_, null);
 		int? d_ = context?.Operators.Subtract(c_, 2);
 		decimal? e_ = context?.Operators.ConvertIntegerToDecimal(0);
 		CqlDateTime f_ = context?.Operators.DateTime(d_, 10, 1, 0, 0, 0, 0, e_);
@@ -357,7 +357,7 @@ public class BCSEHEDISMY2022_1_0_0
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(52, 74, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 		Code<AdministrativeGender> l_ = a_.GenderElement;

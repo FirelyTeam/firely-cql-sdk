@@ -297,7 +297,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
 			Period g_ = ValidEncounter.Period;
 			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
-			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, null);
 			Coding j_ = ValidEncounter.Class;
 			CqlCode k_ = FHIRHelpers_4_3_000.ToCode(j_);
 			CqlCode l_ = this.@virtual();
@@ -377,7 +377,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			CqlDateTime n_ = context?.Operators.Subtract(l_, m_);
 			CqlDateTime p_ = context?.Operators.End(k_);
 			CqlInterval<CqlDateTime> q_ = context?.Operators.Interval(n_, p_, true, true);
-			bool? r_ = context?.Operators.In<CqlDateTime>(j_, q_, "day");
+			bool? r_ = context?.Operators.In<CqlDateTime>(j_, q_, null);
 			bool? s_ = this.isConfirmedActiveDiagnosis(NewBPHDiagnosis);
 			bool? t_ = context?.Operators.And(r_, s_);
 
@@ -722,7 +722,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					}
 				};
 				CqlDateTime bn_ = QICoreCommon_2_0_000.earliest(bm_());
-				bool? bo_ = context?.Operators.SameAs(bl_, bn_, "day");
+				bool? bo_ = context?.Operators.SameAs(bl_, bn_, null);
 				List<CodeableConcept> bp_ = QOLAssessment.Category;
 				CqlConcept bq_(CodeableConcept @this)
 				{
@@ -868,7 +868,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				CqlQuantity r_ = context?.Operators.Quantity(1m, "month");
 				CqlDateTime s_ = context?.Operators.Add(q_, r_);
 				CqlInterval<CqlDateTime> t_ = context?.Operators.Interval(o_, s_, true, true);
-				bool? u_ = context?.Operators.In<CqlDateTime>(m_, t_, "day");
+				bool? u_ = context?.Operators.In<CqlDateTime>(m_, t_, null);
 				CqlDateTime w_ = context?.Operators.Start(n_);
 				bool? x_ = context?.Operators.Not((bool?)(w_ is null));
 				bool? y_ = context?.Operators.And(u_, x_);
@@ -913,7 +913,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.prevalenceInterval(InitialBPHDiagnosis);
 				CqlDateTime n_ = context?.Operators.Start(m_);
 				CqlDateTime o_ = USSAssessment?.effectiveDatetime;
-				int? p_ = context?.Operators.DurationBetween(n_, o_, "month");
+				int? p_ = context?.Operators.DurationBetween(n_, o_, null);
 				CqlInterval<int?> q_ = context?.Operators.Interval(6, 12, true, true);
 				bool? r_ = context?.Operators.In<int?>(p_, q_, null);
 
@@ -995,7 +995,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				CqlQuantity s_ = context?.Operators.Quantity(1m, "year");
 				CqlDateTime t_ = context?.Operators.Add(r_, s_);
 				CqlInterval<CqlDateTime> u_ = context?.Operators.Interval(p_, t_, true, true);
-				bool? v_ = context?.Operators.In<CqlDateTime>(n_, u_, "day");
+				bool? v_ = context?.Operators.In<CqlDateTime>(n_, u_, null);
 				CqlDateTime x_ = context?.Operators.Start(o_);
 				bool? y_ = context?.Operators.Not((bool?)(x_ is null));
 				bool? z_ = context?.Operators.And(v_, y_);
@@ -1143,7 +1143,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 				CqlDateTime z_ = QICoreCommon_2_0_000.earliest(y_);
 				CqlInterval<CqlDateTime> aa_ = this.Measurement_Period();
-				bool? ab_ = context?.Operators.In<CqlDateTime>(z_, aa_, "day");
+				bool? ab_ = context?.Operators.In<CqlDateTime>(z_, aa_, null);
 				bool? ac_ = context?.Operators.And(w_, ab_);
 				object ae_ = FHIRHelpers_4_3_000.ToValue(x_);
 				CqlDateTime af_ = QICoreCommon_2_0_000.earliest(ae_);

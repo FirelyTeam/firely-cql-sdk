@@ -475,7 +475,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			Period ab_ = ValidEncounters.Period;
 			CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_3_000.ToInterval(ab_);
 			CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_0_000.ToInterval((ac_ as object));
-			bool? ae_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, ad_, "day");
+			bool? ae_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, ad_, null);
 
 			return ae_;
 		};
@@ -615,7 +615,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			FhirDateTime k_ = OrderedContraceptives.AuthoredOnElement;
 			CqlDateTime l_ = context?.Operators.Convert<CqlDateTime>(k_);
 			CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.ToInterval((l_ as object));
-			bool? n_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(j_, m_, "day");
+			bool? n_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(j_, m_, null);
 
 			return n_;
 		};
@@ -646,7 +646,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			FhirDateTime n_ = LabOrders.AuthoredOnElement;
 			CqlDateTime o_ = context?.Operators.Convert<CqlDateTime>(n_);
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.ToInterval((o_ as object));
-			bool? q_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
+			bool? q_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
 
 			return q_;
 		};
@@ -671,7 +671,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			FhirDateTime j_ = PregnancyTest.AuthoredOnElement;
 			CqlDateTime k_ = context?.Operators.Convert<CqlDateTime>(j_);
 			CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.ToInterval((k_ as object));
-			bool? m_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(i_, l_, "day");
+			bool? m_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(i_, l_, null);
 
 			return m_;
 		};
@@ -698,7 +698,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			FhirDateTime h_ = SexualActivityDiagnostics.AuthoredOnElement;
 			CqlDateTime i_ = context?.Operators.Convert<CqlDateTime>(h_);
 			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval((i_ as object));
-			bool? k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
+			bool? k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, null);
 
 			return k_;
 		};
@@ -723,7 +723,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			DataType h_ = ProceduresForSexualActivity.Performed;
 			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
 			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(i_);
-			bool? k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
+			bool? k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, null);
 
 			return k_;
 		};
@@ -746,7 +746,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(16, 24, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 		Code<AdministrativeGender> l_ = a_.GenderElement;
@@ -816,7 +816,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				CqlQuantity af_ = context?.Operators.Quantity(6m, "days");
 				CqlDateTime ag_ = context?.Operators.Add(ae_, af_);
 				CqlInterval<CqlDateTime> ah_ = context?.Operators.Interval(aa_, ag_, true, true);
-				bool? ai_ = context?.Operators.In<CqlDateTime>(w_, ah_, "day");
+				bool? ai_ = context?.Operators.In<CqlDateTime>(w_, ah_, null);
 				CqlDateTime ak_ = context?.Operators.Convert<CqlDateTime>(x_);
 				CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.ToInterval((ak_ as object));
 				CqlDateTime am_ = context?.Operators.End(al_);
@@ -863,7 +863,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				CqlQuantity br_ = context?.Operators.Quantity(6m, "days");
 				CqlDateTime bs_ = context?.Operators.Add(bq_, br_);
 				CqlInterval<CqlDateTime> bt_ = context?.Operators.Interval(bm_, bs_, true, true);
-				bool? bu_ = context?.Operators.In<CqlDateTime>(bi_, bt_, "day");
+				bool? bu_ = context?.Operators.In<CqlDateTime>(bi_, bt_, null);
 				CqlDateTime bw_ = context?.Operators.Convert<CqlDateTime>(bj_);
 				CqlInterval<CqlDateTime> bx_ = QICoreCommon_2_0_000.ToInterval((bw_ as object));
 				CqlDateTime by_ = context?.Operators.End(bx_);
@@ -990,7 +990,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			};
 			CqlDateTime h_ = QICoreCommon_2_0_000.Latest(g_());
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period();
-			bool? j_ = context?.Operators.In<CqlDateTime>(h_, i_, "day");
+			bool? j_ = context?.Operators.In<CqlDateTime>(h_, i_, null);
 			DataType k_ = ChlamydiaTest.Value;
 			object l_ = FHIRHelpers_4_3_000.ToValue(k_);
 			bool? m_ = context?.Operators.Not((bool?)(l_ is null));
@@ -1017,7 +1017,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(16, 20, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 
@@ -1037,7 +1037,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(21, 24, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 

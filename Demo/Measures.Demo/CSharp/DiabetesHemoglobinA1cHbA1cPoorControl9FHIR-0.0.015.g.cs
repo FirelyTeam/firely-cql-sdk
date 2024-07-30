@@ -325,7 +325,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(18, 75, true, false);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 		IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
@@ -495,7 +495,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 		CqlDateTime i_ = context?.Operators.Start(h_);
 		CqlDate j_ = context?.Operators.DateFrom(i_);
-		int? k_ = context?.Operators.CalculateAgeAt(g_, j_, "year");
+		int? k_ = context?.Operators.CalculateAgeAt(g_, j_, null);
 		bool? l_ = context?.Operators.GreaterOrEqual(k_, 65);
 		bool? m_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
 		bool? n_ = context?.Operators.And(l_, m_);

@@ -310,7 +310,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				bool? m_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, null);
 				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.prevalenceInterval(Dementia);
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(k_);
-				bool? q_ = context?.Operators.Overlaps(n_, p_, "day");
+				bool? q_ = context?.Operators.Overlaps(n_, p_, null);
 				bool? r_ = context?.Operators.And(m_, q_);
 				bool? s_ = QICoreCommon_2_0_000.isActive(Dementia);
 				bool? t_ = context?.Operators.And(r_, s_);
@@ -430,7 +430,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_3_000.ToInterval(s_);
 				CqlDateTime z_ = context?.Operators.End(y_);
 				CqlInterval<CqlDateTime> aa_ = context?.Operators.Interval(w_, z_, true, true);
-				bool? ab_ = context?.Operators.In<CqlDateTime>(r_, aa_, "day");
+				bool? ab_ = context?.Operators.In<CqlDateTime>(r_, aa_, null);
 				CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(s_);
 				CqlDateTime ae_ = context?.Operators.End(ad_);
 				bool? af_ = context?.Operators.Not((bool?)(ae_ is null));

@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Project>	
+<Project>
 	<!-- Download MVN Dependencies -->
 	<PropertyGroup>
-		<!-- If you change the version here, you also need to update it in the pom.xml file -->		
+		<!-- If you change the version here, you also need to update it in the pom.xml file -->
 		<CqlToElmCliVersion>3.1.0</CqlToElmCliVersion>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 		<PomXmlPath>$(MSBuildThisFileDirectory)pom.xml</PomXmlPath>
 		<Today>$([System.DateTime]::Now.ToString('yyyy-MM-dd-HH-mm-ss-fff'))</Today>
 		<MvnBuildLog>$(MSBuildProjectDirectory)/mvn-build.log</MvnBuildLog>
+		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
 	</PropertyGroup>
 
 	<Target Name="DisplayMessages"

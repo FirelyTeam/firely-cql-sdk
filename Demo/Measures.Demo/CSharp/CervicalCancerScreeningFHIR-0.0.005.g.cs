@@ -319,7 +319,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(23, 64, true, false);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
 		Code<AdministrativeGender> l_ = a_.GenderElement;
@@ -496,7 +496,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(r_);
 			CqlDateTime t_ = context?.Operators.Start(s_);
 			CqlDate u_ = context?.Operators.DateFrom(t_);
-			int? v_ = context?.Operators.CalculateAgeAt(q_, u_, "year");
+			int? v_ = context?.Operators.CalculateAgeAt(q_, u_, null);
 			bool? w_ = context?.Operators.GreaterOrEqual(v_, 30);
 			bool? x_ = context?.Operators.And(m_, w_);
 			CqlDateTime z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(r_);
@@ -645,7 +645,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			CqlInterval<CqlDateTime> m_ = this.toInterval(l_);
 			CqlDateTime n_ = context?.Operators.Start(m_);
 			CqlDate o_ = context?.Operators.DateFrom(n_);
-			int? p_ = context?.Operators.CalculateAgeAt(k_, o_, "year");
+			int? p_ = context?.Operators.CalculateAgeAt(k_, o_, null);
 			bool? q_ = context?.Operators.GreaterOrEqual(p_, 30);
 			bool? r_ = context?.Operators.And(g_, q_);
 			CqlDateTime t_ = this.latest(l_);

@@ -122,7 +122,7 @@ public class Antibiotic_1_5_000
 				CqlQuantity q_ = context?.Operators.Quantity(3m, "days");
 				CqlDateTime r_ = context?.Operators.Add(p_, q_);
 				CqlInterval<CqlDateTime> s_ = context?.Operators.Interval(m_, r_, true, true);
-				bool? t_ = context?.Operators.In<CqlDateTime>(j_, s_, "day");
+				bool? t_ = context?.Operators.In<CqlDateTime>(j_, s_, null);
 				CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_3_000.ToInterval(k_);
 				CqlDateTime w_ = context?.Operators.Start(v_);
 				bool? x_ = context?.Operators.Not((bool?)(w_ is null));
@@ -228,7 +228,7 @@ public class Antibiotic_1_5_000
 					CqlInterval<CqlDate> ch_ = context?.Operators.Interval(bz_, cg_, true, true);
 					bool? ci_ = ch_.highClosed;
 					CqlInterval<CqlDateTime> cj_ = context?.Operators.Interval(al_, bc_, bs_, ci_);
-					bool? ck_ = context?.Operators.Overlaps(u_, cj_, "day");
+					bool? ck_ = context?.Operators.Overlaps(u_, cj_, null);
 
 					return ck_;
 				};
