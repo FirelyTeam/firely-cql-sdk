@@ -292,7 +292,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
 		IEnumerable<Encounter> j_ = AHAOverall_2_6_000.Qualifying_Outpatient_Encounter_During_Measurement_Period();
 		int? k_ = context.Operators.Count<Encounter>(j_);

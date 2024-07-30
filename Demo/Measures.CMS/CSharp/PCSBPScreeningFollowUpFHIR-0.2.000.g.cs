@@ -402,7 +402,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 			Period f_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_3_000.ToInterval(f_);
-			bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, "day");
+			bool? h_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, null);
 			Code<Encounter.EncounterStatus> i_ = ValidEncounter?.StatusElement;
 			Encounter.EncounterStatus? j_ = i_?.Value;
 			Code<Encounter.EncounterStatus> k_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(j_);
@@ -437,7 +437,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlDateTime g_ = context.Operators.ConvertStringToDateTime(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			CqlDateTime i_ = context.Operators.Start(h_);
-			int? j_ = context.Operators.CalculateAgeAt(g_, i_, "year");
+			int? j_ = context.Operators.CalculateAgeAt(g_, i_, null);
 			bool? k_ = context.Operators.GreaterOrEqual(j_, 18);
 
 			return k_;
@@ -501,7 +501,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				};
 				Period p_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_3_000.ToInterval(p_);
-				bool? r_ = context.Operators.SameOrBefore(o_(), q_, "day");
+				bool? r_ = context.Operators.SameOrBefore(o_(), q_, null);
 				bool? s_ = context.Operators.And(n_, r_);
 
 				return s_;
@@ -909,7 +909,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(o_);
 				Period q_ = ElevatedEncounter?.Period;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(q_);
-				bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, "day");
+				bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, null);
 
 				return s_;
 			};
@@ -930,7 +930,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime z_ = context.Operators.Convert<CqlDateTime>(y_);
 				Period aa_ = ElevatedEncounter?.Period;
 				CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_3_000.ToInterval(aa_);
-				bool? ac_ = context.Operators.In<CqlDateTime>(z_, ab_, "day");
+				bool? ac_ = context.Operators.In<CqlDateTime>(z_, ab_, null);
 
 				return ac_;
 			};
@@ -951,7 +951,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime aj_ = context.Operators.Convert<CqlDateTime>(ai_);
 				Period ak_ = ElevatedEncounter?.Period;
 				CqlInterval<CqlDateTime> al_ = FHIRHelpers_4_3_000.ToInterval(ak_);
-				bool? am_ = context.Operators.In<CqlDateTime>(aj_, al_, "day");
+				bool? am_ = context.Operators.In<CqlDateTime>(aj_, al_, null);
 
 				return am_;
 			};
@@ -1282,7 +1282,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime bp_ = context.Operators.End(bo_);
 				Period bq_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_3_000.ToInterval(bq_);
-				bool? bs_ = context.Operators.In<CqlDateTime>(bp_, br_, "day");
+				bool? bs_ = context.Operators.In<CqlDateTime>(bp_, br_, null);
 
 				return bs_;
 			};
@@ -1330,7 +1330,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime cn_ = context.Operators.End(cm_);
 				Period co_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> cp_ = FHIRHelpers_4_3_000.ToInterval(co_);
-				bool? cq_ = context.Operators.In<CqlDateTime>(cn_, cp_, "day");
+				bool? cq_ = context.Operators.In<CqlDateTime>(cn_, cp_, null);
 
 				return cq_;
 			};
@@ -1378,7 +1378,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime dl_ = context.Operators.End(dk_);
 				Period dm_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> dn_ = FHIRHelpers_4_3_000.ToInterval(dm_);
-				bool? do_ = context.Operators.In<CqlDateTime>(dl_, dn_, "day");
+				bool? do_ = context.Operators.In<CqlDateTime>(dl_, dn_, null);
 
 				return do_;
 			};
@@ -1426,7 +1426,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ej_ = context.Operators.End(ei_);
 				Period ek_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> el_ = FHIRHelpers_4_3_000.ToInterval(ek_);
-				bool? em_ = context.Operators.In<CqlDateTime>(ej_, el_, "day");
+				bool? em_ = context.Operators.In<CqlDateTime>(ej_, el_, null);
 
 				return em_;
 			};
@@ -1494,10 +1494,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				FhirDateTime l_ = FourWeekRescreen?.AuthoredOnElement;
 				CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(l_);
 				CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
-				bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
+				bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, null);
 				FhirDateTime p_ = NonPharmInterventionsHTN?.AuthoredOnElement;
 				CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
-				bool? s_ = context.Operators.In<CqlDateTime>(q_, n_, "day");
+				bool? s_ = context.Operators.In<CqlDateTime>(q_, n_, null);
 				bool? t_ = context.Operators.And(o_, s_);
 				Code<RequestIntent> u_ = FourWeekRescreen?.IntentElement;
 				RequestIntent? v_ = u_?.Value;
@@ -1537,7 +1537,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
 				Period k_ = FirstHTNEncounter?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
-				bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, "day");
+				bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, null);
 
 				return m_;
 			};
@@ -1571,7 +1571,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime bv_ = context.Operators.End(bu_);
 				Period bw_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> bx_ = FHIRHelpers_4_3_000.ToInterval(bw_);
-				bool? by_ = context.Operators.In<CqlDateTime>(bv_, bx_, "day");
+				bool? by_ = context.Operators.In<CqlDateTime>(bv_, bx_, null);
 				Code<ObservationStatus> bz_ = BloodPressure?.StatusElement;
 				ObservationStatus? ca_ = bz_?.Value;
 				string cb_ = context.Operators.Convert<string>(ca_);
@@ -1632,7 +1632,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime cz_ = context.Operators.End(cy_);
 				Period da_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> db_ = FHIRHelpers_4_3_000.ToInterval(da_);
-				bool? dc_ = context.Operators.In<CqlDateTime>(cz_, db_, "day");
+				bool? dc_ = context.Operators.In<CqlDateTime>(cz_, db_, null);
 				Code<ObservationStatus> dd_ = BloodPressure?.StatusElement;
 				ObservationStatus? de_ = dd_?.Value;
 				string df_ = context.Operators.Convert<string>(de_);
@@ -1694,7 +1694,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ed_ = context.Operators.End(ec_);
 				Period ee_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> ef_ = FHIRHelpers_4_3_000.ToInterval(ee_);
-				bool? eg_ = context.Operators.In<CqlDateTime>(ed_, ef_, "day");
+				bool? eg_ = context.Operators.In<CqlDateTime>(ed_, ef_, null);
 				Code<ObservationStatus> eh_ = BloodPressure?.StatusElement;
 				ObservationStatus? ei_ = eh_?.Value;
 				string ej_ = context.Operators.Convert<string>(ei_);
@@ -1753,7 +1753,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime fh_ = context.Operators.End(fg_);
 				Period fi_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> fj_ = FHIRHelpers_4_3_000.ToInterval(fi_);
-				bool? fk_ = context.Operators.In<CqlDateTime>(fh_, fj_, "day");
+				bool? fk_ = context.Operators.In<CqlDateTime>(fh_, fj_, null);
 				Code<ObservationStatus> fl_ = BloodPressure?.StatusElement;
 				ObservationStatus? fm_ = fl_?.Value;
 				string fn_ = context.Operators.Convert<string>(fm_);
@@ -1863,10 +1863,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				FhirDateTime k_ = Rescreen2to6?.AuthoredOnElement;
 				CqlDateTime l_ = context.Operators.Convert<CqlDateTime>(k_);
 				CqlInterval<CqlDateTime> m_ = this.Measurement_Period();
-				bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, "day");
+				bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
 				FhirDateTime o_ = LabECGIntervention?.AuthoredOnElement;
 				CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(o_);
-				bool? r_ = context.Operators.In<CqlDateTime>(p_, m_, "day");
+				bool? r_ = context.Operators.In<CqlDateTime>(p_, m_, null);
 				bool? s_ = context.Operators.And(n_, r_);
 
 				return s_;
@@ -1887,7 +1887,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				FhirDateTime y_ = NonPharmSecondIntervention?.AuthoredOnElement;
 				CqlDateTime z_ = context.Operators.Convert<CqlDateTime>(y_);
 				CqlInterval<CqlDateTime> aa_ = this.Measurement_Period();
-				bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
+				bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, null);
 
 				return ab_;
 			};
@@ -1919,7 +1919,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
 				Period o_ = SecondHTNEncounterReading?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
-				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, "day");
+				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, null);
 
 				return q_;
 			};
@@ -1940,7 +1940,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
 				Period y_ = SecondHTNEncounterReading?.Period;
 				CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
-				bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
+				bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, null);
 
 				return aa_;
 			};
@@ -2232,10 +2232,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				FhirDateTime n_ = WeeksRescreen?.AuthoredOnElement;
 				CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(n_);
 				CqlInterval<CqlDateTime> p_ = this.Measurement_Period();
-				bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, "day");
+				bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, null);
 				FhirDateTime r_ = ECGLabTest?.AuthoredOnElement;
 				CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(r_);
-				bool? u_ = context.Operators.In<CqlDateTime>(s_, p_, "day");
+				bool? u_ = context.Operators.In<CqlDateTime>(s_, p_, null);
 				bool? v_ = context.Operators.And(q_, u_);
 				Code<RequestIntent> w_ = WeeksRescreen?.IntentElement;
 				RequestIntent? x_ = w_?.Value;
@@ -2266,7 +2266,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				FhirDateTime al_ = HTNInterventions?.AuthoredOnElement;
 				CqlDateTime am_ = context.Operators.Convert<CqlDateTime>(al_);
 				CqlInterval<CqlDateTime> an_ = this.Measurement_Period();
-				bool? ao_ = context.Operators.In<CqlDateTime>(am_, an_, "day");
+				bool? ao_ = context.Operators.In<CqlDateTime>(am_, an_, null);
 
 				return ao_;
 			};
@@ -2289,7 +2289,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				FhirDateTime ay_ = Medications?.AuthoredOnElement;
 				CqlDateTime az_ = context.Operators.Convert<CqlDateTime>(ay_);
 				CqlInterval<CqlDateTime> ba_ = this.Measurement_Period();
-				bool? bb_ = context.Operators.In<CqlDateTime>(az_, ba_, "day");
+				bool? bb_ = context.Operators.In<CqlDateTime>(az_, ba_, null);
 				Code<MedicationRequest.MedicationrequestStatus> bc_ = Medications?.StatusElement;
 				MedicationRequest.MedicationrequestStatus? bd_ = bc_?.Value;
 				string be_ = context.Operators.Convert<string>(bd_);
@@ -2326,7 +2326,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
 				Period o_ = SecondHTNEncounterReading140Over90?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
-				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, "day");
+				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, null);
 
 				return q_;
 			};
@@ -2347,7 +2347,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
 				Period y_ = SecondHTNEncounterReading140Over90?.Period;
 				CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
-				bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
+				bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, null);
 
 				return aa_;
 			};
@@ -2406,7 +2406,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
 				Period r_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
-				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, "day");
+				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, null);
 				bool? u_(Extension @this)
 				{
 					string at_ = @this?.Url;
@@ -2783,7 +2783,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ay_ = context.Operators.Convert<CqlDateTime>(ax_);
 				Period az_ = ElevatedBPEncounter?.Period;
 				CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_3_000.ToInterval(az_);
-				bool? bb_ = context.Operators.In<CqlDateTime>(ay_, ba_, "day");
+				bool? bb_ = context.Operators.In<CqlDateTime>(ay_, ba_, null);
 				bool? bc_ = context.Operators.And(aw_, bb_);
 				Code<RequestStatus> bd_ = ElevatedBPDeclinedInterventions?.StatusElement;
 				RequestStatus? be_ = bd_?.Value;
@@ -2810,7 +2810,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime bt_ = context.Operators.Convert<CqlDateTime>(bs_);
 				Period bu_ = ElevatedBPEncounter?.Period;
 				CqlInterval<CqlDateTime> bv_ = FHIRHelpers_4_3_000.ToInterval(bu_);
-				bool? bw_ = context.Operators.In<CqlDateTime>(bt_, bv_, "day");
+				bool? bw_ = context.Operators.In<CqlDateTime>(bt_, bv_, null);
 
 				return bw_;
 			};
@@ -2865,7 +2865,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime cw_ = context.Operators.Convert<CqlDateTime>(cv_);
 				Period cx_ = FirstHTNEncounter?.Period;
 				CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_3_000.ToInterval(cx_);
-				bool? cz_ = context.Operators.In<CqlDateTime>(cw_, cy_, "day");
+				bool? cz_ = context.Operators.In<CqlDateTime>(cw_, cy_, null);
 				bool? da_ = context.Operators.And(cu_, cz_);
 				Code<RequestStatus> db_ = FirstHTNDeclinedInterventions?.StatusElement;
 				RequestStatus? dc_ = db_?.Value;
@@ -2892,7 +2892,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime dr_ = context.Operators.Convert<CqlDateTime>(dq_);
 				Period ds_ = FirstHTNEncounter?.Period;
 				CqlInterval<CqlDateTime> dt_ = FHIRHelpers_4_3_000.ToInterval(ds_);
-				bool? du_ = context.Operators.In<CqlDateTime>(dr_, dt_, "day");
+				bool? du_ = context.Operators.In<CqlDateTime>(dr_, dt_, null);
 
 				return du_;
 			};
@@ -2916,7 +2916,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime eb_ = context.Operators.Convert<CqlDateTime>(ea_);
 				Period ec_ = SecondHTNEncounter?.Period;
 				CqlInterval<CqlDateTime> ed_ = FHIRHelpers_4_3_000.ToInterval(ec_);
-				bool? ee_ = context.Operators.In<CqlDateTime>(eb_, ed_, "day");
+				bool? ee_ = context.Operators.In<CqlDateTime>(eb_, ed_, null);
 
 				return ee_;
 			};
@@ -2938,7 +2938,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime el_ = context.Operators.LateBoundProperty<CqlDateTime>(ek_, "value");
 				Period em_ = SecondHTN140Over90Encounter?.Period;
 				CqlInterval<CqlDateTime> en_ = FHIRHelpers_4_3_000.ToInterval(em_);
-				bool? eo_ = context.Operators.In<CqlDateTime>(el_, en_, "day");
+				bool? eo_ = context.Operators.In<CqlDateTime>(el_, en_, null);
 
 				return eo_;
 			};

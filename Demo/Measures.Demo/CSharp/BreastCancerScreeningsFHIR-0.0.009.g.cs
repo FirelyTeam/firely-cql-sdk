@@ -324,7 +324,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
 
 		return h_;
 	}
@@ -342,7 +342,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context.Operators.Interval(51, 74, true, false);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 		Code<AdministrativeGender> l_ = a_?.GenderElement;
@@ -594,7 +594,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		CqlInterval<CqlDateTime> z_ = this.Measurement_Period();
 		CqlDateTime aa_ = context.Operators.Start(z_);
 		CqlDate ab_ = context.Operators.DateFrom(aa_);
-		int? ac_ = context.Operators.CalculateAgeAt(y_, ab_, "year");
+		int? ac_ = context.Operators.CalculateAgeAt(y_, ab_, null);
 		bool? ad_ = context.Operators.GreaterOrEqual(ac_, 65);
 		bool? ae_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
 		bool? af_ = context.Operators.And(ad_, ae_);

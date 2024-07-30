@@ -136,7 +136,7 @@ public class PalliativeCare_1_9_000
 			object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 			CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_0_000.toInterval(ac_);
 			CqlInterval<CqlDateTime> ae_ = this.Measurement_Period();
-			bool? af_ = context.Operators.Overlaps(ad_, ae_, "day");
+			bool? af_ = context.Operators.Overlaps(ad_, ae_, null);
 
 			return af_;
 		};
@@ -148,7 +148,7 @@ public class PalliativeCare_1_9_000
 		{
 			CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.prevalenceInterval(PalliativeDiagnosis);
 			CqlInterval<CqlDateTime> ah_ = this.Measurement_Period();
-			bool? ai_ = context.Operators.Overlaps(ag_, ah_, "day");
+			bool? ai_ = context.Operators.Overlaps(ag_, ah_, null);
 
 			return ai_;
 		};
@@ -164,7 +164,7 @@ public class PalliativeCare_1_9_000
 			CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
 			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.toInterval((ak_ as object));
 			CqlInterval<CqlDateTime> am_ = this.Measurement_Period();
-			bool? an_ = context.Operators.Overlaps(al_, am_, "day");
+			bool? an_ = context.Operators.Overlaps(al_, am_, null);
 
 			return an_;
 		};
@@ -180,7 +180,7 @@ public class PalliativeCare_1_9_000
 			object ap_ = FHIRHelpers_4_3_000.ToValue(ao_);
 			CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_0_000.toInterval(ap_);
 			CqlInterval<CqlDateTime> ar_ = this.Measurement_Period();
-			bool? as_ = context.Operators.Overlaps(aq_, ar_, "day");
+			bool? as_ = context.Operators.Overlaps(aq_, ar_, null);
 
 			return as_;
 		};

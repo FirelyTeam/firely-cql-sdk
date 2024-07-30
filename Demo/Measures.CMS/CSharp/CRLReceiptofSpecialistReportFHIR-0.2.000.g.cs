@@ -198,7 +198,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			CqlInterval<CqlDateTime> y_ = this.Measurement_Period();
 			Period z_ = Encounter?.Period;
 			CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(z_);
-			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, "day");
+			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, null);
 			bool? ac_ = context.Operators.And(x_, ab_);
 
 			return ac_;
@@ -239,11 +239,11 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			CqlInterval<CqlDateTime> w_ = this.Measurement_Period();
 			CqlDateTime x_ = context.Operators.Start(w_);
 			CqlDateTime z_ = context.Operators.Start(w_);
-			int? aa_ = context.Operators.DateTimeComponentFrom(z_, "year");
+			int? aa_ = context.Operators.DateTimeComponentFrom(z_, null);
 			CqlDate ab_ = context.Operators.Date(aa_, 10, 31);
 			CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(ab_);
 			CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(x_, ac_, true, true);
-			bool? ae_ = context.Operators.In<CqlDateTime>(v_, ad_, "day");
+			bool? ae_ = context.Operators.In<CqlDateTime>(v_, ad_, null);
 			bool? af_ = context.Operators.And(t_, ae_);
 
 			return af_;
@@ -396,7 +396,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(o_);
 				CqlDateTime ab_ = context.Operators.End(aa_);
 				CqlInterval<CqlDateTime> ac_ = this.Measurement_Period();
-				bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");
+				bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, null);
 				bool? ae_ = context.Operators.And(y_, ad_);
 
 				return ae_;

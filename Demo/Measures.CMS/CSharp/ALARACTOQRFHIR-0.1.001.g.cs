@@ -163,7 +163,7 @@ public class ALARACTOQRFHIR_0_1_001
 			CqlDate n_ = context.Operators.ConvertStringToDate(m_);
 			CqlDateTime p_ = context.Operators.Start(f_);
 			CqlDate q_ = context.Operators.DateFrom(p_);
-			int? r_ = context.Operators.CalculateAgeAt(n_, q_, "year");
+			int? r_ = context.Operators.CalculateAgeAt(n_, q_, null);
 			bool? s_ = context.Operators.GreaterOrEqual(r_, 18);
 			bool? t_ = context.Operators.And(j_, s_);
 
