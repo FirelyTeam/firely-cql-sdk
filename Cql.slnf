@@ -23,7 +23,8 @@
       "Cql\\Elm\\Elm.csproj",
       "Cql\\Iso8601\\Iso8601.csproj",
       "Cql\\MultiPackagerCLI\\MultiPackagerCLI.csproj",
-      "Cql\\PackagerCLI\\PackagerCLI.csproj"
+      "Cql\\PackagerCLI\\PackagerCLI.csproj",
+      "Cql\\ToolsTest\\ToolsTest.csproj"
     ]
   }
 }

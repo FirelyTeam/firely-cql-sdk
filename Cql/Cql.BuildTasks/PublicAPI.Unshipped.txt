@@ -1,0 +1,9 @@
+﻿Hl7.Cql.Tools.BuildTasks.CqlToElm
+Hl7.Cql.Tools.BuildTasks.CqlToElm.CqlToElm() -> void
+Hl7.Cql.Tools.BuildTasks.CqlToElm.ELM.get -> Microsoft.Build.Framework.ITaskItem[]
+Hl7.Cql.Tools.BuildTasks.CqlToElm.ELM.set -> void
+Hl7.Cql.Tools.BuildTasks.CqlToElm.Options.get -> Microsoft.Build.Framework.ITaskItem
+Hl7.Cql.Tools.BuildTasks.CqlToElm.Options.set -> void
+Hl7.Cql.Tools.BuildTasks.CqlToElm.Sources.get -> Microsoft.Build.Framework.ITaskItem[]
+Hl7.Cql.Tools.BuildTasks.CqlToElm.Sources.set -> void
+override Hl7.Cql.Tools.BuildTasks.CqlToElm.Execute() -> bool

@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.Elm;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.LibraryProviders
 {
-    internal class VersionedIdentifierDictionary<T>
+    internal class VersionedIdentifierDictionary<T> : IEnumerable<KeyValuePair<VersionedIdentifier, IEnumerable<T>>>
     {
         internal VersionedIdentifierDictionary(StringComparer? idComparer = null)
         {
@@ -77,6 +78,21 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                 versions.Add(version, ts);
             }
             ts.Add(t);
+        }
+
+        public IEnumerator<KeyValuePair<VersionedIdentifier, IEnumerable<T>>> GetEnumerator() => Enumerate().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => Enumerate().GetEnumerator();
+
+        private IEnumerable<KeyValuePair<VersionedIdentifier, IEnumerable<T>>> Enumerate()
+        {
+            foreach (var kvp1 in Versions)
+            {
+                foreach (var kvp2 in kvp1.Value)
+                {
+                    var vi = new VersionedIdentifier { id = kvp1.Key, version = kvp2.Key };
+                    yield return KeyValuePair.Create(vi, kvp2.Value as IEnumerable<T>);
+                }
+            }
         }
 
     }

@@ -44,7 +44,6 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
             ScanDirectory();
         }
 
-
         internal void ScanDirectory()
         {
             if (Configuration.AssumeInputExtensions ?? true)
@@ -109,13 +108,11 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                 }
             }
         }
-
         public DirectoryInfo RootDirectory { get; }
         public CqlToElmConverter Converter { get; }
         private StreamInspector StreamInspector { get; }
         public IServiceProvider Services { get; }
         private CqlToElmOptions Configuration { get; }
-
 
         private class LibraryInfo
         {
@@ -135,7 +132,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
         {
             if (TryResolveLibrary(libraryName, version, out _, out _))
                 return false;
-            var info = new LibraryInfo(new FileInfo("in-memory"), library);
+            var info = new LibraryInfo(location, library);
             Libraries.Add(libraryName, version, info);
             LibrariesByFile.Add(location, info);
             return true;
@@ -181,5 +178,9 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                 return false;
             }
         }
+
+        public IEnumerable<LibraryBuilder> All => Libraries!
+            .SelectMany(kvp => kvp.Value.Select(li => li.library!))
+            .Where(lb => lb is not null);
     }
 }

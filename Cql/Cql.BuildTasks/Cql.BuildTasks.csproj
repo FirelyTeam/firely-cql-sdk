@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\cql-sdk.props" />
+
+	<PropertyGroup>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+
+		<AssemblyName>Hl7.Cql.Tools.BuildTasks</AssemblyName>
+		<RootNamespace>Hl7.Cql.Tools.BuildTasks</RootNamespace>
+		<Product>MSBuild tasks</Product>
+		<Description>Provides build tasks for CQL-to-ELM and ELM-to-C#</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" PrivateAssets="all" />
+		<PackageReference Include="Hl7.Fhir.Base" Version="5.7.0" PrivateAssets="all" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="5.7.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Build.Framework" Version="17.10.4" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.10.4" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
+		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
+		<ProjectReference Include="..\Cql.CqlToElm\Cql.CqlToElm.csproj" PrivateAssets="all" />
+		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" PrivateAssets="all" />
+		<ProjectReference Include="..\Elm\Elm.csproj" PrivateAssets="all" />
+		<InternalsVisibleTo Include="ToolsTest" Key="$(LibraryPKHash)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="build\" />
+	</ItemGroup>
+
+
+</Project>
+ 
