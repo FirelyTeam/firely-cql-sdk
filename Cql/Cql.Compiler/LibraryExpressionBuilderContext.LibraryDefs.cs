@@ -37,7 +37,7 @@ partial class LibraryExpressionBuilderContext
         {
             string libraryName = library.NameAndVersion()!;
             if (!HasAliasForNameAndVersion(libraryName))
-                throw new LibraryDoesNotAppearAsADependencyError(library).ToException();
+                throw new CouldNotResolveAliasFromTheLibraryNameAndVersionError(library).ToException();
 
             if (LibrarySetContext!.LibrarySetDefinitions.TryGetDefinitionsForLibrary(
                     libraryName,

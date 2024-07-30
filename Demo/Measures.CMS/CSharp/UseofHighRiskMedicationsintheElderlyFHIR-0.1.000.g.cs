@@ -823,7 +823,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 65);
 		IEnumerable<Encounter> j_ = this.Qualifying_Encounters();
 		bool? k_ = context.Operators.Exists<Encounter>(j_);

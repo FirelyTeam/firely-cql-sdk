@@ -308,14 +308,14 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(z_);
 				CqlDateTime ab_ = context.Operators.Start(aa_);
 				CqlDate ac_ = context.Operators.DateFrom(ab_);
-				int? ad_ = context.Operators.CalculateAgeAt(y_, ac_, "year");
+				int? ad_ = context.Operators.CalculateAgeAt(y_, ac_, null);
 				CqlInterval<int?> ae_ = context.Operators.Interval(65, 94, true, true);
 				bool? af_ = context.Operators.In<int?>(ad_, ae_, null);
 				bool? ag_ = context.Operators.And(u_, af_);
 				CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_3_000.ToInterval(z_);
 				CqlDateTime aj_ = context.Operators.End(ai_);
 				CqlInterval<CqlDateTime> ak_ = this.Measurement_Period();
-				bool? al_ = context.Operators.In<CqlDateTime>(aj_, ak_, "day");
+				bool? al_ = context.Operators.In<CqlDateTime>(aj_, ak_, null);
 				bool? am_ = context.Operators.And(ag_, al_);
 
 				return am_;

@@ -2432,7 +2432,7 @@ public class QICoreCommon_2_0_000
 	{
 		CqlDateTime a_ = context.Operators.Start(Period);
 		CqlDateTime b_ = context.Operators.End(Period);
-		int? c_ = context.Operators.DurationBetween(a_, b_, "day");
+		int? c_ = context.Operators.DurationBetween(a_, b_, null);
 		CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
 		CqlInterval<int?>[] e_ = new CqlInterval<int?>[]
 		{
@@ -2456,7 +2456,7 @@ public class QICoreCommon_2_0_000
 	{
 		CqlDateTime a_ = context.Operators.Start(Period);
 		CqlDateTime b_ = context.Operators.End(Period);
-		int? c_ = context.Operators.DurationBetween(a_, b_, "day");
+		int? c_ = context.Operators.DurationBetween(a_, b_, null);
 		CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
 		CqlInterval<int?>[] e_ = new CqlInterval<int?>[]
 		{
@@ -2499,7 +2499,7 @@ public class QICoreCommon_2_0_000
 					CqlQuantity r_ = context.Operators.Multiply(o_, q_);
 					CqlDateTime s_ = context.Operators.Add(n_, r_);
 					CqlDateTime t_ = context.Operators.End(Period);
-					int? u_ = context.Operators.DurationBetween(s_, t_, "hour");
+					int? u_ = context.Operators.DurationBetween(s_, t_, null);
 					bool? v_ = context.Operators.Less(u_, 24);
 
 					return (v_ ?? false);
@@ -2564,7 +2564,7 @@ public class QICoreCommon_2_0_000
 					CqlQuantity r_ = context.Operators.Multiply(o_, q_);
 					CqlDateTime s_ = context.Operators.Add(n_, r_);
 					CqlDateTime t_ = context.Operators.End(Period);
-					int? u_ = context.Operators.DurationBetween(s_, t_, "hour");
+					int? u_ = context.Operators.DurationBetween(s_, t_, null);
 					bool? v_ = context.Operators.Less(u_, 24);
 
 					return (v_ ?? false);
