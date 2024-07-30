@@ -51,7 +51,8 @@ internal partial class LibraryExpressionBuilderContext
         {
             _logger.LogInformation("Preprocessing library '{library}'", LibraryKey);
             var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryKey, Library);
-            ElmPreprocessor.Process(Library, ls);
+            var processor = new ElmPreprocessor(ls);
+            processor.Process(Library);
 
             _logger.LogInformation("Building expressions for '{library}'", LibraryKey);
 

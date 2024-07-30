@@ -66,7 +66,7 @@ public class TestElmResolution
     }
 
     [TestMethod]
-    public void CreateMethoudGroup()
+    public void CreateOverloadedDefs()
     {
         var lib = new Library
         {
@@ -88,9 +88,9 @@ public class TestElmResolution
 
         var libset = new LibrarySet(name: "Test", lib);
 
-        libset.TryResolveDefinition(lib, "Println", null, out ExpressionDef def).Should().BeTrue();
-        var group = def.Should().BeOfType<MethodGroup>().Subject;
-        group.Methods.Should().HaveCount(2);
+        libset.TryResolveDefinition(lib, "Println", null, out IFunctionElement def).Should().BeTrue();
+        var group = def.Should().BeOfType<OverloadedFunctionDef>().Subject;
+        group.Functions.Should().HaveCount(2);
     }
 
     [TestMethod]

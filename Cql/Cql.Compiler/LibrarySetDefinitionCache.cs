@@ -10,6 +10,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 
@@ -76,7 +77,13 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
             Index(cache.GetIndexForType<ValueSetDef>(), library, library.valueSets);
             Index(cache.GetIndexForType<CodeDef>(), library, library.codes);
             Index(cache.GetIndexForType<ConceptDef>(), library, library.concepts);
-            Index(cache.GetIndexForType<ExpressionDef>(), library, library.statements);
+
+            // Give expressions and functions a separate namespace.
+            var expressionDefs = library.statements?.Where(s => s.GetType() == typeof(ExpressionDef)).ToArray();
+            Index(cache.GetIndexForType<ExpressionDef>(), library, expressionDefs);
+
+            var functionDefs = library.statements?.OfType<FunctionDef>().Cast<IFunctionElement>().ToArray();
+            Index(cache.GetIndexForType<IFunctionElement>(), library, functionDefs);
 
             return cache;
         }
@@ -117,21 +124,21 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
                         definition.Name ?? throw new LibraryDefinitionHasNoName(library, definition).ToException(),
                         definition)) continue;
 
-                // We have a duplicate, this is ok for ExpressionDefs (=overloads), otherwise report
+                // We have a duplicate, this is ok for functions (=overloads), otherwise report
                 // an error.
-                if (definition is not ExpressionDef expr || result[definition.Name] is not ExpressionDef existing)
+                if (definition is not FunctionDef expr || result[definition.Name] is not IFunctionElement existing)
                     throw new LibraryHasDuplicateDefinition(library, definition).ToException();
 
-                if (existing is MethodGroup methodGroup)
+                if (existing is OverloadedFunctionDef methodGroup)
                 {
                     // We have another overload for a MethodGroup, add it to the method group.
-                    methodGroup.Methods.Add(expr);
+                    methodGroup.Add(expr);
                 }
                 else
                 {
                     // We have the first overload, convert the ExpressionDef to a MethodGroup
                     // and add both methods
-                    var newGroup = new MethodGroup(definition.Name, [existing, expr]);
+                    var newGroup = OverloadedFunctionDef.Create(existing, expr);
                     result[definition.Name] = (T)(object)newGroup;
                 }
             }

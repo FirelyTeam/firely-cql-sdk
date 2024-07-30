@@ -13,7 +13,7 @@ public class TestElmPreprocessor()
     [TestMethod]
     public void TestAddResultTypeSpecifierNoSignatureNeeded()
     {
-        var lib = ProcessWithFunctions(
+        var lib = ProcessWithStatements(
             [
                 new FunctionDef { name = "add", resultTypeSpecifier = SystemTypes.IntegerType,
                     expression = new Add { operand = [new FunctionRef { name ="getNumA" }, new FunctionRef { name = "getNumA" }] } },
@@ -45,10 +45,18 @@ public class TestElmPreprocessor()
     [TestMethod]
     public void TestAddResultTypeSpecifierWithSignature()
     {
-        var lib = ProcessWithFunctions(
+        var lib = ProcessWithStatements(
             [
                 new FunctionDef { name = "add", resultTypeName = SystemTypes.IntegerType.TryToQualifiedName(),
-                    expression = new Add { operand = [new FunctionRef { name ="getNumA", signature = [SystemTypes.IntegerType]}, new FunctionRef { name = "getNumA", signature = [SystemTypes.BooleanType] }] } },
+                    expression = new Add
+                    {
+                        operand =
+                        [
+                            new FunctionRef { name = "getNumA", signature = [SystemTypes.IntegerType] },
+                            new FunctionRef { name = "getNumA", signature = [SystemTypes.BooleanType] }
+                        ]
+                    }
+                },
                 _getNumADefInt, _getNumADefBool
             ]
         );
@@ -64,7 +72,7 @@ public class TestElmPreprocessor()
     [TestMethod]
     public void TestAddResultTypeSpecifierWithoutSignature()
     {
-        var lib = ProcessWithFunctions(
+        var lib = ProcessWithStatements(
             [
                 new FunctionDef { name = "add", resultTypeName = SystemTypes.IntegerType.TryToQualifiedName(),
                     expression = new Add { operand =
@@ -83,7 +91,35 @@ public class TestElmPreprocessor()
         addExpression.operand[1].GetTypeSpecifier().Should().Be(SystemTypes.BooleanType);
     }
 
-    private static Library ProcessWithFunctions(IEnumerable<ExpressionDef> defs)
+
+    [TestMethod]
+    public void TestAddResultTypeSpecifierWithDefinition()
+    {
+        var lib = ProcessWithStatements(
+            [
+                new FunctionDef { name = "add", resultTypeSpecifier = SystemTypes.IntegerType,
+                    expression = new Add
+                    {
+                        operand =
+                        [
+                            new ExpressionRef { name = "getNumA" },
+                            new ExpressionRef { name = "getNumA" }
+                        ]
+                    }
+                },
+                new ExpressionDef { name = "getNumA", resultTypeSpecifier = SystemTypes.IntegerType },
+            ]
+        );
+
+        // Assert
+        var addExpression = lib.statements.Select(s => s as FunctionDef).Single(fd => fd?.name == "add")
+                               .expression.Should().BeOfType<Add>().Subject;
+        addExpression.operand[0].GetTypeSpecifier().Should().Be(SystemTypes.IntegerType);
+        addExpression.operand[1].GetTypeSpecifier().Should().Be(SystemTypes.IntegerType);
+    }
+
+
+    private static Library ProcessWithStatements(IEnumerable<ExpressionDef> defs)
     {
         var lib = new Library
         {
@@ -93,7 +129,8 @@ public class TestElmPreprocessor()
 
         var lset = new LibrarySet(name: "test", lib);
 
-        ElmPreprocessor.Process(lib, lset);
+        var preprocessor = new ElmPreprocessor(lset);
+        preprocessor.Process(lib);
         return lib;
     }
 }

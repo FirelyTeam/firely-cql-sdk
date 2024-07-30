@@ -28,6 +28,17 @@ namespace Hl7.Cql.Elm
                                              throw new UntypedOperandInFunctionRefError(funcRef, i).ToException()
             ).ToArray();
 
+        internal static IReadOnlyCollection<IHasSignature> FilterOverloads(this OverloadedFunctionDef overloads, TypeSpecifier[] signature)
+        {
+            return overloads.Functions.Where(match).ToArray();
+
+            bool match(IHasSignature candidate) =>
+                candidate.BuildSignatureFromOperands().ExactlyMatches(signature);
+        }
+
+        internal static TypeSpecifier? GetTypeSpecifier(this IHasSignature func) =>
+            func.ResultTypeSpecifier ?? (func is Element e ? e.GetTypeSpecifier() : null);
+
         /// <summary>
         /// Compares two signatures for exact equality, based on the Equals of the TypeSpecifier.
         /// </summary>
