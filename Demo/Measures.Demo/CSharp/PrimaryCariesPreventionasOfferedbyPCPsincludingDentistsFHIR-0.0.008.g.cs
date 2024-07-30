@@ -308,14 +308,14 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "month");
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
 		Date k_ = a_?.BirthDateElement;
 		string l_ = k_?.Value;
 		CqlDate m_ = context.Operators.ConvertStringToDate(l_);
 		CqlDateTime o_ = context.Operators.Start(e_);
 		CqlDate p_ = context.Operators.DateFrom(o_);
-		int? q_ = context.Operators.CalculateAgeAt(m_, p_, "year");
+		int? q_ = context.Operators.CalculateAgeAt(m_, p_, null);
 		bool? r_ = context.Operators.Less(q_, 20);
 		bool? s_ = context.Operators.And(i_, r_);
 		IEnumerable<Encounter> t_ = this.Qualifying_Encounters();
@@ -360,14 +360,14 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "month");
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 6);
 		Date k_ = a_?.BirthDateElement;
 		string l_ = k_?.Value;
 		CqlDate m_ = context.Operators.ConvertStringToDate(l_);
 		CqlDateTime o_ = context.Operators.Start(e_);
 		CqlDate p_ = context.Operators.DateFrom(o_);
-		int? q_ = context.Operators.CalculateAgeAt(m_, p_, "year");
+		int? q_ = context.Operators.CalculateAgeAt(m_, p_, null);
 		bool? r_ = context.Operators.LessOrEqual(q_, 4);
 		bool? s_ = context.Operators.And(i_, r_);
 
@@ -387,7 +387,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context.Operators.Interval(5, 11, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 
@@ -407,7 +407,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context.Operators.Interval(12, 20, true, false);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 

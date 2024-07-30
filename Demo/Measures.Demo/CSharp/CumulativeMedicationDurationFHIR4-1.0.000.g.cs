@@ -1079,7 +1079,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 		{
 			CqlDateTime e_ = context.Operators.Start(X);
 			CqlDateTime f_ = context.Operators.End(X);
-			int? g_ = context.Operators.DifferenceBetween(e_, f_, "day");
+			int? g_ = context.Operators.DifferenceBetween(e_, f_, null);
 
 			return g_;
 		};
@@ -1120,7 +1120,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				};
 				CqlDateTime v_ = context.Operators.Max<CqlDateTime>((u_ as IEnumerable<CqlDateTime>));
 				CqlDateTime x_ = context.Operators.End(X);
-				int? y_ = context.Operators.DurationBetween(m_, x_, "day");
+				int? y_ = context.Operators.DurationBetween(m_, x_, null);
 				decimal? z_ = context.Operators.ConvertIntegerToDecimal((y_ ?? 0));
 				CqlDateTime aa_ = context.Operators.Add(v_, new CqlQuantity(z_, "day"));
 				CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(o_, aa_, true, true);

@@ -605,7 +605,7 @@ public class HIVRetentionFHIR_0_1_000
 			CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, true, true);
 			Period aq_ = QualifyingEncounter?.Period;
 			CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_3_000.ToInterval(aq_);
-			bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
+			bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, null);
 
 			return as_;
 		};
@@ -711,7 +711,7 @@ public class HIVRetentionFHIR_0_1_000
 					}
 				};
 				CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_3_000.ToInterval(ap_);
-				bool? av_ = context.Operators.SameOrBefore(as_(), au_, "day");
+				bool? av_ = context.Operators.SameOrBefore(as_(), au_, null);
 				bool? aw_ = context.Operators.And(ar_, av_);
 				bool? ax_ = QICoreCommon_2_0_000.isActive(HIVDiagnosis);
 				bool? ay_ = context.Operators.And(aw_, ax_);
@@ -744,7 +744,7 @@ public class HIVRetentionFHIR_0_1_000
 			DataType g_ = ViralLoadTest?.Effective;
 			object h_ = FHIRHelpers_4_3_000.ToValue(g_);
 			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToInterval(h_);
-			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
+			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, null);
 
 			return j_;
 		};
@@ -780,14 +780,14 @@ public class HIVRetentionFHIR_0_1_000
 				CqlDateTime v_ = context.Operators.End(u_);
 				CqlQuantity w_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime x_ = context.Operators.Add(v_, w_);
-				bool? y_ = context.Operators.SameOrAfter(s_, x_, "day");
+				bool? y_ = context.Operators.SameOrAfter(s_, x_, null);
 				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(t_);
 				CqlDateTime ab_ = context.Operators.Start(aa_);
 				object ad_ = FHIRHelpers_4_3_000.ToValue(l_);
 				CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_);
 				CqlDateTime af_ = context.Operators.End(ae_);
 				CqlDateTime ah_ = context.Operators.Add(af_, w_);
-				bool? ai_ = context.Operators.SameOrAfter(ab_, ah_, "day");
+				bool? ai_ = context.Operators.SameOrAfter(ab_, ah_, null);
 				bool? aj_ = context.Operators.Or(y_, ai_);
 				bool? ak_ = context.Operators.And(o_, aj_);
 
@@ -828,7 +828,7 @@ public class HIVRetentionFHIR_0_1_000
 				CqlDateTime q_ = context.Operators.End(p_);
 				CqlQuantity r_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime s_ = context.Operators.Add(q_, r_);
-				bool? t_ = context.Operators.SameOrAfter(n_, s_, "day");
+				bool? t_ = context.Operators.SameOrAfter(n_, s_, null);
 				bool? u_ = context.Operators.And(k_, t_);
 
 				return u_;
