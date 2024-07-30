@@ -51,7 +51,9 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
     private LibraryCache GetLibraryCache(Library context, string? libraryAlias)
     {
         var contextCache = GetLibraryCache(context);
-        if (libraryAlias is null) return contextCache;
+
+        if (libraryAlias is null)
+            return contextCache;
 
         // If a library alias is provided, we need to return the cache for
         // the alias, as defined in the includes in the context Library.
@@ -59,6 +61,7 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
             throw new LibraryAliasUnresolvedError(context, libraryAlias).ToException();
 
         var aliasedLibrary = parent.GetLibrary(includeDef.NameAndVersion()!)!;
+
         return GetLibraryCache(aliasedLibrary);
     }
 
@@ -91,9 +94,12 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
 
         private IDictionary<string, T> GetIndexForType<T>()
         {
-            if (_cache.TryGetValue(typeof(T), out var index)) return (IDictionary<string, T>)index;
+            if (_cache.TryGetValue(typeof(T), out var index))
+                return (IDictionary<string, T>)index;
+
             var newIndex = new Dictionary<string, T>();
             _cache.Add(typeof(T), newIndex);
+
             return newIndex;
         }
 
@@ -102,7 +108,8 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
             Library library,
             T[]? definitions) where T : IDefinitionElement
         {
-            if (definitions is not { Length: > 0 }) return;
+            if (definitions is not { Length: > 0 })
+                return;
 
             foreach (var definition in definitions)
             {
