@@ -212,7 +212,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 		];
 
@@ -373,7 +373,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		{
 			Code<ObservationStatus> h_ = RecentHbA1c.StatusElement;
 			string i_ = FHIRHelpers_4_0_001.ToString(h_);
-			string[] j_ = /* ARR1 */ [
+			string[] j_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -443,7 +443,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		{
 			Code<ObservationStatus> g_ = NoHbA1c.StatusElement;
 			string h_ = FHIRHelpers_4_0_001.ToString(g_);
-			string[] i_ = /* ARR1 */ [
+			string[] i_ = [
 				"final",
 				"amended",
 				"corrected",

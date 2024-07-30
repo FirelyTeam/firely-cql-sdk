@@ -130,7 +130,7 @@ public class SupplementalDataElements_3_4_000
 		};
 		IEnumerable<Extension> c_ = context?.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		Extension d_ = context?.Operators.SingletonFrom<Extension>(c_);
-		Extension[] e_ = /* ARR1 */ [
+		Extension[] e_ = [
 			d_,
 		];
 		(IEnumerable<CqlCode> codes, string display)? f_(Extension E)
@@ -157,7 +157,7 @@ public class SupplementalDataElements_3_4_000
 			DataType u_ = context?.Operators.SingletonFrom<DataType>(t_);
 			Coding v_ = context?.Operators.Convert<Coding>(u_);
 			CqlCode w_ = FHIRHelpers_4_3_000.ToCode(v_);
-			CqlCode[] x_ = /* ARR1 */ [
+			CqlCode[] x_ = [
 				w_,
 			];
 			bool? y_(Extension @this)
@@ -279,7 +279,7 @@ public class SupplementalDataElements_3_4_000
 		};
 		IEnumerable<Extension> c_ = context?.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		Extension d_ = context?.Operators.SingletonFrom<Extension>(c_);
-		Extension[] e_ = /* ARR1 */ [
+		Extension[] e_ = [
 			d_,
 		];
 		(IEnumerable<CqlCode> codes, string display)? f_(Extension R)

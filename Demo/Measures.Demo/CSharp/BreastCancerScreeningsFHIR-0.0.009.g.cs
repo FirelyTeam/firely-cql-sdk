@@ -616,7 +616,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		{
 			Code<ObservationStatus> f_ = Mammogram.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string[] h_ = /* ARR1 */ [
+			string[] h_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -658,7 +658,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		{
 			Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string[] h_ = /* ARR1 */ [
+			string[] h_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -731,7 +731,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		{
 			Code<ObservationStatus> f_ = Mammogram.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string[] h_ = /* ARR1 */ [
+			string[] h_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -774,7 +774,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		{
 			Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string[] h_ = /* ARR1 */ [
+			string[] h_ = [
 				"final",
 				"amended",
 				"corrected",

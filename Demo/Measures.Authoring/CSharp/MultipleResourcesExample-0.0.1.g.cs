@@ -74,7 +74,7 @@ public class MultipleResourcesExample_0_0_1
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("72166-2", "http://loinc.org", null, null),
 		];
 
@@ -106,7 +106,7 @@ public class MultipleResourcesExample_0_0_1
 		{
 			Code<ObservationStatus> f_ = O.StatusElement;
 			string g_ = FHIRHelpers_4_3_000.ToString(f_);
-			string[] h_ = /* ARR1 */ [
+			string[] h_ = [
 				"final",
 				"amended",
 			];

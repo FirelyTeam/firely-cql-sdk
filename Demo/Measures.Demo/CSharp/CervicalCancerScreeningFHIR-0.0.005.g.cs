@@ -188,7 +188,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 		];
 
@@ -414,7 +414,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		{
 			Code<ObservationStatus> e_ = CervicalCytology.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -469,7 +469,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		{
 			Code<ObservationStatus> e_ = HPVTest.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -546,7 +546,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 	{
 		Code<ObservationStatus> a_ = observation.StatusElement;
 		string b_ = FHIRHelpers_4_0_001.ToString(a_);
-		string[] c_ = /* ARR1 */ [
+		string[] c_ = [
 			"final",
 			"amended",
 			"corrected",

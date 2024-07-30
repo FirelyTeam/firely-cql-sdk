@@ -108,7 +108,7 @@ public class VTE_8_6_000
 			IEnumerable<Condition> d_ = CQMCommon_2_0_000.encounterDiagnosis(InpatientEncounter);
 			bool? e_(Condition EncDx)
 			{
-				CodeableConcept i_ = EncDx.Code;
+				CodeableConcept i_ = EncDx?.Code;
 				CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 				CqlValueSet k_ = this.Obstetrical_or_Pregnancy_Related_Conditions();
 				bool? l_ = context?.Operators.ConceptInValueSet(j_, k_);
@@ -144,10 +144,10 @@ public class VTE_8_6_000
 		bool? b_(Encounter InpatientEncounter)
 		{
 			Patient f_ = this.Patient();
-			Date g_ = f_.BirthDateElement;
-			string h_ = g_.Value;
+			Date g_ = f_?.BirthDateElement;
+			string h_ = g_?.Value;
 			CqlDate i_ = context?.Operators.ConvertStringToDate(h_);
-			Period j_ = InpatientEncounter.Period;
+			Period j_ = InpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(j_);
 			CqlDateTime l_ = context?.Operators.Start(k_);
 			CqlDate m_ = context?.Operators.DateFrom(l_);
@@ -184,7 +184,7 @@ public class VTE_8_6_000
 		CqlInterval<CqlDateTime> a_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
 		CqlDateTime b_ = context?.Operators.Start(a_);
 		CqlDate c_ = context?.Operators.DateFrom(b_);
-		Period d_ = Encounter.Period;
+		Period d_ = Encounter?.Period;
 		CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_3_000.ToInterval(d_);
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
@@ -199,7 +199,7 @@ public class VTE_8_6_000
 	public CqlDateTime StartOfFirstICU(Encounter Encounter)
 	{
 		Encounter.LocationComponent a_ = CQMCommon_2_0_000.firstInpatientIntensiveCareUnit(Encounter);
-		Period b_ = a_.Period;
+		Period b_ = a_?.Period;
 		CqlInterval<CqlDateTime> c_ = FHIRHelpers_4_3_000.ToInterval(b_);
 		CqlDateTime d_ = context?.Operators.Start(c_);
 

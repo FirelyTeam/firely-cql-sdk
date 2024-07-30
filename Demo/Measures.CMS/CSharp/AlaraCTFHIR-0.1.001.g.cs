@@ -105,7 +105,7 @@ public class AlaraCTFHIR_0_1_001
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 			new CqlCode("96912-1", "http://loinc.org", null, null),
 			new CqlCode("96913-9", "http://loinc.org", null, null),
@@ -197,13 +197,13 @@ public class AlaraCTFHIR_0_1_001
 		bool? d_(Observation CTScanResult)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
-			DataType g_ = CTScanResult.Effective;
+			DataType g_ = CTScanResult?.Effective;
 			object h_ = FHIRHelpers_4_3_000.ToValue(g_);
 			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToInterval(h_);
 			bool? j_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, null);
 			Patient k_ = this.Patient();
-			Date l_ = k_.BirthDateElement;
-			string m_ = l_.Value;
+			Date l_ = k_?.BirthDateElement;
+			string m_ = l_?.Value;
 			CqlDateTime n_ = context?.Operators.ConvertStringToDateTime(m_);
 			CqlDateTime p_ = context?.Operators.Start(f_);
 			int? q_ = context?.Operators.CalculateAgeAt(n_, p_, null);
@@ -224,17 +224,17 @@ public class AlaraCTFHIR_0_1_001
     [CqlDeclaration("Global Noise Value")]
 	public decimal? Global_Noise_Value(Observation Obs)
 	{
-		List<Observation.ComponentComponent> a_ = Obs.Component;
+		List<Observation.ComponentComponent> a_ = Obs?.Component;
 		bool? b_(Observation.ComponentComponent C)
 		{
-			CodeableConcept g_ = C.Code;
+			CodeableConcept g_ = C?.Code;
 			CqlConcept h_ = FHIRHelpers_4_3_000.ToConcept(g_);
 			CqlCode i_ = this.Calculated_CT_global_noise();
 			CqlConcept j_ = context?.Operators.ConvertCodeToConcept(i_);
 			bool? k_ = context?.Operators.Equivalent(h_, j_);
-			DataType l_ = C.Value;
+			DataType l_ = C?.Value;
 			object m_ = FHIRHelpers_4_3_000.ToValue(l_);
-			string n_ = (m_ as CqlQuantity).unit;
+			string n_ = (m_ as CqlQuantity)?.unit;
 			bool? o_ = context?.Operators.Equal(n_, "[hnsf'U]");
 			bool? p_ = context?.Operators.And(k_, o_);
 
@@ -243,9 +243,9 @@ public class AlaraCTFHIR_0_1_001
 		IEnumerable<Observation.ComponentComponent> c_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
 		decimal? d_(Observation.ComponentComponent C)
 		{
-			DataType q_ = C.Value;
+			DataType q_ = C?.Value;
 			object r_ = FHIRHelpers_4_3_000.ToValue(q_);
-			decimal? s_ = (r_ as CqlQuantity).value;
+			decimal? s_ = (r_ as CqlQuantity)?.value;
 
 			return s_;
 		};
@@ -258,17 +258,17 @@ public class AlaraCTFHIR_0_1_001
     [CqlDeclaration("Size Adjusted Value")]
 	public decimal? Size_Adjusted_Value(Observation Obs)
 	{
-		List<Observation.ComponentComponent> a_ = Obs.Component;
+		List<Observation.ComponentComponent> a_ = Obs?.Component;
 		bool? b_(Observation.ComponentComponent C)
 		{
-			CodeableConcept g_ = C.Code;
+			CodeableConcept g_ = C?.Code;
 			CqlConcept h_ = FHIRHelpers_4_3_000.ToConcept(g_);
 			CqlCode i_ = this.Calculated_CT_size_adjusted_dose();
 			CqlConcept j_ = context?.Operators.ConvertCodeToConcept(i_);
 			bool? k_ = context?.Operators.Equivalent(h_, j_);
-			DataType l_ = C.Value;
+			DataType l_ = C?.Value;
 			object m_ = FHIRHelpers_4_3_000.ToValue(l_);
-			string n_ = (m_ as CqlQuantity).unit;
+			string n_ = (m_ as CqlQuantity)?.unit;
 			bool? o_ = context?.Operators.Equal(n_, "mGy.cm");
 			bool? p_ = context?.Operators.And(k_, o_);
 
@@ -277,9 +277,9 @@ public class AlaraCTFHIR_0_1_001
 		IEnumerable<Observation.ComponentComponent> c_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
 		decimal? d_(Observation.ComponentComponent C)
 		{
-			DataType q_ = C.Value;
+			DataType q_ = C?.Value;
 			object r_ = FHIRHelpers_4_3_000.ToValue(q_);
-			decimal? s_ = (r_ as CqlQuantity).value;
+			decimal? s_ = (r_ as CqlQuantity)?.value;
 
 			return s_;
 		};
@@ -299,7 +299,7 @@ public class AlaraCTFHIR_0_1_001
 			decimal? f_ = this.Size_Adjusted_Value(CTScan);
 			bool? g_ = context?.Operators.Not((bool?)(f_ is null));
 			bool? h_ = context?.Operators.And(e_, g_);
-			DataType i_ = CTScan.Value;
+			DataType i_ = CTScan?.Value;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 			bool? k_ = context?.Operators.Not((bool?)(j_ is null));
 			bool? l_ = context?.Operators.And(h_, k_);
@@ -344,12 +344,12 @@ public class AlaraCTFHIR_0_1_001
 		IEnumerable<Observation> a_ = this.Qualifying_CTScan_with_Values();
 		bool? b_(Observation CTScan)
 		{
-			DataType e_ = CTScan.Value;
+			DataType e_ = CTScan?.Value;
 			object f_ = FHIRHelpers_4_3_000.ToValue(e_);
-			CqlCode[] g_ = (f_ as CqlConcept).codes;
+			CqlCode[] g_ = (f_ as CqlConcept)?.codes;
 			bool? h_(CqlCode @this)
 			{
-				string m_ = @this.code;
+				string m_ = @this?.code;
 				bool? n_ = context?.Operators.Not((bool?)(m_ is null));
 
 				return n_;
@@ -357,7 +357,7 @@ public class AlaraCTFHIR_0_1_001
 			IEnumerable<CqlCode> i_ = context?.Operators.Where<CqlCode>((IEnumerable<CqlCode>)g_, h_);
 			string j_(CqlCode @this)
 			{
-				string o_ = @this.code;
+				string o_ = @this?.code;
 
 				return o_;
 			};
@@ -379,12 +379,12 @@ public class AlaraCTFHIR_0_1_001
     [CqlDeclaration("Qualifies")]
 	public bool? Qualifies(Observation Obs, string code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
 	{
-		DataType a_ = Obs.Value;
+		DataType a_ = Obs?.Value;
 		object b_ = FHIRHelpers_4_3_000.ToValue(a_);
-		CqlCode[] c_ = (b_ as CqlConcept).codes;
+		CqlCode[] c_ = (b_ as CqlConcept)?.codes;
 		bool? d_(CqlCode @this)
 		{
-			string o_ = @this.code;
+			string o_ = @this?.code;
 			bool? p_ = context?.Operators.Not((bool?)(o_ is null));
 
 			return p_;
@@ -392,7 +392,7 @@ public class AlaraCTFHIR_0_1_001
 		IEnumerable<CqlCode> e_ = context?.Operators.Where<CqlCode>((IEnumerable<CqlCode>)c_, d_);
 		string f_(CqlCode @this)
 		{
-			string q_ = @this.code;
+			string q_ = @this?.code;
 
 			return q_;
 		};

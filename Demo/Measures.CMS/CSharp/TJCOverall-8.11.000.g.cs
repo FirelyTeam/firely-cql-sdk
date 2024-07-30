@@ -178,7 +178,7 @@ public class TJCOverall_8_11_000
 		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter NonElectiveEncounter)
 		{
-			Period e_ = NonElectiveEncounter.Period;
+			Period e_ = NonElectiveEncounter?.Period;
 			CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_3_000.ToInterval(e_);
 			CqlDateTime g_ = context?.Operators.End(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
@@ -201,11 +201,11 @@ public class TJCOverall_8_11_000
 		bool? b_(Encounter NonElectiveEncounter)
 		{
 			Condition d_ = CQMCommon_2_0_000.principalDiagnosis(NonElectiveEncounter);
-			CodeableConcept e_ = d_.Code;
+			CodeableConcept e_ = d_?.Code;
 			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(e_);
 			CqlValueSet g_ = this.Hemorrhagic_Stroke();
 			bool? h_ = context?.Operators.ConceptInValueSet(f_, g_);
-			CodeableConcept j_ = d_.Code;
+			CodeableConcept j_ = d_?.Code;
 			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept(j_);
 			CqlValueSet l_ = this.Ischemic_Stroke();
 			bool? m_ = context?.Operators.ConceptInValueSet(k_, l_);
@@ -228,10 +228,10 @@ public class TJCOverall_8_11_000
 		bool? b_(Encounter AllStrokeEncounter)
 		{
 			Patient d_ = this.Patient();
-			Date e_ = d_.BirthDateElement;
-			string f_ = e_.Value;
+			Date e_ = d_?.BirthDateElement;
+			string f_ = e_?.Value;
 			CqlDate g_ = context?.Operators.ConvertStringToDate(f_);
-			Period h_ = AllStrokeEncounter.Period;
+			Period h_ = AllStrokeEncounter?.Period;
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.ToInterval(h_);
 			CqlDateTime j_ = context?.Operators.Start(i_);
 			CqlDate k_ = context?.Operators.DateFrom(j_);
@@ -255,7 +255,7 @@ public class TJCOverall_8_11_000
 		bool? b_(Encounter EncounterWithAge)
 		{
 			Condition d_ = CQMCommon_2_0_000.principalDiagnosis(EncounterWithAge);
-			CodeableConcept e_ = d_.Code;
+			CodeableConcept e_ = d_?.Code;
 			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(e_);
 			CqlValueSet g_ = this.Ischemic_Stroke();
 			bool? h_ = context?.Operators.ConceptInValueSet(f_, g_);
@@ -276,27 +276,27 @@ public class TJCOverall_8_11_000
 		IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter();
 		bool? b_(Encounter IschemicStrokeEncounter)
 		{
-			Encounter.HospitalizationComponent d_ = IschemicStrokeEncounter.Hospitalization;
-			CodeableConcept e_ = d_.DischargeDisposition;
+			Encounter.HospitalizationComponent d_ = IschemicStrokeEncounter?.Hospitalization;
+			CodeableConcept e_ = d_?.DischargeDisposition;
 			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(e_);
 			CqlValueSet g_ = this.Discharge_To_Acute_Care_Facility();
 			bool? h_ = context?.Operators.ConceptInValueSet(f_, g_);
-			CodeableConcept j_ = d_.DischargeDisposition;
+			CodeableConcept j_ = d_?.DischargeDisposition;
 			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept(j_);
 			CqlValueSet l_ = this.Left_Against_Medical_Advice();
 			bool? m_ = context?.Operators.ConceptInValueSet(k_, l_);
 			bool? n_ = context?.Operators.Or(h_, m_);
-			CodeableConcept p_ = d_.DischargeDisposition;
+			CodeableConcept p_ = d_?.DischargeDisposition;
 			CqlConcept q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 			CqlValueSet r_ = this.Patient_Expired();
 			bool? s_ = context?.Operators.ConceptInValueSet(q_, r_);
 			bool? t_ = context?.Operators.Or(n_, s_);
-			CodeableConcept v_ = d_.DischargeDisposition;
+			CodeableConcept v_ = d_?.DischargeDisposition;
 			CqlConcept w_ = FHIRHelpers_4_3_000.ToConcept(v_);
 			CqlValueSet x_ = this.Discharged_to_Home_for_Hospice_Care();
 			bool? y_ = context?.Operators.ConceptInValueSet(w_, x_);
 			bool? z_ = context?.Operators.Or(t_, y_);
-			CodeableConcept ab_ = d_.DischargeDisposition;
+			CodeableConcept ab_ = d_?.DischargeDisposition;
 			CqlConcept ac_ = FHIRHelpers_4_3_000.ToConcept(ab_);
 			CqlValueSet ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
 			bool? ae_ = context?.Operators.ConceptInValueSet(ac_, ad_);
@@ -319,21 +319,21 @@ public class TJCOverall_8_11_000
 		IEnumerable<ServiceRequest> b_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		bool? c_(ServiceRequest SR)
 		{
-			Code<RequestStatus> j_ = SR.StatusElement;
-			RequestStatus? k_ = j_.Value;
+			Code<RequestStatus> j_ = SR?.StatusElement;
+			RequestStatus? k_ = j_?.Value;
 			Code<RequestStatus> l_ = context?.Operators.Convert<Code<RequestStatus>>(k_);
 			string m_ = context?.Operators.Convert<string>(l_);
-			string[] n_ = /* ARR1 */ [
+			string[] n_ = [
 				"active",
 				"completed",
 				"on-hold",
 			];
 			bool? o_ = context?.Operators.In<string>(m_, (n_ as IEnumerable<string>));
-			Code<RequestIntent> p_ = SR.IntentElement;
-			RequestIntent? q_ = p_.Value;
+			Code<RequestIntent> p_ = SR?.IntentElement;
+			RequestIntent? q_ = p_?.Value;
 			Code<RequestIntent> r_ = context?.Operators.Convert<Code<RequestIntent>>(q_);
 			string s_ = context?.Operators.Convert<string>(r_);
-			string[] t_ = /* ARR1 */ [
+			string[] t_ = [
 				"order",
 				"original-order",
 				"reflex-order",
@@ -342,8 +342,8 @@ public class TJCOverall_8_11_000
 			];
 			bool? u_ = context?.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			bool? v_ = context?.Operators.And(o_, u_);
-			FhirBoolean w_ = SR.DoNotPerformElement;
-			bool? x_ = w_.Value;
+			FhirBoolean w_ = SR?.DoNotPerformElement;
+			bool? x_ = w_?.Value;
 			bool? y_ = context?.Operators.IsTrue(x_);
 			bool? z_ = context?.Operators.Not(y_);
 			bool? aa_ = context?.Operators.And(v_, z_);
@@ -354,10 +354,10 @@ public class TJCOverall_8_11_000
 		IEnumerable<Procedure> f_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? g_(Procedure InterventionPerformed)
 		{
-			Code<EventStatus> ab_ = InterventionPerformed.StatusElement;
-			EventStatus? ac_ = ab_.Value;
+			Code<EventStatus> ab_ = InterventionPerformed?.StatusElement;
+			EventStatus? ac_ = ab_?.Value;
 			string ad_ = context?.Operators.Convert<string>(ac_);
-			string[] ae_ = /* ARR1 */ [
+			string[] ae_ = [
 				"completed",
 				"in-progress",
 			];

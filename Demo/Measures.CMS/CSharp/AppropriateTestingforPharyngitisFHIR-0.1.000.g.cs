@@ -327,7 +327,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("99217", "http://www.ama-assn.org/go/cpt", null, null),
 			new CqlCode("99429", "http://www.ama-assn.org/go/cpt", null, null),
 		];
@@ -416,7 +416,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Encounter> c_ = context?.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? d_(Encounter E)
 		{
-			List<CodeableConcept> bg_ = E.Type;
+			List<CodeableConcept> bg_ = E?.Type;
 			CqlConcept bh_(CodeableConcept @this)
 			{
 				CqlConcept bm_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -472,7 +472,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Encounter> al_ = context?.Operators.RetrieveByValueSet<Encounter>(ak_, null);
 		bool? an_(Encounter E)
 		{
-			List<CodeableConcept> bq_ = E.Type;
+			List<CodeableConcept> bq_ = E?.Type;
 			CqlConcept br_(CodeableConcept @this)
 			{
 				CqlConcept bw_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -512,7 +512,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		bool? be_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> ca_ = this.Measurement_Period();
-			Period cb_ = ValidEncounter.Period;
+			Period cb_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> cc_ = FHIRHelpers_4_3_000.ToInterval(cb_);
 			CqlInterval<CqlDateTime> cd_ = QICoreCommon_2_0_000.ToInterval((cc_ as object));
 			bool? ce_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ca_, cd_, null);
@@ -540,11 +540,11 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			IEnumerable<MedicationRequest> i_ = Status_1_6_000.Active_Medication(h_);
 			bool? j_(MedicationRequest AntibioticOrdered)
 			{
-				Period n_ = EDOrAmbulatoryVisit.Period;
+				Period n_ = EDOrAmbulatoryVisit?.Period;
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.ToInterval((o_ as object));
 				CqlDateTime q_ = context?.Operators.Start(p_);
-				FhirDateTime r_ = AntibioticOrdered.AuthoredOnElement;
+				FhirDateTime r_ = AntibioticOrdered?.AuthoredOnElement;
 				CqlDateTime s_ = context?.Operators.Convert<CqlDateTime>(r_);
 				CqlQuantity t_ = context?.Operators.Quantity(3m, "days");
 				CqlDateTime u_ = context?.Operators.Subtract(s_, t_);
@@ -605,7 +605,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		{
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_ypyxedbbcqbdavhxvckuwmfh?.AcutePharyngitisTonsillitis);
 			CqlDateTime l_ = context?.Operators.Start(k_);
-			Period m_ = tuple_ypyxedbbcqbdavhxvckuwmfh?.VisitWithAntibiotic.Period;
+			Period m_ = tuple_ypyxedbbcqbdavhxvckuwmfh?.VisitWithAntibiotic?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
 			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 			bool? p_ = context?.Operators.In<CqlDateTime>(l_, o_, null);
@@ -630,8 +630,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		bool? b_(Encounter EncounterWithPharyngitis)
 		{
 			Patient f_ = this.Patient();
-			Date g_ = f_.BirthDateElement;
-			string h_ = g_.Value;
+			Date g_ = f_?.BirthDateElement;
+			string h_ = g_?.Value;
 			CqlDate i_ = context?.Operators.ConvertStringToDate(h_);
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context?.Operators.Start(j_);
@@ -715,7 +715,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Observation> c_ = Status_1_6_000.Final_Lab_Observation(b_);
 		bool? d_(Observation GroupAStreptococcusTest)
 		{
-			DataType f_ = GroupAStreptococcusTest.Value;
+			DataType f_ = GroupAStreptococcusTest?.Value;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			bool? h_ = context?.Operators.Not((bool?)(g_ is null));
 
@@ -744,11 +744,11 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<(Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?> e_ = context?.Operators.Select<ValueTuple<Observation, Encounter>, (Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?>(c_, d_);
 		bool? f_((Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? tuple_ffguysnebcxllexfcmjoehbij)
 		{
-			DataType k_ = tuple_ffguysnebcxllexfcmjoehbij?.GroupAStreptococcusTest.Effective;
+			DataType k_ = tuple_ffguysnebcxllexfcmjoehbij?.GroupAStreptococcusTest?.Effective;
 			object l_ = FHIRHelpers_4_3_000.ToValue(k_);
 			CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.ToInterval(l_);
 			CqlDateTime n_ = context?.Operators.Start(m_);
-			Period o_ = tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis.Period;
+			Period o_ = tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis?.Period;
 			CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 			CqlDateTime q_ = context?.Operators.End(p_);
 			CqlQuantity r_ = context?.Operators.Quantity(3m, "days");
@@ -779,8 +779,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		bool? b_(Encounter EncounterWithPharyngitis)
 		{
 			Patient f_ = this.Patient();
-			Date g_ = f_.BirthDateElement;
-			string h_ = g_.Value;
+			Date g_ = f_?.BirthDateElement;
+			string h_ = g_?.Value;
 			CqlDate i_ = context?.Operators.ConvertStringToDate(h_);
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context?.Operators.Start(j_);
@@ -809,8 +809,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		bool? b_(Encounter EncounterWithPharyngitis)
 		{
 			Patient f_ = this.Patient();
-			Date g_ = f_.BirthDateElement;
-			string h_ = g_.Value;
+			Date g_ = f_?.BirthDateElement;
+			string h_ = g_?.Value;
 			CqlDate i_ = context?.Operators.ConvertStringToDate(h_);
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context?.Operators.Start(j_);
@@ -839,8 +839,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		bool? b_(Encounter EncounterWithPharyngitis)
 		{
 			Patient f_ = this.Patient();
-			Date g_ = f_.BirthDateElement;
-			string h_ = g_.Value;
+			Date g_ = f_?.BirthDateElement;
+			string h_ = g_?.Value;
 			CqlDate i_ = context?.Operators.ConvertStringToDate(h_);
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context?.Operators.Start(j_);

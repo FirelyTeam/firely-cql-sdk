@@ -138,7 +138,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 		];
 
@@ -443,7 +443,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		CqlDateTime b_ = context?.Operators.End(Period);
 		CqlQuantity d_ = context?.Operators.Quantity(10m, "days");
 		CqlDateTime e_ = context?.Operators.Add(a_, d_);
-		CqlDateTime[] f_ = /* ARR1 */ [
+		CqlDateTime[] f_ = [
 			b_,
 			e_,
 		];
@@ -460,7 +460,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		CqlDateTime b_ = context?.Operators.End(Period);
 		int? c_ = context?.Operators.DurationBetween(a_, b_, null);
 		CqlInterval<int?> d_ = context?.Operators.Interval(1, c_, true, true);
-		CqlInterval<int?>[] e_ = /* ARR1 */ [
+		CqlInterval<int?>[] e_ = [
 			d_,
 		];
 		IEnumerable<CqlInterval<int?>> f_ = context?.Operators.Expand((e_ as IEnumerable<CqlInterval<int?>>), null);

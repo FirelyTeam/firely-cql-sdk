@@ -94,7 +94,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("428191000124101", "http://snomed.info/sct", null, null),
 		];
 

@@ -136,7 +136,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("77427", "http://www.ama-assn.org/go/cpt", null, null),
 		];
 
@@ -186,7 +186,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			CqlDateTime i_ = context?.Operators.Subtract(g_, h_);
 			CqlDateTime k_ = context?.Operators.End(f_);
 			CqlInterval<CqlDateTime> l_ = context?.Operators.Interval(i_, k_, true, true);
-			DataType m_ = ChemoAdministration.Performed;
+			DataType m_ = ChemoAdministration?.Performed;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
 			bool? p_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, null);
@@ -222,11 +222,11 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 		{
 			bool? p_ = QICoreCommon_2_0_000.isActive(tuple_cibligzrihjljqmithporoase?.Cancer);
 			CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.prevalenceInterval(tuple_cibligzrihjljqmithporoase?.Cancer);
-			Period r_ = tuple_cibligzrihjljqmithporoase?.FaceToFaceOrTelehealthEncounter.Period;
+			Period r_ = tuple_cibligzrihjljqmithporoase?.FaceToFaceOrTelehealthEncounter?.Period;
 			CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 			bool? t_ = context?.Operators.Overlaps(q_, s_, null);
 			bool? u_ = context?.Operators.And(p_, t_);
-			DataType v_ = tuple_cibligzrihjljqmithporoase?.ChemoBeforeEncounter.Performed;
+			DataType v_ = tuple_cibligzrihjljqmithporoase?.ChemoBeforeEncounter?.Performed;
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
 			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval(w_);
 			CqlDateTime y_ = context?.Operators.Start(x_);
@@ -243,7 +243,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			bool? am_ = context?.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context?.Operators.And(ai_, am_);
 			bool? ao_ = context?.Operators.And(u_, an_);
-			DataType ap_ = tuple_cibligzrihjljqmithporoase?.ChemoAfterEncounter.Performed;
+			DataType ap_ = tuple_cibligzrihjljqmithporoase?.ChemoAfterEncounter?.Performed;
 			object aq_ = FHIRHelpers_4_3_000.ToValue(ap_);
 			CqlInterval<CqlDateTime> ar_ = QICoreCommon_2_0_000.toInterval(aq_);
 			CqlDateTime as_ = context?.Operators.Start(ar_);
@@ -320,7 +320,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			{
 				bool? l_ = QICoreCommon_2_0_000.isActive(Cancer);
 				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.prevalenceInterval(Cancer);
-				Period n_ = RadiationTreatmentManagement.Period;
+				Period n_ = RadiationTreatmentManagement?.Period;
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
 				bool? p_ = context?.Operators.Overlaps(m_, o_, null);
 				bool? q_ = context?.Operators.And(l_, p_);
@@ -378,18 +378,18 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			IEnumerable<Observation> e_ = context?.Operators.RetrieveByValueSet<Observation>(d_, null);
 			bool? f_(Observation PainAssessed)
 			{
-				Period j_ = FaceToFaceOrTelehealthEncounterWithChemo.Period;
+				Period j_ = FaceToFaceOrTelehealthEncounterWithChemo?.Period;
 				CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(j_);
-				DataType l_ = PainAssessed.Effective;
+				DataType l_ = PainAssessed?.Effective;
 				object m_ = FHIRHelpers_4_3_000.ToValue(l_);
 				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.toInterval(m_);
 				bool? o_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, null);
-				DataType p_ = PainAssessed.Value;
+				DataType p_ = PainAssessed?.Value;
 				object q_ = FHIRHelpers_4_3_000.ToValue(p_);
 				bool? r_ = context?.Operators.Not((bool?)(q_ is null));
 				bool? s_ = context?.Operators.And(o_, r_);
-				Code<ObservationStatus> t_ = PainAssessed.StatusElement;
-				ObservationStatus? u_ = t_.Value;
+				Code<ObservationStatus> t_ = PainAssessed?.StatusElement;
+				ObservationStatus? u_ = t_?.Value;
 				Code<ObservationStatus> v_ = context?.Operators.Convert<Code<ObservationStatus>>(u_);
 				bool? w_ = context?.Operators.Equal(v_, "final");
 				bool? x_ = context?.Operators.And(s_, w_);
@@ -425,7 +425,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 				{
 					bool t_()
 					{
-						List<CodeableConcept> u_ = RadiationManagementEncounter.Type;
+						List<CodeableConcept> u_ = RadiationManagementEncounter?.Type;
 						CqlConcept v_(CodeableConcept @this)
 						{
 							CqlConcept aa_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -448,11 +448,11 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 					};
 					if (t_())
 					{
-						DataType ae_ = PainAssessed.Effective;
+						DataType ae_ = PainAssessed?.Effective;
 						object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
 						CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.toInterval(af_);
 						CqlDateTime ah_ = context?.Operators.End(ag_);
-						Period ai_ = RadiationManagementEncounter.Period;
+						Period ai_ = RadiationManagementEncounter?.Period;
 						CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(ai_);
 						CqlDateTime ak_ = context?.Operators.Start(aj_);
 						CqlQuantity al_ = context?.Operators.Quantity(6m, "days");
@@ -470,9 +470,9 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 					}
 					else
 					{
-						Period ax_ = RadiationManagementEncounter.Period;
+						Period ax_ = RadiationManagementEncounter?.Period;
 						CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_3_000.ToInterval(ax_);
-						DataType az_ = PainAssessed.Effective;
+						DataType az_ = PainAssessed?.Effective;
 						object ba_ = FHIRHelpers_4_3_000.ToValue(az_);
 						CqlInterval<CqlDateTime> bb_ = QICoreCommon_2_0_000.toInterval(ba_);
 						bool? bc_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ay_, bb_, null);
@@ -480,12 +480,12 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 						return bc_;
 					}
 				};
-				DataType k_ = PainAssessed.Value;
+				DataType k_ = PainAssessed?.Value;
 				object l_ = FHIRHelpers_4_3_000.ToValue(k_);
 				bool? m_ = context?.Operators.Not((bool?)(l_ is null));
 				bool? n_ = context?.Operators.And(j_(), m_);
-				Code<ObservationStatus> o_ = PainAssessed.StatusElement;
-				ObservationStatus? p_ = o_.Value;
+				Code<ObservationStatus> o_ = PainAssessed?.StatusElement;
+				ObservationStatus? p_ = o_?.Value;
 				Code<ObservationStatus> q_ = context?.Operators.Convert<Code<ObservationStatus>>(p_);
 				bool? r_ = context?.Operators.Equal(q_, "final");
 				bool? s_ = context?.Operators.And(n_, r_);

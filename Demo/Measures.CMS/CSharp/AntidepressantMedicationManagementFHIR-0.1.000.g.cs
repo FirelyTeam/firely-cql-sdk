@@ -390,7 +390,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		IEnumerable<Encounter> ac_ = context?.Operators.Union<Encounter>(w_, ab_);
 		bool? ad_(Encounter ValidEncounter)
 		{
-			Period af_ = ValidEncounter.Period;
+			Period af_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
 			CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_0_000.ToInterval((ag_ as object));
 			CqlDateTime ai_ = context?.Operators.Start(ah_);
@@ -418,8 +418,8 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlDateTime e_ = this.April_30_of_the_Measurement_Period();
 		CqlDate f_ = context?.Operators.DateFrom(e_);
@@ -461,13 +461,13 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		{
 			CqlDate l_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
 			bool? m_ = context?.Operators.Not((bool?)(l_ is null));
-			List<Dosage> n_ = ActiveAntidepressant.DosageInstruction;
+			List<Dosage> n_ = ActiveAntidepressant?.DosageInstruction;
 			Dosage o_ = context?.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
-			Timing p_ = o_.Timing;
-			Timing.RepeatComponent q_ = p_.Repeat;
-			DataType r_ = q_.Bounds;
+			Timing p_ = o_?.Timing;
+			Timing.RepeatComponent q_ = p_?.Repeat;
+			DataType r_ = q_?.Bounds;
 			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			object[] t_ = /* ARR1 */ [
+			object[] t_ = [
 				s_,
 			];
 			CqlInterval<CqlDateTime> u_(object Meds)

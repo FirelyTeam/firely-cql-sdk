@@ -279,7 +279,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 
 	private CqlCode[] V3TimingEvent_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
 			new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
 			new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
@@ -305,7 +305,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 
 	private CqlCode[] EventTiming_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("AFT", "http://hl7.org/fhir/event-timing", null, null),
 			new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", null, null),
 			new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", null, null),
@@ -786,7 +786,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
     [CqlDeclaration("MedicationRequestPeriod")]
 	public CqlInterval<CqlDateTime> MedicationRequestPeriod(MedicationRequest Request)
 	{
-		MedicationRequest[] a_ = /* ARR1 */ [
+		MedicationRequest[] a_ = [
 			Request,
 		];
 		CqlInterval<CqlDateTime> b_(MedicationRequest R)
@@ -936,7 +936,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
     [CqlDeclaration("MedicationDispensePeriod")]
 	public CqlInterval<CqlDateTime> MedicationDispensePeriod(MedicationDispense Dispense)
 	{
-		MedicationDispense[] a_ = /* ARR1 */ [
+		MedicationDispense[] a_ = [
 			Dispense,
 		];
 		CqlInterval<CqlDateTime> b_(MedicationDispense D)
@@ -1015,7 +1015,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
     [CqlDeclaration("MedicationAdministrationPeriod")]
 	public CqlInterval<CqlDateTime> MedicationAdministrationPeriod(MedicationAdministration Administration)
 	{
-		MedicationAdministration[] a_ = /* ARR1 */ [
+		MedicationAdministration[] a_ = [
 			Administration,
 		];
 		CqlInterval<CqlDateTime> b_(MedicationAdministration M)
@@ -1088,7 +1088,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_(IEnumerable<CqlInterval<CqlDateTime>> R, CqlInterval<CqlDateTime> I)
 		{
-			CqlInterval<CqlDateTime>[] c_ = /* ARR1 */ [
+			CqlInterval<CqlDateTime>[] c_ = [
 				I,
 			];
 			CqlInterval<CqlDateTime> d_(CqlInterval<CqlDateTime> X)
@@ -1098,14 +1098,14 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				CqlQuantity k_ = context?.Operators.Quantity(1m, "day");
 				CqlDateTime l_ = context?.Operators.Add(j_, k_);
 				CqlDateTime m_ = context?.Operators.Start(X);
-				CqlDateTime[] n_ = /* ARR1 */ [
+				CqlDateTime[] n_ = [
 					l_,
 					m_,
 				];
 				CqlDateTime o_ = context?.Operators.Max<CqlDateTime>((n_ as IEnumerable<CqlDateTime>));
 				CqlDateTime q_ = context?.Operators.End(i_);
 				CqlDateTime s_ = context?.Operators.Add(q_, k_);
-				CqlDateTime[] u_ = /* ARR1 */ [
+				CqlDateTime[] u_ = [
 					s_,
 					m_,
 				];
@@ -1120,7 +1120,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			};
 			IEnumerable<CqlInterval<CqlDateTime>> e_ = context?.Operators.Select<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>((IEnumerable<CqlInterval<CqlDateTime>>)c_, d_);
 			CqlInterval<CqlDateTime> f_ = context?.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(e_);
-			CqlInterval<CqlDateTime>[] g_ = /* ARR1 */ [
+			CqlInterval<CqlDateTime>[] g_ = [
 				f_,
 			];
 			IEnumerable<CqlInterval<CqlDateTime>> h_ = context?.Operators.Union<CqlInterval<CqlDateTime>>(R, (g_ as IEnumerable<CqlInterval<CqlDateTime>>));

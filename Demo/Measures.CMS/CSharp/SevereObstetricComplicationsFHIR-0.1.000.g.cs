@@ -629,7 +629,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("8867-4", "http://loinc.org", null, null),
 			new CqlCode("8480-6", "http://loinc.org", null, null),
 		];
@@ -643,7 +643,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR2 */ new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -786,7 +786,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Condition> g_ = CQMCommon_2_0_000.encounterDiagnosis(DeliveryEncounter);
 			bool? h_(Condition EncounterDiagnosis)
 			{
-				CodeableConcept l_ = EncounterDiagnosis.Code;
+				CodeableConcept l_ = EncounterDiagnosis?.Code;
 				CqlConcept m_ = FHIRHelpers_4_3_000.ToConcept(l_);
 				CqlValueSet n_ = this._20_to_42_Plus_Weeks_Gestation();
 				bool? o_ = context?.Operators.ConceptInValueSet(m_, n_);
@@ -828,18 +828,18 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
 		{
-			List<Encounter.DiagnosisComponent> d_ = TwentyWeeksPlusEncounter.Diagnosis;
+			List<Encounter.DiagnosisComponent> d_ = TwentyWeeksPlusEncounter?.Diagnosis;
 			bool? e_(Encounter.DiagnosisComponent EncounterDiagnoses)
 			{
-				ResourceReference n_ = EncounterDiagnoses.Condition;
+				ResourceReference n_ = EncounterDiagnoses?.Condition;
 				Condition o_ = CQMCommon_2_0_000.getCondition(n_);
-				CodeableConcept p_ = o_.Code;
+				CodeableConcept p_ = o_?.Code;
 				CqlConcept q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 				CqlValueSet r_ = this.Severe_Maternal_Morbidity_Diagnoses();
 				bool? s_ = context?.Operators.ConceptInValueSet(q_, r_);
 				bool? t_(Extension @this)
 				{
-					string ad_ = @this.Url;
+					string ad_ = @this?.Url;
 					FhirUri ae_ = context?.Operators.Convert<FhirUri>(ad_);
 					string af_ = FHIRHelpers_4_3_000.ToString(ae_);
 					bool? ag_ = context?.Operators.Equal(af_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
@@ -851,7 +851,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 						: null), t_);
 				DataType v_(Extension @this)
 				{
-					DataType ah_ = @this.Value;
+					DataType ah_ = @this?.Value;
 
 					return ah_;
 				};
@@ -871,11 +871,11 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Procedure> i_ = context?.Operators.RetrieveByValueSet<Procedure>(h_, null);
 			bool? j_(Procedure EncounterSMMProcedures)
 			{
-				Code<EventStatus> ai_ = EncounterSMMProcedures.StatusElement;
-				EventStatus? aj_ = ai_.Value;
+				Code<EventStatus> ai_ = EncounterSMMProcedures?.StatusElement;
+				EventStatus? aj_ = ai_?.Value;
 				string ak_ = context?.Operators.Convert<string>(aj_);
 				bool? al_ = context?.Operators.Equal(ak_, "completed");
-				DataType am_ = EncounterSMMProcedures.Performed;
+				DataType am_ = EncounterSMMProcedures?.Performed;
 				object an_ = FHIRHelpers_4_3_000.ToValue(am_);
 				CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.toInterval(an_);
 				CqlDateTime ap_ = context?.Operators.Start(ao_);
@@ -905,8 +905,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
 		{
-			Encounter.HospitalizationComponent d_ = TwentyWeeksPlusEncounter.Hospitalization;
-			CodeableConcept e_ = d_.DischargeDisposition;
+			Encounter.HospitalizationComponent d_ = TwentyWeeksPlusEncounter?.Hospitalization;
+			CodeableConcept e_ = d_?.DischargeDisposition;
 			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(e_);
 			CqlValueSet g_ = this.Patient_Expired();
 			bool? h_ = context?.Operators.ConceptInValueSet(f_, g_);
@@ -931,11 +931,11 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Procedure> e_ = context?.Operators.RetrieveByValueSet<Procedure>(d_, null);
 			bool? f_(Procedure BloodTransfusion)
 			{
-				Code<EventStatus> j_ = BloodTransfusion.StatusElement;
-				EventStatus? k_ = j_.Value;
+				Code<EventStatus> j_ = BloodTransfusion?.StatusElement;
+				EventStatus? k_ = j_?.Value;
 				string l_ = context?.Operators.Convert<string>(k_);
 				bool? m_ = context?.Operators.Equal(l_, "completed");
-				DataType n_ = BloodTransfusion.Performed;
+				DataType n_ = BloodTransfusion?.Performed;
 				object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
 				CqlDateTime q_ = context?.Operators.Start(p_);
@@ -995,7 +995,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Condition> d_ = CQMCommon_2_0_000.encounterDiagnosis(TwentyWeeksPlusEncounter);
 			bool? e_(Condition EncounterDiagnosis)
 			{
-				CodeableConcept s_ = EncounterDiagnosis.Code;
+				CodeableConcept s_ = EncounterDiagnosis?.Code;
 				CqlConcept t_ = FHIRHelpers_4_3_000.ToConcept(s_);
 				CqlValueSet u_ = this.COVID_19_Confirmed();
 				bool? v_ = context?.Operators.ConceptInValueSet(t_, u_);
@@ -1006,7 +1006,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			bool? g_ = context?.Operators.Exists<Condition>(f_);
 			bool? i_(Condition EncounterDiagnosis)
 			{
-				CodeableConcept w_ = EncounterDiagnosis.Code;
+				CodeableConcept w_ = EncounterDiagnosis?.Code;
 				CqlConcept x_ = FHIRHelpers_4_3_000.ToConcept(w_);
 				CqlValueSet y_ = this.Respiratory_Conditions_Related_to_COVID_19();
 				bool? z_ = context?.Operators.ConceptInValueSet(x_, y_);
@@ -1019,11 +1019,11 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Procedure> m_ = context?.Operators.RetrieveByValueSet<Procedure>(l_, null);
 			bool? n_(Procedure COVIDRespiratoryProcedure)
 			{
-				Code<EventStatus> aa_ = COVIDRespiratoryProcedure.StatusElement;
-				EventStatus? ab_ = aa_.Value;
+				Code<EventStatus> aa_ = COVIDRespiratoryProcedure?.StatusElement;
+				EventStatus? ab_ = aa_?.Value;
 				string ac_ = context?.Operators.Convert<string>(ab_);
 				bool? ad_ = context?.Operators.Equal(ac_, "completed");
-				DataType ae_ = COVIDRespiratoryProcedure.Performed;
+				DataType ae_ = COVIDRespiratoryProcedure?.Performed;
 				object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
 				CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.toInterval(af_);
 				CqlDateTime ah_ = context?.Operators.Start(ag_);
@@ -1124,12 +1124,12 @@ public class SevereObstetricComplicationsFHIR_0_1_000
     [CqlDeclaration("pOAIsYesOrExempt")]
 	public IEnumerable<CqlConcept> pOAIsYesOrExempt(Encounter TheEncounter)
 	{
-		List<Encounter.DiagnosisComponent> a_ = TheEncounter.Diagnosis;
+		List<Encounter.DiagnosisComponent> a_ = TheEncounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent EncounterDiagnoses)
 		{
 			bool? f_(Extension @this)
 			{
-				string o_ = @this.Url;
+				string o_ = @this?.Url;
 				FhirUri p_ = context?.Operators.Convert<FhirUri>(o_);
 				string q_ = FHIRHelpers_4_3_000.ToString(p_);
 				bool? r_ = context?.Operators.Equal(q_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
@@ -1141,7 +1141,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					: null), f_);
 			DataType h_(Extension @this)
 			{
-				DataType s_ = @this.Value;
+				DataType s_ = @this?.Value;
 
 				return s_;
 			};
@@ -1157,9 +1157,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context?.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		CqlConcept d_(Encounter.DiagnosisComponent EncounterDiagnoses)
 		{
-			ResourceReference t_ = EncounterDiagnoses.Condition;
+			ResourceReference t_ = EncounterDiagnoses?.Condition;
 			Condition u_ = CQMCommon_2_0_000.getCondition(t_);
-			CodeableConcept v_ = u_.Code;
+			CodeableConcept v_ = u_?.Code;
 			CqlConcept w_ = FHIRHelpers_4_3_000.ToConcept(v_);
 
 			return w_;
@@ -1776,14 +1776,14 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
 		(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter)
 		{
-			Id d_ = TwentyWeeksPlusEncounter.IdElement;
-			string e_ = d_.Value;
+			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
+			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Hematocrit_lab_test();
 			IEnumerable<Observation> g_ = context?.Operators.RetrieveByValueSet<Observation>(f_, null);
 			bool? h_(Observation Hematocrit)
 			{
-				Instant z_ = Hematocrit.IssuedElement;
-				DateTimeOffset? aa_ = z_.Value;
+				Instant z_ = Hematocrit?.IssuedElement;
+				DateTimeOffset? aa_ = z_?.Value;
 				CqlDateTime ab_ = context?.Operators.Convert<CqlDateTime>(aa_);
 				CqlInterval<CqlDateTime> ac_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				CqlDateTime ad_ = context?.Operators.Start(ac_);
@@ -1792,17 +1792,17 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime ag_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> ah_ = context?.Operators.Interval(af_, ag_, true, false);
 				bool? ai_ = context?.Operators.In<CqlDateTime>(ab_, ah_, null);
-				Code<ObservationStatus> aj_ = Hematocrit.StatusElement;
-				ObservationStatus? ak_ = aj_.Value;
+				Code<ObservationStatus> aj_ = Hematocrit?.StatusElement;
+				ObservationStatus? ak_ = aj_?.Value;
 				string al_ = context?.Operators.Convert<string>(ak_);
-				string[] am_ = /* ARR1 */ [
+				string[] am_ = [
 					"final",
 					"amended",
 					"corrected",
 				];
 				bool? an_ = context?.Operators.In<string>(al_, (am_ as IEnumerable<string>));
 				bool? ao_ = context?.Operators.And(ai_, an_);
-				DataType ap_ = Hematocrit.Value;
+				DataType ap_ = Hematocrit?.Value;
 				object aq_ = FHIRHelpers_4_3_000.ToValue(ap_);
 				bool? ar_ = context?.Operators.Not((bool?)(aq_ is null));
 				bool? as_ = context?.Operators.And(ao_, ar_);
@@ -1812,8 +1812,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> i_ = context?.Operators.Where<Observation>(g_, h_);
 			object j_(Observation @this)
 			{
-				Instant at_ = @this.IssuedElement;
-				DateTimeOffset? au_ = at_.Value;
+				Instant at_ = @this?.IssuedElement;
+				DateTimeOffset? au_ = at_?.Value;
 				CqlDateTime av_ = context?.Operators.Convert<CqlDateTime>(au_);
 				CqlDateTime aw_ = QICoreCommon_2_0_000.earliest((av_ as object));
 
@@ -1821,13 +1821,13 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Observation> k_ = context?.Operators.SortBy<Observation>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation l_ = context?.Operators.First<Observation>(k_);
-			DataType m_ = l_.Value;
+			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 			IEnumerable<Observation> p_ = context?.Operators.RetrieveByValueSet<Observation>(f_, null);
 			bool? q_(Observation Hematocrit)
 			{
-				Instant ax_ = Hematocrit.IssuedElement;
-				DateTimeOffset? ay_ = ax_.Value;
+				Instant ax_ = Hematocrit?.IssuedElement;
+				DateTimeOffset? ay_ = ax_?.Value;
 				CqlDateTime az_ = context?.Operators.Convert<CqlDateTime>(ay_);
 				CqlInterval<CqlDateTime> ba_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				CqlDateTime bb_ = context?.Operators.Start(ba_);
@@ -1836,17 +1836,17 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime be_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> bf_ = context?.Operators.Interval(bd_, be_, true, false);
 				bool? bg_ = context?.Operators.In<CqlDateTime>(az_, bf_, null);
-				Code<ObservationStatus> bh_ = Hematocrit.StatusElement;
-				ObservationStatus? bi_ = bh_.Value;
+				Code<ObservationStatus> bh_ = Hematocrit?.StatusElement;
+				ObservationStatus? bi_ = bh_?.Value;
 				string bj_ = context?.Operators.Convert<string>(bi_);
-				string[] bk_ = /* ARR1 */ [
+				string[] bk_ = [
 					"final",
 					"amended",
 					"corrected",
 				];
 				bool? bl_ = context?.Operators.In<string>(bj_, (bk_ as IEnumerable<string>));
 				bool? bm_ = context?.Operators.And(bg_, bl_);
-				DataType bn_ = Hematocrit.Value;
+				DataType bn_ = Hematocrit?.Value;
 				object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
 				bool? bp_ = context?.Operators.Not((bool?)(bo_ is null));
 				bool? bq_ = context?.Operators.And(bm_, bp_);
@@ -1856,8 +1856,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> r_ = context?.Operators.Where<Observation>(p_, q_);
 			object s_(Observation @this)
 			{
-				Instant br_ = @this.IssuedElement;
-				DateTimeOffset? bs_ = br_.Value;
+				Instant br_ = @this?.IssuedElement;
+				DateTimeOffset? bs_ = br_?.Value;
 				CqlDateTime bt_ = context?.Operators.Convert<CqlDateTime>(bs_);
 				CqlDateTime bu_ = QICoreCommon_2_0_000.earliest((bt_ as object));
 
@@ -1865,8 +1865,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Observation> t_ = context?.Operators.SortBy<Observation>(r_, s_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation u_ = context?.Operators.First<Observation>(t_);
-			Instant v_ = u_.IssuedElement;
-			DateTimeOffset? w_ = v_.Value;
+			Instant v_ = u_?.IssuedElement;
+			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context?.Operators.Convert<CqlDateTime>(w_);
 			(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
@@ -1886,14 +1886,14 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
 		(string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter)
 		{
-			Id d_ = TwentyWeeksPlusEncounter.IdElement;
-			string e_ = d_.Value;
+			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
+			string e_ = d_?.Value;
 			CqlValueSet f_ = this.White_blood_cells_count_lab_test();
 			IEnumerable<Observation> g_ = context?.Operators.RetrieveByValueSet<Observation>(f_, null);
 			bool? h_(Observation WBC)
 			{
-				Instant z_ = WBC.IssuedElement;
-				DateTimeOffset? aa_ = z_.Value;
+				Instant z_ = WBC?.IssuedElement;
+				DateTimeOffset? aa_ = z_?.Value;
 				CqlDateTime ab_ = context?.Operators.Convert<CqlDateTime>(aa_);
 				CqlInterval<CqlDateTime> ac_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				CqlDateTime ad_ = context?.Operators.Start(ac_);
@@ -1902,17 +1902,17 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime ag_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> ah_ = context?.Operators.Interval(af_, ag_, true, false);
 				bool? ai_ = context?.Operators.In<CqlDateTime>(ab_, ah_, null);
-				Code<ObservationStatus> aj_ = WBC.StatusElement;
-				ObservationStatus? ak_ = aj_.Value;
+				Code<ObservationStatus> aj_ = WBC?.StatusElement;
+				ObservationStatus? ak_ = aj_?.Value;
 				string al_ = context?.Operators.Convert<string>(ak_);
-				string[] am_ = /* ARR1 */ [
+				string[] am_ = [
 					"final",
 					"amended",
 					"corrected",
 				];
 				bool? an_ = context?.Operators.In<string>(al_, (am_ as IEnumerable<string>));
 				bool? ao_ = context?.Operators.And(ai_, an_);
-				DataType ap_ = WBC.Value;
+				DataType ap_ = WBC?.Value;
 				object aq_ = FHIRHelpers_4_3_000.ToValue(ap_);
 				bool? ar_ = context?.Operators.Not((bool?)(aq_ is null));
 				bool? as_ = context?.Operators.And(ao_, ar_);
@@ -1922,8 +1922,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> i_ = context?.Operators.Where<Observation>(g_, h_);
 			object j_(Observation @this)
 			{
-				Instant at_ = @this.IssuedElement;
-				DateTimeOffset? au_ = at_.Value;
+				Instant at_ = @this?.IssuedElement;
+				DateTimeOffset? au_ = at_?.Value;
 				CqlDateTime av_ = context?.Operators.Convert<CqlDateTime>(au_);
 				CqlDateTime aw_ = QICoreCommon_2_0_000.earliest((av_ as object));
 
@@ -1931,13 +1931,13 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Observation> k_ = context?.Operators.SortBy<Observation>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation l_ = context?.Operators.First<Observation>(k_);
-			DataType m_ = l_.Value;
+			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 			IEnumerable<Observation> p_ = context?.Operators.RetrieveByValueSet<Observation>(f_, null);
 			bool? q_(Observation WBC)
 			{
-				Instant ax_ = WBC.IssuedElement;
-				DateTimeOffset? ay_ = ax_.Value;
+				Instant ax_ = WBC?.IssuedElement;
+				DateTimeOffset? ay_ = ax_?.Value;
 				CqlDateTime az_ = context?.Operators.Convert<CqlDateTime>(ay_);
 				CqlInterval<CqlDateTime> ba_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
 				CqlDateTime bb_ = context?.Operators.Start(ba_);
@@ -1946,17 +1946,17 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime be_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> bf_ = context?.Operators.Interval(bd_, be_, true, false);
 				bool? bg_ = context?.Operators.In<CqlDateTime>(az_, bf_, null);
-				Code<ObservationStatus> bh_ = WBC.StatusElement;
-				ObservationStatus? bi_ = bh_.Value;
+				Code<ObservationStatus> bh_ = WBC?.StatusElement;
+				ObservationStatus? bi_ = bh_?.Value;
 				string bj_ = context?.Operators.Convert<string>(bi_);
-				string[] bk_ = /* ARR1 */ [
+				string[] bk_ = [
 					"final",
 					"amended",
 					"corrected",
 				];
 				bool? bl_ = context?.Operators.In<string>(bj_, (bk_ as IEnumerable<string>));
 				bool? bm_ = context?.Operators.And(bg_, bl_);
-				DataType bn_ = WBC.Value;
+				DataType bn_ = WBC?.Value;
 				object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
 				bool? bp_ = context?.Operators.Not((bool?)(bo_ is null));
 				bool? bq_ = context?.Operators.And(bm_, bp_);
@@ -1966,8 +1966,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> r_ = context?.Operators.Where<Observation>(p_, q_);
 			object s_(Observation @this)
 			{
-				Instant br_ = @this.IssuedElement;
-				DateTimeOffset? bs_ = br_.Value;
+				Instant br_ = @this?.IssuedElement;
+				DateTimeOffset? bs_ = br_?.Value;
 				CqlDateTime bt_ = context?.Operators.Convert<CqlDateTime>(bs_);
 				CqlDateTime bu_ = QICoreCommon_2_0_000.earliest((bt_ as object));
 
@@ -1975,8 +1975,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Observation> t_ = context?.Operators.SortBy<Observation>(r_, s_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation u_ = context?.Operators.First<Observation>(t_);
-			Instant v_ = u_.IssuedElement;
-			DateTimeOffset? w_ = v_.Value;
+			Instant v_ = u_?.IssuedElement;
+			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context?.Operators.Convert<CqlDateTime>(w_);
 			(string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
@@ -1996,12 +1996,12 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
 		(string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter)
 		{
-			Id d_ = TwentyWeeksPlusEncounter.IdElement;
-			string e_ = d_.Value;
+			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
+			string e_ = d_?.Value;
 			IEnumerable<Observation> f_ = context?.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? g_(Observation HeartRate)
 			{
-				DataType y_ = HeartRate.Effective;
+				DataType y_ = HeartRate?.Effective;
 				object z_ = FHIRHelpers_4_3_000.ToValue(y_);
 				CqlDateTime aa_ = QICoreCommon_2_0_000.earliest(z_);
 				CqlInterval<CqlDateTime> ab_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
@@ -2011,10 +2011,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime af_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> ag_ = context?.Operators.Interval(ae_, af_, true, false);
 				bool? ah_ = context?.Operators.In<CqlDateTime>(aa_, ag_, null);
-				Code<ObservationStatus> ai_ = HeartRate.StatusElement;
-				ObservationStatus? aj_ = ai_.Value;
+				Code<ObservationStatus> ai_ = HeartRate?.StatusElement;
+				ObservationStatus? aj_ = ai_?.Value;
 				string ak_ = context?.Operators.Convert<string>(aj_);
-				string[] al_ = /* ARR1 */ [
+				string[] al_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -2027,7 +2027,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> h_ = context?.Operators.Where<Observation>(f_, g_);
 			object i_(Observation @this)
 			{
-				DataType ao_ = @this.Effective;
+				DataType ao_ = @this?.Effective;
 				object ap_ = FHIRHelpers_4_3_000.ToValue(ao_);
 				CqlDateTime aq_ = QICoreCommon_2_0_000.earliest(ap_);
 
@@ -2035,12 +2035,12 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Observation> j_ = context?.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation k_ = context?.Operators.First<Observation>(j_);
-			DataType l_ = k_.Value;
+			DataType l_ = k_?.Value;
 			Quantity m_ = context?.Operators.Convert<Quantity>(l_);
 			CqlQuantity n_ = FHIRHelpers_4_3_000.ToQuantity(m_);
 			bool? p_(Observation HeartRate)
 			{
-				DataType ar_ = HeartRate.Effective;
+				DataType ar_ = HeartRate?.Effective;
 				object as_ = FHIRHelpers_4_3_000.ToValue(ar_);
 				CqlDateTime at_ = QICoreCommon_2_0_000.earliest(as_);
 				CqlInterval<CqlDateTime> au_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
@@ -2050,10 +2050,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime ay_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> az_ = context?.Operators.Interval(ax_, ay_, true, false);
 				bool? ba_ = context?.Operators.In<CqlDateTime>(at_, az_, null);
-				Code<ObservationStatus> bb_ = HeartRate.StatusElement;
-				ObservationStatus? bc_ = bb_.Value;
+				Code<ObservationStatus> bb_ = HeartRate?.StatusElement;
+				ObservationStatus? bc_ = bb_?.Value;
 				string bd_ = context?.Operators.Convert<string>(bc_);
-				string[] be_ = /* ARR1 */ [
+				string[] be_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -2066,7 +2066,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> q_ = context?.Operators.Where<Observation>(f_, p_);
 			object r_(Observation @this)
 			{
-				DataType bh_ = @this.Effective;
+				DataType bh_ = @this?.Effective;
 				object bi_ = FHIRHelpers_4_3_000.ToValue(bh_);
 				CqlDateTime bj_ = QICoreCommon_2_0_000.earliest(bi_);
 
@@ -2074,7 +2074,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Observation> s_ = context?.Operators.SortBy<Observation>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation t_ = context?.Operators.First<Observation>(s_);
-			DataType u_ = t_.Effective;
+			DataType u_ = t_?.Effective;
 			object v_ = FHIRHelpers_4_3_000.ToValue(u_);
 			CqlDateTime w_ = QICoreCommon_2_0_000.earliest(v_);
 			(string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? x_ = (e_, (n_ as CqlQuantity), w_);
@@ -2095,12 +2095,12 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation();
 		(string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter)
 		{
-			Id d_ = TwentyWeeksPlusEncounter.IdElement;
-			string e_ = d_.Value;
+			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
+			string e_ = d_?.Value;
 			IEnumerable<Observation> f_ = context?.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? g_(Observation BP)
 			{
-				DataType aa_ = BP.Effective;
+				DataType aa_ = BP?.Effective;
 				object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
 				CqlDateTime ac_ = QICoreCommon_2_0_000.earliest(ab_);
 				CqlInterval<CqlDateTime> ad_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
@@ -2110,10 +2110,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime ah_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> ai_ = context?.Operators.Interval(ag_, ah_, true, false);
 				bool? aj_ = context?.Operators.In<CqlDateTime>(ac_, ai_, null);
-				Code<ObservationStatus> ak_ = BP.StatusElement;
-				ObservationStatus? al_ = ak_.Value;
+				Code<ObservationStatus> ak_ = BP?.StatusElement;
+				ObservationStatus? al_ = ak_?.Value;
 				string am_ = context?.Operators.Convert<string>(al_);
-				string[] an_ = /* ARR1 */ [
+				string[] an_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -2126,7 +2126,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> h_ = context?.Operators.Where<Observation>(f_, g_);
 			object i_(Observation @this)
 			{
-				DataType aq_ = @this.Effective;
+				DataType aq_ = @this?.Effective;
 				object ar_ = FHIRHelpers_4_3_000.ToValue(aq_);
 				CqlDateTime as_ = QICoreCommon_2_0_000.earliest(ar_);
 
@@ -2134,10 +2134,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Observation> j_ = context?.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation k_ = context?.Operators.First<Observation>(j_);
-			List<Observation.ComponentComponent> l_ = k_.Component;
+			List<Observation.ComponentComponent> l_ = k_?.Component;
 			bool? m_(Observation.ComponentComponent C)
 			{
-				CodeableConcept at_ = C.Code;
+				CodeableConcept at_ = C?.Code;
 				CqlConcept au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 				CqlCode av_ = this.Systolic_blood_pressure();
 				CqlConcept aw_ = context?.Operators.ConvertCodeToConcept(av_);
@@ -2148,7 +2148,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation.ComponentComponent> n_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)l_, m_);
 			CqlQuantity o_(Observation.ComponentComponent C)
 			{
-				DataType ay_ = C.Value;
+				DataType ay_ = C?.Value;
 				object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
 
 				return (az_ as CqlQuantity);
@@ -2156,7 +2156,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<CqlQuantity> p_ = context?.Operators.Select<Observation.ComponentComponent, CqlQuantity>(n_, o_);
 			bool? r_(Observation BP)
 			{
-				DataType ba_ = BP.Effective;
+				DataType ba_ = BP?.Effective;
 				object bb_ = FHIRHelpers_4_3_000.ToValue(ba_);
 				CqlDateTime bc_ = QICoreCommon_2_0_000.earliest(bb_);
 				CqlInterval<CqlDateTime> bd_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
@@ -2166,10 +2166,10 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime bh_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> bi_ = context?.Operators.Interval(bg_, bh_, true, false);
 				bool? bj_ = context?.Operators.In<CqlDateTime>(bc_, bi_, null);
-				Code<ObservationStatus> bk_ = BP.StatusElement;
-				ObservationStatus? bl_ = bk_.Value;
+				Code<ObservationStatus> bk_ = BP?.StatusElement;
+				ObservationStatus? bl_ = bk_?.Value;
 				string bm_ = context?.Operators.Convert<string>(bl_);
-				string[] bn_ = /* ARR1 */ [
+				string[] bn_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -2182,7 +2182,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> s_ = context?.Operators.Where<Observation>(f_, r_);
 			object t_(Observation @this)
 			{
-				DataType bq_ = @this.Effective;
+				DataType bq_ = @this?.Effective;
 				object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
 				CqlDateTime bs_ = QICoreCommon_2_0_000.earliest(br_);
 
@@ -2190,7 +2190,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Observation> u_ = context?.Operators.SortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation v_ = context?.Operators.First<Observation>(u_);
-			DataType w_ = v_.Effective;
+			DataType w_ = v_?.Effective;
 			object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 			CqlDateTime y_ = QICoreCommon_2_0_000.earliest(x_);
 			(string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)? z_ = (e_, p_, y_);
@@ -2209,12 +2209,12 @@ public class SevereObstetricComplicationsFHIR_0_1_000
     [CqlDeclaration("pOAIsNoOrUTD")]
 	public IEnumerable<CqlConcept> pOAIsNoOrUTD(Encounter TheEncounter)
 	{
-		List<Encounter.DiagnosisComponent> a_ = TheEncounter.Diagnosis;
+		List<Encounter.DiagnosisComponent> a_ = TheEncounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent EncounterDiagnoses)
 		{
 			bool? f_(Extension @this)
 			{
-				string o_ = @this.Url;
+				string o_ = @this?.Url;
 				FhirUri p_ = context?.Operators.Convert<FhirUri>(o_);
 				string q_ = FHIRHelpers_4_3_000.ToString(p_);
 				bool? r_ = context?.Operators.Equal(q_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
@@ -2226,7 +2226,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					: null), f_);
 			DataType h_(Extension @this)
 			{
-				DataType s_ = @this.Value;
+				DataType s_ = @this?.Value;
 
 				return s_;
 			};
@@ -2242,9 +2242,9 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context?.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		CqlConcept d_(Encounter.DiagnosisComponent EncounterDiagnoses)
 		{
-			ResourceReference t_ = EncounterDiagnoses.Condition;
+			ResourceReference t_ = EncounterDiagnoses?.Condition;
 			Condition u_ = CQMCommon_2_0_000.getCondition(t_);
-			CodeableConcept v_ = u_.Code;
+			CodeableConcept v_ = u_?.Code;
 			CqlConcept w_ = FHIRHelpers_4_3_000.ToConcept(v_);
 
 			return w_;

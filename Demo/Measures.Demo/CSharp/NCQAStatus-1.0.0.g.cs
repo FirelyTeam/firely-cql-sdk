@@ -142,7 +142,7 @@ public class NCQAStatus_1_0_0
 		{
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
-			string[] e_ = /* ARR1 */ [
+			string[] e_ = [
 				"completed",
 			];
 			bool? f_ = context?.Operators.In<string>(d_, (e_ as IEnumerable<string>));
@@ -177,7 +177,7 @@ public class NCQAStatus_1_0_0
 		{
 			Code<EventStatus> c_ = P.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
-			string[] e_ = /* ARR1 */ [
+			string[] e_ = [
 				"completed",
 				"in-progress",
 			];

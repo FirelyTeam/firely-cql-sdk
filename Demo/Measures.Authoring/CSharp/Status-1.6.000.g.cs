@@ -88,7 +88,7 @@ public class Status_1_6_000
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 			new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
@@ -104,7 +104,7 @@ public class Status_1_6_000
 
 	private CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
 		];
 
@@ -136,7 +136,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -178,7 +178,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -256,7 +256,7 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_.Value;
 			Code<RequestStatus> e_ = context?.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"active",
 				"completed",
 			];
@@ -283,7 +283,7 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_.Value;
 			Code<RequestStatus> e_ = context?.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"active",
 				"completed",
 			];
@@ -310,7 +310,7 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_.Value;
 			Code<RequestStatus> e_ = context?.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"active",
 				"completed",
 			];
@@ -337,7 +337,7 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_.Value;
 			Code<RequestStatus> e_ = context?.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"active",
 				"completed",
 			];
@@ -364,7 +364,7 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_.Value;
 			Code<RequestStatus> e_ = context?.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"active",
 				"completed",
 			];
@@ -391,7 +391,7 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_.Value;
 			Code<RequestStatus> e_ = context?.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"active",
 				"completed",
 			];
@@ -418,7 +418,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -441,7 +441,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -464,7 +464,7 @@ public class Status_1_6_000
 			Encounter.EncounterStatus? d_ = c_.Value;
 			Code<Encounter.EncounterStatus> e_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"finished",
 				"arrived",
 				"triaged",
@@ -489,7 +489,7 @@ public class Status_1_6_000
 			Encounter.EncounterStatus? d_ = c_.Value;
 			Code<Encounter.EncounterStatus> e_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"finished",
 				"arrived",
 				"triaged",
@@ -599,7 +599,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -641,7 +641,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -727,7 +727,7 @@ public class Status_1_6_000
 			MedicationDispense.MedicationDispenseStatusCodes? d_ = c_.Value;
 			Code<MedicationDispense.MedicationDispenseStatusCodes> e_ = context?.Operators.Convert<Code<MedicationDispense.MedicationDispenseStatusCodes>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"completed",
 				"in-progress",
 				"on-hold",
@@ -750,7 +750,7 @@ public class Status_1_6_000
 			MedicationDispense.MedicationDispenseStatusCodes? d_ = c_.Value;
 			Code<MedicationDispense.MedicationDispenseStatusCodes> e_ = context?.Operators.Convert<Code<MedicationDispense.MedicationDispenseStatusCodes>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"completed",
 				"in-progress",
 				"on-hold",
@@ -772,7 +772,7 @@ public class Status_1_6_000
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M.StatusElement;
 			MedicationRequest.MedicationrequestStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"active",
 				"completed",
 			];
@@ -798,7 +798,7 @@ public class Status_1_6_000
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M.StatusElement;
 			MedicationRequest.MedicationrequestStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"active",
 				"completed",
 			];
@@ -825,7 +825,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -867,7 +867,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -908,7 +908,7 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O.StatusElement;
 			ObservationStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -930,7 +930,7 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O.StatusElement;
 			ObservationStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -952,7 +952,7 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O.StatusElement;
 			ObservationStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -974,7 +974,7 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O.StatusElement;
 			ObservationStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -996,7 +996,7 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O.StatusElement;
 			ObservationStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -1018,7 +1018,7 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O.StatusElement;
 			ObservationStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -1040,7 +1040,7 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O.StatusElement;
 			ObservationStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -1062,7 +1062,7 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O.StatusElement;
 			ObservationStatus? d_ = c_.Value;
 			string e_ = context?.Operators.Convert<string>(d_);
-			string[] f_ = /* ARR1 */ [
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -1085,7 +1085,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"preliminary",
 				"final",
 				"amended",
@@ -1109,7 +1109,7 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"preliminary",
 				"final",
 				"amended",

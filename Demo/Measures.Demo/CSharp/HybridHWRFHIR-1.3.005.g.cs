@@ -276,7 +276,7 @@ public class HybridHWRFHIR_1_3_005
 
 	private CqlCode[] LOINC_2_69_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 			new CqlCode("8867-4", "http://loinc.org", null, null),
 			new CqlCode("59408-5", "http://loinc.org", null, null),
@@ -364,7 +364,7 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("HospitalizationWithObservation")]
 	public CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
 	{
-		Encounter[] a_ = /* ARR1 */ [
+		Encounter[] a_ = [
 			TheEncounter,
 		];
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
@@ -676,7 +676,7 @@ public class HybridHWRFHIR_1_3_005
 				bool? aw_ = context?.Operators.And(ag_, av_);
 				Code<ObservationStatus> ax_ = Exam.StatusElement;
 				string ay_ = FHIRHelpers_4_0_001.ToString(ax_);
-				string[] az_ = /* ARR1 */ [
+				string[] az_ = [
 					"final",
 					"amended",
 					"preliminary",
@@ -727,7 +727,7 @@ public class HybridHWRFHIR_1_3_005
 				bool? cb_ = context?.Operators.And(bl_, ca_);
 				Code<ObservationStatus> cc_ = Exam.StatusElement;
 				string cd_ = FHIRHelpers_4_0_001.ToString(cc_);
-				string[] ce_ = /* ARR1 */ [
+				string[] ce_ = [
 					"final",
 					"amended",
 					"preliminary",
@@ -797,7 +797,7 @@ public class HybridHWRFHIR_1_3_005
 				bool? aw_ = context?.Operators.And(ag_, av_);
 				Code<ObservationStatus> ax_ = Exam.StatusElement;
 				string ay_ = FHIRHelpers_4_0_001.ToString(ax_);
-				string[] az_ = /* ARR1 */ [
+				string[] az_ = [
 					"final",
 					"amended",
 					"preliminary",
@@ -847,7 +847,7 @@ public class HybridHWRFHIR_1_3_005
 				bool? cb_ = context?.Operators.And(bl_, ca_);
 				Code<ObservationStatus> cc_ = Exam.StatusElement;
 				string cd_ = FHIRHelpers_4_0_001.ToString(cc_);
-				string[] ce_ = /* ARR1 */ [
+				string[] ce_ = [
 					"final",
 					"amended",
 					"preliminary",
@@ -914,7 +914,7 @@ public class HybridHWRFHIR_1_3_005
 				bool? as_ = context?.Operators.And(ad_, ar_);
 				Code<ObservationStatus> at_ = Lab.StatusElement;
 				string au_ = FHIRHelpers_4_0_001.ToString(at_);
-				string[] av_ = /* ARR1 */ [
+				string[] av_ = [
 					"final",
 					"amended",
 					"preliminary",
@@ -959,7 +959,7 @@ public class HybridHWRFHIR_1_3_005
 				bool? bs_ = context?.Operators.And(bd_, br_);
 				Code<ObservationStatus> bt_ = Lab.StatusElement;
 				string bu_ = FHIRHelpers_4_0_001.ToString(bt_);
-				string[] bv_ = /* ARR1 */ [
+				string[] bv_ = [
 					"final",
 					"amended",
 					"preliminary",
@@ -1038,7 +1038,7 @@ public class HybridHWRFHIR_1_3_005
 		CqlValueSet ao_ = this.Glucose_lab_test();
 		IEnumerable<Observation> ap_ = context?.Operators.RetrieveByValueSet<Observation>(ao_, null);
 		IEnumerable<string> aq_ = this.FirstLabTestWithEncounterId(ap_, "FirstGlucose");
-		IEnumerable<string>[] ar_ = /* ARR1 */ [
+		IEnumerable<string>[] ar_ = [
 			d_,
 			h_,
 			l_,

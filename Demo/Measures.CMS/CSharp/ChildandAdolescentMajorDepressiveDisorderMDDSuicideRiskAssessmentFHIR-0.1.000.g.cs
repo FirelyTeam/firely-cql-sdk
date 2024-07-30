@@ -188,7 +188,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 		];
 
@@ -201,7 +201,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("225337009", "http://snomed.info/sct", null, null),
 		];
 
@@ -214,7 +214,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 	private CqlCode[] ActCode_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
 		];
 
@@ -227,7 +227,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 
 	private CqlCode[] ICD10CM_Value()
 	{
-		CqlCode[] a_ = /* ARR2 */ new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -334,11 +334,11 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 		IEnumerable<Encounter> w_ = context?.Operators.Union<Encounter>(q_, v_);
 		bool? x_(Encounter ValidEncounter)
 		{
-			Code<Encounter.EncounterStatus> z_ = ValidEncounter.StatusElement;
-			Encounter.EncounterStatus? aa_ = z_.Value;
+			Code<Encounter.EncounterStatus> z_ = ValidEncounter?.StatusElement;
+			Encounter.EncounterStatus? aa_ = z_?.Value;
 			Code<Encounter.EncounterStatus> ab_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(aa_);
 			bool? ac_ = context?.Operators.Equal(ab_, "finished");
-			List<CodeableConcept> ad_ = ValidEncounter.ReasonCode;
+			List<CodeableConcept> ad_ = ValidEncounter?.ReasonCode;
 			CqlConcept ae_(CodeableConcept @this)
 			{
 				CqlConcept at_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -351,7 +351,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			IEnumerable<Condition> ai_ = CQMCommon_2_0_000.EncounterDiagnosis(ValidEncounter);
 			bool? aj_(Condition EncounterDiagnosis)
 			{
-				CodeableConcept au_ = EncounterDiagnosis.Code;
+				CodeableConcept au_ = EncounterDiagnosis?.Code;
 				CqlConcept av_ = FHIRHelpers_4_3_000.ToConcept(au_);
 				CqlValueSet aw_ = this.Major_Depressive_Disorder_Active();
 				bool? ax_ = context?.Operators.ConceptInValueSet(av_, aw_);
@@ -363,7 +363,7 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			bool? am_ = context?.Operators.Or(ah_, al_);
 			bool? an_ = context?.Operators.And(ac_, am_);
 			CqlInterval<CqlDateTime> ao_ = this.Measurement_Period();
-			Period ap_ = ValidEncounter.Period;
+			Period ap_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_3_000.ToInterval(ap_);
 			bool? ar_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, null);
 			bool? as_ = context?.Operators.And(an_, ar_);
@@ -385,16 +385,16 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 		bool? b_(Encounter MDDEncounter)
 		{
 			Patient d_ = this.Patient();
-			Date e_ = d_.BirthDateElement;
-			string f_ = e_.Value;
+			Date e_ = d_?.BirthDateElement;
+			string f_ = e_?.Value;
 			CqlDate g_ = context?.Operators.ConvertStringToDate(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			CqlDateTime i_ = context?.Operators.Start(h_);
 			CqlDate j_ = context?.Operators.DateFrom(i_);
 			int? k_ = context?.Operators.CalculateAgeAt(g_, j_, null);
 			bool? l_ = context?.Operators.GreaterOrEqual(k_, 6);
-			Date n_ = d_.BirthDateElement;
-			string o_ = n_.Value;
+			Date n_ = d_?.BirthDateElement;
+			string o_ = n_?.Value;
 			CqlDate p_ = context?.Operators.ConvertStringToDate(o_);
 			CqlDateTime r_ = context?.Operators.Start(h_);
 			CqlDate s_ = context?.Operators.DateFrom(r_);
@@ -434,13 +434,13 @@ public class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFH
 			IEnumerable<Procedure> f_ = context?.Operators.RetrieveByCodes<Procedure>(e_, null);
 			bool? g_(Procedure SuicideRiskAssessment)
 			{
-				Code<EventStatus> k_ = SuicideRiskAssessment.StatusElement;
-				EventStatus? l_ = k_.Value;
+				Code<EventStatus> k_ = SuicideRiskAssessment?.StatusElement;
+				EventStatus? l_ = k_?.Value;
 				string m_ = context?.Operators.Convert<string>(l_);
 				bool? n_ = context?.Operators.Equal(m_, "completed");
-				Period o_ = MDDEncounter.Period;
+				Period o_ = MDDEncounter?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
-				DataType q_ = SuicideRiskAssessment.Performed;
+				DataType q_ = SuicideRiskAssessment?.Performed;
 				object r_ = FHIRHelpers_4_3_000.ToValue(q_);
 				CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_);
 				bool? t_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, null);

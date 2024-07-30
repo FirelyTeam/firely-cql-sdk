@@ -154,7 +154,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("419099009", "http://snomed.info/sct", null, null),
 		];
 
@@ -167,7 +167,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 	private CqlCode[] HSLOC_Value()
 	{
-		CqlCode[] a_ = /* ARR2 */ new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -210,10 +210,10 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		bool? c_(Encounter InpatientEncounter)
 		{
 			Patient e_ = this.Patient();
-			Date f_ = e_.BirthDateElement;
-			string g_ = f_.Value;
+			Date f_ = e_?.BirthDateElement;
+			string g_ = f_?.Value;
 			CqlDate h_ = context?.Operators.ConvertStringToDate(g_);
-			Period i_ = InpatientEncounter.Period;
+			Period i_ = InpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_3_000.ToInterval(i_);
 			CqlDateTime k_ = context?.Operators.Start(j_);
 			CqlDate l_ = context?.Operators.DateFrom(k_);
@@ -224,8 +224,8 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			CqlInterval<CqlDateTime> r_ = this.Measurement_Period();
 			bool? s_ = context?.Operators.In<CqlDateTime>(q_, r_, null);
 			bool? t_ = context?.Operators.And(n_, s_);
-			Code<Encounter.EncounterStatus> u_ = InpatientEncounter.StatusElement;
-			Encounter.EncounterStatus? v_ = u_.Value;
+			Code<Encounter.EncounterStatus> u_ = InpatientEncounter?.StatusElement;
+			Encounter.EncounterStatus? v_ = u_?.Value;
 			Code<Encounter.EncounterStatus> w_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
 			bool? x_ = context?.Operators.Equal(w_, "finished");
 			bool? y_ = context?.Operators.And(t_, x_);
@@ -249,11 +249,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		IEnumerable<MedicationAdministration> e_ = context?.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration Opioids)
 		{
-			Code<MedicationAdministration.MedicationAdministrationStatusCodes> h_ = Opioids.StatusElement;
-			MedicationAdministration.MedicationAdministrationStatusCodes? i_ = h_.Value;
+			Code<MedicationAdministration.MedicationAdministrationStatusCodes> h_ = Opioids?.StatusElement;
+			MedicationAdministration.MedicationAdministrationStatusCodes? i_ = h_?.Value;
 			Code<MedicationAdministration.MedicationAdministrationStatusCodes> j_ = context?.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(i_);
 			bool? k_ = context?.Operators.Equal(j_, "completed");
-			MedicationAdministration.MedicationAdministrationStatusCodes? m_ = h_.Value;
+			MedicationAdministration.MedicationAdministrationStatusCodes? m_ = h_?.Value;
 			Code<MedicationAdministration.MedicationAdministrationStatusCodes> n_ = context?.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(m_);
 			bool? o_ = context?.Operators.Equal(n_, "not-done");
 			bool? p_ = context?.Operators.Not(o_);
@@ -278,18 +278,18 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			IEnumerable<MedicationAdministration> d_ = this.Opioid_Administration();
 			bool? e_(MedicationAdministration OpioidGiven)
 			{
-				DataType i_ = OpioidGiven.Effective;
+				DataType i_ = OpioidGiven?.Effective;
 				object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 				CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToInterval(j_);
 				CqlDateTime l_ = context?.Operators.Start(k_);
 				CqlInterval<CqlDateTime> m_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientEncounter);
 				bool? n_ = context?.Operators.In<CqlDateTime>(l_, m_, null);
-				List<Encounter.LocationComponent> o_ = InpatientEncounter.Location;
+				List<Encounter.LocationComponent> o_ = InpatientEncounter?.Location;
 				bool? p_(Encounter.LocationComponent EncounterLocation)
 				{
-					ResourceReference u_ = EncounterLocation.Location;
+					ResourceReference u_ = EncounterLocation?.Location;
 					Location v_ = CQMCommon_2_0_000.GetLocation(u_);
-					List<CodeableConcept> w_ = v_.Type;
+					List<CodeableConcept> w_ = v_?.Type;
 					CqlConcept x_(CodeableConcept @this)
 					{
 						CqlConcept aj_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -299,11 +299,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 					IEnumerable<CqlConcept> y_ = context?.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)w_, x_);
 					CqlValueSet z_ = this.Operating_Room_Suite();
 					bool? aa_ = context?.Operators.ConceptsInValueSet(y_, z_);
-					DataType ab_ = OpioidGiven.Effective;
+					DataType ab_ = OpioidGiven?.Effective;
 					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 					CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_0_000.ToInterval(ac_);
 					CqlDateTime ae_ = context?.Operators.Start(ad_);
-					Period af_ = EncounterLocation.Period;
+					Period af_ = EncounterLocation?.Period;
 					CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
 					bool? ah_ = context?.Operators.In<CqlDateTime>(ae_, ag_, null);
 					bool? ai_ = context?.Operators.And(aa_, ah_);
@@ -363,11 +363,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		IEnumerable<MedicationAdministration> e_ = context?.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration AntagonistGiven)
 		{
-			Code<MedicationAdministration.MedicationAdministrationStatusCodes> h_ = AntagonistGiven.StatusElement;
-			MedicationAdministration.MedicationAdministrationStatusCodes? i_ = h_.Value;
+			Code<MedicationAdministration.MedicationAdministrationStatusCodes> h_ = AntagonistGiven?.StatusElement;
+			MedicationAdministration.MedicationAdministrationStatusCodes? i_ = h_?.Value;
 			Code<MedicationAdministration.MedicationAdministrationStatusCodes> j_ = context?.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(i_);
 			bool? k_ = context?.Operators.Equal(j_, "completed");
-			MedicationAdministration.MedicationAdministrationStatusCodes? m_ = h_.Value;
+			MedicationAdministration.MedicationAdministrationStatusCodes? m_ = h_?.Value;
 			Code<MedicationAdministration.MedicationAdministrationStatusCodes> n_ = context?.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(m_);
 			bool? o_ = context?.Operators.Equal(n_, "not-done");
 			bool? p_ = context?.Operators.Not(o_);
@@ -399,12 +399,12 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		IEnumerable<(MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)?> f_ = context?.Operators.Select<ValueTuple<MedicationAdministration, MedicationAdministration, Encounter>, (MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)?>(d_, e_);
 		bool? g_((MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)? tuple_dioqpvxlkifmhgtiyeejrusad)
 		{
-			List<Encounter.LocationComponent> l_ = tuple_dioqpvxlkifmhgtiyeejrusad?.EncounterWithQualifyingAge.Location;
+			List<Encounter.LocationComponent> l_ = tuple_dioqpvxlkifmhgtiyeejrusad?.EncounterWithQualifyingAge?.Location;
 			bool? m_(Encounter.LocationComponent EncounterLocation)
 			{
-				ResourceReference bh_ = EncounterLocation.Location;
+				ResourceReference bh_ = EncounterLocation?.Location;
 				Location bi_ = CQMCommon_2_0_000.GetLocation(bh_);
-				List<CodeableConcept> bj_ = bi_.Type;
+				List<CodeableConcept> bj_ = bi_?.Type;
 				CqlConcept bk_(CodeableConcept @this)
 				{
 					CqlConcept bw_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -414,11 +414,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 				IEnumerable<CqlConcept> bl_ = context?.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bj_, bk_);
 				CqlValueSet bm_ = this.Operating_Room_Suite();
 				bool? bn_ = context?.Operators.ConceptsInValueSet(bl_, bm_);
-				DataType bo_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven.Effective;
+				DataType bo_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven?.Effective;
 				object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 				CqlInterval<CqlDateTime> bq_ = QICoreCommon_2_0_000.ToInterval(bp_);
 				CqlDateTime br_ = context?.Operators.Start(bq_);
-				Period bs_ = EncounterLocation.Period;
+				Period bs_ = EncounterLocation?.Period;
 				CqlInterval<CqlDateTime> bt_ = FHIRHelpers_4_3_000.ToInterval(bs_);
 				bool? bu_ = context?.Operators.In<CqlDateTime>(br_, bt_, null);
 				bool? bv_ = context?.Operators.And(bn_, bu_);
@@ -428,13 +428,13 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			IEnumerable<Encounter.LocationComponent> n_ = context?.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)l_, m_);
 			bool? o_ = context?.Operators.Exists<Encounter.LocationComponent>(n_);
 			bool? p_ = context?.Operators.Not(o_);
-			DataType q_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven.Effective;
+			DataType q_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven?.Effective;
 			object r_ = FHIRHelpers_4_3_000.ToValue(q_);
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_);
 			CqlDateTime t_ = context?.Operators.Start(s_);
 			CqlInterval<CqlDateTime> u_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_dioqpvxlkifmhgtiyeejrusad?.EncounterWithQualifyingAge);
 			bool? v_ = context?.Operators.In<CqlDateTime>(t_, u_, null);
-			DataType w_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidGiven.Effective;
+			DataType w_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidGiven?.Effective;
 			object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_);
 			CqlDateTime z_ = context?.Operators.Start(y_);
@@ -459,8 +459,8 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			bool? ax_ = context?.Operators.Not((bool?)(aw_ is null));
 			bool? ay_ = context?.Operators.And(as_, ax_);
 			bool? az_ = context?.Operators.And(ac_, ay_);
-			MedicationAdministration.DosageComponent ba_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven.Dosage;
-			CodeableConcept bb_ = ba_.Route;
+			MedicationAdministration.DosageComponent ba_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven?.Dosage;
+			CodeableConcept bb_ = ba_?.Route;
 			CqlConcept bc_ = FHIRHelpers_4_3_000.ToConcept(bb_);
 			CqlValueSet bd_ = this.Routes_of_Administration_for_Opioid_Antagonists();
 			bool? be_ = context?.Operators.ConceptInValueSet(bc_, bd_);

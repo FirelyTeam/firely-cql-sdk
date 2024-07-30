@@ -207,7 +207,7 @@ public class HIVRetentionFHIR_0_1_000
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = /* ARR2 */ new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -278,7 +278,7 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		bool? b_(Extension @this)
 		{
-			string m_ = @this.Url;
+			string m_ = @this?.Url;
 			FhirUri n_ = context?.Operators.Convert<FhirUri>(m_);
 			string o_ = FHIRHelpers_4_3_000.ToString(n_);
 			bool? p_ = context?.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
@@ -287,14 +287,14 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		IEnumerable<Extension> c_ = context?.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		Extension d_ = context?.Operators.SingletonFrom<Extension>(c_);
-		Extension[] e_ = /* ARR1 */ [
+		Extension[] e_ = [
 			d_,
 		];
 		(IEnumerable<CqlCode> codes, string display)? f_(Extension E)
 		{
 			bool? q_(Extension @this)
 			{
-				string am_ = @this.Url;
+				string am_ = @this?.Url;
 				FhirUri an_ = context?.Operators.Convert<FhirUri>(am_);
 				string ao_ = FHIRHelpers_4_3_000.ToString(an_);
 				bool? ap_ = context?.Operators.Equal(ao_, "ombCategory");
@@ -306,7 +306,7 @@ public class HIVRetentionFHIR_0_1_000
 					: null), q_);
 			DataType s_(Extension @this)
 			{
-				DataType aq_ = @this.Value;
+				DataType aq_ = @this?.Value;
 
 				return aq_;
 			};
@@ -314,12 +314,12 @@ public class HIVRetentionFHIR_0_1_000
 			DataType u_ = context?.Operators.SingletonFrom<DataType>(t_);
 			Coding v_ = context?.Operators.Convert<Coding>(u_);
 			CqlCode w_ = FHIRHelpers_4_3_000.ToCode(v_);
-			CqlCode[] x_ = /* ARR1 */ [
+			CqlCode[] x_ = [
 				w_,
 			];
 			bool? y_(Extension @this)
 			{
-				string ar_ = @this.Url;
+				string ar_ = @this?.Url;
 				FhirUri as_ = context?.Operators.Convert<FhirUri>(ar_);
 				string at_ = FHIRHelpers_4_3_000.ToString(as_);
 				bool? au_ = context?.Operators.Equal(at_, "detailed");
@@ -331,7 +331,7 @@ public class HIVRetentionFHIR_0_1_000
 					: null), y_);
 			DataType aa_(Extension @this)
 			{
-				DataType av_ = @this.Value;
+				DataType av_ = @this?.Value;
 
 				return av_;
 			};
@@ -347,7 +347,7 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<CqlCode> ae_ = context?.Operators.Union<CqlCode>((x_ as IEnumerable<CqlCode>), ad_);
 			bool? af_(Extension @this)
 			{
-				string ay_ = @this.Url;
+				string ay_ = @this?.Url;
 				FhirUri az_ = context?.Operators.Convert<FhirUri>(ay_);
 				string ba_ = FHIRHelpers_4_3_000.ToString(az_);
 				bool? bb_ = context?.Operators.Equal(ba_, "text");
@@ -359,7 +359,7 @@ public class HIVRetentionFHIR_0_1_000
 					: null), af_);
 			DataType ah_(Extension @this)
 			{
-				DataType bc_ = @this.Value;
+				DataType bc_ = @this?.Value;
 
 				return bc_;
 			};
@@ -404,7 +404,7 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		bool? b_(Extension @this)
 		{
-			string m_ = @this.Url;
+			string m_ = @this?.Url;
 			FhirUri n_ = context?.Operators.Convert<FhirUri>(m_);
 			string o_ = FHIRHelpers_4_3_000.ToString(n_);
 			bool? p_ = context?.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
@@ -413,14 +413,14 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		IEnumerable<Extension> c_ = context?.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		Extension d_ = context?.Operators.SingletonFrom<Extension>(c_);
-		Extension[] e_ = /* ARR1 */ [
+		Extension[] e_ = [
 			d_,
 		];
 		(IEnumerable<CqlCode> codes, string display)? f_(Extension R)
 		{
 			bool? q_(Extension @this)
 			{
-				string ak_ = @this.Url;
+				string ak_ = @this?.Url;
 				FhirUri al_ = context?.Operators.Convert<FhirUri>(ak_);
 				string am_ = FHIRHelpers_4_3_000.ToString(al_);
 				bool? an_ = context?.Operators.Equal(am_, "ombCategory");
@@ -432,7 +432,7 @@ public class HIVRetentionFHIR_0_1_000
 					: null), q_);
 			DataType s_(Extension @this)
 			{
-				DataType ao_ = @this.Value;
+				DataType ao_ = @this?.Value;
 
 				return ao_;
 			};
@@ -447,7 +447,7 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<CqlCode> v_ = context?.Operators.Select<DataType, CqlCode>(t_, u_);
 			bool? w_(Extension @this)
 			{
-				string ar_ = @this.Url;
+				string ar_ = @this?.Url;
 				FhirUri as_ = context?.Operators.Convert<FhirUri>(ar_);
 				string at_ = FHIRHelpers_4_3_000.ToString(as_);
 				bool? au_ = context?.Operators.Equal(at_, "detailed");
@@ -459,7 +459,7 @@ public class HIVRetentionFHIR_0_1_000
 					: null), w_);
 			DataType y_(Extension @this)
 			{
-				DataType av_ = @this.Value;
+				DataType av_ = @this?.Value;
 
 				return av_;
 			};
@@ -475,7 +475,7 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<CqlCode> ac_ = context?.Operators.Union<CqlCode>(v_, ab_);
 			bool? ad_(Extension @this)
 			{
-				string ay_ = @this.Url;
+				string ay_ = @this?.Url;
 				FhirUri az_ = context?.Operators.Convert<FhirUri>(ay_);
 				string ba_ = FHIRHelpers_4_3_000.ToString(az_);
 				bool? bb_ = context?.Operators.Equal(ba_, "text");
@@ -487,7 +487,7 @@ public class HIVRetentionFHIR_0_1_000
 					: null), ad_);
 			DataType af_(Extension @this)
 			{
-				DataType bc_ = @this.Value;
+				DataType bc_ = @this?.Value;
 
 				return bc_;
 			};
@@ -591,7 +591,7 @@ public class HIVRetentionFHIR_0_1_000
 			CqlQuantity an_ = context?.Operators.Quantity(240m, "days");
 			CqlDateTime ao_ = context?.Operators.Add(am_, an_);
 			CqlInterval<CqlDateTime> ap_ = context?.Operators.Interval(ak_, ao_, true, true);
-			Period aq_ = QualifyingEncounter.Period;
+			Period aq_ = QualifyingEncounter?.Period;
 			CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_3_000.ToInterval(aq_);
 			bool? as_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, null);
 
@@ -672,7 +672,7 @@ public class HIVRetentionFHIR_0_1_000
 			bool? ak_(Condition HIVDiagnosis)
 			{
 				CqlInterval<CqlDateTime> ao_ = this.Measurement_Period();
-				Period ap_ = ValidEncounter.Period;
+				Period ap_ = ValidEncounter?.Period;
 				CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_3_000.ToInterval(ap_);
 				bool? ar_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, null);
 				CqlInterval<CqlDateTime> as_()
@@ -729,7 +729,7 @@ public class HIVRetentionFHIR_0_1_000
 		bool? c_(Observation ViralLoadTest)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
-			DataType g_ = ViralLoadTest.Effective;
+			DataType g_ = ViralLoadTest?.Effective;
 			object h_ = FHIRHelpers_4_3_000.ToValue(g_);
 			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToInterval(h_);
 			bool? j_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, null);
@@ -756,14 +756,14 @@ public class HIVRetentionFHIR_0_1_000
 			bool? g_(Observation ViralLoadTest)
 			{
 				CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
-				DataType l_ = ViralLoadTest.Effective;
+				DataType l_ = ViralLoadTest?.Effective;
 				object m_ = FHIRHelpers_4_3_000.ToValue(l_);
 				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.ToInterval(m_);
 				bool? o_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, null);
 				object q_ = FHIRHelpers_4_3_000.ToValue(l_);
 				CqlInterval<CqlDateTime> r_ = QICoreCommon_2_0_000.ToInterval(q_);
 				CqlDateTime s_ = context?.Operators.Start(r_);
-				Period t_ = EncounterWithHIV.Period;
+				Period t_ = EncounterWithHIV?.Period;
 				CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_3_000.ToInterval(t_);
 				CqlDateTime v_ = context?.Operators.End(u_);
 				CqlQuantity w_ = context?.Operators.Quantity(90m, "days");
@@ -808,10 +808,10 @@ public class HIVRetentionFHIR_0_1_000
 			{
 				bool? j_ = context?.Operators.Equivalent(EncounterWithHIV, AnotherEncounterWithHIV);
 				bool? k_ = context?.Operators.Not(j_);
-				Period l_ = AnotherEncounterWithHIV.Period;
+				Period l_ = AnotherEncounterWithHIV?.Period;
 				CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 				CqlDateTime n_ = context?.Operators.Start(m_);
-				Period o_ = EncounterWithHIV.Period;
+				Period o_ = EncounterWithHIV?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 				CqlDateTime q_ = context?.Operators.End(p_);
 				CqlQuantity r_ = context?.Operators.Quantity(90m, "days");

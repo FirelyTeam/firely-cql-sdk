@@ -172,7 +172,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 		];
 

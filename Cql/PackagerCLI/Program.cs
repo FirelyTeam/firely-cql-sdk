@@ -33,7 +33,7 @@ public class Program
 
     public static int Main(string[] args)
     {
-#if DEBUG // Latest Visual Studio can't handle the $(SolutionDir) args in the launchSettings!!
+#if DEBUG // Latest Visual Studio can't handle the $(CqlSolutionDir) args in the launchSettings!!
         var dir = new DirectoryInfo(Environment.CurrentDirectory)
             .FindParentDirectoryContaining("CqlAndDemo.sln")!;
 

@@ -381,7 +381,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlCode[] RXNORM_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
 			new CqlCode("977860", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
 		];
@@ -713,20 +713,20 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			CqlQuantity o_ = context?.Operators.Quantity(6m, "months");
 			CqlDate p_ = context?.Operators.Subtract(n_, o_);
 			CqlInterval<CqlDate> r_ = context?.Operators.Interval(p_, n_, true, true);
-			CqlDate s_ = r_.low;
+			CqlDate s_ = r_?.low;
 			CqlDateTime t_ = context?.Operators.ConvertDateToDateTime(s_);
 			CqlDate w_ = context?.Operators.Subtract(n_, o_);
 			CqlInterval<CqlDate> y_ = context?.Operators.Interval(w_, n_, true, true);
-			CqlDate z_ = y_.high;
+			CqlDate z_ = y_?.high;
 			CqlDateTime aa_ = context?.Operators.ConvertDateToDateTime(z_);
 			CqlDate ad_ = context?.Operators.Subtract(n_, o_);
 			CqlInterval<CqlDate> af_ = context?.Operators.Interval(ad_, n_, true, true);
-			bool? ag_ = af_.lowClosed;
+			bool? ag_ = af_?.lowClosed;
 			CqlDate aj_ = context?.Operators.Subtract(n_, o_);
 			CqlInterval<CqlDate> al_ = context?.Operators.Interval(aj_, n_, true, true);
-			bool? am_ = al_.highClosed;
+			bool? am_ = al_?.highClosed;
 			CqlInterval<CqlDateTime> an_ = context?.Operators.Interval(t_, aa_, ag_, am_);
-			Period ao_ = ValidEncounters.Period;
+			Period ao_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_3_000.ToInterval(ao_);
 			CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_0_000.ToInterval((ap_ as object));
 			bool? ar_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, null);
@@ -745,11 +745,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
     [CqlDeclaration("PrincipalDiagnosis")]
 	public IEnumerable<Condition> PrincipalDiagnosis(Encounter Encounter)
 	{
-		List<Encounter.DiagnosisComponent> a_ = Encounter.Diagnosis;
+		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent D)
 		{
-			PositiveInt f_ = D.RankElement;
-			int? g_ = f_.Value;
+			PositiveInt f_ = D?.RankElement;
+			int? g_ = f_?.Value;
 			bool? h_ = context?.Operators.Equal(g_, 1);
 
 			return h_;
@@ -760,11 +760,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			IEnumerable<Condition> i_ = context?.Operators.RetrieveByValueSet<Condition>(null, null);
 			bool? j_(Condition C)
 			{
-				Id m_ = C.IdElement;
-				string n_ = m_.Value;
-				ResourceReference o_ = PD.Condition;
-				FhirString p_ = o_.ReferenceElement;
-				string q_ = p_.Value;
+				Id m_ = C?.IdElement;
+				string n_ = m_?.Value;
+				ResourceReference o_ = PD?.Condition;
+				FhirString p_ = o_?.ReferenceElement;
+				string q_ = p_?.Value;
 				string r_ = QICoreCommon_2_0_000.getId(q_);
 				bool? s_ = context?.Operators.Equal(n_, r_);
 
@@ -789,7 +789,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			IEnumerable<Condition> e_ = this.PrincipalDiagnosis(InpatientStay);
 			bool? f_(Condition EncounterDiagnosis)
 			{
-				CodeableConcept i_ = EncounterDiagnosis.Code;
+				CodeableConcept i_ = EncounterDiagnosis?.Code;
 				CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 				CqlValueSet k_ = this.Mental_Behavioral_and_Neurodevelopmental_Disorders();
 				bool? l_ = context?.Operators.ConceptInValueSet(j_, k_);
@@ -815,7 +815,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis();
 		bool? b_(Encounter InpatientStay)
 		{
-			Period d_ = InpatientStay.Period;
+			Period d_ = InpatientStay?.Period;
 			CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_3_000.ToInterval(d_);
 			CqlInterval<CqlDate> f_ = CQMCommon_2_0_000.ToDateInterval(e_);
 			CqlDate g_ = context?.Operators.Start(f_);
@@ -841,16 +841,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Initial_Population_1_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Intake_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
 		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context?.Operators.GreaterOrEqual(h_, 6);
-		Date k_ = a_.BirthDateElement;
-		string l_ = k_.Value;
+		Date k_ = a_?.BirthDateElement;
+		string l_ = k_?.Value;
 		CqlDate m_ = context?.Operators.ConvertStringToDate(l_);
 		CqlDateTime o_ = context?.Operators.End(e_);
 		CqlDate p_ = context?.Operators.DateFrom(o_);
@@ -942,12 +942,12 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> o_ = context?.Operators.RetrieveByValueSet<Encounter>(n_, null);
 		bool? p_(Encounter PsychPharmManagement)
 		{
-			List<Encounter.LocationComponent> ao_ = PsychPharmManagement.Location;
+			List<Encounter.LocationComponent> ao_ = PsychPharmManagement?.Location;
 			bool? ap_(Encounter.LocationComponent Location)
 			{
-				ResourceReference as_ = Location.Location;
+				ResourceReference as_ = Location?.Location;
 				Location at_ = CQMCommon_2_0_000.GetLocation(as_);
-				List<CodeableConcept> au_ = at_.Type;
+				List<CodeableConcept> au_ = at_?.Type;
 				CqlConcept av_(CodeableConcept @this)
 				{
 					CqlConcept az_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -1002,7 +1002,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter();
 		bool? b_(Encounter ValidNumeratorEncounter)
 		{
-			Period d_ = ValidNumeratorEncounter.Period;
+			Period d_ = ValidNumeratorEncounter?.Period;
 			CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_3_000.ToInterval(d_);
 			CqlInterval<CqlDate> f_ = CQMCommon_2_0_000.ToDateInterval(e_);
 			CqlDate g_ = context?.Operators.Start(f_);
@@ -1384,7 +1384,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis();
 		bool? b_(Encounter InpatientStay)
 		{
-			Period d_ = InpatientStay.Period;
+			Period d_ = InpatientStay?.Period;
 			CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_3_000.ToInterval(d_);
 			CqlInterval<CqlDate> f_ = CQMCommon_2_0_000.ToDateInterval(e_);
 			CqlDate g_ = context?.Operators.Start(f_);
@@ -1410,16 +1410,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private bool? Initial_Population_2_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Intake_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
 		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context?.Operators.GreaterOrEqual(h_, 6);
-		Date k_ = a_.BirthDateElement;
-		string l_ = k_.Value;
+		Date k_ = a_?.BirthDateElement;
+		string l_ = k_?.Value;
 		CqlDate m_ = context?.Operators.ConvertStringToDate(l_);
 		CqlDateTime o_ = context?.Operators.End(e_);
 		CqlDate p_ = context?.Operators.DateFrom(o_);
@@ -1462,7 +1462,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter();
 		bool? b_(Encounter ValidNumeratorEncounter)
 		{
-			Period f_ = ValidNumeratorEncounter.Period;
+			Period f_ = ValidNumeratorEncounter?.Period;
 			CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_3_000.ToInterval(f_);
 			CqlInterval<CqlDate> h_ = CQMCommon_2_0_000.ToDateInterval(g_);
 			CqlDate i_ = context?.Operators.Start(h_);
@@ -1479,7 +1479,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> c_ = context?.Operators.Where<Encounter>(a_, b_);
 		CqlDate d_(Encounter ValidNumeratorEncounter)
 		{
-			Period r_ = ValidNumeratorEncounter.Period;
+			Period r_ = ValidNumeratorEncounter?.Period;
 			CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 			CqlDateTime t_ = context?.Operators.Start(s_);
 			CqlDate u_ = context?.Operators.DateFrom(t_);
@@ -1514,7 +1514,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter OnlineAssessment)
 		{
-			Period g_ = OnlineAssessment.Period;
+			Period g_ = OnlineAssessment?.Period;
 			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
 			CqlInterval<CqlDate> i_ = CQMCommon_2_0_000.ToDateInterval(h_);
 			CqlDate j_ = context?.Operators.Start(i_);
@@ -1531,7 +1531,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> d_ = context?.Operators.Where<Encounter>(b_, c_);
 		CqlDate e_(Encounter OnlineAssessment)
 		{
-			Period s_ = OnlineAssessment.Period;
+			Period s_ = OnlineAssessment?.Period;
 			CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_3_000.ToInterval(s_);
 			CqlDateTime u_ = context?.Operators.Start(t_);
 			CqlDate v_ = context?.Operators.DateFrom(u_);

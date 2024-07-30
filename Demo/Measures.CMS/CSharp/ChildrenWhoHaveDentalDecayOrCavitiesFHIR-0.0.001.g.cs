@@ -167,7 +167,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("45755-6", "http://loinc.org", null, null),
 		];
 
@@ -180,7 +180,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
 			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
 			new CqlCode("373066001", "http://snomed.info/sct", null, null),
@@ -227,7 +227,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		bool? d_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
-			Period g_ = ValidEncounter.Period;
+			Period g_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
 			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, null);
 
@@ -245,8 +245,8 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);

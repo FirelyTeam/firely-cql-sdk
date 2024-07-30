@@ -625,7 +625,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("11287-0", "http://loinc.org", null, null),
 			new CqlCode("39156-5", "http://loinc.org", null, null),
 			new CqlCode("90265-0", "http://loinc.org", null, null),
@@ -643,7 +643,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlCode[] AdministrativeGender_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("F", "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", null, null),
 		];
 
@@ -656,7 +656,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("7771000", "http://snomed.info/sct", null, null),
 			new CqlCode("24028007", "http://snomed.info/sct", null, null),
 		];
@@ -670,7 +670,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("99429", "http://www.ama-assn.org/go/cpt", null, null),
 		];
 
@@ -761,7 +761,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Encounter> f_ = context?.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? g_(Encounter E)
 		{
-			List<CodeableConcept> x_ = E.Type;
+			List<CodeableConcept> x_ = E?.Type;
 			CqlConcept y_(CodeableConcept @this)
 			{
 				CqlConcept ad_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -799,7 +799,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? v_(Encounter ValidEncounters)
 		{
 			CqlInterval<CqlDateTime> ah_ = this.Measurement_Period();
-			Period ai_ = ValidEncounters.Period;
+			Period ai_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(ai_);
 			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
 			bool? al_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ah_, ak_, null);
@@ -818,8 +818,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -827,8 +827,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(50, 63, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
-		Code<AdministrativeGender> l_ = a_.GenderElement;
-		AdministrativeGender? m_ = l_.Value;
+		Code<AdministrativeGender> l_ = a_?.GenderElement;
+		AdministrativeGender? m_ = l_?.Value;
 		string n_ = context?.Operators.Convert<string>(m_);
 		bool? o_ = context?.Operators.Equal(n_, "female");
 		bool? p_ = context?.Operators.And(j_, o_);
@@ -861,11 +861,11 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? c_(Observation BMIRatio)
 		{
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
-			DataType i_ = BMIRatio.Effective;
+			DataType i_ = BMIRatio?.Effective;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToInterval(j_);
 			bool? l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, null);
-			DataType m_ = BMIRatio.Value;
+			DataType m_ = BMIRatio?.Value;
 			Quantity n_ = context?.Operators.Convert<Quantity>(m_);
 			CqlQuantity o_ = FHIRHelpers_4_3_000.ToQuantity(n_);
 			bool? p_ = context?.Operators.Not((bool?)((o_ as CqlQuantity) is null));
@@ -876,7 +876,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> d_ = context?.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			DataType r_ = @this.Effective;
+			DataType r_ = @this?.Effective;
 			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
 			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.ToInterval(s_);
 			CqlDateTime u_ = context?.Operators.Start(t_);
@@ -896,12 +896,12 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private Observation First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2_Value()
 	{
 		Observation a_ = this.First_BMI_in_Measurement_Period();
-		Observation[] b_ = /* ARR1 */ [
+		Observation[] b_ = [
 			a_,
 		];
 		bool? c_(Observation FirstBMI)
 		{
-			DataType f_ = FirstBMI.Value;
+			DataType f_ = FirstBMI?.Value;
 			Quantity g_ = context?.Operators.Convert<Quantity>(f_);
 			CqlQuantity h_ = FHIRHelpers_4_3_000.ToQuantity(g_);
 			CqlQuantity i_ = context?.Operators.Quantity(20m, "kg/m2");
@@ -927,13 +927,13 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		bool? e_(Observation AverageDrinks)
 		{
-			DataType j_ = AverageDrinks.Effective;
+			DataType j_ = AverageDrinks?.Effective;
 			object k_ = FHIRHelpers_4_3_000.ToValue(j_);
 			CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.ToInterval(k_);
 			CqlDateTime m_ = context?.Operators.Start(l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
 			bool? o_ = context?.Operators.In<CqlDateTime>(m_, n_, null);
-			DataType p_ = AverageDrinks.Value;
+			DataType p_ = AverageDrinks?.Value;
 			object q_ = FHIRHelpers_4_3_000.ToValue(p_);
 			CqlQuantity r_ = context?.Operators.Quantity(2m, "{drinks}/d");
 			bool? s_ = context?.Operators.Greater((q_ as CqlQuantity), r_);
@@ -944,7 +944,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> f_ = context?.Operators.Where<Observation>(d_, e_);
 		object g_(Observation @this)
 		{
-			DataType u_ = @this.Effective;
+			DataType u_ = @this?.Effective;
 			object v_ = FHIRHelpers_4_3_000.ToValue(u_);
 			CqlInterval<CqlDateTime> w_ = QICoreCommon_2_0_000.ToInterval(v_);
 			CqlDateTime x_ = context?.Operators.Start(w_);
@@ -1044,7 +1044,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> c_ = Status_1_6_000.Final_Survey_Observation(b_);
 		bool? d_(Observation ParentFractureHistory)
 		{
-			DataType f_ = ParentFractureHistory.Effective;
+			DataType f_ = ParentFractureHistory?.Effective;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			CqlDateTime i_ = context?.Operators.Start(h_);
@@ -1070,7 +1070,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure GastricBypass)
 		{
-			DataType aa_ = GastricBypass.Performed;
+			DataType aa_ = GastricBypass?.Performed;
 			object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
 			CqlInterval<CqlDateTime> ac_ = QICoreCommon_2_0_000.ToInterval(ab_);
 			CqlDateTime ad_ = context?.Operators.End(ac_);
@@ -1105,7 +1105,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<MedicationRequest> t_ = Status_1_6_000.Active_or_Completed_Medication_Request(s_);
 		bool? u_(MedicationRequest AromataseInhibitorOrder)
 		{
-			FhirDateTime an_ = AromataseInhibitorOrder.AuthoredOnElement;
+			FhirDateTime an_ = AromataseInhibitorOrder?.AuthoredOnElement;
 			CqlDateTime ao_ = context?.Operators.Convert<CqlDateTime>(an_);
 			CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_0_000.ToInterval((ao_ as object));
 			CqlInterval<CqlDateTime> aq_()
@@ -1171,8 +1171,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		{
 			CqlInterval<CqlDate> r_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(Glucocorticoid);
 			Patient s_ = this.Patient();
-			Date t_ = s_.BirthDateElement;
-			string u_ = t_.Value;
+			Date t_ = s_?.BirthDateElement;
+			string u_ = t_?.Value;
 			CqlDate v_ = context?.Operators.ConvertStringToDate(u_);
 			CqlInterval<CqlDateTime> w_ = this.Measurement_Period();
 			CqlDateTime x_ = context?.Operators.End(w_);
@@ -1239,7 +1239,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Procedure> a_ = Status_1_6_000.Completed_Procedure(Procedure);
 		bool? b_(Procedure Proc)
 		{
-			DataType d_ = Proc.Performed;
+			DataType d_ = Proc?.Performed;
 			object e_ = FHIRHelpers_4_3_000.ToValue(d_);
 			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToInterval(e_);
 			CqlDateTime g_ = context?.Operators.End(f_);
@@ -1269,7 +1269,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Procedure> k_ = context?.Operators.RetrieveByValueSet<Procedure>(j_, null);
 		bool? l_(Procedure UnilateralOophorectomy)
 		{
-			List<CodeableConcept> ad_ = UnilateralOophorectomy.BodySite;
+			List<CodeableConcept> ad_ = UnilateralOophorectomy?.BodySite;
 			CqlConcept ae_(CodeableConcept @this)
 			{
 				CqlConcept aj_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -1299,7 +1299,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Procedure> t_ = context?.Operators.RetrieveByValueSet<Procedure>(j_, null);
 		bool? u_(Procedure UnilateralOophorectomy)
 		{
-			List<CodeableConcept> an_ = UnilateralOophorectomy.BodySite;
+			List<CodeableConcept> an_ = UnilateralOophorectomy?.BodySite;
 			CqlConcept ao_(CodeableConcept @this)
 			{
 				CqlConcept at_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -1463,7 +1463,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? d_(ServiceRequest DXA)
 		{
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
-			FhirDateTime i_ = DXA.AuthoredOnElement;
+			FhirDateTime i_ = DXA?.AuthoredOnElement;
 			CqlDateTime j_ = context?.Operators.Convert<CqlDateTime>(i_);
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToInterval((j_ as object));
 			bool? l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, null);
@@ -1473,7 +1473,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<ServiceRequest> e_ = context?.Operators.Where<ServiceRequest>(c_, d_);
 		object f_(ServiceRequest @this)
 		{
-			FhirDateTime m_ = @this.AuthoredOnElement;
+			FhirDateTime m_ = @this?.AuthoredOnElement;
 			CqlDateTime n_ = context?.Operators.Convert<CqlDateTime>(m_);
 
 			return n_;
@@ -1507,7 +1507,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		bool? e_(Observation FRAX)
 		{
-			DataType ad_ = FRAX.Value;
+			DataType ad_ = FRAX?.Value;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlQuantity af_ = context?.Operators.Quantity(8.4m, "%");
 			bool? ag_ = context?.Operators.GreaterOrEqual((ae_ as CqlQuantity), af_);
@@ -1521,7 +1521,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> j_ = Status_1_6_000.Final_Survey_Observation(i_);
 		bool? k_(Observation ORAI)
 		{
-			DataType ah_ = ORAI.Value;
+			DataType ah_ = ORAI?.Value;
 			object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 			bool? aj_ = context?.Operators.GreaterOrEqual((ai_ as int?), 9);
 
@@ -1535,7 +1535,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> q_ = Status_1_6_000.Final_Survey_Observation(p_);
 		bool? r_(Observation OSIRIS)
 		{
-			DataType ak_ = OSIRIS.Value;
+			DataType ak_ = OSIRIS?.Value;
 			object al_ = FHIRHelpers_4_3_000.ToValue(ak_);
 			CqlQuantity am_ = context?.Operators.ConvertDecimalToQuantity(1.0m);
 			bool? an_ = context?.Operators.Less((al_ as CqlQuantity), am_);
@@ -1549,7 +1549,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> w_ = Status_1_6_000.Final_Survey_Observation(v_);
 		bool? x_(Observation OST)
 		{
-			DataType ao_ = OST.Value;
+			DataType ao_ = OST?.Value;
 			object ap_ = FHIRHelpers_4_3_000.ToValue(ao_);
 			CqlQuantity aq_ = context?.Operators.ConvertDecimalToQuantity(2.0m);
 			bool? ar_ = context?.Operators.Less((ap_ as CqlQuantity), aq_);
@@ -1561,13 +1561,13 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> aa_ = context?.Operators.Union<Observation>(m_, z_);
 		bool? ab_(Observation RiskAssessment)
 		{
-			DataType as_ = RiskAssessment.Effective;
+			DataType as_ = RiskAssessment?.Effective;
 			object at_ = FHIRHelpers_4_3_000.ToValue(as_);
 			CqlInterval<CqlDateTime> au_ = QICoreCommon_2_0_000.ToInterval(at_);
 			CqlDateTime av_ = context?.Operators.Start(au_);
 			IEnumerable<ServiceRequest> aw_ = this.DXA_Scan_Order_During_Measurement_Period();
 			ServiceRequest ax_ = context?.Operators.First<ServiceRequest>(aw_);
-			FhirDateTime ay_ = ax_.AuthoredOnElement;
+			FhirDateTime ay_ = ax_?.AuthoredOnElement;
 			CqlDateTime az_ = context?.Operators.Convert<CqlDateTime>(ay_);
 			bool? ba_ = context?.Operators.Before(av_, az_, null);
 
@@ -1599,17 +1599,17 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	{
 		bool? a_(Observation O)
 		{
-			Code<ObservationStatus> c_ = O.StatusElement;
-			ObservationStatus? d_ = c_.Value;
+			Code<ObservationStatus> c_ = O?.StatusElement;
+			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context?.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context?.Operators.Convert<string>(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
 			];
 			bool? h_ = context?.Operators.In<string>(f_, (g_ as IEnumerable<string>));
-			List<CodeableConcept> i_ = O.Category;
+			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
 				CqlConcept n_ = FHIRHelpers_4_3_000.ToConcept(@this);

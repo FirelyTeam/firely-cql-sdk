@@ -277,7 +277,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
 			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
 		];
@@ -291,7 +291,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 	private CqlCode[] ActCode_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
 		];
 
@@ -304,7 +304,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 	private CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
 		];
 
@@ -350,7 +350,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Diabetes);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
 			bool? h_ = context?.Operators.Overlaps(f_, g_, null);
-			CodeableConcept i_ = Diabetes.ClinicalStatus;
+			CodeableConcept i_ = Diabetes?.ClinicalStatus;
 			CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 			CqlCode k_ = this.active();
 			CqlConcept l_ = context?.Operators.ConvertCodeToConcept(k_);
@@ -394,11 +394,11 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		bool? u_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> x_ = this.Measurement_Period();
-			Period y_ = ValidEncounter.Period;
+			Period y_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
 			bool? aa_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, null);
-			Code<Encounter.EncounterStatus> ab_ = ValidEncounter.StatusElement;
-			Encounter.EncounterStatus? ac_ = ab_.Value;
+			Code<Encounter.EncounterStatus> ab_ = ValidEncounter?.StatusElement;
+			Encounter.EncounterStatus? ac_ = ab_?.Value;
 			Code<Encounter.EncounterStatus> ad_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(ac_);
 			bool? ae_ = context?.Operators.Equal(ad_, "finished");
 			bool? af_ = context?.Operators.And(aa_, ae_);
@@ -418,8 +418,8 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -462,7 +462,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToPrevalenceInterval(CKDOrESRD);
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period();
 			bool? j_ = context?.Operators.Overlaps(h_, i_, null);
-			CodeableConcept k_ = CKDOrESRD.ClinicalStatus;
+			CodeableConcept k_ = CKDOrESRD?.ClinicalStatus;
 			CqlConcept l_ = FHIRHelpers_4_3_000.ToConcept(k_);
 			CqlCode m_ = this.active();
 			CqlConcept n_ = context?.Operators.ConvertCodeToConcept(m_);
@@ -503,19 +503,19 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		bool? c_(Observation eGFRTest)
 		{
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
-			DataType m_ = eGFRTest.Effective;
+			DataType m_ = eGFRTest?.Effective;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_);
 			bool? p_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, null);
-			DataType q_ = eGFRTest.Value;
+			DataType q_ = eGFRTest?.Value;
 			object r_ = FHIRHelpers_4_3_000.ToValue(q_);
 			bool? s_ = context?.Operators.Not((bool?)(r_ is null));
 			bool? t_ = context?.Operators.And(p_, s_);
-			Code<ObservationStatus> u_ = eGFRTest.StatusElement;
-			ObservationStatus? v_ = u_.Value;
+			Code<ObservationStatus> u_ = eGFRTest?.StatusElement;
+			ObservationStatus? v_ = u_?.Value;
 			Code<ObservationStatus> w_ = context?.Operators.Convert<Code<ObservationStatus>>(v_);
 			string x_ = context?.Operators.Convert<string>(w_);
-			string[] y_ = /* ARR1 */ [
+			string[] y_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -532,19 +532,19 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		bool? h_(Observation uACRTest)
 		{
 			CqlInterval<CqlDateTime> ab_ = this.Measurement_Period();
-			DataType ac_ = uACRTest.Effective;
+			DataType ac_ = uACRTest?.Effective;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_);
 			bool? af_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, ae_, null);
-			DataType ag_ = uACRTest.Value;
+			DataType ag_ = uACRTest?.Value;
 			object ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
 			bool? ai_ = context?.Operators.Not((bool?)(ah_ is null));
 			bool? aj_ = context?.Operators.And(af_, ai_);
-			Code<ObservationStatus> ak_ = uACRTest.StatusElement;
-			ObservationStatus? al_ = ak_.Value;
+			Code<ObservationStatus> ak_ = uACRTest?.StatusElement;
+			ObservationStatus? al_ = ak_?.Value;
 			Code<ObservationStatus> am_ = context?.Operators.Convert<Code<ObservationStatus>>(al_);
 			string an_ = context?.Operators.Convert<string>(am_);
-			string[] ao_ = /* ARR1 */ [
+			string[] ao_ = [
 				"final",
 				"amended",
 				"corrected",

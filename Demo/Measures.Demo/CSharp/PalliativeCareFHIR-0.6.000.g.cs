@@ -87,7 +87,7 @@ public class PalliativeCareFHIR_0_6_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("71007-9", "http://loinc.org", null, null),
 		];
 
@@ -100,7 +100,7 @@ public class PalliativeCareFHIR_0_6_000
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 		];
 
@@ -143,7 +143,7 @@ public class PalliativeCareFHIR_0_6_000
 		{
 			Code<ObservationStatus> s_ = PalliativeAssessment.StatusElement;
 			string t_ = FHIRHelpers_4_0_001.ToString(s_);
-			string[] u_ = /* ARR1 */ [
+			string[] u_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -196,7 +196,7 @@ public class PalliativeCareFHIR_0_6_000
 		{
 			Code<EventStatus> as_ = PalliativeIntervention.StatusElement;
 			string at_ = FHIRHelpers_4_0_001.ToString(as_);
-			string[] au_ = /* ARR1 */ [
+			string[] au_ = [
 				"completed",
 				"in-progress",
 			];

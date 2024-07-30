@@ -91,7 +91,7 @@ public class NCQAEncounter_1_0_0
 		};
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context?.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Encounter.DiagnosisComponent d_ = context?.Operators.SingletonFrom<Encounter.DiagnosisComponent>(c_);
-		Encounter.DiagnosisComponent[] e_ = /* ARR1 */ [
+		Encounter.DiagnosisComponent[] e_ = [
 			d_,
 		];
 		bool? f_(Encounter.DiagnosisComponent PrincipalDiagnosis)

@@ -206,7 +206,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("71802-3", "http://loinc.org", null, null),
 			new CqlCode("98181-1", "http://loinc.org", null, null),
 		];
@@ -220,7 +220,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("160734000", "http://snomed.info/sct", null, null),
 		];
 
@@ -267,7 +267,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			bool? am_ = context?.Operators.IsTrue(al_);
 			bool? an_ = context?.Operators.Not(am_);
 			CqlInterval<CqlDateTime> ao_ = this.Measurement_Period();
-			FhirDateTime ap_ = FrailtyDeviceOrder.AuthoredOnElement;
+			FhirDateTime ap_ = FrailtyDeviceOrder?.AuthoredOnElement;
 			CqlDateTime aq_ = context?.Operators.Convert<CqlDateTime>(ap_);
 			CqlInterval<CqlDateTime> ar_ = QICoreCommon_2_0_000.toInterval((aq_ as object));
 			bool? as_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, ar_, null);
@@ -283,11 +283,11 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<Observation> m_ = Status_1_6_000.isAssessmentPerformed(l_);
 		bool? n_(Observation EquipmentUsed)
 		{
-			DataType au_ = EquipmentUsed.Value;
+			DataType au_ = EquipmentUsed?.Value;
 			object av_ = FHIRHelpers_4_3_000.ToValue(au_);
 			CqlValueSet aw_ = this.Frailty_Device();
 			bool? ax_ = context?.Operators.ConceptInValueSet((av_ as CqlConcept), aw_);
-			DataType ay_ = EquipmentUsed.Effective;
+			DataType ay_ = EquipmentUsed?.Effective;
 			object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
 			CqlInterval<CqlDateTime> ba_ = QICoreCommon_2_0_000.toInterval(az_);
 			CqlDateTime bb_ = context?.Operators.End(ba_);
@@ -318,7 +318,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<Encounter> z_ = Status_1_6_000.isEncounterPerformed(y_);
 		bool? aa_(Encounter FrailtyEncounter)
 		{
-			Period bi_ = FrailtyEncounter.Period;
+			Period bi_ = FrailtyEncounter?.Period;
 			CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_3_000.ToInterval(bi_);
 			CqlInterval<CqlDateTime> bk_ = QICoreCommon_2_0_000.toInterval((bj_ as object));
 			CqlInterval<CqlDateTime> bl_ = this.Measurement_Period();
@@ -334,7 +334,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<Observation> ag_ = Status_1_6_000.isSymptom(af_);
 		bool? ah_(Observation FrailtySymptom)
 		{
-			DataType bn_ = FrailtySymptom.Effective;
+			DataType bn_ = FrailtySymptom?.Effective;
 			object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
 			CqlInterval<CqlDateTime> bp_ = QICoreCommon_2_0_000.toInterval(bo_);
 			CqlInterval<CqlDateTime> bq_ = this.Measurement_Period();
@@ -372,7 +372,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			IEnumerable<Condition> o_ = CQMCommon_2_0_000.encounterDiagnosis(OutpatientEncounter);
 			bool? p_(Condition Diagnosis)
 			{
-				CodeableConcept af_ = Diagnosis.Code;
+				CodeableConcept af_ = Diagnosis?.Code;
 				CqlConcept ag_ = FHIRHelpers_4_3_000.ToConcept(af_);
 				CqlValueSet ah_ = this.Advanced_Illness();
 				bool? ai_ = context?.Operators.ConceptInValueSet(ag_, ah_);
@@ -381,7 +381,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			};
 			IEnumerable<Condition> q_ = context?.Operators.Where<Condition>(o_, p_);
 			bool? r_ = context?.Operators.Exists<Condition>(q_);
-			Period s_ = OutpatientEncounter.Period;
+			Period s_ = OutpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_3_000.ToInterval(s_);
 			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval((t_ as object));
 			CqlDateTime v_ = context?.Operators.Start(u_);
@@ -418,10 +418,10 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> e_ = context?.Operators.Select<ValueTuple<Encounter, Encounter>, (Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(c_, d_);
 		bool? f_((Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia)
 		{
-			Period l_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter2.Period;
+			Period l_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter2?.Period;
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 			CqlDateTime n_ = context?.Operators.End(m_);
-			Period o_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1.Period;
+			Period o_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1?.Period;
 			CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 			CqlDateTime q_ = context?.Operators.End(p_);
 			CqlQuantity r_ = context?.Operators.Quantity(1m, "day");
@@ -453,7 +453,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			IEnumerable<Condition> g_ = CQMCommon_2_0_000.encounterDiagnosis(InpatientEncounter);
 			bool? h_(Condition Diagnosis)
 			{
-				CodeableConcept x_ = Diagnosis.Code;
+				CodeableConcept x_ = Diagnosis?.Code;
 				CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept(x_);
 				CqlValueSet z_ = this.Advanced_Illness();
 				bool? aa_ = context?.Operators.ConceptInValueSet(y_, z_);
@@ -462,7 +462,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			};
 			IEnumerable<Condition> i_ = context?.Operators.Where<Condition>(g_, h_);
 			bool? j_ = context?.Operators.Exists<Condition>(i_);
-			Period k_ = InpatientEncounter.Period;
+			Period k_ = InpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
 			CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval((l_ as object));
 			CqlDateTime n_ = context?.Operators.Start(m_);
@@ -496,17 +496,17 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.isMedicationActive(e_);
 		bool? g_(MedicationRequest DementiaMedication)
 		{
-			FhirBoolean j_ = DementiaMedication.DoNotPerformElement;
-			bool? k_ = j_.Value;
+			FhirBoolean j_ = DementiaMedication?.DoNotPerformElement;
+			bool? k_ = j_?.Value;
 			bool? l_ = context?.Operators.IsTrue(k_);
 			bool? m_ = context?.Operators.Not(l_);
 			CqlInterval<CqlDate> n_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DementiaMedication);
-			CqlDate o_ = n_.low;
+			CqlDate o_ = n_?.low;
 			CqlDateTime p_ = context?.Operators.ConvertDateToDateTime(o_);
-			CqlDate r_ = n_.high;
+			CqlDate r_ = n_?.high;
 			CqlDateTime s_ = context?.Operators.ConvertDateToDateTime(r_);
-			bool? u_ = n_.lowClosed;
-			bool? w_ = n_.highClosed;
+			bool? u_ = n_?.lowClosed;
+			bool? w_ = n_?.highClosed;
 			CqlInterval<CqlDateTime> x_ = context?.Operators.Interval(p_, s_, u_, w_);
 			CqlInterval<CqlDateTime> y_ = this.Measurement_Period();
 			CqlDateTime z_ = context?.Operators.Start(y_);
@@ -532,8 +532,8 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
@@ -559,8 +559,8 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
@@ -576,8 +576,8 @@ public class AdvancedIllnessandFrailty_1_8_000
 		bool? p_ = this.Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period();
 		bool? q_ = context?.Operators.Or(o_, p_);
 		bool? r_ = context?.Operators.And(l_, q_);
-		Date t_ = a_.BirthDateElement;
-		string u_ = t_.Value;
+		Date t_ = a_?.BirthDateElement;
+		string u_ = t_?.Value;
 		CqlDate v_ = context?.Operators.ConvertStringToDate(u_);
 		CqlDateTime x_ = context?.Operators.End(e_);
 		CqlDate y_ = context?.Operators.DateFrom(x_);
@@ -596,8 +596,8 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
@@ -610,7 +610,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<Observation> m_ = Status_1_6_000.isAssessmentPerformed(l_);
 		bool? n_(Observation HousingStatus)
 		{
-			DataType y_ = HousingStatus.Effective;
+			DataType y_ = HousingStatus?.Effective;
 			object z_ = FHIRHelpers_4_3_000.ToValue(y_);
 			CqlInterval<CqlDateTime> aa_ = QICoreCommon_2_0_000.toInterval(z_);
 			CqlDateTime ab_ = context?.Operators.End(aa_);
@@ -623,7 +623,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<Observation> o_ = context?.Operators.Where<Observation>(m_, n_);
 		object p_(Observation @this)
 		{
-			DataType af_ = @this.Effective;
+			DataType af_ = @this?.Effective;
 			object ag_ = FHIRHelpers_4_3_000.ToValue(af_);
 			CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_0_000.toInterval(ag_);
 			CqlDateTime ai_ = context?.Operators.End(ah_);
@@ -632,12 +632,12 @@ public class AdvancedIllnessandFrailty_1_8_000
 		};
 		IEnumerable<Observation> q_ = context?.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation r_ = context?.Operators.Last<Observation>(q_);
-		Observation[] s_ = /* ARR1 */ [
+		Observation[] s_ = [
 			r_,
 		];
 		bool? t_(Observation LastHousingStatus)
 		{
-			DataType aj_ = LastHousingStatus.Value;
+			DataType aj_ = LastHousingStatus?.Value;
 			object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
 			CqlCode al_ = this.Lives_in_a_nursing_home__finding_();
 			CqlConcept am_ = context?.Operators.ConvertCodeToConcept(al_);

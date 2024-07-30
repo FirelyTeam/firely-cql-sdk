@@ -88,7 +88,7 @@ public class PalliativeCare_1_9_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("71007-9", "http://loinc.org", null, null),
 		];
 
@@ -130,7 +130,7 @@ public class PalliativeCare_1_9_000
 		IEnumerable<Observation> d_ = Status_1_6_000.isAssessmentPerformed(c_);
 		bool? e_(Observation PalliativeAssessment)
 		{
-			DataType ab_ = PalliativeAssessment.Effective;
+			DataType ab_ = PalliativeAssessment?.Effective;
 			object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 			CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_0_000.toInterval(ac_);
 			CqlInterval<CqlDateTime> ae_ = this.Measurement_Period();
@@ -158,7 +158,7 @@ public class PalliativeCare_1_9_000
 		IEnumerable<Encounter> p_ = Status_1_6_000.isEncounterPerformed(o_);
 		bool? q_(Encounter PalliativeEncounter)
 		{
-			Period aj_ = PalliativeEncounter.Period;
+			Period aj_ = PalliativeEncounter?.Period;
 			CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
 			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.toInterval((ak_ as object));
 			CqlInterval<CqlDateTime> am_ = this.Measurement_Period();
@@ -174,7 +174,7 @@ public class PalliativeCare_1_9_000
 		IEnumerable<Procedure> w_ = Status_1_6_000.isInterventionPerformed(v_);
 		bool? x_(Procedure PalliativeIntervention)
 		{
-			DataType ao_ = PalliativeIntervention.Performed;
+			DataType ao_ = PalliativeIntervention?.Performed;
 			object ap_ = FHIRHelpers_4_3_000.ToValue(ao_);
 			CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_0_000.toInterval(ap_);
 			CqlInterval<CqlDateTime> ar_ = this.Measurement_Period();

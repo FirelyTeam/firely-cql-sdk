@@ -222,7 +222,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		bool? s_(Encounter ValidEncounters)
 		{
 			CqlInterval<CqlDateTime> u_ = this.Measurement_Period();
-			Period v_ = ValidEncounters.Period;
+			Period v_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_3_000.ToInterval(v_);
 			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval((w_ as object));
 			bool? y_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(u_, x_, null);
@@ -241,8 +241,8 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
@@ -250,8 +250,8 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(24, 64, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
-		Code<AdministrativeGender> l_ = a_.GenderElement;
-		AdministrativeGender? m_ = l_.Value;
+		Code<AdministrativeGender> l_ = a_?.GenderElement;
+		AdministrativeGender? m_ = l_?.Value;
 		string n_ = context?.Operators.Convert<string>(m_);
 		bool? o_ = context?.Operators.Equal(n_, "female");
 		bool? p_ = context?.Operators.And(j_, o_);
@@ -284,7 +284,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		IEnumerable<Procedure> c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure NoCervixProcedure)
 		{
-			DataType k_ = NoCervixProcedure.Performed;
+			DataType k_ = NoCervixProcedure?.Performed;
 			object l_ = FHIRHelpers_4_3_000.ToValue(k_);
 			CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(l_);
 			CqlDateTime n_ = context?.Operators.End(m_);
@@ -344,7 +344,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			{
 				bool t_()
 				{
-					DataType w_ = CervicalCytology.Effective;
+					DataType w_ = CervicalCytology?.Effective;
 					object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 					bool y_ = x_ is CqlDateTime;
 
@@ -352,7 +352,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				};
 				bool u_()
 				{
-					DataType z_ = CervicalCytology.Effective;
+					DataType z_ = CervicalCytology?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 					bool ab_ = aa_ is CqlInterval<CqlDateTime>;
 
@@ -360,7 +360,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				};
 				bool v_()
 				{
-					DataType ac_ = CervicalCytology.Effective;
+					DataType ac_ = CervicalCytology?.Effective;
 					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 					bool ae_ = ad_ is CqlDateTime;
 
@@ -368,21 +368,21 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				};
 				if (t_())
 				{
-					DataType af_ = CervicalCytology.Effective;
+					DataType af_ = CervicalCytology?.Effective;
 					object ag_ = FHIRHelpers_4_3_000.ToValue(af_);
 
 					return ((ag_ as CqlDateTime) as object);
 				}
 				else if (u_())
 				{
-					DataType ah_ = CervicalCytology.Effective;
+					DataType ah_ = CervicalCytology?.Effective;
 					object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 
 					return ((ai_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (v_())
 				{
-					DataType aj_ = CervicalCytology.Effective;
+					DataType aj_ = CervicalCytology?.Effective;
 					object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
 
 					return ((ak_ as CqlDateTime) as object);
@@ -400,7 +400,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			CqlDateTime m_ = context?.Operators.End(h_);
 			CqlInterval<CqlDateTime> n_ = context?.Operators.Interval(k_, m_, true, true);
 			bool? o_ = context?.Operators.In<CqlDateTime>(g_, n_, null);
-			DataType p_ = CervicalCytology.Value;
+			DataType p_ = CervicalCytology?.Value;
 			object q_ = FHIRHelpers_4_3_000.ToValue(p_);
 			bool? r_ = context?.Operators.Not((bool?)(q_ is null));
 			bool? s_ = context?.Operators.And(o_, r_);
@@ -424,14 +424,14 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		bool? d_(Observation HPVTest)
 		{
 			Patient f_ = this.Patient();
-			Date g_ = f_.BirthDateElement;
-			string h_ = g_.Value;
+			Date g_ = f_?.BirthDateElement;
+			string h_ = g_?.Value;
 			CqlDate i_ = context?.Operators.ConvertStringToDate(h_);
 			object j_()
 			{
 				bool ad_()
 				{
-					DataType ag_ = HPVTest.Effective;
+					DataType ag_ = HPVTest?.Effective;
 					object ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
 					bool ai_ = ah_ is CqlDateTime;
 
@@ -439,7 +439,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				};
 				bool ae_()
 				{
-					DataType aj_ = HPVTest.Effective;
+					DataType aj_ = HPVTest?.Effective;
 					object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
 					bool al_ = ak_ is CqlInterval<CqlDateTime>;
 
@@ -447,7 +447,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				};
 				bool af_()
 				{
-					DataType am_ = HPVTest.Effective;
+					DataType am_ = HPVTest?.Effective;
 					object an_ = FHIRHelpers_4_3_000.ToValue(am_);
 					bool ao_ = an_ is CqlDateTime;
 
@@ -455,21 +455,21 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				};
 				if (ad_())
 				{
-					DataType ap_ = HPVTest.Effective;
+					DataType ap_ = HPVTest?.Effective;
 					object aq_ = FHIRHelpers_4_3_000.ToValue(ap_);
 
 					return ((aq_ as CqlDateTime) as object);
 				}
 				else if (ae_())
 				{
-					DataType ar_ = HPVTest.Effective;
+					DataType ar_ = HPVTest?.Effective;
 					object as_ = FHIRHelpers_4_3_000.ToValue(ar_);
 
 					return ((as_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (af_())
 				{
-					DataType at_ = HPVTest.Effective;
+					DataType at_ = HPVTest?.Effective;
 					object au_ = FHIRHelpers_4_3_000.ToValue(at_);
 
 					return ((au_ as CqlDateTime) as object);
@@ -487,7 +487,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			{
 				bool av_()
 				{
-					DataType ay_ = HPVTest.Effective;
+					DataType ay_ = HPVTest?.Effective;
 					object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
 					bool ba_ = az_ is CqlDateTime;
 
@@ -495,7 +495,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				};
 				bool aw_()
 				{
-					DataType bb_ = HPVTest.Effective;
+					DataType bb_ = HPVTest?.Effective;
 					object bc_ = FHIRHelpers_4_3_000.ToValue(bb_);
 					bool bd_ = bc_ is CqlInterval<CqlDateTime>;
 
@@ -503,7 +503,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				};
 				bool ax_()
 				{
-					DataType be_ = HPVTest.Effective;
+					DataType be_ = HPVTest?.Effective;
 					object bf_ = FHIRHelpers_4_3_000.ToValue(be_);
 					bool bg_ = bf_ is CqlDateTime;
 
@@ -511,21 +511,21 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				};
 				if (av_())
 				{
-					DataType bh_ = HPVTest.Effective;
+					DataType bh_ = HPVTest?.Effective;
 					object bi_ = FHIRHelpers_4_3_000.ToValue(bh_);
 
 					return ((bi_ as CqlDateTime) as object);
 				}
 				else if (aw_())
 				{
-					DataType bj_ = HPVTest.Effective;
+					DataType bj_ = HPVTest?.Effective;
 					object bk_ = FHIRHelpers_4_3_000.ToValue(bj_);
 
 					return ((bk_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (ax_())
 				{
-					DataType bl_ = HPVTest.Effective;
+					DataType bl_ = HPVTest?.Effective;
 					object bm_ = FHIRHelpers_4_3_000.ToValue(bl_);
 
 					return ((bm_ as CqlDateTime) as object);
@@ -544,7 +544,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			CqlInterval<CqlDateTime> w_ = context?.Operators.Interval(t_, v_, true, true);
 			bool? x_ = context?.Operators.In<CqlDateTime>(p_, w_, null);
 			bool? y_ = context?.Operators.And(n_, x_);
-			DataType z_ = HPVTest.Value;
+			DataType z_ = HPVTest?.Value;
 			object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 			bool? ab_ = context?.Operators.Not((bool?)(aa_ is null));
 			bool? ac_ = context?.Operators.And(y_, ab_);

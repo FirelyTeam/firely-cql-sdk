@@ -258,7 +258,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 		];
 
@@ -271,7 +271,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("223366009", "http://snomed.info/sct", null, null),
 			new CqlCode("428341000124108", "http://snomed.info/sct", null, null),
 			new CqlCode("158965000", "http://snomed.info/sct", null, null),
@@ -704,7 +704,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		{
 			Code<ObservationStatus> q_ = MacularExam.StatusElement;
 			string r_ = FHIRHelpers_4_0_001.ToString(q_);
-			string[] s_ = /* ARR1 */ [
+			string[] s_ = [
 				"final",
 				"amended",
 				"corrected",

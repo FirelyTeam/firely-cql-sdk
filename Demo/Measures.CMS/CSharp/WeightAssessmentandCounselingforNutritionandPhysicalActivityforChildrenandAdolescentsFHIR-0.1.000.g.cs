@@ -358,7 +358,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private CqlCode[] UCUM_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("[in_i]", "http://unitsofmeasure.org", null, null),
 			new CqlCode("[lb_av]", "http://unitsofmeasure.org", null, null),
 			new CqlCode("cm", "http://unitsofmeasure.org", null, null),
@@ -375,7 +375,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 			new CqlCode("8302-2", "http://loinc.org", null, null),
 			new CqlCode("39156-5", "http://loinc.org", null, null),
@@ -391,7 +391,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 			new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 		];
@@ -499,7 +499,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		bool? v_(Encounter ValidEncounters)
 		{
 			CqlInterval<CqlDateTime> x_ = this.Measurement_Period();
-			Period y_ = ValidEncounters.Period;
+			Period y_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
 			CqlInterval<CqlDateTime> aa_ = QICoreCommon_2_0_000.ToInterval((z_ as object));
 			bool? ab_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(x_, aa_, null);
@@ -518,8 +518,8 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
@@ -592,11 +592,11 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		bool? c_(Observation BMIPercentile)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-			DataType f_ = BMIPercentile.Effective;
+			DataType f_ = BMIPercentile?.Effective;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
-			DataType j_ = BMIPercentile.Value;
+			DataType j_ = BMIPercentile?.Value;
 			Quantity k_ = context?.Operators.Convert<Quantity>(j_);
 			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(k_);
 			bool? m_ = context?.Operators.Not((bool?)(l_ is null));
@@ -620,11 +620,11 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		bool? c_(Observation Height)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-			DataType f_ = Height.Effective;
+			DataType f_ = Height?.Effective;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
-			DataType j_ = Height.Value;
+			DataType j_ = Height?.Value;
 			Quantity k_ = context?.Operators.Convert<Quantity>(j_);
 			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(k_);
 			bool? m_ = context?.Operators.Not((bool?)(l_ is null));
@@ -648,11 +648,11 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		bool? c_(Observation Weight)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-			DataType f_ = Weight.Effective;
+			DataType f_ = Weight?.Effective;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
-			DataType j_ = Weight.Value;
+			DataType j_ = Weight?.Value;
 			Quantity k_ = context?.Operators.Convert<Quantity>(j_);
 			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(k_);
 			bool? m_ = context?.Operators.Not((bool?)(l_ is null));
@@ -695,7 +695,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		bool? d_(Procedure NutritionCounseling)
 		{
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			DataType h_ = NutritionCounseling.Performed;
+			DataType h_ = NutritionCounseling?.Performed;
 			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
 			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(i_);
 			bool? k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, null);
@@ -720,7 +720,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		bool? d_(Procedure ActivityCounseling)
 		{
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			DataType h_ = ActivityCounseling.Performed;
+			DataType h_ = ActivityCounseling?.Performed;
 			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
 			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(i_);
 			bool? k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, null);
@@ -740,8 +740,8 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	private bool? Stratifaction_1_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
@@ -760,8 +760,8 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	private bool? Stratifaction_2_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);

@@ -464,7 +464,7 @@ public class FHIR347_0_1_021
 
 	private CqlCode[] ICD10CM_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
 		];
 
@@ -671,7 +671,7 @@ public class FHIR347_0_1_021
 			bool? o_ = context?.Operators.And(h_, n_);
 			Code<ObservationStatus> p_ = LDL.StatusElement;
 			string q_ = FHIRHelpers_4_0_001.ToString(p_);
-			string[] r_ = /* ARR1 */ [
+			string[] r_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -924,7 +924,7 @@ public class FHIR347_0_1_021
 			bool? ac_ = context?.Operators.SameOrBefore(z_, ab_, null);
 			Code<RequestStatus> ad_ = PalliativeOrHospiceCareOrder.StatusElement;
 			string ae_ = FHIRHelpers_4_0_001.ToString(ad_);
-			string[] af_ = /* ARR1 */ [
+			string[] af_ = [
 				"active",
 				"on-hold",
 				"completed",
@@ -1160,7 +1160,7 @@ public class FHIR347_0_1_021
 			bool? w_ = context?.Operators.In<CqlDateTime>(u_, v_, null);
 			Code<MedicationRequest.MedicationrequestStatus> x_ = StatinOrdered.StatusElement;
 			string y_ = FHIRHelpers_4_0_001.ToString(x_);
-			string[] z_ = /* ARR1 */ [
+			string[] z_ = [
 				"active",
 				"completed",
 			];
@@ -1265,7 +1265,7 @@ public class FHIR347_0_1_021
 			bool? aa_ = context?.Operators.Exists<Timing>(z_);
 			Code<MedicationRequest.MedicationrequestStatus> ab_ = ActiveStatin.StatusElement;
 			string ac_ = FHIRHelpers_4_0_001.ToString(ab_);
-			string[] ad_ = /* ARR1 */ [
+			string[] ad_ = [
 				"active",
 				"completed",
 			];

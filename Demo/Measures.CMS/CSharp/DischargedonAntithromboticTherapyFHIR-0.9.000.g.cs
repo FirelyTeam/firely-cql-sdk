@@ -224,9 +224,9 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			IEnumerable<MedicationRequest> h_ = context?.Operators.Union<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest DischargeAntithrombotic)
 			{
-				FhirDateTime m_ = DischargeAntithrombotic.AuthoredOnElement;
+				FhirDateTime m_ = DischargeAntithrombotic?.AuthoredOnElement;
 				CqlDateTime n_ = context?.Operators.Convert<CqlDateTime>(m_);
-				Period o_ = IschemicStrokeEncounter.Period;
+				Period o_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 				bool? q_ = context?.Operators.In<CqlDateTime>(n_, p_, null);
 
@@ -259,19 +259,19 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			bool? h_ = QICoreCommon_2_0_000.isCommunity(Antithrombotic);
 			bool? i_ = QICoreCommon_2_0_000.isDischarge(Antithrombotic);
 			bool? j_ = context?.Operators.Or(h_, i_);
-			Code<MedicationRequest.MedicationrequestStatus> k_ = Antithrombotic.StatusElement;
-			MedicationRequest.MedicationrequestStatus? l_ = k_.Value;
+			Code<MedicationRequest.MedicationrequestStatus> k_ = Antithrombotic?.StatusElement;
+			MedicationRequest.MedicationrequestStatus? l_ = k_?.Value;
 			string m_ = context?.Operators.Convert<string>(l_);
-			string[] n_ = /* ARR1 */ [
+			string[] n_ = [
 				"active",
 				"completed",
 			];
 			bool? o_ = context?.Operators.In<string>(m_, (n_ as IEnumerable<string>));
 			bool? p_ = context?.Operators.And(j_, o_);
-			Code<MedicationRequest.MedicationRequestIntent> q_ = Antithrombotic.IntentElement;
-			MedicationRequest.MedicationRequestIntent? r_ = q_.Value;
+			Code<MedicationRequest.MedicationRequestIntent> q_ = Antithrombotic?.IntentElement;
+			MedicationRequest.MedicationRequestIntent? r_ = q_?.Value;
 			string s_ = context?.Operators.Convert<string>(r_);
-			string[] t_ = /* ARR1 */ [
+			string[] t_ = [
 				"order",
 				"original-order",
 				"reflex-order",
@@ -280,8 +280,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			];
 			bool? u_ = context?.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			bool? v_ = context?.Operators.And(p_, u_);
-			FhirBoolean w_ = Antithrombotic.DoNotPerformElement;
-			bool? x_ = w_.Value;
+			FhirBoolean w_ = Antithrombotic?.DoNotPerformElement;
+			bool? x_ = w_?.Value;
 			bool? y_ = context?.Operators.IsTrue(x_);
 			bool? z_ = context?.Operators.Not(y_);
 			bool? aa_ = context?.Operators.And(v_, z_);
@@ -305,7 +305,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 		IEnumerable<MedicationRequest> e_ = context?.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest NoAntithromboticDischarge)
 		{
-			List<CodeableConcept> h_ = NoAntithromboticDischarge.ReasonCode;
+			List<CodeableConcept> h_ = NoAntithromboticDischarge?.ReasonCode;
 			CqlConcept i_(CodeableConcept @this)
 			{
 				CqlConcept ac_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -329,10 +329,10 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			bool? t_ = QICoreCommon_2_0_000.isDischarge(NoAntithromboticDischarge);
 			bool? u_ = context?.Operators.Or(s_, t_);
 			bool? v_ = context?.Operators.And(r_, u_);
-			Code<MedicationRequest.MedicationRequestIntent> w_ = NoAntithromboticDischarge.IntentElement;
-			MedicationRequest.MedicationRequestIntent? x_ = w_.Value;
+			Code<MedicationRequest.MedicationRequestIntent> w_ = NoAntithromboticDischarge?.IntentElement;
+			MedicationRequest.MedicationRequestIntent? x_ = w_?.Value;
 			string y_ = context?.Operators.Convert<string>(x_);
-			string[] z_ = /* ARR1 */ [
+			string[] z_ = [
 				"order",
 				"original-order",
 				"reflex-order",
@@ -361,9 +361,9 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			IEnumerable<MedicationRequest> d_ = this.Reason_for_Not_Giving_Antithrombotic_at_Discharge();
 			bool? e_(MedicationRequest NoDischargeAntithrombotic)
 			{
-				FhirDateTime i_ = NoDischargeAntithrombotic.AuthoredOnElement;
+				FhirDateTime i_ = NoDischargeAntithrombotic?.AuthoredOnElement;
 				CqlDateTime j_ = context?.Operators.Convert<CqlDateTime>(i_);
-				Period k_ = IschemicStrokeEncounter.Period;
+				Period k_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
 				bool? m_ = context?.Operators.In<CqlDateTime>(j_, l_, null);
 
@@ -396,19 +396,19 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			bool? h_ = QICoreCommon_2_0_000.isCommunity(Pharmacological);
 			bool? i_ = QICoreCommon_2_0_000.isDischarge(Pharmacological);
 			bool? j_ = context?.Operators.Or(h_, i_);
-			Code<MedicationRequest.MedicationrequestStatus> k_ = Pharmacological.StatusElement;
-			MedicationRequest.MedicationrequestStatus? l_ = k_.Value;
+			Code<MedicationRequest.MedicationrequestStatus> k_ = Pharmacological?.StatusElement;
+			MedicationRequest.MedicationrequestStatus? l_ = k_?.Value;
 			string m_ = context?.Operators.Convert<string>(l_);
-			string[] n_ = /* ARR1 */ [
+			string[] n_ = [
 				"active",
 				"completed",
 			];
 			bool? o_ = context?.Operators.In<string>(m_, (n_ as IEnumerable<string>));
 			bool? p_ = context?.Operators.And(j_, o_);
-			Code<MedicationRequest.MedicationRequestIntent> q_ = Pharmacological.IntentElement;
-			MedicationRequest.MedicationRequestIntent? r_ = q_.Value;
+			Code<MedicationRequest.MedicationRequestIntent> q_ = Pharmacological?.IntentElement;
+			MedicationRequest.MedicationRequestIntent? r_ = q_?.Value;
 			string s_ = context?.Operators.Convert<string>(r_);
-			string[] t_ = /* ARR1 */ [
+			string[] t_ = [
 				"order",
 				"original-order",
 				"reflex-order",
@@ -417,8 +417,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			];
 			bool? u_ = context?.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			bool? v_ = context?.Operators.And(p_, u_);
-			FhirBoolean w_ = Pharmacological.DoNotPerformElement;
-			bool? x_ = w_.Value;
+			FhirBoolean w_ = Pharmacological?.DoNotPerformElement;
+			bool? x_ = w_?.Value;
 			bool? y_ = context?.Operators.IsTrue(x_);
 			bool? z_ = context?.Operators.Not(y_);
 			bool? aa_ = context?.Operators.And(v_, z_);
@@ -442,9 +442,9 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			IEnumerable<MedicationRequest> d_ = this.Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge();
 			bool? e_(MedicationRequest DischargePharmacological)
 			{
-				FhirDateTime i_ = DischargePharmacological.AuthoredOnElement;
+				FhirDateTime i_ = DischargePharmacological?.AuthoredOnElement;
 				CqlDateTime j_ = context?.Operators.Convert<CqlDateTime>(i_);
-				Period k_ = IschemicStrokeEncounter.Period;
+				Period k_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
 				bool? m_ = context?.Operators.In<CqlDateTime>(j_, l_, null);
 

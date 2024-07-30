@@ -190,12 +190,12 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 		IEnumerable<Encounter> q_ = context?.Operators.Union<Encounter>(k_, p_);
 		bool? r_(Encounter Encounter)
 		{
-			Code<Encounter.EncounterStatus> u_ = Encounter.StatusElement;
-			Encounter.EncounterStatus? v_ = u_.Value;
+			Code<Encounter.EncounterStatus> u_ = Encounter?.StatusElement;
+			Encounter.EncounterStatus? v_ = u_?.Value;
 			Code<Encounter.EncounterStatus> w_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
 			bool? x_ = context?.Operators.Equal(w_, "finished");
 			CqlInterval<CqlDateTime> y_ = this.Measurement_Period();
-			Period z_ = Encounter.Period;
+			Period z_ = Encounter?.Period;
 			CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(z_);
 			bool? ab_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, null);
 			bool? ac_ = context?.Operators.And(x_, ab_);
@@ -218,21 +218,21 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 		IEnumerable<ServiceRequest> b_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		bool? c_(ServiceRequest ReferralOrder)
 		{
-			Code<RequestStatus> j_ = ReferralOrder.StatusElement;
-			RequestStatus? k_ = j_.Value;
+			Code<RequestStatus> j_ = ReferralOrder?.StatusElement;
+			RequestStatus? k_ = j_?.Value;
 			Code<RequestStatus> l_ = context?.Operators.Convert<Code<RequestStatus>>(k_);
 			string m_ = context?.Operators.Convert<string>(l_);
-			string[] n_ = /* ARR1 */ [
+			string[] n_ = [
 				"active",
 				"completed",
 			];
 			bool? o_ = context?.Operators.In<string>(m_, (n_ as IEnumerable<string>));
-			Code<RequestIntent> p_ = ReferralOrder.IntentElement;
-			RequestIntent? q_ = p_.Value;
+			Code<RequestIntent> p_ = ReferralOrder?.IntentElement;
+			RequestIntent? q_ = p_?.Value;
 			Code<RequestIntent> r_ = context?.Operators.Convert<Code<RequestIntent>>(q_);
 			bool? s_ = context?.Operators.Equal(r_, "order");
 			bool? t_ = context?.Operators.And(o_, s_);
-			FhirDateTime u_ = ReferralOrder.AuthoredOnElement;
+			FhirDateTime u_ = ReferralOrder?.AuthoredOnElement;
 			CqlDateTime v_ = context?.Operators.Convert<CqlDateTime>(u_);
 			CqlInterval<CqlDateTime> w_ = this.Measurement_Period();
 			CqlDateTime x_ = context?.Operators.Start(w_);
@@ -249,9 +249,9 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 		IEnumerable<ServiceRequest> d_ = context?.Operators.Where<ServiceRequest>(b_, c_);
 		(string ID, CqlDateTime AuthorDate)? e_(ServiceRequest ReferralOrder)
 		{
-			Id ag_ = ReferralOrder.IdElement;
-			string ah_ = ag_.Value;
-			FhirDateTime ai_ = ReferralOrder.AuthoredOnElement;
+			Id ag_ = ReferralOrder?.IdElement;
+			string ah_ = ag_?.Value;
+			FhirDateTime ai_ = ReferralOrder?.AuthoredOnElement;
 			CqlDateTime aj_ = context?.Operators.Convert<CqlDateTime>(ai_);
 			(string ID, CqlDateTime AuthorDate)? ak_ = (ah_, aj_);
 
@@ -346,11 +346,11 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
     [CqlDeclaration("TaskGetRequestID")]
 	public IEnumerable<string> TaskGetRequestID(Task task)
 	{
-		List<ResourceReference> a_ = task.BasedOn;
+		List<ResourceReference> a_ = task?.BasedOn;
 		string b_(ResourceReference Task)
 		{
-			FhirString d_ = Task.ReferenceElement;
-			string e_ = d_.Value;
+			FhirString d_ = Task?.ReferenceElement;
+			string e_ = d_?.Value;
 			string f_ = QICoreCommon_2_0_000.GetId(e_);
 
 			return f_;
@@ -367,7 +367,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 		IEnumerable<Task> c_(Task ConsultantReportObtained)
 		{
 			(string ID, CqlDateTime AuthorDate)? f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
-			(string ID, CqlDateTime AuthorDate)?[] g_ = /* ARR1 */ [
+			(string ID, CqlDateTime AuthorDate)?[] g_ = [
 				f_,
 			];
 			bool? h_((string ID, CqlDateTime AuthorDate)? FirstReferral)
@@ -375,14 +375,14 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 				string l_ = FirstReferral?.ID;
 				IEnumerable<string> m_ = this.TaskGetRequestID(ConsultantReportObtained);
 				bool? n_ = context?.Operators.In<string>(l_, m_);
-				Period o_ = ConsultantReportObtained.ExecutionPeriod;
+				Period o_ = ConsultantReportObtained?.ExecutionPeriod;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 				CqlDateTime q_ = context?.Operators.End(p_);
 				CqlDateTime r_ = FirstReferral?.AuthorDate;
 				bool? s_ = context?.Operators.After(q_, r_, null);
 				bool? t_ = context?.Operators.And(n_, s_);
-				Code<Task.TaskStatus> u_ = ConsultantReportObtained.StatusElement;
-				Task.TaskStatus? v_ = u_.Value;
+				Code<Task.TaskStatus> u_ = ConsultantReportObtained?.StatusElement;
+				Task.TaskStatus? v_ = u_?.Value;
 				Code<Task.TaskStatus> w_ = context?.Operators.Convert<Code<Task.TaskStatus>>(v_);
 				bool? x_ = context?.Operators.Equal(w_, "completed");
 				bool? y_ = context?.Operators.And(t_, x_);

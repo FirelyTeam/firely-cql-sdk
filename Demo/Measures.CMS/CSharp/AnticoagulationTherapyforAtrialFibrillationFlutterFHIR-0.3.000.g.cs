@@ -229,15 +229,15 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			IEnumerable<Procedure> m_ = context?.Operators.RetrieveByValueSet<Procedure>(l_, null);
 			bool? n_(Procedure AtrialAblationProcedure)
 			{
-				Code<EventStatus> q_ = AtrialAblationProcedure.StatusElement;
-				EventStatus? r_ = q_.Value;
+				Code<EventStatus> q_ = AtrialAblationProcedure?.StatusElement;
+				EventStatus? r_ = q_?.Value;
 				string s_ = context?.Operators.Convert<string>(r_);
 				bool? t_ = context?.Operators.Equal(s_, "completed");
-				DataType u_ = AtrialAblationProcedure.Performed;
+				DataType u_ = AtrialAblationProcedure?.Performed;
 				object v_ = FHIRHelpers_4_3_000.ToValue(u_);
 				CqlInterval<CqlDateTime> w_ = QICoreCommon_2_0_000.toInterval(v_);
 				CqlDateTime x_ = context?.Operators.Start(w_);
-				Period y_ = IschemicStrokeEncounter.Period;
+				Period y_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
 				CqlDateTime aa_ = context?.Operators.Start(z_);
 				bool? ab_ = context?.Operators.Before(x_, aa_, null);
@@ -257,7 +257,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			IEnumerable<Condition> ae_ = context?.Operators.RetrieveByValueSet<Condition>(ad_, null);
 			bool? af_(Condition AtrialAblationDiagnosis)
 			{
-				CodeableConcept aj_ = AtrialAblationDiagnosis.VerificationStatus;
+				CodeableConcept aj_ = AtrialAblationDiagnosis?.VerificationStatus;
 				CqlConcept ak_ = FHIRHelpers_4_3_000.ToConcept(aj_);
 				bool? al_ = context?.Operators.Not((bool?)(ak_ is null));
 				CqlConcept an_ = FHIRHelpers_4_3_000.ToConcept(aj_);
@@ -265,11 +265,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				CqlConcept ap_ = context?.Operators.ConvertCodeToConcept(ao_);
 				bool? aq_ = context?.Operators.Equivalent(an_, ap_);
 				bool? ar_ = context?.Operators.And(al_, aq_);
-				DataType as_ = AtrialAblationDiagnosis.Onset;
+				DataType as_ = AtrialAblationDiagnosis?.Onset;
 				object at_ = FHIRHelpers_4_3_000.ToValue(as_);
 				CqlInterval<CqlDateTime> au_ = QICoreCommon_2_0_000.toInterval(at_);
 				CqlDateTime av_ = context?.Operators.Start(au_);
-				Period aw_ = IschemicStrokeEncounter.Period;
+				Period aw_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
 				CqlDateTime ay_ = context?.Operators.Start(ax_);
 				bool? az_ = context?.Operators.Before(av_, ay_, null);
@@ -292,11 +292,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			IEnumerable<Observation> bc_ = context?.Operators.RetrieveByValueSet<Observation>(bb_, null);
 			bool? bd_(Observation AtrialAblationObservation)
 			{
-				Code<ObservationStatus> bh_ = AtrialAblationObservation.StatusElement;
-				ObservationStatus? bi_ = bh_.Value;
+				Code<ObservationStatus> bh_ = AtrialAblationObservation?.StatusElement;
+				ObservationStatus? bi_ = bh_?.Value;
 				Code<ObservationStatus> bj_ = context?.Operators.Convert<Code<ObservationStatus>>(bi_);
 				string bk_ = context?.Operators.Convert<string>(bj_);
-				string[] bl_ = /* ARR1 */ [
+				string[] bl_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -306,7 +306,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				{
 					bool bu_()
 					{
-						DataType bx_ = AtrialAblationObservation.Effective;
+						DataType bx_ = AtrialAblationObservation?.Effective;
 						object by_ = FHIRHelpers_4_3_000.ToValue(bx_);
 						bool bz_ = by_ is CqlDateTime;
 
@@ -314,7 +314,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					};
 					bool bv_()
 					{
-						DataType ca_ = AtrialAblationObservation.Effective;
+						DataType ca_ = AtrialAblationObservation?.Effective;
 						object cb_ = FHIRHelpers_4_3_000.ToValue(ca_);
 						bool cc_ = cb_ is CqlInterval<CqlDateTime>;
 
@@ -322,7 +322,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					};
 					bool bw_()
 					{
-						DataType cd_ = AtrialAblationObservation.Effective;
+						DataType cd_ = AtrialAblationObservation?.Effective;
 						object ce_ = FHIRHelpers_4_3_000.ToValue(cd_);
 						bool cf_ = ce_ is CqlDateTime;
 
@@ -330,21 +330,21 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					};
 					if (bu_())
 					{
-						DataType cg_ = AtrialAblationObservation.Effective;
+						DataType cg_ = AtrialAblationObservation?.Effective;
 						object ch_ = FHIRHelpers_4_3_000.ToValue(cg_);
 
 						return ((ch_ as CqlDateTime) as object);
 					}
 					else if (bv_())
 					{
-						DataType ci_ = AtrialAblationObservation.Effective;
+						DataType ci_ = AtrialAblationObservation?.Effective;
 						object cj_ = FHIRHelpers_4_3_000.ToValue(ci_);
 
 						return ((cj_ as CqlInterval<CqlDateTime>) as object);
 					}
 					else if (bw_())
 					{
-						DataType ck_ = AtrialAblationObservation.Effective;
+						DataType ck_ = AtrialAblationObservation?.Effective;
 						object cl_ = FHIRHelpers_4_3_000.ToValue(ck_);
 
 						return ((cl_ as CqlDateTime) as object);
@@ -355,7 +355,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					}
 				};
 				CqlDateTime bo_ = QICoreCommon_2_0_000.earliest(bn_());
-				Period bp_ = IschemicStrokeEncounter.Period;
+				Period bp_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> bq_ = FHIRHelpers_4_3_000.ToInterval(bp_);
 				CqlDateTime br_ = context?.Operators.End(bq_);
 				bool? bs_ = context?.Operators.SameOrBefore(bo_, br_, null);
@@ -389,7 +389,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			IEnumerable<Condition> i_ = context?.Operators.RetrieveByValueSet<Condition>(h_, null);
 			bool? j_(Condition AtrialFibrillationFlutter)
 			{
-				CodeableConcept n_ = AtrialFibrillationFlutter.VerificationStatus;
+				CodeableConcept n_ = AtrialFibrillationFlutter?.VerificationStatus;
 				CqlConcept o_ = FHIRHelpers_4_3_000.ToConcept(n_);
 				bool? p_ = context?.Operators.Not((bool?)(o_ is null));
 				CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept(n_);
@@ -397,11 +397,11 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				CqlConcept t_ = context?.Operators.ConvertCodeToConcept(s_);
 				bool? u_ = context?.Operators.Equivalent(r_, t_);
 				bool? v_ = context?.Operators.And(p_, u_);
-				DataType w_ = AtrialFibrillationFlutter.Onset;
+				DataType w_ = AtrialFibrillationFlutter?.Onset;
 				object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(x_);
 				CqlDateTime z_ = context?.Operators.Start(y_);
-				Period aa_ = IschemicStrokeEncounter.Period;
+				Period aa_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_3_000.ToInterval(aa_);
 				CqlDateTime ac_ = context?.Operators.End(ab_);
 				bool? ad_ = context?.Operators.SameOrBefore(z_, ac_, null);
@@ -422,7 +422,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			IEnumerable<Condition> af_ = CQMCommon_2_0_000.encounterDiagnosis(IschemicStrokeEncounter);
 			bool? ag_(Condition EncounterDiagnosis)
 			{
-				CodeableConcept aj_ = EncounterDiagnosis.Code;
+				CodeableConcept aj_ = EncounterDiagnosis?.Code;
 				CqlConcept ak_ = FHIRHelpers_4_3_000.ToConcept(aj_);
 				CqlValueSet al_ = this.Atrial_Fibrillation_or_Flutter();
 				bool? am_ = context?.Operators.ConceptInValueSet(ak_, al_);
@@ -497,31 +497,31 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		IEnumerable<Encounter> a_ = this.Denominator();
 		bool? b_(Encounter Encounter)
 		{
-			Code<Encounter.EncounterStatus> f_ = Encounter.StatusElement;
-			Encounter.EncounterStatus? g_ = f_.Value;
+			Code<Encounter.EncounterStatus> f_ = Encounter?.StatusElement;
+			Encounter.EncounterStatus? g_ = f_?.Value;
 			Code<Encounter.EncounterStatus> h_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(g_);
 			bool? i_ = context?.Operators.Equal(h_, "finished");
-			Encounter.HospitalizationComponent j_ = Encounter.Hospitalization;
-			CodeableConcept k_ = j_.DischargeDisposition;
+			Encounter.HospitalizationComponent j_ = Encounter?.Hospitalization;
+			CodeableConcept k_ = j_?.DischargeDisposition;
 			CqlConcept l_ = FHIRHelpers_4_3_000.ToConcept(k_);
 			CqlValueSet m_ = this.Discharge_To_Acute_Care_Facility();
 			bool? n_ = context?.Operators.ConceptInValueSet(l_, m_);
-			CodeableConcept p_ = j_.DischargeDisposition;
+			CodeableConcept p_ = j_?.DischargeDisposition;
 			CqlConcept q_ = FHIRHelpers_4_3_000.ToConcept(p_);
 			CqlValueSet r_ = this.Left_Against_Medical_Advice();
 			bool? s_ = context?.Operators.ConceptInValueSet(q_, r_);
 			bool? t_ = context?.Operators.Or(n_, s_);
-			CodeableConcept v_ = j_.DischargeDisposition;
+			CodeableConcept v_ = j_?.DischargeDisposition;
 			CqlConcept w_ = FHIRHelpers_4_3_000.ToConcept(v_);
 			CqlValueSet x_ = this.Patient_Expired();
 			bool? y_ = context?.Operators.ConceptInValueSet(w_, x_);
 			bool? z_ = context?.Operators.Or(t_, y_);
-			CodeableConcept ab_ = j_.DischargeDisposition;
+			CodeableConcept ab_ = j_?.DischargeDisposition;
 			CqlConcept ac_ = FHIRHelpers_4_3_000.ToConcept(ab_);
 			CqlValueSet ad_ = this.Discharged_to_Home_for_Hospice_Care();
 			bool? ae_ = context?.Operators.ConceptInValueSet(ac_, ad_);
 			bool? af_ = context?.Operators.Or(z_, ae_);
-			CodeableConcept ah_ = j_.DischargeDisposition;
+			CodeableConcept ah_ = j_?.DischargeDisposition;
 			CqlConcept ai_ = FHIRHelpers_4_3_000.ToConcept(ah_);
 			CqlValueSet aj_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
 			bool? ak_ = context?.Operators.ConceptInValueSet(ai_, aj_);
@@ -555,19 +555,19 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				bool? m_ = QICoreCommon_2_0_000.isCommunity(DischargeAnticoagulant);
 				bool? n_ = QICoreCommon_2_0_000.isDischarge(DischargeAnticoagulant);
 				bool? o_ = context?.Operators.Or(m_, n_);
-				Code<MedicationRequest.MedicationrequestStatus> p_ = DischargeAnticoagulant.StatusElement;
-				MedicationRequest.MedicationrequestStatus? q_ = p_.Value;
+				Code<MedicationRequest.MedicationrequestStatus> p_ = DischargeAnticoagulant?.StatusElement;
+				MedicationRequest.MedicationrequestStatus? q_ = p_?.Value;
 				string r_ = context?.Operators.Convert<string>(q_);
-				string[] s_ = /* ARR1 */ [
+				string[] s_ = [
 					"active",
 					"completed",
 				];
 				bool? t_ = context?.Operators.In<string>(r_, (s_ as IEnumerable<string>));
 				bool? u_ = context?.Operators.And(o_, t_);
-				Code<MedicationRequest.MedicationRequestIntent> v_ = DischargeAnticoagulant.IntentElement;
-				MedicationRequest.MedicationRequestIntent? w_ = v_.Value;
+				Code<MedicationRequest.MedicationRequestIntent> v_ = DischargeAnticoagulant?.IntentElement;
+				MedicationRequest.MedicationRequestIntent? w_ = v_?.Value;
 				string x_ = context?.Operators.Convert<string>(w_);
-				string[] y_ = /* ARR1 */ [
+				string[] y_ = [
 					"order",
 					"original-order",
 					"reflex-order",
@@ -576,14 +576,14 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				];
 				bool? z_ = context?.Operators.In<string>(x_, (y_ as IEnumerable<string>));
 				bool? aa_ = context?.Operators.And(u_, z_);
-				FhirBoolean ab_ = DischargeAnticoagulant.DoNotPerformElement;
-				bool? ac_ = ab_.Value;
+				FhirBoolean ab_ = DischargeAnticoagulant?.DoNotPerformElement;
+				bool? ac_ = ab_?.Value;
 				bool? ad_ = context?.Operators.IsTrue(ac_);
 				bool? ae_ = context?.Operators.Not(ad_);
 				bool? af_ = context?.Operators.And(aa_, ae_);
-				FhirDateTime ag_ = DischargeAnticoagulant.AuthoredOnElement;
+				FhirDateTime ag_ = DischargeAnticoagulant?.AuthoredOnElement;
 				CqlDateTime ah_ = context?.Operators.Convert<CqlDateTime>(ag_);
-				Period ai_ = Encounter.Period;
+				Period ai_ = Encounter?.Period;
 				CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(ai_);
 				bool? ak_ = context?.Operators.In<CqlDateTime>(ah_, aj_, null);
 				bool? al_ = context?.Operators.And(af_, ak_);
@@ -612,7 +612,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		IEnumerable<MedicationRequest> b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		bool? c_(MedicationRequest NoAnticoagulant)
 		{
-			List<CodeableConcept> e_ = NoAnticoagulant.ReasonCode;
+			List<CodeableConcept> e_ = NoAnticoagulant?.ReasonCode;
 			CqlConcept f_(CodeableConcept @this)
 			{
 				CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -636,10 +636,10 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			bool? q_ = QICoreCommon_2_0_000.isDischarge(NoAnticoagulant);
 			bool? r_ = context?.Operators.Or(p_, q_);
 			bool? s_ = context?.Operators.And(o_, r_);
-			Code<MedicationRequest.MedicationRequestIntent> t_ = NoAnticoagulant.IntentElement;
-			MedicationRequest.MedicationRequestIntent? u_ = t_.Value;
+			Code<MedicationRequest.MedicationRequestIntent> t_ = NoAnticoagulant?.IntentElement;
+			MedicationRequest.MedicationRequestIntent? u_ = t_?.Value;
 			string v_ = context?.Operators.Convert<string>(u_);
-			string[] w_ = /* ARR1 */ [
+			string[] w_ = [
 				"order",
 				"original-order",
 				"reflex-order",
@@ -668,9 +668,9 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 			IEnumerable<MedicationRequest> d_ = this.Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge();
 			bool? e_(MedicationRequest NoDischargeAnticoagulant)
 			{
-				FhirDateTime i_ = NoDischargeAnticoagulant.AuthoredOnElement;
+				FhirDateTime i_ = NoDischargeAnticoagulant?.AuthoredOnElement;
 				CqlDateTime j_ = context?.Operators.Convert<CqlDateTime>(i_);
-				Period k_ = Encounter.Period;
+				Period k_ = Encounter?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
 				bool? m_ = context?.Operators.In<CqlDateTime>(j_, l_, null);
 

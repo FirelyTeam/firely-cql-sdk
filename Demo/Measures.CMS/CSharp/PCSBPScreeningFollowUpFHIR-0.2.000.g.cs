@@ -322,7 +322,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private CqlCode[] ActCode_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
 		];
 
@@ -335,7 +335,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("8462-4", "http://loinc.org", null, null),
 			new CqlCode("34534-8", "http://loinc.org", null, null),
 			new CqlCode("11524-6", "http://loinc.org", null, null),
@@ -351,7 +351,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("183624006", "http://snomed.info/sct", null, null),
 			new CqlCode("183625007", "http://snomed.info/sct", null, null),
 		];
@@ -396,15 +396,15 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		bool? c_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-			Period f_ = ValidEncounter.Period;
+			Period f_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_3_000.ToInterval(f_);
 			bool? h_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, null);
-			Code<Encounter.EncounterStatus> i_ = ValidEncounter.StatusElement;
-			Encounter.EncounterStatus? j_ = i_.Value;
+			Code<Encounter.EncounterStatus> i_ = ValidEncounter?.StatusElement;
+			Encounter.EncounterStatus? j_ = i_?.Value;
 			Code<Encounter.EncounterStatus> k_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(j_);
 			bool? l_ = context?.Operators.Equivalent(k_, "finished");
 			bool? m_ = context?.Operators.And(h_, l_);
-			Coding n_ = ValidEncounter.Class;
+			Coding n_ = ValidEncounter?.Class;
 			CqlCode o_ = FHIRHelpers_4_3_000.ToCode(n_);
 			CqlCode p_ = this.@virtual();
 			bool? q_ = context?.Operators.Equivalent(o_, p_);
@@ -428,8 +428,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		bool? b_(Encounter QualifyingEncounter)
 		{
 			Patient d_ = this.Patient();
-			Date e_ = d_.BirthDateElement;
-			string f_ = e_.Value;
+			Date e_ = d_?.BirthDateElement;
+			string f_ = e_?.Value;
 			CqlDateTime g_ = context?.Operators.ConvertStringToDateTime(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			CqlDateTime i_ = context?.Operators.Start(h_);
@@ -495,7 +495,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						return aa_;
 					}
 				};
-				Period p_ = QualifyingEncounter.Period;
+				Period p_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_3_000.ToInterval(p_);
 				bool? r_ = context?.Operators.SameOrBefore(o_(), q_, null);
 				bool? s_ = context?.Operators.And(n_, r_);
@@ -526,17 +526,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> d_ = context?.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation BloodPressure)
 			{
-				DataType ak_ = BloodPressure.Effective;
+				DataType ak_ = BloodPressure?.Effective;
 				object al_ = FHIRHelpers_4_3_000.ToValue(ak_);
 				CqlInterval<CqlDateTime> am_ = QICoreCommon_2_0_000.toInterval(al_);
 				CqlDateTime an_ = context?.Operators.End(am_);
-				Period ao_ = QualifyingEncounter.Period;
+				Period ao_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_3_000.ToInterval(ao_);
 				bool? aq_ = context?.Operators.In<CqlDateTime>(an_, ap_, null);
-				Code<ObservationStatus> ar_ = BloodPressure.StatusElement;
-				ObservationStatus? as_ = ar_.Value;
+				Code<ObservationStatus> ar_ = BloodPressure?.StatusElement;
+				ObservationStatus? as_ = ar_?.Value;
 				string at_ = context?.Operators.Convert<string>(as_);
-				string[] au_ = /* ARR1 */ [
+				string[] au_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -549,7 +549,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> f_ = context?.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
-				DataType ax_ = @this.Effective;
+				DataType ax_ = @this?.Effective;
 				object ay_ = FHIRHelpers_4_3_000.ToValue(ax_);
 				CqlInterval<CqlDateTime> az_ = QICoreCommon_2_0_000.toInterval(ay_);
 				CqlDateTime ba_ = context?.Operators.Start(az_);
@@ -558,18 +558,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> h_ = context?.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context?.Operators.Last<Observation>(h_);
-			List<Observation.ComponentComponent> j_ = i_.Component;
+			List<Observation.ComponentComponent> j_ = i_?.Component;
 			bool? k_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept bb_ = @this.Code;
-				List<Coding> bc_ = bb_.Coding;
+				CodeableConcept bb_ = @this?.Code;
+				List<Coding> bc_ = bb_?.Coding;
 				Coding bd_ = context?.Operators.First<Coding>((IEnumerable<Coding>)bc_);
-				FhirUri be_ = bd_.SystemElement;
+				FhirUri be_ = bd_?.SystemElement;
 				string bf_ = FHIRHelpers_4_3_000.ToString(be_);
 				bool? bg_ = context?.Operators.Equal(bf_, "http://loinc.org");
-				List<Coding> bi_ = bb_.Coding;
+				List<Coding> bi_ = bb_?.Coding;
 				Coding bj_ = context?.Operators.First<Coding>((IEnumerable<Coding>)bi_);
-				Code bk_ = bj_.CodeElement;
+				Code bk_ = bj_?.CodeElement;
 				string bl_ = FHIRHelpers_4_3_000.ToString(bk_);
 				bool? bm_ = context?.Operators.Equal(bl_, "8480-6");
 				bool? bn_ = context?.Operators.And(bg_, bm_);
@@ -578,7 +578,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> l_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
-			DataType n_ = m_.Value;
+			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlQuantity p_ = context?.Operators.Quantity(1m, "mm[Hg]");
 			CqlQuantity q_ = context?.Operators.Quantity(120m, "mm[Hg]");
@@ -586,17 +586,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? s_ = context?.Operators.In<CqlQuantity>((o_ as CqlQuantity), r_, null);
 			bool? u_(Observation BloodPressure)
 			{
-				DataType bo_ = BloodPressure.Effective;
+				DataType bo_ = BloodPressure?.Effective;
 				object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 				CqlInterval<CqlDateTime> bq_ = QICoreCommon_2_0_000.toInterval(bp_);
 				CqlDateTime br_ = context?.Operators.End(bq_);
-				Period bs_ = QualifyingEncounter.Period;
+				Period bs_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> bt_ = FHIRHelpers_4_3_000.ToInterval(bs_);
 				bool? bu_ = context?.Operators.In<CqlDateTime>(br_, bt_, null);
-				Code<ObservationStatus> bv_ = BloodPressure.StatusElement;
-				ObservationStatus? bw_ = bv_.Value;
+				Code<ObservationStatus> bv_ = BloodPressure?.StatusElement;
+				ObservationStatus? bw_ = bv_?.Value;
 				string bx_ = context?.Operators.Convert<string>(bw_);
-				string[] by_ = /* ARR1 */ [
+				string[] by_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -609,7 +609,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> v_ = context?.Operators.Where<Observation>(d_, u_);
 			object w_(Observation @this)
 			{
-				DataType cb_ = @this.Effective;
+				DataType cb_ = @this?.Effective;
 				object cc_ = FHIRHelpers_4_3_000.ToValue(cb_);
 				CqlInterval<CqlDateTime> cd_ = QICoreCommon_2_0_000.toInterval(cc_);
 				CqlDateTime ce_ = context?.Operators.Start(cd_);
@@ -618,18 +618,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> x_ = context?.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation y_ = context?.Operators.Last<Observation>(x_);
-			List<Observation.ComponentComponent> z_ = y_.Component;
+			List<Observation.ComponentComponent> z_ = y_?.Component;
 			bool? aa_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept cf_ = @this.Code;
-				List<Coding> cg_ = cf_.Coding;
+				CodeableConcept cf_ = @this?.Code;
+				List<Coding> cg_ = cf_?.Coding;
 				Coding ch_ = context?.Operators.First<Coding>((IEnumerable<Coding>)cg_);
-				FhirUri ci_ = ch_.SystemElement;
+				FhirUri ci_ = ch_?.SystemElement;
 				string cj_ = FHIRHelpers_4_3_000.ToString(ci_);
 				bool? ck_ = context?.Operators.Equal(cj_, "http://loinc.org");
-				List<Coding> cm_ = cf_.Coding;
+				List<Coding> cm_ = cf_?.Coding;
 				Coding cn_ = context?.Operators.First<Coding>((IEnumerable<Coding>)cm_);
-				Code co_ = cn_.CodeElement;
+				Code co_ = cn_?.CodeElement;
 				string cp_ = FHIRHelpers_4_3_000.ToString(co_);
 				bool? cq_ = context?.Operators.Equal(cp_, "8462-4");
 				bool? cr_ = context?.Operators.And(ck_, cq_);
@@ -638,7 +638,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> ab_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)z_, aa_);
 			Observation.ComponentComponent ac_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(ab_);
-			DataType ad_ = ac_.Value;
+			DataType ad_ = ac_?.Value;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlQuantity ag_ = context?.Operators.Quantity(80m, "mm[Hg]");
 			CqlInterval<CqlQuantity> ah_ = context?.Operators.Interval(p_, ag_, true, false);
@@ -664,17 +664,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> d_ = context?.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation BloodPressure)
 			{
-				DataType ak_ = BloodPressure.Effective;
+				DataType ak_ = BloodPressure?.Effective;
 				object al_ = FHIRHelpers_4_3_000.ToValue(ak_);
 				CqlInterval<CqlDateTime> am_ = QICoreCommon_2_0_000.toInterval(al_);
 				CqlDateTime an_ = context?.Operators.End(am_);
-				Period ao_ = QualifyingEncounter.Period;
+				Period ao_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_3_000.ToInterval(ao_);
 				bool? aq_ = context?.Operators.In<CqlDateTime>(an_, ap_, null);
-				Code<ObservationStatus> ar_ = BloodPressure.StatusElement;
-				ObservationStatus? as_ = ar_.Value;
+				Code<ObservationStatus> ar_ = BloodPressure?.StatusElement;
+				ObservationStatus? as_ = ar_?.Value;
 				string at_ = context?.Operators.Convert<string>(as_);
-				string[] au_ = /* ARR1 */ [
+				string[] au_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -687,7 +687,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> f_ = context?.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
-				DataType ax_ = @this.Effective;
+				DataType ax_ = @this?.Effective;
 				object ay_ = FHIRHelpers_4_3_000.ToValue(ax_);
 				CqlInterval<CqlDateTime> az_ = QICoreCommon_2_0_000.toInterval(ay_);
 				CqlDateTime ba_ = context?.Operators.Start(az_);
@@ -696,18 +696,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> h_ = context?.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context?.Operators.Last<Observation>(h_);
-			List<Observation.ComponentComponent> j_ = i_.Component;
+			List<Observation.ComponentComponent> j_ = i_?.Component;
 			bool? k_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept bb_ = @this.Code;
-				List<Coding> bc_ = bb_.Coding;
+				CodeableConcept bb_ = @this?.Code;
+				List<Coding> bc_ = bb_?.Coding;
 				Coding bd_ = context?.Operators.First<Coding>((IEnumerable<Coding>)bc_);
-				FhirUri be_ = bd_.SystemElement;
+				FhirUri be_ = bd_?.SystemElement;
 				string bf_ = FHIRHelpers_4_3_000.ToString(be_);
 				bool? bg_ = context?.Operators.Equal(bf_, "http://loinc.org");
-				List<Coding> bi_ = bb_.Coding;
+				List<Coding> bi_ = bb_?.Coding;
 				Coding bj_ = context?.Operators.First<Coding>((IEnumerable<Coding>)bi_);
-				Code bk_ = bj_.CodeElement;
+				Code bk_ = bj_?.CodeElement;
 				string bl_ = FHIRHelpers_4_3_000.ToString(bk_);
 				bool? bm_ = context?.Operators.Equal(bl_, "8480-6");
 				bool? bn_ = context?.Operators.And(bg_, bm_);
@@ -716,7 +716,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> l_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
-			DataType n_ = m_.Value;
+			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlQuantity p_ = context?.Operators.Quantity(120m, "mm[Hg]");
 			CqlQuantity q_ = context?.Operators.Quantity(129m, "mm[Hg]");
@@ -724,17 +724,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? s_ = context?.Operators.In<CqlQuantity>((o_ as CqlQuantity), r_, null);
 			bool? u_(Observation BloodPressure)
 			{
-				DataType bo_ = BloodPressure.Effective;
+				DataType bo_ = BloodPressure?.Effective;
 				object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 				CqlInterval<CqlDateTime> bq_ = QICoreCommon_2_0_000.toInterval(bp_);
 				CqlDateTime br_ = context?.Operators.End(bq_);
-				Period bs_ = QualifyingEncounter.Period;
+				Period bs_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> bt_ = FHIRHelpers_4_3_000.ToInterval(bs_);
 				bool? bu_ = context?.Operators.In<CqlDateTime>(br_, bt_, null);
-				Code<ObservationStatus> bv_ = BloodPressure.StatusElement;
-				ObservationStatus? bw_ = bv_.Value;
+				Code<ObservationStatus> bv_ = BloodPressure?.StatusElement;
+				ObservationStatus? bw_ = bv_?.Value;
 				string bx_ = context?.Operators.Convert<string>(bw_);
-				string[] by_ = /* ARR1 */ [
+				string[] by_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -747,7 +747,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> v_ = context?.Operators.Where<Observation>(d_, u_);
 			object w_(Observation @this)
 			{
-				DataType cb_ = @this.Effective;
+				DataType cb_ = @this?.Effective;
 				object cc_ = FHIRHelpers_4_3_000.ToValue(cb_);
 				CqlInterval<CqlDateTime> cd_ = QICoreCommon_2_0_000.toInterval(cc_);
 				CqlDateTime ce_ = context?.Operators.Start(cd_);
@@ -756,18 +756,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> x_ = context?.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation y_ = context?.Operators.Last<Observation>(x_);
-			List<Observation.ComponentComponent> z_ = y_.Component;
+			List<Observation.ComponentComponent> z_ = y_?.Component;
 			bool? aa_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept cf_ = @this.Code;
-				List<Coding> cg_ = cf_.Coding;
+				CodeableConcept cf_ = @this?.Code;
+				List<Coding> cg_ = cf_?.Coding;
 				Coding ch_ = context?.Operators.First<Coding>((IEnumerable<Coding>)cg_);
-				FhirUri ci_ = ch_.SystemElement;
+				FhirUri ci_ = ch_?.SystemElement;
 				string cj_ = FHIRHelpers_4_3_000.ToString(ci_);
 				bool? ck_ = context?.Operators.Equal(cj_, "http://loinc.org");
-				List<Coding> cm_ = cf_.Coding;
+				List<Coding> cm_ = cf_?.Coding;
 				Coding cn_ = context?.Operators.First<Coding>((IEnumerable<Coding>)cm_);
-				Code co_ = cn_.CodeElement;
+				Code co_ = cn_?.CodeElement;
 				string cp_ = FHIRHelpers_4_3_000.ToString(co_);
 				bool? cq_ = context?.Operators.Equal(cp_, "8462-4");
 				bool? cr_ = context?.Operators.And(ck_, cq_);
@@ -776,7 +776,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> ab_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)z_, aa_);
 			Observation.ComponentComponent ac_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(ab_);
-			DataType ad_ = ac_.Value;
+			DataType ad_ = ac_?.Value;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlQuantity af_ = context?.Operators.Quantity(1m, "mm[Hg]");
 			CqlQuantity ag_ = context?.Operators.Quantity(80m, "mm[Hg]");
@@ -806,8 +806,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<ServiceRequest> g_ = context?.Operators.Union<ServiceRequest>(c_, f_);
 		bool? h_(ServiceRequest FollowUp)
 		{
-			Code<RequestIntent> j_ = FollowUp.IntentElement;
-			RequestIntent? k_ = j_.Value;
+			Code<RequestIntent> j_ = FollowUp?.IntentElement;
+			RequestIntent? k_ = j_?.Value;
 			Code<RequestIntent> l_ = context?.Operators.Convert<Code<RequestIntent>>(k_);
 			bool? m_ = context?.Operators.Equivalent(l_, "order");
 
@@ -840,8 +840,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<ServiceRequest> n_ = context?.Operators.Union<ServiceRequest>(k_, m_);
 		bool? o_(ServiceRequest NonPharmaInterventions)
 		{
-			Code<RequestIntent> q_ = NonPharmaInterventions.IntentElement;
-			RequestIntent? r_ = q_.Value;
+			Code<RequestIntent> q_ = NonPharmaInterventions?.IntentElement;
+			RequestIntent? r_ = q_?.Value;
 			Code<RequestIntent> s_ = context?.Operators.Convert<Code<RequestIntent>>(r_);
 			bool? t_ = context?.Operators.Equivalent(s_, "order");
 
@@ -862,7 +862,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<ServiceRequest> b_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		bool? c_(ServiceRequest Referral)
 		{
-			List<CodeableConcept> e_ = Referral.ReasonCode;
+			List<CodeableConcept> e_ = Referral?.ReasonCode;
 			CqlConcept f_(CodeableConcept @this)
 			{
 				CqlConcept o_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -872,8 +872,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<CqlConcept> g_ = context?.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)e_, f_);
 			CqlValueSet h_ = this.Finding_of_Elevated_Blood_Pressure_or_Hypertension();
 			bool? i_ = context?.Operators.ConceptsInValueSet(g_, h_);
-			Code<RequestIntent> j_ = Referral.IntentElement;
-			RequestIntent? k_ = j_.Value;
+			Code<RequestIntent> j_ = Referral?.IntentElement;
+			RequestIntent? k_ = j_?.Value;
 			Code<RequestIntent> l_ = context?.Operators.Convert<Code<RequestIntent>>(k_);
 			bool? m_ = context?.Operators.Equivalent(l_, "order");
 			bool? n_ = context?.Operators.And(i_, m_);
@@ -897,9 +897,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> j_ = this.Follow_up_with_Rescreen_in_2_to_6_Months();
 			bool? k_(ServiceRequest Twoto6MonthRescreen)
 			{
-				FhirDateTime o_ = Twoto6MonthRescreen.AuthoredOnElement;
+				FhirDateTime o_ = Twoto6MonthRescreen?.AuthoredOnElement;
 				CqlDateTime p_ = context?.Operators.Convert<CqlDateTime>(o_);
-				Period q_ = ElevatedEncounter.Period;
+				Period q_ = ElevatedEncounter?.Period;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(q_);
 				bool? s_ = context?.Operators.In<CqlDateTime>(p_, r_, null);
 
@@ -918,9 +918,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> t_ = this.NonPharmacological_Interventions();
 			bool? u_(ServiceRequest NonPharmInterventions)
 			{
-				FhirDateTime y_ = NonPharmInterventions.AuthoredOnElement;
+				FhirDateTime y_ = NonPharmInterventions?.AuthoredOnElement;
 				CqlDateTime z_ = context?.Operators.Convert<CqlDateTime>(y_);
-				Period aa_ = ElevatedEncounter.Period;
+				Period aa_ = ElevatedEncounter?.Period;
 				CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_3_000.ToInterval(aa_);
 				bool? ac_ = context?.Operators.In<CqlDateTime>(z_, ab_, null);
 
@@ -939,9 +939,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> ad_ = this.Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading();
 			bool? ae_(ServiceRequest Referral)
 			{
-				FhirDateTime ai_ = Referral.AuthoredOnElement;
+				FhirDateTime ai_ = Referral?.AuthoredOnElement;
 				CqlDateTime aj_ = context?.Operators.Convert<CqlDateTime>(ai_);
-				Period ak_ = ElevatedEncounter.Period;
+				Period ak_ = ElevatedEncounter?.Period;
 				CqlInterval<CqlDateTime> al_ = FHIRHelpers_4_3_000.ToInterval(ak_);
 				bool? am_ = context?.Operators.In<CqlDateTime>(aj_, al_, null);
 
@@ -972,11 +972,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> d_ = context?.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation BloodPressure)
 			{
-				DataType bk_ = BloodPressure.Effective;
+				DataType bk_ = BloodPressure?.Effective;
 				object bl_ = FHIRHelpers_4_3_000.ToValue(bk_);
 				CqlInterval<CqlDateTime> bm_ = QICoreCommon_2_0_000.toInterval(bl_);
 				CqlDateTime bn_ = context?.Operators.End(bm_);
-				Period bo_ = QualifyingEncounter.Period;
+				Period bo_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> bp_ = FHIRHelpers_4_3_000.ToInterval(bo_);
 				CqlDateTime bq_ = context?.Operators.Start(bp_);
 				CqlQuantity br_ = context?.Operators.Quantity(1m, "year");
@@ -989,10 +989,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ca_ = context?.Operators.Start(bz_);
 				bool? cb_ = context?.Operators.Not((bool?)(ca_ is null));
 				bool? cc_ = context?.Operators.And(bx_, cb_);
-				Code<ObservationStatus> cd_ = BloodPressure.StatusElement;
-				ObservationStatus? ce_ = cd_.Value;
+				Code<ObservationStatus> cd_ = BloodPressure?.StatusElement;
+				ObservationStatus? ce_ = cd_?.Value;
 				string cf_ = context?.Operators.Convert<string>(ce_);
-				string[] cg_ = /* ARR1 */ [
+				string[] cg_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1005,7 +1005,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> f_ = context?.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
-				DataType cj_ = @this.Effective;
+				DataType cj_ = @this?.Effective;
 				object ck_ = FHIRHelpers_4_3_000.ToValue(cj_);
 				CqlInterval<CqlDateTime> cl_ = QICoreCommon_2_0_000.toInterval(ck_);
 				CqlDateTime cm_ = context?.Operators.Start(cl_);
@@ -1014,18 +1014,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> h_ = context?.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context?.Operators.Last<Observation>(h_);
-			List<Observation.ComponentComponent> j_ = i_.Component;
+			List<Observation.ComponentComponent> j_ = i_?.Component;
 			bool? k_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept cn_ = @this.Code;
-				List<Coding> co_ = cn_.Coding;
+				CodeableConcept cn_ = @this?.Code;
+				List<Coding> co_ = cn_?.Coding;
 				Coding cp_ = context?.Operators.First<Coding>((IEnumerable<Coding>)co_);
-				FhirUri cq_ = cp_.SystemElement;
+				FhirUri cq_ = cp_?.SystemElement;
 				string cr_ = FHIRHelpers_4_3_000.ToString(cq_);
 				bool? cs_ = context?.Operators.Equal(cr_, "http://loinc.org");
-				List<Coding> cu_ = cn_.Coding;
+				List<Coding> cu_ = cn_?.Coding;
 				Coding cv_ = context?.Operators.First<Coding>((IEnumerable<Coding>)cu_);
-				Code cw_ = cv_.CodeElement;
+				Code cw_ = cv_?.CodeElement;
 				string cx_ = FHIRHelpers_4_3_000.ToString(cw_);
 				bool? cy_ = context?.Operators.Equal(cx_, "8480-6");
 				bool? cz_ = context?.Operators.And(cs_, cy_);
@@ -1034,17 +1034,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> l_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
-			DataType n_ = m_.Value;
+			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlQuantity p_ = context?.Operators.Quantity(0m, "mm[Hg]");
 			bool? q_ = context?.Operators.Greater((o_ as CqlQuantity), p_);
 			bool? s_(Observation BloodPressure)
 			{
-				DataType da_ = BloodPressure.Effective;
+				DataType da_ = BloodPressure?.Effective;
 				object db_ = FHIRHelpers_4_3_000.ToValue(da_);
 				CqlInterval<CqlDateTime> dc_ = QICoreCommon_2_0_000.toInterval(db_);
 				CqlDateTime dd_ = context?.Operators.End(dc_);
-				Period de_ = QualifyingEncounter.Period;
+				Period de_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> df_ = FHIRHelpers_4_3_000.ToInterval(de_);
 				CqlDateTime dg_ = context?.Operators.Start(df_);
 				CqlQuantity dh_ = context?.Operators.Quantity(1m, "year");
@@ -1057,10 +1057,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime dq_ = context?.Operators.Start(dp_);
 				bool? dr_ = context?.Operators.Not((bool?)(dq_ is null));
 				bool? ds_ = context?.Operators.And(dn_, dr_);
-				Code<ObservationStatus> dt_ = BloodPressure.StatusElement;
-				ObservationStatus? du_ = dt_.Value;
+				Code<ObservationStatus> dt_ = BloodPressure?.StatusElement;
+				ObservationStatus? du_ = dt_?.Value;
 				string dv_ = context?.Operators.Convert<string>(du_);
-				string[] dw_ = /* ARR1 */ [
+				string[] dw_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1073,7 +1073,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> t_ = context?.Operators.Where<Observation>(d_, s_);
 			object u_(Observation @this)
 			{
-				DataType dz_ = @this.Effective;
+				DataType dz_ = @this?.Effective;
 				object ea_ = FHIRHelpers_4_3_000.ToValue(dz_);
 				CqlInterval<CqlDateTime> eb_ = QICoreCommon_2_0_000.toInterval(ea_);
 				CqlDateTime ec_ = context?.Operators.Start(eb_);
@@ -1082,18 +1082,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> v_ = context?.Operators.SortBy<Observation>(t_, u_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation w_ = context?.Operators.Last<Observation>(v_);
-			List<Observation.ComponentComponent> x_ = w_.Component;
+			List<Observation.ComponentComponent> x_ = w_?.Component;
 			bool? y_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept ed_ = @this.Code;
-				List<Coding> ee_ = ed_.Coding;
+				CodeableConcept ed_ = @this?.Code;
+				List<Coding> ee_ = ed_?.Coding;
 				Coding ef_ = context?.Operators.First<Coding>((IEnumerable<Coding>)ee_);
-				FhirUri eg_ = ef_.SystemElement;
+				FhirUri eg_ = ef_?.SystemElement;
 				string eh_ = FHIRHelpers_4_3_000.ToString(eg_);
 				bool? ei_ = context?.Operators.Equal(eh_, "http://loinc.org");
-				List<Coding> ek_ = ed_.Coding;
+				List<Coding> ek_ = ed_?.Coding;
 				Coding el_ = context?.Operators.First<Coding>((IEnumerable<Coding>)ek_);
-				Code em_ = el_.CodeElement;
+				Code em_ = el_?.CodeElement;
 				string en_ = FHIRHelpers_4_3_000.ToString(em_);
 				bool? eo_ = context?.Operators.Equal(en_, "8462-4");
 				bool? ep_ = context?.Operators.And(ei_, eo_);
@@ -1102,17 +1102,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> z_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)x_, y_);
 			Observation.ComponentComponent aa_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(z_);
-			DataType ab_ = aa_.Value;
+			DataType ab_ = aa_?.Value;
 			object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 			bool? ae_ = context?.Operators.Greater((ac_ as CqlQuantity), p_);
 			bool? af_ = context?.Operators.And(q_, ae_);
 			bool? ah_(Observation BloodPressure)
 			{
-				DataType eq_ = BloodPressure.Effective;
+				DataType eq_ = BloodPressure?.Effective;
 				object er_ = FHIRHelpers_4_3_000.ToValue(eq_);
 				CqlInterval<CqlDateTime> es_ = QICoreCommon_2_0_000.toInterval(er_);
 				CqlDateTime et_ = context?.Operators.End(es_);
-				Period eu_ = QualifyingEncounter.Period;
+				Period eu_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> ev_ = FHIRHelpers_4_3_000.ToInterval(eu_);
 				CqlDateTime ew_ = context?.Operators.Start(ev_);
 				CqlQuantity ex_ = context?.Operators.Quantity(1m, "year");
@@ -1125,10 +1125,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime fg_ = context?.Operators.Start(ff_);
 				bool? fh_ = context?.Operators.Not((bool?)(fg_ is null));
 				bool? fi_ = context?.Operators.And(fd_, fh_);
-				Code<ObservationStatus> fj_ = BloodPressure.StatusElement;
-				ObservationStatus? fk_ = fj_.Value;
+				Code<ObservationStatus> fj_ = BloodPressure?.StatusElement;
+				ObservationStatus? fk_ = fj_?.Value;
 				string fl_ = context?.Operators.Convert<string>(fk_);
-				string[] fm_ = /* ARR1 */ [
+				string[] fm_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1141,7 +1141,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> ai_ = context?.Operators.Where<Observation>(d_, ah_);
 			object aj_(Observation @this)
 			{
-				DataType fp_ = @this.Effective;
+				DataType fp_ = @this?.Effective;
 				object fq_ = FHIRHelpers_4_3_000.ToValue(fp_);
 				CqlInterval<CqlDateTime> fr_ = QICoreCommon_2_0_000.toInterval(fq_);
 				CqlDateTime fs_ = context?.Operators.Start(fr_);
@@ -1150,18 +1150,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> ak_ = context?.Operators.SortBy<Observation>(ai_, aj_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation al_ = context?.Operators.Last<Observation>(ak_);
-			List<Observation.ComponentComponent> am_ = al_.Component;
+			List<Observation.ComponentComponent> am_ = al_?.Component;
 			bool? an_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept ft_ = @this.Code;
-				List<Coding> fu_ = ft_.Coding;
+				CodeableConcept ft_ = @this?.Code;
+				List<Coding> fu_ = ft_?.Coding;
 				Coding fv_ = context?.Operators.First<Coding>((IEnumerable<Coding>)fu_);
-				FhirUri fw_ = fv_.SystemElement;
+				FhirUri fw_ = fv_?.SystemElement;
 				string fx_ = FHIRHelpers_4_3_000.ToString(fw_);
 				bool? fy_ = context?.Operators.Equal(fx_, "http://loinc.org");
-				List<Coding> ga_ = ft_.Coding;
+				List<Coding> ga_ = ft_?.Coding;
 				Coding gb_ = context?.Operators.First<Coding>((IEnumerable<Coding>)ga_);
-				Code gc_ = gb_.CodeElement;
+				Code gc_ = gb_?.CodeElement;
 				string gd_ = FHIRHelpers_4_3_000.ToString(gc_);
 				bool? ge_ = context?.Operators.Equal(gd_, "8480-6");
 				bool? gf_ = context?.Operators.And(fy_, ge_);
@@ -1170,17 +1170,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> ao_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)am_, an_);
 			Observation.ComponentComponent ap_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(ao_);
-			DataType aq_ = ap_.Value;
+			DataType aq_ = ap_?.Value;
 			object ar_ = FHIRHelpers_4_3_000.ToValue(aq_);
 			CqlQuantity as_ = context?.Operators.Quantity(130m, "mm[Hg]");
 			bool? at_ = context?.Operators.GreaterOrEqual((ar_ as CqlQuantity), as_);
 			bool? av_(Observation BloodPressure)
 			{
-				DataType gg_ = BloodPressure.Effective;
+				DataType gg_ = BloodPressure?.Effective;
 				object gh_ = FHIRHelpers_4_3_000.ToValue(gg_);
 				CqlInterval<CqlDateTime> gi_ = QICoreCommon_2_0_000.toInterval(gh_);
 				CqlDateTime gj_ = context?.Operators.End(gi_);
-				Period gk_ = QualifyingEncounter.Period;
+				Period gk_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> gl_ = FHIRHelpers_4_3_000.ToInterval(gk_);
 				CqlDateTime gm_ = context?.Operators.Start(gl_);
 				CqlQuantity gn_ = context?.Operators.Quantity(1m, "year");
@@ -1193,10 +1193,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime gw_ = context?.Operators.Start(gv_);
 				bool? gx_ = context?.Operators.Not((bool?)(gw_ is null));
 				bool? gy_ = context?.Operators.And(gt_, gx_);
-				Code<ObservationStatus> gz_ = BloodPressure.StatusElement;
-				ObservationStatus? ha_ = gz_.Value;
+				Code<ObservationStatus> gz_ = BloodPressure?.StatusElement;
+				ObservationStatus? ha_ = gz_?.Value;
 				string hb_ = context?.Operators.Convert<string>(ha_);
-				string[] hc_ = /* ARR1 */ [
+				string[] hc_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1209,7 +1209,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> aw_ = context?.Operators.Where<Observation>(d_, av_);
 			object ax_(Observation @this)
 			{
-				DataType hf_ = @this.Effective;
+				DataType hf_ = @this?.Effective;
 				object hg_ = FHIRHelpers_4_3_000.ToValue(hf_);
 				CqlInterval<CqlDateTime> hh_ = QICoreCommon_2_0_000.toInterval(hg_);
 				CqlDateTime hi_ = context?.Operators.Start(hh_);
@@ -1218,18 +1218,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> ay_ = context?.Operators.SortBy<Observation>(aw_, ax_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation az_ = context?.Operators.Last<Observation>(ay_);
-			List<Observation.ComponentComponent> ba_ = az_.Component;
+			List<Observation.ComponentComponent> ba_ = az_?.Component;
 			bool? bb_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept hj_ = @this.Code;
-				List<Coding> hk_ = hj_.Coding;
+				CodeableConcept hj_ = @this?.Code;
+				List<Coding> hk_ = hj_?.Coding;
 				Coding hl_ = context?.Operators.First<Coding>((IEnumerable<Coding>)hk_);
-				FhirUri hm_ = hl_.SystemElement;
+				FhirUri hm_ = hl_?.SystemElement;
 				string hn_ = FHIRHelpers_4_3_000.ToString(hm_);
 				bool? ho_ = context?.Operators.Equal(hn_, "http://loinc.org");
-				List<Coding> hq_ = hj_.Coding;
+				List<Coding> hq_ = hj_?.Coding;
 				Coding hr_ = context?.Operators.First<Coding>((IEnumerable<Coding>)hq_);
-				Code hs_ = hr_.CodeElement;
+				Code hs_ = hr_?.CodeElement;
 				string ht_ = FHIRHelpers_4_3_000.ToString(hs_);
 				bool? hu_ = context?.Operators.Equal(ht_, "8462-4");
 				bool? hv_ = context?.Operators.And(ho_, hu_);
@@ -1238,7 +1238,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> bc_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ba_, bb_);
 			Observation.ComponentComponent bd_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(bc_);
-			DataType be_ = bd_.Value;
+			DataType be_ = bd_?.Value;
 			object bf_ = FHIRHelpers_4_3_000.ToValue(be_);
 			CqlQuantity bg_ = context?.Operators.Quantity(80m, "mm[Hg]");
 			bool? bh_ = context?.Operators.GreaterOrEqual((bf_ as CqlQuantity), bg_);
@@ -1264,11 +1264,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> f_ = context?.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? g_(Observation BloodPressure)
 			{
-				DataType bm_ = BloodPressure.Effective;
+				DataType bm_ = BloodPressure?.Effective;
 				object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
 				CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_0_000.toInterval(bn_);
 				CqlDateTime bp_ = context?.Operators.End(bo_);
-				Period bq_ = QualifyingEncounter.Period;
+				Period bq_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_3_000.ToInterval(bq_);
 				bool? bs_ = context?.Operators.In<CqlDateTime>(bp_, br_, null);
 
@@ -1277,7 +1277,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> h_ = context?.Operators.Where<Observation>(f_, g_);
 			object i_(Observation @this)
 			{
-				DataType bt_ = @this.Effective;
+				DataType bt_ = @this?.Effective;
 				object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
 				CqlInterval<CqlDateTime> bv_ = QICoreCommon_2_0_000.toInterval(bu_);
 				CqlDateTime bw_ = context?.Operators.Start(bv_);
@@ -1286,18 +1286,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> j_ = context?.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation k_ = context?.Operators.Last<Observation>(j_);
-			List<Observation.ComponentComponent> l_ = k_.Component;
+			List<Observation.ComponentComponent> l_ = k_?.Component;
 			bool? m_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept bx_ = @this.Code;
-				List<Coding> by_ = bx_.Coding;
+				CodeableConcept bx_ = @this?.Code;
+				List<Coding> by_ = bx_?.Coding;
 				Coding bz_ = context?.Operators.First<Coding>((IEnumerable<Coding>)by_);
-				FhirUri ca_ = bz_.SystemElement;
+				FhirUri ca_ = bz_?.SystemElement;
 				string cb_ = FHIRHelpers_4_3_000.ToString(ca_);
 				bool? cc_ = context?.Operators.Equal(cb_, "http://loinc.org");
-				List<Coding> ce_ = bx_.Coding;
+				List<Coding> ce_ = bx_?.Coding;
 				Coding cf_ = context?.Operators.First<Coding>((IEnumerable<Coding>)ce_);
-				Code cg_ = cf_.CodeElement;
+				Code cg_ = cf_?.CodeElement;
 				string ch_ = FHIRHelpers_4_3_000.ToString(cg_);
 				bool? ci_ = context?.Operators.Equal(ch_, "8480-6");
 				bool? cj_ = context?.Operators.And(cc_, ci_);
@@ -1306,17 +1306,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> n_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)l_, m_);
 			Observation.ComponentComponent o_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(n_);
-			DataType p_ = o_.Value;
+			DataType p_ = o_?.Value;
 			object q_ = FHIRHelpers_4_3_000.ToValue(p_);
 			CqlQuantity r_ = context?.Operators.Quantity(0m, "mm[Hg]");
 			bool? s_ = context?.Operators.Greater((q_ as CqlQuantity), r_);
 			bool? u_(Observation BloodPressure)
 			{
-				DataType ck_ = BloodPressure.Effective;
+				DataType ck_ = BloodPressure?.Effective;
 				object cl_ = FHIRHelpers_4_3_000.ToValue(ck_);
 				CqlInterval<CqlDateTime> cm_ = QICoreCommon_2_0_000.toInterval(cl_);
 				CqlDateTime cn_ = context?.Operators.End(cm_);
-				Period co_ = QualifyingEncounter.Period;
+				Period co_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> cp_ = FHIRHelpers_4_3_000.ToInterval(co_);
 				bool? cq_ = context?.Operators.In<CqlDateTime>(cn_, cp_, null);
 
@@ -1325,7 +1325,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> v_ = context?.Operators.Where<Observation>(f_, u_);
 			object w_(Observation @this)
 			{
-				DataType cr_ = @this.Effective;
+				DataType cr_ = @this?.Effective;
 				object cs_ = FHIRHelpers_4_3_000.ToValue(cr_);
 				CqlInterval<CqlDateTime> ct_ = QICoreCommon_2_0_000.toInterval(cs_);
 				CqlDateTime cu_ = context?.Operators.Start(ct_);
@@ -1334,18 +1334,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> x_ = context?.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation y_ = context?.Operators.Last<Observation>(x_);
-			List<Observation.ComponentComponent> z_ = y_.Component;
+			List<Observation.ComponentComponent> z_ = y_?.Component;
 			bool? aa_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept cv_ = @this.Code;
-				List<Coding> cw_ = cv_.Coding;
+				CodeableConcept cv_ = @this?.Code;
+				List<Coding> cw_ = cv_?.Coding;
 				Coding cx_ = context?.Operators.First<Coding>((IEnumerable<Coding>)cw_);
-				FhirUri cy_ = cx_.SystemElement;
+				FhirUri cy_ = cx_?.SystemElement;
 				string cz_ = FHIRHelpers_4_3_000.ToString(cy_);
 				bool? da_ = context?.Operators.Equal(cz_, "http://loinc.org");
-				List<Coding> dc_ = cv_.Coding;
+				List<Coding> dc_ = cv_?.Coding;
 				Coding dd_ = context?.Operators.First<Coding>((IEnumerable<Coding>)dc_);
-				Code de_ = dd_.CodeElement;
+				Code de_ = dd_?.CodeElement;
 				string df_ = FHIRHelpers_4_3_000.ToString(de_);
 				bool? dg_ = context?.Operators.Equal(df_, "8462-4");
 				bool? dh_ = context?.Operators.And(da_, dg_);
@@ -1354,17 +1354,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> ab_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)z_, aa_);
 			Observation.ComponentComponent ac_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(ab_);
-			DataType ad_ = ac_.Value;
+			DataType ad_ = ac_?.Value;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			bool? ag_ = context?.Operators.Greater((ae_ as CqlQuantity), r_);
 			bool? ah_ = context?.Operators.And(s_, ag_);
 			bool? aj_(Observation BloodPressure)
 			{
-				DataType di_ = BloodPressure.Effective;
+				DataType di_ = BloodPressure?.Effective;
 				object dj_ = FHIRHelpers_4_3_000.ToValue(di_);
 				CqlInterval<CqlDateTime> dk_ = QICoreCommon_2_0_000.toInterval(dj_);
 				CqlDateTime dl_ = context?.Operators.End(dk_);
-				Period dm_ = QualifyingEncounter.Period;
+				Period dm_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> dn_ = FHIRHelpers_4_3_000.ToInterval(dm_);
 				bool? do_ = context?.Operators.In<CqlDateTime>(dl_, dn_, null);
 
@@ -1373,7 +1373,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> ak_ = context?.Operators.Where<Observation>(f_, aj_);
 			object al_(Observation @this)
 			{
-				DataType dp_ = @this.Effective;
+				DataType dp_ = @this?.Effective;
 				object dq_ = FHIRHelpers_4_3_000.ToValue(dp_);
 				CqlInterval<CqlDateTime> dr_ = QICoreCommon_2_0_000.toInterval(dq_);
 				CqlDateTime ds_ = context?.Operators.Start(dr_);
@@ -1382,18 +1382,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> am_ = context?.Operators.SortBy<Observation>(ak_, al_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation an_ = context?.Operators.Last<Observation>(am_);
-			List<Observation.ComponentComponent> ao_ = an_.Component;
+			List<Observation.ComponentComponent> ao_ = an_?.Component;
 			bool? ap_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept dt_ = @this.Code;
-				List<Coding> du_ = dt_.Coding;
+				CodeableConcept dt_ = @this?.Code;
+				List<Coding> du_ = dt_?.Coding;
 				Coding dv_ = context?.Operators.First<Coding>((IEnumerable<Coding>)du_);
-				FhirUri dw_ = dv_.SystemElement;
+				FhirUri dw_ = dv_?.SystemElement;
 				string dx_ = FHIRHelpers_4_3_000.ToString(dw_);
 				bool? dy_ = context?.Operators.Equal(dx_, "http://loinc.org");
-				List<Coding> ea_ = dt_.Coding;
+				List<Coding> ea_ = dt_?.Coding;
 				Coding eb_ = context?.Operators.First<Coding>((IEnumerable<Coding>)ea_);
-				Code ec_ = eb_.CodeElement;
+				Code ec_ = eb_?.CodeElement;
 				string ed_ = FHIRHelpers_4_3_000.ToString(ec_);
 				bool? ee_ = context?.Operators.Equal(ed_, "8480-6");
 				bool? ef_ = context?.Operators.And(dy_, ee_);
@@ -1402,17 +1402,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> aq_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ao_, ap_);
 			Observation.ComponentComponent ar_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(aq_);
-			DataType as_ = ar_.Value;
+			DataType as_ = ar_?.Value;
 			object at_ = FHIRHelpers_4_3_000.ToValue(as_);
 			CqlQuantity au_ = context?.Operators.Quantity(130m, "mm[Hg]");
 			bool? av_ = context?.Operators.GreaterOrEqual((at_ as CqlQuantity), au_);
 			bool? ax_(Observation BloodPressure)
 			{
-				DataType eg_ = BloodPressure.Effective;
+				DataType eg_ = BloodPressure?.Effective;
 				object eh_ = FHIRHelpers_4_3_000.ToValue(eg_);
 				CqlInterval<CqlDateTime> ei_ = QICoreCommon_2_0_000.toInterval(eh_);
 				CqlDateTime ej_ = context?.Operators.End(ei_);
-				Period ek_ = QualifyingEncounter.Period;
+				Period ek_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> el_ = FHIRHelpers_4_3_000.ToInterval(ek_);
 				bool? em_ = context?.Operators.In<CqlDateTime>(ej_, el_, null);
 
@@ -1421,7 +1421,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> ay_ = context?.Operators.Where<Observation>(f_, ax_);
 			object az_(Observation @this)
 			{
-				DataType en_ = @this.Effective;
+				DataType en_ = @this?.Effective;
 				object eo_ = FHIRHelpers_4_3_000.ToValue(en_);
 				CqlInterval<CqlDateTime> ep_ = QICoreCommon_2_0_000.toInterval(eo_);
 				CqlDateTime eq_ = context?.Operators.Start(ep_);
@@ -1430,18 +1430,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> ba_ = context?.Operators.SortBy<Observation>(ay_, az_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation bb_ = context?.Operators.Last<Observation>(ba_);
-			List<Observation.ComponentComponent> bc_ = bb_.Component;
+			List<Observation.ComponentComponent> bc_ = bb_?.Component;
 			bool? bd_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept er_ = @this.Code;
-				List<Coding> es_ = er_.Coding;
+				CodeableConcept er_ = @this?.Code;
+				List<Coding> es_ = er_?.Coding;
 				Coding et_ = context?.Operators.First<Coding>((IEnumerable<Coding>)es_);
-				FhirUri eu_ = et_.SystemElement;
+				FhirUri eu_ = et_?.SystemElement;
 				string ev_ = FHIRHelpers_4_3_000.ToString(eu_);
 				bool? ew_ = context?.Operators.Equal(ev_, "http://loinc.org");
-				List<Coding> ey_ = er_.Coding;
+				List<Coding> ey_ = er_?.Coding;
 				Coding ez_ = context?.Operators.First<Coding>((IEnumerable<Coding>)ey_);
-				Code fa_ = ez_.CodeElement;
+				Code fa_ = ez_?.CodeElement;
 				string fb_ = FHIRHelpers_4_3_000.ToString(fa_);
 				bool? fc_ = context?.Operators.Equal(fb_, "8462-4");
 				bool? fd_ = context?.Operators.And(ew_, fc_);
@@ -1450,7 +1450,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> be_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)bc_, bd_);
 			Observation.ComponentComponent bf_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(be_);
-			DataType bg_ = bf_.Value;
+			DataType bg_ = bf_?.Value;
 			object bh_ = FHIRHelpers_4_3_000.ToValue(bg_);
 			CqlQuantity bi_ = context?.Operators.Quantity(80m, "mm[Hg]");
 			bool? bj_ = context?.Operators.GreaterOrEqual((bh_ as CqlQuantity), bi_);
@@ -1479,16 +1479,16 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> g_ = this.NonPharmacological_Interventions();
 			bool? h_(ServiceRequest NonPharmInterventionsHTN)
 			{
-				FhirDateTime l_ = FourWeekRescreen.AuthoredOnElement;
+				FhirDateTime l_ = FourWeekRescreen?.AuthoredOnElement;
 				CqlDateTime m_ = context?.Operators.Convert<CqlDateTime>(l_);
 				CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
 				bool? o_ = context?.Operators.In<CqlDateTime>(m_, n_, null);
-				FhirDateTime p_ = NonPharmInterventionsHTN.AuthoredOnElement;
+				FhirDateTime p_ = NonPharmInterventionsHTN?.AuthoredOnElement;
 				CqlDateTime q_ = context?.Operators.Convert<CqlDateTime>(p_);
 				bool? s_ = context?.Operators.In<CqlDateTime>(q_, n_, null);
 				bool? t_ = context?.Operators.And(o_, s_);
-				Code<RequestIntent> u_ = FourWeekRescreen.IntentElement;
-				RequestIntent? v_ = u_.Value;
+				Code<RequestIntent> u_ = FourWeekRescreen?.IntentElement;
+				RequestIntent? v_ = u_?.Value;
 				Code<RequestIntent> w_ = context?.Operators.Convert<Code<RequestIntent>>(v_);
 				bool? x_ = context?.Operators.Equivalent(w_, "order");
 				bool? y_ = context?.Operators.And(t_, x_);
@@ -1521,9 +1521,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> d_ = this.First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional();
 			bool? e_(ServiceRequest FirstHTNIntervention)
 			{
-				FhirDateTime i_ = FirstHTNIntervention.AuthoredOnElement;
+				FhirDateTime i_ = FirstHTNIntervention?.AuthoredOnElement;
 				CqlDateTime j_ = context?.Operators.Convert<CqlDateTime>(i_);
-				Period k_ = FirstHTNEncounter.Period;
+				Period k_ = FirstHTNEncounter?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
 				bool? m_ = context?.Operators.In<CqlDateTime>(j_, l_, null);
 
@@ -1553,17 +1553,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> d_ = context?.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation BloodPressure)
 			{
-				DataType bs_ = BloodPressure.Effective;
+				DataType bs_ = BloodPressure?.Effective;
 				object bt_ = FHIRHelpers_4_3_000.ToValue(bs_);
 				CqlInterval<CqlDateTime> bu_ = QICoreCommon_2_0_000.toInterval(bt_);
 				CqlDateTime bv_ = context?.Operators.End(bu_);
-				Period bw_ = QualifyingEncounter.Period;
+				Period bw_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> bx_ = FHIRHelpers_4_3_000.ToInterval(bw_);
 				bool? by_ = context?.Operators.In<CqlDateTime>(bv_, bx_, null);
-				Code<ObservationStatus> bz_ = BloodPressure.StatusElement;
-				ObservationStatus? ca_ = bz_.Value;
+				Code<ObservationStatus> bz_ = BloodPressure?.StatusElement;
+				ObservationStatus? ca_ = bz_?.Value;
 				string cb_ = context?.Operators.Convert<string>(ca_);
-				string[] cc_ = /* ARR1 */ [
+				string[] cc_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1576,7 +1576,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> f_ = context?.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
-				DataType cf_ = @this.Effective;
+				DataType cf_ = @this?.Effective;
 				object cg_ = FHIRHelpers_4_3_000.ToValue(cf_);
 				CqlInterval<CqlDateTime> ch_ = QICoreCommon_2_0_000.toInterval(cg_);
 				CqlDateTime ci_ = context?.Operators.Start(ch_);
@@ -1585,18 +1585,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> h_ = context?.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context?.Operators.Last<Observation>(h_);
-			List<Observation.ComponentComponent> j_ = i_.Component;
+			List<Observation.ComponentComponent> j_ = i_?.Component;
 			bool? k_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept cj_ = @this.Code;
-				List<Coding> ck_ = cj_.Coding;
+				CodeableConcept cj_ = @this?.Code;
+				List<Coding> ck_ = cj_?.Coding;
 				Coding cl_ = context?.Operators.First<Coding>((IEnumerable<Coding>)ck_);
-				FhirUri cm_ = cl_.SystemElement;
+				FhirUri cm_ = cl_?.SystemElement;
 				string cn_ = FHIRHelpers_4_3_000.ToString(cm_);
 				bool? co_ = context?.Operators.Equal(cn_, "http://loinc.org");
-				List<Coding> cq_ = cj_.Coding;
+				List<Coding> cq_ = cj_?.Coding;
 				Coding cr_ = context?.Operators.First<Coding>((IEnumerable<Coding>)cq_);
-				Code cs_ = cr_.CodeElement;
+				Code cs_ = cr_?.CodeElement;
 				string ct_ = FHIRHelpers_4_3_000.ToString(cs_);
 				bool? cu_ = context?.Operators.Equal(ct_, "8480-6");
 				bool? cv_ = context?.Operators.And(co_, cu_);
@@ -1605,7 +1605,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> l_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
-			DataType n_ = m_.Value;
+			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlQuantity p_ = context?.Operators.Quantity(130m, "mm[Hg]");
 			CqlQuantity q_ = context?.Operators.Quantity(139m, "mm[Hg]");
@@ -1613,17 +1613,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? s_ = context?.Operators.In<CqlQuantity>((o_ as CqlQuantity), r_, null);
 			bool? u_(Observation BloodPressure)
 			{
-				DataType cw_ = BloodPressure.Effective;
+				DataType cw_ = BloodPressure?.Effective;
 				object cx_ = FHIRHelpers_4_3_000.ToValue(cw_);
 				CqlInterval<CqlDateTime> cy_ = QICoreCommon_2_0_000.toInterval(cx_);
 				CqlDateTime cz_ = context?.Operators.End(cy_);
-				Period da_ = QualifyingEncounter.Period;
+				Period da_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> db_ = FHIRHelpers_4_3_000.ToInterval(da_);
 				bool? dc_ = context?.Operators.In<CqlDateTime>(cz_, db_, null);
-				Code<ObservationStatus> dd_ = BloodPressure.StatusElement;
-				ObservationStatus? de_ = dd_.Value;
+				Code<ObservationStatus> dd_ = BloodPressure?.StatusElement;
+				ObservationStatus? de_ = dd_?.Value;
 				string df_ = context?.Operators.Convert<string>(de_);
-				string[] dg_ = /* ARR1 */ [
+				string[] dg_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1636,7 +1636,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> v_ = context?.Operators.Where<Observation>(d_, u_);
 			object w_(Observation @this)
 			{
-				DataType dj_ = @this.Effective;
+				DataType dj_ = @this?.Effective;
 				object dk_ = FHIRHelpers_4_3_000.ToValue(dj_);
 				CqlInterval<CqlDateTime> dl_ = QICoreCommon_2_0_000.toInterval(dk_);
 				CqlDateTime dm_ = context?.Operators.Start(dl_);
@@ -1645,18 +1645,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> x_ = context?.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation y_ = context?.Operators.Last<Observation>(x_);
-			List<Observation.ComponentComponent> z_ = y_.Component;
+			List<Observation.ComponentComponent> z_ = y_?.Component;
 			bool? aa_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept dn_ = @this.Code;
-				List<Coding> do_ = dn_.Coding;
+				CodeableConcept dn_ = @this?.Code;
+				List<Coding> do_ = dn_?.Coding;
 				Coding dp_ = context?.Operators.First<Coding>((IEnumerable<Coding>)do_);
-				FhirUri dq_ = dp_.SystemElement;
+				FhirUri dq_ = dp_?.SystemElement;
 				string dr_ = FHIRHelpers_4_3_000.ToString(dq_);
 				bool? ds_ = context?.Operators.Equal(dr_, "http://loinc.org");
-				List<Coding> du_ = dn_.Coding;
+				List<Coding> du_ = dn_?.Coding;
 				Coding dv_ = context?.Operators.First<Coding>((IEnumerable<Coding>)du_);
-				Code dw_ = dv_.CodeElement;
+				Code dw_ = dv_?.CodeElement;
 				string dx_ = FHIRHelpers_4_3_000.ToString(dw_);
 				bool? dy_ = context?.Operators.Equal(dx_, "8462-4");
 				bool? dz_ = context?.Operators.And(ds_, dy_);
@@ -1665,7 +1665,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> ab_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)z_, aa_);
 			Observation.ComponentComponent ac_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(ab_);
-			DataType ad_ = ac_.Value;
+			DataType ad_ = ac_?.Value;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlQuantity af_ = context?.Operators.Quantity(80m, "mm[Hg]");
 			CqlQuantity ag_ = context?.Operators.Quantity(89m, "mm[Hg]");
@@ -1674,17 +1674,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? aj_ = context?.Operators.Or(s_, ai_);
 			bool? al_(Observation BloodPressure)
 			{
-				DataType ea_ = BloodPressure.Effective;
+				DataType ea_ = BloodPressure?.Effective;
 				object eb_ = FHIRHelpers_4_3_000.ToValue(ea_);
 				CqlInterval<CqlDateTime> ec_ = QICoreCommon_2_0_000.toInterval(eb_);
 				CqlDateTime ed_ = context?.Operators.End(ec_);
-				Period ee_ = QualifyingEncounter.Period;
+				Period ee_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> ef_ = FHIRHelpers_4_3_000.ToInterval(ee_);
 				bool? eg_ = context?.Operators.In<CqlDateTime>(ed_, ef_, null);
-				Code<ObservationStatus> eh_ = BloodPressure.StatusElement;
-				ObservationStatus? ei_ = eh_.Value;
+				Code<ObservationStatus> eh_ = BloodPressure?.StatusElement;
+				ObservationStatus? ei_ = eh_?.Value;
 				string ej_ = context?.Operators.Convert<string>(ei_);
-				string[] ek_ = /* ARR1 */ [
+				string[] ek_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1697,7 +1697,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> am_ = context?.Operators.Where<Observation>(d_, al_);
 			object an_(Observation @this)
 			{
-				DataType en_ = @this.Effective;
+				DataType en_ = @this?.Effective;
 				object eo_ = FHIRHelpers_4_3_000.ToValue(en_);
 				CqlInterval<CqlDateTime> ep_ = QICoreCommon_2_0_000.toInterval(eo_);
 				CqlDateTime eq_ = context?.Operators.Start(ep_);
@@ -1706,18 +1706,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> ao_ = context?.Operators.SortBy<Observation>(am_, an_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation ap_ = context?.Operators.Last<Observation>(ao_);
-			List<Observation.ComponentComponent> aq_ = ap_.Component;
+			List<Observation.ComponentComponent> aq_ = ap_?.Component;
 			bool? ar_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept er_ = @this.Code;
-				List<Coding> es_ = er_.Coding;
+				CodeableConcept er_ = @this?.Code;
+				List<Coding> es_ = er_?.Coding;
 				Coding et_ = context?.Operators.First<Coding>((IEnumerable<Coding>)es_);
-				FhirUri eu_ = et_.SystemElement;
+				FhirUri eu_ = et_?.SystemElement;
 				string ev_ = FHIRHelpers_4_3_000.ToString(eu_);
 				bool? ew_ = context?.Operators.Equal(ev_, "http://loinc.org");
-				List<Coding> ey_ = er_.Coding;
+				List<Coding> ey_ = er_?.Coding;
 				Coding ez_ = context?.Operators.First<Coding>((IEnumerable<Coding>)ey_);
-				Code fa_ = ez_.CodeElement;
+				Code fa_ = ez_?.CodeElement;
 				string fb_ = FHIRHelpers_4_3_000.ToString(fa_);
 				bool? fc_ = context?.Operators.Equal(fb_, "8480-6");
 				bool? fd_ = context?.Operators.And(ew_, fc_);
@@ -1726,23 +1726,23 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> as_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)aq_, ar_);
 			Observation.ComponentComponent at_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(as_);
-			DataType au_ = at_.Value;
+			DataType au_ = at_?.Value;
 			object av_ = FHIRHelpers_4_3_000.ToValue(au_);
 			CqlQuantity aw_ = context?.Operators.Quantity(140m, "mm[Hg]");
 			bool? ax_ = context?.Operators.GreaterOrEqual((av_ as CqlQuantity), aw_);
 			bool? az_(Observation BloodPressure)
 			{
-				DataType fe_ = BloodPressure.Effective;
+				DataType fe_ = BloodPressure?.Effective;
 				object ff_ = FHIRHelpers_4_3_000.ToValue(fe_);
 				CqlInterval<CqlDateTime> fg_ = QICoreCommon_2_0_000.toInterval(ff_);
 				CqlDateTime fh_ = context?.Operators.End(fg_);
-				Period fi_ = QualifyingEncounter.Period;
+				Period fi_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> fj_ = FHIRHelpers_4_3_000.ToInterval(fi_);
 				bool? fk_ = context?.Operators.In<CqlDateTime>(fh_, fj_, null);
-				Code<ObservationStatus> fl_ = BloodPressure.StatusElement;
-				ObservationStatus? fm_ = fl_.Value;
+				Code<ObservationStatus> fl_ = BloodPressure?.StatusElement;
+				ObservationStatus? fm_ = fl_?.Value;
 				string fn_ = context?.Operators.Convert<string>(fm_);
-				string[] fo_ = /* ARR1 */ [
+				string[] fo_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1755,7 +1755,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> ba_ = context?.Operators.Where<Observation>(d_, az_);
 			object bb_(Observation @this)
 			{
-				DataType fr_ = @this.Effective;
+				DataType fr_ = @this?.Effective;
 				object fs_ = FHIRHelpers_4_3_000.ToValue(fr_);
 				CqlInterval<CqlDateTime> ft_ = QICoreCommon_2_0_000.toInterval(fs_);
 				CqlDateTime fu_ = context?.Operators.Start(ft_);
@@ -1764,18 +1764,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> bc_ = context?.Operators.SortBy<Observation>(ba_, bb_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation bd_ = context?.Operators.Last<Observation>(bc_);
-			List<Observation.ComponentComponent> be_ = bd_.Component;
+			List<Observation.ComponentComponent> be_ = bd_?.Component;
 			bool? bf_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept fv_ = @this.Code;
-				List<Coding> fw_ = fv_.Coding;
+				CodeableConcept fv_ = @this?.Code;
+				List<Coding> fw_ = fv_?.Coding;
 				Coding fx_ = context?.Operators.First<Coding>((IEnumerable<Coding>)fw_);
-				FhirUri fy_ = fx_.SystemElement;
+				FhirUri fy_ = fx_?.SystemElement;
 				string fz_ = FHIRHelpers_4_3_000.ToString(fy_);
 				bool? ga_ = context?.Operators.Equal(fz_, "http://loinc.org");
-				List<Coding> gc_ = fv_.Coding;
+				List<Coding> gc_ = fv_?.Coding;
 				Coding gd_ = context?.Operators.First<Coding>((IEnumerable<Coding>)gc_);
-				Code ge_ = gd_.CodeElement;
+				Code ge_ = gd_?.CodeElement;
 				string gf_ = FHIRHelpers_4_3_000.ToString(ge_);
 				bool? gg_ = context?.Operators.Equal(gf_, "8462-4");
 				bool? gh_ = context?.Operators.And(ga_, gg_);
@@ -1784,7 +1784,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> bg_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)be_, bf_);
 			Observation.ComponentComponent bh_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(bg_);
-			DataType bi_ = bh_.Value;
+			DataType bi_ = bh_?.Value;
 			object bj_ = FHIRHelpers_4_3_000.ToValue(bi_);
 			CqlQuantity bk_ = context?.Operators.Quantity(90m, "mm[Hg]");
 			bool? bl_ = context?.Operators.GreaterOrEqual((bj_ as CqlQuantity), bk_);
@@ -1820,8 +1820,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<ServiceRequest> j_ = context?.Operators.Union<ServiceRequest>(g_, i_);
 		bool? k_(ServiceRequest EKGLab)
 		{
-			Code<RequestIntent> m_ = EKGLab.IntentElement;
-			RequestIntent? n_ = m_.Value;
+			Code<RequestIntent> m_ = EKGLab?.IntentElement;
+			RequestIntent? n_ = m_?.Value;
 			Code<RequestIntent> o_ = context?.Operators.Convert<Code<RequestIntent>>(n_);
 			bool? p_ = context?.Operators.Equivalent(o_, "order");
 
@@ -1844,11 +1844,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> f_ = this.Laboratory_Test_or_ECG_for_Hypertension();
 			bool? g_(ServiceRequest LabECGIntervention)
 			{
-				FhirDateTime k_ = Rescreen2to6.AuthoredOnElement;
+				FhirDateTime k_ = Rescreen2to6?.AuthoredOnElement;
 				CqlDateTime l_ = context?.Operators.Convert<CqlDateTime>(k_);
 				CqlInterval<CqlDateTime> m_ = this.Measurement_Period();
 				bool? n_ = context?.Operators.In<CqlDateTime>(l_, m_, null);
-				FhirDateTime o_ = LabECGIntervention.AuthoredOnElement;
+				FhirDateTime o_ = LabECGIntervention?.AuthoredOnElement;
 				CqlDateTime p_ = context?.Operators.Convert<CqlDateTime>(o_);
 				bool? r_ = context?.Operators.In<CqlDateTime>(p_, m_, null);
 				bool? s_ = context?.Operators.And(n_, r_);
@@ -1868,7 +1868,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> t_ = this.NonPharmacological_Interventions();
 			bool? u_(ServiceRequest NonPharmSecondIntervention)
 			{
-				FhirDateTime y_ = NonPharmSecondIntervention.AuthoredOnElement;
+				FhirDateTime y_ = NonPharmSecondIntervention?.AuthoredOnElement;
 				CqlDateTime z_ = context?.Operators.Convert<CqlDateTime>(y_);
 				CqlInterval<CqlDateTime> aa_ = this.Measurement_Period();
 				bool? ab_ = context?.Operators.In<CqlDateTime>(z_, aa_, null);
@@ -1899,9 +1899,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> h_ = this.Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions();
 			bool? i_(ServiceRequest EncounterInterventions)
 			{
-				FhirDateTime m_ = EncounterInterventions.AuthoredOnElement;
+				FhirDateTime m_ = EncounterInterventions?.AuthoredOnElement;
 				CqlDateTime n_ = context?.Operators.Convert<CqlDateTime>(m_);
-				Period o_ = SecondHTNEncounterReading.Period;
+				Period o_ = SecondHTNEncounterReading?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 				bool? q_ = context?.Operators.In<CqlDateTime>(n_, p_, null);
 
@@ -1920,9 +1920,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> r_ = this.Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading();
 			bool? s_(ServiceRequest ReferralForHTN)
 			{
-				FhirDateTime w_ = ReferralForHTN.AuthoredOnElement;
+				FhirDateTime w_ = ReferralForHTN?.AuthoredOnElement;
 				CqlDateTime x_ = context?.Operators.Convert<CqlDateTime>(w_);
-				Period y_ = SecondHTNEncounterReading.Period;
+				Period y_ = SecondHTNEncounterReading?.Period;
 				CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
 				bool? aa_ = context?.Operators.In<CqlDateTime>(x_, z_, null);
 
@@ -1953,17 +1953,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> d_ = context?.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? e_(Observation BloodPressure)
 			{
-				DataType bn_ = BloodPressure.Effective;
+				DataType bn_ = BloodPressure?.Effective;
 				object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
 				CqlInterval<CqlDateTime> bp_ = QICoreCommon_2_0_000.toInterval(bo_);
 				CqlDateTime bq_ = context?.Operators.End(bp_);
-				Period br_ = QualifyingEncounter.Period;
+				Period br_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> bs_ = FHIRHelpers_4_3_000.ToInterval(br_);
 				bool? bt_ = context?.Operators.In<CqlDateTime>(bq_, bs_, null);
-				Code<ObservationStatus> bu_ = BloodPressure.StatusElement;
-				ObservationStatus? bv_ = bu_.Value;
+				Code<ObservationStatus> bu_ = BloodPressure?.StatusElement;
+				ObservationStatus? bv_ = bu_?.Value;
 				string bw_ = context?.Operators.Convert<string>(bv_);
-				string[] bx_ = /* ARR1 */ [
+				string[] bx_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1976,7 +1976,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> f_ = context?.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
-				DataType ca_ = @this.Effective;
+				DataType ca_ = @this?.Effective;
 				object cb_ = FHIRHelpers_4_3_000.ToValue(ca_);
 				CqlInterval<CqlDateTime> cc_ = QICoreCommon_2_0_000.toInterval(cb_);
 				CqlDateTime cd_ = context?.Operators.Start(cc_);
@@ -1985,18 +1985,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> h_ = context?.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context?.Operators.Last<Observation>(h_);
-			List<Observation.ComponentComponent> j_ = i_.Component;
+			List<Observation.ComponentComponent> j_ = i_?.Component;
 			bool? k_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept ce_ = @this.Code;
-				List<Coding> cf_ = ce_.Coding;
+				CodeableConcept ce_ = @this?.Code;
+				List<Coding> cf_ = ce_?.Coding;
 				Coding cg_ = context?.Operators.First<Coding>((IEnumerable<Coding>)cf_);
-				FhirUri ch_ = cg_.SystemElement;
+				FhirUri ch_ = cg_?.SystemElement;
 				string ci_ = FHIRHelpers_4_3_000.ToString(ch_);
 				bool? cj_ = context?.Operators.Equal(ci_, "http://loinc.org");
-				List<Coding> cl_ = ce_.Coding;
+				List<Coding> cl_ = ce_?.Coding;
 				Coding cm_ = context?.Operators.First<Coding>((IEnumerable<Coding>)cl_);
-				Code cn_ = cm_.CodeElement;
+				Code cn_ = cm_?.CodeElement;
 				string co_ = FHIRHelpers_4_3_000.ToString(cn_);
 				bool? cp_ = context?.Operators.Equal(co_, "8480-6");
 				bool? cq_ = context?.Operators.And(cj_, cp_);
@@ -2005,23 +2005,23 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> l_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
-			DataType n_ = m_.Value;
+			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlQuantity p_ = context?.Operators.Quantity(0m, "mm[Hg]");
 			bool? q_ = context?.Operators.Greater((o_ as CqlQuantity), p_);
 			bool? s_(Observation BloodPressure)
 			{
-				DataType cr_ = BloodPressure.Effective;
+				DataType cr_ = BloodPressure?.Effective;
 				object cs_ = FHIRHelpers_4_3_000.ToValue(cr_);
 				CqlInterval<CqlDateTime> ct_ = QICoreCommon_2_0_000.toInterval(cs_);
 				CqlDateTime cu_ = context?.Operators.End(ct_);
-				Period cv_ = QualifyingEncounter.Period;
+				Period cv_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> cw_ = FHIRHelpers_4_3_000.ToInterval(cv_);
 				bool? cx_ = context?.Operators.In<CqlDateTime>(cu_, cw_, null);
-				Code<ObservationStatus> cy_ = BloodPressure.StatusElement;
-				ObservationStatus? cz_ = cy_.Value;
+				Code<ObservationStatus> cy_ = BloodPressure?.StatusElement;
+				ObservationStatus? cz_ = cy_?.Value;
 				string da_ = context?.Operators.Convert<string>(cz_);
-				string[] db_ = /* ARR1 */ [
+				string[] db_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -2034,7 +2034,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> t_ = context?.Operators.Where<Observation>(d_, s_);
 			object u_(Observation @this)
 			{
-				DataType de_ = @this.Effective;
+				DataType de_ = @this?.Effective;
 				object df_ = FHIRHelpers_4_3_000.ToValue(de_);
 				CqlInterval<CqlDateTime> dg_ = QICoreCommon_2_0_000.toInterval(df_);
 				CqlDateTime dh_ = context?.Operators.Start(dg_);
@@ -2043,18 +2043,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> v_ = context?.Operators.SortBy<Observation>(t_, u_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation w_ = context?.Operators.Last<Observation>(v_);
-			List<Observation.ComponentComponent> x_ = w_.Component;
+			List<Observation.ComponentComponent> x_ = w_?.Component;
 			bool? y_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept di_ = @this.Code;
-				List<Coding> dj_ = di_.Coding;
+				CodeableConcept di_ = @this?.Code;
+				List<Coding> dj_ = di_?.Coding;
 				Coding dk_ = context?.Operators.First<Coding>((IEnumerable<Coding>)dj_);
-				FhirUri dl_ = dk_.SystemElement;
+				FhirUri dl_ = dk_?.SystemElement;
 				string dm_ = FHIRHelpers_4_3_000.ToString(dl_);
 				bool? dn_ = context?.Operators.Equal(dm_, "http://loinc.org");
-				List<Coding> dp_ = di_.Coding;
+				List<Coding> dp_ = di_?.Coding;
 				Coding dq_ = context?.Operators.First<Coding>((IEnumerable<Coding>)dp_);
-				Code dr_ = dq_.CodeElement;
+				Code dr_ = dq_?.CodeElement;
 				string ds_ = FHIRHelpers_4_3_000.ToString(dr_);
 				bool? dt_ = context?.Operators.Equal(ds_, "8462-4");
 				bool? du_ = context?.Operators.And(dn_, dt_);
@@ -2063,23 +2063,23 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> z_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)x_, y_);
 			Observation.ComponentComponent aa_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(z_);
-			DataType ab_ = aa_.Value;
+			DataType ab_ = aa_?.Value;
 			object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 			bool? ae_ = context?.Operators.Greater((ac_ as CqlQuantity), p_);
 			bool? af_ = context?.Operators.And(q_, ae_);
 			bool? ah_(Observation BloodPressure)
 			{
-				DataType dv_ = BloodPressure.Effective;
+				DataType dv_ = BloodPressure?.Effective;
 				object dw_ = FHIRHelpers_4_3_000.ToValue(dv_);
 				CqlInterval<CqlDateTime> dx_ = QICoreCommon_2_0_000.toInterval(dw_);
 				CqlDateTime dy_ = context?.Operators.End(dx_);
-				Period dz_ = QualifyingEncounter.Period;
+				Period dz_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> ea_ = FHIRHelpers_4_3_000.ToInterval(dz_);
 				bool? eb_ = context?.Operators.In<CqlDateTime>(dy_, ea_, null);
-				Code<ObservationStatus> ec_ = BloodPressure.StatusElement;
-				ObservationStatus? ed_ = ec_.Value;
+				Code<ObservationStatus> ec_ = BloodPressure?.StatusElement;
+				ObservationStatus? ed_ = ec_?.Value;
 				string ee_ = context?.Operators.Convert<string>(ed_);
-				string[] ef_ = /* ARR1 */ [
+				string[] ef_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -2092,7 +2092,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> ai_ = context?.Operators.Where<Observation>(d_, ah_);
 			object aj_(Observation @this)
 			{
-				DataType ei_ = @this.Effective;
+				DataType ei_ = @this?.Effective;
 				object ej_ = FHIRHelpers_4_3_000.ToValue(ei_);
 				CqlInterval<CqlDateTime> ek_ = QICoreCommon_2_0_000.toInterval(ej_);
 				CqlDateTime el_ = context?.Operators.Start(ek_);
@@ -2101,18 +2101,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> ak_ = context?.Operators.SortBy<Observation>(ai_, aj_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation al_ = context?.Operators.Last<Observation>(ak_);
-			List<Observation.ComponentComponent> am_ = al_.Component;
+			List<Observation.ComponentComponent> am_ = al_?.Component;
 			bool? an_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept em_ = @this.Code;
-				List<Coding> en_ = em_.Coding;
+				CodeableConcept em_ = @this?.Code;
+				List<Coding> en_ = em_?.Coding;
 				Coding eo_ = context?.Operators.First<Coding>((IEnumerable<Coding>)en_);
-				FhirUri ep_ = eo_.SystemElement;
+				FhirUri ep_ = eo_?.SystemElement;
 				string eq_ = FHIRHelpers_4_3_000.ToString(ep_);
 				bool? er_ = context?.Operators.Equal(eq_, "http://loinc.org");
-				List<Coding> et_ = em_.Coding;
+				List<Coding> et_ = em_?.Coding;
 				Coding eu_ = context?.Operators.First<Coding>((IEnumerable<Coding>)et_);
-				Code ev_ = eu_.CodeElement;
+				Code ev_ = eu_?.CodeElement;
 				string ew_ = FHIRHelpers_4_3_000.ToString(ev_);
 				bool? ex_ = context?.Operators.Equal(ew_, "8480-6");
 				bool? ey_ = context?.Operators.And(er_, ex_);
@@ -2121,23 +2121,23 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> ao_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)am_, an_);
 			Observation.ComponentComponent ap_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(ao_);
-			DataType aq_ = ap_.Value;
+			DataType aq_ = ap_?.Value;
 			object ar_ = FHIRHelpers_4_3_000.ToValue(aq_);
 			CqlQuantity as_ = context?.Operators.Quantity(140m, "mm[Hg]");
 			bool? at_ = context?.Operators.GreaterOrEqual((ar_ as CqlQuantity), as_);
 			bool? av_(Observation BloodPressure)
 			{
-				DataType ez_ = BloodPressure.Effective;
+				DataType ez_ = BloodPressure?.Effective;
 				object fa_ = FHIRHelpers_4_3_000.ToValue(ez_);
 				CqlInterval<CqlDateTime> fb_ = QICoreCommon_2_0_000.toInterval(fa_);
 				CqlDateTime fc_ = context?.Operators.End(fb_);
-				Period fd_ = QualifyingEncounter.Period;
+				Period fd_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> fe_ = FHIRHelpers_4_3_000.ToInterval(fd_);
 				bool? ff_ = context?.Operators.In<CqlDateTime>(fc_, fe_, null);
-				Code<ObservationStatus> fg_ = BloodPressure.StatusElement;
-				ObservationStatus? fh_ = fg_.Value;
+				Code<ObservationStatus> fg_ = BloodPressure?.StatusElement;
+				ObservationStatus? fh_ = fg_?.Value;
 				string fi_ = context?.Operators.Convert<string>(fh_);
-				string[] fj_ = /* ARR1 */ [
+				string[] fj_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -2150,7 +2150,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> aw_ = context?.Operators.Where<Observation>(d_, av_);
 			object ax_(Observation @this)
 			{
-				DataType fm_ = @this.Effective;
+				DataType fm_ = @this?.Effective;
 				object fn_ = FHIRHelpers_4_3_000.ToValue(fm_);
 				CqlInterval<CqlDateTime> fo_ = QICoreCommon_2_0_000.toInterval(fn_);
 				CqlDateTime fp_ = context?.Operators.Start(fo_);
@@ -2159,18 +2159,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation> ay_ = context?.Operators.SortBy<Observation>(aw_, ax_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation az_ = context?.Operators.Last<Observation>(ay_);
-			List<Observation.ComponentComponent> ba_ = az_.Component;
+			List<Observation.ComponentComponent> ba_ = az_?.Component;
 			bool? bb_(Observation.ComponentComponent @this)
 			{
-				CodeableConcept fq_ = @this.Code;
-				List<Coding> fr_ = fq_.Coding;
+				CodeableConcept fq_ = @this?.Code;
+				List<Coding> fr_ = fq_?.Coding;
 				Coding fs_ = context?.Operators.First<Coding>((IEnumerable<Coding>)fr_);
-				FhirUri ft_ = fs_.SystemElement;
+				FhirUri ft_ = fs_?.SystemElement;
 				string fu_ = FHIRHelpers_4_3_000.ToString(ft_);
 				bool? fv_ = context?.Operators.Equal(fu_, "http://loinc.org");
-				List<Coding> fx_ = fq_.Coding;
+				List<Coding> fx_ = fq_?.Coding;
 				Coding fy_ = context?.Operators.First<Coding>((IEnumerable<Coding>)fx_);
-				Code fz_ = fy_.CodeElement;
+				Code fz_ = fy_?.CodeElement;
 				string ga_ = FHIRHelpers_4_3_000.ToString(fz_);
 				bool? gb_ = context?.Operators.Equal(ga_, "8462-4");
 				bool? gc_ = context?.Operators.And(fv_, gb_);
@@ -2179,7 +2179,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Observation.ComponentComponent> bc_ = context?.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ba_, bb_);
 			Observation.ComponentComponent bd_ = context?.Operators.SingletonFrom<Observation.ComponentComponent>(bc_);
-			DataType be_ = bd_.Value;
+			DataType be_ = bd_?.Value;
 			object bf_ = FHIRHelpers_4_3_000.ToValue(be_);
 			CqlQuantity bg_ = context?.Operators.Quantity(90m, "mm[Hg]");
 			bool? bh_ = context?.Operators.GreaterOrEqual((bf_ as CqlQuantity), bg_);
@@ -2209,21 +2209,21 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> i_ = this.Laboratory_Test_or_ECG_for_Hypertension();
 			bool? j_(ServiceRequest ECGLabTest)
 			{
-				FhirDateTime n_ = WeeksRescreen.AuthoredOnElement;
+				FhirDateTime n_ = WeeksRescreen?.AuthoredOnElement;
 				CqlDateTime o_ = context?.Operators.Convert<CqlDateTime>(n_);
 				CqlInterval<CqlDateTime> p_ = this.Measurement_Period();
 				bool? q_ = context?.Operators.In<CqlDateTime>(o_, p_, null);
-				FhirDateTime r_ = ECGLabTest.AuthoredOnElement;
+				FhirDateTime r_ = ECGLabTest?.AuthoredOnElement;
 				CqlDateTime s_ = context?.Operators.Convert<CqlDateTime>(r_);
 				bool? u_ = context?.Operators.In<CqlDateTime>(s_, p_, null);
 				bool? v_ = context?.Operators.And(q_, u_);
-				Code<RequestIntent> w_ = WeeksRescreen.IntentElement;
-				RequestIntent? x_ = w_.Value;
+				Code<RequestIntent> w_ = WeeksRescreen?.IntentElement;
+				RequestIntent? x_ = w_?.Value;
 				Code<RequestIntent> y_ = context?.Operators.Convert<Code<RequestIntent>>(x_);
 				bool? z_ = context?.Operators.Equivalent(y_, "order");
 				bool? aa_ = context?.Operators.And(v_, z_);
-				Code<RequestIntent> ab_ = ECGLabTest.IntentElement;
-				RequestIntent? ac_ = ab_.Value;
+				Code<RequestIntent> ab_ = ECGLabTest?.IntentElement;
+				RequestIntent? ac_ = ab_?.Value;
 				Code<RequestIntent> ad_ = context?.Operators.Convert<Code<RequestIntent>>(ac_);
 				bool? ae_ = context?.Operators.Equivalent(ad_, "order");
 				bool? af_ = context?.Operators.And(aa_, ae_);
@@ -2243,7 +2243,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> ag_ = this.NonPharmacological_Interventions();
 			bool? ah_(ServiceRequest HTNInterventions)
 			{
-				FhirDateTime al_ = HTNInterventions.AuthoredOnElement;
+				FhirDateTime al_ = HTNInterventions?.AuthoredOnElement;
 				CqlDateTime am_ = context?.Operators.Convert<CqlDateTime>(al_);
 				CqlInterval<CqlDateTime> an_ = this.Measurement_Period();
 				bool? ao_ = context?.Operators.In<CqlDateTime>(am_, an_, null);
@@ -2266,12 +2266,12 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<MedicationRequest> at_ = context?.Operators.Union<MedicationRequest>(aq_, as_);
 			bool? au_(MedicationRequest Medications)
 			{
-				FhirDateTime ay_ = Medications.AuthoredOnElement;
+				FhirDateTime ay_ = Medications?.AuthoredOnElement;
 				CqlDateTime az_ = context?.Operators.Convert<CqlDateTime>(ay_);
 				CqlInterval<CqlDateTime> ba_ = this.Measurement_Period();
 				bool? bb_ = context?.Operators.In<CqlDateTime>(az_, ba_, null);
-				Code<MedicationRequest.MedicationrequestStatus> bc_ = Medications.StatusElement;
-				MedicationRequest.MedicationrequestStatus? bd_ = bc_.Value;
+				Code<MedicationRequest.MedicationrequestStatus> bc_ = Medications?.StatusElement;
+				MedicationRequest.MedicationrequestStatus? bd_ = bc_?.Value;
 				string be_ = context?.Operators.Convert<string>(bd_);
 				bool? bf_ = context?.Operators.Equivalent(be_, "active");
 				bool? bg_ = context?.Operators.And(bb_, bf_);
@@ -2302,9 +2302,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> h_ = this.Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions();
 			bool? i_(ServiceRequest SecondHTN140Over90Interventions)
 			{
-				FhirDateTime m_ = SecondHTN140Over90Interventions.AuthoredOnElement;
+				FhirDateTime m_ = SecondHTN140Over90Interventions?.AuthoredOnElement;
 				CqlDateTime n_ = context?.Operators.Convert<CqlDateTime>(m_);
-				Period o_ = SecondHTNEncounterReading140Over90.Period;
+				Period o_ = SecondHTNEncounterReading140Over90?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 				bool? q_ = context?.Operators.In<CqlDateTime>(n_, p_, null);
 
@@ -2323,9 +2323,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> r_ = this.Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading();
 			bool? s_(ServiceRequest ReferralToProfessional)
 			{
-				FhirDateTime w_ = ReferralToProfessional.AuthoredOnElement;
+				FhirDateTime w_ = ReferralToProfessional?.AuthoredOnElement;
 				CqlDateTime x_ = context?.Operators.Convert<CqlDateTime>(w_);
-				Period y_ = SecondHTNEncounterReading140Over90.Period;
+				Period y_ = SecondHTNEncounterReading140Over90?.Period;
 				CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
 				bool? aa_ = context?.Operators.In<CqlDateTime>(x_, z_, null);
 
@@ -2381,15 +2381,15 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Observation> j_ = context?.Operators.Union<Observation>(f_, i_);
 			bool? k_(Observation NoBPScreen)
 			{
-				Instant o_ = NoBPScreen.IssuedElement;
-				DateTimeOffset? p_ = o_.Value;
+				Instant o_ = NoBPScreen?.IssuedElement;
+				DateTimeOffset? p_ = o_?.Value;
 				CqlDateTime q_ = context?.Operators.Convert<CqlDateTime>(p_);
-				Period r_ = QualifyingEncounter.Period;
+				Period r_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 				bool? t_ = context?.Operators.In<CqlDateTime>(q_, s_, null);
 				bool? u_(Extension @this)
 				{
-					string at_ = @this.Url;
+					string at_ = @this?.Url;
 					FhirUri au_ = context?.Operators.Convert<FhirUri>(at_);
 					string av_ = FHIRHelpers_4_3_000.ToString(au_);
 					bool? aw_ = context?.Operators.Equal(av_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
@@ -2401,7 +2401,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						: null), u_);
 				DataType w_(Extension @this)
 				{
-					DataType ax_ = @this.Value;
+					DataType ax_ = @this?.Value;
 
 					return ax_;
 				};
@@ -2413,7 +2413,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ac_ = context?.Operators.ConceptInValueSet(aa_, ab_);
 				bool? ad_(Extension @this)
 				{
-					string ay_ = @this.Url;
+					string ay_ = @this?.Url;
 					FhirUri az_ = context?.Operators.Convert<FhirUri>(ay_);
 					string ba_ = FHIRHelpers_4_3_000.ToString(az_);
 					bool? bb_ = context?.Operators.Equal(ba_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
@@ -2425,7 +2425,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						: null), ad_);
 				DataType af_(Extension @this)
 				{
-					DataType bc_ = @this.Value;
+					DataType bc_ = @this?.Value;
 
 					return bc_;
 				};
@@ -2437,8 +2437,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? al_ = context?.Operators.ConceptInValueSet(aj_, ak_);
 				bool? am_ = context?.Operators.Or(ac_, al_);
 				bool? an_ = context?.Operators.And(t_, am_);
-				Code<ObservationStatus> ao_ = NoBPScreen.StatusElement;
-				ObservationStatus? ap_ = ao_.Value;
+				Code<ObservationStatus> ao_ = NoBPScreen?.StatusElement;
+				ObservationStatus? ap_ = ao_?.Value;
 				Code<ObservationStatus> aq_ = context?.Operators.Convert<Code<ObservationStatus>>(ap_);
 				bool? ar_ = context?.Operators.Equal(aq_, "cancelled");
 				bool? as_ = context?.Operators.And(an_, ar_);
@@ -2491,7 +2491,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			bool? af_(Extension @this)
 			{
-				string at_ = @this.Url;
+				string at_ = @this?.Url;
 				FhirUri au_ = context?.Operators.Convert<FhirUri>(at_);
 				string av_ = FHIRHelpers_4_3_000.ToString(au_);
 				bool? aw_ = context?.Operators.Equal(av_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2503,7 +2503,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					: null), af_);
 			DataType ah_(Extension @this)
 			{
-				DataType ax_ = @this.Value;
+				DataType ax_ = @this?.Value;
 
 				return ax_;
 			};
@@ -2513,8 +2513,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlConcept al_ = FHIRHelpers_4_3_000.ToConcept(ak_);
 			CqlValueSet am_ = this.Patient_Declined();
 			bool? an_ = context?.Operators.ConceptInValueSet(al_, am_);
-			Code<RequestStatus> ao_ = NonPharmIntervention.StatusElement;
-			RequestStatus? ap_ = ao_.Value;
+			Code<RequestStatus> ao_ = NonPharmIntervention?.StatusElement;
+			RequestStatus? ap_ = ao_?.Value;
 			Code<RequestStatus> aq_ = context?.Operators.Convert<Code<RequestStatus>>(ap_);
 			bool? ar_ = context?.Operators.Equal(aq_, "completed");
 			bool? as_ = context?.Operators.And(an_, ar_);
@@ -2548,7 +2548,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			bool? p_(Extension @this)
 			{
-				string y_ = @this.Url;
+				string y_ = @this?.Url;
 				FhirUri z_ = context?.Operators.Convert<FhirUri>(y_);
 				string aa_ = FHIRHelpers_4_3_000.ToString(z_);
 				bool? ab_ = context?.Operators.Equal(aa_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2560,7 +2560,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					: null), p_);
 			DataType r_(Extension @this)
 			{
-				DataType ac_ = @this.Value;
+				DataType ac_ = @this?.Value;
 
 				return ac_;
 			};
@@ -2600,7 +2600,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			bool? t_(Extension @this)
 			{
-				string ah_ = @this.Url;
+				string ah_ = @this?.Url;
 				FhirUri ai_ = context?.Operators.Convert<FhirUri>(ah_);
 				string aj_ = FHIRHelpers_4_3_000.ToString(ai_);
 				bool? ak_ = context?.Operators.Equal(aj_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2612,7 +2612,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					: null), t_);
 			DataType v_(Extension @this)
 			{
-				DataType al_ = @this.Value;
+				DataType al_ = @this?.Value;
 
 				return al_;
 			};
@@ -2622,8 +2622,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_);
 			CqlValueSet aa_ = this.Patient_Declined();
 			bool? ab_ = context?.Operators.ConceptInValueSet(z_, aa_);
-			Code<RequestStatus> ac_ = SecondHTNDeclinedReferralAndFollowUp.StatusElement;
-			RequestStatus? ad_ = ac_.Value;
+			Code<RequestStatus> ac_ = SecondHTNDeclinedReferralAndFollowUp?.StatusElement;
+			RequestStatus? ad_ = ac_?.Value;
 			Code<RequestStatus> ae_ = context?.Operators.Convert<Code<RequestStatus>>(ad_);
 			bool? af_ = context?.Operators.Equal(ae_, "completed");
 			bool? ag_ = context?.Operators.And(ab_, af_);
@@ -2658,7 +2658,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			bool? z_(Extension @this)
 			{
-				string an_ = @this.Url;
+				string an_ = @this?.Url;
 				FhirUri ao_ = context?.Operators.Convert<FhirUri>(an_);
 				string ap_ = FHIRHelpers_4_3_000.ToString(ao_);
 				bool? aq_ = context?.Operators.Equal(ap_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2670,7 +2670,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					: null), z_);
 			DataType ab_(Extension @this)
 			{
-				DataType ar_ = @this.Value;
+				DataType ar_ = @this?.Value;
 
 				return ar_;
 			};
@@ -2680,8 +2680,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlConcept af_ = FHIRHelpers_4_3_000.ToConcept(ae_);
 			CqlValueSet ag_ = this.Patient_Declined();
 			bool? ah_ = context?.Operators.ConceptInValueSet(af_, ag_);
-			Code<RequestStatus> ai_ = SecondHTN140Over90ReferralFollowUpNotDone.StatusElement;
-			RequestStatus? aj_ = ai_.Value;
+			Code<RequestStatus> ai_ = SecondHTN140Over90ReferralFollowUpNotDone?.StatusElement;
+			RequestStatus? aj_ = ai_?.Value;
 			Code<RequestStatus> ak_ = context?.Operators.Convert<Code<RequestStatus>>(aj_);
 			bool? al_ = context?.Operators.Equal(ak_, "completed");
 			bool? am_ = context?.Operators.And(ah_, al_);
@@ -2695,8 +2695,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<MedicationRequest> r_ = context?.Operators.Union<MedicationRequest>(o_, q_);
 		bool? s_(MedicationRequest MedicationRequestNotOrdered)
 		{
-			Code<MedicationRequest.MedicationrequestStatus> as_ = MedicationRequestNotOrdered.StatusElement;
-			MedicationRequest.MedicationrequestStatus? at_ = as_.Value;
+			Code<MedicationRequest.MedicationrequestStatus> as_ = MedicationRequestNotOrdered?.StatusElement;
+			MedicationRequest.MedicationrequestStatus? at_ = as_?.Value;
 			string au_ = context?.Operators.Convert<string>(at_);
 			bool? av_ = context?.Operators.Equal(au_, "completed");
 
@@ -2737,7 +2737,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				bool? ao_(Extension @this)
 				{
-					string bi_ = @this.Url;
+					string bi_ = @this?.Url;
 					FhirUri bj_ = context?.Operators.Convert<FhirUri>(bi_);
 					string bk_ = FHIRHelpers_4_3_000.ToString(bj_);
 					bool? bl_ = context?.Operators.Equal(bk_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2749,7 +2749,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						: null), ao_);
 				DataType aq_(Extension @this)
 				{
-					DataType bm_ = @this.Value;
+					DataType bm_ = @this?.Value;
 
 					return bm_;
 				};
@@ -2759,14 +2759,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlConcept au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 				CqlValueSet av_ = this.Patient_Declined();
 				bool? aw_ = context?.Operators.ConceptInValueSet(au_, av_);
-				FhirDateTime ax_ = ElevatedBPDeclinedInterventions.AuthoredOnElement;
+				FhirDateTime ax_ = ElevatedBPDeclinedInterventions?.AuthoredOnElement;
 				CqlDateTime ay_ = context?.Operators.Convert<CqlDateTime>(ax_);
-				Period az_ = ElevatedBPEncounter.Period;
+				Period az_ = ElevatedBPEncounter?.Period;
 				CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_3_000.ToInterval(az_);
 				bool? bb_ = context?.Operators.In<CqlDateTime>(ay_, ba_, null);
 				bool? bc_ = context?.Operators.And(aw_, bb_);
-				Code<RequestStatus> bd_ = ElevatedBPDeclinedInterventions.StatusElement;
-				RequestStatus? be_ = bd_.Value;
+				Code<RequestStatus> bd_ = ElevatedBPDeclinedInterventions?.StatusElement;
+				RequestStatus? be_ = bd_?.Value;
 				Code<RequestStatus> bf_ = context?.Operators.Convert<Code<RequestStatus>>(be_);
 				bool? bg_ = context?.Operators.Equal(bf_, "completed");
 				bool? bh_ = context?.Operators.And(bc_, bg_);
@@ -2786,9 +2786,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> bn_ = this.NonPharmacological_Intervention_Not_Ordered();
 			bool? bo_(ServiceRequest NotOrdered)
 			{
-				FhirDateTime bs_ = NotOrdered.AuthoredOnElement;
+				FhirDateTime bs_ = NotOrdered?.AuthoredOnElement;
 				CqlDateTime bt_ = context?.Operators.Convert<CqlDateTime>(bs_);
-				Period bu_ = ElevatedBPEncounter.Period;
+				Period bu_ = ElevatedBPEncounter?.Period;
 				CqlInterval<CqlDateTime> bv_ = FHIRHelpers_4_3_000.ToInterval(bu_);
 				bool? bw_ = context?.Operators.In<CqlDateTime>(bt_, bv_, null);
 
@@ -2819,7 +2819,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				bool? cm_(Extension @this)
 				{
-					string dg_ = @this.Url;
+					string dg_ = @this?.Url;
 					FhirUri dh_ = context?.Operators.Convert<FhirUri>(dg_);
 					string di_ = FHIRHelpers_4_3_000.ToString(dh_);
 					bool? dj_ = context?.Operators.Equal(di_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
@@ -2831,7 +2831,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						: null), cm_);
 				DataType co_(Extension @this)
 				{
-					DataType dk_ = @this.Value;
+					DataType dk_ = @this?.Value;
 
 					return dk_;
 				};
@@ -2841,14 +2841,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlConcept cs_ = FHIRHelpers_4_3_000.ToConcept(cr_);
 				CqlValueSet ct_ = this.Patient_Declined();
 				bool? cu_ = context?.Operators.ConceptInValueSet(cs_, ct_);
-				FhirDateTime cv_ = FirstHTNDeclinedInterventions.AuthoredOnElement;
+				FhirDateTime cv_ = FirstHTNDeclinedInterventions?.AuthoredOnElement;
 				CqlDateTime cw_ = context?.Operators.Convert<CqlDateTime>(cv_);
-				Period cx_ = FirstHTNEncounter.Period;
+				Period cx_ = FirstHTNEncounter?.Period;
 				CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_3_000.ToInterval(cx_);
 				bool? cz_ = context?.Operators.In<CqlDateTime>(cw_, cy_, null);
 				bool? da_ = context?.Operators.And(cu_, cz_);
-				Code<RequestStatus> db_ = FirstHTNDeclinedInterventions.StatusElement;
-				RequestStatus? dc_ = db_.Value;
+				Code<RequestStatus> db_ = FirstHTNDeclinedInterventions?.StatusElement;
+				RequestStatus? dc_ = db_?.Value;
 				Code<RequestStatus> dd_ = context?.Operators.Convert<Code<RequestStatus>>(dc_);
 				bool? de_ = context?.Operators.Equal(dd_, "completed");
 				bool? df_ = context?.Operators.And(da_, de_);
@@ -2868,9 +2868,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> dl_ = this.NonPharmacological_Intervention_Not_Ordered();
 			bool? dm_(ServiceRequest NoNonPharm)
 			{
-				FhirDateTime dq_ = NoNonPharm.AuthoredOnElement;
+				FhirDateTime dq_ = NoNonPharm?.AuthoredOnElement;
 				CqlDateTime dr_ = context?.Operators.Convert<CqlDateTime>(dq_);
-				Period ds_ = FirstHTNEncounter.Period;
+				Period ds_ = FirstHTNEncounter?.Period;
 				CqlInterval<CqlDateTime> dt_ = FHIRHelpers_4_3_000.ToInterval(ds_);
 				bool? du_ = context?.Operators.In<CqlDateTime>(dr_, dt_, null);
 
@@ -2892,9 +2892,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<ServiceRequest> dv_ = this.Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined();
 			bool? dw_(ServiceRequest SecondHTNDeclinedInterventions)
 			{
-				FhirDateTime ea_ = SecondHTNDeclinedInterventions.AuthoredOnElement;
+				FhirDateTime ea_ = SecondHTNDeclinedInterventions?.AuthoredOnElement;
 				CqlDateTime eb_ = context?.Operators.Convert<CqlDateTime>(ea_);
-				Period ec_ = SecondHTNEncounter.Period;
+				Period ec_ = SecondHTNEncounter?.Period;
 				CqlInterval<CqlDateTime> ed_ = FHIRHelpers_4_3_000.ToInterval(ec_);
 				bool? ee_ = context?.Operators.In<CqlDateTime>(eb_, ed_, null);
 
@@ -2916,7 +2916,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			{
 				object ek_ = context?.Operators.LateBoundProperty<object>(SecondHTN140Over90DeclinedInterventions, "authoredOn");
 				CqlDateTime el_ = context?.Operators.LateBoundProperty<CqlDateTime>(ek_, "value");
-				Period em_ = SecondHTN140Over90Encounter.Period;
+				Period em_ = SecondHTN140Over90Encounter?.Period;
 				CqlInterval<CqlDateTime> en_ = FHIRHelpers_4_3_000.ToInterval(em_);
 				bool? eo_ = context?.Operators.In<CqlDateTime>(el_, en_, null);
 

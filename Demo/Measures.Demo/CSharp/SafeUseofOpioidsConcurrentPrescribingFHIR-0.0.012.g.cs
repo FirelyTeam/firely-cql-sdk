@@ -154,7 +154,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 		];
 

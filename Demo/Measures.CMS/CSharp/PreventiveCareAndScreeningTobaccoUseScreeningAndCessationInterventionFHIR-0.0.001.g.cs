@@ -380,7 +380,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("96156", "http://www.ama-assn.org/go/cpt", null, null),
 			new CqlCode("96158", "http://www.ama-assn.org/go/cpt", null, null),
 			new CqlCode("99024", "http://www.ama-assn.org/go/cpt", null, null),
@@ -396,7 +396,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 	private CqlCode[] ICD10CM_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("Z71.6", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
 		];
 
@@ -440,7 +440,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Encounter> c_ = context?.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? d_(Encounter E)
 		{
-			List<CodeableConcept> ar_ = E.Type;
+			List<CodeableConcept> ar_ = E?.Type;
 			CqlConcept as_(CodeableConcept @this)
 			{
 				CqlConcept ax_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -465,7 +465,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Encounter> f_ = context?.Operators.Union<Encounter>(b_, e_);
 		bool? h_(Encounter E)
 		{
-			List<CodeableConcept> bb_ = E.Type;
+			List<CodeableConcept> bb_ = E?.Type;
 			CqlConcept bc_(CodeableConcept @this)
 			{
 				CqlConcept bh_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -522,7 +522,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		bool? ap_(Encounter OfficeBasedEncounter)
 		{
 			CqlInterval<CqlDateTime> bl_ = this.Measurement_Period();
-			Period bm_ = OfficeBasedEncounter.Period;
+			Period bm_ = OfficeBasedEncounter?.Period;
 			CqlInterval<CqlDateTime> bn_ = FHIRHelpers_4_3_000.ToInterval(bm_);
 			CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_0_000.toInterval((bn_ as object));
 			bool? bp_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(bl_, bo_, null);
@@ -550,7 +550,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Encounter> h_ = context?.Operators.RetrieveByValueSet<Encounter>(null, null);
 		bool? i_(Encounter E)
 		{
-			List<CodeableConcept> ac_ = E.Type;
+			List<CodeableConcept> ac_ = E?.Type;
 			CqlConcept ad_(CodeableConcept @this)
 			{
 				CqlConcept ai_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -578,7 +578,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Encounter> n_ = context?.Operators.RetrieveByValueSet<Encounter>(m_, null);
 		bool? p_(Encounter E)
 		{
-			List<CodeableConcept> am_ = E.Type;
+			List<CodeableConcept> am_ = E?.Type;
 			CqlConcept an_(CodeableConcept @this)
 			{
 				CqlConcept as_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -612,7 +612,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		bool? aa_(Encounter PreventiveEncounter)
 		{
 			CqlInterval<CqlDateTime> aw_ = this.Measurement_Period();
-			Period ax_ = PreventiveEncounter.Period;
+			Period ax_ = PreventiveEncounter?.Period;
 			CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_3_000.ToInterval(ax_);
 			CqlInterval<CqlDateTime> az_ = QICoreCommon_2_0_000.toInterval((ay_ as object));
 			bool? ba_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, az_, null);
@@ -631,8 +631,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -673,7 +673,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		bool? d_(Observation TobaccoUseScreening)
 		{
 			CqlInterval<CqlDateTime> m_ = this.Measurement_Period();
-			DataType n_ = TobaccoUseScreening.Effective;
+			DataType n_ = TobaccoUseScreening?.Effective;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
 			bool? q_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
@@ -683,7 +683,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Observation> e_ = context?.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			DataType r_ = @this.Effective;
+			DataType r_ = @this?.Effective;
 			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
 			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval(s_);
 			CqlDateTime u_ = context?.Operators.Start(t_);
@@ -692,12 +692,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		};
 		IEnumerable<Observation> g_ = context?.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context?.Operators.Last<Observation>(g_);
-		Observation[] i_ = /* ARR1 */ [
+		Observation[] i_ = [
 			h_,
 		];
 		bool? j_(Observation MostRecentTobaccoUseScreening)
 		{
-			DataType v_ = MostRecentTobaccoUseScreening.Value;
+			DataType v_ = MostRecentTobaccoUseScreening?.Value;
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
 			CqlValueSet x_ = this.Tobacco_User();
 			bool? y_ = context?.Operators.ConceptInValueSet((w_ as CqlConcept), x_);
@@ -747,7 +747,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		bool? d_(Observation TobaccoUseScreening)
 		{
 			CqlInterval<CqlDateTime> m_ = this.Measurement_Period();
-			DataType n_ = TobaccoUseScreening.Effective;
+			DataType n_ = TobaccoUseScreening?.Effective;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
 			bool? q_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
@@ -757,7 +757,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Observation> e_ = context?.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			DataType r_ = @this.Effective;
+			DataType r_ = @this?.Effective;
 			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
 			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval(s_);
 			CqlDateTime u_ = context?.Operators.Start(t_);
@@ -766,12 +766,12 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		};
 		IEnumerable<Observation> g_ = context?.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context?.Operators.Last<Observation>(g_);
-		Observation[] i_ = /* ARR1 */ [
+		Observation[] i_ = [
 			h_,
 		];
 		bool? j_(Observation MostRecentTobaccoUseScreening)
 		{
-			DataType v_ = MostRecentTobaccoUseScreening.Value;
+			DataType v_ = MostRecentTobaccoUseScreening?.Value;
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
 			CqlValueSet x_ = this.Tobacco_Non_User();
 			bool? y_ = context?.Operators.ConceptInValueSet((w_ as CqlConcept), x_);
@@ -816,7 +816,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			CqlDateTime o_ = context?.Operators.Subtract(m_, n_);
 			CqlDateTime q_ = context?.Operators.End(l_);
 			CqlInterval<CqlDateTime> r_ = context?.Operators.Interval(o_, q_, true, true);
-			DataType s_ = TobaccoCessationCounseling.Performed;
+			DataType s_ = TobaccoCessationCounseling?.Performed;
 			object t_ = FHIRHelpers_4_3_000.ToValue(s_);
 			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(t_);
 			bool? v_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, null);
@@ -860,7 +860,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.isMedicationOrder(e_);
 		bool? g_(MedicationRequest CessationPharmacotherapyOrdered)
 		{
-			FhirDateTime i_ = CessationPharmacotherapyOrdered.AuthoredOnElement;
+			FhirDateTime i_ = CessationPharmacotherapyOrdered?.AuthoredOnElement;
 			CqlDateTime j_ = context?.Operators.Convert<CqlDateTime>(i_);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
 			CqlDateTime l_ = context?.Operators.Start(k_);
@@ -890,7 +890,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.isMedicationActive(e_);
 		bool? g_(MedicationRequest TakingCessationPharmacotherapy)
 		{
-			FhirDateTime i_ = TakingCessationPharmacotherapy.AuthoredOnElement;
+			FhirDateTime i_ = TakingCessationPharmacotherapy?.AuthoredOnElement;
 			CqlDateTime j_ = context?.Operators.Convert<CqlDateTime>(i_);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
 			CqlDateTime l_ = context?.Operators.Start(k_);

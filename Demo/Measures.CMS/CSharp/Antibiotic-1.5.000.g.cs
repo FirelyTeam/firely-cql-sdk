@@ -74,7 +74,7 @@ public class Antibiotic_1_5_000
 				CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToPrevalenceInterval(comcondition);
 				CqlDateTime j_ = context?.Operators.Start(i_);
 				CqlDate k_ = context?.Operators.DateFrom(j_);
-				Period l_ = eDate.Period;
+				Period l_ = eDate?.Period;
 				CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
 				CqlDateTime o_ = context?.Operators.Start(n_);
@@ -114,7 +114,7 @@ public class Antibiotic_1_5_000
 			{
 				CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToPrevalenceInterval(competcondition);
 				CqlDateTime j_ = context?.Operators.Start(i_);
-				Period k_ = eDate.Period;
+				Period k_ = eDate?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
 				CqlDateTime m_ = context?.Operators.Start(l_);
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(k_);
@@ -152,10 +152,10 @@ public class Antibiotic_1_5_000
 		{
 			bool? c_(MedicationRequest ActiveMedication)
 			{
-				List<Dosage> g_ = ActiveMedication.DosageInstruction;
+				List<Dosage> g_ = ActiveMedication?.DosageInstruction;
 				bool? h_(Dosage @this)
 				{
-					Timing o_ = @this.Timing;
+					Timing o_ = @this?.Timing;
 					bool? p_ = context?.Operators.Not((bool?)(o_ is null));
 
 					return p_;
@@ -163,18 +163,18 @@ public class Antibiotic_1_5_000
 				IEnumerable<Dosage> i_ = context?.Operators.Where<Dosage>((IEnumerable<Dosage>)g_, h_);
 				Timing j_(Dosage @this)
 				{
-					Timing q_ = @this.Timing;
+					Timing q_ = @this?.Timing;
 
 					return q_;
 				};
 				IEnumerable<Timing> k_ = context?.Operators.Select<Dosage, Timing>(i_, j_);
 				bool? l_(Timing T)
 				{
-					Timing.RepeatComponent r_ = T.Repeat;
-					DataType s_ = r_.Bounds;
+					Timing.RepeatComponent r_ = T?.Repeat;
+					DataType s_ = r_?.Bounds;
 					object t_ = FHIRHelpers_4_3_000.ToValue(s_);
 					CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_);
-					Period v_ = DateOfEpisode.Period;
+					Period v_ = DateOfEpisode?.Period;
 					CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_3_000.ToInterval(v_);
 					CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 					CqlDateTime y_ = context?.Operators.Start(x_);
@@ -188,7 +188,7 @@ public class Antibiotic_1_5_000
 					CqlQuantity ah_ = context?.Operators.Quantity(1m, "day");
 					CqlDate ai_ = context?.Operators.Subtract(ag_, ah_);
 					CqlInterval<CqlDate> aj_ = context?.Operators.Interval(ab_, ai_, true, true);
-					CqlDate ak_ = aj_.low;
+					CqlDate ak_ = aj_?.low;
 					CqlDateTime al_ = context?.Operators.ConvertDateToDateTime(ak_);
 					CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_3_000.ToInterval(v_);
 					CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.ToInterval((an_ as object));
@@ -201,7 +201,7 @@ public class Antibiotic_1_5_000
 					CqlDate ax_ = context?.Operators.DateFrom(aw_);
 					CqlDate az_ = context?.Operators.Subtract(ax_, ah_);
 					CqlInterval<CqlDate> ba_ = context?.Operators.Interval(as_, az_, true, true);
-					CqlDate bb_ = ba_.high;
+					CqlDate bb_ = ba_?.high;
 					CqlDateTime bc_ = context?.Operators.ConvertDateToDateTime(bb_);
 					CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_3_000.ToInterval(v_);
 					CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_0_000.ToInterval((be_ as object));
@@ -214,7 +214,7 @@ public class Antibiotic_1_5_000
 					CqlDate bo_ = context?.Operators.DateFrom(bn_);
 					CqlDate bq_ = context?.Operators.Subtract(bo_, ah_);
 					CqlInterval<CqlDate> br_ = context?.Operators.Interval(bj_, bq_, true, true);
-					bool? bs_ = br_.lowClosed;
+					bool? bs_ = br_?.lowClosed;
 					CqlInterval<CqlDateTime> bu_ = FHIRHelpers_4_3_000.ToInterval(v_);
 					CqlInterval<CqlDateTime> bv_ = QICoreCommon_2_0_000.ToInterval((bu_ as object));
 					CqlDateTime bw_ = context?.Operators.Start(bv_);
@@ -226,7 +226,7 @@ public class Antibiotic_1_5_000
 					CqlDate ce_ = context?.Operators.DateFrom(cd_);
 					CqlDate cg_ = context?.Operators.Subtract(ce_, ah_);
 					CqlInterval<CqlDate> ch_ = context?.Operators.Interval(bz_, cg_, true, true);
-					bool? ci_ = ch_.highClosed;
+					bool? ci_ = ch_?.highClosed;
 					CqlInterval<CqlDateTime> cj_ = context?.Operators.Interval(al_, bc_, bs_, ci_);
 					bool? ck_ = context?.Operators.Overlaps(u_, cj_, null);
 

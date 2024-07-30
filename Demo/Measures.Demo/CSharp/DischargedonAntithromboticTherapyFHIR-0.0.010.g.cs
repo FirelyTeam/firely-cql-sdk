@@ -296,7 +296,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			bool? x_ = context?.Operators.And(s_, w_);
 			Code<MedicationRequest.MedicationrequestStatus> y_ = NoAntithromboticDischarge.StatusElement;
 			string z_ = FHIRHelpers_4_0_001.ToString(y_);
-			string[] aa_ = /* ARR1 */ [
+			string[] aa_ = [
 				"completed",
 				"cancelled",
 			];
@@ -379,7 +379,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			bool? m_ = context?.Operators.And(h_, l_);
 			Code<MedicationRequest.MedicationrequestStatus> n_ = Pharmacological.StatusElement;
 			string o_ = FHIRHelpers_4_0_001.ToString(n_);
-			string[] p_ = /* ARR1 */ [
+			string[] p_ = [
 				"active",
 				"completed",
 			];
@@ -499,7 +499,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			bool? m_ = context?.Operators.And(h_, l_);
 			Code<MedicationRequest.MedicationrequestStatus> n_ = Antithrombotic.StatusElement;
 			string o_ = FHIRHelpers_4_0_001.ToString(n_);
-			string[] p_ = /* ARR1 */ [
+			string[] p_ = [
 				"active",
 				"completed",
 			];

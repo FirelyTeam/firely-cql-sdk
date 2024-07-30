@@ -96,7 +96,7 @@ public class ParametersExample_0_0_1
 	private Patient Patient_Filter_Value()
 	{
 		Patient a_ = this.Patient();
-		Patient[] b_ = /* ARR1 */ [
+		Patient[] b_ = [
 			a_,
 		];
 		bool? c_(Patient P)

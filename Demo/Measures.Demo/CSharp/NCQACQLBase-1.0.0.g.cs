@@ -42,14 +42,14 @@ public class NCQACQLBase_1_0_0
 			};
 			if ((intervals is null))
 			{
-				CqlInterval<CqlDate>[] e_ = /* ARR2 */ new CqlInterval<CqlDate>[0]
+				CqlInterval<CqlDate>[] e_ = []
 ;
 
 				return (e_ as IEnumerable<CqlInterval<CqlDate>>);
 			}
 			else if (b_())
 			{
-				CqlInterval<CqlDate>[] f_ = /* ARR2 */ new CqlInterval<CqlDate>[0]
+				CqlInterval<CqlDate>[] f_ = []
 ;
 
 				return (f_ as IEnumerable<CqlInterval<CqlDate>>);
@@ -114,14 +114,14 @@ public class NCQACQLBase_1_0_0
 			};
 			if ((intervals is null))
 			{
-				CqlInterval<CqlDateTime>[] e_ = /* ARR2 */ new CqlInterval<CqlDateTime>[0]
+				CqlInterval<CqlDateTime>[] e_ = []
 ;
 
 				return (e_ as IEnumerable<CqlInterval<CqlDateTime>>);
 			}
 			else if (b_())
 			{
-				CqlInterval<CqlDateTime>[] f_ = /* ARR2 */ new CqlInterval<CqlDateTime>[0]
+				CqlInterval<CqlDateTime>[] f_ = []
 ;
 
 				return (f_ as IEnumerable<CqlInterval<CqlDateTime>>);
@@ -186,14 +186,14 @@ public class NCQACQLBase_1_0_0
 			};
 			if ((intervals is null))
 			{
-				CqlInterval<CqlDate>[] e_ = /* ARR2 */ new CqlInterval<CqlDate>[0]
+				CqlInterval<CqlDate>[] e_ = []
 ;
 
 				return (e_ as IEnumerable<CqlInterval<CqlDate>>);
 			}
 			else if (b_())
 			{
-				CqlInterval<CqlDate>[] f_ = /* ARR2 */ new CqlInterval<CqlDate>[0]
+				CqlInterval<CqlDate>[] f_ = []
 ;
 
 				return (f_ as IEnumerable<CqlInterval<CqlDate>>);
@@ -238,14 +238,14 @@ public class NCQACQLBase_1_0_0
 			};
 			if ((intervals is null))
 			{
-				CqlInterval<CqlDateTime>[] e_ = /* ARR2 */ new CqlInterval<CqlDateTime>[0]
+				CqlInterval<CqlDateTime>[] e_ = []
 ;
 
 				return (e_ as IEnumerable<CqlInterval<CqlDateTime>>);
 			}
 			else if (b_())
 			{
-				CqlInterval<CqlDateTime>[] f_ = /* ARR2 */ new CqlInterval<CqlDateTime>[0]
+				CqlInterval<CqlDateTime>[] f_ = []
 ;
 
 				return (f_ as IEnumerable<CqlInterval<CqlDateTime>>);
@@ -313,7 +313,7 @@ public class NCQACQLBase_1_0_0
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDate>> sortedCoverings, nint _)? b_ = (a_, default);
-		(IEnumerable<CqlInterval<CqlDate>> sortedCoverings, nint _)?[] c_ = /* ARR1 */ [
+		(IEnumerable<CqlInterval<CqlDate>> sortedCoverings, nint _)?[] c_ = [
 			b_,
 		];
 		IEnumerable<CqlInterval<CqlDate>> d_((IEnumerable<CqlInterval<CqlDate>> sortedCoverings, nint _)? variableDeclarations)
@@ -330,7 +330,7 @@ public class NCQACQLBase_1_0_0
 				};
 				if (n_())
 				{
-					CqlInterval<CqlDate>[] r_ = /* ARR1 */ [
+					CqlInterval<CqlDate>[] r_ = [
 						baseInterval,
 					];
 
@@ -399,7 +399,7 @@ public class NCQACQLBase_1_0_0
 				};
 				if (au_())
 				{
-					CqlInterval<CqlDate>[] ay_ = /* ARR2 */ new CqlInterval<CqlDate>[0]
+					CqlInterval<CqlDate>[] ay_ = []
 ;
 
 					return (ay_ as IEnumerable<CqlInterval<CqlDate>>);
@@ -414,7 +414,7 @@ public class NCQACQLBase_1_0_0
 					CqlInterval<CqlDate> bf_ = context?.Operators.Last<CqlInterval<CqlDate>>(az_);
 					CqlInterval<CqlDate> bg_ = context?.Operators.Except(bd_, bf_);
 					CqlInterval<CqlDate> bh_ = context?.Operators.Intersect<CqlDate>(bg_, baseInterval);
-					CqlInterval<CqlDate>[] bi_ = /* ARR1 */ [
+					CqlInterval<CqlDate>[] bi_ = [
 						bh_,
 					];
 
@@ -422,7 +422,7 @@ public class NCQACQLBase_1_0_0
 				}
 			};
 			(IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)? i_ = (g_(), h_());
-			(IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)?[] j_ = /* ARR1 */ [
+			(IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)?[] j_ = [
 				i_,
 			];
 			IEnumerable<CqlInterval<CqlDate>> k_((IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)? calculations)
@@ -450,7 +450,7 @@ public class NCQACQLBase_1_0_0
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDateTime>> sortedCoverings, nint _)? b_ = (a_, default);
-		(IEnumerable<CqlInterval<CqlDateTime>> sortedCoverings, nint _)?[] c_ = /* ARR1 */ [
+		(IEnumerable<CqlInterval<CqlDateTime>> sortedCoverings, nint _)?[] c_ = [
 			b_,
 		];
 		IEnumerable<CqlInterval<CqlDateTime>> d_((IEnumerable<CqlInterval<CqlDateTime>> sortedCoverings, nint _)? variableDeclarations)
@@ -467,7 +467,7 @@ public class NCQACQLBase_1_0_0
 				};
 				if (n_())
 				{
-					CqlInterval<CqlDateTime>[] r_ = /* ARR1 */ [
+					CqlInterval<CqlDateTime>[] r_ = [
 						baseInterval,
 					];
 
@@ -536,7 +536,7 @@ public class NCQACQLBase_1_0_0
 				};
 				if (au_())
 				{
-					CqlInterval<CqlDateTime>[] ay_ = /* ARR2 */ new CqlInterval<CqlDateTime>[0]
+					CqlInterval<CqlDateTime>[] ay_ = []
 ;
 
 					return (ay_ as IEnumerable<CqlInterval<CqlDateTime>>);
@@ -551,7 +551,7 @@ public class NCQACQLBase_1_0_0
 					CqlInterval<CqlDateTime> bf_ = context?.Operators.Last<CqlInterval<CqlDateTime>>(az_);
 					CqlInterval<CqlDateTime> bg_ = context?.Operators.Except(bd_, bf_);
 					CqlInterval<CqlDateTime> bh_ = context?.Operators.Intersect<CqlDateTime>(bg_, baseInterval);
-					CqlInterval<CqlDateTime>[] bi_ = /* ARR1 */ [
+					CqlInterval<CqlDateTime>[] bi_ = [
 						bh_,
 					];
 
@@ -559,7 +559,7 @@ public class NCQACQLBase_1_0_0
 				}
 			};
 			(IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)? i_ = (g_(), h_());
-			(IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)?[] j_ = /* ARR1 */ [
+			(IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)?[] j_ = [
 				i_,
 			];
 			IEnumerable<CqlInterval<CqlDateTime>> k_((IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)? calculations)
@@ -607,7 +607,7 @@ public class NCQACQLBase_1_0_0
 					CqlDate m_ = context?.Operators.End(I);
 					int? n_ = context?.Operators.DurationBetween(l_, m_, null);
 					int? o_ = context?.Operators.Add(n_, 1);
-					int?[] p_ = /* ARR1 */ [
+					int?[] p_ = [
 						o_,
 						0,
 					];
@@ -642,7 +642,7 @@ public class NCQACQLBase_1_0_0
 					CqlDate ab_ = context?.Operators.End(I);
 					int? ac_ = context?.Operators.DurationBetween(aa_, ab_, null);
 					int? ad_ = context?.Operators.Add(ac_, 1);
-					int?[] ae_ = /* ARR1 */ [
+					int?[] ae_ = [
 						ad_,
 						0,
 					];
@@ -686,7 +686,7 @@ public class NCQACQLBase_1_0_0
 					CqlDate be_ = context?.Operators.End(I);
 					int? bf_ = context?.Operators.DurationBetween(bd_, be_, null);
 					int? bg_ = context?.Operators.Add(bf_, 1);
-					int?[] bh_ = /* ARR1 */ [
+					int?[] bh_ = [
 						bg_,
 						0,
 					];
@@ -712,7 +712,7 @@ public class NCQACQLBase_1_0_0
 					CqlDate bm_ = context?.Operators.End(I);
 					int? bn_ = context?.Operators.DurationBetween(bl_, bm_, null);
 					int? bo_ = context?.Operators.Add(bn_, 1);
-					int?[] bp_ = /* ARR1 */ [
+					int?[] bp_ = [
 						bo_,
 						0,
 					];
@@ -734,7 +734,7 @@ public class NCQACQLBase_1_0_0
 				CqlDate ay_ = context?.Operators.End(ax_);
 				int? az_ = context?.Operators.DurationBetween(ar_, ay_, null);
 				int? ba_ = context?.Operators.Add(az_, 1);
-				int?[] bb_ = /* ARR1 */ [
+				int?[] bb_ = [
 					ba_,
 					0,
 				];
@@ -753,7 +753,7 @@ public class NCQACQLBase_1_0_0
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDate>> Covering_Intervals, nint _)? b_ = (a_, default);
-		(IEnumerable<CqlInterval<CqlDate>> Covering_Intervals, nint _)?[] c_ = /* ARR1 */ [
+		(IEnumerable<CqlInterval<CqlDate>> Covering_Intervals, nint _)?[] c_ = [
 			b_,
 		];
 		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? d_((IEnumerable<CqlInterval<CqlDate>> Covering_Intervals, nint _)? variableDeclarations)
@@ -774,7 +774,7 @@ public class NCQACQLBase_1_0_0
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Date_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDate>> Gap_Intervals, nint _)? b_ = (a_, default);
-		(IEnumerable<CqlInterval<CqlDate>> Gap_Intervals, nint _)?[] c_ = /* ARR1 */ [
+		(IEnumerable<CqlInterval<CqlDate>> Gap_Intervals, nint _)?[] c_ = [
 			b_,
 		];
 		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? d_((IEnumerable<CqlInterval<CqlDate>> Gap_Intervals, nint _)? variableDeclarations)
@@ -1050,7 +1050,7 @@ public class NCQACQLBase_1_0_0
 			}
 		};
 		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? q_ = (b_, c_(), d_(), e_(), f_(), g_(), h_(), j_, k_(), l_(), m_(), n_(), o_(), p_());
-		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?[] r_ = /* ARR1 */ [
+		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?[] r_ = [
 			q_,
 		];
 		CqlInterval<CqlDateTime> s_((int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? i)
@@ -1107,7 +1107,7 @@ public class NCQACQLBase_1_0_0
 					CqlDateTime o_ = context?.Operators.End(l_);
 					int? p_ = context?.Operators.DurationBetween(m_, o_, null);
 					int? q_ = context?.Operators.Add(p_, 1);
-					int?[] r_ = /* ARR1 */ [
+					int?[] r_ = [
 						q_,
 						0,
 					];
@@ -1143,7 +1143,7 @@ public class NCQACQLBase_1_0_0
 					CqlDateTime af_ = context?.Operators.End(ac_);
 					int? ag_ = context?.Operators.DurationBetween(ad_, af_, null);
 					int? ah_ = context?.Operators.Add(ag_, 1);
-					int?[] ai_ = /* ARR1 */ [
+					int?[] ai_ = [
 						ah_,
 						0,
 					];
@@ -1188,7 +1188,7 @@ public class NCQACQLBase_1_0_0
 					CqlDateTime bm_ = context?.Operators.End(bj_);
 					int? bn_ = context?.Operators.DurationBetween(bk_, bm_, null);
 					int? bo_ = context?.Operators.Add(bn_, 1);
-					int?[] bp_ = /* ARR1 */ [
+					int?[] bp_ = [
 						bo_,
 						0,
 					];
@@ -1216,7 +1216,7 @@ public class NCQACQLBase_1_0_0
 					CqlDateTime bw_ = context?.Operators.End(bt_);
 					int? bx_ = context?.Operators.DurationBetween(bu_, bw_, null);
 					int? by_ = context?.Operators.Add(bx_, 1);
-					int?[] bz_ = /* ARR1 */ [
+					int?[] bz_ = [
 						by_,
 						0,
 					];
@@ -1239,7 +1239,7 @@ public class NCQACQLBase_1_0_0
 				CqlDateTime be_ = context?.Operators.End(bd_);
 				int? bf_ = context?.Operators.DurationBetween(aw_, be_, null);
 				int? bg_ = context?.Operators.Add(bf_, 1);
-				int?[] bh_ = /* ARR1 */ [
+				int?[] bh_ = [
 					bg_,
 					0,
 				];
@@ -1258,7 +1258,7 @@ public class NCQACQLBase_1_0_0
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals, nint _)? b_ = (a_, default);
-		(IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals, nint _)?[] c_ = /* ARR1 */ [
+		(IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals, nint _)?[] c_ = [
 			b_,
 		];
 		(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? d_((IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals, nint _)? variableDeclarations)
@@ -1279,7 +1279,7 @@ public class NCQACQLBase_1_0_0
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.DateTime_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals, nint _)? b_ = (a_, default);
-		(IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals, nint _)?[] c_ = /* ARR1 */ [
+		(IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals, nint _)?[] c_ = [
 			b_,
 		];
 		(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? d_((IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals, nint _)? variableDeclarations)
@@ -1326,7 +1326,7 @@ public class NCQACQLBase_1_0_0
 			}
 		};
 		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? d_ = (a_, b_(), c_(), default, default, default, default, default, default, default, default, default, default, default);
-		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?[] e_ = /* ARR1 */ [
+		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?[] e_ = [
 			d_,
 		];
 		CqlDateTime f_((int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? i)

@@ -229,7 +229,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("260988000", "http://snomed.info/sct", null, null),
 			new CqlCode("260415000", "http://snomed.info/sct", null, null),
 		];
@@ -243,7 +243,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = /* ARR2 */ new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -347,7 +347,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			CqlQuantity an_ = context?.Operators.Quantity(240m, "days");
 			CqlDateTime ao_ = context?.Operators.Add(am_, an_);
 			CqlInterval<CqlDateTime> ap_ = context?.Operators.Interval(ak_, ao_, true, true);
-			Period aq_ = QualifyingEncounter.Period;
+			Period aq_ = QualifyingEncounter?.Period;
 			CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_3_000.ToInterval(aq_);
 			bool? as_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, null);
 
@@ -441,7 +441,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			{
 				bool l_()
 				{
-					DataType o_ = ViralLoad.Effective;
+					DataType o_ = ViralLoad?.Effective;
 					object p_ = FHIRHelpers_4_3_000.ToValue(o_);
 					bool q_ = p_ is CqlDateTime;
 
@@ -449,7 +449,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 				};
 				bool m_()
 				{
-					DataType r_ = ViralLoad.Effective;
+					DataType r_ = ViralLoad?.Effective;
 					object s_ = FHIRHelpers_4_3_000.ToValue(r_);
 					bool t_ = s_ is CqlInterval<CqlDateTime>;
 
@@ -457,7 +457,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 				};
 				bool n_()
 				{
-					DataType u_ = ViralLoad.Effective;
+					DataType u_ = ViralLoad?.Effective;
 					object v_ = FHIRHelpers_4_3_000.ToValue(u_);
 					bool w_ = v_ is CqlDateTime;
 
@@ -465,21 +465,21 @@ public class HIVViralSuppressionFHIR_0_1_000
 				};
 				if (l_())
 				{
-					DataType x_ = ViralLoad.Effective;
+					DataType x_ = ViralLoad?.Effective;
 					object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 
 					return ((y_ as CqlDateTime) as object);
 				}
 				else if (m_())
 				{
-					DataType z_ = ViralLoad.Effective;
+					DataType z_ = ViralLoad?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
 					return ((aa_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (n_())
 				{
-					DataType ab_ = ViralLoad.Effective;
+					DataType ab_ = ViralLoad?.Effective;
 					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
 					return ((ac_ as CqlDateTime) as object);
@@ -498,7 +498,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 		IEnumerable<Observation> d_ = context?.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			DataType ad_ = @this.Effective;
+			DataType ad_ = @this?.Effective;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
 			CqlDateTime ag_ = context?.Operators.Start(af_);
@@ -518,17 +518,17 @@ public class HIVViralSuppressionFHIR_0_1_000
 	private bool? Numerator_Value()
 	{
 		Observation a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period();
-		DataType b_ = a_.Value;
+		DataType b_ = a_?.Value;
 		object c_ = FHIRHelpers_4_3_000.ToValue(b_);
 		CqlQuantity d_ = context?.Operators.Quantity(200m, "{copies}/mL");
 		bool? e_ = context?.Operators.Less((c_ as CqlQuantity), d_);
-		DataType g_ = a_.Value;
+		DataType g_ = a_?.Value;
 		object h_ = FHIRHelpers_4_3_000.ToValue(g_);
 		CqlCode i_ = this.Below_threshold_level__qualifier_value_();
 		CqlConcept j_ = context?.Operators.ConvertCodeToConcept(i_);
 		bool? k_ = context?.Operators.Equivalent((h_ as CqlConcept), j_);
 		bool? l_ = context?.Operators.Or(e_, k_);
-		DataType n_ = a_.Value;
+		DataType n_ = a_?.Value;
 		object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 		CqlCode p_ = this.Not_detected__qualifier_value_();
 		CqlConcept q_ = context?.Operators.ConvertCodeToConcept(p_);

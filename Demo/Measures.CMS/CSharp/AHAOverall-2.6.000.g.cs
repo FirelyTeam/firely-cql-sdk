@@ -223,7 +223,7 @@ public class AHAOverall_2_6_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("134401001", "http://snomed.info/sct", null, null),
 		];
 
@@ -236,7 +236,7 @@ public class AHAOverall_2_6_000
 
 	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null),
 		];
 
@@ -276,17 +276,17 @@ public class AHAOverall_2_6_000
     [CqlDeclaration("isConfirmedActiveDiagnosis")]
 	public bool? isConfirmedActiveDiagnosis(Condition Condition)
 	{
-		Condition[] a_ = /* ARR1 */ [
+		Condition[] a_ = [
 			Condition,
 		];
 		bool? b_(Condition Diagnosis)
 		{
-			CodeableConcept f_ = Diagnosis.ClinicalStatus;
+			CodeableConcept f_ = Diagnosis?.ClinicalStatus;
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(f_);
 			CqlCode h_ = QICoreCommon_2_0_000.active();
 			CqlConcept i_ = context?.Operators.ConvertCodeToConcept(h_);
 			bool? j_ = context?.Operators.Equivalent(g_, i_);
-			CodeableConcept k_ = Diagnosis.VerificationStatus;
+			CodeableConcept k_ = Diagnosis?.VerificationStatus;
 			CqlConcept l_ = FHIRHelpers_4_3_000.ToConcept(k_);
 			CqlCode m_ = QICoreCommon_2_0_000.unconfirmed();
 			CqlConcept n_ = context?.Operators.ConvertCodeToConcept(m_);
@@ -316,8 +316,8 @@ public class AHAOverall_2_6_000
     [CqlDeclaration("isFinished")]
 	public bool? isFinished(Encounter Visit)
 	{
-		Code<Encounter.EncounterStatus> a_ = Visit.StatusElement;
-		Encounter.EncounterStatus? b_ = a_.Value;
+		Code<Encounter.EncounterStatus> a_ = Visit?.StatusElement;
+		Encounter.EncounterStatus? b_ = a_?.Value;
 		Code<Encounter.EncounterStatus> c_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(b_);
 		bool? d_ = context?.Operators.Equal(c_, "finished");
 
@@ -347,7 +347,7 @@ public class AHAOverall_2_6_000
 			bool? u_(Condition HeartFailure)
 			{
 				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.prevalenceInterval(HeartFailure);
-				Period z_ = QualifyingEncounter.Period;
+				Period z_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(z_);
 				bool? ab_ = context?.Operators.Overlaps(y_, aa_, null);
 				bool? ac_ = this.isConfirmedActiveDiagnosis(HeartFailure);
@@ -366,7 +366,7 @@ public class AHAOverall_2_6_000
 		bool? q_(Encounter QualifyingEncounter)
 		{
 			CqlInterval<CqlDateTime> ae_ = this.Measurement_Period();
-			Period af_ = QualifyingEncounter.Period;
+			Period af_ = QualifyingEncounter?.Period;
 			CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
 			bool? ah_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ae_, ag_, null);
 			bool? ai_ = this.isFinished(QualifyingEncounter);
@@ -389,15 +389,15 @@ public class AHAOverall_2_6_000
 		IEnumerable<Observation> b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation EjectionFraction)
 		{
-			DataType n_ = EjectionFraction.Value;
+			DataType n_ = EjectionFraction?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlQuantity p_ = context?.Operators.Quantity(40m, "%");
 			bool? q_ = context?.Operators.LessOrEqual((o_ as CqlQuantity), p_);
-			Code<ObservationStatus> r_ = EjectionFraction.StatusElement;
-			ObservationStatus? s_ = r_.Value;
+			Code<ObservationStatus> r_ = EjectionFraction?.StatusElement;
+			ObservationStatus? s_ = r_?.Value;
 			Code<ObservationStatus> t_ = context?.Operators.Convert<Code<ObservationStatus>>(s_);
 			string u_ = context?.Operators.Convert<string>(t_);
-			string[] v_ = /* ARR1 */ [
+			string[] v_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -416,7 +416,7 @@ public class AHAOverall_2_6_000
 		IEnumerable<Condition> j_ = context?.Operators.RetrieveByCodes<Condition>(i_, null);
 		bool? k_(Condition LVSDDiagnosis)
 		{
-			CodeableConcept y_ = LVSDDiagnosis.Severity;
+			CodeableConcept y_ = LVSDDiagnosis?.Severity;
 			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_);
 			CqlValueSet aa_ = this.Moderate_or_Severe();
 			bool? ab_ = context?.Operators.ConceptInValueSet(z_, aa_);
@@ -446,7 +446,7 @@ public class AHAOverall_2_6_000
 				object k_ = FHIRHelpers_4_3_000.ToValue(j_);
 				CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(k_);
 				CqlDateTime m_ = context?.Operators.Start((i_ ?? l_));
-				Period n_ = HFOutpatientEncounter.Period;
+				Period n_ = HFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
 				CqlDateTime p_ = context?.Operators.End(o_);
 				bool? q_ = context?.Operators.Before(m_, p_, null);
@@ -478,12 +478,12 @@ public class AHAOverall_2_6_000
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 			bool? i_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
 			{
-				FhirDateTime m_ = HeartTransplantComplications.RecordedDateElement;
+				FhirDateTime m_ = HeartTransplantComplications?.RecordedDateElement;
 				CqlDateTime n_ = context?.Operators.Convert<CqlDateTime>(m_);
 				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval((n_ as object));
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.prevalenceInterval(HeartTransplantComplications);
 				CqlDateTime q_ = context?.Operators.Start((o_ ?? p_));
-				Period r_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+				Period r_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 				CqlDateTime t_ = context?.Operators.End(s_);
 				bool? u_ = context?.Operators.Before(q_, t_, null);
@@ -523,11 +523,11 @@ public class AHAOverall_2_6_000
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 			bool? i_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
 			{
-				DataType m_ = LVADOutpatient.Performed;
+				DataType m_ = LVADOutpatient?.Performed;
 				object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
 				CqlDateTime p_ = context?.Operators.Start(o_);
-				Period q_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+				Period q_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(q_);
 				CqlDateTime s_ = context?.Operators.End(r_);
 				bool? t_ = context?.Operators.Before(p_, s_, null);
@@ -544,8 +544,8 @@ public class AHAOverall_2_6_000
 		IEnumerable<Procedure> d_ = context?.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure LVADOutpatient)
 		{
-			Code<EventStatus> u_ = LVADOutpatient.StatusElement;
-			EventStatus? v_ = u_.Value;
+			Code<EventStatus> u_ = LVADOutpatient?.StatusElement;
+			EventStatus? v_ = u_?.Value;
 			string w_ = context?.Operators.Convert<string>(v_);
 			bool? x_ = context?.Operators.Equal(w_, "completed");
 
@@ -570,12 +570,12 @@ public class AHAOverall_2_6_000
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 			bool? i_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
 			{
-				FhirDateTime m_ = LVADComplications.RecordedDateElement;
+				FhirDateTime m_ = LVADComplications?.RecordedDateElement;
 				CqlDateTime n_ = context?.Operators.Convert<CqlDateTime>(m_);
 				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval((n_ as object));
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.prevalenceInterval(LVADComplications);
 				CqlDateTime q_ = context?.Operators.Start((o_ ?? p_));
-				Period r_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+				Period r_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 				CqlDateTime t_ = context?.Operators.End(s_);
 				bool? u_ = context?.Operators.Before(q_, t_, null);
@@ -628,7 +628,7 @@ public class AHAOverall_2_6_000
 		bool? r_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
-			Period u_ = ValidEncounter.Period;
+			Period u_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_3_000.ToInterval(u_);
 			bool? w_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
 			bool? x_ = this.isFinished(ValidEncounter);
@@ -648,8 +648,8 @@ public class AHAOverall_2_6_000
 	private bool? Has_Two_Qualifying_Outpatient_Encounters_and_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -662,10 +662,10 @@ public class AHAOverall_2_6_000
 			IEnumerable<Encounter> r_ = this.Qualifying_Outpatient_Encounter_During_Measurement_Period();
 			bool? s_(Encounter Encounter2)
 			{
-				Id w_ = Encounter2.IdElement;
-				string x_ = w_.Value;
-				Id y_ = Encounter1.IdElement;
-				string z_ = y_.Value;
+				Id w_ = Encounter2?.IdElement;
+				string x_ = w_?.Value;
+				Id y_ = Encounter1?.IdElement;
+				string z_ = y_?.Value;
 				bool? aa_ = context?.Operators.Equivalent(x_, z_);
 				bool? ab_ = context?.Operators.Not(aa_);
 
@@ -701,11 +701,11 @@ public class AHAOverall_2_6_000
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 			bool? i_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
 			{
-				DataType m_ = HeartTransplant.Performed;
+				DataType m_ = HeartTransplant?.Performed;
 				object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
 				CqlDateTime p_ = context?.Operators.Start(o_);
-				Period q_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+				Period q_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(q_);
 				CqlDateTime s_ = context?.Operators.End(r_);
 				bool? t_ = context?.Operators.Before(p_, s_, null);
@@ -722,8 +722,8 @@ public class AHAOverall_2_6_000
 		IEnumerable<Procedure> d_ = context?.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure HeartTransplant)
 		{
-			Code<EventStatus> u_ = HeartTransplant.StatusElement;
-			EventStatus? v_ = u_.Value;
+			Code<EventStatus> u_ = HeartTransplant?.StatusElement;
+			EventStatus? v_ = u_?.Value;
 			string w_ = context?.Operators.Convert<string>(v_);
 			bool? x_ = context?.Operators.Equal(w_, "completed");
 
@@ -745,24 +745,24 @@ public class AHAOverall_2_6_000
 		IEnumerable<Encounter> a_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 		bool? b_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
 		{
-			FhirDateTime e_ = Order.AuthoredOnElement;
+			FhirDateTime e_ = Order?.AuthoredOnElement;
 			CqlDateTime f_ = context?.Operators.Convert<CqlDateTime>(e_);
-			Period g_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+			Period g_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
 			bool? i_ = context?.Operators.In<CqlDateTime>(f_, h_, null);
-			Code<MedicationRequest.MedicationrequestStatus> j_ = Order.StatusElement;
-			MedicationRequest.MedicationrequestStatus? k_ = j_.Value;
+			Code<MedicationRequest.MedicationrequestStatus> j_ = Order?.StatusElement;
+			MedicationRequest.MedicationrequestStatus? k_ = j_?.Value;
 			string l_ = context?.Operators.Convert<string>(k_);
-			string[] m_ = /* ARR1 */ [
+			string[] m_ = [
 				"active",
 				"completed",
 			];
 			bool? n_ = context?.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 			bool? o_ = context?.Operators.And(i_, n_);
-			Code<MedicationRequest.MedicationRequestIntent> p_ = Order.IntentElement;
-			MedicationRequest.MedicationRequestIntent? q_ = p_.Value;
+			Code<MedicationRequest.MedicationRequestIntent> p_ = Order?.IntentElement;
+			MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
 			string r_ = context?.Operators.Convert<string>(q_);
-			string[] s_ = /* ARR1 */ [
+			string[] s_ = [
 				"order",
 				"original-order",
 				"reflex-order",
@@ -771,8 +771,8 @@ public class AHAOverall_2_6_000
 			];
 			bool? t_ = context?.Operators.In<string>(r_, (s_ as IEnumerable<string>));
 			bool? u_ = context?.Operators.And(o_, t_);
-			FhirBoolean v_ = Order.DoNotPerformElement;
-			bool? w_ = v_.Value;
+			FhirBoolean v_ = Order?.DoNotPerformElement;
+			bool? w_ = v_?.Value;
 			bool? x_ = context?.Operators.IsTrue(w_);
 			bool? y_ = context?.Operators.Not(x_);
 			bool? z_ = context?.Operators.And(u_, y_);
@@ -792,7 +792,7 @@ public class AHAOverall_2_6_000
 		bool? b_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
 		{
 			CqlInterval<CqlDateTime> e_ = QICoreCommon_2_0_000.prevalenceInterval(Diagnosis);
-			Period f_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+			Period f_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_3_000.ToInterval(f_);
 			bool? h_ = context?.Operators.Overlaps(e_, g_, null);
 			bool? i_ = this.isConfirmedActiveDiagnosis(Diagnosis);
@@ -817,7 +817,7 @@ public class AHAOverall_2_6_000
 				if (Event is Condition)
 				{
 					CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.prevalenceInterval((Event as Condition));
-					Period g_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+					Period g_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 					CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
 					bool? i_ = context?.Operators.OverlapsAfter(f_, h_, null);
 					bool? j_ = this.isConfirmedActiveDiagnosis((Event as Condition));
@@ -827,14 +827,14 @@ public class AHAOverall_2_6_000
 				}
 				else if (Event is Procedure)
 				{
-					DataType l_ = (Event as Procedure).Performed;
+					DataType l_ = (Event as Procedure)?.Performed;
 					object m_ = FHIRHelpers_4_3_000.ToValue(l_);
 					CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.toInterval(m_);
-					Period o_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+					Period o_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 					CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 					bool? q_ = context?.Operators.OverlapsAfter(n_, p_, null);
-					Code<EventStatus> r_ = (Event as Procedure).StatusElement;
-					EventStatus? s_ = r_.Value;
+					Code<EventStatus> r_ = (Event as Procedure)?.StatusElement;
+					EventStatus? s_ = r_?.Value;
 					string t_ = context?.Operators.Convert<string>(s_);
 					bool? u_ = context?.Operators.Equal(t_, "completed");
 					bool? v_ = context?.Operators.And(q_, u_);
@@ -843,23 +843,23 @@ public class AHAOverall_2_6_000
 				}
 				else if (Event is AllergyIntolerance)
 				{
-					DataType w_ = (Event as AllergyIntolerance).Onset;
+					DataType w_ = (Event as AllergyIntolerance)?.Onset;
 					object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 					CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(x_);
 					CqlDateTime z_ = context?.Operators.Start(y_);
-					FhirDateTime aa_ = (Event as AllergyIntolerance).LastOccurrenceElement;
+					FhirDateTime aa_ = (Event as AllergyIntolerance)?.LastOccurrenceElement;
 					CqlDateTime ab_ = context?.Operators.Convert<CqlDateTime>(aa_);
 					CqlInterval<CqlDateTime> ac_ = context?.Operators.Interval(z_, ab_, true, true);
-					Period ad_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+					Period ad_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 					CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_3_000.ToInterval(ad_);
 					bool? af_ = context?.Operators.OverlapsAfter(ac_, ae_, null);
-					CodeableConcept ag_ = (Event as AllergyIntolerance).ClinicalStatus;
+					CodeableConcept ag_ = (Event as AllergyIntolerance)?.ClinicalStatus;
 					CqlConcept ah_ = FHIRHelpers_4_3_000.ToConcept(ag_);
 					CqlCode ai_ = QICoreCommon_2_0_000.allergy_active();
 					CqlConcept aj_ = context?.Operators.ConvertCodeToConcept(ai_);
 					bool? ak_ = context?.Operators.Equivalent(ah_, aj_);
 					bool? al_ = context?.Operators.And(af_, ak_);
-					CodeableConcept am_ = (Event as AllergyIntolerance).VerificationStatus;
+					CodeableConcept am_ = (Event as AllergyIntolerance)?.VerificationStatus;
 					CqlConcept an_ = FHIRHelpers_4_3_000.ToConcept(am_);
 					CqlCode ao_ = QICoreCommon_2_0_000.allergy_unconfirmed();
 					CqlConcept ap_ = context?.Operators.ConvertCodeToConcept(ao_);
@@ -882,7 +882,7 @@ public class AHAOverall_2_6_000
 				else if (Event is MedicationRequest)
 				{
 					object bf_ = context?.Operators.LateBoundProperty<object>(Event, "dosageInstruction");
-					object[] bg_ = /* ARR1 */ [
+					object[] bg_ = [
 						bf_,
 					];
 					bool? bh_(object @this)
@@ -901,7 +901,7 @@ public class AHAOverall_2_6_000
 					};
 					IEnumerable<object> bk_ = context?.Operators.Select<object, object>(bi_, bj_);
 					object bl_ = context?.Operators.SingletonFrom<object>(bk_);
-					object[] bm_ = /* ARR1 */ [
+					object[] bm_ = [
 						bl_,
 					];
 					bool? bn_(object @this)
@@ -920,7 +920,7 @@ public class AHAOverall_2_6_000
 					};
 					IEnumerable<object> bq_ = context?.Operators.Select<object, object>(bo_, bp_);
 					object br_ = context?.Operators.SingletonFrom<object>(bq_);
-					object[] bs_ = /* ARR1 */ [
+					object[] bs_ = [
 						br_,
 					];
 					bool? bt_(object @this)
@@ -941,7 +941,7 @@ public class AHAOverall_2_6_000
 					};
 					IEnumerable<object> bw_ = context?.Operators.Select<object, object>(bu_, bv_);
 					object bx_ = context?.Operators.SingletonFrom<object>(bw_);
-					object[] by_ = /* ARR1 */ [
+					object[] by_ = [
 						bx_,
 					];
 					CqlInterval<CqlDateTime> bz_(object DoseTime)
@@ -960,22 +960,22 @@ public class AHAOverall_2_6_000
 					};
 					IEnumerable<CqlInterval<CqlDateTime>> cd_ = context?.Operators.SortBy<CqlInterval<CqlDateTime>>(cb_, cc_, System.ComponentModel.ListSortDirection.Ascending);
 					CqlInterval<CqlDateTime> ce_ = context?.Operators.First<CqlInterval<CqlDateTime>>(cd_);
-					Period cf_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+					Period cf_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 					CqlInterval<CqlDateTime> cg_ = FHIRHelpers_4_3_000.ToInterval(cf_);
 					bool? ch_ = context?.Operators.OverlapsAfter(ce_, cg_, null);
-					Code<MedicationRequest.MedicationrequestStatus> ci_ = (Event as MedicationRequest).StatusElement;
-					MedicationRequest.MedicationrequestStatus? cj_ = ci_.Value;
+					Code<MedicationRequest.MedicationrequestStatus> ci_ = (Event as MedicationRequest)?.StatusElement;
+					MedicationRequest.MedicationrequestStatus? cj_ = ci_?.Value;
 					string ck_ = context?.Operators.Convert<string>(cj_);
-					string[] cl_ = /* ARR1 */ [
+					string[] cl_ = [
 						"active",
 						"completed",
 					];
 					bool? cm_ = context?.Operators.In<string>(ck_, (cl_ as IEnumerable<string>));
 					bool? cn_ = context?.Operators.And(ch_, cm_);
-					Code<MedicationRequest.MedicationRequestIntent> co_ = (Event as MedicationRequest).IntentElement;
-					MedicationRequest.MedicationRequestIntent? cp_ = co_.Value;
+					Code<MedicationRequest.MedicationRequestIntent> co_ = (Event as MedicationRequest)?.IntentElement;
+					MedicationRequest.MedicationRequestIntent? cp_ = co_?.Value;
 					string cq_ = context?.Operators.Convert<string>(cp_);
-					string[] cr_ = /* ARR1 */ [
+					string[] cr_ = [
 						"order",
 						"original-order",
 						"reflex-order",
@@ -984,8 +984,8 @@ public class AHAOverall_2_6_000
 					];
 					bool? cs_ = context?.Operators.In<string>(cq_, (cr_ as IEnumerable<string>));
 					bool? ct_ = context?.Operators.And(cn_, cs_);
-					FhirBoolean cu_ = (Event as MedicationRequest).DoNotPerformElement;
-					bool? cv_ = cu_.Value;
+					FhirBoolean cu_ = (Event as MedicationRequest)?.DoNotPerformElement;
+					bool? cv_ = cu_?.Value;
 					bool? cw_ = context?.Operators.IsTrue(cv_);
 					bool? cx_ = context?.Operators.Not(cw_);
 					bool? cy_ = context?.Operators.And(ct_, cx_);
@@ -994,16 +994,16 @@ public class AHAOverall_2_6_000
 				}
 				else if (Event is Observation)
 				{
-					DataType dm_ = (Event as Observation).Effective;
+					DataType dm_ = (Event as Observation)?.Effective;
 					object dn_ = FHIRHelpers_4_3_000.ToValue(dm_);
 					CqlInterval<CqlDateTime> do_ = QICoreCommon_2_0_000.toInterval(dn_);
-					Period dp_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+					Period dp_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 					CqlInterval<CqlDateTime> dq_ = FHIRHelpers_4_3_000.ToInterval(dp_);
 					bool? dr_ = context?.Operators.OverlapsAfter(do_, dq_, null);
-					Code<ObservationStatus> ds_ = (Event as Observation).StatusElement;
-					ObservationStatus? dt_ = ds_.Value;
+					Code<ObservationStatus> ds_ = (Event as Observation)?.StatusElement;
+					ObservationStatus? dt_ = ds_?.Value;
 					string du_ = context?.Operators.Convert<string>(dt_);
-					string[] dv_ = /* ARR1 */ [
+					string[] dv_ = [
 						"final",
 						"amended",
 						"corrected",

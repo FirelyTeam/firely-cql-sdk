@@ -206,7 +206,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("35266-6", "http://loinc.org", null, null),
 		];
 
@@ -219,7 +219,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("433351000124101", "http://snomed.info/sct", null, null),
 			new CqlCode("433361000124104", "http://snomed.info/sct", null, null),
 			new CqlCode("433611000124109", "http://snomed.info/sct", null, null),
@@ -381,15 +381,15 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			IEnumerable<Condition> f_ = this.Prostate_Cancer_Diagnosis();
 			bool? g_(Condition ActiveProstateCancer)
 			{
-				DataType k_ = SalvageTherapy.Performed;
+				DataType k_ = SalvageTherapy?.Performed;
 				object l_ = FHIRHelpers_4_3_000.ToValue(k_);
 				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(l_);
 				CqlDateTime n_ = context?.Operators.Start(m_);
 				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveProstateCancer);
 				CqlDateTime p_ = context?.Operators.Start(o_);
 				bool? q_ = context?.Operators.After(n_, p_, null);
-				Code<EventStatus> r_ = SalvageTherapy.StatusElement;
-				EventStatus? s_ = r_.Value;
+				Code<EventStatus> r_ = SalvageTherapy?.StatusElement;
+				EventStatus? s_ = r_?.Value;
 				string t_ = context?.Operators.Convert<string>(s_);
 				bool? u_ = context?.Operators.Equal(t_, "completed");
 				bool? v_ = context?.Operators.And(q_, u_);
@@ -422,7 +422,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			IEnumerable<Condition> e_ = this.Prostate_Cancer_Diagnosis();
 			bool? f_(Condition ActiveProstateCancer)
 			{
-				DataType j_ = BoneScan.Effective;
+				DataType j_ = BoneScan?.Effective;
 				object k_ = FHIRHelpers_4_3_000.ToValue(j_);
 				CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(k_);
 				CqlDateTime m_ = context?.Operators.Start(l_);
@@ -453,7 +453,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> a_ = this.Bone_Scan_Study_Performed();
 		bool? b_(Observation BoneScanAfterDiagnosis)
 		{
-			DataType e_ = BoneScanAfterDiagnosis.Value;
+			DataType e_ = BoneScanAfterDiagnosis?.Value;
 			object f_ = FHIRHelpers_4_3_000.ToValue(e_);
 			CqlCode g_ = this.Procedure_reason_record__record_artifact_();
 			CqlConcept h_ = context?.Operators.ConvertCodeToConcept(g_);
@@ -492,14 +492,14 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Procedure> b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? c_(Procedure ProstateCancerTreatment)
 		{
-			DataType h_ = ProstateCancerTreatment.Performed;
+			DataType h_ = ProstateCancerTreatment?.Performed;
 			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
 			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.toInterval(i_);
 			CqlDateTime k_ = context?.Operators.End(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
 			bool? m_ = context?.Operators.In<CqlDateTime>(k_, l_, null);
-			Code<EventStatus> n_ = ProstateCancerTreatment.StatusElement;
-			EventStatus? o_ = n_.Value;
+			Code<EventStatus> n_ = ProstateCancerTreatment?.StatusElement;
+			EventStatus? o_ = n_?.Value;
 			string p_ = context?.Operators.Convert<string>(o_);
 			bool? q_ = context?.Operators.Equal(p_, "completed");
 			bool? r_ = context?.Operators.And(m_, q_);
@@ -509,7 +509,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Procedure> d_ = context?.Operators.Where<Procedure>(b_, c_);
 		object e_(Procedure @this)
 		{
-			DataType s_ = @this.Performed;
+			DataType s_ = @this?.Performed;
 			object t_ = FHIRHelpers_4_3_000.ToValue(s_);
 			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(t_);
 			CqlDateTime v_ = context?.Operators.Start(u_);
@@ -546,25 +546,25 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> d_(Observation GleasonScore)
 		{
 			Procedure m_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period();
-			Procedure[] n_ = /* ARR1 */ [
+			Procedure[] n_ = [
 				m_,
 			];
 			bool? o_(Procedure FirstProstateCancerTreatment)
 			{
-				DataType s_ = GleasonScore.Effective;
+				DataType s_ = GleasonScore?.Effective;
 				object t_ = FHIRHelpers_4_3_000.ToValue(s_);
 				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(t_);
 				CqlDateTime v_ = context?.Operators.Start(u_);
-				DataType w_ = FirstProstateCancerTreatment.Performed;
+				DataType w_ = FirstProstateCancerTreatment?.Performed;
 				object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(x_);
 				CqlDateTime z_ = context?.Operators.Start(y_);
 				bool? aa_ = context?.Operators.Before(v_, z_, null);
-				Code<ObservationStatus> ab_ = GleasonScore.StatusElement;
-				ObservationStatus? ac_ = ab_.Value;
+				Code<ObservationStatus> ab_ = GleasonScore?.StatusElement;
+				ObservationStatus? ac_ = ab_?.Value;
 				Code<ObservationStatus> ad_ = context?.Operators.Convert<Code<ObservationStatus>>(ac_);
 				string ae_ = context?.Operators.Convert<string>(ad_);
-				string[] af_ = /* ARR1 */ [
+				string[] af_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -584,7 +584,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> e_ = context?.Operators.SelectMany<Observation, Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			DataType ai_ = @this.Effective;
+			DataType ai_ = @this?.Effective;
 			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
 			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.toInterval(aj_);
 			CqlDateTime al_ = context?.Operators.Start(ak_);
@@ -593,12 +593,12 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		IEnumerable<Observation> g_ = context?.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context?.Operators.Last<Observation>(g_);
-		Observation[] i_ = /* ARR1 */ [
+		Observation[] i_ = [
 			h_,
 		];
 		bool? j_(Observation LastGleasonScore)
 		{
-			DataType am_ = LastGleasonScore.Value;
+			DataType am_ = LastGleasonScore?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
 			bool? ao_ = context?.Operators.LessOrEqual((an_ as int?), 6);
 
@@ -622,25 +622,25 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> d_(Observation ProstateCancerStaging)
 		{
 			Procedure m_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period();
-			Procedure[] n_ = /* ARR1 */ [
+			Procedure[] n_ = [
 				m_,
 			];
 			bool? o_(Procedure FirstProstateCancerTreatment)
 			{
-				DataType s_ = ProstateCancerStaging.Effective;
+				DataType s_ = ProstateCancerStaging?.Effective;
 				object t_ = FHIRHelpers_4_3_000.ToValue(s_);
 				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(t_);
 				CqlDateTime v_ = context?.Operators.Start(u_);
-				DataType w_ = FirstProstateCancerTreatment.Performed;
+				DataType w_ = FirstProstateCancerTreatment?.Performed;
 				object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(x_);
 				CqlDateTime z_ = context?.Operators.Start(y_);
 				bool? aa_ = context?.Operators.Before(v_, z_, null);
-				Code<ObservationStatus> ab_ = ProstateCancerStaging.StatusElement;
-				ObservationStatus? ac_ = ab_.Value;
+				Code<ObservationStatus> ab_ = ProstateCancerStaging?.StatusElement;
+				ObservationStatus? ac_ = ab_?.Value;
 				Code<ObservationStatus> ad_ = context?.Operators.Convert<Code<ObservationStatus>>(ac_);
 				string ae_ = context?.Operators.Convert<string>(ad_);
-				string[] af_ = /* ARR1 */ [
+				string[] af_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -660,7 +660,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> e_ = context?.Operators.SelectMany<Observation, Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			DataType ai_ = @this.Effective;
+			DataType ai_ = @this?.Effective;
 			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
 			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.toInterval(aj_);
 			CqlDateTime al_ = context?.Operators.Start(ak_);
@@ -669,12 +669,12 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		IEnumerable<Observation> g_ = context?.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context?.Operators.Last<Observation>(g_);
-		Observation[] i_ = /* ARR1 */ [
+		Observation[] i_ = [
 			h_,
 		];
 		bool? j_(Observation LastProstateCancerStaging)
 		{
-			DataType am_ = LastProstateCancerStaging.Value;
+			DataType am_ = LastProstateCancerStaging?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
 			CqlCode ao_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_();
 			CqlConcept ap_ = context?.Operators.ConvertCodeToConcept(ao_);
@@ -727,7 +727,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> c_(Observation PSATest)
 		{
 			Observation l_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a();
-			Observation[] m_ = /* ARR1 */ [
+			Observation[] m_ = [
 				l_,
 			];
 			bool? n_(Observation MostRecentProstateCancerStaging)
@@ -736,7 +736,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				{
 					bool ad_()
 					{
-						DataType ae_ = PSATest.Effective;
+						DataType ae_ = PSATest?.Effective;
 						object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
 						CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.toInterval(af_);
 						CqlDateTime ah_ = context?.Operators.Start(ag_);
@@ -749,7 +749,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 					}
 					else
 					{
-						DataType ai_ = PSATest.Effective;
+						DataType ai_ = PSATest?.Effective;
 						object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
 						CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.toInterval(aj_);
 						CqlDateTime al_ = context?.Operators.Start(ak_);
@@ -761,15 +761,15 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 						return aq_;
 					}
 				};
-				DataType s_ = MostRecentProstateCancerStaging.Effective;
+				DataType s_ = MostRecentProstateCancerStaging?.Effective;
 				object t_ = FHIRHelpers_4_3_000.ToValue(s_);
 				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(t_);
 				bool? v_ = context?.Operators.Before(r_(), u_, null);
-				Code<ObservationStatus> w_ = PSATest.StatusElement;
-				ObservationStatus? x_ = w_.Value;
+				Code<ObservationStatus> w_ = PSATest?.StatusElement;
+				ObservationStatus? x_ = w_?.Value;
 				Code<ObservationStatus> y_ = context?.Operators.Convert<Code<ObservationStatus>>(x_);
 				string z_ = context?.Operators.Convert<string>(y_);
-				string[] aa_ = /* ARR1 */ [
+				string[] aa_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -789,7 +789,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> d_ = context?.Operators.SelectMany<Observation, Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			DataType ar_ = @this.Effective;
+			DataType ar_ = @this?.Effective;
 			object as_ = FHIRHelpers_4_3_000.ToValue(ar_);
 			CqlInterval<CqlDateTime> at_ = QICoreCommon_2_0_000.toInterval(as_);
 			CqlDateTime au_ = context?.Operators.Start(at_);
@@ -798,12 +798,12 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		IEnumerable<Observation> f_ = context?.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation g_ = context?.Operators.Last<Observation>(f_);
-		Observation[] h_ = /* ARR1 */ [
+		Observation[] h_ = [
 			g_,
 		];
 		bool? i_(Observation LastPSATest)
 		{
-			DataType av_ = LastPSATest.Value;
+			DataType av_ = LastPSATest?.Value;
 			object aw_ = FHIRHelpers_4_3_000.ToValue(av_);
 			CqlQuantity ax_ = context?.Operators.Quantity(10m, "ng/mL");
 			bool? ay_ = context?.Operators.Less((aw_ as CqlQuantity), ax_);

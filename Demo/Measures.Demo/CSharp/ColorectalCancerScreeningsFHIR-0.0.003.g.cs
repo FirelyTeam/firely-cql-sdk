@@ -442,7 +442,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 		];
 
@@ -825,7 +825,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FecalOccult.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -865,7 +865,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 					return al_;
 				};
 				IEnumerable<string> ad_ = context?.Operators.Select<Code, string>(ab_, ac_);
-				string[] ae_ = /* ARR1 */ [
+				string[] ae_ = [
 					"laboratory",
 				];
 				bool? af_ = context?.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
@@ -903,7 +903,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FecalOccult.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -943,7 +943,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 					return al_;
 				};
 				IEnumerable<string> ad_ = context?.Operators.Select<Code, string>(ab_, ac_);
-				string[] ae_ = /* ARR1 */ [
+				string[] ae_ = [
 					"laboratory",
 				];
 				bool? af_ = context?.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
@@ -1013,7 +1013,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 					return ah_;
 				};
 				IEnumerable<string> y_ = context?.Operators.Select<Code, string>(w_, x_);
-				string[] z_ = /* ARR1 */ [
+				string[] z_ = [
 					"laboratory",
 				];
 				bool? aa_ = context?.Operators.Equivalent<string>(y_, (z_ as IEnumerable<string>));
@@ -1051,7 +1051,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FecalOccult.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -1190,7 +1190,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FitDNA.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -1230,7 +1230,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 					return av_;
 				};
 				IEnumerable<string> an_ = context?.Operators.Select<Code, string>(al_, am_);
-				string[] ao_ = /* ARR1 */ [
+				string[] ao_ = [
 					"laboratory",
 				];
 				bool? ap_ = context?.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
@@ -1276,7 +1276,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FitDNA.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -1316,7 +1316,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 					return av_;
 				};
 				IEnumerable<string> an_ = context?.Operators.Select<Code, string>(al_, am_);
-				string[] ao_ = /* ARR1 */ [
+				string[] ao_ = [
 					"laboratory",
 				];
 				bool? ap_ = context?.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
@@ -1394,7 +1394,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 					return ar_;
 				};
 				IEnumerable<string> ai_ = context?.Operators.Select<Code, string>(ag_, ah_);
-				string[] aj_ = /* ARR1 */ [
+				string[] aj_ = [
 					"laboratory",
 				];
 				bool? ak_ = context?.Operators.Equivalent<string>(ai_, (aj_ as IEnumerable<string>));
@@ -1440,7 +1440,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FitDNA.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -1522,7 +1522,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = Colonography.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -1563,7 +1563,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = Colonography.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = /* ARR1 */ [
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",

@@ -326,7 +326,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
 			new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
 			new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
@@ -344,7 +344,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlCode[] AllergyIntoleranceClinicalStatusCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, null),
 			new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, null),
 			new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", null, null),
@@ -359,7 +359,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null),
 			new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null),
 			new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null),
@@ -374,7 +374,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlCode[] Diagnosis_Role_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", null, null),
 		];
 
@@ -387,7 +387,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 		];
 
@@ -400,7 +400,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlCode[] MedicationRequestCategory_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, null),
 			new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", null, null),
 		];
@@ -414,7 +414,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlCode[] ConditionVerificationStatusCodes_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", null, null),
 			new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", null, null),
 			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", null, null),
@@ -432,7 +432,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("419099009", "http://snomed.info/sct", null, null),
 		];
 
@@ -445,7 +445,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlCode[] RoleCode_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", null, null),
 			new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", null, null),
 		];
@@ -573,7 +573,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public CqlInterval<CqlDateTime> Hospitalization(Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(TheEncounter);
-		Encounter[] b_ = /* ARR1 */ [
+		Encounter[] b_ = [
 			a_,
 		];
 		CqlInterval<CqlDateTime> c_(Encounter X)
@@ -613,7 +613,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(TheEncounter);
-		Encounter[] b_ = /* ARR1 */ [
+		Encounter[] b_ = [
 			a_,
 		];
 		IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
@@ -630,7 +630,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				{
 					List<Encounter.LocationComponent> h_ = EDEncounter.Location;
 					List<Encounter.LocationComponent> i_ = TheEncounter.Location;
-					IEnumerable<Encounter.LocationComponent>[] j_ = /* ARR1 */ [
+					IEnumerable<Encounter.LocationComponent>[] j_ = [
 						(IEnumerable<Encounter.LocationComponent>)h_,
 						(IEnumerable<Encounter.LocationComponent>)i_,
 					];
@@ -700,7 +700,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     [CqlDeclaration("HospitalizationWithObservation")]
 	public CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
 	{
-		Encounter[] a_ = /* ARR1 */ [
+		Encounter[] a_ = [
 			TheEncounter,
 		];
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
@@ -1455,7 +1455,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		};
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context?.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Encounter.DiagnosisComponent d_ = context?.Operators.SingletonFrom<Encounter.DiagnosisComponent>(c_);
-		Encounter.DiagnosisComponent[] e_ = /* ARR1 */ [
+		Encounter.DiagnosisComponent[] e_ = [
 			d_,
 		];
 		Condition f_(Encounter.DiagnosisComponent PD)
@@ -1643,7 +1643,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public CqlDateTime Latest(object choice)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Normalize_Interval(choice);
-		CqlInterval<CqlDateTime>[] b_ = /* ARR1 */ [
+		CqlInterval<CqlDateTime>[] b_ = [
 			a_,
 		];
 		CqlDateTime c_(CqlInterval<CqlDateTime> period)
@@ -1676,7 +1676,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public CqlDateTime Earliest(object choice)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Normalize_Interval(choice);
-		CqlInterval<CqlDateTime>[] b_ = /* ARR1 */ [
+		CqlInterval<CqlDateTime>[] b_ = [
 			a_,
 		];
 		CqlDateTime c_(CqlInterval<CqlDateTime> period)

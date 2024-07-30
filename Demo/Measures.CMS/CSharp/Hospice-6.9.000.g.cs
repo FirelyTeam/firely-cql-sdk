@@ -127,7 +127,7 @@ public class Hospice_6_9_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("45755-6", "http://loinc.org", null, null),
 		];
 
@@ -140,7 +140,7 @@ public class Hospice_6_9_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
 			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
 			new CqlCode("373066001", "http://snomed.info/sct", null, null),
@@ -186,19 +186,19 @@ public class Hospice_6_9_000
 		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter InpatientEncounter)
 		{
-			Encounter.HospitalizationComponent ap_ = InpatientEncounter.Hospitalization;
-			CodeableConcept aq_ = ap_.DischargeDisposition;
+			Encounter.HospitalizationComponent ap_ = InpatientEncounter?.Hospitalization;
+			CodeableConcept aq_ = ap_?.DischargeDisposition;
 			CqlConcept ar_ = FHIRHelpers_4_3_000.ToConcept(aq_);
 			CqlCode as_ = this.Discharge_to_home_for_hospice_care__procedure_();
 			CqlConcept at_ = context?.Operators.ConvertCodeToConcept(as_);
 			bool? au_ = context?.Operators.Equivalent(ar_, at_);
-			CodeableConcept aw_ = ap_.DischargeDisposition;
+			CodeableConcept aw_ = ap_?.DischargeDisposition;
 			CqlConcept ax_ = FHIRHelpers_4_3_000.ToConcept(aw_);
 			CqlCode ay_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_();
 			CqlConcept az_ = context?.Operators.ConvertCodeToConcept(ay_);
 			bool? ba_ = context?.Operators.Equivalent(ax_, az_);
 			bool? bb_ = context?.Operators.Or(au_, ba_);
-			Period bc_ = InpatientEncounter.Period;
+			Period bc_ = InpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_3_000.ToInterval(bc_);
 			CqlInterval<CqlDateTime> be_ = QICoreCommon_2_0_000.toInterval((bd_ as object));
 			CqlDateTime bf_ = context?.Operators.End(be_);
@@ -215,7 +215,7 @@ public class Hospice_6_9_000
 		IEnumerable<Encounter> i_ = Status_1_6_000.isEncounterPerformed(h_);
 		bool? j_(Encounter HospiceEncounter)
 		{
-			Period bj_ = HospiceEncounter.Period;
+			Period bj_ = HospiceEncounter?.Period;
 			CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_3_000.ToInterval(bj_);
 			CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_0_000.toInterval((bk_ as object));
 			CqlInterval<CqlDateTime> bm_ = this.Measurement_Period();
@@ -232,12 +232,12 @@ public class Hospice_6_9_000
 		IEnumerable<Observation> q_ = Status_1_6_000.isAssessmentPerformed(p_);
 		bool? r_(Observation HospiceAssessment)
 		{
-			DataType bo_ = HospiceAssessment.Value;
+			DataType bo_ = HospiceAssessment?.Value;
 			object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 			CqlCode bq_ = this.Yes__qualifier_value_();
 			CqlConcept br_ = context?.Operators.ConvertCodeToConcept(bq_);
 			bool? bs_ = context?.Operators.Equivalent((bp_ as CqlConcept), br_);
-			DataType bt_ = HospiceAssessment.Effective;
+			DataType bt_ = HospiceAssessment?.Effective;
 			object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
 			CqlInterval<CqlDateTime> bv_ = QICoreCommon_2_0_000.toInterval(bu_);
 			CqlInterval<CqlDateTime> bw_ = this.Measurement_Period();
@@ -255,7 +255,7 @@ public class Hospice_6_9_000
 		bool? y_(ServiceRequest HospiceOrder)
 		{
 			CqlInterval<CqlDateTime> bz_ = this.Measurement_Period();
-			FhirDateTime ca_ = HospiceOrder.AuthoredOnElement;
+			FhirDateTime ca_ = HospiceOrder?.AuthoredOnElement;
 			CqlDateTime cb_ = context?.Operators.Convert<CqlDateTime>(ca_);
 			CqlInterval<CqlDateTime> cc_ = QICoreCommon_2_0_000.toInterval((cb_ as object));
 			bool? cd_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(bz_, cc_, null);
@@ -269,7 +269,7 @@ public class Hospice_6_9_000
 		IEnumerable<Procedure> ae_ = Status_1_6_000.isInterventionPerformed(ad_);
 		bool? af_(Procedure HospicePerformed)
 		{
-			DataType ce_ = HospicePerformed.Performed;
+			DataType ce_ = HospicePerformed?.Performed;
 			object cf_ = FHIRHelpers_4_3_000.ToValue(ce_);
 			CqlInterval<CqlDateTime> cg_ = QICoreCommon_2_0_000.toInterval(cf_);
 			CqlInterval<CqlDateTime> ch_ = this.Measurement_Period();

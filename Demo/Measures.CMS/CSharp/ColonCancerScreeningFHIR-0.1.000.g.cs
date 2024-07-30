@@ -232,8 +232,8 @@ public class ColonCancerScreeningFHIR_0_1_000
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
@@ -294,7 +294,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure Colectomy)
 		{
-			DataType f_ = Colectomy.Performed;
+			DataType f_ = Colectomy?.Performed;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			CqlDateTime i_ = context?.Operators.End(h_);
@@ -343,14 +343,14 @@ public class ColonCancerScreeningFHIR_0_1_000
 		IEnumerable<Observation> c_ = Status_1_6_000.Final_Lab_Observation(b_);
 		bool? d_(Observation FecalOccultResult)
 		{
-			DataType f_ = FecalOccultResult.Value;
+			DataType f_ = FecalOccultResult?.Value;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			bool? h_ = context?.Operators.Not((bool?)(g_ is null));
 			object i_()
 			{
 				bool n_()
 				{
-					DataType q_ = FecalOccultResult.Effective;
+					DataType q_ = FecalOccultResult?.Effective;
 					object r_ = FHIRHelpers_4_3_000.ToValue(q_);
 					bool s_ = r_ is CqlDateTime;
 
@@ -358,7 +358,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				};
 				bool o_()
 				{
-					DataType t_ = FecalOccultResult.Effective;
+					DataType t_ = FecalOccultResult?.Effective;
 					object u_ = FHIRHelpers_4_3_000.ToValue(t_);
 					bool v_ = u_ is CqlInterval<CqlDateTime>;
 
@@ -366,7 +366,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				};
 				bool p_()
 				{
-					DataType w_ = FecalOccultResult.Effective;
+					DataType w_ = FecalOccultResult?.Effective;
 					object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 					bool y_ = x_ is CqlDateTime;
 
@@ -374,21 +374,21 @@ public class ColonCancerScreeningFHIR_0_1_000
 				};
 				if (n_())
 				{
-					DataType z_ = FecalOccultResult.Effective;
+					DataType z_ = FecalOccultResult?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
 					return ((aa_ as CqlDateTime) as object);
 				}
 				else if (o_())
 				{
-					DataType ab_ = FecalOccultResult.Effective;
+					DataType ab_ = FecalOccultResult?.Effective;
 					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
 					return ((ac_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (p_())
 				{
-					DataType ad_ = FecalOccultResult.Effective;
+					DataType ad_ = FecalOccultResult?.Effective;
 					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 
 					return ((ae_ as CqlDateTime) as object);
@@ -421,14 +421,14 @@ public class ColonCancerScreeningFHIR_0_1_000
 		IEnumerable<Observation> c_ = Status_1_6_000.Final_Lab_Observation(b_);
 		bool? d_(Observation sDNATest)
 		{
-			DataType f_ = sDNATest.Value;
+			DataType f_ = sDNATest?.Value;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			bool? h_ = context?.Operators.Not((bool?)(g_ is null));
 			object i_()
 			{
 				bool t_()
 				{
-					DataType w_ = sDNATest.Effective;
+					DataType w_ = sDNATest?.Effective;
 					object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 					bool y_ = x_ is CqlDateTime;
 
@@ -436,7 +436,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				};
 				bool u_()
 				{
-					DataType z_ = sDNATest.Effective;
+					DataType z_ = sDNATest?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 					bool ab_ = aa_ is CqlInterval<CqlDateTime>;
 
@@ -444,7 +444,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				};
 				bool v_()
 				{
-					DataType ac_ = sDNATest.Effective;
+					DataType ac_ = sDNATest?.Effective;
 					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 					bool ae_ = ad_ is CqlDateTime;
 
@@ -452,21 +452,21 @@ public class ColonCancerScreeningFHIR_0_1_000
 				};
 				if (t_())
 				{
-					DataType af_ = sDNATest.Effective;
+					DataType af_ = sDNATest?.Effective;
 					object ag_ = FHIRHelpers_4_3_000.ToValue(af_);
 
 					return ((ag_ as CqlDateTime) as object);
 				}
 				else if (u_())
 				{
-					DataType ah_ = sDNATest.Effective;
+					DataType ah_ = sDNATest?.Effective;
 					object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 
 					return ((ai_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (v_())
 				{
-					DataType aj_ = sDNATest.Effective;
+					DataType aj_ = sDNATest?.Effective;
 					object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
 
 					return ((ak_ as CqlDateTime) as object);
@@ -504,7 +504,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure FlexibleSigmoidoscopy)
 		{
-			DataType f_ = FlexibleSigmoidoscopy.Performed;
+			DataType f_ = FlexibleSigmoidoscopy?.Performed;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			CqlDateTime i_ = context?.Operators.End(h_);
@@ -534,7 +534,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		IEnumerable<Observation> c_ = Status_1_6_000.Final_Observation(b_);
 		bool? d_(Observation Colonography)
 		{
-			DataType f_ = Colonography.Effective;
+			DataType f_ = Colonography?.Effective;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			CqlDateTime i_ = context?.Operators.End(h_);
@@ -564,7 +564,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure Colonoscopy)
 		{
-			DataType f_ = Colonoscopy.Performed;
+			DataType f_ = Colonoscopy?.Performed;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			CqlDateTime i_ = context?.Operators.End(h_);
@@ -614,8 +614,8 @@ public class ColonCancerScreeningFHIR_0_1_000
 	private bool? Stratification_1_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
@@ -634,8 +634,8 @@ public class ColonCancerScreeningFHIR_0_1_000
 	private bool? Stratification_2_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);

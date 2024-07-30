@@ -200,7 +200,7 @@ public class TJCOverallFHIR_1_8_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 		];
 
@@ -409,7 +409,7 @@ public class TJCOverallFHIR_1_8_000
 		{
 			Code<EventStatus> m_ = InterventionPerformed.StatusElement;
 			string n_ = FHIRHelpers_4_0_001.ToString(m_);
-			string[] o_ = /* ARR1 */ [
+			string[] o_ = [
 				"completed",
 				"in-progress",
 			];

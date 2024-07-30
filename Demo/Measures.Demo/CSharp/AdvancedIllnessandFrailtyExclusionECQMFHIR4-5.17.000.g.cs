@@ -538,7 +538,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		{
 			Code<RequestStatus> ag_ = FrailtyDeviceOrder.StatusElement;
 			string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
-			string[] ai_ = /* ARR1 */ [
+			string[] ai_ = [
 				"active",
 				"on-hold",
 				"completed",
@@ -563,7 +563,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		{
 			Code<ObservationStatus> at_ = FrailtyDeviceApplied.StatusElement;
 			string au_ = FHIRHelpers_4_0_001.ToString(at_);
-			string[] av_ = /* ARR1 */ [
+			string[] av_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -617,7 +617,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		{
 			Code<ObservationStatus> bn_ = FrailtySymptom.StatusElement;
 			string bo_ = FHIRHelpers_4_0_001.ToString(bn_);
-			string[] bp_ = /* ARR1 */ [
+			string[] bp_ = [
 				"preliminary",
 				"final",
 				"amended",

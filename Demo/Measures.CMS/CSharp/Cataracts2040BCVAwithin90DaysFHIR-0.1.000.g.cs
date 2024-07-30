@@ -654,7 +654,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("419775003", "http://snomed.info/sct", null, null),
 		];
 
@@ -698,7 +698,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 		bool? c_(Procedure CataractSurgery)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-			DataType f_ = CataractSurgery.Performed;
+			DataType f_ = CataractSurgery?.Performed;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.toInterval(g_);
 			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
@@ -710,8 +710,8 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			CqlDateTime q_ = context?.Operators.Subtract(o_, p_);
 			bool? r_ = context?.Operators.SameOrBefore(m_, q_, null);
 			bool? s_ = context?.Operators.And(i_, r_);
-			Code<EventStatus> t_ = CataractSurgery.StatusElement;
-			EventStatus? u_ = t_.Value;
+			Code<EventStatus> t_ = CataractSurgery?.StatusElement;
+			EventStatus? u_ = t_?.Value;
 			string v_ = context?.Operators.Convert<string>(u_);
 			bool? w_ = context?.Operators.Equal(v_, "completed");
 			bool? x_ = context?.Operators.And(s_, w_);
@@ -733,8 +733,8 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 		bool? b_(Procedure CataractSurgeryPerformed)
 		{
 			Patient d_ = this.Patient();
-			Date e_ = d_.BirthDateElement;
-			string f_ = e_.Value;
+			Date e_ = d_?.BirthDateElement;
+			string f_ = e_?.Value;
 			CqlDate g_ = context?.Operators.ConvertStringToDate(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			CqlDateTime i_ = context?.Operators.Start(h_);
@@ -936,7 +936,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			bool? fl_(Condition ComorbidDiagnosis)
 			{
 				CqlInterval<CqlDateTime> fp_ = QICoreCommon_2_0_000.prevalenceInterval(ComorbidDiagnosis);
-				DataType fq_ = CataractSurgeryPerformed.Performed;
+				DataType fq_ = CataractSurgeryPerformed?.Performed;
 				object fr_ = FHIRHelpers_4_3_000.ToValue(fq_);
 				CqlInterval<CqlDateTime> fs_ = QICoreCommon_2_0_000.toInterval(fr_);
 				bool? ft_ = context?.Operators.OverlapsBefore(fp_, fs_, null);
@@ -974,11 +974,11 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			IEnumerable<Observation> i_ = context?.Operators.Union<Observation>(f_, h_);
 			bool? j_(Observation VisualAcuityExamPerformed)
 			{
-				DataType n_ = VisualAcuityExamPerformed.Effective;
+				DataType n_ = VisualAcuityExamPerformed?.Effective;
 				object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
 				CqlDateTime q_ = context?.Operators.Start(p_);
-				DataType r_ = CataractSurgeryPerformed.Performed;
+				DataType r_ = CataractSurgeryPerformed?.Performed;
 				object s_ = FHIRHelpers_4_3_000.ToValue(r_);
 				CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval(s_);
 				CqlDateTime u_ = context?.Operators.End(t_);
@@ -994,11 +994,11 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				CqlDateTime ag_ = context?.Operators.End(af_);
 				bool? ah_ = context?.Operators.Not((bool?)(ag_ is null));
 				bool? ai_ = context?.Operators.And(ac_, ah_);
-				Code<ObservationStatus> aj_ = VisualAcuityExamPerformed.StatusElement;
-				ObservationStatus? ak_ = aj_.Value;
+				Code<ObservationStatus> aj_ = VisualAcuityExamPerformed?.StatusElement;
+				ObservationStatus? ak_ = aj_?.Value;
 				Code<ObservationStatus> al_ = context?.Operators.Convert<Code<ObservationStatus>>(ak_);
 				string am_ = context?.Operators.Convert<string>(al_);
-				string[] an_ = /* ARR1 */ [
+				string[] an_ = [
 					"final",
 					"amended",
 					"corrected",
@@ -1006,7 +1006,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				];
 				bool? ao_ = context?.Operators.In<string>(am_, (an_ as IEnumerable<string>));
 				bool? ap_ = context?.Operators.And(ai_, ao_);
-				DataType aq_ = VisualAcuityExamPerformed.Value;
+				DataType aq_ = VisualAcuityExamPerformed?.Value;
 				object ar_ = FHIRHelpers_4_3_000.ToValue(aq_);
 				CqlValueSet as_ = this.Visual_Acuity_20_40_or_Better();
 				bool? at_ = context?.Operators.ConceptInValueSet((ar_ as CqlConcept), as_);

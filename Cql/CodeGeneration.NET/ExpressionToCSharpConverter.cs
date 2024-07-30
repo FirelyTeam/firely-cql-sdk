@@ -16,7 +16,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -153,10 +152,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         private string ConvertNullConditionalMemberExpression(string indentString, NullConditionalMemberExpression nullp)
         {
             var convertExpression = ConvertExpression(0, nullp.MemberExpression.Expression!);
-            bool shouldHaveNullProp = typeToCSharpConverter.ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);// true;//!ShouldUseTupleType(nullp.MemberExpression.Expression!.Type);
-            //bool shouldHaveNullProp = true;
             var memberName = nullp.MemberExpression.Member.Name;
-            return $"{indentString}{Parenthesize(convertExpression)}{(shouldHaveNullProp?"?":"")}.{memberName}";
+            return $"{indentString}{Parenthesize(convertExpression)}?.{memberName}";
         }
 
         private string ConvertConstantExpression(Type constantType, object? value, string? identString = "")
@@ -398,17 +395,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ExpressionType.NewArrayInit:
                     {
                         var newArraySb = new StringBuilder();
-//                         newArraySb.Append(leadingIndentString);
-//
-//                         var arrayType = typeToCSharpConverter.ToCSharp(newArray.Type);
-//
-// #pragma warning disable CA1305 // Specify IFormatProvider
-//                         newArraySb.AppendLine($"/* ARR1 */ new {arrayType}");
-// #pragma warning restore CA1305 // Specify IFormatProvider
                         var braceIndent = IndentString(indent);
-                        // newArraySb.Append(braceIndent);
-                        newArraySb.AppendLine("/* ARR1 */ [");
-                        // newArraySb.AppendLine("{");
+                        newArraySb.AppendLine("[");
 
                         foreach (var expr in newArray.Expressions)
                         {
@@ -419,7 +407,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                         newArraySb.Append(braceIndent);
                         newArraySb.Append(']');
-                        // newArraySb.Append('}');
                         return newArraySb.ToString();
                     }
                 case ExpressionType.NewArrayBounds:
@@ -429,7 +416,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var arrayType = typeToCSharpConverter.ToCSharp(newArray.Type.GetElementType()!);
                         var size = ConvertExpression(0, newArray.Expressions[0], false);
 #pragma warning disable CA1305 // Specify IFormatProvider
-                        newArraySb.AppendLine($"/* ARR2 */ new {arrayType}[{size}]");
+                        newArraySb.AppendLine("[]");
 #pragma warning restore CA1305 // Specify IFormatProvider
                         return newArraySb.ToString();
                     }

@@ -165,7 +165,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		bool? d_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
-			Period g_ = ValidEncounter.Period;
+			Period g_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
 			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, null);
 
@@ -183,8 +183,8 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -232,7 +232,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		IEnumerable<Procedure> c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure FluorideApplication)
 		{
-			DataType j_ = FluorideApplication.Performed;
+			DataType j_ = FluorideApplication?.Performed;
 			object k_ = FHIRHelpers_4_3_000.ToValue(j_);
 			CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(k_);
 			CqlDateTime m_ = context?.Operators.End(l_);
@@ -244,7 +244,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		IEnumerable<Procedure> e_ = context?.Operators.Where<Procedure>(c_, d_);
 		CqlDate f_(Procedure FluorideApplication)
 		{
-			DataType p_ = FluorideApplication.Performed;
+			DataType p_ = FluorideApplication?.Performed;
 			object q_ = FHIRHelpers_4_3_000.ToValue(p_);
 			CqlInterval<CqlDateTime> r_ = QICoreCommon_2_0_000.toInterval(q_);
 			CqlDateTime s_ = context?.Operators.End(r_);
@@ -266,8 +266,8 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	private bool? Stratification_1_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -286,8 +286,8 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	private bool? Stratification_2_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -306,8 +306,8 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	private bool? Stratification_3_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);

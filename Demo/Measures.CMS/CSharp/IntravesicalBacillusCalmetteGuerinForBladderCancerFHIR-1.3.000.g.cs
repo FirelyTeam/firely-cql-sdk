@@ -294,7 +294,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("169331000", "http://snomed.info/sct", null, null),
 			new CqlCode("369935001", "http://snomed.info/sct", null, null),
 			new CqlCode("369949005", "http://snomed.info/sct", null, null),
@@ -312,7 +312,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 	private CqlCode[] ICD10CM_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("D09.0", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
 		];
 
@@ -325,7 +325,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("21902-2", "http://loinc.org", null, null),
 		];
 
@@ -338,7 +338,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 	private CqlCode[] ActCode_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
 		];
 
@@ -378,17 +378,17 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
     [CqlDeclaration("isConfirmedActiveDiagnosis")]
 	public bool? isConfirmedActiveDiagnosis(Condition Condition)
 	{
-		Condition[] a_ = /* ARR1 */ [
+		Condition[] a_ = [
 			Condition,
 		];
 		bool? b_(Condition Diagnosis)
 		{
-			CodeableConcept f_ = Diagnosis.ClinicalStatus;
+			CodeableConcept f_ = Diagnosis?.ClinicalStatus;
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(f_);
 			CqlCode h_ = QICoreCommon_2_0_000.active();
 			CqlConcept i_ = context?.Operators.ConvertCodeToConcept(h_);
 			bool? j_ = context?.Operators.Equivalent(g_, i_);
-			CodeableConcept k_ = Diagnosis.VerificationStatus;
+			CodeableConcept k_ = Diagnosis?.VerificationStatus;
 			CqlConcept l_ = FHIRHelpers_4_3_000.ToConcept(k_);
 			CqlCode m_ = QICoreCommon_2_0_000.unconfirmed();
 			CqlConcept n_ = context?.Operators.ConvertCodeToConcept(m_);
@@ -450,7 +450,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			IEnumerable<Condition> k_ = this.Bladder_Cancer_Diagnosis();
 			bool? l_(Condition BladderCancer)
 			{
-				DataType p_ = BladderCancerStaging.Performed;
+				DataType p_ = BladderCancerStaging?.Performed;
 				object q_ = FHIRHelpers_4_3_000.ToValue(p_);
 				CqlInterval<CqlDateTime> r_ = QICoreCommon_2_0_000.toInterval(q_);
 				CqlDateTime s_ = context?.Operators.Start(r_);
@@ -474,8 +474,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> e_ = context?.Operators.SelectMany<Procedure, Procedure>(c_, d_);
 		bool? f_(Procedure BladderCancerStaging)
 		{
-			Code<EventStatus> ac_ = BladderCancerStaging.StatusElement;
-			EventStatus? ad_ = ac_.Value;
+			Code<EventStatus> ac_ = BladderCancerStaging?.StatusElement;
+			EventStatus? ad_ = ac_?.Value;
 			string ae_ = context?.Operators.Convert<string>(ad_);
 			bool? af_ = context?.Operators.Equal(ae_, "completed");
 
@@ -484,7 +484,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> g_ = context?.Operators.Where<Procedure>(e_, f_);
 		object h_(Procedure @this)
 		{
-			DataType ag_ = @this.Performed;
+			DataType ag_ = @this?.Performed;
 			object ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
 			CqlInterval<CqlDateTime> ai_ = QICoreCommon_2_0_000.toInterval(ah_);
 			CqlDateTime aj_ = context?.Operators.Start(ai_);
@@ -535,7 +535,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	private Procedure First_Qualifying_Bladder_Cancer_Staging_Procedure_Value()
 	{
 		Procedure a_ = this.First_Bladder_Cancer_Staging_Procedure();
-		Procedure[] b_ = /* ARR1 */ [
+		Procedure[] b_ = [
 			a_,
 		];
 		bool? c_(Procedure FirstBladderCancerStaging)
@@ -543,7 +543,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			CqlDateTime f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period();
 			CqlDateTime g_ = this.June_30_of_the_Measurement_Period();
 			CqlInterval<CqlDateTime> h_ = context?.Operators.Interval(f_, g_, true, true);
-			DataType i_ = FirstBladderCancerStaging.Performed;
+			DataType i_ = FirstBladderCancerStaging?.Performed;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.toInterval(j_);
 			bool? l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, null);
@@ -563,7 +563,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	private Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period_Value()
 	{
 		Procedure a_ = this.First_Bladder_Cancer_Staging_Procedure();
-		Procedure[] b_ = /* ARR1 */ [
+		Procedure[] b_ = [
 			a_,
 		];
 		bool? c_(Procedure FirstBladderCancerStaging)
@@ -571,7 +571,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			CqlDateTime f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period();
 			CqlDateTime g_ = this.June_30_of_the_Measurement_Period();
 			CqlInterval<CqlDateTime> h_ = context?.Operators.Interval(f_, g_, true, true);
-			DataType i_ = FirstBladderCancerStaging.Performed;
+			DataType i_ = FirstBladderCancerStaging?.Performed;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.toInterval(j_);
 			bool? l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, null);
@@ -591,19 +591,19 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
     [CqlDeclaration("getStagingProcedure")]
 	public IEnumerable<Procedure> getStagingProcedure(Observation StagingObservation)
 	{
-		List<ResourceReference> a_ = StagingObservation.PartOf;
+		List<ResourceReference> a_ = StagingObservation?.PartOf;
 		Procedure b_(ResourceReference StagingReference)
 		{
 			Procedure d_ = this.First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period();
-			Procedure[] e_ = /* ARR1 */ [
+			Procedure[] e_ = [
 				d_,
 			];
 			bool? f_(Procedure FirstBladderCancerStagingMP)
 			{
-				Id i_ = FirstBladderCancerStagingMP.IdElement;
-				string j_ = i_.Value;
-				FhirString k_ = StagingReference.ReferenceElement;
-				string l_ = k_.Value;
+				Id i_ = FirstBladderCancerStagingMP?.IdElement;
+				string j_ = i_?.Value;
+				FhirString k_ = StagingReference?.ReferenceElement;
+				string l_ = k_?.Value;
 				string m_ = QICoreCommon_2_0_000.getId(l_);
 				bool? n_ = context?.Operators.Equal(j_, m_);
 
@@ -628,7 +628,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		{
 			IEnumerable<Procedure> g_ = this.getStagingProcedure(StagingObservation);
 			bool? h_ = context?.Operators.Not((bool?)(g_ is null));
-			DataType i_ = StagingObservation.Value;
+			DataType i_ = StagingObservation?.Value;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlCode k_ = this.T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_();
 			CqlConcept l_ = context?.Operators.ConvertCodeToConcept(k_);
@@ -649,11 +649,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? ad_ = context?.Operators.Equivalent((aa_ as CqlConcept), ac_);
 			bool? ae_ = context?.Operators.Or(y_, ad_);
 			bool? af_ = context?.Operators.And(h_, ae_);
-			Code<ObservationStatus> ag_ = StagingObservation.StatusElement;
-			ObservationStatus? ah_ = ag_.Value;
+			Code<ObservationStatus> ag_ = StagingObservation?.StatusElement;
+			ObservationStatus? ah_ = ag_?.Value;
 			Code<ObservationStatus> ai_ = context?.Operators.Convert<Code<ObservationStatus>>(ah_);
 			string aj_ = context?.Operators.Convert<string>(ai_);
-			string[] ak_ = /* ARR1 */ [
+			string[] ak_ = [
 				"final",
 				"amended",
 				"corrected",
@@ -680,17 +680,17 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		bool? c_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
-			Period g_ = ValidEncounter.Period;
+			Period g_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
 			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, null);
-			Coding j_ = ValidEncounter.Class;
+			Coding j_ = ValidEncounter?.Class;
 			CqlCode k_ = FHIRHelpers_4_3_000.ToCode(j_);
 			CqlCode l_ = this.@virtual();
 			bool? m_ = context?.Operators.Equivalent(k_, l_);
 			bool? n_ = context?.Operators.Not(m_);
 			bool? o_ = context?.Operators.And(i_, n_);
-			Code<Encounter.EncounterStatus> p_ = ValidEncounter.StatusElement;
-			Encounter.EncounterStatus? q_ = p_.Value;
+			Code<Encounter.EncounterStatus> p_ = ValidEncounter?.StatusElement;
+			Encounter.EncounterStatus? q_ = p_?.Value;
 			Code<Encounter.EncounterStatus> r_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(q_);
 			bool? s_ = context?.Operators.Equal(r_, "finished");
 			bool? t_ = context?.Operators.And(o_, s_);
@@ -743,14 +743,14 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> f_(MedicationAdministration BCGNotGiven)
 		{
 			Procedure j_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] k_ = /* ARR1 */ [
+			Procedure[] k_ = [
 				j_,
 			];
 			bool? l_(Procedure FirstBladderCancerStaging)
 			{
 				bool? p_(Extension @this)
 				{
-					string ay_ = @this.Url;
+					string ay_ = @this?.Url;
 					FhirUri az_ = context?.Operators.Convert<FhirUri>(ay_);
 					string ba_ = FHIRHelpers_4_3_000.ToString(az_);
 					bool? bb_ = context?.Operators.Equal(ba_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
@@ -762,7 +762,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 						: null), p_);
 				DataType r_(Extension @this)
 				{
-					DataType bc_ = @this.Value;
+					DataType bc_ = @this?.Value;
 
 					return bc_;
 				};
@@ -770,7 +770,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				DataType t_ = context?.Operators.SingletonFrom<DataType>(s_);
 				FhirDateTime u_ = context?.Operators.Convert<FhirDateTime>(t_);
 				CqlDateTime v_ = context?.Operators.Convert<CqlDateTime>(u_);
-				DataType w_ = FirstBladderCancerStaging.Performed;
+				DataType w_ = FirstBladderCancerStaging?.Performed;
 				object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(x_);
 				CqlDateTime z_ = context?.Operators.Start(y_);
@@ -788,7 +788,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? an_ = context?.Operators.And(ah_, am_);
 				bool? ao_(Extension @this)
 				{
-					string bd_ = @this.Url;
+					string bd_ = @this?.Url;
 					FhirUri be_ = context?.Operators.Convert<FhirUri>(bd_);
 					string bf_ = FHIRHelpers_4_3_000.ToString(be_);
 					bool? bg_ = context?.Operators.Equal(bf_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
@@ -800,7 +800,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 						: null), ao_);
 				DataType aq_(Extension @this)
 				{
-					DataType bh_ = @this.Value;
+					DataType bh_ = @this?.Value;
 
 					return bh_;
 				};
@@ -824,7 +824,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> g_ = context?.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
 		bool? h_(MedicationAdministration BCGNotGiven)
 		{
-			List<CodeableConcept> bi_ = BCGNotGiven.StatusReason;
+			List<CodeableConcept> bi_ = BCGNotGiven?.StatusReason;
 			CqlConcept bj_(CodeableConcept @this)
 			{
 				CqlConcept bn_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -867,16 +867,16 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> f_(MedicationAdministration BCG)
 		{
 			Procedure m_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] n_ = /* ARR1 */ [
+			Procedure[] n_ = [
 				m_,
 			];
 			bool? o_(Procedure FirstBladderCancerStaging)
 			{
-				DataType s_ = BCG.Effective;
+				DataType s_ = BCG?.Effective;
 				object t_ = FHIRHelpers_4_3_000.ToValue(s_);
 				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(t_);
 				CqlDateTime v_ = context?.Operators.Start(u_);
-				DataType w_ = FirstBladderCancerStaging.Performed;
+				DataType w_ = FirstBladderCancerStaging?.Performed;
 				object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(x_);
 				CqlDateTime z_ = context?.Operators.Start(y_);
@@ -911,11 +911,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> g_ = context?.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
 		bool? h_(MedicationAdministration BCG)
 		{
-			Code<MedicationAdministration.MedicationAdministrationStatusCodes> av_ = BCG.StatusElement;
-			MedicationAdministration.MedicationAdministrationStatusCodes? aw_ = av_.Value;
+			Code<MedicationAdministration.MedicationAdministrationStatusCodes> av_ = BCG?.StatusElement;
+			MedicationAdministration.MedicationAdministrationStatusCodes? aw_ = av_?.Value;
 			Code<MedicationAdministration.MedicationAdministrationStatusCodes> ax_ = context?.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(aw_);
 			string ay_ = context?.Operators.Convert<string>(ax_);
-			string[] az_ = /* ARR1 */ [
+			string[] az_ = [
 				"in-progress",
 				"completed",
 			];
@@ -926,7 +926,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> i_ = context?.Operators.Where<MedicationAdministration>(g_, h_);
 		object j_(MedicationAdministration @this)
 		{
-			DataType bb_ = @this.Effective;
+			DataType bb_ = @this?.Effective;
 			object bc_ = FHIRHelpers_4_3_000.ToValue(bb_);
 			CqlInterval<CqlDateTime> bd_ = QICoreCommon_2_0_000.toInterval(bc_);
 			CqlDateTime be_ = context?.Operators.Start(bd_);
@@ -1006,13 +1006,13 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Condition> c_(Condition ActiveTuberculosis)
 		{
 			Procedure g_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] h_ = /* ARR1 */ [
+			Procedure[] h_ = [
 				g_,
 			];
 			bool? i_(Procedure FirstBladderCancerStaging)
 			{
 				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveTuberculosis);
-				DataType n_ = FirstBladderCancerStaging.Performed;
+				DataType n_ = FirstBladderCancerStaging?.Performed;
 				object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
 				bool? q_ = context?.Operators.OverlapsAfter(m_, p_, null);
@@ -1051,7 +1051,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationRequest> f_(MedicationRequest ImmunosuppressiveDrugs)
 		{
 			Procedure h_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] i_ = /* ARR1 */ [
+			Procedure[] i_ = [
 				h_,
 			];
 			bool? j_(Procedure FirstBladderCancerStaging)
@@ -1059,7 +1059,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				CqlInterval<CqlDate> n_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ImmunosuppressiveDrugs);
 				CqlDate o_ = context?.Operators.Start(n_);
 				CqlDateTime p_ = context?.Operators.ConvertDateToDateTime(o_);
-				DataType q_ = FirstBladderCancerStaging.Performed;
+				DataType q_ = FirstBladderCancerStaging?.Performed;
 				object r_ = FHIRHelpers_4_3_000.ToValue(q_);
 				CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.toInterval(r_);
 				CqlDateTime t_ = context?.Operators.Start(s_);
@@ -1090,16 +1090,16 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> c_(Procedure Cystectomy)
 		{
 			Procedure g_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] h_ = /* ARR1 */ [
+			Procedure[] h_ = [
 				g_,
 			];
 			bool? i_(Procedure FirstBladderCancerStaging)
 			{
-				DataType m_ = Cystectomy.Performed;
+				DataType m_ = Cystectomy?.Performed;
 				object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
 				CqlDateTime p_ = context?.Operators.End(o_);
-				DataType q_ = FirstBladderCancerStaging.Performed;
+				DataType q_ = FirstBladderCancerStaging?.Performed;
 				object r_ = FHIRHelpers_4_3_000.ToValue(q_);
 				CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.toInterval(r_);
 				CqlDateTime t_ = context?.Operators.Start(s_);
@@ -1128,8 +1128,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> d_ = context?.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure Cystectomy)
 		{
-			Code<EventStatus> ai_ = Cystectomy.StatusElement;
-			EventStatus? aj_ = ai_.Value;
+			Code<EventStatus> ai_ = Cystectomy?.StatusElement;
+			EventStatus? aj_ = ai_?.Value;
 			string ak_ = context?.Operators.Convert<string>(aj_);
 			bool? al_ = context?.Operators.Equal(ak_, "completed");
 
@@ -1157,14 +1157,14 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Condition> i_(Condition ExclusionDiagnosis)
 		{
 			Procedure n_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] o_ = /* ARR1 */ [
+			Procedure[] o_ = [
 				n_,
 			];
 			bool? p_(Procedure FirstBladderCancerStaging)
 			{
 				CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.prevalenceInterval(ExclusionDiagnosis);
 				CqlDateTime u_ = context?.Operators.Start(t_);
-				DataType v_ = FirstBladderCancerStaging.Performed;
+				DataType v_ = FirstBladderCancerStaging?.Performed;
 				object w_ = FHIRHelpers_4_3_000.ToValue(v_);
 				CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval(w_);
 				CqlDateTime y_ = context?.Operators.Start(x_);
@@ -1205,7 +1205,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationRequest> f_(MedicationRequest ExclusionMed)
 		{
 			Procedure s_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] t_ = /* ARR1 */ [
+			Procedure[] t_ = [
 				s_,
 			];
 			bool? u_(Procedure FirstBladderCancerStaging)
@@ -1213,7 +1213,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				CqlInterval<CqlDate> y_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ExclusionMed);
 				CqlDate z_ = context?.Operators.Start(y_);
 				CqlDateTime aa_ = context?.Operators.ConvertDateToDateTime(z_);
-				DataType ab_ = FirstBladderCancerStaging.Performed;
+				DataType ab_ = FirstBladderCancerStaging?.Performed;
 				object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 				CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_0_000.toInterval(ac_);
 				CqlDateTime ae_ = context?.Operators.Start(ad_);
@@ -1242,21 +1242,21 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationRequest> g_ = context?.Operators.SelectMany<MedicationRequest, MedicationRequest>(e_, f_);
 		bool? h_(MedicationRequest ExclusionMed)
 		{
-			Code<MedicationRequest.MedicationrequestStatus> at_ = ExclusionMed.StatusElement;
-			MedicationRequest.MedicationrequestStatus? au_ = at_.Value;
+			Code<MedicationRequest.MedicationrequestStatus> at_ = ExclusionMed?.StatusElement;
+			MedicationRequest.MedicationrequestStatus? au_ = at_?.Value;
 			string av_ = context?.Operators.Convert<string>(au_);
-			string[] aw_ = /* ARR1 */ [
+			string[] aw_ = [
 				"active",
 				"completed",
 			];
 			bool? ax_ = context?.Operators.In<string>(av_, (aw_ as IEnumerable<string>));
-			Code<MedicationRequest.MedicationRequestIntent> ay_ = ExclusionMed.IntentElement;
-			MedicationRequest.MedicationRequestIntent? az_ = ay_.Value;
+			Code<MedicationRequest.MedicationRequestIntent> ay_ = ExclusionMed?.IntentElement;
+			MedicationRequest.MedicationRequestIntent? az_ = ay_?.Value;
 			string ba_ = context?.Operators.Convert<string>(az_);
 			bool? bb_ = context?.Operators.Equal(ba_, "order");
 			bool? bc_ = context?.Operators.And(ax_, bb_);
-			FhirBoolean bd_ = ExclusionMed.DoNotPerformElement;
-			bool? be_ = bd_.Value;
+			FhirBoolean bd_ = ExclusionMed?.DoNotPerformElement;
+			bool? be_ = bd_?.Value;
 			bool? bf_ = context?.Operators.IsTrue(be_);
 			bool? bg_ = context?.Operators.Not(bf_);
 			bool? bh_ = context?.Operators.And(bc_, bg_);
@@ -1270,16 +1270,16 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> m_(Procedure ExclusionProcedure)
 		{
 			Procedure bi_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] bj_ = /* ARR1 */ [
+			Procedure[] bj_ = [
 				bi_,
 			];
 			bool? bk_(Procedure FirstBladderCancerStaging)
 			{
-				DataType bo_ = ExclusionProcedure.Performed;
+				DataType bo_ = ExclusionProcedure?.Performed;
 				object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 				CqlInterval<CqlDateTime> bq_ = QICoreCommon_2_0_000.toInterval(bp_);
 				CqlDateTime br_ = context?.Operators.Start(bq_);
-				DataType bs_ = FirstBladderCancerStaging.Performed;
+				DataType bs_ = FirstBladderCancerStaging?.Performed;
 				object bt_ = FHIRHelpers_4_3_000.ToValue(bs_);
 				CqlInterval<CqlDateTime> bu_ = QICoreCommon_2_0_000.toInterval(bt_);
 				CqlDateTime bv_ = context?.Operators.Start(bu_);
@@ -1308,8 +1308,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> n_ = context?.Operators.SelectMany<Procedure, Procedure>(l_, m_);
 		bool? o_(Procedure ExclusionProcedure)
 		{
-			Code<EventStatus> ck_ = ExclusionProcedure.StatusElement;
-			EventStatus? cl_ = ck_.Value;
+			Code<EventStatus> ck_ = ExclusionProcedure?.StatusElement;
+			EventStatus? cl_ = ck_?.Value;
 			string cm_ = context?.Operators.Convert<string>(cl_);
 			bool? cn_ = context?.Operators.Equal(cm_, "completed");
 

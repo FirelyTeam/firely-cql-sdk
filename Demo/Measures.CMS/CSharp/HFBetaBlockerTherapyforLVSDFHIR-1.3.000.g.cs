@@ -244,7 +244,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = /* ARR1 */ [
+		CqlCode[] a_ = [
 			new CqlCode("373254001", "http://snomed.info/sct", null, null),
 		];
 
@@ -284,8 +284,8 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -347,19 +347,19 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		bool? f_(MedicationRequest BetaBlockerOrdered)
 		{
 			bool? i_ = AHAOverall_2_6_000.isOrderedDuringHeartFailureOutpatientEncounter(BetaBlockerOrdered);
-			Code<MedicationRequest.MedicationrequestStatus> j_ = BetaBlockerOrdered.StatusElement;
-			MedicationRequest.MedicationrequestStatus? k_ = j_.Value;
+			Code<MedicationRequest.MedicationrequestStatus> j_ = BetaBlockerOrdered?.StatusElement;
+			MedicationRequest.MedicationrequestStatus? k_ = j_?.Value;
 			string l_ = context?.Operators.Convert<string>(k_);
-			string[] m_ = /* ARR1 */ [
+			string[] m_ = [
 				"active",
 				"completed",
 			];
 			bool? n_ = context?.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 			bool? o_ = context?.Operators.And(i_, n_);
-			Code<MedicationRequest.MedicationRequestIntent> p_ = BetaBlockerOrdered.IntentElement;
-			MedicationRequest.MedicationRequestIntent? q_ = p_.Value;
+			Code<MedicationRequest.MedicationRequestIntent> p_ = BetaBlockerOrdered?.IntentElement;
+			MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
 			string r_ = context?.Operators.Convert<string>(q_);
-			string[] s_ = /* ARR1 */ [
+			string[] s_ = [
 				"order",
 				"original-order",
 				"reflex-order",
@@ -430,23 +430,23 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		IEnumerable<(Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?> e_ = context?.Operators.Select<ValueTuple<Observation, Encounter>, (Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?>(c_, d_);
 		bool? f_((Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? tuple_fufpmqdratbglhghdwfuubanf)
 		{
-			Period l_ = tuple_fufpmqdratbglhghdwfuubanf?.ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+			Period l_ = tuple_fufpmqdratbglhghdwfuubanf?.ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
-			DataType n_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate.Effective;
+			DataType n_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
 			bool? q_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
-			Code<ObservationStatus> r_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate.StatusElement;
-			ObservationStatus? s_ = r_.Value;
+			Code<ObservationStatus> r_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.StatusElement;
+			ObservationStatus? s_ = r_?.Value;
 			string t_ = context?.Operators.Convert<string>(s_);
-			string[] u_ = /* ARR1 */ [
+			string[] u_ = [
 				"final",
 				"amended",
 				"corrected",
 			];
 			bool? v_ = context?.Operators.In<string>(t_, (u_ as IEnumerable<string>));
 			bool? w_ = context?.Operators.And(q_, v_);
-			DataType x_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate.Value;
+			DataType x_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
 			Quantity y_ = context?.Operators.Convert<Quantity>(x_);
 			CqlQuantity z_ = FHIRHelpers_4_3_000.ToQuantity(y_);
 			CqlQuantity aa_ = context?.Operators.Quantity(50m, "/min");
@@ -455,15 +455,15 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			IEnumerable<Observation> ad_ = context?.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? ae_(Observation MostRecentPriorHeartRate)
 			{
-				Period ap_ = tuple_fufpmqdratbglhghdwfuubanf?.ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+				Period ap_ = tuple_fufpmqdratbglhghdwfuubanf?.ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_3_000.ToInterval(ap_);
-				DataType ar_ = MostRecentPriorHeartRate.Effective;
+				DataType ar_ = MostRecentPriorHeartRate?.Effective;
 				object as_ = FHIRHelpers_4_3_000.ToValue(ar_);
 				CqlInterval<CqlDateTime> at_ = QICoreCommon_2_0_000.toInterval(as_);
 				bool? au_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(aq_, at_, null);
 				object aw_ = FHIRHelpers_4_3_000.ToValue(ar_);
 				CqlInterval<CqlDateTime> ax_ = QICoreCommon_2_0_000.toInterval(aw_);
-				DataType ay_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate.Effective;
+				DataType ay_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
 				object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
 				CqlInterval<CqlDateTime> ba_ = QICoreCommon_2_0_000.toInterval(az_);
 				bool? bb_ = context?.Operators.Before(ax_, ba_, null);
@@ -474,7 +474,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			IEnumerable<Observation> af_ = context?.Operators.Where<Observation>(ad_, ae_);
 			object ag_(Observation @this)
 			{
-				DataType bd_ = @this.Effective;
+				DataType bd_ = @this?.Effective;
 				object be_ = FHIRHelpers_4_3_000.ToValue(bd_);
 				CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_0_000.toInterval(be_);
 				CqlDateTime bg_ = context?.Operators.Start(bf_);
@@ -483,7 +483,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			};
 			IEnumerable<Observation> ah_ = context?.Operators.SortBy<Observation>(af_, ag_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation ai_ = context?.Operators.Last<Observation>(ah_);
-			DataType aj_ = ai_.Value;
+			DataType aj_ = ai_?.Value;
 			Quantity ak_ = context?.Operators.Convert<Quantity>(aj_);
 			CqlQuantity al_ = FHIRHelpers_4_3_000.ToQuantity(ak_);
 			bool? an_ = context?.Operators.Less(al_, aa_);
@@ -512,9 +512,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			IEnumerable<Encounter> g_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 			bool? h_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
 			{
-				FhirDateTime l_ = NoBetaBlockerOrdered.AuthoredOnElement;
+				FhirDateTime l_ = NoBetaBlockerOrdered?.AuthoredOnElement;
 				CqlDateTime m_ = context?.Operators.Convert<CqlDateTime>(l_);
-				Period n_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+				Period n_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
 				bool? p_ = context?.Operators.In<CqlDateTime>(m_, o_, null);
 
@@ -530,12 +530,12 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		IEnumerable<MedicationRequest> c_ = context?.Operators.SelectMany<MedicationRequest, MedicationRequest>(a_, b_);
 		bool? d_(MedicationRequest NoBetaBlockerOrdered)
 		{
-			DataType q_ = NoBetaBlockerOrdered.Medication;
+			DataType q_ = NoBetaBlockerOrdered?.Medication;
 			CodeableConcept r_ = context?.Operators.Convert<CodeableConcept>(q_);
 			CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
 			CqlValueSet t_ = this.Beta_Blocker_Therapy_for_LVSD();
 			bool? u_ = context?.Operators.ConceptInValueSet(s_, t_);
-			List<CodeableConcept> v_ = NoBetaBlockerOrdered.ReasonCode;
+			List<CodeableConcept> v_ = NoBetaBlockerOrdered?.ReasonCode;
 			CqlConcept w_(CodeableConcept @this)
 			{
 				CqlConcept ah_ = FHIRHelpers_4_3_000.ToConcept(@this);
@@ -578,7 +578,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(Arrhythmia);
 			bool? g_ = QICoreCommon_2_0_000.isActive(Arrhythmia);
 			bool? h_ = context?.Operators.And(f_, g_);
-			CodeableConcept i_ = Arrhythmia.VerificationStatus;
+			CodeableConcept i_ = Arrhythmia?.VerificationStatus;
 			CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 			CqlCode k_ = QICoreCommon_2_0_000.confirmed();
 			CqlConcept l_ = context?.Operators.ConvertCodeToConcept(k_);
@@ -606,7 +606,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(Hypotension);
 			bool? g_ = QICoreCommon_2_0_000.isActive(Hypotension);
 			bool? h_ = context?.Operators.And(f_, g_);
-			CodeableConcept i_ = Hypotension.VerificationStatus;
+			CodeableConcept i_ = Hypotension?.VerificationStatus;
 			CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 			CqlCode k_ = QICoreCommon_2_0_000.confirmed();
 			CqlConcept l_ = context?.Operators.ConvertCodeToConcept(k_);
@@ -634,7 +634,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(Asthma);
 			bool? g_ = QICoreCommon_2_0_000.isActive(Asthma);
 			bool? h_ = context?.Operators.And(f_, g_);
-			CodeableConcept i_ = Asthma.VerificationStatus;
+			CodeableConcept i_ = Asthma?.VerificationStatus;
 			CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 			CqlCode k_ = QICoreCommon_2_0_000.confirmed();
 			CqlConcept l_ = context?.Operators.ConvertCodeToConcept(k_);
@@ -665,7 +665,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			bool? i_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((BetaBlockerAllergyOrIntoleranceDiagnosis as object));
 			bool? j_ = QICoreCommon_2_0_000.isActive(BetaBlockerAllergyOrIntoleranceDiagnosis);
 			bool? k_ = context?.Operators.And(i_, j_);
-			CodeableConcept l_ = BetaBlockerAllergyOrIntoleranceDiagnosis.VerificationStatus;
+			CodeableConcept l_ = BetaBlockerAllergyOrIntoleranceDiagnosis?.VerificationStatus;
 			CqlConcept m_ = FHIRHelpers_4_3_000.ToConcept(l_);
 			CqlCode n_ = QICoreCommon_2_0_000.confirmed();
 			CqlConcept o_ = context?.Operators.ConvertCodeToConcept(n_);
@@ -693,7 +693,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(Bradycardia);
 			bool? g_ = QICoreCommon_2_0_000.isActive(Bradycardia);
 			bool? h_ = context?.Operators.And(f_, g_);
-			CodeableConcept i_ = Bradycardia.VerificationStatus;
+			CodeableConcept i_ = Bradycardia?.VerificationStatus;
 			CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 			CqlCode k_ = QICoreCommon_2_0_000.confirmed();
 			CqlConcept l_ = context?.Operators.ConvertCodeToConcept(k_);
@@ -723,7 +723,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		bool? g_(AllergyIntolerance BetaBlockerAllergyIntolerance)
 		{
 			bool? j_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((BetaBlockerAllergyIntolerance as object));
-			CodeableConcept k_ = BetaBlockerAllergyIntolerance.ClinicalStatus;
+			CodeableConcept k_ = BetaBlockerAllergyIntolerance?.ClinicalStatus;
 			CqlConcept l_ = FHIRHelpers_4_3_000.ToConcept(k_);
 			CqlConcept n_ = FHIRHelpers_4_3_000.ToConcept(k_);
 			CqlCode o_ = QICoreCommon_2_0_000.allergy_active();
@@ -753,7 +753,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(AtrioventricularBlock);
 			bool? g_ = QICoreCommon_2_0_000.isActive(AtrioventricularBlock);
 			bool? h_ = context?.Operators.And(f_, g_);
-			CodeableConcept i_ = AtrioventricularBlock.VerificationStatus;
+			CodeableConcept i_ = AtrioventricularBlock?.VerificationStatus;
 			CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 			CqlCode k_ = QICoreCommon_2_0_000.confirmed();
 			CqlConcept l_ = context?.Operators.ConvertCodeToConcept(k_);
@@ -781,7 +781,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			bool? f_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((CardiacPacerDiagnosis as object));
 			bool? g_ = QICoreCommon_2_0_000.isActive(CardiacPacerDiagnosis);
 			bool? h_ = context?.Operators.And(f_, g_);
-			CodeableConcept i_ = CardiacPacerDiagnosis.VerificationStatus;
+			CodeableConcept i_ = CardiacPacerDiagnosis?.VerificationStatus;
 			CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 			CqlCode k_ = QICoreCommon_2_0_000.confirmed();
 			CqlConcept l_ = context?.Operators.ConvertCodeToConcept(k_);
@@ -809,11 +809,11 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			IEnumerable<Encounter> h_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 			bool? i_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
 			{
-				DataType m_ = ImplantedCardiacPacer.Performed;
+				DataType m_ = ImplantedCardiacPacer?.Performed;
 				object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(n_);
 				CqlDateTime p_ = context?.Operators.Start(o_);
-				Period q_ = ModerateOrSevereLVSDHFOutpatientEncounter.Period;
+				Period q_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(q_);
 				CqlDateTime s_ = context?.Operators.End(r_);
 				bool? t_ = context?.Operators.Before(p_, s_, null);
@@ -830,8 +830,8 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		IEnumerable<Procedure> d_ = context?.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure ImplantedCardiacPacer)
 		{
-			Code<EventStatus> u_ = ImplantedCardiacPacer.StatusElement;
-			EventStatus? v_ = u_.Value;
+			Code<EventStatus> u_ = ImplantedCardiacPacer?.StatusElement;
+			EventStatus? v_ = u_?.Value;
 			string w_ = context?.Operators.Convert<string>(v_);
 			bool? x_ = context?.Operators.Equal(w_, "completed");
 
