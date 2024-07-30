@@ -200,6 +200,7 @@ partial class ConceptRef : IReferenceElement { }
 partial class ExpressionDef : IGetName { }
 partial class ExpressionRef : IReferenceElement { }
 partial class IdentifierRef : IReferenceElement { }
+
 partial class InstanceElement : IGetName { }
 partial class OperandDef : IGetName
 {

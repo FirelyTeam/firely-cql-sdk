@@ -123,7 +123,8 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
                 else
                 {
                     // We have the first overload, convert the ExpressionDef to a MethodGroup
-                    var newGroup = new MethodGroup(definition.Name, [existing]);
+                    // and add both methods
+                    var newGroup = new MethodGroup(definition.Name, [existing, expr]);
                     result[definition.Name] = (T)(object)newGroup;
                 }
             }

@@ -16,11 +16,17 @@ namespace Hl7.Cql.Elm
 {
     public static class ExtensionMethods
     {
-        internal static TypeSpecifier[] GetSignature(this IHasSignature hasSignature) =>
+        internal static TypeSpecifier[] BuildSignatureFromOperands(this IHasSignature hasSignature) =>
             hasSignature.Operands.Select(o =>
                                              o.GetTypeSpecifier() ??
-                                             throw new UntypedOperandError(hasSignature, o).ToException()
+                                             throw new UntypedOperandInFunctionError(hasSignature, o).ToException()
                                          ).ToArray();
+
+        internal static TypeSpecifier[] GetArgumentTypes(this FunctionRef funcRef) =>
+            (funcRef.operand ?? []).Select((o,i) =>
+                                             o.GetTypeSpecifier() ??
+                                             throw new UntypedOperandInFunctionRefError(funcRef, i).ToException()
+            ).ToArray();
 
         /// <summary>
         /// Compares two signatures for exact equality, based on the Equals of the TypeSpecifier.

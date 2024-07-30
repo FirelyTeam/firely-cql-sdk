@@ -23,6 +23,8 @@ internal class ElmPreprocessor
     public static void Process(Library library, LibrarySet librarySet)
     {
         var walker = new ElmTreeWalker(visit);
+        walker.Walk(library);
+        return;
 
         bool visit(object node)
         {
@@ -41,12 +43,14 @@ internal class ElmPreprocessor
                 return true;
             }
 
+            // If we cannot find the symbol at all, protest.
             if (!librarySet.TryResolveDefinition(library, fref, out ExpressionDef? expressionDef))
                 throw new UnresolvedReferenceError(library, fref).ToException();
 
             if (expressionDef is MethodGroup mg)
             {
-                var candidates = mg.GetOverloads(fref.signature ?? []);
+                var signature = fref.signature ?? fref.GetArgumentTypes();
+                var candidates = mg.GetOverloads(signature);
 
                 fref.resultTypeSpecifier = candidates.Count switch
                 {
@@ -57,6 +61,8 @@ internal class ElmPreprocessor
             }
             else
             {
+                // No overloads, just return the type of the expression,
+                // if signature and params don't match, we'll have semantic errors later.
                 fref.resultTypeSpecifier = expressionDef.GetTypeSpecifier();
             }
 

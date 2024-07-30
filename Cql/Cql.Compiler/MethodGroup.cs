@@ -34,7 +34,7 @@ internal class MethodGroup : ExpressionDef
         bool match(ExpressionDef candidate) =>
             candidate switch
             {
-                IHasSignature hasSig => hasSig.GetSignature().ExactlyMatches(signature),
+                IHasSignature hasSig => hasSig.BuildSignatureFromOperands().ExactlyMatches(signature),
                 _                    => signature.Length == 0
             };
     }

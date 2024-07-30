@@ -34,7 +34,12 @@ internal readonly record struct MissingAliasError(IGetLibraryName Source) : ICql
     public string GetMessage() => $"{Source.GetType().Name} did not have an alias. Source: {Source}";
 }
 
-internal readonly record struct UntypedOperandError(IFunctionElement Func, OperandDef Element) : ICqlError
+internal readonly record struct UntypedOperandInFunctionError(IFunctionElement Func, OperandDef Element) : ICqlError
 {
     public string GetMessage() => $"Function {Func.Name}' has a parameter '{Element.name}' without a type specifier.";
+}
+
+internal readonly record struct UntypedOperandInFunctionRefError(FunctionRef Func, int Index) : ICqlError
+{
+    public string GetMessage() => $"Function reference to {Func.name}', and parameter {Index} has no type specifier.";
 }
