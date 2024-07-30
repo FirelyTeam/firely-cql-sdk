@@ -194,16 +194,16 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		bool? b_(Encounter EncounterInpatient)
 		{
 			Patient d_ = this.Patient();
-			Date e_ = d_.BirthDateElement;
-			string f_ = e_.Value;
+			Date e_ = d_?.BirthDateElement;
+			string f_ = e_?.Value;
 			CqlDate g_ = context?.Operators.ConvertStringToDate(f_);
-			Period h_ = EncounterInpatient.Period;
+			Period h_ = EncounterInpatient?.Period;
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.ToInterval(h_);
 			CqlDateTime j_ = context?.Operators.Start(i_);
 			CqlDate k_ = context?.Operators.DateFrom(j_);
 			int? l_ = context?.Operators.CalculateAgeAt(g_, k_, null);
 			bool? m_ = context?.Operators.GreaterOrEqual(l_, 18);
-			Code<Encounter.EncounterStatus> n_ = EncounterInpatient.StatusElement;
+			Code<Encounter.EncounterStatus> n_ = EncounterInpatient?.StatusElement;
 			string o_ = FHIRHelpers_4_0_001.ToString(n_);
 			bool? p_ = context?.Operators.Equal(o_, "finished");
 			bool? q_ = context?.Operators.And(m_, p_);
@@ -234,7 +234,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<MedicationRequest> m_ = context?.Operators.Union<MedicationRequest>(j_, l_);
 			bool? n_(MedicationRequest Medications)
 			{
-				List<CodeableConcept> u_ = Medications.Category;
+				List<CodeableConcept> u_ = Medications?.Category;
 				bool? v_(CodeableConcept C)
 				{
 					CqlConcept y_ = FHIRHelpers_4_0_001.ToConcept(C);
@@ -253,16 +253,16 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<MedicationRequest> p_ = context?.Operators.Union<MedicationRequest>(h_, o_);
 			bool? q_(MedicationRequest OpioidOrBenzodiazepineDischargeMedication)
 			{
-				FhirDateTime ac_ = OpioidOrBenzodiazepineDischargeMedication.AuthoredOnElement;
+				FhirDateTime ac_ = OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement;
 				CqlDateTime ad_ = FHIRHelpers_4_0_001.ToDateTime(ac_);
-				Period ae_ = InpatientEncounter.Period;
+				Period ae_ = InpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_0_001.ToInterval(ae_);
 				bool? ag_ = context?.Operators.In<CqlDateTime>(ad_, af_, null);
-				Code<MedicationRequest.MedicationrequestStatus> ah_ = OpioidOrBenzodiazepineDischargeMedication.StatusElement;
+				Code<MedicationRequest.MedicationrequestStatus> ah_ = OpioidOrBenzodiazepineDischargeMedication?.StatusElement;
 				string ai_ = FHIRHelpers_4_0_001.ToString(ah_);
 				bool? aj_ = context?.Operators.Equal(ai_, "active");
 				bool? ak_ = context?.Operators.And(ag_, aj_);
-				Code<MedicationRequest.MedicationRequestIntent> al_ = OpioidOrBenzodiazepineDischargeMedication.IntentElement;
+				Code<MedicationRequest.MedicationRequestIntent> al_ = OpioidOrBenzodiazepineDischargeMedication?.IntentElement;
 				string am_ = FHIRHelpers_4_0_001.ToString(al_);
 				bool? an_ = context?.Operators.Equal(am_, "plan");
 				bool? ao_ = context?.Operators.And(ak_, an_);
@@ -349,9 +349,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<MedicationRequest> k_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(j_, null);
 			bool? l_(MedicationRequest Opioids)
 			{
-				FhirDateTime r_ = Opioids.AuthoredOnElement;
+				FhirDateTime r_ = Opioids?.AuthoredOnElement;
 				CqlDateTime s_ = FHIRHelpers_4_0_001.ToDateTime(r_);
-				Period t_ = InpatientEncounter.Period;
+				Period t_ = InpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_0_001.ToInterval(t_);
 				bool? v_ = context?.Operators.In<CqlDateTime>(s_, u_, null);
 
@@ -360,7 +360,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<MedicationRequest> m_ = context?.Operators.Where<MedicationRequest>(k_, l_);
 			object n_(MedicationRequest Opioids)
 			{
-				DataType w_ = Opioids.Medication;
+				DataType w_ = Opioids?.Medication;
 
 				return w_;
 			};
@@ -377,9 +377,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<MedicationRequest> y_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
 			bool? z_(MedicationRequest OpioidsDischarge)
 			{
-				FhirDateTime ad_ = OpioidsDischarge.AuthoredOnElement;
+				FhirDateTime ad_ = OpioidsDischarge?.AuthoredOnElement;
 				CqlDateTime ae_ = FHIRHelpers_4_0_001.ToDateTime(ad_);
-				Period af_ = InpatientEncounter.Period;
+				Period af_ = InpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_0_001.ToInterval(af_);
 				bool? ah_ = context?.Operators.In<CqlDateTime>(ae_, ag_, null);
 
@@ -399,9 +399,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<MedicationRequest> aj_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(ai_, null);
 			bool? ak_(MedicationRequest BenzodiazepinesDischarge)
 			{
-				FhirDateTime ao_ = BenzodiazepinesDischarge.AuthoredOnElement;
+				FhirDateTime ao_ = BenzodiazepinesDischarge?.AuthoredOnElement;
 				CqlDateTime ap_ = FHIRHelpers_4_0_001.ToDateTime(ao_);
-				Period aq_ = InpatientEncounter.Period;
+				Period aq_ = InpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.ToInterval(aq_);
 				bool? as_ = context?.Operators.In<CqlDateTime>(ap_, ar_, null);
 
@@ -434,7 +434,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			bool? h_(Condition Cancer)
 			{
 				CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Cancer);
-				Period ac_ = InpatientEncounter.Period;
+				Period ac_ = InpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_0_001.ToInterval(ac_);
 				bool? ae_ = context?.Operators.Overlaps(ab_, ad_, null);
 
@@ -446,12 +446,12 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<ServiceRequest> l_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(k_, null);
 			bool? m_(ServiceRequest PalliativeOrHospiceCareOrder)
 			{
-				FhirDateTime af_ = PalliativeOrHospiceCareOrder.AuthoredOnElement;
+				FhirDateTime af_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
 				CqlDateTime ag_ = FHIRHelpers_4_0_001.ToDateTime(af_);
-				Period ah_ = InpatientEncounter.Period;
+				Period ah_ = InpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_0_001.ToInterval(ah_);
 				bool? aj_ = context?.Operators.In<CqlDateTime>(ag_, ai_, null);
-				Code<RequestIntent> ak_ = PalliativeOrHospiceCareOrder.IntentElement;
+				Code<RequestIntent> ak_ = PalliativeOrHospiceCareOrder?.IntentElement;
 				string al_ = FHIRHelpers_4_0_001.ToString(ak_);
 				bool? am_ = context?.Operators.Equal(al_, "order");
 				bool? an_ = context?.Operators.And(aj_, am_);
@@ -464,9 +464,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<Procedure> r_ = context?.Operators.RetrieveByValueSet<Procedure>(k_, null);
 			bool? s_(Procedure PalliativeOrHospiceCarePerformed)
 			{
-				DataType ao_ = PalliativeOrHospiceCarePerformed.Performed;
+				DataType ao_ = PalliativeOrHospiceCarePerformed?.Performed;
 				CqlInterval<CqlDateTime> ap_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ao_);
-				Period aq_ = InpatientEncounter.Period;
+				Period aq_ = InpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.ToInterval(aq_);
 				bool? as_ = context?.Operators.Overlaps(ap_, ar_, null);
 
@@ -478,17 +478,17 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<Encounter> w_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
 			bool? x_(Encounter InpatientEncounter)
 			{
-				Encounter.HospitalizationComponent at_ = InpatientEncounter.Hospitalization;
-				CodeableConcept au_ = at_.DischargeDisposition;
+				Encounter.HospitalizationComponent at_ = InpatientEncounter?.Hospitalization;
+				CodeableConcept au_ = at_?.DischargeDisposition;
 				CqlConcept av_ = FHIRHelpers_4_0_001.ToConcept(au_);
 				CqlValueSet aw_ = this.Discharge_To_Acute_Care_Facility();
 				bool? ax_ = context?.Operators.ConceptInValueSet(av_, aw_);
-				CodeableConcept az_ = at_.DischargeDisposition;
+				CodeableConcept az_ = at_?.DischargeDisposition;
 				CqlConcept ba_ = FHIRHelpers_4_0_001.ToConcept(az_);
 				CqlValueSet bb_ = this.Hospice_Care_Referral_or_Admission();
 				bool? bc_ = context?.Operators.ConceptInValueSet(ba_, bb_);
 				bool? bd_ = context?.Operators.Or(ax_, bc_);
-				CodeableConcept bf_ = at_.DischargeDisposition;
+				CodeableConcept bf_ = at_?.DischargeDisposition;
 				CqlConcept bg_ = FHIRHelpers_4_0_001.ToConcept(bf_);
 				CqlValueSet bh_ = this.Patient_Expired();
 				bool? bi_ = context?.Operators.ConceptInValueSet(bg_, bh_);

@@ -278,10 +278,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		bool? x_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> z_ = this.Measurement_Period();
-			Period aa_ = ValidEncounter.Period;
+			Period aa_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((aa_ as object));
 			bool? ac_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, null);
-			Code<Encounter.EncounterStatus> ad_ = ValidEncounter.StatusElement;
+			Code<Encounter.EncounterStatus> ad_ = ValidEncounter?.StatusElement;
 			string ae_ = FHIRHelpers_4_0_001.ToString(ad_);
 			bool? af_ = context?.Operators.Equal(ae_, "finished");
 			bool? ag_ = context?.Operators.And(ac_, af_);
@@ -300,16 +300,16 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
 		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context?.Operators.GreaterOrEqual(h_, 6);
-		Date k_ = a_.BirthDateElement;
-		string l_ = k_.Value;
+		Date k_ = a_?.BirthDateElement;
+		string l_ = k_?.Value;
 		CqlDate m_ = context?.Operators.ConvertStringToDate(l_);
 		CqlDateTime o_ = context?.Operators.Start(e_);
 		CqlDate p_ = context?.Operators.DateFrom(o_);
@@ -352,16 +352,16 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	private bool? Stratification_1_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
 		CqlDate g_ = context?.Operators.DateFrom(f_);
 		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		bool? i_ = context?.Operators.GreaterOrEqual(h_, 6);
-		Date k_ = a_.BirthDateElement;
-		string l_ = k_.Value;
+		Date k_ = a_?.BirthDateElement;
+		string l_ = k_?.Value;
 		CqlDate m_ = context?.Operators.ConvertStringToDate(l_);
 		CqlDateTime o_ = context?.Operators.Start(e_);
 		CqlDate p_ = context?.Operators.DateFrom(o_);
@@ -379,8 +379,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	private bool? Stratification_2_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -399,8 +399,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	private bool? Stratification_3_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -423,10 +423,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		bool? c_(Procedure FluorideApplication)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
-			DataType g_ = FluorideApplication.Performed;
+			DataType g_ = FluorideApplication?.Performed;
 			CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(g_);
 			bool? i_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, null);
-			Code<EventStatus> j_ = FluorideApplication.StatusElement;
+			Code<EventStatus> j_ = FluorideApplication?.StatusElement;
 			string k_ = FHIRHelpers_4_0_001.ToString(j_);
 			bool? l_ = context?.Operators.Equal(k_, "completed");
 			bool? m_ = context?.Operators.And(i_, l_);

@@ -109,8 +109,8 @@ public class DevDays_2023_0_0
 		IEnumerable<Condition> a_ = context?.Operators.RetrieveByValueSet<Condition>(null, null);
 		bool? b_(Condition c)
 		{
-			CodeableConcept d_ = c.Code;
-			List<Coding> e_ = d_.Coding;
+			CodeableConcept d_ = c?.Code;
+			List<Coding> e_ = d_?.Coding;
 			bool? f_(Coding coding)
 			{
 				CqlCode n_ = FHIRHelpers_4_0_001.ToCode(coding);
@@ -121,7 +121,7 @@ public class DevDays_2023_0_0
 			};
 			IEnumerable<Coding> g_ = context?.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context?.Operators.Exists<Coding>(g_);
-			DataType i_ = c.Onset;
+			DataType i_ = c?.Onset;
 			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
 			bool? l_ = context?.Operators.In<CqlDateTime>(j_, k_, null);
@@ -143,8 +143,8 @@ public class DevDays_2023_0_0
 		IEnumerable<Condition> a_ = context?.Operators.RetrieveByValueSet<Condition>(null, null);
 		bool? b_(Condition c)
 		{
-			CodeableConcept d_ = c.Code;
-			List<Coding> e_ = d_.Coding;
+			CodeableConcept d_ = c?.Code;
+			List<Coding> e_ = d_?.Coding;
 			bool? f_(Coding coding)
 			{
 				CqlCode n_ = FHIRHelpers_4_0_001.ToCode(coding);
@@ -155,7 +155,7 @@ public class DevDays_2023_0_0
 			};
 			IEnumerable<Coding> g_ = context?.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context?.Operators.Exists<Coding>(g_);
-			DataType i_ = c.Onset;
+			DataType i_ = c?.Onset;
 			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
 			bool? l_ = context?.Operators.In<CqlDateTime>(j_, k_, null);

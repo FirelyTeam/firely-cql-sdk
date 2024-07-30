@@ -64,13 +64,13 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim MedicalClaim)
 		{
-			CodeableConcept c_ = MedicalClaim.Type;
+			CodeableConcept c_ = MedicalClaim?.Type;
 			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			CqlCode[] e_ = d_.codes;
+			CqlCode[] e_ = d_?.codes;
 			CqlCode f_ = NCQATerminology_1_0_0.Professional();
 			bool? g_ = context?.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 			CqlConcept i_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			CqlCode[] j_ = i_.codes;
+			CqlCode[] j_ = i_?.codes;
 			CqlCode k_ = NCQATerminology_1_0_0.Institutional();
 			bool? l_ = context?.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
 			bool? m_ = context?.Operators.Or(g_, l_);
@@ -87,9 +87,9 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim PharmacyClaim)
 		{
-			CodeableConcept c_ = PharmacyClaim.Type;
+			CodeableConcept c_ = PharmacyClaim?.Type;
 			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			CqlCode[] e_ = d_.codes;
+			CqlCode[] e_ = d_?.codes;
 			CqlCode f_ = NCQATerminology_1_0_0.Pharmacy();
 			bool? g_ = context?.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
@@ -105,13 +105,13 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(ClaimResponse MedicalResponse)
 		{
-			CodeableConcept c_ = MedicalResponse.Type;
+			CodeableConcept c_ = MedicalResponse?.Type;
 			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			CqlCode[] e_ = d_.codes;
+			CqlCode[] e_ = d_?.codes;
 			CqlCode f_ = NCQATerminology_1_0_0.Professional();
 			bool? g_ = context?.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 			CqlConcept i_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			CqlCode[] j_ = i_.codes;
+			CqlCode[] j_ = i_?.codes;
 			CqlCode k_ = NCQATerminology_1_0_0.Institutional();
 			bool? l_ = context?.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
 			bool? m_ = context?.Operators.Or(g_, l_);
@@ -128,9 +128,9 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(ClaimResponse PharmacyResponse)
 		{
-			CodeableConcept c_ = PharmacyResponse.Type;
+			CodeableConcept c_ = PharmacyResponse?.Type;
 			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
-			CqlCode[] e_ = d_.codes;
+			CqlCode[] e_ = d_?.codes;
 			CqlCode f_ = NCQATerminology_1_0_0.Pharmacy();
 			bool? g_ = context?.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
@@ -147,14 +147,14 @@ public class NCQAClaims_1_0_0
 		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode p)
 		{
-			string k_ = p.code;
+			string k_ = p?.code;
 
 			return k_;
 		};
 		IEnumerable<string> c_ = context?.Operators.Select<CqlCode, string>(ProductOrServiceValueSet, b_);
 		string d_(CqlCode pos)
 		{
-			string l_ = pos.code;
+			string l_ = pos?.code;
 
 			return l_;
 		};
@@ -176,15 +176,15 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						List<Claim.ItemComponent> x_ = ClaimofInterest.Item;
+						List<Claim.ItemComponent> x_ = ClaimofInterest?.Item;
 						bool? y_(Claim.ItemComponent ItemOnLine)
 						{
-							CodeableConcept aa_ = ItemOnLine.ProductOrService;
+							CodeableConcept aa_ = ItemOnLine?.ProductOrService;
 							CqlConcept ab_ = FHIRHelpers_4_0_001.ToConcept(aa_);
-							CqlCode[] ac_ = ab_.codes;
+							CqlCode[] ac_ = ab_?.codes;
 							bool? ad_(CqlCode LineCode)
 							{
-								string an_ = LineCode.code;
+								string an_ = LineCode?.code;
 								IEnumerable<string> ao_ = ClaimWithPosCode?.ProceduresAsStrings;
 								bool? ap_ = context?.Operators.In<string>(an_, ao_);
 
@@ -192,12 +192,12 @@ public class NCQAClaims_1_0_0
 							};
 							IEnumerable<CqlCode> ae_ = context?.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ac_, ad_);
 							bool? af_ = context?.Operators.Exists<CqlCode>(ae_);
-							DataType ag_ = ItemOnLine.Location;
+							DataType ag_ = ItemOnLine?.Location;
 							CqlConcept ah_ = FHIRHelpers_4_0_001.ToConcept((ag_ as CodeableConcept));
-							CqlCode[] ai_ = ah_.codes;
+							CqlCode[] ai_ = ah_?.codes;
 							bool? aj_(CqlCode PosCode)
 							{
-								string aq_ = PosCode.code;
+								string aq_ = PosCode?.code;
 								IEnumerable<string> ar_ = ClaimWithPosCode?.POSAsString;
 								bool? as_ = context?.Operators.In<string>(aq_, ar_);
 
@@ -235,7 +235,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ItemComponent> ay_ = LineItemDefinition?.LineItems;
 							bool? az_(Claim.ItemComponent @this)
 							{
-								DataType bg_ = @this.Serviced;
+								DataType bg_ = @this?.Serviced;
 								bool? bh_ = context?.Operators.Not((bool?)(bg_ is null));
 
 								return bh_;
@@ -243,7 +243,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ItemComponent> ba_ = context?.Operators.Where<Claim.ItemComponent>(ay_, az_);
 							DataType bb_(Claim.ItemComponent @this)
 							{
-								DataType bi_ = @this.Serviced;
+								DataType bi_ = @this?.Serviced;
 
 								return bi_;
 							};
@@ -295,7 +295,7 @@ public class NCQAClaims_1_0_0
 		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode p)
 		{
-			string i_ = p.code;
+			string i_ = p?.code;
 
 			return i_;
 		};
@@ -317,15 +317,15 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						List<Claim.ItemComponent> u_ = ClaimofInterest.Item;
+						List<Claim.ItemComponent> u_ = ClaimofInterest?.Item;
 						bool? v_(Claim.ItemComponent ItemOnLine)
 						{
-							CodeableConcept x_ = ItemOnLine.ProductOrService;
+							CodeableConcept x_ = ItemOnLine?.ProductOrService;
 							CqlConcept y_ = FHIRHelpers_4_0_001.ToConcept(x_);
-							CqlCode[] z_ = y_.codes;
+							CqlCode[] z_ = y_?.codes;
 							bool? aa_(CqlCode LineCode)
 							{
-								string ar_ = LineCode.code;
+								string ar_ = LineCode?.code;
 								IEnumerable<string> as_ = ClaimWithProcedure?.ProceduresAsStrings;
 								bool? at_ = context?.Operators.In<string>(ar_, as_);
 
@@ -333,10 +333,10 @@ public class NCQAClaims_1_0_0
 							};
 							IEnumerable<CqlCode> ab_ = context?.Operators.Where<CqlCode>((IEnumerable<CqlCode>)z_, aa_);
 							bool? ac_ = context?.Operators.Exists<CqlCode>(ab_);
-							List<Claim.ProcedureComponent> ad_ = ClaimofInterest.Procedure;
+							List<Claim.ProcedureComponent> ad_ = ClaimofInterest?.Procedure;
 							bool? ae_(Claim.ProcedureComponent @this)
 							{
-								DataType au_ = @this.Procedure;
+								DataType au_ = @this?.Procedure;
 								bool? av_ = context?.Operators.Not((bool?)(au_ is null));
 
 								return av_;
@@ -344,7 +344,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ProcedureComponent> af_ = context?.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)ad_, ae_);
 							DataType ag_(Claim.ProcedureComponent @this)
 							{
-								DataType aw_ = @this.Procedure;
+								DataType aw_ = @this?.Procedure;
 
 								return aw_;
 							};
@@ -368,7 +368,7 @@ public class NCQAClaims_1_0_0
 							bool? an_(object HeaderCode)
 							{
 								Code ba_ = context?.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-								string bb_ = ba_.Value;
+								string bb_ = ba_?.Value;
 								IEnumerable<string> bc_ = ClaimWithProcedure?.ProceduresAsStrings;
 								bool? bd_ = context?.Operators.In<string>(bb_, bc_);
 
@@ -406,7 +406,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ItemComponent> bj_ = LineItemDefinition?.LineItems;
 							bool? bk_(Claim.ItemComponent @this)
 							{
-								DataType br_ = @this.Serviced;
+								DataType br_ = @this?.Serviced;
 								bool? bs_ = context?.Operators.Not((bool?)(br_ is null));
 
 								return bs_;
@@ -414,7 +414,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ItemComponent> bl_ = context?.Operators.Where<Claim.ItemComponent>(bj_, bk_);
 							DataType bm_(Claim.ItemComponent @this)
 							{
-								DataType bt_ = @this.Serviced;
+								DataType bt_ = @this?.Serviced;
 
 								return bt_;
 							};
@@ -466,7 +466,7 @@ public class NCQAClaims_1_0_0
 		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode d)
 		{
-			string i_ = d.code;
+			string i_ = d?.code;
 
 			return i_;
 		};
@@ -488,10 +488,10 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> p_ = ClaimWithDiagnosis?.MedicalClaim;
 					bool? q_(Claim DiagnosisLine)
 					{
-						List<Claim.DiagnosisComponent> s_ = DiagnosisLine.Diagnosis;
+						List<Claim.DiagnosisComponent> s_ = DiagnosisLine?.Diagnosis;
 						bool? t_(Claim.DiagnosisComponent @this)
 						{
-							DataType af_ = @this.Diagnosis;
+							DataType af_ = @this?.Diagnosis;
 							bool? ag_ = context?.Operators.Not((bool?)(af_ is null));
 
 							return ag_;
@@ -499,7 +499,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.DiagnosisComponent> u_ = context?.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)s_, t_);
 						DataType v_(Claim.DiagnosisComponent @this)
 						{
-							DataType ah_ = @this.Diagnosis;
+							DataType ah_ = @this?.Diagnosis;
 
 							return ah_;
 						};
@@ -523,7 +523,7 @@ public class NCQAClaims_1_0_0
 						bool? ac_(object HeaderCode)
 						{
 							Code al_ = context?.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-							string am_ = al_.Value;
+							string am_ = al_?.Value;
 							IEnumerable<string> an_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
 							bool? ao_ = context?.Operators.In<string>(am_, an_);
 
@@ -559,7 +559,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim> ax_ = HeaderDefinition?.DiagnosisItems;
 						bool? az_(Claim @this)
 						{
-							List<Claim.ItemComponent> bh_ = @this.Item;
+							List<Claim.ItemComponent> bh_ = @this?.Item;
 							bool? bi_ = context?.Operators.Not((bool?)(bh_ is null));
 
 							return bi_;
@@ -567,7 +567,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim> ba_ = context?.Operators.Where<Claim>(ax_, az_);
 						List<Claim.ItemComponent> bb_(Claim @this)
 						{
-							List<Claim.ItemComponent> bj_ = @this.Item;
+							List<Claim.ItemComponent> bj_ = @this?.Item;
 
 							return bj_;
 						};
@@ -575,7 +575,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.ItemComponent> bd_ = context?.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)bc_);
 						CqlInterval<CqlDateTime> be_(Claim.ItemComponent NormalDate)
 						{
-							DataType bk_ = NormalDate.Serviced;
+							DataType bk_ = NormalDate?.Serviced;
 							CqlInterval<CqlDateTime> bl_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bk_);
 
 							return bl_;
@@ -621,7 +621,7 @@ public class NCQAClaims_1_0_0
 		IEnumerable<Claim> a_ = this.Pharmacy_Claims(claim);
 		string b_(CqlCode p)
 		{
-			string i_ = p.code;
+			string i_ = p?.code;
 
 			return i_;
 		};
@@ -635,15 +635,15 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim> j_ = ClaimWithMedication?.PharmacyClaim;
 			(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? k_(Claim Pharmacy)
 			{
-				List<Claim.ItemComponent> o_ = Pharmacy.Item;
+				List<Claim.ItemComponent> o_ = Pharmacy?.Item;
 				bool? p_(Claim.ItemComponent ItemOnLine)
 				{
-					CodeableConcept w_ = ItemOnLine.ProductOrService;
+					CodeableConcept w_ = ItemOnLine?.ProductOrService;
 					CqlConcept x_ = FHIRHelpers_4_0_001.ToConcept(w_);
-					CqlCode[] y_ = x_.codes;
+					CqlCode[] y_ = x_?.codes;
 					bool? z_(CqlCode LineCode)
 					{
-						string ac_ = LineCode.code;
+						string ac_ = LineCode?.code;
 						IEnumerable<string> ad_ = ClaimWithMedication?.MedicationsAsStrings;
 						bool? ae_ = context?.Operators.In<string>(ac_, ad_);
 
@@ -667,15 +667,15 @@ public class NCQAClaims_1_0_0
 					];
 					(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? ah_(Claim ClaimLines)
 					{
-						List<Claim.ItemComponent> ak_ = ClaimLines.Item;
+						List<Claim.ItemComponent> ak_ = ClaimLines?.Item;
 						bool? al_(Claim.ItemComponent i)
 						{
-							CodeableConcept au_ = i.ProductOrService;
+							CodeableConcept au_ = i?.ProductOrService;
 							CqlConcept av_ = FHIRHelpers_4_0_001.ToConcept(au_);
-							CqlCode[] aw_ = av_.codes;
+							CqlCode[] aw_ = av_?.codes;
 							bool? ax_(CqlCode LineCode)
 							{
-								string ba_ = LineCode.code;
+								string ba_ = LineCode?.code;
 								IEnumerable<string> bb_ = ClaimWithMedication?.MedicationsAsStrings;
 								bool? bc_ = context?.Operators.In<string>(ba_, bb_);
 
@@ -693,7 +693,7 @@ public class NCQAClaims_1_0_0
 							{
 								bool bf_()
 								{
-									Quantity bg_ = i.Quantity;
+									Quantity bg_ = i?.Quantity;
 									bool? bh_ = context?.Operators.Not((bool?)(bg_ is null));
 
 									return (bh_ ?? false);
@@ -704,20 +704,20 @@ public class NCQAClaims_1_0_0
 									{
 										bool bj_()
 										{
-											DataType bk_ = i.Serviced;
+											DataType bk_ = i?.Serviced;
 											bool bl_ = bk_ is Period;
 
 											return bl_;
 										};
 										if (bj_())
 										{
-											DataType bm_ = i.Serviced;
+											DataType bm_ = i?.Serviced;
 											CqlInterval<CqlDateTime> bn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bm_);
 											CqlDateTime bo_ = context?.Operators.Start(bn_);
 											CqlInterval<CqlDateTime> bq_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bm_);
 											CqlDateTime br_ = context?.Operators.Start(bq_);
-											Quantity bs_ = i.Quantity;
-											FhirDecimal bt_ = bs_.ValueElement;
+											Quantity bs_ = i?.Quantity;
+											FhirDecimal bt_ = bs_?.ValueElement;
 											decimal? bu_ = FHIRHelpers_4_0_001.ToDecimal(bt_);
 											CqlDateTime bv_ = context?.Operators.Add(br_, new CqlQuantity(bu_, "day"));
 											CqlQuantity bw_ = context?.Operators.Quantity(1m, "day");
@@ -728,43 +728,43 @@ public class NCQAClaims_1_0_0
 										}
 										else
 										{
-											DataType bz_ = i.Serviced;
+											DataType bz_ = i?.Serviced;
 											CqlDate ca_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
 											CqlDate cc_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											Quantity cd_ = i.Quantity;
-											FhirDecimal ce_ = cd_.ValueElement;
+											Quantity cd_ = i?.Quantity;
+											FhirDecimal ce_ = cd_?.ValueElement;
 											decimal? cf_ = FHIRHelpers_4_0_001.ToDecimal(ce_);
 											CqlDate cg_ = context?.Operators.Add(cc_, new CqlQuantity(cf_, "day"));
 											CqlQuantity ch_ = context?.Operators.Quantity(1m, "day");
 											CqlDate ci_ = context?.Operators.Subtract(cg_, ch_);
 											CqlInterval<CqlDate> cj_ = context?.Operators.Interval(ca_, ci_, true, true);
-											CqlDate ck_ = cj_.low;
+											CqlDate ck_ = cj_?.low;
 											CqlDateTime cl_ = context?.Operators.ConvertDateToDateTime(ck_);
 											CqlDate cn_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
 											CqlDate cp_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											FhirDecimal cr_ = cd_.ValueElement;
+											FhirDecimal cr_ = cd_?.ValueElement;
 											decimal? cs_ = FHIRHelpers_4_0_001.ToDecimal(cr_);
 											CqlDate ct_ = context?.Operators.Add(cp_, new CqlQuantity(cs_, "day"));
 											CqlDate cv_ = context?.Operators.Subtract(ct_, ch_);
 											CqlInterval<CqlDate> cw_ = context?.Operators.Interval(cn_, cv_, true, true);
-											CqlDate cx_ = cw_.high;
+											CqlDate cx_ = cw_?.high;
 											CqlDateTime cy_ = context?.Operators.ConvertDateToDateTime(cx_);
 											CqlDate da_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
 											CqlDate dc_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											FhirDecimal de_ = cd_.ValueElement;
+											FhirDecimal de_ = cd_?.ValueElement;
 											decimal? df_ = FHIRHelpers_4_0_001.ToDecimal(de_);
 											CqlDate dg_ = context?.Operators.Add(dc_, new CqlQuantity(df_, "day"));
 											CqlDate di_ = context?.Operators.Subtract(dg_, ch_);
 											CqlInterval<CqlDate> dj_ = context?.Operators.Interval(da_, di_, true, true);
-											bool? dk_ = dj_.lowClosed;
+											bool? dk_ = dj_?.lowClosed;
 											CqlDate dm_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
 											CqlDate do_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											FhirDecimal dq_ = cd_.ValueElement;
+											FhirDecimal dq_ = cd_?.ValueElement;
 											decimal? dr_ = FHIRHelpers_4_0_001.ToDecimal(dq_);
 											CqlDate ds_ = context?.Operators.Add(do_, new CqlQuantity(dr_, "day"));
 											CqlDate du_ = context?.Operators.Subtract(ds_, ch_);
 											CqlInterval<CqlDate> dv_ = context?.Operators.Interval(dm_, du_, true, true);
-											bool? dw_ = dv_.highClosed;
+											bool? dw_ = dv_?.highClosed;
 											CqlInterval<CqlDateTime> dx_ = context?.Operators.Interval(cl_, cy_, dk_, dw_);
 
 											return dx_;
@@ -804,7 +804,7 @@ public class NCQAClaims_1_0_0
 									IEnumerable<Claim.ItemComponent> ed_ = LineItemDefinition?.LineItems;
 									bool? ef_(Claim.ItemComponent @this)
 									{
-										DataType ep_ = @this.Serviced;
+										DataType ep_ = @this?.Serviced;
 										bool? eq_ = context?.Operators.Not((bool?)(ep_ is null));
 
 										return eq_;
@@ -812,7 +812,7 @@ public class NCQAClaims_1_0_0
 									IEnumerable<Claim.ItemComponent> eg_ = context?.Operators.Where<Claim.ItemComponent>(ed_, ef_);
 									DataType eh_(Claim.ItemComponent @this)
 									{
-										DataType er_ = @this.Serviced;
+										DataType er_ = @this?.Serviced;
 
 										return er_;
 									};
@@ -882,14 +882,14 @@ public class NCQAClaims_1_0_0
 		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode d)
 		{
-			string k_ = d.code;
+			string k_ = d?.code;
 
 			return k_;
 		};
 		IEnumerable<string> c_ = context?.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
 		string d_(CqlCode p)
 		{
-			string l_ = p.code;
+			string l_ = p?.code;
 
 			return l_;
 		};
@@ -911,10 +911,10 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> s_ = ClaimWithDiagnosis?.MedicalClaim;
 					bool? t_(Claim DiagnosisLine)
 					{
-						List<Claim.DiagnosisComponent> v_ = DiagnosisLine.Diagnosis;
+						List<Claim.DiagnosisComponent> v_ = DiagnosisLine?.Diagnosis;
 						bool? w_(Claim.DiagnosisComponent @this)
 						{
-							DataType ai_ = @this.Diagnosis;
+							DataType ai_ = @this?.Diagnosis;
 							bool? aj_ = context?.Operators.Not((bool?)(ai_ is null));
 
 							return aj_;
@@ -922,7 +922,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.DiagnosisComponent> x_ = context?.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)v_, w_);
 						DataType y_(Claim.DiagnosisComponent @this)
 						{
-							DataType ak_ = @this.Diagnosis;
+							DataType ak_ = @this?.Diagnosis;
 
 							return ak_;
 						};
@@ -946,7 +946,7 @@ public class NCQAClaims_1_0_0
 						bool? af_(object HeaderCode)
 						{
 							Code ao_ = context?.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-							string ap_ = ao_.Value;
+							string ap_ = ao_?.Value;
 							IEnumerable<string> aq_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
 							bool? ar_ = context?.Operators.In<string>(ap_, aq_);
 
@@ -984,10 +984,10 @@ public class NCQAClaims_1_0_0
 							];
 							bool? be_(Claim ItemOnLine)
 							{
-								List<Claim.ProcedureComponent> bh_ = ItemOnLine.Procedure;
+								List<Claim.ProcedureComponent> bh_ = ItemOnLine?.Procedure;
 								bool? bi_(Claim.ProcedureComponent @this)
 								{
-									DataType ci_ = @this.Procedure;
+									DataType ci_ = @this?.Procedure;
 									bool? cj_ = context?.Operators.Not((bool?)(ci_ is null));
 
 									return cj_;
@@ -995,7 +995,7 @@ public class NCQAClaims_1_0_0
 								IEnumerable<Claim.ProcedureComponent> bj_ = context?.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)bh_, bi_);
 								DataType bk_(Claim.ProcedureComponent @this)
 								{
-									DataType ck_ = @this.Procedure;
+									DataType ck_ = @this?.Procedure;
 
 									return ck_;
 								};
@@ -1019,7 +1019,7 @@ public class NCQAClaims_1_0_0
 								bool? br_(object ProcedureHeaderCode)
 								{
 									Code co_ = context?.Operators.LateBoundProperty<Code>(ProcedureHeaderCode, "code");
-									string cp_ = co_.Value;
+									string cp_ = co_?.Value;
 									IEnumerable<string> cq_ = ClaimWithDiagnosis?.ProceduresAsStrings;
 									bool? cr_ = context?.Operators.In<string>(cp_, cq_);
 
@@ -1027,10 +1027,10 @@ public class NCQAClaims_1_0_0
 								};
 								IEnumerable<object> bs_ = context?.Operators.Where<object>(bq_, br_);
 								bool? bt_ = context?.Operators.Exists<object>(bs_);
-								List<Claim.ItemComponent> bu_ = ItemOnLine.Item;
+								List<Claim.ItemComponent> bu_ = ItemOnLine?.Item;
 								bool? bv_(Claim.ItemComponent @this)
 								{
-									CodeableConcept cs_ = @this.ProductOrService;
+									CodeableConcept cs_ = @this?.ProductOrService;
 									bool? ct_ = context?.Operators.Not((bool?)(cs_ is null));
 
 									return ct_;
@@ -1038,14 +1038,14 @@ public class NCQAClaims_1_0_0
 								IEnumerable<Claim.ItemComponent> bw_ = context?.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bu_, bv_);
 								CodeableConcept bx_(Claim.ItemComponent @this)
 								{
-									CodeableConcept cu_ = @this.ProductOrService;
+									CodeableConcept cu_ = @this?.ProductOrService;
 
 									return cu_;
 								};
 								IEnumerable<CodeableConcept> by_ = context?.Operators.Select<Claim.ItemComponent, CodeableConcept>(bw_, bx_);
 								bool? bz_(CodeableConcept @this)
 								{
-									List<Coding> cv_ = @this.Coding;
+									List<Coding> cv_ = @this?.Coding;
 									bool? cw_ = context?.Operators.Not((bool?)(cv_ is null));
 
 									return cw_;
@@ -1053,7 +1053,7 @@ public class NCQAClaims_1_0_0
 								IEnumerable<CodeableConcept> ca_ = context?.Operators.Where<CodeableConcept>(by_, bz_);
 								List<Coding> cb_(CodeableConcept @this)
 								{
-									List<Coding> cx_ = @this.Coding;
+									List<Coding> cx_ = @this?.Coding;
 
 									return cx_;
 								};
@@ -1061,8 +1061,8 @@ public class NCQAClaims_1_0_0
 								IEnumerable<Coding> cd_ = context?.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)cc_);
 								bool? ce_(Coding LineCode)
 								{
-									Code cy_ = LineCode.CodeElement;
-									string cz_ = cy_.Value;
+									Code cy_ = LineCode?.CodeElement;
+									string cz_ = cy_?.Value;
 									IEnumerable<string> da_ = ClaimWithDiagnosis?.ProceduresAsStrings;
 									bool? db_ = context?.Operators.In<string>(cz_, da_);
 
@@ -1098,10 +1098,10 @@ public class NCQAClaims_1_0_0
 							if (dd_())
 							{
 								Claim dg_ = HeaderDefinition?.ProcedureItems;
-								List<Claim.ItemComponent> di_ = dg_.Item;
+								List<Claim.ItemComponent> di_ = dg_?.Item;
 								CqlInterval<CqlDateTime> dj_(Claim.ItemComponent NormalDate)
 								{
-									DataType dm_ = NormalDate.Serviced;
+									DataType dm_ = NormalDate?.Serviced;
 									CqlInterval<CqlDateTime> dn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(dm_);
 
 									return dn_;
@@ -1152,14 +1152,14 @@ public class NCQAClaims_1_0_0
 		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode d)
 		{
-			string k_ = d.code;
+			string k_ = d?.code;
 
 			return k_;
 		};
 		IEnumerable<string> c_ = context?.Operators.Select<CqlCode, string>(DiagnosisValueSet, b_);
 		string d_(CqlCode p)
 		{
-			string l_ = p.code;
+			string l_ = p?.code;
 
 			return l_;
 		};
@@ -1186,10 +1186,10 @@ public class NCQAClaims_1_0_0
 						];
 						bool? y_(Claim ItemOnLine)
 						{
-							List<Claim.ItemComponent> ab_ = ItemOnLine.Item;
+							List<Claim.ItemComponent> ab_ = ItemOnLine?.Item;
 							bool? ac_(Claim.ItemComponent @this)
 							{
-								CodeableConcept bc_ = @this.ProductOrService;
+								CodeableConcept bc_ = @this?.ProductOrService;
 								bool? bd_ = context?.Operators.Not((bool?)(bc_ is null));
 
 								return bd_;
@@ -1197,14 +1197,14 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ItemComponent> ad_ = context?.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ab_, ac_);
 							CodeableConcept ae_(Claim.ItemComponent @this)
 							{
-								CodeableConcept be_ = @this.ProductOrService;
+								CodeableConcept be_ = @this?.ProductOrService;
 
 								return be_;
 							};
 							IEnumerable<CodeableConcept> af_ = context?.Operators.Select<Claim.ItemComponent, CodeableConcept>(ad_, ae_);
 							bool? ag_(CodeableConcept @this)
 							{
-								List<Coding> bf_ = @this.Coding;
+								List<Coding> bf_ = @this?.Coding;
 								bool? bg_ = context?.Operators.Not((bool?)(bf_ is null));
 
 								return bg_;
@@ -1212,7 +1212,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<CodeableConcept> ah_ = context?.Operators.Where<CodeableConcept>(af_, ag_);
 							List<Coding> ai_(CodeableConcept @this)
 							{
-								List<Coding> bh_ = @this.Coding;
+								List<Coding> bh_ = @this?.Coding;
 
 								return bh_;
 							};
@@ -1220,8 +1220,8 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Coding> ak_ = context?.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)aj_);
 							bool? al_(Coding LineCode)
 							{
-								Code bi_ = LineCode.CodeElement;
-								string bj_ = bi_.Value;
+								Code bi_ = LineCode?.CodeElement;
+								string bj_ = bi_?.Value;
 								IEnumerable<string> bk_ = ClaimWithProcedure?.ProceduresAsStrings;
 								bool? bl_ = context?.Operators.In<string>(bj_, bk_);
 
@@ -1229,10 +1229,10 @@ public class NCQAClaims_1_0_0
 							};
 							IEnumerable<Coding> am_ = context?.Operators.Where<Coding>(ak_, al_);
 							bool? an_ = context?.Operators.Exists<Coding>(am_);
-							List<Claim.ProcedureComponent> ao_ = ItemOnLine.Procedure;
+							List<Claim.ProcedureComponent> ao_ = ItemOnLine?.Procedure;
 							bool? ap_(Claim.ProcedureComponent @this)
 							{
-								DataType bm_ = @this.Procedure;
+								DataType bm_ = @this?.Procedure;
 								bool? bn_ = context?.Operators.Not((bool?)(bm_ is null));
 
 								return bn_;
@@ -1240,7 +1240,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ProcedureComponent> aq_ = context?.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)ao_, ap_);
 							DataType ar_(Claim.ProcedureComponent @this)
 							{
-								DataType bo_ = @this.Procedure;
+								DataType bo_ = @this?.Procedure;
 
 								return bo_;
 							};
@@ -1264,7 +1264,7 @@ public class NCQAClaims_1_0_0
 							bool? ay_(object HeaderCode)
 							{
 								Code bs_ = context?.Operators.LateBoundProperty<Code>(HeaderCode, "code");
-								string bt_ = bs_.Value;
+								string bt_ = bs_?.Value;
 								IEnumerable<string> bu_ = ClaimWithProcedure?.ProceduresAsStrings;
 								bool? bv_ = context?.Operators.In<string>(bt_, bu_);
 
@@ -1294,7 +1294,7 @@ public class NCQAClaims_1_0_0
 					];
 					(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? by_(Claim ClaimforDiagnosis)
 					{
-						List<Claim.ItemComponent> cb_ = ClaimforDiagnosis.Item;
+						List<Claim.ItemComponent> cb_ = ClaimforDiagnosis?.Item;
 						Claim cc_()
 						{
 							if ((ClaimforDiagnosis is null))
@@ -1308,19 +1308,19 @@ public class NCQAClaims_1_0_0
 								];
 								bool? cj_(Claim RightClaim)
 								{
-									List<Claim.DiagnosisComponent> cm_ = RightClaim.Diagnosis;
+									List<Claim.DiagnosisComponent> cm_ = RightClaim?.Diagnosis;
 									bool? cn_(Claim.DiagnosisComponent RightDiagnosis)
 									{
-										PositiveInt cq_ = RightDiagnosis.SequenceElement;
+										PositiveInt cq_ = RightDiagnosis?.SequenceElement;
 										Integer cr_ = context?.Operators.Convert<Integer>(cq_);
 										int? cs_ = FHIRHelpers_4_0_001.ToInteger(cr_);
 										bool? ct_ = context?.Operators.Equal(cs_, 1);
-										DataType cu_ = RightDiagnosis.Diagnosis;
+										DataType cu_ = RightDiagnosis?.Diagnosis;
 										IEnumerable<Coding> cv_ = context?.Operators.LateBoundProperty<IEnumerable<Coding>>(cu_, "coding");
 										bool? cw_(Coding DiagnosisCode)
 										{
-											Code da_ = DiagnosisCode.CodeElement;
-											string db_ = da_.Value;
+											Code da_ = DiagnosisCode?.CodeElement;
+											string db_ = da_?.Value;
 											IEnumerable<string> dc_ = ClaimWithProcedure?.DiagnosesAsStrings;
 											bool? dd_ = context?.Operators.In<string>(db_, dc_);
 
@@ -1363,10 +1363,10 @@ public class NCQAClaims_1_0_0
 								if (df_())
 								{
 									Claim dk_ = LineItemDefinition?.LineItems;
-									List<Claim.ItemComponent> dm_ = dk_.Item;
+									List<Claim.ItemComponent> dm_ = dk_?.Item;
 									CqlInterval<CqlDateTime> dn_(Claim.ItemComponent NormalDate)
 									{
-										DataType dq_ = NormalDate.Serviced;
+										DataType dq_ = NormalDate?.Serviced;
 										CqlInterval<CqlDateTime> dr_ = NCQAFHIRBase_1_0_0.Normalize_Interval(dq_);
 
 										return dr_;
@@ -1422,7 +1422,7 @@ public class NCQAClaims_1_0_0
 		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(claim);
 		string b_(CqlCode d)
 		{
-			string i_ = d.code;
+			string i_ = d?.code;
 
 			return i_;
 		};
@@ -1444,19 +1444,19 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> p_ = ClaimWithDiagnosis?.MedicalClaim;
 					bool? q_(Claim RightClaim)
 					{
-						List<Claim.DiagnosisComponent> s_ = RightClaim.Diagnosis;
+						List<Claim.DiagnosisComponent> s_ = RightClaim?.Diagnosis;
 						bool? t_(Claim.DiagnosisComponent RightDiagnosis)
 						{
-							PositiveInt w_ = RightDiagnosis.SequenceElement;
+							PositiveInt w_ = RightDiagnosis?.SequenceElement;
 							Integer x_ = context?.Operators.Convert<Integer>(w_);
 							int? y_ = FHIRHelpers_4_0_001.ToInteger(x_);
 							bool? z_ = context?.Operators.Equal(y_, 1);
-							DataType aa_ = RightDiagnosis.Diagnosis;
+							DataType aa_ = RightDiagnosis?.Diagnosis;
 							IEnumerable<Coding> ab_ = context?.Operators.LateBoundProperty<IEnumerable<Coding>>(aa_, "coding");
 							bool? ac_(Coding DiagnosisCode)
 							{
-								Code ag_ = DiagnosisCode.CodeElement;
-								string ah_ = ag_.Value;
+								Code ag_ = DiagnosisCode?.CodeElement;
+								string ah_ = ag_?.Value;
 								IEnumerable<string> ai_ = ClaimWithDiagnosis?.DiagnosesAsStrings;
 								bool? aj_ = context?.Operators.In<string>(ah_, ai_);
 
@@ -1494,7 +1494,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim> aq_ = LineItemDefinition?.LineItems;
 							bool? as_(Claim @this)
 							{
-								List<Claim.ItemComponent> ba_ = @this.Item;
+								List<Claim.ItemComponent> ba_ = @this?.Item;
 								bool? bb_ = context?.Operators.Not((bool?)(ba_ is null));
 
 								return bb_;
@@ -1502,7 +1502,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim> at_ = context?.Operators.Where<Claim>(aq_, as_);
 							List<Claim.ItemComponent> au_(Claim @this)
 							{
-								List<Claim.ItemComponent> bc_ = @this.Item;
+								List<Claim.ItemComponent> bc_ = @this?.Item;
 
 								return bc_;
 							};
@@ -1510,7 +1510,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ItemComponent> aw_ = context?.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)av_);
 							CqlInterval<CqlDateTime> ax_(Claim.ItemComponent NormalDate)
 							{
-								DataType bd_ = NormalDate.Serviced;
+								DataType bd_ = NormalDate?.Serviced;
 								CqlInterval<CqlDateTime> be_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bd_);
 
 								return be_;
@@ -1565,7 +1565,7 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(ClaimResponse ResponseItem)
 		{
-			Code<ClaimProcessingCodes> h_ = ResponseItem.OutcomeElement;
+			Code<ClaimProcessingCodes> h_ = ResponseItem?.OutcomeElement;
 			string i_ = FHIRHelpers_4_0_001.ToString(h_);
 			string[] j_ = [
 				"complete",
@@ -1585,17 +1585,17 @@ public class NCQAClaims_1_0_0
 			IEnumerable<ClaimResponse> l_ = ClaimResponse?.PaidResponse;
 			(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)? m_(ClaimResponse ClmResp)
 			{
-				ResourceReference o_ = ClmResp.Request;
-				FhirString p_ = o_.ReferenceElement;
+				ResourceReference o_ = ClmResp?.Request;
+				FhirString p_ = o_?.ReferenceElement;
 				string q_ = FHIRHelpers_4_0_001.ToString(p_);
 				string r_ = NCQAFHIRBase_1_0_0.GetId(q_);
-				List<ClaimResponse.ItemComponent> s_ = ClmResp.Item;
+				List<ClaimResponse.ItemComponent> s_ = ClmResp?.Item;
 				bool? t_(ClaimResponse.ItemComponent ResponseItem)
 				{
-					List<ClaimResponse.AdjudicationComponent> w_ = ResponseItem.Adjudication;
+					List<ClaimResponse.AdjudicationComponent> w_ = ResponseItem?.Adjudication;
 					bool? x_(ClaimResponse.AdjudicationComponent @this)
 					{
-						CodeableConcept as_ = @this.Category;
+						CodeableConcept as_ = @this?.Category;
 						bool? at_ = context?.Operators.Not((bool?)(as_ is null));
 
 						return at_;
@@ -1603,14 +1603,14 @@ public class NCQAClaims_1_0_0
 					IEnumerable<ClaimResponse.AdjudicationComponent> y_ = context?.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)w_, x_);
 					CodeableConcept z_(ClaimResponse.AdjudicationComponent @this)
 					{
-						CodeableConcept au_ = @this.Category;
+						CodeableConcept au_ = @this?.Category;
 
 						return au_;
 					};
 					IEnumerable<CodeableConcept> aa_ = context?.Operators.Select<ClaimResponse.AdjudicationComponent, CodeableConcept>(y_, z_);
 					bool? ab_(CodeableConcept @this)
 					{
-						List<Coding> av_ = @this.Coding;
+						List<Coding> av_ = @this?.Coding;
 						bool? aw_ = context?.Operators.Not((bool?)(av_ is null));
 
 						return aw_;
@@ -1618,7 +1618,7 @@ public class NCQAClaims_1_0_0
 					IEnumerable<CodeableConcept> ac_ = context?.Operators.Where<CodeableConcept>(aa_, ab_);
 					List<Coding> ad_(CodeableConcept @this)
 					{
-						List<Coding> ax_ = @this.Coding;
+						List<Coding> ax_ = @this?.Coding;
 
 						return ax_;
 					};
@@ -1626,8 +1626,8 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Coding> af_ = context?.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ae_);
 					bool? ag_(Coding CategoryItem)
 					{
-						Code ay_ = CategoryItem.CodeElement;
-						string az_ = ay_.Value;
+						Code ay_ = CategoryItem?.CodeElement;
+						string az_ = ay_?.Value;
 						bool? ba_ = context?.Operators.Equal(az_, "benefit");
 
 						return ba_;
@@ -1636,7 +1636,7 @@ public class NCQAClaims_1_0_0
 					bool? ai_ = context?.Operators.Exists<Coding>(ah_);
 					bool? ak_(ClaimResponse.AdjudicationComponent @this)
 					{
-						Money bb_ = @this.Amount;
+						Money bb_ = @this?.Amount;
 						bool? bc_ = context?.Operators.Not((bool?)(bb_ is null));
 
 						return bc_;
@@ -1644,14 +1644,14 @@ public class NCQAClaims_1_0_0
 					IEnumerable<ClaimResponse.AdjudicationComponent> al_ = context?.Operators.Where<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)w_, ak_);
 					Money am_(ClaimResponse.AdjudicationComponent @this)
 					{
-						Money bd_ = @this.Amount;
+						Money bd_ = @this?.Amount;
 
 						return bd_;
 					};
 					IEnumerable<Money> an_ = context?.Operators.Select<ClaimResponse.AdjudicationComponent, Money>(al_, am_);
 					bool? ao_(Money DollarAmount)
 					{
-						FhirDecimal be_ = DollarAmount.ValueElement;
+						FhirDecimal be_ = DollarAmount?.ValueElement;
 						decimal? bf_ = FHIRHelpers_4_0_001.ToDecimal(be_);
 						decimal? bg_ = context?.Operators.ConvertIntegerToDecimal(0);
 						bool? bh_ = context?.Operators.Greater(bf_, bg_);
@@ -1684,10 +1684,10 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim AllClaims)
 		{
-			List<Claim.ItemComponent> e_ = AllClaims.Item;
+			List<Claim.ItemComponent> e_ = AllClaims?.Item;
 			bool? f_(Claim.ItemComponent @this)
 			{
-				CodeableConcept af_ = @this.ProductOrService;
+				CodeableConcept af_ = @this?.ProductOrService;
 				bool? ag_ = context?.Operators.Not((bool?)(af_ is null));
 
 				return ag_;
@@ -1695,14 +1695,14 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.ItemComponent> g_ = context?.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)e_, f_);
 			CodeableConcept h_(Claim.ItemComponent @this)
 			{
-				CodeableConcept ah_ = @this.ProductOrService;
+				CodeableConcept ah_ = @this?.ProductOrService;
 
 				return ah_;
 			};
 			IEnumerable<CodeableConcept> i_ = context?.Operators.Select<Claim.ItemComponent, CodeableConcept>(g_, h_);
 			bool? j_(CodeableConcept @this)
 			{
-				List<Coding> ai_ = @this.Coding;
+				List<Coding> ai_ = @this?.Coding;
 				bool? aj_ = context?.Operators.Not((bool?)(ai_ is null));
 
 				return aj_;
@@ -1710,7 +1710,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<CodeableConcept> k_ = context?.Operators.Where<CodeableConcept>(i_, j_);
 			List<Coding> l_(CodeableConcept @this)
 			{
-				List<Coding> ak_ = @this.Coding;
+				List<Coding> ak_ = @this?.Coding;
 
 				return ak_;
 			};
@@ -1725,10 +1725,10 @@ public class NCQAClaims_1_0_0
 			};
 			IEnumerable<Coding> p_ = context?.Operators.Where<Coding>(n_, o_);
 			bool? q_ = context?.Operators.Exists<Coding>(p_);
-			List<Claim.DiagnosisComponent> r_ = AllClaims.Diagnosis;
+			List<Claim.DiagnosisComponent> r_ = AllClaims?.Diagnosis;
 			bool? s_(Claim.DiagnosisComponent @this)
 			{
-				DataType an_ = @this.Diagnosis;
+				DataType an_ = @this?.Diagnosis;
 				bool? ao_ = context?.Operators.Not((bool?)(an_ is null));
 
 				return ao_;
@@ -1736,7 +1736,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.DiagnosisComponent> t_ = context?.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)r_, s_);
 			DataType u_(Claim.DiagnosisComponent @this)
 			{
-				DataType ap_ = @this.Diagnosis;
+				DataType ap_ = @this?.Diagnosis;
 
 				return ap_;
 			};
@@ -1773,12 +1773,12 @@ public class NCQAClaims_1_0_0
 		IEnumerable<Claim> b_ = context?.Operators.Where<Claim>(claim, a_);
 		(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? c_(Claim ProcedureClaims)
 		{
-			Id av_ = ProcedureClaims.IdElement;
-			List<Claim.ItemComponent> aw_ = ProcedureClaims.Item;
+			Id av_ = ProcedureClaims?.IdElement;
+			List<Claim.ItemComponent> aw_ = ProcedureClaims?.Item;
 			bool? ax_(Claim.ItemComponent ResponseItem)
 			{
-				CodeableConcept ba_ = ResponseItem.ProductOrService;
-				List<Coding> bb_ = ba_.Coding;
+				CodeableConcept ba_ = ResponseItem?.ProductOrService;
+				List<Coding> bb_ = ba_?.Coding;
 				bool? bc_(Coding ProductOrServiceCode)
 				{
 					CqlCode bf_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
@@ -1846,14 +1846,14 @@ public class NCQAClaims_1_0_0
 							};
 							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
 							ClaimResponse ae_ = pClaim?.Response;
-							ResourceReference af_ = ae_.Request;
-							FhirString ag_ = af_.ReferenceElement;
+							ResourceReference af_ = ae_?.Request;
+							FhirString ag_ = af_?.ReferenceElement;
 							string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
 							string ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
 							bool? aj_ = context?.Operators.Equal(ad_, ai_);
-							PositiveInt ak_ = medClaimLineItem.SequenceElement;
+							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
 							Integer al_ = context?.Operators.Convert<Integer>(ak_);
-							PositiveInt am_ = pClaimLineItem.ItemSequenceElement;
+							PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
 							Integer an_ = context?.Operators.Convert<Integer>(am_);
 							bool? ao_ = context?.Operators.Equal(al_, an_);
 							bool? ap_ = context?.Operators.And(aj_, ao_);
@@ -1945,7 +1945,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.ItemComponent> bu_ = context?.Operators.Flatten<Claim.ItemComponent>(bt_);
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
-							DataType ce_ = PaidItem.Serviced;
+							DataType ce_ = PaidItem?.Serviced;
 							CqlInterval<CqlDateTime> cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ce_);
 
 							return cf_;
@@ -2042,10 +2042,10 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim AllClaims)
 		{
-			List<Claim.ItemComponent> e_ = AllClaims.Item;
+			List<Claim.ItemComponent> e_ = AllClaims?.Item;
 			bool? f_(Claim.ItemComponent @this)
 			{
-				CodeableConcept af_ = @this.ProductOrService;
+				CodeableConcept af_ = @this?.ProductOrService;
 				bool? ag_ = context?.Operators.Not((bool?)(af_ is null));
 
 				return ag_;
@@ -2053,14 +2053,14 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.ItemComponent> g_ = context?.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)e_, f_);
 			CodeableConcept h_(Claim.ItemComponent @this)
 			{
-				CodeableConcept ah_ = @this.ProductOrService;
+				CodeableConcept ah_ = @this?.ProductOrService;
 
 				return ah_;
 			};
 			IEnumerable<CodeableConcept> i_ = context?.Operators.Select<Claim.ItemComponent, CodeableConcept>(g_, h_);
 			bool? j_(CodeableConcept @this)
 			{
-				List<Coding> ai_ = @this.Coding;
+				List<Coding> ai_ = @this?.Coding;
 				bool? aj_ = context?.Operators.Not((bool?)(ai_ is null));
 
 				return aj_;
@@ -2068,7 +2068,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<CodeableConcept> k_ = context?.Operators.Where<CodeableConcept>(i_, j_);
 			List<Coding> l_(CodeableConcept @this)
 			{
-				List<Coding> ak_ = @this.Coding;
+				List<Coding> ak_ = @this?.Coding;
 
 				return ak_;
 			};
@@ -2083,10 +2083,10 @@ public class NCQAClaims_1_0_0
 			};
 			IEnumerable<Coding> p_ = context?.Operators.Where<Coding>(n_, o_);
 			bool? q_ = context?.Operators.Exists<Coding>(p_);
-			List<Claim.DiagnosisComponent> r_ = AllClaims.Diagnosis;
+			List<Claim.DiagnosisComponent> r_ = AllClaims?.Diagnosis;
 			bool? s_(Claim.DiagnosisComponent @this)
 			{
-				DataType an_ = @this.Diagnosis;
+				DataType an_ = @this?.Diagnosis;
 				bool? ao_ = context?.Operators.Not((bool?)(an_ is null));
 
 				return ao_;
@@ -2094,7 +2094,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.DiagnosisComponent> t_ = context?.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)r_, s_);
 			DataType u_(Claim.DiagnosisComponent @this)
 			{
-				DataType ap_ = @this.Diagnosis;
+				DataType ap_ = @this?.Diagnosis;
 
 				return ap_;
 			};
@@ -2135,11 +2135,11 @@ public class NCQAClaims_1_0_0
 			{
 				bool aw_()
 				{
-					List<Claim.ItemComponent> ax_ = ProcedureClaims.Item;
+					List<Claim.ItemComponent> ax_ = ProcedureClaims?.Item;
 					bool? ay_(Claim.ItemComponent ResponseItem)
 					{
-						CodeableConcept bb_ = ResponseItem.ProductOrService;
-						List<Coding> bc_ = bb_.Coding;
+						CodeableConcept bb_ = ResponseItem?.ProductOrService;
+						List<Coding> bc_ = bb_?.Coding;
 						bool? bd_(Coding ProductOrServiceCode)
 						{
 							CqlCode bg_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
@@ -2159,12 +2159,12 @@ public class NCQAClaims_1_0_0
 				};
 				if (aw_())
 				{
-					Id bi_ = ProcedureClaims.IdElement;
-					List<Claim.ItemComponent> bj_ = ProcedureClaims.Item;
+					Id bi_ = ProcedureClaims?.IdElement;
+					List<Claim.ItemComponent> bj_ = ProcedureClaims?.Item;
 					bool? bk_(Claim.ItemComponent ResponseItem)
 					{
-						CodeableConcept bn_ = ResponseItem.ProductOrService;
-						List<Coding> bo_ = bn_.Coding;
+						CodeableConcept bn_ = ResponseItem?.ProductOrService;
+						List<Coding> bo_ = bn_?.Coding;
 						bool? bp_(Coding ProductOrServiceCode)
 						{
 							CqlCode bs_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
@@ -2184,13 +2184,13 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					Id bu_ = ProcedureClaims.IdElement;
-					List<Claim.ItemComponent> bv_ = ProcedureClaims.Item;
+					Id bu_ = ProcedureClaims?.IdElement;
+					List<Claim.ItemComponent> bv_ = ProcedureClaims?.Item;
 					bool? bw_(Claim.ItemComponent ResponseItem)
 					{
-						PositiveInt bz_ = ResponseItem.SequenceElement;
+						PositiveInt bz_ = ResponseItem?.SequenceElement;
 						Integer ca_ = context?.Operators.Convert<Integer>(bz_);
-						int? cb_ = ca_.Value;
+						int? cb_ = ca_?.Value;
 						bool? cc_ = context?.Operators.Equal(cb_, 1);
 
 						return cc_;
@@ -2254,14 +2254,14 @@ public class NCQAClaims_1_0_0
 							};
 							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
 							ClaimResponse ae_ = pClaim?.Response;
-							ResourceReference af_ = ae_.Request;
-							FhirString ag_ = af_.ReferenceElement;
+							ResourceReference af_ = ae_?.Request;
+							FhirString ag_ = af_?.ReferenceElement;
 							string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
 							string ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
 							bool? aj_ = context?.Operators.Equal(ad_, ai_);
-							PositiveInt ak_ = medClaimLineItem.SequenceElement;
+							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
 							Integer al_ = context?.Operators.Convert<Integer>(ak_);
-							PositiveInt am_ = pClaimLineItem.ItemSequenceElement;
+							PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
 							Integer an_ = context?.Operators.Convert<Integer>(am_);
 							bool? ao_ = context?.Operators.Equal(al_, an_);
 							bool? ap_ = context?.Operators.And(aj_, ao_);
@@ -2353,7 +2353,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.ItemComponent> bu_ = context?.Operators.Flatten<Claim.ItemComponent>(bt_);
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
-							DataType ce_ = PaidItem.Serviced;
+							DataType ce_ = PaidItem?.Serviced;
 							CqlInterval<CqlDateTime> cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ce_);
 
 							return cf_;
@@ -2439,10 +2439,10 @@ public class NCQAClaims_1_0_0
 	{
 		bool? a_(Claim AllClaims)
 		{
-			List<Claim.ItemComponent> e_ = AllClaims.Item;
+			List<Claim.ItemComponent> e_ = AllClaims?.Item;
 			bool? f_(Claim.ItemComponent @this)
 			{
-				CodeableConcept r_ = @this.ProductOrService;
+				CodeableConcept r_ = @this?.ProductOrService;
 				bool? s_ = context?.Operators.Not((bool?)(r_ is null));
 
 				return s_;
@@ -2450,14 +2450,14 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.ItemComponent> g_ = context?.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)e_, f_);
 			CodeableConcept h_(Claim.ItemComponent @this)
 			{
-				CodeableConcept t_ = @this.ProductOrService;
+				CodeableConcept t_ = @this?.ProductOrService;
 
 				return t_;
 			};
 			IEnumerable<CodeableConcept> i_ = context?.Operators.Select<Claim.ItemComponent, CodeableConcept>(g_, h_);
 			bool? j_(CodeableConcept @this)
 			{
-				List<Coding> u_ = @this.Coding;
+				List<Coding> u_ = @this?.Coding;
 				bool? v_ = context?.Operators.Not((bool?)(u_ is null));
 
 				return v_;
@@ -2465,7 +2465,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<CodeableConcept> k_ = context?.Operators.Where<CodeableConcept>(i_, j_);
 			List<Coding> l_(CodeableConcept @this)
 			{
-				List<Coding> w_ = @this.Coding;
+				List<Coding> w_ = @this?.Coding;
 
 				return w_;
 			};
@@ -2486,12 +2486,12 @@ public class NCQAClaims_1_0_0
 		IEnumerable<Claim> b_ = context?.Operators.Where<Claim>(claim, a_);
 		(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? c_(Claim AllClaims)
 		{
-			Id z_ = AllClaims.IdElement;
-			List<Claim.ItemComponent> aa_ = AllClaims.Item;
+			Id z_ = AllClaims?.IdElement;
+			List<Claim.ItemComponent> aa_ = AllClaims?.Item;
 			bool? ab_(Claim.ItemComponent ResponseItem)
 			{
-				CodeableConcept ae_ = ResponseItem.ProductOrService;
-				List<Coding> af_ = ae_.Coding;
+				CodeableConcept ae_ = ResponseItem?.ProductOrService;
+				List<Coding> af_ = ae_?.Coding;
 				bool? ag_(Coding ProductOrServiceCode)
 				{
 					CqlCode aj_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
@@ -2559,14 +2559,14 @@ public class NCQAClaims_1_0_0
 							};
 							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
 							ClaimResponse ae_ = pClaim?.Response;
-							ResourceReference af_ = ae_.Request;
-							FhirString ag_ = af_.ReferenceElement;
+							ResourceReference af_ = ae_?.Request;
+							FhirString ag_ = af_?.ReferenceElement;
 							string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
 							string ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
 							bool? aj_ = context?.Operators.Equal(ad_, ai_);
-							PositiveInt ak_ = medClaimLineItem.SequenceElement;
+							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
 							Integer al_ = context?.Operators.Convert<Integer>(ak_);
-							PositiveInt am_ = pClaimLineItem.ItemSequenceElement;
+							PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
 							Integer an_ = context?.Operators.Convert<Integer>(am_);
 							bool? ao_ = context?.Operators.Equal(al_, an_);
 							bool? ap_ = context?.Operators.And(aj_, ao_);
@@ -2658,7 +2658,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.ItemComponent> bu_ = context?.Operators.Flatten<Claim.ItemComponent>(bt_);
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
-							DataType ce_ = PaidItem.Serviced;
+							DataType ce_ = PaidItem?.Serviced;
 							CqlInterval<CqlDateTime> cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ce_);
 
 							return cf_;
@@ -2794,14 +2794,14 @@ public class NCQAClaims_1_0_0
 							};
 							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
 							ClaimResponse ae_ = pClaim?.Response;
-							ResourceReference af_ = ae_.Request;
-							FhirString ag_ = af_.ReferenceElement;
+							ResourceReference af_ = ae_?.Request;
+							FhirString ag_ = af_?.ReferenceElement;
 							string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
 							string ai_ = NCQAFHIRBase_1_0_0.GetId(ah_);
 							bool? aj_ = context?.Operators.Equal(ad_, ai_);
-							PositiveInt ak_ = medClaimLineItem.SequenceElement;
+							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
 							Integer al_ = context?.Operators.Convert<Integer>(ak_);
-							PositiveInt am_ = pClaimLineItem.ItemSequenceElement;
+							PositiveInt am_ = pClaimLineItem?.ItemSequenceElement;
 							Integer an_ = context?.Operators.Convert<Integer>(am_);
 							bool? ao_ = context?.Operators.Equal(al_, an_);
 							bool? ap_ = context?.Operators.And(aj_, ao_);
@@ -2893,7 +2893,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.ItemComponent> bu_ = context?.Operators.Flatten<Claim.ItemComponent>(bt_);
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
-							DataType cm_ = PaidItem.Serviced;
+							DataType cm_ = PaidItem?.Serviced;
 							CqlInterval<CqlDateTime> cn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cm_);
 
 							return cn_;
@@ -2921,21 +2921,21 @@ public class NCQAClaims_1_0_0
 							{
 								bool cs_()
 								{
-									Quantity ct_ = i.Quantity;
+									Quantity ct_ = i?.Quantity;
 									bool? cu_ = context?.Operators.Not((bool?)(ct_ is null));
 
 									return (cu_ ?? false);
 								};
 								if (cs_())
 								{
-									DataType cv_ = i.Serviced;
+									DataType cv_ = i?.Serviced;
 									CqlInterval<CqlDateTime> cw_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cv_);
 									CqlDateTime cx_ = context?.Operators.Start(cw_);
 									CqlDate cy_ = context?.Operators.ConvertDateTimeToDate(cx_);
 									CqlInterval<CqlDateTime> da_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cv_);
 									CqlDateTime db_ = context?.Operators.Start(da_);
-									Quantity dc_ = i.Quantity;
-									FhirDecimal dd_ = dc_.ValueElement;
+									Quantity dc_ = i?.Quantity;
+									FhirDecimal dd_ = dc_?.ValueElement;
 									decimal? de_ = FHIRHelpers_4_0_001.ToDecimal(dd_);
 									CqlDateTime df_ = context?.Operators.Add(db_, new CqlQuantity(de_, "day"));
 									CqlQuantity dg_ = context?.Operators.Quantity(1m, "day");
@@ -3036,10 +3036,10 @@ public class NCQAClaims_1_0_0
 		{
 			bool? c_(ClaimResponse CR)
 			{
-				Id h_ = Claim.IdElement;
+				Id h_ = Claim?.IdElement;
 				string i_ = FHIRHelpers_4_0_001.ToString(h_);
-				ResourceReference j_ = CR.Request;
-				FhirString k_ = j_.ReferenceElement;
+				ResourceReference j_ = CR?.Request;
+				FhirString k_ = j_?.ReferenceElement;
 				string l_ = FHIRHelpers_4_0_001.ToString(k_);
 				string m_ = NCQAFHIRBase_1_0_0.GetId(l_);
 				bool? n_ = context?.Operators.Equal(i_, m_);
@@ -3049,14 +3049,14 @@ public class NCQAClaims_1_0_0
 			IEnumerable<ClaimResponse> d_ = context?.Operators.Where<ClaimResponse>(claimResponse, c_);
 			bool? e_(Claim C)
 			{
-				Id o_ = Claim.IdElement;
+				Id o_ = Claim?.IdElement;
 				string p_ = FHIRHelpers_4_0_001.ToString(o_);
 				bool? q_(ClaimResponse CR)
 				{
-					Id ae_ = Claim.IdElement;
+					Id ae_ = Claim?.IdElement;
 					string af_ = FHIRHelpers_4_0_001.ToString(ae_);
-					ResourceReference ag_ = CR.Request;
-					FhirString ah_ = ag_.ReferenceElement;
+					ResourceReference ag_ = CR?.Request;
+					FhirString ah_ = ag_?.ReferenceElement;
 					string ai_ = FHIRHelpers_4_0_001.ToString(ah_);
 					string aj_ = NCQAFHIRBase_1_0_0.GetId(ai_);
 					bool? ak_ = context?.Operators.Equal(af_, aj_);
@@ -3066,7 +3066,7 @@ public class NCQAClaims_1_0_0
 				IEnumerable<ClaimResponse> r_ = context?.Operators.Where<ClaimResponse>(claimResponse, q_);
 				bool? s_(ClaimResponse @this)
 				{
-					ResourceReference al_ = @this.Request;
+					ResourceReference al_ = @this?.Request;
 					bool? am_ = context?.Operators.Not((bool?)(al_ is null));
 
 					return am_;
@@ -3074,14 +3074,14 @@ public class NCQAClaims_1_0_0
 				IEnumerable<ClaimResponse> t_ = context?.Operators.Where<ClaimResponse>(r_, s_);
 				ResourceReference u_(ClaimResponse @this)
 				{
-					ResourceReference an_ = @this.Request;
+					ResourceReference an_ = @this?.Request;
 
 					return an_;
 				};
 				IEnumerable<ResourceReference> v_ = context?.Operators.Select<ClaimResponse, ResourceReference>(t_, u_);
 				bool? w_(ResourceReference @this)
 				{
-					FhirString ao_ = @this.ReferenceElement;
+					FhirString ao_ = @this?.ReferenceElement;
 					bool? ap_ = context?.Operators.Not((bool?)(ao_ is null));
 
 					return ap_;
@@ -3089,7 +3089,7 @@ public class NCQAClaims_1_0_0
 				IEnumerable<ResourceReference> x_ = context?.Operators.Where<ResourceReference>(v_, w_);
 				FhirString y_(ResourceReference @this)
 				{
-					FhirString aq_ = @this.ReferenceElement;
+					FhirString aq_ = @this?.ReferenceElement;
 
 					return aq_;
 				};
@@ -3132,15 +3132,15 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> n_ = ClaimWithInpatientStay?.MedicalClaim;
 					bool? o_(Claim c)
 					{
-						List<Claim.ItemComponent> q_ = c.Item;
+						List<Claim.ItemComponent> q_ = c?.Item;
 						bool? r_(Claim.ItemComponent i)
 						{
-							CodeableConcept u_ = i.Revenue;
+							CodeableConcept u_ = i?.Revenue;
 							CqlConcept v_ = FHIRHelpers_4_0_001.ToConcept(u_);
-							CqlCode[] w_ = v_.codes;
+							CqlCode[] w_ = v_?.codes;
 							bool? x_(CqlCode rev)
 							{
-								string aa_ = rev.code;
+								string aa_ = rev?.code;
 								CqlValueSet ab_ = this.Inpatient_Stay();
 								bool? ac_ = context?.Operators.StringInValueSet(aa_, ab_);
 
@@ -3172,15 +3172,15 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> ad_ = ClaimWithInpatientStay?.MedicalClaim;
 					bool? ae_(Claim c)
 					{
-						List<Claim.ItemComponent> ag_ = c.Item;
+						List<Claim.ItemComponent> ag_ = c?.Item;
 						bool? ah_(Claim.ItemComponent i)
 						{
-							CodeableConcept aq_ = i.Revenue;
+							CodeableConcept aq_ = i?.Revenue;
 							CqlConcept ar_ = FHIRHelpers_4_0_001.ToConcept(aq_);
-							CqlCode[] as_ = ar_.codes;
+							CqlCode[] as_ = ar_?.codes;
 							bool? at_(CqlCode rev)
 							{
-								string aw_ = rev.code;
+								string aw_ = rev?.code;
 								CqlValueSet ax_ = this.Nonacute_Inpatient_Stay();
 								bool? ay_ = context?.Operators.StringInValueSet(aw_, ax_);
 
@@ -3193,12 +3193,12 @@ public class NCQAClaims_1_0_0
 						};
 						IEnumerable<Claim.ItemComponent> ai_ = context?.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ag_, ah_);
 						bool? aj_ = context?.Operators.Exists<Claim.ItemComponent>(ai_);
-						CodeableConcept ak_ = c.SubType;
-						List<Coding> al_ = ak_.Coding;
+						CodeableConcept ak_ = c?.SubType;
+						List<Coding> al_ = ak_?.Coding;
 						bool? am_(Coding tob)
 						{
-							Code az_ = tob.CodeElement;
-							string ba_ = az_.Value;
+							Code az_ = tob?.CodeElement;
+							string ba_ = az_?.Value;
 							CqlValueSet bb_ = this.Nonacute_Inpatient_Stay();
 							bool? bc_ = context?.Operators.StringInValueSet(ba_, bb_);
 
@@ -3228,8 +3228,8 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> bn_ = LineItemDefinition?.InpatientStayLineItems;
 					bool? bo_(Claim inpatientStay)
 					{
-						Id bs_ = nonAcuteInpatientStay.IdElement;
-						Id bt_ = inpatientStay.IdElement;
+						Id bs_ = nonAcuteInpatientStay?.IdElement;
+						Id bt_ = inpatientStay?.IdElement;
 						bool? bu_ = context?.Operators.Equal(bs_, bt_);
 
 						return bu_;
@@ -3247,8 +3247,8 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> bv_ = LineItemDefinition?.NonacuteInpatientLineItems;
 					bool? bw_(Claim nonAcuteInpatientStay)
 					{
-						Id ca_ = inpatientStay.IdElement;
-						Id cb_ = nonAcuteInpatientStay.IdElement;
+						Id ca_ = inpatientStay?.IdElement;
+						Id cb_ = nonAcuteInpatientStay?.IdElement;
 						bool? cc_ = context?.Operators.Equal(ca_, cb_);
 
 						return cc_;
@@ -3282,10 +3282,10 @@ public class NCQAClaims_1_0_0
 	{
 		(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? a_(Claim C)
 		{
-			List<Claim.CareTeamComponent> h_ = C.CareTeam;
+			List<Claim.CareTeamComponent> h_ = C?.CareTeam;
 			bool? i_(Claim.CareTeamComponent ct)
 			{
-				PositiveInt y_ = ct.SequenceElement;
+				PositiveInt y_ = ct?.SequenceElement;
 				Integer z_ = context?.Operators.Convert<Integer>(y_);
 				int? aa_ = FHIRHelpers_4_0_001.ToInteger(z_);
 				bool? ab_ = context?.Operators.Equal(aa_, 1);
@@ -3295,7 +3295,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.CareTeamComponent> j_ = context?.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)h_, i_);
 			bool? k_(Claim.CareTeamComponent @this)
 			{
-				ResourceReference ac_ = @this.Provider;
+				ResourceReference ac_ = @this?.Provider;
 				bool? ad_ = context?.Operators.Not((bool?)(ac_ is null));
 
 				return ad_;
@@ -3303,14 +3303,14 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.CareTeamComponent> l_ = context?.Operators.Where<Claim.CareTeamComponent>(j_, k_);
 			ResourceReference m_(Claim.CareTeamComponent @this)
 			{
-				ResourceReference ae_ = @this.Provider;
+				ResourceReference ae_ = @this?.Provider;
 
 				return ae_;
 			};
 			IEnumerable<ResourceReference> n_ = context?.Operators.Select<Claim.CareTeamComponent, ResourceReference>(l_, m_);
 			bool? p_(Claim.CareTeamComponent ct)
 			{
-				PositiveInt af_ = ct.SequenceElement;
+				PositiveInt af_ = ct?.SequenceElement;
 				Integer ag_ = context?.Operators.Convert<Integer>(af_);
 				int? ah_ = FHIRHelpers_4_0_001.ToInteger(ag_);
 				bool? ai_ = context?.Operators.Equal(ah_, 1);
@@ -3320,7 +3320,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.CareTeamComponent> q_ = context?.Operators.Where<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)h_, p_);
 			bool? r_(Claim.CareTeamComponent @this)
 			{
-				ResourceReference aj_ = @this.Provider;
+				ResourceReference aj_ = @this?.Provider;
 				bool? ak_ = context?.Operators.Not((bool?)(aj_ is null));
 
 				return ak_;
@@ -3328,14 +3328,14 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.CareTeamComponent> s_ = context?.Operators.Where<Claim.CareTeamComponent>(q_, r_);
 			ResourceReference t_(Claim.CareTeamComponent @this)
 			{
-				ResourceReference al_ = @this.Provider;
+				ResourceReference al_ = @this?.Provider;
 
 				return al_;
 			};
 			IEnumerable<ResourceReference> u_ = context?.Operators.Select<Claim.CareTeamComponent, ResourceReference>(s_, t_);
 			string v_(ResourceReference p)
 			{
-				FhirString am_ = p.ReferenceElement;
+				FhirString am_ = p?.ReferenceElement;
 				FhirString[] an_ = [
 					am_,
 				];
@@ -3366,7 +3366,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Practitioner> at_ = context?.Operators.RetrieveByValueSet<Practitioner>(null, null);
 			bool? au_(Practitioner p)
 			{
-				Id bb_ = p.IdElement;
+				Id bb_ = p?.IdElement;
 				string bc_ = FHIRHelpers_4_0_001.ToString(bb_);
 				IEnumerable<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> bd_ = ClaimProperties?.CareTeams;
 				bool? be_((Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
@@ -3406,20 +3406,20 @@ public class NCQAClaims_1_0_0
 				IEnumerable<Practitioner> bp_ = context?.Operators.Where<Practitioner>(bn_, bo_);
 				(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? bq_(Practitioner P)
 				{
-					List<Identifier> by_ = P.Identifier;
+					List<Identifier> by_ = P?.Identifier;
 					bool? bz_(Identifier l)
 					{
-						FhirUri cj_ = l.SystemElement;
-						string ck_ = cj_.Value;
+						FhirUri cj_ = l?.SystemElement;
+						string ck_ = cj_?.Value;
 						bool? cl_ = context?.Operators.Equal(ck_, "http://hl7.org/fhir/sid/us-npi");
-						CodeableConcept cm_ = l.Type;
+						CodeableConcept cm_ = l?.Type;
 						CqlConcept cn_ = FHIRHelpers_4_0_001.ToConcept(cm_);
 						CqlCode co_ = NCQATerminology_1_0_0.Provider_number();
 						CqlConcept cp_ = context?.Operators.ConvertCodeToConcept(co_);
 						bool? cq_ = context?.Operators.Equivalent(cn_, cp_);
 						bool? cr_ = context?.Operators.And(cl_, cq_);
-						FhirString cs_ = l.ValueElement;
-						string ct_ = cs_.Value;
+						FhirString cs_ = l?.ValueElement;
+						string ct_ = cs_?.Value;
 						bool? cu_ = context?.Operators.Not((bool?)(ct_ is null));
 						bool? cv_ = context?.Operators.And(cr_, cu_);
 
@@ -3428,24 +3428,24 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Identifier> ca_ = context?.Operators.Where<Identifier>((IEnumerable<Identifier>)by_, bz_);
 					FhirString cb_(Identifier l)
 					{
-						FhirString cw_ = l.ValueElement;
+						FhirString cw_ = l?.ValueElement;
 
 						return cw_;
 					};
 					IEnumerable<FhirString> cc_ = context?.Operators.Select<Identifier, FhirString>(ca_, cb_);
 					bool? ce_(Identifier l)
 					{
-						FhirUri cx_ = l.SystemElement;
-						string cy_ = cx_.Value;
+						FhirUri cx_ = l?.SystemElement;
+						string cy_ = cx_?.Value;
 						bool? cz_ = context?.Operators.Equal(cy_, "http://hl7.org/fhir/sid/us-npi");
-						CodeableConcept da_ = l.Type;
+						CodeableConcept da_ = l?.Type;
 						CqlConcept db_ = FHIRHelpers_4_0_001.ToConcept(da_);
 						CqlCode dc_ = NCQATerminology_1_0_0.Provider_number();
 						CqlConcept dd_ = context?.Operators.ConvertCodeToConcept(dc_);
 						bool? de_ = context?.Operators.Equivalent(db_, dd_);
 						bool? df_ = context?.Operators.And(cz_, de_);
-						FhirString dg_ = l.ValueElement;
-						string dh_ = dg_.Value;
+						FhirString dg_ = l?.ValueElement;
+						string dh_ = dg_?.Value;
 						bool? di_ = context?.Operators.And(df_, (bool?)(dh_ is null));
 
 						return di_;
@@ -3509,7 +3509,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim> dz_ = context?.Operators.Select<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?, Claim>(dx_, dy_);
 							bool? ea_(Claim X)
 							{
-								List<Claim.CareTeamComponent> eu_ = X.CareTeam;
+								List<Claim.CareTeamComponent> eu_ = X?.CareTeam;
 
 								return (bool?)((IEnumerable<Claim.CareTeamComponent>)eu_ is null);
 							};
@@ -3572,10 +3572,10 @@ public class NCQAClaims_1_0_0
 	{
 		(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? a_(Claim C)
 		{
-			List<Claim.ItemComponent> h_ = C.Item;
+			List<Claim.ItemComponent> h_ = C?.Item;
 			bool? j_(Claim.ItemComponent i)
 			{
-				PositiveInt ab_ = i.SequenceElement;
+				PositiveInt ab_ = i?.SequenceElement;
 				Integer ac_ = context?.Operators.Convert<Integer>(ab_);
 				int? ad_ = FHIRHelpers_4_0_001.ToInteger(ac_);
 				bool? ae_ = context?.Operators.Equal(ad_, 1);
@@ -3585,7 +3585,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.ItemComponent> k_ = context?.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)h_, j_);
 			bool? l_(Claim.ItemComponent @this)
 			{
-				DataType af_ = @this.Location;
+				DataType af_ = @this?.Location;
 				bool? ag_ = context?.Operators.Not((bool?)(af_ is null));
 
 				return ag_;
@@ -3593,7 +3593,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.ItemComponent> m_ = context?.Operators.Where<Claim.ItemComponent>(k_, l_);
 			DataType n_(Claim.ItemComponent @this)
 			{
-				DataType ah_ = @this.Location;
+				DataType ah_ = @this?.Location;
 
 				return ah_;
 			};
@@ -3603,7 +3603,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<ResourceReference> q_ = context?.Operators.Select<object, ResourceReference>((IEnumerable<object>)o_, p_);
 			bool? s_(Claim.ItemComponent i)
 			{
-				PositiveInt ai_ = i.SequenceElement;
+				PositiveInt ai_ = i?.SequenceElement;
 				Integer aj_ = context?.Operators.Convert<Integer>(ai_);
 				int? ak_ = FHIRHelpers_4_0_001.ToInteger(aj_);
 				bool? al_ = context?.Operators.Equal(ak_, 1);
@@ -3613,7 +3613,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.ItemComponent> t_ = context?.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)h_, s_);
 			bool? u_(Claim.ItemComponent @this)
 			{
-				DataType am_ = @this.Location;
+				DataType am_ = @this?.Location;
 				bool? an_ = context?.Operators.Not((bool?)(am_ is null));
 
 				return an_;
@@ -3621,14 +3621,14 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Claim.ItemComponent> v_ = context?.Operators.Where<Claim.ItemComponent>(t_, u_);
 			DataType w_(Claim.ItemComponent @this)
 			{
-				DataType ao_ = @this.Location;
+				DataType ao_ = @this?.Location;
 
 				return ao_;
 			};
 			IEnumerable<DataType> x_ = context?.Operators.Select<Claim.ItemComponent, DataType>(v_, w_);
 			string y_(object l)
 			{
-				FhirString ap_ = (l as ResourceReference).ReferenceElement;
+				FhirString ap_ = (l as ResourceReference)?.ReferenceElement;
 				FhirString[] aq_ = [
 					ap_,
 				];
@@ -3659,7 +3659,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<Location> aw_ = context?.Operators.RetrieveByValueSet<Location>(null, null);
 			bool? ax_(Location l)
 			{
-				Id be_ = l.IdElement;
+				Id be_ = l?.IdElement;
 				string bf_ = FHIRHelpers_4_0_001.ToString(be_);
 				IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> bg_ = ClaimProperties?.ItemsLocationReferences;
 				bool? bh_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
@@ -3699,20 +3699,20 @@ public class NCQAClaims_1_0_0
 				IEnumerable<Location> bs_ = context?.Operators.Where<Location>(bq_, br_);
 				(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? bt_(Location C)
 				{
-					List<Identifier> cb_ = C.Identifier;
+					List<Identifier> cb_ = C?.Identifier;
 					bool? cc_(Identifier l)
 					{
-						FhirUri cm_ = l.SystemElement;
-						string cn_ = cm_.Value;
+						FhirUri cm_ = l?.SystemElement;
+						string cn_ = cm_?.Value;
 						bool? co_ = context?.Operators.Equal(cn_, "http://hl7.org/fhir/sid/us-npi");
-						CodeableConcept cp_ = l.Type;
+						CodeableConcept cp_ = l?.Type;
 						CqlConcept cq_ = FHIRHelpers_4_0_001.ToConcept(cp_);
 						CqlCode cr_ = NCQATerminology_1_0_0.Provider_number();
 						CqlConcept cs_ = context?.Operators.ConvertCodeToConcept(cr_);
 						bool? ct_ = context?.Operators.Equivalent(cq_, cs_);
 						bool? cu_ = context?.Operators.And(co_, ct_);
-						FhirString cv_ = l.ValueElement;
-						string cw_ = cv_.Value;
+						FhirString cv_ = l?.ValueElement;
+						string cw_ = cv_?.Value;
 						bool? cx_ = context?.Operators.Not((bool?)(cw_ is null));
 						bool? cy_ = context?.Operators.And(cu_, cx_);
 
@@ -3721,24 +3721,24 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Identifier> cd_ = context?.Operators.Where<Identifier>((IEnumerable<Identifier>)cb_, cc_);
 					FhirString ce_(Identifier l)
 					{
-						FhirString cz_ = l.ValueElement;
+						FhirString cz_ = l?.ValueElement;
 
 						return cz_;
 					};
 					IEnumerable<FhirString> cf_ = context?.Operators.Select<Identifier, FhirString>(cd_, ce_);
 					bool? ch_(Identifier l)
 					{
-						FhirUri da_ = l.SystemElement;
-						string db_ = da_.Value;
+						FhirUri da_ = l?.SystemElement;
+						string db_ = da_?.Value;
 						bool? dc_ = context?.Operators.Equal(db_, "http://hl7.org/fhir/sid/us-npi");
-						CodeableConcept dd_ = l.Type;
+						CodeableConcept dd_ = l?.Type;
 						CqlConcept de_ = FHIRHelpers_4_0_001.ToConcept(dd_);
 						CqlCode df_ = NCQATerminology_1_0_0.Provider_number();
 						CqlConcept dg_ = context?.Operators.ConvertCodeToConcept(df_);
 						bool? dh_ = context?.Operators.Equivalent(de_, dg_);
 						bool? di_ = context?.Operators.And(dc_, dh_);
-						FhirString dj_ = l.ValueElement;
-						string dk_ = dj_.Value;
+						FhirString dj_ = l?.ValueElement;
+						string dk_ = dj_?.Value;
 						bool? dl_ = context?.Operators.And(di_, (bool?)(dk_ is null));
 
 						return dl_;
@@ -3804,8 +3804,8 @@ public class NCQAClaims_1_0_0
 							IEnumerable<ResourceReference> ee_ = context?.Operators.Flatten<ResourceReference>(ed_);
 							bool? ef_(ResourceReference X)
 							{
-								FhirString ez_ = X.ReferenceElement;
-								string fa_ = ez_.Value;
+								FhirString ez_ = X?.ReferenceElement;
+								string fa_ = ez_?.Value;
 
 								return (bool?)(fa_ is null);
 							};

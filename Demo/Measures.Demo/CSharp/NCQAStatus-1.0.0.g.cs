@@ -56,7 +56,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(AllergyIntolerance A)
 		{
-			CodeableConcept c_ = A.ClinicalStatus;
+			CodeableConcept c_ = A?.ClinicalStatus;
 			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			CqlCode e_ = NCQATerminology_1_0_0.allergy_active();
 			CqlConcept f_ = context?.Operators.ConvertCodeToConcept(e_);
@@ -74,7 +74,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Condition C)
 		{
-			CodeableConcept c_ = C.ClinicalStatus;
+			CodeableConcept c_ = C?.ClinicalStatus;
 			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(c_);
 			CqlCode e_ = NCQATerminology_1_0_0.active();
 			CqlConcept f_ = context?.Operators.ConvertCodeToConcept(e_);
@@ -92,7 +92,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Encounter E)
 		{
-			Code<Encounter.EncounterStatus> c_ = E.StatusElement;
+			Code<Encounter.EncounterStatus> c_ = E?.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
 			bool? e_ = context?.Operators.Equal(d_, "finished");
 
@@ -108,7 +108,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Immunization I)
 		{
-			Code<Immunization.ImmunizationStatusCodes> c_ = I.StatusElement;
+			Code<Immunization.ImmunizationStatusCodes> c_ = I?.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
 			bool? e_ = context?.Operators.Equal(d_, "completed");
 
@@ -124,7 +124,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationDispense M)
 		{
-			Code<MedicationDispense.MedicationDispenseStatusCodes> c_ = M.StatusElement;
+			Code<MedicationDispense.MedicationDispenseStatusCodes> c_ = M?.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
 			bool? e_ = context?.Operators.Equal(d_, "completed");
 
@@ -140,7 +140,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationRequest M)
 		{
-			Code<MedicationRequest.MedicationrequestStatus> c_ = M.StatusElement;
+			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
 			string[] e_ = [
 				"completed",
@@ -159,7 +159,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			Code<EventStatus> c_ = P.StatusElement;
+			Code<EventStatus> c_ = P?.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
 			bool? e_ = context?.Operators.Equal(d_, "completed");
 
@@ -175,7 +175,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			Code<EventStatus> c_ = P.StatusElement;
+			Code<EventStatus> c_ = P?.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
 			string[] e_ = [
 				"completed",

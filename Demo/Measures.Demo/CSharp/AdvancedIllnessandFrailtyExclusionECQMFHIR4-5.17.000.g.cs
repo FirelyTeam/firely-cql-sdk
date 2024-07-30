@@ -228,10 +228,10 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<MedicationRequest> e_ = context?.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest DementiaMed)
 		{
-			Code<MedicationRequest.MedicationrequestStatus> h_ = DementiaMed.StatusElement;
+			Code<MedicationRequest.MedicationrequestStatus> h_ = DementiaMed?.StatusElement;
 			string i_ = FHIRHelpers_4_0_001.ToString(h_);
 			bool? j_ = context?.Operators.Equal(i_, "active");
-			Code<MedicationRequest.MedicationRequestIntent> k_ = DementiaMed.IntentElement;
+			Code<MedicationRequest.MedicationRequestIntent> k_ = DementiaMed?.IntentElement;
 			string l_ = FHIRHelpers_4_0_001.ToString(k_);
 			bool? m_ = context?.Operators.Equal(l_, "order");
 			bool? n_ = context?.Operators.And(j_, m_);
@@ -265,10 +265,10 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<Encounter> e_ = context?.Operators.Union<Encounter>(b_, d_);
 		bool? f_(Encounter LongTermFacilityEncounter)
 		{
-			Code<Encounter.EncounterStatus> j_ = LongTermFacilityEncounter.StatusElement;
+			Code<Encounter.EncounterStatus> j_ = LongTermFacilityEncounter?.StatusElement;
 			string k_ = FHIRHelpers_4_0_001.ToString(j_);
 			bool? l_ = context?.Operators.Equal(k_, "finished");
-			Period m_ = LongTermFacilityEncounter.Period;
+			Period m_ = LongTermFacilityEncounter?.Period;
 			CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((m_ as object));
 			CqlInterval<CqlDateTime> o_ = this.Measurement_Period();
 			bool? p_ = context?.Operators.Overlaps(n_, o_, null);
@@ -279,7 +279,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<Encounter> g_ = context?.Operators.Where<Encounter>(e_, f_);
 		CqlInterval<CqlDateTime> h_(Encounter LongTermFacilityEncounter)
 		{
-			Period r_ = LongTermFacilityEncounter.Period;
+			Period r_ = LongTermFacilityEncounter?.Period;
 			CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((r_ as object));
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
 			CqlInterval<CqlDateTime> u_ = context?.Operators.Intersect<CqlDateTime>(s_, t_);
@@ -310,7 +310,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<Encounter> k_ = context?.Operators.Union<Encounter>(e_, j_);
 		bool? l_(Encounter Outpatient)
 		{
-			Code<Encounter.EncounterStatus> p_ = Outpatient.StatusElement;
+			Code<Encounter.EncounterStatus> p_ = Outpatient?.StatusElement;
 			string q_ = FHIRHelpers_4_0_001.ToString(p_);
 			bool? r_ = context?.Operators.Equal(q_, "finished");
 
@@ -325,7 +325,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			{
 				IEnumerable<Condition> y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(OutpatientEncounter);
 				bool? z_ = context?.Operators.In<Condition>(AdvancedIllnessDiagnosis, y_);
-				Period aa_ = OutpatientEncounter.Period;
+				Period aa_ = OutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((aa_ as object));
 				CqlDateTime ac_ = context?.Operators.Start(ab_);
 				CqlInterval<CqlDateTime> ad_ = this.Measurement_Period();
@@ -371,10 +371,10 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> e_ = context?.Operators.Select<ValueTuple<Encounter, Encounter>, (Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(c_, d_);
 		bool? f_((Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia)
 		{
-			Period k_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter2.Period;
+			Period k_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter2?.Period;
 			CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.ToInterval(k_);
 			CqlDateTime m_ = context?.Operators.End(l_);
-			Period n_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1.Period;
+			Period n_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1?.Period;
 			CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.ToInterval(n_);
 			CqlDateTime p_ = context?.Operators.End(o_);
 			CqlQuantity q_ = context?.Operators.Quantity(1m, "day");
@@ -480,7 +480,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter AcuteInpatient)
 		{
-			Code<Encounter.EncounterStatus> g_ = AcuteInpatient.StatusElement;
+			Code<Encounter.EncounterStatus> g_ = AcuteInpatient?.StatusElement;
 			string h_ = FHIRHelpers_4_0_001.ToString(g_);
 			bool? i_ = context?.Operators.Equal(h_, "finished");
 
@@ -495,7 +495,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			{
 				IEnumerable<Condition> p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(InpatientEncounter);
 				bool? q_ = context?.Operators.In<Condition>(AdvancedIllnessDiagnosis, p_);
-				Period r_ = InpatientEncounter.Period;
+				Period r_ = InpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((r_ as object));
 				CqlDateTime t_ = context?.Operators.Start(s_);
 				CqlInterval<CqlDateTime> u_ = this.Measurement_Period();
@@ -536,7 +536,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<DeviceRequest> e_ = context?.Operators.Union<DeviceRequest>(b_, d_);
 		bool? f_(DeviceRequest FrailtyDeviceOrder)
 		{
-			Code<RequestStatus> ag_ = FrailtyDeviceOrder.StatusElement;
+			Code<RequestStatus> ag_ = FrailtyDeviceOrder?.StatusElement;
 			string ah_ = FHIRHelpers_4_0_001.ToString(ag_);
 			string[] ai_ = [
 				"active",
@@ -544,12 +544,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				"completed",
 			];
 			bool? aj_ = context?.Operators.In<string>(ah_, (ai_ as IEnumerable<string>));
-			Code<RequestIntent> ak_ = FrailtyDeviceOrder.IntentElement;
+			Code<RequestIntent> ak_ = FrailtyDeviceOrder?.IntentElement;
 			string al_ = FHIRHelpers_4_0_001.ToString(ak_);
 			bool? am_ = context?.Operators.Equal(al_, "order");
 			bool? an_ = context?.Operators.And(aj_, am_);
 			CqlInterval<CqlDateTime> ao_ = this.Measurement_Period();
-			FhirDateTime ap_ = FrailtyDeviceOrder.AuthoredOnElement;
+			FhirDateTime ap_ = FrailtyDeviceOrder?.AuthoredOnElement;
 			CqlInterval<CqlDateTime> aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ap_ as object));
 			bool? ar_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, null);
 			bool? as_ = context?.Operators.And(an_, ar_);
@@ -561,7 +561,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<Observation> j_ = context?.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? k_(Observation FrailtyDeviceApplied)
 		{
-			Code<ObservationStatus> at_ = FrailtyDeviceApplied.StatusElement;
+			Code<ObservationStatus> at_ = FrailtyDeviceApplied?.StatusElement;
 			string au_ = FHIRHelpers_4_0_001.ToString(at_);
 			string[] av_ = [
 				"final",
@@ -569,7 +569,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				"corrected",
 			];
 			bool? aw_ = context?.Operators.In<string>(au_, (av_ as IEnumerable<string>));
-			DataType ax_ = FrailtyDeviceApplied.Effective;
+			DataType ax_ = FrailtyDeviceApplied?.Effective;
 			CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ax_);
 			CqlInterval<CqlDateTime> az_ = this.Measurement_Period();
 			bool? ba_ = context?.Operators.Overlaps(ay_, az_, null);
@@ -597,10 +597,10 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<Encounter> v_ = context?.Operators.RetrieveByValueSet<Encounter>(u_, null);
 		bool? w_(Encounter FrailtyEncounter)
 		{
-			Code<Encounter.EncounterStatus> bf_ = FrailtyEncounter.StatusElement;
+			Code<Encounter.EncounterStatus> bf_ = FrailtyEncounter?.StatusElement;
 			string bg_ = FHIRHelpers_4_0_001.ToString(bf_);
 			bool? bh_ = context?.Operators.Equal(bg_, "finished");
-			Period bi_ = FrailtyEncounter.Period;
+			Period bi_ = FrailtyEncounter?.Period;
 			CqlInterval<CqlDateTime> bj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((bi_ as object));
 			CqlInterval<CqlDateTime> bk_ = this.Measurement_Period();
 			bool? bl_ = context?.Operators.Overlaps(bj_, bk_, null);
@@ -615,7 +615,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		IEnumerable<Observation> ab_ = context?.Operators.RetrieveByValueSet<Observation>(aa_, null);
 		bool? ac_(Observation FrailtySymptom)
 		{
-			Code<ObservationStatus> bn_ = FrailtySymptom.StatusElement;
+			Code<ObservationStatus> bn_ = FrailtySymptom?.StatusElement;
 			string bo_ = FHIRHelpers_4_0_001.ToString(bn_);
 			string[] bp_ = [
 				"preliminary",
@@ -624,7 +624,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				"corrected",
 			];
 			bool? bq_ = context?.Operators.In<string>(bo_, (bp_ as IEnumerable<string>));
-			DataType br_ = FrailtySymptom.Effective;
+			DataType br_ = FrailtySymptom?.Effective;
 			CqlInterval<CqlDateTime> bs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(br_);
 			CqlInterval<CqlDateTime> bt_ = this.Measurement_Period();
 			bool? bu_ = context?.Operators.Overlaps(bs_, bt_, null);
@@ -646,8 +646,8 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	private bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -666,8 +666,8 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		bool? s_ = context?.Operators.Exists<MedicationRequest>(r_);
 		bool? t_ = context?.Operators.Or(q_, s_);
 		bool? u_ = context?.Operators.And(l_, t_);
-		Date w_ = a_.BirthDateElement;
-		string x_ = w_.Value;
+		Date w_ = a_?.BirthDateElement;
+		string x_ = w_?.Value;
 		CqlDate y_ = context?.Operators.ConvertStringToDate(x_);
 		CqlDateTime aa_ = context?.Operators.Start(e_);
 		CqlDate ab_ = context?.Operators.DateFrom(aa_);
@@ -686,8 +686,8 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 	private bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);

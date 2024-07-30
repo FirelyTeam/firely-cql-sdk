@@ -121,7 +121,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		};
 		bool? b_(Extension Extension)
 		{
-			string o_ = Extension.Url;
+			string o_ = Extension?.Url;
 			FhirUri p_ = context?.Operators.Convert<FhirUri>(o_);
 			string q_ = FHIRHelpers_4_0_001.ToString(p_);
 			bool? r_ = context?.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
@@ -131,7 +131,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		IEnumerable<Extension> c_ = context?.Operators.Where<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension)
 		{
-			List<Extension> s_ = Extension.Extension;
+			List<Extension> s_ = Extension?.Extension;
 
 			return (IEnumerable<Extension>)s_;
 		};
@@ -139,7 +139,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		IEnumerable<Extension> f_ = context?.Operators.Flatten<Extension>(e_);
 		bool? g_(Extension E)
 		{
-			string t_ = E.Url;
+			string t_ = E?.Url;
 			FhirUri u_ = context?.Operators.Convert<FhirUri>(t_);
 			string v_ = FHIRHelpers_4_0_001.ToString(u_);
 			bool? w_ = context?.Operators.Equal(v_, "ombCategory");
@@ -153,7 +153,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		IEnumerable<Extension> h_ = context?.Operators.Where<Extension>(f_, g_);
 		Coding i_(Extension E)
 		{
-			DataType ac_ = E.Value;
+			DataType ac_ = E?.Value;
 
 			return (ac_ as Coding);
 		};
@@ -172,8 +172,8 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		IEnumerable<Coverage> b_ = context?.Operators.RetrieveByValueSet<Coverage>(a_, null);
 		(CodeableConcept code, Period period)? c_(Coverage Payer)
 		{
-			CodeableConcept e_ = Payer.Type;
-			Period f_ = Payer.Period;
+			CodeableConcept e_ = Payer?.Type;
+			Period f_ = Payer?.Period;
 			(CodeableConcept code, Period period)? g_ = (e_, f_);
 
 			return g_;
@@ -211,7 +211,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		};
 		bool? b_(Extension Extension)
 		{
-			string o_ = Extension.Url;
+			string o_ = Extension?.Url;
 			FhirUri p_ = context?.Operators.Convert<FhirUri>(o_);
 			string q_ = FHIRHelpers_4_0_001.ToString(p_);
 			bool? r_ = context?.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
@@ -221,7 +221,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		IEnumerable<Extension> c_ = context?.Operators.Where<Extension>(a_(), b_);
 		IEnumerable<Extension> d_(Extension Extension)
 		{
-			List<Extension> s_ = Extension.Extension;
+			List<Extension> s_ = Extension?.Extension;
 
 			return (IEnumerable<Extension>)s_;
 		};
@@ -229,7 +229,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		IEnumerable<Extension> f_ = context?.Operators.Flatten<Extension>(e_);
 		bool? g_(Extension E)
 		{
-			string t_ = E.Url;
+			string t_ = E?.Url;
 			FhirUri u_ = context?.Operators.Convert<FhirUri>(t_);
 			string v_ = FHIRHelpers_4_0_001.ToString(u_);
 			bool? w_ = context?.Operators.Equal(v_, "ombCategory");
@@ -243,7 +243,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		IEnumerable<Extension> h_ = context?.Operators.Where<Extension>(f_, g_);
 		Coding i_(Extension E)
 		{
-			DataType ac_ = E.Value;
+			DataType ac_ = E?.Value;
 
 			return (ac_ as Coding);
 		};
@@ -263,7 +263,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			bool b_()
 			{
 				Patient d_ = this.Patient();
-				Code<AdministrativeGender> e_ = d_.GenderElement;
+				Code<AdministrativeGender> e_ = d_?.GenderElement;
 				string f_ = FHIRHelpers_4_0_001.ToString(e_);
 				bool? g_ = context?.Operators.Equal(f_, "male");
 
@@ -272,7 +272,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			bool c_()
 			{
 				Patient h_ = this.Patient();
-				Code<AdministrativeGender> i_ = h_.GenderElement;
+				Code<AdministrativeGender> i_ = h_?.GenderElement;
 				string j_ = FHIRHelpers_4_0_001.ToString(i_);
 				bool? k_ = context?.Operators.Equal(j_, "female");
 

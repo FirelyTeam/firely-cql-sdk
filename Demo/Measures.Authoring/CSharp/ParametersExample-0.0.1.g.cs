@@ -101,18 +101,18 @@ public class ParametersExample_0_0_1
 		];
 		bool? c_(Patient P)
 		{
-			Code<AdministrativeGender> f_ = P.GenderElement;
+			Code<AdministrativeGender> f_ = P?.GenderElement;
 			string g_ = FHIRHelpers_4_3_000.ToString(f_);
 			bool? h_ = context?.Operators.Equal(g_, "male");
-			FhirBoolean i_ = P.ActiveElement;
+			FhirBoolean i_ = P?.ActiveElement;
 			bool? j_ = FHIRHelpers_4_3_000.ToBoolean(i_);
 			bool? k_ = context?.Operators.IsTrue(j_);
 			bool? l_ = context?.Operators.And(h_, k_);
-			DataType m_ = P.Deceased;
+			DataType m_ = P?.Deceased;
 			bool? n_ = FHIRHelpers_4_3_000.ToBoolean((m_ as FhirBoolean));
 			bool? o_ = context?.Operators.Not(n_);
 			bool? p_ = context?.Operators.And(l_, o_);
-			CodeableConcept q_ = P.MaritalStatus;
+			CodeableConcept q_ = P?.MaritalStatus;
 			CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept(q_);
 			CqlValueSet s_ = this.Marital_Status();
 			bool? t_ = context?.Operators.ConceptInValueSet(r_, s_);
@@ -133,7 +133,7 @@ public class ParametersExample_0_0_1
 	private Date Patient_Birthdate_Value()
 	{
 		Patient a_ = this.Patient_Filter();
-		Date b_ = a_.BirthDateElement;
+		Date b_ = a_?.BirthDateElement;
 
 		return b_;
 	}

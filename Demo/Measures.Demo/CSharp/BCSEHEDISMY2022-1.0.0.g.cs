@@ -289,7 +289,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Coverage> a_ = context?.Operators.RetrieveByValueSet<Coverage>(null, null);
 		bool? b_(Coverage C)
 		{
-			Period d_ = C.Period;
+			Period d_ = C?.Period;
 			CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_1_0_0.Normalize_Interval((d_ as object));
 			CqlInterval<CqlDateTime> f_ = this.Participation_Period();
 			bool? g_ = context?.Operators.Overlaps(e_, f_, null);
@@ -351,8 +351,8 @@ public class BCSEHEDISMY2022_1_0_0
 	private bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.End(e_);
@@ -360,8 +360,8 @@ public class BCSEHEDISMY2022_1_0_0
 		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
 		CqlInterval<int?> i_ = context?.Operators.Interval(52, 74, true, true);
 		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
-		Code<AdministrativeGender> l_ = a_.GenderElement;
-		AdministrativeGender? m_ = l_.Value;
+		Code<AdministrativeGender> l_ = a_?.GenderElement;
+		AdministrativeGender? m_ = l_?.Value;
 		string n_ = context?.Operators.Convert<string>(m_);
 		bool? o_ = context?.Operators.Equal(n_, "female");
 		bool? p_ = context?.Operators.And(j_, o_);
@@ -420,7 +420,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Procedure> f_ = NCQAStatus_1_0_0.Completed_Procedure(e_);
 		bool? g_(Procedure UnilateralMastectomyProcedure)
 		{
-			List<CodeableConcept> r_ = UnilateralMastectomyProcedure.BodySite;
+			List<CodeableConcept> r_ = UnilateralMastectomyProcedure?.BodySite;
 			CqlConcept s_(CodeableConcept X)
 			{
 				CqlConcept w_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -440,7 +440,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Procedure> l_ = NCQAStatus_1_0_0.Completed_Procedure(k_);
 		bool? m_(Procedure ClinicalUnilateralMastectomyProcedure)
 		{
-			List<CodeableConcept> x_ = ClinicalUnilateralMastectomyProcedure.BodySite;
+			List<CodeableConcept> x_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
 			CqlConcept y_(CodeableConcept X)
 			{
 				CqlConcept ac_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -457,7 +457,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Procedure> o_ = context?.Operators.Union<Procedure>(i_, n_);
 		bool? p_(Procedure RightMastectomyProcedure)
 		{
-			DataType ad_ = RightMastectomyProcedure.Performed;
+			DataType ad_ = RightMastectomyProcedure?.Performed;
 			CqlInterval<CqlDateTime> ae_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ad_);
 			CqlDateTime af_ = context?.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = this.Measurement_Period();
@@ -509,7 +509,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Procedure> f_ = NCQAStatus_1_0_0.Completed_Procedure(e_);
 		bool? g_(Procedure UnilateralMastectomyProcedure)
 		{
-			List<CodeableConcept> r_ = UnilateralMastectomyProcedure.BodySite;
+			List<CodeableConcept> r_ = UnilateralMastectomyProcedure?.BodySite;
 			CqlConcept s_(CodeableConcept X)
 			{
 				CqlConcept w_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -529,7 +529,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Procedure> l_ = NCQAStatus_1_0_0.Completed_Procedure(k_);
 		bool? m_(Procedure ClinicalUnilateralMastectomyProcedure)
 		{
-			List<CodeableConcept> x_ = ClinicalUnilateralMastectomyProcedure.BodySite;
+			List<CodeableConcept> x_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
 			CqlConcept y_(CodeableConcept X)
 			{
 				CqlConcept ac_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -546,7 +546,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Procedure> o_ = context?.Operators.Union<Procedure>(i_, n_);
 		bool? p_(Procedure LeftMastectomyProcedure)
 		{
-			DataType ad_ = LeftMastectomyProcedure.Performed;
+			DataType ad_ = LeftMastectomyProcedure?.Performed;
 			CqlInterval<CqlDateTime> ae_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ad_);
 			CqlDateTime af_ = context?.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = this.Measurement_Period();
@@ -598,7 +598,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Procedure> f_ = NCQAStatus_1_0_0.Completed_Procedure(e_);
 		bool? g_(Procedure UnilateralMastectomyProcedure)
 		{
-			List<CodeableConcept> r_ = UnilateralMastectomyProcedure.BodySite;
+			List<CodeableConcept> r_ = UnilateralMastectomyProcedure?.BodySite;
 			CqlConcept s_(CodeableConcept X)
 			{
 				CqlConcept w_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -618,7 +618,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Procedure> l_ = NCQAStatus_1_0_0.Completed_Procedure(k_);
 		bool? m_(Procedure ClinicalUnilateralMastectomyProcedure)
 		{
-			List<CodeableConcept> x_ = ClinicalUnilateralMastectomyProcedure.BodySite;
+			List<CodeableConcept> x_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
 			CqlConcept y_(CodeableConcept X)
 			{
 				CqlConcept ac_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -635,7 +635,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Procedure> o_ = context?.Operators.Union<Procedure>(i_, n_);
 		bool? p_(Procedure BilateralMastectomyPerformed)
 		{
-			DataType ad_ = BilateralMastectomyPerformed.Performed;
+			DataType ad_ = BilateralMastectomyPerformed?.Performed;
 			CqlInterval<CqlDateTime> ae_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ad_);
 			CqlDateTime af_ = context?.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = this.Measurement_Period();
@@ -704,7 +704,7 @@ public class BCSEHEDISMY2022_1_0_0
 		IEnumerable<Observation> b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation Mammogram)
 		{
-			DataType f_ = Mammogram.Effective;
+			DataType f_ = Mammogram?.Effective;
 			CqlInterval<CqlDateTime> g_ = NCQAFHIRBase_1_0_0.Normalize_Interval(f_);
 			CqlDateTime h_ = context?.Operators.End(g_);
 			CqlInterval<CqlDateTime> i_ = this.Participation_Period();

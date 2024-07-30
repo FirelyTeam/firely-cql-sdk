@@ -538,13 +538,13 @@ public class FHIR347_0_1_021
 		IEnumerable<Procedure> aa_ = context?.Operators.Union<Procedure>(u_, z_);
 		bool? ab_(Procedure ASCVDProcedure)
 		{
-			DataType aj_ = ASCVDProcedure.Performed;
+			DataType aj_ = ASCVDProcedure?.Performed;
 			CqlInterval<CqlDateTime> ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aj_);
 			CqlDateTime al_ = context?.Operators.Start(ak_);
 			CqlInterval<CqlDateTime> am_ = this.Measurement_Period();
 			CqlDateTime an_ = context?.Operators.End(am_);
 			bool? ao_ = context?.Operators.Before(al_, an_, null);
-			Code<EventStatus> ap_ = ASCVDProcedure.StatusElement;
+			Code<EventStatus> ap_ = ASCVDProcedure?.StatusElement;
 			string aq_ = FHIRHelpers_4_0_001.ToString(ap_);
 			bool? ar_ = context?.Operators.Equal(aq_, "completed");
 			bool? as_ = context?.Operators.And(ao_, ar_);
@@ -589,10 +589,10 @@ public class FHIR347_0_1_021
 		bool? x_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> z_ = this.Measurement_Period();
-			Period aa_ = ValidEncounter.Period;
+			Period aa_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_0_001.ToInterval(aa_);
 			bool? ac_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, null);
-			Code<Encounter.EncounterStatus> ad_ = ValidEncounter.StatusElement;
+			Code<Encounter.EncounterStatus> ad_ = ValidEncounter?.StatusElement;
 			string ae_ = FHIRHelpers_4_0_001.ToString(ad_);
 			bool? af_ = context?.Operators.Equal(ae_, "finished");
 			bool? ag_ = context?.Operators.And(ac_, af_);
@@ -637,8 +637,8 @@ public class FHIR347_0_1_021
 	private bool? Patients_Age_20_or_Older_at_Start_of_Measurement_Period_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDateTime d_ = context?.Operators.ConvertStringToDateTime(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -658,18 +658,18 @@ public class FHIR347_0_1_021
 		IEnumerable<Observation> b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation LDL)
 		{
-			DataType e_ = LDL.Value;
+			DataType e_ = LDL?.Value;
 			CqlQuantity f_ = FHIRHelpers_4_0_001.ToQuantity((e_ as Quantity));
 			CqlQuantity g_ = context?.Operators.Quantity(190m, "mg/dL");
 			bool? h_ = context?.Operators.GreaterOrEqual(f_, g_);
-			DataType i_ = LDL.Effective;
+			DataType i_ = LDL?.Effective;
 			CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(i_);
 			CqlDateTime k_ = context?.Operators.Start(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
 			CqlDateTime m_ = context?.Operators.End(l_);
 			bool? n_ = context?.Operators.Before(k_, m_, null);
 			bool? o_ = context?.Operators.And(h_, n_);
-			Code<ObservationStatus> p_ = LDL.StatusElement;
+			Code<ObservationStatus> p_ = LDL?.StatusElement;
 			string q_ = FHIRHelpers_4_0_001.ToString(p_);
 			string[] r_ = [
 				"final",
@@ -784,8 +784,8 @@ public class FHIR347_0_1_021
 	private bool? Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia_Value()
 	{
 		Patient a_ = this.Patient();
-		Date b_ = a_.BirthDateElement;
-		string c_ = b_.Value;
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
 		CqlDateTime d_ = context?.Operators.ConvertStringToDateTime(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context?.Operators.Start(e_);
@@ -889,7 +889,7 @@ public class FHIR347_0_1_021
 		IEnumerable<AllergyIntolerance> b_ = context?.Operators.RetrieveByValueSet<AllergyIntolerance>(a_, null);
 		bool? c_(AllergyIntolerance StatinAllergy)
 		{
-			DataType f_ = StatinAllergy.Onset;
+			DataType f_ = StatinAllergy?.Onset;
 			CqlInterval<CqlDateTime> g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(f_);
 			CqlDateTime h_ = context?.Operators.Start(g_);
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period();
@@ -917,12 +917,12 @@ public class FHIR347_0_1_021
 		IEnumerable<ServiceRequest> e_ = context?.Operators.Union<ServiceRequest>(b_, d_);
 		bool? f_(ServiceRequest PalliativeOrHospiceCareOrder)
 		{
-			FhirDateTime y_ = PalliativeOrHospiceCareOrder.AuthoredOnElement;
+			FhirDateTime y_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
 			CqlDateTime z_ = FHIRHelpers_4_0_001.ToDateTime(y_);
 			CqlInterval<CqlDateTime> aa_ = this.Measurement_Period();
 			CqlDateTime ab_ = context?.Operators.End(aa_);
 			bool? ac_ = context?.Operators.SameOrBefore(z_, ab_, null);
-			Code<RequestStatus> ad_ = PalliativeOrHospiceCareOrder.StatusElement;
+			Code<RequestStatus> ad_ = PalliativeOrHospiceCareOrder?.StatusElement;
 			string ae_ = FHIRHelpers_4_0_001.ToString(ad_);
 			string[] af_ = [
 				"active",
@@ -931,7 +931,7 @@ public class FHIR347_0_1_021
 			];
 			bool? ag_ = context?.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
 			bool? ah_ = context?.Operators.And(ac_, ag_);
-			Code<RequestIntent> ai_ = PalliativeOrHospiceCareOrder.IntentElement;
+			Code<RequestIntent> ai_ = PalliativeOrHospiceCareOrder?.IntentElement;
 			string aj_ = FHIRHelpers_4_0_001.ToString(ai_);
 			bool? ak_ = context?.Operators.Equal(aj_, "order");
 			bool? al_ = context?.Operators.And(ah_, ak_);
@@ -945,13 +945,13 @@ public class FHIR347_0_1_021
 		IEnumerable<Procedure> m_ = context?.Operators.Union<Procedure>(j_, l_);
 		bool? n_(Procedure PalliativeOrHospiceCarePerformed)
 		{
-			DataType am_ = PalliativeOrHospiceCarePerformed.Performed;
+			DataType am_ = PalliativeOrHospiceCarePerformed?.Performed;
 			CqlInterval<CqlDateTime> an_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(am_);
 			CqlDateTime ao_ = context?.Operators.Start(an_);
 			CqlInterval<CqlDateTime> ap_ = this.Measurement_Period();
 			CqlDateTime aq_ = context?.Operators.End(ap_);
 			bool? ar_ = context?.Operators.SameOrBefore(ao_, aq_, null);
-			Code<EventStatus> as_ = PalliativeOrHospiceCarePerformed.StatusElement;
+			Code<EventStatus> as_ = PalliativeOrHospiceCarePerformed?.StatusElement;
 			string at_ = FHIRHelpers_4_0_001.ToString(as_);
 			bool? au_ = context?.Operators.Equal(at_, "completed");
 			bool? av_ = context?.Operators.And(ar_, au_);
@@ -966,13 +966,13 @@ public class FHIR347_0_1_021
 		IEnumerable<Encounter> t_ = context?.Operators.RetrieveByCodes<Encounter>(s_, null);
 		bool? u_(Encounter PalliativeEncounter)
 		{
-			Period aw_ = PalliativeEncounter.Period;
+			Period aw_ = PalliativeEncounter?.Period;
 			CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_0_001.ToInterval(aw_);
 			CqlDateTime ay_ = context?.Operators.Start(ax_);
 			CqlInterval<CqlDateTime> az_ = this.Measurement_Period();
 			CqlDateTime ba_ = context?.Operators.End(az_);
 			bool? bb_ = context?.Operators.SameOrBefore(ay_, ba_, null);
-			Code<Encounter.EncounterStatus> bc_ = PalliativeEncounter.StatusElement;
+			Code<Encounter.EncounterStatus> bc_ = PalliativeEncounter?.StatusElement;
 			string bd_ = FHIRHelpers_4_0_001.ToString(bc_);
 			bool? be_ = context?.Operators.Equal(bd_, "finished");
 			bool? bf_ = context?.Operators.And(bb_, be_);
@@ -1070,7 +1070,7 @@ public class FHIR347_0_1_021
 		IEnumerable<AdverseEvent> b_ = context?.Operators.RetrieveByValueSet<AdverseEvent>(a_, null);
 		bool? c_(AdverseEvent StatinReaction)
 		{
-			FhirDateTime f_ = StatinReaction.DateElement;
+			FhirDateTime f_ = StatinReaction?.DateElement;
 			CqlDateTime g_ = FHIRHelpers_4_0_001.ToDateTime(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			bool? i_ = context?.Operators.In<CqlDateTime>(g_, h_, null);
@@ -1154,11 +1154,11 @@ public class FHIR347_0_1_021
 		IEnumerable<MedicationRequest> q_ = context?.Operators.Union<MedicationRequest>(k_, p_);
 		bool? r_(MedicationRequest StatinOrdered)
 		{
-			FhirDateTime t_ = StatinOrdered.AuthoredOnElement;
+			FhirDateTime t_ = StatinOrdered?.AuthoredOnElement;
 			CqlDateTime u_ = FHIRHelpers_4_0_001.ToDateTime(t_);
 			CqlInterval<CqlDateTime> v_ = this.Measurement_Period();
 			bool? w_ = context?.Operators.In<CqlDateTime>(u_, v_, null);
-			Code<MedicationRequest.MedicationrequestStatus> x_ = StatinOrdered.StatusElement;
+			Code<MedicationRequest.MedicationrequestStatus> x_ = StatinOrdered?.StatusElement;
 			string y_ = FHIRHelpers_4_0_001.ToString(x_);
 			string[] z_ = [
 				"active",
@@ -1166,7 +1166,7 @@ public class FHIR347_0_1_021
 			];
 			bool? aa_ = context?.Operators.In<string>(y_, (z_ as IEnumerable<string>));
 			bool? ab_ = context?.Operators.And(w_, aa_);
-			Code<MedicationRequest.MedicationRequestIntent> ac_ = StatinOrdered.IntentElement;
+			Code<MedicationRequest.MedicationRequestIntent> ac_ = StatinOrdered?.IntentElement;
 			string ad_ = FHIRHelpers_4_0_001.ToString(ac_);
 			bool? ae_ = context?.Operators.Equal(ad_, "order");
 			bool? af_ = context?.Operators.And(ab_, ae_);
@@ -1200,10 +1200,10 @@ public class FHIR347_0_1_021
 		IEnumerable<MedicationRequest> q_ = context?.Operators.Union<MedicationRequest>(k_, p_);
 		bool? r_(MedicationRequest ActiveStatin)
 		{
-			List<Dosage> t_ = ActiveStatin.DosageInstruction;
+			List<Dosage> t_ = ActiveStatin?.DosageInstruction;
 			bool? u_(Dosage @this)
 			{
-				Timing ag_ = @this.Timing;
+				Timing ag_ = @this?.Timing;
 				bool? ah_ = context?.Operators.Not((bool?)(ag_ is null));
 
 				return ah_;
@@ -1211,7 +1211,7 @@ public class FHIR347_0_1_021
 			IEnumerable<Dosage> v_ = context?.Operators.Where<Dosage>((IEnumerable<Dosage>)t_, u_);
 			Timing w_(Dosage @this)
 			{
-				Timing ai_ = @this.Timing;
+				Timing ai_ = @this?.Timing;
 
 				return ai_;
 			};
@@ -1222,31 +1222,31 @@ public class FHIR347_0_1_021
 				{
 					bool an_()
 					{
-						Timing.RepeatComponent ap_ = T.Repeat;
-						DataType aq_ = ap_.Bounds;
+						Timing.RepeatComponent ap_ = T?.Repeat;
+						DataType aq_ = ap_?.Bounds;
 						bool ar_ = aq_ is Range;
 
 						return ar_;
 					};
 					bool ao_()
 					{
-						Timing.RepeatComponent as_ = T.Repeat;
-						DataType at_ = as_.Bounds;
+						Timing.RepeatComponent as_ = T?.Repeat;
+						DataType at_ = as_?.Bounds;
 						bool au_ = at_ is Period;
 
 						return au_;
 					};
 					if (an_())
 					{
-						Timing.RepeatComponent av_ = T.Repeat;
-						DataType aw_ = av_.Bounds;
+						Timing.RepeatComponent av_ = T?.Repeat;
+						DataType aw_ = av_?.Bounds;
 
 						return ((aw_ as Range) as object);
 					}
 					else if (ao_())
 					{
-						Timing.RepeatComponent ax_ = T.Repeat;
-						DataType ay_ = ax_.Bounds;
+						Timing.RepeatComponent ax_ = T?.Repeat;
+						DataType ay_ = ax_?.Bounds;
 
 						return ((ay_ as Period) as object);
 					}
@@ -1263,7 +1263,7 @@ public class FHIR347_0_1_021
 			};
 			IEnumerable<Timing> z_ = context?.Operators.Where<Timing>(x_, y_);
 			bool? aa_ = context?.Operators.Exists<Timing>(z_);
-			Code<MedicationRequest.MedicationrequestStatus> ab_ = ActiveStatin.StatusElement;
+			Code<MedicationRequest.MedicationrequestStatus> ab_ = ActiveStatin?.StatusElement;
 			string ac_ = FHIRHelpers_4_0_001.ToString(ab_);
 			string[] ad_ = [
 				"active",

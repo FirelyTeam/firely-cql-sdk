@@ -104,7 +104,7 @@ public class MultipleResourcesExample_0_0_1
 		IEnumerable<Observation> c_ = context?.Operators.RetrieveByCodes<Observation>(b_, null);
 		bool? d_(Observation O)
 		{
-			Code<ObservationStatus> f_ = O.StatusElement;
+			Code<ObservationStatus> f_ = O?.StatusElement;
 			string g_ = FHIRHelpers_4_3_000.ToString(f_);
 			string[] h_ = [
 				"final",
@@ -129,7 +129,7 @@ public class MultipleResourcesExample_0_0_1
 		IEnumerable<Condition> b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, null);
 		bool? c_(Condition C)
 		{
-			CodeableConcept e_ = C.ClinicalStatus;
+			CodeableConcept e_ = C?.ClinicalStatus;
 			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(e_);
 			CqlValueSet g_ = this.Condition_Clinical_Status();
 			bool? h_ = context?.Operators.ConceptInValueSet(f_, g_);

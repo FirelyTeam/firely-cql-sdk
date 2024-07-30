@@ -100,7 +100,7 @@ public class NCQAPalliativeCare_1_0_0
 		IEnumerable<Observation> b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation PalliativeAssessment)
 		{
-			DataType ab_ = PalliativeAssessment.Effective;
+			DataType ab_ = PalliativeAssessment?.Effective;
 			CqlInterval<CqlDateTime> ac_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ab_);
 			CqlDateTime ad_ = context?.Operators.Start(ac_);
 			CqlDate ae_ = context?.Operators.DateFrom(ad_);
@@ -124,7 +124,7 @@ public class NCQAPalliativeCare_1_0_0
 		IEnumerable<Encounter> h_ = NCQAStatus_1_0_0.Finished_Encounter(g_);
 		bool? i_(Encounter PalliativeEncounter)
 		{
-			Period aq_ = PalliativeEncounter.Period;
+			Period aq_ = PalliativeEncounter?.Period;
 			CqlInterval<CqlDateTime> ar_ = NCQAFHIRBase_1_0_0.Normalize_Interval((aq_ as object));
 			CqlDateTime as_ = context?.Operators.Start(ar_);
 			CqlDate at_ = context?.Operators.DateFrom(as_);
@@ -149,7 +149,7 @@ public class NCQAPalliativeCare_1_0_0
 		IEnumerable<Procedure> o_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(n_);
 		bool? p_(Procedure PalliativeIntervention)
 		{
-			DataType bf_ = PalliativeIntervention.Performed;
+			DataType bf_ = PalliativeIntervention?.Performed;
 			CqlInterval<CqlDateTime> bg_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bf_);
 			CqlDateTime bh_ = context?.Operators.Start(bg_);
 			CqlDate bi_ = context?.Operators.DateFrom(bh_);

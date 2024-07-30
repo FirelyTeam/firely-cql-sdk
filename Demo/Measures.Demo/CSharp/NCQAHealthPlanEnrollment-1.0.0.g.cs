@@ -46,7 +46,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 	{
 		CqlInterval<CqlDate> a_(Coverage C)
 		{
-			Period c_ = C.Period;
+			Period c_ = C?.Period;
 			CqlInterval<CqlDateTime> d_ = NCQAFHIRBase_1_0_0.Normalize_Interval((c_ as object));
 			CqlDateTime e_ = context?.Operators.Start(d_);
 			CqlDate f_ = context?.Operators.DateFrom(e_);
@@ -151,8 +151,8 @@ public class NCQAHealthPlanEnrollment_1_0_0
 	{
 		bool? a_(Coverage C)
 		{
-			CodeableConcept e_ = C.Type;
-			List<Coding> f_ = e_.Coding;
+			CodeableConcept e_ = C?.Type;
+			List<Coding> f_ = e_?.Coding;
 			bool? g_(Coding cTypeCoding)
 			{
 				CqlCode j_ = FHIRHelpers_4_0_001.ToCode(cTypeCoding);
@@ -230,7 +230,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			{
 				bool? r_(Coverage @this)
 				{
-					Period y_ = @this.Period;
+					Period y_ = @this?.Period;
 					bool? z_ = context?.Operators.Not((bool?)(y_ is null));
 
 					return z_;
@@ -238,7 +238,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 				IEnumerable<Coverage> s_ = context?.Operators.Where<Coverage>(Coverage, r_);
 				Period t_(Coverage @this)
 				{
-					Period aa_ = @this.Period;
+					Period aa_ = @this?.Period;
 
 					return aa_;
 				};
@@ -321,8 +321,8 @@ public class NCQAHealthPlanEnrollment_1_0_0
 	{
 		bool? a_(Coverage C)
 		{
-			CodeableConcept e_ = C.Type;
-			List<Coding> f_ = e_.Coding;
+			CodeableConcept e_ = C?.Type;
+			List<Coding> f_ = e_?.Coding;
 			bool? g_(Coding cTypeCoding)
 			{
 				CqlCode j_ = FHIRHelpers_4_0_001.ToCode(cTypeCoding);
@@ -396,8 +396,8 @@ public class NCQAHealthPlanEnrollment_1_0_0
 	{
 		bool? a_(Coverage C)
 		{
-			CodeableConcept e_ = C.Type;
-			List<Coding> f_ = e_.Coding;
+			CodeableConcept e_ = C?.Type;
+			List<Coding> f_ = e_?.Coding;
 			bool? g_(Coding cTypeCoding)
 			{
 				CqlCode j_ = FHIRHelpers_4_0_001.ToCode(cTypeCoding);

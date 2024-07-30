@@ -121,7 +121,7 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			string m_ = @this.Url;
+			string m_ = @this?.Url;
 			FhirUri n_ = context?.Operators.Convert<FhirUri>(m_);
 			string o_ = FHIRHelpers_4_3_000.ToString(n_);
 			bool? p_ = context?.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
@@ -137,7 +137,7 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool? q_(Extension @this)
 			{
-				string am_ = @this.Url;
+				string am_ = @this?.Url;
 				FhirUri an_ = context?.Operators.Convert<FhirUri>(am_);
 				string ao_ = FHIRHelpers_4_3_000.ToString(an_);
 				bool? ap_ = context?.Operators.Equal(ao_, "ombCategory");
@@ -149,7 +149,7 @@ public class SupplementalDataElements_3_4_000
 					: null), q_);
 			DataType s_(Extension @this)
 			{
-				DataType aq_ = @this.Value;
+				DataType aq_ = @this?.Value;
 
 				return aq_;
 			};
@@ -162,7 +162,7 @@ public class SupplementalDataElements_3_4_000
 			];
 			bool? y_(Extension @this)
 			{
-				string ar_ = @this.Url;
+				string ar_ = @this?.Url;
 				FhirUri as_ = context?.Operators.Convert<FhirUri>(ar_);
 				string at_ = FHIRHelpers_4_3_000.ToString(as_);
 				bool? au_ = context?.Operators.Equal(at_, "detailed");
@@ -174,7 +174,7 @@ public class SupplementalDataElements_3_4_000
 					: null), y_);
 			DataType aa_(Extension @this)
 			{
-				DataType av_ = @this.Value;
+				DataType av_ = @this?.Value;
 
 				return av_;
 			};
@@ -190,7 +190,7 @@ public class SupplementalDataElements_3_4_000
 			IEnumerable<CqlCode> ae_ = context?.Operators.Union<CqlCode>((x_ as IEnumerable<CqlCode>), ad_);
 			bool? af_(Extension @this)
 			{
-				string ay_ = @this.Url;
+				string ay_ = @this?.Url;
 				FhirUri az_ = context?.Operators.Convert<FhirUri>(ay_);
 				string ba_ = FHIRHelpers_4_3_000.ToString(az_);
 				bool? bb_ = context?.Operators.Equal(ba_, "text");
@@ -202,7 +202,7 @@ public class SupplementalDataElements_3_4_000
 					: null), af_);
 			DataType ah_(Extension @this)
 			{
-				DataType bc_ = @this.Value;
+				DataType bc_ = @this?.Value;
 
 				return bc_;
 			};
@@ -229,9 +229,9 @@ public class SupplementalDataElements_3_4_000
 		IEnumerable<Coverage> b_ = context?.Operators.RetrieveByValueSet<Coverage>(a_, null);
 		(CqlConcept code, CqlInterval<CqlDateTime> period)? c_(Coverage Payer)
 		{
-			CodeableConcept e_ = Payer.Type;
+			CodeableConcept e_ = Payer?.Type;
 			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(e_);
-			Period g_ = Payer.Period;
+			Period g_ = Payer?.Period;
 			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
 			(CqlConcept code, CqlInterval<CqlDateTime> period)? i_ = (f_, h_);
 
@@ -270,7 +270,7 @@ public class SupplementalDataElements_3_4_000
 		};
 		bool? b_(Extension @this)
 		{
-			string m_ = @this.Url;
+			string m_ = @this?.Url;
 			FhirUri n_ = context?.Operators.Convert<FhirUri>(m_);
 			string o_ = FHIRHelpers_4_3_000.ToString(n_);
 			bool? p_ = context?.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
@@ -286,7 +286,7 @@ public class SupplementalDataElements_3_4_000
 		{
 			bool? q_(Extension @this)
 			{
-				string ak_ = @this.Url;
+				string ak_ = @this?.Url;
 				FhirUri al_ = context?.Operators.Convert<FhirUri>(ak_);
 				string am_ = FHIRHelpers_4_3_000.ToString(al_);
 				bool? an_ = context?.Operators.Equal(am_, "ombCategory");
@@ -298,7 +298,7 @@ public class SupplementalDataElements_3_4_000
 					: null), q_);
 			DataType s_(Extension @this)
 			{
-				DataType ao_ = @this.Value;
+				DataType ao_ = @this?.Value;
 
 				return ao_;
 			};
@@ -313,7 +313,7 @@ public class SupplementalDataElements_3_4_000
 			IEnumerable<CqlCode> v_ = context?.Operators.Select<DataType, CqlCode>(t_, u_);
 			bool? w_(Extension @this)
 			{
-				string ar_ = @this.Url;
+				string ar_ = @this?.Url;
 				FhirUri as_ = context?.Operators.Convert<FhirUri>(ar_);
 				string at_ = FHIRHelpers_4_3_000.ToString(as_);
 				bool? au_ = context?.Operators.Equal(at_, "detailed");
@@ -325,7 +325,7 @@ public class SupplementalDataElements_3_4_000
 					: null), w_);
 			DataType y_(Extension @this)
 			{
-				DataType av_ = @this.Value;
+				DataType av_ = @this?.Value;
 
 				return av_;
 			};
@@ -341,7 +341,7 @@ public class SupplementalDataElements_3_4_000
 			IEnumerable<CqlCode> ac_ = context?.Operators.Union<CqlCode>(v_, ab_);
 			bool? ad_(Extension @this)
 			{
-				string ay_ = @this.Url;
+				string ay_ = @this?.Url;
 				FhirUri az_ = context?.Operators.Convert<FhirUri>(ay_);
 				string ba_ = FHIRHelpers_4_3_000.ToString(az_);
 				bool? bb_ = context?.Operators.Equal(ba_, "text");
@@ -353,7 +353,7 @@ public class SupplementalDataElements_3_4_000
 					: null), ad_);
 			DataType af_(Extension @this)
 			{
-				DataType bc_ = @this.Value;
+				DataType bc_ = @this?.Value;
 
 				return bc_;
 			};
@@ -381,8 +381,8 @@ public class SupplementalDataElements_3_4_000
 			bool b_()
 			{
 				Patient d_ = this.Patient();
-				Code<AdministrativeGender> e_ = d_.GenderElement;
-				AdministrativeGender? f_ = e_.Value;
+				Code<AdministrativeGender> e_ = d_?.GenderElement;
+				AdministrativeGender? f_ = e_?.Value;
 				string g_ = context?.Operators.Convert<string>(f_);
 				bool? h_ = context?.Operators.Equal(g_, "male");
 
@@ -391,8 +391,8 @@ public class SupplementalDataElements_3_4_000
 			bool c_()
 			{
 				Patient i_ = this.Patient();
-				Code<AdministrativeGender> j_ = i_.GenderElement;
-				AdministrativeGender? k_ = j_.Value;
+				Code<AdministrativeGender> j_ = i_?.GenderElement;
+				AdministrativeGender? k_ = j_?.Value;
 				string l_ = context?.Operators.Convert<string>(k_);
 				bool? m_ = context?.Operators.Equal(l_, "female");
 

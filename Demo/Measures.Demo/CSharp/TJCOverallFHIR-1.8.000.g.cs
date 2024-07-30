@@ -243,7 +243,7 @@ public class TJCOverallFHIR_1_8_000
 		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter NonElectiveEncounter)
 		{
-			Period e_ = NonElectiveEncounter.Period;
+			Period e_ = NonElectiveEncounter?.Period;
 			CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_0_001.ToInterval(e_);
 			int? g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.LengthInDays(f_);
 			bool? h_ = context?.Operators.LessOrEqual(g_, 120);
@@ -270,11 +270,11 @@ public class TJCOverallFHIR_1_8_000
 		bool? b_(Encounter NonElectiveEncounter)
 		{
 			Condition d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(NonElectiveEncounter);
-			CodeableConcept e_ = d_.Code;
+			CodeableConcept e_ = d_?.Code;
 			CqlConcept f_ = FHIRHelpers_4_0_001.ToConcept(e_);
 			CqlValueSet g_ = this.Hemorrhagic_Stroke();
 			bool? h_ = context?.Operators.ConceptInValueSet(f_, g_);
-			CodeableConcept j_ = d_.Code;
+			CodeableConcept j_ = d_?.Code;
 			CqlConcept k_ = FHIRHelpers_4_0_001.ToConcept(j_);
 			CqlValueSet l_ = this.Ischemic_Stroke();
 			bool? m_ = context?.Operators.ConceptInValueSet(k_, l_);
@@ -300,10 +300,10 @@ public class TJCOverallFHIR_1_8_000
 			bool? e_(Patient BirthDate)
 			{
 				Patient i_ = this.Patient();
-				Date j_ = i_.BirthDateElement;
-				string k_ = j_.Value;
+				Date j_ = i_?.BirthDateElement;
+				string k_ = j_?.Value;
 				CqlDateTime l_ = context?.Operators.ConvertStringToDateTime(k_);
-				Period m_ = AllStrokeEncounter.Period;
+				Period m_ = AllStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.ToInterval(m_);
 				CqlDateTime o_ = context?.Operators.Start(n_);
 				int? p_ = context?.Operators.CalculateAgeAt(l_, o_, null);
@@ -333,7 +333,7 @@ public class TJCOverallFHIR_1_8_000
 		bool? b_(Encounter EncounterWithAge)
 		{
 			Condition d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(EncounterWithAge);
-			CodeableConcept e_ = d_.Code;
+			CodeableConcept e_ = d_?.Code;
 			CqlConcept f_ = FHIRHelpers_4_0_001.ToConcept(e_);
 			CqlValueSet g_ = this.Ischemic_Stroke();
 			bool? h_ = context?.Operators.ConceptInValueSet(f_, g_);
@@ -354,27 +354,27 @@ public class TJCOverallFHIR_1_8_000
 		IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter();
 		bool? b_(Encounter IschemicStrokeEncounter)
 		{
-			Encounter.HospitalizationComponent d_ = IschemicStrokeEncounter.Hospitalization;
-			CodeableConcept e_ = d_.DischargeDisposition;
+			Encounter.HospitalizationComponent d_ = IschemicStrokeEncounter?.Hospitalization;
+			CodeableConcept e_ = d_?.DischargeDisposition;
 			CqlConcept f_ = FHIRHelpers_4_0_001.ToConcept(e_);
 			CqlValueSet g_ = this.Discharge_To_Acute_Care_Facility();
 			bool? h_ = context?.Operators.ConceptInValueSet(f_, g_);
-			CodeableConcept j_ = d_.DischargeDisposition;
+			CodeableConcept j_ = d_?.DischargeDisposition;
 			CqlConcept k_ = FHIRHelpers_4_0_001.ToConcept(j_);
 			CqlValueSet l_ = this.Left_Against_Medical_Advice();
 			bool? m_ = context?.Operators.ConceptInValueSet(k_, l_);
 			bool? n_ = context?.Operators.Or(h_, m_);
-			CodeableConcept p_ = d_.DischargeDisposition;
+			CodeableConcept p_ = d_?.DischargeDisposition;
 			CqlConcept q_ = FHIRHelpers_4_0_001.ToConcept(p_);
 			CqlValueSet r_ = this.Patient_Expired();
 			bool? s_ = context?.Operators.ConceptInValueSet(q_, r_);
 			bool? t_ = context?.Operators.Or(n_, s_);
-			CodeableConcept v_ = d_.DischargeDisposition;
+			CodeableConcept v_ = d_?.DischargeDisposition;
 			CqlConcept w_ = FHIRHelpers_4_0_001.ToConcept(v_);
 			CqlValueSet x_ = this.Discharged_to_Home_for_Hospice_Care();
 			bool? y_ = context?.Operators.ConceptInValueSet(w_, x_);
 			bool? z_ = context?.Operators.Or(t_, y_);
-			CodeableConcept ab_ = d_.DischargeDisposition;
+			CodeableConcept ab_ = d_?.DischargeDisposition;
 			CqlConcept ac_ = FHIRHelpers_4_0_001.ToConcept(ab_);
 			CqlValueSet ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
 			bool? ae_ = context?.Operators.ConceptInValueSet(ac_, ad_);
@@ -397,7 +397,7 @@ public class TJCOverallFHIR_1_8_000
 		IEnumerable<ServiceRequest> b_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		bool? c_(ServiceRequest P)
 		{
-			Code<RequestIntent> j_ = P.IntentElement;
+			Code<RequestIntent> j_ = P?.IntentElement;
 			string k_ = FHIRHelpers_4_0_001.ToString(j_);
 			bool? l_ = context?.Operators.Equal(k_, "order");
 
@@ -407,7 +407,7 @@ public class TJCOverallFHIR_1_8_000
 		IEnumerable<Procedure> f_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? g_(Procedure InterventionPerformed)
 		{
-			Code<EventStatus> m_ = InterventionPerformed.StatusElement;
+			Code<EventStatus> m_ = InterventionPerformed?.StatusElement;
 			string n_ = FHIRHelpers_4_0_001.ToString(m_);
 			string[] o_ = [
 				"completed",

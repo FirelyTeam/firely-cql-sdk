@@ -14,7 +14,6 @@ using Hl7.Cql.ValueSets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -30,7 +29,6 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// </summary>
     internal class CSharpLibrarySetToStreamsWriter
     {
-        private const string TuplesNamespace = "Tuples";
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
         private readonly IOptions<CSharpCodeWriterOptions> _options;
         private readonly TypeToCSharpConverter _typeToCSharpConverter;
@@ -65,7 +63,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             var hashSet = new HashSet<string>
             {
                 nameof(System),
-                TuplesNamespace,
                 typeof(Enumerable).Namespace!, // System.Linq
                 typeof(ICollection<>).Namespace!, // System.Collections.Generic
                 typeof(CqlContext).Namespace!,
@@ -131,29 +128,20 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// </summary>
         /// <param name="definitions">The lambda expressions to write.</param>
         /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
-        /// <param name="tupleTypes">Tuple types generated during lambda creation.</param>
         /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
         public void ProcessDefinitions(
             DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
-            IReadOnlyCollection<Type> tupleTypes,
             CSharpSourceCodeWriterCallbacks? callbacks = default)
         {
             List<Stream> streamsToDispose = new();
             callbacks ??= new();
             try
             {
-                // foreach (var tuple in WriteTupleTypes(tupleTypes, callbacks))
-                // {
-                //     streamsToDispose.Add(tuple.stream);
-                //     callbacks.Step(tuple.name, tuple.stream, isTuple: true);
-                // }
-
-                //foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks, hasTuples:tupleTypes.Any()))
-                foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks, hasTuples:false))
+                foreach (var (name, stream) in WriteLibraries(definitions, librarySet, callbacks))
                 {
-                    streamsToDispose.Add(tuple.stream);
-                    callbacks.Step(tuple.name, tuple.stream, isTuple: false);
+                    streamsToDispose.Add(stream);
+                    callbacks.Step(name, stream);
                 }
 
                 callbacks.Done();
@@ -170,8 +158,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private IEnumerable<(string name, Stream stream)> WriteLibraries(
             DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
-            CSharpSourceCodeWriterCallbacks callbacks,
-            bool hasTuples)
+            CSharpSourceCodeWriterCallbacks callbacks)
         {
             if (!librarySet.Any())
             {
@@ -200,7 +187,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
                 int indentLevel = 0;
-                WriteUsings(writer, emitTupleNamespace:hasTuples);
+                WriteUsings(writer);
 
                 // Namespace
                 if (!string.IsNullOrWhiteSpace(Namespace))
@@ -355,43 +342,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indentLevel, "#endregion");
         }
 
-        private IEnumerable<(string name, Stream stream)> WriteTupleTypes(
-            IReadOnlyCollection<Type> tupleTypes,
-            CSharpSourceCodeWriterCallbacks callbacks)
-        {
-            if (!tupleTypes.Any())
-            {
-                _logger.LogInformation($"No tuple types detected; skipping.");
-                yield break;
-            }
-
-            foreach (var tupleType in tupleTypes)
-            {
-                if (tupleType == null!)
-                    continue;
-
-                Debug.Assert(tupleType.Namespace == TuplesNamespace, $"If Tuples are expected to be in the {TuplesNamespace} namespace.");
-                var tupleLibraryName = Path.Combine(tupleType.Namespace!, tupleType.Name);
-                var stream = callbacks.GetStreamForLibraryName(tupleLibraryName);
-                if (stream == null!)
-                    continue;
-
-                using var writer = new StreamWriter(stream, leaveOpen: true);
-                WriteUsings(writer, emitTupleNamespace: false);
-                var indentLevel = 0;
-                writer.WriteLine();
-                writer.WriteLine(indentLevel, $"namespace {tupleType.Namespace}");
-                writer.WriteLine(indentLevel, "{");
-                indentLevel += 1;
-                WriteTupleType(writer, indentLevel, tupleType);
-                indentLevel -= 1;
-                writer.WriteLine(indentLevel, "}");
-                writer.Flush();
-
-                yield return (tupleLibraryName, stream);
-            }
-        }
-
         private static bool IsDefinition(LambdaExpression overload) =>
             overload.Parameters.Count == 1
                 && overload.Parameters[0].Type == typeof(CqlContext);
@@ -523,41 +473,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteUsings(TextWriter writer, bool emitTupleNamespace)
+        private void WriteUsings(TextWriter writer)
         {
             foreach (var @using in _usings)
             {
-                if (!emitTupleNamespace && @using == TuplesNamespace)
-                    continue;
-
                 writer.WriteLine($"using {@using};");
             }
             foreach (var @using in _aliasedUsings)
             {
                 writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
             }
-        }
-
-        private void WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
-        {
-            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
-            writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {_typeToCSharpConverter.ToCSharp(tupleType.BaseType!)}");
-            writer.WriteLine(indentLevel, "{");
-
-            indentLevel++;
-            foreach (var property in tupleType.GetProperties())
-            {
-                var normalizedName = VariableNameGenerator.NormalizeIdentifier(property.Name);
-                var propertyType = _typeToCSharpConverter.ToCSharp(property.PropertyType);
-                var cqlDeclarationAttribute = property.GetCustomAttribute<CqlDeclarationAttribute>();
-                if (cqlDeclarationAttribute != null)
-                {
-                    writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlDeclarationAttribute.Name}\")]");
-                }
-                writer.WriteLine(indentLevel, $"public {propertyType} {normalizedName} {{ get; set; }}");
-            }
-            indentLevel--;
-            writer.WriteLine(indentLevel, $"}}");
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)

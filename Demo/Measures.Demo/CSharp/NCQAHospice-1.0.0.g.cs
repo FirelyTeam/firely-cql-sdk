@@ -95,7 +95,7 @@ public class NCQAHospice_1_0_0
 		IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(b_);
 		bool? d_(Procedure HospiceInt)
 		{
-			DataType n_ = HospiceInt.Performed;
+			DataType n_ = HospiceInt?.Performed;
 			CqlInterval<CqlDateTime> o_ = NCQAFHIRBase_1_0_0.Normalize_Interval(n_);
 			CqlInterval<CqlDateTime> p_ = this.Measurement_Period();
 			bool? q_ = context?.Operators.Overlaps(o_, p_, null);
@@ -109,7 +109,7 @@ public class NCQAHospice_1_0_0
 		IEnumerable<Encounter> i_ = NCQAStatus_1_0_0.Finished_Encounter(h_);
 		bool? j_(Encounter HospiceEnc)
 		{
-			Period r_ = HospiceEnc.Period;
+			Period r_ = HospiceEnc?.Period;
 			CqlInterval<CqlDateTime> s_ = NCQAFHIRBase_1_0_0.Normalize_Interval((r_ as object));
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
 			bool? u_ = context?.Operators.Overlaps(s_, t_, null);

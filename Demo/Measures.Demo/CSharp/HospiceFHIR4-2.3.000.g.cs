@@ -126,23 +126,23 @@ public class HospiceFHIR4_2_3_000
 		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter DischargeHospice)
 		{
-			Code<Encounter.EncounterStatus> r_ = DischargeHospice.StatusElement;
+			Code<Encounter.EncounterStatus> r_ = DischargeHospice?.StatusElement;
 			string s_ = FHIRHelpers_4_0_001.ToString(r_);
 			bool? t_ = context?.Operators.Equal(s_, "finished");
-			Encounter.HospitalizationComponent u_ = DischargeHospice.Hospitalization;
-			CodeableConcept v_ = u_.DischargeDisposition;
+			Encounter.HospitalizationComponent u_ = DischargeHospice?.Hospitalization;
+			CodeableConcept v_ = u_?.DischargeDisposition;
 			CqlConcept w_ = FHIRHelpers_4_0_001.ToConcept(v_);
 			CqlCode x_ = this.Discharge_to_home_for_hospice_care__procedure_();
 			CqlConcept y_ = context?.Operators.ConvertCodeToConcept(x_);
 			bool? z_ = context?.Operators.Equivalent(w_, y_);
-			CodeableConcept ab_ = u_.DischargeDisposition;
+			CodeableConcept ab_ = u_?.DischargeDisposition;
 			CqlConcept ac_ = FHIRHelpers_4_0_001.ToConcept(ab_);
 			CqlCode ad_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_();
 			CqlConcept ae_ = context?.Operators.ConvertCodeToConcept(ad_);
 			bool? af_ = context?.Operators.Equivalent(ac_, ae_);
 			bool? ag_ = context?.Operators.Or(z_, af_);
 			bool? ah_ = context?.Operators.And(t_, ag_);
-			Period ai_ = DischargeHospice.Period;
+			Period ai_ = DischargeHospice?.Period;
 			CqlInterval<CqlDateTime> aj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ai_ as object));
 			CqlDateTime ak_ = context?.Operators.End(aj_);
 			CqlInterval<CqlDateTime> al_ = this.Measurement_Period();
@@ -157,19 +157,19 @@ public class HospiceFHIR4_2_3_000
 		IEnumerable<ServiceRequest> g_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
 		bool? h_(ServiceRequest HospiceOrder)
 		{
-			Code<RequestStatus> ao_ = HospiceOrder.StatusElement;
+			Code<RequestStatus> ao_ = HospiceOrder?.StatusElement;
 			string ap_ = FHIRHelpers_4_0_001.ToString(ao_);
 			string[] aq_ = [
 				"active",
 				"completed",
 			];
 			bool? ar_ = context?.Operators.In<string>(ap_, (aq_ as IEnumerable<string>));
-			Code<RequestIntent> as_ = HospiceOrder.IntentElement;
+			Code<RequestIntent> as_ = HospiceOrder?.IntentElement;
 			string at_ = FHIRHelpers_4_0_001.ToString(as_);
 			bool? au_ = context?.Operators.Equal(at_, "order");
 			bool? av_ = context?.Operators.And(ar_, au_);
 			CqlInterval<CqlDateTime> aw_ = this.Measurement_Period();
-			FhirDateTime ax_ = HospiceOrder.AuthoredOnElement;
+			FhirDateTime ax_ = HospiceOrder?.AuthoredOnElement;
 			CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ax_ as object));
 			bool? az_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, null);
 			bool? ba_ = context?.Operators.And(av_, az_);
@@ -182,10 +182,10 @@ public class HospiceFHIR4_2_3_000
 		IEnumerable<Procedure> m_ = context?.Operators.RetrieveByValueSet<Procedure>(f_, null);
 		bool? n_(Procedure HospicePerformed)
 		{
-			Code<EventStatus> bb_ = HospicePerformed.StatusElement;
+			Code<EventStatus> bb_ = HospicePerformed?.StatusElement;
 			string bc_ = FHIRHelpers_4_0_001.ToString(bb_);
 			bool? bd_ = context?.Operators.Equal(bc_, "completed");
-			DataType be_ = HospicePerformed.Performed;
+			DataType be_ = HospicePerformed?.Performed;
 			CqlInterval<CqlDateTime> bf_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(be_);
 			CqlInterval<CqlDateTime> bg_ = this.Measurement_Period();
 			bool? bh_ = context?.Operators.Overlaps(bf_, bg_, null);

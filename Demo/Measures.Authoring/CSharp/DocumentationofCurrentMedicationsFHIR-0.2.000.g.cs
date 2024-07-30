@@ -181,12 +181,12 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter ValidEncounter)
 		{
-			Code<Encounter.EncounterStatus> e_ = ValidEncounter.StatusElement;
-			Encounter.EncounterStatus? f_ = e_.Value;
+			Code<Encounter.EncounterStatus> e_ = ValidEncounter?.StatusElement;
+			Encounter.EncounterStatus? f_ = e_?.Value;
 			Code<Encounter.EncounterStatus> g_ = context?.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
 			bool? h_ = context?.Operators.Equal(g_, "finished");
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period();
-			Period j_ = ValidEncounter.Period;
+			Period j_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(j_);
 			bool? l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(i_, k_, null);
 			bool? m_ = context?.Operators.And(h_, l_);
@@ -234,15 +234,15 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 			IEnumerable<Procedure> f_ = context?.Operators.RetrieveByCodes<Procedure>(e_, null);
 			bool? g_(Procedure MedicationsDocumented)
 			{
-				DataType k_ = MedicationsDocumented.Performed;
+				DataType k_ = MedicationsDocumented?.Performed;
 				object l_ = FHIRHelpers_4_3_000.ToValue(k_);
 				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(l_);
 				CqlDateTime n_ = context?.Operators.End(m_);
-				Period o_ = QualifyingEncounter.Period;
+				Period o_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 				bool? q_ = context?.Operators.In<CqlDateTime>(n_, p_, null);
-				Code<EventStatus> r_ = MedicationsDocumented.StatusElement;
-				EventStatus? s_ = r_.Value;
+				Code<EventStatus> r_ = MedicationsDocumented?.StatusElement;
+				EventStatus? s_ = r_?.Value;
 				string t_ = context?.Operators.Convert<string>(s_);
 				bool? u_ = context?.Operators.Equal(t_, "completed");
 				bool? v_ = context?.Operators.And(q_, u_);
@@ -277,7 +277,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 			{
 				bool? k_(Extension @this)
 				{
-					string af_ = @this.Url;
+					string af_ = @this?.Url;
 					FhirUri ag_ = context?.Operators.Convert<FhirUri>(af_);
 					string ah_ = FHIRHelpers_4_3_000.ToString(ag_);
 					bool? ai_ = context?.Operators.Equal(ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
@@ -289,7 +289,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 						: null), k_);
 				DataType m_(Extension @this)
 				{
-					DataType aj_ = @this.Value;
+					DataType aj_ = @this?.Value;
 
 					return aj_;
 				};
@@ -297,15 +297,15 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 				DataType o_ = context?.Operators.SingletonFrom<DataType>(n_);
 				FhirDateTime p_ = context?.Operators.Convert<FhirDateTime>(o_);
 				CqlDateTime q_ = context?.Operators.Convert<CqlDateTime>(p_);
-				Period r_ = QualifyingEncounter.Period;
+				Period r_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 				bool? t_ = context?.Operators.In<CqlDateTime>(q_, s_, null);
-				Code<EventStatus> u_ = MedicationsNotDocumented.StatusElement;
-				EventStatus? v_ = u_.Value;
+				Code<EventStatus> u_ = MedicationsNotDocumented?.StatusElement;
+				EventStatus? v_ = u_?.Value;
 				string w_ = context?.Operators.Convert<string>(v_);
 				bool? x_ = context?.Operators.Equal(w_, "not-done");
 				bool? y_ = context?.Operators.And(t_, x_);
-				List<CodeableConcept> z_ = MedicationsNotDocumented.ReasonCode;
+				List<CodeableConcept> z_ = MedicationsNotDocumented?.ReasonCode;
 				CqlConcept aa_(CodeableConcept @this)
 				{
 					CqlConcept ak_ = FHIRHelpers_4_3_000.ToConcept(@this);
