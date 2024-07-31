@@ -34,11 +34,6 @@ namespace Hl7.Cql.Compiler
         protected internal TypeResolver Resolver { get; }
 
         /// <summary>
-        /// Gets the namespace for generated tuple types as supplied in the constructor.
-        /// </summary>
-        protected internal string TupleTypeNamespace { get; }
-
-        /// <summary>
         /// Gets the tuple types created by this <see cref="TypeManager"/>.
         /// </summary>
         public IReadOnlyCollection<Type> TupleTypes => TupleTypeList;
