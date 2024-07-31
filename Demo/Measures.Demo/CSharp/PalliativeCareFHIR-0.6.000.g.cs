@@ -61,7 +61,7 @@ public class PalliativeCareFHIR_0_6_000
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090")]
 	public CqlValueSet Palliative_Care_Encounter() => 
-		__Palliative_Care_Encounter?.Value;
+		__Palliative_Care_Encounter.Value;
 
 	private CqlValueSet Palliative_Care_Intervention_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", null);
@@ -69,21 +69,21 @@ public class PalliativeCareFHIR_0_6_000
     [CqlDeclaration("Palliative Care Intervention")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135")]
 	public CqlValueSet Palliative_Care_Intervention() => 
-		__Palliative_Care_Intervention?.Value;
+		__Palliative_Care_Intervention.Value;
 
 	private CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal__Value() => 
 		new CqlCode("71007-9", "http://loinc.org", null, null);
 
     [CqlDeclaration("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)")]
 	public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_() => 
-		__Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_?.Value;
+		__Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_.Value;
 
 	private CqlCode survey_Value() => 
 		new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
 
     [CqlDeclaration("survey")]
 	public CqlCode survey() => 
-		__survey?.Value;
+		__survey.Value;
 
 	private CqlCode[] LOINC_Value()
 	{
@@ -96,7 +96,7 @@ public class PalliativeCareFHIR_0_6_000
 
     [CqlDeclaration("LOINC")]
 	public CqlCode[] LOINC() => 
-		__LOINC?.Value;
+		__LOINC.Value;
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
@@ -109,7 +109,7 @@ public class PalliativeCareFHIR_0_6_000
 
     [CqlDeclaration("ObservationCategoryCodes")]
 	public CqlCode[] ObservationCategoryCodes() => 
-		__ObservationCategoryCodes?.Value;
+		__ObservationCategoryCodes.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
@@ -120,25 +120,25 @@ public class PalliativeCareFHIR_0_6_000
 
     [CqlDeclaration("Measurement Period")]
 	public CqlInterval<CqlDateTime> Measurement_Period() => 
-		__Measurement_Period?.Value;
+		__Measurement_Period.Value;
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context?.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient?.Value;
+		__Patient.Value;
 
 	private bool? Palliative_Care_in_the_Measurement_Period_Value()
 	{
 		CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_();
-		IEnumerable<CqlCode> b_ = context?.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context?.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
 		bool? d_(Observation PalliativeAssessment)
 		{
 			Code<ObservationStatus> s_ = PalliativeAssessment?.StatusElement;
@@ -148,50 +148,50 @@ public class PalliativeCareFHIR_0_6_000
 				"amended",
 				"corrected",
 			];
-			bool? v_ = context?.Operators.In<string>(t_, (u_ as IEnumerable<string>));
+			bool? v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
 			List<CodeableConcept> w_ = PalliativeAssessment?.Category;
 			bool? x_(CodeableConcept PalliativeAssessmentCategory)
 			{
 				CqlCode ag_ = this.survey();
 				CqlConcept ah_ = FHIRHelpers_4_0_001.ToConcept(PalliativeAssessmentCategory);
 				CqlCode[] ai_ = ah_?.codes;
-				bool? aj_ = context?.Operators.In<CqlCode>(ag_, (IEnumerable<CqlCode>)ai_);
+				bool? aj_ = context.Operators.In<CqlCode>(ag_, (IEnumerable<CqlCode>)ai_);
 
 				return aj_;
 			};
-			IEnumerable<CodeableConcept> y_ = context?.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)w_, x_);
-			bool? z_ = context?.Operators.Exists<CodeableConcept>(y_);
-			bool? aa_ = context?.Operators.And(v_, z_);
+			IEnumerable<CodeableConcept> y_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)w_, x_);
+			bool? z_ = context.Operators.Exists<CodeableConcept>(y_);
+			bool? aa_ = context.Operators.And(v_, z_);
 			DataType ab_ = PalliativeAssessment?.Effective;
 			CqlInterval<CqlDateTime> ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ab_);
 			CqlInterval<CqlDateTime> ad_ = this.Measurement_Period();
-			bool? ae_ = context?.Operators.Overlaps(ac_, ad_, null);
-			bool? af_ = context?.Operators.And(aa_, ae_);
+			bool? ae_ = context.Operators.Overlaps(ac_, ad_, null);
+			bool? af_ = context.Operators.And(aa_, ae_);
 
 			return af_;
 		};
-		IEnumerable<Observation> e_ = context?.Operators.Where<Observation>(c_, d_);
-		bool? f_ = context?.Operators.Exists<Observation>(e_);
+		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+		bool? f_ = context.Operators.Exists<Observation>(e_);
 		CqlValueSet g_ = this.Palliative_Care_Encounter();
-		IEnumerable<Encounter> h_ = context?.Operators.RetrieveByValueSet<Encounter>(g_, null);
+		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
 		bool? i_(Encounter PalliativeEncounter)
 		{
 			Code<Encounter.EncounterStatus> ak_ = PalliativeEncounter?.StatusElement;
 			string al_ = FHIRHelpers_4_0_001.ToString(ak_);
-			bool? am_ = context?.Operators.Equal(al_, "finished");
+			bool? am_ = context.Operators.Equal(al_, "finished");
 			Period an_ = PalliativeEncounter?.Period;
 			CqlInterval<CqlDateTime> ao_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((an_ as object));
 			CqlInterval<CqlDateTime> ap_ = this.Measurement_Period();
-			bool? aq_ = context?.Operators.Overlaps(ao_, ap_, null);
-			bool? ar_ = context?.Operators.And(am_, aq_);
+			bool? aq_ = context.Operators.Overlaps(ao_, ap_, null);
+			bool? ar_ = context.Operators.And(am_, aq_);
 
 			return ar_;
 		};
-		IEnumerable<Encounter> j_ = context?.Operators.Where<Encounter>(h_, i_);
-		bool? k_ = context?.Operators.Exists<Encounter>(j_);
-		bool? l_ = context?.Operators.Or(f_, k_);
+		IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
+		bool? k_ = context.Operators.Exists<Encounter>(j_);
+		bool? l_ = context.Operators.Or(f_, k_);
 		CqlValueSet m_ = this.Palliative_Care_Intervention();
-		IEnumerable<Procedure> n_ = context?.Operators.RetrieveByValueSet<Procedure>(m_, null);
+		IEnumerable<Procedure> n_ = context.Operators.RetrieveByValueSet<Procedure>(m_, null);
 		bool? o_(Procedure PalliativeIntervention)
 		{
 			Code<EventStatus> as_ = PalliativeIntervention?.StatusElement;
@@ -200,24 +200,24 @@ public class PalliativeCareFHIR_0_6_000
 				"completed",
 				"in-progress",
 			];
-			bool? av_ = context?.Operators.In<string>(at_, (au_ as IEnumerable<string>));
+			bool? av_ = context.Operators.In<string>(at_, (au_ as IEnumerable<string>));
 			DataType aw_ = PalliativeIntervention?.Performed;
 			CqlInterval<CqlDateTime> ax_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aw_);
 			CqlInterval<CqlDateTime> ay_ = this.Measurement_Period();
-			bool? az_ = context?.Operators.Overlaps(ax_, ay_, null);
-			bool? ba_ = context?.Operators.And(av_, az_);
+			bool? az_ = context.Operators.Overlaps(ax_, ay_, null);
+			bool? ba_ = context.Operators.And(av_, az_);
 
 			return ba_;
 		};
-		IEnumerable<Procedure> p_ = context?.Operators.Where<Procedure>(n_, o_);
-		bool? q_ = context?.Operators.Exists<Procedure>(p_);
-		bool? r_ = context?.Operators.Or(l_, q_);
+		IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>(n_, o_);
+		bool? q_ = context.Operators.Exists<Procedure>(p_);
+		bool? r_ = context.Operators.Or(l_, q_);
 
 		return r_;
 	}
 
     [CqlDeclaration("Palliative Care in the Measurement Period")]
 	public bool? Palliative_Care_in_the_Measurement_Period() => 
-		__Palliative_Care_in_the_Measurement_Period?.Value;
+		__Palliative_Care_in_the_Measurement_Period.Value;
 
 }

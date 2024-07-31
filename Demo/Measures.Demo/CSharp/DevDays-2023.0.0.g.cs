@@ -58,14 +58,14 @@ public class DevDays_2023_0_0
 
     [CqlDeclaration("Sucked into jet engine")]
 	public CqlCode Sucked_into_jet_engine() => 
-		__Sucked_into_jet_engine?.Value;
+		__Sucked_into_jet_engine.Value;
 
 	private CqlCode Sucked_into_jet_engine__subsequent_encounter_Value() => 
 		new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", null, null);
 
     [CqlDeclaration("Sucked into jet engine, subsequent encounter")]
 	public CqlCode Sucked_into_jet_engine__subsequent_encounter() => 
-		__Sucked_into_jet_engine__subsequent_encounter?.Value;
+		__Sucked_into_jet_engine__subsequent_encounter.Value;
 
 	private CqlCode[] ICD10_Value()
 	{
@@ -79,7 +79,7 @@ public class DevDays_2023_0_0
 
     [CqlDeclaration("ICD10")]
 	public CqlCode[] ICD10() => 
-		__ICD10?.Value;
+		__ICD10.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
@@ -90,23 +90,23 @@ public class DevDays_2023_0_0
 
     [CqlDeclaration("Measurement Period")]
 	public CqlInterval<CqlDateTime> Measurement_Period() => 
-		__Measurement_Period?.Value;
+		__Measurement_Period.Value;
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context?.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient?.Value;
+		__Patient.Value;
 
 	private IEnumerable<Condition> Jet_engine_conditions_Value()
 	{
-		IEnumerable<Condition> a_ = context?.Operators.RetrieveByValueSet<Condition>(null, null);
+		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 		bool? b_(Condition c)
 		{
 			CodeableConcept d_ = c?.Code;
@@ -115,32 +115,32 @@ public class DevDays_2023_0_0
 			{
 				CqlCode n_ = FHIRHelpers_4_0_001.ToCode(coding);
 				CqlCode o_ = this.Sucked_into_jet_engine();
-				bool? p_ = context?.Operators.Equivalent(n_, o_);
+				bool? p_ = context.Operators.Equivalent(n_, o_);
 
 				return p_;
 			};
-			IEnumerable<Coding> g_ = context?.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
-			bool? h_ = context?.Operators.Exists<Coding>(g_);
+			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
+			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
 			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
-			bool? l_ = context?.Operators.In<CqlDateTime>(j_, k_, null);
-			bool? m_ = context?.Operators.And(h_, l_);
+			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, null);
+			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
 		};
-		IEnumerable<Condition> c_ = context?.Operators.Where<Condition>(a_, b_);
+		IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Jet engine conditions")]
 	public IEnumerable<Condition> Jet_engine_conditions() => 
-		__Jet_engine_conditions?.Value;
+		__Jet_engine_conditions.Value;
 
 	private IEnumerable<Condition> Subsequent_encounters_Value()
 	{
-		IEnumerable<Condition> a_ = context?.Operators.RetrieveByValueSet<Condition>(null, null);
+		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 		bool? b_(Condition c)
 		{
 			CodeableConcept d_ = c?.Code;
@@ -149,51 +149,51 @@ public class DevDays_2023_0_0
 			{
 				CqlCode n_ = FHIRHelpers_4_0_001.ToCode(coding);
 				CqlCode o_ = this.Sucked_into_jet_engine__subsequent_encounter();
-				bool? p_ = context?.Operators.Equivalent(n_, o_);
+				bool? p_ = context.Operators.Equivalent(n_, o_);
 
 				return p_;
 			};
-			IEnumerable<Coding> g_ = context?.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
-			bool? h_ = context?.Operators.Exists<Coding>(g_);
+			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
+			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
 			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
-			bool? l_ = context?.Operators.In<CqlDateTime>(j_, k_, null);
-			bool? m_ = context?.Operators.And(h_, l_);
+			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, null);
+			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
 		};
-		IEnumerable<Condition> c_ = context?.Operators.Where<Condition>(a_, b_);
+		IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Subsequent encounters")]
 	public IEnumerable<Condition> Subsequent_encounters() => 
-		__Subsequent_encounters?.Value;
+		__Subsequent_encounters.Value;
 
 	private bool? Initial_population_Value()
 	{
 		IEnumerable<Condition> a_ = this.Jet_engine_conditions();
-		bool? b_ = context?.Operators.Exists<Condition>(a_);
+		bool? b_ = context.Operators.Exists<Condition>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Initial population")]
 	public bool? Initial_population() => 
-		__Initial_population?.Value;
+		__Initial_population.Value;
 
 	private bool? Numerator_Value()
 	{
 		IEnumerable<Condition> a_ = this.Subsequent_encounters();
-		bool? b_ = context?.Operators.Exists<Condition>(a_);
+		bool? b_ = context.Operators.Exists<Condition>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Numerator")]
 	public bool? Numerator() => 
-		__Numerator?.Value;
+		__Numerator.Value;
 
 }

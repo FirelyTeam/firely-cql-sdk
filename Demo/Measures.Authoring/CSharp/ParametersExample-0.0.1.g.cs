@@ -57,7 +57,7 @@ public class ParametersExample_0_0_1
     [CqlDeclaration("Marital Status")]
     [CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status")]
 	public CqlValueSet Marital_Status() => 
-		__Marital_Status?.Value;
+		__Marital_Status.Value;
 
 	private int? AgeThreshold_Value()
 	{
@@ -68,30 +68,30 @@ public class ParametersExample_0_0_1
 
     [CqlDeclaration("AgeThreshold")]
 	public int? AgeThreshold() => 
-		__AgeThreshold?.Value;
+		__AgeThreshold.Value;
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context?.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient?.Value;
+		__Patient.Value;
 
 	private CqlDate CurrentDate_Value()
 	{
-		CqlDate a_ = context?.Operators.Today();
+		CqlDate a_ = context.Operators.Today();
 
 		return a_;
 	}
 
     [CqlDeclaration("CurrentDate")]
 	public CqlDate CurrentDate() => 
-		__CurrentDate?.Value;
+		__CurrentDate.Value;
 
 	private Patient Patient_Filter_Value()
 	{
@@ -103,32 +103,32 @@ public class ParametersExample_0_0_1
 		{
 			Code<AdministrativeGender> f_ = P?.GenderElement;
 			string g_ = FHIRHelpers_4_3_000.ToString(f_);
-			bool? h_ = context?.Operators.Equal(g_, "male");
+			bool? h_ = context.Operators.Equal(g_, "male");
 			FhirBoolean i_ = P?.ActiveElement;
 			bool? j_ = FHIRHelpers_4_3_000.ToBoolean(i_);
-			bool? k_ = context?.Operators.IsTrue(j_);
-			bool? l_ = context?.Operators.And(h_, k_);
+			bool? k_ = context.Operators.IsTrue(j_);
+			bool? l_ = context.Operators.And(h_, k_);
 			DataType m_ = P?.Deceased;
 			bool? n_ = FHIRHelpers_4_3_000.ToBoolean((m_ as FhirBoolean));
-			bool? o_ = context?.Operators.Not(n_);
-			bool? p_ = context?.Operators.And(l_, o_);
+			bool? o_ = context.Operators.Not(n_);
+			bool? p_ = context.Operators.And(l_, o_);
 			CodeableConcept q_ = P?.MaritalStatus;
 			CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept(q_);
 			CqlValueSet s_ = this.Marital_Status();
-			bool? t_ = context?.Operators.ConceptInValueSet(r_, s_);
-			bool? u_ = context?.Operators.And(p_, t_);
+			bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
+			bool? u_ = context.Operators.And(p_, t_);
 
 			return u_;
 		};
-		IEnumerable<Patient> d_ = context?.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);
-		Patient e_ = context?.Operators.SingletonFrom<Patient>(d_);
+		IEnumerable<Patient> d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);
+		Patient e_ = context.Operators.SingletonFrom<Patient>(d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Patient Filter")]
 	public Patient Patient_Filter() => 
-		__Patient_Filter?.Value;
+		__Patient_Filter.Value;
 
 	private Date Patient_Birthdate_Value()
 	{
@@ -140,33 +140,33 @@ public class ParametersExample_0_0_1
 
     [CqlDeclaration("Patient Birthdate")]
 	public Date Patient_Birthdate() => 
-		__Patient_Birthdate?.Value;
+		__Patient_Birthdate.Value;
 
 	private int? Patient_Age_in_Years_Value()
 	{
 		Date a_ = this.Patient_Birthdate();
 		CqlDate b_ = FHIRHelpers_4_3_000.ToDate(a_);
 		CqlDate c_ = this.CurrentDate();
-		int? d_ = context?.Operators.DurationBetween(b_, c_, null);
+		int? d_ = context.Operators.DurationBetween(b_, c_, null);
 
 		return d_;
 	}
 
     [CqlDeclaration("Patient Age in Years")]
 	public int? Patient_Age_in_Years() => 
-		__Patient_Age_in_Years?.Value;
+		__Patient_Age_in_Years.Value;
 
 	private bool? Patient_Older_Than_AgeThreshold_Value()
 	{
 		int? a_ = this.Patient_Age_in_Years();
 		int? b_ = this.AgeThreshold();
-		bool? c_ = context?.Operators.Greater(a_, b_);
+		bool? c_ = context.Operators.Greater(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Patient Older Than AgeThreshold")]
 	public bool? Patient_Older_Than_AgeThreshold() => 
-		__Patient_Older_Than_AgeThreshold?.Value;
+		__Patient_Older_Than_AgeThreshold.Value;
 
 }

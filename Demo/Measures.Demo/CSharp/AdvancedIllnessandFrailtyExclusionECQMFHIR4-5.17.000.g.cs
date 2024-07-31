@@ -99,7 +99,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083")]
 	public CqlValueSet Acute_Inpatient() => 
-		__Acute_Inpatient?.Value;
+		__Acute_Inpatient.Value;
 
 	private CqlValueSet Advanced_Illness_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", null);
@@ -107,7 +107,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
 	public CqlValueSet Advanced_Illness() => 
-		__Advanced_Illness?.Value;
+		__Advanced_Illness.Value;
 
 	private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
@@ -115,7 +115,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
 	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility() => 
-		__Care_Services_in_Long_Term_Residential_Facility?.Value;
+		__Care_Services_in_Long_Term_Residential_Facility.Value;
 
 	private CqlValueSet Dementia_Medications_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", null);
@@ -123,7 +123,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510")]
 	public CqlValueSet Dementia_Medications() => 
-		__Dementia_Medications?.Value;
+		__Dementia_Medications.Value;
 
 	private CqlValueSet Emergency_Department_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", null);
@@ -131,7 +131,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010")]
 	public CqlValueSet Emergency_Department_Visit() => 
-		__Emergency_Department_Visit?.Value;
+		__Emergency_Department_Visit.Value;
 
 	private CqlValueSet Frailty_Device_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", null);
@@ -139,7 +139,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300")]
 	public CqlValueSet Frailty_Device() => 
-		__Frailty_Device?.Value;
+		__Frailty_Device.Value;
 
 	private CqlValueSet Frailty_Diagnosis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", null);
@@ -147,7 +147,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074")]
 	public CqlValueSet Frailty_Diagnosis() => 
-		__Frailty_Diagnosis?.Value;
+		__Frailty_Diagnosis.Value;
 
 	private CqlValueSet Frailty_Encounter_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", null);
@@ -155,7 +155,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088")]
 	public CqlValueSet Frailty_Encounter() => 
-		__Frailty_Encounter?.Value;
+		__Frailty_Encounter.Value;
 
 	private CqlValueSet Frailty_Symptom_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", null);
@@ -163,7 +163,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075")]
 	public CqlValueSet Frailty_Symptom() => 
-		__Frailty_Symptom?.Value;
+		__Frailty_Symptom.Value;
 
 	private CqlValueSet Nonacute_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084", null);
@@ -171,7 +171,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Nonacute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084")]
 	public CqlValueSet Nonacute_Inpatient() => 
-		__Nonacute_Inpatient?.Value;
+		__Nonacute_Inpatient.Value;
 
 	private CqlValueSet Nursing_Facility_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", null);
@@ -179,7 +179,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
 	public CqlValueSet Nursing_Facility_Visit() => 
-		__Nursing_Facility_Visit?.Value;
+		__Nursing_Facility_Visit.Value;
 
 	private CqlValueSet Observation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086", null);
@@ -187,7 +187,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Observation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086")]
 	public CqlValueSet Observation() => 
-		__Observation?.Value;
+		__Observation.Value;
 
 	private CqlValueSet Outpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087", null);
@@ -195,7 +195,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     [CqlDeclaration("Outpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087")]
 	public CqlValueSet Outpatient() => 
-		__Outpatient?.Value;
+		__Outpatient.Value;
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
@@ -206,334 +206,334 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
     [CqlDeclaration("Measurement Period")]
 	public CqlInterval<CqlDateTime> Measurement_Period() => 
-		__Measurement_Period?.Value;
+		__Measurement_Period.Value;
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context?.Operators.RetrieveByValueSet<Patient>(null, null);
-		Patient b_ = context?.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
 	public Patient Patient() => 
-		__Patient?.Value;
+		__Patient.Value;
 
 	private IEnumerable<MedicationRequest> Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Dementia_Medications();
-		IEnumerable<MedicationRequest> b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> e_ = context?.Operators.Union<MedicationRequest>(b_, d_);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest DementiaMed)
 		{
 			Code<MedicationRequest.MedicationrequestStatus> h_ = DementiaMed?.StatusElement;
 			string i_ = FHIRHelpers_4_0_001.ToString(h_);
-			bool? j_ = context?.Operators.Equal(i_, "active");
+			bool? j_ = context.Operators.Equal(i_, "active");
 			Code<MedicationRequest.MedicationRequestIntent> k_ = DementiaMed?.IntentElement;
 			string l_ = FHIRHelpers_4_0_001.ToString(k_);
-			bool? m_ = context?.Operators.Equal(l_, "order");
-			bool? n_ = context?.Operators.And(j_, m_);
+			bool? m_ = context.Operators.Equal(l_, "order");
+			bool? n_ = context.Operators.And(j_, m_);
 			CqlInterval<CqlDateTime> o_ = CumulativeMedicationDurationFHIR4_1_0_000.MedicationPeriod((DementiaMed as object));
 			CqlInterval<CqlDateTime> p_ = this.Measurement_Period();
-			CqlDateTime q_ = context?.Operators.Start(p_);
-			CqlQuantity r_ = context?.Operators.Quantity(1m, "year");
-			CqlDateTime s_ = context?.Operators.Subtract(q_, r_);
-			CqlDateTime u_ = context?.Operators.End(p_);
-			CqlInterval<CqlDateTime> v_ = context?.Operators.Interval(s_, u_, true, true);
-			bool? w_ = context?.Operators.Overlaps(o_, v_, null);
-			bool? x_ = context?.Operators.And(n_, w_);
+			CqlDateTime q_ = context.Operators.Start(p_);
+			CqlQuantity r_ = context.Operators.Quantity(1m, "year");
+			CqlDateTime s_ = context.Operators.Subtract(q_, r_);
+			CqlDateTime u_ = context.Operators.End(p_);
+			CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_, u_, true, true);
+			bool? w_ = context.Operators.Overlaps(o_, v_, null);
+			bool? x_ = context.Operators.And(n_, w_);
 
 			return x_;
 		};
-		IEnumerable<MedicationRequest> g_ = context?.Operators.Where<MedicationRequest>(e_, f_);
+		IEnumerable<MedicationRequest> g_ = context.Operators.Where<MedicationRequest>(e_, f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Dementia Medications In Year Before or During Measurement Period")]
 	public IEnumerable<MedicationRequest> Dementia_Medications_In_Year_Before_or_During_Measurement_Period() => 
-		__Dementia_Medications_In_Year_Before_or_During_Measurement_Period?.Value;
+		__Dementia_Medications_In_Year_Before_or_During_Measurement_Period.Value;
 
 	private IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Periods_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		CqlValueSet c_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		IEnumerable<Encounter> e_ = context?.Operators.Union<Encounter>(b_, d_);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		bool? f_(Encounter LongTermFacilityEncounter)
 		{
 			Code<Encounter.EncounterStatus> j_ = LongTermFacilityEncounter?.StatusElement;
 			string k_ = FHIRHelpers_4_0_001.ToString(j_);
-			bool? l_ = context?.Operators.Equal(k_, "finished");
+			bool? l_ = context.Operators.Equal(k_, "finished");
 			Period m_ = LongTermFacilityEncounter?.Period;
 			CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((m_ as object));
 			CqlInterval<CqlDateTime> o_ = this.Measurement_Period();
-			bool? p_ = context?.Operators.Overlaps(n_, o_, null);
-			bool? q_ = context?.Operators.And(l_, p_);
+			bool? p_ = context.Operators.Overlaps(n_, o_, null);
+			bool? q_ = context.Operators.And(l_, p_);
 
 			return q_;
 		};
-		IEnumerable<Encounter> g_ = context?.Operators.Where<Encounter>(e_, f_);
+		IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
 		CqlInterval<CqlDateTime> h_(Encounter LongTermFacilityEncounter)
 		{
 			Period r_ = LongTermFacilityEncounter?.Period;
 			CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((r_ as object));
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
-			CqlInterval<CqlDateTime> u_ = context?.Operators.Intersect<CqlDateTime>(s_, t_);
+			CqlInterval<CqlDateTime> u_ = context.Operators.Intersect<CqlDateTime>(s_, t_);
 
 			return u_;
 		};
-		IEnumerable<CqlInterval<CqlDateTime>> i_ = context?.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(g_, h_);
+		IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Long Term Care Periods During Measurement Period")]
 	public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Periods_During_Measurement_Period() => 
-		__Long_Term_Care_Periods_During_Measurement_Period?.Value;
+		__Long_Term_Care_Periods_During_Measurement_Period.Value;
 
 	private IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness_Value()
 	{
 		CqlValueSet a_ = this.Outpatient();
-		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		CqlValueSet c_ = this.Observation();
-		IEnumerable<Encounter> d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		IEnumerable<Encounter> e_ = context?.Operators.Union<Encounter>(b_, d_);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Emergency_Department_Visit();
-		IEnumerable<Encounter> g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
 		CqlValueSet h_ = this.Nonacute_Inpatient();
-		IEnumerable<Encounter> i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		IEnumerable<Encounter> j_ = context?.Operators.Union<Encounter>(g_, i_);
-		IEnumerable<Encounter> k_ = context?.Operators.Union<Encounter>(e_, j_);
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		bool? l_(Encounter Outpatient)
 		{
 			Code<Encounter.EncounterStatus> p_ = Outpatient?.StatusElement;
 			string q_ = FHIRHelpers_4_0_001.ToString(p_);
-			bool? r_ = context?.Operators.Equal(q_, "finished");
+			bool? r_ = context.Operators.Equal(q_, "finished");
 
 			return r_;
 		};
-		IEnumerable<Encounter> m_ = context?.Operators.Where<Encounter>(k_, l_);
+		IEnumerable<Encounter> m_ = context.Operators.Where<Encounter>(k_, l_);
 		IEnumerable<Encounter> n_(Encounter OutpatientEncounter)
 		{
 			CqlValueSet s_ = this.Advanced_Illness();
-			IEnumerable<Condition> t_ = context?.Operators.RetrieveByValueSet<Condition>(s_, null);
+			IEnumerable<Condition> t_ = context.Operators.RetrieveByValueSet<Condition>(s_, null);
 			bool? u_(Condition AdvancedIllnessDiagnosis)
 			{
 				IEnumerable<Condition> y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(OutpatientEncounter);
-				bool? z_ = context?.Operators.In<Condition>(AdvancedIllnessDiagnosis, y_);
+				bool? z_ = context.Operators.In<Condition>(AdvancedIllnessDiagnosis, y_);
 				Period aa_ = OutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((aa_ as object));
-				CqlDateTime ac_ = context?.Operators.Start(ab_);
+				CqlDateTime ac_ = context.Operators.Start(ab_);
 				CqlInterval<CqlDateTime> ad_ = this.Measurement_Period();
-				CqlDateTime ae_ = context?.Operators.End(ad_);
-				CqlQuantity af_ = context?.Operators.Quantity(2m, "years");
-				CqlDateTime ag_ = context?.Operators.Subtract(ae_, af_);
-				CqlDateTime ai_ = context?.Operators.End(ad_);
-				CqlInterval<CqlDateTime> aj_ = context?.Operators.Interval(ag_, ai_, true, true);
-				bool? ak_ = context?.Operators.In<CqlDateTime>(ac_, aj_, null);
-				CqlDateTime am_ = context?.Operators.End(ad_);
-				bool? an_ = context?.Operators.Not((bool?)(am_ is null));
-				bool? ao_ = context?.Operators.And(ak_, an_);
-				bool? ap_ = context?.Operators.And(z_, ao_);
+				CqlDateTime ae_ = context.Operators.End(ad_);
+				CqlQuantity af_ = context.Operators.Quantity(2m, "years");
+				CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
+				CqlDateTime ai_ = context.Operators.End(ad_);
+				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ag_, ai_, true, true);
+				bool? ak_ = context.Operators.In<CqlDateTime>(ac_, aj_, null);
+				CqlDateTime am_ = context.Operators.End(ad_);
+				bool? an_ = context.Operators.Not((bool?)(am_ is null));
+				bool? ao_ = context.Operators.And(ak_, an_);
+				bool? ap_ = context.Operators.And(z_, ao_);
 
 				return ap_;
 			};
-			IEnumerable<Condition> v_ = context?.Operators.Where<Condition>(t_, u_);
+			IEnumerable<Condition> v_ = context.Operators.Where<Condition>(t_, u_);
 			Encounter w_(Condition AdvancedIllnessDiagnosis) => 
 				OutpatientEncounter;
-			IEnumerable<Encounter> x_ = context?.Operators.Select<Condition, Encounter>(v_, w_);
+			IEnumerable<Encounter> x_ = context.Operators.Select<Condition, Encounter>(v_, w_);
 
 			return x_;
 		};
-		IEnumerable<Encounter> o_ = context?.Operators.SelectMany<Encounter, Encounter>(m_, n_);
+		IEnumerable<Encounter> o_ = context.Operators.SelectMany<Encounter, Encounter>(m_, n_);
 
 		return o_;
 	}
 
     [CqlDeclaration("Outpatient Encounters with Advanced Illness")]
 	public IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness() => 
-		__Outpatient_Encounters_with_Advanced_Illness?.Value;
+		__Outpatient_Encounters_with_Advanced_Illness.Value;
 
 	private IEnumerable<Encounter> Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Outpatient_Encounters_with_Advanced_Illness();
-		IEnumerable<ValueTuple<Encounter, Encounter>> c_ = context?.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
+		IEnumerable<ValueTuple<Encounter, Encounter>> c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
 		(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? d_(ValueTuple<Encounter, Encounter> _valueTuple)
 		{
 			(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? j_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
 		};
-		IEnumerable<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> e_ = context?.Operators.Select<ValueTuple<Encounter, Encounter>, (Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(c_, d_);
+		IEnumerable<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> e_ = context.Operators.Select<ValueTuple<Encounter, Encounter>, (Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(c_, d_);
 		bool? f_((Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia)
 		{
 			Period k_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter2?.Period;
 			CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.ToInterval(k_);
-			CqlDateTime m_ = context?.Operators.End(l_);
+			CqlDateTime m_ = context.Operators.End(l_);
 			Period n_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1?.Period;
 			CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.ToInterval(n_);
-			CqlDateTime p_ = context?.Operators.End(o_);
-			CqlQuantity q_ = context?.Operators.Quantity(1m, "day");
-			CqlDateTime r_ = context?.Operators.Add(p_, q_);
-			bool? s_ = context?.Operators.SameOrAfter(m_, r_, null);
+			CqlDateTime p_ = context.Operators.End(o_);
+			CqlQuantity q_ = context.Operators.Quantity(1m, "day");
+			CqlDateTime r_ = context.Operators.Add(p_, q_);
+			bool? s_ = context.Operators.SameOrAfter(m_, r_, null);
 
 			return s_;
 		};
-		IEnumerable<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> g_ = context?.Operators.Where<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(e_, f_);
+		IEnumerable<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> g_ = context.Operators.Where<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(e_, f_);
 		Encounter h_((Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia) => 
 			tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1;
-		IEnumerable<Encounter> i_ = context?.Operators.Select<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?, Encounter>(g_, h_);
+		IEnumerable<Encounter> i_ = context.Operators.Select<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?, Encounter>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Two Outpatient Encounters with Advanced Illness on Different Dates of Service")]
 	public IEnumerable<Encounter> Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service() => 
-		__Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service?.Value;
+		__Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service.Value;
 
 	private IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Overlapping_Periods_Value()
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.Long_Term_Care_Periods_During_Measurement_Period();
-		IEnumerable<CqlInterval<CqlDateTime>> b_ = context?.Operators.Collapse(a_, null);
+		IEnumerable<CqlInterval<CqlDateTime>> b_ = context.Operators.Collapse(a_, null);
 
 		return b_;
 	}
 
     [CqlDeclaration("Long Term Care Overlapping Periods")]
 	public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Overlapping_Periods() => 
-		__Long_Term_Care_Overlapping_Periods?.Value;
+		__Long_Term_Care_Overlapping_Periods.Value;
 
 	private IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Adjacent_Periods_Value()
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.Long_Term_Care_Overlapping_Periods();
-		IEnumerable<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>> c_ = context?.Operators.CrossJoin<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(a_, a_);
+		IEnumerable<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>> c_ = context.Operators.CrossJoin<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(a_, a_);
 		(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)? d_(ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>> _valueTuple)
 		{
 			(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)? j_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
 		};
-		IEnumerable<(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?> e_ = context?.Operators.Select<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>, (CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?>(c_, d_);
+		IEnumerable<(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?> e_ = context.Operators.Select<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>, (CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?>(c_, d_);
 		bool? f_((CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)? tuple_cgadvoxeqbmgmpcpzothiiddb)
 		{
-			CqlDateTime k_ = context?.Operators.End(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod1);
-			CqlDateTime l_ = context?.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2);
-			CqlQuantity m_ = context?.Operators.Quantity(1m, "day");
-			CqlDateTime n_ = context?.Operators.Subtract(l_, m_);
-			CqlDateTime q_ = context?.Operators.Add(l_, m_);
-			CqlInterval<CqlDateTime> r_ = context?.Operators.Interval(n_, q_, true, true);
-			bool? s_ = context?.Operators.In<CqlDateTime>(k_, r_, null);
-			bool? u_ = context?.Operators.Not((bool?)(l_ is null));
-			bool? v_ = context?.Operators.And(s_, u_);
+			CqlDateTime k_ = context.Operators.End(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod1);
+			CqlDateTime l_ = context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2);
+			CqlQuantity m_ = context.Operators.Quantity(1m, "day");
+			CqlDateTime n_ = context.Operators.Subtract(l_, m_);
+			CqlDateTime q_ = context.Operators.Add(l_, m_);
+			CqlInterval<CqlDateTime> r_ = context.Operators.Interval(n_, q_, true, true);
+			bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, null);
+			bool? u_ = context.Operators.Not((bool?)(l_ is null));
+			bool? v_ = context.Operators.And(s_, u_);
 
 			return v_;
 		};
-		IEnumerable<(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?> g_ = context?.Operators.Where<(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?>(e_, f_);
+		IEnumerable<(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?> g_ = context.Operators.Where<(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?>(e_, f_);
 		CqlInterval<CqlDateTime> h_((CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)? tuple_cgadvoxeqbmgmpcpzothiiddb)
 		{
-			CqlDateTime w_ = context?.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod1);
-			CqlDateTime x_ = context?.Operators.End(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2);
-			CqlInterval<CqlDateTime> y_ = context?.Operators.Interval(w_, x_, true, true);
+			CqlDateTime w_ = context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod1);
+			CqlDateTime x_ = context.Operators.End(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2);
+			CqlInterval<CqlDateTime> y_ = context.Operators.Interval(w_, x_, true, true);
 
 			return y_;
 		};
-		IEnumerable<CqlInterval<CqlDateTime>> i_ = context?.Operators.Select<(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?, CqlInterval<CqlDateTime>>(g_, h_);
+		IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Select<(CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)?, CqlInterval<CqlDateTime>>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Long Term Care Adjacent Periods")]
 	public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Adjacent_Periods() => 
-		__Long_Term_Care_Adjacent_Periods?.Value;
+		__Long_Term_Care_Adjacent_Periods.Value;
 
 	private int? Max_Long_Term_Care_Period_Length_Value()
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.Long_Term_Care_Overlapping_Periods();
 		IEnumerable<CqlInterval<CqlDateTime>> b_ = this.Long_Term_Care_Adjacent_Periods();
-		IEnumerable<CqlInterval<CqlDateTime>> c_ = context?.Operators.Union<CqlInterval<CqlDateTime>>(a_, b_);
-		IEnumerable<CqlInterval<CqlDateTime>> d_ = context?.Operators.Collapse(c_, null);
+		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Union<CqlInterval<CqlDateTime>>(a_, b_);
+		IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Collapse(c_, null);
 		int? e_(CqlInterval<CqlDateTime> LTCPeriods)
 		{
-			CqlDateTime h_ = context?.Operators.Start(LTCPeriods);
-			CqlDateTime i_ = context?.Operators.End(LTCPeriods);
-			int? j_ = context?.Operators.DurationBetween(h_, i_, null);
+			CqlDateTime h_ = context.Operators.Start(LTCPeriods);
+			CqlDateTime i_ = context.Operators.End(LTCPeriods);
+			int? j_ = context.Operators.DurationBetween(h_, i_, null);
 
 			return j_;
 		};
-		IEnumerable<int?> f_ = context?.Operators.Select<CqlInterval<CqlDateTime>, int?>(d_, e_);
-		int? g_ = context?.Operators.Max<int?>(f_);
+		IEnumerable<int?> f_ = context.Operators.Select<CqlInterval<CqlDateTime>, int?>(d_, e_);
+		int? g_ = context.Operators.Max<int?>(f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Max Long Term Care Period Length")]
 	public int? Max_Long_Term_Care_Period_Length() => 
-		__Max_Long_Term_Care_Period_Length?.Value;
+		__Max_Long_Term_Care_Period_Length.Value;
 
 	private IEnumerable<Encounter> Inpatient_Encounter_with_Advanced_Illness_Value()
 	{
 		CqlValueSet a_ = this.Acute_Inpatient();
-		IEnumerable<Encounter> b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter AcuteInpatient)
 		{
 			Code<Encounter.EncounterStatus> g_ = AcuteInpatient?.StatusElement;
 			string h_ = FHIRHelpers_4_0_001.ToString(g_);
-			bool? i_ = context?.Operators.Equal(h_, "finished");
+			bool? i_ = context.Operators.Equal(h_, "finished");
 
 			return i_;
 		};
-		IEnumerable<Encounter> d_ = context?.Operators.Where<Encounter>(b_, c_);
+		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 		IEnumerable<Encounter> e_(Encounter InpatientEncounter)
 		{
 			CqlValueSet j_ = this.Advanced_Illness();
-			IEnumerable<Condition> k_ = context?.Operators.RetrieveByValueSet<Condition>(j_, null);
+			IEnumerable<Condition> k_ = context.Operators.RetrieveByValueSet<Condition>(j_, null);
 			bool? l_(Condition AdvancedIllnessDiagnosis)
 			{
 				IEnumerable<Condition> p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(InpatientEncounter);
-				bool? q_ = context?.Operators.In<Condition>(AdvancedIllnessDiagnosis, p_);
+				bool? q_ = context.Operators.In<Condition>(AdvancedIllnessDiagnosis, p_);
 				Period r_ = InpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((r_ as object));
-				CqlDateTime t_ = context?.Operators.Start(s_);
+				CqlDateTime t_ = context.Operators.Start(s_);
 				CqlInterval<CqlDateTime> u_ = this.Measurement_Period();
-				CqlDateTime v_ = context?.Operators.End(u_);
-				CqlQuantity w_ = context?.Operators.Quantity(2m, "years");
-				CqlDateTime x_ = context?.Operators.Subtract(v_, w_);
-				CqlDateTime z_ = context?.Operators.End(u_);
-				CqlInterval<CqlDateTime> aa_ = context?.Operators.Interval(x_, z_, true, true);
-				bool? ab_ = context?.Operators.In<CqlDateTime>(t_, aa_, null);
-				CqlDateTime ad_ = context?.Operators.End(u_);
-				bool? ae_ = context?.Operators.Not((bool?)(ad_ is null));
-				bool? af_ = context?.Operators.And(ab_, ae_);
-				bool? ag_ = context?.Operators.And(q_, af_);
+				CqlDateTime v_ = context.Operators.End(u_);
+				CqlQuantity w_ = context.Operators.Quantity(2m, "years");
+				CqlDateTime x_ = context.Operators.Subtract(v_, w_);
+				CqlDateTime z_ = context.Operators.End(u_);
+				CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
+				bool? ab_ = context.Operators.In<CqlDateTime>(t_, aa_, null);
+				CqlDateTime ad_ = context.Operators.End(u_);
+				bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+				bool? af_ = context.Operators.And(ab_, ae_);
+				bool? ag_ = context.Operators.And(q_, af_);
 
 				return ag_;
 			};
-			IEnumerable<Condition> m_ = context?.Operators.Where<Condition>(k_, l_);
+			IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
 			Encounter n_(Condition AdvancedIllnessDiagnosis) => 
 				InpatientEncounter;
-			IEnumerable<Encounter> o_ = context?.Operators.Select<Condition, Encounter>(m_, n_);
+			IEnumerable<Encounter> o_ = context.Operators.Select<Condition, Encounter>(m_, n_);
 
 			return o_;
 		};
-		IEnumerable<Encounter> f_ = context?.Operators.SelectMany<Encounter, Encounter>(d_, e_);
+		IEnumerable<Encounter> f_ = context.Operators.SelectMany<Encounter, Encounter>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Inpatient Encounter with Advanced Illness")]
 	public IEnumerable<Encounter> Inpatient_Encounter_with_Advanced_Illness() => 
-		__Inpatient_Encounter_with_Advanced_Illness?.Value;
+		__Inpatient_Encounter_with_Advanced_Illness.Value;
 
 	private bool? Has_Criteria_Indicating_Frailty_Value()
 	{
 		CqlValueSet a_ = this.Frailty_Device();
-		IEnumerable<DeviceRequest> b_ = context?.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
-		IEnumerable<DeviceRequest> d_ = context?.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
-		IEnumerable<DeviceRequest> e_ = context?.Operators.Union<DeviceRequest>(b_, d_);
+		IEnumerable<DeviceRequest> b_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
+		IEnumerable<DeviceRequest> d_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, null);
+		IEnumerable<DeviceRequest> e_ = context.Operators.Union<DeviceRequest>(b_, d_);
 		bool? f_(DeviceRequest FrailtyDeviceOrder)
 		{
 			Code<RequestStatus> ag_ = FrailtyDeviceOrder?.StatusElement;
@@ -543,22 +543,22 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				"on-hold",
 				"completed",
 			];
-			bool? aj_ = context?.Operators.In<string>(ah_, (ai_ as IEnumerable<string>));
+			bool? aj_ = context.Operators.In<string>(ah_, (ai_ as IEnumerable<string>));
 			Code<RequestIntent> ak_ = FrailtyDeviceOrder?.IntentElement;
 			string al_ = FHIRHelpers_4_0_001.ToString(ak_);
-			bool? am_ = context?.Operators.Equal(al_, "order");
-			bool? an_ = context?.Operators.And(aj_, am_);
+			bool? am_ = context.Operators.Equal(al_, "order");
+			bool? an_ = context.Operators.And(aj_, am_);
 			CqlInterval<CqlDateTime> ao_ = this.Measurement_Period();
 			FhirDateTime ap_ = FrailtyDeviceOrder?.AuthoredOnElement;
 			CqlInterval<CqlDateTime> aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ap_ as object));
-			bool? ar_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, null);
-			bool? as_ = context?.Operators.And(an_, ar_);
+			bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, null);
+			bool? as_ = context.Operators.And(an_, ar_);
 
 			return as_;
 		};
-		IEnumerable<DeviceRequest> g_ = context?.Operators.Where<DeviceRequest>(e_, f_);
-		bool? h_ = context?.Operators.Exists<DeviceRequest>(g_);
-		IEnumerable<Observation> j_ = context?.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<DeviceRequest> g_ = context.Operators.Where<DeviceRequest>(e_, f_);
+		bool? h_ = context.Operators.Exists<DeviceRequest>(g_);
+		IEnumerable<Observation> j_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? k_(Observation FrailtyDeviceApplied)
 		{
 			Code<ObservationStatus> at_ = FrailtyDeviceApplied?.StatusElement;
@@ -568,51 +568,51 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				"amended",
 				"corrected",
 			];
-			bool? aw_ = context?.Operators.In<string>(au_, (av_ as IEnumerable<string>));
+			bool? aw_ = context.Operators.In<string>(au_, (av_ as IEnumerable<string>));
 			DataType ax_ = FrailtyDeviceApplied?.Effective;
 			CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ax_);
 			CqlInterval<CqlDateTime> az_ = this.Measurement_Period();
-			bool? ba_ = context?.Operators.Overlaps(ay_, az_, null);
-			bool? bb_ = context?.Operators.And(aw_, ba_);
+			bool? ba_ = context.Operators.Overlaps(ay_, az_, null);
+			bool? bb_ = context.Operators.And(aw_, ba_);
 
 			return bb_;
 		};
-		IEnumerable<Observation> l_ = context?.Operators.Where<Observation>(j_, k_);
-		bool? m_ = context?.Operators.Exists<Observation>(l_);
-		bool? n_ = context?.Operators.Or(h_, m_);
+		IEnumerable<Observation> l_ = context.Operators.Where<Observation>(j_, k_);
+		bool? m_ = context.Operators.Exists<Observation>(l_);
+		bool? n_ = context.Operators.Or(h_, m_);
 		CqlValueSet o_ = this.Frailty_Diagnosis();
-		IEnumerable<Condition> p_ = context?.Operators.RetrieveByValueSet<Condition>(o_, null);
+		IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, null);
 		bool? q_(Condition FrailtyDiagnosis)
 		{
 			CqlInterval<CqlDateTime> bc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(FrailtyDiagnosis);
 			CqlInterval<CqlDateTime> bd_ = this.Measurement_Period();
-			bool? be_ = context?.Operators.Overlaps(bc_, bd_, null);
+			bool? be_ = context.Operators.Overlaps(bc_, bd_, null);
 
 			return be_;
 		};
-		IEnumerable<Condition> r_ = context?.Operators.Where<Condition>(p_, q_);
-		bool? s_ = context?.Operators.Exists<Condition>(r_);
-		bool? t_ = context?.Operators.Or(n_, s_);
+		IEnumerable<Condition> r_ = context.Operators.Where<Condition>(p_, q_);
+		bool? s_ = context.Operators.Exists<Condition>(r_);
+		bool? t_ = context.Operators.Or(n_, s_);
 		CqlValueSet u_ = this.Frailty_Encounter();
-		IEnumerable<Encounter> v_ = context?.Operators.RetrieveByValueSet<Encounter>(u_, null);
+		IEnumerable<Encounter> v_ = context.Operators.RetrieveByValueSet<Encounter>(u_, null);
 		bool? w_(Encounter FrailtyEncounter)
 		{
 			Code<Encounter.EncounterStatus> bf_ = FrailtyEncounter?.StatusElement;
 			string bg_ = FHIRHelpers_4_0_001.ToString(bf_);
-			bool? bh_ = context?.Operators.Equal(bg_, "finished");
+			bool? bh_ = context.Operators.Equal(bg_, "finished");
 			Period bi_ = FrailtyEncounter?.Period;
 			CqlInterval<CqlDateTime> bj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((bi_ as object));
 			CqlInterval<CqlDateTime> bk_ = this.Measurement_Period();
-			bool? bl_ = context?.Operators.Overlaps(bj_, bk_, null);
-			bool? bm_ = context?.Operators.And(bh_, bl_);
+			bool? bl_ = context.Operators.Overlaps(bj_, bk_, null);
+			bool? bm_ = context.Operators.And(bh_, bl_);
 
 			return bm_;
 		};
-		IEnumerable<Encounter> x_ = context?.Operators.Where<Encounter>(v_, w_);
-		bool? y_ = context?.Operators.Exists<Encounter>(x_);
-		bool? z_ = context?.Operators.Or(t_, y_);
+		IEnumerable<Encounter> x_ = context.Operators.Where<Encounter>(v_, w_);
+		bool? y_ = context.Operators.Exists<Encounter>(x_);
+		bool? z_ = context.Operators.Or(t_, y_);
 		CqlValueSet aa_ = this.Frailty_Symptom();
-		IEnumerable<Observation> ab_ = context?.Operators.RetrieveByValueSet<Observation>(aa_, null);
+		IEnumerable<Observation> ab_ = context.Operators.RetrieveByValueSet<Observation>(aa_, null);
 		bool? ac_(Observation FrailtySymptom)
 		{
 			Code<ObservationStatus> bn_ = FrailtySymptom?.StatusElement;
@@ -623,106 +623,106 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				"amended",
 				"corrected",
 			];
-			bool? bq_ = context?.Operators.In<string>(bo_, (bp_ as IEnumerable<string>));
+			bool? bq_ = context.Operators.In<string>(bo_, (bp_ as IEnumerable<string>));
 			DataType br_ = FrailtySymptom?.Effective;
 			CqlInterval<CqlDateTime> bs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(br_);
 			CqlInterval<CqlDateTime> bt_ = this.Measurement_Period();
-			bool? bu_ = context?.Operators.Overlaps(bs_, bt_, null);
-			bool? bv_ = context?.Operators.And(bq_, bu_);
+			bool? bu_ = context.Operators.Overlaps(bs_, bt_, null);
+			bool? bv_ = context.Operators.And(bq_, bu_);
 
 			return bv_;
 		};
-		IEnumerable<Observation> ad_ = context?.Operators.Where<Observation>(ab_, ac_);
-		bool? ae_ = context?.Operators.Exists<Observation>(ad_);
-		bool? af_ = context?.Operators.Or(z_, ae_);
+		IEnumerable<Observation> ad_ = context.Operators.Where<Observation>(ab_, ac_);
+		bool? ae_ = context.Operators.Exists<Observation>(ad_);
+		bool? af_ = context.Operators.Or(z_, ae_);
 
 		return af_;
 	}
 
     [CqlDeclaration("Has Criteria Indicating Frailty")]
 	public bool? Has_Criteria_Indicating_Frailty() => 
-		__Has_Criteria_Indicating_Frailty?.Value;
+		__Has_Criteria_Indicating_Frailty.Value;
 
 	private bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
 		string c_ = b_?.Value;
-		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-		CqlDateTime f_ = context?.Operators.Start(e_);
-		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
-		CqlInterval<int?> i_ = context?.Operators.Interval(65, 79, true, true);
-		bool? j_ = context?.Operators.In<int?>(h_, i_, null);
+		CqlDateTime f_ = context.Operators.Start(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		CqlInterval<int?> i_ = context.Operators.Interval(65, 79, true, true);
+		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 		bool? k_ = this.Has_Criteria_Indicating_Frailty();
-		bool? l_ = context?.Operators.And(j_, k_);
+		bool? l_ = context.Operators.And(j_, k_);
 		IEnumerable<Encounter> m_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
-		bool? n_ = context?.Operators.Exists<Encounter>(m_);
+		bool? n_ = context.Operators.Exists<Encounter>(m_);
 		IEnumerable<Encounter> o_ = this.Inpatient_Encounter_with_Advanced_Illness();
-		bool? p_ = context?.Operators.Exists<Encounter>(o_);
-		bool? q_ = context?.Operators.Or(n_, p_);
+		bool? p_ = context.Operators.Exists<Encounter>(o_);
+		bool? q_ = context.Operators.Or(n_, p_);
 		IEnumerable<MedicationRequest> r_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
-		bool? s_ = context?.Operators.Exists<MedicationRequest>(r_);
-		bool? t_ = context?.Operators.Or(q_, s_);
-		bool? u_ = context?.Operators.And(l_, t_);
+		bool? s_ = context.Operators.Exists<MedicationRequest>(r_);
+		bool? t_ = context.Operators.Or(q_, s_);
+		bool? u_ = context.Operators.And(l_, t_);
 		Date w_ = a_?.BirthDateElement;
 		string x_ = w_?.Value;
-		CqlDate y_ = context?.Operators.ConvertStringToDate(x_);
-		CqlDateTime aa_ = context?.Operators.Start(e_);
-		CqlDate ab_ = context?.Operators.DateFrom(aa_);
-		int? ac_ = context?.Operators.CalculateAgeAt(y_, ab_, null);
-		bool? ad_ = context?.Operators.GreaterOrEqual(ac_, 80);
-		bool? af_ = context?.Operators.And(ad_, k_);
-		bool? ag_ = context?.Operators.Or(u_, af_);
+		CqlDate y_ = context.Operators.ConvertStringToDate(x_);
+		CqlDateTime aa_ = context.Operators.Start(e_);
+		CqlDate ab_ = context.Operators.DateFrom(aa_);
+		int? ac_ = context.Operators.CalculateAgeAt(y_, ab_, null);
+		bool? ad_ = context.Operators.GreaterOrEqual(ac_, 80);
+		bool? af_ = context.Operators.And(ad_, k_);
+		bool? ag_ = context.Operators.Or(u_, af_);
 
 		return ag_;
 	}
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
 	public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80() => 
-		__Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80?.Value;
+		__Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80.Value;
 
 	private bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
 		string c_ = b_?.Value;
-		CqlDate d_ = context?.Operators.ConvertStringToDate(c_);
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
-		CqlDateTime f_ = context?.Operators.Start(e_);
-		CqlDate g_ = context?.Operators.DateFrom(f_);
-		int? h_ = context?.Operators.CalculateAgeAt(d_, g_, null);
-		bool? i_ = context?.Operators.GreaterOrEqual(h_, 65);
+		CqlDateTime f_ = context.Operators.Start(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		bool? i_ = context.Operators.GreaterOrEqual(h_, 65);
 		bool? j_ = this.Has_Criteria_Indicating_Frailty();
-		bool? k_ = context?.Operators.And(i_, j_);
+		bool? k_ = context.Operators.And(i_, j_);
 		IEnumerable<Encounter> l_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
-		bool? m_ = context?.Operators.Exists<Encounter>(l_);
+		bool? m_ = context.Operators.Exists<Encounter>(l_);
 		IEnumerable<Encounter> n_ = this.Inpatient_Encounter_with_Advanced_Illness();
-		bool? o_ = context?.Operators.Exists<Encounter>(n_);
-		bool? p_ = context?.Operators.Or(m_, o_);
+		bool? o_ = context.Operators.Exists<Encounter>(n_);
+		bool? p_ = context.Operators.Or(m_, o_);
 		IEnumerable<MedicationRequest> q_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
-		bool? r_ = context?.Operators.Exists<MedicationRequest>(q_);
-		bool? s_ = context?.Operators.Or(p_, r_);
-		bool? t_ = context?.Operators.And(k_, s_);
+		bool? r_ = context.Operators.Exists<MedicationRequest>(q_);
+		bool? s_ = context.Operators.Or(p_, r_);
+		bool? t_ = context.Operators.And(k_, s_);
 
 		return t_;
 	}
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
 	public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80() => 
-		__Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80?.Value;
+		__Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80.Value;
 
 	private bool? Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days_Value()
 	{
 		int? a_ = this.Max_Long_Term_Care_Period_Length();
-		bool? b_ = context?.Operators.Greater(a_, 90);
+		bool? b_ = context.Operators.Greater(a_, 90);
 
 		return b_;
 	}
 
     [CqlDeclaration("Has Long Term Care Periods Longer Than 90 Consecutive Days")]
 	public bool? Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days() => 
-		__Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days?.Value;
+		__Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days.Value;
 
 }
