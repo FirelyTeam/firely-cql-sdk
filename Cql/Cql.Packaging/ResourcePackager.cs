@@ -105,6 +105,12 @@ internal class ResourcePackager
 
                 var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, resourceCanonicalRootUrl, asmData, typeCrosswalk, library);
                 librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
+
+                // Analyze datarequirements and add to the FHIR Library resource.
+                var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, library);
+                var dataRequirements = dataRequirementsAnalyzer.Analyze();
+                fhirLibrary.DataRequirement.AddRange(dataRequirements);
+
                 OnResourceCreated(fhirLibrary);
             }
         }
@@ -307,12 +313,12 @@ internal class ResourcePackager
     }
 
     private static IEnumerable<Parameters.ParameterComponent>? CqlToElmInfoToFhir(Elm.Library elmLibrary, CqlTypeToFhirTypeMapper typeCrosswalk)
-    {     
+    {
         var parameters = new List<Parameters.ParameterComponent>();
         foreach (var annotation in elmLibrary?.annotation ?? [])
         {
             if (annotation is CqlToElmInfo cqlOptions)
-            {                
+            {
                 // translatorVersion
                 AddParameterIfNotNull(parameters, nameof(cqlOptions.translatorVersion), cqlOptions.translatorVersion);
 
