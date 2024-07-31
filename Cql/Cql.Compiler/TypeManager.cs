@@ -54,18 +54,13 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="resolver">The <see cref="TypeResolver"/> that this instance uses.</param>
         /// <param name="assemblyName">The name of the assembly in which generated tuple types will be created. If not specified, the value will be "Tuples".</param>
-        /// <param name="tupleTypeNamespace">The namespace of all generated tuple types.  If not specified, the value will be "Tuples".</param>
         /// <exception cref="ArgumentNullException">If <paramref name="resolver"/> is <c>null</c>.</exception>
         public TypeManager(
             TypeResolver resolver,
-            string assemblyName = "Tuples",
-            string? tupleTypeNamespace = "Tuples")
+            string assemblyName = "Tuples")
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
                 assemblyName = "Tuples";
-
-            if (string.IsNullOrWhiteSpace(tupleTypeNamespace))
-                tupleTypeNamespace = "Tuples";
 
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
@@ -73,7 +68,6 @@ namespace Hl7.Cql.Compiler
             Hasher = Hasher.Instance;
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
             Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
-            TupleTypeNamespace = tupleTypeNamespace;
         }
 
         /// <summary>
@@ -90,7 +84,6 @@ namespace Hl7.Cql.Compiler
                 .OrderBy(k => k.Key)
                 .Select(kvp => $"{kvp.Key}:{kvp.Value.ToCSharpString()}"));
             var tupleId = Hasher.Hash(hashInput);
-            var ns = TupleTypeNamespace;
             return $"Tuple_{tupleId}";
         }
 
