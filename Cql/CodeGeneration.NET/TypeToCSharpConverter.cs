@@ -62,7 +62,7 @@ internal class TypeToCSharpConverter
     public string GetMemberAccessNullabilityOperator(Type? type)
     {
         if (type is null) return "";
-        if (type.IsNullable(out _)) return "?";
+        if (type.IsNullableValueType(out _)) return "?";
         if (ShouldUseTupleType(type)) return "?";
         return "";
     }

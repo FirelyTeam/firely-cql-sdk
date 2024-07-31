@@ -151,9 +151,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertNullConditionalMemberExpression(string indentString, NullConditionalMemberExpression nullp)
         {
-            var convertExpression = ConvertExpression(0, nullp.MemberExpression.Expression!);
-            var memberName = nullp.MemberExpression.Member.Name;
-            return $"{indentString}{Parenthesize(convertExpression)}?.{memberName}";
+            return $"{indentString}{Parenthesize(ConvertExpression(0, nullp.MemberExpression.Expression!))}?.{nullp.MemberExpression.Member.Name}";
+            //var convertExpression = ConvertExpression(0, nullp.MemberExpression.Expression!);
+            //var memberName = nullp.MemberExpression.Member.Name;
+            //return $"{indentString}{Parenthesize(convertExpression)}?.{memberName}";
         }
 
         private string ConvertConstantExpression(Type constantType, object? value, string? identString = "")
