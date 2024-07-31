@@ -10,19 +10,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 internal class TypeToCSharpConverter
 {
     private readonly TypeCSharpFormat _typeCSharpFormat;
-    private readonly bool _useCSharpValueTuples;
+    private readonly bool _useCSharpValueTuples = true;
 
-    public TypeToCSharpConverter(IOptions<CSharpCodeWriterOptions> cSharpCodeWriterTypeFormat)
+    public TypeToCSharpConverter()
     {
         _typeCSharpFormat = new TypeCSharpFormat(UseKeywords: true, NoNamespaces: true, TypeNameFormat: FormatTypeNameAsTuple);
-        _useCSharpValueTuples = cSharpCodeWriterTypeFormat.Value.UseCSharpValueTuples;
     }
 
     private TextWriterFormattableString FormatTypeNameAsTuple(ITypeNameCSharpFormatContext ctx)

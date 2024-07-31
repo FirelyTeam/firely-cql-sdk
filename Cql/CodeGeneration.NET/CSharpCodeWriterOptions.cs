@@ -55,8 +55,6 @@ public partial class CSharpCodeWriterOptions
             return string.IsNullOrWhiteSpace(path) ? null : new DirectoryInfo(Path.GetFullPath(path));
         }
     }
-
-    internal bool UseCSharpValueTuples { get; set; } = true;
 }
 
 /// <summary>
