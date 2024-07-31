@@ -829,7 +829,7 @@ override Hl7.Cql.Elm.VersionedIdentifier.GetHashCode() -> int
 override Hl7.Cql.Elm.VersionedIdentifier.ToString() -> string?
 static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, Hl7.Cql.Elm.CqlToElmError! error) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, string! errorMessage, Hl7.Cql.Elm.ErrorType errorType = Hl7.Cql.Elm.ErrorType.semantic, Hl7.Cql.Elm.ErrorSeverity severity = Hl7.Cql.Elm.ErrorSeverity.error) -> T!
-static Hl7.Cql.Elm.ExtensionMethods.GetErrors(this Hl7.Cql.Elm.Element! node) -> Hl7.Cql.Elm.CqlToElmError![]!
+static Hl7.Cql.Elm.ExtensionMethods.GetErrors(this Hl7.Cql.Elm.Element! root) -> Hl7.Cql.Elm.CqlToElmError![]!
 static Hl7.Cql.Elm.Library.ComparerByNameAndVersion.get -> System.Collections.Generic.IComparer<Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Elm.Library.EqualityComparerByNameAndVersion.get -> System.Collections.Generic.IEqualityComparer<Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library!

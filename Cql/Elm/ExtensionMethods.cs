@@ -57,46 +57,28 @@ namespace Hl7.Cql.Elm
         }
 
         /// <summary>
-        /// Retrieves all error nodes in the ELM tree rooted in <paramref name="node"/>.
+        /// Retrieves all error nodes in the ELM tree rooted in <paramref name="root"/>.
         /// </summary>
-        public static CqlToElmError[] GetErrors(this Element node)
+        public static CqlToElmError[] GetErrors(this Element root)
         {
             var allErrors = new HashSet<CqlToElmError>();
 
-            var visitor = new ElmTreeWalker(nodeHandler, nodeFilter);
+            var visitor = new ElmTreeWalker(nodeHandler);
 
-            visitor.Walk(node);
+            visitor.Start(root);
             return allErrors.ToArray();
-
-            static bool nodeFilter(PropertyInfo property)
-            {
-                var type = property.PropertyType;
-                if (type.IsAssignableTo(typeof(Element)))
-                {
-                    return true;
-                }
-                else if (type.IsArray)
-                {
-                    if (type.GetElementType()!.IsAssignableTo(typeof(TypeSpecifier)))
-                        return false;
-                    else if (type.GetElementType()!.IsAssignableTo(typeof(Element)))
-                        return true;
-                }
-                return false;
-            }
 
             bool nodeHandler(object node)
             {
-                if (node is Element element && element.annotation?.OfType<CqlToElmError>() is { } errors && errors.Any())
-                {
-                    // avoid duplicate errors.
-                    foreach (var error in errors)
-                    {
-                        if (!allErrors.Contains(error))
-                            allErrors.Add(error);
-                    }
-                }
-                // Let the walker visit my children.
+                if (node is not Element element) return false;
+
+                var errors = element.annotation?.OfType<CqlToElmError>() ?? [];
+
+                // avoid duplicate errors.
+                foreach (var error in errors)
+                    allErrors.Add(error);
+
+                // Let the walker visit my children to scan for nested Elements.
                 return false;
             }
         }

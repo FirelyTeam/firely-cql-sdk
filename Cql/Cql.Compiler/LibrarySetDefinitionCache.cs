@@ -43,10 +43,10 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
     // Indexed by library name and version
     private readonly ConcurrentDictionary<string, LibraryCache> _cachedLibraries = new();
 
-    private LibraryCache GetLibraryCache(Library context)
+    private LibraryCache GetLibraryCache(Library library)
     {
-        return _cachedLibraries.GetOrAdd(context.NameAndVersion()!, buildCache);
-        LibraryCache buildCache(string _) => LibraryCache.Build(context);
+        return _cachedLibraries.GetOrAdd(library.NameAndVersion()!, buildCache);
+        LibraryCache buildCache(string _) => LibraryCache.Build(library);
     }
 
     private LibraryCache GetLibraryCache(Library context, string? libraryAlias)

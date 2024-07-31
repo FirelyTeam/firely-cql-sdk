@@ -118,6 +118,30 @@ public class TestElmPreprocessor()
         addExpression.operand[1].GetTypeSpecifier().Should().Be(SystemTypes.IntegerType);
     }
 
+    [TestMethod]
+    public void TestAmbiguousOverloadsFix()
+    {
+        var lib = ProcessWithStatements(
+            [
+                new FunctionDef { name = "next", resultTypeSpecifier = SystemTypes.IntegerType,
+                   operand = [new OperandDef { name = "p", operandTypeSpecifier = SystemTypes.IntegerType }],
+                },
+                new FunctionDef { name = "next", resultTypeSpecifier = SystemTypes.LongType,
+                    operand = [new OperandDef { name = "p", operandTypeSpecifier = SystemTypes.LongType }],
+                },
+                new FunctionDef { name = "next", resultTypeSpecifier = SystemTypes.IntegerType,
+                    operand = [new OperandDef { name = "p", operandTypeSpecifier = SystemTypes.IntegerType }],
+                },
+            ]
+        );
+
+        // Assert
+        var overloadsFixer = new AmbiguousOverloadCorrector();
+        overloadsFixer.Fix(lib);
+
+        lib.statements.Select(s => s as FunctionDef).Where(fd => fd?.name == "next")
+                               .Should().HaveCount(2);
+    }
 
     private static Library ProcessWithStatements(IEnumerable<ExpressionDef> defs)
     {
@@ -130,7 +154,7 @@ public class TestElmPreprocessor()
         var lset = new LibrarySet(name: "test", lib);
 
         var preprocessor = new ElmPreprocessor(lset);
-        preprocessor.Process(lib);
+        preprocessor.Preprocess(lib);
         return lib;
     }
 }

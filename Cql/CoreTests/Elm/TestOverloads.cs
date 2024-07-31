@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -28,9 +29,7 @@ public class TestOverloads
         var func1 = new FunctionDef { name = "Println", operand = [new OperandDef { name = "param1", operandType = SystemTypes.IntegerType.TryToQualifiedName() }] };
         var func2 = new FunctionDef { name = "Println", operand = [new OperandDef { name = "param1", operandTypeSpecifier = SystemTypes.IntegerType }] };
 
-        var mg = OverloadedFunctionDef.Create([func1, func2]);
-
-        mg.FilterOverloads([SystemTypes.IntegerType]).Should().HaveCount(2);
+        Assert.ThrowsException<ArgumentException>(() => OverloadedFunctionDef.Create([func1, func2]));
     }
 
     [TestMethod]
