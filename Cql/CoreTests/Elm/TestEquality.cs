@@ -172,16 +172,9 @@ namespace CoreTests.Elm
             {
                 name = "Foo", operand = [new OperandDef { name = "Bar", operandTypeSpecifier = SystemTypes.StringType }]
             };
-            var sig3 = new FunctionDef
-            {
-                name = "Foo",
-                operand = [new OperandDef { name = "Bar", operandTypeSpecifier = SystemTypes.StringType }],
-                fluentSpecified = true, fluent = true
-            };
 
             var signatureComparer = new ExpressionSignatureComparer();
             signatureComparer.Equals(sig1, sig2).Should().BeFalse();
-            signatureComparer.Equals(sig2, sig3).Should().BeFalse();
             signatureComparer.Equals(sig1, sig1).Should().BeTrue();
         }
     }

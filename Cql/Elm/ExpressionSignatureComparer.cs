@@ -17,9 +17,9 @@ namespace Hl7.Cql.Compiler;
 /// Compares two ExpressionDefs by their signature. If they are Expressions, their names are compared, if they
 /// are functions, their names and signatures and fluentness are compared.
 /// </summary>
-internal class ExpressionSignatureComparer : IEqualityComparer<ExpressionDef>
+internal class ExpressionSignatureComparer : IEqualityComparer<IDefinitionElement>
 {
-    public bool Equals(ExpressionDef? x, ExpressionDef? y)
+    public bool Equals(IDefinitionElement? x, IDefinitionElement? y)
     {
         if (x == null || y == null) return x == y;
 
@@ -33,8 +33,10 @@ internal class ExpressionSignatureComparer : IEqualityComparer<ExpressionDef>
         if (x is not IHasSignature left || y is not IHasSignature right)
             return false;
 
-        if (left.Fluent != right.Fluent)
-            return false;
+        // This might not be relevant for equality, at least it is not in the
+        // OverloadedFunctionDefinition.Combine().
+        // if (left.Fluent != right.Fluent)
+        //     return false;
 
         var leftSig = left.BuildSignatureFromOperands();
         var rightSig = right.BuildSignatureFromOperands();
@@ -42,5 +44,5 @@ internal class ExpressionSignatureComparer : IEqualityComparer<ExpressionDef>
         return leftSig.SequenceEqual(rightSig);
     }
 
-    public int GetHashCode(ExpressionDef obj) => HashCode.Combine(obj.name);
+    public int GetHashCode(IDefinitionElement obj) => HashCode.Combine(obj.Name);
 }

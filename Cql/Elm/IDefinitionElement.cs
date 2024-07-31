@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
+using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.Elm
 {
@@ -353,23 +354,13 @@ namespace Hl7.Cql.Elm
                 return false;
 
             var allFunctions = elements
-                  .OfType<OverloadedFunctionDef>()
-                  .SelectMany(ofd => ofd.Functions)
-                  .Concat(elements.OfType<IHasSignature>())
-                  .ToArray();
-            var distinctSignatures = new List<TypeSpecifier[]>();
+                               .OfType<OverloadedFunctionDef>()
+                               .SelectMany(ofd => ofd.Functions)
+                               .Concat(elements.OfType<IHasSignature>())
+                               .ToArray();
 
-            // TODO: make this better than O(n2)
-            foreach (var function in allFunctions)
-            {
-                var opTypes = function.BuildSignatureFromOperands();
-
-                if (distinctSignatures.Any(sig => opTypes.SequenceEqual(sig)))
-                    return false;
-                else
-                    distinctSignatures.Add(opTypes);
-            }
-            return true;
+            var distinctSignatures = new HashSet<IHasSignature>(allFunctions, new ExpressionSignatureComparer());
+            return distinctSignatures.Count == allFunctions.Length;
         }
 
         /// <summary>
