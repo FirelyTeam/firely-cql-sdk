@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -224,10 +223,9 @@ public class AHAOverall_2_6_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("134401001", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -238,10 +236,9 @@ public class AHAOverall_2_6_000
 
 	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -279,10 +276,9 @@ public class AHAOverall_2_6_000
     [CqlDeclaration("isConfirmedActiveDiagnosis")]
 	public bool? isConfirmedActiveDiagnosis(Condition Condition)
 	{
-		Condition[] a_ = new Condition[]
-		{
+		Condition[] a_ = [
 			Condition,
-		};
+		];
 		bool? b_(Condition Diagnosis)
 		{
 			CodeableConcept f_ = Diagnosis?.ClinicalStatus;
@@ -401,12 +397,11 @@ public class AHAOverall_2_6_000
 			ObservationStatus? s_ = r_?.Value;
 			Code<ObservationStatus> t_ = context.Operators.Convert<Code<ObservationStatus>>(s_);
 			string u_ = context.Operators.Convert<string>(t_);
-			string[] v_ = new string[]
-			{
+			string[] v_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? w_ = context.Operators.In<string>(u_, (v_ as IEnumerable<string>));
 			bool? x_ = context.Operators.And(q_, w_);
 
@@ -758,24 +753,22 @@ public class AHAOverall_2_6_000
 			Code<MedicationRequest.MedicationrequestStatus> j_ = Order?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? k_ = j_?.Value;
 			string l_ = context.Operators.Convert<string>(k_);
-			string[] m_ = new string[]
-			{
+			string[] m_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? n_ = context.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 			bool? o_ = context.Operators.And(i_, n_);
 			Code<MedicationRequest.MedicationRequestIntent> p_ = Order?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
 			string r_ = context.Operators.Convert<string>(q_);
-			string[] s_ = new string[]
-			{
+			string[] s_ = [
 				"order",
 				"original-order",
 				"reflex-order",
 				"filler-order",
 				"instance-order",
-			};
+			];
 			bool? t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
 			bool? u_ = context.Operators.And(o_, t_);
 			FhirBoolean v_ = Order?.DoNotPerformElement;
@@ -889,10 +882,9 @@ public class AHAOverall_2_6_000
 				else if (Event is MedicationRequest)
 				{
 					object bf_ = context.Operators.LateBoundProperty<object>(Event, "dosageInstruction");
-					object[] bg_ = new object[]
-					{
+					object[] bg_ = [
 						bf_,
-					};
+					];
 					bool? bh_(object @this)
 					{
 						object cz_ = context.Operators.LateBoundProperty<object>(@this, "timing");
@@ -909,10 +901,9 @@ public class AHAOverall_2_6_000
 					};
 					IEnumerable<object> bk_ = context.Operators.Select<object, object>(bi_, bj_);
 					object bl_ = context.Operators.SingletonFrom<object>(bk_);
-					object[] bm_ = new object[]
-					{
+					object[] bm_ = [
 						bl_,
-					};
+					];
 					bool? bn_(object @this)
 					{
 						object dc_ = context.Operators.LateBoundProperty<object>(@this, "repeat");
@@ -929,10 +920,9 @@ public class AHAOverall_2_6_000
 					};
 					IEnumerable<object> bq_ = context.Operators.Select<object, object>(bo_, bp_);
 					object br_ = context.Operators.SingletonFrom<object>(bq_);
-					object[] bs_ = new object[]
-					{
+					object[] bs_ = [
 						br_,
-					};
+					];
 					bool? bt_(object @this)
 					{
 						object df_ = context.Operators.LateBoundProperty<object>(@this, "bounds");
@@ -951,10 +941,9 @@ public class AHAOverall_2_6_000
 					};
 					IEnumerable<object> bw_ = context.Operators.Select<object, object>(bu_, bv_);
 					object bx_ = context.Operators.SingletonFrom<object>(bw_);
-					object[] by_ = new object[]
-					{
+					object[] by_ = [
 						bx_,
-					};
+					];
 					CqlInterval<CqlDateTime> bz_(object DoseTime)
 					{
 						CqlInterval<CqlDateTime> dk_ = QICoreCommon_2_0_000.toInterval(DoseTime);
@@ -977,24 +966,22 @@ public class AHAOverall_2_6_000
 					Code<MedicationRequest.MedicationrequestStatus> ci_ = (Event as MedicationRequest)?.StatusElement;
 					MedicationRequest.MedicationrequestStatus? cj_ = ci_?.Value;
 					string ck_ = context.Operators.Convert<string>(cj_);
-					string[] cl_ = new string[]
-					{
+					string[] cl_ = [
 						"active",
 						"completed",
-					};
+					];
 					bool? cm_ = context.Operators.In<string>(ck_, (cl_ as IEnumerable<string>));
 					bool? cn_ = context.Operators.And(ch_, cm_);
 					Code<MedicationRequest.MedicationRequestIntent> co_ = (Event as MedicationRequest)?.IntentElement;
 					MedicationRequest.MedicationRequestIntent? cp_ = co_?.Value;
 					string cq_ = context.Operators.Convert<string>(cp_);
-					string[] cr_ = new string[]
-					{
+					string[] cr_ = [
 						"order",
 						"original-order",
 						"reflex-order",
 						"filler-order",
 						"instance-order",
-					};
+					];
 					bool? cs_ = context.Operators.In<string>(cq_, (cr_ as IEnumerable<string>));
 					bool? ct_ = context.Operators.And(cn_, cs_);
 					FhirBoolean cu_ = (Event as MedicationRequest)?.DoNotPerformElement;
@@ -1016,12 +1003,11 @@ public class AHAOverall_2_6_000
 					Code<ObservationStatus> ds_ = (Event as Observation)?.StatusElement;
 					ObservationStatus? dt_ = ds_?.Value;
 					string du_ = context.Operators.Convert<string>(dt_);
-					string[] dv_ = new string[]
-					{
+					string[] dv_ = [
 						"final",
 						"amended",
 						"corrected",
-					};
+					];
 					bool? dw_ = context.Operators.In<string>(du_, (dv_ as IEnumerable<string>));
 					bool? dx_ = context.Operators.And(dr_, dw_);
 

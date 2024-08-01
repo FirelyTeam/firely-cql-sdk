@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -41,20 +40,20 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Encounter>> __Inpatient_Encounters;
     internal Lazy<IEnumerable<Encounter>> __Initial_Population;
-    internal Lazy<IEnumerable<Tuple_GIbILVAdXLLNYBgcQIEiUiKaK>> __Encounter_with_First_Body_Temperature;
-    internal Lazy<IEnumerable<Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ>> __Encounter_with_First_Heart_Rate;
-    internal Lazy<IEnumerable<Tuple_FdREYEdHOZIcMCNYCRFJYJReA>> __Encounter_with_First_Oxygen_Saturation;
+    internal Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>> __Encounter_with_First_Body_Temperature;
+    internal Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>> __Encounter_with_First_Heart_Rate;
+    internal Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>> __Encounter_with_First_Oxygen_Saturation;
     internal Lazy<IEnumerable<Observation>> __Blood_Pressure_Reading;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_First_Systolic_Blood_Pressure;
-    internal Lazy<IEnumerable<Tuple_GbUHPXXHScejjXWhcHJFQQifQ>> __Encounter_with_First_Bicarbonate_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_FETECNQPQREfGRgPYWhOWgeWA>> __Encounter_with_First_Creatinine_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_DIHdhbAJeJTdiAVUAELUHRNdS>> __Encounter_with_First_Hematocrit_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_DAUcYHQZcDKbIfORJOEZBDgIh>> __Encounter_with_First_Platelet_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_GKGeLARADLGJcNcZaDhdCREMa>> __Encounter_with_First_Sodium_Lab_Test;
-    internal Lazy<IEnumerable<Tuple_ChVYCdXDGgVcFTCCUefXMbCHX>> __Encounter_with_First_White_Blood_Cells_Lab_Test;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?>> __Encounter_with_First_Bicarbonate_Lab_Test;
+    internal Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?>> __Encounter_with_First_Creatinine_Lab_Test;
+    internal Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>> __Encounter_with_First_Hematocrit_Lab_Test;
+    internal Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?>> __Encounter_with_First_Platelet_Lab_Test;
+    internal Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?>> __Encounter_with_First_Sodium_Lab_Test;
+    internal Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?>> __Encounter_with_First_White_Blood_Cells_Lab_Test;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -87,20 +86,20 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Inpatient_Encounters = new Lazy<IEnumerable<Encounter>>(this.Inpatient_Encounters_Value);
         __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
-        __Encounter_with_First_Body_Temperature = new Lazy<IEnumerable<Tuple_GIbILVAdXLLNYBgcQIEiUiKaK>>(this.Encounter_with_First_Body_Temperature_Value);
-        __Encounter_with_First_Heart_Rate = new Lazy<IEnumerable<Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ>>(this.Encounter_with_First_Heart_Rate_Value);
-        __Encounter_with_First_Oxygen_Saturation = new Lazy<IEnumerable<Tuple_FdREYEdHOZIcMCNYCRFJYJReA>>(this.Encounter_with_First_Oxygen_Saturation_Value);
+        __Encounter_with_First_Body_Temperature = new Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>>(this.Encounter_with_First_Body_Temperature_Value);
+        __Encounter_with_First_Heart_Rate = new Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>>(this.Encounter_with_First_Heart_Rate_Value);
+        __Encounter_with_First_Oxygen_Saturation = new Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>>(this.Encounter_with_First_Oxygen_Saturation_Value);
         __Blood_Pressure_Reading = new Lazy<IEnumerable<Observation>>(this.Blood_Pressure_Reading_Value);
         __Encounter_with_First_Systolic_Blood_Pressure = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_First_Systolic_Blood_Pressure_Value);
-        __Encounter_with_First_Bicarbonate_Lab_Test = new Lazy<IEnumerable<Tuple_GbUHPXXHScejjXWhcHJFQQifQ>>(this.Encounter_with_First_Bicarbonate_Lab_Test_Value);
-        __Encounter_with_First_Creatinine_Lab_Test = new Lazy<IEnumerable<Tuple_FETECNQPQREfGRgPYWhOWgeWA>>(this.Encounter_with_First_Creatinine_Lab_Test_Value);
-        __Encounter_with_First_Hematocrit_Lab_Test = new Lazy<IEnumerable<Tuple_DIHdhbAJeJTdiAVUAELUHRNdS>>(this.Encounter_with_First_Hematocrit_Lab_Test_Value);
-        __Encounter_with_First_Platelet_Lab_Test = new Lazy<IEnumerable<Tuple_DAUcYHQZcDKbIfORJOEZBDgIh>>(this.Encounter_with_First_Platelet_Lab_Test_Value);
-        __Encounter_with_First_Sodium_Lab_Test = new Lazy<IEnumerable<Tuple_GKGeLARADLGJcNcZaDhdCREMa>>(this.Encounter_with_First_Sodium_Lab_Test_Value);
-        __Encounter_with_First_White_Blood_Cells_Lab_Test = new Lazy<IEnumerable<Tuple_ChVYCdXDGgVcFTCCUefXMbCHX>>(this.Encounter_with_First_White_Blood_Cells_Lab_Test_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __Encounter_with_First_Bicarbonate_Lab_Test = new Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?>>(this.Encounter_with_First_Bicarbonate_Lab_Test_Value);
+        __Encounter_with_First_Creatinine_Lab_Test = new Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?>>(this.Encounter_with_First_Creatinine_Lab_Test_Value);
+        __Encounter_with_First_Hematocrit_Lab_Test = new Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>>(this.Encounter_with_First_Hematocrit_Lab_Test_Value);
+        __Encounter_with_First_Platelet_Lab_Test = new Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?>>(this.Encounter_with_First_Platelet_Lab_Test_Value);
+        __Encounter_with_First_Sodium_Lab_Test = new Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?>>(this.Encounter_with_First_Sodium_Lab_Test_Value);
+        __Encounter_with_First_White_Blood_Cells_Lab_Test = new Lazy<IEnumerable<(string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?>>(this.Encounter_with_First_White_Blood_Cells_Lab_Test_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -215,12 +214,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("2708-6", "http://loinc.org", null, null),
 			new CqlCode("59408-5", "http://loinc.org", null, null),
 			new CqlCode("8480-6", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -231,7 +229,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 
 	private CqlCode[] ActCode_Value()
 	{
-		CqlCode[] a_ = new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -243,7 +241,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 
 	private CqlCode[] Source_of_Payment_Typology_Value()
 	{
-		CqlCode[] a_ = new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -347,10 +345,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 	public IEnumerable<Encounter> Initial_Population() => 
 		__Initial_Population.Value;
 
-	private IEnumerable<Tuple_GIbILVAdXLLNYBgcQIEiUiKaK> Encounter_with_First_Body_Temperature_Value()
+	private IEnumerable<(string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?> Encounter_with_First_Body_Temperature_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
-		Tuple_GIbILVAdXLLNYBgcQIEiUiKaK b_(Encounter EncounterInpatient)
+		(string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
@@ -374,12 +372,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> an_ = temperature?.StatusElement;
 				ObservationStatus? ao_ = an_?.Value;
 				string ap_ = context.Operators.Convert<string>(ao_);
-				string[] aq_ = new string[]
-				{
+				string[] aq_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? ar_ = context.Operators.In<string>(ap_, (aq_ as IEnumerable<string>));
 				bool? as_ = context.Operators.And(am_, ar_);
 				DataType at_ = temperature?.Value;
@@ -423,12 +420,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> bq_ = temperature?.StatusElement;
 				ObservationStatus? br_ = bq_?.Value;
 				string bs_ = context.Operators.Convert<string>(br_);
-				string[] bt_ = new string[]
-				{
+				string[] bt_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bu_ = context.Operators.In<string>(bs_, (bt_ as IEnumerable<string>));
 				bool? bv_ = context.Operators.And(bp_, bu_);
 				DataType bw_ = temperature?.Value;
@@ -453,28 +449,23 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			DataType u_ = t_?.Effective;
 			object v_ = FHIRHelpers_4_3_000.ToValue(u_);
 			CqlDateTime w_ = QICoreCommon_2_0_000.earliest(v_);
-			Tuple_GIbILVAdXLLNYBgcQIEiUiKaK x_ = new Tuple_GIbILVAdXLLNYBgcQIEiUiKaK
-			{
-				EncounterId = e_,
-				FirstTemperatureResult = (n_ as CqlQuantity),
-				Timing = w_,
-			};
+			(string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? x_ = (e_, (n_ as CqlQuantity), w_);
 
 			return x_;
 		};
-		IEnumerable<Tuple_GIbILVAdXLLNYBgcQIEiUiKaK> c_ = context.Operators.Select<Encounter, Tuple_GIbILVAdXLLNYBgcQIEiUiKaK>(a_, b_);
+		IEnumerable<(string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?> c_ = context.Operators.Select<Encounter, (string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Body Temperature")]
-	public IEnumerable<Tuple_GIbILVAdXLLNYBgcQIEiUiKaK> Encounter_with_First_Body_Temperature() => 
+	public IEnumerable<(string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?> Encounter_with_First_Body_Temperature() => 
 		__Encounter_with_First_Body_Temperature.Value;
 
-	private IEnumerable<Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ> Encounter_with_First_Heart_Rate_Value()
+	private IEnumerable<(string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?> Encounter_with_First_Heart_Rate_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
-		Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ b_(Encounter EncounterInpatient)
+		(string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
@@ -498,12 +489,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> an_ = HeartRate?.StatusElement;
 				ObservationStatus? ao_ = an_?.Value;
 				string ap_ = context.Operators.Convert<string>(ao_);
-				string[] aq_ = new string[]
-				{
+				string[] aq_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? ar_ = context.Operators.In<string>(ap_, (aq_ as IEnumerable<string>));
 				bool? as_ = context.Operators.And(am_, ar_);
 				DataType at_ = HeartRate?.Value;
@@ -547,12 +537,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> bq_ = HeartRate?.StatusElement;
 				ObservationStatus? br_ = bq_?.Value;
 				string bs_ = context.Operators.Convert<string>(br_);
-				string[] bt_ = new string[]
-				{
+				string[] bt_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bu_ = context.Operators.In<string>(bs_, (bt_ as IEnumerable<string>));
 				bool? bv_ = context.Operators.And(bp_, bu_);
 				DataType bw_ = HeartRate?.Value;
@@ -577,28 +566,23 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			DataType u_ = t_?.Effective;
 			object v_ = FHIRHelpers_4_3_000.ToValue(u_);
 			CqlDateTime w_ = QICoreCommon_2_0_000.earliest(v_);
-			Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ x_ = new Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ
-			{
-				EncounterId = e_,
-				FirstHeartRateResult = (n_ as CqlQuantity),
-				Timing = w_,
-			};
+			(string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? x_ = (e_, (n_ as CqlQuantity), w_);
 
 			return x_;
 		};
-		IEnumerable<Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ> c_ = context.Operators.Select<Encounter, Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ>(a_, b_);
+		IEnumerable<(string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?> c_ = context.Operators.Select<Encounter, (string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Heart Rate")]
-	public IEnumerable<Tuple_DhbJAfCiKIAGYKTjJXYGSKECQ> Encounter_with_First_Heart_Rate() => 
+	public IEnumerable<(string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?> Encounter_with_First_Heart_Rate() => 
 		__Encounter_with_First_Heart_Rate.Value;
 
-	private IEnumerable<Tuple_FdREYEdHOZIcMCNYCRFJYJReA> Encounter_with_First_Oxygen_Saturation_Value()
+	private IEnumerable<(string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?> Encounter_with_First_Oxygen_Saturation_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
-		Tuple_FdREYEdHOZIcMCNYCRFJYJReA b_(Encounter EncounterInpatient)
+		(string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
@@ -674,12 +658,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				ObservationStatus? ag_ = af_?.Value;
 				Code<ObservationStatus> ah_ = context.Operators.Convert<Code<ObservationStatus>>(ag_);
 				string ai_ = context.Operators.Convert<string>(ah_);
-				string[] aj_ = new string[]
-				{
+				string[] aj_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? ak_ = context.Operators.In<string>(ai_, (aj_ as IEnumerable<string>));
 				bool? al_ = context.Operators.And(ae_, ak_);
 				DataType am_ = O2Saturation?.Value;
@@ -828,12 +811,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						ObservationStatus? de_ = dd_?.Value;
 						Code<ObservationStatus> df_ = context.Operators.Convert<Code<ObservationStatus>>(de_);
 						string dg_ = context.Operators.Convert<string>(df_);
-						string[] dh_ = new string[]
-						{
+						string[] dh_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? di_ = context.Operators.In<string>(dg_, (dh_ as IEnumerable<string>));
 						bool? dj_ = context.Operators.And(dc_, di_);
 						DataType dk_ = O2Saturation?.Value;
@@ -984,12 +966,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						ObservationStatus? fz_ = fy_?.Value;
 						Code<ObservationStatus> ga_ = context.Operators.Convert<Code<ObservationStatus>>(fz_);
 						string gb_ = context.Operators.Convert<string>(ga_);
-						string[] gc_ = new string[]
-						{
+						string[] gc_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? gd_ = context.Operators.In<string>(gb_, (gc_ as IEnumerable<string>));
 						bool? ge_ = context.Operators.And(fx_, gd_);
 						DataType gf_ = O2Saturation?.Value;
@@ -1140,12 +1121,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						ObservationStatus? iu_ = it_?.Value;
 						Code<ObservationStatus> iv_ = context.Operators.Convert<Code<ObservationStatus>>(iu_);
 						string iw_ = context.Operators.Convert<string>(iv_);
-						string[] ix_ = new string[]
-						{
+						string[] ix_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? iy_ = context.Operators.In<string>(iw_, (ix_ as IEnumerable<string>));
 						bool? iz_ = context.Operators.And(is_, iy_);
 						DataType ja_ = O2Saturation?.Value;
@@ -1296,12 +1276,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						ObservationStatus? lo_ = ln_?.Value;
 						Code<ObservationStatus> lp_ = context.Operators.Convert<Code<ObservationStatus>>(lo_);
 						string lq_ = context.Operators.Convert<string>(lp_);
-						string[] lr_ = new string[]
-						{
+						string[] lr_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? ls_ = context.Operators.In<string>(lq_, (lr_ as IEnumerable<string>));
 						bool? lt_ = context.Operators.And(lm_, ls_);
 						DataType lu_ = O2Saturation?.Value;
@@ -1451,12 +1430,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						ObservationStatus? oi_ = oh_?.Value;
 						Code<ObservationStatus> oj_ = context.Operators.Convert<Code<ObservationStatus>>(oi_);
 						string ok_ = context.Operators.Convert<string>(oj_);
-						string[] ol_ = new string[]
-						{
+						string[] ol_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? om_ = context.Operators.In<string>(ok_, (ol_ as IEnumerable<string>));
 						bool? on_ = context.Operators.And(og_, om_);
 						DataType oo_ = O2Saturation?.Value;
@@ -1606,12 +1584,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						ObservationStatus? rc_ = rb_?.Value;
 						Code<ObservationStatus> rd_ = context.Operators.Convert<Code<ObservationStatus>>(rc_);
 						string re_ = context.Operators.Convert<string>(rd_);
-						string[] rf_ = new string[]
-						{
+						string[] rf_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? rg_ = context.Operators.In<string>(re_, (rf_ as IEnumerable<string>));
 						bool? rh_ = context.Operators.And(ra_, rg_);
 						DataType ri_ = O2Saturation?.Value;
@@ -1693,22 +1670,17 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				}
 			};
 			CqlDateTime p_ = QICoreCommon_2_0_000.earliest(o_());
-			Tuple_FdREYEdHOZIcMCNYCRFJYJReA q_ = new Tuple_FdREYEdHOZIcMCNYCRFJYJReA
-			{
-				EncounterId = e_,
-				FirstOxygenSatResult = (n_ as CqlQuantity),
-				Timing = p_,
-			};
+			(string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? q_ = (e_, (n_ as CqlQuantity), p_);
 
 			return q_;
 		};
-		IEnumerable<Tuple_FdREYEdHOZIcMCNYCRFJYJReA> c_ = context.Operators.Select<Encounter, Tuple_FdREYEdHOZIcMCNYCRFJYJReA>(a_, b_);
+		IEnumerable<(string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?> c_ = context.Operators.Select<Encounter, (string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Oxygen Saturation")]
-	public IEnumerable<Tuple_FdREYEdHOZIcMCNYCRFJYJReA> Encounter_with_First_Oxygen_Saturation() => 
+	public IEnumerable<(string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?> Encounter_with_First_Oxygen_Saturation() => 
 		__Encounter_with_First_Oxygen_Saturation.Value;
 
 	private IEnumerable<Observation> Blood_Pressure_Reading_Value()
@@ -1719,12 +1691,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Code<ObservationStatus> d_ = BloodPressure?.StatusElement;
 			ObservationStatus? e_ = d_?.Value;
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
@@ -1749,10 +1720,10 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 	public IEnumerable<Encounter> Encounter_with_First_Systolic_Blood_Pressure() => 
 		__Encounter_with_First_Systolic_Blood_Pressure.Value;
 
-	private IEnumerable<Tuple_GbUHPXXHScejjXWhcHJFQQifQ> Encounter_with_First_Bicarbonate_Lab_Test_Value()
+	private IEnumerable<(string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?> Encounter_with_First_Bicarbonate_Lab_Test_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
-		Tuple_GbUHPXXHScejjXWhcHJFQQifQ b_(Encounter EncounterInpatient)
+		(string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
@@ -1777,12 +1748,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> ap_ = BicarbonateLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
-				string[] as_ = new string[]
-				{
+				string[] as_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? at_ = context.Operators.In<string>(ar_, (as_ as IEnumerable<string>));
 				bool? au_ = context.Operators.And(ao_, at_);
 				DataType av_ = BicarbonateLab?.Value;
@@ -1826,12 +1796,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> bt_ = BicarbonateLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
-				string[] bw_ = new string[]
-				{
+				string[] bw_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bx_ = context.Operators.In<string>(bv_, (bw_ as IEnumerable<string>));
 				bool? by_ = context.Operators.And(bs_, bx_);
 				DataType bz_ = BicarbonateLab?.Value;
@@ -1856,28 +1825,23 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			Tuple_GbUHPXXHScejjXWhcHJFQQifQ y_ = new Tuple_GbUHPXXHScejjXWhcHJFQQifQ
-			{
-				EncounterId = e_,
-				FirstBicarbonateResult = (n_ as CqlQuantity),
-				Timing = x_,
-			};
+			(string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
 			return y_;
 		};
-		IEnumerable<Tuple_GbUHPXXHScejjXWhcHJFQQifQ> c_ = context.Operators.Select<Encounter, Tuple_GbUHPXXHScejjXWhcHJFQQifQ>(a_, b_);
+		IEnumerable<(string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?> c_ = context.Operators.Select<Encounter, (string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Bicarbonate Lab Test")]
-	public IEnumerable<Tuple_GbUHPXXHScejjXWhcHJFQQifQ> Encounter_with_First_Bicarbonate_Lab_Test() => 
+	public IEnumerable<(string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?> Encounter_with_First_Bicarbonate_Lab_Test() => 
 		__Encounter_with_First_Bicarbonate_Lab_Test.Value;
 
-	private IEnumerable<Tuple_FETECNQPQREfGRgPYWhOWgeWA> Encounter_with_First_Creatinine_Lab_Test_Value()
+	private IEnumerable<(string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?> Encounter_with_First_Creatinine_Lab_Test_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
-		Tuple_FETECNQPQREfGRgPYWhOWgeWA b_(Encounter EncounterInpatient)
+		(string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
@@ -1902,12 +1866,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> ap_ = CreatinineLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
-				string[] as_ = new string[]
-				{
+				string[] as_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? at_ = context.Operators.In<string>(ar_, (as_ as IEnumerable<string>));
 				bool? au_ = context.Operators.And(ao_, at_);
 				DataType av_ = CreatinineLab?.Value;
@@ -1951,12 +1914,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> bt_ = CreatinineLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
-				string[] bw_ = new string[]
-				{
+				string[] bw_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bx_ = context.Operators.In<string>(bv_, (bw_ as IEnumerable<string>));
 				bool? by_ = context.Operators.And(bs_, bx_);
 				DataType bz_ = CreatinineLab?.Value;
@@ -1981,28 +1943,23 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			Tuple_FETECNQPQREfGRgPYWhOWgeWA y_ = new Tuple_FETECNQPQREfGRgPYWhOWgeWA
-			{
-				EncounterId = e_,
-				FirstCreatinineResult = (n_ as CqlQuantity),
-				Timing = x_,
-			};
+			(string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
 			return y_;
 		};
-		IEnumerable<Tuple_FETECNQPQREfGRgPYWhOWgeWA> c_ = context.Operators.Select<Encounter, Tuple_FETECNQPQREfGRgPYWhOWgeWA>(a_, b_);
+		IEnumerable<(string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?> c_ = context.Operators.Select<Encounter, (string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Creatinine Lab Test")]
-	public IEnumerable<Tuple_FETECNQPQREfGRgPYWhOWgeWA> Encounter_with_First_Creatinine_Lab_Test() => 
+	public IEnumerable<(string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?> Encounter_with_First_Creatinine_Lab_Test() => 
 		__Encounter_with_First_Creatinine_Lab_Test.Value;
 
-	private IEnumerable<Tuple_DIHdhbAJeJTdiAVUAELUHRNdS> Encounter_with_First_Hematocrit_Lab_Test_Value()
+	private IEnumerable<(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Encounter_with_First_Hematocrit_Lab_Test_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
-		Tuple_DIHdhbAJeJTdiAVUAELUHRNdS b_(Encounter EncounterInpatient)
+		(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
@@ -2027,12 +1984,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> ap_ = HematocritLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
-				string[] as_ = new string[]
-				{
+				string[] as_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? at_ = context.Operators.In<string>(ar_, (as_ as IEnumerable<string>));
 				bool? au_ = context.Operators.And(ao_, at_);
 				DataType av_ = HematocritLab?.Value;
@@ -2076,12 +2032,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> bt_ = HematocritLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
-				string[] bw_ = new string[]
-				{
+				string[] bw_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bx_ = context.Operators.In<string>(bv_, (bw_ as IEnumerable<string>));
 				bool? by_ = context.Operators.And(bs_, bx_);
 				DataType bz_ = HematocritLab?.Value;
@@ -2106,28 +2061,23 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			Tuple_DIHdhbAJeJTdiAVUAELUHRNdS y_ = new Tuple_DIHdhbAJeJTdiAVUAELUHRNdS
-			{
-				EncounterId = e_,
-				FirstHematocritResult = (n_ as CqlQuantity),
-				Timing = x_,
-			};
+			(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
 			return y_;
 		};
-		IEnumerable<Tuple_DIHdhbAJeJTdiAVUAELUHRNdS> c_ = context.Operators.Select<Encounter, Tuple_DIHdhbAJeJTdiAVUAELUHRNdS>(a_, b_);
+		IEnumerable<(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> c_ = context.Operators.Select<Encounter, (string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Hematocrit Lab Test")]
-	public IEnumerable<Tuple_DIHdhbAJeJTdiAVUAELUHRNdS> Encounter_with_First_Hematocrit_Lab_Test() => 
+	public IEnumerable<(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Encounter_with_First_Hematocrit_Lab_Test() => 
 		__Encounter_with_First_Hematocrit_Lab_Test.Value;
 
-	private IEnumerable<Tuple_DAUcYHQZcDKbIfORJOEZBDgIh> Encounter_with_First_Platelet_Lab_Test_Value()
+	private IEnumerable<(string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?> Encounter_with_First_Platelet_Lab_Test_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
-		Tuple_DAUcYHQZcDKbIfORJOEZBDgIh b_(Encounter EncounterInpatient)
+		(string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
@@ -2152,12 +2102,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> ap_ = PlateletLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
-				string[] as_ = new string[]
-				{
+				string[] as_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? at_ = context.Operators.In<string>(ar_, (as_ as IEnumerable<string>));
 				bool? au_ = context.Operators.And(ao_, at_);
 				DataType av_ = PlateletLab?.Value;
@@ -2201,12 +2150,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> bt_ = PlateletLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
-				string[] bw_ = new string[]
-				{
+				string[] bw_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bx_ = context.Operators.In<string>(bv_, (bw_ as IEnumerable<string>));
 				bool? by_ = context.Operators.And(bs_, bx_);
 				DataType bz_ = PlateletLab?.Value;
@@ -2231,28 +2179,23 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			Tuple_DAUcYHQZcDKbIfORJOEZBDgIh y_ = new Tuple_DAUcYHQZcDKbIfORJOEZBDgIh
-			{
-				EncounterId = e_,
-				FirstPlateletResult = (n_ as CqlQuantity),
-				Timing = x_,
-			};
+			(string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
 			return y_;
 		};
-		IEnumerable<Tuple_DAUcYHQZcDKbIfORJOEZBDgIh> c_ = context.Operators.Select<Encounter, Tuple_DAUcYHQZcDKbIfORJOEZBDgIh>(a_, b_);
+		IEnumerable<(string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?> c_ = context.Operators.Select<Encounter, (string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Platelet Lab Test")]
-	public IEnumerable<Tuple_DAUcYHQZcDKbIfORJOEZBDgIh> Encounter_with_First_Platelet_Lab_Test() => 
+	public IEnumerable<(string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?> Encounter_with_First_Platelet_Lab_Test() => 
 		__Encounter_with_First_Platelet_Lab_Test.Value;
 
-	private IEnumerable<Tuple_GKGeLARADLGJcNcZaDhdCREMa> Encounter_with_First_Sodium_Lab_Test_Value()
+	private IEnumerable<(string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?> Encounter_with_First_Sodium_Lab_Test_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
-		Tuple_GKGeLARADLGJcNcZaDhdCREMa b_(Encounter EncounterInpatient)
+		(string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
@@ -2277,12 +2220,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> ap_ = SodiumLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
-				string[] as_ = new string[]
-				{
+				string[] as_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? at_ = context.Operators.In<string>(ar_, (as_ as IEnumerable<string>));
 				bool? au_ = context.Operators.And(ao_, at_);
 				DataType av_ = SodiumLab?.Value;
@@ -2326,12 +2268,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> bt_ = SodiumLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
-				string[] bw_ = new string[]
-				{
+				string[] bw_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bx_ = context.Operators.In<string>(bv_, (bw_ as IEnumerable<string>));
 				bool? by_ = context.Operators.And(bs_, bx_);
 				DataType bz_ = SodiumLab?.Value;
@@ -2356,28 +2297,23 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			Tuple_GKGeLARADLGJcNcZaDhdCREMa y_ = new Tuple_GKGeLARADLGJcNcZaDhdCREMa
-			{
-				EncounterId = e_,
-				FirstSodiumResult = (n_ as CqlQuantity),
-				Timing = x_,
-			};
+			(string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
 			return y_;
 		};
-		IEnumerable<Tuple_GKGeLARADLGJcNcZaDhdCREMa> c_ = context.Operators.Select<Encounter, Tuple_GKGeLARADLGJcNcZaDhdCREMa>(a_, b_);
+		IEnumerable<(string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?> c_ = context.Operators.Select<Encounter, (string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Sodium Lab Test")]
-	public IEnumerable<Tuple_GKGeLARADLGJcNcZaDhdCREMa> Encounter_with_First_Sodium_Lab_Test() => 
+	public IEnumerable<(string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?> Encounter_with_First_Sodium_Lab_Test() => 
 		__Encounter_with_First_Sodium_Lab_Test.Value;
 
-	private IEnumerable<Tuple_ChVYCdXDGgVcFTCCUefXMbCHX> Encounter_with_First_White_Blood_Cells_Lab_Test_Value()
+	private IEnumerable<(string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?> Encounter_with_First_White_Blood_Cells_Lab_Test_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
-		Tuple_ChVYCdXDGgVcFTCCUefXMbCHX b_(Encounter EncounterInpatient)
+		(string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
@@ -2402,12 +2338,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> ap_ = WhiteBloodCellLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
-				string[] as_ = new string[]
-				{
+				string[] as_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? at_ = context.Operators.In<string>(ar_, (as_ as IEnumerable<string>));
 				bool? au_ = context.Operators.And(ao_, at_);
 				DataType av_ = WhiteBloodCellLab?.Value;
@@ -2451,12 +2386,11 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				Code<ObservationStatus> bt_ = WhiteBloodCellLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
-				string[] bw_ = new string[]
-				{
+				string[] bw_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bx_ = context.Operators.In<string>(bv_, (bw_ as IEnumerable<string>));
 				bool? by_ = context.Operators.And(bs_, bx_);
 				DataType bz_ = WhiteBloodCellLab?.Value;
@@ -2481,55 +2415,50 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			Tuple_ChVYCdXDGgVcFTCCUefXMbCHX y_ = new Tuple_ChVYCdXDGgVcFTCCUefXMbCHX
-			{
-				EncounterId = e_,
-				FirstWhiteBloodCellResult = (n_ as CqlQuantity),
-				Timing = x_,
-			};
+			(string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
 			return y_;
 		};
-		IEnumerable<Tuple_ChVYCdXDGgVcFTCCUefXMbCHX> c_ = context.Operators.Select<Encounter, Tuple_ChVYCdXDGgVcFTCCUefXMbCHX>(a_, b_);
+		IEnumerable<(string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?> c_ = context.Operators.Select<Encounter, (string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First White Blood Cells Lab Test")]
-	public IEnumerable<Tuple_ChVYCdXDGgVcFTCCUefXMbCHX> Encounter_with_First_White_Blood_Cells_Lab_Test() => 
+	public IEnumerable<(string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?> Encounter_with_First_White_Blood_Cells_Lab_Test() => 
 		__Encounter_with_First_White_Blood_Cells_Lab_Test.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

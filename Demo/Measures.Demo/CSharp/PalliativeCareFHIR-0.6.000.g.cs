@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -88,10 +87,9 @@ public class PalliativeCareFHIR_0_6_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("71007-9", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -102,10 +100,9 @@ public class PalliativeCareFHIR_0_6_000
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -146,12 +143,11 @@ public class PalliativeCareFHIR_0_6_000
 		{
 			Code<ObservationStatus> s_ = PalliativeAssessment?.StatusElement;
 			string t_ = FHIRHelpers_4_0_001.ToString(s_);
-			string[] u_ = new string[]
-			{
+			string[] u_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
 			List<CodeableConcept> w_ = PalliativeAssessment?.Category;
 			bool? x_(CodeableConcept PalliativeAssessmentCategory)
@@ -200,11 +196,10 @@ public class PalliativeCareFHIR_0_6_000
 		{
 			Code<EventStatus> as_ = PalliativeIntervention?.StatusElement;
 			string at_ = FHIRHelpers_4_0_001.ToString(as_);
-			string[] au_ = new string[]
-			{
+			string[] au_ = [
 				"completed",
 				"in-progress",
-			};
+			];
 			bool? av_ = context.Operators.In<string>(at_, (au_ as IEnumerable<string>));
 			DataType aw_ = PalliativeIntervention?.Performed;
 			CqlInterval<CqlDateTime> ax_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aw_);

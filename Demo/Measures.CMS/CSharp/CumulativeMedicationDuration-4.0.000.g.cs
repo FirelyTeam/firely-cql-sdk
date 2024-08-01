@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -480,8 +479,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 	private CqlCode[] V3TimingEvent_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
 			new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
 			new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
@@ -496,7 +494,7 @@ public class CumulativeMedicationDuration_4_0_000
 			new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
 			new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
 			new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -507,8 +505,7 @@ public class CumulativeMedicationDuration_4_0_000
 
 	private CqlCode[] EventTiming_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("MORN", "http://hl7.org/fhir/event-timing", null, null),
 			new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", null, null),
 			new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", null, null),
@@ -521,7 +518,7 @@ public class CumulativeMedicationDuration_4_0_000
 			new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", null, null),
 			new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", null, null),
 			new CqlCode("PHS", "http://hl7.org/fhir/event-timing", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -1553,10 +1550,9 @@ public class CumulativeMedicationDuration_4_0_000
     [CqlDeclaration("MedicationRequestPeriod")]
 	public CqlInterval<CqlDate> MedicationRequestPeriod(MedicationRequest Request)
 	{
-		MedicationRequest[] a_ = new MedicationRequest[]
-		{
+		MedicationRequest[] a_ = [
 			Request,
-		};
+		];
 		CqlInterval<CqlDate> b_(MedicationRequest R)
 		{
 			CqlInterval<CqlDate> e_()
@@ -1814,10 +1810,9 @@ public class CumulativeMedicationDuration_4_0_000
     [CqlDeclaration("MedicationDispensePeriod")]
 	public CqlInterval<CqlDate> MedicationDispensePeriod(MedicationDispense Dispense)
 	{
-		MedicationDispense[] a_ = new MedicationDispense[]
-		{
+		MedicationDispense[] a_ = [
 			Dispense,
-		};
+		];
 		CqlInterval<CqlDate> b_(MedicationDispense D)
 		{
 			CqlInterval<CqlDate> e_()
@@ -1987,10 +1982,9 @@ public class CumulativeMedicationDuration_4_0_000
     [CqlDeclaration("MedicationAdministrationPeriod")]
 	public CqlInterval<CqlDate> MedicationAdministrationPeriod(MedicationAdministration Administration)
 	{
-		MedicationAdministration[] a_ = new MedicationAdministration[]
-		{
+		MedicationAdministration[] a_ = [
 			Administration,
-		};
+		];
 		CqlInterval<CqlDate> b_(MedicationAdministration M)
 		{
 			CqlInterval<CqlDate> e_()
@@ -2079,10 +2073,9 @@ public class CumulativeMedicationDuration_4_0_000
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_(IEnumerable<CqlInterval<CqlDate>> R, CqlInterval<CqlDate> I)
 		{
-			CqlInterval<CqlDate>[] c_ = new CqlInterval<CqlDate>[]
-			{
+			CqlInterval<CqlDate>[] c_ = [
 				I,
-			};
+			];
 			CqlInterval<CqlDate> d_(CqlInterval<CqlDate> X)
 			{
 				CqlInterval<CqlDate> i_ = context.Operators.Last<CqlInterval<CqlDate>>(R);
@@ -2090,19 +2083,17 @@ public class CumulativeMedicationDuration_4_0_000
 				CqlQuantity k_ = context.Operators.Quantity(1m, "day");
 				CqlDate l_ = context.Operators.Add(j_, k_);
 				CqlDate m_ = context.Operators.Start(X);
-				CqlDate[] n_ = new CqlDate[]
-				{
+				CqlDate[] n_ = [
 					l_,
 					m_,
-				};
+				];
 				CqlDate o_ = context.Operators.Max<CqlDate>((n_ as IEnumerable<CqlDate>));
 				CqlDate q_ = context.Operators.End(i_);
 				CqlDate s_ = context.Operators.Add(q_, k_);
-				CqlDate[] u_ = new CqlDate[]
-				{
+				CqlDate[] u_ = [
 					s_,
 					m_,
-				};
+				];
 				CqlDate v_ = context.Operators.Max<CqlDate>((u_ as IEnumerable<CqlDate>));
 				CqlDate x_ = context.Operators.End(X);
 				int? y_ = context.Operators.DurationBetween(m_, x_, null);
@@ -2115,10 +2106,9 @@ public class CumulativeMedicationDuration_4_0_000
 			};
 			IEnumerable<CqlInterval<CqlDate>> e_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>((IEnumerable<CqlInterval<CqlDate>>)c_, d_);
 			CqlInterval<CqlDate> f_ = context.Operators.SingletonFrom<CqlInterval<CqlDate>>(e_);
-			CqlInterval<CqlDate>[] g_ = new CqlInterval<CqlDate>[]
-			{
+			CqlInterval<CqlDate>[] g_ = [
 				f_,
-			};
+			];
 			IEnumerable<CqlInterval<CqlDate>> h_ = context.Operators.Union<CqlInterval<CqlDate>>(R, (g_ as IEnumerable<CqlInterval<CqlDate>>));
 
 			return h_;

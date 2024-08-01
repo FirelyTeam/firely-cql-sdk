@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -44,7 +43,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>> __SDE_Payer;
+    internal Lazy<IEnumerable<(CodeableConcept code, Period period)?>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter_During_Measurement_Period;
@@ -94,7 +93,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CodeableConcept code, Period period)?>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounter_During_Measurement_Period = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_During_Measurement_Period_Value);
@@ -259,10 +258,9 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -273,15 +271,14 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("223366009", "http://snomed.info/sct", null, null),
 			new CqlCode("428341000124108", "http://snomed.info/sct", null, null),
 			new CqlCode("158965000", "http://snomed.info/sct", null, null),
 			new CqlCode("422234006", "http://snomed.info/sct", null, null),
 			new CqlCode("28229004", "http://snomed.info/sct", null, null),
 			new CqlCode("309343006", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -324,15 +321,15 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer_Value()
+	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+		IEnumerable<(CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer() => 
+	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -707,12 +704,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		{
 			Code<ObservationStatus> q_ = MacularExam?.StatusElement;
 			string r_ = FHIRHelpers_4_0_001.ToString(q_);
-			string[] s_ = new string[]
-			{
+			string[] s_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
 			DataType u_ = MacularExam?.Value;
 			bool? v_ = context.Operators.Not((bool?)(u_ is null));

@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -44,7 +43,7 @@ public class HybridHWMFHIR_0_102_005
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>> __SDE_Payer;
+    internal Lazy<IEnumerable<(CodeableConcept code, Period period)?>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Inpatient_Encounters;
@@ -83,7 +82,7 @@ public class HybridHWMFHIR_0_102_005
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CodeableConcept code, Period period)?>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Inpatient_Encounters = new Lazy<IEnumerable<Encounter>>(this.Inpatient_Encounters_Value);
@@ -248,13 +247,12 @@ public class HybridHWMFHIR_0_102_005
 
 	private CqlCode[] LOINC_2_69_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
 			new CqlCode("8867-4", "http://loinc.org", null, null),
 			new CqlCode("59408-5", "http://loinc.org", null, null),
 			new CqlCode("8480-6", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -300,15 +298,15 @@ public class HybridHWMFHIR_0_102_005
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer_Value()
+	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+		IEnumerable<(CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer() => 
+	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -350,27 +348,23 @@ public class HybridHWMFHIR_0_102_005
 		CqlValueSet c_ = this.Medicare_payer();
 		IEnumerable<Coverage> d_ = context.Operators.RetrieveByValueSet<Coverage>(c_, null);
 		IEnumerable<ValueTuple<Encounter, Coverage>> e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
-		Tuple_EFSKhGUTUCLEXZENTURVLjeND f_(ValueTuple<Encounter, Coverage> _valueTuple)
+		(Encounter InpatientEncounter, Coverage Payer)? f_(ValueTuple<Encounter, Coverage> _valueTuple)
 		{
-			Tuple_EFSKhGUTUCLEXZENTURVLjeND l_ = new Tuple_EFSKhGUTUCLEXZENTURVLjeND
-			{
-				InpatientEncounter = _valueTuple.Item1,
-				Payer = _valueTuple.Item2,
-			};
+			(Encounter InpatientEncounter, Coverage Payer)? l_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return l_;
 		};
-		IEnumerable<Tuple_EFSKhGUTUCLEXZENTURVLjeND> g_ = context.Operators.Select<ValueTuple<Encounter, Coverage>, Tuple_EFSKhGUTUCLEXZENTURVLjeND>(e_, f_);
-		bool? h_(Tuple_EFSKhGUTUCLEXZENTURVLjeND tuple_efskhgutuclexzenturvljend)
+		IEnumerable<(Encounter InpatientEncounter, Coverage Payer)?> g_ = context.Operators.Select<ValueTuple<Encounter, Coverage>, (Encounter InpatientEncounter, Coverage Payer)?>(e_, f_);
+		bool? h_((Encounter InpatientEncounter, Coverage Payer)? tuple_efskhgutuclexzenturvljend)
 		{
-			Code<Encounter.EncounterStatus> m_ = tuple_efskhgutuclexzenturvljend.InpatientEncounter?.StatusElement;
+			Code<Encounter.EncounterStatus> m_ = tuple_efskhgutuclexzenturvljend?.InpatientEncounter?.StatusElement;
 			string n_ = FHIRHelpers_4_0_001.ToString(m_);
 			bool? o_ = context.Operators.Equal(n_, "finished");
-			CqlInterval<CqlDateTime> p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(tuple_efskhgutuclexzenturvljend.InpatientEncounter);
+			CqlInterval<CqlDateTime> p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(tuple_efskhgutuclexzenturvljend?.InpatientEncounter);
 			int? q_ = this.LengthInDays(p_);
 			bool? r_ = context.Operators.Less(q_, 365);
 			bool? s_ = context.Operators.And(o_, r_);
-			Period t_ = tuple_efskhgutuclexzenturvljend.InpatientEncounter?.Period;
+			Period t_ = tuple_efskhgutuclexzenturvljend?.InpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_0_001.ToInterval(t_);
 			CqlDateTime v_ = context.Operators.End(u_);
 			CqlInterval<CqlDateTime> w_ = this.Measurement_Period();
@@ -390,10 +384,10 @@ public class HybridHWMFHIR_0_102_005
 
 			return ak_;
 		};
-		IEnumerable<Tuple_EFSKhGUTUCLEXZENTURVLjeND> i_ = context.Operators.Where<Tuple_EFSKhGUTUCLEXZENTURVLjeND>(g_, h_);
-		Encounter j_(Tuple_EFSKhGUTUCLEXZENTURVLjeND tuple_efskhgutuclexzenturvljend) => 
-			tuple_efskhgutuclexzenturvljend.InpatientEncounter;
-		IEnumerable<Encounter> k_ = context.Operators.Select<Tuple_EFSKhGUTUCLEXZENTURVLjeND, Encounter>(i_, j_);
+		IEnumerable<(Encounter InpatientEncounter, Coverage Payer)?> i_ = context.Operators.Where<(Encounter InpatientEncounter, Coverage Payer)?>(g_, h_);
+		Encounter j_((Encounter InpatientEncounter, Coverage Payer)? tuple_efskhgutuclexzenturvljend) => 
+			tuple_efskhgutuclexzenturvljend?.InpatientEncounter;
+		IEnumerable<Encounter> k_ = context.Operators.Select<(Encounter InpatientEncounter, Coverage Payer)?, Encounter>(i_, j_);
 
 		return k_;
 	}
@@ -447,12 +441,11 @@ public class HybridHWMFHIR_0_102_005
 				bool? aw_ = context.Operators.And(ag_, av_);
 				Code<ObservationStatus> ax_ = Exam?.StatusElement;
 				string ay_ = FHIRHelpers_4_0_001.ToString(ax_);
-				string[] az_ = new string[]
-				{
+				string[] az_ = [
 					"final",
 					"amended",
 					"preliminary",
-				};
+				];
 				bool? ba_ = context.Operators.In<string>(ay_, (az_ as IEnumerable<string>));
 				bool? bb_ = context.Operators.And(aw_, ba_);
 				DataType bc_ = Exam?.Value;
@@ -499,12 +492,11 @@ public class HybridHWMFHIR_0_102_005
 				bool? cb_ = context.Operators.And(bl_, ca_);
 				Code<ObservationStatus> cc_ = Exam?.StatusElement;
 				string cd_ = FHIRHelpers_4_0_001.ToString(cc_);
-				string[] ce_ = new string[]
-				{
+				string[] ce_ = [
 					"final",
 					"amended",
 					"preliminary",
-				};
+				];
 				bool? cf_ = context.Operators.In<string>(cd_, (ce_ as IEnumerable<string>));
 				bool? cg_ = context.Operators.And(cb_, cf_);
 				DataType ch_ = Exam?.Value;
@@ -567,12 +559,11 @@ public class HybridHWMFHIR_0_102_005
 				bool? as_ = context.Operators.And(ad_, ar_);
 				Code<ObservationStatus> at_ = Lab?.StatusElement;
 				string au_ = FHIRHelpers_4_0_001.ToString(at_);
-				string[] av_ = new string[]
-				{
+				string[] av_ = [
 					"final",
 					"amended",
 					"preliminary",
-				};
+				];
 				bool? aw_ = context.Operators.In<string>(au_, (av_ as IEnumerable<string>));
 				bool? ax_ = context.Operators.And(as_, aw_);
 				DataType ay_ = Lab?.Value;
@@ -613,12 +604,11 @@ public class HybridHWMFHIR_0_102_005
 				bool? bs_ = context.Operators.And(bd_, br_);
 				Code<ObservationStatus> bt_ = Lab?.StatusElement;
 				string bu_ = FHIRHelpers_4_0_001.ToString(bt_);
-				string[] bv_ = new string[]
-				{
+				string[] bv_ = [
 					"final",
 					"amended",
 					"preliminary",
-				};
+				];
 				bool? bw_ = context.Operators.In<string>(bu_, (bv_ as IEnumerable<string>));
 				bool? bx_ = context.Operators.And(bs_, bw_);
 				DataType by_ = Lab?.Value;
@@ -683,8 +673,7 @@ public class HybridHWMFHIR_0_102_005
 		CqlValueSet ae_ = this.Creatinine_lab_test();
 		IEnumerable<Observation> af_ = context.Operators.RetrieveByValueSet<Observation>(ae_, null);
 		IEnumerable<string> ag_ = this.FirstLabTestWithEncounterId(af_, "FirstCreatinine");
-		IEnumerable<string>[] ah_ = new IEnumerable<string>[]
-		{
+		IEnumerable<string>[] ah_ = [
 			d_,
 			h_,
 			k_,
@@ -695,7 +684,7 @@ public class HybridHWMFHIR_0_102_005
 			aa_,
 			ad_,
 			ag_,
-		};
+		];
 		IEnumerable<string> ai_ = context.Operators.Flatten<string>((ah_ as IEnumerable<IEnumerable<string>>));
 
 		return ai_;
@@ -738,10 +727,9 @@ public class HybridHWMFHIR_0_102_005
     [CqlDeclaration("HospitalizationWithObservation")]
 	public CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
 	{
-		Encounter[] a_ = new Encounter[]
-		{
+		Encounter[] a_ = [
 			TheEncounter,
-		};
+		];
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit();

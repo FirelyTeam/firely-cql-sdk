@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -38,9 +37,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
     internal Lazy<CqlCode[]> __SNOMEDCT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Condition>> __Prostate_Cancer_Diagnosis;
     internal Lazy<bool?> __Has_Diagnosis_of_Pain_related_to_Prostate_Cancer;
@@ -82,9 +81,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
         __SNOMEDCT = new Lazy<CqlCode[]>(this.SNOMEDCT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Prostate_Cancer_Diagnosis = new Lazy<IEnumerable<Condition>>(this.Prostate_Cancer_Diagnosis_Value);
         __Has_Diagnosis_of_Pain_related_to_Prostate_Cancer = new Lazy<bool?>(this.Has_Diagnosis_of_Pain_related_to_Prostate_Cancer_Value);
@@ -207,10 +206,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("35266-6", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -221,15 +219,14 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("433351000124101", "http://snomed.info/sct", null, null),
 			new CqlCode("433361000124104", "http://snomed.info/sct", null, null),
 			new CqlCode("433611000124109", "http://snomed.info/sct", null, null),
 			new CqlCode("369833007", "http://snomed.info/sct", null, null),
 			new CqlCode("369834001", "http://snomed.info/sct", null, null),
 			new CqlCode("254292007", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -264,37 +261,37 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -549,10 +546,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> d_(Observation GleasonScore)
 		{
 			Procedure m_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period();
-			Procedure[] n_ = new Procedure[]
-			{
+			Procedure[] n_ = [
 				m_,
-			};
+			];
 			bool? o_(Procedure FirstProstateCancerTreatment)
 			{
 				DataType s_ = GleasonScore?.Effective;
@@ -568,12 +564,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				ObservationStatus? ac_ = ab_?.Value;
 				Code<ObservationStatus> ad_ = context.Operators.Convert<Code<ObservationStatus>>(ac_);
 				string ae_ = context.Operators.Convert<string>(ad_);
-				string[] af_ = new string[]
-				{
+				string[] af_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? ag_ = context.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
 				bool? ah_ = context.Operators.And(aa_, ag_);
 
@@ -598,10 +593,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context.Operators.Last<Observation>(g_);
-		Observation[] i_ = new Observation[]
-		{
+		Observation[] i_ = [
 			h_,
-		};
+		];
 		bool? j_(Observation LastGleasonScore)
 		{
 			DataType am_ = LastGleasonScore?.Value;
@@ -628,10 +622,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> d_(Observation ProstateCancerStaging)
 		{
 			Procedure m_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period();
-			Procedure[] n_ = new Procedure[]
-			{
+			Procedure[] n_ = [
 				m_,
-			};
+			];
 			bool? o_(Procedure FirstProstateCancerTreatment)
 			{
 				DataType s_ = ProstateCancerStaging?.Effective;
@@ -647,12 +640,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				ObservationStatus? ac_ = ab_?.Value;
 				Code<ObservationStatus> ad_ = context.Operators.Convert<Code<ObservationStatus>>(ac_);
 				string ae_ = context.Operators.Convert<string>(ad_);
-				string[] af_ = new string[]
-				{
+				string[] af_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? ag_ = context.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
 				bool? ah_ = context.Operators.And(aa_, ag_);
 
@@ -677,10 +669,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context.Operators.Last<Observation>(g_);
-		Observation[] i_ = new Observation[]
-		{
+		Observation[] i_ = [
 			h_,
-		};
+		];
 		bool? j_(Observation LastProstateCancerStaging)
 		{
 			DataType am_ = LastProstateCancerStaging?.Value;
@@ -736,10 +727,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		IEnumerable<Observation> c_(Observation PSATest)
 		{
 			Observation l_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a();
-			Observation[] m_ = new Observation[]
-			{
+			Observation[] m_ = [
 				l_,
-			};
+			];
 			bool? n_(Observation MostRecentProstateCancerStaging)
 			{
 				CqlInterval<CqlDateTime> r_()
@@ -779,12 +769,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 				ObservationStatus? x_ = w_?.Value;
 				Code<ObservationStatus> y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
 				string z_ = context.Operators.Convert<string>(y_);
-				string[] aa_ = new string[]
-				{
+				string[] aa_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
 				bool? ac_ = context.Operators.And(v_, ab_);
 
@@ -809,10 +798,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		};
 		IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation g_ = context.Operators.Last<Observation>(f_);
-		Observation[] h_ = new Observation[]
-		{
+		Observation[] h_ = [
 			g_,
-		};
+		];
 		bool? i_(Observation LastPSATest)
 		{
 			DataType av_ = LastPSATest?.Value;

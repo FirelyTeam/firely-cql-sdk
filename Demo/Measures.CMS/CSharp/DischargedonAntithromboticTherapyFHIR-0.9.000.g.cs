@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -38,9 +37,9 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
     internal Lazy<IEnumerable<MedicationRequest>> __Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge;
     internal Lazy<IEnumerable<Encounter>> __Denominator_Exceptions;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -71,9 +70,9 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
         __Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge = new Lazy<IEnumerable<MedicationRequest>>(this.Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Value);
         __Encounter_with_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Value);
         __Denominator_Exceptions = new Lazy<IEnumerable<Encounter>>(this.Denominator_Exceptions_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -263,24 +262,22 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			Code<MedicationRequest.MedicationrequestStatus> k_ = Antithrombotic?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? l_ = k_?.Value;
 			string m_ = context.Operators.Convert<string>(l_);
-			string[] n_ = new string[]
-			{
+			string[] n_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
 			bool? p_ = context.Operators.And(j_, o_);
 			Code<MedicationRequest.MedicationRequestIntent> q_ = Antithrombotic?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? r_ = q_?.Value;
 			string s_ = context.Operators.Convert<string>(r_);
-			string[] t_ = new string[]
-			{
+			string[] t_ = [
 				"order",
 				"original-order",
 				"reflex-order",
 				"filler-order",
 				"instance-order",
-			};
+			];
 			bool? u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			bool? v_ = context.Operators.And(p_, u_);
 			FhirBoolean w_ = Antithrombotic?.DoNotPerformElement;
@@ -335,14 +332,13 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			Code<MedicationRequest.MedicationRequestIntent> w_ = NoAntithromboticDischarge?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? x_ = w_?.Value;
 			string y_ = context.Operators.Convert<string>(x_);
-			string[] z_ = new string[]
-			{
+			string[] z_ = [
 				"order",
 				"original-order",
 				"reflex-order",
 				"filler-order",
 				"instance-order",
-			};
+			];
 			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
 			bool? ab_ = context.Operators.And(v_, aa_);
 
@@ -403,24 +399,22 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 			Code<MedicationRequest.MedicationrequestStatus> k_ = Pharmacological?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? l_ = k_?.Value;
 			string m_ = context.Operators.Convert<string>(l_);
-			string[] n_ = new string[]
-			{
+			string[] n_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
 			bool? p_ = context.Operators.And(j_, o_);
 			Code<MedicationRequest.MedicationRequestIntent> q_ = Pharmacological?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? r_ = q_?.Value;
 			string s_ = context.Operators.Convert<string>(r_);
-			string[] t_ = new string[]
-			{
+			string[] t_ = [
 				"order",
 				"original-order",
 				"reflex-order",
 				"filler-order",
 				"instance-order",
-			};
+			];
 			bool? u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			bool? v_ = context.Operators.And(p_, u_);
 			FhirBoolean w_ = Pharmacological?.DoNotPerformElement;
@@ -485,37 +479,37 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 	public IEnumerable<Encounter> Denominator_Exceptions() => 
 		__Denominator_Exceptions.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

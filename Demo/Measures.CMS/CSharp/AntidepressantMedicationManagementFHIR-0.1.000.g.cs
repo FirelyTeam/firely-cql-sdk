@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -50,9 +49,9 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
     internal Lazy<IEnumerable<CqlInterval<CqlDate>>> __Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD;
     internal Lazy<bool?> __Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days;
     internal Lazy<bool?> __Numerator_2;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -97,9 +96,9 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
         __Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD = new Lazy<IEnumerable<CqlInterval<CqlDate>>>(this.Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD_Value);
         __Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days = new Lazy<bool?>(this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days_Value);
         __Numerator_2 = new Lazy<bool?>(this.Numerator_2_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -298,28 +297,25 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			return s_;
 		};
 		IEnumerable<MedicationDispense> h_ = context.Operators.Where<MedicationDispense>(f_, g_);
-		Tuple_BZDEAYEYEiNadHNdHhSIPXaDL i_(MedicationDispense Antidepressant)
+		(CqlDate AntidepressantDate, nint _)? i_(MedicationDispense Antidepressant)
 		{
 			CqlInterval<CqlDate> t_ = CumulativeMedicationDuration_4_0_000.MedicationDispensePeriod(Antidepressant);
 			CqlDate u_ = context.Operators.Start(t_);
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
 			CqlDate w_ = context.Operators.DateFrom(v_);
-			Tuple_BZDEAYEYEiNadHNdHhSIPXaDL x_ = new Tuple_BZDEAYEYEiNadHNdHhSIPXaDL
-			{
-				AntidepressantDate = w_,
-			};
+			(CqlDate AntidepressantDate, nint _)? x_ = (w_, default);
 
 			return x_;
 		};
-		IEnumerable<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL> j_ = context.Operators.Select<MedicationDispense, Tuple_BZDEAYEYEiNadHNdHhSIPXaDL>(h_, i_);
-		object k_(Tuple_BZDEAYEYEiNadHNdHhSIPXaDL @this)
+		IEnumerable<(CqlDate AntidepressantDate, nint _)?> j_ = context.Operators.Select<MedicationDispense, (CqlDate AntidepressantDate, nint _)?>(h_, i_);
+		object k_((CqlDate AntidepressantDate, nint _)? @this)
 		{
 			CqlDate y_ = @this?.AntidepressantDate;
 
 			return y_;
 		};
-		IEnumerable<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL> l_ = context.Operators.SortBy<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-		Tuple_BZDEAYEYEiNadHNdHhSIPXaDL m_ = context.Operators.First<Tuple_BZDEAYEYEiNadHNdHhSIPXaDL>(l_);
+		IEnumerable<(CqlDate AntidepressantDate, nint _)?> l_ = context.Operators.SortBy<(CqlDate AntidepressantDate, nint _)?>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+		(CqlDate AntidepressantDate, nint _)? m_ = context.Operators.First<(CqlDate AntidepressantDate, nint _)?>(l_);
 		CqlDate n_ = m_?.AntidepressantDate;
 
 		return n_;
@@ -471,10 +467,9 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			Timing.RepeatComponent q_ = p_?.Repeat;
 			DataType r_ = q_?.Bounds;
 			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			object[] t_ = new object[]
-			{
+			object[] t_ = [
 				s_,
-			};
+			];
 			CqlInterval<CqlDateTime> u_(object Meds)
 			{
 				CqlInterval<CqlDateTime> af_ = this.Intake_Period();
@@ -610,37 +605,37 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	public bool? Numerator_2() => 
 		__Numerator_2.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

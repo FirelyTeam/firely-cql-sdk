@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -83,10 +82,9 @@ public class NCQAPalliativeCare_1_0_0
 
 	private CqlCode[] ICD_10_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
-		};
+		];
 
 		return a_;
 	}

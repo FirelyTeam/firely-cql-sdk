@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -76,9 +75,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
     internal Lazy<IEnumerable<object>> __Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient;
     internal Lazy<IEnumerable<Encounter>> __Denominator_Exceptions;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -146,9 +145,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
         __Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined = new Lazy<IEnumerable<object>>(this.Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined_Value);
         __Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient_Value);
         __Denominator_Exceptions = new Lazy<IEnumerable<Encounter>>(this.Denominator_Exceptions_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -323,10 +322,9 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private CqlCode[] ActCode_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -337,13 +335,12 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("8462-4", "http://loinc.org", null, null),
 			new CqlCode("34534-8", "http://loinc.org", null, null),
 			new CqlCode("11524-6", "http://loinc.org", null, null),
 			new CqlCode("8480-6", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -354,11 +351,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("183624006", "http://snomed.info/sct", null, null),
 			new CqlCode("183625007", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -540,12 +536,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> ar_ = BloodPressure?.StatusElement;
 				ObservationStatus? as_ = ar_?.Value;
 				string at_ = context.Operators.Convert<string>(as_);
-				string[] au_ = new string[]
-				{
+				string[] au_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? av_ = context.Operators.In<string>(at_, (au_ as IEnumerable<string>));
 				bool? aw_ = context.Operators.And(aq_, av_);
 
@@ -601,12 +596,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> bv_ = BloodPressure?.StatusElement;
 				ObservationStatus? bw_ = bv_?.Value;
 				string bx_ = context.Operators.Convert<string>(bw_);
-				string[] by_ = new string[]
-				{
+				string[] by_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bz_ = context.Operators.In<string>(bx_, (by_ as IEnumerable<string>));
 				bool? ca_ = context.Operators.And(bu_, bz_);
 
@@ -680,12 +674,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> ar_ = BloodPressure?.StatusElement;
 				ObservationStatus? as_ = ar_?.Value;
 				string at_ = context.Operators.Convert<string>(as_);
-				string[] au_ = new string[]
-				{
+				string[] au_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? av_ = context.Operators.In<string>(at_, (au_ as IEnumerable<string>));
 				bool? aw_ = context.Operators.And(aq_, av_);
 
@@ -741,12 +734,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> bv_ = BloodPressure?.StatusElement;
 				ObservationStatus? bw_ = bv_?.Value;
 				string bx_ = context.Operators.Convert<string>(bw_);
-				string[] by_ = new string[]
-				{
+				string[] by_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? bz_ = context.Operators.In<string>(bx_, (by_ as IEnumerable<string>));
 				bool? ca_ = context.Operators.And(bu_, bz_);
 
@@ -1000,12 +992,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> cd_ = BloodPressure?.StatusElement;
 				ObservationStatus? ce_ = cd_?.Value;
 				string cf_ = context.Operators.Convert<string>(ce_);
-				string[] cg_ = new string[]
-				{
+				string[] cg_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? ch_ = context.Operators.In<string>(cf_, (cg_ as IEnumerable<string>));
 				bool? ci_ = context.Operators.And(cc_, ch_);
 
@@ -1069,12 +1060,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> dt_ = BloodPressure?.StatusElement;
 				ObservationStatus? du_ = dt_?.Value;
 				string dv_ = context.Operators.Convert<string>(du_);
-				string[] dw_ = new string[]
-				{
+				string[] dw_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? dx_ = context.Operators.In<string>(dv_, (dw_ as IEnumerable<string>));
 				bool? dy_ = context.Operators.And(ds_, dx_);
 
@@ -1138,12 +1128,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> fj_ = BloodPressure?.StatusElement;
 				ObservationStatus? fk_ = fj_?.Value;
 				string fl_ = context.Operators.Convert<string>(fk_);
-				string[] fm_ = new string[]
-				{
+				string[] fm_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? fn_ = context.Operators.In<string>(fl_, (fm_ as IEnumerable<string>));
 				bool? fo_ = context.Operators.And(fi_, fn_);
 
@@ -1207,12 +1196,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> gz_ = BloodPressure?.StatusElement;
 				ObservationStatus? ha_ = gz_?.Value;
 				string hb_ = context.Operators.Convert<string>(ha_);
-				string[] hc_ = new string[]
-				{
+				string[] hc_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? hd_ = context.Operators.In<string>(hb_, (hc_ as IEnumerable<string>));
 				bool? he_ = context.Operators.And(gy_, hd_);
 
@@ -1575,12 +1563,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> bz_ = BloodPressure?.StatusElement;
 				ObservationStatus? ca_ = bz_?.Value;
 				string cb_ = context.Operators.Convert<string>(ca_);
-				string[] cc_ = new string[]
-				{
+				string[] cc_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? cd_ = context.Operators.In<string>(cb_, (cc_ as IEnumerable<string>));
 				bool? ce_ = context.Operators.And(by_, cd_);
 
@@ -1636,12 +1623,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> dd_ = BloodPressure?.StatusElement;
 				ObservationStatus? de_ = dd_?.Value;
 				string df_ = context.Operators.Convert<string>(de_);
-				string[] dg_ = new string[]
-				{
+				string[] dg_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? dh_ = context.Operators.In<string>(df_, (dg_ as IEnumerable<string>));
 				bool? di_ = context.Operators.And(dc_, dh_);
 
@@ -1698,12 +1684,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> eh_ = BloodPressure?.StatusElement;
 				ObservationStatus? ei_ = eh_?.Value;
 				string ej_ = context.Operators.Convert<string>(ei_);
-				string[] ek_ = new string[]
-				{
+				string[] ek_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? el_ = context.Operators.In<string>(ej_, (ek_ as IEnumerable<string>));
 				bool? em_ = context.Operators.And(eg_, el_);
 
@@ -1757,12 +1742,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> fl_ = BloodPressure?.StatusElement;
 				ObservationStatus? fm_ = fl_?.Value;
 				string fn_ = context.Operators.Convert<string>(fm_);
-				string[] fo_ = new string[]
-				{
+				string[] fo_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? fp_ = context.Operators.In<string>(fn_, (fo_ as IEnumerable<string>));
 				bool? fq_ = context.Operators.And(fk_, fp_);
 
@@ -1979,12 +1963,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> bu_ = BloodPressure?.StatusElement;
 				ObservationStatus? bv_ = bu_?.Value;
 				string bw_ = context.Operators.Convert<string>(bv_);
-				string[] bx_ = new string[]
-				{
+				string[] bx_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? by_ = context.Operators.In<string>(bw_, (bx_ as IEnumerable<string>));
 				bool? bz_ = context.Operators.And(bt_, by_);
 
@@ -2038,12 +2021,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> cy_ = BloodPressure?.StatusElement;
 				ObservationStatus? cz_ = cy_?.Value;
 				string da_ = context.Operators.Convert<string>(cz_);
-				string[] db_ = new string[]
-				{
+				string[] db_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? dc_ = context.Operators.In<string>(da_, (db_ as IEnumerable<string>));
 				bool? dd_ = context.Operators.And(cx_, dc_);
 
@@ -2097,12 +2079,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> ec_ = BloodPressure?.StatusElement;
 				ObservationStatus? ed_ = ec_?.Value;
 				string ee_ = context.Operators.Convert<string>(ed_);
-				string[] ef_ = new string[]
-				{
+				string[] ef_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? eg_ = context.Operators.In<string>(ee_, (ef_ as IEnumerable<string>));
 				bool? eh_ = context.Operators.And(eb_, eg_);
 
@@ -2156,12 +2137,11 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				Code<ObservationStatus> fg_ = BloodPressure?.StatusElement;
 				ObservationStatus? fh_ = fg_?.Value;
 				string fi_ = context.Operators.Convert<string>(fh_);
-				string[] fj_ = new string[]
-				{
+				string[] fj_ = [
 					"final",
 					"amended",
 					"corrected",
-				};
+				];
 				bool? fk_ = context.Operators.In<string>(fi_, (fj_ as IEnumerable<string>));
 				bool? fl_ = context.Operators.And(ff_, fk_);
 
@@ -2973,37 +2953,37 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	public IEnumerable<Encounter> Denominator_Exceptions() => 
 		__Denominator_Exceptions.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
