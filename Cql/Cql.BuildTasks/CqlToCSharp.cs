@@ -49,9 +49,8 @@ internal class CqlToCSharp : Microsoft.Build.Utilities.Task
             .AddSingleton(isp => isp.GetRequiredService<CqlCompilerFactory>().TypeResolver)
             .BuildServiceProvider();
 
-
-
         var libraries = Sources.ToLibraries(services);
+        var taskItems = libraries.ToCSharp(services);
         return true;
     }
 }

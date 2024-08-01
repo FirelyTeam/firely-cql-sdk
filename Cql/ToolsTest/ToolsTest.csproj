@@ -40,9 +40,6 @@
 	  <None Update="Input\Cql\UsesFHIRHelpers-1.0.0.cql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="Input\deps.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 
 

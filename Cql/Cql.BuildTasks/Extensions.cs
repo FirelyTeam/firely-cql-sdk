@@ -76,7 +76,7 @@ internal static class Extensions
         return libs;
     }
 
-    public static TaskItem[] ToCSharp(this Library[] libraries, IServiceProvider services)
+    public static TaskItem[] ToCSharp(this (Library library, FileInfo file)[] libraries, IServiceProvider services)
     {
         var writer = services.GetRequiredService<CSharpLibrarySetToStreamsWriter>();
         var cf = services.GetRequiredService<CqlCompilerFactory>();
@@ -87,7 +87,7 @@ internal static class Extensions
         var typeManager = cf.TypeManager;
 
         // Turn our libraries into lambdas.
-        var librarySet = new LibrarySet("", libraries);
+        var librarySet = new LibrarySet("", libraries.Select(l=>l.library).ToArray());
         var lambdas = eb.ProcessLibrarySet(librarySet);
 
         var libraryToCode = new Dictionary<string, string>();
@@ -100,7 +100,8 @@ internal static class Extensions
         // Preserve the order of the libraries to their corresponding soure code.
         for (int i = 0; i < libraries.Length; i++)
         {
-            var lib = libraries[i];
+            var lib = libraries[i].library;
+            var file = libraries[i].file;
         }
 
         return items;

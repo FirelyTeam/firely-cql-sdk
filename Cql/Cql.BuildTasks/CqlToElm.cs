@@ -67,11 +67,7 @@ namespace Hl7.Cql.Tools.BuildTasks
 
 
                 var fileName = $"{Path.GetFileNameWithoutExtension(fileInfo.Name)}.elm.json";
-                var outFile = outputPath switch
-                {
-                    { } => Path.Combine(outputPath, fileName),
-                    null => Path.Combine(fileInfo.DirectoryName, fileName)
-                };
+                var outFile = Path.Combine(outputPath ?? fileInfo.DirectoryName, fileName);
 
                 Log.LogMessage(MessageImportance.High, $"Writing {outFile}.");
 
