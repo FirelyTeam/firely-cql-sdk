@@ -1,0 +1,17 @@
+﻿<Project>
+	<UsingTask TaskName="CqlToElm" AssemblyFile="lib\net8.0\Hl7.Cql.Tools.BuildTasks.dll"/>
+	<ItemGroup>
+		<CqlFiles Include="**\*.cql" />
+	</ItemGroup>
+
+	<!-- Visual Studio builds with MSBuild.  Just use dotnet build in that case. -->
+	<Target BeforeTargets="Build" Name="RunCqlToElm" Condition="'$(MSBuildRuntimeType)' != 'Core'">
+		<Exec Command="dotnet build -t:CqlToElm" />
+	</Target>
+
+	<Target BeforeTargets="CoreCompile" Name="CqlToElm" Condition="'$(MSBuildRuntimeType)' == 'Core'">
+		<CqlToElm Sources="@(CqlFiles)">
+			<Output TaskParameter="ELM" PropertyName="ELMFile" />
+		</CqlToElm>
+	</Target>
+</Project>

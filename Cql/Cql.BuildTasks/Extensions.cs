@@ -21,18 +21,22 @@ internal static class Extensions
         .Where(file => file != null).ToArray();
 
 
-    public static Library[] ToLibraries(this ITaskItem[] sources, IServiceProvider services)
+    public static (Library, FileInfo)[] ToLibraries(this ITaskItem[] sources, IServiceProvider services)
     {
         var libraryProvider = (TaskItemLibraryProvider)services.GetRequiredService<ILibraryProvider>();
         libraryProvider.SetItems(sources);
         var files = sources.FlattenToFiles();
         var logger = services.GetRequiredService<ILogger<TaskItemLibraryProvider>>();
 
-        foreach (var fileInfo in files)
+        var libs = new (Library, FileInfo)[files.Length];
+        for(int i = 0; i < files.Length; i++)
         {
+            logger.LogInformation($"Converting {files[i].FullName} to ELM.");
+            var fileInfo = files[i];
             if (!fileInfo.Exists)
             {
                 logger.LogError($"File {fileInfo.FullName} could not be found on disk.");
+                libs[i] = (null, fileInfo);
                 continue;
             }
             else
@@ -64,14 +68,12 @@ internal static class Extensions
                         }
 
                     }
+
+                    libs[i] = (lib, fileInfo);
                 }
             }
         }
-
-        var libraries = libraryProvider.All
-            .Select(lb => lb.Build())
-            .ToArray();
-        return libraries;
+        return libs;
     }
 
     public static TaskItem[] ToCSharp(this Library[] libraries, IServiceProvider services)

@@ -39,6 +39,7 @@ namespace Hl7.Cql.Tools.BuildTasks
         /// <inheritdoc />
         public override bool Execute()
         {
+            Log.LogMessage(MessageImportance.High, "Converting CQL libraries to ELM libraries.");
             var services = new ServiceCollection()
                 .AddSystem()
                 .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
@@ -49,17 +50,31 @@ namespace Hl7.Cql.Tools.BuildTasks
                 .BuildServiceProvider();
 
             var libraries = Sources.ToLibraries(services);
-            var outputPath = BuildEngine9.GetGlobalProperties()["OutputPath"];
+            var props = BuildEngine9.GetGlobalProperties();
+            if (!props.TryGetValue("OutputPath", out var outputPath))
+                outputPath = null;
+
             var elm = new ConcurrentBag<ITaskItem>();
 
-            Parallel.ForEach(libraries, lib =>
+            Parallel.ForEach(libraries, tuple =>
             {
+                var lib = tuple.Item1;
+                var fileInfo = tuple.Item2;
                 using var ms = new MemoryStream();
                 lib.WriteJson(ms);
                 ms.Position = 0;
                 var json = new StreamReader(ms).ReadToEnd();
 
-                var outFile = Path.Combine(outputPath, $"{lib.NameAndVersion()}.elm.json");
+
+                var fileName = $"{Path.GetFileNameWithoutExtension(fileInfo.Name)}.elm.json";
+                var outFile = outputPath switch
+                {
+                    { } => Path.Combine(outputPath, fileName),
+                    null => Path.Combine(fileInfo.DirectoryName, fileName)
+                };
+
+                Log.LogMessage(MessageImportance.High, $"Writing {outFile}.");
+
                 File.WriteAllText(outFile, json);
                 var ti = new TaskItem(outFile, new Dictionary<string, string>
                 {

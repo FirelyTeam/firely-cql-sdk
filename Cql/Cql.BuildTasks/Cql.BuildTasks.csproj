@@ -4,34 +4,157 @@
 	<PropertyGroup>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
-
 		<AssemblyName>Hl7.Cql.Tools.BuildTasks</AssemblyName>
 		<RootNamespace>Hl7.Cql.Tools.BuildTasks</RootNamespace>
 		<Product>MSBuild tasks</Product>
 		<Description>Provides build tasks for CQL-to-ELM and ELM-to-C#</Description>
+		<GenerateDependencyFile>true</GenerateDependencyFile>
+		<DebugType>embedded</DebugType>
+		<IsPackable>true</IsPackable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>CQL Build Tasks</Title>
+		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+		<!-- Normally not necessary, but packages with custom tasks in them need all dependencies embedded within them -->
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" PrivateAssets="all" />
-		<PackageReference Include="Hl7.Fhir.Base" Version="5.7.0" PrivateAssets="all" />
-		<PackageReference Include="Hl7.Fhir.R4" Version="5.7.0" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.Build.Framework" Version="17.10.4" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.10.4" PrivateAssets="all" />
+		<Content Include="build\Hl7.Cql.Tools.BuildTasks.props" PackagePath="build\" />
+		<Content Include="build\Hl7.Cql.Tools.BuildTasks.targets" PackagePath="build\" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" IncludeAssets="all" />
+		<PackageReference Include="Dumpify" Version="0.6.6" IncludeAssets="all" />
+		<PackageReference Include="Fhir.Metrics" Version="1.3.0" IncludeAssets="all" />
+		<PackageReference Include="Hl7.Fhir.Base" Version="5.7.0" IncludeAssets="all" />
+		<PackageReference Include="Hl7.Fhir.Conformance" Version="5.7.0" IncludeAssets="all" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="5.7.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Build.Framework" Version="17.10.4" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.10.4" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.10.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Primitives" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.NET.StringTools" Version="17.10.4" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.NETCore.Platforms" Version="1.1.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.NETCore.Targets" Version="1.1.0" IncludeAssets="all" />
+		<PackageReference Include="Microsoft.SourceLink.Common" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" IncludeAssets="all" />
+		<PackageReference Include="Spectre.Console" Version="0.48.0" IncludeAssets="all" />
+		<PackageReference Include="System.Collections" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Collections.Concurrent" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Collections.Immutable" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" IncludeAssets="all" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Diagnostics.EventLog" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="System.Diagnostics.Tracing" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Globalization" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.IO" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Memory" Version="4.5.5" IncludeAssets="all" />
+		<PackageReference Include="System.Reflection" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" IncludeAssets="all" />
+		<PackageReference Include="System.Reflection.Metadata" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="System.Reflection.Primitives" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Runtime" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Runtime.Extensions" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="System.Text.Encoding" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" IncludeAssets="all" />
+		<PackageReference Include="System.Text.Json" Version="8.0.4" IncludeAssets="all" />
+		<PackageReference Include="System.Threading" Version="4.3.0" IncludeAssets="all" />
+		<PackageReference Include="System.Threading.Tasks" Version="4.3.0" IncludeAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
-		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
-		<ProjectReference Include="..\Cql.CqlToElm\Cql.CqlToElm.csproj" PrivateAssets="all" />
-		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" PrivateAssets="all" />
-		<ProjectReference Include="..\Elm\Elm.csproj" PrivateAssets="all" />
+		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.CodeGeneration.NET.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Abstractions.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Comparers.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Compiler.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Conversion.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.CqlToElm\Cql.CqlToElm.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.CqlToElm.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Fhir.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.CqlToElm.Grammar.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Model.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Operators.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Primitives.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Runtime.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Elm\Elm.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Elm.dll</IncludeAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\Iso8601\Iso8601.csproj" PrivateAssets="all">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Hl7.Cql.Iso8601.dll</IncludeAssets>
+		</ProjectReference>
+		
 		<InternalsVisibleTo Include="ToolsTest" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="build\" />
-	</ItemGroup>
 
+	<Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+		<ItemGroup>
+			<!-- The dependencies of your MSBuild task must be packaged inside the package, they cannot be expressed as normal PackageReferences -->
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths)" TargetPath="%(ReferenceCopyLocalPaths.DestinationSubPath)" />
+		</ItemGroup>
+	</Target>
+
+	<!-- This target adds the generated deps.json file to our package output -->
+	<Target Name="AddBuildDependencyFileToBuiltProjectOutputGroupOutput" BeforeTargets="BuiltProjectOutputGroup" Condition=" '$(GenerateDependencyFile)' == 'true'">
+
+		<ItemGroup>
+			<BuiltProjectOutputGroupOutput Include="$(ProjectDepsFilePath)" TargetPath="$(ProjectDepsFileName)" FinalOutputPath="$(ProjectDepsFilePath)" />
+		</ItemGroup>
+	</Target>
 
 </Project>
- 

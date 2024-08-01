@@ -4,6 +4,7 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -88,6 +89,28 @@ namespace ToolsTest
             cqlToElm.Execute().Should().BeFalse();
             errors.Should().HaveCount(1);
             errors[0].Message.Should().Be("Unable to resolve library: FHIRHelpers version '4.0.1'. Are you sure this library version exists and that you have access?");
+        }
+
+        [TestMethod]
+
+        public void Deps()
+        {
+            string jsonContent = File.ReadAllText(@"Input\deps.json");
+
+            // Parse JSON content
+            JObject json = JObject.Parse(jsonContent);
+
+            var libraries = json["libraries"];
+            if (libraries != null)
+            {
+                foreach (var library in libraries.Children<JProperty>())
+                {
+                    string packageName = library.Name;
+                    string version = packageName.Substring(packageName.IndexOf('/') + 1);
+                    packageName = packageName.Substring(0, packageName.IndexOf('/'));
+                    System.Diagnostics.Debug.WriteLine($"<PackageReference Include=\"{packageName}\" Version=\"{version}\" IncludeAssets=\"all\" />");
+                }
+            }
         }
 
     }

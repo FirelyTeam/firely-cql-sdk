@@ -1,0 +1,3 @@
+﻿<Project>
+	<UsingTask TaskName="CqlToElm" AssemblyFile="..\lib\net8.0\Hl7.Cql.Tools.BuildTasks.dll"/>
+</Project>

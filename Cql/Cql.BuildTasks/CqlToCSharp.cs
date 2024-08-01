@@ -52,8 +52,6 @@ internal class CqlToCSharp : Microsoft.Build.Utilities.Task
 
 
         var libraries = Sources.ToLibraries(services);
-        var output = libraries.ToCSharp(services);
-
         return true;
     }
 }
