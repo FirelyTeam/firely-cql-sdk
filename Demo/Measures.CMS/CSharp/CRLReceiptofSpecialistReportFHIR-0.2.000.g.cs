@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -32,12 +31,12 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<bool?> __Has_Encounter_during_Measurement_Period;
-    internal Lazy<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS> __First_Referral_during_First_10_Months_of_Measurement_Period;
+    internal Lazy<(string ID, CqlDateTime AuthorDate)?> __First_Referral_during_First_10_Months_of_Measurement_Period;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop;
     internal Lazy<bool?> __Numerator;
@@ -62,12 +61,12 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Has_Encounter_during_Measurement_Period = new Lazy<bool?>(this.Has_Encounter_during_Measurement_Period_Value);
-        __First_Referral_during_First_10_Months_of_Measurement_Period = new Lazy<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>(this.First_Referral_during_First_10_Months_of_Measurement_Period_Value);
+        __First_Referral_during_First_10_Months_of_Measurement_Period = new Lazy<(string ID, CqlDateTime AuthorDate)?>(this.First_Referral_during_First_10_Months_of_Measurement_Period_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop = new Lazy<bool?>(this.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
@@ -213,7 +212,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	public bool? Has_Encounter_during_Measurement_Period() => 
 		__Has_Encounter_during_Measurement_Period.Value;
 
-	private Tuple_BLEMZbHGbhMbZiIgCJaASVTUS First_Referral_during_First_10_Months_of_Measurement_Period_Value()
+	private (string ID, CqlDateTime AuthorDate)? First_Referral_during_First_10_Months_of_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Referral();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
@@ -223,11 +222,10 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			RequestStatus? k_ = j_?.Value;
 			Code<RequestStatus> l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
 			string m_ = context.Operators.Convert<string>(l_);
-			string[] n_ = new string[]
-			{
+			string[] n_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
 			Code<RequestIntent> p_ = ReferralOrder?.IntentElement;
 			RequestIntent? q_ = p_?.Value;
@@ -249,41 +247,37 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 			return af_;
 		};
 		IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
-		Tuple_BLEMZbHGbhMbZiIgCJaASVTUS e_(ServiceRequest ReferralOrder)
+		(string ID, CqlDateTime AuthorDate)? e_(ServiceRequest ReferralOrder)
 		{
 			Id ag_ = ReferralOrder?.IdElement;
 			string ah_ = ag_?.Value;
 			FhirDateTime ai_ = ReferralOrder?.AuthoredOnElement;
 			CqlDateTime aj_ = context.Operators.Convert<CqlDateTime>(ai_);
-			Tuple_BLEMZbHGbhMbZiIgCJaASVTUS ak_ = new Tuple_BLEMZbHGbhMbZiIgCJaASVTUS
-			{
-				ID = ah_,
-				AuthorDate = aj_,
-			};
+			(string ID, CqlDateTime AuthorDate)? ak_ = (ah_, aj_);
 
 			return ak_;
 		};
-		IEnumerable<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS> f_ = context.Operators.Select<ServiceRequest, Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>(d_, e_);
-		object g_(Tuple_BLEMZbHGbhMbZiIgCJaASVTUS @this)
+		IEnumerable<(string ID, CqlDateTime AuthorDate)?> f_ = context.Operators.Select<ServiceRequest, (string ID, CqlDateTime AuthorDate)?>(d_, e_);
+		object g_((string ID, CqlDateTime AuthorDate)? @this)
 		{
 			CqlDateTime al_ = @this?.AuthorDate;
 
 			return al_;
 		};
-		IEnumerable<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS> h_ = context.Operators.SortBy<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
-		Tuple_BLEMZbHGbhMbZiIgCJaASVTUS i_ = context.Operators.First<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>(h_);
+		IEnumerable<(string ID, CqlDateTime AuthorDate)?> h_ = context.Operators.SortBy<(string ID, CqlDateTime AuthorDate)?>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+		(string ID, CqlDateTime AuthorDate)? i_ = context.Operators.First<(string ID, CqlDateTime AuthorDate)?>(h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("First Referral during First 10 Months of Measurement Period")]
-	public Tuple_BLEMZbHGbhMbZiIgCJaASVTUS First_Referral_during_First_10_Months_of_Measurement_Period() => 
+	public (string ID, CqlDateTime AuthorDate)? First_Referral_during_First_10_Months_of_Measurement_Period() => 
 		__First_Referral_during_First_10_Months_of_Measurement_Period.Value;
 
 	private bool? Initial_Population_Value()
 	{
 		bool? a_ = this.Has_Encounter_during_Measurement_Period();
-		Tuple_BLEMZbHGbhMbZiIgCJaASVTUS b_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
+		(string ID, CqlDateTime AuthorDate)? b_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
 		bool? c_ = context.Operators.Not((bool?)(b_ is null));
 		bool? d_ = context.Operators.And(a_, c_);
 
@@ -305,37 +299,37 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	public bool? Denominator() => 
 		__Denominator.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -372,12 +366,11 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 		IEnumerable<Task> b_ = context.Operators.RetrieveByValueSet<Task>(a_, null);
 		IEnumerable<Task> c_(Task ConsultantReportObtained)
 		{
-			Tuple_BLEMZbHGbhMbZiIgCJaASVTUS f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
-			Tuple_BLEMZbHGbhMbZiIgCJaASVTUS[] g_ = new Tuple_BLEMZbHGbhMbZiIgCJaASVTUS[]
-			{
+			(string ID, CqlDateTime AuthorDate)? f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
+			(string ID, CqlDateTime AuthorDate)?[] g_ = [
 				f_,
-			};
-			bool? h_(Tuple_BLEMZbHGbhMbZiIgCJaASVTUS FirstReferral)
+			];
+			bool? h_((string ID, CqlDateTime AuthorDate)? FirstReferral)
 			{
 				string l_ = FirstReferral?.ID;
 				IEnumerable<string> m_ = this.TaskGetRequestID(ConsultantReportObtained);
@@ -401,10 +394,10 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 				return ae_;
 			};
-			IEnumerable<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS> i_ = context.Operators.Where<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>((IEnumerable<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>)g_, h_);
-			Task j_(Tuple_BLEMZbHGbhMbZiIgCJaASVTUS FirstReferral) => 
+			IEnumerable<(string ID, CqlDateTime AuthorDate)?> i_ = context.Operators.Where<(string ID, CqlDateTime AuthorDate)?>(((IEnumerable<(string ID, CqlDateTime AuthorDate)?>)g_), h_);
+			Task j_((string ID, CqlDateTime AuthorDate)? FirstReferral) => 
 				ConsultantReportObtained;
-			IEnumerable<Task> k_ = context.Operators.Select<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS, Task>(i_, j_);
+			IEnumerable<Task> k_ = context.Operators.Select<(string ID, CqlDateTime AuthorDate)?, Task>(i_, j_);
 
 			return k_;
 		};

@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -58,9 +57,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
     internal Lazy<bool?> __Has_Cardiac_Pacer_Device_Implanted;
     internal Lazy<bool?> __Atrioventricular_Block_without_Cardiac_Pacer;
     internal Lazy<bool?> __Denominator_Exceptions;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -110,9 +109,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
         __Has_Cardiac_Pacer_Device_Implanted = new Lazy<bool?>(this.Has_Cardiac_Pacer_Device_Implanted_Value);
         __Atrioventricular_Block_without_Cardiac_Pacer = new Lazy<bool?>(this.Atrioventricular_Block_without_Cardiac_Pacer_Value);
         __Denominator_Exceptions = new Lazy<bool?>(this.Denominator_Exceptions_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -245,10 +244,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("373254001", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -352,24 +350,22 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			Code<MedicationRequest.MedicationrequestStatus> j_ = BetaBlockerOrdered?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? k_ = j_?.Value;
 			string l_ = context.Operators.Convert<string>(k_);
-			string[] m_ = new string[]
-			{
+			string[] m_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? n_ = context.Operators.In<string>(l_, (m_ as IEnumerable<string>));
 			bool? o_ = context.Operators.And(i_, n_);
 			Code<MedicationRequest.MedicationRequestIntent> p_ = BetaBlockerOrdered?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
 			string r_ = context.Operators.Convert<string>(q_);
-			string[] s_ = new string[]
-			{
+			string[] s_ = [
 				"order",
 				"original-order",
 				"reflex-order",
 				"filler-order",
 				"instance-order",
-			};
+			];
 			bool? t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
 			bool? u_ = context.Operators.And(o_, t_);
 
@@ -425,37 +421,32 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 		IEnumerable<Encounter> b_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 		IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-		Tuple_FUFPMQdRaTBgLhghDWfUUBaNF d_(ValueTuple<Observation, Encounter> _valueTuple)
+		(Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? d_(ValueTuple<Observation, Encounter> _valueTuple)
 		{
-			Tuple_FUFPMQdRaTBgLhghDWfUUBaNF k_ = new Tuple_FUFPMQdRaTBgLhghDWfUUBaNF
-			{
-				HeartRate = _valueTuple.Item1,
-				ModerateOrSevereLVSDHFOutpatientEncounter = _valueTuple.Item2,
-			};
+			(Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
-		IEnumerable<Tuple_FUFPMQdRaTBgLhghDWfUUBaNF> e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, Tuple_FUFPMQdRaTBgLhghDWfUUBaNF>(c_, d_);
-		bool? f_(Tuple_FUFPMQdRaTBgLhghDWfUUBaNF tuple_fufpmqdratbglhghdwfuubanf)
+		IEnumerable<(Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?> e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, (Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?>(c_, d_);
+		bool? f_((Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? tuple_fufpmqdratbglhghdwfuubanf)
 		{
-			Period l_ = tuple_fufpmqdratbglhghdwfuubanf.ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
+			Period l_ = tuple_fufpmqdratbglhghdwfuubanf?.ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
-			DataType n_ = tuple_fufpmqdratbglhghdwfuubanf.HeartRate?.Effective;
+			DataType n_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
 			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
-			Code<ObservationStatus> r_ = tuple_fufpmqdratbglhghdwfuubanf.HeartRate?.StatusElement;
+			Code<ObservationStatus> r_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.StatusElement;
 			ObservationStatus? s_ = r_?.Value;
 			string t_ = context.Operators.Convert<string>(s_);
-			string[] u_ = new string[]
-			{
+			string[] u_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
 			bool? w_ = context.Operators.And(q_, v_);
-			DataType x_ = tuple_fufpmqdratbglhghdwfuubanf.HeartRate?.Value;
+			DataType x_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
 			Quantity y_ = context.Operators.Convert<Quantity>(x_);
 			CqlQuantity z_ = FHIRHelpers_4_3_000.ToQuantity(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(50m, "/min");
@@ -464,7 +455,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			IEnumerable<Observation> ad_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
 			bool? ae_(Observation MostRecentPriorHeartRate)
 			{
-				Period ap_ = tuple_fufpmqdratbglhghdwfuubanf.ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
+				Period ap_ = tuple_fufpmqdratbglhghdwfuubanf?.ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_3_000.ToInterval(ap_);
 				DataType ar_ = MostRecentPriorHeartRate?.Effective;
 				object as_ = FHIRHelpers_4_3_000.ToValue(ar_);
@@ -472,7 +463,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				bool? au_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aq_, at_, null);
 				object aw_ = FHIRHelpers_4_3_000.ToValue(ar_);
 				CqlInterval<CqlDateTime> ax_ = QICoreCommon_2_0_000.toInterval(aw_);
-				DataType ay_ = tuple_fufpmqdratbglhghdwfuubanf.HeartRate?.Effective;
+				DataType ay_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
 				object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
 				CqlInterval<CqlDateTime> ba_ = QICoreCommon_2_0_000.toInterval(az_);
 				bool? bb_ = context.Operators.Before(ax_, ba_, null);
@@ -500,10 +491,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 			return ao_;
 		};
-		IEnumerable<Tuple_FUFPMQdRaTBgLhghDWfUUBaNF> g_ = context.Operators.Where<Tuple_FUFPMQdRaTBgLhghDWfUUBaNF>(e_, f_);
-		Observation h_(Tuple_FUFPMQdRaTBgLhghDWfUUBaNF tuple_fufpmqdratbglhghdwfuubanf) => 
-			tuple_fufpmqdratbglhghdwfuubanf.HeartRate;
-		IEnumerable<Observation> i_ = context.Operators.Select<Tuple_FUFPMQdRaTBgLhghDWfUUBaNF, Observation>(g_, h_);
+		IEnumerable<(Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?> g_ = context.Operators.Where<(Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?>(e_, f_);
+		Observation h_((Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? tuple_fufpmqdratbglhghdwfuubanf) => 
+			tuple_fufpmqdratbglhghdwfuubanf?.HeartRate;
+		IEnumerable<Observation> i_ = context.Operators.Select<(Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?, Observation>(g_, h_);
 		bool? j_ = context.Operators.Exists<Observation>(i_);
 
 		return j_;
@@ -900,37 +891,37 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	public bool? Denominator_Exceptions() => 
 		__Denominator_Exceptions.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

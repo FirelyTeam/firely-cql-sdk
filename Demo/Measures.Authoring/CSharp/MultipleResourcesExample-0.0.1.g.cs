@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -75,10 +74,9 @@ public class MultipleResourcesExample_0_0_1
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("72166-2", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -108,11 +106,10 @@ public class MultipleResourcesExample_0_0_1
 		{
 			Code<ObservationStatus> f_ = O?.StatusElement;
 			string g_ = FHIRHelpers_4_3_000.ToString(f_);
-			string[] h_ = new string[]
-			{
+			string[] h_ = [
 				"final",
 				"amended",
-			};
+			];
 			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
 
 			return i_;

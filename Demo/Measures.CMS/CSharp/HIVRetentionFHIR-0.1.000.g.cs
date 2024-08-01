@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -37,9 +36,9 @@ public class HIVRetentionFHIR_0_1_000
     internal Lazy<CqlCode[]> __CPT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period;
     internal Lazy<bool?> __Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period;
@@ -78,9 +77,9 @@ public class HIVRetentionFHIR_0_1_000
         __CPT = new Lazy<CqlCode[]>(this.CPT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period = new Lazy<bool?>(this.Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period_Value);
         __Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period = new Lazy<bool?>(this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Value);
@@ -208,7 +207,7 @@ public class HIVRetentionFHIR_0_1_000
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -244,18 +243,18 @@ public class HIVRetentionFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		List<Extension> a_()
 		{
@@ -288,11 +287,10 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
-		Extension[] e_ = new Extension[]
-		{
+		Extension[] e_ = [
 			d_,
-		};
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR f_(Extension E)
+		];
+		(IEnumerable<CqlCode> codes, string display)? f_(Extension E)
 		{
 			bool? q_(Extension @this)
 			{
@@ -316,10 +314,9 @@ public class HIVRetentionFHIR_0_1_000
 			DataType u_ = context.Operators.SingletonFrom<DataType>(t_);
 			Coding v_ = context.Operators.Convert<Coding>(u_);
 			CqlCode w_ = FHIRHelpers_4_3_000.ToCode(v_);
-			CqlCode[] x_ = new CqlCode[]
-			{
+			CqlCode[] x_ = [
 				w_,
-			};
+			];
 			bool? y_(Extension @this)
 			{
 				string ar_ = @this?.Url;
@@ -369,25 +366,21 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<DataType> ai_ = context.Operators.Select<Extension, DataType>(ag_, ah_);
 			DataType aj_ = context.Operators.SingletonFrom<DataType>(ai_);
 			string ak_ = context.Operators.Convert<string>(aj_);
-			Tuple_HPcCiDPXQfZTXIORThMLfTQDR al_ = new Tuple_HPcCiDPXQfZTXIORThMLfTQDR
-			{
-				codes = ae_,
-				display = ak_,
-			};
+			(IEnumerable<CqlCode> codes, string display)? al_ = (ae_, ak_);
 
 			return al_;
 		};
-		IEnumerable<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> g_ = context.Operators.Select<Extension, Tuple_HPcCiDPXQfZTXIORThMLfTQDR>((IEnumerable<Extension>)e_, f_);
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR h_ = context.Operators.SingletonFrom<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(g_);
+		IEnumerable<(IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.Select<Extension, (IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
+		(IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(IEnumerable<CqlCode> codes, string display)?>(g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		List<Extension> a_()
 		{
@@ -420,11 +413,10 @@ public class HIVRetentionFHIR_0_1_000
 		};
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
-		Extension[] e_ = new Extension[]
-		{
+		Extension[] e_ = [
 			d_,
-		};
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR f_(Extension R)
+		];
+		(IEnumerable<CqlCode> codes, string display)? f_(Extension R)
 		{
 			bool? q_(Extension @this)
 			{
@@ -502,22 +494,18 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<DataType> ag_ = context.Operators.Select<Extension, DataType>(ae_, af_);
 			DataType ah_ = context.Operators.SingletonFrom<DataType>(ag_);
 			string ai_ = context.Operators.Convert<string>(ah_);
-			Tuple_HPcCiDPXQfZTXIORThMLfTQDR aj_ = new Tuple_HPcCiDPXQfZTXIORThMLfTQDR
-			{
-				codes = ac_,
-				display = ai_,
-			};
+			(IEnumerable<CqlCode> codes, string display)? aj_ = (ac_, ai_);
 
 			return aj_;
 		};
-		IEnumerable<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> g_ = context.Operators.Select<Extension, Tuple_HPcCiDPXQfZTXIORThMLfTQDR>((IEnumerable<Extension>)e_, f_);
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR h_ = context.Operators.SingletonFrom<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(g_);
+		IEnumerable<(IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.Select<Extension, (IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
+		(IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(IEnumerable<CqlCode> codes, string display)?>(g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

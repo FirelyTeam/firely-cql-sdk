@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -324,25 +323,23 @@ public class TJCOverall_8_11_000
 			RequestStatus? k_ = j_?.Value;
 			Code<RequestStatus> l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
 			string m_ = context.Operators.Convert<string>(l_);
-			string[] n_ = new string[]
-			{
+			string[] n_ = [
 				"active",
 				"completed",
 				"on-hold",
-			};
+			];
 			bool? o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
 			Code<RequestIntent> p_ = SR?.IntentElement;
 			RequestIntent? q_ = p_?.Value;
 			Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
 			string s_ = context.Operators.Convert<string>(r_);
-			string[] t_ = new string[]
-			{
+			string[] t_ = [
 				"order",
 				"original-order",
 				"reflex-order",
 				"filler-order",
 				"instance-order",
-			};
+			];
 			bool? u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
 			bool? v_ = context.Operators.And(o_, u_);
 			FhirBoolean w_ = SR?.DoNotPerformElement;
@@ -360,11 +357,10 @@ public class TJCOverall_8_11_000
 			Code<EventStatus> ab_ = InterventionPerformed?.StatusElement;
 			EventStatus? ac_ = ab_?.Value;
 			string ad_ = context.Operators.Convert<string>(ac_);
-			string[] ae_ = new string[]
-			{
+			string[] ae_ = [
 				"completed",
 				"in-progress",
-			};
+			];
 			bool? af_ = context.Operators.In<string>(ad_, (ae_ as IEnumerable<string>));
 
 			return af_;

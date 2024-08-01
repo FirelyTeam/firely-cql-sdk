@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -36,7 +35,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>> __SDE_Payer;
+    internal Lazy<IEnumerable<(CodeableConcept code, Period period)?>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Telehealth_Services;
@@ -86,7 +85,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CodeableConcept code, Period period)?>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Telehealth_Services = new Lazy<IEnumerable<Encounter>>(this.Telehealth_Services_Value);
@@ -253,15 +252,15 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer_Value()
+	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+		IEnumerable<(CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer() => 
+	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -617,13 +616,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		{
 			Code<ObservationStatus> f_ = Mammogram?.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string[] h_ = new string[]
-			{
+			string[] h_ = [
 				"final",
 				"amended",
 				"corrected",
 				"appended",
-			};
+			];
 			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
 			DataType j_ = Mammogram?.Effective;
 			CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
@@ -660,13 +658,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		{
 			Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram?.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string[] h_ = new string[]
-			{
+			string[] h_ = [
 				"final",
 				"amended",
 				"corrected",
 				"appended",
-			};
+			];
 			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
 			DataType j_ = Mammogram?.Effective;
 			CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
@@ -734,13 +731,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		{
 			Code<ObservationStatus> f_ = Mammogram?.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string[] h_ = new string[]
-			{
+			string[] h_ = [
 				"final",
 				"amended",
 				"corrected",
 				"appended",
-			};
+			];
 			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
 			bool? j_ = context.Operators.Not(i_);
 			DataType k_ = Mammogram?.Effective;
@@ -778,13 +774,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		{
 			Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram?.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string[] h_ = new string[]
-			{
+			string[] h_ = [
 				"final",
 				"amended",
 				"corrected",
 				"appended",
-			};
+			];
 			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
 			bool? j_ = context.Operators.Not(i_);
 			DataType k_ = Mammogram?.Effective;

@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -296,10 +295,9 @@ public class CQMCommon_2_0_000
 	public CqlInterval<CqlDateTime> Hospitalization(Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(TheEncounter);
-		Encounter[] b_ = new Encounter[]
-		{
+		Encounter[] b_ = [
 			a_,
-		};
+		];
 		CqlInterval<CqlDateTime> c_(Encounter X)
 		{
 			CqlInterval<CqlDateTime> f_()
@@ -338,10 +336,9 @@ public class CQMCommon_2_0_000
 	public CqlInterval<CqlDateTime> hospitalization(Encounter TheEncounter)
 	{
 		Encounter a_ = this.edVisit(TheEncounter);
-		Encounter[] b_ = new Encounter[]
-		{
+		Encounter[] b_ = [
 			a_,
-		};
+		];
 		CqlInterval<CqlDateTime> c_(Encounter X)
 		{
 			CqlInterval<CqlDateTime> f_()
@@ -381,10 +378,9 @@ public class CQMCommon_2_0_000
 	public IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(TheEncounter);
-		Encounter[] b_ = new Encounter[]
-		{
+		Encounter[] b_ = [
 			a_,
-		};
+		];
 		IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
 		{
 			IEnumerable<Encounter.LocationComponent> f_()
@@ -399,11 +395,10 @@ public class CQMCommon_2_0_000
 				{
 					List<Encounter.LocationComponent> h_ = EDEncounter?.Location;
 					List<Encounter.LocationComponent> i_ = TheEncounter?.Location;
-					IEnumerable<Encounter.LocationComponent>[] j_ = new IEnumerable<Encounter.LocationComponent>[]
-					{
+					IEnumerable<Encounter.LocationComponent>[] j_ = [
 						(IEnumerable<Encounter.LocationComponent>)h_,
 						(IEnumerable<Encounter.LocationComponent>)i_,
-					};
+					];
 					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>((j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
 					return k_;
@@ -423,10 +418,9 @@ public class CQMCommon_2_0_000
 	public IEnumerable<Encounter.LocationComponent> hospitalizationLocations(Encounter TheEncounter)
 	{
 		Encounter a_ = this.edVisit(TheEncounter);
-		Encounter[] b_ = new Encounter[]
-		{
+		Encounter[] b_ = [
 			a_,
-		};
+		];
 		IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
 		{
 			IEnumerable<Encounter.LocationComponent> f_()
@@ -441,11 +435,10 @@ public class CQMCommon_2_0_000
 				{
 					List<Encounter.LocationComponent> h_ = EDEncounter?.Location;
 					List<Encounter.LocationComponent> i_ = TheEncounter?.Location;
-					IEnumerable<Encounter.LocationComponent>[] j_ = new IEnumerable<Encounter.LocationComponent>[]
-					{
+					IEnumerable<Encounter.LocationComponent>[] j_ = [
 						(IEnumerable<Encounter.LocationComponent>)h_,
 						(IEnumerable<Encounter.LocationComponent>)i_,
-					};
+					];
 					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>((j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
 
 					return k_;
@@ -705,10 +698,9 @@ public class CQMCommon_2_0_000
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationWithObservationAndOutpatientSurgeryService()` instead.")]
 	public CqlInterval<CqlDateTime> HospitalizationWithObservationAndOutpatientSurgeryService(Encounter TheEncounter)
 	{
-		Encounter[] a_ = new Encounter[]
-		{
+		Encounter[] a_ = [
 			TheEncounter,
-		};
+		];
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Outpatient_Surgery_Service();
@@ -1595,10 +1587,9 @@ public class CQMCommon_2_0_000
     [CqlTag("description", "Hospitalization with Observation and Outpatient Surgery Service returns the total interval from the start of any immediately prior emergency department visit, outpatient surgery visit or observation visit to the discharge of the given encounter.")]
 	public CqlInterval<CqlDateTime> hospitalizationWithObservationAndOutpatientSurgeryService(Encounter TheEncounter)
 	{
-		Encounter[] a_ = new Encounter[]
-		{
+		Encounter[] a_ = [
 			TheEncounter,
-		};
+		];
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Outpatient_Surgery_Service();
@@ -2486,10 +2477,9 @@ public class CQMCommon_2_0_000
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationWithObservation()` instead.")]
 	public CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
 	{
-		Encounter[] a_ = new Encounter[]
-		{
+		Encounter[] a_ = [
 			TheEncounter,
-		};
+		];
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit();
@@ -2719,10 +2709,9 @@ public class CQMCommon_2_0_000
     [CqlTag("description", "Hospitalization with Observation returns the total interval from the start of any immediately prior emergency department visit through the observation visit to the discharge of the given encounter")]
 	public CqlInterval<CqlDateTime> hospitalizationWithObservation(Encounter TheEncounter)
 	{
-		Encounter[] a_ = new Encounter[]
-		{
+		Encounter[] a_ = [
 			TheEncounter,
-		};
+		];
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit();

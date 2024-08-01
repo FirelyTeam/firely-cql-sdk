@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -143,10 +142,9 @@ public class NCQAStatus_1_0_0
 		{
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
-			string[] e_ = new string[]
-			{
+			string[] e_ = [
 				"completed",
-			};
+			];
 			bool? f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
@@ -179,11 +177,10 @@ public class NCQAStatus_1_0_0
 		{
 			Code<EventStatus> c_ = P?.StatusElement;
 			string d_ = FHIRHelpers_4_0_001.ToString(c_);
-			string[] e_ = new string[]
-			{
+			string[] e_ = [
 				"completed",
 				"in-progress",
-			};
+			];
 			bool? f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;

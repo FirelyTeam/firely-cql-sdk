@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -48,9 +47,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
     internal Lazy<CqlCode[]> __CPT;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter;
     internal Lazy<IEnumerable<Encounter>> __Encounter_With_Antibiotic_Ordered_Within_Three_Days;
@@ -106,9 +105,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
         __CPT = new Lazy<CqlCode[]>(this.CPT_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounter = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_Value);
         __Encounter_With_Antibiotic_Ordered_Within_Three_Days = new Lazy<IEnumerable<Encounter>>(this.Encounter_With_Antibiotic_Ordered_Within_Three_Days_Value);
@@ -328,11 +327,10 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("99217", "http://www.ama-assn.org/go/cpt", null, null),
 			new CqlCode("99429", "http://www.ama-assn.org/go/cpt", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -367,37 +365,37 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -596,32 +594,28 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Encounter_With_Antibiotic_Ordered_Within_Three_Days();
 		IEnumerable<Condition> b_ = this.Pharyngitis_or_Tonsillitis();
 		IEnumerable<ValueTuple<Encounter, Condition>> c_ = context.Operators.CrossJoin<Encounter, Condition>(a_, b_);
-		Tuple_YPYXEdbbCQBdAVHXVcKUWMfH d_(ValueTuple<Encounter, Condition> _valueTuple)
+		(Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)? d_(ValueTuple<Encounter, Condition> _valueTuple)
 		{
-			Tuple_YPYXEdbbCQBdAVHXVcKUWMfH j_ = new Tuple_YPYXEdbbCQBdAVHXVcKUWMfH
-			{
-				VisitWithAntibiotic = _valueTuple.Item1,
-				AcutePharyngitisTonsillitis = _valueTuple.Item2,
-			};
+			(Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)? j_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
 		};
-		IEnumerable<Tuple_YPYXEdbbCQBdAVHXVcKUWMfH> e_ = context.Operators.Select<ValueTuple<Encounter, Condition>, Tuple_YPYXEdbbCQBdAVHXVcKUWMfH>(c_, d_);
-		bool? f_(Tuple_YPYXEdbbCQBdAVHXVcKUWMfH tuple_ypyxedbbcqbdavhxvckuwmfh)
+		IEnumerable<(Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)?> e_ = context.Operators.Select<ValueTuple<Encounter, Condition>, (Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)?>(c_, d_);
+		bool? f_((Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)? tuple_ypyxedbbcqbdavhxvckuwmfh)
 		{
-			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_ypyxedbbcqbdavhxvckuwmfh.AcutePharyngitisTonsillitis);
+			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToPrevalenceInterval(tuple_ypyxedbbcqbdavhxvckuwmfh?.AcutePharyngitisTonsillitis);
 			CqlDateTime l_ = context.Operators.Start(k_);
-			Period m_ = tuple_ypyxedbbcqbdavhxvckuwmfh.VisitWithAntibiotic?.Period;
+			Period m_ = tuple_ypyxedbbcqbdavhxvckuwmfh?.VisitWithAntibiotic?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
 			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 			bool? p_ = context.Operators.In<CqlDateTime>(l_, o_, null);
 
 			return p_;
 		};
-		IEnumerable<Tuple_YPYXEdbbCQBdAVHXVcKUWMfH> g_ = context.Operators.Where<Tuple_YPYXEdbbCQBdAVHXVcKUWMfH>(e_, f_);
-		Encounter h_(Tuple_YPYXEdbbCQBdAVHXVcKUWMfH tuple_ypyxedbbcqbdavhxvckuwmfh) => 
-			tuple_ypyxedbbcqbdavhxvckuwmfh.VisitWithAntibiotic;
-		IEnumerable<Encounter> i_ = context.Operators.Select<Tuple_YPYXEdbbCQBdAVHXVcKUWMfH, Encounter>(g_, h_);
+		IEnumerable<(Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)?> g_ = context.Operators.Where<(Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)?>(e_, f_);
+		Encounter h_((Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)? tuple_ypyxedbbcqbdavhxvckuwmfh) => 
+			tuple_ypyxedbbcqbdavhxvckuwmfh?.VisitWithAntibiotic;
+		IEnumerable<Encounter> i_ = context.Operators.Select<(Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)?, Encounter>(g_, h_);
 
 		return i_;
 	}
@@ -741,24 +735,20 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Observation> a_ = this.Group_A_Streptococcus_Lab_Test_With_Result();
 		IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic();
 		IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
-		Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ d_(ValueTuple<Observation, Encounter> _valueTuple)
+		(Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? d_(ValueTuple<Observation, Encounter> _valueTuple)
 		{
-			Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ j_ = new Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ
-			{
-				GroupAStreptococcusTest = _valueTuple.Item1,
-				EncounterWithPharyngitis = _valueTuple.Item2,
-			};
+			(Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? j_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
 		};
-		IEnumerable<Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ> e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(c_, d_);
-		bool? f_(Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ tuple_ffguysnebcxllexfcmjoehbij)
+		IEnumerable<(Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?> e_ = context.Operators.Select<ValueTuple<Observation, Encounter>, (Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?>(c_, d_);
+		bool? f_((Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? tuple_ffguysnebcxllexfcmjoehbij)
 		{
-			DataType k_ = tuple_ffguysnebcxllexfcmjoehbij.GroupAStreptococcusTest?.Effective;
+			DataType k_ = tuple_ffguysnebcxllexfcmjoehbij?.GroupAStreptococcusTest?.Effective;
 			object l_ = FHIRHelpers_4_3_000.ToValue(k_);
 			CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
-			Period o_ = tuple_ffguysnebcxllexfcmjoehbij.EncounterWithPharyngitis?.Period;
+			Period o_ = tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis?.Period;
 			CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 			CqlDateTime q_ = context.Operators.End(p_);
 			CqlQuantity r_ = context.Operators.Quantity(3m, "days");
@@ -771,10 +761,10 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 			return z_;
 		};
-		IEnumerable<Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ> g_ = context.Operators.Where<Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ>(e_, f_);
-		Encounter h_(Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ tuple_ffguysnebcxllexfcmjoehbij) => 
-			tuple_ffguysnebcxllexfcmjoehbij.EncounterWithPharyngitis;
-		IEnumerable<Encounter> i_ = context.Operators.Select<Tuple_FfgUYSNEbcXLLEXFcMJOEHbiJ, Encounter>(g_, h_);
+		IEnumerable<(Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?> g_ = context.Operators.Where<(Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?>(e_, f_);
+		Encounter h_((Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? tuple_ffguysnebcxllexfcmjoehbij) => 
+			tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis;
+		IEnumerable<Encounter> i_ = context.Operators.Select<(Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)?, Encounter>(g_, h_);
 
 		return i_;
 	}

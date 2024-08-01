@@ -14,7 +14,6 @@ using Hl7.Cql.ValueSets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -30,23 +29,19 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// </summary>
     internal class CSharpLibrarySetToStreamsWriter
     {
-        private const string TuplesNamespace = "Tuples";
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
-        private readonly CSharpCodeWriterOptions _options;
+        private readonly IOptions<CSharpCodeWriterOptions> _options;
+        private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
-        /// <param name="options">The options <see cref="CSharpCodeWriterOptions"/></param>
-        /// <param name="typeResolver">The <see cref="TypeResolver"/> to use to include namespaces and aliases from.</param>
         public CSharpLibrarySetToStreamsWriter(
             ILogger<CSharpLibrarySetToStreamsWriter> logger,
             IOptions<CSharpCodeWriterOptions> options,
-            TypeResolver typeResolver)
+            TypeResolver typeResolver,
+            TypeToCSharpConverter typeToCSharpConverter)
         {
             _logger = logger;
-            _options = options.Value;
+            _typeToCSharpConverter = typeToCSharpConverter;
+            _options = options;
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
@@ -68,7 +63,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             var hashSet = new HashSet<string>
             {
                 nameof(System),
-                TuplesNamespace,
                 typeof(Enumerable).Namespace!, // System.Linq
                 typeof(ICollection<>).Namespace!, // System.Collections.Generic
                 typeof(CqlContext).Namespace!,
@@ -134,28 +128,20 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// </summary>
         /// <param name="definitions">The lambda expressions to write.</param>
         /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
-        /// <param name="tupleTypes">Tuple types generated during lambda creation.</param>
         /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
         public void ProcessDefinitions(
             DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
-            IReadOnlyCollection<Type> tupleTypes,
             CSharpSourceCodeWriterCallbacks? callbacks = default)
         {
             List<Stream> streamsToDispose = new();
             callbacks ??= new();
             try
             {
-                foreach (var tuple in WriteTupleTypes(tupleTypes, callbacks))
+                foreach (var (name, stream) in WriteLibraries(definitions, librarySet, callbacks))
                 {
-                    streamsToDispose.Add(tuple.stream);
-                    callbacks.Step(tuple.name, tuple.stream, isTuple: true);
-                }
-
-                foreach (var tuple in WriteLibraries(definitions, librarySet, callbacks, hasTuples:tupleTypes.Any()))
-                {
-                    streamsToDispose.Add(tuple.stream);
-                    callbacks.Step(tuple.name, tuple.stream, isTuple: false);
+                    streamsToDispose.Add(stream);
+                    callbacks.Step(name, stream);
                 }
 
                 callbacks.Done();
@@ -172,8 +158,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private IEnumerable<(string name, Stream stream)> WriteLibraries(
             DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
-            CSharpSourceCodeWriterCallbacks callbacks,
-            bool hasTuples)
+            CSharpSourceCodeWriterCallbacks callbacks)
         {
             if (!librarySet.Any())
             {
@@ -202,7 +187,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
                 int indentLevel = 0;
-                WriteUsings(writer, emitTupleNamespace:hasTuples);
+                WriteUsings(writer);
 
                 // Namespace
                 if (!string.IsNullOrWhiteSpace(Namespace))
@@ -309,7 +294,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
                         var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
-                        var returnType = ExpressionConverter.PrettyTypeName(overload.Item2.ReturnType);
+                        var returnType = _typeToCSharpConverter.ToCSharp(overload.Item2.ReturnType);
                         var privateMethodName = PrivateMethodNameFor(methodName!);
                         writer.WriteLine(indentLevel, $"{cachedValueName} = new Lazy<{returnType}>(this.{privateMethodName});");
                     }
@@ -348,50 +333,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
                         var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
-                        var returnType = ExpressionConverter.PrettyTypeName(overload.T.ReturnType);
+                        var returnType = _typeToCSharpConverter.ToCSharp(overload.T.ReturnType);
                         writer.WriteLine(indentLevel, $"{accessModifier} Lazy<{returnType}> {cachedValueName};");
                     }
                 }
             }
             writer.WriteLine();
             writer.WriteLine(indentLevel, "#endregion");
-        }
-
-        private IEnumerable<(string name, Stream stream)> WriteTupleTypes(
-            IReadOnlyCollection<Type> tupleTypes,
-            CSharpSourceCodeWriterCallbacks callbacks)
-        {
-            if (!tupleTypes.Any())
-            {
-                _logger.LogInformation($"No tuple types detected; skipping.");
-                yield break;
-            }
-
-            foreach (var tupleType in tupleTypes)
-            {
-                if (tupleType == null!)
-                    continue;
-
-                Debug.Assert(tupleType.Namespace == TuplesNamespace, $"If Tuples are expected to be in the {TuplesNamespace} namespace.");
-                var tupleLibraryName = Path.Combine(tupleType.Namespace!, tupleType.Name);
-                var stream = callbacks.GetStreamForLibraryName(tupleLibraryName);
-                if (stream == null!)
-                    continue;
-
-                using var writer = new StreamWriter(stream, leaveOpen: true);
-                WriteUsings(writer, emitTupleNamespace: false);
-                var indentLevel = 0;
-                writer.WriteLine();
-                writer.WriteLine(indentLevel, $"namespace {tupleType.Namespace}");
-                writer.WriteLine(indentLevel, "{");
-                indentLevel += 1;
-                WriteTupleType(writer, indentLevel, tupleType);
-                indentLevel -= 1;
-                writer.WriteLine(indentLevel, "}");
-                writer.Flush();
-
-                yield return (tupleLibraryName, stream);
-            }
         }
 
         private static bool IsDefinition(LambdaExpression overload) =>
@@ -448,7 +396,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
-            var simplifyNullConditionalMemberExpression = _options.TypeFormat == CSharpCodeWriterTypeFormat.Var;
+            var simplifyNullConditionalMemberExpression = _options.Value.TypeFormat == CSharpCodeWriterTypeFormat.Var;
             var visitedBody = Transform(
                 overload.Body,
                 new RedundantCastsTransformer(),
@@ -457,10 +405,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                     SimplifyNullConditionalMemberExpression = simplifyNullConditionalMemberExpression
                 },
                 new RenameVariablesVisitor(vng),
-                new LocalVariableDeduper()
+                new LocalVariableDeduper(_typeToCSharpConverter)
             );
 
-            var expressionConverter = new ExpressionConverter(libraryName, _options.TypeFormat);
+            var expressionConverter = new ExpressionToCSharpConverter(libraryName, _options, _typeToCSharpConverter);
 
             // Skip CqlContext
             var parameters = overload.Parameters.Skip(1);
@@ -508,7 +456,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
                 writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
-                //      writer.WriteLine();
             }
         }
 
@@ -526,41 +473,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteUsings(TextWriter writer, bool emitTupleNamespace)
+        private void WriteUsings(TextWriter writer)
         {
             foreach (var @using in _usings)
             {
-                if (!emitTupleNamespace && @using == TuplesNamespace)
-                    continue;
-
                 writer.WriteLine($"using {@using};");
             }
             foreach (var @using in _aliasedUsings)
             {
                 writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
             }
-        }
-
-        private void WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
-        {
-            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
-            writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {ExpressionConverter.PrettyTypeName(tupleType.BaseType!)}");
-            writer.WriteLine(indentLevel, "{");
-
-            indentLevel++;
-            foreach (var property in tupleType.GetProperties())
-            {
-                var normalizedName = VariableNameGenerator.NormalizeIdentifier(property.Name);
-                var propertyType = ExpressionConverter.PrettyTypeName(property.PropertyType);
-                var cqlDeclarationAttribute = property.GetCustomAttribute<CqlDeclarationAttribute>();
-                if (cqlDeclarationAttribute != null)
-                {
-                    writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlDeclarationAttribute.Name}\")]");
-                }
-                writer.WriteLine(indentLevel, $"public {propertyType} {normalizedName} {{ get; set; }}");
-            }
-            indentLevel--;
-            writer.WriteLine(indentLevel, $"}}");
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)

@@ -44,11 +44,17 @@ internal class CqlPackagerFactory : CqlCompilerFactory
     public virtual CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper => Singleton(NewCqlTypeToFhirTypeMapper);
     protected virtual CqlTypeToFhirTypeMapper NewCqlTypeToFhirTypeMapper() => new(TypeResolver);
 
+    public virtual TypeToCSharpConverter TypeToCSharpConverter => Singleton(NewTypeToCSharpConverter);
+
+    protected virtual TypeToCSharpConverter NewTypeToCSharpConverter() =>
+        new TypeToCSharpConverter();
+
     public virtual CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => Singleton(NewCSharpLibrarySetToStreamsWriter);
     protected virtual CSharpLibrarySetToStreamsWriter NewCSharpLibrarySetToStreamsWriter() => new(
         Logger<CSharpLibrarySetToStreamsWriter>(),
         Options(CSharpCodeWriterOptions),
-        TypeResolver);
+        TypeResolver,
+        TypeToCSharpConverter);
 
     public virtual CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => Singleton(NewCSharpCodeStreamPostProcessorOrNull);
     protected virtual CSharpCodeStreamPostProcessor? NewCSharpCodeStreamPostProcessorOrNull() =>

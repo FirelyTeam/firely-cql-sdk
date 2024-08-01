@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -33,7 +32,7 @@ public class PCMaternal_5_16_000
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_Age_Range;
     internal Lazy<IEnumerable<Encounter>> __Delivery_Encounter_with_Age_Range;
-    internal Lazy<IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>> __Variable_Calculated_Gestational_Age;
+    internal Lazy<IEnumerable<(string EncounterID, int? CalculatedCGA)?>> __Variable_Calculated_Gestational_Age;
 
     #endregion
     public PCMaternal_5_16_000(CqlContext context)
@@ -56,7 +55,7 @@ public class PCMaternal_5_16_000
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Encounter_with_Age_Range = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_Age_Range_Value);
         __Delivery_Encounter_with_Age_Range = new Lazy<IEnumerable<Encounter>>(this.Delivery_Encounter_with_Age_Range_Value);
-        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>>(this.Variable_Calculated_Gestational_Age_Value);
+        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<(string EncounterID, int? CalculatedCGA)?>>(this.Variable_Calculated_Gestational_Age_Value);
     }
     #region Dependencies
 
@@ -122,11 +121,10 @@ public class PCMaternal_5_16_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("93857-1", "http://loinc.org", null, null),
 			new CqlCode("11778-8", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -192,10 +190,9 @@ public class PCMaternal_5_16_000
     [CqlDeclaration("hospitalizationWithEDOBTriageObservation")]
 	public CqlInterval<CqlDateTime> hospitalizationWithEDOBTriageObservation(Encounter TheEncounter)
 	{
-		Encounter[] a_ = new Encounter[]
-		{
+		Encounter[] a_ = [
 			TheEncounter,
-		};
+		];
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.ED_Visit_and_OB_Triage();
@@ -475,12 +472,11 @@ public class PCMaternal_5_16_000
 			ObservationStatus? o_ = n_?.Value;
 			Code<ObservationStatus> p_ = context.Operators.Convert<Code<ObservationStatus>>(o_);
 			string q_ = context.Operators.Convert<string>(p_);
-			string[] r_ = new string[]
-			{
+			string[] r_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
 			bool? t_ = context.Operators.And(m_, s_);
 			object u_()
@@ -627,12 +623,11 @@ public class PCMaternal_5_16_000
 			ObservationStatus? o_ = n_?.Value;
 			Code<ObservationStatus> p_ = context.Operators.Convert<Code<ObservationStatus>>(o_);
 			string q_ = context.Operators.Convert<string>(p_);
-			string[] r_ = new string[]
-			{
+			string[] r_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
 			bool? t_ = context.Operators.And(m_, s_);
 			object u_()
@@ -778,29 +773,25 @@ public class PCMaternal_5_16_000
 		return e_;
 	}
 
-	private IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> Variable_Calculated_Gestational_Age_Value()
+	private IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Age_Range();
-		Tuple_QRZgNJCaGQEYIeOSBhjLZNSO b_(Encounter DeliveryEncounter)
+		(string EncounterID, int? CalculatedCGA)? b_(Encounter DeliveryEncounter)
 		{
 			Id d_ = DeliveryEncounter?.IdElement;
 			string e_ = d_?.Value;
 			int? f_ = this.calculatedGestationalAge(DeliveryEncounter);
-			Tuple_QRZgNJCaGQEYIeOSBhjLZNSO g_ = new Tuple_QRZgNJCaGQEYIeOSBhjLZNSO
-			{
-				EncounterID = e_,
-				CalculatedCGA = f_,
-			};
+			(string EncounterID, int? CalculatedCGA)? g_ = (e_, f_);
 
 			return g_;
 		};
-		IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> c_ = context.Operators.Select<Encounter, Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>(a_, b_);
+		IEnumerable<(string EncounterID, int? CalculatedCGA)?> c_ = context.Operators.Select<Encounter, (string EncounterID, int? CalculatedCGA)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> Variable_Calculated_Gestational_Age() => 
+	public IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age() => 
 		__Variable_Calculated_Gestational_Age.Value;
 
     [CqlDeclaration("lastEstimatedGestationalAge")]
@@ -878,12 +869,11 @@ public class PCMaternal_5_16_000
 			ObservationStatus? z_ = y_?.Value;
 			Code<ObservationStatus> aa_ = context.Operators.Convert<Code<ObservationStatus>>(z_);
 			string ab_ = context.Operators.Convert<string>(aa_);
-			string[] ac_ = new string[]
-			{
+			string[] ac_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? ad_ = context.Operators.In<string>(ab_, (ac_ as IEnumerable<string>));
 			bool? ae_ = context.Operators.And(x_, ad_);
 			object af_()
