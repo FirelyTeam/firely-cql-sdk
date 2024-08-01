@@ -19,7 +19,9 @@ namespace Hl7.Cql.Compiler;
 /// <remarks>This happens currently in QICore-based CQL, where the functions only differ
 /// by profiles on the same resource, which results in the same signature after the QICore
 /// profile names are erased by the compiler. This is a temporary fix that should be
-/// corrected in the compiler. Until that moment, we'll just pick the first overload.</remarks>
+/// corrected in the compiler. Until that moment, we'll just pick the first overload.
+/// See https://github.com/FirelyTeam/firely-cql-sdk/issues/438 for more info.
+/// </remarks>
 internal class AmbiguousOverloadCorrector()
 {
     public void Fix(Library library)

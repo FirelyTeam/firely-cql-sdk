@@ -1154,7 +1154,7 @@ partial class ExpressionBuilderContext
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
         var funcType = convertedArguments.Select(a=>a.Type).Append(rtt).ToArray();
-        Type definitionType = GetFuncType(funcType);
+        Type definitionType = Expression.GetFuncType(funcType);
 
         return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
     }

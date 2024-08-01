@@ -173,7 +173,7 @@ namespace Hl7.Cql.Elm
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
-        public override string ToString() => $" {Name} : {resultTypeSpecifier}";
+        public override string ToString() => $"{Name}:{resultTypeSpecifier}";
     }
 
     public partial class FunctionDef : IHasSignature
@@ -412,6 +412,7 @@ namespace Hl7.Cql.Elm
         public OverloadedFunctionDef Add(FunctionDef function)
         {
             // TODO: This does not guard against duplicate signatures, like the Create method does.
+            // See https://github.com/FirelyTeam/firely-cql-sdk/issues/439
             if (function.name != Name)
                 throw new InvalidOperationException($"All functions should have the same name.");
             _functions.Add(function);
