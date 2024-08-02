@@ -60,15 +60,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         // : 'Tuple' '{' tupleElementDefinition (',' tupleElementDefinition)* '}'
-        public override TypeSpecifier VisitTupleTypeSpecifier([NotNull] cqlParser.TupleTypeSpecifierContext context)
-        {
-            var tuple = new TupleTypeSpecifier
+        public override TypeSpecifier VisitTupleTypeSpecifier([NotNull] cqlParser.TupleTypeSpecifierContext context) =>
+            new TupleTypeSpecifier
             {
-                element = context.tupleElementDefinition().Select(ted => ted.Parse(this)).ToArray(),
+                element = context.tupleElementDefinition()
+                    .Select(ted => ted.Parse(this))
+                    .OrderBy(ted=>ted.name)
+                    .ToArray(),
             }.WithLocator(context.Locator());
 
-            return tuple;
-        }
 
         //    : (qualifier '.')* referentialOrTypeNameIdentifier
         public override TypeSpecifier VisitNamedTypeSpecifier([NotNull] cqlParser.NamedTypeSpecifierContext context)

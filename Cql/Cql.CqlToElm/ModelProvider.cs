@@ -75,13 +75,11 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// Creates a new <see cref="Elm.TupleTypeSpecifier"/> based on a <see cref="Model.TupleTypeSpecifier"/>.
         /// </summary>
-        public static Elm.TupleTypeSpecifier ToElm(this Model.TupleTypeSpecifier tts, IModelProvider provider)
-        {
-            return new()
+        public static Elm.TupleTypeSpecifier ToElm(this Model.TupleTypeSpecifier tts, IModelProvider provider) =>
+            new()
             {
-                element = tts.element.Select(e => e.ToElm(provider)).ToArray(),
+                element = tts.element.OrderBy(e=>e.name).Select(e => e.ToElm(provider)).ToArray(),
             };
-        }
 
 
         /// <summary>

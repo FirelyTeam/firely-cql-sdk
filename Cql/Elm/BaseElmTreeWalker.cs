@@ -68,17 +68,18 @@ internal abstract class BaseElmTreeWalker
         if (Process(node))
             return;
 
-        var propertyValues = node.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
+        var propertyTuples = node.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                  .Where(p => p.CanRead && IsRelevant(p.PropertyType))
-                                 .Select(p => p.GetValue(node))
-                                 .Where(v => v is not null);
+                                 .Select(p => (p, p.GetValue(node)))
+                                 .Where(v => v.Item2 is not null);
 
         try
         {
             _visited.Push(node);
 
-            foreach (var propValue in propertyValues)
+            foreach (var tuple in propertyTuples)
             {
+                var propValue = tuple.Item2;
                 if (propValue is IEnumerable enumerable)
                 {
                     foreach (var item in enumerable)
