@@ -4,16 +4,38 @@ The repository consists of two parts:
 * `Cql/` - the main body of code that produces the CQL engine itself, plus the PackagerCLI
 * `Demo/` - a solution that demoes how to get from a CQL measure to an executable rule.
 
-It is important that you either build the Cql engine yourself before you try to build the Demo solution, since that uses parts of the Cql solution. Alternatively, you can tweak the Demo project to use the shipped NuGet packages for the Cql engine, instead of referring to the projects directly.
+It also links to sub module repositories that may be of interest to you:
+* `Firely.Cql.Sdk.Integration.Runner/` - an integration test runner used to run CMS measures.
+
+It is important that you either build the Cql engine yourself before you try to build the Demo solution, 
+since that uses parts of the Cql solution. 
+Alternatively, you can tweak the Demo project to use the shipped NuGet packages for the Cql engine, 
+instead of referring to the projects directly.
 
 ## The Cql solution
-Building the Cql solution should be as simple as doing a build in Visual Studio or running a `dotnet build`. It builds the CQL engine into a
-whole bunch of assemblies, plus builds the only executable in the solution, the PackagerCLI. The PackagerCLI takes CQL measures (in the form
-of ELM), turns them into equivalent C#, compiles the C# and then packages the original ELM, the C# code and the binary assembly data into a FHIR Library resources. It is used in the Demo project, so if you'd like to see example use for it (until we write the documentation), take a look at the provided
-`"ELM to C#"` build target in the Elm project within the Demo solution.
+Building the Cql solution should be as simple as doing a build in Visual Studio or running a `dotnet build`. 
+It builds the CQL engine into a whole bunch of assemblies, 
+plus builds the only executable in the solution, the PackagerCLI. 
+The PackagerCLI takes CQL measures (in the form of ELM), 
+turns them into equivalent C#, 
+compiles the C# and then packages the original ELM, 
+the C# code and the binary assembly data into a FHIR Library resources.
+It is used in the Demo project, 
+so if you'd like to see example use for it (until we write the documentation),
+take a look at the provided `"ELM to C#"` build target in the Elm project within the Demo solution.
 
 The folder also contains a `CQL Engine v2.png` and `CQL Engine Architecture.docx` file that sketch the internal structure of the CQL engine. As should
 be expected, those files will always be somewhat outdated, but still serve as good overview of the codebase.
+
+* Read how to [get started with the Demo solution](docs/getting-started.md) included in the repository.
+* There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
+* [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
+* A [word document](cql/CQL%20Engine%20Architecture.docx) with background documentation on the design. May be somewhat outdated.
+* A [diagram](docs/packager-cli-dependency-graph.md) showing how all the classes and their dependencies involved.
+* A [graphic](docs/CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
+
+The presentation is a good place to start, but note that we have made some minor changes to the public surface, 
+so the names of the classes in the presentation will differ from the examples in the Demo project itself.
 
 
 ## The Demo folder
