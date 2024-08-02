@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -57,7 +56,7 @@ public class Exam130FHIR_0_0_003
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>> __SDE_Payer;
+    internal Lazy<IEnumerable<(CodeableConcept code, Period period)?>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Telehealth_Services;
@@ -68,12 +67,12 @@ public class Exam130FHIR_0_0_003
     internal Lazy<IEnumerable<Procedure>> __Total_Colectomy_Performed;
     internal Lazy<IEnumerable<Condition>> __Total_Colectomy_Condition;
     internal Lazy<bool?> __Denominator_Exclusions;
-    internal Lazy<IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL>> __Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status;
+    internal Lazy<IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>> __Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status;
     internal Lazy<IEnumerable<Observation>> __Fecal_Occult_Blood_Test_Performed;
     internal Lazy<IEnumerable<Observation>> __Fecal_Occult_Blood_Test_Performed__day_of_TZoffset;
     internal Lazy<IEnumerable<Observation>> __Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset;
     internal Lazy<IEnumerable<Observation>> __Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset;
-    internal Lazy<IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL>> __Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status;
+    internal Lazy<IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>> __Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status;
     internal Lazy<IEnumerable<Observation>> __Fecal_Immunochemical_Test_DNA_Performed;
     internal Lazy<IEnumerable<Observation>> __Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset;
     internal Lazy<IEnumerable<Observation>> __Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset;
@@ -140,7 +139,7 @@ public class Exam130FHIR_0_0_003
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CodeableConcept code, Period period)?>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Telehealth_Services = new Lazy<IEnumerable<Encounter>>(this.Telehealth_Services_Value);
@@ -151,12 +150,12 @@ public class Exam130FHIR_0_0_003
         __Total_Colectomy_Performed = new Lazy<IEnumerable<Procedure>>(this.Total_Colectomy_Performed_Value);
         __Total_Colectomy_Condition = new Lazy<IEnumerable<Condition>>(this.Total_Colectomy_Condition_Value);
         __Denominator_Exclusions = new Lazy<bool?>(this.Denominator_Exclusions_Value);
-        __Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status = new Lazy<IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL>>(this.Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Value);
+        __Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status = new Lazy<IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>>(this.Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Value);
         __Fecal_Occult_Blood_Test_Performed = new Lazy<IEnumerable<Observation>>(this.Fecal_Occult_Blood_Test_Performed_Value);
         __Fecal_Occult_Blood_Test_Performed__day_of_TZoffset = new Lazy<IEnumerable<Observation>>(this.Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Value);
         __Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset = new Lazy<IEnumerable<Observation>>(this.Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value);
         __Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset = new Lazy<IEnumerable<Observation>>(this.Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value);
-        __Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status = new Lazy<IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL>>(this.Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Value);
+        __Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status = new Lazy<IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>>(this.Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Value);
         __Fecal_Immunochemical_Test_DNA_Performed = new Lazy<IEnumerable<Observation>>(this.Fecal_Immunochemical_Test_DNA_Performed_Value);
         __Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset = new Lazy<IEnumerable<Observation>>(this.Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Value);
         __Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset = new Lazy<IEnumerable<Observation>>(this.Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value);
@@ -443,10 +442,9 @@ public class Exam130FHIR_0_0_003
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -492,15 +490,15 @@ public class Exam130FHIR_0_0_003
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer_Value()
+	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+		IEnumerable<(CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer() => 
+	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -718,7 +716,7 @@ public class Exam130FHIR_0_0_003
 	public bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Value()
+	private IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
@@ -737,7 +735,7 @@ public class Exam130FHIR_0_0_003
 			return p_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-		Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL e_(Observation FecalOccult)
+		(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FecalOccult)
 		{
 			DataType q_ = FecalOccult?.Effective;
 			CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(q_);
@@ -806,23 +804,17 @@ public class Exam130FHIR_0_0_003
 			};
 			IEnumerable<string> al_ = context.Operators.Select<Code, string>(aj_, ak_);
 			Code<ObservationStatus> am_ = FecalOccult?.StatusElement;
-			Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL an_ = new Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL
-			{
-				occultDate = r_,
-				occultResult = x_,
-				occultCategoryCode = al_,
-				occultStatus = am_,
-			};
+			(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? an_ = (r_, x_, al_, am_);
 
 			return an_;
 		};
-		IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL> f_ = context.Operators.Select<Observation, Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL>(d_, e_);
+		IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Display Date, Result, Category, Status")]
-	public IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status() => 
+	public IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status() => 
 		__Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status.Value;
 
 	private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_Value()
@@ -833,12 +825,11 @@ public class Exam130FHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = FecalOccult?.Category;
 			bool? j_(CodeableConcept FecalOccultCategory)
@@ -874,10 +865,9 @@ public class Exam130FHIR_0_0_003
 					return al_;
 				};
 				IEnumerable<string> ad_ = context.Operators.Select<Code, string>(ab_, ac_);
-				string[] ae_ = new string[]
-				{
+				string[] ae_ = [
 					"laboratory",
-				};
+				];
 				bool? af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
 
 				return af_;
@@ -913,12 +903,11 @@ public class Exam130FHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = FecalOccult?.Category;
 			bool? j_(CodeableConcept FecalOccultCategory)
@@ -954,10 +943,9 @@ public class Exam130FHIR_0_0_003
 					return al_;
 				};
 				IEnumerable<string> ad_ = context.Operators.Select<Code, string>(ab_, ac_);
-				string[] ae_ = new string[]
-				{
+				string[] ae_ = [
 					"laboratory",
-				};
+				];
 				bool? af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
 
 				return af_;
@@ -1025,10 +1013,9 @@ public class Exam130FHIR_0_0_003
 					return ah_;
 				};
 				IEnumerable<string> y_ = context.Operators.Select<Code, string>(w_, x_);
-				string[] z_ = new string[]
-				{
+				string[] z_ = [
 					"laboratory",
-				};
+				];
 				bool? aa_ = context.Operators.Equivalent<string>(y_, (z_ as IEnumerable<string>));
 				bool? ab_ = context.Operators.Not(aa_);
 
@@ -1064,12 +1051,11 @@ public class Exam130FHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			bool? i_ = context.Operators.Not(h_);
 			DataType j_ = FecalOccult?.Value;
@@ -1092,7 +1078,7 @@ public class Exam130FHIR_0_0_003
 	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset() => 
 		__Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset.Value;
 
-	private IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Value()
+	private IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
@@ -1114,7 +1100,7 @@ public class Exam130FHIR_0_0_003
 			return t_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-		Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL e_(Observation FitDNA)
+		(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FitDNA)
 		{
 			DataType u_ = FitDNA?.Effective;
 			CqlDateTime v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(u_);
@@ -1183,23 +1169,17 @@ public class Exam130FHIR_0_0_003
 			};
 			IEnumerable<string> ap_ = context.Operators.Select<Code, string>(an_, ao_);
 			Code<ObservationStatus> aq_ = FitDNA?.StatusElement;
-			Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL ar_ = new Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL
-			{
-				occultDate = v_,
-				occultResult = ab_,
-				occultCategoryCode = ap_,
-				occultStatus = aq_,
-			};
+			(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ar_ = (v_, ab_, ap_, aq_);
 
 			return ar_;
 		};
-		IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL> f_ = context.Operators.Select<Observation, Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL>(d_, e_);
+		IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Display Date, Result, Category, Status")]
-	public IEnumerable<Tuple_DDeEOBQXHDLDYTUSRPAFYZUVL> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status() => 
+	public IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status() => 
 		__Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status.Value;
 
 	private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_Value()
@@ -1210,12 +1190,11 @@ public class Exam130FHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = FitDNA?.Category;
 			bool? j_(CodeableConcept FitDNACategory)
@@ -1251,10 +1230,9 @@ public class Exam130FHIR_0_0_003
 					return av_;
 				};
 				IEnumerable<string> an_ = context.Operators.Select<Code, string>(al_, am_);
-				string[] ao_ = new string[]
-				{
+				string[] ao_ = [
 					"laboratory",
-				};
+				];
 				bool? ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
 
 				return ap_;
@@ -1298,12 +1276,11 @@ public class Exam130FHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = FitDNA?.Category;
 			bool? j_(CodeableConcept FitDNACategory)
@@ -1339,10 +1316,9 @@ public class Exam130FHIR_0_0_003
 					return av_;
 				};
 				IEnumerable<string> an_ = context.Operators.Select<Code, string>(al_, am_);
-				string[] ao_ = new string[]
-				{
+				string[] ao_ = [
 					"laboratory",
-				};
+				];
 				bool? ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
 
 				return ap_;
@@ -1418,10 +1394,9 @@ public class Exam130FHIR_0_0_003
 					return ar_;
 				};
 				IEnumerable<string> ai_ = context.Operators.Select<Code, string>(ag_, ah_);
-				string[] aj_ = new string[]
-				{
+				string[] aj_ = [
 					"laboratory",
-				};
+				];
 				bool? ak_ = context.Operators.Equivalent<string>(ai_, (aj_ as IEnumerable<string>));
 				bool? al_ = context.Operators.Not(ak_);
 
@@ -1465,12 +1440,11 @@ public class Exam130FHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			bool? i_ = context.Operators.Not(h_);
 			DataType j_ = FitDNA?.Value;
@@ -1548,13 +1522,12 @@ public class Exam130FHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = Colonography?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
 				"appended",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			DataType i_ = Colonography?.Effective;
 			CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(i_);
@@ -1590,13 +1563,12 @@ public class Exam130FHIR_0_0_003
 		{
 			Code<ObservationStatus> e_ = Colonography?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.ToString(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
 				"appended",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			bool? i_ = context.Operators.Not(h_);
 			DataType j_ = Colonography?.Effective;

@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -86,11 +85,10 @@ public class HospiceFHIR4_2_3_000
 
 	private CqlCode[] SNOMEDCT_2017_09_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
 			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -161,11 +159,10 @@ public class HospiceFHIR4_2_3_000
 		{
 			Code<RequestStatus> ao_ = HospiceOrder?.StatusElement;
 			string ap_ = FHIRHelpers_4_0_001.ToString(ao_);
-			string[] aq_ = new string[]
-			{
+			string[] aq_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? ar_ = context.Operators.In<string>(ap_, (aq_ as IEnumerable<string>));
 			Code<RequestIntent> as_ = HospiceOrder?.IntentElement;
 			string at_ = FHIRHelpers_4_0_001.ToString(as_);

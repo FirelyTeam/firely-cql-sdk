@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -70,11 +69,10 @@ public class DevDays_2023_0_0
 
 	private CqlCode[] ICD10_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", null, null),
 			new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", null, null),
-		};
+		];
 
 		return a_;
 	}

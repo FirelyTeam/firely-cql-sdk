@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -54,9 +53,9 @@ public class KidneyHealthEvaluationFHIR_0_1_000
     internal Lazy<bool?> __Denominator_Exclusions;
     internal Lazy<bool?> __Has_Kidney_Panel_Performed_During_Measurement_Period;
     internal Lazy<bool?> __Numerator;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -104,9 +103,9 @@ public class KidneyHealthEvaluationFHIR_0_1_000
         __Denominator_Exclusions = new Lazy<bool?>(this.Denominator_Exclusions_Value);
         __Has_Kidney_Panel_Performed_During_Measurement_Period = new Lazy<bool?>(this.Has_Kidney_Panel_Performed_During_Measurement_Period_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -278,11 +277,10 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
 			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -293,10 +291,9 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 	private CqlCode[] ActCode_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -307,10 +304,9 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 	private CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -519,12 +515,11 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			ObservationStatus? v_ = u_?.Value;
 			Code<ObservationStatus> w_ = context.Operators.Convert<Code<ObservationStatus>>(v_);
 			string x_ = context.Operators.Convert<string>(w_);
-			string[] y_ = new string[]
-			{
+			string[] y_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
 			bool? aa_ = context.Operators.And(t_, z_);
 
@@ -549,12 +544,11 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 			ObservationStatus? al_ = ak_?.Value;
 			Code<ObservationStatus> am_ = context.Operators.Convert<Code<ObservationStatus>>(al_);
 			string an_ = context.Operators.Convert<string>(am_);
-			string[] ao_ = new string[]
-			{
+			string[] ao_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? ap_ = context.Operators.In<string>(an_, (ao_ as IEnumerable<string>));
 			bool? aq_ = context.Operators.And(aj_, ap_);
 
@@ -582,37 +576,37 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	public bool? Numerator() => 
 		__Numerator.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

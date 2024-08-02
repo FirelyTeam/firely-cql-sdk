@@ -49,15 +49,15 @@ internal class CSharpSourceCodeWriterCallbacks
     public string? LibraryNameToClassName(string libraryName) =>
         _libraryNameToClassName(libraryName);
 
-    public void Step(string libraryName, Stream stream, bool isTuple) =>
-        _onAfterStep?.Invoke(new CSharpSourceCodeStep.OnStream(libraryName, stream, isTuple));
+    public void Step(string libraryName, Stream stream) =>
+        _onAfterStep?.Invoke(new CSharpSourceCodeStep.OnStream(libraryName, stream));
 
     public void Done() =>
         _onAfterStep?.Invoke(new CSharpSourceCodeStep.OnDone());
 }
 internal abstract record CSharpSourceCodeStep
 {
-    public record OnStream(string Name, Stream Stream, bool IsTuple) : CSharpSourceCodeStep;
+    public record OnStream(string Name, Stream Stream) : CSharpSourceCodeStep;
 
     public record OnDone() : CSharpSourceCodeStep;
 }

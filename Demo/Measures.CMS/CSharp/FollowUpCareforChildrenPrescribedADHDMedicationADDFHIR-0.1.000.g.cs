@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -54,7 +53,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
     internal Lazy<CqlDateTime> __March_1_of_Year_Prior_to_Measurement_Period;
     internal Lazy<CqlDateTime> __Last_Calendar_Day_of_February_of_Measurement_Period;
     internal Lazy<CqlInterval<CqlDateTime>> __Intake_Period;
-    internal Lazy<IEnumerable<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW>> __ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication;
+    internal Lazy<IEnumerable<(CqlDate startDate, nint _)?>> __ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication;
     internal Lazy<CqlDate> __First_ADHD_Medication_Prescribed_During_Intake_Period;
     internal Lazy<CqlDate> __IPSD;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter;
@@ -77,9 +76,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
     internal Lazy<bool?> __Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase;
     internal Lazy<IEnumerable<CqlDate>> __Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase;
     internal Lazy<bool?> __Numerator_2;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -127,7 +126,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
         __March_1_of_Year_Prior_to_Measurement_Period = new Lazy<CqlDateTime>(this.March_1_of_Year_Prior_to_Measurement_Period_Value);
         __Last_Calendar_Day_of_February_of_Measurement_Period = new Lazy<CqlDateTime>(this.Last_Calendar_Day_of_February_of_Measurement_Period_Value);
         __Intake_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Intake_Period_Value);
-        __ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication = new Lazy<IEnumerable<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW>>(this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value);
+        __ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication = new Lazy<IEnumerable<(CqlDate startDate, nint _)?>>(this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value);
         __First_ADHD_Medication_Prescribed_During_Intake_Period = new Lazy<CqlDate>(this.First_ADHD_Medication_Prescribed_During_Intake_Period_Value);
         __IPSD = new Lazy<CqlDate>(this.IPSD_Value);
         __Qualifying_Encounter = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_Value);
@@ -150,9 +149,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
         __Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase = new Lazy<bool?>(this.Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value);
         __Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase = new Lazy<IEnumerable<CqlDate>>(this.Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value);
         __Numerator_2 = new Lazy<bool?>(this.Numerator_2_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -382,11 +381,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private CqlCode[] RXNORM_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
 			new CqlCode("977860", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -467,7 +465,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	public CqlInterval<CqlDateTime> Intake_Period() => 
 		__Intake_Period.Value;
 
-	private IEnumerable<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value()
+	private IEnumerable<(CqlDate startDate, nint _)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value()
 	{
 		CqlValueSet a_ = this.Atomoxetine();
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
@@ -634,51 +632,48 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		};
 		IEnumerable<MedicationRequest> cz_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(cx_, cy_);
 		IEnumerable<MedicationRequest> da_ = context.Operators.Except<MedicationRequest>(ay_, cz_);
-		Tuple_CVELXTjiMTaGQEjMfJXBdUHjW db_(MedicationRequest QualifyingMed)
+		(CqlDate startDate, nint _)? db_(MedicationRequest QualifyingMed)
 		{
 			CqlInterval<CqlDate> gd_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(QualifyingMed);
 			CqlDate ge_ = context.Operators.Start(gd_);
-			Tuple_CVELXTjiMTaGQEjMfJXBdUHjW gf_ = new Tuple_CVELXTjiMTaGQEjMfJXBdUHjW
-			{
-				startDate = ge_,
-			};
+			(CqlDate startDate, nint _)? gf_ = (ge_, default);
 
 			return gf_;
 		};
-		IEnumerable<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW> dc_ = context.Operators.Select<MedicationRequest, Tuple_CVELXTjiMTaGQEjMfJXBdUHjW>(da_, db_);
-		object dd_(Tuple_CVELXTjiMTaGQEjMfJXBdUHjW @this)
+		IEnumerable<(CqlDate startDate, nint _)?> dc_ = context.Operators.Select<MedicationRequest, (CqlDate startDate, nint _)?>(da_, db_);
+		object dd_((CqlDate startDate, nint _)? @this)
 		{
 			CqlDate gg_ = @this?.startDate;
 
 			return gg_;
 		};
-		IEnumerable<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW> de_ = context.Operators.SortBy<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
+		IEnumerable<(CqlDate startDate, nint _)?> de_ = context.Operators.SortBy<(CqlDate startDate, nint _)?>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
 
 		return de_;
 	}
 
     [CqlDeclaration("ADHD Medication Prescribed During Intake Period and Not Previously on ADHD Medication")]
-	public IEnumerable<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication() => 
+	public IEnumerable<(CqlDate startDate, nint _)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication() => 
 		__ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication.Value;
 
 	private CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period_Value()
 	{
-		IEnumerable<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW> a_ = this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication();
-		bool? b_(Tuple_CVELXTjiMTaGQEjMfJXBdUHjW @this)
+		IEnumerable<(CqlDate startDate, nint _)?> a_ = this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication();
+		bool? b_((CqlDate startDate, nint _)? @this)
 		{
 			CqlDate g_ = @this?.startDate;
 			bool? h_ = context.Operators.Not((bool?)(g_ is null));
 
 			return h_;
 		};
-		IEnumerable<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW> c_ = context.Operators.Where<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW>(a_, b_);
-		CqlDate d_(Tuple_CVELXTjiMTaGQEjMfJXBdUHjW @this)
+		IEnumerable<(CqlDate startDate, nint _)?> c_ = context.Operators.Where<(CqlDate startDate, nint _)?>(a_, b_);
+		CqlDate d_((CqlDate startDate, nint _)? @this)
 		{
 			CqlDate i_ = @this?.startDate;
 
 			return i_;
 		};
-		IEnumerable<CqlDate> e_ = context.Operators.Select<Tuple_CVELXTjiMTaGQEjMfJXBdUHjW, CqlDate>(c_, d_);
+		IEnumerable<CqlDate> e_ = context.Operators.Select<(CqlDate startDate, nint _)?, CqlDate>(c_, d_);
 		CqlDate f_ = context.Operators.First<CqlDate>(e_);
 
 		return f_;
@@ -1048,162 +1043,146 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD f_(MedicationRequest AtomoxetineMed)
+		(CqlInterval<CqlDate> period, CqlDate periodStart)? f_(MedicationRequest AtomoxetineMed)
 		{
 			CqlInterval<CqlDate> dt_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(AtomoxetineMed);
 			CqlDate dv_ = context.Operators.Start(dt_);
-			Tuple_EhMLLfWeOaeVhYfBZeiQfaefD dw_ = new Tuple_EhMLLfWeOaeVhYfBZeiQfaefD
-			{
-				period = dt_,
-				periodStart = dv_,
-			};
+			(CqlInterval<CqlDate> period, CqlDate periodStart)? dw_ = (dt_, dv_);
 
 			return dw_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> g_ = context.Operators.Select<MedicationRequest, Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(e_, f_);
-		object h_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> g_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(e_, f_);
+		object h_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate dx_ = @this?.periodStart;
 
 			return dx_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> i_ = context.Operators.SortBy<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? j_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> i_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? j_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> dy_ = @this?.period;
 			bool? dz_ = context.Operators.Not((bool?)(dy_ is null));
 
 			return dz_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> k_ = context.Operators.Where<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(i_, j_);
-		CqlInterval<CqlDate> l_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> k_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(i_, j_);
+		CqlInterval<CqlDate> l_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> ea_ = @this?.period;
 
 			return ea_;
 		};
-		IEnumerable<CqlInterval<CqlDate>> m_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(k_, l_);
+		IEnumerable<CqlInterval<CqlDate>> m_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(k_, l_);
 		IEnumerable<CqlInterval<CqlDate>> n_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(m_);
 		CqlValueSet o_ = this.Clonidine();
 		IEnumerable<MedicationRequest> p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
 		IEnumerable<MedicationRequest> r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
 		IEnumerable<MedicationRequest> s_ = context.Operators.Union<MedicationRequest>(p_, r_);
-		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD t_(MedicationRequest ClonidineMed)
+		(CqlInterval<CqlDate> period, CqlDate periodStart)? t_(MedicationRequest ClonidineMed)
 		{
 			CqlInterval<CqlDate> eb_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ClonidineMed);
 			CqlDate ed_ = context.Operators.Start(eb_);
-			Tuple_EhMLLfWeOaeVhYfBZeiQfaefD ee_ = new Tuple_EhMLLfWeOaeVhYfBZeiQfaefD
-			{
-				period = eb_,
-				periodStart = ed_,
-			};
+			(CqlInterval<CqlDate> period, CqlDate periodStart)? ee_ = (eb_, ed_);
 
 			return ee_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> u_ = context.Operators.Select<MedicationRequest, Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(s_, t_);
-		object v_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> u_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(s_, t_);
+		object v_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate ef_ = @this?.periodStart;
 
 			return ef_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> w_ = context.Operators.SortBy<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(u_, v_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? x_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> w_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(u_, v_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? x_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> eg_ = @this?.period;
 			bool? eh_ = context.Operators.Not((bool?)(eg_ is null));
 
 			return eh_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> y_ = context.Operators.Where<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(w_, x_);
-		CqlInterval<CqlDate> z_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> y_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(w_, x_);
+		CqlInterval<CqlDate> z_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> ei_ = @this?.period;
 
 			return ei_;
 		};
-		IEnumerable<CqlInterval<CqlDate>> aa_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(y_, z_);
+		IEnumerable<CqlInterval<CqlDate>> aa_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(y_, z_);
 		IEnumerable<CqlInterval<CqlDate>> ab_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(aa_);
 		IEnumerable<CqlInterval<CqlDate>> ac_ = context.Operators.Union<CqlInterval<CqlDate>>(n_, ab_);
 		CqlValueSet ad_ = this.Dexmethylphenidate();
 		IEnumerable<MedicationRequest> ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
 		IEnumerable<MedicationRequest> ag_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
 		IEnumerable<MedicationRequest> ah_ = context.Operators.Union<MedicationRequest>(ae_, ag_);
-		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD ai_(MedicationRequest DexmethylphenidateMed)
+		(CqlInterval<CqlDate> period, CqlDate periodStart)? ai_(MedicationRequest DexmethylphenidateMed)
 		{
 			CqlInterval<CqlDate> ej_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DexmethylphenidateMed);
 			CqlDate el_ = context.Operators.Start(ej_);
-			Tuple_EhMLLfWeOaeVhYfBZeiQfaefD em_ = new Tuple_EhMLLfWeOaeVhYfBZeiQfaefD
-			{
-				period = ej_,
-				periodStart = el_,
-			};
+			(CqlInterval<CqlDate> period, CqlDate periodStart)? em_ = (ej_, el_);
 
 			return em_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> aj_ = context.Operators.Select<MedicationRequest, Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(ah_, ai_);
-		object ak_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> aj_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(ah_, ai_);
+		object ak_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate en_ = @this?.periodStart;
 
 			return en_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> al_ = context.Operators.SortBy<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(aj_, ak_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? am_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> al_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(aj_, ak_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? am_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> eo_ = @this?.period;
 			bool? ep_ = context.Operators.Not((bool?)(eo_ is null));
 
 			return ep_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> an_ = context.Operators.Where<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(al_, am_);
-		CqlInterval<CqlDate> ao_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> an_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(al_, am_);
+		CqlInterval<CqlDate> ao_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> eq_ = @this?.period;
 
 			return eq_;
 		};
-		IEnumerable<CqlInterval<CqlDate>> ap_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(an_, ao_);
+		IEnumerable<CqlInterval<CqlDate>> ap_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(an_, ao_);
 		IEnumerable<CqlInterval<CqlDate>> aq_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ap_);
 		CqlValueSet ar_ = this.Dextroamphetamine();
 		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
 		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
 		IEnumerable<MedicationRequest> av_ = context.Operators.Union<MedicationRequest>(as_, au_);
-		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD aw_(MedicationRequest DextroamphetamineMed)
+		(CqlInterval<CqlDate> period, CqlDate periodStart)? aw_(MedicationRequest DextroamphetamineMed)
 		{
 			CqlInterval<CqlDate> er_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(DextroamphetamineMed);
 			CqlDate et_ = context.Operators.Start(er_);
-			Tuple_EhMLLfWeOaeVhYfBZeiQfaefD eu_ = new Tuple_EhMLLfWeOaeVhYfBZeiQfaefD
-			{
-				period = er_,
-				periodStart = et_,
-			};
+			(CqlInterval<CqlDate> period, CqlDate periodStart)? eu_ = (er_, et_);
 
 			return eu_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> ax_ = context.Operators.Select<MedicationRequest, Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(av_, aw_);
-		object ay_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> ax_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(av_, aw_);
+		object ay_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate ev_ = @this?.periodStart;
 
 			return ev_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> az_ = context.Operators.SortBy<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(ax_, ay_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? ba_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> az_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(ax_, ay_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? ba_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> ew_ = @this?.period;
 			bool? ex_ = context.Operators.Not((bool?)(ew_ is null));
 
 			return ex_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> bb_ = context.Operators.Where<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(az_, ba_);
-		CqlInterval<CqlDate> bc_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> bb_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(az_, ba_);
+		CqlInterval<CqlDate> bc_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> ey_ = @this?.period;
 
 			return ey_;
 		};
-		IEnumerable<CqlInterval<CqlDate>> bd_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(bb_, bc_);
+		IEnumerable<CqlInterval<CqlDate>> bd_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(bb_, bc_);
 		IEnumerable<CqlInterval<CqlDate>> be_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bd_);
 		IEnumerable<CqlInterval<CqlDate>> bf_ = context.Operators.Union<CqlInterval<CqlDate>>(aq_, be_);
 		IEnumerable<CqlInterval<CqlDate>> bg_ = context.Operators.Union<CqlInterval<CqlDate>>(ac_, bf_);
@@ -1211,81 +1190,73 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<MedicationRequest> bi_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
 		IEnumerable<MedicationRequest> bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
 		IEnumerable<MedicationRequest> bl_ = context.Operators.Union<MedicationRequest>(bi_, bk_);
-		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD bm_(MedicationRequest LisdexamfetamineMed)
+		(CqlInterval<CqlDate> period, CqlDate periodStart)? bm_(MedicationRequest LisdexamfetamineMed)
 		{
 			CqlInterval<CqlDate> ez_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(LisdexamfetamineMed);
 			CqlDate fb_ = context.Operators.Start(ez_);
-			Tuple_EhMLLfWeOaeVhYfBZeiQfaefD fc_ = new Tuple_EhMLLfWeOaeVhYfBZeiQfaefD
-			{
-				period = ez_,
-				periodStart = fb_,
-			};
+			(CqlInterval<CqlDate> period, CqlDate periodStart)? fc_ = (ez_, fb_);
 
 			return fc_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> bn_ = context.Operators.Select<MedicationRequest, Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(bl_, bm_);
-		object bo_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> bn_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(bl_, bm_);
+		object bo_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate fd_ = @this?.periodStart;
 
 			return fd_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> bp_ = context.Operators.SortBy<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(bn_, bo_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? bq_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> bp_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(bn_, bo_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? bq_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> fe_ = @this?.period;
 			bool? ff_ = context.Operators.Not((bool?)(fe_ is null));
 
 			return ff_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> br_ = context.Operators.Where<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(bp_, bq_);
-		CqlInterval<CqlDate> bs_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> br_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(bp_, bq_);
+		CqlInterval<CqlDate> bs_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> fg_ = @this?.period;
 
 			return fg_;
 		};
-		IEnumerable<CqlInterval<CqlDate>> bt_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(br_, bs_);
+		IEnumerable<CqlInterval<CqlDate>> bt_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(br_, bs_);
 		IEnumerable<CqlInterval<CqlDate>> bu_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bt_);
 		CqlValueSet bv_ = this.Methylphenidate();
 		IEnumerable<MedicationRequest> bw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
 		IEnumerable<MedicationRequest> by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
 		IEnumerable<MedicationRequest> bz_ = context.Operators.Union<MedicationRequest>(bw_, by_);
-		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD ca_(MedicationRequest MethylphenidateMed)
+		(CqlInterval<CqlDate> period, CqlDate periodStart)? ca_(MedicationRequest MethylphenidateMed)
 		{
 			CqlInterval<CqlDate> fh_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethylphenidateMed);
 			CqlDate fj_ = context.Operators.Start(fh_);
-			Tuple_EhMLLfWeOaeVhYfBZeiQfaefD fk_ = new Tuple_EhMLLfWeOaeVhYfBZeiQfaefD
-			{
-				period = fh_,
-				periodStart = fj_,
-			};
+			(CqlInterval<CqlDate> period, CqlDate periodStart)? fk_ = (fh_, fj_);
 
 			return fk_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> cb_ = context.Operators.Select<MedicationRequest, Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(bz_, ca_);
-		object cc_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cb_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(bz_, ca_);
+		object cc_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate fl_ = @this?.periodStart;
 
 			return fl_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> cd_ = context.Operators.SortBy<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(cb_, cc_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? ce_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cd_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(cb_, cc_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? ce_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> fm_ = @this?.period;
 			bool? fn_ = context.Operators.Not((bool?)(fm_ is null));
 
 			return fn_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> cf_ = context.Operators.Where<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(cd_, ce_);
-		CqlInterval<CqlDate> cg_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cf_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(cd_, ce_);
+		CqlInterval<CqlDate> cg_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> fo_ = @this?.period;
 
 			return fo_;
 		};
-		IEnumerable<CqlInterval<CqlDate>> ch_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(cf_, cg_);
+		IEnumerable<CqlInterval<CqlDate>> ch_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cf_, cg_);
 		IEnumerable<CqlInterval<CqlDate>> ci_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ch_);
 		IEnumerable<CqlInterval<CqlDate>> cj_ = context.Operators.Union<CqlInterval<CqlDate>>(bu_, ci_);
 		IEnumerable<CqlInterval<CqlDate>> ck_ = context.Operators.Union<CqlInterval<CqlDate>>(bg_, cj_);
@@ -1293,41 +1264,37 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<MedicationRequest> cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
 		IEnumerable<MedicationRequest> co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
 		IEnumerable<MedicationRequest> cp_ = context.Operators.Union<MedicationRequest>(cm_, co_);
-		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD cq_(MedicationRequest GuanfacineMed)
+		(CqlInterval<CqlDate> period, CqlDate periodStart)? cq_(MedicationRequest GuanfacineMed)
 		{
 			CqlInterval<CqlDate> fp_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(GuanfacineMed);
 			CqlDate fr_ = context.Operators.Start(fp_);
-			Tuple_EhMLLfWeOaeVhYfBZeiQfaefD fs_ = new Tuple_EhMLLfWeOaeVhYfBZeiQfaefD
-			{
-				period = fp_,
-				periodStart = fr_,
-			};
+			(CqlInterval<CqlDate> period, CqlDate periodStart)? fs_ = (fp_, fr_);
 
 			return fs_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> cr_ = context.Operators.Select<MedicationRequest, Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(cp_, cq_);
-		object cs_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cr_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(cp_, cq_);
+		object cs_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate ft_ = @this?.periodStart;
 
 			return ft_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> ct_ = context.Operators.SortBy<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(cr_, cs_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? cu_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> ct_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(cr_, cs_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? cu_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> fu_ = @this?.period;
 			bool? fv_ = context.Operators.Not((bool?)(fu_ is null));
 
 			return fv_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> cv_ = context.Operators.Where<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(ct_, cu_);
-		CqlInterval<CqlDate> cw_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cv_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(ct_, cu_);
+		CqlInterval<CqlDate> cw_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> fw_ = @this?.period;
 
 			return fw_;
 		};
-		IEnumerable<CqlInterval<CqlDate>> cx_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(cv_, cw_);
+		IEnumerable<CqlInterval<CqlDate>> cx_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cv_, cw_);
 		IEnumerable<CqlInterval<CqlDate>> cy_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(cx_);
 		CqlCode cz_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 		IEnumerable<CqlCode> da_ = context.Operators.ToList<CqlCode>(cz_);
@@ -1335,41 +1302,37 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlCode> dd_ = context.Operators.ToList<CqlCode>(cz_);
 		IEnumerable<MedicationRequest> de_ = context.Operators.RetrieveByCodes<MedicationRequest>(dd_, null);
 		IEnumerable<MedicationRequest> df_ = context.Operators.Union<MedicationRequest>(db_, de_);
-		Tuple_EhMLLfWeOaeVhYfBZeiQfaefD dg_(MedicationRequest MethamphetamineMed)
+		(CqlInterval<CqlDate> period, CqlDate periodStart)? dg_(MedicationRequest MethamphetamineMed)
 		{
 			CqlInterval<CqlDate> fx_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(MethamphetamineMed);
 			CqlDate fz_ = context.Operators.Start(fx_);
-			Tuple_EhMLLfWeOaeVhYfBZeiQfaefD ga_ = new Tuple_EhMLLfWeOaeVhYfBZeiQfaefD
-			{
-				period = fx_,
-				periodStart = fz_,
-			};
+			(CqlInterval<CqlDate> period, CqlDate periodStart)? ga_ = (fx_, fz_);
 
 			return ga_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> dh_ = context.Operators.Select<MedicationRequest, Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(df_, dg_);
-		object di_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> dh_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(df_, dg_);
+		object di_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate gb_ = @this?.periodStart;
 
 			return gb_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> dj_ = context.Operators.SortBy<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(dh_, di_, System.ComponentModel.ListSortDirection.Ascending);
-		bool? dk_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> dj_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(dh_, di_, System.ComponentModel.ListSortDirection.Ascending);
+		bool? dk_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> gc_ = @this?.period;
 			bool? gd_ = context.Operators.Not((bool?)(gc_ is null));
 
 			return gd_;
 		};
-		IEnumerable<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD> dl_ = context.Operators.Where<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD>(dj_, dk_);
-		CqlInterval<CqlDate> dm_(Tuple_EhMLLfWeOaeVhYfBZeiQfaefD @this)
+		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> dl_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(dj_, dk_);
+		CqlInterval<CqlDate> dm_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> ge_ = @this?.period;
 
 			return ge_;
 		};
-		IEnumerable<CqlInterval<CqlDate>> dn_ = context.Operators.Select<Tuple_EhMLLfWeOaeVhYfBZeiQfaefD, CqlInterval<CqlDate>>(dl_, dm_);
+		IEnumerable<CqlInterval<CqlDate>> dn_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(dl_, dm_);
 		IEnumerable<CqlInterval<CqlDate>> do_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(dn_);
 		IEnumerable<CqlInterval<CqlDate>> dp_ = context.Operators.Union<CqlInterval<CqlDate>>(cy_, do_);
 		IEnumerable<CqlInterval<CqlDate>> dq_ = context.Operators.Union<CqlInterval<CqlDate>>(ck_, dp_);
@@ -1623,37 +1586,37 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	public bool? Numerator_2() => 
 		__Numerator_2.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

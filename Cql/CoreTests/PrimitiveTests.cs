@@ -3421,7 +3421,6 @@ namespace CoreTests
             writer.ProcessDefinitions(
                 definitions,
                 librarySet,
-                Factory.TypeManager.TupleTypes,
                 callbacks:new(onAfterStep: step =>
                 {
                     switch (step)

@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -142,9 +141,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
     internal Lazy<bool?> __Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination;
     internal Lazy<IEnumerable<Condition>> __Influenza_Numerator_Inclusion_Conditions;
     internal Lazy<bool?> __Numerator;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -280,9 +279,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
         __Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination = new Lazy<bool?>(this.Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Value);
         __Influenza_Numerator_Inclusion_Conditions = new Lazy<IEnumerable<Condition>>(this.Influenza_Numerator_Inclusion_Conditions_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -758,8 +757,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("433621000124101", "http://snomed.info/sct", null, null),
 			new CqlCode("428321000124101", "http://snomed.info/sct", null, null),
 			new CqlCode("428331000124103", "http://snomed.info/sct", null, null),
@@ -769,7 +767,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			new CqlCode("471141000124102", "http://snomed.info/sct", null, null),
 			new CqlCode("471321000124106", "http://snomed.info/sct", null, null),
 			new CqlCode("471341000124104", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -780,10 +778,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("99211", "http://www.ama-assn.org/go/cpt", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -794,10 +791,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlCode[] CVX_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("119", "http://hl7.org/fhir/sid/cvx", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -808,10 +804,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private CqlCode[] ICD10_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("3E0234Z", "http://www.cms.gov/Medicare/Coding/ICD10", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -1215,37 +1210,31 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		IEnumerable<CqlDate> a_ = this.DTaP_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>> e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
-		Tuple_EMDhFLcFhWVERAVVNfLAZYXJi f_(ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate> _valueTuple)
+		(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)? f_(ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			Tuple_EMDhFLcFhWVERAVVNfLAZYXJi l_ = new Tuple_EMDhFLcFhWVERAVVNfLAZYXJi
-			{
-				DTaPVaccination1 = _valueTuple.Item1,
-				DTaPVaccination2 = _valueTuple.Item2,
-				DTaPVaccination3 = _valueTuple.Item3,
-				DTaPVaccination4 = _valueTuple.Item4,
-			};
+			(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4);
 
 			return l_;
 		};
-		IEnumerable<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi> g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, Tuple_EMDhFLcFhWVERAVVNfLAZYXJi>(e_, f_);
-		bool? h_(Tuple_EMDhFLcFhWVERAVVNfLAZYXJi tuple_emdhflcfhwveravvnflazyxji)
+		IEnumerable<(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?> g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, (CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?>(e_, f_);
+		bool? h_((CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)? tuple_emdhflcfhwveravvnflazyxji)
 		{
 			CqlQuantity m_ = context.Operators.Quantity(1m, "day");
-			CqlDate n_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination1, m_);
-			bool? o_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination2, n_, null);
-			CqlDate q_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination2, m_);
-			bool? r_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination3, q_, null);
+			CqlDate n_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination1, m_);
+			bool? o_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination2, n_, null);
+			CqlDate q_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination2, m_);
+			bool? r_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination3, q_, null);
 			bool? s_ = context.Operators.And(o_, r_);
-			CqlDate u_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination3, m_);
-			bool? v_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination4, u_, null);
+			CqlDate u_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination3, m_);
+			bool? v_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination4, u_, null);
 			bool? w_ = context.Operators.And(s_, v_);
 
 			return w_;
 		};
-		IEnumerable<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi> i_ = context.Operators.Where<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi>(g_, h_);
-		CqlDate j_(Tuple_EMDhFLcFhWVERAVVNfLAZYXJi tuple_emdhflcfhwveravvnflazyxji) => 
-			tuple_emdhflcfhwveravvnflazyxji.DTaPVaccination1;
-		IEnumerable<CqlDate> k_ = context.Operators.Select<Tuple_EMDhFLcFhWVERAVVNfLAZYXJi, CqlDate>(i_, j_);
+		IEnumerable<(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?> i_ = context.Operators.Where<(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?>(g_, h_);
+		CqlDate j_((CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)? tuple_emdhflcfhwveravvnflazyxji) => 
+			tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination1;
+		IEnumerable<CqlDate> k_ = context.Operators.Select<(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?, CqlDate>(i_, j_);
 
 		return k_;
 	}
@@ -1352,33 +1341,28 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		IEnumerable<CqlDate> a_ = this.Polio_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
-		Tuple_CNGHaZROXaJTHPICcbIaJbRXV e_(ValueTuple<CqlDate, CqlDate, CqlDate> _valueTuple)
+		(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? e_(ValueTuple<CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			Tuple_CNGHaZROXaJTHPICcbIaJbRXV k_ = new Tuple_CNGHaZROXaJTHPICcbIaJbRXV
-			{
-				PolioVaccination1 = _valueTuple.Item1,
-				PolioVaccination2 = _valueTuple.Item2,
-				PolioVaccination3 = _valueTuple.Item3,
-			};
+			(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? k_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return k_;
 		};
-		IEnumerable<Tuple_CNGHaZROXaJTHPICcbIaJbRXV> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, Tuple_CNGHaZROXaJTHPICcbIaJbRXV>(d_, e_);
-		bool? g_(Tuple_CNGHaZROXaJTHPICcbIaJbRXV tuple_cnghazroxajthpiccbiajbrxv)
+		IEnumerable<(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?>(d_, e_);
+		bool? g_((CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? tuple_cnghazroxajthpiccbiajbrxv)
 		{
 			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
-			CqlDate m_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination1, l_);
-			bool? n_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination2, m_, null);
-			CqlDate p_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination2, l_);
-			bool? q_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination3, p_, null);
+			CqlDate m_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination1, l_);
+			bool? n_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination2, m_, null);
+			CqlDate p_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination2, l_);
+			bool? q_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination3, p_, null);
 			bool? r_ = context.Operators.And(n_, q_);
 
 			return r_;
 		};
-		IEnumerable<Tuple_CNGHaZROXaJTHPICcbIaJbRXV> h_ = context.Operators.Where<Tuple_CNGHaZROXaJTHPICcbIaJbRXV>(f_, g_);
-		CqlDate i_(Tuple_CNGHaZROXaJTHPICcbIaJbRXV tuple_cnghazroxajthpiccbiajbrxv) => 
-			tuple_cnghazroxajthpiccbiajbrxv.PolioVaccination1;
-		IEnumerable<CqlDate> j_ = context.Operators.Select<Tuple_CNGHaZROXaJTHPICcbIaJbRXV, CqlDate>(h_, i_);
+		IEnumerable<(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?> h_ = context.Operators.Where<(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?>(f_, g_);
+		CqlDate i_((CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? tuple_cnghazroxajthpiccbiajbrxv) => 
+			tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination1;
+		IEnumerable<CqlDate> j_ = context.Operators.Select<(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?, CqlDate>(h_, i_);
 
 		return j_;
 	}
@@ -1894,33 +1878,28 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		IEnumerable<CqlDate> a_ = this.Hepatitis_B_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
-		Tuple_EZTgahAUWGgSdGaDCgQNNIPGW e_(ValueTuple<CqlDate, CqlDate, CqlDate> _valueTuple)
+		(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? e_(ValueTuple<CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			Tuple_EZTgahAUWGgSdGaDCgQNNIPGW k_ = new Tuple_EZTgahAUWGgSdGaDCgQNNIPGW
-			{
-				HepatitisBVaccination1 = _valueTuple.Item1,
-				HepatitisBVaccination2 = _valueTuple.Item2,
-				HepatitisBVaccination3 = _valueTuple.Item3,
-			};
+			(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? k_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return k_;
 		};
-		IEnumerable<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, Tuple_EZTgahAUWGgSdGaDCgQNNIPGW>(d_, e_);
-		bool? g_(Tuple_EZTgahAUWGgSdGaDCgQNNIPGW tuple_eztgahauwggsdgadcgqnnipgw)
+		IEnumerable<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?>(d_, e_);
+		bool? g_((CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? tuple_eztgahauwggsdgadcgqnnipgw)
 		{
 			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
-			CqlDate m_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination1, l_);
-			bool? n_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination2, m_, null);
-			CqlDate p_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination2, l_);
-			bool? q_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination3, p_, null);
+			CqlDate m_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination1, l_);
+			bool? n_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination2, m_, null);
+			CqlDate p_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination2, l_);
+			bool? q_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination3, p_, null);
 			bool? r_ = context.Operators.And(n_, q_);
 
 			return r_;
 		};
-		IEnumerable<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW> h_ = context.Operators.Where<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW>(f_, g_);
-		CqlDate i_(Tuple_EZTgahAUWGgSdGaDCgQNNIPGW tuple_eztgahauwggsdgadcgqnnipgw) => 
-			tuple_eztgahauwggsdgadcgqnnipgw.HepatitisBVaccination1;
-		IEnumerable<CqlDate> j_ = context.Operators.Select<Tuple_EZTgahAUWGgSdGaDCgQNNIPGW, CqlDate>(h_, i_);
+		IEnumerable<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?> h_ = context.Operators.Where<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?>(f_, g_);
+		CqlDate i_((CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? tuple_eztgahauwggsdgadcgqnnipgw) => 
+			tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination1;
+		IEnumerable<CqlDate> j_ = context.Operators.Select<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?, CqlDate>(h_, i_);
 
 		return j_;
 	}
@@ -1984,36 +1963,31 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		IEnumerable<CqlDate> a_ = this.Hepatitis_B_Immunizations_or_Procedures();
 		IEnumerable<CqlDate> c_ = this.NewBorn_Vaccine_Requirement();
 		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, c_);
-		Tuple_HDfaMbZGBWDPFETGQNFbceEeg e_(ValueTuple<CqlDate, CqlDate, CqlDate> _valueTuple)
+		(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? e_(ValueTuple<CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			Tuple_HDfaMbZGBWDPFETGQNFbceEeg k_ = new Tuple_HDfaMbZGBWDPFETGQNFbceEeg
-			{
-				HepatitisBVaccination1 = _valueTuple.Item1,
-				HepatitisBVaccination2 = _valueTuple.Item2,
-				NewBornVaccine3 = _valueTuple.Item3,
-			};
+			(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? k_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return k_;
 		};
-		IEnumerable<Tuple_HDfaMbZGBWDPFETGQNFbceEeg> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, Tuple_HDfaMbZGBWDPFETGQNFbceEeg>(d_, e_);
-		bool? g_(Tuple_HDfaMbZGBWDPFETGQNFbceEeg tuple_hdfambzgbwdpfetgqnfbceeeg)
+		IEnumerable<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?>(d_, e_);
+		bool? g_((CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? tuple_hdfambzgbwdpfetgqnfbceeeg)
 		{
 			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
-			CqlDate m_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination1, l_);
-			bool? n_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination2, m_, null);
-			CqlDate p_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg.NewBornVaccine3, l_);
-			bool? q_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination1, p_, null);
+			CqlDate m_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1, l_);
+			bool? n_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination2, m_, null);
+			CqlDate p_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3, l_);
+			bool? q_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1, p_, null);
 			bool? r_ = context.Operators.And(n_, q_);
-			CqlDate t_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg.NewBornVaccine3, l_);
-			bool? u_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination2, t_, null);
+			CqlDate t_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3, l_);
+			bool? u_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination2, t_, null);
 			bool? v_ = context.Operators.And(r_, u_);
 
 			return v_;
 		};
-		IEnumerable<Tuple_HDfaMbZGBWDPFETGQNFbceEeg> h_ = context.Operators.Where<Tuple_HDfaMbZGBWDPFETGQNFbceEeg>(f_, g_);
-		CqlDate i_(Tuple_HDfaMbZGBWDPFETGQNFbceEeg tuple_hdfambzgbwdpfetgqnfbceeeg) => 
-			tuple_hdfambzgbwdpfetgqnfbceeeg.HepatitisBVaccination1;
-		IEnumerable<CqlDate> j_ = context.Operators.Select<Tuple_HDfaMbZGBWDPFETGQNFbceEeg, CqlDate>(h_, i_);
+		IEnumerable<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?> h_ = context.Operators.Where<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?>(f_, g_);
+		CqlDate i_((CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? tuple_hdfambzgbwdpfetgqnfbceeeg) => 
+			tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1;
+		IEnumerable<CqlDate> j_ = context.Operators.Select<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?, CqlDate>(h_, i_);
 
 		return j_;
 	}
@@ -2190,37 +2164,31 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		IEnumerable<CqlDate> a_ = this.Pneumococcal_Conjugate_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>> e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
-		Tuple_DdPDeOJhPYESfHGCOcBNOiPPP f_(ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate> _valueTuple)
+		(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? f_(ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate> _valueTuple)
 		{
-			Tuple_DdPDeOJhPYESfHGCOcBNOiPPP l_ = new Tuple_DdPDeOJhPYESfHGCOcBNOiPPP
-			{
-				PneumococcalVaccination1 = _valueTuple.Item1,
-				PneumococcalVaccination2 = _valueTuple.Item2,
-				PneumococcalVaccination3 = _valueTuple.Item3,
-				PneumococcalVaccination4 = _valueTuple.Item4,
-			};
+			(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4);
 
 			return l_;
 		};
-		IEnumerable<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP> g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, Tuple_DdPDeOJhPYESfHGCOcBNOiPPP>(e_, f_);
-		bool? h_(Tuple_DdPDeOJhPYESfHGCOcBNOiPPP tuple_ddpdeojhpyesfhgcocbnoippp)
+		IEnumerable<(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?> g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, (CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?>(e_, f_);
+		bool? h_((CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? tuple_ddpdeojhpyesfhgcocbnoippp)
 		{
 			CqlQuantity m_ = context.Operators.Quantity(1m, "day");
-			CqlDate n_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination1, m_);
-			bool? o_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination2, n_, null);
-			CqlDate q_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination2, m_);
-			bool? r_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination3, q_, null);
+			CqlDate n_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination1, m_);
+			bool? o_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination2, n_, null);
+			CqlDate q_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination2, m_);
+			bool? r_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3, q_, null);
 			bool? s_ = context.Operators.And(o_, r_);
-			CqlDate u_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination3, m_);
-			bool? v_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination4, u_, null);
+			CqlDate u_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3, m_);
+			bool? v_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination4, u_, null);
 			bool? w_ = context.Operators.And(s_, v_);
 
 			return w_;
 		};
-		IEnumerable<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP> i_ = context.Operators.Where<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP>(g_, h_);
-		CqlDate j_(Tuple_DdPDeOJhPYESfHGCOcBNOiPPP tuple_ddpdeojhpyesfhgcocbnoippp) => 
-			tuple_ddpdeojhpyesfhgcocbnoippp.PneumococcalVaccination1;
-		IEnumerable<CqlDate> k_ = context.Operators.Select<Tuple_DdPDeOJhPYESfHGCOcBNOiPPP, CqlDate>(i_, j_);
+		IEnumerable<(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?> i_ = context.Operators.Where<(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?>(g_, h_);
+		CqlDate j_((CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? tuple_ddpdeojhpyesfhgcocbnoippp) => 
+			tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination1;
+		IEnumerable<CqlDate> k_ = context.Operators.Select<(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?, CqlDate>(i_, j_);
 
 		return k_;
 	}
@@ -2663,29 +2631,25 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		IEnumerable<CqlDate> a_ = this.Influenza_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate>> c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
-		Tuple_BZhFLeRDagbPQMNheVJcUNfNQ d_(ValueTuple<CqlDate, CqlDate> _valueTuple)
+		(CqlDate FluVaccination1, CqlDate FluVaccination2)? d_(ValueTuple<CqlDate, CqlDate> _valueTuple)
 		{
-			Tuple_BZhFLeRDagbPQMNheVJcUNfNQ j_ = new Tuple_BZhFLeRDagbPQMNheVJcUNfNQ
-			{
-				FluVaccination1 = _valueTuple.Item1,
-				FluVaccination2 = _valueTuple.Item2,
-			};
+			(CqlDate FluVaccination1, CqlDate FluVaccination2)? j_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
 		};
-		IEnumerable<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ> e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, Tuple_BZhFLeRDagbPQMNheVJcUNfNQ>(c_, d_);
-		bool? f_(Tuple_BZhFLeRDagbPQMNheVJcUNfNQ tuple_bzhflerdagbpqmnhevjcunfnq)
+		IEnumerable<(CqlDate FluVaccination1, CqlDate FluVaccination2)?> e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, (CqlDate FluVaccination1, CqlDate FluVaccination2)?>(c_, d_);
+		bool? f_((CqlDate FluVaccination1, CqlDate FluVaccination2)? tuple_bzhflerdagbpqmnhevjcunfnq)
 		{
 			CqlQuantity k_ = context.Operators.Quantity(1m, "day");
-			CqlDate l_ = context.Operators.Add(tuple_bzhflerdagbpqmnhevjcunfnq.FluVaccination1, k_);
-			bool? m_ = context.Operators.SameOrAfter(tuple_bzhflerdagbpqmnhevjcunfnq.FluVaccination2, l_, null);
+			CqlDate l_ = context.Operators.Add(tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination1, k_);
+			bool? m_ = context.Operators.SameOrAfter(tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination2, l_, null);
 
 			return m_;
 		};
-		IEnumerable<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ> g_ = context.Operators.Where<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ>(e_, f_);
-		CqlDate h_(Tuple_BZhFLeRDagbPQMNheVJcUNfNQ tuple_bzhflerdagbpqmnhevjcunfnq) => 
-			tuple_bzhflerdagbpqmnhevjcunfnq.FluVaccination1;
-		IEnumerable<CqlDate> i_ = context.Operators.Select<Tuple_BZhFLeRDagbPQMNheVJcUNfNQ, CqlDate>(g_, h_);
+		IEnumerable<(CqlDate FluVaccination1, CqlDate FluVaccination2)?> g_ = context.Operators.Where<(CqlDate FluVaccination1, CqlDate FluVaccination2)?>(e_, f_);
+		CqlDate h_((CqlDate FluVaccination1, CqlDate FluVaccination2)? tuple_bzhflerdagbpqmnhevjcunfnq) => 
+			tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination1;
+		IEnumerable<CqlDate> i_ = context.Operators.Select<(CqlDate FluVaccination1, CqlDate FluVaccination2)?, CqlDate>(g_, h_);
 
 		return i_;
 	}
@@ -2884,37 +2848,37 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	public bool? Numerator() => 
 		__Numerator.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()

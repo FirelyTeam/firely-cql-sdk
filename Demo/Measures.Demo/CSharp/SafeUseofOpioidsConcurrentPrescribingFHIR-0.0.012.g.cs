@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -37,7 +36,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
     internal Lazy<IEnumerable<Encounter>> __Initial_Population;
     internal Lazy<IEnumerable<Encounter>> __Denominator;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>> __SDE_Payer;
+    internal Lazy<IEnumerable<(CodeableConcept code, Period period)?>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
@@ -68,7 +67,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
         __Denominator = new Lazy<IEnumerable<Encounter>>(this.Denominator_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CodeableConcept code, Period period)?>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
@@ -155,10 +154,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -309,15 +307,15 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer_Value()
+	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+		IEnumerable<(CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer() => 
+	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()

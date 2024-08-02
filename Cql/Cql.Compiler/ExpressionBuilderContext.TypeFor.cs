@@ -236,7 +236,7 @@ partial class ExpressionBuilderContext
         if (matchedTupleType != null)
             return matchedTupleType;
 
-        var typeName = $"{_typeManager.TupleTypeNamespace}.{_typeManager.TupleTypeNameFor(elementInfo)}";
+        var typeName = $"Tuples.{_typeManager.TupleTypeNameFor(elementInfo)}";
 
         var myTypeBuilder = _typeManager.ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
 

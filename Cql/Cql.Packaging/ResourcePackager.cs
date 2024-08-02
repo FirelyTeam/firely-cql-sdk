@@ -54,65 +54,40 @@ internal class ResourcePackager
 
         foreach (var (name, asmData) in assembliesByLibraryName)
         {
-            if (name is "TupleTypes")
+            var library = librarySet.GetLibrary(name)!;
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
+            if (!elmFile.Exists)
+                elmFile = new FileInfo(Path.Combine(elmDirectory.FullName,
+                                                    $"{library.identifier?.id ?? string.Empty}.json"));
+
+            if (!elmFile.Exists)
+                throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
+
+            var cqlFiles =
+                cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
+            if (cqlFiles.Length == 0)
             {
-                var tuplesBinary = new Binary
-                {
-                    Id = "TupleTypes-Binary",
-                    ContentType = "application/octet-stream",
-                    Data = asmData.Binary,
-                };
-                OnResourceCreated(tuplesBinary);
-
-                foreach (var sourceKvp in asmData.SourceCode)
-                {
-                    var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
-                    var tuplesCSharpBinary = new Binary
-                    {
-                        Id = sourceKvp.Key.Replace("_", "-"),
-                        ContentType = "text/plain",
-                        Data = tuplesSourceBytes,
-                    };
-                    OnResourceCreated(tuplesCSharpBinary);
-                }
-            }
-            else
-            {
-                var library = librarySet.GetLibrary(name)!;
-                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
-                if (!elmFile.Exists)
-                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName,
-                        $"{library.identifier?.id ?? string.Empty}.json"));
-
-                if (!elmFile.Exists)
-                    throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
-
-                var cqlFiles =
-                    cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
+                cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
                 if (cqlFiles.Length == 0)
-                {
-                    cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
-                    if (cqlFiles.Length == 0)
-                        throw new InvalidOperationException($"{library.identifier!.id}.cql");
-                }
-
-                if (cqlFiles.Length > 1)
-                    throw new InvalidOperationException($"More than 1 CQL file found.");
-
-                var cqlFile = cqlFiles[0];
-                if (library.NameAndVersion() is null)
-                    throw new InvalidOperationException("Library NameAndVersion should not be null.");
-
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, resourceCanonicalRootUrl, asmData, typeCrosswalk, library);
-                librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
-
-                // Analyze datarequirements and add to the FHIR Library resource.
-                var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, library);
-                var dataRequirements = dataRequirementsAnalyzer.Analyze();
-                fhirLibrary.DataRequirement.AddRange(dataRequirements);
-
-                OnResourceCreated(fhirLibrary);
+                    throw new InvalidOperationException($"{library.identifier!.id}.cql");
             }
+
+            if (cqlFiles.Length > 1)
+                throw new InvalidOperationException($"More than 1 CQL file found.");
+
+            var cqlFile = cqlFiles[0];
+            if (library.NameAndVersion() is null)
+                throw new InvalidOperationException("Library NameAndVersion should not be null.");
+
+            var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, resourceCanonicalRootUrl, asmData, typeCrosswalk, library);
+            librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
+
+            // Analyze datarequirements and add to the FHIR Library resource.
+            var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, library);
+            var dataRequirements = dataRequirementsAnalyzer.Analyze();
+            fhirLibrary.DataRequirement.AddRange(dataRequirements);
+          
+            OnResourceCreated(fhirLibrary);
         }
 
         foreach (var library in librarySet)
@@ -305,7 +280,8 @@ internal class ResourcePackager
         return library;
     }
     private static void AddParameterIfNotNull(List<Parameters.ParameterComponent> parameters, string name, string? value)
-    {   //TODO: use mapper when values in CqlToElmInfo results anything but strings
+    {
+        //TODO: use mapper when values in CqlToElmInfo results anything but strings
         if (!string.IsNullOrEmpty(value))
         {
             parameters.Add(new Parameters.ParameterComponent { Name = name, Value = new FhirString(value) });

@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -75,7 +74,7 @@ public class FHIR347_0_1_021
     internal Lazy<bool?> __Initial_Population_3;
     internal Lazy<bool?> __Denominator_3;
     internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>> __SDE_Payer;
+    internal Lazy<IEnumerable<(CodeableConcept code, Period period)?>> __SDE_Payer;
     internal Lazy<IEnumerable<Coding>> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Has_Allergy_to_Statin;
@@ -153,7 +152,7 @@ public class FHIR347_0_1_021
         __Initial_Population_3 = new Lazy<bool?>(this.Initial_Population_3_Value);
         __Denominator_3 = new Lazy<bool?>(this.Denominator_3_Value);
         __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO>>(this.SDE_Payer_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CodeableConcept code, Period period)?>>(this.SDE_Payer_Value);
         __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Has_Allergy_to_Statin = new Lazy<bool?>(this.Has_Allergy_to_Statin_Value);
@@ -465,10 +464,9 @@ public class FHIR347_0_1_021
 
 	private CqlCode[] ICD10CM_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -673,13 +671,12 @@ public class FHIR347_0_1_021
 			bool? o_ = context.Operators.And(h_, n_);
 			Code<ObservationStatus> p_ = LDL?.StatusElement;
 			string q_ = FHIRHelpers_4_0_001.ToString(p_);
-			string[] r_ = new string[]
-			{
+			string[] r_ = [
 				"final",
 				"amended",
 				"corrected",
 				"appended",
-			};
+			];
 			bool? s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
 			bool? t_ = context.Operators.And(o_, s_);
 
@@ -853,15 +850,15 @@ public class FHIR347_0_1_021
 	public IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer_Value()
+	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+		IEnumerable<(CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_CaKghTfWMNOTHSWhifjFZOVYO> SDE_Payer() => 
+	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
 	private IEnumerable<Coding> SDE_Race_Value()
@@ -927,12 +924,11 @@ public class FHIR347_0_1_021
 			bool? ac_ = context.Operators.SameOrBefore(z_, ab_, null);
 			Code<RequestStatus> ad_ = PalliativeOrHospiceCareOrder?.StatusElement;
 			string ae_ = FHIRHelpers_4_0_001.ToString(ad_);
-			string[] af_ = new string[]
-			{
+			string[] af_ = [
 				"active",
 				"on-hold",
 				"completed",
-			};
+			];
 			bool? ag_ = context.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
 			bool? ah_ = context.Operators.And(ac_, ag_);
 			Code<RequestIntent> ai_ = PalliativeOrHospiceCareOrder?.IntentElement;
@@ -1164,11 +1160,10 @@ public class FHIR347_0_1_021
 			bool? w_ = context.Operators.In<CqlDateTime>(u_, v_, null);
 			Code<MedicationRequest.MedicationrequestStatus> x_ = StatinOrdered?.StatusElement;
 			string y_ = FHIRHelpers_4_0_001.ToString(x_);
-			string[] z_ = new string[]
-			{
+			string[] z_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
 			bool? ab_ = context.Operators.And(w_, aa_);
 			Code<MedicationRequest.MedicationRequestIntent> ac_ = StatinOrdered?.IntentElement;
@@ -1270,11 +1265,10 @@ public class FHIR347_0_1_021
 			bool? aa_ = context.Operators.Exists<Timing>(z_);
 			Code<MedicationRequest.MedicationrequestStatus> ab_ = ActiveStatin?.StatusElement;
 			string ac_ = FHIRHelpers_4_0_001.ToString(ab_);
-			string[] ad_ = new string[]
-			{
+			string[] ad_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? ae_ = context.Operators.In<string>(ac_, (ad_ as IEnumerable<string>));
 			bool? af_ = context.Operators.And(aa_, ae_);
 

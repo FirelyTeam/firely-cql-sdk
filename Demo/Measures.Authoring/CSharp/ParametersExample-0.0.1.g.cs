@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -97,10 +96,9 @@ public class ParametersExample_0_0_1
 	private Patient Patient_Filter_Value()
 	{
 		Patient a_ = this.Patient();
-		Patient[] b_ = new Patient[]
-		{
+		Patient[] b_ = [
 			a_,
-		};
+		];
 		bool? c_(Patient P)
 		{
 			Code<AdministrativeGender> f_ = P?.GenderElement;

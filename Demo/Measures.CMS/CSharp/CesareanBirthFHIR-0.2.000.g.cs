@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -51,11 +50,11 @@ public class CesareanBirthFHIR_0_2_000
     internal Lazy<IEnumerable<Encounter>> __Initial_Population;
     internal Lazy<IEnumerable<Encounter>> __Delivery_Encounter_with_Cesarean_Birth;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
-    internal Lazy<IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>> __Variable_Calculated_Gestational_Age;
+    internal Lazy<IEnumerable<(string EncounterID, int? CalculatedCGA)?>> __Variable_Calculated_Gestational_Age;
 
     #endregion
     public CesareanBirthFHIR_0_2_000(CqlContext context)
@@ -98,11 +97,11 @@ public class CesareanBirthFHIR_0_2_000
         __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
         __Delivery_Encounter_with_Cesarean_Birth = new Lazy<IEnumerable<Encounter>>(this.Delivery_Encounter_with_Cesarean_Birth_Value);
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
-        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO>>(this.Variable_Calculated_Gestational_Age_Value);
+        __Variable_Calculated_Gestational_Age = new Lazy<IEnumerable<(string EncounterID, int? CalculatedCGA)?>>(this.Variable_Calculated_Gestational_Age_Value);
     }
     #region Dependencies
 
@@ -215,14 +214,13 @@ public class CesareanBirthFHIR_0_2_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("11637-6", "http://loinc.org", null, null),
 			new CqlCode("11639-2", "http://loinc.org", null, null),
 			new CqlCode("11977-6", "http://loinc.org", null, null),
 			new CqlCode("11996-6", "http://loinc.org", null, null),
 			new CqlCode("93857-1", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -390,12 +388,11 @@ public class CesareanBirthFHIR_0_2_000
 			ObservationStatus? o_ = n_?.Value;
 			Code<ObservationStatus> p_ = context.Operators.Convert<Code<ObservationStatus>>(o_);
 			string q_ = context.Operators.Convert<string>(p_);
-			string[] r_ = new string[]
-			{
+			string[] r_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
 			bool? t_ = context.Operators.And(m_, s_);
 			object u_()
@@ -601,12 +598,11 @@ public class CesareanBirthFHIR_0_2_000
 			ObservationStatus? w_ = v_?.Value;
 			Code<ObservationStatus> x_ = context.Operators.Convert<Code<ObservationStatus>>(w_);
 			string y_ = context.Operators.Convert<string>(x_);
-			string[] z_ = new string[]
-			{
+			string[] z_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
 			bool? ab_ = context.Operators.And(u_, aa_);
 			DataType ac_ = Parity?.Value;
@@ -755,12 +751,11 @@ public class CesareanBirthFHIR_0_2_000
 			ObservationStatus? w_ = v_?.Value;
 			Code<ObservationStatus> x_ = context.Operators.Convert<Code<ObservationStatus>>(w_);
 			string y_ = context.Operators.Convert<string>(x_);
-			string[] z_ = new string[]
-			{
+			string[] z_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
 			bool? ab_ = context.Operators.And(u_, aa_);
 			DataType ac_ = PretermBirth?.Value;
@@ -909,12 +904,11 @@ public class CesareanBirthFHIR_0_2_000
 			ObservationStatus? w_ = v_?.Value;
 			Code<ObservationStatus> x_ = context.Operators.Convert<Code<ObservationStatus>>(w_);
 			string y_ = context.Operators.Convert<string>(x_);
-			string[] z_ = new string[]
-			{
+			string[] z_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
 			bool? ab_ = context.Operators.And(u_, aa_);
 			DataType ac_ = TermBirth?.Value;
@@ -1093,12 +1087,11 @@ public class CesareanBirthFHIR_0_2_000
 						ObservationStatus? af_ = ae_?.Value;
 						Code<ObservationStatus> ag_ = context.Operators.Convert<Code<ObservationStatus>>(af_);
 						string ah_ = context.Operators.Convert<string>(ag_);
-						string[] ai_ = new string[]
-						{
+						string[] ai_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? aj_ = context.Operators.In<string>(ah_, (ai_ as IEnumerable<string>));
 						bool? ak_ = context.Operators.And(ad_, aj_);
 
@@ -1236,12 +1229,11 @@ public class CesareanBirthFHIR_0_2_000
 						ObservationStatus? cm_ = cl_?.Value;
 						Code<ObservationStatus> cn_ = context.Operators.Convert<Code<ObservationStatus>>(cm_);
 						string co_ = context.Operators.Convert<string>(cn_);
-						string[] cp_ = new string[]
-						{
+						string[] cp_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? cq_ = context.Operators.In<string>(co_, (cp_ as IEnumerable<string>));
 						bool? cr_ = context.Operators.And(ck_, cq_);
 
@@ -1379,12 +1371,11 @@ public class CesareanBirthFHIR_0_2_000
 						ObservationStatus? et_ = es_?.Value;
 						Code<ObservationStatus> eu_ = context.Operators.Convert<Code<ObservationStatus>>(et_);
 						string ev_ = context.Operators.Convert<string>(eu_);
-						string[] ew_ = new string[]
-						{
+						string[] ew_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? ex_ = context.Operators.In<string>(ev_, (ew_ as IEnumerable<string>));
 						bool? ey_ = context.Operators.And(er_, ex_);
 
@@ -1522,12 +1513,11 @@ public class CesareanBirthFHIR_0_2_000
 						ObservationStatus? gz_ = gy_?.Value;
 						Code<ObservationStatus> ha_ = context.Operators.Convert<Code<ObservationStatus>>(gz_);
 						string hb_ = context.Operators.Convert<string>(ha_);
-						string[] hc_ = new string[]
-						{
+						string[] hc_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? hd_ = context.Operators.In<string>(hb_, (hc_ as IEnumerable<string>));
 						bool? he_ = context.Operators.And(gx_, hd_);
 
@@ -1664,12 +1654,11 @@ public class CesareanBirthFHIR_0_2_000
 						ObservationStatus? jf_ = je_?.Value;
 						Code<ObservationStatus> jg_ = context.Operators.Convert<Code<ObservationStatus>>(jf_);
 						string jh_ = context.Operators.Convert<string>(jg_);
-						string[] ji_ = new string[]
-						{
+						string[] ji_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? jj_ = context.Operators.In<string>(jh_, (ji_ as IEnumerable<string>));
 						bool? jk_ = context.Operators.And(jd_, jj_);
 
@@ -1806,12 +1795,11 @@ public class CesareanBirthFHIR_0_2_000
 						ObservationStatus? ll_ = lk_?.Value;
 						Code<ObservationStatus> lm_ = context.Operators.Convert<Code<ObservationStatus>>(ll_);
 						string ln_ = context.Operators.Convert<string>(lm_);
-						string[] lo_ = new string[]
-						{
+						string[] lo_ = [
 							"final",
 							"amended",
 							"corrected",
-						};
+						];
 						bool? lp_ = context.Operators.In<string>(ln_, (lo_ as IEnumerable<string>));
 						bool? lq_ = context.Operators.And(lj_, lp_);
 
@@ -2045,37 +2033,37 @@ public class CesareanBirthFHIR_0_2_000
 	public IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -2089,15 +2077,15 @@ public class CesareanBirthFHIR_0_2_000
 	public CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> Variable_Calculated_Gestational_Age_Value()
+	private IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age_Value()
 	{
-		IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> a_ = PCMaternal_5_16_000.Variable_Calculated_Gestational_Age();
+		IEnumerable<(string EncounterID, int? CalculatedCGA)?> a_ = PCMaternal_5_16_000.Variable_Calculated_Gestational_Age();
 
 		return a_;
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<Tuple_QRZgNJCaGQEYIeOSBhjLZNSO> Variable_Calculated_Gestational_Age() => 
+	public IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age() => 
 		__Variable_Calculated_Gestational_Age.Value;
 
 }

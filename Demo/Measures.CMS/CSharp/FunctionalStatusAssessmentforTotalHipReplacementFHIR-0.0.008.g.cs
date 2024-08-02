@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -63,9 +62,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
     internal Lazy<CqlCode[]> __ObservationCategoryCodes;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<CqlDateTime> __November_1_Year_Prior_to_the_Measurement_Period;
     internal Lazy<bool?> __Has_Qualifying_Encounter;
@@ -149,9 +148,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
         __ObservationCategoryCodes = new Lazy<CqlCode[]>(this.ObservationCategoryCodes_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __November_1_Year_Prior_to_the_Measurement_Period = new Lazy<CqlDateTime>(this.November_1_Year_Prior_to_the_Measurement_Period_Value);
         __Has_Qualifying_Encounter = new Lazy<bool?>(this.Has_Qualifying_Encounter_Value);
@@ -454,8 +453,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("72095-3", "http://loinc.org", null, null),
 			new CqlCode("45755-6", "http://loinc.org", null, null),
 			new CqlCode("72097-9", "http://loinc.org", null, null),
@@ -469,7 +467,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			new CqlCode("72028-4", "http://loinc.org", null, null),
 			new CqlCode("72025-0", "http://loinc.org", null, null),
 			new CqlCode("72027-6", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -480,10 +478,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] CPT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("99024", "http://www.ama-assn.org/go/cpt", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -494,7 +491,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] ConditionCategoryCodes_Value()
 	{
-		CqlCode[] a_ = new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -506,14 +503,13 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("419099009", "http://snomed.info/sct", null, null),
 			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
 			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
 			new CqlCode("702956004", "http://snomed.info/sct", null, null),
 			new CqlCode("373066001", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -524,10 +520,9 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/v3-ObservationCategory", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -562,37 +557,37 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -1129,34 +1124,27 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		IEnumerable<Observation> s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
 		IEnumerable<Observation> t_ = Status_1_6_000.isAssessmentPerformed(s_);
 		IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation>> u_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_);
-		Tuple_EIPfMaZVhFScjijaOFHiCPVMb v_(ValueTuple<Observation, Observation, Observation, Observation, Observation> _valueTuple)
+		(Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)? v_(ValueTuple<Observation, Observation, Observation, Observation, Observation> _valueTuple)
 		{
-			Tuple_EIPfMaZVhFScjijaOFHiCPVMb ab_ = new Tuple_EIPfMaZVhFScjijaOFHiCPVMb
-			{
-				HOOSLifeQuality = _valueTuple.Item1,
-				HOOSSport = _valueTuple.Item2,
-				HOOSActivityScore = _valueTuple.Item3,
-				HOOSSymptoms = _valueTuple.Item4,
-				HOOSPain = _valueTuple.Item5,
-			};
+			(Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)? ab_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5);
 
 			return ab_;
 		};
-		IEnumerable<Tuple_EIPfMaZVhFScjijaOFHiCPVMb> w_ = context.Operators.Select<ValueTuple<Observation, Observation, Observation, Observation, Observation>, Tuple_EIPfMaZVhFScjijaOFHiCPVMb>(u_, v_);
-		bool? x_(Tuple_EIPfMaZVhFScjijaOFHiCPVMb tuple_eipfmazvhfscjijaofhicpvmb)
+		IEnumerable<(Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?> w_ = context.Operators.Select<ValueTuple<Observation, Observation, Observation, Observation, Observation>, (Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?>(u_, v_);
+		bool? x_((Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)? tuple_eipfmazvhfscjijaofhicpvmb)
 		{
-			DataType ac_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSLifeQuality?.Effective;
+			DataType ac_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality?.Effective;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.toInterval(ad_);
 			CqlDateTime af_ = context.Operators.Start(ae_);
 			CqlDate ag_ = context.Operators.DateFrom(af_);
-			DataType ah_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSSport?.Effective;
+			DataType ah_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport?.Effective;
 			object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval(ai_);
 			CqlDateTime ak_ = context.Operators.Start(aj_);
 			CqlDate al_ = context.Operators.DateFrom(ak_);
 			bool? am_ = context.Operators.SameAs(ag_, al_, null);
-			DataType an_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSSport?.Value;
+			DataType an_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport?.Value;
 			object ao_ = FHIRHelpers_4_3_000.ToValue(an_);
 			bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
 			bool? aq_ = context.Operators.And(am_, ap_);
@@ -1164,14 +1152,14 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> at_ = QICoreCommon_2_0_000.toInterval(as_);
 			CqlDateTime au_ = context.Operators.Start(at_);
 			CqlDate av_ = context.Operators.DateFrom(au_);
-			DataType aw_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSActivityScore?.Effective;
+			DataType aw_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore?.Effective;
 			object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
 			CqlInterval<CqlDateTime> ay_ = QICoreCommon_2_0_000.toInterval(ax_);
 			CqlDateTime az_ = context.Operators.Start(ay_);
 			CqlDate ba_ = context.Operators.DateFrom(az_);
 			bool? bb_ = context.Operators.SameAs(av_, ba_, null);
 			bool? bc_ = context.Operators.And(aq_, bb_);
-			DataType bd_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSActivityScore?.Value;
+			DataType bd_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore?.Value;
 			object be_ = FHIRHelpers_4_3_000.ToValue(bd_);
 			bool? bf_ = context.Operators.Not((bool?)(be_ is null));
 			bool? bg_ = context.Operators.And(bc_, bf_);
@@ -1179,14 +1167,14 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> bj_ = QICoreCommon_2_0_000.toInterval(bi_);
 			CqlDateTime bk_ = context.Operators.Start(bj_);
 			CqlDate bl_ = context.Operators.DateFrom(bk_);
-			DataType bm_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSSymptoms?.Effective;
+			DataType bm_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms?.Effective;
 			object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
 			CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_0_000.toInterval(bn_);
 			CqlDateTime bp_ = context.Operators.Start(bo_);
 			CqlDate bq_ = context.Operators.DateFrom(bp_);
 			bool? br_ = context.Operators.SameAs(bl_, bq_, null);
 			bool? bs_ = context.Operators.And(bg_, br_);
-			DataType bt_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSSymptoms?.Value;
+			DataType bt_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms?.Value;
 			object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
 			bool? bv_ = context.Operators.Not((bool?)(bu_ is null));
 			bool? bw_ = context.Operators.And(bs_, bv_);
@@ -1194,65 +1182,64 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> bz_ = QICoreCommon_2_0_000.toInterval(by_);
 			CqlDateTime ca_ = context.Operators.Start(bz_);
 			CqlDate cb_ = context.Operators.DateFrom(ca_);
-			DataType cc_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSPain?.Effective;
+			DataType cc_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain?.Effective;
 			object cd_ = FHIRHelpers_4_3_000.ToValue(cc_);
 			CqlInterval<CqlDateTime> ce_ = QICoreCommon_2_0_000.toInterval(cd_);
 			CqlDateTime cf_ = context.Operators.Start(ce_);
 			CqlDate cg_ = context.Operators.DateFrom(cf_);
 			bool? ch_ = context.Operators.SameAs(cb_, cg_, null);
 			bool? ci_ = context.Operators.And(bw_, ch_);
-			DataType cj_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSPain?.Value;
+			DataType cj_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain?.Value;
 			object ck_ = FHIRHelpers_4_3_000.ToValue(cj_);
 			bool? cl_ = context.Operators.Not((bool?)(ck_ is null));
 			bool? cm_ = context.Operators.And(ci_, cl_);
-			DataType cn_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSLifeQuality?.Value;
+			DataType cn_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality?.Value;
 			object co_ = FHIRHelpers_4_3_000.ToValue(cn_);
 			bool? cp_ = context.Operators.Not((bool?)(co_ is null));
 			bool? cq_ = context.Operators.And(cm_, cp_);
 
 			return cq_;
 		};
-		IEnumerable<Tuple_EIPfMaZVhFScjijaOFHiCPVMb> y_ = context.Operators.Where<Tuple_EIPfMaZVhFScjijaOFHiCPVMb>(w_, x_);
-		CqlDate z_(Tuple_EIPfMaZVhFScjijaOFHiCPVMb tuple_eipfmazvhfscjijaofhicpvmb)
+		IEnumerable<(Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?> y_ = context.Operators.Where<(Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?>(w_, x_);
+		CqlDate z_((Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)? tuple_eipfmazvhfscjijaofhicpvmb)
 		{
-			DataType cr_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSLifeQuality?.Effective;
+			DataType cr_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality?.Effective;
 			object cs_ = FHIRHelpers_4_3_000.ToValue(cr_);
 			CqlInterval<CqlDateTime> ct_ = QICoreCommon_2_0_000.toInterval(cs_);
 			CqlDateTime cu_ = context.Operators.Start(ct_);
 			CqlDate cv_ = context.Operators.DateFrom(cu_);
-			DataType cw_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSSport?.Effective;
+			DataType cw_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport?.Effective;
 			object cx_ = FHIRHelpers_4_3_000.ToValue(cw_);
 			CqlInterval<CqlDateTime> cy_ = QICoreCommon_2_0_000.toInterval(cx_);
 			CqlDateTime cz_ = context.Operators.Start(cy_);
 			CqlDate da_ = context.Operators.DateFrom(cz_);
-			DataType db_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSActivityScore?.Effective;
+			DataType db_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore?.Effective;
 			object dc_ = FHIRHelpers_4_3_000.ToValue(db_);
 			CqlInterval<CqlDateTime> dd_ = QICoreCommon_2_0_000.toInterval(dc_);
 			CqlDateTime de_ = context.Operators.Start(dd_);
 			CqlDate df_ = context.Operators.DateFrom(de_);
-			DataType dg_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSSymptoms?.Effective;
+			DataType dg_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms?.Effective;
 			object dh_ = FHIRHelpers_4_3_000.ToValue(dg_);
 			CqlInterval<CqlDateTime> di_ = QICoreCommon_2_0_000.toInterval(dh_);
 			CqlDateTime dj_ = context.Operators.Start(di_);
 			CqlDate dk_ = context.Operators.DateFrom(dj_);
-			DataType dl_ = tuple_eipfmazvhfscjijaofhicpvmb.HOOSPain?.Effective;
+			DataType dl_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain?.Effective;
 			object dm_ = FHIRHelpers_4_3_000.ToValue(dl_);
 			CqlInterval<CqlDateTime> dn_ = QICoreCommon_2_0_000.toInterval(dm_);
 			CqlDateTime do_ = context.Operators.Start(dn_);
 			CqlDate dp_ = context.Operators.DateFrom(do_);
-			CqlDate[] dq_ = new CqlDate[]
-			{
+			CqlDate[] dq_ = [
 				cv_,
 				da_,
 				df_,
 				dk_,
 				dp_,
-			};
+			];
 			CqlDate dr_ = context.Operators.Max<CqlDate>((dq_ as IEnumerable<CqlDate>));
 
 			return dr_;
 		};
-		IEnumerable<CqlDate> aa_ = context.Operators.Select<Tuple_EIPfMaZVhFScjijaOFHiCPVMb, CqlDate>(y_, z_);
+		IEnumerable<CqlDate> aa_ = context.Operators.Select<(Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)?, CqlDate>(y_, z_);
 
 		return aa_;
 	}
@@ -1471,64 +1458,59 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
 		IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		IEnumerable<ValueTuple<Observation, Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuple_DDTAOdcFieSJbGgRLLZPYbGQb h_(ValueTuple<Observation, Observation> _valueTuple)
+		(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? h_(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			Tuple_DDTAOdcFieSJbGgRLLZPYbGQb n_ = new Tuple_DDTAOdcFieSJbGgRLLZPYbGQb
-			{
-				PROMIS10MentalScore = _valueTuple.Item1,
-				PROMIS10PhysicalScore = _valueTuple.Item2,
-			};
+			(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? n_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return n_;
 		};
-		IEnumerable<Tuple_DDTAOdcFieSJbGgRLLZPYbGQb> i_ = context.Operators.Select<ValueTuple<Observation, Observation>, Tuple_DDTAOdcFieSJbGgRLLZPYbGQb>(g_, h_);
-		bool? j_(Tuple_DDTAOdcFieSJbGgRLLZPYbGQb tuple_ddtaodcfiesjbggrllzpybgqb)
+		IEnumerable<(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> i_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(g_, h_);
+		bool? j_((Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb)
 		{
-			DataType o_ = tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10MentalScore?.Effective;
+			DataType o_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Effective;
 			object p_ = FHIRHelpers_4_3_000.ToValue(o_);
 			CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.toInterval(p_);
 			CqlDateTime r_ = context.Operators.Start(q_);
 			CqlDate s_ = context.Operators.DateFrom(r_);
-			DataType t_ = tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10PhysicalScore?.Effective;
+			DataType t_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore?.Effective;
 			object u_ = FHIRHelpers_4_3_000.ToValue(t_);
 			CqlInterval<CqlDateTime> v_ = QICoreCommon_2_0_000.toInterval(u_);
 			CqlDateTime w_ = context.Operators.Start(v_);
 			CqlDate x_ = context.Operators.DateFrom(w_);
 			bool? y_ = context.Operators.SameAs(s_, x_, null);
-			DataType z_ = tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10PhysicalScore?.Value;
+			DataType z_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore?.Value;
 			object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
 			bool? ac_ = context.Operators.And(y_, ab_);
-			DataType ad_ = tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10MentalScore?.Value;
+			DataType ad_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Value;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			bool? af_ = context.Operators.Not((bool?)(ae_ is null));
 			bool? ag_ = context.Operators.And(ac_, af_);
 
 			return ag_;
 		};
-		IEnumerable<Tuple_DDTAOdcFieSJbGgRLLZPYbGQb> k_ = context.Operators.Where<Tuple_DDTAOdcFieSJbGgRLLZPYbGQb>(i_, j_);
-		CqlDate l_(Tuple_DDTAOdcFieSJbGgRLLZPYbGQb tuple_ddtaodcfiesjbggrllzpybgqb)
+		IEnumerable<(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> k_ = context.Operators.Where<(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(i_, j_);
+		CqlDate l_((Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb)
 		{
-			DataType ah_ = tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10MentalScore?.Effective;
+			DataType ah_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Effective;
 			object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval(ai_);
 			CqlDateTime ak_ = context.Operators.Start(aj_);
 			CqlDate al_ = context.Operators.DateFrom(ak_);
-			DataType am_ = tuple_ddtaodcfiesjbggrllzpybgqb.PROMIS10PhysicalScore?.Effective;
+			DataType am_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore?.Effective;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
 			CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.toInterval(an_);
 			CqlDateTime ap_ = context.Operators.Start(ao_);
 			CqlDate aq_ = context.Operators.DateFrom(ap_);
-			CqlDate[] ar_ = new CqlDate[]
-			{
+			CqlDate[] ar_ = [
 				al_,
 				aq_,
-			};
+			];
 			CqlDate as_ = context.Operators.Max<CqlDate>((ar_ as IEnumerable<CqlDate>));
 
 			return as_;
 		};
-		IEnumerable<CqlDate> m_ = context.Operators.Select<Tuple_DDTAOdcFieSJbGgRLLZPYbGQb, CqlDate>(k_, l_);
+		IEnumerable<CqlDate> m_ = context.Operators.Select<(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?, CqlDate>(k_, l_);
 
 		return m_;
 	}
@@ -1630,64 +1612,59 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
 		IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		IEnumerable<ValueTuple<Observation, Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH h_(ValueTuple<Observation, Observation> _valueTuple)
+		(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? h_(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH n_ = new Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH
-			{
-				VR12MentalAssessment = _valueTuple.Item1,
-				VR12PhysicalAssessment = _valueTuple.Item2,
-			};
+			(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? n_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return n_;
 		};
-		IEnumerable<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH> i_ = context.Operators.Select<ValueTuple<Observation, Observation>, Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(g_, h_);
-		bool? j_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
+		IEnumerable<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> i_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(g_, h_);
+		bool? j_((Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
-			DataType o_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective;
+			DataType o_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
 			object p_ = FHIRHelpers_4_3_000.ToValue(o_);
 			CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.toInterval(p_);
 			CqlDateTime r_ = context.Operators.Start(q_);
 			CqlDate s_ = context.Operators.DateFrom(r_);
-			DataType t_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Effective;
+			DataType t_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Effective;
 			object u_ = FHIRHelpers_4_3_000.ToValue(t_);
 			CqlInterval<CqlDateTime> v_ = QICoreCommon_2_0_000.toInterval(u_);
 			CqlDateTime w_ = context.Operators.Start(v_);
 			CqlDate x_ = context.Operators.DateFrom(w_);
 			bool? y_ = context.Operators.SameAs(s_, x_, null);
-			DataType z_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Value;
+			DataType z_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
 			object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
 			bool? ac_ = context.Operators.And(y_, ab_);
-			DataType ad_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Value;
+			DataType ad_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			bool? af_ = context.Operators.Not((bool?)(ae_ is null));
 			bool? ag_ = context.Operators.And(ac_, af_);
 
 			return ag_;
 		};
-		IEnumerable<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH> k_ = context.Operators.Where<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(i_, j_);
-		CqlDate l_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
+		IEnumerable<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> k_ = context.Operators.Where<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_);
+		CqlDate l_((Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
-			DataType ah_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective;
+			DataType ah_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
 			object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval(ai_);
 			CqlDateTime ak_ = context.Operators.Start(aj_);
 			CqlDate al_ = context.Operators.DateFrom(ak_);
-			DataType am_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Effective;
+			DataType am_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Effective;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
 			CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.toInterval(an_);
 			CqlDateTime ap_ = context.Operators.Start(ao_);
 			CqlDate aq_ = context.Operators.DateFrom(ap_);
-			CqlDate[] ar_ = new CqlDate[]
-			{
+			CqlDate[] ar_ = [
 				al_,
 				aq_,
-			};
+			];
 			CqlDate as_ = context.Operators.Max<CqlDate>((ar_ as IEnumerable<CqlDate>));
 
 			return as_;
 		};
-		IEnumerable<CqlDate> m_ = context.Operators.Select<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH, CqlDate>(k_, l_);
+		IEnumerable<CqlDate> m_ = context.Operators.Select<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?, CqlDate>(k_, l_);
 
 		return m_;
 	}
@@ -1789,64 +1766,59 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
 		IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
 		IEnumerable<ValueTuple<Observation, Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
-		Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH h_(ValueTuple<Observation, Observation> _valueTuple)
+		(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? h_(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH n_ = new Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH
-			{
-				VR12MentalAssessment = _valueTuple.Item1,
-				VR12PhysicalAssessment = _valueTuple.Item2,
-			};
+			(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? n_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return n_;
 		};
-		IEnumerable<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH> i_ = context.Operators.Select<ValueTuple<Observation, Observation>, Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(g_, h_);
-		bool? j_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
+		IEnumerable<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> i_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(g_, h_);
+		bool? j_((Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
-			DataType o_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective;
+			DataType o_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
 			object p_ = FHIRHelpers_4_3_000.ToValue(o_);
 			CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.toInterval(p_);
 			CqlDateTime r_ = context.Operators.Start(q_);
 			CqlDate s_ = context.Operators.DateFrom(r_);
-			DataType t_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Effective;
+			DataType t_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Effective;
 			object u_ = FHIRHelpers_4_3_000.ToValue(t_);
 			CqlInterval<CqlDateTime> v_ = QICoreCommon_2_0_000.toInterval(u_);
 			CqlDateTime w_ = context.Operators.Start(v_);
 			CqlDate x_ = context.Operators.DateFrom(w_);
 			bool? y_ = context.Operators.SameAs(s_, x_, null);
-			DataType z_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Value;
+			DataType z_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
 			object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
 			bool? ac_ = context.Operators.And(y_, ab_);
-			DataType ad_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Value;
+			DataType ad_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			bool? af_ = context.Operators.Not((bool?)(ae_ is null));
 			bool? ag_ = context.Operators.And(ac_, af_);
 
 			return ag_;
 		};
-		IEnumerable<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH> k_ = context.Operators.Where<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH>(i_, j_);
-		CqlDate l_(Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH tuple_gadrfkrahuugjcvhwqwrujhrh)
+		IEnumerable<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> k_ = context.Operators.Where<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_);
+		CqlDate l_((Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
-			DataType ah_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12MentalAssessment?.Effective;
+			DataType ah_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
 			object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval(ai_);
 			CqlDateTime ak_ = context.Operators.Start(aj_);
 			CqlDate al_ = context.Operators.DateFrom(ak_);
-			DataType am_ = tuple_gadrfkrahuugjcvhwqwrujhrh.VR12PhysicalAssessment?.Effective;
+			DataType am_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Effective;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
 			CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.toInterval(an_);
 			CqlDateTime ap_ = context.Operators.Start(ao_);
 			CqlDate aq_ = context.Operators.DateFrom(ap_);
-			CqlDate[] ar_ = new CqlDate[]
-			{
+			CqlDate[] ar_ = [
 				al_,
 				aq_,
-			};
+			];
 			CqlDate as_ = context.Operators.Max<CqlDate>((ar_ as IEnumerable<CqlDate>));
 
 			return as_;
 		};
-		IEnumerable<CqlDate> m_ = context.Operators.Select<Tuple_GAdRFKRaHUUGJcVHWQWRUjhRH, CqlDate>(k_, l_);
+		IEnumerable<CqlDate> m_ = context.Operators.Select<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?, CqlDate>(k_, l_);
 
 		return m_;
 	}

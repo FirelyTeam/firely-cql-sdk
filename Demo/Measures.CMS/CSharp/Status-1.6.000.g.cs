@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -89,13 +88,12 @@ public class Status_1_6_000
 
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 			new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
 			new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -106,10 +104,9 @@ public class Status_1_6_000
 
 	private CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -139,12 +136,11 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
@@ -182,12 +178,11 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
@@ -261,11 +256,10 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_?.Value;
 			Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			Code<RequestIntent> i_ = D?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
@@ -289,11 +283,10 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_?.Value;
 			Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			Code<RequestIntent> i_ = D?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
@@ -317,11 +310,10 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_?.Value;
 			Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			Code<RequestIntent> i_ = S?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
@@ -345,11 +337,10 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_?.Value;
 			Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			Code<RequestIntent> i_ = S?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
@@ -373,11 +364,10 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_?.Value;
 			Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			Code<RequestIntent> i_ = S?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
@@ -401,11 +391,10 @@ public class Status_1_6_000
 			RequestStatus? d_ = c_?.Value;
 			Code<RequestStatus> e_ = context.Operators.Convert<Code<RequestStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			Code<RequestIntent> i_ = S?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
@@ -429,12 +418,11 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
@@ -453,12 +441,11 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
@@ -477,14 +464,13 @@ public class Status_1_6_000
 			Encounter.EncounterStatus? d_ = c_?.Value;
 			Code<Encounter.EncounterStatus> e_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"finished",
 				"arrived",
 				"triaged",
 				"in-progress",
 				"onleave",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
@@ -503,14 +489,13 @@ public class Status_1_6_000
 			Encounter.EncounterStatus? d_ = c_?.Value;
 			Code<Encounter.EncounterStatus> e_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"finished",
 				"arrived",
 				"triaged",
 				"in-progress",
 				"onleave",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
@@ -614,12 +599,11 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
@@ -657,12 +641,11 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
@@ -744,12 +727,11 @@ public class Status_1_6_000
 			MedicationDispense.MedicationDispenseStatusCodes? d_ = c_?.Value;
 			Code<MedicationDispense.MedicationDispenseStatusCodes> e_ = context.Operators.Convert<Code<MedicationDispense.MedicationDispenseStatusCodes>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"completed",
 				"in-progress",
 				"on-hold",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
@@ -768,12 +750,11 @@ public class Status_1_6_000
 			MedicationDispense.MedicationDispenseStatusCodes? d_ = c_?.Value;
 			Code<MedicationDispense.MedicationDispenseStatusCodes> e_ = context.Operators.Convert<Code<MedicationDispense.MedicationDispenseStatusCodes>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"completed",
 				"in-progress",
 				"on-hold",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
@@ -791,11 +772,10 @@ public class Status_1_6_000
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
@@ -818,11 +798,10 @@ public class Status_1_6_000
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 			Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
@@ -846,12 +825,11 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
@@ -889,12 +867,11 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
@@ -931,12 +908,11 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
@@ -954,12 +930,11 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
@@ -977,12 +952,11 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
@@ -1000,12 +974,11 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
@@ -1023,12 +996,11 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
@@ -1046,12 +1018,11 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
@@ -1069,12 +1040,11 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
@@ -1092,12 +1062,11 @@ public class Status_1_6_000
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
 			string e_ = context.Operators.Convert<string>(d_);
-			string[] f_ = new string[]
-			{
+			string[] f_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
@@ -1116,13 +1085,12 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"preliminary",
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
@@ -1141,13 +1109,12 @@ public class Status_1_6_000
 			ObservationStatus? d_ = c_?.Value;
 			Code<ObservationStatus> e_ = context.Operators.Convert<Code<ObservationStatus>>(d_);
 			string f_ = context.Operators.Convert<string>(e_);
-			string[] g_ = new string[]
-			{
+			string[] g_ = [
 				"preliminary",
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;

@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -201,10 +200,9 @@ public class TJCOverallFHIR_1_8_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -411,11 +409,10 @@ public class TJCOverallFHIR_1_8_000
 		{
 			Code<EventStatus> m_ = InterventionPerformed?.StatusElement;
 			string n_ = FHIRHelpers_4_0_001.ToString(m_);
-			string[] o_ = new string[]
-			{
+			string[] o_ = [
 				"completed",
 				"in-progress",
-			};
+			];
 			bool? p_ = context.Operators.In<string>(n_, (o_ as IEnumerable<string>));
 
 			return p_;

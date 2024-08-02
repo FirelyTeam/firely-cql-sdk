@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -207,11 +206,10 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("71802-3", "http://loinc.org", null, null),
 			new CqlCode("98181-1", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -222,10 +220,9 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("160734000", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -412,23 +409,19 @@ public class AdvancedIllnessandFrailty_1_8_000
 	{
 		IEnumerable<Encounter> a_ = this.Outpatient_Encounters_with_Advanced_Illness();
 		IEnumerable<ValueTuple<Encounter, Encounter>> c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
-		Tuple_EaLaedgLDgRRYaLbKIIcBTOiA d_(ValueTuple<Encounter, Encounter> _valueTuple)
+		(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? d_(ValueTuple<Encounter, Encounter> _valueTuple)
 		{
-			Tuple_EaLaedgLDgRRYaLbKIIcBTOiA k_ = new Tuple_EaLaedgLDgRRYaLbKIIcBTOiA
-			{
-				OutpatientEncounter1 = _valueTuple.Item1,
-				OutpatientEncounter2 = _valueTuple.Item2,
-			};
+			(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
-		IEnumerable<Tuple_EaLaedgLDgRRYaLbKIIcBTOiA> e_ = context.Operators.Select<ValueTuple<Encounter, Encounter>, Tuple_EaLaedgLDgRRYaLbKIIcBTOiA>(c_, d_);
-		bool? f_(Tuple_EaLaedgLDgRRYaLbKIIcBTOiA tuple_ealaedgldgrryalbkiicbtoia)
+		IEnumerable<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> e_ = context.Operators.Select<ValueTuple<Encounter, Encounter>, (Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(c_, d_);
+		bool? f_((Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia)
 		{
-			Period l_ = tuple_ealaedgldgrryalbkiicbtoia.OutpatientEncounter2?.Period;
+			Period l_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter2?.Period;
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.End(m_);
-			Period o_ = tuple_ealaedgldgrryalbkiicbtoia.OutpatientEncounter1?.Period;
+			Period o_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1?.Period;
 			CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
 			CqlDateTime q_ = context.Operators.End(p_);
 			CqlQuantity r_ = context.Operators.Quantity(1m, "day");
@@ -437,10 +430,10 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 			return t_;
 		};
-		IEnumerable<Tuple_EaLaedgLDgRRYaLbKIIcBTOiA> g_ = context.Operators.Where<Tuple_EaLaedgLDgRRYaLbKIIcBTOiA>(e_, f_);
-		Encounter h_(Tuple_EaLaedgLDgRRYaLbKIIcBTOiA tuple_ealaedgldgrryalbkiicbtoia) => 
-			tuple_ealaedgldgrryalbkiicbtoia.OutpatientEncounter1;
-		IEnumerable<Encounter> i_ = context.Operators.Select<Tuple_EaLaedgLDgRRYaLbKIIcBTOiA, Encounter>(g_, h_);
+		IEnumerable<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> g_ = context.Operators.Where<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(e_, f_);
+		Encounter h_((Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia) => 
+			tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1;
+		IEnumerable<Encounter> i_ = context.Operators.Select<(Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?, Encounter>(g_, h_);
 		bool? j_ = context.Operators.Exists<Encounter>(i_);
 
 		return j_;
@@ -639,10 +632,9 @@ public class AdvancedIllnessandFrailty_1_8_000
 		};
 		IEnumerable<Observation> q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation r_ = context.Operators.Last<Observation>(q_);
-		Observation[] s_ = new Observation[]
-		{
+		Observation[] s_ = [
 			r_,
-		};
+		];
 		bool? t_(Observation LastHousingStatus)
 		{
 			DataType aj_ = LastHousingStatus?.Value;

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -10,8 +12,10 @@ using System.Text.Json.Serialization.Metadata;
 using System.Xml.Serialization;
 using Hl7.Cql.Abstractions.Exceptions;
 using InvalidOperationException = System.InvalidOperationException;
+using PropAndSpecified=(System.Text.Json.Serialization.Metadata.JsonPropertyInfo valueProp, System.Text.Json.Serialization.Metadata.JsonPropertyInfo valuePropSpecified);
 
 namespace Hl7.Cql.Elm;
+
 
 #pragma warning disable CS1591
 
@@ -70,7 +74,7 @@ public partial class Library
     /// </summary>
     public static Library LoadFromJson(Stream stream, bool validate = true, string? originalFilePath = null)
     {
-        var node = JsonNode.Parse(stream, documentOptions: JsonDocumentOptions) ??
+        var node = JsonNode.Parse(stream, documentOptions: _jsonDocumentOptions) ??
                    throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
 
         originalFilePath ??= stream switch
@@ -91,7 +95,7 @@ public partial class Library
         // string, if it is used differently, the property is upgraded to "resultTypeSpecifier".
         CorrectLegacyConstructs(node!);
 
-        var container = node.Deserialize<LibraryContainer>(JsonDeserializerOptions) ??
+        var container = node.Deserialize<LibraryContainer>(_jsonDeserializerOptions) ??
                         throw new InvalidOperationException("Deserialization unexpectedly returned null.");
         var library = container.library;
 
@@ -153,7 +157,7 @@ public partial class Library
         // I hope (and think) this will clone the original options,
         // including all cached metadata, otherwise serialization will be a
         // lot slower than it should be.
-        var options = new JsonSerializerOptions(JsonSerializerOptions)
+        var options = new JsonSerializerOptions(_jsonSerializerOptions)
         {
             WriteIndented = writeIndented
         };
@@ -169,7 +173,7 @@ public partial class Library
     /// <param name="writeIndented">If <see langword="true" />, formats the JSON with indenting.</param>
     public void WriteJson(Stream stream, bool writeIndented = true)
     {
-        var options = new JsonSerializerOptions(JsonSerializerOptions)
+        var options = new JsonSerializerOptions(_jsonSerializerOptions)
         {
             WriteIndented = writeIndented
         };
@@ -180,9 +184,9 @@ public partial class Library
 
 
     private const int MaxDepth = 4096; // int.MaxValue is not a good idea
-    private static JsonSerializerOptions JsonSerializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
-    private static JsonSerializerOptions JsonDeserializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
-    private static JsonDocumentOptions JsonDocumentOptions = BuildJsonDocumentOptions();
+    private static JsonSerializerOptions _jsonSerializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
+    private static JsonSerializerOptions _jsonDeserializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
+    private static JsonDocumentOptions _jsonDocumentOptions = BuildJsonDocumentOptions();
 
     private static JsonDocumentOptions BuildJsonDocumentOptions()
     {
@@ -207,8 +211,9 @@ public partial class Library
         options.Converters.Add(new JsonStringEnumConverter());
 
         options.TypeInfoResolver = new PolymorphicTypeResolver(allowOldStyleTypeDiscriminators)
-            .WithAddedModifier(ModifyNarrative)
-            .WithAddedModifier(DoNotSerializeDefaultValues);
+                                   .WithAddedModifier(ModifyNarrative)
+                                   .WithAddedModifier(DoNotSerializeDefaultValues)
+                                   .WithAddedModifier(HandleSpecifiedProperties);
 
         if(allowOldStyleTypeDiscriminators)
             options.TypeInfoResolver = options.TypeInfoResolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
@@ -216,6 +221,47 @@ public partial class Library
         return options;
     }
 
+    private static void HandleSpecifiedProperties(JsonTypeInfo ti)
+    {
+        IEnumerable<PropAndSpecified> specifiedProps = ti.Properties.SelectMany(getSpecifiedProperty);
+
+        foreach(var prop in specifiedProps)
+        {
+            var originalSetter = prop.valueProp.Set;
+
+            // On deserialization, if we need to set the property,
+            // make sure we set the xxxSpecified property to true.
+            prop.valueProp.Set = (obj, value) =>
+            {
+                originalSetter?.Invoke(obj, value);
+                prop.valuePropSpecified.Set?.Invoke(obj, true);
+            };
+
+            // Only serialize the property if xxxSpecified is true.
+            prop.valueProp.ShouldSerialize = (obj, value) =>
+            {
+                var shouldSerialize = (bool?)prop.valuePropSpecified.Get?.Invoke(obj) == true;
+                if (!shouldSerialize && !IsDefaultValue(value))
+                    Debug.Fail($"Property '{prop.valueProp.Name}' is set to '{value}', but " +
+                               $"the '{prop.valuePropSpecified.Name}' is false.");
+
+                return shouldSerialize;
+            };
+
+            // The xxxSpecified prop should never be serialized itself.
+            prop.valuePropSpecified.ShouldSerialize = (_, _) => false;
+        }
+
+        IEnumerable<PropAndSpecified> getSpecifiedProperty(JsonPropertyInfo prop)
+        {
+            if (prop.Name.EndsWith("Specified") &&
+                ti.Properties.FirstOrDefault(p => p.Name == prop.Name[..^9]) is { } valueProp)
+            {
+                yield return (valueProp, prop);
+            }
+        }
+    }
+    
     private static void DoNotSerializeDefaultValues(JsonTypeInfo ti)
     {
         foreach (var prop in ti.Properties)
@@ -227,23 +273,24 @@ public partial class Library
                 if (value is null) return false;
                 if (prop.PropertyType.IsEnum) return true;
 
-
                 if (ti.Type == typeof(Interval)) return true;
 
                 var defaultAttr = prop.AttributeProvider?
                     .GetCustomAttributes(typeof(DefaultValueAttribute), false)
                     .FirstOrDefault() as DefaultValueAttribute;
 
-                var defaultValue = defaultAttr?.Value ?? getDefaultValue(prop.PropertyType);
+                var defaultValue = defaultAttr?.Value ?? GetDefaultValue(prop.PropertyType);
 
                 return !Equals(value, defaultValue);
             }
-
-            static object? getDefaultValue(Type type) {
-                return type.IsValueType ? Activator.CreateInstance(type) : null;
-            }
         }
     }
+
+    private static object? GetDefaultValue(Type type) =>
+        type.IsValueType ? Activator.CreateInstance(type) : null;
+
+    private static bool IsDefaultValue(object? o) =>
+        o is null || o.Equals(GetDefaultValue(o.GetType()));
 
     private static void ModifyNarrative(JsonTypeInfo ti)
     {

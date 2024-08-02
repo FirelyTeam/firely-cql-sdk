@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -61,9 +60,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
     internal Lazy<bool?> __Denominator_Exception;
     internal Lazy<MedicationAdministration> __First_BCG_Administered;
     internal Lazy<bool?> __Numerator;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Condition>> __Acute_Tuberculosis_Diagnosis;
     internal Lazy<IEnumerable<MedicationRequest>> __Immunosuppressive_Drugs;
@@ -122,9 +121,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
         __Denominator_Exception = new Lazy<bool?>(this.Denominator_Exception_Value);
         __First_BCG_Administered = new Lazy<MedicationAdministration>(this.First_BCG_Administered_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Acute_Tuberculosis_Diagnosis = new Lazy<IEnumerable<Condition>>(this.Acute_Tuberculosis_Diagnosis_Value);
         __Immunosuppressive_Drugs = new Lazy<IEnumerable<MedicationRequest>>(this.Immunosuppressive_Drugs_Value);
@@ -295,15 +294,14 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("169331000", "http://snomed.info/sct", null, null),
 			new CqlCode("369935001", "http://snomed.info/sct", null, null),
 			new CqlCode("369949005", "http://snomed.info/sct", null, null),
 			new CqlCode("369934002", "http://snomed.info/sct", null, null),
 			new CqlCode("254292007", "http://snomed.info/sct", null, null),
 			new CqlCode("419099009", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -314,10 +312,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 	private CqlCode[] ICD10CM_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("D09.0", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -328,10 +325,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 	private CqlCode[] LOINC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("21902-2", "http://loinc.org", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -342,10 +338,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 	private CqlCode[] ActCode_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -383,10 +378,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
     [CqlDeclaration("isConfirmedActiveDiagnosis")]
 	public bool? isConfirmedActiveDiagnosis(Condition Condition)
 	{
-		Condition[] a_ = new Condition[]
-		{
+		Condition[] a_ = [
 			Condition,
-		};
+		];
 		bool? b_(Condition Diagnosis)
 		{
 			CodeableConcept f_ = Diagnosis?.ClinicalStatus;
@@ -541,10 +535,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	private Procedure First_Qualifying_Bladder_Cancer_Staging_Procedure_Value()
 	{
 		Procedure a_ = this.First_Bladder_Cancer_Staging_Procedure();
-		Procedure[] b_ = new Procedure[]
-		{
+		Procedure[] b_ = [
 			a_,
-		};
+		];
 		bool? c_(Procedure FirstBladderCancerStaging)
 		{
 			CqlDateTime f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period();
@@ -570,10 +563,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	private Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period_Value()
 	{
 		Procedure a_ = this.First_Bladder_Cancer_Staging_Procedure();
-		Procedure[] b_ = new Procedure[]
-		{
+		Procedure[] b_ = [
 			a_,
-		};
+		];
 		bool? c_(Procedure FirstBladderCancerStaging)
 		{
 			CqlDateTime f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period();
@@ -603,10 +595,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		Procedure b_(ResourceReference StagingReference)
 		{
 			Procedure d_ = this.First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period();
-			Procedure[] e_ = new Procedure[]
-			{
+			Procedure[] e_ = [
 				d_,
-			};
+			];
 			bool? f_(Procedure FirstBladderCancerStagingMP)
 			{
 				Id i_ = FirstBladderCancerStagingMP?.IdElement;
@@ -662,12 +653,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			ObservationStatus? ah_ = ag_?.Value;
 			Code<ObservationStatus> ai_ = context.Operators.Convert<Code<ObservationStatus>>(ah_);
 			string aj_ = context.Operators.Convert<string>(ai_);
-			string[] ak_ = new string[]
-			{
+			string[] ak_ = [
 				"final",
 				"amended",
 				"corrected",
-			};
+			];
 			bool? al_ = context.Operators.In<string>(aj_, (ak_ as IEnumerable<string>));
 			bool? am_ = context.Operators.And(af_, al_);
 
@@ -753,10 +743,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> f_(MedicationAdministration BCGNotGiven)
 		{
 			Procedure j_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] k_ = new Procedure[]
-			{
+			Procedure[] k_ = [
 				j_,
-			};
+			];
 			bool? l_(Procedure FirstBladderCancerStaging)
 			{
 				bool? p_(Extension @this)
@@ -878,10 +867,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> f_(MedicationAdministration BCG)
 		{
 			Procedure m_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] n_ = new Procedure[]
-			{
+			Procedure[] n_ = [
 				m_,
-			};
+			];
 			bool? o_(Procedure FirstBladderCancerStaging)
 			{
 				DataType s_ = BCG?.Effective;
@@ -927,11 +915,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			MedicationAdministration.MedicationAdministrationStatusCodes? aw_ = av_?.Value;
 			Code<MedicationAdministration.MedicationAdministrationStatusCodes> ax_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(aw_);
 			string ay_ = context.Operators.Convert<string>(ax_);
-			string[] az_ = new string[]
-			{
+			string[] az_ = [
 				"in-progress",
 				"completed",
-			};
+			];
 			bool? ba_ = context.Operators.In<string>(ay_, (az_ as IEnumerable<string>));
 
 			return ba_;
@@ -968,37 +955,37 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	public bool? Numerator() => 
 		__Numerator.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
@@ -1019,10 +1006,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Condition> c_(Condition ActiveTuberculosis)
 		{
 			Procedure g_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] h_ = new Procedure[]
-			{
+			Procedure[] h_ = [
 				g_,
-			};
+			];
 			bool? i_(Procedure FirstBladderCancerStaging)
 			{
 				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.prevalenceInterval(ActiveTuberculosis);
@@ -1065,10 +1051,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationRequest> f_(MedicationRequest ImmunosuppressiveDrugs)
 		{
 			Procedure h_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] i_ = new Procedure[]
-			{
+			Procedure[] i_ = [
 				h_,
-			};
+			];
 			bool? j_(Procedure FirstBladderCancerStaging)
 			{
 				CqlInterval<CqlDate> n_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ImmunosuppressiveDrugs);
@@ -1105,10 +1090,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> c_(Procedure Cystectomy)
 		{
 			Procedure g_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] h_ = new Procedure[]
-			{
+			Procedure[] h_ = [
 				g_,
-			};
+			];
 			bool? i_(Procedure FirstBladderCancerStaging)
 			{
 				DataType m_ = Cystectomy?.Performed;
@@ -1173,10 +1157,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Condition> i_(Condition ExclusionDiagnosis)
 		{
 			Procedure n_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] o_ = new Procedure[]
-			{
+			Procedure[] o_ = [
 				n_,
-			};
+			];
 			bool? p_(Procedure FirstBladderCancerStaging)
 			{
 				CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.prevalenceInterval(ExclusionDiagnosis);
@@ -1222,10 +1205,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationRequest> f_(MedicationRequest ExclusionMed)
 		{
 			Procedure s_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] t_ = new Procedure[]
-			{
+			Procedure[] t_ = [
 				s_,
-			};
+			];
 			bool? u_(Procedure FirstBladderCancerStaging)
 			{
 				CqlInterval<CqlDate> y_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(ExclusionMed);
@@ -1263,11 +1245,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			Code<MedicationRequest.MedicationrequestStatus> at_ = ExclusionMed?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? au_ = at_?.Value;
 			string av_ = context.Operators.Convert<string>(au_);
-			string[] aw_ = new string[]
-			{
+			string[] aw_ = [
 				"active",
 				"completed",
-			};
+			];
 			bool? ax_ = context.Operators.In<string>(av_, (aw_ as IEnumerable<string>));
 			Code<MedicationRequest.MedicationRequestIntent> ay_ = ExclusionMed?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? az_ = ay_?.Value;
@@ -1289,10 +1270,9 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<Procedure> m_(Procedure ExclusionProcedure)
 		{
 			Procedure bi_ = this.First_Bladder_Cancer_Staging_Procedure();
-			Procedure[] bj_ = new Procedure[]
-			{
+			Procedure[] bj_ = [
 				bi_,
-			};
+			];
 			bool? bk_(Procedure FirstBladderCancerStaging)
 			{
 				DataType bo_ = ExclusionProcedure?.Performed;

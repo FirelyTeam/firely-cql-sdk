@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -41,9 +40,9 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
     internal Lazy<IEnumerable<MedicationAdministration>> __Opioid_Antagonist_Administration;
     internal Lazy<IEnumerable<Encounter>> __Encounter_with_Non_Enteral_Opioid_Antagonist_Administration_Outside_of_Operating_Room_and_within_12_Hrs_After_Opioid;
     internal Lazy<IEnumerable<Encounter>> __Numerator;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -76,9 +75,9 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
         __Opioid_Antagonist_Administration = new Lazy<IEnumerable<MedicationAdministration>>(this.Opioid_Antagonist_Administration_Value);
         __Encounter_with_Non_Enteral_Opioid_Antagonist_Administration_Outside_of_Operating_Room_and_within_12_Hrs_After_Opioid = new Lazy<IEnumerable<Encounter>>(this.Encounter_with_Non_Enteral_Opioid_Antagonist_Administration_Outside_of_Operating_Room_and_within_12_Hrs_After_Opioid_Value);
         __Numerator = new Lazy<IEnumerable<Encounter>>(this.Numerator_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -155,10 +154,9 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 	private CqlCode[] SNOMEDCT_Value()
 	{
-		CqlCode[] a_ = new CqlCode[]
-		{
+		CqlCode[] a_ = [
 			new CqlCode("419099009", "http://snomed.info/sct", null, null),
-		};
+		];
 
 		return a_;
 	}
@@ -169,7 +167,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 	private CqlCode[] HSLOC_Value()
 	{
-		CqlCode[] a_ = new CqlCode[0]
+		CqlCode[] a_ = []
 ;
 
 		return a_;
@@ -392,21 +390,16 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		IEnumerable<MedicationAdministration> b_ = this.Opioid_Administration();
 		IEnumerable<Encounter> c_ = this.Denominator();
 		IEnumerable<ValueTuple<MedicationAdministration, MedicationAdministration, Encounter>> d_ = context.Operators.CrossJoin<MedicationAdministration, MedicationAdministration, Encounter>(a_, b_, c_);
-		Tuple_DiOQPVXLKifMhgTIYEEjRUSaD e_(ValueTuple<MedicationAdministration, MedicationAdministration, Encounter> _valueTuple)
+		(MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)? e_(ValueTuple<MedicationAdministration, MedicationAdministration, Encounter> _valueTuple)
 		{
-			Tuple_DiOQPVXLKifMhgTIYEEjRUSaD k_ = new Tuple_DiOQPVXLKifMhgTIYEEjRUSaD
-			{
-				OpioidAntagonistGiven = _valueTuple.Item1,
-				OpioidGiven = _valueTuple.Item2,
-				EncounterWithQualifyingAge = _valueTuple.Item3,
-			};
+			(MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)? k_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return k_;
 		};
-		IEnumerable<Tuple_DiOQPVXLKifMhgTIYEEjRUSaD> f_ = context.Operators.Select<ValueTuple<MedicationAdministration, MedicationAdministration, Encounter>, Tuple_DiOQPVXLKifMhgTIYEEjRUSaD>(d_, e_);
-		bool? g_(Tuple_DiOQPVXLKifMhgTIYEEjRUSaD tuple_dioqpvxlkifmhgtiyeejrusad)
+		IEnumerable<(MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)?> f_ = context.Operators.Select<ValueTuple<MedicationAdministration, MedicationAdministration, Encounter>, (MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)?>(d_, e_);
+		bool? g_((MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)? tuple_dioqpvxlkifmhgtiyeejrusad)
 		{
-			List<Encounter.LocationComponent> l_ = tuple_dioqpvxlkifmhgtiyeejrusad.EncounterWithQualifyingAge?.Location;
+			List<Encounter.LocationComponent> l_ = tuple_dioqpvxlkifmhgtiyeejrusad?.EncounterWithQualifyingAge?.Location;
 			bool? m_(Encounter.LocationComponent EncounterLocation)
 			{
 				ResourceReference bh_ = EncounterLocation?.Location;
@@ -421,7 +414,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 				IEnumerable<CqlConcept> bl_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bj_, bk_);
 				CqlValueSet bm_ = this.Operating_Room_Suite();
 				bool? bn_ = context.Operators.ConceptsInValueSet(bl_, bm_);
-				DataType bo_ = tuple_dioqpvxlkifmhgtiyeejrusad.OpioidAntagonistGiven?.Effective;
+				DataType bo_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven?.Effective;
 				object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 				CqlInterval<CqlDateTime> bq_ = QICoreCommon_2_0_000.ToInterval(bp_);
 				CqlDateTime br_ = context.Operators.Start(bq_);
@@ -435,13 +428,13 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			IEnumerable<Encounter.LocationComponent> n_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)l_, m_);
 			bool? o_ = context.Operators.Exists<Encounter.LocationComponent>(n_);
 			bool? p_ = context.Operators.Not(o_);
-			DataType q_ = tuple_dioqpvxlkifmhgtiyeejrusad.OpioidAntagonistGiven?.Effective;
+			DataType q_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven?.Effective;
 			object r_ = FHIRHelpers_4_3_000.ToValue(q_);
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_);
 			CqlDateTime t_ = context.Operators.Start(s_);
-			CqlInterval<CqlDateTime> u_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_dioqpvxlkifmhgtiyeejrusad.EncounterWithQualifyingAge);
+			CqlInterval<CqlDateTime> u_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_dioqpvxlkifmhgtiyeejrusad?.EncounterWithQualifyingAge);
 			bool? v_ = context.Operators.In<CqlDateTime>(t_, u_, null);
-			DataType w_ = tuple_dioqpvxlkifmhgtiyeejrusad.OpioidGiven?.Effective;
+			DataType w_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidGiven?.Effective;
 			object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_);
 			CqlDateTime z_ = context.Operators.Start(y_);
@@ -466,7 +459,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			bool? ax_ = context.Operators.Not((bool?)(aw_ is null));
 			bool? ay_ = context.Operators.And(as_, ax_);
 			bool? az_ = context.Operators.And(ac_, ay_);
-			MedicationAdministration.DosageComponent ba_ = tuple_dioqpvxlkifmhgtiyeejrusad.OpioidAntagonistGiven?.Dosage;
+			MedicationAdministration.DosageComponent ba_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven?.Dosage;
 			CodeableConcept bb_ = ba_?.Route;
 			CqlConcept bc_ = FHIRHelpers_4_3_000.ToConcept(bb_);
 			CqlValueSet bd_ = this.Routes_of_Administration_for_Opioid_Antagonists();
@@ -476,10 +469,10 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 			return bg_;
 		};
-		IEnumerable<Tuple_DiOQPVXLKifMhgTIYEEjRUSaD> h_ = context.Operators.Where<Tuple_DiOQPVXLKifMhgTIYEEjRUSaD>(f_, g_);
-		Encounter i_(Tuple_DiOQPVXLKifMhgTIYEEjRUSaD tuple_dioqpvxlkifmhgtiyeejrusad) => 
-			tuple_dioqpvxlkifmhgtiyeejrusad.EncounterWithQualifyingAge;
-		IEnumerable<Encounter> j_ = context.Operators.Select<Tuple_DiOQPVXLKifMhgTIYEEjRUSaD, Encounter>(h_, i_);
+		IEnumerable<(MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)?> h_ = context.Operators.Where<(MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)?>(f_, g_);
+		Encounter i_((MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)? tuple_dioqpvxlkifmhgtiyeejrusad) => 
+			tuple_dioqpvxlkifmhgtiyeejrusad?.EncounterWithQualifyingAge;
+		IEnumerable<Encounter> j_ = context.Operators.Select<(MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)?, Encounter>(h_, i_);
 
 		return j_;
 	}
@@ -499,37 +492,37 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	public IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		Tuple_HPcCiDPXQfZTXIORThMLfTQDR a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
