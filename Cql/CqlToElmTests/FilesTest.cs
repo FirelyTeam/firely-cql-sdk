@@ -12,7 +12,7 @@ using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
-[TestClass]
+//[TestClass]
 public class FilesTest : Base
 {
     // change to a path containing CQL; can include subdirectories.
@@ -57,7 +57,7 @@ public class FilesTest : Base
         }
     }
 
-    [TestMethod]
+    //[TestMethod]
     public void SingleFile() => TestLibrary(new FileInfo(@"C:\Code\Ncqa.HT.Firely\Hedis2023\Cql\input\measures\ENP\ENP_Details-2023.0.0.cql"));
 
     [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]
