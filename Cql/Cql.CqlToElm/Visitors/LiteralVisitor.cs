@@ -478,13 +478,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitTupleSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.TupleSelectorContext context)
         {
             var tupleElementContexts = context.tupleElementSelector();
-            var tupleElements = tupleElementContexts.Select(tec => tec.Parse(this)).ToArray();
+            var tupleElements = tupleElementContexts
+                .Select(tec => tec.Parse(this))
+                .OrderBy(te => te.name)
+                .ToArray();
 
             var tupleTypeElementDefs = tupleElements.Select(te => new TupleElementDefinition
             {
                 name = te.name,
                 elementType = te.value.resultTypeSpecifier,
-            }).ToArray();
+            })
+            .OrderBy(e=>e.name)
+            .ToArray();
 
             var resultType = new TupleTypeSpecifier
             {
@@ -493,7 +498,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var tuple = new Elm.Tuple
             {
-                element = tupleElements,
+                element = tupleElements
             }.WithLocator(context.Locator()).WithResultType(resultType);
 
             return tuple;

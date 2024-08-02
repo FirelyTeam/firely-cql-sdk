@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class ListTest: Base
+    public class ListTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -184,5 +184,25 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = Run(slice);
             Assert.IsNull(result);
         }
+
+        [TestMethod]
+        public void List_Tuple_Different_Orders()
+        {
+            // we order tuple types & their elements alphabetically even when not ordered that way in the CQL
+            var lib = MakeLibrary(@"
+                library ListTest version '1.0.0'
+
+                define private l: { Tuple { b: 2, a: 1 }, Tuple { a: 1, b: 2 } }
+            ");
+            var l = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<List>();
+            var lts = l.resultTypeSpecifier.Should().BeOfType<ListTypeSpecifier>().Subject;
+            var tts = lts.elementType.Should().BeOfType<TupleTypeSpecifier>().Subject;
+            tts.element.Should().HaveCount(2);
+            tts.element[0].name.Should().Be("a");
+            tts.element[0].elementType.Should().Be(SystemTypes.IntegerType);
+            tts.element[1].name.Should().Be("b");
+            tts.element[1].elementType.Should().Be(SystemTypes.IntegerType);
+        }
+
     }
 }

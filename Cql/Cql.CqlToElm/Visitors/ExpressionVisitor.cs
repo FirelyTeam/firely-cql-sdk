@@ -186,9 +186,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var terminology = contextTerm is null ? null : Visit(contextTerm);
             var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
-            var contextExpressionRef = new ExpressionRef
+            var contextExpressionRef = contextName switch
             {
-                name = contextName,
+                { } => new ExpressionRef { name = contextName },
+                _ => null
             };
 
             var retrieve = new Retrieve
