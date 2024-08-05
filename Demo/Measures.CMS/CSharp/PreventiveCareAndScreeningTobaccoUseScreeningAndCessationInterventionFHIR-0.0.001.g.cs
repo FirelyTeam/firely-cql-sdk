@@ -525,7 +525,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			Period bm_ = OfficeBasedEncounter?.Period;
 			CqlInterval<CqlDateTime> bn_ = FHIRHelpers_4_3_000.ToInterval(bm_);
 			CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_0_000.toInterval((bn_ as object));
-			bool? bp_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bl_, bo_, null);
+			bool? bp_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bl_, bo_, "day");
 
 			return bp_;
 		};
@@ -615,7 +615,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			Period ax_ = PreventiveEncounter?.Period;
 			CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_3_000.ToInterval(ax_);
 			CqlInterval<CqlDateTime> az_ = QICoreCommon_2_0_000.toInterval((ay_ as object));
-			bool? ba_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, az_, null);
+			bool? ba_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, az_, "day");
 
 			return ba_;
 		};
@@ -637,7 +637,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 12);
 		IEnumerable<Encounter> j_ = this.Qualifying_Visit_During_Measurement_Period();
 		int? k_ = context.Operators.Count<Encounter>(j_);
@@ -676,7 +676,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			DataType n_ = TobaccoUseScreening?.Effective;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
-			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
+			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
 
 			return q_;
 		};
@@ -750,7 +750,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			DataType n_ = TobaccoUseScreening?.Effective;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
-			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
+			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
 
 			return q_;
 		};
@@ -819,7 +819,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			DataType s_ = TobaccoCessationCounseling?.Performed;
 			object t_ = FHIRHelpers_4_3_000.ToValue(s_);
 			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(t_);
-			bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, null);
+			bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, "day");
 
 			return v_;
 		};
@@ -837,7 +837,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlDateTime ad_ = context.Operators.End(y_);
 			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ab_, ad_, true, true);
-			bool? af_ = context.Operators.In<CqlDateTime>(x_, ae_, null);
+			bool? af_ = context.Operators.In<CqlDateTime>(x_, ae_, "day");
 
 			return af_;
 		};
@@ -868,7 +868,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			CqlDateTime n_ = context.Operators.Subtract(l_, m_);
 			CqlDateTime p_ = context.Operators.End(k_);
 			CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
-			bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, null);
+			bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 
 			return r_;
 		};
@@ -898,7 +898,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			CqlDateTime n_ = context.Operators.Subtract(l_, m_);
 			CqlDateTime p_ = context.Operators.End(k_);
 			CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
-			bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, null);
+			bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 
 			return r_;
 		};

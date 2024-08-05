@@ -739,7 +739,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			CqlDateTime i_ = context.Operators.Start(h_);
 			CqlDate j_ = context.Operators.DateFrom(i_);
-			int? k_ = context.Operators.CalculateAgeAt(g_, j_, null);
+			int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
 			bool? l_ = context.Operators.GreaterOrEqual(k_, 18);
 
 			return l_;
@@ -988,7 +988,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				CqlQuantity z_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime aa_ = context.Operators.Add(y_, z_);
 				CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(u_, aa_, false, true);
-				bool? ac_ = context.Operators.In<CqlDateTime>(q_, ab_, null);
+				bool? ac_ = context.Operators.In<CqlDateTime>(q_, ab_, "day");
 				object ae_ = FHIRHelpers_4_3_000.ToValue(r_);
 				CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.toInterval(ae_);
 				CqlDateTime ag_ = context.Operators.End(af_);

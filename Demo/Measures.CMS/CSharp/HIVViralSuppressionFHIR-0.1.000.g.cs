@@ -291,7 +291,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			CqlDateTime i_ = context.Operators.Start(h_);
 			CqlQuantity j_ = context.Operators.Quantity(90m, "days");
 			CqlDateTime k_ = context.Operators.Add(i_, j_);
-			bool? l_ = context.Operators.Before(g_, k_, null);
+			bool? l_ = context.Operators.Before(g_, k_, "day");
 
 			return l_;
 		};
@@ -349,7 +349,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, true, true);
 			Period aq_ = QualifyingEncounter?.Period;
 			CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_3_000.ToInterval(aq_);
-			bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, null);
+			bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
 
 			return as_;
 		};
@@ -491,7 +491,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 			};
 			CqlDateTime i_ = QICoreCommon_2_0_000.Latest(h_());
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
-			bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
 
 			return k_;
 		};

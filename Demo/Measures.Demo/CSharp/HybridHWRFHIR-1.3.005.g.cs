@@ -572,7 +572,7 @@ public class HybridHWRFHIR_1_3_005
 	{
 		CqlDateTime a_ = context.Operators.Start(Value);
 		CqlDateTime b_ = context.Operators.End(Value);
-		int? c_ = context.Operators.DifferenceBetween(a_, b_, null);
+		int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
 
 		return c_;
 	}
@@ -604,7 +604,7 @@ public class HybridHWRFHIR_1_3_005
 			CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_0_001.ToInterval(t_);
 			CqlDateTime v_ = context.Operators.End(u_);
 			CqlInterval<CqlDateTime> w_ = this.Measurement_Period();
-			bool? x_ = context.Operators.In<CqlDateTime>(v_, w_, null);
+			bool? x_ = context.Operators.In<CqlDateTime>(v_, w_, "day");
 			bool? y_ = context.Operators.And(s_, x_);
 			Patient z_ = this.Patient();
 			Date aa_ = z_?.BirthDateElement;
@@ -613,7 +613,7 @@ public class HybridHWRFHIR_1_3_005
 			CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_0_001.ToInterval(t_);
 			CqlDateTime af_ = context.Operators.Start(ae_);
 			CqlDate ag_ = context.Operators.DateFrom(af_);
-			int? ah_ = context.Operators.CalculateAgeAt(ac_, ag_, null);
+			int? ah_ = context.Operators.CalculateAgeAt(ac_, ag_, "year");
 			bool? ai_ = context.Operators.GreaterOrEqual(ah_, 65);
 			bool? aj_ = context.Operators.And(y_, ai_);
 
@@ -1067,7 +1067,7 @@ public class HybridHWRFHIR_1_3_005
 	{
 		CqlDate a_ = context.Operators.ConvertDateTimeToDate(BirthDateTime);
 		CqlDate b_ = context.Operators.ConvertDateTimeToDate(AsOf);
-		int? c_ = context.Operators.DurationBetween(a_, b_, null);
+		int? c_ = context.Operators.DurationBetween(a_, b_, "year");
 
 		return c_;
 	}
@@ -1075,9 +1075,11 @@ public class HybridHWRFHIR_1_3_005
     [CqlDeclaration("ToDate")]
 	public CqlDateTime ToDate(CqlDateTime Value)
 	{
-		int? a_ = context.Operators.DateTimeComponentFrom(Value, null);
+		int? a_ = context.Operators.DateTimeComponentFrom(Value, "year");
+		int? b_ = context.Operators.DateTimeComponentFrom(Value, "month");
+		int? c_ = context.Operators.DateTimeComponentFrom(Value, "day");
 		decimal? d_ = context.Operators.TimezoneOffsetFrom(Value);
-		CqlDateTime e_ = context.Operators.DateTime(a_, a_, a_, 0, 0, 0, 0, d_);
+		CqlDateTime e_ = context.Operators.DateTime(a_, b_, c_, 0, 0, 0, 0, d_);
 
 		return e_;
 	}
@@ -1087,7 +1089,7 @@ public class HybridHWRFHIR_1_3_005
 	{
 		CqlDateTime a_ = context.Operators.Start(Stay);
 		CqlDateTime b_ = context.Operators.End(Stay);
-		int? c_ = context.Operators.DifferenceBetween(a_, b_, null);
+		int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
 
 		return c_;
 	}

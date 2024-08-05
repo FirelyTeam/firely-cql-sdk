@@ -180,7 +180,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 		IEnumerable<Encounter> k_ = AdultOutpatientEncounters_4_8_000.Qualifying_Encounters();
@@ -296,7 +296,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			};
 			CqlDateTime j_ = QICoreCommon_2_0_000.Latest(i_());
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
-			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, null);
+			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
 
 			return l_;
 		};
@@ -411,7 +411,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 			};
 			CqlDateTime i_ = QICoreCommon_2_0_000.Latest(h_());
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
-			bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
 
 			return k_;
 		};

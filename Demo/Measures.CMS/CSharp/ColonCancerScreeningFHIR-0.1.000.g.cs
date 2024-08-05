@@ -238,7 +238,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(46, 75, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 		IEnumerable<Encounter> k_ = AdultOutpatientEncounters_4_8_000.Qualifying_Encounters();
@@ -274,7 +274,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			CqlDateTime g_ = context.Operators.Start(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			CqlDateTime i_ = context.Operators.End(h_);
-			bool? j_ = context.Operators.SameOrBefore(g_, i_, null);
+			bool? j_ = context.Operators.SameOrBefore(g_, i_, "day");
 
 			return j_;
 		};
@@ -300,7 +300,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			CqlDateTime i_ = context.Operators.End(h_);
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context.Operators.End(j_);
-			bool? l_ = context.Operators.SameOrBefore(i_, k_, null);
+			bool? l_ = context.Operators.SameOrBefore(i_, k_, "day");
 
 			return l_;
 		};
@@ -400,7 +400,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			};
 			CqlDateTime j_ = QICoreCommon_2_0_000.Latest(i_());
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
-			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, null);
+			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
 			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
@@ -483,7 +483,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			CqlDateTime n_ = context.Operators.Subtract(l_, m_);
 			CqlDateTime p_ = context.Operators.End(k_);
 			CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
-			bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, null);
+			bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
 			bool? s_ = context.Operators.And(h_, r_);
 
 			return s_;
@@ -514,7 +514,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			CqlDateTime m_ = context.Operators.Subtract(k_, l_);
 			CqlDateTime o_ = context.Operators.End(j_);
 			CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
-			bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
+			bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
 			return q_;
 		};
@@ -544,7 +544,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			CqlDateTime m_ = context.Operators.Subtract(k_, l_);
 			CqlDateTime o_ = context.Operators.End(j_);
 			CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
-			bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
+			bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
 			return q_;
 		};
@@ -574,7 +574,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 			CqlDateTime m_ = context.Operators.Subtract(k_, l_);
 			CqlDateTime o_ = context.Operators.End(j_);
 			CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
-			bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, null);
+			bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
 
 			return q_;
 		};
@@ -620,7 +620,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(46, 49, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 
@@ -640,7 +640,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(50, 75, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 

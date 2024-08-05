@@ -584,7 +584,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				bool? ae_ = context.Operators.And(y_, ad_);
 				CqlInterval<CqlDateTime> af_ = this.Measurement_Period();
 				CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_3_000.ToInterval(ab_);
-				bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, null);
+				bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
 				bool? aj_ = context.Operators.And(ae_, ai_);
 
 				return aj_;
@@ -631,7 +631,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.ToInterval(h_);
 			CqlDateTime j_ = context.Operators.Start(i_);
 			CqlDate k_ = context.Operators.DateFrom(j_);
-			int? l_ = context.Operators.CalculateAgeAt(g_, k_, null);
+			int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
 			bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
 
 			return m_;
