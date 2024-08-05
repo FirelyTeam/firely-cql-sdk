@@ -13,7 +13,7 @@ parameters:
   packageArtifactName: 'NuGetPackages'
   publishWebProjects: false
   zipAfterPublish: false
-  checkoutSubmodules: false
+  checkoutSubmodules: true
   pool: {}
   solutionFile: 'Cql.slnf'
 
