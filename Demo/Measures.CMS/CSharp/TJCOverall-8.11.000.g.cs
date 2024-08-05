@@ -182,7 +182,7 @@ public class TJCOverall_8_11_000
 			CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_3_000.ToInterval(e_);
 			CqlDateTime g_ = context.Operators.End(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
-			bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, null);
+			bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
 
 			return i_;
 		};
@@ -235,7 +235,7 @@ public class TJCOverall_8_11_000
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.ToInterval(h_);
 			CqlDateTime j_ = context.Operators.Start(i_);
 			CqlDate k_ = context.Operators.DateFrom(j_);
-			int? l_ = context.Operators.CalculateAgeAt(g_, k_, null);
+			int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
 			bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
 
 			return m_;

@@ -583,7 +583,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(66, 80, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 		bool? k_ = this.Has_Criteria_Indicating_Frailty();
@@ -601,7 +601,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		CqlDate x_ = context.Operators.ConvertStringToDate(w_);
 		CqlDateTime z_ = context.Operators.End(e_);
 		CqlDate aa_ = context.Operators.DateFrom(z_);
-		int? ab_ = context.Operators.CalculateAgeAt(x_, aa_, null);
+		int? ab_ = context.Operators.CalculateAgeAt(x_, aa_, "year");
 		bool? ac_ = context.Operators.GreaterOrEqual(ab_, 81);
 		bool? ae_ = context.Operators.And(ac_, k_);
 		bool? af_ = context.Operators.Or(t_, ae_);
@@ -622,7 +622,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 66);
 		bool? j_ = this.Has_Criteria_Indicating_Frailty();
 		bool? k_ = context.Operators.And(i_, j_);

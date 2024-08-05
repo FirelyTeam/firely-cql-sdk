@@ -239,7 +239,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
-		int? c_ = context.Operators.DateTimeComponentFrom(b_, null);
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		decimal? d_ = context.Operators.ConvertIntegerToDecimal(0);
 		CqlDateTime e_ = context.Operators.DateTime(c_, 4, 30, 23, 59, 59, 0, d_);
 
@@ -254,7 +254,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
-		int? c_ = context.Operators.DateTimeComponentFrom(b_, null);
+		int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
 		int? d_ = context.Operators.Subtract(c_, 1);
 		decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
 		CqlDateTime f_ = context.Operators.DateTime(d_, 5, 1, 0, 0, 0, 0, e_);
@@ -292,7 +292,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			CqlDate p_ = context.Operators.Start(o_);
 			CqlDateTime q_ = context.Operators.ConvertDateToDateTime(p_);
 			CqlInterval<CqlDateTime> r_ = this.Intake_Period();
-			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, null);
+			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
 
 			return s_;
 		};
@@ -423,7 +423,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
 		CqlDateTime e_ = this.April_30_of_the_Measurement_Period();
 		CqlDate f_ = context.Operators.DateFrom(e_);
-		int? g_ = context.Operators.CalculateAgeAt(d_, f_, null);
+		int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
 		bool? h_ = context.Operators.GreaterOrEqual(g_, 18);
 		bool? i_ = this.Has_Initial_Major_Depression_Diagnosis();
 		bool? j_ = context.Operators.And(h_, i_);

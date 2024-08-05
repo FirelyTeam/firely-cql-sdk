@@ -524,7 +524,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(3, 17, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 		IEnumerable<Encounter> k_ = this.Qualifying_Encounter();
@@ -595,7 +595,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			DataType f_ = BMIPercentile?.Effective;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
-			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
+			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = BMIPercentile?.Value;
 			Quantity k_ = context.Operators.Convert<Quantity>(j_);
 			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(k_);
@@ -623,7 +623,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			DataType f_ = Height?.Effective;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
-			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
+			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Height?.Value;
 			Quantity k_ = context.Operators.Convert<Quantity>(j_);
 			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(k_);
@@ -651,7 +651,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			DataType f_ = Weight?.Effective;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
-			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, null);
+			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Weight?.Value;
 			Quantity k_ = context.Operators.Convert<Quantity>(j_);
 			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(k_);
@@ -698,7 +698,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			DataType h_ = NutritionCounseling?.Performed;
 			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
 			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(i_);
-			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, null);
+			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;
 		};
@@ -723,7 +723,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			DataType h_ = ActivityCounseling?.Performed;
 			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
 			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(i_);
-			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, null);
+			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;
 		};
@@ -746,7 +746,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(3, 11, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 
@@ -766,7 +766,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(12, 17, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 

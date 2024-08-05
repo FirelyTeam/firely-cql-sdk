@@ -448,7 +448,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			CqlQuantity br_ = context.Operators.Quantity(3m, "days");
 			CqlDateTime bs_ = context.Operators.Subtract(bq_, br_);
 			CqlInterval<CqlDateTime> bt_ = context.Operators.Interval(bo_, bs_, true, true);
-			bool? bu_ = context.Operators.In<CqlDateTime>(bm_, bt_, null);
+			bool? bu_ = context.Operators.In<CqlDateTime>(bm_, bt_, "day");
 
 			return bu_;
 		};
@@ -481,7 +481,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			Period n_ = tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters?.Period;
 			CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.ToInterval((o_ as object));
-			bool? q_ = context.Operators.In<CqlDateTime>(m_, p_, null);
+			bool? q_ = context.Operators.In<CqlDateTime>(m_, p_, "day");
 			CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_3_000.ToInterval(n_);
 			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
 			bool? v_ = context.Operators.OverlapsBefore(l_, u_, null);
@@ -513,7 +513,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
-			int? m_ = context.Operators.CalculateAgeAt(i_, l_, null);
+			int? m_ = context.Operators.CalculateAgeAt(i_, l_, "month");
 			bool? n_ = context.Operators.GreaterOrEqual(m_, 3);
 
 			return n_;
@@ -649,14 +649,14 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
-			int? m_ = context.Operators.CalculateAgeAt(i_, l_, null);
+			int? m_ = context.Operators.CalculateAgeAt(i_, l_, "month");
 			bool? n_ = context.Operators.GreaterOrEqual(m_, 3);
 			Date p_ = f_?.BirthDateElement;
 			string q_ = p_?.Value;
 			CqlDate r_ = context.Operators.ConvertStringToDate(q_);
 			CqlDateTime t_ = context.Operators.Start(j_);
 			CqlDate u_ = context.Operators.DateFrom(t_);
-			int? v_ = context.Operators.CalculateAgeAt(r_, u_, null);
+			int? v_ = context.Operators.CalculateAgeAt(r_, u_, "year");
 			bool? w_ = context.Operators.LessOrEqual(v_, 17);
 			bool? x_ = context.Operators.And(n_, w_);
 
@@ -686,7 +686,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
-			int? m_ = context.Operators.CalculateAgeAt(i_, l_, null);
+			int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
 			CqlInterval<int?> n_ = context.Operators.Interval(18, 64, true, true);
 			bool? o_ = context.Operators.In<int?>(m_, n_, null);
 
@@ -716,7 +716,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
-			int? m_ = context.Operators.CalculateAgeAt(i_, l_, null);
+			int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
 			bool? n_ = context.Operators.GreaterOrEqual(m_, 65);
 
 			return n_;

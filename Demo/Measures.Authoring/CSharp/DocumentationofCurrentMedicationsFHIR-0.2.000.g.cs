@@ -188,7 +188,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period();
 			Period j_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(j_);
-			bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(i_, k_, null);
+			bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(i_, k_, "day");
 			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
