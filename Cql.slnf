@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "CqlAndDemo.sln",
+    "path": "Cql+Demo+IntegrationRunner.sln",
     "projects": [
       "Cql\\CodeGeneration.NET\\CodeGeneration.NET.csproj",
       "Cql\\CoreTests\\CoreTests.csproj",
