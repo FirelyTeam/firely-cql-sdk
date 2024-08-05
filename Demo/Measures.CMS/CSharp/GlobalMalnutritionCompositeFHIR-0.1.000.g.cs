@@ -365,7 +365,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_3_000.ToInterval(e_);
 			CqlDateTime g_ = context.Operators.End(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
-			bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, null);
+			bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
 			Patient j_ = this.Patient();
 			Date k_ = j_?.BirthDateElement;
 			string l_ = k_?.Value;
@@ -373,14 +373,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(e_);
 			CqlDateTime p_ = context.Operators.Start(o_);
 			CqlDate q_ = context.Operators.DateFrom(p_);
-			int? r_ = context.Operators.CalculateAgeAt(m_, q_, null);
+			int? r_ = context.Operators.CalculateAgeAt(m_, q_, "year");
 			bool? s_ = context.Operators.GreaterOrEqual(r_, 65);
 			bool? t_ = context.Operators.And(i_, s_);
 			CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_3_000.ToInterval(e_);
 			CqlDateTime w_ = context.Operators.Start(v_);
 			CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_3_000.ToInterval(e_);
 			CqlDateTime z_ = context.Operators.End(y_);
-			int? aa_ = context.Operators.DurationBetween(w_, z_, null);
+			int? aa_ = context.Operators.DurationBetween(w_, z_, "hour");
 			bool? ab_ = context.Operators.GreaterOrEqual(aa_, 24);
 			bool? ac_ = context.Operators.And(t_, ab_);
 			Code<Encounter.EncounterStatus> ad_ = EncounterInpatient?.StatusElement;

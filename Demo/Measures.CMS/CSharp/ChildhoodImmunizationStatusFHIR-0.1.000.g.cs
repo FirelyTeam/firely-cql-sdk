@@ -893,7 +893,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			Period aj_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
 			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.ToInterval((ak_ as object));
-			bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ai_, al_, null);
+			bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ai_, al_, "day");
 
 			return am_;
 		};
@@ -915,7 +915,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		bool? i_ = context.Operators.Equal(h_, 2);
 		IEnumerable<Encounter> j_ = this.Qualifying_Encounters();
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
@@ -984,7 +984,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1009,7 +1009,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1034,7 +1034,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1059,7 +1059,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1084,7 +1084,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1151,7 +1151,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, null);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
@@ -1179,7 +1179,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
 			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, null);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
@@ -1221,12 +1221,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			CqlQuantity m_ = context.Operators.Quantity(1m, "day");
 			CqlDate n_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination1, m_);
-			bool? o_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination2, n_, null);
+			bool? o_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination2, n_, "day");
 			CqlDate q_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination2, m_);
-			bool? r_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination3, q_, null);
+			bool? r_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination3, q_, "day");
 			bool? s_ = context.Operators.And(o_, r_);
 			CqlDate u_ = context.Operators.Add(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination3, m_);
-			bool? v_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination4, u_, null);
+			bool? v_ = context.Operators.SameOrAfter(tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination4, u_, "day");
 			bool? w_ = context.Operators.And(s_, v_);
 
 			return w_;
@@ -1257,7 +1257,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime j_ = context.Operators.Start(i_);
 			CqlDate k_ = context.Operators.DateFrom(j_);
 			CqlInterval<CqlDate> l_ = this.First_Two_Years();
-			bool? m_ = context.Operators.In<CqlDate>(k_, l_, null);
+			bool? m_ = context.Operators.In<CqlDate>(k_, l_, "day");
 
 			return m_;
 		};
@@ -1282,7 +1282,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, null);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
@@ -1310,7 +1310,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
 			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, null);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
@@ -1352,9 +1352,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
 			CqlDate m_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination1, l_);
-			bool? n_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination2, m_, null);
+			bool? n_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination2, m_, "day");
 			CqlDate p_ = context.Operators.Add(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination2, l_);
-			bool? q_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination3, p_, null);
+			bool? q_ = context.Operators.SameOrAfter(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination3, p_, "day");
 			bool? r_ = context.Operators.And(n_, q_);
 
 			return r_;
@@ -1383,7 +1383,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1480,7 +1480,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1504,7 +1504,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime g_ = context.Operators.Start(f_);
 			CqlDate h_ = context.Operators.DateFrom(g_);
 			CqlInterval<CqlDate> i_ = this.First_Two_Years();
-			bool? j_ = context.Operators.In<CqlDate>(h_, i_, null);
+			bool? j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
@@ -1528,7 +1528,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime g_ = context.Operators.Start(f_);
 			CqlDate h_ = context.Operators.DateFrom(g_);
 			CqlInterval<CqlDate> i_ = this.First_Two_Years();
-			bool? j_ = context.Operators.In<CqlDate>(h_, i_, null);
+			bool? j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
@@ -1552,7 +1552,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime g_ = context.Operators.Start(f_);
 			CqlDate h_ = context.Operators.DateFrom(g_);
 			CqlInterval<CqlDate> i_ = this.First_Two_Years();
-			bool? j_ = context.Operators.In<CqlDate>(h_, i_, null);
+			bool? j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
 		};
@@ -1577,7 +1577,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, null);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
@@ -1605,7 +1605,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
 			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, null);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
@@ -1644,7 +1644,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, null);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
@@ -1672,7 +1672,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
 			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, null);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
@@ -1794,7 +1794,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -1819,7 +1819,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, null);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
@@ -1847,7 +1847,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
 			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, null);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
@@ -1889,9 +1889,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
 			CqlDate m_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination1, l_);
-			bool? n_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination2, m_, null);
+			bool? n_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination2, m_, "day");
 			CqlDate p_ = context.Operators.Add(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination2, l_);
-			bool? q_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination3, p_, null);
+			bool? q_ = context.Operators.SameOrAfter(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination3, p_, "day");
 			bool? r_ = context.Operators.And(n_, q_);
 
 			return r_;
@@ -1934,7 +1934,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.ToInterval(y_);
 			CqlInterval<CqlDate> aa_ = CQMCommon_2_0_000.ToDateInterval(z_);
-			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDate>(w_, aa_, null);
+			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDate>(w_, aa_, "day");
 
 			return ab_;
 		};
@@ -1974,12 +1974,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
 			CqlDate m_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1, l_);
-			bool? n_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination2, m_, null);
+			bool? n_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination2, m_, "day");
 			CqlDate p_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3, l_);
-			bool? q_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1, p_, null);
+			bool? q_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1, p_, "day");
 			bool? r_ = context.Operators.And(n_, q_);
 			CqlDate t_ = context.Operators.Add(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3, l_);
-			bool? u_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination2, t_, null);
+			bool? u_ = context.Operators.SameOrAfter(tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination2, t_, "day");
 			bool? v_ = context.Operators.And(r_, u_);
 
 			return v_;
@@ -2011,7 +2011,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
 			CqlInterval<CqlDate> m_ = this.First_Two_Years();
-			bool? n_ = context.Operators.In<CqlDate>(l_, m_, null);
+			bool? n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
@@ -2080,7 +2080,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
 			CqlInterval<CqlDate> m_ = this.First_Two_Years();
-			bool? n_ = context.Operators.In<CqlDate>(l_, m_, null);
+			bool? n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
@@ -2105,7 +2105,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, null);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
@@ -2133,7 +2133,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
 			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, null);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
@@ -2175,12 +2175,12 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			CqlQuantity m_ = context.Operators.Quantity(1m, "day");
 			CqlDate n_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination1, m_);
-			bool? o_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination2, n_, null);
+			bool? o_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination2, n_, "day");
 			CqlDate q_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination2, m_);
-			bool? r_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3, q_, null);
+			bool? r_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3, q_, "day");
 			bool? s_ = context.Operators.And(o_, r_);
 			CqlDate u_ = context.Operators.Add(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3, m_);
-			bool? v_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination4, u_, null);
+			bool? v_ = context.Operators.SameOrAfter(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination4, u_, "day");
 			bool? w_ = context.Operators.And(s_, v_);
 
 			return w_;
@@ -2209,7 +2209,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -2278,7 +2278,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
 			CqlInterval<CqlDate> m_ = this.First_Two_Years();
-			bool? n_ = context.Operators.In<CqlDate>(l_, m_, null);
+			bool? n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
 		};
@@ -2304,7 +2304,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
 			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.ToInterval((s_ as object));
 			CqlInterval<CqlDate> u_ = CQMCommon_2_0_000.ToDateInterval(t_);
-			bool? v_ = context.Operators.IntervalIncludesInterval<CqlDate>(q_, u_, null);
+			bool? v_ = context.Operators.IntervalIncludesInterval<CqlDate>(q_, u_, "day");
 
 			return v_;
 		};
@@ -2332,7 +2332,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
 			CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.ToInterval(af_);
 			CqlInterval<CqlDate> ah_ = CQMCommon_2_0_000.ToDateInterval(ag_);
-			bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDate>(ad_, ah_, null);
+			bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDate>(ad_, ah_, "day");
 
 			return ai_;
 		};
@@ -2371,7 +2371,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, null);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
@@ -2399,7 +2399,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
 			CqlInterval<CqlDate> ag_ = CQMCommon_2_0_000.ToDateInterval(af_);
-			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, null);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
 		};
@@ -2521,7 +2521,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};
@@ -2566,7 +2566,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
-			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, null);
+			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
 		};
@@ -2600,7 +2600,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			DataType an_ = InfluenzaAdministration?.Performed;
 			object ao_ = FHIRHelpers_4_3_000.ToValue(an_);
 			CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_0_000.ToInterval(ao_);
-			bool? aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(am_, ap_, null);
+			bool? aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(am_, ap_, "day");
 
 			return aq_;
 		};
@@ -2642,7 +2642,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			CqlQuantity k_ = context.Operators.Quantity(1m, "day");
 			CqlDate l_ = context.Operators.Add(tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination1, k_);
-			bool? m_ = context.Operators.SameOrAfter(tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination2, l_, null);
+			bool? m_ = context.Operators.SameOrAfter(tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination2, l_, "day");
 
 			return m_;
 		};
@@ -2671,7 +2671,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
 			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
 			CqlInterval<CqlDate> v_ = CQMCommon_2_0_000.ToDateInterval(u_);
-			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, null);
+			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, "day");
 
 			return w_;
 		};
@@ -2700,7 +2700,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.ToInterval(ai_);
 			CqlInterval<CqlDate> ak_ = CQMCommon_2_0_000.ToDateInterval(aj_);
-			bool? al_ = context.Operators.IntervalIncludesInterval<CqlDate>(ag_, ak_, null);
+			bool? al_ = context.Operators.IntervalIncludesInterval<CqlDate>(ag_, ak_, "day");
 
 			return al_;
 		};
@@ -2754,7 +2754,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDateTime h_ = context.Operators.Start(g_);
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			CqlInterval<CqlDate> j_ = this.First_Two_Years();
-			bool? k_ = context.Operators.In<CqlDate>(i_, j_, null);
+			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
 		};

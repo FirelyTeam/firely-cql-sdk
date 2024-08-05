@@ -662,7 +662,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		CqlDateTime d_ = context.Operators.ConvertStringToDateTime(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
-		int? g_ = context.Operators.CalculateAgeAt(d_, f_, null);
+		int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
 		bool? h_ = context.Operators.GreaterOrEqual(g_, 18);
 		IEnumerable<Encounter> i_ = this.Diabetic_Retinopathy_Encounter();
 		bool? j_ = context.Operators.Exists<Encounter>(i_);

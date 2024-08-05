@@ -802,7 +802,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			Period ai_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(ai_);
 			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
-			bool? al_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ah_, ak_, null);
+			bool? al_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ah_, ak_, "day");
 
 			return al_;
 		};
@@ -824,7 +824,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(50, 63, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 		Code<AdministrativeGender> l_ = a_?.GenderElement;
@@ -1224,7 +1224,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			CqlDateTime d_ = context.Operators.Start(c_);
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 			CqlDateTime f_ = context.Operators.End(e_);
-			bool? g_ = context.Operators.SameOrBefore(d_, f_, null);
+			bool? g_ = context.Operators.SameOrBefore(d_, f_, "day");
 
 			return g_;
 		};
@@ -1245,7 +1245,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			CqlDateTime g_ = context.Operators.End(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			CqlDateTime i_ = context.Operators.End(h_);
-			bool? j_ = context.Operators.SameOrBefore(g_, i_, null);
+			bool? j_ = context.Operators.SameOrBefore(g_, i_, "day");
 
 			return j_;
 		};

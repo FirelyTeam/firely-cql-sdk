@@ -151,7 +151,7 @@ public class VTE_8_6_000
 			CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(j_);
 			CqlDateTime l_ = context.Operators.Start(k_);
 			CqlDate m_ = context.Operators.DateFrom(l_);
-			int? n_ = context.Operators.CalculateAgeAt(i_, m_, null);
+			int? n_ = context.Operators.CalculateAgeAt(i_, m_, "year");
 			bool? o_ = context.Operators.GreaterOrEqual(n_, 18);
 
 			return o_;

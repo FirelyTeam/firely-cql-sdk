@@ -217,12 +217,12 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_3_000.ToInterval(i_);
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
-			int? m_ = context.Operators.CalculateAgeAt(h_, l_, null);
+			int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
 			bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
 			CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(i_);
 			CqlDateTime q_ = context.Operators.End(p_);
 			CqlInterval<CqlDateTime> r_ = this.Measurement_Period();
-			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, null);
+			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
 			bool? t_ = context.Operators.And(n_, s_);
 			Code<Encounter.EncounterStatus> u_ = InpatientEncounter?.StatusElement;
 			Encounter.EncounterStatus? v_ = u_?.Value;

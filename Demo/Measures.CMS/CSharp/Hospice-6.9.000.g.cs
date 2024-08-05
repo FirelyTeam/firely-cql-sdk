@@ -203,7 +203,7 @@ public class Hospice_6_9_000
 			CqlInterval<CqlDateTime> be_ = QICoreCommon_2_0_000.toInterval((bd_ as object));
 			CqlDateTime bf_ = context.Operators.End(be_);
 			CqlInterval<CqlDateTime> bg_ = this.Measurement_Period();
-			bool? bh_ = context.Operators.In<CqlDateTime>(bf_, bg_, null);
+			bool? bh_ = context.Operators.In<CqlDateTime>(bf_, bg_, "day");
 			bool? bi_ = context.Operators.And(bb_, bh_);
 
 			return bi_;
@@ -219,7 +219,7 @@ public class Hospice_6_9_000
 			CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_3_000.ToInterval(bj_);
 			CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_0_000.toInterval((bk_ as object));
 			CqlInterval<CqlDateTime> bm_ = this.Measurement_Period();
-			bool? bn_ = context.Operators.Overlaps(bl_, bm_, null);
+			bool? bn_ = context.Operators.Overlaps(bl_, bm_, "day");
 
 			return bn_;
 		};
@@ -241,7 +241,7 @@ public class Hospice_6_9_000
 			object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
 			CqlInterval<CqlDateTime> bv_ = QICoreCommon_2_0_000.toInterval(bu_);
 			CqlInterval<CqlDateTime> bw_ = this.Measurement_Period();
-			bool? bx_ = context.Operators.Overlaps(bv_, bw_, null);
+			bool? bx_ = context.Operators.Overlaps(bv_, bw_, "day");
 			bool? by_ = context.Operators.And(bs_, bx_);
 
 			return by_;
@@ -258,7 +258,7 @@ public class Hospice_6_9_000
 			FhirDateTime ca_ = HospiceOrder?.AuthoredOnElement;
 			CqlDateTime cb_ = context.Operators.Convert<CqlDateTime>(ca_);
 			CqlInterval<CqlDateTime> cc_ = QICoreCommon_2_0_000.toInterval((cb_ as object));
-			bool? cd_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bz_, cc_, null);
+			bool? cd_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bz_, cc_, "day");
 
 			return cd_;
 		};
@@ -273,7 +273,7 @@ public class Hospice_6_9_000
 			object cf_ = FHIRHelpers_4_3_000.ToValue(ce_);
 			CqlInterval<CqlDateTime> cg_ = QICoreCommon_2_0_000.toInterval(cf_);
 			CqlInterval<CqlDateTime> ch_ = this.Measurement_Period();
-			bool? ci_ = context.Operators.Overlaps(cg_, ch_, null);
+			bool? ci_ = context.Operators.Overlaps(cg_, ch_, "day");
 
 			return ci_;
 		};
@@ -286,7 +286,7 @@ public class Hospice_6_9_000
 		{
 			CqlInterval<CqlDateTime> cj_ = QICoreCommon_2_0_000.prevalenceInterval(HospiceCareDiagnosis);
 			CqlInterval<CqlDateTime> ck_ = this.Measurement_Period();
-			bool? cl_ = context.Operators.Overlaps(cj_, ck_, null);
+			bool? cl_ = context.Operators.Overlaps(cj_, ck_, "day");
 
 			return cl_;
 		};
