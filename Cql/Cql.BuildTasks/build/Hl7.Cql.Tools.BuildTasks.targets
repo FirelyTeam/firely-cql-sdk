@@ -1,17 +1,20 @@
 ﻿<Project>
-	<UsingTask TaskName="CqlToElm" AssemblyFile="lib\net8.0\Hl7.Cql.Tools.BuildTasks.dll"/>
+	<UsingTask TaskName="CqlToCSharp" AssemblyFile="..\lib\net8.0\Hl7.Cql.Tools.BuildTasks.dll"/>
 	<ItemGroup>
 		<CqlFiles Include="**\*.cql" />
+		<Compile Update="$(MSBuildProjectDirectory)/**/*.cql.cs" DependentUpon="%(Filename)" />
+		<None Update="$(MSBuildProjectDirectory)/**/*.cql.json" DependentUpon="%(Filename)" />
 	</ItemGroup>
 
 	<!-- Visual Studio builds with MSBuild.  Just use dotnet build in that case. -->
-	<Target BeforeTargets="Build" Name="RunCqlToElm" Condition="'$(MSBuildRuntimeType)' != 'Core'">
-		<Exec Command="dotnet build -t:CqlToElm" />
+	<Target BeforeTargets="Build" Name="RunCqlToCSharp" Condition="'$(MSBuildRuntimeType)' != 'Core'">
+		<Exec Command="dotnet build -t:CqlToCSharp" />
 	</Target>
 
-	<Target BeforeTargets="CoreCompile" Name="CqlToElm" Condition="'$(MSBuildRuntimeType)' == 'Core'">
-		<CqlToElm Sources="@(CqlFiles)">
-			<Output TaskParameter="ELM" PropertyName="ELMFile" />
-		</CqlToElm>
+	<Target BeforeTargets="CoreCompile" Name="CqlToCSharp" Condition="'$(MSBuildRuntimeType)' == 'Core'">
+		<CqlToCSharp Sources="@(CqlFiles)">
+			<Output TaskParameter="Elm" PropertyName="ELMFile" />
+			<Output TaskParameter="CSharp" PropertyName="CSharpFile" />
+		</CqlToCSharp>
 	</Target>
 </Project>
