@@ -16,7 +16,7 @@ using System.Text;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
-internal static class CSharpFormatterrExtensions
+internal static class CSharpFormatterExtensions
 {
     public static string? GetCSharpKeyword(this Type t)
     {
@@ -72,6 +72,7 @@ internal static class CSharpFormatterrExtensions
 
 internal record TypeCSharpFormat(
     FormattableStringProvider<ITypeCSharpFormatContext>? TypeFormat = null,
+    FormattableStringProvider<ITypeNameCSharpFormatContext>? TypeNameFormat = null,
     bool NoNamespaces = false,
     bool UseKeywords = false,
     bool NoNullableOperator = false,          // e.g. Nullable<int> instead of int?
@@ -82,12 +83,14 @@ internal record TypeCSharpFormat(
     : CSharpFormat<Type>
 {
     public static readonly FormattableStringProvider<ITypeCSharpFormatContext> DefaultTypeFormat = type => $"{type.Type}";
+    public static readonly FormattableStringProvider<ITypeNameCSharpFormatContext> DefaultNamePartFormat = type => $"{type.Name}";
     public static readonly TypeCSharpFormat Default = new();
 
     private const char NullOperator = '?';
     private const char PointerOperator = '*';
 
     public FormattableStringProvider<ITypeCSharpFormatContext> TypeFormat { get; init;  } = TypeFormat ?? DefaultTypeFormat;
+    public FormattableStringProvider<ITypeNameCSharpFormatContext> TypeNameFormat { get; init;  } = TypeNameFormat ?? DefaultNamePartFormat;
     public ListTokens GenericArgumentTokens { get; init; } = GenericArgumentTokens ?? CSharpTokens.GenericArguments;
     public ListTokens ArrayTokens { get; init; } = ArrayTokens ?? CSharpTokens.Arrays;
 
@@ -226,11 +229,7 @@ internal record TypeCSharpFormat(
 
         void WriteName()
         {
-            string name = hideNamespaces ? type.Name : (type.FullName ?? type.Name);
-            if (name.IndexOf('`') is var i and >= 0)
-                textWriter.Write(name[..i]);
-            else
-                textWriter.Write(name);
+            TypeNameFormat(new TypeNameCSharpFormatContext(type, this with {NoNamespaces = hideNamespaces})).WriteTo(textWriter);
         }
     }
 }
@@ -253,6 +252,36 @@ internal readonly record struct TypeCSharpFormatContext(
         {
             var self = this;
             return $"{textWriter => self.TypeCSharpFormat.WriteTo(self.TypeInfo, textWriter)}";
+        }
+    }
+}
+
+/// <summary>
+/// Useful for generic types composed of multiple parts.
+/// </summary>
+internal interface ITypeNameCSharpFormatContext
+{
+    Type TypePartInfo { get; }
+    TextWriterFormattableString Name { get; }
+}
+
+
+internal readonly record struct TypeNameCSharpFormatContext(
+    Type TypePartInfo,
+    TypeCSharpFormat TypeCSharpFormat) : ITypeNameCSharpFormatContext
+{
+    public Type TypePartInfo { get; } = TypePartInfo;
+
+    public TextWriterFormattableString Name
+    {
+        get
+        {
+            var self = this;
+            return $"{((self.TypeCSharpFormat.NoNamespaces ? self.TypePartInfo.Name : (self.TypePartInfo.FullName ?? self.TypePartInfo.Name)) switch
+            {
+                { } name when name.IndexOf('`') is var i and >= 0 => name[..i],
+                { } name => name
+            })}";
         }
     }
 }

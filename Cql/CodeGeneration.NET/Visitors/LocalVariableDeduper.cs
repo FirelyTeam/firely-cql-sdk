@@ -18,7 +18,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
     /// <remarks>Note that it is not trivial to determine whether expressions are duplicates, so we
     /// turn the expressions into strings using the (internal) DebugView visitor provided by Microsoft.
     /// This requires a full reduction and visit of the tree, so is quite expensive.</remarks>
-    internal class LocalVariableDeduper : ExpressionVisitor
+    internal class LocalVariableDeduper(TypeToCSharpConverter typeToCSharpConverter) : ExpressionVisitor
     {
         private readonly Stack<Dictionary<ParameterExpression, ParameterExpression>> _replacementStack = new();
 
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             // Find assignments where the right side is exactly the same.
             var duplicateAssignments = localAssignments
-                .GroupBy(ass => $"{ass.Right.GetDebugView()}::{ExpressionConverter.PrettyTypeName(ass.Right.Type)}")
+                .GroupBy(ass => $"{ass.Right.GetDebugView()}::{typeToCSharpConverter.ToCSharp(ass.Right.Type)}")
                 .Where(g => g.Count() > 1) // && !g.Key.Contains("Deeper")
                 .ToList();
 

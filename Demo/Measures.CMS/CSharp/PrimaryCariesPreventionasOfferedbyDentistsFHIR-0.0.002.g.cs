@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -37,9 +36,9 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
     internal Lazy<bool?> __Stratification_1;
     internal Lazy<bool?> __Stratification_2;
     internal Lazy<bool?> __Stratification_3;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
 
     #endregion
@@ -69,9 +68,9 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
         __Stratification_1 = new Lazy<bool?>(this.Stratification_1_Value);
         __Stratification_2 = new Lazy<bool?>(this.Stratification_2_Value);
         __Stratification_3 = new Lazy<bool?>(this.Stratification_3_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
     }
     #region Dependencies
@@ -134,10 +133,10 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyDentistsFHIR-0.0.002", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyDentistsFHIR-0.0.002", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -148,8 +147,8 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -160,19 +159,19 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		var a_ = this.Clinical_Oral_Evaluation();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = Status_1_6_000.isEncounterPerformed(b_);
+		CqlValueSet a_ = this.Clinical_Oral_Evaluation();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter ValidEncounter)
 		{
-			var f_ = this.Measurement_Period();
-			var g_ = ValidEncounter?.Period;
-			var h_ = FHIRHelpers_4_3_000.ToInterval(g_);
-			var i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
+			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
+			Period g_ = ValidEncounter?.Period;
+			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
+			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
 
 			return i_;
 		};
-		var e_ = context.Operators.Where<Encounter>(c_, d_);
+		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
 
 		return e_;
 	}
@@ -183,19 +182,21 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval(1, 20, true, true);
-		var h_ = context.Operators.In<int?>(f_, g_, null);
-		var i_ = this.Qualifying_Encounters();
-		var j_ = context.Operators.Exists<Encounter>(i_);
-		var k_ = context.Operators.And(h_, j_);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context.Operators.Start(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		CqlInterval<int?> i_ = context.Operators.Interval(1, 20, true, true);
+		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		IEnumerable<Encounter> k_ = this.Qualifying_Encounters();
+		bool? l_ = context.Operators.Exists<Encounter>(k_);
+		bool? m_ = context.Operators.And(j_, l_);
 
-		return k_;
+		return m_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -204,7 +205,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -215,7 +216,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = Hospice_6_9_000.Has_Hospice_Services();
+		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
 
 		return a_;
 	}
@@ -226,34 +227,34 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Fluoride_Varnish_Application_for_Children();
-		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
-		var c_ = Status_1_6_000.isProcedurePerformed(b_);
+		CqlValueSet a_ = this.Fluoride_Varnish_Application_for_Children();
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure FluorideApplication)
 		{
-			var j_ = FluorideApplication?.Performed;
-			var k_ = FHIRHelpers_4_3_000.ToValue(j_);
-			var l_ = QICoreCommon_2_0_000.toInterval(k_);
-			var m_ = context.Operators.End(l_);
-			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
+			DataType j_ = FluorideApplication?.Performed;
+			object k_ = FHIRHelpers_4_3_000.ToValue(j_);
+			CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(k_);
+			CqlDateTime m_ = context.Operators.End(l_);
+			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
+			bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
 
 			return o_;
 		};
-		var e_ = context.Operators.Where<Procedure>(c_, d_);
+		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlDate f_(Procedure FluorideApplication)
 		{
-			var p_ = FluorideApplication?.Performed;
-			var q_ = FHIRHelpers_4_3_000.ToValue(p_);
-			var r_ = QICoreCommon_2_0_000.toInterval(q_);
-			var s_ = context.Operators.End(r_);
-			var t_ = context.Operators.DateFrom(s_);
+			DataType p_ = FluorideApplication?.Performed;
+			object q_ = FHIRHelpers_4_3_000.ToValue(p_);
+			CqlInterval<CqlDateTime> r_ = QICoreCommon_2_0_000.toInterval(q_);
+			CqlDateTime s_ = context.Operators.End(r_);
+			CqlDate t_ = context.Operators.DateFrom(s_);
 
 			return t_;
 		};
-		var g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
-		var h_ = context.Operators.Count<CqlDate>(g_);
-		var i_ = context.Operators.GreaterOrEqual(h_, 2);
+		IEnumerable<CqlDate> g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
+		int? h_ = context.Operators.Count<CqlDate>(g_);
+		bool? i_ = context.Operators.GreaterOrEqual(h_, 2);
 
 		return i_;
 	}
@@ -264,16 +265,18 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private bool? Stratification_1_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval(1, 5, true, true);
-		var h_ = context.Operators.In<int?>(f_, g_, null);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context.Operators.Start(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		CqlInterval<int?> i_ = context.Operators.Interval(1, 5, true, true);
+		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 
-		return h_;
+		return j_;
 	}
 
     [CqlDeclaration("Stratification 1")]
@@ -282,16 +285,18 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private bool? Stratification_2_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval(6, 12, true, true);
-		var h_ = context.Operators.In<int?>(f_, g_, null);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context.Operators.Start(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		CqlInterval<int?> i_ = context.Operators.Interval(6, 12, true, true);
+		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 
-		return h_;
+		return j_;
 	}
 
     [CqlDeclaration("Stratification 2")]
@@ -300,58 +305,60 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private bool? Stratification_3_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.ConvertStringToDate(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.Interval(13, 20, true, true);
-		var h_ = context.Operators.In<int?>(f_, g_, null);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context.Operators.Start(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		CqlInterval<int?> i_ = context.Operators.Interval(13, 20, true, true);
+		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 
-		return h_;
+		return j_;
 	}
 
     [CqlDeclaration("Stratification 3")]
 	public bool? Stratification_3() => 
 		__Stratification_3.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}

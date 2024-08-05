@@ -33,7 +33,7 @@ public class Program
 
     public static int Main(string[] args)
     {
-#if DEBUG // Latest Visual Studio can't handle the $(SolutionDir) args in the launchSettings!!
+#if DEBUG // Latest Visual Studio can't handle the $(CqlSolutionDir) args in the launchSettings!!
         var dir = new DirectoryInfo(Environment.CurrentDirectory)
             .FindParentDirectoryContaining("CqlAndDemo.sln")!;
 
@@ -191,7 +191,6 @@ public class Program
     public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
         TryAddPackagerOptions(services, context.Configuration);
-        services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
         services.AddSingleton<ProgramCqlPackagerFactory>();
         services.AddSingleton<PackagerCliProgram>();
         services.TryAddSingleton<OptionsConsoleDumper>();
@@ -201,6 +200,9 @@ public class Program
     {
         if (services.Any(s => s.ServiceType == typeof(IValidateOptions<CqlToResourcePackagingOptions>)))
             return;
+
+        services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
+        services.AddSingleton<IValidateOptions<CSharpCodeWriterOptions>, CSharpCodeWriterOptions.Validator>();
 
         services
             .AddOptions<CqlToResourcePackagingOptions>()

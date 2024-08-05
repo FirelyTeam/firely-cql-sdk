@@ -61,6 +61,7 @@ namespace Hl7.Cql.CqlToElm
         {
             using var cqlLibrary = new StringReader(cql);
             var visitor = new LibraryVisitor(scope.ServiceProvider);
+
             try
             {
                 var builder = visitor.Visit(ParseLibrary(cqlLibrary));

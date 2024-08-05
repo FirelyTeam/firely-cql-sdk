@@ -94,5 +94,19 @@ namespace Hl7.Cql.CqlToElm.Test
             ", "Could not resolve context name ObservationX in model FHIR.");
         }
 
+        [TestMethod]
+        public void Context_Unfiltered_Retrieve_Null_Context()
+        {
+            var lib = MakeLibrary(@"
+                library UsingTest version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define patients: [Patient]
+            ");
+            var retrieve = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Retrieve>();
+            retrieve.context.Should().BeNull();
+        }
+
     }
 }

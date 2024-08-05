@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using Hl7.Cql.Elm;
@@ -8,20 +9,20 @@ namespace CoreTests.Elm
     [TestClass]
     public class TestWalker
     {
-        static TupleTypeSpecifier tt = new()
+        private static readonly TupleTypeSpecifier Tt = new()
         {
-            element = new[]
-              {
-                    new TupleElementDefinition { name = "typeParam", elementType = new ParameterTypeSpecifier { parameterName = "A" } },
-              }
+            element =
+            [
+                new TupleElementDefinition { name = "typeParam", elementType = new ParameterTypeSpecifier { parameterName = "A" } }
+            ]
         };
 
-        static Library lib = new()
+        private static readonly Library Lib = new()
         {
-            statements = new[]
-            {
-                    new ExpressionDef { expression = new Literal { value = "hi", resultTypeSpecifier = tt }, name = "Foo" }
-            }
+            statements =
+            [
+                new ExpressionDef { expression = new Literal { value = "hi", resultTypeSpecifier = Tt }, name = "Foo" }
+            ]
         };
 
         class ResultBuilder
@@ -37,41 +38,7 @@ namespace CoreTests.Elm
 
                 return false;
             }
-
-            public bool VisitorThatHandlesTupleElementDefinition(object e)
-            {
-                if (e is TupleElementDefinition)
-                    return true;
-                else if (e is string s)
-                    Strings.Add(s);
-                else if(e is Literal l)
-                    Strings.Add($"Literal {l.value}");
-
-                return false;
-            }
         }
-
-        //[TestMethod]
-        //public void WalkLibraryIncludingStrings()
-        //{
-        //    var result = new ResultBuilder();
-
-        //    var walker = new ElmTreeWalker(result.Visitor, null, typeof(string));
-        //    walker.Walk(lib);
-
-        //    result.Strings.Should().BeEquivalentTo("Literal hi", "hi", "A", "typeParam", "Foo");
-        //}
-
-        //[TestMethod]
-        //public void WalkLibraryButDontEnterTupleElementDefinition()
-        //{
-        //    var result = new ResultBuilder();
-
-        //    var walker = new ElmTreeWalker(result.VisitorThatHandlesTupleElementDefinition, null, typeof(string));
-        //    walker.Walk(lib);
-
-        //    result.Strings.Should().BeEquivalentTo("Literal hi", "hi", "Foo");
-        //}
 
         [TestMethod]
         public void WalkLibraryExcludingStrings()
@@ -79,10 +46,21 @@ namespace CoreTests.Elm
             var result = new ResultBuilder();
 
             var walker = new ElmTreeWalker(result.Visitor);
-            walker.Walk(lib);
+            walker.Start(Lib);
 
             result.Strings.Should().BeEquivalentTo("Literal hi");
         }
 
+        [TestMethod]
+        public void DetectsCycles()
+        {
+            var add = new Add();
+            var sub = new Subtract { operand = [add] };
+            add.operand = [sub];
+
+            var walker = new ElmTreeWalker(_ => false);
+            Assert.ThrowsException<InvalidOperationException>(() => walker.Start(add)).Message.Should()
+                  .Contain("Cycle in ELM");
+        }
     }
 }

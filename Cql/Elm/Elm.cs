@@ -10,6 +10,8 @@
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
+using System.Xml.Serialization;
+
 // ReSharper disable InconsistentNaming
 
 namespace Hl7.Cql.Elm;
@@ -31,6 +33,7 @@ internal interface IGetNameAndVersion
     /// </summary>
     /// <param name="throwError">Indicates whether to throw an exception if the identifier is missing.</param>
     /// <returns>The name with version, or just the name if no version exists.</returns>
+    /// <remarks>The name and version are formatted in CQL style, e.g. "FHIRHelpers-4.0.1".</remarks>
     string? NameAndVersion(bool throwError = true);
 
     /// <summary>
@@ -91,7 +94,7 @@ partial class IncludeDef : IGetNameAndVersion
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class VersionedIdentifier : IGetNameAndVersion
 {
-    /// <inheritedoc/>
+    /// <inheritdoc />
     public string? NameAndVersion(bool throwError = true)
     {
         if (string.IsNullOrEmpty(id))
@@ -134,9 +137,18 @@ partial class IncludeDef : IGetLibraryName
 {
     /// <inheritdoc />
     [JsonIgnore]
+    [XmlIgnore]
     public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
 }
 
+partial class Element
+{
+    /// <summary>
+    /// Returns the type of the element, either from resultTypeSpecifier or resultTypeName.
+    /// </summary>
+    public virtual TypeSpecifier? GetTypeSpecifier() =>
+        resultTypeSpecifier ?? resultTypeName?.ToNamedType();
+}
 
 partial class CodeRef : IGetLibraryName { }
 partial class CodeSystemRef : IGetLibraryName { }
@@ -174,30 +186,37 @@ partial class Property : IGetPath { }
 internal interface IGetName
 {
     /// <summary>
-    /// Gets the name.
+    /// The name of the definition by which it can be referenced.
     /// </summary>
     string? name { get; }
 }
-partial class AliasRef : IGetName { }
-partial class CodeRef : IGetName { }
+
+partial class AliasRef : IReferenceElement { }
+partial class CodeRef : IReferenceElement { }
 partial class CodeSystemDef : IGetName { }
-partial class CodeSystemRef : IGetName { }
+partial class CodeSystemRef : IReferenceElement { }
 partial class ConceptDef : IGetName { }
-partial class ConceptRef : IGetName { }
+partial class ConceptRef : IReferenceElement { }
 partial class ExpressionDef : IGetName { }
-partial class ExpressionRef : IGetName { }
-partial class IdentifierRef : IGetName { }
+partial class ExpressionRef : IReferenceElement { }
+partial class IdentifierRef : IReferenceElement { }
+
 partial class InstanceElement : IGetName { }
-partial class OperandDef : IGetName { }
-partial class OperandRef : IGetName { }
+partial class OperandDef : IGetName
+{
+    /// <inheritdoc />
+    public override TypeSpecifier? GetTypeSpecifier() =>
+        operandTypeSpecifier ?? operandType?.ToNamedType() ?? base.GetTypeSpecifier();
+}
+partial class OperandRef : IReferenceElement { }
 partial class ParameterDef: IGetName { }
-partial class ParameterRef: IGetName { }
+partial class ParameterRef: IReferenceElement { }
 partial class QueryLetRef: IGetName { }
 partial class Tag: IGetName { }
 partial class TupleElement: IGetName { }
 partial class TupleElementDefinition: IGetName { }
 partial class ValueSetDef: IGetName { }
-partial class ValueSetRef: IGetName { }
+partial class ValueSetRef: IReferenceElement { }
 
 #endregion
 

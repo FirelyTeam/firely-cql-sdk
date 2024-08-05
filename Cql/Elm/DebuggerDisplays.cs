@@ -72,7 +72,5 @@ namespace Hl7.Cql.Elm
     }
 
     [DebuggerDisplay($"{{{nameof(name)}}} {{{nameof(operandTypeSpecifier)}}}")]
-    partial class OperandDef
-    {
-    }
+    partial class OperandDef;
 }

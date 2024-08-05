@@ -14,7 +14,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <summary>
 /// Represents the options for the <see cref="CSharpCodeStreamPostProcessor"/>.
 /// </summary>
-public class CSharpCodeWriterOptions
+public partial class CSharpCodeWriterOptions
 
 {
     /// <summary>
@@ -65,10 +65,10 @@ public enum CSharpCodeWriterTypeFormat
     /// <summary>
     /// Use 'var' over explicit types.
     /// </summary>
-    Var,
+    Var = 1,
 
     /// <summary>
     /// Use explicit types.
     /// </summary>
-    Explicit
+    Explicit = 2
 }

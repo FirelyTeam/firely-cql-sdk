@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -14,9 +14,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
+using System.Xml.Serialization;
+using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.Elm
 {
+    /// <summary>
+    /// Represents an ELM element that is used as a reference to a definition in a library.
+    /// </summary>
+    internal interface IReferenceElement : IGetName
+    {
+    }
+
     /// <summary>
     /// Represents an ELM Element that is used as a definition in a library or other resolution scope.
     /// </summary>
@@ -50,13 +59,12 @@ namespace Hl7.Cql.Elm
     /// <summary>
     /// Represents a function-typed element.
     /// </summary>
-    public interface IFunctionElement : IDefinitionElement
-    {
-    }
+    public interface IFunctionElement : IDefinitionElement;
+
     public interface IHasSignature : IFunctionElement
     {
         IEnumerable<OperandDef> Operands { get; }
-        TypeSpecifier ResultTypeSpecifier { get; }
+        TypeSpecifier? ResultTypeSpecifier { get; }
         bool Fluent { get; }
     }
 
@@ -150,10 +158,12 @@ namespace Hl7.Cql.Elm
     public partial class ExpressionDef : IDefinitionElement
     {
         [JsonIgnore]
-        AccessModifier IDefinitionElement.Access => accessLevel;
+        [XmlIgnore]
+        public AccessModifier Access => accessLevel!;
 
         [JsonIgnore]
-        string IDefinitionElement.Name => name;
+        [XmlIgnore]
+        public string Name => name!;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ExpressionRef
         {
@@ -163,23 +173,21 @@ namespace Hl7.Cql.Elm
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
+        public override string ToString() => $"{Name}:{resultTypeSpecifier}";
     }
 
-    public partial class FunctionDef : IFunctionElement, IHasSignature
+    public partial class FunctionDef : IHasSignature
     {
         [JsonIgnore]
-        AccessModifier IDefinitionElement.Access => accessLevel;
+        [XmlIgnore]
+        public IEnumerable<OperandDef> Operands => operand ?? [];
 
         [JsonIgnore]
-        string IDefinitionElement.Name => name;
+        [XmlIgnore]
+        public TypeSpecifier? ResultTypeSpecifier => resultTypeSpecifier;
 
         [JsonIgnore]
-        public IEnumerable<OperandDef> Operands => operand ?? Enumerable.Empty<OperandDef>();
-
-        [JsonIgnore]
-        public TypeSpecifier ResultTypeSpecifier => resultTypeSpecifier!;
-
-        [JsonIgnore]
+        [XmlIgnore]
         public bool Fluent => fluentSpecified && fluent;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
@@ -192,6 +200,11 @@ namespace Hl7.Cql.Elm
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
+        public override string ToString()
+        {
+            var pars = string.Join(",", Operands.Select(s => s.ToString()));
+            return $"{(Fluent ? "fluent " : "")} {Name}({pars}):{GetTypeSpecifier()?.ToString() ?? "(missing)" }";
+        }
     }
 
     public partial class ContextDef : IDefinitionElement
@@ -202,6 +215,7 @@ namespace Hl7.Cql.Elm
         string IDefinitionElement.Name => $"$context:{this.name}";
 
         [JsonIgnore]
+        [XmlIgnore]
         public bool IsUnfiltered => name == "Unfiltered";
 
         [JsonIgnore]
@@ -231,6 +245,7 @@ namespace Hl7.Cql.Elm
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
+        public override string ToString() => $"{name} {GetTypeSpecifier()}";
     }
 
     public partial class AliasedQuerySource : IDefinitionElement
@@ -296,9 +311,10 @@ namespace Hl7.Cql.Elm
     partial class IdentifierRef : IDefinitionElement
     {
         [JsonIgnore]
-        public AccessModifier Access => AccessModifier.Private;
+        AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
         [JsonIgnore]
+        [XmlIgnore]
         public string Name => name;
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
@@ -331,29 +347,20 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public static bool CanCombine(params IFunctionElement[] elements)
         {
-            for (int i = 0; i < elements.Length; i++)
-                if (elements[i] is not IHasSignature && elements[i] is not OverloadedFunctionDef)
-                    return false;
+            if (elements.Any(t => t is not IHasSignature && t is not OverloadedFunctionDef))
+                return false;
+
             if (elements.Select(e => e.Name).Distinct().Count() != 1)
                 return false;
+
             var allFunctions = elements
-                  .OfType<OverloadedFunctionDef>()
-                  .SelectMany(ofd => ofd.Functions)
-                  .Concat(elements.OfType<IHasSignature>())
-                  .ToArray();
-            var distinctSignatures = new List<TypeSpecifier[]>();
-            // TODO: make this better than O(n2)
-            foreach (var function in allFunctions)
-            {
-                var opTypes = function.Operands
-                    .Select(op => op.operandTypeSpecifier)
-                    .ToArray();
-                if (distinctSignatures.Any(sig => opTypes.SequenceEqual(sig)))
-                    return false;
-                else
-                    distinctSignatures.Add(opTypes);
-            }
-            return true;
+                               .OfType<OverloadedFunctionDef>()
+                               .SelectMany(ofd => ofd.Functions)
+                               .Concat(elements.OfType<IHasSignature>())
+                               .ToArray();
+
+            var distinctSignatures = new HashSet<IHasSignature>(allFunctions, new ExpressionSignatureComparer());
+            return distinctSignatures.Count == allFunctions.Length;
         }
 
         /// <summary>
@@ -367,21 +374,30 @@ namespace Hl7.Cql.Elm
                 .SelectMany(ofd => ofd.Functions)
                 .Concat(elements.OfType<IHasSignature>())
                 .ToArray();
+
             if (!CanCombine(allFunctions))
-                throw new ArgumentException("Cannot combine these functions.", nameof(elements));
+            {
+                var funcs = string.Join(", ", allFunctions.Select(f => $"'{f}'"));
+                throw new ArgumentException($"Cannot combine functions {funcs} into an overload, as they are not unique.", nameof(elements));
+            }
+
             var accessLevel = allFunctions.Select(f => f.Access).Min(); // public < private; any public overload makes this public
             return new OverloadedFunctionDef(allFunctions, allFunctions[0].Name, accessLevel);
         }
 
 
         private readonly List<IHasSignature> _functions;
+
         [JsonIgnore]
+        [XmlIgnore]
         public IReadOnlyList<IHasSignature> Functions => _functions!.AsReadOnly();
 
         [JsonIgnore]
+        [XmlIgnore]
         public string Name { get; }
 
         [JsonIgnore]
+        [XmlIgnore]
         public AccessModifier Access { get; }
 
         private OverloadedFunctionDef(IEnumerable<IHasSignature> functions,
@@ -395,6 +411,8 @@ namespace Hl7.Cql.Elm
 
         public OverloadedFunctionDef Add(FunctionDef function)
         {
+            // TODO: This does not guard against duplicate signatures, like the Create method does.
+            // See https://github.com/FirelyTeam/firely-cql-sdk/issues/439
             if (function.name != Name)
                 throw new InvalidOperationException($"All functions should have the same name.");
             _functions.Add(function);
@@ -411,24 +429,24 @@ namespace Hl7.Cql.Elm
     /// <summary>
     /// Defines a deferred symbol that will be resolved later.
     /// </summary>
-    public abstract class DeferredDefinition<T> : IDefinitionElement
+    public abstract class DeferredDefinition<T>
+        (string name, AccessModifier access, Func<T> resolve) : IDefinitionElement
         where T : IDefinitionElement
     {
         [JsonIgnore]
-        public string Name { get; }
+        [XmlIgnore]
+        public string Name { get; } = name;
+
         [JsonIgnore]
-        public AccessModifier Access { get; }
+        [XmlIgnore]
+        public AccessModifier Access { get; } = access;
+
         [JsonIgnore]
-        protected Lazy<T> Definition { get; }
+        [XmlIgnore]
+        protected Lazy<T> Definition { get; } = new(resolve);
+
         public T Resolve() => Definition.Value;
 
-
-        public DeferredDefinition(string name, AccessModifier access, Func<T> resolve)
-        {
-            Name = name;
-            Access = access;
-            Definition = new Lazy<T>(resolve);
-        }
 
         public IDefinitionElement AddError(CqlToElmError error) => Definition.Value.AddError(error);
 
@@ -437,33 +455,31 @@ namespace Hl7.Cql.Elm
     /// <summary>
     /// Defines a deferred expression (define).
     /// </summary>
-    public sealed class DeferredExpressionDef : DeferredDefinition<ExpressionDef>
-    {
-        public DeferredExpressionDef(string name, AccessModifier access, Func<ExpressionDef> resolve) : base(name, access, resolve)
-        {
-        }
-    }
+    public sealed class DeferredExpressionDef(string name, AccessModifier access, Func<ExpressionDef> resolve)
+        : DeferredDefinition<ExpressionDef>(name, access, resolve);
     /// <summary>
     /// Defines a deferred expression (define).
     /// </summary>
-    public sealed class DeferredFunctionDef : DeferredDefinition<FunctionDef>, IFunctionElement, IHasSignature
+    public sealed class DeferredFunctionDef
+    (
+        AccessModifier access,
+        bool fluent,
+        string name,
+        OperandDef[] operand,
+        Func<FunctionDef> resolve)
+        : DeferredDefinition<FunctionDef>(name, access, resolve), IHasSignature
     {
-        public DeferredFunctionDef(AccessModifier access,
-            bool fluent,
-            string name,
-            OperandDef[] operand,
-            Func<FunctionDef> resolve) : base(name, access, resolve)
-        {
-            Fluent = fluent;
-            Operands = operand;
-        }
-
         // the signature has to be known initially without resolution.
         [JsonIgnore]
-        public IEnumerable<OperandDef> Operands { get; }
+        [XmlIgnore]
+        public IEnumerable<OperandDef> Operands { get; } = operand;
+
         [JsonIgnore]
-        public bool Fluent { get; }
+        [XmlIgnore]
+        public bool Fluent { get; } = fluent;
+
         [JsonIgnore]
-        public TypeSpecifier ResultTypeSpecifier => Resolve().ResultTypeSpecifier;
+        [XmlIgnore]
+        public TypeSpecifier? ResultTypeSpecifier => Resolve().ResultTypeSpecifier;
     }
 }
