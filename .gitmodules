@@ -1,3 +1,6 @@
 [submodule "Cql/CqlToElmTests/cql-tests"]
-	path = Cql/CqlToElmTests/cql-tests
+	path = submodules/CqlToElmTests
 	url = https://github.com/cqframework/cql-tests
+[submodule "Firely.Cql.Sdk.Integration.Runner"]
+	path = submodules/Firely.Cql.Sdk.Integration.Runner
+	url = https://github.com/FirelyTeam/Firely.Cql.Sdk.Integration.Runner
