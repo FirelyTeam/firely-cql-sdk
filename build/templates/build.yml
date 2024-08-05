@@ -53,7 +53,7 @@ jobs:
       command: test
       projects:
       - '**/*Tests/*Tests.csproj'
-      - 'submodules/*Tests.csproj'
+      - 'submodules/**/*Tests.csproj'
       arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
 
   - template: sign-dlls-template.yml
