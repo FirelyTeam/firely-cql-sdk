@@ -880,7 +880,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.toInterval(an_);
 				CqlDateTime ap_ = context.Operators.Start(ao_);
 				CqlInterval<CqlDateTime> aq_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
-				bool? ar_ = context.Operators.In<CqlDateTime>(ap_, aq_, null);
+				bool? ar_ = context.Operators.In<CqlDateTime>(ap_, aq_, "day");
 				bool? as_ = context.Operators.And(al_, ar_);
 
 				return as_;
@@ -940,7 +940,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
 				CqlDateTime q_ = context.Operators.Start(p_);
 				CqlInterval<CqlDateTime> r_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
-				bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, null);
+				bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
 				bool? t_ = context.Operators.And(m_, s_);
 
 				return t_;
@@ -1028,7 +1028,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.toInterval(af_);
 				CqlDateTime ah_ = context.Operators.Start(ag_);
 				CqlInterval<CqlDateTime> ai_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(TwentyWeeksPlusEncounter);
-				bool? aj_ = context.Operators.In<CqlDateTime>(ah_, ai_, null);
+				bool? aj_ = context.Operators.In<CqlDateTime>(ah_, ai_, "day");
 				bool? ak_ = context.Operators.And(ad_, aj_);
 
 				return ak_;

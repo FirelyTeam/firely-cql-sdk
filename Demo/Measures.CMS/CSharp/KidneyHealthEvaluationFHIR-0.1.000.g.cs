@@ -424,7 +424,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 		bool? k_ = this.Has_Active_Diabetes_Overlaps_Measurement_Period();

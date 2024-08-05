@@ -642,7 +642,7 @@ public class FHIR347_0_1_021
 		CqlDateTime d_ = context.Operators.ConvertStringToDateTime(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
-		int? g_ = context.Operators.CalculateAgeAt(d_, f_, null);
+		int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
 		bool? h_ = context.Operators.GreaterOrEqual(g_, 20);
 
 		return h_;
@@ -789,7 +789,7 @@ public class FHIR347_0_1_021
 		CqlDateTime d_ = context.Operators.ConvertStringToDateTime(c_);
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.Start(e_);
-		int? g_ = context.Operators.CalculateAgeAt(d_, f_, null);
+		int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
 		CqlInterval<int?> h_ = context.Operators.Interval(40, 75, true, true);
 		bool? i_ = context.Operators.In<int?>(g_, h_, null);
 		bool? j_ = this.Has_Diabetes_Diagnosis();

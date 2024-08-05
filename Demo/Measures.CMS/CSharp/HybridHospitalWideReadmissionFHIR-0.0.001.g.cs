@@ -322,13 +322,13 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(z_);
 				CqlDateTime ab_ = context.Operators.Start(aa_);
 				CqlDate ac_ = context.Operators.DateFrom(ab_);
-				int? ad_ = context.Operators.CalculateAgeAt(y_, ac_, null);
+				int? ad_ = context.Operators.CalculateAgeAt(y_, ac_, "year");
 				bool? ae_ = context.Operators.GreaterOrEqual(ad_, 65);
 				bool? af_ = context.Operators.And(u_, ae_);
 				CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_3_000.ToInterval(z_);
 				CqlDateTime ai_ = context.Operators.End(ah_);
 				CqlInterval<CqlDateTime> aj_ = this.Measurement_Period();
-				bool? ak_ = context.Operators.In<CqlDateTime>(ai_, aj_, null);
+				bool? ak_ = context.Operators.In<CqlDateTime>(ai_, aj_, "day");
 				bool? al_ = context.Operators.And(af_, ak_);
 
 				return al_;

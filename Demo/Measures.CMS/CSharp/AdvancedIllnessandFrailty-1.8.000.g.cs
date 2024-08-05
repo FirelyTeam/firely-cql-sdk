@@ -270,7 +270,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			FhirDateTime ap_ = FrailtyDeviceOrder?.AuthoredOnElement;
 			CqlDateTime aq_ = context.Operators.Convert<CqlDateTime>(ap_);
 			CqlInterval<CqlDateTime> ar_ = QICoreCommon_2_0_000.toInterval((aq_ as object));
-			bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, ar_, null);
+			bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, ar_, "day");
 			bool? at_ = context.Operators.And(an_, as_);
 
 			return at_;
@@ -292,7 +292,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			CqlInterval<CqlDateTime> ba_ = QICoreCommon_2_0_000.toInterval(az_);
 			CqlDateTime bb_ = context.Operators.End(ba_);
 			CqlInterval<CqlDateTime> bc_ = this.Measurement_Period();
-			bool? bd_ = context.Operators.In<CqlDateTime>(bb_, bc_, null);
+			bool? bd_ = context.Operators.In<CqlDateTime>(bb_, bc_, "day");
 			bool? be_ = context.Operators.And(ax_, bd_);
 
 			return be_;
@@ -306,7 +306,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		{
 			CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_0_000.prevalenceInterval(FrailtyDiagnosis);
 			CqlInterval<CqlDateTime> bg_ = this.Measurement_Period();
-			bool? bh_ = context.Operators.Overlaps(bf_, bg_, null);
+			bool? bh_ = context.Operators.Overlaps(bf_, bg_, "day");
 
 			return bh_;
 		};
@@ -322,7 +322,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_3_000.ToInterval(bi_);
 			CqlInterval<CqlDateTime> bk_ = QICoreCommon_2_0_000.toInterval((bj_ as object));
 			CqlInterval<CqlDateTime> bl_ = this.Measurement_Period();
-			bool? bm_ = context.Operators.Overlaps(bk_, bl_, null);
+			bool? bm_ = context.Operators.Overlaps(bk_, bl_, "day");
 
 			return bm_;
 		};
@@ -338,7 +338,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
 			CqlInterval<CqlDateTime> bp_ = QICoreCommon_2_0_000.toInterval(bo_);
 			CqlInterval<CqlDateTime> bq_ = this.Measurement_Period();
-			bool? br_ = context.Operators.Overlaps(bp_, bq_, null);
+			bool? br_ = context.Operators.Overlaps(bp_, bq_, "day");
 
 			return br_;
 		};
@@ -391,7 +391,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			CqlDateTime z_ = context.Operators.Subtract(x_, y_);
 			CqlDateTime ab_ = context.Operators.End(w_);
 			CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(z_, ab_, true, true);
-			bool? ad_ = context.Operators.In<CqlDateTime>(v_, ac_, null);
+			bool? ad_ = context.Operators.In<CqlDateTime>(v_, ac_, "day");
 			bool? ae_ = context.Operators.And(r_, ad_);
 
 			return ae_;
@@ -426,7 +426,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			CqlDateTime q_ = context.Operators.End(p_);
 			CqlQuantity r_ = context.Operators.Quantity(1m, "day");
 			CqlDateTime s_ = context.Operators.Add(q_, r_);
-			bool? t_ = context.Operators.SameOrAfter(n_, s_, null);
+			bool? t_ = context.Operators.SameOrAfter(n_, s_, "day");
 
 			return t_;
 		};
@@ -472,7 +472,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			CqlDateTime r_ = context.Operators.Subtract(p_, q_);
 			CqlDateTime t_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> u_ = context.Operators.Interval(r_, t_, true, true);
-			bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+			bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
 			bool? w_ = context.Operators.And(j_, v_);
 
 			return w_;
@@ -514,7 +514,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlDateTime ad_ = context.Operators.End(y_);
 			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ab_, ad_, true, true);
-			bool? af_ = context.Operators.Overlaps(x_, ae_, null);
+			bool? af_ = context.Operators.Overlaps(x_, ae_, "day");
 			bool? ag_ = context.Operators.And(m_, af_);
 
 			return ag_;
@@ -538,7 +538,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 66);
 		bool? j_ = this.Has_Criteria_Indicating_Frailty();
 		bool? k_ = context.Operators.And(i_, j_);
@@ -565,7 +565,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(66, 80, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, null);
 		bool? k_ = this.Has_Criteria_Indicating_Frailty();
@@ -581,7 +581,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		CqlDate v_ = context.Operators.ConvertStringToDate(u_);
 		CqlDateTime x_ = context.Operators.End(e_);
 		CqlDate y_ = context.Operators.DateFrom(x_);
-		int? z_ = context.Operators.CalculateAgeAt(v_, y_, null);
+		int? z_ = context.Operators.CalculateAgeAt(v_, y_, "year");
 		bool? aa_ = context.Operators.GreaterOrEqual(z_, 81);
 		bool? ac_ = context.Operators.And(aa_, k_);
 		bool? ad_ = context.Operators.Or(r_, ac_);
@@ -602,7 +602,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
-		int? h_ = context.Operators.CalculateAgeAt(d_, g_, null);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 66);
 		CqlCode j_ = this.Housing_status();
 		IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(j_);
@@ -616,7 +616,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 			CqlDateTime ab_ = context.Operators.End(aa_);
 			CqlInterval<CqlDateTime> ac_ = this.Measurement_Period();
 			CqlDateTime ad_ = context.Operators.End(ac_);
-			bool? ae_ = context.Operators.SameOrBefore(ab_, ad_, null);
+			bool? ae_ = context.Operators.SameOrBefore(ab_, ad_, "day");
 
 			return ae_;
 		};

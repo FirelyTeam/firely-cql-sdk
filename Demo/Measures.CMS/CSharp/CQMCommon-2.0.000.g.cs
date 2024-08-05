@@ -143,7 +143,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_3_000.ToInterval(i_);
 			CqlDateTime k_ = context.Operators.End(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
-			bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, null);
+			bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
 			bool? n_ = context.Operators.And(h_, m_);
 
 			return n_;
@@ -178,7 +178,7 @@ public class CQMCommon_2_0_000
 	{
 		CqlDateTime a_ = context.Operators.Start(Value);
 		CqlDateTime b_ = context.Operators.End(Value);
-		int? c_ = context.Operators.DifferenceBetween(a_, b_, null);
+		int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
 
 		return c_;
 	}
@@ -189,7 +189,7 @@ public class CQMCommon_2_0_000
 	{
 		CqlDateTime a_ = context.Operators.Start(Value);
 		CqlDateTime b_ = context.Operators.End(Value);
-		int? c_ = context.Operators.DifferenceBetween(a_, b_, null);
+		int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
 
 		return c_;
 	}

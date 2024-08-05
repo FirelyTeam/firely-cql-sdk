@@ -167,7 +167,7 @@ public class AdultOutpatientEncounters_4_8_000
 			Period y_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
 			CqlInterval<CqlDateTime> aa_ = QICoreCommon_2_0_000.toInterval((z_ as object));
-			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, aa_, null);
+			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, aa_, "day");
 
 			return ab_;
 		};
