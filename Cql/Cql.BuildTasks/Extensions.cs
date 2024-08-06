@@ -139,7 +139,7 @@ internal static class Extensions
         }
         return (elmItems.ToArray(), csItems.ToArray());
 
-        string getElmPath(FileInfo file) => Path.Combine(outputPath ?? file.DirectoryName ?? "",
+        string getElmPath(FileInfo file) => Path.Combine(outputPath ?? file.DirectoryName ?? "", "obj",
             Path.ChangeExtension(file.Name, ".cql.json"));
         string getCsPath(FileInfo file) => Path.Combine(outputPath ?? file.DirectoryName ?? "",
             Path.ChangeExtension(file.Name, ".cql.cs"));
