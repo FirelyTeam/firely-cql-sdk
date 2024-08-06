@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -23,7 +24,7 @@ namespace Hl7.Cql.Elm
                                          ).ToArray();
 
         internal static TypeSpecifier[] GetArgumentTypes(this FunctionRef funcRef) =>
-            (funcRef.operand ?? []).Select((o,i) =>
+            (funcRef.operand ?? []).Select((o, i) =>
                                              o.GetTypeSpecifier() ??
                                              throw new UntypedOperandInFunctionRefError(funcRef, i).ToException()
             ).ToArray();
@@ -45,7 +46,7 @@ namespace Hl7.Cql.Elm
         internal static bool ExactlyMatches(this TypeSpecifier[] me, TypeSpecifier[] signature)
         {
             return me.Length == signature.Length &&
-                   me.Zip(signature, (l,r) => r.Equals(l)).All(r => r);
+                   me.Zip(signature, (l, r) => r.Equals(l)).All(r => r);
         }
 
         /// <summary>
@@ -72,14 +73,59 @@ namespace Hl7.Cql.Elm
             {
                 if (node is not Element element) return false;
 
-                var errors = element.annotation?.OfType<CqlToElmError>() ?? [];
+                var errors = element.annotation?.OfType<CqlToElmError>()?.ToArray() ?? Array.Empty<CqlToElmError>();
 
-                // avoid duplicate errors.
-                foreach (var error in errors)
-                    allErrors.Add(error);
+                if (errors.Length > 0) {
+                    // propagate the element's locator to the error.
+                    // this is important for error reporting in the IDE.
+                    // TODO: fix in the source?
+                    // this only happens if someone calls the GetErrors function to invoke this
+                    var l = locator(element.locator);
+                    if (l is not null)
+                    {
+                        foreach (var error in errors)
+                        {
+                            error.startLine = l.Value.startLine;
+                            error.startLineSpecified = true;
+                            error.startChar = l.Value.startChar;
+                            error.startCharSpecified = true;
+                            error.endLine = l.Value.endLine;
+                            error.endLineSpecified = true;
+                            error.endChar = l.Value.endChar;
+                            error.endCharSpecified = true;
+                        }
+                    }
 
+                    // avoid duplicate errors.
+                    foreach (var error in errors)
+                        allErrors.Add(error);
+                }
                 // Let the walker visit my children to scan for nested Elements.
                 return false;
+            }
+
+            (int startLine, int startChar, int endLine, int endChar)? locator(string locator)
+            {
+                if (string.IsNullOrWhiteSpace(locator))
+                {
+                    return null;
+                }
+
+                var parts = locator.Split(new[] { '-', ':' }, StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length != 4)
+                {
+                    return null;
+                }
+
+                if (!int.TryParse(parts[0], out int startLine) ||
+                    !int.TryParse(parts[1], out int startChar) ||
+                    !int.TryParse(parts[2], out int endLine) ||
+                    !int.TryParse(parts[3], out int endChar))
+                {
+                    return null;
+                }
+
+                return (startLine, startChar, endLine, endChar);
             }
         }
 

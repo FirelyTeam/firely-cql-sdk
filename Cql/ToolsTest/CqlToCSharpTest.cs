@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ToolsTest
 {
@@ -22,7 +23,6 @@ namespace ToolsTest
         public void Startup()
         {
             buildEngine = new Mock<IBuildEngine9>();
-
             errors = new List<BuildErrorEventArgs>();
             buildEngine.Setup(x => x.LogErrorEvent(It.IsAny<BuildErrorEventArgs>()))
                 .Callback<BuildErrorEventArgs>(e => errors.Add(e));
@@ -36,7 +36,7 @@ namespace ToolsTest
         [TestMethod]
         public void FHIRHelpers_No_Errors()
         {
-            var cqlToElm = new CqlToCSharp();
+            var cqlToElm = new CqlToCSharp() { Force = true };
             cqlToElm.BuildEngine = buildEngine.Object;
             cqlToElm.Sources = [new TaskItem(@"Input\Cql\FHIRHelpers-4.0.1.cql")];
             cqlToElm.Execute().Should().BeTrue();
@@ -49,7 +49,7 @@ namespace ToolsTest
         [TestMethod]
         public void Could_Not_Resolve()
         {
-            var cqlToElm = new CqlToCSharp();
+            var cqlToElm = new CqlToCSharp() { Force = true };
             cqlToElm.BuildEngine = buildEngine.Object;
             cqlToElm.Sources = [new TaskItem(@"Input\Cql\Errors-1.0.0.cql")];
             cqlToElm.Execute().Should().BeFalse();
@@ -62,7 +62,7 @@ namespace ToolsTest
         [TestMethod]
         public void Two_Files()
         {
-            var cqlToElm = new CqlToCSharp();
+            var cqlToElm = new CqlToCSharp() { Force = true };
             cqlToElm.BuildEngine = buildEngine.Object;
             cqlToElm.Sources = [
                 new TaskItem(@"Input\Cql\UsesFHIRHelpers-1.0.0.cql"),
@@ -78,7 +78,7 @@ namespace ToolsTest
         [TestMethod]
         public void Only_One_File_Specified()
         {
-            var cqlToElm = new CqlToCSharp();
+            var cqlToElm = new CqlToCSharp() { Force = true };
             cqlToElm.BuildEngine = buildEngine.Object;
             // because FHIRHelpers is not a compilation source, this should not succeed.
             cqlToElm.Sources = [new TaskItem(@"Input\Cql\UsesFHIRHelpers-1.0.0.cql")];

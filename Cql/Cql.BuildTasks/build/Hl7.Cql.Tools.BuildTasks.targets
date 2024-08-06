@@ -2,13 +2,13 @@
 	<UsingTask TaskName="CqlToCSharp" AssemblyFile="..\lib\net8.0\Hl7.Cql.Tools.BuildTasks.dll"/>
 	<ItemGroup>
 		<CqlFiles Include="**\*.cql" />
-		<Compile Update="$(MSBuildProjectDirectory)/**/*.cql.cs" DependentUpon="%(Filename)" />
-		<None Update="$(MSBuildProjectDirectory)/**/*.cql.json" DependentUpon="%(Filename)" />
+		<GeneratedCSharp Include="**\*.cql.cs"/>
+		<Compile Update="@(GeneratedCSharp)" DependentUpon="%(Filename)" />
 	</ItemGroup>
 
 	<!-- Visual Studio builds with MSBuild.  Just use dotnet build in that case. -->
 	<Target BeforeTargets="Build" Name="RunCqlToCSharp" Condition="'$(MSBuildRuntimeType)' != 'Core'">
-		<Exec Command="dotnet build -t:CqlToCSharp" />
+		<Exec ConsoleToMsBuild="true" Command="dotnet build -t:CqlToCSharp" />
 	</Target>
 
 	<Target BeforeTargets="CoreCompile" Name="CqlToCSharp" Condition="'$(MSBuildRuntimeType)' == 'Core'">

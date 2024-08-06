@@ -38,13 +38,13 @@ internal static class Extensions
 
     public static (IList<TaskItem> elm, IList<TaskItem> cs) ToCSharp(this ITaskItem[] sources,
         IServiceProvider services,
+        TaskLoggingHelper log,
         bool force)
     {
         var writer = services.GetRequiredService<CSharpLibrarySetToStreamsWriter>();
         var cf = services.GetRequiredService<CqlCompilerFactory>();
         var configuration = services.GetRequiredService<IConfiguration>();
         var outputPath = configuration["BuildEngine:OutputPath"];
-        var taskLogger = services.GetRequiredService<ILogger<TaskItemLibraryProvider>>();
 
         var loggerFactory = services.GetRequiredService<ILoggerFactory>();
         // TODO: use actual .NET services
@@ -81,7 +81,7 @@ internal static class Extensions
                 var csFile = new FileInfo(getCsPath(lib.file));
                 if (!force && csFile.Exists && csFile.LastWriteTimeUtc > lib.file.LastWriteTimeUtc)
                 {
-                    taskLogger.LogInformation($"Skipping {lib.file.FullName} because the C# is up to date.");
+                    log.LogMessage($"Skipping {lib.file.FullName} because the C# is up to date.");
                     return null;
                 }
                 else
@@ -94,7 +94,7 @@ internal static class Extensions
         // Turn our libraries into lambdas.
         var librarySet = new LibrarySet("", libs);
 
-        taskLogger.LogInformation($"Compiling ELM to expressions.");
+        log.LogMessage($"Compiling ELM to expressions.");
         DefinitionDictionary<LambdaExpression> lambdas;
         try
         {
@@ -102,7 +102,7 @@ internal static class Extensions
         }
         catch (Exception ex)
         {
-            taskLogger.LogError(ex, "Error compiling ELM to expressions.");
+            log.LogErrorFromException(ex);
             deleteGeneratedCSharp();
             return (elmItems.ToArray(), Array.Empty<TaskItem>());
         }
@@ -110,14 +110,14 @@ internal static class Extensions
         var csByNav = new Dictionary<string, string>();
         var callbacks = new CSharpSourceCodeWriterCallbacks(onAfterStep: afterWrite);
 
-        taskLogger.LogInformation($"Writing expressions to C#.");
+        log.LogMessage($"Writing expressions to C#.");
         try
         {
             writer.ProcessDefinitions(lambdas, librarySet, callbacks);
         }
         catch (Exception ex)
         {
-            taskLogger.LogError(ex, "Error writing expressions to C#.");
+            log.LogErrorFromException(ex);
             deleteGeneratedCSharp();
             return (elmItems.ToArray(), Array.Empty<TaskItem>());
         }
@@ -174,7 +174,7 @@ internal static class Extensions
                 var fileInfo = files[i];
                 if (!fileInfo.Exists)
                 {
-                    taskLogger.LogError($"File {fileInfo.FullName} could not be found on disk.");
+                    log.LogError($"File {fileInfo.FullName} could not be found on disk.");
                     libs[i] = (null, fileInfo, false);
                     continue;
                 }
@@ -183,7 +183,7 @@ internal static class Extensions
                     var elmFile = new FileInfo(getElmPath(fileInfo));
                     if (!force && elmFile.Exists && elmFile.LastWriteTime > fileInfo.LastWriteTimeUtc)
                     {
-                        taskLogger.LogInformation($"Skipping {fileInfo.FullName} because the ELM is up to date.");
+                        log.LogMessage($"Skipping {fileInfo.FullName} because the ELM is up to date.");
                         try
                         {
                             var lib = Library.LoadFromJson(elmFile);
@@ -192,10 +192,10 @@ internal static class Extensions
                         }
                         catch (Exception ex)
                         {
-                            taskLogger.LogError(ex, $"Error loading ELM from {elmFile.FullName}; regenerating.");
+                            log.LogErrorFromException(ex);
                         }
                     }
-                    taskLogger.LogInformation($"Converting {files[i].FullName} to ELM.");
+                    log.LogMessage($"Converting {files[i].FullName} to ELM.");
                     var cql = File.ReadAllText(fileInfo.FullName);
                     using (var scope = services.CreateScope())
                     {
@@ -212,14 +212,18 @@ internal static class Extensions
                             switch (severity)
                             {
                                 case ErrorSeverity.error:
-                                    taskLogger.LogError(error.message, locators);
+                                    log.LogError(error.errorType.ToString(), null, null,
+                                        fileInfo.FullName, error.startLine, error.startChar, error.endLine, error.endLine,
+                                        error.message);                                    
                                     hasErrors = true;
                                     break;
                                 case ErrorSeverity.warning:
-                                    taskLogger.LogWarning(error.message, locators);
+                                    log.LogWarning(error.errorType.ToString(), null, null,
+                                        fileInfo.FullName, error.startLine, error.startChar, error.endLine, error.endLine,
+                                        error.message);
                                     break;
                                 default:
-                                    taskLogger.LogInformation(error.message, locators);
+                                    log.LogMessage(error.message, locators);
                                     break;
                             }
 

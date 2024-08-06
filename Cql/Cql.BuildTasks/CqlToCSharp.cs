@@ -80,7 +80,7 @@ public class CqlToCSharp : Microsoft.Build.Utilities.Task
             return false;
         }
 
-        var taskItems = Sources.ToCSharp(services, Force);
+        var taskItems = Sources.ToCSharp(services, Log, Force);
         Elm = taskItems.elm.ToArray();
         CSharp = taskItems.cs.ToArray();
 

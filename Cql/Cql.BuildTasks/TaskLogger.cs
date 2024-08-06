@@ -52,26 +52,7 @@ namespace Hl7.Cql.Tools.BuildTasks
 
                 public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
                 {
-                    switch(logLevel) { 
-                        case LogLevel.Trace:
-                            TaskLoggingHelper.LogMessage(Microsoft.Build.Framework.MessageImportance.Low, formatter(state, exception));
-                            break;
-                        case LogLevel.Debug:
-                            TaskLoggingHelper.LogMessage(Microsoft.Build.Framework.MessageImportance.Normal, formatter(state, exception));
-                            break;
-                        case LogLevel.Information:
-                            TaskLoggingHelper.LogMessage(Microsoft.Build.Framework.MessageImportance.High, formatter(state, exception));
-                            break;
-                        case LogLevel.Warning:
-                            TaskLoggingHelper.LogWarning(null, null, null, null, 0, 0, 0, 0, formatter(state, exception));
-                            break;
-                        case LogLevel.Error:
-                            TaskLoggingHelper.LogError(null, null, null, null, 0, 0, 0, 0, formatter(state, exception));
-                            break;
-                        case LogLevel.Critical:
-                            TaskLoggingHelper.LogCriticalMessage(null, null, null, null, 0, 0, 0, 0, formatter(state, exception));
-                            break;
-                    }
+                    TaskLoggingHelper.LogMessage(Microsoft.Build.Framework.MessageImportance.High, formatter(state, exception));
                 }
             }
         }
