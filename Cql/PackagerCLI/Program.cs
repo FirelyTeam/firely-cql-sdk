@@ -33,17 +33,6 @@ public class Program
 
     public static int Main(string[] args)
     {
-#if DEBUG // Latest Visual Studio can't handle the $(CqlSolutionDir) args in the launchSettings!!
-        var dir = new DirectoryInfo(Environment.CurrentDirectory)
-            .FindParentDirectoryContaining("CqlAndDemo.sln")!;
-
-        args = args.SelectToArray(arg =>
-        {
-            var path = arg.StartsWith('/') ? Path.Combine(dir.FullName, arg[1..]) : arg;
-            return path;
-        });
-#endif
-
         if (args.Length == 0 ||
             new[] { "-?", "-h", "-help" }.Any(s => args.Contains(s, StringComparer.InvariantCultureIgnoreCase)))
         {
