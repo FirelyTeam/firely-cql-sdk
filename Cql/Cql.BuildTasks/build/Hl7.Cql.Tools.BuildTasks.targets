@@ -3,7 +3,9 @@
 	<ItemGroup>
 		<CqlFiles Include="**\*.cql" />
 		<GeneratedCSharp Include="**\*.cql.cs"/>
+		<GeneratedJson Include="**\*.cql.json"/>
 		<Compile Update="@(GeneratedCSharp)" DependentUpon="%(Filename)" />
+		<Compile Update="@(GeneratedJson)" DependentUpon="%(Filename)" />
 	</ItemGroup>
 
 	<!-- Visual Studio builds with MSBuild.  Just use dotnet build in that case. -->
