@@ -4,6 +4,8 @@ Hl7.Cql.Tools.BuildTasks.CqlToCSharp.CSharp.get -> Microsoft.Build.Framework.ITa
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.CSharp.set -> void
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Elm.get -> Microsoft.Build.Framework.ITaskItem[]
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Elm.set -> void
+Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Force.get -> bool
+Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Force.set -> void
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Options.get -> Microsoft.Build.Framework.ITaskItem
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Options.set -> void
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Sources.get -> Microsoft.Build.Framework.ITaskItem[]

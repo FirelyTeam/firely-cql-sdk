@@ -41,6 +41,7 @@ namespace ToolsTest
             cqlToElm.Sources = [new TaskItem(@"Input\Cql\FHIRHelpers-4.0.1.cql")];
             cqlToElm.Execute().Should().BeTrue();
             cqlToElm.Elm.Should().NotBeEmpty();
+            cqlToElm.CSharp.Should().NotBeEmpty();
             errors.Should().BeEmpty();
 
         }

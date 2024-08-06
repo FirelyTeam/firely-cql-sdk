@@ -36,9 +36,9 @@ internal static class Extensions
         }
     }
 
-
-
-    public static (IList<TaskItem> elm, IList<TaskItem> cs) ToCSharp(this ITaskItem[] sources, IServiceProvider services)
+    public static (IList<TaskItem> elm, IList<TaskItem> cs) ToCSharp(this ITaskItem[] sources,
+        IServiceProvider services,
+        bool force)
     {
         var writer = services.GetRequiredService<CSharpLibrarySetToStreamsWriter>();
         var cf = services.GetRequiredService<CqlCompilerFactory>();
@@ -52,17 +52,17 @@ internal static class Extensions
 
         var libraries = toLibraries(sources, out var hasErrors);
         var elmItems = new List<TaskItem>(libraries.Length);
-        foreach (var (lib, file) in libraries)
+        foreach (var (lib, file, write) in libraries)
         {
-            using var ms = new MemoryStream();
-            lib.WriteJson(ms);
-            ms.Position = 0;
-            var elmJson = new StreamReader(ms).ReadToEnd();
-
-            var elmPath = Path.Combine(outputPath ?? file.DirectoryName ?? "",
-                 Path.ChangeExtension(file.Name, ".cql.json"));
-            File.WriteAllText(elmPath, elmJson, Encoding.UTF8);
-
+            var elmPath = getElmPath(file);
+            if (write)
+            {
+                using var ms = new MemoryStream();
+                lib.WriteJson(ms);
+                ms.Position = 0;
+                var elmJson = new StreamReader(ms).ReadToEnd();
+                File.WriteAllText(elmPath, elmJson, Encoding.UTF8);
+            }
             elmItems.Add(new TaskItem(elmPath, new Dictionary<string, string>
             {
                 ["DependentUpon"] = file.Name,
@@ -76,16 +76,31 @@ internal static class Extensions
             return (elmItems.ToArray(), Array.Empty<TaskItem>());
         }
 
-        // Turn our libraries into lambdas.
+        var libs = libraries.Select(lib =>
+            {
+                var csFile = new FileInfo(getCsPath(lib.file));
+                if (!force && csFile.Exists && csFile.LastWriteTimeUtc > lib.file.LastWriteTimeUtc)
+                {
+                    taskLogger.LogInformation($"Skipping {lib.file.FullName} because the C# is up to date.");
+                    return null;
+                }
+                else
+                    return lib.library;
 
-        var librarySet = new LibrarySet("", libraries.Select(l=>l.library).ToArray());
+            })
+            .Where(lib => lib is not null)
+            .ToArray();
+
+        // Turn our libraries into lambdas.
+        var librarySet = new LibrarySet("", libs);
+
         taskLogger.LogInformation($"Compiling ELM to expressions.");
         DefinitionDictionary<LambdaExpression> lambdas;
         try
         {
             lambdas = eb.ProcessLibrarySet(librarySet);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             taskLogger.LogError(ex, "Error compiling ELM to expressions.");
             deleteGeneratedCSharp();
@@ -100,7 +115,7 @@ internal static class Extensions
         {
             writer.ProcessDefinitions(lambdas, librarySet, callbacks);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             taskLogger.LogError(ex, "Error writing expressions to C#.");
             deleteGeneratedCSharp();
@@ -108,12 +123,11 @@ internal static class Extensions
         }
 
         var csItems = new List<TaskItem>(libraries.Length);
-        foreach(var (lib, file) in libraries)
-        { 
+        foreach (var (lib, file, _) in libraries)
+        {
             if (csByNav.TryGetValue(lib.NameAndVersion(), out var code))
             {
-                var csPath = Path.Combine(outputPath ?? file.DirectoryName ?? "",
-                    Path.ChangeExtension(file.Name, ".cql.cs"));
+                var csPath = getCsPath(file);
                 File.WriteAllText(csPath, code, Encoding.UTF8);
                 csItems.Add(new TaskItem(csPath, new Dictionary<string, string>
                 {
@@ -125,13 +139,19 @@ internal static class Extensions
         }
         return (elmItems.ToArray(), csItems.ToArray());
 
+        string getElmPath(FileInfo file) => Path.Combine(outputPath ?? file.DirectoryName ?? "",
+            Path.ChangeExtension(file.Name, ".cql.json"));
+        string getCsPath(FileInfo file) => Path.Combine(outputPath ?? file.DirectoryName ?? "",
+            Path.ChangeExtension(file.Name, ".cql.cs"));
+
         void afterWrite(CSharpSourceCodeStep step)
         {
             switch (step)
             {
                 case CSharpSourceCodeStep.OnStream onStream:
                     onStream.Stream.Seek(0, SeekOrigin.Begin);
-                    using (var reader = new StreamReader(onStream.Stream)) {
+                    using (var reader = new StreamReader(onStream.Stream))
+                    {
                         var code = reader.ReadToEnd();
                         csByNav.Add(onStream.Name, code);
                     }
@@ -141,26 +161,41 @@ internal static class Extensions
             }
         }
 
-        (Library library, FileInfo file)[] toLibraries(ITaskItem[] sources, out bool hasErrors)
+        (Library library, FileInfo file, bool writeLib)[] toLibraries(ITaskItem[] sources, out bool hasErrors)
         {
             hasErrors = false;
             var libraryProvider = (TaskItemLibraryProvider)services.GetRequiredService<ILibraryProvider>();
             libraryProvider.SetItems(sources);
             var files = sources.FlattenToFiles();
 
-            var libs = new (Library, FileInfo)[files.Length];
+            var libs = new (Library, FileInfo, bool)[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
-                taskLogger.LogInformation($"Converting {files[i].FullName} to ELM.");
                 var fileInfo = files[i];
                 if (!fileInfo.Exists)
                 {
                     taskLogger.LogError($"File {fileInfo.FullName} could not be found on disk.");
-                    libs[i] = (null, fileInfo);
+                    libs[i] = (null, fileInfo, false);
                     continue;
                 }
                 else
                 {
+                    var elmFile = new FileInfo(getElmPath(fileInfo));
+                    if (!force && elmFile.Exists && elmFile.LastWriteTime > fileInfo.LastWriteTimeUtc)
+                    {
+                        taskLogger.LogInformation($"Skipping {fileInfo.FullName} because the ELM is up to date.");
+                        try
+                        {
+                            var lib = Library.LoadFromJson(elmFile);
+                            libs[i] = (lib, fileInfo, false);
+                            continue;
+                        }
+                        catch (Exception ex)
+                        {
+                            taskLogger.LogError(ex, $"Error loading ELM from {elmFile.FullName}; regenerating.");
+                        }
+                    }
+                    taskLogger.LogInformation($"Converting {files[i].FullName} to ELM.");
                     var cql = File.ReadAllText(fileInfo.FullName);
                     using (var scope = services.CreateScope())
                     {
@@ -190,7 +225,7 @@ internal static class Extensions
 
                         }
 
-                        libs[i] = (lib, fileInfo);
+                        libs[i] = (lib, fileInfo, true);
                     }
                 }
             }
@@ -199,10 +234,9 @@ internal static class Extensions
 
         void deleteGeneratedCSharp()
         {
-            foreach (var (_, file) in libraries)
+            foreach (var (_, file, _) in libraries)
             {
-                var csPath = Path.Combine(outputPath ?? file.DirectoryName ?? "",
-                    Path.ChangeExtension(file.Name, ".cql.cs"));
+                var csPath = getCsPath(file);
                 if (File.Exists(csPath))
                     File.Delete(csPath);
             }

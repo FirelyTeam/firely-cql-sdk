@@ -17,4 +17,12 @@
 			<Output TaskParameter="CSharp" PropertyName="CSharpFile" />
 		</CqlToCSharp>
 	</Target>
+
+	<Target AfterTargets="Clean" Name="AfterClean">
+		<ItemGroup>
+			<FilesToDelete Include="$(MSBuildProjectDirectory)\**\*.cql.json" />
+			<FilesToDelete Include="$(MSBuildProjectDirectory)\**\*.cql.cs" />
+		</ItemGroup>
+		<Delete Files="@(FilesToDelete)" />
+	</Target>
 </Project>

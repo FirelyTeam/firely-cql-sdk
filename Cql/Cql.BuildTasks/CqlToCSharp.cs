@@ -46,6 +46,11 @@ public class CqlToCSharp : Microsoft.Build.Utilities.Task
     [Output]
     public ITaskItem[] CSharp { get; set; }
 
+    /// <summary>
+    /// When <see clang="true" />, recompile all CQL files , even if the output files are up to date.
+    /// </summary>
+    public bool Force { get; set; }
+
     /// <inheritdoc />
     public override bool Execute()
     {
@@ -75,7 +80,7 @@ public class CqlToCSharp : Microsoft.Build.Utilities.Task
             return false;
         }
 
-        var taskItems = Sources.ToCSharp(services);
+        var taskItems = Sources.ToCSharp(services, Force);
         Elm = taskItems.elm.ToArray();
         CSharp = taskItems.cs.ToArray();
 
