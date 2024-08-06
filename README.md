@@ -2,10 +2,15 @@
 
 
 ## Introduction ##
-This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec] on the Microsoft .NET (dotnet) platform. It contains an engine for executing ELM, and/or turning the contents of an ELM file into a .NET assembly so it can be called statically.
+This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec] on the Microsoft .NET (dotnet) platform. It contains an engine for executing ELM,
+and/or turning the contents of an ELM file into a .NET assembly so it can be called statically.
 
 ## Release notes ##
-This is release version 1.0 (release candidate) of the engine. The engine has been tested by running it against the current NCQA HEDIS measures. There is quite some variation in how CQL is written and interpreted, so it is likely at this early stage that there will be deviations from other engines currently available. As well, we expect parts of the public interface can to change. 
+This is release version 2.0 (alpha) of the engine.
+We expect parts of the public interface can to change. 
+The engine has been tested by running it against the current NCQA HEDIS measures and CMS measures.
+There is quite some variation in how CQL is written and interpreted, 
+so it is likely at this early stage that there will be deviations from other engines currently available.
 
 The releases notes 
 at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version will document these changes and (major) issues we have encountered.
@@ -32,6 +37,7 @@ During development, new alpha releases will appear on Firely's Github Package fe
 ```USERNAME```: your username on GitHub
 ```PAT```: your Personal access token with at least the scope ```read:packages```
 
+Further information can be found in [docs/getting-started.md](docs/getting-started.md).
 ## Support 
 We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/firely-cql-sdk/issues](https://github.com/FirelyTeam/firely-cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.
 
