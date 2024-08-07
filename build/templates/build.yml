@@ -16,8 +16,6 @@ parameters:
   checkoutSubmodules: true
   pool: {}
   solutionFile: 'Cql+Demo.slnf'
-  git:
-    longpaths: true
 
 jobs:
 - job: Build
@@ -28,6 +26,10 @@ jobs:
       version: ${{ parameters.dotNetCoreVersion }}
 
   - ${{ if eq(parameters.checkoutSubmodules, 'true') }}:
+    - task: CmdLine@2
+      inputs:
+        script: |
+            git config --system core.longpaths true
     - checkout: self
       submodules: true
 
