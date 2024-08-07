@@ -30,7 +30,7 @@ jobs:
     - task: CmdLine@2
       inputs:
         script: |
-            git config --system core.longpaths true
+            git config --system core.longpaths true # enable long paths, especially on submodules
     - checkout: self
       submodules: true
 
@@ -40,16 +40,16 @@ jobs:
         nuGetServiceConnections: ${{ parameters.nuGetServiceConnections }}
         nuGetSources: ${{ parameters.nuGetSources }}
 
-  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-restore /p:ContinuousIntegrationBuild=true
-    displayName: 'dotnet build $(buildConfiguration) with version suffix  and no restore'
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-incremental --no-restore /p:ContinuousIntegrationBuild=true
+    displayName: 'dotnet build $(buildConfiguration) with version suffix, no restore and no incremental'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'true')))
 
-  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) /p:ContinuousIntegrationBuild=true
-    displayName: 'dotnet build $(buildConfiguration) with version suffix'
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-incremental /p:ContinuousIntegrationBuild=true
+    displayName: 'dotnet build $(buildConfiguration) with version suffix and no incremental'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'false')))
 
-  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) /p:ContinuousIntegrationBuild=true
-    displayName: 'dotnet build $(buildConfiguration)'
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --no-incremental /p:ContinuousIntegrationBuild=true
+    displayName: 'dotnet build $(buildConfiguration) with no incremental'
     condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'false'))
 
   - task: DotNetCoreCLI@2
