@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "Cql+Demo+IntegrationRunner.sln",
+    "path": "Cql-Sdk-All.sln",
     "projects": [
       "Cql\\CodeGeneration.NET\\CodeGeneration.NET.csproj",
       "Cql\\CoreTests\\CoreTests.csproj",

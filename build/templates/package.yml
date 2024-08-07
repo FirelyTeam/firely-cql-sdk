@@ -2,8 +2,7 @@ parameters:
   # Default values
   useVersionSuffix: true
   artifactName: 'NuGetPackages'
-  solutionFile: 'Cql+Demo.slnf' # also in build.yml and package.yml
-  #solutionFile: 'Cql+Demo+IntegrationRunner.sln' # also in build.yml and package.yml
+  solutionFile: 'Cql-Sdk.slnf' # also in build.yml and package.yml
 
 
 steps:
