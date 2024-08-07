@@ -16,6 +16,8 @@ parameters:
   checkoutSubmodules: true
   pool: {}
   solutionFile: 'Cql+Demo.slnf'
+  git:
+    longpaths: true
 
 jobs:
 - job: Build
