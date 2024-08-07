@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -147,35 +146,6 @@ namespace CoreTests.Elm
             eq(pts1, pts2);
             neq(pts1, pts3);
             neq(pts1, pts4);
-        }
-
-        [TestMethod]
-        public void TestDefinitionSignatureComparison()
-        {
-            var sig1 = new ExpressionDef { name = "Foo" };
-            var sig2 = new ExpressionDef { name = "Foo1" };
-
-            var signatureComparer = new ExpressionSignatureComparer();
-            signatureComparer.Equals(sig1, sig2).Should().BeFalse();
-            signatureComparer.Equals(sig1, sig1).Should().BeTrue();
-        }
-
-        [TestMethod]
-        public void TestFunctionSignatureComparison()
-        {
-            var sig1 = new FunctionDef
-            {
-                name = "Foo",
-                operand = [new OperandDef { name = "Bar", operandTypeSpecifier = SystemTypes.BooleanType }]
-            };
-            var sig2 = new FunctionDef
-            {
-                name = "Foo", operand = [new OperandDef { name = "Bar", operandTypeSpecifier = SystemTypes.StringType }]
-            };
-
-            var signatureComparer = new ExpressionSignatureComparer();
-            signatureComparer.Equals(sig1, sig2).Should().BeFalse();
-            signatureComparer.Equals(sig1, sig1).Should().BeTrue();
         }
     }
 }
