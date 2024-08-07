@@ -15,10 +15,10 @@ namespace Hl7.Cql.CqlToElm
 
 
     /// <summary>
-    /// Builds the implicit casts described in the CQL spec. Given the type of the parameter and an expression
+    /// Builds the implicit casts described in the CQL spec. Given the type of the parameter and an expression 
     /// representing the argument at the call site, this class will the necessary chain of nested expressions
     /// to implement the implicit casts.
-    ///
+    /// 
     /// See https://cql.hl7.org/03-developersguide.html#conversion-precedence
     /// </summary>
     internal class InvocationBuilder
@@ -84,7 +84,7 @@ namespace Hl7.Cql.CqlToElm
                 expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
             if (result.Function is SystemFunction systemFunction)
                 expression = systemFunction.Validate(expression);
-            var newResultType = ReplaceGenericType(result.Function.ResultTypeSpecifier!, result.GenericInferences);
+            var newResultType = ReplaceGenericType(result.Function.ResultTypeSpecifier, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);
         }
@@ -107,7 +107,7 @@ namespace Hl7.Cql.CqlToElm
             var expression = ElmFactory.CreateElmNode(function, null, newArguments);
             if (!result.Compatible)
                 expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
-            var newResultType = ReplaceGenericType(function.ResultTypeSpecifier!, result.GenericInferences);
+            var newResultType = ReplaceGenericType(function.ResultTypeSpecifier, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);
         }
@@ -290,7 +290,7 @@ namespace Hl7.Cql.CqlToElm
         internal SignatureMatchResult MatchSignature(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
         {
             var matches = overloadedFunction.Functions
-                .Select(function => MatchSignature(function, arguments));
+                .Select(function => MatchSignature(function, arguments));                
             var compatible = matches
                 .Where(result => result.Compatible)
                 .ToArray();
@@ -346,3 +346,4 @@ namespace Hl7.Cql.CqlToElm
 
 
 }
+

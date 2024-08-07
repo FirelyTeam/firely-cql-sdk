@@ -33,7 +33,7 @@ public class DataRequirementsAnalyzer(LibrarySet librarySet, Elm.Library library
         var result = new List<DataRequirement>();
 
         var walker = new Elm.ElmTreeWalker(n => Visit(result, n));
-        walker.Start(library);
+        walker.Walk(library);
 
         return result;
     }
