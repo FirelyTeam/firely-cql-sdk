@@ -15,7 +15,7 @@ parameters:
   zipAfterPublish: false
   checkoutSubmodules: true
   pool: {}
-  solutionFile: 'Cql+Demo.sln' # also in build.yml and package.yml
+  solutionFile: 'Cql+Demo.slnf' # also in build.yml and package.yml
   #solutionFile: 'Cql+Demo+IntegrationRunner.sln' # also in build.yml and package.yml
 
 jobs:
