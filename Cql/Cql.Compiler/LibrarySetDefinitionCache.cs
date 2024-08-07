@@ -10,7 +10,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 
@@ -43,10 +42,10 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
     // Indexed by library name and version
     private readonly ConcurrentDictionary<string, LibraryCache> _cachedLibraries = new();
 
-    private LibraryCache GetLibraryCache(Library library)
+    private LibraryCache GetLibraryCache(Library context)
     {
-        return _cachedLibraries.GetOrAdd(library.NameAndVersion()!, buildCache);
-        LibraryCache buildCache(string _) => LibraryCache.Build(library);
+        return _cachedLibraries.GetOrAdd(context.NameAndVersion()!, buildCache);
+        LibraryCache buildCache(string _) => LibraryCache.Build(context);
     }
 
     private LibraryCache GetLibraryCache(Library context, string? libraryAlias)
@@ -78,19 +77,13 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
             Index(cache.GetIndexForType<CodeDef>(), library, library.codes);
             Index(cache.GetIndexForType<ConceptDef>(), library, library.concepts);
 
-            // Give expressions and functions a separate namespace.
-            var expressionDefs = library.statements?.Where(s => s.GetType() == typeof(ExpressionDef)).ToArray();
-            Index(cache.GetIndexForType<ExpressionDef>(), library, expressionDefs);
-
-            var functionDefs = library.statements?.OfType<FunctionDef>().Cast<IFunctionElement>().ToArray();
-            Index(cache.GetIndexForType<IFunctionElement>(), library, functionDefs);
-
             return cache;
         }
 
         public bool TryResolveDefinition<T>(string name, [NotNullWhen(true)] out T? def)
             where T : IDefinitionElement =>
             GetIndexForType<T>().TryGetValue(name, out def);
+
 
         private LibraryCache()
         {
@@ -120,27 +113,10 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
 
             foreach (var definition in definitions)
             {
-                if (result.TryAdd(
+                if (!result.TryAdd(
                         definition.Name ?? throw new LibraryDefinitionHasNoName(library, definition).ToException(),
-                        definition)) continue;
-
-                // We have a duplicate, this is ok for functions (=overloads), otherwise report
-                // an error.
-                if (definition is not FunctionDef expr || result[definition.Name] is not IFunctionElement existing)
+                        definition))
                     throw new LibraryHasDuplicateDefinition(library, definition).ToException();
-
-                if (existing is OverloadedFunctionDef methodGroup)
-                {
-                    // We have another overload for a MethodGroup, add it to the method group.
-                    methodGroup.Add(expr);
-                }
-                else
-                {
-                    // We have the first overload, convert the ExpressionDef to a MethodGroup
-                    // and add both methods
-                    var newGroup = OverloadedFunctionDef.Create(existing, expr);
-                    result[definition.Name] = (T)(object)newGroup;
-                }
             }
         }
     }
