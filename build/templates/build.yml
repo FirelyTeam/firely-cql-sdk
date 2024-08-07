@@ -27,11 +27,14 @@ jobs:
       version: ${{ parameters.dotNetCoreVersion }}
 
   - ${{ if eq(parameters.checkoutSubmodules, 'true') }}:
+    # enable long paths, especially on submodules
     - task: CmdLine@2
+      displayName: 'Enable long paths for git'
       inputs:
         script: |
-            git config --system core.longpaths true # enable long paths, especially on submodules
+            git config --system core.longpaths true
     - checkout: self
+      displayName: 'Checking out repo'
       submodules: true
 
   - ${{ if eq(parameters.restoreDependencies, 'true') }}:
