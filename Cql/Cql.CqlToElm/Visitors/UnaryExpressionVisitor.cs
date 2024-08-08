@@ -312,9 +312,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 "flatten" => handleFlatten(operand),
                 _ => throw new NotImplementedException(),
             };
-            if (expression.GetErrors().Any())
-            {
-            }
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
