@@ -13,9 +13,9 @@ parameters:
   packageArtifactName: 'NuGetPackages'
   publishWebProjects: false
   zipAfterPublish: false
-  checkoutSubmodules: false
+  checkoutSubmodules: true
   pool: {}
-  solutionFile: 'Cql.slnf'
+  solutionFile: 'Cql-Sdk-and-Demo.slnf' # also in build.yml and package.yml
 
 jobs:
 - job: Build
@@ -26,7 +26,14 @@ jobs:
       version: ${{ parameters.dotNetCoreVersion }}
 
   - ${{ if eq(parameters.checkoutSubmodules, 'true') }}:
+    # enable long paths, especially on submodules
+    - task: CmdLine@2
+      displayName: 'Enable long paths for git'
+      inputs:
+        script: |
+            git config --system core.longpaths true
     - checkout: self
+      displayName: 'Checking out repo'
       submodules: true
 
   - ${{ if eq(parameters.restoreDependencies, 'true') }}:
@@ -35,12 +42,15 @@ jobs:
         nuGetServiceConnections: ${{ parameters.nuGetServiceConnections }}
         nuGetSources: ${{ parameters.nuGetSources }}
 
+  # To rebuild projects (and not just restore dependencies), use the --no-incremental flag)
+  # Before this can be done, the java tooling needs to be included to rebuild the demo projects
+
   - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-restore /p:ContinuousIntegrationBuild=true
-    displayName: 'dotnet build $(buildConfiguration) with version suffix  and no restore'
+    displayName: 'dotnet build $(buildConfiguration) with version suffix, no restorel'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'true')))
 
   - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) /p:ContinuousIntegrationBuild=true
-    displayName: 'dotnet build $(buildConfiguration) with version suffix'
+    displayName: 'dotnet build $(buildConfiguration) with version suffixl'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'false')))
 
   - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) /p:ContinuousIntegrationBuild=true
