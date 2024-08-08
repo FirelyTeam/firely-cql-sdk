@@ -9,7 +9,7 @@
 	<artifactId>demo</artifactId>
 	<version>1.0</version>
 	<properties>
-		<cql.version>3.1.0</cql.version>
+		<cql.version>3.13.0</cql.version>
 	</properties>
 	<repositories>
 		<repository>
