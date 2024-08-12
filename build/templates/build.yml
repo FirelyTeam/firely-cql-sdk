@@ -15,7 +15,7 @@ parameters:
   zipAfterPublish: false
   checkoutSubmodules: true
   pool: {}
-  solutionFile: 'Cql-Sdk-and-Demo.slnf' # also in build.yml and package.yml
+  solutionFile: 'Cql-Sdk-All.sln' # also in build.yml and package.yml
 
 jobs:
 - job: Build
@@ -57,11 +57,18 @@ jobs:
     displayName: 'dotnet build $(buildConfiguration)'
     condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'false'))
 
+#  - task: DotNetCoreCLI@2
+#    displayName: 'dotnet test UnitTests'
+#    inputs:
+#      command: test
+#      projects: '**/*Tests/*Tests.csproj'
+#      arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
+
   - task: DotNetCoreCLI@2
-    displayName: 'dotnet test UnitTests'
+    displayName: 'dotnet test Integration Tests against CMS Meassures'
     inputs:
       command: test
-      projects: '**/*Tests/*Tests.csproj'
+      projects: 'submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj'
       arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
 
   - template: sign-dlls-template.yml
