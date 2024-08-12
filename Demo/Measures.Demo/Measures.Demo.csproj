@@ -25,7 +25,7 @@
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 
-	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
+	<!-- <Import Condition="false" Project="../Cql/Build/CqlToElm.Targets.xml" /> -->
 	<Import Project="../Cql/Build/ElmToCSharp.Targets.xml" />
 
   <ItemGroup>

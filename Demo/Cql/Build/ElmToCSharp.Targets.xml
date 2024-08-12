@@ -24,10 +24,15 @@
 		<CSharpTypeFormat>explicit</CSharpTypeFormat> <!--CSharpTypeFormat: explicit|var -->
 	</PropertyGroup>
 
+	<Target Name="CQLtoELM"
+	        DependsOnTargets="StartMessage">
+		<!-- Dummy target so that is can be called below -->
+	</Target>
+
 	<Target Name="GenerateCSharp"
 			DependsOnTargets="CQLtoELM"
-			Condition="'$(CQLtoElmRan)'=='true'"
 			BeforeTargets="PreBuildEvent">
+		<!--Condition="'$(CQLtoElmRan)'=='true'"-->
 		<PropertyGroup>
 			<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 			<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>

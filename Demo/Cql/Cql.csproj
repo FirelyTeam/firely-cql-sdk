@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
 	<Import Project="..\cql-demo.props" />
 	<Import Project="Build\Mvn.Targets.xml" />
 
