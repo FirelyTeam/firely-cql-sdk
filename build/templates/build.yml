@@ -45,15 +45,15 @@ jobs:
   # To rebuild projects (and not just restore dependencies), use the --no-incremental flag)
   # Before this can be done, the java tooling needs to be included to rebuild the demo projects
 
-  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-restore /p:ContinuousIntegrationBuild=true
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration '$(buildConfiguration)' --version-suffix $(build.buildNumber) --no-restore /p:ContinuousIntegrationBuild=true
     displayName: 'dotnet build $(buildConfiguration) with version suffix, no restorel'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'true')))
 
-  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) /p:ContinuousIntegrationBuild=true
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration '$(buildConfiguration)' --version-suffix $(build.buildNumber) /p:ContinuousIntegrationBuild=true
     displayName: 'dotnet build $(buildConfiguration) with version suffixl'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'false')))
 
-  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) /p:ContinuousIntegrationBuild=true
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration '$(buildConfiguration)' /p:ContinuousIntegrationBuild=true
     displayName: 'dotnet build $(buildConfiguration)'
     condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'false'))
 
