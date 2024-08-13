@@ -42,6 +42,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql", "Demo\Cql\Cql.csproj"
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Measures.Demo", "Demo\Measures.Demo\Measures.Demo.csproj", "{A7111722-6C8F-42AA-8CDD-732D34FB678A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FEF0C134-505D-4206-8630-569A6762F787} = {FEF0C134-505D-4206-8630-569A6762F787}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLI", "Demo\CLI\CLI.csproj", "{12BB22FD-E576-44A9-AE74-A5A673715870}"
 EndProject
@@ -59,8 +62,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{B00E560D-A
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Measures.CMS", "Demo\Measures.CMS\Measures.CMS.csproj", "{B1161915-FFB0-412A-9C65-2F4E046FA9B8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FEF0C134-505D-4206-8630-569A6762F787} = {FEF0C134-505D-4206-8630-569A6762F787}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTests", "Cql\CoreTests\CoreTests.csproj", "{ED703B53-BF12-4F55-B35A-F8290F542E16}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FEF0C134-505D-4206-8630-569A6762F787} = {FEF0C134-505D-4206-8630-569A6762F787}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "50 Tests", "50 Tests", "{314A4A1E-1671-4F4C-BA1F-DEE73D584677}"
 EndProject
@@ -69,6 +78,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Measures.Demo", "Demo\Test.Measures.Demo\Test.Measures.Demo.csproj", "{95F35BF6-1FF1-4A5F-8725-A8EA4F1D43CD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A7111722-6C8F-42AA-8CDD-732D34FB678A} = {A7111722-6C8F-42AA-8CDD-732D34FB678A}
+		{FEF0C134-505D-4206-8630-569A6762F787} = {FEF0C134-505D-4206-8630-569A6762F787}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30 Elm to C#", "30 Elm to C#", "{39731466-DC8C-4FB2-A4D3-C4212A87700A}"
@@ -80,6 +90,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiPackagerCLI", "Cql\MultiPackagerCLI\MultiPackagerCLI.csproj", "{B574B177-48B2-455B-BEF8-B7D6DB5C3015}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Measures.Authoring", "Demo\Measures.Authoring\Measures.Authoring.csproj", "{C5C0F7CF-D0A4-41F5-B426-D99F40EC0379}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FEF0C134-505D-4206-8630-569A6762F787} = {FEF0C134-505D-4206-8630-569A6762F787}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20 Cql to Elm", "20 Cql to Elm", "{A2259B13-A115-4EA3-9DFB-5411DB88EA6F}"
 EndProject
@@ -90,6 +103,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10 Model", "10 Model", "{F2ADD1CA-E231-4E88-B0EE-5C6885422629}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqlToElmTests", "Cql\CqlToElmTests\CqlToElmTests.csproj", "{BF5D524C-0582-4471-BC79-B04B2D8DFCDB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FEF0C134-505D-4206-8630-569A6762F787} = {FEF0C134-505D-4206-8630-569A6762F787}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "submodules", "submodules", "{D33B7DF4-8AC5-47D1-A782-AC5078FFDEC7}"
 EndProject
@@ -441,7 +457,7 @@ Global
 		{2929117D-FB33-4BD6-8F20-4B623C114438} = {0E5F5704-5289-4C65-AD4E-364CD5F60C44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 		FileExplorer = |build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
+		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 	EndGlobalSection
 EndGlobal

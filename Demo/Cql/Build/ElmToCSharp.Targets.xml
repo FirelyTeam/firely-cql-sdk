@@ -10,11 +10,6 @@
 		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
 	</PropertyGroup>
 
-	<Target Name="StartMessage"
-			BeforeTargets="PreBuildEvent">
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
-	</Target>
-
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
 		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
@@ -24,15 +19,19 @@
 		<CSharpTypeFormat>explicit</CSharpTypeFormat> <!--CSharpTypeFormat: explicit|var -->
 	</PropertyGroup>
 
-	<Target Name="CQLtoELM"
-	        DependsOnTargets="StartMessage">
-		<!-- Dummy target so that is can be called below -->
+	<Target Name="StartMessage"
+	        BeforeTargets="PreBuildEvent">
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
 	</Target>
 
 	<Target Name="GenerateCSharp"
+	        DependsOnTargets="StartMessage"
+	        BeforeTargets="PreBuildEvent">
+		<!--
+		  NOTE: This needs some work still
 			DependsOnTargets="CQLtoELM"
-			BeforeTargets="PreBuildEvent">
-		<!--Condition="'$(CQLtoElmRan)'=='true'"-->
+		  Condition="'$(CQLtoElmRan)'=='true'"-->
+
 		<PropertyGroup>
 			<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 			<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
