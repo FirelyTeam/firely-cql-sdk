@@ -20,7 +20,6 @@
 	</PropertyGroup>
 
 	<Target Name="StartMessage"
-					Condition="'$(PackagerCLI)'"
 	        BeforeTargets="GenerateAdditionalSources">
 	        <!-- BeforeTargets="PreBuildEvent"> -->
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
