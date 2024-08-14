@@ -19,15 +19,9 @@
 		<CSharpTypeFormat>explicit</CSharpTypeFormat> <!--CSharpTypeFormat: explicit|var -->
 	</PropertyGroup>
 
-	<Target Name="StartMessage"
-	        BeforeTargets="GenerateAdditionalSources">
-	        <!-- BeforeTargets="PreBuildEvent"> -->
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
-	</Target>
-
 	<Target Name="GenerateCSharp"
-	        DependsOnTargets="StartMessage"
-	        BeforeTargets="PreBuildEvent">
+	        BeforeTargets="PreBuildEvent"
+	        DependsOnTargets="GenerateAdditionalSources">
 		<!--
 		  NOTE: This needs some work still
 			DependsOnTargets="CQLtoELM"
@@ -48,12 +42,16 @@
 			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand>
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>
+
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
+
 		<!-- Remove assets about to be created to avoid duplicates when editing/renaming CQL files -->
 		<ItemGroup>
 			<!-- Keep relative path else complains about duplicates in msbuild meta tracking-->
 			<CSharpFiles Include="CSharp/**/*.cs" />
 			<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
 		</ItemGroup>
+
 		<Delete Files="@(CSharpFiles)" />
 		<Delete Files="@(ResourceFiles)" />
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) Converting ELM to CSharp&#10;$(PackagerCLICommand)))" Importance="High" />
