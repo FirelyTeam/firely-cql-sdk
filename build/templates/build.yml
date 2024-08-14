@@ -69,7 +69,7 @@ jobs:
     inputs:
       command: test
       projects: 'submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj'
-      arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
+      arguments: '--configuration $(integrationRunnerConfiguration) --no-build --no-restore'
 
   - template: sign-dlls-template.yml
 
