@@ -20,7 +20,8 @@
 	</PropertyGroup>
 
 	<Target Name="StartMessage"
-	        BeforeTargets="PreBuildEvent">
+	        BeforeTargets="Compile">
+	        <!-- BeforeTargets="PreBuildEvent"> -->
 		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
 	</Target>
 
