@@ -57,12 +57,12 @@ jobs:
     displayName: 'dotnet build $(buildConfiguration)'
     condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'false'))
 
-#  - task: DotNetCoreCLI@2
-#    displayName: 'dotnet test UnitTests'
-#    inputs:
-#      command: test
-#      projects: '**/*Tests/*Tests.csproj'
-#      arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test UnitTests'
+    inputs:
+      command: test
+      projects: '**/*Tests/*Tests.csproj'
+      arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet test Integration Tests against CMS Meassures'
