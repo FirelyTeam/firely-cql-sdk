@@ -41,6 +41,7 @@ internal class OptionsConsoleDumper
         WriteLine("PackageCLI");
         WriteLine("- Environment -----------------------------------");
         WriteLine($"{"Current Directory",-45} : {Environment.CurrentDirectory}");
+        WriteLine($"{"ASPNETCORE_ENVIRONMENT",-45} : {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}");
         WriteLine("- Arguments Provided ----------------------------");
         (string name, object? value)[] values = new[]
         {
