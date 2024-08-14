@@ -13,14 +13,9 @@
 
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
-		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
-
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 
-		<!-- Comment out these if you don't need them -->
-		<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
-		<CSharpTypeFormat>explicit</CSharpTypeFormat> <!--CSharpTypeFormat: explicit|var -->
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
@@ -30,13 +25,21 @@
 		<!--     DependsOnTargets="GenerateAdditionalSources" -->
 		<!--     Condition="'$(CQLtoElmRan)'=='true'" -->
 		<!--     BeforeTargets="PreBuildEvent" -->
-		<!-- > -->
 		<!--
 		  NOTE: This needs some work still
 			DependsOnTargets="CQLtoELM"
 		  Condition="'$(CQLtoElmRan)'=='true'"-->
 
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting on Configuration '$(Configuration)' ))" Importance="High" />
+
 		<PropertyGroup>
+			<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+
+			<!-- Comment out these if you don't need them -->
+			<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
+			<CSharpTypeFormat>explicit</CSharpTypeFormat>
+			<!--CSharpTypeFormat: explicit|var -->
+
 			<!-- Leave these alone, they are automatically picked up from the properties above -->
 			<PackagerCLIArgs Condition="'$(OverrideUtcDateTime)'!=''">$(PackagerCLIArgs) --override-utc-date-time "$(1970-01-01T00:00:00Z)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CanonicalRootUrl)'!=''">$(PackagerCLIArgs) --canonical-root-url "$(CanonicalRootUrl)"</PackagerCLIArgs>
@@ -48,9 +51,6 @@
 			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand>
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>
-
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
-
 
 		<!--
 		~1~ Remove assets about to be created to avoid duplicates when editing/renaming CQL files @1@
