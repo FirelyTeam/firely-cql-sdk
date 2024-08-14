@@ -3,8 +3,7 @@
 # Variables used during builds.
 
 variables:
-  buildConfiguration: '"Release IntegrationRunner Use Project References"'
-  integrationRunnerConfiguration: '"Release Use Project References"'
+  buildConfiguration: '"Release"'
   vmImage: 'windows-latest'
   DOTNET_CORE_SDK: '8.0.x'
   GITHUB_PACKAGES_APIKEY: $(GitHubPushPackagesAPIKey) # key is set in variable group APIKeys
