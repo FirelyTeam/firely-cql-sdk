@@ -14,10 +14,6 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
-		<PackageReference Include="Dumpify" Version="0.6.6" />
-	</ItemGroup>
-
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Logging\Cql.Logging.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />

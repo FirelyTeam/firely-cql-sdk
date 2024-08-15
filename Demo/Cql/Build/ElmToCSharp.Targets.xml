@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Project>
 
 	<!-- Turn off visual studio msbuild automatics -->
@@ -10,27 +11,34 @@
 		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
 	</PropertyGroup>
 
-	<Target Name="StartMessage"
-			BeforeTargets="PreBuildEvent">
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
-	</Target>
-
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
-		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+		<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 
-		<!-- Comment out these if you don't need them -->
-		<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
-		<CSharpTypeFormat>explicit</CSharpTypeFormat> <!--CSharpTypeFormat: explicit|var -->
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
+	        Condition="Exists('$(PackagerCLI)')"
+	        BeforeTargets="PreBuildEvent">
+		<!-- DependsOnTargets="CQLtoELM" -->
+		<!--     DependsOnTargets="GenerateAdditionalSources" -->
+		<!--     Condition="'$(CQLtoElmRan)'=='true'" -->
+		<!--     BeforeTargets="PreBuildEvent" -->
+		<!--
+		  NOTE: This needs some work still
 			DependsOnTargets="CQLtoELM"
-			Condition="'$(CQLtoElmRan)'=='true'"
-			BeforeTargets="PreBuildEvent">
+		  Condition="'$(CQLtoElmRan)'=='true'"-->
+
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting on Configuration '$(Configuration)' ))" Importance="High" />
+
 		<PropertyGroup>
-			<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
-			<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/debug/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+			<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+
+			<!-- Comment out these if you don't need them -->
+			<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
+			<CSharpTypeFormat>explicit</CSharpTypeFormat>
+			<!--CSharpTypeFormat: explicit|var -->
 
 			<!-- Leave these alone, they are automatically picked up from the properties above -->
 			<PackagerCLIArgs Condition="'$(OverrideUtcDateTime)'!=''">$(PackagerCLIArgs) --override-utc-date-time "$(1970-01-01T00:00:00Z)"</PackagerCLIArgs>
@@ -43,21 +51,27 @@
 			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand>
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>
-		<!-- Remove assets about to be created to avoid duplicates when editing/renaming CQL files -->
+
+		<!--
+		~1~ Remove assets about to be created to avoid duplicates when editing/renaming CQL files @1@
 		<ItemGroup>
-			<!-- Keep relative path else complains about duplicates in msbuild meta tracking-->
+			~1~ Keep relative path else complains about duplicates in msbuild meta tracking@1@
 			<CSharpFiles Include="CSharp/**/*.cs" />
 			<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
 		</ItemGroup>
+
 		<Delete Files="@(CSharpFiles)" />
 		<Delete Files="@(ResourceFiles)" />
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Converting ELM to CSharp&#10;$(PackagerCLICommand)))" Importance="High" />
+		-->
+
+		<Message Text="$(Box.Replace(Text, $(LibrarySet) Converting ELM to CSharp&#10;$(PackagerCLICommand)))"
+		         Importance="High" />
 		<Exec Command='$(PackagerCLICommand)' />
 
 		<ItemGroup>
 			<!-- Keep relative path else complains about duplicates-->
 			<CSharpFiles Include="CSharp/**/*.cs" />
-			<Compile Include="@(CSharpFiles)" Exclude="@(Compile)" KeepDuplicates="false"/>
+			<Compile Include="@(CSharpFiles)" Exclude="@(Compile)" KeepDuplicates="false" />
 		</ItemGroup>
 
 		<!-- Touch CQL files if error so build will try again-->
@@ -65,11 +79,10 @@
 	</Target>
 
 	<Target Name="TouchFiles">
-		<Touch
-            Files="@(CqlFiles)">
+		<Touch Files="@(CqlFiles)">
 			<Output
-                TaskParameter="TouchedFiles"
-                ItemName="FilesTouched"/>
+				TaskParameter="TouchedFiles"
+				ItemName="FilesTouched" />
 		</Touch>
 	</Target>
 
