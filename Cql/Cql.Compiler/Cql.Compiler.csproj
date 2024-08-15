@@ -14,13 +14,15 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
-	<!-- <ItemGroup Condition=" '$(Configuration)' == 'Debug' "> -->
 	<ItemGroup>
 		<PackageReference Include="Dumpify" Version="0.6.6" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)'=='Release'" >
 		<!--
 		Since Dumpify is not a strongly named assembly, we need to use StrongNamer to make it work when building the CLI.
 		-->
-		<PackageReference Condition=" '$(Configuration)' == 'Release' " Include="StrongNamer" Version="0.2.5" />
+		<PackageReference Include="StrongNamer" Version="0.2.5" />
 	</ItemGroup>
 
 	<ItemGroup>
