@@ -23,8 +23,7 @@
 		<!--
 		Since Dumpify is not a strongly named assembly, we need to use StrongNamer to make it work when building the CLI.
 		-->
-		<PackageReference Include="StrongNamer" Version="0.2.5" />
-		<!-- <PackageReference Condition=" '$(DefineConstants.Contains(RELEASE))' " Include="StrongNamer" Version="0.2.5" /> -->
+		<PackageReference Condition=" '$(Configuration)' == 'Release' " Include="StrongNamer" Version="0.2.5" />
 	</ItemGroup>
 
 </Project>
