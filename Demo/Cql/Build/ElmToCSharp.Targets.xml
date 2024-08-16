@@ -58,7 +58,7 @@
 		<Delete Files="@(ResourceFiles)" />
 
 		<!-- Generate C# and Resource files -->
-		<Message Text="$(Box.Replace({Text}, Generating C# and Resource files&#10;$(PackagerCLICommand)))" Importance="High" />
+		<Message Text="$(Box.Replace({Text}, Generating C# and Resource files&#10;| $(PackagerCLICommand)))" Importance="High" />
 		<Exec Command='$(PackagerCLICommand)' />
 
 		<ItemGroup>
