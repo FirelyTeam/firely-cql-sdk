@@ -36,6 +36,20 @@ namespace Hl7.Cql.CqlToElm
             return errorSb.ToString();
         }
 
+        public string FluentCallIsAmbiguous(string name, Expression[] arguments, IHasSignature[] matches)
+        {
+            var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
+            // match cql-to-elm reference implementation (Java) error messages
+            var errorSb = new StringBuilder();
+            errorSb.AppendLine(string.Format(Culture, Messages.CallIsAmbiguous, name, argTypeString));
+            foreach (var match in matches)
+            {
+                var operands = string.Join(", ", match.Operands.Select(od => od.resultTypeSpecifier.ToString()));
+                errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {name}({operands}) in {match.Library}");
+            }
+            return errorSb.ToString();
+        }
+
         public string CannotResolveCircularReference() =>
              Messages.CannotResolveCircularReference;
         public string CouldNotResolveContextName(string contextName, params string[] modelNames) =>

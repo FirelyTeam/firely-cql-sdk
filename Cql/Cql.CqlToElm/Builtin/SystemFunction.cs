@@ -19,6 +19,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public abstract Type ElmNodeType { get; }
         public abstract int? RequiredParameterCount { get; protected set; }
 
+        public override string Library => "System";
+
         /// <summary>
         /// Calls all validators associated with this function def on the specified call, adding any resulting errors.
         /// </summary>

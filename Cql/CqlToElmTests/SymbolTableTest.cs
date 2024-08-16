@@ -60,7 +60,6 @@ namespace Hl7.Cql.CqlToElm.Test
             fd.Name.Should().Be(name);
             fd.Functions.Should().HaveCount(1);
             fd.Functions.First()!.Fluent.Should().BeTrue();
-
         }
         [TestMethod]
         public void Add_Overload()
@@ -98,7 +97,9 @@ namespace Hl7.Cql.CqlToElm.Test
             ed.name.Should().Be(name);
 
             var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.BooleanType, name);
-            st.TryAdd(f1).Should().BeFalse();
+            st.TryAdd(f1).Should().BeTrue();
+
+            st.TryResolveFunction(name, out var resolvedFunc).Should().BeTrue();
         }
 
         [TestMethod]

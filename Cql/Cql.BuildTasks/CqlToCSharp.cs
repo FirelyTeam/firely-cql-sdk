@@ -14,6 +14,7 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Tools.BuildTasks;
 
@@ -51,6 +52,16 @@ public class CqlToCSharp : Microsoft.Build.Utilities.Task
     /// </summary>
     public bool Force { get; set; }
 
+    /// <summary>
+    /// Specifies the namespace to use for the generated C# files.
+    /// </summary>
+    public string Namespace { get; set; }
+
+    /// <summary>
+    /// Specifies the location to store ELM
+    /// </summary>
+    public string ElmPath { get; set; }
+
     /// <inheritdoc />
     public override bool Execute()
     {
@@ -61,7 +72,9 @@ public class CqlToCSharp : Microsoft.Build.Utilities.Task
             .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
             .AddConfiguration(cb =>
                 cb.WithOptions(o => { })
-                .AddInMemoryCollection(globalProperties))
+                .AddInMemoryCollection(globalProperties)
+            )
+            .Configure<CSharpCodeWriterOptions>(o => o.Namespace = Namespace)
             .AddMessaging()
             .AddLogging(builder => builder.AddTaskLogger(Log))
             .AddSingleton(typeof(ILibraryProvider), typeof(TaskItemLibraryProvider))
@@ -71,16 +84,17 @@ public class CqlToCSharp : Microsoft.Build.Utilities.Task
             .AddSingleton(isp => isp.GetRequiredService<CqlCompilerFactory>().TypeResolver)
             .BuildServiceProvider();
 
-
+        var opts = services.GetRequiredService<IOptions<CSharpCodeWriterOptions>>();
         var configuration = services.GetRequiredService<IConfiguration>();
         var outputDir = configuration["BuildEngine:OutputPath"];
+        
         if (outputDir is not null && !Directory.Exists(outputDir))
         {
             Log.LogError($"OutputPath {outputDir} could not be found on disk.");
             return false;
         }
 
-        var taskItems = Sources.ToCSharp(services, Log, Force);
+        var taskItems = Sources.ToCSharp(services, ElmPath, Log, Force);
         Elm = taskItems.elm.ToArray();
         CSharp = taskItems.cs.ToArray();
 

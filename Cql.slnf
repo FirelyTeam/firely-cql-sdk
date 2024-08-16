@@ -24,7 +24,9 @@
       "Cql\\Iso8601\\Iso8601.csproj",
       "Cql\\MultiPackagerCLI\\MultiPackagerCLI.csproj",
       "Cql\\PackagerCLI\\PackagerCLI.csproj",
-      "Cql\\ToolsTest\\ToolsTest.csproj"
+      "Cql\\ToolsTest\\ToolsTest.csproj",
+      "Cql\\Cql.BuildTasks\\Cql.BuildTasks.csproj"
+
     ]
   }
 }

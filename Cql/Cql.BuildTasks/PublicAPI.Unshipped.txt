@@ -6,6 +6,10 @@ Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Elm.get -> Microsoft.Build.Framework.ITaskI
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Elm.set -> void
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Force.get -> bool
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Force.set -> void
+Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Namespace.get -> string
+Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Namespace.set -> void
+Hl7.Cql.Tools.BuildTasks.CqlToCSharp.ElmPath.get -> string
+Hl7.Cql.Tools.BuildTasks.CqlToCSharp.ElmPath.set -> void
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Options.get -> Microsoft.Build.Framework.ITaskItem
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Options.set -> void
 Hl7.Cql.Tools.BuildTasks.CqlToCSharp.Sources.get -> Microsoft.Build.Framework.ITaskItem[]

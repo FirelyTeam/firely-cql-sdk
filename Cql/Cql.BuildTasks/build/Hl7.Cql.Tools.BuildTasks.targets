@@ -10,15 +10,15 @@
 	<Target BeforeTargets="Build" Name="RunCqlToCSharp" Condition="'$(MSBuildRuntimeType)' != 'Core'">
 		<Exec ConsoleToMsBuild="true" Command="dotnet build -t:CqlToCSharp" />
 	</Target>
-
+	
 	<Target BeforeTargets="CoreCompile" Name="CqlToCSharp" Condition="'$(MSBuildRuntimeType)' == 'Core'">
-		<CqlToCSharp Sources="@(CqlFiles)">
+		<CqlToCSharp Sources="@(CqlFiles)" ElmPath="$(MSBuildProjectDirectory)/obj" Namespace="$(RootNamespace)">
 			<Output TaskParameter="Elm" PropertyName="ELMFile" />
 			<Output TaskParameter="CSharp" PropertyName="CSharpFile" />
-		</CqlToCSharp>
+		</CqlToCSharp>		
 	</Target>
 
-	<Target AfterTargets="Clean" Name="AfterClean">
+	<Target AfterTargets="Clean" Name="BeforeClean">
 		<ItemGroup>
 			<FilesToDelete Include="$(MSBuildProjectDirectory)\**\*.cql.json" />
 			<FilesToDelete Include="$(MSBuildProjectDirectory)\**\*.cql.cs" />

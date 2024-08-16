@@ -75,6 +75,5 @@ namespace Hl7.Cql.CqlToElm.Test
             or.resultTypeName.Name.Should().Be("{http://hl7.org/fhir}Quantity");
         }
 
-
     }
 }

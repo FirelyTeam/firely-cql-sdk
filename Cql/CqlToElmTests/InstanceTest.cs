@@ -40,5 +40,21 @@ namespace Hl7.Cql.CqlToElm.Test
             instanceElement.value.Should().BeLiteralString("8480-6");
             instanceElement.name.Should().Be("code");
         }
+
+        [TestMethod]
+        public void FHIR_Parameters_Parameter()
+        {
+            var lib = MakeLibrary(@"
+            library Test version '1.0.0'
+
+            using FHIR version '4.0.1'
+
+            define instance:
+                FHIR.Parameters.Parameter {
+                   part: FHIR.Parameters.Parameter { name: FHIR.string { value: 'name' } }
+                }
+            ");
+
+        }
     }
 }

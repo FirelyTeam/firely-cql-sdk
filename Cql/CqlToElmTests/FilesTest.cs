@@ -12,11 +12,11 @@ using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
-//[TestClass]
+[TestClass]
 public class FilesTest : Base
 {
     // change to a path containing CQL; can include subdirectories.
-    public const string Path = "C:\\Code\\Ncqa.HT.Firely\\Hedis2023\\Cql\\input";
+    public const string Path = "C:\\Code\\Ncqa.HT.2024\\Hedis2024\\Cql\\input";
 
     [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -54,11 +54,13 @@ public class FilesTest : Base
             var eb = LibraryExpressionBuilder;
             var lambdas = eb.ProcessLibrary(lib);
             var delegates = lambdas.CompileAll();
+
+            var json = lib.SerializeToJson();
         }
     }
 
-    //[TestMethod]
-    public void SingleFile() => TestLibrary(new FileInfo(@"C:\Code\Ncqa.HT.Firely\Hedis2023\Cql\input\measures\ENP\ENP_Details-2023.0.0.cql"));
+    [TestMethod]
+    public void SingleFile() => TestLibrary(new FileInfo(@"C:\Code\Ncqa.HT.2024\Hedis2024\Cql\input\measures\PND-E\PNDE_Details-2024.1.0.cql"));
 
     [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]
     [TestMethod]

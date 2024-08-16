@@ -5,6 +5,8 @@ Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.get -> System.
 Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.CSharpCodeWriterOptions() -> void
+Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.Namespace.get -> string?
+Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.Namespace.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.TypeFormat.get -> Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat

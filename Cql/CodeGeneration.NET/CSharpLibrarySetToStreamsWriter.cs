@@ -82,7 +82,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// <summary>
         /// Gets or sets the namespace for generated .NET types.
         /// </summary>
-        private string? Namespace { get; }
+        private string? Namespace => _options?.Value?.Namespace;
         /// <summary>
         /// If <see langword="true"/>, classes will be declared with the <see langword="partial"/> keyword.
         /// </summary>

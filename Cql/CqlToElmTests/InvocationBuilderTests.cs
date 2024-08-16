@@ -353,6 +353,16 @@ namespace Hl7.Cql.CqlToElm.Test
             result.Compatible.Should().BeTrue();
         }
 
+        [TestMethod]
+        public void MatchCoalesceIntervals()
+        {
+            var args = new Expression[] {
+                Interval(Integer(1), Integer(2)),
+                new Null().WithResultType(SystemTypes.IntegerType.ToIntervalType())
+            };
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.Coalesce, args);
+            result.Compatible.Should().BeTrue();
+        }
 
     }
 }

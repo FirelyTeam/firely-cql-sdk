@@ -38,6 +38,7 @@ namespace ToolsTest
         {
             var cqlToElm = new CqlToCSharp() { Force = true };
             cqlToElm.BuildEngine = buildEngine.Object;
+            cqlToElm.ElmPath = Environment.CurrentDirectory;
             cqlToElm.Sources = [new TaskItem(@"Input\Cql\FHIRHelpers-4.0.1.cql")];
             cqlToElm.Execute().Should().BeTrue();
             cqlToElm.Elm.Should().NotBeEmpty();
@@ -51,6 +52,7 @@ namespace ToolsTest
         {
             var cqlToElm = new CqlToCSharp() { Force = true };
             cqlToElm.BuildEngine = buildEngine.Object;
+            cqlToElm.ElmPath = Environment.CurrentDirectory;
             cqlToElm.Sources = [new TaskItem(@"Input\Cql\Errors-1.0.0.cql")];
             cqlToElm.Execute().Should().BeFalse();
             cqlToElm.Elm.Should().NotBeEmpty();
@@ -64,6 +66,7 @@ namespace ToolsTest
         {
             var cqlToElm = new CqlToCSharp() { Force = true };
             cqlToElm.BuildEngine = buildEngine.Object;
+            cqlToElm.ElmPath = Environment.CurrentDirectory;
             cqlToElm.Sources = [
                 new TaskItem(@"Input\Cql\UsesFHIRHelpers-1.0.0.cql"),
                 new TaskItem(@"Input\Cql\FHIRHelpers-4.0.1.cql")
@@ -80,6 +83,7 @@ namespace ToolsTest
         {
             var cqlToElm = new CqlToCSharp() { Force = true };
             cqlToElm.BuildEngine = buildEngine.Object;
+            cqlToElm.ElmPath = Environment.CurrentDirectory;
             // because FHIRHelpers is not a compilation source, this should not succeed.
             cqlToElm.Sources = [new TaskItem(@"Input\Cql\UsesFHIRHelpers-1.0.0.cql")];
             cqlToElm.Execute().Should().BeFalse();
@@ -87,5 +91,19 @@ namespace ToolsTest
             errors[0].Message.Should().Be("Unable to resolve library: FHIRHelpers version '4.0.1'. Are you sure this library version exists and that you have access?");
         }
 
+
+        [TestMethod]
+        public void FHIRHelpers_Namespace()
+        {
+            var cqlToElm = new CqlToCSharp() { Force = true, Namespace = "UnitTest" };
+            cqlToElm.BuildEngine = buildEngine.Object;
+            cqlToElm.ElmPath = Environment.CurrentDirectory;
+            cqlToElm.Sources = [new TaskItem(@"Input\Cql\FHIRHelpers-4.0.1.cql")];
+            cqlToElm.Execute().Should().BeTrue();
+            cqlToElm.Elm.Should().NotBeEmpty();
+            cqlToElm.CSharp.Should().NotBeEmpty();
+            errors.Should().BeEmpty();
+
+        }
     }
 }

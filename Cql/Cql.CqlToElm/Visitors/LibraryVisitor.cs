@@ -310,7 +310,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 List<string> definedContexts = new();
 
                 var table = LibraryBuilder.SymbolTable;
-
+                var libNav = LibraryBuilder.Identifier.ToString() ?? string.Empty;
 
 
                 // Go over the statements in order, since they can be interleaved
@@ -332,26 +332,28 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 var ed = (ExpressionDef)Visit(edCtx);
                                 ed.context = activeContext?.name;
                                 return ed;
-                            });
+                            })
+                            { Library = libNav };
                         if (!table.TryAdd(dd))
                             LibraryBuilder.AddError(Messaging.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
                     }
                     else if (statementContext.functionDefinition() is { } fdCtx)
                     {
                         var access = fdCtx.accessModifier().Parse();
-                        var fluent = fdCtx.fluentModifier() is not null;
+                        bool? fluent = fdCtx.fluentModifier() is not null ? true : null;
                         var name = fdCtx.identifierOrFunctionIdentifier().Parse();
                         var signature = fdCtx.operandDefinition()
                             .Select(Visit)
                             .Cast<OperandDef>()
                             .ToArray();
-                        var dd = new DeferredFunctionDef(access, fluent, name, signature,
+                        var dd = new DeferredFunctionDef(access, fluent ?? false, name, signature,
                             () =>
                             {
                                 var fd = createFunctionDef(access, fluent, name, signature, fdCtx);
                                 fd.context = activeContext?.name;
                                 return fd;
-                            });
+                            })
+                            { Library = libNav };
                         if (!table.TryAdd(dd))
                             LibraryBuilder.AddError(Messaging.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
                     }
@@ -382,7 +384,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             "Encountered unknown statement type in statement rule.");
                 }
 
-                FunctionDef createFunctionDef(AccessModifier access, bool fluent, string name, OperandDef[] signature,
+                FunctionDef createFunctionDef(AccessModifier access, bool? fluent, string name, OperandDef[] signature,
                     cqlParser.FunctionDefinitionContext context)
                 {
 
@@ -390,7 +392,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         accessLevel = access,
                         name = name,
-                        fluent = fluent,
+                        fluent = fluent ?? false,
+                        fluentSpecified = fluent is not null,
                         operand = signature,
                     }.WithLocator(context.Locator());
 

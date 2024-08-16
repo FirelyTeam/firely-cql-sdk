@@ -4,6 +4,8 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -111,13 +113,27 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 }
                                 else if (classElement.elementTypeSpecifier is Model.ListTypeSpecifier { } listTypeSpecifier)
                                 {
-                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(listTypeSpecifier.elementType, out var elt))
+                                    if (listTypeSpecifier.elementType is { } et
+                                        && ModelProvider.TryGetTypeSpecifierForQualifiedName(et, out var elt))
+                                    {
+                                        // <elementTypeSpecifier elementType="FHIR.Parameters.Parameter" xsi:type="ListTypeSpecifier"/>
+
                                         elementType = elt.ToListType();
+                                    }
+                                    else if (listTypeSpecifier.elementTypeSpecifier is { } ets)
+                                    {
+                                        // <elementTypeSpecifier xsi:type="ListTypeSpecifier">
+                                        //    <elementTypeSpecifier namespace="FHIR" name="Parameters.Parameter" xsi:type="NamedTypeSpecifier"/>
+                                        // </elementTypeSpecifier>
+                                        elementType = ets.ToElm(ModelProvider).ToListType();
+                                    }
                                     else
+                                    {
                                         return new Instance()
-                                            .AddError($"The named type '{listTypeSpecifier.elementType}' for element {elementName} could not be resolved to any model type.")
+                                            .AddError($"The element type for List element {elementName} could not be determined.")
                                             .WithLocator(context.Locator())
                                             .WithResultType(type);
+                                    }
                                 }
                                 else if (classElement.elementTypeSpecifier is Model.ChoiceTypeSpecifier { } choiceTypeSpecifier)
                                 {
@@ -187,10 +203,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // expressionTerm '.' qualifiedInvocation
         public override Expression VisitInvocationExpressionTerm([NotNull] cqlParser.InvocationExpressionTermContext context)
         {
-            if (context.expressionTerm()?.GetText() == "\"EOB\"")
-            {
-
-            }
             var left = Visit(context.expressionTerm());
             if (left is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
@@ -408,8 +420,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // If it exists, it takes precedence over other matching non-fluent functions (for some reason).
             if (LibraryBuilder.CurrentScope.TryResolveSymbol("$this", out var @this))
             {
-                if (LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
+                // if resolving a fluent function is successful, symbolDefs will have 1 element.
+                if (LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out var symbolDefs))
                 {
+                    symbolDef = symbolDefs.Single();
                     var fluentParams = new Expression[] { @this.ToRef(null) }.Concat(paramList).ToArray();
                     var result = symbolDef switch
                     {
@@ -423,8 +437,34 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             if (fluent)
             {
-                if (!LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
-                    return unresolved();
+                if (!LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out var symbolDefs))
+                {
+                    if (symbolDefs is not null)
+                    {
+                        var havingSignatures = symbolDefs
+                            .SelectMany(m => m switch
+                            {
+                                IHasSignature ihs => [ihs],
+                                OverloadedFunctionDef ofd => ofd.Functions,
+                                _ => Enumerable.Empty<IHasSignature>()
+                            }).ToArray();
+                        var paramTypes = paramList.Select(p => p.resultTypeSpecifier).ToArray();
+                        var matches = havingSignatures
+                            .Where(ihs => ihs.BuildSignatureFromOperands().ExactlyMatches(paramTypes))
+                            .ToArray();
+                        return (matches?.Length ?? 0) switch
+                        {
+                            0 => unresolved(),
+                            1 when matches![0] is IFunctionElement fe => invoke(fe, null, paramList, true),
+                            1 when matches![0] is not IFunctionElement => throw new InvalidOperationException($"Expecting function element here."),
+                            > 1 => ambiguous(symbolDefs!, paramList.Select(e => e.resultTypeSpecifier).ToArray()),
+                            _ => throw new InvalidOperationException("The length of an array was negative."), // impossible
+                        }; 
+                    }
+                    else return unresolved();
+
+                }
+                else symbolDef = symbolDefs.Single();
             }
             else if (libraryName is null)
             {
@@ -450,6 +490,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithResultType(SystemTypes.AnyType)
                     .WithLocator(locator)
                     .AddError(Messaging.CouldNotResolveFunction(funcName, paramList));
+            FunctionRef ambiguous(IFunctionElement[] matches, Elm.TypeSpecifier[] signature)
+            {
+
+                var functionDefs = matches
+                    .SelectMany(m => m switch
+                    {
+                        IHasSignature ihs => [ihs],
+                        OverloadedFunctionDef ofd => ofd.Functions,
+                        _ => Enumerable.Empty<IHasSignature>()
+                    }).ToArray();
+                var ambiguousOverloads = functionDefs
+                    .Where(ihs => ihs.BuildSignatureFromOperands().ExactlyMatches(signature))
+                    .ToArray();
+                 return new FunctionRef { name = funcName, operand = paramList }
+                    .WithResultType(SystemTypes.AnyType)
+                    .WithLocator(locator)
+                    .AddError(Messaging.FluentCallIsAmbiguous(funcName, paramList, ambiguousOverloads));
+            }
+
             Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] arguments, bool fluent)
             {
                 var funcRef = InvocationBuilder.Invoke(funcDef, libraryName, arguments);

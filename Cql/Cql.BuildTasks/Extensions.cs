@@ -38,6 +38,7 @@ internal static class Extensions
 
     public static (IList<TaskItem> elm, IList<TaskItem> cs) ToCSharp(this ITaskItem[] sources,
         IServiceProvider services,
+        string elmRoot,
         TaskLoggingHelper log,
         bool force)
     {
@@ -45,6 +46,7 @@ internal static class Extensions
         var cf = services.GetRequiredService<CqlCompilerFactory>();
         var configuration = services.GetRequiredService<IConfiguration>();
         var outputPath = configuration["BuildEngine:OutputPath"];
+
 
         var loggerFactory = services.GetRequiredService<ILoggerFactory>();
         // TODO: use actual .NET services
@@ -61,6 +63,9 @@ internal static class Extensions
                 lib.WriteJson(ms);
                 ms.Position = 0;
                 var elmJson = new StreamReader(ms).ReadToEnd();
+                var elmDir = Path.GetDirectoryName(elmPath);
+                if (!Directory.Exists(elmDir))
+                    Directory.CreateDirectory(elmDir);
                 File.WriteAllText(elmPath, elmJson, Encoding.UTF8);
             }
             elmItems.Add(new TaskItem(elmPath, new Dictionary<string, string>
@@ -139,8 +144,7 @@ internal static class Extensions
         }
         return (elmItems.ToArray(), csItems.ToArray());
 
-        string getElmPath(FileInfo file) => Path.Combine(outputPath ?? file.DirectoryName ?? "", "obj",
-            Path.ChangeExtension(file.Name, ".cql.json"));
+        string getElmPath(FileInfo file) => Path.Combine(elmRoot, Path.ChangeExtension(file.Name, ".cql.json"));
         string getCsPath(FileInfo file) => Path.Combine(outputPath ?? file.DirectoryName ?? "",
             Path.ChangeExtension(file.Name, ".cql.cs"));
 

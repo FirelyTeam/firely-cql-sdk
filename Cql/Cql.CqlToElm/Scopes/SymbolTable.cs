@@ -18,7 +18,13 @@ namespace Hl7.Cql.CqlToElm.Scopes
             Name = name;
             Parent = parent;
         }
-        private Dictionary<string, IDefinitionElement> LocalSymbols { get; } = new();
+        private class ScopeElement
+        {
+            public IExpressionElement? expression;
+            public IFunctionElement? function;
+            public IDefinitionElement? other;
+        }
+        private Dictionary<string, ScopeElement> LocalSymbols { get; } = new();
 
         public string Name { get; }
 
@@ -37,40 +43,70 @@ namespace Hl7.Cql.CqlToElm.Scopes
             {
                 if (LocalSymbols.TryGetValue(symbol.Name, out var existing))
                 {
-                    if (existing is IFunctionElement existingFunction)
+                    if (existing.function is not null)
                     {
                         // replace existing symbol with new overload.
-                        LocalSymbols[symbol.Name] = OverloadedFunctionDef.Create(existingFunction, function);
-                        return true;
+                        if (OverloadedFunctionDef.CanCombine(existing.function, function))
+                        {
+                            existing.function = OverloadedFunctionDef.Create(existing.function, function);
+                            return true;
+                        }
+                        else
+                            return false;
                     }
                     else
-                        return false;
+                    {
+                        existing.function = function;
+                        return true;
+                    }
+                        
                 }
                 else
                     symbol = OverloadedFunctionDef.Create(function);
             }
-            return LocalSymbols.TryAdd(symbol.Name, symbol);
+            else if (LocalSymbols.TryGetValue(symbol.Name, out var existing))
+            {
+                if (symbol is IExpressionElement ed && existing.expression is null)
+                {
+                    existing.expression = ed;
+                    return true;
+                }
+                else if (existing.other is not null)
+                {
+                    existing.other = symbol;
+                    return true;
+                }
+                else return false;
+            }
+            return LocalSymbols.TryAdd(symbol.Name, symbol switch
+            {
+                IFunctionElement f => new ScopeElement { function = f },
+                IExpressionElement e => new ScopeElement { expression = e },
+                _ => new ScopeElement { other = symbol }
+            });
         }
 
 
-        public bool TryResolveSymbol(string identifier, [NotNullWhen(true)] out IDefinitionElement? symbol)
+        public bool TryResolveSymbol(string identifier, [NotNullWhen(true)] out IDefinitionElement? element)
         {
-            if (LocalSymbols.TryGetValue(identifier, out symbol))
+            if (LocalSymbols.TryGetValue(identifier, out var symbol)) {
+                element = symbol.expression ?? symbol.other ?? symbol.function;
+                return element is not null;
+            }
+            else if (Parent is not null && Parent.TryResolveSymbol(identifier, out element))
                 return true;
-            else if (Parent is not null && Parent.TryResolveSymbol(identifier, out symbol))
-                return true;
-            symbol = null;
+            element = null;
             return false;
         }
 
         public bool TryResolveFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
         {
-            var inLocal = LocalSymbols.TryGetValue(identifier, out var local) && local is IFunctionElement;
+            var inLocal = LocalSymbols.TryGetValue(identifier, out var local) && local.function is not null;
             IFunctionElement? parentFunction = null;
             var inParent = Parent is not null && Parent.TryResolveFunction(identifier, out parentFunction) && parentFunction is IFunctionElement;
             if (inLocal)
             {
-                var localFunction = (IFunctionElement)local!;
+                var localFunction = local!.function!;
                 if (inParent)
                 {
                     // start with parent functions (most often, this will be the system lib).
@@ -135,7 +171,7 @@ namespace Hl7.Cql.CqlToElm.Scopes
             }
         }
 
-        public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
+        public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement[]? symbols)
         {
             var inLocalAndParent = TryResolveFunction(identifier, out var localAndParent);
             // list would suffice, but dictionary better for debugging.
@@ -209,16 +245,30 @@ namespace Hl7.Cql.CqlToElm.Scopes
                         if (!merged.Any(m => currentOperands.SequenceEqual(m.Operands.Select(op => op.operandTypeSpecifier))))
                             merged.Add(l);
                     }
-                    symbol = OverloadedFunctionDef.Create(merged.ToArray());
-                    return true;
+                    var mergedArray = merged.ToArray();
+                    if (OverloadedFunctionDef.CanCombine(mergedArray))
+                    {
+                        symbols = [OverloadedFunctionDef.Create(mergedArray)];
+                        return true;
+                    }
+                    else
+                    {
+                        symbols = mergedArray;
+                        return false;
+                    }
                 }
                 else
                 {
-                    symbol = localAndParent;
-                    if (symbol is not null)
+                    if (localAndParent is not null)
+                    {
+                        symbols = [localAndParent];
                         return true;
+                    }
                     else
+                    {
+                        symbols = null;
                         return false;
+                    }
                 }
             }
             else if (fromReferences.Count > 0)
@@ -230,12 +280,20 @@ namespace Hl7.Cql.CqlToElm.Scopes
                     DeferredFunctionDef dfd => new[] { dfd.Resolve() },
                     _ => throw new InvalidOperationException("Expecting a function type")
                 }).ToArray();
-                symbol = OverloadedFunctionDef.Create(functionsInRefScope);
-                return true;
+                if (OverloadedFunctionDef.CanCombine(functionsInRefScope))
+                {
+                    symbols = [OverloadedFunctionDef.Create(functionsInRefScope)];
+                    return true;
+                }
+                else
+                {
+                    symbols = functionsInRefScope;
+                    return false;
+                }
             }
             else
             {
-                symbol = null;
+                symbols = null;
                 return false;
             }
         }
@@ -243,11 +301,23 @@ namespace Hl7.Cql.CqlToElm.Scopes
         public IEnumerable<ReferencedLibrary> ReferencedLibraries =>
             Parent switch
             {
-                { } => LocalSymbols.Values.OfType<ReferencedLibrary>().Concat(Parent.ReferencedLibraries),
-                _ => LocalSymbols.Values.OfType<ReferencedLibrary>()
+                { } => LocalSymbols.Values
+                    .Select(s=> s.other)
+                    .OfType<ReferencedLibrary>()
+                    .Concat(Parent.ReferencedLibraries),
+                _ => LocalSymbols.Values
+                    .Select(s => s.other)
+                    .OfType<ReferencedLibrary>()
             };
 
-        public IEnumerator<IDefinitionElement> GetEnumerator() => LocalSymbols.Values.GetEnumerator();
+        public IEnumerator<IDefinitionElement> GetEnumerator() => LocalSymbols.Values
+            .SelectMany(symbol =>
+                new IDefinitionElement[] { symbol.expression!, symbol.function!, symbol.other! }
+                .Where(s=>s is not null))
+            .GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
+
+
 }

@@ -34,7 +34,12 @@ public partial class CSharpCodeWriterOptions
     /// <summary>
     /// Gets or sets a value indicating whether to prefer 'var' over explicit types.
     /// </summary>
-    public CSharpCodeWriterTypeFormat TypeFormat { get; set; }
+    public CSharpCodeWriterTypeFormat TypeFormat { get; set; } = CSharpCodeWriterTypeFormat.Explicit;
+
+    /// <summary>
+    /// Gets or sets the namespace to use for the generated C# files.
+    /// </summary>
+    public string? Namespace { get; set; }
 
     /// <summary>
     /// Binds the configuration values to the <see cref="CSharpCodeWriterOptions"/> object.

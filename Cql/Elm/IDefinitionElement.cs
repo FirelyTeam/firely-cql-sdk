@@ -66,6 +66,7 @@ namespace Hl7.Cql.Elm
         IEnumerable<OperandDef> Operands { get; }
         TypeSpecifier? ResultTypeSpecifier { get; }
         bool Fluent { get; }
+        string Library { get; }
     }
 
     public partial class ValueSetDef : IDefinitionElement
@@ -155,7 +156,13 @@ namespace Hl7.Cql.Elm
 
     }
 
-    public partial class ExpressionDef : IDefinitionElement
+    /// <summary>
+    /// Describes a non-functional statement, e.g.:
+    /// define foo: true
+    /// </summary>
+    public interface IExpressionElement : IDefinitionElement { }
+
+    public partial class ExpressionDef : IExpressionElement
     {
         [JsonIgnore]
         [XmlIgnore]
@@ -189,6 +196,10 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         [XmlIgnore]
         public bool Fluent => fluentSpecified && fluent;
+
+        [JsonIgnore]
+        [XmlIgnore]
+        public virtual string Library => "";
 
         Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
 
@@ -445,8 +456,11 @@ namespace Hl7.Cql.Elm
         [XmlIgnore]
         protected Lazy<T> Definition { get; } = new(resolve);
 
-        public T Resolve() => Definition.Value;
+        [JsonIgnore]
+        [XmlIgnore]
+        public string Library { get; set; } = ""; // used for error reporting for fluent function collisions
 
+        public T Resolve() => Definition.Value;
 
         public IDefinitionElement AddError(CqlToElmError error) => Definition.Value.AddError(error);
 
@@ -456,7 +470,7 @@ namespace Hl7.Cql.Elm
     /// Defines a deferred expression (define).
     /// </summary>
     public sealed class DeferredExpressionDef(string name, AccessModifier access, Func<ExpressionDef> resolve)
-        : DeferredDefinition<ExpressionDef>(name, access, resolve);
+        : DeferredDefinition<ExpressionDef>(name, access, resolve), IExpressionElement;
     /// <summary>
     /// Defines a deferred expression (define).
     /// </summary>

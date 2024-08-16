@@ -136,9 +136,9 @@ namespace Hl7.Cql.CqlToElm
                 return CurrentScope.TryAdd(symbol);
             }
 
-            public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
+            public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement[]? symbols)
             {
-                return CurrentScope.TryResolveFluentFunction(identifier, out symbol);
+                return CurrentScope.TryResolveFluentFunction(identifier, out symbols);
             }
 
             public bool TryResolveFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
