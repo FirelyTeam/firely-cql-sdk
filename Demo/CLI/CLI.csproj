@@ -21,16 +21,16 @@
 		<PackageReference Include="CommandLineParser" Version="2.9.1" />
 	</ItemGroup>
 
+	<!--<PropertyGroup Condition="'$(Configuration)'!='Release'" >
+		<DisableStrongNamer>false</DisableStrongNamer>
+	</PropertyGroup>
+
 	<ItemGroup >
 		<PackageReference Include="Dumpify" Version="0.6.6" />
-		<!--
+		~1~
 		Since Dumpify is not a strongly named assembly, we need to use StrongNamer to make it work when building the CLI.
-		-->
+		@1@
 		<PackageReference Include="StrongNamer" Version="0.2.5" />
-	</ItemGroup>
-
-	<!--<ItemGroup Condition="'$(Configuration)'!='Release'" >
-		<PackageReference Include="Dumpify" Version="0.6.6" />
 	</ItemGroup>-->
 
 </Project>
