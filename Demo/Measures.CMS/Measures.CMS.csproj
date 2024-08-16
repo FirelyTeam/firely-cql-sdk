@@ -2,8 +2,6 @@
 	<Import Project="..\cql-demo.props" />
 
 	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<Nullable>enable</Nullable>
 		<Configurations>Debug;Release;Generate-CQL-to-ELM</Configurations>
 	</PropertyGroup>
 

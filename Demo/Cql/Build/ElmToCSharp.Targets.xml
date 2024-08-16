@@ -30,7 +30,7 @@
 			DependsOnTargets="CQLtoELM"
 		  Condition="'$(CQLtoElmRan)'=='true'"-->
 
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting on Configuration '$(Configuration)' ))" Importance="High" />
+		<Message Text="$(Box.Replace(Text, ELM to C#: Generating C# for LibrarySet: '$(LibrarySet)' with Configuration: '$(Configuration)' ))" Importance="High" />
 
 		<PropertyGroup>
 			<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
@@ -64,7 +64,7 @@
 		<Delete Files="@(ResourceFiles)" />
 		-->
 
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Converting ELM to CSharp&#10;$(PackagerCLICommand)))"
+		<Message Text="$(Box.Replace(Text, ELM to C#: Generating ELM for LibrarySet: '$(LibrarySet)'&#10;$(PackagerCLICommand)))"
 		         Importance="High" />
 		<Exec Command='$(PackagerCLICommand)' />
 
