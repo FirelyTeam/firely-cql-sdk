@@ -6,9 +6,9 @@
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
-		<TextHeader>CQL to ELM: </TextHeader>
-		<TextFooter>&#10;| LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'&#10;\</TextFooter>
-		<Box>$(Box.Replace({Text}, | $(TextHeader){Text}$(TextFooter)))</Box>
+		<BoxHeader>CQL to ELM: </BoxHeader>
+		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
+		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
 	</PropertyGroup>
 
 	<!-- CQL to ELM -->
@@ -17,19 +17,11 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<JavaCommand>java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory</JavaCommand>
 		<ClassPath>-classpath $(TargetDependencies)/* org.cqframework.cql.cql2elm.cli.Main</ClassPath>
 		<JavaOutputFile>$(MSBuildProjectDirectory)/elm-build.log</JavaOutputFile>
 		<JavaArgs>-input $(CqlDirectory) -f JSON -output $(ElmDirectory) -locators true -result-types true -signatures All</JavaArgs>
-		<JavaCommandArgs>$(JavaCommand) $(ClassPath) $(JavaArgs)</JavaCommandArgs>
+		<JavaCLI>java -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory $(ClassPath) $(JavaArgs)</JavaCLI>
 	</PropertyGroup>
-
-	<!--
-	<Target Name="StartMessage"
-	        BeforeTargets="PreBuildEvent">
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting... ))" Importance="High" />
-	</Target>
-	-->
 
 	<Target Name="GenerateElmFiles"
 	        Inputs="@(CqlFiles)"
@@ -47,9 +39,9 @@
 		<Delete Files="@(ElmFiles)" />-->
 
 		<!-- Generate ELM files -->
-		<Message Text="$(Box.Replace({Text}, Generating ELM&#10;| $(JavaCommandArgs)))" Importance="High" />
+		<Message Text="$(Box.Replace({Text}, Generating ELM&#10;| $(JavaCLI)))" Importance="High" />
 
-		<Exec Command="$(JavaCommandArgs)" ConsoleToMSBuild="true">
+		<Exec Command="$(JavaCLI)" ConsoleToMSBuild="true">
 			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
 		</Exec>
 
