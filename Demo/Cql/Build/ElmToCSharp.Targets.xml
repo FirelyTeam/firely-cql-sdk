@@ -44,21 +44,21 @@
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>
 
-		<!--~1~ 1. Remove old C# and Resource files to avoid duplicates when editing/renaming CQL files @1@
+		<!-- 1. Remove old C# and Resource files to avoid duplicates when editing/renaming CQL files -->
 
 		<Message Text="$(Box.Replace({Text}, Deleting C# and Resource files))" Importance="High" />
 
 		<ItemGroup>
-			~1~ Keep relative path else complains about duplicates in msbuild meta tracking@1@
+			<!-- Keep relative path else complains about duplicates in msbuild meta tracking-->
 			<CSharpFiles Include="CSharp/**/*.cs" />
 			<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
 		</ItemGroup>
 
 		<Delete Files="@(CSharpFiles)" />
-		<Delete Files="@(ResourceFiles)" />-->
+		<Delete Files="@(ResourceFiles)" />
 
 		<!-- Generate C# and Resource files -->
-		<Message Text="$(Box.Replace({Text}, Generating C# and Resource files&#10;| $(PackagerCLICommand)))" Importance="High" />
+		<Message Text="$(Box.Replace({Text}, Generating C# and Resource files&#10;$(PackagerCLICommand)))" Importance="High" />
 		<Exec Command='$(PackagerCLICommand)' />
 
 		<ItemGroup>
