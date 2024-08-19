@@ -117,17 +117,17 @@ partial class ExpressionBuilderContext
         args switch
         {
             Type[] types => types,
-            { } objects  => objects.SelectToArray(obj => TranslateType(obj!)),
-            _            => [],
+            { } objects => objects.SelectToArray(obj => TranslateType(obj!)),
+            _ => [],
         };
 
     [DebuggerStepThrough]
     private Type TranslateType<TType>(TType? arg) =>
         arg switch
         {
-            Type type                         => type,
+            Type type => type,
             XmlQualifiedName xmlQualifiedName => _typeResolver.ResolveType(xmlQualifiedName.Name)!,
-            _                                 => null!,
+            _ => null!,
         };
 
     [DebuggerStepThrough]
@@ -135,8 +135,8 @@ partial class ExpressionBuilderContext
         args switch
         {
             Expression[] expressions => expressions,
-            { } objects              => objects.SelectToArray(obj => TranslateArg(obj!)),
-            _                        => [],
+            { } objects => objects.SelectToArray(obj => TranslateArg(obj!)),
+            _ => [],
         };
 
     [DebuggerStepThrough]
@@ -144,8 +144,8 @@ partial class ExpressionBuilderContext
         arg switch
         {
             Expression expression => expression,
-            Element element       => TranslateElement(element),
-            var obj               => Expression.Constant(obj),
+            Element element => TranslateElement(element),
+            var obj => Expression.Constant(obj),
         };
 
     private Expression TranslateElement(Element element) =>
@@ -156,58 +156,58 @@ partial class ExpressionBuilderContext
                 Expression? expression = element switch
                 {
                     //@formatter:off
-                    Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."),
-                    Flatten e          => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
-                    Negate e           => Negate(e),
-                    As e               => As(e),
-                    Case e             => Case(e),
-                    ToTime e           => ChangeType(e.operand!, _typeResolver.TimeType),
-                    ToBoolean e        => ChangeType(e.operand!, typeof(bool?)),
-                    ToString e         => ChangeType(e.operand!, typeof(string)),
-                    ToConcept e        => ChangeType(e.operand!, _typeResolver.ConceptType),
-                    ToDate e           => ChangeType(e.operand!, _typeResolver.DateType),
-                    ToDecimal e        => ChangeType(e.operand!, typeof(decimal?)),
-                    ToInteger e        => ChangeType(e.operand!, typeof(int?)),
-                    ToDateTime e       => ChangeType(e.operand!, _typeResolver.DateTimeType),
-                    ToLong e           => ChangeType(e.operand!, typeof(long?)),
-                    ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
-                    Coalesce e         => Coalesce(e),
-                    Equivalent e       => Equivalent(e),
-                    AliasRef e         => GetScopeExpression(e.name!),
-                    QueryLetRef e      => GetScopeExpression(e.name!),
-                    IdentifierRef e    => IdentifierRef(e),
-                    If e               => If(e),
-                    IncludedIn e       => IncludedIn(e),
-                    Includes e         => Includes(e),
-                    Instance e         => Instance(e),
-                    Is e               => Is(e),
-                    IsNull e           => IsNull(e),
-                    List e             => List(e),
-                    Literal e          => Literal(e),
-                    Message e          => Message(e),
-                    Null e             => NullExpression.ForType(TypeFor(e)!),
-                    OperandRef e       => OperandRef(e),
-                    ProperContains e   => ProperContains(e),
-                    ProperIn e         => ProperIn(e),
+                    Ratio e => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."),
+                    Flatten e => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
+                    Negate e => Negate(e),
+                    As e => As(e),
+                    Case e => Case(e),
+                    ToTime e => ChangeType(e.operand!, _typeResolver.TimeType),
+                    ToBoolean e => ChangeType(e.operand!, typeof(bool?)),
+                    ToString e => ChangeType(e.operand!, typeof(string)),
+                    ToConcept e => ChangeType(e.operand!, _typeResolver.ConceptType),
+                    ToDate e => ChangeType(e.operand!, _typeResolver.DateType),
+                    ToDecimal e => ChangeType(e.operand!, typeof(decimal?)),
+                    ToInteger e => ChangeType(e.operand!, typeof(int?)),
+                    ToDateTime e => ChangeType(e.operand!, _typeResolver.DateTimeType),
+                    ToLong e => ChangeType(e.operand!, typeof(long?)),
+                    ToQuantity e => ChangeType(e.operand!, _typeResolver.QuantityType),
+                    Coalesce e => Coalesce(e),
+                    Equivalent e => Equivalent(e),
+                    AliasRef e => GetScopeExpression(e.name!),
+                    QueryLetRef e => GetScopeExpression(e.name!),
+                    IdentifierRef e => IdentifierRef(e),
+                    If e => If(e),
+                    IncludedIn e => IncludedIn(e),
+                    Includes e => Includes(e),
+                    Instance e => Instance(e),
+                    Is e => Is(e),
+                    IsNull e => IsNull(e),
+                    List e => List(e),
+                    Literal e => Literal(e),
+                    Message e => Message(e),
+                    Null e => NullExpression.ForType(TypeFor(e)!),
+                    OperandRef e => OperandRef(e),
+                    ProperContains e => ProperContains(e),
+                    ProperIn e => ProperIn(e),
                     ProperIncludedIn e => ProperIncludedIn(e),
-                    ProperIncludes e   => ProperIncludes(e),
-                    Property e         => Property(e),
-                    Query e            => Query(e),
-                    Tuple e            => Tuple(e),
+                    ProperIncludes e => ProperIncludes(e),
+                    Property e => Property(e),
+                    Query e => Query(e),
+                    Tuple e => Tuple(e),
 
                     // InvokeDefinedFunctionThroughRuntimeContext
-                    FunctionRef e      => FunctionRef(e),
+                    FunctionRef e => FunctionRef(e),
 
                     // InvokeDefinitionThroughRuntimeContext
-                    CodeRef e       => CodeRef(e),
+                    CodeRef e => CodeRef(e),
                     CodeSystemRef e => CodeSystemRef(e),
-                    ConceptRef e    => ConceptRef(e),
+                    ConceptRef e => ConceptRef(e),
                     ExpressionRef e => ExpressionRef(e),
                     AnyInValueSet e => ProcessValueSet(e.valueset, e.codes, isList: true),
-                    InValueSet e    => ProcessValueSet(e.valueset!, e.code, isList: false),
-                    Retrieve e      => Retrieve(e),
-                    ValueSetRef e   => ValueSetRef(e),
-                    ParameterRef e  => ParameterRef(e),
+                    InValueSet e => ProcessValueSet(e.valueset!, e.code, isList: false),
+                    Retrieve e => Retrieve(e),
+                    ValueSetRef e => ValueSetRef(e),
+                    ParameterRef e => ParameterRef(e),
 
                     // NOTE: Do not rename ICqlOperators.CreateValueSetFacade to ExpandValueSet
                     ExpandValueSet e => _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.CreateValueSetFacade), TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
@@ -251,7 +251,7 @@ partial class ExpressionBuilderContext
                 return expression!;
             }
         });
-  
+
 
     private object?[] GetTypeArgs(Element element)
     {
@@ -260,7 +260,7 @@ partial class ExpressionBuilderContext
         {
             MinValue e => [e.valueType],
             MaxValue e => [e.valueType],
-            _          => NoTypes,
+            _ => NoTypes,
         };
         // ReSharper restore CoVariantArrayConversion
         return types;
@@ -316,12 +316,12 @@ partial class ExpressionBuilderContext
         object?[] Collapse(Collapse e)
         {
             var operand = TranslateArg(e.operand![0]!);
-            if (_typeResolver.GetListElementCqlIntervalPointType(operand.Type) is {})
+            if (_typeResolver.GetListElementCqlIntervalPointType(operand.Type) is { })
             {
                 object precision = e.operand switch
                 {
-                    [_, Quantity quantity, ..] => quantity.unit,
-                    _                          => NullExpression.String
+                [_, Quantity quantity, ..] => quantity.unit,
+                    _ => NullExpression.String
                 };
 
                 return [operand, precision];
@@ -331,7 +331,7 @@ partial class ExpressionBuilderContext
 
         object?[] Contains(Contains e)
         {
-            if (TranslateArgs(e.operand) is [{ }left, { } right, ..])
+            if (TranslateArgs(e.operand) is [{ } left, { } right, ..])
             {
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftType)
                 {
@@ -460,7 +460,7 @@ partial class ExpressionBuilderContext
         {
 
             var elementType = TypeFor(listTypeSpecifier.elementType);
-            var elements =  TranslateArgs(list.element);
+            var elements = TranslateArgs(list.element);
             if (!elementType.IsNullableValueType(out _) && elements.Any(exp => exp.Type.IsNullableValueType(out _)))
             {
                 for (int i = 0; i < elements.Length; i++)
@@ -1029,7 +1029,7 @@ partial class ExpressionBuilderContext
 
                 // If we cannot determine the type from the ELM, let's try
                 // if the POCO model can help us.
-                if(expectedType == null)
+                if (expectedType == null)
                 {
                     expectedType = _typeResolver.GetProperty(source.Type, path)?.PropertyType
                                    ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
@@ -1253,7 +1253,7 @@ partial class ExpressionBuilderContext
             return BindCqlOperator(isList ? nameof(ICqlOperators.ConceptsInValueSet) : nameof(ICqlOperators.ConceptInValueSet), expr, valueSet);
 
         if (codeType == typeof(string))
-            return BindCqlOperator(isList ? nameof(ICqlOperators.StringsInValueSet): nameof(ICqlOperators.StringInValueSet), expr, valueSet);
+            return BindCqlOperator(isList ? nameof(ICqlOperators.StringsInValueSet) : nameof(ICqlOperators.StringInValueSet), expr, valueSet);
 
         throw new NotImplementedException().WithContext(this);
     }
@@ -1334,7 +1334,7 @@ partial class ExpressionBuilderContext
     protected Expression Equivalent(Equivalent eqv)
     {
         if (TranslateArgs(eqv.operand) is [{ } left, { } right]
-            && _typeResolver.GetListElementType(left.Type, throwError:false) is { } leftType
+            && _typeResolver.GetListElementType(left.Type, throwError: false) is { } leftType
             && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightType
             && leftType != rightType)
         {
@@ -2006,38 +2006,38 @@ partial class ExpressionBuilderContext
                     switch (by)
                     {
                         case ByExpression byExpression:
-                        {
-                            var parameterName = "@this";
-                            var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
-                            var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                            using (PushScopes(parameterName,
-                                              KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
                             {
-                                var sortMemberExpression = TranslateArg(byExpression.expression);
-                                var lambdaBody = _cqlOperatorsBinder.ConvertToType(sortMemberExpression, typeof(object));
+                                var parameterName = "@this";
+                                var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
+                                var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                                using (PushScopes(parameterName,
+                                                  KeyValuePair.Create(parameterName, ((Expression)sortMemberParameter, (Element)byExpression.expression))))
+                                {
+                                    var sortMemberExpression = TranslateArg(byExpression.expression);
+                                    var lambdaBody = _cqlOperatorsBinder.ConvertToType(sortMemberExpression, typeof(object));
+                                    var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
+                                    return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
+                                }
+                            }
+                        case ByColumn byColumn:
+                            {
+                                var parameterName = "@this";
+                                var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
+                                var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
+                                var pathMemberType = TypeFor(byColumn);
+                                if (pathMemberType == null)
+                                {
+                                    throw this.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
+                                }
+                                var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
+                                var lambdaBody = _cqlOperatorsBinder.ConvertToType(pathExpression, typeof(object));
                                 var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                                 return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                             }
-                        }
-                        case ByColumn byColumn:
-                        {
-                            var parameterName = "@this";
-                            var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
-                            var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                            var pathMemberType = TypeFor(byColumn);
-                            if (pathMemberType == null)
-                            {
-                                throw this.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
-                            }
-                            var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
-                            var lambdaBody = _cqlOperatorsBinder.ConvertToType(pathExpression, typeof(object));
-                            var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                            return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
-                        }
                         default:
-                        {
-                            return BindCqlOperator(nameof(ICqlOperators.ListSort), @return, Expression.Constant(order, typeof(ListSortDirection)));
-                        }
+                            {
+                                return BindCqlOperator(nameof(ICqlOperators.ListSort), @return, Expression.Constant(order, typeof(ListSortDirection)));
+                            }
                     }
                 }
             }
@@ -2211,23 +2211,25 @@ partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!);
                     var operand = TranslateArg(@as.operand!);
-                    var operandType = operand.GetType();
-                    if (!operandType.IsAssignableTo(type))
-                    {                      
-                        var typeConversion = TypeConversion.NoMatch;
-                        var converted = ChangeType(operand, type, out typeConversion);
-                        if (typeConversion == TypeConversion.NoMatch)
-                        {
-                            // log an unsafe cast
-                            _logger.LogWarning(FormatMessage(
-                                $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
-                                @as.operand));
-                            return Expression.Default(type);
-                        }
-                        else return converted;                            
+                    var operandType = operand.Type;
+                    var typeConversion = TypeConversion.NoMatch;
+                    var converted = ChangeType(operand, type, out typeConversion);
+                    if (typeConversion == TypeConversion.NoMatch)
+                    {
+                        // log an unsafe cast
+                        _logger.LogWarning(FormatMessage(
+                            $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
+                            @as.operand));
+                        return Expression.Default(type);
                     }
-                    else 
+                    else if (typeConversion == TypeConversion.OperatorConvert) // use the custom conversion function
+                    { 
+                        return converted;
+                    }
+                    else
+                    {
                         return new ElmAsExpression(operand, type, @as.strict);
+                    }
                 }
             }
         }
@@ -2391,7 +2393,7 @@ file static class LocalExtensions
     public static Type? GetListElementCqlIntervalPointType(
         this TypeResolver typeResolver,
         Type type) =>
-        typeResolver.GetListElementType(type, throwError:false) is { } elementType
+        typeResolver.GetListElementType(type, throwError: false) is { } elementType
         && elementType.IsCqlInterval(out var pointType)
             ? pointType
             : null;

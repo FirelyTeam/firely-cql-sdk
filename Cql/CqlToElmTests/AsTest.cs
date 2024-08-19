@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -155,6 +157,24 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = dg.DynamicInvoke([ctx, new Hl7.Fhir.Model.Id("id")]);
             var fs = result.Should().BeOfType<Hl7.Fhir.Model.FhirString>().Subject;
             fs.Value.Should().Be("id");
+        }
+
+        [TestMethod]
+        public void FHIR_Range_To_Interval()
+        {
+            // from MATGlobalCommonFunctionsFHIR4.cql function "Normalize Interval"
+            var lib = MakeLibrary(@"
+                library AsTest version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+
+                context Patient
+
+                define private function f(choice Choice<FHIR.dateTime, FHIR.Range>):
+                    choice as FHIR.Range
+            ");
+            var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
         }
     }
 }
