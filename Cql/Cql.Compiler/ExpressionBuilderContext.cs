@@ -158,7 +158,7 @@ partial class ExpressionBuilderContext
                     //@formatter:off
                     Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."),
                     Flatten e          => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
-                    Negate e           => e.operand is Literal literal ? NegateLiteral(e, literal) : ChangeType(BindCqlOperator(nameof(ICqlOperators.Negate), e.operand), e.resultTypeSpecifier),
+                    Negate e           => Negate(e),
                     As e               => As(e),
                     Case e             => Case(e),
                     ToTime e           => ChangeType(e.operand!, _typeResolver.TimeType),
@@ -251,6 +251,7 @@ partial class ExpressionBuilderContext
                 return expression!;
             }
         });
+  
 
     private object?[] GetTypeArgs(Element element)
     {
@@ -336,11 +337,11 @@ partial class ExpressionBuilderContext
                 {
                     if (leftType != right.Type)
                     {
+                        var typeConversion = TypeConversion.NoMatch;
                         if (leftType.IsAssignableFrom(right.Type))
-                        {
-                            right = ChangeType(right, leftType);
-                        }
-                        else throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {leftType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                            right = ChangeType(right, leftType, out typeConversion);
+                        if (typeConversion == TypeConversion.NoMatch)
+                            throw this.NewExpressionBuildingException($"Cannot convert Contains target {right.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {leftType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                     }
                     return [left, right, e.GetPrecision()];
                 }
@@ -602,8 +603,11 @@ partial class ExpressionBuilderContext
             }
             var ctor = ConstructorInfos.CqlQuantity;
 
+            TypeConversion typeConversion = TypeConversion.NoMatch;
             if (unitExpr is not null)
-                unitExpr = ChangeType(unitExpr, typeof(string));
+                unitExpr = ChangeType(unitExpr, typeof(string), out typeConversion);
+            if (typeConversion == TypeConversion.NoMatch)
+                throw this.NewExpressionBuildingException($"Unit property cannot be converted to string.");
 
             var @new = Expression.New(ctor,
                                       valueExpr ?? Expression.Default(typeof(decimal?)),
@@ -710,7 +714,10 @@ partial class ExpressionBuilderContext
                     else
                     {
                         var selectParameter = Expression.Parameter(valueEnumerableElement, TypeNameToIdentifier(value.Type, this));
-                        var body = ChangeType(selectParameter, memberArrayElement);
+                        var typeConversion = TypeConversion.NoMatch;
+                        var body = ChangeType(selectParameter, memberArrayElement, out typeConversion);
+                        if (typeConversion == TypeConversion.NoMatch)
+                            throw this.NewExpressionBuildingException($"Cannot convert {selectParameter.Type} to {memberArrayElement}.");
                         var selectLambda = Expression.Lambda(body, selectParameter);
                         var callSelectMethod = BindCqlOperator(nameof(ICqlOperators.Select), [value, selectLambda
                                                                ]);
@@ -732,7 +739,11 @@ partial class ExpressionBuilderContext
                     return Expression.Bind(memberInfo, newList);
                 }
             }
-            var convert = ChangeType(value, property.PropertyType);
+
+            var propertyConversion = TypeConversion.NoMatch;
+            var convert = ChangeType(value, property.PropertyType, out propertyConversion);
+            if (propertyConversion == TypeConversion.NoMatch)
+                throw this.NewExpressionBuildingException($"Cannot convert {value.Type} to {property.PropertyType}.");
             return Expression.Bind(memberInfo, convert);
         }
 
@@ -986,7 +997,10 @@ partial class ExpressionBuilderContext
                 var resultType = TypeFor(op) ?? throw this.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
-                    propogate = ChangeType(propogate, resultType);
+                    var typeConversion = TypeConversion.NoMatch;
+                    propogate = ChangeType(propogate, resultType, out typeConversion);
+                    if (typeConversion == TypeConversion.NoMatch)
+                        throw this.NewExpressionBuildingException($"Cannot convert {propogate.Type} to {resultType}.");
                 }
                 return propogate;
             }
@@ -1056,10 +1070,18 @@ partial class ExpressionBuilderContext
                 {
                     if (expectedType != ifIs.Type)
                     {
-                        ifIs = ChangeType(ifIs, expectedType);
+                        var ifIsConversion = TypeConversion.NoMatch;
+                        ifIs = ChangeType(ifIs, expectedType, out ifIsConversion);
+                        if (ifIsConversion == TypeConversion.NoMatch)
+                            throw this.NewExpressionBuildingException($"Cannot convert {ifIs.Type} to {expectedType}.");
                     }
                     if (expectedType != elseNull.Type)
-                        elseNull = ChangeType(elseNull, expectedType);
+                    {
+                        var elseConversion = TypeConversion.NoMatch;
+                        elseNull = ChangeType(elseNull, expectedType, out elseConversion);
+                        if (elseConversion == TypeConversion.NoMatch)
+                            throw this.NewExpressionBuildingException($"Cannot convert {elseNull.Type} to {expectedType}.");
+                    }
                 }
                 var condition = Expression.Condition(isCheck, ifIs, elseNull);
                 return condition;
@@ -1070,7 +1092,10 @@ partial class ExpressionBuilderContext
 
         if (expectedType != null && expectedType != result.Type)
         {
-            result = ChangeType(result, expectedType);
+            var resultConversion = TypeConversion.NoMatch;
+            result = ChangeType(result, expectedType, out resultConversion);
+            if (resultConversion == TypeConversion.NoMatch)
+                throw this.NewExpressionBuildingException($"Cannot convert {result.Type} to {expectedType}.");
         }
         return result;
     }
@@ -1169,7 +1194,14 @@ partial class ExpressionBuilderContext
         // all functions still take the bundle and context parameters, plus whatver the operands
         // to the actual function are.
         var convertedArguments = arguments
-                                 .Select((arg, i) => ChangeType(arg, parameterTypes[i]))
+                                 .Select((arg, i) =>
+                                 {
+                                     var argConversion = TypeConversion.NoMatch;
+                                     var converted = ChangeType(arg, parameterTypes[i], out argConversion);
+                                     if (argConversion == TypeConversion.NoMatch)
+                                         throw this.NewExpressionBuildingException($"Cannot convert {arg.Type} to {parameterTypes[i]}.");
+                                     else return converted;
+                                 })
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
 
@@ -1244,13 +1276,52 @@ partial class ExpressionBuilderContext
         {
             return Expression.Constant(int.MinValue);
         }
-
-        if (literalType == typeof(long?) && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
+        else if (literalType == typeof(long?)
+            && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
         {
             return Expression.Constant(long.MinValue);
         }
+        var bind = BindCqlOperator(nameof(ICqlOperators.Negate), e.operand);
+        var typeConversion = TypeConversion.NoMatch;
+        var converted = ChangeType(bind, e.resultTypeSpecifier, out typeConversion);
+        if (typeConversion == TypeConversion.NoMatch)
+        {
+            var tsType = TypeFor(e.resultTypeSpecifier);
+            if (tsType is null)
+            {
+                throw this.NewExpressionBuildingException($"Type for {e.resultTypeSpecifier.ToString()} could not be resolved.");
+            }
+            else
+            {
+                throw this.NewExpressionBuildingException($"Cannot convert {bind.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+            }
+        }
+        else return converted;
+    }
 
-        return ChangeType(BindCqlOperator(nameof(ICqlOperators.Negate), e.operand), e.resultTypeSpecifier);
+    private Expression Negate(Negate e)
+    {
+        if (e.operand is Literal literal)
+            return NegateLiteral(e, literal);
+        else
+        {
+            var bind = BindCqlOperator(nameof(ICqlOperators.Negate), e.operand);
+            var typeConversion = TypeConversion.NoMatch;
+            var converted = ChangeType(bind, e.resultTypeSpecifier, out typeConversion);
+            if (typeConversion == TypeConversion.NoMatch)
+            {
+                var tsType = TypeFor(e.resultTypeSpecifier);
+                if (tsType is null)
+                {
+                    throw this.NewExpressionBuildingException($"Type for {e.resultTypeSpecifier.ToString()} could not be resolved.");
+                }
+                else
+                {
+                    throw this.NewExpressionBuildingException($"Cannot convert {bind.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                }
+            }
+            else return converted;
+        }
     }
 }
 
@@ -2069,7 +2140,14 @@ partial class ExpressionBuilderContext
                 var lambdaBody = TranslateArg(queryAggregate.expression!);
                 // when starting is not present, it is a null literal typed as Any (object).
                 // cast the null to the expression type.
-                var startingValue = ChangeType(TranslateArg(queryAggregate.starting!), lambdaBody.Type);
+                var typeConversion = TypeConversion.NoMatch;
+                var starting = TranslateArg(queryAggregate.starting!);
+                var startingValue = ChangeType(starting, lambdaBody.Type, out typeConversion);
+                if (typeConversion == TypeConversion.NoMatch)
+                {
+                    throw this.NewExpressionBuildingException(
+                        $"Cannot convert starting value of type {starting.Type.ToCSharpString()} to the result type of the aggregate expression ({lambdaBody.Type.ToCSharpString()})");
+                }
                 if (queryAggregate.distinct)
                     @return = _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.Distinct), [@return], [resultType]);
                 var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
@@ -2133,7 +2211,22 @@ partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!);
                     var operand = TranslateArg(@as.operand!);
-                    return new ElmAsExpression(operand, type, @as.strict);
+                    if (!operand.GetType().IsAssignableTo(type))
+                    {
+                        var typeConversion = TypeConversion.NoMatch;
+                        var converted = ChangeType(operand, type, out typeConversion);
+                        if (typeConversion == TypeConversion.NoMatch)
+                        {
+                            // log an unsafe cast
+                            _logger.LogWarning(FormatMessage(
+                                $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
+                                @as.operand));
+                            return Expression.Default(type);
+                        }
+                        else return converted;                            
+                    }
+                    else 
+                        return new ElmAsExpression(operand, type, @as.strict);
                 }
             }
         }
@@ -2212,64 +2305,75 @@ partial class ExpressionBuilderContext
 {
     private Expression ChangeType(
         Expression expr,
-        TypeSpecifier? typeSpecifier) // @TODO: Cast - ChangeType
+        TypeSpecifier? typeSpecifier,
+        out TypeConversion typeConversion) // @TODO: Cast - ChangeType
     {
-        if (typeSpecifier is null)
-            return expr;
-
-        if (TypeFor(typeSpecifier) is { } resultType && resultType != expr.Type)
+        if (typeSpecifier is not null
+            && TypeFor(typeSpecifier) is { } resultType
+            && resultType != expr.Type)
         {
-            var typeAs = ChangeType(expr, resultType);
+            var typeAs = ChangeType(expr, resultType, out typeConversion);
             return typeAs;
         }
-
-        return expr;
+        else
+        {
+            typeConversion = TypeConversion.ExactType;
+            return expr;
+        }
     }
 
 
     private Expression ChangeType(
         Element element,
         Type outputType)
-        => ChangeType(TranslateArg(element), outputType); // @TODO: Cast - ChangeType
+        => ChangeType(TranslateArg(element),
+            outputType,
+            out TypeConversion typeConversion); // @TODO: Cast - ChangeType
 
     private Expression ChangeType(
         Expression input,
-        Type outputType) // @TODO: Cast - ChangeType
+        Type outputType,
+        out TypeConversion typeConversion) // @TODO: Cast - ChangeType
     {
-        var (expression, typeConversion) = input.TryNewAssignToTypeExpression(outputType, false);
-        if (typeConversion != TypeConversion.NoMatch)
+        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false);
+        if (tc != TypeConversion.NoMatch)
         {
+            typeConversion = tc;
             return expression!;
         }
-
-        // if (input.Type == outputType)
-        // {
-        //     return input;
-        // }
-        //
-        // if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
-        // {
-        //     return input.NewTypeAsExpression(outputType);
-        // }
-
-        if (_typeResolver.IsListType(input.Type)
-            && _typeResolver.IsListType(outputType))
+        else
         {
-            var inputElementType = _typeResolver.GetListElementType(input.Type, true)!;
-            var outputElementType = _typeResolver.GetListElementType(outputType, true)!;
-            var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
-            var lambdaBody = ChangeType(lambdaParameter, outputElementType);
-            var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-            return BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
+            if (_typeResolver.IsListType(input.Type)
+                && _typeResolver.IsListType(outputType))
+            {
+                var inputElementType = _typeResolver.GetListElementType(input.Type, true)!;
+                var outputElementType = _typeResolver.GetListElementType(outputType, true)!;
+                var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
+                var lambdaBody = ChangeType(lambdaParameter, outputElementType, out typeConversion);
+                if (typeConversion != TypeConversion.NoMatch)
+                {
+                    var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
+                    return BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
+                }
+                else
+                {
+                    typeConversion = TypeConversion.NoMatch;
+                    return input;
+                }
+            }
+            else if (TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
+            {
+                typeConversion = TypeConversion.OperatorConvert;
+                return BindCqlOperator(nameof(ICqlOperators.Convert), input, Expression.Constant(correctedTo, typeof(Type)));
+            }
+            else
+            {
+                typeConversion = TypeConversion.OperatorConvert;
+                return BindCqlOperator(nameof(ICqlOperators.Convert), input, Expression.Constant(outputType, typeof(Type)));
+            }
         }
-
-        if (TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
-        {
-            return BindCqlOperator(nameof(ICqlOperators.Convert), input, Expression.Constant(correctedTo, typeof(Type)));
-        }
-
-        return BindCqlOperator(nameof(ICqlOperators.Convert), input, Expression.Constant(outputType, typeof(Type)));
     }
+
 }
 
 #endregion
