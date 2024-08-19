@@ -2211,8 +2211,9 @@ partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!);
                     var operand = TranslateArg(@as.operand!);
-                    if (!operand.GetType().IsAssignableTo(type))
-                    {
+                    var operandType = operand.GetType();
+                    if (!operandType.IsAssignableTo(type))
+                    {                      
                         var typeConversion = TypeConversion.NoMatch;
                         var converted = ChangeType(operand, type, out typeConversion);
                         if (typeConversion == TypeConversion.NoMatch)
@@ -2343,7 +2344,14 @@ partial class ExpressionBuilderContext
         }
         else
         {
-            if (_typeResolver.IsListType(input.Type)
+            // tuples are not convertible.
+            if (input.Type.IsAssignableTo(typeof(TupleBaseType)) || outputType.IsAssignableTo(typeof(TupleBaseType)))
+            {
+                // unless they're the same type.
+                typeConversion = input.Type == outputType ? TypeConversion.ExactType : TypeConversion.NoMatch;
+                return input;
+            }
+            else if (_typeResolver.IsListType(input.Type)
                 && _typeResolver.IsListType(outputType))
             {
                 var inputElementType = _typeResolver.GetListElementType(input.Type, true)!;
