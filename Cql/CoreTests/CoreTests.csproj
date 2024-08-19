@@ -3,6 +3,10 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
+		<Configurations>Debug;Release;Generate-CQL-to-ELM</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 		<Nullable>disable</Nullable>
 		<NoWarn>CS1591</NoWarn>
@@ -45,7 +49,8 @@
 		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
 	</PropertyGroup>
 
-	<!-- <Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" /> -->
+	<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
+	<Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />
 
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">

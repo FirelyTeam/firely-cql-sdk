@@ -28,9 +28,9 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void FHIRTypeConversionTest_1_0_0()
+        public void FHIRConversionTest_1_0_0()
         {
-            var elm = new FileInfo(@"Input\ELM\HL7\FHIRTypeConversionTest.json");
+            var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);

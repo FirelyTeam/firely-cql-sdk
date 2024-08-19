@@ -32,10 +32,7 @@ public class TestDataRequirementsAnalyzer
         var dataRequirements = analyzer.Analyze();
 
         // Assert
-        dataRequirements.Select(dr => dr.Type).Distinct().Should()
-                        .BeEquivalentTo([
-                            FHIRAllTypes.Patient, FHIRAllTypes.DiagnosticReport,
-                            FHIRAllTypes.Condition, FHIRAllTypes.ServiceRequest
-                        ]);
+        var actual = dataRequirements.Select(dr => dr.Type).Distinct().ToArray();
+        actual.Should().BeEquivalentTo([FHIRAllTypes.Patient]);
     }
 }

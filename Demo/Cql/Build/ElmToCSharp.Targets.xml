@@ -9,28 +9,20 @@
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
+		<BoxHeader>ELM to C#: </BoxHeader>
+		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
+		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
 	</PropertyGroup>
 
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
-
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
 	        Condition="Exists('$(PackagerCLI)')"
 	        BeforeTargets="PreBuildEvent">
-		<!-- DependsOnTargets="CQLtoELM" -->
-		<!--     DependsOnTargets="GenerateAdditionalSources" -->
-		<!--     Condition="'$(CQLtoElmRan)'=='true'" -->
-		<!--     BeforeTargets="PreBuildEvent" -->
-		<!--
-		  NOTE: This needs some work still
-			DependsOnTargets="CQLtoELM"
-		  Condition="'$(CQLtoElmRan)'=='true'"-->
-
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Starting on Configuration '$(Configuration)' ))" Importance="High" />
 
 		<PropertyGroup>
 			<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
@@ -52,20 +44,21 @@
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>
 
-		<!--
-		~1~ Remove assets about to be created to avoid duplicates when editing/renaming CQL files @1@
+		<!-- 1. Remove old C# and Resource files to avoid duplicates when editing/renaming CQL files -->
+
+		<Message Text="$(Box.Replace({Text}, Deleting C# and Resource files))" Importance="High" />
+
 		<ItemGroup>
-			~1~ Keep relative path else complains about duplicates in msbuild meta tracking@1@
+			<!-- Keep relative path else complains about duplicates in msbuild meta tracking-->
 			<CSharpFiles Include="CSharp/**/*.cs" />
 			<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
 		</ItemGroup>
 
 		<Delete Files="@(CSharpFiles)" />
 		<Delete Files="@(ResourceFiles)" />
-		-->
 
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Converting ELM to CSharp&#10;$(PackagerCLICommand)))"
-		         Importance="High" />
+		<!-- Generate C# and Resource files -->
+		<Message Text="$(Box.Replace({Text}, Generating C# and Resource files&#10;| $(PackagerCLICommand)))" Importance="High" />
 		<Exec Command='$(PackagerCLICommand)' />
 
 		<ItemGroup>
@@ -91,7 +84,7 @@
 	</ItemGroup>
 
 	<Target Name="Delete CSharp" AfterTargets="Clean">
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting CSharp files...))" Importance="High" />
+		<Message Text="$(Box.Replace({Text}, Deleting C# files))" Importance="High" />
 		<Delete Files="@(CSharpFiles)" />
 	</Target>
 
@@ -100,7 +93,7 @@
 	</ItemGroup>
 
 	<Target Name="Delete Resources" AfterTargets="Clean">
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Resource files...))" Importance="High" />
+		<Message Text="$(Box.Replace({Text}, Deleting Resource files))" Importance="High" />
 		<Delete Files="@(ResourceFiles)" />
 	</Target>
 
@@ -108,17 +101,12 @@
 		<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
 	</ItemGroup>
 
-	<Target Name="Delete Resources" AfterTargets="Clean">
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Resource files...))" Importance="High" />
-		<Delete Files="@(ResourceFiles)" />
-	</Target>
-
 	<ItemGroup>
 		<ResultsFiles Include="$(TestResultsDirectory)/*.*" />
 	</ItemGroup>
 
 	<Target Name="Delete Results" AfterTargets="Clean">
-		<Message Text="$(Box.Replace(Text, $(LibrarySet) Deleting Results files...))" Importance="High" />
+		<Message Text="$(Box.Replace({Text}, Deleting Test Results files))" Importance="High" />
 		<RemoveDir Directories="$(TestResultsDirectory)" />
 	</Target>
 </Project>
