@@ -46,6 +46,10 @@ internal readonly record struct UnresolvedReferenceError(Library Library, IRefer
 {
     public string GetMessage() => $"Cannot resolve {re.GetType().Name} with name {re.name}. Library Identifier: '{Library}'.";
 }
+internal readonly record struct AmbiguousMatch(Library Library, FunctionRef Ref) : ILibraryError
+{
+    public string GetMessage() => $"FunctionRef '{Ref.name}' cannot be resolved unambiguously. Library Identifier: '{Library}'.";
+}
 
 
 

@@ -1078,7 +1078,14 @@ partial class ExpressionBuilderContext
     protected Expression FunctionRef(FunctionRef op)
     {
         Expression[] operands = TranslateArgs(op.operand);
+
+        // NOTE: Breaks 
+        //var resultType = op.resultTypeSpecifier ?? op.resultTypeName?.ToNamedType() ??
+        //                 throw new InvalidOperationException($"FunctionRef {op.libraryName + "." + op.name} has no result type specifier or result type name.");
+        //var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, resultType);
+
         var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, op.resultTypeSpecifier);
+
         return invoke;
     }
 
@@ -1163,7 +1170,7 @@ partial class ExpressionBuilderContext
 
         var argumentTypes = arguments.SelectToArray(a => a.Type);
         var selected = _libraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
-        Type definitionType = GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
+        Type definitionType = Expression.GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
         var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
 
         // all functions still take the bundle and context parameters, plus whatver the operands
