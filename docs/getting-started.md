@@ -73,7 +73,11 @@ Prerequisites:
 
 Take a look at the `Cql` project in the Demo solution folder. Its `Build` directory contains the build target (including the Maven configuration files). This project is used for common build targets.
 
- There are multiple `Measures.*` projects where the and the `input` folder contains a set of demo CQL files. Running the build (manually) for these project turns these CQL files into ELM, and puts the files into the source directory of the next step (which is the `Elm` folder each respective project).
+ There are multiple `Measures.*` projects where the `input` folder contains a set of demo CQL files. 
+ Select the `Generate-CQL-to-ELM` build configuration in the solution explorer,
+ then build these projects which will generate ELM JSON files from the CQL,
+ and put them into the source `Elm` folder each respective project.
+
 
 ### 2. Turning ELM into C# and DLLs
 The next step does quite a bit at one:
