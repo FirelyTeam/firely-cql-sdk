@@ -217,9 +217,22 @@ partial class ExpressionBuilderContext
                     //@formatter:on
                 };
 
-                expression = ConvertToResultType2(element, expression);
+                if (expression is not null)
+                    expression = ConvertToResultType();
+
                 expression = Mutate(element, expression);
                 return expression!;
+
+                Expression ConvertToResultType()
+                {
+                    var converted = ChangeType(expression, element.resultTypeSpecifier, out var typeConversion);
+                    if (typeConversion != TypeConversion.NoMatch)
+                        return converted;
+
+                    var tsType = TypeFor(element.resultTypeSpecifier);
+                    throw this.NewExpressionBuildingException(
+                        $"Cannot convert {expression.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                }
             }
         });
 
@@ -1243,84 +1256,22 @@ partial class ExpressionBuilderContext
         // since int.MaxValue is 2147483647, we have to handle this specially
         var literalType = TypeFor(literal);
         if (literalType == typeof(int?) && literal.value == Int32MaxPlusOneAsString)
-        {
             return Expression.Constant(int.MinValue);
-        }
-        else if (literalType == typeof(long?)
+
+        if (literalType == typeof(long?)
             && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
-        {
             return Expression.Constant(long.MinValue);
-        }
-        var bind = BindCqlOperator(nameof(ICqlOperators.Negate), e.operand);
-        return ConvertToResultType(e, bind);
+
+        return BindCqlOperator(nameof(ICqlOperators.Negate), e.operand);
     }
 
     private Expression Negate(Negate e)
     {
         if (e.operand is Literal literal)
             return NegateLiteral(e, literal);
-        else
-        {
-            var bind = BindCqlOperator(nameof(ICqlOperators.Negate), e.operand);
-            return ConvertToResultType(e, bind);
-        }
+
+        return BindCqlOperator(nameof(ICqlOperators.Negate), e.operand);
     }
-
-    private Expression ConvertToResultType(Element element, Expression expression)
-    {
-        var converted = ChangeType(expression, element.resultTypeSpecifier, out var typeConversion);
-        if (typeConversion != TypeConversion.NoMatch)
-            return converted;
-
-        var tsType = TypeFor(element.resultTypeSpecifier);
-        // if (tsType is null)
-        // {
-        //     throw this.NewExpressionBuildingException(
-        //         $"Type for {element.resultTypeSpecifier.ToString()} could not be resolved.");
-        // }
-        // else
-        // {
-            throw this.NewExpressionBuildingException(
-                $"Cannot convert {expression.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
-        // }
-    }
-
-    private Expression? ConvertToResultType2(Element element, Expression? expression)
-    {
-        return ConvertToResultType(element, expression!);
-        /*if (element.resultTypeName != null || element.resultTypeSpecifier != null)
-        {
-            var resultType = TypeFor(element, false);
-            if (
-                resultType != null
-                && expression?.Type != null
-                && resultType != expression!.Type)
-            {
-                if (_cqlOperatorsBinder.TryConvert(expression, resultType, out var result))
-                {
-                    _logger.LogDebug(
-                        "Changing expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
-                        element.GetType().Name,
-                        element.locator,
-                        resultType.ToCSharpString(Defaults.TypeCSharpFormat),
-                        expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
-                    expression = result.arg;
-                }
-                else
-                {
-                    _logger.LogDebug(
-                        "Failed to change expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
-                        element.GetType().Name,
-                        element.locator,
-                        resultType.ToCSharpString(Defaults.TypeCSharpFormat),
-                        expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
-                }
-            }
-        }
-
-        return expression;*/
-    }
-
 }
 
 #endregion
