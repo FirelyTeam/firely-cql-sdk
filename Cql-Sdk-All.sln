@@ -113,6 +113,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Firely.Cql.Sdk.Integration.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationRunner", "submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj", "{2929117D-FB33-4BD6-8F20-4B623C114438}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "60 Tooling", "60 Tooling", "{B06378CF-AFF4-48B3-8A9F-569B91E8CD1F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.BuildTasks", "Cql\Cql.BuildTasks\Cql.BuildTasks.csproj", "{02B17592-7DD8-4E2F-978B-E01AAAFCBC30}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsTest", "Cql\ToolsTest\ToolsTest.csproj", "{D613B1FD-2D37-41F2-BC2E-FD9527D76542}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -353,6 +359,22 @@ Global
 		{2929117D-FB33-4BD6-8F20-4B623C114438}.Generate-CQL-to-ELM|Any CPU.Build.0 = Debug|Any CPU
 		{2929117D-FB33-4BD6-8F20-4B623C114438}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2929117D-FB33-4BD6-8F20-4B623C114438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02B17592-7DD8-4E2F-978B-E01AAAFCBC30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02B17592-7DD8-4E2F-978B-E01AAAFCBC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02B17592-7DD8-4E2F-978B-E01AAAFCBC30}.FullDebug|Any CPU.ActiveCfg = FullDebug|Any CPU
+		{02B17592-7DD8-4E2F-978B-E01AAAFCBC30}.FullDebug|Any CPU.Build.0 = FullDebug|Any CPU
+		{02B17592-7DD8-4E2F-978B-E01AAAFCBC30}.Generate-CQL-to-ELM|Any CPU.ActiveCfg = Debug|Any CPU
+		{02B17592-7DD8-4E2F-978B-E01AAAFCBC30}.Generate-CQL-to-ELM|Any CPU.Build.0 = Debug|Any CPU
+		{02B17592-7DD8-4E2F-978B-E01AAAFCBC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02B17592-7DD8-4E2F-978B-E01AAAFCBC30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D613B1FD-2D37-41F2-BC2E-FD9527D76542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D613B1FD-2D37-41F2-BC2E-FD9527D76542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D613B1FD-2D37-41F2-BC2E-FD9527D76542}.FullDebug|Any CPU.ActiveCfg = FullDebug|Any CPU
+		{D613B1FD-2D37-41F2-BC2E-FD9527D76542}.FullDebug|Any CPU.Build.0 = FullDebug|Any CPU
+		{D613B1FD-2D37-41F2-BC2E-FD9527D76542}.Generate-CQL-to-ELM|Any CPU.ActiveCfg = Debug|Any CPU
+		{D613B1FD-2D37-41F2-BC2E-FD9527D76542}.Generate-CQL-to-ELM|Any CPU.Build.0 = Debug|Any CPU
+		{D613B1FD-2D37-41F2-BC2E-FD9527D76542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D613B1FD-2D37-41F2-BC2E-FD9527D76542}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -396,9 +418,12 @@ Global
 		{BF5D524C-0582-4471-BC79-B04B2D8DFCDB} = {314A4A1E-1671-4F4C-BA1F-DEE73D584677}
 		{0E5F5704-5289-4C65-AD4E-364CD5F60C44} = {D33B7DF4-8AC5-47D1-A782-AC5078FFDEC7}
 		{2929117D-FB33-4BD6-8F20-4B623C114438} = {0E5F5704-5289-4C65-AD4E-364CD5F60C44}
+		{B06378CF-AFF4-48B3-8A9F-569B91E8CD1F} = {4B5D75F5-E2FC-4CCB-90EF-6DC4A0193032}
+		{02B17592-7DD8-4E2F-978B-E01AAAFCBC30} = {B06378CF-AFF4-48B3-8A9F-569B91E8CD1F}
+		{D613B1FD-2D37-41F2-BC2E-FD9527D76542} = {314A4A1E-1671-4F4C-BA1F-DEE73D584677}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		FileExplorer = |build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
+		FileExplorer = |build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
 	EndGlobalSection
 EndGlobal

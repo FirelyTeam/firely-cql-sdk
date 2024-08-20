@@ -203,6 +203,8 @@ Hl7.Cql.Elm.DeferredDefinition<T>.Access.get -> Hl7.Cql.Elm.AccessModifier
 Hl7.Cql.Elm.DeferredDefinition<T>.AddError(Hl7.Cql.Elm.CqlToElmError! error) -> Hl7.Cql.Elm.IDefinitionElement!
 Hl7.Cql.Elm.DeferredDefinition<T>.DeferredDefinition(string! name, Hl7.Cql.Elm.AccessModifier access, System.Func<T>! resolve) -> void
 Hl7.Cql.Elm.DeferredDefinition<T>.Definition.get -> System.Lazy<T>!
+Hl7.Cql.Elm.DeferredDefinition<T>.Library.get -> string!
+Hl7.Cql.Elm.DeferredDefinition<T>.Library.set -> void
 Hl7.Cql.Elm.DeferredDefinition<T>.Name.get -> string!
 Hl7.Cql.Elm.DeferredDefinition<T>.Resolve() -> T
 Hl7.Cql.Elm.DeferredDefinition<T>.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
@@ -321,11 +323,13 @@ Hl7.Cql.Elm.IdentifierRef
 Hl7.Cql.Elm.IdentifierRef.IdentifierRef() -> void
 Hl7.Cql.Elm.IdentifierRef.Name.get -> string!
 Hl7.Cql.Elm.IdentifierRef.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
+Hl7.Cql.Elm.IExpressionElement
 Hl7.Cql.Elm.If
 Hl7.Cql.Elm.If.If() -> void
 Hl7.Cql.Elm.IFunctionElement
 Hl7.Cql.Elm.IHasSignature
 Hl7.Cql.Elm.IHasSignature.Fluent.get -> bool
+Hl7.Cql.Elm.IHasSignature.Library.get -> string!
 Hl7.Cql.Elm.IHasSignature.Operands.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.OperandDef!>!
 Hl7.Cql.Elm.IHasSignature.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier!
 Hl7.Cql.Elm.Implies
@@ -859,6 +863,7 @@ static Hl7.Cql.Elm.TypeSpecifierExtensions.IsOrderedType(this Hl7.Cql.Elm.TypeSp
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToIntervalType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToListType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.ListTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToNamedType(this System.Xml.XmlQualifiedName! qname) -> Hl7.Cql.Elm.NamedTypeSpecifier!
+virtual Hl7.Cql.Elm.FunctionDef.Library.get -> string!
 ~Hl7.Cql.Elm.Aggregate.initialValue.get -> Hl7.Cql.Elm.Expression
 ~Hl7.Cql.Elm.Aggregate.initialValue.set -> void
 ~Hl7.Cql.Elm.Aggregate.iteration.get -> Hl7.Cql.Elm.Expression

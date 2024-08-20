@@ -450,7 +450,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             }).ToArray();
                         var paramTypes = paramList.Select(p => p.resultTypeSpecifier).ToArray();
                         var matches = havingSignatures
-                            .Where(ihs => ihs.BuildSignatureFromOperands().ExactlyMatches(paramTypes))
+                            .Where(ihs => ihs.Operands.Select(op=>op.operandTypeSpecifier).SequenceEqual(paramTypes))
                             .ToArray();
                         return (matches?.Length ?? 0) switch
                         {
@@ -501,7 +501,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         _ => Enumerable.Empty<IHasSignature>()
                     }).ToArray();
                 var ambiguousOverloads = functionDefs
-                    .Where(ihs => ihs.BuildSignatureFromOperands().ExactlyMatches(signature))
+                .Where(ihs => ihs.Operands.Select(op => op.operandTypeSpecifier).SequenceEqual(signature))
                     .ToArray();
                  return new FunctionRef { name = funcName, operand = paramList }
                     .WithResultType(SystemTypes.AnyType)
