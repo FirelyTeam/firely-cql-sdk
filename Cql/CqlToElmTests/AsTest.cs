@@ -160,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void FHIR_Range_To_Interval()
+        public void Choice_As()
         {
             // from MATGlobalCommonFunctionsFHIR4.cql function "Normalize Interval"
             var lib = MakeLibrary(@"
