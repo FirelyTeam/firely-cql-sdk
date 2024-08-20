@@ -6,7 +6,7 @@
 
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
-		<VersionPrefix>2.0.0</VersionPrefix>
+		<VersionPrefix>2.0.1</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
@@ -31,8 +31,7 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-    <FirelySdkVersion>5.7.0</FirelySdkVersion>
-		<!--<FirelySdkVersion>5.8.1</FirelySdkVersion>--><!-- Not yet -->
+    <FirelySdkVersion>5.9.1</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Compiler settings -->
@@ -79,5 +78,9 @@
 
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24318.1" PrivateAssets="All" />
 	</ItemGroup>
+
+	<PropertyGroup>
+		<Box> __________________________________________________________________________________________&#10;/&#10;{Text}&#10;\</Box>
+	</PropertyGroup>
 
 </Project>

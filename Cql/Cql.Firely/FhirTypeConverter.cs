@@ -52,6 +52,7 @@ namespace Hl7.Cql.Fhir
                             .ConvertCqlPrimitivesToFhir()
                             .ConvertCodeTypes(model)
                             .ConvertEnumToStrings()
+                            .ConvertSubtypeRelationships()
                             ;
             return converter;
         }
@@ -346,7 +347,6 @@ namespace Hl7.Cql.Fhir
             return converter;
         }
 
-
         internal static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {
             converter.AddConversion<byte[], string>(binary => Encoding.UTF8.GetString(binary));
@@ -416,6 +416,15 @@ namespace Hl7.Cql.Fhir
 
                 converter.AddConversion(enumType, codeOfEnumType, enumValue => Activator.CreateInstance(codeOfEnumType, enumValue)!);
             }
+            return converter;
+        }
+
+        /// <summary>
+        /// Adds conversions for types which the ELM model defines a type relationship that does not exist in the POCOs
+        /// </summary>
+        internal static TypeConverter ConvertSubtypeRelationships(this TypeConverter converter)
+        {
+            converter.AddConversion<M.Id, M.FhirString>(id => new M.FhirString(id.Value));
             return converter;
         }
     }

@@ -3,7 +3,7 @@ steps:
     displayName: Download Signing key file
     inputs:
       secureFile: cql-sdk.snk
-      retryCount: 
+      retryCount:
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   - task: CopyFiles@2
     displayName: Copy key file to $(Build.SourcesDirectory)
@@ -12,7 +12,7 @@ steps:
       Contents: cql-sdk.snk
       TargetFolder: $(Build.SourcesDirectory)
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
-  - powershell: |        
+  - powershell: |
           $filePaths = @('$(Build.SourcesDirectory)\Cql\*\bin\Release\*\Hl7.Cql*.dll',
           '$(Build.SourcesDirectory)\Cql\*\bin\Release\*\Ncqa.Cql*.dll',
           '$(Build.SourcesDirectory)*\bin\Release\*\Cql.*.dll',
@@ -22,24 +22,23 @@ steps:
           $files = @()
 
           # Iterate over each file path
-          foreach ($path in $filePaths) 
+          foreach ($path in $filePaths)
           {
               # Use Get-ChildItem to find files matching the path
-              $files += Get-ChildItem -Path $path -File 
+              $files += Get-ChildItem -Path $path -File
           }
 
-          Write-Verbose "Last exitcode before signing: $lastexitcode" 
+          Write-Verbose "Last exitcode before signing: $lastexitcode"
 
           foreach ($file in $files | Where-Object { $_ -notmatch "CoreTests" -and $_ -notmatch "CodeGeneration"})
-          {          
+          {
             Write-Verbose "Signing file: $file"
             & '$(Build.SourcesDirectory)\build\tools\sn.exe' -R $file  $(Build.SourcesDirectory)\cql-sdk.snk
-            Write-Verbose "Last exitcode after signing file: $lastexitcode" 
-          }           
+            Write-Verbose "Last exitcode after signing file: $lastexitcode"
+          }
           Write-VErbose "Last exitcode after signing all files: $lastexitcode"
-          # suppress exitcode 
+          # suppress exitcode
           if ($lastexitcode -lt 2) { $global:lastexitcode = 0 }
     displayName: Signing the dlls
     name: signing
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
-  

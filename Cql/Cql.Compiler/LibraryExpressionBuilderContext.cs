@@ -49,11 +49,6 @@ internal partial class LibraryExpressionBuilderContext
     public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
-            _logger.LogInformation("Preprocessing library '{library}'", LibraryKey);
-            var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryKey, Library);
-            var processor = new ElmPreprocessor(ls);
-            processor.Preprocess(Library);
-
             _logger.LogInformation("Building expressions for '{library}'", LibraryKey);
 
             if (Library.includes is { Length: > 0 } includeDefs)
@@ -122,3 +117,4 @@ internal partial class LibraryExpressionBuilderContext
             return LibraryDefinitions;
         });
 }
+

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
+
 	<!-- Download MVN Dependencies -->
 	<PropertyGroup>
 		<!-- If you change the version here, you also need to update it in the pom.xml file -->

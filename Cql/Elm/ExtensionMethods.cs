@@ -7,48 +7,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.Elm
 {
     public static class ExtensionMethods
     {
-        internal static TypeSpecifier[] BuildSignatureFromOperands(this IHasSignature hasSignature) =>
-            hasSignature.Operands.Select(o =>
-                                             o.GetTypeSpecifier() ??
-                                             throw new UntypedOperandInFunctionError(hasSignature, o).ToException()
-                                         ).ToArray();
-
-        internal static TypeSpecifier[] GetArgumentTypes(this FunctionRef funcRef) =>
-            (funcRef.operand ?? []).Select((o, i) =>
-                                             o.GetTypeSpecifier() ??
-                                             throw new UntypedOperandInFunctionRefError(funcRef, i).ToException()
-            ).ToArray();
-
-        internal static IReadOnlyCollection<IHasSignature> FilterOverloads(this OverloadedFunctionDef overloads, TypeSpecifier[] signature)
-        {
-            return overloads.Functions.Where(match).ToArray();
-
-            bool match(IHasSignature candidate) =>
-                candidate.BuildSignatureFromOperands().ExactlyMatches(signature);
-        }
-
-        internal static TypeSpecifier? GetTypeSpecifier(this IHasSignature func) =>
-            func.ResultTypeSpecifier ?? (func is Element e ? e.GetTypeSpecifier() : null);
-
-        /// <summary>
-        /// Compares two signatures for exact equality, based on the Equals of the TypeSpecifier.
-        /// </summary>
-        internal static bool ExactlyMatches(this TypeSpecifier[] me, TypeSpecifier[] signature)
-        {
-            return me.Length == signature.Length &&
-                   me.Zip(signature, (l, r) => r.Equals(l)).All(r => r);
-        }
-
         /// <summary>
         /// Determines whether a given symbol is visible for the kind of access given in <paramref name="access"/>.
         /// </summary>
@@ -58,74 +24,47 @@ namespace Hl7.Cql.Elm
         }
 
         /// <summary>
-        /// Retrieves all error nodes in the ELM tree rooted in <paramref name="root"/>.
+        /// Retrieves all error nodes in the ELM tree rooted in <paramref name="node"/>.
         /// </summary>
-        public static CqlToElmError[] GetErrors(this Element root)
+        public static CqlToElmError[] GetErrors(this Element node)
         {
             var allErrors = new HashSet<CqlToElmError>();
 
-            var visitor = new ElmTreeWalker(nodeHandler);
+            var visitor = new ElmTreeWalker(nodeHandler, nodeFilter);
 
-            visitor.Start(root);
+            visitor.Walk(node);
             return allErrors.ToArray();
 
-            bool nodeHandler(object node)
+            bool nodeFilter(PropertyInfo property)
             {
-                if (node is not Element element) return false;
-
-                var errors = element.annotation?.OfType<CqlToElmError>()?.ToArray() ?? Array.Empty<CqlToElmError>();
-
-                if (errors.Length > 0) {
-                    // propagate the element's locator to the error.
-                    // this is important for error reporting in the IDE.
-                    // TODO: fix in the source?
-                    // this only happens if someone calls the GetErrors function to invoke this
-                    var l = locator(element.locator);
-                    if (l is not null)
-                    {
-                        foreach (var error in errors)
-                        {
-                            error.startLine = l.Value.startLine;
-                            error.startLineSpecified = true;
-                            error.startChar = l.Value.startChar;
-                            error.startCharSpecified = true;
-                            error.endLine = l.Value.endLine;
-                            error.endLineSpecified = true;
-                            error.endChar = l.Value.endChar;
-                            error.endCharSpecified = true;
-                        }
-                    }
-
-                    // avoid duplicate errors.
-                    foreach (var error in errors)
-                        allErrors.Add(error);
+                var type = property.PropertyType;
+                if (type.IsAssignableTo(typeof(Element)))
+                {
+                    return true;
                 }
-                // Let the walker visit my children to scan for nested Elements.
+                else if (type.IsArray)
+                {
+                    if (type.GetElementType()!.IsAssignableTo(typeof(TypeSpecifier)))
+                        return false;
+                    else if (type.GetElementType()!.IsAssignableTo(typeof(Element)))
+                        return true;
+                }
                 return false;
             }
 
-            (int startLine, int startChar, int endLine, int endChar)? locator(string locator)
+            bool nodeHandler(object node)
             {
-                if (string.IsNullOrWhiteSpace(locator))
+                if (node is Element element && element.annotation?.OfType<CqlToElmError>() is { } errors && errors.Any())
                 {
-                    return null;
+                    // avoid duplicate errors.
+                    foreach (var error in errors)
+                    {
+                        if (!allErrors.Contains(error))
+                            allErrors.Add(error);
+                    }
                 }
-
-                var parts = locator.Split(new[] { '-', ':' }, StringSplitOptions.RemoveEmptyEntries);
-                if (parts.Length != 4)
-                {
-                    return null;
-                }
-
-                if (!int.TryParse(parts[0], out int startLine) ||
-                    !int.TryParse(parts[1], out int startChar) ||
-                    !int.TryParse(parts[2], out int endLine) ||
-                    !int.TryParse(parts[3], out int endChar))
-                {
-                    return null;
-                }
-
-                return (startLine, startChar, endLine, endChar);
+                // Let the walker visit my children.
+                return false;
             }
         }
 

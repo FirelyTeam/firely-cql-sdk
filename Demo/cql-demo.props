@@ -5,12 +5,12 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.7.0</FirelySdkVersion>
+		<FirelySdkVersion>5.9.1</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
-		<VersionPrefix>2.0.0</VersionPrefix>
+		<VersionPrefix>2.0.1</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
@@ -53,7 +53,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Box>==============================================&#10;Text&#10;==============================================</Box>
+		<Box> __________________________________________________________________________________________&#10;/&#10;{Text}&#10;\</Box>
 	</PropertyGroup>
 
 </Project>

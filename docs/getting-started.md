@@ -2,21 +2,57 @@
 
 The repository consists of two parts:
 * `Cql/` - the main body of code that produces the CQL engine itself, plus the PackagerCLI
+* `docs/` - documentation and other files that are useful to understand the codebase
+  * A [diagram](docs/packager-cli-dependency-graph.md) showing how all the classes and their dependencies involved.
+  * A [graphic](docs/CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
+  * The folder also contains a `CQL Engine v2.png` and `CQL Engine Architecture.docx` file that sketch the internal structure of the CQL engine. As should
+be expected, those files will always be somewhat outdated, but still serve as good overview of the codebase.
 * `Demo/` - a solution that demoes how to get from a CQL measure to an executable rule.
 
-It is important that you either build the Cql engine yourself before you try to build the Demo solution, since that uses parts of the Cql solution. Alternatively, you can tweak the Demo project to use the shipped NuGet packages for the Cql engine, instead of referring to the projects directly.
+It also links to submodule repositories that may be of interest to you:
+* `submodules/Firely.Cql.Sdk.Integration.Runner/` - an integration test runner used to run CMS measures.
 
-## The Cql solution
-Building the Cql solution should be as simple as doing a build in Visual Studio or running a `dotnet build`. It builds the CQL engine into a
-whole bunch of assemblies, plus builds the only executable in the solution, the PackagerCLI. The PackagerCLI takes CQL measures (in the form
-of ELM), turns them into equivalent C#, compiles the C# and then packages the original ELM, the C# code and the binary assembly data into a FHIR Library resources. It is used in the Demo project, so if you'd like to see example use for it (until we write the documentation), take a look at the provided
-`"ELM to C#"` build target in the Elm project within the Demo solution.
+## The Cql-Sdl-All solution
+The `Cql-Sdk-All.sln` solution includes all the projects in the repository, _and_ the submodules.
+In most cases you will not need to build the submodules, 
+since the purpose of it is to run the integration tests in the build pipeline (still to be done).
 
-The folder also contains a `CQL Engine v2.png` and `CQL Engine Architecture.docx` file that sketch the internal structure of the CQL engine. As should
-be expected, those files will always be somewhat outdated, but still serve as good overview of the codebase.
+If you do you want to open this solution in Visual Studio, 
+you can do so by following the following steps:
+* Clone the repository
+* Clone the submodules by running `git submodule update`
+* Then open the `Cql-Sdk-All.sln` solution in Visual Studio and build it.
 
+Note that you will see multiple repositories in the `Git Changes` tool window in Visual Studio.
+Each repository must be branched and committed separately.
+
+
+## The Cql-Sdk solution
+Building the Cql solution should be as simple as doing a build in Visual Studio or running a `dotnet build 'Cql-Sdk.slnf'`.
+It builds the CQL engine into a whole bunch of assemblies, 
+plus builds the only executable in the solution, the PackagerCLI. 
+The PackagerCLI takes CQL measures (in the form of ELM), 
+turns them into equivalent C#, 
+compiles the C# and then packages the original ELM, 
+the C# code and the binary assembly data into a FHIR Library resources.
+It is used in the Demo project, 
+so if you'd like to see example use for it (until we write the documentation),
+take a look at the provided `"ELM to C#"` build target in the Elm project within the Demo solution.
 
 ## The Demo folder
+
+* Read how to [get started with the Demo solution](docs/getting-started.md) included in the repository.
+* There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
+* [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
+* A [word document](cql/CQL%20Engine%20Architecture.docx) with background documentation on the design. May be somewhat outdated.
+
+The presentation is a good place to start, but note that we have made some minor changes to the public surface, 
+so the names of the classes in the presentation will differ from the examples in the Demo project itself.
+
+It is important that you either build the Cql engine yourself before you try to build the Demo solution, 
+since that uses parts of the Cql solution. 
+Alternatively, you can tweak the Demo project to use the shipped NuGet packages for the Cql engine, 
+instead of referring to the projects directly.
 
 ### (2.x update) Thanks to feedback, the Demo projects have been updated!
 After reviewing the following high level understanding of the Demo projects, be sure to see the detailed breakdown of the Demo projects below.
@@ -37,7 +73,11 @@ Prerequisites:
 
 Take a look at the `Cql` project in the Demo solution folder. Its `Build` directory contains the build target (including the Maven configuration files). This project is used for common build targets.
 
- There are multiple `Measures.*` projects where the and the `input` folder contains a set of demo CQL files. Running the build (manually) for these project turns these CQL files into ELM, and puts the files into the source directory of the next step (which is the `Elm` folder each respective project).
+ There are multiple `Measures.*` projects where the `input` folder contains a set of demo CQL files. 
+ Select the `Generate-CQL-to-ELM` build configuration in the solution explorer,
+ then build these projects which will generate ELM JSON files from the CQL,
+ and put them into the source `Elm` folder each respective project.
+
 
 ### 2. Turning ELM into C# and DLLs
 The next step does quite a bit at one:

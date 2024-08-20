@@ -2,8 +2,7 @@
 	<Import Project="..\cql-demo.props" />
 
 	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<Nullable>enable</Nullable>
+		<Configurations>Debug;Release;Generate-CQL-to-ELM</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -25,8 +24,8 @@
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 
-	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
-	<Import Project="../Cql/Build/ElmToCSharp.Targets.xml" />
+	<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="../Cql/Build/CqlToElm.Targets.xml" />
+	<Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="../Cql/Build/ElmToCSharp.Targets.xml" />
 
   <ItemGroup>
     <Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />

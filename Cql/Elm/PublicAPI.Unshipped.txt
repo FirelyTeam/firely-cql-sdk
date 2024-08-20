@@ -203,8 +203,6 @@ Hl7.Cql.Elm.DeferredDefinition<T>.Access.get -> Hl7.Cql.Elm.AccessModifier
 Hl7.Cql.Elm.DeferredDefinition<T>.AddError(Hl7.Cql.Elm.CqlToElmError! error) -> Hl7.Cql.Elm.IDefinitionElement!
 Hl7.Cql.Elm.DeferredDefinition<T>.DeferredDefinition(string! name, Hl7.Cql.Elm.AccessModifier access, System.Func<T>! resolve) -> void
 Hl7.Cql.Elm.DeferredDefinition<T>.Definition.get -> System.Lazy<T>!
-Hl7.Cql.Elm.DeferredDefinition<T>.Library.get -> string!
-Hl7.Cql.Elm.DeferredDefinition<T>.Library.set -> void
 Hl7.Cql.Elm.DeferredDefinition<T>.Name.get -> string!
 Hl7.Cql.Elm.DeferredDefinition<T>.Resolve() -> T
 Hl7.Cql.Elm.DeferredDefinition<T>.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
@@ -214,7 +212,7 @@ Hl7.Cql.Elm.DeferredFunctionDef
 Hl7.Cql.Elm.DeferredFunctionDef.DeferredFunctionDef(Hl7.Cql.Elm.AccessModifier access, bool fluent, string! name, Hl7.Cql.Elm.OperandDef![]! operand, System.Func<Hl7.Cql.Elm.FunctionDef!>! resolve) -> void
 Hl7.Cql.Elm.DeferredFunctionDef.Fluent.get -> bool
 Hl7.Cql.Elm.DeferredFunctionDef.Operands.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.OperandDef!>!
-Hl7.Cql.Elm.DeferredFunctionDef.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier?
+Hl7.Cql.Elm.DeferredFunctionDef.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier!
 Hl7.Cql.Elm.Descendents
 Hl7.Cql.Elm.Descendents.Descendents() -> void
 Hl7.Cql.Elm.DifferenceBetween
@@ -275,11 +273,9 @@ Hl7.Cql.Elm.ExpandValueSet.ExpandValueSet() -> void
 Hl7.Cql.Elm.Expression
 Hl7.Cql.Elm.Expression.Expression() -> void
 Hl7.Cql.Elm.ExpressionDef
-Hl7.Cql.Elm.ExpressionDef.Access.get -> Hl7.Cql.Elm.AccessModifier
 Hl7.Cql.Elm.ExpressionDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
 Hl7.Cql.Elm.ExpressionDef.accessLevel.set -> void
 Hl7.Cql.Elm.ExpressionDef.ExpressionDef() -> void
-Hl7.Cql.Elm.ExpressionDef.Name.get -> string!
 Hl7.Cql.Elm.ExpressionRef
 Hl7.Cql.Elm.ExpressionRef.ExpressionRef() -> void
 Hl7.Cql.Elm.ExtensionMethods
@@ -305,7 +301,7 @@ Hl7.Cql.Elm.FunctionDef.fluentSpecified.get -> bool
 Hl7.Cql.Elm.FunctionDef.fluentSpecified.set -> void
 Hl7.Cql.Elm.FunctionDef.FunctionDef() -> void
 Hl7.Cql.Elm.FunctionDef.Operands.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.OperandDef!>!
-Hl7.Cql.Elm.FunctionDef.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier?
+Hl7.Cql.Elm.FunctionDef.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier!
 Hl7.Cql.Elm.FunctionRef
 Hl7.Cql.Elm.FunctionRef.FunctionRef() -> void
 Hl7.Cql.Elm.GeometricMean
@@ -325,15 +321,13 @@ Hl7.Cql.Elm.IdentifierRef
 Hl7.Cql.Elm.IdentifierRef.IdentifierRef() -> void
 Hl7.Cql.Elm.IdentifierRef.Name.get -> string!
 Hl7.Cql.Elm.IdentifierRef.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
-Hl7.Cql.Elm.IExpressionElement
 Hl7.Cql.Elm.If
 Hl7.Cql.Elm.If.If() -> void
 Hl7.Cql.Elm.IFunctionElement
 Hl7.Cql.Elm.IHasSignature
 Hl7.Cql.Elm.IHasSignature.Fluent.get -> bool
-Hl7.Cql.Elm.IHasSignature.Library.get -> string!
 Hl7.Cql.Elm.IHasSignature.Operands.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.OperandDef!>!
-Hl7.Cql.Elm.IHasSignature.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier?
+Hl7.Cql.Elm.IHasSignature.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier!
 Hl7.Cql.Elm.Implies
 Hl7.Cql.Elm.Implies.Implies() -> void
 Hl7.Cql.Elm.In
@@ -802,8 +796,6 @@ override Hl7.Cql.Elm.ChoiceTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.GetHashCode() -> int
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.DateTime.ToString() -> string!
-override Hl7.Cql.Elm.ExpressionDef.ToString() -> string!
-override Hl7.Cql.Elm.FunctionDef.ToString() -> string!
 override Hl7.Cql.Elm.IncludeDef.ToString() -> string?
 override Hl7.Cql.Elm.IntervalTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.IntervalTypeSpecifier.GetHashCode() -> int
@@ -815,8 +807,6 @@ override Hl7.Cql.Elm.ListTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.NamedTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.NamedTypeSpecifier.GetHashCode() -> int
 override Hl7.Cql.Elm.NamedTypeSpecifier.ToString() -> string!
-override Hl7.Cql.Elm.OperandDef.GetTypeSpecifier() -> Hl7.Cql.Elm.TypeSpecifier?
-override Hl7.Cql.Elm.OperandDef.ToString() -> string!
 override Hl7.Cql.Elm.ParameterTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.ParameterTypeSpecifier.GetHashCode() -> int
 override Hl7.Cql.Elm.ParameterTypeSpecifier.ToString() -> string!
@@ -833,7 +823,7 @@ override Hl7.Cql.Elm.VersionedIdentifier.GetHashCode() -> int
 override Hl7.Cql.Elm.VersionedIdentifier.ToString() -> string?
 static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, Hl7.Cql.Elm.CqlToElmError! error) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, string! errorMessage, Hl7.Cql.Elm.ErrorType errorType = Hl7.Cql.Elm.ErrorType.semantic, Hl7.Cql.Elm.ErrorSeverity severity = Hl7.Cql.Elm.ErrorSeverity.error) -> T!
-static Hl7.Cql.Elm.ExtensionMethods.GetErrors(this Hl7.Cql.Elm.Element! root) -> Hl7.Cql.Elm.CqlToElmError![]!
+static Hl7.Cql.Elm.ExtensionMethods.GetErrors(this Hl7.Cql.Elm.Element! node) -> Hl7.Cql.Elm.CqlToElmError![]!
 static Hl7.Cql.Elm.Library.ComparerByNameAndVersion.get -> System.Collections.Generic.IComparer<Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Elm.Library.EqualityComparerByNameAndVersion.get -> System.Collections.Generic.IEqualityComparer<Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library!
@@ -869,8 +859,6 @@ static Hl7.Cql.Elm.TypeSpecifierExtensions.IsOrderedType(this Hl7.Cql.Elm.TypeSp
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToIntervalType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToListType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.ListTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToNamedType(this System.Xml.XmlQualifiedName! qname) -> Hl7.Cql.Elm.NamedTypeSpecifier!
-virtual Hl7.Cql.Elm.Element.GetTypeSpecifier() -> Hl7.Cql.Elm.TypeSpecifier?
-virtual Hl7.Cql.Elm.FunctionDef.Library.get -> string!
 ~Hl7.Cql.Elm.Aggregate.initialValue.get -> Hl7.Cql.Elm.Expression
 ~Hl7.Cql.Elm.Aggregate.initialValue.set -> void
 ~Hl7.Cql.Elm.Aggregate.iteration.get -> Hl7.Cql.Elm.Expression

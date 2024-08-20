@@ -3,6 +3,10 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
+		<Configurations>Debug;Release;Generate-CQL-to-ELM</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 		<Nullable>disable</Nullable>
 		<NoWarn>CS1591</NoWarn>
@@ -11,6 +15,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="FluentAssertions" Version="6.12.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -45,7 +50,8 @@
 		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
 	</PropertyGroup>
 
-	<Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
+	<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
+	<Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />
 
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">

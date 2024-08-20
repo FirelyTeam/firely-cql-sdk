@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
 [CqlLibrary("IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR", "1.3.000")]
 public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 {
@@ -750,69 +750,67 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			{
 				bool? p_(Extension @this)
 				{
-					string ay_ = @this?.Url;
-					FhirUri az_ = context.Operators.Convert<FhirUri>(ay_);
-					string ba_ = FHIRHelpers_4_3_000.ToString(az_);
-					bool? bb_ = context.Operators.Equal(ba_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					string aw_ = @this?.Url;
+					FhirUri ax_ = context.Operators.Convert<FhirUri>(aw_);
+					string ay_ = FHIRHelpers_4_3_000.ToString(ax_);
+					bool? az_ = context.Operators.Equal(ay_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return bb_;
+					return az_;
 				};
 				IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: null), p_);
 				DataType r_(Extension @this)
 				{
-					DataType bc_ = @this?.Value;
+					DataType ba_ = @this?.Value;
 
-					return bc_;
+					return ba_;
 				};
 				IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
 				DataType t_ = context.Operators.SingletonFrom<DataType>(s_);
-				FhirDateTime u_ = context.Operators.Convert<FhirDateTime>(t_);
-				CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
-				DataType w_ = FirstBladderCancerStaging?.Performed;
-				object x_ = FHIRHelpers_4_3_000.ToValue(w_);
-				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(x_);
-				CqlDateTime z_ = context.Operators.Start(y_);
-				object ab_ = FHIRHelpers_4_3_000.ToValue(w_);
-				CqlInterval<CqlDateTime> ac_ = QICoreCommon_2_0_000.toInterval(ab_);
-				CqlDateTime ad_ = context.Operators.Start(ac_);
-				CqlQuantity ae_ = context.Operators.Quantity(6m, "months");
-				CqlDateTime af_ = context.Operators.Add(ad_, ae_);
-				CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(z_, af_, false, true);
-				bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, null);
-				object aj_ = FHIRHelpers_4_3_000.ToValue(w_);
-				CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.toInterval(aj_);
-				CqlDateTime al_ = context.Operators.Start(ak_);
-				bool? am_ = context.Operators.Not((bool?)(al_ is null));
-				bool? an_ = context.Operators.And(ah_, am_);
-				bool? ao_(Extension @this)
+				CqlDateTime u_ = context.Operators.Convert<CqlDateTime>(t_);
+				DataType v_ = FirstBladderCancerStaging?.Performed;
+				object w_ = FHIRHelpers_4_3_000.ToValue(v_);
+				CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval(w_);
+				CqlDateTime y_ = context.Operators.Start(x_);
+				object aa_ = FHIRHelpers_4_3_000.ToValue(v_);
+				CqlInterval<CqlDateTime> ab_ = QICoreCommon_2_0_000.toInterval(aa_);
+				CqlDateTime ac_ = context.Operators.Start(ab_);
+				CqlQuantity ad_ = context.Operators.Quantity(6m, "months");
+				CqlDateTime ae_ = context.Operators.Add(ac_, ad_);
+				CqlInterval<CqlDateTime> af_ = context.Operators.Interval(y_, ae_, false, true);
+				bool? ag_ = context.Operators.In<CqlDateTime>(u_, af_, null);
+				object ai_ = FHIRHelpers_4_3_000.ToValue(v_);
+				CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval(ai_);
+				CqlDateTime ak_ = context.Operators.Start(aj_);
+				bool? al_ = context.Operators.Not((bool?)(ak_ is null));
+				bool? am_ = context.Operators.And(ag_, al_);
+				bool? an_(Extension @this)
 				{
-					string bd_ = @this?.Url;
-					FhirUri be_ = context.Operators.Convert<FhirUri>(bd_);
-					string bf_ = FHIRHelpers_4_3_000.ToString(be_);
-					bool? bg_ = context.Operators.Equal(bf_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					string bb_ = @this?.Url;
+					FhirUri bc_ = context.Operators.Convert<FhirUri>(bb_);
+					string bd_ = FHIRHelpers_4_3_000.ToString(bc_);
+					bool? be_ = context.Operators.Equal(bd_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return bg_;
+					return be_;
 				};
-				IEnumerable<Extension> ap_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
+				IEnumerable<Extension> ao_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
-						: null), ao_);
-				DataType aq_(Extension @this)
+						: null), an_);
+				DataType ap_(Extension @this)
 				{
-					DataType bh_ = @this?.Value;
+					DataType bf_ = @this?.Value;
 
-					return bh_;
+					return bf_;
 				};
-				IEnumerable<DataType> ar_ = context.Operators.Select<Extension, DataType>(ap_, aq_);
-				DataType as_ = context.Operators.SingletonFrom<DataType>(ar_);
-				FhirDateTime at_ = context.Operators.Convert<FhirDateTime>(as_);
-				CqlDateTime au_ = context.Operators.Convert<CqlDateTime>(at_);
-				CqlInterval<CqlDateTime> av_ = this.Measurement_Period();
-				bool? aw_ = context.Operators.In<CqlDateTime>(au_, av_, null);
-				bool? ax_ = context.Operators.And(an_, aw_);
+				IEnumerable<DataType> aq_ = context.Operators.Select<Extension, DataType>(ao_, ap_);
+				DataType ar_ = context.Operators.SingletonFrom<DataType>(aq_);
+				CqlDateTime as_ = context.Operators.Convert<CqlDateTime>(ar_);
+				CqlInterval<CqlDateTime> at_ = this.Measurement_Period();
+				bool? au_ = context.Operators.In<CqlDateTime>(as_, at_, null);
+				bool? av_ = context.Operators.And(am_, au_);
 
-				return ax_;
+				return av_;
 			};
 			IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
 			MedicationAdministration n_(Procedure FirstBladderCancerStaging) => 
@@ -824,18 +822,18 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> g_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
 		bool? h_(MedicationAdministration BCGNotGiven)
 		{
-			List<CodeableConcept> bi_ = BCGNotGiven?.StatusReason;
-			CqlConcept bj_(CodeableConcept @this)
+			List<CodeableConcept> bg_ = BCGNotGiven?.StatusReason;
+			CqlConcept bh_(CodeableConcept @this)
 			{
-				CqlConcept bn_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept bl_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return bn_;
+				return bl_;
 			};
-			IEnumerable<CqlConcept> bk_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bi_, bj_);
-			CqlValueSet bl_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
-			bool? bm_ = context.Operators.ConceptsInValueSet(bk_, bl_);
+			IEnumerable<CqlConcept> bi_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bg_, bh_);
+			CqlValueSet bj_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
+			bool? bk_ = context.Operators.ConceptsInValueSet(bi_, bj_);
 
-			return bm_;
+			return bk_;
 		};
 		IEnumerable<MedicationAdministration> i_ = context.Operators.Where<MedicationAdministration>(g_, h_);
 
