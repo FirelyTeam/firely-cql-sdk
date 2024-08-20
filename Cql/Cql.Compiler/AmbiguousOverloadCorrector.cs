@@ -26,9 +26,12 @@ internal class AmbiguousOverloadCorrector()
 {
     public void Fix(Library library)
     {
-        var statementSet = new HashSet<IDefinitionElement>(library.statements, new ExpressionSignatureComparer());
+        if (library.statements is { Length: > 0 } expressionDefs)
+        {
+            var statementSet = new HashSet<IDefinitionElement>(expressionDefs, new ExpressionSignatureComparer());
 
-        // Since we just only put ExpressionDefs into the HashSet, we can safely cast them back.
-        library.statements = statementSet.Cast<ExpressionDef>().ToArray();
+            // Since we just only put ExpressionDefs into the HashSet, we can safely cast them back.
+            library.statements = statementSet.Cast<ExpressionDef>().ToArray();
+        }
     }
 }
