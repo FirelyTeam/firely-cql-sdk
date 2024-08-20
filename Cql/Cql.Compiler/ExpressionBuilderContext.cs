@@ -217,41 +217,11 @@ partial class ExpressionBuilderContext
                     //@formatter:on
                 };
 
-                if (element.resultTypeName != null || element.resultTypeSpecifier != null)
-                {
-                    var resultType = TypeFor(element, false);
-                    if (
-                        resultType != null
-                        && expression?.Type != null
-                        && resultType != expression!.Type)
-                    {
-                        if (_cqlOperatorsBinder.TryConvert(expression, resultType, out var result))
-                        {
-                            _logger.LogDebug(
-                                "Changing expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
-                                element.GetType().Name,
-                                element.locator,
-                                resultType.ToCSharpString(Defaults.TypeCSharpFormat),
-                                expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
-                            expression = result.arg;
-                        }
-                        else
-                        {
-                            _logger.LogDebug(
-                                "Failed to change expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
-                                element.GetType().Name,
-                                element.locator,
-                                resultType.ToCSharpString(Defaults.TypeCSharpFormat),
-                                expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
-                        }
-                    }
-                }
-
+                expression = ConvertToResultType2(element, expression);
                 expression = Mutate(element, expression);
                 return expression!;
             }
         });
-
 
     private object?[] GetTypeArgs(Element element)
     {
@@ -1282,21 +1252,7 @@ partial class ExpressionBuilderContext
             return Expression.Constant(long.MinValue);
         }
         var bind = BindCqlOperator(nameof(ICqlOperators.Negate), e.operand);
-        var typeConversion = TypeConversion.NoMatch;
-        var converted = ChangeType(bind, e.resultTypeSpecifier, out typeConversion);
-        if (typeConversion == TypeConversion.NoMatch)
-        {
-            var tsType = TypeFor(e.resultTypeSpecifier);
-            if (tsType is null)
-            {
-                throw this.NewExpressionBuildingException($"Type for {e.resultTypeSpecifier.ToString()} could not be resolved.");
-            }
-            else
-            {
-                throw this.NewExpressionBuildingException($"Cannot convert {bind.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
-            }
-        }
-        else return converted;
+        return ConvertToResultType(e, bind);
     }
 
     private Expression Negate(Negate e)
@@ -1306,23 +1262,65 @@ partial class ExpressionBuilderContext
         else
         {
             var bind = BindCqlOperator(nameof(ICqlOperators.Negate), e.operand);
-            var typeConversion = TypeConversion.NoMatch;
-            var converted = ChangeType(bind, e.resultTypeSpecifier, out typeConversion);
-            if (typeConversion == TypeConversion.NoMatch)
+            return ConvertToResultType(e, bind);
+        }
+    }
+
+    private Expression ConvertToResultType(Element element, Expression expression)
+    {
+        var converted = ChangeType(expression, element.resultTypeSpecifier, out var typeConversion);
+        if (typeConversion != TypeConversion.NoMatch)
+            return converted;
+
+        var tsType = TypeFor(element.resultTypeSpecifier);
+        // if (tsType is null)
+        // {
+        //     throw this.NewExpressionBuildingException(
+        //         $"Type for {element.resultTypeSpecifier.ToString()} could not be resolved.");
+        // }
+        // else
+        // {
+            throw this.NewExpressionBuildingException(
+                $"Cannot convert {expression.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+        // }
+    }
+
+    private Expression? ConvertToResultType2(Element element, Expression? expression)
+    {
+        return ConvertToResultType(element, expression!);
+        /*if (element.resultTypeName != null || element.resultTypeSpecifier != null)
+        {
+            var resultType = TypeFor(element, false);
+            if (
+                resultType != null
+                && expression?.Type != null
+                && resultType != expression!.Type)
             {
-                var tsType = TypeFor(e.resultTypeSpecifier);
-                if (tsType is null)
+                if (_cqlOperatorsBinder.TryConvert(expression, resultType, out var result))
                 {
-                    throw this.NewExpressionBuildingException($"Type for {e.resultTypeSpecifier.ToString()} could not be resolved.");
+                    _logger.LogDebug(
+                        "Changing expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
+                        element.GetType().Name,
+                        element.locator,
+                        resultType.ToCSharpString(Defaults.TypeCSharpFormat),
+                        expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
+                    expression = result.arg;
                 }
                 else
                 {
-                    throw this.NewExpressionBuildingException($"Cannot convert {bind.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                    _logger.LogDebug(
+                        "Failed to change expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
+                        element.GetType().Name,
+                        element.locator,
+                        resultType.ToCSharpString(Defaults.TypeCSharpFormat),
+                        expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
                 }
             }
-            else return converted;
         }
+
+        return expression;*/
     }
+
 }
 
 #endregion
@@ -2223,7 +2221,7 @@ partial class ExpressionBuilderContext
                         return Expression.Default(type);
                     }
                     else if (typeConversion == TypeConversion.OperatorConvert) // use the custom conversion function
-                    { 
+                    {
                         return converted;
                     }
                     else
