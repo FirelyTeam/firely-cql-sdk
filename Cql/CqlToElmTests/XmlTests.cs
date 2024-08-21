@@ -36,8 +36,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Run(TestCase testCase)
         {
+            string testFullName = $"{testCase.Category}: {testCase.TestName}";
+
             if (SkippedTests.DoesNotCompile.TryGetValue(testCase.TestName, out var reason))
-                Assert.Inconclusive($"Case {testCase.Category}: {testCase.TestName} skipped: {reason}");
+                Assert.Inconclusive($"Case {testFullName} skipped: {reason}");
 
             // If you want to test a particular case, you can uncomment the following lines
             // if (testCase.TestName != "AgeInYearsAt")
@@ -47,13 +49,13 @@ namespace Hl7.Cql.CqlToElm.Test
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
             {
-                Assert.Fail($"Case {testCase.Category}: {testCase.TestName} expression compiled with errors: {expressionErrors.First().message}");
+                Assert.Fail($"Case {testFullName} expression compiled with errors: {expressionErrors.First().message}");
                 return;
             }
 
             if (testCase.Expectation is null)
             {
-                Assert.Inconclusive($"Case {testCase.Category}: {testCase.TestName} is inconclusive; no expectation provided.");
+                Assert.Inconclusive($"Case {testFullName} is inconclusive; no expectation provided.");
                 return;
             }
 
@@ -61,13 +63,13 @@ namespace Hl7.Cql.CqlToElm.Test
             var expectationErrors = expectation.GetErrors();
             if (expectationErrors.Any())
             {
-                Assert.Fail($"Case {testCase.Category}: {testCase.TestName} expectation compiled with errors: {expressionErrors.First().message}");
+                Assert.Fail($"Case {testFullName} expectation compiled with errors: {expressionErrors.First().message}");
                 return;
             }
 
             if (SkippedTests.DoesNotMatchExpectation.TryGetValue(testCase.TestName, out var doesNotMatchReason))
             {
-                Assert.Inconclusive($"Cannot evaluate case {testCase.Category}: {testCase.TestName}: {doesNotMatchReason}");
+                Assert.Inconclusive($"Cannot evaluate case {testFullName}: {testCase.TestName}: {doesNotMatchReason}");
                 return;
             }
 
@@ -79,7 +81,7 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var expressionValue = LibraryExpressionBuilder.Lambda(expression).Compile().DynamicInvoke(CqlContext);
                 var expectationValue = LibraryExpressionBuilder.Lambda(expectation).Compile().DynamicInvoke(CqlContext);
-                Assert.Fail($"Expected {expectationValue}, but got {expressionValue}");
+                Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
             }
         }
 
