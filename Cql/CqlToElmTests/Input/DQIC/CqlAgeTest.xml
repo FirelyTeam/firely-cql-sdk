@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+	name="CqlAgeTest" reference="https://cql.hl7.org/09-b-cqlreference.html#age">
+	<group name="Age">
+		<test name="CalculateAgeInYearsAt">
+			<expression>CalculateAgeInYearsAt(@1976-01-01, @2020-01-02)</expression>
+			<output>44</output>
+		</test>
+		<test name="CalculateAgeAt">
+			<expression>CalculateAgeInYearsAt(@1976-01-01, @2020-01-02)</expression>
+			<output>44</output>
+		</test>
+	</group>
+</tests>
