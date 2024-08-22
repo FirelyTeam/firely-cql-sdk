@@ -225,23 +225,24 @@ partial class ExpressionBuilderContext
 
                 Expression ConvertToResultType()
                 {
-                    var converted = ChangeType(expression, element.resultTypeSpecifier, out var typeConversion);
-                    if (typeConversion != TypeConversion.NoMatch)
-                        return converted;
+                    var tsType = TypeFor(element.resultTypeSpecifier, false);
+                    if (tsType is not null)
+                    {
+                        var converted = ChangeType(expression, element.resultTypeSpecifier, out var typeConversion);
+                        if (typeConversion != TypeConversion.NoMatch)
+                            return converted;
 
+                        // If we make this a hard fail, 15 unit tests fail.
+                        // throw this.NewExpressionBuildingException(
+                        //      $"Cannot convert {expression.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
 
-                    var tsType = TypeFor(element.resultTypeSpecifier);
-
-                    // If we make this a hard fail, 15 unit tests fail.
-                    // throw this.NewExpressionBuildingException(
-                    //      $"Cannot convert {expression.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
-
-                    _logger.LogDebug(
-                        "Failed to change expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
-                        element.GetType().Name,
-                        element.locator,
-                        tsType.ToCSharpString(Defaults.TypeCSharpFormat),
-                        expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
+                        _logger.LogDebug(
+                            "Failed to change expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
+                            element.GetType().Name,
+                            element.locator,
+                            tsType.ToCSharpString(Defaults.TypeCSharpFormat),
+                            expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
+                    }
 
                     return expression;
                 }
@@ -454,7 +455,7 @@ partial class ExpressionBuilderContext
         if (list.resultTypeSpecifier is ListTypeSpecifier listTypeSpecifier)
         {
 
-            var elementType = TypeFor(listTypeSpecifier.elementType);
+            var elementType = TypeFor(listTypeSpecifier.elementType)!;
             var elements = TranslateArgs(list.element);
             if (!elementType.IsNullableValueType(out _) && elements.Any(exp => exp.Type.IsNullableValueType(out _)))
             {
@@ -914,7 +915,7 @@ partial class ExpressionBuilderContext
             if (retrieve.resultTypeSpecifier is ListTypeSpecifier listTypeSpecifier)
             {
                 cqlRetrieveResultType = listTypeSpecifier.elementType is NamedTypeSpecifier nts ? nts.name.Name : null;
-                sourceElementType = TypeFor(listTypeSpecifier.elementType);
+                sourceElementType = TypeFor(listTypeSpecifier.elementType)!;
             }
             else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.").WithContext(this);
         }
@@ -1098,7 +1099,14 @@ partial class ExpressionBuilderContext
     protected Expression FunctionRef(FunctionRef op)
     {
         Expression[] operands = TranslateArgs(op.operand);
+
+        // NOTE: Breaks
+        //var resultType = op.resultTypeSpecifier ?? op.resultTypeName?.ToNamedType() ??
+        //                 throw new InvalidOperationException($"FunctionRef {op.libraryName + "." + op.name} has no result type specifier or result type name.");
+        //var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, resultType);
+
         var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, op.resultTypeSpecifier);
+
         return invoke;
     }
 
@@ -1110,7 +1118,7 @@ partial class ExpressionBuilderContext
             Type? expressionType = null;
             if (expressionRef.resultTypeSpecifier != null)
             {
-                expressionType = TypeFor(expressionRef.resultTypeSpecifier);
+                expressionType = TypeFor(expressionRef.resultTypeSpecifier)!;
             }
             else if (!string.IsNullOrWhiteSpace(expressionRef.resultTypeName?.Name))
             {
@@ -1183,7 +1191,7 @@ partial class ExpressionBuilderContext
 
         var argumentTypes = arguments.SelectToArray(a => a.Type);
         var selected = _libraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
-        Type definitionType = GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
+        Type definitionType = Expression.GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
         var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
 
         // all functions still take the bundle and context parameters, plus whatver the operands
@@ -2084,7 +2092,7 @@ partial class ExpressionBuilderContext
             Type? resultType = null;
             if (queryAggregate.resultTypeSpecifier is { } typeSpecifier)
             {
-                resultType = TypeFor(typeSpecifier);
+                resultType = TypeFor(typeSpecifier)!;
             }
             else if (!string.IsNullOrWhiteSpace(queryAggregate.resultTypeName.Name!))
             {
@@ -2134,7 +2142,7 @@ partial class ExpressionBuilderContext
                 // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
                 if ((list.element?.Length ?? 0) == 0)
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!);
+                    var type = TypeFor(@as.asTypeSpecifier!)!;
                     if (_typeResolver.IsListType(type))
                     {
                         var listElementType = _typeResolver.GetListElementType(type) ??
@@ -2164,17 +2172,15 @@ partial class ExpressionBuilderContext
             {
                 if (@as.operand is Null)
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!);
+                    var type = TypeFor(@as.asTypeSpecifier!)!;
                     var defaultExpression = Expression.Default(type);
                     return new ElmAsExpression(defaultExpression, type, @as.strict);
                 }
                 else
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!);
+                    var type = TypeFor(@as.asTypeSpecifier!)!;
                     var operand = TranslateArg(@as.operand!);
-                    var operandType = operand.Type;
-                    var typeConversion = TypeConversion.NoMatch;
-                    var converted = ChangeType(operand, type, out typeConversion);
+                    var converted = ChangeType(operand, type, out var typeConversion);
                     if (typeConversion == TypeConversion.NoMatch)
                     {
                         // log an unsafe cast
@@ -2225,15 +2231,15 @@ partial class ExpressionBuilderContext
         {
             if (@is.isTypeSpecifier is ChoiceTypeSpecifier choice)
             {
-                var firstChoiceType = TypeFor(choice.choice[0]) ??
-                                      throw this.NewExpressionBuildingException(
-                                          $"Could not resolve type for Is expression");
+                var firstChoiceType = TypeFor(choice.choice[0], false) ??
+                                      throw this.NewExpressionBuildingException("Could not resolve type for Is expression");
+
                 Expression result = op.NewTypeIsExpression(firstChoiceType);
                 for (int i = 1; i < choice.choice.Length; i++)
                 {
-                    var cti = TypeFor(choice.choice[i]) ??
-                              throw this.NewExpressionBuildingException(
-                                  $"Could not resolve type for Is expression");
+                    var cti = TypeFor(choice.choice[i], false) ??
+                              throw this.NewExpressionBuildingException("Could not resolve type for Is expression");
+
                     var ie = op.NewTypeIsExpression(cti);
                     result = Expression.Or(result, ie);
                 }
@@ -2242,7 +2248,7 @@ partial class ExpressionBuilderContext
                 return ta;
             }
 
-            type = TypeFor(@is.isTypeSpecifier) ??
+            type = TypeFor(@is.isTypeSpecifier, false) ??
                    throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
         }
         else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
@@ -2272,18 +2278,25 @@ partial class ExpressionBuilderContext
         TypeSpecifier? typeSpecifier,
         out TypeConversion typeConversion) // @TODO: Cast - ChangeType
     {
-        if (typeSpecifier is not null
-            && TypeFor(typeSpecifier) is { } resultType
-            && resultType != expr.Type)
+        if (typeSpecifier is not null)
         {
-            var typeAs = ChangeType(expr, resultType, out typeConversion);
-            return typeAs;
+            if (TypeFor(typeSpecifier, false) is { } resultType)
+            {
+                if (resultType != expr.Type)
+                {
+                    var typeAs = ChangeType(expr, resultType, out typeConversion);
+                    return typeAs;
+                }
+            }
+            else
+            {
+                typeConversion = TypeConversion.NoMatch;
+                return expr;
+            }
         }
-        else
-        {
-            typeConversion = TypeConversion.ExactType;
-            return expr;
-        }
+
+        typeConversion = TypeConversion.ExactType;
+        return expr;
     }
 
 
