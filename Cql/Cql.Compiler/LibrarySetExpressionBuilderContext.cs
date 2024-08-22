@@ -33,16 +33,8 @@ internal partial class LibrarySetExpressionBuilderContext
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet() =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
-            var ambiguousOverloadCorrector = new AmbiguousOverloadCorrector();
-
             foreach (var library in LibrarySet)
             {
-                // Make sure all overloads in the library are unique.
-                // This is a fix for QICore-based CQL, where the functions only differ by profiles on the same resource.
-                // We should remove this when the compiler is fixed.
-                // See https://github.com/FirelyTeam/firely-cql-sdk/issues/438.
-                ambiguousOverloadCorrector.Fix(library);
-
                 var librarySetDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
                 LibrarySetDefinitions.Merge(librarySetDefinitions);
             }

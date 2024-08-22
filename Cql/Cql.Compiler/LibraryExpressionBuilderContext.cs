@@ -15,6 +15,7 @@ namespace Hl7.Cql.Compiler;
 
 internal partial class LibraryExpressionBuilderContext
 {
+    private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();
     private readonly ILogger<LibraryExpressionBuilder> _logger;
     private readonly ExpressionBuilder _expressionBuilder;
 
@@ -49,7 +50,14 @@ internal partial class LibraryExpressionBuilderContext
     public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
-            _logger.LogInformation("Preprocessing library '{library}'", LibraryKey);
+            // Make sure all overloads in the library are unique.
+            // This is a fix for QICore-based CQL, where the functions only differ by profiles on the same resource.
+            // We should remove this when the compiler is fixed.
+            // See https://github.com/FirelyTeam/firely-cql-sdk/issues/438.
+            _logger.LogInformation("Preprocessing library '{library}' - AmbiguousOverloadCorrector", LibraryKey);
+            AmbiguousOverloadCorrector.Fix(Library);
+
+            _logger.LogInformation("Preprocessing library '{library}' - ElmPreprocessor", LibraryKey);
             var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryKey, Library);
             var processor = new ElmPreprocessor(ls);
             processor.Preprocess(Library);
