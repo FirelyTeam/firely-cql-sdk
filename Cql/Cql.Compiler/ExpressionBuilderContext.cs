@@ -1099,7 +1099,6 @@ partial class ExpressionBuilderContext
     protected Expression FunctionRef(FunctionRef op)
     {
         Expression[] operands = TranslateArgs(op.operand);
-
         // NOTE: Breaks
         //var resultType = op.resultTypeSpecifier ?? op.resultTypeName?.ToNamedType() ??
         //                 throw new InvalidOperationException($"FunctionRef {op.libraryName + "." + op.name} has no result type specifier or result type name.");
@@ -1175,42 +1174,42 @@ partial class ExpressionBuilderContext
         //
         // TODO: To fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397
 
-        // string libraryName = _libraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
-        //                      ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
-        //
-        // var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
-        // var convertedArguments = arguments
-        //                          .Prepend(CqlExpressions.ParameterExpression)
-        //                          .ToArray();
-        // var funcType = convertedArguments.Select(a=>a.Type).Append(rtt).ToArray();
-        // Type definitionType = GetFuncType(funcType);
-        // return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
-
         string libraryName = _libraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
                              ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
-        var argumentTypes = arguments.SelectToArray(a => a.Type);
-        var selected = _libraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
-        Type definitionType = Expression.GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
-        var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
-
-        // all functions still take the bundle and context parameters, plus whatver the operands
-        // to the actual function are.
+        var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
         var convertedArguments = arguments
-                                 .Select((arg, i) =>
-                                 {
-                                     var argConversion = TypeConversion.NoMatch;
-                                     var converted = ChangeType(arg, parameterTypes[i], out argConversion);
-                                     if (argConversion == TypeConversion.NoMatch)
-                                         throw this.NewExpressionBuildingException($"Cannot convert {arg.Type} to {parameterTypes[i]}.");
-                                     else return converted;
-                                 })
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
-
+        var funcType = convertedArguments.Select(a => a.Type).Append(rtt).ToArray();
+        Type definitionType = Expression.GetFuncType(funcType);
         return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
 
-        bool CheckConversion(Type from, Type to) => _typeConverter.CanConvert(from, to);
+        //string libraryName = _libraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
+        //                     ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
+
+        //var argumentTypes = arguments.SelectToArray(a => a.Type);
+        //var selected = _libraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
+        //Type definitionType = Expression.GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
+        //var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
+
+        //// all functions still take the bundle and context parameters, plus whatver the operands
+        //// to the actual function are.
+        //var convertedArguments = arguments
+        //                         .Select((arg, i) =>
+        //                         {
+        //                             var argConversion = TypeConversion.NoMatch;
+        //                             var converted = ChangeType(arg, parameterTypes[i], out argConversion);
+        //                             if (argConversion == TypeConversion.NoMatch)
+        //                                 throw this.NewExpressionBuildingException($"Cannot convert {arg.Type} to {parameterTypes[i]}.");
+        //                             else return converted;
+        //                         })
+        //                         .Prepend(CqlExpressions.ParameterExpression)
+        //                         .ToArray();
+
+        //return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
+
+        //bool CheckConversion(Type from, Type to) => _typeConverter.CanConvert(from, to);
     }
 
     protected Expression InvokeDefinitionThroughRuntimeContext(

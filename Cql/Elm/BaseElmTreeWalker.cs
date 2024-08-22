@@ -96,4 +96,10 @@ internal abstract class BaseElmTreeWalker
             _visited.Pop();
         }
     }
+
+    /// <summary>
+    /// Walks the entire library.
+    /// </summary>
+    /// <param name="library">The library to walk.</param>
+    public virtual void Walk(Library library) => StartInternal(library);
 }

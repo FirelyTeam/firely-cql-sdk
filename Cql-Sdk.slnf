@@ -5,6 +5,7 @@
       "Cql\\CodeGeneration.NET\\CodeGeneration.NET.csproj",
       "Cql\\CoreTests\\CoreTests.csproj",
       "Cql\\Cql.Abstractions\\Cql.Abstractions.csproj",
+      "Cql\\Cql.BuildTasks\\Cql.BuildTasks.csproj",
       "Cql\\Cql.Comparers\\Cql.Comparers.csproj",
       "Cql\\Cql.Compiler\\Cql.Compiler.csproj",
       "Cql\\Cql.Conversion\\Cql.Conversion.csproj",

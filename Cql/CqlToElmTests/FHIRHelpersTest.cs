@@ -138,5 +138,34 @@ namespace Hl7.Cql.CqlToElm.Test
             any.resultTypeSpecifier.Should().NotBeNull();
             any.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
         }
+
+        //[TestMethod]
+        //public void SDE_Ethnicity()
+        //{
+        //    var services = ServiceCollection().BuildServiceProvider();
+        //    var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
+        //    using var scope = services.CreateScope();
+        //    AddFHIRHelpers(libraryProvider, scope);
+        //    var lib = MakeLibrary(services, @"
+        //        library SupplementalDataElements version '3.4.000'
+
+        //        using QICore version '4.1.1'
+
+        //        include FHIRHelpers version '4.0.1' called FHIRHelpers
+
+        //        context Patient
+
+        //        define ""SDE Ethnicity"":
+        //            Patient.ethnicity E
+        //                return Tuple {
+        //                    codes: { E.ombCategory }
+        //                        union E.detailed,
+        //                    display: E.text
+        //                }
+        //    ");
+        //    var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
+        //    var delegates = lambdas.CompileAll();
+        //}
+
     }
 }

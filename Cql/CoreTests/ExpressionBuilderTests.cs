@@ -5,6 +5,9 @@ using System;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.CodeGeneration.NET;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace CoreTests
 {
@@ -69,13 +72,23 @@ namespace CoreTests
             Assert.IsTrue(definitions.Libraries.Any());
         }
 
-
         [TestMethod]
         public void Get_Property_Uses_TypeResolver()
         {
             var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", Factory.TypeManager.Resolver)!;
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
+        }
+
+        [TestMethod]
+        [Ignore("Currently failing")]
+        public void SupplementalDataElements()
+        {
+            var fh = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.3.000.json"));
+            var lib = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\SupplementalDataElements.json"));
+            var ls = new LibrarySet("", fh, lib);
+            var cs = ls.ToCSharp();
+            var assemblies = ls.Compile();
         }
 
     }

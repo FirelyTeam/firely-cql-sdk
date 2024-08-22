@@ -14,5 +14,9 @@ Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.TypeFormat.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat.Explicit = 2 -> Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat.Var = 1 -> Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
+Hl7.Cql.CodeGeneration.NET.LibrarySetExtensions
 static Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 static Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
+static Hl7.Cql.CodeGeneration.NET.LibrarySetExtensions.Compile(this Hl7.Cql.Compiler.LibrarySet! librarySet) -> System.Collections.Generic.IDictionary<string!, byte[]!>!
+static Hl7.Cql.CodeGeneration.NET.LibrarySetExtensions.ToCSharp(this Hl7.Cql.Compiler.LibrarySet! librarySet) -> System.Collections.Generic.IDictionary<string!, string!>!
+static Hl7.Cql.CodeGeneration.NET.LibrarySetExtensions.ToCSharp(this Hl7.Cql.Compiler.LibrarySet! librarySet, System.IServiceProvider! services) -> System.Collections.Generic.IDictionary<string!, string!>!

@@ -30,27 +30,21 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
 
     protected override bool Process(object node)
     {
-        // Do not process anything else than FunctionRefs/ExpressionRefs
-        if (node is not ExpressionRef reference)
-            return false;
-
-        // If the FunctionRef is ok, we're done.
-        if (reference.resultTypeSpecifier is not null)
-            return true;
-
-        // If it has a resultTypeName but no resultTypeSpecifier, make one.
-        if (reference.resultTypeName is not null)
+        if (node is ExpressionRef element && element.resultTypeSpecifier is null)
         {
-            reference.resultTypeSpecifier = reference.resultTypeName.ToNamedType();
-            return true;
+            switch (node)
+            {
+                case FunctionRef fref: FixFunctionRef(_library!, fref); break;
+                case ExpressionRef exref: FixExpressionRef(_library!, exref); break;
+                default: break;
+            }
+            FixElement(_library!, element);
+
+            //if (element.resultTypeSpecifier is null)
+            //    throw new InvalidOperationException("Result type specifier is still null after attempting to fix it.");
+
         }
-
-        if (reference is FunctionRef fref)
-            FixFunctionRef(_library!, fref);
-        else
-            FixExpressionRef(_library!, reference);
-
-        return true;
+        return false;
     }
 
     private void FixExpressionRef(Library library, ExpressionRef reference)
@@ -62,6 +56,15 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
         reference.resultTypeSpecifier = expressionDef.GetTypeSpecifier();
     }
 
+    private void FixElement(Library library, Element element)
+    {
+        // Ensure resultTypeSpecifier is always populated.
+        if (element.resultTypeSpecifier is null && element.resultTypeName is not null)
+        {
+            element.resultTypeSpecifier = new NamedTypeSpecifier { name = element.resultTypeName };
+        }
+    }
+
     private void FixFunctionRef(Library library, FunctionRef reference)
     {
         // If we cannot find the symbol at all, protest.
@@ -71,18 +74,18 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
         switch (expressionDef)
         {
             case OverloadedFunctionDef mg:
-            {
-                var signature = reference.signature ?? reference.GetArgumentTypes();
-                var candidates = mg.FilterOverloads(signature);
-
-                reference.resultTypeSpecifier = candidates.Count switch
                 {
-                    0   => throw new UnresolvedReferenceError(library, reference).ToException(),
-                    > 1 => throw new AmbiguousMatch(library, reference).ToException(),
-                    _   => candidates.Single().GetTypeSpecifier()
-                };
-                break;
-            }
+                    var signature = reference.signature ?? reference.GetArgumentTypes();
+                    var candidates = mg.FilterOverloads(signature);
+
+                    reference.resultTypeSpecifier = candidates.Count switch
+                    {
+                        0 => throw new UnresolvedReferenceError(library, reference).ToException(),
+                        > 1 => throw new AmbiguousMatch(library, reference).ToException(),
+                        _ => candidates.Single().GetTypeSpecifier()
+                    };
+                    break;
+                }
             case IHasSignature sig:
                 // No overloads, just return the type of the expression,
                 // if signature and params don't match, we'll have semantic errors later.

@@ -51,7 +51,7 @@
 	</PropertyGroup>
 
 	<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
-	<Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />
+	<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />
 
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">
@@ -69,5 +69,14 @@
 		<None Update="Input\ValueSets\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Input\ELM\Libs\FHIRHelpers-4.3.000.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\Libs\SupplementalDataElements.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>
