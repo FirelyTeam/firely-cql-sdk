@@ -16,6 +16,7 @@ using Hl7.Fhir.Model;
 using FhirLibrary = Hl7.Fhir.Model.Library;
 using Annotation = Hl7.Cql.Elm.Annotation;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
+using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Packaging;
 
@@ -53,59 +54,40 @@ internal class ResourcePackager
 
         foreach (var (name, asmData) in assembliesByLibraryName)
         {
-            if (name is "TupleTypes")
+            var library = librarySet.GetLibrary(name)!;
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
+            if (!elmFile.Exists)
+                elmFile = new FileInfo(Path.Combine(elmDirectory.FullName,
+                                                    $"{library.identifier?.id ?? string.Empty}.json"));
+
+            if (!elmFile.Exists)
+                throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
+
+            var cqlFiles =
+                cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
+            if (cqlFiles.Length == 0)
             {
-                var tuplesBinary = new Binary
-                {
-                    Id = "TupleTypes-Binary",
-                    ContentType = "application/octet-stream",
-                    Data = asmData.Binary,
-                };
-                OnResourceCreated(tuplesBinary);
-
-                foreach (var sourceKvp in asmData.SourceCode)
-                {
-                    var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
-                    var tuplesCSharpBinary = new Binary
-                    {
-                        Id = sourceKvp.Key.Replace("_", "-"),
-                        ContentType = "text/plain",
-                        Data = tuplesSourceBytes,
-                    };
-                    OnResourceCreated(tuplesCSharpBinary);
-                }
-            }
-            else
-            {
-                var library = librarySet.GetLibrary(name)!;
-                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
-                if (!elmFile.Exists)
-                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName,
-                        $"{library.identifier?.id ?? string.Empty}.json"));
-
-                if (!elmFile.Exists)
-                    throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
-
-                var cqlFiles =
-                    cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
+                cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
                 if (cqlFiles.Length == 0)
-                {
-                    cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
-                    if (cqlFiles.Length == 0)
-                        throw new InvalidOperationException($"{library.identifier!.id}.cql");
-                }
-
-                if (cqlFiles.Length > 1)
-                    throw new InvalidOperationException($"More than 1 CQL file found.");
-
-                var cqlFile = cqlFiles[0];
-                if (library.NameAndVersion() is null)
-                    throw new InvalidOperationException("Library NameAndVersion should not be null.");
-
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, resourceCanonicalRootUrl, asmData, typeCrosswalk, library);
-                librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
-                OnResourceCreated(fhirLibrary);
+                    throw new InvalidOperationException($"{library.identifier!.id}.cql");
             }
+
+            if (cqlFiles.Length > 1)
+                throw new InvalidOperationException($"More than 1 CQL file found.");
+
+            var cqlFile = cqlFiles[0];
+            if (library.NameAndVersion() is null)
+                throw new InvalidOperationException("Library NameAndVersion should not be null.");
+
+            var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, resourceCanonicalRootUrl, asmData, typeCrosswalk, library);
+            librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
+
+            // Analyze datarequirements and add to the FHIR Library resource.
+            var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, library);
+            var dataRequirements = dataRequirementsAnalyzer.Analyze();
+            fhirLibrary.DataRequirement.AddRange(dataRequirements);
+
+            OnResourceCreated(fhirLibrary);
         }
 
         foreach (var library in librarySet)
@@ -206,7 +188,7 @@ internal class ResourcePackager
         var library = new FhirLibrary();
         library.Content.Add(attachment);
         library.Type = LogicLibraryCodeableConcept;
-        string libraryId = $"{elmLibrary!.NameAndVersion()}";
+        string libraryId = $"{elmLibrary!.identifier.id}";
         library.Id = libraryId!;
         library.Version = elmLibrary!.identifier?.version!;
         library.Name = elmLibrary!.identifier?.id!;
@@ -240,12 +222,39 @@ internal class ResourcePackager
 
         foreach (var include in elmLibrary?.includes ?? [])
         {
-            var includeId = $"{include.path}-{include.version}";
+            string includeVersionString = string.IsNullOrEmpty(include.version) ? string.Empty : $"|{include.version}";
+            string includeIdMaybeVersion = $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}Library/{include.path}{includeVersionString}";
             library.RelatedArtifact.Add(new RelatedArtifact
             {
                 Type = RelatedArtifact.RelatedArtifactType.DependsOn,
-                Resource = includeId,
+                Resource = includeIdMaybeVersion,
             });
+        }
+
+        var cqlOptions = CqlToElmInfoToFhir(elmLibrary!, typeCrosswalk);
+        if (cqlOptions.Any())
+        {
+            // Adding CQL Options as a contained resource
+            // See: https://build.fhir.org/domainresource-definitions.html#DomainResource.contained
+
+            var p = new Parameters();
+            p.Id = "options";
+            p.Parameter.AddRange(cqlOptions);
+            library.Contained = [p];
+
+            // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
+            // dom-3: If the resource is contained in another resource,
+            //        it SHALL be referred to from elsewhere in the resource
+            //        or SHALL refer to the containing resource
+            //
+            // This is done by adding an extension. (Example: https://build.fhir.org/ig/HL7/cql-ig/Library-CQLExample.json.html)
+
+            var extension = new Extension
+            {
+                Url = "http://hl7.org/fhir/StructureDefinition/cqf-cqlOptions",
+                Value = new ResourceReference { Reference = "#options" },
+            };
+            library.Extension.Add(extension);
         }
 
         if (cqlFile!.Exists)
@@ -285,6 +294,47 @@ internal class ResourcePackager
             }
         }
         return library;
+    }
+    private static void AddParameterIfNotNull(List<Parameters.ParameterComponent> parameters, string name, string? value)
+    {
+        //TODO: use mapper when values in CqlToElmInfo results anything but strings
+        if (!string.IsNullOrEmpty(value))
+        {
+            parameters.Add(new Parameters.ParameterComponent { Name = name, Value = new FhirString(value) });
+        }
+    }
+
+    private static IReadOnlyList<Parameters.ParameterComponent> CqlToElmInfoToFhir(Elm.Library elmLibrary, CqlTypeToFhirTypeMapper typeCrosswalk)
+    {
+        var parameters = new List<Parameters.ParameterComponent>();
+        foreach (var annotation in elmLibrary?.annotation ?? [])
+        {
+            if (annotation is CqlToElmInfo cqlOptions)
+            {
+                // translatorVersion
+                AddParameterIfNotNull(parameters, nameof(cqlOptions.translatorVersion), cqlOptions.translatorVersion);
+
+                // translatorOptions
+                if (!string.IsNullOrEmpty(cqlOptions.translatorOptions))
+                {
+                    var optionArray = cqlOptions.translatorOptions.Split(',');
+                    foreach (string item in optionArray)
+                    {
+                        AddParameterIfNotNull(parameters, "option", item);
+                    }
+                }
+
+                // signatureLevel
+                AddParameterIfNotNull(parameters, nameof(cqlOptions.signatureLevel), cqlOptions.signatureLevel);
+
+                // compatibilityLevel
+                AddParameterIfNotNull(parameters, "compatibilityLevel", "1.5");
+
+                // format
+                AddParameterIfNotNull(parameters, "format", "JSON");
+            }
+        }
+        return parameters;
     }
 
     private static readonly CodeableConcept LogicLibraryCodeableConcept = new()

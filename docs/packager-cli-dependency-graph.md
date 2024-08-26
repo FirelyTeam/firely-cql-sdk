@@ -14,6 +14,9 @@ classDiagram
 %%            Compile(librarySet : LibrarySet,definitions : DefinitionDictionary~LambdaExpression~? = null) IDictionary~string, AssemblyData~
         }
 
+        class TypeToCSharpConverter {
+        }
+
         class CSharpLibrarySetToStreamsWriter {
         }
 
@@ -105,6 +108,8 @@ classDiagram
     WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
     %% Injected Dependencies
+
+    TypeToCSharpConverter ..> CSharpLibrarySetToStreamsWriter : injected
 
     AssemblyDataPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpCodeStreamPostProcessor ..> AssemblyCompiler : injected\n(optional)

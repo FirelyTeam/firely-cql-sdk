@@ -71,39 +71,43 @@ internal partial class CqlOperatorsBinder
             _          => PickCandidate(candidates)
         };
 
-        if (candidate.method is null)
+        switch (candidate.method, throwError)
         {
-            if (throwError)
-            {
-                throw new CannotBindToCqlOperatorError(
-                    methodName,
-                    methodArguments,
-                    genericTypeArguments,
-                    ICqlOperatorsMethods.GetMethodsByName(methodName),
-                    Defaults.MethodCSharpFormat)
-                    .ToException();
-            }
-        }
-
-        if (_logger.IsEnabled(LogLevel.Debug))
-        {
-            MethodCSharpFormat methodCSharpFormat =
-                Defaults.MethodCSharpFormat with
+            case (method: not null, _):
+                if (_logger.IsEnabled(LogLevel.Debug))
                 {
-                    ParameterFormat = Defaults.MethodCSharpFormat.ParameterFormat with
-                    {
-                        // Show the parameter type, and conversion method
-                        ParameterFormat = t => $"{t.Type} as {candidate.conversionMethods[t.Position].ToString()}"
-                    }
-                };
+                    MethodCSharpFormat methodCSharpFormat =
+                        Defaults.MethodCSharpFormat with
+                        {
+                            ParameterFormat = Defaults.MethodCSharpFormat.ParameterFormat with
+                            {
+                                // Show the parameter type, and conversion method
+                                ParameterFormat = t => $"{t.Type} as {candidate.conversionMethods[t.Position].ToString()}"
+                            }
+                        };
 
-            _logger.LogDebug(
-                "Resolved with score {score} to method overload {candidate}",
-                Score(candidate!),
-                candidate.method?.ToCSharpString(methodCSharpFormat));
+                    _logger.LogDebug(
+                        "Resolved with score {score} to method overload {candidate}",
+                        Score(candidate!),
+                        candidate.method?.ToCSharpString(methodCSharpFormat));
+                }
+
+                return (candidate.method, candidate.arguments);
+
+            case (method: null, throwError: true):
+                throw new CannotBindToCqlOperatorError(
+                        methodName,
+                        methodArguments,
+                        genericTypeArguments,
+                        ICqlOperatorsMethods.GetMethodsByName(methodName),
+                        Defaults.MethodCSharpFormat)
+                    .ToException();
+
+            case (method: null, throwError: false):
+                // No need to log here, since the caller didn't care about if the method
+                // was not found and would perform its own action based on that.
+                return default;
         }
-
-        return (candidate.method, candidate.arguments);
 
         (MethodInfo? method, Expression[] arguments, TypeConversion[] conversionMethods) PickCandidate(
             (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates)
@@ -223,26 +227,36 @@ internal partial class CqlOperatorsBinder
                 }
                 else
                 {
-                    // Generic method, figure out the generic type by the first two arguments
-                    for (int argIndexForGenericMethod = 0;
-                         argIndexForGenericMethod < Math.Min(args.Length, 2);
-                         argIndexForGenericMethod
-                             ++) // Try to get generic type from argument up to the second one
+                    IEnumerable<Type> GetGenericTypeArgs()
                     {
-                        Type? genericTypeArg = null;
-                        var argType = args[argIndexForGenericMethod].Type;
-                        var parameterType = methodParameters[i].ParameterType;
-                        var argIsGeneric = argType.IsGenericType;
-                        var paramIsGeneric = parameterType.IsGenericMethodParameter;
+                        for (int argIndexForGenericMethod = 0;
+                             argIndexForGenericMethod < Math.Min(args.Length, 2);
+                             argIndexForGenericMethod++) // Try to get generic type from argument up to the second one
+                        {
+                            var argType = args[argIndexForGenericMethod].Type;
+                            var parameterType = methodParameters[i].ParameterType;
+                            var argIsGeneric = argType.IsGenericType;
+                            var paramIsGeneric = parameterType.IsGenericMethodParameter;
 
-                        if (paramIsGeneric && !argIsGeneric)
-                            genericTypeArg = argType; // Already a generic argument, try again
-                        else if (argIsGeneric)
-                            genericTypeArg = argType.GetGenericArguments().Single();
+                            if (paramIsGeneric && !argIsGeneric)
+                                yield return argType; // Already a generic argument, try again
+                            else if (argIsGeneric)
+                            {
+                                yield return argType;
+                                yield return argType.GetGenericArguments().Single();
+                            }
+                        }
+                    }
 
-                        if (genericTypeArg is null)
-                            continue; // Not a generic argument, try again
+                    var genericTypeArgs =
+                        GetGenericTypeArgs()
+#if DEBUG
+                            .ToArray() // Helps debugging
+#endif
+                        ;
 
+                    foreach (var genericTypeArg in genericTypeArgs)
+                    {
                         MethodInfo genericMethod;
                         try
                         {

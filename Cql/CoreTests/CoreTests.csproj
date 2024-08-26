@@ -3,6 +3,10 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
+		<Configurations>Debug;Release;Generate-CQL-to-ELM</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 		<Nullable>disable</Nullable>
 		<NoWarn>CS1591</NoWarn>
@@ -11,13 +15,17 @@
 
 	<ItemGroup>
 		<PackageReference Include="FluentAssertions" Version="6.12.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-		<PackageReference Include="MSTest.TestFramework" Version="3.3.1" />
-		<PackageReference Include="MSTest.TestAdapter" Version="3.3.1" />
-		<PackageReference Include="coverlet.collector" Version="6.0.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+		<PackageReference Include="coverlet.collector" Version="6.0.2">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 		<PackageReference Remove="Microsoft.CodeAnalysis.PublicApiAnalyzers" />
@@ -34,6 +42,17 @@
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 	</ItemGroup>
 
+	<PropertyGroup>
+		<LibrarySet>CoreTests.HL7</LibrarySet>
+		<CqlDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</CqlDirectory>
+		<ElmDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</ElmDirectory>
+		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
+		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
+	</PropertyGroup>
+
+	<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
+	<Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />
+
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -44,17 +63,11 @@
 		<None Include="Input\ELM\Test\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Include="Input\Xml\*.xml">
+		<None Include="Input\ELM\Test\*.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Input\ValueSets\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update="HL7Tests.*.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
 	</ItemGroup>
 </Project>

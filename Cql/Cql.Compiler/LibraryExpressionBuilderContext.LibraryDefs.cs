@@ -35,9 +35,9 @@ partial class LibraryExpressionBuilderContext
 
         void AddDefinitions(Library library)
         {
-            string libraryName = library.NameAndVersion(true)!;
+            string libraryName = library.NameAndVersion()!;
             if (!HasAliasForNameAndVersion(libraryName))
-                throw new LibraryAliasUnresolvedError(library).ToException();
+                throw new CouldNotResolveAliasFromTheLibraryNameAndVersionError(library).ToException();
 
             if (LibrarySetContext!.LibrarySetDefinitions.TryGetDefinitionsForLibrary(
                     libraryName,
@@ -126,14 +126,22 @@ partial class LibraryExpressionBuilderContext
         }
 
         AddCodeSystemRefs(Library);
+    }
 
-        void AddCodeSystemRefs(Library library)
+    private void AddCodeSystemRefs(Library library)
+    {
+        if (library.codeSystems is { Length: > 0 } codeSystemDefs)
         {
-            if (library.codeSystems is { Length: > 0 } codeSystemDefs)
+            foreach (var codeSystemDef in codeSystemDefs)
             {
-                foreach (var codeSystemDef in codeSystemDefs)
+                var libraryNameAndName = new LibraryNameAndName(library.NameAndVersion()!, codeSystemDef.name);
+                var newValue = codeSystemDef.id;
+                if (!_codeSystemIdsByCodeSystemRefs.TryAdd(libraryNameAndName, newValue))
                 {
-                    _codeSystemIdsByCodeSystemRefs.Add(new(library.NameAndVersion()!, codeSystemDef.name), codeSystemDef.id);
+                    var previousValue = _codeSystemIdsByCodeSystemRefs[libraryNameAndName];
+                    if (previousValue != newValue)
+                        throw this.NewExpressionBuildingException(
+                            $"A code system '{libraryNameAndName}' was previously added with value '{previousValue}', and it cannot accept a different value '{newValue}'.");
                 }
             }
         }

@@ -1,21 +1,28 @@
 {
   "profiles": {
-    "PackageCLI (Demo LibrarySet, typeformat=var)": {
-      "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(SolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(SolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(SolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(SolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(SolutionDir)/Demo/Measures.Demo/CSharp\" --cs-typeformat var --f true"
-    },
-    "PackageCLI (CMS Measures LibrarySet, typeformat=var)": {
-      "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(SolutionDir)/LibrarySets/Cms/Elm\" --cql \"$(SolutionDir)/LibrarySets/Cms/Cql\" --fhir \"$(SolutionDir)/LibrarySets/Cms/Resources\" --dll \"$(SolutionDir)/LibrarySets/Cms/Assemblies\" --cs \"$(SolutionDir)/Demo/Measures.CMS/CSharp\" --cs-typeformat var --f true"
-    },
+//    "PackageCLI (Demo LibrarySet, typeformat=var)": {
+//      "commandName": "Project",
+//      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --cs-typeformat var --f true"
+//    },
+//    "PackageCLI (CMS Measures LibrarySet, typeformat=var)": {
+//      "commandName": "Project",
+//      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Cms/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Cms/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Cms/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Cms/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.CMS/CSharp\" --cs-typeformat var --f true"
+//    },
     "PackageCLI (Demo LibrarySet, typeformat=explicit)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(SolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(SolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(SolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(SolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(SolutionDir)/Demo/Measures.Demo/CSharp\" --cs-typeformat explicit --f true"
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --cs-typeformat explicit --f true"
     },
     "PackageCLI (CMS Measures LibrarySet, typeformat=explicit)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(SolutionDir)/LibrarySets/Cms/Elm\" --cql \"$(SolutionDir)/LibrarySets/Cms/Cql\" --fhir \"$(SolutionDir)/LibrarySets/Cms/Resources\" --dll \"$(SolutionDir)/LibrarySets/Cms/Assemblies\" --cs \"$(SolutionDir)/Demo/Measures.CMS/CSharp\" --cs-typeformat explicit --f true"
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Cms/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Cms/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Cms/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Cms/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.CMS/CSharp\" --cs-typeformat explicit --f true"
+    },
+//    "PackageCLI (Measures.Authoring LibrarySet, typeformat=var)": {
+//      "commandName": "Project",
+//      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" --cs-typeformat var --f true"
+//    },
+    "PackageCLI (Measures.Authoring LibrarySet, typeformat=explicit)": {
+      "commandName": "Project",
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" --cs-typeformat explicit --f true"
     }
-
   }
 }

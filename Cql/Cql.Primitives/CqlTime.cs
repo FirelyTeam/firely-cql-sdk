@@ -99,10 +99,10 @@ namespace Hl7.Cql.Primitives
         {
             if (quantity == null || quantity.value == null || quantity.unit == null)
                 return null;
-
-            var value = quantity!.value.Value;
+            quantity = quantity.NormalizeTo(Precision);
+            var value = quantity.value!.Value;
             var span = Value.TimeSpan;
-            switch (quantity.unit[0])
+            switch (quantity.unit![0])
             {
                 case 'm':
                     if (quantity.unit.Length > 1)
@@ -149,10 +149,10 @@ namespace Hl7.Cql.Primitives
         {
             if (quantity == null || quantity.value == null || quantity.unit == null)
                 return null;
-
-            var value = quantity!.value.Value;
+            quantity = quantity.NormalizeTo(Precision);
+            var value = quantity.value!.Value;
             var span = Value.TimeSpan;
-            switch (quantity.unit[0])
+            switch (quantity.unit![0])
             {
                 case 'm':
                     if (quantity.unit.Length > 1)

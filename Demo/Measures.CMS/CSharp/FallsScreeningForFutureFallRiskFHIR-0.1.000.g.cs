@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -11,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("FallsScreeningForFutureFallRiskFHIR", "0.1.000")]
 public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 {
@@ -39,9 +38,9 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
     internal Lazy<CqlValueSet> __Telephone_Visits;
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<IEnumerable<Encounter>> __Qualifying_Encounter;
     internal Lazy<bool?> __Initial_Population;
@@ -79,9 +78,9 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
         __Telephone_Visits = new Lazy<CqlValueSet>(this.Telephone_Visits_Value);
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Qualifying_Encounter = new Lazy<IEnumerable<Encounter>>(this.Qualifying_Encounter_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
@@ -230,10 +229,10 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("FallsScreeningForFutureFallRiskFHIR-0.1.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("FallsScreeningForFutureFallRiskFHIR-0.1.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -244,8 +243,8 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -254,42 +253,42 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 	public Patient Patient() => 
 		__Patient.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
@@ -300,62 +299,62 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Annual_Wellness_Visit();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.Union<Encounter>(b_, d_);
-		var f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.Union<Encounter>(g_, i_);
-		var k_ = context.Operators.Union<Encounter>(e_, j_);
-		var l_ = this.Home_Healthcare_Services();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = this.Ophthalmological_Services();
-		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.Union<Encounter>(m_, o_);
-		var q_ = context.Operators.Union<Encounter>(k_, p_);
-		var r_ = this.Preventive_Care_Services_Individual_Counseling();
-		var s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
-		var t_ = this.Discharge_Services_Nursing_Facility();
-		var u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context.Operators.Union<Encounter>(s_, u_);
-		var w_ = context.Operators.Union<Encounter>(q_, v_);
-		var x_ = this.Nursing_Facility_Visit();
-		var y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
-		var z_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		var aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
-		var ab_ = context.Operators.Union<Encounter>(y_, aa_);
-		var ac_ = context.Operators.Union<Encounter>(w_, ab_);
-		var ad_ = this.Audiology_Visit();
-		var ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
-		var af_ = this.Telephone_Visits();
-		var ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
-		var ah_ = context.Operators.Union<Encounter>(ae_, ag_);
-		var ai_ = context.Operators.Union<Encounter>(ac_, ah_);
-		var aj_ = this.Online_Assessments();
-		var ak_ = context.Operators.RetrieveByValueSet<Encounter>(aj_, null);
-		var al_ = this.Physical_Therapy_Evaluation();
-		var am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, null);
-		var an_ = context.Operators.Union<Encounter>(ak_, am_);
-		var ao_ = context.Operators.Union<Encounter>(ai_, an_);
-		var ap_ = this.Occupational_Therapy_Evaluation();
-		var aq_ = context.Operators.RetrieveByValueSet<Encounter>(ap_, null);
-		var ar_ = context.Operators.Union<Encounter>(ao_, aq_);
-		var as_ = Status_1_6_000.Finished_Encounter(ar_);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Annual_Wellness_Visit();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+		CqlValueSet l_ = this.Home_Healthcare_Services();
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		CqlValueSet n_ = this.Ophthalmological_Services();
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
+		CqlValueSet r_ = this.Preventive_Care_Services_Individual_Counseling();
+		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
+		CqlValueSet t_ = this.Discharge_Services_Nursing_Facility();
+		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
+		IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
+		CqlValueSet x_ = this.Nursing_Facility_Visit();
+		IEnumerable<Encounter> y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
+		CqlValueSet z_ = this.Care_Services_in_Long_Term_Residential_Facility();
+		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
+		IEnumerable<Encounter> ab_ = context.Operators.Union<Encounter>(y_, aa_);
+		IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(w_, ab_);
+		CqlValueSet ad_ = this.Audiology_Visit();
+		IEnumerable<Encounter> ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
+		CqlValueSet af_ = this.Telephone_Visits();
+		IEnumerable<Encounter> ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
+		IEnumerable<Encounter> ah_ = context.Operators.Union<Encounter>(ae_, ag_);
+		IEnumerable<Encounter> ai_ = context.Operators.Union<Encounter>(ac_, ah_);
+		CqlValueSet aj_ = this.Online_Assessments();
+		IEnumerable<Encounter> ak_ = context.Operators.RetrieveByValueSet<Encounter>(aj_, null);
+		CqlValueSet al_ = this.Physical_Therapy_Evaluation();
+		IEnumerable<Encounter> am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, null);
+		IEnumerable<Encounter> an_ = context.Operators.Union<Encounter>(ak_, am_);
+		IEnumerable<Encounter> ao_ = context.Operators.Union<Encounter>(ai_, an_);
+		CqlValueSet ap_ = this.Occupational_Therapy_Evaluation();
+		IEnumerable<Encounter> aq_ = context.Operators.RetrieveByValueSet<Encounter>(ap_, null);
+		IEnumerable<Encounter> ar_ = context.Operators.Union<Encounter>(ao_, aq_);
+		IEnumerable<Encounter> as_ = Status_1_6_000.Finished_Encounter(ar_);
 		bool? at_(Encounter ValidEncounter)
 		{
-			var av_ = this.Measurement_Period();
-			var aw_ = ValidEncounter?.Period;
-			var ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
-			var ay_ = QICoreCommon_2_0_000.ToInterval((ax_ as object));
-			var az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ay_, "day");
+			CqlInterval<CqlDateTime> av_ = this.Measurement_Period();
+			Period aw_ = ValidEncounter?.Period;
+			CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
+			CqlInterval<CqlDateTime> ay_ = QICoreCommon_2_0_000.ToInterval((ax_ as object));
+			bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ay_, "day");
 
 			return az_;
 		};
-		var au_ = context.Operators.Where<Encounter>(as_, at_);
+		IEnumerable<Encounter> au_ = context.Operators.Where<Encounter>(as_, at_);
 
 		return au_;
 	}
@@ -366,18 +365,20 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
-		var c_ = this.Measurement_Period();
-		var d_ = context.Operators.Start(c_);
-		var e_ = context.Operators.DateFrom(d_);
-		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context.Operators.GreaterOrEqual(f_, 65);
-		var h_ = this.Qualifying_Encounter();
-		var i_ = context.Operators.Exists<Encounter>(h_);
-		var j_ = context.Operators.And(g_, i_);
+		Patient a_ = this.Patient();
+		Date b_ = a_?.BirthDateElement;
+		string c_ = b_?.Value;
+		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context.Operators.Start(e_);
+		CqlDate g_ = context.Operators.DateFrom(f_);
+		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		bool? i_ = context.Operators.GreaterOrEqual(h_, 65);
+		IEnumerable<Encounter> j_ = this.Qualifying_Encounter();
+		bool? k_ = context.Operators.Exists<Encounter>(j_);
+		bool? l_ = context.Operators.And(i_, k_);
 
-		return j_;
+		return l_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -386,7 +387,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -397,7 +398,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 
 	private bool? Denominator_Exclusions_Value()
 	{
-		var a_ = Hospice_6_9_000.Has_Hospice_Services();
+		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
 
 		return a_;
 	}
@@ -408,21 +409,21 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Falls_Screening();
-		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = Status_1_6_000.isAssessmentPerformed(b_);
+		CqlValueSet a_ = this.Falls_Screening();
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> c_ = Status_1_6_000.isAssessmentPerformed(b_);
 		bool? d_(Observation FallsScreening)
 		{
-			var g_ = this.Measurement_Period();
-			var h_ = FallsScreening?.Effective;
-			var i_ = FHIRHelpers_4_3_000.ToValue(h_);
-			var j_ = QICoreCommon_2_0_000.ToInterval(i_);
-			var k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
+			DataType h_ = FallsScreening?.Effective;
+			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
+			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(i_);
+			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;
 		};
-		var e_ = context.Operators.Where<Observation>(c_, d_);
-		var f_ = context.Operators.Exists<Observation>(e_);
+		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+		bool? f_ = context.Operators.Exists<Observation>(e_);
 
 		return f_;
 	}

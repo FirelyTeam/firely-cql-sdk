@@ -1,0 +1,3 @@
+﻿#nullable enable
+Hl7.Cql.Packager.Program
+static Hl7.Cql.Packager.Program.Main(string![]! args) -> int

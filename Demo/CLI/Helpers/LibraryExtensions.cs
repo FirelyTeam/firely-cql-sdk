@@ -5,15 +5,12 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-using CommandLine;
+
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Graph;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using Hl7.Fhir.Utility;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Loader;
 
 namespace CLI.Helpers;

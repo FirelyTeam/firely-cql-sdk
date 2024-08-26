@@ -4,12 +4,8 @@
   "meta": {
     "versionId": "5",
     "lastUpdated": "2024-05-02T12:14:54.000-04:00",
-    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/computable-valueset-cqfm", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
-  },
-  "extension": [ {
-    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
-    "valueDate": "2015-03-31"
-  } ],
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset"]
+  },  
   "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1",
   "identifier": [ {
     "system": "urn:ietf:rfc:3986",
@@ -18,6 +14,7 @@
   "version": "20150331",
   "name": "ONCAdministrativeSex",
   "title": "ONC Administrative Sex",
+  "description": "ONC Administrative Sex",
   "status": "active",
   "experimental": false,
   "date": "2015-03-31T01:00:01-04:00",

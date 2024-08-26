@@ -41,6 +41,7 @@ internal class OptionsConsoleDumper
         WriteLine("PackageCLI");
         WriteLine("- Environment -----------------------------------");
         WriteLine($"{"Current Directory",-45} : {Environment.CurrentDirectory}");
+        WriteLine($"{"DOTNET_ENVIRONMENT",-45} : {Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}");
         WriteLine("- Arguments Provided ----------------------------");
         (string name, object? value)[] values = new[]
         {

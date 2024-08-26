@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project>
+
+	<!-- Turn off visual studio msbuild automatics -->
+	<PropertyGroup>
+		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
+		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
+		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
+		<BoxHeader>ELM to C#: </BoxHeader>
+		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
+		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
+	</PropertyGroup>
+
+	<!-- ELM to CSharp -->
+	<PropertyGroup>
+		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+		<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+	</PropertyGroup>
+
+	<Target Name="GenerateCSharp"
+	        Condition="Exists('$(PackagerCLI)')"
+	        BeforeTargets="PreBuildEvent">
+
+		<PropertyGroup>
+			<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+
+			<!-- Comment out these if you don't need them -->
+			<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
+			<CSharpTypeFormat>explicit</CSharpTypeFormat>
+			<!--CSharpTypeFormat: explicit|var -->
+
+			<!-- Leave these alone, they are automatically picked up from the properties above -->
+			<PackagerCLIArgs Condition="'$(OverrideUtcDateTime)'!=''">$(PackagerCLIArgs) --override-utc-date-time "$(1970-01-01T00:00:00Z)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(CanonicalRootUrl)'!=''">$(PackagerCLIArgs) --canonical-root-url "$(CanonicalRootUrl)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(ElmDirectory)'!=''">$(PackagerCLIArgs) --elm "$(ElmDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(CqlDirectory)'!=''">$(PackagerCLIArgs) --cql "$(CqlDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(CSharpDirectory)'!=''">$(PackagerCLIArgs) --cs "$(CSharpDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(CSharpTypeFormat)'!=''">$(PackagerCLIArgs) --cs-typeformat "$(CSharpTypeFormat)"</PackagerCLIArgs>
+			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand>
+			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
+		</PropertyGroup>
+
+		<!-- 1. Remove old C# and Resource files to avoid duplicates when editing/renaming CQL files -->
+
+		<Message Text="$(Box.Replace({Text}, Deleting C# and Resource files))" Importance="High" />
+
+		<ItemGroup>
+			<!-- Keep relative path else complains about duplicates in msbuild meta tracking-->
+			<CSharpFiles Include="CSharp/**/*.cs" />
+			<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
+		</ItemGroup>
+
+		<Delete Files="@(CSharpFiles)" />
+		<Delete Files="@(ResourceFiles)" />
+
+		<!-- Generate C# and Resource files -->
+		<Message Text="$(Box.Replace({Text}, Generating C# and Resource files&#10;| $(PackagerCLICommand)))" Importance="High" />
+		<Exec Command='$(PackagerCLICommand)' />
+
+		<ItemGroup>
+			<!-- Keep relative path else complains about duplicates-->
+			<CSharpFiles Include="CSharp/**/*.cs" />
+			<Compile Include="@(CSharpFiles)" Exclude="@(Compile)" KeepDuplicates="false" />
+		</ItemGroup>
+
+		<!-- Touch CQL files if error so build will try again-->
+		<OnError ExecuteTargets="TouchFiles" />
+	</Target>
+
+	<Target Name="TouchFiles">
+		<Touch Files="@(CqlFiles)">
+			<Output
+				TaskParameter="TouchedFiles"
+				ItemName="FilesTouched" />
+		</Touch>
+	</Target>
+
+	<ItemGroup>
+		<CSharpFiles Include="CSharp/**/*.cs" />
+	</ItemGroup>
+
+	<Target Name="Delete CSharp" AfterTargets="Clean">
+		<Message Text="$(Box.Replace({Text}, Deleting C# files))" Importance="High" />
+		<Delete Files="@(CSharpFiles)" />
+	</Target>
+
+	<ItemGroup>
+		<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
+	</ItemGroup>
+
+	<Target Name="Delete Resources" AfterTargets="Clean">
+		<Message Text="$(Box.Replace({Text}, Deleting Resource files))" Importance="High" />
+		<Delete Files="@(ResourceFiles)" />
+	</Target>
+
+	<ItemGroup>
+		<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ResultsFiles Include="$(TestResultsDirectory)/*.*" />
+	</ItemGroup>
+
+	<Target Name="Delete Results" AfterTargets="Clean">
+		<Message Text="$(Box.Replace({Text}, Deleting Test Results files))" Importance="High" />
+		<RemoveDir Directories="$(TestResultsDirectory)" />
+	</Target>
+</Project>

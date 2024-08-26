@@ -5,12 +5,15 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.7.0</FirelySdkVersion>
+		<FirelySdkVersion>5.9.1</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
-		<VersionPrefix>2.0.0</VersionPrefix>
+		<!--
+			Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
+			-->
+		<VersionPrefix>2.0.2</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
@@ -22,6 +25,8 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+		<CqlSolutionDir>$(MSBuildThisFileDirectory)/../</CqlSolutionDir>
 	</PropertyGroup>
 
 	<!-- ignore sdk warnings -->
@@ -40,8 +45,18 @@
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<SignAssembly>True</SignAssembly>
+		<DelaySign>true</DelaySign>
+		<AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile>
+		<IncludeSymbols>True</IncludeSymbols>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<LibraryPKHash>00240000048000009400000006020000002400005253413100040000010001006d866cf0363db3976082a2439c420bd942b78243c0ce6c289f3c07d6901ecf149c38bafc12167f6eba7618b288e5327a7e4ab554c9a294ae6c68d7455b6562f846455b6bfdde68542a7046a632f1730a1647f2d365f8a25f73860c14d1428e7319df673e2d3212fa535f310c52a7c7ec17de772cb49961f4ea195fa4ea601dcd</LibraryPKHash>
+	</PropertyGroup>
+
 	<PropertyGroup>
-		<Box>==============================================&#10;Text&#10;==============================================</Box>
+		<Box> __________________________________________________________________________________________&#10;/&#10;{Text}&#10;\</Box>
 	</PropertyGroup>
 
 </Project>

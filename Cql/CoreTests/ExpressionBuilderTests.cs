@@ -15,7 +15,7 @@ namespace CoreTests
             Microsoft.Extensions.Logging.LoggerFactory
                 .Create(logging => logging.AddDebug());
 
-        private static CqlCompilerFactory Factory = new(LoggerFactory);
+        private static readonly CqlCompilerFactory Factory = new(LoggerFactory);
 
         [TestMethod]
         public void AggregateQueries_1_0_0()
@@ -28,9 +28,9 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void FHIRTypeConversionTest_1_0_0()
+        public void FHIRConversionTest_1_0_0()
         {
-            var elm = new FileInfo(@"Input\ELM\HL7\FHIRTypeConversionTest.json");
+            var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
@@ -73,7 +73,7 @@ namespace CoreTests
         [TestMethod]
         public void Get_Property_Uses_TypeResolver()
         {
-            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", Factory.TypeManager.Resolver);
+            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", Factory.TypeManager.Resolver)!;
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }

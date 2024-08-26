@@ -1,0 +1,706 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33092",
+  "meta": {
+    "lastUpdated": "2019-06-09T17:07:48.103-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1168"
+    }
+  ],
+  "version": "Working",
+  "name": "Mammography",
+  "title": "Mammography",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:08-04:00",
+    "total": 113,
+    "offset": 0,
+    "contains": [
+      {
+        "version": "2012.05",
+        "code": "0401",
+        "display": "Diagnostic mammography"
+      },
+      {
+        "version": "2012.05",
+        "code": "0403",
+        "display": "Screening mammography"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "43204002",
+        "display": "Bilateral mammography"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "726551006",
+        "display": "Contrast enhanced spectral mammography"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77062",
+        "display": "Diagnostic digital breast tomosynthesis; bilateral"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77061",
+        "display": "Diagnostic digital breast tomosynthesis; unilateral"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77066",
+        "display": "Diagnostic mammography, including computer-aided detection (CAD) when performed; bilateral"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77065",
+        "display": "Diagnostic mammography, including computer-aided detection (CAD) when performed; unilateral"
+      },
+      {
+        "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+        "inactive": true,
+        "version": "2021.1.20AB",
+        "code": "G0204",
+        "display": "Diagnostic mammography, including computer-aided detection (cad) when performed; bilateral"
+      },
+      {
+        "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+        "inactive": true,
+        "version": "2021.1.20AB",
+        "code": "G0206",
+        "display": "Diagnostic mammography, including computer-aided detection (cad) when performed; unilateral"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "450566007",
+        "display": "Digital breast tomosynthesis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "723780005",
+        "display": "Digital tomosynthesis of bilateral breasts"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "723779007",
+        "display": "Digital tomosynthesis of left breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "723778004",
+        "display": "Digital tomosynthesis of right breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "709657006",
+        "display": "Fluoroscopy of breast"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "38090-7",
+        "display": "MG Breast - bilateral Air gap Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26346-7",
+        "display": "MG Breast - bilateral Diagnostic"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26349-1",
+        "display": "MG Breast - bilateral Diagnostic Limited Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "48475-8",
+        "display": "MG Breast - bilateral Diagnostic for implant"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "46351-3",
+        "display": "MG Breast - bilateral Displacement Views for Implant"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26287-3",
+        "display": "MG Breast - bilateral Limited Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37006-4",
+        "display": "MG Breast - bilateral MLO"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37543-6",
+        "display": "MG Breast - bilateral Magnification Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37554-3",
+        "display": "MG Breast - bilateral Magnification and Spot"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37016-3",
+        "display": "MG Breast - bilateral Rolled Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26175-0",
+        "display": "MG Breast - bilateral Screening"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "48492-3",
+        "display": "MG Breast - bilateral Screening for implant"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "46335-6",
+        "display": "MG Breast - bilateral Single view"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37552-7",
+        "display": "MG Breast - bilateral Spot Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37029-6",
+        "display": "MG Breast - bilateral Tangential"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37038-7",
+        "display": "MG Breast - bilateral True lateral"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "36626-0",
+        "display": "MG Breast - bilateral Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "42415-0",
+        "display": "MG Breast - bilateral Views Post Wire Placement"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "38071-7",
+        "display": "MG Breast - bilateral Views for implant"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37052-8",
+        "display": "MG Breast - bilateral XCCL"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "36642-7",
+        "display": "MG Breast - left 2 Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "38091-5",
+        "display": "MG Breast - left Air gap Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26347-5",
+        "display": "MG Breast - left Diagnostic"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26350-9",
+        "display": "MG Breast - left Diagnostic Limited Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "69150-1",
+        "display": "MG Breast - left Diagnostic for implant"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26289-9",
+        "display": "MG Breast - left Limited Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37005-6",
+        "display": "MG Breast - left Magnification"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "38854-6",
+        "display": "MG Breast - left Magnification and Spot"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37017-1",
+        "display": "MG Breast - left Rolled Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26176-8",
+        "display": "MG Breast - left Screening"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "46336-4",
+        "display": "MG Breast - left Single view"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37553-5",
+        "display": "MG Breast - left Spot Views compression"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37030-4",
+        "display": "MG Breast - left Tangential"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "38855-3",
+        "display": "MG Breast - left True lateral"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "36627-8",
+        "display": "MG Breast - left Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "42416-8",
+        "display": "MG Breast - left Views Post Wire Placement"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "38072-5",
+        "display": "MG Breast - left Views for implant"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37053-6",
+        "display": "MG Breast - left XCCL"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37768-9",
+        "display": "MG Breast - right 2 Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26348-3",
+        "display": "MG Breast - right Diagnostic"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26351-7",
+        "display": "MG Breast - right Diagnostic Limited Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "69259-0",
+        "display": "MG Breast - right Diagnostic for implant"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26291-5",
+        "display": "MG Breast - right Limited Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37773-9",
+        "display": "MG Breast - right Magnification"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37769-7",
+        "display": "MG Breast - right Magnification and Spot"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37775-4",
+        "display": "MG Breast - right Rolled Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "26177-6",
+        "display": "MG Breast - right Screening"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "46337-2",
+        "display": "MG Breast - right Single view"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "38807-4",
+        "display": "MG Breast - right Spot Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37770-5",
+        "display": "MG Breast - right Tangential"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37771-3",
+        "display": "MG Breast - right True lateral"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37774-7",
+        "display": "MG Breast - right Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "38820-7",
+        "display": "MG Breast - right Views for implant"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37772-1",
+        "display": "MG Breast - right XCCL"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "46350-5",
+        "display": "MG Breast - unilateral Diagnostic"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "46356-2",
+        "display": "MG Breast - unilateral Screening"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "46338-0",
+        "display": "MG Breast - unilateral Single view"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "46339-8",
+        "display": "MG Breast - unilateral Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "46380-2",
+        "display": "MG Breast - unilateral Views for implant"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "36319-2",
+        "display": "MG Breast 4 Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "36962-9",
+        "display": "MG Breast Axillary"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "24605-8",
+        "display": "MG Breast Diagnostic"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "24604-1",
+        "display": "MG Breast Diagnostic Limited Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37539-4",
+        "display": "MG Breast Grid Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "24610-8",
+        "display": "MG Breast Limited Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37542-8",
+        "display": "MG Breast Magnification Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "24606-6",
+        "display": "MG Breast Screening"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37551-9",
+        "display": "MG Breast Spot Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37028-8",
+        "display": "MG Breast Tangential"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "37037-9",
+        "display": "MG Breast True lateral"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "36625-2",
+        "display": "MG Breast Views"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "69251-7",
+        "display": "MG Breast Views Post Wire Placement"
+      },
+      {
+        "system": "http://loinc.org",
+        "version": "2.69.20AB",
+        "code": "38070-9",
+        "display": "MG Breast Views for implant"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77049",
+        "display": "Magnetic resonance imaging, breast, without and with contrast material(s), including computer-aided detection (CAD real-time lesion detection, characterization and pharmacokinetic analysis), when performed; bilateral"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77048",
+        "display": "Magnetic resonance imaging, breast, without and with contrast material(s), including computer-aided detection (CAD real-time lesion detection, characterization and pharmacokinetic analysis), when performed; unilateral"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77047",
+        "display": "Magnetic resonance imaging, breast, without contrast material; bilateral"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77046",
+        "display": "Magnetic resonance imaging, breast, without contrast material; unilateral"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "241055006",
+        "display": "Mammogram - symptomatic"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "241057003",
+        "display": "Mammogram coned"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "439324009",
+        "display": "Mammogram in compression view"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "241058008",
+        "display": "Mammogram magnification"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "71651007",
+        "display": "Mammography"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "572701000119102",
+        "display": "Mammography of left breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "566571000119105",
+        "display": "Mammography of right breast"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "inactive": true,
+        "version": "2021.2.20AB",
+        "code": "77056",
+        "display": "Mammography; bilateral"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "inactive": true,
+        "version": "2021.2.20AB",
+        "code": "77055",
+        "display": "Mammography; unilateral"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+        "version": "2014.1.13AA",
+        "code": "87.37",
+        "display": "Other mammography"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77063",
+        "display": "Screening digital breast tomosynthesis, bilateral (List separately in addition to code for primary procedure)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "24623002",
+        "display": "Screening mammography"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "384151000119104",
+        "display": "Screening mammography of bilateral breasts"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "392531000119105",
+        "display": "Screening mammography of left breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "392521000119107",
+        "display": "Screening mammography of right breast"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "inactive": true,
+        "version": "2021.2.20AB",
+        "code": "77057",
+        "display": "Screening mammography, bilateral (2-view study of each breast)"
+      },
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "77067",
+        "display": "Screening mammography, bilateral (2-view study of each breast), including computer-aided detection (CAD) when performed"
+      },
+      {
+        "system": "https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/index.html",
+        "inactive": true,
+        "version": "2021.1.20AB",
+        "code": "G0202",
+        "display": "Screening mammography, bilateral (2-view study of each breast), including computer-aided detection (cad) when performed"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "258172002",
+        "display": "Stereotactic mammography"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+        "version": "2014.1.13AA",
+        "code": "87.36",
+        "display": "Xerography of breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "12389009",
+        "display": "Xeromammography"
+      }
+    ]
+  }
+}

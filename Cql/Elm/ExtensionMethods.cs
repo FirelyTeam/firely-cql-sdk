@@ -7,20 +7,96 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Hl7.Cql.Elm
 {
     public static class ExtensionMethods
     {
-        public static ListSortDirection ListSortOrder(this SortDirection direction) => direction switch
+        /// <summary>
+        /// Determines whether a given symbol is visible for the kind of access given in <paramref name="access"/>.
+        /// </summary>
+        internal static bool IsVisible(this IDefinitionElement symbol, AccessModifier access)
         {
-            SortDirection.asc => ListSortDirection.Ascending,
-            SortDirection.ascending => ListSortDirection.Ascending,
-            SortDirection.desc => ListSortDirection.Descending,
-            SortDirection.descending => ListSortDirection.Descending,
-            _ => throw new ArgumentException($"Unrecognized sort direction {Enum.GetName(typeof(SortDirection), direction)}")
-        };
+            return access >= symbol.Access;
+        }
+
+        /// <summary>
+        /// Retrieves all error nodes in the ELM tree rooted in <paramref name="node"/>.
+        /// </summary>
+        public static CqlToElmError[] GetErrors(this Element node)
+        {
+            var allErrors = new HashSet<CqlToElmError>();
+
+            var visitor = new ElmTreeWalker(nodeHandler, nodeFilter);
+
+            visitor.Walk(node);
+            return allErrors.ToArray();
+
+            bool nodeFilter(PropertyInfo property)
+            {
+                var type = property.PropertyType;
+                if (type.IsAssignableTo(typeof(Element)))
+                {
+                    return true;
+                }
+                else if (type.IsArray)
+                {
+                    if (type.GetElementType()!.IsAssignableTo(typeof(TypeSpecifier)))
+                        return false;
+                    else if (type.GetElementType()!.IsAssignableTo(typeof(Element)))
+                        return true;
+                }
+                return false;
+            }
+
+            bool nodeHandler(object node)
+            {
+                if (node is Element element && element.annotation?.OfType<CqlToElmError>() is { } errors && errors.Any())
+                {
+                    // avoid duplicate errors.
+                    foreach (var error in errors)
+                    {
+                        if (!allErrors.Contains(error))
+                            allErrors.Add(error);
+                    }
+                }
+                // Let the walker visit my children.
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Adds an error or warning to the given node using a <see cref="CqlToElmError"/> annotation."/>
+        /// </summary>
+        public static T AddError<T>(this T node,
+            string errorMessage,
+            ErrorType errorType = ErrorType.semantic,
+            ErrorSeverity severity = ErrorSeverity.error) where T : Element
+        {
+            var error = new CqlToElmError
+            {
+                errorSeverity = severity,
+                errorSeveritySpecified = true,
+                errorType = errorType,
+                message = errorMessage,
+            };
+
+            return AddError(node, error);
+        }
+
+        /// <summary>
+        /// Adds an error to the given node.
+        /// </summary>
+        public static T AddError<T>(this T node, CqlToElmError error) where T : Element
+        {
+            node.annotation = node.annotation is { } annotations
+                ? annotations.Append(error).ToArray()
+                : new[] { error };
+            return node;
+        }
+
     }
 }

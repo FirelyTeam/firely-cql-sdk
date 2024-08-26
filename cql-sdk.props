@@ -6,7 +6,10 @@
 
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
-		<VersionPrefix>2.0.0</VersionPrefix>
+		<!--
+			Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
+			-->
+		<VersionPrefix>2.0.2</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
@@ -18,6 +21,8 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+		<CqlSolutionDir>$(MSBuildThisFileDirectory)</CqlSolutionDir>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -29,7 +34,7 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.7.0</FirelySdkVersion>
+    <FirelySdkVersion>5.9.1</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Compiler settings -->
@@ -40,6 +45,7 @@
 		<Configurations>Debug;Release;FullDebug</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<NoWarn>RS0026</NoWarn>  <!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'FullDebug' ">
@@ -71,10 +77,13 @@
 		metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
-		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+		<PackageReference Include="JetBrains.Annotations" Version="2024.2.0" />
 
-
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24165.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24318.1" PrivateAssets="All" />
 	</ItemGroup>
+
+	<PropertyGroup>
+		<Box> __________________________________________________________________________________________&#10;/&#10;{Text}&#10;\</Box>
+	</PropertyGroup>
 
 </Project>

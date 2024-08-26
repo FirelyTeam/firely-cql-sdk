@@ -27,7 +27,7 @@
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm.Test" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

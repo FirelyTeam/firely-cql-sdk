@@ -127,7 +127,7 @@ namespace Hl7.Cql.Conversion
                 toDictionary.TryGetValue(to, out Func<object, object>? convert))
                 return convert(from);
 
-            throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
+            throw new InvalidOperationException($"No conversion from {fromType} to {to} is defined.");
         }
 
         /// <summary>

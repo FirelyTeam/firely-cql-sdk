@@ -1,5 +1,4 @@
 ﻿using System;
-using Tuples;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -11,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.2.000")]
 public class CRLReceiptofSpecialistReportFHIR_0_2_000
 {
@@ -32,12 +31,12 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
     internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<bool?> __Has_Encounter_during_Measurement_Period;
-    internal Lazy<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS> __First_Referral_during_First_10_Months_of_Measurement_Period;
+    internal Lazy<(string ID, CqlDateTime AuthorDate)?> __First_Referral_during_First_10_Months_of_Measurement_Period;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>> __SDE_Payer;
-    internal Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR> __SDE_Race;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
+    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
     internal Lazy<CqlCode> __SDE_Sex;
     internal Lazy<bool?> __Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop;
     internal Lazy<bool?> __Numerator;
@@ -62,12 +61,12 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
         __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Has_Encounter_during_Measurement_Period = new Lazy<bool?>(this.Has_Encounter_during_Measurement_Period_Value);
-        __First_Referral_during_First_10_Months_of_Measurement_Period = new Lazy<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>(this.First_Referral_during_First_10_Months_of_Measurement_Period_Value);
+        __First_Referral_during_First_10_Months_of_Measurement_Period = new Lazy<(string ID, CqlDateTime AuthorDate)?>(this.First_Referral_during_First_10_Months_of_Measurement_Period_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
-        __SDE_Ethnicity = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<Tuple_HPcCiDPXQfZTXIORThMLfTQDR>(this.SDE_Race_Value);
+        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
+        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
+        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
         __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
         __Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop = new Lazy<bool?>(this.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
@@ -146,10 +145,10 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		var b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-		var c_ = context.Operators.Interval(a_, b_, true, false);
-		var d_ = context.ResolveParameter("CRLReceiptofSpecialistReportFHIR-0.2.000", "Measurement Period", c_);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+		object d_ = context.ResolveParameter("CRLReceiptofSpecialistReportFHIR-0.2.000", "Measurement Period", c_);
 
 		return (CqlInterval<CqlDateTime>)d_;
 	}
@@ -160,8 +159,8 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
-		var b_ = context.Operators.SingletonFrom<Patient>(a_);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
@@ -172,39 +171,39 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 	private bool? Has_Encounter_during_Measurement_Period_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Ophthalmological_Services();
-		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context.Operators.Union<Encounter>(b_, d_);
-		var f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		var h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
-		var j_ = context.Operators.Union<Encounter>(g_, i_);
-		var k_ = context.Operators.Union<Encounter>(e_, j_);
-		var l_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = context.Operators.Union<Encounter>(m_, o_);
-		var q_ = context.Operators.Union<Encounter>(k_, p_);
+		CqlValueSet a_ = this.Office_Visit();
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		CqlValueSet c_ = this.Ophthalmological_Services();
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+		CqlValueSet f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		CqlValueSet h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+		CqlValueSet l_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		CqlValueSet n_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		bool? r_(Encounter Encounter)
 		{
-			var u_ = Encounter?.StatusElement;
-			var v_ = u_?.Value;
-			var w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
-			var x_ = context.Operators.Equal(w_, "finished");
-			var y_ = this.Measurement_Period();
-			var z_ = Encounter?.Period;
-			var aa_ = FHIRHelpers_4_3_000.ToInterval(z_);
-			var ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, "day");
-			var ac_ = context.Operators.And(x_, ab_);
+			Code<Encounter.EncounterStatus> u_ = Encounter?.StatusElement;
+			Encounter.EncounterStatus? v_ = u_?.Value;
+			Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
+			bool? x_ = context.Operators.Equal(w_, "finished");
+			CqlInterval<CqlDateTime> y_ = this.Measurement_Period();
+			Period z_ = Encounter?.Period;
+			CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(z_);
+			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, "day");
+			bool? ac_ = context.Operators.And(x_, ab_);
 
 			return ac_;
 		};
-		var s_ = context.Operators.Where<Encounter>(q_, r_);
-		var t_ = context.Operators.Exists<Encounter>(s_);
+		IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
+		bool? t_ = context.Operators.Exists<Encounter>(s_);
 
 		return t_;
 	}
@@ -213,79 +212,74 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	public bool? Has_Encounter_during_Measurement_Period() => 
 		__Has_Encounter_during_Measurement_Period.Value;
 
-	private Tuple_BLEMZbHGbhMbZiIgCJaASVTUS First_Referral_during_First_10_Months_of_Measurement_Period_Value()
+	private (string ID, CqlDateTime AuthorDate)? First_Referral_during_First_10_Months_of_Measurement_Period_Value()
 	{
-		var a_ = this.Referral();
-		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		CqlValueSet a_ = this.Referral();
+		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		bool? c_(ServiceRequest ReferralOrder)
 		{
-			var j_ = ReferralOrder?.StatusElement;
-			var k_ = j_?.Value;
-			var l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
-			var m_ = context.Operators.Convert<string>(l_);
-			var n_ = new string[]
-			{
+			Code<RequestStatus> j_ = ReferralOrder?.StatusElement;
+			RequestStatus? k_ = j_?.Value;
+			Code<RequestStatus> l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
+			string m_ = context.Operators.Convert<string>(l_);
+			string[] n_ = [
 				"active",
 				"completed",
-			};
-			var o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
-			var p_ = ReferralOrder?.IntentElement;
-			var q_ = p_?.Value;
-			var r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
-			var s_ = context.Operators.Equal(r_, "order");
-			var t_ = context.Operators.And(o_, s_);
-			var u_ = ReferralOrder?.AuthoredOnElement;
-			var v_ = context.Operators.Convert<CqlDateTime>(u_);
-			var w_ = this.Measurement_Period();
-			var x_ = context.Operators.Start(w_);
-			var z_ = context.Operators.Start(w_);
-			var aa_ = context.Operators.DateTimeComponentFrom(z_, "year");
-			var ab_ = context.Operators.Date(aa_, 10, 31);
-			var ac_ = context.Operators.ConvertDateToDateTime(ab_);
-			var ad_ = context.Operators.Interval(x_, ac_, true, true);
-			var ae_ = context.Operators.In<CqlDateTime>(v_, ad_, "day");
-			var af_ = context.Operators.And(t_, ae_);
+			];
+			bool? o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
+			Code<RequestIntent> p_ = ReferralOrder?.IntentElement;
+			RequestIntent? q_ = p_?.Value;
+			Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
+			bool? s_ = context.Operators.Equal(r_, "order");
+			bool? t_ = context.Operators.And(o_, s_);
+			FhirDateTime u_ = ReferralOrder?.AuthoredOnElement;
+			CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
+			CqlInterval<CqlDateTime> w_ = this.Measurement_Period();
+			CqlDateTime x_ = context.Operators.Start(w_);
+			CqlDateTime z_ = context.Operators.Start(w_);
+			int? aa_ = context.Operators.DateTimeComponentFrom(z_, "year");
+			CqlDate ab_ = context.Operators.Date(aa_, 10, 31);
+			CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(ab_);
+			CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(x_, ac_, true, true);
+			bool? ae_ = context.Operators.In<CqlDateTime>(v_, ad_, "day");
+			bool? af_ = context.Operators.And(t_, ae_);
 
 			return af_;
 		};
-		var d_ = context.Operators.Where<ServiceRequest>(b_, c_);
-		Tuple_BLEMZbHGbhMbZiIgCJaASVTUS e_(ServiceRequest ReferralOrder)
+		IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
+		(string ID, CqlDateTime AuthorDate)? e_(ServiceRequest ReferralOrder)
 		{
-			var ag_ = ReferralOrder?.IdElement;
-			var ah_ = ag_?.Value;
-			var ai_ = ReferralOrder?.AuthoredOnElement;
-			var aj_ = context.Operators.Convert<CqlDateTime>(ai_);
-			var ak_ = new Tuple_BLEMZbHGbhMbZiIgCJaASVTUS
-			{
-				ID = ah_,
-				AuthorDate = aj_,
-			};
+			Id ag_ = ReferralOrder?.IdElement;
+			string ah_ = ag_?.Value;
+			FhirDateTime ai_ = ReferralOrder?.AuthoredOnElement;
+			CqlDateTime aj_ = context.Operators.Convert<CqlDateTime>(ai_);
+			(string ID, CqlDateTime AuthorDate)? ak_ = (ah_, aj_);
 
 			return ak_;
 		};
-		var f_ = context.Operators.Select<ServiceRequest, Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>(d_, e_);
-		object g_(Tuple_BLEMZbHGbhMbZiIgCJaASVTUS @this)
+		IEnumerable<(string ID, CqlDateTime AuthorDate)?> f_ = context.Operators.Select<ServiceRequest, (string ID, CqlDateTime AuthorDate)?>(d_, e_);
+		object g_((string ID, CqlDateTime AuthorDate)? @this)
 		{
-			var al_ = @this?.AuthorDate;
+			CqlDateTime al_ = @this?.AuthorDate;
 
 			return al_;
 		};
-		var h_ = context.Operators.SortBy<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
-		var i_ = context.Operators.First<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>(h_);
+		IEnumerable<(string ID, CqlDateTime AuthorDate)?> h_ = context.Operators.SortBy<(string ID, CqlDateTime AuthorDate)?>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+		(string ID, CqlDateTime AuthorDate)? i_ = context.Operators.First<(string ID, CqlDateTime AuthorDate)?>(h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("First Referral during First 10 Months of Measurement Period")]
-	public Tuple_BLEMZbHGbhMbZiIgCJaASVTUS First_Referral_during_First_10_Months_of_Measurement_Period() => 
+	public (string ID, CqlDateTime AuthorDate)? First_Referral_during_First_10_Months_of_Measurement_Period() => 
 		__First_Referral_during_First_10_Months_of_Measurement_Period.Value;
 
 	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Has_Encounter_during_Measurement_Period();
-		var b_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
-		var c_ = context.Operators.Not((bool?)(b_ is null));
-		var d_ = context.Operators.And(a_, c_);
+		bool? a_ = this.Has_Encounter_during_Measurement_Period();
+		(string ID, CqlDateTime AuthorDate)? b_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
+		bool? c_ = context.Operators.Not((bool?)(b_ is null));
+		bool? d_ = context.Operators.And(a_, c_);
 
 		return d_;
 	}
@@ -296,7 +290,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 	private bool? Denominator_Value()
 	{
-		var a_ = this.Initial_Population();
+		bool? a_ = this.Initial_Population();
 
 		return a_;
 	}
@@ -305,42 +299,42 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 	public bool? Denominator() => 
 		__Denominator.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Ethnicity() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer_Value()
+	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Payer();
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuple_GPRWMPNAYaJRiGDFSTLJOPeIJ> SDE_Payer() => 
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race_Value()
+	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Race();
+		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public Tuple_HPcCiDPXQfZTXIORThMLfTQDR SDE_Race() => 
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
 	private CqlCode SDE_Sex_Value()
 	{
-		var a_ = SupplementalDataElements_3_4_000.SDE_Sex();
+		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
 		return a_;
 	}
@@ -352,63 +346,63 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
     [CqlDeclaration("TaskGetRequestID")]
 	public IEnumerable<string> TaskGetRequestID(Task task)
 	{
-		string a_(ResourceReference Task)
+		List<ResourceReference> a_ = task?.BasedOn;
+		string b_(ResourceReference Task)
 		{
-			var c_ = Task?.ReferenceElement;
-			var d_ = c_?.Value;
-			var e_ = QICoreCommon_2_0_000.GetId(d_);
+			FhirString d_ = Task?.ReferenceElement;
+			string e_ = d_?.Value;
+			string f_ = QICoreCommon_2_0_000.GetId(e_);
 
-			return e_;
+			return f_;
 		};
-		var b_ = context.Operators.Select<ResourceReference, string>((IEnumerable<ResourceReference>)task?.BasedOn, a_);
+		IEnumerable<string> c_ = context.Operators.Select<ResourceReference, string>((IEnumerable<ResourceReference>)a_, b_);
 
-		return b_;
+		return c_;
 	}
 
 	private bool? Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop_Value()
 	{
-		var a_ = this.Consultant_Report();
-		var b_ = context.Operators.RetrieveByValueSet<Task>(a_, null);
+		CqlValueSet a_ = this.Consultant_Report();
+		IEnumerable<Task> b_ = context.Operators.RetrieveByValueSet<Task>(a_, null);
 		IEnumerable<Task> c_(Task ConsultantReportObtained)
 		{
-			var f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
-			var g_ = new Tuple_BLEMZbHGbhMbZiIgCJaASVTUS[]
-			{
+			(string ID, CqlDateTime AuthorDate)? f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period();
+			(string ID, CqlDateTime AuthorDate)?[] g_ = [
 				f_,
-			};
-			bool? h_(Tuple_BLEMZbHGbhMbZiIgCJaASVTUS FirstReferral)
+			];
+			bool? h_((string ID, CqlDateTime AuthorDate)? FirstReferral)
 			{
-				var l_ = FirstReferral?.ID;
-				var m_ = this.TaskGetRequestID(ConsultantReportObtained);
-				var n_ = context.Operators.In<string>(l_, m_);
-				var o_ = ConsultantReportObtained?.ExecutionPeriod;
-				var p_ = FHIRHelpers_4_3_000.ToInterval(o_);
-				var q_ = context.Operators.End(p_);
-				var r_ = FirstReferral?.AuthorDate;
-				var s_ = context.Operators.After(q_, r_, null);
-				var t_ = context.Operators.And(n_, s_);
-				var u_ = ConsultantReportObtained?.StatusElement;
-				var v_ = u_?.Value;
-				var w_ = context.Operators.Convert<Code<Task.TaskStatus>>(v_);
-				var x_ = context.Operators.Equal(w_, "completed");
-				var y_ = context.Operators.And(t_, x_);
-				var aa_ = FHIRHelpers_4_3_000.ToInterval(o_);
-				var ab_ = context.Operators.End(aa_);
-				var ac_ = this.Measurement_Period();
-				var ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");
-				var ae_ = context.Operators.And(y_, ad_);
+				string l_ = FirstReferral?.ID;
+				IEnumerable<string> m_ = this.TaskGetRequestID(ConsultantReportObtained);
+				bool? n_ = context.Operators.In<string>(l_, m_);
+				Period o_ = ConsultantReportObtained?.ExecutionPeriod;
+				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
+				CqlDateTime q_ = context.Operators.End(p_);
+				CqlDateTime r_ = FirstReferral?.AuthorDate;
+				bool? s_ = context.Operators.After(q_, r_, null);
+				bool? t_ = context.Operators.And(n_, s_);
+				Code<Task.TaskStatus> u_ = ConsultantReportObtained?.StatusElement;
+				Task.TaskStatus? v_ = u_?.Value;
+				Code<Task.TaskStatus> w_ = context.Operators.Convert<Code<Task.TaskStatus>>(v_);
+				bool? x_ = context.Operators.Equal(w_, "completed");
+				bool? y_ = context.Operators.And(t_, x_);
+				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(o_);
+				CqlDateTime ab_ = context.Operators.End(aa_);
+				CqlInterval<CqlDateTime> ac_ = this.Measurement_Period();
+				bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");
+				bool? ae_ = context.Operators.And(y_, ad_);
 
 				return ae_;
 			};
-			var i_ = context.Operators.Where<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>((IEnumerable<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS>)g_, h_);
-			Task j_(Tuple_BLEMZbHGbhMbZiIgCJaASVTUS FirstReferral) => 
+			IEnumerable<(string ID, CqlDateTime AuthorDate)?> i_ = context.Operators.Where<(string ID, CqlDateTime AuthorDate)?>(((IEnumerable<(string ID, CqlDateTime AuthorDate)?>)g_), h_);
+			Task j_((string ID, CqlDateTime AuthorDate)? FirstReferral) => 
 				ConsultantReportObtained;
-			var k_ = context.Operators.Select<Tuple_BLEMZbHGbhMbZiIgCJaASVTUS, Task>(i_, j_);
+			IEnumerable<Task> k_ = context.Operators.Select<(string ID, CqlDateTime AuthorDate)?, Task>(i_, j_);
 
 			return k_;
 		};
-		var d_ = context.Operators.SelectMany<Task, Task>(b_, c_);
-		var e_ = context.Operators.Exists<Task>(d_);
+		IEnumerable<Task> d_ = context.Operators.SelectMany<Task, Task>(b_, c_);
+		bool? e_ = context.Operators.Exists<Task>(d_);
 
 		return e_;
 	}
@@ -419,7 +413,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 	private bool? Numerator_Value()
 	{
-		var a_ = this.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop();
+		bool? a_ = this.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop();
 
 		return a_;
 	}

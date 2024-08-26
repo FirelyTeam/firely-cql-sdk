@@ -825,6 +825,7 @@ namespace Hl7.Cql.Elm {
 
         private string translatorOptionsField;
 
+        private string signatureLevelField;
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string translatorVersion {
@@ -846,8 +847,19 @@ namespace Hl7.Cql.Elm {
                 this.translatorOptionsField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string signatureLevel {
+            get {
+                return this.signatureLevelField;
+            }
+            set {
+                this.signatureLevelField = value;
+            }
+        }
     }
-
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CqlToElmError))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]

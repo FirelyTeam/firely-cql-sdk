@@ -11,13 +11,17 @@
   <ItemGroup>
     <Compile Include="..\..\Cql\CoreTests\LibrarySetsDirs.cs" Link="LibrarySetsDirs.cs" />
     <Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="DirectoryInfoExtensions.cs" />
+    <Compile Include="..\CLI\Helpers\LibraryExtensions.cs" Link="LibraryExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+    <PackageReference Include="coverlet.collector" Version="6.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

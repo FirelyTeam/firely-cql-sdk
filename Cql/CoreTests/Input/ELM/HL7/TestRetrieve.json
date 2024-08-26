@@ -1,0 +1,336 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "3.1.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestRetrieve",
+         "version" : "1.0.1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "locator" : "3:1-3:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1"
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "locator" : "5:1-5:54",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.0.1"
+         }, {
+            "locator" : "6:1-6:55",
+            "localIdentifier" : "test",
+            "path" : "TestRetrieveInclude",
+            "version" : "1.0.1"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "locator" : "26:1-26:112",
+            "name" : "MeasurementPeriod",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "default" : {
+               "locator" : "26:37-26:112",
+               "lowClosed" : true,
+               "highClosed" : false,
+               "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "low" : {
+                  "locator" : "26:46-26:77",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "year" : {
+                     "locator" : "26:55-26:58",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2013",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "locator" : "26:61",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "locator" : "26:64",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "locator" : "26:67",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "locator" : "26:70",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "locator" : "26:73",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "locator" : "26:76",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "locator" : "26:80-26:111",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "year" : {
+                     "locator" : "26:89-26:92",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2014",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "locator" : "26:95",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "locator" : "26:98",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "locator" : "26:101",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "locator" : "26:104",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "locator" : "26:107",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "locator" : "26:110",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "locator" : "8:1-8:56",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "ICD-10",
+            "id" : "http://hl7.org/fhir/sid/icd-10-cm",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "locator" : "10:1-10:58",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "HIV",
+            "id" : "2.16.840.1.113883.3.464.1003.120.12.1003",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "11:1-11:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Syphilis",
+            "id" : "2.16.840.1.113883.3.464.1003.112.12.1002",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "12:1-12:112",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Complications of Pregnancy, Childbirth and the Puerperium",
+            "id" : "2.16.840.1.113883.3.464.1003.111.12.1012",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "13:1-13:69",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Pregnancy Test",
+            "id" : "2.16.840.1.113883.3.464.1003.111.12.1011",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "14:1-14:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Pap Test",
+            "id" : "2.16.840.1.113883.3.464.1003.108.12.1017",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "15:1-15:81",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Lab Tests During Pregnancy",
+            "id" : "2.16.840.1.113883.3.464.1003.111.12.1007",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "16:1-16:100",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Lab Tests for Sexually Transmitted Infections",
+            "id" : "2.16.840.1.113883.3.464.1003.110.12.1051",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "17:1-17:74",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Chlamydia Screening",
+            "id" : "2.16.840.1.113883.3.464.1003.110.12.1052",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "19:1-19:109",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Palliative Care Assessment",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "20:1-20:108",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Palliative Care Encounter",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "21:1-21:111",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Palliative Care Intervention",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "locator" : "23:1-23:99",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "Encounter for palliative care",
+            "id" : "Z51.5",
+            "display" : "Encounter for palliative care",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "locator" : "23:52-23:59",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+               "name" : "ICD-10"
+            }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "28:1-28:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "28:1-28:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "28:1-28:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         } ]
+      }
+   }
+}
+
