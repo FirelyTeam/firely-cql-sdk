@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
@@ -7,13 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -21,6 +16,9 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class XmlTests : Base
     {
+        private static XmlSerializer Serializer = new(typeof(Xml.Tests));
+        private static readonly DateTimeOffset NowValue = new(2020, 1, 2, 3, 4, 0, TimeSpan.Zero);
+
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize(co =>
@@ -29,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
         });
 #pragma warning restore IDE0060 // Remove unused parameter
 
-        private static CqlContext CqlContext = FhirCqlContext.ForBundle();
+        private static CqlContext CqlContext = FhirCqlContext.ForBundle(now: NowValue);
         private static InvocationBuilder InvocationBuilder = Services.GetRequiredService<InvocationBuilder>();
         private static ElmFactory ElmFactory = Services.GetRequiredService<ElmFactory>();
 
@@ -38,33 +36,53 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Run(TestCase testCase)
         {
+            string testFullName = $"{testCase.Category}: {testCase.TestName}";
+
             if (SkippedTests.DoesNotCompile.TryGetValue(testCase.TestName, out var reason))
-                Assert.Inconclusive($"Case {testCase.Category}: {testCase.TestName} skipped: {reason}");
+                Assert.Inconclusive($"Case {testFullName} skipped: {reason}");
+
+            // If you want to test a particular case, you can uncomment the following lines
+            // if (testCase.TestName != "AgeInYearsAt")
+            //     Assert.Inconclusive("Skipped!");
+
             var expression = Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
-                Assert.Fail($"Case {testCase.Category}: {testCase.TestName} expression compiled with errors: {expressionErrors.First().message}");
-            if (testCase.Expectation is not null)
             {
-                var expectation = Expression(testCase.Expectation);
-                var expectationErrors = expectation.GetErrors();
-                if (expectationErrors.Any())
-                    Assert.Fail($"Case {testCase.Category}: {testCase.TestName} expectation compiled with errors: {expressionErrors.First().message}");
-                if (SkippedTests.DoesNotMatchExpectation.TryGetValue(testCase.TestName, out var doesNotMatchReason))
-                    Assert.Inconclusive($"Cannot evaluate case {testCase.Category}: {testCase.TestName}: {doesNotMatchReason}");
-                Elm.Expression equal = Equals(expression, expectation);
-                var equalLambda = LibraryExpressionBuilder.Lambda(equal);
-                var equalDelegate = equalLambda.Compile();
-                var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
-                if (equalResult != true)
-                {
-                    var expressionValue = LibraryExpressionBuilder.Lambda(expression).Compile().DynamicInvoke(CqlContext);
-                    var expectationValue = LibraryExpressionBuilder.Lambda(expectation).Compile().DynamicInvoke(CqlContext);
-                    Assert.Fail($"Expected {expectationValue}, but got {expressionValue}");
-                }
+                Assert.Fail($"Case {testFullName} expression compiled with errors: {expressionErrors.First().message}");
+                return;
             }
-            else
-                Assert.Inconclusive($"Case {testCase.Category}: {testCase.TestName} is inconclusive; no expectation provided.");
+
+            if (testCase.Expectation is null)
+            {
+                Assert.Inconclusive($"Case {testFullName} is inconclusive; no expectation provided.");
+                return;
+            }
+
+            var expectation = Expression(testCase.Expectation);
+            var expectationErrors = expectation.GetErrors();
+            if (expectationErrors.Any())
+            {
+                Assert.Fail($"Case {testFullName} expectation compiled with errors: {expressionErrors.First().message}");
+                return;
+            }
+
+            if (SkippedTests.DoesNotMatchExpectation.TryGetValue(testCase.TestName, out var doesNotMatchReason))
+            {
+                Assert.Inconclusive($"Cannot evaluate case {testFullName}: {testCase.TestName}: {doesNotMatchReason}");
+                return;
+            }
+
+            Elm.Expression equal = Equals(expression, expectation);
+            var equalLambda = LibraryExpressionBuilder.Lambda(equal);
+            var equalDelegate = equalLambda.Compile();
+            var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
+            if (equalResult != true)
+            {
+                var expressionValue = LibraryExpressionBuilder.Lambda(expression).Compile().DynamicInvoke(CqlContext);
+                var expectationValue = LibraryExpressionBuilder.Lambda(expectation).Compile().DynamicInvoke(CqlContext);
+                Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
+            }
         }
 
         private static Elm.Expression Equals(Elm.Expression expression, Elm.Expression expectation)
@@ -92,7 +110,6 @@ namespace Hl7.Cql.CqlToElm.Test
             return $"{tc.File}: {tc.Category}/{tc.TestName}";
         }
 
-        private static XmlSerializer Serializer = new(typeof(Xml.Tests));
         public static IEnumerable<object[]> GetTests()
         {
             var dir = new DirectoryInfo(@"Input\DQIC");
