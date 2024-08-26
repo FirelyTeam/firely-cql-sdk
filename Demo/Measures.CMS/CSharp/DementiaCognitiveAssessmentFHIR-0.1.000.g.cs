@@ -520,30 +520,28 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		{
 			bool? u_(Extension @this)
 			{
-				string ad_ = @this?.Url;
-				FhirUri ae_ = context.Operators.Convert<FhirUri>(ad_);
-				string af_ = FHIRHelpers_4_3_000.ToString(ae_);
-				bool? ag_ = context.Operators.Equal(af_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				string ac_ = @this?.Url;
+				string ad_ = FHIRHelpers_4_3_000.ToString(ac_);
+				bool? ae_ = context.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-				return ag_;
+				return ae_;
 			};
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoCognitiveAssessment is DomainResource)
 					? ((NoCognitiveAssessment as DomainResource).Extension)
 					: null), u_);
 			DataType w_(Extension @this)
 			{
-				DataType ah_ = @this?.Value;
+				DataType af_ = @this?.Value;
 
-				return ah_;
+				return af_;
 			};
 			IEnumerable<DataType> x_ = context.Operators.Select<Extension, DataType>(v_, w_);
 			DataType y_ = context.Operators.SingletonFrom<DataType>(x_);
-			CodeableConcept z_ = context.Operators.Convert<CodeableConcept>(y_);
-			CqlConcept aa_ = FHIRHelpers_4_3_000.ToConcept(z_);
-			CqlValueSet ab_ = this.Patient_Reason();
-			bool? ac_ = context.Operators.ConceptInValueSet(aa_, ab_);
+			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_);
+			CqlValueSet aa_ = this.Patient_Reason();
+			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
-			return ac_;
+			return ab_;
 		};
 		IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 

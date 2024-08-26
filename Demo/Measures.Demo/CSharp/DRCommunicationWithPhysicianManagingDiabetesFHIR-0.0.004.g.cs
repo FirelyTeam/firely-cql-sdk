@@ -473,7 +473,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			{
 				Period m_ = EncounterDiabeticRetinopathy?.Period;
 				CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.ToInterval(m_);
-				Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension((DomainResource)LevelOfSeverityNotCommunicated, "qicore-recorded");
+				Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(LevelOfSeverityNotCommunicated, "qicore-recorded");
 				DataType p_ = o_?.Value;
 				CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.ToInterval((p_ as Period));
 				bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, null);
@@ -493,7 +493,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			Code<EventStatus> s_ = LevelOfSeverityNotCommunicated?.StatusElement;
 			string t_ = FHIRHelpers_4_0_001.ToString(s_);
 			bool? u_ = context.Operators.Equal(t_, "not-done");
-			Extension v_ = this.GetModifierExtension((DomainResource)LevelOfSeverityNotCommunicated, "qicore-notDone");
+			Extension v_ = this.GetModifierExtension(LevelOfSeverityNotCommunicated, "qicore-notDone");
 			DataType w_ = v_?.Value;
 			bool? x_ = FHIRHelpers_4_0_001.ToBoolean((w_ as FhirBoolean));
 			bool? y_ = context.Operators.IsTrue(x_);
@@ -532,7 +532,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			{
 				Period n_ = EncounterDiabeticRetinopathy?.Period;
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.ToInterval(n_);
-				Extension p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension((DomainResource)MacularEdemaAbsentNotCommunicated, "qicore-recorded");
+				Extension p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(MacularEdemaAbsentNotCommunicated, "qicore-recorded");
 				DataType q_ = p_?.Value;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_0_001.ToInterval((q_ as Period));
 				bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, null);
@@ -552,7 +552,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			Code<EventStatus> t_ = MacularEdemaAbsentNotCommunicated?.StatusElement;
 			string u_ = FHIRHelpers_4_0_001.ToString(t_);
 			bool? v_ = context.Operators.Equal(u_, "not-done");
-			Extension w_ = this.GetModifierExtension((DomainResource)MacularEdemaAbsentNotCommunicated, "qicore-notDone");
+			Extension w_ = this.GetModifierExtension(MacularEdemaAbsentNotCommunicated, "qicore-notDone");
 			DataType x_ = w_?.Value;
 			bool? y_ = FHIRHelpers_4_0_001.ToBoolean((x_ as FhirBoolean));
 			bool? z_ = context.Operators.IsTrue(y_);
@@ -590,7 +590,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			{
 				Period m_ = EncounterDiabeticRetinopathy?.Period;
 				CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.ToInterval(m_);
-				Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension((DomainResource)MacularEdemaPresentNotCommunicated, "qicore-recorded");
+				Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(MacularEdemaPresentNotCommunicated, "qicore-recorded");
 				DataType p_ = o_?.Value;
 				CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.ToInterval((p_ as Period));
 				bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, null);
@@ -610,7 +610,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			Code<EventStatus> s_ = MacularEdemaPresentNotCommunicated?.StatusElement;
 			string t_ = FHIRHelpers_4_0_001.ToString(s_);
 			bool? u_ = context.Operators.Equal(t_, "not-done");
-			Extension v_ = this.GetModifierExtension((DomainResource)MacularEdemaPresentNotCommunicated, "qicore-notDone");
+			Extension v_ = this.GetModifierExtension(MacularEdemaPresentNotCommunicated, "qicore-notDone");
 			DataType w_ = v_?.Value;
 			bool? x_ = FHIRHelpers_4_0_001.ToBoolean((w_ as FhirBoolean));
 			bool? y_ = context.Operators.IsTrue(x_);

@@ -20,6 +20,8 @@ namespace Hl7.Cql.Elm;
 /// </summary>
 internal abstract class BaseElmTreeWalker
 {
+    public virtual void Walk(Library lib) => StartInternal(lib);
+
     /// <summary>
     /// Determine whether a node of a given type should be walked into.
     /// </summary>

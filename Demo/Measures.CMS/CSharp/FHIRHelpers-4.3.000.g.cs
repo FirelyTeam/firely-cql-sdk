@@ -636,7 +636,7 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (value is Age)
 			{
-				CqlQuantity y_ = this.ToQuantity((Quantity)(value as Age));
+				CqlQuantity y_ = this.ToQuantity((value as Age));
 
 				return (y_ as object);
 			}
@@ -654,19 +654,19 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (value is Count)
 			{
-				CqlQuantity ab_ = this.ToQuantity((Quantity)(value as Count));
+				CqlQuantity ab_ = this.ToQuantity((value as Count));
 
 				return (ab_ as object);
 			}
 			else if (value is Distance)
 			{
-				CqlQuantity ac_ = this.ToQuantity((Quantity)(value as Distance));
+				CqlQuantity ac_ = this.ToQuantity((value as Distance));
 
 				return (ac_ as object);
 			}
 			else if (value is Duration)
 			{
-				CqlQuantity ad_ = this.ToQuantity((Quantity)(value as Duration));
+				CqlQuantity ad_ = this.ToQuantity((value as Duration));
 
 				return (ad_ as object);
 			}

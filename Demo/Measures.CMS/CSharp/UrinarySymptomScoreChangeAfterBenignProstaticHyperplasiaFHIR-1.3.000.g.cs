@@ -1125,33 +1125,32 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			bool? i_((CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)
 			{
 				DataType m_ = BMIExam?.Value;
-				Quantity n_ = context.Operators.Convert<Quantity>(m_);
-				CqlQuantity o_ = FHIRHelpers_4_3_000.ToQuantity(n_);
-				CqlQuantity p_ = context.Operators.Quantity(40m, "kg/m2");
-				bool? q_ = context.Operators.Greater(o_, p_);
-				Code<ObservationStatus> r_ = BMIExam?.StatusElement;
-				ObservationStatus? s_ = r_?.Value;
-				string t_ = context.Operators.Convert<string>(s_);
-				string[] u_ = [
+				CqlQuantity n_ = FHIRHelpers_4_3_000.ToQuantity(m_);
+				CqlQuantity o_ = context.Operators.Quantity(40m, "kg/m2");
+				bool? p_ = context.Operators.Greater(n_, o_);
+				Code<ObservationStatus> q_ = BMIExam?.StatusElement;
+				ObservationStatus? r_ = q_?.Value;
+				string s_ = context.Operators.Convert<string>(r_);
+				string[] t_ = [
 					"final",
 					"amended",
 					"corrected",
 				];
-				bool? v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
-				bool? w_ = context.Operators.And(q_, v_);
-				DataType x_ = BMIExam?.Effective;
-				object y_ = FHIRHelpers_4_3_000.ToValue(x_);
-				CqlDateTime z_ = QICoreCommon_2_0_000.earliest(y_);
-				CqlInterval<CqlDateTime> aa_ = this.Measurement_Period();
-				bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
-				bool? ac_ = context.Operators.And(w_, ab_);
-				object ae_ = FHIRHelpers_4_3_000.ToValue(x_);
-				CqlDateTime af_ = QICoreCommon_2_0_000.earliest(ae_);
-				CqlDateTime ag_ = FollowUpUSSAssessment?.effectiveDatetime;
-				bool? ah_ = context.Operators.SameOrBefore(af_, ag_, null);
-				bool? ai_ = context.Operators.And(ac_, ah_);
+				bool? u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
+				bool? v_ = context.Operators.And(p_, u_);
+				DataType w_ = BMIExam?.Effective;
+				object x_ = FHIRHelpers_4_3_000.ToValue(w_);
+				CqlDateTime y_ = QICoreCommon_2_0_000.earliest(x_);
+				CqlInterval<CqlDateTime> z_ = this.Measurement_Period();
+				bool? aa_ = context.Operators.In<CqlDateTime>(y_, z_, "day");
+				bool? ab_ = context.Operators.And(v_, aa_);
+				object ad_ = FHIRHelpers_4_3_000.ToValue(w_);
+				CqlDateTime ae_ = QICoreCommon_2_0_000.earliest(ad_);
+				CqlDateTime af_ = FollowUpUSSAssessment?.effectiveDatetime;
+				bool? ag_ = context.Operators.SameOrBefore(ae_, af_, null);
+				bool? ah_ = context.Operators.And(ab_, ag_);
 
-				return ai_;
+				return ah_;
 			};
 			IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?> j_ = context.Operators.Where<(CqlDateTime effectiveDatetime, int? valueInteger)?>(((IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?>)h_), i_);
 			Observation k_((CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) => 
@@ -1163,11 +1162,11 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		IEnumerable<Observation> c_ = context.Operators.SelectMany<Observation, Observation>(a_, b_);
 		CqlDateTime d_(Observation BMIExam)
 		{
-			DataType aj_ = BMIExam?.Effective;
-			object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
-			CqlDateTime al_ = QICoreCommon_2_0_000.earliest(ak_);
+			DataType ai_ = BMIExam?.Effective;
+			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
+			CqlDateTime ak_ = QICoreCommon_2_0_000.earliest(aj_);
 
-			return al_;
+			return ak_;
 		};
 		IEnumerable<CqlDateTime> e_ = context.Operators.Select<Observation, CqlDateTime>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlDateTime>(e_);
