@@ -52,7 +52,7 @@ public class ParametersExample_0_0_1
     #endregion
 
 	private CqlValueSet Marital_Status_Value() => 
-		new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", default(string));
+		new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", default);
 
     [CqlDeclaration("Marital Status")]
     [CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status")]
@@ -72,7 +72,7 @@ public class ParametersExample_0_0_1
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
