@@ -90,7 +90,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
     #endregion
 
 	private CqlValueSet Emergency_Department_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default(string));
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
@@ -98,7 +98,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		__Emergency_Department_Visit.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default(string));
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -106,7 +106,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Observation_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default(string));
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
@@ -114,7 +114,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		__Observation_Services.Value;
 
 	private CqlValueSet Operating_Room_Suite_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.141", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.141", default(string));
 
     [CqlDeclaration("Operating Room Suite")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.141")]
@@ -122,7 +122,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		__Operating_Room_Suite.Value;
 
 	private CqlValueSet Opioid_Antagonist_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.119", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.119", default(string));
 
     [CqlDeclaration("Opioid Antagonist")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.119")]
@@ -130,7 +130,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		__Opioid_Antagonist.Value;
 
 	private CqlValueSet Opioids__All_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.226", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.226", default(string));
 
     [CqlDeclaration("Opioids, All")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.226")]
@@ -138,7 +138,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		__Opioids__All.Value;
 
 	private CqlValueSet Routes_of_Administration_for_Opioid_Antagonists_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.187", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.187", default(string));
 
     [CqlDeclaration("Routes of Administration for Opioid Antagonists")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.187")]
@@ -146,7 +146,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 		__Routes_of_Administration_for_Opioid_Antagonists.Value;
 
 	private CqlCode Dead_Value() => 
-		new CqlCode("419099009", "http://snomed.info/sct", null, null);
+		new CqlCode("419099009", "http://snomed.info/sct", default(string), default(string));
 
     [CqlDeclaration("Dead")]
 	public CqlCode Dead() => 
@@ -155,7 +155,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("419099009", "http://snomed.info/sct", null, null),
+			new CqlCode("419099009", "http://snomed.info/sct", default(string), default(string)),
 		];
 
 		return a_;
@@ -179,8 +179,8 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("HospitalHarmOpioidRelatedAdverseEventsFHIR-0.1.000", "Measurement Period", c_);
 
@@ -193,7 +193,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -206,7 +206,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
 		bool? c_(Encounter InpatientEncounter)
 		{
 			Patient e_ = this.Patient();
@@ -244,8 +244,8 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	private IEnumerable<MedicationAdministration> Opioid_Administration_Value()
 	{
 		CqlValueSet a_ = this.Opioids__All();
-		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
-		IEnumerable<MedicationAdministration> d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
+		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default(PropertyInfo));
+		IEnumerable<MedicationAdministration> d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default(PropertyInfo));
 		IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration Opioids)
 		{
@@ -283,7 +283,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 				CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToInterval(j_);
 				CqlDateTime l_ = context.Operators.Start(k_);
 				CqlInterval<CqlDateTime> m_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientEncounter);
-				bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
+				bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, default(string));
 				List<Encounter.LocationComponent> o_ = InpatientEncounter?.Location;
 				bool? p_(Encounter.LocationComponent EncounterLocation)
 				{
@@ -305,7 +305,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 					CqlDateTime ae_ = context.Operators.Start(ad_);
 					Period af_ = EncounterLocation?.Period;
 					CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
-					bool? ah_ = context.Operators.In<CqlDateTime>(ae_, ag_, null);
+					bool? ah_ = context.Operators.In<CqlDateTime>(ae_, ag_, default(string));
 					bool? ai_ = context.Operators.And(aa_, ah_);
 
 					return ai_;
@@ -358,8 +358,8 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	private IEnumerable<MedicationAdministration> Opioid_Antagonist_Administration_Value()
 	{
 		CqlValueSet a_ = this.Opioid_Antagonist();
-		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
-		IEnumerable<MedicationAdministration> d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
+		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default(PropertyInfo));
+		IEnumerable<MedicationAdministration> d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default(PropertyInfo));
 		IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration AntagonistGiven)
 		{
@@ -420,7 +420,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 				CqlDateTime br_ = context.Operators.Start(bq_);
 				Period bs_ = EncounterLocation?.Period;
 				CqlInterval<CqlDateTime> bt_ = FHIRHelpers_4_3_000.ToInterval(bs_);
-				bool? bu_ = context.Operators.In<CqlDateTime>(br_, bt_, null);
+				bool? bu_ = context.Operators.In<CqlDateTime>(br_, bt_, default(string));
 				bool? bv_ = context.Operators.And(bn_, bu_);
 
 				return bv_;
@@ -433,12 +433,12 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_);
 			CqlDateTime t_ = context.Operators.Start(s_);
 			CqlInterval<CqlDateTime> u_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_dioqpvxlkifmhgtiyeejrusad?.EncounterWithQualifyingAge);
-			bool? v_ = context.Operators.In<CqlDateTime>(t_, u_, null);
+			bool? v_ = context.Operators.In<CqlDateTime>(t_, u_, default(string));
 			DataType w_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidGiven?.Effective;
 			object x_ = FHIRHelpers_4_3_000.ToValue(w_);
 			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_);
 			CqlDateTime z_ = context.Operators.Start(y_);
-			bool? ab_ = context.Operators.In<CqlDateTime>(z_, u_, null);
+			bool? ab_ = context.Operators.In<CqlDateTime>(z_, u_, default(string));
 			bool? ac_ = context.Operators.And(v_, ab_);
 			object ae_ = FHIRHelpers_4_3_000.ToValue(w_);
 			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
@@ -452,7 +452,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 			CqlInterval<CqlDateTime> ap_ = QICoreCommon_2_0_000.ToInterval(ao_);
 			CqlDateTime aq_ = context.Operators.Start(ap_);
 			CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(am_, aq_, true, false);
-			bool? as_ = context.Operators.In<CqlDateTime>(ag_, ar_, null);
+			bool? as_ = context.Operators.In<CqlDateTime>(ag_, ar_, default(string));
 			object au_ = FHIRHelpers_4_3_000.ToValue(q_);
 			CqlInterval<CqlDateTime> av_ = QICoreCommon_2_0_000.ToInterval(au_);
 			CqlDateTime aw_ = context.Operators.Start(av_);

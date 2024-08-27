@@ -6,8 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
@@ -121,4 +125,42 @@ internal static class TypeExtensions
             ({ IsGenericTypeDefinition: true }, { IsConstructedGenericType: true } b) => b.GetGenericTypeDefinition(),
             var (_, b)                                                                => b,
         };
+
+
+    /// <summary>
+    /// Determines if <paramref name="obj"/> is null or default.
+    /// </summary>
+    /// <remarks>Only use this method where <typeparamref name="TObject"/> is <see cref="object"/>.</remarks>
+    /// <typeparam name="TObject">Must always be <see cref="System.Object"/>.</typeparam>
+    public static bool IsObjectNullOrDefault<TObject>(
+        [NotNullWhen(true)]
+        this TObject? obj)
+    {
+        if (typeof(TObject) != typeof(object))
+            throw new NotSupportedException(
+            "Although this method is generic, it is intended to be used on System.Object only. "
+            + "There are better alternatives to check for default on specific types.");
+
+        if (obj == null)
+            return true; // Null is considered the default for reference types
+
+        var type = obj.GetType();
+        if (!type.IsValueType)
+            return false; // Non-obj types can't have a default obj
+
+        var defaultValue = DefaultValueByType.GetOrAdd(type, GetDefaultValue);
+        return Equals(defaultValue, obj);
+    }
+
+    private static readonly ConcurrentDictionary<Type, object> DefaultValueByType = new();
+
+    private static object GetDefaultValue(Type type)
+    {
+        // Using expressions is more performant than Activator.CreateInstance(type)
+        var defaultValueFunc = Expression.Lambda<Func<object>>(
+            Expression.Convert(Expression.Default(type), typeof(object))
+        ).Compile();
+
+        return defaultValueFunc();
+    }
 }

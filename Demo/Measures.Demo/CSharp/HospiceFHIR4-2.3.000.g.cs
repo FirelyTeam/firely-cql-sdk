@@ -54,7 +54,7 @@ public class HospiceFHIR4_2_3_000
     #endregion
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default(string));
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -62,7 +62,7 @@ public class HospiceFHIR4_2_3_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Hospice_care_ambulatory_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", default(string));
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
@@ -70,14 +70,14 @@ public class HospiceFHIR4_2_3_000
 		__Hospice_care_ambulatory.Value;
 
 	private CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure__Value() => 
-		new CqlCode("428371000124100", "http://snomed.info/sct", null, null);
+		new CqlCode("428371000124100", "http://snomed.info/sct", default(string), default(string));
 
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
 	public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_() => 
 		__Discharge_to_healthcare_facility_for_hospice_care__procedure_.Value;
 
 	private CqlCode Discharge_to_home_for_hospice_care__procedure__Value() => 
-		new CqlCode("428361000124107", "http://snomed.info/sct", null, null);
+		new CqlCode("428361000124107", "http://snomed.info/sct", default(string), default(string));
 
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
 	public CqlCode Discharge_to_home_for_hospice_care__procedure_() => 
@@ -86,8 +86,8 @@ public class HospiceFHIR4_2_3_000
 	private CqlCode[] SNOMEDCT_2017_09_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
-			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
+			new CqlCode("428371000124100", "http://snomed.info/sct", default(string), default(string)),
+			new CqlCode("428361000124107", "http://snomed.info/sct", default(string), default(string)),
 		];
 
 		return a_;
@@ -110,7 +110,7 @@ public class HospiceFHIR4_2_3_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -123,7 +123,7 @@ public class HospiceFHIR4_2_3_000
 	private bool? Has_Hospice_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
 		bool? c_(Encounter DischargeHospice)
 		{
 			Code<Encounter.EncounterStatus> r_ = DischargeHospice?.StatusElement;
@@ -146,7 +146,7 @@ public class HospiceFHIR4_2_3_000
 			CqlInterval<CqlDateTime> aj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ai_ as object));
 			CqlDateTime ak_ = context.Operators.End(aj_);
 			CqlInterval<CqlDateTime> al_ = this.Measurement_Period();
-			bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, null);
+			bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, default(string));
 			bool? an_ = context.Operators.And(ah_, am_);
 
 			return an_;
@@ -154,7 +154,7 @@ public class HospiceFHIR4_2_3_000
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 		bool? e_ = context.Operators.Exists<Encounter>(d_);
 		CqlValueSet f_ = this.Hospice_care_ambulatory();
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
+		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default(PropertyInfo));
 		bool? h_(ServiceRequest HospiceOrder)
 		{
 			Code<RequestStatus> ao_ = HospiceOrder?.StatusElement;
@@ -171,7 +171,7 @@ public class HospiceFHIR4_2_3_000
 			CqlInterval<CqlDateTime> aw_ = this.Measurement_Period();
 			FhirDateTime ax_ = HospiceOrder?.AuthoredOnElement;
 			CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ax_ as object));
-			bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, null);
+			bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, default(string));
 			bool? ba_ = context.Operators.And(av_, az_);
 
 			return ba_;
@@ -179,7 +179,7 @@ public class HospiceFHIR4_2_3_000
 		IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
 		bool? j_ = context.Operators.Exists<ServiceRequest>(i_);
 		bool? k_ = context.Operators.Or(e_, j_);
-		IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(f_, null);
+		IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default(PropertyInfo));
 		bool? n_(Procedure HospicePerformed)
 		{
 			Code<EventStatus> bb_ = HospicePerformed?.StatusElement;
@@ -188,7 +188,7 @@ public class HospiceFHIR4_2_3_000
 			DataType be_ = HospicePerformed?.Performed;
 			CqlInterval<CqlDateTime> bf_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(be_);
 			CqlInterval<CqlDateTime> bg_ = this.Measurement_Period();
-			bool? bh_ = context.Operators.Overlaps(bf_, bg_, null);
+			bool? bh_ = context.Operators.Overlaps(bf_, bg_, default(string));
 			bool? bi_ = context.Operators.And(bd_, bh_);
 
 			return bi_;

@@ -118,28 +118,28 @@ public class FHIRHelpers_4_3_000
 					if (c_())
 					{
 						CqlQuantity w_ = this.ToQuantityIgnoringComparator(quantity);
-						CqlInterval<CqlQuantity> x_ = context.Operators.Interval(null, w_, true, false);
+						CqlInterval<CqlQuantity> x_ = context.Operators.Interval(default(CqlQuantity), w_, true, false);
 
 						return x_;
 					}
 					else if (d_())
 					{
 						CqlQuantity y_ = this.ToQuantityIgnoringComparator(quantity);
-						CqlInterval<CqlQuantity> z_ = context.Operators.Interval(null, y_, true, true);
+						CqlInterval<CqlQuantity> z_ = context.Operators.Interval(default(CqlQuantity), y_, true, true);
 
 						return z_;
 					}
 					else if (e_())
 					{
 						CqlQuantity aa_ = this.ToQuantityIgnoringComparator(quantity);
-						CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, null, true, true);
+						CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, default(CqlQuantity), true, true);
 
 						return ab_;
 					}
 					else if (f_())
 					{
 						CqlQuantity ac_ = this.ToQuantityIgnoringComparator(quantity);
-						CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, null, false, true);
+						CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, default(CqlQuantity), false, true);
 
 						return ad_;
 					}
@@ -261,11 +261,11 @@ public class FHIRHelpers_4_3_000
 			};
 			if ((quantity is null))
 			{
-				return null;
+				return default(CqlQuantity);
 			}
 			else if ((quantity?.ValueElement is null))
 			{
-				return null;
+				return default(CqlQuantity);
 			}
 			else if (b_())
 			{
@@ -330,11 +330,11 @@ public class FHIRHelpers_4_3_000
 			};
 			if ((quantity is null))
 			{
-				return null;
+				return default(CqlQuantity);
 			}
 			else if ((quantity?.ValueElement is null))
 			{
-				return null;
+				return default(CqlQuantity);
 			}
 			else if (b_())
 			{
@@ -379,7 +379,7 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((ratio is null))
 			{
-				return null;
+				return default(CqlRatio);
 			}
 			else
 			{
@@ -403,7 +403,7 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((coding is null))
 			{
-				return null;
+				return default(CqlCode);
 			}
 			else
 			{
@@ -431,7 +431,7 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((concept is null))
 			{
-				return null;
+				return default(CqlConcept);
 			}
 			else
 			{
@@ -461,7 +461,7 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((uri is null))
 			{
-				return null;
+				return default(CqlValueSet);
 			}
 			else
 			{
@@ -485,7 +485,7 @@ public class FHIRHelpers_4_3_000
 		{
 			if ((reference is null))
 			{
-				return null;
+				return default(ResourceReference);
 			}
 			else
 			{

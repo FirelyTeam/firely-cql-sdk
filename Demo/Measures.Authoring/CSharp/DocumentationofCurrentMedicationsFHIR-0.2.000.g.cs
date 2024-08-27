@@ -70,7 +70,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
     #endregion
 
 	private CqlValueSet Encounter_to_Document_Medications_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", default(string));
 
     [CqlDeclaration("Encounter to Document Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834")]
@@ -78,7 +78,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 		__Encounter_to_Document_Medications.Value;
 
 	private CqlValueSet Medical_Reason_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default(string));
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
@@ -86,7 +86,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 		__Medical_Reason.Value;
 
 	private CqlCode Documentation_of_current_medications__procedure__Value() => 
-		new CqlCode("428191000124101", "http://snomed.info/sct", null, null);
+		new CqlCode("428191000124101", "http://snomed.info/sct", default(string), default(string));
 
     [CqlDeclaration("Documentation of current medications (procedure)")]
 	public CqlCode Documentation_of_current_medications__procedure_() => 
@@ -95,7 +95,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("428191000124101", "http://snomed.info/sct", null, null),
+			new CqlCode("428191000124101", "http://snomed.info/sct", default(string), default(string)),
 		];
 
 		return a_;
@@ -107,8 +107,8 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("DocumentationofCurrentMedicationsFHIR-0.2.000", "Measurement Period", c_);
 
@@ -121,7 +121,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -178,7 +178,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 	private IEnumerable<Encounter> Qualifying_Encounter_during_day_of_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Encounter_to_Document_Medications();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
 		bool? c_(Encounter ValidEncounter)
 		{
 			Code<Encounter.EncounterStatus> e_ = ValidEncounter?.StatusElement;
@@ -231,7 +231,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 		{
 			CqlCode d_ = this.Documentation_of_current_medications__procedure_();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Procedure> f_ = context.Operators.RetrieveByCodes<Procedure>(e_, null);
+			IEnumerable<Procedure> f_ = context.Operators.RetrieveByCodes<Procedure>(e_, default(PropertyInfo));
 			bool? g_(Procedure MedicationsDocumented)
 			{
 				DataType k_ = MedicationsDocumented?.Performed;
@@ -240,7 +240,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 				CqlDateTime n_ = context.Operators.End(m_);
 				Period o_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
-				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, null);
+				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, default(string));
 				Code<EventStatus> r_ = MedicationsDocumented?.StatusElement;
 				EventStatus? s_ = r_?.Value;
 				string t_ = context.Operators.Convert<string>(s_);
@@ -272,7 +272,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 		{
 			CqlCode d_ = this.Documentation_of_current_medications__procedure_();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Procedure> f_ = context.Operators.RetrieveByCodes<Procedure>(e_, null);
+			IEnumerable<Procedure> f_ = context.Operators.RetrieveByCodes<Procedure>(e_, default(PropertyInfo));
 			bool? g_(Procedure MedicationsNotDocumented)
 			{
 				bool? k_(Extension @this)
@@ -286,7 +286,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 				};
 				IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MedicationsNotDocumented is DomainResource)
 						? ((MedicationsNotDocumented as DomainResource).Extension)
-						: null), k_);
+						: default(List<Extension>)), k_);
 				DataType m_(Extension @this)
 				{
 					DataType ai_ = @this?.Value;
@@ -298,7 +298,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 				CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(o_);
 				Period q_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(q_);
-				bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, null);
+				bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, default(string));
 				Code<EventStatus> t_ = MedicationsNotDocumented?.StatusElement;
 				EventStatus? u_ = t_?.Value;
 				string v_ = context.Operators.Convert<string>(u_);

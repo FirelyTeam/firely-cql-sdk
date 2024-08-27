@@ -96,7 +96,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
     #endregion
 
 	private CqlValueSet Anticoagulant_Therapy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200", default(string));
 
     [CqlDeclaration("Anticoagulant Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200")]
@@ -104,7 +104,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__Anticoagulant_Therapy.Value;
 
 	private CqlValueSet Atrial_Ablation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203", default(string));
 
     [CqlDeclaration("Atrial Ablation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203")]
@@ -112,7 +112,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__Atrial_Ablation.Value;
 
 	private CqlValueSet Atrial_Fibrillation_or_Flutter_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202", default(string));
 
     [CqlDeclaration("Atrial Fibrillation or Flutter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202")]
@@ -120,7 +120,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__Atrial_Fibrillation_or_Flutter.Value;
 
 	private CqlValueSet Discharge_To_Acute_Care_Facility_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", default(string));
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
@@ -128,7 +128,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__Discharge_To_Acute_Care_Facility.Value;
 
 	private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default(string));
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
@@ -136,7 +136,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
 
 	private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default(string));
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
@@ -144,7 +144,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__Discharged_to_Home_for_Hospice_Care.Value;
 
 	private CqlValueSet History_of_Atrial_Ablation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76", default(string));
 
     [CqlDeclaration("History of Atrial Ablation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76")]
@@ -152,7 +152,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__History_of_Atrial_Ablation.Value;
 
 	private CqlValueSet Left_Against_Medical_Advice_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", default(string));
 
     [CqlDeclaration("Left Against Medical Advice")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308")]
@@ -160,7 +160,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__Left_Against_Medical_Advice.Value;
 
 	private CqlValueSet Medical_Reason_For_Not_Providing_Treatment_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", default(string));
 
     [CqlDeclaration("Medical Reason For Not Providing Treatment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473")]
@@ -168,7 +168,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__Medical_Reason_For_Not_Providing_Treatment.Value;
 
 	private CqlValueSet Patient_Expired_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default(string));
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
@@ -176,7 +176,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		__Patient_Expired.Value;
 
 	private CqlValueSet Patient_Refusal_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", default(string));
 
     [CqlDeclaration("Patient Refusal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93")]
@@ -185,8 +185,8 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR-0.3.000", "Measurement Period", c_);
 
@@ -199,7 +199,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -226,7 +226,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		bool? b_(Encounter IschemicStrokeEncounter)
 		{
 			CqlValueSet l_ = this.Atrial_Ablation();
-			IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, null);
+			IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, default(PropertyInfo));
 			bool? n_(Procedure AtrialAblationProcedure)
 			{
 				Code<EventStatus> q_ = AtrialAblationProcedure?.StatusElement;
@@ -240,7 +240,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				Period y_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
 				CqlDateTime aa_ = context.Operators.Start(z_);
-				bool? ab_ = context.Operators.Before(x_, aa_, null);
+				bool? ab_ = context.Operators.Before(x_, aa_, default(string));
 				bool? ac_ = context.Operators.And(t_, ab_);
 
 				return ac_;
@@ -254,7 +254,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		IEnumerable<Encounter> e_(Encounter IschemicStrokeEncounter)
 		{
 			CqlValueSet ad_ = this.History_of_Atrial_Ablation();
-			IEnumerable<Condition> ae_ = context.Operators.RetrieveByValueSet<Condition>(ad_, null);
+			IEnumerable<Condition> ae_ = context.Operators.RetrieveByValueSet<Condition>(ad_, default(PropertyInfo));
 			bool? af_(Condition AtrialAblationDiagnosis)
 			{
 				CodeableConcept aj_ = AtrialAblationDiagnosis?.VerificationStatus;
@@ -272,7 +272,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				Period aw_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
 				CqlDateTime ay_ = context.Operators.Start(ax_);
-				bool? az_ = context.Operators.Before(av_, ay_, null);
+				bool? az_ = context.Operators.Before(av_, ay_, default(string));
 				bool? ba_ = context.Operators.And(ar_, az_);
 
 				return ba_;
@@ -289,7 +289,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		IEnumerable<Encounter> i_(Encounter IschemicStrokeEncounter)
 		{
 			CqlValueSet bb_ = this.History_of_Atrial_Ablation();
-			IEnumerable<Observation> bc_ = context.Operators.RetrieveByValueSet<Observation>(bb_, null);
+			IEnumerable<Observation> bc_ = context.Operators.RetrieveByValueSet<Observation>(bb_, default(PropertyInfo));
 			bool? bd_(Observation AtrialAblationObservation)
 			{
 				Code<ObservationStatus> bh_ = AtrialAblationObservation?.StatusElement;
@@ -358,7 +358,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				Period bp_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> bq_ = FHIRHelpers_4_3_000.ToInterval(bp_);
 				CqlDateTime br_ = context.Operators.End(bq_);
-				bool? bs_ = context.Operators.SameOrBefore(bo_, br_, null);
+				bool? bs_ = context.Operators.SameOrBefore(bo_, br_, default(string));
 				bool? bt_ = context.Operators.And(bm_, bs_);
 
 				return bt_;
@@ -386,7 +386,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
 		{
 			CqlValueSet h_ = this.Atrial_Fibrillation_or_Flutter();
-			IEnumerable<Condition> i_ = context.Operators.RetrieveByValueSet<Condition>(h_, null);
+			IEnumerable<Condition> i_ = context.Operators.RetrieveByValueSet<Condition>(h_, default(PropertyInfo));
 			bool? j_(Condition AtrialFibrillationFlutter)
 			{
 				CodeableConcept n_ = AtrialFibrillationFlutter?.VerificationStatus;
@@ -404,7 +404,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				Period aa_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_3_000.ToInterval(aa_);
 				CqlDateTime ac_ = context.Operators.End(ab_);
-				bool? ad_ = context.Operators.SameOrBefore(z_, ac_, null);
+				bool? ad_ = context.Operators.SameOrBefore(z_, ac_, default(string));
 				bool? ae_ = context.Operators.And(v_, ad_);
 
 				return ae_;
@@ -472,7 +472,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				object m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				CqlInterval<CqlDateTime> o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
-				bool? p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, null);
+				bool? p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, default(string));
 
 				return p_;
 			};
@@ -547,8 +547,8 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 		IEnumerable<Encounter> b_(Encounter Encounter)
 		{
 			CqlValueSet d_ = this.Anticoagulant_Therapy();
-			IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
-			IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
+			IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default(PropertyInfo));
+			IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default(PropertyInfo));
 			IEnumerable<MedicationRequest> h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest DischargeAnticoagulant)
 			{
@@ -585,7 +585,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				CqlDateTime ah_ = context.Operators.Convert<CqlDateTime>(ag_);
 				Period ai_ = Encounter?.Period;
 				CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(ai_);
-				bool? ak_ = context.Operators.In<CqlDateTime>(ah_, aj_, null);
+				bool? ak_ = context.Operators.In<CqlDateTime>(ah_, aj_, default(string));
 				bool? al_ = context.Operators.And(af_, ak_);
 
 				return al_;
@@ -609,7 +609,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 	private IEnumerable<MedicationRequest> Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge_Value()
 	{
 		CqlValueSet a_ = this.Anticoagulant_Therapy();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
 		bool? c_(MedicationRequest NoAnticoagulant)
 		{
 			List<CodeableConcept> e_ = NoAnticoagulant?.ReasonCode;
@@ -672,7 +672,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
 				Period k_ = Encounter?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
-				bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, null);
+				bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, default(string));
 
 				return m_;
 			};

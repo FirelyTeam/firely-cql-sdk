@@ -152,7 +152,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
     #endregion
 
 	private CqlValueSet Annual_Wellness_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default(string));
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
@@ -160,7 +160,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Annual_Wellness_Visit.Value;
 
 	private CqlValueSet Home_Healthcare_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default(string));
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
@@ -168,7 +168,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Home_Healthcare_Services.Value;
 
 	private CqlValueSet Limited_Life_Expectancy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1259", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1259", default(string));
 
     [CqlDeclaration("Limited Life Expectancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1259")]
@@ -176,7 +176,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Limited_Life_Expectancy.Value;
 
 	private CqlValueSet Medical_Reason_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default(string));
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
@@ -184,7 +184,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Medical_Reason.Value;
 
 	private CqlValueSet Nutrition_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1006", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1006", default(string));
 
     [CqlDeclaration("Nutrition Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1006")]
@@ -192,7 +192,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Nutrition_Services.Value;
 
 	private CqlValueSet Occupational_Therapy_Evaluation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011", default(string));
 
     [CqlDeclaration("Occupational Therapy Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011")]
@@ -200,7 +200,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Occupational_Therapy_Evaluation.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default(string));
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
@@ -208,7 +208,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Office_Visit.Value;
 
 	private CqlValueSet Online_Assessments_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default(string));
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
@@ -216,7 +216,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Online_Assessments.Value;
 
 	private CqlValueSet Ophthalmological_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default(string));
 
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
@@ -224,7 +224,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Ophthalmological_Services.Value;
 
 	private CqlValueSet Physical_Therapy_Evaluation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1022", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1022", default(string));
 
     [CqlDeclaration("Physical Therapy Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1022")]
@@ -232,7 +232,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Physical_Therapy_Evaluation.Value;
 
 	private CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default(string));
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
@@ -240,7 +240,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Preventive_Care_Services_Established_Office_Visit__18_and_Up.Value;
 
 	private CqlValueSet Preventive_Care_Services_Group_Counseling_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default(string));
 
     [CqlDeclaration("Preventive Care Services Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
@@ -248,7 +248,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Preventive_Care_Services_Group_Counseling.Value;
 
 	private CqlValueSet Preventive_Care_Services_Individual_Counseling_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default(string));
 
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
@@ -256,7 +256,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Preventive_Care_Services_Individual_Counseling.Value;
 
 	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default(string));
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
@@ -264,7 +264,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
 	private CqlValueSet Psych_Visit_Diagnostic_Evaluation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default(string));
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
@@ -272,7 +272,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Psych_Visit_Diagnostic_Evaluation.Value;
 
 	private CqlValueSet Psych_Visit_Psychotherapy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default(string));
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
@@ -280,7 +280,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Psych_Visit_Psychotherapy.Value;
 
 	private CqlValueSet Psychoanalysis_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141", default(string));
 
     [CqlDeclaration("Psychoanalysis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141")]
@@ -288,7 +288,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Psychoanalysis.Value;
 
 	private CqlValueSet Speech_and_Hearing_Evaluation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1530", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1530", default(string));
 
     [CqlDeclaration("Speech and Hearing Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1530")]
@@ -296,7 +296,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Speech_and_Hearing_Evaluation.Value;
 
 	private CqlValueSet Telephone_Visits_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default(string));
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
@@ -304,7 +304,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Telephone_Visits.Value;
 
 	private CqlValueSet Tobacco_Non_User_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1189", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1189", default(string));
 
     [CqlDeclaration("Tobacco Non User")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1189")]
@@ -312,7 +312,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Tobacco_Non_User.Value;
 
 	private CqlValueSet Tobacco_Use_Cessation_Counseling_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.509", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.509", default(string));
 
     [CqlDeclaration("Tobacco Use Cessation Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.509")]
@@ -320,7 +320,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Tobacco_Use_Cessation_Counseling.Value;
 
 	private CqlValueSet Tobacco_Use_Cessation_Pharmacotherapy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1190", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1190", default(string));
 
     [CqlDeclaration("Tobacco Use Cessation Pharmacotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1190")]
@@ -328,7 +328,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Tobacco_Use_Cessation_Pharmacotherapy.Value;
 
 	private CqlValueSet Tobacco_Use_Screening_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1278", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1278", default(string));
 
     [CqlDeclaration("Tobacco Use Screening")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1278")]
@@ -336,7 +336,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Tobacco_Use_Screening.Value;
 
 	private CqlValueSet Tobacco_User_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1170", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1170", default(string));
 
     [CqlDeclaration("Tobacco User")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1170")]
@@ -344,35 +344,35 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		__Tobacco_User.Value;
 
 	private CqlCode Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making__Value() => 
-		new CqlCode("96156", "http://www.ama-assn.org/go/cpt", null, null);
+		new CqlCode("96156", "http://www.ama-assn.org/go/cpt", default(string), default(string));
 
     [CqlDeclaration("Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making)")]
 	public CqlCode Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_() => 
 		__Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_.Value;
 
 	private CqlCode Health_behavior_intervention__individual__face_to_face__initial_30_minutes_Value() => 
-		new CqlCode("96158", "http://www.ama-assn.org/go/cpt", null, null);
+		new CqlCode("96158", "http://www.ama-assn.org/go/cpt", default(string), default(string));
 
     [CqlDeclaration("Health behavior intervention, individual, face-to-face; initial 30 minutes")]
 	public CqlCode Health_behavior_intervention__individual__face_to_face__initial_30_minutes() => 
 		__Health_behavior_intervention__individual__face_to_face__initial_30_minutes.Value;
 
 	private CqlCode Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure_Value() => 
-		new CqlCode("99024", "http://www.ama-assn.org/go/cpt", null, null);
+		new CqlCode("99024", "http://www.ama-assn.org/go/cpt", default(string), default(string));
 
     [CqlDeclaration("Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure")]
 	public CqlCode Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure() => 
 		__Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure.Value;
 
 	private CqlCode Tobacco_abuse_counseling_Value() => 
-		new CqlCode("Z71.6", "http://hl7.org/fhir/sid/icd-10-cm", null, null);
+		new CqlCode("Z71.6", "http://hl7.org/fhir/sid/icd-10-cm", default(string), default(string));
 
     [CqlDeclaration("Tobacco abuse counseling")]
 	public CqlCode Tobacco_abuse_counseling() => 
 		__Tobacco_abuse_counseling.Value;
 
 	private CqlCode Unlisted_preventive_medicine_service_Value() => 
-		new CqlCode("99429", "http://www.ama-assn.org/go/cpt", null, null);
+		new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default(string), default(string));
 
     [CqlDeclaration("Unlisted preventive medicine service")]
 	public CqlCode Unlisted_preventive_medicine_service() => 
@@ -381,10 +381,10 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private CqlCode[] CPT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("96156", "http://www.ama-assn.org/go/cpt", null, null),
-			new CqlCode("96158", "http://www.ama-assn.org/go/cpt", null, null),
-			new CqlCode("99024", "http://www.ama-assn.org/go/cpt", null, null),
-			new CqlCode("99429", "http://www.ama-assn.org/go/cpt", null, null),
+			new CqlCode("96156", "http://www.ama-assn.org/go/cpt", default(string), default(string)),
+			new CqlCode("96158", "http://www.ama-assn.org/go/cpt", default(string), default(string)),
+			new CqlCode("99024", "http://www.ama-assn.org/go/cpt", default(string), default(string)),
+			new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default(string), default(string)),
 		];
 
 		return a_;
@@ -397,7 +397,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private CqlCode[] ICD10CM_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("Z71.6", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
+			new CqlCode("Z71.6", "http://hl7.org/fhir/sid/icd-10-cm", default(string), default(string)),
 		];
 
 		return a_;
@@ -409,8 +409,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR-0.0.001", "Measurement Period", c_);
 
@@ -423,7 +423,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -436,8 +436,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<Encounter> Qualifying_Visit_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
-		IEnumerable<Encounter> c_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
+		IEnumerable<Encounter> c_ = context.Operators.RetrieveByValueSet<Encounter>(default(CqlValueSet), default(PropertyInfo));
 		bool? d_(Encounter E)
 		{
 			List<CodeableConcept> ar_ = E?.Type;
@@ -488,35 +488,35 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		};
 		IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(c_, h_);
 		CqlValueSet j_ = this.Occupational_Therapy_Evaluation();
-		IEnumerable<Encounter> k_ = context.Operators.RetrieveByValueSet<Encounter>(j_, null);
+		IEnumerable<Encounter> k_ = context.Operators.RetrieveByValueSet<Encounter>(j_, default(PropertyInfo));
 		IEnumerable<Encounter> l_ = context.Operators.Union<Encounter>(i_, k_);
 		IEnumerable<Encounter> m_ = context.Operators.Union<Encounter>(f_, l_);
 		CqlValueSet n_ = this.Office_Visit();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default(PropertyInfo));
 		CqlValueSet p_ = this.Ophthalmological_Services();
-		IEnumerable<Encounter> q_ = context.Operators.RetrieveByValueSet<Encounter>(p_, null);
+		IEnumerable<Encounter> q_ = context.Operators.RetrieveByValueSet<Encounter>(p_, default(PropertyInfo));
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(o_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(m_, r_);
 		CqlValueSet t_ = this.Physical_Therapy_Evaluation();
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default(PropertyInfo));
 		CqlValueSet v_ = this.Psych_Visit_Diagnostic_Evaluation();
-		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, null);
+		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, default(PropertyInfo));
 		IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(u_, w_);
 		IEnumerable<Encounter> y_ = context.Operators.Union<Encounter>(s_, x_);
 		CqlValueSet z_ = this.Psych_Visit_Psychotherapy();
-		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
+		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, default(PropertyInfo));
 		CqlValueSet ab_ = this.Psychoanalysis();
-		IEnumerable<Encounter> ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, null);
+		IEnumerable<Encounter> ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, default(PropertyInfo));
 		IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(aa_, ac_);
 		IEnumerable<Encounter> ae_ = context.Operators.Union<Encounter>(y_, ad_);
 		CqlValueSet af_ = this.Speech_and_Hearing_Evaluation();
-		IEnumerable<Encounter> ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
+		IEnumerable<Encounter> ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, default(PropertyInfo));
 		CqlValueSet ah_ = this.Telephone_Visits();
-		IEnumerable<Encounter> ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, null);
+		IEnumerable<Encounter> ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, default(PropertyInfo));
 		IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ag_, ai_);
 		IEnumerable<Encounter> ak_ = context.Operators.Union<Encounter>(ae_, aj_);
 		CqlValueSet al_ = this.Online_Assessments();
-		IEnumerable<Encounter> am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, null);
+		IEnumerable<Encounter> am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, default(PropertyInfo));
 		IEnumerable<Encounter> an_ = context.Operators.Union<Encounter>(ak_, am_);
 		IEnumerable<Encounter> ao_ = Status_1_6_000.isEncounterPerformed(an_);
 		bool? ap_(Encounter OfficeBasedEncounter)
@@ -541,13 +541,13 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<Encounter> Preventive_Visit_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Annual_Wellness_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
 		CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default(PropertyInfo));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care_Services_Group_Counseling();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
-		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(null, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default(PropertyInfo));
+		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(default(CqlValueSet), default(PropertyInfo));
 		bool? i_(Encounter E)
 		{
 			List<CodeableConcept> ac_ = E?.Type;
@@ -575,7 +575,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(g_, j_);
 		IEnumerable<Encounter> l_ = context.Operators.Union<Encounter>(e_, k_);
 		CqlValueSet m_ = this.Preventive_Care_Services_Individual_Counseling();
-		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, null);
+		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, default(PropertyInfo));
 		bool? p_(Encounter E)
 		{
 			List<CodeableConcept> am_ = E?.Type;
@@ -603,9 +603,9 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(n_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(l_, r_);
 		CqlValueSet t_ = this.Nutrition_Services();
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default(PropertyInfo));
 		CqlValueSet v_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, null);
+		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, default(PropertyInfo));
 		IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(u_, w_);
 		IEnumerable<Encounter> y_ = context.Operators.Union<Encounter>(s_, x_);
 		IEnumerable<Encounter> z_ = Status_1_6_000.isEncounterPerformed(y_);
@@ -668,7 +668,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Screening();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default(PropertyInfo));
 		IEnumerable<Observation> c_ = Status_1_6_000.isAssessmentPerformed(b_);
 		bool? d_(Observation TobaccoUseScreening)
 		{
@@ -742,7 +742,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Screening();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default(PropertyInfo));
 		IEnumerable<Observation> c_ = Status_1_6_000.isAssessmentPerformed(b_);
 		bool? d_(Observation TobaccoUseScreening)
 		{
@@ -806,7 +806,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<object> Tobacco_Cessation_Counseling_Given_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Cessation_Counseling();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default(PropertyInfo));
 		IEnumerable<Procedure> c_ = Status_1_6_000.isInterventionPerformed(b_);
 		bool? d_(Procedure TobaccoCessationCounseling)
 		{
@@ -826,7 +826,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlCode f_ = this.Tobacco_abuse_counseling();
 		IEnumerable<CqlCode> g_ = context.Operators.ToList<CqlCode>(f_);
-		IEnumerable<Condition> h_ = context.Operators.RetrieveByCodes<Condition>(g_, null);
+		IEnumerable<Condition> h_ = context.Operators.RetrieveByCodes<Condition>(g_, default(PropertyInfo));
 		bool? i_(Condition TobaccoCounseling)
 		{
 			CqlInterval<CqlDateTime> w_ = QICoreCommon_2_0_000.prevalenceInterval(TobaccoCounseling);
@@ -854,8 +854,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<MedicationRequest> Tobacco_Cessation_Pharmacotherapy_Ordered_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Cessation_Pharmacotherapy();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.isMedicationOrder(e_);
 		bool? g_(MedicationRequest CessationPharmacotherapyOrdered)
@@ -884,8 +884,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<MedicationRequest> Active_Pharmacotherapy_for_Tobacco_Cessation_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Cessation_Pharmacotherapy();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.isMedicationActive(e_);
 		bool? g_(MedicationRequest TakingCessationPharmacotherapy)

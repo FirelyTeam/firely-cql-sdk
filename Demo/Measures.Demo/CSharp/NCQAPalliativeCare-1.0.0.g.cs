@@ -50,7 +50,7 @@ public class NCQAPalliativeCare_1_0_0
     #endregion
 
 	private CqlValueSet Palliative_Care_Assessment_Value() => 
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", null);
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", default(string));
 
     [CqlDeclaration("Palliative Care Assessment")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225")]
@@ -58,7 +58,7 @@ public class NCQAPalliativeCare_1_0_0
 		__Palliative_Care_Assessment.Value;
 
 	private CqlValueSet Palliative_Care_Encounter_Value() => 
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450", null);
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450", default(string));
 
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450")]
@@ -66,7 +66,7 @@ public class NCQAPalliativeCare_1_0_0
 		__Palliative_Care_Encounter.Value;
 
 	private CqlValueSet Palliative_Care_Intervention_Value() => 
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224", null);
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224", default(string));
 
     [CqlDeclaration("Palliative Care Intervention")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224")]
@@ -74,7 +74,7 @@ public class NCQAPalliativeCare_1_0_0
 		__Palliative_Care_Intervention.Value;
 
 	private CqlCode Encounter_for_palliative_care_Value() => 
-		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null);
+		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", default(string), default(string));
 
     [CqlDeclaration("Encounter for palliative care")]
 	public CqlCode Encounter_for_palliative_care() => 
@@ -83,7 +83,7 @@ public class NCQAPalliativeCare_1_0_0
 	private CqlCode[] ICD_10_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", null, null),
+			new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", default(string), default(string)),
 		];
 
 		return a_;
@@ -97,7 +97,7 @@ public class NCQAPalliativeCare_1_0_0
 	public bool? Palliative_Care_Overlapping_Period(CqlInterval<CqlDateTime> Period)
 	{
 		CqlValueSet a_ = this.Palliative_Care_Assessment();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default(PropertyInfo));
 		bool? c_(Observation PalliativeAssessment)
 		{
 			DataType ab_ = PalliativeAssessment?.Effective;
@@ -113,14 +113,14 @@ public class NCQAPalliativeCare_1_0_0
 			CqlDateTime am_ = context.Operators.End(Period);
 			CqlDate an_ = context.Operators.DateFrom(am_);
 			CqlInterval<CqlDate> ao_ = context.Operators.Interval(al_, an_, true, true);
-			bool? ap_ = context.Operators.Overlaps(aj_, ao_, null);
+			bool? ap_ = context.Operators.Overlaps(aj_, ao_, default(string));
 
 			return ap_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		bool? e_ = context.Operators.Exists<Observation>(d_);
 		CqlValueSet f_ = this.Palliative_Care_Encounter();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default(PropertyInfo));
 		IEnumerable<Encounter> h_ = NCQAStatus_1_0_0.Finished_Encounter(g_);
 		bool? i_(Encounter PalliativeEncounter)
 		{
@@ -137,7 +137,7 @@ public class NCQAPalliativeCare_1_0_0
 			CqlDateTime bb_ = context.Operators.End(Period);
 			CqlDate bc_ = context.Operators.DateFrom(bb_);
 			CqlInterval<CqlDate> bd_ = context.Operators.Interval(ba_, bc_, true, true);
-			bool? be_ = context.Operators.Overlaps(ay_, bd_, null);
+			bool? be_ = context.Operators.Overlaps(ay_, bd_, default(string));
 
 			return be_;
 		};
@@ -145,7 +145,7 @@ public class NCQAPalliativeCare_1_0_0
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 		bool? l_ = context.Operators.Or(e_, k_);
 		CqlValueSet m_ = this.Palliative_Care_Intervention();
-		IEnumerable<Procedure> n_ = context.Operators.RetrieveByValueSet<Procedure>(m_, null);
+		IEnumerable<Procedure> n_ = context.Operators.RetrieveByValueSet<Procedure>(m_, default(PropertyInfo));
 		IEnumerable<Procedure> o_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(n_);
 		bool? p_(Procedure PalliativeIntervention)
 		{
@@ -162,7 +162,7 @@ public class NCQAPalliativeCare_1_0_0
 			CqlDateTime bq_ = context.Operators.End(Period);
 			CqlDate br_ = context.Operators.DateFrom(bq_);
 			CqlInterval<CqlDate> bs_ = context.Operators.Interval(bp_, br_, true, true);
-			bool? bt_ = context.Operators.Overlaps(bn_, bs_, null);
+			bool? bt_ = context.Operators.Overlaps(bn_, bs_, default(string));
 
 			return bt_;
 		};
@@ -171,7 +171,7 @@ public class NCQAPalliativeCare_1_0_0
 		bool? s_ = context.Operators.Or(l_, r_);
 		CqlCode t_ = this.Encounter_for_palliative_care();
 		IEnumerable<CqlCode> u_ = context.Operators.ToList<CqlCode>(t_);
-		IEnumerable<Condition> v_ = context.Operators.RetrieveByCodes<Condition>(u_, null);
+		IEnumerable<Condition> v_ = context.Operators.RetrieveByCodes<Condition>(u_, default(PropertyInfo));
 		IEnumerable<Condition> w_ = NCQAStatus_1_0_0.Active_Condition(v_);
 		bool? x_(Condition PalliativeDiagnosis)
 		{
@@ -186,7 +186,7 @@ public class NCQAPalliativeCare_1_0_0
 			CqlDateTime cd_ = context.Operators.End(Period);
 			CqlDate ce_ = context.Operators.DateFrom(cd_);
 			CqlInterval<CqlDate> cf_ = context.Operators.Interval(cc_, ce_, true, true);
-			bool? cg_ = context.Operators.Overlaps(ca_, cf_, null);
+			bool? cg_ = context.Operators.Overlaps(ca_, cf_, default(string));
 
 			return cg_;
 		};

@@ -41,7 +41,7 @@ public class TestRetrieveInclude_1_0_1
         __Chlamydia = new Lazy<CqlValueSet>(this.Chlamydia_Value);
     }
 	private CqlValueSet Female_Administrative_Sex_Value() => 
-		new CqlValueSet("2.16.840.1.113883.3.560.100.2", null);
+		new CqlValueSet("2.16.840.1.113883.3.560.100.2", default(string));
 
     [CqlDeclaration("Female Administrative Sex")]
     [CqlValueSet("2.16.840.1.113883.3.560.100.2")]
@@ -49,7 +49,7 @@ public class TestRetrieveInclude_1_0_1
 		__Female_Administrative_Sex.Value;
 
 	private CqlValueSet Other_Female_Reproductive_Conditions_Value() => 
-		new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006", null);
+		new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006", default(string));
 
     [CqlDeclaration("Other Female Reproductive Conditions")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006")]
@@ -57,7 +57,7 @@ public class TestRetrieveInclude_1_0_1
 		__Other_Female_Reproductive_Conditions.Value;
 
 	private CqlValueSet Genital_Herpes_Value() => 
-		new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049", null);
+		new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049", default(string));
 
     [CqlDeclaration("Genital Herpes")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049")]
@@ -65,7 +65,7 @@ public class TestRetrieveInclude_1_0_1
 		__Genital_Herpes.Value;
 
 	private CqlValueSet Genococcal_Infections_and_Venereal_Diseases_Value() => 
-		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001", null);
+		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001", default(string));
 
     [CqlDeclaration("Genococcal Infections and Venereal Diseases")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001")]
@@ -73,7 +73,7 @@ public class TestRetrieveInclude_1_0_1
 		__Genococcal_Infections_and_Venereal_Diseases.Value;
 
 	private CqlValueSet Inflammatory_Diseases_of_Female_Reproductive_Organs_Value() => 
-		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004", null);
+		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004", default(string));
 
     [CqlDeclaration("Inflammatory Diseases of Female Reproductive Organs")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004")]
@@ -81,7 +81,7 @@ public class TestRetrieveInclude_1_0_1
 		__Inflammatory_Diseases_of_Female_Reproductive_Organs.Value;
 
 	private CqlValueSet Chlamydia_Value() => 
-		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003", null);
+		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003", default(string));
 
     [CqlDeclaration("Chlamydia")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003")]
