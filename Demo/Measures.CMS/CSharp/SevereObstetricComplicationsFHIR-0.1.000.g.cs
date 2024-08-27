@@ -254,7 +254,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
     #endregion
 
 	private CqlValueSet _20_to_42_Plus_Weeks_Gestation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", default);
 
     [CqlDeclaration("20 to 42 Plus Weeks Gestation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67")]
@@ -262,7 +262,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		___20_to_42_Plus_Weeks_Gestation.Value;
 
 	private CqlValueSet Acute_or_Persistent_Asthma_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271", default);
 
     [CqlDeclaration("Acute or Persistent Asthma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271")]
@@ -270,7 +270,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Acute_or_Persistent_Asthma.Value;
 
 	private CqlValueSet Anemia_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323", default);
 
     [CqlDeclaration("Anemia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323")]
@@ -278,7 +278,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Anemia.Value;
 
 	private CqlValueSet Autoimmune_Disease_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311", default);
 
     [CqlDeclaration("Autoimmune Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311")]
@@ -286,7 +286,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Autoimmune_Disease.Value;
 
 	private CqlValueSet Bariatric_Surgery_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317", default);
 
     [CqlDeclaration("Bariatric Surgery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317")]
@@ -294,7 +294,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Bariatric_Surgery.Value;
 
 	private CqlValueSet Bleeding_Disorder_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287", default);
 
     [CqlDeclaration("Bleeding Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287")]
@@ -302,7 +302,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Bleeding_Disorder.Value;
 
 	private CqlValueSet Blood_Transfusion_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213", default);
 
     [CqlDeclaration("Blood Transfusion")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213")]
@@ -310,7 +310,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Blood_Transfusion.Value;
 
 	private CqlValueSet Cardiac_Disease_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341", default);
 
     [CqlDeclaration("Cardiac Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341")]
@@ -318,7 +318,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Cardiac_Disease.Value;
 
 	private CqlValueSet COVID_19_Confirmed_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373", default);
 
     [CqlDeclaration("COVID 19 Confirmed")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373")]
@@ -326,7 +326,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__COVID_19_Confirmed.Value;
 
 	private CqlValueSet Delivery_Procedures_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
 
     [CqlDeclaration("Delivery Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
@@ -334,7 +334,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Delivery_Procedures.Value;
 
 	private CqlValueSet Economic_Housing_Instability_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292", default);
 
     [CqlDeclaration("Economic Housing Instability")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292")]
@@ -342,7 +342,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Economic_Housing_Instability.Value;
 
 	private CqlValueSet ED_Visit_and_OB_Triage_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", default);
 
     [CqlDeclaration("ED Visit and OB Triage")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369")]
@@ -350,7 +350,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__ED_Visit_and_OB_Triage.Value;
 
 	private CqlValueSet Emergency_Department_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
@@ -358,7 +358,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Emergency_Department_Visit.Value;
 
 	private CqlValueSet Gastrointestinal_Disease_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338", default);
 
     [CqlDeclaration("Gastrointestinal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338")]
@@ -366,7 +366,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Gastrointestinal_Disease.Value;
 
 	private CqlValueSet Gestational_Diabetes_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269", default);
 
     [CqlDeclaration("Gestational Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269")]
@@ -374,7 +374,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Gestational_Diabetes.Value;
 
 	private CqlValueSet Hematocrit_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", default);
 
     [CqlDeclaration("Hematocrit lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114")]
@@ -382,7 +382,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Hematocrit_lab_test.Value;
 
 	private CqlValueSet HIV_in_Pregnancy_Childbirth_and_Puerperium_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272", default);
 
     [CqlDeclaration("HIV in Pregnancy Childbirth and Puerperium")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272")]
@@ -390,7 +390,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__HIV_in_Pregnancy_Childbirth_and_Puerperium.Value;
 
 	private CqlValueSet Hypertension_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332", default);
 
     [CqlDeclaration("Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332")]
@@ -398,7 +398,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Hypertension.Value;
 
 	private CqlValueSet Long_Term_Anticoagulant_Use_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366", default);
 
     [CqlDeclaration("Long Term Anticoagulant Use")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366")]
@@ -406,7 +406,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Long_Term_Anticoagulant_Use.Value;
 
 	private CqlValueSet Mental_Health_Disorder_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314", default);
 
     [CqlDeclaration("Mental Health Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314")]
@@ -414,7 +414,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Mental_Health_Disorder.Value;
 
 	private CqlValueSet Mild_or_Moderate_Preeclampsia_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329", default);
 
     [CqlDeclaration("Mild or Moderate Preeclampsia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329")]
@@ -422,7 +422,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Mild_or_Moderate_Preeclampsia.Value;
 
 	private CqlValueSet Morbid_or_Severe_Obesity_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290", default);
 
     [CqlDeclaration("Morbid or Severe Obesity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290")]
@@ -430,7 +430,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Morbid_or_Severe_Obesity.Value;
 
 	private CqlValueSet Multiple_Pregnancy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284", default);
 
     [CqlDeclaration("Multiple Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284")]
@@ -438,7 +438,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Multiple_Pregnancy.Value;
 
 	private CqlValueSet Neuromuscular_Disease_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308", default);
 
     [CqlDeclaration("Neuromuscular Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308")]
@@ -446,7 +446,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Neuromuscular_Disease.Value;
 
 	private CqlValueSet Observation_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
@@ -454,7 +454,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Observation_Services.Value;
 
 	private CqlValueSet Patient_Expired_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
@@ -462,7 +462,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Patient_Expired.Value;
 
 	private CqlValueSet Placenta_Previa_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.35", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.35", default);
 
     [CqlDeclaration("Placenta Previa")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.35")]
@@ -470,7 +470,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Placenta_Previa.Value;
 
 	private CqlValueSet Placental_Abruption_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305", default);
 
     [CqlDeclaration("Placental Abruption")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305")]
@@ -478,7 +478,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Placental_Abruption.Value;
 
 	private CqlValueSet Placental_Accreta_Spectrum_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", default);
 
     [CqlDeclaration("Placental Accreta Spectrum")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302")]
@@ -486,7 +486,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Placental_Accreta_Spectrum.Value;
 
 	private CqlValueSet Preexisting_Diabetes_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275", default);
 
     [CqlDeclaration("Preexisting Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275")]
@@ -494,7 +494,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Preexisting_Diabetes.Value;
 
 	private CqlValueSet Present_on_Admission_is_No_or_Unable_To_Determine_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370", default);
 
     [CqlDeclaration("Present on Admission is No or Unable To Determine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370")]
@@ -502,7 +502,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Present_on_Admission_is_No_or_Unable_To_Determine.Value;
 
 	private CqlValueSet Present_On_Admission_is_Yes_or_Exempt_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63", default);
 
     [CqlDeclaration("Present On Admission is Yes or Exempt")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63")]
@@ -510,7 +510,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Present_On_Admission_is_Yes_or_Exempt.Value;
 
 	private CqlValueSet Preterm_Birth_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299", default);
 
     [CqlDeclaration("Preterm Birth")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299")]
@@ -518,7 +518,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Preterm_Birth.Value;
 
 	private CqlValueSet Previous_Cesarean_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278", default);
 
     [CqlDeclaration("Previous Cesarean")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278")]
@@ -526,7 +526,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Previous_Cesarean.Value;
 
 	private CqlValueSet Pulmonary_Hypertension_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281", default);
 
     [CqlDeclaration("Pulmonary Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281")]
@@ -534,7 +534,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Pulmonary_Hypertension.Value;
 
 	private CqlValueSet Renal_Disease_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", default);
 
     [CqlDeclaration("Renal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335")]
@@ -542,7 +542,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Renal_Disease.Value;
 
 	private CqlValueSet Respiratory_Conditions_Related_to_COVID_19_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376", default);
 
     [CqlDeclaration("Respiratory Conditions Related to COVID 19")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376")]
@@ -550,7 +550,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Respiratory_Conditions_Related_to_COVID_19.Value;
 
 	private CqlValueSet Respiratory_Support_Procedures_Related_to_COVID_19_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379", default);
 
     [CqlDeclaration("Respiratory Support Procedures Related to COVID 19")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379")]
@@ -558,7 +558,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Respiratory_Support_Procedures_Related_to_COVID_19.Value;
 
 	private CqlValueSet Severe_Maternal_Morbidity_Diagnoses_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255", default);
 
     [CqlDeclaration("Severe Maternal Morbidity Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255")]
@@ -566,7 +566,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Severe_Maternal_Morbidity_Diagnoses.Value;
 
 	private CqlValueSet Severe_Maternal_Morbidity_Procedures_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256", default);
 
     [CqlDeclaration("Severe Maternal Morbidity Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256")]
@@ -574,7 +574,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Severe_Maternal_Morbidity_Procedures.Value;
 
 	private CqlValueSet Severe_Preeclampsia_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327", default);
 
     [CqlDeclaration("Severe Preeclampsia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327")]
@@ -582,7 +582,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Severe_Preeclampsia.Value;
 
 	private CqlValueSet Substance_Abuse_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320", default);
 
     [CqlDeclaration("Substance Abuse")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320")]
@@ -590,7 +590,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Substance_Abuse.Value;
 
 	private CqlValueSet Thyrotoxicosis_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296", default);
 
     [CqlDeclaration("Thyrotoxicosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296")]
@@ -598,7 +598,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Thyrotoxicosis.Value;
 
 	private CqlValueSet Venous_Thromboembolism_in_Pregnancy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363", default);
 
     [CqlDeclaration("Venous Thromboembolism in Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363")]
@@ -606,7 +606,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__Venous_Thromboembolism_in_Pregnancy.Value;
 
 	private CqlValueSet White_blood_cells_count_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", default);
 
     [CqlDeclaration("White blood cells count lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129")]
@@ -614,14 +614,14 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		__White_blood_cells_count_lab_test.Value;
 
 	private CqlCode Heart_rate_Value() => 
-		new CqlCode("8867-4", "http://loinc.org", default(string), default(string));
+		new CqlCode("8867-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("Heart rate")]
 	public CqlCode Heart_rate() => 
 		__Heart_rate.Value;
 
 	private CqlCode Systolic_blood_pressure_Value() => 
-		new CqlCode("8480-6", "http://loinc.org", default(string), default(string));
+		new CqlCode("8480-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Systolic blood pressure")]
 	public CqlCode Systolic_blood_pressure() => 
@@ -630,8 +630,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("8867-4", "http://loinc.org", default(string), default(string)),
-			new CqlCode("8480-6", "http://loinc.org", default(string), default(string)),
+			new CqlCode("8867-4", "http://loinc.org", default, default),
+			new CqlCode("8480-6", "http://loinc.org", default, default),
 		];
 
 		return a_;
@@ -655,8 +655,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("SevereObstetricComplicationsFHIR-0.1.000", "Measurement Period", c_);
 
@@ -669,7 +669,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -848,7 +848,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				};
 				IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
 						? ((EncounterDiagnoses as Element).Extension)
-						: default(List<Extension>)), t_);
+						: default), t_);
 				DataType v_(Extension @this)
 				{
 					DataType ah_ = @this?.Value;
@@ -868,7 +868,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 			CqlValueSet h_ = this.Severe_Maternal_Morbidity_Procedures();
-			IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default(PropertyInfo));
+			IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
 			bool? j_(Procedure EncounterSMMProcedures)
 			{
 				Code<EventStatus> ai_ = EncounterSMMProcedures?.StatusElement;
@@ -928,7 +928,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		IEnumerable<Encounter> b_(Encounter TwentyWeeksPlusEncounter)
 		{
 			CqlValueSet d_ = this.Blood_Transfusion();
-			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default(PropertyInfo));
+			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
 			bool? f_(Procedure BloodTransfusion)
 			{
 				Code<EventStatus> j_ = BloodTransfusion?.StatusElement;
@@ -1016,7 +1016,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Condition> j_ = context.Operators.Where<Condition>(d_, i_);
 			bool? k_ = context.Operators.Exists<Condition>(j_);
 			CqlValueSet l_ = this.Respiratory_Support_Procedures_Related_to_COVID_19();
-			IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, default(PropertyInfo));
+			IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, default);
 			bool? n_(Procedure COVIDRespiratoryProcedure)
 			{
 				Code<EventStatus> aa_ = COVIDRespiratoryProcedure?.StatusElement;
@@ -1138,7 +1138,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
 					? ((EncounterDiagnoses as Element).Extension)
-					: default(List<Extension>)), f_);
+					: default), f_);
 			DataType h_(Extension @this)
 			{
 				DataType s_ = @this?.Value;
@@ -1736,7 +1736,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		{
 			int? h_ = PCMaternal_5_16_000.calculatedGestationalAge(DeliveryEncounter);
 			CqlInterval<int?> i_ = context.Operators.Interval(20, 36, true, true);
-			bool? j_ = context.Operators.In<int?>(h_, i_, default(string));
+			bool? j_ = context.Operators.In<int?>(h_, i_, default);
 			CqlQuantity l_ = PCMaternal_5_16_000.lastEstimatedGestationalAge(DeliveryEncounter);
 			CqlQuantity m_ = context.Operators.Quantity(20m, "weeks");
 			bool? n_ = context.Operators.GreaterOrEqual(l_, m_);
@@ -1779,7 +1779,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Hematocrit_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default(PropertyInfo));
+			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? h_(Observation Hematocrit)
 			{
 				Instant z_ = Hematocrit?.IssuedElement;
@@ -1791,7 +1791,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime af_ = context.Operators.Subtract(ad_, ae_);
 				CqlDateTime ag_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(af_, ag_, true, false);
-				bool? ai_ = context.Operators.In<CqlDateTime>(ab_, ah_, default(string));
+				bool? ai_ = context.Operators.In<CqlDateTime>(ab_, ah_, default);
 				Code<ObservationStatus> aj_ = Hematocrit?.StatusElement;
 				ObservationStatus? ak_ = aj_?.Value;
 				string al_ = context.Operators.Convert<string>(ak_);
@@ -1823,7 +1823,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default(PropertyInfo));
+			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? q_(Observation Hematocrit)
 			{
 				Instant ax_ = Hematocrit?.IssuedElement;
@@ -1835,7 +1835,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime bd_ = context.Operators.Subtract(bb_, bc_);
 				CqlDateTime be_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(bd_, be_, true, false);
-				bool? bg_ = context.Operators.In<CqlDateTime>(az_, bf_, default(string));
+				bool? bg_ = context.Operators.In<CqlDateTime>(az_, bf_, default);
 				Code<ObservationStatus> bh_ = Hematocrit?.StatusElement;
 				ObservationStatus? bi_ = bh_?.Value;
 				string bj_ = context.Operators.Convert<string>(bi_);
@@ -1889,7 +1889,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.White_blood_cells_count_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default(PropertyInfo));
+			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? h_(Observation WBC)
 			{
 				Instant z_ = WBC?.IssuedElement;
@@ -1901,7 +1901,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime af_ = context.Operators.Subtract(ad_, ae_);
 				CqlDateTime ag_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(af_, ag_, true, false);
-				bool? ai_ = context.Operators.In<CqlDateTime>(ab_, ah_, default(string));
+				bool? ai_ = context.Operators.In<CqlDateTime>(ab_, ah_, default);
 				Code<ObservationStatus> aj_ = WBC?.StatusElement;
 				ObservationStatus? ak_ = aj_?.Value;
 				string al_ = context.Operators.Convert<string>(ak_);
@@ -1933,7 +1933,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default(PropertyInfo));
+			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? q_(Observation WBC)
 			{
 				Instant ax_ = WBC?.IssuedElement;
@@ -1945,7 +1945,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime bd_ = context.Operators.Subtract(bb_, bc_);
 				CqlDateTime be_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> bf_ = context.Operators.Interval(bd_, be_, true, false);
-				bool? bg_ = context.Operators.In<CqlDateTime>(az_, bf_, default(string));
+				bool? bg_ = context.Operators.In<CqlDateTime>(az_, bf_, default);
 				Code<ObservationStatus> bh_ = WBC?.StatusElement;
 				ObservationStatus? bi_ = bh_?.Value;
 				string bj_ = context.Operators.Convert<string>(bi_);
@@ -1998,7 +1998,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		{
 			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
 			string e_ = d_?.Value;
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default(CqlValueSet), default(PropertyInfo));
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
 			bool? g_(Observation HeartRate)
 			{
 				DataType y_ = HeartRate?.Effective;
@@ -2010,7 +2010,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime ae_ = context.Operators.Subtract(ac_, ad_);
 				CqlDateTime af_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ae_, af_, true, false);
-				bool? ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, default(string));
+				bool? ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, default);
 				Code<ObservationStatus> ai_ = HeartRate?.StatusElement;
 				ObservationStatus? aj_ = ai_?.Value;
 				string ak_ = context.Operators.Convert<string>(aj_);
@@ -2049,7 +2049,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime ax_ = context.Operators.Subtract(av_, aw_);
 				CqlDateTime ay_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> az_ = context.Operators.Interval(ax_, ay_, true, false);
-				bool? ba_ = context.Operators.In<CqlDateTime>(at_, az_, default(string));
+				bool? ba_ = context.Operators.In<CqlDateTime>(at_, az_, default);
 				Code<ObservationStatus> bb_ = HeartRate?.StatusElement;
 				ObservationStatus? bc_ = bb_?.Value;
 				string bd_ = context.Operators.Convert<string>(bc_);
@@ -2097,7 +2097,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 		{
 			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
 			string e_ = d_?.Value;
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default(CqlValueSet), default(PropertyInfo));
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
 			bool? g_(Observation BP)
 			{
 				DataType aa_ = BP?.Effective;
@@ -2109,7 +2109,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
 				CqlDateTime ah_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, true, false);
-				bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, default(string));
+				bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, default);
 				Code<ObservationStatus> ak_ = BP?.StatusElement;
 				ObservationStatus? al_ = ak_?.Value;
 				string am_ = context.Operators.Convert<string>(al_);
@@ -2165,7 +2165,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				CqlDateTime bg_ = context.Operators.Subtract(be_, bf_);
 				CqlDateTime bh_ = PCMaternal_5_16_000.lastTimeOfDelivery(TwentyWeeksPlusEncounter);
 				CqlInterval<CqlDateTime> bi_ = context.Operators.Interval(bg_, bh_, true, false);
-				bool? bj_ = context.Operators.In<CqlDateTime>(bc_, bi_, default(string));
+				bool? bj_ = context.Operators.In<CqlDateTime>(bc_, bi_, default);
 				Code<ObservationStatus> bk_ = BP?.StatusElement;
 				ObservationStatus? bl_ = bk_?.Value;
 				string bm_ = context.Operators.Convert<string>(bl_);
@@ -2223,7 +2223,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
 					? ((EncounterDiagnoses as Element).Extension)
-					: default(List<Extension>)), f_);
+					: default), f_);
 			DataType h_(Extension @this)
 			{
 				DataType s_ = @this?.Value;

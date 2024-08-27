@@ -44,7 +44,7 @@ public class NCQAClaims_1_0_0
     #endregion
 
 	private CqlValueSet Inpatient_Stay_Value() => 
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1395", default(string));
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1395", default);
 
     [CqlDeclaration("Inpatient Stay")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1395")]
@@ -52,7 +52,7 @@ public class NCQAClaims_1_0_0
 		__Inpatient_Stay.Value;
 
 	private CqlValueSet Nonacute_Inpatient_Stay_Value() => 
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1398", default(string));
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1398", default);
 
     [CqlDeclaration("Nonacute Inpatient Stay")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1398")]
@@ -984,7 +984,7 @@ public class NCQAClaims_1_0_0
 					{
 						if ((ClaimofInterest is null))
 						{
-							return default(Claim);
+							return default;
 						}
 						else
 						{
@@ -1189,7 +1189,7 @@ public class NCQAClaims_1_0_0
 				{
 					if ((ClaimofInterest is null))
 					{
-						return default(Claim);
+						return default;
 					}
 					else
 					{
@@ -1314,7 +1314,7 @@ public class NCQAClaims_1_0_0
 						{
 							if ((ClaimforDiagnosis is null))
 							{
-								return default(Claim);
+								return default;
 							}
 							else
 							{
@@ -1859,7 +1859,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return default(Id);
+									return default;
 								}
 							};
 							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
@@ -2270,7 +2270,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return default(Id);
+									return default;
 								}
 							};
 							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
@@ -2575,7 +2575,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return default(Id);
+									return default;
 								}
 							};
 							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
@@ -2810,7 +2810,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return default(Id);
+									return default;
 								}
 							};
 							string ad_ = FHIRHelpers_4_0_001.ToString(ac_());
@@ -3384,7 +3384,7 @@ public class NCQAClaims_1_0_0
 		];
 		(int? IdentifierCount, nint _)? e_((IEnumerable<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams, nint _)? ClaimProperties)
 		{
-			IEnumerable<Practitioner> at_ = context.Operators.RetrieveByValueSet<Practitioner>(default(CqlValueSet), default(PropertyInfo));
+			IEnumerable<Practitioner> at_ = context.Operators.RetrieveByValueSet<Practitioner>(default, default);
 			bool? au_(Practitioner p)
 			{
 				Id bb_ = p?.IdElement;
@@ -3677,7 +3677,7 @@ public class NCQAClaims_1_0_0
 		];
 		(int? IdentifierCount, nint _)? e_((IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)? ClaimProperties)
 		{
-			IEnumerable<Location> aw_ = context.Operators.RetrieveByValueSet<Location>(default(CqlValueSet), default(PropertyInfo));
+			IEnumerable<Location> aw_ = context.Operators.RetrieveByValueSet<Location>(default, default);
 			bool? ax_(Location l)
 			{
 				Id be_ = l?.IdElement;

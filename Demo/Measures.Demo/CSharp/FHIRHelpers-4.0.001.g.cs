@@ -32,7 +32,7 @@ public class FHIRHelpers_4_0_001
     }
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -97,7 +97,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((quantity is null))
 			{
-				return default(CqlQuantity);
+				return default;
 			}
 			else
 			{
@@ -120,7 +120,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((ratio is null))
 			{
-				return default(CqlRatio);
+				return default;
 			}
 			else
 			{
@@ -143,7 +143,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((coding is null))
 			{
-				return default(CqlCode);
+				return default;
 			}
 			else
 			{
@@ -170,7 +170,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if ((concept is null))
 			{
-				return default(CqlConcept);
+				return default;
 			}
 			else
 			{

@@ -93,7 +93,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 			CqlDate l_ = context.Operators.Subtract(j_, k_);
 			CqlDate o_ = context.Operators.Add(j_, k_);
 			CqlInterval<CqlDate> p_ = context.Operators.Interval(l_, o_, true, true);
-			bool? q_ = context.Operators.In<CqlDate>(i_, p_, default(string));
+			bool? q_ = context.Operators.In<CqlDate>(i_, p_, default);
 			bool? s_ = context.Operators.Not((bool?)(j_ is null));
 			bool? t_ = context.Operators.And(q_, s_);
 
@@ -191,12 +191,12 @@ public class NCQAHealthPlanEnrollment_1_0_0
 		{
 			bool b_()
 			{
-				bool? c_ = context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default(string));
+				bool? c_ = context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default);
 				bool? d_ = context.Operators.Not(c_);
 
 				return (d_ ?? false);
 			};
-			if ((context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default(string)) ?? false))
+			if ((context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default) ?? false))
 			{
 				IEnumerable<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> e_ = this.All_Coverage_Info(Coverage, participationPeriod);
 				bool? f_((IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
@@ -217,7 +217,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 				IEnumerable<CqlInterval<CqlDate>> j_ = context.Operators.Flatten<CqlInterval<CqlDate>>(i_);
 				bool? k_(CqlInterval<CqlDate> FinalInterval)
 				{
-					bool? q_ = context.Operators.In<CqlDate>(AnchorDate, FinalInterval, default(string));
+					bool? q_ = context.Operators.In<CqlDate>(AnchorDate, FinalInterval, default);
 
 					return q_;
 				};
@@ -251,7 +251,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 					CqlDateTime af_ = context.Operators.End(ab_);
 					CqlDate ag_ = context.Operators.DateFrom(af_);
 					CqlInterval<CqlDate> ah_ = context.Operators.Interval(ad_, ag_, true, true);
-					bool? ai_ = context.Operators.In<CqlDate>(AnchorDate, ah_, default(string));
+					bool? ai_ = context.Operators.In<CqlDate>(AnchorDate, ah_, default);
 
 					return ai_;
 				};

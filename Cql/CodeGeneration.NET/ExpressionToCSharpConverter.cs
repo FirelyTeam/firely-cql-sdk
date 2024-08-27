@@ -176,7 +176,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     bool b => b ? "true" : "false",
                     decimal d => FormattableString.Invariant($"{d}m"),
                     int i => FormattableString.Invariant($"{i}"),
-                    var v when v.IsObjectNullOrDefault() => $"default({typeToCSharpConverter.ToCSharp(type)})",
+                    var v when v.IsObjectNullOrDefault() => DefaultExpressionForType(),
                     _ => FormattableString.Invariant($"{value}"),
                 };
             }
@@ -185,16 +185,26 @@ namespace Hl7.Cql.CodeGeneration.NET
                 // Reference Types
                 text = value switch
                 {
-                    null when type == typeof(object)    => "null",
-                    null => $"default({typeToCSharpConverter.ToCSharp(type)})",
-                    Type t   => $"typeof({typeToCSharpConverter.ToCSharp(t)})",
-                    Uri u    => $"new Uri(\"{u}\")",
-                    string s => SymbolDisplay.FormatLiteral(s, true),
-                    _        => FormattableString.Invariant($"{value}")
+                    null when type == typeof(object) => "null",
+                    null                             => DefaultExpressionForType(),
+                    Type t                           => $"typeof({typeToCSharpConverter.ToCSharp(t)})",
+                    Uri u                            => $"new Uri(\"{u}\")",
+                    string s                         => SymbolDisplay.FormatLiteral(s, true),
+                    _                                => FormattableString.Invariant($"{value}")
                 };
             }
 
             return $"{indentString}{text}";
+
+            string DefaultExpressionForType()
+            {
+                // NOTE: Be careful changing this to include the type name,
+                // there are cases in this file where an exact match on "null"
+                // or "default" is expected, and this will break it.
+                //
+                // return $"default({typeToCSharpConverter.ToCSharp(type)})";
+                return "default";
+            }
         }
 
         private static string ConvertParameterExpression(string leadingIndentString, ParameterExpression pe)

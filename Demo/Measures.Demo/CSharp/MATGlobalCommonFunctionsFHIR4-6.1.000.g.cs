@@ -118,7 +118,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     #endregion
 
 	private CqlValueSet Emergency_Department_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
@@ -126,7 +126,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		__Emergency_Department_Visit.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -134,7 +134,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Observation_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
@@ -142,7 +142,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		__Observation_Services.Value;
 
 	private CqlValueSet Present_on_Admission_or_Clinically_Undetermined_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default);
 
     [CqlDeclaration("Present on Admission or Clinically Undetermined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197")]
@@ -150,175 +150,175 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		__Present_on_Admission_or_Clinically_Undetermined.Value;
 
 	private CqlCode active_Value() => 
-		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string));
+		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("active")]
 	public CqlCode active() => 
 		__active.Value;
 
 	private CqlCode allergy_active_Value() => 
-		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default(string), default(string));
+		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
     [CqlDeclaration("allergy-active")]
 	public CqlCode allergy_active() => 
 		__allergy_active.Value;
 
 	private CqlCode allergy_confirmed_Value() => 
-		new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default(string), default(string));
+		new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-confirmed")]
 	public CqlCode allergy_confirmed() => 
 		__allergy_confirmed.Value;
 
 	private CqlCode allergy_inactive_Value() => 
-		new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default(string), default(string));
+		new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
     [CqlDeclaration("allergy-inactive")]
 	public CqlCode allergy_inactive() => 
 		__allergy_inactive.Value;
 
 	private CqlCode allergy_refuted_Value() => 
-		new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default(string), default(string));
+		new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-refuted")]
 	public CqlCode allergy_refuted() => 
 		__allergy_refuted.Value;
 
 	private CqlCode allergy_resolved_Value() => 
-		new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default(string), default(string));
+		new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
     [CqlDeclaration("allergy-resolved")]
 	public CqlCode allergy_resolved() => 
 		__allergy_resolved.Value;
 
 	private CqlCode allergy_unconfirmed_Value() => 
-		new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default(string), default(string));
+		new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-unconfirmed")]
 	public CqlCode allergy_unconfirmed() => 
 		__allergy_unconfirmed.Value;
 
 	private CqlCode Billing_Value() => 
-		new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default(string), default(string));
+		new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("Billing")]
 	public CqlCode Billing() => 
 		__Billing.Value;
 
 	private CqlCode Birthdate_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", default(string), default(string));
+		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Birthdate")]
 	public CqlCode Birthdate() => 
 		__Birthdate.Value;
 
 	private CqlCode Community_Value() => 
-		new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default(string), default(string));
+		new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
     [CqlDeclaration("Community")]
 	public CqlCode Community() => 
 		__Community.Value;
 
 	private CqlCode confirmed_Value() => 
-		new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string));
+		new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("confirmed")]
 	public CqlCode confirmed() => 
 		__confirmed.Value;
 
 	private CqlCode Dead_Value() => 
-		new CqlCode("419099009", "http://snomed.info/sct", default(string), default(string));
+		new CqlCode("419099009", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Dead")]
 	public CqlCode Dead() => 
 		__Dead.Value;
 
 	private CqlCode differential_Value() => 
-		new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string));
+		new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("differential")]
 	public CqlCode differential() => 
 		__differential.Value;
 
 	private CqlCode Discharge_Value() => 
-		new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default(string), default(string));
+		new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
     [CqlDeclaration("Discharge")]
 	public CqlCode Discharge() => 
 		__Discharge.Value;
 
 	private CqlCode entered_in_error_Value() => 
-		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string));
+		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("entered-in-error")]
 	public CqlCode entered_in_error() => 
 		__entered_in_error.Value;
 
 	private CqlCode ER_Value() => 
-		new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default(string), default(string));
+		new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
 
     [CqlDeclaration("ER")]
 	public CqlCode ER() => 
 		__ER.Value;
 
 	private CqlCode ICU_Value() => 
-		new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default(string), default(string));
+		new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
 
     [CqlDeclaration("ICU")]
 	public CqlCode ICU() => 
 		__ICU.Value;
 
 	private CqlCode inactive_Value() => 
-		new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string));
+		new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("inactive")]
 	public CqlCode inactive() => 
 		__inactive.Value;
 
 	private CqlCode provisional_Value() => 
-		new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string));
+		new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("provisional")]
 	public CqlCode provisional() => 
 		__provisional.Value;
 
 	private CqlCode recurrence_Value() => 
-		new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string));
+		new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("recurrence")]
 	public CqlCode recurrence() => 
 		__recurrence.Value;
 
 	private CqlCode refuted_Value() => 
-		new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string));
+		new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("refuted")]
 	public CqlCode refuted() => 
 		__refuted.Value;
 
 	private CqlCode relapse_Value() => 
-		new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string));
+		new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("relapse")]
 	public CqlCode relapse() => 
 		__relapse.Value;
 
 	private CqlCode remission_Value() => 
-		new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string));
+		new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("remission")]
 	public CqlCode remission() => 
 		__remission.Value;
 
 	private CqlCode resolved_Value() => 
-		new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string));
+		new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("resolved")]
 	public CqlCode resolved() => 
 		__resolved.Value;
 
 	private CqlCode unconfirmed_Value() => 
-		new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string));
+		new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("unconfirmed")]
 	public CqlCode unconfirmed() => 
@@ -327,12 +327,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string)),
-			new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string)),
-			new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string)),
-			new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string)),
-			new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string)),
-			new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string)),
+			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
+			new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
+			new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
+			new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
+			new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
+			new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
 		];
 
 		return a_;
@@ -345,9 +345,9 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private CqlCode[] AllergyIntoleranceClinicalStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default(string), default(string)),
-			new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default(string), default(string)),
-			new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default(string), default(string)),
+			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default),
+			new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default),
+			new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default),
 		];
 
 		return a_;
@@ -360,9 +360,9 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default(string), default(string)),
-			new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default(string), default(string)),
-			new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default(string), default(string)),
+			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
+			new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
+			new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
 		];
 
 		return a_;
@@ -375,7 +375,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private CqlCode[] Diagnosis_Role_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default(string), default(string)),
+			new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
 		];
 
 		return a_;
@@ -388,7 +388,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("21112-8", "http://loinc.org", default(string), default(string)),
+			new CqlCode("21112-8", "http://loinc.org", default, default),
 		];
 
 		return a_;
@@ -401,8 +401,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private CqlCode[] MedicationRequestCategory_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default(string), default(string)),
-			new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default(string), default(string)),
+			new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default),
+			new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default),
 		];
 
 		return a_;
@@ -415,12 +415,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private CqlCode[] ConditionVerificationStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string)),
-			new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string)),
-			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string)),
-			new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string)),
-			new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string)),
-			new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default(string), default(string)),
+			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
+			new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
+			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
+			new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
+			new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
+			new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
 		];
 
 		return a_;
@@ -433,7 +433,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("419099009", "http://snomed.info/sct", default(string), default(string)),
+			new CqlCode("419099009", "http://snomed.info/sct", default, default),
 		];
 
 		return a_;
@@ -446,8 +446,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private CqlCode[] RoleCode_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default(string), default(string)),
-			new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default(string), default(string)),
+			new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default),
+			new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default),
 		];
 
 		return a_;
@@ -459,8 +459,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default(decimal));
-		CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("MATGlobalCommonFunctionsFHIR4-6.1.000", "Measurement Period", c_);
 
@@ -473,7 +473,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -496,7 +496,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private IEnumerable<Encounter> Inpatient_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter EncounterInpatient)
 		{
 			Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
@@ -510,7 +510,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.ToInterval(h_);
 			CqlDateTime o_ = context.Operators.End(n_);
 			CqlInterval<CqlDateTime> p_ = this.Measurement_Period();
-			bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, default(string));
+			bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, default);
 			bool? r_ = context.Operators.And(l_, q_);
 
 			return r_;
@@ -528,7 +528,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public Encounter ED_Visit(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter EDVisit)
 		{
 			Code<Encounter.EncounterStatus> h_ = EDVisit?.StatusElement;
@@ -545,7 +545,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_0_001.ToInterval(n_);
 			CqlDateTime u_ = context.Operators.Start(t_);
 			CqlInterval<CqlDateTime> v_ = context.Operators.Interval(r_, u_, true, true);
-			bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, default(string));
+			bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, default);
 			CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_0_001.ToInterval(n_);
 			CqlDateTime z_ = context.Operators.Start(y_);
 			bool? aa_ = context.Operators.Not((bool?)(z_ is null));
@@ -706,14 +706,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit();
-			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default(PropertyInfo));
+			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
 			bool? g_(Encounter LastED)
 			{
 				Period af_ = LastED?.Period;
 				CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_0_001.ToInterval(af_);
 				CqlDateTime ah_ = context.Operators.End(ag_);
 				CqlValueSet ai_ = this.Observation_Services();
-				IEnumerable<Encounter> aj_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default(PropertyInfo));
+				IEnumerable<Encounter> aj_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? ak_(Encounter LastObs)
 				{
 					Period cb_ = LastObs?.Period;
@@ -727,7 +727,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					CqlInterval<CqlDateTime> ck_ = FHIRHelpers_4_0_001.ToInterval(ce_);
 					CqlDateTime cl_ = context.Operators.Start(ck_);
 					CqlInterval<CqlDateTime> cm_ = context.Operators.Interval(ci_, cl_, true, true);
-					bool? cn_ = context.Operators.In<CqlDateTime>(cd_, cm_, default(string));
+					bool? cn_ = context.Operators.In<CqlDateTime>(cd_, cm_, default);
 					CqlInterval<CqlDateTime> cp_ = FHIRHelpers_4_0_001.ToInterval(ce_);
 					CqlDateTime cq_ = context.Operators.Start(cp_);
 					bool? cr_ = context.Operators.Not((bool?)(cq_ is null));
@@ -754,7 +754,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlDateTime au_ = context.Operators.Start(at_);
 				CqlQuantity av_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime aw_ = context.Operators.Subtract((ar_ ?? au_), av_);
-				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default(PropertyInfo));
+				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? az_(Encounter LastObs)
 				{
 					Period cw_ = LastObs?.Period;
@@ -768,7 +768,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					CqlInterval<CqlDateTime> df_ = FHIRHelpers_4_0_001.ToInterval(cz_);
 					CqlDateTime dg_ = context.Operators.Start(df_);
 					CqlInterval<CqlDateTime> dh_ = context.Operators.Interval(dd_, dg_, true, true);
-					bool? di_ = context.Operators.In<CqlDateTime>(cy_, dh_, default(string));
+					bool? di_ = context.Operators.In<CqlDateTime>(cy_, dh_, default);
 					CqlInterval<CqlDateTime> dk_ = FHIRHelpers_4_0_001.ToInterval(cz_);
 					CqlDateTime dl_ = context.Operators.Start(dk_);
 					bool? dm_ = context.Operators.Not((bool?)(dl_ is null));
@@ -793,8 +793,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlInterval<CqlDateTime> bi_ = FHIRHelpers_4_0_001.ToInterval(as_);
 				CqlDateTime bj_ = context.Operators.Start(bi_);
 				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, (bg_ ?? bj_), true, true);
-				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default(string));
-				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default(PropertyInfo));
+				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default);
+				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? bo_(Encounter LastObs)
 				{
 					Period dr_ = LastObs?.Period;
@@ -808,7 +808,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					CqlInterval<CqlDateTime> ea_ = FHIRHelpers_4_0_001.ToInterval(du_);
 					CqlDateTime eb_ = context.Operators.Start(ea_);
 					CqlInterval<CqlDateTime> ec_ = context.Operators.Interval(dy_, eb_, true, true);
-					bool? ed_ = context.Operators.In<CqlDateTime>(dt_, ec_, default(string));
+					bool? ed_ = context.Operators.In<CqlDateTime>(dt_, ec_, default);
 					CqlInterval<CqlDateTime> ef_ = FHIRHelpers_4_0_001.ToInterval(du_);
 					CqlDateTime eg_ = context.Operators.Start(ef_);
 					bool? eh_ = context.Operators.Not((bool?)(eg_ is null));
@@ -852,7 +852,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_0_001.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services();
-			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default(PropertyInfo));
+			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
 			bool? q_(Encounter LastObs)
 			{
 				Period ep_ = LastObs?.Period;
@@ -866,7 +866,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlInterval<CqlDateTime> ey_ = FHIRHelpers_4_0_001.ToInterval(es_);
 				CqlDateTime ez_ = context.Operators.Start(ey_);
 				CqlInterval<CqlDateTime> fa_ = context.Operators.Interval(ew_, ez_, true, true);
-				bool? fb_ = context.Operators.In<CqlDateTime>(er_, fa_, default(string));
+				bool? fb_ = context.Operators.In<CqlDateTime>(er_, fa_, default);
 				CqlInterval<CqlDateTime> fd_ = FHIRHelpers_4_0_001.ToInterval(es_);
 				CqlDateTime fe_ = context.Operators.Start(fd_);
 				bool? ff_ = context.Operators.Not((bool?)(fe_ is null));
@@ -1326,7 +1326,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		Condition b_(Encounter.DiagnosisComponent D)
 		{
-			IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(default(CqlValueSet), default(PropertyInfo));
+			IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 			bool? e_(Condition C)
 			{
 				Id h_ = C?.IdElement;
@@ -1352,7 +1352,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     [CqlDeclaration("GetCondition")]
 	public Condition GetCondition(ResourceReference reference)
 	{
-		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 		bool? b_(Condition C)
 		{
 			Id e_ = C?.IdElement;
@@ -1460,7 +1460,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		];
 		Condition f_(Encounter.DiagnosisComponent PD)
 		{
-			IEnumerable<Condition> m_ = context.Operators.RetrieveByValueSet<Condition>(default(CqlValueSet), default(PropertyInfo));
+			IEnumerable<Condition> m_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 			bool? n_(Condition C)
 			{
 				Id q_ = C?.IdElement;
@@ -1487,7 +1487,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     [CqlDeclaration("GetLocation")]
 	public Location GetLocation(ResourceReference reference)
 	{
-		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(default, default);
 		bool? b_(Location L)
 		{
 			Id e_ = L?.IdElement;
@@ -1591,7 +1591,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			}
 			else
 			{
-				IEnumerable<Medication> f_ = context.Operators.RetrieveByValueSet<Medication>(default(CqlValueSet), default(PropertyInfo));
+				IEnumerable<Medication> f_ = context.Operators.RetrieveByValueSet<Medication>(default, default);
 				bool? g_(Medication M)
 				{
 					Id k_ = M?.IdElement;
