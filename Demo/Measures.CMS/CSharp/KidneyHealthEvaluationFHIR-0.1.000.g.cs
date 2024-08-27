@@ -120,7 +120,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
     #endregion
 
 	private CqlValueSet Acute_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", default);
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083")]
@@ -128,7 +128,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Acute_Inpatient.Value;
 
 	private CqlValueSet Annual_Wellness_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
@@ -136,7 +136,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Annual_Wellness_Visit.Value;
 
 	private CqlValueSet Chronic_Kidney_Disease__Stage_5_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1002", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1002", default);
 
     [CqlDeclaration("Chronic Kidney Disease, Stage 5")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1002")]
@@ -144,7 +144,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Chronic_Kidney_Disease__Stage_5.Value;
 
 	private CqlValueSet Diabetes_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", default);
 
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
@@ -152,7 +152,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Diabetes.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -160,7 +160,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet End_Stage_Renal_Disease_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", default);
 
     [CqlDeclaration("End Stage Renal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353")]
@@ -168,7 +168,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__End_Stage_Renal_Disease.Value;
 
 	private CqlValueSet Estimated_Glomerular_Filtration_Rate_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1000", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1000", default);
 
     [CqlDeclaration("Estimated Glomerular Filtration Rate")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1000")]
@@ -176,7 +176,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Estimated_Glomerular_Filtration_Rate.Value;
 
 	private CqlValueSet Home_Healthcare_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
@@ -184,7 +184,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Home_Healthcare_Services.Value;
 
 	private CqlValueSet Hospice_Care_Ambulatory_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", default);
 
     [CqlDeclaration("Hospice Care Ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584")]
@@ -192,7 +192,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Hospice_Care_Ambulatory.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
@@ -200,7 +200,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Office_Visit.Value;
 
 	private CqlValueSet Outpatient_Consultation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
@@ -208,7 +208,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Outpatient_Consultation.Value;
 
 	private CqlValueSet Palliative_or_Hospice_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", default);
 
     [CqlDeclaration("Palliative or Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579")]
@@ -216,7 +216,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Palliative_or_Hospice_Care.Value;
 
 	private CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
@@ -224,7 +224,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Preventive_Care_Services_Established_Office_Visit__18_and_Up.Value;
 
 	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
@@ -232,7 +232,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
 	private CqlValueSet Telephone_Visits_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
@@ -240,7 +240,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Telephone_Visits.Value;
 
 	private CqlValueSet Urine_Albumin_Creatinine_Ratio_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1007", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1007", default);
 
     [CqlDeclaration("Urine Albumin Creatinine Ratio")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1007")]
@@ -248,28 +248,28 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		__Urine_Albumin_Creatinine_Ratio.Value;
 
 	private CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure__Value() => 
-		new CqlCode("428371000124100", "http://snomed.info/sct", default(string), default(string));
+		new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
 	public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_() => 
 		__Discharge_to_healthcare_facility_for_hospice_care__procedure_.Value;
 
 	private CqlCode Discharge_to_home_for_hospice_care__procedure__Value() => 
-		new CqlCode("428361000124107", "http://snomed.info/sct", default(string), default(string));
+		new CqlCode("428361000124107", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
 	public CqlCode Discharge_to_home_for_hospice_care__procedure_() => 
 		__Discharge_to_home_for_hospice_care__procedure_.Value;
 
 	private CqlCode AMB_Value() => 
-		new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default(string), default(string));
+		new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("AMB")]
 	public CqlCode AMB() => 
 		__AMB.Value;
 
 	private CqlCode active_Value() => 
-		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string));
+		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("active")]
 	public CqlCode active() => 
@@ -278,8 +278,8 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("428371000124100", "http://snomed.info/sct", default(string), default(string)),
-			new CqlCode("428361000124107", "http://snomed.info/sct", default(string), default(string)),
+			new CqlCode("428371000124100", "http://snomed.info/sct", default, default),
+			new CqlCode("428361000124107", "http://snomed.info/sct", default, default),
 		];
 
 		return a_;
@@ -292,7 +292,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private CqlCode[] ActCode_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default(string), default(string)),
+			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
 		];
 
 		return a_;
@@ -305,7 +305,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default(string), default(string)),
+			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
 		];
 
 		return a_;
@@ -317,8 +317,8 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("KidneyHealthEvaluationFHIR-0.1.000", "Measurement Period", c_);
 
@@ -331,7 +331,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -344,12 +344,12 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private bool? Has_Active_Diabetes_Overlaps_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Diabetes();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default(PropertyInfo));
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition Diabetes)
 		{
 			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Diabetes);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			bool? h_ = context.Operators.Overlaps(f_, g_, default(string));
+			bool? h_ = context.Operators.Overlaps(f_, g_, default);
 			CodeableConcept i_ = Diabetes?.ClinicalStatus;
 			CqlConcept j_ = FHIRHelpers_4_3_000.ToConcept(i_);
 			CqlCode k_ = this.active();
@@ -372,31 +372,31 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private bool? Has_Outpatient_Visit_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Annual_Wellness_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet c_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default(PropertyInfo));
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Office_Visit();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default(PropertyInfo));
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
 		CqlValueSet h_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default(PropertyInfo));
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default(PropertyInfo));
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
 		CqlValueSet n_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default(PropertyInfo));
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		CqlValueSet r_ = this.Telephone_Visits();
-		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default(PropertyInfo));
+		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
 		IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
 		bool? u_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> x_ = this.Measurement_Period();
 			Period y_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
-			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, default(string));
+			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, default);
 			Code<Encounter.EncounterStatus> ab_ = ValidEncounter?.StatusElement;
 			Encounter.EncounterStatus? ac_ = ab_?.Value;
 			Code<Encounter.EncounterStatus> ad_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ac_);
@@ -426,7 +426,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, default(string));
+		bool? j_ = context.Operators.In<int?>(h_, i_, default);
 		bool? k_ = this.Has_Active_Diabetes_Overlaps_Measurement_Period();
 		bool? l_ = context.Operators.And(j_, k_);
 		bool? m_ = this.Has_Outpatient_Visit_During_Measurement_Period();
@@ -453,15 +453,15 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private IEnumerable<Condition> Has_CKD_Stage_5_or_ESRD_Diagnosis_Overlaps_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Chronic_Kidney_Disease__Stage_5();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default(PropertyInfo));
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		CqlValueSet c_ = this.End_Stage_Renal_Disease();
-		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default(PropertyInfo));
+		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default);
 		IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
 		bool? f_(Condition CKDOrESRD)
 		{
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToPrevalenceInterval(CKDOrESRD);
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period();
-			bool? j_ = context.Operators.Overlaps(h_, i_, default(string));
+			bool? j_ = context.Operators.Overlaps(h_, i_, default);
 			CodeableConcept k_ = CKDOrESRD?.ClinicalStatus;
 			CqlConcept l_ = FHIRHelpers_4_3_000.ToConcept(k_);
 			CqlCode m_ = this.active();
@@ -499,14 +499,14 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 	private bool? Has_Kidney_Panel_Performed_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Estimated_Glomerular_Filtration_Rate();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default(PropertyInfo));
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		bool? c_(Observation eGFRTest)
 		{
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
 			DataType m_ = eGFRTest?.Effective;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
 			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_);
-			bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, default(string));
+			bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, default);
 			DataType q_ = eGFRTest?.Value;
 			object r_ = FHIRHelpers_4_3_000.ToValue(q_);
 			bool? s_ = context.Operators.Not((bool?)(r_ is null));
@@ -528,14 +528,14 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		bool? e_ = context.Operators.Exists<Observation>(d_);
 		CqlValueSet f_ = this.Urine_Albumin_Creatinine_Ratio();
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default(PropertyInfo));
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 		bool? h_(Observation uACRTest)
 		{
 			CqlInterval<CqlDateTime> ab_ = this.Measurement_Period();
 			DataType ac_ = uACRTest?.Effective;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_);
-			bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, ae_, default(string));
+			bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, ae_, default);
 			DataType ag_ = uACRTest?.Value;
 			object ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
 			bool? ai_ = context.Operators.Not((bool?)(ah_ is null));

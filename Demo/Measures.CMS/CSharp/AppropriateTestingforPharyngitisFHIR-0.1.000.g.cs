@@ -136,7 +136,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
     #endregion
 
 	private CqlValueSet Acute_Pharyngitis_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1011", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1011", default);
 
     [CqlDeclaration("Acute Pharyngitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1011")]
@@ -144,7 +144,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Acute_Pharyngitis.Value;
 
 	private CqlValueSet Acute_Tonsillitis_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1012", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1012", default);
 
     [CqlDeclaration("Acute Tonsillitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1012")]
@@ -152,7 +152,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Acute_Tonsillitis.Value;
 
 	private CqlValueSet Antibiotic_Medications_for_Pharyngitis_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1001", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1001", default);
 
     [CqlDeclaration("Antibiotic Medications for Pharyngitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1001")]
@@ -160,7 +160,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Antibiotic_Medications_for_Pharyngitis.Value;
 
 	private CqlValueSet Comorbid_Conditions_for_Respiratory_Conditions_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1025", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1025", default);
 
     [CqlDeclaration("Comorbid Conditions for Respiratory Conditions")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1025")]
@@ -168,7 +168,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Comorbid_Conditions_for_Respiratory_Conditions.Value;
 
 	private CqlValueSet Competing_Conditions_for_Respiratory_Conditions_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1017", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1017", default);
 
     [CqlDeclaration("Competing Conditions for Respiratory Conditions")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1017")]
@@ -176,7 +176,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Competing_Conditions_for_Respiratory_Conditions.Value;
 
 	private CqlValueSet Discharge_Services_Observation_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1039", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1039", default);
 
     [CqlDeclaration("Discharge Services Observation Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1039")]
@@ -184,7 +184,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Discharge_Services_Observation_Care.Value;
 
 	private CqlValueSet Emergency_Department_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010")]
@@ -192,7 +192,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Emergency_Department_Visit.Value;
 
 	private CqlValueSet Group_A_Streptococcus_Test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1012", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1012", default);
 
     [CqlDeclaration("Group A Streptococcus Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1012")]
@@ -200,7 +200,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Group_A_Streptococcus_Test.Value;
 
 	private CqlValueSet Home_Healthcare_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
@@ -208,7 +208,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Home_Healthcare_Services.Value;
 
 	private CqlValueSet Initial_Hospital_Observation_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1002", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1002", default);
 
     [CqlDeclaration("Initial Hospital Observation Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1002")]
@@ -216,7 +216,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Initial_Hospital_Observation_Care.Value;
 
 	private CqlValueSet Medical_Disability_Exam_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1073", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1073", default);
 
     [CqlDeclaration("Medical Disability Exam")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1073")]
@@ -224,7 +224,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Medical_Disability_Exam.Value;
 
 	private CqlValueSet Observation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086", default);
 
     [CqlDeclaration("Observation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086")]
@@ -232,7 +232,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Observation.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
@@ -240,7 +240,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Office_Visit.Value;
 
 	private CqlValueSet Online_Assessments_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
@@ -248,7 +248,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Online_Assessments.Value;
 
 	private CqlValueSet Outpatient_Consultation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
@@ -256,7 +256,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Outpatient_Consultation.Value;
 
 	private CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
@@ -264,7 +264,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Preventive_Care_Services_Established_Office_Visit__18_and_Up.Value;
 
 	private CqlValueSet Preventive_Care_Services_Group_Counseling_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default);
 
     [CqlDeclaration("Preventive Care Services Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
@@ -272,7 +272,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Preventive_Care_Services_Group_Counseling.Value;
 
 	private CqlValueSet Preventive_Care_Services_Individual_Counseling_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
 
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
@@ -280,7 +280,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Preventive_Care_Services_Individual_Counseling.Value;
 
 	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
@@ -288,7 +288,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
 	private CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
@@ -296,7 +296,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Preventive_Care_Services__Initial_Office_Visit__0_to_17.Value;
 
 	private CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
@@ -304,7 +304,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Preventive_Care__Established_Office_Visit__0_to_17.Value;
 
 	private CqlValueSet Telephone_Visits_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
@@ -312,14 +312,14 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		__Telephone_Visits.Value;
 
 	private CqlCode Observation_care_discharge_day_management__This_code_is_to_be_utilized_to_report_all_services_provided_to_a_patient_on_discharge_from_outpatient_hospital_observation_status_if_the_discharge_is_on_other_than_the_initial_date_of_observation_status__To_report_services_to_a_patient_designated_as_observation_status_or_inpatient_status_and_discharged_on_the_same_date__use_the_codes_for_Observation_or_Inpatient_Care_Services__including_Admission_and_Discharge_Services__99234_99236_as_appropriate____Value() => 
-		new CqlCode("99217", "http://www.ama-assn.org/go/cpt", default(string), default(string));
+		new CqlCode("99217", "http://www.ama-assn.org/go/cpt", default, default);
 
     [CqlDeclaration("Observation care discharge day management (This code is to be utilized to report all services provided to a patient on discharge from outpatient hospital observation status if the discharge is on other than the initial date of observation status. To report services to a patient designated as observation status or inpatient status and discharged on the same date, use the codes for Observation or Inpatient Care Services [including Admission and Discharge Services, 99234-99236 as appropriate.])")]
 	public CqlCode Observation_care_discharge_day_management__This_code_is_to_be_utilized_to_report_all_services_provided_to_a_patient_on_discharge_from_outpatient_hospital_observation_status_if_the_discharge_is_on_other_than_the_initial_date_of_observation_status__To_report_services_to_a_patient_designated_as_observation_status_or_inpatient_status_and_discharged_on_the_same_date__use_the_codes_for_Observation_or_Inpatient_Care_Services__including_Admission_and_Discharge_Services__99234_99236_as_appropriate___() => 
 		__Observation_care_discharge_day_management__This_code_is_to_be_utilized_to_report_all_services_provided_to_a_patient_on_discharge_from_outpatient_hospital_observation_status_if_the_discharge_is_on_other_than_the_initial_date_of_observation_status__To_report_services_to_a_patient_designated_as_observation_status_or_inpatient_status_and_discharged_on_the_same_date__use_the_codes_for_Observation_or_Inpatient_Care_Services__including_Admission_and_Discharge_Services__99234_99236_as_appropriate___.Value;
 
 	private CqlCode Unlisted_preventive_medicine_service_Value() => 
-		new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default(string), default(string));
+		new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default, default);
 
     [CqlDeclaration("Unlisted preventive medicine service")]
 	public CqlCode Unlisted_preventive_medicine_service() => 
@@ -328,8 +328,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	private CqlCode[] CPT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("99217", "http://www.ama-assn.org/go/cpt", default(string), default(string)),
-			new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default(string), default(string)),
+			new CqlCode("99217", "http://www.ama-assn.org/go/cpt", default, default),
+			new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default, default),
 		];
 
 		return a_;
@@ -341,8 +341,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("AppropriateTestingforPharyngitisFHIR-0.1.000", "Measurement Period", c_);
 
@@ -355,7 +355,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -412,8 +412,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
-		IEnumerable<Encounter> c_ = context.Operators.RetrieveByValueSet<Encounter>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> c_ = context.Operators.RetrieveByValueSet<Encounter>(default, default);
 		bool? d_(Encounter E)
 		{
 			List<CodeableConcept> bg_ = E?.Type;
@@ -439,37 +439,37 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		};
 		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
 		IEnumerable<Encounter> f_ = context.Operators.Union<Encounter>(b_, e_);
-		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
+		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet i_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, default(PropertyInfo));
+		IEnumerable<Encounter> j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, default);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(h_, j_);
 		IEnumerable<Encounter> l_ = context.Operators.Union<Encounter>(f_, k_);
 		CqlValueSet m_ = this.Initial_Hospital_Observation_Care();
-		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, default(PropertyInfo));
+		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, default);
 		CqlValueSet o_ = this.Medical_Disability_Exam();
-		IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default(PropertyInfo));
+		IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(n_, p_);
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(l_, q_);
 		CqlValueSet s_ = this.Observation();
-		IEnumerable<Encounter> t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, default(PropertyInfo));
+		IEnumerable<Encounter> t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, default);
 		CqlValueSet u_ = this.Office_Visit();
-		IEnumerable<Encounter> v_ = context.Operators.RetrieveByValueSet<Encounter>(u_, default(PropertyInfo));
+		IEnumerable<Encounter> v_ = context.Operators.RetrieveByValueSet<Encounter>(u_, default);
 		IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(t_, v_);
 		IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(r_, w_);
 		CqlValueSet y_ = this.Telephone_Visits();
-		IEnumerable<Encounter> z_ = context.Operators.RetrieveByValueSet<Encounter>(y_, default(PropertyInfo));
+		IEnumerable<Encounter> z_ = context.Operators.RetrieveByValueSet<Encounter>(y_, default);
 		CqlValueSet aa_ = this.Online_Assessments();
-		IEnumerable<Encounter> ab_ = context.Operators.RetrieveByValueSet<Encounter>(aa_, default(PropertyInfo));
+		IEnumerable<Encounter> ab_ = context.Operators.RetrieveByValueSet<Encounter>(aa_, default);
 		IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(z_, ab_);
 		IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(x_, ac_);
 		CqlValueSet ae_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> af_ = context.Operators.RetrieveByValueSet<Encounter>(ae_, default(PropertyInfo));
+		IEnumerable<Encounter> af_ = context.Operators.RetrieveByValueSet<Encounter>(ae_, default);
 		CqlValueSet ag_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> ah_ = context.Operators.RetrieveByValueSet<Encounter>(ag_, default(PropertyInfo));
+		IEnumerable<Encounter> ah_ = context.Operators.RetrieveByValueSet<Encounter>(ag_, default);
 		IEnumerable<Encounter> ai_ = context.Operators.Union<Encounter>(af_, ah_);
 		IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ad_, ai_);
 		CqlValueSet ak_ = this.Preventive_Care_Services_Group_Counseling();
-		IEnumerable<Encounter> al_ = context.Operators.RetrieveByValueSet<Encounter>(ak_, default(PropertyInfo));
+		IEnumerable<Encounter> al_ = context.Operators.RetrieveByValueSet<Encounter>(ak_, default);
 		bool? an_(Encounter E)
 		{
 			List<CodeableConcept> bq_ = E?.Type;
@@ -497,15 +497,15 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Encounter> ap_ = context.Operators.Union<Encounter>(al_, ao_);
 		IEnumerable<Encounter> aq_ = context.Operators.Union<Encounter>(aj_, ap_);
 		CqlValueSet ar_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		IEnumerable<Encounter> as_ = context.Operators.RetrieveByValueSet<Encounter>(ar_, default(PropertyInfo));
+		IEnumerable<Encounter> as_ = context.Operators.RetrieveByValueSet<Encounter>(ar_, default);
 		CqlValueSet at_ = this.Preventive_Care_Services_Individual_Counseling();
-		IEnumerable<Encounter> au_ = context.Operators.RetrieveByValueSet<Encounter>(at_, default(PropertyInfo));
+		IEnumerable<Encounter> au_ = context.Operators.RetrieveByValueSet<Encounter>(at_, default);
 		IEnumerable<Encounter> av_ = context.Operators.Union<Encounter>(as_, au_);
 		IEnumerable<Encounter> aw_ = context.Operators.Union<Encounter>(aq_, av_);
 		CqlValueSet ax_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ax_, default(PropertyInfo));
+		IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ax_, default);
 		CqlValueSet az_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		IEnumerable<Encounter> ba_ = context.Operators.RetrieveByValueSet<Encounter>(az_, default(PropertyInfo));
+		IEnumerable<Encounter> ba_ = context.Operators.RetrieveByValueSet<Encounter>(az_, default);
 		IEnumerable<Encounter> bb_ = context.Operators.Union<Encounter>(ay_, ba_);
 		IEnumerable<Encounter> bc_ = context.Operators.Union<Encounter>(aw_, bb_);
 		IEnumerable<Encounter> bd_ = Status_1_6_000.Finished_Encounter(bc_);
@@ -515,7 +515,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			Period cb_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> cc_ = FHIRHelpers_4_3_000.ToInterval(cb_);
 			CqlInterval<CqlDateTime> cd_ = QICoreCommon_2_0_000.ToInterval((cc_ as object));
-			bool? ce_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ca_, cd_, default(string));
+			bool? ce_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ca_, cd_, default);
 
 			return ce_;
 		};
@@ -534,8 +534,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Encounter> b_(Encounter EDOrAmbulatoryVisit)
 		{
 			CqlValueSet d_ = this.Antibiotic_Medications_for_Pharyngitis();
-			IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default(PropertyInfo));
-			IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default(PropertyInfo));
+			IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default);
+			IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default);
 			IEnumerable<MedicationRequest> h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			IEnumerable<MedicationRequest> i_ = Status_1_6_000.Active_Medication(h_);
 			bool? j_(MedicationRequest AntibioticOrdered)
@@ -550,7 +550,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 				CqlDateTime u_ = context.Operators.Subtract(s_, t_);
 				CqlDateTime w_ = context.Operators.Convert<CqlDateTime>(r_);
 				CqlInterval<CqlDateTime> x_ = context.Operators.Interval(u_, w_, true, true);
-				bool? y_ = context.Operators.In<CqlDateTime>(q_, x_, default(string));
+				bool? y_ = context.Operators.In<CqlDateTime>(q_, x_, default);
 				CqlDateTime aa_ = context.Operators.Convert<CqlDateTime>(r_);
 				bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
 				bool? ac_ = context.Operators.And(y_, ab_);
@@ -576,9 +576,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	private IEnumerable<Condition> Pharyngitis_or_Tonsillitis_Value()
 	{
 		CqlValueSet a_ = this.Acute_Pharyngitis();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default(PropertyInfo));
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		CqlValueSet c_ = this.Acute_Tonsillitis();
-		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default(PropertyInfo));
+		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default);
 		IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
 		IEnumerable<Condition> f_ = Status_1_6_000.Active_Condition(e_);
 
@@ -608,7 +608,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			Period m_ = tuple_ypyxedbbcqbdavhxvckuwmfh?.VisitWithAntibiotic?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
 			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
-			bool? p_ = context.Operators.In<CqlDateTime>(l_, o_, default(string));
+			bool? p_ = context.Operators.In<CqlDateTime>(l_, o_, default);
 
 			return p_;
 		};
@@ -687,16 +687,16 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.In_Hospice();
 		IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic();
 		CqlValueSet c_ = this.Antibiotic_Medications_for_Pharyngitis();
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(c_, default(PropertyInfo));
-		IEnumerable<MedicationRequest> f_ = context.Operators.RetrieveByValueSet<MedicationRequest>(c_, default(PropertyInfo));
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(c_, default);
+		IEnumerable<MedicationRequest> f_ = context.Operators.RetrieveByValueSet<MedicationRequest>(c_, default);
 		IEnumerable<MedicationRequest> g_ = context.Operators.Union<MedicationRequest>(d_, f_);
 		IEnumerable<Encounter> h_ = Antibiotic_1_5_000.Has_Antibiotic_Medication_History(b_, g_);
 		IEnumerable<Encounter> i_ = context.Operators.Union<Encounter>(a_, h_);
 		CqlValueSet k_ = this.Competing_Conditions_for_Respiratory_Conditions();
-		IEnumerable<Condition> l_ = context.Operators.RetrieveByValueSet<Condition>(k_, default(PropertyInfo));
+		IEnumerable<Condition> l_ = context.Operators.RetrieveByValueSet<Condition>(k_, default);
 		IEnumerable<Encounter> m_ = Antibiotic_1_5_000.Has_Competing_Diagnosis_History(b_, l_);
 		CqlValueSet o_ = this.Comorbid_Conditions_for_Respiratory_Conditions();
-		IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, default(PropertyInfo));
+		IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, default);
 		IEnumerable<Encounter> q_ = Antibiotic_1_5_000.Has_Comorbid_Condition_History(b_, p_);
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(m_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(i_, r_);
@@ -711,7 +711,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	private IEnumerable<Observation> Group_A_Streptococcus_Lab_Test_With_Result_Value()
 	{
 		CqlValueSet a_ = this.Group_A_Streptococcus_Test();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default(PropertyInfo));
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		IEnumerable<Observation> c_ = Status_1_6_000.Final_Lab_Observation(b_);
 		bool? d_(Observation GroupAStreptococcusTest)
 		{
@@ -787,7 +787,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			CqlDate l_ = context.Operators.DateFrom(k_);
 			int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
 			CqlInterval<int?> n_ = context.Operators.Interval(3, 17, true, true);
-			bool? o_ = context.Operators.In<int?>(m_, n_, default(string));
+			bool? o_ = context.Operators.In<int?>(m_, n_, default);
 
 			return o_;
 		};
@@ -817,7 +817,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			CqlDate l_ = context.Operators.DateFrom(k_);
 			int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
 			CqlInterval<int?> n_ = context.Operators.Interval(18, 64, true, true);
-			bool? o_ = context.Operators.In<int?>(m_, n_, default(string));
+			bool? o_ = context.Operators.In<int?>(m_, n_, default);
 
 			return o_;
 		};

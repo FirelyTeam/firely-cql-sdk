@@ -76,28 +76,28 @@ public class AlaraCTFHIR_0_1_001
     #endregion
 
 	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", default(string), default(string));
+		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Birth date")]
 	public CqlCode Birth_date() => 
 		__Birth_date.Value;
 
 	private CqlCode Calculated_CT_global_noise_Value() => 
-		new CqlCode("96912-1", "http://loinc.org", default(string), default(string));
+		new CqlCode("96912-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Calculated CT global noise")]
 	public CqlCode Calculated_CT_global_noise() => 
 		__Calculated_CT_global_noise.Value;
 
 	private CqlCode Calculated_CT_size_adjusted_dose_Value() => 
-		new CqlCode("96913-9", "http://loinc.org", default(string), default(string));
+		new CqlCode("96913-9", "http://loinc.org", default, default);
 
     [CqlDeclaration("Calculated CT size-adjusted dose")]
 	public CqlCode Calculated_CT_size_adjusted_dose() => 
 		__Calculated_CT_size_adjusted_dose.Value;
 
 	private CqlCode CT_dose_and_image_quality_category_Value() => 
-		new CqlCode("96914-7", "http://loinc.org", default(string), default(string));
+		new CqlCode("96914-7", "http://loinc.org", default, default);
 
     [CqlDeclaration("CT dose and image quality category")]
 	public CqlCode CT_dose_and_image_quality_category() => 
@@ -106,10 +106,10 @@ public class AlaraCTFHIR_0_1_001
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("21112-8", "http://loinc.org", default(string), default(string)),
-			new CqlCode("96912-1", "http://loinc.org", default(string), default(string)),
-			new CqlCode("96913-9", "http://loinc.org", default(string), default(string)),
-			new CqlCode("96914-7", "http://loinc.org", default(string), default(string)),
+			new CqlCode("21112-8", "http://loinc.org", default, default),
+			new CqlCode("96912-1", "http://loinc.org", default, default),
+			new CqlCode("96913-9", "http://loinc.org", default, default),
+			new CqlCode("96914-7", "http://loinc.org", default, default),
 		];
 
 		return a_;
@@ -121,8 +121,8 @@ public class AlaraCTFHIR_0_1_001
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("AlaraCTFHIR-0.1.001", "Measurement Period", c_);
 
@@ -135,7 +135,7 @@ public class AlaraCTFHIR_0_1_001
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -193,14 +193,14 @@ public class AlaraCTFHIR_0_1_001
 	{
 		CqlCode a_ = this.CT_dose_and_image_quality_category();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
 		bool? d_(Observation CTScanResult)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period();
 			DataType g_ = CTScanResult?.Effective;
 			object h_ = FHIRHelpers_4_3_000.ToValue(g_);
 			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToInterval(h_);
-			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, default(string));
+			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, default);
 			Patient k_ = this.Patient();
 			Date l_ = k_?.BirthDateElement;
 			string m_ = l_?.Value;

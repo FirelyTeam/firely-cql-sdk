@@ -66,7 +66,7 @@ public class PCMaternal_5_16_000
     #endregion
 
 	private CqlValueSet Delivery_Procedures_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
 
     [CqlDeclaration("Delivery Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
@@ -74,7 +74,7 @@ public class PCMaternal_5_16_000
 		__Delivery_Procedures.Value;
 
 	private CqlValueSet ED_Visit_and_OB_Triage_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", default);
 
     [CqlDeclaration("ED Visit and OB Triage")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369")]
@@ -82,7 +82,7 @@ public class PCMaternal_5_16_000
 		__ED_Visit_and_OB_Triage.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -90,7 +90,7 @@ public class PCMaternal_5_16_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Estimated_Gestational_Age_at_Delivery_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26", default);
 
     [CqlDeclaration("Estimated Gestational Age at Delivery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26")]
@@ -98,7 +98,7 @@ public class PCMaternal_5_16_000
 		__Estimated_Gestational_Age_at_Delivery.Value;
 
 	private CqlValueSet Observation_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default(string));
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
@@ -106,14 +106,14 @@ public class PCMaternal_5_16_000
 		__Observation_Services.Value;
 
 	private CqlCode Date_and_time_of_obstetric_delivery_Value() => 
-		new CqlCode("93857-1", "http://loinc.org", default(string), default(string));
+		new CqlCode("93857-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Date and time of obstetric delivery")]
 	public CqlCode Date_and_time_of_obstetric_delivery() => 
 		__Date_and_time_of_obstetric_delivery.Value;
 
 	private CqlCode Delivery_date_Estimated_Value() => 
-		new CqlCode("11778-8", "http://loinc.org", default(string), default(string));
+		new CqlCode("11778-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Delivery date Estimated")]
 	public CqlCode Delivery_date_Estimated() => 
@@ -122,8 +122,8 @@ public class PCMaternal_5_16_000
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("93857-1", "http://loinc.org", default(string), default(string)),
-			new CqlCode("11778-8", "http://loinc.org", default(string), default(string)),
+			new CqlCode("93857-1", "http://loinc.org", default, default),
+			new CqlCode("11778-8", "http://loinc.org", default, default),
 		];
 
 		return a_;
@@ -135,8 +135,8 @@ public class PCMaternal_5_16_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("PCMaternal-5.16.000", "Measurement Period", c_);
 
@@ -149,7 +149,7 @@ public class PCMaternal_5_16_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -174,7 +174,7 @@ public class PCMaternal_5_16_000
 			CqlDate k_ = context.Operators.DateFrom(j_);
 			int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
 			CqlInterval<int?> m_ = context.Operators.Interval(8, 65, true, false);
-			bool? n_ = context.Operators.In<int?>(l_, m_, default(string));
+			bool? n_ = context.Operators.In<int?>(l_, m_, default);
 
 			return n_;
 		};
@@ -196,14 +196,14 @@ public class PCMaternal_5_16_000
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.ED_Visit_and_OB_Triage();
-			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default(PropertyInfo));
+			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
 			bool? g_(Encounter LastEDOBTriage)
 			{
 				Period af_ = LastEDOBTriage?.Period;
 				CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
 				CqlDateTime ah_ = context.Operators.End(ag_);
 				CqlValueSet ai_ = this.Observation_Services();
-				IEnumerable<Encounter> aj_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default(PropertyInfo));
+				IEnumerable<Encounter> aj_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? ak_(Encounter LastObs)
 				{
 					Period cg_ = LastObs?.Period;
@@ -217,7 +217,7 @@ public class PCMaternal_5_16_000
 					CqlInterval<CqlDateTime> cp_ = FHIRHelpers_4_3_000.ToInterval(cj_);
 					CqlDateTime cq_ = context.Operators.Start(cp_);
 					CqlInterval<CqlDateTime> cr_ = context.Operators.Interval(cn_, cq_, true, true);
-					bool? cs_ = context.Operators.In<CqlDateTime>(ci_, cr_, default(string));
+					bool? cs_ = context.Operators.In<CqlDateTime>(ci_, cr_, default);
 					CqlInterval<CqlDateTime> cu_ = FHIRHelpers_4_3_000.ToInterval(cj_);
 					CqlDateTime cv_ = context.Operators.Start(cu_);
 					bool? cw_ = context.Operators.Not((bool?)(cv_ is null));
@@ -249,7 +249,7 @@ public class PCMaternal_5_16_000
 				CqlDateTime au_ = context.Operators.Start(at_);
 				CqlQuantity av_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime aw_ = context.Operators.Subtract((ar_ ?? au_), av_);
-				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default(PropertyInfo));
+				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? az_(Encounter LastObs)
 				{
 					Period dg_ = LastObs?.Period;
@@ -263,7 +263,7 @@ public class PCMaternal_5_16_000
 					CqlInterval<CqlDateTime> dp_ = FHIRHelpers_4_3_000.ToInterval(dj_);
 					CqlDateTime dq_ = context.Operators.Start(dp_);
 					CqlInterval<CqlDateTime> dr_ = context.Operators.Interval(dn_, dq_, true, true);
-					bool? ds_ = context.Operators.In<CqlDateTime>(di_, dr_, default(string));
+					bool? ds_ = context.Operators.In<CqlDateTime>(di_, dr_, default);
 					CqlInterval<CqlDateTime> du_ = FHIRHelpers_4_3_000.ToInterval(dj_);
 					CqlDateTime dv_ = context.Operators.Start(du_);
 					bool? dw_ = context.Operators.Not((bool?)(dv_ is null));
@@ -293,8 +293,8 @@ public class PCMaternal_5_16_000
 				CqlInterval<CqlDateTime> bi_ = FHIRHelpers_4_3_000.ToInterval(as_);
 				CqlDateTime bj_ = context.Operators.Start(bi_);
 				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, (bg_ ?? bj_), true, true);
-				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default(string));
-				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default(PropertyInfo));
+				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default);
+				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? bo_(Encounter LastObs)
 				{
 					Period eg_ = LastObs?.Period;
@@ -308,7 +308,7 @@ public class PCMaternal_5_16_000
 					CqlInterval<CqlDateTime> ep_ = FHIRHelpers_4_3_000.ToInterval(ej_);
 					CqlDateTime eq_ = context.Operators.Start(ep_);
 					CqlInterval<CqlDateTime> er_ = context.Operators.Interval(en_, eq_, true, true);
-					bool? es_ = context.Operators.In<CqlDateTime>(ei_, er_, default(string));
+					bool? es_ = context.Operators.In<CqlDateTime>(ei_, er_, default);
 					CqlInterval<CqlDateTime> eu_ = FHIRHelpers_4_3_000.ToInterval(ej_);
 					CqlDateTime ev_ = context.Operators.Start(eu_);
 					bool? ew_ = context.Operators.Not((bool?)(ev_ is null));
@@ -362,7 +362,7 @@ public class PCMaternal_5_16_000
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services();
-			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default(PropertyInfo));
+			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
 			bool? q_(Encounter LastObs)
 			{
 				Period fj_ = LastObs?.Period;
@@ -376,7 +376,7 @@ public class PCMaternal_5_16_000
 				CqlInterval<CqlDateTime> fs_ = FHIRHelpers_4_3_000.ToInterval(fm_);
 				CqlDateTime ft_ = context.Operators.Start(fs_);
 				CqlInterval<CqlDateTime> fu_ = context.Operators.Interval(fq_, ft_, true, true);
-				bool? fv_ = context.Operators.In<CqlDateTime>(fl_, fu_, default(string));
+				bool? fv_ = context.Operators.In<CqlDateTime>(fl_, fu_, default);
 				CqlInterval<CqlDateTime> fx_ = FHIRHelpers_4_3_000.ToInterval(fm_);
 				CqlDateTime fy_ = context.Operators.Start(fx_);
 				bool? fz_ = context.Operators.Not((bool?)(fy_ is null));
@@ -424,7 +424,7 @@ public class PCMaternal_5_16_000
 		IEnumerable<Encounter> b_(Encounter EncounterWithAge)
 		{
 			CqlValueSet d_ = this.Delivery_Procedures();
-			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default(PropertyInfo));
+			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
 			bool? f_(Procedure DeliveryProcedure)
 			{
 				Code<EventStatus> j_ = DeliveryProcedure?.StatusElement;
@@ -436,7 +436,7 @@ public class PCMaternal_5_16_000
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
 				CqlDateTime q_ = context.Operators.Start(p_);
 				CqlInterval<CqlDateTime> r_ = this.hospitalizationWithEDOBTriageObservation(EncounterWithAge);
-				bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, default(string));
+				bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, default);
 				bool? t_ = context.Operators.And(m_, s_);
 
 				return t_;
@@ -462,7 +462,7 @@ public class PCMaternal_5_16_000
 	{
 		CqlCode a_ = this.Date_and_time_of_obstetric_delivery();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
 		bool? d_(Observation TimeOfDelivery)
 		{
 			DataType k_ = TimeOfDelivery?.Value;
@@ -533,10 +533,10 @@ public class PCMaternal_5_16_000
 			};
 			CqlDateTime v_ = QICoreCommon_2_0_000.earliest(u_());
 			CqlInterval<CqlDateTime> w_ = this.hospitalizationWithEDOBTriageObservation(TheEncounter);
-			bool? x_ = context.Operators.In<CqlDateTime>(v_, w_, default(string));
+			bool? x_ = context.Operators.In<CqlDateTime>(v_, w_, default);
 			bool? y_ = context.Operators.And(t_, x_);
 			object aa_ = FHIRHelpers_4_3_000.ToValue(k_);
-			bool? ac_ = context.Operators.In<CqlDateTime>((aa_ as CqlDateTime), w_, default(string));
+			bool? ac_ = context.Operators.In<CqlDateTime>((aa_ as CqlDateTime), w_, default);
 			bool? ad_ = context.Operators.And(y_, ac_);
 
 			return ad_;
@@ -613,7 +613,7 @@ public class PCMaternal_5_16_000
 	{
 		CqlCode a_ = this.Delivery_date_Estimated();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
 		bool? d_(Observation EstimatedDateOfDelivery)
 		{
 			DataType k_ = EstimatedDateOfDelivery?.Value;
@@ -687,7 +687,7 @@ public class PCMaternal_5_16_000
 			CqlQuantity x_ = context.Operators.Quantity(42m, "weeks");
 			CqlDateTime y_ = context.Operators.Subtract(w_, x_);
 			CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(y_, w_, true, true);
-			bool? ab_ = context.Operators.In<CqlDateTime>(v_, aa_, default(string));
+			bool? ab_ = context.Operators.In<CqlDateTime>(v_, aa_, default);
 			bool? ad_ = context.Operators.Not((bool?)(w_ is null));
 			bool? ae_ = context.Operators.And(ab_, ad_);
 			bool? af_ = context.Operators.And(t_, ae_);
@@ -798,7 +798,7 @@ public class PCMaternal_5_16_000
 	public CqlQuantity lastEstimatedGestationalAge(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Estimated_Gestational_Age_at_Delivery();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default(PropertyInfo));
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		bool? c_(Observation EstimatedGestationalAge)
 		{
 			object j_()
@@ -858,7 +858,7 @@ public class PCMaternal_5_16_000
 			CqlQuantity m_ = context.Operators.Quantity(24m, "hours");
 			CqlDateTime n_ = context.Operators.Subtract(l_, m_);
 			CqlInterval<CqlDateTime> p_ = context.Operators.Interval(n_, l_, true, true);
-			bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, default(string));
+			bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, default);
 			bool? s_ = context.Operators.Not((bool?)(l_ is null));
 			bool? t_ = context.Operators.And(q_, s_);
 			DataType u_ = EstimatedGestationalAge?.Value;
@@ -984,7 +984,7 @@ public class PCMaternal_5_16_000
 			};
 			CqlDateTime ak_ = QICoreCommon_2_0_000.earliest(aj_());
 			CqlInterval<CqlDateTime> al_ = this.hospitalizationWithEDOBTriageObservation(TheEncounter);
-			bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, default(string));
+			bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, default);
 			bool? an_ = context.Operators.And(ai_, am_);
 			object ap_ = FHIRHelpers_4_3_000.ToValue(u_);
 			bool? aq_ = context.Operators.Not((bool?)(ap_ is null));

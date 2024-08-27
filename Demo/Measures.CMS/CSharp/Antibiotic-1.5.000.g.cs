@@ -54,7 +54,7 @@ public class Antibiotic_1_5_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -86,7 +86,7 @@ public class Antibiotic_1_5_000
 				CqlDateTime v_ = context.Operators.Start(u_);
 				CqlDate w_ = context.Operators.DateFrom(v_);
 				CqlInterval<CqlDate> x_ = context.Operators.Interval(r_, w_, true, true);
-				bool? y_ = context.Operators.In<CqlDate>(k_, x_, default(string));
+				bool? y_ = context.Operators.In<CqlDate>(k_, x_, default);
 
 				return y_;
 			};

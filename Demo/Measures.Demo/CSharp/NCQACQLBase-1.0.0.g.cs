@@ -204,7 +204,7 @@ public class NCQACQLBase_1_0_0
 				{
 					bool? j_(CqlInterval<CqlDate> J)
 					{
-						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, default(string));
+						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, default);
 
 						return n_;
 					};
@@ -256,7 +256,7 @@ public class NCQACQLBase_1_0_0
 				{
 					bool? j_(CqlInterval<CqlDateTime> J)
 					{
-						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, default(string));
+						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, default);
 
 						return n_;
 					};
@@ -267,7 +267,7 @@ public class NCQACQLBase_1_0_0
 					return m_;
 				};
 				IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Where<CqlInterval<CqlDateTime>>(intervals, g_);
-				IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Collapse(h_, default(string));
+				IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Collapse(h_, default);
 
 				return i_;
 			}
@@ -1062,7 +1062,7 @@ public class NCQACQLBase_1_0_0
 			int? ch_ = i?.StartMinute;
 			int? ci_ = i?.StartSecond;
 			int? cj_ = i?.StartMillisecond;
-			CqlDateTime ck_ = context.Operators.DateTime(cd_, ce_, cf_, cg_, ch_, ci_, cj_, default(decimal));
+			CqlDateTime ck_ = context.Operators.DateTime(cd_, ce_, cf_, cg_, ch_, ci_, cj_, default);
 			int? cl_ = i?.EndYear;
 			int? cm_ = i?.EndMonth;
 			int? cn_ = i?.EndDay;
@@ -1070,7 +1070,7 @@ public class NCQACQLBase_1_0_0
 			int? cp_ = i?.EndMinute;
 			int? cq_ = i?.EndSecond;
 			int? cr_ = i?.EndMillisecond;
-			CqlDateTime cs_ = context.Operators.DateTime(cl_, cm_, cn_, co_, cp_, cq_, cr_, default(decimal));
+			CqlDateTime cs_ = context.Operators.DateTime(cl_, cm_, cn_, co_, cp_, cq_, cr_, default);
 			CqlInterval<CqlDateTime> ct_ = context.Operators.Interval(ck_, cs_, true, true);
 
 			return ct_;
