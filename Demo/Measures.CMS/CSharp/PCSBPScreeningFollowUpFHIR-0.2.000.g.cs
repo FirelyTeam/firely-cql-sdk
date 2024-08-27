@@ -160,7 +160,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
     #endregion
 
 	private CqlValueSet Diagnosis_of_Hypertension_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263", default(string));
 
     [CqlDeclaration("Diagnosis of Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263")]
@@ -168,7 +168,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Diagnosis_of_Hypertension.Value;
 
 	private CqlValueSet Dietary_Recommendations_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515", default(string));
 
     [CqlDeclaration("Dietary Recommendations")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515")]
@@ -176,7 +176,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Dietary_Recommendations.Value;
 
 	private CqlValueSet Encounter_to_Screen_for_Blood_Pressure_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920", default(string));
 
     [CqlDeclaration("Encounter to Screen for Blood Pressure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920")]
@@ -184,7 +184,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Encounter_to_Screen_for_Blood_Pressure.Value;
 
 	private CqlValueSet Finding_of_Elevated_Blood_Pressure_or_Hypertension_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514", default(string));
 
     [CqlDeclaration("Finding of Elevated Blood Pressure or Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514")]
@@ -192,7 +192,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Finding_of_Elevated_Blood_Pressure_or_Hypertension.Value;
 
 	private CqlValueSet Follow_Up_Within_4_Weeks_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578", default(string));
 
     [CqlDeclaration("Follow Up Within 4 Weeks")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578")]
@@ -200,7 +200,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Follow_Up_Within_4_Weeks.Value;
 
 	private CqlValueSet Laboratory_Tests_for_Hypertension_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482", default(string));
 
     [CqlDeclaration("Laboratory Tests for Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482")]
@@ -208,7 +208,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Laboratory_Tests_for_Hypertension.Value;
 
 	private CqlValueSet Lifestyle_Recommendation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581", default(string));
 
     [CqlDeclaration("Lifestyle Recommendation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581")]
@@ -216,7 +216,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Lifestyle_Recommendation.Value;
 
 	private CqlValueSet Medical_Reason_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default(string));
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
@@ -224,7 +224,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Medical_Reason.Value;
 
 	private CqlValueSet Patient_Declined_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", default(string));
 
     [CqlDeclaration("Patient Declined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582")]
@@ -232,7 +232,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Patient_Declined.Value;
 
 	private CqlValueSet Pharmacologic_Therapy_for_Hypertension_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577", default(string));
 
     [CqlDeclaration("Pharmacologic Therapy for Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577")]
@@ -240,7 +240,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Pharmacologic_Therapy_for_Hypertension.Value;
 
 	private CqlValueSet Recommendation_to_Increase_Physical_Activity_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518", default(string));
 
     [CqlDeclaration("Recommendation to Increase Physical Activity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518")]
@@ -248,7 +248,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Recommendation_to_Increase_Physical_Activity.Value;
 
 	private CqlValueSet Referral_or_Counseling_for_Alcohol_Consumption_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583", default(string));
 
     [CqlDeclaration("Referral or Counseling for Alcohol Consumption")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583")]
@@ -256,7 +256,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Referral_or_Counseling_for_Alcohol_Consumption.Value;
 
 	private CqlValueSet Referral_to_Primary_Care_or_Alternate_Provider_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580", default(string));
 
     [CqlDeclaration("Referral to Primary Care or Alternate Provider")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580")]
@@ -264,7 +264,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Referral_to_Primary_Care_or_Alternate_Provider.Value;
 
 	private CqlValueSet Weight_Reduction_Recommended_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510", default(string));
 
     [CqlDeclaration("Weight Reduction Recommended")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510")]
@@ -272,49 +272,49 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		__Weight_Reduction_Recommended.Value;
 
 	private CqlCode Diastolic_blood_pressure_Value() => 
-		new CqlCode("8462-4", "http://loinc.org", null, null);
+		new CqlCode("8462-4", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Diastolic blood pressure")]
 	public CqlCode Diastolic_blood_pressure() => 
 		__Diastolic_blood_pressure.Value;
 
 	private CqlCode _12_lead_EKG_panel_Value() => 
-		new CqlCode("34534-8", "http://loinc.org", null, null);
+		new CqlCode("34534-8", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("12 lead EKG panel")]
 	public CqlCode _12_lead_EKG_panel() => 
 		___12_lead_EKG_panel.Value;
 
 	private CqlCode EKG_study_Value() => 
-		new CqlCode("11524-6", "http://loinc.org", null, null);
+		new CqlCode("11524-6", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("EKG study")]
 	public CqlCode EKG_study() => 
 		__EKG_study.Value;
 
 	private CqlCode Follow_up_2_3_months__finding__Value() => 
-		new CqlCode("183624006", "http://snomed.info/sct", null, null);
+		new CqlCode("183624006", "http://snomed.info/sct", default(string), default(string));
 
     [CqlDeclaration("Follow-up 2-3 months (finding)")]
 	public CqlCode Follow_up_2_3_months__finding_() => 
 		__Follow_up_2_3_months__finding_.Value;
 
 	private CqlCode Follow_up_4_6_months__finding__Value() => 
-		new CqlCode("183625007", "http://snomed.info/sct", null, null);
+		new CqlCode("183625007", "http://snomed.info/sct", default(string), default(string));
 
     [CqlDeclaration("Follow-up 4-6 months (finding)")]
 	public CqlCode Follow_up_4_6_months__finding_() => 
 		__Follow_up_4_6_months__finding_.Value;
 
 	private CqlCode Systolic_blood_pressure_Value() => 
-		new CqlCode("8480-6", "http://loinc.org", null, null);
+		new CqlCode("8480-6", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Systolic blood pressure")]
 	public CqlCode Systolic_blood_pressure() => 
 		__Systolic_blood_pressure.Value;
 
 	private CqlCode @virtual_Value() => 
-		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null);
+		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default(string), default(string));
 
     [CqlDeclaration("virtual")]
 	public CqlCode @virtual() => 
@@ -323,7 +323,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private CqlCode[] ActCode_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
+			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default(string), default(string)),
 		];
 
 		return a_;
@@ -336,10 +336,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("8462-4", "http://loinc.org", null, null),
-			new CqlCode("34534-8", "http://loinc.org", null, null),
-			new CqlCode("11524-6", "http://loinc.org", null, null),
-			new CqlCode("8480-6", "http://loinc.org", null, null),
+			new CqlCode("8462-4", "http://loinc.org", default(string), default(string)),
+			new CqlCode("34534-8", "http://loinc.org", default(string), default(string)),
+			new CqlCode("11524-6", "http://loinc.org", default(string), default(string)),
+			new CqlCode("8480-6", "http://loinc.org", default(string), default(string)),
 		];
 
 		return a_;
@@ -352,8 +352,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("183624006", "http://snomed.info/sct", null, null),
-			new CqlCode("183625007", "http://snomed.info/sct", null, null),
+			new CqlCode("183624006", "http://snomed.info/sct", default(string), default(string)),
+			new CqlCode("183625007", "http://snomed.info/sct", default(string), default(string)),
 		];
 
 		return a_;
@@ -365,8 +365,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("PCSBPScreeningFollowUpFHIR-0.2.000", "Measurement Period", c_);
 
@@ -379,7 +379,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -392,7 +392,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Encounter_to_Screen_for_Blood_Pressure();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
 		bool? c_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
@@ -464,7 +464,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
 		{
 			CqlValueSet d_ = this.Diagnosis_of_Hypertension();
-			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
+			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default(PropertyInfo));
 			bool? f_(Condition Hypertension)
 			{
 				bool? j_ = QICoreCommon_2_0_000.isProblemListItem(Hypertension);
@@ -483,7 +483,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					};
 					if (t_())
 					{
-						return null;
+						return default(CqlInterval<CqlDateTime>);
 					}
 					else
 					{
@@ -523,7 +523,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default(CqlValueSet), default(PropertyInfo));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType ak_ = BloodPressure?.Effective;
@@ -532,7 +532,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime an_ = context.Operators.End(am_);
 				Period ao_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_3_000.ToInterval(ao_);
-				bool? aq_ = context.Operators.In<CqlDateTime>(an_, ap_, null);
+				bool? aq_ = context.Operators.In<CqlDateTime>(an_, ap_, default(string));
 				Code<ObservationStatus> ar_ = BloodPressure?.StatusElement;
 				ObservationStatus? as_ = ar_?.Value;
 				string at_ = context.Operators.Convert<string>(as_);
@@ -583,7 +583,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlQuantity p_ = context.Operators.Quantity(1m, "mm[Hg]");
 			CqlQuantity q_ = context.Operators.Quantity(120m, "mm[Hg]");
 			CqlInterval<CqlQuantity> r_ = context.Operators.Interval(p_, q_, true, false);
-			bool? s_ = context.Operators.In<CqlQuantity>((o_ as CqlQuantity), r_, null);
+			bool? s_ = context.Operators.In<CqlQuantity>((o_ as CqlQuantity), r_, default(string));
 			bool? u_(Observation BloodPressure)
 			{
 				DataType bo_ = BloodPressure?.Effective;
@@ -592,7 +592,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime br_ = context.Operators.End(bq_);
 				Period bs_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> bt_ = FHIRHelpers_4_3_000.ToInterval(bs_);
-				bool? bu_ = context.Operators.In<CqlDateTime>(br_, bt_, null);
+				bool? bu_ = context.Operators.In<CqlDateTime>(br_, bt_, default(string));
 				Code<ObservationStatus> bv_ = BloodPressure?.StatusElement;
 				ObservationStatus? bw_ = bv_?.Value;
 				string bx_ = context.Operators.Convert<string>(bw_);
@@ -642,7 +642,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 			CqlQuantity ag_ = context.Operators.Quantity(80m, "mm[Hg]");
 			CqlInterval<CqlQuantity> ah_ = context.Operators.Interval(p_, ag_, true, false);
-			bool? ai_ = context.Operators.In<CqlQuantity>((ae_ as CqlQuantity), ah_, null);
+			bool? ai_ = context.Operators.In<CqlQuantity>((ae_ as CqlQuantity), ah_, default(string));
 			bool? aj_ = context.Operators.And(s_, ai_);
 
 			return aj_;
@@ -661,7 +661,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default(CqlValueSet), default(PropertyInfo));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType ak_ = BloodPressure?.Effective;
@@ -670,7 +670,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime an_ = context.Operators.End(am_);
 				Period ao_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_3_000.ToInterval(ao_);
-				bool? aq_ = context.Operators.In<CqlDateTime>(an_, ap_, null);
+				bool? aq_ = context.Operators.In<CqlDateTime>(an_, ap_, default(string));
 				Code<ObservationStatus> ar_ = BloodPressure?.StatusElement;
 				ObservationStatus? as_ = ar_?.Value;
 				string at_ = context.Operators.Convert<string>(as_);
@@ -721,7 +721,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlQuantity p_ = context.Operators.Quantity(120m, "mm[Hg]");
 			CqlQuantity q_ = context.Operators.Quantity(129m, "mm[Hg]");
 			CqlInterval<CqlQuantity> r_ = context.Operators.Interval(p_, q_, true, true);
-			bool? s_ = context.Operators.In<CqlQuantity>((o_ as CqlQuantity), r_, null);
+			bool? s_ = context.Operators.In<CqlQuantity>((o_ as CqlQuantity), r_, default(string));
 			bool? u_(Observation BloodPressure)
 			{
 				DataType bo_ = BloodPressure?.Effective;
@@ -730,7 +730,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime br_ = context.Operators.End(bq_);
 				Period bs_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> bt_ = FHIRHelpers_4_3_000.ToInterval(bs_);
-				bool? bu_ = context.Operators.In<CqlDateTime>(br_, bt_, null);
+				bool? bu_ = context.Operators.In<CqlDateTime>(br_, bt_, default(string));
 				Code<ObservationStatus> bv_ = BloodPressure?.StatusElement;
 				ObservationStatus? bw_ = bv_?.Value;
 				string bx_ = context.Operators.Convert<string>(bw_);
@@ -781,7 +781,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlQuantity af_ = context.Operators.Quantity(1m, "mm[Hg]");
 			CqlQuantity ag_ = context.Operators.Quantity(80m, "mm[Hg]");
 			CqlInterval<CqlQuantity> ah_ = context.Operators.Interval(af_, ag_, true, false);
-			bool? ai_ = context.Operators.In<CqlQuantity>((ae_ as CqlQuantity), ah_, null);
+			bool? ai_ = context.Operators.In<CqlQuantity>((ae_ as CqlQuantity), ah_, default(string));
 			bool? aj_ = context.Operators.And(s_, ai_);
 
 			return aj_;
@@ -799,10 +799,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	{
 		CqlCode a_ = this.Follow_up_2_3_months__finding_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<ServiceRequest> c_ = context.Operators.RetrieveByCodes<ServiceRequest>(b_, null);
+		IEnumerable<ServiceRequest> c_ = context.Operators.RetrieveByCodes<ServiceRequest>(b_, default(PropertyInfo));
 		CqlCode d_ = this.Follow_up_4_6_months__finding_();
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-		IEnumerable<ServiceRequest> f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, null);
+		IEnumerable<ServiceRequest> f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> g_ = context.Operators.Union<ServiceRequest>(c_, f_);
 		bool? h_(ServiceRequest FollowUp)
 		{
@@ -825,18 +825,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> NonPharmacological_Interventions_Value()
 	{
 		CqlValueSet a_ = this.Lifestyle_Recommendation();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
 		CqlValueSet c_ = this.Weight_Reduction_Recommended();
-		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(c_, null);
+		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(c_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		CqlValueSet f_ = this.Dietary_Recommendations();
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
+		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default(PropertyInfo));
 		CqlValueSet h_ = this.Recommendation_to_Increase_Physical_Activity();
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, null);
+		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> j_ = context.Operators.Union<ServiceRequest>(g_, i_);
 		IEnumerable<ServiceRequest> k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		CqlValueSet l_ = this.Referral_or_Counseling_for_Alcohol_Consumption();
-		IEnumerable<ServiceRequest> m_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, null);
+		IEnumerable<ServiceRequest> m_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> n_ = context.Operators.Union<ServiceRequest>(k_, m_);
 		bool? o_(ServiceRequest NonPharmaInterventions)
 		{
@@ -859,7 +859,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading_Value()
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
 		bool? c_(ServiceRequest Referral)
 		{
 			List<CodeableConcept> e_ = Referral?.ReasonCode;
@@ -969,7 +969,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default(CqlValueSet), default(PropertyInfo));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType bk_ = BloodPressure?.Effective;
@@ -984,7 +984,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlInterval<CqlDateTime> bu_ = FHIRHelpers_4_3_000.ToInterval(bo_);
 				CqlDateTime bv_ = context.Operators.Start(bu_);
 				CqlInterval<CqlDateTime> bw_ = context.Operators.Interval(bs_, bv_, true, true);
-				bool? bx_ = context.Operators.In<CqlDateTime>(bn_, bw_, null);
+				bool? bx_ = context.Operators.In<CqlDateTime>(bn_, bw_, default(string));
 				CqlInterval<CqlDateTime> bz_ = FHIRHelpers_4_3_000.ToInterval(bo_);
 				CqlDateTime ca_ = context.Operators.Start(bz_);
 				bool? cb_ = context.Operators.Not((bool?)(ca_ is null));
@@ -1052,7 +1052,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlInterval<CqlDateTime> dk_ = FHIRHelpers_4_3_000.ToInterval(de_);
 				CqlDateTime dl_ = context.Operators.Start(dk_);
 				CqlInterval<CqlDateTime> dm_ = context.Operators.Interval(di_, dl_, true, true);
-				bool? dn_ = context.Operators.In<CqlDateTime>(dd_, dm_, null);
+				bool? dn_ = context.Operators.In<CqlDateTime>(dd_, dm_, default(string));
 				CqlInterval<CqlDateTime> dp_ = FHIRHelpers_4_3_000.ToInterval(de_);
 				CqlDateTime dq_ = context.Operators.Start(dp_);
 				bool? dr_ = context.Operators.Not((bool?)(dq_ is null));
@@ -1120,7 +1120,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlInterval<CqlDateTime> fa_ = FHIRHelpers_4_3_000.ToInterval(eu_);
 				CqlDateTime fb_ = context.Operators.Start(fa_);
 				CqlInterval<CqlDateTime> fc_ = context.Operators.Interval(ey_, fb_, true, true);
-				bool? fd_ = context.Operators.In<CqlDateTime>(et_, fc_, null);
+				bool? fd_ = context.Operators.In<CqlDateTime>(et_, fc_, default(string));
 				CqlInterval<CqlDateTime> ff_ = FHIRHelpers_4_3_000.ToInterval(eu_);
 				CqlDateTime fg_ = context.Operators.Start(ff_);
 				bool? fh_ = context.Operators.Not((bool?)(fg_ is null));
@@ -1188,7 +1188,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlInterval<CqlDateTime> gq_ = FHIRHelpers_4_3_000.ToInterval(gk_);
 				CqlDateTime gr_ = context.Operators.Start(gq_);
 				CqlInterval<CqlDateTime> gs_ = context.Operators.Interval(go_, gr_, true, true);
-				bool? gt_ = context.Operators.In<CqlDateTime>(gj_, gs_, null);
+				bool? gt_ = context.Operators.In<CqlDateTime>(gj_, gs_, default(string));
 				CqlInterval<CqlDateTime> gv_ = FHIRHelpers_4_3_000.ToInterval(gk_);
 				CqlDateTime gw_ = context.Operators.Start(gv_);
 				bool? gx_ = context.Operators.Not((bool?)(gw_ is null));
@@ -1261,7 +1261,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default(CqlValueSet), default(PropertyInfo));
 			bool? g_(Observation BloodPressure)
 			{
 				DataType bm_ = BloodPressure?.Effective;
@@ -1473,7 +1473,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional_Value()
 	{
 		CqlValueSet a_ = this.Follow_Up_Within_4_Weeks();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> c_(ServiceRequest FourWeekRescreen)
 		{
 			IEnumerable<ServiceRequest> g_ = this.NonPharmacological_Interventions();
@@ -1550,7 +1550,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default(CqlValueSet), default(PropertyInfo));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType bs_ = BloodPressure?.Effective;
@@ -1610,7 +1610,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlQuantity p_ = context.Operators.Quantity(130m, "mm[Hg]");
 			CqlQuantity q_ = context.Operators.Quantity(139m, "mm[Hg]");
 			CqlInterval<CqlQuantity> r_ = context.Operators.Interval(p_, q_, true, true);
-			bool? s_ = context.Operators.In<CqlQuantity>((o_ as CqlQuantity), r_, null);
+			bool? s_ = context.Operators.In<CqlQuantity>((o_ as CqlQuantity), r_, default(string));
 			bool? u_(Observation BloodPressure)
 			{
 				DataType cw_ = BloodPressure?.Effective;
@@ -1670,7 +1670,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			CqlQuantity af_ = context.Operators.Quantity(80m, "mm[Hg]");
 			CqlQuantity ag_ = context.Operators.Quantity(89m, "mm[Hg]");
 			CqlInterval<CqlQuantity> ah_ = context.Operators.Interval(af_, ag_, true, true);
-			bool? ai_ = context.Operators.In<CqlQuantity>((ae_ as CqlQuantity), ah_, null);
+			bool? ai_ = context.Operators.In<CqlQuantity>((ae_ as CqlQuantity), ah_, default(string));
 			bool? aj_ = context.Operators.Or(s_, ai_);
 			bool? al_(Observation BloodPressure)
 			{
@@ -1810,13 +1810,13 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	{
 		CqlCode a_ = this._12_lead_EKG_panel();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<ServiceRequest> c_ = context.Operators.RetrieveByCodes<ServiceRequest>(b_, null);
+		IEnumerable<ServiceRequest> c_ = context.Operators.RetrieveByCodes<ServiceRequest>(b_, default(PropertyInfo));
 		CqlCode d_ = this.EKG_study();
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-		IEnumerable<ServiceRequest> f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, null);
+		IEnumerable<ServiceRequest> f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> g_ = context.Operators.Union<ServiceRequest>(c_, f_);
 		CqlValueSet h_ = this.Laboratory_Tests_for_Hypertension();
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, null);
+		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> j_ = context.Operators.Union<ServiceRequest>(g_, i_);
 		bool? k_(ServiceRequest EKGLab)
 		{
@@ -1950,7 +1950,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default(CqlValueSet), default(PropertyInfo));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType bn_ = BloodPressure?.Effective;
@@ -1959,7 +1959,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime bq_ = context.Operators.End(bp_);
 				Period br_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> bs_ = FHIRHelpers_4_3_000.ToInterval(br_);
-				bool? bt_ = context.Operators.In<CqlDateTime>(bq_, bs_, null);
+				bool? bt_ = context.Operators.In<CqlDateTime>(bq_, bs_, default(string));
 				Code<ObservationStatus> bu_ = BloodPressure?.StatusElement;
 				ObservationStatus? bv_ = bu_?.Value;
 				string bw_ = context.Operators.Convert<string>(bv_);
@@ -2017,7 +2017,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime cu_ = context.Operators.End(ct_);
 				Period cv_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> cw_ = FHIRHelpers_4_3_000.ToInterval(cv_);
-				bool? cx_ = context.Operators.In<CqlDateTime>(cu_, cw_, null);
+				bool? cx_ = context.Operators.In<CqlDateTime>(cu_, cw_, default(string));
 				Code<ObservationStatus> cy_ = BloodPressure?.StatusElement;
 				ObservationStatus? cz_ = cy_?.Value;
 				string da_ = context.Operators.Convert<string>(cz_);
@@ -2075,7 +2075,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime dy_ = context.Operators.End(dx_);
 				Period dz_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> ea_ = FHIRHelpers_4_3_000.ToInterval(dz_);
-				bool? eb_ = context.Operators.In<CqlDateTime>(dy_, ea_, null);
+				bool? eb_ = context.Operators.In<CqlDateTime>(dy_, ea_, default(string));
 				Code<ObservationStatus> ec_ = BloodPressure?.StatusElement;
 				ObservationStatus? ed_ = ec_?.Value;
 				string ee_ = context.Operators.Convert<string>(ed_);
@@ -2133,7 +2133,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime fc_ = context.Operators.End(fb_);
 				Period fd_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> fe_ = FHIRHelpers_4_3_000.ToInterval(fd_);
-				bool? ff_ = context.Operators.In<CqlDateTime>(fc_, fe_, null);
+				bool? ff_ = context.Operators.In<CqlDateTime>(fc_, fe_, default(string));
 				Code<ObservationStatus> fg_ = BloodPressure?.StatusElement;
 				ObservationStatus? fh_ = fg_?.Value;
 				string fi_ = context.Operators.Convert<string>(fh_);
@@ -2203,7 +2203,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Value()
 	{
 		CqlValueSet a_ = this.Follow_Up_Within_4_Weeks();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> c_(ServiceRequest WeeksRescreen)
 		{
 			IEnumerable<ServiceRequest> i_ = this.Laboratory_Test_or_ECG_for_Hypertension();
@@ -2261,8 +2261,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<ServiceRequest> g_(ServiceRequest WeeksRescreen)
 		{
 			CqlValueSet ap_ = this.Pharmacologic_Therapy_for_Hypertension();
-			IEnumerable<MedicationRequest> aq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
-			IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, null);
+			IEnumerable<MedicationRequest> aq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, default(PropertyInfo));
+			IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, default(PropertyInfo));
 			IEnumerable<MedicationRequest> at_ = context.Operators.Union<MedicationRequest>(aq_, as_);
 			bool? au_(MedicationRequest Medications)
 			{
@@ -2374,10 +2374,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			CqlCode d_ = this.Systolic_blood_pressure();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default(PropertyInfo));
 			CqlCode g_ = this.Diastolic_blood_pressure();
 			IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(g_);
-			IEnumerable<Observation> i_ = context.Operators.RetrieveByCodes<Observation>(h_, null);
+			IEnumerable<Observation> i_ = context.Operators.RetrieveByCodes<Observation>(h_, default(PropertyInfo));
 			IEnumerable<Observation> j_ = context.Operators.Union<Observation>(f_, i_);
 			bool? k_(Observation NoBPScreen)
 			{
@@ -2398,7 +2398,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				};
 				IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
 						? ((NoBPScreen as DomainResource).Extension)
-						: null), u_);
+						: default(List<Extension>)), u_);
 				DataType w_(Extension @this)
 				{
 					DataType ax_ = @this?.Value;
@@ -2422,7 +2422,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				};
 				IEnumerable<Extension> ae_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
 						? ((NoBPScreen as DomainResource).Extension)
-						: null), ad_);
+						: default(List<Extension>)), ad_);
 				DataType af_(Extension @this)
 				{
 					DataType bc_ = @this?.Value;
@@ -2464,27 +2464,27 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered_Value()
 	{
 		CqlValueSet a_ = this.Lifestyle_Recommendation();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
-		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
+		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		CqlValueSet f_ = this.Weight_Reduction_Recommended();
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
+		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default(PropertyInfo));
+		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> j_ = context.Operators.Union<ServiceRequest>(g_, i_);
 		IEnumerable<ServiceRequest> k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		CqlValueSet l_ = this.Dietary_Recommendations();
-		IEnumerable<ServiceRequest> m_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, null);
-		IEnumerable<ServiceRequest> o_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, null);
+		IEnumerable<ServiceRequest> m_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, default(PropertyInfo));
+		IEnumerable<ServiceRequest> o_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> p_ = context.Operators.Union<ServiceRequest>(m_, o_);
 		IEnumerable<ServiceRequest> q_ = context.Operators.Union<ServiceRequest>(k_, p_);
 		CqlValueSet r_ = this.Recommendation_to_Increase_Physical_Activity();
-		IEnumerable<ServiceRequest> s_ = context.Operators.RetrieveByValueSet<ServiceRequest>(r_, null);
-		IEnumerable<ServiceRequest> u_ = context.Operators.RetrieveByValueSet<ServiceRequest>(r_, null);
+		IEnumerable<ServiceRequest> s_ = context.Operators.RetrieveByValueSet<ServiceRequest>(r_, default(PropertyInfo));
+		IEnumerable<ServiceRequest> u_ = context.Operators.RetrieveByValueSet<ServiceRequest>(r_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> v_ = context.Operators.Union<ServiceRequest>(s_, u_);
 		IEnumerable<ServiceRequest> w_ = context.Operators.Union<ServiceRequest>(q_, v_);
 		CqlValueSet x_ = this.Referral_or_Counseling_for_Alcohol_Consumption();
-		IEnumerable<ServiceRequest> y_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, null);
-		IEnumerable<ServiceRequest> aa_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, null);
+		IEnumerable<ServiceRequest> y_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, default(PropertyInfo));
+		IEnumerable<ServiceRequest> aa_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> ab_ = context.Operators.Union<ServiceRequest>(y_, aa_);
 		IEnumerable<ServiceRequest> ac_ = context.Operators.Union<ServiceRequest>(w_, ab_);
 		bool? ad_(ServiceRequest NonPharmIntervention)
@@ -2500,7 +2500,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Extension> ag_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NonPharmIntervention is DomainResource)
 					? ((NonPharmIntervention as DomainResource).Extension)
-					: null), af_);
+					: default(List<Extension>)), af_);
 			DataType ah_(Extension @this)
 			{
 				DataType ax_ = @this?.Value;
@@ -2534,14 +2534,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	{
 		CqlCode a_ = this._12_lead_EKG_panel();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<ServiceRequest> c_ = context.Operators.RetrieveByCodes<ServiceRequest>(b_, null);
+		IEnumerable<ServiceRequest> c_ = context.Operators.RetrieveByCodes<ServiceRequest>(b_, default(PropertyInfo));
 		CqlCode d_ = this.EKG_study();
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-		IEnumerable<ServiceRequest> f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, null);
+		IEnumerable<ServiceRequest> f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> g_ = context.Operators.Union<ServiceRequest>(c_, f_);
 		CqlValueSet h_ = this.Laboratory_Tests_for_Hypertension();
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, null);
-		IEnumerable<ServiceRequest> k_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, null);
+		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, default(PropertyInfo));
+		IEnumerable<ServiceRequest> k_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> l_ = context.Operators.Union<ServiceRequest>(i_, k_);
 		IEnumerable<ServiceRequest> m_ = context.Operators.Union<ServiceRequest>(g_, l_);
 		bool? n_(ServiceRequest LabECGNotDone)
@@ -2557,7 +2557,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((LabECGNotDone is DomainResource)
 					? ((LabECGNotDone as DomainResource).Extension)
-					: null), p_);
+					: default(List<Extension>)), p_);
 			DataType r_(Extension @this)
 			{
 				DataType ac_ = @this?.Value;
@@ -2585,15 +2585,15 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined_Value()
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
-		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
+		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		CqlCode f_ = this.Follow_up_2_3_months__finding_();
 		IEnumerable<CqlCode> g_ = context.Operators.ToList<CqlCode>(f_);
-		IEnumerable<ServiceRequest> h_ = context.Operators.RetrieveByCodes<ServiceRequest>(g_, null);
+		IEnumerable<ServiceRequest> h_ = context.Operators.RetrieveByCodes<ServiceRequest>(g_, default(PropertyInfo));
 		CqlCode i_ = this.Follow_up_4_6_months__finding_();
 		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
-		IEnumerable<ServiceRequest> k_ = context.Operators.RetrieveByCodes<ServiceRequest>(j_, null);
+		IEnumerable<ServiceRequest> k_ = context.Operators.RetrieveByCodes<ServiceRequest>(j_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> l_ = context.Operators.Union<ServiceRequest>(h_, k_);
 		IEnumerable<ServiceRequest> m_ = context.Operators.Union<ServiceRequest>(e_, l_);
 		bool? n_(ServiceRequest SecondHTNDeclinedReferralAndFollowUp)
@@ -2609,7 +2609,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTNDeclinedReferralAndFollowUp is DomainResource)
 					? ((SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension)
-					: null), t_);
+					: default(List<Extension>)), t_);
 			DataType v_(Extension @this)
 			{
 				DataType al_ = @this?.Value;
@@ -2646,12 +2646,12 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined_Value()
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
-		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
+		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
+		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		CqlValueSet f_ = this.Follow_Up_Within_4_Weeks();
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, null);
+		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default(PropertyInfo));
+		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default(PropertyInfo));
 		IEnumerable<ServiceRequest> j_ = context.Operators.Union<ServiceRequest>(g_, i_);
 		IEnumerable<ServiceRequest> k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		bool? l_(ServiceRequest SecondHTN140Over90ReferralFollowUpNotDone)
@@ -2667,7 +2667,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<Extension> aa_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTN140Over90ReferralFollowUpNotDone is DomainResource)
 					? ((SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension)
-					: null), z_);
+					: default(List<Extension>)), z_);
 			DataType ab_(Extension @this)
 			{
 				DataType ar_ = @this?.Value;
@@ -2690,8 +2690,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		};
 		IEnumerable<ServiceRequest> m_ = context.Operators.Where<ServiceRequest>(k_, l_);
 		CqlValueSet n_ = this.Pharmacologic_Therapy_for_Hypertension();
-		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
-		IEnumerable<MedicationRequest> q_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, null);
+		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, default(PropertyInfo));
+		IEnumerable<MedicationRequest> q_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, default(PropertyInfo));
 		IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(o_, q_);
 		bool? s_(MedicationRequest MedicationRequestNotOrdered)
 		{
@@ -2722,15 +2722,15 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> b_(Encounter ElevatedBPEncounter)
 		{
 			CqlValueSet x_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-			IEnumerable<ServiceRequest> y_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, null);
-			IEnumerable<ServiceRequest> aa_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, null);
+			IEnumerable<ServiceRequest> y_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, default(PropertyInfo));
+			IEnumerable<ServiceRequest> aa_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, default(PropertyInfo));
 			IEnumerable<ServiceRequest> ab_ = context.Operators.Union<ServiceRequest>(y_, aa_);
 			CqlCode ac_ = this.Follow_up_2_3_months__finding_();
 			IEnumerable<CqlCode> ad_ = context.Operators.ToList<CqlCode>(ac_);
-			IEnumerable<ServiceRequest> ae_ = context.Operators.RetrieveByCodes<ServiceRequest>(ad_, null);
+			IEnumerable<ServiceRequest> ae_ = context.Operators.RetrieveByCodes<ServiceRequest>(ad_, default(PropertyInfo));
 			CqlCode af_ = this.Follow_up_4_6_months__finding_();
 			IEnumerable<CqlCode> ag_ = context.Operators.ToList<CqlCode>(af_);
-			IEnumerable<ServiceRequest> ah_ = context.Operators.RetrieveByCodes<ServiceRequest>(ag_, null);
+			IEnumerable<ServiceRequest> ah_ = context.Operators.RetrieveByCodes<ServiceRequest>(ag_, default(PropertyInfo));
 			IEnumerable<ServiceRequest> ai_ = context.Operators.Union<ServiceRequest>(ae_, ah_);
 			IEnumerable<ServiceRequest> aj_ = context.Operators.Union<ServiceRequest>(ab_, ai_);
 			bool? ak_(ServiceRequest ElevatedBPDeclinedInterventions)
@@ -2746,7 +2746,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				};
 				IEnumerable<Extension> ap_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((ElevatedBPDeclinedInterventions is DomainResource)
 						? ((ElevatedBPDeclinedInterventions as DomainResource).Extension)
-						: null), ao_);
+						: default(List<Extension>)), ao_);
 				DataType aq_(Extension @this)
 				{
 					DataType bm_ = @this?.Value;
@@ -2807,12 +2807,12 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> i_(Encounter FirstHTNEncounter)
 		{
 			CqlValueSet bx_ = this.Follow_Up_Within_4_Weeks();
-			IEnumerable<ServiceRequest> by_ = context.Operators.RetrieveByValueSet<ServiceRequest>(bx_, null);
-			IEnumerable<ServiceRequest> ca_ = context.Operators.RetrieveByValueSet<ServiceRequest>(bx_, null);
+			IEnumerable<ServiceRequest> by_ = context.Operators.RetrieveByValueSet<ServiceRequest>(bx_, default(PropertyInfo));
+			IEnumerable<ServiceRequest> ca_ = context.Operators.RetrieveByValueSet<ServiceRequest>(bx_, default(PropertyInfo));
 			IEnumerable<ServiceRequest> cb_ = context.Operators.Union<ServiceRequest>(by_, ca_);
 			CqlValueSet cc_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-			IEnumerable<ServiceRequest> cd_ = context.Operators.RetrieveByValueSet<ServiceRequest>(cc_, null);
-			IEnumerable<ServiceRequest> cf_ = context.Operators.RetrieveByValueSet<ServiceRequest>(cc_, null);
+			IEnumerable<ServiceRequest> cd_ = context.Operators.RetrieveByValueSet<ServiceRequest>(cc_, default(PropertyInfo));
+			IEnumerable<ServiceRequest> cf_ = context.Operators.RetrieveByValueSet<ServiceRequest>(cc_, default(PropertyInfo));
 			IEnumerable<ServiceRequest> cg_ = context.Operators.Union<ServiceRequest>(cd_, cf_);
 			IEnumerable<ServiceRequest> ch_ = context.Operators.Union<ServiceRequest>(cb_, cg_);
 			bool? ci_(ServiceRequest FirstHTNDeclinedInterventions)
@@ -2828,7 +2828,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				};
 				IEnumerable<Extension> cn_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((FirstHTNDeclinedInterventions is DomainResource)
 						? ((FirstHTNDeclinedInterventions as DomainResource).Extension)
-						: null), cm_);
+						: default(List<Extension>)), cm_);
 				DataType co_(Extension @this)
 				{
 					DataType dk_ = @this?.Value;

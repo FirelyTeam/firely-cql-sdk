@@ -122,7 +122,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
     #endregion
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default(string));
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -130,7 +130,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Ethnicity_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default(string));
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
@@ -138,7 +138,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Ethnicity.Value;
 
 	private CqlValueSet Hospital_Dietitian_Referral_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.91", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.91", default(string));
 
     [CqlDeclaration("Hospital Dietitian Referral")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.91")]
@@ -146,7 +146,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Hospital_Dietitian_Referral.Value;
 
 	private CqlValueSet Malnutrition_Diagnosis_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.55", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.55", default(string));
 
     [CqlDeclaration("Malnutrition Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.55")]
@@ -154,7 +154,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Malnutrition_Diagnosis.Value;
 
 	private CqlValueSet Malnutrition_Risk_Screening_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.92", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.92", default(string));
 
     [CqlDeclaration("Malnutrition Risk Screening")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.92")]
@@ -162,7 +162,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Malnutrition_Risk_Screening.Value;
 
 	private CqlValueSet Malnutrition_Screening_At_Risk_Result_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.38", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.38", default(string));
 
     [CqlDeclaration("Malnutrition Screening At Risk Result")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.38")]
@@ -170,7 +170,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Malnutrition_Screening_At_Risk_Result.Value;
 
 	private CqlValueSet Malnutrition_Screening_Not_At_Risk_Result_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.34", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.34", default(string));
 
     [CqlDeclaration("Malnutrition Screening Not At Risk Result")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.34")]
@@ -178,7 +178,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Malnutrition_Screening_Not_At_Risk_Result.Value;
 
 	private CqlValueSet Nutrition_Assessment_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.21", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.21", default(string));
 
     [CqlDeclaration("Nutrition Assessment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.21")]
@@ -186,7 +186,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Nutrition_Assessment.Value;
 
 	private CqlValueSet Nutrition_Assessment_Status_Moderately_Malnourished_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.44", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.44", default(string));
 
     [CqlDeclaration("Nutrition Assessment Status Moderately Malnourished")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.44")]
@@ -194,7 +194,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Nutrition_Assessment_Status_Moderately_Malnourished.Value;
 
 	private CqlValueSet Nutrition_Assessment_Status_Not_or_Mildly_Malnourished_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.48", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.48", default(string));
 
     [CqlDeclaration("Nutrition Assessment Status Not or Mildly Malnourished")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.48")]
@@ -202,7 +202,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Nutrition_Assessment_Status_Not_or_Mildly_Malnourished.Value;
 
 	private CqlValueSet Nutrition_Assessment_Status_Severely_Malnourished_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.42", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.42", default(string));
 
     [CqlDeclaration("Nutrition Assessment Status Severely Malnourished")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.42")]
@@ -210,7 +210,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Nutrition_Assessment_Status_Severely_Malnourished.Value;
 
 	private CqlValueSet Nutrition_Care_Plan_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.93", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.93", default(string));
 
     [CqlDeclaration("Nutrition Care Plan")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.93")]
@@ -218,7 +218,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Nutrition_Care_Plan.Value;
 
 	private CqlValueSet ONC_Administrative_Sex_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default(string));
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
@@ -226,7 +226,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__ONC_Administrative_Sex.Value;
 
 	private CqlValueSet Payer_Type_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default(string));
 
     [CqlDeclaration("Payer Type")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
@@ -234,7 +234,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Payer_Type.Value;
 
 	private CqlValueSet Race_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default(string));
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
@@ -242,7 +242,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 		__Race.Value;
 
 	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
+		new CqlCode("21112-8", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Birth date")]
 	public CqlCode Birth_date() => 
@@ -251,7 +251,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("21112-8", "http://loinc.org", null, null),
+			new CqlCode("21112-8", "http://loinc.org", default(string), default(string)),
 		];
 
 		return a_;
@@ -287,8 +287,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("GlobalMalnutritionCompositeFHIR-0.1.000", "Measurement Period", c_);
 
@@ -301,7 +301,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -358,7 +358,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
 		bool? c_(Encounter EncounterInpatient)
 		{
 			Period e_ = EncounterInpatient?.Period;
@@ -426,7 +426,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Hospital_Dietitian_Referral();
-		IEnumerable<Procedure> c_ = context.Operators.RetrieveByValueSet<Procedure>(b_, null);
+		IEnumerable<Procedure> c_ = context.Operators.RetrieveByValueSet<Procedure>(b_, default(PropertyInfo));
 		IEnumerable<ValueTuple<Encounter, Procedure>> d_ = context.Operators.CrossJoin<Encounter, Procedure>(a_, c_);
 		(Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)? e_(ValueTuple<Encounter, Procedure> _valueTuple)
 		{
@@ -455,7 +455,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
 			CqlDateTime x_ = QICoreCommon_2_0_000.earliest(w_);
 			CqlInterval<CqlDateTime> y_ = CQMCommon_2_0_000.hospitalizationWithObservation(tuple_blodcpfeecjfnodfofhfzlqfa?.QualifyingEncounter);
-			bool? z_ = context.Operators.In<CqlDateTime>(x_, y_, null);
+			bool? z_ = context.Operators.In<CqlDateTime>(x_, y_, default(string));
 			bool? aa_ = context.Operators.And(u_, z_);
 
 			return aa_;
@@ -476,7 +476,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Risk_Screening();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default(PropertyInfo));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -506,7 +506,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			DataType x_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Effective;
 			object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.toInterval(y_);
-			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, null);
+			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, default(string));
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -561,7 +561,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Risk_Screening();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default(PropertyInfo));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -591,7 +591,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			DataType x_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Effective;
 			object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.toInterval(y_);
-			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, null);
+			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, default(string));
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -643,7 +643,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Risk_Screening();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default(PropertyInfo));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -673,7 +673,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			DataType x_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Effective;
 			object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.toInterval(y_);
-			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, null);
+			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, default(string));
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -724,7 +724,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Assessment();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default(PropertyInfo));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation NutritionAssessment)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -754,7 +754,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			DataType x_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Effective;
 			object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.toInterval(y_);
-			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, null);
+			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, default(string));
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -788,7 +788,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Assessment();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default(PropertyInfo));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation NutritionAssessment)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -818,7 +818,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			DataType x_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Effective;
 			object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.toInterval(y_);
-			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, null);
+			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, default(string));
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -848,7 +848,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Assessment();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default(PropertyInfo));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation NutritionAssessment)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -878,7 +878,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			DataType x_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Effective;
 			object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.toInterval(y_);
-			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, null);
+			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, z_, default(string));
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -904,7 +904,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Diagnosis();
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByValueSet<Condition>(b_, null);
+		IEnumerable<Condition> c_ = context.Operators.RetrieveByValueSet<Condition>(b_, default(PropertyInfo));
 		IEnumerable<ValueTuple<Encounter, Condition>> d_ = context.Operators.CrossJoin<Encounter, Condition>(a_, c_);
 		(Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)? e_(ValueTuple<Encounter, Condition> _valueTuple)
 		{
@@ -922,7 +922,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.prevalenceInterval(tuple_gsigyornrkjgexbhejviwntmn?.MalnutritionDiagnosis);
 			CqlDateTime q_ = context.Operators.Start(p_);
 			CqlInterval<CqlDateTime> r_ = CQMCommon_2_0_000.hospitalizationWithObservation(tuple_gsigyornrkjgexbhejviwntmn?.QualifyingEncounter);
-			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, null);
+			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, default(string));
 			bool? t_ = context.Operators.And(o_, s_);
 
 			return t_;
@@ -943,7 +943,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Care_Plan();
-		IEnumerable<Procedure> c_ = context.Operators.RetrieveByValueSet<Procedure>(b_, null);
+		IEnumerable<Procedure> c_ = context.Operators.RetrieveByValueSet<Procedure>(b_, default(PropertyInfo));
 		IEnumerable<ValueTuple<Encounter, Procedure>> d_ = context.Operators.CrossJoin<Encounter, Procedure>(a_, c_);
 		(Encounter QualifyingEncounter, Procedure NutritionCarePlan)? e_(ValueTuple<Encounter, Procedure> _valueTuple)
 		{
@@ -971,7 +971,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
 			CqlDateTime x_ = QICoreCommon_2_0_000.earliest(w_);
 			CqlInterval<CqlDateTime> y_ = CQMCommon_2_0_000.hospitalizationWithObservation(tuple_igutmwhaufjcwzmijcgjeysm?.QualifyingEncounter);
-			bool? z_ = context.Operators.In<CqlDateTime>(x_, y_, null);
+			bool? z_ = context.Operators.In<CqlDateTime>(x_, y_, default(string));
 			bool? aa_ = context.Operators.And(u_, z_);
 
 			return aa_;

@@ -182,7 +182,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
     #endregion
 
 	private CqlValueSet Heart_Failure_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", default(string));
 
     [CqlDeclaration("Heart Failure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376")]
@@ -190,7 +190,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		__Heart_Failure.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default(string));
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
@@ -198,7 +198,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		__Office_Visit.Value;
 
 	private CqlValueSet Online_Assessments_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default(string));
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
@@ -206,7 +206,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		__Online_Assessments.Value;
 
 	private CqlValueSet Telephone_Visits_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default(string));
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
@@ -214,210 +214,210 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		__Telephone_Visits.Value;
 
 	private CqlCode Emotional_score__MLHFQ__Value() => 
-		new CqlCode("85609-6", "http://loinc.org", null, null);
+		new CqlCode("85609-6", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Emotional score [MLHFQ]")]
 	public CqlCode Emotional_score__MLHFQ_() => 
 		__Emotional_score__MLHFQ_.Value;
 
 	private CqlCode Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12__Value() => 
-		new CqlCode("86923-0", "http://loinc.org", null, null);
+		new CqlCode("86923-0", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]")]
 	public CqlCode Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_() => 
 		__Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_.Value;
 
 	private CqlCode Overall_summary_score__KCCQ_12__Value() => 
-		new CqlCode("86924-8", "http://loinc.org", null, null);
+		new CqlCode("86924-8", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Overall summary score [KCCQ-12]")]
 	public CqlCode Overall_summary_score__KCCQ_12_() => 
 		__Overall_summary_score__KCCQ_12_.Value;
 
 	private CqlCode Overall_summary_score__KCCQ__Value() => 
-		new CqlCode("71940-1", "http://loinc.org", null, null);
+		new CqlCode("71940-1", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Overall summary score [KCCQ]")]
 	public CqlCode Overall_summary_score__KCCQ_() => 
 		__Overall_summary_score__KCCQ_.Value;
 
 	private CqlCode Physical_limitation_score__KCCQ__Value() => 
-		new CqlCode("72195-1", "http://loinc.org", null, null);
+		new CqlCode("72195-1", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Physical limitation score [KCCQ]")]
 	public CqlCode Physical_limitation_score__KCCQ_() => 
 		__Physical_limitation_score__KCCQ_.Value;
 
 	private CqlCode Physical_score__MLHFQ__Value() => 
-		new CqlCode("85618-7", "http://loinc.org", null, null);
+		new CqlCode("85618-7", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Physical score [MLHFQ]")]
 	public CqlCode Physical_score__MLHFQ_() => 
 		__Physical_score__MLHFQ_.Value;
 
 	private CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score_Value() => 
-		new CqlCode("71969-0", "http://loinc.org", null, null);
+		new CqlCode("71969-0", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("PROMIS-10 Global Mental Health (GMH) score T-score")]
 	public CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score() => 
 		__PROMIS_10_Global_Mental_Health__GMH__score_T_score.Value;
 
 	private CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score_Value() => 
-		new CqlCode("71971-6", "http://loinc.org", null, null);
+		new CqlCode("71971-6", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("PROMIS-10 Global Physical Health (GPH) score T-score")]
 	public CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score() => 
 		__PROMIS_10_Global_Physical_Health__GPH__score_T_score.Value;
 
 	private CqlCode PROMIS_29_Anxiety_score_T_score_Value() => 
-		new CqlCode("71967-4", "http://loinc.org", null, null);
+		new CqlCode("71967-4", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("PROMIS-29 Anxiety score T-score")]
 	public CqlCode PROMIS_29_Anxiety_score_T_score() => 
 		__PROMIS_29_Anxiety_score_T_score.Value;
 
 	private CqlCode PROMIS_29_Depression_score_T_score_Value() => 
-		new CqlCode("71965-8", "http://loinc.org", null, null);
+		new CqlCode("71965-8", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("PROMIS-29 Depression score T-score")]
 	public CqlCode PROMIS_29_Depression_score_T_score() => 
 		__PROMIS_29_Depression_score_T_score.Value;
 
 	private CqlCode PROMIS_29_Fatigue_score_T_score_Value() => 
-		new CqlCode("71963-3", "http://loinc.org", null, null);
+		new CqlCode("71963-3", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("PROMIS-29 Fatigue score T-score")]
 	public CqlCode PROMIS_29_Fatigue_score_T_score() => 
 		__PROMIS_29_Fatigue_score_T_score.Value;
 
 	private CqlCode PROMIS_29_Pain_interference_score_T_score_Value() => 
-		new CqlCode("71961-7", "http://loinc.org", null, null);
+		new CqlCode("71961-7", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("PROMIS-29 Pain interference score T-score")]
 	public CqlCode PROMIS_29_Pain_interference_score_T_score() => 
 		__PROMIS_29_Pain_interference_score_T_score.Value;
 
 	private CqlCode PROMIS_29_Physical_function_score_T_score_Value() => 
-		new CqlCode("71959-1", "http://loinc.org", null, null);
+		new CqlCode("71959-1", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("PROMIS-29 Physical function score T-score")]
 	public CqlCode PROMIS_29_Physical_function_score_T_score() => 
 		__PROMIS_29_Physical_function_score_T_score.Value;
 
 	private CqlCode PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score_Value() => 
-		new CqlCode("71957-5", "http://loinc.org", null, null);
+		new CqlCode("71957-5", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("PROMIS-29 Satisfaction with participation in social roles score T-score")]
 	public CqlCode PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score() => 
 		__PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score.Value;
 
 	private CqlCode PROMIS_29_Sleep_disturbance_score_T_score_Value() => 
-		new CqlCode("71955-9", "http://loinc.org", null, null);
+		new CqlCode("71955-9", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("PROMIS-29 Sleep disturbance score T-score")]
 	public CqlCode PROMIS_29_Sleep_disturbance_score_T_score() => 
 		__PROMIS_29_Sleep_disturbance_score_T_score.Value;
 
 	private CqlCode Quality_of_life_score__KCCQ__Value() => 
-		new CqlCode("72189-4", "http://loinc.org", null, null);
+		new CqlCode("72189-4", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Quality of life score [KCCQ]")]
 	public CqlCode Quality_of_life_score__KCCQ_() => 
 		__Quality_of_life_score__KCCQ_.Value;
 
 	private CqlCode Self_efficacy_score__KCCQ__Value() => 
-		new CqlCode("72190-2", "http://loinc.org", null, null);
+		new CqlCode("72190-2", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Self-efficacy score [KCCQ]")]
 	public CqlCode Self_efficacy_score__KCCQ_() => 
 		__Self_efficacy_score__KCCQ_.Value;
 
 	private CqlCode Severe_cognitive_impairment__finding__Value() => 
-		new CqlCode("702956004", "http://snomed.info/sct", null, null);
+		new CqlCode("702956004", "http://snomed.info/sct", default(string), default(string));
 
     [CqlDeclaration("Severe cognitive impairment (finding)")]
 	public CqlCode Severe_cognitive_impairment__finding_() => 
 		__Severe_cognitive_impairment__finding_.Value;
 
 	private CqlCode Social_limitation_score__KCCQ__Value() => 
-		new CqlCode("72196-9", "http://loinc.org", null, null);
+		new CqlCode("72196-9", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Social limitation score [KCCQ]")]
 	public CqlCode Social_limitation_score__KCCQ_() => 
 		__Social_limitation_score__KCCQ_.Value;
 
 	private CqlCode Symptom_stability_score__KCCQ__Value() => 
-		new CqlCode("72194-4", "http://loinc.org", null, null);
+		new CqlCode("72194-4", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Symptom stability score [KCCQ]")]
 	public CqlCode Symptom_stability_score__KCCQ_() => 
 		__Symptom_stability_score__KCCQ_.Value;
 
 	private CqlCode Total_score__MLHFQ__Value() => 
-		new CqlCode("71938-5", "http://loinc.org", null, null);
+		new CqlCode("71938-5", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Total score [MLHFQ]")]
 	public CqlCode Total_score__MLHFQ_() => 
 		__Total_score__MLHFQ_.Value;
 
 	private CqlCode Total_symptom_score__KCCQ__Value() => 
-		new CqlCode("72191-0", "http://loinc.org", null, null);
+		new CqlCode("72191-0", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Total symptom score [KCCQ]")]
 	public CqlCode Total_symptom_score__KCCQ_() => 
 		__Total_symptom_score__KCCQ_.Value;
 
 	private CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score_Value() => 
-		new CqlCode("72026-8", "http://loinc.org", null, null);
+		new CqlCode("72026-8", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - oblique method T-score")]
 	public CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score() => 
 		__VR_12_Mental_component_summary__MCS__score___oblique_method_T_score.Value;
 
 	private CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score_Value() => 
-		new CqlCode("72028-4", "http://loinc.org", null, null);
+		new CqlCode("72028-4", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - orthogonal method T-score")]
 	public CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score() => 
 		__VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score.Value;
 
 	private CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score_Value() => 
-		new CqlCode("72025-0", "http://loinc.org", null, null);
+		new CqlCode("72025-0", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - oblique method T-score")]
 	public CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score() => 
 		__VR_12_Physical_component_summary__PCS__score___oblique_method_T_score.Value;
 
 	private CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score_Value() => 
-		new CqlCode("72027-6", "http://loinc.org", null, null);
+		new CqlCode("72027-6", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - orthogonal method T-score")]
 	public CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score() => 
 		__VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score.Value;
 
 	private CqlCode VR_36_Mental_component_summary__MCS__score___oblique_method_T_score_Value() => 
-		new CqlCode("71990-6", "http://loinc.org", null, null);
+		new CqlCode("71990-6", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - oblique method T-score")]
 	public CqlCode VR_36_Mental_component_summary__MCS__score___oblique_method_T_score() => 
 		__VR_36_Mental_component_summary__MCS__score___oblique_method_T_score.Value;
 
 	private CqlCode VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score_Value() => 
-		new CqlCode("72008-6", "http://loinc.org", null, null);
+		new CqlCode("72008-6", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - orthogonal method T-score")]
 	public CqlCode VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score() => 
 		__VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score.Value;
 
 	private CqlCode VR_36_Physical_component_summary__PCS__score___oblique_method_T_score_Value() => 
-		new CqlCode("71989-8", "http://loinc.org", null, null);
+		new CqlCode("71989-8", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - oblique method T-score")]
 	public CqlCode VR_36_Physical_component_summary__PCS__score___oblique_method_T_score() => 
 		__VR_36_Physical_component_summary__PCS__score___oblique_method_T_score.Value;
 
 	private CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score_Value() => 
-		new CqlCode("72007-8", "http://loinc.org", null, null);
+		new CqlCode("72007-8", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - orthogonal method T-score")]
 	public CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score() => 
@@ -426,35 +426,35 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("85609-6", "http://loinc.org", null, null),
-			new CqlCode("86923-0", "http://loinc.org", null, null),
-			new CqlCode("86924-8", "http://loinc.org", null, null),
-			new CqlCode("71940-1", "http://loinc.org", null, null),
-			new CqlCode("72195-1", "http://loinc.org", null, null),
-			new CqlCode("85618-7", "http://loinc.org", null, null),
-			new CqlCode("71969-0", "http://loinc.org", null, null),
-			new CqlCode("71971-6", "http://loinc.org", null, null),
-			new CqlCode("71967-4", "http://loinc.org", null, null),
-			new CqlCode("71965-8", "http://loinc.org", null, null),
-			new CqlCode("71963-3", "http://loinc.org", null, null),
-			new CqlCode("71961-7", "http://loinc.org", null, null),
-			new CqlCode("71959-1", "http://loinc.org", null, null),
-			new CqlCode("71957-5", "http://loinc.org", null, null),
-			new CqlCode("71955-9", "http://loinc.org", null, null),
-			new CqlCode("72189-4", "http://loinc.org", null, null),
-			new CqlCode("72190-2", "http://loinc.org", null, null),
-			new CqlCode("72196-9", "http://loinc.org", null, null),
-			new CqlCode("72194-4", "http://loinc.org", null, null),
-			new CqlCode("71938-5", "http://loinc.org", null, null),
-			new CqlCode("72191-0", "http://loinc.org", null, null),
-			new CqlCode("72026-8", "http://loinc.org", null, null),
-			new CqlCode("72028-4", "http://loinc.org", null, null),
-			new CqlCode("72025-0", "http://loinc.org", null, null),
-			new CqlCode("72027-6", "http://loinc.org", null, null),
-			new CqlCode("71990-6", "http://loinc.org", null, null),
-			new CqlCode("72008-6", "http://loinc.org", null, null),
-			new CqlCode("71989-8", "http://loinc.org", null, null),
-			new CqlCode("72007-8", "http://loinc.org", null, null),
+			new CqlCode("85609-6", "http://loinc.org", default(string), default(string)),
+			new CqlCode("86923-0", "http://loinc.org", default(string), default(string)),
+			new CqlCode("86924-8", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71940-1", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72195-1", "http://loinc.org", default(string), default(string)),
+			new CqlCode("85618-7", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71969-0", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71971-6", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71967-4", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71965-8", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71963-3", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71961-7", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71959-1", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71957-5", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71955-9", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72189-4", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72190-2", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72196-9", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72194-4", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71938-5", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72191-0", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72026-8", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72028-4", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72025-0", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72027-6", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71990-6", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72008-6", "http://loinc.org", default(string), default(string)),
+			new CqlCode("71989-8", "http://loinc.org", default(string), default(string)),
+			new CqlCode("72007-8", "http://loinc.org", default(string), default(string)),
 		];
 
 		return a_;
@@ -467,7 +467,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("702956004", "http://snomed.info/sct", null, null),
+			new CqlCode("702956004", "http://snomed.info/sct", default(string), default(string)),
 		];
 
 		return a_;
@@ -479,8 +479,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("FunctionalStatusAssessmentsforHeartFailureFHIR-0.1.000", "Measurement Period", c_);
 
@@ -493,7 +493,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -550,12 +550,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
 		CqlValueSet c_ = this.Telephone_Visits();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default(PropertyInfo));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Online_Assessments();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default(PropertyInfo));
 		IEnumerable<Encounter> h_ = context.Operators.Union<Encounter>(e_, g_);
 		IEnumerable<Encounter> i_ = Status_1_6_000.Finished_Encounter(h_);
 		bool? j_(Encounter ValidEncounter)
@@ -628,12 +628,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
 		CqlValueSet j_ = this.Heart_Failure();
-		IEnumerable<Condition> k_ = context.Operators.RetrieveByValueSet<Condition>(j_, null);
+		IEnumerable<Condition> k_ = context.Operators.RetrieveByValueSet<Condition>(j_, default(PropertyInfo));
 		bool? l_(Condition HeartFailure)
 		{
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToPrevalenceInterval(HeartFailure);
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
-			bool? u_ = context.Operators.OverlapsBefore(s_, t_, null);
+			bool? u_ = context.Operators.OverlapsBefore(s_, t_, default(string));
 
 			return u_;
 		};
@@ -667,12 +667,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
 		CqlCode b_ = this.Severe_cognitive_impairment__finding_();
 		IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
-		IEnumerable<Condition> d_ = context.Operators.RetrieveByCodes<Condition>(c_, null);
+		IEnumerable<Condition> d_ = context.Operators.RetrieveByCodes<Condition>(c_, default(PropertyInfo));
 		bool? e_(Condition Dementia)
 		{
 			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Dementia);
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
-			bool? k_ = context.Operators.Overlaps(i_, j_, null);
+			bool? k_ = context.Operators.Overlaps(i_, j_, default(string));
 
 			return k_;
 		};
@@ -691,11 +691,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.PROMIS_10_Global_Mental_Health__GMH__score_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		CqlCode e_ = this.PROMIS_10_Global_Physical_Health__GPH__score_T_score();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default(PropertyInfo));
 		IEnumerable<Observation> h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -829,31 +829,31 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.PROMIS_29_Sleep_disturbance_score_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		CqlCode e_ = this.PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default(PropertyInfo));
 		IEnumerable<Observation> h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		CqlCode i_ = this.PROMIS_29_Physical_function_score_T_score();
 		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
-		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, null);
+		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, default(PropertyInfo));
 		IEnumerable<Observation> l_ = Status_1_6_000.Final_Survey_Observation(k_);
 		CqlCode m_ = this.PROMIS_29_Pain_interference_score_T_score();
 		IEnumerable<CqlCode> n_ = context.Operators.ToList<CqlCode>(m_);
-		IEnumerable<Observation> o_ = context.Operators.RetrieveByCodes<Observation>(n_, null);
+		IEnumerable<Observation> o_ = context.Operators.RetrieveByCodes<Observation>(n_, default(PropertyInfo));
 		IEnumerable<Observation> p_ = Status_1_6_000.Final_Survey_Observation(o_);
 		CqlCode q_ = this.PROMIS_29_Fatigue_score_T_score();
 		IEnumerable<CqlCode> r_ = context.Operators.ToList<CqlCode>(q_);
-		IEnumerable<Observation> s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
+		IEnumerable<Observation> s_ = context.Operators.RetrieveByCodes<Observation>(r_, default(PropertyInfo));
 		IEnumerable<Observation> t_ = Status_1_6_000.Final_Survey_Observation(s_);
 		CqlCode u_ = this.PROMIS_29_Depression_score_T_score();
 		IEnumerable<CqlCode> v_ = context.Operators.ToList<CqlCode>(u_);
-		IEnumerable<Observation> w_ = context.Operators.RetrieveByCodes<Observation>(v_, null);
+		IEnumerable<Observation> w_ = context.Operators.RetrieveByCodes<Observation>(v_, default(PropertyInfo));
 		IEnumerable<Observation> x_ = Status_1_6_000.Final_Survey_Observation(w_);
 		CqlCode y_ = this.PROMIS_29_Anxiety_score_T_score();
 		IEnumerable<CqlCode> z_ = context.Operators.ToList<CqlCode>(y_);
-		IEnumerable<Observation> aa_ = context.Operators.RetrieveByCodes<Observation>(z_, null);
+		IEnumerable<Observation> aa_ = context.Operators.RetrieveByCodes<Observation>(z_, default(PropertyInfo));
 		IEnumerable<Observation> ab_ = Status_1_6_000.Final_Survey_Observation(aa_);
 		IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation>> ac_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_, ab_);
 		(Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? ad_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
@@ -1092,11 +1092,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___oblique_method_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		CqlCode e_ = this.VR_12_Physical_component_summary__PCS__score___oblique_method_T_score();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default(PropertyInfo));
 		IEnumerable<Observation> h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1230,11 +1230,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		CqlCode e_ = this.VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default(PropertyInfo));
 		IEnumerable<Observation> h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1368,11 +1368,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.VR_36_Mental_component_summary__MCS__score___oblique_method_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		CqlCode e_ = this.VR_36_Physical_component_summary__PCS__score___oblique_method_T_score();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default(PropertyInfo));
 		IEnumerable<Observation> h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1506,11 +1506,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		CqlCode e_ = this.VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default(PropertyInfo));
 		IEnumerable<Observation> h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1644,11 +1644,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.Physical_score__MLHFQ_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		CqlCode e_ = this.Emotional_score__MLHFQ_();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default(PropertyInfo));
 		IEnumerable<Observation> h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation MLHFQPhysical, Observation MLHFQEmotional)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1782,11 +1782,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		CqlCode e_ = this.Overall_summary_score__KCCQ_12_();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default(PropertyInfo));
 		IEnumerable<Observation> h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation KCCQ12Item, Observation KCCQ12Summary)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1920,27 +1920,27 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.Quality_of_life_score__KCCQ_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		CqlCode e_ = this.Symptom_stability_score__KCCQ_();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default(PropertyInfo));
 		IEnumerable<Observation> h_ = Status_1_6_000.Final_Survey_Observation(g_);
 		CqlCode i_ = this.Self_efficacy_score__KCCQ_();
 		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
-		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, null);
+		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, default(PropertyInfo));
 		IEnumerable<Observation> l_ = Status_1_6_000.Final_Survey_Observation(k_);
 		CqlCode m_ = this.Total_symptom_score__KCCQ_();
 		IEnumerable<CqlCode> n_ = context.Operators.ToList<CqlCode>(m_);
-		IEnumerable<Observation> o_ = context.Operators.RetrieveByCodes<Observation>(n_, null);
+		IEnumerable<Observation> o_ = context.Operators.RetrieveByCodes<Observation>(n_, default(PropertyInfo));
 		IEnumerable<Observation> p_ = Status_1_6_000.Final_Survey_Observation(o_);
 		CqlCode q_ = this.Physical_limitation_score__KCCQ_();
 		IEnumerable<CqlCode> r_ = context.Operators.ToList<CqlCode>(q_);
-		IEnumerable<Observation> s_ = context.Operators.RetrieveByCodes<Observation>(r_, null);
+		IEnumerable<Observation> s_ = context.Operators.RetrieveByCodes<Observation>(r_, default(PropertyInfo));
 		IEnumerable<Observation> t_ = Status_1_6_000.Final_Survey_Observation(s_);
 		CqlCode u_ = this.Social_limitation_score__KCCQ_();
 		IEnumerable<CqlCode> v_ = context.Operators.ToList<CqlCode>(u_);
-		IEnumerable<Observation> w_ = context.Operators.RetrieveByCodes<Observation>(v_, null);
+		IEnumerable<Observation> w_ = context.Operators.RetrieveByCodes<Observation>(v_, default(PropertyInfo));
 		IEnumerable<Observation> x_ = Status_1_6_000.Final_Survey_Observation(w_);
 		IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation>> y_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_);
 		(Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? z_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
@@ -2158,7 +2158,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	{
 		CqlCode a_ = this.Overall_summary_score__KCCQ_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default(PropertyInfo));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		bool? e_(Observation KCCQSummaryScore)
 		{

@@ -86,7 +86,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
     #endregion
 
 	private CqlValueSet Antithrombotic_Therapy_for_Ischemic_Stroke_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62", default(string));
 
     [CqlDeclaration("Antithrombotic Therapy for Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62")]
@@ -94,7 +94,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 		__Antithrombotic_Therapy_for_Ischemic_Stroke.Value;
 
 	private CqlValueSet Medical_Reason_For_Not_Providing_Treatment_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", default(string));
 
     [CqlDeclaration("Medical Reason For Not Providing Treatment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473")]
@@ -102,7 +102,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 		__Medical_Reason_For_Not_Providing_Treatment.Value;
 
 	private CqlValueSet Patient_Refusal_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", default(string));
 
     [CqlDeclaration("Patient Refusal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93")]
@@ -110,7 +110,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 		__Patient_Refusal.Value;
 
 	private CqlValueSet Pharmacological_Contraindications_For_Antithrombotic_Therapy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52", default(string));
 
     [CqlDeclaration("Pharmacological Contraindications For Antithrombotic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52")]
@@ -119,8 +119,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.9.000", "Measurement Period", c_);
 
@@ -133,7 +133,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -180,7 +180,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				object m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				CqlInterval<CqlDateTime> o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
-				bool? p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, null);
+				bool? p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, default(string));
 
 				return p_;
 			};
@@ -219,8 +219,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 		IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
 		{
 			CqlValueSet d_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke();
-			IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
-			IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, null);
+			IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default(PropertyInfo));
+			IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default(PropertyInfo));
 			IEnumerable<MedicationRequest> h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest DischargeAntithrombotic)
 			{
@@ -228,7 +228,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
 				Period o_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
-				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, null);
+				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, default(string));
 
 				return q_;
 			};
@@ -251,8 +251,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 	private IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge_Value()
 	{
 		CqlValueSet a_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest Antithrombotic)
 		{
@@ -300,8 +300,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 	private IEnumerable<MedicationRequest> Reason_for_Not_Giving_Antithrombotic_at_Discharge_Value()
 	{
 		CqlValueSet a_ = this.Antithrombotic_Therapy_for_Ischemic_Stroke();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest NoAntithromboticDischarge)
 		{
@@ -365,7 +365,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
 				Period k_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
-				bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, null);
+				bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, default(string));
 
 				return m_;
 			};
@@ -388,8 +388,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 	private IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Value()
 	{
 		CqlValueSet a_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default(PropertyInfo));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest Pharmacological)
 		{
@@ -446,7 +446,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
 				Period k_ = IschemicStrokeEncounter?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
-				bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, null);
+				bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, default(string));
 
 				return m_;
 			};

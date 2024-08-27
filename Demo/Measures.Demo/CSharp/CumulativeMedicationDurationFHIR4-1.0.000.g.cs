@@ -96,182 +96,182 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
     #endregion
 
 	private CqlCode AC_Value() => 
-		new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("AC")]
 	public CqlCode AC() => 
 		__AC.Value;
 
 	private CqlCode ACD_Value() => 
-		new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("ACD")]
 	public CqlCode ACD() => 
 		__ACD.Value;
 
 	private CqlCode ACM_Value() => 
-		new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("ACM")]
 	public CqlCode ACM() => 
 		__ACM.Value;
 
 	private CqlCode ACV_Value() => 
-		new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("ACV")]
 	public CqlCode ACV() => 
 		__ACV.Value;
 
 	private CqlCode AFT_Value() => 
-		new CqlCode("AFT", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("AFT")]
 	public CqlCode AFT() => 
 		__AFT.Value;
 
 	private CqlCode AFT_early_Value() => 
-		new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("AFT.early")]
 	public CqlCode AFT_early() => 
 		__AFT_early.Value;
 
 	private CqlCode AFT_late_Value() => 
-		new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("AFT.late")]
 	public CqlCode AFT_late() => 
 		__AFT_late.Value;
 
 	private CqlCode C_Value() => 
-		new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("C")]
 	public CqlCode C() => 
 		__C.Value;
 
 	private CqlCode CD_Value() => 
-		new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("CD")]
 	public CqlCode CD() => 
 		__CD.Value;
 
 	private CqlCode CM_Value() => 
-		new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("CM")]
 	public CqlCode CM() => 
 		__CM.Value;
 
 	private CqlCode CV_Value() => 
-		new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("CV")]
 	public CqlCode CV() => 
 		__CV.Value;
 
 	private CqlCode EVE_Value() => 
-		new CqlCode("EVE", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("EVE")]
 	public CqlCode EVE() => 
 		__EVE.Value;
 
 	private CqlCode EVE_early_Value() => 
-		new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("EVE.early")]
 	public CqlCode EVE_early() => 
 		__EVE_early.Value;
 
 	private CqlCode EVE_late_Value() => 
-		new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("EVE.late")]
 	public CqlCode EVE_late() => 
 		__EVE_late.Value;
 
 	private CqlCode HS_Value() => 
-		new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("HS")]
 	public CqlCode HS() => 
 		__HS.Value;
 
 	private CqlCode MORN_Value() => 
-		new CqlCode("MORN", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("MORN")]
 	public CqlCode MORN() => 
 		__MORN.Value;
 
 	private CqlCode MORN_early_Value() => 
-		new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("MORN.early")]
 	public CqlCode MORN_early() => 
 		__MORN_early.Value;
 
 	private CqlCode MORN_late_Value() => 
-		new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("MORN.late")]
 	public CqlCode MORN_late() => 
 		__MORN_late.Value;
 
 	private CqlCode NIGHT_Value() => 
-		new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("NIGHT")]
 	public CqlCode NIGHT() => 
 		__NIGHT.Value;
 
 	private CqlCode NOON_Value() => 
-		new CqlCode("NOON", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("NOON")]
 	public CqlCode NOON() => 
 		__NOON.Value;
 
 	private CqlCode PC_Value() => 
-		new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("PC")]
 	public CqlCode PC() => 
 		__PC.Value;
 
 	private CqlCode PCD_Value() => 
-		new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("PCD")]
 	public CqlCode PCD() => 
 		__PCD.Value;
 
 	private CqlCode PCM_Value() => 
-		new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("PCM")]
 	public CqlCode PCM() => 
 		__PCM.Value;
 
 	private CqlCode PCV_Value() => 
-		new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("PCV")]
 	public CqlCode PCV() => 
 		__PCV.Value;
 
 	private CqlCode PHS_Value() => 
-		new CqlCode("PHS", "http://hl7.org/fhir/event-timing", null, null);
+		new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default(string), default(string));
 
     [CqlDeclaration("PHS")]
 	public CqlCode PHS() => 
 		__PHS.Value;
 
 	private CqlCode WAKE_Value() => 
-		new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null);
+		new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string));
 
     [CqlDeclaration("WAKE")]
 	public CqlCode WAKE() => 
@@ -280,20 +280,20 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	private CqlCode[] V3TimingEvent_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
-			new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", null, null),
+			new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
+			new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default(string), default(string)),
 		];
 
 		return a_;
@@ -306,18 +306,18 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	private CqlCode[] EventTiming_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("AFT", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("EVE", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("MORN", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("NOON", "http://hl7.org/fhir/event-timing", null, null),
-			new CqlCode("PHS", "http://hl7.org/fhir/event-timing", null, null),
+			new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default(string), default(string)),
+			new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default(string), default(string)),
 		];
 
 		return a_;
@@ -340,7 +340,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;

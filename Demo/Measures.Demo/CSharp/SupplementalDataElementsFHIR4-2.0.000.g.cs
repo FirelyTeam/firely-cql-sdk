@@ -54,7 +54,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
     #endregion
 
 	private CqlValueSet Ethnicity_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default(string));
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
@@ -62,7 +62,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		__Ethnicity.Value;
 
 	private CqlValueSet ONC_Administrative_Sex_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default(string));
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
@@ -70,7 +70,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		__ONC_Administrative_Sex.Value;
 
 	private CqlValueSet Payer_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default(string));
 
     [CqlDeclaration("Payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
@@ -78,7 +78,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		__Payer.Value;
 
 	private CqlValueSet Race_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default(string));
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
@@ -87,7 +87,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -116,7 +116,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			}
 			else
 			{
-				return null;
+				return default(IEnumerable<Extension>);
 			}
 		};
 		bool? b_(Extension Extension)
@@ -169,7 +169,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
 		CqlValueSet a_ = this.Payer();
-		IEnumerable<Coverage> b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
+		IEnumerable<Coverage> b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, default(PropertyInfo));
 		(CodeableConcept code, Period period)? c_(Coverage Payer)
 		{
 			CodeableConcept e_ = Payer?.Type;
@@ -206,7 +206,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			}
 			else
 			{
-				return null;
+				return default(IEnumerable<Extension>);
 			}
 		};
 		bool? b_(Extension Extension)
@@ -288,7 +288,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			}
 			else
 			{
-				return null;
+				return default(CqlCode);
 			}
 		};
 

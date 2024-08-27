@@ -114,7 +114,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
     #endregion
 
 	private CqlValueSet COVID_19_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.140", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.140", default(string));
 
     [CqlDeclaration("COVID 19")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.140")]
@@ -122,7 +122,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__COVID_19.Value;
 
 	private CqlValueSet Emergency_Department_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default(string));
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
@@ -130,7 +130,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__Emergency_Department_Visit.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default(string));
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -138,7 +138,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198", default(string));
 
     [CqlDeclaration("Not Present On Admission or Documentation Insufficient to Determine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198")]
@@ -146,7 +146,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine.Value;
 
 	private CqlValueSet Observation_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default(string));
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
@@ -154,7 +154,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__Observation_Services.Value;
 
 	private CqlValueSet Present_on_Admission_or_Clinically_Undetermined_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default(string));
 
     [CqlDeclaration("Present on Admission or Clinically Undetermined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197")]
@@ -162,7 +162,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__Present_on_Admission_or_Clinically_Undetermined.Value;
 
 	private CqlValueSet Pressure_Injury_Deep_Tissue_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.112", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.112", default(string));
 
     [CqlDeclaration("Pressure Injury Deep Tissue")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.112")]
@@ -170,7 +170,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__Pressure_Injury_Deep_Tissue.Value;
 
 	private CqlValueSet Pressure_Injury_Deep_Tissue_Diagnoses_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.194", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.194", default(string));
 
     [CqlDeclaration("Pressure Injury Deep Tissue Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.194")]
@@ -178,7 +178,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__Pressure_Injury_Deep_Tissue_Diagnoses.Value;
 
 	private CqlValueSet Pressure_Injury_Stage_2__3__4_or_Unstageable_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.113", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.113", default(string));
 
     [CqlDeclaration("Pressure Injury Stage 2, 3, 4 or Unstageable")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.113")]
@@ -186,7 +186,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__Pressure_Injury_Stage_2__3__4_or_Unstageable.Value;
 
 	private CqlValueSet Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.196", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.196", default(string));
 
     [CqlDeclaration("Pressure Injury Stage 2, 3, 4, or Unstageable Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.196")]
@@ -194,7 +194,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		__Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses.Value;
 
 	private CqlCode Physical_findings_of_Skin_Value() => 
-		new CqlCode("8709-8", "http://loinc.org", null, null);
+		new CqlCode("8709-8", "http://loinc.org", default(string), default(string));
 
     [CqlDeclaration("Physical findings of Skin")]
 	public CqlCode Physical_findings_of_Skin() => 
@@ -203,7 +203,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("8709-8", "http://loinc.org", null, null),
+			new CqlCode("8709-8", "http://loinc.org", default(string), default(string)),
 		];
 
 		return a_;
@@ -215,8 +215,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default(decimal));
+		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default(decimal));
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("HospitalHarmPressureInjuryFHIR-0.1.000", "Measurement Period", c_);
 
@@ -229,7 +229,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default(CqlValueSet), default(PropertyInfo));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -242,7 +242,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	private IEnumerable<Encounter> Encounter_with_Age_18_and_Older_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default(PropertyInfo));
 		bool? c_(Encounter InpatientEncounter)
 		{
 			Patient e_ = this.Patient();
@@ -324,7 +324,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
-						: null), n_);
+						: default(List<Extension>)), n_);
 				DataType p_(Extension @this)
 				{
 					DataType ab_ = @this?.Value;
@@ -362,7 +362,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		{
 			CqlCode d_ = this.Physical_findings_of_Skin();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default(PropertyInfo));
 			bool? g_(Observation SkinExam)
 			{
 				DataType k_ = SkinExam?.Effective;
@@ -375,7 +375,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				CqlQuantity s_ = context.Operators.Quantity(72m, "hours");
 				CqlDateTime t_ = context.Operators.Add(r_, s_);
 				CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, true, true);
-				bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+				bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, default(string));
 				Code<ObservationStatus> w_ = SkinExam?.StatusElement;
 				ObservationStatus? x_ = w_?.Value;
 				Code<ObservationStatus> y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
@@ -449,7 +449,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
-						: null), n_);
+						: default(List<Extension>)), n_);
 				DataType p_(Extension @this)
 				{
 					DataType ab_ = @this?.Value;
@@ -487,7 +487,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		{
 			CqlCode d_ = this.Physical_findings_of_Skin();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default(PropertyInfo));
 			bool? g_(Observation SkinExam)
 			{
 				DataType k_ = SkinExam?.Effective;
@@ -500,7 +500,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				CqlQuantity s_ = context.Operators.Quantity(24m, "hours");
 				CqlDateTime t_ = context.Operators.Add(r_, s_);
 				CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, true, true);
-				bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+				bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, default(string));
 				Code<ObservationStatus> w_ = SkinExam?.StatusElement;
 				ObservationStatus? x_ = w_?.Value;
 				Code<ObservationStatus> y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
@@ -618,7 +618,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
-						: null), n_);
+						: default(List<Extension>)), n_);
 				DataType p_(Extension @this)
 				{
 					DataType ab_ = @this?.Value;
@@ -656,7 +656,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		{
 			CqlCode d_ = this.Physical_findings_of_Skin();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default(PropertyInfo));
 			bool? g_(Observation SkinExam)
 			{
 				DataType k_ = SkinExam?.Effective;
@@ -669,7 +669,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				CqlDateTime r_ = context.Operators.Add(p_, q_);
 				CqlDateTime t_ = context.Operators.End(o_);
 				CqlInterval<CqlDateTime> u_ = context.Operators.Interval(r_, t_, true, true);
-				bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+				bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, default(string));
 				Code<ObservationStatus> w_ = SkinExam?.StatusElement;
 				ObservationStatus? x_ = w_?.Value;
 				Code<ObservationStatus> y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
@@ -763,7 +763,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
-						: null), n_);
+						: default(List<Extension>)), n_);
 				DataType p_(Extension @this)
 				{
 					DataType ab_ = @this?.Value;
@@ -801,7 +801,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 		{
 			CqlCode d_ = this.Physical_findings_of_Skin();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, null);
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default(PropertyInfo));
 			bool? g_(Observation SkinExam)
 			{
 				DataType k_ = SkinExam?.Effective;
@@ -814,7 +814,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				CqlDateTime r_ = context.Operators.Add(p_, q_);
 				CqlDateTime t_ = context.Operators.End(o_);
 				CqlInterval<CqlDateTime> u_ = context.Operators.Interval(r_, t_, true, true);
-				bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+				bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, default(string));
 				Code<ObservationStatus> w_ = SkinExam?.StatusElement;
 				ObservationStatus? x_ = w_?.Value;
 				Code<ObservationStatus> y_ = context.Operators.Convert<Code<ObservationStatus>>(x_);
