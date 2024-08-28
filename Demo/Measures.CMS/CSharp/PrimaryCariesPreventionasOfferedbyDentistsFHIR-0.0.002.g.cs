@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyDentistsFHIR", "0.0.002")]
 public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 {
@@ -84,7 +84,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
     #endregion
 
 	private CqlValueSet Clinical_Oral_Evaluation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", default);
 
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]
@@ -92,7 +92,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		__Clinical_Oral_Evaluation.Value;
 
 	private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
@@ -100,7 +100,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		__Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
 
 	private CqlValueSet Discharged_to_Home_for_Hosice_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
     [CqlDeclaration("Discharged to Home for Hosice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
@@ -108,7 +108,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		__Discharged_to_Home_for_Hosice_Care.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -116,7 +116,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Fluoride_Varnish_Application_for_Children_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002", default);
 
     [CqlDeclaration("Fluoride Varnish Application for Children")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002")]
@@ -124,7 +124,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		__Fluoride_Varnish_Application_for_Children.Value;
 
 	private CqlValueSet Hospice_care_ambulatory_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", default);
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
@@ -147,7 +147,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -160,7 +160,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Clinical_Oral_Evaluation();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter ValidEncounter)
 		{
@@ -191,7 +191,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(1, 20, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		bool? j_ = context.Operators.In<int?>(h_, i_, default);
 		IEnumerable<Encounter> k_ = this.Qualifying_Encounters();
 		bool? l_ = context.Operators.Exists<Encounter>(k_);
 		bool? m_ = context.Operators.And(j_, l_);
@@ -228,7 +228,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	private bool? Numerator_Value()
 	{
 		CqlValueSet a_ = this.Fluoride_Varnish_Application_for_Children();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
 		IEnumerable<Procedure> c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure FluorideApplication)
 		{
@@ -274,7 +274,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(1, 5, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		bool? j_ = context.Operators.In<int?>(h_, i_, default);
 
 		return j_;
 	}
@@ -294,7 +294,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(6, 12, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		bool? j_ = context.Operators.In<int?>(h_, i_, default);
 
 		return j_;
 	}
@@ -314,7 +314,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(13, 20, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		bool? j_ = context.Operators.In<int?>(h_, i_, default);
 
 		return j_;
 	}

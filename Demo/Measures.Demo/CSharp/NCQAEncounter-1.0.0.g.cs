@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
 public class NCQAEncounter_1_0_0
 {
@@ -128,7 +128,7 @@ public class NCQAEncounter_1_0_0
 			Period e_ = EncounterPeriod?.Period;
 			CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Normalize_Interval((e_ as object));
 			CqlDateTime g_ = context.Operators.End(f_);
-			bool? h_ = context.Operators.In<CqlDateTime>(g_, timeperiod, null);
+			bool? h_ = context.Operators.In<CqlDateTime>(g_, timeperiod, default);
 
 			return h_;
 		};

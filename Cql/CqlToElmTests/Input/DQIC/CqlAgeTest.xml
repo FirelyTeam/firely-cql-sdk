@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+	name="CqlAgeTest" reference="https://cql.hl7.org/09-b-cqlreference.html#age">
+	<group name="Age">
+		<test name="CalculateAgeInYearsAt">
+			<expression>CalculateAgeInYearsAt(@1976-01-01, @2020-01-02)</expression>
+			<output>44</output>
+		</test>
+		<test name="CalculateAgeInMonthsAt">
+			<expression>CalculateAgeInMonthsAt(@1976-01-01, @2020-01-02)</expression>
+			<output>528</output>
+		</test>
+		<test name="CalculateAgeInWeeksAt">
+			<expression>CalculateAgeInWeeksAt(@1976-01-01, @2020-01-02)</expression>
+			<output>2296</output>
+		</test>
+		<test name="CalculateAgeInDaysAt">
+			<expression>CalculateAgeInDaysAt(@1976-01-01, @2020-01-02)</expression>
+			<output>16072</output>
+		</test>
+		<test name="CalculateAgeInHoursAt">
+			<expression>CalculateAgeInHoursAt(@1976-01-01, @2020-01-02)</expression>
+			<output>385728</output>
+		</test>
+		<test name="CalculateAgeInMinutesAt">
+			<expression>CalculateAgeInMinutesAt(@1976-01-01, @2020-01-02)</expression>
+			<output>23143680</output>
+		</test>
+		<test name="CalculateAgeInSecondsAt">
+			<expression>CalculateAgeInSecondsAt(@1976-01-01, @2020-01-02)</expression>
+			<output>1388620800</output>
+		</test>
+	</group>
+</tests>

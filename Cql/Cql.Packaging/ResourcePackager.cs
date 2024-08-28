@@ -86,7 +86,7 @@ internal class ResourcePackager
             var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, library);
             var dataRequirements = dataRequirementsAnalyzer.Analyze();
             fhirLibrary.DataRequirement.AddRange(dataRequirements);
-          
+
             OnResourceCreated(fhirLibrary);
         }
 
@@ -232,13 +232,29 @@ internal class ResourcePackager
         }
 
         var cqlOptions = CqlToElmInfoToFhir(elmLibrary!, typeCrosswalk);
-        if (cqlOptions!.Any())
+        if (cqlOptions.Any())
         {
+            // Adding CQL Options as a contained resource
+            // See: https://build.fhir.org/domainresource-definitions.html#DomainResource.contained
+
             var p = new Parameters();
             p.Id = "options";
-            p.Parameter.AddRange(cqlOptions!);
-            library.Contained = new();
-            library.Contained.Add(p);
+            p.Parameter.AddRange(cqlOptions);
+            library.Contained = [p];
+
+            // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
+            // dom-3: If the resource is contained in another resource,
+            //        it SHALL be referred to from elsewhere in the resource
+            //        or SHALL refer to the containing resource
+            //
+            // This is done by adding an extension. (Example: https://build.fhir.org/ig/HL7/cql-ig/Library-CQLExample.json.html)
+
+            var extension = new Extension
+            {
+                Url = "http://hl7.org/fhir/StructureDefinition/cqf-cqlOptions",
+                Value = new ResourceReference { Reference = "#options" },
+            };
+            library.Extension.Add(extension);
         }
 
         if (cqlFile!.Exists)
@@ -288,7 +304,7 @@ internal class ResourcePackager
         }
     }
 
-    private static IEnumerable<Parameters.ParameterComponent>? CqlToElmInfoToFhir(Elm.Library elmLibrary, CqlTypeToFhirTypeMapper typeCrosswalk)
+    private static IReadOnlyList<Parameters.ParameterComponent> CqlToElmInfoToFhir(Elm.Library elmLibrary, CqlTypeToFhirTypeMapper typeCrosswalk)
     {
         var parameters = new List<Parameters.ParameterComponent>();
         foreach (var annotation in elmLibrary?.annotation ?? [])

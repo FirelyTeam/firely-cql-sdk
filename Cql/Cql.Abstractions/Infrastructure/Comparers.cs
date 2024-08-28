@@ -14,18 +14,9 @@ namespace Hl7.Cql.Abstractions.Infrastructure;
 
 #region Comparer
 
-internal class DelegatedComparer<T> : IComparer<T>
+internal class DelegatedComparer<T>(Func<T?, T?, int> compare) : IComparer<T>
 {
-    private readonly Func<T?, T?, int> compare;
-
-    public DelegatedComparer(Func<T?, T?, int> compare)
-    {
-        this.compare = compare;
-    }
-
-    public int Compare(
-        T? x,
-        T? y) => compare(x, y);
+    public int Compare(T? x, T? y) => compare(x, y);
 }
 
 internal static class ComparerFactory
@@ -61,22 +52,12 @@ internal static class ComparerFactory
 
 #region EqualityComparer
 
-internal class DelegatedEqualityComparer<T> : IEqualityComparer<T>
+internal class DelegatedEqualityComparer<T>(
+    Func<T?, T?, bool> equals,
+    Func<T, int> getHashCode)
+    : IEqualityComparer<T>
 {
-    private readonly Func<T?, T?, bool> equals;
-    private readonly Func<T, int> getHashCode;
-
-    public DelegatedEqualityComparer(
-        Func<T?, T?, bool> equals,
-        Func<T, int> getHashCode)
-    {
-        this.equals = equals;
-        this.getHashCode = getHashCode;
-    }
-
-    public bool Equals(
-        T? x,
-        T? y) => equals(x, y);
+    public bool Equals(T? x, T? y) => equals(x, y);
 
     public int GetHashCode([DisallowNull] T obj) => getHashCode(obj);
 }
@@ -87,7 +68,7 @@ internal static class EqualityComparerFactory
     {
         public static IEqualityComparer<T> Create(
             Func<T?, T?, bool> equals,
-            Func<T?, int> getHashCode) => new DelegatedEqualityComparer<T>(equals, getHashCode);
+            Func<T, int> getHashCode) => new DelegatedEqualityComparer<T>(equals, getHashCode);
 
         public static IEqualityComparer<T> CreateByKey<TKey>(
             Func<T, TKey> getKey,
@@ -99,12 +80,12 @@ internal static class EqualityComparerFactory
 
         public static IEqualityComparer<T> CreateByKey<TKey>(Func<T, TKey> getKey)
             where TKey : notnull =>
-            CreateByKey(getKey, EqualityComparer<TKey>.Default.Equals, EqualityComparer<TKey>.Default.GetHashCode!);
+            CreateByKey(getKey, EqualityComparer<TKey>.Default.Equals, EqualityComparer<TKey>.Default.GetHashCode);
     }
 
     public static IEqualityComparer<T> Create<T>(
         Func<T?, T?, bool> equals,
-        Func<T?, int> getHashCode) =>
+        Func<T, int> getHashCode) =>
         For<T>.Create(equals, getHashCode);
 
     public static IEqualityComparer<T> CreateByKey<T, TKey>(
