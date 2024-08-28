@@ -265,6 +265,19 @@ namespace Hl7.Cql.CqlToElm.Test
 
         }
 
+        [TestMethod]
+        public void External_Function()
+        {
+            var lib = MakeLibrary(@"
+                library FuncTest version '1.0.0'
 
+                define function Add(left Integer, right Integer) returns Integer: external
+            ");
+            lib.statements.Should().HaveCount(1);
+            var fd = lib.statements[0].Should().BeOfType<FunctionDef>().Subject;
+            fd.external.Should().BeTrue();
+            fd.externalSpecified.Should().BeTrue();
+            fd.expression.Should().BeNull();
+        }
     }
 }
