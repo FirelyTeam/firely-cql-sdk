@@ -96,7 +96,7 @@ public class AHAOverall_2_6_000
     #endregion
 
 	private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Care Services in Long Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
@@ -104,7 +104,7 @@ public class AHAOverall_2_6_000
 		__Care_Services_in_Long_Term_Residential_Facility.Value;
 
 	private CqlValueSet Ejection_Fraction_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134", default);
 
     [CqlDeclaration("Ejection Fraction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134")]
@@ -112,7 +112,7 @@ public class AHAOverall_2_6_000
 		__Ejection_Fraction.Value;
 
 	private CqlValueSet Heart_Failure_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", default);
 
     [CqlDeclaration("Heart Failure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376")]
@@ -120,7 +120,7 @@ public class AHAOverall_2_6_000
 		__Heart_Failure.Value;
 
 	private CqlValueSet Heart_Transplant_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33", default);
 
     [CqlDeclaration("Heart Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33")]
@@ -128,7 +128,7 @@ public class AHAOverall_2_6_000
 		__Heart_Transplant.Value;
 
 	private CqlValueSet Heart_Transplant_Complications_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56", default);
 
     [CqlDeclaration("Heart Transplant Complications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56")]
@@ -136,7 +136,7 @@ public class AHAOverall_2_6_000
 		__Heart_Transplant_Complications.Value;
 
 	private CqlValueSet Home_Healthcare_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
@@ -144,7 +144,7 @@ public class AHAOverall_2_6_000
 		__Home_Healthcare_Services.Value;
 
 	private CqlValueSet Left_Ventricular_Assist_Device_Complications_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58", default);
 
     [CqlDeclaration("Left Ventricular Assist Device Complications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58")]
@@ -152,7 +152,7 @@ public class AHAOverall_2_6_000
 		__Left_Ventricular_Assist_Device_Complications.Value;
 
 	private CqlValueSet Left_Ventricular_Assist_Device_Placement_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61", default);
 
     [CqlDeclaration("Left Ventricular Assist Device Placement")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61")]
@@ -160,7 +160,7 @@ public class AHAOverall_2_6_000
 		__Left_Ventricular_Assist_Device_Placement.Value;
 
 	private CqlValueSet Moderate_or_Severe_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092", default);
 
     [CqlDeclaration("Moderate or Severe")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092")]
@@ -168,7 +168,7 @@ public class AHAOverall_2_6_000
 		__Moderate_or_Severe.Value;
 
 	private CqlValueSet Moderate_or_Severe_LVSD_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090", default);
 
     [CqlDeclaration("Moderate or Severe LVSD")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090")]
@@ -176,7 +176,7 @@ public class AHAOverall_2_6_000
 		__Moderate_or_Severe_LVSD.Value;
 
 	private CqlValueSet Nursing_Facility_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
@@ -184,7 +184,7 @@ public class AHAOverall_2_6_000
 		__Nursing_Facility_Visit.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
@@ -192,7 +192,7 @@ public class AHAOverall_2_6_000
 		__Office_Visit.Value;
 
 	private CqlValueSet Outpatient_Consultation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
@@ -200,7 +200,7 @@ public class AHAOverall_2_6_000
 		__Outpatient_Consultation.Value;
 
 	private CqlValueSet Patient_Provider_Interaction_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", default);
 
     [CqlDeclaration("Patient Provider Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012")]
@@ -208,14 +208,14 @@ public class AHAOverall_2_6_000
 		__Patient_Provider_Interaction.Value;
 
 	private CqlCode Left_ventricular_systolic_dysfunction__disorder__Value() => 
-		new CqlCode("134401001", "http://snomed.info/sct", null, null);
+		new CqlCode("134401001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Left ventricular systolic dysfunction (disorder)")]
 	public CqlCode Left_ventricular_systolic_dysfunction__disorder_() => 
 		__Left_ventricular_systolic_dysfunction__disorder_.Value;
 
 	private CqlCode allergy_entered_in_error_Value() => 
-		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null);
+		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-entered-in-error")]
 	public CqlCode allergy_entered_in_error() => 
@@ -224,7 +224,7 @@ public class AHAOverall_2_6_000
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("134401001", "http://snomed.info/sct", null, null),
+			new CqlCode("134401001", "http://snomed.info/sct", default, default),
 		];
 
 		return a_;
@@ -237,7 +237,7 @@ public class AHAOverall_2_6_000
 	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", null, null),
+			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
 		];
 
 		return a_;
@@ -263,7 +263,7 @@ public class AHAOverall_2_6_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -327,29 +327,29 @@ public class AHAOverall_2_6_000
 	private IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet c_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
 		CqlValueSet h_ = this.Office_Visit();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
 		IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
 		IEnumerable<Encounter> o_(Encounter QualifyingEncounter)
 		{
 			CqlValueSet s_ = this.Heart_Failure();
-			IEnumerable<Condition> t_ = context.Operators.RetrieveByValueSet<Condition>(s_, null);
+			IEnumerable<Condition> t_ = context.Operators.RetrieveByValueSet<Condition>(s_, default);
 			bool? u_(Condition HeartFailure)
 			{
 				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.prevalenceInterval(HeartFailure);
 				Period z_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(z_);
-				bool? ab_ = context.Operators.Overlaps(y_, aa_, null);
+				bool? ab_ = context.Operators.Overlaps(y_, aa_, default);
 				bool? ac_ = this.isConfirmedActiveDiagnosis(HeartFailure);
 				bool? ad_ = context.Operators.And(ab_, ac_);
 
@@ -368,7 +368,7 @@ public class AHAOverall_2_6_000
 			CqlInterval<CqlDateTime> ae_ = this.Measurement_Period();
 			Period af_ = QualifyingEncounter?.Period;
 			CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
-			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ae_, ag_, null);
+			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ae_, ag_, default);
 			bool? ai_ = this.isFinished(QualifyingEncounter);
 			bool? aj_ = context.Operators.And(ah_, ai_);
 
@@ -386,7 +386,7 @@ public class AHAOverall_2_6_000
 	private IEnumerable<object> Moderate_or_Severe_LVSD_Findings_Value()
 	{
 		CqlValueSet a_ = this.Ejection_Fraction();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		bool? c_(Observation EjectionFraction)
 		{
 			DataType n_ = EjectionFraction?.Value;
@@ -409,11 +409,11 @@ public class AHAOverall_2_6_000
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		CqlValueSet e_ = this.Moderate_or_Severe_LVSD();
-		IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(e_, null);
+		IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(e_, default);
 		IEnumerable<object> g_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (f_ as IEnumerable<object>));
 		CqlCode h_ = this.Left_ventricular_systolic_dysfunction__disorder_();
 		IEnumerable<CqlCode> i_ = context.Operators.ToList<CqlCode>(h_);
-		IEnumerable<Condition> j_ = context.Operators.RetrieveByCodes<Condition>(i_, null);
+		IEnumerable<Condition> j_ = context.Operators.RetrieveByCodes<Condition>(i_, default);
 		bool? k_(Condition LVSDDiagnosis)
 		{
 			CodeableConcept y_ = LVSDDiagnosis?.Severity;
@@ -449,7 +449,7 @@ public class AHAOverall_2_6_000
 				Period n_ = HFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
 				CqlDateTime p_ = context.Operators.End(o_);
-				bool? q_ = context.Operators.Before(m_, p_, null);
+				bool? q_ = context.Operators.Before(m_, p_, default);
 
 				return q_;
 			};
@@ -472,7 +472,7 @@ public class AHAOverall_2_6_000
 	private bool? Has_Heart_Transplant_Complications_Value()
 	{
 		CqlValueSet a_ = this.Heart_Transplant_Complications();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		IEnumerable<Condition> c_(Condition HeartTransplantComplications)
 		{
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
@@ -486,7 +486,7 @@ public class AHAOverall_2_6_000
 				Period r_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 				CqlDateTime t_ = context.Operators.End(s_);
-				bool? u_ = context.Operators.Before(q_, t_, null);
+				bool? u_ = context.Operators.Before(q_, t_, default);
 
 				return u_;
 			};
@@ -517,7 +517,7 @@ public class AHAOverall_2_6_000
 	private bool? Has_Left_Ventricular_Assist_Device_Value()
 	{
 		CqlValueSet a_ = this.Left_Ventricular_Assist_Device_Placement();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
 		IEnumerable<Procedure> c_(Procedure LVADOutpatient)
 		{
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
@@ -530,7 +530,7 @@ public class AHAOverall_2_6_000
 				Period q_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(q_);
 				CqlDateTime s_ = context.Operators.End(r_);
-				bool? t_ = context.Operators.Before(p_, s_, null);
+				bool? t_ = context.Operators.Before(p_, s_, default);
 
 				return t_;
 			};
@@ -564,7 +564,7 @@ public class AHAOverall_2_6_000
 	private bool? Has_Left_Ventricular_Assist_Device_Complications_Value()
 	{
 		CqlValueSet a_ = this.Left_Ventricular_Assist_Device_Complications();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		IEnumerable<Condition> c_(Condition LVADComplications)
 		{
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
@@ -578,7 +578,7 @@ public class AHAOverall_2_6_000
 				Period r_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 				CqlDateTime t_ = context.Operators.End(s_);
-				bool? u_ = context.Operators.Before(q_, t_, null);
+				bool? u_ = context.Operators.Before(q_, t_, default);
 
 				return u_;
 			};
@@ -609,20 +609,20 @@ public class AHAOverall_2_6_000
 	private IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet c_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
 		CqlValueSet h_ = this.Office_Visit();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
 		CqlValueSet n_ = this.Patient_Provider_Interaction();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		bool? r_(Encounter ValidEncounter)
@@ -630,7 +630,7 @@ public class AHAOverall_2_6_000
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
 			Period u_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_3_000.ToInterval(u_);
-			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
+			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, default);
 			bool? x_ = this.isFinished(ValidEncounter);
 			bool? y_ = context.Operators.And(w_, x_);
 
@@ -695,7 +695,7 @@ public class AHAOverall_2_6_000
 	private bool? Has_Heart_Transplant_Value()
 	{
 		CqlValueSet a_ = this.Heart_Transplant();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
 		IEnumerable<Procedure> c_(Procedure HeartTransplant)
 		{
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
@@ -708,7 +708,7 @@ public class AHAOverall_2_6_000
 				Period q_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(q_);
 				CqlDateTime s_ = context.Operators.End(r_);
-				bool? t_ = context.Operators.Before(p_, s_, null);
+				bool? t_ = context.Operators.Before(p_, s_, default);
 
 				return t_;
 			};
@@ -951,7 +951,7 @@ public class AHAOverall_2_6_000
 						return dk_;
 					};
 					IEnumerable<CqlInterval<CqlDateTime>> ca_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)by_, bz_);
-					IEnumerable<CqlInterval<CqlDateTime>> cb_ = context.Operators.Collapse(ca_, null);
+					IEnumerable<CqlInterval<CqlDateTime>> cb_ = context.Operators.Collapse(ca_, default);
 					object cc_(CqlInterval<CqlDateTime> @this)
 					{
 						CqlDateTime dl_ = context.Operators.Start(@this);

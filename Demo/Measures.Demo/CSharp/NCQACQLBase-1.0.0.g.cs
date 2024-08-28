@@ -204,7 +204,7 @@ public class NCQACQLBase_1_0_0
 				{
 					bool? j_(CqlInterval<CqlDate> J)
 					{
-						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, null);
+						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, default);
 
 						return n_;
 					};
@@ -256,7 +256,7 @@ public class NCQACQLBase_1_0_0
 				{
 					bool? j_(CqlInterval<CqlDateTime> J)
 					{
-						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, null);
+						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, default);
 
 						return n_;
 					};
@@ -267,7 +267,7 @@ public class NCQACQLBase_1_0_0
 					return m_;
 				};
 				IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Where<CqlInterval<CqlDateTime>>(intervals, g_);
-				IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Collapse(h_, null);
+				IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Collapse(h_, default);
 
 				return i_;
 			}

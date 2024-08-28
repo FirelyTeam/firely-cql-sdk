@@ -44,7 +44,7 @@ public class VTEFHIR4_4_8_000
     #endregion
 
 	private CqlValueSet Intensive_Care_Unit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", default);
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
@@ -67,7 +67,7 @@ public class VTEFHIR4_4_8_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -99,7 +99,7 @@ public class VTEFHIR4_4_8_000
 			CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.ToInterval(n_);
 			Period p_ = HospitalLocation?.Period;
 			CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.ToInterval(p_);
-			bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, null);
+			bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
 			bool? s_ = context.Operators.And(m_, r_);
 
 			return s_;

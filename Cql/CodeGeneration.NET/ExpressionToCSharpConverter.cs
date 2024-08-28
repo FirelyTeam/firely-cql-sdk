@@ -16,7 +16,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.Extensions.Options;
+using TypeExtensions = Hl7.Cql.Abstractions.Infrastructure.TypeExtensions;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -157,40 +159,51 @@ namespace Hl7.Cql.CodeGeneration.NET
             //return $"{indentString}{Parenthesize(convertExpression)}?.{memberName}";
         }
 
-        private string ConvertConstantExpression(Type constantType, object? value, string? identString = "")
+        private string ConvertConstantExpression(Type constantType, object? value, string? indentString = "")
         {
-            return $"{identString}{formatValue(constantType, value)}";
+            string text;
+            var type = value?.GetType() ?? constantType;
+            type = Nullable.GetUnderlyingType(type) ?? type;
 
-            string formatValue(Type constantType, object? value)
+            if (type.IsValueType)
             {
-                if (value == default)
+                // Value Types
+                text = value switch
                 {
-                    return constantType.IsValueType ? "default" : "null";
-                }
-                else
+                    // Value Types
+                    Enum e when Enum.IsDefined(e.GetType(), e) => $"{e.GetType().FullName}.{e}", // 'e' will be the name of the defined enum
+                    Enum e => $"(({e.GetType().FullName}){e})", // 'e' will be the numeric value of the undefined enum
+                    bool b => b ? "true" : "false",
+                    decimal d => FormattableString.Invariant($"{d}m"),
+                    int i => FormattableString.Invariant($"{i}"),
+                    var v when v.IsObjectNullOrDefault() => DefaultExpressionForType(),
+                    _ => FormattableString.Invariant($"{value}"),
+                };
+            }
+            else
+            {
+                // Reference Types
+                text = value switch
                 {
-                    if (constantType.IsEnum)
-                        return $"{constantType.Namespace}.{constantType.Name}.{value}";
-                    if (constantType == typeof(string))
-                        return SymbolDisplay.FormatLiteral((string)value, true);
-                    else if (constantType == typeof(bool))
-                        return value.ToString()!.ToLowerInvariant();
-                    else if (constantType == typeof(bool?))
-                        return value.ToString()!.ToLowerInvariant();
-                    else if (constantType == typeof(Uri))
-                        return $"new Uri(\"{value}\")";
-                    else if (constantType == typeof(decimal))
-                        return ((decimal)value).ToString(CultureInfo.InvariantCulture) + "m";
-                    else if (constantType == typeof(decimal?))
-                        return ((decimal?)value).Value.ToString(CultureInfo.InvariantCulture) + "m";
-                    else if (typeof(Type).IsAssignableFrom(constantType))
-                        return $"typeof({typeToCSharpConverter.ToCSharp((Type)value)})";
-                    else
-                    {
-                        var str = value.ToString()!;
-                        return str;
-                    }
-                }
+                    null when type == typeof(object) => "null",
+                    null                             => DefaultExpressionForType(),
+                    Type t                           => $"typeof({typeToCSharpConverter.ToCSharp(t)})",
+                    Uri u                            => $"new Uri(\"{u}\")",
+                    string s                         => SymbolDisplay.FormatLiteral(s, true),
+                    _                                => FormattableString.Invariant($"{value}")
+                };
+            }
+
+            return $"{indentString}{text}";
+
+            string DefaultExpressionForType()
+            {
+                // NOTE: Be careful changing this to include the type name,
+                // there are cases in this file where an exact match on "null"
+                // or "default" is expected, and this will break it.
+                //
+                // return $"default({typeToCSharpConverter.ToCSharp(type)})";
+                return "default";
             }
         }
 

@@ -90,7 +90,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
     #endregion
 
 	private CqlValueSet Clinical_Oral_Evaluation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", default);
 
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]
@@ -98,7 +98,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		__Clinical_Oral_Evaluation.Value;
 
 	private CqlValueSet Dental_Caries_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1004", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1004", default);
 
     [CqlDeclaration("Dental Caries")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1004")]
@@ -106,7 +106,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		__Dental_Caries.Value;
 
 	private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
@@ -114,7 +114,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		__Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
 
 	private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
@@ -122,7 +122,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		__Discharged_to_Home_for_Hospice_Care.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -130,7 +130,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Hospice_care_ambulatory_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", default);
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
@@ -138,28 +138,28 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		__Hospice_care_ambulatory.Value;
 
 	private CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure__Value() => 
-		new CqlCode("428371000124100", "http://snomed.info/sct", null, null);
+		new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
 	public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_() => 
 		__Discharge_to_healthcare_facility_for_hospice_care__procedure_.Value;
 
 	private CqlCode Discharge_to_home_for_hospice_care__procedure__Value() => 
-		new CqlCode("428361000124107", "http://snomed.info/sct", null, null);
+		new CqlCode("428361000124107", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
 	public CqlCode Discharge_to_home_for_hospice_care__procedure_() => 
 		__Discharge_to_home_for_hospice_care__procedure_.Value;
 
 	private CqlCode Hospice_care__Minimum_Data_Set__Value() => 
-		new CqlCode("45755-6", "http://loinc.org", null, null);
+		new CqlCode("45755-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Hospice care [Minimum Data Set]")]
 	public CqlCode Hospice_care__Minimum_Data_Set_() => 
 		__Hospice_care__Minimum_Data_Set_.Value;
 
 	private CqlCode Yes__qualifier_value__Value() => 
-		new CqlCode("373066001", "http://snomed.info/sct", null, null);
+		new CqlCode("373066001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Yes (qualifier value)")]
 	public CqlCode Yes__qualifier_value_() => 
@@ -168,7 +168,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("45755-6", "http://loinc.org", null, null),
+			new CqlCode("45755-6", "http://loinc.org", default, default),
 		];
 
 		return a_;
@@ -181,9 +181,9 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
-			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
-			new CqlCode("373066001", "http://snomed.info/sct", null, null),
+			new CqlCode("428371000124100", "http://snomed.info/sct", default, default),
+			new CqlCode("428361000124107", "http://snomed.info/sct", default, default),
+			new CqlCode("373066001", "http://snomed.info/sct", default, default),
 		];
 
 		return a_;
@@ -209,7 +209,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -222,7 +222,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Clinical_Oral_Evaluation();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter ValidEncounter)
 		{
@@ -253,7 +253,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(1, 20, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		bool? j_ = context.Operators.In<int?>(h_, i_, default);
 		IEnumerable<Encounter> k_ = this.Qualifying_Encounters();
 		bool? l_ = context.Operators.Exists<Encounter>(k_);
 		bool? m_ = context.Operators.And(j_, l_);
@@ -290,12 +290,12 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 	private bool? Numerator_Value()
 	{
 		CqlValueSet a_ = this.Dental_Caries();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition DentalCaries)
 		{
 			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.prevalenceInterval(DentalCaries);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			bool? h_ = context.Operators.Overlaps(f_, g_, null);
+			bool? h_ = context.Operators.Overlaps(f_, g_, default);
 
 			return h_;
 		};

@@ -94,7 +94,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
     #endregion
 
 	private CqlValueSet Congenital_or_Acquired_Absence_of_Cervix_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016", default);
 
     [CqlDeclaration("Congenital or Acquired Absence of Cervix")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016")]
@@ -102,7 +102,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		__Congenital_or_Acquired_Absence_of_Cervix.Value;
 
 	private CqlValueSet Home_Healthcare_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
@@ -110,7 +110,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		__Home_Healthcare_Services.Value;
 
 	private CqlValueSet HPV_Test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1059", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1059", default);
 
     [CqlDeclaration("HPV Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1059")]
@@ -118,7 +118,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		__HPV_Test.Value;
 
 	private CqlValueSet Hysterectomy_with_No_Residual_Cervix_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014", default);
 
     [CqlDeclaration("Hysterectomy with No Residual Cervix")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014")]
@@ -126,7 +126,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		__Hysterectomy_with_No_Residual_Cervix.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
@@ -134,7 +134,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		__Office_Visit.Value;
 
 	private CqlValueSet Online_Assessments_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
@@ -142,7 +142,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		__Online_Assessments.Value;
 
 	private CqlValueSet Pap_Test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017", default);
 
     [CqlDeclaration("Pap Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017")]
@@ -150,7 +150,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		__Pap_Test.Value;
 
 	private CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
@@ -158,7 +158,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		__Preventive_Care_Services_Established_Office_Visit__18_and_Up.Value;
 
 	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
@@ -166,7 +166,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
 	private CqlValueSet Telephone_Visits_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
@@ -189,7 +189,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -202,20 +202,20 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
 		CqlValueSet h_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Telephone_Visits();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
 		CqlValueSet n_ = this.Online_Assessments();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		IEnumerable<Encounter> r_ = Status_1_6_000.isEncounterPerformed(q_);
@@ -249,7 +249,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(24, 64, true, true);
-		bool? j_ = context.Operators.In<int?>(h_, i_, null);
+		bool? j_ = context.Operators.In<int?>(h_, i_, default);
 		Code<AdministrativeGender> l_ = a_?.GenderElement;
 		AdministrativeGender? m_ = l_?.Value;
 		string n_ = context.Operators.Convert<string>(m_);
@@ -280,7 +280,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	private IEnumerable<object> Absence_of_Cervix_Value()
 	{
 		CqlValueSet a_ = this.Hysterectomy_with_No_Residual_Cervix();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
 		IEnumerable<Procedure> c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure NoCervixProcedure)
 		{
@@ -290,20 +290,20 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			CqlDateTime n_ = context.Operators.End(m_);
 			CqlInterval<CqlDateTime> o_ = this.Measurement_Period();
 			CqlDateTime p_ = context.Operators.End(o_);
-			bool? q_ = context.Operators.SameOrBefore(n_, p_, null);
+			bool? q_ = context.Operators.SameOrBefore(n_, p_, default);
 
 			return q_;
 		};
 		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlValueSet f_ = this.Congenital_or_Acquired_Absence_of_Cervix();
-		IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, null);
+		IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
 		bool? h_(Condition NoCervixDiagnosis)
 		{
 			CqlInterval<CqlDateTime> r_ = QICoreCommon_2_0_000.prevalenceInterval(NoCervixDiagnosis);
 			CqlDateTime s_ = context.Operators.Start(r_);
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
 			CqlDateTime u_ = context.Operators.End(t_);
-			bool? v_ = context.Operators.SameOrBefore(s_, u_, null);
+			bool? v_ = context.Operators.SameOrBefore(s_, u_, default);
 
 			return v_;
 		};
@@ -336,7 +336,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	private IEnumerable<Observation> Cervical_Cytology_Within_3_Years_Value()
 	{
 		CqlValueSet a_ = this.Pap_Test();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		IEnumerable<Observation> c_ = Status_1_6_000.isLaboratoryTestPerformed(b_);
 		bool? d_(Observation CervicalCytology)
 		{
@@ -419,7 +419,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 	private IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older_Value()
 	{
 		CqlValueSet a_ = this.HPV_Test();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		IEnumerable<Observation> c_ = Status_1_6_000.isLaboratoryTestPerformed(b_);
 		bool? d_(Observation HPVTest)
 		{

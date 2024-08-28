@@ -114,28 +114,28 @@ public class FHIRHelpers_4_0_1
 					if (c_())
 					{
 						CqlQuantity w_ = this.ToQuantityIgnoringComparator(quantity);
-						CqlInterval<CqlQuantity> x_ = context.Operators.Interval(null, w_, true, false);
+						CqlInterval<CqlQuantity> x_ = context.Operators.Interval(default, w_, true, false);
 
 						return x_;
 					}
 					else if (d_())
 					{
 						CqlQuantity y_ = this.ToQuantityIgnoringComparator(quantity);
-						CqlInterval<CqlQuantity> z_ = context.Operators.Interval(null, y_, true, true);
+						CqlInterval<CqlQuantity> z_ = context.Operators.Interval(default, y_, true, true);
 
 						return z_;
 					}
 					else if (e_())
 					{
 						CqlQuantity aa_ = this.ToQuantityIgnoringComparator(quantity);
-						CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, null, true, true);
+						CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, default, true, true);
 
 						return ab_;
 					}
 					else if (f_())
 					{
 						CqlQuantity ac_ = this.ToQuantityIgnoringComparator(quantity);
-						CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, null, false, true);
+						CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, default, false, true);
 
 						return ad_;
 					}
@@ -251,11 +251,11 @@ public class FHIRHelpers_4_0_1
 			};
 			if ((quantity is null))
 			{
-				return null;
+				return default;
 			}
 			else if ((quantity?.ValueElement is null))
 			{
-				return null;
+				return default;
 			}
 			else if (b_())
 			{
@@ -317,11 +317,11 @@ public class FHIRHelpers_4_0_1
 			};
 			if ((quantity is null))
 			{
-				return null;
+				return default;
 			}
 			else if ((quantity?.ValueElement is null))
 			{
-				return null;
+				return default;
 			}
 			else if (b_())
 			{
@@ -365,7 +365,7 @@ public class FHIRHelpers_4_0_1
 		{
 			if ((ratio is null))
 			{
-				return null;
+				return default;
 			}
 			else
 			{
@@ -388,7 +388,7 @@ public class FHIRHelpers_4_0_1
 		{
 			if ((coding is null))
 			{
-				return null;
+				return default;
 			}
 			else
 			{
@@ -415,7 +415,7 @@ public class FHIRHelpers_4_0_1
 		{
 			if ((concept is null))
 			{
-				return null;
+				return default;
 			}
 			else
 			{

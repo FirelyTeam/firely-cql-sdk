@@ -74,7 +74,7 @@ public class AlaraCTIQRFHIR_0_1_000
     #endregion
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -82,21 +82,21 @@ public class AlaraCTIQRFHIR_0_1_000
 		__Encounter_Inpatient.Value;
 
 	private CqlCode Calculated_CT_global_noise_Value() => 
-		new CqlCode("96912-1", "http://loinc.org", null, null);
+		new CqlCode("96912-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Calculated CT global noise")]
 	public CqlCode Calculated_CT_global_noise() => 
 		__Calculated_CT_global_noise.Value;
 
 	private CqlCode Calculated_CT_size_adjusted_dose_Value() => 
-		new CqlCode("96913-9", "http://loinc.org", null, null);
+		new CqlCode("96913-9", "http://loinc.org", default, default);
 
     [CqlDeclaration("Calculated CT size-adjusted dose")]
 	public CqlCode Calculated_CT_size_adjusted_dose() => 
 		__Calculated_CT_size_adjusted_dose.Value;
 
 	private CqlCode CT_dose_and_image_quality_category_Value() => 
-		new CqlCode("96914-7", "http://loinc.org", null, null);
+		new CqlCode("96914-7", "http://loinc.org", default, default);
 
     [CqlDeclaration("CT dose and image quality category")]
 	public CqlCode CT_dose_and_image_quality_category() => 
@@ -105,9 +105,9 @@ public class AlaraCTIQRFHIR_0_1_000
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("96912-1", "http://loinc.org", null, null),
-			new CqlCode("96913-9", "http://loinc.org", null, null),
-			new CqlCode("96914-7", "http://loinc.org", null, null),
+			new CqlCode("96912-1", "http://loinc.org", default, default),
+			new CqlCode("96913-9", "http://loinc.org", default, default),
+			new CqlCode("96914-7", "http://loinc.org", default, default),
 		];
 
 		return a_;
@@ -133,7 +133,7 @@ public class AlaraCTIQRFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -146,13 +146,13 @@ public class AlaraCTIQRFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Inpatient_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter InpatientEncounter)
 		{
 			Period e_ = InpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_3_000.ToInterval(e_);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			bool? h_ = context.Operators.Overlaps(f_, g_, null);
+			bool? h_ = context.Operators.Overlaps(f_, g_, default);
 			Patient i_ = this.Patient();
 			Date j_ = i_?.BirthDateElement;
 			string k_ = j_?.Value;
@@ -222,7 +222,7 @@ public class AlaraCTIQRFHIR_0_1_000
 	{
 		CqlCode a_ = this.CT_dose_and_image_quality_category();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
 		IEnumerable<Observation> d_(Observation CTScan)
 		{
 			IEnumerable<Encounter> f_ = this.Qualifying_Inpatient_Encounters();
@@ -234,11 +234,11 @@ public class AlaraCTIQRFHIR_0_1_000
 				CqlDateTime n_ = context.Operators.Start(m_);
 				Period o_ = InpatientEncounters?.Period;
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
-				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, null);
+				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, default);
 				CqlInterval<CqlDateTime> r_ = this.Measurement_Period();
 				object t_ = FHIRHelpers_4_3_000.ToValue(k_);
 				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_);
-				bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, null);
+				bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, default);
 				bool? w_ = context.Operators.And(q_, v_);
 
 				return w_;
