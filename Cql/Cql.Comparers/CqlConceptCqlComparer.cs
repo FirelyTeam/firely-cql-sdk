@@ -94,10 +94,12 @@ namespace Hl7.Cql.Comparers
                 _ => NewCodeEquivalenceComparer(precision)
             };
 
-            HashSet<CqlCode> xCodes = new(x.codes, codeEquivalenceComparer);
-            HashSet<CqlCode> yCodes = new(y.codes, codeEquivalenceComparer);
-
-            bool isEquivalent = xCodes.Overlaps(yCodes);
+            // More performance to have the hashset with the smallest set
+            var (codesSet, compareSet) =
+                x.codes.Length < y.codes.Length
+                 ? (new HashSet<CqlCode>(x.codes, codeEquivalenceComparer), y.codes)
+                 : (new HashSet<CqlCode>(y.codes, codeEquivalenceComparer), x.codes);
+            bool isEquivalent = codesSet.Overlaps(compareSet);
             return isEquivalent;
         }
 
