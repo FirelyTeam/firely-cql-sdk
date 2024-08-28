@@ -35,6 +35,81 @@ public class TypeExtensionsTests
     private static readonly Type MyClassGenericDefinitionType = typeof(MyGenericClassDerived<>);
 
     [TestMethod]
+    public void IsObjectNullOrDefault_ShouldThrowNotSupportedException_WhenTypeArgumentNotObject()
+    {
+        // Don't use IsObjectNullOrDefault on specific types, it must be boxed to an object first
+
+        Assert.ThrowsException<NotSupportedException>(() => 0.IsObjectNullOrDefault());
+
+        Assert.ThrowsException<NotSupportedException>(() => default(int?).IsObjectNullOrDefault());
+    }
+
+    [TestMethod]
+    public void IsObjectNullOrDefault_ShouldReturnCorrectResults_ForObject()
+    {
+        object? obj = null;
+        Assert.IsTrue(obj.IsObjectNullOrDefault());
+
+        obj = new();
+        Assert.IsFalse(obj.IsObjectNullOrDefault());
+    }
+
+    [TestMethod]
+    public void IsObjectNullOrDefault_ShouldReturnCorrectResults_ForEnum()
+    {
+        TestEnum? testEnum = null;
+        Assert.IsTrue(testEnum.IsObjectNullOrDefault<object>());
+
+        testEnum = TestEnum.Zero; // default
+        Assert.IsTrue(testEnum.IsObjectNullOrDefault<object>());
+
+        testEnum = TestEnum.One;
+        Assert.IsFalse(testEnum.IsObjectNullOrDefault<object>());
+    }
+
+    [TestMethod]
+    public void IsObjectNullOrDefault_ShouldReturnCorrectResults_ForInt32()
+    {
+        int? testInt32 = null;
+        Assert.IsTrue(testInt32.IsObjectNullOrDefault<object>());
+
+        testInt32 = 0;
+        Assert.IsTrue(testInt32.IsObjectNullOrDefault<object>());
+
+        testInt32 = 1;
+        Assert.IsFalse(testInt32.IsObjectNullOrDefault<object>());
+    }
+
+    [TestMethod]
+    public void IsObjectNullOrDefault_ShouldReturnCorrectResults_ForGuids()
+    {
+        Guid? testGuid = null;
+        Assert.IsTrue(testGuid.IsObjectNullOrDefault<object>());
+
+        testGuid = Guid.Empty;
+        Assert.IsTrue(testGuid.IsObjectNullOrDefault<object>());
+
+        testGuid = Guid.NewGuid();
+        Assert.IsFalse(testGuid.IsObjectNullOrDefault<object>());
+    }
+
+    [TestMethod]
+    public void IsObjectNullOrDefault_ShouldReturnCorrectResults_ForStrings()
+    {
+        string? testString = null;
+        Assert.IsTrue(testString.IsObjectNullOrDefault<object>());
+
+        testString = "";
+        Assert.IsFalse(testString.IsObjectNullOrDefault<object>());
+    }
+
+    private enum TestEnum
+    {
+        Zero = 0,
+        One = 1
+    };
+
+    [TestMethod]
     public void IsNullableValueType_ShouldReturnCorrectResults()
     {
         // Arrange

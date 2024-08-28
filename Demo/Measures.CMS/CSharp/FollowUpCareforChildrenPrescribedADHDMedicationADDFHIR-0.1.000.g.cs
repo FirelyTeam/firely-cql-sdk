@@ -166,7 +166,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
     #endregion
 
 	private CqlValueSet Ambulatory_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1003", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1003", default);
 
     [CqlDeclaration("Ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1003")]
@@ -174,7 +174,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Ambulatory.Value;
 
 	private CqlValueSet Atomoxetine_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1170", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1170", default);
 
     [CqlDeclaration("Atomoxetine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1170")]
@@ -182,7 +182,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Atomoxetine.Value;
 
 	private CqlValueSet Behavioral_Health_Follow_up_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1054", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1054", default);
 
     [CqlDeclaration("Behavioral Health Follow up Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1054")]
@@ -190,7 +190,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Behavioral_Health_Follow_up_Visit.Value;
 
 	private CqlValueSet Clonidine_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1171", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1171", default);
 
     [CqlDeclaration("Clonidine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1171")]
@@ -198,7 +198,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Clonidine.Value;
 
 	private CqlValueSet Dexmethylphenidate_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1172", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1172", default);
 
     [CqlDeclaration("Dexmethylphenidate")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1172")]
@@ -206,7 +206,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Dexmethylphenidate.Value;
 
 	private CqlValueSet Dextroamphetamine_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1173", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1173", default);
 
     [CqlDeclaration("Dextroamphetamine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1173")]
@@ -214,7 +214,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Dextroamphetamine.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -222,7 +222,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Guanfacine_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.11.1252", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.11.1252", default);
 
     [CqlDeclaration("Guanfacine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.11.1252")]
@@ -230,7 +230,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Guanfacine.Value;
 
 	private CqlValueSet Home_Healthcare_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
@@ -238,7 +238,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Home_Healthcare_Services.Value;
 
 	private CqlValueSet Initial_Hospital_Observation_Care_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1002", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1002", default);
 
     [CqlDeclaration("Initial Hospital Observation Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1002")]
@@ -246,7 +246,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Initial_Hospital_Observation_Care.Value;
 
 	private CqlValueSet Lisdexamfetamine_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1174", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1174", default);
 
     [CqlDeclaration("Lisdexamfetamine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1174")]
@@ -254,7 +254,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Lisdexamfetamine.Value;
 
 	private CqlValueSet Mental_Behavioral_and_Neurodevelopmental_Disorders_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1203", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1203", default);
 
     [CqlDeclaration("Mental Behavioral and Neurodevelopmental Disorders")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1203")]
@@ -262,7 +262,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Mental_Behavioral_and_Neurodevelopmental_Disorders.Value;
 
 	private CqlValueSet Methylphenidate_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1176", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1176", default);
 
     [CqlDeclaration("Methylphenidate")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1176")]
@@ -270,7 +270,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Methylphenidate.Value;
 
 	private CqlValueSet Narcolepsy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1011", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1011", default);
 
     [CqlDeclaration("Narcolepsy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1011")]
@@ -278,7 +278,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Narcolepsy.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
@@ -286,7 +286,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Office_Visit.Value;
 
 	private CqlValueSet Online_Assessments_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
@@ -294,7 +294,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Online_Assessments.Value;
 
 	private CqlValueSet Outpatient_Consultation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
@@ -302,7 +302,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Outpatient_Consultation.Value;
 
 	private CqlValueSet Preventive_Care_Services_Group_Counseling_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default);
 
     [CqlDeclaration("Preventive Care Services Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
@@ -310,7 +310,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Preventive_Care_Services_Group_Counseling.Value;
 
 	private CqlValueSet Preventive_Care_Services_Individual_Counseling_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
 
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
@@ -318,7 +318,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Preventive_Care_Services_Individual_Counseling.Value;
 
 	private CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
@@ -326,7 +326,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Preventive_Care_Services__Initial_Office_Visit__0_to_17.Value;
 
 	private CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
@@ -334,7 +334,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Preventive_Care__Established_Office_Visit__0_to_17.Value;
 
 	private CqlValueSet Psych_Visit_Diagnostic_Evaluation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
@@ -342,7 +342,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Psych_Visit_Diagnostic_Evaluation.Value;
 
 	private CqlValueSet Psych_Visit_Psychotherapy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
@@ -350,7 +350,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Psych_Visit_Psychotherapy.Value;
 
 	private CqlValueSet Psychotherapy_and_Pharmacologic_Management_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1055", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1055", default);
 
     [CqlDeclaration("Psychotherapy and Pharmacologic Management")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1055")]
@@ -358,7 +358,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Psychotherapy_and_Pharmacologic_Management.Value;
 
 	private CqlValueSet Telephone_Visits_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
@@ -366,14 +366,14 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		__Telephone_Visits.Value;
 
 	private CqlCode _24_HR_dexmethylphenidate_hydrochloride_40_MG_Extended_Release_Oral_Capsule_Value() => 
-		new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null);
+		new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("24 HR dexmethylphenidate hydrochloride 40 MG Extended Release Oral Capsule")]
 	public CqlCode _24_HR_dexmethylphenidate_hydrochloride_40_MG_Extended_Release_Oral_Capsule() => 
 		___24_HR_dexmethylphenidate_hydrochloride_40_MG_Extended_Release_Oral_Capsule.Value;
 
 	private CqlCode methamphetamine_hydrochloride_5_MG_Oral_Tablet_Value() => 
-		new CqlCode("977860", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null);
+		new CqlCode("977860", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("methamphetamine hydrochloride 5 MG Oral Tablet")]
 	public CqlCode methamphetamine_hydrochloride_5_MG_Oral_Tablet() => 
@@ -382,8 +382,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private CqlCode[] RXNORM_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
-			new CqlCode("977860", "http://www.nlm.nih.gov/research/umls/rxnorm", null, null),
+			new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default),
+			new CqlCode("977860", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default),
 		];
 
 		return a_;
@@ -409,7 +409,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -468,44 +468,44 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<(CqlDate startDate, nint _)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value()
 	{
 		CqlValueSet a_ = this.Atomoxetine();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		CqlValueSet f_ = this.Clonidine();
-		IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		IEnumerable<MedicationRequest> i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
+		IEnumerable<MedicationRequest> i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
 		IEnumerable<MedicationRequest> j_ = context.Operators.Union<MedicationRequest>(g_, i_);
 		IEnumerable<MedicationRequest> k_ = context.Operators.Union<MedicationRequest>(e_, j_);
 		CqlValueSet l_ = this.Dexmethylphenidate();
-		IEnumerable<MedicationRequest> m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		IEnumerable<MedicationRequest> m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, default);
+		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, default);
 		IEnumerable<MedicationRequest> p_ = context.Operators.Union<MedicationRequest>(m_, o_);
 		IEnumerable<MedicationRequest> q_ = context.Operators.Union<MedicationRequest>(k_, p_);
 		CqlValueSet r_ = this.Dextroamphetamine();
-		IEnumerable<MedicationRequest> s_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
-		IEnumerable<MedicationRequest> u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
+		IEnumerable<MedicationRequest> s_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, default);
+		IEnumerable<MedicationRequest> u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, default);
 		IEnumerable<MedicationRequest> v_ = context.Operators.Union<MedicationRequest>(s_, u_);
 		IEnumerable<MedicationRequest> w_ = context.Operators.Union<MedicationRequest>(q_, v_);
 		CqlValueSet x_ = this.Lisdexamfetamine();
-		IEnumerable<MedicationRequest> y_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
-		IEnumerable<MedicationRequest> aa_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
+		IEnumerable<MedicationRequest> y_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, default);
+		IEnumerable<MedicationRequest> aa_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, default);
 		IEnumerable<MedicationRequest> ab_ = context.Operators.Union<MedicationRequest>(y_, aa_);
 		IEnumerable<MedicationRequest> ac_ = context.Operators.Union<MedicationRequest>(w_, ab_);
 		CqlCode ad_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 		IEnumerable<CqlCode> ae_ = context.Operators.ToList<CqlCode>(ad_);
-		IEnumerable<MedicationRequest> af_ = context.Operators.RetrieveByCodes<MedicationRequest>(ae_, null);
+		IEnumerable<MedicationRequest> af_ = context.Operators.RetrieveByCodes<MedicationRequest>(ae_, default);
 		IEnumerable<CqlCode> ah_ = context.Operators.ToList<CqlCode>(ad_);
-		IEnumerable<MedicationRequest> ai_ = context.Operators.RetrieveByCodes<MedicationRequest>(ah_, null);
+		IEnumerable<MedicationRequest> ai_ = context.Operators.RetrieveByCodes<MedicationRequest>(ah_, default);
 		IEnumerable<MedicationRequest> aj_ = context.Operators.Union<MedicationRequest>(af_, ai_);
 		IEnumerable<MedicationRequest> ak_ = context.Operators.Union<MedicationRequest>(ac_, aj_);
 		CqlValueSet al_ = this.Methylphenidate();
-		IEnumerable<MedicationRequest> am_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
-		IEnumerable<MedicationRequest> ao_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
+		IEnumerable<MedicationRequest> am_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, default);
+		IEnumerable<MedicationRequest> ao_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, default);
 		IEnumerable<MedicationRequest> ap_ = context.Operators.Union<MedicationRequest>(am_, ao_);
 		IEnumerable<MedicationRequest> aq_ = context.Operators.Union<MedicationRequest>(ak_, ap_);
 		CqlValueSet ar_ = this.Guanfacine();
-		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
+		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
+		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
 		IEnumerable<MedicationRequest> av_ = context.Operators.Union<MedicationRequest>(as_, au_);
 		IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(aq_, av_);
 		bool? ax_(MedicationRequest ADHDMedications)
@@ -514,42 +514,42 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			CqlDate dg_ = context.Operators.Start(df_);
 			CqlDateTime dh_ = context.Operators.ConvertDateToDateTime(dg_);
 			CqlInterval<CqlDateTime> di_ = this.Intake_Period();
-			bool? dj_ = context.Operators.In<CqlDateTime>(dh_, di_, null);
+			bool? dj_ = context.Operators.In<CqlDateTime>(dh_, di_, default);
 
 			return dj_;
 		};
 		IEnumerable<MedicationRequest> ay_ = context.Operators.Where<MedicationRequest>(aw_, ax_);
-		IEnumerable<MedicationRequest> ba_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> bc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> ba_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> bc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> bd_ = context.Operators.Union<MedicationRequest>(ba_, bc_);
-		IEnumerable<MedicationRequest> bf_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
-		IEnumerable<MedicationRequest> bh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, null);
+		IEnumerable<MedicationRequest> bf_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
+		IEnumerable<MedicationRequest> bh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
 		IEnumerable<MedicationRequest> bi_ = context.Operators.Union<MedicationRequest>(bf_, bh_);
 		IEnumerable<MedicationRequest> bj_ = context.Operators.Union<MedicationRequest>(bd_, bi_);
-		IEnumerable<MedicationRequest> bl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
-		IEnumerable<MedicationRequest> bn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, null);
+		IEnumerable<MedicationRequest> bl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, default);
+		IEnumerable<MedicationRequest> bn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, default);
 		IEnumerable<MedicationRequest> bo_ = context.Operators.Union<MedicationRequest>(bl_, bn_);
 		IEnumerable<MedicationRequest> bp_ = context.Operators.Union<MedicationRequest>(bj_, bo_);
-		IEnumerable<MedicationRequest> br_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
-		IEnumerable<MedicationRequest> bt_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, null);
+		IEnumerable<MedicationRequest> br_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, default);
+		IEnumerable<MedicationRequest> bt_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, default);
 		IEnumerable<MedicationRequest> bu_ = context.Operators.Union<MedicationRequest>(br_, bt_);
 		IEnumerable<MedicationRequest> bv_ = context.Operators.Union<MedicationRequest>(bp_, bu_);
-		IEnumerable<MedicationRequest> bx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
-		IEnumerable<MedicationRequest> bz_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, null);
+		IEnumerable<MedicationRequest> bx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, default);
+		IEnumerable<MedicationRequest> bz_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, default);
 		IEnumerable<MedicationRequest> ca_ = context.Operators.Union<MedicationRequest>(bx_, bz_);
 		IEnumerable<MedicationRequest> cb_ = context.Operators.Union<MedicationRequest>(bv_, ca_);
 		IEnumerable<CqlCode> cd_ = context.Operators.ToList<CqlCode>(ad_);
-		IEnumerable<MedicationRequest> ce_ = context.Operators.RetrieveByCodes<MedicationRequest>(cd_, null);
+		IEnumerable<MedicationRequest> ce_ = context.Operators.RetrieveByCodes<MedicationRequest>(cd_, default);
 		IEnumerable<CqlCode> cg_ = context.Operators.ToList<CqlCode>(ad_);
-		IEnumerable<MedicationRequest> ch_ = context.Operators.RetrieveByCodes<MedicationRequest>(cg_, null);
+		IEnumerable<MedicationRequest> ch_ = context.Operators.RetrieveByCodes<MedicationRequest>(cg_, default);
 		IEnumerable<MedicationRequest> ci_ = context.Operators.Union<MedicationRequest>(ce_, ch_);
 		IEnumerable<MedicationRequest> cj_ = context.Operators.Union<MedicationRequest>(cb_, ci_);
-		IEnumerable<MedicationRequest> cl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
-		IEnumerable<MedicationRequest> cn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, null);
+		IEnumerable<MedicationRequest> cl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, default);
+		IEnumerable<MedicationRequest> cn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, default);
 		IEnumerable<MedicationRequest> co_ = context.Operators.Union<MedicationRequest>(cl_, cn_);
 		IEnumerable<MedicationRequest> cp_ = context.Operators.Union<MedicationRequest>(cj_, co_);
-		IEnumerable<MedicationRequest> cr_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		IEnumerable<MedicationRequest> ct_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
+		IEnumerable<MedicationRequest> cr_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
+		IEnumerable<MedicationRequest> ct_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
 		IEnumerable<MedicationRequest> cu_ = context.Operators.Union<MedicationRequest>(cr_, ct_);
 		IEnumerable<MedicationRequest> cv_ = context.Operators.Union<MedicationRequest>(cp_, cu_);
 		bool? cw_(MedicationRequest ADHDMedications)
@@ -558,7 +558,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			CqlDate dl_ = context.Operators.Start(dk_);
 			CqlDateTime dm_ = context.Operators.ConvertDateToDateTime(dl_);
 			CqlInterval<CqlDateTime> dn_ = this.Intake_Period();
-			bool? do_ = context.Operators.In<CqlDateTime>(dm_, dn_, null);
+			bool? do_ = context.Operators.In<CqlDateTime>(dm_, dn_, default);
 
 			return do_;
 		};
@@ -566,44 +566,44 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<MedicationRequest> cy_(MedicationRequest ADHDMedicationOrder)
 		{
 			CqlValueSet dp_ = this.Atomoxetine();
-			IEnumerable<MedicationRequest> dq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, null);
-			IEnumerable<MedicationRequest> ds_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, null);
+			IEnumerable<MedicationRequest> dq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, default);
+			IEnumerable<MedicationRequest> ds_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, default);
 			IEnumerable<MedicationRequest> dt_ = context.Operators.Union<MedicationRequest>(dq_, ds_);
 			CqlValueSet du_ = this.Clonidine();
-			IEnumerable<MedicationRequest> dv_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, null);
-			IEnumerable<MedicationRequest> dx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, null);
+			IEnumerable<MedicationRequest> dv_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, default);
+			IEnumerable<MedicationRequest> dx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, default);
 			IEnumerable<MedicationRequest> dy_ = context.Operators.Union<MedicationRequest>(dv_, dx_);
 			IEnumerable<MedicationRequest> dz_ = context.Operators.Union<MedicationRequest>(dt_, dy_);
 			CqlValueSet ea_ = this.Dexmethylphenidate();
-			IEnumerable<MedicationRequest> eb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, null);
-			IEnumerable<MedicationRequest> ed_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, null);
+			IEnumerable<MedicationRequest> eb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, default);
+			IEnumerable<MedicationRequest> ed_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, default);
 			IEnumerable<MedicationRequest> ee_ = context.Operators.Union<MedicationRequest>(eb_, ed_);
 			IEnumerable<MedicationRequest> ef_ = context.Operators.Union<MedicationRequest>(dz_, ee_);
 			CqlValueSet eg_ = this.Dextroamphetamine();
-			IEnumerable<MedicationRequest> eh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, null);
-			IEnumerable<MedicationRequest> ej_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, null);
+			IEnumerable<MedicationRequest> eh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, default);
+			IEnumerable<MedicationRequest> ej_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, default);
 			IEnumerable<MedicationRequest> ek_ = context.Operators.Union<MedicationRequest>(eh_, ej_);
 			IEnumerable<MedicationRequest> el_ = context.Operators.Union<MedicationRequest>(ef_, ek_);
 			CqlValueSet em_ = this.Lisdexamfetamine();
-			IEnumerable<MedicationRequest> en_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, null);
-			IEnumerable<MedicationRequest> ep_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, null);
+			IEnumerable<MedicationRequest> en_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, default);
+			IEnumerable<MedicationRequest> ep_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, default);
 			IEnumerable<MedicationRequest> eq_ = context.Operators.Union<MedicationRequest>(en_, ep_);
 			IEnumerable<MedicationRequest> er_ = context.Operators.Union<MedicationRequest>(el_, eq_);
 			CqlCode es_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 			IEnumerable<CqlCode> et_ = context.Operators.ToList<CqlCode>(es_);
-			IEnumerable<MedicationRequest> eu_ = context.Operators.RetrieveByCodes<MedicationRequest>(et_, null);
+			IEnumerable<MedicationRequest> eu_ = context.Operators.RetrieveByCodes<MedicationRequest>(et_, default);
 			IEnumerable<CqlCode> ew_ = context.Operators.ToList<CqlCode>(es_);
-			IEnumerable<MedicationRequest> ex_ = context.Operators.RetrieveByCodes<MedicationRequest>(ew_, null);
+			IEnumerable<MedicationRequest> ex_ = context.Operators.RetrieveByCodes<MedicationRequest>(ew_, default);
 			IEnumerable<MedicationRequest> ey_ = context.Operators.Union<MedicationRequest>(eu_, ex_);
 			IEnumerable<MedicationRequest> ez_ = context.Operators.Union<MedicationRequest>(er_, ey_);
 			CqlValueSet fa_ = this.Methylphenidate();
-			IEnumerable<MedicationRequest> fb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, null);
-			IEnumerable<MedicationRequest> fd_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, null);
+			IEnumerable<MedicationRequest> fb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, default);
+			IEnumerable<MedicationRequest> fd_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, default);
 			IEnumerable<MedicationRequest> fe_ = context.Operators.Union<MedicationRequest>(fb_, fd_);
 			IEnumerable<MedicationRequest> ff_ = context.Operators.Union<MedicationRequest>(ez_, fe_);
 			CqlValueSet fg_ = this.Guanfacine();
-			IEnumerable<MedicationRequest> fh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, null);
-			IEnumerable<MedicationRequest> fj_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, null);
+			IEnumerable<MedicationRequest> fh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, default);
+			IEnumerable<MedicationRequest> fj_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, default);
 			IEnumerable<MedicationRequest> fk_ = context.Operators.Union<MedicationRequest>(fh_, fj_);
 			IEnumerable<MedicationRequest> fl_ = context.Operators.Union<MedicationRequest>(ff_, fk_);
 			bool? fm_(MedicationRequest ActiveADHDMedication)
@@ -619,7 +619,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				CqlDateTime fz_ = context.Operators.ConvertDateToDateTime(fy_);
 				CqlDate ga_ = context.Operators.DateFrom(fz_);
 				CqlInterval<CqlDate> gb_ = context.Operators.Interval(fw_, ga_, true, false);
-				bool? gc_ = context.Operators.Overlaps(fq_, gb_, null);
+				bool? gc_ = context.Operators.Overlaps(fq_, gb_, default);
 
 				return gc_;
 			};
@@ -697,14 +697,14 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet c_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
 		CqlValueSet h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		bool? l_(Encounter ValidEncounters)
@@ -757,7 +757,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Condition d_(Encounter.DiagnosisComponent PD)
 		{
-			IEnumerable<Condition> i_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
+			IEnumerable<Condition> i_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 			bool? j_(Condition C)
 			{
 				Id m_ = C?.IdElement;
@@ -783,7 +783,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter InpatientStay)
 		{
 			IEnumerable<Condition> e_ = this.PrincipalDiagnosis(InpatientStay);
@@ -889,14 +889,14 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<Condition> Narcolepsy_Exclusion_Value()
 	{
 		CqlValueSet a_ = this.Narcolepsy();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition Narcolepsy)
 		{
 			CqlInterval<CqlDateTime> e_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Narcolepsy);
 			CqlDateTime f_ = context.Operators.Start(e_);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
 			CqlDateTime h_ = context.Operators.End(g_);
-			bool? i_ = context.Operators.SameOrBefore(f_, h_, null);
+			bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
 
 			return i_;
 		};
@@ -926,20 +926,20 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Numerator_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet c_ = this.Initial_Hospital_Observation_Care();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care_Services_Group_Counseling();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
 		CqlValueSet h_ = this.Behavioral_Health_Follow_up_Visit();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Preventive_Care_Services_Individual_Counseling();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
 		CqlValueSet n_ = this.Psychotherapy_and_Pharmacologic_Management();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
 		bool? p_(Encounter PsychPharmManagement)
 		{
 			List<Encounter.LocationComponent> ao_ = PsychPharmManagement?.Location;
@@ -969,25 +969,25 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(m_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(k_, r_);
 		CqlValueSet t_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default);
 		CqlValueSet v_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, null);
+		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, default);
 		IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(u_, w_);
 		IEnumerable<Encounter> y_ = context.Operators.Union<Encounter>(s_, x_);
 		CqlValueSet z_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, null);
+		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, default);
 		CqlValueSet ab_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		IEnumerable<Encounter> ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, null);
+		IEnumerable<Encounter> ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, default);
 		IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(aa_, ac_);
 		IEnumerable<Encounter> ae_ = context.Operators.Union<Encounter>(y_, ad_);
 		CqlValueSet af_ = this.Psych_Visit_Diagnostic_Evaluation();
-		IEnumerable<Encounter> ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, null);
+		IEnumerable<Encounter> ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, default);
 		CqlValueSet ah_ = this.Psych_Visit_Psychotherapy();
-		IEnumerable<Encounter> ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, null);
+		IEnumerable<Encounter> ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, default);
 		IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ag_, ai_);
 		IEnumerable<Encounter> ak_ = context.Operators.Union<Encounter>(ae_, aj_);
 		CqlValueSet al_ = this.Telephone_Visits();
-		IEnumerable<Encounter> am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, null);
+		IEnumerable<Encounter> am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, default);
 		IEnumerable<Encounter> an_ = context.Operators.Union<Encounter>(ak_, am_);
 
 		return an_;
@@ -1040,8 +1040,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Value()
 	{
 		CqlValueSet a_ = this.Atomoxetine();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? f_(MedicationRequest AtomoxetineMed)
 		{
@@ -1076,8 +1076,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> m_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(k_, l_);
 		IEnumerable<CqlInterval<CqlDate>> n_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(m_);
 		CqlValueSet o_ = this.Clonidine();
-		IEnumerable<MedicationRequest> p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
-		IEnumerable<MedicationRequest> r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, null);
+		IEnumerable<MedicationRequest> p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, default);
+		IEnumerable<MedicationRequest> r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, default);
 		IEnumerable<MedicationRequest> s_ = context.Operators.Union<MedicationRequest>(p_, r_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? t_(MedicationRequest ClonidineMed)
 		{
@@ -1113,8 +1113,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> ab_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(aa_);
 		IEnumerable<CqlInterval<CqlDate>> ac_ = context.Operators.Union<CqlInterval<CqlDate>>(n_, ab_);
 		CqlValueSet ad_ = this.Dexmethylphenidate();
-		IEnumerable<MedicationRequest> ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
-		IEnumerable<MedicationRequest> ag_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, null);
+		IEnumerable<MedicationRequest> ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, default);
+		IEnumerable<MedicationRequest> ag_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, default);
 		IEnumerable<MedicationRequest> ah_ = context.Operators.Union<MedicationRequest>(ae_, ag_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? ai_(MedicationRequest DexmethylphenidateMed)
 		{
@@ -1149,8 +1149,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> ap_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(an_, ao_);
 		IEnumerable<CqlInterval<CqlDate>> aq_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ap_);
 		CqlValueSet ar_ = this.Dextroamphetamine();
-		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
-		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, null);
+		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
+		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
 		IEnumerable<MedicationRequest> av_ = context.Operators.Union<MedicationRequest>(as_, au_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? aw_(MedicationRequest DextroamphetamineMed)
 		{
@@ -1187,8 +1187,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> bf_ = context.Operators.Union<CqlInterval<CqlDate>>(aq_, be_);
 		IEnumerable<CqlInterval<CqlDate>> bg_ = context.Operators.Union<CqlInterval<CqlDate>>(ac_, bf_);
 		CqlValueSet bh_ = this.Lisdexamfetamine();
-		IEnumerable<MedicationRequest> bi_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
-		IEnumerable<MedicationRequest> bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, null);
+		IEnumerable<MedicationRequest> bi_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, default);
+		IEnumerable<MedicationRequest> bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, default);
 		IEnumerable<MedicationRequest> bl_ = context.Operators.Union<MedicationRequest>(bi_, bk_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? bm_(MedicationRequest LisdexamfetamineMed)
 		{
@@ -1223,8 +1223,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> bt_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(br_, bs_);
 		IEnumerable<CqlInterval<CqlDate>> bu_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bt_);
 		CqlValueSet bv_ = this.Methylphenidate();
-		IEnumerable<MedicationRequest> bw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
-		IEnumerable<MedicationRequest> by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, null);
+		IEnumerable<MedicationRequest> bw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, default);
+		IEnumerable<MedicationRequest> by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, default);
 		IEnumerable<MedicationRequest> bz_ = context.Operators.Union<MedicationRequest>(bw_, by_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? ca_(MedicationRequest MethylphenidateMed)
 		{
@@ -1261,8 +1261,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> cj_ = context.Operators.Union<CqlInterval<CqlDate>>(bu_, ci_);
 		IEnumerable<CqlInterval<CqlDate>> ck_ = context.Operators.Union<CqlInterval<CqlDate>>(bg_, cj_);
 		CqlValueSet cl_ = this.Guanfacine();
-		IEnumerable<MedicationRequest> cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
-		IEnumerable<MedicationRequest> co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, null);
+		IEnumerable<MedicationRequest> cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, default);
+		IEnumerable<MedicationRequest> co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, default);
 		IEnumerable<MedicationRequest> cp_ = context.Operators.Union<MedicationRequest>(cm_, co_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? cq_(MedicationRequest GuanfacineMed)
 		{
@@ -1298,9 +1298,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> cy_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(cx_);
 		CqlCode cz_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 		IEnumerable<CqlCode> da_ = context.Operators.ToList<CqlCode>(cz_);
-		IEnumerable<MedicationRequest> db_ = context.Operators.RetrieveByCodes<MedicationRequest>(da_, null);
+		IEnumerable<MedicationRequest> db_ = context.Operators.RetrieveByCodes<MedicationRequest>(da_, default);
 		IEnumerable<CqlCode> dd_ = context.Operators.ToList<CqlCode>(cz_);
-		IEnumerable<MedicationRequest> de_ = context.Operators.RetrieveByCodes<MedicationRequest>(dd_, null);
+		IEnumerable<MedicationRequest> de_ = context.Operators.RetrieveByCodes<MedicationRequest>(dd_, default);
 		IEnumerable<MedicationRequest> df_ = context.Operators.Union<MedicationRequest>(db_, de_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? dg_(MedicationRequest MethamphetamineMed)
 		{
@@ -1511,7 +1511,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<CqlDate> Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
 		CqlValueSet a_ = this.Online_Assessments();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter OnlineAssessment)
 		{
 			Period g_ = OnlineAssessment?.Period;

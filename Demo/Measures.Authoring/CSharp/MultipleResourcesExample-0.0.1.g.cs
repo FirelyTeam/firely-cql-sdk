@@ -50,7 +50,7 @@ public class MultipleResourcesExample_0_0_1
     #endregion
 
 	private CqlValueSet Lung_Cancer_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", default);
 
     [CqlDeclaration("Lung Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
@@ -58,7 +58,7 @@ public class MultipleResourcesExample_0_0_1
 		__Lung_Cancer.Value;
 
 	private CqlValueSet Condition_Clinical_Status_Value() => 
-		new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", null);
+		new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", default);
 
     [CqlDeclaration("Condition Clinical Status")]
     [CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical")]
@@ -66,7 +66,7 @@ public class MultipleResourcesExample_0_0_1
 		__Condition_Clinical_Status.Value;
 
 	private CqlCode Tobacco_Smoking_Status_Value() => 
-		new CqlCode("72166-2", "http://loinc.org", null, null);
+		new CqlCode("72166-2", "http://loinc.org", default, default);
 
     [CqlDeclaration("Tobacco Smoking Status")]
 	public CqlCode Tobacco_Smoking_Status() => 
@@ -75,7 +75,7 @@ public class MultipleResourcesExample_0_0_1
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("72166-2", "http://loinc.org", null, null),
+			new CqlCode("72166-2", "http://loinc.org", default, default),
 		];
 
 		return a_;
@@ -87,7 +87,7 @@ public class MultipleResourcesExample_0_0_1
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -101,7 +101,7 @@ public class MultipleResourcesExample_0_0_1
 	{
 		CqlCode a_ = this.Tobacco_Smoking_Status();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
 		bool? d_(Observation O)
 		{
 			Code<ObservationStatus> f_ = O?.StatusElement;
@@ -126,7 +126,7 @@ public class MultipleResourcesExample_0_0_1
 	private IEnumerable<Condition> Lung_cancer_diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Lung_Cancer();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition C)
 		{
 			CodeableConcept e_ = C?.ClinicalStatus;

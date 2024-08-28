@@ -98,7 +98,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
     #endregion
 
 	private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
@@ -106,7 +106,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Care_Services_in_Long_Term_Residential_Facility.Value;
 
 	private CqlValueSet Cup_to_Disc_Ratio_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333", default);
 
     [CqlDeclaration("Cup to Disc Ratio")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333")]
@@ -114,7 +114,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Cup_to_Disc_Ratio.Value;
 
 	private CqlValueSet Face_to_Face_Interaction_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", default);
 
     [CqlDeclaration("Face-to-Face Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048")]
@@ -122,7 +122,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Face_to_Face_Interaction.Value;
 
 	private CqlValueSet Medical_Reason_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
@@ -130,7 +130,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Medical_Reason.Value;
 
 	private CqlValueSet Nursing_Facility_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
@@ -138,7 +138,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Nursing_Facility_Visit.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
@@ -146,7 +146,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Office_Visit.Value;
 
 	private CqlValueSet Ophthalmological_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
 
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
@@ -154,7 +154,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Ophthalmological_Services.Value;
 
 	private CqlValueSet Optic_Disc_Exam_for_Structural_Abnormalities_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334", default);
 
     [CqlDeclaration("Optic Disc Exam for Structural Abnormalities")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334")]
@@ -162,7 +162,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Optic_Disc_Exam_for_Structural_Abnormalities.Value;
 
 	private CqlValueSet Outpatient_Consultation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
@@ -170,7 +170,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Outpatient_Consultation.Value;
 
 	private CqlValueSet Primary_Open_Angle_Glaucoma_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326", default);
 
     [CqlDeclaration("Primary Open-Angle Glaucoma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326")]
@@ -178,14 +178,14 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		__Primary_Open_Angle_Glaucoma.Value;
 
 	private CqlCode @virtual_Value() => 
-		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null);
+		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("virtual")]
 	public CqlCode @virtual() => 
 		__virtual.Value;
 
 	private CqlCode AMB_Value() => 
-		new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null);
+		new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("AMB")]
 	public CqlCode AMB() => 
@@ -194,8 +194,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private CqlCode[] ActCode_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
-			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", null, null),
+			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
+			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
 		];
 
 		return a_;
@@ -221,7 +221,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -278,25 +278,25 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet c_ = this.Ophthalmological_Services();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
 		CqlValueSet h_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
 		IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
 		bool? o_(Encounter QualifyingEncounter)
 		{
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			Period r_ = QualifyingEncounter?.Period;
 			CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
-			bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, null);
+			bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, default);
 			Code<Encounter.EncounterStatus> u_ = QualifyingEncounter?.StatusElement;
 			Encounter.EncounterStatus? v_ = u_?.Value;
 			Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
@@ -326,13 +326,13 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter)
 		{
 			CqlValueSet d_ = this.Primary_Open_Angle_Glaucoma();
-			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
+			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
 			bool? f_(Condition PrimaryOpenAngleGlaucoma)
 			{
 				CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.prevalenceInterval(PrimaryOpenAngleGlaucoma);
 				Period k_ = ValidQualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
-				bool? m_ = context.Operators.Overlaps(j_, l_, null);
+				bool? m_ = context.Operators.Overlaps(j_, l_, default);
 				bool? n_ = QICoreCommon_2_0_000.isActive(PrimaryOpenAngleGlaucoma);
 				bool? o_ = context.Operators.And(m_, n_);
 				CodeableConcept p_ = PrimaryOpenAngleGlaucoma?.VerificationStatus;
@@ -407,8 +407,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio_Value()
 	{
 		CqlValueSet a_ = this.Cup_to_Disc_Ratio();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation CupToDiscExamNotPerformed)
 		{
@@ -420,7 +420,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
 				Period r_ = EncounterWithPOAG?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
-				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, null);
+				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 
 				return t_;
 			};
@@ -445,7 +445,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			};
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((CupToDiscExamNotPerformed is DomainResource)
 					? ((CupToDiscExamNotPerformed as DomainResource).Extension)
-					: null), u_);
+					: default), u_);
 			DataType w_(Extension @this)
 			{
 				DataType ah_ = @this?.Value;
@@ -473,8 +473,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam_Value()
 	{
 		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
-		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation OpticDiscExamNotPerformed)
 		{
@@ -486,7 +486,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
 				Period r_ = EncounterWithPOAG?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
-				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, null);
+				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 
 				return t_;
 			};
@@ -511,7 +511,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			};
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((OpticDiscExamNotPerformed is DomainResource)
 					? ((OpticDiscExamNotPerformed as DomainResource).Extension)
-					: null), u_);
+					: default), u_);
 			DataType w_(Extension @this)
 			{
 				DataType ah_ = @this?.Value;
@@ -554,7 +554,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result_Value()
 	{
 		CqlValueSet a_ = this.Cup_to_Disc_Ratio();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		IEnumerable<Observation> c_(Observation CupToDiscExamPerformed)
 		{
 			IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter();
@@ -565,7 +565,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				DataType n_ = CupToDiscExamPerformed?.Effective;
 				object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
-				bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
+				bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
 
 				return q_;
 			};
@@ -608,7 +608,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result_Value()
 	{
 		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		IEnumerable<Observation> c_(Observation OpticDiscExamPerformed)
 		{
 			IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter();
@@ -619,7 +619,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				DataType n_ = OpticDiscExamPerformed?.Effective;
 				object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
-				bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
+				bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
 
 				return q_;
 			};

@@ -56,7 +56,7 @@ public class CQMCommon_2_0_000
     #endregion
 
 	private CqlValueSet Emergency_Department_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
@@ -64,7 +64,7 @@ public class CQMCommon_2_0_000
 		__Emergency_Department_Visit.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -72,7 +72,7 @@ public class CQMCommon_2_0_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Intensive_Care_Unit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", default);
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
@@ -80,7 +80,7 @@ public class CQMCommon_2_0_000
 		__Intensive_Care_Unit.Value;
 
 	private CqlValueSet Observation_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
@@ -88,7 +88,7 @@ public class CQMCommon_2_0_000
 		__Observation_Services.Value;
 
 	private CqlValueSet Outpatient_Surgery_Service_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38", default);
 
     [CqlDeclaration("Outpatient Surgery Service")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38")]
@@ -96,7 +96,7 @@ public class CQMCommon_2_0_000
 		__Outpatient_Surgery_Service.Value;
 
 	private CqlValueSet Present_on_Admission_or_Clinically_Undetermined_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default);
 
     [CqlDeclaration("Present on Admission or Clinically Undetermined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197")]
@@ -119,7 +119,7 @@ public class CQMCommon_2_0_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -132,7 +132,7 @@ public class CQMCommon_2_0_000
 	private IEnumerable<Encounter> Inpatient_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter EncounterInpatient)
 		{
 			Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
@@ -200,7 +200,7 @@ public class CQMCommon_2_0_000
 	public Encounter ED_Visit(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter EDVisit)
 		{
 			Code<Encounter.EncounterStatus> h_ = EDVisit?.StatusElement;
@@ -218,7 +218,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_3_000.ToInterval(o_);
 			CqlDateTime v_ = context.Operators.Start(u_);
 			CqlInterval<CqlDateTime> w_ = context.Operators.Interval(s_, v_, true, true);
-			bool? x_ = context.Operators.In<CqlDateTime>(n_, w_, null);
+			bool? x_ = context.Operators.In<CqlDateTime>(n_, w_, default);
 			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(o_);
 			CqlDateTime aa_ = context.Operators.Start(z_);
 			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
@@ -247,7 +247,7 @@ public class CQMCommon_2_0_000
 	public Encounter edVisit(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter EDVisit)
 		{
 			Code<Encounter.EncounterStatus> h_ = EDVisit?.StatusElement;
@@ -265,7 +265,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_3_000.ToInterval(o_);
 			CqlDateTime v_ = context.Operators.Start(u_);
 			CqlInterval<CqlDateTime> w_ = context.Operators.Interval(s_, v_, true, true);
-			bool? x_ = context.Operators.In<CqlDateTime>(n_, w_, null);
+			bool? x_ = context.Operators.In<CqlDateTime>(n_, w_, default);
 			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(o_);
 			CqlDateTime aa_ = context.Operators.Start(z_);
 			bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
@@ -613,7 +613,7 @@ public class CQMCommon_2_0_000
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getLocation()` instead.")]
 	public Location GetLocation(ResourceReference reference)
 	{
-		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(null, null);
+		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(default, default);
 		bool? b_(Location L)
 		{
 			Id e_ = L?.IdElement;
@@ -704,14 +704,14 @@ public class CQMCommon_2_0_000
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Outpatient_Surgery_Service();
-			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, null);
+			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
 			bool? g_(Encounter LastSurgeryOP)
 			{
 				Period ap_ = LastSurgeryOP?.Period;
 				CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_3_000.ToInterval(ap_);
 				CqlDateTime ar_ = context.Operators.End(aq_);
 				CqlValueSet as_ = this.Emergency_Department_Visit();
-				IEnumerable<Encounter> at_ = context.Operators.RetrieveByValueSet<Encounter>(as_, null);
+				IEnumerable<Encounter> at_ = context.Operators.RetrieveByValueSet<Encounter>(as_, default);
 				bool? au_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> dp_ = LastED?.StatusElement;
@@ -722,7 +722,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> du_ = FHIRHelpers_4_3_000.ToInterval(dt_);
 					CqlDateTime dv_ = context.Operators.End(du_);
 					CqlValueSet dw_ = this.Observation_Services();
-					IEnumerable<Encounter> dx_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, null);
+					IEnumerable<Encounter> dx_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, default);
 					bool? dy_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> fq_ = LastObs?.StatusElement;
@@ -740,7 +740,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> gd_ = FHIRHelpers_4_3_000.ToInterval(fx_);
 						CqlDateTime ge_ = context.Operators.Start(gd_);
 						CqlInterval<CqlDateTime> gf_ = context.Operators.Interval(gb_, ge_, true, true);
-						bool? gg_ = context.Operators.In<CqlDateTime>(fw_, gf_, null);
+						bool? gg_ = context.Operators.In<CqlDateTime>(fw_, gf_, default);
 						CqlInterval<CqlDateTime> gi_ = FHIRHelpers_4_3_000.ToInterval(fx_);
 						CqlDateTime gj_ = context.Operators.Start(gi_);
 						bool? gk_ = context.Operators.Not((bool?)(gj_ is null));
@@ -768,7 +768,7 @@ public class CQMCommon_2_0_000
 					CqlDateTime ei_ = context.Operators.Start(eh_);
 					CqlQuantity ej_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime ek_ = context.Operators.Subtract((ef_ ?? ei_), ej_);
-					IEnumerable<Encounter> em_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, null);
+					IEnumerable<Encounter> em_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, default);
 					bool? en_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> gq_ = LastObs?.StatusElement;
@@ -786,7 +786,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> hd_ = FHIRHelpers_4_3_000.ToInterval(gx_);
 						CqlDateTime he_ = context.Operators.Start(hd_);
 						CqlInterval<CqlDateTime> hf_ = context.Operators.Interval(hb_, he_, true, true);
-						bool? hg_ = context.Operators.In<CqlDateTime>(gw_, hf_, null);
+						bool? hg_ = context.Operators.In<CqlDateTime>(gw_, hf_, default);
 						CqlInterval<CqlDateTime> hi_ = FHIRHelpers_4_3_000.ToInterval(gx_);
 						CqlDateTime hj_ = context.Operators.Start(hi_);
 						bool? hk_ = context.Operators.Not((bool?)(hj_ is null));
@@ -812,8 +812,8 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> ew_ = FHIRHelpers_4_3_000.ToInterval(eg_);
 					CqlDateTime ex_ = context.Operators.Start(ew_);
 					CqlInterval<CqlDateTime> ey_ = context.Operators.Interval(ek_, (eu_ ?? ex_), true, true);
-					bool? ez_ = context.Operators.In<CqlDateTime>(dv_, ey_, null);
-					IEnumerable<Encounter> fb_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, null);
+					bool? ez_ = context.Operators.In<CqlDateTime>(dv_, ey_, default);
+					IEnumerable<Encounter> fb_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, default);
 					bool? fc_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> hq_ = LastObs?.StatusElement;
@@ -831,7 +831,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> id_ = FHIRHelpers_4_3_000.ToInterval(hx_);
 						CqlDateTime ie_ = context.Operators.Start(id_);
 						CqlInterval<CqlDateTime> if_ = context.Operators.Interval(ib_, ie_, true, true);
-						bool? ig_ = context.Operators.In<CqlDateTime>(hw_, if_, null);
+						bool? ig_ = context.Operators.In<CqlDateTime>(hw_, if_, default);
 						CqlInterval<CqlDateTime> ii_ = FHIRHelpers_4_3_000.ToInterval(hx_);
 						CqlDateTime ij_ = context.Operators.Start(ii_);
 						bool? ik_ = context.Operators.Not((bool?)(ij_ is null));
@@ -877,7 +877,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_3_000.ToInterval(az_);
 				CqlDateTime bb_ = context.Operators.Start(ba_);
 				CqlValueSet bc_ = this.Observation_Services();
-				IEnumerable<Encounter> bd_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, null);
+				IEnumerable<Encounter> bd_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, default);
 				bool? be_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> it_ = LastObs?.StatusElement;
@@ -895,7 +895,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> jg_ = FHIRHelpers_4_3_000.ToInterval(ja_);
 					CqlDateTime jh_ = context.Operators.Start(jg_);
 					CqlInterval<CqlDateTime> ji_ = context.Operators.Interval(je_, jh_, true, true);
-					bool? jj_ = context.Operators.In<CqlDateTime>(iz_, ji_, null);
+					bool? jj_ = context.Operators.In<CqlDateTime>(iz_, ji_, default);
 					CqlInterval<CqlDateTime> jl_ = FHIRHelpers_4_3_000.ToInterval(ja_);
 					CqlDateTime jm_ = context.Operators.Start(jl_);
 					bool? jn_ = context.Operators.Not((bool?)(jm_ is null));
@@ -923,7 +923,7 @@ public class CQMCommon_2_0_000
 				CqlDateTime bo_ = context.Operators.Start(bn_);
 				CqlQuantity bp_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime bq_ = context.Operators.Subtract((bb_ ?? (bl_ ?? bo_)), bp_);
-				IEnumerable<Encounter> bs_ = context.Operators.RetrieveByValueSet<Encounter>(as_, null);
+				IEnumerable<Encounter> bs_ = context.Operators.RetrieveByValueSet<Encounter>(as_, default);
 				bool? bt_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> jt_ = LastED?.StatusElement;
@@ -934,7 +934,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> jy_ = FHIRHelpers_4_3_000.ToInterval(jx_);
 					CqlDateTime jz_ = context.Operators.End(jy_);
 					CqlValueSet ka_ = this.Observation_Services();
-					IEnumerable<Encounter> kb_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, null);
+					IEnumerable<Encounter> kb_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, default);
 					bool? kc_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> lu_ = LastObs?.StatusElement;
@@ -952,7 +952,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> mh_ = FHIRHelpers_4_3_000.ToInterval(mb_);
 						CqlDateTime mi_ = context.Operators.Start(mh_);
 						CqlInterval<CqlDateTime> mj_ = context.Operators.Interval(mf_, mi_, true, true);
-						bool? mk_ = context.Operators.In<CqlDateTime>(ma_, mj_, null);
+						bool? mk_ = context.Operators.In<CqlDateTime>(ma_, mj_, default);
 						CqlInterval<CqlDateTime> mm_ = FHIRHelpers_4_3_000.ToInterval(mb_);
 						CqlDateTime mn_ = context.Operators.Start(mm_);
 						bool? mo_ = context.Operators.Not((bool?)(mn_ is null));
@@ -980,7 +980,7 @@ public class CQMCommon_2_0_000
 					CqlDateTime km_ = context.Operators.Start(kl_);
 					CqlQuantity kn_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime ko_ = context.Operators.Subtract((kj_ ?? km_), kn_);
-					IEnumerable<Encounter> kq_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, null);
+					IEnumerable<Encounter> kq_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, default);
 					bool? kr_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> mu_ = LastObs?.StatusElement;
@@ -998,7 +998,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> nh_ = FHIRHelpers_4_3_000.ToInterval(nb_);
 						CqlDateTime ni_ = context.Operators.Start(nh_);
 						CqlInterval<CqlDateTime> nj_ = context.Operators.Interval(nf_, ni_, true, true);
-						bool? nk_ = context.Operators.In<CqlDateTime>(na_, nj_, null);
+						bool? nk_ = context.Operators.In<CqlDateTime>(na_, nj_, default);
 						CqlInterval<CqlDateTime> nm_ = FHIRHelpers_4_3_000.ToInterval(nb_);
 						CqlDateTime nn_ = context.Operators.Start(nm_);
 						bool? no_ = context.Operators.Not((bool?)(nn_ is null));
@@ -1024,8 +1024,8 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> la_ = FHIRHelpers_4_3_000.ToInterval(kk_);
 					CqlDateTime lb_ = context.Operators.Start(la_);
 					CqlInterval<CqlDateTime> lc_ = context.Operators.Interval(ko_, (ky_ ?? lb_), true, true);
-					bool? ld_ = context.Operators.In<CqlDateTime>(jz_, lc_, null);
-					IEnumerable<Encounter> lf_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, null);
+					bool? ld_ = context.Operators.In<CqlDateTime>(jz_, lc_, default);
+					IEnumerable<Encounter> lf_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, default);
 					bool? lg_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> nu_ = LastObs?.StatusElement;
@@ -1043,7 +1043,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> oh_ = FHIRHelpers_4_3_000.ToInterval(ob_);
 						CqlDateTime oi_ = context.Operators.Start(oh_);
 						CqlInterval<CqlDateTime> oj_ = context.Operators.Interval(of_, oi_, true, true);
-						bool? ok_ = context.Operators.In<CqlDateTime>(oa_, oj_, null);
+						bool? ok_ = context.Operators.In<CqlDateTime>(oa_, oj_, default);
 						CqlInterval<CqlDateTime> om_ = FHIRHelpers_4_3_000.ToInterval(ob_);
 						CqlDateTime on_ = context.Operators.Start(om_);
 						bool? oo_ = context.Operators.Not((bool?)(on_ is null));
@@ -1088,7 +1088,7 @@ public class CQMCommon_2_0_000
 				Period by_ = bx_?.Period;
 				CqlInterval<CqlDateTime> bz_ = FHIRHelpers_4_3_000.ToInterval(by_);
 				CqlDateTime ca_ = context.Operators.Start(bz_);
-				IEnumerable<Encounter> cc_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, null);
+				IEnumerable<Encounter> cc_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, default);
 				bool? cd_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> ox_ = LastObs?.StatusElement;
@@ -1106,7 +1106,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> pk_ = FHIRHelpers_4_3_000.ToInterval(pe_);
 					CqlDateTime pl_ = context.Operators.Start(pk_);
 					CqlInterval<CqlDateTime> pm_ = context.Operators.Interval(pi_, pl_, true, true);
-					bool? pn_ = context.Operators.In<CqlDateTime>(pd_, pm_, null);
+					bool? pn_ = context.Operators.In<CqlDateTime>(pd_, pm_, default);
 					CqlInterval<CqlDateTime> pp_ = FHIRHelpers_4_3_000.ToInterval(pe_);
 					CqlDateTime pq_ = context.Operators.Start(pp_);
 					bool? pr_ = context.Operators.Not((bool?)(pq_ is null));
@@ -1132,8 +1132,8 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> cm_ = FHIRHelpers_4_3_000.ToInterval(bm_);
 				CqlDateTime cn_ = context.Operators.Start(cm_);
 				CqlInterval<CqlDateTime> co_ = context.Operators.Interval(bq_, (ca_ ?? (ck_ ?? cn_)), true, true);
-				bool? cp_ = context.Operators.In<CqlDateTime>(ar_, co_, null);
-				IEnumerable<Encounter> cr_ = context.Operators.RetrieveByValueSet<Encounter>(as_, null);
+				bool? cp_ = context.Operators.In<CqlDateTime>(ar_, co_, default);
+				IEnumerable<Encounter> cr_ = context.Operators.RetrieveByValueSet<Encounter>(as_, default);
 				bool? cs_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> px_ = LastED?.StatusElement;
@@ -1144,7 +1144,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> qc_ = FHIRHelpers_4_3_000.ToInterval(qb_);
 					CqlDateTime qd_ = context.Operators.End(qc_);
 					CqlValueSet qe_ = this.Observation_Services();
-					IEnumerable<Encounter> qf_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, null);
+					IEnumerable<Encounter> qf_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, default);
 					bool? qg_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> ry_ = LastObs?.StatusElement;
@@ -1162,7 +1162,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> sl_ = FHIRHelpers_4_3_000.ToInterval(sf_);
 						CqlDateTime sm_ = context.Operators.Start(sl_);
 						CqlInterval<CqlDateTime> sn_ = context.Operators.Interval(sj_, sm_, true, true);
-						bool? so_ = context.Operators.In<CqlDateTime>(se_, sn_, null);
+						bool? so_ = context.Operators.In<CqlDateTime>(se_, sn_, default);
 						CqlInterval<CqlDateTime> sq_ = FHIRHelpers_4_3_000.ToInterval(sf_);
 						CqlDateTime sr_ = context.Operators.Start(sq_);
 						bool? ss_ = context.Operators.Not((bool?)(sr_ is null));
@@ -1190,7 +1190,7 @@ public class CQMCommon_2_0_000
 					CqlDateTime qq_ = context.Operators.Start(qp_);
 					CqlQuantity qr_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime qs_ = context.Operators.Subtract((qn_ ?? qq_), qr_);
-					IEnumerable<Encounter> qu_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, null);
+					IEnumerable<Encounter> qu_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, default);
 					bool? qv_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> sy_ = LastObs?.StatusElement;
@@ -1208,7 +1208,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> tl_ = FHIRHelpers_4_3_000.ToInterval(tf_);
 						CqlDateTime tm_ = context.Operators.Start(tl_);
 						CqlInterval<CqlDateTime> tn_ = context.Operators.Interval(tj_, tm_, true, true);
-						bool? to_ = context.Operators.In<CqlDateTime>(te_, tn_, null);
+						bool? to_ = context.Operators.In<CqlDateTime>(te_, tn_, default);
 						CqlInterval<CqlDateTime> tq_ = FHIRHelpers_4_3_000.ToInterval(tf_);
 						CqlDateTime tr_ = context.Operators.Start(tq_);
 						bool? ts_ = context.Operators.Not((bool?)(tr_ is null));
@@ -1234,8 +1234,8 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> re_ = FHIRHelpers_4_3_000.ToInterval(qo_);
 					CqlDateTime rf_ = context.Operators.Start(re_);
 					CqlInterval<CqlDateTime> rg_ = context.Operators.Interval(qs_, (rc_ ?? rf_), true, true);
-					bool? rh_ = context.Operators.In<CqlDateTime>(qd_, rg_, null);
-					IEnumerable<Encounter> rj_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, null);
+					bool? rh_ = context.Operators.In<CqlDateTime>(qd_, rg_, default);
+					IEnumerable<Encounter> rj_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, default);
 					bool? rk_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> ty_ = LastObs?.StatusElement;
@@ -1253,7 +1253,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> ul_ = FHIRHelpers_4_3_000.ToInterval(uf_);
 						CqlDateTime um_ = context.Operators.Start(ul_);
 						CqlInterval<CqlDateTime> un_ = context.Operators.Interval(uj_, um_, true, true);
-						bool? uo_ = context.Operators.In<CqlDateTime>(ue_, un_, null);
+						bool? uo_ = context.Operators.In<CqlDateTime>(ue_, un_, default);
 						CqlInterval<CqlDateTime> uq_ = FHIRHelpers_4_3_000.ToInterval(uf_);
 						CqlDateTime ur_ = context.Operators.Start(uq_);
 						bool? us_ = context.Operators.Not((bool?)(ur_ is null));
@@ -1298,7 +1298,7 @@ public class CQMCommon_2_0_000
 				Period cx_ = cw_?.Period;
 				CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_3_000.ToInterval(cx_);
 				CqlDateTime cz_ = context.Operators.Start(cy_);
-				IEnumerable<Encounter> db_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, null);
+				IEnumerable<Encounter> db_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, default);
 				bool? dc_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> vb_ = LastObs?.StatusElement;
@@ -1316,7 +1316,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> vo_ = FHIRHelpers_4_3_000.ToInterval(vi_);
 					CqlDateTime vp_ = context.Operators.Start(vo_);
 					CqlInterval<CqlDateTime> vq_ = context.Operators.Interval(vm_, vp_, true, true);
-					bool? vr_ = context.Operators.In<CqlDateTime>(vh_, vq_, null);
+					bool? vr_ = context.Operators.In<CqlDateTime>(vh_, vq_, default);
 					CqlInterval<CqlDateTime> vt_ = FHIRHelpers_4_3_000.ToInterval(vi_);
 					CqlDateTime vu_ = context.Operators.Start(vt_);
 					bool? vv_ = context.Operators.Not((bool?)(vu_ is null));
@@ -1361,7 +1361,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Emergency_Department_Visit();
-			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
+			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
 			bool? q_(Encounter LastED)
 			{
 				Code<Encounter.EncounterStatus> we_ = LastED?.StatusElement;
@@ -1372,7 +1372,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> wj_ = FHIRHelpers_4_3_000.ToInterval(wi_);
 				CqlDateTime wk_ = context.Operators.End(wj_);
 				CqlValueSet wl_ = this.Observation_Services();
-				IEnumerable<Encounter> wm_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, null);
+				IEnumerable<Encounter> wm_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, default);
 				bool? wn_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> yf_ = LastObs?.StatusElement;
@@ -1390,7 +1390,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> ys_ = FHIRHelpers_4_3_000.ToInterval(ym_);
 					CqlDateTime yt_ = context.Operators.Start(ys_);
 					CqlInterval<CqlDateTime> yu_ = context.Operators.Interval(yq_, yt_, true, true);
-					bool? yv_ = context.Operators.In<CqlDateTime>(yl_, yu_, null);
+					bool? yv_ = context.Operators.In<CqlDateTime>(yl_, yu_, default);
 					CqlInterval<CqlDateTime> yx_ = FHIRHelpers_4_3_000.ToInterval(ym_);
 					CqlDateTime yy_ = context.Operators.Start(yx_);
 					bool? yz_ = context.Operators.Not((bool?)(yy_ is null));
@@ -1418,7 +1418,7 @@ public class CQMCommon_2_0_000
 				CqlDateTime wx_ = context.Operators.Start(ww_);
 				CqlQuantity wy_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime wz_ = context.Operators.Subtract((wu_ ?? wx_), wy_);
-				IEnumerable<Encounter> xb_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, null);
+				IEnumerable<Encounter> xb_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, default);
 				bool? xc_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> zf_ = LastObs?.StatusElement;
@@ -1436,7 +1436,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> zs_ = FHIRHelpers_4_3_000.ToInterval(zm_);
 					CqlDateTime zt_ = context.Operators.Start(zs_);
 					CqlInterval<CqlDateTime> zu_ = context.Operators.Interval(zq_, zt_, true, true);
-					bool? zv_ = context.Operators.In<CqlDateTime>(zl_, zu_, null);
+					bool? zv_ = context.Operators.In<CqlDateTime>(zl_, zu_, default);
 					CqlInterval<CqlDateTime> zx_ = FHIRHelpers_4_3_000.ToInterval(zm_);
 					CqlDateTime zy_ = context.Operators.Start(zx_);
 					bool? zz_ = context.Operators.Not((bool?)(zy_ is null));
@@ -1462,8 +1462,8 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> xl_ = FHIRHelpers_4_3_000.ToInterval(wv_);
 				CqlDateTime xm_ = context.Operators.Start(xl_);
 				CqlInterval<CqlDateTime> xn_ = context.Operators.Interval(wz_, (xj_ ?? xm_), true, true);
-				bool? xo_ = context.Operators.In<CqlDateTime>(wk_, xn_, null);
-				IEnumerable<Encounter> xq_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, null);
+				bool? xo_ = context.Operators.In<CqlDateTime>(wk_, xn_, default);
+				IEnumerable<Encounter> xq_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, default);
 				bool? xr_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> azf_ = LastObs?.StatusElement;
@@ -1481,7 +1481,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> azs_ = FHIRHelpers_4_3_000.ToInterval(azm_);
 					CqlDateTime azt_ = context.Operators.Start(azs_);
 					CqlInterval<CqlDateTime> azu_ = context.Operators.Interval(azq_, azt_, true, true);
-					bool? azv_ = context.Operators.In<CqlDateTime>(azl_, azu_, null);
+					bool? azv_ = context.Operators.In<CqlDateTime>(azl_, azu_, default);
 					CqlInterval<CqlDateTime> azx_ = FHIRHelpers_4_3_000.ToInterval(azm_);
 					CqlDateTime azy_ = context.Operators.Start(azx_);
 					bool? azz_ = context.Operators.Not((bool?)(azy_ is null));
@@ -1527,7 +1527,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_3_000.ToInterval(v_);
 			CqlDateTime x_ = context.Operators.Start(w_);
 			CqlValueSet y_ = this.Observation_Services();
-			IEnumerable<Encounter> z_ = context.Operators.RetrieveByValueSet<Encounter>(y_, null);
+			IEnumerable<Encounter> z_ = context.Operators.RetrieveByValueSet<Encounter>(y_, default);
 			bool? aa_(Encounter LastObs)
 			{
 				Code<Encounter.EncounterStatus> bzi_ = LastObs?.StatusElement;
@@ -1545,7 +1545,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> bzv_ = FHIRHelpers_4_3_000.ToInterval(bzp_);
 				CqlDateTime bzw_ = context.Operators.Start(bzv_);
 				CqlInterval<CqlDateTime> bzx_ = context.Operators.Interval(bzt_, bzw_, true, true);
-				bool? bzy_ = context.Operators.In<CqlDateTime>(bzo_, bzx_, null);
+				bool? bzy_ = context.Operators.In<CqlDateTime>(bzo_, bzx_, default);
 				CqlInterval<CqlDateTime> cza_ = FHIRHelpers_4_3_000.ToInterval(bzp_);
 				CqlDateTime czb_ = context.Operators.Start(cza_);
 				bool? czc_ = context.Operators.Not((bool?)(czb_ is null));
@@ -1593,14 +1593,14 @@ public class CQMCommon_2_0_000
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Outpatient_Surgery_Service();
-			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, null);
+			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
 			bool? g_(Encounter LastSurgeryOP)
 			{
 				Period ap_ = LastSurgeryOP?.Period;
 				CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_3_000.ToInterval(ap_);
 				CqlDateTime ar_ = context.Operators.End(aq_);
 				CqlValueSet as_ = this.Emergency_Department_Visit();
-				IEnumerable<Encounter> at_ = context.Operators.RetrieveByValueSet<Encounter>(as_, null);
+				IEnumerable<Encounter> at_ = context.Operators.RetrieveByValueSet<Encounter>(as_, default);
 				bool? au_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> dp_ = LastED?.StatusElement;
@@ -1611,7 +1611,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> du_ = FHIRHelpers_4_3_000.ToInterval(dt_);
 					CqlDateTime dv_ = context.Operators.End(du_);
 					CqlValueSet dw_ = this.Observation_Services();
-					IEnumerable<Encounter> dx_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, null);
+					IEnumerable<Encounter> dx_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, default);
 					bool? dy_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> fq_ = LastObs?.StatusElement;
@@ -1629,7 +1629,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> gd_ = FHIRHelpers_4_3_000.ToInterval(fx_);
 						CqlDateTime ge_ = context.Operators.Start(gd_);
 						CqlInterval<CqlDateTime> gf_ = context.Operators.Interval(gb_, ge_, true, true);
-						bool? gg_ = context.Operators.In<CqlDateTime>(fw_, gf_, null);
+						bool? gg_ = context.Operators.In<CqlDateTime>(fw_, gf_, default);
 						CqlInterval<CqlDateTime> gi_ = FHIRHelpers_4_3_000.ToInterval(fx_);
 						CqlDateTime gj_ = context.Operators.Start(gi_);
 						bool? gk_ = context.Operators.Not((bool?)(gj_ is null));
@@ -1657,7 +1657,7 @@ public class CQMCommon_2_0_000
 					CqlDateTime ei_ = context.Operators.Start(eh_);
 					CqlQuantity ej_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime ek_ = context.Operators.Subtract((ef_ ?? ei_), ej_);
-					IEnumerable<Encounter> em_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, null);
+					IEnumerable<Encounter> em_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, default);
 					bool? en_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> gq_ = LastObs?.StatusElement;
@@ -1675,7 +1675,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> hd_ = FHIRHelpers_4_3_000.ToInterval(gx_);
 						CqlDateTime he_ = context.Operators.Start(hd_);
 						CqlInterval<CqlDateTime> hf_ = context.Operators.Interval(hb_, he_, true, true);
-						bool? hg_ = context.Operators.In<CqlDateTime>(gw_, hf_, null);
+						bool? hg_ = context.Operators.In<CqlDateTime>(gw_, hf_, default);
 						CqlInterval<CqlDateTime> hi_ = FHIRHelpers_4_3_000.ToInterval(gx_);
 						CqlDateTime hj_ = context.Operators.Start(hi_);
 						bool? hk_ = context.Operators.Not((bool?)(hj_ is null));
@@ -1701,8 +1701,8 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> ew_ = FHIRHelpers_4_3_000.ToInterval(eg_);
 					CqlDateTime ex_ = context.Operators.Start(ew_);
 					CqlInterval<CqlDateTime> ey_ = context.Operators.Interval(ek_, (eu_ ?? ex_), true, true);
-					bool? ez_ = context.Operators.In<CqlDateTime>(dv_, ey_, null);
-					IEnumerable<Encounter> fb_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, null);
+					bool? ez_ = context.Operators.In<CqlDateTime>(dv_, ey_, default);
+					IEnumerable<Encounter> fb_ = context.Operators.RetrieveByValueSet<Encounter>(dw_, default);
 					bool? fc_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> hq_ = LastObs?.StatusElement;
@@ -1720,7 +1720,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> id_ = FHIRHelpers_4_3_000.ToInterval(hx_);
 						CqlDateTime ie_ = context.Operators.Start(id_);
 						CqlInterval<CqlDateTime> if_ = context.Operators.Interval(ib_, ie_, true, true);
-						bool? ig_ = context.Operators.In<CqlDateTime>(hw_, if_, null);
+						bool? ig_ = context.Operators.In<CqlDateTime>(hw_, if_, default);
 						CqlInterval<CqlDateTime> ii_ = FHIRHelpers_4_3_000.ToInterval(hx_);
 						CqlDateTime ij_ = context.Operators.Start(ii_);
 						bool? ik_ = context.Operators.Not((bool?)(ij_ is null));
@@ -1766,7 +1766,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_3_000.ToInterval(az_);
 				CqlDateTime bb_ = context.Operators.Start(ba_);
 				CqlValueSet bc_ = this.Observation_Services();
-				IEnumerable<Encounter> bd_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, null);
+				IEnumerable<Encounter> bd_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, default);
 				bool? be_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> it_ = LastObs?.StatusElement;
@@ -1784,7 +1784,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> jg_ = FHIRHelpers_4_3_000.ToInterval(ja_);
 					CqlDateTime jh_ = context.Operators.Start(jg_);
 					CqlInterval<CqlDateTime> ji_ = context.Operators.Interval(je_, jh_, true, true);
-					bool? jj_ = context.Operators.In<CqlDateTime>(iz_, ji_, null);
+					bool? jj_ = context.Operators.In<CqlDateTime>(iz_, ji_, default);
 					CqlInterval<CqlDateTime> jl_ = FHIRHelpers_4_3_000.ToInterval(ja_);
 					CqlDateTime jm_ = context.Operators.Start(jl_);
 					bool? jn_ = context.Operators.Not((bool?)(jm_ is null));
@@ -1812,7 +1812,7 @@ public class CQMCommon_2_0_000
 				CqlDateTime bo_ = context.Operators.Start(bn_);
 				CqlQuantity bp_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime bq_ = context.Operators.Subtract((bb_ ?? (bl_ ?? bo_)), bp_);
-				IEnumerable<Encounter> bs_ = context.Operators.RetrieveByValueSet<Encounter>(as_, null);
+				IEnumerable<Encounter> bs_ = context.Operators.RetrieveByValueSet<Encounter>(as_, default);
 				bool? bt_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> jt_ = LastED?.StatusElement;
@@ -1823,7 +1823,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> jy_ = FHIRHelpers_4_3_000.ToInterval(jx_);
 					CqlDateTime jz_ = context.Operators.End(jy_);
 					CqlValueSet ka_ = this.Observation_Services();
-					IEnumerable<Encounter> kb_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, null);
+					IEnumerable<Encounter> kb_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, default);
 					bool? kc_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> lu_ = LastObs?.StatusElement;
@@ -1841,7 +1841,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> mh_ = FHIRHelpers_4_3_000.ToInterval(mb_);
 						CqlDateTime mi_ = context.Operators.Start(mh_);
 						CqlInterval<CqlDateTime> mj_ = context.Operators.Interval(mf_, mi_, true, true);
-						bool? mk_ = context.Operators.In<CqlDateTime>(ma_, mj_, null);
+						bool? mk_ = context.Operators.In<CqlDateTime>(ma_, mj_, default);
 						CqlInterval<CqlDateTime> mm_ = FHIRHelpers_4_3_000.ToInterval(mb_);
 						CqlDateTime mn_ = context.Operators.Start(mm_);
 						bool? mo_ = context.Operators.Not((bool?)(mn_ is null));
@@ -1869,7 +1869,7 @@ public class CQMCommon_2_0_000
 					CqlDateTime km_ = context.Operators.Start(kl_);
 					CqlQuantity kn_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime ko_ = context.Operators.Subtract((kj_ ?? km_), kn_);
-					IEnumerable<Encounter> kq_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, null);
+					IEnumerable<Encounter> kq_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, default);
 					bool? kr_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> mu_ = LastObs?.StatusElement;
@@ -1887,7 +1887,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> nh_ = FHIRHelpers_4_3_000.ToInterval(nb_);
 						CqlDateTime ni_ = context.Operators.Start(nh_);
 						CqlInterval<CqlDateTime> nj_ = context.Operators.Interval(nf_, ni_, true, true);
-						bool? nk_ = context.Operators.In<CqlDateTime>(na_, nj_, null);
+						bool? nk_ = context.Operators.In<CqlDateTime>(na_, nj_, default);
 						CqlInterval<CqlDateTime> nm_ = FHIRHelpers_4_3_000.ToInterval(nb_);
 						CqlDateTime nn_ = context.Operators.Start(nm_);
 						bool? no_ = context.Operators.Not((bool?)(nn_ is null));
@@ -1913,8 +1913,8 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> la_ = FHIRHelpers_4_3_000.ToInterval(kk_);
 					CqlDateTime lb_ = context.Operators.Start(la_);
 					CqlInterval<CqlDateTime> lc_ = context.Operators.Interval(ko_, (ky_ ?? lb_), true, true);
-					bool? ld_ = context.Operators.In<CqlDateTime>(jz_, lc_, null);
-					IEnumerable<Encounter> lf_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, null);
+					bool? ld_ = context.Operators.In<CqlDateTime>(jz_, lc_, default);
+					IEnumerable<Encounter> lf_ = context.Operators.RetrieveByValueSet<Encounter>(ka_, default);
 					bool? lg_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> nu_ = LastObs?.StatusElement;
@@ -1932,7 +1932,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> oh_ = FHIRHelpers_4_3_000.ToInterval(ob_);
 						CqlDateTime oi_ = context.Operators.Start(oh_);
 						CqlInterval<CqlDateTime> oj_ = context.Operators.Interval(of_, oi_, true, true);
-						bool? ok_ = context.Operators.In<CqlDateTime>(oa_, oj_, null);
+						bool? ok_ = context.Operators.In<CqlDateTime>(oa_, oj_, default);
 						CqlInterval<CqlDateTime> om_ = FHIRHelpers_4_3_000.ToInterval(ob_);
 						CqlDateTime on_ = context.Operators.Start(om_);
 						bool? oo_ = context.Operators.Not((bool?)(on_ is null));
@@ -1977,7 +1977,7 @@ public class CQMCommon_2_0_000
 				Period by_ = bx_?.Period;
 				CqlInterval<CqlDateTime> bz_ = FHIRHelpers_4_3_000.ToInterval(by_);
 				CqlDateTime ca_ = context.Operators.Start(bz_);
-				IEnumerable<Encounter> cc_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, null);
+				IEnumerable<Encounter> cc_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, default);
 				bool? cd_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> ox_ = LastObs?.StatusElement;
@@ -1995,7 +1995,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> pk_ = FHIRHelpers_4_3_000.ToInterval(pe_);
 					CqlDateTime pl_ = context.Operators.Start(pk_);
 					CqlInterval<CqlDateTime> pm_ = context.Operators.Interval(pi_, pl_, true, true);
-					bool? pn_ = context.Operators.In<CqlDateTime>(pd_, pm_, null);
+					bool? pn_ = context.Operators.In<CqlDateTime>(pd_, pm_, default);
 					CqlInterval<CqlDateTime> pp_ = FHIRHelpers_4_3_000.ToInterval(pe_);
 					CqlDateTime pq_ = context.Operators.Start(pp_);
 					bool? pr_ = context.Operators.Not((bool?)(pq_ is null));
@@ -2021,8 +2021,8 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> cm_ = FHIRHelpers_4_3_000.ToInterval(bm_);
 				CqlDateTime cn_ = context.Operators.Start(cm_);
 				CqlInterval<CqlDateTime> co_ = context.Operators.Interval(bq_, (ca_ ?? (ck_ ?? cn_)), true, true);
-				bool? cp_ = context.Operators.In<CqlDateTime>(ar_, co_, null);
-				IEnumerable<Encounter> cr_ = context.Operators.RetrieveByValueSet<Encounter>(as_, null);
+				bool? cp_ = context.Operators.In<CqlDateTime>(ar_, co_, default);
+				IEnumerable<Encounter> cr_ = context.Operators.RetrieveByValueSet<Encounter>(as_, default);
 				bool? cs_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> px_ = LastED?.StatusElement;
@@ -2033,7 +2033,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> qc_ = FHIRHelpers_4_3_000.ToInterval(qb_);
 					CqlDateTime qd_ = context.Operators.End(qc_);
 					CqlValueSet qe_ = this.Observation_Services();
-					IEnumerable<Encounter> qf_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, null);
+					IEnumerable<Encounter> qf_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, default);
 					bool? qg_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> ry_ = LastObs?.StatusElement;
@@ -2051,7 +2051,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> sl_ = FHIRHelpers_4_3_000.ToInterval(sf_);
 						CqlDateTime sm_ = context.Operators.Start(sl_);
 						CqlInterval<CqlDateTime> sn_ = context.Operators.Interval(sj_, sm_, true, true);
-						bool? so_ = context.Operators.In<CqlDateTime>(se_, sn_, null);
+						bool? so_ = context.Operators.In<CqlDateTime>(se_, sn_, default);
 						CqlInterval<CqlDateTime> sq_ = FHIRHelpers_4_3_000.ToInterval(sf_);
 						CqlDateTime sr_ = context.Operators.Start(sq_);
 						bool? ss_ = context.Operators.Not((bool?)(sr_ is null));
@@ -2079,7 +2079,7 @@ public class CQMCommon_2_0_000
 					CqlDateTime qq_ = context.Operators.Start(qp_);
 					CqlQuantity qr_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime qs_ = context.Operators.Subtract((qn_ ?? qq_), qr_);
-					IEnumerable<Encounter> qu_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, null);
+					IEnumerable<Encounter> qu_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, default);
 					bool? qv_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> sy_ = LastObs?.StatusElement;
@@ -2097,7 +2097,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> tl_ = FHIRHelpers_4_3_000.ToInterval(tf_);
 						CqlDateTime tm_ = context.Operators.Start(tl_);
 						CqlInterval<CqlDateTime> tn_ = context.Operators.Interval(tj_, tm_, true, true);
-						bool? to_ = context.Operators.In<CqlDateTime>(te_, tn_, null);
+						bool? to_ = context.Operators.In<CqlDateTime>(te_, tn_, default);
 						CqlInterval<CqlDateTime> tq_ = FHIRHelpers_4_3_000.ToInterval(tf_);
 						CqlDateTime tr_ = context.Operators.Start(tq_);
 						bool? ts_ = context.Operators.Not((bool?)(tr_ is null));
@@ -2123,8 +2123,8 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> re_ = FHIRHelpers_4_3_000.ToInterval(qo_);
 					CqlDateTime rf_ = context.Operators.Start(re_);
 					CqlInterval<CqlDateTime> rg_ = context.Operators.Interval(qs_, (rc_ ?? rf_), true, true);
-					bool? rh_ = context.Operators.In<CqlDateTime>(qd_, rg_, null);
-					IEnumerable<Encounter> rj_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, null);
+					bool? rh_ = context.Operators.In<CqlDateTime>(qd_, rg_, default);
+					IEnumerable<Encounter> rj_ = context.Operators.RetrieveByValueSet<Encounter>(qe_, default);
 					bool? rk_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> ty_ = LastObs?.StatusElement;
@@ -2142,7 +2142,7 @@ public class CQMCommon_2_0_000
 						CqlInterval<CqlDateTime> ul_ = FHIRHelpers_4_3_000.ToInterval(uf_);
 						CqlDateTime um_ = context.Operators.Start(ul_);
 						CqlInterval<CqlDateTime> un_ = context.Operators.Interval(uj_, um_, true, true);
-						bool? uo_ = context.Operators.In<CqlDateTime>(ue_, un_, null);
+						bool? uo_ = context.Operators.In<CqlDateTime>(ue_, un_, default);
 						CqlInterval<CqlDateTime> uq_ = FHIRHelpers_4_3_000.ToInterval(uf_);
 						CqlDateTime ur_ = context.Operators.Start(uq_);
 						bool? us_ = context.Operators.Not((bool?)(ur_ is null));
@@ -2187,7 +2187,7 @@ public class CQMCommon_2_0_000
 				Period cx_ = cw_?.Period;
 				CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_3_000.ToInterval(cx_);
 				CqlDateTime cz_ = context.Operators.Start(cy_);
-				IEnumerable<Encounter> db_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, null);
+				IEnumerable<Encounter> db_ = context.Operators.RetrieveByValueSet<Encounter>(bc_, default);
 				bool? dc_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> vb_ = LastObs?.StatusElement;
@@ -2205,7 +2205,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> vo_ = FHIRHelpers_4_3_000.ToInterval(vi_);
 					CqlDateTime vp_ = context.Operators.Start(vo_);
 					CqlInterval<CqlDateTime> vq_ = context.Operators.Interval(vm_, vp_, true, true);
-					bool? vr_ = context.Operators.In<CqlDateTime>(vh_, vq_, null);
+					bool? vr_ = context.Operators.In<CqlDateTime>(vh_, vq_, default);
 					CqlInterval<CqlDateTime> vt_ = FHIRHelpers_4_3_000.ToInterval(vi_);
 					CqlDateTime vu_ = context.Operators.Start(vt_);
 					bool? vv_ = context.Operators.Not((bool?)(vu_ is null));
@@ -2250,7 +2250,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Emergency_Department_Visit();
-			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
+			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
 			bool? q_(Encounter LastED)
 			{
 				Code<Encounter.EncounterStatus> we_ = LastED?.StatusElement;
@@ -2261,7 +2261,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> wj_ = FHIRHelpers_4_3_000.ToInterval(wi_);
 				CqlDateTime wk_ = context.Operators.End(wj_);
 				CqlValueSet wl_ = this.Observation_Services();
-				IEnumerable<Encounter> wm_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, null);
+				IEnumerable<Encounter> wm_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, default);
 				bool? wn_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> yf_ = LastObs?.StatusElement;
@@ -2279,7 +2279,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> ys_ = FHIRHelpers_4_3_000.ToInterval(ym_);
 					CqlDateTime yt_ = context.Operators.Start(ys_);
 					CqlInterval<CqlDateTime> yu_ = context.Operators.Interval(yq_, yt_, true, true);
-					bool? yv_ = context.Operators.In<CqlDateTime>(yl_, yu_, null);
+					bool? yv_ = context.Operators.In<CqlDateTime>(yl_, yu_, default);
 					CqlInterval<CqlDateTime> yx_ = FHIRHelpers_4_3_000.ToInterval(ym_);
 					CqlDateTime yy_ = context.Operators.Start(yx_);
 					bool? yz_ = context.Operators.Not((bool?)(yy_ is null));
@@ -2307,7 +2307,7 @@ public class CQMCommon_2_0_000
 				CqlDateTime wx_ = context.Operators.Start(ww_);
 				CqlQuantity wy_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime wz_ = context.Operators.Subtract((wu_ ?? wx_), wy_);
-				IEnumerable<Encounter> xb_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, null);
+				IEnumerable<Encounter> xb_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, default);
 				bool? xc_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> zf_ = LastObs?.StatusElement;
@@ -2325,7 +2325,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> zs_ = FHIRHelpers_4_3_000.ToInterval(zm_);
 					CqlDateTime zt_ = context.Operators.Start(zs_);
 					CqlInterval<CqlDateTime> zu_ = context.Operators.Interval(zq_, zt_, true, true);
-					bool? zv_ = context.Operators.In<CqlDateTime>(zl_, zu_, null);
+					bool? zv_ = context.Operators.In<CqlDateTime>(zl_, zu_, default);
 					CqlInterval<CqlDateTime> zx_ = FHIRHelpers_4_3_000.ToInterval(zm_);
 					CqlDateTime zy_ = context.Operators.Start(zx_);
 					bool? zz_ = context.Operators.Not((bool?)(zy_ is null));
@@ -2351,8 +2351,8 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> xl_ = FHIRHelpers_4_3_000.ToInterval(wv_);
 				CqlDateTime xm_ = context.Operators.Start(xl_);
 				CqlInterval<CqlDateTime> xn_ = context.Operators.Interval(wz_, (xj_ ?? xm_), true, true);
-				bool? xo_ = context.Operators.In<CqlDateTime>(wk_, xn_, null);
-				IEnumerable<Encounter> xq_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, null);
+				bool? xo_ = context.Operators.In<CqlDateTime>(wk_, xn_, default);
+				IEnumerable<Encounter> xq_ = context.Operators.RetrieveByValueSet<Encounter>(wl_, default);
 				bool? xr_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> azf_ = LastObs?.StatusElement;
@@ -2370,7 +2370,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> azs_ = FHIRHelpers_4_3_000.ToInterval(azm_);
 					CqlDateTime azt_ = context.Operators.Start(azs_);
 					CqlInterval<CqlDateTime> azu_ = context.Operators.Interval(azq_, azt_, true, true);
-					bool? azv_ = context.Operators.In<CqlDateTime>(azl_, azu_, null);
+					bool? azv_ = context.Operators.In<CqlDateTime>(azl_, azu_, default);
 					CqlInterval<CqlDateTime> azx_ = FHIRHelpers_4_3_000.ToInterval(azm_);
 					CqlDateTime azy_ = context.Operators.Start(azx_);
 					bool? azz_ = context.Operators.Not((bool?)(azy_ is null));
@@ -2416,7 +2416,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_3_000.ToInterval(v_);
 			CqlDateTime x_ = context.Operators.Start(w_);
 			CqlValueSet y_ = this.Observation_Services();
-			IEnumerable<Encounter> z_ = context.Operators.RetrieveByValueSet<Encounter>(y_, null);
+			IEnumerable<Encounter> z_ = context.Operators.RetrieveByValueSet<Encounter>(y_, default);
 			bool? aa_(Encounter LastObs)
 			{
 				Code<Encounter.EncounterStatus> bzi_ = LastObs?.StatusElement;
@@ -2434,7 +2434,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> bzv_ = FHIRHelpers_4_3_000.ToInterval(bzp_);
 				CqlDateTime bzw_ = context.Operators.Start(bzv_);
 				CqlInterval<CqlDateTime> bzx_ = context.Operators.Interval(bzt_, bzw_, true, true);
-				bool? bzy_ = context.Operators.In<CqlDateTime>(bzo_, bzx_, null);
+				bool? bzy_ = context.Operators.In<CqlDateTime>(bzo_, bzx_, default);
 				CqlInterval<CqlDateTime> cza_ = FHIRHelpers_4_3_000.ToInterval(bzp_);
 				CqlDateTime czb_ = context.Operators.Start(cza_);
 				bool? czc_ = context.Operators.Not((bool?)(czb_ is null));
@@ -2483,7 +2483,7 @@ public class CQMCommon_2_0_000
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit();
-			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, null);
+			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
 			bool? g_(Encounter LastED)
 			{
 				Code<Encounter.EncounterStatus> af_ = LastED?.StatusElement;
@@ -2494,7 +2494,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
 				CqlDateTime al_ = context.Operators.End(ak_);
 				CqlValueSet am_ = this.Observation_Services();
-				IEnumerable<Encounter> an_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
+				IEnumerable<Encounter> an_ = context.Operators.RetrieveByValueSet<Encounter>(am_, default);
 				bool? ao_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> cg_ = LastObs?.StatusElement;
@@ -2512,7 +2512,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> ct_ = FHIRHelpers_4_3_000.ToInterval(cn_);
 					CqlDateTime cu_ = context.Operators.Start(ct_);
 					CqlInterval<CqlDateTime> cv_ = context.Operators.Interval(cr_, cu_, true, true);
-					bool? cw_ = context.Operators.In<CqlDateTime>(cm_, cv_, null);
+					bool? cw_ = context.Operators.In<CqlDateTime>(cm_, cv_, default);
 					CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_3_000.ToInterval(cn_);
 					CqlDateTime cz_ = context.Operators.Start(cy_);
 					bool? da_ = context.Operators.Not((bool?)(cz_ is null));
@@ -2540,7 +2540,7 @@ public class CQMCommon_2_0_000
 				CqlDateTime ay_ = context.Operators.Start(ax_);
 				CqlQuantity az_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime ba_ = context.Operators.Subtract((av_ ?? ay_), az_);
-				IEnumerable<Encounter> bc_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
+				IEnumerable<Encounter> bc_ = context.Operators.RetrieveByValueSet<Encounter>(am_, default);
 				bool? bd_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> dg_ = LastObs?.StatusElement;
@@ -2558,7 +2558,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> dt_ = FHIRHelpers_4_3_000.ToInterval(dn_);
 					CqlDateTime du_ = context.Operators.Start(dt_);
 					CqlInterval<CqlDateTime> dv_ = context.Operators.Interval(dr_, du_, true, true);
-					bool? dw_ = context.Operators.In<CqlDateTime>(dm_, dv_, null);
+					bool? dw_ = context.Operators.In<CqlDateTime>(dm_, dv_, default);
 					CqlInterval<CqlDateTime> dy_ = FHIRHelpers_4_3_000.ToInterval(dn_);
 					CqlDateTime dz_ = context.Operators.Start(dy_);
 					bool? ea_ = context.Operators.Not((bool?)(dz_ is null));
@@ -2584,8 +2584,8 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> bm_ = FHIRHelpers_4_3_000.ToInterval(aw_);
 				CqlDateTime bn_ = context.Operators.Start(bm_);
 				CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(ba_, (bk_ ?? bn_), true, true);
-				bool? bp_ = context.Operators.In<CqlDateTime>(al_, bo_, null);
-				IEnumerable<Encounter> br_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
+				bool? bp_ = context.Operators.In<CqlDateTime>(al_, bo_, default);
+				IEnumerable<Encounter> br_ = context.Operators.RetrieveByValueSet<Encounter>(am_, default);
 				bool? bs_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> eg_ = LastObs?.StatusElement;
@@ -2603,7 +2603,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> et_ = FHIRHelpers_4_3_000.ToInterval(en_);
 					CqlDateTime eu_ = context.Operators.Start(et_);
 					CqlInterval<CqlDateTime> ev_ = context.Operators.Interval(er_, eu_, true, true);
-					bool? ew_ = context.Operators.In<CqlDateTime>(em_, ev_, null);
+					bool? ew_ = context.Operators.In<CqlDateTime>(em_, ev_, default);
 					CqlInterval<CqlDateTime> ey_ = FHIRHelpers_4_3_000.ToInterval(en_);
 					CqlDateTime ez_ = context.Operators.Start(ey_);
 					bool? fa_ = context.Operators.Not((bool?)(ez_ is null));
@@ -2649,7 +2649,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services();
-			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
+			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
 			bool? q_(Encounter LastObs)
 			{
 				Code<Encounter.EncounterStatus> fj_ = LastObs?.StatusElement;
@@ -2667,7 +2667,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> fw_ = FHIRHelpers_4_3_000.ToInterval(fq_);
 				CqlDateTime fx_ = context.Operators.Start(fw_);
 				CqlInterval<CqlDateTime> fy_ = context.Operators.Interval(fu_, fx_, true, true);
-				bool? fz_ = context.Operators.In<CqlDateTime>(fp_, fy_, null);
+				bool? fz_ = context.Operators.In<CqlDateTime>(fp_, fy_, default);
 				CqlInterval<CqlDateTime> gb_ = FHIRHelpers_4_3_000.ToInterval(fq_);
 				CqlDateTime gc_ = context.Operators.Start(gb_);
 				bool? gd_ = context.Operators.Not((bool?)(gc_ is null));
@@ -2715,7 +2715,7 @@ public class CQMCommon_2_0_000
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit();
-			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, null);
+			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
 			bool? g_(Encounter LastED)
 			{
 				Code<Encounter.EncounterStatus> af_ = LastED?.StatusElement;
@@ -2726,7 +2726,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
 				CqlDateTime al_ = context.Operators.End(ak_);
 				CqlValueSet am_ = this.Observation_Services();
-				IEnumerable<Encounter> an_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
+				IEnumerable<Encounter> an_ = context.Operators.RetrieveByValueSet<Encounter>(am_, default);
 				bool? ao_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> cg_ = LastObs?.StatusElement;
@@ -2744,7 +2744,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> ct_ = FHIRHelpers_4_3_000.ToInterval(cn_);
 					CqlDateTime cu_ = context.Operators.Start(ct_);
 					CqlInterval<CqlDateTime> cv_ = context.Operators.Interval(cr_, cu_, true, true);
-					bool? cw_ = context.Operators.In<CqlDateTime>(cm_, cv_, null);
+					bool? cw_ = context.Operators.In<CqlDateTime>(cm_, cv_, default);
 					CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_3_000.ToInterval(cn_);
 					CqlDateTime cz_ = context.Operators.Start(cy_);
 					bool? da_ = context.Operators.Not((bool?)(cz_ is null));
@@ -2772,7 +2772,7 @@ public class CQMCommon_2_0_000
 				CqlDateTime ay_ = context.Operators.Start(ax_);
 				CqlQuantity az_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime ba_ = context.Operators.Subtract((av_ ?? ay_), az_);
-				IEnumerable<Encounter> bc_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
+				IEnumerable<Encounter> bc_ = context.Operators.RetrieveByValueSet<Encounter>(am_, default);
 				bool? bd_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> dg_ = LastObs?.StatusElement;
@@ -2790,7 +2790,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> dt_ = FHIRHelpers_4_3_000.ToInterval(dn_);
 					CqlDateTime du_ = context.Operators.Start(dt_);
 					CqlInterval<CqlDateTime> dv_ = context.Operators.Interval(dr_, du_, true, true);
-					bool? dw_ = context.Operators.In<CqlDateTime>(dm_, dv_, null);
+					bool? dw_ = context.Operators.In<CqlDateTime>(dm_, dv_, default);
 					CqlInterval<CqlDateTime> dy_ = FHIRHelpers_4_3_000.ToInterval(dn_);
 					CqlDateTime dz_ = context.Operators.Start(dy_);
 					bool? ea_ = context.Operators.Not((bool?)(dz_ is null));
@@ -2816,8 +2816,8 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> bm_ = FHIRHelpers_4_3_000.ToInterval(aw_);
 				CqlDateTime bn_ = context.Operators.Start(bm_);
 				CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(ba_, (bk_ ?? bn_), true, true);
-				bool? bp_ = context.Operators.In<CqlDateTime>(al_, bo_, null);
-				IEnumerable<Encounter> br_ = context.Operators.RetrieveByValueSet<Encounter>(am_, null);
+				bool? bp_ = context.Operators.In<CqlDateTime>(al_, bo_, default);
+				IEnumerable<Encounter> br_ = context.Operators.RetrieveByValueSet<Encounter>(am_, default);
 				bool? bs_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> eg_ = LastObs?.StatusElement;
@@ -2835,7 +2835,7 @@ public class CQMCommon_2_0_000
 					CqlInterval<CqlDateTime> et_ = FHIRHelpers_4_3_000.ToInterval(en_);
 					CqlDateTime eu_ = context.Operators.Start(et_);
 					CqlInterval<CqlDateTime> ev_ = context.Operators.Interval(er_, eu_, true, true);
-					bool? ew_ = context.Operators.In<CqlDateTime>(em_, ev_, null);
+					bool? ew_ = context.Operators.In<CqlDateTime>(em_, ev_, default);
 					CqlInterval<CqlDateTime> ey_ = FHIRHelpers_4_3_000.ToInterval(en_);
 					CqlDateTime ez_ = context.Operators.Start(ey_);
 					bool? fa_ = context.Operators.Not((bool?)(ez_ is null));
@@ -2881,7 +2881,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services();
-			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, null);
+			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
 			bool? q_(Encounter LastObs)
 			{
 				Code<Encounter.EncounterStatus> fj_ = LastObs?.StatusElement;
@@ -2899,7 +2899,7 @@ public class CQMCommon_2_0_000
 				CqlInterval<CqlDateTime> fw_ = FHIRHelpers_4_3_000.ToInterval(fq_);
 				CqlDateTime fx_ = context.Operators.Start(fw_);
 				CqlInterval<CqlDateTime> fy_ = context.Operators.Interval(fu_, fx_, true, true);
-				bool? fz_ = context.Operators.In<CqlDateTime>(fp_, fy_, null);
+				bool? fz_ = context.Operators.In<CqlDateTime>(fp_, fy_, default);
 				CqlInterval<CqlDateTime> gb_ = FHIRHelpers_4_3_000.ToInterval(fq_);
 				CqlDateTime gc_ = context.Operators.Start(gb_);
 				bool? gd_ = context.Operators.Not((bool?)(gc_ is null));
@@ -2982,7 +2982,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
 			Period p_ = HospitalLocation?.Period;
 			CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_3_000.ToInterval(p_);
-			bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, null);
+			bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
 			bool? s_ = context.Operators.And(m_, r_);
 
 			return s_;
@@ -3025,7 +3025,7 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
 			Period p_ = HospitalLocation?.Period;
 			CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_3_000.ToInterval(p_);
-			bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, null);
+			bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
 			bool? s_ = context.Operators.And(m_, r_);
 
 			return s_;
@@ -3053,7 +3053,7 @@ public class CQMCommon_2_0_000
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		Condition b_(Encounter.DiagnosisComponent D)
 		{
-			IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
+			IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 			bool? e_(Condition C)
 			{
 				Id h_ = C?.IdElement;
@@ -3083,7 +3083,7 @@ public class CQMCommon_2_0_000
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		Condition b_(Encounter.DiagnosisComponent D)
 		{
-			IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
+			IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 			bool? e_(Condition C)
 			{
 				Id h_ = C?.IdElement;
@@ -3111,7 +3111,7 @@ public class CQMCommon_2_0_000
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getCondition()` instead")]
 	public Condition GetCondition(ResourceReference reference)
 	{
-		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
+		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 		bool? b_(Condition C)
 		{
 			Id e_ = C?.IdElement;
@@ -3133,7 +3133,7 @@ public class CQMCommon_2_0_000
     [CqlTag("description", "Returns the Condition resource for the given reference")]
 	public Condition getCondition(ResourceReference reference)
 	{
-		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
+		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 		bool? b_(Condition C)
 		{
 			Id e_ = C?.IdElement;
@@ -3168,7 +3168,7 @@ public class CQMCommon_2_0_000
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Condition d_(Encounter.DiagnosisComponent PD)
 		{
-			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
+			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 			bool? k_(Condition C)
 			{
 				Id n_ = C?.IdElement;
@@ -3208,7 +3208,7 @@ public class CQMCommon_2_0_000
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Condition d_(Encounter.DiagnosisComponent PD)
 		{
-			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
+			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 			bool? k_(Condition C)
 			{
 				Id n_ = C?.IdElement;
@@ -3236,7 +3236,7 @@ public class CQMCommon_2_0_000
     [CqlTag("description", "Returns the Location resource specified by the given reference.")]
 	public Location getLocation(ResourceReference reference)
 	{
-		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(null, null);
+		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(default, default);
 		bool? b_(Location L)
 		{
 			Id e_ = L?.IdElement;
@@ -3278,7 +3278,7 @@ public class CQMCommon_2_0_000
 			}
 			else
 			{
-				IEnumerable<Medication> h_ = context.Operators.RetrieveByValueSet<Medication>(null, null);
+				IEnumerable<Medication> h_ = context.Operators.RetrieveByValueSet<Medication>(default, default);
 				bool? i_(Medication M)
 				{
 					Id n_ = M?.IdElement;
@@ -3327,7 +3327,7 @@ public class CQMCommon_2_0_000
 			}
 			else
 			{
-				IEnumerable<Medication> h_ = context.Operators.RetrieveByValueSet<Medication>(null, null);
+				IEnumerable<Medication> h_ = context.Operators.RetrieveByValueSet<Medication>(default, default);
 				bool? i_(Medication M)
 				{
 					Id n_ = M?.IdElement;
