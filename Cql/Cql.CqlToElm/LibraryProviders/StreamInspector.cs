@@ -119,6 +119,9 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
 
         internal VersionedIdentifier? FromCql(StreamReader reader)
         {
+            // empty file
+            if (reader.Peek() < 0)
+                return null;
             try
             {
                 var library = CqlToElmConverter.ParseLibrary(reader);

@@ -44,7 +44,20 @@ namespace ToolsTest
             cqlToElm.Elm.Should().NotBeEmpty();
             cqlToElm.CSharp.Should().NotBeEmpty();
             errors.Should().BeEmpty();
+        }
 
+
+        [TestMethod]
+        public void Empty_File()
+        {
+            var cqlToElm = new CqlToCSharp() { Force = true };
+            cqlToElm.BuildEngine = buildEngine.Object;
+            cqlToElm.ElmPath = Environment.CurrentDirectory;
+            cqlToElm.Sources = [new TaskItem(@"Input\Cql\Empty-1.0.0.cql")];
+            cqlToElm.Execute().Should().BeTrue();
+            cqlToElm.Elm.Should().BeEmpty();
+            cqlToElm.CSharp.Should().BeEmpty();
+            errors.Should().BeEmpty();
         }
 
         [TestMethod]

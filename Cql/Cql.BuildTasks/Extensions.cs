@@ -68,12 +68,13 @@ internal static class Extensions
                     Directory.CreateDirectory(elmDir);
                 File.WriteAllText(elmPath, elmJson, Encoding.UTF8);
             }
-            elmItems.Add(new TaskItem(elmPath, new Dictionary<string, string>
-            {
-                ["DependentUpon"] = file.Name,
-                ["Name"] = lib.identifier.id,
-                ["Version"] = lib.identifier.version,
-            }));
+            if (lib is not null) // cql files could be empty or not valid
+                elmItems.Add(new TaskItem(elmPath, new Dictionary<string, string>
+                {
+                    ["DependentUpon"] = file.Name,
+                    ["Name"] = lib.identifier.id,
+                    ["Version"] = lib.identifier.version,
+                }));
         }
         if (hasErrors)
         {
@@ -130,16 +131,19 @@ internal static class Extensions
         var csItems = new List<TaskItem>(libraries.Length);
         foreach (var (lib, file, _) in libraries)
         {
-            if (csByNav.TryGetValue(lib.NameAndVersion(), out var code))
+            if (lib is not null)
             {
-                var csPath = getCsPath(file);
-                File.WriteAllText(csPath, code, Encoding.UTF8);
-                csItems.Add(new TaskItem(csPath, new Dictionary<string, string>
+                if (csByNav.TryGetValue(lib.NameAndVersion(), out var code))
                 {
-                    ["DependentUpon"] = file.Name,
-                    ["Name"] = lib.identifier.id,
-                    ["Version"] = lib.identifier.version,
-                }));
+                    var csPath = getCsPath(file);
+                    File.WriteAllText(csPath, code, Encoding.UTF8);
+                    csItems.Add(new TaskItem(csPath, new Dictionary<string, string>
+                    {
+                        ["DependentUpon"] = file.Name,
+                        ["Name"] = lib.identifier.id,
+                        ["Version"] = lib.identifier.version,
+                    }));
+                }
             }
         }
         return (elmItems.ToArray(), csItems.ToArray());
@@ -201,6 +205,12 @@ internal static class Extensions
                     }
                     log.LogMessage($"Converting {files[i].FullName} to ELM.");
                     var cql = File.ReadAllText(fileInfo.FullName);
+                    if (string.IsNullOrWhiteSpace(cql))
+                    {
+                        log.LogMessage($"Skipping empty file {files[i].FullName}.");
+                        libs[i] = (null, fileInfo, false);
+                        continue;
+                    }
                     using (var scope = services.CreateScope())
                     {
                         var builder = services.GetRequiredService<CqlToElmConverter>()
