@@ -6,9 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
+
 using System;
 using FluentAssertions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -57,11 +60,75 @@ public class CqlContextOperatorTests
 		isEqual.Should().BeTrue();
 	}
 
-	#endregion
+    [TestMethod]
+    public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
+    {
+        // Arrange
+        CqlContext rtx = GetNewContext();
 
-	#region Convert
+        CqlCode[] divorcedCodes =
+        [
+            new CqlCode("D", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
+        ];
 
-	[TestMethod]
+        CqlConcept divorcedConcept = new(divorcedCodes, "Divorced Concept");
+
+        CqlCode[] notMarriedCodes =
+        [
+            new CqlCode("L", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
+            new CqlCode("D", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
+        ];
+
+        CqlConcept notMarriedConcept = new(notMarriedCodes, "Not Married Concept");
+
+
+        // Act
+        bool? isEqualLessOnLeftConcept = rtx.Operators.Equivalent(divorcedConcept, notMarriedConcept);
+        bool? isEqualLessOnRightConcept = rtx.Operators.Equivalent(notMarriedConcept, divorcedConcept);
+
+        // Assert
+        isEqualLessOnLeftConcept.Should().BeTrue();
+        isEqualLessOnRightConcept.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Equivalent_ConceptAtLeastOneCodeEquivalentOnNull_MustBeEquivalent()
+    {
+        // Arrange
+        CqlContext rtx = GetNewContext();
+
+        CqlCode?[] divorcedCodes =
+        [
+			null,
+            new CqlCode("X", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
+        ];
+
+        CqlConcept divorcedConcept = new(divorcedCodes!, "Divorced Concept");
+
+        CqlCode?[] notMarriedCodes =
+        [
+            new CqlCode("Y", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
+			null,
+            new CqlCode("Z", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
+        ];
+
+        CqlConcept notMarriedConcept = new(notMarriedCodes!, "Not Married Concept");
+
+
+        // Act
+        bool? isEqualLessOnLeftConcept = rtx.Operators.Equivalent(divorcedConcept, notMarriedConcept);
+        bool? isEqualLessOnRightConcept = rtx.Operators.Equivalent(notMarriedConcept, divorcedConcept);
+
+        // Assert
+        isEqualLessOnLeftConcept.Should().BeTrue();
+        isEqualLessOnRightConcept.Should().BeTrue();
+    }
+
+    #endregion
+
+    #region Convert
+
+    [TestMethod]
 	public void Convert_FhirCodeToString_MustReturnValueFromEnumLiteral()
 	{
 		// Arrange

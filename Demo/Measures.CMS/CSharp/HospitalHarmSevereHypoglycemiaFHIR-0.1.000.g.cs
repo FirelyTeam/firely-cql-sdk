@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.1.000")]
 public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 {
@@ -86,7 +86,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
     #endregion
 
 	private CqlValueSet birth_date_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", default);
 
     [CqlDeclaration("birth date")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4")]
@@ -94,7 +94,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		__birth_date.Value;
 
 	private CqlValueSet Emergency_Department_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
@@ -102,7 +102,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		__Emergency_Department_Visit.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -110,7 +110,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Glucose_Lab_Test_Mass_Per_Volume_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.34", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.34", default);
 
     [CqlDeclaration("Glucose Lab Test Mass Per Volume")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.34")]
@@ -118,7 +118,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		__Glucose_Lab_Test_Mass_Per_Volume.Value;
 
 	private CqlValueSet Hypoglycemics_Severe_Hypoglycemia_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.393", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.393", default);
 
     [CqlDeclaration("Hypoglycemics Severe Hypoglycemia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.393")]
@@ -126,7 +126,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		__Hypoglycemics_Severe_Hypoglycemia.Value;
 
 	private CqlValueSet Observation_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
@@ -149,7 +149,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -162,7 +162,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter InpatientEncounter)
 		{
 			Patient e_ = this.Patient();
@@ -200,8 +200,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 	private IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration_Value()
 	{
 		CqlValueSet a_ = this.Hypoglycemics_Severe_Hypoglycemia();
-		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
-		IEnumerable<MedicationAdministration> d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, null);
+		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default);
+		IEnumerable<MedicationAdministration> d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default);
 		IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration HypoMedication)
 		{
@@ -239,7 +239,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToInterval(j_);
 				CqlDateTime l_ = context.Operators.Start(k_);
 				CqlInterval<CqlDateTime> m_ = CQMCommon_2_0_000.HospitalizationWithObservation(InpatientHospitalization);
-				bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
+				bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, default);
 
 				return n_;
 			};
@@ -286,7 +286,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Denominator();
 		IEnumerable<MedicationAdministration> b_ = this.Hypoglycemic_Medication_Administration();
 		CqlValueSet c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
-		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, default);
 		IEnumerable<ValueTuple<Encounter, MedicationAdministration, Observation>> e_ = context.Operators.CrossJoin<Encounter, MedicationAdministration, Observation>(a_, b_, d_);
 		(Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? f_(ValueTuple<Encounter, MedicationAdministration, Observation> _valueTuple)
 		{
@@ -351,7 +351,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			};
 			CqlDateTime n_ = QICoreCommon_2_0_000.Earliest(m_());
 			CqlInterval<CqlDateTime> o_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_btymmdgachdragrhofgxbxgho?.QualifyingEncounter);
-			bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, null);
+			bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, default);
 			Code<ObservationStatus> q_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.StatusElement;
 			ObservationStatus? r_ = q_?.Value;
 			Code<ObservationStatus> s_ = context.Operators.Convert<Code<ObservationStatus>>(r_);
@@ -481,7 +481,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			};
 			CqlDateTime al_ = QICoreCommon_2_0_000.Earliest(ak_());
 			CqlInterval<CqlDateTime> am_ = context.Operators.Interval(aj_, al_, true, true);
-			bool? an_ = context.Operators.In<CqlDateTime>(af_, am_, null);
+			bool? an_ = context.Operators.In<CqlDateTime>(af_, am_, default);
 			object ao_()
 			{
 				bool cv_()
@@ -558,7 +558,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.Denominator();
 		IEnumerable<Observation> b_ = this.Glucose_Test_with_Result_Less_Than_40();
 		CqlValueSet c_ = this.Glucose_Lab_Test_Mass_Per_Volume();
-		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, default);
 		IEnumerable<ValueTuple<Encounter, Observation, Observation>> e_ = context.Operators.CrossJoin<Encounter, Observation, Observation>(a_, b_, d_);
 		(Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? f_(ValueTuple<Encounter, Observation, Observation> _valueTuple)
 		{
@@ -731,7 +731,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			CqlQuantity s_ = context.Operators.Quantity(5m, "minutes");
 			CqlDateTime t_ = context.Operators.Add(r_, s_);
 			CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, false, true);
-			bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, null);
+			bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, default);
 			object w_()
 			{
 				bool df_()
@@ -841,7 +841,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			};
 			CqlDateTime ab_ = QICoreCommon_2_0_000.Earliest(aa_());
 			CqlInterval<CqlDateTime> ac_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_clljqcgdejtdiiewkzyjpwapd?.QualifyingEncounter);
-			bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, null);
+			bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, default);
 			bool? ae_ = context.Operators.And(z_, ad_);
 			object af_()
 			{
@@ -896,7 +896,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				}
 			};
 			CqlDateTime ag_ = QICoreCommon_2_0_000.Earliest(af_());
-			bool? ai_ = context.Operators.In<CqlDateTime>(ag_, ac_, null);
+			bool? ai_ = context.Operators.In<CqlDateTime>(ag_, ac_, default);
 			bool? aj_ = context.Operators.And(ae_, ai_);
 			Id ak_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.IdElement;
 			string al_ = ak_?.Value;
@@ -948,7 +948,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			{
 				string m_ = ((@this is Resource)
 	? ((@this as Resource).IdElement)
-	: null)?.Value;
+	: default)?.Value;
 				bool? n_ = context.Operators.Not((bool?)(m_ is null));
 
 				return n_;
@@ -958,7 +958,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			{
 				string o_ = ((@this is Resource)
 	? ((@this as Resource).IdElement)
-	: null)?.Value;
+	: default)?.Value;
 
 				return o_;
 			};
@@ -1045,7 +1045,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			};
 			CqlDateTime l_ = QICoreCommon_2_0_000.Earliest(k_());
 			CqlInterval<CqlDateTime> m_ = CQMCommon_2_0_000.HospitalizationWithObservation(tuple_hfnempjqliopfnrmypnydhffr?.QualifyingEncounter);
-			bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, null);
+			bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, default);
 
 			return n_;
 		};

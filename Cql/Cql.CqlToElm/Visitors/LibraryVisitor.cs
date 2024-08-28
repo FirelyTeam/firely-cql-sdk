@@ -429,7 +429,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     else
                     {
                         functionDef.external = true;
-
+                        functionDef.externalSpecified = true;
                         if (returnType is null)
                         {
                             functionDef.AddError("External functions must specify a return type.");

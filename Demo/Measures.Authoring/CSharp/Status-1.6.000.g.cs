@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("Status", "1.6.000")]
 public class Status_1_6_000
 {
@@ -52,35 +52,35 @@ public class Status_1_6_000
     #endregion
 
 	private CqlCode laboratory_Value() => 
-		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
+		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("laboratory")]
 	public CqlCode laboratory() => 
 		__laboratory.Value;
 
 	private CqlCode exam_Value() => 
-		new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
+		new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("exam")]
 	public CqlCode exam() => 
 		__exam.Value;
 
 	private CqlCode survey_Value() => 
-		new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
+		new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("survey")]
 	public CqlCode survey() => 
 		__survey.Value;
 
 	private CqlCode vital_signs_Value() => 
-		new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", null, null);
+		new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("vital-signs")]
 	public CqlCode vital_signs() => 
 		__vital_signs.Value;
 
 	private CqlCode active_Value() => 
-		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null);
+		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("active")]
 	public CqlCode active() => 
@@ -89,10 +89,10 @@ public class Status_1_6_000
 	private CqlCode[] ObservationCategoryCodes_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
-			new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", null, null),
+			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
+			new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
+			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
+			new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
 		];
 
 		return a_;
@@ -105,7 +105,7 @@ public class Status_1_6_000
 	private CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", null, null),
+			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
 		];
 
 		return a_;
@@ -117,7 +117,7 @@ public class Status_1_6_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;

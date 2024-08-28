@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("DementiaCognitiveAssessmentFHIR", "0.1.000")]
 public class DementiaCognitiveAssessmentFHIR_0_1_000
 {
@@ -102,7 +102,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
     #endregion
 
 	private CqlValueSet Behavioral_Neuropsych_Assessment_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1023", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1023", default);
 
     [CqlDeclaration("Behavioral/Neuropsych Assessment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1023")]
@@ -110,7 +110,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Behavioral_Neuropsych_Assessment.Value;
 
 	private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Care Services in Long Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
@@ -118,7 +118,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Care_Services_in_Long_Term_Residential_Facility.Value;
 
 	private CqlValueSet Cognitive_Assessment_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1332", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1332", default);
 
     [CqlDeclaration("Cognitive Assessment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1332")]
@@ -126,7 +126,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Cognitive_Assessment.Value;
 
 	private CqlValueSet Dementia_and_Mental_Degenerations_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1005", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1005", default);
 
     [CqlDeclaration("Dementia & Mental Degenerations")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1005")]
@@ -134,7 +134,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Dementia_and_Mental_Degenerations.Value;
 
 	private CqlValueSet Face_to_Face_Interaction_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", default);
 
     [CqlDeclaration("Face-to-Face Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048")]
@@ -142,7 +142,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Face_to_Face_Interaction.Value;
 
 	private CqlValueSet Home_Healthcare_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
@@ -150,7 +150,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Home_Healthcare_Services.Value;
 
 	private CqlValueSet Nursing_Facility_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
@@ -158,7 +158,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Nursing_Facility_Visit.Value;
 
 	private CqlValueSet Occupational_Therapy_Evaluation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011", default);
 
     [CqlDeclaration("Occupational Therapy Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011")]
@@ -166,7 +166,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Occupational_Therapy_Evaluation.Value;
 
 	private CqlValueSet Office_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
@@ -174,7 +174,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Office_Visit.Value;
 
 	private CqlValueSet Outpatient_Consultation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
@@ -182,7 +182,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Outpatient_Consultation.Value;
 
 	private CqlValueSet Patient_Provider_Interaction_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", default);
 
     [CqlDeclaration("Patient Provider Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012")]
@@ -190,7 +190,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Patient_Provider_Interaction.Value;
 
 	private CqlValueSet Patient_Reason_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", default);
 
     [CqlDeclaration("Patient Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008")]
@@ -198,7 +198,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Patient_Reason.Value;
 
 	private CqlValueSet Psych_Visit_Diagnostic_Evaluation_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
@@ -206,7 +206,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Psych_Visit_Diagnostic_Evaluation.Value;
 
 	private CqlValueSet Psych_Visit_Psychotherapy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
@@ -214,7 +214,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		__Psych_Visit_Psychotherapy.Value;
 
 	private CqlValueSet Standardized_Tools_Score_for_Assessment_of_Cognition_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1006", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1006", default);
 
     [CqlDeclaration("Standardized Tools Score for Assessment of Cognition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1006")]
@@ -249,7 +249,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -262,30 +262,30 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private IEnumerable<Encounter> Encounter_to_Assess_Cognition_Value()
 	{
 		CqlValueSet a_ = this.Psych_Visit_Diagnostic_Evaluation();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet c_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
 		CqlValueSet h_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Psych_Visit_Psychotherapy();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
 		CqlValueSet n_ = this.Behavioral_Neuropsych_Assessment();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
+		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		CqlValueSet r_ = this.Occupational_Therapy_Evaluation();
-		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, null);
+		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
 		CqlValueSet t_ = this.Office_Visit();
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, null);
+		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default);
 		IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
 		IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
 		CqlValueSet x_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, null);
+		IEnumerable<Encounter> y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, default);
 		IEnumerable<Encounter> z_ = context.Operators.Union<Encounter>(w_, y_);
 
 		return z_;
@@ -301,13 +301,13 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		IEnumerable<Encounter> b_(Encounter EncounterAssessCognition)
 		{
 			CqlValueSet d_ = this.Dementia_and_Mental_Degenerations();
-			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, null);
+			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
 			bool? f_(Condition Dementia)
 			{
 				CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
 				Period k_ = EncounterAssessCognition?.Period;
 				CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
-				bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, null);
+				bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, default);
 				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.prevalenceInterval(Dementia);
 				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(k_);
 				bool? q_ = context.Operators.Overlaps(n_, p_, "day");
@@ -354,14 +354,14 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_to_Assess_Cognition();
 		CqlValueSet b_ = this.Patient_Provider_Interaction();
-		IEnumerable<Encounter> c_ = context.Operators.RetrieveByValueSet<Encounter>(b_, null);
+		IEnumerable<Encounter> c_ = context.Operators.RetrieveByValueSet<Encounter>(b_, default);
 		IEnumerable<Encounter> d_ = context.Operators.Union<Encounter>(a_, c_);
 		bool? e_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
 			Period h_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.ToInterval(h_);
-			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, null);
+			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, default);
 			Code<Encounter.EncounterStatus> k_ = ValidEncounter?.StatusElement;
 			Encounter.EncounterStatus? l_ = k_?.Value;
 			Code<Encounter.EncounterStatus> m_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(l_);
@@ -409,9 +409,9 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private IEnumerable<Observation> Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Value()
 	{
 		CqlValueSet a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		CqlValueSet c_ = this.Cognitive_Assessment();
-		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, default);
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation CognitiveAssessment)
 		{
@@ -490,9 +490,9 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private IEnumerable<Observation> Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Value()
 	{
 		CqlValueSet a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
+		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		CqlValueSet c_ = this.Cognitive_Assessment();
-		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, null);
+		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, default);
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation NoCognitiveAssessment)
 		{
@@ -504,7 +504,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
 				Period r_ = EncounterDementia?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
-				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, null);
+				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 
 				return t_;
 			};
@@ -529,7 +529,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			};
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoCognitiveAssessment is DomainResource)
 					? ((NoCognitiveAssessment as DomainResource).Extension)
-					: null), u_);
+					: default), u_);
 			DataType w_(Extension @this)
 			{
 				DataType ah_ = @this?.Value;
