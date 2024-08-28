@@ -751,19 +751,20 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? p_(Extension @this)
 				{
 					string aw_ = @this?.Url;
-					string ax_ = FHIRHelpers_4_3_000.ToString(aw_);
-					bool? ay_ = context.Operators.Equal(ax_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					FhirString ax_ = context.Operators.Convert<FhirString>(aw_);
+					string ay_ = FHIRHelpers_4_3_000.ToString(ax_);
+					bool? az_ = context.Operators.Equal(ay_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return ay_;
+					return az_;
 				};
 				IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: null), p_);
 				DataType r_(Extension @this)
 				{
-					DataType az_ = @this?.Value;
+					DataType ba_ = @this?.Value;
 
-					return az_;
+					return ba_;
 				};
 				IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
 				DataType t_ = context.Operators.SingletonFrom<DataType>(s_);
@@ -786,20 +787,21 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? am_ = context.Operators.And(ag_, al_);
 				bool? an_(Extension @this)
 				{
-					string ba_ = @this?.Url;
-					string bb_ = FHIRHelpers_4_3_000.ToString(ba_);
-					bool? bc_ = context.Operators.Equal(bb_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					string bb_ = @this?.Url;
+					FhirString bc_ = context.Operators.Convert<FhirString>(bb_);
+					string bd_ = FHIRHelpers_4_3_000.ToString(bc_);
+					bool? be_ = context.Operators.Equal(bd_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return bc_;
+					return be_;
 				};
 				IEnumerable<Extension> ao_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: null), an_);
 				DataType ap_(Extension @this)
 				{
-					DataType bd_ = @this?.Value;
+					DataType bf_ = @this?.Value;
 
-					return bd_;
+					return bf_;
 				};
 				IEnumerable<DataType> aq_ = context.Operators.Select<Extension, DataType>(ao_, ap_);
 				DataType ar_ = context.Operators.SingletonFrom<DataType>(aq_);
@@ -820,18 +822,18 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		IEnumerable<MedicationAdministration> g_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
 		bool? h_(MedicationAdministration BCGNotGiven)
 		{
-			List<CodeableConcept> be_ = BCGNotGiven?.StatusReason;
-			CqlConcept bf_(CodeableConcept @this)
+			List<CodeableConcept> bg_ = BCGNotGiven?.StatusReason;
+			CqlConcept bh_(CodeableConcept @this)
 			{
-				CqlConcept bj_ = FHIRHelpers_4_3_000.ToConcept(@this);
+				CqlConcept bl_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-				return bj_;
+				return bl_;
 			};
-			IEnumerable<CqlConcept> bg_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)be_, bf_);
-			CqlValueSet bh_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
-			bool? bi_ = context.Operators.ConceptsInValueSet(bg_, bh_);
+			IEnumerable<CqlConcept> bi_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bg_, bh_);
+			CqlValueSet bj_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
+			bool? bk_ = context.Operators.ConceptsInValueSet(bi_, bj_);
 
-			return bi_;
+			return bk_;
 		};
 		IEnumerable<MedicationAdministration> i_ = context.Operators.Where<MedicationAdministration>(g_, h_);
 

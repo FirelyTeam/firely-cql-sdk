@@ -1309,20 +1309,21 @@ public class QICoreCommon_2_0_000
 		bool? a_(Extension E)
 		{
 			string f_ = E?.Url;
-			string g_ = context.Operators.LateBoundProperty<string>(f_, "value");
-			bool? h_ = context.Operators.Equal(g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
+			FhirString g_ = context.Operators.Convert<FhirString>(f_);
+			string h_ = g_?.Value;
+			bool? i_ = context.Operators.Equal(h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
 
-			return h_;
+			return i_;
 		};
 		IEnumerable<Extension> b_ = context.Operators.Where<Extension>(((deviceRequest is DomainResource)
 				? ((IEnumerable<Extension>)(deviceRequest as DomainResource).ModifierExtension)
 				: null), a_);
 		bool? c_(Extension E)
 		{
-			DataType i_ = E?.Value;
-			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
+			DataType j_ = E?.Value;
+			object k_ = FHIRHelpers_4_3_000.ToValue(j_);
 
-			return (j_ as bool?);
+			return (k_ as bool?);
 		};
 		IEnumerable<bool?> d_ = context.Operators.Select<Extension, bool?>(b_, c_);
 		bool? e_ = context.Operators.SingletonFrom<bool?>(d_);

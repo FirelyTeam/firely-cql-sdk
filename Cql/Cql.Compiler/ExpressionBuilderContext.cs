@@ -963,8 +963,8 @@ partial class ExpressionBuilderContext
         {
             if (string.IsNullOrWhiteSpace(op.path))
                 throw this.NewExpressionBuildingException("path cannot be null or empty");
-            //var path = ExpressionBuilderContext.NormalizeIdentifier(op.path);
             var path = op.path;
+
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = GetScopeExpression(op.scope!);
@@ -977,27 +977,15 @@ partial class ExpressionBuilderContext
                     return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                 }
                 var propogate = PropagateNull(scopeExpression, pathMemberInfo);
-                // This is only necessary for Firely b/c it always initializes colleciton members even if they are
-                // not included in the FHIR, and this makes it impossible for CQL to differentiate [] from null
-                //
-                //if (typeof(Resource).IsAssignableFrom(scopeExpression.Type)
-                //    && pathMemberInfo is PropertyInfo prop
-                //    && IsOrImplementsIEnumerableOfT(prop.PropertyType))
-                //{
-                //    var method = typeof(BuiltIns).GetMethod(nameof(BuiltIns.NullIfEmpty))
-                //        .MakeGenericMethod(GetElementType(prop.PropertyType));
-                //    var call = Expression.Call(method, propogate);
-                //    return call;
-                //}
                 string message = $"TypeManager failed to resolve type.";
                 var resultType = TypeFor(op) ?? throw this.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
-                    var typeConversion = TypeConversion.NoMatch;
-                    propogate = ChangeType(propogate, resultType, out typeConversion);
+                    propogate = ChangeType(propogate, resultType, out var typeConversion);
                     if (typeConversion == TypeConversion.NoMatch)
                         throw this.NewExpressionBuildingException($"Cannot convert {propogate.Type} to {resultType}.");
                 }
+
                 return propogate;
             }
 
@@ -1034,6 +1022,7 @@ partial class ExpressionBuilderContext
                 var result = PropertyHelper(source, path, expectedType);
                 return result;
             }
+
             throw new NotImplementedException().WithContext(this);
         }
     }
@@ -1048,18 +1037,20 @@ partial class ExpressionBuilderContext
         else
         {
             var pathMemberInfo = _typeResolver.GetProperty(source.Type, path!);
+
             if (pathMemberInfo == null)
             {
                 _logger.LogWarning(FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
                 return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
             }
-            if (pathMemberInfo is PropertyInfo property && pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
+
+            if (pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
             {
                 var isCheck = source.NewTypeIsExpression(pathMemberInfo.DeclaringType!);
                 var typeAs = source.NewTypeAsExpression(pathMemberInfo.DeclaringType!);
                 var pathAccess = Expression.MakeMemberAccess(typeAs, pathMemberInfo);
                 Expression? ifIs = pathAccess;
-                Expression elseNull = Expression.Constant(null, property.PropertyType);
+                Expression elseNull = Expression.Constant(null, pathMemberInfo.PropertyType);
                 // some ops, like properties on alias refs, don't have type information on them.
                 // can't check against what we don't have.
                 if (expectedType != null)

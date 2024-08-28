@@ -521,19 +521,20 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			bool? u_(Extension @this)
 			{
 				string ac_ = @this?.Url;
-				string ad_ = FHIRHelpers_4_3_000.ToString(ac_);
-				bool? ae_ = context.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
+				string ae_ = FHIRHelpers_4_3_000.ToString(ad_);
+				bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-				return ae_;
+				return af_;
 			};
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoCognitiveAssessment is DomainResource)
 					? ((NoCognitiveAssessment as DomainResource).Extension)
 					: null), u_);
 			DataType w_(Extension @this)
 			{
-				DataType af_ = @this?.Value;
+				DataType ag_ = @this?.Value;
 
-				return af_;
+				return ag_;
 			};
 			IEnumerable<DataType> x_ = context.Operators.Select<Extension, DataType>(v_, w_);
 			DataType y_ = context.Operators.SingletonFrom<DataType>(x_);

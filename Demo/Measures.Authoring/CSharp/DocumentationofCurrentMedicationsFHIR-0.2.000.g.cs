@@ -278,19 +278,20 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 				bool? k_(Extension @this)
 				{
 					string ae_ = @this?.Url;
-					string af_ = FHIRHelpers_4_3_000.ToString(ae_);
-					bool? ag_ = context.Operators.Equal(af_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					FhirString af_ = context.Operators.Convert<FhirString>(ae_);
+					string ag_ = FHIRHelpers_4_3_000.ToString(af_);
+					bool? ah_ = context.Operators.Equal(ag_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return ag_;
+					return ah_;
 				};
 				IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MedicationsNotDocumented is DomainResource)
 						? ((MedicationsNotDocumented as DomainResource).Extension)
 						: null), k_);
 				DataType m_(Extension @this)
 				{
-					DataType ah_ = @this?.Value;
+					DataType ai_ = @this?.Value;
 
-					return ah_;
+					return ai_;
 				};
 				IEnumerable<DataType> n_ = context.Operators.Select<Extension, DataType>(l_, m_);
 				DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
@@ -306,9 +307,9 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 				List<CodeableConcept> y_ = MedicationsNotDocumented?.ReasonCode;
 				CqlConcept z_(CodeableConcept @this)
 				{
-					CqlConcept ai_ = FHIRHelpers_4_3_000.ToConcept(@this);
+					CqlConcept aj_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
-					return ai_;
+					return aj_;
 				};
 				IEnumerable<CqlConcept> aa_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)y_, z_);
 				CqlValueSet ab_ = this.Medical_Reason();

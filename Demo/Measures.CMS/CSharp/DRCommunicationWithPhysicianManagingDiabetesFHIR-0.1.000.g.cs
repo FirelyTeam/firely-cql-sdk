@@ -734,19 +734,20 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				bool? q_(Extension @this)
 				{
 					string z_ = @this?.Url;
-					string aa_ = FHIRHelpers_4_3_000.ToString(z_);
-					bool? ab_ = context.Operators.Equal(aa_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					FhirString aa_ = context.Operators.Convert<FhirString>(z_);
+					string ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+					bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return ab_;
+					return ac_;
 				};
 				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((LevelOfSeverityNotCommunicated is DomainResource)
 						? ((LevelOfSeverityNotCommunicated as DomainResource).Extension)
 						: null), q_);
 				DataType s_(Extension @this)
 				{
-					DataType ac_ = @this?.Value;
+					DataType ad_ = @this?.Value;
 
-					return ac_;
+					return ad_;
 				};
 				IEnumerable<DataType> t_ = context.Operators.Select<Extension, DataType>(r_, s_);
 				DataType u_ = context.Operators.SingletonFrom<DataType>(t_);
@@ -767,16 +768,16 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		IEnumerable<Communication> i_ = context.Operators.SelectMany<Communication, Communication>(g_, h_);
 		bool? j_(Communication LevelOfSeverityNotCommunicated)
 		{
-			CodeableConcept ad_ = LevelOfSeverityNotCommunicated?.StatusReason;
-			CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
-			CqlValueSet af_ = this.Medical_Reason();
-			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-			CqlConcept ai_ = FHIRHelpers_4_3_000.ToConcept(ad_);
-			CqlValueSet aj_ = this.Patient_Reason();
-			bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
-			bool? al_ = context.Operators.Or(ag_, ak_);
+			CodeableConcept ae_ = LevelOfSeverityNotCommunicated?.StatusReason;
+			CqlConcept af_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			CqlValueSet ag_ = this.Medical_Reason();
+			bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
+			CqlConcept aj_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			CqlValueSet ak_ = this.Patient_Reason();
+			bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
+			bool? am_ = context.Operators.Or(ah_, al_);
 
-			return al_;
+			return am_;
 		};
 		IEnumerable<Communication> k_ = context.Operators.Where<Communication>(i_, j_);
 
@@ -802,19 +803,20 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				bool? q_(Extension @this)
 				{
 					string z_ = @this?.Url;
-					string aa_ = FHIRHelpers_4_3_000.ToString(z_);
-					bool? ab_ = context.Operators.Equal(aa_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					FhirString aa_ = context.Operators.Convert<FhirString>(z_);
+					string ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+					bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return ab_;
+					return ac_;
 				};
 				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MacularEdemaAbsentNotCommunicated is DomainResource)
 						? ((MacularEdemaAbsentNotCommunicated as DomainResource).Extension)
 						: null), q_);
 				DataType s_(Extension @this)
 				{
-					DataType ac_ = @this?.Value;
+					DataType ad_ = @this?.Value;
 
-					return ac_;
+					return ad_;
 				};
 				IEnumerable<DataType> t_ = context.Operators.Select<Extension, DataType>(r_, s_);
 				DataType u_ = context.Operators.SingletonFrom<DataType>(t_);
@@ -835,16 +837,16 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		IEnumerable<Communication> i_ = context.Operators.SelectMany<Communication, Communication>(g_, h_);
 		bool? j_(Communication MacularEdemaAbsentNotCommunicated)
 		{
-			CodeableConcept ad_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
-			CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
-			CqlValueSet af_ = this.Medical_Reason();
-			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-			CqlConcept ai_ = FHIRHelpers_4_3_000.ToConcept(ad_);
-			CqlValueSet aj_ = this.Patient_Reason();
-			bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
-			bool? al_ = context.Operators.Or(ag_, ak_);
+			CodeableConcept ae_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
+			CqlConcept af_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			CqlValueSet ag_ = this.Medical_Reason();
+			bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
+			CqlConcept aj_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			CqlValueSet ak_ = this.Patient_Reason();
+			bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
+			bool? am_ = context.Operators.Or(ah_, al_);
 
-			return al_;
+			return am_;
 		};
 		IEnumerable<Communication> k_ = context.Operators.Where<Communication>(i_, j_);
 
@@ -870,19 +872,20 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				bool? q_(Extension @this)
 				{
 					string z_ = @this?.Url;
-					string aa_ = FHIRHelpers_4_3_000.ToString(z_);
-					bool? ab_ = context.Operators.Equal(aa_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+					FhirString aa_ = context.Operators.Convert<FhirString>(z_);
+					string ab_ = FHIRHelpers_4_3_000.ToString(aa_);
+					bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
-					return ab_;
+					return ac_;
 				};
 				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MacularEdemaPresentNotCommunicated is DomainResource)
 						? ((MacularEdemaPresentNotCommunicated as DomainResource).Extension)
 						: null), q_);
 				DataType s_(Extension @this)
 				{
-					DataType ac_ = @this?.Value;
+					DataType ad_ = @this?.Value;
 
-					return ac_;
+					return ad_;
 				};
 				IEnumerable<DataType> t_ = context.Operators.Select<Extension, DataType>(r_, s_);
 				DataType u_ = context.Operators.SingletonFrom<DataType>(t_);
@@ -903,16 +906,16 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		IEnumerable<Communication> i_ = context.Operators.SelectMany<Communication, Communication>(g_, h_);
 		bool? j_(Communication MacularEdemaPresentNotCommunicated)
 		{
-			CodeableConcept ad_ = MacularEdemaPresentNotCommunicated?.StatusReason;
-			CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
-			CqlValueSet af_ = this.Medical_Reason();
-			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-			CqlConcept ai_ = FHIRHelpers_4_3_000.ToConcept(ad_);
-			CqlValueSet aj_ = this.Patient_Reason();
-			bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
-			bool? al_ = context.Operators.Or(ag_, ak_);
+			CodeableConcept ae_ = MacularEdemaPresentNotCommunicated?.StatusReason;
+			CqlConcept af_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			CqlValueSet ag_ = this.Medical_Reason();
+			bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
+			CqlConcept aj_ = FHIRHelpers_4_3_000.ToConcept(ae_);
+			CqlValueSet ak_ = this.Patient_Reason();
+			bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
+			bool? am_ = context.Operators.Or(ah_, al_);
 
-			return al_;
+			return am_;
 		};
 		IEnumerable<Communication> k_ = context.Operators.Where<Communication>(i_, j_);
 

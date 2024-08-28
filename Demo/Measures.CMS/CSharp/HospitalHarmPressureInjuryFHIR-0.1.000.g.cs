@@ -316,19 +316,20 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? n_(Extension @this)
 				{
 					string w_ = @this?.Url;
-					string x_ = FHIRHelpers_4_3_000.ToString(w_);
-					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					FhirString x_ = context.Operators.Convert<FhirString>(w_);
+					string y_ = FHIRHelpers_4_3_000.ToString(x_);
+					bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return y_;
+					return z_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: null), n_);
 				DataType p_(Extension @this)
 				{
-					DataType z_ = @this?.Value;
+					DataType aa_ = @this?.Value;
 
-					return z_;
+					return aa_;
 				};
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
@@ -439,19 +440,20 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? n_(Extension @this)
 				{
 					string w_ = @this?.Url;
-					string x_ = FHIRHelpers_4_3_000.ToString(w_);
-					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					FhirString x_ = context.Operators.Convert<FhirString>(w_);
+					string y_ = FHIRHelpers_4_3_000.ToString(x_);
+					bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return y_;
+					return z_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: null), n_);
 				DataType p_(Extension @this)
 				{
-					DataType z_ = @this?.Value;
+					DataType aa_ = @this?.Value;
 
-					return z_;
+					return aa_;
 				};
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
@@ -606,19 +608,20 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? n_(Extension @this)
 				{
 					string w_ = @this?.Url;
-					string x_ = FHIRHelpers_4_3_000.ToString(w_);
-					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					FhirString x_ = context.Operators.Convert<FhirString>(w_);
+					string y_ = FHIRHelpers_4_3_000.ToString(x_);
+					bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return y_;
+					return z_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: null), n_);
 				DataType p_(Extension @this)
 				{
-					DataType z_ = @this?.Value;
+					DataType aa_ = @this?.Value;
 
-					return z_;
+					return aa_;
 				};
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
@@ -749,19 +752,20 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? n_(Extension @this)
 				{
 					string w_ = @this?.Url;
-					string x_ = FHIRHelpers_4_3_000.ToString(w_);
-					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					FhirString x_ = context.Operators.Convert<FhirString>(w_);
+					string y_ = FHIRHelpers_4_3_000.ToString(x_);
+					bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return y_;
+					return z_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: null), n_);
 				DataType p_(Extension @this)
 				{
-					DataType z_ = @this?.Value;
+					DataType aa_ = @this?.Value;
 
-					return z_;
+					return aa_;
 				};
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
