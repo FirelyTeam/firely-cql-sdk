@@ -6,9 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#nullable enable
+
 using System;
 using FluentAssertions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -56,48 +59,69 @@ public class CqlContextOperatorTests
 		// Assert
 		isEqual.Should().BeTrue();
 	}
+
     [TestMethod]
-    public void Equal_ConceptAtLeastOneCodeMatch_MustEqual()
+    public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
     {
         // Arrange
-        var rtx = GetNewContext();
+        CqlContext rtx = GetNewContext();
 
-        var divorcedCode = new CqlCode[]
-        {
-            new CqlCode("D", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
-        };
+        CqlCode[] divorcedCodes =
+        [
+            new CqlCode("D", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
+        ];
 
-        var divorcedConcept = new CqlConcept((divorcedCode as IEnumerable<CqlCode>), "Divorced Concept");
+        CqlConcept divorcedConcept = new(divorcedCodes, "Divorced Concept");
 
-        var notMarriedCode = new CqlCode[]
-        {
+        CqlCode[] notMarriedCodes =
+        [
             new CqlCode("L", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
-            new CqlCode("D", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
-        };
+            new CqlCode("D", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
+        ];
 
-        var notMarriedConcept = new CqlConcept((notMarriedCode as IEnumerable<CqlCode>), "Not Married Concept");
+        CqlConcept notMarriedConcept = new(notMarriedCodes, "Not Married Concept");
 
 
         // Act
-        //This should work according to https://cql.hl7.org/02-authorsguide.html#comparison-operators
-        //Quote: For Concept values, equivalence means the values have at least one equivalent code.
-        //commented items that crash.
-        var isEqualLessOnLeftConcept = rtx.Operators.Equivalent(divorcedConcept, notMarriedConcept);
-        //var isEqualLessOnRightConcept = rtx.Operators.Equivalent(notMarriedConcept, divorcedConcept);
+        bool? isEqualLessOnLeftConcept = rtx.Operators.Equivalent(divorcedConcept, notMarriedConcept);
+        bool? isEqualLessOnRightConcept = rtx.Operators.Equivalent(notMarriedConcept, divorcedConcept);
 
         // Assert
         isEqualLessOnLeftConcept.Should().BeTrue();
-        //isEqualLessOnRighConcept.Should().BeTrue();
+        isEqualLessOnRightConcept.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Equivalent_ConceptAtLeastOneCodeEquivalentOnNull_MustBeEquivalent()
+    {
+        // Arrange
+        CqlContext rtx = GetNewContext();
+
+        CqlCode?[] divorcedCodes =
+        [
+			null,
+            new CqlCode("X", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
+        ];
+
+        CqlConcept divorcedConcept = new(divorcedCodes!, "Divorced Concept");
+
+        CqlCode?[] notMarriedCodes =
+        [
+            new CqlCode("Y", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
+			null,
+            new CqlCode("Z", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
+        ];
+
+        CqlConcept notMarriedConcept = new(notMarriedCodes!, "Not Married Concept");
 
 
         // Act
-        //Unclear if these should work from documentation
-        //var isEqualLessOnLeftCode = rtx.Operators.Equivalent(divorcedCode, notMarriedConcept);
-        //var isEqualLessOnRightCode = rtx.Operators.Equivalent(notMarriedConcept, divorcedCode);
+        bool? isEqualLessOnLeftConcept = rtx.Operators.Equivalent(divorcedConcept, notMarriedConcept);
+        bool? isEqualLessOnRightConcept = rtx.Operators.Equivalent(notMarriedConcept, divorcedConcept);
 
         // Assert
-        //isEqualLessOnLeftCode.Should().BeTrue();
-        //isEqualLessOnRightCode.Should().BeTrue();
+        isEqualLessOnLeftConcept.Should().BeTrue();
+        isEqualLessOnRightConcept.Should().BeTrue();
     }
 
     #endregion
