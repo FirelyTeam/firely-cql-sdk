@@ -324,6 +324,26 @@ namespace Hl7.Cql.CqlToElm
                         result = cheapest[0];
                         return true;
                     }
+                    else if (cheapest.Length == 2)
+                    {
+                        // if one is a system function and one is not, prefer the non-system function
+                        switch(cheapest[0].Function, cheapest[1].Function)
+                        {
+                            case (not SystemFunction, SystemFunction):
+                                result = cheapest[0];
+                                return true;
+                            case (SystemFunction, not SystemFunction):
+                                result = cheapest[1];
+                                return true;
+                            default: // ambiguous
+                                result = new(cheapest[0].Function,
+                                    cheapest[0].Arguments,
+                                    cheapest[0].GenericInferences,
+                                    cheapest[0].Flags | SignatureMatchFlags.Ambiguous,
+                                    () => Messaging.CallIsAmbiguous(overloadedFunction.Name, arguments, cheapest));
+                                return true;
+                        }
+                    }
                     else if (cheapest.Length > 0)
                     {
                         result = new(cheapest[0].Function,

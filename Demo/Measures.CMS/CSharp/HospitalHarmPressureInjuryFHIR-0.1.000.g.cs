@@ -315,31 +315,29 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 				bool? n_(Extension @this)
 				{
-					string x_ = @this?.Url;
-					FhirUri y_ = context.Operators.Convert<FhirUri>(x_);
-					string z_ = FHIRHelpers_4_3_000.ToString(y_);
-					bool? aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					string w_ = @this?.Url;
+					string x_ = FHIRHelpers_4_3_000.ToString(w_);
+					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return aa_;
+					return y_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: default), n_);
 				DataType p_(Extension @this)
 				{
-					DataType ab_ = @this?.Value;
+					DataType z_ = @this?.Value;
 
-					return ab_;
+					return z_;
 				};
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
-				CodeableConcept s_ = context.Operators.Convert<CodeableConcept>(r_);
-				CqlConcept t_ = FHIRHelpers_4_3_000.ToConcept(s_);
-				CqlValueSet u_ = this.Present_on_Admission_or_Clinically_Undetermined();
-				bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-				bool? w_ = context.Operators.And(m_, v_);
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
+				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined();
+				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+				bool? v_ = context.Operators.And(m_, u_);
 
-				return w_;
+				return v_;
 			};
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
@@ -440,31 +438,29 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 				bool? n_(Extension @this)
 				{
-					string x_ = @this?.Url;
-					FhirUri y_ = context.Operators.Convert<FhirUri>(x_);
-					string z_ = FHIRHelpers_4_3_000.ToString(y_);
-					bool? aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					string w_ = @this?.Url;
+					string x_ = FHIRHelpers_4_3_000.ToString(w_);
+					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return aa_;
+					return y_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: default), n_);
 				DataType p_(Extension @this)
 				{
-					DataType ab_ = @this?.Value;
+					DataType z_ = @this?.Value;
 
-					return ab_;
+					return z_;
 				};
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
-				CodeableConcept s_ = context.Operators.Convert<CodeableConcept>(r_);
-				CqlConcept t_ = FHIRHelpers_4_3_000.ToConcept(s_);
-				CqlValueSet u_ = this.Present_on_Admission_or_Clinically_Undetermined();
-				bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-				bool? w_ = context.Operators.And(m_, v_);
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
+				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined();
+				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+				bool? v_ = context.Operators.And(m_, u_);
 
-				return w_;
+				return v_;
 			};
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
@@ -609,31 +605,29 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 				bool? n_(Extension @this)
 				{
-					string x_ = @this?.Url;
-					FhirUri y_ = context.Operators.Convert<FhirUri>(x_);
-					string z_ = FHIRHelpers_4_3_000.ToString(y_);
-					bool? aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					string w_ = @this?.Url;
+					string x_ = FHIRHelpers_4_3_000.ToString(w_);
+					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return aa_;
+					return y_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: default), n_);
 				DataType p_(Extension @this)
 				{
-					DataType ab_ = @this?.Value;
+					DataType z_ = @this?.Value;
 
-					return ab_;
+					return z_;
 				};
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
-				CodeableConcept s_ = context.Operators.Convert<CodeableConcept>(r_);
-				CqlConcept t_ = FHIRHelpers_4_3_000.ToConcept(s_);
-				CqlValueSet u_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
-				bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-				bool? w_ = context.Operators.And(m_, v_);
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
+				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
+				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+				bool? v_ = context.Operators.And(m_, u_);
 
-				return w_;
+				return v_;
 			};
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
@@ -754,31 +748,29 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 				bool? n_(Extension @this)
 				{
-					string x_ = @this?.Url;
-					FhirUri y_ = context.Operators.Convert<FhirUri>(x_);
-					string z_ = FHIRHelpers_4_3_000.ToString(y_);
-					bool? aa_ = context.Operators.Equal(z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
+					string w_ = @this?.Url;
+					string x_ = FHIRHelpers_4_3_000.ToString(w_);
+					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
-					return aa_;
+					return y_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: default), n_);
 				DataType p_(Extension @this)
 				{
-					DataType ab_ = @this?.Value;
+					DataType z_ = @this?.Value;
 
-					return ab_;
+					return z_;
 				};
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
-				CodeableConcept s_ = context.Operators.Convert<CodeableConcept>(r_);
-				CqlConcept t_ = FHIRHelpers_4_3_000.ToConcept(s_);
-				CqlValueSet u_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
-				bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-				bool? w_ = context.Operators.And(m_, v_);
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
+				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
+				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+				bool? v_ = context.Operators.And(m_, u_);
 
-				return w_;
+				return v_;
 			};
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);

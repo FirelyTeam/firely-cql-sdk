@@ -61,6 +61,19 @@ namespace ToolsTest
         }
 
         [TestMethod]
+        public void System()
+        {
+            var cqlToElm = new CqlToCSharp() { Force = true };
+            cqlToElm.BuildEngine = buildEngine.Object;
+            cqlToElm.ElmPath = Environment.CurrentDirectory;
+            cqlToElm.Sources = [new TaskItem(@"Input\Cql\System-2.0.0.cql")];
+            cqlToElm.Execute().Should().BeTrue();
+            cqlToElm.Elm.Should().NotBeEmpty();
+            cqlToElm.CSharp.Should().NotBeEmpty();
+            errors.Should().BeEmpty();
+        }
+
+        [TestMethod]
         public void Could_Not_Resolve()
         {
             var cqlToElm = new CqlToCSharp() { Force = true };

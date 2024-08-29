@@ -279,5 +279,6 @@ namespace Hl7.Cql.CqlToElm.Test
             fd.externalSpecified.Should().BeTrue();
             fd.expression.Should().BeNull();
         }
+
     }
 }

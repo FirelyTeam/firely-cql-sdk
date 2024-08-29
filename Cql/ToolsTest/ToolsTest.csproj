@@ -40,6 +40,9 @@
 	  <None Update="Input\Cql\FHIRHelpers-4.0.1.cql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Input\Cql\System-2.0.0.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Input\Cql\UsesFHIRHelpers-1.0.0.cql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>

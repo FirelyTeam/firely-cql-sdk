@@ -1,3 +1,4 @@
 {
-    "github.copilot.editor.enableAutoCompletions": false
+    "github.copilot.editor.enableAutoCompletions": false,
+    "editor.formatOnSave": false
 }
