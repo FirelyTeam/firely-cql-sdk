@@ -6,3 +6,7 @@
 [submodule "submodules/Firely.Cql.Sdk.Integration.Runner"]
 	path = submodules/Firely.Cql.Sdk.Integration.Runner
 	url = https://github.com/FirelyTeam/Firely.Cql.Sdk.Integration.Runner
+
+[submodule "submodules/Ncqa.DQIC"]
+	path = submodules/Ncqa.DQIC
+	url = https://github.com/FirelyTeam/Ncqa.DQIC

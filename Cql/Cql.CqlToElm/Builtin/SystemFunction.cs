@@ -93,6 +93,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             this.name = name ?? typeof(T).Name;
             expression = null;
             external = true;
+            externalSpecified = true;
             fluent = false;   // not too sure, maybe should be true for fhirpath functions?
             context = null;    // any context?
             accessLevel = AccessModifier.Public;    // All built-in functions are public                
