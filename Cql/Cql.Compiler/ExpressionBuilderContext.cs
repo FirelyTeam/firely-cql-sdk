@@ -2184,9 +2184,9 @@ partial class ExpressionBuilderContext
                             return Expression.Default(type);
 
                         case TypeConversion.OperatorConvert:
-                        case TypeConversion.ExpressionTypeAs:
                             return converted;
 
+                        case TypeConversion.ExpressionTypeAs:
                         default:
                             return new ElmAsExpression(operand, type, @as.strict);
                     }
