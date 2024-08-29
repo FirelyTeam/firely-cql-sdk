@@ -1096,7 +1096,7 @@ partial class ExpressionBuilderContext
         //                 throw new InvalidOperationException($"FunctionRef {op.libraryName + "." + op.name} has no result type specifier or result type name.");
         //var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, resultType);
 
-        var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, op.resultTypeSpecifier);
+        var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, op.signature, operands, op.resultTypeSpecifier);
 
         return invoke;
     }
@@ -1152,12 +1152,14 @@ partial class ExpressionBuilderContext
 
     /// <param name="name">The function name</param>
     /// <param name="libraryAlias">If this is an external call, the local alias defined in the using statement</param>
+    /// <param name="signature">The signature as specified in the function call.</param>
     /// <param name="arguments">The function arguments</param>
     /// <param name="returnType">The function's return type</param>
     /// <returns></returns>
     protected Expression InvokeDefinedFunctionThroughRuntimeContext(
         string name,
         string? libraryAlias,
+        TypeSpecifier[]? signature,
         Expression[] arguments,
         TypeSpecifier returnType)
     {
@@ -1166,11 +1168,30 @@ partial class ExpressionBuilderContext
 
         var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
         var convertedArguments = arguments
+                                 .Select((a,i) => convertChoice(a,signature?[i]))
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
         var funcType = convertedArguments.Select(a => a.Type).Append(rtt).ToArray();
         Type definitionType = Expression.GetFuncType(funcType);
+
         return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
+
+        // This function will handle the cases where the normal C# invocation is insufficient to represent the CQL function call:
+        // the argument is of a choice type, and the parameter is of a specific type (or for now, also a choice type).
+        // In this case we need to insert a conversion from the choice type to the specific type of the argument. Presumably, the
+        // cql2elm compiler has already checked that the call is valid, but we do need to cast the choice type (in C# represented by
+        // object/DataType) to the actual type to make this a valid C# call. CQL semantics state that the result may be null if the
+        // choice is not compatible with the parameter, so we'll use an As in C#.
+        Expression convertChoice(Expression argument, TypeSpecifier? actualType)
+        {
+            if(actualType is not null && argument.Type == typeof(object))
+            {
+                var type = TypeFor(actualType) ?? throw new InvalidOperationException($"Unable to resolve type for {actualType}");
+                return argument.NewTypeAsExpression(type);
+            }
+
+            return argument;
+        }
     }
 
     protected Expression InvokeDefinitionThroughRuntimeContext(

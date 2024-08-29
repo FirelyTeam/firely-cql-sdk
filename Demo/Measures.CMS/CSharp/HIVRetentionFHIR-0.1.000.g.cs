@@ -304,15 +304,15 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
 					: null), q_);
-			DataType s_(Extension @this)
+			object s_(Extension @this)
 			{
 				DataType ap_ = @this?.Value;
 
 				return ap_;
 			};
-			IEnumerable<DataType> t_ = context.Operators.Select<Extension, DataType>(r_, s_);
-			DataType u_ = context.Operators.SingletonFrom<DataType>(t_);
-			CqlCode v_ = FHIRHelpers_4_3_000.ToCode(u_);
+			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
+			object u_ = context.Operators.SingletonFrom<object>(t_);
+			CqlCode v_ = FHIRHelpers_4_3_000.ToCode((u_ as Coding));
 			CqlCode[] w_ = [
 				v_,
 			];
@@ -328,20 +328,20 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
 					: null), x_);
-			DataType z_(Extension @this)
+			object z_(Extension @this)
 			{
 				DataType au_ = @this?.Value;
 
 				return au_;
 			};
-			IEnumerable<DataType> aa_ = context.Operators.Select<Extension, DataType>(y_, z_);
-			CqlCode ab_(DataType @this)
+			IEnumerable<object> aa_ = context.Operators.Select<Extension, object>(y_, z_);
+			CqlCode ab_(object @this)
 			{
-				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(@this);
+				CqlCode av_ = FHIRHelpers_4_3_000.ToCode((@this as Coding));
 
 				return av_;
 			};
-			IEnumerable<CqlCode> ac_ = context.Operators.Select<DataType, CqlCode>(aa_, ab_);
+			IEnumerable<CqlCode> ac_ = context.Operators.Select<object, CqlCode>(aa_, ab_);
 			IEnumerable<CqlCode> ad_ = context.Operators.Union<CqlCode>((w_ as IEnumerable<CqlCode>), ac_);
 			bool? ae_(Extension @this)
 			{
@@ -428,20 +428,20 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
 					: null), q_);
-			DataType s_(Extension @this)
+			object s_(Extension @this)
 			{
 				DataType ao_ = @this?.Value;
 
 				return ao_;
 			};
-			IEnumerable<DataType> t_ = context.Operators.Select<Extension, DataType>(r_, s_);
-			CqlCode u_(DataType @this)
+			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
+			CqlCode u_(object @this)
 			{
-				CqlCode ap_ = FHIRHelpers_4_3_000.ToCode(@this);
+				CqlCode ap_ = FHIRHelpers_4_3_000.ToCode((@this as Coding));
 
 				return ap_;
 			};
-			IEnumerable<CqlCode> v_ = context.Operators.Select<DataType, CqlCode>(t_, u_);
+			IEnumerable<CqlCode> v_ = context.Operators.Select<object, CqlCode>(t_, u_);
 			bool? w_(Extension @this)
 			{
 				string aq_ = @this?.Url;
@@ -454,20 +454,20 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<Extension> x_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
 					: null), w_);
-			DataType y_(Extension @this)
+			object y_(Extension @this)
 			{
 				DataType au_ = @this?.Value;
 
 				return au_;
 			};
-			IEnumerable<DataType> z_ = context.Operators.Select<Extension, DataType>(x_, y_);
-			CqlCode aa_(DataType @this)
+			IEnumerable<object> z_ = context.Operators.Select<Extension, object>(x_, y_);
+			CqlCode aa_(object @this)
 			{
-				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(@this);
+				CqlCode av_ = FHIRHelpers_4_3_000.ToCode((@this as Coding));
 
 				return av_;
 			};
-			IEnumerable<CqlCode> ab_ = context.Operators.Select<DataType, CqlCode>(z_, aa_);
+			IEnumerable<CqlCode> ab_ = context.Operators.Select<object, CqlCode>(z_, aa_);
 			IEnumerable<CqlCode> ac_ = context.Operators.Union<CqlCode>(v_, ab_);
 			bool? ad_(Extension @this)
 			{

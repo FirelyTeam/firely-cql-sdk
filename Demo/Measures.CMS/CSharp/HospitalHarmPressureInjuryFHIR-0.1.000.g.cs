@@ -325,14 +325,14 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: null), n_);
-				DataType p_(Extension @this)
+				object p_(Extension @this)
 				{
 					DataType aa_ = @this?.Value;
 
 					return aa_;
 				};
-				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
-				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
+				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
+				object r_ = context.Operators.SingletonFrom<object>(q_);
 				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
 				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
@@ -449,14 +449,14 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: null), n_);
-				DataType p_(Extension @this)
+				object p_(Extension @this)
 				{
 					DataType aa_ = @this?.Value;
 
 					return aa_;
 				};
-				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
-				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
+				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
+				object r_ = context.Operators.SingletonFrom<object>(q_);
 				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
 				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
@@ -617,14 +617,14 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: null), n_);
-				DataType p_(Extension @this)
+				object p_(Extension @this)
 				{
 					DataType aa_ = @this?.Value;
 
 					return aa_;
 				};
-				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
-				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
+				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
+				object r_ = context.Operators.SingletonFrom<object>(q_);
 				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
 				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
@@ -761,14 +761,14 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: null), n_);
-				DataType p_(Extension @this)
+				object p_(Extension @this)
 				{
 					DataType aa_ = @this?.Value;
 
 					return aa_;
 				};
-				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
-				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
+				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
+				object r_ = context.Operators.SingletonFrom<object>(q_);
 				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
 				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);

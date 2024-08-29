@@ -7,6 +7,7 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
@@ -30,7 +31,7 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
 
     protected override bool Process(object node)
     {
-        if (node is ExpressionRef element && element.resultTypeSpecifier is null)
+        if (node is ExpressionRef { resultTypeSpecifier: null } element)
         {
             switch (node)
             {
@@ -40,6 +41,16 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
             }
             FixElement(_library!, element);
         }
+
+        if(node is FunctionRef { libraryName: "FHIRHelpers", name: "ToCode", signature: null } frefnos)
+        {
+            // Call overload resolution and add a signature. In fact we should probably do this for ANY FunctionRef
+            // without a signature. For now, we'll just fix this for the ToCode() function we're dealing with in
+            // the current eCQM measures.
+            // Issue https://github.com/FirelyTeam/firely-cql-sdk/issues/497 will make this solution more general.
+            frefnos.signature = [new NamedTypeSpecifier("http://hl7.org/fhir", "Coding")];
+        }
+
         return false;
     }
 

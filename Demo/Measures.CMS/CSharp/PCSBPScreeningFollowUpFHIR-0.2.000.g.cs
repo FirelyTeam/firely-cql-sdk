@@ -2399,14 +2399,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
 						? ((NoBPScreen as DomainResource).Extension)
 						: null), u_);
-				DataType w_(Extension @this)
+				object w_(Extension @this)
 				{
 					DataType av_ = @this?.Value;
 
 					return av_;
 				};
-				IEnumerable<DataType> x_ = context.Operators.Select<Extension, DataType>(v_, w_);
-				DataType y_ = context.Operators.SingletonFrom<DataType>(x_);
+				IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
+				object y_ = context.Operators.SingletonFrom<object>(x_);
 				CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_);
 				CqlValueSet aa_ = this.Patient_Declined();
 				bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
@@ -2422,14 +2422,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				IEnumerable<Extension> ad_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
 						? ((NoBPScreen as DomainResource).Extension)
 						: null), ac_);
-				DataType ae_(Extension @this)
+				object ae_(Extension @this)
 				{
 					DataType ba_ = @this?.Value;
 
 					return ba_;
 				};
-				IEnumerable<DataType> af_ = context.Operators.Select<Extension, DataType>(ad_, ae_);
-				DataType ag_ = context.Operators.SingletonFrom<DataType>(af_);
+				IEnumerable<object> af_ = context.Operators.Select<Extension, object>(ad_, ae_);
+				object ag_ = context.Operators.SingletonFrom<object>(af_);
 				CqlConcept ah_ = FHIRHelpers_4_3_000.ToConcept(ag_);
 				CqlValueSet ai_ = this.Medical_Reason();
 				bool? aj_ = context.Operators.ConceptInValueSet(ah_, ai_);
@@ -2499,14 +2499,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Extension> ag_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NonPharmIntervention is DomainResource)
 					? ((NonPharmIntervention as DomainResource).Extension)
 					: null), af_);
-			DataType ah_(Extension @this)
+			object ah_(Extension @this)
 			{
 				DataType aw_ = @this?.Value;
 
 				return aw_;
 			};
-			IEnumerable<DataType> ai_ = context.Operators.Select<Extension, DataType>(ag_, ah_);
-			DataType aj_ = context.Operators.SingletonFrom<DataType>(ai_);
+			IEnumerable<object> ai_ = context.Operators.Select<Extension, object>(ag_, ah_);
+			object aj_ = context.Operators.SingletonFrom<object>(ai_);
 			CqlConcept ak_ = FHIRHelpers_4_3_000.ToConcept(aj_);
 			CqlValueSet al_ = this.Patient_Declined();
 			bool? am_ = context.Operators.ConceptInValueSet(ak_, al_);
@@ -2555,14 +2555,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((LabECGNotDone is DomainResource)
 					? ((LabECGNotDone as DomainResource).Extension)
 					: null), p_);
-			DataType r_(Extension @this)
+			object r_(Extension @this)
 			{
 				DataType ab_ = @this?.Value;
 
 				return ab_;
 			};
-			IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
-			DataType t_ = context.Operators.SingletonFrom<DataType>(s_);
+			IEnumerable<object> s_ = context.Operators.Select<Extension, object>(q_, r_);
+			object t_ = context.Operators.SingletonFrom<object>(s_);
 			CqlConcept u_ = FHIRHelpers_4_3_000.ToConcept(t_);
 			CqlValueSet v_ = this.Patient_Declined();
 			bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
@@ -2606,14 +2606,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTNDeclinedReferralAndFollowUp is DomainResource)
 					? ((SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension)
 					: null), t_);
-			DataType v_(Extension @this)
+			object v_(Extension @this)
 			{
 				DataType ak_ = @this?.Value;
 
 				return ak_;
 			};
-			IEnumerable<DataType> w_ = context.Operators.Select<Extension, DataType>(u_, v_);
-			DataType x_ = context.Operators.SingletonFrom<DataType>(w_);
+			IEnumerable<object> w_ = context.Operators.Select<Extension, object>(u_, v_);
+			object x_ = context.Operators.SingletonFrom<object>(w_);
 			CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept(x_);
 			CqlValueSet z_ = this.Patient_Declined();
 			bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
@@ -2663,14 +2663,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			IEnumerable<Extension> aa_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTN140Over90ReferralFollowUpNotDone is DomainResource)
 					? ((SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension)
 					: null), z_);
-			DataType ab_(Extension @this)
+			object ab_(Extension @this)
 			{
 				DataType aq_ = @this?.Value;
 
 				return aq_;
 			};
-			IEnumerable<DataType> ac_ = context.Operators.Select<Extension, DataType>(aa_, ab_);
-			DataType ad_ = context.Operators.SingletonFrom<DataType>(ac_);
+			IEnumerable<object> ac_ = context.Operators.Select<Extension, object>(aa_, ab_);
+			object ad_ = context.Operators.SingletonFrom<object>(ac_);
 			CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
 			CqlValueSet af_ = this.Patient_Declined();
 			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
@@ -2741,14 +2741,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				IEnumerable<Extension> ap_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((ElevatedBPDeclinedInterventions is DomainResource)
 						? ((ElevatedBPDeclinedInterventions as DomainResource).Extension)
 						: null), ao_);
-				DataType aq_(Extension @this)
+				object aq_(Extension @this)
 				{
 					DataType bl_ = @this?.Value;
 
 					return bl_;
 				};
-				IEnumerable<DataType> ar_ = context.Operators.Select<Extension, DataType>(ap_, aq_);
-				DataType as_ = context.Operators.SingletonFrom<DataType>(ar_);
+				IEnumerable<object> ar_ = context.Operators.Select<Extension, object>(ap_, aq_);
+				object as_ = context.Operators.SingletonFrom<object>(ar_);
 				CqlConcept at_ = FHIRHelpers_4_3_000.ToConcept(as_);
 				CqlValueSet au_ = this.Patient_Declined();
 				bool? av_ = context.Operators.ConceptInValueSet(at_, au_);
@@ -2822,14 +2822,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				IEnumerable<Extension> cm_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((FirstHTNDeclinedInterventions is DomainResource)
 						? ((FirstHTNDeclinedInterventions as DomainResource).Extension)
 						: null), cl_);
-				DataType cn_(Extension @this)
+				object cn_(Extension @this)
 				{
 					DataType di_ = @this?.Value;
 
 					return di_;
 				};
-				IEnumerable<DataType> co_ = context.Operators.Select<Extension, DataType>(cm_, cn_);
-				DataType cp_ = context.Operators.SingletonFrom<DataType>(co_);
+				IEnumerable<object> co_ = context.Operators.Select<Extension, object>(cm_, cn_);
+				object cp_ = context.Operators.SingletonFrom<object>(co_);
 				CqlConcept cq_ = FHIRHelpers_4_3_000.ToConcept(cp_);
 				CqlValueSet cr_ = this.Patient_Declined();
 				bool? cs_ = context.Operators.ConceptInValueSet(cq_, cr_);

@@ -530,14 +530,14 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoCognitiveAssessment is DomainResource)
 					? ((NoCognitiveAssessment as DomainResource).Extension)
 					: null), u_);
-			DataType w_(Extension @this)
+			object w_(Extension @this)
 			{
 				DataType ag_ = @this?.Value;
 
 				return ag_;
 			};
-			IEnumerable<DataType> x_ = context.Operators.Select<Extension, DataType>(v_, w_);
-			DataType y_ = context.Operators.SingletonFrom<DataType>(x_);
+			IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
+			object y_ = context.Operators.SingletonFrom<object>(x_);
 			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_);
 			CqlValueSet aa_ = this.Patient_Reason();
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
