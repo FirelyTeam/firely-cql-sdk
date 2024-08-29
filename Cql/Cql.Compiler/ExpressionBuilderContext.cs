@@ -2181,16 +2181,11 @@ partial class ExpressionBuilderContext
                                 FormatMessage(
                                     $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
                                     @as.operand));
-
                             return Expression.Default(type);
 
-                        // use the custom conversion function
                         case TypeConversion.OperatorConvert:
-                            return converted;
-
                         case TypeConversion.ExpressionTypeAs:
                             return converted;
-                            //return new ElmAsExpression(operand, type, @as.strict);
 
                         default:
                             return new ElmAsExpression(operand, type, @as.strict);
