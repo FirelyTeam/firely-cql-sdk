@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Compiler;
+﻿using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
@@ -26,6 +27,9 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder;
 
+        internal static CSharpLibrarySetToStreamsWriter SourceCodeWriter =>
+            Services.GetRequiredService<CSharpLibrarySetToStreamsWriter>();
+
         internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
 
 
@@ -41,7 +45,11 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddMessaging()
                 .AddLogging(builder => builder
                     .AddConsole())
-                .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider));
+                .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider))
+                .AddSingleton(typeof(CSharpLibrarySetToStreamsWriter))
+                .AddSingleton(typeof(TypeToCSharpConverter))
+                .AddSingleton(typeof(CqlCompilerFactory))
+                .AddSingleton(isp => isp.GetRequiredService<CqlCompilerFactory>().TypeResolver);
 
         private class TestLibraryProvider : ILibraryProvider
         {
@@ -276,5 +284,41 @@ namespace Hl7.Cql.CqlToElm.Test
             provider.Libraries.Add("FHIRHelpers", "4.0.1", builder);
         }
 
+
+        internal static string WriteCSharp(Library library)
+        {
+            var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
+            var ls = new LibrarySet("", library);
+            var csByNav = new Dictionary<string, string>();
+            var callbacks = new CSharpSourceCodeWriterCallbacks(onAfterStep: afterWrite);
+            SourceCodeWriter.ProcessDefinitions(lambdas, ls, callbacks);
+            return csByNav[library.NameAndVersion()!];
+
+            void afterWrite(CSharpSourceCodeStep step)
+            {
+                switch (step)
+                {
+                    case CSharpSourceCodeStep.OnStream onStream:
+                        onStream.Stream.Seek(0, SeekOrigin.Begin);
+                        using (var reader = new StreamReader(onStream.Stream))
+                        {
+                            var code = reader.ReadToEnd();
+                            csByNav.Add(onStream.Name, code);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        internal static byte[] Compile(Library library)
+        {
+            var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
+            var ccf = Services.GetRequiredService<CqlCompilerFactory>();
+            var asm = new AssemblyCompiler(SourceCodeWriter, ccf.TypeManager, default, default);
+            var dict = asm.Compile(new LibrarySet("",library), lambdas);
+            return dict.Single().Value.Binary;
+        }
     }
 }
