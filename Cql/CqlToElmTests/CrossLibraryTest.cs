@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class CrossLibraryTest: Base
+    public class CrossLibraryTest : Base
     {
 
         [TestMethod]
