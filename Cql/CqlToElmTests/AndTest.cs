@@ -1,23 +1,22 @@
 ﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class AndTest : Base
+    internal class AndTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize();
-        
+
         //private IServiceScope? Scope;
 
         //[TestInitialize]
         //public void TestInitialize()
         //{
-        //    Scope = Services.CreateScope();
+        //    Scope = CqlCompilerServices.CreateScope();
         //}
         //[TestCleanup]
         //public void TestCleanup() => Scope?.Dispose();

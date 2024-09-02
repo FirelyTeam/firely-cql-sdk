@@ -1,8 +1,6 @@
 using FluentAssertions;
-using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
@@ -11,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
 {
 
     [TestClass]
-    public class LibraryTest : Base
+    internal class LibraryTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

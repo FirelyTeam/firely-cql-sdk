@@ -1,10 +1,5 @@
-﻿using System;
-using System.IO;
-using Antlr4.Runtime;
-using FluentAssertions;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using FluentAssertions;
 using Hl7.Cql.CqlToElm.LibraryProviders;
-using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
 {
 
     [TestClass]
-    public class FunctionDefinitionTest : Base
+    internal class FunctionDefinitionTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

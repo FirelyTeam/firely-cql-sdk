@@ -1,15 +1,13 @@
 using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class ContextDefTest : Base
+    internal class ContextDefTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

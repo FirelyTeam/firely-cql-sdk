@@ -1,16 +1,11 @@
 ﻿using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class CaseTest : Base
+    internal class CaseTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -38,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var @case = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
             @case.caseItem.Should().NotBeNull();
             @case.caseItem.Should().HaveCount(2);
-            
+
             @case.caseItem[0].resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
             @case.caseItem[0].when.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
 

@@ -1,16 +1,11 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class ExpandCollapseTest: Base
+    internal class ExpandCollapseTest: Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -47,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var lib = CreateLibraryForExpression("expand { Interval [1, 10] } per 2");
             var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
         }
-            
+
 
         [TestMethod]
         public void Expand_List_Interval()

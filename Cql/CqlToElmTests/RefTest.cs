@@ -2,18 +2,15 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using Hl7.Cql.Runtime;
 using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class RefTest : Base
+    internal class RefTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

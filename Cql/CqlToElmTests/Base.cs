@@ -8,28 +8,27 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Hl7.Cql.Compiler.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
-    public class Base
+    internal class Base
     {
         protected const string SystemUri = "urn:hl7-org:elm-types:r1";
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        protected static ServiceProvider Services;
+        protected static CqlCompilerServices CqlCompilerServices;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
         internal static CqlToElmConverter DefaultConverter => Services.GetRequiredService<CqlToElmConverter>();
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        protected static IServiceProvider Services;
-
-        internal static LibraryExpressionBuilder LibraryExpressionBuilder;
+        internal static LibraryExpressionBuilder LibraryExpressionBuilder => CqlCompilerServices.LibraryExpressionBuilder;
 
         internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
-
-
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         protected static IServiceCollection ServiceCollection(Action<CqlToElmOptions>? options = null,
             Action<IModelProvider>? models = null,
@@ -48,9 +47,9 @@ namespace Hl7.Cql.CqlToElm.Test
         protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
         {
             var services = ServiceCollection(options);
-            CqlCompilerFactory.ConfigureServices(services);
+            services.AddCqlCompilerServices();
             Services = services.BuildServiceProvider();
-            LibraryExpressionBuilder = new CqlCompilerFactory(Services).LibraryExpressionBuilder;
+            CqlCompilerServices = Services.GetCqlCompilerServices();
         }
 
         protected static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);

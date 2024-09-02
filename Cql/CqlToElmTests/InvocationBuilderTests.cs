@@ -1,18 +1,15 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class InvocationBuilderTest : Base
+    internal class InvocationBuilderTest : Base
     {
         internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
         internal static ElmFactory ElmFactory => Services.GetRequiredService<ElmFactory>();

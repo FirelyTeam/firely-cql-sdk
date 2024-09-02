@@ -7,12 +7,11 @@ using FluentAssertions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Microsoft.Extensions.DependencyInjection;
-using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
 //[TestClass]
-public class FilesTest : Base
+internal class FilesTest : Base
 {
     // change to a path containing CQL; can include subdirectories.
     public const string Path = "C:\\Code\\Ncqa.HT.Firely\\Hedis2023\\Cql\\input";
@@ -24,11 +23,9 @@ public class FilesTest : Base
         var sc = ServiceCollection(opt =>
                                    {
                                        opt.Input = Path;
-                                       opt.AmbiguousTypeBehavior =
-                                           AmbiguousTypeBehavior.PreferModel; // match the ref implementation behavior
+                                       opt.AmbiguousTypeBehavior = AmbiguousTypeBehavior.PreferModel; // match the ref implementation behavior
                                    },
                                    libraryProviderType: typeof(FileSystemLibraryProvider));
-        LibraryExpressionBuilder = CqlCompilerFactory.NewHostedCqlCompilerFactory(sc).LibraryExpressionBuilder;
     }
 #pragma warning restore IDE0060 // Remove unused parameter
 

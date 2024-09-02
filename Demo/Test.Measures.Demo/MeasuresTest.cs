@@ -157,9 +157,9 @@ namespace Test
             Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
-            CqlPackagerFactory factory = CqlPackagerFactory.NewHostedCqlPackagerFactory()/* new CqlPackagerFactory(logFactory, cacheSize, cancellationToken:cts.Token)*/;
+            CqlPackagerFactory factory = CqlPackagerFactory.BuildCqlPackagerServices()/* new CqlPackagerFactory(logFactory, cacheSize, cancellationToken:cts.Token)*/;
             var definitions = factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
-            var assemblyData = factory.AssemblyCompiler.Compile(librarySet, definitions);
+            var assemblyData = factory.GetAssemblyCompiler().Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             foreach (var (_, asmData) in assemblyData)
             {

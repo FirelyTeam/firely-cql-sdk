@@ -12,23 +12,13 @@ namespace CoreTests
     [TestClass]
     public class LibraryExpressionBuilderTests
     {
-        private static readonly CqlCompilerFactory Factory = CqlCompilerFactory.NewHostedCqlCompilerFactory(
-            new ServiceCollection()
-                .AddLogging(loggingBuilder =>
-                {
-                    loggingBuilder.ClearProviders();
-                    loggingBuilder.AddDebug();
-                }));
-        private static readonly LibraryExpressionBuilder LibraryExpressionBuilder = Factory.LibraryExpressionBuilder;
-        private static readonly LibrarySetExpressionBuilder LibrarySetExpressionBuilder = Factory.LibrarySetExpressionBuilder;
-        private static readonly TypeManager TypeManager = Factory.TypeManager;
-
         [TestMethod]
         public void AggregateQueries_1_0_0()
         {
+            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -36,9 +26,10 @@ namespace CoreTests
         [TestMethod]
         public void FHIRConversionTest_1_0_0()
         {
+            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -46,9 +37,10 @@ namespace CoreTests
         [TestMethod]
         public void QueriesTest_1_0_0()
         {
+            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -57,6 +49,7 @@ namespace CoreTests
         [TestMethod]
         public void Medication_Request_Example_Test()
         {
+            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
             FileInfo[] files =
             [
                 new(@"Input\ELM\Test\Medication_Request_Example.json"),
@@ -70,7 +63,7 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+            var definitions = cqlCompilerServices.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -79,7 +72,8 @@ namespace CoreTests
         [TestMethod]
         public void Get_Property_Uses_TypeResolver()
         {
-            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", TypeManager.Resolver)!;
+            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
+            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", cqlCompilerServices.TypeManager.Resolver)!;
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }

@@ -5,39 +5,26 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.DependencyInjection;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 
-namespace Hl7.Cql.Packaging;
+namespace Hl7.Cql.Packaging.DependencyInjection;
 
-/// <summary>
-/// This creates all services necessary for a <see cref="ResourcePackager"/>.
-/// The idea is not to inject this into service types, it's purpose is to
-/// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
-/// </summary>
-internal class CqlPackagerFactory(
-    IServiceProvider serviceProvider)
-    : CqlCompilerFactory(serviceProvider)
+internal static class CqlPackagerServicesInitializer
 {
-    public static CqlPackagerFactory NewHostedCqlPackagerFactory(IServiceCollection? services = null)
-    {
-        services ??= new ServiceCollection()
-            .AddLogging(lb => lb.ClearProviders()); ;
-        ConfigureServices(services);
-        var serviceProvider = services.BuildServiceProvider();
-        return new CqlPackagerFactory(serviceProvider);
-    }
+    internal static CqlPackagerServices GetCqlPackagerServices(this IServiceProvider serviceProvider) =>
+        new CqlPackagerServices(serviceProvider);
 
-    public virtual CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => _serviceProvider.GetRequiredService<CSharpLibrarySetToStreamsWriter>();
-
-    public virtual AssemblyCompiler AssemblyCompiler => _serviceProvider.GetRequiredService<AssemblyCompiler>();
-    public new static void ConfigureServices(IServiceCollection services)
+    public static IServiceCollection AddCqlPackagerServices(this IServiceCollection services)
     {
+        services.AddCqlCompilerServices();
+
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
 
         services.TryAddSingleton<TypeToCSharpConverter>();
@@ -81,7 +68,7 @@ internal class CqlPackagerFactory(
 
         services.TryAddSingleton<CqlToResourcePackagingPipeline>();
 
-        CqlCompilerFactory.ConfigureServices(services);
+        return services;
     }
 }
 

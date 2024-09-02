@@ -13,6 +13,7 @@ using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager.Logging;
 using Hl7.Cql.Packaging;
+using Hl7.Cql.Packaging.DependencyInjection;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -179,7 +180,7 @@ public class Program
     public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
         TryAddPackagerOptions(services, context.Configuration);
-        CqlPackagerFactory.ConfigureServices(services);
+        services.AddCqlPackagerServices();
         services.AddSingleton<PackagerCliProgram>();
         services.TryAddSingleton<OptionsConsoleDumper>();
     }

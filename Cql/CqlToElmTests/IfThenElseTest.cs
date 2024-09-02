@@ -6,7 +6,7 @@ namespace Hl7.Cql.CqlToElm.Test
 {
 
     [TestClass]
-    public class IfThenElseTest : Base
+    internal class IfThenElseTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

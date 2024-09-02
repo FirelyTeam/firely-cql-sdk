@@ -1,22 +1,14 @@
 ﻿using Hl7.Cql.Abstractions;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
 
-    public class SubtractionTest: Base
+    internal class SubtractionTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -80,7 +72,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(1, result);
             }
 
-            
+
 
         }
 

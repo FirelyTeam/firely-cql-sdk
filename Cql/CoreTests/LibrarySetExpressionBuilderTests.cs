@@ -8,20 +8,20 @@ namespace CoreTests;
 [TestClass]
 public class LibrarySetExpressionBuilderTests
 {
-
     [TestMethod]
     public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()
     {
+        using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
+
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");
-        var f = CqlCompilerFactory.NewHostedCqlCompilerFactory();
-        var defs = f.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
-        var lambdaExpression = defs["CumulativeMedicationDuration-4.0.000", "Every eight hours (qualifier value)"];
+        var degfs = cqlCompilerServices.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+        var lambdaExpression = degfs["CumulativeMedicationDuration-4.0.000", "Every eight hours (qualifier value)"];
         Assert.IsNotNull(lambdaExpression);
 
         var del = lambdaExpression.Compile(true);
-        var res = (CqlCode)del.DynamicInvoke(new CqlContext(CqlOperators.Create(f.TypeResolver, f.TypeConverter)));
+        var cqlContext = new CqlContext(CqlOperators.Create(cqlCompilerServices.TypeResolver, cqlCompilerServices.TypeConverter));
+        var res = (CqlCode)del.DynamicInvoke(cqlContext);
         Assert.AreEqual(("307469008", "http://snomed.info/sct"), (res.code, res.system));
     }
-
 }
