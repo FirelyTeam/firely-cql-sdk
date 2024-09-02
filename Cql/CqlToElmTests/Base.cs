@@ -42,22 +42,15 @@ namespace Hl7.Cql.CqlToElm.Test
                                     .AddMessaging()
                                     .AddLogging(builder => builder.AddConsole())
                                     .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider));
-            CqlCompilerFactory.ConfigureServices(serviceCollection);
             return serviceCollection;
-        }
-
-        private class TestLibraryProvider : ILibraryProvider
-        {
-            public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? library, out string? error)
-            {
-                (library, error) = (null, null);
-                return false;
-            }
         }
 
         protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
         {
-            LibraryExpressionBuilder = CqlCompilerFactory.NewHostedCqlCompilerFactory(ServiceCollection(options)).LibraryExpressionBuilder;
+            var services = ServiceCollection(options);
+            CqlCompilerFactory.ConfigureServices(services);
+            Services = services.BuildServiceProvider();
+            LibraryExpressionBuilder = new CqlCompilerFactory(Services).LibraryExpressionBuilder;
         }
 
         protected static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);

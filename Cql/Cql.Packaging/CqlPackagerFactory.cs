@@ -11,6 +11,7 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Packaging;
 
@@ -25,7 +26,8 @@ internal class CqlPackagerFactory(
 {
     public static CqlPackagerFactory NewHostedCqlPackagerFactory(IServiceCollection? services = null)
     {
-        services ??= new ServiceCollection();
+        services ??= new ServiceCollection()
+            .AddLogging(lb => lb.ClearProviders()); ;
         ConfigureServices(services);
         var serviceProvider = services.BuildServiceProvider();
         return new CqlPackagerFactory(serviceProvider);

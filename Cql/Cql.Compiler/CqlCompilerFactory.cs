@@ -39,7 +39,8 @@ internal class CqlCompilerFactory(
 
     public static CqlCompilerFactory NewHostedCqlCompilerFactory(IServiceCollection? services = null)
     {
-        services ??= new ServiceCollection();
+        services ??= new ServiceCollection()
+            .AddLogging(lb => lb.ClearProviders());
         ConfigureServices(services);
         var serviceProvider = services.BuildServiceProvider();
         return new CqlCompilerFactory(serviceProvider);
