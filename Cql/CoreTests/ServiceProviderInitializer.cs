@@ -1,4 +1,5 @@
 using Hl7.Cql.Compiler.DependencyInjection;
+using Hl7.Cql.Packaging.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -16,5 +17,17 @@ internal static class ServiceProviderInitializer
                        })
                        .AddCqlCompilerServices();
         return services.BuildServiceProvider().GetCqlCompilerServices();
+    }
+
+    public static CqlPackagerServices CreateCqlPackagerServiceProvider()
+    {
+        var services = new ServiceCollection()
+                       .AddLogging(loggingBuilder =>
+                       {
+                           loggingBuilder.ClearProviders();
+                           loggingBuilder.AddDebug();
+                       })
+                       .AddCqlPackagerServices();
+        return services.BuildServiceProvider().GetCqlPackagerServices();
     }
 }

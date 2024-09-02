@@ -3406,15 +3406,7 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
-            var services = new ServiceCollection()
-                           .AddLogging(loggingBuilder =>
-                           {
-                               loggingBuilder.ClearProviders();
-                               loggingBuilder.AddDebug();
-                           })
-                           .AddCqlPackagerServices();
-            using var cqlPackagerServices = services.BuildServiceProvider().GetCqlPackagerServices();
-
+            using var cqlPackagerServices = ServiceProviderInitializer.CreateCqlPackagerServiceProvider();
 
             var librarySet = new LibrarySet();
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
