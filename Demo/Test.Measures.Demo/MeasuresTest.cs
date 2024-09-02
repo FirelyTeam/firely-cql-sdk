@@ -9,6 +9,7 @@ using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using CLI.Helpers;
+using Hl7.Cql.Packaging.DependencyInjection;
 using Test.Deck;
 
 namespace Test
@@ -157,9 +158,10 @@ namespace Test
             Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
-            CqlPackagerFactory factory = CqlPackagerFactory.BuildCqlPackagerServices()/* new CqlPackagerFactory(logFactory, cacheSize, cancellationToken:cts.Token)*/;
-            var definitions = factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
-            var assemblyData = factory.GetAssemblyCompiler().Compile(librarySet, definitions);
+
+            using var cqlPackagerServices = ServiceProviderInitializer.CreateCqlPackagerServiceProvider();
+            var definitions = cqlPackagerServices.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+            var assemblyData = cqlPackagerServices.AssemblyCompiler.Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             foreach (var (_, asmData) in assemblyData)
             {
