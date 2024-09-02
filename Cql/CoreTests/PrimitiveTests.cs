@@ -3406,13 +3406,13 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
-            using var cqlPackagerServices = ServiceProviderInitializer.CreateCqlPackagerServiceProvider();
+            using var cqlCodeGenerationServices = ServiceProviderInitializer.CreateCqlCodeGenerationServices();
 
             var librarySet = new LibrarySet();
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
-            var definitions = cqlPackagerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
-            var writer = cqlPackagerServices.CSharpLibrarySetToStreamsWriter;
+            var definitions = cqlCodeGenerationServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var writer = cqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
             var isDone = false;
             writer.ProcessDefinitions(
                 definitions,
