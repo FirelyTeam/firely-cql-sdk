@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Hl7.Cql.CodeGeneration.NET.DependencyInjection;
 using Hl7.Cql.Compiler.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -22,17 +23,13 @@ namespace Hl7.Cql.CqlToElm.Test
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         protected static IServiceProvider Services;
-
-        internal static LibraryExpressionBuilder LibraryExpressionBuilder;
-
-        internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
-
-
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         internal static CqlToElmConverter DefaultConverter => Services.GetRequiredService<CqlToElmConverter>();
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder => Services.GetCqlCompilerServices().LibraryExpressionBuilder;
+
+        internal static CSharpLibrarySetToStreamsWriter SourceCodeWriter => Services.GetCqlCodeGenerationServices().CSharpLibrarySetToStreamsWriter;
 
         internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
 
@@ -46,21 +43,18 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddMessaging()
                 .AddLogging(builder => builder
                     .AddConsole())
-                .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider))
-                .AddSingleton(typeof(CSharpLibrarySetToStreamsWriter))
-                .AddSingleton(typeof(TypeToCSharpConverter))
-                .AddSingleton(typeof(CqlCompilerFactory))
-                .AddSingleton(isp => isp.GetRequiredService<CqlCompilerFactory>().TypeResolver);
+                .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider));
 
 
         protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
         {
             var services = ServiceCollection(options);
-            services.AddCqlCompilerServices();
+            services.AddCqlCodeGenerationServices();
             Services = services.BuildServiceProvider();
         }
 
         protected static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
+
         protected virtual Library ConvertLibrary(IServiceProvider services, string cql) =>
             services.GetRequiredService<CqlToElmConverter>().ConvertLibrary(cql);
 
@@ -304,8 +298,7 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static byte[] Compile(Library library)
         {
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
-            var ccf = Services.GetRequiredService<CqlCompilerFactory>();
-            var asm = new AssemblyCompiler(SourceCodeWriter, ccf.TypeManager, default, default);
+            var asm = Services.GetCqlCodeGenerationServices().AssemblyCompiler;
             var dict = asm.Compile(new LibrarySet("",library), lambdas);
             return dict.Single().Value.Binary;
         }

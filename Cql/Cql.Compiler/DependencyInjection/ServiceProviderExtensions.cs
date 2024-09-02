@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Hl7.Cql.Compiler;
+namespace Hl7.Cql.Compiler.DependencyInjection;
 
 internal static class ServiceProviderExtensions
 {

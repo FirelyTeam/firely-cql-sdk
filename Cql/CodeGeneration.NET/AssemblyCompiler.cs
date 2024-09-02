@@ -73,8 +73,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             LibrarySet librarySet,
             DefinitionDictionary<LambdaExpression> definitions)
         {
-            if (definitions is null)
-                throw new ArgumentNullException(nameof(definitions));
+            ArgumentNullException.ThrowIfNull(definitions);
 
             Dictionary<string, AssemblyData> results = new();
 

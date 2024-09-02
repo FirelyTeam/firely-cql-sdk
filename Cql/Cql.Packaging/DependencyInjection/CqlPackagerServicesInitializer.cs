@@ -7,8 +7,7 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.CodeGeneration.NET.PostProcessors;
-using Hl7.Cql.Compiler;
+using Hl7.Cql.CodeGeneration.NET.DependencyInjection;
 using Hl7.Cql.Compiler.DependencyInjection;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,27 +22,9 @@ internal static class CqlPackagerServicesInitializer
 
     public static IServiceCollection AddCqlPackagerServices(this IServiceCollection services)
     {
-        services.AddCqlCompilerServices();
+        services.AddCqlCodeGenerationServices();
 
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
-
-        services.TryAddSingleton<TypeToCSharpConverter>();
-
-        services.TryAddSingleton<CSharpLibrarySetToStreamsWriter>();
-
-        services.TryAddSingletonSwitch<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor, StubCSharpCodeStreamPostProcessor>(
-            sp => sp.GetOptions<CSharpCodeWriterOptions>().Value.OutDirectory switch
-            {
-                null => 1,
-                _    => 0
-            });
-
-        services.TryAddSingletonSwitch<AssemblyDataPostProcessor, WriteToFileAssemblyDataPostProcessor, StubAssemblyDataPostProcessor>(
-            sp => sp.GetOptions<AssemblyDataWriterOptions>().Value.OutDirectory switch
-            {
-                null => 1,
-                _    => 0
-            });
 
         services.TryAddSingletonSwitch<FhirResourcePostProcessor, WriteToFileFhirResourcePostProcessor, StubFhirResourcePostProcessor>(
             sp => sp.GetOptions<FhirResourceWriterOptions>().Value.OutDirectory switch
