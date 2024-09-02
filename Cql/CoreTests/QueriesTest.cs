@@ -10,17 +10,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreTests
 {
     [TestClass]
     public class QueriesTest
     {
-        private static ILoggerFactory LoggerFactory { get; } =
-            Microsoft.Extensions.Logging.LoggerFactory
-                .Create(logging => logging.AddDebug());
-
-        private static readonly LibraryExpressionBuilder LibraryExpressionBuilder = new CqlCompilerFactory(LoggerFactory).LibraryExpressionBuilder;
+        private static readonly CqlCompilerFactory Factory = CqlCompilerFactory.NewHostedCqlCompilerFactory(
+            new ServiceCollection()
+                .AddLogging(loggingBuilder =>
+                {
+                    loggingBuilder.ClearProviders();
+                    loggingBuilder.AddDebug();
+                }));
+        private static readonly LibraryExpressionBuilder LibraryExpressionBuilder = Factory.LibraryExpressionBuilder;
 
 
         [ClassInitialize]

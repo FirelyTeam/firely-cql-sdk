@@ -33,15 +33,18 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static IServiceCollection ServiceCollection(Action<CqlToElmOptions>? options = null,
             Action<IModelProvider>? models = null,
-            Type? libraryProviderType = null) =>
-            new ServiceCollection()
-                .AddSystem()
-                .AddModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
-                .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
-                .AddMessaging()
-                .AddLogging(builder => builder
-                    .AddConsole())
-                .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider));
+            Type? libraryProviderType = null)
+        {
+            var serviceCollection = new ServiceCollection()
+                                    .AddSystem()
+                                    .AddModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
+                                    .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
+                                    .AddMessaging()
+                                    .AddLogging(builder => builder.AddConsole())
+                                    .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider));
+            CqlCompilerFactory.ConfigureServices(serviceCollection);
+            return serviceCollection;
+        }
 
         private class TestLibraryProvider : ILibraryProvider
         {
@@ -54,11 +57,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
         {
-            Services = ServiceCollection(options).BuildServiceProvider();
-            var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
-            LibraryExpressionBuilder = CqlCompilerFactory.NewLibraryExpressionBuilder(loggerFactory);
+            LibraryExpressionBuilder = CqlCompilerFactory.NewHostedCqlCompilerFactory(ServiceCollection(options)).LibraryExpressionBuilder;
         }
-
 
         protected static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
         protected virtual Library ConvertLibrary(IServiceProvider services, string cql) =>

@@ -17,6 +17,7 @@ using FluentAssertions;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
 using Hl7.Cql.Packaging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreTests
 {
@@ -24,12 +25,13 @@ namespace CoreTests
     [TestCategory("UnitTest")]
     public class PrimitiveTests
     {
-        private static ILoggerFactory LoggerFactory { get; } =
-            Microsoft.Extensions.Logging.LoggerFactory
-                .Create(logging => logging.AddDebug());
-
-
-        private static CqlPackagerFactory Factory = new(LoggerFactory);
+        private static readonly CqlPackagerFactory Factory = CqlPackagerFactory.NewHostedCqlPackagerFactory(
+            new ServiceCollection()
+                .AddLogging(loggingBuilder =>
+                {
+                    loggingBuilder.ClearProviders();
+                    loggingBuilder.AddDebug();
+                }));
 
         private CqlContext GetNewContext() => FhirCqlContext.WithDataSource();
 

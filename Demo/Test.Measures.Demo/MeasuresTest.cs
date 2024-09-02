@@ -1,7 +1,6 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using System.Diagnostics;
 using System.Runtime.Loader;
@@ -134,15 +133,17 @@ namespace Test
             int cacheSize = 0)
         {
             var logFactory = LoggerFactory
-                .Create(logging =>
-                {
-                    logging.AddFilter(level => level >= logLevel);
-                    logging.AddConsole(console =>
-                    {
-                        console.LogToStandardErrorThreshold = LogLevel.Error;
-                    });
-                });
+                .Create(logging => { BuildLogging(logLevel, logging); });
             return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
+        }
+
+        private static void BuildLogging(LogLevel logLevel, ILoggingBuilder logging)
+        {
+            logging.AddFilter(level => level >= logLevel);
+            logging.AddConsole(console =>
+            {
+                console.LogToStandardErrorThreshold = LogLevel.Error;
+            });
         }
 
         [UsedImplicitly]
@@ -153,10 +154,10 @@ namespace Test
             ILoggerFactory logFactory,
             int cacheSize)
         {
-            using var cts = new CancellationTokenSource();
+            Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
-            CqlPackagerFactory factory = new CqlPackagerFactory(logFactory, cacheSize, cancellationToken:cts.Token);
+            CqlPackagerFactory factory = CqlPackagerFactory.NewHostedCqlPackagerFactory()/* new CqlPackagerFactory(logFactory, cacheSize, cancellationToken:cts.Token)*/;
             var definitions = factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             var assemblyData = factory.AssemblyCompiler.Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");

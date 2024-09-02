@@ -5,17 +5,20 @@ using System;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreTests
 {
     [TestClass]
     public class LibraryExpressionBuilderTests
     {
-        private static ILoggerFactory LoggerFactory { get; } =
-            Microsoft.Extensions.Logging.LoggerFactory
-                .Create(logging => logging.AddDebug());
-
-        private static readonly CqlCompilerFactory Factory = new(LoggerFactory);
+        private static readonly CqlCompilerFactory Factory = CqlCompilerFactory.NewHostedCqlCompilerFactory(
+            new ServiceCollection()
+                .AddLogging(loggingBuilder =>
+                {
+                    loggingBuilder.ClearProviders();
+                    loggingBuilder.AddDebug();
+                }));
         private static readonly LibraryExpressionBuilder LibraryExpressionBuilder = Factory.LibraryExpressionBuilder;
         private static readonly LibrarySetExpressionBuilder LibrarySetExpressionBuilder = Factory.LibrarySetExpressionBuilder;
         private static readonly TypeManager TypeManager = Factory.TypeManager;

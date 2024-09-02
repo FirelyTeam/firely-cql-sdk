@@ -10,7 +10,9 @@ using System.IO;
 
 namespace Hl7.Cql.CodeGeneration.NET.PostProcessors;
 
-internal abstract class CSharpCodeStreamPostProcessor
+internal class StubCSharpCodeStreamPostProcessor : CSharpCodeStreamPostProcessor
 {
-    public abstract void ProcessStream(string name, Stream stream);
+    public override void ProcessStream(string name, Stream stream)
+    {
+    }
 }

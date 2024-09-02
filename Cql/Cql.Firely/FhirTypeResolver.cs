@@ -19,7 +19,8 @@ namespace Hl7.Cql.Fhir
     {
         public static readonly FhirTypeResolver Default = new FhirTypeResolver(ModelInfo.ModelInspector);
 
-        internal FhirTypeResolver(ModelInspector inspector)
+        /// <nodoc />
+        public FhirTypeResolver(ModelInspector inspector)
         {
             Inspector = inspector;
 

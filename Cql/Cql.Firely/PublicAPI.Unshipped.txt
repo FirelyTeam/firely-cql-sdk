@@ -13,8 +13,10 @@ Hl7.Cql.Fhir.FhirModelBindingOptions.ResourceIdComparer.get -> System.StringComp
 Hl7.Cql.Fhir.FhirModelBindingOptions.ResourceIdComparer.init -> void
 Hl7.Cql.Fhir.FhirTypeConverter
 Hl7.Cql.Fhir.FhirTypeResolver
+Hl7.Cql.Fhir.FhirTypeResolver.FhirTypeResolver(Hl7.Fhir.Introspection.ModelInspector! inspector) -> void
 Hl7.Cql.Fhir.StreamExtensions
 Hl7.Cql.Fhir.ValueSetExtensions
+override Hl7.Cql.Fhir.FhirTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
 static Hl7.Cql.Fhir.FhirCqlContext.ForBundle(Hl7.Fhir.Model.Bundle? bundle = null, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.ValueSets.IValueSetDictionary? valueSets = null, System.DateTimeOffset? now = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null, Hl7.Cql.Fhir.FhirModelBindingOptions? options = null) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.Fhir.FhirCqlContext.WithDataSource(Hl7.Cql.Operators.IDataSource? source = null, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.ValueSets.IValueSetDictionary? valueSets = null, System.DateTimeOffset? now = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null, Hl7.Cql.Fhir.FhirModelBindingOptions? options = null) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Introspection.ModelInspector! model, int? cacheSize = null) -> Hl7.Cql.Conversion.TypeConverter!

@@ -9,7 +9,8 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging.PostProcessors;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Hl7.Cql.Packaging;
 
@@ -19,92 +20,85 @@ namespace Hl7.Cql.Packaging;
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
 internal class CqlPackagerFactory(
-    ILoggerFactory loggerFactory,
-    int cacheSize = 0,
-    CqlToResourcePackagingOptions? cqlToResourcePackagingOptions = default,
-    CSharpCodeWriterOptions? cSharpCodeWriterOptions = default,
-    FhirResourceWriterOptions? fhirResourceWriterOptions = default,
-    AssemblyDataWriterOptions? assemblyDataWriterOptions = default,
-    CancellationToken cancellationToken = default)
-    : CqlCompilerFactory(loggerFactory, cancellationToken, cacheSize)
+    IServiceProvider serviceProvider)
+    : CqlCompilerFactory(serviceProvider)
 {
-    protected virtual AssemblyDataWriterOptions? AssemblyDataWriterOptions { get; } = assemblyDataWriterOptions;
-    protected virtual CqlToResourcePackagingOptions CqlToResourcePackagingOptions { get; } = cqlToResourcePackagingOptions ?? new();
-    protected virtual CSharpCodeWriterOptions CSharpCodeWriterOptions { get; } = cSharpCodeWriterOptions ?? new();
-    protected virtual FhirResourceWriterOptions FhirResourceWriterOptions { get; } = fhirResourceWriterOptions ?? new();
+    public static CqlPackagerFactory NewHostedCqlPackagerFactory(IServiceCollection? services = null)
+    {
+        services ??= new ServiceCollection();
+        ConfigureServices(services);
+        var serviceProvider = services.BuildServiceProvider();
+        return new CqlPackagerFactory(serviceProvider);
+    }
 
-    protected virtual CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper => Singleton(NewCqlTypeToFhirTypeMapper);
-    protected virtual CqlTypeToFhirTypeMapper NewCqlTypeToFhirTypeMapper() => new(TypeResolver);
+    public virtual CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => _serviceProvider.GetRequiredService<CSharpLibrarySetToStreamsWriter>();
 
-    protected virtual TypeToCSharpConverter TypeToCSharpConverter => Singleton(NewTypeToCSharpConverter);
+    public virtual AssemblyCompiler AssemblyCompiler => _serviceProvider.GetRequiredService<AssemblyCompiler>();
+    public new static void ConfigureServices(IServiceCollection services)
+    {
+        services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
 
-    protected virtual TypeToCSharpConverter NewTypeToCSharpConverter() =>
-        new TypeToCSharpConverter();
+        services.TryAddSingleton<TypeToCSharpConverter>();
 
-    public virtual CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => Singleton(NewCSharpLibrarySetToStreamsWriter);
-    protected virtual CSharpLibrarySetToStreamsWriter NewCSharpLibrarySetToStreamsWriter() => new(
-        Logger<CSharpLibrarySetToStreamsWriter>(),
-        Options(CSharpCodeWriterOptions),
-        TypeResolver,
-        TypeToCSharpConverter);
+        services.TryAddSingleton<CSharpLibrarySetToStreamsWriter>();
 
-    protected virtual CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => Singleton(NewCSharpCodeStreamPostProcessorOrNull);
-    protected virtual CSharpCodeStreamPostProcessor? NewCSharpCodeStreamPostProcessorOrNull() =>
-        CSharpCodeWriterOptions is { OutDirectory: { } } opt
-            ? NewWriteToFileCSharpCodeStreamPostProcessor(opt)
-            : default(CSharpCodeStreamPostProcessor);
+        services.TryAddSingletonSwitch<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor, StubCSharpCodeStreamPostProcessor>(sp =>
+        {
+            var cSharpCodeWriterOptions = sp.GetOptions<CSharpCodeWriterOptions>().Value;
+            return cSharpCodeWriterOptions.OutDirectory switch
+            {
+                null => 1,
+                _    => 0
+            };
+        });
 
-    protected virtual WriteToFileCSharpCodeStreamPostProcessor NewWriteToFileCSharpCodeStreamPostProcessor(
-        CSharpCodeWriterOptions opt) =>
-        new WriteToFileCSharpCodeStreamPostProcessor(
-            Options(opt),
-            Logger<WriteToFileCSharpCodeStreamPostProcessor>());
+        services.TryAddSingletonSwitch<AssemblyDataPostProcessor, WriteToFileAssemblyDataPostProcessor, StubAssemblyDataPostProcessor>(sp =>
+        {
+            var cSharpCodeWriterOptions = sp.GetOptions<AssemblyDataWriterOptions>().Value;
+            return cSharpCodeWriterOptions.OutDirectory switch
+            {
+                null => 1,
+                _    => 0
+            };
+        });
 
-    protected virtual AssemblyDataPostProcessor? AssemblyDataPostProcessor => Singleton(NewAssemblyDataPostProcessorOrNull);
-    protected virtual AssemblyDataPostProcessor? NewAssemblyDataPostProcessorOrNull() =>
-        AssemblyDataWriterOptions is { OutDirectory: { } } opt
-            ? NewWriteToFileAssemblyDataPostProcessor(opt)
-            : default(AssemblyDataPostProcessor);
-
-    protected virtual WriteToFileAssemblyDataPostProcessor NewWriteToFileAssemblyDataPostProcessor(
-        AssemblyDataWriterOptions opt) =>
-        new WriteToFileAssemblyDataPostProcessor(
-            Options(opt),
-            Logger<WriteToFileAssemblyDataPostProcessor>());
-
-    protected virtual FhirResourcePostProcessor? FhirResourcePostProcessor => Singleton(NewFhirResourcePostProcessorOrNull);
-    protected virtual FhirResourcePostProcessor? NewFhirResourcePostProcessorOrNull() =>
-        FhirResourceWriterOptions is { OutDirectory: {} } opt
-            ? NewWriteToFileFhirResourcePostProcessor(opt)
-            : default(FhirResourcePostProcessor);
-
-    protected virtual WriteToFileFhirResourcePostProcessor NewWriteToFileFhirResourcePostProcessor(
-        FhirResourceWriterOptions opt) =>
-        new WriteToFileFhirResourcePostProcessor(
-            Options(opt),
-            Logger<WriteToFileFhirResourcePostProcessor>());
+        services.TryAddSingletonSwitch<FhirResourcePostProcessor, WriteToFileFhirResourcePostProcessor, StubFhirResourcePostProcessor>(sp =>
+        {
+            var cSharpCodeWriterOptions = sp.GetOptions<FhirResourceWriterOptions>().Value;
+            return cSharpCodeWriterOptions.OutDirectory switch
+            {
+                null => 1,
+                _    => 0
+            };
+        });
 
 
-    public virtual AssemblyCompiler AssemblyCompiler => Singleton(NewAssemblyCompiler);
-    protected virtual AssemblyCompiler NewAssemblyCompiler() =>
-        new AssemblyCompiler(
-            CSharpLibrarySetToStreamsWriter,
-            TypeManager,
-            CSharpCodeStreamPostProcessor,
-            AssemblyDataPostProcessor);
+        services.TryAddSingleton<AssemblyCompiler>();
 
-    protected virtual ResourcePackager ResourcePackager => Singleton(NewResourcePackager);
-    protected virtual ResourcePackager NewResourcePackager() =>
-        new ResourcePackager(
-            TypeResolver,
-            FhirResourcePostProcessor);
+        services.TryAddSingleton<ResourcePackager>();
 
-    public virtual CqlToResourcePackagingPipeline CqlToResourcePackagingPipeline => Singleton(NewCqlToResourcePackagingPipeline);
-    protected virtual CqlToResourcePackagingPipeline NewCqlToResourcePackagingPipeline() =>
-        new CqlToResourcePackagingPipeline(
-            Logger<CqlToResourcePackagingPipeline>(),
-            Options(CqlToResourcePackagingOptions),
-            ResourcePackager,
-            LibrarySetExpressionBuilder,
-            AssemblyCompiler);
+        services.TryAddSingleton<CqlToResourcePackagingPipeline>();
+
+        CqlCompilerFactory.ConfigureServices(services);
+    }
+}
+
+internal static class ServiceCollectionExtensions
+{
+    public static IServiceCollection TryAddSingletonSwitch<TService, TImpl0, TImpl1>(
+        this IServiceCollection services,
+        Func<IServiceProvider, int> switchFn)
+        where TService : class
+        where TImpl0 : class, TService
+        where TImpl1 : class, TService
+    {
+        services.TryAddSingleton<TService>(
+            sp => switchFn(sp) switch
+            {
+                0 => (TService)ActivatorUtilities.CreateInstance<TImpl0>(sp),
+                1 => (TService)ActivatorUtilities.CreateInstance<TImpl1>(sp),
+                _ => throw new InvalidOperationException("Invalid switch value")
+            });
+        return services;
+    }
 }

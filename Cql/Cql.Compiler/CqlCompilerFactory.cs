@@ -6,13 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System;
-using System.Threading;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Fhir.Introspection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Compiler;
 
@@ -22,78 +23,74 @@ namespace Hl7.Cql.Compiler;
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
 internal class CqlCompilerFactory(
-    ILoggerFactory loggerFactory,
-    CancellationToken cancellationToken = default,
-    int? cacheSize = null)
-    : CqlAbstractionsFactory(loggerFactory, cancellationToken)
+    IServiceProvider serviceProvider)
 {
-    public static LibraryExpressionBuilder NewLibraryExpressionBuilder(
-        ILoggerFactory? loggerFactory = default,
-        CancellationToken cancellationToken = default,
-        int? cacheSize = null) => new CqlCompilerFactory(loggerFactory ?? NullLoggerFactory.Instance, cancellationToken, cacheSize).LibraryExpressionBuilder;
+    protected readonly IServiceProvider _serviceProvider = serviceProvider;
 
-    protected int? CacheSize { get; } = cacheSize;
+    public virtual TypeConverter TypeConverter => _serviceProvider.GetRequiredService<TypeConverter>();
 
+    public virtual TypeResolver TypeResolver => _serviceProvider.GetRequiredService<TypeResolver>();
 
-    protected virtual ModelInspector ModelInspector => Singleton(fn: NewModelInspector);
-    protected virtual ModelInspector NewModelInspector() => Hl7.Fhir.Model.ModelInfo.ModelInspector;
+    public virtual TypeManager TypeManager => _serviceProvider.GetRequiredService<TypeManager>();
 
+    public virtual LibrarySetExpressionBuilder LibrarySetExpressionBuilder => _serviceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 
-    public virtual TypeConverter TypeConverter => Singleton(fn: NewTypeConverter);
-    protected virtual TypeConverter NewTypeConverter()
+    public virtual LibraryExpressionBuilder LibraryExpressionBuilder => _serviceProvider.GetRequiredService<LibraryExpressionBuilder>();
+
+    public static CqlCompilerFactory NewHostedCqlCompilerFactory(IServiceCollection? services = null)
     {
-        var converter = FhirTypeConverter
-                .Create(ModelInspector, CacheSize)
-                .UseLogger(Logger<TypeConverter>());
-        converter.CaptureAvailableConverters();
-        return converter;
+        services ??= new ServiceCollection();
+        ConfigureServices(services);
+        var serviceProvider = services.BuildServiceProvider();
+        return new CqlCompilerFactory(serviceProvider);
     }
 
+    internal static void ConfigureServices(IServiceCollection services)
+    {
+        services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
-    public virtual TypeResolver TypeResolver => Singleton(fn: NewTypeResolver);
-    protected virtual TypeResolver NewTypeResolver() => new FhirTypeResolver(ModelInspector);
+        const int cacheSize = 0; // TODO: Must move to configuration
+        services.TryAddSingleton<TypeConverter>(sp =>
+        {
+            var modelInspector = sp.GetRequiredService<ModelInspector>();
+            var logger = sp.GetRequiredService<ILogger<TypeConverter>>();
+            var converter = FhirTypeConverter
+                            .Create(modelInspector, cacheSize)
+                            .UseLogger(logger);
+            converter.CaptureAvailableConverters();
+            return converter;
+        });
 
+        // services.TryAddSingleton<TypeResolver>(serviceProvider =>
+        // {
+        //     var modelInspector = serviceProvider.GetRequiredService<ModelInspector>();
+        //     return new FhirTypeResolver(modelInspector);
+        // });
+        services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
 
-    protected virtual CqlOperatorsBinder CqlOperatorsBinder => Singleton(fn: NewOperatorsBinder);
-    protected virtual CqlOperatorsBinder NewOperatorsBinder() =>
-        new CqlOperatorsBinder(
-            Logger<CqlOperatorsBinder>(),
-            TypeResolver,
-            TypeConverter);
+        services.TryAddSingleton<CqlOperatorsBinder>();
 
+        services.TryAddSingleton<CqlContextBinder>();
 
-    protected virtual CqlContextBinder CqlContextBinder => Singleton(fn: NewContextBinder);
-    protected virtual CqlContextBinder NewContextBinder() => new CqlContextBinder();
+        services.TryAddSingleton<TypeManager>();
 
+        services.TryAddSingleton<LibrarySetExpressionBuilder>();
 
-    public virtual TypeManager TypeManager => Singleton(fn: NewTypeManager);
-    protected virtual TypeManager NewTypeManager() => new(resolver: TypeResolver);
+        services.TryAddSingleton<LibraryExpressionBuilder>();
 
+        services.TryAddSingleton<ExpressionBuilderSettings>(_ => ExpressionBuilderSettings.Default); // TODO: Must move to configuration
 
-    public virtual LibrarySetExpressionBuilder LibrarySetExpressionBuilder => Singleton(fn: NewLibrarySetExpressionBuilder);
+        services.TryAddSingleton<ExpressionBuilder>();
+    }
+}
 
-    protected virtual LibrarySetExpressionBuilder NewLibrarySetExpressionBuilder() =>
-        new(LibraryExpressionBuilder);
+internal static class ServiceProviderExtensions
+{
+    public static IOptions<T> GetOptions<T>(this IServiceProvider serviceProvider)
+        where T : class =>
+        serviceProvider.GetRequiredService<IOptions<T>>();
 
-    public virtual LibraryExpressionBuilder LibraryExpressionBuilder => Singleton(fn: NewLibraryExpressionBuilder);
-
-    protected virtual LibraryExpressionBuilder NewLibraryExpressionBuilder() =>
-        new LibraryExpressionBuilder(
-            Logger<LibraryExpressionBuilder>(),
-            ExpressionBuilder);
-
-    protected virtual ExpressionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
-        ExpressionBuilderSettings.Default;
-
-    protected virtual ExpressionBuilder ExpressionBuilder => Singleton(fn: NewExpressionBuilder);
-
-    protected virtual ExpressionBuilder NewExpressionBuilder() =>
-        new ExpressionBuilder(
-            Logger<ExpressionBuilder>(),
-            Singleton(fn: NewLibraryDefinitionBuilderSettings),
-            CqlOperatorsBinder,
-            TypeManager,
-            TypeConverter,
-            TypeResolver,
-            CqlContextBinder);
+    public static ILogger<T> GetLogger<T>(this IServiceProvider serviceProvider)
+        where T : class =>
+        serviceProvider.GetRequiredService<ILogger<T>>();
 }

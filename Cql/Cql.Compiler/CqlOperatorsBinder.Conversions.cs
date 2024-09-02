@@ -7,7 +7,6 @@
  */
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler.Expressions;

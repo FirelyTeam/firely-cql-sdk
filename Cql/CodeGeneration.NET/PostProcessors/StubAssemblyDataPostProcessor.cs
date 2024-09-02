@@ -6,11 +6,17 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.IO;
+using System.Reflection;
 
 namespace Hl7.Cql.CodeGeneration.NET.PostProcessors;
 
-internal abstract class CSharpCodeStreamPostProcessor
+internal class StubAssemblyDataPostProcessor : AssemblyDataPostProcessor
 {
-    public abstract void ProcessStream(string name, Stream stream);
+    public override void ProcessAssemblyData(string name, AssemblyData assemblyData)
+    {
+    }
+
+    public override void ProcessReferenceAssembly(Assembly referenceAssembly)
+    {
+    }
 }
