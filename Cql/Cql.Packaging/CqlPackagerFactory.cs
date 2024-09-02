@@ -18,33 +18,25 @@ namespace Hl7.Cql.Packaging;
 /// The idea is not to inject this into service types, it's purpose is to
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
-internal class CqlPackagerFactory : CqlCompilerFactory
+internal class CqlPackagerFactory(
+    ILoggerFactory loggerFactory,
+    int cacheSize = 0,
+    CqlToResourcePackagingOptions? cqlToResourcePackagingOptions = default,
+    CSharpCodeWriterOptions? cSharpCodeWriterOptions = default,
+    FhirResourceWriterOptions? fhirResourceWriterOptions = default,
+    AssemblyDataWriterOptions? assemblyDataWriterOptions = default,
+    CancellationToken cancellationToken = default)
+    : CqlCompilerFactory(loggerFactory, cancellationToken, cacheSize)
 {
-    public AssemblyDataWriterOptions? AssemblyDataWriterOptions { get; }
-    public CqlToResourcePackagingOptions CqlToResourcePackagingOptions { get; }
-    public CSharpCodeWriterOptions CSharpCodeWriterOptions { get; }
-    public FhirResourceWriterOptions FhirResourceWriterOptions { get; }
+    protected virtual AssemblyDataWriterOptions? AssemblyDataWriterOptions { get; } = assemblyDataWriterOptions;
+    protected virtual CqlToResourcePackagingOptions CqlToResourcePackagingOptions { get; } = cqlToResourcePackagingOptions ?? new();
+    protected virtual CSharpCodeWriterOptions CSharpCodeWriterOptions { get; } = cSharpCodeWriterOptions ?? new();
+    protected virtual FhirResourceWriterOptions FhirResourceWriterOptions { get; } = fhirResourceWriterOptions ?? new();
 
-    public CqlPackagerFactory(
-        ILoggerFactory loggerFactory,
-        int cacheSize = 0,
-        CqlToResourcePackagingOptions? cqlToResourcePackagingOptions = default,
-        CSharpCodeWriterOptions? cSharpCodeWriterOptions = default,
-        FhirResourceWriterOptions? fhirResourceWriterOptions = default,
-        AssemblyDataWriterOptions? assemblyDataWriterOptions = default,
-        CancellationToken cancellationToken = default)
-        : base(loggerFactory, cancellationToken, cacheSize)
-    {
-        AssemblyDataWriterOptions = assemblyDataWriterOptions;
-        CqlToResourcePackagingOptions = cqlToResourcePackagingOptions ?? new();
-        CSharpCodeWriterOptions = cSharpCodeWriterOptions ?? new();
-        FhirResourceWriterOptions = fhirResourceWriterOptions ?? new();
-    }
-
-    public virtual CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper => Singleton(NewCqlTypeToFhirTypeMapper);
+    protected virtual CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper => Singleton(NewCqlTypeToFhirTypeMapper);
     protected virtual CqlTypeToFhirTypeMapper NewCqlTypeToFhirTypeMapper() => new(TypeResolver);
 
-    public virtual TypeToCSharpConverter TypeToCSharpConverter => Singleton(NewTypeToCSharpConverter);
+    protected virtual TypeToCSharpConverter TypeToCSharpConverter => Singleton(NewTypeToCSharpConverter);
 
     protected virtual TypeToCSharpConverter NewTypeToCSharpConverter() =>
         new TypeToCSharpConverter();
@@ -56,7 +48,7 @@ internal class CqlPackagerFactory : CqlCompilerFactory
         TypeResolver,
         TypeToCSharpConverter);
 
-    public virtual CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => Singleton(NewCSharpCodeStreamPostProcessorOrNull);
+    protected virtual CSharpCodeStreamPostProcessor? CSharpCodeStreamPostProcessor => Singleton(NewCSharpCodeStreamPostProcessorOrNull);
     protected virtual CSharpCodeStreamPostProcessor? NewCSharpCodeStreamPostProcessorOrNull() =>
         CSharpCodeWriterOptions is { OutDirectory: { } } opt
             ? NewWriteToFileCSharpCodeStreamPostProcessor(opt)
@@ -68,7 +60,7 @@ internal class CqlPackagerFactory : CqlCompilerFactory
             Options(opt),
             Logger<WriteToFileCSharpCodeStreamPostProcessor>());
 
-    public virtual AssemblyDataPostProcessor? AssemblyDataPostProcessor => Singleton(NewAssemblyDataPostProcessorOrNull);
+    protected virtual AssemblyDataPostProcessor? AssemblyDataPostProcessor => Singleton(NewAssemblyDataPostProcessorOrNull);
     protected virtual AssemblyDataPostProcessor? NewAssemblyDataPostProcessorOrNull() =>
         AssemblyDataWriterOptions is { OutDirectory: { } } opt
             ? NewWriteToFileAssemblyDataPostProcessor(opt)
@@ -80,7 +72,7 @@ internal class CqlPackagerFactory : CqlCompilerFactory
             Options(opt),
             Logger<WriteToFileAssemblyDataPostProcessor>());
 
-    public virtual FhirResourcePostProcessor? FhirResourcePostProcessor => Singleton(NewFhirResourcePostProcessorOrNull);
+    protected virtual FhirResourcePostProcessor? FhirResourcePostProcessor => Singleton(NewFhirResourcePostProcessorOrNull);
     protected virtual FhirResourcePostProcessor? NewFhirResourcePostProcessorOrNull() =>
         FhirResourceWriterOptions is { OutDirectory: {} } opt
             ? NewWriteToFileFhirResourcePostProcessor(opt)
@@ -93,7 +85,7 @@ internal class CqlPackagerFactory : CqlCompilerFactory
             Logger<WriteToFileFhirResourcePostProcessor>());
 
 
-    public AssemblyCompiler AssemblyCompiler => Singleton(NewAssemblyCompiler);
+    public virtual AssemblyCompiler AssemblyCompiler => Singleton(NewAssemblyCompiler);
     protected virtual AssemblyCompiler NewAssemblyCompiler() =>
         new AssemblyCompiler(
             CSharpLibrarySetToStreamsWriter,
@@ -101,13 +93,13 @@ internal class CqlPackagerFactory : CqlCompilerFactory
             CSharpCodeStreamPostProcessor,
             AssemblyDataPostProcessor);
 
-    public ResourcePackager ResourcePackager => Singleton(NewResourcePackager);
+    protected virtual ResourcePackager ResourcePackager => Singleton(NewResourcePackager);
     protected virtual ResourcePackager NewResourcePackager() =>
         new ResourcePackager(
             TypeResolver,
             FhirResourcePostProcessor);
 
-    public CqlToResourcePackagingPipeline CqlToResourcePackagingPipeline => Singleton(NewCqlToResourcePackagingPipeline);
+    public virtual CqlToResourcePackagingPipeline CqlToResourcePackagingPipeline => Singleton(NewCqlToResourcePackagingPipeline);
     protected virtual CqlToResourcePackagingPipeline NewCqlToResourcePackagingPipeline() =>
         new CqlToResourcePackagingPipeline(
             Logger<CqlToResourcePackagingPipeline>(),

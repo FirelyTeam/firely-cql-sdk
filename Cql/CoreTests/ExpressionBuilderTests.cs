@@ -16,13 +16,16 @@ namespace CoreTests
                 .Create(logging => logging.AddDebug());
 
         private static readonly CqlCompilerFactory Factory = new(LoggerFactory);
+        private static readonly LibraryExpressionBuilder LibraryExpressionBuilder = Factory.LibraryExpressionBuilder;
+        private static readonly LibrarySetExpressionBuilder LibrarySetExpressionBuilder = Factory.LibrarySetExpressionBuilder;
+        private static readonly TypeManager TypeManager = Factory.TypeManager;
 
         [TestMethod]
         public void AggregateQueries_1_0_0()
         {
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -32,7 +35,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -42,7 +45,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -64,7 +67,7 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = Factory.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+            var definitions = LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -73,7 +76,7 @@ namespace CoreTests
         [TestMethod]
         public void Get_Property_Uses_TypeResolver()
         {
-            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", Factory.TypeManager.Resolver)!;
+            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", TypeManager.Resolver)!;
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }

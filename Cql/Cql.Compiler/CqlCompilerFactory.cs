@@ -1,6 +1,4 @@
-﻿
-
-/*
+﻿/*
  * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -14,6 +12,7 @@ using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hl7.Cql.Compiler;
 
@@ -22,20 +21,21 @@ namespace Hl7.Cql.Compiler;
 /// The idea is not to inject this into service types, it's purpose is to
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
-internal class CqlCompilerFactory :
-    CqlAbstractionsFactory
+internal class CqlCompilerFactory(
+    ILoggerFactory loggerFactory,
+    CancellationToken cancellationToken = default,
+    int? cacheSize = null)
+    : CqlAbstractionsFactory(loggerFactory, cancellationToken)
 {
-    protected int? CacheSize { get; }
-
-    public CqlCompilerFactory(
-        ILoggerFactory loggerFactory,
+    public static LibraryExpressionBuilder NewLibraryExpressionBuilder(
+        ILoggerFactory? loggerFactory = default,
         CancellationToken cancellationToken = default,
-        int ? cacheSize = null) :
-        base(loggerFactory, cancellationToken) =>
-        CacheSize = cacheSize;
+        int? cacheSize = null) => new CqlCompilerFactory(loggerFactory ?? NullLoggerFactory.Instance, cancellationToken, cacheSize).LibraryExpressionBuilder;
+
+    protected int? CacheSize { get; } = cacheSize;
 
 
-    public virtual ModelInspector ModelInspector => Singleton(fn: NewModelInspector);
+    protected virtual ModelInspector ModelInspector => Singleton(fn: NewModelInspector);
     protected virtual ModelInspector NewModelInspector() => Hl7.Fhir.Model.ModelInfo.ModelInspector;
 
 
@@ -54,7 +54,7 @@ internal class CqlCompilerFactory :
     protected virtual TypeResolver NewTypeResolver() => new FhirTypeResolver(ModelInspector);
 
 
-    public virtual CqlOperatorsBinder CqlOperatorsBinder => Singleton(fn: NewOperatorsBinder);
+    protected virtual CqlOperatorsBinder CqlOperatorsBinder => Singleton(fn: NewOperatorsBinder);
     protected virtual CqlOperatorsBinder NewOperatorsBinder() =>
         new CqlOperatorsBinder(
             Logger<CqlOperatorsBinder>(),
@@ -62,7 +62,7 @@ internal class CqlCompilerFactory :
             TypeConverter);
 
 
-    public virtual CqlContextBinder CqlContextBinder => Singleton(fn: NewContextBinder);
+    protected virtual CqlContextBinder CqlContextBinder => Singleton(fn: NewContextBinder);
     protected virtual CqlContextBinder NewContextBinder() => new CqlContextBinder();
 
 
@@ -85,7 +85,7 @@ internal class CqlCompilerFactory :
     protected virtual ExpressionBuilderSettings NewLibraryDefinitionBuilderSettings() =>
         ExpressionBuilderSettings.Default;
 
-    public virtual ExpressionBuilder ExpressionBuilder => Singleton(fn: NewExpressionBuilder);
+    protected virtual ExpressionBuilder ExpressionBuilder => Singleton(fn: NewExpressionBuilder);
 
     protected virtual ExpressionBuilder NewExpressionBuilder() =>
         new ExpressionBuilder(

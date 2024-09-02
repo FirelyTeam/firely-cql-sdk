@@ -55,11 +55,8 @@ namespace Hl7.Cql.CqlToElm.Test
         protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
         {
             Services = ServiceCollection(options).BuildServiceProvider();
-
             var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
-            var cqlCompilerFactory = new CqlCompilerFactory(loggerFactory, cancellationToken: default, cacheSize: default);
-            var libraryExpressionBuilder = cqlCompilerFactory.LibraryExpressionBuilder;
-            LibraryExpressionBuilder = libraryExpressionBuilder;
+            LibraryExpressionBuilder = CqlCompilerFactory.NewLibraryExpressionBuilder(loggerFactory);
         }
 
 

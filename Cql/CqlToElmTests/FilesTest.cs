@@ -9,6 +9,7 @@ using Hl7.Cql.CqlToElm.LibraryProviders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Hl7.Cql.Compiler;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
@@ -23,17 +24,15 @@ public class FilesTest : Base
     public static void Initialize(TestContext context)
     {
         var sc = ServiceCollection(opt =>
-        {
-            opt.Input = Path;
-            opt.AmbiguousTypeBehavior = AmbiguousTypeBehavior.PreferModel; // match the ref implementation behavior
-        },
-        libraryProviderType: typeof(FileSystemLibraryProvider));
+                                   {
+                                       opt.Input = Path;
+                                       opt.AmbiguousTypeBehavior =
+                                           AmbiguousTypeBehavior.PreferModel; // match the ref implementation behavior
+                                   },
+                                   libraryProviderType: typeof(FileSystemLibraryProvider));
         Services = sc.BuildServiceProvider();
-
         var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
-        var cqlCompilerFactory = new CqlCompilerFactory(loggerFactory, cancellationToken: default, cacheSize: default);
-        var libraryExpressionBuilder = cqlCompilerFactory.LibraryExpressionBuilder;
-        LibraryExpressionBuilder = libraryExpressionBuilder;
+        LibraryExpressionBuilder = CqlCompilerFactory.NewLibraryExpressionBuilder(loggerFactory);
     }
 #pragma warning restore IDE0060 // Remove unused parameter
 
