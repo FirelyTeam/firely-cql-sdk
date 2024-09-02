@@ -1,11 +1,9 @@
 using Hl7.Fhir.Model;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreTests
 {

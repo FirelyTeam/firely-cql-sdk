@@ -31,35 +31,26 @@ internal static class CqlPackagerServicesInitializer
 
         services.TryAddSingleton<CSharpLibrarySetToStreamsWriter>();
 
-        services.TryAddSingletonSwitch<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor, StubCSharpCodeStreamPostProcessor>(sp =>
-        {
-            var cSharpCodeWriterOptions = sp.GetOptions<CSharpCodeWriterOptions>().Value;
-            return cSharpCodeWriterOptions.OutDirectory switch
+        services.TryAddSingletonSwitch<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor, StubCSharpCodeStreamPostProcessor>(
+            sp => sp.GetOptions<CSharpCodeWriterOptions>().Value.OutDirectory switch
             {
                 null => 1,
                 _    => 0
-            };
-        });
+            });
 
-        services.TryAddSingletonSwitch<AssemblyDataPostProcessor, WriteToFileAssemblyDataPostProcessor, StubAssemblyDataPostProcessor>(sp =>
-        {
-            var cSharpCodeWriterOptions = sp.GetOptions<AssemblyDataWriterOptions>().Value;
-            return cSharpCodeWriterOptions.OutDirectory switch
+        services.TryAddSingletonSwitch<AssemblyDataPostProcessor, WriteToFileAssemblyDataPostProcessor, StubAssemblyDataPostProcessor>(
+            sp => sp.GetOptions<AssemblyDataWriterOptions>().Value.OutDirectory switch
             {
                 null => 1,
                 _    => 0
-            };
-        });
+            });
 
-        services.TryAddSingletonSwitch<FhirResourcePostProcessor, WriteToFileFhirResourcePostProcessor, StubFhirResourcePostProcessor>(sp =>
-        {
-            var cSharpCodeWriterOptions = sp.GetOptions<FhirResourceWriterOptions>().Value;
-            return cSharpCodeWriterOptions.OutDirectory switch
+        services.TryAddSingletonSwitch<FhirResourcePostProcessor, WriteToFileFhirResourcePostProcessor, StubFhirResourcePostProcessor>(
+            sp => sp.GetOptions<FhirResourceWriterOptions>().Value.OutDirectory switch
             {
                 null => 1,
                 _    => 0
-            };
-        });
+            });
 
 
         services.TryAddSingleton<AssemblyCompiler>();
@@ -84,8 +75,8 @@ internal static class ServiceCollectionExtensions
         services.TryAddSingleton<TService>(
             sp => switchFn(sp) switch
             {
-                0 => (TService)ActivatorUtilities.CreateInstance<TImpl0>(sp),
-                1 => (TService)ActivatorUtilities.CreateInstance<TImpl1>(sp),
+                0 => ActivatorUtilities.CreateInstance<TImpl0>(sp),
+                1 => ActivatorUtilities.CreateInstance<TImpl1>(sp),
                 _ => throw new InvalidOperationException("Invalid switch value")
             });
         return services;

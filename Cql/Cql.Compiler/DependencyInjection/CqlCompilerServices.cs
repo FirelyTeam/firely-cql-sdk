@@ -9,6 +9,7 @@
 using System;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Conversion;
+using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Compiler.DependencyInjection;
@@ -17,15 +18,25 @@ internal class CqlCompilerServices(IServiceProvider serviceProvider) : IDisposab
 {
     public IServiceProvider ServiceProvider { get; private set; } = serviceProvider;
 
+    public ModelInspector ModelInspector => ServiceProvider.GetRequiredService<ModelInspector>();
+
     public TypeConverter TypeConverter => ServiceProvider.GetRequiredService<TypeConverter>();
 
     public TypeResolver TypeResolver => ServiceProvider.GetRequiredService<TypeResolver>();
+
+    public CqlOperatorsBinder CqlOperatorsBinder => ServiceProvider.GetRequiredService<CqlOperatorsBinder>();
+
+    public CqlContextBinder CqlContextBinder => ServiceProvider.GetRequiredService<CqlContextBinder>();
 
     public TypeManager TypeManager => ServiceProvider.GetRequiredService<TypeManager>();
 
     public LibrarySetExpressionBuilder LibrarySetExpressionBuilder => ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 
     public LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
+
+    public ExpressionBuilderSettings ExpressionBuilderSettings => ServiceProvider.GetRequiredService<ExpressionBuilderSettings>();
+
+    public ExpressionBuilder ExpressionBuilder => ServiceProvider.GetRequiredService<ExpressionBuilder>();
 
     public void Dispose()
     {
