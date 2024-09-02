@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Compiler;
+﻿using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
@@ -20,7 +21,13 @@ namespace Hl7.Cql.CqlToElm.Test
         protected const string SystemUri = "urn:hl7-org:elm-types:r1";
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        protected static ServiceProvider Services;
+        protected static IServiceProvider Services;
+
+        internal static LibraryExpressionBuilder LibraryExpressionBuilder;
+
+        internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
+
+
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         internal static CqlToElmConverter DefaultConverter => Services.GetRequiredService<CqlToElmConverter>();
@@ -31,17 +38,20 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static IServiceCollection ServiceCollection(Action<CqlToElmOptions>? options = null,
             Action<IModelProvider>? models = null,
-            Type? libraryProviderType = null)
-        {
-            var serviceCollection = new ServiceCollection()
-                                    .AddSystem()
-                                    .AddModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
-                                    .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
-                                    .AddMessaging()
-                                    .AddLogging(builder => builder.AddConsole())
-                                    .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider));
-            return serviceCollection;
-        }
+            Type? libraryProviderType = null) =>
+            new ServiceCollection()
+                .AddSystem()
+                .AddModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
+                .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
+                .AddMessaging()
+                .AddLogging(builder => builder
+                    .AddConsole())
+                .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider))
+                .AddSingleton(typeof(CSharpLibrarySetToStreamsWriter))
+                .AddSingleton(typeof(TypeToCSharpConverter))
+                .AddSingleton(typeof(CqlCompilerFactory))
+                .AddSingleton(isp => isp.GetRequiredService<CqlCompilerFactory>().TypeResolver);
+
 
         protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
         {
@@ -263,5 +273,41 @@ namespace Hl7.Cql.CqlToElm.Test
             provider.Libraries.Add("FHIRHelpers", "4.0.1", builder);
         }
 
+
+        internal static string WriteCSharp(Library library)
+        {
+            var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
+            var ls = new LibrarySet("", library);
+            var csByNav = new Dictionary<string, string>();
+            var callbacks = new CSharpSourceCodeWriterCallbacks(onAfterStep: afterWrite);
+            SourceCodeWriter.ProcessDefinitions(lambdas, ls, callbacks);
+            return csByNav[library.NameAndVersion()!];
+
+            void afterWrite(CSharpSourceCodeStep step)
+            {
+                switch (step)
+                {
+                    case CSharpSourceCodeStep.OnStream onStream:
+                        onStream.Stream.Seek(0, SeekOrigin.Begin);
+                        using (var reader = new StreamReader(onStream.Stream))
+                        {
+                            var code = reader.ReadToEnd();
+                            csByNav.Add(onStream.Name, code);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        internal static byte[] Compile(Library library)
+        {
+            var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
+            var ccf = Services.GetRequiredService<CqlCompilerFactory>();
+            var asm = new AssemblyCompiler(SourceCodeWriter, ccf.TypeManager, default, default);
+            var dict = asm.Compile(new LibrarySet("",library), lambdas);
+            return dict.Single().Value.Binary;
+        }
     }
 }
