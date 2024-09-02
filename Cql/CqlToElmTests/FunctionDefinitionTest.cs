@@ -2,6 +2,7 @@
 using System.IO;
 using Antlr4.Runtime;
 using FluentAssertions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.CqlToElm.Visitors;
@@ -278,6 +279,18 @@ namespace Hl7.Cql.CqlToElm.Test
             fd.external.Should().BeTrue();
             fd.externalSpecified.Should().BeTrue();
             fd.expression.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void CSharp_Keyword_Parameter_Name()
+        {
+            var lib = MakeLibrary(@"
+                library FuncTest version '1.0.0'
+
+                define function ToInteger(decimal System.Decimal) returns System.Integer: external
+            ");
+            var asm = Compile(lib);
+
         }
     }
 }
