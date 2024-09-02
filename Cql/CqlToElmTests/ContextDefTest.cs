@@ -7,7 +7,7 @@ using System.Linq;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class ContextDefTest : Base
+    public class ContextDefTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

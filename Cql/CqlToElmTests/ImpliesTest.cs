@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class ImpliesTest : Base
+    public class ImpliesTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class InfixSetTest : Base
+    public class InfixSetTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

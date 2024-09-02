@@ -7,7 +7,7 @@ using System;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class ConvertTest : Base
+    public class ConvertTest : Base
     {
 
         [ClassInitialize]

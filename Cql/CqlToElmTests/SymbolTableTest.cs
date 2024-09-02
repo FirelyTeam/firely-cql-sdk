@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class SymbolTableTest : Base
+    public class SymbolTableTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

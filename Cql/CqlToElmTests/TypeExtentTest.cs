@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class TypeExtentTest : Base
+    public class TypeExtentTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

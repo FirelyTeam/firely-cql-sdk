@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class XmlTests : Base
+    public class XmlTest : Base
     {
         private static XmlSerializer Serializer = new(typeof(Xml.Tests));
         private static readonly DateTimeOffset NowValue = new(2020, 1, 2, 3, 4, 0, TimeSpan.Zero);

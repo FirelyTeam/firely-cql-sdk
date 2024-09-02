@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class InvocationBuilderTest : Base
+    public class InvocationBuilderTest : Base
     {
         internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
         internal static ElmFactory ElmFactory => Services.GetRequiredService<ElmFactory>();

@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class TimingExpressionTest : Base
+    public class TimingExpressionTest : Base
     {
         internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
 

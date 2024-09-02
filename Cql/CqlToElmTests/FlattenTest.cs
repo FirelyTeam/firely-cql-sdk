@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class FlattenTest : Base
+    public class FlattenTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

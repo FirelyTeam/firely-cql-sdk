@@ -8,7 +8,7 @@ using System;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class AsTest : Base
+    public class AsTest : Base
     {
 
 

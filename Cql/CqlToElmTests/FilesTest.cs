@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Hl7.Cql.CqlToElm.Test;
 
 //[TestClass]
-internal class FilesTest : Base
+public class FilesTest : Base
 {
     // change to a path containing CQL; can include subdirectories.
     public const string Path = "C:\\Code\\Ncqa.HT.Firely\\Hedis2023\\Cql\\input";

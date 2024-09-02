@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
 
-    internal class SubtractionTest : Base
+    public class SubtractionTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

@@ -8,7 +8,7 @@ using System.Reflection;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class SingletonTest : Base
+    public class SingletonTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

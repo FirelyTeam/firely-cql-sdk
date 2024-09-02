@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class InstanceTest : Base
+    public class InstanceTest : Base
     {
 
         [ClassInitialize]

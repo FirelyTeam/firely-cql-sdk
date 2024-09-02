@@ -9,7 +9,7 @@ using System.IO;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class FHIRHelpersTest : Base
+    public class FHIRHelpersTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

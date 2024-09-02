@@ -10,7 +10,7 @@ using M = Hl7.Fhir.Model;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class RefTest : Base
+    public class RefTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

@@ -7,7 +7,7 @@ using System.Linq;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class CoercionTest : Base
+    public class CoercionTest : Base
     {
         internal static CoercionProvider CoercionProvider => Services.GetRequiredService<CoercionProvider>();
         internal static ElmFactory ElmFactory => Services.GetRequiredService<ElmFactory>();

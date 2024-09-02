@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class FunctionDefinitionBuilderTest : Base
+    public class FunctionDefinitionBuilderTest : Base
     {
         internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
 

@@ -5,7 +5,7 @@ namespace Hl7.Cql.CqlToElm.Test
 {
 
     [TestClass]
-    internal class ConcurrentWithTest : Base
+    public class ConcurrentWithTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

@@ -15,18 +15,17 @@ using Hl7.Cql.Compiler.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
-    internal class Base
+    public class Base
     {
         protected const string SystemUri = "urn:hl7-org:elm-types:r1";
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         protected static ServiceProvider Services;
-        protected static CqlCompilerServices CqlCompilerServices;
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         internal static CqlToElmConverter DefaultConverter => Services.GetRequiredService<CqlToElmConverter>();
 
-        internal static LibraryExpressionBuilder LibraryExpressionBuilder => CqlCompilerServices.LibraryExpressionBuilder;
+        internal static LibraryExpressionBuilder LibraryExpressionBuilder => Services.GetCqlCompilerServices().LibraryExpressionBuilder;
 
         internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
 
@@ -49,7 +48,6 @@ namespace Hl7.Cql.CqlToElm.Test
             var services = ServiceCollection(options);
             services.AddCqlCompilerServices();
             Services = services.BuildServiceProvider();
-            CqlCompilerServices = Services.GetCqlCompilerServices();
         }
 
         protected static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);

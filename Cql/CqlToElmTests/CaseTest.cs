@@ -5,7 +5,7 @@ using FluentAssertions;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    internal class CaseTest : Base
+    public class CaseTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

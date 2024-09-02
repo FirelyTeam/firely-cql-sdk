@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
 
-    internal class LiteralTests : Base
+    public class LiteralTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
