@@ -9,8 +9,8 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class CoercionTest : Base
     {
-        internal static CoercionProvider CoercionProvider => Services.GetRequiredService<CoercionProvider>();
-        internal static ElmFactory ElmFactory => Services.GetRequiredService<ElmFactory>();
+        internal static CoercionProvider CoercionProvider => CqlToElmServices.CoercionProvider;
+        internal static ElmFactory ElmFactory =>  CqlToElmServices.ElmFactory;
 
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

@@ -9,8 +9,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class FunctionDefinitionBuilderTest : Base
     {
-        internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
-
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize(options =>

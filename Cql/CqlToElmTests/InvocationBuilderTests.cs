@@ -11,8 +11,8 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class InvocationBuilderTest : Base
     {
-        internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
-        internal static ElmFactory ElmFactory => Services.GetRequiredService<ElmFactory>();
+        internal static InvocationBuilder InvocationBuilder => CqlToElmServices.InvocationBuilder;
+        internal static ElmFactory ElmFactory => CqlToElmServices.ElmFactory;
 
 
         [ClassInitialize]

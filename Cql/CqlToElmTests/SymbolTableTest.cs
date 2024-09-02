@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static VersionedIdentifier TestId => new VersionedIdentifier { id = "Test", version = "1.0.0" };
-        private static SystemLibrary SystemLibrary => Services.GetRequiredService<SystemLibrary>();
+        private static SystemLibrary SystemLibrary => CqlToElmServices.SystemLibrary;
 
         [TestMethod]
         public void Add_Local_Expression()

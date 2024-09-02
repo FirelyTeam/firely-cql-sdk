@@ -14,6 +14,7 @@ using System.Linq;
 using System.Reflection;
 using Hl7.Cql.CodeGeneration.NET.DependencyInjection;
 using Hl7.Cql.Compiler.DependencyInjection;
+using Hl7.Cql.CqlToElm.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -22,16 +23,18 @@ namespace Hl7.Cql.CqlToElm.Test
         protected const string SystemUri = "urn:hl7-org:elm-types:r1";
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        protected static IServiceProvider Services;
+        internal static CqlCodeGenerationServices CqlCodeGenerationServices;
+        internal static CqlToElmServices CqlToElmServices;
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        internal static CqlToElmConverter DefaultConverter => Services.GetRequiredService<CqlToElmConverter>();
 
-        internal static LibraryExpressionBuilder LibraryExpressionBuilder => Services.GetCqlCompilerServices().LibraryExpressionBuilder;
+        internal static CqlToElmConverter DefaultConverter => CqlToElmServices.CqlToElmConverter;
 
-        internal static CSharpLibrarySetToStreamsWriter SourceCodeWriter => Services.GetCqlCodeGenerationServices().CSharpLibrarySetToStreamsWriter;
+        internal static LibraryExpressionBuilder LibraryExpressionBuilder => CqlCodeGenerationServices.LibraryExpressionBuilder;
 
-        internal static MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
+        internal static CSharpLibrarySetToStreamsWriter SourceCodeWriter => CqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
+
+        internal static MessageProvider Messaging => CqlToElmServices.MessageProvider;
 
         protected static IServiceCollection ServiceCollection(Action<CqlToElmOptions>? options = null,
             Action<IModelProvider>? models = null,
@@ -50,7 +53,9 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var services = ServiceCollection(options);
             services.AddCqlCodeGenerationServices();
-            Services = services.BuildServiceProvider();
+            var sb = services.BuildServiceProvider();
+            CqlCodeGenerationServices = sb.GetCqlCodeGenerationServices();
+            CqlToElmServices = sb.GetCqlToElmServices();
         }
 
         protected static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
@@ -298,7 +303,7 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static byte[] Compile(Library library)
         {
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
-            var asm = Services.GetCqlCodeGenerationServices().AssemblyCompiler;
+            var asm = CqlCodeGenerationServices.AssemblyCompiler;
             var dict = asm.Compile(new LibrarySet("",library), lambdas);
             return dict.Single().Value.Binary;
         }

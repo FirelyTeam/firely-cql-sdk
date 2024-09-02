@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -8,8 +7,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class TimingExpressionTest : Base
     {
-        internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
-
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize(options =>
