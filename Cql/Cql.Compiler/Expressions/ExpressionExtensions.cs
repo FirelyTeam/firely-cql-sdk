@@ -65,15 +65,6 @@ internal static class ExpressionExtensions
             }
         }
 
-        var isAssignableTo =
-            expression.Type == typeof(object) // Choice?
-            || expression.Type.IsAssignableTo(type);
-        if (isAssignableTo || throwError)
-        {
-            Expression cast = Expression.Convert(expression, type);
-            return (cast, TypeConversion.ExpressionCast);
-        }
-
         if (safeUpcastAllowed)
         {
             var isAssignableFrom =
@@ -84,6 +75,15 @@ internal static class ExpressionExtensions
                 Expression cast = Expression.TypeAs(expression, type);
                 return (cast, TypeConversion.ExpressionTypeAs);
             }
+        }
+
+        var isAssignableTo =
+            expression.Type == typeof(object) // Choice?
+            || expression.Type.IsAssignableTo(type);
+        if (isAssignableTo || throwError)
+        {
+            Expression cast = Expression.Convert(expression, type);
+            return (cast, TypeConversion.ExpressionCast);
         }
 
         return (null, TypeConversion.NoMatch);
