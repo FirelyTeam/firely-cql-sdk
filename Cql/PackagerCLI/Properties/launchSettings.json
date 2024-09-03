@@ -1,28 +1,20 @@
 {
   "profiles": {
-//    "PackageCLI (Demo LibrarySet, typeformat=var)": {
-//      "commandName": "Project",
-//      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --cs-typeformat var --f true"
-//    },
-//    "PackageCLI (CMS Measures LibrarySet, typeformat=var)": {
-//      "commandName": "Project",
-//      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Cms/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Cms/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Cms/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Cms/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.CMS/CSharp\" --cs-typeformat var --f true"
-//    },
-    "PackageCLI (Demo LibrarySet, typeformat=explicit)": {
+    "PackageCLI (Demo)": {
       "commandName": "Project",
       "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --cs-typeformat explicit --f true"
     },
-    "PackageCLI (CMS Measures LibrarySet, typeformat=explicit)": {
+    "PackageCLI (CMS Measures)": {
       "commandName": "Project",
       "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/LibrarySets/Cms/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Cms/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Cms/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Cms/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.CMS/CSharp\" --cs-typeformat explicit --f true"
     },
-//    "PackageCLI (Measures.Authoring LibrarySet, typeformat=var)": {
-//      "commandName": "Project",
-//      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" --cs-typeformat var --f true"
-//    },
-    "PackageCLI (Measures.Authoring LibrarySet, typeformat=explicit)": {
+    "PackageCLI (Measures.Authoring)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" --cs-typeformat explicit --f true"
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/ql\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" --cs-typeformat explicit --f true"
+    },
+    "PackageCLI (Ncqa.DQIC\\BuildArtifaces)": {
+      "commandName": "Project",
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Elm\" --cql \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Cql\" --fhir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Resources\" --cs \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/CSharp\" --cs-typeformat explicit --f true"
     }
   }
 }
