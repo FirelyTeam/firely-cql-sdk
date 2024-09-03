@@ -2,7 +2,6 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -10,11 +9,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class XmlTests : Base
+    public class XmlTest : Base
     {
         private static XmlSerializer Serializer = new(typeof(Xml.Tests));
         private static readonly DateTimeOffset NowValue = new(2020, 1, 2, 3, 4, 0, TimeSpan.Zero);
@@ -28,8 +28,8 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static CqlContext CqlContext = FhirCqlContext.ForBundle(now: NowValue);
-        private static InvocationBuilder InvocationBuilder = Services.GetRequiredService<InvocationBuilder>();
-        private static ElmFactory ElmFactory = Services.GetRequiredService<ElmFactory>();
+        private static InvocationBuilder InvocationBuilder = CqlToElmServices.InvocationBuilder;
+        private static ElmFactory ElmFactory = CqlToElmServices.ElmFactory;
 
 
         [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]

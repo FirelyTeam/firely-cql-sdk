@@ -10,10 +10,10 @@
 using System.Diagnostics;
 using System.Globalization;
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager.Logging;
 using Hl7.Cql.Packaging;
+using Hl7.Cql.Packaging.Hosting;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -180,12 +180,12 @@ public class Program
     public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
         TryAddPackagerOptions(services, context.Configuration);
-        services.AddSingleton<ProgramCqlPackagerFactory>();
+        services.AddCqlPackagerServices();
         services.AddSingleton<PackagerCliProgram>();
         services.TryAddSingleton<OptionsConsoleDumper>();
     }
 
-    private static void TryAddPackagerOptions(IServiceCollection services, IConfiguration config)
+    public static void TryAddPackagerOptions(IServiceCollection services, IConfiguration configuration)
     {
         if (services.Any(s => s.ServiceType == typeof(IValidateOptions<CqlToResourcePackagingOptions>)))
             return;
@@ -213,6 +213,7 @@ public class Program
             .Configure<IConfiguration>(AssemblyDataWriterOptions.BindConfig)
             .ValidateOnStart();
     }
+
 
     private static int Run(IHostBuilder hostBuilder)
     {

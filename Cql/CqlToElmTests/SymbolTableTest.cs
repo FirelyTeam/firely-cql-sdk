@@ -2,13 +2,9 @@
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Scopes;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -21,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static VersionedIdentifier TestId => new VersionedIdentifier { id = "Test", version = "1.0.0" };
-        private static SystemLibrary SystemLibrary => Services.GetRequiredService<SystemLibrary>();
+        private static SystemLibrary SystemLibrary => CqlToElmServices.SystemLibrary;
 
         [TestMethod]
         public void Add_Local_Expression()

@@ -1,16 +1,14 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
 
-    public class LiteralTests : Base
+    public class LiteralTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -18,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
         });
 #pragma warning restore IDE0060 // Remove unused parameter
-        internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
+        internal static InvocationBuilder InvocationBuilder => CqlToElmServices.InvocationBuilder;
 
         [TestMethod]
         public void String_Literal()

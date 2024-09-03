@@ -16,42 +16,30 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-internal partial class ExpressionBuilder
+internal class ExpressionBuilder(
+    ILogger<ExpressionBuilder> logger,
+    ExpressionBuilderSettings expressionBuilderSettings,
+    CqlOperatorsBinder cqlOperatorsBinder,
+    TypeManager typeManager,
+    TypeConverter typeConverter,
+    TypeResolver typeResolver,
+    CqlContextBinder cqlContextBinder)
 {
-    internal readonly CqlOperatorsBinder _cqlOperatorsBinder;
-    internal readonly CqlContextBinder _cqlContextBinder;
-    internal readonly TypeManager _typeManager;
-    internal readonly ILogger<ExpressionBuilder> _logger;
-    internal readonly TypeConverter _typeConverter;
-    internal readonly TypeResolver _typeResolver;
-    internal readonly ExpressionBuilderSettings _expressionBuilderSettings;
-
-    internal ExpressionBuilder(
-        ILogger<ExpressionBuilder> logger,
-        ExpressionBuilderSettings expressionBuilderSettings,
-        CqlOperatorsBinder cqlOperatorsBinder,
-        TypeManager typeManager,
-        TypeConverter typeConverter,
-        TypeResolver typeResolver,
-        CqlContextBinder cqlContextBinder)
-    {
-        _logger = logger;
-        _cqlOperatorsBinder = cqlOperatorsBinder;
-        _cqlContextBinder = cqlContextBinder;
-        _typeManager = typeManager;
-        _expressionBuilderSettings = expressionBuilderSettings;
-        _typeConverter = typeConverter;
-        _typeResolver = typeResolver;
-    }
+    internal readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
+    internal readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
+    internal readonly TypeManager _typeManager = typeManager;
+    internal readonly ILogger<ExpressionBuilder> _logger = logger;
+    internal readonly TypeConverter _typeConverter = typeConverter;
+    internal readonly TypeResolver _typeResolver = typeResolver;
+    internal readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
 
     /*
-         * The ExpressionBuilderContext is created anew for each of the ProcessXXX methods.
-         * This works, because all but the ProcessExpressionDef methods only change state
-         * on the ILibraryExpressionBuilderContext.
-         *
-         * Only ProcessExpressionDef changes state on the ExpressionBuilderContext.
-         *
-         */
+     * The ExpressionBuilderContext is created anew for each of the ProcessXXX methods.
+     * This works, because all but the ProcessExpressionDef methods only change state
+     * on the ILibraryExpressionBuilderContext.
+     *
+     * Only ProcessExpressionDef changes state on the ExpressionBuilderContext.
+     */
 
     public void ProcessIncludes(ILibraryExpressionBuilderContext libCtx, IncludeDef includeDef)
     {

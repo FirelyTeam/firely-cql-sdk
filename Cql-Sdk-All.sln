@@ -398,7 +398,7 @@ Global
 		{2929117D-FB33-4BD6-8F20-4B623C114438} = {0E5F5704-5289-4C65-AD4E-364CD5F60C44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		FileExplorer = |build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
+		FileExplorer = |build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
 	EndGlobalSection
 EndGlobal
