@@ -158,8 +158,9 @@ namespace Test
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            using var cqlCodeGenerationServices = CqlServicesInitializer.CreateCqlCodeGenerationServices();
-            var definitions = cqlCodeGenerationServices.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+            using var disposeContext = new DisposeContext();
+            var cqlCodeGenerationServices = CqlServicesInitializer.CreateCqlCodeGenerationServices(disposeContext.Token);
+            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             var assemblyData = cqlCodeGenerationServices.AssemblyCompiler.Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             foreach (var (_, asmData) in assemblyData)
