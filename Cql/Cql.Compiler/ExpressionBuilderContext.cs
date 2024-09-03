@@ -2161,22 +2161,23 @@ partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var operand = TranslateArg(@as.operand!);
-                    var converted = ChangeType(operand, type, out var typeConversion);
-                    if (typeConversion == TypeConversion.NoMatch)
+                    var converted = ChangeType(operand, type, out var typeConversion, safeUpcastAllowed:true);
+                    switch (typeConversion)
                     {
-                        // log an unsafe cast
-                        _logger.LogWarning(FormatMessage(
-                            $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
-                            @as.operand));
-                        return Expression.Default(type);
-                    }
-                    else if (typeConversion == TypeConversion.OperatorConvert) // use the custom conversion function
-                    {
-                        return converted;
-                    }
-                    else
-                    {
-                        return new ElmAsExpression(operand, type, @as.strict);
+                        case TypeConversion.NoMatch:
+                            // log an unsafe cast
+                            _logger.LogWarning(
+                                FormatMessage(
+                                    $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
+                                    @as.operand));
+                            return Expression.Default(type);
+
+                        case TypeConversion.OperatorConvert:
+                            return converted;
+
+                        case TypeConversion.ExpressionTypeAs:
+                        default:
+                            return new ElmAsExpression(operand, type, @as.strict);
                     }
                 }
             }
@@ -2291,9 +2292,10 @@ partial class ExpressionBuilderContext
     private Expression ChangeType(
         Expression input,
         Type outputType,
-        out TypeConversion typeConversion) // @TODO: Cast - ChangeType
+        out TypeConversion typeConversion,
+        bool safeUpcastAllowed = false) // @TODO: Cast - ChangeType
     {
-        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false);
+        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, safeUpcastAllowed);
         if (tc != TypeConversion.NoMatch)
         {
             typeConversion = tc;
