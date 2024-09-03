@@ -19,8 +19,6 @@ namespace Hl7.Cql.Elm
     internal class ElmTreeWalker(Func<object, bool> visitor,
                                Func<Type, bool>? filter = null) : BaseElmTreeWalker
     {
-        public void Start(object root) => StartInternal(root);
-
         protected override bool IsRelevant(Type nodeType) => filter?.Invoke(nodeType) ?? base.IsRelevant(nodeType);
 
         protected override bool Process(object node) => visitor(node);

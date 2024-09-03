@@ -21,11 +21,11 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
 {
     private Library? _library;
 
-    public override void Walk(Library library)
+    public void Fix(Library library)
     {
         _library = library;
 
-        base.Walk(library);
+        base.Start(library);
     }
 
     protected override bool Process(object node)

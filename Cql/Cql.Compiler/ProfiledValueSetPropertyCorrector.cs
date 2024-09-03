@@ -10,6 +10,10 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal class ProfiledValueSetPropertyCorrector : BaseElmTreeWalker
 {
+    public void Fix(Library library)
+    {
+        base.Start(library);
+    }
     protected override bool Process(object node)
     {
         // Correct this for the valueset UnitsOfTime, the only place where this causes problems in the current

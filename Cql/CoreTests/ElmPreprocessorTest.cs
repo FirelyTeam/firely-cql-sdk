@@ -25,7 +25,7 @@ namespace CoreTests
 
             var lib = Library.LoadFromJson(file);
             var rtsChecker = new ResultTypeSpecifierChecker();
-            rtsChecker.Walk(lib);
+            rtsChecker.Start(lib);
             // there are nodes missing resultTypeSpecifiers.
             rtsChecker.Nodes.Should().NotBeEmpty();
 
@@ -33,7 +33,7 @@ namespace CoreTests
             var pp = new ElmPreprocessor(ls);
             pp.Preprocess(lib);
             rtsChecker = new ResultTypeSpecifierChecker();
-            rtsChecker.Walk(lib);
+            rtsChecker.Start(lib);
             // after pre-processing the library, there should be no such nodes remaining.
             rtsChecker.Nodes.Should().BeEmpty();
         }

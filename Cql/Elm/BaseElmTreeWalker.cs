@@ -20,7 +20,11 @@ namespace Hl7.Cql.Elm;
 /// </summary>
 internal abstract class BaseElmTreeWalker
 {
-    public virtual void Walk(Library lib) => StartInternal(lib);
+    public virtual void Start(object root)
+    {
+        _visited = [];
+        Walk(root);
+    }
 
     /// <summary>
     /// Determine whether a node of a given type should be walked into.
@@ -44,15 +48,6 @@ internal abstract class BaseElmTreeWalker
     /// Process a node that we have walked into.
     /// </summary>
     protected abstract bool Process(object node);
-
-    /// <summary>
-    /// Perform the walk.
-    /// </summary>
-    protected void StartInternal(object? root)
-    {
-        _visited = [];
-        Walk(root);
-    }
 
     private Stack<object> _visited = new();
 

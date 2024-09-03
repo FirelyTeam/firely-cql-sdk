@@ -19,9 +19,9 @@ internal class ElmPreprocessor(LibrarySet librarySet)
     public void Preprocess(Library library)
     {
         var expressionRefCorrector = new ExpressionRefCorrector(librarySet);
-        expressionRefCorrector.Walk(library);
+        expressionRefCorrector.Fix(library);
 
         var profilesVsCorrector = new ProfiledValueSetPropertyCorrector();
-        profilesVsCorrector.Walk(library);
+        profilesVsCorrector.Fix(library);
     }
 }
