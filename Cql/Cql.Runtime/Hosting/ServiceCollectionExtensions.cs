@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Hl7.Cql.Compiler.DependencyInjection;
+namespace Hl7.Cql.Runtime.Hosting;
 
 internal static class ServiceCollectionExtensions
 {

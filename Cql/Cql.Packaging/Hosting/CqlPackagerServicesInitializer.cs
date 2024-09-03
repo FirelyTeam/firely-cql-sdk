@@ -7,13 +7,13 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.CodeGeneration.NET.DependencyInjection;
-using Hl7.Cql.Compiler.DependencyInjection;
+using Hl7.Cql.CodeGeneration.NET.Hosting;
 using Hl7.Cql.Packaging.PostProcessors;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Hl7.Cql.Packaging.DependencyInjection;
+namespace Hl7.Cql.Packaging.Hosting;
 
 internal static class CqlPackagerServicesInitializer
 {
@@ -27,7 +27,7 @@ internal static class CqlPackagerServicesInitializer
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
 
         services.TryAddSingletonSwitch<FhirResourcePostProcessor, WriteToFileFhirResourcePostProcessor, StubFhirResourcePostProcessor>(
-            sp => sp.GetOptions<FhirResourceWriterOptions>().Value.OutDirectory switch
+            sp => sp.GetOptionsValue<FhirResourceWriterOptions>().OutDirectory switch
             {
                 null => 1,
                 _    => 0
@@ -40,26 +40,6 @@ internal static class CqlPackagerServicesInitializer
 
         services.TryAddSingleton<CqlToResourcePackagingPipeline>();
 
-        return services;
-    }
-}
-
-internal static class ServiceCollectionExtensions
-{
-    public static IServiceCollection TryAddSingletonSwitch<TService, TImpl0, TImpl1>(
-        this IServiceCollection services,
-        Func<IServiceProvider, int> switchFn)
-        where TService : class
-        where TImpl0 : class, TService
-        where TImpl1 : class, TService
-    {
-        services.TryAddSingleton<TService>(
-            sp => switchFn(sp) switch
-            {
-                0 => ActivatorUtilities.CreateInstance<TImpl0>(sp),
-                1 => ActivatorUtilities.CreateInstance<TImpl1>(sp),
-                _ => throw new InvalidOperationException("Invalid switch value")
-            });
         return services;
     }
 }

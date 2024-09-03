@@ -8,14 +8,17 @@
 
 using System;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
-using Hl7.Cql.Compiler.DependencyInjection;
+using Hl7.Cql.Compiler.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.CodeGeneration.NET.DependencyInjection;
+namespace Hl7.Cql.CodeGeneration.NET.Hosting;
 
-internal class CqlCodeGenerationServices(IServiceProvider serviceProvider)
-    : CqlCompilerServices(serviceProvider)
+internal readonly struct CqlCodeGenerationServices(IServiceProvider serviceProvider)
 {
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
+
+    public CqlCompilerServices GetCqlCompilerServices() => new(ServiceProvider);
+
     public TypeToCSharpConverter TypeToCSharpConverter => ServiceProvider.GetRequiredService<TypeToCSharpConverter>();
 
     public CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => ServiceProvider.GetRequiredService<CSharpLibrarySetToStreamsWriter>();

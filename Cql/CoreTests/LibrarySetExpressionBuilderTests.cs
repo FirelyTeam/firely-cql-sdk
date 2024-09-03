@@ -11,7 +11,8 @@ public class LibrarySetExpressionBuilderTests
     [TestMethod]
     public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()
     {
-        using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
+        using var disposeContext = new DisposeContext();
+        var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
 
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");

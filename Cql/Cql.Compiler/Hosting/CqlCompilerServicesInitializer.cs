@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
-namespace Hl7.Cql.Compiler.DependencyInjection;
+namespace Hl7.Cql.Compiler.Hosting;
 
 internal static class CqlCompilerServicesInitializer
 {

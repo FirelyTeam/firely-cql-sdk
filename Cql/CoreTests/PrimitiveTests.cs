@@ -13,7 +13,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
-using Hl7.Cql.Packaging.DependencyInjection;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
 using Microsoft.Extensions.DependencyInjection;
@@ -3406,12 +3405,13 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
-            using var cqlCodeGenerationServices = ServiceProviderInitializer.CreateCqlCodeGenerationServices();
+            using var disposeContext = new DisposeContext();
+            var cqlCodeGenerationServices = CqlServicesInitializer.CreateCqlCodeGenerationServices(disposeContext.Token);
 
             var librarySet = new LibrarySet();
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
-            var definitions = cqlCodeGenerationServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             var writer = cqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
             var isDone = false;
             writer.ProcessDefinitions(

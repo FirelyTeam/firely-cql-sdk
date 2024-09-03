@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Hosting;
 
 namespace CoreTests
 {
@@ -13,7 +14,8 @@ namespace CoreTests
         [TestMethod]
         public void AggregateQueries_1_0_0()
         {
-            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
+            using var disposeContext = new DisposeContext();
+            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
@@ -24,7 +26,8 @@ namespace CoreTests
         [TestMethod]
         public void FHIRConversionTest_1_0_0()
         {
-            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
+            using var disposeContext = new DisposeContext();
+            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
@@ -35,7 +38,8 @@ namespace CoreTests
         [TestMethod]
         public void QueriesTest_1_0_0()
         {
-            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
+            using var disposeContext = new DisposeContext();
+            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
@@ -47,7 +51,8 @@ namespace CoreTests
         [TestMethod]
         public void Medication_Request_Example_Test()
         {
-            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
+            using var disposeContext = new DisposeContext();
+            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
             FileInfo[] files =
             [
                 new(@"Input\ELM\Test\Medication_Request_Example.json"),
@@ -70,7 +75,8 @@ namespace CoreTests
         [TestMethod]
         public void Get_Property_Uses_TypeResolver()
         {
-            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
+            using var disposeContext = new DisposeContext();
+            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
             var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", cqlCompilerServices.TypeManager.Resolver)!;
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);

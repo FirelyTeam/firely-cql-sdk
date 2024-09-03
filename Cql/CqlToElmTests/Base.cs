@@ -12,9 +12,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Hl7.Cql.CodeGeneration.NET.DependencyInjection;
-using Hl7.Cql.Compiler.DependencyInjection;
-using Hl7.Cql.CqlToElm.DependencyInjection;
+using Hl7.Cql.CodeGeneration.NET.Hosting;
+using Hl7.Cql.CqlToElm.Hosting;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -30,7 +29,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static CqlToElmConverter DefaultConverter => CqlToElmServices.CqlToElmConverter;
 
-        internal static LibraryExpressionBuilder LibraryExpressionBuilder => CqlCodeGenerationServices.LibraryExpressionBuilder;
+        internal static LibraryExpressionBuilder LibraryExpressionBuilder => CqlCodeGenerationServices.GetCqlCompilerServices().LibraryExpressionBuilder;
 
         internal static CSharpLibrarySetToStreamsWriter SourceCodeWriter => CqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
 

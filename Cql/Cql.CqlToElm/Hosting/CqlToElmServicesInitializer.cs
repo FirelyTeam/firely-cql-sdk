@@ -6,16 +6,16 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 
-namespace Hl7.Cql.CqlToElm.DependencyInjection;
+namespace Hl7.Cql.CqlToElm.Hosting;
 
 internal static class CqlToElmServicesInitializer
 {

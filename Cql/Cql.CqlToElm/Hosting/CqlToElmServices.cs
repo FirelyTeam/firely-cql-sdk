@@ -11,11 +11,11 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.CqlToElm.DependencyInjection;
+namespace Hl7.Cql.CqlToElm.Hosting;
 
-internal class CqlToElmServices(IServiceProvider serviceProvider) : IDisposable
+internal readonly struct CqlToElmServices(IServiceProvider serviceProvider)
 {
-    public IServiceProvider ServiceProvider { get; private set; } = serviceProvider;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
 
     public CqlToElmConverter CqlToElmConverter => ServiceProvider.GetRequiredService<CqlToElmConverter>();
 
@@ -34,11 +34,4 @@ internal class CqlToElmServices(IServiceProvider serviceProvider) : IDisposable
     public MessageProvider MessageProvider => ServiceProvider.GetRequiredService<MessageProvider>();
 
     public IModelProvider ModelProvider => ServiceProvider.GetRequiredService<IModelProvider>();
-
-    public void Dispose()
-    {
-        var sp = ServiceProvider;
-        ServiceProvider = null!;
-        (sp as IDisposable)?.Dispose();
-    }
 }

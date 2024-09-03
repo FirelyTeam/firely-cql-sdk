@@ -9,7 +9,6 @@ using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using CLI.Helpers;
-using Hl7.Cql.Packaging.DependencyInjection;
 using Test.Deck;
 
 namespace Test
@@ -159,7 +158,7 @@ namespace Test
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            using var cqlCodeGenerationServices = ServiceProviderInitializer.CreateCqlCodeGenerationServices();
+            using var cqlCodeGenerationServices = CqlServicesInitializer.CreateCqlCodeGenerationServices();
             var definitions = cqlCodeGenerationServices.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             var assemblyData = cqlCodeGenerationServices.AssemblyCompiler.Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");

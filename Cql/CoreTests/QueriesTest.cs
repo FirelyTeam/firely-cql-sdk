@@ -18,7 +18,8 @@ namespace CoreTests
        [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            using var cqlCompilerServices = ServiceProviderInitializer.CreateCqlCompilerServiceProvider();
+            using var disposeContext = new DisposeContext();
+            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
 
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);

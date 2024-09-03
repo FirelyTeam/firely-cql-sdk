@@ -12,11 +12,11 @@ using Hl7.Cql.Conversion;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.Compiler.DependencyInjection;
+namespace Hl7.Cql.Compiler.Hosting;
 
-internal class CqlCompilerServices(IServiceProvider serviceProvider) : IDisposable
+internal readonly struct CqlCompilerServices(IServiceProvider serviceProvider)
 {
-    public IServiceProvider ServiceProvider { get; private set; } = serviceProvider;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
 
     public ModelInspector ModelInspector => ServiceProvider.GetRequiredService<ModelInspector>();
 
@@ -37,11 +37,4 @@ internal class CqlCompilerServices(IServiceProvider serviceProvider) : IDisposab
     public ExpressionBuilderSettings ExpressionBuilderSettings => ServiceProvider.GetRequiredService<ExpressionBuilderSettings>();
 
     public ExpressionBuilder ExpressionBuilder => ServiceProvider.GetRequiredService<ExpressionBuilder>();
-
-    public void Dispose()
-    {
-        var sp = ServiceProvider;
-        ServiceProvider = null!;
-        (sp as IDisposable)?.Dispose();
-    }
 }
