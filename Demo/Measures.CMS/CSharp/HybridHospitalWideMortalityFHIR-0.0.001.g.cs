@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("HybridHospitalWideMortalityFHIR", "0.0.001")]
 public class HybridHospitalWideMortalityFHIR_0_0_001
 {
@@ -112,7 +112,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
     #endregion
 
 	private CqlValueSet Bicarbonate_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", default);
 
     [CqlDeclaration("Bicarbonate lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139")]
@@ -120,7 +120,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__Bicarbonate_lab_test.Value;
 
 	private CqlValueSet Creatinine_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363", default);
 
     [CqlDeclaration("Creatinine lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363")]
@@ -128,7 +128,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__Creatinine_lab_test.Value;
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -136,7 +136,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Hematocrit_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", default);
 
     [CqlDeclaration("Hematocrit lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114")]
@@ -144,7 +144,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__Hematocrit_lab_test.Value;
 
 	private CqlValueSet Medicare_Advantage_payer_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.12", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.12", default);
 
     [CqlDeclaration("Medicare Advantage payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.12")]
@@ -152,7 +152,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__Medicare_Advantage_payer.Value;
 
 	private CqlValueSet Medicare_FFS_payer_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10", default);
 
     [CqlDeclaration("Medicare FFS payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10")]
@@ -160,7 +160,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__Medicare_FFS_payer.Value;
 
 	private CqlValueSet Oxygen_Saturation_by_Pulse_Oximetry_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.151", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.151", default);
 
     [CqlDeclaration("Oxygen Saturation by Pulse Oximetry")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.151")]
@@ -168,7 +168,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__Oxygen_Saturation_by_Pulse_Oximetry.Value;
 
 	private CqlValueSet Platelet_count_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.127", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.127", default);
 
     [CqlDeclaration("Platelet count lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.127")]
@@ -176,7 +176,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__Platelet_count_lab_test.Value;
 
 	private CqlValueSet Sodium_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119", default);
 
     [CqlDeclaration("Sodium lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119")]
@@ -184,7 +184,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__Sodium_lab_test.Value;
 
 	private CqlValueSet White_blood_cells_count_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", default);
 
     [CqlDeclaration("White blood cells count lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129")]
@@ -192,21 +192,21 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		__White_blood_cells_count_lab_test.Value;
 
 	private CqlCode Oxygen_saturation_in_Arterial_blood_Value() => 
-		new CqlCode("2708-6", "http://loinc.org", null, null);
+		new CqlCode("2708-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Oxygen saturation in Arterial blood")]
 	public CqlCode Oxygen_saturation_in_Arterial_blood() => 
 		__Oxygen_saturation_in_Arterial_blood.Value;
 
 	private CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry_Value() => 
-		new CqlCode("59408-5", "http://loinc.org", null, null);
+		new CqlCode("59408-5", "http://loinc.org", default, default);
 
     [CqlDeclaration("Oxygen saturation in Arterial blood by Pulse oximetry")]
 	public CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry() => 
 		__Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry.Value;
 
 	private CqlCode Systolic_blood_pressure_Value() => 
-		new CqlCode("8480-6", "http://loinc.org", null, null);
+		new CqlCode("8480-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Systolic blood pressure")]
 	public CqlCode Systolic_blood_pressure() => 
@@ -215,9 +215,9 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("2708-6", "http://loinc.org", null, null),
-			new CqlCode("59408-5", "http://loinc.org", null, null),
-			new CqlCode("8480-6", "http://loinc.org", null, null),
+			new CqlCode("2708-6", "http://loinc.org", default, default),
+			new CqlCode("59408-5", "http://loinc.org", default, default),
+			new CqlCode("8480-6", "http://loinc.org", default, default),
 		];
 
 		return a_;
@@ -267,7 +267,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -280,13 +280,13 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 	private IEnumerable<Encounter> Inpatient_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		IEnumerable<Encounter> c_(Encounter InpatientEncounter)
 		{
 			CqlValueSet e_ = this.Medicare_FFS_payer();
-			IEnumerable<Coverage> f_ = context.Operators.RetrieveByValueSet<Coverage>(e_, null);
+			IEnumerable<Coverage> f_ = context.Operators.RetrieveByValueSet<Coverage>(e_, default);
 			CqlValueSet g_ = this.Medicare_Advantage_payer();
-			IEnumerable<Coverage> h_ = context.Operators.RetrieveByValueSet<Coverage>(g_, null);
+			IEnumerable<Coverage> h_ = context.Operators.RetrieveByValueSet<Coverage>(g_, default);
 			IEnumerable<Coverage> i_ = context.Operators.Union<Coverage>(f_, h_);
 			bool? j_(Coverage MedicarePayer)
 			{
@@ -308,7 +308,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDate ac_ = context.Operators.DateFrom(ab_);
 				int? ad_ = context.Operators.CalculateAgeAt(y_, ac_, "year");
 				CqlInterval<int?> ae_ = context.Operators.Interval(65, 94, true, true);
-				bool? af_ = context.Operators.In<int?>(ad_, ae_, null);
+				bool? af_ = context.Operators.In<int?>(ad_, ae_, default);
 				bool? ag_ = context.Operators.And(u_, af_);
 				CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_3_000.ToInterval(z_);
 				CqlDateTime aj_ = context.Operators.End(ai_);
@@ -352,7 +352,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
 			bool? g_(Observation temperature)
 			{
 				DataType x_ = temperature?.Effective;
@@ -368,7 +368,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlQuantity ai_ = context.Operators.Quantity(120m, "minutes");
 				CqlDateTime aj_ = context.Operators.Add(ah_, ai_);
 				CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ae_, aj_, true, true);
-				bool? al_ = context.Operators.In<CqlDateTime>(z_, ak_, null);
+				bool? al_ = context.Operators.In<CqlDateTime>(z_, ak_, default);
 				Code<ObservationStatus> am_ = temperature?.StatusElement;
 				ObservationStatus? an_ = am_?.Value;
 				string ao_ = context.Operators.Convert<string>(an_);
@@ -414,7 +414,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlQuantity bk_ = context.Operators.Quantity(120m, "minutes");
 				CqlDateTime bl_ = context.Operators.Add(bj_, bk_);
 				CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bg_, bl_, true, true);
-				bool? bn_ = context.Operators.In<CqlDateTime>(bb_, bm_, null);
+				bool? bn_ = context.Operators.In<CqlDateTime>(bb_, bm_, default);
 				Code<ObservationStatus> bo_ = temperature?.StatusElement;
 				ObservationStatus? bp_ = bo_?.Value;
 				string bq_ = context.Operators.Convert<string>(bp_);
@@ -466,7 +466,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
 			bool? g_(Observation HeartRate)
 			{
 				DataType x_ = HeartRate?.Effective;
@@ -482,7 +482,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlQuantity ai_ = context.Operators.Quantity(120m, "minutes");
 				CqlDateTime aj_ = context.Operators.Add(ah_, ai_);
 				CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ae_, aj_, true, true);
-				bool? al_ = context.Operators.In<CqlDateTime>(z_, ak_, null);
+				bool? al_ = context.Operators.In<CqlDateTime>(z_, ak_, default);
 				Code<ObservationStatus> am_ = HeartRate?.StatusElement;
 				ObservationStatus? an_ = am_?.Value;
 				string ao_ = context.Operators.Convert<string>(an_);
@@ -528,7 +528,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlQuantity bk_ = context.Operators.Quantity(120m, "minutes");
 				CqlDateTime bl_ = context.Operators.Add(bj_, bk_);
 				CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bg_, bl_, true, true);
-				bool? bn_ = context.Operators.In<CqlDateTime>(bb_, bm_, null);
+				bool? bn_ = context.Operators.In<CqlDateTime>(bb_, bm_, default);
 				Code<ObservationStatus> bo_ = HeartRate?.StatusElement;
 				ObservationStatus? bp_ = bo_?.Value;
 				string bq_ = context.Operators.Convert<string>(bp_);
@@ -581,7 +581,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? h_(Observation O2Saturation)
 			{
 				object r_()
@@ -647,7 +647,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlQuantity ab_ = context.Operators.Quantity(120m, "minutes");
 				CqlDateTime ac_ = context.Operators.Add(aa_, ab_);
 				CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(x_, ac_, true, true);
-				bool? ae_ = context.Operators.In<CqlDateTime>(s_, ad_, null);
+				bool? ae_ = context.Operators.In<CqlDateTime>(s_, ad_, default);
 				Code<ObservationStatus> af_ = O2Saturation?.StatusElement;
 				ObservationStatus? ag_ = af_?.Value;
 				Code<ObservationStatus> ah_ = context.Operators.Convert<Code<ObservationStatus>>(ag_);
@@ -734,7 +734,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool cc_()
 				{
 					CqlValueSet cf_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> cg_ = context.Operators.RetrieveByValueSet<Observation>(cf_, null);
+					IEnumerable<Observation> cg_ = context.Operators.RetrieveByValueSet<Observation>(cf_, default);
 					bool? ch_(Observation O2Saturation)
 					{
 						object cp_()
@@ -800,7 +800,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						CqlQuantity cz_ = context.Operators.Quantity(120m, "minutes");
 						CqlDateTime da_ = context.Operators.Add(cy_, cz_);
 						CqlInterval<CqlDateTime> db_ = context.Operators.Interval(cv_, da_, true, true);
-						bool? dc_ = context.Operators.In<CqlDateTime>(cq_, db_, null);
+						bool? dc_ = context.Operators.In<CqlDateTime>(cq_, db_, default);
 						Code<ObservationStatus> dd_ = O2Saturation?.StatusElement;
 						ObservationStatus? de_ = dd_?.Value;
 						Code<ObservationStatus> df_ = context.Operators.Convert<Code<ObservationStatus>>(de_);
@@ -889,7 +889,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool cd_()
 				{
 					CqlValueSet fa_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> fb_ = context.Operators.RetrieveByValueSet<Observation>(fa_, null);
+					IEnumerable<Observation> fb_ = context.Operators.RetrieveByValueSet<Observation>(fa_, default);
 					bool? fc_(Observation O2Saturation)
 					{
 						object fk_()
@@ -955,7 +955,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						CqlQuantity fu_ = context.Operators.Quantity(120m, "minutes");
 						CqlDateTime fv_ = context.Operators.Add(ft_, fu_);
 						CqlInterval<CqlDateTime> fw_ = context.Operators.Interval(fq_, fv_, true, true);
-						bool? fx_ = context.Operators.In<CqlDateTime>(fl_, fw_, null);
+						bool? fx_ = context.Operators.In<CqlDateTime>(fl_, fw_, default);
 						Code<ObservationStatus> fy_ = O2Saturation?.StatusElement;
 						ObservationStatus? fz_ = fy_?.Value;
 						Code<ObservationStatus> ga_ = context.Operators.Convert<Code<ObservationStatus>>(fz_);
@@ -1044,7 +1044,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool ce_()
 				{
 					CqlValueSet hv_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> hw_ = context.Operators.RetrieveByValueSet<Observation>(hv_, null);
+					IEnumerable<Observation> hw_ = context.Operators.RetrieveByValueSet<Observation>(hv_, default);
 					bool? hx_(Observation O2Saturation)
 					{
 						object if_()
@@ -1110,7 +1110,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						CqlQuantity ip_ = context.Operators.Quantity(120m, "minutes");
 						CqlDateTime iq_ = context.Operators.Add(io_, ip_);
 						CqlInterval<CqlDateTime> ir_ = context.Operators.Interval(il_, iq_, true, true);
-						bool? is_ = context.Operators.In<CqlDateTime>(ig_, ir_, null);
+						bool? is_ = context.Operators.In<CqlDateTime>(ig_, ir_, default);
 						Code<ObservationStatus> it_ = O2Saturation?.StatusElement;
 						ObservationStatus? iu_ = it_?.Value;
 						Code<ObservationStatus> iv_ = context.Operators.Convert<Code<ObservationStatus>>(iu_);
@@ -1199,7 +1199,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				if (cc_())
 				{
 					CqlValueSet kq_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> kr_ = context.Operators.RetrieveByValueSet<Observation>(kq_, null);
+					IEnumerable<Observation> kr_ = context.Operators.RetrieveByValueSet<Observation>(kq_, default);
 					bool? ks_(Observation O2Saturation)
 					{
 						object kz_()
@@ -1265,7 +1265,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						CqlQuantity lj_ = context.Operators.Quantity(120m, "minutes");
 						CqlDateTime lk_ = context.Operators.Add(li_, lj_);
 						CqlInterval<CqlDateTime> ll_ = context.Operators.Interval(lf_, lk_, true, true);
-						bool? lm_ = context.Operators.In<CqlDateTime>(la_, ll_, null);
+						bool? lm_ = context.Operators.In<CqlDateTime>(la_, ll_, default);
 						Code<ObservationStatus> ln_ = O2Saturation?.StatusElement;
 						ObservationStatus? lo_ = ln_?.Value;
 						Code<ObservationStatus> lp_ = context.Operators.Convert<Code<ObservationStatus>>(lo_);
@@ -1353,7 +1353,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				else if (cd_())
 				{
 					CqlValueSet nk_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> nl_ = context.Operators.RetrieveByValueSet<Observation>(nk_, null);
+					IEnumerable<Observation> nl_ = context.Operators.RetrieveByValueSet<Observation>(nk_, default);
 					bool? nm_(Observation O2Saturation)
 					{
 						object nt_()
@@ -1419,7 +1419,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						CqlQuantity od_ = context.Operators.Quantity(120m, "minutes");
 						CqlDateTime oe_ = context.Operators.Add(oc_, od_);
 						CqlInterval<CqlDateTime> of_ = context.Operators.Interval(nz_, oe_, true, true);
-						bool? og_ = context.Operators.In<CqlDateTime>(nu_, of_, null);
+						bool? og_ = context.Operators.In<CqlDateTime>(nu_, of_, default);
 						Code<ObservationStatus> oh_ = O2Saturation?.StatusElement;
 						ObservationStatus? oi_ = oh_?.Value;
 						Code<ObservationStatus> oj_ = context.Operators.Convert<Code<ObservationStatus>>(oi_);
@@ -1507,7 +1507,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				else if (ce_())
 				{
 					CqlValueSet qe_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> qf_ = context.Operators.RetrieveByValueSet<Observation>(qe_, null);
+					IEnumerable<Observation> qf_ = context.Operators.RetrieveByValueSet<Observation>(qe_, default);
 					bool? qg_(Observation O2Saturation)
 					{
 						object qn_()
@@ -1573,7 +1573,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 						CqlQuantity qx_ = context.Operators.Quantity(120m, "minutes");
 						CqlDateTime qy_ = context.Operators.Add(qw_, qx_);
 						CqlInterval<CqlDateTime> qz_ = context.Operators.Interval(qt_, qy_, true, true);
-						bool? ra_ = context.Operators.In<CqlDateTime>(qo_, qz_, null);
+						bool? ra_ = context.Operators.In<CqlDateTime>(qo_, qz_, default);
 						Code<ObservationStatus> rb_ = O2Saturation?.StatusElement;
 						ObservationStatus? rc_ = rb_?.Value;
 						Code<ObservationStatus> rd_ = context.Operators.Convert<Code<ObservationStatus>>(rc_);
@@ -1679,7 +1679,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 
 	private IEnumerable<Observation> Blood_Pressure_Reading_Value()
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
 		bool? b_(Observation BloodPressure)
 		{
 			Code<ObservationStatus> d_ = BloodPressure?.StatusElement;
@@ -1722,7 +1722,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Bicarbonate_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? h_(Observation BicarbonateLab)
 			{
 				Instant z_ = BicarbonateLab?.IssuedElement;
@@ -1738,7 +1738,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime ak_ = context.Operators.Start(aj_);
 				CqlDateTime am_ = context.Operators.Add(ak_, ag_);
 				CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ah_, am_, true, true);
-				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, null);
+				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, default);
 				Code<ObservationStatus> ap_ = BicarbonateLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
@@ -1770,7 +1770,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? q_(Observation BicarbonateLab)
 			{
 				Instant bd_ = BicarbonateLab?.IssuedElement;
@@ -1786,7 +1786,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime bo_ = context.Operators.Start(bn_);
 				CqlDateTime bq_ = context.Operators.Add(bo_, bk_);
 				CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, true, true);
-				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, null);
+				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, default);
 				Code<ObservationStatus> bt_ = BicarbonateLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
@@ -1840,7 +1840,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Creatinine_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? h_(Observation CreatinineLab)
 			{
 				Instant z_ = CreatinineLab?.IssuedElement;
@@ -1856,7 +1856,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime ak_ = context.Operators.Start(aj_);
 				CqlDateTime am_ = context.Operators.Add(ak_, ag_);
 				CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ah_, am_, true, true);
-				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, null);
+				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, default);
 				Code<ObservationStatus> ap_ = CreatinineLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
@@ -1888,7 +1888,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? q_(Observation CreatinineLab)
 			{
 				Instant bd_ = CreatinineLab?.IssuedElement;
@@ -1904,7 +1904,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime bo_ = context.Operators.Start(bn_);
 				CqlDateTime bq_ = context.Operators.Add(bo_, bk_);
 				CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, true, true);
-				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, null);
+				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, default);
 				Code<ObservationStatus> bt_ = CreatinineLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
@@ -1958,7 +1958,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Hematocrit_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? h_(Observation HematocritLab)
 			{
 				Instant z_ = HematocritLab?.IssuedElement;
@@ -1974,7 +1974,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime ak_ = context.Operators.Start(aj_);
 				CqlDateTime am_ = context.Operators.Add(ak_, ag_);
 				CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ah_, am_, true, true);
-				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, null);
+				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, default);
 				Code<ObservationStatus> ap_ = HematocritLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
@@ -2006,7 +2006,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? q_(Observation HematocritLab)
 			{
 				Instant bd_ = HematocritLab?.IssuedElement;
@@ -2022,7 +2022,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime bo_ = context.Operators.Start(bn_);
 				CqlDateTime bq_ = context.Operators.Add(bo_, bk_);
 				CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, true, true);
-				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, null);
+				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, default);
 				Code<ObservationStatus> bt_ = HematocritLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
@@ -2076,7 +2076,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Platelet_count_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? h_(Observation PlateletLab)
 			{
 				Instant z_ = PlateletLab?.IssuedElement;
@@ -2092,7 +2092,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime ak_ = context.Operators.Start(aj_);
 				CqlDateTime am_ = context.Operators.Add(ak_, ag_);
 				CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ah_, am_, true, true);
-				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, null);
+				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, default);
 				Code<ObservationStatus> ap_ = PlateletLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
@@ -2124,7 +2124,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? q_(Observation PlateletLab)
 			{
 				Instant bd_ = PlateletLab?.IssuedElement;
@@ -2140,7 +2140,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime bo_ = context.Operators.Start(bn_);
 				CqlDateTime bq_ = context.Operators.Add(bo_, bk_);
 				CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, true, true);
-				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, null);
+				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, default);
 				Code<ObservationStatus> bt_ = PlateletLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
@@ -2194,7 +2194,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Sodium_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? h_(Observation SodiumLab)
 			{
 				Instant z_ = SodiumLab?.IssuedElement;
@@ -2210,7 +2210,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime ak_ = context.Operators.Start(aj_);
 				CqlDateTime am_ = context.Operators.Add(ak_, ag_);
 				CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ah_, am_, true, true);
-				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, null);
+				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, default);
 				Code<ObservationStatus> ap_ = SodiumLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
@@ -2242,7 +2242,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? q_(Observation SodiumLab)
 			{
 				Instant bd_ = SodiumLab?.IssuedElement;
@@ -2258,7 +2258,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime bo_ = context.Operators.Start(bn_);
 				CqlDateTime bq_ = context.Operators.Add(bo_, bk_);
 				CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, true, true);
-				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, null);
+				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, default);
 				Code<ObservationStatus> bt_ = SodiumLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);
@@ -2312,7 +2312,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.White_blood_cells_count_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? h_(Observation WhiteBloodCellLab)
 			{
 				Instant z_ = WhiteBloodCellLab?.IssuedElement;
@@ -2328,7 +2328,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime ak_ = context.Operators.Start(aj_);
 				CqlDateTime am_ = context.Operators.Add(ak_, ag_);
 				CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ah_, am_, true, true);
-				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, null);
+				bool? ao_ = context.Operators.In<CqlDateTime>(ac_, an_, default);
 				Code<ObservationStatus> ap_ = WhiteBloodCellLab?.StatusElement;
 				ObservationStatus? aq_ = ap_?.Value;
 				string ar_ = context.Operators.Convert<string>(aq_);
@@ -2360,7 +2360,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, null);
+			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? q_(Observation WhiteBloodCellLab)
 			{
 				Instant bd_ = WhiteBloodCellLab?.IssuedElement;
@@ -2376,7 +2376,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				CqlDateTime bo_ = context.Operators.Start(bn_);
 				CqlDateTime bq_ = context.Operators.Add(bo_, bk_);
 				CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, true, true);
-				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, null);
+				bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, default);
 				Code<ObservationStatus> bt_ = WhiteBloodCellLab?.StatusElement;
 				ObservationStatus? bu_ = bt_?.Value;
 				string bv_ = context.Operators.Convert<string>(bu_);

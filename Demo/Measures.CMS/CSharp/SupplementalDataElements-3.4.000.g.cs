@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("SupplementalDataElements", "3.4.000")]
 public class SupplementalDataElements_3_4_000
 {
@@ -54,7 +54,7 @@ public class SupplementalDataElements_3_4_000
     #endregion
 
 	private CqlValueSet Ethnicity_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
@@ -62,7 +62,7 @@ public class SupplementalDataElements_3_4_000
 		__Ethnicity.Value;
 
 	private CqlValueSet ONC_Administrative_Sex_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
@@ -70,7 +70,7 @@ public class SupplementalDataElements_3_4_000
 		__ONC_Administrative_Sex.Value;
 
 	private CqlValueSet Payer_Type_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
 
     [CqlDeclaration("Payer Type")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
@@ -78,7 +78,7 @@ public class SupplementalDataElements_3_4_000
 		__Payer_Type.Value;
 
 	private CqlValueSet Race_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
@@ -87,7 +87,7 @@ public class SupplementalDataElements_3_4_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -116,7 +116,7 @@ public class SupplementalDataElements_3_4_000
 			}
 			else
 			{
-				return null;
+				return default;
 			}
 		};
 		bool? b_(Extension @this)
@@ -146,7 +146,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
-					: null), q_);
+					: default), q_);
 			object s_(Extension @this)
 			{
 				DataType ap_ = @this?.Value;
@@ -170,7 +170,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
-					: null), x_);
+					: default), x_);
 			object z_(Extension @this)
 			{
 				DataType au_ = @this?.Value;
@@ -197,7 +197,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			IEnumerable<Extension> af_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
-					: null), ae_);
+					: default), ae_);
 			DataType ag_(Extension @this)
 			{
 				DataType ba_ = @this?.Value;
@@ -224,7 +224,7 @@ public class SupplementalDataElements_3_4_000
 	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		CqlValueSet a_ = this.Payer_Type();
-		IEnumerable<Coverage> b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
+		IEnumerable<Coverage> b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, default);
 		(CqlConcept code, CqlInterval<CqlDateTime> period)? c_(Coverage Payer)
 		{
 			CodeableConcept e_ = Payer?.Type;
@@ -263,7 +263,7 @@ public class SupplementalDataElements_3_4_000
 			}
 			else
 			{
-				return null;
+				return default;
 			}
 		};
 		bool? b_(Extension @this)
@@ -293,7 +293,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
-					: null), q_);
+					: default), q_);
 			object s_(Extension @this)
 			{
 				DataType ao_ = @this?.Value;
@@ -319,7 +319,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			IEnumerable<Extension> x_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
-					: null), w_);
+					: default), w_);
 			object y_(Extension @this)
 			{
 				DataType au_ = @this?.Value;
@@ -346,7 +346,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			IEnumerable<Extension> ae_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
-					: null), ad_);
+					: default), ad_);
 			DataType af_(Extension @this)
 			{
 				DataType ba_ = @this?.Value;
@@ -404,7 +404,7 @@ public class SupplementalDataElements_3_4_000
 			}
 			else
 			{
-				return null;
+				return default;
 			}
 		};
 

@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("HFBetaBlockerTherapyforLVSDFHIR", "1.3.000")]
 public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 {
@@ -124,7 +124,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
     #endregion
 
 	private CqlValueSet Allergy_to_Beta_Blocker_Therapy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177", default);
 
     [CqlDeclaration("Allergy to Beta Blocker Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177")]
@@ -132,7 +132,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Allergy_to_Beta_Blocker_Therapy.Value;
 
 	private CqlValueSet Arrhythmia_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.366", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.366", default);
 
     [CqlDeclaration("Arrhythmia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.366")]
@@ -140,7 +140,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Arrhythmia.Value;
 
 	private CqlValueSet Asthma_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.362", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.362", default);
 
     [CqlDeclaration("Asthma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.362")]
@@ -148,7 +148,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Asthma.Value;
 
 	private CqlValueSet Atrioventricular_Block_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.367", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.367", default);
 
     [CqlDeclaration("Atrioventricular Block")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.367")]
@@ -156,7 +156,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Atrioventricular_Block.Value;
 
 	private CqlValueSet Beta_Blocker_Therapy_for_LVSD_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1184", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1184", default);
 
     [CqlDeclaration("Beta Blocker Therapy for LVSD")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1184")]
@@ -164,7 +164,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Beta_Blocker_Therapy_for_LVSD.Value;
 
 	private CqlValueSet Beta_Blocker_Therapy_Ingredient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1493", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1493", default);
 
     [CqlDeclaration("Beta Blocker Therapy Ingredient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1493")]
@@ -172,7 +172,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Beta_Blocker_Therapy_Ingredient.Value;
 
 	private CqlValueSet Bradycardia_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.412", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.412", default);
 
     [CqlDeclaration("Bradycardia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.412")]
@@ -180,7 +180,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Bradycardia.Value;
 
 	private CqlValueSet Cardiac_Pacer_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.53", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.53", default);
 
     [CqlDeclaration("Cardiac Pacer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.53")]
@@ -188,7 +188,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Cardiac_Pacer.Value;
 
 	private CqlValueSet Cardiac_Pacer_in_Situ_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.368", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.368", default);
 
     [CqlDeclaration("Cardiac Pacer in Situ")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.368")]
@@ -196,7 +196,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Cardiac_Pacer_in_Situ.Value;
 
 	private CqlValueSet Hypotension_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.370", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.370", default);
 
     [CqlDeclaration("Hypotension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.370")]
@@ -204,7 +204,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Hypotension.Value;
 
 	private CqlValueSet Intolerance_to_Beta_Blocker_Therapy_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1178", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1178", default);
 
     [CqlDeclaration("Intolerance to Beta Blocker Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1178")]
@@ -212,7 +212,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Intolerance_to_Beta_Blocker_Therapy.Value;
 
 	private CqlValueSet Left_Ventricular_Assist_Device_Placement_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61", default);
 
     [CqlDeclaration("Left Ventricular Assist Device Placement")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61")]
@@ -220,7 +220,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Left_Ventricular_Assist_Device_Placement.Value;
 
 	private CqlValueSet Medical_Reason_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
@@ -228,7 +228,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Medical_Reason.Value;
 
 	private CqlValueSet Patient_Reason_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", default);
 
     [CqlDeclaration("Patient Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008")]
@@ -236,7 +236,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		__Patient_Reason.Value;
 
 	private CqlCode Substance_with_beta_adrenergic_receptor_antagonist_mechanism_of_action__substance__Value() => 
-		new CqlCode("373254001", "http://snomed.info/sct", null, null);
+		new CqlCode("373254001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Substance with beta adrenergic receptor antagonist mechanism of action (substance)")]
 	public CqlCode Substance_with_beta_adrenergic_receptor_antagonist_mechanism_of_action__substance_() => 
@@ -245,7 +245,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("373254001", "http://snomed.info/sct", null, null),
+			new CqlCode("373254001", "http://snomed.info/sct", default, default),
 		];
 
 		return a_;
@@ -271,7 +271,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -341,8 +341,8 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Value()
 	{
 		CqlValueSet a_ = this.Beta_Blocker_Therapy_for_LVSD();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest BetaBlockerOrdered)
 		{
@@ -384,8 +384,8 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Value()
 	{
 		CqlValueSet a_ = this.Beta_Blocker_Therapy_for_LVSD();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, null);
+		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest ActiveBetaBlocker)
 		{
@@ -418,7 +418,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 	private bool? Has_Consecutive_Heart_Rates_Less_than_50_Value()
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
 		IEnumerable<Encounter> b_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 		IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
 		(Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? d_(ValueTuple<Observation, Encounter> _valueTuple)
@@ -435,7 +435,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			DataType n_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(o_);
-			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, null);
+			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
 			Code<ObservationStatus> r_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.StatusElement;
 			ObservationStatus? s_ = r_?.Value;
 			string t_ = context.Operators.Convert<string>(s_);
@@ -451,7 +451,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			CqlQuantity z_ = context.Operators.Quantity(50m, "/min");
 			bool? aa_ = context.Operators.Less(y_, z_);
 			bool? ab_ = context.Operators.And(w_, aa_);
-			IEnumerable<Observation> ac_ = context.Operators.RetrieveByValueSet<Observation>(null, null);
+			IEnumerable<Observation> ac_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
 			bool? ad_(Observation MostRecentPriorHeartRate)
 			{
 				Period an_ = tuple_fufpmqdratbglhghdwfuubanf?.ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
@@ -459,13 +459,13 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				DataType ap_ = MostRecentPriorHeartRate?.Effective;
 				object aq_ = FHIRHelpers_4_3_000.ToValue(ap_);
 				CqlInterval<CqlDateTime> ar_ = QICoreCommon_2_0_000.toInterval(aq_);
-				bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, ar_, null);
+				bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, ar_, default);
 				object au_ = FHIRHelpers_4_3_000.ToValue(ap_);
 				CqlInterval<CqlDateTime> av_ = QICoreCommon_2_0_000.toInterval(au_);
 				DataType aw_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
 				object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
 				CqlInterval<CqlDateTime> ay_ = QICoreCommon_2_0_000.toInterval(ax_);
-				bool? az_ = context.Operators.Before(av_, ay_, null);
+				bool? az_ = context.Operators.Before(av_, ay_, default);
 				bool? ba_ = context.Operators.And(as_, az_);
 
 				return ba_;
@@ -504,7 +504,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 
 	private bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Value()
 	{
-		IEnumerable<MedicationRequest> a_ = context.Operators.RetrieveByValueSet<MedicationRequest>(null, null);
+		IEnumerable<MedicationRequest> a_ = context.Operators.RetrieveByValueSet<MedicationRequest>(default, default);
 		IEnumerable<MedicationRequest> b_(MedicationRequest NoBetaBlockerOrdered)
 		{
 			IEnumerable<Encounter> g_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
@@ -514,7 +514,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(l_);
 				Period n_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
-				bool? p_ = context.Operators.In<CqlDateTime>(m_, o_, null);
+				bool? p_ = context.Operators.In<CqlDateTime>(m_, o_, default);
 
 				return p_;
 			};
@@ -569,7 +569,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Arrhythmia_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Arrhythmia();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition Arrhythmia)
 		{
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(Arrhythmia);
@@ -597,7 +597,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Hypotension_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Hypotension();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition Hypotension)
 		{
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(Hypotension);
@@ -625,7 +625,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Asthma_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Asthma();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition Asthma)
 		{
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(Asthma);
@@ -653,9 +653,9 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Value()
 	{
 		CqlValueSet a_ = this.Allergy_to_Beta_Blocker_Therapy();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		CqlValueSet c_ = this.Intolerance_to_Beta_Blocker_Therapy();
-		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
+		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default);
 		IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
 		bool? f_(Condition BetaBlockerAllergyOrIntoleranceDiagnosis)
 		{
@@ -684,7 +684,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Bradycardia_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Bradycardia();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition Bradycardia)
 		{
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(Bradycardia);
@@ -712,10 +712,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_Value()
 	{
 		CqlValueSet a_ = this.Beta_Blocker_Therapy_Ingredient();
-		IEnumerable<AllergyIntolerance> b_ = context.Operators.RetrieveByValueSet<AllergyIntolerance>(a_, null);
+		IEnumerable<AllergyIntolerance> b_ = context.Operators.RetrieveByValueSet<AllergyIntolerance>(a_, default);
 		CqlCode c_ = this.Substance_with_beta_adrenergic_receptor_antagonist_mechanism_of_action__substance_();
 		IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
-		IEnumerable<AllergyIntolerance> e_ = context.Operators.RetrieveByCodes<AllergyIntolerance>(d_, null);
+		IEnumerable<AllergyIntolerance> e_ = context.Operators.RetrieveByCodes<AllergyIntolerance>(d_, default);
 		IEnumerable<AllergyIntolerance> f_ = context.Operators.Union<AllergyIntolerance>(b_, e_);
 		bool? g_(AllergyIntolerance BetaBlockerAllergyIntolerance)
 		{
@@ -744,7 +744,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Atrioventricular_Block_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Atrioventricular_Block();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition AtrioventricularBlock)
 		{
 			bool? f_ = AHAOverall_2_6_000.overlapsHeartFailureOutpatientEncounter(AtrioventricularBlock);
@@ -772,7 +772,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_Value()
 	{
 		CqlValueSet a_ = this.Cardiac_Pacer_in_Situ();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, null);
+		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition CardiacPacerDiagnosis)
 		{
 			bool? f_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((CardiacPacerDiagnosis as object));
@@ -800,7 +800,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 	private bool? Has_Cardiac_Pacer_Device_Implanted_Value()
 	{
 		CqlValueSet a_ = this.Cardiac_Pacer();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
+		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
 		IEnumerable<Procedure> c_(Procedure ImplantedCardiacPacer)
 		{
 			IEnumerable<Encounter> h_ = AHAOverall_2_6_000.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
@@ -813,7 +813,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				Period q_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(q_);
 				CqlDateTime s_ = context.Operators.End(r_);
-				bool? t_ = context.Operators.Before(p_, s_, null);
+				bool? t_ = context.Operators.Before(p_, s_, default);
 
 				return t_;
 			};

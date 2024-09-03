@@ -115,7 +115,10 @@ partial class ExpressionBuilderContext
         var typeName = type.Name.ToLowerInvariant();
         if (type.IsGenericType)
         {
-            var genericTypeNames = string.Join("_", type.GetGenericArguments().Select(t => TypeNameToIdentifier(t, ctx)));
+            var typeNames = type.GetGenericArguments()
+                .Select(t => TypeNameToIdentifier(t, ctx)
+                .TrimStart('@'));
+            var genericTypeNames = string.Join("_", typeNames);
             var tick = typeName.IndexOf('`');
             if (tick > -1)
                 typeName = typeName[..tick];

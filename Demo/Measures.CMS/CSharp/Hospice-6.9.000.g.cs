@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
 [CqlLibrary("Hospice", "6.9.000")]
 public class Hospice_6_9_000
 {
@@ -66,7 +66,7 @@ public class Hospice_6_9_000
     #endregion
 
 	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
@@ -74,7 +74,7 @@ public class Hospice_6_9_000
 		__Encounter_Inpatient.Value;
 
 	private CqlValueSet Hospice_Care_Ambulatory_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", default);
 
     [CqlDeclaration("Hospice Care Ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584")]
@@ -82,7 +82,7 @@ public class Hospice_6_9_000
 		__Hospice_Care_Ambulatory.Value;
 
 	private CqlValueSet Hospice_Encounter_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", default);
 
     [CqlDeclaration("Hospice Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003")]
@@ -90,7 +90,7 @@ public class Hospice_6_9_000
 		__Hospice_Encounter.Value;
 
 	private CqlValueSet Hospice_Diagnosis_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", default);
 
     [CqlDeclaration("Hospice Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165")]
@@ -98,28 +98,28 @@ public class Hospice_6_9_000
 		__Hospice_Diagnosis.Value;
 
 	private CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure__Value() => 
-		new CqlCode("428371000124100", "http://snomed.info/sct", null, null);
+		new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
 	public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_() => 
 		__Discharge_to_healthcare_facility_for_hospice_care__procedure_.Value;
 
 	private CqlCode Discharge_to_home_for_hospice_care__procedure__Value() => 
-		new CqlCode("428361000124107", "http://snomed.info/sct", null, null);
+		new CqlCode("428361000124107", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
 	public CqlCode Discharge_to_home_for_hospice_care__procedure_() => 
 		__Discharge_to_home_for_hospice_care__procedure_.Value;
 
 	private CqlCode Hospice_care__Minimum_Data_Set__Value() => 
-		new CqlCode("45755-6", "http://loinc.org", null, null);
+		new CqlCode("45755-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Hospice care [Minimum Data Set]")]
 	public CqlCode Hospice_care__Minimum_Data_Set_() => 
 		__Hospice_care__Minimum_Data_Set_.Value;
 
 	private CqlCode Yes__qualifier_value__Value() => 
-		new CqlCode("373066001", "http://snomed.info/sct", null, null);
+		new CqlCode("373066001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Yes (qualifier value)")]
 	public CqlCode Yes__qualifier_value_() => 
@@ -128,7 +128,7 @@ public class Hospice_6_9_000
 	private CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("45755-6", "http://loinc.org", null, null),
+			new CqlCode("45755-6", "http://loinc.org", default, default),
 		];
 
 		return a_;
@@ -141,9 +141,9 @@ public class Hospice_6_9_000
 	private CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
-			new CqlCode("428371000124100", "http://snomed.info/sct", null, null),
-			new CqlCode("428361000124107", "http://snomed.info/sct", null, null),
-			new CqlCode("373066001", "http://snomed.info/sct", null, null),
+			new CqlCode("428371000124100", "http://snomed.info/sct", default, default),
+			new CqlCode("428361000124107", "http://snomed.info/sct", default, default),
+			new CqlCode("373066001", "http://snomed.info/sct", default, default),
 		];
 
 		return a_;
@@ -169,7 +169,7 @@ public class Hospice_6_9_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -182,7 +182,7 @@ public class Hospice_6_9_000
 	private bool? Has_Hospice_Services_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter InpatientEncounter)
 		{
@@ -211,7 +211,7 @@ public class Hospice_6_9_000
 		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
 		bool? f_ = context.Operators.Exists<Encounter>(e_);
 		CqlValueSet g_ = this.Hospice_Encounter();
-		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, null);
+		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, default);
 		IEnumerable<Encounter> i_ = Status_1_6_000.isEncounterPerformed(h_);
 		bool? j_(Encounter HospiceEncounter)
 		{
@@ -228,7 +228,7 @@ public class Hospice_6_9_000
 		bool? m_ = context.Operators.Or(f_, l_);
 		CqlCode n_ = this.Hospice_care__Minimum_Data_Set_();
 		IEnumerable<CqlCode> o_ = context.Operators.ToList<CqlCode>(n_);
-		IEnumerable<Observation> p_ = context.Operators.RetrieveByCodes<Observation>(o_, null);
+		IEnumerable<Observation> p_ = context.Operators.RetrieveByCodes<Observation>(o_, default);
 		IEnumerable<Observation> q_ = Status_1_6_000.isAssessmentPerformed(p_);
 		bool? r_(Observation HospiceAssessment)
 		{
@@ -250,7 +250,7 @@ public class Hospice_6_9_000
 		bool? t_ = context.Operators.Exists<Observation>(s_);
 		bool? u_ = context.Operators.Or(m_, t_);
 		CqlValueSet v_ = this.Hospice_Care_Ambulatory();
-		IEnumerable<ServiceRequest> w_ = context.Operators.RetrieveByValueSet<ServiceRequest>(v_, null);
+		IEnumerable<ServiceRequest> w_ = context.Operators.RetrieveByValueSet<ServiceRequest>(v_, default);
 		IEnumerable<ServiceRequest> x_ = Status_1_6_000.isInterventionOrder(w_);
 		bool? y_(ServiceRequest HospiceOrder)
 		{
@@ -265,7 +265,7 @@ public class Hospice_6_9_000
 		IEnumerable<ServiceRequest> z_ = context.Operators.Where<ServiceRequest>(x_, y_);
 		bool? aa_ = context.Operators.Exists<ServiceRequest>(z_);
 		bool? ab_ = context.Operators.Or(u_, aa_);
-		IEnumerable<Procedure> ad_ = context.Operators.RetrieveByValueSet<Procedure>(v_, null);
+		IEnumerable<Procedure> ad_ = context.Operators.RetrieveByValueSet<Procedure>(v_, default);
 		IEnumerable<Procedure> ae_ = Status_1_6_000.isInterventionPerformed(ad_);
 		bool? af_(Procedure HospicePerformed)
 		{
@@ -281,7 +281,7 @@ public class Hospice_6_9_000
 		bool? ah_ = context.Operators.Exists<Procedure>(ag_);
 		bool? ai_ = context.Operators.Or(ab_, ah_);
 		CqlValueSet aj_ = this.Hospice_Diagnosis();
-		IEnumerable<Condition> ak_ = context.Operators.RetrieveByValueSet<Condition>(aj_, null);
+		IEnumerable<Condition> ak_ = context.Operators.RetrieveByValueSet<Condition>(aj_, default);
 		bool? al_(Condition HospiceCareDiagnosis)
 		{
 			CqlInterval<CqlDateTime> cj_ = QICoreCommon_2_0_000.prevalenceInterval(HospiceCareDiagnosis);
