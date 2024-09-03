@@ -6,7 +6,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,8 @@ using System.Linq;
 using FluentAssertions;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
-using Hl7.Cql.Packaging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CoreTests
 {
@@ -24,13 +24,6 @@ namespace CoreTests
     [TestCategory("UnitTest")]
     public class PrimitiveTests
     {
-        private static ILoggerFactory LoggerFactory { get; } =
-            Microsoft.Extensions.Logging.LoggerFactory
-                .Create(logging => logging.AddDebug());
-
-
-        private static CqlPackagerFactory Factory = new(LoggerFactory);
-
         private CqlContext GetNewContext() => FhirCqlContext.WithDataSource();
 
         [TestMethod]
@@ -3412,11 +3405,14 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
+            using var disposeContext = new DisposeContext();
+            var cqlCodeGenerationServices = CqlServicesInitializer.CreateCqlCodeGenerationServices(disposeContext.Token);
+
             var librarySet = new LibrarySet();
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
-            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
-            var writer = Factory.CSharpLibrarySetToStreamsWriter;
+            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var writer = cqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
             var isDone = false;
             writer.ProcessDefinitions(
                 definitions,

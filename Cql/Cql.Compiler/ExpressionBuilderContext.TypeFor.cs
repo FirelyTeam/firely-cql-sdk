@@ -12,6 +12,8 @@ using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
+using Hl7.Fhir.Model;
+using Element = Hl7.Cql.Elm.Element;
 
 namespace Hl7.Cql.Compiler;
 
@@ -82,9 +84,22 @@ partial class ExpressionBuilderContext
                 }
                 if (sourceType != null)
                 {
+                    // This is a temporary fix for the issue where the type of the Extension.url in the Firely
+                    // model is different from the type of the url in the CQL model. Since GetProperty() cannot
+                    // properly correct for this, we'll return the "correct" type here, so that in the end
+                    // a cast from string->FhirString is generated and the code compiles.
+                    // Task https://github.com/FirelyTeam/firely-cql-sdk/issues/493 will clean this up.
+                    if(sourceType == typeof(Extension) && propertyExpression.path == "url")
+                        return typeof(FhirString);
+
                     var property = _typeResolver.GetProperty(sourceType, propertyExpression.path);
+
+                    // This is a temporary fix for the issue where the type the Firely SDK uses for a choice
+                    // property is `DataType`, whereas the type the CQL model uses is `object`.
+                    // Since GetProperty() cannot properly correct for this, we'll correct the type to `object` here.
+                    // Task https://github.com/FirelyTeam/firely-cql-sdk/issues/493 will clean this up.
                     if (property != null)
-                        return property.PropertyType;
+                        return property.PropertyType == typeof(DataType) ? typeof(object) : property.PropertyType;
 
                     return typeof(object); // this is likely a choice
                 }
@@ -112,22 +127,32 @@ partial class ExpressionBuilderContext
         return null;
     }
 
-    private Type TypeFor(TypeSpecifier? resultTypeSpecifier)
+    private Type? TypeFor(
+        TypeSpecifier? resultTypeSpecifier,
+        bool throwIfNotFound = true)
     {
         if (resultTypeSpecifier == null)
             return typeof(object);
 
         if (resultTypeSpecifier is IntervalTypeSpecifier interval)
         {
-            var pointType = TypeFor(interval.pointType!);
+            var pointType = TypeFor(interval.pointType!, false);
+            if (pointType == null)
+            {
+                if (throwIfNotFound)
+                    throw new ArgumentException("Cannot resolve type for expression");
+
+                return null;
+            }
+
             var intervalType = typeof(CqlInterval<>).MakeGenericType(pointType);
             return intervalType;
         }
 
         if (resultTypeSpecifier is NamedTypeSpecifier named)
         {
-            var type = _typeResolver.ResolveType(named.name.Name!);
-            if (type == null)
+            var type = _typeResolver.ResolveType(named.name.Name!, false);
+            if (type == null && throwIfNotFound)
                 throw new ArgumentException("Cannot resolve type for expression");
             return type!;
         }
@@ -140,10 +165,21 @@ partial class ExpressionBuilderContext
         if (resultTypeSpecifier is ListTypeSpecifier list)
         {
             if (list.elementType == null)
-                throw new ArgumentException("ListTypeSpecifier must have a non-null elementType");
-            var elementType = TypeFor(list.elementType);
+            {
+                if (throwIfNotFound)
+                    throw new ArgumentException("ListTypeSpecifier must have a non-null elementType");
+
+                return null;
+            }
+
+            var elementType = TypeFor(list.elementType, throwIfNotFound);
             if (elementType == null)
-                throw new ArgumentException("Cannot resolve type for expression");
+            {
+                if (throwIfNotFound)
+                    throw new ArgumentException("Cannot resolve type for expression");
+
+                return null;
+            }
 
             var enumerableOfElementType = typeof(IEnumerable<>).MakeGenericType(elementType);
             return enumerableOfElementType;
@@ -162,12 +198,15 @@ partial class ExpressionBuilderContext
             // In the example above, x and y have different structures.
             // Code handles x but not y
             if (resultTypeSpecifier.resultTypeSpecifier != null)
-                return TypeFor(tuple.resultTypeSpecifier);
+                return TypeFor(tuple.resultTypeSpecifier, throwIfNotFound);
 
             return TupleTypeFor(tuple);
         }
 
-        throw new NotImplementedException().WithContext(this);
+        if (throwIfNotFound)
+            throw new NotImplementedException().WithContext(this);
+
+        return null;
     }
 
     private Type TupleTypeFor(TupleTypeSpecifier tuple, Func<Type, Type>? changeType = null)
@@ -204,7 +243,7 @@ partial class ExpressionBuilderContext
                         throw this.NewExpressionBuildingException(
                             $"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.");
 
-                    var type = TypeFor(el.elementType);
+                    var type = TypeFor(el.elementType)!;
                     if (changeType != null)
                         type = changeType(type);
 

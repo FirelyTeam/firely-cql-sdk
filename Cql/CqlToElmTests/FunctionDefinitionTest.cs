@@ -1,10 +1,5 @@
-﻿using System;
-using System.IO;
-using Antlr4.Runtime;
-using FluentAssertions;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using FluentAssertions;
 using Hl7.Cql.CqlToElm.LibraryProviders;
-using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -246,19 +241,19 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define fluent function ""Onset date""(condition FHIR.Condition, birthDate Date):
                 case
-                    when condition is null or condition.onset is null then 
+                    when condition is null or condition.onset is null then
                         null
-                    when condition.onset is FHIR.dateTime then 
+                    when condition.onset is FHIR.dateTime then
                         date from (condition.onset as FHIR.dateTime)
-                    when condition.onset is FHIR.Period then 
+                    when condition.onset is FHIR.Period then
                         date from start of (condition.onset as FHIR.Period)
-                    when condition.onset is FHIR.Age and birthDate is not null then 
+                    when condition.onset is FHIR.Age and birthDate is not null then
                         birthDate + (condition.onset as FHIR.Age)
-                    when condition.onset is Range and birthDate is not null then 
+                    when condition.onset is Range and birthDate is not null then
                         birthDate + (condition.onset as FHIR.Range).low
-                    else 
+                    else
                         null
-                end            
+                end
             ");
             var cs = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
             cs.Should().HaveType(SystemTypes.DateType);
@@ -278,6 +273,18 @@ namespace Hl7.Cql.CqlToElm.Test
             fd.external.Should().BeTrue();
             fd.externalSpecified.Should().BeTrue();
             fd.expression.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void CSharp_Keyword_Parameter_Name()
+        {
+            var lib = MakeLibrary(@"
+                library FuncTest version '1.0.0'
+
+                define function ToInteger(decimal System.Decimal) returns System.Integer: external
+            ");
+            var asm = Compile(lib);
+
         }
     }
 }

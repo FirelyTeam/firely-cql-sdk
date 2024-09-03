@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
+using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.Elm
 {
@@ -58,13 +59,12 @@ namespace Hl7.Cql.Elm
     /// <summary>
     /// Represents a function-typed element.
     /// </summary>
-    public interface IFunctionElement : IDefinitionElement
-    {
-    }
+    public interface IFunctionElement : IDefinitionElement;
+
     public interface IHasSignature : IFunctionElement
     {
         IEnumerable<OperandDef> Operands { get; }
-        TypeSpecifier ResultTypeSpecifier { get; }
+        TypeSpecifier? ResultTypeSpecifier { get; }
         bool Fluent { get; }
     }
 
@@ -158,10 +158,12 @@ namespace Hl7.Cql.Elm
     public partial class ExpressionDef : IDefinitionElement
     {
         [JsonIgnore]
-        AccessModifier IDefinitionElement.Access => accessLevel;
+        [XmlIgnore]
+        public AccessModifier Access => accessLevel!;
 
         [JsonIgnore]
-        string IDefinitionElement.Name => name;
+        [XmlIgnore]
+        public string Name => name!;
 
         Expression IDefinitionElement.ToRef(string? libraryName) => new ExpressionRef
         {
@@ -171,23 +173,18 @@ namespace Hl7.Cql.Elm
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
+        public override string ToString() => $"{Name}:{resultTypeSpecifier}";
     }
 
-    public partial class FunctionDef : IFunctionElement, IHasSignature
+    public partial class FunctionDef : IHasSignature
     {
         [JsonIgnore]
-        AccessModifier IDefinitionElement.Access => accessLevel;
-
-        [JsonIgnore]
-        string IDefinitionElement.Name => name;
+        [XmlIgnore]
+        public IEnumerable<OperandDef> Operands => operand ?? [];
 
         [JsonIgnore]
         [XmlIgnore]
-        public IEnumerable<OperandDef> Operands => operand ?? Enumerable.Empty<OperandDef>();
-
-        [JsonIgnore]
-        [XmlIgnore]
-        public TypeSpecifier ResultTypeSpecifier => resultTypeSpecifier!;
+        public TypeSpecifier? ResultTypeSpecifier => resultTypeSpecifier;
 
         [JsonIgnore]
         [XmlIgnore]
@@ -203,6 +200,11 @@ namespace Hl7.Cql.Elm
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
+        public override string ToString()
+        {
+            var pars = string.Join(",", Operands.Select(s => s.ToString()));
+            return $"{(Fluent ? "fluent " : "")} {Name}({pars}):{GetTypeSpecifier()?.ToString() ?? "(missing)" }";
+        }
     }
 
     public partial class ContextDef : IDefinitionElement
@@ -243,6 +245,7 @@ namespace Hl7.Cql.Elm
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
+        public override string ToString() => $"{name} {GetTypeSpecifier()}";
     }
 
     public partial class AliasedQuerySource : IDefinitionElement
@@ -344,29 +347,20 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public static bool CanCombine(params IFunctionElement[] elements)
         {
-            for (int i = 0; i < elements.Length; i++)
-                if (elements[i] is not IHasSignature && elements[i] is not OverloadedFunctionDef)
-                    return false;
+            if (elements.Any(t => t is not IHasSignature && t is not OverloadedFunctionDef))
+                return false;
+
             if (elements.Select(e => e.Name).Distinct().Count() != 1)
                 return false;
+
             var allFunctions = elements
-                  .OfType<OverloadedFunctionDef>()
-                  .SelectMany(ofd => ofd.Functions)
-                  .Concat(elements.OfType<IHasSignature>())
-                  .ToArray();
-            var distinctSignatures = new List<TypeSpecifier[]>();
-            // TODO: make this better than O(n2)
-            foreach (var function in allFunctions)
-            {
-                var opTypes = function.Operands
-                    .Select(op => op.operandTypeSpecifier)
-                    .ToArray();
-                if (distinctSignatures.Any(sig => opTypes.SequenceEqual(sig)))
-                    return false;
-                else
-                    distinctSignatures.Add(opTypes);
-            }
-            return true;
+                               .OfType<OverloadedFunctionDef>()
+                               .SelectMany(ofd => ofd.Functions)
+                               .Concat(elements.OfType<IHasSignature>())
+                               .ToArray();
+
+            var distinctSignatures = new HashSet<IHasSignature>(allFunctions, new ExpressionSignatureComparer());
+            return distinctSignatures.Count == allFunctions.Length;
         }
 
         /// <summary>
@@ -380,8 +374,13 @@ namespace Hl7.Cql.Elm
                 .SelectMany(ofd => ofd.Functions)
                 .Concat(elements.OfType<IHasSignature>())
                 .ToArray();
+
             if (!CanCombine(allFunctions))
-                throw new ArgumentException("Cannot combine these functions.", nameof(elements));
+            {
+                var funcs = string.Join(", ", allFunctions.Select(f => $"'{f}'"));
+                throw new ArgumentException($"Cannot combine functions {funcs} into an overload, as they are not unique.", nameof(elements));
+            }
+
             var accessLevel = allFunctions.Select(f => f.Access).Min(); // public < private; any public overload makes this public
             return new OverloadedFunctionDef(allFunctions, allFunctions[0].Name, accessLevel);
         }
@@ -412,6 +411,8 @@ namespace Hl7.Cql.Elm
 
         public OverloadedFunctionDef Add(FunctionDef function)
         {
+            // TODO: This does not guard against duplicate signatures, like the Create method does.
+            // See https://github.com/FirelyTeam/firely-cql-sdk/issues/439
             if (function.name != Name)
                 throw new InvalidOperationException($"All functions should have the same name.");
             _functions.Add(function);
@@ -479,6 +480,6 @@ namespace Hl7.Cql.Elm
 
         [JsonIgnore]
         [XmlIgnore]
-        public TypeSpecifier ResultTypeSpecifier => Resolve().ResultTypeSpecifier;
+        public TypeSpecifier? ResultTypeSpecifier => Resolve().ResultTypeSpecifier;
     }
 }

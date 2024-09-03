@@ -71,9 +71,9 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public IReadOnlyDictionary<string, AssemblyData> Compile(
             LibrarySet librarySet,
-            DefinitionDictionary<LambdaExpression>? definitions = null)
+            DefinitionDictionary<LambdaExpression> definitions)
         {
-            definitions ??= new();
+            ArgumentNullException.ThrowIfNull(definitions);
 
             Dictionary<string, AssemblyData> results = new();
 

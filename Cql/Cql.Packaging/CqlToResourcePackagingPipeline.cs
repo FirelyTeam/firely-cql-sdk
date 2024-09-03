@@ -19,27 +19,18 @@ using static System.FormattableString;
 
 namespace Hl7.Cql.Packaging;
 
-internal class CqlToResourcePackagingPipeline
+internal class CqlToResourcePackagingPipeline(
+    ILogger<CqlToResourcePackagingPipeline> logger,
+    IOptions<CqlToResourcePackagingOptions> options,
+    ResourcePackager resourcePackager,
+    LibrarySetExpressionBuilder librarySetExpressionBuilder,
+    AssemblyCompiler assemblyCompiler)
 {
-    protected readonly ResourcePackager _resourcePackager;
-    protected readonly LibrarySetExpressionBuilder _LibrarySetExpressionBuilder;
-    protected readonly AssemblyCompiler _assemblyCompiler;
-    protected readonly CqlToResourcePackagingOptions _options;
-    protected readonly ILogger<CqlToResourcePackagingPipeline> _logger;
-
-    public CqlToResourcePackagingPipeline(
-        ILogger<CqlToResourcePackagingPipeline> logger,
-        IOptions<CqlToResourcePackagingOptions> options,
-        ResourcePackager resourcePackager,
-        LibrarySetExpressionBuilder librarySetExpressionBuilder,
-        AssemblyCompiler assemblyCompiler)
-    {
-        _options = options.Value;
-        _logger = logger;
-        _resourcePackager = resourcePackager;
-        _LibrarySetExpressionBuilder = librarySetExpressionBuilder;
-        _assemblyCompiler = assemblyCompiler;
-    }
+    protected readonly ResourcePackager _resourcePackager = resourcePackager;
+    protected readonly LibrarySetExpressionBuilder _LibrarySetExpressionBuilder = librarySetExpressionBuilder;
+    protected readonly AssemblyCompiler _assemblyCompiler = assemblyCompiler;
+    protected readonly CqlToResourcePackagingOptions _options = options.Value;
+    protected readonly ILogger<CqlToResourcePackagingPipeline> _logger = logger;
 
     public IReadOnlyCollection<Resource> ProcessCqlToResources()
     {

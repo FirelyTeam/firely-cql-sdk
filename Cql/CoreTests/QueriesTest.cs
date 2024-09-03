@@ -4,7 +4,6 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
@@ -16,18 +15,15 @@ namespace CoreTests
     [TestClass]
     public class QueriesTest
     {
-        private static ILoggerFactory LoggerFactory { get; } =
-            Microsoft.Extensions.Logging.LoggerFactory
-                .Create(logging => logging.AddDebug());
-
-        private static CqlCompilerFactory Factory = new(LoggerFactory);
-
-        [ClassInitialize]
+       [ClassInitialize]
         public static void Initialize(TestContext context)
         {
+            using var disposeContext = new DisposeContext();
+            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
+
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             QueriesDefinitions = definitions.CompileAll();
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
@@ -36,7 +32,7 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage, libraryDefinitions: definitions);
+            cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage, libraryDefinitions: definitions);
             AggregatesDefinitions = definitions.CompileAll();
         }
 

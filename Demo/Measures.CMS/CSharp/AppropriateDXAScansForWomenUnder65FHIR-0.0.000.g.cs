@@ -866,22 +866,21 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToInterval(j_);
 			bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, default);
 			DataType m_ = BMIRatio?.Value;
-			Quantity n_ = context.Operators.Convert<Quantity>(m_);
-			CqlQuantity o_ = FHIRHelpers_4_3_000.ToQuantity(n_);
-			bool? p_ = context.Operators.Not((bool?)((o_ as CqlQuantity) is null));
-			bool? q_ = context.Operators.And(l_, p_);
+			CqlQuantity n_ = FHIRHelpers_4_3_000.ToQuantity((m_ as Quantity));
+			bool? o_ = context.Operators.Not((bool?)((n_ as CqlQuantity) is null));
+			bool? p_ = context.Operators.And(l_, o_);
 
-			return q_;
+			return p_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			DataType r_ = @this?.Effective;
-			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.ToInterval(s_);
-			CqlDateTime u_ = context.Operators.Start(t_);
+			DataType q_ = @this?.Effective;
+			object r_ = FHIRHelpers_4_3_000.ToValue(q_);
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_);
+			CqlDateTime t_ = context.Operators.Start(s_);
 
-			return u_;
+			return t_;
 		};
 		IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation g_ = context.Operators.First<Observation>(f_);
@@ -902,12 +901,11 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? c_(Observation FirstBMI)
 		{
 			DataType f_ = FirstBMI?.Value;
-			Quantity g_ = context.Operators.Convert<Quantity>(f_);
-			CqlQuantity h_ = FHIRHelpers_4_3_000.ToQuantity(g_);
-			CqlQuantity i_ = context.Operators.Quantity(20m, "kg/m2");
-			bool? j_ = context.Operators.LessOrEqual((h_ as CqlQuantity), i_);
+			CqlQuantity g_ = FHIRHelpers_4_3_000.ToQuantity((f_ as Quantity));
+			CqlQuantity h_ = context.Operators.Quantity(20m, "kg/m2");
+			bool? i_ = context.Operators.LessOrEqual((g_ as CqlQuantity), h_);
 
-			return j_;
+			return i_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>((IEnumerable<Observation>)b_, c_);
 		Observation e_ = context.Operators.SingletonFrom<Observation>(d_);

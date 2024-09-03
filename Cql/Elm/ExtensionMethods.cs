@@ -10,11 +10,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.Elm
 {
     public static class ExtensionMethods
     {
+        internal static TypeSpecifier[] BuildSignatureFromOperands(this IHasSignature hasSignature) =>
+            hasSignature.Operands.Select(o =>
+                                             o.GetTypeSpecifier() ??
+                                             throw new UntypedOperandInFunctionError(hasSignature, o).ToException()
+                                         ).ToArray();
+
+        internal static TypeSpecifier[] GetArgumentTypes(this FunctionRef funcRef) =>
+            (funcRef.operand ?? []).Select((o,i) =>
+                                             o.GetTypeSpecifier() ??
+                                             throw new UntypedOperandInFunctionRefError(funcRef, i).ToException()
+            ).ToArray();
+
+        internal static IReadOnlyCollection<IHasSignature> FilterOverloads(this OverloadedFunctionDef overloads, TypeSpecifier[] signature)
+        {
+            return overloads.Functions.Where(match).ToArray();
+
+            bool match(IHasSignature candidate) =>
+                candidate.BuildSignatureFromOperands().ExactlyMatches(signature);
+        }
+
+        internal static TypeSpecifier? GetTypeSpecifier(this IHasSignature func) =>
+            func.ResultTypeSpecifier ?? (func is Element e ? e.GetTypeSpecifier() : null);
+
+        /// <summary>
+        /// Compares two signatures for exact equality, based on the Equals of the TypeSpecifier.
+        /// </summary>
+        internal static bool ExactlyMatches(this TypeSpecifier[] me, TypeSpecifier[] signature)
+        {
+            return me.Length == signature.Length &&
+                   me.Zip(signature, (l,r) => r.Equals(l)).All(r => r);
+        }
+
         /// <summary>
         /// Determines whether a given symbol is visible for the kind of access given in <paramref name="access"/>.
         /// </summary>
@@ -24,46 +57,28 @@ namespace Hl7.Cql.Elm
         }
 
         /// <summary>
-        /// Retrieves all error nodes in the ELM tree rooted in <paramref name="node"/>.
+        /// Retrieves all error nodes in the ELM tree rooted in <paramref name="root"/>.
         /// </summary>
-        public static CqlToElmError[] GetErrors(this Element node)
+        public static CqlToElmError[] GetErrors(this Element root)
         {
             var allErrors = new HashSet<CqlToElmError>();
 
-            var visitor = new ElmTreeWalker(nodeHandler, nodeFilter);
+            var visitor = new ElmTreeWalker(nodeHandler);
 
-            visitor.Walk(node);
+            visitor.Start(root);
             return allErrors.ToArray();
-
-            bool nodeFilter(PropertyInfo property)
-            {
-                var type = property.PropertyType;
-                if (type.IsAssignableTo(typeof(Element)))
-                {
-                    return true;
-                }
-                else if (type.IsArray)
-                {
-                    if (type.GetElementType()!.IsAssignableTo(typeof(TypeSpecifier)))
-                        return false;
-                    else if (type.GetElementType()!.IsAssignableTo(typeof(Element)))
-                        return true;
-                }
-                return false;
-            }
 
             bool nodeHandler(object node)
             {
-                if (node is Element element && element.annotation?.OfType<CqlToElmError>() is { } errors && errors.Any())
-                {
-                    // avoid duplicate errors.
-                    foreach (var error in errors)
-                    {
-                        if (!allErrors.Contains(error))
-                            allErrors.Add(error);
-                    }
-                }
-                // Let the walker visit my children.
+                if (node is not Element element) return false;
+
+                var errors = element.annotation?.OfType<CqlToElmError>() ?? [];
+
+                // avoid duplicate errors.
+                foreach (var error in errors)
+                    allErrors.Add(error);
+
+                // Let the walker visit my children to scan for nested Elements.
                 return false;
             }
         }

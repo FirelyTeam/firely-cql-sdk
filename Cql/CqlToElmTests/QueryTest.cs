@@ -1,11 +1,7 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -304,7 +300,7 @@ namespace Hl7.Cql.CqlToElm.Test
             query.Should().HaveType(SystemTypes.IntegerType);
             var result = Run<int>(query);
             result.Should().Be(120);
-            
+
         }
 
         [TestMethod]
@@ -365,8 +361,8 @@ namespace Hl7.Cql.CqlToElm.Test
                     from (Skip(intervals,1)) interval
                         aggregate result starting ( {First(intervals)} as List<Interval<System.Date>> ):
                             if start of interval in Interval[ Last(result).high, Last(result).high + 1 day ]
-                             then flatten({ (result) r where r !~ Last(result), 
-                                            { Interval[Last(result).low, interval.high] } 
+                             then flatten({ (result) r where r !~ Last(result),
+                                            { Interval[Last(result).low, interval.high] }
                                         })
                             else flatten({result, {interval}})
                 ");
