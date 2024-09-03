@@ -36,15 +36,9 @@ internal static class CqlServicesInitializer
     }
 }
 
-public readonly struct DisposeContext : IDisposable
+public readonly struct DisposeContext() : IDisposable
 {
-    private readonly CancellationTokenSource _cancellationTokenSource;
-
-    public DisposeContext()
-    {
-        _cancellationTokenSource = new CancellationTokenSource();
-        Token = new DisposeContextToken(_cancellationTokenSource.Token);
-    }
+    private readonly CancellationTokenSource _cancellationTokenSource = new();
 
     public void Dispose()
     {
@@ -52,7 +46,7 @@ public readonly struct DisposeContext : IDisposable
         _cancellationTokenSource.Dispose();
     }
 
-    public DisposeContextToken Token { get; }
+    public DisposeContextToken Token => new(_cancellationTokenSource.Token);
 }
 
 public readonly struct DisposeContextToken
