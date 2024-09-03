@@ -1168,7 +1168,7 @@ partial class ExpressionBuilderContext
 
         var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
         var convertedArguments = arguments
-                                 .Select((a,i) => convertChoice(a,signature?[i]))
+                                 .Select((a,i) => convertChoice(a, signature?[i]))
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
         var funcType = convertedArguments.Select(a => a.Type).Append(rtt).ToArray();
@@ -1182,12 +1182,14 @@ partial class ExpressionBuilderContext
         // cql2elm compiler has already checked that the call is valid, but we do need to cast the choice type (in C# represented by
         // object/DataType) to the actual type to make this a valid C# call. CQL semantics state that the result may be null if the
         // choice is not compatible with the parameter, so we'll use an As in C#.
-        Expression convertChoice(Expression argument, TypeSpecifier? actualType)
+        Expression convertChoice(Expression argument, TypeSpecifier? targetTypeSpecifier)
         {
-            if(actualType is not null && argument.Type == typeof(object))
+            if(argument.Type == typeof(object)
+               && targetTypeSpecifier is not null and not ChoiceTypeSpecifier)
             {
-                var type = TypeFor(actualType) ?? throw new InvalidOperationException($"Unable to resolve type for {actualType}");
-                return argument.NewTypeAsExpression(type);
+                var changeType = ChangeType(argument, targetTypeSpecifier, out var typeConversion, considerSafeUpcast: true);
+                Debug.Assert(typeConversion == TypeConversion.ExpressionTypeAs);
+                return changeType;
             }
 
             return argument;
@@ -2161,7 +2163,7 @@ partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var operand = TranslateArg(@as.operand!);
-                    var converted = ChangeType(operand, type, out var typeConversion, safeUpcastAllowed:true);
+                    var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast:true);
                     switch (typeConversion)
                     {
                         case TypeConversion.NoMatch:
@@ -2258,7 +2260,8 @@ partial class ExpressionBuilderContext
     private Expression ChangeType(
         Expression expr,
         TypeSpecifier? typeSpecifier,
-        out TypeConversion typeConversion) // @TODO: Cast - ChangeType
+        out TypeConversion typeConversion,
+        bool considerSafeUpcast = false) // @TODO: Cast - ChangeType
     {
         if (typeSpecifier is not null)
         {
@@ -2266,7 +2269,7 @@ partial class ExpressionBuilderContext
             {
                 if (resultType != expr.Type)
                 {
-                    var typeAs = ChangeType(expr, resultType, out typeConversion);
+                    var typeAs = ChangeType(expr, resultType, out typeConversion, considerSafeUpcast);
                     return typeAs;
                 }
             }
@@ -2284,18 +2287,21 @@ partial class ExpressionBuilderContext
 
     private Expression ChangeType(
         Element element,
-        Type outputType)
-        => ChangeType(TranslateArg(element),
+        Type outputType,
+        bool considerSafeUpcast = false)
+        => ChangeType(
+            TranslateArg(element),
             outputType,
-            out TypeConversion typeConversion); // @TODO: Cast - ChangeType
+            out TypeConversion typeConversion,
+            considerSafeUpcast); // @TODO: Cast - ChangeType
 
     private Expression ChangeType(
         Expression input,
         Type outputType,
         out TypeConversion typeConversion,
-        bool safeUpcastAllowed = false) // @TODO: Cast - ChangeType
+        bool considerSafeUpcast = false) // @TODO: Cast - ChangeType
     {
-        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, safeUpcastAllowed);
+        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, considerSafeUpcast);
         if (tc != TypeConversion.NoMatch)
         {
             typeConversion = tc;
