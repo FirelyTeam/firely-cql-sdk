@@ -36,36 +36,24 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
             {
                 case FunctionRef fref: FixFunctionRef(_library!, fref); break;
                 case ExpressionRef exref: FixExpressionRef(_library!, exref); break;
-                default: break;
             }
-            FixElement(_library!, element);
+
+            FixElement(element);
         }
 
-        if(node is FunctionRef { libraryName: "FHIRHelpers", name: "ToCode", signature: null } frefnos)
+        if(node is FunctionRef { signature: null } noSignature)
         {
-            // Call overload resolution and add a signature. In fact we should probably do this for ANY FunctionRef
-            // without a signature. For now, we'll just fix this for the ToCode() function we're dealing with in
-            // the current eCQM measures.
-            // Issue https://github.com/FirelyTeam/firely-cql-sdk/issues/497 will make this solution more general.
-            frefnos.signature = [new NamedTypeSpecifier("http://hl7.org/fhir", "Coding")];
-        }
-
-        if(node is FunctionRef { libraryName: "FHIRHelpers", name: "ToQuantity", signature: null } frefnoq)
-        {
-            // Call overload resolution and add a signature. In fact we should probably do this for ANY FunctionRef
-            // without a signature. For now, we'll just fix this for the ToQuantity() function we're dealing with in
-            // the current eCQM measures.
-            // Issue https://github.com/FirelyTeam/firely-cql-sdk/issues/497 will make this solution more general.
-            frefnoq.signature = [new NamedTypeSpecifier("http://hl7.org/fhir", "Quantity")];
-        }
-
-        if(node is FunctionRef { libraryName: "FHIRHelpers", name: "ToConcept", signature: null } frefnocc)
-        {
-            // Call overload resolution and add a signature. In fact we should probably do this for ANY FunctionRef
-            // without a signature. For now, we'll just fix this for the ToConcept() function we're dealing with in
-            // the current eCQM measures.
-            // Issue https://github.com/FirelyTeam/firely-cql-sdk/issues/497 will make this solution more general.
-            frefnocc.signature = [new NamedTypeSpecifier("http://hl7.org/fhir", "CodeableConcept")];
+            if (librarySet.TryResolveDefinition(_library!, noSignature,
+                                                out IFunctionElement? expressionDef) &&
+                expressionDef is IHasSignature hasSig)
+            {
+                // We can only correct signatures if we know the function & it has a single signature
+                // (it is not a function with overloads), since we don't want to re-implement overload resolution here.
+                // We could do so by making overload resulution a public method on LibrarySet, but that's a bigger change
+                // and will require isolating the resolution logic. This will be picked up by
+                // issue https://github.com/FirelyTeam/firely-cql-sdk/issues/497. For now, this is good enough.
+                noSignature.signature = hasSig.BuildSignatureFromOperands();
+            }
         }
 
         return false;
@@ -80,7 +68,7 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
         reference.resultTypeSpecifier = expressionDef.GetTypeSpecifier();
     }
 
-    private void FixElement(Library library, Element element)
+    private static void FixElement(Element element)
     {
         // Ensure resultTypeSpecifier is always populated.
         if (element.resultTypeSpecifier is null && element.resultTypeName is not null)
