@@ -241,20 +241,20 @@ public class NCQAClaims_1_0_0
 								return bh_;
 							};
 							IEnumerable<Claim.ItemComponent> ba_ = context.Operators.Where<Claim.ItemComponent>(ay_, az_);
-							DataType bb_(Claim.ItemComponent @this)
+							object bb_(Claim.ItemComponent @this)
 							{
 								DataType bi_ = @this?.Serviced;
 
 								return bi_;
 							};
-							IEnumerable<DataType> bc_ = context.Operators.Select<Claim.ItemComponent, DataType>(ba_, bb_);
+							IEnumerable<object> bc_ = context.Operators.Select<Claim.ItemComponent, object>(ba_, bb_);
 							CqlInterval<CqlDateTime> bd_(object NormalDate)
 							{
 								CqlInterval<CqlDateTime> bj_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 								return bj_;
 							};
-							IEnumerable<CqlInterval<CqlDateTime>> be_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)bc_, bd_);
+							IEnumerable<CqlInterval<CqlDateTime>> be_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(bc_, bd_);
 							(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bf_ = (ax_, be_);
 
 							return bf_;
@@ -342,13 +342,13 @@ public class NCQAClaims_1_0_0
 								return ax_;
 							};
 							IEnumerable<Claim.ProcedureComponent> af_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)ad_, ae_);
-							DataType ag_(Claim.ProcedureComponent @this)
+							object ag_(Claim.ProcedureComponent @this)
 							{
 								DataType ay_ = @this?.Procedure;
 
 								return ay_;
 							};
-							IEnumerable<DataType> ah_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(af_, ag_);
+							IEnumerable<object> ah_ = context.Operators.Select<Claim.ProcedureComponent, object>(af_, ag_);
 							bool? ai_(object @this)
 							{
 								object az_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -356,7 +356,7 @@ public class NCQAClaims_1_0_0
 
 								return ba_;
 							};
-							IEnumerable<object> aj_ = context.Operators.Where<object>((IEnumerable<object>)ah_, ai_);
+							IEnumerable<object> aj_ = context.Operators.Where<object>(ah_, ai_);
 							object ak_(object @this)
 							{
 								object bb_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -415,20 +415,20 @@ public class NCQAClaims_1_0_0
 								return bu_;
 							};
 							IEnumerable<Claim.ItemComponent> bn_ = context.Operators.Where<Claim.ItemComponent>(bl_, bm_);
-							DataType bo_(Claim.ItemComponent @this)
+							object bo_(Claim.ItemComponent @this)
 							{
 								DataType bv_ = @this?.Serviced;
 
 								return bv_;
 							};
-							IEnumerable<DataType> bp_ = context.Operators.Select<Claim.ItemComponent, DataType>(bn_, bo_);
+							IEnumerable<object> bp_ = context.Operators.Select<Claim.ItemComponent, object>(bn_, bo_);
 							CqlInterval<CqlDateTime> bq_(object NormalDate)
 							{
 								CqlInterval<CqlDateTime> bw_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 								return bw_;
 							};
-							IEnumerable<CqlInterval<CqlDateTime>> br_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)bp_, bq_);
+							IEnumerable<CqlInterval<CqlDateTime>> br_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(bp_, bq_);
 							(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? bs_ = (bk_, br_);
 
 							return bs_;
@@ -500,13 +500,13 @@ public class NCQAClaims_1_0_0
 							return ai_;
 						};
 						IEnumerable<Claim.DiagnosisComponent> u_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)s_, t_);
-						DataType v_(Claim.DiagnosisComponent @this)
+						object v_(Claim.DiagnosisComponent @this)
 						{
 							DataType aj_ = @this?.Diagnosis;
 
 							return aj_;
 						};
-						IEnumerable<DataType> w_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(u_, v_);
+						IEnumerable<object> w_ = context.Operators.Select<Claim.DiagnosisComponent, object>(u_, v_);
 						bool? x_(object @this)
 						{
 							object ak_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -514,7 +514,7 @@ public class NCQAClaims_1_0_0
 
 							return al_;
 						};
-						IEnumerable<object> y_ = context.Operators.Where<object>((IEnumerable<object>)w_, x_);
+						IEnumerable<object> y_ = context.Operators.Where<object>(w_, x_);
 						object z_(object @this)
 						{
 							object am_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -816,20 +816,20 @@ public class NCQAClaims_1_0_0
 										return eq_;
 									};
 									IEnumerable<Claim.ItemComponent> eg_ = context.Operators.Where<Claim.ItemComponent>(ed_, ef_);
-									DataType eh_(Claim.ItemComponent @this)
+									object eh_(Claim.ItemComponent @this)
 									{
 										DataType er_ = @this?.Serviced;
 
 										return er_;
 									};
-									IEnumerable<DataType> ei_ = context.Operators.Select<Claim.ItemComponent, DataType>(eg_, eh_);
+									IEnumerable<object> ei_ = context.Operators.Select<Claim.ItemComponent, object>(eg_, eh_);
 									CqlInterval<CqlDateTime> ej_(object NormalDate)
 									{
 										CqlInterval<CqlDateTime> es_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
 										return es_;
 									};
-									IEnumerable<CqlInterval<CqlDateTime>> ek_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)ei_, ej_);
+									IEnumerable<CqlInterval<CqlDateTime>> ek_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(ei_, ej_);
 									IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> el_ = ItemCalculation?.CoveredDays;
 									CqlInterval<CqlDateTime> em_((CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)? d)
 									{
@@ -926,13 +926,13 @@ public class NCQAClaims_1_0_0
 							return al_;
 						};
 						IEnumerable<Claim.DiagnosisComponent> x_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)v_, w_);
-						DataType y_(Claim.DiagnosisComponent @this)
+						object y_(Claim.DiagnosisComponent @this)
 						{
 							DataType am_ = @this?.Diagnosis;
 
 							return am_;
 						};
-						IEnumerable<DataType> z_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(x_, y_);
+						IEnumerable<object> z_ = context.Operators.Select<Claim.DiagnosisComponent, object>(x_, y_);
 						bool? aa_(object @this)
 						{
 							object an_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -940,7 +940,7 @@ public class NCQAClaims_1_0_0
 
 							return ao_;
 						};
-						IEnumerable<object> ab_ = context.Operators.Where<object>((IEnumerable<object>)z_, aa_);
+						IEnumerable<object> ab_ = context.Operators.Where<object>(z_, aa_);
 						object ac_(object @this)
 						{
 							object ap_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -1002,13 +1002,13 @@ public class NCQAClaims_1_0_0
 									return cn_;
 								};
 								IEnumerable<Claim.ProcedureComponent> bl_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)bj_, bk_);
-								DataType bm_(Claim.ProcedureComponent @this)
+								object bm_(Claim.ProcedureComponent @this)
 								{
 									DataType co_ = @this?.Procedure;
 
 									return co_;
 								};
-								IEnumerable<DataType> bn_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(bl_, bm_);
+								IEnumerable<object> bn_ = context.Operators.Select<Claim.ProcedureComponent, object>(bl_, bm_);
 								bool? bo_(object @this)
 								{
 									object cp_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -1016,7 +1016,7 @@ public class NCQAClaims_1_0_0
 
 									return cq_;
 								};
-								IEnumerable<object> bp_ = context.Operators.Where<object>((IEnumerable<object>)bn_, bo_);
+								IEnumerable<object> bp_ = context.Operators.Where<object>(bn_, bo_);
 								object bq_(object @this)
 								{
 									object cr_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -1250,13 +1250,13 @@ public class NCQAClaims_1_0_0
 								return bp_;
 							};
 							IEnumerable<Claim.ProcedureComponent> aq_ = context.Operators.Where<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)ao_, ap_);
-							DataType ar_(Claim.ProcedureComponent @this)
+							object ar_(Claim.ProcedureComponent @this)
 							{
 								DataType bq_ = @this?.Procedure;
 
 								return bq_;
 							};
-							IEnumerable<DataType> as_ = context.Operators.Select<Claim.ProcedureComponent, DataType>(aq_, ar_);
+							IEnumerable<object> as_ = context.Operators.Select<Claim.ProcedureComponent, object>(aq_, ar_);
 							bool? at_(object @this)
 							{
 								object br_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -1264,7 +1264,7 @@ public class NCQAClaims_1_0_0
 
 								return bs_;
 							};
-							IEnumerable<object> au_ = context.Operators.Where<object>((IEnumerable<object>)as_, at_);
+							IEnumerable<object> au_ = context.Operators.Where<object>(as_, at_);
 							object av_(object @this)
 							{
 								object bt_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -1749,13 +1749,13 @@ public class NCQAClaims_1_0_0
 				return aq_;
 			};
 			IEnumerable<Claim.DiagnosisComponent> t_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)r_, s_);
-			DataType u_(Claim.DiagnosisComponent @this)
+			object u_(Claim.DiagnosisComponent @this)
 			{
 				DataType ar_ = @this?.Diagnosis;
 
 				return ar_;
 			};
-			IEnumerable<DataType> v_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(t_, u_);
+			IEnumerable<object> v_ = context.Operators.Select<Claim.DiagnosisComponent, object>(t_, u_);
 			bool? w_(object @this)
 			{
 				object as_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -1763,7 +1763,7 @@ public class NCQAClaims_1_0_0
 
 				return at_;
 			};
-			IEnumerable<object> x_ = context.Operators.Where<object>((IEnumerable<object>)v_, w_);
+			IEnumerable<object> x_ = context.Operators.Where<object>(v_, w_);
 			object y_(object @this)
 			{
 				object au_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -2110,13 +2110,13 @@ public class NCQAClaims_1_0_0
 				return aq_;
 			};
 			IEnumerable<Claim.DiagnosisComponent> t_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)r_, s_);
-			DataType u_(Claim.DiagnosisComponent @this)
+			object u_(Claim.DiagnosisComponent @this)
 			{
 				DataType ar_ = @this?.Diagnosis;
 
 				return ar_;
 			};
-			IEnumerable<DataType> v_ = context.Operators.Select<Claim.DiagnosisComponent, DataType>(t_, u_);
+			IEnumerable<object> v_ = context.Operators.Select<Claim.DiagnosisComponent, object>(t_, u_);
 			bool? w_(object @this)
 			{
 				object as_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -2124,7 +2124,7 @@ public class NCQAClaims_1_0_0
 
 				return at_;
 			};
-			IEnumerable<object> x_ = context.Operators.Where<object>((IEnumerable<object>)v_, w_);
+			IEnumerable<object> x_ = context.Operators.Where<object>(v_, w_);
 			object y_(object @this)
 			{
 				object au_ = context.Operators.LateBoundProperty<object>(@this, "coding");
@@ -3612,16 +3612,16 @@ public class NCQAClaims_1_0_0
 				return ag_;
 			};
 			IEnumerable<Claim.ItemComponent> m_ = context.Operators.Where<Claim.ItemComponent>(k_, l_);
-			DataType n_(Claim.ItemComponent @this)
+			object n_(Claim.ItemComponent @this)
 			{
 				DataType ah_ = @this?.Location;
 
 				return ah_;
 			};
-			IEnumerable<DataType> o_ = context.Operators.Select<Claim.ItemComponent, DataType>(m_, n_);
+			IEnumerable<object> o_ = context.Operators.Select<Claim.ItemComponent, object>(m_, n_);
 			ResourceReference p_(object l) => 
 				(l as ResourceReference);
-			IEnumerable<ResourceReference> q_ = context.Operators.Select<object, ResourceReference>((IEnumerable<object>)o_, p_);
+			IEnumerable<ResourceReference> q_ = context.Operators.Select<object, ResourceReference>(o_, p_);
 			bool? s_(Claim.ItemComponent i)
 			{
 				PositiveInt ai_ = i?.SequenceElement;
@@ -3640,13 +3640,13 @@ public class NCQAClaims_1_0_0
 				return an_;
 			};
 			IEnumerable<Claim.ItemComponent> v_ = context.Operators.Where<Claim.ItemComponent>(t_, u_);
-			DataType w_(Claim.ItemComponent @this)
+			object w_(Claim.ItemComponent @this)
 			{
 				DataType ao_ = @this?.Location;
 
 				return ao_;
 			};
-			IEnumerable<DataType> x_ = context.Operators.Select<Claim.ItemComponent, DataType>(v_, w_);
+			IEnumerable<object> x_ = context.Operators.Select<Claim.ItemComponent, object>(v_, w_);
 			string y_(object l)
 			{
 				FhirString ap_ = (l as ResourceReference)?.ReferenceElement;
@@ -3665,7 +3665,7 @@ public class NCQAClaims_1_0_0
 
 				return at_;
 			};
-			IEnumerable<string> z_ = context.Operators.Select<object, string>((IEnumerable<object>)x_, y_);
+			IEnumerable<string> z_ = context.Operators.Select<object, string>(x_, y_);
 			(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? aa_ = ((IEnumerable<Claim.ItemComponent>)h_, q_, z_);
 
 			return aa_;

@@ -51,36 +51,8 @@ partial class ExpressionBuilderContext
         var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
         var @throw = Expression.Throw(@new, returnType);
         var lambda = Expression.Lambda(@throw, parameters);
-        //var funcTypes = new Type[functionParameterTypes.Length + 1];
-        //Array.Copy(functionParameterTypes, funcTypes, functionParameterTypes.Length);
-        //funcTypes[funcTypes.Length - 1] = returnType;
-        //var funcType = GetFuncType(funcTypes);
-        //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
-        //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
         return lambda;
     }
-
-    protected static Type GetFuncType(Type[] funcTypeParameters) =>
-        funcTypeParameters.Length switch
-        {
-            0 => throw new NotSupportedException(),
-            1 => typeof(Func<>).MakeGenericType(funcTypeParameters),
-            2 => typeof(Func<,>).MakeGenericType(funcTypeParameters),
-            3 => typeof(Func<,,>).MakeGenericType(funcTypeParameters),
-            4 => typeof(Func<,,,>).MakeGenericType(funcTypeParameters),
-            5 => typeof(Func<,,,,>).MakeGenericType(funcTypeParameters),
-            6 => typeof(Func<,,,,,>).MakeGenericType(funcTypeParameters),
-            7 => typeof(Func<,,,,,,>).MakeGenericType(funcTypeParameters),
-            8 => typeof(Func<,,,,,,,>).MakeGenericType(funcTypeParameters),
-            9 => typeof(Func<,,,,,,,,>).MakeGenericType(funcTypeParameters),
-            10 => typeof(Func<,,,,,,,,,>).MakeGenericType(funcTypeParameters),
-            11 => typeof(Func<,,,,,,,,,,>).MakeGenericType(funcTypeParameters),
-            12 => typeof(Func<,,,,,,,,,,,>).MakeGenericType(funcTypeParameters),
-            13 => typeof(Func<,,,,,,,,,,,,>).MakeGenericType(funcTypeParameters),
-            14 => typeof(Func<,,,,,,,,,,,,,>).MakeGenericType(funcTypeParameters),
-            15 => typeof(Func<,,,,,,,,,,,,,,>).MakeGenericType(funcTypeParameters),
-            _ => throw new NotSupportedException("Functions with more than 15 parameters are not supported.")
-        };
 
     internal static string NormalizeIdentifier(string identifier)
     {

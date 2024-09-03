@@ -734,7 +734,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				bool? q_(Extension @this)
 				{
 					string z_ = @this?.Url;
-					FhirUri aa_ = context.Operators.Convert<FhirUri>(z_);
+					FhirString aa_ = context.Operators.Convert<FhirString>(z_);
 					string ab_ = FHIRHelpers_4_3_000.ToString(aa_);
 					bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
@@ -803,7 +803,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				bool? q_(Extension @this)
 				{
 					string z_ = @this?.Url;
-					FhirUri aa_ = context.Operators.Convert<FhirUri>(z_);
+					FhirString aa_ = context.Operators.Convert<FhirString>(z_);
 					string ab_ = FHIRHelpers_4_3_000.ToString(aa_);
 					bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
@@ -872,7 +872,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				bool? q_(Extension @this)
 				{
 					string z_ = @this?.Url;
-					FhirUri aa_ = context.Operators.Convert<FhirUri>(z_);
+					FhirString aa_ = context.Operators.Convert<FhirString>(z_);
 					string ab_ = FHIRHelpers_4_3_000.ToString(aa_);
 					bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 

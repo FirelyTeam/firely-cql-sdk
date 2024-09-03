@@ -79,7 +79,7 @@ namespace CoreTests.Elm
             var result = new ResultBuilder();
 
             var walker = new ElmTreeWalker(result.Visitor);
-            walker.Walk(lib);
+            walker.Start(lib);
 
             result.Strings.Should().BeEquivalentTo("Literal hi");
         }

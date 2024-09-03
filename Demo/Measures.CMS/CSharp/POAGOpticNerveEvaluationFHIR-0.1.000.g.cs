@@ -436,30 +436,29 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		{
 			bool? u_(Extension @this)
 			{
-				string ad_ = @this?.Url;
-				FhirUri ae_ = context.Operators.Convert<FhirUri>(ad_);
-				string af_ = FHIRHelpers_4_3_000.ToString(ae_);
-				bool? ag_ = context.Operators.Equal(af_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				string ac_ = @this?.Url;
+				FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
+				string ae_ = FHIRHelpers_4_3_000.ToString(ad_);
+				bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-				return ag_;
+				return af_;
 			};
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((CupToDiscExamNotPerformed is DomainResource)
 					? ((CupToDiscExamNotPerformed as DomainResource).Extension)
 					: default), u_);
-			DataType w_(Extension @this)
+			object w_(Extension @this)
 			{
-				DataType ah_ = @this?.Value;
+				DataType ag_ = @this?.Value;
 
-				return ah_;
+				return ag_;
 			};
-			IEnumerable<DataType> x_ = context.Operators.Select<Extension, DataType>(v_, w_);
-			DataType y_ = context.Operators.SingletonFrom<DataType>(x_);
-			CodeableConcept z_ = context.Operators.Convert<CodeableConcept>(y_);
-			CqlConcept aa_ = FHIRHelpers_4_3_000.ToConcept(z_);
-			CqlValueSet ab_ = this.Medical_Reason();
-			bool? ac_ = context.Operators.ConceptInValueSet(aa_, ab_);
+			IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
+			object y_ = context.Operators.SingletonFrom<object>(x_);
+			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept((y_ as CodeableConcept));
+			CqlValueSet aa_ = this.Medical_Reason();
+			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
-			return ac_;
+			return ab_;
 		};
 		IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 
@@ -502,30 +501,29 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		{
 			bool? u_(Extension @this)
 			{
-				string ad_ = @this?.Url;
-				FhirUri ae_ = context.Operators.Convert<FhirUri>(ad_);
-				string af_ = FHIRHelpers_4_3_000.ToString(ae_);
-				bool? ag_ = context.Operators.Equal(af_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+				string ac_ = @this?.Url;
+				FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
+				string ae_ = FHIRHelpers_4_3_000.ToString(ad_);
+				bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
-				return ag_;
+				return af_;
 			};
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((OpticDiscExamNotPerformed is DomainResource)
 					? ((OpticDiscExamNotPerformed as DomainResource).Extension)
 					: default), u_);
-			DataType w_(Extension @this)
+			object w_(Extension @this)
 			{
-				DataType ah_ = @this?.Value;
+				DataType ag_ = @this?.Value;
 
-				return ah_;
+				return ag_;
 			};
-			IEnumerable<DataType> x_ = context.Operators.Select<Extension, DataType>(v_, w_);
-			DataType y_ = context.Operators.SingletonFrom<DataType>(x_);
-			CodeableConcept z_ = context.Operators.Convert<CodeableConcept>(y_);
-			CqlConcept aa_ = FHIRHelpers_4_3_000.ToConcept(z_);
-			CqlValueSet ab_ = this.Medical_Reason();
-			bool? ac_ = context.Operators.ConceptInValueSet(aa_, ab_);
+			IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
+			object y_ = context.Operators.SingletonFrom<object>(x_);
+			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept((y_ as CodeableConcept));
+			CqlValueSet aa_ = this.Medical_Reason();
+			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
-			return ac_;
+			return ab_;
 		};
 		IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 
