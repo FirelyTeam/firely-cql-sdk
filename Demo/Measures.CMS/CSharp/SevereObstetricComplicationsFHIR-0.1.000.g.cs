@@ -857,7 +857,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				};
 				IEnumerable<object> w_ = context.Operators.Select<Extension, object>(u_, v_);
 				object x_ = context.Operators.SingletonFrom<object>(w_);
-				CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept(x_);
+				CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept((x_ as CodeableConcept));
 				CqlValueSet z_ = this.Present_on_Admission_is_No_or_Unable_To_Determine();
 				bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
 				bool? ab_ = context.Operators.And(s_, aa_);
@@ -1146,7 +1146,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<object> i_ = context.Operators.Select<Extension, object>(g_, h_);
 			object j_ = context.Operators.SingletonFrom<object>(i_);
-			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept(j_);
+			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept((j_ as CodeableConcept));
 			CqlValueSet l_ = this.Present_On_Admission_is_Yes_or_Exempt();
 			bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 
@@ -2034,7 +2034,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation k_ = context.Operators.First<Observation>(j_);
 			DataType l_ = k_?.Value;
-			CqlQuantity m_ = FHIRHelpers_4_3_000.ToQuantity(l_);
+			CqlQuantity m_ = FHIRHelpers_4_3_000.ToQuantity((l_ as Quantity));
 			bool? o_(Observation HeartRate)
 			{
 				DataType aq_ = HeartRate?.Effective;
@@ -2229,7 +2229,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<object> i_ = context.Operators.Select<Extension, object>(g_, h_);
 			object j_ = context.Operators.SingletonFrom<object>(i_);
-			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept(j_);
+			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept((j_ as CodeableConcept));
 			CqlValueSet l_ = this.Present_on_Admission_is_No_or_Unable_To_Determine();
 			bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 

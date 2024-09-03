@@ -447,7 +447,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			bool? v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
 			bool? w_ = context.Operators.And(q_, v_);
 			DataType x_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
-			CqlQuantity y_ = FHIRHelpers_4_3_000.ToQuantity(x_);
+			CqlQuantity y_ = FHIRHelpers_4_3_000.ToQuantity((x_ as Quantity));
 			CqlQuantity z_ = context.Operators.Quantity(50m, "/min");
 			bool? aa_ = context.Operators.Less(y_, z_);
 			bool? ab_ = context.Operators.And(w_, aa_);
@@ -483,7 +483,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			IEnumerable<Observation> ag_ = context.Operators.SortBy<Observation>(ae_, af_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation ah_ = context.Operators.Last<Observation>(ag_);
 			DataType ai_ = ah_?.Value;
-			CqlQuantity aj_ = FHIRHelpers_4_3_000.ToQuantity(ai_);
+			CqlQuantity aj_ = FHIRHelpers_4_3_000.ToQuantity((ai_ as Quantity));
 			bool? al_ = context.Operators.Less(aj_, z_);
 			bool? am_ = context.Operators.And(ab_, al_);
 
@@ -529,7 +529,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		bool? d_(MedicationRequest NoBetaBlockerOrdered)
 		{
 			DataType q_ = NoBetaBlockerOrdered?.Medication;
-			CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept(q_);
+			CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept((q_ as CodeableConcept));
 			CqlValueSet s_ = this.Beta_Blocker_Therapy_for_LVSD();
 			bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
 			List<CodeableConcept> u_ = NoBetaBlockerOrdered?.ReasonCode;

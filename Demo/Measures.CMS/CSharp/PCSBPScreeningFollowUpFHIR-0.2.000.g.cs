@@ -2407,7 +2407,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				};
 				IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
 				object y_ = context.Operators.SingletonFrom<object>(x_);
-				CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_);
+				CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept((y_ as CodeableConcept));
 				CqlValueSet aa_ = this.Patient_Declined();
 				bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 				bool? ac_(Extension @this)
@@ -2430,7 +2430,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				};
 				IEnumerable<object> af_ = context.Operators.Select<Extension, object>(ad_, ae_);
 				object ag_ = context.Operators.SingletonFrom<object>(af_);
-				CqlConcept ah_ = FHIRHelpers_4_3_000.ToConcept(ag_);
+				CqlConcept ah_ = FHIRHelpers_4_3_000.ToConcept((ag_ as CodeableConcept));
 				CqlValueSet ai_ = this.Medical_Reason();
 				bool? aj_ = context.Operators.ConceptInValueSet(ah_, ai_);
 				bool? ak_ = context.Operators.Or(ab_, aj_);
@@ -2507,7 +2507,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<object> ai_ = context.Operators.Select<Extension, object>(ag_, ah_);
 			object aj_ = context.Operators.SingletonFrom<object>(ai_);
-			CqlConcept ak_ = FHIRHelpers_4_3_000.ToConcept(aj_);
+			CqlConcept ak_ = FHIRHelpers_4_3_000.ToConcept((aj_ as CodeableConcept));
 			CqlValueSet al_ = this.Patient_Declined();
 			bool? am_ = context.Operators.ConceptInValueSet(ak_, al_);
 			Code<RequestStatus> an_ = NonPharmIntervention?.StatusElement;
@@ -2563,7 +2563,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<object> s_ = context.Operators.Select<Extension, object>(q_, r_);
 			object t_ = context.Operators.SingletonFrom<object>(s_);
-			CqlConcept u_ = FHIRHelpers_4_3_000.ToConcept(t_);
+			CqlConcept u_ = FHIRHelpers_4_3_000.ToConcept((t_ as CodeableConcept));
 			CqlValueSet v_ = this.Patient_Declined();
 			bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
 
@@ -2614,7 +2614,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<object> w_ = context.Operators.Select<Extension, object>(u_, v_);
 			object x_ = context.Operators.SingletonFrom<object>(w_);
-			CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept(x_);
+			CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept((x_ as CodeableConcept));
 			CqlValueSet z_ = this.Patient_Declined();
 			bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
 			Code<RequestStatus> ab_ = SecondHTNDeclinedReferralAndFollowUp?.StatusElement;
@@ -2671,7 +2671,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			};
 			IEnumerable<object> ac_ = context.Operators.Select<Extension, object>(aa_, ab_);
 			object ad_ = context.Operators.SingletonFrom<object>(ac_);
-			CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
+			CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept((ad_ as CodeableConcept));
 			CqlValueSet af_ = this.Patient_Declined();
 			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 			Code<RequestStatus> ah_ = SecondHTN140Over90ReferralFollowUpNotDone?.StatusElement;
@@ -2749,7 +2749,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				};
 				IEnumerable<object> ar_ = context.Operators.Select<Extension, object>(ap_, aq_);
 				object as_ = context.Operators.SingletonFrom<object>(ar_);
-				CqlConcept at_ = FHIRHelpers_4_3_000.ToConcept(as_);
+				CqlConcept at_ = FHIRHelpers_4_3_000.ToConcept((as_ as CodeableConcept));
 				CqlValueSet au_ = this.Patient_Declined();
 				bool? av_ = context.Operators.ConceptInValueSet(at_, au_);
 				FhirDateTime aw_ = ElevatedBPDeclinedInterventions?.AuthoredOnElement;
@@ -2830,7 +2830,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				};
 				IEnumerable<object> co_ = context.Operators.Select<Extension, object>(cm_, cn_);
 				object cp_ = context.Operators.SingletonFrom<object>(co_);
-				CqlConcept cq_ = FHIRHelpers_4_3_000.ToConcept(cp_);
+				CqlConcept cq_ = FHIRHelpers_4_3_000.ToConcept((cp_ as CodeableConcept));
 				CqlValueSet cr_ = this.Patient_Declined();
 				bool? cs_ = context.Operators.ConceptInValueSet(cq_, cr_);
 				FhirDateTime ct_ = FirstHTNDeclinedInterventions?.AuthoredOnElement;

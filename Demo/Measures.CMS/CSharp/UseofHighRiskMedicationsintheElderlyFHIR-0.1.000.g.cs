@@ -1089,7 +1089,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			Timing.RepeatComponent aw_ = av_?.Repeat;
 			Code<Timing.UnitsOfTime> ax_ = aw_?.PeriodUnitElement;
 			Timing.UnitsOfTime? ay_ = ax_?.Value;
-			Code<Timing.UnitsOfTime> az_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(ay_);
+			string az_ = context.Operators.Convert<string>(ay_);
 			CqlQuantity ba_ = CumulativeMedicationDuration_4_0_000.Quantity(as_, az_);
 			decimal? bb_ = CumulativeMedicationDuration_4_0_000.ToDaily((ag_ ?? am_), ba_);
 			Dosage bd_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);

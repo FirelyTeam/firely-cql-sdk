@@ -1125,7 +1125,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			bool? i_((CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)
 			{
 				DataType m_ = BMIExam?.Value;
-				CqlQuantity n_ = FHIRHelpers_4_3_000.ToQuantity(m_);
+				CqlQuantity n_ = FHIRHelpers_4_3_000.ToQuantity((m_ as Quantity));
 				CqlQuantity o_ = context.Operators.Quantity(40m, "kg/m2");
 				bool? p_ = context.Operators.Greater(n_, o_);
 				Code<ObservationStatus> q_ = BMIExam?.StatusElement;

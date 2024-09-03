@@ -866,7 +866,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.ToInterval(j_);
 			bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, null);
 			DataType m_ = BMIRatio?.Value;
-			CqlQuantity n_ = FHIRHelpers_4_3_000.ToQuantity(m_);
+			CqlQuantity n_ = FHIRHelpers_4_3_000.ToQuantity((m_ as Quantity));
 			bool? o_ = context.Operators.Not((bool?)((n_ as CqlQuantity) is null));
 			bool? p_ = context.Operators.And(l_, o_);
 
@@ -901,7 +901,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		bool? c_(Observation FirstBMI)
 		{
 			DataType f_ = FirstBMI?.Value;
-			CqlQuantity g_ = FHIRHelpers_4_3_000.ToQuantity(f_);
+			CqlQuantity g_ = FHIRHelpers_4_3_000.ToQuantity((f_ as Quantity));
 			CqlQuantity h_ = context.Operators.Quantity(20m, "kg/m2");
 			bool? i_ = context.Operators.LessOrEqual((g_ as CqlQuantity), h_);
 

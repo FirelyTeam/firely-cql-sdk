@@ -21,12 +21,11 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
 {
     private Library? _library;
 
-    public void Fix(Library library)
+    public override void Walk(Library library)
     {
         _library = library;
 
-        // Walk the tree, fixing the ExpressionRefs and FunctionRefs.
-        StartInternal(library);
+        base.Walk(library);
     }
 
     protected override bool Process(object node)
@@ -49,6 +48,24 @@ internal class ExpressionRefCorrector(LibrarySet librarySet) : BaseElmTreeWalker
             // the current eCQM measures.
             // Issue https://github.com/FirelyTeam/firely-cql-sdk/issues/497 will make this solution more general.
             frefnos.signature = [new NamedTypeSpecifier("http://hl7.org/fhir", "Coding")];
+        }
+
+        if(node is FunctionRef { libraryName: "FHIRHelpers", name: "ToQuantity", signature: null } frefnoq)
+        {
+            // Call overload resolution and add a signature. In fact we should probably do this for ANY FunctionRef
+            // without a signature. For now, we'll just fix this for the ToQuantity() function we're dealing with in
+            // the current eCQM measures.
+            // Issue https://github.com/FirelyTeam/firely-cql-sdk/issues/497 will make this solution more general.
+            frefnoq.signature = [new NamedTypeSpecifier("http://hl7.org/fhir", "Quantity")];
+        }
+
+        if(node is FunctionRef { libraryName: "FHIRHelpers", name: "ToConcept", signature: null } frefnocc)
+        {
+            // Call overload resolution and add a signature. In fact we should probably do this for ANY FunctionRef
+            // without a signature. For now, we'll just fix this for the ToConcept() function we're dealing with in
+            // the current eCQM measures.
+            // Issue https://github.com/FirelyTeam/firely-cql-sdk/issues/497 will make this solution more general.
+            frefnocc.signature = [new NamedTypeSpecifier("http://hl7.org/fhir", "CodeableConcept")];
         }
 
         return false;

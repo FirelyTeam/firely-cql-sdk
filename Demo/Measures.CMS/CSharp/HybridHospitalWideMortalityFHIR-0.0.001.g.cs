@@ -380,7 +380,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool? aq_ = context.Operators.In<string>(ao_, (ap_ as IEnumerable<string>));
 				bool? ar_ = context.Operators.And(al_, aq_);
 				DataType as_ = temperature?.Value;
-				CqlQuantity at_ = FHIRHelpers_4_3_000.ToQuantity(as_);
+				CqlQuantity at_ = FHIRHelpers_4_3_000.ToQuantity((as_ as Quantity));
 				bool? au_ = context.Operators.Not((bool?)(at_ is null));
 				bool? av_ = context.Operators.And(ar_, au_);
 
@@ -398,7 +398,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			IEnumerable<Observation> j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation k_ = context.Operators.First<Observation>(j_);
 			DataType l_ = k_?.Value;
-			CqlQuantity m_ = FHIRHelpers_4_3_000.ToQuantity(l_);
+			CqlQuantity m_ = FHIRHelpers_4_3_000.ToQuantity((l_ as Quantity));
 			bool? o_(Observation temperature)
 			{
 				DataType az_ = temperature?.Effective;
@@ -426,7 +426,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool? bs_ = context.Operators.In<string>(bq_, (br_ as IEnumerable<string>));
 				bool? bt_ = context.Operators.And(bn_, bs_);
 				DataType bu_ = temperature?.Value;
-				CqlQuantity bv_ = FHIRHelpers_4_3_000.ToQuantity(bu_);
+				CqlQuantity bv_ = FHIRHelpers_4_3_000.ToQuantity((bu_ as Quantity));
 				bool? bw_ = context.Operators.Not((bool?)(bv_ is null));
 				bool? bx_ = context.Operators.And(bt_, bw_);
 
@@ -494,7 +494,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool? aq_ = context.Operators.In<string>(ao_, (ap_ as IEnumerable<string>));
 				bool? ar_ = context.Operators.And(al_, aq_);
 				DataType as_ = HeartRate?.Value;
-				CqlQuantity at_ = FHIRHelpers_4_3_000.ToQuantity(as_);
+				CqlQuantity at_ = FHIRHelpers_4_3_000.ToQuantity((as_ as Quantity));
 				bool? au_ = context.Operators.Not((bool?)(at_ is null));
 				bool? av_ = context.Operators.And(ar_, au_);
 
@@ -512,7 +512,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			IEnumerable<Observation> j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation k_ = context.Operators.First<Observation>(j_);
 			DataType l_ = k_?.Value;
-			CqlQuantity m_ = FHIRHelpers_4_3_000.ToQuantity(l_);
+			CqlQuantity m_ = FHIRHelpers_4_3_000.ToQuantity((l_ as Quantity));
 			bool? o_(Observation HeartRate)
 			{
 				DataType az_ = HeartRate?.Effective;
@@ -540,7 +540,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool? bs_ = context.Operators.In<string>(bq_, (br_ as IEnumerable<string>));
 				bool? bt_ = context.Operators.And(bn_, bs_);
 				DataType bu_ = HeartRate?.Value;
-				CqlQuantity bv_ = FHIRHelpers_4_3_000.ToQuantity(bu_);
+				CqlQuantity bv_ = FHIRHelpers_4_3_000.ToQuantity((bu_ as Quantity));
 				bool? bw_ = context.Operators.Not((bool?)(bv_ is null));
 				bool? bx_ = context.Operators.And(bt_, bw_);
 

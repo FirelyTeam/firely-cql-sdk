@@ -1615,7 +1615,7 @@ public class CumulativeMedicationDuration_4_0_000
 					Timing.RepeatComponent bq_ = bp_?.Repeat;
 					Code<Timing.UnitsOfTime> br_ = bq_?.PeriodUnitElement;
 					Timing.UnitsOfTime? bs_ = br_?.Value;
-					Code<Timing.UnitsOfTime> bt_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(bs_);
+					string bt_ = context.Operators.Convert<string>(bs_);
 					CqlQuantity bu_ = this.Quantity(bm_, bt_);
 					decimal? bv_ = this.ToDaily((ba_ ?? bg_), bu_);
 					Dosage bx_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)h_);
@@ -1737,7 +1737,7 @@ public class CumulativeMedicationDuration_4_0_000
 					Timing.RepeatComponent gm_ = gl_?.Repeat;
 					Code<Timing.UnitsOfTime> gn_ = gm_?.PeriodUnitElement;
 					Timing.UnitsOfTime? go_ = gn_?.Value;
-					Code<Timing.UnitsOfTime> gp_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(go_);
+					string gp_ = context.Operators.Convert<string>(go_);
 					CqlQuantity gq_ = this.Quantity(gi_, gp_);
 					decimal? gr_ = this.ToDaily((fw_ ?? gc_), gq_);
 					Dosage gt_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
@@ -1864,7 +1864,7 @@ public class CumulativeMedicationDuration_4_0_000
 					Timing.RepeatComponent bd_ = bc_?.Repeat;
 					Code<Timing.UnitsOfTime> be_ = bd_?.PeriodUnitElement;
 					Timing.UnitsOfTime? bf_ = be_?.Value;
-					Code<Timing.UnitsOfTime> bg_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(bf_);
+					string bg_ = context.Operators.Convert<string>(bf_);
 					CqlQuantity bh_ = this.Quantity(az_, bg_);
 					decimal? bi_ = this.ToDaily((an_ ?? at_), bh_);
 					Dosage bk_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)u_);
@@ -1933,7 +1933,7 @@ public class CumulativeMedicationDuration_4_0_000
 					Timing.RepeatComponent dx_ = dw_?.Repeat;
 					Code<Timing.UnitsOfTime> dy_ = dx_?.PeriodUnitElement;
 					Timing.UnitsOfTime? dz_ = dy_?.Value;
-					Code<Timing.UnitsOfTime> ea_ = context.Operators.Convert<Code<Timing.UnitsOfTime>>(dz_);
+					string ea_ = context.Operators.Convert<string>(dz_);
 					CqlQuantity eb_ = this.Quantity(dt_, ea_);
 					decimal? ec_ = this.ToDaily((dh_ ?? dn_), eb_);
 					Dosage ee_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);

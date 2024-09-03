@@ -333,7 +333,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept((r_ as CodeableConcept));
 				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -457,7 +457,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept((r_ as CodeableConcept));
 				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -625,7 +625,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept((r_ as CodeableConcept));
 				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -769,7 +769,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept((r_ as CodeableConcept));
 				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
