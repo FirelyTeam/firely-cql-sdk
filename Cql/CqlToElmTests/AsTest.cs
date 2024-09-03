@@ -1,13 +1,9 @@
 ﻿using FluentAssertions;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -29,7 +25,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private Integer_As_Decimal: 1 as System.Decimal
             ", "Expression of type*");
-           
+
         }
 
         [TestMethod]
