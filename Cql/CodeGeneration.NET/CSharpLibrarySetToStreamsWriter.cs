@@ -20,6 +20,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Operators;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -71,6 +72,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 typeof(IValueSetFacade).Namespace!,
                 typeof(Iso8601.DateIso8601).Namespace!,
                 typeof(PropertyInfo).Namespace!,
+                typeof(RetrieveParameters).Namespace!,
             };
 
             foreach (var @using in typeResolver.ModelNamespaces)

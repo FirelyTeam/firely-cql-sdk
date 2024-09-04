@@ -28,6 +28,9 @@ internal static class NullExpression
     public static ConstantExpression ForType(Type type) =>
         (ConstantExpression)ForType_GenericDefinitionMethodInfo.MakeGenericMethod(type).Invoke(null, [])!;
 
+    public static bool IsNullConstant(this Expression expression) =>
+        expression is ConstantExpression { Value: null };
+
     private static class Typed<T>
     {
         public static readonly ConstantExpression Instance = Expression.Constant(null, typeof(T));

@@ -6,6 +6,16 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -18,26 +28,16 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Xml;
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Model;
-using Hl7.Cql.Operators;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
 using Convert = System.Convert;
 using DateTime = Hl7.Cql.Elm.DateTime;
 using Expression = System.Linq.Expressions.Expression;
-using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
-using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
 using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
 using Tuple = Hl7.Cql.Elm.Tuple;
 using TupleTypeSpecifier = Hl7.Cql.Elm.TupleTypeSpecifier;
+using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 
 namespace Hl7.Cql.Compiler;
 
@@ -49,7 +49,7 @@ namespace Hl7.Cql.Compiler;
 /// <remarks>
 /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
 /// </remarks>
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     private readonly CqlOperatorsBinder _cqlOperatorsBinder;
     private readonly CqlContextBinder _contextBinder;
@@ -1168,7 +1168,7 @@ partial class ExpressionBuilderContext
 
         var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
         var convertedArguments = arguments
-                                 .Select((a,i) => convertChoice(a,signature?[i]))
+                                 .Select((a, i) => convertChoice(a, signature?[i]))
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
         var funcType = convertedArguments.Select(a => a.Type).Append(rtt).ToArray();
@@ -1184,7 +1184,7 @@ partial class ExpressionBuilderContext
         // choice is not compatible with the parameter, so we'll use an As in C#.
         Expression convertChoice(Expression argument, TypeSpecifier? actualType)
         {
-            if(actualType is not null && argument.Type == typeof(object))
+            if (actualType is not null && argument.Type == typeof(object))
             {
                 var type = TypeFor(actualType) ?? throw new InvalidOperationException($"Unable to resolve type for {actualType}");
                 return argument.NewTypeAsExpression(type);
@@ -1247,7 +1247,7 @@ partial class ExpressionBuilderContext
 
 #region ArithmeticOperators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     private const string Int32MaxPlusOneAsString = "2147483648";
 
@@ -1279,7 +1279,7 @@ partial class ExpressionBuilderContext
 
 #region ComparisonOperators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression Equivalent(Equivalent eqv)
     {
@@ -1301,7 +1301,7 @@ partial class ExpressionBuilderContext
 
 #region ErrorsAndMessaging
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     private Expression Message(Message e)
     {
@@ -1332,7 +1332,7 @@ partial class ExpressionBuilderContext
 
 #region IntervalOperators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression? Includes(Includes e)
     {
@@ -1520,7 +1520,7 @@ partial class ExpressionBuilderContext
 
 #region NullologicalOperators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression Coalesce(Coalesce ce)
     {
@@ -1566,7 +1566,7 @@ partial class ExpressionBuilderContext
 #endregion
 
 #region Query
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression Query(Query query)
     {
@@ -2112,7 +2112,7 @@ partial class ExpressionBuilderContext
 
 #region Type Operators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression As(As @as) //@ TODO: Cast - As
     {
@@ -2161,7 +2161,7 @@ partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var operand = TranslateArg(@as.operand!);
-                    var converted = ChangeType(operand, type, out var typeConversion, safeUpcastAllowed:true);
+                    var converted = ChangeType(operand, type, out var typeConversion, safeUpcastAllowed: true);
                     switch (typeConversion)
                     {
                         case TypeConversion.NoMatch:
@@ -2253,7 +2253,7 @@ partial class ExpressionBuilderContext
 
 #region ChangeType
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     private Expression ChangeType(
         Expression expr,
