@@ -830,7 +830,7 @@ public class QICoreCommon_2_0_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;

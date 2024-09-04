@@ -513,9 +513,11 @@ Hl7.Cql.Operators.RetrieveParameters.CodeProperty.get -> System.Reflection.Prope
 Hl7.Cql.Operators.RetrieveParameters.CodeProperty.init -> void
 Hl7.Cql.Operators.RetrieveParameters.Codes.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>?
 Hl7.Cql.Operators.RetrieveParameters.Codes.init -> void
-Hl7.Cql.Operators.RetrieveParameters.Deconstruct(out System.Reflection.PropertyInfo? CodeProperty, out Hl7.Cql.Primitives.CqlValueSet? ValueSet, out System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? Codes) -> void
+Hl7.Cql.Operators.RetrieveParameters.Deconstruct(out System.Reflection.PropertyInfo? CodeProperty, out Hl7.Cql.Primitives.CqlValueSet? ValueSet, out System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? Codes, out string? TemplateId) -> void
 Hl7.Cql.Operators.RetrieveParameters.RetrieveParameters(Hl7.Cql.Operators.RetrieveParameters! original) -> void
-Hl7.Cql.Operators.RetrieveParameters.RetrieveParameters(System.Reflection.PropertyInfo? CodeProperty, Hl7.Cql.Primitives.CqlValueSet? ValueSet, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? Codes) -> void
+Hl7.Cql.Operators.RetrieveParameters.RetrieveParameters(System.Reflection.PropertyInfo? CodeProperty, Hl7.Cql.Primitives.CqlValueSet? ValueSet, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? Codes, string? TemplateId) -> void
+Hl7.Cql.Operators.RetrieveParameters.TemplateId.get -> string?
+Hl7.Cql.Operators.RetrieveParameters.TemplateId.init -> void
 Hl7.Cql.Operators.RetrieveParameters.ValueSet.get -> Hl7.Cql.Primitives.CqlValueSet?
 Hl7.Cql.Operators.RetrieveParameters.ValueSet.init -> void
 override Hl7.Cql.Operators.RetrieveParameters.Equals(object? obj) -> bool

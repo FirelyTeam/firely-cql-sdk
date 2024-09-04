@@ -88,7 +88,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -170,7 +170,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
 		CqlValueSet a_ = this.Payer();
-		IEnumerable<Coverage> b_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Coverage> b_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Coverage"));
 		(CodeableConcept code, Period period)? c_(Coverage Payer)
 		{
 			CodeableConcept e_ = Payer?.Type;

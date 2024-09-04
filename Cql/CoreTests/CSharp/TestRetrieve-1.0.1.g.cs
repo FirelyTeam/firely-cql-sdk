@@ -192,7 +192,7 @@ public class TestRetrieve_1_0_1
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;

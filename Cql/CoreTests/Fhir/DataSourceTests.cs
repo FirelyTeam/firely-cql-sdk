@@ -23,7 +23,7 @@ namespace CoreTests.Fhir
             results.Should().AllBeOfType<Patient>();
         }
 
-        private static RetrieveParameters Pars(params CqlCode[] codes) => new(null, null, codes);
+        private static RetrieveParameters Pars(params CqlCode[] codes) => new(null, null, codes, null);
 
         [TestMethod]
         public void FiltersOnDefaultProp()
@@ -50,17 +50,18 @@ namespace CoreTests.Fhir
         {
             var dr = buildDataSource();
             var model = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var genderProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Patient"), "gender");
+            var genderProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Patient")!, "gender");
             genderProp.Should().NotBeNull();
 
             var results = dr.Retrieve<Patient>(new RetrieveParameters(genderProp, null,
-                [new CqlCode("male", "http://hl7.org/fhir/administrative-gender")]));
+                [new CqlCode("male", "http://hl7.org/fhir/administrative-gender")], null));
             results.Should().HaveCount(1);
             results.Should().AllBeOfType<Patient>().And.AllSatisfy(p => p.Gender.Should().Be(AdministrativeGender.Male));
 
-            var activeProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Patient"), "active");
+            var activeProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Patient")!, "active");
             Assert.ThrowsException<NotSupportedException>(() =>
-                dr.Retrieve<Patient>(new RetrieveParameters(activeProp, null, new[] { new CqlCode("male", "http://hl7.org/fhir/administrative-gender") })).ToList());
+                dr.Retrieve<Patient>(new RetrieveParameters(activeProp, null,
+                [new CqlCode("male", "http://hl7.org/fhir/administrative-gender")], null)).ToList());
         }
 
         private BundleDataSource buildDataSource()

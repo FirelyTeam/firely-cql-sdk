@@ -194,7 +194,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -207,7 +207,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? c_(Encounter InpatientEncounter)
 		{
 			Patient e_ = this.Patient();
@@ -245,8 +245,8 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	private IEnumerable<MedicationAdministration> Opioid_Administration_Value()
 	{
 		CqlValueSet a_ = this.Opioids__All();
-		IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default));
-		IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default));
+		IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+		IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 		IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration Opioids)
 		{
@@ -359,8 +359,8 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000
 	private IEnumerable<MedicationAdministration> Opioid_Antagonist_Administration_Value()
 	{
 		CqlValueSet a_ = this.Opioid_Antagonist();
-		IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default));
-		IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default));
+		IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+		IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 		IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration AntagonistGiven)
 		{

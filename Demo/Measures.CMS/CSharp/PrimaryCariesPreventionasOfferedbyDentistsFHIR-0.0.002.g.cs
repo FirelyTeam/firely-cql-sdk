@@ -148,7 +148,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -161,7 +161,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Clinical_Oral_Evaluation();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter ValidEncounter)
 		{
@@ -229,7 +229,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002
 	private bool? Numerator_Value()
 	{
 		CqlValueSet a_ = this.Fluoride_Varnish_Application_for_Children();
-		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.isProcedurePerformed(b_);
 		bool? d_(Procedure FluorideApplication)
 		{

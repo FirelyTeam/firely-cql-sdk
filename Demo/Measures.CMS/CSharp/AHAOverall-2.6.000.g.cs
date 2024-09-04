@@ -264,7 +264,7 @@ public class AHAOverall_2_6_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -328,23 +328,23 @@ public class AHAOverall_2_6_000
 	private IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default));
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default));
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Office_Visit();
-		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default));
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default));
+		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
 		IEnumerable<Encounter> o_(Encounter QualifyingEncounter)
 		{
 			CqlValueSet s_ = this.Heart_Failure();
-			IEnumerable<Condition> t_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, s_, default));
+			IEnumerable<Condition> t_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? u_(Condition HeartFailure)
 			{
 				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.prevalenceInterval(HeartFailure);
@@ -387,7 +387,7 @@ public class AHAOverall_2_6_000
 	private IEnumerable<object> Moderate_or_Severe_LVSD_Findings_Value()
 	{
 		CqlValueSet a_ = this.Ejection_Fraction();
-		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		bool? c_(Observation EjectionFraction)
 		{
 			DataType n_ = EjectionFraction?.Value;
@@ -410,11 +410,11 @@ public class AHAOverall_2_6_000
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		CqlValueSet e_ = this.Moderate_or_Severe_LVSD();
-		IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default));
+		IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<object> g_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (f_ as IEnumerable<object>));
 		CqlCode h_ = this.Left_ventricular_systolic_dysfunction__disorder_();
 		IEnumerable<CqlCode> i_ = context.Operators.ToList<CqlCode>(h_);
-		IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, i_));
+		IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, i_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? k_(Condition LVSDDiagnosis)
 		{
 			CodeableConcept y_ = LVSDDiagnosis?.Severity;
@@ -473,7 +473,7 @@ public class AHAOverall_2_6_000
 	private bool? Has_Heart_Transplant_Complications_Value()
 	{
 		CqlValueSet a_ = this.Heart_Transplant_Complications();
-		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_(Condition HeartTransplantComplications)
 		{
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
@@ -518,7 +518,7 @@ public class AHAOverall_2_6_000
 	private bool? Has_Left_Ventricular_Assist_Device_Value()
 	{
 		CqlValueSet a_ = this.Left_Ventricular_Assist_Device_Placement();
-		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_(Procedure LVADOutpatient)
 		{
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
@@ -565,7 +565,7 @@ public class AHAOverall_2_6_000
 	private bool? Has_Left_Ventricular_Assist_Device_Complications_Value()
 	{
 		CqlValueSet a_ = this.Left_Ventricular_Assist_Device_Complications();
-		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_(Condition LVADComplications)
 		{
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
@@ -610,20 +610,20 @@ public class AHAOverall_2_6_000
 	private IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default));
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default));
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Office_Visit();
-		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default));
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default));
+		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet n_ = this.Patient_Provider_Interaction();
-		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default));
+		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		bool? r_(Encounter ValidEncounter)
@@ -696,7 +696,7 @@ public class AHAOverall_2_6_000
 	private bool? Has_Heart_Transplant_Value()
 	{
 		CqlValueSet a_ = this.Heart_Transplant();
-		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_(Procedure HeartTransplant)
 		{
 			IEnumerable<Encounter> h_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();

@@ -145,7 +145,8 @@ internal partial class ExpressionBuilderContext
         {
             Expression expression => expression,
             Element element => TranslateElement(element),
-            var obj => Expression.Constant(obj),
+            null => NullExpression.ForType<TArg>(),
+            _ => Expression.Constant(arg),
         };
 
     private Expression TranslateElement(Element element) =>
@@ -938,23 +939,28 @@ internal partial class ExpressionBuilderContext
             codeProperty = NullExpression.ForType<PropertyInfo>();
         }
 
+        var templateId = TranslateArg(retrieve.templateId);
+        var sourceElementTypeExpr = Expression.Constant(sourceElementType, typeof(Type));
+        Expression values = NullExpression.ForType<CqlValueSet>();
+
         if (retrieve.codes != null)
         {
             if (retrieve.codes is ValueSetRef valueSetRef)
             {
                 if (string.IsNullOrWhiteSpace(valueSetRef.name))
                     throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-                var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
-                return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty);
-            }
 
-            // In this construct, instead of querying a value set, we're testing resources
-            // against a list of codes, e.g., as defined by the code from or codesystem construct
-            var codes = TranslateArg(retrieve.codes);
-            return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty);
+                values = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
+            }
+            else
+            {
+                // In this construct, instead of querying a value set, we're testing resources
+                // against a list of codes, e.g., as defined by the code from or codesystem construct
+                values = TranslateArg(retrieve.codes);
+            }
         }
 
-        return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), NullExpression.ForType<CqlValueSet>(), codeProperty);
+        return BindCqlOperator(CqlOperator.Retrieve, sourceElementTypeExpr, values, codeProperty, templateId);
     }
 
     protected Expression Property(Property op)

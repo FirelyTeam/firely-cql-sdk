@@ -113,7 +113,7 @@ public class PalliativeCare_1_9_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -127,7 +127,7 @@ public class PalliativeCare_1_9_000
 	{
 		CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_));
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.isAssessmentPerformed(c_);
 		bool? e_(Observation PalliativeAssessment)
 		{
@@ -142,7 +142,7 @@ public class PalliativeCare_1_9_000
 		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 		bool? g_ = context.Operators.Exists<Observation>(f_);
 		CqlValueSet h_ = this.Palliative_Care_Diagnosis();
-		IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default));
+		IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? j_(Condition PalliativeDiagnosis)
 		{
 			CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.prevalenceInterval(PalliativeDiagnosis);
@@ -155,7 +155,7 @@ public class PalliativeCare_1_9_000
 		bool? l_ = context.Operators.Exists<Condition>(k_);
 		bool? m_ = context.Operators.Or(g_, l_);
 		CqlValueSet n_ = this.Palliative_Care_Encounter();
-		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default));
+		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> p_ = Status_1_6_000.isEncounterPerformed(o_);
 		bool? q_(Encounter PalliativeEncounter)
 		{
@@ -171,7 +171,7 @@ public class PalliativeCare_1_9_000
 		bool? s_ = context.Operators.Exists<Encounter>(r_);
 		bool? t_ = context.Operators.Or(m_, s_);
 		CqlValueSet u_ = this.Palliative_Care_Intervention();
-		IEnumerable<Procedure> v_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, u_, default));
+		IEnumerable<Procedure> v_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, u_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> w_ = Status_1_6_000.isInterventionPerformed(v_);
 		bool? x_(Procedure PalliativeIntervention)
 		{

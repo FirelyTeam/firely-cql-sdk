@@ -356,7 +356,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -413,8 +413,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
-		IEnumerable<Encounter> c_ = context.Operators.Retrieve<Encounter>(default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+		IEnumerable<Encounter> c_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? d_(Encounter E)
 		{
 			List<CodeableConcept> bg_ = E?.Type;
@@ -440,37 +440,37 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		};
 		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
 		IEnumerable<Encounter> f_ = context.Operators.Union<Encounter>(b_, e_);
-		IEnumerable<Encounter> h_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> h_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet i_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> j_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, i_, default));
+		IEnumerable<Encounter> j_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(h_, j_);
 		IEnumerable<Encounter> l_ = context.Operators.Union<Encounter>(f_, k_);
 		CqlValueSet m_ = this.Initial_Hospital_Observation_Care();
-		IEnumerable<Encounter> n_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, m_, default));
+		IEnumerable<Encounter> n_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet o_ = this.Medical_Disability_Exam();
-		IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default));
+		IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(n_, p_);
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(l_, q_);
 		CqlValueSet s_ = this.Observation();
-		IEnumerable<Encounter> t_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, s_, default));
+		IEnumerable<Encounter> t_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet u_ = this.Office_Visit();
-		IEnumerable<Encounter> v_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, u_, default));
+		IEnumerable<Encounter> v_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, u_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(t_, v_);
 		IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(r_, w_);
 		CqlValueSet y_ = this.Telephone_Visits();
-		IEnumerable<Encounter> z_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, y_, default));
+		IEnumerable<Encounter> z_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet aa_ = this.Online_Assessments();
-		IEnumerable<Encounter> ab_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aa_, default));
+		IEnumerable<Encounter> ab_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(z_, ab_);
 		IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(x_, ac_);
 		CqlValueSet ae_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> af_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ae_, default));
+		IEnumerable<Encounter> af_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet ag_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> ah_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ag_, default));
+		IEnumerable<Encounter> ah_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> ai_ = context.Operators.Union<Encounter>(af_, ah_);
 		IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ad_, ai_);
 		CqlValueSet ak_ = this.Preventive_Care_Services_Group_Counseling();
-		IEnumerable<Encounter> al_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ak_, default));
+		IEnumerable<Encounter> al_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ak_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? an_(Encounter E)
 		{
 			List<CodeableConcept> bq_ = E?.Type;
@@ -498,15 +498,15 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Encounter> ap_ = context.Operators.Union<Encounter>(al_, ao_);
 		IEnumerable<Encounter> aq_ = context.Operators.Union<Encounter>(aj_, ap_);
 		CqlValueSet ar_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		IEnumerable<Encounter> as_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ar_, default));
+		IEnumerable<Encounter> as_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ar_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet at_ = this.Preventive_Care_Services_Individual_Counseling();
-		IEnumerable<Encounter> au_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, at_, default));
+		IEnumerable<Encounter> au_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, at_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> av_ = context.Operators.Union<Encounter>(as_, au_);
 		IEnumerable<Encounter> aw_ = context.Operators.Union<Encounter>(aq_, av_);
 		CqlValueSet ax_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> ay_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ax_, default));
+		IEnumerable<Encounter> ay_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ax_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet az_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		IEnumerable<Encounter> ba_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, az_, default));
+		IEnumerable<Encounter> ba_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, az_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> bb_ = context.Operators.Union<Encounter>(ay_, ba_);
 		IEnumerable<Encounter> bc_ = context.Operators.Union<Encounter>(aw_, bb_);
 		IEnumerable<Encounter> bd_ = Status_1_6_000.Finished_Encounter(bc_);
@@ -535,8 +535,8 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Encounter> b_(Encounter EDOrAmbulatoryVisit)
 		{
 			CqlValueSet d_ = this.Antibiotic_Medications_for_Pharyngitis();
-			IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default));
-			IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default));
+			IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			IEnumerable<MedicationRequest> i_ = Status_1_6_000.Active_Medication(h_);
 			bool? j_(MedicationRequest AntibioticOrdered)
@@ -577,9 +577,9 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	private IEnumerable<Condition> Pharyngitis_or_Tonsillitis_Value()
 	{
 		CqlValueSet a_ = this.Acute_Pharyngitis();
-		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet c_ = this.Acute_Tonsillitis();
-		IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default));
+		IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
 		IEnumerable<Condition> f_ = Status_1_6_000.Active_Condition(e_);
 
@@ -688,16 +688,16 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 		IEnumerable<Encounter> a_ = this.In_Hospice();
 		IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic();
 		CqlValueSet c_ = this.Antibiotic_Medications_for_Pharyngitis();
-		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, c_, default));
-		IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, c_, default));
+		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> g_ = context.Operators.Union<MedicationRequest>(d_, f_);
 		IEnumerable<Encounter> h_ = Antibiotic_1_5_000.Has_Antibiotic_Medication_History(b_, g_);
 		IEnumerable<Encounter> i_ = context.Operators.Union<Encounter>(a_, h_);
 		CqlValueSet k_ = this.Competing_Conditions_for_Respiratory_Conditions();
-		IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, k_, default));
+		IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Encounter> m_ = Antibiotic_1_5_000.Has_Competing_Diagnosis_History(b_, l_);
 		CqlValueSet o_ = this.Comorbid_Conditions_for_Respiratory_Conditions();
-		IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default));
+		IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Encounter> q_ = Antibiotic_1_5_000.Has_Comorbid_Condition_History(b_, p_);
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(m_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(i_, r_);
@@ -712,7 +712,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 	private IEnumerable<Observation> Group_A_Streptococcus_Lab_Test_With_Result_Value()
 	{
 		CqlValueSet a_ = this.Group_A_Streptococcus_Test();
-		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Final_Lab_Observation(b_);
 		bool? d_(Observation GroupAStreptococcusTest)
 		{

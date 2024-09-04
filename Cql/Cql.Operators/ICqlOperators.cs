@@ -575,5 +575,9 @@ namespace Hl7.Cql.Operators
         #endregion
     }
 
-    public record RetrieveParameters(PropertyInfo? CodeProperty, CqlValueSet? ValueSet, IEnumerable<CqlCode?>? Codes);
+    public record RetrieveParameters(
+        PropertyInfo? CodeProperty,
+        CqlValueSet? ValueSet,
+        IEnumerable<CqlCode?>? Codes,
+        string? TemplateId);
 }

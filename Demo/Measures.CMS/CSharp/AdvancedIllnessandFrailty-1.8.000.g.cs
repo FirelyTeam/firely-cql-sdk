@@ -245,7 +245,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -258,8 +258,8 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Has_Criteria_Indicating_Frailty_Value()
 	{
 		CqlValueSet a_ = this.Frailty_Device();
-		IEnumerable<DeviceRequest> b_ = context.Operators.Retrieve<DeviceRequest>(new RetrieveParameters(default, a_, default));
-		IEnumerable<DeviceRequest> d_ = context.Operators.Retrieve<DeviceRequest>(new RetrieveParameters(default, a_, default));
+		IEnumerable<DeviceRequest> b_ = context.Operators.Retrieve<DeviceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-devicerequest"));
+		IEnumerable<DeviceRequest> d_ = context.Operators.Retrieve<DeviceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-devicerequest"));
 		IEnumerable<DeviceRequest> e_ = context.Operators.Union<DeviceRequest>(b_, d_);
 		IEnumerable<DeviceRequest> f_ = Status_1_6_000.isDeviceOrder(e_);
 		bool? g_(DeviceRequest FrailtyDeviceOrder)
@@ -280,7 +280,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		bool? i_ = context.Operators.Exists<DeviceRequest>(h_);
 		CqlCode j_ = this.Medical_equipment_used();
 		IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(j_);
-		IEnumerable<Observation> l_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, k_));
+		IEnumerable<Observation> l_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> m_ = Status_1_6_000.isAssessmentPerformed(l_);
 		bool? n_(Observation EquipmentUsed)
 		{
@@ -302,7 +302,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		bool? p_ = context.Operators.Exists<Observation>(o_);
 		bool? q_ = context.Operators.Or(i_, p_);
 		CqlValueSet r_ = this.Frailty_Diagnosis();
-		IEnumerable<Condition> s_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, r_, default));
+		IEnumerable<Condition> s_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? t_(Condition FrailtyDiagnosis)
 		{
 			CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_0_000.prevalenceInterval(FrailtyDiagnosis);
@@ -315,7 +315,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		bool? v_ = context.Operators.Exists<Condition>(u_);
 		bool? w_ = context.Operators.Or(q_, v_);
 		CqlValueSet x_ = this.Frailty_Encounter();
-		IEnumerable<Encounter> y_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, x_, default));
+		IEnumerable<Encounter> y_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> z_ = Status_1_6_000.isEncounterPerformed(y_);
 		bool? aa_(Encounter FrailtyEncounter)
 		{
@@ -331,7 +331,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		bool? ac_ = context.Operators.Exists<Encounter>(ab_);
 		bool? ad_ = context.Operators.Or(w_, ac_);
 		CqlValueSet ae_ = this.Frailty_Symptom();
-		IEnumerable<Observation> af_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ae_, default));
+		IEnumerable<Observation> af_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> ag_ = Status_1_6_000.isSymptom(af_);
 		bool? ah_(Observation FrailtySymptom)
 		{
@@ -357,14 +357,14 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness_Value()
 	{
 		CqlValueSet a_ = this.Outpatient();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Observation();
-		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default));
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Emergency_Department_Evaluation_and_Management_Visit();
-		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default));
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Nonacute_Inpatient();
-		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default));
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		IEnumerable<Encounter> l_ = Status_1_6_000.isEncounterPerformed(k_);
@@ -447,7 +447,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Has_Inpatient_Encounter_with_Advanced_Illness_Value()
 	{
 		CqlValueSet a_ = this.Acute_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter InpatientEncounter)
 		{
@@ -491,8 +491,8 @@ public class AdvancedIllnessandFrailty_1_8_000
 	private bool? Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Dementia_Medications();
-		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default));
-		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default));
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.isMedicationActive(e_);
 		bool? g_(MedicationRequest DementiaMedication)
@@ -607,7 +607,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 66);
 		CqlCode j_ = this.Housing_status();
 		IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(j_);
-		IEnumerable<Observation> l_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, k_));
+		IEnumerable<Observation> l_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> m_ = Status_1_6_000.isAssessmentPerformed(l_);
 		bool? n_(Observation HousingStatus)
 		{

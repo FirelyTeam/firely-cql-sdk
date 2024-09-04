@@ -88,7 +88,7 @@ public class SupplementalDataElements_3_4_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -225,7 +225,7 @@ public class SupplementalDataElements_3_4_000
 	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		CqlValueSet a_ = this.Payer_Type();
-		IEnumerable<Coverage> b_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Coverage> b_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
 		(CqlConcept code, CqlInterval<CqlDateTime> period)? c_(Coverage Payer)
 		{
 			CodeableConcept e_ = Payer?.Type;

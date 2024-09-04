@@ -314,7 +314,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -371,18 +371,18 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Ophthalmological_Services();
-		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default));
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default));
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default));
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default));
+		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
 		bool? o_(Encounter QualifyingEncounter)
 		{
@@ -419,7 +419,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 		IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter)
 		{
 			CqlValueSet d_ = this.Diabetic_Retinopathy();
-			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default));
+			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? f_(Condition DiabeticRetinopathy)
 			{
 				CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.prevalenceInterval(DiabeticRetinopathy);
@@ -489,7 +489,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	private IEnumerable<Observation> Macular_Exam_Performed_Value()
 	{
 		CqlValueSet a_ = this.Macular_Exam();
-		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_(Observation MacularExam)
 		{
 			IEnumerable<Encounter> g_ = this.Diabetic_Retinopathy_Encounter();
@@ -559,7 +559,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	{
 		PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
 		CqlValueSet b_ = this.Level_of_Severity_of_Retinopathy_Findings();
-		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default));
+		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communication"));
 		IEnumerable<Communication> d_(Communication LevelOfSeverityCommunicated)
 		{
 			IEnumerable<Encounter> h_ = this.Diabetic_Retinopathy_Encounter();
@@ -608,7 +608,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	{
 		PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
 		CqlValueSet b_ = this.Macular_edema_absent__situation_();
-		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default));
+		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communication"));
 		IEnumerable<Communication> d_(Communication MacularEdemaAbsentCommunicated)
 		{
 			IEnumerable<Encounter> h_ = this.Diabetic_Retinopathy_Encounter();
@@ -657,7 +657,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	{
 		PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
 		CqlValueSet b_ = this.Macular_Edema_Findings_Present();
-		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default));
+		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communication"));
 		IEnumerable<Communication> d_(Communication MacularEdemaPresentCommunicated)
 		{
 			IEnumerable<Encounter> h_ = this.Diabetic_Retinopathy_Encounter();
@@ -724,8 +724,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	{
 		PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
 		CqlValueSet b_ = this.Level_of_Severity_of_Retinopathy_Findings();
-		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default));
-		IEnumerable<Communication> f_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default));
+		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communicationnotdone"));
+		IEnumerable<Communication> f_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communicationnotdone"));
 		IEnumerable<Communication> g_ = context.Operators.Union<Communication>(c_, f_);
 		IEnumerable<Communication> h_(Communication LevelOfSeverityNotCommunicated)
 		{
@@ -793,8 +793,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	{
 		PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
 		CqlValueSet b_ = this.Macular_edema_absent__situation_();
-		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default));
-		IEnumerable<Communication> f_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default));
+		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communicationnotdone"));
+		IEnumerable<Communication> f_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communicationnotdone"));
 		IEnumerable<Communication> g_ = context.Operators.Union<Communication>(c_, f_);
 		IEnumerable<Communication> h_(Communication MacularEdemaAbsentNotCommunicated)
 		{
@@ -862,8 +862,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 	{
 		PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
 		CqlValueSet b_ = this.Macular_Edema_Findings_Present();
-		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default));
-		IEnumerable<Communication> f_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default));
+		IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communicationnotdone"));
+		IEnumerable<Communication> f_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-communicationnotdone"));
 		IEnumerable<Communication> g_ = context.Operators.Union<Communication>(c_, f_);
 		IEnumerable<Communication> h_(Communication MacularEdemaPresentNotCommunicated)
 		{

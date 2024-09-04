@@ -237,7 +237,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -294,7 +294,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	private IEnumerable<Encounter> Telehealth_Services_Value()
 	{
 		CqlValueSet a_ = this.Telephone_Visits();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		bool? c_(Encounter TelehealthEncounter)
 		{
 			Code<Encounter.EncounterStatus> e_ = TelehealthEncounter?.StatusElement;
@@ -335,7 +335,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		bool? n_ = context.Operators.Exists<Encounter>(m_);
 		bool? o_ = context.Operators.And(j_, n_);
 		CqlValueSet p_ = this.Diabetes();
-		IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, p_, default));
+		IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? r_(Condition Diabetes)
 		{
 			CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
@@ -369,7 +369,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	private Observation Most_Recent_HbA1c_Value()
 	{
 		CqlValueSet a_ = this.HbA1c_Laboratory_Test();
-		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation RecentHbA1c)
 		{
 			Code<ObservationStatus> h_ = RecentHbA1c?.StatusElement;
@@ -439,7 +439,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	private bool? Has_No_Record_Of_HbA1c_Value()
 	{
 		CqlValueSet a_ = this.HbA1c_Laboratory_Test();
-		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation NoHbA1c)
 		{
 			Code<ObservationStatus> g_ = NoHbA1c?.StatusElement;

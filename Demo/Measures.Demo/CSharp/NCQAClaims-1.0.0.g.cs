@@ -3385,7 +3385,7 @@ public class NCQAClaims_1_0_0
 		];
 		(int? IdentifierCount, nint _)? e_((IEnumerable<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams, nint _)? ClaimProperties)
 		{
-			IEnumerable<Practitioner> at_ = context.Operators.Retrieve<Practitioner>(default);
+			IEnumerable<Practitioner> at_ = context.Operators.Retrieve<Practitioner>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Practitioner"));
 			bool? au_(Practitioner p)
 			{
 				Id bb_ = p?.IdElement;
@@ -3678,7 +3678,7 @@ public class NCQAClaims_1_0_0
 		];
 		(int? IdentifierCount, nint _)? e_((IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)? ClaimProperties)
 		{
-			IEnumerable<Location> aw_ = context.Operators.Retrieve<Location>(default);
+			IEnumerable<Location> aw_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Location"));
 			bool? ax_(Location l)
 			{
 				Id be_ = l?.IdElement;

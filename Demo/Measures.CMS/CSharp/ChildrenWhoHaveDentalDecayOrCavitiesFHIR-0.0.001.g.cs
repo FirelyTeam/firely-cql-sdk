@@ -210,7 +210,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -223,7 +223,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Clinical_Oral_Evaluation();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter ValidEncounter)
 		{
@@ -291,7 +291,7 @@ public class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001
 	private bool? Numerator_Value()
 	{
 		CqlValueSet a_ = this.Dental_Caries();
-		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? c_(Condition DentalCaries)
 		{
 			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.prevalenceInterval(DentalCaries);

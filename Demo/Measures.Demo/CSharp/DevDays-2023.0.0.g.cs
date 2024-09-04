@@ -95,7 +95,7 @@ public class DevDays_2023_0_0
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -107,7 +107,7 @@ public class DevDays_2023_0_0
 
 	private IEnumerable<Condition> Jet_engine_conditions_Value()
 	{
-		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(default);
+		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? b_(Condition c)
 		{
 			CodeableConcept d_ = c?.Code;
@@ -141,7 +141,7 @@ public class DevDays_2023_0_0
 
 	private IEnumerable<Condition> Subsequent_encounters_Value()
 	{
-		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(default);
+		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? b_(Condition c)
 		{
 			CodeableConcept d_ = c?.Code;

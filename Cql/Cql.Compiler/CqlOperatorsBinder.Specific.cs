@@ -180,7 +180,8 @@ partial class CqlOperatorsBinder
     private MethodCallExpression Retrieve(
         Expression typeExpression,
         Expression valueSetOrCodes,
-        Expression codePropertyExpression)
+        Expression codePropertyExpression,
+        Expression templateId)
     {
         if (typeExpression is not ConstantExpression ce || ce.Type != typeof(Type))
             throw new ArgumentException("First parameter to Retrieve is expected to be a constant Type", nameof(typeExpression));
@@ -199,7 +200,7 @@ partial class CqlOperatorsBinder
             codePropertyExpression = Expression.Call(typeOf, method, Expression.Constant(propName));
         }
 
-        return Retrieve(type, valueSetOrCodes, codePropertyExpression);
+        return Retrieve(type, valueSetOrCodes, codePropertyExpression, templateId);
 
     }
 
@@ -207,7 +208,8 @@ partial class CqlOperatorsBinder
     protected MethodCallExpression Retrieve(
         Type resourceType,
         Expression codes,
-        Expression codeProperty)
+        Expression codeProperty,
+        Expression templateId)
     {
         var forType = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.Retrieve))!.MakeGenericMethod(resourceType);
         Expression codeExpression = NullExpression.ForType<IEnumerable<CqlCode>>();
@@ -238,9 +240,12 @@ partial class CqlOperatorsBinder
             throw new ArgumentException($"Retrieve statements can only accept terminology expressions whose type is {nameof(CqlValueSet)} or {nameof(IEnumerable<CqlCode>)}.  The expression provided has a type of {codes.Type.FullName}", nameof(codes));
 
         var constructor = typeof(RetrieveParameters).GetConstructors(BindingFlags.Public | BindingFlags.Instance).Single();
-        var hasFilters = !codeProperty.IsNullConstant() || !codeExpression.IsNullConstant() || !valuesetExpression.IsNullConstant();
+        var hasFilters = !codeProperty.IsNullConstant() || !codeExpression.IsNullConstant()
+                                                        || !valuesetExpression.IsNullConstant()
+                                                        || !templateId.IsNullConstant();
+
         Expression createParameters = hasFilters
-                                   ? Expression.New(constructor, codeProperty, valuesetExpression, codeExpression)
+                                   ? Expression.New(constructor, codeProperty, valuesetExpression, codeExpression, templateId)
                                    : NullExpression.ForType<RetrieveParameters>();
 
         var call = BindToDirectMethod(forType, createParameters);

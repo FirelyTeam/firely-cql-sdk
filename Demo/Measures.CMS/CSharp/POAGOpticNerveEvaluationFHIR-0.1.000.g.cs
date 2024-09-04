@@ -222,7 +222,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -279,18 +279,18 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Ophthalmological_Services();
-		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default));
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default));
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default));
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default));
+		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
 		bool? o_(Encounter QualifyingEncounter)
 		{
@@ -327,7 +327,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 		IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter)
 		{
 			CqlValueSet d_ = this.Primary_Open_Angle_Glaucoma();
-			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default));
+			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? f_(Condition PrimaryOpenAngleGlaucoma)
 			{
 				CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.prevalenceInterval(PrimaryOpenAngleGlaucoma);
@@ -408,8 +408,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio_Value()
 	{
 		CqlValueSet a_ = this.Cup_to_Disc_Ratio();
-		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
-		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
+		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation CupToDiscExamNotPerformed)
 		{
@@ -473,8 +473,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam_Value()
 	{
 		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
-		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
-		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
+		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation OpticDiscExamNotPerformed)
 		{
@@ -553,7 +553,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result_Value()
 	{
 		CqlValueSet a_ = this.Cup_to_Disc_Ratio();
-		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_(Observation CupToDiscExamPerformed)
 		{
 			IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter();
@@ -607,7 +607,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	private IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result_Value()
 	{
 		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
-		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default));
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_(Observation OpticDiscExamPerformed)
 		{
 			IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter();

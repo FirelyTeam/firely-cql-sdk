@@ -179,7 +179,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -226,12 +226,12 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		IEnumerable<Encounter> b_(Encounter InpatientEncounter)
 		{
 			CqlValueSet d_ = this.Schedule_II_and_III_Opioid_Medications();
-			IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default));
-			IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default));
+			IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
+			IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 			IEnumerable<MedicationRequest> h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			CqlValueSet i_ = this.Schedule_IV_Benzodiazepines();
-			IEnumerable<MedicationRequest> j_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, i_, default));
-			IEnumerable<MedicationRequest> l_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, i_, default));
+			IEnumerable<MedicationRequest> j_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
+			IEnumerable<MedicationRequest> l_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 			IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(j_, l_);
 			bool? n_(MedicationRequest Medications)
 			{
@@ -347,7 +347,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		bool? b_(Encounter InpatientEncounter)
 		{
 			CqlValueSet j_ = this.Schedule_II_and_III_Opioid_Medications();
-			IEnumerable<MedicationRequest> k_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, j_, default));
+			IEnumerable<MedicationRequest> k_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 			bool? l_(MedicationRequest Opioids)
 			{
 				FhirDateTime r_ = Opioids?.AuthoredOnElement;
@@ -375,7 +375,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		IEnumerable<Encounter> e_(Encounter InpatientEncounter)
 		{
 			CqlValueSet x_ = this.Schedule_II_and_III_Opioid_Medications();
-			IEnumerable<MedicationRequest> y_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default));
+			IEnumerable<MedicationRequest> y_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 			bool? z_(MedicationRequest OpioidsDischarge)
 			{
 				FhirDateTime ad_ = OpioidsDischarge?.AuthoredOnElement;
@@ -397,7 +397,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		IEnumerable<Encounter> g_(Encounter InpatientEncounter)
 		{
 			CqlValueSet ai_ = this.Schedule_IV_Benzodiazepines();
-			IEnumerable<MedicationRequest> aj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ai_, default));
+			IEnumerable<MedicationRequest> aj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 			bool? ak_(MedicationRequest BenzodiazepinesDischarge)
 			{
 				FhirDateTime ao_ = BenzodiazepinesDischarge?.AuthoredOnElement;
@@ -431,7 +431,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		bool? b_(Encounter InpatientEncounter)
 		{
 			CqlValueSet f_ = this.All_Primary_and_Secondary_Cancer();
-			IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default));
+			IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 			bool? h_(Condition Cancer)
 			{
 				CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Cancer);
@@ -444,7 +444,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 			bool? j_ = context.Operators.Exists<Condition>(i_);
 			CqlValueSet k_ = this.Palliative_or_Hospice_Care();
-			IEnumerable<ServiceRequest> l_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, k_, default));
+			IEnumerable<ServiceRequest> l_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
 			bool? m_(ServiceRequest PalliativeOrHospiceCareOrder)
 			{
 				FhirDateTime af_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
@@ -462,7 +462,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			IEnumerable<ServiceRequest> n_ = context.Operators.Where<ServiceRequest>(l_, m_);
 			bool? o_ = context.Operators.Exists<ServiceRequest>(n_);
 			bool? p_ = context.Operators.Or(j_, o_);
-			IEnumerable<Procedure> r_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, k_, default));
+			IEnumerable<Procedure> r_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 			bool? s_(Procedure PalliativeOrHospiceCarePerformed)
 			{
 				DataType ao_ = PalliativeOrHospiceCarePerformed?.Performed;
