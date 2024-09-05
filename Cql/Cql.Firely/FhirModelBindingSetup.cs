@@ -33,14 +33,17 @@ namespace Hl7.Cql.Fhir
             IDataSource? dataSource,
             IValueSetDictionary? valuesets,
             DateTimeOffset? now,
-            FhirModelBindingOptions? options)
+            FhirModelBindingOptions? options,
+            TypeConverter? typeConverter)
         {
             _options = options ?? FhirModelBindingOptions.Default;
+
+            _typeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector, _options.LRUCacheSize);
 
             Comparers = new CqlComparers();
             Operators = CqlOperators.Create(
                     TypeResolver,
-                    FhirTypeConverter.Create(ModelInfo.ModelInspector, _options.LRUCacheSize),
+                    _typeConverter,
                     dataSource,
                     Comparers,
                     valuesets,
@@ -48,7 +51,7 @@ namespace Hl7.Cql.Fhir
                     now is not null ?
                         new DateTimeIso8601(now.Value, DateTimePrecision.Millisecond) : null,
                     FhirEnumComparer.Default);
-
+            
             Comparers
                 .AddIntervalComparisons(Operators)
                 .AddFhirComparers();
@@ -59,20 +62,10 @@ namespace Hl7.Cql.Fhir
             if (_options?.CodeInOperatorType == FhirModelBindingOptions.CodeInOperatorSemantics.Equivalent)
                 Comparers.Register(typeof(CqlCode), new CqlCodeCqlEquivalentComparer(StringComparer.OrdinalIgnoreCase));
         }
-
-        /// <summary>
-        /// Creates a model binding for the .NET SDK POCO's with the default 
-        /// <see cref="FhirModelBindingOptions"/>.
-        /// </summary>
-        public FhirModelBindingSetup(
-            IDataSource? dataSource,
-            IValueSetDictionary? valuesets,
-            DateTimeOffset? now) : this(dataSource, valuesets, now, FhirModelBindingOptions.Default)
-        {
-            // Nothing
-        }
-
+        
         private readonly FhirModelBindingOptions? _options;
+
+        private readonly TypeConverter _typeConverter;
 
         public override TypeResolver TypeResolver => FhirTypeResolver.Default;
 

@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -24,9 +25,10 @@ namespace Hl7.Cql.Fhir
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            FhirModelBindingOptions? options = null) =>
+            FhirModelBindingOptions? options = null,
+            TypeConverter? typeConverter = null) =>
             new CqlContext(
-                new FhirModelBindingSetup(dataSource, valueSets, now, options).Operators,
+                new FhirModelBindingSetup(dataSource, valueSets, now, options, typeConverter).Operators,
                 parameters,
                 delegates);
 
@@ -38,13 +40,14 @@ namespace Hl7.Cql.Fhir
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            FhirModelBindingOptions? options = null)
+            FhirModelBindingOptions? options = null,
+            TypeConverter? typeConverter = null)
         {
             IDataSource source = bundle is not null ?
               new BundleDataSource(bundle, valueSets ?? new HashValueSetDictionary()) :
               new CompositeDataSource();
 
-            return WithDataSource(source, parameters, valueSets, now, delegates, options);
+            return WithDataSource(source, parameters, valueSets, now, delegates, options, typeConverter);
         }
 
         /// <summary>
@@ -55,9 +58,10 @@ namespace Hl7.Cql.Fhir
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            FhirModelBindingOptions? options = null)
+            FhirModelBindingOptions? options = null,
+            TypeConverter? typeConverter = null)
         {
-            return createContext(source, parameters, valueSets, now, delegates, options);
+            return createContext(source, parameters, valueSets, now, delegates, options, typeConverter);
         }
     }
 }
