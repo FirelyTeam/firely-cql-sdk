@@ -105,7 +105,6 @@ namespace Hl7.Cql.Runtime
         public IDataSource DataSource { get; }
         public CqlDateTime NowValue { get; }
 
-        internal IEqualityComparer<object> EqualityComparer { get; }
         internal IComparer<object> DataComparer { get; }
         internal ICqlComparer EnumComparer { get; }
 
@@ -182,13 +181,9 @@ namespace Hl7.Cql.Runtime
 
         public object NotSupported() => throw new NotSupportedException();
 
-        public bool? Equals(object? x, object? y, string? precision) => Comparer.Equals(x, y, precision);
-
         public int? Compare(object? x, object? y, string? precision) => Comparer.Compare(x, y, precision);
 
         public int GetHashCode(object x) => Comparer.GetHashCode(x);
-
-        public bool Equivalent(object? x, object? y, string? precision) => Comparer.Equivalent(x, y, precision);
 
         public T? Convert<T>(object? from) => TypeConverter.Convert<T>(from);
 
