@@ -121,134 +121,134 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+	private  CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+	public  CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Ethnicity_Value() => 
+	private  CqlValueSet Ethnicity_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
-	public CqlValueSet Ethnicity() => 
+	public  CqlValueSet Ethnicity() => 
 		__Ethnicity.Value;
 
-	private CqlValueSet Hospital_Dietitian_Referral_Value() => 
+	private  CqlValueSet Hospital_Dietitian_Referral_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.91", default);
 
     [CqlDeclaration("Hospital Dietitian Referral")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.91")]
-	public CqlValueSet Hospital_Dietitian_Referral() => 
+	public  CqlValueSet Hospital_Dietitian_Referral() => 
 		__Hospital_Dietitian_Referral.Value;
 
-	private CqlValueSet Malnutrition_Diagnosis_Value() => 
+	private  CqlValueSet Malnutrition_Diagnosis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.55", default);
 
     [CqlDeclaration("Malnutrition Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.55")]
-	public CqlValueSet Malnutrition_Diagnosis() => 
+	public  CqlValueSet Malnutrition_Diagnosis() => 
 		__Malnutrition_Diagnosis.Value;
 
-	private CqlValueSet Malnutrition_Risk_Screening_Value() => 
+	private  CqlValueSet Malnutrition_Risk_Screening_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.92", default);
 
     [CqlDeclaration("Malnutrition Risk Screening")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.92")]
-	public CqlValueSet Malnutrition_Risk_Screening() => 
+	public  CqlValueSet Malnutrition_Risk_Screening() => 
 		__Malnutrition_Risk_Screening.Value;
 
-	private CqlValueSet Malnutrition_Screening_At_Risk_Result_Value() => 
+	private  CqlValueSet Malnutrition_Screening_At_Risk_Result_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.38", default);
 
     [CqlDeclaration("Malnutrition Screening At Risk Result")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.38")]
-	public CqlValueSet Malnutrition_Screening_At_Risk_Result() => 
+	public  CqlValueSet Malnutrition_Screening_At_Risk_Result() => 
 		__Malnutrition_Screening_At_Risk_Result.Value;
 
-	private CqlValueSet Malnutrition_Screening_Not_At_Risk_Result_Value() => 
+	private  CqlValueSet Malnutrition_Screening_Not_At_Risk_Result_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.34", default);
 
     [CqlDeclaration("Malnutrition Screening Not At Risk Result")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.34")]
-	public CqlValueSet Malnutrition_Screening_Not_At_Risk_Result() => 
+	public  CqlValueSet Malnutrition_Screening_Not_At_Risk_Result() => 
 		__Malnutrition_Screening_Not_At_Risk_Result.Value;
 
-	private CqlValueSet Nutrition_Assessment_Value() => 
+	private  CqlValueSet Nutrition_Assessment_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.21", default);
 
     [CqlDeclaration("Nutrition Assessment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.21")]
-	public CqlValueSet Nutrition_Assessment() => 
+	public  CqlValueSet Nutrition_Assessment() => 
 		__Nutrition_Assessment.Value;
 
-	private CqlValueSet Nutrition_Assessment_Status_Moderately_Malnourished_Value() => 
+	private  CqlValueSet Nutrition_Assessment_Status_Moderately_Malnourished_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.44", default);
 
     [CqlDeclaration("Nutrition Assessment Status Moderately Malnourished")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.44")]
-	public CqlValueSet Nutrition_Assessment_Status_Moderately_Malnourished() => 
+	public  CqlValueSet Nutrition_Assessment_Status_Moderately_Malnourished() => 
 		__Nutrition_Assessment_Status_Moderately_Malnourished.Value;
 
-	private CqlValueSet Nutrition_Assessment_Status_Not_or_Mildly_Malnourished_Value() => 
+	private  CqlValueSet Nutrition_Assessment_Status_Not_or_Mildly_Malnourished_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.48", default);
 
     [CqlDeclaration("Nutrition Assessment Status Not or Mildly Malnourished")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.48")]
-	public CqlValueSet Nutrition_Assessment_Status_Not_or_Mildly_Malnourished() => 
+	public  CqlValueSet Nutrition_Assessment_Status_Not_or_Mildly_Malnourished() => 
 		__Nutrition_Assessment_Status_Not_or_Mildly_Malnourished.Value;
 
-	private CqlValueSet Nutrition_Assessment_Status_Severely_Malnourished_Value() => 
+	private  CqlValueSet Nutrition_Assessment_Status_Severely_Malnourished_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.42", default);
 
     [CqlDeclaration("Nutrition Assessment Status Severely Malnourished")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.42")]
-	public CqlValueSet Nutrition_Assessment_Status_Severely_Malnourished() => 
+	public  CqlValueSet Nutrition_Assessment_Status_Severely_Malnourished() => 
 		__Nutrition_Assessment_Status_Severely_Malnourished.Value;
 
-	private CqlValueSet Nutrition_Care_Plan_Value() => 
+	private  CqlValueSet Nutrition_Care_Plan_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.93", default);
 
     [CqlDeclaration("Nutrition Care Plan")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.93")]
-	public CqlValueSet Nutrition_Care_Plan() => 
+	public  CqlValueSet Nutrition_Care_Plan() => 
 		__Nutrition_Care_Plan.Value;
 
-	private CqlValueSet ONC_Administrative_Sex_Value() => 
+	private  CqlValueSet ONC_Administrative_Sex_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
-	public CqlValueSet ONC_Administrative_Sex() => 
+	public  CqlValueSet ONC_Administrative_Sex() => 
 		__ONC_Administrative_Sex.Value;
 
-	private CqlValueSet Payer_Type_Value() => 
+	private  CqlValueSet Payer_Type_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
 
     [CqlDeclaration("Payer Type")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
-	public CqlValueSet Payer_Type() => 
+	public  CqlValueSet Payer_Type() => 
 		__Payer_Type.Value;
 
-	private CqlValueSet Race_Value() => 
+	private  CqlValueSet Race_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
-	public CqlValueSet Race() => 
+	public  CqlValueSet Race() => 
 		__Race.Value;
 
-	private CqlCode Birth_date_Value() => 
+	private  CqlCode Birth_date_Value() => 
 		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
+	public  CqlCode Birth_date() => 
 		__Birth_date.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", default, default),
@@ -258,10 +258,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = []
 ;
@@ -270,10 +270,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlCode[] ICD10CM_Value()
+	private  CqlCode[] ICD10CM_Value()
 	{
 		CqlCode[] a_ = []
 ;
@@ -282,10 +282,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("ICD10CM")]
-	public CqlCode[] ICD10CM() => 
+	public  CqlCode[] ICD10CM() => 
 		__ICD10CM.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -296,10 +296,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -308,10 +308,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -319,10 +319,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -330,10 +330,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer Type")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type() => 
 		__SDE_Payer_Type.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -341,10 +341,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -352,10 +352,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Encounter> Qualifying_Encounter_Value()
+	private  IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -390,17 +390,18 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ah_ = context.Operators.And(ac_, ag_);
 
 			return ah_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Qualifying Encounter")]
-	public IEnumerable<Encounter> Qualifying_Encounter() => 
+	public  IEnumerable<Encounter> Qualifying_Encounter() => 
 		__Qualifying_Encounter.Value;
 
-	private IEnumerable<Encounter> Initial_Population_Value()
+	private  IEnumerable<Encounter> Initial_Population_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 
@@ -408,10 +409,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public IEnumerable<Encounter> Initial_Population() => 
+	public  IEnumerable<Encounter> Initial_Population() => 
 		__Initial_Population.Value;
 
-	private IEnumerable<Encounter> Measure_Population_Value()
+	private  IEnumerable<Encounter> Measure_Population_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population();
 
@@ -419,10 +420,10 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measure Population")]
-	public IEnumerable<Encounter> Measure_Population() => 
+	public  IEnumerable<Encounter> Measure_Population() => 
 		__Measure_Population.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Hospital_Dietitian_Referral_Value()
+	private  IEnumerable<Encounter> Encounter_with_Hospital_Dietitian_Referral_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Hospital_Dietitian_Referral();
@@ -433,7 +434,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			(Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)?> f_ = context.Operators.Select<ValueTuple<Encounter, Procedure>, (Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)? tuple_blodcpfeecjfnodfofhfzlqfa)
 		{
@@ -459,20 +461,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? aa_ = context.Operators.And(u_, z_);
 
 			return aa_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)? tuple_blodcpfeecjfnodfofhfzlqfa) => 
 			tuple_blodcpfeecjfnodfofhfzlqfa?.QualifyingEncounter;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)?, Encounter>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Encounter with Hospital Dietitian Referral")]
-	public IEnumerable<Encounter> Encounter_with_Hospital_Dietitian_Referral() => 
+	public  IEnumerable<Encounter> Encounter_with_Hospital_Dietitian_Referral() => 
 		__Encounter_with_Hospital_Dietitian_Referral.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_Value()
+	private  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Risk_Screening();
@@ -483,7 +487,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?> f_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? tuple_bejjtwegpxjsnajsodybefddb)
 		{
@@ -519,20 +524,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? al_ = context.Operators.And(ab_, ak_);
 
 			return al_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? tuple_bejjtwegpxjsnajsodybefddb) => 
 			tuple_bejjtwegpxjsnajsodybefddb?.QualifyingEncounter;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?, Encounter>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Encounter with Malnutrition Risk Screening")]
-	public IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening() => 
+	public  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening() => 
 		__Encounter_with_Malnutrition_Risk_Screening.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral_Value()
+	private  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		bool? b_(Encounter QualifyingEncounter)
@@ -544,20 +551,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? j_ = context.Operators.Or(g_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter QualifyingEncounter) => 
 			QualifyingEncounter;
+;
 		IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Encounter with Malnutrition Risk Screening or with Hospital Dietitian Referral")]
-	public IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral() => 
+	public  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral() => 
 		__Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk_Value()
+	private  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Risk_Screening();
@@ -568,7 +577,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?> f_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? tuple_bejjtwegpxjsnajsodybefddb)
 		{
@@ -600,20 +610,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ag_ = context.Operators.And(ab_, af_);
 
 			return ag_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? tuple_bejjtwegpxjsnajsodybefddb) => 
 			tuple_bejjtwegpxjsnajsodybefddb?.QualifyingEncounter;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?, Encounter>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Encounter with Malnutrition Risk Screening Not at Risk")]
-	public IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk() => 
+	public  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk() => 
 		__Encounter_with_Malnutrition_Risk_Screening_Not_at_Risk.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral_Value()
+	private  IEnumerable<Encounter> Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		bool? b_(Encounter QualifyingEncounter)
@@ -626,20 +638,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? k_ = context.Operators.And(g_, j_);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter QualifyingEncounter) => 
 			QualifyingEncounter;
+;
 		IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Encounter with Malnutrition Not at Risk Screening and without Hospital Dietitian Referral")]
-	public IEnumerable<Encounter> Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral() => 
+	public  IEnumerable<Encounter> Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral() => 
 		__Encounter_with_Malnutrition_Not_at_Risk_Screening_and_without_Hospital_Dietitian_Referral.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_at_Risk_Value()
+	private  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_at_Risk_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Risk_Screening();
@@ -650,7 +664,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?> f_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? tuple_bejjtwegpxjsnajsodybefddb)
 		{
@@ -682,20 +697,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ag_ = context.Operators.And(ab_, af_);
 
 			return ag_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? tuple_bejjtwegpxjsnajsodybefddb) => 
 			tuple_bejjtwegpxjsnajsodybefddb?.QualifyingEncounter;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?, Encounter>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Encounter with Malnutrition Risk Screening at Risk")]
-	public IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_at_Risk() => 
+	public  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_at_Risk() => 
 		__Encounter_with_Malnutrition_Risk_Screening_at_Risk.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral_Value()
+	private  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		bool? b_(Encounter QualifyingEncounter)
@@ -707,20 +724,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? j_ = context.Operators.Or(g_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		Encounter d_(Encounter QualifyingEncounter) => 
 			QualifyingEncounter;
+;
 		IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Encounter with Malnutrition Risk Screening at Risk or with Hospital Dietitian Referral")]
-	public IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral() => 
+	public  IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral() => 
 		__Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_and_Identified_Status_Value()
+	private  IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_and_Identified_Status_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Assessment();
@@ -731,7 +750,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			(Encounter QualifyingEncounter, Observation NutritionAssessment)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation NutritionAssessment)?> f_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (Encounter QualifyingEncounter, Observation NutritionAssessment)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounter, Observation NutritionAssessment)? tuple_hhhypfjvjujitmizocefugcne)
 		{
@@ -771,20 +791,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? aq_ = context.Operators.And(ab_, ap_);
 
 			return aq_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation NutritionAssessment)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation NutritionAssessment)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation NutritionAssessment)? tuple_hhhypfjvjujitmizocefugcne) => 
 			tuple_hhhypfjvjujitmizocefugcne?.QualifyingEncounter;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounter, Observation NutritionAssessment)?, Encounter>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Encounter with Nutrition Assessment and Identified Status")]
-	public IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_and_Identified_Status() => 
+	public  IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_and_Identified_Status() => 
 		__Encounter_with_Nutrition_Assessment_and_Identified_Status.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished_Value()
+	private  IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Assessment();
@@ -795,7 +817,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			(Encounter QualifyingEncounter, Observation NutritionAssessment)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation NutritionAssessment)?> f_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (Encounter QualifyingEncounter, Observation NutritionAssessment)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounter, Observation NutritionAssessment)? tuple_hhhypfjvjujitmizocefugcne)
 		{
@@ -831,20 +854,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? al_ = context.Operators.And(ab_, ak_);
 
 			return al_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation NutritionAssessment)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation NutritionAssessment)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation NutritionAssessment)? tuple_hhhypfjvjujitmizocefugcne) => 
 			tuple_hhhypfjvjujitmizocefugcne?.QualifyingEncounter;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounter, Observation NutritionAssessment)?, Encounter>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Encounter with Nutrition Assessment Status Moderately Or Severely Malnourished")]
-	public IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished() => 
+	public  IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished() => 
 		__Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished_Value()
+	private  IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Assessment();
@@ -855,7 +880,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			(Encounter QualifyingEncounter, Observation NutritionAssessment)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation NutritionAssessment)?> f_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (Encounter QualifyingEncounter, Observation NutritionAssessment)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounter, Observation NutritionAssessment)? tuple_hhhypfjvjujitmizocefugcne)
 		{
@@ -887,20 +913,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ag_ = context.Operators.And(ab_, af_);
 
 			return ag_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Observation NutritionAssessment)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation NutritionAssessment)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation NutritionAssessment)? tuple_hhhypfjvjujitmizocefugcne) => 
 			tuple_hhhypfjvjujitmizocefugcne?.QualifyingEncounter;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounter, Observation NutritionAssessment)?, Encounter>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Encounter with Nutrition Assessment Not or Mildly Malnourished")]
-	public IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished() => 
+	public  IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished() => 
 		__Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Malnutrition_Diagnosis_Value()
+	private  IEnumerable<Encounter> Encounter_with_Malnutrition_Diagnosis_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Diagnosis();
@@ -911,7 +939,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			(Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)?> f_ = context.Operators.Select<ValueTuple<Encounter, Condition>, (Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)? tuple_gsigyornrkjgexbhejviwntmn)
 		{
@@ -926,20 +955,22 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? t_ = context.Operators.And(o_, s_);
 
 			return t_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)? tuple_gsigyornrkjgexbhejviwntmn) => 
 			tuple_gsigyornrkjgexbhejviwntmn?.QualifyingEncounter;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)?, Encounter>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Encounter with Malnutrition Diagnosis")]
-	public IEnumerable<Encounter> Encounter_with_Malnutrition_Diagnosis() => 
+	public  IEnumerable<Encounter> Encounter_with_Malnutrition_Diagnosis() => 
 		__Encounter_with_Malnutrition_Diagnosis.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Nutrition_Care_Plan_Value()
+	private  IEnumerable<Encounter> Encounter_with_Nutrition_Care_Plan_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Care_Plan();
@@ -950,7 +981,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			(Encounter QualifyingEncounter, Procedure NutritionCarePlan)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Procedure NutritionCarePlan)?> f_ = context.Operators.Select<ValueTuple<Encounter, Procedure>, (Encounter QualifyingEncounter, Procedure NutritionCarePlan)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounter, Procedure NutritionCarePlan)? tuple_igutmwhaufjcwzmijcgjeysm)
 		{
@@ -975,27 +1007,29 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? aa_ = context.Operators.And(u_, z_);
 
 			return aa_;
-		};
+		}
+;
 		IEnumerable<(Encounter QualifyingEncounter, Procedure NutritionCarePlan)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Procedure NutritionCarePlan)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Procedure NutritionCarePlan)? tuple_igutmwhaufjcwzmijcgjeysm) => 
 			tuple_igutmwhaufjcwzmijcgjeysm?.QualifyingEncounter;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounter, Procedure NutritionCarePlan)?, Encounter>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Encounter with Nutrition Care Plan")]
-	public IEnumerable<Encounter> Encounter_with_Nutrition_Care_Plan() => 
+	public  IEnumerable<Encounter> Encounter_with_Nutrition_Care_Plan() => 
 		__Encounter_with_Nutrition_Care_Plan.Value;
 
     [CqlDeclaration("Measure Observation 1")]
-	public int? Measure_Observation_1(Encounter MalnutritionRiskScreening) => 
+	public  int? Measure_Observation_1(Encounter MalnutritionRiskScreening) => 
 		((context.Operators.Contains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral(), MalnutritionRiskScreening) ?? false)
 			? 1
 			: 0);
 
     [CqlDeclaration("Measure Observation 2")]
-	public int? Measure_Observation_2(Encounter NutritionAssessment)
+	public  int? Measure_Observation_2(Encounter NutritionAssessment)
 	{
 		int? a_()
 		{
@@ -1005,14 +1039,16 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 				bool? e_ = context.Operators.Contains<Encounter>(d_, NutritionAssessment);
 
 				return (e_ ?? false);
-			};
+			}
+;
 			bool c_()
 			{
 				IEnumerable<Encounter> f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral();
 				bool? g_ = context.Operators.Contains<Encounter>(f_, NutritionAssessment);
 
 				return (g_ ?? false);
-			};
+			}
+;
 			if (b_())
 			{
 				return 0;
@@ -1027,13 +1063,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			{
 				return 0;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Measure Observation 3")]
-	public int? Measure_Observation_3(Encounter MalnutritionDiagonsis)
+	public  int? Measure_Observation_3(Encounter MalnutritionDiagonsis)
 	{
 		int? a_()
 		{
@@ -1043,14 +1080,16 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 				bool? e_ = context.Operators.Contains<Encounter>(d_, MalnutritionDiagonsis);
 
 				return (e_ ?? false);
-			};
+			}
+;
 			bool c_()
 			{
 				IEnumerable<Encounter> f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral();
 				bool? g_ = context.Operators.Contains<Encounter>(f_, MalnutritionDiagonsis);
 
 				return (g_ ?? false);
-			};
+			}
+;
 			if (b_())
 			{
 				return 0;
@@ -1065,7 +1104,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 						bool? k_ = context.Operators.Contains<Encounter>(j_, MalnutritionDiagonsis);
 
 						return (k_ ?? false);
-					};
+					}
+;
 					if (i_())
 					{
 						int? l_()
@@ -1076,14 +1116,16 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 								bool? p_ = context.Operators.Contains<Encounter>(o_, MalnutritionDiagonsis);
 
 								return (p_ ?? false);
-							};
+							}
+;
 							bool n_()
 							{
 								IEnumerable<Encounter> q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished();
 								bool? r_ = context.Operators.Contains<Encounter>(q_, MalnutritionDiagonsis);
 
 								return (r_ ?? false);
-							};
+							}
+;
 							if (m_())
 							{
 								return 0;
@@ -1096,7 +1138,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							{
 								return 0;
 							}
-						};
+						}
+;
 
 						return l_();
 					}
@@ -1104,7 +1147,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					{
 						return 0;
 					}
-				};
+				}
+;
 
 				return h_();
 			}
@@ -1112,13 +1156,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			{
 				return 0;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Measure Observation 4")]
-	public int? Measure_Observation_4(Encounter NutritionCarePlan)
+	public  int? Measure_Observation_4(Encounter NutritionCarePlan)
 	{
 		int? a_()
 		{
@@ -1128,14 +1173,16 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 				bool? e_ = context.Operators.Contains<Encounter>(d_, NutritionCarePlan);
 
 				return (e_ ?? false);
-			};
+			}
+;
 			bool c_()
 			{
 				IEnumerable<Encounter> f_ = this.Encounter_with_Malnutrition_Risk_Screening_at_Risk_or_with_Hospital_Dietitian_Referral();
 				bool? g_ = context.Operators.Contains<Encounter>(f_, NutritionCarePlan);
 
 				return (g_ ?? false);
-			};
+			}
+;
 			if (b_())
 			{
 				return 0;
@@ -1150,7 +1197,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 						bool? k_ = context.Operators.Contains<Encounter>(j_, NutritionCarePlan);
 
 						return (k_ ?? false);
-					};
+					}
+;
 					if (i_())
 					{
 						int? l_()
@@ -1161,14 +1209,16 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 								bool? p_ = context.Operators.Contains<Encounter>(o_, NutritionCarePlan);
 
 								return (p_ ?? false);
-							};
+							}
+;
 							bool n_()
 							{
 								IEnumerable<Encounter> q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished();
 								bool? r_ = context.Operators.Contains<Encounter>(q_, NutritionCarePlan);
 
 								return (r_ ?? false);
-							};
+							}
+;
 							if (m_())
 							{
 								return 0;
@@ -1181,7 +1231,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 							{
 								return 0;
 							}
-						};
+						}
+;
 
 						return l_();
 					}
@@ -1189,7 +1240,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 					{
 						return 0;
 					}
-				};
+				}
+;
 
 				return h_();
 			}
@@ -1197,13 +1249,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			{
 				return 0;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Measure Observation TotalMalnutritionComponentsScore")]
-	public int? Measure_Observation_TotalMalnutritionComponentsScore(Encounter QualifyingEncounter)
+	public  int? Measure_Observation_TotalMalnutritionComponentsScore(Encounter QualifyingEncounter)
 	{
 		int? a_ = this.Measure_Observation_1(QualifyingEncounter);
 		int? b_ = this.Measure_Observation_2(QualifyingEncounter);
@@ -1221,7 +1274,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	}
 
     [CqlDeclaration("TotalMalnutritionCompositeScore Eligible Denominators")]
-	public int? TotalMalnutritionCompositeScore_Eligible_Denominators(Encounter QualifyingEncounter)
+	public  int? TotalMalnutritionCompositeScore_Eligible_Denominators(Encounter QualifyingEncounter)
 	{
 		int? a_()
 		{
@@ -1238,7 +1291,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 				bool? l_ = context.Operators.And(h_, k_);
 
 				return (l_ ?? false);
-			};
+			}
+;
 			bool c_()
 			{
 				IEnumerable<Encounter> m_ = this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral();
@@ -1258,7 +1312,8 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 				bool? aa_ = context.Operators.Or(w_, z_);
 
 				return (aa_ ?? false);
-			};
+			}
+;
 			if (b_())
 			{
 				return 1;
@@ -1271,13 +1326,14 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			{
 				return 4;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Measure Observation TotalMalnutritionCompositeScore as Percentage")]
-	public decimal? Measure_Observation_TotalMalnutritionCompositeScore_as_Percentage(Encounter QualifyingEncounter)
+	public  decimal? Measure_Observation_TotalMalnutritionCompositeScore_as_Percentage(Encounter QualifyingEncounter)
 	{
 		decimal? a_ = context.Operators.ConvertIntegerToDecimal(100);
 		int? b_ = this.Measure_Observation_TotalMalnutritionComponentsScore(QualifyingEncounter);

@@ -295,467 +295,467 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Anaphylactic_Reaction_to_DTaP_Vaccine_Value() => 
+	private  CqlValueSet Anaphylactic_Reaction_to_DTaP_Vaccine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1031", default);
 
     [CqlDeclaration("Anaphylactic Reaction to DTaP Vaccine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1031")]
-	public CqlValueSet Anaphylactic_Reaction_to_DTaP_Vaccine() => 
+	public  CqlValueSet Anaphylactic_Reaction_to_DTaP_Vaccine() => 
 		__Anaphylactic_Reaction_to_DTaP_Vaccine.Value;
 
-	private CqlValueSet Disorders_of_the_Immune_System_Value() => 
+	private  CqlValueSet Disorders_of_the_Immune_System_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1001", default);
 
     [CqlDeclaration("Disorders of the Immune System")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1001")]
-	public CqlValueSet Disorders_of_the_Immune_System() => 
+	public  CqlValueSet Disorders_of_the_Immune_System() => 
 		__Disorders_of_the_Immune_System.Value;
 
-	private CqlValueSet DTaP_Vaccine_Value() => 
+	private  CqlValueSet DTaP_Vaccine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1214", default);
 
     [CqlDeclaration("DTaP Vaccine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1214")]
-	public CqlValueSet DTaP_Vaccine() => 
+	public  CqlValueSet DTaP_Vaccine() => 
 		__DTaP_Vaccine.Value;
 
-	private CqlValueSet DTaP_Vaccine_Administered_Value() => 
+	private  CqlValueSet DTaP_Vaccine_Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1022", default);
 
     [CqlDeclaration("DTaP Vaccine Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1022")]
-	public CqlValueSet DTaP_Vaccine_Administered() => 
+	public  CqlValueSet DTaP_Vaccine_Administered() => 
 		__DTaP_Vaccine_Administered.Value;
 
-	private CqlValueSet Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine_Value() => 
+	private  CqlValueSet Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1164", default);
 
     [CqlDeclaration("Encephalitis Due to Diphtheria, Tetanus or Pertussis Vaccine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1164")]
-	public CqlValueSet Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine() => 
+	public  CqlValueSet Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine() => 
 		__Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+	private  CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+	public  CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Haemophilus_Influenzae_Type_B__Hib__Vaccine_Administered_Value() => 
+	private  CqlValueSet Haemophilus_Influenzae_Type_B__Hib__Vaccine_Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1043", default);
 
     [CqlDeclaration("Haemophilus Influenzae Type B (Hib) Vaccine Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1043")]
-	public CqlValueSet Haemophilus_Influenzae_Type_B__Hib__Vaccine_Administered() => 
+	public  CqlValueSet Haemophilus_Influenzae_Type_B__Hib__Vaccine_Administered() => 
 		__Haemophilus_Influenzae_Type_B__Hib__Vaccine_Administered.Value;
 
-	private CqlValueSet Hepatitis_A_Value() => 
+	private  CqlValueSet Hepatitis_A_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1024", default);
 
     [CqlDeclaration("Hepatitis A")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1024")]
-	public CqlValueSet Hepatitis_A() => 
+	public  CqlValueSet Hepatitis_A() => 
 		__Hepatitis_A.Value;
 
-	private CqlValueSet Hepatitis_A_Vaccine_Value() => 
+	private  CqlValueSet Hepatitis_A_Vaccine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1215", default);
 
     [CqlDeclaration("Hepatitis A Vaccine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1215")]
-	public CqlValueSet Hepatitis_A_Vaccine() => 
+	public  CqlValueSet Hepatitis_A_Vaccine() => 
 		__Hepatitis_A_Vaccine.Value;
 
-	private CqlValueSet Hepatitis_A_Vaccine_Administered_Value() => 
+	private  CqlValueSet Hepatitis_A_Vaccine_Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1041", default);
 
     [CqlDeclaration("Hepatitis A Vaccine Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1041")]
-	public CqlValueSet Hepatitis_A_Vaccine_Administered() => 
+	public  CqlValueSet Hepatitis_A_Vaccine_Administered() => 
 		__Hepatitis_A_Vaccine_Administered.Value;
 
-	private CqlValueSet Hepatitis_B_Value() => 
+	private  CqlValueSet Hepatitis_B_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1025", default);
 
     [CqlDeclaration("Hepatitis B")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1025")]
-	public CqlValueSet Hepatitis_B() => 
+	public  CqlValueSet Hepatitis_B() => 
 		__Hepatitis_B.Value;
 
-	private CqlValueSet Hepatitis_B_Vaccine_Value() => 
+	private  CqlValueSet Hepatitis_B_Vaccine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1216", default);
 
     [CqlDeclaration("Hepatitis B Vaccine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1216")]
-	public CqlValueSet Hepatitis_B_Vaccine() => 
+	public  CqlValueSet Hepatitis_B_Vaccine() => 
 		__Hepatitis_B_Vaccine.Value;
 
-	private CqlValueSet Hepatitis_B_Vaccine_Administered_Value() => 
+	private  CqlValueSet Hepatitis_B_Vaccine_Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1042", default);
 
     [CqlDeclaration("Hepatitis B Vaccine Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1042")]
-	public CqlValueSet Hepatitis_B_Vaccine_Administered() => 
+	public  CqlValueSet Hepatitis_B_Vaccine_Administered() => 
 		__Hepatitis_B_Vaccine_Administered.Value;
 
-	private CqlValueSet Hib_Vaccine__3_dose_schedule__Value() => 
+	private  CqlValueSet Hib_Vaccine__3_dose_schedule__Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1083", default);
 
     [CqlDeclaration("Hib Vaccine (3 dose schedule)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1083")]
-	public CqlValueSet Hib_Vaccine__3_dose_schedule_() => 
+	public  CqlValueSet Hib_Vaccine__3_dose_schedule_() => 
 		__Hib_Vaccine__3_dose_schedule_.Value;
 
-	private CqlValueSet Hib_Vaccine__3_dose_schedule__Administered_Value() => 
+	private  CqlValueSet Hib_Vaccine__3_dose_schedule__Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1084", default);
 
     [CqlDeclaration("Hib Vaccine (3 dose schedule) Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1084")]
-	public CqlValueSet Hib_Vaccine__3_dose_schedule__Administered() => 
+	public  CqlValueSet Hib_Vaccine__3_dose_schedule__Administered() => 
 		__Hib_Vaccine__3_dose_schedule__Administered.Value;
 
-	private CqlValueSet Hib_Vaccine__4_dose_schedule__Value() => 
+	private  CqlValueSet Hib_Vaccine__4_dose_schedule__Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1085", default);
 
     [CqlDeclaration("Hib Vaccine (4 dose schedule)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1085")]
-	public CqlValueSet Hib_Vaccine__4_dose_schedule_() => 
+	public  CqlValueSet Hib_Vaccine__4_dose_schedule_() => 
 		__Hib_Vaccine__4_dose_schedule_.Value;
 
-	private CqlValueSet Hib_Vaccine__4_dose_schedule__Administered_Value() => 
+	private  CqlValueSet Hib_Vaccine__4_dose_schedule__Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1086", default);
 
     [CqlDeclaration("Hib Vaccine (4 dose schedule) Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1086")]
-	public CqlValueSet Hib_Vaccine__4_dose_schedule__Administered() => 
+	public  CqlValueSet Hib_Vaccine__4_dose_schedule__Administered() => 
 		__Hib_Vaccine__4_dose_schedule__Administered.Value;
 
-	private CqlValueSet HIV_Value() => 
+	private  CqlValueSet HIV_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003", default);
 
     [CqlDeclaration("HIV")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003")]
-	public CqlValueSet HIV() => 
+	public  CqlValueSet HIV() => 
 		__HIV.Value;
 
-	private CqlValueSet Home_Healthcare_Services_Value() => 
+	private  CqlValueSet Home_Healthcare_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services() => 
+	public  CqlValueSet Home_Healthcare_Services() => 
 		__Home_Healthcare_Services.Value;
 
-	private CqlValueSet Hospice_care_ambulatory_Value() => 
+	private  CqlValueSet Hospice_care_ambulatory_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", default);
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
-	public CqlValueSet Hospice_care_ambulatory() => 
+	public  CqlValueSet Hospice_care_ambulatory() => 
 		__Hospice_care_ambulatory.Value;
 
-	private CqlValueSet Inactivated_Polio_Vaccine__IPV__Value() => 
+	private  CqlValueSet Inactivated_Polio_Vaccine__IPV__Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1219", default);
 
     [CqlDeclaration("Inactivated Polio Vaccine (IPV)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1219")]
-	public CqlValueSet Inactivated_Polio_Vaccine__IPV_() => 
+	public  CqlValueSet Inactivated_Polio_Vaccine__IPV_() => 
 		__Inactivated_Polio_Vaccine__IPV_.Value;
 
-	private CqlValueSet Inactivated_Polio_Vaccine__IPV__Administered_Value() => 
+	private  CqlValueSet Inactivated_Polio_Vaccine__IPV__Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1045", default);
 
     [CqlDeclaration("Inactivated Polio Vaccine (IPV) Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1045")]
-	public CqlValueSet Inactivated_Polio_Vaccine__IPV__Administered() => 
+	public  CqlValueSet Inactivated_Polio_Vaccine__IPV__Administered() => 
 		__Inactivated_Polio_Vaccine__IPV__Administered.Value;
 
-	private CqlValueSet Child_Influenza_Immunization_Administered_Value() => 
+	private  CqlValueSet Child_Influenza_Immunization_Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1218", default);
 
     [CqlDeclaration("Child Influenza Immunization Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1218")]
-	public CqlValueSet Child_Influenza_Immunization_Administered() => 
+	public  CqlValueSet Child_Influenza_Immunization_Administered() => 
 		__Child_Influenza_Immunization_Administered.Value;
 
-	private CqlValueSet Child_Influenza_Vaccine_Administered_Value() => 
+	private  CqlValueSet Child_Influenza_Vaccine_Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1044", default);
 
     [CqlDeclaration("Child Influenza Vaccine Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1044")]
-	public CqlValueSet Child_Influenza_Vaccine_Administered() => 
+	public  CqlValueSet Child_Influenza_Vaccine_Administered() => 
 		__Child_Influenza_Vaccine_Administered.Value;
 
-	private CqlValueSet Influenza_Virus_LAIV_Immunization_Value() => 
+	private  CqlValueSet Influenza_Virus_LAIV_Immunization_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1087", default);
 
     [CqlDeclaration("Influenza Virus LAIV Immunization")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1087")]
-	public CqlValueSet Influenza_Virus_LAIV_Immunization() => 
+	public  CqlValueSet Influenza_Virus_LAIV_Immunization() => 
 		__Influenza_Virus_LAIV_Immunization.Value;
 
-	private CqlValueSet Influenza_Virus_LAIV_Procedure_Value() => 
+	private  CqlValueSet Influenza_Virus_LAIV_Procedure_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1088", default);
 
     [CqlDeclaration("Influenza Virus LAIV Procedure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1088")]
-	public CqlValueSet Influenza_Virus_LAIV_Procedure() => 
+	public  CqlValueSet Influenza_Virus_LAIV_Procedure() => 
 		__Influenza_Virus_LAIV_Procedure.Value;
 
-	private CqlValueSet Intussusception_Value() => 
+	private  CqlValueSet Intussusception_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1056", default);
 
     [CqlDeclaration("Intussusception")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1056")]
-	public CqlValueSet Intussusception() => 
+	public  CqlValueSet Intussusception() => 
 		__Intussusception.Value;
 
-	private CqlValueSet Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue_Value() => 
+	private  CqlValueSet Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1009", default);
 
     [CqlDeclaration("Malignant Neoplasm of Lymphatic and Hematopoietic Tissue")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1009")]
-	public CqlValueSet Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue() => 
+	public  CqlValueSet Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue() => 
 		__Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue.Value;
 
-	private CqlValueSet Measles_Value() => 
+	private  CqlValueSet Measles_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1053", default);
 
     [CqlDeclaration("Measles")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1053")]
-	public CqlValueSet Measles() => 
+	public  CqlValueSet Measles() => 
 		__Measles.Value;
 
-	private CqlValueSet Measles__Mumps_and_Rubella__MMR__Vaccine_Value() => 
+	private  CqlValueSet Measles__Mumps_and_Rubella__MMR__Vaccine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1224", default);
 
     [CqlDeclaration("Measles, Mumps and Rubella (MMR) Vaccine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1224")]
-	public CqlValueSet Measles__Mumps_and_Rubella__MMR__Vaccine() => 
+	public  CqlValueSet Measles__Mumps_and_Rubella__MMR__Vaccine() => 
 		__Measles__Mumps_and_Rubella__MMR__Vaccine.Value;
 
-	private CqlValueSet Measles__Mumps_and_Rubella__MMR__Vaccine_Administered_Value() => 
+	private  CqlValueSet Measles__Mumps_and_Rubella__MMR__Vaccine_Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1031", default);
 
     [CqlDeclaration("Measles, Mumps and Rubella (MMR) Vaccine Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1031")]
-	public CqlValueSet Measles__Mumps_and_Rubella__MMR__Vaccine_Administered() => 
+	public  CqlValueSet Measles__Mumps_and_Rubella__MMR__Vaccine_Administered() => 
 		__Measles__Mumps_and_Rubella__MMR__Vaccine_Administered.Value;
 
-	private CqlValueSet Mumps_Value() => 
+	private  CqlValueSet Mumps_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1032", default);
 
     [CqlDeclaration("Mumps")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1032")]
-	public CqlValueSet Mumps() => 
+	public  CqlValueSet Mumps() => 
 		__Mumps.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Online_Assessments_Value() => 
+	private  CqlValueSet Online_Assessments_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments() => 
+	public  CqlValueSet Online_Assessments() => 
 		__Online_Assessments.Value;
 
-	private CqlValueSet Pneumococcal_Conjugate_Vaccine_Value() => 
+	private  CqlValueSet Pneumococcal_Conjugate_Vaccine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1221", default);
 
     [CqlDeclaration("Pneumococcal Conjugate Vaccine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1221")]
-	public CqlValueSet Pneumococcal_Conjugate_Vaccine() => 
+	public  CqlValueSet Pneumococcal_Conjugate_Vaccine() => 
 		__Pneumococcal_Conjugate_Vaccine.Value;
 
-	private CqlValueSet Pneumococcal_Conjugate_Vaccine_Administered_Value() => 
+	private  CqlValueSet Pneumococcal_Conjugate_Vaccine_Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1046", default);
 
     [CqlDeclaration("Pneumococcal Conjugate Vaccine Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1046")]
-	public CqlValueSet Pneumococcal_Conjugate_Vaccine_Administered() => 
+	public  CqlValueSet Pneumococcal_Conjugate_Vaccine_Administered() => 
 		__Pneumococcal_Conjugate_Vaccine_Administered.Value;
 
-	private CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
+	private  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-	public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17() => 
+	public  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17() => 
 		__Preventive_Care_Services__Initial_Office_Visit__0_to_17.Value;
 
-	private CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
+	private  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-	public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17() => 
+	public  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17() => 
 		__Preventive_Care__Established_Office_Visit__0_to_17.Value;
 
-	private CqlValueSet Rotavirus_Vaccine__2_dose_schedule__Administered_Value() => 
+	private  CqlValueSet Rotavirus_Vaccine__2_dose_schedule__Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1048", default);
 
     [CqlDeclaration("Rotavirus Vaccine (2 dose schedule) Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1048")]
-	public CqlValueSet Rotavirus_Vaccine__2_dose_schedule__Administered() => 
+	public  CqlValueSet Rotavirus_Vaccine__2_dose_schedule__Administered() => 
 		__Rotavirus_Vaccine__2_dose_schedule__Administered.Value;
 
-	private CqlValueSet Rotavirus_Vaccine__3_dose_schedule__Value() => 
+	private  CqlValueSet Rotavirus_Vaccine__3_dose_schedule__Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1223", default);
 
     [CqlDeclaration("Rotavirus Vaccine (3 dose schedule)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1223")]
-	public CqlValueSet Rotavirus_Vaccine__3_dose_schedule_() => 
+	public  CqlValueSet Rotavirus_Vaccine__3_dose_schedule_() => 
 		__Rotavirus_Vaccine__3_dose_schedule_.Value;
 
-	private CqlValueSet Rotavirus_Vaccine__3_dose_schedule__Administered_Value() => 
+	private  CqlValueSet Rotavirus_Vaccine__3_dose_schedule__Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1047", default);
 
     [CqlDeclaration("Rotavirus Vaccine (3 dose schedule) Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1047")]
-	public CqlValueSet Rotavirus_Vaccine__3_dose_schedule__Administered() => 
+	public  CqlValueSet Rotavirus_Vaccine__3_dose_schedule__Administered() => 
 		__Rotavirus_Vaccine__3_dose_schedule__Administered.Value;
 
-	private CqlValueSet Rubella_Value() => 
+	private  CqlValueSet Rubella_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1037", default);
 
     [CqlDeclaration("Rubella")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1037")]
-	public CqlValueSet Rubella() => 
+	public  CqlValueSet Rubella() => 
 		__Rubella.Value;
 
-	private CqlValueSet Severe_Combined_Immunodeficiency_Value() => 
+	private  CqlValueSet Severe_Combined_Immunodeficiency_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1007", default);
 
     [CqlDeclaration("Severe Combined Immunodeficiency")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1007")]
-	public CqlValueSet Severe_Combined_Immunodeficiency() => 
+	public  CqlValueSet Severe_Combined_Immunodeficiency() => 
 		__Severe_Combined_Immunodeficiency.Value;
 
-	private CqlValueSet Telephone_Visits_Value() => 
+	private  CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits() => 
+	public  CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
 
-	private CqlValueSet Varicella_Zoster_Value() => 
+	private  CqlValueSet Varicella_Zoster_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1039", default);
 
     [CqlDeclaration("Varicella Zoster")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1039")]
-	public CqlValueSet Varicella_Zoster() => 
+	public  CqlValueSet Varicella_Zoster() => 
 		__Varicella_Zoster.Value;
 
-	private CqlValueSet Varicella_Zoster_Vaccine__VZV__Value() => 
+	private  CqlValueSet Varicella_Zoster_Vaccine__VZV__Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1170", default);
 
     [CqlDeclaration("Varicella Zoster Vaccine (VZV)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1170")]
-	public CqlValueSet Varicella_Zoster_Vaccine__VZV_() => 
+	public  CqlValueSet Varicella_Zoster_Vaccine__VZV_() => 
 		__Varicella_Zoster_Vaccine__VZV_.Value;
 
-	private CqlValueSet Varicella_Zoster_Vaccine__VZV__Administered_Value() => 
+	private  CqlValueSet Varicella_Zoster_Vaccine__VZV__Administered_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1040", default);
 
     [CqlDeclaration("Varicella Zoster Vaccine (VZV) Administered")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1040")]
-	public CqlValueSet Varicella_Zoster_Vaccine__VZV__Administered() => 
+	public  CqlValueSet Varicella_Zoster_Vaccine__VZV__Administered() => 
 		__Varicella_Zoster_Vaccine__VZV__Administered.Value;
 
-	private CqlCode Anaphylaxis_due_to_Haemophilus_influenzae_type_b_vaccine__disorder__Value() => 
+	private  CqlCode Anaphylaxis_due_to_Haemophilus_influenzae_type_b_vaccine__disorder__Value() => 
 		new CqlCode("433621000124101", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Anaphylaxis due to Haemophilus influenzae type b vaccine (disorder)")]
-	public CqlCode Anaphylaxis_due_to_Haemophilus_influenzae_type_b_vaccine__disorder_() => 
+	public  CqlCode Anaphylaxis_due_to_Haemophilus_influenzae_type_b_vaccine__disorder_() => 
 		__Anaphylaxis_due_to_Haemophilus_influenzae_type_b_vaccine__disorder_.Value;
 
-	private CqlCode Anaphylaxis_due_to_Hepatitis_B_vaccine__disorder__Value() => 
+	private  CqlCode Anaphylaxis_due_to_Hepatitis_B_vaccine__disorder__Value() => 
 		new CqlCode("428321000124101", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Anaphylaxis due to Hepatitis B vaccine (disorder)")]
-	public CqlCode Anaphylaxis_due_to_Hepatitis_B_vaccine__disorder_() => 
+	public  CqlCode Anaphylaxis_due_to_Hepatitis_B_vaccine__disorder_() => 
 		__Anaphylaxis_due_to_Hepatitis_B_vaccine__disorder_.Value;
 
-	private CqlCode Anaphylaxis_due_to_rotavirus_vaccine__disorder__Value() => 
+	private  CqlCode Anaphylaxis_due_to_rotavirus_vaccine__disorder__Value() => 
 		new CqlCode("428331000124103", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Anaphylaxis due to rotavirus vaccine (disorder)")]
-	public CqlCode Anaphylaxis_due_to_rotavirus_vaccine__disorder_() => 
+	public  CqlCode Anaphylaxis_due_to_rotavirus_vaccine__disorder_() => 
 		__Anaphylaxis_due_to_rotavirus_vaccine__disorder_.Value;
 
-	private CqlCode Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional_Value() => 
+	private  CqlCode Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional_Value() => 
 		new CqlCode("99211", "http://www.ama-assn.org/go/cpt", default, default);
 
     [CqlDeclaration("Office or other outpatient visit for the evaluation and management of an established patient that may not require the presence of a physician or other qualified health care professional")]
-	public CqlCode Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional() => 
+	public  CqlCode Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional() => 
 		__Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional.Value;
 
-	private CqlCode rotavirus__live__monovalent_vaccine_Value() => 
+	private  CqlCode rotavirus__live__monovalent_vaccine_Value() => 
 		new CqlCode("119", "http://hl7.org/fhir/sid/cvx", default, default);
 
     [CqlDeclaration("rotavirus, live, monovalent vaccine")]
-	public CqlCode rotavirus__live__monovalent_vaccine() => 
+	public  CqlCode rotavirus__live__monovalent_vaccine() => 
 		__rotavirus__live__monovalent_vaccine.Value;
 
-	private CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder__Value() => 
+	private  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder__Value() => 
 		new CqlCode("471311000124103", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Anaphylaxis caused by vaccine product containing Hepatitis A virus antigen (disorder)")]
-	public CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder_() => 
+	public  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder_() => 
 		__Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder_.Value;
 
-	private CqlCode Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach_Value() => 
+	private  CqlCode Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach_Value() => 
 		new CqlCode("3E0234Z", "http://www.cms.gov/Medicare/Coding/ICD10", default, default);
 
     [CqlDeclaration("Introduction of Serum, Toxoid and Vaccine into Muscle, Percutaneous Approach")]
-	public CqlCode Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach() => 
+	public  CqlCode Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach() => 
 		__Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach.Value;
 
-	private CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder__Value() => 
+	private  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder__Value() => 
 		new CqlCode("471361000124100", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Anaphylaxis caused by vaccine product containing Influenza virus antigen (disorder)")]
-	public CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder_() => 
+	public  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder_() => 
 		__Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder_.Value;
 
-	private CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder__Value() => 
+	private  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder__Value() => 
 		new CqlCode("471331000124109", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Anaphylaxis caused by vaccine product containing Measles morbillivirus and Mumps orthorubulavirus and Rubella virus antigens (disorder)")]
-	public CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder_() => 
+	public  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder_() => 
 		__Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder_.Value;
 
-	private CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder__Value() => 
+	private  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder__Value() => 
 		new CqlCode("471141000124102", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Anaphylaxis caused by vaccine product containing Streptococcus pneumoniae antigen (disorder)")]
-	public CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder_() => 
+	public  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder_() => 
 		__Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder_.Value;
 
-	private CqlCode Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder__Value() => 
+	private  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder__Value() => 
 		new CqlCode("471321000124106", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Anaphylaxis caused by vaccine product containing human poliovirus antigen (disorder)")]
-	public CqlCode Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_() => 
+	public  CqlCode Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_() => 
 		__Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_.Value;
 
-	private CqlCode Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder__Value() => 
+	private  CqlCode Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder__Value() => 
 		new CqlCode("471341000124104", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Anaphylaxis caused by vaccine containing Human alphaherpesvirus 3 antigen (disorder)")]
-	public CqlCode Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder_() => 
+	public  CqlCode Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder_() => 
 		__Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder_.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("433621000124101", "http://snomed.info/sct", default, default),
@@ -773,10 +773,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlCode[] CPT_Value()
+	private  CqlCode[] CPT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("99211", "http://www.ama-assn.org/go/cpt", default, default),
@@ -786,10 +786,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("CPT")]
-	public CqlCode[] CPT() => 
+	public  CqlCode[] CPT() => 
 		__CPT.Value;
 
-	private CqlCode[] CVX_Value()
+	private  CqlCode[] CVX_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("119", "http://hl7.org/fhir/sid/cvx", default, default),
@@ -799,10 +799,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("CVX")]
-	public CqlCode[] CVX() => 
+	public  CqlCode[] CVX() => 
 		__CVX.Value;
 
-	private CqlCode[] ICD10_Value()
+	private  CqlCode[] ICD10_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("3E0234Z", "http://www.cms.gov/Medicare/Coding/ICD10", default, default),
@@ -812,10 +812,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("ICD10")]
-	public CqlCode[] ICD10() => 
+	public  CqlCode[] ICD10() => 
 		__ICD10.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -826,10 +826,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -838,10 +838,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Encounter> Qualifying_Encounters_Value()
+	private  IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -863,7 +863,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 				CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return ae_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> aa_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)y_, z_);
 			bool? ab_(CqlConcept T)
 			{
@@ -872,12 +873,14 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 				bool? ah_ = context.Operators.Equivalent(T, ag_);
 
 				return ah_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> ac_ = context.Operators.Where<CqlConcept>(aa_, ab_);
 			bool? ad_ = context.Operators.Exists<CqlConcept>(ac_);
 
 			return ad_;
-		};
+		}
+;
 		IEnumerable<Encounter> n_ = context.Operators.Where<Encounter>(l_, m_);
 		CqlValueSet o_ = this.Online_Assessments();
 		IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
@@ -896,17 +899,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ai_, al_, "day");
 
 			return am_;
-		};
+		}
+;
 		IEnumerable<Encounter> x_ = context.Operators.Where<Encounter>(v_, w_);
 
 		return x_;
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
-	public IEnumerable<Encounter> Qualifying_Encounters() => 
+	public  IEnumerable<Encounter> Qualifying_Encounters() => 
 		__Qualifying_Encounters.Value;
 
-	private bool? Initial_Population_Value()
+	private  bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -925,10 +929,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population() => 
+	public  bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-	private bool? Denominator_Value()
+	private  bool? Denominator_Value()
 	{
 		bool? a_ = this.Initial_Population();
 
@@ -936,10 +940,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator() => 
+	public  bool? Denominator() => 
 		__Denominator.Value;
 
-	private CqlDate Date_of_Second_Birthday_Value()
+	private  CqlDate Date_of_Second_Birthday_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -952,10 +956,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Date of Second Birthday")]
-	public CqlDate Date_of_Second_Birthday() => 
+	public  CqlDate Date_of_Second_Birthday() => 
 		__Date_of_Second_Birthday.Value;
 
-	private CqlInterval<CqlDate> First_Two_Years_Value()
+	private  CqlInterval<CqlDate> First_Two_Years_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -970,10 +974,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("First Two Years")]
-	public CqlInterval<CqlDate> First_Two_Years() => 
+	public  CqlInterval<CqlDate> First_Two_Years() => 
 		__First_Two_Years.Value;
 
-	private bool? Has_Severe_Combined_Immunodeficiency_Value()
+	private  bool? Has_Severe_Combined_Immunodeficiency_Value()
 	{
 		CqlValueSet a_ = this.Severe_Combined_Immunodeficiency();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -987,7 +991,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 		bool? f_ = context.Operators.Exists<Condition>(e_);
 
@@ -995,10 +1000,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Severe Combined Immunodeficiency")]
-	public bool? Has_Severe_Combined_Immunodeficiency() => 
+	public  bool? Has_Severe_Combined_Immunodeficiency() => 
 		__Has_Severe_Combined_Immunodeficiency.Value;
 
-	private bool? Has_Immunodeficiency_Value()
+	private  bool? Has_Immunodeficiency_Value()
 	{
 		CqlValueSet a_ = this.Disorders_of_the_Immune_System();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1012,7 +1017,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 		bool? f_ = context.Operators.Exists<Condition>(e_);
 
@@ -1020,10 +1026,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Immunodeficiency")]
-	public bool? Has_Immunodeficiency() => 
+	public  bool? Has_Immunodeficiency() => 
 		__Has_Immunodeficiency.Value;
 
-	private bool? Has_HIV_Value()
+	private  bool? Has_HIV_Value()
 	{
 		CqlValueSet a_ = this.HIV();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1037,7 +1043,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 		bool? f_ = context.Operators.Exists<Condition>(e_);
 
@@ -1045,10 +1052,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has HIV")]
-	public bool? Has_HIV() => 
+	public  bool? Has_HIV() => 
 		__Has_HIV.Value;
 
-	private bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Value()
+	private  bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Value()
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1062,7 +1069,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 		bool? f_ = context.Operators.Exists<Condition>(e_);
 
@@ -1070,10 +1078,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Lymphoreticular Cancer, Multiple Myeloma or Leukemia")]
-	public bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia() => 
+	public  bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia() => 
 		__Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia.Value;
 
-	private bool? Has_Intussusception_Value()
+	private  bool? Has_Intussusception_Value()
 	{
 		CqlValueSet a_ = this.Intussusception();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1087,7 +1095,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 		bool? f_ = context.Operators.Exists<Condition>(e_);
 
@@ -1095,10 +1104,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Intussusception")]
-	public bool? Has_Intussusception() => 
+	public  bool? Has_Intussusception() => 
 		__Has_Intussusception.Value;
 
-	private bool? Denominator_Exclusions_Value()
+	private  bool? Denominator_Exclusions_Value()
 	{
 		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
 		bool? b_ = this.Has_Severe_Combined_Immunodeficiency();
@@ -1116,10 +1125,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions() => 
+	public  bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Value()
+	private  CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -1136,10 +1145,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Vaccine Administration Interval - 42 Days up to 2 Years Old")]
-	public CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old() => 
+	public  CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old() => 
 		__Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old.Value;
 
-	private IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures_Value()
+	private  IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.DTaP_Vaccine();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -1154,7 +1163,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization DTaPVaccination)
 		{
@@ -1167,7 +1177,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.DTaP_Vaccine_Administered();
 		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
@@ -1182,7 +1193,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
-		};
+		}
+;
 		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure DTaPProcedure)
 		{
@@ -1195,7 +1207,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
-		};
+		}
+;
 		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
 		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
@@ -1203,10 +1216,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("DTaP Immunizations or Procedures")]
-	public IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures() => 
+	public  IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures() => 
 		__DTaP_Immunizations_or_Procedures.Value;
 
-	private IEnumerable<CqlDate> Four_DTaP_Vaccinations_Value()
+	private  IEnumerable<CqlDate> Four_DTaP_Vaccinations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.DTaP_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>> e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
@@ -1215,7 +1228,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?> g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, (CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?>(e_, f_);
 		bool? h_((CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)? tuple_emdhflcfhwveravvnflazyxji)
 		{
@@ -1230,20 +1244,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? w_ = context.Operators.And(s_, v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?> i_ = context.Operators.Where<(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?>(g_, h_);
 		CqlDate j_((CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)? tuple_emdhflcfhwveravvnflazyxji) => 
 			tuple_emdhflcfhwveravvnflazyxji?.DTaPVaccination1;
+;
 		IEnumerable<CqlDate> k_ = context.Operators.Select<(CqlDate DTaPVaccination1, CqlDate DTaPVaccination2, CqlDate DTaPVaccination3, CqlDate DTaPVaccination4)?, CqlDate>(i_, j_);
 
 		return k_;
 	}
 
     [CqlDeclaration("Four DTaP Vaccinations")]
-	public IEnumerable<CqlDate> Four_DTaP_Vaccinations() => 
+	public  IEnumerable<CqlDate> Four_DTaP_Vaccinations() => 
 		__Four_DTaP_Vaccinations.Value;
 
-	private IEnumerable<Condition> DTaP_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> DTaP_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlValueSet a_ = this.Anaphylactic_Reaction_to_DTaP_Vaccine();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1260,17 +1276,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? m_ = context.Operators.In<CqlDate>(k_, l_, "day");
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("DTaP Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> DTaP_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> DTaP_Numerator_Inclusion_Conditions() => 
 		__DTaP_Numerator_Inclusion_Conditions.Value;
 
-	private IEnumerable<CqlDate> Polio_Immunizations_or_Procedures_Value()
+	private  IEnumerable<CqlDate> Polio_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Inactivated_Polio_Vaccine__IPV_();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -1285,7 +1302,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization PolioVaccination)
 		{
@@ -1298,7 +1316,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Inactivated_Polio_Vaccine__IPV__Administered();
 		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
@@ -1313,7 +1332,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
-		};
+		}
+;
 		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure PolioProcedure)
 		{
@@ -1326,7 +1346,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
-		};
+		}
+;
 		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
 		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
@@ -1334,10 +1355,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Polio Immunizations or Procedures")]
-	public IEnumerable<CqlDate> Polio_Immunizations_or_Procedures() => 
+	public  IEnumerable<CqlDate> Polio_Immunizations_or_Procedures() => 
 		__Polio_Immunizations_or_Procedures.Value;
 
-	private IEnumerable<CqlDate> Three_Polio_Vaccinations_Value()
+	private  IEnumerable<CqlDate> Three_Polio_Vaccinations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Polio_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
@@ -1346,7 +1367,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? k_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?>(d_, e_);
 		bool? g_((CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? tuple_cnghazroxajthpiccbiajbrxv)
 		{
@@ -1358,20 +1380,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? r_ = context.Operators.And(n_, q_);
 
 			return r_;
-		};
+		}
+;
 		IEnumerable<(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?> h_ = context.Operators.Where<(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?>(f_, g_);
 		CqlDate i_((CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)? tuple_cnghazroxajthpiccbiajbrxv) => 
 			tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination1;
+;
 		IEnumerable<CqlDate> j_ = context.Operators.Select<(CqlDate PolioVaccination1, CqlDate PolioVaccination2, CqlDate PolioVaccination3)?, CqlDate>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Three Polio Vaccinations")]
-	public IEnumerable<CqlDate> Three_Polio_Vaccinations() => 
+	public  IEnumerable<CqlDate> Three_Polio_Vaccinations() => 
 		__Three_Polio_Vaccinations.Value;
 
-	private IEnumerable<Condition> Polio_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> Polio_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1386,17 +1410,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Polio Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> Polio_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> Polio_Numerator_Inclusion_Conditions() => 
 		__Polio_Numerator_Inclusion_Conditions.Value;
 
-	private CqlDate Date_of_First_Birthday_Value()
+	private  CqlDate Date_of_First_Birthday_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -1411,10 +1436,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Date of First Birthday")]
-	public CqlDate Date_of_First_Birthday() => 
+	public  CqlDate Date_of_First_Birthday() => 
 		__Date_of_First_Birthday.Value;
 
-	private CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday_Value()
+	private  CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday_Value()
 	{
 		CqlDate a_ = this.Date_of_First_Birthday();
 		CqlDate b_ = this.Date_of_Second_Birthday();
@@ -1424,10 +1449,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Date of First Birthday to Date of Second Birthday")]
-	public CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday() => 
+	public  CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday() => 
 		__Date_of_First_Birthday_to_Date_of_Second_Birthday.Value;
 
-	private IEnumerable<object> One_MMR_Vaccination_Value()
+	private  IEnumerable<object> One_MMR_Vaccination_Value()
 	{
 		CqlValueSet a_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -1442,7 +1467,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, default);
 
 			return q_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlValueSet f_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine_Administered();
 		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
@@ -1457,7 +1483,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, default);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
 		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
@@ -1465,10 +1492,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("One MMR Vaccination")]
-	public IEnumerable<object> One_MMR_Vaccination() => 
+	public  IEnumerable<object> One_MMR_Vaccination() => 
 		__One_MMR_Vaccination.Value;
 
-	private IEnumerable<Condition> MMR_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> MMR_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1483,17 +1510,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("MMR Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> MMR_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> MMR_Numerator_Inclusion_Conditions() => 
 		__MMR_Numerator_Inclusion_Conditions.Value;
 
-	private IEnumerable<Condition> Measles_Indicators_Value()
+	private  IEnumerable<Condition> Measles_Indicators_Value()
 	{
 		CqlValueSet a_ = this.Measles();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1507,17 +1535,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Measles Indicators")]
-	public IEnumerable<Condition> Measles_Indicators() => 
+	public  IEnumerable<Condition> Measles_Indicators() => 
 		__Measles_Indicators.Value;
 
-	private IEnumerable<Condition> Mumps_Indicators_Value()
+	private  IEnumerable<Condition> Mumps_Indicators_Value()
 	{
 		CqlValueSet a_ = this.Mumps();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1531,17 +1560,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Mumps Indicators")]
-	public IEnumerable<Condition> Mumps_Indicators() => 
+	public  IEnumerable<Condition> Mumps_Indicators() => 
 		__Mumps_Indicators.Value;
 
-	private IEnumerable<Condition> Rubella_Indicators_Value()
+	private  IEnumerable<Condition> Rubella_Indicators_Value()
 	{
 		CqlValueSet a_ = this.Rubella();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1555,17 +1585,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? j_ = context.Operators.In<CqlDate>(h_, i_, "day");
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Rubella Indicators")]
-	public IEnumerable<Condition> Rubella_Indicators() => 
+	public  IEnumerable<Condition> Rubella_Indicators() => 
 		__Rubella_Indicators.Value;
 
-	private IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures_Value()
+	private  IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Hib_Vaccine__3_dose_schedule_();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -1580,7 +1611,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization ThreeDoseHibVaccine)
 		{
@@ -1593,7 +1625,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Hib_Vaccine__3_dose_schedule__Administered();
 		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
@@ -1608,7 +1641,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
-		};
+		}
+;
 		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure ThreeDoseHibProcedure)
 		{
@@ -1621,7 +1655,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
-		};
+		}
+;
 		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
 		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
@@ -1629,10 +1664,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Hib 3 Dose Immunizations or Procedures")]
-	public IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures() => 
+	public  IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures() => 
 		__Hib_3_Dose_Immunizations_or_Procedures.Value;
 
-	private IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures_Value()
+	private  IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Hib_Vaccine__4_dose_schedule_();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -1647,7 +1682,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization HibVaccine)
 		{
@@ -1660,7 +1696,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Hib_Vaccine__4_dose_schedule__Administered();
 		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
@@ -1675,7 +1712,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
-		};
+		}
+;
 		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure HibProcedure)
 		{
@@ -1688,7 +1726,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
-		};
+		}
+;
 		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
 		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
@@ -1696,10 +1735,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Hib 4 Dose Immunizations or Procedures")]
-	public IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures() => 
+	public  IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures() => 
 		__Hib_4_Dose_Immunizations_or_Procedures.Value;
 
-	private IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations_Value()
+	private  IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Hib_3_Dose_Immunizations_or_Procedures();
 		IEnumerable<CqlDate> b_ = this.Hib_4_Dose_Immunizations_or_Procedures();
@@ -1709,10 +1748,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Hib 3 or 4 Dose Immunizations")]
-	public IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations() => 
+	public  IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations() => 
 		__Hib_3_or_4_Dose_Immunizations.Value;
 
-	private IEnumerable<CqlDate> All_Hib_Vaccinations_Value()
+	private  IEnumerable<CqlDate> All_Hib_Vaccinations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Hib_3_or_4_Dose_Immunizations();
 		IEnumerable<CqlDate> c_(CqlDate AllHibDoses1)
@@ -1726,14 +1765,17 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 				bool? n_ = context.Operators.In<CqlDate>(AllHibDoses1, m_, default);
 
 				return n_;
-			};
+			}
+;
 			IEnumerable<CqlDate> h_ = context.Operators.Where<CqlDate>(f_, g_);
 			CqlDate i_(CqlDate AllHibDoses2) => 
 				AllHibDoses1;
+;
 			IEnumerable<CqlDate> j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlDate> d_ = context.Operators.SelectMany<CqlDate, CqlDate>(a_, c_);
 		IEnumerable<CqlDate> e_ = context.Operators.Except<CqlDate>(a_, d_);
 
@@ -1741,10 +1783,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("All Hib Vaccinations")]
-	public IEnumerable<CqlDate> All_Hib_Vaccinations() => 
+	public  IEnumerable<CqlDate> All_Hib_Vaccinations() => 
 		__All_Hib_Vaccinations.Value;
 
-	private bool? Has_Appropriate_Number_of_Hib_Immunizations_Value()
+	private  bool? Has_Appropriate_Number_of_Hib_Immunizations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.All_Hib_Vaccinations();
 		bool? b_(CqlDate HibImmunization)
@@ -1755,6 +1797,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			IEnumerable<CqlDate> h_ = this.All_Hib_Vaccinations();
 			CqlDate i_(CqlDate HibVaccinations) => 
 				HibVaccinations;
+;
 			IEnumerable<CqlDate> j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
 			IEnumerable<CqlDate> k_ = context.Operators.Distinct<CqlDate>(j_);
 			int? l_ = context.Operators.Count<CqlDate>(k_);
@@ -1771,7 +1814,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? z_ = context.Operators.Or(n_, y_);
 
 			return z_;
-		};
+		}
+;
 		IEnumerable<CqlDate> c_ = context.Operators.Where<CqlDate>(a_, b_);
 		bool? d_ = context.Operators.Exists<CqlDate>(c_);
 
@@ -1779,10 +1823,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Appropriate Number of Hib Immunizations")]
-	public bool? Has_Appropriate_Number_of_Hib_Immunizations() => 
+	public  bool? Has_Appropriate_Number_of_Hib_Immunizations() => 
 		__Has_Appropriate_Number_of_Hib_Immunizations.Value;
 
-	private IEnumerable<Condition> Hib_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> Hib_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlCode a_ = this.Anaphylaxis_due_to_Haemophilus_influenzae_type_b_vaccine__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1797,17 +1841,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Hib Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> Hib_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> Hib_Numerator_Inclusion_Conditions() => 
 		__Hib_Numerator_Inclusion_Conditions.Value;
 
-	private IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures_Value()
+	private  IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Hepatitis_B_Vaccine();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -1822,7 +1867,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization HepatitisBVaccination)
 		{
@@ -1835,7 +1881,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Hepatitis_B_Vaccine_Administered();
 		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
@@ -1850,7 +1897,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
-		};
+		}
+;
 		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure HepatitisBProcedure)
 		{
@@ -1863,7 +1911,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
-		};
+		}
+;
 		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
 		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
@@ -1871,10 +1920,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Hepatitis B Immunizations or Procedures")]
-	public IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures() => 
+	public  IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures() => 
 		__Hepatitis_B_Immunizations_or_Procedures.Value;
 
-	private IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations_Value()
+	private  IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Hepatitis_B_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
@@ -1883,7 +1932,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? k_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?>(d_, e_);
 		bool? g_((CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? tuple_eztgahauwggsdgadcgqnnipgw)
 		{
@@ -1895,20 +1945,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? r_ = context.Operators.And(n_, q_);
 
 			return r_;
-		};
+		}
+;
 		IEnumerable<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?> h_ = context.Operators.Where<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?>(f_, g_);
 		CqlDate i_((CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)? tuple_eztgahauwggsdgadcgqnnipgw) => 
 			tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination1;
+;
 		IEnumerable<CqlDate> j_ = context.Operators.Select<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate HepatitisBVaccination3)?, CqlDate>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Three Hepatitis B Vaccinations")]
-	public IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations() => 
+	public  IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations() => 
 		__Three_Hepatitis_B_Vaccinations.Value;
 
-	private IEnumerable<CqlDate> NewBorn_Vaccine_Requirement_Value()
+	private  IEnumerable<CqlDate> NewBorn_Vaccine_Requirement_Value()
 	{
 		CqlCode a_ = this.Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1937,7 +1989,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDate>(w_, aa_, "day");
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<Procedure> f_ = context.Operators.Where<Procedure>(d_, e_);
 		CqlDate g_(Procedure NewBornVaccine)
 		{
@@ -1948,17 +2001,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ag_ = context.Operators.DateFrom(af_);
 
 			return ag_;
-		};
+		}
+;
 		IEnumerable<CqlDate> h_ = context.Operators.Select<Procedure, CqlDate>(f_, g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("NewBorn Vaccine Requirement")]
-	public IEnumerable<CqlDate> NewBorn_Vaccine_Requirement() => 
+	public  IEnumerable<CqlDate> NewBorn_Vaccine_Requirement() => 
 		__NewBorn_Vaccine_Requirement.Value;
 
-	private IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement_Value()
+	private  IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Hepatitis_B_Immunizations_or_Procedures();
 		IEnumerable<CqlDate> c_ = this.NewBorn_Vaccine_Requirement();
@@ -1968,7 +2022,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? k_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?> f_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate>, (CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?>(d_, e_);
 		bool? g_((CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? tuple_hdfambzgbwdpfetgqnfbceeeg)
 		{
@@ -1983,20 +2038,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? v_ = context.Operators.And(r_, u_);
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?> h_ = context.Operators.Where<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?>(f_, g_);
 		CqlDate i_((CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)? tuple_hdfambzgbwdpfetgqnfbceeeg) => 
 			tuple_hdfambzgbwdpfetgqnfbceeeg?.HepatitisBVaccination1;
+;
 		IEnumerable<CqlDate> j_ = context.Operators.Select<(CqlDate HepatitisBVaccination1, CqlDate HepatitisBVaccination2, CqlDate NewBornVaccine3)?, CqlDate>(h_, i_);
 
 		return j_;
 	}
 
     [CqlDeclaration("Meets HepB Vaccination Requirement")]
-	public IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement() => 
+	public  IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement() => 
 		__Meets_HepB_Vaccination_Requirement.Value;
 
-	private IEnumerable<Condition> Hepatitis_B_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> Hepatitis_B_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlCode a_ = this.Anaphylaxis_due_to_Hepatitis_B_vaccine__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -2014,17 +2071,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Hepatitis B Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> Hepatitis_B_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> Hepatitis_B_Numerator_Inclusion_Conditions() => 
 		__Hepatitis_B_Numerator_Inclusion_Conditions.Value;
 
-	private IEnumerable<object> One_Chicken_Pox_Vaccination_Value()
+	private  IEnumerable<object> One_Chicken_Pox_Vaccination_Value()
 	{
 		CqlValueSet a_ = this.Varicella_Zoster_Vaccine__VZV_();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -2039,7 +2097,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, default);
 
 			return q_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlValueSet f_ = this.Varicella_Zoster_Vaccine__VZV__Administered();
 		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
@@ -2054,7 +2113,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, default);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
 		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
@@ -2062,10 +2122,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("One Chicken Pox Vaccination")]
-	public IEnumerable<object> One_Chicken_Pox_Vaccination() => 
+	public  IEnumerable<object> One_Chicken_Pox_Vaccination() => 
 		__One_Chicken_Pox_Vaccination.Value;
 
-	private IEnumerable<Condition> Varicella_Zoster_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> Varicella_Zoster_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlValueSet a_ = this.Varicella_Zoster();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -2083,17 +2143,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Varicella Zoster Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> Varicella_Zoster_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> Varicella_Zoster_Numerator_Inclusion_Conditions() => 
 		__Varicella_Zoster_Numerator_Inclusion_Conditions.Value;
 
-	private IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures_Value()
+	private  IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Pneumococcal_Conjugate_Vaccine();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -2108,7 +2169,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization PneumococcalVaccination)
 		{
@@ -2121,7 +2183,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Pneumococcal_Conjugate_Vaccine_Administered();
 		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
@@ -2136,7 +2199,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
-		};
+		}
+;
 		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure PneumococcalProcedure)
 		{
@@ -2149,7 +2213,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
-		};
+		}
+;
 		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
 		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
@@ -2157,10 +2222,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Pneumococcal Conjugate Immunizations or Procedures")]
-	public IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures() => 
+	public  IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures() => 
 		__Pneumococcal_Conjugate_Immunizations_or_Procedures.Value;
 
-	private IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations_Value()
+	private  IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Pneumococcal_Conjugate_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>> e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
@@ -2169,7 +2234,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?> g_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>, (CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?>(e_, f_);
 		bool? h_((CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? tuple_ddpdeojhpyesfhgcocbnoippp)
 		{
@@ -2184,20 +2250,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? w_ = context.Operators.And(s_, v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?> i_ = context.Operators.Where<(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?>(g_, h_);
 		CqlDate j_((CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)? tuple_ddpdeojhpyesfhgcocbnoippp) => 
 			tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination1;
+;
 		IEnumerable<CqlDate> k_ = context.Operators.Select<(CqlDate PneumococcalVaccination1, CqlDate PneumococcalVaccination2, CqlDate PneumococcalVaccination3, CqlDate PneumococcalVaccination4)?, CqlDate>(i_, j_);
 
 		return k_;
 	}
 
     [CqlDeclaration("Four Pneumococcal Conjugate Vaccinations")]
-	public IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations() => 
+	public  IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations() => 
 		__Four_Pneumococcal_Conjugate_Vaccinations.Value;
 
-	private IEnumerable<Condition> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -2212,17 +2280,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Pneumococcal Conjugate Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions() => 
 		__Pneumococcal_Conjugate_Numerator_Inclusion_Conditions.Value;
 
-	private IEnumerable<object> One_Hepatitis_A_Vaccinations_Value()
+	private  IEnumerable<object> One_Hepatitis_A_Vaccinations_Value()
 	{
 		CqlValueSet a_ = this.Hepatitis_A_Vaccine();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -2237,7 +2306,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, default);
 
 			return q_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlValueSet f_ = this.Hepatitis_A_Vaccine_Administered();
 		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
@@ -2252,7 +2322,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, default);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
 		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
@@ -2260,10 +2331,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("One Hepatitis A Vaccinations")]
-	public IEnumerable<object> One_Hepatitis_A_Vaccinations() => 
+	public  IEnumerable<object> One_Hepatitis_A_Vaccinations() => 
 		__One_Hepatitis_A_Vaccinations.Value;
 
-	private IEnumerable<Condition> Hepatitis_A_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> Hepatitis_A_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlValueSet a_ = this.Hepatitis_A();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -2281,17 +2352,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? n_ = context.Operators.In<CqlDate>(l_, m_, "day");
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Hepatitis A Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> Hepatitis_A_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> Hepatitis_A_Numerator_Inclusion_Conditions() => 
 		__Hepatitis_A_Numerator_Inclusion_Conditions.Value;
 
-	private IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures_Value()
+	private  IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures_Value()
 	{
 		CqlCode a_ = this.rotavirus__live__monovalent_vaccine();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -2307,7 +2379,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? v_ = context.Operators.IntervalIncludesInterval<CqlDate>(q_, u_, "day");
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<Immunization> f_ = context.Operators.Where<Immunization>(d_, e_);
 		CqlDate g_(Immunization TwoDoseRotavirusVaccine)
 		{
@@ -2320,7 +2393,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ac_ = context.Operators.DateFrom(ab_);
 
 			return ac_;
-		};
+		}
+;
 		IEnumerable<CqlDate> h_ = context.Operators.Select<Immunization, CqlDate>(f_, g_);
 		CqlValueSet i_ = this.Rotavirus_Vaccine__2_dose_schedule__Administered();
 		IEnumerable<Procedure> j_ = context.Operators.RetrieveByValueSet<Procedure>(i_, default);
@@ -2335,7 +2409,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDate>(ad_, ah_, "day");
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>(k_, l_);
 		CqlDate n_(Procedure TwoDoseRotavirusProcedure)
 		{
@@ -2348,7 +2423,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ap_ = context.Operators.DateFrom(ao_);
 
 			return ap_;
-		};
+		}
+;
 		IEnumerable<CqlDate> o_ = context.Operators.Select<Procedure, CqlDate>(m_, n_);
 		IEnumerable<CqlDate> p_ = context.Operators.Union<CqlDate>(h_, o_);
 
@@ -2356,10 +2432,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Rotavirus 2 Dose Immunizations or Procedures")]
-	public IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures() => 
+	public  IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures() => 
 		__Rotavirus_2_Dose_Immunizations_or_Procedures.Value;
 
-	private IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures_Value()
+	private  IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Rotavirus_Vaccine__3_dose_schedule_();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -2374,7 +2450,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization ThreeDoseRotavirusVaccine)
 		{
@@ -2387,7 +2464,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Rotavirus_Vaccine__3_dose_schedule__Administered();
 		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
@@ -2402,7 +2480,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? ah_ = context.Operators.IntervalIncludesInterval<CqlDate>(ac_, ag_, "day");
 
 			return ah_;
-		};
+		}
+;
 		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure ThreeDoseRotavirusAdministered)
 		{
@@ -2415,7 +2494,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ao_ = context.Operators.DateFrom(an_);
 
 			return ao_;
-		};
+		}
+;
 		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
 		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
@@ -2423,10 +2503,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Rotavirus 3 Dose Immunizations or Procedures")]
-	public IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures() => 
+	public  IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures() => 
 		__Rotavirus_3_Dose_Immunizations_or_Procedures.Value;
 
-	private IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations_Value()
+	private  IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Rotavirus_2_Dose_Immunizations_or_Procedures();
 		IEnumerable<CqlDate> b_ = this.Rotavirus_3_Dose_Immunizations_or_Procedures();
@@ -2436,10 +2516,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Rotavirus 2 or 3 Dose Immunizations")]
-	public IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations() => 
+	public  IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations() => 
 		__Rotavirus_2_or_3_Dose_Immunizations.Value;
 
-	private IEnumerable<CqlDate> All_Rotavirus_Vaccinations_Value()
+	private  IEnumerable<CqlDate> All_Rotavirus_Vaccinations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Rotavirus_2_or_3_Dose_Immunizations();
 		IEnumerable<CqlDate> c_(CqlDate AllRotavirusDoses1)
@@ -2453,14 +2533,17 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 				bool? n_ = context.Operators.In<CqlDate>(AllRotavirusDoses1, m_, default);
 
 				return n_;
-			};
+			}
+;
 			IEnumerable<CqlDate> h_ = context.Operators.Where<CqlDate>(f_, g_);
 			CqlDate i_(CqlDate AllRotavirusDoses2) => 
 				AllRotavirusDoses1;
+;
 			IEnumerable<CqlDate> j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlDate> d_ = context.Operators.SelectMany<CqlDate, CqlDate>(a_, c_);
 		IEnumerable<CqlDate> e_ = context.Operators.Except<CqlDate>(a_, d_);
 
@@ -2468,10 +2551,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("All Rotavirus Vaccinations")]
-	public IEnumerable<CqlDate> All_Rotavirus_Vaccinations() => 
+	public  IEnumerable<CqlDate> All_Rotavirus_Vaccinations() => 
 		__All_Rotavirus_Vaccinations.Value;
 
-	private bool? Has_Appropriate_Number_of_Rotavirus_Immunizations_Value()
+	private  bool? Has_Appropriate_Number_of_Rotavirus_Immunizations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.All_Rotavirus_Vaccinations();
 		bool? b_(CqlDate RotavirusImmunization)
@@ -2482,6 +2565,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			IEnumerable<CqlDate> h_ = this.All_Rotavirus_Vaccinations();
 			CqlDate i_(CqlDate RotavirusVaccinations) => 
 				RotavirusVaccinations;
+;
 			IEnumerable<CqlDate> j_ = context.Operators.Select<CqlDate, CqlDate>(h_, i_);
 			IEnumerable<CqlDate> k_ = context.Operators.Distinct<CqlDate>(j_);
 			int? l_ = context.Operators.Count<CqlDate>(k_);
@@ -2498,7 +2582,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? z_ = context.Operators.Or(n_, y_);
 
 			return z_;
-		};
+		}
+;
 		IEnumerable<CqlDate> c_ = context.Operators.Where<CqlDate>(a_, b_);
 		bool? d_ = context.Operators.Exists<CqlDate>(c_);
 
@@ -2506,10 +2591,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Appropriate Number of Rotavirus Immunizations")]
-	public bool? Has_Appropriate_Number_of_Rotavirus_Immunizations() => 
+	public  bool? Has_Appropriate_Number_of_Rotavirus_Immunizations() => 
 		__Has_Appropriate_Number_of_Rotavirus_Immunizations.Value;
 
-	private IEnumerable<Condition> Rotavirus_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> Rotavirus_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlCode a_ = this.Anaphylaxis_due_to_rotavirus_vaccine__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -2524,17 +2609,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Rotavirus Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> Rotavirus_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> Rotavirus_Numerator_Inclusion_Conditions() => 
 		__Rotavirus_Numerator_Inclusion_Conditions.Value;
 
-	private CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Value()
+	private  CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -2551,10 +2637,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Vaccine Administration Interval - 180 Days up to 2 Years Old")]
-	public CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old() => 
+	public  CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old() => 
 		__Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old.Value;
 
-	private IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures_Value()
+	private  IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Child_Influenza_Immunization_Administered();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -2569,7 +2655,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization InfluenzaVaccine)
 		{
@@ -2582,7 +2669,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ab_ = context.Operators.DateFrom(aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Child_Influenza_Vaccine_Administered();
 		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
@@ -2603,7 +2691,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(am_, ap_, "day");
 
 			return aq_;
-		};
+		}
+;
 		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure InfluenzaAdministration)
 		{
@@ -2616,7 +2705,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ax_ = context.Operators.DateFrom(aw_);
 
 			return ax_;
-		};
+		}
+;
 		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
 		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
@@ -2624,10 +2714,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Influenza Immunizations or Procedures")]
-	public IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures() => 
+	public  IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures() => 
 		__Influenza_Immunizations_or_Procedures.Value;
 
-	private IEnumerable<CqlDate> Two_Influenza_Vaccinations_Value()
+	private  IEnumerable<CqlDate> Two_Influenza_Vaccinations_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Influenza_Immunizations_or_Procedures();
 		IEnumerable<ValueTuple<CqlDate, CqlDate>> c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
@@ -2636,7 +2726,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			(CqlDate FluVaccination1, CqlDate FluVaccination2)? j_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<(CqlDate FluVaccination1, CqlDate FluVaccination2)?> e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, (CqlDate FluVaccination1, CqlDate FluVaccination2)?>(c_, d_);
 		bool? f_((CqlDate FluVaccination1, CqlDate FluVaccination2)? tuple_bzhflerdagbpqmnhevjcunfnq)
 		{
@@ -2645,20 +2736,22 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? m_ = context.Operators.SameOrAfter(tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination2, l_, "day");
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<(CqlDate FluVaccination1, CqlDate FluVaccination2)?> g_ = context.Operators.Where<(CqlDate FluVaccination1, CqlDate FluVaccination2)?>(e_, f_);
 		CqlDate h_((CqlDate FluVaccination1, CqlDate FluVaccination2)? tuple_bzhflerdagbpqmnhevjcunfnq) => 
 			tuple_bzhflerdagbpqmnhevjcunfnq?.FluVaccination1;
+;
 		IEnumerable<CqlDate> i_ = context.Operators.Select<(CqlDate FluVaccination1, CqlDate FluVaccination2)?, CqlDate>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Two Influenza Vaccinations")]
-	public IEnumerable<CqlDate> Two_Influenza_Vaccinations() => 
+	public  IEnumerable<CqlDate> Two_Influenza_Vaccinations() => 
 		__Two_Influenza_Vaccinations.Value;
 
-	private IEnumerable<CqlDate> LAIV_Vaccinations_Value()
+	private  IEnumerable<CqlDate> LAIV_Vaccinations_Value()
 	{
 		CqlValueSet a_ = this.Influenza_Virus_LAIV_Immunization();
 		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
@@ -2674,7 +2767,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, "day");
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlDate f_(Immunization LAIVVaccine)
 		{
@@ -2687,7 +2781,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate ad_ = context.Operators.DateFrom(ac_);
 
 			return ad_;
-		};
+		}
+;
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Influenza_Virus_LAIV_Procedure();
 		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
@@ -2703,7 +2798,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? al_ = context.Operators.IntervalIncludesInterval<CqlDate>(ag_, ak_, "day");
 
 			return al_;
-		};
+		}
+;
 		IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
 		CqlDate m_(Procedure InfluenzaAdministration)
 		{
@@ -2716,7 +2812,8 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlDate as_ = context.Operators.DateFrom(ar_);
 
 			return as_;
-		};
+		}
+;
 		IEnumerable<CqlDate> n_ = context.Operators.Select<Procedure, CqlDate>(l_, m_);
 		IEnumerable<CqlDate> o_ = context.Operators.Union<CqlDate>(g_, n_);
 
@@ -2724,10 +2821,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("LAIV Vaccinations")]
-	public IEnumerable<CqlDate> LAIV_Vaccinations() => 
+	public  IEnumerable<CqlDate> LAIV_Vaccinations() => 
 		__LAIV_Vaccinations.Value;
 
-	private bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Value()
+	private  bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.LAIV_Vaccinations();
 		bool? b_ = context.Operators.Exists<CqlDate>(a_);
@@ -2739,10 +2836,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Two Influenza Vaccinations Including One LAIV Vaccination")]
-	public bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination() => 
+	public  bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination() => 
 		__Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination.Value;
 
-	private IEnumerable<Condition> Influenza_Numerator_Inclusion_Conditions_Value()
+	private  IEnumerable<Condition> Influenza_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -2757,17 +2854,18 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			bool? k_ = context.Operators.In<CqlDate>(i_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Influenza Numerator Inclusion Conditions")]
-	public IEnumerable<Condition> Influenza_Numerator_Inclusion_Conditions() => 
+	public  IEnumerable<Condition> Influenza_Numerator_Inclusion_Conditions() => 
 		__Influenza_Numerator_Inclusion_Conditions.Value;
 
-	private bool? Numerator_Value()
+	private  bool? Numerator_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Four_DTaP_Vaccinations();
 		bool? b_ = context.Operators.Exists<CqlDate>(a_);
@@ -2845,10 +2943,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator() => 
+	public  bool? Numerator() => 
 		__Numerator.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -2856,10 +2954,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -2867,10 +2965,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -2878,10 +2976,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -2889,7 +2987,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
 }

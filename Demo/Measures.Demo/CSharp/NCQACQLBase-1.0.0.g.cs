@@ -29,7 +29,7 @@ public class NCQACQLBase_1_0_0
 
     }
     [CqlDeclaration("Sort Date Intervals")]
-	public IEnumerable<CqlInterval<CqlDate>> Sort_Date_Intervals(IEnumerable<CqlInterval<CqlDate>> intervals)
+	public  IEnumerable<CqlInterval<CqlDate>> Sort_Date_Intervals(IEnumerable<CqlInterval<CqlDate>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_()
 		{
@@ -39,7 +39,8 @@ public class NCQACQLBase_1_0_0
 				bool? d_ = context.Operators.Equal(c_, 0);
 
 				return (d_ ?? false);
-			};
+			}
+;
 			if ((intervals is null))
 			{
 				CqlInterval<CqlDate>[] e_ = []
@@ -72,36 +73,41 @@ public class NCQACQLBase_1_0_0
 
 							return p_;
 						}
-					};
+					}
+;
 					(CqlInterval<CqlDate> interval, CqlDate startOfInterval)? n_ = (I, m_());
 
 					return n_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDate> interval, CqlDate startOfInterval)?> h_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlInterval<CqlDate> interval, CqlDate startOfInterval)?>(intervals, g_);
 				object i_((CqlInterval<CqlDate> interval, CqlDate startOfInterval)? @this)
 				{
 					CqlDate q_ = @this?.startOfInterval;
 
 					return q_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDate> interval, CqlDate startOfInterval)?> j_ = context.Operators.SortBy<(CqlInterval<CqlDate> interval, CqlDate startOfInterval)?>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 				CqlInterval<CqlDate> k_((CqlInterval<CqlDate> interval, CqlDate startOfInterval)? sortedIntervals)
 				{
 					CqlInterval<CqlDate> r_ = sortedIntervals?.interval;
 
 					return r_;
-				};
+				}
+;
 				IEnumerable<CqlInterval<CqlDate>> l_ = context.Operators.Select<(CqlInterval<CqlDate> interval, CqlDate startOfInterval)?, CqlInterval<CqlDate>>(j_, k_);
 
 				return l_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Sort DateTime Intervals")]
-	public IEnumerable<CqlInterval<CqlDateTime>> Sort_DateTime_Intervals(IEnumerable<CqlInterval<CqlDateTime>> intervals)
+	public  IEnumerable<CqlInterval<CqlDateTime>> Sort_DateTime_Intervals(IEnumerable<CqlInterval<CqlDateTime>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_()
 		{
@@ -111,7 +117,8 @@ public class NCQACQLBase_1_0_0
 				bool? d_ = context.Operators.Equal(c_, 0);
 
 				return (d_ ?? false);
-			};
+			}
+;
 			if ((intervals is null))
 			{
 				CqlInterval<CqlDateTime>[] e_ = []
@@ -144,36 +151,41 @@ public class NCQACQLBase_1_0_0
 
 							return p_;
 						}
-					};
+					}
+;
 					(CqlInterval<CqlDateTime> interval, CqlDateTime startOfInterval)? n_ = (I, m_());
 
 					return n_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDateTime> interval, CqlDateTime startOfInterval)?> h_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlInterval<CqlDateTime> interval, CqlDateTime startOfInterval)?>(intervals, g_);
 				object i_((CqlInterval<CqlDateTime> interval, CqlDateTime startOfInterval)? @this)
 				{
 					CqlDateTime q_ = @this?.startOfInterval;
 
 					return q_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDateTime> interval, CqlDateTime startOfInterval)?> j_ = context.Operators.SortBy<(CqlInterval<CqlDateTime> interval, CqlDateTime startOfInterval)?>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 				CqlInterval<CqlDateTime> k_((CqlInterval<CqlDateTime> interval, CqlDateTime startOfInterval)? sortedIntervals)
 				{
 					CqlInterval<CqlDateTime> r_ = sortedIntervals?.interval;
 
 					return r_;
-				};
+				}
+;
 				IEnumerable<CqlInterval<CqlDateTime>> l_ = context.Operators.Select<(CqlInterval<CqlDateTime> interval, CqlDateTime startOfInterval)?, CqlInterval<CqlDateTime>>(j_, k_);
 
 				return l_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Collapse Date Interval Workaround")]
-	public IEnumerable<CqlInterval<CqlDate>> Collapse_Date_Interval_Workaround(IEnumerable<CqlInterval<CqlDate>> intervals)
+	public  IEnumerable<CqlInterval<CqlDate>> Collapse_Date_Interval_Workaround(IEnumerable<CqlInterval<CqlDate>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_()
 		{
@@ -183,7 +195,8 @@ public class NCQACQLBase_1_0_0
 				bool? d_ = context.Operators.Equal(c_, 0);
 
 				return (d_ ?? false);
-			};
+			}
+;
 			if ((intervals is null))
 			{
 				CqlInterval<CqlDate>[] e_ = []
@@ -207,25 +220,28 @@ public class NCQACQLBase_1_0_0
 						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, default);
 
 						return n_;
-					};
+					}
+;
 					IEnumerable<bool?> k_ = context.Operators.Select<CqlInterval<CqlDate>, bool?>(intervals, j_);
 					bool? l_ = context.Operators.AnyTrue(k_);
 					bool? m_ = context.Operators.Not(l_);
 
 					return m_;
-				};
+				}
+;
 				IEnumerable<CqlInterval<CqlDate>> h_ = context.Operators.Where<CqlInterval<CqlDate>>(intervals, g_);
 				IEnumerable<CqlInterval<CqlDate>> i_ = context.Operators.Collapse(h_, "day");
 
 				return i_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Collapse DateTime Interval Workaround")]
-	public IEnumerable<CqlInterval<CqlDateTime>> Collapse_DateTime_Interval_Workaround(IEnumerable<CqlInterval<CqlDateTime>> intervals)
+	public  IEnumerable<CqlInterval<CqlDateTime>> Collapse_DateTime_Interval_Workaround(IEnumerable<CqlInterval<CqlDateTime>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_()
 		{
@@ -235,7 +251,8 @@ public class NCQACQLBase_1_0_0
 				bool? d_ = context.Operators.Equal(c_, 0);
 
 				return (d_ ?? false);
-			};
+			}
+;
 			if ((intervals is null))
 			{
 				CqlInterval<CqlDateTime>[] e_ = []
@@ -259,25 +276,28 @@ public class NCQACQLBase_1_0_0
 						bool? n_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, default);
 
 						return n_;
-					};
+					}
+;
 					IEnumerable<bool?> k_ = context.Operators.Select<CqlInterval<CqlDateTime>, bool?>(intervals, j_);
 					bool? l_ = context.Operators.AnyTrue(k_);
 					bool? m_ = context.Operators.Not(l_);
 
 					return m_;
-				};
+				}
+;
 				IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Where<CqlInterval<CqlDateTime>>(intervals, g_);
 				IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Collapse(h_, default);
 
 				return i_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Date Interval Covering Relative to Base Interval")]
-	public IEnumerable<CqlInterval<CqlDate>> Date_Interval_Covering_Relative_to_Base_Interval(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+	public  IEnumerable<CqlInterval<CqlDate>> Date_Interval_Covering_Relative_to_Base_Interval(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Sort_Date_Intervals(coveringIntervals);
 		CqlInterval<CqlDate> b_(CqlInterval<CqlDate> sortedInterval)
@@ -285,7 +305,8 @@ public class NCQACQLBase_1_0_0
 			CqlInterval<CqlDate> e_ = context.Operators.Intersect<CqlDate>(baseInterval, sortedInterval);
 
 			return e_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> c_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(a_, b_);
 		IEnumerable<CqlInterval<CqlDate>> d_ = this.Collapse_Date_Interval_Workaround(c_);
 
@@ -293,7 +314,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("DateTime Interval Covering Relative to Base Interval")]
-	public IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Covering_Relative_to_Base_Interval(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+	public  IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Covering_Relative_to_Base_Interval(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.Sort_DateTime_Intervals(coveringIntervals);
 		CqlInterval<CqlDateTime> b_(CqlInterval<CqlDateTime> sortedInterval)
@@ -301,7 +322,8 @@ public class NCQACQLBase_1_0_0
 			CqlInterval<CqlDateTime> e_ = context.Operators.Intersect<CqlDateTime>(baseInterval, sortedInterval);
 
 			return e_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(a_, b_);
 		IEnumerable<CqlInterval<CqlDateTime>> d_ = this.Collapse_DateTime_Interval_Workaround(c_);
 
@@ -309,7 +331,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Date Interval Gaps Relative to Base Interval")]
-	public IEnumerable<CqlInterval<CqlDate>> Date_Interval_Gaps_Relative_to_Base_Interval(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+	public  IEnumerable<CqlInterval<CqlDate>> Date_Interval_Gaps_Relative_to_Base_Interval(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDate>> sortedCoverings, nint _)? b_ = (a_, default);
@@ -327,7 +349,8 @@ public class NCQACQLBase_1_0_0
 					bool? q_ = context.Operators.Equal(p_, 0);
 
 					return (q_ ?? false);
-				};
+				}
+;
 				if (n_())
 				{
 					CqlInterval<CqlDate>[] r_ = [
@@ -350,7 +373,8 @@ public class NCQACQLBase_1_0_0
 								bool? z_ = context.Operators.Equal(y_, 0);
 
 								return (z_ ?? false);
-							};
+							}
+;
 							if (w_())
 							{
 								CqlDate aa_ = context.Operators.Start(baseInterval);
@@ -378,15 +402,18 @@ public class NCQACQLBase_1_0_0
 
 								return at_;
 							}
-						};
+						}
+;
 
 						return v_();
-					};
+					}
+;
 					IEnumerable<CqlInterval<CqlDate>> u_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(s_, t_);
 
 					return u_;
 				}
-			};
+			}
+;
 			IEnumerable<CqlInterval<CqlDate>> h_()
 			{
 				bool au_()
@@ -396,7 +423,8 @@ public class NCQACQLBase_1_0_0
 					bool? ax_ = context.Operators.Equal(aw_, 0);
 
 					return (ax_ ?? false);
-				};
+				}
+;
 				if (au_())
 				{
 					CqlInterval<CqlDate>[] ay_ = []
@@ -420,7 +448,8 @@ public class NCQACQLBase_1_0_0
 
 					return (bi_ as IEnumerable<CqlInterval<CqlDate>>);
 				}
-			};
+			}
+;
 			(IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)? i_ = (g_(), h_());
 			(IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)?[] j_ = [
 				i_,
@@ -433,12 +462,14 @@ public class NCQACQLBase_1_0_0
 				IEnumerable<CqlInterval<CqlDate>> bm_ = this.Collapse_Date_Interval_Workaround(bl_);
 
 				return bm_;
-			};
+			}
+;
 			IEnumerable<IEnumerable<CqlInterval<CqlDate>>> l_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)?, IEnumerable<CqlInterval<CqlDate>>>(((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)?>)j_), k_);
 			IEnumerable<CqlInterval<CqlDate>> m_ = context.Operators.SingletonFrom<IEnumerable<CqlInterval<CqlDate>>>(l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<IEnumerable<CqlInterval<CqlDate>>> e_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> sortedCoverings, nint _)?, IEnumerable<CqlInterval<CqlDate>>>(((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> sortedCoverings, nint _)?>)c_), d_);
 		IEnumerable<CqlInterval<CqlDate>> f_ = context.Operators.SingletonFrom<IEnumerable<CqlInterval<CqlDate>>>(e_);
 
@@ -446,7 +477,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("DateTime Interval Gaps Relative to Base Interval")]
-	public IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Gaps_Relative_to_Base_Interval(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+	public  IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Gaps_Relative_to_Base_Interval(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDateTime>> sortedCoverings, nint _)? b_ = (a_, default);
@@ -464,7 +495,8 @@ public class NCQACQLBase_1_0_0
 					bool? q_ = context.Operators.Equal(p_, 0);
 
 					return (q_ ?? false);
-				};
+				}
+;
 				if (n_())
 				{
 					CqlInterval<CqlDateTime>[] r_ = [
@@ -487,7 +519,8 @@ public class NCQACQLBase_1_0_0
 								bool? z_ = context.Operators.Equal(y_, 0);
 
 								return (z_ ?? false);
-							};
+							}
+;
 							if (w_())
 							{
 								CqlDateTime aa_ = context.Operators.Start(baseInterval);
@@ -515,15 +548,18 @@ public class NCQACQLBase_1_0_0
 
 								return at_;
 							}
-						};
+						}
+;
 
 						return v_();
-					};
+					}
+;
 					IEnumerable<CqlInterval<CqlDateTime>> u_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(s_, t_);
 
 					return u_;
 				}
-			};
+			}
+;
 			IEnumerable<CqlInterval<CqlDateTime>> h_()
 			{
 				bool au_()
@@ -533,7 +569,8 @@ public class NCQACQLBase_1_0_0
 					bool? ax_ = context.Operators.Equal(aw_, 0);
 
 					return (ax_ ?? false);
-				};
+				}
+;
 				if (au_())
 				{
 					CqlInterval<CqlDateTime>[] ay_ = []
@@ -557,7 +594,8 @@ public class NCQACQLBase_1_0_0
 
 					return (bi_ as IEnumerable<CqlInterval<CqlDateTime>>);
 				}
-			};
+			}
+;
 			(IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)? i_ = (g_(), h_());
 			(IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)?[] j_ = [
 				i_,
@@ -570,12 +608,14 @@ public class NCQACQLBase_1_0_0
 				IEnumerable<CqlInterval<CqlDateTime>> bm_ = this.Collapse_DateTime_Interval_Workaround(bl_);
 
 				return bm_;
-			};
+			}
+;
 			IEnumerable<IEnumerable<CqlInterval<CqlDateTime>>> l_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)?, IEnumerable<CqlInterval<CqlDateTime>>>(((IEnumerable<(IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)?>)j_), k_);
 			IEnumerable<CqlInterval<CqlDateTime>> m_ = context.Operators.SingletonFrom<IEnumerable<CqlInterval<CqlDateTime>>>(l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<IEnumerable<CqlInterval<CqlDateTime>>> e_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDateTime>> sortedCoverings, nint _)?, IEnumerable<CqlInterval<CqlDateTime>>>(((IEnumerable<(IEnumerable<CqlInterval<CqlDateTime>> sortedCoverings, nint _)?>)c_), d_);
 		IEnumerable<CqlInterval<CqlDateTime>> f_ = context.Operators.SingletonFrom<IEnumerable<CqlInterval<CqlDateTime>>>(e_);
 
@@ -583,7 +623,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Collapsed Date Interval Stats")]
-	public (IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? Collapsed_Date_Interval_Stats(IEnumerable<CqlInterval<CqlDate>> collapsedIntervals)
+	public  (IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? Collapsed_Date_Interval_Stats(IEnumerable<CqlInterval<CqlDate>> collapsedIntervals)
 	{
 		int? a_ = context.Operators.Count<CqlInterval<CqlDate>>(collapsedIntervals);
 		int? b_()
@@ -594,7 +634,8 @@ public class NCQACQLBase_1_0_0
 				bool? h_ = context.Operators.Equal(g_, 0);
 
 				return (h_ ?? false);
-			};
+			}
+;
 			if (f_())
 			{
 				return 0;
@@ -614,13 +655,15 @@ public class NCQACQLBase_1_0_0
 					int? q_ = context.Operators.Max<int?>((p_ as IEnumerable<int?>));
 
 					return q_;
-				};
+				}
+;
 				IEnumerable<int?> j_ = context.Operators.Select<CqlInterval<CqlDate>, int?>(collapsedIntervals, i_);
 				int? k_ = context.Operators.Sum(j_);
 
 				return k_;
 			}
-		};
+		}
+;
 		CqlInterval<CqlDate> c_()
 		{
 			bool r_()
@@ -629,7 +672,8 @@ public class NCQACQLBase_1_0_0
 				bool? t_ = context.Operators.Equal(s_, 0);
 
 				return (t_ ?? false);
-			};
+			}
+;
 			if (r_())
 			{
 				return (null as CqlInterval<CqlDate>);
@@ -650,21 +694,24 @@ public class NCQACQLBase_1_0_0
 					(CqlInterval<CqlDate> interval, int? days)? ag_ = (I, af_);
 
 					return ag_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDate> interval, int? days)?> v_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlInterval<CqlDate> interval, int? days)?>(collapsedIntervals, u_);
 				object w_((CqlInterval<CqlDate> interval, int? days)? @this)
 				{
 					int? ah_ = @this?.days;
 
 					return ah_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDate> interval, int? days)?> x_ = context.Operators.SortBy<(CqlInterval<CqlDate> interval, int? days)?>(v_, w_, System.ComponentModel.ListSortDirection.Descending);
 				(CqlInterval<CqlDate> interval, int? days)? y_ = context.Operators.First<(CqlInterval<CqlDate> interval, int? days)?>(x_);
 				CqlInterval<CqlDate> z_ = y_?.interval;
 
 				return z_;
 			}
-		};
+		}
+;
 		int? d_()
 		{
 			bool ai_()
@@ -673,7 +720,8 @@ public class NCQACQLBase_1_0_0
 				bool? ak_ = context.Operators.Equal(aj_, 0);
 
 				return (ak_ ?? false);
-			};
+			}
+;
 			if (ai_())
 			{
 				return 0;
@@ -694,14 +742,16 @@ public class NCQACQLBase_1_0_0
 					(CqlInterval<CqlDate> interval, int? days)? bj_ = (I, bi_);
 
 					return bj_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDate> interval, int? days)?> am_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlInterval<CqlDate> interval, int? days)?>(collapsedIntervals, al_);
 				object an_((CqlInterval<CqlDate> interval, int? days)? @this)
 				{
 					int? bk_ = @this?.days;
 
 					return bk_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDate> interval, int? days)?> ao_ = context.Operators.SortBy<(CqlInterval<CqlDate> interval, int? days)?>(am_, an_, System.ComponentModel.ListSortDirection.Descending);
 				(CqlInterval<CqlDate> interval, int? days)? ap_ = context.Operators.First<(CqlInterval<CqlDate> interval, int? days)?>(ao_);
 				CqlInterval<CqlDate> aq_ = ap_?.interval;
@@ -720,14 +770,16 @@ public class NCQACQLBase_1_0_0
 					(CqlInterval<CqlDate> interval, int? days)? br_ = (I, bq_);
 
 					return br_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDate> interval, int? days)?> at_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlInterval<CqlDate> interval, int? days)?>(collapsedIntervals, as_);
 				object au_((CqlInterval<CqlDate> interval, int? days)? @this)
 				{
 					int? bs_ = @this?.days;
 
 					return bs_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDate> interval, int? days)?> av_ = context.Operators.SortBy<(CqlInterval<CqlDate> interval, int? days)?>(at_, au_, System.ComponentModel.ListSortDirection.Descending);
 				(CqlInterval<CqlDate> interval, int? days)? aw_ = context.Operators.First<(CqlInterval<CqlDate> interval, int? days)?>(av_);
 				CqlInterval<CqlDate> ax_ = aw_?.interval;
@@ -742,14 +794,15 @@ public class NCQACQLBase_1_0_0
 
 				return bc_;
 			}
-		};
+		}
+;
 		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? e_ = (collapsedIntervals, a_, b_(), c_(), d_());
 
 		return e_;
 	}
 
     [CqlDeclaration("Date Interval Covering Relative to Base Interval Stats")]
-	public (IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? Date_Interval_Covering_Relative_to_Base_Interval_Stats(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+	public  (IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? Date_Interval_Covering_Relative_to_Base_Interval_Stats(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDate>> Covering_Intervals, nint _)? b_ = (a_, default);
@@ -762,7 +815,8 @@ public class NCQACQLBase_1_0_0
 			(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = this.Collapsed_Date_Interval_Stats(g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> Covering_Intervals, nint _)?, (IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Covering_Intervals, nint _)?>)c_), d_);
 		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? f_ = context.Operators.SingletonFrom<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(e_);
 
@@ -770,7 +824,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Date Interval Gaps Relative to Base Interval Stats")]
-	public (IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? Date_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+	public  (IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? Date_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Date_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDate>> Gap_Intervals, nint _)? b_ = (a_, default);
@@ -783,7 +837,8 @@ public class NCQACQLBase_1_0_0
 			(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = this.Collapsed_Date_Interval_Stats(g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> Gap_Intervals, nint _)?, (IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Gap_Intervals, nint _)?>)c_), d_);
 		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? f_ = context.Operators.SingletonFrom<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(e_);
 
@@ -791,7 +846,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("DateTime Interval Set Nulls to Zero")]
-	public CqlInterval<CqlDateTime> DateTime_Interval_Set_Nulls_to_Zero(CqlInterval<CqlDateTime> interval)
+	public  CqlInterval<CqlDateTime> DateTime_Interval_Set_Nulls_to_Zero(CqlInterval<CqlDateTime> interval)
 	{
 		CqlDateTime a_ = context.Operators.Start(interval);
 		int? b_ = context.Operators.DateTimeComponentFrom(a_, "year");
@@ -803,7 +858,8 @@ public class NCQACQLBase_1_0_0
 				int? x_ = context.Operators.DateTimeComponentFrom(w_, "month");
 
 				return (x_ is null);
-			};
+			}
+;
 			if (v_())
 			{
 				return 0;
@@ -815,7 +871,8 @@ public class NCQACQLBase_1_0_0
 
 				return z_;
 			}
-		};
+		}
+;
 		int? d_()
 		{
 			bool aa_()
@@ -824,7 +881,8 @@ public class NCQACQLBase_1_0_0
 				int? ac_ = context.Operators.DateTimeComponentFrom(ab_, "day");
 
 				return (ac_ is null);
-			};
+			}
+;
 			if (aa_())
 			{
 				return 0;
@@ -836,7 +894,8 @@ public class NCQACQLBase_1_0_0
 
 				return ae_;
 			}
-		};
+		}
+;
 		int? e_()
 		{
 			bool af_()
@@ -845,7 +904,8 @@ public class NCQACQLBase_1_0_0
 				int? ah_ = context.Operators.DateTimeComponentFrom(ag_, "hour");
 
 				return (ah_ is null);
-			};
+			}
+;
 			if (af_())
 			{
 				return 0;
@@ -857,7 +917,8 @@ public class NCQACQLBase_1_0_0
 
 				return aj_;
 			}
-		};
+		}
+;
 		int? f_()
 		{
 			bool ak_()
@@ -866,7 +927,8 @@ public class NCQACQLBase_1_0_0
 				int? am_ = context.Operators.DateTimeComponentFrom(al_, "minute");
 
 				return (am_ is null);
-			};
+			}
+;
 			if (ak_())
 			{
 				return 0;
@@ -878,7 +940,8 @@ public class NCQACQLBase_1_0_0
 
 				return ao_;
 			}
-		};
+		}
+;
 		int? g_()
 		{
 			bool ap_()
@@ -887,7 +950,8 @@ public class NCQACQLBase_1_0_0
 				int? ar_ = context.Operators.DateTimeComponentFrom(aq_, "second");
 
 				return (ar_ is null);
-			};
+			}
+;
 			if (ap_())
 			{
 				return 0;
@@ -899,7 +963,8 @@ public class NCQACQLBase_1_0_0
 
 				return at_;
 			}
-		};
+		}
+;
 		int? h_()
 		{
 			bool au_()
@@ -908,7 +973,8 @@ public class NCQACQLBase_1_0_0
 				int? aw_ = context.Operators.DateTimeComponentFrom(av_, "millisecond");
 
 				return (aw_ is null);
-			};
+			}
+;
 			if (au_())
 			{
 				return 0;
@@ -920,7 +986,8 @@ public class NCQACQLBase_1_0_0
 
 				return ay_;
 			}
-		};
+		}
+;
 		CqlDateTime i_ = context.Operators.End(interval);
 		int? j_ = context.Operators.DateTimeComponentFrom(i_, "year");
 		int? k_()
@@ -931,7 +998,8 @@ public class NCQACQLBase_1_0_0
 				int? bb_ = context.Operators.DateTimeComponentFrom(ba_, "month");
 
 				return (bb_ is null);
-			};
+			}
+;
 			if (az_())
 			{
 				return 0;
@@ -943,7 +1011,8 @@ public class NCQACQLBase_1_0_0
 
 				return bd_;
 			}
-		};
+		}
+;
 		int? l_()
 		{
 			bool be_()
@@ -952,7 +1021,8 @@ public class NCQACQLBase_1_0_0
 				int? bg_ = context.Operators.DateTimeComponentFrom(bf_, "day");
 
 				return (bg_ is null);
-			};
+			}
+;
 			if (be_())
 			{
 				return 0;
@@ -964,7 +1034,8 @@ public class NCQACQLBase_1_0_0
 
 				return bi_;
 			}
-		};
+		}
+;
 		int? m_()
 		{
 			bool bj_()
@@ -973,7 +1044,8 @@ public class NCQACQLBase_1_0_0
 				int? bl_ = context.Operators.DateTimeComponentFrom(bk_, "hour");
 
 				return (bl_ is null);
-			};
+			}
+;
 			if (bj_())
 			{
 				return 0;
@@ -985,7 +1057,8 @@ public class NCQACQLBase_1_0_0
 
 				return bn_;
 			}
-		};
+		}
+;
 		int? n_()
 		{
 			bool bo_()
@@ -994,7 +1067,8 @@ public class NCQACQLBase_1_0_0
 				int? bq_ = context.Operators.DateTimeComponentFrom(bp_, "minute");
 
 				return (bq_ is null);
-			};
+			}
+;
 			if (bo_())
 			{
 				return 0;
@@ -1006,7 +1080,8 @@ public class NCQACQLBase_1_0_0
 
 				return bs_;
 			}
-		};
+		}
+;
 		int? o_()
 		{
 			bool bt_()
@@ -1015,7 +1090,8 @@ public class NCQACQLBase_1_0_0
 				int? bv_ = context.Operators.DateTimeComponentFrom(bu_, "second");
 
 				return (bv_ is null);
-			};
+			}
+;
 			if (bt_())
 			{
 				return 0;
@@ -1027,7 +1103,8 @@ public class NCQACQLBase_1_0_0
 
 				return bx_;
 			}
-		};
+		}
+;
 		int? p_()
 		{
 			bool by_()
@@ -1036,7 +1113,8 @@ public class NCQACQLBase_1_0_0
 				int? ca_ = context.Operators.DateTimeComponentFrom(bz_, "millisecond");
 
 				return (ca_ is null);
-			};
+			}
+;
 			if (by_())
 			{
 				return 0;
@@ -1048,7 +1126,8 @@ public class NCQACQLBase_1_0_0
 
 				return cc_;
 			}
-		};
+		}
+;
 		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? q_ = (b_, c_(), d_(), e_(), f_(), g_(), h_(), j_, k_(), l_(), m_(), n_(), o_(), p_());
 		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?[] r_ = [
 			q_,
@@ -1074,7 +1153,8 @@ public class NCQACQLBase_1_0_0
 			CqlInterval<CqlDateTime> ct_ = context.Operators.Interval(ck_, cs_, true, true);
 
 			return ct_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> t_ = context.Operators.Select<(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?, CqlInterval<CqlDateTime>>(((IEnumerable<(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?>)r_), s_);
 		CqlInterval<CqlDateTime> u_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(t_);
 
@@ -1082,7 +1162,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Collapsed DateTime Interval Stats")]
-	public (IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? Collapsed_DateTime_Interval_Stats(IEnumerable<CqlInterval<CqlDateTime>> collapsedIntervals)
+	public  (IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? Collapsed_DateTime_Interval_Stats(IEnumerable<CqlInterval<CqlDateTime>> collapsedIntervals)
 	{
 		int? a_ = context.Operators.Count<CqlInterval<CqlDateTime>>(collapsedIntervals);
 		int? b_()
@@ -1093,7 +1173,8 @@ public class NCQACQLBase_1_0_0
 				bool? h_ = context.Operators.Equal(g_, 0);
 
 				return (h_ ?? false);
-			};
+			}
+;
 			if (f_())
 			{
 				return 0;
@@ -1114,13 +1195,15 @@ public class NCQACQLBase_1_0_0
 					int? s_ = context.Operators.Max<int?>((r_ as IEnumerable<int?>));
 
 					return s_;
-				};
+				}
+;
 				IEnumerable<int?> j_ = context.Operators.Select<CqlInterval<CqlDateTime>, int?>(collapsedIntervals, i_);
 				int? k_ = context.Operators.Sum(j_);
 
 				return k_;
 			}
-		};
+		}
+;
 		CqlInterval<CqlDateTime> c_()
 		{
 			bool t_()
@@ -1129,7 +1212,8 @@ public class NCQACQLBase_1_0_0
 				bool? v_ = context.Operators.Equal(u_, 0);
 
 				return (v_ ?? false);
-			};
+			}
+;
 			if (t_())
 			{
 				return (null as CqlInterval<CqlDateTime>);
@@ -1151,21 +1235,24 @@ public class NCQACQLBase_1_0_0
 					(CqlInterval<CqlDateTime> interval, int? days)? ak_ = (I, aj_);
 
 					return ak_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDateTime> interval, int? days)?> x_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlInterval<CqlDateTime> interval, int? days)?>(collapsedIntervals, w_);
 				object y_((CqlInterval<CqlDateTime> interval, int? days)? @this)
 				{
 					int? al_ = @this?.days;
 
 					return al_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDateTime> interval, int? days)?> z_ = context.Operators.SortBy<(CqlInterval<CqlDateTime> interval, int? days)?>(x_, y_, System.ComponentModel.ListSortDirection.Descending);
 				(CqlInterval<CqlDateTime> interval, int? days)? aa_ = context.Operators.First<(CqlInterval<CqlDateTime> interval, int? days)?>(z_);
 				CqlInterval<CqlDateTime> ab_ = aa_?.interval;
 
 				return ab_;
 			}
-		};
+		}
+;
 		int? d_()
 		{
 			bool am_()
@@ -1174,7 +1261,8 @@ public class NCQACQLBase_1_0_0
 				bool? ao_ = context.Operators.Equal(an_, 0);
 
 				return (ao_ ?? false);
-			};
+			}
+;
 			if (am_())
 			{
 				return 0;
@@ -1196,14 +1284,16 @@ public class NCQACQLBase_1_0_0
 					(CqlInterval<CqlDateTime> interval, int? days)? br_ = (I, bq_);
 
 					return br_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDateTime> interval, int? days)?> aq_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlInterval<CqlDateTime> interval, int? days)?>(collapsedIntervals, ap_);
 				object ar_((CqlInterval<CqlDateTime> interval, int? days)? @this)
 				{
 					int? bs_ = @this?.days;
 
 					return bs_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDateTime> interval, int? days)?> as_ = context.Operators.SortBy<(CqlInterval<CqlDateTime> interval, int? days)?>(aq_, ar_, System.ComponentModel.ListSortDirection.Descending);
 				(CqlInterval<CqlDateTime> interval, int? days)? at_ = context.Operators.First<(CqlInterval<CqlDateTime> interval, int? days)?>(as_);
 				CqlInterval<CqlDateTime> au_ = at_?.interval;
@@ -1224,14 +1314,16 @@ public class NCQACQLBase_1_0_0
 					(CqlInterval<CqlDateTime> interval, int? days)? cb_ = (I, ca_);
 
 					return cb_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDateTime> interval, int? days)?> ay_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlInterval<CqlDateTime> interval, int? days)?>(collapsedIntervals, ax_);
 				object az_((CqlInterval<CqlDateTime> interval, int? days)? @this)
 				{
 					int? cc_ = @this?.days;
 
 					return cc_;
-				};
+				}
+;
 				IEnumerable<(CqlInterval<CqlDateTime> interval, int? days)?> ba_ = context.Operators.SortBy<(CqlInterval<CqlDateTime> interval, int? days)?>(ay_, az_, System.ComponentModel.ListSortDirection.Descending);
 				(CqlInterval<CqlDateTime> interval, int? days)? bb_ = context.Operators.First<(CqlInterval<CqlDateTime> interval, int? days)?>(ba_);
 				CqlInterval<CqlDateTime> bc_ = bb_?.interval;
@@ -1247,14 +1339,15 @@ public class NCQACQLBase_1_0_0
 
 				return bi_;
 			}
-		};
+		}
+;
 		(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? e_ = (collapsedIntervals, a_, b_(), c_(), d_());
 
 		return e_;
 	}
 
     [CqlDeclaration("DateTime Interval Covering Relative to Base Interval Stats")]
-	public (IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? DateTime_Interval_Covering_Relative_to_Base_Interval_Stats(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+	public  (IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? DateTime_Interval_Covering_Relative_to_Base_Interval_Stats(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals, nint _)? b_ = (a_, default);
@@ -1267,7 +1360,8 @@ public class NCQACQLBase_1_0_0
 			(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = this.Collapsed_DateTime_Interval_Stats(g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals, nint _)?, (IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(((IEnumerable<(IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals, nint _)?>)c_), d_);
 		(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? f_ = context.Operators.SingletonFrom<(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(e_);
 
@@ -1275,7 +1369,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("DateTime Interval Gaps Relative to Base Interval Stats")]
-	public (IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? DateTime_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+	public  (IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? DateTime_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = this.DateTime_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
 		(IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals, nint _)? b_ = (a_, default);
@@ -1288,7 +1382,8 @@ public class NCQACQLBase_1_0_0
 			(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = this.Collapsed_DateTime_Interval_Stats(g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals, nint _)?, (IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(((IEnumerable<(IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals, nint _)?>)c_), d_);
 		(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? f_ = context.Operators.SingletonFrom<(IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(e_);
 
@@ -1296,7 +1391,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Convert To UTC DateTime")]
-	public CqlDateTime Convert_To_UTC_DateTime(CqlDate d)
+	public  CqlDateTime Convert_To_UTC_DateTime(CqlDate d)
 	{
 		int? a_ = context.Operators.DateTimeComponentFrom(d, "year");
 		int? b_()
@@ -1311,7 +1406,8 @@ public class NCQACQLBase_1_0_0
 
 				return i_;
 			}
-		};
+		}
+;
 		int? c_()
 		{
 			if ((context.Operators.DateTimeComponentFrom(d, "day") is null))
@@ -1324,7 +1420,8 @@ public class NCQACQLBase_1_0_0
 
 				return j_;
 			}
-		};
+		}
+;
 		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? d_ = (a_, b_(), c_(), default, default, default, default, default, default, default, default, default, default, default);
 		(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?[] e_ = [
 			d_,
@@ -1338,7 +1435,8 @@ public class NCQACQLBase_1_0_0
 			CqlDateTime o_ = context.Operators.DateTime(k_, l_, m_, 0, 0, 0, 0, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<CqlDateTime> g_ = context.Operators.Select<(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?, CqlDateTime>(((IEnumerable<(int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?>)e_), f_);
 		CqlDateTime h_ = context.Operators.SingletonFrom<CqlDateTime>(g_);
 
@@ -1346,7 +1444,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Convert Interval Date to UTC Interval DateTime")]
-	public CqlInterval<CqlDateTime> Convert_Interval_Date_to_UTC_Interval_DateTime(CqlInterval<CqlDate> interval)
+	public  CqlInterval<CqlDateTime> Convert_Interval_Date_to_UTC_Interval_DateTime(CqlInterval<CqlDate> interval)
 	{
 		CqlDate a_ = context.Operators.Start(interval);
 		CqlDateTime b_ = this.Convert_To_UTC_DateTime(a_);

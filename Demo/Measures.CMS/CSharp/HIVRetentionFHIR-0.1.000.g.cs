@@ -101,111 +101,111 @@ public class HIVRetentionFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Annual_Wellness_Visit_Value() => 
+	private  CqlValueSet Annual_Wellness_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-	public CqlValueSet Annual_Wellness_Visit() => 
+	public  CqlValueSet Annual_Wellness_Visit() => 
 		__Annual_Wellness_Visit.Value;
 
-	private CqlValueSet Face_to_Face_Interaction_Value() => 
+	private  CqlValueSet Face_to_Face_Interaction_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", default);
 
     [CqlDeclaration("Face-to-Face Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048")]
-	public CqlValueSet Face_to_Face_Interaction() => 
+	public  CqlValueSet Face_to_Face_Interaction() => 
 		__Face_to_Face_Interaction.Value;
 
-	private CqlValueSet HIV_Value() => 
+	private  CqlValueSet HIV_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003", default);
 
     [CqlDeclaration("HIV")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003")]
-	public CqlValueSet HIV() => 
+	public  CqlValueSet HIV() => 
 		__HIV.Value;
 
-	private CqlValueSet HIV_Viral_Load_Value() => 
+	private  CqlValueSet HIV_Viral_Load_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1002", default);
 
     [CqlDeclaration("HIV Viral Load")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1002")]
-	public CqlValueSet HIV_Viral_Load() => 
+	public  CqlValueSet HIV_Viral_Load() => 
 		__HIV_Viral_Load.Value;
 
-	private CqlValueSet Home_Healthcare_Services_Value() => 
+	private  CqlValueSet Home_Healthcare_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services() => 
+	public  CqlValueSet Home_Healthcare_Services() => 
 		__Home_Healthcare_Services.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Outpatient_Consultation_Value() => 
+	private  CqlValueSet Outpatient_Consultation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public CqlValueSet Outpatient_Consultation() => 
+	public  CqlValueSet Outpatient_Consultation() => 
 		__Outpatient_Consultation.Value;
 
-	private CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services_Established_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
+	private  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-	public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17() => 
+	public  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17() => 
 		__Preventive_Care_Services__Initial_Office_Visit__0_to_17.Value;
 
-	private CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
+	private  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-	public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17() => 
+	public  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17() => 
 		__Preventive_Care__Established_Office_Visit__0_to_17.Value;
 
-	private CqlValueSet Telephone_Visits_Value() => 
+	private  CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits() => 
+	public  CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
 
-	private CqlValueSet Preventive_Care_Services_Other_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Other_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1150", default);
 
     [CqlDeclaration("Preventive Care Services Other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1150")]
-	public CqlValueSet Preventive_Care_Services_Other() => 
+	public  CqlValueSet Preventive_Care_Services_Other() => 
 		__Preventive_Care_Services_Other.Value;
 
-	private CqlCode[] CPT_Value()
+	private  CqlCode[] CPT_Value()
 	{
 		CqlCode[] a_ = []
 ;
@@ -214,10 +214,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("CPT")]
-	public CqlCode[] CPT() => 
+	public  CqlCode[] CPT() => 
 		__CPT.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -228,10 +228,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -240,10 +240,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -251,10 +251,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		List<Extension> a_()
 		{
@@ -264,7 +264,8 @@ public class HIVRetentionFHIR_0_1_000
 				bool k_ = j_ is DomainResource;
 
 				return k_;
-			};
+			}
+;
 			if (i_())
 			{
 				Patient l_ = this.Patient();
@@ -275,7 +276,8 @@ public class HIVRetentionFHIR_0_1_000
 			{
 				return default;
 			}
-		};
+		}
+;
 		bool? b_(Extension @this)
 		{
 			string m_ = @this?.Url;
@@ -283,7 +285,8 @@ public class HIVRetentionFHIR_0_1_000
 			bool? o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
 		Extension[] e_ = [
@@ -298,7 +301,8 @@ public class HIVRetentionFHIR_0_1_000
 				bool? am_ = context.Operators.Equal(al_, "ombCategory");
 
 				return am_;
-			};
+			}
+;
 			IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
 					: default), p_);
@@ -307,7 +311,8 @@ public class HIVRetentionFHIR_0_1_000
 				DataType an_ = @this?.Value;
 
 				return an_;
-			};
+			}
+;
 			IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
 			DataType t_ = context.Operators.SingletonFrom<DataType>(s_);
 			CqlCode u_ = FHIRHelpers_4_3_000.ToCode(t_);
@@ -321,7 +326,8 @@ public class HIVRetentionFHIR_0_1_000
 				bool? aq_ = context.Operators.Equal(ap_, "detailed");
 
 				return aq_;
-			};
+			}
+;
 			IEnumerable<Extension> x_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
 					: default), w_);
@@ -330,14 +336,16 @@ public class HIVRetentionFHIR_0_1_000
 				DataType ar_ = @this?.Value;
 
 				return ar_;
-			};
+			}
+;
 			IEnumerable<DataType> z_ = context.Operators.Select<Extension, DataType>(x_, y_);
 			CqlCode aa_(DataType @this)
 			{
 				CqlCode as_ = FHIRHelpers_4_3_000.ToCode(@this);
 
 				return as_;
-			};
+			}
+;
 			IEnumerable<CqlCode> ab_ = context.Operators.Select<DataType, CqlCode>(z_, aa_);
 			IEnumerable<CqlCode> ac_ = context.Operators.Union<CqlCode>((v_ as IEnumerable<CqlCode>), ab_);
 			bool? ad_(Extension @this)
@@ -347,7 +355,8 @@ public class HIVRetentionFHIR_0_1_000
 				bool? av_ = context.Operators.Equal(au_, "text");
 
 				return av_;
-			};
+			}
+;
 			IEnumerable<Extension> ae_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
 					? ((E as Element).Extension)
 					: default), ad_);
@@ -356,14 +365,16 @@ public class HIVRetentionFHIR_0_1_000
 				DataType aw_ = @this?.Value;
 
 				return aw_;
-			};
+			}
+;
 			IEnumerable<DataType> ag_ = context.Operators.Select<Extension, DataType>(ae_, af_);
 			DataType ah_ = context.Operators.SingletonFrom<DataType>(ag_);
 			string ai_ = context.Operators.Convert<string>(ah_);
 			(IEnumerable<CqlCode> codes, string display)? aj_ = (ac_, ai_);
 
 			return aj_;
-		};
+		}
+;
 		IEnumerable<(IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.Select<Extension, (IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
 		(IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(IEnumerable<CqlCode> codes, string display)?>(g_);
 
@@ -371,10 +382,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		List<Extension> a_()
 		{
@@ -384,7 +395,8 @@ public class HIVRetentionFHIR_0_1_000
 				bool k_ = j_ is DomainResource;
 
 				return k_;
-			};
+			}
+;
 			if (i_())
 			{
 				Patient l_ = this.Patient();
@@ -395,7 +407,8 @@ public class HIVRetentionFHIR_0_1_000
 			{
 				return default;
 			}
-		};
+		}
+;
 		bool? b_(Extension @this)
 		{
 			string m_ = @this?.Url;
@@ -403,7 +416,8 @@ public class HIVRetentionFHIR_0_1_000
 			bool? o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
 		Extension[] e_ = [
@@ -418,7 +432,8 @@ public class HIVRetentionFHIR_0_1_000
 				bool? al_ = context.Operators.Equal(ak_, "ombCategory");
 
 				return al_;
-			};
+			}
+;
 			IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
 					: default), p_);
@@ -427,14 +442,16 @@ public class HIVRetentionFHIR_0_1_000
 				DataType am_ = @this?.Value;
 
 				return am_;
-			};
+			}
+;
 			IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
 			CqlCode t_(DataType @this)
 			{
 				CqlCode an_ = FHIRHelpers_4_3_000.ToCode(@this);
 
 				return an_;
-			};
+			}
+;
 			IEnumerable<CqlCode> u_ = context.Operators.Select<DataType, CqlCode>(s_, t_);
 			bool? v_(Extension @this)
 			{
@@ -443,7 +460,8 @@ public class HIVRetentionFHIR_0_1_000
 				bool? aq_ = context.Operators.Equal(ap_, "detailed");
 
 				return aq_;
-			};
+			}
+;
 			IEnumerable<Extension> w_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
 					: default), v_);
@@ -452,14 +470,16 @@ public class HIVRetentionFHIR_0_1_000
 				DataType ar_ = @this?.Value;
 
 				return ar_;
-			};
+			}
+;
 			IEnumerable<DataType> y_ = context.Operators.Select<Extension, DataType>(w_, x_);
 			CqlCode z_(DataType @this)
 			{
 				CqlCode as_ = FHIRHelpers_4_3_000.ToCode(@this);
 
 				return as_;
-			};
+			}
+;
 			IEnumerable<CqlCode> aa_ = context.Operators.Select<DataType, CqlCode>(y_, z_);
 			IEnumerable<CqlCode> ab_ = context.Operators.Union<CqlCode>(u_, aa_);
 			bool? ac_(Extension @this)
@@ -469,7 +489,8 @@ public class HIVRetentionFHIR_0_1_000
 				bool? av_ = context.Operators.Equal(au_, "text");
 
 				return av_;
-			};
+			}
+;
 			IEnumerable<Extension> ad_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
 					? ((R as Element).Extension)
 					: default), ac_);
@@ -478,14 +499,16 @@ public class HIVRetentionFHIR_0_1_000
 				DataType aw_ = @this?.Value;
 
 				return aw_;
-			};
+			}
+;
 			IEnumerable<DataType> af_ = context.Operators.Select<Extension, DataType>(ad_, ae_);
 			DataType ag_ = context.Operators.SingletonFrom<DataType>(af_);
 			string ah_ = context.Operators.Convert<string>(ag_);
 			(IEnumerable<CqlCode> codes, string display)? ai_ = (ab_, ah_);
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<(IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.Select<Extension, (IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
 		(IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(IEnumerable<CqlCode> codes, string display)?>(g_);
 
@@ -493,10 +516,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -504,10 +527,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private bool? Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period_Value()
+	private  bool? Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.HIV();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -526,7 +549,8 @@ public class HIVRetentionFHIR_0_1_000
 			bool? p_ = context.Operators.And(n_, o_);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 		bool? e_ = context.Operators.Exists<Condition>(d_);
 
@@ -534,10 +558,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Active HIV Diagnosis Starts On or Before First 240 Days of Measurement Period")]
-	public bool? Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period() => 
+	public  bool? Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period() => 
 		__Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period.Value;
 
-	private bool? Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Value()
+	private  bool? Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -584,7 +608,8 @@ public class HIVRetentionFHIR_0_1_000
 			bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
 
 			return as_;
-		};
+		}
+;
 		IEnumerable<Encounter> ah_ = context.Operators.Where<Encounter>(af_, ag_);
 		bool? ai_ = context.Operators.Exists<Encounter>(ah_);
 
@@ -592,10 +617,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Qualifying Encounter During First 240 Days of Measurement Period")]
-	public bool? Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period() => 
+	public  bool? Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period() => 
 		__Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period.Value;
 
-	private bool? Initial_Population_Value()
+	private  bool? Initial_Population_Value()
 	{
 		bool? a_ = this.Has_Active_HIV_Diagnosis_Starts_On_or_Before_First_240_Days_of_Measurement_Period();
 		bool? b_ = this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period();
@@ -605,10 +630,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population() => 
+	public  bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-	private bool? Denominator_Value()
+	private  bool? Denominator_Value()
 	{
 		bool? a_ = this.Initial_Population();
 
@@ -616,10 +641,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator() => 
+	public  bool? Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<Encounter> Encounter_During_Measurement_Period_With_HIV_Value()
+	private  IEnumerable<Encounter> Encounter_During_Measurement_Period_With_HIV_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -671,7 +696,8 @@ public class HIVRetentionFHIR_0_1_000
 						CqlDateTime bb_ = context.Operators.Start(ba_);
 
 						return (bb_ is null);
-					};
+					}
+;
 					if (az_())
 					{
 						return default;
@@ -685,7 +711,8 @@ public class HIVRetentionFHIR_0_1_000
 
 						return bg_;
 					}
-				};
+				}
+;
 				CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_3_000.ToInterval(ap_);
 				bool? av_ = context.Operators.SameOrBefore(as_(), au_, "day");
 				bool? aw_ = context.Operators.And(ar_, av_);
@@ -693,24 +720,27 @@ public class HIVRetentionFHIR_0_1_000
 				bool? ay_ = context.Operators.And(aw_, ax_);
 
 				return ay_;
-			};
+			}
+;
 			IEnumerable<Condition> al_ = context.Operators.Where<Condition>(aj_, ak_);
 			Encounter am_(Condition HIVDiagnosis) => 
 				ValidEncounter;
+;
 			IEnumerable<Encounter> an_ = context.Operators.Select<Condition, Encounter>(al_, am_);
 
 			return an_;
-		};
+		}
+;
 		IEnumerable<Encounter> ah_ = context.Operators.SelectMany<Encounter, Encounter>(af_, ag_);
 
 		return ah_;
 	}
 
     [CqlDeclaration("Encounter During Measurement Period With HIV")]
-	public IEnumerable<Encounter> Encounter_During_Measurement_Period_With_HIV() => 
+	public  IEnumerable<Encounter> Encounter_During_Measurement_Period_With_HIV() => 
 		__Encounter_During_Measurement_Period_With_HIV.Value;
 
-	private bool? Has_HIV_Viral_Load_Test_During_Measurement_Period_Value()
+	private  bool? Has_HIV_Viral_Load_Test_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.HIV_Viral_Load();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -723,7 +753,8 @@ public class HIVRetentionFHIR_0_1_000
 			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		bool? e_ = context.Operators.Exists<Observation>(d_);
 
@@ -731,10 +762,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has HIV Viral Load Test During Measurement Period")]
-	public bool? Has_HIV_Viral_Load_Test_During_Measurement_Period() => 
+	public  bool? Has_HIV_Viral_Load_Test_During_Measurement_Period() => 
 		__Has_HIV_Viral_Load_Test_During_Measurement_Period.Value;
 
-	private bool? Has_One_Encounter_With_HIV_and_One_Viral_Load_Test_At_Least_90_Days_Apart_Value()
+	private  bool? Has_One_Encounter_With_HIV_and_One_Viral_Load_Test_At_Least_90_Days_Apart_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_During_Measurement_Period_With_HIV();
 		IEnumerable<Encounter> b_(Encounter EncounterWithHIV)
@@ -768,14 +799,17 @@ public class HIVRetentionFHIR_0_1_000
 				bool? ak_ = context.Operators.And(o_, aj_);
 
 				return ak_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation ViralLoadTest) => 
 				EncounterWithHIV;
+;
 			IEnumerable<Encounter> j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 		bool? d_ = context.Operators.Exists<Encounter>(c_);
 
@@ -783,10 +817,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has One Encounter With HIV and One Viral Load Test At Least 90 Days Apart")]
-	public bool? Has_One_Encounter_With_HIV_and_One_Viral_Load_Test_At_Least_90_Days_Apart() => 
+	public  bool? Has_One_Encounter_With_HIV_and_One_Viral_Load_Test_At_Least_90_Days_Apart() => 
 		__Has_One_Encounter_With_HIV_and_One_Viral_Load_Test_At_Least_90_Days_Apart.Value;
 
-	private bool? Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart_Value()
+	private  bool? Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_During_Measurement_Period_With_HIV();
 		IEnumerable<Encounter> b_(Encounter EncounterWithHIV)
@@ -808,14 +842,17 @@ public class HIVRetentionFHIR_0_1_000
 				bool? u_ = context.Operators.And(k_, t_);
 
 				return u_;
-			};
+			}
+;
 			IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
 			Encounter h_(Encounter AnotherEncounterWithHIV) => 
 				EncounterWithHIV;
+;
 			IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 		bool? d_ = context.Operators.Exists<Encounter>(c_);
 
@@ -823,10 +860,10 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Two Encounters With HIV At Least 90 Days Apart")]
-	public bool? Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart() => 
+	public  bool? Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart() => 
 		__Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart.Value;
 
-	private bool? Numerator_Value()
+	private  bool? Numerator_Value()
 	{
 		bool? a_ = this.Has_One_Encounter_With_HIV_and_One_Viral_Load_Test_At_Least_90_Days_Apart();
 		bool? b_ = this.Has_Two_Encounters_With_HIV_At_Least_90_Days_Apart();
@@ -836,7 +873,7 @@ public class HIVRetentionFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator() => 
+	public  bool? Numerator() => 
 		__Numerator.Value;
 
 }

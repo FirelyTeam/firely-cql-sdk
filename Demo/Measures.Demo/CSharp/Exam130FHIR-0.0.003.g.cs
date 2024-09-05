@@ -185,262 +185,262 @@ public class Exam130FHIR_0_0_003
 
     #endregion
 
-	private CqlValueSet Acute_Inpatient_Value() => 
+	private  CqlValueSet Acute_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", default);
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083")]
-	public CqlValueSet Acute_Inpatient() => 
+	public  CqlValueSet Acute_Inpatient() => 
 		__Acute_Inpatient.Value;
 
-	private CqlValueSet Advanced_Illness_Value() => 
+	private  CqlValueSet Advanced_Illness_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", default);
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
-	public CqlValueSet Advanced_Illness() => 
+	public  CqlValueSet Advanced_Illness() => 
 		__Advanced_Illness.Value;
 
-	private CqlValueSet Annual_Wellness_Visit_Value() => 
+	private  CqlValueSet Annual_Wellness_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-	public CqlValueSet Annual_Wellness_Visit() => 
+	public  CqlValueSet Annual_Wellness_Visit() => 
 		__Annual_Wellness_Visit.Value;
 
-	private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
+	private  CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility() => 
+	public  CqlValueSet Care_Services_in_Long_Term_Residential_Facility() => 
 		__Care_Services_in_Long_Term_Residential_Facility.Value;
 
-	private CqlValueSet Colonoscopy_Value() => 
+	private  CqlValueSet Colonoscopy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020", default);
 
     [CqlDeclaration("Colonoscopy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020")]
-	public CqlValueSet Colonoscopy() => 
+	public  CqlValueSet Colonoscopy() => 
 		__Colonoscopy.Value;
 
-	private CqlValueSet CT_Colonography_Value() => 
+	private  CqlValueSet CT_Colonography_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038", default);
 
     [CqlDeclaration("CT Colonography")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038")]
-	public CqlValueSet CT_Colonography() => 
+	public  CqlValueSet CT_Colonography() => 
 		__CT_Colonography.Value;
 
-	private CqlValueSet Dementia_Medications_Value() => 
+	private  CqlValueSet Dementia_Medications_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", default);
 
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510")]
-	public CqlValueSet Dementia_Medications() => 
+	public  CqlValueSet Dementia_Medications() => 
 		__Dementia_Medications.Value;
 
-	private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
+	private  CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
-	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care() => 
+	public  CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care() => 
 		__Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
 
-	private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() => 
+	private  CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
-	public CqlValueSet Discharged_to_Home_for_Hospice_Care() => 
+	public  CqlValueSet Discharged_to_Home_for_Hospice_Care() => 
 		__Discharged_to_Home_for_Hospice_Care.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+	private  CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+	public  CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Fecal_Occult_Blood_Test__FOBT__Value() => 
+	private  CqlValueSet Fecal_Occult_Blood_Test__FOBT__Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011", default);
 
     [CqlDeclaration("Fecal Occult Blood Test (FOBT)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011")]
-	public CqlValueSet Fecal_Occult_Blood_Test__FOBT_() => 
+	public  CqlValueSet Fecal_Occult_Blood_Test__FOBT_() => 
 		__Fecal_Occult_Blood_Test__FOBT_.Value;
 
-	private CqlValueSet FIT_DNA_Value() => 
+	private  CqlValueSet FIT_DNA_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039", default);
 
     [CqlDeclaration("FIT DNA")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039")]
-	public CqlValueSet FIT_DNA() => 
+	public  CqlValueSet FIT_DNA() => 
 		__FIT_DNA.Value;
 
-	private CqlValueSet Flexible_Sigmoidoscopy_Value() => 
+	private  CqlValueSet Flexible_Sigmoidoscopy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010", default);
 
     [CqlDeclaration("Flexible Sigmoidoscopy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010")]
-	public CqlValueSet Flexible_Sigmoidoscopy() => 
+	public  CqlValueSet Flexible_Sigmoidoscopy() => 
 		__Flexible_Sigmoidoscopy.Value;
 
-	private CqlValueSet Frailty_Device_Value() => 
+	private  CqlValueSet Frailty_Device_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", default);
 
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300")]
-	public CqlValueSet Frailty_Device() => 
+	public  CqlValueSet Frailty_Device() => 
 		__Frailty_Device.Value;
 
-	private CqlValueSet Frailty_Diagnosis_Value() => 
+	private  CqlValueSet Frailty_Diagnosis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", default);
 
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074")]
-	public CqlValueSet Frailty_Diagnosis() => 
+	public  CqlValueSet Frailty_Diagnosis() => 
 		__Frailty_Diagnosis.Value;
 
-	private CqlValueSet Frailty_Encounter_Value() => 
+	private  CqlValueSet Frailty_Encounter_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", default);
 
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088")]
-	public CqlValueSet Frailty_Encounter() => 
+	public  CqlValueSet Frailty_Encounter() => 
 		__Frailty_Encounter.Value;
 
-	private CqlValueSet Frailty_Symptom_Value() => 
+	private  CqlValueSet Frailty_Symptom_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", default);
 
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075")]
-	public CqlValueSet Frailty_Symptom() => 
+	public  CqlValueSet Frailty_Symptom() => 
 		__Frailty_Symptom.Value;
 
-	private CqlValueSet Home_Healthcare_Services_Value() => 
+	private  CqlValueSet Home_Healthcare_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services() => 
+	public  CqlValueSet Home_Healthcare_Services() => 
 		__Home_Healthcare_Services.Value;
 
-	private CqlValueSet Hospice_care_ambulatory_Value() => 
+	private  CqlValueSet Hospice_care_ambulatory_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", default);
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
-	public CqlValueSet Hospice_care_ambulatory() => 
+	public  CqlValueSet Hospice_care_ambulatory() => 
 		__Hospice_care_ambulatory.Value;
 
-	private CqlValueSet Malignant_Neoplasm_of_Colon_Value() => 
+	private  CqlValueSet Malignant_Neoplasm_of_Colon_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001", default);
 
     [CqlDeclaration("Malignant Neoplasm of Colon")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001")]
-	public CqlValueSet Malignant_Neoplasm_of_Colon() => 
+	public  CqlValueSet Malignant_Neoplasm_of_Colon() => 
 		__Malignant_Neoplasm_of_Colon.Value;
 
-	private CqlValueSet Nonacute_Inpatient_Value() => 
+	private  CqlValueSet Nonacute_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084", default);
 
     [CqlDeclaration("Nonacute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084")]
-	public CqlValueSet Nonacute_Inpatient() => 
+	public  CqlValueSet Nonacute_Inpatient() => 
 		__Nonacute_Inpatient.Value;
 
-	private CqlValueSet Nursing_Facility_Visit_Value() => 
+	private  CqlValueSet Nursing_Facility_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public CqlValueSet Nursing_Facility_Visit() => 
+	public  CqlValueSet Nursing_Facility_Visit() => 
 		__Nursing_Facility_Visit.Value;
 
-	private CqlValueSet Observation_Value() => 
+	private  CqlValueSet Observation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086", default);
 
     [CqlDeclaration("Observation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086")]
-	public CqlValueSet Observation() => 
+	public  CqlValueSet Observation() => 
 		__Observation.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Online_Assessments_Value() => 
+	private  CqlValueSet Online_Assessments_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments() => 
+	public  CqlValueSet Online_Assessments() => 
 		__Online_Assessments.Value;
 
-	private CqlValueSet Outpatient_Value() => 
+	private  CqlValueSet Outpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087", default);
 
     [CqlDeclaration("Outpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087")]
-	public CqlValueSet Outpatient() => 
+	public  CqlValueSet Outpatient() => 
 		__Outpatient.Value;
 
-	private CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services___Established_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Telephone_Visits_Value() => 
+	private  CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits() => 
+	public  CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
 
-	private CqlValueSet Total_Colectomy_Value() => 
+	private  CqlValueSet Total_Colectomy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019", default);
 
     [CqlDeclaration("Total Colectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019")]
-	public CqlValueSet Total_Colectomy() => 
+	public  CqlValueSet Total_Colectomy() => 
 		__Total_Colectomy.Value;
 
-	private CqlValueSet Total_Colectomy_ICD9_Value() => 
+	private  CqlValueSet Total_Colectomy_ICD9_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.11.1136", default);
 
     [CqlDeclaration("Total Colectomy ICD9")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.11.1136")]
-	public CqlValueSet Total_Colectomy_ICD9() => 
+	public  CqlValueSet Total_Colectomy_ICD9() => 
 		__Total_Colectomy_ICD9.Value;
 
-	private CqlCode laboratory_Value() => 
+	private  CqlCode laboratory_Value() => 
 		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("laboratory")]
-	public CqlCode laboratory() => 
+	public  CqlCode laboratory() => 
 		__laboratory.Value;
 
-	private CqlCode[] ObservationCategoryCodes_Value()
+	private  CqlCode[] ObservationCategoryCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
@@ -450,10 +450,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes() => 
+	public  CqlCode[] ObservationCategoryCodes() => 
 		__ObservationCategoryCodes.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
@@ -464,10 +464,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -476,10 +476,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Coding> SDE_Ethnicity_Value()
+	private  IEnumerable<Coding> SDE_Ethnicity_Value()
 	{
 		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 
@@ -487,10 +487,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public IEnumerable<Coding> SDE_Ethnicity() => 
+	public  IEnumerable<Coding> SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
+	private  IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -498,10 +498,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
+	public  IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private IEnumerable<Coding> SDE_Race_Value()
+	private  IEnumerable<Coding> SDE_Race_Value()
 	{
 		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 
@@ -509,10 +509,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("SDE Race")]
-	public IEnumerable<Coding> SDE_Race() => 
+	public  IEnumerable<Coding> SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 
@@ -520,10 +520,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Encounter> Telehealth_Services_Value()
+	private  IEnumerable<Encounter> Telehealth_Services_Value()
 	{
 		CqlValueSet a_ = this.Online_Assessments();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -542,17 +542,18 @@ public class Exam130FHIR_0_0_003
 			bool? o_ = context.Operators.And(j_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Telehealth Services")]
-	public IEnumerable<Encounter> Telehealth_Services() => 
+	public  IEnumerable<Encounter> Telehealth_Services() => 
 		__Telehealth_Services.Value;
 
-	private int? Age_at_start_of_Measurement_Period_Value()
+	private  int? Age_at_start_of_Measurement_Period_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -567,10 +568,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("Age at start of Measurement Period")]
-	public int? Age_at_start_of_Measurement_Period() => 
+	public  int? Age_at_start_of_Measurement_Period() => 
 		__Age_at_start_of_Measurement_Period.Value;
 
-	private bool? Initial_Population_Value()
+	private  bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -592,10 +593,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population() => 
+	public  bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-	private bool? Denominator_Value()
+	private  bool? Denominator_Value()
 	{
 		bool? a_ = this.Initial_Population();
 
@@ -603,10 +604,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator() => 
+	public  bool? Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<Condition> Malignant_Neoplasm_Value()
+	private  IEnumerable<Condition> Malignant_Neoplasm_Value()
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasm_of_Colon();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -619,17 +620,18 @@ public class Exam130FHIR_0_0_003
 			bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Malignant Neoplasm")]
-	public IEnumerable<Condition> Malignant_Neoplasm() => 
+	public  IEnumerable<Condition> Malignant_Neoplasm() => 
 		__Malignant_Neoplasm.Value;
 
-	private IEnumerable<Procedure> Total_Colectomy_Performed_Value()
+	private  IEnumerable<Procedure> Total_Colectomy_Performed_Value()
 	{
 		CqlValueSet a_ = this.Total_Colectomy();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -647,17 +649,18 @@ public class Exam130FHIR_0_0_003
 			bool? n_ = context.Operators.And(g_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Total Colectomy Performed")]
-	public IEnumerable<Procedure> Total_Colectomy_Performed() => 
+	public  IEnumerable<Procedure> Total_Colectomy_Performed() => 
 		__Total_Colectomy_Performed.Value;
 
-	private IEnumerable<Condition> Total_Colectomy_Condition_Value()
+	private  IEnumerable<Condition> Total_Colectomy_Condition_Value()
 	{
 		CqlValueSet a_ = this.Total_Colectomy_ICD9();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -670,17 +673,18 @@ public class Exam130FHIR_0_0_003
 			bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Total Colectomy Condition")]
-	public IEnumerable<Condition> Total_Colectomy_Condition() => 
+	public  IEnumerable<Condition> Total_Colectomy_Condition() => 
 		__Total_Colectomy_Condition.Value;
 
-	private bool? Denominator_Exclusions_Value()
+	private  bool? Denominator_Exclusions_Value()
 	{
 		bool? a_ = HospiceFHIR4_2_3_000.Has_Hospice();
 		IEnumerable<Condition> b_ = this.Malignant_Neoplasm();
@@ -713,10 +717,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions() => 
+	public  bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Value()
+	private  IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -733,7 +737,8 @@ public class Exam130FHIR_0_0_003
 			bool? p_ = context.Operators.In<CqlDateTime>(h_, o_, default);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FecalOccult)
 		{
@@ -747,14 +752,16 @@ public class Exam130FHIR_0_0_003
 				bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
 
 				return ap_;
-			};
+			}
+;
 			IEnumerable<Coding> v_ = context.Operators.Where<Coding>(t_, u_);
 			FhirString w_(Coding @this)
 			{
 				FhirString aq_ = @this?.DisplayElement;
 
 				return aq_;
-			};
+			}
+;
 			IEnumerable<FhirString> x_ = context.Operators.Select<Coding, FhirString>(v_, w_);
 			List<CodeableConcept> y_ = FecalOccult?.Category;
 			bool? z_(CodeableConcept @this)
@@ -763,14 +770,16 @@ public class Exam130FHIR_0_0_003
 				bool? as_ = context.Operators.Not((bool?)(ar_ is null));
 
 				return as_;
-			};
+			}
+;
 			IEnumerable<CodeableConcept> aa_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)y_, z_);
 			List<Coding> ab_(CodeableConcept @this)
 			{
 				List<Coding> at_ = @this?.Coding;
 
 				return at_;
-			};
+			}
+;
 			IEnumerable<List<Coding>> ac_ = context.Operators.Select<CodeableConcept, List<Coding>>(aa_, ab_);
 			IEnumerable<Coding> ad_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ac_);
 			bool? ae_(Coding @this)
@@ -779,14 +788,16 @@ public class Exam130FHIR_0_0_003
 				bool? av_ = context.Operators.Not((bool?)(au_ is null));
 
 				return av_;
-			};
+			}
+;
 			IEnumerable<Coding> af_ = context.Operators.Where<Coding>(ad_, ae_);
 			Code ag_(Coding @this)
 			{
 				Code aw_ = @this?.CodeElement;
 
 				return aw_;
-			};
+			}
+;
 			IEnumerable<Code> ah_ = context.Operators.Select<Coding, Code>(af_, ag_);
 			bool? ai_(Code @this)
 			{
@@ -794,30 +805,33 @@ public class Exam130FHIR_0_0_003
 				bool? ay_ = context.Operators.Not((bool?)(ax_ is null));
 
 				return ay_;
-			};
+			}
+;
 			IEnumerable<Code> aj_ = context.Operators.Where<Code>(ah_, ai_);
 			string ak_(Code @this)
 			{
 				string az_ = @this?.Value;
 
 				return az_;
-			};
+			}
+;
 			IEnumerable<string> al_ = context.Operators.Select<Code, string>(aj_, ak_);
 			Code<ObservationStatus> am_ = FecalOccult?.StatusElement;
 			(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? an_ = (r_, x_, al_, am_);
 
 			return an_;
-		};
+		}
+;
 		IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Display Date, Result, Category, Status")]
-	public IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status() => 
+	public  IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status() => 
 		__Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status.Value;
 
-	private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_Value()
+	private  IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -841,14 +855,16 @@ public class Exam130FHIR_0_0_003
 					bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
 
 					return ah_;
-				};
+				}
+;
 				IEnumerable<Coding> x_ = context.Operators.Where<Coding>((IEnumerable<Coding>)v_, w_);
 				Code y_(Coding @this)
 				{
 					Code ai_ = @this?.CodeElement;
 
 					return ai_;
-				};
+				}
+;
 				IEnumerable<Code> z_ = context.Operators.Select<Coding, Code>(x_, y_);
 				bool? aa_(Code @this)
 				{
@@ -856,14 +872,16 @@ public class Exam130FHIR_0_0_003
 					bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
 
 					return ak_;
-				};
+				}
+;
 				IEnumerable<Code> ab_ = context.Operators.Where<Code>(z_, aa_);
 				string ac_(Code @this)
 				{
 					string al_ = @this?.Value;
 
 					return al_;
-				};
+				}
+;
 				IEnumerable<string> ad_ = context.Operators.Select<Code, string>(ab_, ac_);
 				string[] ae_ = [
 					"laboratory",
@@ -871,7 +889,8 @@ public class Exam130FHIR_0_0_003
 				bool? af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
 
 				return af_;
-			};
+			}
+;
 			IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
 			bool? m_ = context.Operators.And(h_, l_);
@@ -885,17 +904,18 @@ public class Exam130FHIR_0_0_003
 			bool? u_ = context.Operators.And(p_, t_);
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Performed")]
-	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed() => 
+	public  IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed() => 
 		__Fecal_Occult_Blood_Test_Performed.Value;
 
-	private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Value()
+	private  IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -919,14 +939,16 @@ public class Exam130FHIR_0_0_003
 					bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
 
 					return ah_;
-				};
+				}
+;
 				IEnumerable<Coding> x_ = context.Operators.Where<Coding>((IEnumerable<Coding>)v_, w_);
 				Code y_(Coding @this)
 				{
 					Code ai_ = @this?.CodeElement;
 
 					return ai_;
-				};
+				}
+;
 				IEnumerable<Code> z_ = context.Operators.Select<Coding, Code>(x_, y_);
 				bool? aa_(Code @this)
 				{
@@ -934,14 +956,16 @@ public class Exam130FHIR_0_0_003
 					bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
 
 					return ak_;
-				};
+				}
+;
 				IEnumerable<Code> ab_ = context.Operators.Where<Code>(z_, aa_);
 				string ac_(Code @this)
 				{
 					string al_ = @this?.Value;
 
 					return al_;
-				};
+				}
+;
 				IEnumerable<string> ad_ = context.Operators.Select<Code, string>(ab_, ac_);
 				string[] ae_ = [
 					"laboratory",
@@ -949,7 +973,8 @@ public class Exam130FHIR_0_0_003
 				bool? af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
 
 				return af_;
-			};
+			}
+;
 			IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
 			bool? m_ = context.Operators.And(h_, l_);
@@ -963,17 +988,18 @@ public class Exam130FHIR_0_0_003
 			bool? u_ = context.Operators.And(p_, t_);
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Performed, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset() => 
+	public  IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset() => 
 		__Fecal_Occult_Blood_Test_Performed__day_of_TZoffset.Value;
 
-	private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
+	private  IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -989,14 +1015,16 @@ public class Exam130FHIR_0_0_003
 					bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
 
 					return ad_;
-				};
+				}
+;
 				IEnumerable<Coding> s_ = context.Operators.Where<Coding>((IEnumerable<Coding>)q_, r_);
 				Code t_(Coding @this)
 				{
 					Code ae_ = @this?.CodeElement;
 
 					return ae_;
-				};
+				}
+;
 				IEnumerable<Code> u_ = context.Operators.Select<Coding, Code>(s_, t_);
 				bool? v_(Code @this)
 				{
@@ -1004,14 +1032,16 @@ public class Exam130FHIR_0_0_003
 					bool? ag_ = context.Operators.Not((bool?)(af_ is null));
 
 					return ag_;
-				};
+				}
+;
 				IEnumerable<Code> w_ = context.Operators.Where<Code>(u_, v_);
 				string x_(Code @this)
 				{
 					string ah_ = @this?.Value;
 
 					return ah_;
-				};
+				}
+;
 				IEnumerable<string> y_ = context.Operators.Select<Code, string>(w_, x_);
 				string[] z_ = [
 					"laboratory",
@@ -1020,7 +1050,8 @@ public class Exam130FHIR_0_0_003
 				bool? ab_ = context.Operators.Not(aa_);
 
 				return ab_;
-			};
+			}
+;
 			IEnumerable<CodeableConcept> g_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)e_, f_);
 			bool? h_ = context.Operators.Exists<CodeableConcept>(g_);
 			DataType i_ = FecalOccult?.Value;
@@ -1033,17 +1064,18 @@ public class Exam130FHIR_0_0_003
 			bool? p_ = context.Operators.And(k_, o_);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Performed without appropriate category, ignore status, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset() => 
+	public  IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset() => 
 		__Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset.Value;
 
-	private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
+	private  IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1068,17 +1100,18 @@ public class Exam130FHIR_0_0_003
 			bool? q_ = context.Operators.And(l_, p_);
 
 			return q_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Performed without appropriate status, ignore category, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset() => 
+	public  IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset() => 
 		__Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset.Value;
 
-	private IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Value()
+	private  IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1098,7 +1131,8 @@ public class Exam130FHIR_0_0_003
 			bool? t_ = context.Operators.And(p_, s_);
 
 			return t_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FitDNA)
 		{
@@ -1112,14 +1146,16 @@ public class Exam130FHIR_0_0_003
 				bool? at_ = context.Operators.Not((bool?)(as_ is null));
 
 				return at_;
-			};
+			}
+;
 			IEnumerable<Coding> z_ = context.Operators.Where<Coding>(x_, y_);
 			FhirString aa_(Coding @this)
 			{
 				FhirString au_ = @this?.DisplayElement;
 
 				return au_;
-			};
+			}
+;
 			IEnumerable<FhirString> ab_ = context.Operators.Select<Coding, FhirString>(z_, aa_);
 			List<CodeableConcept> ac_ = FitDNA?.Category;
 			bool? ad_(CodeableConcept @this)
@@ -1128,14 +1164,16 @@ public class Exam130FHIR_0_0_003
 				bool? aw_ = context.Operators.Not((bool?)(av_ is null));
 
 				return aw_;
-			};
+			}
+;
 			IEnumerable<CodeableConcept> ae_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)ac_, ad_);
 			List<Coding> af_(CodeableConcept @this)
 			{
 				List<Coding> ax_ = @this?.Coding;
 
 				return ax_;
-			};
+			}
+;
 			IEnumerable<List<Coding>> ag_ = context.Operators.Select<CodeableConcept, List<Coding>>(ae_, af_);
 			IEnumerable<Coding> ah_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ag_);
 			bool? ai_(Coding @this)
@@ -1144,14 +1182,16 @@ public class Exam130FHIR_0_0_003
 				bool? az_ = context.Operators.Not((bool?)(ay_ is null));
 
 				return az_;
-			};
+			}
+;
 			IEnumerable<Coding> aj_ = context.Operators.Where<Coding>(ah_, ai_);
 			Code ak_(Coding @this)
 			{
 				Code ba_ = @this?.CodeElement;
 
 				return ba_;
-			};
+			}
+;
 			IEnumerable<Code> al_ = context.Operators.Select<Coding, Code>(aj_, ak_);
 			bool? am_(Code @this)
 			{
@@ -1159,30 +1199,33 @@ public class Exam130FHIR_0_0_003
 				bool? bc_ = context.Operators.Not((bool?)(bb_ is null));
 
 				return bc_;
-			};
+			}
+;
 			IEnumerable<Code> an_ = context.Operators.Where<Code>(al_, am_);
 			string ao_(Code @this)
 			{
 				string bd_ = @this?.Value;
 
 				return bd_;
-			};
+			}
+;
 			IEnumerable<string> ap_ = context.Operators.Select<Code, string>(an_, ao_);
 			Code<ObservationStatus> aq_ = FitDNA?.StatusElement;
 			(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ar_ = (v_, ab_, ap_, aq_);
 
 			return ar_;
-		};
+		}
+;
 		IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Display Date, Result, Category, Status")]
-	public IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status() => 
+	public  IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status() => 
 		__Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status.Value;
 
-	private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_Value()
+	private  IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1206,14 +1249,16 @@ public class Exam130FHIR_0_0_003
 					bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
 
 					return ar_;
-				};
+				}
+;
 				IEnumerable<Coding> ah_ = context.Operators.Where<Coding>((IEnumerable<Coding>)af_, ag_);
 				Code ai_(Coding @this)
 				{
 					Code as_ = @this?.CodeElement;
 
 					return as_;
-				};
+				}
+;
 				IEnumerable<Code> aj_ = context.Operators.Select<Coding, Code>(ah_, ai_);
 				bool? ak_(Code @this)
 				{
@@ -1221,14 +1266,16 @@ public class Exam130FHIR_0_0_003
 					bool? au_ = context.Operators.Not((bool?)(at_ is null));
 
 					return au_;
-				};
+				}
+;
 				IEnumerable<Code> al_ = context.Operators.Where<Code>(aj_, ak_);
 				string am_(Code @this)
 				{
 					string av_ = @this?.Value;
 
 					return av_;
-				};
+				}
+;
 				IEnumerable<string> an_ = context.Operators.Select<Code, string>(al_, am_);
 				string[] ao_ = [
 					"laboratory",
@@ -1236,7 +1283,8 @@ public class Exam130FHIR_0_0_003
 				bool? ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
 
 				return ap_;
-			};
+			}
+;
 			IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
 			bool? m_ = context.Operators.And(h_, l_);
@@ -1258,17 +1306,18 @@ public class Exam130FHIR_0_0_003
 			bool? ae_ = context.Operators.And(p_, ad_);
 
 			return ae_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed")]
-	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed() => 
+	public  IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed() => 
 		__Fecal_Immunochemical_Test_DNA_Performed.Value;
 
-	private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Value()
+	private  IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1292,14 +1341,16 @@ public class Exam130FHIR_0_0_003
 					bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
 
 					return ar_;
-				};
+				}
+;
 				IEnumerable<Coding> ah_ = context.Operators.Where<Coding>((IEnumerable<Coding>)af_, ag_);
 				Code ai_(Coding @this)
 				{
 					Code as_ = @this?.CodeElement;
 
 					return as_;
-				};
+				}
+;
 				IEnumerable<Code> aj_ = context.Operators.Select<Coding, Code>(ah_, ai_);
 				bool? ak_(Code @this)
 				{
@@ -1307,14 +1358,16 @@ public class Exam130FHIR_0_0_003
 					bool? au_ = context.Operators.Not((bool?)(at_ is null));
 
 					return au_;
-				};
+				}
+;
 				IEnumerable<Code> al_ = context.Operators.Where<Code>(aj_, ak_);
 				string am_(Code @this)
 				{
 					string av_ = @this?.Value;
 
 					return av_;
-				};
+				}
+;
 				IEnumerable<string> an_ = context.Operators.Select<Code, string>(al_, am_);
 				string[] ao_ = [
 					"laboratory",
@@ -1322,7 +1375,8 @@ public class Exam130FHIR_0_0_003
 				bool? ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
 
 				return ap_;
-			};
+			}
+;
 			IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
 			bool? m_ = context.Operators.And(h_, l_);
@@ -1344,17 +1398,18 @@ public class Exam130FHIR_0_0_003
 			bool? ae_ = context.Operators.And(p_, ad_);
 
 			return ae_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset() => 
+	public  IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset() => 
 		__Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset.Value;
 
-	private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
+	private  IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1370,14 +1425,16 @@ public class Exam130FHIR_0_0_003
 					bool? an_ = context.Operators.Not((bool?)(am_ is null));
 
 					return an_;
-				};
+				}
+;
 				IEnumerable<Coding> ac_ = context.Operators.Where<Coding>((IEnumerable<Coding>)aa_, ab_);
 				Code ad_(Coding @this)
 				{
 					Code ao_ = @this?.CodeElement;
 
 					return ao_;
-				};
+				}
+;
 				IEnumerable<Code> ae_ = context.Operators.Select<Coding, Code>(ac_, ad_);
 				bool? af_(Code @this)
 				{
@@ -1385,14 +1442,16 @@ public class Exam130FHIR_0_0_003
 					bool? aq_ = context.Operators.Not((bool?)(ap_ is null));
 
 					return aq_;
-				};
+				}
+;
 				IEnumerable<Code> ag_ = context.Operators.Where<Code>(ae_, af_);
 				string ah_(Code @this)
 				{
 					string ar_ = @this?.Value;
 
 					return ar_;
-				};
+				}
+;
 				IEnumerable<string> ai_ = context.Operators.Select<Code, string>(ag_, ah_);
 				string[] aj_ = [
 					"laboratory",
@@ -1401,7 +1460,8 @@ public class Exam130FHIR_0_0_003
 				bool? al_ = context.Operators.Not(ak_);
 
 				return al_;
-			};
+			}
+;
 			IEnumerable<CodeableConcept> g_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)e_, f_);
 			bool? h_ = context.Operators.Exists<CodeableConcept>(g_);
 			DataType i_ = FitDNA?.Value;
@@ -1422,17 +1482,18 @@ public class Exam130FHIR_0_0_003
 			bool? z_ = context.Operators.And(k_, y_);
 
 			return z_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed without appropriate category, ignore status, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset() => 
+	public  IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset() => 
 		__Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset.Value;
 
-	private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
+	private  IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1465,17 +1526,18 @@ public class Exam130FHIR_0_0_003
 			bool? aa_ = context.Operators.And(l_, z_);
 
 			return aa_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed without appropriate status, ignore category, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset() => 
+	public  IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset() => 
 		__Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset.Value;
 
-	private IEnumerable<CqlDateTime> CT_Colonography_Display_Date_Value()
+	private  IEnumerable<CqlDateTime> CT_Colonography_Display_Date_Value()
 	{
 		CqlValueSet a_ = this.CT_Colonography();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1496,7 +1558,8 @@ public class Exam130FHIR_0_0_003
 			bool? u_ = context.Operators.And(q_, t_);
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		CqlDateTime e_(Observation Colonography)
 		{
@@ -1504,17 +1567,18 @@ public class Exam130FHIR_0_0_003
 			CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<CqlDateTime> f_ = context.Operators.Select<Observation, CqlDateTime>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("CT Colonography Display Date")]
-	public IEnumerable<CqlDateTime> CT_Colonography_Display_Date() => 
+	public  IEnumerable<CqlDateTime> CT_Colonography_Display_Date() => 
 		__CT_Colonography_Display_Date.Value;
 
-	private IEnumerable<Observation> CT_Colonography_Performed_Value()
+	private  IEnumerable<Observation> CT_Colonography_Performed_Value()
 	{
 		CqlValueSet a_ = this.CT_Colonography();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1545,17 +1609,18 @@ public class Exam130FHIR_0_0_003
 			bool? x_ = context.Operators.And(h_, w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("CT Colonography Performed")]
-	public IEnumerable<Observation> CT_Colonography_Performed() => 
+	public  IEnumerable<Observation> CT_Colonography_Performed() => 
 		__CT_Colonography_Performed.Value;
 
-	private IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status_Value()
+	private  IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status_Value()
 	{
 		CqlValueSet a_ = this.CT_Colonography();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1587,17 +1652,18 @@ public class Exam130FHIR_0_0_003
 			bool? y_ = context.Operators.And(i_, x_);
 
 			return y_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("CT Colonography Performed without appropriate status")]
-	public IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status() => 
+	public  IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status() => 
 		__CT_Colonography_Performed_without_appropriate_status.Value;
 
-	private IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date_Value()
+	private  IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date_Value()
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1618,7 +1684,8 @@ public class Exam130FHIR_0_0_003
 			bool? u_ = context.Operators.And(q_, t_);
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 		CqlDateTime e_(Procedure FlexibleSigmoidoscopy)
 		{
@@ -1626,17 +1693,18 @@ public class Exam130FHIR_0_0_003
 			CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<CqlDateTime> f_ = context.Operators.Select<Procedure, CqlDateTime>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Flexible Sigmoidoscopy Display Date")]
-	public IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date() => 
+	public  IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date() => 
 		__Flexible_Sigmoidoscopy_Display_Date.Value;
 
-	private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_Value()
+	private  IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_Value()
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1661,17 +1729,18 @@ public class Exam130FHIR_0_0_003
 			bool? w_ = context.Operators.And(g_, v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Flexible Sigmoidoscopy Performed")]
-	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed() => 
+	public  IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed() => 
 		__Flexible_Sigmoidoscopy_Performed.Value;
 
-	private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Value()
+	private  IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Value()
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1697,17 +1766,18 @@ public class Exam130FHIR_0_0_003
 			bool? x_ = context.Operators.And(h_, w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Flexible Sigmoidoscopy Performed without appropriate status")]
-	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status() => 
+	public  IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status() => 
 		__Flexible_Sigmoidoscopy_Performed_without_appropriate_status.Value;
 
-	private IEnumerable<CqlDateTime> Colonoscopy_Display_Date_Value()
+	private  IEnumerable<CqlDateTime> Colonoscopy_Display_Date_Value()
 	{
 		CqlValueSet a_ = this.Colonoscopy();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1728,7 +1798,8 @@ public class Exam130FHIR_0_0_003
 			bool? u_ = context.Operators.And(q_, t_);
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 		CqlDateTime e_(Procedure Colonoscopy)
 		{
@@ -1736,17 +1807,18 @@ public class Exam130FHIR_0_0_003
 			CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<CqlDateTime> f_ = context.Operators.Select<Procedure, CqlDateTime>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Colonoscopy Display Date")]
-	public IEnumerable<CqlDateTime> Colonoscopy_Display_Date() => 
+	public  IEnumerable<CqlDateTime> Colonoscopy_Display_Date() => 
 		__Colonoscopy_Display_Date.Value;
 
-	private IEnumerable<Procedure> Colonoscopy_Performed_Value()
+	private  IEnumerable<Procedure> Colonoscopy_Performed_Value()
 	{
 		CqlValueSet a_ = this.Colonoscopy();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1771,17 +1843,18 @@ public class Exam130FHIR_0_0_003
 			bool? w_ = context.Operators.And(g_, v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Colonoscopy Performed")]
-	public IEnumerable<Procedure> Colonoscopy_Performed() => 
+	public  IEnumerable<Procedure> Colonoscopy_Performed() => 
 		__Colonoscopy_Performed.Value;
 
-	private IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status_Value()
+	private  IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status_Value()
 	{
 		CqlValueSet a_ = this.Colonoscopy();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1807,17 +1880,18 @@ public class Exam130FHIR_0_0_003
 			bool? x_ = context.Operators.And(h_, w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Colonoscopy Performed without appropriate status")]
-	public IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status() => 
+	public  IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status() => 
 		__Colonoscopy_Performed_without_appropriate_status.Value;
 
-	private bool? Numerator_Value()
+	private  bool? Numerator_Value()
 	{
 		IEnumerable<Procedure> a_ = this.Colonoscopy_Performed();
 		bool? b_ = context.Operators.Exists<Procedure>(a_);
@@ -1838,10 +1912,10 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator() => 
+	public  bool? Numerator() => 
 		__Numerator.Value;
 
-	private bool? Final_Numerator_Population_Value()
+	private  bool? Final_Numerator_Population_Value()
 	{
 		bool? a_ = this.Numerator();
 		bool? b_ = this.Initial_Population();
@@ -1856,7 +1930,7 @@ public class Exam130FHIR_0_0_003
 	}
 
     [CqlDeclaration("Final Numerator Population")]
-	public bool? Final_Numerator_Population() => 
+	public  bool? Final_Numerator_Population() => 
 		__Final_Numerator_Population.Value;
 
 }

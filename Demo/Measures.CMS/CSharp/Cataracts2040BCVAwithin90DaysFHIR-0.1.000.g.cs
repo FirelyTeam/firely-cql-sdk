@@ -181,478 +181,478 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Acute_and_Subacute_Iridocyclitis_Value() => 
+	private  CqlValueSet Acute_and_Subacute_Iridocyclitis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1241", default);
 
     [CqlDeclaration("Acute and Subacute Iridocyclitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1241")]
-	public CqlValueSet Acute_and_Subacute_Iridocyclitis() => 
+	public  CqlValueSet Acute_and_Subacute_Iridocyclitis() => 
 		__Acute_and_Subacute_Iridocyclitis.Value;
 
-	private CqlValueSet Amblyopia_Value() => 
+	private  CqlValueSet Amblyopia_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1448", default);
 
     [CqlDeclaration("Amblyopia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1448")]
-	public CqlValueSet Amblyopia() => 
+	public  CqlValueSet Amblyopia() => 
 		__Amblyopia.Value;
 
-	private CqlValueSet Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart_Value() => 
+	private  CqlValueSet Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1560", default);
 
     [CqlDeclaration("Best Corrected Visual Acuity Exam Using Snellen Chart")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1560")]
-	public CqlValueSet Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart() => 
+	public  CqlValueSet Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart() => 
 		__Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart.Value;
 
-	private CqlValueSet Burn_Confined_to_Eye_and_Adnexa_Value() => 
+	private  CqlValueSet Burn_Confined_to_Eye_and_Adnexa_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1409", default);
 
     [CqlDeclaration("Burn Confined to Eye and Adnexa")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1409")]
-	public CqlValueSet Burn_Confined_to_Eye_and_Adnexa() => 
+	public  CqlValueSet Burn_Confined_to_Eye_and_Adnexa() => 
 		__Burn_Confined_to_Eye_and_Adnexa.Value;
 
-	private CqlValueSet Cataract_Congenital_Value() => 
+	private  CqlValueSet Cataract_Congenital_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1412", default);
 
     [CqlDeclaration("Cataract Congenital")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1412")]
-	public CqlValueSet Cataract_Congenital() => 
+	public  CqlValueSet Cataract_Congenital() => 
 		__Cataract_Congenital.Value;
 
-	private CqlValueSet Cataract_Mature_or_Hypermature_Value() => 
+	private  CqlValueSet Cataract_Mature_or_Hypermature_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1413", default);
 
     [CqlDeclaration("Cataract Mature or Hypermature")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1413")]
-	public CqlValueSet Cataract_Mature_or_Hypermature() => 
+	public  CqlValueSet Cataract_Mature_or_Hypermature() => 
 		__Cataract_Mature_or_Hypermature.Value;
 
-	private CqlValueSet Cataract_Posterior_Polar_Value() => 
+	private  CqlValueSet Cataract_Posterior_Polar_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1414", default);
 
     [CqlDeclaration("Cataract Posterior Polar")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1414")]
-	public CqlValueSet Cataract_Posterior_Polar() => 
+	public  CqlValueSet Cataract_Posterior_Polar() => 
 		__Cataract_Posterior_Polar.Value;
 
-	private CqlValueSet Cataract_Secondary_to_Ocular_Disorders_Value() => 
+	private  CqlValueSet Cataract_Secondary_to_Ocular_Disorders_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1410", default);
 
     [CqlDeclaration("Cataract Secondary to Ocular Disorders")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1410")]
-	public CqlValueSet Cataract_Secondary_to_Ocular_Disorders() => 
+	public  CqlValueSet Cataract_Secondary_to_Ocular_Disorders() => 
 		__Cataract_Secondary_to_Ocular_Disorders.Value;
 
-	private CqlValueSet Cataract_Surgery_Value() => 
+	private  CqlValueSet Cataract_Surgery_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1411", default);
 
     [CqlDeclaration("Cataract Surgery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1411")]
-	public CqlValueSet Cataract_Surgery() => 
+	public  CqlValueSet Cataract_Surgery() => 
 		__Cataract_Surgery.Value;
 
-	private CqlValueSet Central_Corneal_Ulcer_Value() => 
+	private  CqlValueSet Central_Corneal_Ulcer_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1428", default);
 
     [CqlDeclaration("Central Corneal Ulcer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1428")]
-	public CqlValueSet Central_Corneal_Ulcer() => 
+	public  CqlValueSet Central_Corneal_Ulcer() => 
 		__Central_Corneal_Ulcer.Value;
 
-	private CqlValueSet Certain_Types_of_Iridocyclitis_Value() => 
+	private  CqlValueSet Certain_Types_of_Iridocyclitis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1415", default);
 
     [CqlDeclaration("Certain Types of Iridocyclitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1415")]
-	public CqlValueSet Certain_Types_of_Iridocyclitis() => 
+	public  CqlValueSet Certain_Types_of_Iridocyclitis() => 
 		__Certain_Types_of_Iridocyclitis.Value;
 
-	private CqlValueSet Choroidal_Degenerations_Value() => 
+	private  CqlValueSet Choroidal_Degenerations_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1450", default);
 
     [CqlDeclaration("Choroidal Degenerations")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1450")]
-	public CqlValueSet Choroidal_Degenerations() => 
+	public  CqlValueSet Choroidal_Degenerations() => 
 		__Choroidal_Degenerations.Value;
 
-	private CqlValueSet Choroidal_Detachment_Value() => 
+	private  CqlValueSet Choroidal_Detachment_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1451", default);
 
     [CqlDeclaration("Choroidal Detachment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1451")]
-	public CqlValueSet Choroidal_Detachment() => 
+	public  CqlValueSet Choroidal_Detachment() => 
 		__Choroidal_Detachment.Value;
 
-	private CqlValueSet Choroidal_Hemorrhage_and_Rupture_Value() => 
+	private  CqlValueSet Choroidal_Hemorrhage_and_Rupture_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1452", default);
 
     [CqlDeclaration("Choroidal Hemorrhage and Rupture")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1452")]
-	public CqlValueSet Choroidal_Hemorrhage_and_Rupture() => 
+	public  CqlValueSet Choroidal_Hemorrhage_and_Rupture() => 
 		__Choroidal_Hemorrhage_and_Rupture.Value;
 
-	private CqlValueSet Chronic_Iridocyclitis_Value() => 
+	private  CqlValueSet Chronic_Iridocyclitis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1416", default);
 
     [CqlDeclaration("Chronic Iridocyclitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1416")]
-	public CqlValueSet Chronic_Iridocyclitis() => 
+	public  CqlValueSet Chronic_Iridocyclitis() => 
 		__Chronic_Iridocyclitis.Value;
 
-	private CqlValueSet Cloudy_Cornea_Value() => 
+	private  CqlValueSet Cloudy_Cornea_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1417", default);
 
     [CqlDeclaration("Cloudy Cornea")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1417")]
-	public CqlValueSet Cloudy_Cornea() => 
+	public  CqlValueSet Cloudy_Cornea() => 
 		__Cloudy_Cornea.Value;
 
-	private CqlValueSet Corneal_Edema_Value() => 
+	private  CqlValueSet Corneal_Edema_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1418", default);
 
     [CqlDeclaration("Corneal Edema")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1418")]
-	public CqlValueSet Corneal_Edema() => 
+	public  CqlValueSet Corneal_Edema() => 
 		__Corneal_Edema.Value;
 
-	private CqlValueSet Degeneration_of_Macula_and_Posterior_Pole_Value() => 
+	private  CqlValueSet Degeneration_of_Macula_and_Posterior_Pole_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1453", default);
 
     [CqlDeclaration("Degeneration of Macula and Posterior Pole")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1453")]
-	public CqlValueSet Degeneration_of_Macula_and_Posterior_Pole() => 
+	public  CqlValueSet Degeneration_of_Macula_and_Posterior_Pole() => 
 		__Degeneration_of_Macula_and_Posterior_Pole.Value;
 
-	private CqlValueSet Degenerative_Disorders_of_Globe_Value() => 
+	private  CqlValueSet Degenerative_Disorders_of_Globe_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1454", default);
 
     [CqlDeclaration("Degenerative Disorders of Globe")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1454")]
-	public CqlValueSet Degenerative_Disorders_of_Globe() => 
+	public  CqlValueSet Degenerative_Disorders_of_Globe() => 
 		__Degenerative_Disorders_of_Globe.Value;
 
-	private CqlValueSet Diabetic_Macular_Edema_Value() => 
+	private  CqlValueSet Diabetic_Macular_Edema_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1455", default);
 
     [CqlDeclaration("Diabetic Macular Edema")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1455")]
-	public CqlValueSet Diabetic_Macular_Edema() => 
+	public  CqlValueSet Diabetic_Macular_Edema() => 
 		__Diabetic_Macular_Edema.Value;
 
-	private CqlValueSet Diabetic_Retinopathy_Value() => 
+	private  CqlValueSet Diabetic_Retinopathy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", default);
 
     [CqlDeclaration("Diabetic Retinopathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327")]
-	public CqlValueSet Diabetic_Retinopathy() => 
+	public  CqlValueSet Diabetic_Retinopathy() => 
 		__Diabetic_Retinopathy.Value;
 
-	private CqlValueSet Disorders_of_Cornea_Including_Corneal_Opacity_Value() => 
+	private  CqlValueSet Disorders_of_Cornea_Including_Corneal_Opacity_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1419", default);
 
     [CqlDeclaration("Disorders of Cornea Including Corneal Opacity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1419")]
-	public CqlValueSet Disorders_of_Cornea_Including_Corneal_Opacity() => 
+	public  CqlValueSet Disorders_of_Cornea_Including_Corneal_Opacity() => 
 		__Disorders_of_Cornea_Including_Corneal_Opacity.Value;
 
-	private CqlValueSet Disorders_of_Optic_Chiasm_Value() => 
+	private  CqlValueSet Disorders_of_Optic_Chiasm_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1457", default);
 
     [CqlDeclaration("Disorders of Optic Chiasm")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1457")]
-	public CqlValueSet Disorders_of_Optic_Chiasm() => 
+	public  CqlValueSet Disorders_of_Optic_Chiasm() => 
 		__Disorders_of_Optic_Chiasm.Value;
 
-	private CqlValueSet Disorders_of_Visual_Cortex_Value() => 
+	private  CqlValueSet Disorders_of_Visual_Cortex_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1458", default);
 
     [CqlDeclaration("Disorders of Visual Cortex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1458")]
-	public CqlValueSet Disorders_of_Visual_Cortex() => 
+	public  CqlValueSet Disorders_of_Visual_Cortex() => 
 		__Disorders_of_Visual_Cortex.Value;
 
-	private CqlValueSet Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis_Value() => 
+	private  CqlValueSet Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1459", default);
 
     [CqlDeclaration("Disseminated Chorioretinitis and Disseminated Retinochoroiditis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1459")]
-	public CqlValueSet Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis() => 
+	public  CqlValueSet Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis() => 
 		__Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis.Value;
 
-	private CqlValueSet Focal_Chorioretinitis_and_Focal_Retinochoroiditis_Value() => 
+	private  CqlValueSet Focal_Chorioretinitis_and_Focal_Retinochoroiditis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1460", default);
 
     [CqlDeclaration("Focal Chorioretinitis and Focal Retinochoroiditis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1460")]
-	public CqlValueSet Focal_Chorioretinitis_and_Focal_Retinochoroiditis() => 
+	public  CqlValueSet Focal_Chorioretinitis_and_Focal_Retinochoroiditis() => 
 		__Focal_Chorioretinitis_and_Focal_Retinochoroiditis.Value;
 
-	private CqlValueSet Glaucoma_Value() => 
+	private  CqlValueSet Glaucoma_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1423", default);
 
     [CqlDeclaration("Glaucoma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1423")]
-	public CqlValueSet Glaucoma() => 
+	public  CqlValueSet Glaucoma() => 
 		__Glaucoma.Value;
 
-	private CqlValueSet Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes_Value() => 
+	private  CqlValueSet Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1461", default);
 
     [CqlDeclaration("Glaucoma Associated with Congenital Anomalies and Dystrophies and Systemic Syndromes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1461")]
-	public CqlValueSet Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes() => 
+	public  CqlValueSet Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes() => 
 		__Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes.Value;
 
-	private CqlValueSet Hereditary_Choroidal_Dystrophies_Value() => 
+	private  CqlValueSet Hereditary_Choroidal_Dystrophies_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1462", default);
 
     [CqlDeclaration("Hereditary Choroidal Dystrophies")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1462")]
-	public CqlValueSet Hereditary_Choroidal_Dystrophies() => 
+	public  CqlValueSet Hereditary_Choroidal_Dystrophies() => 
 		__Hereditary_Choroidal_Dystrophies.Value;
 
-	private CqlValueSet Hereditary_Corneal_Dystrophies_Value() => 
+	private  CqlValueSet Hereditary_Corneal_Dystrophies_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1424", default);
 
     [CqlDeclaration("Hereditary Corneal Dystrophies")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1424")]
-	public CqlValueSet Hereditary_Corneal_Dystrophies() => 
+	public  CqlValueSet Hereditary_Corneal_Dystrophies() => 
 		__Hereditary_Corneal_Dystrophies.Value;
 
-	private CqlValueSet Hereditary_Retinal_Dystrophies_Value() => 
+	private  CqlValueSet Hereditary_Retinal_Dystrophies_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1463", default);
 
     [CqlDeclaration("Hereditary Retinal Dystrophies")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1463")]
-	public CqlValueSet Hereditary_Retinal_Dystrophies() => 
+	public  CqlValueSet Hereditary_Retinal_Dystrophies() => 
 		__Hereditary_Retinal_Dystrophies.Value;
 
-	private CqlValueSet Hypotony_of_Eye_Value() => 
+	private  CqlValueSet Hypotony_of_Eye_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1426", default);
 
     [CqlDeclaration("Hypotony of Eye")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1426")]
-	public CqlValueSet Hypotony_of_Eye() => 
+	public  CqlValueSet Hypotony_of_Eye() => 
 		__Hypotony_of_Eye.Value;
 
-	private CqlValueSet Injury_to_Optic_Nerve_and_Pathways_Value() => 
+	private  CqlValueSet Injury_to_Optic_Nerve_and_Pathways_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1427", default);
 
     [CqlDeclaration("Injury to Optic Nerve and Pathways")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1427")]
-	public CqlValueSet Injury_to_Optic_Nerve_and_Pathways() => 
+	public  CqlValueSet Injury_to_Optic_Nerve_and_Pathways() => 
 		__Injury_to_Optic_Nerve_and_Pathways.Value;
 
-	private CqlValueSet Macular_Scar_of_Posterior_Polar_Value() => 
+	private  CqlValueSet Macular_Scar_of_Posterior_Polar_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1559", default);
 
     [CqlDeclaration("Macular Scar of Posterior Polar")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1559")]
-	public CqlValueSet Macular_Scar_of_Posterior_Polar() => 
+	public  CqlValueSet Macular_Scar_of_Posterior_Polar() => 
 		__Macular_Scar_of_Posterior_Polar.Value;
 
-	private CqlValueSet Morgagnian_Cataract_Value() => 
+	private  CqlValueSet Morgagnian_Cataract_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1558", default);
 
     [CqlDeclaration("Morgagnian Cataract")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1558")]
-	public CqlValueSet Morgagnian_Cataract() => 
+	public  CqlValueSet Morgagnian_Cataract() => 
 		__Morgagnian_Cataract.Value;
 
-	private CqlValueSet Nystagmus_and_Other_Irregular_Eye_Movements_Value() => 
+	private  CqlValueSet Nystagmus_and_Other_Irregular_Eye_Movements_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1465", default);
 
     [CqlDeclaration("Nystagmus and Other Irregular Eye Movements")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1465")]
-	public CqlValueSet Nystagmus_and_Other_Irregular_Eye_Movements() => 
+	public  CqlValueSet Nystagmus_and_Other_Irregular_Eye_Movements() => 
 		__Nystagmus_and_Other_Irregular_Eye_Movements.Value;
 
-	private CqlValueSet Open_Wound_of_Eyeball_Value() => 
+	private  CqlValueSet Open_Wound_of_Eyeball_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1430", default);
 
     [CqlDeclaration("Open Wound of Eyeball")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1430")]
-	public CqlValueSet Open_Wound_of_Eyeball() => 
+	public  CqlValueSet Open_Wound_of_Eyeball() => 
 		__Open_Wound_of_Eyeball.Value;
 
-	private CqlValueSet Optic_Atrophy_Value() => 
+	private  CqlValueSet Optic_Atrophy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1466", default);
 
     [CqlDeclaration("Optic Atrophy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1466")]
-	public CqlValueSet Optic_Atrophy() => 
+	public  CqlValueSet Optic_Atrophy() => 
 		__Optic_Atrophy.Value;
 
-	private CqlValueSet Optic_Neuritis_Value() => 
+	private  CqlValueSet Optic_Neuritis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1467", default);
 
     [CqlDeclaration("Optic Neuritis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1467")]
-	public CqlValueSet Optic_Neuritis() => 
+	public  CqlValueSet Optic_Neuritis() => 
 		__Optic_Neuritis.Value;
 
-	private CqlValueSet Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis_Value() => 
+	private  CqlValueSet Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1468", default);
 
     [CqlDeclaration("Other and Unspecified Forms of Chorioretinitis and Retinochoroiditis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1468")]
-	public CqlValueSet Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis() => 
+	public  CqlValueSet Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis() => 
 		__Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis.Value;
 
-	private CqlValueSet Other_Background_Retinopathy_and_Retinal_Vascular_Changes_Value() => 
+	private  CqlValueSet Other_Background_Retinopathy_and_Retinal_Vascular_Changes_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1469", default);
 
     [CqlDeclaration("Other Background Retinopathy and Retinal Vascular Changes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1469")]
-	public CqlValueSet Other_Background_Retinopathy_and_Retinal_Vascular_Changes() => 
+	public  CqlValueSet Other_Background_Retinopathy_and_Retinal_Vascular_Changes() => 
 		__Other_Background_Retinopathy_and_Retinal_Vascular_Changes.Value;
 
-	private CqlValueSet Other_Disorders_of_Optic_Nerve_Value() => 
+	private  CqlValueSet Other_Disorders_of_Optic_Nerve_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1471", default);
 
     [CqlDeclaration("Other Disorders of Optic Nerve")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1471")]
-	public CqlValueSet Other_Disorders_of_Optic_Nerve() => 
+	public  CqlValueSet Other_Disorders_of_Optic_Nerve() => 
 		__Other_Disorders_of_Optic_Nerve.Value;
 
-	private CqlValueSet Other_Endophthalmitis_Value() => 
+	private  CqlValueSet Other_Endophthalmitis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1473", default);
 
     [CqlDeclaration("Other Endophthalmitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1473")]
-	public CqlValueSet Other_Endophthalmitis() => 
+	public  CqlValueSet Other_Endophthalmitis() => 
 		__Other_Endophthalmitis.Value;
 
-	private CqlValueSet Other_Proliferative_Retinopathy_Value() => 
+	private  CqlValueSet Other_Proliferative_Retinopathy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1480", default);
 
     [CqlDeclaration("Other Proliferative Retinopathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1480")]
-	public CqlValueSet Other_Proliferative_Retinopathy() => 
+	public  CqlValueSet Other_Proliferative_Retinopathy() => 
 		__Other_Proliferative_Retinopathy.Value;
 
-	private CqlValueSet Pathologic_Myopia_Value() => 
+	private  CqlValueSet Pathologic_Myopia_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1432", default);
 
     [CqlDeclaration("Pathologic Myopia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1432")]
-	public CqlValueSet Pathologic_Myopia() => 
+	public  CqlValueSet Pathologic_Myopia() => 
 		__Pathologic_Myopia.Value;
 
-	private CqlValueSet Posterior_Lenticonus_Value() => 
+	private  CqlValueSet Posterior_Lenticonus_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1433", default);
 
     [CqlDeclaration("Posterior Lenticonus")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1433")]
-	public CqlValueSet Posterior_Lenticonus() => 
+	public  CqlValueSet Posterior_Lenticonus() => 
 		__Posterior_Lenticonus.Value;
 
-	private CqlValueSet Prior_Penetrating_Keratoplasty_Value() => 
+	private  CqlValueSet Prior_Penetrating_Keratoplasty_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1475", default);
 
     [CqlDeclaration("Prior Penetrating Keratoplasty")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1475")]
-	public CqlValueSet Prior_Penetrating_Keratoplasty() => 
+	public  CqlValueSet Prior_Penetrating_Keratoplasty() => 
 		__Prior_Penetrating_Keratoplasty.Value;
 
-	private CqlValueSet Purulent_Endophthalmitis_Value() => 
+	private  CqlValueSet Purulent_Endophthalmitis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1477", default);
 
     [CqlDeclaration("Purulent Endophthalmitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1477")]
-	public CqlValueSet Purulent_Endophthalmitis() => 
+	public  CqlValueSet Purulent_Endophthalmitis() => 
 		__Purulent_Endophthalmitis.Value;
 
-	private CqlValueSet Retinal_Detachment_with_Retinal_Defect_Value() => 
+	private  CqlValueSet Retinal_Detachment_with_Retinal_Defect_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1478", default);
 
     [CqlDeclaration("Retinal Detachment with Retinal Defect")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1478")]
-	public CqlValueSet Retinal_Detachment_with_Retinal_Defect() => 
+	public  CqlValueSet Retinal_Detachment_with_Retinal_Defect() => 
 		__Retinal_Detachment_with_Retinal_Defect.Value;
 
-	private CqlValueSet Retinal_Vascular_Occlusion_Value() => 
+	private  CqlValueSet Retinal_Vascular_Occlusion_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1479", default);
 
     [CqlDeclaration("Retinal Vascular Occlusion")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1479")]
-	public CqlValueSet Retinal_Vascular_Occlusion() => 
+	public  CqlValueSet Retinal_Vascular_Occlusion() => 
 		__Retinal_Vascular_Occlusion.Value;
 
-	private CqlValueSet Retrolental_Fibroplasias_Value() => 
+	private  CqlValueSet Retrolental_Fibroplasias_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1438", default);
 
     [CqlDeclaration("Retrolental Fibroplasias")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1438")]
-	public CqlValueSet Retrolental_Fibroplasias() => 
+	public  CqlValueSet Retrolental_Fibroplasias() => 
 		__Retrolental_Fibroplasias.Value;
 
-	private CqlValueSet Scleritis_Value() => 
+	private  CqlValueSet Scleritis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1226.1", default);
 
     [CqlDeclaration("Scleritis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1226.1")]
-	public CqlValueSet Scleritis() => 
+	public  CqlValueSet Scleritis() => 
 		__Scleritis.Value;
 
-	private CqlValueSet Separation_of_Retinal_Layers_Value() => 
+	private  CqlValueSet Separation_of_Retinal_Layers_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1482", default);
 
     [CqlDeclaration("Separation of Retinal Layers")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1482")]
-	public CqlValueSet Separation_of_Retinal_Layers() => 
+	public  CqlValueSet Separation_of_Retinal_Layers() => 
 		__Separation_of_Retinal_Layers.Value;
 
-	private CqlValueSet Traumatic_Cataract_Value() => 
+	private  CqlValueSet Traumatic_Cataract_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1443", default);
 
     [CqlDeclaration("Traumatic Cataract")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1443")]
-	public CqlValueSet Traumatic_Cataract() => 
+	public  CqlValueSet Traumatic_Cataract() => 
 		__Traumatic_Cataract.Value;
 
-	private CqlValueSet Uveitis_Value() => 
+	private  CqlValueSet Uveitis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1444", default);
 
     [CqlDeclaration("Uveitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1444")]
-	public CqlValueSet Uveitis() => 
+	public  CqlValueSet Uveitis() => 
 		__Uveitis.Value;
 
-	private CqlValueSet Vascular_Disorders_of_Iris_and_Ciliary_Body_Value() => 
+	private  CqlValueSet Vascular_Disorders_of_Iris_and_Ciliary_Body_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1445", default);
 
     [CqlDeclaration("Vascular Disorders of Iris and Ciliary Body")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1445")]
-	public CqlValueSet Vascular_Disorders_of_Iris_and_Ciliary_Body() => 
+	public  CqlValueSet Vascular_Disorders_of_Iris_and_Ciliary_Body() => 
 		__Vascular_Disorders_of_Iris_and_Ciliary_Body.Value;
 
-	private CqlValueSet Visual_Acuity_20_40_or_Better_Value() => 
+	private  CqlValueSet Visual_Acuity_20_40_or_Better_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1483", default);
 
     [CqlDeclaration("Visual Acuity 20/40 or Better")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1483")]
-	public CqlValueSet Visual_Acuity_20_40_or_Better() => 
+	public  CqlValueSet Visual_Acuity_20_40_or_Better() => 
 		__Visual_Acuity_20_40_or_Better.Value;
 
-	private CqlValueSet Visual_Field_Defects_Value() => 
+	private  CqlValueSet Visual_Field_Defects_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1446", default);
 
     [CqlDeclaration("Visual Field Defects")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1446")]
-	public CqlValueSet Visual_Field_Defects() => 
+	public  CqlValueSet Visual_Field_Defects() => 
 		__Visual_Field_Defects.Value;
 
-	private CqlCode Best_corrected_visual_acuity__observable_entity__Value() => 
+	private  CqlCode Best_corrected_visual_acuity__observable_entity__Value() => 
 		new CqlCode("419775003", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Best corrected visual acuity (observable entity)")]
-	public CqlCode Best_corrected_visual_acuity__observable_entity_() => 
+	public  CqlCode Best_corrected_visual_acuity__observable_entity_() => 
 		__Best_corrected_visual_acuity__observable_entity_.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("419775003", "http://snomed.info/sct", default, default),
@@ -662,10 +662,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -676,10 +676,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -688,10 +688,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period_Value()
+	private  IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Cataract_Surgery();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -717,17 +717,18 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			bool? x_ = context.Operators.And(s_, w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Cataract Surgery Between January and September of Measurement Period")]
-	public IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period() => 
+	public  IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period() => 
 		__Cataract_Surgery_Between_January_and_September_of_Measurement_Period.Value;
 
-	private IEnumerable<Procedure> Initial_Population_Value()
+	private  IEnumerable<Procedure> Initial_Population_Value()
 	{
 		IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period();
 		bool? b_(Procedure CataractSurgeryPerformed)
@@ -743,17 +744,18 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 			bool? l_ = context.Operators.GreaterOrEqual(k_, 18);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Procedure> c_ = context.Operators.Where<Procedure>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Initial Population")]
-	public IEnumerable<Procedure> Initial_Population() => 
+	public  IEnumerable<Procedure> Initial_Population() => 
 		__Initial_Population.Value;
 
-	private IEnumerable<Procedure> Denominator_Value()
+	private  IEnumerable<Procedure> Denominator_Value()
 	{
 		IEnumerable<Procedure> a_ = this.Initial_Population();
 
@@ -761,10 +763,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public IEnumerable<Procedure> Denominator() => 
+	public  IEnumerable<Procedure> Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<Procedure> Denominator_Exclusions_Value()
+	private  IEnumerable<Procedure> Denominator_Exclusions_Value()
 	{
 		IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period();
 		IEnumerable<Procedure> b_(Procedure CataractSurgeryPerformed)
@@ -944,24 +946,27 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				bool? fv_ = context.Operators.And(ft_, fu_);
 
 				return fv_;
-			};
+			}
+;
 			IEnumerable<Condition> fm_ = context.Operators.Where<Condition>(fk_, fl_);
 			Procedure fn_(Condition ComorbidDiagnosis) => 
 				CataractSurgeryPerformed;
+;
 			IEnumerable<Procedure> fo_ = context.Operators.Select<Condition, Procedure>(fm_, fn_);
 
 			return fo_;
-		};
+		}
+;
 		IEnumerable<Procedure> c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public IEnumerable<Procedure> Denominator_Exclusions() => 
+	public  IEnumerable<Procedure> Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<Procedure> Numerator_Value()
+	private  IEnumerable<Procedure> Numerator_Value()
 	{
 		IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period();
 		IEnumerable<Procedure> b_(Procedure CataractSurgeryPerformed)
@@ -1013,24 +1018,27 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				bool? au_ = context.Operators.And(ap_, at_);
 
 				return au_;
-			};
+			}
+;
 			IEnumerable<Observation> k_ = context.Operators.Where<Observation>(i_, j_);
 			Procedure l_(Observation VisualAcuityExamPerformed) => 
 				CataractSurgeryPerformed;
+;
 			IEnumerable<Procedure> m_ = context.Operators.Select<Observation, Procedure>(k_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<Procedure> c_ = context.Operators.SelectMany<Procedure, Procedure>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Numerator")]
-	public IEnumerable<Procedure> Numerator() => 
+	public  IEnumerable<Procedure> Numerator() => 
 		__Numerator.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1038,10 +1046,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1049,10 +1057,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1060,10 +1068,10 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -1071,7 +1079,7 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
 }

@@ -141,158 +141,158 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
     #endregion
 
-	private CqlValueSet Active_Tuberculosis_for_Urology_Care_Value() => 
+	private  CqlValueSet Active_Tuberculosis_for_Urology_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.56", default);
 
     [CqlDeclaration("Active Tuberculosis for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.56")]
-	public CqlValueSet Active_Tuberculosis_for_Urology_Care() => 
+	public  CqlValueSet Active_Tuberculosis_for_Urology_Care() => 
 		__Active_Tuberculosis_for_Urology_Care.Value;
 
-	private CqlValueSet BCG_Bacillus_Calmette_Guerin_for_Urology_Care_Value() => 
+	private  CqlValueSet BCG_Bacillus_Calmette_Guerin_for_Urology_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.52", default);
 
     [CqlDeclaration("BCG Bacillus Calmette Guerin for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.52")]
-	public CqlValueSet BCG_Bacillus_Calmette_Guerin_for_Urology_Care() => 
+	public  CqlValueSet BCG_Bacillus_Calmette_Guerin_for_Urology_Care() => 
 		__BCG_Bacillus_Calmette_Guerin_for_Urology_Care.Value;
 
-	private CqlValueSet Bladder_Cancer_for_Urology_Care_Value() => 
+	private  CqlValueSet Bladder_Cancer_for_Urology_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.45", default);
 
     [CqlDeclaration("Bladder Cancer for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.45")]
-	public CqlValueSet Bladder_Cancer_for_Urology_Care() => 
+	public  CqlValueSet Bladder_Cancer_for_Urology_Care() => 
 		__Bladder_Cancer_for_Urology_Care.Value;
 
-	private CqlValueSet Chemotherapy_Agents_for_Advanced_Cancer_Value() => 
+	private  CqlValueSet Chemotherapy_Agents_for_Advanced_Cancer_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.60", default);
 
     [CqlDeclaration("Chemotherapy Agents for Advanced Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.60")]
-	public CqlValueSet Chemotherapy_Agents_for_Advanced_Cancer() => 
+	public  CqlValueSet Chemotherapy_Agents_for_Advanced_Cancer() => 
 		__Chemotherapy_Agents_for_Advanced_Cancer.Value;
 
-	private CqlValueSet Cystectomy_for_Urology_Care_Value() => 
+	private  CqlValueSet Cystectomy_for_Urology_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.55", default);
 
     [CqlDeclaration("Cystectomy for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.55")]
-	public CqlValueSet Cystectomy_for_Urology_Care() => 
+	public  CqlValueSet Cystectomy_for_Urology_Care() => 
 		__Cystectomy_for_Urology_Care.Value;
 
-	private CqlValueSet HIV_Value() => 
+	private  CqlValueSet HIV_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003", default);
 
     [CqlDeclaration("HIV")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003")]
-	public CqlValueSet HIV() => 
+	public  CqlValueSet HIV() => 
 		__HIV.Value;
 
-	private CqlValueSet Immunocompromised_Conditions_Value() => 
+	private  CqlValueSet Immunocompromised_Conditions_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.1940", default);
 
     [CqlDeclaration("Immunocompromised Conditions")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.1940")]
-	public CqlValueSet Immunocompromised_Conditions() => 
+	public  CqlValueSet Immunocompromised_Conditions() => 
 		__Immunocompromised_Conditions.Value;
 
-	private CqlValueSet Immunosuppressive_Drugs_for_Urology_Care_Value() => 
+	private  CqlValueSet Immunosuppressive_Drugs_for_Urology_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.32", default);
 
     [CqlDeclaration("Immunosuppressive Drugs for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.32")]
-	public CqlValueSet Immunosuppressive_Drugs_for_Urology_Care() => 
+	public  CqlValueSet Immunosuppressive_Drugs_for_Urology_Care() => 
 		__Immunosuppressive_Drugs_for_Urology_Care.Value;
 
-	private CqlValueSet Mixed_histology_urothelial_cell_carcinoma_for_Urology_Care_Value() => 
+	private  CqlValueSet Mixed_histology_urothelial_cell_carcinoma_for_Urology_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.39", default);
 
     [CqlDeclaration("Mixed histology urothelial cell carcinoma for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.39")]
-	public CqlValueSet Mixed_histology_urothelial_cell_carcinoma_for_Urology_Care() => 
+	public  CqlValueSet Mixed_histology_urothelial_cell_carcinoma_for_Urology_Care() => 
 		__Mixed_histology_urothelial_cell_carcinoma_for_Urology_Care.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care_Value() => 
+	private  CqlValueSet Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.44", default);
 
     [CqlDeclaration("Unavailability of Bacillus Calmette Guerin for urology care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.44")]
-	public CqlValueSet Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care() => 
+	public  CqlValueSet Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care() => 
 		__Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care.Value;
 
-	private CqlCode Carcinoma_in_situ_of_bladder_Value() => 
+	private  CqlCode Carcinoma_in_situ_of_bladder_Value() => 
 		new CqlCode("D09.0", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
 
     [CqlDeclaration("Carcinoma in situ of bladder")]
-	public CqlCode Carcinoma_in_situ_of_bladder() => 
+	public  CqlCode Carcinoma_in_situ_of_bladder() => 
 		__Carcinoma_in_situ_of_bladder.Value;
 
-	private CqlCode Combined_radiotherapy__procedure__Value() => 
+	private  CqlCode Combined_radiotherapy__procedure__Value() => 
 		new CqlCode("169331000", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Combined radiotherapy (procedure)")]
-	public CqlCode Combined_radiotherapy__procedure_() => 
+	public  CqlCode Combined_radiotherapy__procedure_() => 
 		__Combined_radiotherapy__procedure_.Value;
 
-	private CqlCode T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding__Value() => 
+	private  CqlCode T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding__Value() => 
 		new CqlCode("369935001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("T1: Urinary tract tumor invades subepithelial connective tissue (finding)")]
-	public CqlCode T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_() => 
+	public  CqlCode T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_() => 
 		__T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_.Value;
 
-	private CqlCode Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding__Value() => 
+	private  CqlCode Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding__Value() => 
 		new CqlCode("369949005", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Ta: Noninvasive papillary carcinoma (urinary tract) (finding)")]
-	public CqlCode Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding_() => 
+	public  CqlCode Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding_() => 
 		__Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding_.Value;
 
-	private CqlCode Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding__Value() => 
+	private  CqlCode Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding__Value() => 
 		new CqlCode("369934002", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Tis: Carcinoma in situ (flat tumor of urinary bladder) (finding)")]
-	public CqlCode Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding_() => 
+	public  CqlCode Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding_() => 
 		__Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding_.Value;
 
-	private CqlCode Tumor_staging__tumor_staging__Value() => 
+	private  CqlCode Tumor_staging__tumor_staging__Value() => 
 		new CqlCode("254292007", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Tumor staging (tumor staging)")]
-	public CqlCode Tumor_staging__tumor_staging_() => 
+	public  CqlCode Tumor_staging__tumor_staging_() => 
 		__Tumor_staging__tumor_staging_.Value;
 
-	private CqlCode Dead__finding__Value() => 
+	private  CqlCode Dead__finding__Value() => 
 		new CqlCode("419099009", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Dead (finding)")]
-	public CqlCode Dead__finding_() => 
+	public  CqlCode Dead__finding_() => 
 		__Dead__finding_.Value;
 
-	private CqlCode @virtual_Value() => 
+	private  CqlCode @virtual_Value() => 
 		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("virtual")]
-	public CqlCode @virtual() => 
+	public  CqlCode @virtual() => 
 		__virtual.Value;
 
-	private CqlCode Stage_group_pathology_Cancer_Value() => 
+	private  CqlCode Stage_group_pathology_Cancer_Value() => 
 		new CqlCode("21902-2", "http://loinc.org", default, default);
 
     [CqlDeclaration("Stage group.pathology Cancer")]
-	public CqlCode Stage_group_pathology_Cancer() => 
+	public  CqlCode Stage_group_pathology_Cancer() => 
 		__Stage_group_pathology_Cancer.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("169331000", "http://snomed.info/sct", default, default),
@@ -307,10 +307,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlCode[] ICD10CM_Value()
+	private  CqlCode[] ICD10CM_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("D09.0", "http://hl7.org/fhir/sid/icd-10-cm", default, default),
@@ -320,10 +320,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("ICD10CM")]
-	public CqlCode[] ICD10CM() => 
+	public  CqlCode[] ICD10CM() => 
 		__ICD10CM.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21902-2", "http://loinc.org", default, default),
@@ -333,10 +333,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlCode[] ActCode_Value()
+	private  CqlCode[] ActCode_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -346,10 +346,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("ActCode")]
-	public CqlCode[] ActCode() => 
+	public  CqlCode[] ActCode() => 
 		__ActCode.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -360,10 +360,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -372,11 +372,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("isConfirmedActiveDiagnosis")]
-	public bool? isConfirmedActiveDiagnosis(Condition Condition)
+	public  bool? isConfirmedActiveDiagnosis(Condition Condition)
 	{
 		Condition[] a_ = [
 			Condition,
@@ -407,7 +407,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? ac_ = context.Operators.And(j_, ab_);
 
 			return ac_;
-		};
+		}
+;
 		IEnumerable<Condition> c_ = context.Operators.Where<Condition>((IEnumerable<Condition>)a_, b_);
 		Condition d_ = context.Operators.SingletonFrom<Condition>(c_);
 		bool? e_ = context.Operators.Not((bool?)(d_ is null));
@@ -415,7 +416,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 		return e_;
 	}
 
-	private IEnumerable<Condition> Bladder_Cancer_Diagnosis_Value()
+	private  IEnumerable<Condition> Bladder_Cancer_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Bladder_Cancer_for_Urology_Care();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -430,17 +431,18 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? k_ = context.Operators.And(i_, j_);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Bladder Cancer Diagnosis")]
-	public IEnumerable<Condition> Bladder_Cancer_Diagnosis() => 
+	public  IEnumerable<Condition> Bladder_Cancer_Diagnosis() => 
 		__Bladder_Cancer_Diagnosis.Value;
 
-	private Procedure First_Bladder_Cancer_Staging_Procedure_Value()
+	private  Procedure First_Bladder_Cancer_Staging_Procedure_Value()
 	{
 		CqlCode a_ = this.Tumor_staging__tumor_staging_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -463,14 +465,17 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? ab_ = context.Operators.And(v_, aa_);
 
 				return ab_;
-			};
+			}
+;
 			IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
 			Procedure n_(Condition BladderCancer) => 
 				BladderCancerStaging;
+;
 			IEnumerable<Procedure> o_ = context.Operators.Select<Condition, Procedure>(m_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Procedure> e_ = context.Operators.SelectMany<Procedure, Procedure>(c_, d_);
 		bool? f_(Procedure BladderCancerStaging)
 		{
@@ -480,7 +485,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? af_ = context.Operators.Equal(ae_, "completed");
 
 			return af_;
-		};
+		}
+;
 		IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
 		object h_(Procedure @this)
 		{
@@ -490,7 +496,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			CqlDateTime aj_ = context.Operators.Start(ai_);
 
 			return aj_;
-		};
+		}
+;
 		IEnumerable<Procedure> i_ = context.Operators.SortBy<Procedure>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		Procedure j_ = context.Operators.First<Procedure>(i_);
 
@@ -498,10 +505,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("First Bladder Cancer Staging Procedure")]
-	public Procedure First_Bladder_Cancer_Staging_Procedure() => 
+	public  Procedure First_Bladder_Cancer_Staging_Procedure() => 
 		__First_Bladder_Cancer_Staging_Procedure.Value;
 
-	private CqlDateTime July_1_of_Year_Prior_to_the_Measurement_Period_Value()
+	private  CqlDateTime July_1_of_Year_Prior_to_the_Measurement_Period_Value()
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -514,10 +521,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("July 1 of Year Prior to the Measurement Period")]
-	public CqlDateTime July_1_of_Year_Prior_to_the_Measurement_Period() => 
+	public  CqlDateTime July_1_of_Year_Prior_to_the_Measurement_Period() => 
 		__July_1_of_Year_Prior_to_the_Measurement_Period.Value;
 
-	private CqlDateTime June_30_of_the_Measurement_Period_Value()
+	private  CqlDateTime June_30_of_the_Measurement_Period_Value()
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -529,10 +536,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("June 30 of the Measurement Period")]
-	public CqlDateTime June_30_of_the_Measurement_Period() => 
+	public  CqlDateTime June_30_of_the_Measurement_Period() => 
 		__June_30_of_the_Measurement_Period.Value;
 
-	private Procedure First_Qualifying_Bladder_Cancer_Staging_Procedure_Value()
+	private  Procedure First_Qualifying_Bladder_Cancer_Staging_Procedure_Value()
 	{
 		Procedure a_ = this.First_Bladder_Cancer_Staging_Procedure();
 		Procedure[] b_ = [
@@ -549,7 +556,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, "day");
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)b_, c_);
 		Procedure e_ = context.Operators.SingletonFrom<Procedure>(d_);
 
@@ -557,10 +565,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("First Qualifying Bladder Cancer Staging Procedure")]
-	public Procedure First_Qualifying_Bladder_Cancer_Staging_Procedure() => 
+	public  Procedure First_Qualifying_Bladder_Cancer_Staging_Procedure() => 
 		__First_Qualifying_Bladder_Cancer_Staging_Procedure.Value;
 
-	private Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period_Value()
+	private  Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period_Value()
 	{
 		Procedure a_ = this.First_Bladder_Cancer_Staging_Procedure();
 		Procedure[] b_ = [
@@ -577,7 +585,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, "day");
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)b_, c_);
 		Procedure e_ = context.Operators.SingletonFrom<Procedure>(d_);
 
@@ -585,11 +594,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("First Bladder Cancer Staging Procedure during 6 Months Prior to Measurement Period through the First 6 Months of Measurement Period")]
-	public Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period() => 
+	public  Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period() => 
 		__First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period.Value;
 
     [CqlDeclaration("getStagingProcedure")]
-	public IEnumerable<Procedure> getStagingProcedure(Observation StagingObservation)
+	public  IEnumerable<Procedure> getStagingProcedure(Observation StagingObservation)
 	{
 		List<ResourceReference> a_ = StagingObservation?.PartOf;
 		Procedure b_(ResourceReference StagingReference)
@@ -608,18 +617,20 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? n_ = context.Operators.Equal(j_, m_);
 
 				return n_;
-			};
+			}
+;
 			IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)e_, f_);
 			Procedure h_ = context.Operators.SingletonFrom<Procedure>(g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Procedure> c_ = context.Operators.Select<ResourceReference, Procedure>((IEnumerable<ResourceReference>)a_, b_);
 
 		return c_;
 	}
 
-	private bool? Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_Ta_HG__Tis__T1_Value()
+	private  bool? Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_Ta_HG__Tis__T1_Value()
 	{
 		CqlCode a_ = this.Stage_group_pathology_Cancer();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -662,7 +673,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? am_ = context.Operators.And(af_, al_);
 
 			return am_;
-		};
+		}
+;
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		bool? f_ = context.Operators.Exists<Observation>(e_);
 
@@ -670,10 +682,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Has Most Recent Bladder Cancer Tumor Staging is Ta HG, Tis, T1")]
-	public bool? Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_Ta_HG__Tis__T1() => 
+	public  bool? Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_Ta_HG__Tis__T1() => 
 		__Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_Ta_HG__Tis__T1.Value;
 
-	private bool? Has_Qualifying_Encounter_Value()
+	private  bool? Has_Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -696,7 +708,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? t_ = context.Operators.And(o_, s_);
 
 			return t_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 		bool? e_ = context.Operators.Exists<Encounter>(d_);
 
@@ -704,10 +717,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Has Qualifying Encounter")]
-	public bool? Has_Qualifying_Encounter() => 
+	public  bool? Has_Qualifying_Encounter() => 
 		__Has_Qualifying_Encounter.Value;
 
-	private bool? Initial_Population_Value()
+	private  bool? Initial_Population_Value()
 	{
 		Procedure a_ = this.First_Qualifying_Bladder_Cancer_Staging_Procedure();
 		bool? b_ = context.Operators.Not((bool?)(a_ is null));
@@ -720,10 +733,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population() => 
+	public  bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-	private bool? Denominator_Value()
+	private  bool? Denominator_Value()
 	{
 		bool? a_ = this.Initial_Population();
 
@@ -731,10 +744,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator() => 
+	public  bool? Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<MedicationAdministration> BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging_Value()
+	private  IEnumerable<MedicationAdministration> BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging_Value()
 	{
 		CqlValueSet a_ = this.BCG_Bacillus_Calmette_Guerin_for_Urology_Care();
 		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default);
@@ -755,7 +768,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 					bool? ay_ = context.Operators.Equal(ax_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
 					return ay_;
-				};
+				}
+;
 				IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: default), p_);
@@ -764,7 +778,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 					DataType az_ = @this?.Value;
 
 					return az_;
-				};
+				}
+;
 				IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
 				DataType t_ = context.Operators.SingletonFrom<DataType>(s_);
 				CqlDateTime u_ = context.Operators.Convert<CqlDateTime>(t_);
@@ -791,7 +806,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 					bool? bc_ = context.Operators.Equal(bb_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
 					return bc_;
-				};
+				}
+;
 				IEnumerable<Extension> ao_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
 						? ((BCGNotGiven as DomainResource).Extension)
 						: default), an_);
@@ -800,7 +816,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 					DataType bd_ = @this?.Value;
 
 					return bd_;
-				};
+				}
+;
 				IEnumerable<DataType> aq_ = context.Operators.Select<Extension, DataType>(ao_, ap_);
 				DataType ar_ = context.Operators.SingletonFrom<DataType>(aq_);
 				CqlDateTime as_ = context.Operators.Convert<CqlDateTime>(ar_);
@@ -809,14 +826,17 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? av_ = context.Operators.And(am_, au_);
 
 				return av_;
-			};
+			}
+;
 			IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
 			MedicationAdministration n_(Procedure FirstBladderCancerStaging) => 
 				BCGNotGiven;
+;
 			IEnumerable<MedicationAdministration> o_ = context.Operators.Select<Procedure, MedicationAdministration>(m_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<MedicationAdministration> g_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
 		bool? h_(MedicationAdministration BCGNotGiven)
 		{
@@ -826,23 +846,25 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				CqlConcept bj_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return bj_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> bg_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)be_, bf_);
 			CqlValueSet bh_ = this.Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care();
 			bool? bi_ = context.Operators.ConceptsInValueSet(bg_, bh_);
 
 			return bi_;
-		};
+		}
+;
 		IEnumerable<MedicationAdministration> i_ = context.Operators.Where<MedicationAdministration>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("BCG Not Available Within 6 Months After Bladder Cancer Staging")]
-	public IEnumerable<MedicationAdministration> BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging() => 
+	public  IEnumerable<MedicationAdministration> BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging() => 
 		__BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging.Value;
 
-	private bool? Denominator_Exception_Value()
+	private  bool? Denominator_Exception_Value()
 	{
 		IEnumerable<MedicationAdministration> a_ = this.BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging();
 		bool? b_ = context.Operators.Exists<MedicationAdministration>(a_);
@@ -851,10 +873,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Denominator Exception")]
-	public bool? Denominator_Exception() => 
+	public  bool? Denominator_Exception() => 
 		__Denominator_Exception.Value;
 
-	private MedicationAdministration First_BCG_Administered_Value()
+	private  MedicationAdministration First_BCG_Administered_Value()
 	{
 		CqlValueSet a_ = this.BCG_Bacillus_Calmette_Guerin_for_Urology_Care();
 		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default);
@@ -896,14 +918,17 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? au_ = context.Operators.And(an_, at_);
 
 				return au_;
-			};
+			}
+;
 			IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)n_, o_);
 			MedicationAdministration q_(Procedure FirstBladderCancerStaging) => 
 				BCG;
+;
 			IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Procedure, MedicationAdministration>(p_, q_);
 
 			return r_;
-		};
+		}
+;
 		IEnumerable<MedicationAdministration> g_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(e_, f_);
 		bool? h_(MedicationAdministration BCG)
 		{
@@ -918,7 +943,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? ba_ = context.Operators.In<string>(ay_, (az_ as IEnumerable<string>));
 
 			return ba_;
-		};
+		}
+;
 		IEnumerable<MedicationAdministration> i_ = context.Operators.Where<MedicationAdministration>(g_, h_);
 		object j_(MedicationAdministration @this)
 		{
@@ -928,7 +954,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			CqlDateTime be_ = context.Operators.Start(bd_);
 
 			return be_;
-		};
+		}
+;
 		IEnumerable<MedicationAdministration> k_ = context.Operators.SortBy<MedicationAdministration>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
 		MedicationAdministration l_ = context.Operators.First<MedicationAdministration>(k_);
 
@@ -936,10 +963,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("First BCG Administered")]
-	public MedicationAdministration First_BCG_Administered() => 
+	public  MedicationAdministration First_BCG_Administered() => 
 		__First_BCG_Administered.Value;
 
-	private bool? Numerator_Value()
+	private  bool? Numerator_Value()
 	{
 		MedicationAdministration a_ = this.First_BCG_Administered();
 		bool? b_ = context.Operators.Not((bool?)(a_ is null));
@@ -948,10 +975,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator() => 
+	public  bool? Numerator() => 
 		__Numerator.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -959,10 +986,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -970,10 +997,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -981,10 +1008,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -992,10 +1019,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Condition> Acute_Tuberculosis_Diagnosis_Value()
+	private  IEnumerable<Condition> Acute_Tuberculosis_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Active_Tuberculosis_for_Urology_Care();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1014,31 +1041,35 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? q_ = context.Operators.OverlapsAfter(m_, p_, default);
 
 				return q_;
-			};
+			}
+;
 			IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)h_, i_);
 			Condition k_(Procedure FirstBladderCancerStaging) => 
 				ActiveTuberculosis;
+;
 			IEnumerable<Condition> l_ = context.Operators.Select<Procedure, Condition>(j_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
 		bool? e_(Condition ActiveTuberculosis)
 		{
 			bool? r_ = this.isConfirmedActiveDiagnosis(ActiveTuberculosis);
 
 			return r_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Acute Tuberculosis Diagnosis")]
-	public IEnumerable<Condition> Acute_Tuberculosis_Diagnosis() => 
+	public  IEnumerable<Condition> Acute_Tuberculosis_Diagnosis() => 
 		__Acute_Tuberculosis_Diagnosis.Value;
 
-	private IEnumerable<MedicationRequest> Immunosuppressive_Drugs_Value()
+	private  IEnumerable<MedicationRequest> Immunosuppressive_Drugs_Value()
 	{
 		CqlValueSet a_ = this.Immunosuppressive_Drugs_for_Urology_Care();
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -1062,24 +1093,27 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? u_ = context.Operators.SameOrBefore(p_, t_, default);
 
 				return u_;
-			};
+			}
+;
 			IEnumerable<Procedure> k_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)i_, j_);
 			MedicationRequest l_(Procedure FirstBladderCancerStaging) => 
 				ImmunosuppressiveDrugs;
+;
 			IEnumerable<MedicationRequest> m_ = context.Operators.Select<Procedure, MedicationRequest>(k_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> g_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(e_, f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Immunosuppressive Drugs")]
-	public IEnumerable<MedicationRequest> Immunosuppressive_Drugs() => 
+	public  IEnumerable<MedicationRequest> Immunosuppressive_Drugs() => 
 		__Immunosuppressive_Drugs.Value;
 
-	private IEnumerable<Procedure> Cystectomy_Done_Value()
+	private  IEnumerable<Procedure> Cystectomy_Done_Value()
 	{
 		CqlValueSet a_ = this.Cystectomy_for_Urology_Care();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1113,14 +1147,17 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? ah_ = context.Operators.And(ab_, ag_);
 
 				return ah_;
-			};
+			}
+;
 			IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)h_, i_);
 			Procedure k_(Procedure FirstBladderCancerStaging) => 
 				Cystectomy;
+;
 			IEnumerable<Procedure> l_ = context.Operators.Select<Procedure, Procedure>(j_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure Cystectomy)
 		{
@@ -1130,17 +1167,18 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? al_ = context.Operators.Equal(ak_, "completed");
 
 			return al_;
-		};
+		}
+;
 		IEnumerable<Procedure> f_ = context.Operators.Where<Procedure>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Cystectomy Done")]
-	public IEnumerable<Procedure> Cystectomy_Done() => 
+	public  IEnumerable<Procedure> Cystectomy_Done() => 
 		__Cystectomy_Done.Value;
 
-	private bool? Has_Excluding__HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging_Value()
+	private  bool? Has_Excluding__HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging_Value()
 	{
 		CqlValueSet a_ = this.HIV();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1167,21 +1205,25 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? z_ = context.Operators.SameOrBefore(u_, y_, default);
 
 				return z_;
-			};
+			}
+;
 			IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)o_, p_);
 			Condition r_(Procedure FirstBladderCancerStaging) => 
 				ExclusionDiagnosis;
+;
 			IEnumerable<Condition> s_ = context.Operators.Select<Procedure, Condition>(q_, r_);
 
 			return s_;
-		};
+		}
+;
 		IEnumerable<Condition> j_ = context.Operators.SelectMany<Condition, Condition>(h_, i_);
 		bool? k_(Condition ExclusionDiagnosis)
 		{
 			bool? aa_ = this.isConfirmedActiveDiagnosis(ExclusionDiagnosis);
 
 			return aa_;
-		};
+		}
+;
 		IEnumerable<Condition> l_ = context.Operators.Where<Condition>(j_, k_);
 		bool? m_ = context.Operators.Exists<Condition>(l_);
 
@@ -1189,10 +1231,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Has Excluding  HIV, Immunocompromised Conditions or Mixed Histology Before Staging")]
-	public bool? Has_Excluding__HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging() => 
+	public  bool? Has_Excluding__HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging() => 
 		__Has_Excluding__HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging.Value;
 
-	private bool? Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging_Value()
+	private  bool? Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging_Value()
 	{
 		CqlValueSet a_ = this.Chemotherapy_Agents_for_Advanced_Cancer();
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -1227,14 +1269,17 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? as_ = context.Operators.And(am_, ar_);
 
 				return as_;
-			};
+			}
+;
 			IEnumerable<Procedure> v_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)t_, u_);
 			MedicationRequest w_(Procedure FirstBladderCancerStaging) => 
 				ExclusionMed;
+;
 			IEnumerable<MedicationRequest> x_ = context.Operators.Select<Procedure, MedicationRequest>(v_, w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> g_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(e_, f_);
 		bool? h_(MedicationRequest ExclusionMed)
 		{
@@ -1258,7 +1303,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? bh_ = context.Operators.And(bc_, bg_);
 
 			return bh_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
 		CqlCode j_ = this.Combined_radiotherapy__procedure_();
 		IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(j_);
@@ -1293,14 +1339,17 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? cj_ = context.Operators.And(cd_, ci_);
 
 				return cj_;
-			};
+			}
+;
 			IEnumerable<Procedure> bl_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)bj_, bk_);
 			Procedure bm_(Procedure FirstBladderCancerStaging) => 
 				ExclusionProcedure;
+;
 			IEnumerable<Procedure> bn_ = context.Operators.Select<Procedure, Procedure>(bl_, bm_);
 
 			return bn_;
-		};
+		}
+;
 		IEnumerable<Procedure> n_ = context.Operators.SelectMany<Procedure, Procedure>(l_, m_);
 		bool? o_(Procedure ExclusionProcedure)
 		{
@@ -1310,7 +1359,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? cn_ = context.Operators.Equal(cm_, "completed");
 
 			return cn_;
-		};
+		}
+;
 		IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>(n_, o_);
 		IEnumerable<object> q_ = context.Operators.Union<object>((i_ as IEnumerable<object>), (p_ as IEnumerable<object>));
 		bool? r_ = context.Operators.Exists<object>(q_);
@@ -1319,10 +1369,10 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Has Excluding Chemotherapy or Radiotherapy Procedure Before Staging")]
-	public bool? Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging() => 
+	public  bool? Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging() => 
 		__Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging.Value;
 
-	private bool? Denominator_Exclusion_Value()
+	private  bool? Denominator_Exclusion_Value()
 	{
 		IEnumerable<Condition> a_ = this.Acute_Tuberculosis_Diagnosis();
 		bool? b_ = context.Operators.Exists<Condition>(a_);
@@ -1341,11 +1391,11 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	}
 
     [CqlDeclaration("Denominator Exclusion")]
-	public bool? Denominator_Exclusion() => 
+	public  bool? Denominator_Exclusion() => 
 		__Denominator_Exclusion.Value;
 
     [CqlDeclaration("NormalizePeriod")]
-	public CqlInterval<CqlDateTime> NormalizePeriod(CqlDateTime pointInTime, CqlInterval<CqlDateTime> dateTimeInterval)
+	public  CqlInterval<CqlDateTime> NormalizePeriod(CqlDateTime pointInTime, CqlInterval<CqlDateTime> dateTimeInterval)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1363,7 +1413,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			{
 				return (null as CqlInterval<CqlDateTime>);
 			}
-		};
+		}
+;
 
 		return a_();
 	}

@@ -49,38 +49,38 @@ public class NCQAPalliativeCare_1_0_0
 
     #endregion
 
-	private CqlValueSet Palliative_Care_Assessment_Value() => 
+	private  CqlValueSet Palliative_Care_Assessment_Value() => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", default);
 
     [CqlDeclaration("Palliative Care Assessment")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225")]
-	public CqlValueSet Palliative_Care_Assessment() => 
+	public  CqlValueSet Palliative_Care_Assessment() => 
 		__Palliative_Care_Assessment.Value;
 
-	private CqlValueSet Palliative_Care_Encounter_Value() => 
+	private  CqlValueSet Palliative_Care_Encounter_Value() => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450", default);
 
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450")]
-	public CqlValueSet Palliative_Care_Encounter() => 
+	public  CqlValueSet Palliative_Care_Encounter() => 
 		__Palliative_Care_Encounter.Value;
 
-	private CqlValueSet Palliative_Care_Intervention_Value() => 
+	private  CqlValueSet Palliative_Care_Intervention_Value() => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224", default);
 
     [CqlDeclaration("Palliative Care Intervention")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224")]
-	public CqlValueSet Palliative_Care_Intervention() => 
+	public  CqlValueSet Palliative_Care_Intervention() => 
 		__Palliative_Care_Intervention.Value;
 
-	private CqlCode Encounter_for_palliative_care_Value() => 
+	private  CqlCode Encounter_for_palliative_care_Value() => 
 		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
 
     [CqlDeclaration("Encounter for palliative care")]
-	public CqlCode Encounter_for_palliative_care() => 
+	public  CqlCode Encounter_for_palliative_care() => 
 		__Encounter_for_palliative_care.Value;
 
-	private CqlCode[] ICD_10_Value()
+	private  CqlCode[] ICD_10_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", default, default),
@@ -90,11 +90,11 @@ public class NCQAPalliativeCare_1_0_0
 	}
 
     [CqlDeclaration("ICD-10")]
-	public CqlCode[] ICD_10() => 
+	public  CqlCode[] ICD_10() => 
 		__ICD_10.Value;
 
     [CqlDeclaration("Palliative Care Overlapping Period")]
-	public bool? Palliative_Care_Overlapping_Period(CqlInterval<CqlDateTime> Period)
+	public  bool? Palliative_Care_Overlapping_Period(CqlInterval<CqlDateTime> Period)
 	{
 		CqlValueSet a_ = this.Palliative_Care_Assessment();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -116,7 +116,8 @@ public class NCQAPalliativeCare_1_0_0
 			bool? ap_ = context.Operators.Overlaps(aj_, ao_, default);
 
 			return ap_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		bool? e_ = context.Operators.Exists<Observation>(d_);
 		CqlValueSet f_ = this.Palliative_Care_Encounter();
@@ -140,7 +141,8 @@ public class NCQAPalliativeCare_1_0_0
 			bool? be_ = context.Operators.Overlaps(ay_, bd_, default);
 
 			return be_;
-		};
+		}
+;
 		IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 		bool? l_ = context.Operators.Or(e_, k_);
@@ -165,7 +167,8 @@ public class NCQAPalliativeCare_1_0_0
 			bool? bt_ = context.Operators.Overlaps(bn_, bs_, default);
 
 			return bt_;
-		};
+		}
+;
 		IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>(o_, p_);
 		bool? r_ = context.Operators.Exists<Procedure>(q_);
 		bool? s_ = context.Operators.Or(l_, r_);
@@ -189,7 +192,8 @@ public class NCQAPalliativeCare_1_0_0
 			bool? cg_ = context.Operators.Overlaps(ca_, cf_, default);
 
 			return cg_;
-		};
+		}
+;
 		IEnumerable<Condition> y_ = context.Operators.Where<Condition>(w_, x_);
 		bool? z_ = context.Operators.Exists<Condition>(y_);
 		bool? aa_ = context.Operators.Or(s_, z_);

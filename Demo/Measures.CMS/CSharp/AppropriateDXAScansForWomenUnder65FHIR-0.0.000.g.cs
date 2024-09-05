@@ -217,413 +217,413 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
     #endregion
 
-	private CqlValueSet Amenorrhea_Value() => 
+	private  CqlValueSet Amenorrhea_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1022", default);
 
     [CqlDeclaration("Amenorrhea")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1022")]
-	public CqlValueSet Amenorrhea() => 
+	public  CqlValueSet Amenorrhea() => 
 		__Amenorrhea.Value;
 
-	private CqlValueSet Ankylosing_Spondylitis_Value() => 
+	private  CqlValueSet Ankylosing_Spondylitis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1045", default);
 
     [CqlDeclaration("Ankylosing Spondylitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1045")]
-	public CqlValueSet Ankylosing_Spondylitis() => 
+	public  CqlValueSet Ankylosing_Spondylitis() => 
 		__Ankylosing_Spondylitis.Value;
 
-	private CqlValueSet Aromatase_Inhibitors_Value() => 
+	private  CqlValueSet Aromatase_Inhibitors_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1265", default);
 
     [CqlDeclaration("Aromatase Inhibitors")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1265")]
-	public CqlValueSet Aromatase_Inhibitors() => 
+	public  CqlValueSet Aromatase_Inhibitors() => 
 		__Aromatase_Inhibitors.Value;
 
-	private CqlValueSet Bilateral_Oophorectomy_Value() => 
+	private  CqlValueSet Bilateral_Oophorectomy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.471", default);
 
     [CqlDeclaration("Bilateral Oophorectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.471")]
-	public CqlValueSet Bilateral_Oophorectomy() => 
+	public  CqlValueSet Bilateral_Oophorectomy() => 
 		__Bilateral_Oophorectomy.Value;
 
-	private CqlValueSet Bone_Marrow_Transplant_Value() => 
+	private  CqlValueSet Bone_Marrow_Transplant_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.336", default);
 
     [CqlDeclaration("Bone Marrow Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.336")]
-	public CqlValueSet Bone_Marrow_Transplant() => 
+	public  CqlValueSet Bone_Marrow_Transplant() => 
 		__Bone_Marrow_Transplant.Value;
 
-	private CqlValueSet Chemotherapy_Value() => 
+	private  CqlValueSet Chemotherapy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.485", default);
 
     [CqlDeclaration("Chemotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.485")]
-	public CqlValueSet Chemotherapy() => 
+	public  CqlValueSet Chemotherapy() => 
 		__Chemotherapy.Value;
 
-	private CqlValueSet Chronic_Liver_Disease_Value() => 
+	private  CqlValueSet Chronic_Liver_Disease_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1035", default);
 
     [CqlDeclaration("Chronic Liver Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1035")]
-	public CqlValueSet Chronic_Liver_Disease() => 
+	public  CqlValueSet Chronic_Liver_Disease() => 
 		__Chronic_Liver_Disease.Value;
 
-	private CqlValueSet Chronic_Malnutrition_Value() => 
+	private  CqlValueSet Chronic_Malnutrition_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1036", default);
 
     [CqlDeclaration("Chronic Malnutrition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1036")]
-	public CqlValueSet Chronic_Malnutrition() => 
+	public  CqlValueSet Chronic_Malnutrition() => 
 		__Chronic_Malnutrition.Value;
 
-	private CqlValueSet Cushings_Syndrome_Value() => 
+	private  CqlValueSet Cushings_Syndrome_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1009", default);
 
     [CqlDeclaration("Cushings Syndrome")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1009")]
-	public CqlValueSet Cushings_Syndrome() => 
+	public  CqlValueSet Cushings_Syndrome() => 
 		__Cushings_Syndrome.Value;
 
-	private CqlValueSet DXA__Dual_energy_Xray_Absorptiometry__Scan_Value() => 
+	private  CqlValueSet DXA__Dual_energy_Xray_Absorptiometry__Scan_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1051", default);
 
     [CqlDeclaration("DXA (Dual energy Xray Absorptiometry) Scan")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1051")]
-	public CqlValueSet DXA__Dual_energy_Xray_Absorptiometry__Scan() => 
+	public  CqlValueSet DXA__Dual_energy_Xray_Absorptiometry__Scan() => 
 		__DXA__Dual_energy_Xray_Absorptiometry__Scan.Value;
 
-	private CqlValueSet Eating_Disorders_Value() => 
+	private  CqlValueSet Eating_Disorders_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1039", default);
 
     [CqlDeclaration("Eating Disorders")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1039")]
-	public CqlValueSet Eating_Disorders() => 
+	public  CqlValueSet Eating_Disorders() => 
 		__Eating_Disorders.Value;
 
-	private CqlValueSet Ehlers_Danlos_Syndrome_Value() => 
+	private  CqlValueSet Ehlers_Danlos_Syndrome_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1047", default);
 
     [CqlDeclaration("Ehlers Danlos Syndrome")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1047")]
-	public CqlValueSet Ehlers_Danlos_Syndrome() => 
+	public  CqlValueSet Ehlers_Danlos_Syndrome() => 
 		__Ehlers_Danlos_Syndrome.Value;
 
-	private CqlValueSet End_Stage_Renal_Disease_Value() => 
+	private  CqlValueSet End_Stage_Renal_Disease_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", default);
 
     [CqlDeclaration("End Stage Renal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353")]
-	public CqlValueSet End_Stage_Renal_Disease() => 
+	public  CqlValueSet End_Stage_Renal_Disease() => 
 		__End_Stage_Renal_Disease.Value;
 
-	private CqlValueSet Evidence_of_Bilateral_Oophorectomy_Value() => 
+	private  CqlValueSet Evidence_of_Bilateral_Oophorectomy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1048", default);
 
     [CqlDeclaration("Evidence of Bilateral Oophorectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1048")]
-	public CqlValueSet Evidence_of_Bilateral_Oophorectomy() => 
+	public  CqlValueSet Evidence_of_Bilateral_Oophorectomy() => 
 		__Evidence_of_Bilateral_Oophorectomy.Value;
 
-	private CqlValueSet Gastric_Bypass_Surgery_Value() => 
+	private  CqlValueSet Gastric_Bypass_Surgery_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1050", default);
 
     [CqlDeclaration("Gastric Bypass Surgery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1050")]
-	public CqlValueSet Gastric_Bypass_Surgery() => 
+	public  CqlValueSet Gastric_Bypass_Surgery() => 
 		__Gastric_Bypass_Surgery.Value;
 
-	private CqlValueSet Glucocorticoids__oral_only__Value() => 
+	private  CqlValueSet Glucocorticoids__oral_only__Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1266", default);
 
     [CqlDeclaration("Glucocorticoids (oral only)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1266")]
-	public CqlValueSet Glucocorticoids__oral_only_() => 
+	public  CqlValueSet Glucocorticoids__oral_only_() => 
 		__Glucocorticoids__oral_only_.Value;
 
-	private CqlValueSet History_of_hip_fracture_in_parent_Value() => 
+	private  CqlValueSet History_of_hip_fracture_in_parent_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1040", default);
 
     [CqlDeclaration("History of hip fracture in parent")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1040")]
-	public CqlValueSet History_of_hip_fracture_in_parent() => 
+	public  CqlValueSet History_of_hip_fracture_in_parent() => 
 		__History_of_hip_fracture_in_parent.Value;
 
-	private CqlValueSet Hyperparathyroidism_Value() => 
+	private  CqlValueSet Hyperparathyroidism_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1016", default);
 
     [CqlDeclaration("Hyperparathyroidism")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1016")]
-	public CqlValueSet Hyperparathyroidism() => 
+	public  CqlValueSet Hyperparathyroidism() => 
 		__Hyperparathyroidism.Value;
 
-	private CqlValueSet Hyperthyroidism_Value() => 
+	private  CqlValueSet Hyperthyroidism_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1015", default);
 
     [CqlDeclaration("Hyperthyroidism")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1015")]
-	public CqlValueSet Hyperthyroidism() => 
+	public  CqlValueSet Hyperthyroidism() => 
 		__Hyperthyroidism.Value;
 
-	private CqlValueSet Kidney_Transplant_Value() => 
+	private  CqlValueSet Kidney_Transplant_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1012", default);
 
     [CqlDeclaration("Kidney Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1012")]
-	public CqlValueSet Kidney_Transplant() => 
+	public  CqlValueSet Kidney_Transplant() => 
 		__Kidney_Transplant.Value;
 
-	private CqlValueSet Lupus_Value() => 
+	private  CqlValueSet Lupus_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1010", default);
 
     [CqlDeclaration("Lupus")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1010")]
-	public CqlValueSet Lupus() => 
+	public  CqlValueSet Lupus() => 
 		__Lupus.Value;
 
-	private CqlValueSet Major_Transplant_Value() => 
+	private  CqlValueSet Major_Transplant_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1075", default);
 
     [CqlDeclaration("Major Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1075")]
-	public CqlValueSet Major_Transplant() => 
+	public  CqlValueSet Major_Transplant() => 
 		__Major_Transplant.Value;
 
-	private CqlValueSet Malabsorption_Syndromes_Value() => 
+	private  CqlValueSet Malabsorption_Syndromes_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1050", default);
 
     [CqlDeclaration("Malabsorption Syndromes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1050")]
-	public CqlValueSet Malabsorption_Syndromes() => 
+	public  CqlValueSet Malabsorption_Syndromes() => 
 		__Malabsorption_Syndromes.Value;
 
-	private CqlValueSet Marfans_Syndrome_Value() => 
+	private  CqlValueSet Marfans_Syndrome_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1048", default);
 
     [CqlDeclaration("Marfan's Syndrome")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1048")]
-	public CqlValueSet Marfans_Syndrome() => 
+	public  CqlValueSet Marfans_Syndrome() => 
 		__Marfans_Syndrome.Value;
 
-	private CqlValueSet Multiple_Myeloma_Value() => 
+	private  CqlValueSet Multiple_Myeloma_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1011", default);
 
     [CqlDeclaration("Multiple Myeloma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1011")]
-	public CqlValueSet Multiple_Myeloma() => 
+	public  CqlValueSet Multiple_Myeloma() => 
 		__Multiple_Myeloma.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Online_Assessments_Value() => 
+	private  CqlValueSet Online_Assessments_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments() => 
+	public  CqlValueSet Online_Assessments() => 
 		__Online_Assessments.Value;
 
-	private CqlValueSet Osteogenesis_Imperfecta_Value() => 
+	private  CqlValueSet Osteogenesis_Imperfecta_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1044", default);
 
     [CqlDeclaration("Osteogenesis Imperfecta")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1044")]
-	public CqlValueSet Osteogenesis_Imperfecta() => 
+	public  CqlValueSet Osteogenesis_Imperfecta() => 
 		__Osteogenesis_Imperfecta.Value;
 
-	private CqlValueSet Osteopenia_Value() => 
+	private  CqlValueSet Osteopenia_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1049", default);
 
     [CqlDeclaration("Osteopenia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1049")]
-	public CqlValueSet Osteopenia() => 
+	public  CqlValueSet Osteopenia() => 
 		__Osteopenia.Value;
 
-	private CqlValueSet Osteoporosis_Value() => 
+	private  CqlValueSet Osteoporosis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1038", default);
 
     [CqlDeclaration("Osteoporosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1038")]
-	public CqlValueSet Osteoporosis() => 
+	public  CqlValueSet Osteoporosis() => 
 		__Osteoporosis.Value;
 
-	private CqlValueSet Osteoporotic_Fractures_Value() => 
+	private  CqlValueSet Osteoporotic_Fractures_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1050", default);
 
     [CqlDeclaration("Osteoporotic Fractures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1050")]
-	public CqlValueSet Osteoporotic_Fractures() => 
+	public  CqlValueSet Osteoporotic_Fractures() => 
 		__Osteoporotic_Fractures.Value;
 
-	private CqlValueSet Outpatient_Consultation_Value() => 
+	private  CqlValueSet Outpatient_Consultation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public CqlValueSet Outpatient_Consultation() => 
+	public  CqlValueSet Outpatient_Consultation() => 
 		__Outpatient_Consultation.Value;
 
-	private CqlValueSet Premature_Menopause_Value() => 
+	private  CqlValueSet Premature_Menopause_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1013", default);
 
     [CqlDeclaration("Premature Menopause")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1013")]
-	public CqlValueSet Premature_Menopause() => 
+	public  CqlValueSet Premature_Menopause() => 
 		__Premature_Menopause.Value;
 
-	private CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services_Established_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Psoriatic_Arthritis_Value() => 
+	private  CqlValueSet Psoriatic_Arthritis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1046", default);
 
     [CqlDeclaration("Psoriatic Arthritis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1046")]
-	public CqlValueSet Psoriatic_Arthritis() => 
+	public  CqlValueSet Psoriatic_Arthritis() => 
 		__Psoriatic_Arthritis.Value;
 
-	private CqlValueSet Rheumatoid_Arthritis_Value() => 
+	private  CqlValueSet Rheumatoid_Arthritis_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1005", default);
 
     [CqlDeclaration("Rheumatoid Arthritis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1005")]
-	public CqlValueSet Rheumatoid_Arthritis() => 
+	public  CqlValueSet Rheumatoid_Arthritis() => 
 		__Rheumatoid_Arthritis.Value;
 
-	private CqlValueSet Telephone_Visits_Value() => 
+	private  CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits() => 
+	public  CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
 
-	private CqlValueSet Type_1_Diabetes_Value() => 
+	private  CqlValueSet Type_1_Diabetes_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1020", default);
 
     [CqlDeclaration("Type 1 Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1020")]
-	public CqlValueSet Type_1_Diabetes() => 
+	public  CqlValueSet Type_1_Diabetes() => 
 		__Type_1_Diabetes.Value;
 
-	private CqlValueSet Unilateral_Oophorectomy_Left_Value() => 
+	private  CqlValueSet Unilateral_Oophorectomy_Left_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1028", default);
 
     [CqlDeclaration("Unilateral Oophorectomy Left")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1028")]
-	public CqlValueSet Unilateral_Oophorectomy_Left() => 
+	public  CqlValueSet Unilateral_Oophorectomy_Left() => 
 		__Unilateral_Oophorectomy_Left.Value;
 
-	private CqlValueSet Unilateral_Oophorectomy_Right_Value() => 
+	private  CqlValueSet Unilateral_Oophorectomy_Right_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1032", default);
 
     [CqlDeclaration("Unilateral Oophorectomy Right")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1032")]
-	public CqlValueSet Unilateral_Oophorectomy_Right() => 
+	public  CqlValueSet Unilateral_Oophorectomy_Right() => 
 		__Unilateral_Oophorectomy_Right.Value;
 
-	private CqlValueSet Unilateral_Oophorectomy__Unspecified_Laterality_Value() => 
+	private  CqlValueSet Unilateral_Oophorectomy__Unspecified_Laterality_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1035", default);
 
     [CqlDeclaration("Unilateral Oophorectomy, Unspecified Laterality")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1035")]
-	public CqlValueSet Unilateral_Oophorectomy__Unspecified_Laterality() => 
+	public  CqlValueSet Unilateral_Oophorectomy__Unspecified_Laterality() => 
 		__Unilateral_Oophorectomy__Unspecified_Laterality.Value;
 
-	private CqlCode Alcoholic_drinks_per_drinking_day___Reported_Value() => 
+	private  CqlCode Alcoholic_drinks_per_drinking_day___Reported_Value() => 
 		new CqlCode("11287-0", "http://loinc.org", default, default);
 
     [CqlDeclaration("Alcoholic drinks per drinking day - Reported")]
-	public CqlCode Alcoholic_drinks_per_drinking_day___Reported() => 
+	public  CqlCode Alcoholic_drinks_per_drinking_day___Reported() => 
 		__Alcoholic_drinks_per_drinking_day___Reported.Value;
 
-	private CqlCode Body_mass_index__BMI___Ratio__Value() => 
+	private  CqlCode Body_mass_index__BMI___Ratio__Value() => 
 		new CqlCode("39156-5", "http://loinc.org", default, default);
 
     [CqlDeclaration("Body mass index (BMI) [Ratio]")]
-	public CqlCode Body_mass_index__BMI___Ratio_() => 
+	public  CqlCode Body_mass_index__BMI___Ratio_() => 
 		__Body_mass_index__BMI___Ratio_.Value;
 
-	private CqlCode Female_Value() => 
+	private  CqlCode Female_Value() => 
 		new CqlCode("F", "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", default, default);
 
     [CqlDeclaration("Female")]
-	public CqlCode Female() => 
+	public  CqlCode Female() => 
 		__Female.Value;
 
-	private CqlCode Left__qualifier_value__Value() => 
+	private  CqlCode Left__qualifier_value__Value() => 
 		new CqlCode("7771000", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Left (qualifier value)")]
-	public CqlCode Left__qualifier_value_() => 
+	public  CqlCode Left__qualifier_value_() => 
 		__Left__qualifier_value_.Value;
 
-	private CqlCode Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment_Value() => 
+	private  CqlCode Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment_Value() => 
 		new CqlCode("90265-0", "http://loinc.org", default, default);
 
     [CqlDeclaration("Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment")]
-	public CqlCode Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment() => 
+	public  CqlCode Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment() => 
 		__Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment.Value;
 
-	private CqlCode Osteoporosis_Index_of_Risk_panel_Value() => 
+	private  CqlCode Osteoporosis_Index_of_Risk_panel_Value() => 
 		new CqlCode("98133-2", "http://loinc.org", default, default);
 
     [CqlDeclaration("Osteoporosis Index of Risk panel")]
-	public CqlCode Osteoporosis_Index_of_Risk_panel() => 
+	public  CqlCode Osteoporosis_Index_of_Risk_panel() => 
 		__Osteoporosis_Index_of_Risk_panel.Value;
 
-	private CqlCode Osteoporosis_Risk_Assessment_Instrument_Value() => 
+	private  CqlCode Osteoporosis_Risk_Assessment_Instrument_Value() => 
 		new CqlCode("98139-9", "http://loinc.org", default, default);
 
     [CqlDeclaration("Osteoporosis Risk Assessment Instrument")]
-	public CqlCode Osteoporosis_Risk_Assessment_Instrument() => 
+	public  CqlCode Osteoporosis_Risk_Assessment_Instrument() => 
 		__Osteoporosis_Risk_Assessment_Instrument.Value;
 
-	private CqlCode Osteoporosis_Self_Assessment_Tool_Value() => 
+	private  CqlCode Osteoporosis_Self_Assessment_Tool_Value() => 
 		new CqlCode("98146-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("Osteoporosis Self-Assessment Tool")]
-	public CqlCode Osteoporosis_Self_Assessment_Tool() => 
+	public  CqlCode Osteoporosis_Self_Assessment_Tool() => 
 		__Osteoporosis_Self_Assessment_Tool.Value;
 
-	private CqlCode Right__qualifier_value__Value() => 
+	private  CqlCode Right__qualifier_value__Value() => 
 		new CqlCode("24028007", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Right (qualifier value)")]
-	public CqlCode Right__qualifier_value_() => 
+	public  CqlCode Right__qualifier_value_() => 
 		__Right__qualifier_value_.Value;
 
-	private CqlCode Unlisted_preventive_medicine_service_Value() => 
+	private  CqlCode Unlisted_preventive_medicine_service_Value() => 
 		new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default, default);
 
     [CqlDeclaration("Unlisted preventive medicine service")]
-	public CqlCode Unlisted_preventive_medicine_service() => 
+	public  CqlCode Unlisted_preventive_medicine_service() => 
 		__Unlisted_preventive_medicine_service.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("11287-0", "http://loinc.org", default, default),
@@ -638,10 +638,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlCode[] AdministrativeGender_Value()
+	private  CqlCode[] AdministrativeGender_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("F", "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", default, default),
@@ -651,10 +651,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("AdministrativeGender")]
-	public CqlCode[] AdministrativeGender() => 
+	public  CqlCode[] AdministrativeGender() => 
 		__AdministrativeGender.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("7771000", "http://snomed.info/sct", default, default),
@@ -665,10 +665,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlCode[] CPT_Value()
+	private  CqlCode[] CPT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default, default),
@@ -678,10 +678,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("CPT")]
-	public CqlCode[] CPT() => 
+	public  CqlCode[] CPT() => 
 		__CPT.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -692,10 +692,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -704,10 +704,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -715,10 +715,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -726,10 +726,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -737,10 +737,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -748,10 +748,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Encounter> Qualifying_Encounter_Value()
+	private  IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -767,7 +767,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				CqlConcept ad_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return ad_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> z_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)x_, y_);
 			bool? aa_(CqlConcept T)
 			{
@@ -776,12 +777,14 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				bool? ag_ = context.Operators.Equivalent(T, af_);
 
 				return ag_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> ab_ = context.Operators.Where<CqlConcept>(z_, aa_);
 			bool? ac_ = context.Operators.Exists<CqlConcept>(ab_);
 
 			return ac_;
-		};
+		}
+;
 		IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 		CqlValueSet i_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
 		IEnumerable<Encounter> j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, default);
@@ -805,17 +808,18 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? al_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ah_, ak_, "day");
 
 			return al_;
-		};
+		}
+;
 		IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
 
 		return w_;
 	}
 
     [CqlDeclaration("Qualifying Encounter")]
-	public IEnumerable<Encounter> Qualifying_Encounter() => 
+	public  IEnumerable<Encounter> Qualifying_Encounter() => 
 		__Qualifying_Encounter.Value;
 
-	private bool? Initial_Population_Value()
+	private  bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -840,10 +844,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population() => 
+	public  bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-	private bool? Denominator_Value()
+	private  bool? Denominator_Value()
 	{
 		bool? a_ = this.Initial_Population();
 
@@ -851,10 +855,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator() => 
+	public  bool? Denominator() => 
 		__Denominator.Value;
 
-	private Observation First_BMI_in_Measurement_Period_Value()
+	private  Observation First_BMI_in_Measurement_Period_Value()
 	{
 		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
 		IEnumerable<Observation> b_ = Status_1_6_000.BMI(a_);
@@ -871,7 +875,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? p_ = context.Operators.And(l_, o_);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
@@ -881,7 +886,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			CqlDateTime t_ = context.Operators.Start(s_);
 
 			return t_;
-		};
+		}
+;
 		IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation g_ = context.Operators.First<Observation>(f_);
 
@@ -889,10 +895,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("First BMI in Measurement Period")]
-	public Observation First_BMI_in_Measurement_Period() => 
+	public  Observation First_BMI_in_Measurement_Period() => 
 		__First_BMI_in_Measurement_Period.Value;
 
-	private Observation First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2_Value()
+	private  Observation First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2_Value()
 	{
 		Observation a_ = this.First_BMI_in_Measurement_Period();
 		Observation[] b_ = [
@@ -906,7 +912,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? i_ = context.Operators.LessOrEqual((g_ as CqlQuantity), h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>((IEnumerable<Observation>)b_, c_);
 		Observation e_ = context.Operators.SingletonFrom<Observation>(d_);
 
@@ -914,10 +921,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("First BMI in Measurement Period Less Than or Equal to 20 kg m2")]
-	public Observation First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2() => 
+	public  Observation First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2() => 
 		__First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2.Value;
 
-	private Observation First_Average_Number_of_Drinks_Assessments_Indicating_More_Than_Two_Per_Day_Value()
+	private  Observation First_Average_Number_of_Drinks_Assessments_Indicating_More_Than_Two_Per_Day_Value()
 	{
 		CqlCode a_ = this.Alcoholic_drinks_per_drinking_day___Reported();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -938,7 +945,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? t_ = context.Operators.And(o_, s_);
 
 			return t_;
-		};
+		}
+;
 		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 		object g_(Observation @this)
 		{
@@ -948,7 +956,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			CqlDateTime x_ = context.Operators.Start(w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Observation> h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation i_ = context.Operators.First<Observation>(h_);
 
@@ -956,10 +965,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("First Average Number of Drinks Assessments Indicating More Than Two Per Day")]
-	public Observation First_Average_Number_of_Drinks_Assessments_Indicating_More_Than_Two_Per_Day() => 
+	public  Observation First_Average_Number_of_Drinks_Assessments_Indicating_More_Than_Two_Per_Day() => 
 		__First_Average_Number_of_Drinks_Assessments_Indicating_More_Than_Two_Per_Day.Value;
 
-	private bool? Has_Risk_Factor_Active_During_the_Measurement_Period_Value()
+	private  bool? Has_Risk_Factor_Active_During_the_Measurement_Period_Value()
 	{
 		Observation a_ = this.First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2();
 		bool? b_ = context.Operators.Not((bool?)(a_ is null));
@@ -971,10 +980,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Has Risk Factor Active During the Measurement Period")]
-	public bool? Has_Risk_Factor_Active_During_the_Measurement_Period() => 
+	public  bool? Has_Risk_Factor_Active_During_the_Measurement_Period() => 
 		__Has_Risk_Factor_Active_During_the_Measurement_Period.Value;
 
-	private bool? Has_Osteoporosis_Before_Measurement_Period_Value()
+	private  bool? Has_Osteoporosis_Before_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Osteoporosis();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -987,7 +996,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? j_ = context.Operators.Before(g_, i_, default);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 		bool? e_ = context.Operators.Exists<Condition>(d_);
 
@@ -995,10 +1005,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Has Osteoporosis Before Measurement Period")]
-	public bool? Has_Osteoporosis_Before_Measurement_Period() => 
+	public  bool? Has_Osteoporosis_Before_Measurement_Period() => 
 		__Has_Osteoporosis_Before_Measurement_Period.Value;
 
-	private bool? Has_Osteopenia_Before_Measurement_Period_Value()
+	private  bool? Has_Osteopenia_Before_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Osteopenia();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -1011,7 +1021,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? j_ = context.Operators.Before(g_, i_, default);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 		bool? e_ = context.Operators.Exists<Condition>(d_);
 
@@ -1019,10 +1030,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Has Osteopenia Before Measurement Period")]
-	public bool? Has_Osteopenia_Before_Measurement_Period() => 
+	public  bool? Has_Osteopenia_Before_Measurement_Period() => 
 		__Has_Osteopenia_Before_Measurement_Period.Value;
 
-	private bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_Value()
+	private  bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_Value()
 	{
 		bool? a_ = this.Has_Osteoporosis_Before_Measurement_Period();
 		bool? b_ = this.Has_Osteopenia_Before_Measurement_Period();
@@ -1032,10 +1043,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Has Risk Factor Any Time in History Prior to Measurement Period")]
-	public bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period() => 
+	public  bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period() => 
 		__Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period.Value;
 
-	private IEnumerable<Observation> Parent_History_of_Hip_Fracture_Assessment_Value()
+	private  IEnumerable<Observation> Parent_History_of_Hip_Fracture_Assessment_Value()
 	{
 		CqlValueSet a_ = this.History_of_hip_fracture_in_parent();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -1051,17 +1062,18 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? l_ = context.Operators.Before(i_, k_, default);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Parent History of Hip Fracture Assessment")]
-	public IEnumerable<Observation> Parent_History_of_Hip_Fracture_Assessment() => 
+	public  IEnumerable<Observation> Parent_History_of_Hip_Fracture_Assessment() => 
 		__Parent_History_of_Hip_Fracture_Assessment.Value;
 
-	private bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_and_Do_Not_Need_to_be_Active_During_Measurement_Period_Value()
+	private  bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_and_Do_Not_Need_to_be_Active_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Gastric_Bypass_Surgery();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1077,7 +1089,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? ag_ = context.Operators.Before(ad_, af_, default);
 
 			return ag_;
-		};
+		}
+;
 		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlValueSet f_ = this.Aromatase_Inhibitors();
 		IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
@@ -1094,7 +1107,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? am_ = context.Operators.Before(aj_, al_, default);
 
 			return am_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> m_ = context.Operators.Where<MedicationRequest>(k_, l_);
 		IEnumerable<object> n_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (m_ as IEnumerable<object>));
 		IEnumerable<MedicationRequest> p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
@@ -1114,7 +1128,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 					CqlDateTime au_ = context.Operators.Start(at_);
 
 					return (au_ is null);
-				};
+				}
+;
 				if (as_())
 				{
 					return default;
@@ -1128,11 +1143,13 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 					return az_;
 				}
-			};
+			}
+;
 			bool? ar_ = context.Operators.Before(ap_, aq_(), default);
 
 			return ar_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> v_ = context.Operators.Where<MedicationRequest>(t_, u_);
 		IEnumerable<object> w_ = context.Operators.Union<object>((n_ as IEnumerable<object>), (v_ as IEnumerable<object>));
 		IEnumerable<Observation> x_ = this.Parent_History_of_Hip_Fracture_Assessment();
@@ -1143,10 +1160,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Has Risk Factor Any Time in History Prior to Measurement Period and Do Not Need to be Active During Measurement Period")]
-	public bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_and_Do_Not_Need_to_be_Active_During_Measurement_Period() => 
+	public  bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_and_Do_Not_Need_to_be_Active_During_Measurement_Period() => 
 		__Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_and_Do_Not_Need_to_be_Active_During_Measurement_Period.Value;
 
-	private int? Glucocorticoid_Active_Medication_Duration_in_Days_Value()
+	private  int? Glucocorticoid_Active_Medication_Duration_in_Days_Value()
 	{
 		CqlValueSet a_ = this.Glucocorticoids__oral_only_();
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -1163,7 +1180,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? q_ = context.Operators.Before(n_, p_, default);
 
 			return q_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		CqlInterval<CqlDate> i_(MedicationRequest Glucocorticoid)
 		{
@@ -1179,7 +1197,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			CqlInterval<CqlDate> aa_ = context.Operators.Intersect<CqlDate>(r_, z_);
 
 			return aa_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> j_ = context.Operators.Select<MedicationRequest, CqlInterval<CqlDate>>(h_, i_);
 		int? k_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(j_);
 
@@ -1187,10 +1206,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Glucocorticoid Active Medication Duration in Days")]
-	public int? Glucocorticoid_Active_Medication_Duration_in_Days() => 
+	public  int? Glucocorticoid_Active_Medication_Duration_in_Days() => 
 		__Glucocorticoid_Active_Medication_Duration_in_Days.Value;
 
-	private int? Glucocorticoid_Active_Medication_Days_Value()
+	private  int? Glucocorticoid_Active_Medication_Days_Value()
 	{
 		int? a_ = this.Glucocorticoid_Active_Medication_Duration_in_Days();
 
@@ -1198,10 +1217,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Glucocorticoid Active Medication Days")]
-	public int? Glucocorticoid_Active_Medication_Days() => 
+	public  int? Glucocorticoid_Active_Medication_Days() => 
 		__Glucocorticoid_Active_Medication_Days.Value;
 
-	private bool? Has_90_or_More_Active_Glucocorticoid_Medication_Days_Value()
+	private  bool? Has_90_or_More_Active_Glucocorticoid_Medication_Days_Value()
 	{
 		int? a_ = this.Glucocorticoid_Active_Medication_Days();
 		bool? b_ = context.Operators.GreaterOrEqual(a_, 90);
@@ -1210,11 +1229,11 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Has 90 or More Active Glucocorticoid Medication Days")]
-	public bool? Has_90_or_More_Active_Glucocorticoid_Medication_Days() => 
+	public  bool? Has_90_or_More_Active_Glucocorticoid_Medication_Days() => 
 		__Has_90_or_More_Active_Glucocorticoid_Medication_Days.Value;
 
     [CqlDeclaration("DiagnosisInPatientHistory")]
-	public IEnumerable<Condition> DiagnosisInPatientHistory(IEnumerable<Condition> Condition)
+	public  IEnumerable<Condition> DiagnosisInPatientHistory(IEnumerable<Condition> Condition)
 	{
 		bool? a_(Condition Dx)
 		{
@@ -1225,14 +1244,15 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? g_ = context.Operators.SameOrBefore(d_, f_, "day");
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("ProcedureInPatientHistory")]
-	public IEnumerable<Procedure> ProcedureInPatientHistory(IEnumerable<Procedure> Procedure)
+	public  IEnumerable<Procedure> ProcedureInPatientHistory(IEnumerable<Procedure> Procedure)
 	{
 		IEnumerable<Procedure> a_ = Status_1_6_000.Completed_Procedure(Procedure);
 		bool? b_(Procedure Proc)
@@ -1246,13 +1266,14 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? j_ = context.Operators.SameOrBefore(g_, i_, "day");
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Procedure> c_ = context.Operators.Where<Procedure>(a_, b_);
 
 		return c_;
 	}
 
-	private bool? Has_Double_or_Bilateral_Oophorectomy_Value()
+	private  bool? Has_Double_or_Bilateral_Oophorectomy_Value()
 	{
 		CqlValueSet a_ = this.Bilateral_Oophorectomy();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1273,7 +1294,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				CqlConcept aj_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return aj_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> af_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ad_, ae_);
 			bool? ag_(CqlConcept C)
 			{
@@ -1282,12 +1304,14 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				bool? am_ = context.Operators.Equivalent(C, al_);
 
 				return am_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> ah_ = context.Operators.Where<CqlConcept>(af_, ag_);
 			bool? ai_ = context.Operators.Exists<CqlConcept>(ah_);
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>(k_, l_);
 		CqlValueSet n_ = this.Unilateral_Oophorectomy_Right();
 		IEnumerable<Procedure> o_ = context.Operators.RetrieveByValueSet<Procedure>(n_, default);
@@ -1303,7 +1327,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				CqlConcept at_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return at_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> ap_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)an_, ao_);
 			bool? aq_(CqlConcept D)
 			{
@@ -1312,12 +1337,14 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				bool? aw_ = context.Operators.Equivalent(D, av_);
 
 				return aw_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> ar_ = context.Operators.Where<CqlConcept>(ap_, aq_);
 			bool? as_ = context.Operators.Exists<CqlConcept>(ar_);
 
 			return as_;
-		};
+		}
+;
 		IEnumerable<Procedure> v_ = context.Operators.Where<Procedure>(t_, u_);
 		CqlValueSet w_ = this.Unilateral_Oophorectomy_Left();
 		IEnumerable<Procedure> x_ = context.Operators.RetrieveByValueSet<Procedure>(w_, default);
@@ -1331,10 +1358,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Has Double or Bilateral Oophorectomy")]
-	public bool? Has_Double_or_Bilateral_Oophorectomy() => 
+	public  bool? Has_Double_or_Bilateral_Oophorectomy() => 
 		__Has_Double_or_Bilateral_Oophorectomy.Value;
 
-	private bool? Has_Organ_Transplants_Value()
+	private  bool? Has_Organ_Transplants_Value()
 	{
 		CqlValueSet a_ = this.Major_Transplant();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -1351,10 +1378,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Has Organ Transplants")]
-	public bool? Has_Organ_Transplants() => 
+	public  bool? Has_Organ_Transplants() => 
 		__Has_Organ_Transplants.Value;
 
-	private bool? Has_Risk_Factor_Any_Time_in_History_or_During_Measurement_Period_Value()
+	private  bool? Has_Risk_Factor_Any_Time_in_History_or_During_Measurement_Period_Value()
 	{
 		bool? a_ = this.Has_90_or_More_Active_Glucocorticoid_Medication_Days();
 		CqlValueSet b_ = this.Osteoporotic_Fractures();
@@ -1433,10 +1460,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Has Risk Factor Any Time in History or During Measurement Period")]
-	public bool? Has_Risk_Factor_Any_Time_in_History_or_During_Measurement_Period() => 
+	public  bool? Has_Risk_Factor_Any_Time_in_History_or_During_Measurement_Period() => 
 		__Has_Risk_Factor_Any_Time_in_History_or_During_Measurement_Period.Value;
 
-	private bool? Denominator_Exclusions_Value()
+	private  bool? Denominator_Exclusions_Value()
 	{
 		bool? a_ = this.Has_Risk_Factor_Active_During_the_Measurement_Period();
 		bool? b_ = this.Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period();
@@ -1450,10 +1477,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions() => 
+	public  bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<ServiceRequest> DXA_Scan_Order_During_Measurement_Period_Value()
+	private  IEnumerable<ServiceRequest> DXA_Scan_Order_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.DXA__Dual_energy_Xray_Absorptiometry__Scan();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -1467,7 +1494,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, k_, default);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> e_ = context.Operators.Where<ServiceRequest>(c_, d_);
 		object f_(ServiceRequest @this)
 		{
@@ -1475,17 +1503,18 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> g_ = context.Operators.SortBy<ServiceRequest>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 
 		return g_;
 	}
 
     [CqlDeclaration("DXA Scan Order During Measurement Period")]
-	public IEnumerable<ServiceRequest> DXA_Scan_Order_During_Measurement_Period() => 
+	public  IEnumerable<ServiceRequest> DXA_Scan_Order_During_Measurement_Period() => 
 		__DXA_Scan_Order_During_Measurement_Period.Value;
 
-	private bool? Numerator_Value()
+	private  bool? Numerator_Value()
 	{
 		IEnumerable<ServiceRequest> a_ = this.DXA_Scan_Order_During_Measurement_Period();
 		bool? b_ = context.Operators.Exists<ServiceRequest>(a_);
@@ -1494,10 +1523,10 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator() => 
+	public  bool? Numerator() => 
 		__Numerator.Value;
 
-	private IEnumerable<Observation> Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan_Value()
+	private  IEnumerable<Observation> Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan_Value()
 	{
 		CqlCode a_ = this.Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1511,7 +1540,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? ag_ = context.Operators.GreaterOrEqual((ae_ as CqlQuantity), af_);
 
 			return ag_;
-		};
+		}
+;
 		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 		CqlCode g_ = this.Osteoporosis_Risk_Assessment_Instrument();
 		IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(g_);
@@ -1524,7 +1554,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? aj_ = context.Operators.GreaterOrEqual((ai_ as int?), 9);
 
 			return aj_;
-		};
+		}
+;
 		IEnumerable<Observation> l_ = context.Operators.Where<Observation>(j_, k_);
 		IEnumerable<Observation> m_ = context.Operators.Union<Observation>(f_, l_);
 		CqlCode n_ = this.Osteoporosis_Index_of_Risk_panel();
@@ -1539,7 +1570,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? an_ = context.Operators.Less((al_ as CqlQuantity), am_);
 
 			return an_;
-		};
+		}
+;
 		IEnumerable<Observation> s_ = context.Operators.Where<Observation>(q_, r_);
 		CqlCode t_ = this.Osteoporosis_Self_Assessment_Tool();
 		IEnumerable<CqlCode> u_ = context.Operators.ToList<CqlCode>(t_);
@@ -1553,7 +1585,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? ar_ = context.Operators.Less((ap_ as CqlQuantity), aq_);
 
 			return ar_;
-		};
+		}
+;
 		IEnumerable<Observation> y_ = context.Operators.Where<Observation>(w_, x_);
 		IEnumerable<Observation> z_ = context.Operators.Union<Observation>(s_, y_);
 		IEnumerable<Observation> aa_ = context.Operators.Union<Observation>(m_, z_);
@@ -1570,17 +1603,18 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? ba_ = context.Operators.Before(av_, az_, default);
 
 			return ba_;
-		};
+		}
+;
 		IEnumerable<Observation> ac_ = context.Operators.Where<Observation>(aa_, ab_);
 
 		return ac_;
 	}
 
     [CqlDeclaration("Osteoporosis Fracture Risk Assessment Prior to First DXA Scan")]
-	public IEnumerable<Observation> Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan() => 
+	public  IEnumerable<Observation> Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan() => 
 		__Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan.Value;
 
-	private bool? Numerator_Exclusion_Value()
+	private  bool? Numerator_Exclusion_Value()
 	{
 		IEnumerable<Observation> a_ = this.Osteoporosis_Fracture_Risk_Assessment_Prior_to_First_DXA_Scan();
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -1589,11 +1623,11 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	}
 
     [CqlDeclaration("Numerator Exclusion")]
-	public bool? Numerator_Exclusion() => 
+	public  bool? Numerator_Exclusion() => 
 		__Numerator_Exclusion.Value;
 
     [CqlDeclaration("Final Survey Observation")]
-	public IEnumerable<Observation> Final_Survey_Observation(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> Final_Survey_Observation(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -1613,13 +1647,15 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 				CqlConcept n_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return n_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_ = context.Operators.Exists<CqlConcept>(k_);
 			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;

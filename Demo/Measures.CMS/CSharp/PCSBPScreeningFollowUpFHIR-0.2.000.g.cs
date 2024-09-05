@@ -159,168 +159,168 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
     #endregion
 
-	private CqlValueSet Diagnosis_of_Hypertension_Value() => 
+	private  CqlValueSet Diagnosis_of_Hypertension_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263", default);
 
     [CqlDeclaration("Diagnosis of Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263")]
-	public CqlValueSet Diagnosis_of_Hypertension() => 
+	public  CqlValueSet Diagnosis_of_Hypertension() => 
 		__Diagnosis_of_Hypertension.Value;
 
-	private CqlValueSet Dietary_Recommendations_Value() => 
+	private  CqlValueSet Dietary_Recommendations_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515", default);
 
     [CqlDeclaration("Dietary Recommendations")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515")]
-	public CqlValueSet Dietary_Recommendations() => 
+	public  CqlValueSet Dietary_Recommendations() => 
 		__Dietary_Recommendations.Value;
 
-	private CqlValueSet Encounter_to_Screen_for_Blood_Pressure_Value() => 
+	private  CqlValueSet Encounter_to_Screen_for_Blood_Pressure_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920", default);
 
     [CqlDeclaration("Encounter to Screen for Blood Pressure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920")]
-	public CqlValueSet Encounter_to_Screen_for_Blood_Pressure() => 
+	public  CqlValueSet Encounter_to_Screen_for_Blood_Pressure() => 
 		__Encounter_to_Screen_for_Blood_Pressure.Value;
 
-	private CqlValueSet Finding_of_Elevated_Blood_Pressure_or_Hypertension_Value() => 
+	private  CqlValueSet Finding_of_Elevated_Blood_Pressure_or_Hypertension_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514", default);
 
     [CqlDeclaration("Finding of Elevated Blood Pressure or Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514")]
-	public CqlValueSet Finding_of_Elevated_Blood_Pressure_or_Hypertension() => 
+	public  CqlValueSet Finding_of_Elevated_Blood_Pressure_or_Hypertension() => 
 		__Finding_of_Elevated_Blood_Pressure_or_Hypertension.Value;
 
-	private CqlValueSet Follow_Up_Within_4_Weeks_Value() => 
+	private  CqlValueSet Follow_Up_Within_4_Weeks_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578", default);
 
     [CqlDeclaration("Follow Up Within 4 Weeks")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578")]
-	public CqlValueSet Follow_Up_Within_4_Weeks() => 
+	public  CqlValueSet Follow_Up_Within_4_Weeks() => 
 		__Follow_Up_Within_4_Weeks.Value;
 
-	private CqlValueSet Laboratory_Tests_for_Hypertension_Value() => 
+	private  CqlValueSet Laboratory_Tests_for_Hypertension_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482", default);
 
     [CqlDeclaration("Laboratory Tests for Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482")]
-	public CqlValueSet Laboratory_Tests_for_Hypertension() => 
+	public  CqlValueSet Laboratory_Tests_for_Hypertension() => 
 		__Laboratory_Tests_for_Hypertension.Value;
 
-	private CqlValueSet Lifestyle_Recommendation_Value() => 
+	private  CqlValueSet Lifestyle_Recommendation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581", default);
 
     [CqlDeclaration("Lifestyle Recommendation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581")]
-	public CqlValueSet Lifestyle_Recommendation() => 
+	public  CqlValueSet Lifestyle_Recommendation() => 
 		__Lifestyle_Recommendation.Value;
 
-	private CqlValueSet Medical_Reason_Value() => 
+	private  CqlValueSet Medical_Reason_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-	public CqlValueSet Medical_Reason() => 
+	public  CqlValueSet Medical_Reason() => 
 		__Medical_Reason.Value;
 
-	private CqlValueSet Patient_Declined_Value() => 
+	private  CqlValueSet Patient_Declined_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", default);
 
     [CqlDeclaration("Patient Declined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582")]
-	public CqlValueSet Patient_Declined() => 
+	public  CqlValueSet Patient_Declined() => 
 		__Patient_Declined.Value;
 
-	private CqlValueSet Pharmacologic_Therapy_for_Hypertension_Value() => 
+	private  CqlValueSet Pharmacologic_Therapy_for_Hypertension_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577", default);
 
     [CqlDeclaration("Pharmacologic Therapy for Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577")]
-	public CqlValueSet Pharmacologic_Therapy_for_Hypertension() => 
+	public  CqlValueSet Pharmacologic_Therapy_for_Hypertension() => 
 		__Pharmacologic_Therapy_for_Hypertension.Value;
 
-	private CqlValueSet Recommendation_to_Increase_Physical_Activity_Value() => 
+	private  CqlValueSet Recommendation_to_Increase_Physical_Activity_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518", default);
 
     [CqlDeclaration("Recommendation to Increase Physical Activity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518")]
-	public CqlValueSet Recommendation_to_Increase_Physical_Activity() => 
+	public  CqlValueSet Recommendation_to_Increase_Physical_Activity() => 
 		__Recommendation_to_Increase_Physical_Activity.Value;
 
-	private CqlValueSet Referral_or_Counseling_for_Alcohol_Consumption_Value() => 
+	private  CqlValueSet Referral_or_Counseling_for_Alcohol_Consumption_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583", default);
 
     [CqlDeclaration("Referral or Counseling for Alcohol Consumption")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583")]
-	public CqlValueSet Referral_or_Counseling_for_Alcohol_Consumption() => 
+	public  CqlValueSet Referral_or_Counseling_for_Alcohol_Consumption() => 
 		__Referral_or_Counseling_for_Alcohol_Consumption.Value;
 
-	private CqlValueSet Referral_to_Primary_Care_or_Alternate_Provider_Value() => 
+	private  CqlValueSet Referral_to_Primary_Care_or_Alternate_Provider_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580", default);
 
     [CqlDeclaration("Referral to Primary Care or Alternate Provider")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580")]
-	public CqlValueSet Referral_to_Primary_Care_or_Alternate_Provider() => 
+	public  CqlValueSet Referral_to_Primary_Care_or_Alternate_Provider() => 
 		__Referral_to_Primary_Care_or_Alternate_Provider.Value;
 
-	private CqlValueSet Weight_Reduction_Recommended_Value() => 
+	private  CqlValueSet Weight_Reduction_Recommended_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510", default);
 
     [CqlDeclaration("Weight Reduction Recommended")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510")]
-	public CqlValueSet Weight_Reduction_Recommended() => 
+	public  CqlValueSet Weight_Reduction_Recommended() => 
 		__Weight_Reduction_Recommended.Value;
 
-	private CqlCode Diastolic_blood_pressure_Value() => 
+	private  CqlCode Diastolic_blood_pressure_Value() => 
 		new CqlCode("8462-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("Diastolic blood pressure")]
-	public CqlCode Diastolic_blood_pressure() => 
+	public  CqlCode Diastolic_blood_pressure() => 
 		__Diastolic_blood_pressure.Value;
 
-	private CqlCode _12_lead_EKG_panel_Value() => 
+	private  CqlCode _12_lead_EKG_panel_Value() => 
 		new CqlCode("34534-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("12 lead EKG panel")]
-	public CqlCode _12_lead_EKG_panel() => 
+	public  CqlCode _12_lead_EKG_panel() => 
 		___12_lead_EKG_panel.Value;
 
-	private CqlCode EKG_study_Value() => 
+	private  CqlCode EKG_study_Value() => 
 		new CqlCode("11524-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("EKG study")]
-	public CqlCode EKG_study() => 
+	public  CqlCode EKG_study() => 
 		__EKG_study.Value;
 
-	private CqlCode Follow_up_2_3_months__finding__Value() => 
+	private  CqlCode Follow_up_2_3_months__finding__Value() => 
 		new CqlCode("183624006", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Follow-up 2-3 months (finding)")]
-	public CqlCode Follow_up_2_3_months__finding_() => 
+	public  CqlCode Follow_up_2_3_months__finding_() => 
 		__Follow_up_2_3_months__finding_.Value;
 
-	private CqlCode Follow_up_4_6_months__finding__Value() => 
+	private  CqlCode Follow_up_4_6_months__finding__Value() => 
 		new CqlCode("183625007", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Follow-up 4-6 months (finding)")]
-	public CqlCode Follow_up_4_6_months__finding_() => 
+	public  CqlCode Follow_up_4_6_months__finding_() => 
 		__Follow_up_4_6_months__finding_.Value;
 
-	private CqlCode Systolic_blood_pressure_Value() => 
+	private  CqlCode Systolic_blood_pressure_Value() => 
 		new CqlCode("8480-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Systolic blood pressure")]
-	public CqlCode Systolic_blood_pressure() => 
+	public  CqlCode Systolic_blood_pressure() => 
 		__Systolic_blood_pressure.Value;
 
-	private CqlCode @virtual_Value() => 
+	private  CqlCode @virtual_Value() => 
 		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("virtual")]
-	public CqlCode @virtual() => 
+	public  CqlCode @virtual() => 
 		__virtual.Value;
 
-	private CqlCode[] ActCode_Value()
+	private  CqlCode[] ActCode_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -330,10 +330,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("ActCode")]
-	public CqlCode[] ActCode() => 
+	public  CqlCode[] ActCode() => 
 		__ActCode.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("8462-4", "http://loinc.org", default, default),
@@ -346,10 +346,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("183624006", "http://snomed.info/sct", default, default),
@@ -360,10 +360,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -374,10 +374,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -386,10 +386,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period_Value()
+	private  IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Encounter_to_Screen_for_Blood_Pressure();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -412,17 +412,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? s_ = context.Operators.And(m_, r_);
 
 			return s_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Qualifying Encounter during Measurement Period")]
-	public IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period() => 
+	public  IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period() => 
 		__Qualifying_Encounter_during_Measurement_Period.Value;
 
-	private IEnumerable<Encounter> Initial_Population_Value()
+	private  IEnumerable<Encounter> Initial_Population_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
@@ -437,17 +438,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? k_ = context.Operators.GreaterOrEqual(j_, 18);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Initial Population")]
-	public IEnumerable<Encounter> Initial_Population() => 
+	public  IEnumerable<Encounter> Initial_Population() => 
 		__Initial_Population.Value;
 
-	private IEnumerable<Encounter> Denominator_Value()
+	private  IEnumerable<Encounter> Denominator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population();
 
@@ -455,10 +457,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public IEnumerable<Encounter> Denominator() => 
+	public  IEnumerable<Encounter> Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<Encounter> Denominator_Exclusions_Value()
+	private  IEnumerable<Encounter> Denominator_Exclusions_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
@@ -480,7 +482,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						CqlDateTime v_ = context.Operators.Start(u_);
 
 						return (v_ is null);
-					};
+					}
+;
 					if (t_())
 					{
 						return default;
@@ -494,31 +497,35 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 						return aa_;
 					}
-				};
+				}
+;
 				Period p_ = QualifyingEncounter?.Period;
 				CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_3_000.ToInterval(p_);
 				bool? r_ = context.Operators.SameOrBefore(o_(), q_, "day");
 				bool? s_ = context.Operators.And(n_, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
 			Encounter h_(Condition Hypertension) => 
 				QualifyingEncounter;
+;
 			IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public IEnumerable<Encounter> Denominator_Exclusions() => 
+	public  IEnumerable<Encounter> Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Normal_Blood_Pressure_Reading_Value()
+	private  IEnumerable<Encounter> Encounter_with_Normal_Blood_Pressure_Reading_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
@@ -545,7 +552,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? aw_ = context.Operators.And(aq_, av_);
 
 				return aw_;
-			};
+			}
+;
 			IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
@@ -555,7 +563,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ba_ = context.Operators.Start(az_);
 
 				return ba_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context.Operators.Last<Observation>(h_);
 			List<Observation.ComponentComponent> j_ = i_?.Component;
@@ -575,7 +584,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? bn_ = context.Operators.And(bg_, bm_);
 
 				return bn_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> l_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
@@ -605,7 +615,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ca_ = context.Operators.And(bu_, bz_);
 
 				return ca_;
-			};
+			}
+;
 			IEnumerable<Observation> v_ = context.Operators.Where<Observation>(d_, u_);
 			object w_(Observation @this)
 			{
@@ -615,7 +626,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ce_ = context.Operators.Start(cd_);
 
 				return ce_;
-			};
+			}
+;
 			IEnumerable<Observation> x_ = context.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation y_ = context.Operators.Last<Observation>(x_);
 			List<Observation.ComponentComponent> z_ = y_?.Component;
@@ -635,7 +647,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? cr_ = context.Operators.And(ck_, cq_);
 
 				return cr_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> ab_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)z_, aa_);
 			Observation.ComponentComponent ac_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(ab_);
 			DataType ad_ = ac_?.Value;
@@ -646,17 +659,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? aj_ = context.Operators.And(s_, ai_);
 
 			return aj_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Normal Blood Pressure Reading")]
-	public IEnumerable<Encounter> Encounter_with_Normal_Blood_Pressure_Reading() => 
+	public  IEnumerable<Encounter> Encounter_with_Normal_Blood_Pressure_Reading() => 
 		__Encounter_with_Normal_Blood_Pressure_Reading.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_Value()
+	private  IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
@@ -683,7 +697,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? aw_ = context.Operators.And(aq_, av_);
 
 				return aw_;
-			};
+			}
+;
 			IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
@@ -693,7 +708,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ba_ = context.Operators.Start(az_);
 
 				return ba_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context.Operators.Last<Observation>(h_);
 			List<Observation.ComponentComponent> j_ = i_?.Component;
@@ -713,7 +729,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? bn_ = context.Operators.And(bg_, bm_);
 
 				return bn_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> l_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
@@ -743,7 +760,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ca_ = context.Operators.And(bu_, bz_);
 
 				return ca_;
-			};
+			}
+;
 			IEnumerable<Observation> v_ = context.Operators.Where<Observation>(d_, u_);
 			object w_(Observation @this)
 			{
@@ -753,7 +771,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ce_ = context.Operators.Start(cd_);
 
 				return ce_;
-			};
+			}
+;
 			IEnumerable<Observation> x_ = context.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation y_ = context.Operators.Last<Observation>(x_);
 			List<Observation.ComponentComponent> z_ = y_?.Component;
@@ -773,7 +792,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? cr_ = context.Operators.And(ck_, cq_);
 
 				return cr_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> ab_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)z_, aa_);
 			Observation.ComponentComponent ac_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(ab_);
 			DataType ad_ = ac_?.Value;
@@ -785,17 +805,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? aj_ = context.Operators.And(s_, ai_);
 
 			return aj_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80")]
-	public IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80() => 
+	public  IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80() => 
 		__Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80.Value;
 
-	private IEnumerable<ServiceRequest> Follow_up_with_Rescreen_in_2_to_6_Months_Value()
+	private  IEnumerable<ServiceRequest> Follow_up_with_Rescreen_in_2_to_6_Months_Value()
 	{
 		CqlCode a_ = this.Follow_up_2_3_months__finding_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -812,17 +833,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? m_ = context.Operators.Equivalent(l_, "order");
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Follow up with Rescreen in 2 to 6 Months")]
-	public IEnumerable<ServiceRequest> Follow_up_with_Rescreen_in_2_to_6_Months() => 
+	public  IEnumerable<ServiceRequest> Follow_up_with_Rescreen_in_2_to_6_Months() => 
 		__Follow_up_with_Rescreen_in_2_to_6_Months.Value;
 
-	private IEnumerable<ServiceRequest> NonPharmacological_Interventions_Value()
+	private  IEnumerable<ServiceRequest> NonPharmacological_Interventions_Value()
 	{
 		CqlValueSet a_ = this.Lifestyle_Recommendation();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -846,17 +868,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? t_ = context.Operators.Equivalent(s_, "order");
 
 			return t_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> p_ = context.Operators.Where<ServiceRequest>(n_, o_);
 
 		return p_;
 	}
 
     [CqlDeclaration("NonPharmacological Interventions")]
-	public IEnumerable<ServiceRequest> NonPharmacological_Interventions() => 
+	public  IEnumerable<ServiceRequest> NonPharmacological_Interventions() => 
 		__NonPharmacological_Interventions.Value;
 
-	private IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading_Value()
+	private  IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading_Value()
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -868,7 +891,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlConcept o_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return o_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> g_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)e_, f_);
 			CqlValueSet h_ = this.Finding_of_Elevated_Blood_Pressure_or_Hypertension();
 			bool? i_ = context.Operators.ConceptsInValueSet(g_, h_);
@@ -879,17 +903,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? n_ = context.Operators.And(i_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Referral to Alternate or Primary Healthcare Professional for Hypertensive Reading")]
-	public IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading() => 
+	public  IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading() => 
 		__Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions_Value()
+	private  IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80();
 		IEnumerable<Encounter> b_(Encounter ElevatedEncounter)
@@ -904,14 +929,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, "day");
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> l_ = context.Operators.Where<ServiceRequest>(j_, k_);
 			Encounter m_(ServiceRequest Twoto6MonthRescreen) => 
 				ElevatedEncounter;
+;
 			IEnumerable<Encounter> n_ = context.Operators.Select<ServiceRequest, Encounter>(l_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 		IEnumerable<Encounter> d_(Encounter ElevatedEncounter)
 		{
@@ -925,14 +953,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ac_ = context.Operators.In<CqlDateTime>(z_, ab_, "day");
 
 				return ac_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> v_ = context.Operators.Where<ServiceRequest>(t_, u_);
 			Encounter w_(ServiceRequest NonPharmInterventions) => 
 				ElevatedEncounter;
+;
 			IEnumerable<Encounter> x_ = context.Operators.Select<ServiceRequest, Encounter>(v_, w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Encounter> e_ = context.Operators.SelectMany<Encounter, Encounter>(c_, d_);
 		IEnumerable<Encounter> g_(Encounter ElevatedEncounter)
 		{
@@ -946,14 +977,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? am_ = context.Operators.In<CqlDateTime>(aj_, al_, "day");
 
 				return am_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> af_ = context.Operators.Where<ServiceRequest>(ad_, ae_);
 			Encounter ag_(ServiceRequest Referral) => 
 				ElevatedEncounter;
+;
 			IEnumerable<Encounter> ah_ = context.Operators.Select<ServiceRequest, Encounter>(af_, ag_);
 
 			return ah_;
-		};
+		}
+;
 		IEnumerable<Encounter> h_ = context.Operators.SelectMany<Encounter, Encounter>(a_, g_);
 		IEnumerable<Encounter> i_ = context.Operators.Union<Encounter>(e_, h_);
 
@@ -961,10 +995,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80 and Interventions")]
-	public IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions() => 
+	public  IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions() => 
 		__Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Hypertensive_Reading_Within_Year_Prior_Value()
+	private  IEnumerable<Encounter> Encounter_with_Hypertensive_Reading_Within_Year_Prior_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
@@ -1001,7 +1035,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ci_ = context.Operators.And(cc_, ch_);
 
 				return ci_;
-			};
+			}
+;
 			IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
@@ -1011,7 +1046,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime cm_ = context.Operators.Start(cl_);
 
 				return cm_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context.Operators.Last<Observation>(h_);
 			List<Observation.ComponentComponent> j_ = i_?.Component;
@@ -1031,7 +1067,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? cz_ = context.Operators.And(cs_, cy_);
 
 				return cz_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> l_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
@@ -1069,7 +1106,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? dy_ = context.Operators.And(ds_, dx_);
 
 				return dy_;
-			};
+			}
+;
 			IEnumerable<Observation> t_ = context.Operators.Where<Observation>(d_, s_);
 			object u_(Observation @this)
 			{
@@ -1079,7 +1117,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ec_ = context.Operators.Start(eb_);
 
 				return ec_;
-			};
+			}
+;
 			IEnumerable<Observation> v_ = context.Operators.SortBy<Observation>(t_, u_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation w_ = context.Operators.Last<Observation>(v_);
 			List<Observation.ComponentComponent> x_ = w_?.Component;
@@ -1099,7 +1138,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ep_ = context.Operators.And(ei_, eo_);
 
 				return ep_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> z_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)x_, y_);
 			Observation.ComponentComponent aa_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(z_);
 			DataType ab_ = aa_?.Value;
@@ -1137,7 +1177,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? fo_ = context.Operators.And(fi_, fn_);
 
 				return fo_;
-			};
+			}
+;
 			IEnumerable<Observation> ai_ = context.Operators.Where<Observation>(d_, ah_);
 			object aj_(Observation @this)
 			{
@@ -1147,7 +1188,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime fs_ = context.Operators.Start(fr_);
 
 				return fs_;
-			};
+			}
+;
 			IEnumerable<Observation> ak_ = context.Operators.SortBy<Observation>(ai_, aj_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation al_ = context.Operators.Last<Observation>(ak_);
 			List<Observation.ComponentComponent> am_ = al_?.Component;
@@ -1167,7 +1209,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? gf_ = context.Operators.And(fy_, ge_);
 
 				return gf_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> ao_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)am_, an_);
 			Observation.ComponentComponent ap_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(ao_);
 			DataType aq_ = ap_?.Value;
@@ -1205,7 +1248,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? he_ = context.Operators.And(gy_, hd_);
 
 				return he_;
-			};
+			}
+;
 			IEnumerable<Observation> aw_ = context.Operators.Where<Observation>(d_, av_);
 			object ax_(Observation @this)
 			{
@@ -1215,7 +1259,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime hi_ = context.Operators.Start(hh_);
 
 				return hi_;
-			};
+			}
+;
 			IEnumerable<Observation> ay_ = context.Operators.SortBy<Observation>(aw_, ax_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation az_ = context.Operators.Last<Observation>(ay_);
 			List<Observation.ComponentComponent> ba_ = az_?.Component;
@@ -1235,7 +1280,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? hv_ = context.Operators.And(ho_, hu_);
 
 				return hv_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> bc_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ba_, bb_);
 			Observation.ComponentComponent bd_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(bc_);
 			DataType be_ = bd_?.Value;
@@ -1246,17 +1292,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? bj_ = context.Operators.And(af_, bi_);
 
 			return bj_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Hypertensive Reading Within Year Prior")]
-	public IEnumerable<Encounter> Encounter_with_Hypertensive_Reading_Within_Year_Prior() => 
+	public  IEnumerable<Encounter> Encounter_with_Hypertensive_Reading_Within_Year_Prior() => 
 		__Encounter_with_Hypertensive_Reading_Within_Year_Prior.Value;
 
-	private IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_Value()
+	private  IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
@@ -1273,7 +1320,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? bs_ = context.Operators.In<CqlDateTime>(bp_, br_, "day");
 
 				return bs_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
 			object i_(Observation @this)
 			{
@@ -1283,7 +1331,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime bw_ = context.Operators.Start(bv_);
 
 				return bw_;
-			};
+			}
+;
 			IEnumerable<Observation> j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation k_ = context.Operators.Last<Observation>(j_);
 			List<Observation.ComponentComponent> l_ = k_?.Component;
@@ -1303,7 +1352,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? cj_ = context.Operators.And(cc_, ci_);
 
 				return cj_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> n_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)l_, m_);
 			Observation.ComponentComponent o_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(n_);
 			DataType p_ = o_?.Value;
@@ -1321,7 +1371,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? cq_ = context.Operators.In<CqlDateTime>(cn_, cp_, "day");
 
 				return cq_;
-			};
+			}
+;
 			IEnumerable<Observation> v_ = context.Operators.Where<Observation>(f_, u_);
 			object w_(Observation @this)
 			{
@@ -1331,7 +1382,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime cu_ = context.Operators.Start(ct_);
 
 				return cu_;
-			};
+			}
+;
 			IEnumerable<Observation> x_ = context.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation y_ = context.Operators.Last<Observation>(x_);
 			List<Observation.ComponentComponent> z_ = y_?.Component;
@@ -1351,7 +1403,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? dh_ = context.Operators.And(da_, dg_);
 
 				return dh_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> ab_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)z_, aa_);
 			Observation.ComponentComponent ac_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(ab_);
 			DataType ad_ = ac_?.Value;
@@ -1369,7 +1422,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? do_ = context.Operators.In<CqlDateTime>(dl_, dn_, "day");
 
 				return do_;
-			};
+			}
+;
 			IEnumerable<Observation> ak_ = context.Operators.Where<Observation>(f_, aj_);
 			object al_(Observation @this)
 			{
@@ -1379,7 +1433,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ds_ = context.Operators.Start(dr_);
 
 				return ds_;
-			};
+			}
+;
 			IEnumerable<Observation> am_ = context.Operators.SortBy<Observation>(ak_, al_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation an_ = context.Operators.Last<Observation>(am_);
 			List<Observation.ComponentComponent> ao_ = an_?.Component;
@@ -1399,7 +1454,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ef_ = context.Operators.And(dy_, ee_);
 
 				return ef_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> aq_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ao_, ap_);
 			Observation.ComponentComponent ar_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(aq_);
 			DataType as_ = ar_?.Value;
@@ -1417,7 +1473,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? em_ = context.Operators.In<CqlDateTime>(ej_, el_, "day");
 
 				return em_;
-			};
+			}
+;
 			IEnumerable<Observation> ay_ = context.Operators.Where<Observation>(f_, ax_);
 			object az_(Observation @this)
 			{
@@ -1427,7 +1484,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime eq_ = context.Operators.Start(ep_);
 
 				return eq_;
-			};
+			}
+;
 			IEnumerable<Observation> ba_ = context.Operators.SortBy<Observation>(ay_, az_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation bb_ = context.Operators.Last<Observation>(ba_);
 			List<Observation.ComponentComponent> bc_ = bb_?.Component;
@@ -1447,7 +1505,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? fd_ = context.Operators.And(ew_, fc_);
 
 				return fd_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> be_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)bc_, bd_);
 			Observation.ComponentComponent bf_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(be_);
 			DataType bg_ = bf_?.Value;
@@ -1458,7 +1517,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? bl_ = context.Operators.And(ah_, bk_);
 
 			return bl_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		IEnumerable<Encounter> d_ = this.Encounter_with_Hypertensive_Reading_Within_Year_Prior();
 		IEnumerable<Encounter> e_ = context.Operators.Except<Encounter>(c_, d_);
@@ -1467,10 +1527,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80")]
-	public IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80() => 
+	public  IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80() => 
 		__Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80.Value;
 
-	private IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional_Value()
+	private  IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional_Value()
 	{
 		CqlValueSet a_ = this.Follow_Up_Within_4_Weeks();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -1494,14 +1554,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? y_ = context.Operators.And(t_, x_);
 
 				return y_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
 			ServiceRequest j_(ServiceRequest NonPharmInterventionsHTN) => 
 				FourWeekRescreen;
+;
 			IEnumerable<ServiceRequest> k_ = context.Operators.Select<ServiceRequest, ServiceRequest>(i_, j_);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> d_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(b_, c_);
 		IEnumerable<ServiceRequest> e_ = this.Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading();
 		IEnumerable<ServiceRequest> f_ = context.Operators.Union<ServiceRequest>(d_, e_);
@@ -1510,10 +1573,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("First Hypertensive Reading Interventions or Referral to Alternate Professional")]
-	public IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional() => 
+	public  IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional() => 
 		__First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional.Value;
 
-	private IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions_Value()
+	private  IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80();
 		IEnumerable<Encounter> b_(Encounter FirstHTNEncounter)
@@ -1528,24 +1591,27 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, "day");
 
 				return m_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> f_ = context.Operators.Where<ServiceRequest>(d_, e_);
 			Encounter g_(ServiceRequest FirstHTNIntervention) => 
 				FirstHTNEncounter;
+;
 			IEnumerable<Encounter> h_ = context.Operators.Select<ServiceRequest, Encounter>(f_, g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80 and Interventions")]
-	public IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions() => 
+	public  IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions() => 
 		__Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Value()
+	private  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
@@ -1572,7 +1638,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ce_ = context.Operators.And(by_, cd_);
 
 				return ce_;
-			};
+			}
+;
 			IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
@@ -1582,7 +1649,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime ci_ = context.Operators.Start(ch_);
 
 				return ci_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context.Operators.Last<Observation>(h_);
 			List<Observation.ComponentComponent> j_ = i_?.Component;
@@ -1602,7 +1670,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? cv_ = context.Operators.And(co_, cu_);
 
 				return cv_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> l_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
@@ -1632,7 +1701,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? di_ = context.Operators.And(dc_, dh_);
 
 				return di_;
-			};
+			}
+;
 			IEnumerable<Observation> v_ = context.Operators.Where<Observation>(d_, u_);
 			object w_(Observation @this)
 			{
@@ -1642,7 +1712,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime dm_ = context.Operators.Start(dl_);
 
 				return dm_;
-			};
+			}
+;
 			IEnumerable<Observation> x_ = context.Operators.SortBy<Observation>(v_, w_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation y_ = context.Operators.Last<Observation>(x_);
 			List<Observation.ComponentComponent> z_ = y_?.Component;
@@ -1662,7 +1733,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? dz_ = context.Operators.And(ds_, dy_);
 
 				return dz_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> ab_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)z_, aa_);
 			Observation.ComponentComponent ac_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(ab_);
 			DataType ad_ = ac_?.Value;
@@ -1693,7 +1765,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? em_ = context.Operators.And(eg_, el_);
 
 				return em_;
-			};
+			}
+;
 			IEnumerable<Observation> am_ = context.Operators.Where<Observation>(d_, al_);
 			object an_(Observation @this)
 			{
@@ -1703,7 +1776,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime eq_ = context.Operators.Start(ep_);
 
 				return eq_;
-			};
+			}
+;
 			IEnumerable<Observation> ao_ = context.Operators.SortBy<Observation>(am_, an_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation ap_ = context.Operators.Last<Observation>(ao_);
 			List<Observation.ComponentComponent> aq_ = ap_?.Component;
@@ -1723,7 +1797,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? fd_ = context.Operators.And(ew_, fc_);
 
 				return fd_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> as_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)aq_, ar_);
 			Observation.ComponentComponent at_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(as_);
 			DataType au_ = at_?.Value;
@@ -1751,7 +1826,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? fq_ = context.Operators.And(fk_, fp_);
 
 				return fq_;
-			};
+			}
+;
 			IEnumerable<Observation> ba_ = context.Operators.Where<Observation>(d_, az_);
 			object bb_(Observation @this)
 			{
@@ -1761,7 +1837,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime fu_ = context.Operators.Start(ft_);
 
 				return fu_;
-			};
+			}
+;
 			IEnumerable<Observation> bc_ = context.Operators.SortBy<Observation>(ba_, bb_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation bd_ = context.Operators.Last<Observation>(bc_);
 			List<Observation.ComponentComponent> be_ = bd_?.Component;
@@ -1781,7 +1858,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? gh_ = context.Operators.And(ga_, gg_);
 
 				return gh_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> bg_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)be_, bf_);
 			Observation.ComponentComponent bh_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(bg_);
 			DataType bi_ = bh_?.Value;
@@ -1796,17 +1874,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? br_ = context.Operators.And(bo_, bq_);
 
 			return br_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89")]
-	public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89() => 
+	public  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89() => 
 		__Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89.Value;
 
-	private IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Value()
+	private  IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Value()
 	{
 		CqlCode a_ = this._12_lead_EKG_panel();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1826,17 +1905,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? p_ = context.Operators.Equivalent(o_, "order");
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> l_ = context.Operators.Where<ServiceRequest>(j_, k_);
 
 		return l_;
 	}
 
     [CqlDeclaration("Laboratory Test or ECG for Hypertension")]
-	public IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension() => 
+	public  IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension() => 
 		__Laboratory_Test_or_ECG_for_Hypertension.Value;
 
-	private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Value()
+	private  IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Value()
 	{
 		IEnumerable<ServiceRequest> a_ = this.Follow_up_with_Rescreen_in_2_to_6_Months();
 		IEnumerable<ServiceRequest> b_(ServiceRequest Rescreen2to6)
@@ -1854,14 +1934,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? s_ = context.Operators.And(n_, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> h_ = context.Operators.Where<ServiceRequest>(f_, g_);
 			ServiceRequest i_(ServiceRequest LabECGIntervention) => 
 				Rescreen2to6;
+;
 			IEnumerable<ServiceRequest> j_ = context.Operators.Select<ServiceRequest, ServiceRequest>(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> c_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(a_, b_);
 		IEnumerable<ServiceRequest> d_(ServiceRequest Rescreen2to6)
 		{
@@ -1874,24 +1957,27 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ab_ = context.Operators.In<CqlDateTime>(z_, aa_, "day");
 
 				return ab_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> v_ = context.Operators.Where<ServiceRequest>(t_, u_);
 			ServiceRequest w_(ServiceRequest NonPharmSecondIntervention) => 
 				Rescreen2to6;
+;
 			IEnumerable<ServiceRequest> x_ = context.Operators.Select<ServiceRequest, ServiceRequest>(v_, w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> e_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 and Interventions")]
-	public IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions() => 
+	public  IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions() => 
 		__Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Value()
+	private  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89();
 		IEnumerable<Encounter> b_(Encounter SecondHTNEncounterReading)
@@ -1906,14 +1992,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, "day");
 
 				return q_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
 			Encounter k_(ServiceRequest EncounterInterventions) => 
 				SecondHTNEncounterReading;
+;
 			IEnumerable<Encounter> l_ = context.Operators.Select<ServiceRequest, Encounter>(j_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter SecondHTNEncounterReading)
 		{
@@ -1927,14 +2016,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
 
 				return aa_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> t_ = context.Operators.Where<ServiceRequest>(r_, s_);
 			Encounter u_(ServiceRequest ReferralForHTN) => 
 				SecondHTNEncounterReading;
+;
 			IEnumerable<Encounter> v_ = context.Operators.Select<ServiceRequest, Encounter>(t_, u_);
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<Encounter> f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
 		IEnumerable<Encounter> g_ = context.Operators.Union<Encounter>(c_, f_);
 
@@ -1942,10 +2034,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Encounter with Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 and Interventions")]
-	public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions() => 
+	public  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions() => 
 		__Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Value()
+	private  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
@@ -1972,7 +2064,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? bz_ = context.Operators.And(bt_, by_);
 
 				return bz_;
-			};
+			}
+;
 			IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 			object g_(Observation @this)
 			{
@@ -1982,7 +2075,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime cd_ = context.Operators.Start(cc_);
 
 				return cd_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.SortBy<Observation>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation i_ = context.Operators.Last<Observation>(h_);
 			List<Observation.ComponentComponent> j_ = i_?.Component;
@@ -2002,7 +2096,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? cq_ = context.Operators.And(cj_, cp_);
 
 				return cq_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> l_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)j_, k_);
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
@@ -2030,7 +2125,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? dd_ = context.Operators.And(cx_, dc_);
 
 				return dd_;
-			};
+			}
+;
 			IEnumerable<Observation> t_ = context.Operators.Where<Observation>(d_, s_);
 			object u_(Observation @this)
 			{
@@ -2040,7 +2136,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime dh_ = context.Operators.Start(dg_);
 
 				return dh_;
-			};
+			}
+;
 			IEnumerable<Observation> v_ = context.Operators.SortBy<Observation>(t_, u_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation w_ = context.Operators.Last<Observation>(v_);
 			List<Observation.ComponentComponent> x_ = w_?.Component;
@@ -2060,7 +2157,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? du_ = context.Operators.And(dn_, dt_);
 
 				return du_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> z_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)x_, y_);
 			Observation.ComponentComponent aa_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(z_);
 			DataType ab_ = aa_?.Value;
@@ -2088,7 +2186,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? eh_ = context.Operators.And(eb_, eg_);
 
 				return eh_;
-			};
+			}
+;
 			IEnumerable<Observation> ai_ = context.Operators.Where<Observation>(d_, ah_);
 			object aj_(Observation @this)
 			{
@@ -2098,7 +2197,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime el_ = context.Operators.Start(ek_);
 
 				return el_;
-			};
+			}
+;
 			IEnumerable<Observation> ak_ = context.Operators.SortBy<Observation>(ai_, aj_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation al_ = context.Operators.Last<Observation>(ak_);
 			List<Observation.ComponentComponent> am_ = al_?.Component;
@@ -2118,7 +2218,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ey_ = context.Operators.And(er_, ex_);
 
 				return ey_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> ao_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)am_, an_);
 			Observation.ComponentComponent ap_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(ao_);
 			DataType aq_ = ap_?.Value;
@@ -2146,7 +2247,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? fl_ = context.Operators.And(ff_, fk_);
 
 				return fl_;
-			};
+			}
+;
 			IEnumerable<Observation> aw_ = context.Operators.Where<Observation>(d_, av_);
 			object ax_(Observation @this)
 			{
@@ -2156,7 +2258,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				CqlDateTime fp_ = context.Operators.Start(fo_);
 
 				return fp_;
-			};
+			}
+;
 			IEnumerable<Observation> ay_ = context.Operators.SortBy<Observation>(aw_, ax_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation az_ = context.Operators.Last<Observation>(ay_);
 			List<Observation.ComponentComponent> ba_ = az_?.Component;
@@ -2176,7 +2279,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? gc_ = context.Operators.And(fv_, gb_);
 
 				return gc_;
-			};
+			}
+;
 			IEnumerable<Observation.ComponentComponent> bc_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ba_, bb_);
 			Observation.ComponentComponent bd_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(bc_);
 			DataType be_ = bd_?.Value;
@@ -2190,17 +2294,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? bm_ = context.Operators.And(bj_, bl_);
 
 			return bm_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90")]
-	public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90() => 
+	public  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90() => 
 		__Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90.Value;
 
-	private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Value()
+	private  IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Value()
 	{
 		CqlValueSet a_ = this.Follow_Up_Within_4_Weeks();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -2229,14 +2334,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? af_ = context.Operators.And(aa_, ae_);
 
 				return af_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> k_ = context.Operators.Where<ServiceRequest>(i_, j_);
 			ServiceRequest l_(ServiceRequest ECGLabTest) => 
 				WeeksRescreen;
+;
 			IEnumerable<ServiceRequest> m_ = context.Operators.Select<ServiceRequest, ServiceRequest>(k_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> d_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(b_, c_);
 		IEnumerable<ServiceRequest> e_(ServiceRequest WeeksRescreen)
 		{
@@ -2249,14 +2357,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ao_ = context.Operators.In<CqlDateTime>(am_, an_, "day");
 
 				return ao_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> ai_ = context.Operators.Where<ServiceRequest>(ag_, ah_);
 			ServiceRequest aj_(ServiceRequest HTNInterventions) => 
 				WeeksRescreen;
+;
 			IEnumerable<ServiceRequest> ak_ = context.Operators.Select<ServiceRequest, ServiceRequest>(ai_, aj_);
 
 			return ak_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> f_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(d_, e_);
 		IEnumerable<ServiceRequest> g_(ServiceRequest WeeksRescreen)
 		{
@@ -2277,24 +2388,27 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? bg_ = context.Operators.And(bb_, bf_);
 
 				return bg_;
-			};
+			}
+;
 			IEnumerable<MedicationRequest> av_ = context.Operators.Where<MedicationRequest>(at_, au_);
 			ServiceRequest aw_(MedicationRequest Medications) => 
 				WeeksRescreen;
+;
 			IEnumerable<ServiceRequest> ax_ = context.Operators.Select<MedicationRequest, ServiceRequest>(av_, aw_);
 
 			return ax_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> h_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(f_, g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 Interventions")]
-	public IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions() => 
+	public  IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions() => 
 		__Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions_Value()
+	private  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90();
 		IEnumerable<Encounter> b_(Encounter SecondHTNEncounterReading140Over90)
@@ -2309,14 +2423,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, "day");
 
 				return q_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
 			Encounter k_(ServiceRequest SecondHTN140Over90Interventions) => 
 				SecondHTNEncounterReading140Over90;
+;
 			IEnumerable<Encounter> l_ = context.Operators.Select<ServiceRequest, Encounter>(j_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter SecondHTNEncounterReading140Over90)
 		{
@@ -2330,14 +2447,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
 
 				return aa_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> t_ = context.Operators.Where<ServiceRequest>(r_, s_);
 			Encounter u_(ServiceRequest ReferralToProfessional) => 
 				SecondHTNEncounterReading140Over90;
+;
 			IEnumerable<Encounter> v_ = context.Operators.Select<ServiceRequest, Encounter>(t_, u_);
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<Encounter> f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
 		IEnumerable<Encounter> g_ = context.Operators.Union<Encounter>(c_, f_);
 
@@ -2345,10 +2465,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Encounter with Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 and Interventions")]
-	public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions() => 
+	public  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions() => 
 		__Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions.Value;
 
-	private IEnumerable<Encounter> Numerator_Value()
+	private  IEnumerable<Encounter> Numerator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Normal_Blood_Pressure_Reading();
 		IEnumerable<Encounter> b_ = this.Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions();
@@ -2364,10 +2484,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public IEnumerable<Encounter> Numerator() => 
+	public  IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement_Value()
+	private  IEnumerable<Encounter> Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
@@ -2394,7 +2514,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					bool? at_ = context.Operators.Equal(as_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 					return at_;
-				};
+				}
+;
 				IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
 						? ((NoBPScreen as DomainResource).Extension)
 						: default), u_);
@@ -2403,7 +2524,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					DataType au_ = @this?.Value;
 
 					return au_;
-				};
+				}
+;
 				IEnumerable<DataType> x_ = context.Operators.Select<Extension, DataType>(v_, w_);
 				DataType y_ = context.Operators.SingletonFrom<DataType>(x_);
 				CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_);
@@ -2416,7 +2538,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					bool? ax_ = context.Operators.Equal(aw_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 					return ax_;
-				};
+				}
+;
 				IEnumerable<Extension> ad_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
 						? ((NoBPScreen as DomainResource).Extension)
 						: default), ac_);
@@ -2425,7 +2548,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					DataType ay_ = @this?.Value;
 
 					return ay_;
-				};
+				}
+;
 				IEnumerable<DataType> af_ = context.Operators.Select<Extension, DataType>(ad_, ae_);
 				DataType ag_ = context.Operators.SingletonFrom<DataType>(af_);
 				CqlConcept ah_ = FHIRHelpers_4_3_000.ToConcept(ag_);
@@ -2440,24 +2564,27 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? aq_ = context.Operators.And(al_, ap_);
 
 				return aq_;
-			};
+			}
+;
 			IEnumerable<Observation> l_ = context.Operators.Where<Observation>(j_, k_);
 			Encounter m_(Observation NoBPScreen) => 
 				QualifyingEncounter;
+;
 			IEnumerable<Encounter> n_ = context.Operators.Select<Observation, Encounter>(l_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Medical Reason for Not Obtaining or Patient Declined Blood Pressure Measurement")]
-	public IEnumerable<Encounter> Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement() => 
+	public  IEnumerable<Encounter> Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement() => 
 		__Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement.Value;
 
-	private IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered_Value()
+	private  IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered_Value()
 	{
 		CqlValueSet a_ = this.Lifestyle_Recommendation();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -2492,7 +2619,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? au_ = context.Operators.Equal(at_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 				return au_;
-			};
+			}
+;
 			IEnumerable<Extension> ag_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NonPharmIntervention is DomainResource)
 					? ((NonPharmIntervention as DomainResource).Extension)
 					: default), af_);
@@ -2501,7 +2629,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				DataType av_ = @this?.Value;
 
 				return av_;
-			};
+			}
+;
 			IEnumerable<DataType> ai_ = context.Operators.Select<Extension, DataType>(ag_, ah_);
 			DataType aj_ = context.Operators.SingletonFrom<DataType>(ai_);
 			CqlConcept ak_ = FHIRHelpers_4_3_000.ToConcept(aj_);
@@ -2514,17 +2643,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? ar_ = context.Operators.And(am_, aq_);
 
 			return ar_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> ae_ = context.Operators.Where<ServiceRequest>(ac_, ad_);
 
 		return ae_;
 	}
 
     [CqlDeclaration("NonPharmacological Intervention Not Ordered")]
-	public IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered() => 
+	public  IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered() => 
 		__NonPharmacological_Intervention_Not_Ordered.Value;
 
-	private IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered_Value()
+	private  IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered_Value()
 	{
 		CqlCode a_ = this._12_lead_EKG_panel();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -2547,7 +2677,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 				return z_;
-			};
+			}
+;
 			IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((LabECGNotDone is DomainResource)
 					? ((LabECGNotDone as DomainResource).Extension)
 					: default), p_);
@@ -2556,7 +2687,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				DataType aa_ = @this?.Value;
 
 				return aa_;
-			};
+			}
+;
 			IEnumerable<DataType> s_ = context.Operators.Select<Extension, DataType>(q_, r_);
 			DataType t_ = context.Operators.SingletonFrom<DataType>(s_);
 			CqlConcept u_ = FHIRHelpers_4_3_000.ToConcept(t_);
@@ -2564,17 +2696,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> o_ = context.Operators.Where<ServiceRequest>(m_, n_);
 
 		return o_;
 	}
 
     [CqlDeclaration("Laboratory Test or ECG for Hypertension Not Ordered")]
-	public IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered() => 
+	public  IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered() => 
 		__Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered.Value;
 
-	private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined_Value()
+	private  IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined_Value()
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -2597,7 +2730,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ai_ = context.Operators.Equal(ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 				return ai_;
-			};
+			}
+;
 			IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTNDeclinedReferralAndFollowUp is DomainResource)
 					? ((SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension)
 					: default), t_);
@@ -2606,7 +2740,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				DataType aj_ = @this?.Value;
 
 				return aj_;
-			};
+			}
+;
 			IEnumerable<DataType> w_ = context.Operators.Select<Extension, DataType>(u_, v_);
 			DataType x_ = context.Operators.SingletonFrom<DataType>(w_);
 			CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept(x_);
@@ -2619,7 +2754,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? af_ = context.Operators.And(aa_, ae_);
 
 			return af_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> o_ = context.Operators.Where<ServiceRequest>(m_, n_);
 		IEnumerable<ServiceRequest> p_ = this.Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered();
 		IEnumerable<ServiceRequest> q_ = context.Operators.Union<ServiceRequest>(o_, p_);
@@ -2630,10 +2766,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 Interventions Declined")]
-	public IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined() => 
+	public  IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined() => 
 		__Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined.Value;
 
-	private IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined_Value()
+	private  IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined_Value()
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -2653,7 +2789,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ao_ = context.Operators.Equal(an_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 				return ao_;
-			};
+			}
+;
 			IEnumerable<Extension> aa_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTN140Over90ReferralFollowUpNotDone is DomainResource)
 					? ((SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension)
 					: default), z_);
@@ -2662,7 +2799,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				DataType ap_ = @this?.Value;
 
 				return ap_;
-			};
+			}
+;
 			IEnumerable<DataType> ac_ = context.Operators.Select<Extension, DataType>(aa_, ab_);
 			DataType ad_ = context.Operators.SingletonFrom<DataType>(ac_);
 			CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
@@ -2675,7 +2813,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? al_ = context.Operators.And(ag_, ak_);
 
 			return al_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> m_ = context.Operators.Where<ServiceRequest>(k_, l_);
 		CqlValueSet n_ = this.Pharmacologic_Therapy_for_Hypertension();
 		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, default);
@@ -2689,7 +2828,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			bool? at_ = context.Operators.Equal(as_, "completed");
 
 			return at_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(r_, s_);
 		IEnumerable<object> u_ = context.Operators.Union<object>((m_ as IEnumerable<object>), (t_ as IEnumerable<object>));
 		IEnumerable<ServiceRequest> v_ = this.Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered();
@@ -2701,10 +2841,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 Interventions Declined")]
-	public IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined() => 
+	public  IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined() => 
 		__Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient_Value()
+	private  IEnumerable<Encounter> Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80();
 		IEnumerable<Encounter> b_(Encounter ElevatedBPEncounter)
@@ -2730,7 +2870,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					bool? bj_ = context.Operators.Equal(bi_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 					return bj_;
-				};
+				}
+;
 				IEnumerable<Extension> ap_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((ElevatedBPDeclinedInterventions is DomainResource)
 						? ((ElevatedBPDeclinedInterventions as DomainResource).Extension)
 						: default), ao_);
@@ -2739,7 +2880,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					DataType bk_ = @this?.Value;
 
 					return bk_;
-				};
+				}
+;
 				IEnumerable<DataType> ar_ = context.Operators.Select<Extension, DataType>(ap_, aq_);
 				DataType as_ = context.Operators.SingletonFrom<DataType>(ar_);
 				CqlConcept at_ = FHIRHelpers_4_3_000.ToConcept(as_);
@@ -2758,14 +2900,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? bg_ = context.Operators.And(bb_, bf_);
 
 				return bg_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> al_ = context.Operators.Where<ServiceRequest>(aj_, ak_);
 			Encounter am_(ServiceRequest ElevatedBPDeclinedInterventions) => 
 				ElevatedBPEncounter;
+;
 			IEnumerable<Encounter> an_ = context.Operators.Select<ServiceRequest, Encounter>(al_, am_);
 
 			return an_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 		IEnumerable<Encounter> e_(Encounter ElevatedBPEncounter)
 		{
@@ -2779,14 +2924,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? bu_ = context.Operators.In<CqlDateTime>(br_, bt_, "day");
 
 				return bu_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> bn_ = context.Operators.Where<ServiceRequest>(bl_, bm_);
 			Encounter bo_(ServiceRequest NotOrdered) => 
 				ElevatedBPEncounter;
+;
 			IEnumerable<Encounter> bp_ = context.Operators.Select<ServiceRequest, Encounter>(bn_, bo_);
 
 			return bp_;
-		};
+		}
+;
 		IEnumerable<Encounter> f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
 		IEnumerable<Encounter> g_ = context.Operators.Union<Encounter>(c_, f_);
 		IEnumerable<Encounter> h_ = this.Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80();
@@ -2810,7 +2958,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					bool? df_ = context.Operators.Equal(de_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
 
 					return df_;
-				};
+				}
+;
 				IEnumerable<Extension> cl_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((FirstHTNDeclinedInterventions is DomainResource)
 						? ((FirstHTNDeclinedInterventions as DomainResource).Extension)
 						: default), ck_);
@@ -2819,7 +2968,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 					DataType dg_ = @this?.Value;
 
 					return dg_;
-				};
+				}
+;
 				IEnumerable<DataType> cn_ = context.Operators.Select<Extension, DataType>(cl_, cm_);
 				DataType co_ = context.Operators.SingletonFrom<DataType>(cn_);
 				CqlConcept cp_ = FHIRHelpers_4_3_000.ToConcept(co_);
@@ -2838,14 +2988,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? dc_ = context.Operators.And(cx_, db_);
 
 				return dc_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> ch_ = context.Operators.Where<ServiceRequest>(cf_, cg_);
 			Encounter ci_(ServiceRequest FirstHTNDeclinedInterventions) => 
 				FirstHTNEncounter;
+;
 			IEnumerable<Encounter> cj_ = context.Operators.Select<ServiceRequest, Encounter>(ch_, ci_);
 
 			return cj_;
-		};
+		}
+;
 		IEnumerable<Encounter> j_ = context.Operators.SelectMany<Encounter, Encounter>(h_, i_);
 		IEnumerable<Encounter> l_(Encounter FirstHTNEncounter)
 		{
@@ -2859,14 +3012,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? dq_ = context.Operators.In<CqlDateTime>(dn_, dp_, "day");
 
 				return dq_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> dj_ = context.Operators.Where<ServiceRequest>(dh_, di_);
 			Encounter dk_(ServiceRequest NoNonPharm) => 
 				FirstHTNEncounter;
+;
 			IEnumerable<Encounter> dl_ = context.Operators.Select<ServiceRequest, Encounter>(dj_, dk_);
 
 			return dl_;
-		};
+		}
+;
 		IEnumerable<Encounter> m_ = context.Operators.SelectMany<Encounter, Encounter>(h_, l_);
 		IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(j_, m_);
 		IEnumerable<Encounter> o_ = context.Operators.Union<Encounter>(g_, n_);
@@ -2883,14 +3039,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ea_ = context.Operators.In<CqlDateTime>(dx_, dz_, "day");
 
 				return ea_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> dt_ = context.Operators.Where<ServiceRequest>(dr_, ds_);
 			Encounter du_(ServiceRequest SecondHTNDeclinedInterventions) => 
 				SecondHTNEncounter;
+;
 			IEnumerable<Encounter> dv_ = context.Operators.Select<ServiceRequest, Encounter>(dt_, du_);
 
 			return dv_;
-		};
+		}
+;
 		IEnumerable<Encounter> r_ = context.Operators.SelectMany<Encounter, Encounter>(p_, q_);
 		IEnumerable<Encounter> s_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90();
 		IEnumerable<Encounter> t_(Encounter SecondHTN140Over90Encounter)
@@ -2905,14 +3064,17 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 				bool? ek_ = context.Operators.In<CqlDateTime>(eh_, ej_, "day");
 
 				return ek_;
-			};
+			}
+;
 			IEnumerable<object> ed_ = context.Operators.Where<object>(eb_, ec_);
 			Encounter ee_(object SecondHTN140Over90DeclinedInterventions) => 
 				SecondHTN140Over90Encounter;
+;
 			IEnumerable<Encounter> ef_ = context.Operators.Select<object, Encounter>(ed_, ee_);
 
 			return ef_;
-		};
+		}
+;
 		IEnumerable<Encounter> u_ = context.Operators.SelectMany<Encounter, Encounter>(s_, t_);
 		IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(r_, u_);
 		IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(o_, v_);
@@ -2921,10 +3083,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Encounter with Order for Hypertension Follow Up Declined by Patient")]
-	public IEnumerable<Encounter> Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient() => 
+	public  IEnumerable<Encounter> Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient() => 
 		__Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient.Value;
 
-	private IEnumerable<Encounter> Denominator_Exceptions_Value()
+	private  IEnumerable<Encounter> Denominator_Exceptions_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement();
 		IEnumerable<Encounter> b_ = this.Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient();
@@ -2934,10 +3096,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
-	public IEnumerable<Encounter> Denominator_Exceptions() => 
+	public  IEnumerable<Encounter> Denominator_Exceptions() => 
 		__Denominator_Exceptions.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -2945,10 +3107,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -2956,10 +3118,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -2967,10 +3129,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -2978,7 +3140,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
 }

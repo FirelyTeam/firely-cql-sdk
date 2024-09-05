@@ -19,6 +19,7 @@ using System.Text;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.Extensions.Options;
 using TypeExtensions = Hl7.Cql.Abstractions.Infrastructure.TypeExtensions;
+using System.Diagnostics.Tracing;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -460,31 +461,41 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
 
-        private string ConvertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda, bool functionMode = false)
+        private string ConvertLambdaExpression(int indent, string leadingIndentString,
+            LambdaExpression lambda,
+            bool functionMode = false,
+            bool isAbstract = false)
         {
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
 
             var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => $"{typeToCSharpConverter.ToCSharp(p.Type)} {EscapeKeywords(p.Name!)}"))})";
             lambdaSb.Append(lambdaParameters);
-
-            if (lambda.Body is BlockExpression)
-            {
-                if (!functionMode)
-                    lambdaSb.AppendLine(" =>");
-                else
-                    lambdaSb.AppendLine();
-
-                var lambdaBody = ConvertExpression(indent, lambda.Body);
-                lambdaSb.Append(lambdaBody);
-            }
+            if (isAbstract)
+                lambdaSb.AppendLine(";");
             else
             {
-                lambdaSb.AppendLine(" => ");
-                var lambdaBody = ConvertExpression(indent + 1, lambda.Body);
-                lambdaSb.Append(lambdaBody);
-            }
+                if (lambda.Body is BlockExpression)
+                {
+                    if (!functionMode)
+                        lambdaSb.AppendLine(" =>");
+                    else
+                        lambdaSb.AppendLine();
 
+                    var lambdaBody = ConvertExpression(indent, lambda.Body);
+                    lambdaSb.Append(lambdaBody);
+                    lambdaSb.AppendLine();
+
+                }
+                else
+                {
+                    lambdaSb.AppendLine(" => ");
+                    var lambdaBody = ConvertExpression(indent + 1, lambda.Body);
+                    lambdaSb.Append(lambdaBody);
+                    lambdaSb.AppendLine(";");
+
+                }
+            }
             return lambdaSb.ToString();
         }
 
@@ -501,21 +512,32 @@ namespace Hl7.Cql.CodeGeneration.NET
             return funcSb.ToString();
         }
 
-        public string ConvertTopLevelFunctionDefinition(int indent, LambdaExpression function, string name, string specifiers)
+       
+
+        public string ConvertTopLevelFunctionDefinition(int indent, LambdaExpression function,
+            string name,
+            string accessModifier,
+            Polymorphism polymorphism = Polymorphism.None)
         {
             var funcSb = new StringBuilder();
 
-            funcSb.Append(indent, specifiers + " ");
+            var specifiers = string.Join(" ", [accessModifier, polymorphism switch
+            {
+                Polymorphism.Abstract => "abstract",
+                Polymorphism.Virtual => "virtual",
+                _ => "",
+            }]);
+            funcSb.Append(indent, specifiers);
+            funcSb.Append(" ");
             funcSb.Append(typeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
             funcSb.Append(name);
 
-            var lambda = ConvertLambdaExpression(indent, "", function, functionMode: true);
+            var lambda = ConvertLambdaExpression(indent, "", function,
+                functionMode: true,
+                isAbstract: polymorphism == Polymorphism.Abstract);
             funcSb.Append(lambda);
 
-            if (function.Body is not BlockExpression)
-                funcSb.AppendLine(";");
-            else
-                funcSb.AppendLine();
+
 
             return funcSb.ToString();
         }

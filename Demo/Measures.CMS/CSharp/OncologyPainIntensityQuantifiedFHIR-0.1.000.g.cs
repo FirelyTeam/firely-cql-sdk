@@ -87,54 +87,54 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Cancer_Value() => 
+	private  CqlValueSet Cancer_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1010", default);
 
     [CqlDeclaration("Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1010")]
-	public CqlValueSet Cancer() => 
+	public  CqlValueSet Cancer() => 
 		__Cancer.Value;
 
-	private CqlValueSet Chemotherapy_Administration_Value() => 
+	private  CqlValueSet Chemotherapy_Administration_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1027", default);
 
     [CqlDeclaration("Chemotherapy Administration")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1027")]
-	public CqlValueSet Chemotherapy_Administration() => 
+	public  CqlValueSet Chemotherapy_Administration() => 
 		__Chemotherapy_Administration.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Radiation_Treatment_Management_Value() => 
+	private  CqlValueSet Radiation_Treatment_Management_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1026", default);
 
     [CqlDeclaration("Radiation Treatment Management")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1026")]
-	public CqlValueSet Radiation_Treatment_Management() => 
+	public  CqlValueSet Radiation_Treatment_Management() => 
 		__Radiation_Treatment_Management.Value;
 
-	private CqlValueSet Standardized_Pain_Assessment_Tool_Value() => 
+	private  CqlValueSet Standardized_Pain_Assessment_Tool_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1028", default);
 
     [CqlDeclaration("Standardized Pain Assessment Tool")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1028")]
-	public CqlValueSet Standardized_Pain_Assessment_Tool() => 
+	public  CqlValueSet Standardized_Pain_Assessment_Tool() => 
 		__Standardized_Pain_Assessment_Tool.Value;
 
-	private CqlCode Radiation_treatment_management__5_treatments_Value() => 
+	private  CqlCode Radiation_treatment_management__5_treatments_Value() => 
 		new CqlCode("77427", "http://www.ama-assn.org/go/cpt", default, default);
 
     [CqlDeclaration("Radiation treatment management, 5 treatments")]
-	public CqlCode Radiation_treatment_management__5_treatments() => 
+	public  CqlCode Radiation_treatment_management__5_treatments() => 
 		__Radiation_treatment_management__5_treatments.Value;
 
-	private CqlCode[] CPT_Value()
+	private  CqlCode[] CPT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("77427", "http://www.ama-assn.org/go/cpt", default, default),
@@ -144,10 +144,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("CPT")]
-	public CqlCode[] CPT() => 
+	public  CqlCode[] CPT() => 
 		__CPT.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -158,10 +158,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -170,10 +170,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period_Value()
+	private  IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Chemotherapy_Administration();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -192,17 +192,18 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, default);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Chemotherapy Within 31 Days Prior and During Measurement Period")]
-	public IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period() => 
+	public  IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period() => 
 		__Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period.Value;
 
-	private IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy_Value()
+	private  IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -216,7 +217,8 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			(Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)? o_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<(Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)?> j_ = context.Operators.Select<ValueTuple<Encounter, Procedure, Procedure, Condition>, (Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)?>(h_, i_);
 		bool? k_((Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)? tuple_cibligzrihjljqmithporoase)
 		{
@@ -272,20 +274,22 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 			bool? bw_ = context.Operators.And(br_, bv_);
 
 			return bw_;
-		};
+		}
+;
 		IEnumerable<(Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)?> l_ = context.Operators.Where<(Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)?>(j_, k_);
 		Encounter m_((Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)? tuple_cibligzrihjljqmithporoase) => 
 			tuple_cibligzrihjljqmithporoase?.FaceToFaceOrTelehealthEncounter;
+;
 		IEnumerable<Encounter> n_ = context.Operators.Select<(Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)?, Encounter>(l_, m_);
 
 		return n_;
 	}
 
     [CqlDeclaration("Face to Face or Telehealth Encounter with Ongoing Chemotherapy")]
-	public IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy() => 
+	public  IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy() => 
 		__Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy.Value;
 
-	private IEnumerable<Encounter> Initial_Population_1_Value()
+	private  IEnumerable<Encounter> Initial_Population_1_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy();
 
@@ -293,10 +297,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population 1")]
-	public IEnumerable<Encounter> Initial_Population_1() => 
+	public  IEnumerable<Encounter> Initial_Population_1() => 
 		__Initial_Population_1.Value;
 
-	private IEnumerable<Encounter> Denominator_1_Value()
+	private  IEnumerable<Encounter> Denominator_1_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population_1();
 
@@ -304,10 +308,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator 1")]
-	public IEnumerable<Encounter> Denominator_1() => 
+	public  IEnumerable<Encounter> Denominator_1() => 
 		__Denominator_1.Value;
 
-	private IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis_Value()
+	private  IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Radiation_Treatment_Management();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -330,24 +334,27 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 				bool? v_ = context.Operators.And(q_, u_);
 
 				return v_;
-			};
+			}
+;
 			IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 			Encounter j_(Condition Cancer) => 
 				RadiationTreatmentManagement;
+;
 			IEnumerable<Encounter> k_ = context.Operators.Select<Condition, Encounter>(i_, j_);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Encounter> e_ = context.Operators.SelectMany<Encounter, Encounter>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Radiation Treatment Management During Measurement Period with Cancer Diagnosis")]
-	public IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis() => 
+	public  IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis() => 
 		__Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis.Value;
 
-	private IEnumerable<Encounter> Initial_Population_2_Value()
+	private  IEnumerable<Encounter> Initial_Population_2_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis();
 
@@ -355,10 +362,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population 2")]
-	public IEnumerable<Encounter> Initial_Population_2() => 
+	public  IEnumerable<Encounter> Initial_Population_2() => 
 		__Initial_Population_2.Value;
 
-	private IEnumerable<Encounter> Denominator_2_Value()
+	private  IEnumerable<Encounter> Denominator_2_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population_2();
 
@@ -366,10 +373,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator 2")]
-	public IEnumerable<Encounter> Denominator_2() => 
+	public  IEnumerable<Encounter> Denominator_2() => 
 		__Denominator_2.Value;
 
-	private IEnumerable<Encounter> Numerator_1_Value()
+	private  IEnumerable<Encounter> Numerator_1_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy();
 		IEnumerable<Encounter> b_(Encounter FaceToFaceOrTelehealthEncounterWithChemo)
@@ -395,24 +402,27 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 				bool? x_ = context.Operators.And(s_, w_);
 
 				return x_;
-			};
+			}
+;
 			IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
 			Encounter h_(Observation PainAssessed) => 
 				FaceToFaceOrTelehealthEncounterWithChemo;
+;
 			IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Numerator 1")]
-	public IEnumerable<Encounter> Numerator_1() => 
+	public  IEnumerable<Encounter> Numerator_1() => 
 		__Numerator_1.Value;
 
-	private IEnumerable<Encounter> Numerator_2_Value()
+	private  IEnumerable<Encounter> Numerator_2_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis();
 		IEnumerable<Encounter> b_(Encounter RadiationManagementEncounter)
@@ -431,7 +441,8 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 							CqlConcept aa_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 							return aa_;
-						};
+						}
+;
 						IEnumerable<CqlConcept> w_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)u_, v_);
 						bool? x_(CqlConcept RadiationManagement)
 						{
@@ -440,12 +451,14 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 							bool? ad_ = context.Operators.Equivalent(RadiationManagement, ac_);
 
 							return ad_;
-						};
+						}
+;
 						IEnumerable<CqlConcept> y_ = context.Operators.Where<CqlConcept>(w_, x_);
 						bool? z_ = context.Operators.Exists<CqlConcept>(y_);
 
 						return (z_ ?? false);
-					};
+					}
+;
 					if (t_())
 					{
 						DataType ae_ = PainAssessed?.Effective;
@@ -479,7 +492,8 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 
 						return bc_;
 					}
-				};
+				}
+;
 				DataType k_ = PainAssessed?.Value;
 				object l_ = FHIRHelpers_4_3_000.ToValue(k_);
 				bool? m_ = context.Operators.Not((bool?)(l_ is null));
@@ -491,24 +505,27 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 				bool? s_ = context.Operators.And(n_, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
 			Encounter h_(Observation PainAssessed) => 
 				RadiationManagementEncounter;
+;
 			IEnumerable<Encounter> i_ = context.Operators.Select<Observation, Encounter>(g_, h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Numerator 2")]
-	public IEnumerable<Encounter> Numerator_2() => 
+	public  IEnumerable<Encounter> Numerator_2() => 
 		__Numerator_2.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -516,10 +533,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -527,10 +544,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -538,10 +555,10 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -549,7 +566,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
 }

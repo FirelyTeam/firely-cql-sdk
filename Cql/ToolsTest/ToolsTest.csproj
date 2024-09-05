@@ -27,6 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 	  <ProjectReference Include="..\Cql.BuildTasks\Cql.BuildTasks.csproj" />
 	</ItemGroup>
 
@@ -45,6 +46,9 @@
 	  </None>
 	  <None Update="Input\Cql\UsesFHIRHelpers-1.0.0.cql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\Cql\write-virtual.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 

@@ -51,42 +51,42 @@ public class Status_1_6_000
 
     #endregion
 
-	private CqlCode laboratory_Value() => 
+	private  CqlCode laboratory_Value() => 
 		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("laboratory")]
-	public CqlCode laboratory() => 
+	public  CqlCode laboratory() => 
 		__laboratory.Value;
 
-	private CqlCode exam_Value() => 
+	private  CqlCode exam_Value() => 
 		new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("exam")]
-	public CqlCode exam() => 
+	public  CqlCode exam() => 
 		__exam.Value;
 
-	private CqlCode survey_Value() => 
+	private  CqlCode survey_Value() => 
 		new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("survey")]
-	public CqlCode survey() => 
+	public  CqlCode survey() => 
 		__survey.Value;
 
-	private CqlCode vital_signs_Value() => 
+	private  CqlCode vital_signs_Value() => 
 		new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("vital-signs")]
-	public CqlCode vital_signs() => 
+	public  CqlCode vital_signs() => 
 		__vital_signs.Value;
 
-	private CqlCode active_Value() => 
+	private  CqlCode active_Value() => 
 		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("active")]
-	public CqlCode active() => 
+	public  CqlCode active() => 
 		__active.Value;
 
-	private CqlCode[] ObservationCategoryCodes_Value()
+	private  CqlCode[] ObservationCategoryCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
@@ -99,10 +99,10 @@ public class Status_1_6_000
 	}
 
     [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes() => 
+	public  CqlCode[] ObservationCategoryCodes() => 
 		__ObservationCategoryCodes.Value;
 
-	private CqlCode[] ConditionClinicalStatusCodes_Value()
+	private  CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
@@ -112,10 +112,10 @@ public class Status_1_6_000
 	}
 
     [CqlDeclaration("ConditionClinicalStatusCodes")]
-	public CqlCode[] ConditionClinicalStatusCodes() => 
+	public  CqlCode[] ConditionClinicalStatusCodes() => 
 		__ConditionClinicalStatusCodes.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -124,11 +124,11 @@ public class Status_1_6_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("Final Survey Observation")]
-	public IEnumerable<Observation> Final_Survey_Observation(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> Final_Survey_Observation(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -148,7 +148,8 @@ public class Status_1_6_000
 				CqlConcept p_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return p_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_(CqlConcept ObservationCategory)
 			{
@@ -157,20 +158,22 @@ public class Status_1_6_000
 				bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
 			bool? n_ = context.Operators.Exists<CqlConcept>(m_);
 			bool? o_ = context.Operators.And(h_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isAssessmentPerformed")]
-	public IEnumerable<Observation> isAssessmentPerformed(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> isAssessmentPerformed(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -190,7 +193,8 @@ public class Status_1_6_000
 				CqlConcept p_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return p_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_(CqlConcept ObservationCategory)
 			{
@@ -199,20 +203,22 @@ public class Status_1_6_000
 				bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
 			bool? n_ = context.Operators.Exists<CqlConcept>(m_);
 			bool? o_ = context.Operators.And(h_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Active Condition")]
-	public IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
+	public  IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
 	{
 		bool? a_(Condition C)
 		{
@@ -223,14 +229,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.Equivalent(d_, f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isActiveOnly")]
-	public IEnumerable<Condition> isActiveOnly(IEnumerable<Condition> Condition)
+	public  IEnumerable<Condition> isActiveOnly(IEnumerable<Condition> Condition)
 	{
 		bool? a_(Condition C)
 		{
@@ -241,14 +248,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.Equivalent(d_, f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Completed or Ongoing Device Request")]
-	public IEnumerable<DeviceRequest> Completed_or_Ongoing_Device_Request(IEnumerable<DeviceRequest> DeviceRequest)
+	public  IEnumerable<DeviceRequest> Completed_or_Ongoing_Device_Request(IEnumerable<DeviceRequest> DeviceRequest)
 	{
 		bool? a_(DeviceRequest D)
 		{
@@ -268,14 +276,15 @@ public class Status_1_6_000
 			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isDeviceOrder")]
-	public IEnumerable<DeviceRequest> isDeviceOrder(IEnumerable<DeviceRequest> DeviceRequest)
+	public  IEnumerable<DeviceRequest> isDeviceOrder(IEnumerable<DeviceRequest> DeviceRequest)
 	{
 		bool? a_(DeviceRequest D)
 		{
@@ -295,14 +304,15 @@ public class Status_1_6_000
 			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Completed or Ongoing Service Request")]
-	public IEnumerable<ServiceRequest> Completed_or_Ongoing_Service_Request(IEnumerable<ServiceRequest> ServiceRequest)
+	public  IEnumerable<ServiceRequest> Completed_or_Ongoing_Service_Request(IEnumerable<ServiceRequest> ServiceRequest)
 	{
 		bool? a_(ServiceRequest S)
 		{
@@ -322,14 +332,15 @@ public class Status_1_6_000
 			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isDiagnosticStudyOrder")]
-	public IEnumerable<ServiceRequest> isDiagnosticStudyOrder(IEnumerable<ServiceRequest> ServiceRequest)
+	public  IEnumerable<ServiceRequest> isDiagnosticStudyOrder(IEnumerable<ServiceRequest> ServiceRequest)
 	{
 		bool? a_(ServiceRequest S)
 		{
@@ -349,14 +360,15 @@ public class Status_1_6_000
 			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isInterventionOrder")]
-	public IEnumerable<ServiceRequest> isInterventionOrder(IEnumerable<ServiceRequest> ServiceRequest)
+	public  IEnumerable<ServiceRequest> isInterventionOrder(IEnumerable<ServiceRequest> ServiceRequest)
 	{
 		bool? a_(ServiceRequest S)
 		{
@@ -376,14 +388,15 @@ public class Status_1_6_000
 			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isLaboratoryTestOrder")]
-	public IEnumerable<ServiceRequest> isLaboratoryTestOrder(IEnumerable<ServiceRequest> ServiceRequest)
+	public  IEnumerable<ServiceRequest> isLaboratoryTestOrder(IEnumerable<ServiceRequest> ServiceRequest)
 	{
 		bool? a_(ServiceRequest S)
 		{
@@ -403,14 +416,15 @@ public class Status_1_6_000
 			bool? m_ = context.Operators.And(h_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Final Observation")]
-	public IEnumerable<Observation> Final_Observation(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> Final_Observation(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -426,14 +440,15 @@ public class Status_1_6_000
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isDiagnosticStudyPerformed")]
-	public IEnumerable<Observation> isDiagnosticStudyPerformed(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> isDiagnosticStudyPerformed(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -449,14 +464,15 @@ public class Status_1_6_000
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Finished Encounter")]
-	public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
+	public  IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
 	{
 		bool? a_(Encounter E)
 		{
@@ -474,14 +490,15 @@ public class Status_1_6_000
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isEncounterPerformed")]
-	public IEnumerable<Encounter> isEncounterPerformed(IEnumerable<Encounter> Enc)
+	public  IEnumerable<Encounter> isEncounterPerformed(IEnumerable<Encounter> Enc)
 	{
 		bool? a_(Encounter E)
 		{
@@ -499,14 +516,15 @@ public class Status_1_6_000
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Completed Immunization")]
-	public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
+	public  IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
 	{
 		bool? a_(Immunization I)
 		{
@@ -516,14 +534,15 @@ public class Status_1_6_000
 			bool? f_ = context.Operators.Equivalent(e_, "completed");
 
 			return f_;
-		};
+		}
+;
 		IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isImmunizationAdministered")]
-	public IEnumerable<Immunization> isImmunizationAdministered(IEnumerable<Immunization> Immunization)
+	public  IEnumerable<Immunization> isImmunizationAdministered(IEnumerable<Immunization> Immunization)
 	{
 		bool? a_(Immunization I)
 		{
@@ -533,14 +552,15 @@ public class Status_1_6_000
 			bool? f_ = context.Operators.Equivalent(e_, "completed");
 
 			return f_;
-		};
+		}
+;
 		IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Completed Procedure")]
-	public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
+	public  IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{
@@ -550,14 +570,15 @@ public class Status_1_6_000
 			bool? f_ = context.Operators.Equivalent(e_, "completed");
 
 			return f_;
-		};
+		}
+;
 		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isInterventionPerformed")]
-	public IEnumerable<Procedure> isInterventionPerformed(IEnumerable<Procedure> Proc)
+	public  IEnumerable<Procedure> isInterventionPerformed(IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{
@@ -567,14 +588,15 @@ public class Status_1_6_000
 			bool? f_ = context.Operators.Equivalent(e_, "completed");
 
 			return f_;
-		};
+		}
+;
 		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isProcedurePerformed")]
-	public IEnumerable<Procedure> isProcedurePerformed(IEnumerable<Procedure> Proc)
+	public  IEnumerable<Procedure> isProcedurePerformed(IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{
@@ -584,14 +606,15 @@ public class Status_1_6_000
 			bool? f_ = context.Operators.Equivalent(e_, "completed");
 
 			return f_;
-		};
+		}
+;
 		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Final Lab Observation")]
-	public IEnumerable<Observation> Final_Lab_Observation(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> Final_Lab_Observation(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -611,7 +634,8 @@ public class Status_1_6_000
 				CqlConcept p_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return p_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_(CqlConcept ObservationCategory)
 			{
@@ -620,20 +644,22 @@ public class Status_1_6_000
 				bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
 			bool? n_ = context.Operators.Exists<CqlConcept>(m_);
 			bool? o_ = context.Operators.And(h_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isLaboratoryTestPerformed")]
-	public IEnumerable<Observation> isLaboratoryTestPerformed(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> isLaboratoryTestPerformed(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -653,7 +679,8 @@ public class Status_1_6_000
 				CqlConcept p_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return p_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_(CqlConcept ObservationCategory)
 			{
@@ -662,20 +689,22 @@ public class Status_1_6_000
 				bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
 			bool? n_ = context.Operators.Exists<CqlConcept>(m_);
 			bool? o_ = context.Operators.And(h_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Active Medication")]
-	public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> MedicationRequest)
+	public  IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> MedicationRequest)
 	{
 		bool? a_(MedicationRequest M)
 		{
@@ -690,14 +719,15 @@ public class Status_1_6_000
 			bool? k_ = context.Operators.And(f_, j_);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isMedicationActive")]
-	public IEnumerable<MedicationRequest> isMedicationActive(IEnumerable<MedicationRequest> MedicationRequest)
+	public  IEnumerable<MedicationRequest> isMedicationActive(IEnumerable<MedicationRequest> MedicationRequest)
 	{
 		bool? a_(MedicationRequest M)
 		{
@@ -712,14 +742,15 @@ public class Status_1_6_000
 			bool? k_ = context.Operators.And(f_, j_);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Dispensed Medication")]
-	public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
+	public  IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
 	{
 		bool? a_(MedicationDispense M)
 		{
@@ -735,14 +766,15 @@ public class Status_1_6_000
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isMedicationDispensed")]
-	public IEnumerable<MedicationDispense> isMedicationDispensed(IEnumerable<MedicationDispense> Med)
+	public  IEnumerable<MedicationDispense> isMedicationDispensed(IEnumerable<MedicationDispense> Med)
 	{
 		bool? a_(MedicationDispense M)
 		{
@@ -758,14 +790,15 @@ public class Status_1_6_000
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Active or Completed Medication Request")]
-	public IEnumerable<MedicationRequest> Active_or_Completed_Medication_Request(IEnumerable<MedicationRequest> MedicationRequest)
+	public  IEnumerable<MedicationRequest> Active_or_Completed_Medication_Request(IEnumerable<MedicationRequest> MedicationRequest)
 	{
 		bool? a_(MedicationRequest M)
 		{
@@ -784,14 +817,15 @@ public class Status_1_6_000
 			bool? l_ = context.Operators.And(g_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isMedicationOrder")]
-	public IEnumerable<MedicationRequest> isMedicationOrder(IEnumerable<MedicationRequest> MedicationRequest)
+	public  IEnumerable<MedicationRequest> isMedicationOrder(IEnumerable<MedicationRequest> MedicationRequest)
 	{
 		bool? a_(MedicationRequest M)
 		{
@@ -810,14 +844,15 @@ public class Status_1_6_000
 			bool? l_ = context.Operators.And(g_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Final Exam Observation")]
-	public IEnumerable<Observation> Final_Exam_Observation(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> Final_Exam_Observation(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -837,7 +872,8 @@ public class Status_1_6_000
 				CqlConcept p_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return p_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_(CqlConcept ObservationCategory)
 			{
@@ -846,20 +882,22 @@ public class Status_1_6_000
 				bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
 			bool? n_ = context.Operators.Exists<CqlConcept>(m_);
 			bool? o_ = context.Operators.And(h_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isPhysicalExamPerformed")]
-	public IEnumerable<Observation> isPhysicalExamPerformed(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> isPhysicalExamPerformed(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -879,7 +917,8 @@ public class Status_1_6_000
 				CqlConcept p_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return p_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			bool? l_(CqlConcept ObservationCategory)
 			{
@@ -888,20 +927,22 @@ public class Status_1_6_000
 				bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
 			bool? n_ = context.Operators.Exists<CqlConcept>(m_);
 			bool? o_ = context.Operators.And(h_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("BloodPressure")]
-	public IEnumerable<Observation> BloodPressure(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> BloodPressure(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -916,14 +957,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("BodyHeight")]
-	public IEnumerable<Observation> BodyHeight(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> BodyHeight(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -938,14 +980,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("BodyWeight")]
-	public IEnumerable<Observation> BodyWeight(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> BodyWeight(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -960,14 +1003,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("BMI")]
-	public IEnumerable<Observation> BMI(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> BMI(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -982,14 +1026,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isObservationBP")]
-	public IEnumerable<Observation> isObservationBP(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> isObservationBP(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -1004,14 +1049,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isObservationBodyHeight")]
-	public IEnumerable<Observation> isObservationBodyHeight(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> isObservationBodyHeight(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -1026,14 +1072,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isObservationBodyWeight")]
-	public IEnumerable<Observation> isObservationBodyWeight(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> isObservationBodyWeight(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -1048,14 +1095,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isObservationBMI")]
-	public IEnumerable<Observation> isObservationBMI(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> isObservationBMI(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -1070,14 +1118,15 @@ public class Status_1_6_000
 			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Initial or Final Observation")]
-	public IEnumerable<Observation> Initial_or_Final_Observation(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> Initial_or_Final_Observation(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -1094,14 +1143,15 @@ public class Status_1_6_000
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("isSymptom")]
-	public IEnumerable<Observation> isSymptom(IEnumerable<Observation> Obs)
+	public  IEnumerable<Observation> isSymptom(IEnumerable<Observation> Obs)
 	{
 		bool? a_(Observation O)
 		{
@@ -1118,7 +1168,8 @@ public class Status_1_6_000
 			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
 
 		return b_;

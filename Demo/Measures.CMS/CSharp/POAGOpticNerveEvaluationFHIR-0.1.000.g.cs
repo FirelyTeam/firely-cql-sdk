@@ -97,101 +97,101 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
+	private  CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility() => 
+	public  CqlValueSet Care_Services_in_Long_Term_Residential_Facility() => 
 		__Care_Services_in_Long_Term_Residential_Facility.Value;
 
-	private CqlValueSet Cup_to_Disc_Ratio_Value() => 
+	private  CqlValueSet Cup_to_Disc_Ratio_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333", default);
 
     [CqlDeclaration("Cup to Disc Ratio")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333")]
-	public CqlValueSet Cup_to_Disc_Ratio() => 
+	public  CqlValueSet Cup_to_Disc_Ratio() => 
 		__Cup_to_Disc_Ratio.Value;
 
-	private CqlValueSet Face_to_Face_Interaction_Value() => 
+	private  CqlValueSet Face_to_Face_Interaction_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", default);
 
     [CqlDeclaration("Face-to-Face Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048")]
-	public CqlValueSet Face_to_Face_Interaction() => 
+	public  CqlValueSet Face_to_Face_Interaction() => 
 		__Face_to_Face_Interaction.Value;
 
-	private CqlValueSet Medical_Reason_Value() => 
+	private  CqlValueSet Medical_Reason_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-	public CqlValueSet Medical_Reason() => 
+	public  CqlValueSet Medical_Reason() => 
 		__Medical_Reason.Value;
 
-	private CqlValueSet Nursing_Facility_Visit_Value() => 
+	private  CqlValueSet Nursing_Facility_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public CqlValueSet Nursing_Facility_Visit() => 
+	public  CqlValueSet Nursing_Facility_Visit() => 
 		__Nursing_Facility_Visit.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Ophthalmological_Services_Value() => 
+	private  CqlValueSet Ophthalmological_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
 
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
-	public CqlValueSet Ophthalmological_Services() => 
+	public  CqlValueSet Ophthalmological_Services() => 
 		__Ophthalmological_Services.Value;
 
-	private CqlValueSet Optic_Disc_Exam_for_Structural_Abnormalities_Value() => 
+	private  CqlValueSet Optic_Disc_Exam_for_Structural_Abnormalities_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334", default);
 
     [CqlDeclaration("Optic Disc Exam for Structural Abnormalities")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334")]
-	public CqlValueSet Optic_Disc_Exam_for_Structural_Abnormalities() => 
+	public  CqlValueSet Optic_Disc_Exam_for_Structural_Abnormalities() => 
 		__Optic_Disc_Exam_for_Structural_Abnormalities.Value;
 
-	private CqlValueSet Outpatient_Consultation_Value() => 
+	private  CqlValueSet Outpatient_Consultation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public CqlValueSet Outpatient_Consultation() => 
+	public  CqlValueSet Outpatient_Consultation() => 
 		__Outpatient_Consultation.Value;
 
-	private CqlValueSet Primary_Open_Angle_Glaucoma_Value() => 
+	private  CqlValueSet Primary_Open_Angle_Glaucoma_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326", default);
 
     [CqlDeclaration("Primary Open-Angle Glaucoma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326")]
-	public CqlValueSet Primary_Open_Angle_Glaucoma() => 
+	public  CqlValueSet Primary_Open_Angle_Glaucoma() => 
 		__Primary_Open_Angle_Glaucoma.Value;
 
-	private CqlCode @virtual_Value() => 
+	private  CqlCode @virtual_Value() => 
 		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("virtual")]
-	public CqlCode @virtual() => 
+	public  CqlCode @virtual() => 
 		__virtual.Value;
 
-	private CqlCode AMB_Value() => 
+	private  CqlCode AMB_Value() => 
 		new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("AMB")]
-	public CqlCode AMB() => 
+	public  CqlCode AMB() => 
 		__AMB.Value;
 
-	private CqlCode[] ActCode_Value()
+	private  CqlCode[] ActCode_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -202,10 +202,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("ActCode")]
-	public CqlCode[] ActCode() => 
+	public  CqlCode[] ActCode() => 
 		__ActCode.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -216,10 +216,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -228,10 +228,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -239,10 +239,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -250,10 +250,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -261,10 +261,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -272,10 +272,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Value()
+	private  IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -310,17 +310,18 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			bool? ae_ = context.Operators.And(y_, ad_);
 
 			return ae_;
-		};
+		}
+;
 		IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
 
 		return p_;
 	}
 
     [CqlDeclaration("Qualifying Encounter During Measurement Period")]
-	public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period() => 
+	public  IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period() => 
 		__Qualifying_Encounter_During_Measurement_Period.Value;
 
-	private IEnumerable<Encounter> Primary_Open_Angle_Glaucoma_Encounter_Value()
+	private  IEnumerable<Encounter> Primary_Open_Angle_Glaucoma_Encounter_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_During_Measurement_Period();
 		IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter)
@@ -354,24 +355,27 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				bool? ah_ = context.Operators.And(o_, ag_);
 
 				return ah_;
-			};
+			}
+;
 			IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
 			Encounter h_(Condition PrimaryOpenAngleGlaucoma) => 
 				ValidQualifyingEncounter;
+;
 			IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Primary Open Angle Glaucoma Encounter")]
-	public IEnumerable<Encounter> Primary_Open_Angle_Glaucoma_Encounter() => 
+	public  IEnumerable<Encounter> Primary_Open_Angle_Glaucoma_Encounter() => 
 		__Primary_Open_Angle_Glaucoma_Encounter.Value;
 
-	private bool? Initial_Population_Value()
+	private  bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -390,10 +394,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population() => 
+	public  bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-	private bool? Denominator_Value()
+	private  bool? Denominator_Value()
 	{
 		bool? a_ = this.Initial_Population();
 
@@ -401,10 +405,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator() => 
+	public  bool? Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio_Value()
+	private  IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio_Value()
 	{
 		CqlValueSet a_ = this.Cup_to_Disc_Ratio();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -423,14 +427,17 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamNotPerformed;
+;
 			IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation CupToDiscExamNotPerformed)
 		{
@@ -441,7 +448,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				bool? ae_ = context.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return ae_;
-			};
+			}
+;
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((CupToDiscExamNotPerformed is DomainResource)
 					? ((CupToDiscExamNotPerformed as DomainResource).Extension)
 					: default), u_);
@@ -450,7 +458,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				DataType af_ = @this?.Value;
 
 				return af_;
-			};
+			}
+;
 			IEnumerable<DataType> x_ = context.Operators.Select<Extension, DataType>(v_, w_);
 			DataType y_ = context.Operators.SingletonFrom<DataType>(x_);
 			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_);
@@ -458,17 +467,18 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Medical Reason for Not Performing Cup to Disc Ratio")]
-	public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio() => 
+	public  IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio() => 
 		__Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio.Value;
 
-	private IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam_Value()
+	private  IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam_Value()
 	{
 		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -487,14 +497,17 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
 			Observation m_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamNotPerformed;
+;
 			IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
 		bool? h_(Observation OpticDiscExamNotPerformed)
 		{
@@ -505,7 +518,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				bool? ae_ = context.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return ae_;
-			};
+			}
+;
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((OpticDiscExamNotPerformed is DomainResource)
 					? ((OpticDiscExamNotPerformed as DomainResource).Extension)
 					: default), u_);
@@ -514,7 +528,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				DataType af_ = @this?.Value;
 
 				return af_;
-			};
+			}
+;
 			IEnumerable<DataType> x_ = context.Operators.Select<Extension, DataType>(v_, w_);
 			DataType y_ = context.Operators.SingletonFrom<DataType>(x_);
 			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_);
@@ -522,17 +537,18 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Medical Reason for Not Performing Optic Disc Exam")]
-	public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam() => 
+	public  IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam() => 
 		__Medical_Reason_for_Not_Performing_Optic_Disc_Exam.Value;
 
-	private bool? Denominator_Exceptions_Value()
+	private  bool? Denominator_Exceptions_Value()
 	{
 		IEnumerable<Observation> a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio();
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -544,10 +560,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
-	public bool? Denominator_Exceptions() => 
+	public  bool? Denominator_Exceptions() => 
 		__Denominator_Exceptions.Value;
 
-	private IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result_Value()
+	private  IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result_Value()
 	{
 		CqlValueSet a_ = this.Cup_to_Disc_Ratio();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -564,14 +580,17 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
 
 				return q_;
-			};
+			}
+;
 			IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				CupToDiscExamPerformed;
+;
 			IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		bool? e_(Observation CupToDiscExamPerformed)
 		{
@@ -591,17 +610,18 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			bool? aa_ = context.Operators.And(t_, z_);
 
 			return aa_;
-		};
+		}
+;
 		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Cup to Disc Ratio Performed with Result")]
-	public IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result() => 
+	public  IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result() => 
 		__Cup_to_Disc_Ratio_Performed_with_Result.Value;
 
-	private IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result_Value()
+	private  IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result_Value()
 	{
 		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -618,14 +638,17 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
 
 				return q_;
-			};
+			}
+;
 			IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
 			Observation j_(Encounter EncounterWithPOAG) => 
 				OpticDiscExamPerformed;
+;
 			IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
 		bool? e_(Observation OpticDiscExamPerformed)
 		{
@@ -645,17 +668,18 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			bool? aa_ = context.Operators.And(t_, z_);
 
 			return aa_;
-		};
+		}
+;
 		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Optic Disc Exam Performed with Result")]
-	public IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result() => 
+	public  IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result() => 
 		__Optic_Disc_Exam_Performed_with_Result.Value;
 
-	private bool? Numerator_Value()
+	private  bool? Numerator_Value()
 	{
 		IEnumerable<Observation> a_ = this.Cup_to_Disc_Ratio_Performed_with_Result();
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -667,7 +691,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator() => 
+	public  bool? Numerator() => 
 		__Numerator.Value;
 
 }

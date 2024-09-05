@@ -65,29 +65,11 @@ public class CqlToCSharp : Microsoft.Build.Utilities.Task
     /// <inheritdoc />
     public override bool Execute()
     {
-        var globalProperties = BuildEngine9.GetGlobalProperties()
-            .Select(kvp => KeyValuePair.Create($"BuildEngine:{kvp.Key}", kvp.Value));
-        var services = new ServiceCollection()
-            .AddSystem()
-            .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
-            .AddConfiguration(cb =>
-                cb.WithOptions(o => { })
-                .AddInMemoryCollection(globalProperties)
-            )
-            .Configure<CSharpCodeWriterOptions>(o => o.Namespace = Namespace)
-            .AddMessaging()
-            .AddLogging(builder => builder.AddTaskLogger(Log))
-            .AddSingleton(typeof(ILibraryProvider), typeof(TaskItemLibraryProvider))
-            .AddSingleton(typeof(CSharpLibrarySetToStreamsWriter))
-            .AddSingleton(typeof(TypeToCSharpConverter))
-            .AddSingleton(typeof(CqlCompilerFactory))
-            .AddSingleton(isp => isp.GetRequiredService<CqlCompilerFactory>().TypeResolver)
-            .BuildServiceProvider();
-
+        var services = BuildServiceProvider();
         var opts = services.GetRequiredService<IOptions<CSharpCodeWriterOptions>>();
         var configuration = services.GetRequiredService<IConfiguration>();
         var outputDir = configuration["BuildEngine:OutputPath"];
-        
+
         if (outputDir is not null && !Directory.Exists(outputDir))
         {
             Log.LogError($"OutputPath {outputDir} could not be found on disk.");
@@ -99,5 +81,43 @@ public class CqlToCSharp : Microsoft.Build.Utilities.Task
         CSharp = taskItems.cs.ToArray();
 
         return !Log.HasLoggedErrors;
+    }
+
+    internal ServiceProvider BuildServiceProvider()
+    {
+        var globalProperties = BuildEngine9.GetGlobalProperties()
+            .Select(kvp => KeyValuePair.Create($"BuildEngine:{kvp.Key}", kvp.Value));
+        var servicesCollection = new ServiceCollection()
+            .AddSystem()
+            .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
+            .AddConfiguration(cb =>
+                cb.WithOptions(o => { })
+                .AddInMemoryCollection(globalProperties)
+            )
+            .AddMessaging()
+            .AddLogging(builder => builder.AddTaskLogger(Log))
+            .AddSingleton(typeof(ILibraryProvider), typeof(TaskItemLibraryProvider))
+            .AddSingleton(typeof(CSharpLibrarySetToStreamsWriter))
+            .AddSingleton(typeof(TypeToCSharpConverter))
+            .AddSingleton(typeof(CqlCompilerFactory))
+            .AddSingleton(isp => isp.GetRequiredService<CqlCompilerFactory>().TypeResolver);
+        if (Options is not null)
+        {
+            var fileInfo = new FileInfo(Options.GetMetadata("FullPath"));
+            if (fileInfo.Exists)
+            {
+                servicesCollection.AddConfiguration(cb => cb.AddJsonFile(fileInfo.FullName));
+                servicesCollection
+                    .AddOptions<CSharpCodeWriterOptions>()
+                    .Configure<IConfiguration>((opt, config) =>
+                    {
+                        CSharpCodeWriterOptions.BindConfig(opt, config);
+                        if (!string.IsNullOrWhiteSpace(Namespace))
+                            opt.Namespace = Namespace;
+                    });
+            }
+        }
+        var services = servicesCollection.BuildServiceProvider();
+        return services;
     }
 }

@@ -1,7 +1,10 @@
 ﻿using FluentAssertions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Tools.BuildTasks;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -74,6 +77,36 @@ namespace ToolsTest
         }
 
         [TestMethod]
+        public void With_Configuration()
+        {
+            var cqlToElm = new CqlToCSharp() { Force = true };
+            cqlToElm.BuildEngine = buildEngine.Object;
+            cqlToElm.ElmPath = Environment.CurrentDirectory;
+            cqlToElm.Options = new TaskItem(@"Input\Cql\write-virtual.json");
+            var services = cqlToElm.BuildServiceProvider();
+            var opts = services.GetRequiredService<IOptions<CSharpCodeWriterOptions>>().Value;
+            opts.Namespace.Should().Be("FromConfiguration");
+            opts.WriteVirtualMethods.Should().BeTrue();
+            cqlToElm.Sources = [new TaskItem(@"Input\Cql\System-2.0.0.cql")];
+            cqlToElm.Execute().Should().BeTrue();
+            cqlToElm.CSharp.Should().NotBeEmpty();
+        }
+
+        [TestMethod]
+        public void With_Configuration_And_Namespace()
+        {
+            var cqlToElm = new CqlToCSharp() { Force = true };
+            cqlToElm.BuildEngine = buildEngine.Object;
+            cqlToElm.ElmPath = Environment.CurrentDirectory;
+            cqlToElm.Options = new TaskItem(@"Input\Cql\write-virtual.json");
+            cqlToElm.Namespace = "Overridden";
+            var services = cqlToElm.BuildServiceProvider();
+            var opts = services.GetRequiredService<IOptions<CSharpCodeWriterOptions>>().Value;
+            opts.Namespace.Should().Be("Overridden");
+            opts.WriteVirtualMethods.Should().BeTrue();
+        }
+
+        [TestMethod]
         public void Could_Not_Resolve()
         {
             var cqlToElm = new CqlToCSharp() { Force = true };
@@ -129,7 +162,6 @@ namespace ToolsTest
             cqlToElm.Elm.Should().NotBeEmpty();
             cqlToElm.CSharp.Should().NotBeEmpty();
             errors.Should().BeEmpty();
-
         }
     }
 }

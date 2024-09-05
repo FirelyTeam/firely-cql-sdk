@@ -95,189 +95,189 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 
     #endregion
 
-	private CqlCode AC_Value() => 
+	private  CqlCode AC_Value() => 
 		new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("AC")]
-	public CqlCode AC() => 
+	public  CqlCode AC() => 
 		__AC.Value;
 
-	private CqlCode ACD_Value() => 
+	private  CqlCode ACD_Value() => 
 		new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("ACD")]
-	public CqlCode ACD() => 
+	public  CqlCode ACD() => 
 		__ACD.Value;
 
-	private CqlCode ACM_Value() => 
+	private  CqlCode ACM_Value() => 
 		new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("ACM")]
-	public CqlCode ACM() => 
+	public  CqlCode ACM() => 
 		__ACM.Value;
 
-	private CqlCode ACV_Value() => 
+	private  CqlCode ACV_Value() => 
 		new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("ACV")]
-	public CqlCode ACV() => 
+	public  CqlCode ACV() => 
 		__ACV.Value;
 
-	private CqlCode AFT_Value() => 
+	private  CqlCode AFT_Value() => 
 		new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("AFT")]
-	public CqlCode AFT() => 
+	public  CqlCode AFT() => 
 		__AFT.Value;
 
-	private CqlCode AFT_early_Value() => 
+	private  CqlCode AFT_early_Value() => 
 		new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("AFT.early")]
-	public CqlCode AFT_early() => 
+	public  CqlCode AFT_early() => 
 		__AFT_early.Value;
 
-	private CqlCode AFT_late_Value() => 
+	private  CqlCode AFT_late_Value() => 
 		new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("AFT.late")]
-	public CqlCode AFT_late() => 
+	public  CqlCode AFT_late() => 
 		__AFT_late.Value;
 
-	private CqlCode C_Value() => 
+	private  CqlCode C_Value() => 
 		new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("C")]
-	public CqlCode C() => 
+	public  CqlCode C() => 
 		__C.Value;
 
-	private CqlCode CD_Value() => 
+	private  CqlCode CD_Value() => 
 		new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("CD")]
-	public CqlCode CD() => 
+	public  CqlCode CD() => 
 		__CD.Value;
 
-	private CqlCode CM_Value() => 
+	private  CqlCode CM_Value() => 
 		new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("CM")]
-	public CqlCode CM() => 
+	public  CqlCode CM() => 
 		__CM.Value;
 
-	private CqlCode CV_Value() => 
+	private  CqlCode CV_Value() => 
 		new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("CV")]
-	public CqlCode CV() => 
+	public  CqlCode CV() => 
 		__CV.Value;
 
-	private CqlCode EVE_Value() => 
+	private  CqlCode EVE_Value() => 
 		new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("EVE")]
-	public CqlCode EVE() => 
+	public  CqlCode EVE() => 
 		__EVE.Value;
 
-	private CqlCode EVE_early_Value() => 
+	private  CqlCode EVE_early_Value() => 
 		new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("EVE.early")]
-	public CqlCode EVE_early() => 
+	public  CqlCode EVE_early() => 
 		__EVE_early.Value;
 
-	private CqlCode EVE_late_Value() => 
+	private  CqlCode EVE_late_Value() => 
 		new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("EVE.late")]
-	public CqlCode EVE_late() => 
+	public  CqlCode EVE_late() => 
 		__EVE_late.Value;
 
-	private CqlCode HS_Value() => 
+	private  CqlCode HS_Value() => 
 		new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("HS")]
-	public CqlCode HS() => 
+	public  CqlCode HS() => 
 		__HS.Value;
 
-	private CqlCode MORN_Value() => 
+	private  CqlCode MORN_Value() => 
 		new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("MORN")]
-	public CqlCode MORN() => 
+	public  CqlCode MORN() => 
 		__MORN.Value;
 
-	private CqlCode MORN_early_Value() => 
+	private  CqlCode MORN_early_Value() => 
 		new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("MORN.early")]
-	public CqlCode MORN_early() => 
+	public  CqlCode MORN_early() => 
 		__MORN_early.Value;
 
-	private CqlCode MORN_late_Value() => 
+	private  CqlCode MORN_late_Value() => 
 		new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("MORN.late")]
-	public CqlCode MORN_late() => 
+	public  CqlCode MORN_late() => 
 		__MORN_late.Value;
 
-	private CqlCode NIGHT_Value() => 
+	private  CqlCode NIGHT_Value() => 
 		new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("NIGHT")]
-	public CqlCode NIGHT() => 
+	public  CqlCode NIGHT() => 
 		__NIGHT.Value;
 
-	private CqlCode NOON_Value() => 
+	private  CqlCode NOON_Value() => 
 		new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("NOON")]
-	public CqlCode NOON() => 
+	public  CqlCode NOON() => 
 		__NOON.Value;
 
-	private CqlCode PC_Value() => 
+	private  CqlCode PC_Value() => 
 		new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("PC")]
-	public CqlCode PC() => 
+	public  CqlCode PC() => 
 		__PC.Value;
 
-	private CqlCode PCD_Value() => 
+	private  CqlCode PCD_Value() => 
 		new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("PCD")]
-	public CqlCode PCD() => 
+	public  CqlCode PCD() => 
 		__PCD.Value;
 
-	private CqlCode PCM_Value() => 
+	private  CqlCode PCM_Value() => 
 		new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("PCM")]
-	public CqlCode PCM() => 
+	public  CqlCode PCM() => 
 		__PCM.Value;
 
-	private CqlCode PCV_Value() => 
+	private  CqlCode PCV_Value() => 
 		new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("PCV")]
-	public CqlCode PCV() => 
+	public  CqlCode PCV() => 
 		__PCV.Value;
 
-	private CqlCode PHS_Value() => 
+	private  CqlCode PHS_Value() => 
 		new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("PHS")]
-	public CqlCode PHS() => 
+	public  CqlCode PHS() => 
 		__PHS.Value;
 
-	private CqlCode WAKE_Value() => 
+	private  CqlCode WAKE_Value() => 
 		new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("WAKE")]
-	public CqlCode WAKE() => 
+	public  CqlCode WAKE() => 
 		__WAKE.Value;
 
-	private CqlCode[] V3TimingEvent_Value()
+	private  CqlCode[] V3TimingEvent_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
@@ -300,10 +300,10 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	}
 
     [CqlDeclaration("V3TimingEvent")]
-	public CqlCode[] V3TimingEvent() => 
+	public  CqlCode[] V3TimingEvent() => 
 		__V3TimingEvent.Value;
 
-	private CqlCode[] EventTiming_Value()
+	private  CqlCode[] EventTiming_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default),
@@ -324,10 +324,10 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	}
 
     [CqlDeclaration("EventTiming")]
-	public CqlCode[] EventTiming() => 
+	public  CqlCode[] EventTiming() => 
 		__EventTiming.Value;
 
-	private string ErrorLevel_Value()
+	private  string ErrorLevel_Value()
 	{
 		object a_ = context.ResolveParameter("CumulativeMedicationDurationFHIR4-1.0.000", "ErrorLevel", "Warning");
 
@@ -335,10 +335,10 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	}
 
     [CqlDeclaration("ErrorLevel")]
-	public string ErrorLevel() => 
+	public  string ErrorLevel() => 
 		__ErrorLevel.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -347,11 +347,11 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("ToDaily")]
-	public decimal? ToDaily(int? frequency, CqlQuantity period)
+	public  decimal? ToDaily(int? frequency, CqlQuantity period)
 	{
 		decimal? a_()
 		{
@@ -361,147 +361,168 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				bool? x_ = context.Operators.Equal(w_, "h");
 
 				return (x_ ?? false);
-			};
+			}
+;
 			bool c_()
 			{
 				string y_ = period?.unit;
 				bool? z_ = context.Operators.Equal(y_, "min");
 
 				return (z_ ?? false);
-			};
+			}
+;
 			bool d_()
 			{
 				string aa_ = period?.unit;
 				bool? ab_ = context.Operators.Equal(aa_, "s");
 
 				return (ab_ ?? false);
-			};
+			}
+;
 			bool e_()
 			{
 				string ac_ = period?.unit;
 				bool? ad_ = context.Operators.Equal(ac_, "d");
 
 				return (ad_ ?? false);
-			};
+			}
+;
 			bool f_()
 			{
 				string ae_ = period?.unit;
 				bool? af_ = context.Operators.Equal(ae_, "wk");
 
 				return (af_ ?? false);
-			};
+			}
+;
 			bool g_()
 			{
 				string ag_ = period?.unit;
 				bool? ah_ = context.Operators.Equal(ag_, "mo");
 
 				return (ah_ ?? false);
-			};
+			}
+;
 			bool h_()
 			{
 				string ai_ = period?.unit;
 				bool? aj_ = context.Operators.Equal(ai_, "a");
 
 				return (aj_ ?? false);
-			};
+			}
+;
 			bool i_()
 			{
 				string ak_ = period?.unit;
 				bool? al_ = context.Operators.Equal(ak_, "hour");
 
 				return (al_ ?? false);
-			};
+			}
+;
 			bool j_()
 			{
 				string am_ = period?.unit;
 				bool? an_ = context.Operators.Equal(am_, "minute");
 
 				return (an_ ?? false);
-			};
+			}
+;
 			bool k_()
 			{
 				string ao_ = period?.unit;
 				bool? ap_ = context.Operators.Equal(ao_, "second");
 
 				return (ap_ ?? false);
-			};
+			}
+;
 			bool l_()
 			{
 				string aq_ = period?.unit;
 				bool? ar_ = context.Operators.Equal(aq_, "day");
 
 				return (ar_ ?? false);
-			};
+			}
+;
 			bool m_()
 			{
 				string as_ = period?.unit;
 				bool? at_ = context.Operators.Equal(as_, "week");
 
 				return (at_ ?? false);
-			};
+			}
+;
 			bool n_()
 			{
 				string au_ = period?.unit;
 				bool? av_ = context.Operators.Equal(au_, "month");
 
 				return (av_ ?? false);
-			};
+			}
+;
 			bool o_()
 			{
 				string aw_ = period?.unit;
 				bool? ax_ = context.Operators.Equal(aw_, "year");
 
 				return (ax_ ?? false);
-			};
+			}
+;
 			bool p_()
 			{
 				string ay_ = period?.unit;
 				bool? az_ = context.Operators.Equal(ay_, "hours");
 
 				return (az_ ?? false);
-			};
+			}
+;
 			bool q_()
 			{
 				string ba_ = period?.unit;
 				bool? bb_ = context.Operators.Equal(ba_, "minutes");
 
 				return (bb_ ?? false);
-			};
+			}
+;
 			bool r_()
 			{
 				string bc_ = period?.unit;
 				bool? bd_ = context.Operators.Equal(bc_, "seconds");
 
 				return (bd_ ?? false);
-			};
+			}
+;
 			bool s_()
 			{
 				string be_ = period?.unit;
 				bool? bf_ = context.Operators.Equal(be_, "days");
 
 				return (bf_ ?? false);
-			};
+			}
+;
 			bool t_()
 			{
 				string bg_ = period?.unit;
 				bool? bh_ = context.Operators.Equal(bg_, "weeks");
 
 				return (bh_ ?? false);
-			};
+			}
+;
 			bool u_()
 			{
 				string bi_ = period?.unit;
 				bool? bj_ = context.Operators.Equal(bi_, "months");
 
 				return (bj_ ?? false);
-			};
+			}
+;
 			bool v_()
 			{
 				string bk_ = period?.unit;
 				bool? bl_ = context.Operators.Equal(bk_, "years");
 
 				return (bl_ ?? false);
-			};
+			}
+;
 			if (b_())
 			{
 				decimal? bm_ = context.Operators.ConvertIntegerToDecimal(frequency);
@@ -748,13 +769,14 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 
 				return (gu_ as decimal?);
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("ToDaily")]
-	public decimal? ToDaily(CqlCode frequency)
+	public  decimal? ToDaily(CqlCode frequency)
 	{
 		decimal? a_()
 		{
@@ -764,7 +786,8 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				bool? d_ = context.Operators.Equal(frequency, c_);
 
 				return (d_ ?? false);
-			};
+			}
+;
 			if (b_())
 			{
 				return 3.0m;
@@ -778,13 +801,14 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 
 				return (h_ as decimal?);
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("MedicationRequestPeriod")]
-	public CqlInterval<CqlDateTime> MedicationRequestPeriod(MedicationRequest Request)
+	public  CqlInterval<CqlDateTime> MedicationRequestPeriod(MedicationRequest Request)
 	{
 		MedicationRequest[] a_ = [
 			Request,
@@ -814,7 +838,8 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 					bool? x_ = context.Operators.Not(w_);
 
 					return (x_ ?? false);
-				};
+				}
+;
 				if (f_())
 				{
 					List<Dosage> y_ = R?.DosageInstruction;
@@ -923,10 +948,12 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 
 					return ef_;
 				}
-			};
+			}
+;
 
 			return e_();
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<MedicationRequest, CqlInterval<CqlDateTime>>((IEnumerable<MedicationRequest>)a_, b_);
 		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
@@ -934,7 +961,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	}
 
     [CqlDeclaration("MedicationDispensePeriod")]
-	public CqlInterval<CqlDateTime> MedicationDispensePeriod(MedicationDispense Dispense)
+	public  CqlInterval<CqlDateTime> MedicationDispensePeriod(MedicationDispense Dispense)
 	{
 		MedicationDispense[] a_ = [
 			Dispense,
@@ -997,7 +1024,8 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			CqlInterval<CqlDateTime> bn_ = context.Operators.Interval(g_, bm_, true, true);
 
 			return bn_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDateTime>>((IEnumerable<MedicationDispense>)a_, b_);
 		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
@@ -1005,7 +1033,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	}
 
     [CqlDeclaration("TherapeuticDuration")]
-	public CqlQuantity TherapeuticDuration(CqlConcept medication)
+	public  CqlQuantity TherapeuticDuration(CqlConcept medication)
 	{
 		CqlQuantity a_ = context.Operators.Quantity(14m, "days");
 
@@ -1013,7 +1041,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	}
 
     [CqlDeclaration("MedicationAdministrationPeriod")]
-	public CqlInterval<CqlDateTime> MedicationAdministrationPeriod(MedicationAdministration Administration)
+	public  CqlInterval<CqlDateTime> MedicationAdministrationPeriod(MedicationAdministration Administration)
 	{
 		MedicationAdministration[] a_ = [
 			Administration,
@@ -1035,7 +1063,8 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 					bool? o_ = context.Operators.And(j_, n_);
 
 					return (o_ ?? false);
-				};
+				}
+;
 				if (f_())
 				{
 					DataType p_ = Administration?.Effective;
@@ -1055,10 +1084,12 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				{
 					return (null as CqlInterval<CqlDateTime>);
 				}
-			};
+			}
+;
 
 			return e_();
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<MedicationAdministration, CqlInterval<CqlDateTime>>((IEnumerable<MedicationAdministration>)a_, b_);
 		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
@@ -1066,7 +1097,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	}
 
     [CqlDeclaration("CumulativeDuration")]
-	public int? CumulativeDuration(IEnumerable<CqlInterval<CqlDateTime>> Intervals)
+	public  int? CumulativeDuration(IEnumerable<CqlInterval<CqlDateTime>> Intervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = context.Operators.Collapse(Intervals, "day");
 		int? b_(CqlInterval<CqlDateTime> X)
@@ -1076,7 +1107,8 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			int? g_ = context.Operators.DifferenceBetween(e_, f_, "day");
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<int?> c_ = context.Operators.Select<CqlInterval<CqlDateTime>, int?>(a_, b_);
 		int? d_ = context.Operators.Sum(c_);
 
@@ -1084,7 +1116,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 	}
 
     [CqlDeclaration("RolloutIntervals")]
-	public IEnumerable<CqlInterval<CqlDateTime>> RolloutIntervals(IEnumerable<CqlInterval<CqlDateTime>> intervals)
+	public  IEnumerable<CqlInterval<CqlDateTime>> RolloutIntervals(IEnumerable<CqlInterval<CqlDateTime>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_(IEnumerable<CqlInterval<CqlDateTime>> R, CqlInterval<CqlDateTime> I)
 		{
@@ -1117,7 +1149,8 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(o_, aa_, true, true);
 
 				return ab_;
-			};
+			}
+;
 			IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>((IEnumerable<CqlInterval<CqlDateTime>>)c_, d_);
 			CqlInterval<CqlDateTime> f_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(e_);
 			CqlInterval<CqlDateTime>[] g_ = [
@@ -1126,14 +1159,15 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Union<CqlInterval<CqlDateTime>>(R, (g_ as IEnumerable<CqlInterval<CqlDateTime>>));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> b_ = context.Operators.Aggregate<CqlInterval<CqlDateTime>, IEnumerable<CqlInterval<CqlDateTime>>>(intervals, a_, (null as IEnumerable<CqlInterval<CqlDateTime>>));
 
 		return b_;
 	}
 
     [CqlDeclaration("MedicationPeriod")]
-	public CqlInterval<CqlDateTime> MedicationPeriod(object medication)
+	public  CqlInterval<CqlDateTime> MedicationPeriod(object medication)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1159,27 +1193,30 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			{
 				return (null as CqlInterval<CqlDateTime>);
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("CumulativeMedicationDuration")]
-	public int? CumulativeMedicationDuration(IEnumerable<object> Medications)
+	public  int? CumulativeMedicationDuration(IEnumerable<object> Medications)
 	{
 		bool? a_(object M)
 		{
 			bool l_ = M is MedicationRequest;
 
 			return (l_ as bool?);
-		};
+		}
+;
 		IEnumerable<object> b_ = context.Operators.Where<object>(Medications, a_);
 		CqlInterval<CqlDateTime> c_(object M)
 		{
 			CqlInterval<CqlDateTime> m_ = this.MedicationPeriod(M);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(b_, c_);
 		bool? e_(object M)
 		{
@@ -1188,14 +1225,16 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			bool? p_ = context.Operators.Or((n_ as bool?), (o_ as bool?));
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<object> f_ = context.Operators.Where<object>(Medications, e_);
 		CqlInterval<CqlDateTime> g_(object M)
 		{
 			CqlInterval<CqlDateTime> q_ = this.MedicationPeriod(M);
 
 			return q_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(f_, g_);
 		IEnumerable<CqlInterval<CqlDateTime>> i_ = this.RolloutIntervals(h_);
 		IEnumerable<CqlInterval<CqlDateTime>> j_ = context.Operators.Union<CqlInterval<CqlDateTime>>(d_, i_);

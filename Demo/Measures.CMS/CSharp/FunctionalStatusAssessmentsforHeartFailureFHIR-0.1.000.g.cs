@@ -181,249 +181,249 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Heart_Failure_Value() => 
+	private  CqlValueSet Heart_Failure_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", default);
 
     [CqlDeclaration("Heart Failure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376")]
-	public CqlValueSet Heart_Failure() => 
+	public  CqlValueSet Heart_Failure() => 
 		__Heart_Failure.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Online_Assessments_Value() => 
+	private  CqlValueSet Online_Assessments_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments() => 
+	public  CqlValueSet Online_Assessments() => 
 		__Online_Assessments.Value;
 
-	private CqlValueSet Telephone_Visits_Value() => 
+	private  CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits() => 
+	public  CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
 
-	private CqlCode Emotional_score__MLHFQ__Value() => 
+	private  CqlCode Emotional_score__MLHFQ__Value() => 
 		new CqlCode("85609-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Emotional score [MLHFQ]")]
-	public CqlCode Emotional_score__MLHFQ_() => 
+	public  CqlCode Emotional_score__MLHFQ_() => 
 		__Emotional_score__MLHFQ_.Value;
 
-	private CqlCode Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12__Value() => 
+	private  CqlCode Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12__Value() => 
 		new CqlCode("86923-0", "http://loinc.org", default, default);
 
     [CqlDeclaration("Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]")]
-	public CqlCode Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_() => 
+	public  CqlCode Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_() => 
 		__Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_.Value;
 
-	private CqlCode Overall_summary_score__KCCQ_12__Value() => 
+	private  CqlCode Overall_summary_score__KCCQ_12__Value() => 
 		new CqlCode("86924-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Overall summary score [KCCQ-12]")]
-	public CqlCode Overall_summary_score__KCCQ_12_() => 
+	public  CqlCode Overall_summary_score__KCCQ_12_() => 
 		__Overall_summary_score__KCCQ_12_.Value;
 
-	private CqlCode Overall_summary_score__KCCQ__Value() => 
+	private  CqlCode Overall_summary_score__KCCQ__Value() => 
 		new CqlCode("71940-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Overall summary score [KCCQ]")]
-	public CqlCode Overall_summary_score__KCCQ_() => 
+	public  CqlCode Overall_summary_score__KCCQ_() => 
 		__Overall_summary_score__KCCQ_.Value;
 
-	private CqlCode Physical_limitation_score__KCCQ__Value() => 
+	private  CqlCode Physical_limitation_score__KCCQ__Value() => 
 		new CqlCode("72195-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Physical limitation score [KCCQ]")]
-	public CqlCode Physical_limitation_score__KCCQ_() => 
+	public  CqlCode Physical_limitation_score__KCCQ_() => 
 		__Physical_limitation_score__KCCQ_.Value;
 
-	private CqlCode Physical_score__MLHFQ__Value() => 
+	private  CqlCode Physical_score__MLHFQ__Value() => 
 		new CqlCode("85618-7", "http://loinc.org", default, default);
 
     [CqlDeclaration("Physical score [MLHFQ]")]
-	public CqlCode Physical_score__MLHFQ_() => 
+	public  CqlCode Physical_score__MLHFQ_() => 
 		__Physical_score__MLHFQ_.Value;
 
-	private CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score_Value() => 
+	private  CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score_Value() => 
 		new CqlCode("71969-0", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-10 Global Mental Health (GMH) score T-score")]
-	public CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score() => 
+	public  CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score() => 
 		__PROMIS_10_Global_Mental_Health__GMH__score_T_score.Value;
 
-	private CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score_Value() => 
+	private  CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score_Value() => 
 		new CqlCode("71971-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-10 Global Physical Health (GPH) score T-score")]
-	public CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score() => 
+	public  CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score() => 
 		__PROMIS_10_Global_Physical_Health__GPH__score_T_score.Value;
 
-	private CqlCode PROMIS_29_Anxiety_score_T_score_Value() => 
+	private  CqlCode PROMIS_29_Anxiety_score_T_score_Value() => 
 		new CqlCode("71967-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-29 Anxiety score T-score")]
-	public CqlCode PROMIS_29_Anxiety_score_T_score() => 
+	public  CqlCode PROMIS_29_Anxiety_score_T_score() => 
 		__PROMIS_29_Anxiety_score_T_score.Value;
 
-	private CqlCode PROMIS_29_Depression_score_T_score_Value() => 
+	private  CqlCode PROMIS_29_Depression_score_T_score_Value() => 
 		new CqlCode("71965-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-29 Depression score T-score")]
-	public CqlCode PROMIS_29_Depression_score_T_score() => 
+	public  CqlCode PROMIS_29_Depression_score_T_score() => 
 		__PROMIS_29_Depression_score_T_score.Value;
 
-	private CqlCode PROMIS_29_Fatigue_score_T_score_Value() => 
+	private  CqlCode PROMIS_29_Fatigue_score_T_score_Value() => 
 		new CqlCode("71963-3", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-29 Fatigue score T-score")]
-	public CqlCode PROMIS_29_Fatigue_score_T_score() => 
+	public  CqlCode PROMIS_29_Fatigue_score_T_score() => 
 		__PROMIS_29_Fatigue_score_T_score.Value;
 
-	private CqlCode PROMIS_29_Pain_interference_score_T_score_Value() => 
+	private  CqlCode PROMIS_29_Pain_interference_score_T_score_Value() => 
 		new CqlCode("71961-7", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-29 Pain interference score T-score")]
-	public CqlCode PROMIS_29_Pain_interference_score_T_score() => 
+	public  CqlCode PROMIS_29_Pain_interference_score_T_score() => 
 		__PROMIS_29_Pain_interference_score_T_score.Value;
 
-	private CqlCode PROMIS_29_Physical_function_score_T_score_Value() => 
+	private  CqlCode PROMIS_29_Physical_function_score_T_score_Value() => 
 		new CqlCode("71959-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-29 Physical function score T-score")]
-	public CqlCode PROMIS_29_Physical_function_score_T_score() => 
+	public  CqlCode PROMIS_29_Physical_function_score_T_score() => 
 		__PROMIS_29_Physical_function_score_T_score.Value;
 
-	private CqlCode PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score_Value() => 
+	private  CqlCode PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score_Value() => 
 		new CqlCode("71957-5", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-29 Satisfaction with participation in social roles score T-score")]
-	public CqlCode PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score() => 
+	public  CqlCode PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score() => 
 		__PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score.Value;
 
-	private CqlCode PROMIS_29_Sleep_disturbance_score_T_score_Value() => 
+	private  CqlCode PROMIS_29_Sleep_disturbance_score_T_score_Value() => 
 		new CqlCode("71955-9", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-29 Sleep disturbance score T-score")]
-	public CqlCode PROMIS_29_Sleep_disturbance_score_T_score() => 
+	public  CqlCode PROMIS_29_Sleep_disturbance_score_T_score() => 
 		__PROMIS_29_Sleep_disturbance_score_T_score.Value;
 
-	private CqlCode Quality_of_life_score__KCCQ__Value() => 
+	private  CqlCode Quality_of_life_score__KCCQ__Value() => 
 		new CqlCode("72189-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("Quality of life score [KCCQ]")]
-	public CqlCode Quality_of_life_score__KCCQ_() => 
+	public  CqlCode Quality_of_life_score__KCCQ_() => 
 		__Quality_of_life_score__KCCQ_.Value;
 
-	private CqlCode Self_efficacy_score__KCCQ__Value() => 
+	private  CqlCode Self_efficacy_score__KCCQ__Value() => 
 		new CqlCode("72190-2", "http://loinc.org", default, default);
 
     [CqlDeclaration("Self-efficacy score [KCCQ]")]
-	public CqlCode Self_efficacy_score__KCCQ_() => 
+	public  CqlCode Self_efficacy_score__KCCQ_() => 
 		__Self_efficacy_score__KCCQ_.Value;
 
-	private CqlCode Severe_cognitive_impairment__finding__Value() => 
+	private  CqlCode Severe_cognitive_impairment__finding__Value() => 
 		new CqlCode("702956004", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Severe cognitive impairment (finding)")]
-	public CqlCode Severe_cognitive_impairment__finding_() => 
+	public  CqlCode Severe_cognitive_impairment__finding_() => 
 		__Severe_cognitive_impairment__finding_.Value;
 
-	private CqlCode Social_limitation_score__KCCQ__Value() => 
+	private  CqlCode Social_limitation_score__KCCQ__Value() => 
 		new CqlCode("72196-9", "http://loinc.org", default, default);
 
     [CqlDeclaration("Social limitation score [KCCQ]")]
-	public CqlCode Social_limitation_score__KCCQ_() => 
+	public  CqlCode Social_limitation_score__KCCQ_() => 
 		__Social_limitation_score__KCCQ_.Value;
 
-	private CqlCode Symptom_stability_score__KCCQ__Value() => 
+	private  CqlCode Symptom_stability_score__KCCQ__Value() => 
 		new CqlCode("72194-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("Symptom stability score [KCCQ]")]
-	public CqlCode Symptom_stability_score__KCCQ_() => 
+	public  CqlCode Symptom_stability_score__KCCQ_() => 
 		__Symptom_stability_score__KCCQ_.Value;
 
-	private CqlCode Total_score__MLHFQ__Value() => 
+	private  CqlCode Total_score__MLHFQ__Value() => 
 		new CqlCode("71938-5", "http://loinc.org", default, default);
 
     [CqlDeclaration("Total score [MLHFQ]")]
-	public CqlCode Total_score__MLHFQ_() => 
+	public  CqlCode Total_score__MLHFQ_() => 
 		__Total_score__MLHFQ_.Value;
 
-	private CqlCode Total_symptom_score__KCCQ__Value() => 
+	private  CqlCode Total_symptom_score__KCCQ__Value() => 
 		new CqlCode("72191-0", "http://loinc.org", default, default);
 
     [CqlDeclaration("Total symptom score [KCCQ]")]
-	public CqlCode Total_symptom_score__KCCQ_() => 
+	public  CqlCode Total_symptom_score__KCCQ_() => 
 		__Total_symptom_score__KCCQ_.Value;
 
-	private CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score_Value() => 
+	private  CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score_Value() => 
 		new CqlCode("72026-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - oblique method T-score")]
-	public CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score() => 
+	public  CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score() => 
 		__VR_12_Mental_component_summary__MCS__score___oblique_method_T_score.Value;
 
-	private CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score_Value() => 
+	private  CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score_Value() => 
 		new CqlCode("72028-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - orthogonal method T-score")]
-	public CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score() => 
+	public  CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score() => 
 		__VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score.Value;
 
-	private CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score_Value() => 
+	private  CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score_Value() => 
 		new CqlCode("72025-0", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - oblique method T-score")]
-	public CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score() => 
+	public  CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score() => 
 		__VR_12_Physical_component_summary__PCS__score___oblique_method_T_score.Value;
 
-	private CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score_Value() => 
+	private  CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score_Value() => 
 		new CqlCode("72027-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - orthogonal method T-score")]
-	public CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score() => 
+	public  CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score() => 
 		__VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score.Value;
 
-	private CqlCode VR_36_Mental_component_summary__MCS__score___oblique_method_T_score_Value() => 
+	private  CqlCode VR_36_Mental_component_summary__MCS__score___oblique_method_T_score_Value() => 
 		new CqlCode("71990-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - oblique method T-score")]
-	public CqlCode VR_36_Mental_component_summary__MCS__score___oblique_method_T_score() => 
+	public  CqlCode VR_36_Mental_component_summary__MCS__score___oblique_method_T_score() => 
 		__VR_36_Mental_component_summary__MCS__score___oblique_method_T_score.Value;
 
-	private CqlCode VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score_Value() => 
+	private  CqlCode VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score_Value() => 
 		new CqlCode("72008-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - orthogonal method T-score")]
-	public CqlCode VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score() => 
+	public  CqlCode VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score() => 
 		__VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score.Value;
 
-	private CqlCode VR_36_Physical_component_summary__PCS__score___oblique_method_T_score_Value() => 
+	private  CqlCode VR_36_Physical_component_summary__PCS__score___oblique_method_T_score_Value() => 
 		new CqlCode("71989-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - oblique method T-score")]
-	public CqlCode VR_36_Physical_component_summary__PCS__score___oblique_method_T_score() => 
+	public  CqlCode VR_36_Physical_component_summary__PCS__score___oblique_method_T_score() => 
 		__VR_36_Physical_component_summary__PCS__score___oblique_method_T_score.Value;
 
-	private CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score_Value() => 
+	private  CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score_Value() => 
 		new CqlCode("72007-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - orthogonal method T-score")]
-	public CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score() => 
+	public  CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score() => 
 		__VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("85609-6", "http://loinc.org", default, default),
@@ -461,10 +461,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("702956004", "http://snomed.info/sct", default, default),
@@ -474,10 +474,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -488,10 +488,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -500,10 +500,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -511,10 +511,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -522,10 +522,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -533,10 +533,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -544,10 +544,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Encounter> Qualifying_Encounters_Value()
+	private  IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -567,17 +567,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
 
 		return k_;
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
-	public IEnumerable<Encounter> Qualifying_Encounters() => 
+	public  IEnumerable<Encounter> Qualifying_Encounters() => 
 		__Qualifying_Encounters.Value;
 
-	private IEnumerable<Encounter> Two_Outpatient_Encounters_during_Measurement_Period_Value()
+	private  IEnumerable<Encounter> Two_Outpatient_Encounters_during_Measurement_Period_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<ValueTuple<Encounter, Encounter>> c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
@@ -586,7 +587,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter OfficeVisit1, Encounter OfficeVisit2)? j_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<(Encounter OfficeVisit1, Encounter OfficeVisit2)?> e_ = context.Operators.Select<ValueTuple<Encounter, Encounter>, (Encounter OfficeVisit1, Encounter OfficeVisit2)?>(c_, d_);
 		bool? f_((Encounter OfficeVisit1, Encounter OfficeVisit2)? tuple_dbnmmzbtissrtndishcesfvih)
 		{
@@ -603,20 +605,22 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrAfter(n_, t_, "day");
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<(Encounter OfficeVisit1, Encounter OfficeVisit2)?> g_ = context.Operators.Where<(Encounter OfficeVisit1, Encounter OfficeVisit2)?>(e_, f_);
 		Encounter h_((Encounter OfficeVisit1, Encounter OfficeVisit2)? tuple_dbnmmzbtissrtndishcesfvih) => 
 			tuple_dbnmmzbtissrtndishcesfvih?.OfficeVisit1;
+;
 		IEnumerable<Encounter> i_ = context.Operators.Select<(Encounter OfficeVisit1, Encounter OfficeVisit2)?, Encounter>(g_, h_);
 
 		return i_;
 	}
 
     [CqlDeclaration("Two Outpatient Encounters during Measurement Period")]
-	public IEnumerable<Encounter> Two_Outpatient_Encounters_during_Measurement_Period() => 
+	public  IEnumerable<Encounter> Two_Outpatient_Encounters_during_Measurement_Period() => 
 		__Two_Outpatient_Encounters_during_Measurement_Period.Value;
 
-	private bool? Initial_Population_Value()
+	private  bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -636,7 +640,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.OverlapsBefore(s_, t_, default);
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
 		bool? n_ = context.Operators.Exists<Condition>(m_);
 		bool? o_ = context.Operators.And(i_, n_);
@@ -648,10 +653,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population() => 
+	public  bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-	private bool? Denominator_Value()
+	private  bool? Denominator_Value()
 	{
 		bool? a_ = this.Initial_Population();
 
@@ -659,10 +664,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator() => 
+	public  bool? Denominator() => 
 		__Denominator.Value;
 
-	private bool? Denominator_Exclusions_Value()
+	private  bool? Denominator_Exclusions_Value()
 	{
 		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
 		CqlCode b_ = this.Severe_cognitive_impairment__finding_();
@@ -675,7 +680,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? k_ = context.Operators.Overlaps(i_, j_, default);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 		bool? g_ = context.Operators.Exists<Condition>(f_);
 		bool? h_ = context.Operators.Or(a_, g_);
@@ -684,10 +690,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions() => 
+	public  bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.PROMIS_10_Global_Mental_Health__GMH__score_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -703,7 +709,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? p_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(i_, j_);
 		bool? l_((Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb)
 		{
@@ -728,7 +735,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? ai_ = context.Operators.And(ae_, ah_);
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> m_ = context.Operators.Where<(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(k_, l_);
 		CqlDate n_((Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb)
 		{
@@ -749,17 +757,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
 
 			return au_;
-		};
+		}
+;
 		IEnumerable<CqlDate> o_ = context.Operators.Select<(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?, CqlDate>(m_, n_);
 
 		return o_;
 	}
 
     [CqlDeclaration("Date PROMIS10 Total Assessment Completed")]
-	public IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed() => 
 		__Date_PROMIS10_Total_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_PROMIS10_Total_Assessment_Completed();
@@ -769,7 +778,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj)
 		{
@@ -811,10 +821,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj) => 
 			tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -822,10 +834,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up PROMIS10 Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments.Value;
 
-	private IEnumerable<CqlDate> Date_PROMIS29_Total_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_PROMIS29_Total_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.PROMIS_29_Sleep_disturbance_score_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -861,7 +873,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? aj_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6, _valueTuple.Item7);
 
 			return aj_;
-		};
+		}
+;
 		IEnumerable<(Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?> ae_ = context.Operators.Select<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation>, (Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?>(ac_, ad_);
 		bool? af_((Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? tuple_cbgpsarvwrsewlglehinjanim)
 		{
@@ -961,7 +974,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? ee_ = context.Operators.And(ea_, ed_);
 
 			return ee_;
-		};
+		}
+;
 		IEnumerable<(Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?> ag_ = context.Operators.Where<(Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?>(ae_, af_);
 		CqlDate ah_((Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? tuple_cbgpsarvwrsewlglehinjanim)
 		{
@@ -1012,17 +1026,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate fp_ = context.Operators.Max<CqlDate>((fo_ as IEnumerable<CqlDate>));
 
 			return fp_;
-		};
+		}
+;
 		IEnumerable<CqlDate> ai_ = context.Operators.Select<(Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?, CqlDate>(ag_, ah_);
 
 		return ai_;
 	}
 
     [CqlDeclaration("Date PROMIS29 Total Assessment Completed")]
-	public IEnumerable<CqlDate> Date_PROMIS29_Total_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_PROMIS29_Total_Assessment_Completed() => 
 		__Date_PROMIS29_Total_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_PROMIS29_Total_Assessment_Completed();
@@ -1032,7 +1047,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao)
 		{
@@ -1074,10 +1090,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao) => 
 			tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -1085,10 +1103,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up PROMIS29 Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments.Value;
 
-	private IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___oblique_method_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1104,7 +1122,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? p_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_);
 		bool? l_((Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
@@ -1129,7 +1148,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? ai_ = context.Operators.And(ae_, ah_);
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> m_ = context.Operators.Where<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(k_, l_);
 		CqlDate n_((Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
@@ -1150,17 +1170,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
 
 			return au_;
-		};
+		}
+;
 		IEnumerable<CqlDate> o_ = context.Operators.Select<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?, CqlDate>(m_, n_);
 
 		return o_;
 	}
 
     [CqlDeclaration("Date VR12 Oblique Total Assessment Completed")]
-	public IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed() => 
 		__Date_VR12_Oblique_Total_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_VR12_Oblique_Total_Assessment_Completed();
@@ -1170,7 +1191,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh)
 		{
@@ -1212,10 +1234,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh) => 
 			tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -1223,10 +1247,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR12 Oblique Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments.Value;
 
-	private IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1242,7 +1266,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? p_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_);
 		bool? l_((Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
@@ -1267,7 +1292,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? ai_ = context.Operators.And(ae_, ah_);
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> m_ = context.Operators.Where<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(k_, l_);
 		CqlDate n_((Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
 		{
@@ -1288,17 +1314,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
 
 			return au_;
-		};
+		}
+;
 		IEnumerable<CqlDate> o_ = context.Operators.Select<(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?, CqlDate>(m_, n_);
 
 		return o_;
 	}
 
     [CqlDeclaration("Date VR12 Orthogonal Total Assessment Completed")]
-	public IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed() => 
 		__Date_VR12_Orthogonal_Total_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed();
@@ -1308,7 +1335,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai)
 		{
@@ -1350,10 +1378,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai) => 
 			tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -1361,10 +1391,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR12 Orthogonal Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments.Value;
 
-	private IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.VR_36_Mental_component_summary__MCS__score___oblique_method_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1380,7 +1410,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? p_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(i_, j_);
 		bool? l_((Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
 		{
@@ -1405,7 +1436,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? ai_ = context.Operators.And(ae_, ah_);
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> m_ = context.Operators.Where<(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(k_, l_);
 		CqlDate n_((Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
 		{
@@ -1426,17 +1458,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
 
 			return au_;
-		};
+		}
+;
 		IEnumerable<CqlDate> o_ = context.Operators.Select<(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?, CqlDate>(m_, n_);
 
 		return o_;
 	}
 
     [CqlDeclaration("Date VR36 Oblique Total Assessment Completed")]
-	public IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed() => 
 		__Date_VR36_Oblique_Total_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_VR36_Oblique_Total_Assessment_Completed();
@@ -1446,7 +1479,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga)
 		{
@@ -1488,10 +1522,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga) => 
 			tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -1499,10 +1535,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR36 Oblique Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments.Value;
 
-	private IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1518,7 +1554,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? p_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(i_, j_);
 		bool? l_((Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
 		{
@@ -1543,7 +1580,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? ai_ = context.Operators.And(ae_, ah_);
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> m_ = context.Operators.Where<(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(k_, l_);
 		CqlDate n_((Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
 		{
@@ -1564,17 +1602,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
 
 			return au_;
-		};
+		}
+;
 		IEnumerable<CqlDate> o_ = context.Operators.Select<(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?, CqlDate>(m_, n_);
 
 		return o_;
 	}
 
     [CqlDeclaration("Date VR36 Orthogonal Total Assessment Completed")]
-	public IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed() => 
 		__Date_VR36_Orthogonal_Total_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_VR36_Orthogonal_Total_Assessment_Completed();
@@ -1584,7 +1623,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht)
 		{
@@ -1626,10 +1666,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht) => 
 			tuple_fucqujadjizabihdffformht?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -1637,10 +1679,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR36 Orthogonal Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments.Value;
 
-	private IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.Physical_score__MLHFQ_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1656,7 +1698,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Observation MLHFQPhysical, Observation MLHFQEmotional)? p_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<(Observation MLHFQPhysical, Observation MLHFQEmotional)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation MLHFQPhysical, Observation MLHFQEmotional)?>(i_, j_);
 		bool? l_((Observation MLHFQPhysical, Observation MLHFQEmotional)? tuple_fnofxckadaeusjerhbdqfoshe)
 		{
@@ -1681,7 +1724,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? ai_ = context.Operators.And(ae_, ah_);
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<(Observation MLHFQPhysical, Observation MLHFQEmotional)?> m_ = context.Operators.Where<(Observation MLHFQPhysical, Observation MLHFQEmotional)?>(k_, l_);
 		CqlDate n_((Observation MLHFQPhysical, Observation MLHFQEmotional)? tuple_fnofxckadaeusjerhbdqfoshe)
 		{
@@ -1702,17 +1746,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
 
 			return au_;
-		};
+		}
+;
 		IEnumerable<CqlDate> o_ = context.Operators.Select<(Observation MLHFQPhysical, Observation MLHFQEmotional)?, CqlDate>(m_, n_);
 
 		return o_;
 	}
 
     [CqlDeclaration("Date MLHFQ Total Assessment Completed")]
-	public IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed() => 
 		__Date_MLHFQ_Total_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_MLHFQ_Total_Assessment_Completed();
@@ -1722,7 +1767,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig)
 		{
@@ -1764,10 +1810,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig) => 
 			tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -1775,10 +1823,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up MLHFQ Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments.Value;
 
-	private IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1794,7 +1842,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Observation KCCQ12Item, Observation KCCQ12Summary)? p_ = (_valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<(Observation KCCQ12Item, Observation KCCQ12Summary)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (Observation KCCQ12Item, Observation KCCQ12Summary)?>(i_, j_);
 		bool? l_((Observation KCCQ12Item, Observation KCCQ12Summary)? tuple_dfkxorghhyafccusbqamfntdj)
 		{
@@ -1819,7 +1868,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? ai_ = context.Operators.And(ae_, ah_);
 
 			return ai_;
-		};
+		}
+;
 		IEnumerable<(Observation KCCQ12Item, Observation KCCQ12Summary)?> m_ = context.Operators.Where<(Observation KCCQ12Item, Observation KCCQ12Summary)?>(k_, l_);
 		CqlDate n_((Observation KCCQ12Item, Observation KCCQ12Summary)? tuple_dfkxorghhyafccusbqamfntdj)
 		{
@@ -1840,17 +1890,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
 
 			return au_;
-		};
+		}
+;
 		IEnumerable<CqlDate> o_ = context.Operators.Select<(Observation KCCQ12Item, Observation KCCQ12Summary)?, CqlDate>(m_, n_);
 
 		return o_;
 	}
 
     [CqlDeclaration("Date KCCQ12 Total Assessment Completed")]
-	public IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed() => 
 		__Date_KCCQ12_Total_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_KCCQ12_Total_Assessment_Completed();
@@ -1860,7 +1911,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo)
 		{
@@ -1902,10 +1954,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo) => 
 			tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -1913,10 +1967,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ12 Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments.Value;
 
-	private IEnumerable<CqlDate> Date_KCCQ_Domain_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_KCCQ_Domain_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.Quality_of_life_score__KCCQ_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1948,7 +2002,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? af_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6);
 
 			return af_;
-		};
+		}
+;
 		IEnumerable<(Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?> aa_ = context.Operators.Select<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation>, (Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?>(y_, z_);
 		bool? ab_((Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? tuple_etfcawdpmcqfbnayqdmdqqsdn)
 		{
@@ -2033,7 +2088,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? dk_ = context.Operators.And(dg_, dj_);
 
 			return dk_;
-		};
+		}
+;
 		IEnumerable<(Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?> ac_ = context.Operators.Where<(Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?>(aa_, ab_);
 		CqlDate ad_((Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? tuple_etfcawdpmcqfbnayqdmdqqsdn)
 		{
@@ -2078,17 +2134,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate eq_ = context.Operators.Max<CqlDate>((ep_ as IEnumerable<CqlDate>));
 
 			return eq_;
-		};
+		}
+;
 		IEnumerable<CqlDate> ae_ = context.Operators.Select<(Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?, CqlDate>(ac_, ad_);
 
 		return ae_;
 	}
 
     [CqlDeclaration("Date KCCQ Domain Assessment Completed")]
-	public IEnumerable<CqlDate> Date_KCCQ_Domain_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_KCCQ_Domain_Assessment_Completed() => 
 		__Date_KCCQ_Domain_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_KCCQ_Domain_Assessment_Completed();
@@ -2098,7 +2155,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea)
 		{
@@ -2140,10 +2198,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea) => 
 			tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -2151,10 +2211,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ Domain Score Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments.Value;
 
-	private IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed_Value()
+	private  IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed_Value()
 	{
 		CqlCode a_ = this.Overall_summary_score__KCCQ_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -2167,7 +2227,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? k_ = context.Operators.Not((bool?)(j_ is null));
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 		CqlDate g_(Observation KCCQSummaryScore)
 		{
@@ -2182,17 +2243,18 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate r_ = context.Operators.Max<CqlDate>((q_ as IEnumerable<CqlDate>));
 
 			return r_;
-		};
+		}
+;
 		IEnumerable<CqlDate> h_ = context.Operators.Select<Observation, CqlDate>(f_, g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("Date KCCQ Total Assessment Completed")]
-	public IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed() => 
+	public  IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed() => 
 		__Date_KCCQ_Total_Assessment_Completed.Value;
 
-	private bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments_Value()
+	private  bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounters();
 		IEnumerable<CqlDate> b_ = this.Date_KCCQ_Total_Assessment_Completed();
@@ -2202,7 +2264,8 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			(Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?>(d_, e_);
 		bool? g_((Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj)
 		{
@@ -2244,10 +2307,12 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? bb_ = context.Operators.And(ao_, ba_);
 
 			return bb_;
-		};
+		}
+;
 		IEnumerable<(Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?> h_ = context.Operators.Where<(Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?>(f_, g_);
 		Encounter i_((Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj) => 
 			tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters;
+;
 		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?, Encounter>(h_, i_);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 
@@ -2255,10 +2320,10 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ Total Score Assessments")]
-	public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments() => 
+	public  bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments() => 
 		__Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments.Value;
 
-	private bool? Numerator_Value()
+	private  bool? Numerator_Value()
 	{
 		bool? a_ = this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments();
 		bool? b_ = this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments();
@@ -2284,7 +2349,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator() => 
+	public  bool? Numerator() => 
 		__Numerator.Value;
 
 }

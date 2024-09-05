@@ -183,413 +183,413 @@ public class QICoreCommon_2_0_000
 
     #endregion
 
-	private CqlCode Birthdate_Value() => 
+	private  CqlCode Birthdate_Value() => 
 		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Birthdate")]
-	public CqlCode Birthdate() => 
+	public  CqlCode Birthdate() => 
 		__Birthdate.Value;
 
-	private CqlCode Dead_Value() => 
+	private  CqlCode Dead_Value() => 
 		new CqlCode("419099009", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Dead")]
-	public CqlCode Dead() => 
+	public  CqlCode Dead() => 
 		__Dead.Value;
 
-	private CqlCode ER_Value() => 
+	private  CqlCode ER_Value() => 
 		new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
 
     [CqlDeclaration("ER")]
-	public CqlCode ER() => 
+	public  CqlCode ER() => 
 		__ER.Value;
 
-	private CqlCode ICU_Value() => 
+	private  CqlCode ICU_Value() => 
 		new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
 
     [CqlDeclaration("ICU")]
-	public CqlCode ICU() => 
+	public  CqlCode ICU() => 
 		__ICU.Value;
 
-	private CqlCode Billing_Value() => 
+	private  CqlCode Billing_Value() => 
 		new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("Billing")]
-	public CqlCode Billing() => 
+	public  CqlCode Billing() => 
 		__Billing.Value;
 
-	private CqlCode ambulatory_Value() => 
+	private  CqlCode ambulatory_Value() => 
 		new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("ambulatory")]
-	public CqlCode ambulatory() => 
+	public  CqlCode ambulatory() => 
 		__ambulatory.Value;
 
-	private CqlCode emergency_Value() => 
+	private  CqlCode emergency_Value() => 
 		new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("emergency")]
-	public CqlCode emergency() => 
+	public  CqlCode emergency() => 
 		__emergency.Value;
 
-	private CqlCode field_Value() => 
+	private  CqlCode field_Value() => 
 		new CqlCode("FLD", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("field")]
-	public CqlCode field() => 
+	public  CqlCode field() => 
 		__field.Value;
 
-	private CqlCode home_health_Value() => 
+	private  CqlCode home_health_Value() => 
 		new CqlCode("HH", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("home health")]
-	public CqlCode home_health() => 
+	public  CqlCode home_health() => 
 		__home_health.Value;
 
-	private CqlCode inpatient_encounter_Value() => 
+	private  CqlCode inpatient_encounter_Value() => 
 		new CqlCode("IMP", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("inpatient encounter")]
-	public CqlCode inpatient_encounter() => 
+	public  CqlCode inpatient_encounter() => 
 		__inpatient_encounter.Value;
 
-	private CqlCode inpatient_acute_Value() => 
+	private  CqlCode inpatient_acute_Value() => 
 		new CqlCode("ACUTE", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("inpatient acute")]
-	public CqlCode inpatient_acute() => 
+	public  CqlCode inpatient_acute() => 
 		__inpatient_acute.Value;
 
-	private CqlCode inpatient_non_acute_Value() => 
+	private  CqlCode inpatient_non_acute_Value() => 
 		new CqlCode("NONAC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("inpatient non-acute")]
-	public CqlCode inpatient_non_acute() => 
+	public  CqlCode inpatient_non_acute() => 
 		__inpatient_non_acute.Value;
 
-	private CqlCode observation_encounter_Value() => 
+	private  CqlCode observation_encounter_Value() => 
 		new CqlCode("OBSENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("observation encounter")]
-	public CqlCode observation_encounter() => 
+	public  CqlCode observation_encounter() => 
 		__observation_encounter.Value;
 
-	private CqlCode pre_admission_Value() => 
+	private  CqlCode pre_admission_Value() => 
 		new CqlCode("PRENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("pre-admission")]
-	public CqlCode pre_admission() => 
+	public  CqlCode pre_admission() => 
 		__pre_admission.Value;
 
-	private CqlCode short_stay_Value() => 
+	private  CqlCode short_stay_Value() => 
 		new CqlCode("SS", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("short stay")]
-	public CqlCode short_stay() => 
+	public  CqlCode short_stay() => 
 		__short_stay.Value;
 
-	private CqlCode @virtual_Value() => 
+	private  CqlCode @virtual_Value() => 
 		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("virtual")]
-	public CqlCode @virtual() => 
+	public  CqlCode @virtual() => 
 		__virtual.Value;
 
-	private CqlCode problem_list_item_Value() => 
+	private  CqlCode problem_list_item_Value() => 
 		new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category", default, default);
 
     [CqlDeclaration("problem-list-item")]
-	public CqlCode problem_list_item() => 
+	public  CqlCode problem_list_item() => 
 		__problem_list_item.Value;
 
-	private CqlCode encounter_diagnosis_Value() => 
+	private  CqlCode encounter_diagnosis_Value() => 
 		new CqlCode("encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category", default, default);
 
     [CqlDeclaration("encounter-diagnosis")]
-	public CqlCode encounter_diagnosis() => 
+	public  CqlCode encounter_diagnosis() => 
 		__encounter_diagnosis.Value;
 
-	private CqlCode health_concern_Value() => 
+	private  CqlCode health_concern_Value() => 
 		new CqlCode("health-concern", "http://hl7.org/fhir/us/core/CodeSystem/condition-category", default, default);
 
     [CqlDeclaration("health-concern")]
-	public CqlCode health_concern() => 
+	public  CqlCode health_concern() => 
 		__health_concern.Value;
 
-	private CqlCode active_Value() => 
+	private  CqlCode active_Value() => 
 		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("active")]
-	public CqlCode active() => 
+	public  CqlCode active() => 
 		__active.Value;
 
-	private CqlCode recurrence_Value() => 
+	private  CqlCode recurrence_Value() => 
 		new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("recurrence")]
-	public CqlCode recurrence() => 
+	public  CqlCode recurrence() => 
 		__recurrence.Value;
 
-	private CqlCode relapse_Value() => 
+	private  CqlCode relapse_Value() => 
 		new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("relapse")]
-	public CqlCode relapse() => 
+	public  CqlCode relapse() => 
 		__relapse.Value;
 
-	private CqlCode inactive_Value() => 
+	private  CqlCode inactive_Value() => 
 		new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("inactive")]
-	public CqlCode inactive() => 
+	public  CqlCode inactive() => 
 		__inactive.Value;
 
-	private CqlCode remission_Value() => 
+	private  CqlCode remission_Value() => 
 		new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("remission")]
-	public CqlCode remission() => 
+	public  CqlCode remission() => 
 		__remission.Value;
 
-	private CqlCode resolved_Value() => 
+	private  CqlCode resolved_Value() => 
 		new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("resolved")]
-	public CqlCode resolved() => 
+	public  CqlCode resolved() => 
 		__resolved.Value;
 
-	private CqlCode unconfirmed_Value() => 
+	private  CqlCode unconfirmed_Value() => 
 		new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("unconfirmed")]
-	public CqlCode unconfirmed() => 
+	public  CqlCode unconfirmed() => 
 		__unconfirmed.Value;
 
-	private CqlCode provisional_Value() => 
+	private  CqlCode provisional_Value() => 
 		new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("provisional")]
-	public CqlCode provisional() => 
+	public  CqlCode provisional() => 
 		__provisional.Value;
 
-	private CqlCode differential_Value() => 
+	private  CqlCode differential_Value() => 
 		new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("differential")]
-	public CqlCode differential() => 
+	public  CqlCode differential() => 
 		__differential.Value;
 
-	private CqlCode confirmed_Value() => 
+	private  CqlCode confirmed_Value() => 
 		new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("confirmed")]
-	public CqlCode confirmed() => 
+	public  CqlCode confirmed() => 
 		__confirmed.Value;
 
-	private CqlCode refuted_Value() => 
+	private  CqlCode refuted_Value() => 
 		new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("refuted")]
-	public CqlCode refuted() => 
+	public  CqlCode refuted() => 
 		__refuted.Value;
 
-	private CqlCode entered_in_error_Value() => 
+	private  CqlCode entered_in_error_Value() => 
 		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("entered-in-error")]
-	public CqlCode entered_in_error() => 
+	public  CqlCode entered_in_error() => 
 		__entered_in_error.Value;
 
-	private CqlCode allergy_active_Value() => 
+	private  CqlCode allergy_active_Value() => 
 		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
     [CqlDeclaration("allergy-active")]
-	public CqlCode allergy_active() => 
+	public  CqlCode allergy_active() => 
 		__allergy_active.Value;
 
-	private CqlCode allergy_inactive_Value() => 
+	private  CqlCode allergy_inactive_Value() => 
 		new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
     [CqlDeclaration("allergy-inactive")]
-	public CqlCode allergy_inactive() => 
+	public  CqlCode allergy_inactive() => 
 		__allergy_inactive.Value;
 
-	private CqlCode allergy_resolved_Value() => 
+	private  CqlCode allergy_resolved_Value() => 
 		new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
     [CqlDeclaration("allergy-resolved")]
-	public CqlCode allergy_resolved() => 
+	public  CqlCode allergy_resolved() => 
 		__allergy_resolved.Value;
 
-	private CqlCode allergy_unconfirmed_Value() => 
+	private  CqlCode allergy_unconfirmed_Value() => 
 		new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-unconfirmed")]
-	public CqlCode allergy_unconfirmed() => 
+	public  CqlCode allergy_unconfirmed() => 
 		__allergy_unconfirmed.Value;
 
-	private CqlCode allergy_confirmed_Value() => 
+	private  CqlCode allergy_confirmed_Value() => 
 		new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-confirmed")]
-	public CqlCode allergy_confirmed() => 
+	public  CqlCode allergy_confirmed() => 
 		__allergy_confirmed.Value;
 
-	private CqlCode allergy_refuted_Value() => 
+	private  CqlCode allergy_refuted_Value() => 
 		new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-refuted")]
-	public CqlCode allergy_refuted() => 
+	public  CqlCode allergy_refuted() => 
 		__allergy_refuted.Value;
 
-	private CqlCode Inpatient_Value() => 
+	private  CqlCode Inpatient_Value() => 
 		new CqlCode("inpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
     [CqlDeclaration("Inpatient")]
-	public CqlCode Inpatient() => 
+	public  CqlCode Inpatient() => 
 		__Inpatient.Value;
 
-	private CqlCode Outpatient_Value() => 
+	private  CqlCode Outpatient_Value() => 
 		new CqlCode("outpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
     [CqlDeclaration("Outpatient")]
-	public CqlCode Outpatient() => 
+	public  CqlCode Outpatient() => 
 		__Outpatient.Value;
 
-	private CqlCode Community_Value() => 
+	private  CqlCode Community_Value() => 
 		new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
     [CqlDeclaration("Community")]
-	public CqlCode Community() => 
+	public  CqlCode Community() => 
 		__Community.Value;
 
-	private CqlCode Discharge_Value() => 
+	private  CqlCode Discharge_Value() => 
 		new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
     [CqlDeclaration("Discharge")]
-	public CqlCode Discharge() => 
+	public  CqlCode Discharge() => 
 		__Discharge.Value;
 
-	private CqlCode AD_Value() => 
+	private  CqlCode AD_Value() => 
 		new CqlCode("AD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("AD")]
-	public CqlCode AD() => 
+	public  CqlCode AD() => 
 		__AD.Value;
 
-	private CqlCode DD_Value() => 
+	private  CqlCode DD_Value() => 
 		new CqlCode("DD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("DD")]
-	public CqlCode DD() => 
+	public  CqlCode DD() => 
 		__DD.Value;
 
-	private CqlCode CC_Value() => 
+	private  CqlCode CC_Value() => 
 		new CqlCode("CC", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("CC")]
-	public CqlCode CC() => 
+	public  CqlCode CC() => 
 		__CC.Value;
 
-	private CqlCode CM_Value() => 
+	private  CqlCode CM_Value() => 
 		new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("CM")]
-	public CqlCode CM() => 
+	public  CqlCode CM() => 
 		__CM.Value;
 
-	private CqlCode pre_op_Value() => 
+	private  CqlCode pre_op_Value() => 
 		new CqlCode("pre-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("pre-op")]
-	public CqlCode pre_op() => 
+	public  CqlCode pre_op() => 
 		__pre_op.Value;
 
-	private CqlCode post_op_Value() => 
+	private  CqlCode post_op_Value() => 
 		new CqlCode("post-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("post-op")]
-	public CqlCode post_op() => 
+	public  CqlCode post_op() => 
 		__post_op.Value;
 
-	private CqlCode billing_Value() => 
+	private  CqlCode billing_Value() => 
 		new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("billing")]
-	public CqlCode billing() => 
+	public  CqlCode billing() => 
 		__billing.Value;
 
-	private CqlCode social_history_Value() => 
+	private  CqlCode social_history_Value() => 
 		new CqlCode("social-history", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("social-history")]
-	public CqlCode social_history() => 
+	public  CqlCode social_history() => 
 		__social_history.Value;
 
-	private CqlCode vital_signs_Value() => 
+	private  CqlCode vital_signs_Value() => 
 		new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("vital-signs")]
-	public CqlCode vital_signs() => 
+	public  CqlCode vital_signs() => 
 		__vital_signs.Value;
 
-	private CqlCode imaging_Value() => 
+	private  CqlCode imaging_Value() => 
 		new CqlCode("imaging", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("imaging")]
-	public CqlCode imaging() => 
+	public  CqlCode imaging() => 
 		__imaging.Value;
 
-	private CqlCode laboratory_Value() => 
+	private  CqlCode laboratory_Value() => 
 		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("laboratory")]
-	public CqlCode laboratory() => 
+	public  CqlCode laboratory() => 
 		__laboratory.Value;
 
-	private CqlCode procedure_Value() => 
+	private  CqlCode procedure_Value() => 
 		new CqlCode("procedure", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("procedure")]
-	public CqlCode procedure() => 
+	public  CqlCode procedure() => 
 		__procedure.Value;
 
-	private CqlCode survey_Value() => 
+	private  CqlCode survey_Value() => 
 		new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("survey")]
-	public CqlCode survey() => 
+	public  CqlCode survey() => 
 		__survey.Value;
 
-	private CqlCode exam_Value() => 
+	private  CqlCode exam_Value() => 
 		new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("exam")]
-	public CqlCode exam() => 
+	public  CqlCode exam() => 
 		__exam.Value;
 
-	private CqlCode therapy_Value() => 
+	private  CqlCode therapy_Value() => 
 		new CqlCode("therapy", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("therapy")]
-	public CqlCode therapy() => 
+	public  CqlCode therapy() => 
 		__therapy.Value;
 
-	private CqlCode activity_Value() => 
+	private  CqlCode activity_Value() => 
 		new CqlCode("activity", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("activity")]
-	public CqlCode activity() => 
+	public  CqlCode activity() => 
 		__activity.Value;
 
-	private CqlCode clinical_test_Value() => 
+	private  CqlCode clinical_test_Value() => 
 		new CqlCode("clinical-test", "http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category", default, default);
 
     [CqlDeclaration("clinical-test")]
-	public CqlCode clinical_test() => 
+	public  CqlCode clinical_test() => 
 		__clinical_test.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", default, default),
@@ -599,10 +599,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("419099009", "http://snomed.info/sct", default, default),
@@ -612,10 +612,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlCode[] ActCode_Value()
+	private  CqlCode[] ActCode_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -635,10 +635,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("ActCode")]
-	public CqlCode[] ActCode() => 
+	public  CqlCode[] ActCode() => 
 		__ActCode.Value;
 
-	private CqlCode[] RoleCode_Value()
+	private  CqlCode[] RoleCode_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default),
@@ -649,10 +649,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("RoleCode")]
-	public CqlCode[] RoleCode() => 
+	public  CqlCode[] RoleCode() => 
 		__RoleCode.Value;
 
-	private CqlCode[] Diagnosis_Role_Value()
+	private  CqlCode[] Diagnosis_Role_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
@@ -669,10 +669,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("Diagnosis Role")]
-	public CqlCode[] Diagnosis_Role() => 
+	public  CqlCode[] Diagnosis_Role() => 
 		__Diagnosis_Role.Value;
 
-	private CqlCode[] RequestIntent_Value()
+	private  CqlCode[] RequestIntent_Value()
 	{
 		CqlCode[] a_ = []
 ;
@@ -681,10 +681,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("RequestIntent")]
-	public CqlCode[] RequestIntent() => 
+	public  CqlCode[] RequestIntent() => 
 		__RequestIntent.Value;
 
-	private CqlCode[] MedicationRequestCategory_Value()
+	private  CqlCode[] MedicationRequestCategory_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("inpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default),
@@ -697,10 +697,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("MedicationRequestCategory")]
-	public CqlCode[] MedicationRequestCategory() => 
+	public  CqlCode[] MedicationRequestCategory() => 
 		__MedicationRequestCategory.Value;
 
-	private CqlCode[] ConditionClinicalStatusCodes_Value()
+	private  CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
@@ -715,10 +715,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("ConditionClinicalStatusCodes")]
-	public CqlCode[] ConditionClinicalStatusCodes() => 
+	public  CqlCode[] ConditionClinicalStatusCodes() => 
 		__ConditionClinicalStatusCodes.Value;
 
-	private CqlCode[] ConditionVerificationStatusCodes_Value()
+	private  CqlCode[] ConditionVerificationStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
@@ -733,10 +733,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("ConditionVerificationStatusCodes")]
-	public CqlCode[] ConditionVerificationStatusCodes() => 
+	public  CqlCode[] ConditionVerificationStatusCodes() => 
 		__ConditionVerificationStatusCodes.Value;
 
-	private CqlCode[] AllergyIntoleranceClinicalStatusCodes_Value()
+	private  CqlCode[] AllergyIntoleranceClinicalStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default),
@@ -748,10 +748,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("AllergyIntoleranceClinicalStatusCodes")]
-	public CqlCode[] AllergyIntoleranceClinicalStatusCodes() => 
+	public  CqlCode[] AllergyIntoleranceClinicalStatusCodes() => 
 		__AllergyIntoleranceClinicalStatusCodes.Value;
 
-	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
+	private  CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
@@ -763,10 +763,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
-	public CqlCode[] AllergyIntoleranceVerificationStatusCodes() => 
+	public  CqlCode[] AllergyIntoleranceVerificationStatusCodes() => 
 		__AllergyIntoleranceVerificationStatusCodes.Value;
 
-	private CqlCode[] ObservationCategoryCodes_Value()
+	private  CqlCode[] ObservationCategoryCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("social-history", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
@@ -784,10 +784,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes() => 
+	public  CqlCode[] ObservationCategoryCodes() => 
 		__ObservationCategoryCodes.Value;
 
-	private CqlCode[] USCoreObservationCategoryExtensionCodes_Value()
+	private  CqlCode[] USCoreObservationCategoryExtensionCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("clinical-test", "http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category", default, default),
@@ -797,10 +797,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("USCoreObservationCategoryExtensionCodes")]
-	public CqlCode[] USCoreObservationCategoryExtensionCodes() => 
+	public  CqlCode[] USCoreObservationCategoryExtensionCodes() => 
 		__USCoreObservationCategoryExtensionCodes.Value;
 
-	private CqlCode[] ConditionCategory_Value()
+	private  CqlCode[] ConditionCategory_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category", default, default),
@@ -811,10 +811,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("ConditionCategory")]
-	public CqlCode[] ConditionCategory() => 
+	public  CqlCode[] ConditionCategory() => 
 		__ConditionCategory.Value;
 
-	private CqlCode[] USCoreConditionCategoryExtensionCodes_Value()
+	private  CqlCode[] USCoreConditionCategoryExtensionCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("health-concern", "http://hl7.org/fhir/us/core/CodeSystem/condition-category", default, default),
@@ -824,10 +824,10 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("USCoreConditionCategoryExtensionCodes")]
-	public CqlCode[] USCoreConditionCategoryExtensionCodes() => 
+	public  CqlCode[] USCoreConditionCategoryExtensionCodes() => 
 		__USCoreConditionCategoryExtensionCodes.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -836,12 +836,12 @@ public class QICoreCommon_2_0_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("isActive")]
     [CqlTag("description", "Returns true if the given condition has a clinical status of active, recurrence, or relapse")]
-	public bool? isActive(Condition condition)
+	public  bool? isActive(Condition condition)
 	{
 		CodeableConcept a_ = condition?.ClinicalStatus;
 		CqlConcept b_ = FHIRHelpers_4_3_000.ToConcept(a_);
@@ -864,7 +864,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("hasCategory")]
     [CqlTag("description", "Returns true if the given condition has the given category")]
-	public bool? hasCategory(Condition condition, CqlCode category)
+	public  bool? hasCategory(Condition condition, CqlCode category)
 	{
 		List<CodeableConcept> a_ = condition?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -872,7 +872,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -880,7 +881,8 @@ public class QICoreCommon_2_0_000
 			bool? i_ = context.Operators.Equivalent(C, h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -889,7 +891,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("hasCategory")]
     [CqlTag("description", "Returns true if the given observation has the given category")]
-	public bool? hasCategory(Observation observation, CqlCode category)
+	public  bool? hasCategory(Observation observation, CqlCode category)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -897,7 +899,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -905,7 +908,8 @@ public class QICoreCommon_2_0_000
 			bool? i_ = context.Operators.Equivalent(C, h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -914,7 +918,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isProblemListItem")]
     [CqlTag("description", "Returns true if the given condition is a problem list item.")]
-	public bool? isProblemListItem(Condition condition)
+	public  bool? isProblemListItem(Condition condition)
 	{
 		List<CodeableConcept> a_ = condition?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -922,7 +926,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -931,7 +936,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -940,7 +946,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isEncounterDiagnosis")]
     [CqlTag("description", "Returns true if the given condition is an encounter diagnosis")]
-	public bool? isEncounterDiagnosis(Condition condition)
+	public  bool? isEncounterDiagnosis(Condition condition)
 	{
 		List<CodeableConcept> a_ = condition?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -948,7 +954,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -957,7 +964,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -966,7 +974,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isHealthConcern")]
     [CqlTag("description", "Returns true if the given condition is a health concern")]
-	public bool? isHealthConcern(Condition condition)
+	public  bool? isHealthConcern(Condition condition)
 	{
 		List<CodeableConcept> a_ = condition?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -974,7 +982,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -983,7 +992,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -992,7 +1002,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isSocialHistory")]
     [CqlTag("description", "Returns true if the given observation is a social history observation")]
-	public bool? isSocialHistory(Observation observation)
+	public  bool? isSocialHistory(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1000,7 +1010,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1009,7 +1020,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1018,7 +1030,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isVitalSign")]
     [CqlTag("description", "Returns true if the given observation is a vital sign")]
-	public bool? isVitalSign(Observation observation)
+	public  bool? isVitalSign(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1026,7 +1038,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1035,7 +1048,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1044,7 +1058,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isImaging")]
     [CqlTag("description", "Returns true if the given observation is an imaging observation")]
-	public bool? isImaging(Observation observation)
+	public  bool? isImaging(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1052,7 +1066,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1061,7 +1076,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1070,7 +1086,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isLaboratory")]
     [CqlTag("description", "Returns true if the given observation is a laboratory observation")]
-	public bool? isLaboratory(Observation observation)
+	public  bool? isLaboratory(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1078,7 +1094,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1087,7 +1104,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1096,7 +1114,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isProcedure")]
     [CqlTag("description", "REturns true if the given observation is a procedure observation")]
-	public bool? isProcedure(Observation observation)
+	public  bool? isProcedure(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1104,7 +1122,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1113,7 +1132,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1122,7 +1142,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isSurvey")]
     [CqlTag("description", "Returns true if the given observation is a survey observation")]
-	public bool? isSurvey(Observation observation)
+	public  bool? isSurvey(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1130,7 +1150,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1139,7 +1160,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1148,7 +1170,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isExam")]
     [CqlTag("description", "Returns true if the given observation is an exam observation")]
-	public bool? isExam(Observation observation)
+	public  bool? isExam(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1156,7 +1178,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1165,7 +1188,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1174,7 +1198,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isTherapy")]
     [CqlTag("description", "Returns true if the given observation is a therapy observation")]
-	public bool? isTherapy(Observation observation)
+	public  bool? isTherapy(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1182,7 +1206,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1191,7 +1216,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1200,7 +1226,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isActivity")]
     [CqlTag("description", "Returns true if the given observation is an activity observation")]
-	public bool? isActivity(Observation observation)
+	public  bool? isActivity(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1208,7 +1234,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1217,7 +1244,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1226,7 +1254,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isClinicalTest")]
     [CqlTag("description", "Returns true if the given observation is a clinical test result")]
-	public bool? isClinicalTest(Observation observation)
+	public  bool? isClinicalTest(Observation observation)
 	{
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1234,7 +1262,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1243,7 +1272,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1252,7 +1282,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isCommunity")]
     [CqlTag("description", "Returns true if the given MedicationRequest has a category of Community")]
-	public bool? isCommunity(MedicationRequest medicationRequest)
+	public  bool? isCommunity(MedicationRequest medicationRequest)
 	{
 		List<CodeableConcept> a_ = medicationRequest?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1260,7 +1290,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1269,7 +1300,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1278,7 +1310,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("isDischarge")]
     [CqlTag("description", "Returns true if the given MedicationRequest has a category of Discharge")]
-	public bool? isDischarge(MedicationRequest medicationRequest)
+	public  bool? isDischarge(MedicationRequest medicationRequest)
 	{
 		List<CodeableConcept> a_ = medicationRequest?.Category;
 		CqlConcept b_(CodeableConcept @this)
@@ -1286,7 +1318,8 @@ public class QICoreCommon_2_0_000
 			CqlConcept g_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 		bool? d_(CqlConcept C)
 		{
@@ -1295,7 +1328,8 @@ public class QICoreCommon_2_0_000
 			bool? j_ = context.Operators.Equivalent(C, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
 		bool? f_ = context.Operators.Exists<CqlConcept>(e_);
 
@@ -1304,7 +1338,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("doNotPerform")]
     [CqlTag("description", "Returns true if the given DeviceRequest is a negation (i.e. do not perform this order)")]
-	public bool? doNotPerform(DeviceRequest deviceRequest)
+	public  bool? doNotPerform(DeviceRequest deviceRequest)
 	{
 		bool? a_(Extension E)
 		{
@@ -1313,7 +1347,8 @@ public class QICoreCommon_2_0_000
 			bool? h_ = context.Operators.Equal(g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Extension> b_ = context.Operators.Where<Extension>(((deviceRequest is DomainResource)
 				? ((IEnumerable<Extension>)(deviceRequest as DomainResource).ModifierExtension)
 				: default), a_);
@@ -1323,7 +1358,8 @@ public class QICoreCommon_2_0_000
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 
 			return (j_ as bool?);
-		};
+		}
+;
 		IEnumerable<bool?> d_ = context.Operators.Select<Extension, bool?>(b_, c_);
 		bool? e_ = context.Operators.SingletonFrom<bool?>(d_);
 
@@ -1334,7 +1370,7 @@ public class QICoreCommon_2_0_000
     [CqlTag("description", "Normalizes a value that is a choice of timing-valued types to an equivalent interval")]
     [CqlTag("comment", "Normalizes a choice type of DateTime, Quanitty, Interval<DateTime>, or Interval<Quantity> types to an equivalent interval. This selection of choice types is a superset of the majority of choice types that are used as possible representations for timing-valued elements in QICore, allowing this function to be used across any resource. The input can be provided as a DateTime, Quantity, Interval<DateTime> or Interval<Quantity>. The intent of this function is to provide a clear and concise mechanism to treat single elements that have multiple possible representations as intervals so that logic doesn't have to account for the variability. More complex calculations (such as medication request period or dispense period calculation) need specific guidance and consideration. That guidance may make use of this function, but the focus of this function is on single element calculations where the semantics are unambiguous. If the input is a DateTime, the result a DateTime Interval beginning and ending on that DateTime. If the input is a Quantity, the quantity is expected to be a calendar-duration interpreted as an Age, and the result is a DateTime Interval beginning on the Date the patient turned that age and ending immediately before one year later. If the input is a DateTime Interval, the result is the input. If the input is a Quantity Interval, the quantities are expected to be calendar-durations interpreted as an Age, and the result is a DateTime Interval beginning on the date the patient turned the age given as the start of the quantity interval, and ending immediately before one year later than the date the patient turned the age given as the end of the quantity interval. If the input is a Timing, an error will be thrown indicating that Timing calculations are not implemented. Any other input will reslt in a null DateTime Interval")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `toInterval()` instead")]
-	public CqlInterval<CqlDateTime> ToInterval(object choice)
+	public  CqlInterval<CqlDateTime> ToInterval(object choice)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1468,7 +1504,8 @@ public class QICoreCommon_2_0_000
 			{
 				return (null as CqlInterval<CqlDateTime>);
 			}
-		};
+		}
+;
 
 		return a_();
 	}
@@ -1476,7 +1513,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("toInterval")]
     [CqlTag("description", "Normalizes a value that is a choice of timing-valued types to an equivalent interval")]
     [CqlTag("comment", "Normalizes a choice type of DateTime, Quanitty, Interval<DateTime>, or Interval<Quantity> types to an equivalent interval. This selection of choice types is a superset of the majority of choice types that are used as possible representations for timing-valued elements in QICore, allowing this function to be used across any resource. The input can be provided as a DateTime, Quantity, Interval<DateTime> or Interval<Quantity>. The intent of this function is to provide a clear and concise mechanism to treat single elements that have multiple possible representations as intervals so that logic doesn't have to account for the variability. More complex calculations (such as medication request period or dispense period calculation) need specific guidance and consideration. That guidance may make use of this function, but the focus of this function is on single element calculations where the semantics are unambiguous. If the input is a DateTime, the result a DateTime Interval beginning and ending on that DateTime. If the input is a Quantity, the quantity is expected to be a calendar-duration interpreted as an Age, and the result is a DateTime Interval beginning on the Date the patient turned that age and ending immediately before one year later. If the input is a DateTime Interval, the result is the input. If the input is a Quantity Interval, the quantities are expected to be calendar-durations interpreted as an Age, and the result is a DateTime Interval beginning on the date the patient turned the age given as the start of the quantity interval, and ending immediately before one year later than the date the patient turned the age given as the end of the quantity interval. If the input is a Timing, an error will be thrown indicating that Timing calculations are not implemented. Any other input will reslt in a null DateTime Interval")]
-	public CqlInterval<CqlDateTime> toInterval(object choice)
+	public  CqlInterval<CqlDateTime> toInterval(object choice)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1610,7 +1647,8 @@ public class QICoreCommon_2_0_000
 			{
 				return (null as CqlInterval<CqlDateTime>);
 			}
-		};
+		}
+;
 
 		return a_();
 	}
@@ -1619,7 +1657,7 @@ public class QICoreCommon_2_0_000
     [CqlTag("description", "Returns an interval representing the normalized abatement of a given Condition.")]
     [CqlTag("comment", "If the abatement element of the Condition is represented as a DateTime, the result is an interval beginning and ending on that DateTime. If the abatement is represented as a Quantity, the quantity is expected to be a calendar-duration and is interpreted as the age of the patient. The result is an interval from the date the patient turned that age to immediately before one year later. If the abatement is represented as a Quantity Interval, the quantities are expected to be calendar-durations and are interpreted as an age range during which the abatement occurred. The result is an interval from the date the patient turned the starting age of the quantity interval, and ending immediately before one year later than the date the patient turned the ending age of the quantity interval.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `abatementInterval()` instead.")]
-	public CqlInterval<CqlDateTime> ToAbatementInterval(Condition condition)
+	public  CqlInterval<CqlDateTime> ToAbatementInterval(Condition condition)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1630,7 +1668,8 @@ public class QICoreCommon_2_0_000
 				bool h_ = g_ is CqlDateTime;
 
 				return h_;
-			};
+			}
+;
 			bool c_()
 			{
 				DataType i_ = condition?.Abatement;
@@ -1638,7 +1677,8 @@ public class QICoreCommon_2_0_000
 				bool k_ = j_ is CqlQuantity;
 
 				return k_;
-			};
+			}
+;
 			bool d_()
 			{
 				DataType l_ = condition?.Abatement;
@@ -1646,7 +1686,8 @@ public class QICoreCommon_2_0_000
 				bool n_ = m_ is CqlInterval<CqlQuantity>;
 
 				return n_;
-			};
+			}
+;
 			bool e_()
 			{
 				DataType o_ = condition?.Abatement;
@@ -1654,7 +1695,8 @@ public class QICoreCommon_2_0_000
 				bool q_ = p_ is CqlInterval<CqlDateTime>;
 
 				return q_;
-			};
+			}
+;
 			if (b_())
 			{
 				DataType r_ = condition?.Abatement;
@@ -1813,7 +1855,8 @@ public class QICoreCommon_2_0_000
 			{
 				return (null as CqlInterval<CqlDateTime>);
 			}
-		};
+		}
+;
 
 		return a_();
 	}
@@ -1821,7 +1864,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("abatementInterval")]
     [CqlTag("description", "Returns an interval representing the normalized abatement of a given Condition.")]
     [CqlTag("comment", "If the abatement element of the Condition is represented as a DateTime, the result is an interval beginning and ending on that DateTime. If the abatement is represented as a Quantity, the quantity is expected to be a calendar-duration and is interpreted as the age of the patient. The result is an interval from the date the patient turned that age to immediately before one year later. If the abatement is represented as a Quantity Interval, the quantities are expected to be calendar-durations and are interpreted as an age range during which the abatement occurred. The result is an interval from the date the patient turned the starting age of the quantity interval, and ending immediately before one year later than the date the patient turned the ending age of the quantity interval.")]
-	public CqlInterval<CqlDateTime> abatementInterval(Condition condition)
+	public  CqlInterval<CqlDateTime> abatementInterval(Condition condition)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1832,7 +1875,8 @@ public class QICoreCommon_2_0_000
 				bool h_ = g_ is CqlDateTime;
 
 				return h_;
-			};
+			}
+;
 			bool c_()
 			{
 				DataType i_ = condition?.Abatement;
@@ -1840,7 +1884,8 @@ public class QICoreCommon_2_0_000
 				bool k_ = j_ is CqlQuantity;
 
 				return k_;
-			};
+			}
+;
 			bool d_()
 			{
 				DataType l_ = condition?.Abatement;
@@ -1848,7 +1893,8 @@ public class QICoreCommon_2_0_000
 				bool n_ = m_ is CqlInterval<CqlQuantity>;
 
 				return n_;
-			};
+			}
+;
 			bool e_()
 			{
 				DataType o_ = condition?.Abatement;
@@ -1856,7 +1902,8 @@ public class QICoreCommon_2_0_000
 				bool q_ = p_ is CqlInterval<CqlDateTime>;
 
 				return q_;
-			};
+			}
+;
 			if (b_())
 			{
 				DataType r_ = condition?.Abatement;
@@ -2015,7 +2062,8 @@ public class QICoreCommon_2_0_000
 			{
 				return (null as CqlInterval<CqlDateTime>);
 			}
-		};
+		}
+;
 
 		return a_();
 	}
@@ -2024,7 +2072,7 @@ public class QICoreCommon_2_0_000
     [CqlTag("description", "Returns an interval representing the normalized prevalence period of a given Condition.")]
     [CqlTag("comment", "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting interval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.")]
     [CqlTag("deprecated", "This function is deprecated. Use the `prevalenceInterval()` fluent function instead")]
-	public CqlInterval<CqlDateTime> ToPrevalenceInterval(Condition condition)
+	public  CqlInterval<CqlDateTime> ToPrevalenceInterval(Condition condition)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -2047,7 +2095,8 @@ public class QICoreCommon_2_0_000
 				bool? s_ = context.Operators.Or(m_, r_);
 
 				return (s_ ?? false);
-			};
+			}
+;
 			if (b_())
 			{
 				DataType t_ = condition?.Onset;
@@ -2091,16 +2140,19 @@ public class QICoreCommon_2_0_000
 
 							return aq_;
 						}
-					};
+					}
+;
 
 					return ag_();
-				};
+				}
+;
 				IEnumerable<CqlInterval<CqlDateTime>> ae_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)ac_, ad_);
 				CqlInterval<CqlDateTime> af_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(ae_);
 
 				return af_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
@@ -2108,7 +2160,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("prevalenceInterval")]
     [CqlTag("description", "Returns an interval representing the normalized prevalence period of a given Condition.")]
     [CqlTag("comment", "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting interval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.")]
-	public CqlInterval<CqlDateTime> prevalenceInterval(Condition condition)
+	public  CqlInterval<CqlDateTime> prevalenceInterval(Condition condition)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -2131,7 +2183,8 @@ public class QICoreCommon_2_0_000
 				bool? s_ = context.Operators.Or(m_, r_);
 
 				return (s_ ?? false);
-			};
+			}
+;
 			if (b_())
 			{
 				DataType t_ = condition?.Onset;
@@ -2175,16 +2228,19 @@ public class QICoreCommon_2_0_000
 
 							return aq_;
 						}
-					};
+					}
+;
 
 					return ag_();
-				};
+				}
+;
 				IEnumerable<CqlInterval<CqlDateTime>> ae_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)ac_, ad_);
 				CqlInterval<CqlDateTime> af_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(ae_);
 
 				return af_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
@@ -2193,7 +2249,7 @@ public class QICoreCommon_2_0_000
     [CqlTag("description", "Returns the tail of the given uri (i.e. everything after the last slash in the URI).")]
     [CqlTag("comment", "This function can be used to determine the logical id of a given resource. It can be used in a single-server environment to trace references. However, this function does not attempt to resolve or distinguish the base of the given url, and so cannot be used safely in multi-server environments.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getId()` instead")]
-	public string GetId(string uri)
+	public  string GetId(string uri)
 	{
 		IEnumerable<string> a_ = context.Operators.Split(uri, "/");
 		string b_ = context.Operators.Last<string>(a_);
@@ -2204,7 +2260,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("getId")]
     [CqlTag("description", "Returns the tail of the given uri (i.e. everything after the last slash in the URI).")]
     [CqlTag("comment", "This function can be used to determine the logical id of a given resource. It can be used in a single-server environment to trace references. However, this function does not attempt to resolve or distinguish the base of the given url, and so cannot be used safely in multi-server environments.")]
-	public string getId(string uri)
+	public  string getId(string uri)
 	{
 		IEnumerable<string> a_ = context.Operators.Split(uri, "/");
 		string b_ = context.Operators.Last<string>(a_);
@@ -2215,7 +2271,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("HasStart")]
     [CqlTag("description", "Given an interval, return true if the interval has a starting boundary specified (i.e. the start of the interval is not null and not the minimum DateTime value)")]
     [CqlTag("deprecated", "This function is deprecated. Uee the fluent function `hasStart()` instead")]
-	public bool? HasStart(CqlInterval<CqlDateTime> period)
+	public  bool? HasStart(CqlInterval<CqlDateTime> period)
 	{
 		CqlDateTime a_ = context.Operators.Start(period);
 		CqlDateTime c_ = context.Operators.MinValue<CqlDateTime>();
@@ -2228,7 +2284,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("hasStart")]
     [CqlTag("description", "Given an interval, return true if the interval has a starting boundary specified (i.e. the start of the interval is not null and not the minimum DateTime value)")]
-	public bool? hasStart(CqlInterval<CqlDateTime> period)
+	public  bool? hasStart(CqlInterval<CqlDateTime> period)
 	{
 		CqlDateTime a_ = context.Operators.Start(period);
 		CqlDateTime c_ = context.Operators.MinValue<CqlDateTime>();
@@ -2242,7 +2298,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("HasEnd")]
     [CqlTag("description", "Given an interval, returns true if the interval has an ending boundary specified (i.e. the end of the interval is not null and not the maximum DateTime value)")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hasEnd()` instead")]
-	public bool? HasEnd(CqlInterval<CqlDateTime> period)
+	public  bool? HasEnd(CqlInterval<CqlDateTime> period)
 	{
 		CqlDateTime a_ = context.Operators.End(period);
 		CqlDateTime c_ = context.Operators.MaxValue<CqlDateTime>();
@@ -2255,7 +2311,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("hasEnd")]
     [CqlTag("description", "Given an interval, returns true if the interval has an ending boundary specified (i.e. the end of the interval is not null and not the maximum DateTime value)")]
-	public bool? hasEnd(CqlInterval<CqlDateTime> period)
+	public  bool? hasEnd(CqlInterval<CqlDateTime> period)
 	{
 		CqlDateTime a_ = context.Operators.End(period);
 		CqlDateTime c_ = context.Operators.MaxValue<CqlDateTime>();
@@ -2269,7 +2325,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("Latest")]
     [CqlTag("description", "Given an interval, returns the ending point if the interval has an ending boundary specified, otherwise, returns the starting point")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `latest()` instead")]
-	public CqlDateTime Latest(object choice)
+	public  CqlDateTime Latest(object choice)
 	{
 		CqlInterval<CqlDateTime> a_ = this.toInterval(choice);
 		CqlInterval<CqlDateTime>[] b_ = [
@@ -2291,10 +2347,12 @@ public class QICoreCommon_2_0_000
 
 					return h_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
@@ -2303,7 +2361,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("latest")]
     [CqlTag("description", "Given an interval, returns the ending point if the interval has an ending boundary specified, otherwise, returns the starting point")]
-	public CqlDateTime latest(object choice)
+	public  CqlDateTime latest(object choice)
 	{
 		CqlInterval<CqlDateTime> a_ = this.toInterval(choice);
 		CqlInterval<CqlDateTime>[] b_ = [
@@ -2325,10 +2383,12 @@ public class QICoreCommon_2_0_000
 
 					return h_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
@@ -2338,7 +2398,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("Earliest")]
     [CqlTag("description", "Given an interval, return the starting point if the interval has a starting boundary specified, otherwise, return the ending point")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `earliest()` instead")]
-	public CqlDateTime Earliest(object choice)
+	public  CqlDateTime Earliest(object choice)
 	{
 		CqlInterval<CqlDateTime> a_ = this.toInterval(choice);
 		CqlInterval<CqlDateTime>[] b_ = [
@@ -2360,10 +2420,12 @@ public class QICoreCommon_2_0_000
 
 					return h_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
@@ -2372,7 +2434,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("earliest")]
     [CqlTag("description", "Given an interval, return the starting point if the interval has a starting boundary specified, otherwise, return the ending point")]
-	public CqlDateTime earliest(object choice)
+	public  CqlDateTime earliest(object choice)
 	{
 		CqlInterval<CqlDateTime> a_ = this.toInterval(choice);
 		CqlInterval<CqlDateTime>[] b_ = [
@@ -2394,10 +2456,12 @@ public class QICoreCommon_2_0_000
 
 					return h_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
@@ -2407,7 +2471,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("Interval To Day Numbers")]
     [CqlTag("description", "Creates a list of integers from 1 to how many days are in the interval. Note, this wont create an index for the final day if it is less than 24 hours. This also includes the first 24 hour period.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `toDayNumbers()` instead")]
-	public IEnumerable<int?> Interval_To_Day_Numbers(CqlInterval<CqlDateTime> Period)
+	public  IEnumerable<int?> Interval_To_Day_Numbers(CqlInterval<CqlDateTime> Period)
 	{
 		CqlDateTime a_ = context.Operators.Start(Period);
 		CqlDateTime b_ = context.Operators.End(Period);
@@ -2422,7 +2486,8 @@ public class QICoreCommon_2_0_000
 			int? i_ = context.Operators.End(DayNumber);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<int?> h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
 
 		return h_;
@@ -2430,7 +2495,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("toDayNumbers")]
     [CqlTag("description", "Creates a list of integers from 1 to how many days are in the interval. Note, this wont create an index for the final day if it is less than 24 hours. This also includes the first 24 hour period.")]
-	public IEnumerable<int?> toDayNumbers(CqlInterval<CqlDateTime> Period)
+	public  IEnumerable<int?> toDayNumbers(CqlInterval<CqlDateTime> Period)
 	{
 		CqlDateTime a_ = context.Operators.Start(Period);
 		CqlDateTime b_ = context.Operators.End(Period);
@@ -2445,7 +2510,8 @@ public class QICoreCommon_2_0_000
 			int? i_ = context.Operators.End(DayNumber);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<int?> h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
 
 		return h_;
@@ -2454,7 +2520,7 @@ public class QICoreCommon_2_0_000
     [CqlDeclaration("Days In Period")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is. Note that the result will include intervals that are closed at the beginning and open at the end")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `daysInPeriod()` instead")]
-	public IEnumerable<(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> Days_In_Period(CqlInterval<CqlDateTime> Period)
+	public  IEnumerable<(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> Days_In_Period(CqlInterval<CqlDateTime> Period)
 	{
 		IEnumerable<int?> a_ = this.Interval_To_Day_Numbers(Period);
 		(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? b_(int? DayIndex)
@@ -2480,7 +2546,8 @@ public class QICoreCommon_2_0_000
 					bool? v_ = context.Operators.Less(u_, 24);
 
 					return (v_ ?? false);
-				};
+				}
+;
 				if (m_())
 				{
 					CqlDateTime w_ = context.Operators.Start(Period);
@@ -2502,12 +2569,14 @@ public class QICoreCommon_2_0_000
 
 					return ag_;
 				}
-			};
+			}
+;
 			CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_(), true, false);
 			(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? l_ = (DayIndex, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> c_ = context.Operators.Select<int?, (int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(a_, b_);
 
 		return c_;
@@ -2515,7 +2584,7 @@ public class QICoreCommon_2_0_000
 
     [CqlDeclaration("daysInPeriod")]
     [CqlTag("description", "Creates a list of 24 hour long intervals in an interval paired with the index (1 indexed) to which 24 hour interval it is. Note that the result will include intervals that are closed at the beginning and open at the end")]
-	public IEnumerable<(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> daysInPeriod(CqlInterval<CqlDateTime> Period)
+	public  IEnumerable<(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> daysInPeriod(CqlInterval<CqlDateTime> Period)
 	{
 		IEnumerable<int?> a_ = this.Interval_To_Day_Numbers(Period);
 		(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? b_(int? DayIndex)
@@ -2541,7 +2610,8 @@ public class QICoreCommon_2_0_000
 					bool? v_ = context.Operators.Less(u_, 24);
 
 					return (v_ ?? false);
-				};
+				}
+;
 				if (m_())
 				{
 					CqlDateTime w_ = context.Operators.Start(Period);
@@ -2563,12 +2633,14 @@ public class QICoreCommon_2_0_000
 
 					return ag_;
 				}
-			};
+			}
+;
 			CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_(), true, false);
 			(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? l_ = (DayIndex, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<(int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> c_ = context.Operators.Select<int?, (int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(a_, b_);
 
 		return c_;

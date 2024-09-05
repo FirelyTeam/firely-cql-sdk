@@ -113,94 +113,94 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet COVID_19_Value() => 
+	private  CqlValueSet COVID_19_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.140", default);
 
     [CqlDeclaration("COVID 19")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.140")]
-	public CqlValueSet COVID_19() => 
+	public  CqlValueSet COVID_19() => 
 		__COVID_19.Value;
 
-	private CqlValueSet Emergency_Department_Visit_Value() => 
+	private  CqlValueSet Emergency_Department_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public CqlValueSet Emergency_Department_Visit() => 
+	public  CqlValueSet Emergency_Department_Visit() => 
 		__Emergency_Department_Visit.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+	private  CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+	public  CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine_Value() => 
+	private  CqlValueSet Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198", default);
 
     [CqlDeclaration("Not Present On Admission or Documentation Insufficient to Determine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198")]
-	public CqlValueSet Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine() => 
+	public  CqlValueSet Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine() => 
 		__Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine.Value;
 
-	private CqlValueSet Observation_Services_Value() => 
+	private  CqlValueSet Observation_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public CqlValueSet Observation_Services() => 
+	public  CqlValueSet Observation_Services() => 
 		__Observation_Services.Value;
 
-	private CqlValueSet Present_on_Admission_or_Clinically_Undetermined_Value() => 
+	private  CqlValueSet Present_on_Admission_or_Clinically_Undetermined_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default);
 
     [CqlDeclaration("Present on Admission or Clinically Undetermined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197")]
-	public CqlValueSet Present_on_Admission_or_Clinically_Undetermined() => 
+	public  CqlValueSet Present_on_Admission_or_Clinically_Undetermined() => 
 		__Present_on_Admission_or_Clinically_Undetermined.Value;
 
-	private CqlValueSet Pressure_Injury_Deep_Tissue_Value() => 
+	private  CqlValueSet Pressure_Injury_Deep_Tissue_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.112", default);
 
     [CqlDeclaration("Pressure Injury Deep Tissue")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.112")]
-	public CqlValueSet Pressure_Injury_Deep_Tissue() => 
+	public  CqlValueSet Pressure_Injury_Deep_Tissue() => 
 		__Pressure_Injury_Deep_Tissue.Value;
 
-	private CqlValueSet Pressure_Injury_Deep_Tissue_Diagnoses_Value() => 
+	private  CqlValueSet Pressure_Injury_Deep_Tissue_Diagnoses_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.194", default);
 
     [CqlDeclaration("Pressure Injury Deep Tissue Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.194")]
-	public CqlValueSet Pressure_Injury_Deep_Tissue_Diagnoses() => 
+	public  CqlValueSet Pressure_Injury_Deep_Tissue_Diagnoses() => 
 		__Pressure_Injury_Deep_Tissue_Diagnoses.Value;
 
-	private CqlValueSet Pressure_Injury_Stage_2__3__4_or_Unstageable_Value() => 
+	private  CqlValueSet Pressure_Injury_Stage_2__3__4_or_Unstageable_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.113", default);
 
     [CqlDeclaration("Pressure Injury Stage 2, 3, 4 or Unstageable")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.113")]
-	public CqlValueSet Pressure_Injury_Stage_2__3__4_or_Unstageable() => 
+	public  CqlValueSet Pressure_Injury_Stage_2__3__4_or_Unstageable() => 
 		__Pressure_Injury_Stage_2__3__4_or_Unstageable.Value;
 
-	private CqlValueSet Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses_Value() => 
+	private  CqlValueSet Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.196", default);
 
     [CqlDeclaration("Pressure Injury Stage 2, 3, 4, or Unstageable Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.196")]
-	public CqlValueSet Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses() => 
+	public  CqlValueSet Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses() => 
 		__Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses.Value;
 
-	private CqlCode Physical_findings_of_Skin_Value() => 
+	private  CqlCode Physical_findings_of_Skin_Value() => 
 		new CqlCode("8709-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Physical findings of Skin")]
-	public CqlCode Physical_findings_of_Skin() => 
+	public  CqlCode Physical_findings_of_Skin() => 
 		__Physical_findings_of_Skin.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("8709-8", "http://loinc.org", default, default),
@@ -210,10 +210,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -224,10 +224,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -236,10 +236,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Age_18_and_Older_Value()
+	private  IEnumerable<Encounter> Encounter_with_Age_18_and_Older_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -267,17 +267,18 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 			bool? y_ = context.Operators.And(t_, x_);
 
 			return y_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Encounter with Age 18 and Older")]
-	public IEnumerable<Encounter> Encounter_with_Age_18_and_Older() => 
+	public  IEnumerable<Encounter> Encounter_with_Age_18_and_Older() => 
 		__Encounter_with_Age_18_and_Older.Value;
 
-	private IEnumerable<Encounter> Initial_Population_Value()
+	private  IEnumerable<Encounter> Initial_Population_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 
@@ -285,10 +286,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public IEnumerable<Encounter> Initial_Population() => 
+	public  IEnumerable<Encounter> Initial_Population() => 
 		__Initial_Population.Value;
 
-	private IEnumerable<Encounter> Denominator_Value()
+	private  IEnumerable<Encounter> Denominator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population();
 
@@ -296,10 +297,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public IEnumerable<Encounter> Denominator() => 
+	public  IEnumerable<Encounter> Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Indicator_Value()
+	private  IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Indicator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 		bool? b_(Encounter InpatientHospitalization)
@@ -320,7 +321,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return y_;
-				};
+				}
+;
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: default), n_);
@@ -329,7 +331,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					DataType z_ = @this?.Value;
 
 					return z_;
-				};
+				}
+;
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
 				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
@@ -338,22 +341,24 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? v_ = context.Operators.And(m_, u_);
 
 				return v_;
-			};
+			}
+;
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Deep Tissue Pressure Injury POA by Indicator")]
-	public IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Indicator() => 
+	public  IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Indicator() => 
 		__Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Indicator.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Skin_Exam_within_First_72_Hours_Value()
+	private  IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Skin_Exam_within_First_72_Hours_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 		IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
@@ -392,24 +397,27 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? ah_ = context.Operators.And(ac_, ag_);
 
 				return ah_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
 				InpatientHospitalization;
+;
 			IEnumerable<Encounter> j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Deep Tissue Pressure Injury POA by Skin Exam within First 72 Hours")]
-	public IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Skin_Exam_within_First_72_Hours() => 
+	public  IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Skin_Exam_within_First_72_Hours() => 
 		__Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Skin_Exam_within_First_72_Hours.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_Value()
+	private  IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Indicator();
 		IEnumerable<Encounter> b_ = this.Encounter_with_Deep_Tissue_Pressure_Injury_POA_by_Skin_Exam_within_First_72_Hours();
@@ -419,10 +427,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Encounter with Deep Tissue Pressure Injury POA")]
-	public IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA() => 
+	public  IEnumerable<Encounter> Encounter_with_Deep_Tissue_Pressure_Injury_POA() => 
 		__Encounter_with_Deep_Tissue_Pressure_Injury_POA.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Stage_2__3__4__or_Unstageable_Pressure_Injury_Present_on_Admission_by_POA_Indicator_Value()
+	private  IEnumerable<Encounter> Encounter_with_Stage_2__3__4__or_Unstageable_Pressure_Injury_Present_on_Admission_by_POA_Indicator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 		bool? b_(Encounter InpatientHospitalization)
@@ -443,7 +451,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return y_;
-				};
+				}
+;
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: default), n_);
@@ -452,7 +461,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					DataType z_ = @this?.Value;
 
 					return z_;
-				};
+				}
+;
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
 				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
@@ -461,22 +471,24 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? v_ = context.Operators.And(m_, u_);
 
 				return v_;
-			};
+			}
+;
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Stage 2, 3, 4, or Unstageable Pressure Injury Present on Admission by POA Indicator")]
-	public IEnumerable<Encounter> Encounter_with_Stage_2__3__4__or_Unstageable_Pressure_Injury_Present_on_Admission_by_POA_Indicator() => 
+	public  IEnumerable<Encounter> Encounter_with_Stage_2__3__4__or_Unstageable_Pressure_Injury_Present_on_Admission_by_POA_Indicator() => 
 		__Encounter_with_Stage_2__3__4__or_Unstageable_Pressure_Injury_Present_on_Admission_by_POA_Indicator.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA_by_Skin_Exam_within_24_Hours_Value()
+	private  IEnumerable<Encounter> Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA_by_Skin_Exam_within_24_Hours_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 		IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
@@ -515,24 +527,27 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? ah_ = context.Operators.And(ac_, ag_);
 
 				return ah_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
 				InpatientHospitalization;
+;
 			IEnumerable<Encounter> j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Stage 2, 3, 4 or Unstageable Pressure Injury POA by Skin Exam within 24 Hours")]
-	public IEnumerable<Encounter> Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA_by_Skin_Exam_within_24_Hours() => 
+	public  IEnumerable<Encounter> Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA_by_Skin_Exam_within_24_Hours() => 
 		__Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA_by_Skin_Exam_within_24_Hours.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA_Value()
+	private  IEnumerable<Encounter> Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Stage_2__3__4__or_Unstageable_Pressure_Injury_Present_on_Admission_by_POA_Indicator();
 		IEnumerable<Encounter> b_ = this.Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA_by_Skin_Exam_within_24_Hours();
@@ -542,10 +557,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Encounter with Stage 2, 3, 4 or Unstageable Pressure Injury POA")]
-	public IEnumerable<Encounter> Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA() => 
+	public  IEnumerable<Encounter> Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA() => 
 		__Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Diagnosis_of_COVID19_Infection_Value()
+	private  IEnumerable<Encounter> Encounter_with_Diagnosis_of_COVID19_Infection_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 		bool? b_(Encounter InpatientHospitalization)
@@ -559,22 +574,24 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? k_ = context.Operators.ConceptInValueSet(i_, j_);
 
 				return k_;
-			};
+			}
+;
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 			bool? g_ = context.Operators.Exists<Condition>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Diagnosis of COVID19 Infection")]
-	public IEnumerable<Encounter> Encounter_with_Diagnosis_of_COVID19_Infection() => 
+	public  IEnumerable<Encounter> Encounter_with_Diagnosis_of_COVID19_Infection() => 
 		__Encounter_with_Diagnosis_of_COVID19_Infection.Value;
 
-	private IEnumerable<Encounter> Denominator_Exclusions_Value()
+	private  IEnumerable<Encounter> Denominator_Exclusions_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Deep_Tissue_Pressure_Injury_POA();
 		IEnumerable<Encounter> b_ = this.Encounter_with_Stage_2__3__4_or_Unstageable_Pressure_Injury_POA();
@@ -586,10 +603,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public IEnumerable<Encounter> Denominator_Exclusions() => 
+	public  IEnumerable<Encounter> Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA_by_Indicator_Value()
+	private  IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA_by_Indicator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 		bool? b_(Encounter InpatientHospitalization)
@@ -610,7 +627,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return y_;
-				};
+				}
+;
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
 						? ((EncounterDiag as Element).Extension)
 						: default), n_);
@@ -619,7 +637,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					DataType z_ = @this?.Value;
 
 					return z_;
-				};
+				}
+;
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
 				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
@@ -628,22 +647,24 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? v_ = context.Operators.And(m_, u_);
 
 				return v_;
-			};
+			}
+;
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with New Deep Tissue Pressure Injury Not POA by Indicator")]
-	public IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA_by_Indicator() => 
+	public  IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA_by_Indicator() => 
 		__Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA_by_Indicator.Value;
 
-	private IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_by_Skin_Exam_after_First_72_Hours_Value()
+	private  IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_by_Skin_Exam_after_First_72_Hours_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 		IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
@@ -687,7 +708,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					bool? as_ = context.Operators.Not((bool?)(ar_ is null));
 
 					return as_;
-				};
+				}
+;
 				IEnumerable<Observation.ComponentComponent> aj_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ah_, ai_);
 				CqlConcept ak_(Observation.ComponentComponent @this)
 				{
@@ -695,31 +717,35 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					CqlConcept au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 
 					return au_;
-				};
+				}
+;
 				IEnumerable<CqlConcept> al_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(aj_, ak_);
 				bool? an_ = context.Operators.ConceptsInValueSet(al_, af_);
 				bool? ao_ = context.Operators.Or(ag_, an_);
 				bool? ap_ = context.Operators.And(ac_, ao_);
 
 				return ap_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
 				InpatientHospitalization;
+;
 			IEnumerable<Encounter> j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with New Deep Tissue Pressure Injury by Skin Exam after First 72 Hours")]
-	public IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_by_Skin_Exam_after_First_72_Hours() => 
+	public  IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_by_Skin_Exam_after_First_72_Hours() => 
 		__Encounter_with_New_Deep_Tissue_Pressure_Injury_by_Skin_Exam_after_First_72_Hours.Value;
 
-	private IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA_Value()
+	private  IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA_by_Indicator();
 		IEnumerable<Encounter> b_ = this.Encounter_with_New_Deep_Tissue_Pressure_Injury_by_Skin_Exam_after_First_72_Hours();
@@ -729,10 +755,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Encounter with New Deep Tissue Pressure Injury Not POA")]
-	public IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA() => 
+	public  IEnumerable<Encounter> Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA() => 
 		__Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA.Value;
 
-	private IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA_by_Indicator_Value()
+	private  IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA_by_Indicator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 		bool? b_(Encounter InpatientHospitalization)
@@ -753,7 +779,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					bool? y_ = context.Operators.Equal(x_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return y_;
-				};
+				}
+;
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
 						? ((Stage234UnstageablePressureInjury as Element).Extension)
 						: default), n_);
@@ -762,7 +789,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					DataType z_ = @this?.Value;
 
 					return z_;
-				};
+				}
+;
 				IEnumerable<DataType> q_ = context.Operators.Select<Extension, DataType>(o_, p_);
 				DataType r_ = context.Operators.SingletonFrom<DataType>(q_);
 				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
@@ -771,22 +799,24 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? v_ = context.Operators.And(m_, u_);
 
 				return v_;
-			};
+			}
+;
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with New Stage 2, 3, 4 or Unstageable Pressure Injury Not POA by Indicator")]
-	public IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA_by_Indicator() => 
+	public  IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA_by_Indicator() => 
 		__Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA_by_Indicator.Value;
 
-	private IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_by_Skin_Exam_after_First_24_Hours_Value()
+	private  IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_by_Skin_Exam_after_First_24_Hours_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older();
 		IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
@@ -830,7 +860,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					bool? as_ = context.Operators.Not((bool?)(ar_ is null));
 
 					return as_;
-				};
+				}
+;
 				IEnumerable<Observation.ComponentComponent> aj_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ah_, ai_);
 				CqlConcept ak_(Observation.ComponentComponent @this)
 				{
@@ -838,31 +869,35 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					CqlConcept au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 
 					return au_;
-				};
+				}
+;
 				IEnumerable<CqlConcept> al_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(aj_, ak_);
 				bool? an_ = context.Operators.ConceptsInValueSet(al_, af_);
 				bool? ao_ = context.Operators.Or(ag_, an_);
 				bool? ap_ = context.Operators.And(ac_, ao_);
 
 				return ap_;
-			};
+			}
+;
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
 				InpatientHospitalization;
+;
 			IEnumerable<Encounter> j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with New Stage 2, 3, 4 or Unstageable Pressure Injury by Skin Exam after First 24 Hours")]
-	public IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_by_Skin_Exam_after_First_24_Hours() => 
+	public  IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_by_Skin_Exam_after_First_24_Hours() => 
 		__Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_by_Skin_Exam_after_First_24_Hours.Value;
 
-	private IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA_Value()
+	private  IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA_by_Indicator();
 		IEnumerable<Encounter> b_ = this.Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_by_Skin_Exam_after_First_24_Hours();
@@ -872,10 +907,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Encounter with New Stage 2, 3, 4 or Unstageable Pressure Injury Not POA")]
-	public IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA() => 
+	public  IEnumerable<Encounter> Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA() => 
 		__Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA.Value;
 
-	private IEnumerable<Encounter> Numerator_Value()
+	private  IEnumerable<Encounter> Numerator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_New_Deep_Tissue_Pressure_Injury_Not_POA();
 		IEnumerable<Encounter> b_ = this.Encounter_with_New_Stage_2__3__4_or_Unstageable_Pressure_Injury_Not_POA();
@@ -885,10 +920,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public IEnumerable<Encounter> Numerator() => 
+	public  IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -896,10 +931,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -907,10 +942,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -918,10 +953,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -929,7 +964,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
 }

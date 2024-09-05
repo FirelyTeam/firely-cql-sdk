@@ -5,16 +5,24 @@ Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.get -> System.
 Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.CSharpCodeWriterOptions() -> void
+Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.ExternalsAreAbstract.get -> bool?
+Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.ExternalsAreAbstract.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.Namespace.get -> string?
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.Namespace.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.TypeFormat.get -> Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.TypeFormat.set -> void
+Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.WriteVirtualMethods.get -> bool?
+Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.WriteVirtualMethods.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat.Explicit = 2 -> Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat.Var = 1 -> Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
 Hl7.Cql.CodeGeneration.NET.LibrarySetExtensions
+Hl7.Cql.CodeGeneration.NET.Polymorphism
+Hl7.Cql.CodeGeneration.NET.Polymorphism.Abstract = 1 -> Hl7.Cql.CodeGeneration.NET.Polymorphism
+Hl7.Cql.CodeGeneration.NET.Polymorphism.None = 0 -> Hl7.Cql.CodeGeneration.NET.Polymorphism
+Hl7.Cql.CodeGeneration.NET.Polymorphism.Virtual = 2 -> Hl7.Cql.CodeGeneration.NET.Polymorphism
 static Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 static Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 static Hl7.Cql.CodeGeneration.NET.LibrarySetExtensions.Compile(this Hl7.Cql.Compiler.LibrarySet! librarySet) -> System.Collections.Generic.IDictionary<string!, byte[]!>!

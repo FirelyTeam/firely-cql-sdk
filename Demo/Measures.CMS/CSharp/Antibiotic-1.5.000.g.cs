@@ -41,7 +41,7 @@ public class Antibiotic_1_5_000
 
     #endregion
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		object a_ = context.ResolveParameter("Antibiotic-1.5.000", "Measurement Period", null);
 
@@ -49,10 +49,10 @@ public class Antibiotic_1_5_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -61,11 +61,11 @@ public class Antibiotic_1_5_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("Has Comorbid Condition History")]
-	public IEnumerable<Encounter> Has_Comorbid_Condition_History(IEnumerable<Encounter> episodeDate, IEnumerable<Condition> comorbidConditions)
+	public  IEnumerable<Encounter> Has_Comorbid_Condition_History(IEnumerable<Encounter> episodeDate, IEnumerable<Condition> comorbidConditions)
 	{
 		IEnumerable<Encounter> a_(Encounter eDate)
 		{
@@ -89,24 +89,28 @@ public class Antibiotic_1_5_000
 				bool? y_ = context.Operators.In<CqlDate>(k_, x_, default);
 
 				return y_;
-			};
+			}
+;
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(comorbidConditions, e_);
 			Encounter g_(Condition comcondition) => 
 				eDate;
+;
 			IEnumerable<Encounter> h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
 		Encounter c_(Encounter eDate) => 
 			eDate;
+;
 		IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Has Competing Diagnosis History")]
-	public IEnumerable<Encounter> Has_Competing_Diagnosis_History(IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
+	public  IEnumerable<Encounter> Has_Competing_Diagnosis_History(IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
 	{
 		IEnumerable<Encounter> a_(Encounter eDate)
 		{
@@ -129,24 +133,28 @@ public class Antibiotic_1_5_000
 				bool? y_ = context.Operators.And(t_, x_);
 
 				return y_;
-			};
+			}
+;
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(competingConditions, e_);
 			Encounter g_(Condition competcondition) => 
 				eDate;
+;
 			IEnumerable<Encounter> h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
 		Encounter c_(Encounter eDate) => 
 			eDate;
+;
 		IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Has Antibiotic Medication History")]
-	public IEnumerable<Encounter> Has_Antibiotic_Medication_History(IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)
+	public  IEnumerable<Encounter> Has_Antibiotic_Medication_History(IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)
 	{
 		IEnumerable<Encounter> a_(Encounter DateOfEpisode)
 		{
@@ -159,14 +167,16 @@ public class Antibiotic_1_5_000
 					bool? p_ = context.Operators.Not((bool?)(o_ is null));
 
 					return p_;
-				};
+				}
+;
 				IEnumerable<Dosage> i_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)g_, h_);
 				Timing j_(Dosage @this)
 				{
 					Timing q_ = @this?.Timing;
 
 					return q_;
-				};
+				}
+;
 				IEnumerable<Timing> k_ = context.Operators.Select<Dosage, Timing>(i_, j_);
 				bool? l_(Timing T)
 				{
@@ -231,19 +241,23 @@ public class Antibiotic_1_5_000
 					bool? ck_ = context.Operators.Overlaps(u_, cj_, "day");
 
 					return ck_;
-				};
+				}
+;
 				IEnumerable<Timing> m_ = context.Operators.Where<Timing>(k_, l_);
 				bool? n_ = context.Operators.Exists<Timing>(m_);
 
 				return n_;
-			};
+			}
+;
 			IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(antibioticMedications, c_);
 			Encounter e_(MedicationRequest ActiveMedication) => 
 				DateOfEpisode;
+;
 			IEnumerable<Encounter> f_ = context.Operators.Select<MedicationRequest, Encounter>(d_, e_);
 
 			return f_;
-		};
+		}
+;
 		IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
 
 		return b_;

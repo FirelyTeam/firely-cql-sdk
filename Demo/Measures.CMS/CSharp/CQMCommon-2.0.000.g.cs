@@ -55,55 +55,55 @@ public class CQMCommon_2_0_000
 
     #endregion
 
-	private CqlValueSet Emergency_Department_Visit_Value() => 
+	private  CqlValueSet Emergency_Department_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public CqlValueSet Emergency_Department_Visit() => 
+	public  CqlValueSet Emergency_Department_Visit() => 
 		__Emergency_Department_Visit.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+	private  CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+	public  CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Intensive_Care_Unit_Value() => 
+	private  CqlValueSet Intensive_Care_Unit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", default);
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
-	public CqlValueSet Intensive_Care_Unit() => 
+	public  CqlValueSet Intensive_Care_Unit() => 
 		__Intensive_Care_Unit.Value;
 
-	private CqlValueSet Observation_Services_Value() => 
+	private  CqlValueSet Observation_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public CqlValueSet Observation_Services() => 
+	public  CqlValueSet Observation_Services() => 
 		__Observation_Services.Value;
 
-	private CqlValueSet Outpatient_Surgery_Service_Value() => 
+	private  CqlValueSet Outpatient_Surgery_Service_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38", default);
 
     [CqlDeclaration("Outpatient Surgery Service")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38")]
-	public CqlValueSet Outpatient_Surgery_Service() => 
+	public  CqlValueSet Outpatient_Surgery_Service() => 
 		__Outpatient_Surgery_Service.Value;
 
-	private CqlValueSet Present_on_Admission_or_Clinically_Undetermined_Value() => 
+	private  CqlValueSet Present_on_Admission_or_Clinically_Undetermined_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default);
 
     [CqlDeclaration("Present on Admission or Clinically Undetermined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197")]
-	public CqlValueSet Present_on_Admission_or_Clinically_Undetermined() => 
+	public  CqlValueSet Present_on_Admission_or_Clinically_Undetermined() => 
 		__Present_on_Admission_or_Clinically_Undetermined.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -114,10 +114,10 @@ public class CQMCommon_2_0_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -126,10 +126,10 @@ public class CQMCommon_2_0_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Encounter> Inpatient_Encounter_Value()
+	private  IEnumerable<Encounter> Inpatient_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -147,20 +147,21 @@ public class CQMCommon_2_0_000
 			bool? n_ = context.Operators.And(h_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Inpatient Encounter")]
-	public IEnumerable<Encounter> Inpatient_Encounter() => 
+	public  IEnumerable<Encounter> Inpatient_Encounter() => 
 		__Inpatient_Encounter.Value;
 
     [CqlDeclaration("ToDateInterval")]
     [CqlTag("description", "Returns an interval of date values extracted from the input interval of date-time values")]
     [CqlTag("comment", "This function returns an interval constructed using the `date from` extractor on the start and end values of the input date-time interval. Note that using a precision specifier such as `day of` as part of a timing phrase is preferred to communicate intent to perform day-level comparison, as well as for general readability.")]
-	public CqlInterval<CqlDate> ToDateInterval(CqlInterval<CqlDateTime> period)
+	public  CqlInterval<CqlDate> ToDateInterval(CqlInterval<CqlDateTime> period)
 	{
 		CqlDateTime a_ = context.Operators.Start(period);
 		CqlDate b_ = context.Operators.DateFrom(a_);
@@ -174,7 +175,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("LengthInDays")]
     [CqlTag("description", "Calculates the difference in calendar days between the start and end of the given interval.")]
     [CqlTag("deprecated", "This function in deprecated. Use the fluent function `lengthInDays()` instead.")]
-	public int? LengthInDays(CqlInterval<CqlDateTime> Value)
+	public  int? LengthInDays(CqlInterval<CqlDateTime> Value)
 	{
 		CqlDateTime a_ = context.Operators.Start(Value);
 		CqlDateTime b_ = context.Operators.End(Value);
@@ -185,7 +186,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("lengthInDays")]
     [CqlTag("description", "Calculates the difference in calendar days between the start and end of the given interval.")]
-	public int? lengthInDays(CqlInterval<CqlDateTime> Value)
+	public  int? lengthInDays(CqlInterval<CqlDateTime> Value)
 	{
 		CqlDateTime a_ = context.Operators.Start(Value);
 		CqlDateTime b_ = context.Operators.End(Value);
@@ -197,7 +198,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("ED Visit")]
     [CqlTag("description", "Returns the most recent emergency department visit, if any, that occurs 1 hour or less prior to the given encounter.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `edVisit()` instead.")]
-	public Encounter ED_Visit(Encounter TheEncounter)
+	public  Encounter ED_Visit(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -226,7 +227,8 @@ public class CQMCommon_2_0_000
 			bool? ad_ = context.Operators.And(k_, ac_);
 
 			return ad_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 		object e_(Encounter @this)
 		{
@@ -235,7 +237,8 @@ public class CQMCommon_2_0_000
 			CqlDateTime ag_ = context.Operators.End(af_);
 
 			return ag_;
-		};
+		}
+;
 		IEnumerable<Encounter> f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter g_ = context.Operators.Last<Encounter>(f_);
 
@@ -244,7 +247,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("edVisit")]
     [CqlTag("description", "Returns the most recent emergency department visit, if any, that occurs 1 hour or less prior to the given encounter.")]
-	public Encounter edVisit(Encounter TheEncounter)
+	public  Encounter edVisit(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -273,7 +276,8 @@ public class CQMCommon_2_0_000
 			bool? ad_ = context.Operators.And(k_, ac_);
 
 			return ad_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 		object e_(Encounter @this)
 		{
@@ -282,7 +286,8 @@ public class CQMCommon_2_0_000
 			CqlDateTime ag_ = context.Operators.End(af_);
 
 			return ag_;
-		};
+		}
+;
 		IEnumerable<Encounter> f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter g_ = context.Operators.Last<Encounter>(f_);
 
@@ -292,7 +297,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("Hospitalization")]
     [CqlTag("description", "Hospitalization returns the total interval for admission to discharge for the given encounter, or for the admission of any immediately prior emergency department visit to the discharge of the given encounter.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalization()` instead.")]
-	public CqlInterval<CqlDateTime> Hospitalization(Encounter TheEncounter)
+	public  CqlInterval<CqlDateTime> Hospitalization(Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(TheEncounter);
 		Encounter[] b_ = [
@@ -321,10 +326,12 @@ public class CQMCommon_2_0_000
 
 					return o_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
 		CqlInterval<CqlDateTime> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
@@ -333,7 +340,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalization")]
     [CqlTag("description", "Hospitalization returns the total interval for admission to discharge for the given encounter, or for the admission of any immediately prior emergency department visit to the discharge of the given encounter.")]
-	public CqlInterval<CqlDateTime> hospitalization(Encounter TheEncounter)
+	public  CqlInterval<CqlDateTime> hospitalization(Encounter TheEncounter)
 	{
 		Encounter a_ = this.edVisit(TheEncounter);
 		Encounter[] b_ = [
@@ -362,10 +369,12 @@ public class CQMCommon_2_0_000
 
 					return o_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
 		CqlInterval<CqlDateTime> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
@@ -375,7 +384,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("Hospitalization Locations")]
     [CqlTag("description", "Returns list of all locations within an encounter, including locations for immediately prior ED visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationLocations()` instead.")]
-	public IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(Encounter TheEncounter)
+	public  IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(TheEncounter);
 		Encounter[] b_ = [
@@ -403,10 +412,12 @@ public class CQMCommon_2_0_000
 
 					return k_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<IEnumerable<Encounter.LocationComponent>> d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
 		IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
 
@@ -415,7 +426,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalizationLocations")]
     [CqlTag("description", "Returns list of all locations within an encounter, including locations for immediately prior ED visit.")]
-	public IEnumerable<Encounter.LocationComponent> hospitalizationLocations(Encounter TheEncounter)
+	public  IEnumerable<Encounter.LocationComponent> hospitalizationLocations(Encounter TheEncounter)
 	{
 		Encounter a_ = this.edVisit(TheEncounter);
 		Encounter[] b_ = [
@@ -443,10 +454,12 @@ public class CQMCommon_2_0_000
 
 					return k_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<IEnumerable<Encounter.LocationComponent>> d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
 		IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
 
@@ -456,7 +469,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("Hospitalization Length of Stay")]
     [CqlTag("description", "Returns the length of stay in days (i.e. the number of days between admission and discharge) for the given encounter, or from the admission of any immediately prior emergency department visit to the discharge of the encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationLengthOfStay()` instead.")]
-	public int? Hospitalization_Length_of_Stay(Encounter TheEncounter)
+	public  int? Hospitalization_Length_of_Stay(Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Hospitalization(TheEncounter);
 		int? b_ = this.LengthInDays(a_);
@@ -466,7 +479,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalizationLengthOfStay")]
     [CqlTag("description", "Returns the length of stay in days (i.e. the number of days between admission and discharge) for the given encounter, or from the admission of any immediately prior emergency department visit to the discharge of the encounter")]
-	public int? hospitalizationLengthOfStay(Encounter TheEncounter)
+	public  int? hospitalizationLengthOfStay(Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.hospitalization(TheEncounter);
 		int? b_ = this.lengthInDays(a_);
@@ -477,7 +490,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("Hospital Admission Time")]
     [CqlTag("description", "Returns admission time for an encounter or for immediately prior emergency department visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalAdmissionTime()` instead.")]
-	public CqlDateTime Hospital_Admission_Time(Encounter TheEncounter)
+	public  CqlDateTime Hospital_Admission_Time(Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Hospitalization(TheEncounter);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -487,7 +500,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalAdmissionTime")]
     [CqlTag("description", "Returns admission time for an encounter or for immediately prior emergency department visit.")]
-	public CqlDateTime hospitalAdmissionTime(Encounter TheEncounter)
+	public  CqlDateTime hospitalAdmissionTime(Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.hospitalization(TheEncounter);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -498,7 +511,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("Hospital Discharge Time")]
     [CqlTag("description", "Hospital Discharge Time returns the discharge time for an encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalDischargeTime()` instead.")]
-	public CqlDateTime Hospital_Discharge_Time(Encounter TheEncounter)
+	public  CqlDateTime Hospital_Discharge_Time(Encounter TheEncounter)
 	{
 		Period a_ = TheEncounter?.Period;
 		CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_3_000.ToInterval(a_);
@@ -509,7 +522,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalDischargeTime")]
     [CqlTag("description", "Hospital Discharge Time returns the discharge time for an encounter")]
-	public CqlDateTime hospitalDischargeTime(Encounter TheEncounter)
+	public  CqlDateTime hospitalDischargeTime(Encounter TheEncounter)
 	{
 		Period a_ = TheEncounter?.Period;
 		CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_3_000.ToInterval(a_);
@@ -521,7 +534,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("Hospital Arrival Time")]
     [CqlTag("description", "Returns earliest arrival time for an encounter including any prior ED visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalArrivalTime()` instead.")]
-	public CqlDateTime Hospital_Arrival_Time(Encounter TheEncounter)
+	public  CqlDateTime Hospital_Arrival_Time(Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(TheEncounter);
 		object b_(Encounter.LocationComponent @this)
@@ -531,7 +544,8 @@ public class CQMCommon_2_0_000
 			CqlDateTime j_ = context.Operators.Start(i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter.LocationComponent d_ = context.Operators.First<Encounter.LocationComponent>(c_);
 		Period e_ = d_?.Period;
@@ -543,7 +557,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalArrivalTime")]
     [CqlTag("description", "Returns earliest arrival time for an encounter including any prior ED visit.")]
-	public CqlDateTime hospitalArrivalTime(Encounter TheEncounter)
+	public  CqlDateTime hospitalArrivalTime(Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.hospitalizationLocations(TheEncounter);
 		object b_(Encounter.LocationComponent @this)
@@ -553,7 +567,8 @@ public class CQMCommon_2_0_000
 			CqlDateTime j_ = context.Operators.Start(i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter.LocationComponent d_ = context.Operators.First<Encounter.LocationComponent>(c_);
 		Period e_ = d_?.Period;
@@ -566,7 +581,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("Hospital Departure Time")]
     [CqlTag("description", "Returns the latest departure time for encounter including any prior ED visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalDepartureTime()` instead.")]
-	public CqlDateTime Hospital_Departure_Time(Encounter TheEncounter)
+	public  CqlDateTime Hospital_Departure_Time(Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(TheEncounter);
 		object b_(Encounter.LocationComponent @this)
@@ -576,7 +591,8 @@ public class CQMCommon_2_0_000
 			CqlDateTime j_ = context.Operators.Start(i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter.LocationComponent d_ = context.Operators.Last<Encounter.LocationComponent>(c_);
 		Period e_ = d_?.Period;
@@ -588,7 +604,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalDepartureTime")]
     [CqlTag("description", "Returns the latest departure time for encounter including any prior ED visit.")]
-	public CqlDateTime hospitalDepartureTime(Encounter TheEncounter)
+	public  CqlDateTime hospitalDepartureTime(Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.hospitalizationLocations(TheEncounter);
 		object b_(Encounter.LocationComponent @this)
@@ -598,7 +614,8 @@ public class CQMCommon_2_0_000
 			CqlDateTime j_ = context.Operators.Start(i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter.LocationComponent d_ = context.Operators.Last<Encounter.LocationComponent>(c_);
 		Period e_ = d_?.Period;
@@ -611,7 +628,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("GetLocation")]
     [CqlTag("description", "Returns the Location resource specified by the given reference")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getLocation()` instead.")]
-	public Location GetLocation(ResourceReference reference)
+	public  Location GetLocation(ResourceReference reference)
 	{
 		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(default, default);
 		bool? b_(Location L)
@@ -624,7 +641,8 @@ public class CQMCommon_2_0_000
 			bool? j_ = context.Operators.Equal(f_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
 		Location d_ = context.Operators.SingletonFrom<Location>(c_);
 
@@ -633,7 +651,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("Emergency Department Arrival Time")]
     [CqlTag("description", "Returns the emergency department arrival time for the encounter.")]
-	public CqlDateTime Emergency_Department_Arrival_Time(Encounter TheEncounter)
+	public  CqlDateTime Emergency_Department_Arrival_Time(Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(TheEncounter);
 		bool? b_(Encounter.LocationComponent HospitalLocation)
@@ -646,13 +664,15 @@ public class CQMCommon_2_0_000
 				CqlConcept o_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return o_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
 			CqlValueSet m_ = this.Emergency_Department_Visit();
 			bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>(a_, b_);
 		Encounter.LocationComponent d_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(c_);
 		Period e_ = d_?.Period;
@@ -664,7 +684,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("emergencyDepartmentArrivalTime")]
     [CqlTag("description", "Returns the emergency department arrival time for the encounter.")]
-	public CqlDateTime emergencyDepartmentArrivalTime(Encounter TheEncounter)
+	public  CqlDateTime emergencyDepartmentArrivalTime(Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.hospitalizationLocations(TheEncounter);
 		bool? b_(Encounter.LocationComponent HospitalLocation)
@@ -677,13 +697,15 @@ public class CQMCommon_2_0_000
 				CqlConcept o_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return o_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
 			CqlValueSet m_ = this.Emergency_Department_Visit();
 			bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>(a_, b_);
 		Encounter.LocationComponent d_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(c_);
 		Period e_ = d_?.Period;
@@ -696,7 +718,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("HospitalizationWithObservationAndOutpatientSurgeryService")]
     [CqlTag("description", "Hospitalization with Observation and Outpatient Surgery Service returns the total interval from the start of any immediately prior emergency department visit, outpatient surgery visit or observation visit to the discharge of the given encounter.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationWithObservationAndOutpatientSurgeryService()` instead.")]
-	public CqlInterval<CqlDateTime> HospitalizationWithObservationAndOutpatientSurgeryService(Encounter TheEncounter)
+	public  CqlInterval<CqlDateTime> HospitalizationWithObservationAndOutpatientSurgeryService(Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
@@ -748,7 +770,8 @@ public class CQMCommon_2_0_000
 						bool? gm_ = context.Operators.And(ft_, gl_);
 
 						return gm_;
-					};
+					}
+;
 					IEnumerable<Encounter> dz_ = context.Operators.Where<Encounter>(dx_, dy_);
 					object ea_(Encounter @this)
 					{
@@ -757,7 +780,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime gp_ = context.Operators.End(go_);
 
 						return gp_;
-					};
+					}
+;
 					IEnumerable<Encounter> eb_ = context.Operators.SortBy<Encounter>(dz_, ea_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter ec_ = context.Operators.Last<Encounter>(eb_);
 					Period ed_ = ec_?.Period;
@@ -794,7 +818,8 @@ public class CQMCommon_2_0_000
 						bool? hm_ = context.Operators.And(gt_, hl_);
 
 						return hm_;
-					};
+					}
+;
 					IEnumerable<Encounter> eo_ = context.Operators.Where<Encounter>(em_, en_);
 					object ep_(Encounter @this)
 					{
@@ -803,7 +828,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime hp_ = context.Operators.End(ho_);
 
 						return hp_;
-					};
+					}
+;
 					IEnumerable<Encounter> eq_ = context.Operators.SortBy<Encounter>(eo_, ep_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter er_ = context.Operators.Last<Encounter>(eq_);
 					Period es_ = er_?.Period;
@@ -839,7 +865,8 @@ public class CQMCommon_2_0_000
 						bool? im_ = context.Operators.And(ht_, il_);
 
 						return im_;
-					};
+					}
+;
 					IEnumerable<Encounter> fd_ = context.Operators.Where<Encounter>(fb_, fc_);
 					object fe_(Encounter @this)
 					{
@@ -848,7 +875,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime ip_ = context.Operators.End(io_);
 
 						return ip_;
-					};
+					}
+;
 					IEnumerable<Encounter> ff_ = context.Operators.SortBy<Encounter>(fd_, fe_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter fg_ = context.Operators.Last<Encounter>(ff_);
 					Period fh_ = fg_?.Period;
@@ -861,7 +889,8 @@ public class CQMCommon_2_0_000
 					bool? fp_ = context.Operators.And(ds_, fo_);
 
 					return fp_;
-				};
+				}
+;
 				IEnumerable<Encounter> av_ = context.Operators.Where<Encounter>(at_, au_);
 				object aw_(Encounter @this)
 				{
@@ -870,7 +899,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime is_ = context.Operators.End(ir_);
 
 					return is_;
-				};
+				}
+;
 				IEnumerable<Encounter> ax_ = context.Operators.SortBy<Encounter>(av_, aw_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter ay_ = context.Operators.Last<Encounter>(ax_);
 				Period az_ = ay_?.Period;
@@ -903,7 +933,8 @@ public class CQMCommon_2_0_000
 					bool? jp_ = context.Operators.And(iw_, jo_);
 
 					return jp_;
-				};
+				}
+;
 				IEnumerable<Encounter> bf_ = context.Operators.Where<Encounter>(bd_, be_);
 				object bg_(Encounter @this)
 				{
@@ -912,7 +943,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime js_ = context.Operators.End(jr_);
 
 					return js_;
-				};
+				}
+;
 				IEnumerable<Encounter> bh_ = context.Operators.SortBy<Encounter>(bf_, bg_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bi_ = context.Operators.Last<Encounter>(bh_);
 				Period bj_ = bi_?.Period;
@@ -960,7 +992,8 @@ public class CQMCommon_2_0_000
 						bool? mq_ = context.Operators.And(lx_, mp_);
 
 						return mq_;
-					};
+					}
+;
 					IEnumerable<Encounter> kd_ = context.Operators.Where<Encounter>(kb_, kc_);
 					object ke_(Encounter @this)
 					{
@@ -969,7 +1002,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime mt_ = context.Operators.End(ms_);
 
 						return mt_;
-					};
+					}
+;
 					IEnumerable<Encounter> kf_ = context.Operators.SortBy<Encounter>(kd_, ke_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter kg_ = context.Operators.Last<Encounter>(kf_);
 					Period kh_ = kg_?.Period;
@@ -1006,7 +1040,8 @@ public class CQMCommon_2_0_000
 						bool? nq_ = context.Operators.And(mx_, np_);
 
 						return nq_;
-					};
+					}
+;
 					IEnumerable<Encounter> ks_ = context.Operators.Where<Encounter>(kq_, kr_);
 					object kt_(Encounter @this)
 					{
@@ -1015,7 +1050,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime nt_ = context.Operators.End(ns_);
 
 						return nt_;
-					};
+					}
+;
 					IEnumerable<Encounter> ku_ = context.Operators.SortBy<Encounter>(ks_, kt_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter kv_ = context.Operators.Last<Encounter>(ku_);
 					Period kw_ = kv_?.Period;
@@ -1051,7 +1087,8 @@ public class CQMCommon_2_0_000
 						bool? oq_ = context.Operators.And(nx_, op_);
 
 						return oq_;
-					};
+					}
+;
 					IEnumerable<Encounter> lh_ = context.Operators.Where<Encounter>(lf_, lg_);
 					object li_(Encounter @this)
 					{
@@ -1060,7 +1097,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime ot_ = context.Operators.End(os_);
 
 						return ot_;
-					};
+					}
+;
 					IEnumerable<Encounter> lj_ = context.Operators.SortBy<Encounter>(lh_, li_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter lk_ = context.Operators.Last<Encounter>(lj_);
 					Period ll_ = lk_?.Period;
@@ -1073,7 +1111,8 @@ public class CQMCommon_2_0_000
 					bool? lt_ = context.Operators.And(jw_, ls_);
 
 					return lt_;
-				};
+				}
+;
 				IEnumerable<Encounter> bu_ = context.Operators.Where<Encounter>(bs_, bt_);
 				object bv_(Encounter @this)
 				{
@@ -1082,7 +1121,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime ow_ = context.Operators.End(ov_);
 
 					return ow_;
-				};
+				}
+;
 				IEnumerable<Encounter> bw_ = context.Operators.SortBy<Encounter>(bu_, bv_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bx_ = context.Operators.Last<Encounter>(bw_);
 				Period by_ = bx_?.Period;
@@ -1114,7 +1154,8 @@ public class CQMCommon_2_0_000
 					bool? pt_ = context.Operators.And(pa_, ps_);
 
 					return pt_;
-				};
+				}
+;
 				IEnumerable<Encounter> ce_ = context.Operators.Where<Encounter>(cc_, cd_);
 				object cf_(Encounter @this)
 				{
@@ -1123,7 +1164,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime pw_ = context.Operators.End(pv_);
 
 					return pw_;
-				};
+				}
+;
 				IEnumerable<Encounter> cg_ = context.Operators.SortBy<Encounter>(ce_, cf_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter ch_ = context.Operators.Last<Encounter>(cg_);
 				Period ci_ = ch_?.Period;
@@ -1170,7 +1212,8 @@ public class CQMCommon_2_0_000
 						bool? su_ = context.Operators.And(sb_, st_);
 
 						return su_;
-					};
+					}
+;
 					IEnumerable<Encounter> qh_ = context.Operators.Where<Encounter>(qf_, qg_);
 					object qi_(Encounter @this)
 					{
@@ -1179,7 +1222,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime sx_ = context.Operators.End(sw_);
 
 						return sx_;
-					};
+					}
+;
 					IEnumerable<Encounter> qj_ = context.Operators.SortBy<Encounter>(qh_, qi_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter qk_ = context.Operators.Last<Encounter>(qj_);
 					Period ql_ = qk_?.Period;
@@ -1216,7 +1260,8 @@ public class CQMCommon_2_0_000
 						bool? tu_ = context.Operators.And(tb_, tt_);
 
 						return tu_;
-					};
+					}
+;
 					IEnumerable<Encounter> qw_ = context.Operators.Where<Encounter>(qu_, qv_);
 					object qx_(Encounter @this)
 					{
@@ -1225,7 +1270,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime tx_ = context.Operators.End(tw_);
 
 						return tx_;
-					};
+					}
+;
 					IEnumerable<Encounter> qy_ = context.Operators.SortBy<Encounter>(qw_, qx_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter qz_ = context.Operators.Last<Encounter>(qy_);
 					Period ra_ = qz_?.Period;
@@ -1261,7 +1307,8 @@ public class CQMCommon_2_0_000
 						bool? uu_ = context.Operators.And(ub_, ut_);
 
 						return uu_;
-					};
+					}
+;
 					IEnumerable<Encounter> rl_ = context.Operators.Where<Encounter>(rj_, rk_);
 					object rm_(Encounter @this)
 					{
@@ -1270,7 +1317,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime ux_ = context.Operators.End(uw_);
 
 						return ux_;
-					};
+					}
+;
 					IEnumerable<Encounter> rn_ = context.Operators.SortBy<Encounter>(rl_, rm_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter ro_ = context.Operators.Last<Encounter>(rn_);
 					Period rp_ = ro_?.Period;
@@ -1283,7 +1331,8 @@ public class CQMCommon_2_0_000
 					bool? rx_ = context.Operators.And(qa_, rw_);
 
 					return rx_;
-				};
+				}
+;
 				IEnumerable<Encounter> ct_ = context.Operators.Where<Encounter>(cr_, cs_);
 				object cu_(Encounter @this)
 				{
@@ -1292,7 +1341,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime va_ = context.Operators.End(uz_);
 
 					return va_;
-				};
+				}
+;
 				IEnumerable<Encounter> cv_ = context.Operators.SortBy<Encounter>(ct_, cu_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter cw_ = context.Operators.Last<Encounter>(cv_);
 				Period cx_ = cw_?.Period;
@@ -1324,7 +1374,8 @@ public class CQMCommon_2_0_000
 					bool? vx_ = context.Operators.And(ve_, vw_);
 
 					return vx_;
-				};
+				}
+;
 				IEnumerable<Encounter> dd_ = context.Operators.Where<Encounter>(db_, dc_);
 				object de_(Encounter @this)
 				{
@@ -1333,7 +1384,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime wa_ = context.Operators.End(vz_);
 
 					return wa_;
-				};
+				}
+;
 				IEnumerable<Encounter> df_ = context.Operators.SortBy<Encounter>(dd_, de_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter dg_ = context.Operators.Last<Encounter>(df_);
 				Period dh_ = dg_?.Period;
@@ -1345,7 +1397,8 @@ public class CQMCommon_2_0_000
 				bool? do_ = context.Operators.And(cp_, dn_);
 
 				return do_;
-			};
+			}
+;
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
@@ -1354,7 +1407,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime wd_ = context.Operators.End(wc_);
 
 				return wd_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter k_ = context.Operators.Last<Encounter>(j_);
 			Period l_ = k_?.Period;
@@ -1398,7 +1452,8 @@ public class CQMCommon_2_0_000
 					bool? zb_ = context.Operators.And(yi_, za_);
 
 					return zb_;
-				};
+				}
+;
 				IEnumerable<Encounter> wo_ = context.Operators.Where<Encounter>(wm_, wn_);
 				object wp_(Encounter @this)
 				{
@@ -1407,7 +1462,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime ze_ = context.Operators.End(zd_);
 
 					return ze_;
-				};
+				}
+;
 				IEnumerable<Encounter> wq_ = context.Operators.SortBy<Encounter>(wo_, wp_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter wr_ = context.Operators.Last<Encounter>(wq_);
 				Period ws_ = wr_?.Period;
@@ -1444,7 +1500,8 @@ public class CQMCommon_2_0_000
 					bool? azb_ = context.Operators.And(zi_, aza_);
 
 					return azb_;
-				};
+				}
+;
 				IEnumerable<Encounter> xd_ = context.Operators.Where<Encounter>(xb_, xc_);
 				object xe_(Encounter @this)
 				{
@@ -1453,7 +1510,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime aze_ = context.Operators.End(azd_);
 
 					return aze_;
-				};
+				}
+;
 				IEnumerable<Encounter> xf_ = context.Operators.SortBy<Encounter>(xd_, xe_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter xg_ = context.Operators.Last<Encounter>(xf_);
 				Period xh_ = xg_?.Period;
@@ -1489,7 +1547,8 @@ public class CQMCommon_2_0_000
 					bool? bzb_ = context.Operators.And(azi_, bza_);
 
 					return bzb_;
-				};
+				}
+;
 				IEnumerable<Encounter> xs_ = context.Operators.Where<Encounter>(xq_, xr_);
 				object xt_(Encounter @this)
 				{
@@ -1498,7 +1557,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime bze_ = context.Operators.End(bzd_);
 
 					return bze_;
-				};
+				}
+;
 				IEnumerable<Encounter> xu_ = context.Operators.SortBy<Encounter>(xs_, xt_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter xv_ = context.Operators.Last<Encounter>(xu_);
 				Period xw_ = xv_?.Period;
@@ -1511,7 +1571,8 @@ public class CQMCommon_2_0_000
 				bool? ye_ = context.Operators.And(wh_, yd_);
 
 				return ye_;
-			};
+			}
+;
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
 			object s_(Encounter @this)
 			{
@@ -1520,7 +1581,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime bzh_ = context.Operators.End(bzg_);
 
 				return bzh_;
-			};
+			}
+;
 			IEnumerable<Encounter> t_ = context.Operators.SortBy<Encounter>(r_, s_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter u_ = context.Operators.Last<Encounter>(t_);
 			Period v_ = u_?.Period;
@@ -1553,7 +1615,8 @@ public class CQMCommon_2_0_000
 				bool? cze_ = context.Operators.And(bzl_, czd_);
 
 				return cze_;
-			};
+			}
+;
 			IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
 			object ac_(Encounter @this)
 			{
@@ -1562,7 +1625,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime czh_ = context.Operators.End(czg_);
 
 				return czh_;
-			};
+			}
+;
 			IEnumerable<Encounter> ad_ = context.Operators.SortBy<Encounter>(ab_, ac_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter ae_ = context.Operators.Last<Encounter>(ad_);
 			Period af_ = ae_?.Period;
@@ -1576,7 +1640,8 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> ao_ = context.Operators.Interval((n_ ?? (x_ ?? (ah_ ?? ak_))), an_, true, true);
 
 			return ao_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
@@ -1585,7 +1650,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalizationWithObservationAndOutpatientSurgeryService")]
     [CqlTag("description", "Hospitalization with Observation and Outpatient Surgery Service returns the total interval from the start of any immediately prior emergency department visit, outpatient surgery visit or observation visit to the discharge of the given encounter.")]
-	public CqlInterval<CqlDateTime> hospitalizationWithObservationAndOutpatientSurgeryService(Encounter TheEncounter)
+	public  CqlInterval<CqlDateTime> hospitalizationWithObservationAndOutpatientSurgeryService(Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
@@ -1637,7 +1702,8 @@ public class CQMCommon_2_0_000
 						bool? gm_ = context.Operators.And(ft_, gl_);
 
 						return gm_;
-					};
+					}
+;
 					IEnumerable<Encounter> dz_ = context.Operators.Where<Encounter>(dx_, dy_);
 					object ea_(Encounter @this)
 					{
@@ -1646,7 +1712,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime gp_ = context.Operators.End(go_);
 
 						return gp_;
-					};
+					}
+;
 					IEnumerable<Encounter> eb_ = context.Operators.SortBy<Encounter>(dz_, ea_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter ec_ = context.Operators.Last<Encounter>(eb_);
 					Period ed_ = ec_?.Period;
@@ -1683,7 +1750,8 @@ public class CQMCommon_2_0_000
 						bool? hm_ = context.Operators.And(gt_, hl_);
 
 						return hm_;
-					};
+					}
+;
 					IEnumerable<Encounter> eo_ = context.Operators.Where<Encounter>(em_, en_);
 					object ep_(Encounter @this)
 					{
@@ -1692,7 +1760,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime hp_ = context.Operators.End(ho_);
 
 						return hp_;
-					};
+					}
+;
 					IEnumerable<Encounter> eq_ = context.Operators.SortBy<Encounter>(eo_, ep_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter er_ = context.Operators.Last<Encounter>(eq_);
 					Period es_ = er_?.Period;
@@ -1728,7 +1797,8 @@ public class CQMCommon_2_0_000
 						bool? im_ = context.Operators.And(ht_, il_);
 
 						return im_;
-					};
+					}
+;
 					IEnumerable<Encounter> fd_ = context.Operators.Where<Encounter>(fb_, fc_);
 					object fe_(Encounter @this)
 					{
@@ -1737,7 +1807,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime ip_ = context.Operators.End(io_);
 
 						return ip_;
-					};
+					}
+;
 					IEnumerable<Encounter> ff_ = context.Operators.SortBy<Encounter>(fd_, fe_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter fg_ = context.Operators.Last<Encounter>(ff_);
 					Period fh_ = fg_?.Period;
@@ -1750,7 +1821,8 @@ public class CQMCommon_2_0_000
 					bool? fp_ = context.Operators.And(ds_, fo_);
 
 					return fp_;
-				};
+				}
+;
 				IEnumerable<Encounter> av_ = context.Operators.Where<Encounter>(at_, au_);
 				object aw_(Encounter @this)
 				{
@@ -1759,7 +1831,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime is_ = context.Operators.End(ir_);
 
 					return is_;
-				};
+				}
+;
 				IEnumerable<Encounter> ax_ = context.Operators.SortBy<Encounter>(av_, aw_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter ay_ = context.Operators.Last<Encounter>(ax_);
 				Period az_ = ay_?.Period;
@@ -1792,7 +1865,8 @@ public class CQMCommon_2_0_000
 					bool? jp_ = context.Operators.And(iw_, jo_);
 
 					return jp_;
-				};
+				}
+;
 				IEnumerable<Encounter> bf_ = context.Operators.Where<Encounter>(bd_, be_);
 				object bg_(Encounter @this)
 				{
@@ -1801,7 +1875,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime js_ = context.Operators.End(jr_);
 
 					return js_;
-				};
+				}
+;
 				IEnumerable<Encounter> bh_ = context.Operators.SortBy<Encounter>(bf_, bg_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bi_ = context.Operators.Last<Encounter>(bh_);
 				Period bj_ = bi_?.Period;
@@ -1849,7 +1924,8 @@ public class CQMCommon_2_0_000
 						bool? mq_ = context.Operators.And(lx_, mp_);
 
 						return mq_;
-					};
+					}
+;
 					IEnumerable<Encounter> kd_ = context.Operators.Where<Encounter>(kb_, kc_);
 					object ke_(Encounter @this)
 					{
@@ -1858,7 +1934,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime mt_ = context.Operators.End(ms_);
 
 						return mt_;
-					};
+					}
+;
 					IEnumerable<Encounter> kf_ = context.Operators.SortBy<Encounter>(kd_, ke_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter kg_ = context.Operators.Last<Encounter>(kf_);
 					Period kh_ = kg_?.Period;
@@ -1895,7 +1972,8 @@ public class CQMCommon_2_0_000
 						bool? nq_ = context.Operators.And(mx_, np_);
 
 						return nq_;
-					};
+					}
+;
 					IEnumerable<Encounter> ks_ = context.Operators.Where<Encounter>(kq_, kr_);
 					object kt_(Encounter @this)
 					{
@@ -1904,7 +1982,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime nt_ = context.Operators.End(ns_);
 
 						return nt_;
-					};
+					}
+;
 					IEnumerable<Encounter> ku_ = context.Operators.SortBy<Encounter>(ks_, kt_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter kv_ = context.Operators.Last<Encounter>(ku_);
 					Period kw_ = kv_?.Period;
@@ -1940,7 +2019,8 @@ public class CQMCommon_2_0_000
 						bool? oq_ = context.Operators.And(nx_, op_);
 
 						return oq_;
-					};
+					}
+;
 					IEnumerable<Encounter> lh_ = context.Operators.Where<Encounter>(lf_, lg_);
 					object li_(Encounter @this)
 					{
@@ -1949,7 +2029,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime ot_ = context.Operators.End(os_);
 
 						return ot_;
-					};
+					}
+;
 					IEnumerable<Encounter> lj_ = context.Operators.SortBy<Encounter>(lh_, li_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter lk_ = context.Operators.Last<Encounter>(lj_);
 					Period ll_ = lk_?.Period;
@@ -1962,7 +2043,8 @@ public class CQMCommon_2_0_000
 					bool? lt_ = context.Operators.And(jw_, ls_);
 
 					return lt_;
-				};
+				}
+;
 				IEnumerable<Encounter> bu_ = context.Operators.Where<Encounter>(bs_, bt_);
 				object bv_(Encounter @this)
 				{
@@ -1971,7 +2053,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime ow_ = context.Operators.End(ov_);
 
 					return ow_;
-				};
+				}
+;
 				IEnumerable<Encounter> bw_ = context.Operators.SortBy<Encounter>(bu_, bv_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bx_ = context.Operators.Last<Encounter>(bw_);
 				Period by_ = bx_?.Period;
@@ -2003,7 +2086,8 @@ public class CQMCommon_2_0_000
 					bool? pt_ = context.Operators.And(pa_, ps_);
 
 					return pt_;
-				};
+				}
+;
 				IEnumerable<Encounter> ce_ = context.Operators.Where<Encounter>(cc_, cd_);
 				object cf_(Encounter @this)
 				{
@@ -2012,7 +2096,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime pw_ = context.Operators.End(pv_);
 
 					return pw_;
-				};
+				}
+;
 				IEnumerable<Encounter> cg_ = context.Operators.SortBy<Encounter>(ce_, cf_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter ch_ = context.Operators.Last<Encounter>(cg_);
 				Period ci_ = ch_?.Period;
@@ -2059,7 +2144,8 @@ public class CQMCommon_2_0_000
 						bool? su_ = context.Operators.And(sb_, st_);
 
 						return su_;
-					};
+					}
+;
 					IEnumerable<Encounter> qh_ = context.Operators.Where<Encounter>(qf_, qg_);
 					object qi_(Encounter @this)
 					{
@@ -2068,7 +2154,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime sx_ = context.Operators.End(sw_);
 
 						return sx_;
-					};
+					}
+;
 					IEnumerable<Encounter> qj_ = context.Operators.SortBy<Encounter>(qh_, qi_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter qk_ = context.Operators.Last<Encounter>(qj_);
 					Period ql_ = qk_?.Period;
@@ -2105,7 +2192,8 @@ public class CQMCommon_2_0_000
 						bool? tu_ = context.Operators.And(tb_, tt_);
 
 						return tu_;
-					};
+					}
+;
 					IEnumerable<Encounter> qw_ = context.Operators.Where<Encounter>(qu_, qv_);
 					object qx_(Encounter @this)
 					{
@@ -2114,7 +2202,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime tx_ = context.Operators.End(tw_);
 
 						return tx_;
-					};
+					}
+;
 					IEnumerable<Encounter> qy_ = context.Operators.SortBy<Encounter>(qw_, qx_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter qz_ = context.Operators.Last<Encounter>(qy_);
 					Period ra_ = qz_?.Period;
@@ -2150,7 +2239,8 @@ public class CQMCommon_2_0_000
 						bool? uu_ = context.Operators.And(ub_, ut_);
 
 						return uu_;
-					};
+					}
+;
 					IEnumerable<Encounter> rl_ = context.Operators.Where<Encounter>(rj_, rk_);
 					object rm_(Encounter @this)
 					{
@@ -2159,7 +2249,8 @@ public class CQMCommon_2_0_000
 						CqlDateTime ux_ = context.Operators.End(uw_);
 
 						return ux_;
-					};
+					}
+;
 					IEnumerable<Encounter> rn_ = context.Operators.SortBy<Encounter>(rl_, rm_, System.ComponentModel.ListSortDirection.Ascending);
 					Encounter ro_ = context.Operators.Last<Encounter>(rn_);
 					Period rp_ = ro_?.Period;
@@ -2172,7 +2263,8 @@ public class CQMCommon_2_0_000
 					bool? rx_ = context.Operators.And(qa_, rw_);
 
 					return rx_;
-				};
+				}
+;
 				IEnumerable<Encounter> ct_ = context.Operators.Where<Encounter>(cr_, cs_);
 				object cu_(Encounter @this)
 				{
@@ -2181,7 +2273,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime va_ = context.Operators.End(uz_);
 
 					return va_;
-				};
+				}
+;
 				IEnumerable<Encounter> cv_ = context.Operators.SortBy<Encounter>(ct_, cu_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter cw_ = context.Operators.Last<Encounter>(cv_);
 				Period cx_ = cw_?.Period;
@@ -2213,7 +2306,8 @@ public class CQMCommon_2_0_000
 					bool? vx_ = context.Operators.And(ve_, vw_);
 
 					return vx_;
-				};
+				}
+;
 				IEnumerable<Encounter> dd_ = context.Operators.Where<Encounter>(db_, dc_);
 				object de_(Encounter @this)
 				{
@@ -2222,7 +2316,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime wa_ = context.Operators.End(vz_);
 
 					return wa_;
-				};
+				}
+;
 				IEnumerable<Encounter> df_ = context.Operators.SortBy<Encounter>(dd_, de_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter dg_ = context.Operators.Last<Encounter>(df_);
 				Period dh_ = dg_?.Period;
@@ -2234,7 +2329,8 @@ public class CQMCommon_2_0_000
 				bool? do_ = context.Operators.And(cp_, dn_);
 
 				return do_;
-			};
+			}
+;
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
@@ -2243,7 +2339,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime wd_ = context.Operators.End(wc_);
 
 				return wd_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter k_ = context.Operators.Last<Encounter>(j_);
 			Period l_ = k_?.Period;
@@ -2287,7 +2384,8 @@ public class CQMCommon_2_0_000
 					bool? zb_ = context.Operators.And(yi_, za_);
 
 					return zb_;
-				};
+				}
+;
 				IEnumerable<Encounter> wo_ = context.Operators.Where<Encounter>(wm_, wn_);
 				object wp_(Encounter @this)
 				{
@@ -2296,7 +2394,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime ze_ = context.Operators.End(zd_);
 
 					return ze_;
-				};
+				}
+;
 				IEnumerable<Encounter> wq_ = context.Operators.SortBy<Encounter>(wo_, wp_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter wr_ = context.Operators.Last<Encounter>(wq_);
 				Period ws_ = wr_?.Period;
@@ -2333,7 +2432,8 @@ public class CQMCommon_2_0_000
 					bool? azb_ = context.Operators.And(zi_, aza_);
 
 					return azb_;
-				};
+				}
+;
 				IEnumerable<Encounter> xd_ = context.Operators.Where<Encounter>(xb_, xc_);
 				object xe_(Encounter @this)
 				{
@@ -2342,7 +2442,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime aze_ = context.Operators.End(azd_);
 
 					return aze_;
-				};
+				}
+;
 				IEnumerable<Encounter> xf_ = context.Operators.SortBy<Encounter>(xd_, xe_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter xg_ = context.Operators.Last<Encounter>(xf_);
 				Period xh_ = xg_?.Period;
@@ -2378,7 +2479,8 @@ public class CQMCommon_2_0_000
 					bool? bzb_ = context.Operators.And(azi_, bza_);
 
 					return bzb_;
-				};
+				}
+;
 				IEnumerable<Encounter> xs_ = context.Operators.Where<Encounter>(xq_, xr_);
 				object xt_(Encounter @this)
 				{
@@ -2387,7 +2489,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime bze_ = context.Operators.End(bzd_);
 
 					return bze_;
-				};
+				}
+;
 				IEnumerable<Encounter> xu_ = context.Operators.SortBy<Encounter>(xs_, xt_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter xv_ = context.Operators.Last<Encounter>(xu_);
 				Period xw_ = xv_?.Period;
@@ -2400,7 +2503,8 @@ public class CQMCommon_2_0_000
 				bool? ye_ = context.Operators.And(wh_, yd_);
 
 				return ye_;
-			};
+			}
+;
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
 			object s_(Encounter @this)
 			{
@@ -2409,7 +2513,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime bzh_ = context.Operators.End(bzg_);
 
 				return bzh_;
-			};
+			}
+;
 			IEnumerable<Encounter> t_ = context.Operators.SortBy<Encounter>(r_, s_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter u_ = context.Operators.Last<Encounter>(t_);
 			Period v_ = u_?.Period;
@@ -2442,7 +2547,8 @@ public class CQMCommon_2_0_000
 				bool? cze_ = context.Operators.And(bzl_, czd_);
 
 				return cze_;
-			};
+			}
+;
 			IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
 			object ac_(Encounter @this)
 			{
@@ -2451,7 +2557,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime czh_ = context.Operators.End(czg_);
 
 				return czh_;
-			};
+			}
+;
 			IEnumerable<Encounter> ad_ = context.Operators.SortBy<Encounter>(ab_, ac_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter ae_ = context.Operators.Last<Encounter>(ad_);
 			Period af_ = ae_?.Period;
@@ -2465,7 +2572,8 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> ao_ = context.Operators.Interval((n_ ?? (x_ ?? (ah_ ?? ak_))), an_, true, true);
 
 			return ao_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
@@ -2475,7 +2583,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("HospitalizationWithObservation")]
     [CqlTag("description", "Hospitalization with Observation returns the total interval from the start of any immediately prior emergency department visit through the observation visit to the discharge of the given encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationWithObservation()` instead.")]
-	public CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
+	public  CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
@@ -2520,7 +2628,8 @@ public class CQMCommon_2_0_000
 					bool? dc_ = context.Operators.And(cj_, db_);
 
 					return dc_;
-				};
+				}
+;
 				IEnumerable<Encounter> ap_ = context.Operators.Where<Encounter>(an_, ao_);
 				object aq_(Encounter @this)
 				{
@@ -2529,7 +2638,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime df_ = context.Operators.End(de_);
 
 					return df_;
-				};
+				}
+;
 				IEnumerable<Encounter> ar_ = context.Operators.SortBy<Encounter>(ap_, aq_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter as_ = context.Operators.Last<Encounter>(ar_);
 				Period at_ = as_?.Period;
@@ -2566,7 +2676,8 @@ public class CQMCommon_2_0_000
 					bool? ec_ = context.Operators.And(dj_, eb_);
 
 					return ec_;
-				};
+				}
+;
 				IEnumerable<Encounter> be_ = context.Operators.Where<Encounter>(bc_, bd_);
 				object bf_(Encounter @this)
 				{
@@ -2575,7 +2686,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime ef_ = context.Operators.End(ee_);
 
 					return ef_;
-				};
+				}
+;
 				IEnumerable<Encounter> bg_ = context.Operators.SortBy<Encounter>(be_, bf_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bh_ = context.Operators.Last<Encounter>(bg_);
 				Period bi_ = bh_?.Period;
@@ -2611,7 +2723,8 @@ public class CQMCommon_2_0_000
 					bool? fc_ = context.Operators.And(ej_, fb_);
 
 					return fc_;
-				};
+				}
+;
 				IEnumerable<Encounter> bt_ = context.Operators.Where<Encounter>(br_, bs_);
 				object bu_(Encounter @this)
 				{
@@ -2620,7 +2733,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime ff_ = context.Operators.End(fe_);
 
 					return ff_;
-				};
+				}
+;
 				IEnumerable<Encounter> bv_ = context.Operators.SortBy<Encounter>(bt_, bu_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bw_ = context.Operators.Last<Encounter>(bv_);
 				Period bx_ = bw_?.Period;
@@ -2633,7 +2747,8 @@ public class CQMCommon_2_0_000
 				bool? cf_ = context.Operators.And(ai_, ce_);
 
 				return cf_;
-			};
+			}
+;
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
@@ -2642,7 +2757,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime fi_ = context.Operators.End(fh_);
 
 				return fi_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter k_ = context.Operators.Last<Encounter>(j_);
 			Period l_ = k_?.Period;
@@ -2675,7 +2791,8 @@ public class CQMCommon_2_0_000
 				bool? gf_ = context.Operators.And(fm_, ge_);
 
 				return gf_;
-			};
+			}
+;
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
 			object s_(Encounter @this)
 			{
@@ -2684,7 +2801,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime gi_ = context.Operators.End(gh_);
 
 				return gi_;
-			};
+			}
+;
 			IEnumerable<Encounter> t_ = context.Operators.SortBy<Encounter>(r_, s_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter u_ = context.Operators.Last<Encounter>(t_);
 			Period v_ = u_?.Period;
@@ -2698,7 +2816,8 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval((n_ ?? (x_ ?? aa_)), ad_, true, true);
 
 			return ae_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
@@ -2707,7 +2826,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalizationWithObservation")]
     [CqlTag("description", "Hospitalization with Observation returns the total interval from the start of any immediately prior emergency department visit through the observation visit to the discharge of the given encounter")]
-	public CqlInterval<CqlDateTime> hospitalizationWithObservation(Encounter TheEncounter)
+	public  CqlInterval<CqlDateTime> hospitalizationWithObservation(Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
@@ -2752,7 +2871,8 @@ public class CQMCommon_2_0_000
 					bool? dc_ = context.Operators.And(cj_, db_);
 
 					return dc_;
-				};
+				}
+;
 				IEnumerable<Encounter> ap_ = context.Operators.Where<Encounter>(an_, ao_);
 				object aq_(Encounter @this)
 				{
@@ -2761,7 +2881,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime df_ = context.Operators.End(de_);
 
 					return df_;
-				};
+				}
+;
 				IEnumerable<Encounter> ar_ = context.Operators.SortBy<Encounter>(ap_, aq_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter as_ = context.Operators.Last<Encounter>(ar_);
 				Period at_ = as_?.Period;
@@ -2798,7 +2919,8 @@ public class CQMCommon_2_0_000
 					bool? ec_ = context.Operators.And(dj_, eb_);
 
 					return ec_;
-				};
+				}
+;
 				IEnumerable<Encounter> be_ = context.Operators.Where<Encounter>(bc_, bd_);
 				object bf_(Encounter @this)
 				{
@@ -2807,7 +2929,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime ef_ = context.Operators.End(ee_);
 
 					return ef_;
-				};
+				}
+;
 				IEnumerable<Encounter> bg_ = context.Operators.SortBy<Encounter>(be_, bf_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bh_ = context.Operators.Last<Encounter>(bg_);
 				Period bi_ = bh_?.Period;
@@ -2843,7 +2966,8 @@ public class CQMCommon_2_0_000
 					bool? fc_ = context.Operators.And(ej_, fb_);
 
 					return fc_;
-				};
+				}
+;
 				IEnumerable<Encounter> bt_ = context.Operators.Where<Encounter>(br_, bs_);
 				object bu_(Encounter @this)
 				{
@@ -2852,7 +2976,8 @@ public class CQMCommon_2_0_000
 					CqlDateTime ff_ = context.Operators.End(fe_);
 
 					return ff_;
-				};
+				}
+;
 				IEnumerable<Encounter> bv_ = context.Operators.SortBy<Encounter>(bt_, bu_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bw_ = context.Operators.Last<Encounter>(bv_);
 				Period bx_ = bw_?.Period;
@@ -2865,7 +2990,8 @@ public class CQMCommon_2_0_000
 				bool? cf_ = context.Operators.And(ai_, ce_);
 
 				return cf_;
-			};
+			}
+;
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
@@ -2874,7 +3000,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime fi_ = context.Operators.End(fh_);
 
 				return fi_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter k_ = context.Operators.Last<Encounter>(j_);
 			Period l_ = k_?.Period;
@@ -2907,7 +3034,8 @@ public class CQMCommon_2_0_000
 				bool? gf_ = context.Operators.And(fm_, ge_);
 
 				return gf_;
-			};
+			}
+;
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
 			object s_(Encounter @this)
 			{
@@ -2916,7 +3044,8 @@ public class CQMCommon_2_0_000
 				CqlDateTime gi_ = context.Operators.End(gh_);
 
 				return gi_;
-			};
+			}
+;
 			IEnumerable<Encounter> t_ = context.Operators.SortBy<Encounter>(r_, s_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter u_ = context.Operators.Last<Encounter>(t_);
 			Period v_ = u_?.Period;
@@ -2930,7 +3059,8 @@ public class CQMCommon_2_0_000
 			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval((n_ ?? (x_ ?? aa_)), ad_, true, true);
 
 			return ae_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
@@ -2940,7 +3070,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("HospitalizationWithObservationLengthofStay")]
     [CqlTag("description", "Hospitalization with Observation Length of Stay returns the length in days from the start of any immediately prior emergency department visit through the observation visit to the discharge of the given encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `hospitalizationWithObservationLengthofStay()` instead.")]
-	public int? HospitalizationWithObservationLengthofStay(Encounter TheEncounter)
+	public  int? HospitalizationWithObservationLengthofStay(Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.HospitalizationWithObservation(TheEncounter);
 		int? b_ = this.LengthInDays(a_);
@@ -2950,7 +3080,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("hospitalizationWithObservationLengthofStay")]
     [CqlTag("description", "Hospitalization with Observation Length of Stay returns the length in days from the start of any immediately prior emergency department visit through the observation visit to the discharge of the given encounter")]
-	public int? hospitalizationWithObservationLengthofStay(Encounter TheEncounter)
+	public  int? hospitalizationWithObservationLengthofStay(Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.hospitalizationWithObservation(TheEncounter);
 		int? b_ = this.lengthInDays(a_);
@@ -2961,7 +3091,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("FirstInpatientIntensiveCareUnit")]
     [CqlTag("description", "First Inpatient Intensive Care Unit returns the first intensive care unit for the given encounter, without considering any immediately prior emergency department visit.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `firstInpatientIntensiveCareUnit()` instead.")]
-	public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(Encounter Encounter)
+	public  Encounter.LocationComponent FirstInpatientIntensiveCareUnit(Encounter Encounter)
 	{
 		List<Encounter.LocationComponent> a_ = Encounter?.Location;
 		bool? b_(Encounter.LocationComponent HospitalLocation)
@@ -2974,7 +3104,8 @@ public class CQMCommon_2_0_000
 				CqlConcept t_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			CqlValueSet l_ = this.Intensive_Care_Unit();
 			bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
@@ -2986,7 +3117,8 @@ public class CQMCommon_2_0_000
 			bool? s_ = context.Operators.And(m_, r_);
 
 			return s_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
 		object d_(Encounter.LocationComponent @this)
 		{
@@ -2995,7 +3127,8 @@ public class CQMCommon_2_0_000
 			CqlDateTime w_ = context.Operators.Start(v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SortBy<Encounter.LocationComponent>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter.LocationComponent f_ = context.Operators.First<Encounter.LocationComponent>(e_);
 
@@ -3004,7 +3137,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("firstInpatientIntensiveCareUnit")]
     [CqlTag("description", "First Inpatient Intensive Care Unit returns the first intensive care unit for the given encounter, without considering any immediately prior emergency department visit.")]
-	public Encounter.LocationComponent firstInpatientIntensiveCareUnit(Encounter Encounter)
+	public  Encounter.LocationComponent firstInpatientIntensiveCareUnit(Encounter Encounter)
 	{
 		List<Encounter.LocationComponent> a_ = Encounter?.Location;
 		bool? b_(Encounter.LocationComponent HospitalLocation)
@@ -3017,7 +3150,8 @@ public class CQMCommon_2_0_000
 				CqlConcept t_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
 			CqlValueSet l_ = this.Intensive_Care_Unit();
 			bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
@@ -3029,7 +3163,8 @@ public class CQMCommon_2_0_000
 			bool? s_ = context.Operators.And(m_, r_);
 
 			return s_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
 		object d_(Encounter.LocationComponent @this)
 		{
@@ -3038,7 +3173,8 @@ public class CQMCommon_2_0_000
 			CqlDateTime w_ = context.Operators.Start(v_);
 
 			return w_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SortBy<Encounter.LocationComponent>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter.LocationComponent f_ = context.Operators.First<Encounter.LocationComponent>(e_);
 
@@ -3048,7 +3184,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("EncounterDiagnosis")]
     [CqlTag("description", "Returns the Condition resource referenced by the `diagnosis.condition` element of the Encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `encounterDiagnosis()` instead.")]
-	public IEnumerable<Condition> EncounterDiagnosis(Encounter Encounter)
+	public  IEnumerable<Condition> EncounterDiagnosis(Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		Condition b_(Encounter.DiagnosisComponent D)
@@ -3065,12 +3201,14 @@ public class CQMCommon_2_0_000
 				bool? n_ = context.Operators.Equal(i_, m_);
 
 				return n_;
-			};
+			}
+;
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 			Condition g_ = context.Operators.SingletonFrom<Condition>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Condition> c_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 
 		return c_;
@@ -3078,7 +3216,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("encounterDiagnosis")]
     [CqlTag("description", "Returns the Condition resources referenced by the diagnosis element of the Encounter")]
-	public IEnumerable<Condition> encounterDiagnosis(Encounter Encounter)
+	public  IEnumerable<Condition> encounterDiagnosis(Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		Condition b_(Encounter.DiagnosisComponent D)
@@ -3095,12 +3233,14 @@ public class CQMCommon_2_0_000
 				bool? n_ = context.Operators.Equal(i_, m_);
 
 				return n_;
-			};
+			}
+;
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 			Condition g_ = context.Operators.SingletonFrom<Condition>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Condition> c_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 
 		return c_;
@@ -3109,7 +3249,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("GetCondition")]
     [CqlTag("description", "Returns the Condition resource for the given reference")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getCondition()` instead")]
-	public Condition GetCondition(ResourceReference reference)
+	public  Condition GetCondition(ResourceReference reference)
 	{
 		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 		bool? b_(Condition C)
@@ -3122,7 +3262,8 @@ public class CQMCommon_2_0_000
 			bool? j_ = context.Operators.Equal(f_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
 		Condition d_ = context.Operators.SingletonFrom<Condition>(c_);
 
@@ -3131,7 +3272,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("getCondition")]
     [CqlTag("description", "Returns the Condition resource for the given reference")]
-	public Condition getCondition(ResourceReference reference)
+	public  Condition getCondition(ResourceReference reference)
 	{
 		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 		bool? b_(Condition C)
@@ -3144,7 +3285,8 @@ public class CQMCommon_2_0_000
 			bool? j_ = context.Operators.Equal(f_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
 		Condition d_ = context.Operators.SingletonFrom<Condition>(c_);
 
@@ -3154,7 +3296,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("PrincipalDiagnosis")]
     [CqlTag("description", "Returns the condition that is specified as the principal diagnosis for the encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `principalDiagnosis()` instead.")]
-	public Condition PrincipalDiagnosis(Encounter Encounter)
+	public  Condition PrincipalDiagnosis(Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent D)
@@ -3164,7 +3306,8 @@ public class CQMCommon_2_0_000
 			bool? i_ = context.Operators.Equal(h_, 1);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Condition d_(Encounter.DiagnosisComponent PD)
 		{
@@ -3180,12 +3323,14 @@ public class CQMCommon_2_0_000
 				bool? t_ = context.Operators.Equal(o_, s_);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<Condition> l_ = context.Operators.Where<Condition>(j_, k_);
 			Condition m_ = context.Operators.SingletonFrom<Condition>(l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(c_, d_);
 		Condition f_ = context.Operators.SingletonFrom<Condition>(e_);
 
@@ -3194,7 +3339,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("principalDiagnosis")]
     [CqlTag("description", "Returns the condition that is specified as the principal diagnosis for the encounter")]
-	public Condition principalDiagnosis(Encounter Encounter)
+	public  Condition principalDiagnosis(Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent D)
@@ -3204,7 +3349,8 @@ public class CQMCommon_2_0_000
 			bool? i_ = context.Operators.Equal(h_, 1);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Condition d_(Encounter.DiagnosisComponent PD)
 		{
@@ -3220,12 +3366,14 @@ public class CQMCommon_2_0_000
 				bool? t_ = context.Operators.Equal(o_, s_);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<Condition> l_ = context.Operators.Where<Condition>(j_, k_);
 			Condition m_ = context.Operators.SingletonFrom<Condition>(l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(c_, d_);
 		Condition f_ = context.Operators.SingletonFrom<Condition>(e_);
 
@@ -3234,7 +3382,7 @@ public class CQMCommon_2_0_000
 
     [CqlDeclaration("getLocation")]
     [CqlTag("description", "Returns the Location resource specified by the given reference.")]
-	public Location getLocation(ResourceReference reference)
+	public  Location getLocation(ResourceReference reference)
 	{
 		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(default, default);
 		bool? b_(Location L)
@@ -3247,7 +3395,8 @@ public class CQMCommon_2_0_000
 			bool? j_ = context.Operators.Equal(f_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
 		Location d_ = context.Operators.SingletonFrom<Location>(c_);
 
@@ -3257,7 +3406,7 @@ public class CQMCommon_2_0_000
     [CqlDeclaration("GetMedicationCode")]
     [CqlTag("description", "Returns the medication code for the given MedicationRequest")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getMedicationCode()` instead.")]
-	public CqlConcept GetMedicationCode(MedicationRequest request)
+	public  CqlConcept GetMedicationCode(MedicationRequest request)
 	{
 		CqlConcept a_()
 		{
@@ -3268,7 +3417,8 @@ public class CQMCommon_2_0_000
 				bool e_ = d_ is CqlConcept;
 
 				return e_;
-			};
+			}
+;
 			if (b_())
 			{
 				DataType f_ = request?.Medication;
@@ -3291,7 +3441,8 @@ public class CQMCommon_2_0_000
 					bool? u_ = context.Operators.Equal(o_, t_);
 
 					return u_;
-				};
+				}
+;
 				IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
 				Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
 				CodeableConcept l_ = k_?.Code;
@@ -3299,14 +3450,15 @@ public class CQMCommon_2_0_000
 
 				return m_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("getMedicationCode")]
     [CqlTag("description", "Returns the medication code for the given MedicationRequest")]
-	public CqlConcept getMedicationCode(MedicationRequest request)
+	public  CqlConcept getMedicationCode(MedicationRequest request)
 	{
 		CqlConcept a_()
 		{
@@ -3317,7 +3469,8 @@ public class CQMCommon_2_0_000
 				bool e_ = d_ is CqlConcept;
 
 				return e_;
-			};
+			}
+;
 			if (b_())
 			{
 				DataType f_ = request?.Medication;
@@ -3340,7 +3493,8 @@ public class CQMCommon_2_0_000
 					bool? u_ = context.Operators.Equal(o_, t_);
 
 					return u_;
-				};
+				}
+;
 				IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
 				Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
 				CodeableConcept l_ = k_?.Code;
@@ -3348,7 +3502,8 @@ public class CQMCommon_2_0_000
 
 				return m_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}

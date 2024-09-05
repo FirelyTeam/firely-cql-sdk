@@ -117,214 +117,214 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
     #endregion
 
-	private CqlValueSet Emergency_Department_Visit_Value() => 
+	private  CqlValueSet Emergency_Department_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public CqlValueSet Emergency_Department_Visit() => 
+	public  CqlValueSet Emergency_Department_Visit() => 
 		__Emergency_Department_Visit.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+	private  CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+	public  CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Observation_Services_Value() => 
+	private  CqlValueSet Observation_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public CqlValueSet Observation_Services() => 
+	public  CqlValueSet Observation_Services() => 
 		__Observation_Services.Value;
 
-	private CqlValueSet Present_on_Admission_or_Clinically_Undetermined_Value() => 
+	private  CqlValueSet Present_on_Admission_or_Clinically_Undetermined_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default);
 
     [CqlDeclaration("Present on Admission or Clinically Undetermined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197")]
-	public CqlValueSet Present_on_Admission_or_Clinically_Undetermined() => 
+	public  CqlValueSet Present_on_Admission_or_Clinically_Undetermined() => 
 		__Present_on_Admission_or_Clinically_Undetermined.Value;
 
-	private CqlCode active_Value() => 
+	private  CqlCode active_Value() => 
 		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("active")]
-	public CqlCode active() => 
+	public  CqlCode active() => 
 		__active.Value;
 
-	private CqlCode allergy_active_Value() => 
+	private  CqlCode allergy_active_Value() => 
 		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
     [CqlDeclaration("allergy-active")]
-	public CqlCode allergy_active() => 
+	public  CqlCode allergy_active() => 
 		__allergy_active.Value;
 
-	private CqlCode allergy_confirmed_Value() => 
+	private  CqlCode allergy_confirmed_Value() => 
 		new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-confirmed")]
-	public CqlCode allergy_confirmed() => 
+	public  CqlCode allergy_confirmed() => 
 		__allergy_confirmed.Value;
 
-	private CqlCode allergy_inactive_Value() => 
+	private  CqlCode allergy_inactive_Value() => 
 		new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
     [CqlDeclaration("allergy-inactive")]
-	public CqlCode allergy_inactive() => 
+	public  CqlCode allergy_inactive() => 
 		__allergy_inactive.Value;
 
-	private CqlCode allergy_refuted_Value() => 
+	private  CqlCode allergy_refuted_Value() => 
 		new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-refuted")]
-	public CqlCode allergy_refuted() => 
+	public  CqlCode allergy_refuted() => 
 		__allergy_refuted.Value;
 
-	private CqlCode allergy_resolved_Value() => 
+	private  CqlCode allergy_resolved_Value() => 
 		new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
     [CqlDeclaration("allergy-resolved")]
-	public CqlCode allergy_resolved() => 
+	public  CqlCode allergy_resolved() => 
 		__allergy_resolved.Value;
 
-	private CqlCode allergy_unconfirmed_Value() => 
+	private  CqlCode allergy_unconfirmed_Value() => 
 		new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-unconfirmed")]
-	public CqlCode allergy_unconfirmed() => 
+	public  CqlCode allergy_unconfirmed() => 
 		__allergy_unconfirmed.Value;
 
-	private CqlCode Billing_Value() => 
+	private  CqlCode Billing_Value() => 
 		new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
     [CqlDeclaration("Billing")]
-	public CqlCode Billing() => 
+	public  CqlCode Billing() => 
 		__Billing.Value;
 
-	private CqlCode Birthdate_Value() => 
+	private  CqlCode Birthdate_Value() => 
 		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Birthdate")]
-	public CqlCode Birthdate() => 
+	public  CqlCode Birthdate() => 
 		__Birthdate.Value;
 
-	private CqlCode Community_Value() => 
+	private  CqlCode Community_Value() => 
 		new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
     [CqlDeclaration("Community")]
-	public CqlCode Community() => 
+	public  CqlCode Community() => 
 		__Community.Value;
 
-	private CqlCode confirmed_Value() => 
+	private  CqlCode confirmed_Value() => 
 		new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("confirmed")]
-	public CqlCode confirmed() => 
+	public  CqlCode confirmed() => 
 		__confirmed.Value;
 
-	private CqlCode Dead_Value() => 
+	private  CqlCode Dead_Value() => 
 		new CqlCode("419099009", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Dead")]
-	public CqlCode Dead() => 
+	public  CqlCode Dead() => 
 		__Dead.Value;
 
-	private CqlCode differential_Value() => 
+	private  CqlCode differential_Value() => 
 		new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("differential")]
-	public CqlCode differential() => 
+	public  CqlCode differential() => 
 		__differential.Value;
 
-	private CqlCode Discharge_Value() => 
+	private  CqlCode Discharge_Value() => 
 		new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
     [CqlDeclaration("Discharge")]
-	public CqlCode Discharge() => 
+	public  CqlCode Discharge() => 
 		__Discharge.Value;
 
-	private CqlCode entered_in_error_Value() => 
+	private  CqlCode entered_in_error_Value() => 
 		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("entered-in-error")]
-	public CqlCode entered_in_error() => 
+	public  CqlCode entered_in_error() => 
 		__entered_in_error.Value;
 
-	private CqlCode ER_Value() => 
+	private  CqlCode ER_Value() => 
 		new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
 
     [CqlDeclaration("ER")]
-	public CqlCode ER() => 
+	public  CqlCode ER() => 
 		__ER.Value;
 
-	private CqlCode ICU_Value() => 
+	private  CqlCode ICU_Value() => 
 		new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
 
     [CqlDeclaration("ICU")]
-	public CqlCode ICU() => 
+	public  CqlCode ICU() => 
 		__ICU.Value;
 
-	private CqlCode inactive_Value() => 
+	private  CqlCode inactive_Value() => 
 		new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("inactive")]
-	public CqlCode inactive() => 
+	public  CqlCode inactive() => 
 		__inactive.Value;
 
-	private CqlCode provisional_Value() => 
+	private  CqlCode provisional_Value() => 
 		new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("provisional")]
-	public CqlCode provisional() => 
+	public  CqlCode provisional() => 
 		__provisional.Value;
 
-	private CqlCode recurrence_Value() => 
+	private  CqlCode recurrence_Value() => 
 		new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("recurrence")]
-	public CqlCode recurrence() => 
+	public  CqlCode recurrence() => 
 		__recurrence.Value;
 
-	private CqlCode refuted_Value() => 
+	private  CqlCode refuted_Value() => 
 		new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("refuted")]
-	public CqlCode refuted() => 
+	public  CqlCode refuted() => 
 		__refuted.Value;
 
-	private CqlCode relapse_Value() => 
+	private  CqlCode relapse_Value() => 
 		new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("relapse")]
-	public CqlCode relapse() => 
+	public  CqlCode relapse() => 
 		__relapse.Value;
 
-	private CqlCode remission_Value() => 
+	private  CqlCode remission_Value() => 
 		new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("remission")]
-	public CqlCode remission() => 
+	public  CqlCode remission() => 
 		__remission.Value;
 
-	private CqlCode resolved_Value() => 
+	private  CqlCode resolved_Value() => 
 		new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
     [CqlDeclaration("resolved")]
-	public CqlCode resolved() => 
+	public  CqlCode resolved() => 
 		__resolved.Value;
 
-	private CqlCode unconfirmed_Value() => 
+	private  CqlCode unconfirmed_Value() => 
 		new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("unconfirmed")]
-	public CqlCode unconfirmed() => 
+	public  CqlCode unconfirmed() => 
 		__unconfirmed.Value;
 
-	private CqlCode[] ConditionClinicalStatusCodes_Value()
+	private  CqlCode[] ConditionClinicalStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
@@ -339,10 +339,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("ConditionClinicalStatusCodes")]
-	public CqlCode[] ConditionClinicalStatusCodes() => 
+	public  CqlCode[] ConditionClinicalStatusCodes() => 
 		__ConditionClinicalStatusCodes.Value;
 
-	private CqlCode[] AllergyIntoleranceClinicalStatusCodes_Value()
+	private  CqlCode[] AllergyIntoleranceClinicalStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default),
@@ -354,10 +354,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("AllergyIntoleranceClinicalStatusCodes")]
-	public CqlCode[] AllergyIntoleranceClinicalStatusCodes() => 
+	public  CqlCode[] AllergyIntoleranceClinicalStatusCodes() => 
 		__AllergyIntoleranceClinicalStatusCodes.Value;
 
-	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
+	private  CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
@@ -369,10 +369,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
-	public CqlCode[] AllergyIntoleranceVerificationStatusCodes() => 
+	public  CqlCode[] AllergyIntoleranceVerificationStatusCodes() => 
 		__AllergyIntoleranceVerificationStatusCodes.Value;
 
-	private CqlCode[] Diagnosis_Role_Value()
+	private  CqlCode[] Diagnosis_Role_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default),
@@ -382,10 +382,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Diagnosis Role")]
-	public CqlCode[] Diagnosis_Role() => 
+	public  CqlCode[] Diagnosis_Role() => 
 		__Diagnosis_Role.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", default, default),
@@ -395,10 +395,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlCode[] MedicationRequestCategory_Value()
+	private  CqlCode[] MedicationRequestCategory_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default),
@@ -409,10 +409,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("MedicationRequestCategory")]
-	public CqlCode[] MedicationRequestCategory() => 
+	public  CqlCode[] MedicationRequestCategory() => 
 		__MedicationRequestCategory.Value;
 
-	private CqlCode[] ConditionVerificationStatusCodes_Value()
+	private  CqlCode[] ConditionVerificationStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
@@ -427,10 +427,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("ConditionVerificationStatusCodes")]
-	public CqlCode[] ConditionVerificationStatusCodes() => 
+	public  CqlCode[] ConditionVerificationStatusCodes() => 
 		__ConditionVerificationStatusCodes.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("419099009", "http://snomed.info/sct", default, default),
@@ -440,10 +440,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlCode[] RoleCode_Value()
+	private  CqlCode[] RoleCode_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default),
@@ -454,10 +454,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("RoleCode")]
-	public CqlCode[] RoleCode() => 
+	public  CqlCode[] RoleCode() => 
 		__RoleCode.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
@@ -468,10 +468,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -480,11 +480,11 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("LengthInDays")]
-	public int? LengthInDays(CqlInterval<CqlDateTime> Value)
+	public  int? LengthInDays(CqlInterval<CqlDateTime> Value)
 	{
 		CqlDateTime a_ = context.Operators.Start(Value);
 		CqlDateTime b_ = context.Operators.End(Value);
@@ -493,7 +493,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		return c_;
 	}
 
-	private IEnumerable<Encounter> Inpatient_Encounter_Value()
+	private  IEnumerable<Encounter> Inpatient_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -514,18 +514,19 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			bool? r_ = context.Operators.And(l_, q_);
 
 			return r_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Inpatient Encounter")]
-	public IEnumerable<Encounter> Inpatient_Encounter() => 
+	public  IEnumerable<Encounter> Inpatient_Encounter() => 
 		__Inpatient_Encounter.Value;
 
     [CqlDeclaration("ED Visit")]
-	public Encounter ED_Visit(Encounter TheEncounter)
+	public  Encounter ED_Visit(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -553,7 +554,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			bool? ac_ = context.Operators.And(j_, ab_);
 
 			return ac_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 		object e_(Encounter @this)
 		{
@@ -562,7 +564,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			CqlDateTime af_ = context.Operators.End(ae_);
 
 			return af_;
-		};
+		}
+;
 		IEnumerable<Encounter> f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter g_ = context.Operators.Last<Encounter>(f_);
 
@@ -570,7 +573,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Hospitalization")]
-	public CqlInterval<CqlDateTime> Hospitalization(Encounter TheEncounter)
+	public  CqlInterval<CqlDateTime> Hospitalization(Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(TheEncounter);
 		Encounter[] b_ = [
@@ -599,10 +602,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return o_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
 		CqlInterval<CqlDateTime> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
 
@@ -610,7 +615,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Hospitalization Locations")]
-	public IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(Encounter TheEncounter)
+	public  IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(TheEncounter);
 		Encounter[] b_ = [
@@ -638,10 +643,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return k_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<IEnumerable<Encounter.LocationComponent>> d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
 		IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
 
@@ -649,7 +656,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Hospitalization Length of Stay")]
-	public int? Hospitalization_Length_of_Stay(Encounter TheEncounter)
+	public  int? Hospitalization_Length_of_Stay(Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Hospitalization(TheEncounter);
 		int? b_ = this.LengthInDays(a_);
@@ -658,7 +665,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Hospital Admission Time")]
-	public CqlDateTime Hospital_Admission_Time(Encounter TheEncounter)
+	public  CqlDateTime Hospital_Admission_Time(Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Hospitalization(TheEncounter);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -667,7 +674,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Hospital Discharge Time")]
-	public CqlDateTime Hospital_Discharge_Time(Encounter TheEncounter)
+	public  CqlDateTime Hospital_Discharge_Time(Encounter TheEncounter)
 	{
 		Period a_ = TheEncounter?.Period;
 		CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_0_001.ToInterval(a_);
@@ -677,7 +684,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Hospital Arrival Time")]
-	public CqlDateTime Hospital_Arrival_Time(Encounter TheEncounter)
+	public  CqlDateTime Hospital_Arrival_Time(Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(TheEncounter);
 		object b_(Encounter.LocationComponent @this)
@@ -687,7 +694,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			CqlDateTime j_ = context.Operators.Start(i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
 		Encounter.LocationComponent d_ = context.Operators.First<Encounter.LocationComponent>(c_);
 		Period e_ = d_?.Period;
@@ -698,7 +706,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("HospitalizationWithObservation")]
-	public CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
+	public  CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
@@ -734,7 +742,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					bool? cs_ = context.Operators.And(cn_, cr_);
 
 					return cs_;
-				};
+				}
+;
 				IEnumerable<Encounter> al_ = context.Operators.Where<Encounter>(aj_, ak_);
 				object am_(Encounter @this)
 				{
@@ -743,7 +752,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					CqlDateTime cv_ = context.Operators.End(cu_);
 
 					return cv_;
-				};
+				}
+;
 				IEnumerable<Encounter> an_ = context.Operators.SortBy<Encounter>(al_, am_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter ao_ = context.Operators.Last<Encounter>(an_);
 				Period ap_ = ao_?.Period;
@@ -775,7 +785,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					bool? dn_ = context.Operators.And(di_, dm_);
 
 					return dn_;
-				};
+				}
+;
 				IEnumerable<Encounter> ba_ = context.Operators.Where<Encounter>(ay_, az_);
 				object bb_(Encounter @this)
 				{
@@ -784,7 +795,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					CqlDateTime dq_ = context.Operators.End(dp_);
 
 					return dq_;
-				};
+				}
+;
 				IEnumerable<Encounter> bc_ = context.Operators.SortBy<Encounter>(ba_, bb_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bd_ = context.Operators.Last<Encounter>(bc_);
 				Period be_ = bd_?.Period;
@@ -815,7 +827,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					bool? ei_ = context.Operators.And(ed_, eh_);
 
 					return ei_;
-				};
+				}
+;
 				IEnumerable<Encounter> bp_ = context.Operators.Where<Encounter>(bn_, bo_);
 				object bq_(Encounter @this)
 				{
@@ -824,7 +837,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					CqlDateTime el_ = context.Operators.End(ek_);
 
 					return el_;
-				};
+				}
+;
 				IEnumerable<Encounter> br_ = context.Operators.SortBy<Encounter>(bp_, bq_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bs_ = context.Operators.Last<Encounter>(br_);
 				Period bt_ = bs_?.Period;
@@ -836,7 +850,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				bool? ca_ = context.Operators.And(bl_, bz_);
 
 				return ca_;
-			};
+			}
+;
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
@@ -845,7 +860,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlDateTime eo_ = context.Operators.End(en_);
 
 				return eo_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter k_ = context.Operators.Last<Encounter>(j_);
 			Period l_ = k_?.Period;
@@ -873,7 +889,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				bool? fg_ = context.Operators.And(fb_, ff_);
 
 				return fg_;
-			};
+			}
+;
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
 			object s_(Encounter @this)
 			{
@@ -882,7 +899,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlDateTime fj_ = context.Operators.End(fi_);
 
 				return fj_;
-			};
+			}
+;
 			IEnumerable<Encounter> t_ = context.Operators.SortBy<Encounter>(r_, s_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter u_ = context.Operators.Last<Encounter>(t_);
 			Period v_ = u_?.Period;
@@ -896,7 +914,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval((n_ ?? (x_ ?? aa_)), ad_, true, true);
 
 			return ae_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
@@ -904,7 +923,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Normalize Interval")]
-	public CqlInterval<CqlDateTime> Normalize_Interval(object choice)
+	public  CqlInterval<CqlDateTime> Normalize_Interval(object choice)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1047,13 +1066,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				return (null as CqlInterval<CqlDateTime>);
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Normalize Abatement")]
-	public CqlInterval<CqlDateTime> Normalize_Abatement(Condition condition)
+	public  CqlInterval<CqlDateTime> Normalize_Abatement(Condition condition)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1063,42 +1083,48 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				bool i_ = h_ is FhirDateTime;
 
 				return i_;
-			};
+			}
+;
 			bool c_()
 			{
 				DataType j_ = condition?.Abatement;
 				bool k_ = j_ is Period;
 
 				return k_;
-			};
+			}
+;
 			bool d_()
 			{
 				DataType l_ = condition?.Abatement;
 				bool m_ = l_ is FhirString;
 
 				return m_;
-			};
+			}
+;
 			bool e_()
 			{
 				DataType n_ = condition?.Abatement;
 				bool o_ = n_ is Age;
 
 				return o_;
-			};
+			}
+;
 			bool f_()
 			{
 				DataType p_ = condition?.Abatement;
 				bool q_ = p_ is Range;
 
 				return q_;
-			};
+			}
+;
 			bool g_()
 			{
 				DataType r_ = condition?.Abatement;
 				bool s_ = r_ is FhirBoolean;
 
 				return s_;
-			};
+			}
+;
 			if (b_())
 			{
 				DataType t_ = condition?.Abatement;
@@ -1254,13 +1280,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				return (null as CqlInterval<CqlDateTime>);
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("Prevalence Period")]
-	public CqlInterval<CqlDateTime> Prevalence_Period(Condition condition)
+	public  CqlInterval<CqlDateTime> Prevalence_Period(Condition condition)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1283,7 +1310,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				bool? s_ = context.Operators.Or(m_, r_);
 
 				return (s_ ?? false);
-			};
+			}
+;
 			if (b_())
 			{
 				DataType t_ = condition?.Onset;
@@ -1306,13 +1334,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 				return ae_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("GetId")]
-	public string GetId(string uri)
+	public  string GetId(string uri)
 	{
 		IEnumerable<string> a_ = context.Operators.Split(uri, "/");
 		string b_ = context.Operators.Last<string>(a_);
@@ -1321,7 +1350,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("EncounterDiagnosis")]
-	public IEnumerable<Condition> EncounterDiagnosis(Encounter Encounter)
+	public  IEnumerable<Condition> EncounterDiagnosis(Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		Condition b_(Encounter.DiagnosisComponent D)
@@ -1338,19 +1367,21 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				bool? n_ = context.Operators.Equal(i_, m_);
 
 				return n_;
-			};
+			}
+;
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 			Condition g_ = context.Operators.SingletonFrom<Condition>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Condition> c_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("GetCondition")]
-	public Condition GetCondition(ResourceReference reference)
+	public  Condition GetCondition(ResourceReference reference)
 	{
 		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
 		bool? b_(Condition C)
@@ -1363,7 +1394,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			bool? j_ = context.Operators.Equal(f_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
 		Condition d_ = context.Operators.SingletonFrom<Condition>(c_);
 
@@ -1371,7 +1403,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("GetExtensions")]
-	public IEnumerable<Extension> GetExtensions(DomainResource domainResource, string url)
+	public  IEnumerable<Extension> GetExtensions(DomainResource domainResource, string url)
 	{
 		List<Extension> a_ = domainResource?.Extension;
 		bool? b_(Extension E)
@@ -1383,17 +1415,19 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			bool? j_ = context.Operators.Equal(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
 		Extension d_(Extension E) => 
 			E;
+;
 		IEnumerable<Extension> e_ = context.Operators.Select<Extension, Extension>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("GetExtensions")]
-	public IEnumerable<Extension> GetExtensions(Element element, string url)
+	public  IEnumerable<Extension> GetExtensions(Element element, string url)
 	{
 		List<Extension> a_ = element?.Extension;
 		bool? b_(Extension E)
@@ -1404,17 +1438,19 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			bool? i_ = context.Operators.Equal(h_, url);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
 		Extension d_(Extension E) => 
 			E;
+;
 		IEnumerable<Extension> e_ = context.Operators.Select<Extension, Extension>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("GetExtension")]
-	public Extension GetExtension(DomainResource domainResource, string url)
+	public  Extension GetExtension(DomainResource domainResource, string url)
 	{
 		IEnumerable<Extension> a_ = this.GetExtensions(domainResource, url);
 		Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
@@ -1423,7 +1459,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("GetExtension")]
-	public Extension GetExtension(Element element, string url)
+	public  Extension GetExtension(Element element, string url)
 	{
 		IEnumerable<Extension> a_ = this.GetExtensions(element, url);
 		Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
@@ -1432,7 +1468,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("PresentOnAdmissionIndicator")]
-	public CodeableConcept PresentOnAdmissionIndicator(Element element)
+	public  CodeableConcept PresentOnAdmissionIndicator(Element element)
 	{
 		Extension a_ = this.GetExtension(element, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 		DataType b_ = a_?.Value;
@@ -1441,7 +1477,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("PrincipalDiagnosis")]
-	public Condition PrincipalDiagnosis(Encounter Encounter)
+	public  Condition PrincipalDiagnosis(Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent D)
@@ -1452,7 +1488,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			bool? l_ = context.Operators.Equal(k_, 1);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Encounter.DiagnosisComponent d_ = context.Operators.SingletonFrom<Encounter.DiagnosisComponent>(c_);
 		Encounter.DiagnosisComponent[] e_ = [
@@ -1472,12 +1509,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				bool? w_ = context.Operators.Equal(r_, v_);
 
 				return w_;
-			};
+			}
+;
 			IEnumerable<Condition> o_ = context.Operators.Where<Condition>(m_, n_);
 			Condition p_ = context.Operators.SingletonFrom<Condition>(o_);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Condition> g_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)e_, f_);
 		Condition h_ = context.Operators.SingletonFrom<Condition>(g_);
 
@@ -1485,7 +1524,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("GetLocation")]
-	public Location GetLocation(ResourceReference reference)
+	public  Location GetLocation(ResourceReference reference)
 	{
 		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(default, default);
 		bool? b_(Location L)
@@ -1498,7 +1537,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			bool? j_ = context.Operators.Equal(f_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
 		Location d_ = context.Operators.SingletonFrom<Location>(c_);
 
@@ -1506,7 +1546,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("GetBaseExtensions")]
-	public IEnumerable<Extension> GetBaseExtensions(DomainResource domainResource, string url)
+	public  IEnumerable<Extension> GetBaseExtensions(DomainResource domainResource, string url)
 	{
 		List<Extension> a_ = domainResource?.Extension;
 		bool? b_(Extension E)
@@ -1518,17 +1558,19 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			bool? j_ = context.Operators.Equal(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
 		Extension d_(Extension E) => 
 			E;
+;
 		IEnumerable<Extension> e_ = context.Operators.Select<Extension, Extension>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("GetBaseExtension")]
-	public Extension GetBaseExtension(DomainResource domainResource, string url)
+	public  Extension GetBaseExtension(DomainResource domainResource, string url)
 	{
 		IEnumerable<Extension> a_ = this.GetBaseExtensions(domainResource, url);
 		Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
@@ -1539,7 +1581,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     [CqlDeclaration("BaseExtensions")]
     [CqlTag("description", "Returns any base-FHIR extensions defined on the given element with the specified id.")]
     [CqlTag("comment", "NOTE: Extensions are not the preferred approach, but are used as a way to access content that is defined by extensions but not yet surfaced in the CQL model info.")]
-	public IEnumerable<Extension> BaseExtensions(Element element, string id)
+	public  IEnumerable<Extension> BaseExtensions(Element element, string id)
 	{
 		List<Extension> a_ = element?.Extension;
 		bool? b_(Extension E)
@@ -1551,10 +1593,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			bool? j_ = context.Operators.Equal(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
 		Extension d_(Extension E) => 
 			E;
+;
 		IEnumerable<Extension> e_ = context.Operators.Select<Extension, Extension>(c_, d_);
 
 		return e_;
@@ -1563,7 +1607,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     [CqlDeclaration("BaseExtension")]
     [CqlTag("description", "Returns the single base-FHIR extension (if present) on the given element with the specified id.")]
     [CqlTag("comment", "This function uses singleton from to ensure that a run-time exception is thrown if there is more than one extension on the given resource with the specified url.")]
-	public Extension BaseExtension(Element element, string id)
+	public  Extension BaseExtension(Element element, string id)
 	{
 		IEnumerable<Extension> a_ = this.BaseExtensions(element, id);
 		Extension b_ = context.Operators.SingletonFrom<Extension>(a_);
@@ -1572,7 +1616,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("GetMedicationCode")]
-	public CodeableConcept GetMedicationCode(MedicationRequest request)
+	public  CodeableConcept GetMedicationCode(MedicationRequest request)
 	{
 		CodeableConcept a_()
 		{
@@ -1582,7 +1626,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				bool d_ = c_ is CodeableConcept;
 
 				return d_;
-			};
+			}
+;
 			if (b_())
 			{
 				DataType e_ = request?.Medication;
@@ -1603,20 +1648,22 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					bool? q_ = context.Operators.Equal(l_, p_);
 
 					return q_;
-				};
+				}
+;
 				IEnumerable<Medication> h_ = context.Operators.Where<Medication>(f_, g_);
 				Medication i_ = context.Operators.SingletonFrom<Medication>(h_);
 				CodeableConcept j_ = i_?.Code;
 
 				return j_;
 			}
-		};
+		}
+;
 
 		return a_();
 	}
 
     [CqlDeclaration("HasStart")]
-	public bool? HasStart(CqlInterval<CqlDateTime> period)
+	public  bool? HasStart(CqlInterval<CqlDateTime> period)
 	{
 		CqlDateTime a_ = context.Operators.Start(period);
 		CqlDateTime c_ = context.Operators.MinValue<CqlDateTime>();
@@ -1628,7 +1675,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("HasEnd")]
-	public bool? HasEnd(CqlInterval<CqlDateTime> period)
+	public  bool? HasEnd(CqlInterval<CqlDateTime> period)
 	{
 		CqlDateTime a_ = context.Operators.End(period);
 		CqlDateTime c_ = context.Operators.MaxValue<CqlDateTime>();
@@ -1640,7 +1687,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Latest")]
-	public CqlDateTime Latest(object choice)
+	public  CqlDateTime Latest(object choice)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Normalize_Interval(choice);
 		CqlInterval<CqlDateTime>[] b_ = [
@@ -1662,10 +1709,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return h_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 
@@ -1673,7 +1722,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("Earliest")]
-	public CqlDateTime Earliest(object choice)
+	public  CqlDateTime Earliest(object choice)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Normalize_Interval(choice);
 		CqlInterval<CqlDateTime>[] b_ = [
@@ -1695,10 +1744,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 					return h_;
 				}
-			};
+			}
+;
 
 			return f_();
-		};
+		}
+;
 		IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
 		CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
 

@@ -231,12 +231,15 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
 
+            var @abstract = (_options.Value.ExternalsAreAbstract == true && isAbstract(definitions, libraryName))
+                ? " abstract "
+                : " ";
             writer.WriteLine(indentLevel, $"[CqlLibrary(\"{libraryAttribute}\", \"{versionAttribute}\")]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
             if (PartialClass)
-                writer.WriteLine(indentLevel, $"partial class {className}");
+                writer.WriteLine(indentLevel, $"partial{@abstract}class {className}");
             else
-                writer.WriteLine(indentLevel, $"public class {className}");
+                writer.WriteLine(indentLevel, $"public{@abstract}class {className}");
             writer.WriteLine(indentLevel, "{");
             writer.WriteLine();
             indentLevel += 1;
@@ -269,6 +272,23 @@ namespace Hl7.Cql.CodeGeneration.NET
                 indentLevel -= 1;
                 writer.WriteLine(indentLevel, "}");
             }
+        }
+
+        private static bool isAbstract(DefinitionDictionary<LambdaExpression> definitions, string libraryName)
+        {
+            foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
+            {
+                foreach (var overload in kvp.Value)
+                {
+                    if (overload.T.Body.NodeType == ExpressionType.Throw)
+                    {
+                        var unary = (UnaryExpression)overload.T.Body;
+                        if (unary.Operand.Type == typeof(NotImplementedException))
+                            return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private void WriteMemoizedInstanceMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
@@ -455,7 +475,18 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
+                var polymorphism = Polymorphism.None;
+                if (_options.Value.ExternalsAreAbstract == true &&
+                    overload.Body.NodeType == ExpressionType.Throw)
+                {
+                    var @throw = (UnaryExpression)overload.Body;
+                    if (@throw.Operand.Type == typeof(NotImplementedException))
+                        polymorphism = Polymorphism.Abstract;
+                }
+                else if (_options.Value.WriteVirtualMethods == true)
+                    polymorphism = Polymorphism.Virtual;
+                var functionText = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public", polymorphism);
+                writer.Write(functionText);
             }
         }
 

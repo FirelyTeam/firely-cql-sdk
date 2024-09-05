@@ -113,103 +113,103 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Annual_Wellness_Visit_Value() => 
+	private  CqlValueSet Annual_Wellness_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-	public CqlValueSet Annual_Wellness_Visit() => 
+	public  CqlValueSet Annual_Wellness_Visit() => 
 		__Annual_Wellness_Visit.Value;
 
-	private CqlValueSet Antidepressant_Medication_Value() => 
+	private  CqlValueSet Antidepressant_Medication_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1213", default);
 
     [CqlDeclaration("Antidepressant Medication")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1213")]
-	public CqlValueSet Antidepressant_Medication() => 
+	public  CqlValueSet Antidepressant_Medication() => 
 		__Antidepressant_Medication.Value;
 
-	private CqlValueSet Home_Healthcare_Services_Value() => 
+	private  CqlValueSet Home_Healthcare_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services() => 
+	public  CqlValueSet Home_Healthcare_Services() => 
 		__Home_Healthcare_Services.Value;
 
-	private CqlValueSet Major_Depression_Value() => 
+	private  CqlValueSet Major_Depression_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1007", default);
 
     [CqlDeclaration("Major Depression")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1007")]
-	public CqlValueSet Major_Depression() => 
+	public  CqlValueSet Major_Depression() => 
 		__Major_Depression.Value;
 
-	private CqlValueSet Nursing_Facility_Visit_Value() => 
+	private  CqlValueSet Nursing_Facility_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public CqlValueSet Nursing_Facility_Visit() => 
+	public  CqlValueSet Nursing_Facility_Visit() => 
 		__Nursing_Facility_Visit.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Online_Assessments_Value() => 
+	private  CqlValueSet Online_Assessments_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments() => 
+	public  CqlValueSet Online_Assessments() => 
 		__Online_Assessments.Value;
 
-	private CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services_Established_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Psych_Visit_Diagnostic_Evaluation_Value() => 
+	private  CqlValueSet Psych_Visit_Diagnostic_Evaluation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
-	public CqlValueSet Psych_Visit_Diagnostic_Evaluation() => 
+	public  CqlValueSet Psych_Visit_Diagnostic_Evaluation() => 
 		__Psych_Visit_Diagnostic_Evaluation.Value;
 
-	private CqlValueSet Psych_Visit_Psychotherapy_Value() => 
+	private  CqlValueSet Psych_Visit_Psychotherapy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
-	public CqlValueSet Psych_Visit_Psychotherapy() => 
+	public  CqlValueSet Psych_Visit_Psychotherapy() => 
 		__Psych_Visit_Psychotherapy.Value;
 
-	private CqlValueSet Telephone_Visits_Value() => 
+	private  CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits() => 
+	public  CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -220,10 +220,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -232,10 +232,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private CqlDateTime April_30_of_the_Measurement_Period_Value()
+	private  CqlDateTime April_30_of_the_Measurement_Period_Value()
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -247,10 +247,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("April 30 of the Measurement Period")]
-	public CqlDateTime April_30_of_the_Measurement_Period() => 
+	public  CqlDateTime April_30_of_the_Measurement_Period() => 
 		__April_30_of_the_Measurement_Period.Value;
 
-	private CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period_Value()
+	private  CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period_Value()
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -263,10 +263,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("May 1 of the Year Prior to the Measurement Period")]
-	public CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period() => 
+	public  CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period() => 
 		__May_1_of_the_Year_Prior_to_the_Measurement_Period.Value;
 
-	private CqlInterval<CqlDateTime> Intake_Period_Value()
+	private  CqlInterval<CqlDateTime> Intake_Period_Value()
 	{
 		CqlDateTime a_ = this.May_1_of_the_Year_Prior_to_the_Measurement_Period();
 		CqlDateTime b_ = this.April_30_of_the_Measurement_Period();
@@ -276,10 +276,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Intake Period")]
-	public CqlInterval<CqlDateTime> Intake_Period() => 
+	public  CqlInterval<CqlDateTime> Intake_Period() => 
 		__Intake_Period.Value;
 
-	private CqlDate Earliest_Antidepressant_Dispensed_During_Intake_Period_Value()
+	private  CqlDate Earliest_Antidepressant_Dispensed_During_Intake_Period_Value()
 	{
 		CqlValueSet a_ = this.Antidepressant_Medication();
 		IEnumerable<MedicationDispense> b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, default);
@@ -295,7 +295,8 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
 
 			return s_;
-		};
+		}
+;
 		IEnumerable<MedicationDispense> h_ = context.Operators.Where<MedicationDispense>(f_, g_);
 		(CqlDate AntidepressantDate, nint _)? i_(MedicationDispense Antidepressant)
 		{
@@ -306,14 +307,16 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			(CqlDate AntidepressantDate, nint _)? x_ = (w_, default);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<(CqlDate AntidepressantDate, nint _)?> j_ = context.Operators.Select<MedicationDispense, (CqlDate AntidepressantDate, nint _)?>(h_, i_);
 		object k_((CqlDate AntidepressantDate, nint _)? @this)
 		{
 			CqlDate y_ = @this?.AntidepressantDate;
 
 			return y_;
-		};
+		}
+;
 		IEnumerable<(CqlDate AntidepressantDate, nint _)?> l_ = context.Operators.SortBy<(CqlDate AntidepressantDate, nint _)?>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
 		(CqlDate AntidepressantDate, nint _)? m_ = context.Operators.First<(CqlDate AntidepressantDate, nint _)?>(l_);
 		CqlDate n_ = m_?.AntidepressantDate;
@@ -322,10 +325,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Earliest Antidepressant Dispensed During Intake Period")]
-	public CqlDate Earliest_Antidepressant_Dispensed_During_Intake_Period() => 
+	public  CqlDate Earliest_Antidepressant_Dispensed_During_Intake_Period() => 
 		__Earliest_Antidepressant_Dispensed_During_Intake_Period.Value;
 
-	private bool? Has_Initial_Major_Depression_Diagnosis_Value()
+	private  bool? Has_Initial_Major_Depression_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Major_Depression();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -346,7 +349,8 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			bool? v_ = context.Operators.And(g_, u_);
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 		bool? e_ = context.Operators.Exists<Condition>(d_);
 
@@ -354,10 +358,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Initial Major Depression Diagnosis")]
-	public bool? Has_Initial_Major_Depression_Diagnosis() => 
+	public  bool? Has_Initial_Major_Depression_Diagnosis() => 
 		__Has_Initial_Major_Depression_Diagnosis.Value;
 
-	private IEnumerable<Encounter> Qualifying_Encounters_Value()
+	private  IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -405,17 +409,18 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			bool? au_ = context.Operators.And(ar_, at_);
 
 			return au_;
-		};
+		}
+;
 		IEnumerable<Encounter> ae_ = context.Operators.Where<Encounter>(ac_, ad_);
 
 		return ae_;
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
-	public IEnumerable<Encounter> Qualifying_Encounters() => 
+	public  IEnumerable<Encounter> Qualifying_Encounters() => 
 		__Qualifying_Encounters.Value;
 
-	private bool? Initial_Population_Value()
+	private  bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -435,10 +440,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population() => 
+	public  bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-	private bool? Denominator_Value()
+	private  bool? Denominator_Value()
 	{
 		bool? a_ = this.Initial_Population();
 
@@ -446,10 +451,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator() => 
+	public  bool? Denominator() => 
 		__Denominator.Value;
 
-	private bool? Denominator_Exclusions_Value()
+	private  bool? Denominator_Exclusions_Value()
 	{
 		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
 		CqlValueSet b_ = this.Antidepressant_Medication();
@@ -480,7 +485,8 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 				CqlInterval<CqlDateTime> ak_ = context.Operators.Intersect<CqlDateTime>((Meds as CqlInterval<CqlDateTime>), aj_);
 
 				return ak_;
-			};
+			}
+;
 			IEnumerable<CqlInterval<CqlDateTime>> v_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)t_, u_);
 			CqlInterval<CqlDateTime> w_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(v_);
 			CqlInterval<CqlDate> x_ = CQMCommon_2_0_000.ToDateInterval(w_);
@@ -491,7 +497,8 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			bool? ae_ = context.Operators.And(m_, ad_);
 
 			return ae_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
 		bool? j_ = context.Operators.Exists<MedicationRequest>(i_);
 		bool? k_ = context.Operators.Or(a_, j_);
@@ -500,10 +507,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions() => 
+	public  bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD_Value()
+	private  IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD_Value()
 	{
 		CqlValueSet a_ = this.Antidepressant_Medication();
 		IEnumerable<MedicationDispense> b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, default);
@@ -520,17 +527,18 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			CqlInterval<CqlDate> o_ = context.Operators.Intersect<CqlDate>(i_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("Antidepressant Medication Period Between IPSD and 114 Days After IPSD")]
-	public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD() => 
+	public  IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD() => 
 		__Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD.Value;
 
-	private bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days_Value()
+	private  bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days_Value()
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD();
 		int? b_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(a_);
@@ -540,10 +548,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Cumulative Medication Duration Greater Than or Equal to 84 Days")]
-	public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days() => 
+	public  bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days() => 
 		__Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days.Value;
 
-	private bool? Numerator_1_Value()
+	private  bool? Numerator_1_Value()
 	{
 		bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days();
 
@@ -551,10 +559,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator 1")]
-	public bool? Numerator_1() => 
+	public  bool? Numerator_1() => 
 		__Numerator_1.Value;
 
-	private IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD_Value()
+	private  IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD_Value()
 	{
 		CqlValueSet a_ = this.Antidepressant_Medication();
 		IEnumerable<MedicationDispense> b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, default);
@@ -571,17 +579,18 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			CqlInterval<CqlDate> o_ = context.Operators.Intersect<CqlDate>(i_, n_);
 
 			return o_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("Antidepressant Medication Period Between IPSD and 231 Days After IPSD")]
-	public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD() => 
+	public  IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD() => 
 		__Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD.Value;
 
-	private bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days_Value()
+	private  bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days_Value()
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD();
 		int? b_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(a_);
@@ -591,10 +600,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Cumulative Medication Duration Greater Than or Equal to 180 Days")]
-	public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days() => 
+	public  bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days() => 
 		__Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days.Value;
 
-	private bool? Numerator_2_Value()
+	private  bool? Numerator_2_Value()
 	{
 		bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days();
 
@@ -602,10 +611,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator 2")]
-	public bool? Numerator_2() => 
+	public  bool? Numerator_2() => 
 		__Numerator_2.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -613,10 +622,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -624,10 +633,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -635,10 +644,10 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -646,7 +655,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
 }

@@ -145,196 +145,196 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Chlamydia_Screening_Value() => 
+	private  CqlValueSet Chlamydia_Screening_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1052", default);
 
     [CqlDeclaration("Chlamydia Screening")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1052")]
-	public CqlValueSet Chlamydia_Screening() => 
+	public  CqlValueSet Chlamydia_Screening() => 
 		__Chlamydia_Screening.Value;
 
-	private CqlValueSet Complications_of_Pregnancy__Childbirth_and_the_Puerperium_Value() => 
+	private  CqlValueSet Complications_of_Pregnancy__Childbirth_and_the_Puerperium_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1012", default);
 
     [CqlDeclaration("Complications of Pregnancy, Childbirth and the Puerperium")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1012")]
-	public CqlValueSet Complications_of_Pregnancy__Childbirth_and_the_Puerperium() => 
+	public  CqlValueSet Complications_of_Pregnancy__Childbirth_and_the_Puerperium() => 
 		__Complications_of_Pregnancy__Childbirth_and_the_Puerperium.Value;
 
-	private CqlValueSet Contraceptive_Medications_Value() => 
+	private  CqlValueSet Contraceptive_Medications_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1080", default);
 
     [CqlDeclaration("Contraceptive Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1080")]
-	public CqlValueSet Contraceptive_Medications() => 
+	public  CqlValueSet Contraceptive_Medications() => 
 		__Contraceptive_Medications.Value;
 
-	private CqlValueSet Diagnoses_Used_to_Indicate_Sexual_Activity_Value() => 
+	private  CqlValueSet Diagnoses_Used_to_Indicate_Sexual_Activity_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1018", default);
 
     [CqlDeclaration("Diagnoses Used to Indicate Sexual Activity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1018")]
-	public CqlValueSet Diagnoses_Used_to_Indicate_Sexual_Activity() => 
+	public  CqlValueSet Diagnoses_Used_to_Indicate_Sexual_Activity() => 
 		__Diagnoses_Used_to_Indicate_Sexual_Activity.Value;
 
-	private CqlValueSet Diagnostic_Studies_During_Pregnancy_Value() => 
+	private  CqlValueSet Diagnostic_Studies_During_Pregnancy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1008", default);
 
     [CqlDeclaration("Diagnostic Studies During Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1008")]
-	public CqlValueSet Diagnostic_Studies_During_Pregnancy() => 
+	public  CqlValueSet Diagnostic_Studies_During_Pregnancy() => 
 		__Diagnostic_Studies_During_Pregnancy.Value;
 
-	private CqlValueSet HIV_Value() => 
+	private  CqlValueSet HIV_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003", default);
 
     [CqlDeclaration("HIV")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003")]
-	public CqlValueSet HIV() => 
+	public  CqlValueSet HIV() => 
 		__HIV.Value;
 
-	private CqlValueSet Home_Healthcare_Services_Value() => 
+	private  CqlValueSet Home_Healthcare_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services() => 
+	public  CqlValueSet Home_Healthcare_Services() => 
 		__Home_Healthcare_Services.Value;
 
-	private CqlValueSet Isotretinoin_Value() => 
+	private  CqlValueSet Isotretinoin_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1143", default);
 
     [CqlDeclaration("Isotretinoin")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1143")]
-	public CqlValueSet Isotretinoin() => 
+	public  CqlValueSet Isotretinoin() => 
 		__Isotretinoin.Value;
 
-	private CqlValueSet Lab_Tests_During_Pregnancy_Value() => 
+	private  CqlValueSet Lab_Tests_During_Pregnancy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1007", default);
 
     [CqlDeclaration("Lab Tests During Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1007")]
-	public CqlValueSet Lab_Tests_During_Pregnancy() => 
+	public  CqlValueSet Lab_Tests_During_Pregnancy() => 
 		__Lab_Tests_During_Pregnancy.Value;
 
-	private CqlValueSet Lab_Tests_for_Sexually_Transmitted_Infections_Value() => 
+	private  CqlValueSet Lab_Tests_for_Sexually_Transmitted_Infections_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1051", default);
 
     [CqlDeclaration("Lab Tests for Sexually Transmitted Infections")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1051")]
-	public CqlValueSet Lab_Tests_for_Sexually_Transmitted_Infections() => 
+	public  CqlValueSet Lab_Tests_for_Sexually_Transmitted_Infections() => 
 		__Lab_Tests_for_Sexually_Transmitted_Infections.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Online_Assessments_Value() => 
+	private  CqlValueSet Online_Assessments_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments() => 
+	public  CqlValueSet Online_Assessments() => 
 		__Online_Assessments.Value;
 
-	private CqlValueSet Pap_Test_Value() => 
+	private  CqlValueSet Pap_Test_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017", default);
 
     [CqlDeclaration("Pap Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017")]
-	public CqlValueSet Pap_Test() => 
+	public  CqlValueSet Pap_Test() => 
 		__Pap_Test.Value;
 
-	private CqlValueSet Pregnancy_Test_Value() => 
+	private  CqlValueSet Pregnancy_Test_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1011", default);
 
     [CqlDeclaration("Pregnancy Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1011")]
-	public CqlValueSet Pregnancy_Test() => 
+	public  CqlValueSet Pregnancy_Test() => 
 		__Pregnancy_Test.Value;
 
-	private CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services_Established_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
+	public  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
 		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
-	private CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
+	private  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-	public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17() => 
+	public  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17() => 
 		__Preventive_Care_Services__Initial_Office_Visit__0_to_17.Value;
 
-	private CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
+	private  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-	public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17() => 
+	public  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17() => 
 		__Preventive_Care__Established_Office_Visit__0_to_17.Value;
 
-	private CqlValueSet Procedures_Used_to_Indicate_Sexual_Activity_Value() => 
+	private  CqlValueSet Procedures_Used_to_Indicate_Sexual_Activity_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1017", default);
 
     [CqlDeclaration("Procedures Used to Indicate Sexual Activity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1017")]
-	public CqlValueSet Procedures_Used_to_Indicate_Sexual_Activity() => 
+	public  CqlValueSet Procedures_Used_to_Indicate_Sexual_Activity() => 
 		__Procedures_Used_to_Indicate_Sexual_Activity.Value;
 
-	private CqlValueSet Telephone_Visits_Value() => 
+	private  CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits() => 
+	public  CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
 
-	private CqlValueSet XRay_Study_Value() => 
+	private  CqlValueSet XRay_Study_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1034", default);
 
     [CqlDeclaration("XRay Study")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1034")]
-	public CqlValueSet XRay_Study() => 
+	public  CqlValueSet XRay_Study() => 
 		__XRay_Study.Value;
 
-	private CqlCode Female_Value() => 
+	private  CqlCode Female_Value() => 
 		new CqlCode("F", "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", default, default);
 
     [CqlDeclaration("Female")]
-	public CqlCode Female() => 
+	public  CqlCode Female() => 
 		__Female.Value;
 
-	private CqlCode Have_you_ever_had_vaginal_intercourse__PhenX__Value() => 
+	private  CqlCode Have_you_ever_had_vaginal_intercourse__PhenX__Value() => 
 		new CqlCode("64728-9", "http://loinc.org", default, default);
 
     [CqlDeclaration("Have you ever had vaginal intercourse [PhenX]")]
-	public CqlCode Have_you_ever_had_vaginal_intercourse__PhenX_() => 
+	public  CqlCode Have_you_ever_had_vaginal_intercourse__PhenX_() => 
 		__Have_you_ever_had_vaginal_intercourse__PhenX_.Value;
 
-	private CqlCode Yes__qualifier_value__Value() => 
+	private  CqlCode Yes__qualifier_value__Value() => 
 		new CqlCode("373066001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Yes (qualifier value)")]
-	public CqlCode Yes__qualifier_value_() => 
+	public  CqlCode Yes__qualifier_value_() => 
 		__Yes__qualifier_value_.Value;
 
-	private CqlCode[] AdministrativeGender_Value()
+	private  CqlCode[] AdministrativeGender_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("F", "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", default, default),
@@ -344,10 +344,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("AdministrativeGender")]
-	public CqlCode[] AdministrativeGender() => 
+	public  CqlCode[] AdministrativeGender() => 
 		__AdministrativeGender.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("64728-9", "http://loinc.org", default, default),
@@ -357,10 +357,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("373066001", "http://snomed.info/sct", default, default),
@@ -370,10 +370,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -384,10 +384,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -396,10 +396,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -407,10 +407,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -418,10 +418,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -429,10 +429,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -440,10 +440,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<Encounter> Qualifying_Encounters_Value()
+	private  IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -478,17 +478,18 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			bool? ae_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aa_, ad_, "day");
 
 			return ae_;
-		};
+		}
+;
 		IEnumerable<Encounter> z_ = context.Operators.Where<Encounter>(x_, y_);
 
 		return z_;
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
-	public IEnumerable<Encounter> Qualifying_Encounters() => 
+	public  IEnumerable<Encounter> Qualifying_Encounters() => 
 		__Qualifying_Encounters.Value;
 
-	private bool? Has_Assessments_Identifying_Sexual_Activity_Value()
+	private  bool? Has_Assessments_Identifying_Sexual_Activity_Value()
 	{
 		CqlCode a_ = this.Have_you_ever_had_vaginal_intercourse__PhenX_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -512,7 +513,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					CqlDateTime u_ = context.Operators.End(t_);
 
 					return (u_ is null);
-				};
+				}
+;
 				if (s_())
 				{
 					return default;
@@ -526,12 +528,14 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 
 					return z_;
 				}
-			};
+			}
+;
 			bool? q_ = context.Operators.SameOrBefore(o_, p_(), default);
 			bool? r_ = context.Operators.And(l_, q_);
 
 			return r_;
-		};
+		}
+;
 		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 		bool? g_ = context.Operators.Exists<Observation>(f_);
 
@@ -539,10 +543,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Assessments Identifying Sexual Activity")]
-	public bool? Has_Assessments_Identifying_Sexual_Activity() => 
+	public  bool? Has_Assessments_Identifying_Sexual_Activity() => 
 		__Has_Assessments_Identifying_Sexual_Activity.Value;
 
-	private bool? Has_Diagnoses_Identifying_Sexual_Activity_Value()
+	private  bool? Has_Diagnoses_Identifying_Sexual_Activity_Value()
 	{
 		CqlValueSet a_ = this.Diagnoses_Used_to_Indicate_Sexual_Activity();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -559,7 +563,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			bool? n_ = context.Operators.Overlaps(l_, m_, default);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
 		bool? k_ = context.Operators.Exists<Condition>(j_);
 
@@ -567,10 +572,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Diagnoses Identifying Sexual Activity")]
-	public bool? Has_Diagnoses_Identifying_Sexual_Activity() => 
+	public  bool? Has_Diagnoses_Identifying_Sexual_Activity() => 
 		__Has_Diagnoses_Identifying_Sexual_Activity.Value;
 
-	private bool? Has_Active_Contraceptive_Medications_Value()
+	private  bool? Has_Active_Contraceptive_Medications_Value()
 	{
 		CqlValueSet a_ = this.Contraceptive_Medications();
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -591,7 +596,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			bool? v_ = context.Operators.Overlaps(t_, u_, default);
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		bool? i_ = context.Operators.Exists<MedicationRequest>(h_);
 
@@ -599,10 +605,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Active Contraceptive Medications")]
-	public bool? Has_Active_Contraceptive_Medications() => 
+	public  bool? Has_Active_Contraceptive_Medications() => 
 		__Has_Active_Contraceptive_Medications.Value;
 
-	private bool? Has_Ordered_Contraceptive_Medications_Value()
+	private  bool? Has_Ordered_Contraceptive_Medications_Value()
 	{
 		CqlValueSet a_ = this.Contraceptive_Medications();
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -618,7 +624,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, m_, "day");
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
 		bool? i_ = context.Operators.Exists<MedicationRequest>(h_);
 
@@ -626,10 +633,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Ordered Contraceptive Medications")]
-	public bool? Has_Ordered_Contraceptive_Medications() => 
+	public  bool? Has_Ordered_Contraceptive_Medications() => 
 		__Has_Ordered_Contraceptive_Medications.Value;
 
-	private bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy_Value()
+	private  bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy_Value()
 	{
 		CqlValueSet a_ = this.Pap_Test();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -649,7 +656,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
 
 			return q_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> k_ = context.Operators.Where<ServiceRequest>(i_, j_);
 		bool? l_ = context.Operators.Exists<ServiceRequest>(k_);
 
@@ -657,10 +665,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Laboratory Tests Identifying Sexual Activity But Not Pregnancy")]
-	public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy() => 
+	public  bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy() => 
 		__Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy.Value;
 
-	private bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_Value()
+	private  bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_Value()
 	{
 		CqlValueSet a_ = this.Pregnancy_Test();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -674,7 +682,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(i_, l_, "day");
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> e_ = context.Operators.Where<ServiceRequest>(c_, d_);
 		bool? f_ = context.Operators.Exists<ServiceRequest>(e_);
 		bool? g_ = this.Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy();
@@ -684,10 +693,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Laboratory Tests Identifying Sexual Activity")]
-	public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity() => 
+	public  bool? Has_Laboratory_Tests_Identifying_Sexual_Activity() => 
 		__Has_Laboratory_Tests_Identifying_Sexual_Activity.Value;
 
-	private bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity_Value()
+	private  bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity_Value()
 	{
 		CqlValueSet a_ = this.Diagnostic_Studies_During_Pregnancy();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -701,7 +710,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> e_ = context.Operators.Where<ServiceRequest>(c_, d_);
 		bool? f_ = context.Operators.Exists<ServiceRequest>(e_);
 
@@ -709,10 +719,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Diagnostic Studies Identifying Sexual Activity")]
-	public bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity() => 
+	public  bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity() => 
 		__Has_Diagnostic_Studies_Identifying_Sexual_Activity.Value;
 
-	private bool? Has_Procedures_Identifying_Sexual_Activity_Value()
+	private  bool? Has_Procedures_Identifying_Sexual_Activity_Value()
 	{
 		CqlValueSet a_ = this.Procedures_Used_to_Indicate_Sexual_Activity();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -726,7 +736,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 		bool? f_ = context.Operators.Exists<Procedure>(e_);
 
@@ -734,10 +745,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Procedures Identifying Sexual Activity")]
-	public bool? Has_Procedures_Identifying_Sexual_Activity() => 
+	public  bool? Has_Procedures_Identifying_Sexual_Activity() => 
 		__Has_Procedures_Identifying_Sexual_Activity.Value;
 
-	private bool? Initial_Population_Value()
+	private  bool? Initial_Population_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -776,10 +787,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population() => 
+	public  bool? Initial_Population() => 
 		__Initial_Population.Value;
 
-	private bool? Denominator_Value()
+	private  bool? Denominator_Value()
 	{
 		bool? a_ = this.Initial_Population();
 
@@ -787,10 +798,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator() => 
+	public  bool? Denominator() => 
 		__Denominator.Value;
 
-	private bool? Has_Pregnancy_Test_Exclusion_Value()
+	private  bool? Has_Pregnancy_Test_Exclusion_Value()
 	{
 		CqlValueSet a_ = this.Pregnancy_Test();
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -829,14 +840,17 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				bool? au_ = context.Operators.And(ao_, at_);
 
 				return au_;
-			};
+			}
+;
 			IEnumerable<ServiceRequest> q_ = context.Operators.Where<ServiceRequest>(o_, p_);
 			ServiceRequest r_(ServiceRequest XrayOrder) => 
 				PregnancyTest;
+;
 			IEnumerable<ServiceRequest> s_ = context.Operators.Select<ServiceRequest, ServiceRequest>(q_, r_);
 
 			return s_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> e_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(c_, d_);
 		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
 		IEnumerable<ServiceRequest> h_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(g_);
@@ -876,14 +890,17 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				bool? cg_ = context.Operators.And(ca_, cf_);
 
 				return cg_;
-			};
+			}
+;
 			IEnumerable<MedicationRequest> bc_ = context.Operators.Where<MedicationRequest>(ba_, bb_);
 			ServiceRequest bd_(MedicationRequest AccutaneOrder) => 
 				PregnancyTestOrder;
+;
 			IEnumerable<ServiceRequest> be_ = context.Operators.Select<MedicationRequest, ServiceRequest>(bc_, bd_);
 
 			return be_;
-		};
+		}
+;
 		IEnumerable<ServiceRequest> j_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(h_, i_);
 		IEnumerable<ServiceRequest> k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		bool? l_ = context.Operators.Exists<ServiceRequest>(k_);
@@ -892,10 +909,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has Pregnancy Test Exclusion")]
-	public bool? Has_Pregnancy_Test_Exclusion() => 
+	public  bool? Has_Pregnancy_Test_Exclusion() => 
 		__Has_Pregnancy_Test_Exclusion.Value;
 
-	private bool? Denominator_Exclusions_Value()
+	private  bool? Denominator_Exclusions_Value()
 	{
 		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
 		bool? b_ = this.Has_Pregnancy_Test_Exclusion();
@@ -926,10 +943,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions() => 
+	public  bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private bool? Numerator_Value()
+	private  bool? Numerator_Value()
 	{
 		CqlValueSet a_ = this.Chlamydia_Screening();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -945,7 +962,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					bool t_ = s_ is CqlDateTime;
 
 					return t_;
-				};
+				}
+;
 				bool p_()
 				{
 					DataType u_ = ChlamydiaTest?.Effective;
@@ -953,7 +971,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					bool w_ = v_ is CqlInterval<CqlDateTime>;
 
 					return w_;
-				};
+				}
+;
 				bool q_()
 				{
 					DataType x_ = ChlamydiaTest?.Effective;
@@ -961,7 +980,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					bool z_ = y_ is CqlDateTime;
 
 					return z_;
-				};
+				}
+;
 				if (o_())
 				{
 					DataType aa_ = ChlamydiaTest?.Effective;
@@ -987,7 +1007,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime h_ = QICoreCommon_2_0_000.Latest(g_());
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period();
 			bool? j_ = context.Operators.In<CqlDateTime>(h_, i_, "day");
@@ -997,7 +1018,8 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 			bool? n_ = context.Operators.And(j_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		bool? f_ = context.Operators.Exists<Observation>(e_);
 
@@ -1005,10 +1027,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator() => 
+	public  bool? Numerator() => 
 		__Numerator.Value;
 
-	private bool? Stratification_1_Value()
+	private  bool? Stratification_1_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -1025,10 +1047,10 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Stratification 1")]
-	public bool? Stratification_1() => 
+	public  bool? Stratification_1() => 
 		__Stratification_1.Value;
 
-	private bool? Stratification_2_Value()
+	private  bool? Stratification_2_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -1045,7 +1067,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 	}
 
     [CqlDeclaration("Stratification 2")]
-	public bool? Stratification_2() => 
+	public  bool? Stratification_2() => 
 		__Stratification_2.Value;
 
 }

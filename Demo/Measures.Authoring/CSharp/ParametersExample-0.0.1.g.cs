@@ -51,15 +51,15 @@ public class ParametersExample_0_0_1
 
     #endregion
 
-	private CqlValueSet Marital_Status_Value() => 
+	private  CqlValueSet Marital_Status_Value() => 
 		new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", default);
 
     [CqlDeclaration("Marital Status")]
     [CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status")]
-	public CqlValueSet Marital_Status() => 
+	public  CqlValueSet Marital_Status() => 
 		__Marital_Status.Value;
 
-	private int? AgeThreshold_Value()
+	private  int? AgeThreshold_Value()
 	{
 		object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
 
@@ -67,10 +67,10 @@ public class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("AgeThreshold")]
-	public int? AgeThreshold() => 
+	public  int? AgeThreshold() => 
 		__AgeThreshold.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -79,10 +79,10 @@ public class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private CqlDate CurrentDate_Value()
+	private  CqlDate CurrentDate_Value()
 	{
 		CqlDate a_ = context.Operators.Today();
 
@@ -90,10 +90,10 @@ public class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("CurrentDate")]
-	public CqlDate CurrentDate() => 
+	public  CqlDate CurrentDate() => 
 		__CurrentDate.Value;
 
-	private Patient Patient_Filter_Value()
+	private  Patient Patient_Filter_Value()
 	{
 		Patient a_ = this.Patient();
 		Patient[] b_ = [
@@ -119,7 +119,8 @@ public class ParametersExample_0_0_1
 			bool? u_ = context.Operators.And(p_, t_);
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<Patient> d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);
 		Patient e_ = context.Operators.SingletonFrom<Patient>(d_);
 
@@ -127,10 +128,10 @@ public class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("Patient Filter")]
-	public Patient Patient_Filter() => 
+	public  Patient Patient_Filter() => 
 		__Patient_Filter.Value;
 
-	private Date Patient_Birthdate_Value()
+	private  Date Patient_Birthdate_Value()
 	{
 		Patient a_ = this.Patient_Filter();
 		Date b_ = a_?.BirthDateElement;
@@ -139,10 +140,10 @@ public class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("Patient Birthdate")]
-	public Date Patient_Birthdate() => 
+	public  Date Patient_Birthdate() => 
 		__Patient_Birthdate.Value;
 
-	private int? Patient_Age_in_Years_Value()
+	private  int? Patient_Age_in_Years_Value()
 	{
 		Date a_ = this.Patient_Birthdate();
 		CqlDate b_ = FHIRHelpers_4_3_000.ToDate(a_);
@@ -153,10 +154,10 @@ public class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("Patient Age in Years")]
-	public int? Patient_Age_in_Years() => 
+	public  int? Patient_Age_in_Years() => 
 		__Patient_Age_in_Years.Value;
 
-	private bool? Patient_Older_Than_AgeThreshold_Value()
+	private  bool? Patient_Older_Than_AgeThreshold_Value()
 	{
 		int? a_ = this.Patient_Age_in_Years();
 		int? b_ = this.AgeThreshold();
@@ -166,7 +167,7 @@ public class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("Patient Older Than AgeThreshold")]
-	public bool? Patient_Older_Than_AgeThreshold() => 
+	public  bool? Patient_Older_Than_AgeThreshold() => 
 		__Patient_Older_Than_AgeThreshold.Value;
 
 }

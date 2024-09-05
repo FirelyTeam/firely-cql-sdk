@@ -165,221 +165,221 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
     #endregion
 
-	private CqlValueSet Ambulatory_Value() => 
+	private  CqlValueSet Ambulatory_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1003", default);
 
     [CqlDeclaration("Ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1003")]
-	public CqlValueSet Ambulatory() => 
+	public  CqlValueSet Ambulatory() => 
 		__Ambulatory.Value;
 
-	private CqlValueSet Atomoxetine_Value() => 
+	private  CqlValueSet Atomoxetine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1170", default);
 
     [CqlDeclaration("Atomoxetine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1170")]
-	public CqlValueSet Atomoxetine() => 
+	public  CqlValueSet Atomoxetine() => 
 		__Atomoxetine.Value;
 
-	private CqlValueSet Behavioral_Health_Follow_up_Visit_Value() => 
+	private  CqlValueSet Behavioral_Health_Follow_up_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1054", default);
 
     [CqlDeclaration("Behavioral Health Follow up Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1054")]
-	public CqlValueSet Behavioral_Health_Follow_up_Visit() => 
+	public  CqlValueSet Behavioral_Health_Follow_up_Visit() => 
 		__Behavioral_Health_Follow_up_Visit.Value;
 
-	private CqlValueSet Clonidine_Value() => 
+	private  CqlValueSet Clonidine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1171", default);
 
     [CqlDeclaration("Clonidine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1171")]
-	public CqlValueSet Clonidine() => 
+	public  CqlValueSet Clonidine() => 
 		__Clonidine.Value;
 
-	private CqlValueSet Dexmethylphenidate_Value() => 
+	private  CqlValueSet Dexmethylphenidate_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1172", default);
 
     [CqlDeclaration("Dexmethylphenidate")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1172")]
-	public CqlValueSet Dexmethylphenidate() => 
+	public  CqlValueSet Dexmethylphenidate() => 
 		__Dexmethylphenidate.Value;
 
-	private CqlValueSet Dextroamphetamine_Value() => 
+	private  CqlValueSet Dextroamphetamine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1173", default);
 
     [CqlDeclaration("Dextroamphetamine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1173")]
-	public CqlValueSet Dextroamphetamine() => 
+	public  CqlValueSet Dextroamphetamine() => 
 		__Dextroamphetamine.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+	private  CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+	public  CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Guanfacine_Value() => 
+	private  CqlValueSet Guanfacine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.11.1252", default);
 
     [CqlDeclaration("Guanfacine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.11.1252")]
-	public CqlValueSet Guanfacine() => 
+	public  CqlValueSet Guanfacine() => 
 		__Guanfacine.Value;
 
-	private CqlValueSet Home_Healthcare_Services_Value() => 
+	private  CqlValueSet Home_Healthcare_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services() => 
+	public  CqlValueSet Home_Healthcare_Services() => 
 		__Home_Healthcare_Services.Value;
 
-	private CqlValueSet Initial_Hospital_Observation_Care_Value() => 
+	private  CqlValueSet Initial_Hospital_Observation_Care_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1002", default);
 
     [CqlDeclaration("Initial Hospital Observation Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1002")]
-	public CqlValueSet Initial_Hospital_Observation_Care() => 
+	public  CqlValueSet Initial_Hospital_Observation_Care() => 
 		__Initial_Hospital_Observation_Care.Value;
 
-	private CqlValueSet Lisdexamfetamine_Value() => 
+	private  CqlValueSet Lisdexamfetamine_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1174", default);
 
     [CqlDeclaration("Lisdexamfetamine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1174")]
-	public CqlValueSet Lisdexamfetamine() => 
+	public  CqlValueSet Lisdexamfetamine() => 
 		__Lisdexamfetamine.Value;
 
-	private CqlValueSet Mental_Behavioral_and_Neurodevelopmental_Disorders_Value() => 
+	private  CqlValueSet Mental_Behavioral_and_Neurodevelopmental_Disorders_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1203", default);
 
     [CqlDeclaration("Mental Behavioral and Neurodevelopmental Disorders")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1203")]
-	public CqlValueSet Mental_Behavioral_and_Neurodevelopmental_Disorders() => 
+	public  CqlValueSet Mental_Behavioral_and_Neurodevelopmental_Disorders() => 
 		__Mental_Behavioral_and_Neurodevelopmental_Disorders.Value;
 
-	private CqlValueSet Methylphenidate_Value() => 
+	private  CqlValueSet Methylphenidate_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1176", default);
 
     [CqlDeclaration("Methylphenidate")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1176")]
-	public CqlValueSet Methylphenidate() => 
+	public  CqlValueSet Methylphenidate() => 
 		__Methylphenidate.Value;
 
-	private CqlValueSet Narcolepsy_Value() => 
+	private  CqlValueSet Narcolepsy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1011", default);
 
     [CqlDeclaration("Narcolepsy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1011")]
-	public CqlValueSet Narcolepsy() => 
+	public  CqlValueSet Narcolepsy() => 
 		__Narcolepsy.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Online_Assessments_Value() => 
+	private  CqlValueSet Online_Assessments_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments() => 
+	public  CqlValueSet Online_Assessments() => 
 		__Online_Assessments.Value;
 
-	private CqlValueSet Outpatient_Consultation_Value() => 
+	private  CqlValueSet Outpatient_Consultation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public CqlValueSet Outpatient_Consultation() => 
+	public  CqlValueSet Outpatient_Consultation() => 
 		__Outpatient_Consultation.Value;
 
-	private CqlValueSet Preventive_Care_Services_Group_Counseling_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Group_Counseling_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default);
 
     [CqlDeclaration("Preventive Care Services Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
-	public CqlValueSet Preventive_Care_Services_Group_Counseling() => 
+	public  CqlValueSet Preventive_Care_Services_Group_Counseling() => 
 		__Preventive_Care_Services_Group_Counseling.Value;
 
-	private CqlValueSet Preventive_Care_Services_Individual_Counseling_Value() => 
+	private  CqlValueSet Preventive_Care_Services_Individual_Counseling_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
 
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
-	public CqlValueSet Preventive_Care_Services_Individual_Counseling() => 
+	public  CqlValueSet Preventive_Care_Services_Individual_Counseling() => 
 		__Preventive_Care_Services_Individual_Counseling.Value;
 
-	private CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
+	private  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-	public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17() => 
+	public  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17() => 
 		__Preventive_Care_Services__Initial_Office_Visit__0_to_17.Value;
 
-	private CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
+	private  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-	public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17() => 
+	public  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17() => 
 		__Preventive_Care__Established_Office_Visit__0_to_17.Value;
 
-	private CqlValueSet Psych_Visit_Diagnostic_Evaluation_Value() => 
+	private  CqlValueSet Psych_Visit_Diagnostic_Evaluation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
-	public CqlValueSet Psych_Visit_Diagnostic_Evaluation() => 
+	public  CqlValueSet Psych_Visit_Diagnostic_Evaluation() => 
 		__Psych_Visit_Diagnostic_Evaluation.Value;
 
-	private CqlValueSet Psych_Visit_Psychotherapy_Value() => 
+	private  CqlValueSet Psych_Visit_Psychotherapy_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
-	public CqlValueSet Psych_Visit_Psychotherapy() => 
+	public  CqlValueSet Psych_Visit_Psychotherapy() => 
 		__Psych_Visit_Psychotherapy.Value;
 
-	private CqlValueSet Psychotherapy_and_Pharmacologic_Management_Value() => 
+	private  CqlValueSet Psychotherapy_and_Pharmacologic_Management_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1055", default);
 
     [CqlDeclaration("Psychotherapy and Pharmacologic Management")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1055")]
-	public CqlValueSet Psychotherapy_and_Pharmacologic_Management() => 
+	public  CqlValueSet Psychotherapy_and_Pharmacologic_Management() => 
 		__Psychotherapy_and_Pharmacologic_Management.Value;
 
-	private CqlValueSet Telephone_Visits_Value() => 
+	private  CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits() => 
+	public  CqlValueSet Telephone_Visits() => 
 		__Telephone_Visits.Value;
 
-	private CqlCode _24_HR_dexmethylphenidate_hydrochloride_40_MG_Extended_Release_Oral_Capsule_Value() => 
+	private  CqlCode _24_HR_dexmethylphenidate_hydrochloride_40_MG_Extended_Release_Oral_Capsule_Value() => 
 		new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("24 HR dexmethylphenidate hydrochloride 40 MG Extended Release Oral Capsule")]
-	public CqlCode _24_HR_dexmethylphenidate_hydrochloride_40_MG_Extended_Release_Oral_Capsule() => 
+	public  CqlCode _24_HR_dexmethylphenidate_hydrochloride_40_MG_Extended_Release_Oral_Capsule() => 
 		___24_HR_dexmethylphenidate_hydrochloride_40_MG_Extended_Release_Oral_Capsule.Value;
 
-	private CqlCode methamphetamine_hydrochloride_5_MG_Oral_Tablet_Value() => 
+	private  CqlCode methamphetamine_hydrochloride_5_MG_Oral_Tablet_Value() => 
 		new CqlCode("977860", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("methamphetamine hydrochloride 5 MG Oral Tablet")]
-	public CqlCode methamphetamine_hydrochloride_5_MG_Oral_Tablet() => 
+	public  CqlCode methamphetamine_hydrochloride_5_MG_Oral_Tablet() => 
 		__methamphetamine_hydrochloride_5_MG_Oral_Tablet.Value;
 
-	private CqlCode[] RXNORM_Value()
+	private  CqlCode[] RXNORM_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default),
@@ -390,10 +390,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("RXNORM")]
-	public CqlCode[] RXNORM() => 
+	public  CqlCode[] RXNORM() => 
 		__RXNORM.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -404,10 +404,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -416,10 +416,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private CqlDateTime March_1_of_Year_Prior_to_Measurement_Period_Value()
+	private  CqlDateTime March_1_of_Year_Prior_to_Measurement_Period_Value()
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -432,10 +432,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("March 1 of Year Prior to Measurement Period")]
-	public CqlDateTime March_1_of_Year_Prior_to_Measurement_Period() => 
+	public  CqlDateTime March_1_of_Year_Prior_to_Measurement_Period() => 
 		__March_1_of_Year_Prior_to_Measurement_Period.Value;
 
-	private CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period_Value()
+	private  CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period_Value()
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period();
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -449,10 +449,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Last Calendar Day of February of Measurement Period")]
-	public CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period() => 
+	public  CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period() => 
 		__Last_Calendar_Day_of_February_of_Measurement_Period.Value;
 
-	private CqlInterval<CqlDateTime> Intake_Period_Value()
+	private  CqlInterval<CqlDateTime> Intake_Period_Value()
 	{
 		CqlDateTime a_ = this.March_1_of_Year_Prior_to_Measurement_Period();
 		CqlDateTime b_ = this.Last_Calendar_Day_of_February_of_Measurement_Period();
@@ -462,10 +462,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Intake Period")]
-	public CqlInterval<CqlDateTime> Intake_Period() => 
+	public  CqlInterval<CqlDateTime> Intake_Period() => 
 		__Intake_Period.Value;
 
-	private IEnumerable<(CqlDate startDate, nint _)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value()
+	private  IEnumerable<(CqlDate startDate, nint _)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value()
 	{
 		CqlValueSet a_ = this.Atomoxetine();
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -517,7 +517,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? dj_ = context.Operators.In<CqlDateTime>(dh_, di_, default);
 
 			return dj_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> ay_ = context.Operators.Where<MedicationRequest>(aw_, ax_);
 		IEnumerable<MedicationRequest> ba_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> bc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -561,7 +562,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? do_ = context.Operators.In<CqlDateTime>(dm_, dn_, default);
 
 			return do_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> cx_ = context.Operators.Where<MedicationRequest>(cv_, cw_);
 		IEnumerable<MedicationRequest> cy_(MedicationRequest ADHDMedicationOrder)
 		{
@@ -622,14 +624,17 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				bool? gc_ = context.Operators.Overlaps(fq_, gb_, default);
 
 				return gc_;
-			};
+			}
+;
 			IEnumerable<MedicationRequest> fn_ = context.Operators.Where<MedicationRequest>(fl_, fm_);
 			MedicationRequest fo_(MedicationRequest ActiveADHDMedication) => 
 				ADHDMedicationOrder;
+;
 			IEnumerable<MedicationRequest> fp_ = context.Operators.Select<MedicationRequest, MedicationRequest>(fn_, fo_);
 
 			return fp_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> cz_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(cx_, cy_);
 		IEnumerable<MedicationRequest> da_ = context.Operators.Except<MedicationRequest>(ay_, cz_);
 		(CqlDate startDate, nint _)? db_(MedicationRequest QualifyingMed)
@@ -639,24 +644,26 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			(CqlDate startDate, nint _)? gf_ = (ge_, default);
 
 			return gf_;
-		};
+		}
+;
 		IEnumerable<(CqlDate startDate, nint _)?> dc_ = context.Operators.Select<MedicationRequest, (CqlDate startDate, nint _)?>(da_, db_);
 		object dd_((CqlDate startDate, nint _)? @this)
 		{
 			CqlDate gg_ = @this?.startDate;
 
 			return gg_;
-		};
+		}
+;
 		IEnumerable<(CqlDate startDate, nint _)?> de_ = context.Operators.SortBy<(CqlDate startDate, nint _)?>(dc_, dd_, System.ComponentModel.ListSortDirection.Ascending);
 
 		return de_;
 	}
 
     [CqlDeclaration("ADHD Medication Prescribed During Intake Period and Not Previously on ADHD Medication")]
-	public IEnumerable<(CqlDate startDate, nint _)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication() => 
+	public  IEnumerable<(CqlDate startDate, nint _)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication() => 
 		__ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication.Value;
 
-	private CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period_Value()
+	private  CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period_Value()
 	{
 		IEnumerable<(CqlDate startDate, nint _)?> a_ = this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication();
 		bool? b_((CqlDate startDate, nint _)? @this)
@@ -665,14 +672,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? h_ = context.Operators.Not((bool?)(g_ is null));
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<(CqlDate startDate, nint _)?> c_ = context.Operators.Where<(CqlDate startDate, nint _)?>(a_, b_);
 		CqlDate d_((CqlDate startDate, nint _)? @this)
 		{
 			CqlDate i_ = @this?.startDate;
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<CqlDate> e_ = context.Operators.Select<(CqlDate startDate, nint _)?, CqlDate>(c_, d_);
 		CqlDate f_ = context.Operators.First<CqlDate>(e_);
 
@@ -680,10 +689,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("First ADHD Medication Prescribed During Intake Period")]
-	public CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period() => 
+	public  CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period() => 
 		__First_ADHD_Medication_Prescribed_During_Intake_Period.Value;
 
-	private CqlDate IPSD_Value()
+	private  CqlDate IPSD_Value()
 	{
 		CqlDate a_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period();
 
@@ -691,10 +700,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("IPSD")]
-	public CqlDate IPSD() => 
+	public  CqlDate IPSD() => 
 		__IPSD.Value;
 
-	private IEnumerable<Encounter> Qualifying_Encounter_Value()
+	private  IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -732,18 +741,19 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, "day");
 
 			return ar_;
-		};
+		}
+;
 		IEnumerable<Encounter> m_ = context.Operators.Where<Encounter>(k_, l_);
 
 		return m_;
 	}
 
     [CqlDeclaration("Qualifying Encounter")]
-	public IEnumerable<Encounter> Qualifying_Encounter() => 
+	public  IEnumerable<Encounter> Qualifying_Encounter() => 
 		__Qualifying_Encounter.Value;
 
     [CqlDeclaration("PrincipalDiagnosis")]
-	public IEnumerable<Condition> PrincipalDiagnosis(Encounter Encounter)
+	public  IEnumerable<Condition> PrincipalDiagnosis(Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent D)
@@ -753,7 +763,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? h_ = context.Operators.Equal(g_, 1);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Condition d_(Encounter.DiagnosisComponent PD)
 		{
@@ -769,18 +780,20 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				bool? s_ = context.Operators.Equal(n_, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<Condition> k_ = context.Operators.Where<Condition>(i_, j_);
 			Condition l_ = context.Operators.SingletonFrom<Condition>(k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Condition> e_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(c_, d_);
 
 		return e_;
 	}
 
-	private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_Value()
+	private  IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -795,22 +808,24 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				bool? l_ = context.Operators.ConceptInValueSet(j_, k_);
 
 				return l_;
-			};
+			}
+;
 			IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
 			bool? h_ = context.Operators.Exists<Condition>(g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Inpatient Stay with Qualifying Diagnosis")]
-	public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis() => 
+	public  IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis() => 
 		__Inpatient_Stay_with_Qualifying_Diagnosis.Value;
 
-	private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase_Value()
+	private  IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis();
 		bool? b_(Encounter InpatientStay)
@@ -828,17 +843,18 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? p_ = context.Operators.And(m_, o_);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Inpatient Stay with Qualifying Diagnosis During Initiation Phase")]
-	public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase() => 
+	public  IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase() => 
 		__Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase.Value;
 
-	private bool? Initial_Population_1_Value()
+	private  bool? Initial_Population_1_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -872,10 +888,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population 1")]
-	public bool? Initial_Population_1() => 
+	public  bool? Initial_Population_1() => 
 		__Initial_Population_1.Value;
 
-	private bool? Denominator_1_Value()
+	private  bool? Denominator_1_Value()
 	{
 		bool? a_ = this.Initial_Population_1();
 
@@ -883,10 +899,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator 1")]
-	public bool? Denominator_1() => 
+	public  bool? Denominator_1() => 
 		__Denominator_1.Value;
 
-	private IEnumerable<Condition> Narcolepsy_Exclusion_Value()
+	private  IEnumerable<Condition> Narcolepsy_Exclusion_Value()
 	{
 		CqlValueSet a_ = this.Narcolepsy();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -899,17 +915,18 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Narcolepsy Exclusion")]
-	public IEnumerable<Condition> Narcolepsy_Exclusion() => 
+	public  IEnumerable<Condition> Narcolepsy_Exclusion() => 
 		__Narcolepsy_Exclusion.Value;
 
-	private bool? Denominator_Exclusions_Value()
+	private  bool? Denominator_Exclusions_Value()
 	{
 		bool? a_ = Hospice_6_9_000.Has_Hospice_Services();
 		IEnumerable<Condition> b_ = this.Narcolepsy_Exclusion();
@@ -920,10 +937,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions() => 
+	public  bool? Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<Encounter> Qualifying_Numerator_Encounter_Value()
+	private  IEnumerable<Encounter> Qualifying_Numerator_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -953,18 +970,21 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 					CqlConcept az_ = FHIRHelpers_4_3_000.ToConcept(@this);
 
 					return az_;
-				};
+				}
+;
 				IEnumerable<CqlConcept> aw_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)au_, av_);
 				CqlValueSet ax_ = this.Ambulatory();
 				bool? ay_ = context.Operators.ConceptsInValueSet(aw_, ax_);
 
 				return ay_;
-			};
+			}
+;
 			IEnumerable<Encounter.LocationComponent> aq_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)ao_, ap_);
 			bool? ar_ = context.Operators.Exists<Encounter.LocationComponent>(aq_);
 
 			return ar_;
-		};
+		}
+;
 		IEnumerable<Encounter> q_ = context.Operators.Where<Encounter>(o_, p_);
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(m_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(k_, r_);
@@ -994,10 +1014,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Qualifying Numerator Encounter")]
-	public IEnumerable<Encounter> Qualifying_Numerator_Encounter() => 
+	public  IEnumerable<Encounter> Qualifying_Numerator_Encounter() => 
 		__Qualifying_Numerator_Encounter.Value;
 
-	private IEnumerable<Encounter> Encounter_During_Initiation_Phase_Value()
+	private  IEnumerable<Encounter> Encounter_During_Initiation_Phase_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter();
 		bool? b_(Encounter ValidNumeratorEncounter)
@@ -1015,17 +1035,18 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? p_ = context.Operators.And(m_, o_);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter During Initiation Phase")]
-	public IEnumerable<Encounter> Encounter_During_Initiation_Phase() => 
+	public  IEnumerable<Encounter> Encounter_During_Initiation_Phase() => 
 		__Encounter_During_Initiation_Phase.Value;
 
-	private bool? Numerator_1_Value()
+	private  bool? Numerator_1_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_During_Initiation_Phase();
 		bool? b_ = context.Operators.Exists<Encounter>(a_);
@@ -1034,10 +1055,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator 1")]
-	public bool? Numerator_1() => 
+	public  bool? Numerator_1() => 
 		__Numerator_1.Value;
 
-	private IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Value()
+	private  IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Value()
 	{
 		CqlValueSet a_ = this.Atomoxetine();
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -1050,14 +1071,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? dw_ = (dt_, dv_);
 
 			return dw_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> g_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(e_, f_);
 		object h_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate dx_ = @this?.periodStart;
 
 			return dx_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> i_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? j_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
@@ -1065,14 +1088,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? dz_ = context.Operators.Not((bool?)(dy_ is null));
 
 			return dz_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> k_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(i_, j_);
 		CqlInterval<CqlDate> l_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> ea_ = @this?.period;
 
 			return ea_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> m_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(k_, l_);
 		IEnumerable<CqlInterval<CqlDate>> n_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(m_);
 		CqlValueSet o_ = this.Clonidine();
@@ -1086,14 +1111,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? ee_ = (eb_, ed_);
 
 			return ee_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> u_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(s_, t_);
 		object v_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate ef_ = @this?.periodStart;
 
 			return ef_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> w_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(u_, v_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? x_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
@@ -1101,14 +1128,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? eh_ = context.Operators.Not((bool?)(eg_ is null));
 
 			return eh_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> y_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(w_, x_);
 		CqlInterval<CqlDate> z_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> ei_ = @this?.period;
 
 			return ei_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> aa_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(y_, z_);
 		IEnumerable<CqlInterval<CqlDate>> ab_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(aa_);
 		IEnumerable<CqlInterval<CqlDate>> ac_ = context.Operators.Union<CqlInterval<CqlDate>>(n_, ab_);
@@ -1123,14 +1152,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? em_ = (ej_, el_);
 
 			return em_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> aj_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(ah_, ai_);
 		object ak_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate en_ = @this?.periodStart;
 
 			return en_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> al_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(aj_, ak_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? am_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
@@ -1138,14 +1169,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? ep_ = context.Operators.Not((bool?)(eo_ is null));
 
 			return ep_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> an_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(al_, am_);
 		CqlInterval<CqlDate> ao_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> eq_ = @this?.period;
 
 			return eq_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> ap_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(an_, ao_);
 		IEnumerable<CqlInterval<CqlDate>> aq_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ap_);
 		CqlValueSet ar_ = this.Dextroamphetamine();
@@ -1159,14 +1192,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? eu_ = (er_, et_);
 
 			return eu_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> ax_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(av_, aw_);
 		object ay_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate ev_ = @this?.periodStart;
 
 			return ev_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> az_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(ax_, ay_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? ba_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
@@ -1174,14 +1209,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? ex_ = context.Operators.Not((bool?)(ew_ is null));
 
 			return ex_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> bb_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(az_, ba_);
 		CqlInterval<CqlDate> bc_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> ey_ = @this?.period;
 
 			return ey_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> bd_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(bb_, bc_);
 		IEnumerable<CqlInterval<CqlDate>> be_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bd_);
 		IEnumerable<CqlInterval<CqlDate>> bf_ = context.Operators.Union<CqlInterval<CqlDate>>(aq_, be_);
@@ -1197,14 +1234,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? fc_ = (ez_, fb_);
 
 			return fc_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> bn_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(bl_, bm_);
 		object bo_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate fd_ = @this?.periodStart;
 
 			return fd_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> bp_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(bn_, bo_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? bq_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
@@ -1212,14 +1251,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? ff_ = context.Operators.Not((bool?)(fe_ is null));
 
 			return ff_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> br_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(bp_, bq_);
 		CqlInterval<CqlDate> bs_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> fg_ = @this?.period;
 
 			return fg_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> bt_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(br_, bs_);
 		IEnumerable<CqlInterval<CqlDate>> bu_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bt_);
 		CqlValueSet bv_ = this.Methylphenidate();
@@ -1233,14 +1274,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? fk_ = (fh_, fj_);
 
 			return fk_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cb_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(bz_, ca_);
 		object cc_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate fl_ = @this?.periodStart;
 
 			return fl_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cd_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(cb_, cc_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? ce_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
@@ -1248,14 +1291,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? fn_ = context.Operators.Not((bool?)(fm_ is null));
 
 			return fn_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cf_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(cd_, ce_);
 		CqlInterval<CqlDate> cg_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> fo_ = @this?.period;
 
 			return fo_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> ch_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cf_, cg_);
 		IEnumerable<CqlInterval<CqlDate>> ci_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ch_);
 		IEnumerable<CqlInterval<CqlDate>> cj_ = context.Operators.Union<CqlInterval<CqlDate>>(bu_, ci_);
@@ -1271,14 +1316,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? fs_ = (fp_, fr_);
 
 			return fs_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cr_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(cp_, cq_);
 		object cs_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate ft_ = @this?.periodStart;
 
 			return ft_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> ct_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(cr_, cs_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? cu_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
@@ -1286,14 +1333,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? fv_ = context.Operators.Not((bool?)(fu_ is null));
 
 			return fv_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> cv_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(ct_, cu_);
 		CqlInterval<CqlDate> cw_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> fw_ = @this?.period;
 
 			return fw_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> cx_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cv_, cw_);
 		IEnumerable<CqlInterval<CqlDate>> cy_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(cx_);
 		CqlCode cz_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
@@ -1309,14 +1358,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? ga_ = (fx_, fz_);
 
 			return ga_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> dh_ = context.Operators.Select<MedicationRequest, (CqlInterval<CqlDate> period, CqlDate periodStart)?>(df_, dg_);
 		object di_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlDate gb_ = @this?.periodStart;
 
 			return gb_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> dj_ = context.Operators.SortBy<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(dh_, di_, System.ComponentModel.ListSortDirection.Ascending);
 		bool? dk_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
@@ -1324,14 +1375,16 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? gd_ = context.Operators.Not((bool?)(gc_ is null));
 
 			return gd_;
-		};
+		}
+;
 		IEnumerable<(CqlInterval<CqlDate> period, CqlDate periodStart)?> dl_ = context.Operators.Where<(CqlInterval<CqlDate> period, CqlDate periodStart)?>(dj_, dk_);
 		CqlInterval<CqlDate> dm_((CqlInterval<CqlDate> period, CqlDate periodStart)? @this)
 		{
 			CqlInterval<CqlDate> ge_ = @this?.period;
 
 			return ge_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> dn_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(dl_, dm_);
 		IEnumerable<CqlInterval<CqlDate>> do_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(dn_);
 		IEnumerable<CqlInterval<CqlDate>> dp_ = context.Operators.Union<CqlInterval<CqlDate>>(cy_, do_);
@@ -1345,17 +1398,18 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			CqlInterval<CqlDate> gk_ = context.Operators.Intersect<CqlDate>(ADHDMedication, gj_);
 
 			return gk_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDate>> ds_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(dq_, dr_);
 
 		return ds_;
 	}
 
     [CqlDeclaration("ADHD Medications Taken on IPSD or During Continuation and Maintenance Phase")]
-	public IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase() => 
+	public  IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase() => 
 		__ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase.Value;
 
-	private int? ADHD_Cumulative_Medication_Duration_Value()
+	private  int? ADHD_Cumulative_Medication_Duration_Value()
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase();
 		int? b_ = CumulativeMedicationDuration_4_0_000.CumulativeDuration(a_);
@@ -1364,10 +1418,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("ADHD Cumulative Medication Duration")]
-	public int? ADHD_Cumulative_Medication_Duration() => 
+	public  int? ADHD_Cumulative_Medication_Duration() => 
 		__ADHD_Cumulative_Medication_Duration.Value;
 
-	private bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Value()
+	private  bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Value()
 	{
 		int? a_ = this.ADHD_Cumulative_Medication_Duration();
 		bool? b_ = context.Operators.GreaterOrEqual(a_, 210);
@@ -1376,10 +1430,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Has ADHD Cumulative Medication Duration Greater Than or Equal to 210 Days")]
-	public bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days() => 
+	public  bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days() => 
 		__Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days.Value;
 
-	private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase_Value()
+	private  IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis();
 		bool? b_(Encounter InpatientStay)
@@ -1397,17 +1451,18 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? p_ = context.Operators.And(m_, o_);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Inpatient Stay with Qualifying Diagnosis During Continuation and Maintenance Phase")]
-	public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase() => 
+	public  IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase() => 
 		__Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase.Value;
 
-	private bool? Initial_Population_2_Value()
+	private  bool? Initial_Population_2_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -1443,10 +1498,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population 2")]
-	public bool? Initial_Population_2() => 
+	public  bool? Initial_Population_2() => 
 		__Initial_Population_2.Value;
 
-	private bool? Denominator_2_Value()
+	private  bool? Denominator_2_Value()
 	{
 		bool? a_ = this.Initial_Population_2();
 
@@ -1454,10 +1509,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator 2")]
-	public bool? Denominator_2() => 
+	public  bool? Denominator_2() => 
 		__Denominator_2.Value;
 
-	private IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
+	private  IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter();
 		bool? b_(Encounter ValidNumeratorEncounter)
@@ -1475,7 +1530,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? q_ = context.Operators.In<CqlDate>(i_, p_, "day");
 
 			return q_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		CqlDate d_(Encounter ValidNumeratorEncounter)
 		{
@@ -1485,17 +1541,18 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			CqlDate u_ = context.Operators.DateFrom(t_);
 
 			return u_;
-		};
+		}
+;
 		IEnumerable<CqlDate> e_ = context.Operators.Select<Encounter, CqlDate>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Encounter 31 to 300 Days into Continuation and Maintenance Phase")]
-	public IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase() => 
+	public  IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase() => 
 		__Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase.Value;
 
-	private bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
+	private  bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
 		IEnumerable<CqlDate> a_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase();
 		int? b_ = context.Operators.Count<CqlDate>(a_);
@@ -1505,10 +1562,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Two or More Encounters 31 to 300 Days into Continuation and Maintenance Phase")]
-	public bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase() => 
+	public  bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase() => 
 		__Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase.Value;
 
-	private IEnumerable<CqlDate> Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
+	private  IEnumerable<CqlDate> Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
 		CqlValueSet a_ = this.Online_Assessments();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -1527,7 +1584,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			bool? r_ = context.Operators.In<CqlDate>(j_, q_, "day");
 
 			return r_;
-		};
+		}
+;
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 		CqlDate e_(Encounter OnlineAssessment)
 		{
@@ -1537,17 +1595,18 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			CqlDate v_ = context.Operators.DateFrom(u_);
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<CqlDate> f_ = context.Operators.Select<Encounter, CqlDate>(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("Online Assessment 31 to 300 Days into Continuation and Maintenance Phase")]
-	public IEnumerable<CqlDate> Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase() => 
+	public  IEnumerable<CqlDate> Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase() => 
 		__Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase.Value;
 
-	private bool? Numerator_2_Value()
+	private  bool? Numerator_2_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_During_Initiation_Phase();
 		bool? b_ = context.Operators.Exists<Encounter>(a_);
@@ -1566,14 +1625,17 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 				bool? t_ = context.Operators.And(q_, s_);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<CqlDate> l_ = context.Operators.Where<CqlDate>(j_, k_);
 			CqlDate m_(CqlDate Encounter2) => 
 				Encounter1;
+;
 			IEnumerable<CqlDate> n_ = context.Operators.Select<CqlDate, CqlDate>(l_, m_);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<CqlDate> f_ = context.Operators.SelectMany<CqlDate, CqlDate>(d_, e_);
 		bool? g_ = context.Operators.Exists<CqlDate>(f_);
 		bool? h_ = context.Operators.Or(c_, g_);
@@ -1583,10 +1645,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator 2")]
-	public bool? Numerator_2() => 
+	public  bool? Numerator_2() => 
 		__Numerator_2.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -1594,10 +1656,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -1605,10 +1667,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -1616,10 +1678,10 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -1627,7 +1689,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
 }

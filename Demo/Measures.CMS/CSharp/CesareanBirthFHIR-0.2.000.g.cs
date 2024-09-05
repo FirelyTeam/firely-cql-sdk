@@ -113,106 +113,106 @@ public class CesareanBirthFHIR_0_2_000
 
     #endregion
 
-	private CqlValueSet Abnormal_Presentation_Value() => 
+	private  CqlValueSet Abnormal_Presentation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105", default);
 
     [CqlDeclaration("Abnormal Presentation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105")]
-	public CqlValueSet Abnormal_Presentation() => 
+	public  CqlValueSet Abnormal_Presentation() => 
 		__Abnormal_Presentation.Value;
 
-	private CqlValueSet Cesarean_Birth_Value() => 
+	private  CqlValueSet Cesarean_Birth_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282", default);
 
     [CqlDeclaration("Cesarean Birth")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282")]
-	public CqlValueSet Cesarean_Birth() => 
+	public  CqlValueSet Cesarean_Birth() => 
 		__Cesarean_Birth.Value;
 
-	private CqlValueSet Delivery_of_Singleton_Value() => 
+	private  CqlValueSet Delivery_of_Singleton_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99", default);
 
     [CqlDeclaration("Delivery of Singleton")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99")]
-	public CqlValueSet Delivery_of_Singleton() => 
+	public  CqlValueSet Delivery_of_Singleton() => 
 		__Delivery_of_Singleton.Value;
 
-	private CqlValueSet Delivery_Procedures_Value() => 
+	private  CqlValueSet Delivery_Procedures_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
 
     [CqlDeclaration("Delivery Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
-	public CqlValueSet Delivery_Procedures() => 
+	public  CqlValueSet Delivery_Procedures() => 
 		__Delivery_Procedures.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+	private  CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+	public  CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Genital_Herpes_Value() => 
+	private  CqlValueSet Genital_Herpes_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049", default);
 
     [CqlDeclaration("Genital Herpes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049")]
-	public CqlValueSet Genital_Herpes() => 
+	public  CqlValueSet Genital_Herpes() => 
 		__Genital_Herpes.Value;
 
-	private CqlValueSet Placenta_Previa_Accreta_Increta_Percreta_or_Vasa_Previa_Value() => 
+	private  CqlValueSet Placenta_Previa_Accreta_Increta_Percreta_or_Vasa_Previa_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37", default);
 
     [CqlDeclaration("Placenta Previa Accreta Increta Percreta or Vasa Previa")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37")]
-	public CqlValueSet Placenta_Previa_Accreta_Increta_Percreta_or_Vasa_Previa() => 
+	public  CqlValueSet Placenta_Previa_Accreta_Increta_Percreta_or_Vasa_Previa() => 
 		__Placenta_Previa_Accreta_Increta_Percreta_or_Vasa_Previa.Value;
 
-	private CqlValueSet _37_to_42_Plus_Weeks_Gestation_Value() => 
+	private  CqlValueSet _37_to_42_Plus_Weeks_Gestation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68", default);
 
     [CqlDeclaration("37 to 42 Plus Weeks Gestation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68")]
-	public CqlValueSet _37_to_42_Plus_Weeks_Gestation() => 
+	public  CqlValueSet _37_to_42_Plus_Weeks_Gestation() => 
 		___37_to_42_Plus_Weeks_Gestation.Value;
 
-	private CqlCode ____Births_preterm_Value() => 
+	private  CqlCode ____Births_preterm_Value() => 
 		new CqlCode("11637-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("[#] Births.preterm")]
-	public CqlCode ____Births_preterm() => 
+	public  CqlCode ____Births_preterm() => 
 		______Births_preterm.Value;
 
-	private CqlCode ____Births_term_Value() => 
+	private  CqlCode ____Births_term_Value() => 
 		new CqlCode("11639-2", "http://loinc.org", default, default);
 
     [CqlDeclaration("[#] Births.term")]
-	public CqlCode ____Births_term() => 
+	public  CqlCode ____Births_term() => 
 		______Births_term.Value;
 
-	private CqlCode ____Parity_Value() => 
+	private  CqlCode ____Parity_Value() => 
 		new CqlCode("11977-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("[#] Parity")]
-	public CqlCode ____Parity() => 
+	public  CqlCode ____Parity() => 
 		______Parity.Value;
 
-	private CqlCode ____Pregnancies_Value() => 
+	private  CqlCode ____Pregnancies_Value() => 
 		new CqlCode("11996-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("[#] Pregnancies")]
-	public CqlCode ____Pregnancies() => 
+	public  CqlCode ____Pregnancies() => 
 		______Pregnancies.Value;
 
-	private CqlCode Date_and_time_of_obstetric_delivery_Value() => 
+	private  CqlCode Date_and_time_of_obstetric_delivery_Value() => 
 		new CqlCode("93857-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Date and time of obstetric delivery")]
-	public CqlCode Date_and_time_of_obstetric_delivery() => 
+	public  CqlCode Date_and_time_of_obstetric_delivery() => 
 		__Date_and_time_of_obstetric_delivery.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("11637-6", "http://loinc.org", default, default),
@@ -226,10 +226,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -240,10 +240,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -252,10 +252,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Encounter> Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Value()
+	private  IEnumerable<Encounter> Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Value()
 	{
 		IEnumerable<Encounter> a_ = PCMaternal_5_16_000.Delivery_Encounter_with_Age_Range();
 		bool? b_(Encounter DeliveryEncounter)
@@ -264,17 +264,18 @@ public class CesareanBirthFHIR_0_2_000
 			bool? e_ = context.Operators.GreaterOrEqual(d_, 37);
 
 			return e_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Delivery Encounter with Calculated Gestational Age Greater than or Equal to 37 Weeks")]
-	public IEnumerable<Encounter> Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks() => 
+	public  IEnumerable<Encounter> Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks() => 
 		__Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks.Value;
 
-	private IEnumerable<Encounter> Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Value()
+	private  IEnumerable<Encounter> Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Value()
 	{
 		IEnumerable<Encounter> a_ = PCMaternal_5_16_000.Delivery_Encounter_with_Age_Range();
 		bool? b_(Encounter DeliveryEncounter)
@@ -286,17 +287,18 @@ public class CesareanBirthFHIR_0_2_000
 			bool? h_ = context.Operators.And((bool?)(d_ is null), g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Delivery Encounter with Estimated Gestational Age Greater than or Equal to 37 Weeks")]
-	public IEnumerable<Encounter> Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks() => 
+	public  IEnumerable<Encounter> Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks() => 
 		__Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks.Value;
 
-	private IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding_Value()
+	private  IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding_Value()
 	{
 		IEnumerable<Encounter> a_ = PCMaternal_5_16_000.Delivery_Encounter_with_Age_Range();
 		bool? b_(Encounter DeliveryEncounter)
@@ -313,23 +315,25 @@ public class CesareanBirthFHIR_0_2_000
 				bool? o_ = context.Operators.ConceptInValueSet(m_, n_);
 
 				return o_;
-			};
+			}
+;
 			IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 			bool? j_ = context.Operators.Exists<Condition>(i_);
 			bool? k_ = context.Operators.And(f_, j_);
 
 			return k_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Delivery Encounter with Gestational Age Greater than or Equal to 37 Weeks Based on Coding")]
-	public IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding() => 
+	public  IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding() => 
 		__Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding.Value;
 
-	private IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Value()
+	private  IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks();
 		IEnumerable<Encounter> b_ = this.Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks();
@@ -341,10 +345,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Delivery Encounter with Gestational Age Greater than or Equal to 37 Weeks")]
-	public IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks() => 
+	public  IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks() => 
 		__Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Singleton_Delivery_Value()
+	private  IEnumerable<Encounter> Encounter_with_Singleton_Delivery_Value()
 	{
 		IEnumerable<Encounter> a_ = PCMaternal_5_16_000.Delivery_Encounter_with_Age_Range();
 		bool? b_(Encounter DeliveryEncounter)
@@ -358,23 +362,25 @@ public class CesareanBirthFHIR_0_2_000
 				bool? k_ = context.Operators.ConceptInValueSet(i_, j_);
 
 				return k_;
-			};
+			}
+;
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 			bool? g_ = context.Operators.Exists<Condition>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Singleton Delivery")]
-	public IEnumerable<Encounter> Encounter_with_Singleton_Delivery() => 
+	public  IEnumerable<Encounter> Encounter_with_Singleton_Delivery() => 
 		__Encounter_with_Singleton_Delivery.Value;
 
     [CqlDeclaration("lastGravida")]
-	public int? lastGravida(Encounter TheEncounter)
+	public  int? lastGravida(Encounter TheEncounter)
 	{
 		CqlCode a_ = this.____Pregnancies();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -404,7 +410,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool al_ = ak_ is CqlDateTime;
 
 					return al_;
-				};
+				}
+;
 				bool ah_()
 				{
 					DataType am_ = Gravida?.Effective;
@@ -412,7 +419,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool ao_ = an_ is CqlInterval<CqlDateTime>;
 
 					return ao_;
-				};
+				}
+;
 				bool ai_()
 				{
 					DataType ap_ = Gravida?.Effective;
@@ -420,7 +428,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool ar_ = aq_ is CqlDateTime;
 
 					return ar_;
-				};
+				}
+;
 				if (ag_())
 				{
 					DataType as_ = Gravida?.Effective;
@@ -446,7 +455,8 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime v_ = QICoreCommon_2_0_000.earliest(u_());
 			CqlDateTime w_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
 			CqlQuantity x_ = context.Operators.Quantity(42m, "weeks");
@@ -458,7 +468,8 @@ public class CesareanBirthFHIR_0_2_000
 			bool? af_ = context.Operators.And(t_, ae_);
 
 			return af_;
-		};
+		}
+;
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
@@ -471,7 +482,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bf_ = be_ is CqlDateTime;
 
 					return bf_;
-				};
+				}
+;
 				bool bb_()
 				{
 					DataType bg_ = @this?.Effective;
@@ -479,7 +491,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bi_ = bh_ is CqlInterval<CqlDateTime>;
 
 					return bi_;
-				};
+				}
+;
 				bool bc_()
 				{
 					DataType bj_ = @this?.Effective;
@@ -487,7 +500,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bl_ = bk_ is CqlDateTime;
 
 					return bl_;
-				};
+				}
+;
 				if (ba_())
 				{
 					DataType bm_ = @this?.Effective;
@@ -513,11 +527,13 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime az_ = QICoreCommon_2_0_000.earliest(ay_());
 
 			return az_;
-		};
+		}
+;
 		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
@@ -527,7 +543,7 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("lastParity")]
-	public int? lastParity(Encounter TheEncounter)
+	public  int? lastParity(Encounter TheEncounter)
 	{
 		CqlCode a_ = this.____Parity();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -543,7 +559,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool al_ = ak_ is CqlDateTime;
 
 					return al_;
-				};
+				}
+;
 				bool ah_()
 				{
 					DataType am_ = Parity?.Effective;
@@ -551,7 +568,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool ao_ = an_ is CqlInterval<CqlDateTime>;
 
 					return ao_;
-				};
+				}
+;
 				bool ai_()
 				{
 					DataType ap_ = Parity?.Effective;
@@ -559,7 +577,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool ar_ = aq_ is CqlDateTime;
 
 					return ar_;
-				};
+				}
+;
 				if (ag_())
 				{
 					DataType as_ = Parity?.Effective;
@@ -585,7 +604,8 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime l_ = QICoreCommon_2_0_000.earliest(k_());
 			CqlDateTime m_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
 			CqlQuantity n_ = context.Operators.Quantity(42m, "weeks");
@@ -611,7 +631,8 @@ public class CesareanBirthFHIR_0_2_000
 			bool? af_ = context.Operators.And(ab_, ae_);
 
 			return af_;
-		};
+		}
+;
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
@@ -624,7 +645,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bf_ = be_ is CqlDateTime;
 
 					return bf_;
-				};
+				}
+;
 				bool bb_()
 				{
 					DataType bg_ = @this?.Effective;
@@ -632,7 +654,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bi_ = bh_ is CqlInterval<CqlDateTime>;
 
 					return bi_;
-				};
+				}
+;
 				bool bc_()
 				{
 					DataType bj_ = @this?.Effective;
@@ -640,7 +663,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bl_ = bk_ is CqlDateTime;
 
 					return bl_;
-				};
+				}
+;
 				if (ba_())
 				{
 					DataType bm_ = @this?.Effective;
@@ -666,11 +690,13 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime az_ = QICoreCommon_2_0_000.earliest(ay_());
 
 			return az_;
-		};
+		}
+;
 		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
@@ -680,7 +706,7 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("lastHistoryPretermBirth")]
-	public int? lastHistoryPretermBirth(Encounter TheEncounter)
+	public  int? lastHistoryPretermBirth(Encounter TheEncounter)
 	{
 		CqlCode a_ = this.____Births_preterm();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -696,7 +722,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool al_ = ak_ is CqlDateTime;
 
 					return al_;
-				};
+				}
+;
 				bool ah_()
 				{
 					DataType am_ = PretermBirth?.Effective;
@@ -704,7 +731,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool ao_ = an_ is CqlInterval<CqlDateTime>;
 
 					return ao_;
-				};
+				}
+;
 				bool ai_()
 				{
 					DataType ap_ = PretermBirth?.Effective;
@@ -712,7 +740,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool ar_ = aq_ is CqlDateTime;
 
 					return ar_;
-				};
+				}
+;
 				if (ag_())
 				{
 					DataType as_ = PretermBirth?.Effective;
@@ -738,7 +767,8 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime l_ = QICoreCommon_2_0_000.earliest(k_());
 			CqlDateTime m_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
 			CqlQuantity n_ = context.Operators.Quantity(42m, "weeks");
@@ -764,7 +794,8 @@ public class CesareanBirthFHIR_0_2_000
 			bool? af_ = context.Operators.And(ab_, ae_);
 
 			return af_;
-		};
+		}
+;
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
@@ -777,7 +808,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bf_ = be_ is CqlDateTime;
 
 					return bf_;
-				};
+				}
+;
 				bool bb_()
 				{
 					DataType bg_ = @this?.Effective;
@@ -785,7 +817,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bi_ = bh_ is CqlInterval<CqlDateTime>;
 
 					return bi_;
-				};
+				}
+;
 				bool bc_()
 				{
 					DataType bj_ = @this?.Effective;
@@ -793,7 +826,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bl_ = bk_ is CqlDateTime;
 
 					return bl_;
-				};
+				}
+;
 				if (ba_())
 				{
 					DataType bm_ = @this?.Effective;
@@ -819,11 +853,13 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime az_ = QICoreCommon_2_0_000.earliest(ay_());
 
 			return az_;
-		};
+		}
+;
 		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
@@ -833,7 +869,7 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("lastHistoryTermBirth")]
-	public int? lastHistoryTermBirth(Encounter TheEncounter)
+	public  int? lastHistoryTermBirth(Encounter TheEncounter)
 	{
 		CqlCode a_ = this.____Births_term();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -849,7 +885,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool al_ = ak_ is CqlDateTime;
 
 					return al_;
-				};
+				}
+;
 				bool ah_()
 				{
 					DataType am_ = TermBirth?.Effective;
@@ -857,7 +894,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool ao_ = an_ is CqlInterval<CqlDateTime>;
 
 					return ao_;
-				};
+				}
+;
 				bool ai_()
 				{
 					DataType ap_ = TermBirth?.Effective;
@@ -865,7 +903,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool ar_ = aq_ is CqlDateTime;
 
 					return ar_;
-				};
+				}
+;
 				if (ag_())
 				{
 					DataType as_ = TermBirth?.Effective;
@@ -891,7 +930,8 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime l_ = QICoreCommon_2_0_000.earliest(k_());
 			CqlDateTime m_ = PCMaternal_5_16_000.lastTimeOfDelivery(TheEncounter);
 			CqlQuantity n_ = context.Operators.Quantity(42m, "weeks");
@@ -917,7 +957,8 @@ public class CesareanBirthFHIR_0_2_000
 			bool? af_ = context.Operators.And(ab_, ae_);
 
 			return af_;
-		};
+		}
+;
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
@@ -930,7 +971,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bf_ = be_ is CqlDateTime;
 
 					return bf_;
-				};
+				}
+;
 				bool bb_()
 				{
 					DataType bg_ = @this?.Effective;
@@ -938,7 +980,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bi_ = bh_ is CqlInterval<CqlDateTime>;
 
 					return bi_;
-				};
+				}
+;
 				bool bc_()
 				{
 					DataType bj_ = @this?.Effective;
@@ -946,7 +989,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool bl_ = bk_ is CqlDateTime;
 
 					return bl_;
-				};
+				}
+;
 				if (ba_())
 				{
 					DataType bm_ = @this?.Effective;
@@ -972,11 +1016,13 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime az_ = QICoreCommon_2_0_000.earliest(ay_());
 
 			return az_;
-		};
+		}
+;
 		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
@@ -985,7 +1031,7 @@ public class CesareanBirthFHIR_0_2_000
 		return (j_ as int?);
 	}
 
-	private IEnumerable<Encounter> Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births_Value()
+	private  IEnumerable<Encounter> Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks();
 		IEnumerable<Encounter> b_ = this.Encounter_with_Singleton_Delivery();
@@ -1005,17 +1051,18 @@ public class CesareanBirthFHIR_0_2_000
 			bool? p_ = context.Operators.Or(j_, o_);
 
 			return p_;
-		};
+		}
+;
 		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("Singleton Delivery Encounters at 37 Plus Weeks Gravida 1 Parity 0, No Previous Births")]
-	public IEnumerable<Encounter> Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births() => 
+	public  IEnumerable<Encounter> Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births() => 
 		__Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Abnormal_Presentation_Value()
+	private  IEnumerable<Encounter> Encounter_with_Abnormal_Presentation_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births();
 		bool? b_(Encounter ThirtysevenWeeksPlusEncounter)
@@ -1037,7 +1084,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool aq_ = ap_ is CqlDateTime;
 
 								return aq_;
-							};
+							}
+;
 							bool am_()
 							{
 								DataType ar_ = AbnormalPresentation?.Effective;
@@ -1045,7 +1093,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool at_ = as_ is CqlInterval<CqlDateTime>;
 
 								return at_;
-							};
+							}
+;
 							bool an_()
 							{
 								DataType au_ = AbnormalPresentation?.Effective;
@@ -1053,7 +1102,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool aw_ = av_ is CqlDateTime;
 
 								return aw_;
-							};
+							}
+;
 							if (al_())
 							{
 								DataType ax_ = AbnormalPresentation?.Effective;
@@ -1079,7 +1129,8 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime ab_ = QICoreCommon_2_0_000.earliest(aa_());
 						CqlDateTime ac_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
 						bool? ad_ = context.Operators.SameOrBefore(ab_, ac_, default);
@@ -1096,7 +1147,8 @@ public class CesareanBirthFHIR_0_2_000
 						bool? ak_ = context.Operators.And(ad_, aj_);
 
 						return ak_;
-					};
+					}
+;
 					IEnumerable<Observation> t_ = context.Operators.Where<Observation>(r_, s_);
 					object u_(Observation @this)
 					{
@@ -1109,7 +1161,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool bk_ = bj_ is CqlDateTime;
 
 								return bk_;
-							};
+							}
+;
 							bool bg_()
 							{
 								DataType bl_ = @this?.Effective;
@@ -1117,7 +1170,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool bn_ = bm_ is CqlInterval<CqlDateTime>;
 
 								return bn_;
-							};
+							}
+;
 							bool bh_()
 							{
 								DataType bo_ = @this?.Effective;
@@ -1125,7 +1179,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool bq_ = bp_ is CqlDateTime;
 
 								return bq_;
-							};
+							}
+;
 							if (bf_())
 							{
 								DataType br_ = @this?.Effective;
@@ -1151,11 +1206,13 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime be_ = QICoreCommon_2_0_000.earliest(bd_());
 
 						return be_;
-					};
+					}
+;
 					IEnumerable<Observation> v_ = context.Operators.SortBy<Observation>(t_, u_, System.ComponentModel.ListSortDirection.Ascending);
 					Observation w_ = context.Operators.Last<Observation>(v_);
 					DataType x_ = w_?.Effective;
@@ -1163,7 +1220,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool z_ = y_ is CqlDateTime;
 
 					return z_;
-				};
+				}
+;
 				bool o_()
 				{
 					CqlValueSet bx_ = this.Abnormal_Presentation();
@@ -1179,7 +1237,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool cx_ = cw_ is CqlDateTime;
 
 								return cx_;
-							};
+							}
+;
 							bool ct_()
 							{
 								DataType cy_ = AbnormalPresentation?.Effective;
@@ -1187,7 +1246,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool da_ = cz_ is CqlInterval<CqlDateTime>;
 
 								return da_;
-							};
+							}
+;
 							bool cu_()
 							{
 								DataType db_ = AbnormalPresentation?.Effective;
@@ -1195,7 +1255,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool dd_ = dc_ is CqlDateTime;
 
 								return dd_;
-							};
+							}
+;
 							if (cs_())
 							{
 								DataType de_ = AbnormalPresentation?.Effective;
@@ -1221,7 +1282,8 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime ci_ = QICoreCommon_2_0_000.earliest(ch_());
 						CqlDateTime cj_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
 						bool? ck_ = context.Operators.SameOrBefore(ci_, cj_, default);
@@ -1238,7 +1300,8 @@ public class CesareanBirthFHIR_0_2_000
 						bool? cr_ = context.Operators.And(ck_, cq_);
 
 						return cr_;
-					};
+					}
+;
 					IEnumerable<Observation> ca_ = context.Operators.Where<Observation>(by_, bz_);
 					object cb_(Observation @this)
 					{
@@ -1251,7 +1314,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool dr_ = dq_ is CqlDateTime;
 
 								return dr_;
-							};
+							}
+;
 							bool dn_()
 							{
 								DataType ds_ = @this?.Effective;
@@ -1259,7 +1323,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool du_ = dt_ is CqlInterval<CqlDateTime>;
 
 								return du_;
-							};
+							}
+;
 							bool do_()
 							{
 								DataType dv_ = @this?.Effective;
@@ -1267,7 +1332,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool dx_ = dw_ is CqlDateTime;
 
 								return dx_;
-							};
+							}
+;
 							if (dm_())
 							{
 								DataType dy_ = @this?.Effective;
@@ -1293,11 +1359,13 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime dl_ = QICoreCommon_2_0_000.earliest(dk_());
 
 						return dl_;
-					};
+					}
+;
 					IEnumerable<Observation> cc_ = context.Operators.SortBy<Observation>(ca_, cb_, System.ComponentModel.ListSortDirection.Ascending);
 					Observation cd_ = context.Operators.Last<Observation>(cc_);
 					DataType ce_ = cd_?.Effective;
@@ -1305,7 +1373,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool cg_ = cf_ is CqlInterval<CqlDateTime>;
 
 					return cg_;
-				};
+				}
+;
 				bool p_()
 				{
 					CqlValueSet ee_ = this.Abnormal_Presentation();
@@ -1321,7 +1390,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool fe_ = fd_ is CqlDateTime;
 
 								return fe_;
-							};
+							}
+;
 							bool fa_()
 							{
 								DataType ff_ = AbnormalPresentation?.Effective;
@@ -1329,7 +1399,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool fh_ = fg_ is CqlInterval<CqlDateTime>;
 
 								return fh_;
-							};
+							}
+;
 							bool fb_()
 							{
 								DataType fi_ = AbnormalPresentation?.Effective;
@@ -1337,7 +1408,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool fk_ = fj_ is CqlDateTime;
 
 								return fk_;
-							};
+							}
+;
 							if (ez_())
 							{
 								DataType fl_ = AbnormalPresentation?.Effective;
@@ -1363,7 +1435,8 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime ep_ = QICoreCommon_2_0_000.earliest(eo_());
 						CqlDateTime eq_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
 						bool? er_ = context.Operators.SameOrBefore(ep_, eq_, default);
@@ -1380,7 +1453,8 @@ public class CesareanBirthFHIR_0_2_000
 						bool? ey_ = context.Operators.And(er_, ex_);
 
 						return ey_;
-					};
+					}
+;
 					IEnumerable<Observation> eh_ = context.Operators.Where<Observation>(ef_, eg_);
 					object ei_(Observation @this)
 					{
@@ -1393,7 +1467,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool fy_ = fx_ is CqlDateTime;
 
 								return fy_;
-							};
+							}
+;
 							bool fu_()
 							{
 								DataType fz_ = @this?.Effective;
@@ -1401,7 +1476,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool gb_ = ga_ is CqlInterval<CqlDateTime>;
 
 								return gb_;
-							};
+							}
+;
 							bool fv_()
 							{
 								DataType gc_ = @this?.Effective;
@@ -1409,7 +1485,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool ge_ = gd_ is CqlDateTime;
 
 								return ge_;
-							};
+							}
+;
 							if (ft_())
 							{
 								DataType gf_ = @this?.Effective;
@@ -1435,11 +1512,13 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime fs_ = QICoreCommon_2_0_000.earliest(fr_());
 
 						return fs_;
-					};
+					}
+;
 					IEnumerable<Observation> ej_ = context.Operators.SortBy<Observation>(eh_, ei_, System.ComponentModel.ListSortDirection.Ascending);
 					Observation ek_ = context.Operators.Last<Observation>(ej_);
 					DataType el_ = ek_?.Effective;
@@ -1447,7 +1526,8 @@ public class CesareanBirthFHIR_0_2_000
 					bool en_ = em_ is CqlDateTime;
 
 					return en_;
-				};
+				}
+;
 				if (n_())
 				{
 					CqlValueSet gl_ = this.Abnormal_Presentation();
@@ -1463,7 +1543,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool hk_ = hj_ is CqlDateTime;
 
 								return hk_;
-							};
+							}
+;
 							bool hg_()
 							{
 								DataType hl_ = AbnormalPresentation?.Effective;
@@ -1471,7 +1552,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool hn_ = hm_ is CqlInterval<CqlDateTime>;
 
 								return hn_;
-							};
+							}
+;
 							bool hh_()
 							{
 								DataType ho_ = AbnormalPresentation?.Effective;
@@ -1479,7 +1561,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool hq_ = hp_ is CqlDateTime;
 
 								return hq_;
-							};
+							}
+;
 							if (hf_())
 							{
 								DataType hr_ = AbnormalPresentation?.Effective;
@@ -1505,7 +1588,8 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime gv_ = QICoreCommon_2_0_000.earliest(gu_());
 						CqlDateTime gw_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
 						bool? gx_ = context.Operators.SameOrBefore(gv_, gw_, default);
@@ -1522,7 +1606,8 @@ public class CesareanBirthFHIR_0_2_000
 						bool? he_ = context.Operators.And(gx_, hd_);
 
 						return he_;
-					};
+					}
+;
 					IEnumerable<Observation> go_ = context.Operators.Where<Observation>(gm_, gn_);
 					object gp_(Observation @this)
 					{
@@ -1535,7 +1620,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool ie_ = id_ is CqlDateTime;
 
 								return ie_;
-							};
+							}
+;
 							bool ia_()
 							{
 								DataType if_ = @this?.Effective;
@@ -1543,7 +1629,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool ih_ = ig_ is CqlInterval<CqlDateTime>;
 
 								return ih_;
-							};
+							}
+;
 							bool ib_()
 							{
 								DataType ii_ = @this?.Effective;
@@ -1551,7 +1638,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool ik_ = ij_ is CqlDateTime;
 
 								return ik_;
-							};
+							}
+;
 							if (hz_())
 							{
 								DataType il_ = @this?.Effective;
@@ -1577,11 +1665,13 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime hy_ = QICoreCommon_2_0_000.earliest(hx_());
 
 						return hy_;
-					};
+					}
+;
 					IEnumerable<Observation> gq_ = context.Operators.SortBy<Observation>(go_, gp_, System.ComponentModel.ListSortDirection.Ascending);
 					Observation gr_ = context.Operators.Last<Observation>(gq_);
 					DataType gs_ = gr_?.Effective;
@@ -1604,7 +1694,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool jq_ = jp_ is CqlDateTime;
 
 								return jq_;
-							};
+							}
+;
 							bool jm_()
 							{
 								DataType jr_ = AbnormalPresentation?.Effective;
@@ -1612,7 +1703,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool jt_ = js_ is CqlInterval<CqlDateTime>;
 
 								return jt_;
-							};
+							}
+;
 							bool jn_()
 							{
 								DataType ju_ = AbnormalPresentation?.Effective;
@@ -1620,7 +1712,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool jw_ = jv_ is CqlDateTime;
 
 								return jw_;
-							};
+							}
+;
 							if (jl_())
 							{
 								DataType jx_ = AbnormalPresentation?.Effective;
@@ -1646,7 +1739,8 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime jb_ = QICoreCommon_2_0_000.earliest(ja_());
 						CqlDateTime jc_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
 						bool? jd_ = context.Operators.SameOrBefore(jb_, jc_, default);
@@ -1663,7 +1757,8 @@ public class CesareanBirthFHIR_0_2_000
 						bool? jk_ = context.Operators.And(jd_, jj_);
 
 						return jk_;
-					};
+					}
+;
 					IEnumerable<Observation> iu_ = context.Operators.Where<Observation>(is_, it_);
 					object iv_(Observation @this)
 					{
@@ -1676,7 +1771,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool kk_ = kj_ is CqlDateTime;
 
 								return kk_;
-							};
+							}
+;
 							bool kg_()
 							{
 								DataType kl_ = @this?.Effective;
@@ -1684,7 +1780,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool kn_ = km_ is CqlInterval<CqlDateTime>;
 
 								return kn_;
-							};
+							}
+;
 							bool kh_()
 							{
 								DataType ko_ = @this?.Effective;
@@ -1692,7 +1789,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool kq_ = kp_ is CqlDateTime;
 
 								return kq_;
-							};
+							}
+;
 							if (kf_())
 							{
 								DataType kr_ = @this?.Effective;
@@ -1718,11 +1816,13 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime ke_ = QICoreCommon_2_0_000.earliest(kd_());
 
 						return ke_;
-					};
+					}
+;
 					IEnumerable<Observation> iw_ = context.Operators.SortBy<Observation>(iu_, iv_, System.ComponentModel.ListSortDirection.Ascending);
 					Observation ix_ = context.Operators.Last<Observation>(iw_);
 					DataType iy_ = ix_?.Effective;
@@ -1745,7 +1845,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool lw_ = lv_ is CqlDateTime;
 
 								return lw_;
-							};
+							}
+;
 							bool ls_()
 							{
 								DataType lx_ = AbnormalPresentation?.Effective;
@@ -1753,7 +1854,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool lz_ = ly_ is CqlInterval<CqlDateTime>;
 
 								return lz_;
-							};
+							}
+;
 							bool lt_()
 							{
 								DataType ma_ = AbnormalPresentation?.Effective;
@@ -1761,7 +1863,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool mc_ = mb_ is CqlDateTime;
 
 								return mc_;
-							};
+							}
+;
 							if (lr_())
 							{
 								DataType md_ = AbnormalPresentation?.Effective;
@@ -1787,7 +1890,8 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime lh_ = QICoreCommon_2_0_000.earliest(lg_());
 						CqlDateTime li_ = PCMaternal_5_16_000.lastTimeOfDelivery(ThirtysevenWeeksPlusEncounter);
 						bool? lj_ = context.Operators.SameOrBefore(lh_, li_, default);
@@ -1804,7 +1908,8 @@ public class CesareanBirthFHIR_0_2_000
 						bool? lq_ = context.Operators.And(lj_, lp_);
 
 						return lq_;
-					};
+					}
+;
 					IEnumerable<Observation> la_ = context.Operators.Where<Observation>(ky_, kz_);
 					object lb_(Observation @this)
 					{
@@ -1817,7 +1922,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool mq_ = mp_ is CqlDateTime;
 
 								return mq_;
-							};
+							}
+;
 							bool mm_()
 							{
 								DataType mr_ = @this?.Effective;
@@ -1825,7 +1931,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool mt_ = ms_ is CqlInterval<CqlDateTime>;
 
 								return mt_;
-							};
+							}
+;
 							bool mn_()
 							{
 								DataType mu_ = @this?.Effective;
@@ -1833,7 +1940,8 @@ public class CesareanBirthFHIR_0_2_000
 								bool mw_ = mv_ is CqlDateTime;
 
 								return mw_;
-							};
+							}
+;
 							if (ml_())
 							{
 								DataType mx_ = @this?.Effective;
@@ -1859,11 +1967,13 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								return null;
 							}
-						};
+						}
+;
 						CqlDateTime mk_ = QICoreCommon_2_0_000.earliest(mj_());
 
 						return mk_;
-					};
+					}
+;
 					IEnumerable<Observation> lc_ = context.Operators.SortBy<Observation>(la_, lb_, System.ComponentModel.ListSortDirection.Ascending);
 					Observation ld_ = context.Operators.Last<Observation>(lc_);
 					DataType le_ = ld_?.Effective;
@@ -1875,7 +1985,8 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime e_ = QICoreCommon_2_0_000.earliest(d_());
 			Period f_ = ThirtysevenWeeksPlusEncounter?.Period;
 			CqlInterval<CqlDateTime> g_ = FHIRHelpers_4_3_000.ToInterval(f_);
@@ -1889,23 +2000,25 @@ public class CesareanBirthFHIR_0_2_000
 				bool? ng_ = context.Operators.ConceptInValueSet(ne_, nf_);
 
 				return ng_;
-			};
+			}
+;
 			IEnumerable<Condition> k_ = context.Operators.Where<Condition>(i_, j_);
 			bool? l_ = context.Operators.Exists<Condition>(k_);
 			bool? m_ = context.Operators.Or(h_, l_);
 
 			return m_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Abnormal Presentation")]
-	public IEnumerable<Encounter> Encounter_with_Abnormal_Presentation() => 
+	public  IEnumerable<Encounter> Encounter_with_Abnormal_Presentation() => 
 		__Encounter_with_Abnormal_Presentation.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum_Value()
+	private  IEnumerable<Encounter> Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births();
 		bool? b_(Encounter ThirtysevenWeeksPlusEncounter)
@@ -1923,22 +2036,24 @@ public class CesareanBirthFHIR_0_2_000
 				bool? p_ = context.Operators.Or(k_, o_);
 
 				return p_;
-			};
+			}
+;
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 			bool? g_ = context.Operators.Exists<Condition>(f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Genital Herpes, Placenta Previa, Vasa Previa or Placenta Accreta Spectrum")]
-	public IEnumerable<Encounter> Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum() => 
+	public  IEnumerable<Encounter> Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum() => 
 		__Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum.Value;
 
-	private IEnumerable<Encounter> Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum_Value()
+	private  IEnumerable<Encounter> Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Abnormal_Presentation();
 		IEnumerable<Encounter> b_ = this.Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum();
@@ -1948,10 +2063,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Delivery Encounter with Abnormal Presentation, Genital Herpes, Placenta Previa, Vasa Previa or Placenta Accreta Spectrum")]
-	public IEnumerable<Encounter> Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum() => 
+	public  IEnumerable<Encounter> Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum() => 
 		__Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum.Value;
 
-	private IEnumerable<Encounter> Denominator_Value()
+	private  IEnumerable<Encounter> Denominator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births();
 
@@ -1959,10 +2074,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public IEnumerable<Encounter> Denominator() => 
+	public  IEnumerable<Encounter> Denominator() => 
 		__Denominator.Value;
 
-	private IEnumerable<Encounter> Denominator_Exclusions_Value()
+	private  IEnumerable<Encounter> Denominator_Exclusions_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum();
 
@@ -1970,10 +2085,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public IEnumerable<Encounter> Denominator_Exclusions() => 
+	public  IEnumerable<Encounter> Denominator_Exclusions() => 
 		__Denominator_Exclusions.Value;
 
-	private IEnumerable<Encounter> Initial_Population_Value()
+	private  IEnumerable<Encounter> Initial_Population_Value()
 	{
 		IEnumerable<Encounter> a_ = PCMaternal_5_16_000.Delivery_Encounter_with_Age_Range();
 
@@ -1981,10 +2096,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public IEnumerable<Encounter> Initial_Population() => 
+	public  IEnumerable<Encounter> Initial_Population() => 
 		__Initial_Population.Value;
 
-	private IEnumerable<Encounter> Delivery_Encounter_with_Cesarean_Birth_Value()
+	private  IEnumerable<Encounter> Delivery_Encounter_with_Cesarean_Birth_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births();
 		IEnumerable<Encounter> b_(Encounter ThirtysevenWeeksPlusEncounter)
@@ -2005,24 +2120,27 @@ public class CesareanBirthFHIR_0_2_000
 				bool? s_ = context.Operators.And(n_, r_);
 
 				return s_;
-			};
+			}
+;
 			IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
 			Encounter h_(Procedure CSection) => 
 				ThirtysevenWeeksPlusEncounter;
+;
 			IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Delivery Encounter with Cesarean Birth")]
-	public IEnumerable<Encounter> Delivery_Encounter_with_Cesarean_Birth() => 
+	public  IEnumerable<Encounter> Delivery_Encounter_with_Cesarean_Birth() => 
 		__Delivery_Encounter_with_Cesarean_Birth.Value;
 
-	private IEnumerable<Encounter> Numerator_Value()
+	private  IEnumerable<Encounter> Numerator_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Cesarean_Birth();
 
@@ -2030,10 +2148,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public IEnumerable<Encounter> Numerator() => 
+	public  IEnumerable<Encounter> Numerator() => 
 		__Numerator.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity();
 
@@ -2041,10 +2159,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
 		__SDE_Ethnicity.Value;
 
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+	private  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer();
 
@@ -2052,10 +2170,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
 		__SDE_Payer.Value;
 
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+	private  (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race();
 
@@ -2063,10 +2181,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
 		__SDE_Race.Value;
 
-	private CqlCode SDE_Sex_Value()
+	private  CqlCode SDE_Sex_Value()
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex();
 
@@ -2074,10 +2192,10 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
+	public  CqlCode SDE_Sex() => 
 		__SDE_Sex.Value;
 
-	private IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age_Value()
+	private  IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age_Value()
 	{
 		IEnumerable<(string EncounterID, int? CalculatedCGA)?> a_ = PCMaternal_5_16_000.Variable_Calculated_Gestational_Age();
 
@@ -2085,7 +2203,7 @@ public class CesareanBirthFHIR_0_2_000
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age() => 
+	public  IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age() => 
 		__Variable_Calculated_Gestational_Age.Value;
 
 }

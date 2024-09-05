@@ -95,133 +95,133 @@ public class AHAOverall_2_6_000
 
     #endregion
 
-	private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
+	private  CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Care Services in Long Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility() => 
+	public  CqlValueSet Care_Services_in_Long_Term_Residential_Facility() => 
 		__Care_Services_in_Long_Term_Residential_Facility.Value;
 
-	private CqlValueSet Ejection_Fraction_Value() => 
+	private  CqlValueSet Ejection_Fraction_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134", default);
 
     [CqlDeclaration("Ejection Fraction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134")]
-	public CqlValueSet Ejection_Fraction() => 
+	public  CqlValueSet Ejection_Fraction() => 
 		__Ejection_Fraction.Value;
 
-	private CqlValueSet Heart_Failure_Value() => 
+	private  CqlValueSet Heart_Failure_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", default);
 
     [CqlDeclaration("Heart Failure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376")]
-	public CqlValueSet Heart_Failure() => 
+	public  CqlValueSet Heart_Failure() => 
 		__Heart_Failure.Value;
 
-	private CqlValueSet Heart_Transplant_Value() => 
+	private  CqlValueSet Heart_Transplant_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33", default);
 
     [CqlDeclaration("Heart Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33")]
-	public CqlValueSet Heart_Transplant() => 
+	public  CqlValueSet Heart_Transplant() => 
 		__Heart_Transplant.Value;
 
-	private CqlValueSet Heart_Transplant_Complications_Value() => 
+	private  CqlValueSet Heart_Transplant_Complications_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56", default);
 
     [CqlDeclaration("Heart Transplant Complications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56")]
-	public CqlValueSet Heart_Transplant_Complications() => 
+	public  CqlValueSet Heart_Transplant_Complications() => 
 		__Heart_Transplant_Complications.Value;
 
-	private CqlValueSet Home_Healthcare_Services_Value() => 
+	private  CqlValueSet Home_Healthcare_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services() => 
+	public  CqlValueSet Home_Healthcare_Services() => 
 		__Home_Healthcare_Services.Value;
 
-	private CqlValueSet Left_Ventricular_Assist_Device_Complications_Value() => 
+	private  CqlValueSet Left_Ventricular_Assist_Device_Complications_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58", default);
 
     [CqlDeclaration("Left Ventricular Assist Device Complications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58")]
-	public CqlValueSet Left_Ventricular_Assist_Device_Complications() => 
+	public  CqlValueSet Left_Ventricular_Assist_Device_Complications() => 
 		__Left_Ventricular_Assist_Device_Complications.Value;
 
-	private CqlValueSet Left_Ventricular_Assist_Device_Placement_Value() => 
+	private  CqlValueSet Left_Ventricular_Assist_Device_Placement_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61", default);
 
     [CqlDeclaration("Left Ventricular Assist Device Placement")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61")]
-	public CqlValueSet Left_Ventricular_Assist_Device_Placement() => 
+	public  CqlValueSet Left_Ventricular_Assist_Device_Placement() => 
 		__Left_Ventricular_Assist_Device_Placement.Value;
 
-	private CqlValueSet Moderate_or_Severe_Value() => 
+	private  CqlValueSet Moderate_or_Severe_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092", default);
 
     [CqlDeclaration("Moderate or Severe")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092")]
-	public CqlValueSet Moderate_or_Severe() => 
+	public  CqlValueSet Moderate_or_Severe() => 
 		__Moderate_or_Severe.Value;
 
-	private CqlValueSet Moderate_or_Severe_LVSD_Value() => 
+	private  CqlValueSet Moderate_or_Severe_LVSD_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090", default);
 
     [CqlDeclaration("Moderate or Severe LVSD")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090")]
-	public CqlValueSet Moderate_or_Severe_LVSD() => 
+	public  CqlValueSet Moderate_or_Severe_LVSD() => 
 		__Moderate_or_Severe_LVSD.Value;
 
-	private CqlValueSet Nursing_Facility_Visit_Value() => 
+	private  CqlValueSet Nursing_Facility_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public CqlValueSet Nursing_Facility_Visit() => 
+	public  CqlValueSet Nursing_Facility_Visit() => 
 		__Nursing_Facility_Visit.Value;
 
-	private CqlValueSet Office_Visit_Value() => 
+	private  CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit() => 
+	public  CqlValueSet Office_Visit() => 
 		__Office_Visit.Value;
 
-	private CqlValueSet Outpatient_Consultation_Value() => 
+	private  CqlValueSet Outpatient_Consultation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public CqlValueSet Outpatient_Consultation() => 
+	public  CqlValueSet Outpatient_Consultation() => 
 		__Outpatient_Consultation.Value;
 
-	private CqlValueSet Patient_Provider_Interaction_Value() => 
+	private  CqlValueSet Patient_Provider_Interaction_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", default);
 
     [CqlDeclaration("Patient Provider Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012")]
-	public CqlValueSet Patient_Provider_Interaction() => 
+	public  CqlValueSet Patient_Provider_Interaction() => 
 		__Patient_Provider_Interaction.Value;
 
-	private CqlCode Left_ventricular_systolic_dysfunction__disorder__Value() => 
+	private  CqlCode Left_ventricular_systolic_dysfunction__disorder__Value() => 
 		new CqlCode("134401001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Left ventricular systolic dysfunction (disorder)")]
-	public CqlCode Left_ventricular_systolic_dysfunction__disorder_() => 
+	public  CqlCode Left_ventricular_systolic_dysfunction__disorder_() => 
 		__Left_ventricular_systolic_dysfunction__disorder_.Value;
 
-	private CqlCode allergy_entered_in_error_Value() => 
+	private  CqlCode allergy_entered_in_error_Value() => 
 		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("allergy-entered-in-error")]
-	public CqlCode allergy_entered_in_error() => 
+	public  CqlCode allergy_entered_in_error() => 
 		__allergy_entered_in_error.Value;
 
-	private CqlCode[] SNOMEDCT_Value()
+	private  CqlCode[] SNOMEDCT_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("134401001", "http://snomed.info/sct", default, default),
@@ -231,10 +231,10 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public CqlCode[] SNOMEDCT() => 
+	public  CqlCode[] SNOMEDCT() => 
 		__SNOMEDCT.Value;
 
-	private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
+	private  CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
@@ -244,10 +244,10 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
-	public CqlCode[] AllergyIntoleranceVerificationStatusCodes() => 
+	public  CqlCode[] AllergyIntoleranceVerificationStatusCodes() => 
 		__AllergyIntoleranceVerificationStatusCodes.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -258,10 +258,10 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -270,11 +270,11 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("isConfirmedActiveDiagnosis")]
-	public bool? isConfirmedActiveDiagnosis(Condition Condition)
+	public  bool? isConfirmedActiveDiagnosis(Condition Condition)
 	{
 		Condition[] a_ = [
 			Condition,
@@ -305,7 +305,8 @@ public class AHAOverall_2_6_000
 			bool? ac_ = context.Operators.And(j_, ab_);
 
 			return ac_;
-		};
+		}
+;
 		IEnumerable<Condition> c_ = context.Operators.Where<Condition>((IEnumerable<Condition>)a_, b_);
 		Condition d_ = context.Operators.SingletonFrom<Condition>(c_);
 		bool? e_ = context.Operators.Not((bool?)(d_ is null));
@@ -314,7 +315,7 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("isFinished")]
-	public bool? isFinished(Encounter Visit)
+	public  bool? isFinished(Encounter Visit)
 	{
 		Code<Encounter.EncounterStatus> a_ = Visit?.StatusElement;
 		Encounter.EncounterStatus? b_ = a_?.Value;
@@ -324,7 +325,7 @@ public class AHAOverall_2_6_000
 		return d_;
 	}
 
-	private IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_Value()
+	private  IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -354,14 +355,17 @@ public class AHAOverall_2_6_000
 				bool? ad_ = context.Operators.And(ab_, ac_);
 
 				return ad_;
-			};
+			}
+;
 			IEnumerable<Condition> v_ = context.Operators.Where<Condition>(t_, u_);
 			Encounter w_(Condition HeartFailure) => 
 				QualifyingEncounter;
+;
 			IEnumerable<Encounter> x_ = context.Operators.Select<Condition, Encounter>(v_, w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Encounter> p_ = context.Operators.SelectMany<Encounter, Encounter>(n_, o_);
 		bool? q_(Encounter QualifyingEncounter)
 		{
@@ -373,17 +377,18 @@ public class AHAOverall_2_6_000
 			bool? aj_ = context.Operators.And(ah_, ai_);
 
 			return aj_;
-		};
+		}
+;
 		IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
 
 		return r_;
 	}
 
     [CqlDeclaration("Heart Failure Outpatient Encounter")]
-	public IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter() => 
+	public  IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter() => 
 		__Heart_Failure_Outpatient_Encounter.Value;
 
-	private IEnumerable<object> Moderate_or_Severe_LVSD_Findings_Value()
+	private  IEnumerable<object> Moderate_or_Severe_LVSD_Findings_Value()
 	{
 		CqlValueSet a_ = this.Ejection_Fraction();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -406,7 +411,8 @@ public class AHAOverall_2_6_000
 			bool? x_ = context.Operators.And(q_, w_);
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		CqlValueSet e_ = this.Moderate_or_Severe_LVSD();
 		IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(e_, default);
@@ -422,7 +428,8 @@ public class AHAOverall_2_6_000
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
 			return ab_;
-		};
+		}
+;
 		IEnumerable<Condition> l_ = context.Operators.Where<Condition>(j_, k_);
 		IEnumerable<object> m_ = context.Operators.Union<object>((g_ as IEnumerable<object>), (l_ as IEnumerable<object>));
 
@@ -430,10 +437,10 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("Moderate or Severe LVSD Findings")]
-	public IEnumerable<object> Moderate_or_Severe_LVSD_Findings() => 
+	public  IEnumerable<object> Moderate_or_Severe_LVSD_Findings() => 
 		__Moderate_or_Severe_LVSD_Findings.Value;
 
-	private IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD_Value()
+	private  IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Heart_Failure_Outpatient_Encounter();
 		IEnumerable<Encounter> b_(Encounter HFOutpatientEncounter)
@@ -452,24 +459,27 @@ public class AHAOverall_2_6_000
 				bool? q_ = context.Operators.Before(m_, p_, default);
 
 				return q_;
-			};
+			}
+;
 			IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
 			Encounter g_(object LVSDFindings) => 
 				HFOutpatientEncounter;
+;
 			IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
 			return h_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD")]
-	public IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD() => 
+	public  IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD() => 
 		__Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD.Value;
 
-	private bool? Has_Heart_Transplant_Complications_Value()
+	private  bool? Has_Heart_Transplant_Complications_Value()
 	{
 		CqlValueSet a_ = this.Heart_Transplant_Complications();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -489,21 +499,25 @@ public class AHAOverall_2_6_000
 				bool? u_ = context.Operators.Before(q_, t_, default);
 
 				return u_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
 			Condition k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				HeartTransplantComplications;
+;
 			IEnumerable<Condition> l_ = context.Operators.Select<Encounter, Condition>(j_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
 		bool? e_(Condition HeartTransplantComplications)
 		{
 			bool? v_ = this.isConfirmedActiveDiagnosis(HeartTransplantComplications);
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 		bool? g_ = context.Operators.Exists<Condition>(f_);
 
@@ -511,10 +525,10 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("Has Heart Transplant Complications")]
-	public bool? Has_Heart_Transplant_Complications() => 
+	public  bool? Has_Heart_Transplant_Complications() => 
 		__Has_Heart_Transplant_Complications.Value;
 
-	private bool? Has_Left_Ventricular_Assist_Device_Value()
+	private  bool? Has_Left_Ventricular_Assist_Device_Value()
 	{
 		CqlValueSet a_ = this.Left_Ventricular_Assist_Device_Placement();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -533,14 +547,17 @@ public class AHAOverall_2_6_000
 				bool? t_ = context.Operators.Before(p_, s_, default);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
 			Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				LVADOutpatient;
+;
 			IEnumerable<Procedure> l_ = context.Operators.Select<Encounter, Procedure>(j_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure LVADOutpatient)
 		{
@@ -550,7 +567,8 @@ public class AHAOverall_2_6_000
 			bool? x_ = context.Operators.Equal(w_, "completed");
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Procedure> f_ = context.Operators.Where<Procedure>(d_, e_);
 		bool? g_ = context.Operators.Exists<Procedure>(f_);
 
@@ -558,10 +576,10 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("Has Left Ventricular Assist Device")]
-	public bool? Has_Left_Ventricular_Assist_Device() => 
+	public  bool? Has_Left_Ventricular_Assist_Device() => 
 		__Has_Left_Ventricular_Assist_Device.Value;
 
-	private bool? Has_Left_Ventricular_Assist_Device_Complications_Value()
+	private  bool? Has_Left_Ventricular_Assist_Device_Complications_Value()
 	{
 		CqlValueSet a_ = this.Left_Ventricular_Assist_Device_Complications();
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -581,21 +599,25 @@ public class AHAOverall_2_6_000
 				bool? u_ = context.Operators.Before(q_, t_, default);
 
 				return u_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
 			Condition k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				LVADComplications;
+;
 			IEnumerable<Condition> l_ = context.Operators.Select<Encounter, Condition>(j_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Condition> d_ = context.Operators.SelectMany<Condition, Condition>(b_, c_);
 		bool? e_(Condition LVADComplications)
 		{
 			bool? v_ = this.isConfirmedActiveDiagnosis(LVADComplications);
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 		bool? g_ = context.Operators.Exists<Condition>(f_);
 
@@ -603,10 +625,10 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("Has Left Ventricular Assist Device Complications")]
-	public bool? Has_Left_Ventricular_Assist_Device_Complications() => 
+	public  bool? Has_Left_Ventricular_Assist_Device_Complications() => 
 		__Has_Left_Ventricular_Assist_Device_Complications.Value;
 
-	private IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period_Value()
+	private  IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility();
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -635,17 +657,18 @@ public class AHAOverall_2_6_000
 			bool? y_ = context.Operators.And(w_, x_);
 
 			return y_;
-		};
+		}
+;
 		IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
 
 		return s_;
 	}
 
     [CqlDeclaration("Qualifying Outpatient Encounter During Measurement Period")]
-	public IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period() => 
+	public  IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period() => 
 		__Qualifying_Outpatient_Encounter_During_Measurement_Period.Value;
 
-	private bool? Has_Two_Qualifying_Outpatient_Encounters_and_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period_Value()
+	private  bool? Has_Two_Qualifying_Outpatient_Encounters_and_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period_Value()
 	{
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
@@ -670,14 +693,17 @@ public class AHAOverall_2_6_000
 				bool? ab_ = context.Operators.Not(aa_);
 
 				return ab_;
-			};
+			}
+;
 			IEnumerable<Encounter> t_ = context.Operators.Where<Encounter>(r_, s_);
 			Encounter u_(Encounter Encounter2) => 
 				Encounter1;
+;
 			IEnumerable<Encounter> v_ = context.Operators.Select<Encounter, Encounter>(t_, u_);
 
 			return v_;
-		};
+		}
+;
 		IEnumerable<Encounter> l_ = context.Operators.SelectMany<Encounter, Encounter>(j_, k_);
 		bool? m_ = context.Operators.Exists<Encounter>(l_);
 		bool? n_ = context.Operators.And(i_, m_);
@@ -689,10 +715,10 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("Has Two Qualifying Outpatient Encounters and Heart Failure Outpatient Encounter During the Measurement Period")]
-	public bool? Has_Two_Qualifying_Outpatient_Encounters_and_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period() => 
+	public  bool? Has_Two_Qualifying_Outpatient_Encounters_and_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period() => 
 		__Has_Two_Qualifying_Outpatient_Encounters_and_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period.Value;
 
-	private bool? Has_Heart_Transplant_Value()
+	private  bool? Has_Heart_Transplant_Value()
 	{
 		CqlValueSet a_ = this.Heart_Transplant();
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -711,14 +737,17 @@ public class AHAOverall_2_6_000
 				bool? t_ = context.Operators.Before(p_, s_, default);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
 			Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
 				HeartTransplant;
+;
 			IEnumerable<Procedure> l_ = context.Operators.Select<Encounter, Procedure>(j_, k_);
 
 			return l_;
-		};
+		}
+;
 		IEnumerable<Procedure> d_ = context.Operators.SelectMany<Procedure, Procedure>(b_, c_);
 		bool? e_(Procedure HeartTransplant)
 		{
@@ -728,7 +757,8 @@ public class AHAOverall_2_6_000
 			bool? x_ = context.Operators.Equal(w_, "completed");
 
 			return x_;
-		};
+		}
+;
 		IEnumerable<Procedure> f_ = context.Operators.Where<Procedure>(d_, e_);
 		bool? g_ = context.Operators.Exists<Procedure>(f_);
 
@@ -736,11 +766,11 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("Has Heart Transplant")]
-	public bool? Has_Heart_Transplant() => 
+	public  bool? Has_Heart_Transplant() => 
 		__Has_Heart_Transplant.Value;
 
     [CqlDeclaration("isOrderedDuringHeartFailureOutpatientEncounter")]
-	public bool? isOrderedDuringHeartFailureOutpatientEncounter(MedicationRequest Order)
+	public  bool? isOrderedDuringHeartFailureOutpatientEncounter(MedicationRequest Order)
 	{
 		IEnumerable<Encounter> a_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 		bool? b_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
@@ -778,7 +808,8 @@ public class AHAOverall_2_6_000
 			bool? z_ = context.Operators.And(u_, y_);
 
 			return z_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		bool? d_ = context.Operators.Exists<Encounter>(c_);
 
@@ -786,7 +817,7 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("overlapsHeartFailureOutpatientEncounter")]
-	public bool? overlapsHeartFailureOutpatientEncounter(Condition Diagnosis)
+	public  bool? overlapsHeartFailureOutpatientEncounter(Condition Diagnosis)
 	{
 		IEnumerable<Encounter> a_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 		bool? b_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
@@ -799,7 +830,8 @@ public class AHAOverall_2_6_000
 			bool? j_ = context.Operators.And(h_, i_);
 
 			return j_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		bool? d_ = context.Operators.Exists<Encounter>(c_);
 
@@ -807,7 +839,7 @@ public class AHAOverall_2_6_000
 	}
 
     [CqlDeclaration("overlapsAfterHeartFailureOutpatientEncounter")]
-	public bool? overlapsAfterHeartFailureOutpatientEncounter(object Event)
+	public  bool? overlapsAfterHeartFailureOutpatientEncounter(object Event)
 	{
 		IEnumerable<Encounter> a_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD();
 		bool? b_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
@@ -891,14 +923,16 @@ public class AHAOverall_2_6_000
 						bool? da_ = context.Operators.Not((bool?)(cz_ is null));
 
 						return da_;
-					};
+					}
+;
 					IEnumerable<object> bi_ = context.Operators.Where<object>((IEnumerable<object>)bg_, bh_);
 					object bj_(object @this)
 					{
 						object db_ = context.Operators.LateBoundProperty<object>(@this, "timing");
 
 						return db_;
-					};
+					}
+;
 					IEnumerable<object> bk_ = context.Operators.Select<object, object>(bi_, bj_);
 					object bl_ = context.Operators.SingletonFrom<object>(bk_);
 					object[] bm_ = [
@@ -910,14 +944,16 @@ public class AHAOverall_2_6_000
 						bool? dd_ = context.Operators.Not((bool?)(dc_ is null));
 
 						return dd_;
-					};
+					}
+;
 					IEnumerable<object> bo_ = context.Operators.Where<object>((IEnumerable<object>)bm_, bn_);
 					object bp_(object @this)
 					{
 						object de_ = context.Operators.LateBoundProperty<object>(@this, "repeat");
 
 						return de_;
-					};
+					}
+;
 					IEnumerable<object> bq_ = context.Operators.Select<object, object>(bo_, bp_);
 					object br_ = context.Operators.SingletonFrom<object>(bq_);
 					object[] bs_ = [
@@ -930,7 +966,8 @@ public class AHAOverall_2_6_000
 						bool? dh_ = context.Operators.Not((bool?)(dg_ is null));
 
 						return dh_;
-					};
+					}
+;
 					IEnumerable<object> bu_ = context.Operators.Where<object>((IEnumerable<object>)bs_, bt_);
 					object bv_(object @this)
 					{
@@ -938,7 +975,8 @@ public class AHAOverall_2_6_000
 						object dj_ = FHIRHelpers_4_3_000.ToValue(di_);
 
 						return dj_;
-					};
+					}
+;
 					IEnumerable<object> bw_ = context.Operators.Select<object, object>(bu_, bv_);
 					object bx_ = context.Operators.SingletonFrom<object>(bw_);
 					object[] by_ = [
@@ -949,7 +987,8 @@ public class AHAOverall_2_6_000
 						CqlInterval<CqlDateTime> dk_ = QICoreCommon_2_0_000.toInterval(DoseTime);
 
 						return dk_;
-					};
+					}
+;
 					IEnumerable<CqlInterval<CqlDateTime>> ca_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)by_, bz_);
 					IEnumerable<CqlInterval<CqlDateTime>> cb_ = context.Operators.Collapse(ca_, default);
 					object cc_(CqlInterval<CqlDateTime> @this)
@@ -957,7 +996,8 @@ public class AHAOverall_2_6_000
 						CqlDateTime dl_ = context.Operators.Start(@this);
 
 						return dl_;
-					};
+					}
+;
 					IEnumerable<CqlInterval<CqlDateTime>> cd_ = context.Operators.SortBy<CqlInterval<CqlDateTime>>(cb_, cc_, System.ComponentModel.ListSortDirection.Ascending);
 					CqlInterval<CqlDateTime> ce_ = context.Operators.First<CqlInterval<CqlDateTime>>(cd_);
 					Period cf_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
@@ -1017,10 +1057,12 @@ public class AHAOverall_2_6_000
 				{
 					return false;
 				}
-			};
+			}
+;
 
 			return e_();
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 		bool? d_ = context.Operators.Exists<Encounter>(c_);
 

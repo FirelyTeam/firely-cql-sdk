@@ -39,7 +39,7 @@ public class NCQAStatus_1_0_0
 
     #endregion
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -48,11 +48,11 @@ public class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
     [CqlDeclaration("Active Allergy")]
-	public IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
+	public  IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
 	{
 		bool? a_(AllergyIntolerance A)
 		{
@@ -63,14 +63,15 @@ public class NCQAStatus_1_0_0
 			bool? g_ = context.Operators.Equal(d_, f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<AllergyIntolerance> b_ = context.Operators.Where<AllergyIntolerance>(Allergy, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Active Condition")]
-	public IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
+	public  IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
 	{
 		bool? a_(Condition C)
 		{
@@ -81,14 +82,15 @@ public class NCQAStatus_1_0_0
 			bool? g_ = context.Operators.Equal(d_, f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Finished Encounter")]
-	public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
+	public  IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
 	{
 		bool? a_(Encounter E)
 		{
@@ -97,14 +99,15 @@ public class NCQAStatus_1_0_0
 			bool? e_ = context.Operators.Equal(d_, "finished");
 
 			return e_;
-		};
+		}
+;
 		IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Completed Immunization")]
-	public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
+	public  IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
 	{
 		bool? a_(Immunization I)
 		{
@@ -113,14 +116,15 @@ public class NCQAStatus_1_0_0
 			bool? e_ = context.Operators.Equal(d_, "completed");
 
 			return e_;
-		};
+		}
+;
 		IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Dispensed Medication")]
-	public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
+	public  IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
 	{
 		bool? a_(MedicationDispense M)
 		{
@@ -129,14 +133,15 @@ public class NCQAStatus_1_0_0
 			bool? e_ = context.Operators.Equal(d_, "completed");
 
 			return e_;
-		};
+		}
+;
 		IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Active Medication")]
-	public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
+	public  IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
 	{
 		bool? a_(MedicationRequest M)
 		{
@@ -148,14 +153,15 @@ public class NCQAStatus_1_0_0
 			bool? f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
-		};
+		}
+;
 		IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(Med, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Completed Procedure")]
-	public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
+	public  IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{
@@ -164,14 +170,15 @@ public class NCQAStatus_1_0_0
 			bool? e_ = context.Operators.Equal(d_, "completed");
 
 			return e_;
-		};
+		}
+;
 		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Completed or Ongoing Procedure")]
-	public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
+	public  IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{
@@ -184,7 +191,8 @@ public class NCQAStatus_1_0_0
 			bool? f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
 
 			return f_;
-		};
+		}
+;
 		IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
 
 		return b_;

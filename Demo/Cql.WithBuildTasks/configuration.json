@@ -1,0 +1,6 @@
+﻿{
+  "CSharpCodeWriter": {
+    "WriteVirtualMethods": true,
+    "ExternalsAreAbstract":  true
+  }
+}

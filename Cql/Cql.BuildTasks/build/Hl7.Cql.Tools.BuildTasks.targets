@@ -12,7 +12,11 @@
 	</Target>
 	
 	<Target BeforeTargets="CoreCompile" Name="CqlToCSharp" Condition="'$(MSBuildRuntimeType)' == 'Core'">
-		<CqlToCSharp Sources="@(CqlFiles)" ElmPath="$(MSBuildProjectDirectory)/obj" Namespace="$(RootNamespace)">
+		<CqlToCSharp 
+			Sources="@(CqlFiles)" 
+			ElmPath="$(MSBuildProjectDirectory)/obj" 
+			Options="$(MSBuildProjectDirectory)/configuration.json"
+			Namespace="$(RootNamespace)">
 			<Output TaskParameter="Elm" PropertyName="ELMFile" />
 			<Output TaskParameter="CSharp" PropertyName="CSharpFile" />
 		</CqlToCSharp>		

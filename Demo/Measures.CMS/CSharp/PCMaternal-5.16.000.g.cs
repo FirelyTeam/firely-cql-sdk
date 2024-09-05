@@ -65,61 +65,61 @@ public class PCMaternal_5_16_000
 
     #endregion
 
-	private CqlValueSet Delivery_Procedures_Value() => 
+	private  CqlValueSet Delivery_Procedures_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
 
     [CqlDeclaration("Delivery Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
-	public CqlValueSet Delivery_Procedures() => 
+	public  CqlValueSet Delivery_Procedures() => 
 		__Delivery_Procedures.Value;
 
-	private CqlValueSet ED_Visit_and_OB_Triage_Value() => 
+	private  CqlValueSet ED_Visit_and_OB_Triage_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", default);
 
     [CqlDeclaration("ED Visit and OB Triage")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369")]
-	public CqlValueSet ED_Visit_and_OB_Triage() => 
+	public  CqlValueSet ED_Visit_and_OB_Triage() => 
 		__ED_Visit_and_OB_Triage.Value;
 
-	private CqlValueSet Encounter_Inpatient_Value() => 
+	private  CqlValueSet Encounter_Inpatient_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
+	public  CqlValueSet Encounter_Inpatient() => 
 		__Encounter_Inpatient.Value;
 
-	private CqlValueSet Estimated_Gestational_Age_at_Delivery_Value() => 
+	private  CqlValueSet Estimated_Gestational_Age_at_Delivery_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26", default);
 
     [CqlDeclaration("Estimated Gestational Age at Delivery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26")]
-	public CqlValueSet Estimated_Gestational_Age_at_Delivery() => 
+	public  CqlValueSet Estimated_Gestational_Age_at_Delivery() => 
 		__Estimated_Gestational_Age_at_Delivery.Value;
 
-	private CqlValueSet Observation_Services_Value() => 
+	private  CqlValueSet Observation_Services_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public CqlValueSet Observation_Services() => 
+	public  CqlValueSet Observation_Services() => 
 		__Observation_Services.Value;
 
-	private CqlCode Date_and_time_of_obstetric_delivery_Value() => 
+	private  CqlCode Date_and_time_of_obstetric_delivery_Value() => 
 		new CqlCode("93857-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Date and time of obstetric delivery")]
-	public CqlCode Date_and_time_of_obstetric_delivery() => 
+	public  CqlCode Date_and_time_of_obstetric_delivery() => 
 		__Date_and_time_of_obstetric_delivery.Value;
 
-	private CqlCode Delivery_date_Estimated_Value() => 
+	private  CqlCode Delivery_date_Estimated_Value() => 
 		new CqlCode("11778-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Delivery date Estimated")]
-	public CqlCode Delivery_date_Estimated() => 
+	public  CqlCode Delivery_date_Estimated() => 
 		__Delivery_date_Estimated.Value;
 
-	private CqlCode[] LOINC_Value()
+	private  CqlCode[] LOINC_Value()
 	{
 		CqlCode[] a_ = [
 			new CqlCode("93857-1", "http://loinc.org", default, default),
@@ -130,10 +130,10 @@ public class PCMaternal_5_16_000
 	}
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
+	public  CqlCode[] LOINC() => 
 		__LOINC.Value;
 
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private  CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -144,10 +144,10 @@ public class PCMaternal_5_16_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
+	public  CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+	private  Patient Patient_Value()
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -156,10 +156,10 @@ public class PCMaternal_5_16_000
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public  Patient Patient() => 
 		__Patient.Value;
 
-	private IEnumerable<Encounter> Encounter_with_Age_Range_Value()
+	private  IEnumerable<Encounter> Encounter_with_Age_Range_Value()
 	{
 		IEnumerable<Encounter> a_ = CQMCommon_2_0_000.Inpatient_Encounter();
 		bool? b_(Encounter InpatientEncounter)
@@ -177,18 +177,19 @@ public class PCMaternal_5_16_000
 			bool? n_ = context.Operators.In<int?>(l_, m_, default);
 
 			return n_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Encounter with Age Range")]
-	public IEnumerable<Encounter> Encounter_with_Age_Range() => 
+	public  IEnumerable<Encounter> Encounter_with_Age_Range() => 
 		__Encounter_with_Age_Range.Value;
 
     [CqlDeclaration("hospitalizationWithEDOBTriageObservation")]
-	public CqlInterval<CqlDateTime> hospitalizationWithEDOBTriageObservation(Encounter TheEncounter)
+	public  CqlInterval<CqlDateTime> hospitalizationWithEDOBTriageObservation(Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
@@ -229,7 +230,8 @@ public class PCMaternal_5_16_000
 					bool? dc_ = context.Operators.And(cx_, db_);
 
 					return dc_;
-				};
+				}
+;
 				IEnumerable<Encounter> al_ = context.Operators.Where<Encounter>(aj_, ak_);
 				object am_(Encounter @this)
 				{
@@ -238,7 +240,8 @@ public class PCMaternal_5_16_000
 					CqlDateTime df_ = context.Operators.End(de_);
 
 					return df_;
-				};
+				}
+;
 				IEnumerable<Encounter> an_ = context.Operators.SortBy<Encounter>(al_, am_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter ao_ = context.Operators.Last<Encounter>(an_);
 				Period ap_ = ao_?.Period;
@@ -275,7 +278,8 @@ public class PCMaternal_5_16_000
 					bool? ec_ = context.Operators.And(dx_, eb_);
 
 					return ec_;
-				};
+				}
+;
 				IEnumerable<Encounter> ba_ = context.Operators.Where<Encounter>(ay_, az_);
 				object bb_(Encounter @this)
 				{
@@ -284,7 +288,8 @@ public class PCMaternal_5_16_000
 					CqlDateTime ef_ = context.Operators.End(ee_);
 
 					return ef_;
-				};
+				}
+;
 				IEnumerable<Encounter> bc_ = context.Operators.SortBy<Encounter>(ba_, bb_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bd_ = context.Operators.Last<Encounter>(bc_);
 				Period be_ = bd_?.Period;
@@ -320,7 +325,8 @@ public class PCMaternal_5_16_000
 					bool? fc_ = context.Operators.And(ex_, fb_);
 
 					return fc_;
-				};
+				}
+;
 				IEnumerable<Encounter> bp_ = context.Operators.Where<Encounter>(bn_, bo_);
 				object bq_(Encounter @this)
 				{
@@ -329,7 +335,8 @@ public class PCMaternal_5_16_000
 					CqlDateTime ff_ = context.Operators.End(fe_);
 
 					return ff_;
-				};
+				}
+;
 				IEnumerable<Encounter> br_ = context.Operators.SortBy<Encounter>(bp_, bq_, System.ComponentModel.ListSortDirection.Ascending);
 				Encounter bs_ = context.Operators.Last<Encounter>(br_);
 				Period bt_ = bs_?.Period;
@@ -346,7 +353,8 @@ public class PCMaternal_5_16_000
 				bool? cf_ = context.Operators.And(ca_, ce_);
 
 				return cf_;
-			};
+			}
+;
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
@@ -355,7 +363,8 @@ public class PCMaternal_5_16_000
 				CqlDateTime fi_ = context.Operators.End(fh_);
 
 				return fi_;
-			};
+			}
+;
 			IEnumerable<Encounter> j_ = context.Operators.SortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter k_ = context.Operators.Last<Encounter>(j_);
 			Period l_ = k_?.Period;
@@ -388,7 +397,8 @@ public class PCMaternal_5_16_000
 				bool? gf_ = context.Operators.And(ga_, ge_);
 
 				return gf_;
-			};
+			}
+;
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
 			object s_(Encounter @this)
 			{
@@ -397,7 +407,8 @@ public class PCMaternal_5_16_000
 				CqlDateTime gi_ = context.Operators.End(gh_);
 
 				return gi_;
-			};
+			}
+;
 			IEnumerable<Encounter> t_ = context.Operators.SortBy<Encounter>(r_, s_, System.ComponentModel.ListSortDirection.Ascending);
 			Encounter u_ = context.Operators.Last<Encounter>(t_);
 			Period v_ = u_?.Period;
@@ -411,14 +422,15 @@ public class PCMaternal_5_16_000
 			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval((n_ ?? (x_ ?? aa_)), ad_, true, true);
 
 			return ae_;
-		};
+		}
+;
 		IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
 		CqlInterval<CqlDateTime> d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
 
 		return d_;
 	}
 
-	private IEnumerable<Encounter> Delivery_Encounter_with_Age_Range_Value()
+	private  IEnumerable<Encounter> Delivery_Encounter_with_Age_Range_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_Range();
 		IEnumerable<Encounter> b_(Encounter EncounterWithAge)
@@ -440,25 +452,28 @@ public class PCMaternal_5_16_000
 				bool? t_ = context.Operators.And(m_, s_);
 
 				return t_;
-			};
+			}
+;
 			IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
 			Encounter h_(Procedure DeliveryProcedure) => 
 				EncounterWithAge;
+;
 			IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
 			return i_;
-		};
+		}
+;
 		IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Delivery Encounter with Age Range")]
-	public IEnumerable<Encounter> Delivery_Encounter_with_Age_Range() => 
+	public  IEnumerable<Encounter> Delivery_Encounter_with_Age_Range() => 
 		__Delivery_Encounter_with_Age_Range.Value;
 
     [CqlDeclaration("lastTimeOfDelivery")]
-	public CqlDateTime lastTimeOfDelivery(Encounter TheEncounter)
+	public  CqlDateTime lastTimeOfDelivery(Encounter TheEncounter)
 	{
 		CqlCode a_ = this.Date_and_time_of_obstetric_delivery();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -488,7 +503,8 @@ public class PCMaternal_5_16_000
 					bool aj_ = ai_ is CqlDateTime;
 
 					return aj_;
-				};
+				}
+;
 				bool af_()
 				{
 					DataType ak_ = TimeOfDelivery?.Effective;
@@ -496,7 +512,8 @@ public class PCMaternal_5_16_000
 					bool am_ = al_ is CqlInterval<CqlDateTime>;
 
 					return am_;
-				};
+				}
+;
 				bool ag_()
 				{
 					DataType an_ = TimeOfDelivery?.Effective;
@@ -504,7 +521,8 @@ public class PCMaternal_5_16_000
 					bool ap_ = ao_ is CqlDateTime;
 
 					return ap_;
-				};
+				}
+;
 				if (ae_())
 				{
 					DataType aq_ = TimeOfDelivery?.Effective;
@@ -530,7 +548,8 @@ public class PCMaternal_5_16_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime v_ = QICoreCommon_2_0_000.earliest(u_());
 			CqlInterval<CqlDateTime> w_ = this.hospitalizationWithEDOBTriageObservation(TheEncounter);
 			bool? x_ = context.Operators.In<CqlDateTime>(v_, w_, default);
@@ -540,7 +559,8 @@ public class PCMaternal_5_16_000
 			bool? ad_ = context.Operators.And(y_, ac_);
 
 			return ad_;
-		};
+		}
+;
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
@@ -553,7 +573,8 @@ public class PCMaternal_5_16_000
 					bool bd_ = bc_ is CqlDateTime;
 
 					return bd_;
-				};
+				}
+;
 				bool az_()
 				{
 					DataType be_ = @this?.Effective;
@@ -561,7 +582,8 @@ public class PCMaternal_5_16_000
 					bool bg_ = bf_ is CqlInterval<CqlDateTime>;
 
 					return bg_;
-				};
+				}
+;
 				bool ba_()
 				{
 					DataType bh_ = @this?.Effective;
@@ -569,7 +591,8 @@ public class PCMaternal_5_16_000
 					bool bj_ = bi_ is CqlDateTime;
 
 					return bj_;
-				};
+				}
+;
 				if (ay_())
 				{
 					DataType bk_ = @this?.Effective;
@@ -595,11 +618,13 @@ public class PCMaternal_5_16_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime ax_ = QICoreCommon_2_0_000.earliest(aw_());
 
 			return ax_;
-		};
+		}
+;
 		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
@@ -609,7 +634,7 @@ public class PCMaternal_5_16_000
 	}
 
     [CqlDeclaration("lastEstimatedDeliveryDate")]
-	public CqlDateTime lastEstimatedDeliveryDate(Encounter TheEncounter)
+	public  CqlDateTime lastEstimatedDeliveryDate(Encounter TheEncounter)
 	{
 		CqlCode a_ = this.Delivery_date_Estimated();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -639,7 +664,8 @@ public class PCMaternal_5_16_000
 					bool al_ = ak_ is CqlDateTime;
 
 					return al_;
-				};
+				}
+;
 				bool ah_()
 				{
 					DataType am_ = EstimatedDateOfDelivery?.Effective;
@@ -647,7 +673,8 @@ public class PCMaternal_5_16_000
 					bool ao_ = an_ is CqlInterval<CqlDateTime>;
 
 					return ao_;
-				};
+				}
+;
 				bool ai_()
 				{
 					DataType ap_ = EstimatedDateOfDelivery?.Effective;
@@ -655,7 +682,8 @@ public class PCMaternal_5_16_000
 					bool ar_ = aq_ is CqlDateTime;
 
 					return ar_;
-				};
+				}
+;
 				if (ag_())
 				{
 					DataType as_ = EstimatedDateOfDelivery?.Effective;
@@ -681,7 +709,8 @@ public class PCMaternal_5_16_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime v_ = QICoreCommon_2_0_000.earliest(u_());
 			CqlDateTime w_ = this.lastTimeOfDelivery(TheEncounter);
 			CqlQuantity x_ = context.Operators.Quantity(42m, "weeks");
@@ -693,7 +722,8 @@ public class PCMaternal_5_16_000
 			bool? af_ = context.Operators.And(t_, ae_);
 
 			return af_;
-		};
+		}
+;
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
@@ -706,7 +736,8 @@ public class PCMaternal_5_16_000
 					bool bf_ = be_ is CqlDateTime;
 
 					return bf_;
-				};
+				}
+;
 				bool bb_()
 				{
 					DataType bg_ = @this?.Effective;
@@ -714,7 +745,8 @@ public class PCMaternal_5_16_000
 					bool bi_ = bh_ is CqlInterval<CqlDateTime>;
 
 					return bi_;
-				};
+				}
+;
 				bool bc_()
 				{
 					DataType bj_ = @this?.Effective;
@@ -722,7 +754,8 @@ public class PCMaternal_5_16_000
 					bool bl_ = bk_ is CqlDateTime;
 
 					return bl_;
-				};
+				}
+;
 				if (ba_())
 				{
 					DataType bm_ = @this?.Effective;
@@ -748,11 +781,13 @@ public class PCMaternal_5_16_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime az_ = QICoreCommon_2_0_000.earliest(ay_());
 
 			return az_;
-		};
+		}
+;
 		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
@@ -762,7 +797,7 @@ public class PCMaternal_5_16_000
 	}
 
     [CqlDeclaration("calculatedGestationalAge")]
-	public int? calculatedGestationalAge(Encounter TheEncounter)
+	public  int? calculatedGestationalAge(Encounter TheEncounter)
 	{
 		CqlDateTime a_ = this.lastTimeOfDelivery(TheEncounter);
 		CqlDateTime b_ = this.lastEstimatedDeliveryDate(TheEncounter);
@@ -773,7 +808,7 @@ public class PCMaternal_5_16_000
 		return e_;
 	}
 
-	private IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age_Value()
+	private  IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age_Value()
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Age_Range();
 		(string EncounterID, int? CalculatedCGA)? b_(Encounter DeliveryEncounter)
@@ -784,18 +819,19 @@ public class PCMaternal_5_16_000
 			(string EncounterID, int? CalculatedCGA)? g_ = (e_, f_);
 
 			return g_;
-		};
+		}
+;
 		IEnumerable<(string EncounterID, int? CalculatedCGA)?> c_ = context.Operators.Select<Encounter, (string EncounterID, int? CalculatedCGA)?>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age() => 
+	public  IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age() => 
 		__Variable_Calculated_Gestational_Age.Value;
 
     [CqlDeclaration("lastEstimatedGestationalAge")]
-	public CqlQuantity lastEstimatedGestationalAge(Encounter TheEncounter)
+	public  CqlQuantity lastEstimatedGestationalAge(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Estimated_Gestational_Age_at_Delivery();
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -810,7 +846,8 @@ public class PCMaternal_5_16_000
 					bool ay_ = ax_ is CqlDateTime;
 
 					return ay_;
-				};
+				}
+;
 				bool au_()
 				{
 					DataType az_ = EstimatedGestationalAge?.Effective;
@@ -818,7 +855,8 @@ public class PCMaternal_5_16_000
 					bool bb_ = ba_ is CqlInterval<CqlDateTime>;
 
 					return bb_;
-				};
+				}
+;
 				bool av_()
 				{
 					DataType bc_ = EstimatedGestationalAge?.Effective;
@@ -826,7 +864,8 @@ public class PCMaternal_5_16_000
 					bool be_ = bd_ is CqlDateTime;
 
 					return be_;
-				};
+				}
+;
 				if (at_())
 				{
 					DataType bf_ = EstimatedGestationalAge?.Effective;
@@ -852,7 +891,8 @@ public class PCMaternal_5_16_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime k_ = QICoreCommon_2_0_000.earliest(j_());
 			CqlDateTime l_ = this.lastTimeOfDelivery(TheEncounter);
 			CqlQuantity m_ = context.Operators.Quantity(24m, "hours");
@@ -885,7 +925,8 @@ public class PCMaternal_5_16_000
 					bool bq_ = bp_ is CqlDateTime;
 
 					return bq_;
-				};
+				}
+;
 				bool bm_()
 				{
 					DataType br_ = EstimatedGestationalAge?.Effective;
@@ -893,7 +934,8 @@ public class PCMaternal_5_16_000
 					bool bt_ = bs_ is CqlInterval<CqlDateTime>;
 
 					return bt_;
-				};
+				}
+;
 				bool bn_()
 				{
 					DataType bu_ = EstimatedGestationalAge?.Effective;
@@ -901,7 +943,8 @@ public class PCMaternal_5_16_000
 					bool bw_ = bv_ is CqlDateTime;
 
 					return bw_;
-				};
+				}
+;
 				if (bl_())
 				{
 					DataType bx_ = EstimatedGestationalAge?.Effective;
@@ -927,7 +970,8 @@ public class PCMaternal_5_16_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime ag_ = QICoreCommon_2_0_000.earliest(af_());
 			bool? ai_ = context.Operators.SameAs(ag_, l_, "day");
 			object aj_()
@@ -939,7 +983,8 @@ public class PCMaternal_5_16_000
 					bool ci_ = ch_ is CqlDateTime;
 
 					return ci_;
-				};
+				}
+;
 				bool ce_()
 				{
 					DataType cj_ = EstimatedGestationalAge?.Effective;
@@ -947,7 +992,8 @@ public class PCMaternal_5_16_000
 					bool cl_ = ck_ is CqlInterval<CqlDateTime>;
 
 					return cl_;
-				};
+				}
+;
 				bool cf_()
 				{
 					DataType cm_ = EstimatedGestationalAge?.Effective;
@@ -955,7 +1001,8 @@ public class PCMaternal_5_16_000
 					bool co_ = cn_ is CqlDateTime;
 
 					return co_;
-				};
+				}
+;
 				if (cd_())
 				{
 					DataType cp_ = EstimatedGestationalAge?.Effective;
@@ -981,7 +1028,8 @@ public class PCMaternal_5_16_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime ak_ = QICoreCommon_2_0_000.earliest(aj_());
 			CqlInterval<CqlDateTime> al_ = this.hospitalizationWithEDOBTriageObservation(TheEncounter);
 			bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, default);
@@ -992,7 +1040,8 @@ public class PCMaternal_5_16_000
 			bool? as_ = context.Operators.Or(ae_, ar_);
 
 			return as_;
-		};
+		}
+;
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
@@ -1005,7 +1054,8 @@ public class PCMaternal_5_16_000
 					bool dc_ = db_ is CqlDateTime;
 
 					return dc_;
-				};
+				}
+;
 				bool cy_()
 				{
 					DataType dd_ = @this?.Effective;
@@ -1013,7 +1063,8 @@ public class PCMaternal_5_16_000
 					bool df_ = de_ is CqlInterval<CqlDateTime>;
 
 					return df_;
-				};
+				}
+;
 				bool cz_()
 				{
 					DataType dg_ = @this?.Effective;
@@ -1021,7 +1072,8 @@ public class PCMaternal_5_16_000
 					bool di_ = dh_ is CqlDateTime;
 
 					return di_;
-				};
+				}
+;
 				if (cx_())
 				{
 					DataType dj_ = @this?.Effective;
@@ -1047,11 +1099,13 @@ public class PCMaternal_5_16_000
 				{
 					return null;
 				}
-			};
+			}
+;
 			CqlDateTime cw_ = QICoreCommon_2_0_000.earliest(cv_());
 
 			return cw_;
-		};
+		}
+;
 		IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation g_ = context.Operators.Last<Observation>(f_);
 		DataType h_ = g_?.Value;

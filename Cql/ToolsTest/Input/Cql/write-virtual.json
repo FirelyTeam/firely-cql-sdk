@@ -1,0 +1,7 @@
+﻿{
+  "CSharpCodeWriter": {
+    "Namespace": "FromConfiguration",
+    "ExternalsAreAbstract": true,
+    "WriteVirtualMethods": true
+  }
+}

@@ -42,6 +42,16 @@ public partial class CSharpCodeWriterOptions
     public string? Namespace { get; set; }
 
     /// <summary>
+    /// When true, functions will be generated as virtual methods.
+    /// </summary>
+    public bool? WriteVirtualMethods { get; set; }
+
+    /// <summary>
+    /// When true, external functions will be abstract.
+    /// </summary>
+    public bool? ExternalsAreAbstract { get; set; }
+
+    /// <summary>
     /// Binds the configuration values to the <see cref="CSharpCodeWriterOptions"/> object.
     /// </summary>
     /// <param name="opt">The <see cref="CSharpCodeWriterOptions"/> object to bind the configuration values to.</param>

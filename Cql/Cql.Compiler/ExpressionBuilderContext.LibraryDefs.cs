@@ -172,12 +172,15 @@ partial class ExpressionBuilderContext
                         if (_expressionBuilderSettings.AllowUnresolvedExternals)
                         {
                             var returnType = TypeFor(expressionDef)!;
-                            var paramTypes = new[] { typeof(CqlContext) }
-                                .Concat(functionParameterTypes)
-                                .ToArray();
-                            var notImplemented = NotImplemented(expressionKey, paramTypes, returnType);
+                            var funcOps = function.operand ?? Array.Empty<OperandDef>();
+                            var @params = new (string name, Type type)[funcOps.Length + 1];
+                            @params[0] = ("context", CqlExpressions.ParameterExpression.Type);
+                            for(int o = 0; o < funcOps.Length; o++)
+                                @params[o+1] = (funcOps[o].name, functionParameterTypes[o]);
+                            var notImplemented = NotImplemented(expressionKey, @params, returnType);
+                            var paramTypes = @params.Select(p => p.type).ToArray();
                             _libraryContext.LibraryDefinitions.Add(_libraryContext.LibraryKey, expressionDef.name,
-                                paramTypes, notImplemented);
+                               paramTypes, notImplemented);
                             _logger.LogWarning(FormatMessage(
                                 $"Function '{expressionDef.name}' is declared external, but it was not defined in the expression scope. " +
                                 "A stub has been created that throws a NotImplemented exception."), expressionDef);
@@ -191,6 +194,12 @@ partial class ExpressionBuilderContext
 
                 //ctx = ctx.Deeper(expressionDef);
                 var bodyExpression = TranslateArg(expressionDef.expression);
+                var bodyType = TypeFor(expressionDef.resultTypeSpecifier);
+                if (bodyType is not null) {
+                    bodyExpression = ChangeType(bodyExpression, bodyType, out var bodyConversion);
+                    if (bodyConversion == TypeConversion.NoMatch)
+                        throw new Exception($"Cannot convert expression {expressionDef.name} to {bodyType}");
+                }
                 var lambda = Expression.Lambda(bodyExpression, parameters);
                 if (function?.operand != null &&
                     _libraryContext.LibraryDefinitions.ContainsKey(_libraryContext.LibraryKey, expressionDef.name,
