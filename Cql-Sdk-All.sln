@@ -113,16 +113,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Firely.Cql.Sdk.Integration.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationRunner", "submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj", "{2929117D-FB33-4BD6-8F20-4B623C114438}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ncqa.DQIC", "Ncqa.DQIC", "{1AF2E4B2-99C5-4678-B926-D224CC83A8F7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ncqa", "Ncqa", "{1AF2E4B2-99C5-4678-B926-D224CC83A8F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildArtifacts", "submodules\Ncqa.DQIC\BuildArtifacts\BuildArtifacts.csproj", "{B5BF0EDC-D95F-4368-A74B-B5794FB34F9E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FEF0C134-505D-4206-8630-569A6762F787} = {FEF0C134-505D-4206-8630-569A6762F787}
-	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeckTest", "submodules\Ncqa.DQIC\DeckTest\DeckTest.csproj", "{C573B0CB-733A-4E22-9693-4581E683109C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.DeckTests", "submodules\Ncqa.DQIC\Ncqa.HT.DeckTests\Ncqa.HT.DeckTests.csproj", "{C573B0CB-733A-4E22-9693-4581E683109C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "submodules\Ncqa.DQIC\Test\Test.csproj", "{584116D7-4E88-401E-8089-BAA6A35DB591}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.MeasuresTests", "submodules\Ncqa.DQIC\Ncqa.HT.MeasuresTests\Ncqa.HT.MeasuresTests.csproj", "{584116D7-4E88-401E-8089-BAA6A35DB591}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
