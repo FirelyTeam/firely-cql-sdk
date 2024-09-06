@@ -107,12 +107,6 @@ namespace Hl7.Cql.Runtime
 
         public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
-            if (typeof(T) == typeof(char))
-            {
-                // strings are IEnumerable<char>, so we need to handle them in the overload for objects
-                return Equivalent((object?)left, (object?)right);
-            }
-
             if (left == null)
             {
                 if (right == null)
