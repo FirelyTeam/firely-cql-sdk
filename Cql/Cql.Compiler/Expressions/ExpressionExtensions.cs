@@ -26,7 +26,8 @@ internal static class ExpressionExtensions
     public static (Expression? expression, TypeConversion typeConversion) TryNewAssignToTypeExpression(
         this Expression expression,
         Type type,
-        bool throwError = true)
+        bool throwError = true,
+        bool safeUpcastAllowed = false)
     {
         if (expression.Type == type)
             return (expression, TypeConversion.ExactType);
@@ -64,7 +65,17 @@ internal static class ExpressionExtensions
             }
         }
 
-
+        if (safeUpcastAllowed)
+        {
+            var isAssignableFrom =
+                expression.Type == typeof(object) // Choice?
+                || expression.Type.IsAssignableFrom(type);
+            if (isAssignableFrom || throwError)
+            {
+                Expression cast = Expression.TypeAs(expression, type);
+                return (cast, TypeConversion.ExpressionTypeAs);
+            }
+        }
 
         var isAssignableTo =
             expression.Type == typeof(object) // Choice?

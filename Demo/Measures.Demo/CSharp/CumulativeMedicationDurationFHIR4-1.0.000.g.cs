@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CumulativeMedicationDurationFHIR4", "1.0.000")]
 public class CumulativeMedicationDurationFHIR4_1_0_000
 {
@@ -866,7 +866,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 					CqlDateTime bq_ = context.Operators.Start(bp_);
 					CqlDateTime bs_ = FHIRHelpers_4_0_001.ToDateTime(be_);
 					Duration bu_ = ba_?.ExpectedSupplyDuration;
-					CqlQuantity bv_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)bu_);
+					CqlQuantity bv_ = FHIRHelpers_4_0_001.ToQuantity(bu_);
 					Quantity bx_ = ba_?.Quantity;
 					CqlQuantity by_ = FHIRHelpers_4_0_001.ToQuantity(bx_);
 					Dosage ca_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)at_);

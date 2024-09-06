@@ -13,3 +13,10 @@ internal abstract class FhirResourcePostProcessor
 {
     public abstract void ProcessResource(Resource resource);
 }
+
+internal class StubFhirResourcePostProcessor : FhirResourcePostProcessor
+{
+    public override void ProcessResource(Resource resource)
+    {
+    }
+}

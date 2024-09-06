@@ -7,8 +7,6 @@ using FluentAssertions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
@@ -23,21 +21,15 @@ public class FilesTest : Base
     public static void Initialize(TestContext context)
     {
         var sc = ServiceCollection(opt =>
-        {
-            opt.Input = Path;
-            opt.AmbiguousTypeBehavior = AmbiguousTypeBehavior.PreferModel; // match the ref implementation behavior
-        },
-        libraryProviderType: typeof(FileSystemLibraryProvider));
-        Services = sc.BuildServiceProvider();
-
-        var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
-        var cqlCompilerFactory = new CqlCompilerFactory(loggerFactory, cancellationToken: default, cacheSize: default);
-        var libraryExpressionBuilder = cqlCompilerFactory.LibraryExpressionBuilder;
-        LibraryExpressionBuilder = libraryExpressionBuilder;
+                                   {
+                                       opt.Input = Path;
+                                       opt.AmbiguousTypeBehavior = AmbiguousTypeBehavior.PreferModel; // match the ref implementation behavior
+                                   },
+                                   libraryProviderType: typeof(FileSystemLibraryProvider));
     }
 #pragma warning restore IDE0060 // Remove unused parameter
 
-    internal static FileSystemLibraryProvider LibraryProvider => (FileSystemLibraryProvider)Services.GetRequiredService<ILibraryProvider>();
+    internal static FileSystemLibraryProvider LibraryProvider => (FileSystemLibraryProvider)CqlToElmServices.ServiceProvider.GetRequiredService<ILibraryProvider>();
 
     private void TestLibrary(FileInfo fileInfo)
     {
@@ -45,7 +37,7 @@ public class FilesTest : Base
         {
             System.Diagnostics.Debug.WriteLine($"Processing {fileInfo.FullName}");
             var cql = File.ReadAllText(fileInfo.FullName);
-            var builder = MakeLibraryBuilder(Services, cql);
+            var builder = MakeLibraryBuilder(CqlToElmServices.ServiceProvider, cql);
             var lib = builder.Build();
             LibraryProvider.TryAddLibrary(lib.identifier.id, lib.identifier.version, fileInfo, builder);
             var errors = lib.GetErrors();

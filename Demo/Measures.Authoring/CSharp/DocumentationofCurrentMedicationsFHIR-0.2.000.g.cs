@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DocumentationofCurrentMedicationsFHIR", "0.2.000")]
 public class DocumentationofCurrentMedicationsFHIR_0_2_000
 {
@@ -278,7 +278,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 				bool? k_(Extension @this)
 				{
 					string ae_ = @this?.Url;
-					FhirUri af_ = context.Operators.Convert<FhirUri>(ae_);
+					FhirString af_ = context.Operators.Convert<FhirString>(ae_);
 					string ag_ = FHIRHelpers_4_3_000.ToString(af_);
 					bool? ah_ = context.Operators.Equal(ag_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 

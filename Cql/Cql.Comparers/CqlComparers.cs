@@ -69,6 +69,13 @@ namespace Hl7.Cql.Comparers
                 var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, @this)!;
                 return cqlComparer;
             });
+            ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, @this) =>
+            {
+                var genericArguments = type.GetGenericArguments();
+                var genericType = typeof(KeyValuePairComparer<,>).MakeGenericType(genericArguments);
+                var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType)!;
+                return cqlComparer;
+            });
         }
 
 

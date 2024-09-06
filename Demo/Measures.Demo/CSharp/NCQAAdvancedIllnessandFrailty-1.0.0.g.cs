@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public class NCQAAdvancedIllnessandFrailty_1_0_0
 {
@@ -354,7 +354,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		IEnumerable<Claim> c_ = b_?.NonacuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness();
 		IValueSetFacade e_ = context.Operators.CreateValueSetFacade(d_);
-		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(c_, (IEnumerable<CqlCode>)e_);
+		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(c_, e_);
 		IEnumerable<CqlInterval<CqlDateTime>> g_ = f_?.ServicePeriod;
 		bool? h_(CqlInterval<CqlDateTime> DischargeWithDiagnosis)
 		{
@@ -511,7 +511,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		IEnumerable<Claim> c_ = b_?.AcuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness();
 		IValueSetFacade e_ = context.Operators.CreateValueSetFacade(d_);
-		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(c_, (IEnumerable<CqlCode>)e_);
+		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(c_, e_);
 		IEnumerable<CqlInterval<CqlDateTime>> g_ = f_?.ServicePeriod;
 		bool? h_(CqlInterval<CqlDateTime> InpatientDischarge)
 		{

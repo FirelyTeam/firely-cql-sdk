@@ -1,17 +1,11 @@
 ﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class PowerTest: Base
+    public class PowerTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter

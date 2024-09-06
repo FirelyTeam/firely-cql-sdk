@@ -42,7 +42,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     private static readonly (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries)
         EmptyCached = (EmptySet<Library>.Instance, Array.Empty<Library>());
 
-    private LibrarySetDefinitionCache _librarySetDefinitionCache;
+    private readonly LibrarySetDefinitionCache _librarySetDefinitionCache;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LibrarySet"/> class.
@@ -118,7 +118,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         Library[] libraries = new Library[input.Length];
         Parallel.ForEach(input, t =>
         {
-            var library = Library.LoadFromJson(t.file)!;
+            var library = Library.LoadFromJson(t.file);
             libraries[t.index] = library;
         });
 
@@ -137,6 +137,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
             try
             {
                 _libraryInfosByKey.Add(library.NameAndVersion()!, (library, []));
+                _librariesNotCalculatedYet.Add(library);
             }
             catch (ArgumentNullException)
             {
@@ -148,8 +149,6 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
                 throw new LibraryIdentifierMustBeUniqueError(library).ToException();
             }
         }
-
-        _librariesNotCalculatedYet.AddRange(libraries);
     }
 
     private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) GetCalculatedState()
@@ -263,11 +262,6 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         return libraries;
     }
-
-    private int GetEdgesCount() =>
-        this
-            .GetEdges(lib => GetLibraryDependencies(lib.NameAndVersion(false)))
-            .Count();
 
     internal string MermaidDiagram => this.BuildMermaidFlowChart(
         getNextItems: lib => GetLibraryDependencies(lib.NameAndVersion(false)),

@@ -225,23 +225,24 @@ partial class ExpressionBuilderContext
 
                 Expression ConvertToResultType()
                 {
-                    var converted = ChangeType(expression, element.resultTypeSpecifier, out var typeConversion);
-                    if (typeConversion != TypeConversion.NoMatch)
-                        return converted;
+                    var tsType = TypeFor(element.resultTypeSpecifier, false);
+                    if (tsType is not null)
+                    {
+                        var converted = ChangeType(expression, element.resultTypeSpecifier, out var typeConversion);
+                        if (typeConversion != TypeConversion.NoMatch)
+                            return converted;
 
+                        // If we make this a hard fail, 15 unit tests fail.
+                        // throw this.NewExpressionBuildingException(
+                        //      $"Cannot convert {expression.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
 
-                    var tsType = TypeFor(element.resultTypeSpecifier);
-
-                    // If we make this a hard fail, 15 unit tests fail.
-                    // throw this.NewExpressionBuildingException(
-                    //      $"Cannot convert {expression.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to {tsType.ToCSharpString(Defaults.TypeCSharpFormat)}");
-
-                    _logger.LogDebug(
-                        "Failed to change expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
-                        element.GetType().Name,
-                        element.locator,
-                        tsType.ToCSharpString(Defaults.TypeCSharpFormat),
-                        expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
+                        _logger.LogDebug(
+                            "Failed to change expression '{elementType}' at '{elementLocator}' from type '{expressionType}' to '{resultType}'",
+                            element.GetType().Name,
+                            element.locator,
+                            tsType.ToCSharpString(Defaults.TypeCSharpFormat),
+                            expression.Type.ToCSharpString(Defaults.TypeCSharpFormat));
+                    }
 
                     return expression;
                 }
@@ -454,7 +455,7 @@ partial class ExpressionBuilderContext
         if (list.resultTypeSpecifier is ListTypeSpecifier listTypeSpecifier)
         {
 
-            var elementType = TypeFor(listTypeSpecifier.elementType);
+            var elementType = TypeFor(listTypeSpecifier.elementType)!;
             var elements = TranslateArgs(list.element);
             if (!elementType.IsNullableValueType(out _) && elements.Any(exp => exp.Type.IsNullableValueType(out _)))
             {
@@ -914,7 +915,7 @@ partial class ExpressionBuilderContext
             if (retrieve.resultTypeSpecifier is ListTypeSpecifier listTypeSpecifier)
             {
                 cqlRetrieveResultType = listTypeSpecifier.elementType is NamedTypeSpecifier nts ? nts.name.Name : null;
-                sourceElementType = TypeFor(listTypeSpecifier.elementType);
+                sourceElementType = TypeFor(listTypeSpecifier.elementType)!;
             }
             else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.").WithContext(this);
         }
@@ -962,8 +963,8 @@ partial class ExpressionBuilderContext
         {
             if (string.IsNullOrWhiteSpace(op.path))
                 throw this.NewExpressionBuildingException("path cannot be null or empty");
-            //var path = ExpressionBuilderContext.NormalizeIdentifier(op.path);
             var path = op.path;
+
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = GetScopeExpression(op.scope!);
@@ -976,27 +977,15 @@ partial class ExpressionBuilderContext
                     return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                 }
                 var propogate = PropagateNull(scopeExpression, pathMemberInfo);
-                // This is only necessary for Firely b/c it always initializes colleciton members even if they are
-                // not included in the FHIR, and this makes it impossible for CQL to differentiate [] from null
-                //
-                //if (typeof(Resource).IsAssignableFrom(scopeExpression.Type)
-                //    && pathMemberInfo is PropertyInfo prop
-                //    && IsOrImplementsIEnumerableOfT(prop.PropertyType))
-                //{
-                //    var method = typeof(BuiltIns).GetMethod(nameof(BuiltIns.NullIfEmpty))
-                //        .MakeGenericMethod(GetElementType(prop.PropertyType));
-                //    var call = Expression.Call(method, propogate);
-                //    return call;
-                //}
                 string message = $"TypeManager failed to resolve type.";
                 var resultType = TypeFor(op) ?? throw this.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
-                    var typeConversion = TypeConversion.NoMatch;
-                    propogate = ChangeType(propogate, resultType, out typeConversion);
+                    propogate = ChangeType(propogate, resultType, out var typeConversion);
                     if (typeConversion == TypeConversion.NoMatch)
                         throw this.NewExpressionBuildingException($"Cannot convert {propogate.Type} to {resultType}.");
                 }
+
                 return propogate;
             }
 
@@ -1033,6 +1022,7 @@ partial class ExpressionBuilderContext
                 var result = PropertyHelper(source, path, expectedType);
                 return result;
             }
+
             throw new NotImplementedException().WithContext(this);
         }
     }
@@ -1047,18 +1037,20 @@ partial class ExpressionBuilderContext
         else
         {
             var pathMemberInfo = _typeResolver.GetProperty(source.Type, path!);
+
             if (pathMemberInfo == null)
             {
                 _logger.LogWarning(FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
                 return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
             }
-            if (pathMemberInfo is PropertyInfo property && pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
+
+            if (pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
             {
                 var isCheck = source.NewTypeIsExpression(pathMemberInfo.DeclaringType!);
                 var typeAs = source.NewTypeAsExpression(pathMemberInfo.DeclaringType!);
                 var pathAccess = Expression.MakeMemberAccess(typeAs, pathMemberInfo);
                 Expression? ifIs = pathAccess;
-                Expression elseNull = Expression.Constant(null, property.PropertyType);
+                Expression elseNull = Expression.Constant(null, pathMemberInfo.PropertyType);
                 // some ops, like properties on alias refs, don't have type information on them.
                 // can't check against what we don't have.
                 if (expectedType != null)
@@ -1098,7 +1090,14 @@ partial class ExpressionBuilderContext
     protected Expression FunctionRef(FunctionRef op)
     {
         Expression[] operands = TranslateArgs(op.operand);
-        var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, op.resultTypeSpecifier);
+
+        // NOTE: Breaks
+        //var resultType = op.resultTypeSpecifier ?? op.resultTypeName?.ToNamedType() ??
+        //                 throw new InvalidOperationException($"FunctionRef {op.libraryName + "." + op.name} has no result type specifier or result type name.");
+        //var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, resultType);
+
+        var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, op.signature, operands, op.resultTypeSpecifier);
+
         return invoke;
     }
 
@@ -1110,7 +1109,7 @@ partial class ExpressionBuilderContext
             Type? expressionType = null;
             if (expressionRef.resultTypeSpecifier != null)
             {
-                expressionType = TypeFor(expressionRef.resultTypeSpecifier);
+                expressionType = TypeFor(expressionRef.resultTypeSpecifier)!;
             }
             else if (!string.IsNullOrWhiteSpace(expressionRef.resultTypeName?.Name))
             {
@@ -1153,56 +1152,48 @@ partial class ExpressionBuilderContext
 
     /// <param name="name">The function name</param>
     /// <param name="libraryAlias">If this is an external call, the local alias defined in the using statement</param>
+    /// <param name="signature">The signature as specified in the function call.</param>
     /// <param name="arguments">The function arguments</param>
     /// <param name="returnType">The function's return type</param>
     /// <returns></returns>
     protected Expression InvokeDefinedFunctionThroughRuntimeContext(
         string name,
         string? libraryAlias,
+        TypeSpecifier[]? signature,
         Expression[] arguments,
         TypeSpecifier returnType)
     {
-        // NOTE: Reverted back (by commenting out the code below) to the old implementation (below that),
-        // because the new one is not working in https://github.com/FirelyTeam/firely-cql-sdk/issues/422
-        //
-        // TODO: To fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397
-
-        // string libraryName = _libraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
-        //                      ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
-        //
-        // var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
-        // var convertedArguments = arguments
-        //                          .Prepend(CqlExpressions.ParameterExpression)
-        //                          .ToArray();
-        // var funcType = convertedArguments.Select(a=>a.Type).Append(rtt).ToArray();
-        // Type definitionType = GetFuncType(funcType);
-        // return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
-
         string libraryName = _libraryContext.GetNameAndVersionFromAlias(libraryAlias, throwError: false)
                              ?? throw this.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
 
-        var argumentTypes = arguments.SelectToArray(a => a.Type);
-        var selected = _libraryContext.LibraryDefinitions.Resolve(libraryName, name, CheckConversion, argumentTypes);
-        Type definitionType = GetFuncType(selected.Parameters.Select(p => p.Type).Append(selected.ReturnType).ToArray());
-        var parameterTypes = selected.Parameters.Skip(1).Select(p => p.Type).ToArray();
-
-        // all functions still take the bundle and context parameters, plus whatver the operands
-        // to the actual function are.
+        var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
         var convertedArguments = arguments
-                                 .Select((arg, i) =>
-                                 {
-                                     var argConversion = TypeConversion.NoMatch;
-                                     var converted = ChangeType(arg, parameterTypes[i], out argConversion);
-                                     if (argConversion == TypeConversion.NoMatch)
-                                         throw this.NewExpressionBuildingException($"Cannot convert {arg.Type} to {parameterTypes[i]}.");
-                                     else return converted;
-                                 })
+                                 .Select((a,i) => convertChoice(a, signature?[i]))
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
+        var funcType = convertedArguments.Select(a => a.Type).Append(rtt).ToArray();
+        Type definitionType = Expression.GetFuncType(funcType);
 
         return new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
 
-        bool CheckConversion(Type from, Type to) => _typeConverter.CanConvert(from, to);
+        // This function will handle the cases where the normal C# invocation is insufficient to represent the CQL function call:
+        // the argument is of a choice type, and the parameter is of a specific type (or for now, also a choice type).
+        // In this case we need to insert a conversion from the choice type to the specific type of the argument. Presumably, the
+        // cql2elm compiler has already checked that the call is valid, but we do need to cast the choice type (in C# represented by
+        // object/DataType) to the actual type to make this a valid C# call. CQL semantics state that the result may be null if the
+        // choice is not compatible with the parameter, so we'll use an As in C#.
+        Expression convertChoice(Expression argument, TypeSpecifier? targetTypeSpecifier)
+        {
+            if(argument.Type == typeof(object)
+               && targetTypeSpecifier is not null and not ChoiceTypeSpecifier)
+            {
+                var changeType = ChangeType(argument, targetTypeSpecifier, out var typeConversion, considerSafeUpcast: true);
+                Debug.Assert(typeConversion == TypeConversion.ExpressionTypeAs);
+                return changeType;
+            }
+
+            return argument;
+        }
     }
 
     protected Expression InvokeDefinitionThroughRuntimeContext(
@@ -2084,7 +2075,7 @@ partial class ExpressionBuilderContext
             Type? resultType = null;
             if (queryAggregate.resultTypeSpecifier is { } typeSpecifier)
             {
-                resultType = TypeFor(typeSpecifier);
+                resultType = TypeFor(typeSpecifier)!;
             }
             else if (!string.IsNullOrWhiteSpace(queryAggregate.resultTypeName.Name!))
             {
@@ -2134,7 +2125,7 @@ partial class ExpressionBuilderContext
                 // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
                 if ((list.element?.Length ?? 0) == 0)
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!);
+                    var type = TypeFor(@as.asTypeSpecifier!)!;
                     if (_typeResolver.IsListType(type))
                     {
                         var listElementType = _typeResolver.GetListElementType(type) ??
@@ -2164,32 +2155,31 @@ partial class ExpressionBuilderContext
             {
                 if (@as.operand is Null)
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!);
+                    var type = TypeFor(@as.asTypeSpecifier!)!;
                     var defaultExpression = Expression.Default(type);
                     return new ElmAsExpression(defaultExpression, type, @as.strict);
                 }
                 else
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!);
+                    var type = TypeFor(@as.asTypeSpecifier!)!;
                     var operand = TranslateArg(@as.operand!);
-                    var operandType = operand.Type;
-                    var typeConversion = TypeConversion.NoMatch;
-                    var converted = ChangeType(operand, type, out typeConversion);
-                    if (typeConversion == TypeConversion.NoMatch)
+                    var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast:true);
+                    switch (typeConversion)
                     {
-                        // log an unsafe cast
-                        _logger.LogWarning(FormatMessage(
-                            $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
-                            @as.operand));
-                        return Expression.Default(type);
-                    }
-                    else if (typeConversion == TypeConversion.OperatorConvert) // use the custom conversion function
-                    {
-                        return converted;
-                    }
-                    else
-                    {
-                        return new ElmAsExpression(operand, type, @as.strict);
+                        case TypeConversion.NoMatch:
+                            // log an unsafe cast
+                            _logger.LogWarning(
+                                FormatMessage(
+                                    $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
+                                    @as.operand));
+                            return Expression.Default(type);
+
+                        case TypeConversion.OperatorConvert:
+                            return converted;
+
+                        case TypeConversion.ExpressionTypeAs:
+                        default:
+                            return new ElmAsExpression(operand, type, @as.strict);
                     }
                 }
             }
@@ -2225,15 +2215,15 @@ partial class ExpressionBuilderContext
         {
             if (@is.isTypeSpecifier is ChoiceTypeSpecifier choice)
             {
-                var firstChoiceType = TypeFor(choice.choice[0]) ??
-                                      throw this.NewExpressionBuildingException(
-                                          $"Could not resolve type for Is expression");
+                var firstChoiceType = TypeFor(choice.choice[0], false) ??
+                                      throw this.NewExpressionBuildingException("Could not resolve type for Is expression");
+
                 Expression result = op.NewTypeIsExpression(firstChoiceType);
                 for (int i = 1; i < choice.choice.Length; i++)
                 {
-                    var cti = TypeFor(choice.choice[i]) ??
-                              throw this.NewExpressionBuildingException(
-                                  $"Could not resolve type for Is expression");
+                    var cti = TypeFor(choice.choice[i], false) ??
+                              throw this.NewExpressionBuildingException("Could not resolve type for Is expression");
+
                     var ie = op.NewTypeIsExpression(cti);
                     result = Expression.Or(result, ie);
                 }
@@ -2242,7 +2232,7 @@ partial class ExpressionBuilderContext
                 return ta;
             }
 
-            type = TypeFor(@is.isTypeSpecifier) ??
+            type = TypeFor(@is.isTypeSpecifier, false) ??
                    throw this.NewExpressionBuildingException($"Could not resolve type for Is expression");
         }
         else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
@@ -2270,36 +2260,48 @@ partial class ExpressionBuilderContext
     private Expression ChangeType(
         Expression expr,
         TypeSpecifier? typeSpecifier,
-        out TypeConversion typeConversion) // @TODO: Cast - ChangeType
+        out TypeConversion typeConversion,
+        bool considerSafeUpcast = false) // @TODO: Cast - ChangeType
     {
-        if (typeSpecifier is not null
-            && TypeFor(typeSpecifier) is { } resultType
-            && resultType != expr.Type)
+        if (typeSpecifier is not null)
         {
-            var typeAs = ChangeType(expr, resultType, out typeConversion);
-            return typeAs;
+            if (TypeFor(typeSpecifier, false) is { } resultType)
+            {
+                if (resultType != expr.Type)
+                {
+                    var typeAs = ChangeType(expr, resultType, out typeConversion, considerSafeUpcast);
+                    return typeAs;
+                }
+            }
+            else
+            {
+                typeConversion = TypeConversion.NoMatch;
+                return expr;
+            }
         }
-        else
-        {
-            typeConversion = TypeConversion.ExactType;
-            return expr;
-        }
+
+        typeConversion = TypeConversion.ExactType;
+        return expr;
     }
 
 
     private Expression ChangeType(
         Element element,
-        Type outputType)
-        => ChangeType(TranslateArg(element),
+        Type outputType,
+        bool considerSafeUpcast = false)
+        => ChangeType(
+            TranslateArg(element),
             outputType,
-            out TypeConversion typeConversion); // @TODO: Cast - ChangeType
+            out TypeConversion typeConversion,
+            considerSafeUpcast); // @TODO: Cast - ChangeType
 
     private Expression ChangeType(
         Expression input,
         Type outputType,
-        out TypeConversion typeConversion) // @TODO: Cast - ChangeType
+        out TypeConversion typeConversion,
+        bool considerSafeUpcast = false) // @TODO: Cast - ChangeType
     {
-        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false);
+        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, considerSafeUpcast);
         if (tc != TypeConversion.NoMatch)
         {
             typeConversion = tc;

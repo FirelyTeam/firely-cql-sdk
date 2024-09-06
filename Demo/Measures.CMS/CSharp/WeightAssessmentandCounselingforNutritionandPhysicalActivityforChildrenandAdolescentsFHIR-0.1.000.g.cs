@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR", "0.1.000")]
 public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000
 {
@@ -597,12 +597,11 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = BMIPercentile?.Value;
-			Quantity k_ = context.Operators.Convert<Quantity>(j_);
-			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(k_);
-			bool? m_ = context.Operators.Not((bool?)(l_ is null));
-			bool? n_ = context.Operators.And(i_, m_);
+			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity((j_ as Quantity));
+			bool? l_ = context.Operators.Not((bool?)(k_ is null));
+			bool? m_ = context.Operators.And(i_, l_);
 
-			return n_;
+			return m_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
@@ -625,12 +624,11 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Height?.Value;
-			Quantity k_ = context.Operators.Convert<Quantity>(j_);
-			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(k_);
-			bool? m_ = context.Operators.Not((bool?)(l_ is null));
-			bool? n_ = context.Operators.And(i_, m_);
+			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity((j_ as Quantity));
+			bool? l_ = context.Operators.Not((bool?)(k_ is null));
+			bool? m_ = context.Operators.And(i_, l_);
 
-			return n_;
+			return m_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
@@ -653,12 +651,11 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Weight?.Value;
-			Quantity k_ = context.Operators.Convert<Quantity>(j_);
-			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(k_);
-			bool? m_ = context.Operators.Not((bool?)(l_ is null));
-			bool? n_ = context.Operators.And(i_, m_);
+			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity((j_ as Quantity));
+			bool? l_ = context.Operators.Not((bool?)(k_ is null));
+			bool? m_ = context.Operators.And(i_, l_);
 
-			return n_;
+			return m_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 

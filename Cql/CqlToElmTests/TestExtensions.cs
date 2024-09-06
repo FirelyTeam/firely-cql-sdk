@@ -1,11 +1,7 @@
-﻿using FluentAssertions;
-using FluentAssertions.Collections;
+﻿using FluentAssertions.Collections;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Options;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using static Hl7.Cql.CqlToElm.Test.TestExtensions;
 using M = Hl7.Cql.Model;
 namespace Hl7.Cql.CqlToElm.Test
 {

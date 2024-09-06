@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR", "1.3.000")]
 public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 {
@@ -751,7 +751,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? p_(Extension @this)
 				{
 					string aw_ = @this?.Url;
-					FhirUri ax_ = context.Operators.Convert<FhirUri>(aw_);
+					FhirString ax_ = context.Operators.Convert<FhirString>(aw_);
 					string ay_ = FHIRHelpers_4_3_000.ToString(ax_);
 					bool? az_ = context.Operators.Equal(ay_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
@@ -788,7 +788,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				bool? an_(Extension @this)
 				{
 					string bb_ = @this?.Url;
-					FhirUri bc_ = context.Operators.Convert<FhirUri>(bb_);
+					FhirString bc_ = context.Operators.Convert<FhirString>(bb_);
 					string bd_ = FHIRHelpers_4_3_000.ToString(bc_);
 					bool? be_ = context.Operators.Equal(bd_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 

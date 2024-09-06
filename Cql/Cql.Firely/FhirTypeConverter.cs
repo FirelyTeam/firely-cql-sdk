@@ -372,6 +372,7 @@ namespace Hl7.Cql.Fhir
             });
             converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
             converter.AddConversion<string, M.FhirUri>(str => new M.FhirUri(str));
+            converter.AddConversion<string, M.FhirString>(str => new M.FhirString(str));
             converter.AddConversion<M.FhirUri, string>(uri => uri.Value);
 
             return converter;

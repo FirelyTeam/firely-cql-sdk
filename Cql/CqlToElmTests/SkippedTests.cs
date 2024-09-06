@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -17,7 +13,7 @@ namespace Hl7.Cql.CqlToElm.Test
             { "TestCollapseNull", "Collapse should not be supported for Interval<Any>." },
             { "TestNullElement1", "This expression is ambiguous between the List and Interval overloads." },
             { "In1Null", "This expression is ambiguous between the List and Interval overloads." },
-            
+
             { "EquivalentABCAnd123", "Equivalent is not defined for two disparate list types." },
             { "Equivalent123AndABC",  "Equivalent is not defined for two disparate list types." },
             { "Equivalent123AndString123",  "Equivalent is not defined for two disparate list types." },
@@ -26,18 +22,18 @@ namespace Hl7.Cql.CqlToElm.Test
             { "NotEqual123AndString123",  "Equal is not defined for two disparate list types." },
 
             { "CodeToConcept1", "The expectation requires ListPromotion to be enabled to evaluate properly." },
-            
+
             { "Decimal10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
             { "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue", "The spec requires decimals to have no more than 28 total digits; this test has 36." },
-            
+
             { "ExpandPer0D1", "Not working" },
             { "ExpandIntervalPer2", "Not working" },
 
             { "TestExceptNull", "This is ambiguous with every valid interval overload." },
-            
+
             { "DescendentsEmptyList", "Not implemented" },
-            
+
             { "EqualNullNull", "The spec states that null elements are considered equal for list equality." },
             { "ReplaceMatchesSpaces", "The first argument should have four backslashes instead of 2" },
         };
@@ -64,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Test
             { "DecimalPosTenStep", "Power returns integers, not decimals." },
             { "DecimalNegTenStep", "Power returns integers, not decimals." },
             { "DecimalNegOneStep", "Power returns integers, not decimals." },
-            
+
             { "RoundNeg0D5", "This rounding test doesn't behave like the others." },
             { "RoundNeg1D5", "This rounding test doesn't behave like the others." },
 
@@ -81,7 +77,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
 
 
-        }; 
+        };
     }
 
 
