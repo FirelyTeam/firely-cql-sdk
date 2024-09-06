@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hl7.Cql.Comparers;
-using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Runtime;
 
 internal partial class CqlOperators
 {
-    #region Equal
+    #region Equality
 
     /*
      * Equality : https://cql.hl7.org/04-logicalspecification.html#equal
@@ -38,7 +34,11 @@ internal partial class CqlOperators
         var onlyNull = true;
         var notEmpty = false;
         var lit = left!.GetEnumerator();
+        using var litd = lit as IDisposable;
+
         var rit = right!.GetEnumerator();
+        using var ritd = lit as IDisposable;
+
         while (lit.MoveNext())
         {
             if (!rit.MoveNext())
@@ -67,10 +67,6 @@ internal partial class CqlOperators
             return true;
     }
 
-    #endregion
-
-    #region NotEqual
-
     public bool? NotEqual(object? left, object? right) =>
         Equal(left, right) switch
         {
@@ -83,7 +79,18 @@ internal partial class CqlOperators
 
     #endregion
 
-    #region Equivalent
+    #region Equivalence
+
+    /*
+     *
+     * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
+     *
+     * The Equivalent operator returns:
+     * - true if the arguments are the same value, or if they are both null;
+     * - and false otherwise.
+     *
+     * With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
+     */
 
     public bool Equivalent(object? x, object? y, string? precision) =>
         CqlComparers.EquivalentOnNullsOnly(x, y)
@@ -102,30 +109,6 @@ internal partial class CqlOperators
         var rit = right!.GetEnumerator();
         using var ritd = lit as IDisposable;
 
-        while (lit.MoveNext())
-        {
-            if (!rit.MoveNext())
-                return false;
-
-            var lv = lit.Current;
-            var rv = rit.Current;
-            if (lv == null)
-            {
-                if (rv != null) return false;
-            }
-            else if (rv == null) return false;
-            else if (Equivalent(lv!, rv!, null) == false)
-                return false;
-        }
-        if (rit.MoveNext()) // the 2nd list is longer than the 1st.
-            return false;
-        return true;
-    }
-
-    private bool? EquivalentNotNull<T>(IEnumerable<T> left, IEnumerable<T> right)
-    {
-        var lit = left!.GetEnumerator();
-        var rit = right!.GetEnumerator();
         while (lit.MoveNext())
         {
             if (!rit.MoveNext())
