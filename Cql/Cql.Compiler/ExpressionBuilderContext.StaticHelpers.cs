@@ -43,22 +43,17 @@ partial class ExpressionBuilderContext
 
     private LambdaExpression NotImplemented(
         string nav,
-        Type[] signature,
+        (string name, Type type)[] signature,
         Type returnType)
     {
-        var parameters = signature.SelectToArray((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, this) + index));
+        var parameters = signature.SelectToArray((type, index) => Expression.Parameter(type.type, type.name));
         var ctor = ConstructorInfos.NotImplementedException;
         var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
         var @throw = Expression.Throw(@new, returnType);
         var lambda = Expression.Lambda(@throw, parameters);
-        //var funcTypes = new Type[functionParameterTypes.Length + 1];
-        //Array.Copy(functionParameterTypes, funcTypes, functionParameterTypes.Length);
-        //funcTypes[funcTypes.Length - 1] = returnType;
-        //var funcType = GetFuncType(funcTypes);
-        //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
-        //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
         return lambda;
     }
+
 
     protected static Type GetFuncType(Type[] funcTypeParameters) =>
         funcTypeParameters.Length switch
