@@ -56,6 +56,6 @@ namespace Hl7.Cql.Comparers
 
         /// <inheritdoc />
         public int GetHashCode(object? x) =>
-            GetHashCode((T?)t)
+            GetHashCode((T?)x);
     }
 }
