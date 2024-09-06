@@ -95,12 +95,11 @@ namespace Hl7.Cql.Comparers
 
         /// <inheritdoc />
         public int GetHashCode(CqlQuantity? x) =>
-            x == null
-            ? typeof(CqlQuantity).GetHashCode()
-            : x.ToString()!.GetHashCode();
+            x?.ToString()?.GetHashCode() ?? typeof(CqlQuantity).GetHashCode();
 
         /// <inheritdoc />
-        public int GetHashCode(object x) => GetHashCode(x as CqlQuantity);
+        public int GetHashCode(object? x) =>
+            GetHashCode(x as CqlQuantity);
     }
 }
 

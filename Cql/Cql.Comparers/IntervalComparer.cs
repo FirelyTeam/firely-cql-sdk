@@ -13,18 +13,15 @@ using System;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class IntervalComparer<T> : CqlComparerBase<CqlInterval<T>>
+    internal class IntervalComparer<T>(
+        ICqlComparer pointComparer,
+        Func<T, T> predecessor,
+        Func<T, T> successor)
+        : CqlComparerBase<CqlInterval<T>>
     {
-        public IntervalComparer(ICqlComparer pointComparer, Func<T, T> predecessor, Func<T, T> successor)
-        {
-            PointComparer = pointComparer ?? throw new ArgumentNullException(nameof(pointComparer));
-            Predecessor = predecessor ?? throw new ArgumentNullException(nameof(predecessor));
-            Successor = successor ?? throw new ArgumentNullException(nameof(successor));
-        }
-
-        public ICqlComparer PointComparer { get; }
-        public Func<T, T> Predecessor { get; }
-        public Func<T, T> Successor { get; }
+        public ICqlComparer PointComparer { get; } = pointComparer ?? throw new ArgumentNullException(nameof(pointComparer));
+        public Func<T, T> Predecessor { get; } = predecessor ?? throw new ArgumentNullException(nameof(predecessor));
+        public Func<T, T> Successor { get; } = successor ?? throw new ArgumentNullException(nameof(successor));
 
         public override int? Compare(CqlInterval<T>? x, CqlInterval<T>? y, string? precision)
         {

@@ -138,11 +138,10 @@ namespace Hl7.Cql.Comparers
         }
 
         public int GetHashCode(IEnumerable? x) =>
-            x == null
-            ? typeof(IEnumerable).GetHashCode()
-            : x.GetHashCode();
+            x?.GetHashCode() ?? typeof(IEnumerable).GetHashCode();
 
-        public int GetHashCode(object? x) => GetHashCode(x as IEnumerable);
+        public int GetHashCode(object? x) =>
+            GetHashCode(x as IEnumerable);
     }
 }
 

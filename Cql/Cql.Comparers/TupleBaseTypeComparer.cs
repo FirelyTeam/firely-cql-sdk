@@ -99,8 +99,7 @@ namespace Hl7.Cql.Comparers
             Equivalent(x as TupleBaseType, y as TupleBaseType);
 
         public int GetHashCode(TupleBaseType? obj) =>
-            obj?.GetHashCode()
-            ?? typeof(TupleBaseType).GetHashCode() ^ 098174506;
+            obj?.GetHashCode() ?? typeof(TupleBaseType).GetHashCode() ^ 098174506;
 
         public int GetHashCode(object? obj) => GetHashCode(obj as TupleBaseType);
     }

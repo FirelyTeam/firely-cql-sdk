@@ -36,7 +36,7 @@ internal class CharCqlComparer(StringCqlComparer inner) : ICqlComparer, ICqlComp
     public bool Equivalent(char? x, char? y, string? precision = null) =>
         Inner.Equivalent(CharToString(x), CharToString(y), precision);
 
-    public int GetHashCode(object x) =>
+    public int GetHashCode(object? x) =>
         Inner.GetHashCode(ObjectAsCharToString(x));
 
     public int GetHashCode(char? x) =>

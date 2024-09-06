@@ -185,9 +185,7 @@ namespace Hl7.Cql.Runtime
             Comparer.Compare(x, y, precision);
 
         public int GetHashCode(object? x) =>
-            x is null
-                ? typeof(object).GetHashCode()
-                : Comparer.GetHashCode(x);
+            Comparer.GetHashCode(x);
 
         public T? Convert<T>(object? from) => TypeConverter.Convert<T>(from);
 

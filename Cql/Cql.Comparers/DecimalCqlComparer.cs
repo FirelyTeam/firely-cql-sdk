@@ -70,11 +70,10 @@ namespace Hl7.Cql.Comparers
         }
 
         public int GetHashCode(decimal? x) =>
-            x == null
-            ? typeof(decimal).GetHashCode()
-            : x.GetHashCode();
+            x?.GetHashCode() ?? typeof(decimal).GetHashCode();
 
-        public int GetHashCode(object x) => GetHashCode(x as decimal?);
+        public int GetHashCode(object? x) =>
+            GetHashCode(x as decimal?);
 
         public int GetPrecision(decimal value) => BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
         private decimal TruncateDigits(decimal value, int places)

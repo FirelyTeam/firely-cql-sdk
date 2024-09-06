@@ -95,7 +95,8 @@ namespace Hl7.Cql.Comparers
             ? typeof(CqlCode).GetHashCode()
             : $"{x.code ?? "null"}\0{x.system}\0".GetHashCode();
 
-        public int GetHashCode(object? x) => GetHashCode(x as CqlCode);
+        public int GetHashCode(object? x) =>
+            GetHashCode(x as CqlCode);
     }
 }
 

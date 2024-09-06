@@ -70,9 +70,7 @@ namespace Hl7.Cql.Comparers
 
         /// <inheritdoc/>
         public int GetHashCode(string? x) =>
-            x == null
-            ? typeof(string).GetHashCode()
-            : x.GetHashCode();
+            x?.GetHashCode() ?? typeof(string).GetHashCode();
 
         /// <inheritdoc/>
         public int GetHashCode(object? x) => GetHashCode(x as string);

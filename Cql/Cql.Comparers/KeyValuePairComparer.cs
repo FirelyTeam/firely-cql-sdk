@@ -58,11 +58,12 @@ internal class KeyValuePairComparer<TKey,TValue> : ICqlComparer, ICqlComparer<Ke
         ?? Compare(x, y, precision) == 0;
 
     /// <inheritdoc />
-    public int GetHashCode(KeyValuePair<TKey, TValue> x) => x.GetHashCode();
+    public int GetHashCode(KeyValuePair<TKey, TValue> x) =>
+        x.GetHashCode();
 
     /// <inheritdoc />
-    public int GetHashCode(object x) =>
-        x is KeyValuePair<TKey, TValue> t
-            ? GetHashCode(t)
-            : throw new InvalidCastException();
+    public int GetHashCode(object? x) =>
+        x is null
+            ? typeof(KeyValuePair<TKey, TValue>).GetHashCode()
+            : GetHashCode((KeyValuePair<TKey, TValue>)x);
 }
