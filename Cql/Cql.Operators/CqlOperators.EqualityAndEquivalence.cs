@@ -131,5 +131,7 @@ internal partial class CqlOperators
 
     public bool? NotEquivalent(object? left, object? right) => !Equivalent(left, right);
 
+    public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !Equivalent(left, right);
+
     #endregion
 }

@@ -41,11 +41,8 @@ namespace Hl7.Cql.Fhir.Comparers
             return compareId;
         }
 
-        protected override bool EquivalentImpl(Resource x, Resource y, string? precision)
-        {
-            var compareId = IdComparer.Equivalent(x.Id, y.Id, precision);
-            return compareId;
-        }
+        protected override bool EquivalentImpl(Resource x, Resource y, string? precision) =>
+            IdComparer.Equivalent(x.Id, y.Id, precision);
 
         public override int GetHashCode(Resource? x)
         {

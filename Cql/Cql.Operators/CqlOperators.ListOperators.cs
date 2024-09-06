@@ -993,9 +993,15 @@ namespace Hl7.Cql.Runtime
 
         #endregion
 
+        #region Not Equal
+
+        // public bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) moved to CqlOperators.ListOperators.cs
+
+        #endregion
+
         #region Not Equivalent
 
-        public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !Equivalent(left, right);
+        // public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) moved to CqlOperators.ListOperators.cs
 
         #endregion
 
