@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 namespace Hl7.Cql.Comparers
@@ -86,6 +87,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
             Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this));
+            Comparers.TryAdd(typeof(ITuple), new TupleComparer(this));
 
             ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) =>
             {
