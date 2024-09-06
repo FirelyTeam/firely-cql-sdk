@@ -11,12 +11,12 @@ internal partial class CqlOperators
     /*
      * Equality : https://cql.hl7.org/04-logicalspecification.html#equal
      *
-     * The Equal operator returns:
+     * Spec: The Equal operator returns:
      * - true if the arguments are equal;
      * - false if the arguments are known unequal,
      * - and null otherwise.
      *
-     * Equality semantics are defined to be value-based.
+     * Spec: Equality semantics are defined to be value-based.
      *
      */
 
@@ -85,11 +85,11 @@ internal partial class CqlOperators
      *
      * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
      *
-     * The Equivalent operator returns:
+     * Spec: The Equivalent operator returns:
      * - true if the arguments are the same value, or if they are both null;
      * - and false otherwise.
      *
-     * With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
+     * Spec: With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
      */
 
     public bool Equivalent(object? x, object? y, string? precision) =>
@@ -100,6 +100,8 @@ internal partial class CqlOperators
 
     public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
+        // Spec: For list types, this means that two lists are equivalent if and only if the lists contain elements of the same type, have the same number of elements, and for each element in the lists, in order, the elements are equivalent.
+
         if (CqlComparers.EquivalentOnNullsOnly(left, right) is {} r)
             return r;
 
