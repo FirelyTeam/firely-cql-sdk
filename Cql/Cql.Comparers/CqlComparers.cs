@@ -14,6 +14,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using System.Xml.Schema;
 using JetBrains.Annotations;
 
 namespace Hl7.Cql.Comparers
@@ -216,6 +217,10 @@ namespace Hl7.Cql.Comparers
             }
 
             ICqlComparer ? comparer = null;
+
+            if (x is ITuple) // Should cover all value types
+                xType = typeof(ITuple);
+
             if (Comparers.TryGetValue(xType, out ICqlComparer? c))
             {
                 comparer = c;
