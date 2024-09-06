@@ -73,10 +73,10 @@ namespace Hl7.Cql.Comparers
             }
         }
 
-        public override bool Equivalent(CqlInterval<T>? x, CqlInterval<T>? y, string? precision) =>
-            Compare(x, y, precision) == 0 ? true : false;
+        protected override bool EquivalentImpl(CqlInterval<T> x, CqlInterval<T> y, string? precision) =>
+            Compare(x, y, precision) == 0;
 
-        public override int GetHashCode(CqlInterval<T> x) =>
+        public override int GetHashCode(CqlInterval<T>? x) =>
             x == null
             ? typeof(object).GetHashCode()
             : x.ToString()!.GetHashCode();

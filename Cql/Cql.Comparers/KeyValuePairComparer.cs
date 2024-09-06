@@ -53,7 +53,9 @@ internal class KeyValuePairComparer<TKey,TValue> : ICqlComparer, ICqlComparer<Ke
         Compare(x, y, precision) == 0;
 
     /// <inheritdoc />
-    public bool Equivalent(KeyValuePair<TKey, TValue> x, KeyValuePair<TKey, TValue> y, string? precision = null) => Compare(x, y, precision) == 0;
+    public bool Equivalent(KeyValuePair<TKey, TValue> x, KeyValuePair<TKey, TValue> y, string? precision = null) =>
+        CqlComparers.EquivalentOnNullsOnly(x, y)
+        ?? Compare(x, y, precision) == 0;
 
     /// <inheritdoc />
     public int GetHashCode(KeyValuePair<TKey, TValue> x) => x.GetHashCode();

@@ -7,8 +7,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using Hl7.Cql.Abstractions;
 using System.Collections;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Hl7.Cql.Comparers
 {
@@ -106,18 +108,15 @@ namespace Hl7.Cql.Comparers
 
         public bool Equivalent(IEnumerable? x, IEnumerable? y, string? precision = null)
         {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else
-                    return false;
-            }
-            else if (y == null)
-                return false;
+            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+                return r;
 
             var lit = x!.GetEnumerator();
+            using var litd = lit as IDisposable;
+
             var rit = y!.GetEnumerator();
+            using var ritd = rit as IDisposable;
+
             while (lit.MoveNext())
             {
                 if (!rit.MoveNext())
@@ -138,12 +137,12 @@ namespace Hl7.Cql.Comparers
             return true;
         }
 
-        public int GetHashCode(IEnumerable x) =>
+        public int GetHashCode(IEnumerable? x) =>
             x == null
             ? typeof(IEnumerable).GetHashCode()
             : x.GetHashCode();
 
-        public int GetHashCode(object x) => GetHashCode((x as IEnumerable)!);
+        public int GetHashCode(object? x) => GetHashCode(x as IEnumerable);
     }
 }
 

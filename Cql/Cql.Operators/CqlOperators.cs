@@ -181,9 +181,13 @@ namespace Hl7.Cql.Runtime
 
         public object NotSupported() => throw new NotSupportedException();
 
-        public int? Compare(object? x, object? y, string? precision) => Comparer.Compare(x, y, precision);
+        public int? Compare(object? x, object? y, string? precision) =>
+            Comparer.Compare(x, y, precision);
 
-        public int GetHashCode(object x) => Comparer.GetHashCode(x);
+        public int GetHashCode(object? x) =>
+            x is null
+                ? typeof(object).GetHashCode()
+                : Comparer.GetHashCode(x);
 
         public T? Convert<T>(object? from) => TypeConverter.Convert<T>(from);
 

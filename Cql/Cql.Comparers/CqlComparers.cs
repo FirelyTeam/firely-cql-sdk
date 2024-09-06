@@ -12,6 +12,8 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using JetBrains.Annotations;
 
 namespace Hl7.Cql.Comparers
 {
@@ -20,6 +22,28 @@ namespace Hl7.Cql.Comparers
     /// </summary>
     internal sealed class CqlComparers : ICqlComparer
     {
+
+        /*
+         *
+         * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
+         *
+         * The Equivalent operator returns:
+         * - true if the arguments are the same value, or if they are both null;
+         * - and false otherwise.
+         *
+         * With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
+         */
+
+        internal static bool? EquivalentOnNullsOnly<T>(
+            [NoEnumeration, NotNullWhen(true)] T? left,
+            [NoEnumeration, NotNullWhen(true)] T? right) =>
+            (left, right) switch
+            {
+                (null, null) => true,
+                (null, _)    => false,
+                (_, null)    => false,
+                _            => null
+            };
 
         internal ConcurrentDictionary<Type, ICqlComparer> Comparers { get; } = new ConcurrentDictionary<Type, ICqlComparer>();
         internal ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>> ComparerFactories { get; } = new ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>>();

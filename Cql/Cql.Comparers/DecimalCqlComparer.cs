@@ -56,14 +56,9 @@ namespace Hl7.Cql.Comparers
 
         public bool Equivalent(decimal? x, decimal? y, string? precision = null)
         {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else return false;
-            }
-            else if (y == null)
-                return false;
+            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+                return r;
+
             var @thisPrecision = GetPrecision(x!.Value!);
             var otherPrecision = GetPrecision(y!.Value!);
             if (@thisPrecision < otherPrecision)
