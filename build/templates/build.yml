@@ -62,6 +62,7 @@ jobs:
     inputs:
       command: test
       projects: '**/*Tests/*Tests.csproj'
+      exclude: 'Ncqa.HT.DeckTests.csproj' # Add the projects you want to exclude here
       arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
 
   - task: DotNetCoreCLI@2
@@ -85,4 +86,3 @@ jobs:
         useVersionSuffix: ${{ parameters.useVersionSuffix }}
         publishWebProjects: ${{ parameters.publishWebProjects }}
         zipAfterPublish: ${{ parameters.zipAfterPublish }}
-
