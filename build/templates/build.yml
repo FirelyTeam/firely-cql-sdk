@@ -61,7 +61,7 @@ jobs:
     displayName: 'dotnet test UnitTests'
     inputs:
       command: test
-      projects: '**/*Tests/*Tests.csproj;!Ncqa.HT.DeckTests.csproj'
+      projects: '**/*Tests/*Tests.csproj;!**/Ncqa.HT.DeckTests.csproj'
       arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
 
   - task: DotNetCoreCLI@2
