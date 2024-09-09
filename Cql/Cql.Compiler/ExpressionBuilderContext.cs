@@ -767,7 +767,7 @@ partial class ExpressionBuilderContext
                 // since that would catch quite a few cases (mostly the if .... then X else List<X> cases),
                 // which are common.
                 throw this.NewExpressionBuildingException(
-                    $"The If expression at {@if.locator} produces two branches with different types.");
+                    $"The If expression at {@if.locator} produces two branches with different types. then:{then.Type.ToCSharpString(Defaults.TypeCSharpFormat)}, else:{@else.Type.ToCSharpString(Defaults.TypeCSharpFormat)}");
                 // then = Expression.Convert(then, typeof(object));
                 // @else = Expression.Convert(@else, typeof(object));
             }
