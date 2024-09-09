@@ -44,15 +44,18 @@ namespace Hl7.Cql.Comparers
             Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
-        public bool Equivalent(T? x, T? y, string? precision = null) => Compare(x, y, precision) == 0;
+        public bool Equivalent(T? x, T? y, string? precision = null) =>
+            CqlComparers.EquivalentOnNullsOnly(x, y)
+            ?? Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
-        public int GetHashCode(T x) => x is not null ? EqualityComparer<T>.Default.GetHashCode(x) : typeof(T).GetHashCode();
+        public int GetHashCode(T? x) =>
+            x is null
+                ? typeof(T).GetHashCode()
+                : EqualityComparer<T>.Default.GetHashCode(x);
 
         /// <inheritdoc />
-        public int GetHashCode(object x) =>
-            x is T t
-            ? GetHashCode(t)
-            : throw new InvalidCastException();
+        public int GetHashCode(object? x) =>
+            GetHashCode((T?)x);
     }
 }

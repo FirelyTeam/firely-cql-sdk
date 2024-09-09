@@ -68,17 +68,11 @@ namespace Hl7.Cql.Comparers
 
         public bool Equivalent(TupleBaseType? x, TupleBaseType? y, string? precision = null)
         {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else return false;
-            }
-            else if (y == null)
-                return false;
+            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+                return r;
 
-            var xType = x.GetType();
-            var yType = y.GetType();
+            var xType = x!.GetType();
+            var yType = y!.GetType();
             if (xType != yType)
                 return false;
             var joined = from xProp in xType.GetProperties()
@@ -104,8 +98,10 @@ namespace Hl7.Cql.Comparers
         public bool Equivalent(object? x, object? y, string? precision = null) =>
             Equivalent(x as TupleBaseType, y as TupleBaseType);
 
-        public int GetHashCode(TupleBaseType? obj) => obj?.GetHashCode() ?? typeof(TupleBaseType).GetHashCode() ^ 098174506;
-        public int GetHashCode(object obj) => GetHashCode(obj as TupleBaseType);
+        public int GetHashCode(TupleBaseType? obj) =>
+            obj?.GetHashCode() ?? typeof(TupleBaseType).GetHashCode() ^ 098174506;
+
+        public int GetHashCode(object? obj) => GetHashCode(obj as TupleBaseType);
     }
 }
 

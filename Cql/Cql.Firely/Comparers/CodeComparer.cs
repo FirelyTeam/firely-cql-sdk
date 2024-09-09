@@ -48,24 +48,10 @@ namespace Hl7.Cql.Fhir.Comparers
             return CompareFunction(x.Value!, y.Value!, precision);
         }
 
-        public override bool Equivalent(Code<T>? x, Code<T>? y, string? precision)
-        {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else return false;
-            }
-            else if (y == null)
-                return false;
-            else
-                return EquivalentFunction(x.Value!, y.Value!, precision);
-        }
+        protected override bool EquivalentImpl(Code<T> x, Code<T> y, string? precision) =>
+            EquivalentFunction(x.Value!, y.Value!, precision);
 
-        public override int GetHashCode(Code<T> x)
-        {
-            if (x == null) return typeof(Code<T>).GetHashCode();
-            else return typeof(Code<T>).GetHashCode() ^ x.Value.GetHashCode();
-        }
+        public override int GetHashCode(Code<T>? x) =>
+            x == null ? typeof(Code<T>).GetHashCode() : typeof(Code<T>).GetHashCode() ^ x.Value.GetHashCode();
     }
 }

@@ -35,7 +35,7 @@ Hl7.Cql.Abstractions.ICqlComparable<T>.CompareTo(T? other, string? precision = n
 Hl7.Cql.Abstractions.ICqlComparer
 Hl7.Cql.Abstractions.ICqlComparer.Compare(object? x, object? y, string? precision) -> int?
 Hl7.Cql.Abstractions.ICqlComparer.Equals(object? x, object? y, string? precision) -> bool?
-Hl7.Cql.Abstractions.ICqlComparer.GetHashCode(object! x) -> int
+Hl7.Cql.Abstractions.ICqlComparer.GetHashCode(object? x) -> int
 Hl7.Cql.Abstractions.ICqlComparer<T>
 Hl7.Cql.Abstractions.ICqlComparer<T>.Compare(T? x, T? y, string? precision) -> int?
 Hl7.Cql.Abstractions.ICqlComparer<T>.Equals(T? x, T? y, string? precision) -> bool?

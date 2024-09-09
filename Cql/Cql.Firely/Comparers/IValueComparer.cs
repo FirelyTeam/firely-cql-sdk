@@ -17,9 +17,9 @@ namespace Hl7.Cql.Fhir.Comparers
             ? null
             : Comparer<T>.Default.Compare(x.Value, y.Value);
 
-        public override bool Equivalent(IValue<T>? x, IValue<T>? y, string? precision) => Compare(x, y, precision) == 0;
+        protected override bool EquivalentImpl(IValue<T> x, IValue<T> y, string? precision) => Compare(x, y, precision) == 0;
 
-        public override int GetHashCode(IValue<T> x)
+        public override int GetHashCode(IValue<T>? x)
         {
             if (x == null || x.Value == null)
                 return typeof(Integer).GetHashCode();
