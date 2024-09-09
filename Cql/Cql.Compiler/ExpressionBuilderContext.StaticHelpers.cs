@@ -43,10 +43,10 @@ partial class ExpressionBuilderContext
 
     private LambdaExpression NotImplemented(
         string nav,
-        Type[] signature,
+        (string name, Type type)[] signature,
         Type returnType)
     {
-        var parameters = signature.SelectToArray((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, this) + index));
+        var parameters = signature.SelectToArray((type, index) => Expression.Parameter(type.type, type.name));
         var ctor = ConstructorInfos.NotImplementedException;
         var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
         var @throw = Expression.Throw(@new, returnType);
