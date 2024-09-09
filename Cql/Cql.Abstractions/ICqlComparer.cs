@@ -46,7 +46,7 @@ namespace Hl7.Cql.Abstractions
         /// </summary>
         /// <param name="x">The object whose hash code to compute.</param>
         /// <returns>The hash code for <paramref name="x"/>.</returns>
-        int GetHashCode(object x);
+        int GetHashCode(object? x);
     }
 
     internal abstract class CqlComparerDecorator(ICqlComparer inner) : ICqlComparer
@@ -59,7 +59,8 @@ namespace Hl7.Cql.Abstractions
         public virtual int? Compare(object? x, object? y, string? precision) =>
             Inner.Compare(x, y, precision);
 
-        public virtual int GetHashCode(object x) => Inner.GetHashCode(x);
+        public virtual int GetHashCode(object? x) =>
+            Inner.GetHashCode(x);
 
         public virtual bool Equivalent(object? x, object? y, string? precision) =>
             Inner.Equivalent(x, y, precision);

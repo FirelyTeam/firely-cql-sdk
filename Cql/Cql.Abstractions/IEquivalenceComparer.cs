@@ -23,6 +23,7 @@ namespace Hl7.Cql.Abstractions
         /// <returns><see langword="true"/> if the objects are equivalent, and <see langword="false"/> if not. Equivalence computations are never <see langword="null"/> and will return <see langword="false"/> in uncertainty situations.</returns>
         bool Equivalent(object? x, object? y, string? precision);
     }
+
     /// <summary>
     /// Defines a method that a type implements to compare two objects for equivalence.
     /// See https://cql.hl7.org/09-b-cqlreference.html#equivalent.

@@ -12,6 +12,10 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using System.Xml.Schema;
+using JetBrains.Annotations;
 
 namespace Hl7.Cql.Comparers
 {
@@ -20,6 +24,28 @@ namespace Hl7.Cql.Comparers
     /// </summary>
     internal sealed class CqlComparers : ICqlComparer
     {
+
+        /*
+         *
+         * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
+         *
+         * The Equivalent operator returns:
+         * - true if the arguments are the same value, or if they are both null;
+         * - and false otherwise.
+         *
+         * With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
+         */
+
+        internal static bool? EquivalentOnNullsOnly<T>(
+            [NoEnumeration, NotNullWhen(true)] T? left,
+            [NoEnumeration, NotNullWhen(true)] T? right) =>
+            (left, right) switch
+            {
+                (null, null) => true,
+                (null, _)    => false,
+                (_, null)    => false,
+                _            => null
+            };
 
         internal ConcurrentDictionary<Type, ICqlComparer> Comparers { get; } = new ConcurrentDictionary<Type, ICqlComparer>();
         internal ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>> ComparerFactories { get; } = new ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>>();
@@ -62,6 +88,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
             Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this));
+            Comparers.TryAdd(typeof(ITuple), new TupleComparer(this));
 
             ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) =>
             {
@@ -190,6 +217,10 @@ namespace Hl7.Cql.Comparers
             }
 
             ICqlComparer ? comparer = null;
+
+            if (x is ITuple) // Should cover all value types
+                xType = typeof(ITuple);
+
             if (Comparers.TryGetValue(xType, out ICqlComparer? c))
             {
                 comparer = c;
