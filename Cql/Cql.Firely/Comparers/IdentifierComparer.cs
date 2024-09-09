@@ -37,10 +37,10 @@ namespace Hl7.Cql.Fhir.Comparers
             }
         }
 
-        public override bool Equivalent(Identifier? x, Identifier? y, string? precision) =>
+        protected override bool EquivalentImpl(Identifier x, Identifier y, string? precision) =>
             (Compare(x, y, precision) ?? -1) == 0;
 
-        public override int GetHashCode(Identifier x)
+        public override int GetHashCode(Identifier? x)
         {
             if (x == null || x.Value == null)
                 return typeof(Identifier).GetHashCode();

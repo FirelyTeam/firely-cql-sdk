@@ -91,15 +91,6 @@ namespace Hl7.Cql.Runtime
         }
         #endregion
 
-        #region Equal
-        public bool? Equal(object? x, object? y) => x == null || y == null ? null : Equals(x, y, null);
-        #endregion
-
-
-        #region Equivalent
-        public bool? Equivalent(object? x, object? y) => Equivalent(x!, y!, null);
-        #endregion
-
         #region Greater
 
         public bool? Greater(object? left, object? right)
@@ -151,24 +142,14 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region  Not Equal
-        public bool? NotEqual(object? left, object? right)
-        {
-            var eq = Equal(left, right);
-            if (eq is null)
-                return null;
-            else return !eq.Value;
-        }
+
+        // bool? NotEqual(object? left, object? right) is located in CqlOperators.EqualityAndEquivalence.cs
+
         #endregion
 
         #region  Not Equivalent
 
-        public bool? NotEquivalent(object? left, object? right)
-        {
-            var eq = Equal(left, right);
-            if (eq is null)
-                return null;
-            else return !eq.Value;
-        }
+        // bool? NotEquivalent(object? left, object? right) is located in CqlOperators.EqualityAndEquivalence.cs
 
         #endregion
 

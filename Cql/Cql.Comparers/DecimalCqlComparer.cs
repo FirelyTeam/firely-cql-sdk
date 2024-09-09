@@ -56,14 +56,9 @@ namespace Hl7.Cql.Comparers
 
         public bool Equivalent(decimal? x, decimal? y, string? precision = null)
         {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else return false;
-            }
-            else if (y == null)
-                return false;
+            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+                return r;
+
             var @thisPrecision = GetPrecision(x!.Value!);
             var otherPrecision = GetPrecision(y!.Value!);
             if (@thisPrecision < otherPrecision)
@@ -75,11 +70,10 @@ namespace Hl7.Cql.Comparers
         }
 
         public int GetHashCode(decimal? x) =>
-            x == null
-            ? typeof(decimal).GetHashCode()
-            : x.GetHashCode();
+            x?.GetHashCode() ?? typeof(decimal).GetHashCode();
 
-        public int GetHashCode(object x) => GetHashCode(x as decimal?);
+        public int GetHashCode(object? x) =>
+            GetHashCode(x as decimal?);
 
         public int GetPrecision(decimal value) => BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
         private decimal TruncateDigits(decimal value, int places)

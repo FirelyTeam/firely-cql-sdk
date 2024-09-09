@@ -34,29 +34,17 @@ namespace Hl7.Cql.Comparers
 
         public bool? Equals(object? x, object? y, string? precision) => Equals((x as T)!, (y as T)!, precision);
 
-        public bool Equivalent(T? x, T? y, string? precision)
-        {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else
-                    return false;
-            }
-            else if (y == null)
-                return false;
-
-            return x.Equivalent(y, precision);
-        }
+        public bool Equivalent(T? x, T? y, string? precision) =>
+            CqlComparers.EquivalentOnNullsOnly(x, y)
+            ?? x!.Equivalent(y, precision);
 
         public bool Equivalent(object? x, object? y, string? precision) => Equivalent(x as T, y as T, precision);
 
         public int GetHashCode(T? x) =>
-            x == null
-            ? typeof(T).GetHashCode()
-            : x.GetHashCode();
+            x?.GetHashCode() ?? typeof(T).GetHashCode();
 
-        public int GetHashCode(object x) => GetHashCode(x as T);
+        public int GetHashCode(object? x) =>
+            GetHashCode(x as T);
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

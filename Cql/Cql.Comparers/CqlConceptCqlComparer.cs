@@ -118,7 +118,8 @@ namespace Hl7.Cql.Comparers
             }
             return baseCode;
         }
-        public int GetHashCode(object? x) => GetHashCode(x as CqlConcept);
+        public int GetHashCode(object? x) =>
+            GetHashCode(x as CqlConcept);
 
     }
 }
