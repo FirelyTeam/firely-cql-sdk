@@ -4,7 +4,7 @@
 
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Operators</AssemblyName>
-		<RootNamespace>Hl7.Cql.Operators</RootNamespace>
+		<RootNamespace>Hl7.Cql.Runtime</RootNamespace>
 		<Product>CQL operators implementation</Product>
 		<Description>Support package for Hl7.Cql. Implementation of the various operators and methods in the Cql spec.</Description>
 	</PropertyGroup>

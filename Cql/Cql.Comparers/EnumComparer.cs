@@ -63,10 +63,7 @@ namespace Hl7.Cql.Comparers
         public bool Equivalent(object? x, object? y, string? precision) => (Equals(x, y, precision) ?? false) == false;
 
         /// <inheritdoc/>
-        public int GetHashCode(object x)
-        {
-            if (x == null) return typeof(object).GetHashCode();
-            else return x.GetHashCode();
-        }
+        public int GetHashCode(object? x) =>
+            x?.GetHashCode() ?? typeof(object).GetHashCode();
     }
 }

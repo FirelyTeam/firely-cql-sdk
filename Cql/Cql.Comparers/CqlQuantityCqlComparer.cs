@@ -77,18 +77,17 @@ namespace Hl7.Cql.Comparers
         /// <inheritdoc />
         public bool Equivalent(CqlQuantity? x, CqlQuantity? y, string? precision = null)
         {
-            if (x == null)
-                throw new ArgumentNullException(nameof(x));
-            if (y == null)
-                throw new ArgumentNullException(nameof(y));
+            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+                return r;
 
-            var unitCompare = UnitComparer.Equivalent(x.unit!, y.unit!, precision);
+            var unitCompare = UnitComparer.Equivalent(x!.unit, y!.unit, precision);
             if (unitCompare || x.unit == "1" || y.unit == "1")
             {
-                var valueComparison = ValueComparer.Equivalent(x.value!, y.value!, precision);
+                var valueComparison = ValueComparer.Equivalent(x.value, y.value, precision);
                 return valueComparison;
             }
-            else return false;
+
+            return false;
         }
 
         /// <inheritdoc />
@@ -96,12 +95,11 @@ namespace Hl7.Cql.Comparers
 
         /// <inheritdoc />
         public int GetHashCode(CqlQuantity? x) =>
-            x == null
-            ? typeof(CqlQuantity).GetHashCode()
-            : x.ToString()!.GetHashCode();
+            x?.ToString()?.GetHashCode() ?? typeof(CqlQuantity).GetHashCode();
 
         /// <inheritdoc />
-        public int GetHashCode(object x) => GetHashCode(x as CqlQuantity);
+        public int GetHashCode(object? x) =>
+            GetHashCode(x as CqlQuantity);
     }
 }
 

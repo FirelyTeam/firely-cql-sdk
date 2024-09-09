@@ -59,14 +59,9 @@ namespace Hl7.Cql.Comparers
         /// <inheritdoc/>
         public bool Equivalent(string? x, string? y, string? precision = null)
         {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else return false;
-            }
-            else if (y == null)
-                return false;
+            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+                return r;
+
             var thisNormalized = x!.Normalize();
             var otherNormalized = y!.Normalize();
             var areEqual = _comparer.Equals(thisNormalized, otherNormalized);
@@ -75,9 +70,7 @@ namespace Hl7.Cql.Comparers
 
         /// <inheritdoc/>
         public int GetHashCode(string? x) =>
-            x == null
-            ? typeof(string).GetHashCode()
-            : x.GetHashCode();
+            x?.GetHashCode() ?? typeof(string).GetHashCode();
 
         /// <inheritdoc/>
         public int GetHashCode(object? x) => GetHashCode(x as string);

@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -14,15 +12,8 @@ using System.Linq;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class TupleBaseTypeComparer : ICqlComparer<TupleBaseType?>, ICqlComparer
+    internal class TupleBaseTypeComparer(ICqlComparer memberComparer) : ICqlComparer<TupleBaseType?>, ICqlComparer
     {
-        public TupleBaseTypeComparer(ICqlComparer memberComparer)
-        {
-            MemberComparer = memberComparer;
-        }
-
-        public ICqlComparer MemberComparer { get; }
-
         public int? Compare(TupleBaseType? x, TupleBaseType? y, string? precision = null)
         {
             if (x == null || y == null)
@@ -40,45 +31,30 @@ namespace Hl7.Cql.Comparers
                              XValue = xProp.GetValue(x),
                              YValue = foundY == null ? null : foundY.GetValue(y)
                          };
-            var result = 0;
+
             foreach (var prop in joined)
             {
-                var compare = MemberComparer.Compare(prop.XValue, prop.YValue, precision);
-                if (compare == null)
-                    return null;
-                if (compare.Value != 0)
-                {
-                    result += compare.Value;
-                    break;
-                }
+                var compare = memberComparer.Compare(prop.XValue, prop.YValue, precision);
+                if (compare is null or not 0)
+                    return compare;
             }
-            return result;
+
+            return 0;
         }
 
-
-
-        public int? Compare(object? x, object? y, string? precision = null) =>
-            Compare(x as TupleBaseType, y as TupleBaseType, null);
+        public int GetHashCode(TupleBaseType? obj) =>
+            obj?.GetHashCode() ?? typeof(TupleBaseType).GetHashCode() ^ 098174506;
 
         public bool? Equals(TupleBaseType? x, TupleBaseType? y, string? precision = null) =>
             Compare(x, y, null) == 0;
 
-        public bool? Equals(object? x, object? y, string? precision = null) =>
-            Compare(x, y, null) == 0;
-
         public bool Equivalent(TupleBaseType? x, TupleBaseType? y, string? precision = null)
         {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else return false;
-            }
-            else if (y == null)
-                return false;
+            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+                return r;
 
-            var xType = x.GetType();
-            var yType = y.GetType();
+            var xType = x!.GetType();
+            var yType = y!.GetType();
             if (xType != yType)
                 return false;
             var joined = from xProp in xType.GetProperties()
@@ -92,20 +68,23 @@ namespace Hl7.Cql.Comparers
                          };
             foreach (var prop in joined)
             {
-                if (!MemberComparer.Equivalent(prop.XValue, prop.YValue, precision))
+                if (!memberComparer.Equivalent(prop.XValue, prop.YValue, precision))
                     return false;
             }
             return true;
         }
 
-        public bool Equivalent(object? x, object? y) =>
-            Equivalent(x as TupleBaseType, y as TupleBaseType);
+        int? ICqlComparer.Compare(object? x, object? y, string? precision) =>
+            Compare(x as TupleBaseType, y as TupleBaseType, precision);
 
-        public bool Equivalent(object? x, object? y, string? precision = null) =>
-            Equivalent(x as TupleBaseType, y as TupleBaseType);
+        bool? ICqlComparer.Equals(object? x, object? y, string? precision) =>
+            Equals(x as TupleBaseType, y as TupleBaseType, precision);
 
-        public int GetHashCode(TupleBaseType? obj) => obj?.GetHashCode() ?? typeof(TupleBaseType).GetHashCode() ^ 098174506;
-        public int GetHashCode(object obj) => GetHashCode(obj as TupleBaseType);
+        bool IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) =>
+            Equivalent(x as TupleBaseType, y as TupleBaseType, precision);
+
+        int ICqlComparer.GetHashCode(object? obj) =>
+            GetHashCode(obj as TupleBaseType);
     }
 }
 

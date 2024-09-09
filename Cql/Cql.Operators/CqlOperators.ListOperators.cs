@@ -64,79 +64,13 @@ namespace Hl7.Cql.Runtime
 
         #region Equal
 
-        public bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right)
-        {
-            if (left == null || right == null)
-                return null;
-
-            var onlyNull = true;
-            var notEmpty = false;
-            var lit = left!.GetEnumerator();
-            var rit = right!.GetEnumerator();
-            while (lit.MoveNext())
-            {
-                if (!rit.MoveNext())
-                    return false;
-                notEmpty = true;
-                var lv = lit.Current;
-                var rv = rit.Current;
-                if (lv == null)
-                {
-                    if (rv != null) return false;
-                }
-                else if (rv == null) return false;
-                else
-                {
-                    onlyNull = false;
-                    if (Compare(lv!, rv!, null) != 0)
-                        return false;
-                }
-            }
-            if (rit.MoveNext()) // the 2nd list is longer than the 1st.
-                return false;
-
-            if (notEmpty && onlyNull)
-                return null;
-            else
-                return true;
-        }
+        // bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) is located in CqlOperators.EqualityAndEquivalence.cs
 
         #endregion
 
         #region Equivalent
 
-        public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
-        {
-            if (left == null)
-            {
-                if (right == null)
-                    return true;
-                else return null;
-            }
-            else if (right == null)
-                return null;
-
-            var lit = left!.GetEnumerator();
-            var rit = right!.GetEnumerator();
-            while (lit.MoveNext())
-            {
-                if (!rit.MoveNext())
-                    return false;
-
-                var lv = lit.Current;
-                var rv = rit.Current;
-                if (lv == null)
-                {
-                    if (rv != null) return false;
-                }
-                else if (rv == null) return false;
-                else if (Equivalent(lv!, rv!, null) == false)
-                    return false;
-            }
-            if (rit.MoveNext()) // the 2nd list is longer than the 1st.
-                return false;
-            return true;
-        }
+        // bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) is located in CqlOperators.EqualityAndEquivalence.cs
 
         #endregion
 
@@ -1061,13 +995,13 @@ namespace Hl7.Cql.Runtime
 
         #region Not Equal
 
-        public bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !ListEqual(left, right);
+        // public bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) moved to CqlOperators.ListOperators.cs
 
         #endregion
 
         #region Not Equivalent
 
-        public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !Equivalent(left, right);
+        // public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) moved to CqlOperators.ListOperators.cs
 
         #endregion
 
