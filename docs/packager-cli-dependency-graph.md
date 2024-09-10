@@ -89,7 +89,7 @@ classDiagram
     }
 
 %%    namespace Dependencies {
-        class DynamicTupleCache {
+        class TupleBuilderCache {
             get_TupleTypes() IEnumerable~Type~
         }
 
@@ -196,7 +196,7 @@ classDiagram
     }
 
 %%    namespace Dependencies {
-        class DynamicTupleCache {
+        class TupleBuilderCache {
             get_TypeResolver() TypeResolver
         }
 
@@ -229,7 +229,7 @@ classDiagram
     ILibraryExpressionBuilderContext ..> LibraryExpressionBuilderContext : injected (optional)
 
     OperatorsBinder ..> ExpressionBuilder : injected
-    DynamicTupleCache ..> ExpressionBuilder : injected
+    TupleBuilderCache ..> ExpressionBuilder : injected
     TypeConverter ..> ExpressionBuilder : injected
     TypeResolver ..> ExpressionBuilder : injected
     ContextBinder ..> ExpressionBuilder : injected

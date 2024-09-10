@@ -263,7 +263,7 @@ partial class ExpressionBuilderContext
                 return (propName, propType);
             });
 
-        var matchedTupleType = _dynamicTupleCache.TupleTypes
+        var matchedTupleType = _tupleBuilderCache.TupleTypes
                                            .FirstOrDefault(tupleType =>
                                            {
                                                var isMatch = normalizedProperties
@@ -277,7 +277,7 @@ partial class ExpressionBuilderContext
 
         var typeName = $"Tuples.{TupleTypeNameFor(elementInfo)}";
 
-        var myTypeBuilder = _dynamicTupleCache.ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
+        var myTypeBuilder = _tupleBuilderCache.ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
 
         foreach (var kvp in elementInfo)
         {
@@ -285,11 +285,11 @@ partial class ExpressionBuilderContext
             {
                 var name = NormalizeIdentifier(kvp.Key);
                 var type = kvp.Value;
-                DynamicTupleCache.DefineProperty(myTypeBuilder, name!, kvp.Key, type);
+                TupleBuilderCache.DefineProperty(myTypeBuilder, name!, kvp.Key, type);
             }
         }
         var typeInfo = myTypeBuilder.CreateTypeInfo();
-        _dynamicTupleCache.AddTupleType(typeInfo!); // TODO: PDB - This is changing external state. Should become internal instead
+        _tupleBuilderCache.AddTupleType(typeInfo!); // TODO: PDB - This is changing external state. Should become internal instead
         return typeInfo!;
     }
 

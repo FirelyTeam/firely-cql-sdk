@@ -20,14 +20,14 @@ internal class ExpressionBuilder(
     ILogger<ExpressionBuilder> logger,
     ExpressionBuilderSettings expressionBuilderSettings,
     CqlOperatorsBinder cqlOperatorsBinder,
-    DynamicTupleCache dynamicTupleCache,
+    TupleBuilderCache tupleBuilderCache,
     TypeConverter typeConverter,
     TypeResolver typeResolver,
     CqlContextBinder cqlContextBinder)
 {
     internal readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     internal readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
-    internal readonly DynamicTupleCache DynamicTupleCache = dynamicTupleCache;
+    internal readonly TupleBuilderCache TupleBuilderCache = tupleBuilderCache;
     internal readonly ILogger<ExpressionBuilder> _logger = logger;
     internal readonly TypeConverter _typeConverter = typeConverter;
     internal readonly TypeResolver _typeResolver = typeResolver;

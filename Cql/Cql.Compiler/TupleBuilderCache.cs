@@ -16,9 +16,9 @@ using System.Reflection.Emit;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The DynamicTupleCache creates new types (e.g. for Tuples) as needed.
+    /// The TupleBuilderCache creates new types (e.g. for Tuples) as needed.
     /// </summary>
-    internal class DynamicTupleCache
+    internal class TupleBuilderCache
     {
         /// <summary>
         /// Gets the assembly name for any generated types created by this type manager.
@@ -26,7 +26,7 @@ namespace Hl7.Cql.Compiler
         private string AssemblyName { get; }
 
         /// <summary>
-        /// Gets the tuple types created by this <see cref="DynamicTupleCache"/>.
+        /// Gets the tuple types created by this <see cref="TupleBuilderCache"/>.
         /// </summary>
         public IReadOnlyCollection<Type> TupleTypes => _tupleTypeList;
 
@@ -38,7 +38,7 @@ namespace Hl7.Cql.Compiler
         /// Creates an instance with the specified resolver, assembly name, and tuple type namespace.
         /// </summary>
         /// <param name="assemblyName">The name of the assembly in which generated tuple types will be created. If not specified, the value will be "Tuples".</param>
-        public DynamicTupleCache(
+        public TupleBuilderCache(
             string assemblyName = "Tuples")
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
