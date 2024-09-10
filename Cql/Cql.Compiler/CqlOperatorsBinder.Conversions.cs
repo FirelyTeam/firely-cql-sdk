@@ -43,7 +43,7 @@ partial class CqlOperatorsBinder
             }
         }
 
-        if (typeConverter.CanConvert(from, to))
+        if (_typeConverter.CanConvert(from, to))
         {
             var bindToGenericMethod = BindToBestMethodOverload(nameof(ICqlOperators.Convert), [expression.NewAssignToTypeExpression<object>()], [to], false);
             if (bindToGenericMethod != null)

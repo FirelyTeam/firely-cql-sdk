@@ -17,11 +17,12 @@ internal class WriteToFileCSharpCodeStreamPostProcessor(
     : CSharpCodeStreamPostProcessor
 {
     private readonly CSharpCodeWriterOptions _csharpCodeWriterOptions = csharpCodeWriterOptions.Value;
+    private readonly ILogger<WriteToFileCSharpCodeStreamPostProcessor> _logger = logger;
 
     public override void ProcessStream(string name, Stream stream)
     {
         var file = new FileInfo($"{Path.Combine(_csharpCodeWriterOptions.OutDirectory!.FullName, name)}.g.cs");
-        logger.LogInformation("Writing C# file: '{file}'", file.FullName);
+        _logger.LogInformation("Writing C# file: '{file}'", file.FullName);
 
         file.Directory!.Create();
         using var streamOut = file.OpenWrite();

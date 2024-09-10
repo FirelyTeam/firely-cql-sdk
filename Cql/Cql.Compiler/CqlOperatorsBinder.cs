@@ -42,6 +42,10 @@ namespace Hl7.Cql.Compiler
         TypeResolver typeResolver,
         TypeConverter typeConverter)
     {
+        private readonly ILogger<CqlOperatorsBinder> _logger = logger;
+        private readonly TypeResolver _typeResolver = typeResolver;
+        private readonly TypeConverter _typeConverter = typeConverter;
+
         /// <summary>
         /// Facilitates binding to <see cref="ICqlOperators"/> methods,
         /// by converting the <param ref="methodName"/> and <see cref="Expression"/> <param ref="args"/>
@@ -60,8 +64,8 @@ namespace Hl7.Cql.Compiler
             {
                 // @formatter:off
                 "Convert"           => BindConvert(args[0], args[1]),
-                "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
-                "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => typeResolver.GetListElementType(s.Type, true)!))!,
+                "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
+                "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!))!,
                 "Message"           => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type])!,
                 "Coalesce"          => Coalesce(args[0]),
                 "Flatten"           => Flatten(args[0]),
@@ -88,7 +92,7 @@ namespace Hl7.Cql.Compiler
                     : null;
 
             Expression? ToList(Expression[] args) =>
-                args is [{ Type:{} t } a] && typeResolver.IsListType(t)
+                args is [{ Type:{} t } a] && _typeResolver.IsListType(t)
                     ? a // Already a list type
                     : null;
         }

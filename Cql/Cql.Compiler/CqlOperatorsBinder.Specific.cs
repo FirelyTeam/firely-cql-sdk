@@ -26,7 +26,7 @@ partial class CqlOperatorsBinder
     {
         if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(ListSortDirection))
         {
-            var elementType = typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
+            var elementType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var call = BindToBestMethodOverload(nameof(ICqlOperators.SortBy), [source, lambda, orderConstant], [elementType])!;
             return call;
 
@@ -41,7 +41,7 @@ partial class CqlOperatorsBinder
     {
         if (left.Type == typeof(CqlCode))
         {
-            var rightElementType = typeResolver.GetListElementType(right.Type);
+            var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
                 return BindToBestMethodOverload(nameof(ICqlOperators.CodeInList), [left, right], [])!;
@@ -67,10 +67,10 @@ partial class CqlOperatorsBinder
                 [left.NewTypeAsExpression<IEnumerable<CqlCode>>(), right.NewTypeAsExpression<IEnumerable<CqlCode>>()],
                 [])!;
         }
-        var leftElementType = typeResolver.GetListElementType(left.Type);
+        var leftElementType = _typeResolver.GetListElementType(left.Type);
         if (leftElementType == typeof(CqlCode))
         {
-            var rightElementType = typeResolver.GetListElementType(right.Type);
+            var rightElementType = _typeResolver.GetListElementType(right.Type);
             if (rightElementType == typeof(CqlCode))
             {
                 return BindToBestMethodOverload(nameof(ICqlOperators.ValueSetUnion), [left, right], [])!;
@@ -118,10 +118,10 @@ partial class CqlOperatorsBinder
 
     private Expression Flatten(Expression operand)
     {
-        var elementType = typeResolver.GetListElementType(operand.Type, throwError: true)!;
-        if (typeResolver.IsListType(elementType))
+        var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)!;
+        if (_typeResolver.IsListType(elementType))
         {
-            var nestedElementType = typeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"'{elementType}' was expected to be a list type.");
+            var nestedElementType = _typeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"'{elementType}' was expected to be a list type.");
             var call = BindToBestMethodOverload(nameof(ICqlOperators.Flatten), [operand], [nestedElementType])!;
             return call;
         }
@@ -213,9 +213,9 @@ partial class CqlOperatorsBinder
             var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByValueSet))!;
             forType = method.MakeGenericMethod(resourceType);
         }
-        else if (typeResolver.IsListType(codes.Type))
+        else if (_typeResolver.IsListType(codes.Type))
         {
-            var elementType = typeResolver.GetListElementType(codes.Type, true)!;
+            var elementType = _typeResolver.GetListElementType(codes.Type, true)!;
             if (elementType == typeof(CqlCode))
             {
                 var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByCodes))!;
@@ -225,7 +225,7 @@ partial class CqlOperatorsBinder
             // for expressions like:
             // [Source : "Definition returning List<Code>"]
             // this ends up turning the codes expression into a List<List<Code>>
-            else if (typeResolver.IsListType(elementType) && typeResolver.GetListElementType(elementType) == typeof(CqlCode))
+            else if (_typeResolver.IsListType(elementType) && _typeResolver.GetListElementType(elementType) == typeof(CqlCode))
             {
                 // call Flatten.
                 codes = Flatten(codes);
@@ -247,7 +247,7 @@ partial class CqlOperatorsBinder
     {
         if (lambda is LambdaExpression lambdaExpr)
         {
-            var sourceType = typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
+            var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var resultType = lambdaExpr.ReturnType;
             var call = BindToBestMethodOverload(nameof(ICqlOperators.Select), [source, lambda], [sourceType, resultType])!;
             return call;
@@ -262,7 +262,7 @@ partial class CqlOperatorsBinder
     {
         if (lambda is LambdaExpression lamdaExpr)
         {
-            var sourceType = typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
+            var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var call = BindToBestMethodOverload(nameof(ICqlOperators.Where), [source, lambda], [sourceType])!;
             return call;
         }
@@ -276,10 +276,10 @@ partial class CqlOperatorsBinder
     {
         if (collectionSelectorLambda is LambdaExpression collectionSelector)
         {
-            var firstGenericArgument = typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
-            if (typeResolver.IsListType(collectionSelector.ReturnType))
+            var firstGenericArgument = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+            if (_typeResolver.IsListType(collectionSelector.ReturnType))
             {
-                var secondGenericArgument = typeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
+                var secondGenericArgument = _typeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
                 var call = BindToBestMethodOverload(nameof(ICqlOperators.SelectMany), [source, collectionSelector], [firstGenericArgument, secondGenericArgument])!;
                 return call;
             }
@@ -298,14 +298,14 @@ partial class CqlOperatorsBinder
         if (collectionSelectorLambda is not LambdaExpression collectionSelector)
             throw new ArgumentException("Source is not generic", nameof(source));
 
-        var firstGenericArgument = typeResolver.GetListElementType(source.Type) ??
+        var firstGenericArgument = _typeResolver.GetListElementType(source.Type) ??
                                    throw new InvalidOperationException(
                                        $"{source.Type} was expected to be a list type.");
-        if (!typeResolver.IsListType(collectionSelector.ReturnType))
+        if (!_typeResolver.IsListType(collectionSelector.ReturnType))
             throw new ArgumentException("Collection lambda does not return an IEnumerable",
                 nameof(collectionSelectorLambda));
 
-        var secondGenericArgument = typeResolver.GetListElementType(collectionSelector.ReturnType) ??
+        var secondGenericArgument = _typeResolver.GetListElementType(collectionSelector.ReturnType) ??
                                     throw new InvalidOperationException(
                                         $"{collectionSelector.Type} was expected to be a list type.");
         if (resultSelectorLambda is not LambdaExpression resultSelector)
