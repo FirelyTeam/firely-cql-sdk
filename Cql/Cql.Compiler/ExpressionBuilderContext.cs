@@ -1908,7 +1908,7 @@ partial class ExpressionBuilderContext
         Type valueTupleType = _typeResolver.GetListElementType(funcResultType, true)!;
         FieldInfo[] valueTupleFields = valueTupleType.GetFields(bfPublicInstance | BindingFlags.GetField);
 
-        Type cqlTupleType = TupleTypeFor(aliasAndElementTypes);
+        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(aliasAndElementTypes);
         PropertyInfo[] cqlTupleProperties = cqlTupleType.GetProperties(bfPublicInstance | BindingFlags.SetProperty);
 
         Debug.Assert(valueTupleFields.Length > 0);

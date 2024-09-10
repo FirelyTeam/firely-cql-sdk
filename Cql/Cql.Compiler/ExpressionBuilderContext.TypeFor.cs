@@ -250,63 +250,6 @@ partial class ExpressionBuilderContext
                     return type;
                 });
 
-        return TupleTypeFor(elementInfo);
-    }
-
-    private Type TupleTypeFor(IReadOnlyDictionary<string, Type> elementInfo)
-    {
-        var normalizedProperties = elementInfo
-            .SelectToArray(kvp =>
-            {
-                var propName = NormalizeIdentifier(kvp.Key);
-                var propType = kvp.Value;
-                return (propName, propType);
-            });
-
-        var matchedTupleType = _tupleBuilderCache.TupleTypes
-                                           .FirstOrDefault(tupleType =>
-                                           {
-                                               var isMatch = normalizedProperties
-                                                   .All(prop =>
-                                                            tupleType.GetProperty(prop.propName) is { PropertyType: { } tuplePropertyType }
-                                                            && tuplePropertyType == prop.propType);
-                                               return isMatch;
-                                           });
-        if (matchedTupleType != null)
-            return matchedTupleType;
-
-        var typeName = $"Tuples.{TupleTypeNameFor(elementInfo)}";
-
-        var myTypeBuilder = _tupleBuilderCache.ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
-
-        foreach (var kvp in elementInfo)
-        {
-            if (kvp.Key != null)
-            {
-                var name = NormalizeIdentifier(kvp.Key);
-                var type = kvp.Value;
-                TupleBuilderCache.DefineProperty(myTypeBuilder, name!, kvp.Key, type);
-            }
-        }
-        var typeInfo = myTypeBuilder.CreateTypeInfo();
-        _tupleBuilderCache.AddTupleType(typeInfo!); // TODO: PDB - This is changing external state. Should become internal instead
-        return typeInfo!;
-    }
-
-    /// <summary>
-    /// Gets a unique tuple name given the elements (members) of the type.
-    /// This method must return the same value for equal values of <paramref name="elementInfo"/>.
-    /// Equality is determined by comparing <see cref="KeyValuePair{TKey,TValue}.Key"/> using default string equality
-    /// and <see cref="KeyValuePair{TKey,TValue}.Value"/> using default equality.
-    /// </summary>
-    /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
-    /// <returns>The unique tuple type name.</returns>
-    private static string TupleTypeNameFor(IReadOnlyDictionary<string, Type> elementInfo)
-    {
-        var hashInput = string.Join("+", elementInfo
-                                         .OrderBy(k => k.Key)
-                                         .Select(kvp => $"{kvp.Key}:{kvp.Value.ToCSharpString()}"));
-        var tupleId = Hasher.Instance.Hash(hashInput);
-        return $"Tuple_{tupleId}";
+        return _tupleBuilderCache.CreateOrGetTupleTypeFor(elementInfo);
     }
 }

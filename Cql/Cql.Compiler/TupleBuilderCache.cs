@@ -6,87 +6,130 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Primitives;
 
+namespace Hl7.Cql.Compiler;
 
-namespace Hl7.Cql.Compiler
+/// <summary>
+/// The TupleBuilderCache creates and caches dynamic tuple types.
+/// </summary>
+internal class TupleBuilderCache
 {
-    /// <summary>
-    /// The TupleBuilderCache creates new types (e.g. for Tuples) as needed.
-    /// </summary>
-    internal class TupleBuilderCache
+    private readonly List<Type> _tupleTypeList;
+
+    private readonly ModuleBuilder _moduleBuilder;
+
+    /// <nodoc/>
+    public TupleBuilderCache()
     {
-        /// <summary>
-        /// Gets the assembly name for any generated types created by this type manager.
-        /// </summary>
-        private string AssemblyName { get; }
+        string assemblyName = $"Tuples{Guid.NewGuid():N}";
+        var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.Run);
+        _tupleTypeList = [];
+        _moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName);
+    }
 
-        /// <summary>
-        /// Gets the tuple types created by this <see cref="TupleBuilderCache"/>.
-        /// </summary>
-        public IReadOnlyCollection<Type> TupleTypes => _tupleTypeList;
-
-        private readonly List<Type> _tupleTypeList;
-
-        public ModuleBuilder ModuleBuilder { get; }
-
-        /// <summary>
-        /// Creates an instance with the specified resolver, assembly name, and tuple type namespace.
-        /// </summary>
-        /// <param name="assemblyName">The name of the assembly in which generated tuple types will be created. If not specified, the value will be "Tuples".</param>
-        public TupleBuilderCache(
-            string assemblyName = "Tuples" // TODO: Must move to configuration
-            )
-        {
-            if (string.IsNullOrWhiteSpace(assemblyName))
-                assemblyName = "Tuples";
-
-            AssemblyName = assemblyName;
-            var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
-            _tupleTypeList = [];
-            ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
-        }
-
-        public void AddTupleType(Type type)
-        {
-            if (_tupleTypeList.Contains(type))
-                throw new ArgumentException($"Type {type.Name} already exists", nameof(type));
-            _tupleTypeList.Add(type);
-        }
-
-        public static void DefineProperty(TypeBuilder myTypeBuilder, string normalizedName, string cqlName, Type type)
-        {
-            var fieldBuilder = myTypeBuilder.DefineField($"_{normalizedName}", type, FieldAttributes.Private);
-            var propertyBuilder = myTypeBuilder.DefineProperty(normalizedName, PropertyAttributes.None, type, null);
-            var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDeclarationAttribute).GetConstructor([
-                typeof(string)
-            ])!, [cqlName]);
-            propertyBuilder.SetCustomAttribute(customAttributeBuilder);
-            MethodAttributes attributes = MethodAttributes.Public
-                    | MethodAttributes.SpecialName
-                    | MethodAttributes.HideBySig;
+    /// <summary>
+    /// Creates or gets from the cache, a tuple type for the specified property names and types.
+    /// </summary>
+    /// <param name="propertyNamesAndTypes">A readonly collection of property names with their corresponding types.</param>
+    /// <returns>Gets the type that matches the properties.</returns>
+    public Type CreateOrGetTupleTypeFor(IReadOnlyDictionary<string, Type> propertyNamesAndTypes)
+    {
+        var normalizedProperties = propertyNamesAndTypes
+            .SelectToArray(kvp =>
             {
-                var get = myTypeBuilder.DefineMethod($"get_{normalizedName}", attributes, type, Type.EmptyTypes);
-                ILGenerator getIL = get.GetILGenerator();
-                getIL.Emit(OpCodes.Ldarg_0);
-                getIL.Emit(OpCodes.Ldfld, fieldBuilder);
-                getIL.Emit(OpCodes.Ret);
-                propertyBuilder.SetGetMethod(get);
-            }
+                var propName = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
+                var propType = kvp.Value;
+                return (propName, propType);
+            });
 
+        var matchedTupleType = _tupleTypeList
+            .FirstOrDefault(tupleType =>
             {
-                var set = myTypeBuilder.DefineMethod($"set_{normalizedName}", attributes, null, [type]);
-                ILGenerator setIL = set.GetILGenerator();
-                setIL.Emit(OpCodes.Ldarg_0);
-                setIL.Emit(OpCodes.Ldarg_1);
-                setIL.Emit(OpCodes.Stfld, fieldBuilder);
-                setIL.Emit(OpCodes.Ret);
-                propertyBuilder.SetSetMethod(set);
-            }
+                var isMatch = normalizedProperties
+                    .All(prop =>
+                             tupleType.GetProperty(prop.propName) is { PropertyType: { } tuplePropertyType }
+                             && tuplePropertyType == prop.propType);
+                return isMatch;
+            });
+        if (matchedTupleType != null)
+            return matchedTupleType;
+
+        var typeName = $"Tuples.{TupleTypeNameFor(propertyNamesAndTypes)}";
+
+        var myTypeBuilder = _moduleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
+
+        foreach (var kvp in propertyNamesAndTypes)
+        {
+            var name = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
+            var type = kvp.Value;
+            DefineProperty(myTypeBuilder, name!, kvp.Key, type);
         }
+        var typeInfo = myTypeBuilder.CreateTypeInfo();
+        AddTupleType(typeInfo!);
+        return typeInfo!;
+    }
+
+    private void AddTupleType(Type type)
+    {
+        if (_tupleTypeList.Contains(type))
+            throw new ArgumentException($"Type {type.Name} already exists", nameof(type));
+        _tupleTypeList.Add(type);
+    }
+
+    private static void DefineProperty(TypeBuilder myTypeBuilder, string normalizedName, string cqlName, Type type)
+    {
+        var fieldBuilder = myTypeBuilder.DefineField($"_{normalizedName}", type, FieldAttributes.Private);
+        var propertyBuilder = myTypeBuilder.DefineProperty(normalizedName, PropertyAttributes.None, type, null);
+        var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDeclarationAttribute).GetConstructor([
+            typeof(string)
+        ])!, [cqlName]);
+        propertyBuilder.SetCustomAttribute(customAttributeBuilder);
+        MethodAttributes attributes = MethodAttributes.Public
+                                      | MethodAttributes.SpecialName
+                                      | MethodAttributes.HideBySig;
+        {
+            var get = myTypeBuilder.DefineMethod($"get_{normalizedName}", attributes, type, Type.EmptyTypes);
+            ILGenerator getIL = get.GetILGenerator();
+            getIL.Emit(OpCodes.Ldarg_0);
+            getIL.Emit(OpCodes.Ldfld, fieldBuilder);
+            getIL.Emit(OpCodes.Ret);
+            propertyBuilder.SetGetMethod(get);
+        }
+
+        {
+            var set = myTypeBuilder.DefineMethod($"set_{normalizedName}", attributes, null, [type]);
+            ILGenerator setIL = set.GetILGenerator();
+            setIL.Emit(OpCodes.Ldarg_0);
+            setIL.Emit(OpCodes.Ldarg_1);
+            setIL.Emit(OpCodes.Stfld, fieldBuilder);
+            setIL.Emit(OpCodes.Ret);
+            propertyBuilder.SetSetMethod(set);
+        }
+    }
+
+    /// <summary>
+    /// Gets a unique tuple name given the elements (members) of the type.
+    /// This method must return the same value for equal values of <paramref name="elementInfo"/>.
+    /// Equality is determined by comparing <see cref="KeyValuePair{TKey,TValue}.Key"/> using default string equality
+    /// and <see cref="KeyValuePair{TKey,TValue}.Value"/> using default equality.
+    /// </summary>
+    /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
+    /// <returns>The unique tuple type name.</returns>
+    private static string TupleTypeNameFor(IReadOnlyDictionary<string, Type> elementInfo)
+    {
+        var nameTypes = elementInfo
+                         .OrderBy(k => k.Key)
+                         .Select(kvp => $"{kvp.Key}:{kvp.Value.ToCSharpString()}");
+        var hashInput = string.Join("+", nameTypes);
+        var tupleId = Hasher.Instance.Hash(hashInput);
+        return $"Tuple_{tupleId}";
     }
 }
