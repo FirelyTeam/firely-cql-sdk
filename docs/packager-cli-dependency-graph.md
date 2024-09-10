@@ -3,6 +3,10 @@ The diagram is split into two, the first one showing the high-level dependencies
 
 ### Application Dependencies (excl Logger and Options)
 
+Remarks
+* Cyan dotted outline classes indicate scoped services.
+* All others are singleton services.
+
 ```mermaid
 classDiagram
     direction LR
@@ -98,6 +102,14 @@ classDiagram
         }
 %%    }
 
+    %% Style Scoped services
+    style CqlToResourcePackagingPipeline stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style PackagerCliProgram stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style TupleBuilderCache stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style LibrarySetExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style LibraryExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style ExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+
     %% Inheritance  
 
     CqlOperatorsBinder --> OperatorsBinder : inherits
@@ -136,6 +148,10 @@ classDiagram
 
 
 ### Expression Builder Dependencies (excl Logger and Options)
+
+Remarks
+* Cyan dotted outline classes indicate scoped services.
+* All others are singleton services.
 
 ```mermaid
 classDiagram
@@ -204,6 +220,14 @@ classDiagram
         class TypeResolver {
         }
 %%    }
+
+    %% Style Scoped services
+    style CqlToResourcePackagingPipeline stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style PackagerCliProgram stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style TupleBuilderCache stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style LibrarySetExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style LibraryExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style ExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
 
     %% Inheritance  
 

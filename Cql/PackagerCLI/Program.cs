@@ -31,7 +31,6 @@ public class Program
         }
 
         var hostBuilder = CreateHostBuilder(args);
-
         try
         {
             return Run(hostBuilder);
@@ -99,20 +98,14 @@ public class Program
 
         try
         {
-            LocalRun();
-            return LocalRun();
+            using IServiceScope mainScope = host.Services.CreateScope();
+            var packageService = mainScope.ServiceProvider.GetPackagerCliServices().PackagerCliProgramScoped();
+            return packageService.Run();
         }
         finally
         {
             var hostLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
             hostLifetime.StopApplication();
-        }
-
-        int LocalRun()
-        {
-            using IServiceScope mainScope = host.Services.CreateScope();
-            var packageService = mainScope.ServiceProvider.GetPackagerCliServices().PackagerCliProgramScoped();
-            return packageService.Run();
         }
     }
 

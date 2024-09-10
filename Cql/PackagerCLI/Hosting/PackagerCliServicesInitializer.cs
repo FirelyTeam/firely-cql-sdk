@@ -26,37 +26,6 @@ internal static class PackagerCliServicesInitializer
         services.TryAddScoped<PackagerCliProgram>();
         services.TryAddSingleton<OptionsConsoleDumper>();
 
-        // services.TryAddScoped<TestSingleton>();
-        // services.TryAddScoped<TestScoped>();
         return services;
-    }
-}
-
-internal class TestSingleton : IDisposable
-{
-    private readonly TestScoped _testScoped;
-
-    public TestSingleton(TestScoped testScoped)
-    {
-        _testScoped = testScoped;
-        ;
-    }
-
-    public void Dispose()
-    {
-        ;
-    }
-}
-
-internal class TestScoped : IDisposable
-{
-    public TestScoped()
-    {
-        ;
-    }
-
-    public void Dispose()
-    {
-        ;
     }
 }
