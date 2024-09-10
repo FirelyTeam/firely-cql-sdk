@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Packager.Hosting;
 using Hl7.Cql.Packager.Logging;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.Hosting;
@@ -55,8 +56,11 @@ public class Program
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder()
             .ConfigureAppConfiguration((context, config) => ConfigureAppConfiguration(config, args))
-            .ConfigureLogging((context, logging) => ConfigureLogging(context, logging))
-            .ConfigureServices((context, services) => ConfigureServices(context, services));
+            .ConfigureLogging((context, logging) => ConfigureLogging(logging, context.Configuration))
+            .ConfigureServices((context, services) =>
+                                   services
+                                       .ConfigurePackagerCliOptions(context.Configuration)
+                                       .AddPackagerCliServices());
 
     private static string Usage { get; }
 
@@ -119,15 +123,17 @@ public class Program
         config.AddCommandLine(args, SwitchMappings);
     }
 
-    private static void ConfigureLogging(HostBuilderContext context, ILoggingBuilder logging)
+    public static void ConfigureLogging(
+        ILoggingBuilder logging,
+        IConfiguration configuration)
     {
         logging.ClearProviders();
 
         bool enableDebugLogging = Debugger.IsAttached;
-        enableDebugLogging = enableDebugLogging || context.Configuration.GetValue<bool>(SwitchMappings[CqlToResourcePackagingOptions.ArgNameLogDebugEnabled]);
+        enableDebugLogging = enableDebugLogging || configuration.GetValue<bool>(SwitchMappings[CqlToResourcePackagingOptions.ArgNameLogDebugEnabled]);
         var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;
 
-        bool shouldClearLog = !context.Configuration.GetValue<bool>(SwitchMappings[CqlToResourcePackagingOptions.ArgNameLogDontClear]);
+        bool shouldClearLog = !configuration.GetValue<bool>(SwitchMappings[CqlToResourcePackagingOptions.ArgNameLogDontClear]);
 
         logging.AddFilter(level => level >= minLogLevel);
 
@@ -177,44 +183,6 @@ public class Program
             _ => throw new UnsupportedSwitchCaseError(logLevel, typeof(LogLevel).FullName).ToException(),
         };
 
-    public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
-    {
-        TryAddPackagerOptions(services, context.Configuration);
-        services.AddCqlPackagerServices();
-        services.AddSingleton<PackagerCliProgram>();
-        services.TryAddSingleton<OptionsConsoleDumper>();
-    }
-
-    public static void TryAddPackagerOptions(IServiceCollection services, IConfiguration configuration)
-    {
-        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<CqlToResourcePackagingOptions>)))
-            return;
-
-        services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
-        services.AddSingleton<IValidateOptions<CSharpCodeWriterOptions>, CSharpCodeWriterOptions.Validator>();
-
-        services
-            .AddOptions<CqlToResourcePackagingOptions>()
-            .Configure<IConfiguration>(CqlToResourcePackagingOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<FhirResourceWriterOptions>()
-            .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<CSharpCodeWriterOptions>()
-            .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<AssemblyDataWriterOptions>()
-            .Configure<IConfiguration>(AssemblyDataWriterOptions.BindConfig)
-            .ValidateOnStart();
-    }
-
-
     private static int Run(IHostBuilder hostBuilder)
     {
         using var host = CreateHost(hostBuilder);
@@ -225,7 +193,7 @@ public class Program
         }
 
         using var mainScope = host.Services.CreateScope();
-        var packageService = mainScope.ServiceProvider.GetRequiredService<PackagerCliProgram>();
+        var packageService = mainScope.ServiceProvider.GetPackagerCliServices().PackagerCliProgramScoped();
         return packageService.Run();
     }
 

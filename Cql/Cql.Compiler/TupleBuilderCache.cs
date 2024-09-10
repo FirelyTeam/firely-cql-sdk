@@ -39,7 +39,8 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="assemblyName">The name of the assembly in which generated tuple types will be created. If not specified, the value will be "Tuples".</param>
         public TupleBuilderCache(
-            string assemblyName = "Tuples")
+            string assemblyName = "Tuples" // TODO: Must move to configuration
+            )
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
                 assemblyName = "Tuples";

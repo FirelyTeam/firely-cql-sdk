@@ -15,12 +15,12 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Hl7.Cql.Packaging.Hosting;
 
-internal static class CqlPackagerServicesInitializer
+internal static class CqlPackagingServicesInitializer
 {
-    internal static CqlPackagerServices GetCqlPackagerServices(this IServiceProvider serviceProvider) =>
-        new CqlPackagerServices(serviceProvider);
+    internal static CqlPackagingServices GetCqlPackagingServices(this IServiceProvider serviceProvider) =>
+        new CqlPackagingServices(serviceProvider);
 
-    public static IServiceCollection AddCqlPackagerServices(this IServiceCollection services)
+    public static IServiceCollection AddCqlPackagingServices(this IServiceCollection services)
     {
         services.AddCqlCodeGenerationServices();
 

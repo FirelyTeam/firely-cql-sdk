@@ -28,7 +28,7 @@ internal readonly struct CqlCompilerServices(IServiceProvider serviceProvider)
 
     public CqlContextBinder CqlContextBinder => ServiceProvider.GetRequiredService<CqlContextBinder>();
 
-    public TupleBuilderCache TupleBuilderCache => ServiceProvider.GetRequiredService<TupleBuilderCache>();
+    public TupleBuilderCache TupleBuilderCacheScoped() => ServiceProvider.GetRequiredService<TupleBuilderCache>();
 
     public LibrarySetExpressionBuilder LibrarySetExpressionBuilder => ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 
