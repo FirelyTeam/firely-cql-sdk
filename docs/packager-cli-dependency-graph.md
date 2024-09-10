@@ -40,6 +40,7 @@ classDiagram
         class WriteToFileFhirResourcePostProcessor { }
         class StubFhirResourcePostProcessor { }
         class CqlToResourcePackagingPipeline { }
+        class ResourcePackager { }
     }
 
     namespace Abstraction {
