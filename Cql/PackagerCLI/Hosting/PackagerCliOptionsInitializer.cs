@@ -15,7 +15,7 @@ using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager.Hosting;
 
-internal static class PackagerCliOptionsConfigurator
+internal static class PackagerCliOptionsInitializer
 {
     public static IServiceCollection AddPackagerCliOptions(
         this IServiceCollection services,
