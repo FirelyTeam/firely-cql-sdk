@@ -5,7 +5,7 @@ The diagram is split into two, the first one showing the high-level dependencies
 
 ```mermaid
 classDiagram
-    direction TB
+    direction LR
 
     %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
 
@@ -90,7 +90,6 @@ classDiagram
 
 %%    namespace Dependencies {
         class DynamicTupleCache {
-            get_TypeResolver() TypeResolver
             get_TupleTypes() IEnumerable~Type~
         }
 
@@ -114,7 +113,7 @@ classDiagram
     AssemblyDataPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpCodeStreamPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
-    DynamicTupleCache ..> AssemblyCompiler : injected
+    TypeResolver ..> AssemblyCompiler : injected
     
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
     ILibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
@@ -128,8 +127,6 @@ classDiagram
 
     ModelInspector ..> TypeConverter : injected  
 
-    TypeResolver ..> DynamicTupleCache : injected
-
     TypeResolver ..> ResourcePackager : injected
     FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
     
@@ -142,7 +139,7 @@ classDiagram
 
 ```mermaid
 classDiagram
-    direction TB
+    direction LR
 
     %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
 
@@ -201,7 +198,6 @@ classDiagram
 %%    namespace Dependencies {
         class DynamicTupleCache {
             get_TypeResolver() TypeResolver
-            get_TupleTypes() IEnumerable~Type~
         }
 
     
@@ -246,7 +242,5 @@ classDiagram
     TypeConverter ..> CqlOperatorsBinder : injected
 
     ModelInspector ..> TypeConverter : injected  
-
-    TypeResolver ..> DynamicTupleCache : injected
 ```
 

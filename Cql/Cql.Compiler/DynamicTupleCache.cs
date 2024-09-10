@@ -16,8 +16,7 @@ using System.Reflection.Emit;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The DynamicTupleCache class maps ELM types to .NET types usually through its <see cref="Resolver"/>, and
-    /// also creates new types (e.g. for Tuples) as needed.
+    /// The DynamicTupleCache creates new types (e.g. for Tuples) as needed.
     /// </summary>
     internal class DynamicTupleCache
     {
@@ -27,27 +26,19 @@ namespace Hl7.Cql.Compiler
         private string AssemblyName { get; }
 
         /// <summary>
-        /// Gets the <see cref="TypeResolver"/> this DynamicTupleCache uses.
-        /// </summary>
-        protected internal TypeResolver Resolver { get; }
-
-        /// <summary>
         /// Gets the tuple types created by this <see cref="DynamicTupleCache"/>.
         /// </summary>
-        public IReadOnlyCollection<Type> TupleTypes => TupleTypeList;
+        public IReadOnlyCollection<Type> TupleTypes => _tupleTypeList;
 
-        private readonly List<Type> TupleTypeList;
+        private readonly List<Type> _tupleTypeList;
 
         public ModuleBuilder ModuleBuilder { get; }
 
         /// <summary>
         /// Creates an instance with the specified resolver, assembly name, and tuple type namespace.
         /// </summary>
-        /// <param name="resolver">The <see cref="TypeResolver"/> that this instance uses.</param>
         /// <param name="assemblyName">The name of the assembly in which generated tuple types will be created. If not specified, the value will be "Tuples".</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="resolver"/> is <c>null</c>.</exception>
         public DynamicTupleCache(
-            TypeResolver resolver,
             string assemblyName = "Tuples")
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
@@ -55,16 +46,15 @@ namespace Hl7.Cql.Compiler
 
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
-            TupleTypeList = [];
+            _tupleTypeList = [];
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
-            Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
         }
 
         public void AddTupleType(Type type)
         {
-            if (TupleTypeList.Contains(type))
+            if (_tupleTypeList.Contains(type))
                 throw new ArgumentException($"Type {type.Name} already exists", nameof(type));
-            TupleTypeList.Add(type);
+            _tupleTypeList.Add(type);
         }
 
         public static void DefineProperty(TypeBuilder myTypeBuilder, string normalizedName, string cqlName, Type type)
