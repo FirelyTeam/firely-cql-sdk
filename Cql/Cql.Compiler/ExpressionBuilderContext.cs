@@ -48,61 +48,35 @@ namespace Hl7.Cql.Compiler;
 /// <remarks>
 /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
 /// </remarks>
-partial class ExpressionBuilderContext
+partial class ExpressionBuilderContext(
+    ILogger<ExpressionBuilder> logger,
+    ExpressionBuilderSettings expressionBuilderSettings,
+    CqlOperatorsBinder cqlOperatorsBinder,
+    TupleBuilderCache tupleBuilderCache,
+    TypeResolver typeResolver,
+    CqlContextBinder cqlContextBinder,
+    LibraryExpressionBuilderContext libraryContext,
+    Dictionary<string, ParameterExpression>? operands = null // Parameters for function definitions. Used during ProcessExpressionDef.
+    )
 {
-    private readonly CqlOperatorsBinder _cqlOperatorsBinder;
-    private readonly CqlContextBinder _contextBinder;
-    private readonly TupleBuilderCache _tupleBuilderCache;
-    private readonly ILogger<ExpressionBuilder> _logger;
-    private readonly TypeResolver _typeResolver;
-    private readonly ExpressionBuilderSettings _expressionBuilderSettings;
-    private readonly LibraryExpressionBuilderContext _libraryContext;
-
-    private ImmutableStack<Element> _elementStack;
+    private readonly ILogger<ExpressionBuilder> _logger = logger;
+    private readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
+    private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
+    private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
+    private readonly TypeResolver _typeResolver = typeResolver;
+    private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
+    private readonly LibraryExpressionBuilderContext _libraryContext = libraryContext;
+    private readonly Dictionary<string, ParameterExpression>? _operands = operands;
+    private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty; // Not used yet, since it's always empty
+    private ImmutableStack<Element> _elementStack = ImmutableStack<Element>.Empty;
 
     /// <summary>
     /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
     /// </summary>
-    private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)> _impliedAliasAndScopesStack; //
-
-    /// <summary>
-    /// Parameters for function definitions.
-    /// </summary>
-    private readonly Dictionary<string, ParameterExpression> _operands; // Used during ProcessExpressionDef
-
-    private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators; // Not used yet, since it's always empty
-
-    internal ExpressionBuilderContext(
-        // Dependencies
-        ILogger<ExpressionBuilder> logger,
-        ExpressionBuilderSettings expressionBuilderSettings,
-        CqlOperatorsBinder cqlOperatorsBinder,
-        TupleBuilderCache tupleBuilderCache,
-        TypeResolver typeResolver,
-        CqlContextBinder cqlContextBinder,
-        // State
-        LibraryExpressionBuilderContext libContext,
-        Dictionary<string, ParameterExpression>? operands = null)
-    {
-        // External Services
-        _logger = logger;
-        _cqlOperatorsBinder = cqlOperatorsBinder;
-        _contextBinder = cqlContextBinder;
-        _tupleBuilderCache = tupleBuilderCache;
-        _expressionBuilderSettings = expressionBuilderSettings;
-        _typeResolver = typeResolver;
-        _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty;
-
-        // External State
-        _libraryContext = libContext;
-        _operands = operands!;
-
-        // Internal State
-        _elementStack = ImmutableStack<Element>.Empty;
-        _impliedAliasAndScopesStack = ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)>.Empty;
-    }
+    private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)> _impliedAliasAndScopesStack = ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)>.Empty;
 
     private static Expression[] NoArgs { get; } = [];
+
     private static Type[] NoTypes { get; } = [];
 
     private Expression BindCqlOperator<TArg>(
@@ -845,7 +819,7 @@ partial class ExpressionBuilderContext
 
     protected Expression OperandRef(OperandRef ore)
     {
-        if (_operands.TryGetValue(ore.name!, out var expression))
+        if (_operands?.TryGetValue(ore.name!, out var expression) == true)
             return expression;
         throw this.NewExpressionBuildingException($"Operand reference to {ore.name} not found in definition operands.");
     }

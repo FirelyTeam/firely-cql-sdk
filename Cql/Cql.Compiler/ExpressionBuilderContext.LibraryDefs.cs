@@ -130,6 +130,9 @@ partial class ExpressionBuilderContext
         ExpressionDef expressionDef) =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
+            if (_operands is null)
+                throw new InvalidOperationException("Operands dictionary is null.");
+
             using (PushElement(expressionDef))
             {
                 if (string.IsNullOrWhiteSpace(expressionDef.name))
@@ -259,7 +262,7 @@ partial class ExpressionBuilderContext
                     defaultValue = TranslateArg(parameter.@default).NewTypeAsExpression<object>();
                 else defaultValue = NullExpression.Object;
 
-                var resolveParam = _contextBinder.ResolveParameter(_libraryContext.LibraryKey, parameter.name, defaultValue);
+                var resolveParam = _cqlContextBinder.ResolveParameter(_libraryContext.LibraryKey, parameter.name, defaultValue);
 
                 var parameterType = TypeFor(parameter.parameterTypeSpecifier)!;
                 var cast = _cqlOperatorsBinder.CastToType(resolveParam, parameterType);

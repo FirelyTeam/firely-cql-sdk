@@ -27,7 +27,7 @@ partial class LibraryExpressionBuilderContext
     /// If the library was processed within the context of a library set,
     /// then this dictionary will be merged with the library set's dictionary.
     /// </summary>
-    public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; } = libraryDefinitions;
+    public DefinitionDictionary<LambdaExpression> LibraryDefinitions  => libraryDefinitions;
 
     private void AddLibraryDefinitionsFromIncludes()
     {
@@ -112,7 +112,8 @@ partial class LibraryExpressionBuilderContext
         _codesByCodeSystemName.Add(codeSystemName!, codings);
         return codings;
     }
-    public LibrarySetExpressionBuilderContext? LibrarySetContext { get; } = libsCtx;
+
+    public LibrarySetExpressionBuilderContext? LibrarySetContext => libsCtx;
 
     #endregion
 

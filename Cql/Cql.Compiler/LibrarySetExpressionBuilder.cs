@@ -14,6 +14,8 @@ namespace Hl7.Cql.Compiler;
 internal class LibrarySetExpressionBuilder(
     LibraryExpressionBuilder libraryExpressionBuilder)
 {
+    private readonly LibraryExpressionBuilder _libraryExpressionBuilder = libraryExpressionBuilder;
+
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
@@ -23,5 +25,5 @@ internal class LibrarySetExpressionBuilder(
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
-        new(libraryExpressionBuilder, librarySet, librarySetDefinitions ?? new());
+        new(_libraryExpressionBuilder, librarySet, librarySetDefinitions ?? new());
 }

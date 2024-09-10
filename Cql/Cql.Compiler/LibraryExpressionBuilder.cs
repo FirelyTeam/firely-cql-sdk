@@ -21,6 +21,9 @@ internal class LibraryExpressionBuilder(
     ILogger<LibraryExpressionBuilder> logger,
     ExpressionBuilder expressionBuilder)
 {
+    private readonly ILogger<LibraryExpressionBuilder> _logger = logger;
+    private readonly ExpressionBuilder _expressionBuilder = expressionBuilder;
+
     public DefinitionDictionary<LambdaExpression> ProcessLibrary(
         Library library,
         DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
@@ -32,7 +35,7 @@ internal class LibraryExpressionBuilder(
         Library library,
         DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
         LibrarySetExpressionBuilderContext? libsCtx = null) =>
-        new(logger, expressionBuilder, library, libraryDefinitions ?? new(), libsCtx);
+        new(_logger, _expressionBuilder, library, libraryDefinitions ?? new(), libsCtx);
 
     public ExpressionBuilderContext NewExpressionBuilderContext(
         Library library,
@@ -40,6 +43,6 @@ internal class LibraryExpressionBuilder(
         Dictionary<string, ParameterExpression>? operands = null)
     {
         var libraryExpressionBuilderContext = NewLibraryExpressionBuilderContext(library, libraryDefinitions);
-        return expressionBuilder.NewExpressionBuilderContext(libraryExpressionBuilderContext, operands);
+        return _expressionBuilder.NewExpressionBuilderContext(libraryExpressionBuilderContext, operands);
     }
 }

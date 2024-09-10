@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
@@ -113,7 +114,8 @@ partial class ExpressionBuilderContext
 
             case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
             {
-                _operands.TryGetValue(operandRef.name, out var operand);
+                ParameterExpression? operand = null;
+                _operands?.TryGetValue(operandRef.name, out operand);
                 if (operand != null)
                     return operand.Type;
                 break;

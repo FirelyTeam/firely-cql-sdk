@@ -20,12 +20,14 @@ internal partial class LibraryExpressionBuilderContext(
     DefinitionDictionary<LambdaExpression> libraryDefinitions,
     LibrarySetExpressionBuilderContext? libsCtx = null)
 {
+    private readonly ILogger<LibraryExpressionBuilder> _logger = logger;
+    private readonly ExpressionBuilder _expressionBuilder = expressionBuilder;
     private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();
 
     /// <summary>
     /// Gets the library associated with the expression builder context.
     /// </summary>
-    public Library Library { get; } = library;
+    public Library Library => library;
 
     /// <summary>
     /// Gets the key of the library, which is the name and version of the library.
@@ -40,21 +42,21 @@ internal partial class LibraryExpressionBuilderContext(
             // This is a fix for QICore-based CQL, where the functions only differ by profiles on the same resource.
             // We should remove this when the compiler is fixed.
             // See https://github.com/FirelyTeam/firely-cql-sdk/issues/438.
-            logger.LogInformation("Preprocessing library '{library}' - AmbiguousOverloadCorrector", LibraryKey);
+            _logger.LogInformation("Preprocessing library '{library}' - AmbiguousOverloadCorrector", LibraryKey);
             AmbiguousOverloadCorrector.Fix(Library);
 
-            logger.LogInformation("Preprocessing library '{library}' - ElmPreprocessor", LibraryKey);
+            _logger.LogInformation("Preprocessing library '{library}' - ElmPreprocessor", LibraryKey);
             var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryKey, Library);
             var processor = new ElmPreprocessor(ls);
             processor.Preprocess(Library);
 
-            logger.LogInformation("Building expressions for '{library}'", LibraryKey);
+            _logger.LogInformation("Building expressions for '{library}'", LibraryKey);
 
             if (Library.includes is { Length: > 0 } includeDefs)
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    expressionBuilder.ProcessIncludes(this, includeDef);
+                    _expressionBuilder.ProcessIncludes(this, includeDef);
                 }
 
                 AddLibraryDefinitionsFromIncludes();
@@ -65,7 +67,7 @@ internal partial class LibraryExpressionBuilderContext(
             {
                 foreach (var valueSetDef in valueSetDefs)
                 {
-                    expressionBuilder.ProcessValueSetDef(this, valueSetDef);
+                    _expressionBuilder.ProcessValueSetDef(this, valueSetDef);
                 }
             }
 
@@ -77,7 +79,7 @@ internal partial class LibraryExpressionBuilderContext(
 
                 foreach (var codeDef in codeDefs)
                 {
-                    expressionBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
+                    _expressionBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
                 }
             }
 
@@ -85,7 +87,7 @@ internal partial class LibraryExpressionBuilderContext(
             {
                 foreach (var codeSystemDef in codeSystemDefs)
                 {
-                    expressionBuilder.ProcessCodeSystemDef(this, codeSystemDef);
+                    _expressionBuilder.ProcessCodeSystemDef(this, codeSystemDef);
                 }
             }
 
@@ -93,7 +95,7 @@ internal partial class LibraryExpressionBuilderContext(
             {
                 foreach (var conceptDef in conceptDefs)
                 {
-                    expressionBuilder.ProcessConceptDef(this, conceptDef);
+                    _expressionBuilder.ProcessConceptDef(this, conceptDef);
                 }
             }
 
@@ -101,7 +103,7 @@ internal partial class LibraryExpressionBuilderContext(
             {
                 foreach (var parameterDef in parameterDefs)
                 {
-                    expressionBuilder.ProcessParameterDef(this, parameterDef);
+                    _expressionBuilder.ProcessParameterDef(this, parameterDef);
                 }
             }
 
@@ -109,7 +111,7 @@ internal partial class LibraryExpressionBuilderContext(
             {
                 foreach (var expressionDef in expressionDefs)
                 {
-                    expressionBuilder.ProcessExpressionDef(this, expressionDef);
+                    _expressionBuilder.ProcessExpressionDef(this, expressionDef);
                 }
             }
 
