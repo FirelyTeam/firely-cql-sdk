@@ -44,7 +44,7 @@ internal static class CqlCompilerServicesInitializer
 
         services.TryAddSingleton<CqlContextBinder>();
 
-        services.TryAddSingleton<TypeManager>();
+        services.TryAddSingleton<DynamicTupleCache>();
 
         services.TryAddSingleton<LibrarySetExpressionBuilder>();
 

@@ -263,7 +263,7 @@ partial class ExpressionBuilderContext
                 return (propName, propType);
             });
 
-        var matchedTupleType = _typeManager.TupleTypes
+        var matchedTupleType = _dynamicTupleCache.TupleTypes
                                            .FirstOrDefault(tupleType =>
                                            {
                                                var isMatch = normalizedProperties
@@ -275,9 +275,9 @@ partial class ExpressionBuilderContext
         if (matchedTupleType != null)
             return matchedTupleType;
 
-        var typeName = $"Tuples.{_typeManager.TupleTypeNameFor(elementInfo)}";
+        var typeName = $"Tuples.{TupleTypeNameFor(elementInfo)}";
 
-        var myTypeBuilder = _typeManager.ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
+        var myTypeBuilder = _dynamicTupleCache.ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
 
         foreach (var kvp in elementInfo)
         {
@@ -285,11 +285,28 @@ partial class ExpressionBuilderContext
             {
                 var name = NormalizeIdentifier(kvp.Key);
                 var type = kvp.Value;
-                TypeManager.DefineProperty(myTypeBuilder, name!, kvp.Key, type);
+                DynamicTupleCache.DefineProperty(myTypeBuilder, name!, kvp.Key, type);
             }
         }
         var typeInfo = myTypeBuilder.CreateTypeInfo();
-        _typeManager.AddTupleType(typeInfo!); // TODO: PDB - This is changing external state. Should become internal instead
+        _dynamicTupleCache.AddTupleType(typeInfo!); // TODO: PDB - This is changing external state. Should become internal instead
         return typeInfo!;
+    }
+
+    /// <summary>
+    /// Gets a unique tuple name given the elements (members) of the type.
+    /// This method must return the same value for equal values of <paramref name="elementInfo"/>.
+    /// Equality is determined by comparing <see cref="KeyValuePair{TKey,TValue}.Key"/> using default string equality
+    /// and <see cref="KeyValuePair{TKey,TValue}.Value"/> using default equality.
+    /// </summary>
+    /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
+    /// <returns>The unique tuple type name.</returns>
+    private static string TupleTypeNameFor(IReadOnlyDictionary<string, Type> elementInfo)
+    {
+        var hashInput = string.Join("+", elementInfo
+                                         .OrderBy(k => k.Key)
+                                         .Select(kvp => $"{kvp.Key}:{kvp.Value.ToCSharpString()}"));
+        var tupleId = Hasher.Instance.Hash(hashInput);
+        return $"Tuple_{tupleId}";
     }
 }

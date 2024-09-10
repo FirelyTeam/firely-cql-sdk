@@ -28,7 +28,7 @@ internal readonly struct CqlCompilerServices(IServiceProvider serviceProvider)
 
     public CqlContextBinder CqlContextBinder => ServiceProvider.GetRequiredService<CqlContextBinder>();
 
-    public TypeManager TypeManager => ServiceProvider.GetRequiredService<TypeManager>();
+    public DynamicTupleCache DynamicTupleCache => ServiceProvider.GetRequiredService<DynamicTupleCache>();
 
     public LibrarySetExpressionBuilder LibrarySetExpressionBuilder => ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 

@@ -53,7 +53,7 @@ partial class ExpressionBuilderContext
 {
     private readonly CqlOperatorsBinder _cqlOperatorsBinder;
     private readonly CqlContextBinder _contextBinder;
-    private readonly TypeManager _typeManager;
+    private readonly DynamicTupleCache _dynamicTupleCache;
     private readonly ILogger<ExpressionBuilder> _logger;
     private readonly TypeConverter _typeConverter;
     private readonly TypeResolver _typeResolver;
@@ -83,7 +83,7 @@ partial class ExpressionBuilderContext
         _logger = builder._logger;
         _cqlOperatorsBinder = builder._cqlOperatorsBinder;
         _contextBinder = builder._cqlContextBinder;
-        _typeManager = builder._typeManager;
+        _dynamicTupleCache = builder.DynamicTupleCache;
         _expressionBuilderSettings = builder._expressionBuilderSettings;
         _typeConverter = builder._typeConverter;
         _typeResolver = builder._typeResolver;
@@ -977,7 +977,7 @@ partial class ExpressionBuilderContext
                     return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                 }
                 var propogate = PropagateNull(scopeExpression, pathMemberInfo);
-                string message = $"TypeManager failed to resolve type.";
+                string message = $"DynamicTupleCache failed to resolve type.";
                 var resultType = TypeFor(op) ?? throw this.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
@@ -1651,7 +1651,7 @@ partial class ExpressionBuilderContext
             // inside every if statement here (so for where, return, etc).
             // -----
             // The element type may have changed
-            // elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
+            // elementType = DynamicTupleCache.Resolver.GetListElementType(@return.Type, @throw: true)!;
             if (query.where is { } queryWhere)
             {
                 @return = Where(queryWhere, scopeParameter, @return);

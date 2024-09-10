@@ -89,7 +89,7 @@ classDiagram
     }
 
 %%    namespace Dependencies {
-        class TypeManager {
+        class DynamicTupleCache {
             get_TypeResolver() TypeResolver
             get_TupleTypes() IEnumerable~Type~
         }
@@ -114,7 +114,7 @@ classDiagram
     AssemblyDataPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpCodeStreamPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
-    TypeManager ..> AssemblyCompiler : injected
+    DynamicTupleCache ..> AssemblyCompiler : injected
     
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
     ILibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
@@ -128,7 +128,7 @@ classDiagram
 
     ModelInspector ..> TypeConverter : injected  
 
-    TypeResolver ..> TypeManager : injected
+    TypeResolver ..> DynamicTupleCache : injected
 
     TypeResolver ..> ResourcePackager : injected
     FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
@@ -199,7 +199,7 @@ classDiagram
     }
 
 %%    namespace Dependencies {
-        class TypeManager {
+        class DynamicTupleCache {
             get_TypeResolver() TypeResolver
             get_TupleTypes() IEnumerable~Type~
         }
@@ -233,7 +233,7 @@ classDiagram
     ILibraryExpressionBuilderContext ..> LibraryExpressionBuilderContext : injected (optional)
 
     OperatorsBinder ..> ExpressionBuilder : injected
-    TypeManager ..> ExpressionBuilder : injected
+    DynamicTupleCache ..> ExpressionBuilder : injected
     TypeConverter ..> ExpressionBuilder : injected
     TypeResolver ..> ExpressionBuilder : injected
     ContextBinder ..> ExpressionBuilder : injected
@@ -247,6 +247,6 @@ classDiagram
 
     ModelInspector ..> TypeConverter : injected  
 
-    TypeResolver ..> TypeManager : injected
+    TypeResolver ..> DynamicTupleCache : injected
 ```
 
