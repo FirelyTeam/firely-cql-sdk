@@ -58,8 +58,8 @@ internal partial class CqlOperatorsBinder
         Type[] genericTypeArguments,
         bool throwError = true)
     {
-        if (_logger.IsEnabled(LogLevel.Debug))
-            _logger.LogDebug("Resolving method overload for {input}", new StringBuilder().AppendCSharp(methodName, methodArguments, genericTypeArguments, Defaults.MethodCSharpFormat));
+        if (logger.IsEnabled(LogLevel.Debug))
+            logger.LogDebug("Resolving method overload for {input}", new StringBuilder().AppendCSharp(methodName, methodArguments, genericTypeArguments, Defaults.MethodCSharpFormat));
 
         (MethodInfo method, Expression[] arguments, TypeConversion[] conversionMethods)[] candidates =
             ResolveMethodInfosWithPotentialArgumentConversions(methodName, methodArguments, genericTypeArguments).ToArray();
@@ -74,7 +74,7 @@ internal partial class CqlOperatorsBinder
         switch (candidate.method, throwError)
         {
             case (method: not null, _):
-                if (_logger.IsEnabled(LogLevel.Debug))
+                if (logger.IsEnabled(LogLevel.Debug))
                 {
                     MethodCSharpFormat methodCSharpFormat =
                         Defaults.MethodCSharpFormat with
@@ -86,7 +86,7 @@ internal partial class CqlOperatorsBinder
                             }
                         };
 
-                    _logger.LogDebug(
+                    logger.LogDebug(
                         "Resolved with score {score} to method overload {candidate}",
                         Score(candidate!),
                         candidate.method?.ToCSharpString(methodCSharpFormat));
@@ -131,7 +131,7 @@ internal partial class CqlOperatorsBinder
                     sbCandidatesAndScore.Append(')');
                 }
 
-                _logger?.LogDebug(
+                logger?.LogDebug(
                     "Multiple candidates found for method:{input}\nPicking the top item with lowest score: {candidatesAndScore}",
                     sbInput,
                     sbCandidatesAndScore);

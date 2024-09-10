@@ -17,11 +17,11 @@ internal partial class LibrarySetExpressionBuilderContext
     private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
 
     public LibrarySetExpressionBuilderContext(
-        LibrarySetExpressionBuilder builder,
-        DefinitionDictionary<LambdaExpression> librarySetDefinitions,
-        LibrarySet librarySet)
+        LibraryExpressionBuilder libraryExpressionBuilder,
+        LibrarySet librarySet,
+        DefinitionDictionary<LambdaExpression> librarySetDefinitions)
     {
-        _libraryExpressionBuilder = builder._libraryExpressionBuilder;
+        _libraryExpressionBuilder = libraryExpressionBuilder;
         LibrarySetDefinitions = librarySetDefinitions;
         LibrarySet = librarySet;
         DebuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: LibrarySet!.Name!);

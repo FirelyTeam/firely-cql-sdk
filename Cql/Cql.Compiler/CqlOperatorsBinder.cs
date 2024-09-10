@@ -24,39 +24,24 @@ namespace Hl7.Cql.Compiler
     /// by converting the method name and <see cref="Expression"/> arguments
     /// to the appropriate overload of the method.
     /// </summary>
-    internal partial class CqlOperatorsBinder
+    /// <param name="logger">
+    /// The logger used.
+    /// </param>
+    /// <param name="typeResolver">
+    /// The type resolver used.
+    /// Note that if you provide a different instance of this class to <see cref="CqlOperators"/>, you will get errors at runtime.
+    /// </param>
+    /// <param name="typeConverter">
+    /// If provided, this binding will use the supplied instance to determine whether
+    /// a conversion is possible.  Note that if you provide a different instance of this class to <see cref="CqlOperators"/>,
+    /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
+    /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
+    /// </param>
+    internal partial class CqlOperatorsBinder(
+        ILogger<CqlOperatorsBinder> logger,
+        TypeResolver typeResolver,
+        TypeConverter typeConverter)
     {
-        private readonly ILogger<CqlOperatorsBinder> _logger;
-        private readonly TypeConverter _typeConverter;
-        private readonly TypeResolver _typeResolver;
-
-
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        /// <param name="logger">
-        /// The logger used.
-        /// </param>
-        /// <param name="typeResolver">
-        /// The type resolver used.
-        /// Note that if you provide a different instance of this class to <see cref="CqlOperators"/>, you will get errors at runtime.
-        /// </param>
-        /// <param name="typeConverter">
-        /// If provided, this binding will use the supplied instance to determine whether
-        /// a conversion is possible.  Note that if you provide a different instance of this class to <see cref="CqlOperators"/>,
-        /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
-        /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
-        /// </param>
-        public CqlOperatorsBinder(
-            ILogger<CqlOperatorsBinder> logger,
-            TypeResolver typeResolver,
-            TypeConverter typeConverter)
-        {
-            _typeConverter = typeConverter;
-            _typeResolver = typeResolver;
-            _logger = logger;
-        }
-
         /// <summary>
         /// Facilitates binding to <see cref="ICqlOperators"/> methods,
         /// by converting the <param ref="methodName"/> and <see cref="Expression"/> <param ref="args"/>
@@ -75,8 +60,8 @@ namespace Hl7.Cql.Compiler
             {
                 // @formatter:off
                 "Convert"           => BindConvert(args[0], args[1]),
-                "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
-                "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!))!,
+                "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
+                "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => typeResolver.GetListElementType(s.Type, true)!))!,
                 "Message"           => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type])!,
                 "Coalesce"          => Coalesce(args[0]),
                 "Flatten"           => Flatten(args[0]),
@@ -103,7 +88,7 @@ namespace Hl7.Cql.Compiler
                     : null;
 
             Expression? ToList(Expression[] args) =>
-                args is [{ Type:{} t } a] && _typeResolver.IsListType(t)
+                args is [{ Type:{} t } a] && typeResolver.IsListType(t)
                     ? a // Already a list type
                     : null;
         }

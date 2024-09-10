@@ -10,6 +10,7 @@ using System;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Runtime.Hosting;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -29,8 +30,8 @@ internal static class CqlCompilerServicesInitializer
         const int cacheSize = 0; // TODO: Must move to configuration
         services.TryAddSingleton<TypeConverter>(sp =>
         {
-            var modelInspector = sp.GetRequiredService<ModelInspector>();
-            var logger = sp.GetRequiredService<ILogger<TypeConverter>>();
+            var modelInspector = sp.GetCqlCompilerServices().ModelInspector;
+            var logger = sp.GetLogger<TypeConverter>();
             var converter = FhirTypeConverter
                             .Create(modelInspector, cacheSize)
                             .UseLogger(logger);

@@ -55,7 +55,6 @@ partial class ExpressionBuilderContext
     private readonly CqlContextBinder _contextBinder;
     private readonly TupleBuilderCache _tupleBuilderCache;
     private readonly ILogger<ExpressionBuilder> _logger;
-    private readonly TypeConverter _typeConverter;
     private readonly TypeResolver _typeResolver;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings;
     private readonly ILibraryExpressionBuilderContext _libraryContext;
@@ -75,18 +74,23 @@ partial class ExpressionBuilderContext
     private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators; // Not used yet, since it's always empty
 
     internal ExpressionBuilderContext(
-        ExpressionBuilder builder,
+        ILogger<ExpressionBuilder> logger,
+        ExpressionBuilderSettings expressionBuilderSettings,
+        CqlOperatorsBinder cqlOperatorsBinder,
+        TupleBuilderCache tupleBuilderCache,
+        TypeResolver typeResolver,
+        CqlContextBinder cqlContextBinder,
+        //ExpressionBuilder builder,
         ILibraryExpressionBuilderContext libContext,
         Dictionary<string, ParameterExpression>? operands = null)
     {
         // External Services
-        _logger = builder._logger;
-        _cqlOperatorsBinder = builder._cqlOperatorsBinder;
-        _contextBinder = builder._cqlContextBinder;
-        _tupleBuilderCache = builder.TupleBuilderCache;
-        _expressionBuilderSettings = builder._expressionBuilderSettings;
-        _typeConverter = builder._typeConverter;
-        _typeResolver = builder._typeResolver;
+        _logger = logger;
+        _cqlOperatorsBinder = cqlOperatorsBinder;
+        _contextBinder = cqlContextBinder;
+        _tupleBuilderCache = tupleBuilderCache;
+        _expressionBuilderSettings = expressionBuilderSettings;
+        _typeResolver = typeResolver;
         _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty;
 
         // External State

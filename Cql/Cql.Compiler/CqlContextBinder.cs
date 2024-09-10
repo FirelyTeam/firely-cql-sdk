@@ -13,7 +13,7 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Facilitates binding to <see cref="CqlContext"/> methods.
 /// </summary>
-internal class CqlContextBinder
+internal class CqlContextBinder()
 {
     /// <summary>
     /// Creates an expression which resolves a parameter in the CQL context,

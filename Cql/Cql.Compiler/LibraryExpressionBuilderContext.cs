@@ -13,39 +13,24 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-internal partial class LibraryExpressionBuilderContext
+internal partial class LibraryExpressionBuilderContext(
+    ILogger<LibraryExpressionBuilder> logger,
+    ExpressionBuilder expressionBuilder,
+    Library library,
+    DefinitionDictionary<LambdaExpression> libraryDefinitions,
+    ILibrarySetExpressionBuilderContext? libsCtx = null)
 {
     private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();
-    private readonly ILogger<LibraryExpressionBuilder> _logger;
-    private readonly ExpressionBuilder _expressionBuilder;
 
     /// <inheritdoc />
-    public Library Library { get; }
+    public Library Library { get; } = library;
 
     /// <inheritdoc />
     public string LibraryKey => Library.NameAndVersion()!;
 
-    public LibraryExpressionBuilderContext(
-        LibraryExpressionBuilder builder,
-        Library library,
-        DefinitionDictionary<LambdaExpression> libraryDefinitions,
-        ILibrarySetExpressionBuilderContext? libsCtx = null)
-    {
-        // External Services
-        _logger = builder._logger;
-        _expressionBuilder = builder._expressionBuilder;
-
-        // External State
-        LibraryDefinitions = libraryDefinitions;
-        Library = library;
-        LibrarySetContext = libsCtx;
-
-        // Internal State
-        _libraryIdentifiersByAlias = new();
-        _codesByName = new();
-        _codesByCodeSystemName = new();
-        _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
-    }
+    // External Services
+    // External State
+    // Internal State
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>
@@ -54,21 +39,21 @@ internal partial class LibraryExpressionBuilderContext
             // This is a fix for QICore-based CQL, where the functions only differ by profiles on the same resource.
             // We should remove this when the compiler is fixed.
             // See https://github.com/FirelyTeam/firely-cql-sdk/issues/438.
-            _logger.LogInformation("Preprocessing library '{library}' - AmbiguousOverloadCorrector", LibraryKey);
+            logger.LogInformation("Preprocessing library '{library}' - AmbiguousOverloadCorrector", LibraryKey);
             AmbiguousOverloadCorrector.Fix(Library);
 
-            _logger.LogInformation("Preprocessing library '{library}' - ElmPreprocessor", LibraryKey);
+            logger.LogInformation("Preprocessing library '{library}' - ElmPreprocessor", LibraryKey);
             var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryKey, Library);
             var processor = new ElmPreprocessor(ls);
             processor.Preprocess(Library);
 
-            _logger.LogInformation("Building expressions for '{library}'", LibraryKey);
+            logger.LogInformation("Building expressions for '{library}'", LibraryKey);
 
             if (Library.includes is { Length: > 0 } includeDefs)
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    _expressionBuilder.ProcessIncludes(this, includeDef);
+                    expressionBuilder.ProcessIncludes(this, includeDef);
                 }
 
                 AddLibraryDefinitionsFromIncludes();
@@ -79,7 +64,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var valueSetDef in valueSetDefs)
                 {
-                    _expressionBuilder.ProcessValueSetDef(this, valueSetDef);
+                    expressionBuilder.ProcessValueSetDef(this, valueSetDef);
                 }
             }
 
@@ -91,7 +76,7 @@ internal partial class LibraryExpressionBuilderContext
 
                 foreach (var codeDef in codeDefs)
                 {
-                    _expressionBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
+                    expressionBuilder.ProcessCodeDef(this, codeDef, foundCodeNameCodeSystemUrls);
                 }
             }
 
@@ -99,7 +84,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var codeSystemDef in codeSystemDefs)
                 {
-                    _expressionBuilder.ProcessCodeSystemDef(this, codeSystemDef);
+                    expressionBuilder.ProcessCodeSystemDef(this, codeSystemDef);
                 }
             }
 
@@ -107,7 +92,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var conceptDef in conceptDefs)
                 {
-                    _expressionBuilder.ProcessConceptDef(this, conceptDef);
+                    expressionBuilder.ProcessConceptDef(this, conceptDef);
                 }
             }
 
@@ -115,7 +100,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var parameterDef in parameterDefs)
                 {
-                    _expressionBuilder.ProcessParameterDef(this, parameterDef);
+                    expressionBuilder.ProcessParameterDef(this, parameterDef);
                 }
             }
 
@@ -123,7 +108,7 @@ internal partial class LibraryExpressionBuilderContext
             {
                 foreach (var expressionDef in expressionDefs)
                 {
-                    _expressionBuilder.ProcessExpressionDef(this, expressionDef);
+                    expressionBuilder.ProcessExpressionDef(this, expressionDef);
                 }
             }
 

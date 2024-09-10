@@ -39,33 +39,6 @@ classDiagram
         }
     }
 
-    namespace Expression_Building {
-        class LibrarySetExpressionBuilder {
-            ProcessLibrarySet(librarySet : LibrarySet) DefinitionDictionary<LambdaExpression>
-        }
-
-        class OperatorsBinder {
-        }
-
-        class CqlOperatorsBinder {
-        }
-
-        class ContextBinder{
-        }
-
-        class CqlContextBinder{
-		}
-
-        class TypeConverter {
-        }
-
-        class ModelInspector {
-        }
-
-        class CqlCompilerFactory {
-        }
-    }
-
     namespace Fhir_Resource_Building {
         class ResourcePackager {
 %%            PackageResources(elmDirectory : DirectoryInfo, cqlDirectory : DirectoryInfo, resourceCanonicalRootUrl : string? = null) IReadOnlyCollection~Resource~
@@ -92,28 +65,31 @@ classDiagram
         }
     }
 
-%%    namespace Dependencies {
-        class TupleBuilderCache {
-            get_TupleTypes() IEnumerable~Type~
-        }
-
-    
+    namespace Abstractions {
         class TypeResolver {
         }
-%%    }
+    }
+
+    class BaseTypeResolver {
+    }
+
+    class FhirTypeResolver {
+    }
+
+    namespace Expression_Building {
+        class LibrarySetExpressionBuilder {
+        }
+    }
 
     %% Style Scoped services
     style CqlToResourcePackagingPipeline stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
     style PackagerCliProgram stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
-    style TupleBuilderCache stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
     style LibrarySetExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
-    style LibraryExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
-    style ExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
 
     %% Inheritance  
 
-    CqlOperatorsBinder --> OperatorsBinder : inherits
-    CqlContextBinder --> ContextBinder : inherits
+    BaseTypeResolver --> TypeResolver : inherits
+    FhirTypeResolver --> BaseTypeResolver : inherits
     WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
     WriteToFileAssemblyDataPostProcessor --> AssemblyDataPostProcessor : inherits
     WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
@@ -128,17 +104,12 @@ classDiagram
     TypeResolver ..> AssemblyCompiler : injected
     
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
-    ILibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
     ResourcePackager ..> CqlToResourcePackagingPipeline : injected 
+    LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
     
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
     CqlToResourcePackagingPipeline ..> PackagerCliProgram : injected
       
-    TypeResolver ..> CqlOperatorsBinder : injected
-    TypeConverter ..> CqlOperatorsBinder : injected
-
-    ModelInspector ..> TypeConverter : injected  
-
     TypeResolver ..> ResourcePackager : injected
     FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
     
@@ -146,12 +117,7 @@ classDiagram
 ```
 
 
-
 ### Expression Builder Dependencies (excl Logger and Options)
-
-Remarks
-* Cyan dotted outline classes indicate scoped services.
-* All others are singleton services.
 
 ```mermaid
 classDiagram
@@ -160,19 +126,7 @@ classDiagram
     %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
 
 %%    namespace Expression_Building {
-        class ILibrarySetExpressionBuilderContext{
-        }
-
-        class LibrarySetExpressionBuilderContext {
-        }
-
         class LibrarySetExpressionBuilder{
-        }
-
-        class ILibraryExpressionBuilderContext{
-        }
-
-        class LibraryExpressionBuilderContext {
         }
 
         class LibraryExpressionBuilder{
@@ -184,13 +138,7 @@ classDiagram
         class ExpressionBuilder{
         }
 
-        class OperatorsBinder {
-        }
-
         class CqlOperatorsBinder {
-        }
-
-        class ContextBinder{
         }
 
         class CqlContextBinder{
@@ -202,27 +150,20 @@ classDiagram
         class ModelInspector {
         }
 
-        class CqlCompilerFactory {
-        }
-%%    }
-
-    namespace Cql_To_Resource_Pipeline {
-        class CqlToResourcePackagingPipeline {
-        }        
-    }
-
-%%    namespace Dependencies {
         class TupleBuilderCache {
-            get_TypeResolver() TypeResolver
         }
-
-    
+            
         class TypeResolver {
         }
+
+        class BaseTypeResolver {
+		}
+
+        class FhirTypeResolver {
+		}
 %%    }
 
     %% Style Scoped services
-    style CqlToResourcePackagingPipeline stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
     style PackagerCliProgram stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
     style TupleBuilderCache stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
     style LibrarySetExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
@@ -231,36 +172,20 @@ classDiagram
 
     %% Inheritance  
 
-    LibrarySetExpressionBuilderContext --> ILibrarySetExpressionBuilderContext : implements
-    LibraryExpressionBuilderContext --> ILibraryExpressionBuilderContext : implements
-
-    CqlContextBinder --> ContextBinder : inherits
-    CqlOperatorsBinder --> OperatorsBinder : inherits
+    BaseTypeResolver --> TypeResolver : inherits
+    FhirTypeResolver --> BaseTypeResolver : inherits
 
     %% Injected Dependencies
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
-    LibrarySetExpressionBuilder ..> LibrarySetExpressionBuilderContext : injected
-    DefinitionDictionary~LambdaExpression~ ..> LibrarySetExpressionBuilderContext : injected
-    LibrarySet ..> LibrarySetExpressionBuilderContext : injected
-
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
 
-    LibraryExpressionBuilder ..> LibraryExpressionBuilderContext : injected
-    Library ..> LibraryExpressionBuilderContext : injected
-    DefinitionDictionary~LambdaExpression~ ..> LibraryExpressionBuilderContext : injected
-    ILibraryExpressionBuilderContext ..> LibraryExpressionBuilderContext : injected (optional)
-
-    OperatorsBinder ..> ExpressionBuilder : injected
+    CqlOperatorsBinder ..> ExpressionBuilder : injected
     TupleBuilderCache ..> ExpressionBuilder : injected
-    TypeConverter ..> ExpressionBuilder : injected
     TypeResolver ..> ExpressionBuilder : injected
-    ContextBinder ..> ExpressionBuilder : injected
+    CqlContextBinder ..> ExpressionBuilder : injected
     ExpressionBuilderSettings ..> ExpressionBuilder : injected
-    ILibraryExpressionBuilderContext ..> ExpressionBuilder : injected
-    
-    LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
 
     TypeResolver ..> CqlOperatorsBinder : injected
     TypeConverter ..> CqlOperatorsBinder : injected

@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
@@ -16,25 +17,29 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
-internal class LibraryExpressionBuilder
+internal class LibraryExpressionBuilder(
+    ILogger<LibraryExpressionBuilder> logger,
+    ExpressionBuilder expressionBuilder)
 {
-    internal readonly ILogger<LibraryExpressionBuilder> _logger;
-    internal readonly ExpressionBuilder _expressionBuilder;
-
-    public LibraryExpressionBuilder(
-        ILogger<LibraryExpressionBuilder> logger,
-        ExpressionBuilder expressionBuilder)
-    {
-        _logger = logger;
-        _expressionBuilder = expressionBuilder;
-    }
-
     public DefinitionDictionary<LambdaExpression> ProcessLibrary(
         Library library,
         DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
-        ILibrarySetExpressionBuilderContext? libsCtx = null)
+        ILibrarySetExpressionBuilderContext? libsCtx = null) =>
+        NewLibraryExpressionBuilderContext(library, libraryDefinitions, libsCtx)
+            .ProcessLibrary();
+
+    public LibraryExpressionBuilderContext NewLibraryExpressionBuilderContext(
+        Library library,
+        DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
+        ILibrarySetExpressionBuilderContext? libsCtx = null) =>
+        new(logger, expressionBuilder, library, libraryDefinitions ?? new(), libsCtx);
+
+    public ExpressionBuilderContext NewExpressionBuilderContext(
+        Library library,
+        DefinitionDictionary<LambdaExpression>? libraryDefinitions = null,
+        Dictionary<string, ParameterExpression>? operands = null)
     {
-        LibraryExpressionBuilderContext ctx = new(this, library, libraryDefinitions ?? new(), libsCtx);
-        return ctx.ProcessLibrary();
+        var libCtx = NewLibraryExpressionBuilderContext(library, libraryDefinitions);
+        return expressionBuilder.NewExpressionBuilderContext(libCtx, operands);
     }
 }

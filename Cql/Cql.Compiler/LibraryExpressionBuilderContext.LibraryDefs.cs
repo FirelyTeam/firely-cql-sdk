@@ -21,7 +21,7 @@ partial class LibraryExpressionBuilderContext
     #region Definitions
 
     /// <inheritdoc />
-    public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
+    public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; } = libraryDefinitions;
 
     private void AddLibraryDefinitionsFromIncludes()
     {
@@ -52,7 +52,7 @@ partial class LibraryExpressionBuilderContext
 
     #region Library Identifiers by Alias
 
-    private readonly Dictionary<string, string> _libraryIdentifiersByAlias;
+    private readonly Dictionary<string, string> _libraryIdentifiersByAlias = new();
 
     public void AddAliasForNameAndVersion(string alias, string libraryKey) =>
         _libraryIdentifiersByAlias.Add(alias, libraryKey);
@@ -74,7 +74,7 @@ partial class LibraryExpressionBuilderContext
 
     #region Codes By CodeSystemName
 
-    private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
+    private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName = new();
 
     /// <inheritdoc />
     public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
@@ -89,13 +89,13 @@ partial class LibraryExpressionBuilderContext
         _codesByCodeSystemName.Add(codeSystemName!, codings);
         return codings;
     }
-    public ILibrarySetExpressionBuilderContext? LibrarySetContext { get; }
+    public ILibrarySetExpressionBuilderContext? LibrarySetContext { get; } = libsCtx;
 
     #endregion
 
     #region Codes By Name (cross library???)
 
-    private readonly Dictionary<string, CqlCode> _codesByName;
+    private readonly Dictionary<string, CqlCode> _codesByName = new();
 
     public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)] out CqlCode? systemCode) =>
         _codesByName.TryGetValue(codeRef.name, out systemCode);
@@ -113,7 +113,7 @@ partial class LibraryExpressionBuilderContext
 
     #region Url By CodeSystemRef (cross library)
 
-    private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs;
+    private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs = new();
 
     private void AddCodeSystemRefsFromIncludes()
     {
