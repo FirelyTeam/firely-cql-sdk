@@ -14,11 +14,9 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager.Hosting;
 using Hl7.Cql.Packager.Logging;
 using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.Hosting;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -29,9 +27,6 @@ namespace Hl7.Cql.Packager;
 
 public class Program
 {
-    private static IDictionary<string, string> SwitchMappings { get; }
-
-
     public static int Main(string[] args)
     {
         if (args.Length == 0 ||
@@ -55,7 +50,7 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((context, config) => ConfigureAppConfiguration(config, args))
+            .ConfigureAppConfiguration((context, config) => config.ConfigurePackagerCliApp(args))
             .ConfigureLogging((context, logging) => ConfigureLogging(logging, context.Configuration))
             .ConfigureServices((context, services) =>
                                    services
@@ -67,7 +62,6 @@ public class Program
     static Program()
     {
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-        SwitchMappings = BuildSwitchMappings();
         Usage = $"""
                  Packager CLI Usage:
 
@@ -88,39 +82,6 @@ public class Program
                  """;
 
         static string Optional(string s) => $"[{s}]";
-
-        static IDictionary<string, string> BuildSwitchMappings()
-        {
-            const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
-            const string CSharpCodeWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
-            const string AssemblyDataWriterSection = AssemblyDataWriterOptions.ConfigSection + ":";
-            const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
-
-            return new SortedDictionary<string, string>
-            {
-                // @formatter:off
-                [CqlToResourcePackagingOptions.ArgNameElmDirectory] = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
-                [CqlToResourcePackagingOptions.ArgNameCqlDirectory] = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
-                [CqlToResourcePackagingOptions.ArgNameLogDebugEnabled] = PackageSection + nameof(CqlToResourcePackagingOptions.LogDebugEnabled),
-                [CqlToResourcePackagingOptions.ArgNameLogDontClear] = PackageSection + nameof(CqlToResourcePackagingOptions.DontLogClear),
-                [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
-
-                [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
-                [CSharpCodeWriterOptions.ArgNameTypeFormat] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.TypeFormat),
-
-                [AssemblyDataWriterOptions.ArgNameOutDirectory] = AssemblyDataWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
-
-                [FhirResourceWriterOptions.ArgNameOutDirectory] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
-                [FhirResourceWriterOptions.ArgNameOverrideDate] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
-                // @formatter:on
-            };
-        }
-    }
-
-
-    private static void ConfigureAppConfiguration(IConfigurationBuilder config, string[] args)
-    {
-        config.AddCommandLine(args, SwitchMappings);
     }
 
     public static void ConfigureLogging(
@@ -130,10 +91,10 @@ public class Program
         logging.ClearProviders();
 
         bool enableDebugLogging = Debugger.IsAttached;
-        enableDebugLogging = enableDebugLogging || configuration.GetValue<bool>(SwitchMappings[CqlToResourcePackagingOptions.ArgNameLogDebugEnabled]);
+        enableDebugLogging = enableDebugLogging || configuration.GetSwitchMappedValue<bool>(CqlToResourcePackagingOptions.ArgNameLogDebugEnabled);
         var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;
 
-        bool shouldClearLog = !configuration.GetValue<bool>(SwitchMappings[CqlToResourcePackagingOptions.ArgNameLogDontClear]);
+        bool shouldClearLog = !configuration.GetSwitchMappedValue<bool>(CqlToResourcePackagingOptions.ArgNameLogDontClear);
 
         logging.AddFilter(level => level >= minLogLevel);
 
