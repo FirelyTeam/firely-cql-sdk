@@ -7,8 +7,6 @@
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
-		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
-		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
 		<BoxHeader>ELM to C#: </BoxHeader>
 		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
 		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
@@ -16,8 +14,8 @@
 
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
-		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
-		<PackagerCLI>$(CqlSolutionDir)Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+		<!-- This PackagerCLI reference can remain relative to the is file. -->
+		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
