@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Runtime;
 
@@ -27,7 +26,14 @@ internal partial class LibrarySetExpressionBuilderContext
         DebuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: LibrarySet!.Name!);
     }
 
+    /// <summary>
+    /// Gets the merged definitions of all the libraries processed in the <see cref="LibrarySet"/>.
+    /// </summary>
     public DefinitionDictionary<LambdaExpression> LibrarySetDefinitions { get; }
+
+    /// <summary>
+    /// Gets the library set being processed.
+    /// </summary>
     public LibrarySet LibrarySet { get; }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet() =>

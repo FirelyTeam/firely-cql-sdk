@@ -13,7 +13,6 @@ using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
 

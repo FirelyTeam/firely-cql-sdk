@@ -32,7 +32,6 @@ using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
 using Convert = System.Convert;
 using DateTime = Hl7.Cql.Elm.DateTime;
 using Expression = System.Linq.Expressions.Expression;
-using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
 using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
@@ -57,7 +56,7 @@ partial class ExpressionBuilderContext
     private readonly ILogger<ExpressionBuilder> _logger;
     private readonly TypeResolver _typeResolver;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings;
-    private readonly ILibraryExpressionBuilderContext _libraryContext;
+    private readonly LibraryExpressionBuilderContext _libraryContext;
 
     private ImmutableStack<Element> _elementStack;
 
@@ -74,14 +73,15 @@ partial class ExpressionBuilderContext
     private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators; // Not used yet, since it's always empty
 
     internal ExpressionBuilderContext(
+        // Dependencies
         ILogger<ExpressionBuilder> logger,
         ExpressionBuilderSettings expressionBuilderSettings,
         CqlOperatorsBinder cqlOperatorsBinder,
         TupleBuilderCache tupleBuilderCache,
         TypeResolver typeResolver,
         CqlContextBinder cqlContextBinder,
-        //ExpressionBuilder builder,
-        ILibraryExpressionBuilderContext libContext,
+        // State
+        LibraryExpressionBuilderContext libContext,
         Dictionary<string, ParameterExpression>? operands = null)
     {
         // External Services
@@ -1655,7 +1655,7 @@ partial class ExpressionBuilderContext
             // inside every if statement here (so for where, return, etc).
             // -----
             // The element type may have changed
-            // elementType = TupleBuilderCache.Resolver.GetListElementType(@return.Type, @throw: true)!;
+            // elementType = TypeResolver.GetListElementType(@return.Type, @throw: true)!;
             if (query.where is { } queryWhere)
             {
                 @return = Where(queryWhere, scopeParameter, @return);

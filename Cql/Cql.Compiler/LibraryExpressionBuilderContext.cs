@@ -18,19 +18,20 @@ internal partial class LibraryExpressionBuilderContext(
     ExpressionBuilder expressionBuilder,
     Library library,
     DefinitionDictionary<LambdaExpression> libraryDefinitions,
-    ILibrarySetExpressionBuilderContext? libsCtx = null)
+    LibrarySetExpressionBuilderContext? libsCtx = null)
 {
     private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Gets the library associated with the expression builder context.
+    /// </summary>
     public Library Library { get; } = library;
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Gets the key of the library, which is the name and version of the library.
+    /// </summary>
+    /// <seealso cref="Library.NameAndVersion"/>
     public string LibraryKey => Library.NameAndVersion()!;
-
-    // External Services
-    // External State
-    // Internal State
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>

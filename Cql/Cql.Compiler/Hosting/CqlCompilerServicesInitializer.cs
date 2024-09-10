@@ -14,7 +14,6 @@ using Hl7.Cql.Runtime.Hosting;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler.Hosting;
 
