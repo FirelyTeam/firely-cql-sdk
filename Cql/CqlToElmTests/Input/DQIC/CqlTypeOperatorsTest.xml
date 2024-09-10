@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
-	name="CqlTypeOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#type-operators-1">
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd" name="CqlTypeOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#type-operators-1">
 	<group name="As">
 		<test name="AsQuantity">
 			<expression>45.5 'g' as Quantity</expression>
@@ -133,7 +133,7 @@
 			<output>'true'</output>
 		</test>
 	</group>
-	<group name="ToTime">
+	<group name="">
 		<test name="ToTime1">
 			<expression>ToTime('T14:30:00.0')</expression>
 			<output>@T14:30:00.000</output>

@@ -162,9 +162,36 @@ namespace SystemTest
         #region HighBoundary
 
         [TestMethod]
-        public void HighBoundaryDecimal() => System200.HighBoundary(1.587m, 8).Should().Be(1m);
+        public void HighBoundaryDecimal() => System200.HighBoundary(1.587m, 8).Should().Be(1.58799999m);
+
+        [TestMethod]
+        [TestCategory("Custom")]
+        public void HighBoundaryDecimalNullPrecision() => System200.HighBoundary(1.587m, null).Should().Be(1.58799999m);
+
+        [TestMethod]
+        public void HighBoundaryDateMonth() =>
+            System200.HighBoundary(new CqlDate(2014,null,null), 6).Should().Be(new CqlDate(2014, 12, null));
+
+        [TestMethod]
+        public void HighBoundaryDateTimeMillisecond() =>
+            System200.HighBoundary(new CqlDateTime(2014,1,1,8,null,null,null,null,null), 17)
+                .Should().Be(new CqlDateTime(2014, 1, 1, 8, 17, 59, 999, null, null));
+
+        [TestMethod]
+        public void HighBoundaryTimeMillisecond() =>
+            System200.HighBoundary(new CqlTime(10, 30, null, null, null, null), 9).Should().Be(new CqlTime(10, 30, 59, 999, null, null));
+
+
 
         #endregion
+
+        #region Precision
+
+        [TestMethod]
+        public void PrecisionDecimal() => System200.Precision(1.58700m).Should().Be(5);
+
+        #endregion
+
 
         #region Power
 
@@ -172,7 +199,7 @@ namespace SystemTest
         public void PowerNullToNull() => System200.Power(null, null).Should().BeNull();
 
         [TestMethod]
-        public void Power0To0() => System200.Power(0m, 0m).Should().Be(1);
+        public void Power0To0() => System200.Power(0m, 0m).Should().Be(1m);
 
 
         [TestMethod]

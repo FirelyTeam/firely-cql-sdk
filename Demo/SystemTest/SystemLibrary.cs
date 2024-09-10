@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SystemTest;
@@ -83,5 +84,20 @@ internal class SystemLibrary : System_2_0_0
             output.Add(i);
         return output;
     }
+
+    public override int? Length(string argument) =>
+        argument is null ? null : argument.Length;
+
+    public override IEnumerable<string> SplitOnMatches(string stringToSplit, string separatorPattern) =>
+        (stringToSplit, separatorPattern) switch
+        {
+            (null, _) => null,
+            (_, null) => new[] { stringToSplit },
+            _ => Regex.Split(stringToSplit, separatorPattern)
+        };
+
+    public override string ToString(decimal? argument) => argument?.ToString();
+
+    public override bool? IsNull(object argument) => argument is null;
 }
 

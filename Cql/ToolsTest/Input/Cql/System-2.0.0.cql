@@ -57,7 +57,7 @@ define public function Abs(argument System.Decimal) returns System.Decimal:
 */ 
 define public function Abs(argument System.Quantity) returns System.Quantity:
   case 
-    when argument is null then null
+    when IsNull(argument) then null
     else System.Quantity { value: Abs(argument.value), unit: argument.unit }
   end
 
@@ -95,7 +95,7 @@ define public function Add(left System.Long, right System.Long) returns System.L
 */
 define public function Add(left System.Quantity, right System.Quantity) returns System.Quantity:
   case 
-    when left is null or right is null then 
+    when Or(IsNull(left), IsNull(right)) then 
       null
     when left.unit = right.unit then 
       System.Quantity { value: Add(left.value,right.value), unit: left. unit }
@@ -113,11 +113,60 @@ define public function Add(left System.Quantity, right System.Quantity) returns 
 */
 define public function Ceiling(argument System.Decimal) returns System.Integer:
   case 
-      when argument is null then null
+      when IsNull(argument) then null
       when IsNegative(argument) then Truncate(argument)
       when Equal(ToDecimal(Truncate(argument)), argument) then Truncate(argument)
       else Truncate(Add(argument,1))
   end
+
+// ----------------------------------------------------------------------------
+
+define public function Coalesce(argument1 System.Any, argument2 System.Any) returns System.Any:
+  case
+    when IsNull(argument1) then argument2
+    else argument1
+  end
+
+
+// ----------------------------------------------------------------------------
+
+define public function Combine(source List<System.String>) returns System.String:
+  from (source) s
+    aggregate result starting '': Concatenate(result, s)
+
+
+// ----------------------------------------------------------------------------
+
+
+/*
+ * Helper function for extracting a component from a date.
+*/
+define private function dateComponent(parts List<System.String>, precision System.String) returns System.Integer:
+  case
+    when Equal(precision, 'year') then ToInteger(parts[0])
+    when Equal(precision, 'month') then ToInteger(parts[1])
+    else ToInteger(parts[2])
+  end
+
+
+define public function Component(date System.Date, precision System.String) returns System.Integer:
+  dateComponent(Split(ToString(date), '-'), precision)
+
+define private function timeComponent(parts List<System.String>, precision System.String) returns System.Integer:
+  case
+    when Equal(precision, 'hour') then ToInteger(parts[0])
+    when Equal(precision, 'minute') then ToInteger(parts[1])
+    when Equal(precision, 'second') then ToInteger(parts[2])
+    else ToInteger(parts[3])
+  end
+
+define public function Component(time System.Time, precision System.String) returns System.Integer:
+  timeComponent(Split(ToString(time), ':'), precision)
+
+// ----------------------------------------------------------------------------
+
+define public function DateFrom(argument System.DateTime) returns System.Date:
+  ToDate(Split(ToString(argument), 'T')[0])
 
 // ----------------------------------------------------------------------------
 
@@ -141,25 +190,13 @@ define public function Divide(left System.Decimal, right System.Decimal) returns
 */
 define public function Divide(left System.Quantity, right System.Quantity) returns System.Quantity: 
   case 
-    when left is null or right is null then 
+    when Or(IsNull(left), IsNull(right)) then 
       null
     else 
       System.Quantity { value: Divide(left.value, right.value), unit: DivideUnit(left.unit, right.unit) }
   end
 
-// ----------------------------------------------------------------------------
 
-/*
- * The Floor operator returns the first integer less than or equal to the argument.
- * @see: https://cql.hl7.org/09-b-cqlreference.html#floor
-*/ 
-define public function Floor(argument System.Decimal) returns System.Integer:
-  case
-    when argument is null then null
-    when Equal(ToDecimal(Truncate(argument)), argument) then Truncate(argument)
-    when IsNegative(argument) then Truncate(Subtract(argument,1))
-    else Truncate(argument)
-  end
 
 // ----------------------------------------------------------------------------
 
@@ -179,10 +216,22 @@ define public function Exp(argument System.Decimal) returns System.Decimal:
 */ 
 define public function Expand(argument Interval<System.Decimal>, "per" System.Quantity) returns List<System.Decimal>:
   external
-    
 
 // ----------------------------------------------------------------------------
 
+/*
+ * The Floor operator returns the first integer less than or equal to the argument.
+ * @see: https://cql.hl7.org/09-b-cqlreference.html#floor
+*/ 
+define public function Floor(argument System.Decimal) returns System.Integer:
+  case
+    when IsNull(argument) then null
+    when Equal(ToDecimal(Truncate(argument)), argument) then Truncate(argument)
+    when IsNegative(argument) then Truncate(Subtract(argument,1))
+    else Truncate(argument)
+  end
+
+// ----------------------------------------------------------------------------
 
 /*
  * The HighBoundary function returns the greatest possible value of the input to the specified precision.
@@ -193,18 +242,75 @@ define public function HighBoundary(input System.Decimal, precision Integer) ret
 case
   when IsNegative(precision) then 
     null
-  when precision is null then 
-    Divide(Subtract(Multiply(input, Power(10.0, 8.0)), Power(10.0, Negate(8.0))), Power(10.0, 8.0))
-  else 
-    Divide(Subtract(Multiply(input, Power(10.0, precision)), Power(10.0, Negate(precision))), Power(10.0, precision))
+  when IsNull(precision) then
+    case 
+      when Precision(input) < 8 then
+        Add(input, Subtract(Power(10.0, Negate(Precision(input))), Power(10.0, Negate(8.0))))
+      else input
+    end
+  else
+      case 
+      when Precision(input) < precision then
+        Add(input, Subtract(Power(10.0, Negate(Precision(input))), Power(10.0, Negate(precision))))
+      else input
+    end
 end
 
 define public function HighBoundary(input System.Date, precision Integer) returns System.Date:
-  null as System.Date
+  case
+    when Or(IsNull(precision), Equal(precision, 8)) then
+      case
+        when Equal(Component(input, 'month'), 4) then
+          Date(Component(input, 'year'), Coalesce(Component(input, 'month'), 12), 30)
+        when Equal(Component(input, 'month'), 6) then
+          Date(Component(input, 'year'), Coalesce(Component(input, 'month'), 12), 30)
+        when Equal(Component(input, 'month'), 9) then
+          Date(Component(input, 'year'), Coalesce(Component(input, 'month'), 12), 30)
+        when Equal(Component(input, 'month'), 11) then
+          Date(Component(input, 'year'), Coalesce(Component(input, 'month'), 12), 30)
+        when Equal(Component(input, 'month'), 2) then
+          case
+            when Equal(Modulo(Component(input, 'year'), 4), 0) then
+              Date(Component(input, 'year'), Coalesce(Component(input, 'month'), 12), 29)
+            else
+              Date(Component(input, 'year'), Coalesce(Component(input, 'month'), 12), 28)
+          end
+        else
+          Date(Component(input, 'year'), Coalesce(Component(input, 'month'), 12), 31)
+      end
+    when Equal(precision, 6) then
+      Date(Component(input, 'year'), 12)
+    else
+      Date(9999)
+  end
+
+
 define public function HighBoundary(input System.DateTime, precision Integer) returns System.DateTime:
   null as System.DateTime
+
 define public function HighBoundary(input System.Time, precision Integer) returns System.Time:
-  null as System.Time
+  case
+    when Or(IsNull(precision), Equal(precision,9)) then
+      Time(Component(input, 'hour'), 
+        Coalesce(Component(input, 'minute'), 59), 
+        Coalesce(Component(input, 'second'), 59), 
+        999)
+    when Equal(precision, 6) then
+      Time(Component(input, 'hour'), Coalesce(Component(input, 'minute'), 59), 59, 999)    
+    when Equal(precision, 4) then
+      Time(Component(input, 'hour'), 59, 59, 999)    
+    else Time(23,59,59,999)
+  end
+
+// ----------------------------------------------------------------------------
+
+define public function IsNull(argument System.Any) returns System.Boolean:
+  external
+
+// ----------------------------------------------------------------------------
+
+define public function Length(argument System.String) returns System.Integer:
+  external
 
 // ----------------------------------------------------------------------------
 
@@ -214,13 +320,27 @@ define public function Multiply(left System.Decimal, right System.Decimal) retur
 
 // ----------------------------------------------------------------------------
 
+/*
+ * The Precision function returns the number of digits of precision in the input value.
+ * @see: https://cql.hl7.org/09-b-cqlreference.html#precision
+*/
+define public function Precision(argument System.Decimal) returns System.Integer:
+  Length(Split(ToString(argument), '\\.')[1])
+
+
+// ----------------------------------------------------------------------------
+
+
 define public function Power(argument System.Decimal, exponent System.Decimal) returns System.Decimal:
   case 
-    when argument is null or exponent is null then null as System.Decimal
-    when Equal(exponent, 0) then 1
+    when Or(IsNull(argument), IsNull(exponent)) then null as System.Decimal
+    when Equal(exponent, 0) then 1.0
+    when IsNegative(exponent) then
+      from (from (Expand(Interval[1,Abs(exponent)], 1 '1')) _ return argument) a
+        aggregate Result starting 1: Divide(Result,a)
     else 
       from (from (Expand(Interval[1,exponent], 1 '1')) _ return argument) a
-        aggregate Result starting 1: Result * a
+        aggregate Result starting 1: Multiply(Result,a)
   end
 
 // ----------------------------------------------------------------------------
@@ -233,11 +353,83 @@ define public function Round(argument System.Decimal, precision Integer) returns
 
 // ----------------------------------------------------------------------------
 
+define public function Split(stringToSplit System.String, separator System.String) 
+  returns List<System.String>:
+  SplitOnMatches(stringToSplit, separator)
+
+/* 
+ * The SplitOnMatches operator splits a string into a list of strings 
+ * using a separator that is defined by a regular expression pattern.
+ * If the stringToSplit argument is null, the result is null.
+ * If the stringToSplit argument does not contain any matches for the separatorPattern, 
+ * the result is a list of strings containing one element 
+ * that is the value of the stringToSplit argument.
+ * @see: https://cql.hl7.org/09-b-cqlreference.html#splitonmatches
+*/ 
+define public function SplitOnMatches(stringToSplit System.String, 
+  separatorPattern System.String) returns List<System.String>:
+  external
+    
+
+// ----------------------------------------------------------------------------
+
+define public function Substring(stringToSub System.String, 
+  startIndex System.Integer, length System.Integer) returns System.String:
+  Combine(from (Expand(Interval[ToDecimal(startIndex), ToDecimal(Add(startIndex,length))], 1 '1')) index
+    return stringToSub[Truncate(index)])
+
+define public function Substring(stringToSub System.String, 
+  startIndex System.Integer) returns System.String:
+  Substring(stringToSub, startIndex, Subtract(Length(stringToSub), startIndex))
+
+
+
+// ----------------------------------------------------------------------------
+
+define public function TimeFrom(argument System.DateTime) returns System.Time:
+  ToTime(Split(ToString(argument), 'T')[1])
+
+// ----------------------------------------------------------------------------
+
+define private function toDate(parts List<System.String>) returns System.Date:
+  Date(ToInteger(parts[0]), ToInteger(parts[1]), ToInteger(parts[2]))
+
+define public function ToDate(argument System.String) returns System.Date:
+  toDate(Split(argument, '-'))
+
+// ----------------------------------------------------------------------------
+
 
 define public function ToDecimal(argument System.Integer) returns System.Decimal:
   external
 define public function ToDecimal(argument System.Long) returns System.Decimal:
   external
+
+// ----------------------------------------------------------------------------
+
+define public function ToString(argument System.Decimal) returns System.String:
+  external
+
+// ----------------------------------------------------------------------------
+
+define private function toTime(parts List<System.String>) returns System.Time:
+  Time(ToInteger(parts[0]), 
+    ToInteger(parts[1]), 
+    ToInteger(Split(parts[2], '\\.')[0]),
+    ToInteger(Split(parts[2], '\\.')[1])
+  )
+
+define public function ToTime(argument System.String) returns System.Time:
+  case 
+    // TODO: add regex validation to handle bad times
+    when true then 
+      toTime(Split(Substring(argument,1), ':'))
+    else null
+  end
+
+// ----------------------------------------------------------------------------
+
+
 
 define public function Truncate(argument System.Decimal) returns System.Integer:
   external
