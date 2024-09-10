@@ -87,9 +87,23 @@ public class Program
             return -1;
         }
 
-        using var mainScope = host.Services.CreateScope();
-        var packageService = mainScope.ServiceProvider.GetPackagerCliServices().PackagerCliProgramScoped();
-        return packageService.Run();
+        try
+        {
+            LocalRun();
+            return LocalRun();
+        }
+        finally
+        {
+            var hostLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
+            hostLifetime.StopApplication();
+        }
+
+        int LocalRun()
+        {
+            using IServiceScope mainScope = host.Services.CreateScope();
+            var packageService = mainScope.ServiceProvider.GetPackagerCliServices().PackagerCliProgramScoped();
+            return packageService.Run();
+        }
     }
 
     private static IHost? CreateHost(IHostBuilder hostBuilder)

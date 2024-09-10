@@ -20,7 +20,7 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// The TupleBuilderCache creates and caches dynamic tuple types.
 /// </summary>
-internal class TupleBuilderCache
+internal class TupleBuilderCache : IDisposable
 {
     private readonly List<Type> _tupleTypeList;
 
@@ -30,9 +30,13 @@ internal class TupleBuilderCache
     public TupleBuilderCache()
     {
         string assemblyName = $"Tuples{Guid.NewGuid():N}";
-        var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.Run);
+        var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.RunAndCollect);
         _tupleTypeList = [];
         _moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName);
+    }
+
+    public void Dispose()
+    {
     }
 
     /// <summary>

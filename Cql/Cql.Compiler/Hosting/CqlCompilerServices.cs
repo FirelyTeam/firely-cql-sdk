@@ -36,5 +36,5 @@ internal readonly struct CqlCompilerServices(IServiceProvider serviceProvider)
 
     public ExpressionBuilderSettings ExpressionBuilderSettings => ServiceProvider.GetRequiredService<ExpressionBuilderSettings>();
 
-    public ExpressionBuilder ExpressionBuilder => ServiceProvider.GetRequiredService<ExpressionBuilder>();
+    public ExpressionBuilder GetExpressionBuilderScoped() => ServiceProvider.GetRequiredService<ExpressionBuilder>();
 }
