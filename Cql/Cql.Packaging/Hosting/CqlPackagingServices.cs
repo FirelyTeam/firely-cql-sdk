@@ -22,5 +22,5 @@ internal readonly struct CqlPackagingServices(IServiceProvider serviceProvider)
 
     public ResourcePackager ResourcePackager => serviceProvider.GetRequiredService<ResourcePackager>();
 
-    public CqlToResourcePackagingPipeline CqlToResourcePackagingPipeline => serviceProvider.GetRequiredService<CqlToResourcePackagingPipeline>();
+    public CqlToResourcePackagingPipeline CqlToResourcePackagingPipelineScoped() => serviceProvider.GetRequiredService<CqlToResourcePackagingPipeline>();
 }

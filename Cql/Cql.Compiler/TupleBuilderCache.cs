@@ -14,6 +14,7 @@ using System.Reflection.Emit;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Primitives;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
@@ -22,21 +23,27 @@ namespace Hl7.Cql.Compiler;
 /// </summary>
 internal class TupleBuilderCache : IDisposable
 {
+    private readonly ILogger<TupleBuilderCache> _logger;
     private readonly List<Type> _tupleTypeList;
-
     private readonly ModuleBuilder _moduleBuilder;
+    private readonly string _tupleBuilderCacheName;
 
     /// <nodoc/>
-    public TupleBuilderCache()
+    public TupleBuilderCache(
+        ILogger<TupleBuilderCache> logger)
     {
-        string assemblyName = $"Tuples{Guid.NewGuid():N}";
-        var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.RunAndCollect);
+        _logger = logger;
+        _tupleBuilderCacheName = $"Tuples{Guid.NewGuid():N}";
+        _logger.LogInformation("Creating tuple type cache {name}", _tupleBuilderCacheName);
+
+        var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(_tupleBuilderCacheName), AssemblyBuilderAccess.RunAndCollect);
         _tupleTypeList = [];
-        _moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName);
+        _moduleBuilder = assemblyBuilder.DefineDynamicModule(_tupleBuilderCacheName);
     }
 
     public void Dispose()
     {
+        _logger.LogInformation("Disposing tuple type cache {name}", _tupleBuilderCacheName);
     }
 
     /// <summary>

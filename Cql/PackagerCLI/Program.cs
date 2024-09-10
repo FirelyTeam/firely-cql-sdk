@@ -44,12 +44,22 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder()
+            .UseServiceProviderFactory(context =>
+                                           new DefaultServiceProviderFactory(
+                                               new ServiceProviderOptions()
+                                               {
+                                                   // Since we are using scopes,
+                                                   // we need to validate that they are never used from the root provider,
+                                                   // nor that they are included into singletons.
+                                                   ValidateScopes = true
+                                               }))
             .ConfigureAppConfiguration((context, config) => config.AddPackagerCliCommandLineSwitches(args))
             .ConfigureLogging((context, logging) => logging.AddPackagerCLiLogging(context.Configuration))
-            .ConfigureServices((context, services) =>
-                                   services
+            .ConfigureServices((context, services) =>                                   services
                                        .AddPackagerCliOptions(context.Configuration)
-                                       .AddPackagerCliServices());
+                                       .AddPackagerCliServices())
+            .UseConsoleLifetime()
+            ;
 
     private static string Usage { get; }
 
