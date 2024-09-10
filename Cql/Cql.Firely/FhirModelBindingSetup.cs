@@ -61,7 +61,19 @@ namespace Hl7.Cql.Fhir
             if (_options?.CodeInOperatorType == FhirModelBindingOptions.CodeInOperatorSemantics.Equivalent)
                 Comparers.Register(typeof(CqlCode), new CqlCodeCqlEquivalentComparer(StringComparer.OrdinalIgnoreCase));
         }
-        
+
+        /// <summary>
+        /// Creates a model binding for the .NET SDK POCO's with the default 
+        /// <see cref="FhirModelBindingOptions"/>.
+        /// </summary>
+        public FhirModelBindingSetup(
+            IDataSource? dataSource,
+            IValueSetDictionary? valuesets,
+            DateTimeOffset? now) : this(dataSource, valuesets, now, FhirModelBindingOptions.Default)
+        {
+            // Nothing
+        }
+
         private readonly FhirModelBindingOptions? _options;
 
         public override TypeResolver TypeResolver => FhirTypeResolver.Default;
