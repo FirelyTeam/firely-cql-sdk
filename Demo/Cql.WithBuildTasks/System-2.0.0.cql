@@ -420,12 +420,7 @@ define private function toTime(parts List<System.String>) returns System.Time:
   )
 
 define public function ToTime(argument System.String) returns System.Time:
-  case 
-    // TODO: add regex validation to handle bad times
-    when true then 
-      toTime(Split(Substring(argument,1), ':'))
-    else null
-  end
+  toTime(Split(Substring(argument,1), ':'))
 
 // ----------------------------------------------------------------------------
 
