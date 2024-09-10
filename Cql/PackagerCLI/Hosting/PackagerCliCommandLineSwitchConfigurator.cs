@@ -10,16 +10,14 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager.Hosting;
 
-internal static class PackagerCliServicesConfigurator
+internal static class PackagerCliCommandLineSwitchConfigurator
 {
-    private static IDictionary<string, string> SwitchMappings { get; } = BuildSwitchMappings();
+    private static IDictionary<string, string> CommandLineSwitchMappings { get; } = BuildCommandLineSwitchMappings();
 
-    static IDictionary<string, string> BuildSwitchMappings()
+    static IDictionary<string, string> BuildCommandLineSwitchMappings()
     {
         const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
         const string CSharpCodeWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
@@ -46,48 +44,15 @@ internal static class PackagerCliServicesConfigurator
         };
     }
 
-    public static T? GetSwitchMappedValue<T>(
+    public static T? GetCommandLineSwitchValue<T>(
         this IConfiguration configuration,
         string switchMapKey) =>
-        configuration.GetValue<T>(SwitchMappings[switchMapKey]);
+        configuration.GetValue<T>(CommandLineSwitchMappings[switchMapKey]);
 
-    public static void ConfigurePackagerCliApp(
+    public static void AddPackagerCliCommandLineSwitches(
         this IConfigurationBuilder config,
         string[] args)
     {
-        config.AddCommandLine(args, SwitchMappings);
-    }
-
-    public static IServiceCollection ConfigurePackagerCliOptions(
-        this IServiceCollection services,
-        IConfiguration configuration)
-    {
-        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<CqlToResourcePackagingOptions>)))
-            return services;
-
-        services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
-        services.AddSingleton<IValidateOptions<CSharpCodeWriterOptions>, CSharpCodeWriterOptions.Validator>();
-
-        services
-            .AddOptions<CqlToResourcePackagingOptions>()
-            .Configure<IConfiguration>(CqlToResourcePackagingOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<FhirResourceWriterOptions>()
-            .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<CSharpCodeWriterOptions>()
-            .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<AssemblyDataWriterOptions>()
-            .Configure<IConfiguration>(AssemblyDataWriterOptions.BindConfig)
-            .ValidateOnStart();
-
-        return services;
+        config.AddCommandLine(args, CommandLineSwitchMappings);
     }
 }
