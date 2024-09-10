@@ -29,7 +29,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static CqlToElmConverter DefaultConverter => CqlToElmServices.CqlToElmConverter;
 
-        internal static LibraryExpressionBuilder LibraryExpressionBuilder => CqlCodeGenerationServices.GetCqlCompilerServices().LibraryExpressionBuilder;
+        internal static LibraryExpressionBuilder LibraryExpressionBuilder => CqlCodeGenerationServices.GetCqlCompilerServices().LibraryExpressionBuilderScoped();
 
         internal static CSharpLibrarySetToStreamsWriter SourceCodeWriter => CqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
 

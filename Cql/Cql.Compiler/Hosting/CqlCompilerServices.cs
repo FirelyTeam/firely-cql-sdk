@@ -30,11 +30,11 @@ internal readonly struct CqlCompilerServices(IServiceProvider serviceProvider)
 
     public TupleBuilderCache TupleBuilderCacheScoped() => ServiceProvider.GetRequiredService<TupleBuilderCache>();
 
-    public LibrarySetExpressionBuilder LibrarySetExpressionBuilder => ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
+    public LibrarySetExpressionBuilder LibrarySetExpressionBuilderScoped() => ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 
-    public LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
+    public LibraryExpressionBuilder LibraryExpressionBuilderScoped() => ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
 
     public ExpressionBuilderSettings ExpressionBuilderSettings => ServiceProvider.GetRequiredService<ExpressionBuilderSettings>();
 
-    public ExpressionBuilder GetExpressionBuilderScoped() => ServiceProvider.GetRequiredService<ExpressionBuilder>();
+    public ExpressionBuilder ExpressionBuilderScoped() => ServiceProvider.GetRequiredService<ExpressionBuilder>();
 }
