@@ -25,10 +25,9 @@ namespace Hl7.Cql.Fhir
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            FhirModelBindingOptions? options = null,
-            TypeConverter? typeConverter = null) =>
+            FhirModelBindingOptions? options = null) =>
             new CqlContext(
-                new FhirModelBindingSetup(dataSource, valueSets, now, options, typeConverter).Operators,
+                new FhirModelBindingSetup(dataSource, valueSets, now, options).Operators,
                 parameters,
                 delegates);
 
@@ -40,14 +39,13 @@ namespace Hl7.Cql.Fhir
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            FhirModelBindingOptions? options = null,
-            TypeConverter? typeConverter = null)
+            FhirModelBindingOptions? options = null)
         {
             IDataSource source = bundle is not null ?
               new BundleDataSource(bundle, valueSets ?? new HashValueSetDictionary()) :
               new CompositeDataSource();
 
-            return WithDataSource(source, parameters, valueSets, now, delegates, options, typeConverter);
+            return WithDataSource(source, parameters, valueSets, now, delegates, options);
         }
 
         /// <summary>
@@ -58,10 +56,9 @@ namespace Hl7.Cql.Fhir
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            FhirModelBindingOptions? options = null,
-            TypeConverter? typeConverter = null)
+            FhirModelBindingOptions? options = null)
         {
-            return createContext(source, parameters, valueSets, now, delegates, options, typeConverter);
+            return createContext(source, parameters, valueSets, now, delegates, options);
         }
     }
 }

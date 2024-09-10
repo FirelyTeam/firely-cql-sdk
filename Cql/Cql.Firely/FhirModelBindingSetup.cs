@@ -33,17 +33,16 @@ namespace Hl7.Cql.Fhir
             IDataSource? dataSource,
             IValueSetDictionary? valuesets,
             DateTimeOffset? now,
-            FhirModelBindingOptions? options,
-            TypeConverter? typeConverter)
+            FhirModelBindingOptions? options)
         {
             _options = options ?? FhirModelBindingOptions.Default;
 
-            _typeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector, _options.LRUCacheSize);
+            FhirTypeConverter.InitializeCache(_options.LRUCacheSize);
 
             Comparers = new CqlComparers();
             Operators = CqlOperators.Create(
                     TypeResolver,
-                    _typeConverter,
+                    TypeConverter,
                     dataSource,
                     Comparers,
                     valuesets,
@@ -64,8 +63,6 @@ namespace Hl7.Cql.Fhir
         }
         
         private readonly FhirModelBindingOptions? _options;
-
-        private readonly TypeConverter _typeConverter;
 
         public override TypeResolver TypeResolver => FhirTypeResolver.Default;
 
