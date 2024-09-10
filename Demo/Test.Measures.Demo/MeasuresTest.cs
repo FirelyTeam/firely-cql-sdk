@@ -113,14 +113,14 @@ namespace Test
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             allLibs.LoadAssemblies(asmContext);
 
-            var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "_tupleTypeList-Binary.json"));
-            using var tupleFs = tupleTypes.OpenRead();
-            var binaries = new[]
-            {
-                tupleFs.ParseFhir<Binary>()
-            };
-
-            binaries.LoadAssemblies(asmContext);
+            // var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
+            // using var tupleFs = tupleTypes.OpenRead();
+            // var binaries = new[]
+            // {
+            //     tupleFs.ParseFhir<Binary>()
+            // };
+            //
+            // binaries.LoadAssemblies(asmContext);
             return asmContext;
         }
 
