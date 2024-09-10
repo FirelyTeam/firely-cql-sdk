@@ -1,36 +1,82 @@
 # PackagerCLI Diagrams
 The diagram is split into two, the first one showing the high-level dependencies for the application, and the second the detailed dependencies for expression building.
 
-### Cql Compiler Service Dependencies
+### CQL SDK Service Dependencies
 
 Remarks
 * Excl Logger and Options
-* Cyan dotted outline classes indicate scoped services
+* Cyan outline classes indicate scoped services
 * All others are singleton services
+* Classes are group by their respective projects
 
 ```mermaid
 classDiagram
     direction LR
 
-    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
+    namespace Compiler {
+        class LibrarySetExpressionBuilder { }    
+        class LibraryExpressionBuilder { }    
+        class ExpressionBuilder { }    
+        class ExpressionBuilderSettings { }    
+        class TupleBuilderCache { }
+        class CqlContextBinder { }
+        class CqlOperatorsBinder { }
+    }
 
-    class LibrarySetExpressionBuilder{ }
-    class LibraryExpressionBuilder { }        
-    class ExpressionBuilder { }
-    class TupleBuilderCache { } 
+    namespace CodeGeneration {
+        class CSharpCodeStreamPostProcessor { }
+        class WriteToFileCSharpCodeStreamPostProcessor { }
+        class StubCSharpCodeStreamPostProcessor { }
+        class AssemblyDataPostProcessor { }
+        class WriteToFileAssemblyDataPostProcessor { }
+        class StubAssemblyDataPostProcessor { }
+        class TypeToCSharpConverter { }
+        class CSharpLibrarySetToStreamsWriter { }
+        class AssemblyCompiler { }
+    }
 
-    %% Style Scoped services
-    style TupleBuilderCache stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
-    style LibrarySetExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
-    style LibraryExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
-    style ExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    namespace Packaging {
+        class FhirResourcePostProcessor { }
+        class WriteToFileFhirResourcePostProcessor { }
+        class StubFhirResourcePostProcessor { }
+        class CqlToResourcePackagingPipeline { }
+    }
+
+    namespace Abstraction {
+        class TypeResolver { }
+    }
+
+    namespace Runtime {
+        class BaseTypeResolver { }
+    }
+
+    namespace Fhir {
+        class FhirTypeResolver { }
+        class ModelInspector { }
+    }
+
+    namespace Conversion {
+        class TypeConverter { }
+    }
+
+    style LibrarySetExpressionBuilder stroke:#066,stroke-width:3px
+    style LibraryExpressionBuilder stroke:#066,stroke-width:3px
+    style ExpressionBuilder stroke:#066,stroke-width:3px
+    style TupleBuilderCache stroke:#066,stroke-width:3px
+    style CqlToResourcePackagingPipeline stroke:#066,stroke-width:3px
 
     %% Inheritance  
 
     BaseTypeResolver --> TypeResolver : inherits
     FhirTypeResolver --> BaseTypeResolver : inherits
+    WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
+    StubCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
+    WriteToFileAssemblyDataPostProcessor --> AssemblyDataPostProcessor : inherits
+    StubAssemblyDataPostProcessor --> AssemblyDataPostProcessor : inherits
+    WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
+    StubFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
-    %% Injected Dependencies
+   %% Dependencies
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
@@ -46,27 +92,6 @@ classDiagram
     TypeConverter ..> CqlOperatorsBinder : injected
 
     ModelInspector ..> TypeConverter : injected  
-```
-
-### Cql Code Generation Service Dependencies
-
-Remarks
-* Excl Logger and Options
-* Cyan dotted outline classes indicate scoped services
-* All others are singleton services
-
-```mermaid
-classDiagram
-    direction LR
-
-    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
-
-    %% Inheritance  
-
-    WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
-    WriteToFileAssemblyDataPostProcessor --> AssemblyDataPostProcessor : inherits
-
-    %% Injected Dependencies
 
     TypeToCSharpConverter ..> CSharpLibrarySetToStreamsWriter : injected
 
@@ -76,45 +101,11 @@ classDiagram
     TypeResolver ..> AssemblyCompiler : injected
     
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
-```
-
-### Cql Packager Service Dependencies
-
-Remarks
-* Excl Logger and Options
-* Cyan dotted outline classes indicate scoped services
-* All others are singleton services
-
-```mermaid
-classDiagram
-    direction LR
-
-    %% HACK: Mermaid doesnt support commas withing generic, so use a similar looking character (﹐)
-
-    class CqlToResourcePackagingPipeline { }
-    class PackagerCliProgram { }
-    class LibrarySetExpressionBuilder { }
-
-    %% Style Scoped services
-    style CqlToResourcePackagingPipeline stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
-    style PackagerCliProgram stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
-    style LibrarySetExpressionBuilder stroke:#066,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
-
-    %% Inheritance  
-
-    BaseTypeResolver --> TypeResolver : inherits
-    FhirTypeResolver --> BaseTypeResolver : inherits
-    WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
-
-    %% Injected Dependencies
 
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
     ResourcePackager ..> CqlToResourcePackagingPipeline : injected 
     LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
     
-    OptionsConsoleDumper ..> PackagerCliProgram : injected 
-    CqlToResourcePackagingPipeline ..> PackagerCliProgram : injected
-      
     TypeResolver ..> ResourcePackager : injected
     FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
 ```
