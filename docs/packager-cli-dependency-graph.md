@@ -10,14 +10,6 @@ Remarks
 * Classes are group by their respective projects
 
 ```mermaid
-%%{init: {
-    'theme': 'base', 
-    'themeVariables':{  
-      'primaryColor': '#222',
-      'primaryTextColor': '#fff',
-      'primaryBorderColor': 'gray',
-      'lineColor': '#888'
-}}}%%
 
 classDiagram
 
