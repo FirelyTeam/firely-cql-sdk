@@ -95,9 +95,9 @@ classDiagram
 
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
 
+    TypeResolver ..> ExpressionBuilder : injected
     CqlOperatorsBinder ..> ExpressionBuilder : injected
     TupleBuilderCache ..> ExpressionBuilder : injected
-    TypeResolver ..> ExpressionBuilder : injected
     CqlContextBinder ..> ExpressionBuilder : injected
     ExpressionBuilderSettings ..> ExpressionBuilder : injected
 
