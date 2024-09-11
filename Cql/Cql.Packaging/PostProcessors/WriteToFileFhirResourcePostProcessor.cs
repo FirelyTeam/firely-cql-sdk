@@ -30,7 +30,8 @@ internal class WriteToFileFhirResourcePostProcessor : FhirResourcePostProcessor
 
     public override void ProcessResource(Resource resource)
     {
-        var file = new FileInfo($"{Path.Combine(_fhirResourceWriterOptions.OutDirectory!.FullName, resource.Id)}.json");
+        var fileName = $"{Path.Combine(_fhirResourceWriterOptions.OutDirectory!.FullName, $"{resource.GetType().Name}-{resource.Id}")}.json";
+        var file = new FileInfo(fileName);
         _logger.LogInformation("Writing FHIR Resource file: '{file}'", file.FullName);
 
         if (resource is Library library
