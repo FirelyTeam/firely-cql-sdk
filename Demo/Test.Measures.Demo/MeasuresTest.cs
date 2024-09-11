@@ -112,15 +112,6 @@ namespace Test
             var allLibs = library.GetDependenciesAndSelf(dir);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             allLibs.LoadAssemblies(asmContext);
-
-            var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
-            using var tupleFs = tupleTypes.OpenRead();
-            var binaries = new[]
-            {
-                tupleFs.ParseFhir<Binary>()
-            };
-
-            binaries.LoadAssemblies(asmContext);
             return asmContext;
         }
 
@@ -160,7 +151,7 @@ namespace Test
 
             using var disposeContext = new DisposeContext();
             var cqlCodeGenerationServices = CqlServicesInitializer.CreateCqlCodeGenerationServices(disposeContext.Token);
-            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
             var assemblyData = cqlCodeGenerationServices.AssemblyCompiler.Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             foreach (var (_, asmData) in assemblyData)

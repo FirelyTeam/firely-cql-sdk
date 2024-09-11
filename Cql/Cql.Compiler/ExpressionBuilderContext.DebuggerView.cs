@@ -52,7 +52,7 @@ partial class ExpressionBuilderContext : IBuilderContext
 
     private readonly record struct ExpressionBuilderNode : IBuilderContext
     {
-        public ILibraryExpressionBuilderContext LibraryExpressionBuilder { get; init; }
+        public LibraryExpressionBuilderContext LibraryExpressionBuilder { get; init; }
         public IReadOnlyList<Elm.Element> ElementStackList { get; init; }
         public int ElementStackPosition { get; init; }
 

@@ -3411,7 +3411,7 @@ namespace CoreTests
             var librarySet = new LibrarySet();
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
-            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
             var writer = cqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
             var isDone = false;
             writer.ProcessDefinitions(

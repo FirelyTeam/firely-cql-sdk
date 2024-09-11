@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Packaging.Hosting;
 
-internal readonly struct CqlPackagerServices(IServiceProvider serviceProvider)
+internal readonly struct CqlPackagingServices(IServiceProvider serviceProvider)
 {
     public CqlCodeGenerationServices GetCqlCodeGenerationServices() => new(serviceProvider);
 
@@ -22,5 +22,5 @@ internal readonly struct CqlPackagerServices(IServiceProvider serviceProvider)
 
     public ResourcePackager ResourcePackager => serviceProvider.GetRequiredService<ResourcePackager>();
 
-    public CqlToResourcePackagingPipeline CqlToResourcePackagingPipeline => serviceProvider.GetRequiredService<CqlToResourcePackagingPipeline>();
+    public CqlToResourcePackagingPipeline CqlToResourcePackagingPipelineScoped() => serviceProvider.GetRequiredService<CqlToResourcePackagingPipeline>();
 }

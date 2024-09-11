@@ -28,11 +28,7 @@ public static class LibraryExpressionBuilderExtensions
         Elm.Expression expression)
     {
         DefinitionDictionary<LambdaExpression> lambdas = new DefinitionDictionary<LambdaExpression>();
-
-        var library = Library;
-        var libctx = new LibraryExpressionBuilderContext(libraryExpressionBuilder, library, lambdas);
-        Dictionary<string, ParameterExpression>? parameterExpressions = null;
-        var ctx = new ExpressionBuilderContext(libraryExpressionBuilder._expressionBuilder, libctx, parameterExpressions);
+        var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, lambdas);
         Expression translated = ctx.TranslateArg(expression);
         var contextParameter = CqlExpressions.ParameterExpression;
         LambdaExpression lambda = Expression.Lambda(translated, contextParameter);

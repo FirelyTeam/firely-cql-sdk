@@ -18,7 +18,7 @@ namespace CoreTests
             var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = cqlCompilerServices.LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -30,7 +30,7 @@ namespace CoreTests
             var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = cqlCompilerServices.LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -42,7 +42,7 @@ namespace CoreTests
             var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = cqlCompilerServices.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var definitions = cqlCompilerServices.LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -66,7 +66,7 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = cqlCompilerServices.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+            var definitions = cqlCompilerServices.LibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -77,7 +77,7 @@ namespace CoreTests
         {
             using var disposeContext = new DisposeContext();
             var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
-            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", cqlCompilerServices.TypeManager.Resolver)!;
+            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", cqlCompilerServices.TypeResolver)!;
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }

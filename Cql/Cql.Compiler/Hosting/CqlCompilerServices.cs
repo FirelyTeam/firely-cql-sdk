@@ -28,13 +28,13 @@ internal readonly struct CqlCompilerServices(IServiceProvider serviceProvider)
 
     public CqlContextBinder CqlContextBinder => ServiceProvider.GetRequiredService<CqlContextBinder>();
 
-    public TypeManager TypeManager => ServiceProvider.GetRequiredService<TypeManager>();
+    public TupleBuilderCache TupleBuilderCacheScoped() => ServiceProvider.GetRequiredService<TupleBuilderCache>();
 
-    public LibrarySetExpressionBuilder LibrarySetExpressionBuilder => ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
+    public LibrarySetExpressionBuilder LibrarySetExpressionBuilderScoped() => ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 
-    public LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
+    public LibraryExpressionBuilder LibraryExpressionBuilderScoped() => ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
 
     public ExpressionBuilderSettings ExpressionBuilderSettings => ServiceProvider.GetRequiredService<ExpressionBuilderSettings>();
 
-    public ExpressionBuilder ExpressionBuilder => ServiceProvider.GetRequiredService<ExpressionBuilder>();
+    public ExpressionBuilder ExpressionBuilderScoped() => ServiceProvider.GetRequiredService<ExpressionBuilder>();
 }
