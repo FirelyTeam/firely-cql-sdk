@@ -23,6 +23,10 @@ trigger:
     - develop-2.0*
     - release*
     - refs/tags/v*
+ paths:
+   exclude:
+   - **/docs
+   - **/*.md
 
 stages:
 - stage: build
