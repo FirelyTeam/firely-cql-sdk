@@ -4,6 +4,7 @@ using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using Hl7.Cql.CqlToElm.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -11,8 +12,8 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class InvocationBuilderTest : Base
     {
-        internal static InvocationBuilder InvocationBuilder => CqlToElmServices.InvocationBuilder;
-        internal static ElmFactory ElmFactory => CqlToElmServices.ElmFactory;
+        internal static InvocationBuilder InvocationBuilder => ServiceProvider.GetInvocationBuilder();
+        internal static ElmFactory ElmFactory => ServiceProvider.GetElmFactory();
 
 
         [ClassInitialize]

@@ -8,24 +8,23 @@
 
 using System;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
-using Hl7.Cql.Compiler.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CodeGeneration.NET.Hosting;
 
-internal readonly struct CqlCodeGenerationServices(IServiceProvider serviceProvider)
+internal static class CqlCodeGenerationServices
 {
-    public IServiceProvider ServiceProvider { get; } = serviceProvider;
+    public static TypeToCSharpConverter GetTypeToCSharpConverter(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<TypeToCSharpConverter>();
 
-    public CqlCompilerServices GetCqlCompilerServices() => new(ServiceProvider);
+    public static CSharpLibrarySetToStreamsWriter GetCSharpLibrarySetToStreamsWriter(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<CSharpLibrarySetToStreamsWriter>();
 
-    public TypeToCSharpConverter TypeToCSharpConverter => ServiceProvider.GetRequiredService<TypeToCSharpConverter>();
+    public static CSharpCodeStreamPostProcessor GetCSharpCodeStreamPostProcessor(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<CSharpCodeStreamPostProcessor>();
 
-    public CSharpLibrarySetToStreamsWriter CSharpLibrarySetToStreamsWriter => ServiceProvider.GetRequiredService<CSharpLibrarySetToStreamsWriter>();
+    public static AssemblyDataPostProcessor GetAssemblyDataPostProcessor(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<AssemblyDataPostProcessor>();
 
-    public CSharpCodeStreamPostProcessor CSharpCodeStreamPostProcessor => ServiceProvider.GetRequiredService<CSharpCodeStreamPostProcessor>();
-
-    public AssemblyDataPostProcessor AssemblyDataPostProcessor => ServiceProvider.GetRequiredService<AssemblyDataPostProcessor>();
-
-    public AssemblyCompiler AssemblyCompiler => ServiceProvider.GetRequiredService<AssemblyCompiler>();
+    public static AssemblyCompiler GetAssemblyCompiler(this IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<AssemblyCompiler>();
 }

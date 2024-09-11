@@ -6,21 +6,22 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET.Hosting;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Packaging.Hosting;
 
-internal readonly struct CqlPackagingServices(IServiceProvider serviceProvider)
+internal static class CqlPackagingServices
 {
-    public CqlCodeGenerationServices GetCqlCodeGenerationServices() => new(serviceProvider);
+    public static CqlTypeToFhirTypeMapper GetCqlTypeToFhirTypeMapper(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<CqlTypeToFhirTypeMapper>();
 
-    public CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper => serviceProvider.GetRequiredService<CqlTypeToFhirTypeMapper>();
+    public static FhirResourcePostProcessor GetFhirResourcePostProcessor(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<FhirResourcePostProcessor>();
 
-    public FhirResourcePostProcessor FhirResourcePostProcessor => serviceProvider.GetRequiredService<FhirResourcePostProcessor>();
+    public static ResourcePackager GetResourcePackager(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<ResourcePackager>();
 
-    public ResourcePackager ResourcePackager => serviceProvider.GetRequiredService<ResourcePackager>();
-
-    public CqlToResourcePackagingPipeline CqlToResourcePackagingPipelineScoped() => serviceProvider.GetRequiredService<CqlToResourcePackagingPipeline>();
+    public static CqlToResourcePackagingPipeline CqlToResourcePackagingPipelineScoped(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<CqlToResourcePackagingPipeline>();
 }

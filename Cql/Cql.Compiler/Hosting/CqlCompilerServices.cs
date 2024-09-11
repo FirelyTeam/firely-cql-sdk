@@ -14,27 +14,32 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Compiler.Hosting;
 
-internal readonly struct CqlCompilerServices(IServiceProvider serviceProvider)
+internal static class CqlCompilerServices
 {
-    public IServiceProvider ServiceProvider { get; } = serviceProvider;
+    public static ModelInspector GetModelInspector(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<ModelInspector>();
 
-    public ModelInspector ModelInspector => ServiceProvider.GetRequiredService<ModelInspector>();
+    public static TypeConverter GetTypeConverter(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<TypeConverter>();
 
-    public TypeConverter TypeConverter => ServiceProvider.GetRequiredService<TypeConverter>();
+    public static TypeResolver GetTypeResolver(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<TypeResolver>();
 
-    public TypeResolver TypeResolver => ServiceProvider.GetRequiredService<TypeResolver>();
+    public static CqlOperatorsBinder GetCqlOperatorsBinder(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<CqlOperatorsBinder>();
 
-    public CqlOperatorsBinder CqlOperatorsBinder => ServiceProvider.GetRequiredService<CqlOperatorsBinder>();
+    public static CqlContextBinder GetCqlContextBinder(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<CqlContextBinder>();
 
-    public CqlContextBinder CqlContextBinder => ServiceProvider.GetRequiredService<CqlContextBinder>();
+    public static TupleBuilderCache GetTupleBuilderCacheScoped(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<TupleBuilderCache>();
 
-    public TupleBuilderCache TupleBuilderCacheScoped() => ServiceProvider.GetRequiredService<TupleBuilderCache>();
+    public static LibrarySetExpressionBuilder GetLibrarySetExpressionBuilderScoped(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 
-    public LibrarySetExpressionBuilder LibrarySetExpressionBuilderScoped() => ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
+    public static LibraryExpressionBuilder GetLibraryExpressionBuilderScoped(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<LibraryExpressionBuilder>();
 
-    public LibraryExpressionBuilder LibraryExpressionBuilderScoped() => ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
-
-    public ExpressionBuilderSettings ExpressionBuilderSettings => ServiceProvider.GetRequiredService<ExpressionBuilderSettings>();
-
-    public ExpressionBuilder ExpressionBuilderScoped() => ServiceProvider.GetRequiredService<ExpressionBuilder>();
+    public static ExpressionBuilder GetExpressionBuilderScoped(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<ExpressionBuilder>();
 }

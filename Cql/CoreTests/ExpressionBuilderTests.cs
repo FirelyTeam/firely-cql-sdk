@@ -5,20 +5,26 @@ using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreTests
 {
     [TestClass]
     public class LibraryExpressionBuilderTests
     {
+        private static ServiceProvider BuildServiceProvider() =>
+            new ServiceCollection()
+                .AddDebugLogging()
+                .AddCqlCompilerServices()
+                .BuildServiceProvider(validateScopes: true);
+
         [TestMethod]
         public void AggregateQueries_1_0_0()
         {
-            using var disposeContext = new DisposeContext();
-            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
+            using var serviceProvider = BuildServiceProvider();
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = cqlCompilerServices.LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var definitions = serviceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -26,11 +32,10 @@ namespace CoreTests
         [TestMethod]
         public void FHIRConversionTest_1_0_0()
         {
-            using var disposeContext = new DisposeContext();
-            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
+            using var serviceProvider = BuildServiceProvider();
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = cqlCompilerServices.LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var definitions = serviceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -38,11 +43,10 @@ namespace CoreTests
         [TestMethod]
         public void QueriesTest_1_0_0()
         {
-            using var disposeContext = new DisposeContext();
-            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
+            using var serviceProvider = BuildServiceProvider();
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = cqlCompilerServices.LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var definitions = serviceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -51,8 +55,7 @@ namespace CoreTests
         [TestMethod]
         public void Medication_Request_Example_Test()
         {
-            using var disposeContext = new DisposeContext();
-            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
+            using var serviceProvider = BuildServiceProvider();
             FileInfo[] files =
             [
                 new(@"Input\ELM\Test\Medication_Request_Example.json"),
@@ -66,21 +69,9 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = cqlCompilerServices.LibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
+            var definitions = serviceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
-
-
-        [TestMethod]
-        public void Get_Property_Uses_TypeResolver()
-        {
-            using var disposeContext = new DisposeContext();
-            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
-            var property = ExpressionBuilder.GetProperty(typeof(MeasureReport.PopulationComponent), "id", cqlCompilerServices.TypeResolver)!;
-            Assert.AreEqual(typeof(Element), property.DeclaringType);
-            Assert.AreEqual(nameof(Element.ElementId), property.Name);
-        }
-
     }
 }

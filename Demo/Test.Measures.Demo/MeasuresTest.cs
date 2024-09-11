@@ -9,6 +9,9 @@ using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using CLI.Helpers;
+using Hl7.Cql.CodeGeneration.NET.Hosting;
+using Hl7.Cql.Compiler.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Test.Deck;
 
 namespace Test
@@ -149,10 +152,10 @@ namespace Test
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            using var disposeContext = new DisposeContext();
-            var cqlCodeGenerationServices = CqlServicesInitializer.CreateCqlCodeGenerationServices(disposeContext.Token);
-            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
-            var assemblyData = cqlCodeGenerationServices.AssemblyCompiler.Compile(librarySet, definitions);
+            using var serviceProvider = ServiceCollectionExtensions.CreateCqlCodeGenerationServices();
+            using var serviceScope = serviceProvider.CreateScope();
+            var definitions = serviceScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
+            var assemblyData = serviceProvider.GetAssemblyCompiler().Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             foreach (var (_, asmData) in assemblyData)
             {

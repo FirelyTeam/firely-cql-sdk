@@ -414,7 +414,7 @@ partial class ExpressionBuilderContext(
                      .SelectToArray(element =>
                      {
                          var value = TranslateArg(element.value!);
-                         var propInfo = ExpressionBuilder.GetProperty(tupleType, NormalizeIdentifier(element.name!), _typeResolver)
+                         var propInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!), _typeResolver)
                                         ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {tupleType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                          var binding = Binding(value, propInfo);
                          return binding;
@@ -643,7 +643,7 @@ partial class ExpressionBuilderContext(
                 var tuple = tuples[i];
                 var element = tuple.Item1;
                 var expression = tuple.Item2;
-                var memberInfo = ExpressionBuilder.GetProperty(instanceType, element, _typeResolver) ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {instanceType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                var memberInfo = GetProperty(instanceType, element, _typeResolver) ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {instanceType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                 var binding = Binding(expression, memberInfo);
                 elementBindings[i] = binding;
             }
@@ -653,6 +653,26 @@ partial class ExpressionBuilderContext(
             return init;
         }
     }
+
+    internal static PropertyInfo? GetProperty(Type type, string name, TypeResolver typeResolver)
+    {
+        if (type.IsGenericType)
+        {
+            var gtd = type.GetGenericTypeDefinition();
+            if (gtd == typeof(Nullable<>))
+            {
+                if (string.Equals(name, "value", StringComparison.OrdinalIgnoreCase))
+                {
+                    var valueMember = type.GetProperty("Value");
+                    return valueMember;
+                }
+            }
+        }
+
+        var member = typeResolver.GetProperty(type, name);
+        return member;
+    }
+
 
     protected MemberAssignment Binding(Expression value, MemberInfo memberInfo)
     {

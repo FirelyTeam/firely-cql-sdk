@@ -16,22 +16,25 @@ namespace Hl7.Cql.CqlToElm.Hosting;
 internal readonly struct CqlToElmServices(IServiceProvider serviceProvider)
 {
     public IServiceProvider ServiceProvider { get; } = serviceProvider;
+}
 
-    public CqlToElmConverter CqlToElmConverter => ServiceProvider.GetRequiredService<CqlToElmConverter>();
+internal static class CqlToElmServicesX
+{
+    public static CqlToElmConverter GetCqlToElmConverter(this IServiceProvider sp) => sp.GetRequiredService<CqlToElmConverter>();
 
-    public CoercionProvider CoercionProvider => ServiceProvider.GetRequiredService<CoercionProvider>();
+    public static CoercionProvider GetCoercionProvider(this IServiceProvider sp) => sp.GetRequiredService<CoercionProvider>();
 
-    public ElmFactory ElmFactory => ServiceProvider.GetRequiredService<ElmFactory>();
+    public static ElmFactory GetElmFactory(this IServiceProvider sp) => sp.GetRequiredService<ElmFactory>();
 
-    public SystemLibrary SystemLibrary => ServiceProvider.GetRequiredService<SystemLibrary>();
+    public static SystemLibrary GetSystemLibrary(this IServiceProvider sp) => sp.GetRequiredService<SystemLibrary>();
 
-    public StreamInspector StreamInspector => ServiceProvider.GetRequiredService<StreamInspector>();
+    public static StreamInspector GetStreamInspector(this IServiceProvider sp) => sp.GetRequiredService<StreamInspector>();
 
-    public InvocationBuilder InvocationBuilder => ServiceProvider.GetRequiredService<InvocationBuilder>();
+    public static InvocationBuilder GetInvocationBuilder(this IServiceProvider sp) => sp.GetRequiredService<InvocationBuilder>();
 
-    public LocalIdentifierProvider LocalIdentifierProvider() => ServiceProvider.GetRequiredService<LocalIdentifierProvider>();
+    public static LocalIdentifierProvider GetLocalIdentifierProvider(this IServiceProvider sp) => sp.GetRequiredService<LocalIdentifierProvider>();
 
-    public MessageProvider MessageProvider => ServiceProvider.GetRequiredService<MessageProvider>();
+    public static MessageProvider GetMessageProvider(this IServiceProvider sp) => sp.GetRequiredService<MessageProvider>();
 
-    public IModelProvider ModelProvider => ServiceProvider.GetRequiredService<IModelProvider>();
+    public static IModelProvider GetModelProvider(this IServiceProvider sp) => sp.GetRequiredService<IModelProvider>();
 }

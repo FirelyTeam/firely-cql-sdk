@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler.Hosting;
 using Hl7.Cql.Runtime.Hosting;
@@ -17,9 +16,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Hosting;
 
 internal static class CqlCodeGenerationServicesInitializer
 {
-    internal static CqlCodeGenerationServices GetCqlCodeGenerationServices(this IServiceProvider serviceProvider) =>
-        new CqlCodeGenerationServices(serviceProvider);
-
     public static IServiceCollection AddCqlCodeGenerationServices(this IServiceCollection services)
     {
         services.AddCqlCompilerServices();
