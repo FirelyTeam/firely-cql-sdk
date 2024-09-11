@@ -1,5 +1,7 @@
 # Getting started with the Firely SDK CQL repository
 
+Temporary change--will remove later
+
 The repository consists of two parts:
 * `Cql/` - the main body of code that produces the CQL engine itself, plus the PackagerCLI
 * `docs/` - documentation and other files that are useful to understand the codebase
