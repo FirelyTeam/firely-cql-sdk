@@ -16,7 +16,7 @@ Remarks
       'primaryColor': '#222',
       'primaryTextColor': '#fff',
       'primaryBorderColor': 'gray',
-      'lineColor': 'white'
+      'lineColor': '#888'
 }}}%%
 
 classDiagram
@@ -72,11 +72,11 @@ classDiagram
 
     %% Style Scoped Types as Cyan
 
-    style LibrarySetExpressionBuilder fill:#033
-    style LibraryExpressionBuilder fill:#033
-    style ExpressionBuilder fill:#033
-    style TupleBuilderCache fill:#033
-    style CqlToResourcePackagingPipeline fill:#033
+    style LibrarySetExpressionBuilder fill:#055
+    style LibraryExpressionBuilder fill:#055
+    style ExpressionBuilder fill:#055
+    style TupleBuilderCache fill:#055
+    style CqlToResourcePackagingPipeline fill:#055
 
     %% Inheritance  
 
