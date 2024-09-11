@@ -5,12 +5,22 @@ The diagram is split into two, the first one showing the high-level dependencies
 
 Remarks
 * Excl Logger and Options
-* Cyan outline classes indicate scoped services
+* Cyan classes indicate scoped services
 * All others are singleton services
 * Classes are group by their respective projects
 
 ```mermaid
+%%{init: {
+    'theme': 'base', 
+    'themeVariables':{  
+      'primaryColor': '#222',
+      'primaryTextColor': '#fff',
+      'primaryBorderColor': 'gray',
+      'lineColor': 'white'
+}}}%%
+
 classDiagram
+
     direction LR
 
     namespace Compiler {
@@ -60,11 +70,13 @@ classDiagram
         class TypeConverter { }
     }
 
-    style LibrarySetExpressionBuilder stroke:#066,stroke-width:3px
-    style LibraryExpressionBuilder stroke:#066,stroke-width:3px
-    style ExpressionBuilder stroke:#066,stroke-width:3px
-    style TupleBuilderCache stroke:#066,stroke-width:3px
-    style CqlToResourcePackagingPipeline stroke:#066,stroke-width:3px
+    %% Style Scoped Types as Cyan
+
+    style LibrarySetExpressionBuilder fill:#033
+    style LibraryExpressionBuilder fill:#033
+    style ExpressionBuilder fill:#033
+    style TupleBuilderCache fill:#033
+    style CqlToResourcePackagingPipeline fill:#033
 
     %% Inheritance  
 
@@ -77,7 +89,7 @@ classDiagram
     WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
     StubFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
-   %% Dependencies
+    %% Dependencies
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
@@ -100,15 +112,13 @@ classDiagram
     CSharpCodeStreamPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpLibrarySetToStreamsWriter ..> AssemblyCompiler : injected
     TypeResolver ..> AssemblyCompiler : injected
-    
+
     TypeResolver ..> CSharpLibrarySetToStreamsWriter : injected
 
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
     ResourcePackager ..> CqlToResourcePackagingPipeline : injected 
     LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
-    
+
     TypeResolver ..> ResourcePackager : injected
     FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
 ```
-
-
