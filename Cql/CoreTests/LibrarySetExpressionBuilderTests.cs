@@ -17,11 +17,11 @@ public class LibrarySetExpressionBuilderTests
                               .AddDebugLogging()
                               .AddCqlCompilerServices()
                               .BuildServiceProvider(validateScopes: true);
-
+        using var servicesScope = serviceProvider.CreateScope();
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");
 
-        var definitionDictionary = serviceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
+        var definitionDictionary = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
         var lambdaExpression = definitionDictionary["CumulativeMedicationDuration-4.0.000", "Every eight hours (qualifier value)"];
         Assert.IsNotNull(lambdaExpression);
 
