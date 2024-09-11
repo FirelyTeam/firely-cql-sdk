@@ -7,37 +7,55 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CqlToElm.Services;
 
 internal static class CqlToElmServicesInitializer
 {
-    public static IConfigurationBuilder WithDefaultOptions(this IConfigurationBuilder builder) =>
-        builder.WithCqlToElmOptions(options => { });
-
-    public static IConfigurationBuilder WithCqlToElmOptions(
-        this IConfigurationBuilder builder,
-        Action<CqlToElmOptions> options)
+    // public static IConfigurationBuilder WithCqlToElmOptions(
+    //     this IConfigurationBuilder builder,
+    //     Action<CqlToElmOptions> options)
+    // {
+    //     var opt = new CqlToElmOptions();
+    //     options(opt);
+    //     var props = typeof(CqlToElmOptions).GetProperties();
+    //     var kvps = new KeyValuePair<string, string?>[props.Length];
+    //     for (int i = 0; i < props.Length; i++)
+    //     {
+    //         var prop = props[i];
+    //         kvps[i] = KeyValuePair.Create(prop.Name, prop.GetValue(opt)?.ToString());
+    //     }
+    //
+    //     builder.AddInMemoryCollection(kvps);
+    //     return builder;
+    // }
+    //
+    // public static IServiceCollection AddCqlToElmConfiguration(
+    //     this IServiceCollection services,
+    //     Action<IConfigurationBuilder> builder)
+    // {
+    //     var cb = new ConfigurationBuilder();
+    //     builder(cb);
+    //     var config = cb.Build();
+    //     services.AddSingleton<IConfiguration>(config);
+    //     var options = new CqlToElmOptions();
+    //     config.Bind(options);
+    //     var wrapper = new OptionsWrapper<CqlToElmOptions>(options);
+    //     services.AddSingleton<IOptions<CqlToElmOptions>>(wrapper);
+    //     return services;
+    // }
+    public static IServiceCollection AddCqlToElmOptions(
+        this IServiceCollection services,
+        Action<CqlToElmOptions>? configureOptions)
     {
-        var opt = new CqlToElmOptions();
-        options(opt);
-        var props = typeof(CqlToElmOptions).GetProperties();
-        var kvps = new KeyValuePair<string, string?>[props.Length];
-        for (int i = 0; i < props.Length; i++)
-        {
-            var prop = props[i];
-            kvps[i] = KeyValuePair.Create(prop.Name, prop.GetValue(opt)?.ToString());
-        }
-
-        builder.AddInMemoryCollection(kvps);
-        return builder;
+        services.AddOptions<CqlToElmOptions>()
+                .Configure(configureOptions ?? (_ => { }))
+                .ValidateOnStart();
+        return services;
     }
 
     public static IServiceCollection AddCqlToElmModels(
@@ -51,21 +69,6 @@ internal static class CqlToElmServicesInitializer
             return provider;
         });
 
-        return services;
-    }
-
-    public static IServiceCollection AddCqlToElmConfiguration(
-        this IServiceCollection services,
-        Action<IConfigurationBuilder> builder)
-    {
-        var cb = new ConfigurationBuilder();
-        builder(cb);
-        var config = cb.Build();
-        services.AddSingleton<IConfiguration>(config);
-        var options = new CqlToElmOptions();
-        config.Bind(options);
-        var wrapper = new OptionsWrapper<CqlToElmOptions>(options);
-        services.AddSingleton<IOptions<CqlToElmOptions>>(wrapper);
         return services;
     }
 
