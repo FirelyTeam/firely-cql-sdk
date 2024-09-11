@@ -9,6 +9,8 @@ using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using CLI.Helpers;
+using Hl7.Cql.CodeGeneration.NET.Services;
+using Hl7.Cql.Compiler.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Deck;
 
@@ -150,7 +152,10 @@ namespace Test
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            using var serviceProvider = ServiceCollectionExtensions.CreateCqlCodeGenerationServices();
+            using var serviceProvider = new ServiceCollection()
+                                        .AddDebugLogging()
+                                        .AddCqlCodeGenerationServices()
+                                        .BuildServiceProvider(validateScopes: true);
             using var serviceScope = serviceProvider.CreateScope();
             var definitions = serviceScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
             var assemblyData = serviceProvider.GetAssemblyCompiler().Compile(librarySet, definitions);
