@@ -16,6 +16,12 @@ namespace Hl7.Cql.CqlToElm.Services;
 
 internal static class CqlToElmServicesInitializer
 {
+    // For unit testing, there is no need to create the options, then put it into an in-memory collection, only to bind it to a new options object.
+    // We can just create the options object directly and pass it to the configureOptions action in the AddCqlToElmOptions method.
+    //
+    // The commented code below is the original implementation of the AddCqlToElmOptions method.
+    // There are some useful things that might be useful for the future.
+    //
     // public static IConfigurationBuilder WithCqlToElmOptions(
     //     this IConfigurationBuilder builder,
     //     Action<CqlToElmOptions> options)
@@ -48,6 +54,7 @@ internal static class CqlToElmServicesInitializer
     //     services.AddSingleton<IOptions<CqlToElmOptions>>(wrapper);
     //     return services;
     // }
+
     public static IServiceCollection AddCqlToElmOptions(
         this IServiceCollection services,
         Action<CqlToElmOptions>? configureOptions)

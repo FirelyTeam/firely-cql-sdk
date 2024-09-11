@@ -39,7 +39,6 @@ namespace Hl7.Cql.CqlToElm.Test
             new ServiceCollection()
                 .AddCqlToElmServices()
                 .AddCqlToElmModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
-                //.AddCqlToElmConfiguration(cb => cb.WithCqlToElmOptions(options ?? (o => { })))
                 .AddCqlToElmOptions(options)
                 .AddCqlToElmMessaging()
                 .AddLogging(builder => builder.AddConsole())
