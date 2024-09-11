@@ -29,22 +29,24 @@ namespace Hl7.Cql.Fhir
         /// </summary>
         public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
 
-        static LRUCache<CqlDateTime>? dateTimes;
+        private static LRUCache<CqlDateTime>? dateTimes = null;
 
+        /// <summary>
+        /// Sets up the cache size for the LRU cache
+        /// </summary>
+        /// <param name="cacheSize">the size of the LRU cache</param>
+        public static void InitializeCache(int cacheSize)
+        {
+            if (dateTimes == null)
+                dateTimes = new LRUCache<CqlDateTime>(cacheSize);
+        }
         /// <summary>
         /// Allows for the creation of a converter with the specified model 
         /// </summary>
         /// <param name="model">the model</param>
-        /// <param name="cacheSize">the size of the LRU cache</param>
         /// <returns>the type converter</returns>
-        public static TypeConverter Create(ModelInspector model, int? cacheSize = null)
+        public static TypeConverter Create(ModelInspector model)
         {
-            var lruCacheSize = cacheSize ?? 0;  
-            if (lruCacheSize > 0 && dateTimes is null)
-            {
-                dateTimes = new LRUCache<CqlDateTime>(lruCacheSize);
-            }
-
             return TypeConverter
                 .Create()
                 .ConvertSystemTypes()

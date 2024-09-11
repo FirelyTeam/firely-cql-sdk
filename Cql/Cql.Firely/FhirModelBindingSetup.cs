@@ -37,10 +37,12 @@ namespace Hl7.Cql.Fhir
         {
             _options = options ?? FhirModelBindingOptions.Default;
 
+            FhirTypeConverter.InitializeCache(_options.LRUCacheSize);
+
             Comparers = new CqlComparers();
             Operators = CqlOperators.Create(
                     TypeResolver,
-                    FhirTypeConverter.Create(ModelInfo.ModelInspector, _options.LRUCacheSize),
+                    TypeConverter,
                     dataSource,
                     Comparers,
                     valuesets,
@@ -48,7 +50,7 @@ namespace Hl7.Cql.Fhir
                     now is not null ?
                         new DateTimeIso8601(now.Value, DateTimePrecision.Millisecond) : null,
                     FhirEnumComparer.Default);
-
+            
             Comparers
                 .AddIntervalComparisons(Operators)
                 .AddFhirComparers();

@@ -31,12 +31,14 @@ namespace Hl7.Cql.Packaging
     {
         internal LibraryPackager()
         {
-            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
+            FhirTypeConverter.InitializeCache(0);
+            TypeConverter = FhirTypeConverter.Default;
         }
 
         internal LibraryPackager(TypeConverter? typeConverter)
         {
-            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
+            FhirTypeConverter.InitializeCache(0);
+            TypeConverter = typeConverter ?? FhirTypeConverter.Default;
         }
 
         public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
@@ -115,7 +117,8 @@ namespace Hl7.Cql.Packaging
                 .ToArray();
 
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
+            FhirTypeConverter.InitializeCache(cacheSize);
+            var typeConverter = FhirTypeConverter.Default;
             var typeManager = new TypeManager(typeResolver);
             var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
