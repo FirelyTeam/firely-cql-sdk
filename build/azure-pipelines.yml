@@ -25,8 +25,8 @@ trigger:
     - refs/tags/v*
   paths:
     exclude:
-    - **/docs
-    - **/*.md
+    - /**/docs
+    - /**/*.md
 
 stages:
 - stage: build
