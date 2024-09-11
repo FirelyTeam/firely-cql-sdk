@@ -24,8 +24,14 @@ trigger:
     - release*
     - refs/tags/v*
   paths:
+    include:
+    - build/
+    - LibrarySets/
+    - Cql/
+    - Demo/
+    - submodules/
     exclude:
-    - /**/docs
+    - /**/docs/
     - /**/*.md
 
 stages:
