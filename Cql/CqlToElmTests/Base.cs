@@ -12,9 +12,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Hl7.Cql.CodeGeneration.NET.Hosting;
-using Hl7.Cql.Compiler.Hosting;
-using Hl7.Cql.CqlToElm.Hosting;
+using Hl7.Cql.CodeGeneration.NET.Services;
+using Hl7.Cql.Compiler.Services;
+using Hl7.Cql.CqlToElm.Services;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -32,14 +32,15 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static MessageProvider Messaging => ServiceProvider.GetMessageProvider();
 
-        protected static IServiceCollection ServiceCollection(Action<CqlToElmOptions>? options = null,
+        protected static IServiceCollection ServiceCollection(
+            Action<CqlToElmOptions>? options = null,
             Action<IModelProvider>? models = null,
             Type? libraryProviderType = null) =>
             new ServiceCollection()
-                .AddSystem()
-                .AddModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
-                .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
-                .AddMessaging()
+                .AddCqlToElmServices()
+                .AddCqlToElmModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
+                .AddCqlToElmConfiguration(cb => cb.WithCqlToElmOptions(options ?? (o => { })))
+                .AddCqlToElmMessaging()
                 .AddLogging(builder => builder.AddConsole())
                 .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider))
                 .AddCqlCodeGenerationServices();

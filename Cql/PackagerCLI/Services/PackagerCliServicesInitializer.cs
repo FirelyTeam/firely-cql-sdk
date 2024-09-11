@@ -6,11 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Packaging.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Hl7.Cql.Packaging.Hosting;
 
-namespace Hl7.Cql.Packager.Hosting;
+namespace Hl7.Cql.Packager.Services;
 
 internal static class PackagerCliServicesInitializer
 {

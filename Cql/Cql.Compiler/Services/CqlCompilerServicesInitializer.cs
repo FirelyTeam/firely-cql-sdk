@@ -14,7 +14,7 @@ using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Hl7.Cql.Compiler.Hosting;
+namespace Hl7.Cql.Compiler.Services;
 
 internal static class CqlCompilerServicesInitializer
 {

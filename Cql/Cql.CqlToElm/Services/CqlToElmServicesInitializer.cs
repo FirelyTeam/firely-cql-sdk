@@ -15,18 +15,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Hl7.Cql.CqlToElm.Hosting;
+namespace Hl7.Cql.CqlToElm.Services;
 
 internal static class CqlToElmServicesInitializer
 {
-    public static CqlToElmServices GetCqlToElmServices(this IServiceProvider serviceProvider) =>
-        new CqlToElmServices(serviceProvider);
-
     public static IConfigurationBuilder WithDefaultOptions(this IConfigurationBuilder builder) =>
-        builder.WithOptions(options => { });
+        builder.WithCqlToElmOptions(options => { });
 
-    public static IConfigurationBuilder WithOptions(this IConfigurationBuilder builder,
-                                                    Action<CqlToElmOptions> options)
+    public static IConfigurationBuilder WithCqlToElmOptions(
+        this IConfigurationBuilder builder,
+        Action<CqlToElmOptions> options)
     {
         var opt = new CqlToElmOptions();
         options(opt);
@@ -37,12 +35,14 @@ internal static class CqlToElmServicesInitializer
             var prop = props[i];
             kvps[i] = KeyValuePair.Create(prop.Name, prop.GetValue(opt)?.ToString());
         }
+
         builder.AddInMemoryCollection(kvps);
         return builder;
     }
 
-    public static IServiceCollection AddModels(this IServiceCollection services,
-                                               Action<IModelProvider> builder)
+    public static IServiceCollection AddCqlToElmModels(
+        this IServiceCollection services,
+        Action<IModelProvider> builder)
     {
         services.AddSingleton<IModelProvider>(isp =>
         {
@@ -54,8 +54,9 @@ internal static class CqlToElmServicesInitializer
         return services;
     }
 
-    public static IServiceCollection AddConfiguration(this IServiceCollection services,
-                                                      Action<IConfigurationBuilder> builder)
+    public static IServiceCollection AddCqlToElmConfiguration(
+        this IServiceCollection services,
+        Action<IConfigurationBuilder> builder)
     {
         var cb = new ConfigurationBuilder();
         builder(cb);
@@ -68,7 +69,7 @@ internal static class CqlToElmServicesInitializer
         return services;
     }
 
-    public static IServiceCollection AddSystem(this IServiceCollection services) =>
+    public static IServiceCollection AddCqlToElmServices(this IServiceCollection services) =>
         services
             .AddSingleton<CqlToElmConverter>()
             .AddSingleton<CoercionProvider>()
@@ -78,6 +79,8 @@ internal static class CqlToElmServicesInitializer
             .AddSingleton<InvocationBuilder>()
             .AddTransient<LocalIdentifierProvider>();
 
-    public static IServiceCollection AddMessaging(this IServiceCollection services, CultureInfo? culture = null) =>
-        services.AddSingleton(new MessageProvider(culture ?? CultureInfo.InvariantCulture));
+    public static IServiceCollection AddCqlToElmMessaging(
+        this IServiceCollection services,
+        CultureInfo? culture = null) =>
+        services.AddSingleton(_ => new MessageProvider(culture ?? CultureInfo.InvariantCulture));
 }

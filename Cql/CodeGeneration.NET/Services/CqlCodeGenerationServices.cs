@@ -10,7 +10,7 @@ using System;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.CodeGeneration.NET.Hosting;
+namespace Hl7.Cql.CodeGeneration.NET.Services;
 
 internal static class CqlCodeGenerationServices
 {

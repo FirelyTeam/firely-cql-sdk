@@ -11,14 +11,9 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.CqlToElm.Hosting;
+namespace Hl7.Cql.CqlToElm.Services;
 
-internal readonly struct CqlToElmServices(IServiceProvider serviceProvider)
-{
-    public IServiceProvider ServiceProvider { get; } = serviceProvider;
-}
-
-internal static class CqlToElmServicesX
+internal static class CqlToElmServices
 {
     public static CqlToElmConverter GetCqlToElmConverter(this IServiceProvider sp) => sp.GetRequiredService<CqlToElmConverter>();
 
@@ -32,7 +27,7 @@ internal static class CqlToElmServicesX
 
     public static InvocationBuilder GetInvocationBuilder(this IServiceProvider sp) => sp.GetRequiredService<InvocationBuilder>();
 
-    public static LocalIdentifierProvider GetLocalIdentifierProvider(this IServiceProvider sp) => sp.GetRequiredService<LocalIdentifierProvider>();
+    public static LocalIdentifierProvider GetLocalIdentifierProviderTransient(this IServiceProvider sp) => sp.GetRequiredService<LocalIdentifierProvider>();
 
     public static MessageProvider GetMessageProvider(this IServiceProvider sp) => sp.GetRequiredService<MessageProvider>();
 

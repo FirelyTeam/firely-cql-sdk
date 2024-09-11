@@ -7,13 +7,13 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.CodeGeneration.NET.Hosting;
+using Hl7.Cql.CodeGeneration.NET.Services;
 using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Hl7.Cql.Packaging.Hosting;
+namespace Hl7.Cql.Packaging.Services;
 
 internal static class CqlPackagingServicesInitializer
 {

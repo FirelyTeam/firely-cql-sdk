@@ -11,7 +11,7 @@ using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Configuration;
 
-namespace Hl7.Cql.Packager.Hosting;
+namespace Hl7.Cql.Packager.Services;
 
 internal static class PackagerCliCommandLineSwitchInitializer
 {

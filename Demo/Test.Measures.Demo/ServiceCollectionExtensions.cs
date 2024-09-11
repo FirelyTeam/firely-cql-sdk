@@ -1,7 +1,5 @@
 using System;
 using System.Threading;
-using Hl7.Cql.CodeGeneration.NET.Hosting;
-using Hl7.Cql.Compiler.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
