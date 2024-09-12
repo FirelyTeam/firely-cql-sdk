@@ -1,0 +1,228 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "3.1.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "RR23",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "locator" : "8:1-8:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "publisher",
+                  "value" : "MOH Alpha"
+               }, {
+                  "name" : "description",
+                  "value" : "Library used to validate guidance related to Roadrunners Syndrome"
+               } ]
+            } ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "locator" : "9:1-9:35",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.0.1"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "locator" : "23:1-23:73",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "parameter",
+                  "value" : "in"
+               } ]
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "default" : {
+               "locator" : "23:40-23:73",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "low" : {
+                  "locator" : "23:49-23:59",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2023",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "locator" : "23:62-23:72",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2023",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "31",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "locator" : "11:1-11:68",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "ACME Product Catalog",
+            "id" : "http://acme.org/product-catalog",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "12:1-12:107",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "ConditionVerificationStatusCodes",
+            "id" : "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "locator" : "14:1-14:102",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Injury due to falling rock",
+            "id" : "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "15:1-15:103",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Roadrunners Syndrome Indicators",
+            "id" : "http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "locator" : "17:1-17:85",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "Tiny Umbrella",
+            "id" : "U707",
+            "display" : "ACME Tiny Umbrella",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "locator" : "17:35-17:56",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+               "name" : "ACME Product Catalog"
+            }
+         }, {
+            "locator" : "18:1-18:81",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "entered-in-error",
+            "id" : "entered-in-error",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "locator" : "18:50-18:81",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+               "name" : "ConditionVerificationStatusCodes"
+            }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "25:1-25:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "25:1-25:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "25:1-25:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "locator" : "33:1-33:64",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "Injury due to falling rock within measurement period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "description",
+                  "value" : "Conditions of type 'Injury due to falling rock' within the measurement period"
+               }, {
+                  "name" : "fhirquery",
+                  "value" : "akin to Condition?code:in=http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock&onset-date=sa[Period-start]&onset-date=eb[Period-end]"
+               }, {
+                  "name" : "datarequirement",
+                  "value" : "\"code\",\"onset.ofType(DateTime)\",\"subject.ofType(Patient)\"]"
+               }, {
+                  "name" : "coderequirement",
+                  "value" : "Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock"
+               } ]
+            } ],
+            "expression" : {
+               "locator" : "33:64",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+               "value" : "1",
+               "type" : "Literal"
+            }
+         } ]
+      }
+   }
+}
+
