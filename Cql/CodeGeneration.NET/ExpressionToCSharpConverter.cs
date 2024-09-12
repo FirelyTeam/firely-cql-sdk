@@ -567,8 +567,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var operand = ConvertExpression(indent, strippedUnary.Operand, false);
                         var typeName = _typeToCSharpConverter.ToCSharp(strippedUnary.Type);
                         var code = strippedUnary.NodeType == ExpressionType.TypeAs ?
-                            $"{leadingIndentString}{Parenthesize($"{operand} as {typeName}")}" :
-                            $"{leadingIndentString}{Parenthesize($"({typeName}){operand}")}";
+                            $"{leadingIndentString}({operand} as {typeName})" :
+                            $"{leadingIndentString}(({typeName}){operand})";
                         return code;
                     }
                     case ExpressionType.Throw:
@@ -675,7 +675,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             term = term.Trim();
             if (term.StartsWith('(') && term.EndsWith(')')) return term;
 
-            return term.ToCharArray().Any(char.IsWhiteSpace) ? $"({term})" : term;
+            // if (term.ToCharArray().Any(char.IsWhiteSpace))
+            //     return $"({term})";
+
+            return term;
         }
 
         private static string EscapeKeywords(string symbol)
