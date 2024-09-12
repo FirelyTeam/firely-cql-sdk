@@ -13,7 +13,7 @@ public class TagsTest : Base
 #pragma warning restore IDE0060 // Remove unused parameter
 
     [TestMethod]
-    [Ignore("The C# CQL-to-ELM does not support capturing annotation tags yet. Once that is ready, this test must be completed. It will be moved to CoreTests for the time being.")]
+    [Ignore("The C# CQL-to-ELM does not support capturing annotation tags yet. Once that is ready, this test must be completed. It will be moved to CoreTests.AnnotationTagsTest.TestAttributesWithQuotes for the time being.")]
     public void Tags_Containing_Quotes_Must_Be_Escaped_In_CSharp()
     {
         var lib = MakeLibrary("""
