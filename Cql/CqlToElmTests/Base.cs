@@ -13,15 +13,10 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-<<<<<<< HEAD
 using Hl7.Cql.CodeGeneration.NET.Services;
 using Hl7.Cql.Compiler.Services;
 using Hl7.Cql.CqlToElm.Services;
-=======
-using Hl7.Cql.CodeGeneration.NET.Hosting;
-using Hl7.Cql.CqlToElm.Hosting;
 using Expression = Hl7.Cql.Elm.Expression;
->>>>>>> develop-2.0
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -107,7 +102,7 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static LibrarySetDefinitions BuildLibrarySetDefinitions(
             Library library)
         {
-            LibrarySetExpressionBuilder librarySetExpressionBuilder = CqlCodeGenerationServices.GetCqlCompilerServices().LibrarySetExpressionBuilderScoped();
+            LibrarySetExpressionBuilder librarySetExpressionBuilder = ServiceProvider.GetLibrarySetExpressionBuilderScoped();
 
             LibrarySet librarySet = new LibrarySet(library.NameAndVersion()!, library);
             DefinitionDictionary<LambdaExpression> definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
@@ -120,7 +115,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
         {
-            var cSharpLibrarySetToStreamsWriter = CqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
+            var cSharpLibrarySetToStreamsWriter = ServiceProvider.GetCSharpLibrarySetToStreamsWriter();
 
             Dictionary<string, string> cSharpCodeByLibraryName = new();
             cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
