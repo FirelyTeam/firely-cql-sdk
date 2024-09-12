@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CoreTests;
 
 [TestClass]
-internal class CqlBooleanTest
+public class CqlBooleanTest
 {
     [TestMethod]
     public void SomethingTrueEqualsTrue_ShouldBeTrue()

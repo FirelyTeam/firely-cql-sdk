@@ -11,9 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.CodeGeneration.NET.Hosting;
 using Hl7.Cql.CqlToElm.Hosting;
+using Expression = Hl7.Cql.Elm.Expression;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -97,6 +99,46 @@ namespace Hl7.Cql.CqlToElm.Test
 
             return builder;
         }
+
+        internal record LibrarySetDefinitions(
+            LibrarySet LibrarySet,
+            DefinitionDictionary<LambdaExpression> Definitions);
+
+        internal static LibrarySetDefinitions BuildLibrarySetDefinitions(
+            Library library)
+        {
+            LibrarySetExpressionBuilder librarySetExpressionBuilder = CqlCodeGenerationServices.GetCqlCompilerServices().LibrarySetExpressionBuilderScoped();
+
+            LibrarySet librarySet = new LibrarySet(library.NameAndVersion()!, library);
+            DefinitionDictionary<LambdaExpression> definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+            return new(librarySet, definitions);
+        }
+
+        internal record LibrarySetCSharp(
+            LibrarySetDefinitions LibrarySetDefinitions,
+            IReadOnlyDictionary<string, string> CSharpCodeByLibraryName);
+
+        internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
+        {
+            var cSharpLibrarySetToStreamsWriter = CqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
+
+            Dictionary<string, string> cSharpCodeByLibraryName = new();
+            cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
+                librarySetDefinitions.Definitions,
+                librarySetDefinitions.LibrarySet,
+                new CSharpSourceCodeWriterCallbacks(onAfterStep: step =>
+                {
+                    if (step is CSharpSourceCodeStep.OnStream onStream)
+                    {
+                        onStream.Stream.Seek(0, SeekOrigin.Begin);
+                        using var reader = new StreamReader(onStream.Stream);
+                        var code = reader.ReadToEnd();
+                        cSharpCodeByLibraryName.Add(onStream.Name, code);
+                    }
+                }));
+            return new(librarySetDefinitions, cSharpCodeByLibraryName.AsReadOnly());
+        }
+
         internal static object? Run(Expression expression, CqlContext? ctx = null)
         {
             var lambda = LibraryExpressionBuilder.Lambda(expression);
