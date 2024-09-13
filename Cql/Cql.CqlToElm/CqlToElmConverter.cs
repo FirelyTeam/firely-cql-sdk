@@ -15,7 +15,8 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     internal class CqlToElmConverter
     {
-        public CqlToElmConverter(IServiceProvider services,
+        public CqlToElmConverter(
+            IServiceProvider services,
             ILogger<CqlToElmConverter> logger)
         {
             Services = services;
