@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.DependencyInjection;
 
-internal static class CqlToElmServices
+internal static class CqlToElmServiceProviderExtensions
 {
     public static CqlToElmConverter GetCqlToElmConverter(this IServiceProvider sp) => sp.GetRequiredService<CqlToElmConverter>();
 

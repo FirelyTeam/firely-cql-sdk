@@ -13,6 +13,7 @@ using Hl7.Cql.CodeGeneration.NET.DependencyInjection;
 using Hl7.Cql.Compiler.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Deck;
+using Test.Measures.Demo;
 
 namespace Test
 {

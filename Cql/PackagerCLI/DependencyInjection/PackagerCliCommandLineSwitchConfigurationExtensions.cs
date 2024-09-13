@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Hl7.Cql.Packager.DependencyInjection;
 
-internal static class PackagerCliCommandLineSwitchInitializer
+internal static class PackagerCliCommandLineSwitchConfigurationExtensions
 {
     private static IDictionary<string, string> CommandLineSwitchMappings { get; } = BuildCommandLineSwitchMappings();
 

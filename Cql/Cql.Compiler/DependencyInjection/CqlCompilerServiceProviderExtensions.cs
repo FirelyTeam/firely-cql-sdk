@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Compiler.DependencyInjection;
 
-internal static class CqlCompilerServices
+internal static class CqlCompilerServiceProviderExtensions
 {
     public static ModelInspector GetModelInspector(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<ModelInspector>();

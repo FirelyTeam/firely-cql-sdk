@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Hl7.Cql.CodeGeneration.NET.DependencyInjection;
 
-internal static class CqlCodeGenerationServicesInitializer
+internal static class CqlCodeGenerationServiceCollectionExtensions
 {
     public static IServiceCollection AddCqlCodeGenerationServices(this IServiceCollection services)
     {

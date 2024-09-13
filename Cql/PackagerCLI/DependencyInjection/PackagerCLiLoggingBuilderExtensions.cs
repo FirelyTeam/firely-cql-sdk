@@ -18,7 +18,7 @@ using Serilog.Events;
 
 namespace Hl7.Cql.Packager.DependencyInjection;
 
-internal static class PackagerCLiLoggingInitializer
+internal static class PackagerCLiLoggingBuilderExtensions
 {
     public static ILoggingBuilder AddPackagerCLiLogging(
         this ILoggingBuilder logging,

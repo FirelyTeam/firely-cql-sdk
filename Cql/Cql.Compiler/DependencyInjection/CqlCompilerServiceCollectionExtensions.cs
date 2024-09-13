@@ -16,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Hl7.Cql.Compiler.DependencyInjection;
 
-internal static class CqlCompilerServicesInitializer
+internal static class CqlCompilerServiceCollectionExtensions
 {
     internal static IServiceCollection AddCqlCompilerServices(this IServiceCollection services)
     {

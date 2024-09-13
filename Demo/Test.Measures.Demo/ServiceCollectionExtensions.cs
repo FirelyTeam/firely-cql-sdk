@@ -1,11 +1,9 @@
-using System;
-using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace CoreTests;
+namespace Test.Measures.Demo;
 
-internal static class CqlServicesInitializer
+internal static class CqlServicesServiceCollectionExtensions
 {
     public static IServiceCollection AddDebugLogging(
         this IServiceCollection services) =>

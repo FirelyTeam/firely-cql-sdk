@@ -15,7 +15,7 @@ using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager.DependencyInjection;
 
-internal static class PackagerCliOptionsInitializer
+internal static class PackagerCliOptionsServiceCollectionExtensions
 {
     public static IServiceCollection AddPackagerCliOptions(
         this IServiceCollection services,

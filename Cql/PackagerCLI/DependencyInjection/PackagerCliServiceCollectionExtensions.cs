@@ -12,12 +12,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Hl7.Cql.Packager.DependencyInjection;
 
-internal static class PackagerCliServicesInitializer
+internal static class PackagerCliServiceCollectionExtensions
 {
-    internal static PackagerCliServices GetPackagerCliServices(
-        this IServiceProvider serviceProvider) =>
-        new PackagerCliServices(serviceProvider);
-
     internal static IServiceCollection AddPackagerCliServices(
         this IServiceCollection services)
     {

@@ -99,8 +99,8 @@ public class Program
         try
         {
             using IServiceScope mainScope = host.Services.CreateScope();
-            var packageService = mainScope.ServiceProvider.GetPackagerCliServices().PackagerCliProgramScoped();
-            return packageService.Run();
+            var packagerCliProgram = mainScope.ServiceProvider.PackagerCliProgramScoped();
+            return packagerCliProgram.Run();
         }
         finally
         {

@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Packaging.DependencyInjection;
 
-internal static class CqlPackagingServices
+internal static class CqlPackagingServiceProviderExtensions
 {
     public static CqlTypeToFhirTypeMapper GetCqlTypeToFhirTypeMapper(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<CqlTypeToFhirTypeMapper>();

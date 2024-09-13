@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Hl7.Cql.Packaging.DependencyInjection;
 
-internal static class CqlPackagingServicesInitializer
+internal static class CqlPackagingServiceCollectionExtensions
 {
     public static IServiceCollection AddCqlPackagingServices(this IServiceCollection services)
     {
