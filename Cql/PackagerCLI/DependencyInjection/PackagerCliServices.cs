@@ -8,7 +8,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.Packager.Services;
+namespace Hl7.Cql.Packager.DependencyInjection;
 
 internal readonly record struct PackagerCliServices(IServiceProvider serviceProvider)
 {

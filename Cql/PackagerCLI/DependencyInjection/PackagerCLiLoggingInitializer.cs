@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 
-namespace Hl7.Cql.Packager.Services;
+namespace Hl7.Cql.Packager.DependencyInjection;
 
 internal static class PackagerCLiLoggingInitializer
 {

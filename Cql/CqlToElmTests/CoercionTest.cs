@@ -3,7 +3,7 @@ using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using Hl7.Cql.CqlToElm.Services;
+using Hl7.Cql.CqlToElm.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

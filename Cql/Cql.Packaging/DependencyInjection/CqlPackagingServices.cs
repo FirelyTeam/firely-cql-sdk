@@ -9,7 +9,7 @@
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.Packaging.Services;
+namespace Hl7.Cql.Packaging.DependencyInjection;
 
 internal static class CqlPackagingServices
 {

@@ -11,7 +11,7 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.CqlToElm.Services;
+namespace Hl7.Cql.CqlToElm.DependencyInjection;
 
 internal static class CqlToElmServices
 {

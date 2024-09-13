@@ -1,5 +1,5 @@
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Services;
+using Hl7.Cql.Compiler.DependencyInjection;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

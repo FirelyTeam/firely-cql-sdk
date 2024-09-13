@@ -9,8 +9,8 @@ using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using CLI.Helpers;
-using Hl7.Cql.CodeGeneration.NET.Services;
-using Hl7.Cql.Compiler.Services;
+using Hl7.Cql.CodeGeneration.NET.DependencyInjection;
+using Hl7.Cql.Compiler.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Deck;
 

@@ -13,7 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Hl7.Cql.Packager.Services;
+namespace Hl7.Cql.Packager.DependencyInjection;
 
 internal static class PackagerCliOptionsInitializer
 {

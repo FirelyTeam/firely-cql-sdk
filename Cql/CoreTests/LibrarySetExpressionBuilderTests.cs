@@ -1,5 +1,5 @@
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Services;
+using Hl7.Cql.Compiler.DependencyInjection;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.DependencyInjection;

@@ -12,7 +12,7 @@ using Hl7.Cql.Conversion;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.Compiler.Services;
+namespace Hl7.Cql.Compiler.DependencyInjection;
 
 internal static class CqlCompilerServices
 {
