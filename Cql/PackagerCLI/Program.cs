@@ -98,7 +98,7 @@ public class Program
         try
         {
             using IServiceScope mainScope = host.Services.CreateScope();
-            var packagerCliProgram = mainScope.ServiceProvider.PackagerCliProgramScoped();
+            var packagerCliProgram = mainScope.ServiceProvider.GetRequiredService<PackagerCliProgram>();
             return packagerCliProgram.Run();
         }
         finally
