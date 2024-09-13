@@ -16,6 +16,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Text.RegularExpressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.Extensions.Options;
 
@@ -686,7 +687,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             if (term.StartsWith('(') ^ term.EndsWith(')'))
                 return $"({term})";
 
-            if (term.Contains(' '))
+            if (term.Any(Char.IsWhiteSpace))
                 return $"({term})";
 
             return term;
