@@ -38,30 +38,31 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 var leadingIndentString = leadingIndent ? IndentString(indent) : string.Empty;
 
-                return expression switch
+                var result = expression switch
                 {
-                    ConstantExpression constant => ConvertConstantExpression(constant.Type, constant.Value, leadingIndentString),
-                    NewExpression @new => ConvertNewExpression(leadingIndentString, @new),
-                    MethodCallExpression call => ConvertMethodCallExpression(indent, leadingIndentString, call),
-                    LambdaExpression lambda => ConvertLambdaExpression(indent, leadingIndentString, lambda),
-                    BinaryExpression binary => ConvertBinaryExpression(indent, leadingIndentString, binary),
-                    UnaryExpression unary => ConvertUnaryExpression(indent, leadingIndentString, unary),
-                    NewArrayExpression newArray => ConvertNewArrayExpression(indent, leadingIndentString, newArray),
-                    MemberExpression me => ConvertMemberExpression(leadingIndentString, me),
-                    MemberInitExpression memberInit => ConvertMemberInitExpression(indent, leadingIndentString, memberInit),
-                    ConditionalExpression ce => ConvertConditionalExpression(indent, leadingIndentString, ce),
-                    TypeBinaryExpression typeBinary => ConvertTypeBinaryExpression(indent, typeBinary),
-                    ParameterExpression pe => ConvertParameterExpression(leadingIndentString, pe),
-                    DefaultExpression de => ConvertDefaultExpression(leadingIndentString, de),
+                    ConstantExpression constant           => ConvertConstantExpression(constant.Type, constant.Value, leadingIndentString),
+                    NewExpression @new                    => ConvertNewExpression(leadingIndentString, @new),
+                    MethodCallExpression call             => ConvertMethodCallExpression(indent, leadingIndentString, call),
+                    LambdaExpression lambda               => ConvertLambdaExpression(indent, leadingIndentString, lambda),
+                    BinaryExpression binary               => ConvertBinaryExpression(indent, leadingIndentString, binary),
+                    UnaryExpression unary                 => ConvertUnaryExpression(indent, leadingIndentString, unary),
+                    NewArrayExpression newArray           => ConvertNewArrayExpression(indent, leadingIndentString, newArray),
+                    MemberExpression me                   => ConvertMemberExpression(leadingIndentString, me),
+                    MemberInitExpression memberInit       => ConvertMemberInitExpression(indent, leadingIndentString, memberInit),
+                    ConditionalExpression ce              => ConvertConditionalExpression(indent, leadingIndentString, ce),
+                    TypeBinaryExpression typeBinary       => ConvertTypeBinaryExpression(indent, typeBinary),
+                    ParameterExpression pe                => ConvertParameterExpression(leadingIndentString, pe),
+                    DefaultExpression de                  => ConvertDefaultExpression(leadingIndentString, de),
                     NullConditionalMemberExpression nullp => ConvertNullConditionalMemberExpression(leadingIndentString, nullp),
-                    BlockExpression block => ConvertBlockExpression(indent, block),
-                    InvocationExpression invocation => ConvertInvocationExpression(leadingIndentString, invocation),
-                    CaseWhenThenExpression cwt => ConvertCaseWhenThenExpression(indent, cwt),
-                    FunctionCallExpression fce => ConvertFunctionCallExpression(indent, leadingIndentString, fce),
-                    DefinitionCallExpression dce => ConvertDefinitionCallExpression(leadingIndentString, dce),
-                    ElmAsExpression ea => ConvertExpression(indent, ea.Reduce(), leadingIndent),
-                    _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
+                    BlockExpression block                 => ConvertBlockExpression(indent, block),
+                    InvocationExpression invocation       => ConvertInvocationExpression(leadingIndentString, invocation),
+                    CaseWhenThenExpression cwt            => ConvertCaseWhenThenExpression(indent, cwt),
+                    FunctionCallExpression fce            => ConvertFunctionCallExpression(indent, leadingIndentString, fce),
+                    DefinitionCallExpression dce          => ConvertDefinitionCallExpression(leadingIndentString, dce),
+                    ElmAsExpression ea                    => ConvertExpression(indent, ea.Reduce(), leadingIndent),
+                    _                                     => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
                 };
+                return result;
             }
             catch (Exception e)
             {
@@ -156,10 +157,9 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertNullConditionalMemberExpression(string indentString, NullConditionalMemberExpression nullp)
         {
-            return $"{indentString}{Parenthesize(ConvertExpression(0, nullp.MemberExpression.Expression!))}?.{nullp.MemberExpression.Member.Name}";
-            //var convertExpression = ConvertExpression(0, nullp.MemberExpression.Expression!);
-            //var memberName = nullp.MemberExpression.Member.Name;
-            //return $"{indentString}{Parenthesize(convertExpression)}?.{memberName}";
+            var @object = ConvertExpression(0, nullp.MemberExpression.Expression!);
+            @object = ParenthesizeIfNeeded(@object);
+            return $"{indentString}{@object}?.{nullp.MemberExpression.Member.Name}";
         }
 
         private string ConvertConstantExpression(Type constantType, object? value, string? indentString = "")
@@ -175,7 +175,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 {
                     // Value Types
                     Enum e when Enum.IsDefined(e.GetType(), e) => $"{e.GetType().FullName}.{e}", // 'e' will be the name of the defined enum
-                    Enum e => $"(({e.GetType().FullName}){e})", // 'e' will be the numeric value of the undefined enum
+                    Enum e => $"({e.GetType().FullName}){e}", // 'e' will be the numeric value of the undefined enum
                     bool b => b ? "true" : "false",
                     decimal d => FormattableString.Invariant($"{d}m"),
                     int i => FormattableString.Invariant($"{i}"),
@@ -232,9 +232,9 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var @object = call switch
             {
-                { Object: not null } => $"{Parenthesize(ConvertExpression(indent, call.Object, false))}.",
+                { Object: not null } => $"{ConvertExpression(indent, call.Object, false)}.",
                 { Method.IsStatic: true } ext when ext.Method.IsExtensionMethod() =>
-                        $"{Parenthesize(ConvertExpression(indent, call.Arguments[0], false))}.",
+                        $"{ConvertExpression(indent, call.Arguments[0], false)}.",
                 { Method.IsStatic: true } => $"{_typeToCSharpConverter.ToCSharp(call.Method.DeclaringType!)}.",
                 _                         => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
             };
@@ -299,15 +299,15 @@ namespace Hl7.Cql.CodeGeneration.NET
             conditionalSb.Append(leadingIndentString);
             conditionalSb.Append('(');
             var test = ConvertExpression(indent, ce.Test, false);
-            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{Parenthesize(test)}");
+            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{test}");
 
-            var ifTrue = $"{Parenthesize(ConvertExpression(indent + 2, ce.IfTrue, false))}";
-            var ifFalse = $"{Parenthesize(ConvertExpression(indent + 2, ce.IfFalse, false))}";
+            var ifTrue = $"{ConvertExpression(indent + 2, ce.IfTrue, false)}";
+            var ifFalse = $"{ConvertExpression(indent + 2, ce.IfFalse, false)}";
             conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{IndentString(indent + 1)}? {ifTrue}");
             conditionalSb.Append(CultureInfo.InvariantCulture, $"{IndentString(indent + 1)}: {ifFalse})");
 
             if (ce.IfTrue.Type != ce.Type || ce.IfFalse.Type != ce.Type)
-                return $"(({_typeToCSharpConverter.ToCSharp(ce.Type)}){conditionalSb})";
+                return $"({_typeToCSharpConverter.ToCSharp(ce.Type)}){conditionalSb}";
             else
                 return conditionalSb.ToString();
         }
@@ -459,11 +459,10 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var nullProp = _typeToCSharpConverter.GetMemberAccessNullabilityOperator(me.Expression?.Type);
             var @object = me.Expression is not null ? ConvertExpression(0, me.Expression) : _typeToCSharpConverter.ToCSharp(me.Member.DeclaringType!);
+            @object = ParenthesizeIfNeeded(@object);
             var memberName = EscapeKeywords(me.Member.Name);
-            var nullCoalesce = $"{@object}{nullProp}.{memberName}";
-            return $"{leadingIndentString}{nullCoalesce}";
+            return $"{leadingIndentString}{@object}{nullProp}.{memberName}";
         }
-
 
         private string ConvertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda, bool functionMode = false)
         {
@@ -565,10 +564,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ExpressionType.TypeAs:
                     {
                         var operand = ConvertExpression(indent, strippedUnary.Operand, false);
+                        operand = ParenthesizeIfNeeded(operand);
                         var typeName = _typeToCSharpConverter.ToCSharp(strippedUnary.Type);
                         var code = strippedUnary.NodeType == ExpressionType.TypeAs ?
                             $"{leadingIndentString}({operand} as {typeName})" :
-                            $"{leadingIndentString}(({typeName}){operand})";
+                            $"{leadingIndentString}({typeName}){operand}";
                         return code;
                     }
                     case ExpressionType.Throw:
@@ -613,9 +613,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                     ? "is"
                     : BinaryOperatorFor(binary.NodeType);
 
-                var leftCode = ConvertExpression(indent, left, false);
+                var leftCode =  ConvertExpression(indent, left, false);
+                leftCode = ParenthesizeIfNeeded(leftCode);
                 var rightCode = ConvertExpression(indent, right, false);
-                var binaryString = $"{leadingIndentString}({leftCode} {@operator} {rightCode})";
+                var binaryString = $"{leadingIndentString}{leftCode} {@operator} {rightCode}";
                 return binaryString;
             }
         }
@@ -670,13 +671,23 @@ namespace Hl7.Cql.CodeGeneration.NET
                 return method.Name;
         }
 
-        private static string Parenthesize(string term)
+        private string ParenthesizeIfNeeded(string term)
         {
             term = term.Trim();
-            if (term.StartsWith('(') && term.EndsWith(')')) return term;
 
-            // if (term.ToCharArray().Any(char.IsWhiteSpace))
-            //     return $"({term})";
+            if (term.StartsWith('(') && term.EndsWith(')'))
+                return term; // No need to parenthesize if already parenthesized
+
+            // Handles cases such as:
+            // 1. ((CqlInterval<CqlDate>)g_)?.lowClosed;
+            //     ^-----------------------
+            // 2. an_ ?? (at_ as CqlQuantity)?.value
+            //    --------------------------^
+            if (term.StartsWith('(') ^ term.EndsWith(')'))
+                return $"({term})";
+
+            if (term.Contains(' '))
+                return $"({term})";
 
             return term;
         }

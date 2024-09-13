@@ -219,14 +219,14 @@ public class RR23_1_0_0
 				CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, false);
 				bool? z_ = context.Operators.In<CqlDateTime>((r_ as CqlDateTime), y_, default);
 				CqlDateTime ab_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-				bool? ac_ = context.Operators.Not(((bool?)(ab_ is null)));
+				bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
 				bool? ad_ = context.Operators.And(z_, ac_);
 
 				return ad_;
 			};
-			IEnumerable<Condition> m_ = context.Operators.Where<Condition>(((IEnumerable<Condition>)k_), l_);
+			IEnumerable<Condition> m_ = context.Operators.Where<Condition>((IEnumerable<Condition>)k_, l_);
 			Condition n_ = context.Operators.SingletonFrom<Condition>(m_);
-			bool? o_ = context.Operators.Not(((bool?)(n_ is null)));
+			bool? o_ = context.Operators.Not((bool?)(n_ is null));
 			bool? p_ = context.Operators.And(i_, o_);
 
 			return p_;

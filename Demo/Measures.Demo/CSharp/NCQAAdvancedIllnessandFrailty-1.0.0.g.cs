@@ -400,7 +400,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 				IEnumerable<CqlDate> e_ = context.Operators.Union<CqlDate>(c_, d_);
 				bool? f_ = context.Operators.Not((bool?)(e_ is null));
 
-				return (f_ ?? false);
+				return f_ ?? false;
 			};
 			if (b_())
 			{
@@ -410,13 +410,13 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
 				return i_;
 			}
-			else if ((this.Outpatient_Encounters_with_Advanced_Illness() is null))
+			else if ((this.Outpatient_Encounters_with_Advanced_Illness()) is null)
 			{
 				IEnumerable<CqlDate> j_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness();
 
 				return j_;
 			}
-			else if ((this.Nonacute_Inpatient_Discharge_with_Advanced_Illness() is null))
+			else if ((this.Nonacute_Inpatient_Discharge_with_Advanced_Illness()) is null)
 			{
 				IEnumerable<CqlDate> k_ = this.Outpatient_Encounters_with_Advanced_Illness();
 

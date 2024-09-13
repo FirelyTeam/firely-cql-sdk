@@ -511,7 +511,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 					CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
 					CqlDateTime u_ = context.Operators.End(t_);
 
-					return (u_ is null);
+					return u_ is null;
 				};
 				if (s_())
 				{

@@ -479,7 +479,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 						CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.prevalenceInterval(Hypertension);
 						CqlDateTime v_ = context.Operators.Start(u_);
 
-						return (v_ is null);
+						return v_ is null;
 					};
 					if (t_())
 					{
@@ -2396,8 +2396,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 					return au_;
 				};
-				IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
-						? ((NoBPScreen as DomainResource).Extension)
+				IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoBPScreen is DomainResource
+						? (NoBPScreen as DomainResource).Extension
 						: default), u_);
 				object w_(Extension @this)
 				{
@@ -2419,8 +2419,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 					return az_;
 				};
-				IEnumerable<Extension> ad_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoBPScreen is DomainResource)
-						? ((NoBPScreen as DomainResource).Extension)
+				IEnumerable<Extension> ad_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoBPScreen is DomainResource
+						? (NoBPScreen as DomainResource).Extension
 						: default), ac_);
 				object ae_(Extension @this)
 				{
@@ -2496,8 +2496,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return av_;
 			};
-			IEnumerable<Extension> ag_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NonPharmIntervention is DomainResource)
-					? ((NonPharmIntervention as DomainResource).Extension)
+			IEnumerable<Extension> ag_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NonPharmIntervention is DomainResource
+					? (NonPharmIntervention as DomainResource).Extension
 					: default), af_);
 			object ah_(Extension @this)
 			{
@@ -2552,8 +2552,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return aa_;
 			};
-			IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((LabECGNotDone is DomainResource)
-					? ((LabECGNotDone as DomainResource).Extension)
+			IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(LabECGNotDone is DomainResource
+					? (LabECGNotDone as DomainResource).Extension
 					: default), p_);
 			object r_(Extension @this)
 			{
@@ -2603,8 +2603,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return aj_;
 			};
-			IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTNDeclinedReferralAndFollowUp is DomainResource)
-					? ((SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension)
+			IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(SecondHTNDeclinedReferralAndFollowUp is DomainResource
+					? (SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension
 					: default), t_);
 			object v_(Extension @this)
 			{
@@ -2660,8 +2660,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 				return ap_;
 			};
-			IEnumerable<Extension> aa_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((SecondHTN140Over90ReferralFollowUpNotDone is DomainResource)
-					? ((SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension)
+			IEnumerable<Extension> aa_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(SecondHTN140Over90ReferralFollowUpNotDone is DomainResource
+					? (SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension
 					: default), z_);
 			object ab_(Extension @this)
 			{
@@ -2738,8 +2738,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 					return bk_;
 				};
-				IEnumerable<Extension> ap_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((ElevatedBPDeclinedInterventions is DomainResource)
-						? ((ElevatedBPDeclinedInterventions as DomainResource).Extension)
+				IEnumerable<Extension> ap_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(ElevatedBPDeclinedInterventions is DomainResource
+						? (ElevatedBPDeclinedInterventions as DomainResource).Extension
 						: default), ao_);
 				object aq_(Extension @this)
 				{
@@ -2819,8 +2819,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 					return dh_;
 				};
-				IEnumerable<Extension> cm_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((FirstHTNDeclinedInterventions is DomainResource)
-						? ((FirstHTNDeclinedInterventions as DomainResource).Extension)
+				IEnumerable<Extension> cm_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(FirstHTNDeclinedInterventions is DomainResource
+						? (FirstHTNDeclinedInterventions as DomainResource).Extension
 						: default), cl_);
 				object cn_(Extension @this)
 				{

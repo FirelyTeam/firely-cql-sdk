@@ -437,7 +437,7 @@ public class TJCOverallFHIR_1_8_000
 			{
 				object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
 				FhirDateTime j_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
-				CqlDateTime k_ = FHIRHelpers_4_0_001.ToDateTime(((i_ as FhirDateTime) ?? j_));
+				CqlDateTime k_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime) ?? j_);
 				CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(IschemicStrokeEncounter);
 				bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
 
@@ -473,7 +473,7 @@ public class TJCOverallFHIR_1_8_000
 				FhirDateTime l_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
 				CqlDateTime m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
 				CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(IschemicStrokeEncounter);
-				bool? o_ = context.Operators.In<CqlDateTime>((k_ ?? m_), n_, default);
+				bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, default);
 
 				return o_;
 			};

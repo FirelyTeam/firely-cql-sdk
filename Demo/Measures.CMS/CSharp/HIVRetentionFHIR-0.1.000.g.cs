@@ -285,7 +285,7 @@ public class HIVRetentionFHIR_0_1_000
 
 			return p_;
 		};
-		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
+		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(a_()), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
 		Extension[] e_ = [
 			d_,
@@ -301,8 +301,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return ao_;
 			};
-			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
-					? ((E as Element).Extension)
+			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
+					? (E as Element).Extension
 					: default), q_);
 			object s_(Extension @this)
 			{
@@ -325,8 +325,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return at_;
 			};
-			IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
-					? ((E as Element).Extension)
+			IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
+					? (E as Element).Extension
 					: default), x_);
 			object z_(Extension @this)
 			{
@@ -352,8 +352,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return az_;
 			};
-			IEnumerable<Extension> af_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
-					? ((E as Element).Extension)
+			IEnumerable<Extension> af_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
+					? (E as Element).Extension
 					: default), ae_);
 			DataType ag_(Extension @this)
 			{
@@ -409,7 +409,7 @@ public class HIVRetentionFHIR_0_1_000
 
 			return p_;
 		};
-		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
+		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(a_()), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
 		Extension[] e_ = [
 			d_,
@@ -425,8 +425,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return an_;
 			};
-			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
-					? ((R as Element).Extension)
+			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
+					? (R as Element).Extension
 					: default), q_);
 			object s_(Extension @this)
 			{
@@ -451,8 +451,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return at_;
 			};
-			IEnumerable<Extension> x_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
-					? ((R as Element).Extension)
+			IEnumerable<Extension> x_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
+					? (R as Element).Extension
 					: default), w_);
 			object y_(Extension @this)
 			{
@@ -478,8 +478,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return az_;
 			};
-			IEnumerable<Extension> ae_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
-					? ((R as Element).Extension)
+			IEnumerable<Extension> ae_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
+					? (R as Element).Extension
 					: default), ad_);
 			DataType af_(Extension @this)
 			{
@@ -678,7 +678,7 @@ public class HIVRetentionFHIR_0_1_000
 						CqlInterval<CqlDateTime> ba_ = QICoreCommon_2_0_000.prevalenceInterval(HIVDiagnosis);
 						CqlDateTime bb_ = context.Operators.Start(ba_);
 
-						return (bb_ is null);
+						return bb_ is null;
 					};
 					if (az_())
 					{

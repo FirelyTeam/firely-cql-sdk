@@ -527,8 +527,8 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 				return af_;
 			};
-			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoCognitiveAssessment is DomainResource)
-					? ((NoCognitiveAssessment as DomainResource).Extension)
+			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoCognitiveAssessment is DomainResource
+					? (NoCognitiveAssessment as DomainResource).Extension
 					: default), u_);
 			object w_(Extension @this)
 			{

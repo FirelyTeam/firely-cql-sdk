@@ -946,8 +946,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			IEnumerable<Observation> f_ = this.Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80();
 			bool? g_(Observation @this)
 			{
-				string m_ = ((@this is Resource)
-	? ((@this as Resource).IdElement)
+				string m_ = (@this is Resource
+	? (@this as Resource).IdElement
 	: default)?.Value;
 				bool? n_ = context.Operators.Not((bool?)(m_ is null));
 
@@ -956,8 +956,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
 			string i_(Observation @this)
 			{
-				string o_ = ((@this is Resource)
-	? ((@this as Resource).IdElement)
+				string o_ = (@this is Resource
+	? (@this as Resource).IdElement
 	: default)?.Value;
 
 				return o_;

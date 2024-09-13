@@ -846,8 +846,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 					return af_;
 				};
-				IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
-						? ((EncounterDiagnoses as Element).Extension)
+				IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiagnoses is Element
+						? (EncounterDiagnoses as Element).Extension
 						: default), t_);
 				object v_(Extension @this)
 				{
@@ -1135,8 +1135,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return q_;
 			};
-			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
-					? ((EncounterDiagnoses as Element).Extension)
+			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiagnoses is Element
+					? (EncounterDiagnoses as Element).Extension
 					: default), f_);
 			object h_(Extension @this)
 			{
@@ -2218,8 +2218,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return q_;
 			};
-			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
-					? ((EncounterDiagnoses as Element).Extension)
+			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiagnoses is Element
+					? (EncounterDiagnoses as Element).Extension
 					: default), f_);
 			object h_(Extension @this)
 			{

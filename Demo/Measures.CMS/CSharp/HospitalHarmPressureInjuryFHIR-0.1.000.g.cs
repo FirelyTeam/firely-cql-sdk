@@ -322,8 +322,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return z_;
 				};
-				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
-						? ((EncounterDiag as Element).Extension)
+				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiag is Element
+						? (EncounterDiag as Element).Extension
 						: default), n_);
 				object p_(Extension @this)
 				{
@@ -446,8 +446,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return z_;
 				};
-				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
-						? ((Stage234UnstageablePressureInjury as Element).Extension)
+				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Stage234UnstageablePressureInjury is Element
+						? (Stage234UnstageablePressureInjury as Element).Extension
 						: default), n_);
 				object p_(Extension @this)
 				{
@@ -614,8 +614,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return z_;
 				};
-				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
-						? ((EncounterDiag as Element).Extension)
+				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiag is Element
+						? (EncounterDiag as Element).Extension
 						: default), n_);
 				object p_(Extension @this)
 				{
@@ -758,8 +758,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return z_;
 				};
-				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
-						? ((Stage234UnstageablePressureInjury as Element).Extension)
+				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Stage234UnstageablePressureInjury is Element
+						? (Stage234UnstageablePressureInjury as Element).Extension
 						: default), n_);
 				object p_(Extension @this)
 				{

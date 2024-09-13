@@ -757,8 +757,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 					return az_;
 				};
-				IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
-						? ((BCGNotGiven as DomainResource).Extension)
+				IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(BCGNotGiven is DomainResource
+						? (BCGNotGiven as DomainResource).Extension
 						: default), p_);
 				DataType r_(Extension @this)
 				{
@@ -794,8 +794,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 					return be_;
 				};
-				IEnumerable<Extension> ao_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
-						? ((BCGNotGiven as DomainResource).Extension)
+				IEnumerable<Extension> ao_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(BCGNotGiven is DomainResource
+						? (BCGNotGiven as DomainResource).Extension
 						: default), an_);
 				DataType ap_(Extension @this)
 				{
@@ -1351,13 +1351,13 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
-			if ((context.Operators.Not((bool?)(pointInTime is null)) ?? false))
+			if ((context.Operators.Not((bool?)(pointInTime is null))) ?? false)
 			{
 				CqlInterval<CqlDateTime> b_ = context.Operators.Interval(pointInTime, pointInTime, true, true);
 
 				return b_;
 			}
-			else if ((context.Operators.Not((bool?)(dateTimeInterval is null)) ?? false))
+			else if ((context.Operators.Not((bool?)(dateTimeInterval is null))) ?? false)
 			{
 				return dateTimeInterval;
 			}

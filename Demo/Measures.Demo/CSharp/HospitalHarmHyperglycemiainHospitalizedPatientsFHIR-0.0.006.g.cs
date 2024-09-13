@@ -501,7 +501,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					int? u_ = context.Operators.DurationBetween(s_, t_, "hour");
 					bool? v_ = context.Operators.Less(u_, 24);
 
-					return (v_ ?? false);
+					return v_ ?? false;
 				};
 				if (m_())
 				{

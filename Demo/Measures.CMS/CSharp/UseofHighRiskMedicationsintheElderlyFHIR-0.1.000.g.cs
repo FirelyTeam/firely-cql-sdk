@@ -1091,7 +1091,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			Timing.UnitsOfTime? ay_ = ax_?.Value;
 			string az_ = context.Operators.Convert<string>(ay_);
 			CqlQuantity ba_ = CumulativeMedicationDuration_4_0_000.Quantity(as_, az_);
-			decimal? bb_ = CumulativeMedicationDuration_4_0_000.ToDaily((ag_ ?? am_), ba_);
+			decimal? bb_ = CumulativeMedicationDuration_4_0_000.ToDaily(ag_ ?? am_, ba_);
 			Dosage bd_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			Timing be_ = bd_?.Timing;
 			Timing.RepeatComponent bf_ = be_?.Repeat;
@@ -1099,13 +1099,13 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			IEnumerable<CqlTime> bh_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(bg_, "value");
 			int? bi_ = context.Operators.Count<CqlTime>(bh_);
 			decimal? bj_ = context.Operators.ConvertIntegerToDecimal(bi_);
-			decimal? bk_ = context.Operators.Multiply(aa_, ((bb_ ?? bj_) ?? 1.0m));
+			decimal? bk_ = context.Operators.Multiply(aa_, (bb_ ?? bj_) ?? 1.0m);
 			decimal? bl_ = context.Operators.Divide(m_, bk_);
 			UnsignedInt bn_ = e_?.NumberOfRepeatsAllowedElement;
 			int? bo_ = bn_?.Value;
-			int? bp_ = context.Operators.Add(1, (bo_ ?? 0));
+			int? bp_ = context.Operators.Add(1, bo_ ?? 0);
 			decimal? bq_ = context.Operators.ConvertIntegerToDecimal(bp_);
-			decimal? br_ = context.Operators.Multiply((i_ ?? bl_), bq_);
+			decimal? br_ = context.Operators.Multiply(i_ ?? bl_, bq_);
 
 			return br_;
 		};
@@ -1151,7 +1151,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept u_ = context.Operators.ConvertCodeToConcept(t_);
 				bool? v_ = context.Operators.Equivalent(Strength, u_);
 
-				return (v_ ?? false);
+				return v_ ?? false;
 			};
 			bool c_()
 			{
@@ -1159,7 +1159,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
 				bool? y_ = context.Operators.Equivalent(Strength, x_);
 
-				return (y_ ?? false);
+				return y_ ?? false;
 			};
 			bool d_()
 			{
@@ -1167,7 +1167,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept aa_ = context.Operators.ConvertCodeToConcept(z_);
 				bool? ab_ = context.Operators.Equivalent(Strength, aa_);
 
-				return (ab_ ?? false);
+				return ab_ ?? false;
 			};
 			bool e_()
 			{
@@ -1175,7 +1175,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
 				bool? ae_ = context.Operators.Equivalent(Strength, ad_);
 
-				return (ae_ ?? false);
+				return ae_ ?? false;
 			};
 			bool f_()
 			{
@@ -1183,7 +1183,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept ag_ = context.Operators.ConvertCodeToConcept(af_);
 				bool? ah_ = context.Operators.Equivalent(Strength, ag_);
 
-				return (ah_ ?? false);
+				return ah_ ?? false;
 			};
 			bool g_()
 			{
@@ -1191,7 +1191,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept aj_ = context.Operators.ConvertCodeToConcept(ai_);
 				bool? ak_ = context.Operators.Equivalent(Strength, aj_);
 
-				return (ak_ ?? false);
+				return ak_ ?? false;
 			};
 			bool h_()
 			{
@@ -1199,7 +1199,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept am_ = context.Operators.ConvertCodeToConcept(al_);
 				bool? an_ = context.Operators.Equivalent(Strength, am_);
 
-				return (an_ ?? false);
+				return an_ ?? false;
 			};
 			bool i_()
 			{
@@ -1207,7 +1207,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
 				bool? aq_ = context.Operators.Equivalent(Strength, ap_);
 
-				return (aq_ ?? false);
+				return aq_ ?? false;
 			};
 			bool j_()
 			{
@@ -1215,7 +1215,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept as_ = context.Operators.ConvertCodeToConcept(ar_);
 				bool? at_ = context.Operators.Equivalent(Strength, as_);
 
-				return (at_ ?? false);
+				return at_ ?? false;
 			};
 			bool k_()
 			{
@@ -1223,7 +1223,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept av_ = context.Operators.ConvertCodeToConcept(au_);
 				bool? aw_ = context.Operators.Equivalent(Strength, av_);
 
-				return (aw_ ?? false);
+				return aw_ ?? false;
 			};
 			bool l_()
 			{
@@ -1231,7 +1231,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept ay_ = context.Operators.ConvertCodeToConcept(ax_);
 				bool? az_ = context.Operators.Equivalent(Strength, ay_);
 
-				return (az_ ?? false);
+				return az_ ?? false;
 			};
 			bool m_()
 			{
@@ -1239,7 +1239,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
 				bool? bc_ = context.Operators.Equivalent(Strength, bb_);
 
-				return (bc_ ?? false);
+				return bc_ ?? false;
 			};
 			bool n_()
 			{
@@ -1247,7 +1247,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept be_ = context.Operators.ConvertCodeToConcept(bd_);
 				bool? bf_ = context.Operators.Equivalent(Strength, be_);
 
-				return (bf_ ?? false);
+				return bf_ ?? false;
 			};
 			bool o_()
 			{
@@ -1255,7 +1255,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept bh_ = context.Operators.ConvertCodeToConcept(bg_);
 				bool? bi_ = context.Operators.Equivalent(Strength, bh_);
 
-				return (bi_ ?? false);
+				return bi_ ?? false;
 			};
 			bool p_()
 			{
@@ -1263,7 +1263,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept bk_ = context.Operators.ConvertCodeToConcept(bj_);
 				bool? bl_ = context.Operators.Equivalent(Strength, bk_);
 
-				return (bl_ ?? false);
+				return bl_ ?? false;
 			};
 			bool q_()
 			{
@@ -1271,7 +1271,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept bn_ = context.Operators.ConvertCodeToConcept(bm_);
 				bool? bo_ = context.Operators.Equivalent(Strength, bn_);
 
-				return (bo_ ?? false);
+				return bo_ ?? false;
 			};
 			bool r_()
 			{
@@ -1279,7 +1279,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept bq_ = context.Operators.ConvertCodeToConcept(bp_);
 				bool? br_ = context.Operators.Equivalent(Strength, bq_);
 
-				return (br_ ?? false);
+				return br_ ?? false;
 			};
 			bool s_()
 			{
@@ -1287,7 +1287,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlConcept bt_ = context.Operators.ConvertCodeToConcept(bs_);
 				bool? bu_ = context.Operators.Equivalent(Strength, bt_);
 
-				return (bu_ ?? false);
+				return bu_ ?? false;
 			};
 			if (b_())
 			{
@@ -1436,7 +1436,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 					bool? w_ = context.Operators.Or(l_, v_);
 					bool? x_ = context.Operators.And(h_, w_);
 
-					return (x_ ?? false);
+					return x_ ?? false;
 				};
 				if (f_())
 				{

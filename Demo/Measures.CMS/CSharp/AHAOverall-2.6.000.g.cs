@@ -445,7 +445,7 @@ public class AHAOverall_2_6_000
 				object j_ = context.Operators.LateBoundProperty<object>(LVSDFindings, "effective");
 				object k_ = FHIRHelpers_4_3_000.ToValue(j_);
 				CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(k_);
-				CqlDateTime m_ = context.Operators.Start((i_ ?? l_));
+				CqlDateTime m_ = context.Operators.Start(i_ ?? l_);
 				Period n_ = HFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
 				CqlDateTime p_ = context.Operators.End(o_);
@@ -482,7 +482,7 @@ public class AHAOverall_2_6_000
 				CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
 				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval((n_ as object));
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.prevalenceInterval(HeartTransplantComplications);
-				CqlDateTime q_ = context.Operators.Start((o_ ?? p_));
+				CqlDateTime q_ = context.Operators.Start(o_ ?? p_);
 				Period r_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 				CqlDateTime t_ = context.Operators.End(s_);
@@ -574,7 +574,7 @@ public class AHAOverall_2_6_000
 				CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
 				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval((n_ as object));
 				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.prevalenceInterval(LVADComplications);
-				CqlDateTime q_ = context.Operators.Start((o_ ?? p_));
+				CqlDateTime q_ = context.Operators.Start(o_ ?? p_);
 				Period r_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(r_);
 				CqlDateTime t_ = context.Operators.End(s_);

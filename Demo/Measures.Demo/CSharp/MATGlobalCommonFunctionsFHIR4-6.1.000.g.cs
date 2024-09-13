@@ -580,7 +580,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		{
 			CqlInterval<CqlDateTime> f_()
 			{
-				if ((X is null))
+				if (X is null)
 				{
 					Period g_ = TheEncounter?.Period;
 					CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_0_001.ToInterval(g_);
@@ -620,7 +620,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		{
 			IEnumerable<Encounter.LocationComponent> f_()
 			{
-				if ((EDEncounter is null))
+				if (EDEncounter is null)
 				{
 					List<Encounter.LocationComponent> g_ = TheEncounter?.Location;
 
@@ -753,7 +753,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_0_001.ToInterval(as_);
 				CqlDateTime au_ = context.Operators.Start(at_);
 				CqlQuantity av_ = context.Operators.Quantity(1m, "hour");
-				CqlDateTime aw_ = context.Operators.Subtract((ar_ ?? au_), av_);
+				CqlDateTime aw_ = context.Operators.Subtract(ar_ ?? au_, av_);
 				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? az_(Encounter LastObs)
 				{
@@ -792,7 +792,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlDateTime bg_ = context.Operators.Start(bf_);
 				CqlInterval<CqlDateTime> bi_ = FHIRHelpers_4_0_001.ToInterval(as_);
 				CqlDateTime bj_ = context.Operators.Start(bi_);
-				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, (bg_ ?? bj_), true, true);
+				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, bg_ ?? bj_, true, true);
 				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default);
 				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? bo_(Encounter LastObs)
@@ -893,7 +893,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			CqlDateTime aa_ = context.Operators.Start(z_);
 			CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_0_001.ToInterval(y_);
 			CqlDateTime ad_ = context.Operators.End(ac_);
-			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval((n_ ?? (x_ ?? aa_)), ad_, true, true);
+			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(n_ ?? x_ ?? aa_, ad_, true, true);
 
 			return ae_;
 		};
@@ -1282,7 +1282,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				bool? r_ = context.Operators.Equivalent(o_, q_);
 				bool? s_ = context.Operators.Or(m_, r_);
 
-				return (s_ ?? false);
+				return s_ ?? false;
 			};
 			if (b_())
 			{
@@ -1650,7 +1650,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		{
 			CqlDateTime f_()
 			{
-				if ((this.HasEnd(period) ?? false))
+				if ((this.HasEnd(period)) ?? false)
 				{
 					CqlDateTime g_ = context.Operators.End(period);
 
@@ -1683,7 +1683,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		{
 			CqlDateTime f_()
 			{
-				if ((this.HasStart(period) ?? false))
+				if ((this.HasStart(period)) ?? false)
 				{
 					CqlDateTime g_ = context.Operators.Start(period);
 

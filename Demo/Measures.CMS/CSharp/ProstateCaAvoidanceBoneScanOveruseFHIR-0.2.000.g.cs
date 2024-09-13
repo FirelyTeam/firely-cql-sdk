@@ -741,7 +741,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 						CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.toInterval(af_);
 						CqlDateTime ah_ = context.Operators.Start(ag_);
 
-						return (ah_ is null);
+						return ah_ is null;
 					};
 					if (ad_())
 					{

@@ -1315,8 +1315,8 @@ public class QICoreCommon_2_0_000
 
 			return i_;
 		};
-		IEnumerable<Extension> b_ = context.Operators.Where<Extension>(((deviceRequest is DomainResource)
-				? ((IEnumerable<Extension>)(deviceRequest as DomainResource).ModifierExtension)
+		IEnumerable<Extension> b_ = context.Operators.Where<Extension>((deviceRequest is DomainResource
+				? (IEnumerable<Extension>)((deviceRequest as DomainResource).ModifierExtension)
 				: default), a_);
 		bool? c_(Extension E)
 		{
@@ -2047,7 +2047,7 @@ public class QICoreCommon_2_0_000
 				bool? r_ = context.Operators.Equivalent(o_, q_);
 				bool? s_ = context.Operators.Or(m_, r_);
 
-				return (s_ ?? false);
+				return s_ ?? false;
 			};
 			if (b_())
 			{
@@ -2072,7 +2072,7 @@ public class QICoreCommon_2_0_000
 				{
 					CqlInterval<CqlDateTime> ag_()
 					{
-						if ((abatementDate is null))
+						if (abatementDate is null)
 						{
 							DataType ah_ = condition?.Onset;
 							object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
@@ -2131,7 +2131,7 @@ public class QICoreCommon_2_0_000
 				bool? r_ = context.Operators.Equivalent(o_, q_);
 				bool? s_ = context.Operators.Or(m_, r_);
 
-				return (s_ ?? false);
+				return s_ ?? false;
 			};
 			if (b_())
 			{
@@ -2156,7 +2156,7 @@ public class QICoreCommon_2_0_000
 				{
 					CqlInterval<CqlDateTime> ag_()
 					{
-						if ((abatementDate is null))
+						if (abatementDate is null)
 						{
 							DataType ah_ = condition?.Onset;
 							object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
@@ -2280,7 +2280,7 @@ public class QICoreCommon_2_0_000
 		{
 			CqlDateTime f_()
 			{
-				if ((this.HasEnd(period) ?? false))
+				if ((this.HasEnd(period)) ?? false)
 				{
 					CqlDateTime g_ = context.Operators.End(period);
 
@@ -2314,7 +2314,7 @@ public class QICoreCommon_2_0_000
 		{
 			CqlDateTime f_()
 			{
-				if ((this.hasEnd(period) ?? false))
+				if ((this.hasEnd(period)) ?? false)
 				{
 					CqlDateTime g_ = context.Operators.End(period);
 
@@ -2349,7 +2349,7 @@ public class QICoreCommon_2_0_000
 		{
 			CqlDateTime f_()
 			{
-				if ((this.HasStart(period) ?? false))
+				if ((this.HasStart(period)) ?? false)
 				{
 					CqlDateTime g_ = context.Operators.Start(period);
 
@@ -2383,7 +2383,7 @@ public class QICoreCommon_2_0_000
 		{
 			CqlDateTime f_()
 			{
-				if ((this.hasStart(period) ?? false))
+				if ((this.hasStart(period)) ?? false)
 				{
 					CqlDateTime g_ = context.Operators.Start(period);
 
@@ -2480,7 +2480,7 @@ public class QICoreCommon_2_0_000
 					int? u_ = context.Operators.DurationBetween(s_, t_, "hour");
 					bool? v_ = context.Operators.Less(u_, 24);
 
-					return (v_ ?? false);
+					return v_ ?? false;
 				};
 				if (m_())
 				{
@@ -2541,7 +2541,7 @@ public class QICoreCommon_2_0_000
 					int? u_ = context.Operators.DurationBetween(s_, t_, "hour");
 					bool? v_ = context.Operators.Less(u_, 24);
 
-					return (v_ ?? false);
+					return v_ ?? false;
 				};
 				if (m_())
 				{

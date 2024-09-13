@@ -1113,7 +1113,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 					CqlInterval<CqlDateTime> at_ = this.Measurement_Period();
 					CqlDateTime au_ = context.Operators.Start(at_);
 
-					return (au_ is null);
+					return au_ is null;
 				};
 				if (as_())
 				{

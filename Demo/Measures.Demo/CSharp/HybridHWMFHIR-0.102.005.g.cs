@@ -413,12 +413,12 @@ public class HybridHWMFHIR_0_102_005
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
 		string b_(Encounter Encounter)
 		{
-			string d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
-			string e_ = context.Operators.Concatenate((d_ ?? ""), ",");
+			string d_ = context.Operators.Concatenate("\r\n", CCDE ?? "");
+			string e_ = context.Operators.Concatenate(d_ ?? "", ",");
 			Id f_ = Encounter?.IdElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string h_ = context.Operators.Concatenate((e_ ?? ""), (g_ ?? ""));
-			string i_ = context.Operators.Concatenate((h_ ?? ""), " , ");
+			string h_ = context.Operators.Concatenate(e_ ?? "", g_ ?? "");
+			string i_ = context.Operators.Concatenate(h_ ?? "", " , ");
 			bool? j_(Observation Exam)
 			{
 				DataType ad_ = Exam?.Effective;
@@ -468,8 +468,8 @@ public class HybridHWMFHIR_0_102_005
 			DataType o_ = n_?.Value;
 			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity((o_ as Quantity));
 			string q_ = context.Operators.ConvertQuantityToString(p_);
-			string r_ = context.Operators.Concatenate((i_ ?? ""), (q_ ?? ""));
-			string s_ = context.Operators.Concatenate((r_ ?? ""), ",");
+			string r_ = context.Operators.Concatenate(i_ ?? "", q_ ?? "");
+			string s_ = context.Operators.Concatenate(r_ ?? "", ",");
 			bool? t_(Observation Exam)
 			{
 				DataType bi_ = Exam?.Effective;
@@ -520,7 +520,7 @@ public class HybridHWMFHIR_0_102_005
 			CqlInterval<CqlDateTime> z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(y_);
 			CqlDateTime aa_ = context.Operators.Start(z_);
 			string ab_ = context.Operators.ConvertDateTimeToString(aa_);
-			string ac_ = context.Operators.Concatenate((s_ ?? ""), (ab_ ?? ""));
+			string ac_ = context.Operators.Concatenate(s_ ?? "", ab_ ?? "");
 
 			return ac_;
 		};
@@ -535,12 +535,12 @@ public class HybridHWMFHIR_0_102_005
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
 		string b_(Encounter Encounter)
 		{
-			string d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
-			string e_ = context.Operators.Concatenate((d_ ?? ""), ",");
+			string d_ = context.Operators.Concatenate("\r\n", CCDE ?? "");
+			string e_ = context.Operators.Concatenate(d_ ?? "", ",");
 			Id f_ = Encounter?.IdElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string h_ = context.Operators.Concatenate((e_ ?? ""), (g_ ?? ""));
-			string i_ = context.Operators.Concatenate((h_ ?? ""), ",");
+			string h_ = context.Operators.Concatenate(e_ ?? "", g_ ?? "");
+			string i_ = context.Operators.Concatenate(h_ ?? "", ",");
 			bool? j_(Observation Lab)
 			{
 				Instant ac_ = Lab?.IssuedElement;
@@ -584,8 +584,8 @@ public class HybridHWMFHIR_0_102_005
 			DataType o_ = n_?.Value;
 			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity((o_ as Quantity));
 			string q_ = context.Operators.ConvertQuantityToString(p_);
-			string r_ = context.Operators.Concatenate((i_ ?? ""), (q_ ?? ""));
-			string s_ = context.Operators.Concatenate((r_ ?? ""), ",");
+			string r_ = context.Operators.Concatenate(i_ ?? "", q_ ?? "");
+			string s_ = context.Operators.Concatenate(r_ ?? "", ",");
 			bool? t_(Observation Lab)
 			{
 				Instant bc_ = Lab?.IssuedElement;
@@ -629,7 +629,7 @@ public class HybridHWMFHIR_0_102_005
 			Instant y_ = x_?.IssuedElement;
 			CqlDateTime z_ = FHIRHelpers_4_0_001.ToDateTime(y_);
 			string aa_ = context.Operators.ConvertDateTimeToString(z_);
-			string ab_ = context.Operators.Concatenate((s_ ?? ""), (aa_ ?? ""));
+			string ab_ = context.Operators.Concatenate(s_ ?? "", aa_ ?? "");
 
 			return ab_;
 		};
@@ -782,7 +782,7 @@ public class HybridHWMFHIR_0_102_005
 				CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_0_001.ToInterval(as_);
 				CqlDateTime au_ = context.Operators.Start(at_);
 				CqlQuantity av_ = context.Operators.Quantity(1m, "hour");
-				CqlDateTime aw_ = context.Operators.Subtract((ar_ ?? au_), av_);
+				CqlDateTime aw_ = context.Operators.Subtract(ar_ ?? au_, av_);
 				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? az_(Encounter LastObs)
 				{
@@ -821,7 +821,7 @@ public class HybridHWMFHIR_0_102_005
 				CqlDateTime bg_ = context.Operators.Start(bf_);
 				CqlInterval<CqlDateTime> bi_ = FHIRHelpers_4_0_001.ToInterval(as_);
 				CqlDateTime bj_ = context.Operators.Start(bi_);
-				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, (bg_ ?? bj_), true, true);
+				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, bg_ ?? bj_, true, true);
 				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default);
 				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? bo_(Encounter LastObs)
@@ -922,7 +922,7 @@ public class HybridHWMFHIR_0_102_005
 			CqlDateTime aa_ = context.Operators.Start(z_);
 			CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_0_001.ToInterval(y_);
 			CqlDateTime ad_ = context.Operators.End(ac_);
-			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval((n_ ?? (x_ ?? aa_)), ad_, true, true);
+			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(n_ ?? x_ ?? aa_, ad_, true, true);
 
 			return ae_;
 		};

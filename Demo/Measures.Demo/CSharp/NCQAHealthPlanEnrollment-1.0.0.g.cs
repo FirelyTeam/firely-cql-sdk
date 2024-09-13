@@ -194,9 +194,9 @@ public class NCQAHealthPlanEnrollment_1_0_0
 				bool? c_ = context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default);
 				bool? d_ = context.Operators.Not(c_);
 
-				return (d_ ?? false);
+				return d_ ?? false;
 			};
-			if ((context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default) ?? false))
+			if ((context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default)) ?? false)
 			{
 				IEnumerable<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> e_ = this.All_Coverage_Info(Coverage, participationPeriod);
 				bool? f_((IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? @this)
@@ -260,7 +260,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 				return x_;
 			}
-			else if ((AnchorDate is null))
+			else if (AnchorDate is null)
 			{
 				return true;
 			}
@@ -310,7 +310,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 			return v_;
 		};
-		IEnumerable<bool?> k_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>(((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)i_), j_);
+		IEnumerable<bool?> k_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)i_, j_);
 		bool? l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;
@@ -385,7 +385,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 			return v_;
 		};
-		IEnumerable<bool?> k_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>(((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)i_), j_);
+		IEnumerable<bool?> k_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)i_, j_);
 		bool? l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;
@@ -460,7 +460,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 
 			return v_;
 		};
-		IEnumerable<bool?> k_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>(((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)i_), j_);
+		IEnumerable<bool?> k_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?, bool?>((IEnumerable<(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>)i_, j_);
 		bool? l_ = context.Operators.SingletonFrom<bool?>(k_);
 
 		return l_;

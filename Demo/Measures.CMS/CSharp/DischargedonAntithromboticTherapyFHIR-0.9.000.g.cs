@@ -180,7 +180,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				object m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				CqlInterval<CqlDateTime> o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
-				bool? p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, default);
+				bool? p_ = context.Operators.In<CqlDateTime>(l_ ?? n_, o_, default);
 
 				return p_;
 			};

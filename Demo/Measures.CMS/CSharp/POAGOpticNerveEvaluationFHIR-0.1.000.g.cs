@@ -443,8 +443,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return af_;
 			};
-			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((CupToDiscExamNotPerformed is DomainResource)
-					? ((CupToDiscExamNotPerformed as DomainResource).Extension)
+			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(CupToDiscExamNotPerformed is DomainResource
+					? (CupToDiscExamNotPerformed as DomainResource).Extension
 					: default), u_);
 			object w_(Extension @this)
 			{
@@ -508,8 +508,8 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 
 				return af_;
 			};
-			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((OpticDiscExamNotPerformed is DomainResource)
-					? ((OpticDiscExamNotPerformed as DomainResource).Extension)
+			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(OpticDiscExamNotPerformed is DomainResource
+					? (OpticDiscExamNotPerformed as DomainResource).Extension
 					: default), u_);
 			object w_(Extension @this)
 			{
