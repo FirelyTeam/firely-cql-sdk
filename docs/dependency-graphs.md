@@ -21,7 +21,9 @@ Remarks
     * `LibraryBuilder` exposes `FileSystemLibraryProvider`
     * `LibraryInfo` exposes `LibraryBuilder library`
     * `CqlToElmConverter` exposes `IServiceProvider Services`, `ILogger<CqlToElmConverter> Logger`
+    * `LibraryVisitor` exposes `IServiceProvider Services`, `SystemLibrary SystemLibrary`
   * `CqlToElmConverter` is also a factory for `LibraryBuilder`, see `GetBuilder` method
+  * `SystemLibrary` is a singleton service but it is not used as a service
 
 ```mermaid
 
@@ -31,6 +33,7 @@ classDiagram
 
     namespace Microsoft {
         class IServiceProvider { }
+        class CultureInfo { }
     }
 
     namespace CqlToElm {
@@ -47,10 +50,18 @@ classDiagram
         class LocalIdentifierProvider { }
         class DiskStreamProvider { }
         class IModelProvider { }
-        class SystemFunction { }
         class MessageProvider { }
         class ILibraryProvider { }
         class MemoryLibraryProvider { }
+        class BuiltinModelProvider { }
+        class IStreamProvider { }
+        class ISymbolScope { }
+        class LibraryVisitor { }
+        class DefinitionVisitor { }
+    }
+
+    namespace CqlModel {
+        class ModelInfo { }
     }
 
     %% Style Singleton Types as Brown
@@ -65,6 +76,7 @@ classDiagram
     style IModelProvider fill:#550
     style MessageProvider fill:#550
     style IServiceProvider fill:#550
+    style BuiltinModelProvider fill:#550
 
     %% Style Scoped Types as Cyan
     
@@ -77,29 +89,61 @@ classDiagram
     %% Style Non-Services Types as Gray
 
     style LibraryInfo fill: #555
-    style DiskStreamProvider fill: #555
-    style SystemFunction fill: #555
     style ILibraryProvider fill: #555
     style FileSystemLibraryProvider fill: #555
     style MemoryLibraryProvider fill: #555
+    style ModelInfo fill: #555
+    style CultureInfo fill: #555
+    style DiskStreamProvider fill: #555
+    style IStreamProvider fill: #555
+    style LibraryVisitor fill: #555
+    style ISymbolScope fill: #555
+    style DefinitionVisitor fill: #555
 
     %% Inheritance  
 
+    DiskStreamProvider --> IStreamProvider : inherits
     MemoryLibraryProvider --> ILibraryProvider : inherits
     FileSystemLibraryProvider --> ILibraryProvider : inherits
+    BuiltinModelProvider --> IModelProvider : inherits
+    SystemLibrary --> ISymbolScope : inherits
     
     %% Dependencies
 
+    CultureInfo ..> MessageProvider : injected
+
+    CoercionProvider ..> ElmFactory : injected
+    MessageProvider ..> ElmFactory : injected
+
+    ModelInfo ..> BuiltinModelProvider : injected as params[]
+
+    IModelProvider ..> CoercionProvider : injected
+
+    IModelProvider ..> InvocationBuilder : injected
+    CoercionProvider ..> InvocationBuilder : injected
+    ElmFactory ..> InvocationBuilder : injected
+    MessageProvider ..> InvocationBuilder : injected
+
     LibraryBuilder ..> LibraryInfo : assigned to Library property<br>by FileSystemLibraryProvider
 
-    IServiceProvider ..> FileSystemLibraryProvider : injected
     StreamInspector ..> FileSystemLibraryProvider : injected
+    LibraryBuilder ..> FileSystemLibraryProvider : created scoped<br>in TryResolveLibrary()
     CqlToElmConverter ..> FileSystemLibraryProvider : injected
-    LibraryBuilder ..> FileSystemLibraryProvider : created for scoped<br>use in TryResolveLibrary()
+    IServiceProvider ..> FileSystemLibraryProvider : injected
 
-    IServiceProvider ..> CqlToElmConverter : injected
-    LibraryBuilder ..> CqlToElmConverter : created for scoped<br>use in ConvertLibrary()
+    LibraryBuilder ..> DefinitionVisitor : injected
+    IServiceProvider ..> DefinitionVisitor : injected    
+    InvocationBuilder ..> DefinitionVisitor : created in ctor  
 
+    LibraryBuilder ..> CqlToElmConverter : created scoped<br>in ConvertLibrary()
+    IServiceProvider ..> CqlToElmConverter : injected  
+    
+    SystemLibrary ..> LibraryVisitor : created in SystemLibrary
+    IModelProvider ..> LibraryVisitor : created in ModelProvider
+    LocalIdentifierProvider ..> LibraryVisitor : created in VisitLibrary()
+    DefinitionVisitor ..> LibraryVisitor : created in VisitLibrary()
+    LibraryBuilder ..> LibraryVisitor : created in VisitLibrary()
+    IServiceProvider ..> LibraryVisitor : injected    
 
 ```
 
