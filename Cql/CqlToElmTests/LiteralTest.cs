@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
         });
 #pragma warning restore IDE0060 // Remove unused parameter
-        internal static InvocationBuilder InvocationBuilder => CqlToElmServices.InvocationBuilder;
+        internal static InvocationBuilder InvocationBuilder => ServiceProvider.GetInvocationBuilder();
 
         [TestMethod]
         public void String_Literal()

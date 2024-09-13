@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Elm;

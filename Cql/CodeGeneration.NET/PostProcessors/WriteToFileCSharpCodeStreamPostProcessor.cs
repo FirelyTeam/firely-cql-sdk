@@ -11,18 +11,13 @@ using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET.PostProcessors;
 
-internal class WriteToFileCSharpCodeStreamPostProcessor : CSharpCodeStreamPostProcessor
+internal class WriteToFileCSharpCodeStreamPostProcessor(
+    IOptions<CSharpCodeWriterOptions> csharpCodeWriterOptions,
+    ILogger<WriteToFileCSharpCodeStreamPostProcessor> logger)
+    : CSharpCodeStreamPostProcessor
 {
-    private readonly CSharpCodeWriterOptions _csharpCodeWriterOptions;
-    private readonly ILogger<WriteToFileCSharpCodeStreamPostProcessor> _logger;
-
-    public WriteToFileCSharpCodeStreamPostProcessor(
-        IOptions<CSharpCodeWriterOptions> csharpCodeWriterOptions,
-        ILogger<WriteToFileCSharpCodeStreamPostProcessor> logger)
-    {
-        _logger = logger;
-        _csharpCodeWriterOptions = csharpCodeWriterOptions.Value;
-    }
+    private readonly CSharpCodeWriterOptions _csharpCodeWriterOptions = csharpCodeWriterOptions.Value;
+    private readonly ILogger<WriteToFileCSharpCodeStreamPostProcessor> _logger = logger;
 
     public override void ProcessStream(string name, Stream stream)
     {

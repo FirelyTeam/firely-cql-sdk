@@ -20,8 +20,14 @@ partial class LibraryExpressionBuilderContext
 {
     #region Definitions
 
-    /// <inheritdoc />
-    public DefinitionDictionary<LambdaExpression> LibraryDefinitions { get; }
+    /// <summary>
+    /// Gets the dictionary of library definitions.
+    /// Before the library is built, this dictionary contains the definitions from all the included libraries.
+    /// After processing of the library, this dictionary also contains the definitions from the library itself.
+    /// If the library was processed within the context of a library set,
+    /// then this dictionary will be merged with the library set's dictionary.
+    /// </summary>
+    public DefinitionDictionary<LambdaExpression> LibraryDefinitions  => libraryDefinitions;
 
     private void AddLibraryDefinitionsFromIncludes()
     {
@@ -52,11 +58,23 @@ partial class LibraryExpressionBuilderContext
 
     #region Library Identifiers by Alias
 
-    private readonly Dictionary<string, string> _libraryIdentifiersByAlias;
+    private readonly Dictionary<string, string> _libraryIdentifiersByAlias = new();
 
+    /// <summary>
+    /// Adds an alias for the library name and version.
+    /// </summary>
+    /// <param name="alias">The alias.</param>
+    /// <param name="libraryKey">The library key.</param>
     public void AddAliasForNameAndVersion(string alias, string libraryKey) =>
         _libraryIdentifiersByAlias.Add(alias, libraryKey);
 
+    /// <summary>
+    /// Gets the name and version of the library from the alias.
+    /// References to definitions from included libraries are resolved using the alias.
+    /// </summary>
+    /// <param name="alias">The alias.</param>
+    /// <param name="throwError">Indicates whether to throw an error if the alias is not found.</param>
+    /// <returns>The name and version of the library.</returns>
     public string? GetNameAndVersionFromAlias(string? alias, bool throwError = true)
     {
         if (alias == null)
@@ -74,9 +92,14 @@ partial class LibraryExpressionBuilderContext
 
     #region Codes By CodeSystemName
 
-    private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
+    private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName = new();
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Tries to get the codes by code system name.
+    /// </summary>
+    /// <param name="codeSystemName">The name of the code system.</param>
+    /// <param name="codes">The list of CqlCode objects.</param>
+    /// <returns>True if the codes are found, false otherwise.</returns>
     public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
         _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
 
@@ -89,17 +112,29 @@ partial class LibraryExpressionBuilderContext
         _codesByCodeSystemName.Add(codeSystemName!, codings);
         return codings;
     }
-    public ILibrarySetExpressionBuilderContext? LibrarySetContext { get; }
+
+    public LibrarySetExpressionBuilderContext? LibrarySetContext => libsCtx;
 
     #endregion
 
     #region Codes By Name (cross library???)
 
-    private readonly Dictionary<string, CqlCode> _codesByName;
+    private readonly Dictionary<string, CqlCode> _codesByName = new();
 
+    /// <summary>
+    /// Tries to get the CqlCode object by code reference.
+    /// </summary>
+    /// <param name="codeRef">The code reference.</param>
+    /// <param name="systemCode">The CqlCode object.</param>
+    /// <returns>True if the CqlCode object is found, false otherwise.</returns>
     public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)] out CqlCode? systemCode) =>
         _codesByName.TryGetValue(codeRef.name, out systemCode);
 
+    /// <summary>
+    /// Adds a code definition and its corresponding CqlCode object.
+    /// </summary>
+    /// <param name="codeDef">The code definition.</param>
+    /// <param name="cqlCode">The CqlCode object.</param>
     public void AddCode(CodeDef codeDef, CqlCode cqlCode)
     {
         _codesByName.Add(codeDef.name, cqlCode);
@@ -113,7 +148,7 @@ partial class LibraryExpressionBuilderContext
 
     #region Url By CodeSystemRef (cross library)
 
-    private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs;
+    private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs = new();
 
     private void AddCodeSystemRefsFromIncludes()
     {
@@ -147,7 +182,12 @@ partial class LibraryExpressionBuilderContext
         }
     }
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Tries to get the code system name by code system reference.
+    /// </summary>
+    /// <param name="codeSystemRef">The code system reference.</param>
+    /// <param name="url">The URL of the code system.</param>
+    /// <returns>True if the code system name is found, false otherwise.</returns>
     public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)] out string? url)
     {
         var libraryName = GetNameAndVersionFromAlias(codeSystemRef.libraryName);

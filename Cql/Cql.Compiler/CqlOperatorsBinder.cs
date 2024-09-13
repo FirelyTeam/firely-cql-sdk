@@ -24,38 +24,27 @@ namespace Hl7.Cql.Compiler
     /// by converting the method name and <see cref="Expression"/> arguments
     /// to the appropriate overload of the method.
     /// </summary>
-    internal partial class CqlOperatorsBinder
+    /// <param name="logger">
+    /// The logger used.
+    /// </param>
+    /// <param name="typeResolver">
+    /// The type resolver used.
+    /// Note that if you provide a different instance of this class to <see cref="CqlOperators"/>, you will get errors at runtime.
+    /// </param>
+    /// <param name="typeConverter">
+    /// If provided, this binding will use the supplied instance to determine whether
+    /// a conversion is possible.  Note that if you provide a different instance of this class to <see cref="CqlOperators"/>,
+    /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
+    /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
+    /// </param>
+    internal partial class CqlOperatorsBinder(
+        ILogger<CqlOperatorsBinder> logger,
+        TypeResolver typeResolver,
+        TypeConverter typeConverter)
     {
-        private readonly ILogger<CqlOperatorsBinder> _logger;
-        private readonly TypeConverter _typeConverter;
-        private readonly TypeResolver _typeResolver;
-
-
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        /// <param name="logger">
-        /// The logger used.
-        /// </param>
-        /// <param name="typeResolver">
-        /// The type resolver used.
-        /// Note that if you provide a different instance of this class to <see cref="CqlOperators"/>, you will get errors at runtime.
-        /// </param>
-        /// <param name="typeConverter">
-        /// If provided, this binding will use the supplied instance to determine whether
-        /// a conversion is possible.  Note that if you provide a different instance of this class to <see cref="CqlOperators"/>,
-        /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
-        /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
-        /// </param>
-        public CqlOperatorsBinder(
-            ILogger<CqlOperatorsBinder> logger,
-            TypeResolver typeResolver,
-            TypeConverter typeConverter)
-        {
-            _typeConverter = typeConverter;
-            _typeResolver = typeResolver;
-            _logger = logger;
-        }
+        private readonly ILogger<CqlOperatorsBinder> _logger = logger;
+        private readonly TypeResolver _typeResolver = typeResolver;
+        private readonly TypeConverter _typeConverter = typeConverter;
 
         /// <summary>
         /// Facilitates binding to <see cref="ICqlOperators"/> methods,

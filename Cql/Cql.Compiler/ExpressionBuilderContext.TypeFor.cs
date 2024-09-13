@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
@@ -114,7 +114,8 @@ partial class ExpressionBuilderContext
 
             case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
             {
-                _operands.TryGetValue(operandRef.name, out var operand);
+                ParameterExpression? operand = null;
+                _operands?.TryGetValue(operandRef.name, out operand);
                 if (operand != null)
                     return operand.Type;
                 break;
@@ -250,46 +251,6 @@ partial class ExpressionBuilderContext
                     return type;
                 });
 
-        return TupleTypeFor(elementInfo);
-    }
-
-    private Type TupleTypeFor(IReadOnlyDictionary<string, Type> elementInfo)
-    {
-        var normalizedProperties = elementInfo
-            .SelectToArray(kvp =>
-            {
-                var propName = NormalizeIdentifier(kvp.Key);
-                var propType = kvp.Value;
-                return (propName, propType);
-            });
-
-        var matchedTupleType = _typeManager.TupleTypes
-                                           .FirstOrDefault(tupleType =>
-                                           {
-                                               var isMatch = normalizedProperties
-                                                   .All(prop =>
-                                                            tupleType.GetProperty(prop.propName) is { PropertyType: { } tuplePropertyType }
-                                                            && tuplePropertyType == prop.propType);
-                                               return isMatch;
-                                           });
-        if (matchedTupleType != null)
-            return matchedTupleType;
-
-        var typeName = $"Tuples.{_typeManager.TupleTypeNameFor(elementInfo)}";
-
-        var myTypeBuilder = _typeManager.ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
-
-        foreach (var kvp in elementInfo)
-        {
-            if (kvp.Key != null)
-            {
-                var name = NormalizeIdentifier(kvp.Key);
-                var type = kvp.Value;
-                TypeManager.DefineProperty(myTypeBuilder, name!, kvp.Key, type);
-            }
-        }
-        var typeInfo = myTypeBuilder.CreateTypeInfo();
-        _typeManager.AddTupleType(typeInfo!); // TODO: PDB - This is changing external state. Should become internal instead
-        return typeInfo!;
+        return _tupleBuilderCache.CreateOrGetTupleTypeFor(elementInfo);
     }
 }

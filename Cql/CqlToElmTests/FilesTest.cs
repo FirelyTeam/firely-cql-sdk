@@ -29,7 +29,7 @@ public class FilesTest : Base
     }
 #pragma warning restore IDE0060 // Remove unused parameter
 
-    internal static FileSystemLibraryProvider LibraryProvider => (FileSystemLibraryProvider)CqlToElmServices.ServiceProvider.GetRequiredService<ILibraryProvider>();
+    internal static FileSystemLibraryProvider LibraryProvider => (FileSystemLibraryProvider)ServiceProvider.GetRequiredService<ILibraryProvider>();
 
     private void TestLibrary(FileInfo fileInfo)
     {
@@ -37,7 +37,7 @@ public class FilesTest : Base
         {
             System.Diagnostics.Debug.WriteLine($"Processing {fileInfo.FullName}");
             var cql = File.ReadAllText(fileInfo.FullName);
-            var builder = MakeLibraryBuilder(CqlToElmServices.ServiceProvider, cql);
+            var builder = MakeLibraryBuilder(ServiceProvider, cql);
             var lib = builder.Build();
             LibraryProvider.TryAddLibrary(lib.identifier.id, lib.identifier.version, fileInfo, builder);
             var errors = lib.GetErrors();
