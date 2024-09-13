@@ -6,22 +6,21 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Hosting;
 using Hl7.Fhir.Introspection;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Hl7.Cql.Compiler.Hosting;
+// ReSharper disable once CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Microsoft.Extensions.DependencyInjection;
 
-internal static class CqlCompilerServicesInitializer
+
+internal static class CqlCompilerServiceCollectionExtensions
 {
-    internal static CqlCompilerServices GetCqlCompilerServices(this IServiceProvider serviceProvider) =>
-        new CqlCompilerServices(serviceProvider);
-
     internal static IServiceCollection AddCqlCompilerServices(this IServiceCollection services)
     {
         services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
@@ -29,7 +28,7 @@ internal static class CqlCompilerServicesInitializer
         const int cacheSize = 0; // TODO: Must move to configuration
         services.TryAddSingleton<TypeConverter>(sp =>
         {
-            var modelInspector = sp.GetCqlCompilerServices().ModelInspector;
+            var modelInspector = sp.GetModelInspector();
             var logger = sp.GetLogger<TypeConverter>();
             var converter = FhirTypeConverter
                             .Create(modelInspector, cacheSize)

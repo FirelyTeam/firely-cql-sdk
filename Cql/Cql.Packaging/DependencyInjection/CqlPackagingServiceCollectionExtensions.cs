@@ -7,19 +7,19 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.CodeGeneration.NET.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Hl7.Cql.Packaging.Hosting;
+// ReSharper disable once CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Microsoft.Extensions.DependencyInjection;
 
-internal static class CqlPackagingServicesInitializer
+
+internal static class CqlPackagingServiceCollectionExtensions
 {
-    internal static CqlPackagingServices GetCqlPackagingServices(this IServiceProvider serviceProvider) =>
-        new CqlPackagingServices(serviceProvider);
-
     public static IServiceCollection AddCqlPackagingServices(this IServiceCollection services)
     {
         services.AddCqlCodeGenerationServices();
