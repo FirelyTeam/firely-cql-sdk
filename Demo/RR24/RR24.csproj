@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+	<Import Project="..\cql-demo.props" />
+
+	<PropertyGroup>
+		<Configurations>Debug;Release;Generate-CQL-to-ELM</Configurations>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
+		<ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
+		<ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
+		<ProjectReference Include="..\CLI\CLI.csproj" />
+		<ProjectReference Include="..\Cql\Cql.csproj" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<LibrarySet>RR24</LibrarySet>
+		<CqlDirectory>$(MSBuildProjectDirectory)/input/cql</CqlDirectory>
+		<ElmDirectory>$(MSBuildProjectDirectory)/Elm</ElmDirectory>
+		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
+		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
+	</PropertyGroup>
+
+	<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="../Cql/Build/CqlToElm.Targets.xml" />
+	<Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="../Cql/Build/ElmToCSharp.Targets.xml" />
+
+
+	<ItemGroup>
+		<Content Include="$(CqlDirectory)/*">
+			<Link>input/cql/%(Filename)%(Extension)</Link>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="$(ElmDirectory)/*">
+			<Link>Elm/%(Filename)%(Extension)</Link>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="$(ResourcesDirectory)/*">
+			<Link>Resources/%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="input/**">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="CSharp\" />
+	  <Folder Include="Elm\" />
+	</ItemGroup>
+
+</Project>

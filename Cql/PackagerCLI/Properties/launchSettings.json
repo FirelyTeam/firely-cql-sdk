@@ -12,6 +12,10 @@
       "commandName": "Project",
       "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" --cs-typeformat explicit --f true"
     },
+    "PackageCLI (RR24)": {
+      "commandName": "Project",
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/Demo/RR24/Elm\" --cql \"$(CqlSolutionDir)/Demo/RR24/input/cql\" --fhir \"$(CqlSolutionDir)/Demo/RR24/Resources\" --cs \"$(CqlSolutionDir)/Demo/RR24/CSharp\" --cs-typeformat explicit --f true"
+    },
     "PackageCLI (Ncqa.DQIC\\BuildArtifacts)": {
       "commandName": "Project",
       "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00.000Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Elm\" --cql \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Cql\" --fhir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Resources\" --cs \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/CSharp\" --cs-typeformat explicit --f true"
