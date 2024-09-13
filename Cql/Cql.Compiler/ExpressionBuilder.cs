@@ -74,23 +74,4 @@ internal class ExpressionBuilder(
     public void ProcessExpressionDef(LibraryExpressionBuilderContext libCtx, ExpressionDef expressionDef) =>
         NewExpressionBuilderContext(libCtx, new Dictionary<string, ParameterExpression>())
             .ProcessExpressionDef(expressionDef);
-
-    internal static PropertyInfo? GetProperty(Type type, string name, TypeResolver typeResolver)
-    {
-        if (type.IsGenericType)
-        {
-            var gtd = type.GetGenericTypeDefinition();
-            if (gtd == typeof(Nullable<>))
-            {
-                if (string.Equals(name, "value", StringComparison.OrdinalIgnoreCase))
-                {
-                    var valueMember = type.GetProperty("Value");
-                    return valueMember;
-                }
-            }
-        }
-
-        var member = typeResolver.GetProperty(type, name);
-        return member;
-    }
 }

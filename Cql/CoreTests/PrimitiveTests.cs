@@ -3405,14 +3405,17 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
-            using var disposeContext = new DisposeContext();
-            var cqlCodeGenerationServices = CqlServicesInitializer.CreateCqlCodeGenerationServices(disposeContext.Token);
+            using var serviceProvider = new ServiceCollection()
+                                        .AddDebugLogging()
+                                        .AddCqlCodeGenerationServices()
+                                        .BuildServiceProvider(validateScopes: true);
+            using var serviceScope = serviceProvider.CreateScope();
 
             var librarySet = new LibrarySet();
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
-            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
-            var writer = cqlCodeGenerationServices.CSharpLibrarySetToStreamsWriter;
+            var definitions = serviceScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var writer = serviceProvider.GetCSharpLibrarySetToStreamsWriter();
             var isDone = false;
             writer.ProcessDefinitions(
                 definitions,

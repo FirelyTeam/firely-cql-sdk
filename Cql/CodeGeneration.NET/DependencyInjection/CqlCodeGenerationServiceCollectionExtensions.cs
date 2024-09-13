@@ -6,20 +6,19 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
-using Hl7.Cql.Compiler.Hosting;
-using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Hl7.Cql.CodeGeneration.NET.Hosting;
+// ReSharper disable once CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Microsoft.Extensions.DependencyInjection;
 
-internal static class CqlCodeGenerationServicesInitializer
+
+internal static class CqlCodeGenerationServiceCollectionExtensions
 {
-    internal static CqlCodeGenerationServices GetCqlCodeGenerationServices(this IServiceProvider serviceProvider) =>
-        new CqlCodeGenerationServices(serviceProvider);
-
     public static IServiceCollection AddCqlCodeGenerationServices(this IServiceCollection services)
     {
         services.AddCqlCompilerServices();
