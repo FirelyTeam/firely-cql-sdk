@@ -21,18 +21,13 @@ using Hl7.Fhir.Utility;
 namespace Hl7.Cql.Packaging;
 
 #pragma warning disable CS1591
-internal class ResourcePackager
+internal class ResourcePackager(
+    TypeResolver typeResolver,
+    FhirResourcePostProcessor? fhirResourcePostProcessor
+    )
 {
-    private readonly TypeResolver _typeResolver;
-    private readonly FhirResourcePostProcessor? _fhirResourcePostProcessor;
-
-    public ResourcePackager(
-        TypeResolver typeResolver,
-        FhirResourcePostProcessor? fhirResourcePostProcessor)
-    {
-        _typeResolver = typeResolver;
-        _fhirResourcePostProcessor = fhirResourcePostProcessor;
-    }
+    private readonly TypeResolver _typeResolver = typeResolver;
+    private readonly FhirResourcePostProcessor? _fhirResourcePostProcessor = fhirResourcePostProcessor;
 
     public IReadOnlyCollection<Resource> PackageResources(
         DirectoryInfo elmDirectory,
