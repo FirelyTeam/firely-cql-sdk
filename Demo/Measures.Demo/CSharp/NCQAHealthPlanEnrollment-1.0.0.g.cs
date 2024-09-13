@@ -47,10 +47,10 @@ public class NCQAHealthPlanEnrollment_1_0_0
 		CqlInterval<CqlDate> a_(Coverage C)
 		{
 			Period c_ = C?.Period;
-			CqlInterval<CqlDateTime> d_ = NCQAFHIRBase_1_0_0.Normalize_Interval((c_ as object));
+			CqlInterval<CqlDateTime> d_ = NCQAFHIRBase_1_0_0.Normalize_Interval(c_ as object);
 			CqlDateTime e_ = context.Operators.Start(d_);
 			CqlDate f_ = context.Operators.DateFrom(e_);
-			CqlInterval<CqlDateTime> h_ = NCQAFHIRBase_1_0_0.Normalize_Interval((c_ as object));
+			CqlInterval<CqlDateTime> h_ = NCQAFHIRBase_1_0_0.Normalize_Interval(c_ as object);
 			CqlDateTime i_ = context.Operators.End(h_);
 			CqlDate j_ = context.Operators.DateFrom(i_);
 			CqlInterval<CqlDate> k_ = context.Operators.Interval(f_, j_, true, true);
@@ -245,7 +245,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 				IEnumerable<Period> u_ = context.Operators.Select<Coverage, Period>(s_, t_);
 				bool? v_(Period Cperiod)
 				{
-					CqlInterval<CqlDateTime> ab_ = NCQAFHIRBase_1_0_0.Normalize_Interval((Cperiod as object));
+					CqlInterval<CqlDateTime> ab_ = NCQAFHIRBase_1_0_0.Normalize_Interval(Cperiod as object);
 					CqlDateTime ac_ = context.Operators.Start(ab_);
 					CqlDate ad_ = context.Operators.DateFrom(ac_);
 					CqlDateTime af_ = context.Operators.End(ab_);

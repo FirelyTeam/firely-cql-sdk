@@ -155,7 +155,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
 			object u_ = context.Operators.SingletonFrom<object>(t_);
-			CqlCode v_ = FHIRHelpers_4_3_000.ToCode((u_ as Coding));
+			CqlCode v_ = FHIRHelpers_4_3_000.ToCode(u_ as Coding);
 			CqlCode[] w_ = [
 				v_,
 			];
@@ -180,12 +180,12 @@ public class SupplementalDataElements_3_4_000
 			IEnumerable<object> aa_ = context.Operators.Select<Extension, object>(y_, z_);
 			CqlCode ab_(object @this)
 			{
-				CqlCode av_ = FHIRHelpers_4_3_000.ToCode((@this as Coding));
+				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(@this as Coding);
 
 				return av_;
 			};
 			IEnumerable<CqlCode> ac_ = context.Operators.Select<object, CqlCode>(aa_, ab_);
-			IEnumerable<CqlCode> ad_ = context.Operators.Union<CqlCode>((w_ as IEnumerable<CqlCode>), ac_);
+			IEnumerable<CqlCode> ad_ = context.Operators.Union<CqlCode>(w_ as IEnumerable<CqlCode>, ac_);
 			bool? ae_(Extension @this)
 			{
 				string aw_ = @this?.Url;
@@ -303,7 +303,7 @@ public class SupplementalDataElements_3_4_000
 			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
 			CqlCode u_(object @this)
 			{
-				CqlCode ap_ = FHIRHelpers_4_3_000.ToCode((@this as Coding));
+				CqlCode ap_ = FHIRHelpers_4_3_000.ToCode(@this as Coding);
 
 				return ap_;
 			};
@@ -329,7 +329,7 @@ public class SupplementalDataElements_3_4_000
 			IEnumerable<object> z_ = context.Operators.Select<Extension, object>(x_, y_);
 			CqlCode aa_(object @this)
 			{
-				CqlCode av_ = FHIRHelpers_4_3_000.ToCode((@this as Coding));
+				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(@this as Coding);
 
 				return av_;
 			};

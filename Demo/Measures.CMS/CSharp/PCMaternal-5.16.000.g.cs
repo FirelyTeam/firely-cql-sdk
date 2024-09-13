@@ -477,7 +477,7 @@ public class PCMaternal_5_16_000
 				"amended",
 				"corrected",
 			];
-			bool? s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
+			bool? s_ = context.Operators.In<string>(q_, r_ as IEnumerable<string>);
 			bool? t_ = context.Operators.And(m_, s_);
 			object u_()
 			{
@@ -510,21 +510,21 @@ public class PCMaternal_5_16_000
 					DataType aq_ = TimeOfDelivery?.Effective;
 					object ar_ = FHIRHelpers_4_3_000.ToValue(aq_);
 
-					return ((ar_ as CqlDateTime) as object);
+					return (ar_ as CqlDateTime) as object;
 				}
 				else if (af_())
 				{
 					DataType as_ = TimeOfDelivery?.Effective;
 					object at_ = FHIRHelpers_4_3_000.ToValue(as_);
 
-					return ((at_ as CqlInterval<CqlDateTime>) as object);
+					return (at_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ag_())
 				{
 					DataType au_ = TimeOfDelivery?.Effective;
 					object av_ = FHIRHelpers_4_3_000.ToValue(au_);
 
-					return ((av_ as CqlDateTime) as object);
+					return (av_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -536,7 +536,7 @@ public class PCMaternal_5_16_000
 			bool? x_ = context.Operators.In<CqlDateTime>(v_, w_, default);
 			bool? y_ = context.Operators.And(t_, x_);
 			object aa_ = FHIRHelpers_4_3_000.ToValue(k_);
-			bool? ac_ = context.Operators.In<CqlDateTime>((aa_ as CqlDateTime), w_, default);
+			bool? ac_ = context.Operators.In<CqlDateTime>(aa_ as CqlDateTime, w_, default);
 			bool? ad_ = context.Operators.And(y_, ac_);
 
 			return ad_;
@@ -575,21 +575,21 @@ public class PCMaternal_5_16_000
 					DataType bk_ = @this?.Effective;
 					object bl_ = FHIRHelpers_4_3_000.ToValue(bk_);
 
-					return ((bl_ as CqlDateTime) as object);
+					return (bl_ as CqlDateTime) as object;
 				}
 				else if (az_())
 				{
 					DataType bm_ = @this?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
 
-					return ((bn_ as CqlInterval<CqlDateTime>) as object);
+					return (bn_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ba_())
 				{
 					DataType bo_ = @this?.Effective;
 					object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 
-					return ((bp_ as CqlDateTime) as object);
+					return (bp_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -605,7 +605,7 @@ public class PCMaternal_5_16_000
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 
-		return (j_ as CqlDateTime);
+		return j_ as CqlDateTime;
 	}
 
     [CqlDeclaration("lastEstimatedDeliveryDate")]
@@ -628,7 +628,7 @@ public class PCMaternal_5_16_000
 				"amended",
 				"corrected",
 			];
-			bool? s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
+			bool? s_ = context.Operators.In<string>(q_, r_ as IEnumerable<string>);
 			bool? t_ = context.Operators.And(m_, s_);
 			object u_()
 			{
@@ -661,21 +661,21 @@ public class PCMaternal_5_16_000
 					DataType as_ = EstimatedDateOfDelivery?.Effective;
 					object at_ = FHIRHelpers_4_3_000.ToValue(as_);
 
-					return ((at_ as CqlDateTime) as object);
+					return (at_ as CqlDateTime) as object;
 				}
 				else if (ah_())
 				{
 					DataType au_ = EstimatedDateOfDelivery?.Effective;
 					object av_ = FHIRHelpers_4_3_000.ToValue(au_);
 
-					return ((av_ as CqlInterval<CqlDateTime>) as object);
+					return (av_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ai_())
 				{
 					DataType aw_ = EstimatedDateOfDelivery?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
 
-					return ((ax_ as CqlDateTime) as object);
+					return (ax_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -728,21 +728,21 @@ public class PCMaternal_5_16_000
 					DataType bm_ = @this?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
 
-					return ((bn_ as CqlDateTime) as object);
+					return (bn_ as CqlDateTime) as object;
 				}
 				else if (bb_())
 				{
 					DataType bo_ = @this?.Effective;
 					object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 
-					return ((bp_ as CqlInterval<CqlDateTime>) as object);
+					return (bp_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bc_())
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
 
-					return ((br_ as CqlDateTime) as object);
+					return (br_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -758,7 +758,7 @@ public class PCMaternal_5_16_000
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 
-		return (j_ as CqlDateTime);
+		return j_ as CqlDateTime;
 	}
 
     [CqlDeclaration("calculatedGestationalAge")]
@@ -832,21 +832,21 @@ public class PCMaternal_5_16_000
 					DataType bf_ = EstimatedGestationalAge?.Effective;
 					object bg_ = FHIRHelpers_4_3_000.ToValue(bf_);
 
-					return ((bg_ as CqlDateTime) as object);
+					return (bg_ as CqlDateTime) as object;
 				}
 				else if (au_())
 				{
 					DataType bh_ = EstimatedGestationalAge?.Effective;
 					object bi_ = FHIRHelpers_4_3_000.ToValue(bh_);
 
-					return ((bi_ as CqlInterval<CqlDateTime>) as object);
+					return (bi_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (av_())
 				{
 					DataType bj_ = EstimatedGestationalAge?.Effective;
 					object bk_ = FHIRHelpers_4_3_000.ToValue(bj_);
 
-					return ((bk_ as CqlDateTime) as object);
+					return (bk_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -874,7 +874,7 @@ public class PCMaternal_5_16_000
 				"amended",
 				"corrected",
 			];
-			bool? ad_ = context.Operators.In<string>(ab_, (ac_ as IEnumerable<string>));
+			bool? ad_ = context.Operators.In<string>(ab_, ac_ as IEnumerable<string>);
 			bool? ae_ = context.Operators.And(x_, ad_);
 			object af_()
 			{
@@ -907,21 +907,21 @@ public class PCMaternal_5_16_000
 					DataType bx_ = EstimatedGestationalAge?.Effective;
 					object by_ = FHIRHelpers_4_3_000.ToValue(bx_);
 
-					return ((by_ as CqlDateTime) as object);
+					return (by_ as CqlDateTime) as object;
 				}
 				else if (bm_())
 				{
 					DataType bz_ = EstimatedGestationalAge?.Effective;
 					object ca_ = FHIRHelpers_4_3_000.ToValue(bz_);
 
-					return ((ca_ as CqlInterval<CqlDateTime>) as object);
+					return (ca_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bn_())
 				{
 					DataType cb_ = EstimatedGestationalAge?.Effective;
 					object cc_ = FHIRHelpers_4_3_000.ToValue(cb_);
 
-					return ((cc_ as CqlDateTime) as object);
+					return (cc_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -961,21 +961,21 @@ public class PCMaternal_5_16_000
 					DataType cp_ = EstimatedGestationalAge?.Effective;
 					object cq_ = FHIRHelpers_4_3_000.ToValue(cp_);
 
-					return ((cq_ as CqlDateTime) as object);
+					return (cq_ as CqlDateTime) as object;
 				}
 				else if (ce_())
 				{
 					DataType cr_ = EstimatedGestationalAge?.Effective;
 					object cs_ = FHIRHelpers_4_3_000.ToValue(cr_);
 
-					return ((cs_ as CqlInterval<CqlDateTime>) as object);
+					return (cs_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (cf_())
 				{
 					DataType ct_ = EstimatedGestationalAge?.Effective;
 					object cu_ = FHIRHelpers_4_3_000.ToValue(ct_);
 
-					return ((cu_ as CqlDateTime) as object);
+					return (cu_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -1027,21 +1027,21 @@ public class PCMaternal_5_16_000
 					DataType dj_ = @this?.Effective;
 					object dk_ = FHIRHelpers_4_3_000.ToValue(dj_);
 
-					return ((dk_ as CqlDateTime) as object);
+					return (dk_ as CqlDateTime) as object;
 				}
 				else if (cy_())
 				{
 					DataType dl_ = @this?.Effective;
 					object dm_ = FHIRHelpers_4_3_000.ToValue(dl_);
 
-					return ((dm_ as CqlInterval<CqlDateTime>) as object);
+					return (dm_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (cz_())
 				{
 					DataType dn_ = @this?.Effective;
 					object do_ = FHIRHelpers_4_3_000.ToValue(dn_);
 
-					return ((do_ as CqlDateTime) as object);
+					return (do_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -1057,7 +1057,7 @@ public class PCMaternal_5_16_000
 		DataType h_ = g_?.Value;
 		object i_ = FHIRHelpers_4_3_000.ToValue(h_);
 
-		return (i_ as CqlQuantity);
+		return i_ as CqlQuantity;
 	}
 
 }

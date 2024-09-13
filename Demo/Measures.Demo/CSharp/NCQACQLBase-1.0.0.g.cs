@@ -45,14 +45,14 @@ public class NCQACQLBase_1_0_0
 				CqlInterval<CqlDate>[] e_ = []
 ;
 
-				return (e_ as IEnumerable<CqlInterval<CqlDate>>);
+				return e_ as IEnumerable<CqlInterval<CqlDate>>;
 			}
 			else if (b_())
 			{
 				CqlInterval<CqlDate>[] f_ = []
 ;
 
-				return (f_ as IEnumerable<CqlInterval<CqlDate>>);
+				return f_ as IEnumerable<CqlInterval<CqlDate>>;
 			}
 			else
 			{
@@ -117,14 +117,14 @@ public class NCQACQLBase_1_0_0
 				CqlInterval<CqlDateTime>[] e_ = []
 ;
 
-				return (e_ as IEnumerable<CqlInterval<CqlDateTime>>);
+				return e_ as IEnumerable<CqlInterval<CqlDateTime>>;
 			}
 			else if (b_())
 			{
 				CqlInterval<CqlDateTime>[] f_ = []
 ;
 
-				return (f_ as IEnumerable<CqlInterval<CqlDateTime>>);
+				return f_ as IEnumerable<CqlInterval<CqlDateTime>>;
 			}
 			else
 			{
@@ -189,14 +189,14 @@ public class NCQACQLBase_1_0_0
 				CqlInterval<CqlDate>[] e_ = []
 ;
 
-				return (e_ as IEnumerable<CqlInterval<CqlDate>>);
+				return e_ as IEnumerable<CqlInterval<CqlDate>>;
 			}
 			else if (b_())
 			{
 				CqlInterval<CqlDate>[] f_ = []
 ;
 
-				return (f_ as IEnumerable<CqlInterval<CqlDate>>);
+				return f_ as IEnumerable<CqlInterval<CqlDate>>;
 			}
 			else
 			{
@@ -241,14 +241,14 @@ public class NCQACQLBase_1_0_0
 				CqlInterval<CqlDateTime>[] e_ = []
 ;
 
-				return (e_ as IEnumerable<CqlInterval<CqlDateTime>>);
+				return e_ as IEnumerable<CqlInterval<CqlDateTime>>;
 			}
 			else if (b_())
 			{
 				CqlInterval<CqlDateTime>[] f_ = []
 ;
 
-				return (f_ as IEnumerable<CqlInterval<CqlDateTime>>);
+				return f_ as IEnumerable<CqlInterval<CqlDateTime>>;
 			}
 			else
 			{
@@ -334,7 +334,7 @@ public class NCQACQLBase_1_0_0
 						baseInterval,
 					];
 
-					return (r_ as IEnumerable<CqlInterval<CqlDate>>);
+					return r_ as IEnumerable<CqlInterval<CqlDate>>;
 				}
 				else
 				{
@@ -402,7 +402,7 @@ public class NCQACQLBase_1_0_0
 					CqlInterval<CqlDate>[] ay_ = []
 ;
 
-					return (ay_ as IEnumerable<CqlInterval<CqlDate>>);
+					return ay_ as IEnumerable<CqlInterval<CqlDate>>;
 				}
 				else
 				{
@@ -418,7 +418,7 @@ public class NCQACQLBase_1_0_0
 						bh_,
 					];
 
-					return (bi_ as IEnumerable<CqlInterval<CqlDate>>);
+					return bi_ as IEnumerable<CqlInterval<CqlDate>>;
 				}
 			};
 			(IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)? i_ = (g_(), h_());
@@ -471,7 +471,7 @@ public class NCQACQLBase_1_0_0
 						baseInterval,
 					];
 
-					return (r_ as IEnumerable<CqlInterval<CqlDateTime>>);
+					return r_ as IEnumerable<CqlInterval<CqlDateTime>>;
 				}
 				else
 				{
@@ -539,7 +539,7 @@ public class NCQACQLBase_1_0_0
 					CqlInterval<CqlDateTime>[] ay_ = []
 ;
 
-					return (ay_ as IEnumerable<CqlInterval<CqlDateTime>>);
+					return ay_ as IEnumerable<CqlInterval<CqlDateTime>>;
 				}
 				else
 				{
@@ -555,7 +555,7 @@ public class NCQACQLBase_1_0_0
 						bh_,
 					];
 
-					return (bi_ as IEnumerable<CqlInterval<CqlDateTime>>);
+					return bi_ as IEnumerable<CqlInterval<CqlDateTime>>;
 				}
 			};
 			(IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)? i_ = (g_(), h_());
@@ -611,7 +611,7 @@ public class NCQACQLBase_1_0_0
 						o_,
 						0,
 					];
-					int? q_ = context.Operators.Max<int?>((p_ as IEnumerable<int?>));
+					int? q_ = context.Operators.Max<int?>(p_ as IEnumerable<int?>);
 
 					return q_;
 				};
@@ -632,7 +632,7 @@ public class NCQACQLBase_1_0_0
 			};
 			if (r_())
 			{
-				return (null as CqlInterval<CqlDate>);
+				return null as CqlInterval<CqlDate>;
 			}
 			else
 			{
@@ -646,7 +646,7 @@ public class NCQACQLBase_1_0_0
 						ad_,
 						0,
 					];
-					int? af_ = context.Operators.Max<int?>((ae_ as IEnumerable<int?>));
+					int? af_ = context.Operators.Max<int?>(ae_ as IEnumerable<int?>);
 					(CqlInterval<CqlDate> interval, int? days)? ag_ = (I, af_);
 
 					return ag_;
@@ -690,7 +690,7 @@ public class NCQACQLBase_1_0_0
 						bg_,
 						0,
 					];
-					int? bi_ = context.Operators.Max<int?>((bh_ as IEnumerable<int?>));
+					int? bi_ = context.Operators.Max<int?>(bh_ as IEnumerable<int?>);
 					(CqlInterval<CqlDate> interval, int? days)? bj_ = (I, bi_);
 
 					return bj_;
@@ -716,7 +716,7 @@ public class NCQACQLBase_1_0_0
 						bo_,
 						0,
 					];
-					int? bq_ = context.Operators.Max<int?>((bp_ as IEnumerable<int?>));
+					int? bq_ = context.Operators.Max<int?>(bp_ as IEnumerable<int?>);
 					(CqlInterval<CqlDate> interval, int? days)? br_ = (I, bq_);
 
 					return br_;
@@ -738,7 +738,7 @@ public class NCQACQLBase_1_0_0
 					ba_,
 					0,
 				];
-				int? bc_ = context.Operators.Max<int?>((bb_ as IEnumerable<int?>));
+				int? bc_ = context.Operators.Max<int?>(bb_ as IEnumerable<int?>);
 
 				return bc_;
 			}
@@ -1111,7 +1111,7 @@ public class NCQACQLBase_1_0_0
 						q_,
 						0,
 					];
-					int? s_ = context.Operators.Max<int?>((r_ as IEnumerable<int?>));
+					int? s_ = context.Operators.Max<int?>(r_ as IEnumerable<int?>);
 
 					return s_;
 				};
@@ -1132,7 +1132,7 @@ public class NCQACQLBase_1_0_0
 			};
 			if (t_())
 			{
-				return (null as CqlInterval<CqlDateTime>);
+				return null as CqlInterval<CqlDateTime>;
 			}
 			else
 			{
@@ -1147,7 +1147,7 @@ public class NCQACQLBase_1_0_0
 						ah_,
 						0,
 					];
-					int? aj_ = context.Operators.Max<int?>((ai_ as IEnumerable<int?>));
+					int? aj_ = context.Operators.Max<int?>(ai_ as IEnumerable<int?>);
 					(CqlInterval<CqlDateTime> interval, int? days)? ak_ = (I, aj_);
 
 					return ak_;
@@ -1192,7 +1192,7 @@ public class NCQACQLBase_1_0_0
 						bo_,
 						0,
 					];
-					int? bq_ = context.Operators.Max<int?>((bp_ as IEnumerable<int?>));
+					int? bq_ = context.Operators.Max<int?>(bp_ as IEnumerable<int?>);
 					(CqlInterval<CqlDateTime> interval, int? days)? br_ = (I, bq_);
 
 					return br_;
@@ -1220,7 +1220,7 @@ public class NCQACQLBase_1_0_0
 						by_,
 						0,
 					];
-					int? ca_ = context.Operators.Max<int?>((bz_ as IEnumerable<int?>));
+					int? ca_ = context.Operators.Max<int?>(bz_ as IEnumerable<int?>);
 					(CqlInterval<CqlDateTime> interval, int? days)? cb_ = (I, ca_);
 
 					return cb_;
@@ -1243,7 +1243,7 @@ public class NCQACQLBase_1_0_0
 					bg_,
 					0,
 				];
-				int? bi_ = context.Operators.Max<int?>((bh_ as IEnumerable<int?>));
+				int? bi_ = context.Operators.Max<int?>(bh_ as IEnumerable<int?>);
 
 				return bi_;
 			}

@@ -35,7 +35,7 @@ public class FHIRHelpers_4_0_1
 		{
 			if (period is null)
 			{
-				return (null as CqlInterval<CqlDateTime>);
+				return null as CqlInterval<CqlDateTime>;
 			}
 			else if (period?.StartElement is null)
 			{
@@ -69,7 +69,7 @@ public class FHIRHelpers_4_0_1
 		{
 			if (quantity is null)
 			{
-				return (null as CqlInterval<CqlQuantity>);
+				return null as CqlInterval<CqlQuantity>;
 			}
 			else
 			{
@@ -162,7 +162,7 @@ public class FHIRHelpers_4_0_1
 		{
 			if (range is null)
 			{
-				return (null as CqlInterval<CqlQuantity>);
+				return null as CqlInterval<CqlQuantity>;
 			}
 			else
 			{
@@ -261,7 +261,7 @@ public class FHIRHelpers_4_0_1
 			{
 				object o_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
 
-				return (o_ as CqlQuantity);
+				return o_ as CqlQuantity;
 			}
 			else if (c_())
 			{
@@ -291,7 +291,7 @@ public class FHIRHelpers_4_0_1
 				string ah_ = context.Operators.Concatenate(ag_ ?? "", ")");
 				object ai_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ah_);
 
-				return (ai_ as CqlQuantity);
+				return ai_ as CqlQuantity;
 			}
 		};
 
@@ -351,7 +351,7 @@ public class FHIRHelpers_4_0_1
 				string ad_ = context.Operators.Concatenate(ac_ ?? "", ")");
 				object ae_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ad_);
 
-				return (ae_ as CqlQuantity);
+				return ae_ as CqlQuantity;
 			}
 		};
 

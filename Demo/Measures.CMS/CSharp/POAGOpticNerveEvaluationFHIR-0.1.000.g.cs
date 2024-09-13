@@ -454,7 +454,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			};
 			IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
 			object y_ = context.Operators.SingletonFrom<object>(x_);
-			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept((y_ as CodeableConcept));
+			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_ as CodeableConcept);
 			CqlValueSet aa_ = this.Medical_Reason();
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
@@ -519,7 +519,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 			};
 			IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
 			object y_ = context.Operators.SingletonFrom<object>(x_);
-			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept((y_ as CodeableConcept));
+			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_ as CodeableConcept);
 			CqlValueSet aa_ = this.Medical_Reason();
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
@@ -589,7 +589,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			];
-			bool? z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
+			bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
 			bool? aa_ = context.Operators.And(t_, z_);
 
 			return aa_;
@@ -643,7 +643,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			];
-			bool? z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
+			bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
 			bool? aa_ = context.Operators.And(t_, z_);
 
 			return aa_;

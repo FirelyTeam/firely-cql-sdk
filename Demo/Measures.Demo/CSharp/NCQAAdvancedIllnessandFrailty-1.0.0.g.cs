@@ -255,7 +255,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		bool? p_(Encounter FrailtyEncounter)
 		{
 			Period ag_ = FrailtyEncounter?.Period;
-			CqlInterval<CqlDateTime> ah_ = NCQAFHIRBase_1_0_0.Normalize_Interval((ag_ as object));
+			CqlInterval<CqlDateTime> ah_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ag_ as object);
 			CqlInterval<CqlDateTime> ai_ = this.Measurement_Period();
 			bool? aj_ = context.Operators.Overlaps(ah_, ai_, default);
 
@@ -312,7 +312,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			IEnumerable<Condition> x_ = context.Operators.RetrieveByValueSet<Condition>(w_, default);
 			bool? y_ = NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(OutpatientEncounter, x_);
 			Period z_ = OutpatientEncounter?.Period;
-			CqlInterval<CqlDateTime> aa_ = NCQAFHIRBase_1_0_0.Normalize_Interval((z_ as object));
+			CqlInterval<CqlDateTime> aa_ = NCQAFHIRBase_1_0_0.Normalize_Interval(z_ as object);
 			CqlDateTime ab_ = context.Operators.Start(aa_);
 			CqlDate ac_ = context.Operators.DateFrom(ab_);
 			CqlInterval<CqlDateTime> ad_ = this.Measurement_Period();
@@ -332,7 +332,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		CqlDate u_(Encounter EncounterWithDiagnosis)
 		{
 			Period ao_ = EncounterWithDiagnosis?.Period;
-			CqlInterval<CqlDateTime> ap_ = NCQAFHIRBase_1_0_0.Normalize_Interval((ao_ as object));
+			CqlInterval<CqlDateTime> ap_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ao_ as object);
 			CqlDateTime aq_ = context.Operators.End(ap_);
 			CqlDate ar_ = context.Operators.DateFrom(aq_);
 
@@ -424,7 +424,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			}
 			else
 			{
-				return (null as IEnumerable<CqlDate>);
+				return null as IEnumerable<CqlDate>;
 			}
 		};
 
@@ -478,7 +478,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			IEnumerable<Condition> h_ = context.Operators.RetrieveByValueSet<Condition>(g_, default);
 			bool? i_ = NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(InpatientEncounter, h_);
 			Period j_ = InpatientEncounter?.Period;
-			CqlInterval<CqlDateTime> k_ = NCQAFHIRBase_1_0_0.Normalize_Interval((j_ as object));
+			CqlInterval<CqlDateTime> k_ = NCQAFHIRBase_1_0_0.Normalize_Interval(j_ as object);
 			CqlDateTime l_ = context.Operators.Start(k_);
 			CqlDate m_ = context.Operators.DateFrom(l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
@@ -549,7 +549,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		bool? g_(MedicationDispense DementiaMedDispensed)
 		{
 			FhirDateTime j_ = DementiaMedDispensed?.WhenHandedOverElement;
-			CqlInterval<CqlDateTime> k_ = NCQAFHIRBase_1_0_0.Normalize_Interval((j_ as object));
+			CqlInterval<CqlDateTime> k_ = NCQAFHIRBase_1_0_0.Normalize_Interval(j_ as object);
 			CqlDateTime l_ = context.Operators.Start(k_);
 			CqlDate m_ = context.Operators.DateFrom(l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();

@@ -526,7 +526,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				"corrected",
 				"preliminary",
 			];
-			bool? z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
+			bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
 			bool? aa_ = context.Operators.And(t_, z_);
 
 			return aa_;

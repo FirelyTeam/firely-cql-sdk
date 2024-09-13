@@ -1062,13 +1062,13 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			Dosage.DoseAndRateComponent q_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)p_);
 			DataType r_ = q_?.Dose;
 			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			CqlQuantity t_ = context.Operators.End((s_ as CqlInterval<CqlQuantity>));
+			CqlQuantity t_ = context.Operators.End(s_ as CqlInterval<CqlQuantity>);
 			Dosage v_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			List<Dosage.DoseAndRateComponent> w_ = v_?.DoseAndRate;
 			Dosage.DoseAndRateComponent x_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)w_);
 			DataType y_ = x_?.Dose;
 			object z_ = FHIRHelpers_4_3_000.ToValue(y_);
-			decimal? aa_ = (t_ ?? (z_ as CqlQuantity))?.value;
+			decimal? aa_ = (t_ ?? z_ as CqlQuantity)?.value;
 			Dosage ac_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			Timing ad_ = ac_?.Timing;
 			Timing.RepeatComponent ae_ = ad_?.Repeat;

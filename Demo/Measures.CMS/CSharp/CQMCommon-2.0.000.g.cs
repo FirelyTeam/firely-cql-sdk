@@ -399,7 +399,7 @@ public class CQMCommon_2_0_000
 						(IEnumerable<Encounter.LocationComponent>)h_,
 						(IEnumerable<Encounter.LocationComponent>)i_,
 					];
-					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>((j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
+					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>(j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
 
 					return k_;
 				}
@@ -439,7 +439,7 @@ public class CQMCommon_2_0_000
 						(IEnumerable<Encounter.LocationComponent>)h_,
 						(IEnumerable<Encounter.LocationComponent>)i_,
 					];
-					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>((j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
+					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>(j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
 
 					return k_;
 				}
@@ -3274,7 +3274,7 @@ public class CQMCommon_2_0_000
 				DataType f_ = request?.Medication;
 				object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 
-				return (g_ as CqlConcept);
+				return g_ as CqlConcept;
 			}
 			else
 			{
@@ -3323,7 +3323,7 @@ public class CQMCommon_2_0_000
 				DataType f_ = request?.Medication;
 				object g_ = FHIRHelpers_4_3_000.ToValue(f_);
 
-				return (g_ as CqlConcept);
+				return g_ as CqlConcept;
 			}
 			else
 			{

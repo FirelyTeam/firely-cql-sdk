@@ -634,7 +634,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 						(IEnumerable<Encounter.LocationComponent>)h_,
 						(IEnumerable<Encounter.LocationComponent>)i_,
 					];
-					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>((j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>));
+					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>(j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
 
 					return k_;
 				}
@@ -910,20 +910,20 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		{
 			if (choice is FhirDateTime)
 			{
-				CqlDateTime b_ = FHIRHelpers_4_0_001.ToDateTime((choice as FhirDateTime));
+				CqlDateTime b_ = FHIRHelpers_4_0_001.ToDateTime(choice as FhirDateTime);
 				CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
 
 				return d_;
 			}
 			else if (choice is Period)
 			{
-				CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_0_001.ToInterval((choice as Period));
+				CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_0_001.ToInterval(choice as Period);
 
 				return e_;
 			}
 			else if (choice is Instant)
 			{
-				CqlDateTime f_ = FHIRHelpers_4_0_001.ToDateTime((choice as Instant));
+				CqlDateTime f_ = FHIRHelpers_4_0_001.ToDateTime(choice as Instant);
 				CqlInterval<CqlDateTime> h_ = context.Operators.Interval(f_, f_, true, true);
 
 				return h_;
@@ -933,7 +933,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				Patient i_ = this.Patient();
 				Date j_ = i_?.BirthDateElement;
 				CqlDate k_ = FHIRHelpers_4_0_001.ToDate(j_);
-				CqlQuantity l_ = FHIRHelpers_4_0_001.ToQuantity((choice as Age));
+				CqlQuantity l_ = FHIRHelpers_4_0_001.ToQuantity(choice as Age);
 				CqlDate m_ = context.Operators.Add(k_, l_);
 				Date o_ = i_?.BirthDateElement;
 				CqlDate p_ = FHIRHelpers_4_0_001.ToDate(o_);
@@ -1033,19 +1033,19 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			}
 			else if (choice is Timing)
 			{
-				CqlInterval<CqlDateTime> ee_ = context.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute a single interval from a Timing type");
+				CqlInterval<CqlDateTime> ee_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute a single interval from a Timing type");
 
 				return ee_;
 			}
 			else if (choice is FhirString)
 			{
-				CqlInterval<CqlDateTime> ef_ = context.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
+				CqlInterval<CqlDateTime> ef_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
 
 				return ef_;
 			}
 			else
 			{
-				return (null as CqlInterval<CqlDateTime>);
+				return null as CqlInterval<CqlDateTime>;
 			}
 		};
 
@@ -1102,8 +1102,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			if (b_())
 			{
 				DataType t_ = condition?.Abatement;
-				CqlDateTime u_ = FHIRHelpers_4_0_001.ToDateTime((t_ as FhirDateTime));
-				CqlDateTime w_ = FHIRHelpers_4_0_001.ToDateTime((t_ as FhirDateTime));
+				CqlDateTime u_ = FHIRHelpers_4_0_001.ToDateTime(t_ as FhirDateTime);
+				CqlDateTime w_ = FHIRHelpers_4_0_001.ToDateTime(t_ as FhirDateTime);
 				CqlInterval<CqlDateTime> x_ = context.Operators.Interval(u_, w_, true, true);
 
 				return x_;
@@ -1111,13 +1111,13 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			else if (c_())
 			{
 				DataType y_ = condition?.Abatement;
-				CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_0_001.ToInterval((y_ as Period));
+				CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_0_001.ToInterval(y_ as Period);
 
 				return z_;
 			}
 			else if (d_())
 			{
-				CqlInterval<CqlDateTime> aa_ = context.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
+				CqlInterval<CqlDateTime> aa_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
 
 				return aa_;
 			}
@@ -1127,11 +1127,11 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				Date ac_ = ab_?.BirthDateElement;
 				CqlDate ad_ = FHIRHelpers_4_0_001.ToDate(ac_);
 				DataType ae_ = condition?.Abatement;
-				CqlQuantity af_ = FHIRHelpers_4_0_001.ToQuantity((ae_ as Age));
+				CqlQuantity af_ = FHIRHelpers_4_0_001.ToQuantity(ae_ as Age);
 				CqlDate ag_ = context.Operators.Add(ad_, af_);
 				Date ai_ = ab_?.BirthDateElement;
 				CqlDate aj_ = FHIRHelpers_4_0_001.ToDate(ai_);
-				CqlQuantity al_ = FHIRHelpers_4_0_001.ToQuantity((ae_ as Age));
+				CqlQuantity al_ = FHIRHelpers_4_0_001.ToQuantity(ae_ as Age);
 				CqlDate am_ = context.Operators.Add(aj_, al_);
 				CqlQuantity an_ = context.Operators.Quantity(1m, "year");
 				CqlDate ao_ = context.Operators.Add(am_, an_);
@@ -1140,11 +1140,11 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlDateTime ar_ = context.Operators.ConvertDateToDateTime(aq_);
 				Date at_ = ab_?.BirthDateElement;
 				CqlDate au_ = FHIRHelpers_4_0_001.ToDate(at_);
-				CqlQuantity aw_ = FHIRHelpers_4_0_001.ToQuantity((ae_ as Age));
+				CqlQuantity aw_ = FHIRHelpers_4_0_001.ToQuantity(ae_ as Age);
 				CqlDate ax_ = context.Operators.Add(au_, aw_);
 				Date az_ = ab_?.BirthDateElement;
 				CqlDate ba_ = FHIRHelpers_4_0_001.ToDate(az_);
-				CqlQuantity bc_ = FHIRHelpers_4_0_001.ToQuantity((ae_ as Age));
+				CqlQuantity bc_ = FHIRHelpers_4_0_001.ToQuantity(ae_ as Age);
 				CqlDate bd_ = context.Operators.Add(ba_, bc_);
 				CqlDate bf_ = context.Operators.Add(bd_, an_);
 				CqlInterval<CqlDate> bg_ = context.Operators.Interval(ax_, bf_, true, false);
@@ -1152,22 +1152,22 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlDateTime bi_ = context.Operators.ConvertDateToDateTime(bh_);
 				Date bk_ = ab_?.BirthDateElement;
 				CqlDate bl_ = FHIRHelpers_4_0_001.ToDate(bk_);
-				CqlQuantity bn_ = FHIRHelpers_4_0_001.ToQuantity((ae_ as Age));
+				CqlQuantity bn_ = FHIRHelpers_4_0_001.ToQuantity(ae_ as Age);
 				CqlDate bo_ = context.Operators.Add(bl_, bn_);
 				Date bq_ = ab_?.BirthDateElement;
 				CqlDate br_ = FHIRHelpers_4_0_001.ToDate(bq_);
-				CqlQuantity bt_ = FHIRHelpers_4_0_001.ToQuantity((ae_ as Age));
+				CqlQuantity bt_ = FHIRHelpers_4_0_001.ToQuantity(ae_ as Age);
 				CqlDate bu_ = context.Operators.Add(br_, bt_);
 				CqlDate bw_ = context.Operators.Add(bu_, an_);
 				CqlInterval<CqlDate> bx_ = context.Operators.Interval(bo_, bw_, true, false);
 				bool? by_ = bx_?.lowClosed;
 				Date ca_ = ab_?.BirthDateElement;
 				CqlDate cb_ = FHIRHelpers_4_0_001.ToDate(ca_);
-				CqlQuantity cd_ = FHIRHelpers_4_0_001.ToQuantity((ae_ as Age));
+				CqlQuantity cd_ = FHIRHelpers_4_0_001.ToQuantity(ae_ as Age);
 				CqlDate ce_ = context.Operators.Add(cb_, cd_);
 				Date cg_ = ab_?.BirthDateElement;
 				CqlDate ch_ = FHIRHelpers_4_0_001.ToDate(cg_);
-				CqlQuantity cj_ = FHIRHelpers_4_0_001.ToQuantity((ae_ as Age));
+				CqlQuantity cj_ = FHIRHelpers_4_0_001.ToQuantity(ae_ as Age);
 				CqlDate ck_ = context.Operators.Add(ch_, cj_);
 				CqlDate cm_ = context.Operators.Add(ck_, an_);
 				CqlInterval<CqlDate> cn_ = context.Operators.Interval(ce_, cm_, true, false);
@@ -1252,7 +1252,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			}
 			else
 			{
-				return (null as CqlInterval<CqlDateTime>);
+				return null as CqlInterval<CqlDateTime>;
 			}
 		};
 
@@ -1437,7 +1437,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		Extension a_ = this.GetExtension(element, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 		DataType b_ = a_?.Value;
 
-		return (b_ as CodeableConcept);
+		return b_ as CodeableConcept;
 	}
 
     [CqlDeclaration("PrincipalDiagnosis")]
@@ -1587,7 +1587,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			{
 				DataType e_ = request?.Medication;
 
-				return (e_ as CodeableConcept);
+				return e_ as CodeableConcept;
 			}
 			else
 			{

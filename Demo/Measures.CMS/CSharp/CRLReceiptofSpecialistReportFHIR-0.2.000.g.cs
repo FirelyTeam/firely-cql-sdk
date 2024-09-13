@@ -226,7 +226,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 				"active",
 				"completed",
 			];
-			bool? o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
+			bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
 			Code<RequestIntent> p_ = ReferralOrder?.IntentElement;
 			RequestIntent? q_ = p_?.Value;
 			Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);

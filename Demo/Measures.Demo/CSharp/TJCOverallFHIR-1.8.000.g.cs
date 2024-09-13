@@ -413,12 +413,12 @@ public class TJCOverallFHIR_1_8_000
 				"completed",
 				"in-progress",
 			];
-			bool? p_ = context.Operators.In<string>(n_, (o_ as IEnumerable<string>));
+			bool? p_ = context.Operators.In<string>(n_, o_ as IEnumerable<string>);
 
 			return p_;
 		};
 		IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-		IEnumerable<object> i_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
+		IEnumerable<object> i_ = context.Operators.Union<object>(d_ as IEnumerable<object>, h_ as IEnumerable<object>);
 
 		return i_;
 	}

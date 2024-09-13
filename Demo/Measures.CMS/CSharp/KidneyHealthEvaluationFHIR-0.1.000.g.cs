@@ -520,7 +520,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			];
-			bool? z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
+			bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
 			bool? aa_ = context.Operators.And(t_, z_);
 
 			return aa_;
@@ -549,7 +549,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000
 				"amended",
 				"corrected",
 			];
-			bool? ap_ = context.Operators.In<string>(an_, (ao_ as IEnumerable<string>));
+			bool? ap_ = context.Operators.In<string>(an_, ao_ as IEnumerable<string>);
 			bool? aq_ = context.Operators.And(aj_, ap_);
 
 			return aq_;

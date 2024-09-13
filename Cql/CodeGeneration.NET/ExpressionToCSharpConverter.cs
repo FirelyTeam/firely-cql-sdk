@@ -568,7 +568,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         operand = ParenthesizeIfNeeded(operand);
                         var typeName = _typeToCSharpConverter.ToCSharp(strippedUnary.Type);
                         var code = strippedUnary.NodeType == ExpressionType.TypeAs ?
-                            $"{leadingIndentString}({operand} as {typeName})" :
+                            $"{leadingIndentString}{operand} as {typeName}" :
                             $"{leadingIndentString}({typeName}){operand}";
                         return code;
                     }

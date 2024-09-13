@@ -446,7 +446,7 @@ public class HybridHWMFHIR_0_102_005
 					"amended",
 					"preliminary",
 				];
-				bool? ba_ = context.Operators.In<string>(ay_, (az_ as IEnumerable<string>));
+				bool? ba_ = context.Operators.In<string>(ay_, az_ as IEnumerable<string>);
 				bool? bb_ = context.Operators.And(aw_, ba_);
 				DataType bc_ = Exam?.Value;
 				bool? bd_ = context.Operators.Not((bool?)(bc_ is null));
@@ -466,7 +466,7 @@ public class HybridHWMFHIR_0_102_005
 			IEnumerable<Observation> m_ = context.Operators.SortBy<Observation>(k_, l_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation n_ = context.Operators.First<Observation>(m_);
 			DataType o_ = n_?.Value;
-			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity((o_ as Quantity));
+			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity(o_ as Quantity);
 			string q_ = context.Operators.ConvertQuantityToString(p_);
 			string r_ = context.Operators.Concatenate(i_ ?? "", q_ ?? "");
 			string s_ = context.Operators.Concatenate(r_ ?? "", ",");
@@ -497,7 +497,7 @@ public class HybridHWMFHIR_0_102_005
 					"amended",
 					"preliminary",
 				];
-				bool? cf_ = context.Operators.In<string>(cd_, (ce_ as IEnumerable<string>));
+				bool? cf_ = context.Operators.In<string>(cd_, ce_ as IEnumerable<string>);
 				bool? cg_ = context.Operators.And(cb_, cf_);
 				DataType ch_ = Exam?.Value;
 				bool? ci_ = context.Operators.Not((bool?)(ch_ is null));
@@ -564,7 +564,7 @@ public class HybridHWMFHIR_0_102_005
 					"amended",
 					"preliminary",
 				];
-				bool? aw_ = context.Operators.In<string>(au_, (av_ as IEnumerable<string>));
+				bool? aw_ = context.Operators.In<string>(au_, av_ as IEnumerable<string>);
 				bool? ax_ = context.Operators.And(as_, aw_);
 				DataType ay_ = Lab?.Value;
 				bool? az_ = context.Operators.Not((bool?)(ay_ is null));
@@ -582,7 +582,7 @@ public class HybridHWMFHIR_0_102_005
 			IEnumerable<Observation> m_ = context.Operators.SortBy<Observation>(k_, l_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation n_ = context.Operators.First<Observation>(m_);
 			DataType o_ = n_?.Value;
-			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity((o_ as Quantity));
+			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity(o_ as Quantity);
 			string q_ = context.Operators.ConvertQuantityToString(p_);
 			string r_ = context.Operators.Concatenate(i_ ?? "", q_ ?? "");
 			string s_ = context.Operators.Concatenate(r_ ?? "", ",");
@@ -609,7 +609,7 @@ public class HybridHWMFHIR_0_102_005
 					"amended",
 					"preliminary",
 				];
-				bool? bw_ = context.Operators.In<string>(bu_, (bv_ as IEnumerable<string>));
+				bool? bw_ = context.Operators.In<string>(bu_, bv_ as IEnumerable<string>);
 				bool? bx_ = context.Operators.And(bs_, bw_);
 				DataType by_ = Lab?.Value;
 				bool? bz_ = context.Operators.Not((bool?)(by_ is null));
@@ -685,7 +685,7 @@ public class HybridHWMFHIR_0_102_005
 			ad_,
 			ag_,
 		];
-		IEnumerable<string> ai_ = context.Operators.Flatten<string>((ah_ as IEnumerable<IEnumerable<string>>));
+		IEnumerable<string> ai_ = context.Operators.Flatten<string>(ah_ as IEnumerable<IEnumerable<string>>);
 
 		return ai_;
 	}
