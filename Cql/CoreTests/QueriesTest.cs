@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreTests
 {
@@ -18,12 +19,16 @@ namespace CoreTests
        [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            using var disposeContext = new DisposeContext();
-            var cqlCompilerServices = CqlServicesInitializer.CreateCqlCompilerServices(disposeContext.Token);
+            using var serviceProvider = new ServiceCollection()
+                                        .AddDebugLogging()
+                                        .AddCqlCompilerServices()
+                                        .BuildServiceProvider(validateScopes: true);
+            using var servicesScope = serviceProvider.CreateScope();
 
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = cqlCompilerServices.LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var libraryExpressionBuilderScoped = servicesScope.ServiceProvider.GetLibraryExpressionBuilderScoped();
+            var definitions = libraryExpressionBuilderScoped.ProcessLibrary(elmPackage);
             QueriesDefinitions = definitions.CompileAll();
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
@@ -32,7 +37,7 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            cqlCompilerServices.LibraryExpressionBuilderScoped().ProcessLibrary(elmPackage, libraryDefinitions: definitions);
+            libraryExpressionBuilderScoped.ProcessLibrary(elmPackage, libraryDefinitions: definitions);
             AggregatesDefinitions = definitions.CompileAll();
         }
 

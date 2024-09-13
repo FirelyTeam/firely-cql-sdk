@@ -1,5 +1,5 @@
 ﻿/*
- *Copyright(c) 2024, NCQA and contributors
+ * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -7,16 +7,31 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Packager;
 using Hl7.Cql.Packaging;
+using Microsoft.Extensions.DependencyInjection;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
-namespace Hl7.Cql.Packager.Hosting;
+// ReSharper disable once CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Microsoft.Extensions.DependencyInjection;
 
-internal static class PackagerCliOptionsInitializer
+internal static class PackagerCliServiceCollectionExtensions
 {
+    internal static IServiceCollection AddPackagerCliServices(
+        this IServiceCollection services)
+    {
+        services.AddCqlPackagingServices();
+
+        services.TryAddScoped<PackagerCliProgram>();
+        services.TryAddSingleton<OptionsConsoleDumper>();
+
+        return services;
+    }
+
     public static IServiceCollection AddPackagerCliOptions(
         this IServiceCollection services,
         IConfiguration configuration)
