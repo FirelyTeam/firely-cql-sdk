@@ -28,7 +28,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
-        private readonly TypeManager _typeManager;
         private readonly CSharpLibrarySetToStreamsWriter _cSharpLibrarySetToStreamsWriter;
         private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
@@ -36,13 +35,12 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public AssemblyCompiler(
             CSharpLibrarySetToStreamsWriter cSharpLibrarySetToStreamsWriter,
-            TypeManager typeManager,
+            TypeResolver typeResolver,
             CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null,
             AssemblyDataPostProcessor? assemblyDataPostProcessor = null)
         {
             _assemblyDataPostProcessor = assemblyDataPostProcessor;
             _cSharpLibrarySetToStreamsWriter = cSharpLibrarySetToStreamsWriter;
-            _typeManager = typeManager;
             _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
@@ -62,7 +60,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                         }                                        // @formatter on
                         .Select(type => type.Assembly)
-                        .Concat(typeManager.Resolver.ModelAssemblies)
+                        .Concat(typeResolver.ModelAssemblies)
                         .Distinct()
                         .ToArray();
                     return references;

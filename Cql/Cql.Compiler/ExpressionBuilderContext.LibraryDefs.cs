@@ -13,7 +13,6 @@ using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
 
@@ -131,6 +130,9 @@ partial class ExpressionBuilderContext
         ExpressionDef expressionDef) =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
+            if (_operands is null)
+                throw new InvalidOperationException("Operands dictionary is null.");
+
             using (PushElement(expressionDef))
             {
                 if (string.IsNullOrWhiteSpace(expressionDef.name))
@@ -260,7 +262,7 @@ partial class ExpressionBuilderContext
                     defaultValue = TranslateArg(parameter.@default).NewTypeAsExpression<object>();
                 else defaultValue = NullExpression.Object;
 
-                var resolveParam = _contextBinder.ResolveParameter(_libraryContext.LibraryKey, parameter.name, defaultValue);
+                var resolveParam = _cqlContextBinder.ResolveParameter(_libraryContext.LibraryKey, parameter.name, defaultValue);
 
                 var parameterType = TypeFor(parameter.parameterTypeSpecifier)!;
                 var cast = _cqlOperatorsBinder.CastToType(resolveParam, parameterType);
