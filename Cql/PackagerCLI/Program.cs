@@ -9,7 +9,6 @@
 
 using System.Globalization;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Packager.DependencyInjection;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;

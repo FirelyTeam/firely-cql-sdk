@@ -6,13 +6,16 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.PostProcessors;
-using Hl7.Cql.Compiler.DependencyInjection;
-using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Hl7.Cql.CodeGeneration.NET.DependencyInjection;
+// ReSharper disable once CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Microsoft.Extensions.DependencyInjection;
+
 
 internal static class CqlCodeGenerationServiceCollectionExtensions
 {

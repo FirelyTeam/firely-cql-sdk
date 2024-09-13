@@ -13,9 +13,6 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Hl7.Cql.CodeGeneration.NET.DependencyInjection;
-using Hl7.Cql.Compiler.DependencyInjection;
-using Hl7.Cql.CqlToElm.DependencyInjection;
 using Expression = Hl7.Cql.Elm.Expression;
 
 namespace Hl7.Cql.CqlToElm.Test

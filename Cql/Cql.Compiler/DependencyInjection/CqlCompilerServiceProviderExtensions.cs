@@ -8,11 +8,14 @@
 
 using System;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Fhir.Introspection;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.Compiler.DependencyInjection;
+// ReSharper disable once CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Microsoft.Extensions.DependencyInjection;
+
 
 internal static class CqlCompilerServiceProviderExtensions
 {

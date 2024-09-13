@@ -4,7 +4,6 @@ using Hl7.Cql.CqlToElm.Scopes;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using Hl7.Cql.CqlToElm.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test

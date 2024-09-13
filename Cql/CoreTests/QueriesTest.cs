@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreTests

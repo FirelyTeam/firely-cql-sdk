@@ -6,10 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.PostProcessors;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.Packaging.DependencyInjection;
+// ReSharper disable once CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Microsoft.Extensions.DependencyInjection;
 
 internal static class CqlPackagingServiceProviderExtensions
 {

@@ -7,11 +7,13 @@
  */
 
 using System;
+using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Hl7.Cql.CqlToElm.DependencyInjection;
+// ReSharper disable once CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Microsoft.Extensions.DependencyInjection;
 
 internal static class CqlToElmServiceProviderExtensions
 {

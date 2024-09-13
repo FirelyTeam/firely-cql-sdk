@@ -16,7 +16,9 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 
-namespace Hl7.Cql.Packager.DependencyInjection;
+// ReSharper disable once CheckNamespace
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Microsoft.Extensions.DependencyInjection;
 
 internal static class PackagerCLiLoggingBuilderExtensions
 {
