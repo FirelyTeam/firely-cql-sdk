@@ -78,7 +78,6 @@
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
 		<PackageReference Include="JetBrains.Annotations" Version="2024.2.0" />
-
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24318.1" PrivateAssets="All" />
 	</ItemGroup>
 

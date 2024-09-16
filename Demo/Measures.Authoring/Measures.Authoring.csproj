@@ -10,10 +10,8 @@
 		<ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
 		<ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\CLI\CLI.csproj" />
-		<ProjectReference Include="..\Cql\Cql.csproj" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 	</ItemGroup>
-
 
 	<PropertyGroup>
 		<LibrarySet>Measures.Authoring</LibrarySet>
