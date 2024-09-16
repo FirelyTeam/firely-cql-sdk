@@ -7,23 +7,13 @@
 <a name="h2-cql-to-elm"></a>
 ## CQL to ELM
 
-Remarks
-* Excl Logger and Options
-* Cyan classes indicate scoped services
-* Purple classes indicate transient services
-* Gray classes indicate types not registered by the service provider
-* Brown classes indicate singleton services
-* Classes are group by their respective projects
-* Code Smells
-  * `IServiceProvider` must not be used directly in the code
-  * Scoped services leak out of the scope into data objects e.g. `LibraryBuilder` into `LibraryInfo`
-  * Services leak out their dependencies by making them public properties e.g.
-    * `LibraryBuilder` exposes `FileSystemLibraryProvider`
-    * `LibraryInfo` exposes `LibraryBuilder library`
-    * `CqlToElmConverter` exposes `IServiceProvider Services`, `ILogger<CqlToElmConverter> Logger`
-    * `LibraryVisitor` exposes `IServiceProvider Services`, `SystemLibrary SystemLibrary`
-  * `CqlToElmConverter` is also a factory for `LibraryBuilder`, see `GetBuilder` method
-  * `SystemLibrary` is a singleton service but it is not used as a service
+**Legend**
+  * Exclude dependencies to  `ILogger<T>` and `IOptions<T>`
+  * <span style="background:#055">Cyan</span> classes indicate scoped services
+  * <span style="background:#505">Purple</span> classes indicate transient services
+  * <span style="background:#555">Gray</span> classes indicate types not registered by the service provider
+  * <span style="background:#550">Brown</span> classes indicate singleton services
+  * Classes are group by their respective projects
 
 ```mermaid
 
@@ -146,6 +136,18 @@ classDiagram
     IServiceProvider ..> LibraryVisitor : injected    
 
 ```
+
+### CQL to ELM Code Smells
+* `IServiceProvider` must not be used directly in the code
+* Scoped services leak out of the scope into data objects e.g. `LibraryBuilder` into `LibraryInfo`
+* Services leak out their dependencies by making them public properties e.g.
+  * `LibraryBuilder` exposes `FileSystemLibraryProvider`
+  * `LibraryInfo` exposes `LibraryBuilder library`
+  * `CqlToElmConverter` exposes `IServiceProvider Services`, `ILogger<CqlToElmConverter> Logger`
+  * `LibraryVisitor` exposes `IServiceProvider Services`, `SystemLibrary SystemLibrary`
+* `CqlToElmConverter` is also a factory for `LibraryBuilder`, see `GetBuilder` method
+* `SystemLibrary` is a singleton service but it is not used as a service
+
 
  <a name="h2-cql-packager"></a>
 ## CQL Packager SDK (with dependencies: Code Generation and Compiler)
