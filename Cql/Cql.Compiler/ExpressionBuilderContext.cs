@@ -190,6 +190,9 @@ partial class ExpressionBuilderContext(
                     // NOTE: Do not rename ICqlOperators.CreateValueSetFacade to ExpandValueSet
                     ExpandValueSet e => _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.CreateValueSetFacade), TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
 
+                    // Special case for intervals with null boundaries. See https://github.com/FirelyTeam/firely-cql-sdk/issues/543
+                    Interval { low: Null, high: Null } => Expression.Constant(null, typeof(CqlInterval<object>)),
+
                     // All other Elm types matches on type name to the ICqlOperators method name
                     _ => _cqlOperatorsBinder.BindToMethod(element.GetType().Name, TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
                     //@formatter:on
