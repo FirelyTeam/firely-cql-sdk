@@ -1,13 +1,4 @@
-﻿/*
- * Copyright (c) 2024, NCQA and contributors
- * See the file CONTRIBUTORS for details.
- *
- * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
- */
-
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
@@ -28,11 +19,7 @@ public static class LibraryExpressionBuilderExtensions
         Elm.Expression expression)
     {
         DefinitionDictionary<LambdaExpression> lambdas = new DefinitionDictionary<LambdaExpression>();
-
-        var library = Library;
-        var libctx = new LibraryExpressionBuilderContext(libraryExpressionBuilder, library, lambdas);
-        Dictionary<string, ParameterExpression>? parameterExpressions = null;
-        var ctx = new ExpressionBuilderContext(libraryExpressionBuilder._expressionBuilder, libctx, parameterExpressions);
+        var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, lambdas);
         Expression translated = ctx.TranslateArg(expression);
         var contextParameter = CqlExpressions.ParameterExpression;
         LambdaExpression lambda = Expression.Lambda(translated, contextParameter);

@@ -13,39 +13,27 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-internal partial class LibraryExpressionBuilderContext
+internal partial class LibraryExpressionBuilderContext(
+    ILogger<LibraryExpressionBuilder> logger,
+    ExpressionBuilder expressionBuilder,
+    Library library,
+    DefinitionDictionary<LambdaExpression> libraryDefinitions,
+    LibrarySetExpressionBuilderContext? libsCtx = null)
 {
+    private readonly ILogger<LibraryExpressionBuilder> _logger = logger;
+    private readonly ExpressionBuilder _expressionBuilder = expressionBuilder;
     private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();
-    private readonly ILogger<LibraryExpressionBuilder> _logger;
-    private readonly ExpressionBuilder _expressionBuilder;
 
-    /// <inheritdoc />
-    public Library Library { get; }
+    /// <summary>
+    /// Gets the library associated with the expression builder context.
+    /// </summary>
+    public Library Library => library;
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Gets the key of the library, which is the name and version of the library.
+    /// </summary>
+    /// <seealso cref="Library.NameAndVersion"/>
     public string LibraryKey => Library.NameAndVersion()!;
-
-    public LibraryExpressionBuilderContext(
-        LibraryExpressionBuilder builder,
-        Library library,
-        DefinitionDictionary<LambdaExpression> libraryDefinitions,
-        ILibrarySetExpressionBuilderContext? libsCtx = null)
-    {
-        // External Services
-        _logger = builder._logger;
-        _expressionBuilder = builder._expressionBuilder;
-
-        // External State
-        LibraryDefinitions = libraryDefinitions;
-        Library = library;
-        LibrarySetContext = libsCtx;
-
-        // Internal State
-        _libraryIdentifiersByAlias = new();
-        _codesByName = new();
-        _codesByCodeSystemName = new();
-        _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
-    }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>

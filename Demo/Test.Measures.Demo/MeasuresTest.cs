@@ -9,7 +9,9 @@ using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using CLI.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 using Test.Deck;
+using Test.Measures.Demo;
 
 namespace Test
 {
@@ -112,15 +114,6 @@ namespace Test
             var allLibs = library.GetDependenciesAndSelf(dir);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             allLibs.LoadAssemblies(asmContext);
-
-            var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
-            using var tupleFs = tupleTypes.OpenRead();
-            var binaries = new[]
-            {
-                tupleFs.ParseFhir<Binary>()
-            };
-
-            binaries.LoadAssemblies(asmContext);
             return asmContext;
         }
 
@@ -158,10 +151,13 @@ namespace Test
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            using var disposeContext = new DisposeContext();
-            var cqlCodeGenerationServices = CqlServicesInitializer.CreateCqlCodeGenerationServices(disposeContext.Token);
-            var definitions = cqlCodeGenerationServices.GetCqlCompilerServices().LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
-            var assemblyData = cqlCodeGenerationServices.AssemblyCompiler.Compile(librarySet, definitions);
+            using var serviceProvider = new ServiceCollection()
+                                        .AddDebugLogging()
+                                        .AddCqlCodeGenerationServices()
+                                        .BuildServiceProvider(validateScopes: true);
+            using var serviceScope = serviceProvider.CreateScope();
+            var definitions = serviceScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
+            var assemblyData = serviceProvider.GetAssemblyCompiler().Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             foreach (var (_, asmData) in assemblyData)
             {

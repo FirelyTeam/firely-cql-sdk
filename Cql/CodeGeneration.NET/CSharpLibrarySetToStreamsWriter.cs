@@ -20,6 +20,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Compiler;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -217,7 +218,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             StreamWriter writer,
             int indentLevel)
         {
-            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
+            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode({QuoteString(_tool)}, {QuoteString(_version)})]");
 
             var libraryAttribute = libraryName;
             var versionAttribute = string.Empty;
@@ -231,7 +232,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
 
-            writer.WriteLine(indentLevel, $"[CqlLibrary(\"{libraryAttribute}\", \"{versionAttribute}\")]");
+            writer.WriteLine(indentLevel, $"[CqlLibrary({QuoteString(libraryAttribute)}, {QuoteString(versionAttribute)})]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
             if (PartialClass)
                 writer.WriteLine(indentLevel, $"partial class {className}");
@@ -408,7 +409,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 new LocalVariableDeduper(_typeToCSharpConverter)
             );
 
-            var expressionConverter = new ExpressionToCSharpConverter(libraryName, _options, _typeToCSharpConverter);
+            var expressionConverter = NewExpressionToCSharpConverter(libraryName);
 
             // Skip CqlContext
             var parameters = overload.Parameters.Skip(1);
@@ -427,7 +428,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, privateMethodName, "private");
                 writer.Write(func);
                 writer.WriteLine();
-                writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
+                writer.WriteLine(indentLevel, $"[CqlDeclaration({QuoteString(cqlName)})]");
                 WriteTags(writer, indentLevel, tags);
 
                 if (overload.ReturnType == typeof(CqlValueSet))
@@ -437,7 +438,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var arg = @new.Arguments[0];
                         if (arg is ConstantExpression { Value: string valueSetId })
                         {
-                            writer.WriteLine(indentLevel, $"[CqlValueSet(\"{valueSetId}\")]");
+                            writer.WriteLine(indentLevel, $"[CqlValueSet({QuoteString(valueSetId)})]");
                         }
                     }
                 }
@@ -453,13 +454,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             else
             {
-                writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
+                writer.WriteLine(indentLevel, $"[CqlDeclaration({QuoteString(cqlName)})]");
                 WriteTags(writer, indentLevel, tags);
                 writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
             }
         }
 
-        private static void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
+        private ExpressionToCSharpConverter NewExpressionToCSharpConverter(string libraryName) =>
+            new(_options, _typeToCSharpConverter, libraryName);
+
+        private void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
         {
             if (tags != null)
             {
@@ -467,7 +471,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 {
                     foreach (var tag in group)
                     {
-                        writer.WriteLine(indentLevel, $"[CqlTag(\"{group.Key}\", \"{tag}\")]");
+                        writer.WriteLine(indentLevel, $"[CqlTag({QuoteString(group.Key)}, {QuoteString(tag)})]");
                     }
                 }
             }
@@ -504,5 +508,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             AccessModifier.ProtectedInternal => "protected internal",
             _ => throw new ArgumentException("Invalid access modifier", nameof(modifier)),
         };
+
+        private string QuoteString(string literal) =>
+            SymbolDisplay.FormatLiteral(literal, true);
     }
 }

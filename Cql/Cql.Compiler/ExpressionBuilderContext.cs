@@ -48,54 +48,35 @@ namespace Hl7.Cql.Compiler;
 /// <remarks>
 /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
 /// </remarks>
-partial class ExpressionBuilderContext
+partial class ExpressionBuilderContext(
+    ILogger<ExpressionBuilder> logger,
+    ExpressionBuilderSettings expressionBuilderSettings,
+    CqlOperatorsBinder cqlOperatorsBinder,
+    TupleBuilderCache tupleBuilderCache,
+    TypeResolver typeResolver,
+    CqlContextBinder cqlContextBinder,
+    LibraryExpressionBuilderContext libraryContext,
+    Dictionary<string, ParameterExpression>? operands = null // Parameters for function definitions. Used during ProcessExpressionDef.
+    )
 {
-    private readonly CqlOperatorsBinder _cqlOperatorsBinder;
-    private readonly CqlContextBinder _contextBinder;
-    private readonly TypeManager _typeManager;
-    private readonly ILogger<ExpressionBuilder> _logger;
-    private readonly TypeResolver _typeResolver;
-    private readonly ExpressionBuilderSettings _expressionBuilderSettings;
-    private readonly ILibraryExpressionBuilderContext _libraryContext;
-
-    private ImmutableStack<Element> _elementStack;
+    private readonly ILogger<ExpressionBuilder> _logger = logger;
+    private readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
+    private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
+    private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
+    private readonly TypeResolver _typeResolver = typeResolver;
+    private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
+    private readonly LibraryExpressionBuilderContext _libraryContext = libraryContext;
+    private readonly Dictionary<string, ParameterExpression>? _operands = operands;
+    private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty; // Not used yet, since it's always empty
+    private ImmutableStack<Element> _elementStack = ImmutableStack<Element>.Empty;
 
     /// <summary>
     /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
     /// </summary>
-    private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)> _impliedAliasAndScopesStack; //
-
-    /// <summary>
-    /// Parameters for function definitions.
-    /// </summary>
-    private readonly Dictionary<string, ParameterExpression> _operands; // Used during ProcessExpressionDef
-
-    private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators; // Not used yet, since it's always empty
-
-    internal ExpressionBuilderContext(
-        ExpressionBuilder builder,
-        ILibraryExpressionBuilderContext libContext,
-        Dictionary<string, ParameterExpression>? operands = null)
-    {
-        // External Services
-        _logger = builder._logger;
-        _cqlOperatorsBinder = builder._cqlOperatorsBinder;
-        _contextBinder = builder._cqlContextBinder;
-        _typeManager = builder._typeManager;
-        _expressionBuilderSettings = builder._expressionBuilderSettings;
-        _typeResolver = builder._typeResolver;
-        _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty;
-
-        // External State
-        _libraryContext = libContext;
-        _operands = operands!;
-
-        // Internal State
-        _elementStack = ImmutableStack<Element>.Empty;
-        _impliedAliasAndScopesStack = ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)>.Empty;
-    }
+    private ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)> _impliedAliasAndScopesStack = ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (Expression expr, Element element)>? scopes)>.Empty;
 
     private static Expression[] NoArgs { get; } = [];
+
     private static Type[] NoTypes { get; } = [];
 
     private Expression BindCqlOperator<TArg>(
@@ -417,7 +398,7 @@ partial class ExpressionBuilderContext
                      .SelectToArray(element =>
                      {
                          var value = TranslateArg(element.value!);
-                         var propInfo = ExpressionBuilder.GetProperty(tupleType, NormalizeIdentifier(element.name!), _typeResolver)
+                         var propInfo = GetProperty(tupleType, NormalizeIdentifier(element.name!), _typeResolver)
                                         ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {tupleType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                          var binding = Binding(value, propInfo);
                          return binding;
@@ -643,7 +624,7 @@ partial class ExpressionBuilderContext
                 var tuple = tuples[i];
                 var element = tuple.Item1;
                 var expression = tuple.Item2;
-                var memberInfo = ExpressionBuilder.GetProperty(instanceType, element, _typeResolver) ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {instanceType.ToCSharpString(Defaults.TypeCSharpFormat)}");
+                var memberInfo = GetProperty(instanceType, element, _typeResolver) ?? throw this.NewExpressionBuildingException($"Could not find member {element} on type {instanceType.ToCSharpString(Defaults.TypeCSharpFormat)}");
                 var binding = Binding(expression, memberInfo);
                 elementBindings[i] = binding;
             }
@@ -653,6 +634,26 @@ partial class ExpressionBuilderContext
             return init;
         }
     }
+
+    internal static PropertyInfo? GetProperty(Type type, string name, TypeResolver typeResolver)
+    {
+        if (type.IsGenericType)
+        {
+            var gtd = type.GetGenericTypeDefinition();
+            if (gtd == typeof(Nullable<>))
+            {
+                if (string.Equals(name, "value", StringComparison.OrdinalIgnoreCase))
+                {
+                    var valueMember = type.GetProperty("Value");
+                    return valueMember;
+                }
+            }
+        }
+
+        var member = typeResolver.GetProperty(type, name);
+        return member;
+    }
+
 
     protected MemberAssignment Binding(Expression value, MemberInfo memberInfo)
     {
@@ -813,7 +814,7 @@ partial class ExpressionBuilderContext
 
     protected Expression OperandRef(OperandRef ore)
     {
-        if (_operands.TryGetValue(ore.name!, out var expression))
+        if (_operands?.TryGetValue(ore.name!, out var expression) == true)
             return expression;
         throw this.NewExpressionBuildingException($"Operand reference to {ore.name} not found in definition operands.");
     }
@@ -949,7 +950,7 @@ partial class ExpressionBuilderContext
                     return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                 }
                 var propogate = PropagateNull(scopeExpression, pathMemberInfo);
-                string message = $"TypeManager failed to resolve type.";
+                string message = $"TupleBuilderCache failed to resolve type.";
                 var resultType = TypeFor(op) ?? throw this.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
@@ -1611,7 +1612,7 @@ partial class ExpressionBuilderContext
             // inside every if statement here (so for where, return, etc).
             // -----
             // The element type may have changed
-            // elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
+            // elementType = TypeResolver.GetListElementType(@return.Type, @throw: true)!;
             if (query.where is { } queryWhere)
             {
                 @return = Where(queryWhere, scopeParameter, @return);
@@ -1868,7 +1869,7 @@ partial class ExpressionBuilderContext
         Type valueTupleType = _typeResolver.GetListElementType(funcResultType, true)!;
         FieldInfo[] valueTupleFields = valueTupleType.GetFields(bfPublicInstance | BindingFlags.GetField);
 
-        Type cqlTupleType = TupleTypeFor(aliasAndElementTypes);
+        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(aliasAndElementTypes);
         PropertyInfo[] cqlTupleProperties = cqlTupleType.GetProperties(bfPublicInstance | BindingFlags.SetProperty);
 
         Debug.Assert(valueTupleFields.Length > 0);
