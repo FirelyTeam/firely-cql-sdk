@@ -26,8 +26,8 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Hl7.Fhir.Base" Version="5.10.1" />
-		<PackageReference Include="Hl7.Fhir.R4" Version="5.10.1" />
+		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 		<PackageReference Remove="Microsoft.CodeAnalysis.PublicApiAnalyzers" />
 	</ItemGroup>
 

@@ -12,8 +12,8 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="Hl7.Fhir.Base" Version="5.10.1" />
-		<PackageReference Include="Hl7.Fhir.R4" Version="5.10.1" />
+		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 	</ItemGroup>
 
 	<ItemGroup>
