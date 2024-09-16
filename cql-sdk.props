@@ -4,6 +4,11 @@
 		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<!-- Keep this in sync between cql-sdk.props and cql-demo.props -->
+		<FirelySdkVersion>5.10.1</FirelySdkVersion>
+	</PropertyGroup>
+
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
 		<!--
@@ -32,10 +37,6 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
 	</ItemGroup>
-
-	<PropertyGroup>
-    <FirelySdkVersion>5.10.1</FirelySdkVersion>
-	</PropertyGroup>
 
 	<!-- Compiler settings -->
 	<PropertyGroup>
