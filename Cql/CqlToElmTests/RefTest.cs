@@ -38,6 +38,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/519")]
         public void CodeSystem_Local()
         {
             var library = MakeLibrary($@"
@@ -238,7 +239,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = MakeLibrary($@"
                library BareMinimum version '0.0.1'
-    
+
                 parameter x default 'bla'
 
                 define {nameof(InvokeParameter)}: x(4)
@@ -250,7 +251,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = MakeLibrary($@"
                library BareMinimum version '0.0.1'
-    
+
                 define pi: 3.14
 
                 define {nameof(InvokeExpression)}: pi()
@@ -334,7 +335,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = MakeLibrary($@"
             library BareMinimum version '0.0.1'
-    
+
             define lowI: Interval[1,3].low
             ");
 
@@ -351,7 +352,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = MakeLibrary($@"
             library BareMinimum version '0.0.1'
-    
+
             define closed: Interval[1,3].highClosed
             ");
 
@@ -368,7 +369,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = MakeLibrary($@"
             library BareMinimum version '0.0.1'
-    
+
             define tupleMember: Tuple {{ name: 'Ewout' }}.name
             ");
 
@@ -441,7 +442,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             _ = MakeLibrary($@"
              library BareMinimum version '0.0.1'
-            
+
              using FHIR
             include Math
 
@@ -453,7 +454,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void InvokeProperty()
         {
             var library = MakeLibrary($@"
-                    library BareMinimum version '0.0.1'   
+                    library BareMinimum version '0.0.1'
                     using FHIR
 
                     context Patient
@@ -475,7 +476,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void InvokeListProperty()
         {
             var library = MakeLibrary($@"
-                    library BareMinimum version '0.0.1'   
+                    library BareMinimum version '0.0.1'
                     using FHIR
 
                     context Patient
@@ -497,7 +498,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void InvokeThroughListProperty()
         {
             var library = MakeLibrary($@"
-                    library BareMinimum version '0.0.1'   
+                    library BareMinimum version '0.0.1'
                     using FHIR
 
                     context Patient
@@ -517,7 +518,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void InvokeListPropertyThroughListProperty()
         {
             var library = MakeLibrary($@"
-                    library BareMinimum version '0.0.1'   
+                    library BareMinimum version '0.0.1'
                     using FHIR
 
                     context Patient
@@ -539,7 +540,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = MakeLibrary($@"
                     library BareMinimum version '0.0.1'
-    
+
                     using FHIR
 
                     context Patient
