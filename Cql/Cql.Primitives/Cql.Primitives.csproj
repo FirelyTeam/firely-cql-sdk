@@ -13,8 +13,13 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
-		<PackageReference Include="System.Globalization" Version="4.3.0" />
 		<PackageReference Remove="Microsoft.CodeAnalysis.PublicApiAnalyzers" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="JetBrains.Annotations">
+	    <TreatAsUsed>true</TreatAsUsed>
+	  </PackageReference>
 	</ItemGroup>
 
 </Project>
