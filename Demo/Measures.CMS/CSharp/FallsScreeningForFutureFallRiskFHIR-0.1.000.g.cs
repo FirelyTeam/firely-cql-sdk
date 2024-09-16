@@ -349,7 +349,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000
 			CqlInterval<CqlDateTime> av_ = this.Measurement_Period();
 			Period aw_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_3_000.ToInterval(aw_);
-			CqlInterval<CqlDateTime> ay_ = QICoreCommon_2_0_000.ToInterval((ax_ as object));
+			CqlInterval<CqlDateTime> ay_ = QICoreCommon_2_0_000.ToInterval(ax_ as object);
 			bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ay_, "day");
 
 			return az_;

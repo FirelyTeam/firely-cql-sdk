@@ -125,10 +125,10 @@ public class NCQAPalliativeCare_1_0_0
 		bool? i_(Encounter PalliativeEncounter)
 		{
 			Period aq_ = PalliativeEncounter?.Period;
-			CqlInterval<CqlDateTime> ar_ = NCQAFHIRBase_1_0_0.Normalize_Interval((aq_ as object));
+			CqlInterval<CqlDateTime> ar_ = NCQAFHIRBase_1_0_0.Normalize_Interval(aq_ as object);
 			CqlDateTime as_ = context.Operators.Start(ar_);
 			CqlDate at_ = context.Operators.DateFrom(as_);
-			CqlInterval<CqlDateTime> av_ = NCQAFHIRBase_1_0_0.Normalize_Interval((aq_ as object));
+			CqlInterval<CqlDateTime> av_ = NCQAFHIRBase_1_0_0.Normalize_Interval(aq_ as object);
 			CqlDateTime aw_ = context.Operators.End(av_);
 			CqlDate ax_ = context.Operators.DateFrom(aw_);
 			CqlInterval<CqlDate> ay_ = context.Operators.Interval(at_, ax_, true, true);

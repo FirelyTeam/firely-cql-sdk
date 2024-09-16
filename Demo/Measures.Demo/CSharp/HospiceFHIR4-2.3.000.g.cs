@@ -143,7 +143,7 @@ public class HospiceFHIR4_2_3_000
 			bool? ag_ = context.Operators.Or(z_, af_);
 			bool? ah_ = context.Operators.And(t_, ag_);
 			Period ai_ = DischargeHospice?.Period;
-			CqlInterval<CqlDateTime> aj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ai_ as object));
+			CqlInterval<CqlDateTime> aj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ai_ as object);
 			CqlDateTime ak_ = context.Operators.End(aj_);
 			CqlInterval<CqlDateTime> al_ = this.Measurement_Period();
 			bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, default);
@@ -163,14 +163,14 @@ public class HospiceFHIR4_2_3_000
 				"active",
 				"completed",
 			];
-			bool? ar_ = context.Operators.In<string>(ap_, (aq_ as IEnumerable<string>));
+			bool? ar_ = context.Operators.In<string>(ap_, aq_ as IEnumerable<string>);
 			Code<RequestIntent> as_ = HospiceOrder?.IntentElement;
 			string at_ = FHIRHelpers_4_0_001.ToString(as_);
 			bool? au_ = context.Operators.Equal(at_, "order");
 			bool? av_ = context.Operators.And(ar_, au_);
 			CqlInterval<CqlDateTime> aw_ = this.Measurement_Period();
 			FhirDateTime ax_ = HospiceOrder?.AuthoredOnElement;
-			CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ax_ as object));
+			CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ax_ as object);
 			bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, default);
 			bool? ba_ = context.Operators.And(av_, az_);
 
