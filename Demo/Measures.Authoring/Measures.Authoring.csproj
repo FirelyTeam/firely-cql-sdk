@@ -50,4 +50,10 @@
 	  <None Remove="Resources\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="CSharp\" />
+	  <Folder Include="Elm\" />
+	  <Folder Include="Input\cql\" />
+	</ItemGroup>
+
 </Project>

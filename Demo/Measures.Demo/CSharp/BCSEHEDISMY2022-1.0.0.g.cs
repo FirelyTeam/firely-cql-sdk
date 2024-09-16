@@ -290,7 +290,7 @@ public class BCSEHEDISMY2022_1_0_0
 		bool? b_(Coverage C)
 		{
 			Period d_ = C?.Period;
-			CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_1_0_0.Normalize_Interval((d_ as object));
+			CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_1_0_0.Normalize_Interval(d_ as object);
 			CqlInterval<CqlDateTime> f_ = this.Participation_Period();
 			bool? g_ = context.Operators.Overlaps(e_, f_, default);
 

@@ -632,21 +632,21 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlCode k_ = this.T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_();
 			CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-			bool? m_ = context.Operators.Equivalent((j_ as CqlConcept), l_);
+			bool? m_ = context.Operators.Equivalent(j_ as CqlConcept, l_);
 			object o_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlCode p_ = this.Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding_();
 			CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-			bool? r_ = context.Operators.Equivalent((o_ as CqlConcept), q_);
+			bool? r_ = context.Operators.Equivalent(o_ as CqlConcept, q_);
 			bool? s_ = context.Operators.Or(m_, r_);
 			object u_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlCode v_ = this.Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding_();
 			CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-			bool? x_ = context.Operators.Equivalent((u_ as CqlConcept), w_);
+			bool? x_ = context.Operators.Equivalent(u_ as CqlConcept, w_);
 			bool? y_ = context.Operators.Or(s_, x_);
 			object aa_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlCode ab_ = this.Carcinoma_in_situ_of_bladder();
 			CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
-			bool? ad_ = context.Operators.Equivalent((aa_ as CqlConcept), ac_);
+			bool? ad_ = context.Operators.Equivalent(aa_ as CqlConcept, ac_);
 			bool? ae_ = context.Operators.Or(y_, ad_);
 			bool? af_ = context.Operators.And(h_, ae_);
 			Code<ObservationStatus> ag_ = StagingObservation?.StatusElement;
@@ -658,7 +658,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				"amended",
 				"corrected",
 			];
-			bool? al_ = context.Operators.In<string>(aj_, (ak_ as IEnumerable<string>));
+			bool? al_ = context.Operators.In<string>(aj_, ak_ as IEnumerable<string>);
 			bool? am_ = context.Operators.And(af_, al_);
 
 			return am_;
@@ -757,8 +757,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 					return az_;
 				};
-				IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
-						? ((BCGNotGiven as DomainResource).Extension)
+				IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(BCGNotGiven is DomainResource
+						? (BCGNotGiven as DomainResource).Extension
 						: default), p_);
 				DataType r_(Extension @this)
 				{
@@ -794,8 +794,8 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 
 					return be_;
 				};
-				IEnumerable<Extension> ao_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((BCGNotGiven is DomainResource)
-						? ((BCGNotGiven as DomainResource).Extension)
+				IEnumerable<Extension> ao_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(BCGNotGiven is DomainResource
+						? (BCGNotGiven as DomainResource).Extension
 						: default), an_);
 				DataType ap_(Extension @this)
 				{
@@ -917,7 +917,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				"in-progress",
 				"completed",
 			];
-			bool? ba_ = context.Operators.In<string>(ay_, (az_ as IEnumerable<string>));
+			bool? ba_ = context.Operators.In<string>(ay_, az_ as IEnumerable<string>);
 
 			return ba_;
 		};
@@ -1247,7 +1247,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 				"active",
 				"completed",
 			];
-			bool? ax_ = context.Operators.In<string>(av_, (aw_ as IEnumerable<string>));
+			bool? ax_ = context.Operators.In<string>(av_, aw_ as IEnumerable<string>);
 			Code<MedicationRequest.MedicationRequestIntent> ay_ = ExclusionMed?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? az_ = ay_?.Value;
 			string ba_ = context.Operators.Convert<string>(az_);
@@ -1314,7 +1314,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			return cn_;
 		};
 		IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>(n_, o_);
-		IEnumerable<object> q_ = context.Operators.Union<object>((i_ as IEnumerable<object>), (p_ as IEnumerable<object>));
+		IEnumerable<object> q_ = context.Operators.Union<object>(i_ as IEnumerable<object>, p_ as IEnumerable<object>);
 		bool? r_ = context.Operators.Exists<object>(q_);
 
 		return r_;
@@ -1351,19 +1351,19 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
-			if ((context.Operators.Not((bool?)(pointInTime is null)) ?? false))
+			if ((context.Operators.Not((bool?)(pointInTime is null))) ?? false)
 			{
 				CqlInterval<CqlDateTime> b_ = context.Operators.Interval(pointInTime, pointInTime, true, true);
 
 				return b_;
 			}
-			else if ((context.Operators.Not((bool?)(dateTimeInterval is null)) ?? false))
+			else if ((context.Operators.Not((bool?)(dateTimeInterval is null))) ?? false)
 			{
 				return dateTimeInterval;
 			}
 			else
 			{
-				return (null as CqlInterval<CqlDateTime>);
+				return null as CqlInterval<CqlDateTime>;
 			}
 		};
 

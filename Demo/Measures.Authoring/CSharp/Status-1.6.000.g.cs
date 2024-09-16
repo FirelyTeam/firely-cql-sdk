@@ -141,7 +141,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
@@ -183,7 +183,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
@@ -260,7 +260,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			Code<RequestIntent> i_ = D?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
 			Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -287,7 +287,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			Code<RequestIntent> i_ = D?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
 			Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -314,7 +314,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			Code<RequestIntent> i_ = S?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
 			Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -341,7 +341,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			Code<RequestIntent> i_ = S?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
 			Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -368,7 +368,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			Code<RequestIntent> i_ = S?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
 			Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -395,7 +395,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			Code<RequestIntent> i_ = S?.IntentElement;
 			RequestIntent? j_ = i_?.Value;
 			Code<RequestIntent> k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -423,7 +423,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 
 			return h_;
 		};
@@ -446,7 +446,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 
 			return h_;
 		};
@@ -471,7 +471,7 @@ public class Status_1_6_000
 				"in-progress",
 				"onleave",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 
 			return h_;
 		};
@@ -496,7 +496,7 @@ public class Status_1_6_000
 				"in-progress",
 				"onleave",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 
 			return h_;
 		};
@@ -604,7 +604,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
@@ -646,7 +646,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
@@ -732,7 +732,7 @@ public class Status_1_6_000
 				"in-progress",
 				"on-hold",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 
 			return h_;
 		};
@@ -755,7 +755,7 @@ public class Status_1_6_000
 				"in-progress",
 				"on-hold",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 
 			return h_;
 		};
@@ -776,7 +776,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 			Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
 			string j_ = context.Operators.Convert<string>(i_);
@@ -802,7 +802,7 @@ public class Status_1_6_000
 				"active",
 				"completed",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 			Code<MedicationRequest.MedicationRequestIntent> h_ = M?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
 			string j_ = context.Operators.Convert<string>(i_);
@@ -830,7 +830,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
@@ -872,7 +872,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
@@ -913,7 +913,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 
 			return g_;
 		};
@@ -935,7 +935,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 
 			return g_;
 		};
@@ -957,7 +957,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 
 			return g_;
 		};
@@ -979,7 +979,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 
 			return g_;
 		};
@@ -1001,7 +1001,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 
 			return g_;
 		};
@@ -1023,7 +1023,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 
 			return g_;
 		};
@@ -1045,7 +1045,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 
 			return g_;
 		};
@@ -1067,7 +1067,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? g_ = context.Operators.In<string>(e_, (f_ as IEnumerable<string>));
+			bool? g_ = context.Operators.In<string>(e_, f_ as IEnumerable<string>);
 
 			return g_;
 		};
@@ -1091,7 +1091,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 
 			return h_;
 		};
@@ -1115,7 +1115,7 @@ public class Status_1_6_000
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 
 			return h_;
 		};

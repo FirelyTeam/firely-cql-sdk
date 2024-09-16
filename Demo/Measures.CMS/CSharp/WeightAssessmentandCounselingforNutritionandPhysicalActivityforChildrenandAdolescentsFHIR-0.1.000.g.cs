@@ -501,7 +501,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			CqlInterval<CqlDateTime> x_ = this.Measurement_Period();
 			Period y_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(y_);
-			CqlInterval<CqlDateTime> aa_ = QICoreCommon_2_0_000.ToInterval((z_ as object));
+			CqlInterval<CqlDateTime> aa_ = QICoreCommon_2_0_000.ToInterval(z_ as object);
 			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, aa_, default);
 
 			return ab_;
@@ -597,7 +597,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = BMIPercentile?.Value;
-			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity((j_ as Quantity));
+			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity(j_ as Quantity);
 			bool? l_ = context.Operators.Not((bool?)(k_ is null));
 			bool? m_ = context.Operators.And(i_, l_);
 
@@ -624,7 +624,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Height?.Value;
-			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity((j_ as Quantity));
+			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity(j_ as Quantity);
 			bool? l_ = context.Operators.Not((bool?)(k_ is null));
 			bool? m_ = context.Operators.And(i_, l_);
 
@@ -651,7 +651,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Weight?.Value;
-			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity((j_ as Quantity));
+			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity(j_ as Quantity);
 			bool? l_ = context.Operators.Not((bool?)(k_ is null));
 			bool? m_ = context.Operators.And(i_, l_);
 

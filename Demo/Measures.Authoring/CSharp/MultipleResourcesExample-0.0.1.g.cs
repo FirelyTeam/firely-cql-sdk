@@ -110,7 +110,7 @@ public class MultipleResourcesExample_0_0_1
 				"final",
 				"amended",
 			];
-			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
+			bool? i_ = context.Operators.In<string>(g_, h_ as IEnumerable<string>);
 
 			return i_;
 		};

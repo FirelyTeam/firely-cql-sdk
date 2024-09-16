@@ -47,9 +47,9 @@ public class FHIRHelpers_4_0_001
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
-			if ((period is null))
+			if (period is null)
 			{
-				return (null as CqlInterval<CqlDateTime>);
+				return null as CqlInterval<CqlDateTime>;
 			}
 			else
 			{
@@ -71,9 +71,9 @@ public class FHIRHelpers_4_0_001
 	{
 		CqlInterval<CqlQuantity> a_()
 		{
-			if ((range is null))
+			if (range is null)
 			{
-				return (null as CqlInterval<CqlQuantity>);
+				return null as CqlInterval<CqlQuantity>;
 			}
 			else
 			{
@@ -95,7 +95,7 @@ public class FHIRHelpers_4_0_001
 	{
 		CqlQuantity a_()
 		{
-			if ((quantity is null))
+			if (quantity is null)
 			{
 				return default;
 			}
@@ -118,7 +118,7 @@ public class FHIRHelpers_4_0_001
 	{
 		CqlRatio a_()
 		{
-			if ((ratio is null))
+			if (ratio is null)
 			{
 				return default;
 			}
@@ -141,7 +141,7 @@ public class FHIRHelpers_4_0_001
 	{
 		CqlCode a_()
 		{
-			if ((coding is null))
+			if (coding is null)
 			{
 				return default;
 			}
@@ -168,7 +168,7 @@ public class FHIRHelpers_4_0_001
 	{
 		CqlConcept a_()
 		{
-			if ((concept is null))
+			if (concept is null)
 			{
 				return default;
 			}
