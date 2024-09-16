@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -14,6 +14,12 @@
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" />
+		<PackageReference Include="System.Text.Json" Version="8.0.4" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
