@@ -1,11 +1,80 @@
 # Service Dependency Graphs
 
 ## Table of Contents
+1. [CQL Runtime](#h2-cql-runtime)
 1. [CQL to ELM](#h2-cql-to-elm)
 1. [CQL Packager SDK (with dependencies: Code Generation and Compiler)](#h2-cql-packager)
 
+<a name="h2-cql-runtime"></a>
+## CQL Runtime
+
+**Legend**
+  * Exclude dependencies to  `ILogger<T>` and `IOptions<T>`
+  * <span style="background:#055">Cyan</span> classes indicate scoped services
+  * <span style="background:#505">Purple</span> classes indicate transient services
+  * <span style="background:#555">Gray</span> classes indicate types not registered by the service provider
+  * <span style="background:#550">Brown</span> classes indicate singleton services
+  * Classes are group by their respective project groups
+
+```mermaid
+
+classDiagram
+
+    direction LR
+
+    namespace Microsoft {
+        class DateTimeOffset { }
+    }
+
+    namespace Runtime {
+        class CqlContext { }
+        class ICqlOperators { }
+        class CqlOperators { }
+        class DefinitionDictionary_Delegate_ { }
+        class FhirCqlContext { }
+        class FhirModelBindingSetup { }
+        class IDataSource { }
+        class IValueSetDictionary { }
+        class FhirModelBindingOptions { }
+    }
+
+    %% Style Singleton Types as Brown
+    
+    %% style IServiceProvider fill:#550
+
+    %% Style Scoped Types as Cyan
+    
+    %% style LibraryBuilder fill:#055
+
+    %% Style Transient Types as Purple
+
+    %% style LocalIdentifierProvider fill: #505
+
+    %% Style Non-Services Types as Gray
+
+    %% style LibraryInfo fill: #555
+
+    %% Inheritance  
+
+    CqlOperators --> ICqlOperators : inherits
+    
+    %% Dependencies
+
+    FhirCqlContext ..> CqlContext : created by
+    ICqlOperators ..> CqlContext : injected by\nFhirCqlContext.ForBundle
+    DefinitionDictionary_Delegate_ ..> CqlContext : injected by\nFhirCqlContext.ForBundle
+
+    IDataSource ..> FhirModelBindingSetup : injected by\nFhirCqlContext.ForBundle
+    IValueSetDictionary ..> FhirModelBindingSetup : injected by\nFhirCqlContext.ForBundle
+    FhirModelBindingOptions ..> FhirModelBindingSetup : injected by\nFhirCqlContext.ForBundle
+    DateTimeOffset ..> FhirModelBindingSetup : injected by\nFhirCqlContext.ForBundle
+```
+
+
 <a name="h2-cql-to-elm"></a>
 ## CQL to ELM
+
+NOTE: This is a work in progress
 
 **Legend**
   * Exclude dependencies to  `ILogger<T>` and `IOptions<T>`
@@ -114,10 +183,10 @@ classDiagram
     ElmFactory ..> InvocationBuilder : injected
     MessageProvider ..> InvocationBuilder : injected
 
-    LibraryBuilder ..> LibraryInfo : assigned to Library property<br>by FileSystemLibraryProvider
+    LibraryBuilder ..> LibraryInfo : assigned to Library property\nby FileSystemLibraryProvider
 
     StreamInspector ..> FileSystemLibraryProvider : injected
-    LibraryBuilder ..> FileSystemLibraryProvider : created scoped<br>in TryResolveLibrary()
+    LibraryBuilder ..> FileSystemLibraryProvider : created scoped\nin TryResolveLibrary()
     CqlToElmConverter ..> FileSystemLibraryProvider : injected
     IServiceProvider ..> FileSystemLibraryProvider : injected
 
@@ -125,7 +194,7 @@ classDiagram
     IServiceProvider ..> DefinitionVisitor : injected    
     InvocationBuilder ..> DefinitionVisitor : created in ctor  
 
-    LibraryBuilder ..> CqlToElmConverter : created scoped<br>in ConvertLibrary()
+    LibraryBuilder ..> CqlToElmConverter : created scoped\nin ConvertLibrary()
     IServiceProvider ..> CqlToElmConverter : injected  
     
     SystemLibrary ..> LibraryVisitor : created in SystemLibrary
@@ -150,12 +219,13 @@ classDiagram
 
 
  <a name="h2-cql-packager"></a>
+
 ## CQL Packager SDK (with dependencies: Code Generation and Compiler)
 
-Remarks
-* Excl Logger and Options
-* Cyan classes indicate scoped services
-* Brown classes indicate singleton services
+** Legend **
+* Exclude dependencies to  `ILogger<T>` and `IOptions<T>`
+* <span style="background:#055">Cyan</span> classes indicate scoped services
+* <span style="background:#550">Brown</span> classes indicate singleton services
 * Classes are group by their respective projects
 
 ```mermaid
