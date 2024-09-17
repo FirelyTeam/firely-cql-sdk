@@ -393,7 +393,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			];
-			bool? s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
+			bool? s_ = context.Operators.In<string>(q_, r_ as IEnumerable<string>);
 			bool? t_ = context.Operators.And(m_, s_);
 			object u_()
 			{
@@ -426,21 +426,21 @@ public class CesareanBirthFHIR_0_2_000
 					DataType as_ = Gravida?.Effective;
 					object at_ = FHIRHelpers_4_3_000.ToValue(as_);
 
-					return ((at_ as CqlDateTime) as object);
+					return (at_ as CqlDateTime) as object;
 				}
 				else if (ah_())
 				{
 					DataType au_ = Gravida?.Effective;
 					object av_ = FHIRHelpers_4_3_000.ToValue(au_);
 
-					return ((av_ as CqlInterval<CqlDateTime>) as object);
+					return (av_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ai_())
 				{
 					DataType aw_ = Gravida?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
 
-					return ((ax_ as CqlDateTime) as object);
+					return (ax_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -493,21 +493,21 @@ public class CesareanBirthFHIR_0_2_000
 					DataType bm_ = @this?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
 
-					return ((bn_ as CqlDateTime) as object);
+					return (bn_ as CqlDateTime) as object;
 				}
 				else if (bb_())
 				{
 					DataType bo_ = @this?.Effective;
 					object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 
-					return ((bp_ as CqlInterval<CqlDateTime>) as object);
+					return (bp_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bc_())
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
 
-					return ((br_ as CqlDateTime) as object);
+					return (br_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -523,7 +523,7 @@ public class CesareanBirthFHIR_0_2_000
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 
-		return (j_ as int?);
+		return j_ as int?;
 	}
 
     [CqlDeclaration("lastParity")]
@@ -565,21 +565,21 @@ public class CesareanBirthFHIR_0_2_000
 					DataType as_ = Parity?.Effective;
 					object at_ = FHIRHelpers_4_3_000.ToValue(as_);
 
-					return ((at_ as CqlDateTime) as object);
+					return (at_ as CqlDateTime) as object;
 				}
 				else if (ah_())
 				{
 					DataType au_ = Parity?.Effective;
 					object av_ = FHIRHelpers_4_3_000.ToValue(au_);
 
-					return ((av_ as CqlInterval<CqlDateTime>) as object);
+					return (av_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ai_())
 				{
 					DataType aw_ = Parity?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
 
-					return ((ax_ as CqlDateTime) as object);
+					return (ax_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -603,7 +603,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			];
-			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
+			bool? aa_ = context.Operators.In<string>(y_, z_ as IEnumerable<string>);
 			bool? ab_ = context.Operators.And(u_, aa_);
 			DataType ac_ = Parity?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -646,21 +646,21 @@ public class CesareanBirthFHIR_0_2_000
 					DataType bm_ = @this?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
 
-					return ((bn_ as CqlDateTime) as object);
+					return (bn_ as CqlDateTime) as object;
 				}
 				else if (bb_())
 				{
 					DataType bo_ = @this?.Effective;
 					object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 
-					return ((bp_ as CqlInterval<CqlDateTime>) as object);
+					return (bp_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bc_())
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
 
-					return ((br_ as CqlDateTime) as object);
+					return (br_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -676,7 +676,7 @@ public class CesareanBirthFHIR_0_2_000
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 
-		return (j_ as int?);
+		return j_ as int?;
 	}
 
     [CqlDeclaration("lastHistoryPretermBirth")]
@@ -718,21 +718,21 @@ public class CesareanBirthFHIR_0_2_000
 					DataType as_ = PretermBirth?.Effective;
 					object at_ = FHIRHelpers_4_3_000.ToValue(as_);
 
-					return ((at_ as CqlDateTime) as object);
+					return (at_ as CqlDateTime) as object;
 				}
 				else if (ah_())
 				{
 					DataType au_ = PretermBirth?.Effective;
 					object av_ = FHIRHelpers_4_3_000.ToValue(au_);
 
-					return ((av_ as CqlInterval<CqlDateTime>) as object);
+					return (av_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ai_())
 				{
 					DataType aw_ = PretermBirth?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
 
-					return ((ax_ as CqlDateTime) as object);
+					return (ax_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -756,7 +756,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			];
-			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
+			bool? aa_ = context.Operators.In<string>(y_, z_ as IEnumerable<string>);
 			bool? ab_ = context.Operators.And(u_, aa_);
 			DataType ac_ = PretermBirth?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -799,21 +799,21 @@ public class CesareanBirthFHIR_0_2_000
 					DataType bm_ = @this?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
 
-					return ((bn_ as CqlDateTime) as object);
+					return (bn_ as CqlDateTime) as object;
 				}
 				else if (bb_())
 				{
 					DataType bo_ = @this?.Effective;
 					object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 
-					return ((bp_ as CqlInterval<CqlDateTime>) as object);
+					return (bp_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bc_())
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
 
-					return ((br_ as CqlDateTime) as object);
+					return (br_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -829,7 +829,7 @@ public class CesareanBirthFHIR_0_2_000
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 
-		return (j_ as int?);
+		return j_ as int?;
 	}
 
     [CqlDeclaration("lastHistoryTermBirth")]
@@ -871,21 +871,21 @@ public class CesareanBirthFHIR_0_2_000
 					DataType as_ = TermBirth?.Effective;
 					object at_ = FHIRHelpers_4_3_000.ToValue(as_);
 
-					return ((at_ as CqlDateTime) as object);
+					return (at_ as CqlDateTime) as object;
 				}
 				else if (ah_())
 				{
 					DataType au_ = TermBirth?.Effective;
 					object av_ = FHIRHelpers_4_3_000.ToValue(au_);
 
-					return ((av_ as CqlInterval<CqlDateTime>) as object);
+					return (av_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ai_())
 				{
 					DataType aw_ = TermBirth?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
 
-					return ((ax_ as CqlDateTime) as object);
+					return (ax_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -909,7 +909,7 @@ public class CesareanBirthFHIR_0_2_000
 				"amended",
 				"corrected",
 			];
-			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
+			bool? aa_ = context.Operators.In<string>(y_, z_ as IEnumerable<string>);
 			bool? ab_ = context.Operators.And(u_, aa_);
 			DataType ac_ = TermBirth?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -952,21 +952,21 @@ public class CesareanBirthFHIR_0_2_000
 					DataType bm_ = @this?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
 
-					return ((bn_ as CqlDateTime) as object);
+					return (bn_ as CqlDateTime) as object;
 				}
 				else if (bb_())
 				{
 					DataType bo_ = @this?.Effective;
 					object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 
-					return ((bp_ as CqlInterval<CqlDateTime>) as object);
+					return (bp_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bc_())
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
 
-					return ((br_ as CqlDateTime) as object);
+					return (br_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -982,7 +982,7 @@ public class CesareanBirthFHIR_0_2_000
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 
-		return (j_ as int?);
+		return j_ as int?;
 	}
 
 	private IEnumerable<Encounter> Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births_Value()
@@ -1059,21 +1059,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType ax_ = AbnormalPresentation?.Effective;
 								object ay_ = FHIRHelpers_4_3_000.ToValue(ax_);
 
-								return ((ay_ as CqlDateTime) as object);
+								return (ay_ as CqlDateTime) as object;
 							}
 							else if (am_())
 							{
 								DataType az_ = AbnormalPresentation?.Effective;
 								object ba_ = FHIRHelpers_4_3_000.ToValue(az_);
 
-								return ((ba_ as CqlInterval<CqlDateTime>) as object);
+								return (ba_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (an_())
 							{
 								DataType bb_ = AbnormalPresentation?.Effective;
 								object bc_ = FHIRHelpers_4_3_000.ToValue(bb_);
 
-								return ((bc_ as CqlDateTime) as object);
+								return (bc_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1092,7 +1092,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						];
-						bool? aj_ = context.Operators.In<string>(ah_, (ai_ as IEnumerable<string>));
+						bool? aj_ = context.Operators.In<string>(ah_, ai_ as IEnumerable<string>);
 						bool? ak_ = context.Operators.And(ad_, aj_);
 
 						return ak_;
@@ -1131,21 +1131,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType br_ = @this?.Effective;
 								object bs_ = FHIRHelpers_4_3_000.ToValue(br_);
 
-								return ((bs_ as CqlDateTime) as object);
+								return (bs_ as CqlDateTime) as object;
 							}
 							else if (bg_())
 							{
 								DataType bt_ = @this?.Effective;
 								object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
 
-								return ((bu_ as CqlInterval<CqlDateTime>) as object);
+								return (bu_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (bh_())
 							{
 								DataType bv_ = @this?.Effective;
 								object bw_ = FHIRHelpers_4_3_000.ToValue(bv_);
 
-								return ((bw_ as CqlDateTime) as object);
+								return (bw_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1201,21 +1201,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType de_ = AbnormalPresentation?.Effective;
 								object df_ = FHIRHelpers_4_3_000.ToValue(de_);
 
-								return ((df_ as CqlDateTime) as object);
+								return (df_ as CqlDateTime) as object;
 							}
 							else if (ct_())
 							{
 								DataType dg_ = AbnormalPresentation?.Effective;
 								object dh_ = FHIRHelpers_4_3_000.ToValue(dg_);
 
-								return ((dh_ as CqlInterval<CqlDateTime>) as object);
+								return (dh_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (cu_())
 							{
 								DataType di_ = AbnormalPresentation?.Effective;
 								object dj_ = FHIRHelpers_4_3_000.ToValue(di_);
 
-								return ((dj_ as CqlDateTime) as object);
+								return (dj_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1234,7 +1234,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						];
-						bool? cq_ = context.Operators.In<string>(co_, (cp_ as IEnumerable<string>));
+						bool? cq_ = context.Operators.In<string>(co_, cp_ as IEnumerable<string>);
 						bool? cr_ = context.Operators.And(ck_, cq_);
 
 						return cr_;
@@ -1273,21 +1273,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType dy_ = @this?.Effective;
 								object dz_ = FHIRHelpers_4_3_000.ToValue(dy_);
 
-								return ((dz_ as CqlDateTime) as object);
+								return (dz_ as CqlDateTime) as object;
 							}
 							else if (dn_())
 							{
 								DataType ea_ = @this?.Effective;
 								object eb_ = FHIRHelpers_4_3_000.ToValue(ea_);
 
-								return ((eb_ as CqlInterval<CqlDateTime>) as object);
+								return (eb_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (do_())
 							{
 								DataType ec_ = @this?.Effective;
 								object ed_ = FHIRHelpers_4_3_000.ToValue(ec_);
 
-								return ((ed_ as CqlDateTime) as object);
+								return (ed_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1343,21 +1343,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType fl_ = AbnormalPresentation?.Effective;
 								object fm_ = FHIRHelpers_4_3_000.ToValue(fl_);
 
-								return ((fm_ as CqlDateTime) as object);
+								return (fm_ as CqlDateTime) as object;
 							}
 							else if (fa_())
 							{
 								DataType fn_ = AbnormalPresentation?.Effective;
 								object fo_ = FHIRHelpers_4_3_000.ToValue(fn_);
 
-								return ((fo_ as CqlInterval<CqlDateTime>) as object);
+								return (fo_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (fb_())
 							{
 								DataType fp_ = AbnormalPresentation?.Effective;
 								object fq_ = FHIRHelpers_4_3_000.ToValue(fp_);
 
-								return ((fq_ as CqlDateTime) as object);
+								return (fq_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1376,7 +1376,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						];
-						bool? ex_ = context.Operators.In<string>(ev_, (ew_ as IEnumerable<string>));
+						bool? ex_ = context.Operators.In<string>(ev_, ew_ as IEnumerable<string>);
 						bool? ey_ = context.Operators.And(er_, ex_);
 
 						return ey_;
@@ -1415,21 +1415,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType gf_ = @this?.Effective;
 								object gg_ = FHIRHelpers_4_3_000.ToValue(gf_);
 
-								return ((gg_ as CqlDateTime) as object);
+								return (gg_ as CqlDateTime) as object;
 							}
 							else if (fu_())
 							{
 								DataType gh_ = @this?.Effective;
 								object gi_ = FHIRHelpers_4_3_000.ToValue(gh_);
 
-								return ((gi_ as CqlInterval<CqlDateTime>) as object);
+								return (gi_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (fv_())
 							{
 								DataType gj_ = @this?.Effective;
 								object gk_ = FHIRHelpers_4_3_000.ToValue(gj_);
 
-								return ((gk_ as CqlDateTime) as object);
+								return (gk_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1485,21 +1485,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType hr_ = AbnormalPresentation?.Effective;
 								object hs_ = FHIRHelpers_4_3_000.ToValue(hr_);
 
-								return ((hs_ as CqlDateTime) as object);
+								return (hs_ as CqlDateTime) as object;
 							}
 							else if (hg_())
 							{
 								DataType ht_ = AbnormalPresentation?.Effective;
 								object hu_ = FHIRHelpers_4_3_000.ToValue(ht_);
 
-								return ((hu_ as CqlInterval<CqlDateTime>) as object);
+								return (hu_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (hh_())
 							{
 								DataType hv_ = AbnormalPresentation?.Effective;
 								object hw_ = FHIRHelpers_4_3_000.ToValue(hv_);
 
-								return ((hw_ as CqlDateTime) as object);
+								return (hw_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1518,7 +1518,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						];
-						bool? hd_ = context.Operators.In<string>(hb_, (hc_ as IEnumerable<string>));
+						bool? hd_ = context.Operators.In<string>(hb_, hc_ as IEnumerable<string>);
 						bool? he_ = context.Operators.And(gx_, hd_);
 
 						return he_;
@@ -1557,21 +1557,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType il_ = @this?.Effective;
 								object im_ = FHIRHelpers_4_3_000.ToValue(il_);
 
-								return ((im_ as CqlDateTime) as object);
+								return (im_ as CqlDateTime) as object;
 							}
 							else if (ia_())
 							{
 								DataType in_ = @this?.Effective;
 								object io_ = FHIRHelpers_4_3_000.ToValue(in_);
 
-								return ((io_ as CqlInterval<CqlDateTime>) as object);
+								return (io_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (ib_())
 							{
 								DataType ip_ = @this?.Effective;
 								object iq_ = FHIRHelpers_4_3_000.ToValue(ip_);
 
-								return ((iq_ as CqlDateTime) as object);
+								return (iq_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1587,7 +1587,7 @@ public class CesareanBirthFHIR_0_2_000
 					DataType gs_ = gr_?.Effective;
 					object gt_ = FHIRHelpers_4_3_000.ToValue(gs_);
 
-					return ((gt_ as CqlDateTime) as object);
+					return (gt_ as CqlDateTime) as object;
 				}
 				else if (o_())
 				{
@@ -1626,21 +1626,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType jx_ = AbnormalPresentation?.Effective;
 								object jy_ = FHIRHelpers_4_3_000.ToValue(jx_);
 
-								return ((jy_ as CqlDateTime) as object);
+								return (jy_ as CqlDateTime) as object;
 							}
 							else if (jm_())
 							{
 								DataType jz_ = AbnormalPresentation?.Effective;
 								object ka_ = FHIRHelpers_4_3_000.ToValue(jz_);
 
-								return ((ka_ as CqlInterval<CqlDateTime>) as object);
+								return (ka_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (jn_())
 							{
 								DataType kb_ = AbnormalPresentation?.Effective;
 								object kc_ = FHIRHelpers_4_3_000.ToValue(kb_);
 
-								return ((kc_ as CqlDateTime) as object);
+								return (kc_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1659,7 +1659,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						];
-						bool? jj_ = context.Operators.In<string>(jh_, (ji_ as IEnumerable<string>));
+						bool? jj_ = context.Operators.In<string>(jh_, ji_ as IEnumerable<string>);
 						bool? jk_ = context.Operators.And(jd_, jj_);
 
 						return jk_;
@@ -1698,21 +1698,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType kr_ = @this?.Effective;
 								object ks_ = FHIRHelpers_4_3_000.ToValue(kr_);
 
-								return ((ks_ as CqlDateTime) as object);
+								return (ks_ as CqlDateTime) as object;
 							}
 							else if (kg_())
 							{
 								DataType kt_ = @this?.Effective;
 								object ku_ = FHIRHelpers_4_3_000.ToValue(kt_);
 
-								return ((ku_ as CqlInterval<CqlDateTime>) as object);
+								return (ku_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (kh_())
 							{
 								DataType kv_ = @this?.Effective;
 								object kw_ = FHIRHelpers_4_3_000.ToValue(kv_);
 
-								return ((kw_ as CqlDateTime) as object);
+								return (kw_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1728,7 +1728,7 @@ public class CesareanBirthFHIR_0_2_000
 					DataType iy_ = ix_?.Effective;
 					object iz_ = FHIRHelpers_4_3_000.ToValue(iy_);
 
-					return ((iz_ as CqlInterval<CqlDateTime>) as object);
+					return (iz_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (p_())
 				{
@@ -1767,21 +1767,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType md_ = AbnormalPresentation?.Effective;
 								object me_ = FHIRHelpers_4_3_000.ToValue(md_);
 
-								return ((me_ as CqlDateTime) as object);
+								return (me_ as CqlDateTime) as object;
 							}
 							else if (ls_())
 							{
 								DataType mf_ = AbnormalPresentation?.Effective;
 								object mg_ = FHIRHelpers_4_3_000.ToValue(mf_);
 
-								return ((mg_ as CqlInterval<CqlDateTime>) as object);
+								return (mg_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (lt_())
 							{
 								DataType mh_ = AbnormalPresentation?.Effective;
 								object mi_ = FHIRHelpers_4_3_000.ToValue(mh_);
 
-								return ((mi_ as CqlDateTime) as object);
+								return (mi_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1800,7 +1800,7 @@ public class CesareanBirthFHIR_0_2_000
 							"amended",
 							"corrected",
 						];
-						bool? lp_ = context.Operators.In<string>(ln_, (lo_ as IEnumerable<string>));
+						bool? lp_ = context.Operators.In<string>(ln_, lo_ as IEnumerable<string>);
 						bool? lq_ = context.Operators.And(lj_, lp_);
 
 						return lq_;
@@ -1839,21 +1839,21 @@ public class CesareanBirthFHIR_0_2_000
 								DataType mx_ = @this?.Effective;
 								object my_ = FHIRHelpers_4_3_000.ToValue(mx_);
 
-								return ((my_ as CqlDateTime) as object);
+								return (my_ as CqlDateTime) as object;
 							}
 							else if (mm_())
 							{
 								DataType mz_ = @this?.Effective;
 								object na_ = FHIRHelpers_4_3_000.ToValue(mz_);
 
-								return ((na_ as CqlInterval<CqlDateTime>) as object);
+								return (na_ as CqlInterval<CqlDateTime>) as object;
 							}
 							else if (mn_())
 							{
 								DataType nb_ = @this?.Effective;
 								object nc_ = FHIRHelpers_4_3_000.ToValue(nb_);
 
-								return ((nc_ as CqlDateTime) as object);
+								return (nc_ as CqlDateTime) as object;
 							}
 							else
 							{
@@ -1869,7 +1869,7 @@ public class CesareanBirthFHIR_0_2_000
 					DataType le_ = ld_?.Effective;
 					object lf_ = FHIRHelpers_4_3_000.ToValue(le_);
 
-					return ((lf_ as CqlDateTime) as object);
+					return (lf_ as CqlDateTime) as object;
 				}
 				else
 				{

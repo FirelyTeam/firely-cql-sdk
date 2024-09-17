@@ -13,7 +13,7 @@ namespace Hl7.Cql.CqlToElm.Test
         private static StreamReader StringStream(string s) => new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(s)), Encoding.UTF8);
 
         [TestMethod]
-        public void FromCql_NameOnly()
+        public void FromCql_IdentifierOnly()
         {
             var si = new StreamInspector();
             using var ss = StringStream("library Foo\n");
@@ -24,7 +24,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void FromCql_NameAndVersion()
+        public void FromCql_VersionedIdentifier()
         {
             var si = new StreamInspector();
             using var ss = StringStream("library Foo version '1.0.0'");
