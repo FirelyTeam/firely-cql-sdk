@@ -136,7 +136,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         {
             try
             {
-                _libraryInfosByKey.Add(library.NameAndVersion()!, (library, []));
+                _libraryInfosByKey.Add(library.GetVersionedIdentifierString()!, (library, []));
                 _librariesNotCalculatedYet.Add(library);
             }
             catch (ArgumentNullException)
@@ -164,12 +164,12 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         foreach (var library in _librariesNotCalculatedYet)
         {
-            var dependencies = _libraryInfosByKey[library.NameAndVersion()!].dependencies;
+            var dependencies = _libraryInfosByKey[library.GetVersionedIdentifierString()!].dependencies;
             if (library.includes is { Length: > 0 } includeDefs)
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    var toKey = includeDef.NameAndVersion(true)!;
+                    var toKey = includeDef.GetVersionedIdentifierString(true)!;
                     var toLib = _libraryInfosByKey.GetValueOrDefault(toKey).library ?? throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
                     dependencies.Add(toLib);
                 }
@@ -186,12 +186,12 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         var rootLibraries = new LibraryByNameAndVersionHashSet(
             allLibraries
-            .GetRoots(lib => GetLibraryDependencies(lib.NameAndVersion()!)));
+            .GetRoots(lib => GetLibraryDependencies(lib.GetVersionedIdentifierString()!)));
 
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
         var topologicallySortedLibraries = allLibraries
-            .TopologicalSort(lib => GetLibraryDependencies(lib.NameAndVersion()!))
+            .TopologicalSort(lib => GetLibraryDependencies(lib.GetVersionedIdentifierString()!))
             .ToList();
         Debug.Assert(topologicallySortedLibraries.Count == _libraryInfosByKey.Count);
 
@@ -241,7 +241,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
             foreach (var library in librariesLoaded)
             {
-                if (!_libraryInfosByKey.TryAdd(library.NameAndVersion()!, (library, [])))
+                if (!_libraryInfosByKey.TryAdd(library.GetVersionedIdentifierString()!, (library, [])))
                     continue; // Already loaded, skip
 
                 if (library.includes is { Length: > 0 } includeDefs)
@@ -264,8 +264,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     }
 
     internal string MermaidDiagram => this.BuildMermaidFlowChart(
-        getNextItems: lib => GetLibraryDependencies(lib.NameAndVersion(false)),
-        formatItem: lib => lib.NameAndVersion(false) ?? "???");
+        getNextItems: lib => GetLibraryDependencies(lib.GetVersionedIdentifierString(false)),
+        formatItem: lib => lib.GetVersionedIdentifierString(false) ?? "???");
 
     /// <summary>
     /// Given a reference that appears in a library, this method will attempt to resolve the definition.
@@ -338,7 +338,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         /// <inheritdoc/>
         public IEnumerable<string> Keys =>
-            LibrarySet.GetCalculatedState().TopologicallySortedLibraries.Select(lib => lib.NameAndVersion(true)!);
+            LibrarySet.GetCalculatedState().TopologicallySortedLibraries.Select(lib => lib.GetVersionedIdentifierString(true)!);
 
         /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -348,7 +348,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
             LibrarySet
                 .GetCalculatedState()
                 .TopologicallySortedLibraries
-                .Select(lib => KeyValuePair.Create(lib.NameAndVersion(true)!, lib))
+                .Select(lib => KeyValuePair.Create(lib.GetVersionedIdentifierString(true)!, lib))
                 .GetEnumerator();
     }
 }

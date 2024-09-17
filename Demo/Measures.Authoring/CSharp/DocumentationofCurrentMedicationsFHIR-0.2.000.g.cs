@@ -284,8 +284,8 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 
 					return ah_;
 				};
-				IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MedicationsNotDocumented is DomainResource
-						? (MedicationsNotDocumented as DomainResource).Extension
+				IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MedicationsNotDocumented is DomainResource)
+						? ((MedicationsNotDocumented as DomainResource).Extension)
 						: default), k_);
 				DataType m_(Extension @this)
 				{

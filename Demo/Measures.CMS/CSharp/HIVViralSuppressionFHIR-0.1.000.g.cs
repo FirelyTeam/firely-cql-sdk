@@ -468,21 +468,21 @@ public class HIVViralSuppressionFHIR_0_1_000
 					DataType x_ = ViralLoad?.Effective;
 					object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 
-					return (y_ as CqlDateTime) as object;
+					return ((y_ as CqlDateTime) as object);
 				}
 				else if (m_())
 				{
 					DataType z_ = ViralLoad?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
-					return (aa_ as CqlInterval<CqlDateTime>) as object;
+					return ((aa_ as CqlInterval<CqlDateTime>) as object);
 				}
 				else if (n_())
 				{
 					DataType ab_ = ViralLoad?.Effective;
 					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
-					return (ac_ as CqlDateTime) as object;
+					return ((ac_ as CqlDateTime) as object);
 				}
 				else
 				{
@@ -521,18 +521,18 @@ public class HIVViralSuppressionFHIR_0_1_000
 		DataType b_ = a_?.Value;
 		object c_ = FHIRHelpers_4_3_000.ToValue(b_);
 		CqlQuantity d_ = context.Operators.Quantity(200m, "{copies}/mL");
-		bool? e_ = context.Operators.Less(c_ as CqlQuantity, d_);
+		bool? e_ = context.Operators.Less((c_ as CqlQuantity), d_);
 		DataType g_ = a_?.Value;
 		object h_ = FHIRHelpers_4_3_000.ToValue(g_);
 		CqlCode i_ = this.Below_threshold_level__qualifier_value_();
 		CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
-		bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
+		bool? k_ = context.Operators.Equivalent((h_ as CqlConcept), j_);
 		bool? l_ = context.Operators.Or(e_, k_);
 		DataType n_ = a_?.Value;
 		object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 		CqlCode p_ = this.Not_detected__qualifier_value_();
 		CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-		bool? r_ = context.Operators.Equivalent(o_ as CqlConcept, q_);
+		bool? r_ = context.Operators.Equivalent((o_ as CqlConcept), q_);
 		bool? s_ = context.Operators.Or(l_, r_);
 
 		return s_;

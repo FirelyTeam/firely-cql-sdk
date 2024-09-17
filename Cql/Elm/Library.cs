@@ -29,13 +29,13 @@ public partial class Library
         if (IsValidated)
             return;
 
-        _ = NameAndVersion(throwError: true);
+        _ = GetVersionedIdentifierString(throwError: true);
 
         if (includes is { Length: > 0 } includeDefs)
         {
             foreach (var includeDef in includeDefs)
             {
-                if (includeDef.NameAndVersion(throwError: false) == null)
+                if (includeDef.GetVersionedIdentifierString(throwError: false) == null)
                     throw new LibraryMissingIncludeDefPathError(this, includeDef).ToException();
             }
         }
@@ -44,10 +44,10 @@ public partial class Library
     }
 
     public static IEqualityComparer<Library> EqualityComparerByNameAndVersion { get; } =
-        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion(true)!);
+        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.GetVersionedIdentifierString(true)!);
 
     public static IComparer<Library> ComparerByNameAndVersion { get; } =
-        ComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion(true)!);
+        ComparerFactory.For<Library>.CreateByKey(lib => lib.GetVersionedIdentifierString(true)!);
 
     internal string? OriginalFilePath { get; private set; }
 }

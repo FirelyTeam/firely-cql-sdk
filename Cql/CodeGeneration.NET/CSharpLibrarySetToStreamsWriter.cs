@@ -20,8 +20,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Options;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -169,7 +171,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var library in librarySet)
             {
-                string libraryName = library.NameAndVersion()!;
+                string libraryName = library.GetVersionedIdentifierString()!;
                 if (!callbacks.ShouldWriteLibrary(libraryName))
                 {
                     _logger.LogInformation($"Skipping library {libraryName} as per callback.");
@@ -314,7 +316,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var dependentLibrary in requiredLibraries)
             {
-                var typeName = libraryNameToClassName(dependentLibrary.NameAndVersion()!);
+                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifierString()!);
                 var memberName = typeName;
                 writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
             }
@@ -366,7 +368,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     writer.WriteLine();
                 }
 
-                var typeName = libraryNameToClassName(dependentLibrary.NameAndVersion()!);
+                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifierString()!);
                 var memberName = typeName;
                 writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
             }

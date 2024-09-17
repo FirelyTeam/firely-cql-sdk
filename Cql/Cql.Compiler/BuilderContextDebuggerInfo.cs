@@ -71,7 +71,7 @@ internal readonly record struct BuilderContextDebuggerInfo(
 
             string? FromPath() => (elem as IGetPath)?.path;
             string? FromContext() => (elem as ExpressionDef)?.context;
-            string? FromNameAndVersion() => (elem as IGetNameAndVersion)?.NameAndVersion(throwError: false);
+            string? FromNameAndVersion() => (elem as IGetVersionedIdentifier)?.GetVersionedIdentifierString(throwError: false);
             string? FromLibraryName() => (elem as IGetLibraryName)?.libraryName;
             string? FromName() => (elem as IGetName)?.name;
         }

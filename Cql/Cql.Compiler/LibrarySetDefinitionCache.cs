@@ -45,7 +45,7 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
 
     private LibraryCache GetLibraryCache(Library library)
     {
-        return _cachedLibraries.GetOrAdd(library.NameAndVersion()!, buildCache);
+        return _cachedLibraries.GetOrAdd(library.GetVersionedIdentifierString()!, buildCache);
         LibraryCache buildCache(string _) => LibraryCache.Build(library);
     }
 
@@ -61,7 +61,7 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
         if (!contextCache.TryResolveDefinition<IncludeDef>(libraryAlias, out var includeDef))
             throw new LibraryAliasUnresolvedError(context, libraryAlias).ToException();
 
-        var aliasedLibrary = parent.GetLibrary(includeDef.NameAndVersion()!)!;
+        var aliasedLibrary = parent.GetLibrary(includeDef.GetVersionedIdentifierString()!)!;
 
         return GetLibraryCache(aliasedLibrary);
     }

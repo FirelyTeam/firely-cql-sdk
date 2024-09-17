@@ -381,7 +381,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			return x_;
 		};
 		IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
-		IEnumerable<object> i_ = context.Operators.Union<object>(d_ as IEnumerable<object>, h_ as IEnumerable<object>);
+		IEnumerable<object> i_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
 
 		return i_;
 	}
@@ -419,7 +419,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
+			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = CervicalCytology?.Category;
 			bool? j_(CodeableConcept CervicalCytologyCategory)
 			{
@@ -474,7 +474,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
+			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
 			List<CodeableConcept> i_ = HPVTest?.Category;
 			bool? j_(CodeableConcept HPVTestCategory)
 			{
@@ -551,7 +551,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			"amended",
 			"corrected",
 		];
-		bool? d_ = context.Operators.In<string>(b_, c_ as IEnumerable<string>);
+		bool? d_ = context.Operators.In<string>(b_, (c_ as IEnumerable<string>));
 
 		return d_;
 	}

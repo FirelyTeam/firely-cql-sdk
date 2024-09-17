@@ -444,7 +444,7 @@ public class OncologyPainIntensityQuantifiedFHIR_0_1_000
 						IEnumerable<CqlConcept> y_ = context.Operators.Where<CqlConcept>(w_, x_);
 						bool? z_ = context.Operators.Exists<CqlConcept>(y_);
 
-						return z_ ?? false;
+						return (z_ ?? false);
 					};
 					if (t_())
 					{

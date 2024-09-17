@@ -514,7 +514,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			CqlInterval<CqlDateTime> ca_ = this.Measurement_Period();
 			Period cb_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> cc_ = FHIRHelpers_4_3_000.ToInterval(cb_);
-			CqlInterval<CqlDateTime> cd_ = QICoreCommon_2_0_000.ToInterval(cc_ as object);
+			CqlInterval<CqlDateTime> cd_ = QICoreCommon_2_0_000.ToInterval((cc_ as object));
 			bool? ce_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ca_, cd_, default);
 
 			return ce_;
@@ -542,7 +542,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			{
 				Period n_ = EDOrAmbulatoryVisit?.Period;
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
-				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.ToInterval(o_ as object);
+				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.ToInterval((o_ as object));
 				CqlDateTime q_ = context.Operators.Start(p_);
 				FhirDateTime r_ = AntibioticOrdered?.AuthoredOnElement;
 				CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(r_);
@@ -607,7 +607,7 @@ public class AppropriateTestingforPharyngitisFHIR_0_1_000
 			CqlDateTime l_ = context.Operators.Start(k_);
 			Period m_ = tuple_ypyxedbbcqbdavhxvckuwmfh?.VisitWithAntibiotic?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 			bool? p_ = context.Operators.In<CqlDateTime>(l_, o_, default);
 
 			return p_;

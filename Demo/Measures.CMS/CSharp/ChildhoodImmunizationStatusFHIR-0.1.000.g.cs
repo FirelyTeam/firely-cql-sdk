@@ -892,7 +892,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDateTime> ai_ = this.Measurement_Period();
 			Period aj_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
-			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.ToInterval(ak_ as object);
+			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.ToInterval((ak_ as object));
 			bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ai_, al_, "day");
 
 			return am_;
@@ -1149,7 +1149,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
 			DataType q_ = DTaPVaccination?.Occurrence;
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_ as object);
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
@@ -1160,7 +1160,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType v_ = DTaPVaccination?.Occurrence;
 			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval(w_ as object);
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
 			CqlDate z_ = context.Operators.Start(y_);
 			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
@@ -1280,7 +1280,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
 			DataType q_ = PolioVaccination?.Occurrence;
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_ as object);
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
@@ -1291,7 +1291,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType v_ = PolioVaccination?.Occurrence;
 			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval(w_ as object);
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
 			CqlDate z_ = context.Operators.Start(y_);
 			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
@@ -1437,7 +1437,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> l_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
 			DataType m_ = MMRVaccination?.Occurrence;
 			CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 			CqlInterval<CqlDate> p_ = CQMCommon_2_0_000.ToDateInterval(o_);
 			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, default);
 
@@ -1459,7 +1459,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return w_;
 		};
 		IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
-		IEnumerable<object> k_ = context.Operators.Union<object>(e_ as IEnumerable<object>, j_ as IEnumerable<object>);
+		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -1575,7 +1575,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
 			DataType q_ = ThreeDoseHibVaccine?.Occurrence;
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_ as object);
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
@@ -1586,7 +1586,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType v_ = ThreeDoseHibVaccine?.Occurrence;
 			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval(w_ as object);
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
 			CqlDate z_ = context.Operators.Start(y_);
 			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
@@ -1642,7 +1642,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
 			DataType q_ = HibVaccine?.Occurrence;
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_ as object);
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
@@ -1653,7 +1653,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType v_ = HibVaccine?.Occurrence;
 			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval(w_ as object);
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
 			CqlDate z_ = context.Operators.Start(y_);
 			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
@@ -1817,7 +1817,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> p_ = this.First_Two_Years();
 			DataType q_ = HepatitisBVaccination?.Occurrence;
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_ as object);
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
@@ -1828,7 +1828,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType v_ = HepatitisBVaccination?.Occurrence;
 			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval(w_ as object);
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
 			CqlDate z_ = context.Operators.Start(y_);
 			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
@@ -2034,7 +2034,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> l_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
 			DataType m_ = ChickenPoxVaccination?.Occurrence;
 			CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 			CqlInterval<CqlDate> p_ = CQMCommon_2_0_000.ToDateInterval(o_);
 			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, default);
 
@@ -2056,7 +2056,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return w_;
 		};
 		IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
-		IEnumerable<object> k_ = context.Operators.Union<object>(e_ as IEnumerable<object>, j_ as IEnumerable<object>);
+		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -2103,7 +2103,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
 			DataType q_ = PneumococcalVaccination?.Occurrence;
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_ as object);
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
@@ -2114,7 +2114,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType v_ = PneumococcalVaccination?.Occurrence;
 			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval(w_ as object);
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
 			CqlDate z_ = context.Operators.Start(y_);
 			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
@@ -2232,7 +2232,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> l_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday();
 			DataType m_ = HepatitisAVaccination?.Occurrence;
 			CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
 			CqlInterval<CqlDate> p_ = CQMCommon_2_0_000.ToDateInterval(o_);
 			bool? q_ = context.Operators.IntervalIncludesInterval<CqlDate>(l_, p_, default);
 
@@ -2254,7 +2254,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			return w_;
 		};
 		IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
-		IEnumerable<object> k_ = context.Operators.Union<object>(e_ as IEnumerable<object>, j_ as IEnumerable<object>);
+		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
 
 		return k_;
 	}
@@ -2302,7 +2302,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> q_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
 			DataType r_ = TwoDoseRotavirusVaccine?.Occurrence;
 			CqlDateTime s_ = context.Operators.LateBoundProperty<CqlDateTime>(r_, "value");
-			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.ToInterval(s_ as object);
+			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.ToInterval((s_ as object));
 			CqlInterval<CqlDate> u_ = CQMCommon_2_0_000.ToDateInterval(t_);
 			bool? v_ = context.Operators.IntervalIncludesInterval<CqlDate>(q_, u_, "day");
 
@@ -2313,7 +2313,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType w_ = TwoDoseRotavirusVaccine?.Occurrence;
 			CqlDateTime x_ = context.Operators.LateBoundProperty<CqlDateTime>(w_, "value");
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
 			CqlInterval<CqlDate> z_ = CQMCommon_2_0_000.ToDateInterval(y_);
 			CqlDate aa_ = context.Operators.Start(z_);
 			CqlDateTime ab_ = context.Operators.ConvertDateToDateTime(aa_);
@@ -2369,7 +2369,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
 			DataType q_ = ThreeDoseRotavirusVaccine?.Occurrence;
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_ as object);
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
@@ -2380,7 +2380,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType v_ = ThreeDoseRotavirusVaccine?.Occurrence;
 			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval(w_ as object);
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
 			CqlDate z_ = context.Operators.Start(y_);
 			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
@@ -2564,7 +2564,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> p_ = this.Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old();
 			DataType q_ = InfluenzaVaccine?.Occurrence;
 			CqlDateTime r_ = context.Operators.LateBoundProperty<CqlDateTime>(q_, "value");
-			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval(r_ as object);
+			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.ToInterval((r_ as object));
 			CqlInterval<CqlDate> t_ = CQMCommon_2_0_000.ToDateInterval(s_);
 			bool? u_ = context.Operators.IntervalIncludesInterval<CqlDate>(p_, t_, "day");
 
@@ -2575,7 +2575,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType v_ = InfluenzaVaccine?.Occurrence;
 			CqlDateTime w_ = context.Operators.LateBoundProperty<CqlDateTime>(v_, "value");
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval(w_ as object);
+			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
 			CqlInterval<CqlDate> y_ = CQMCommon_2_0_000.ToDateInterval(x_);
 			CqlDate z_ = context.Operators.Start(y_);
 			CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
@@ -2669,7 +2669,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 			CqlInterval<CqlDate> r_ = context.Operators.Interval(p_, p_, true, true);
 			DataType s_ = LAIVVaccine?.Occurrence;
 			CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_ as object);
+			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
 			CqlInterval<CqlDate> v_ = CQMCommon_2_0_000.ToDateInterval(u_);
 			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDate>(r_, v_, "day");
 
@@ -2680,7 +2680,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		{
 			DataType x_ = LAIVVaccine?.Occurrence;
 			CqlDateTime y_ = context.Operators.LateBoundProperty<CqlDateTime>(x_, "value");
-			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.ToInterval(y_ as object);
+			CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.ToInterval((y_ as object));
 			CqlInterval<CqlDate> aa_ = CQMCommon_2_0_000.ToDateInterval(z_);
 			CqlDate ab_ = context.Operators.Start(aa_);
 			CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(ab_);

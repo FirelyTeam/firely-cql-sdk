@@ -1004,12 +1004,12 @@ public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 					"corrected",
 					"preliminary",
 				];
-				bool? ao_ = context.Operators.In<string>(am_, an_ as IEnumerable<string>);
+				bool? ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
 				bool? ap_ = context.Operators.And(ai_, ao_);
 				DataType aq_ = VisualAcuityExamPerformed?.Value;
 				object ar_ = FHIRHelpers_4_3_000.ToValue(aq_);
 				CqlValueSet as_ = this.Visual_Acuity_20_40_or_Better();
-				bool? at_ = context.Operators.ConceptInValueSet(ar_ as CqlConcept, as_);
+				bool? at_ = context.Operators.ConceptInValueSet((ar_ as CqlConcept), as_);
 				bool? au_ = context.Operators.And(ap_, at_);
 
 				return au_;

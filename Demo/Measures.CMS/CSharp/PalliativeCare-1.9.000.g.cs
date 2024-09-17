@@ -160,7 +160,7 @@ public class PalliativeCare_1_9_000
 		{
 			Period aj_ = PalliativeEncounter?.Period;
 			CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
-			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.toInterval(ak_ as object);
+			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.toInterval((ak_ as object));
 			CqlInterval<CqlDateTime> am_ = this.Measurement_Period();
 			bool? an_ = context.Operators.Overlaps(al_, am_, "day");
 

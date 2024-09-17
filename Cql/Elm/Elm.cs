@@ -23,19 +23,28 @@ file static class StringExtensions
 
 #region GetNameAndVersion
 
-/// <summary>
-/// Interface for getting the name and version of an object.
-/// </summary>
-internal interface IGetNameAndVersion
+internal static class IGetVersionedIdentifierExtensions
 {
     /// <summary>
-    /// Gets the name with version, or just the name if no version exists.
+    /// Gets the identifier with the version, or just the identifier if no version exists.
     /// </summary>
+    /// <param name="getVersionedIdentifier">The instance to get the versioned identifier string from.</param>
     /// <param name="throwError">Indicates whether to throw an exception if the identifier is missing.</param>
-    /// <returns>The name with version, or just the name if no version exists.</returns>
-    /// <remarks>The name and version are formatted in CQL style, e.g. "FHIRHelpers-4.0.1".</remarks>
-    string? NameAndVersion(bool throwError = true);
+    /// <returns>The identifier with version, or just the identifier if no version exists.</returns>
+    /// <remarks>The identifier and version are formatted in CQL style, e.g. "FHIRHelpers-4.0.1".</remarks>
+    public static string? GetVersionedIdentifierString(
+        this IGetVersionedIdentifier getVersionedIdentifier,
+        bool throwError = true) =>
+        getVersionedIdentifier
+            .GetVersionedIdentifier(throwError)!
+            .GetVersionedIdentifierString(throwError);
+}
 
+/// <summary>
+/// Interface for getting the versioned identifier an object.
+/// </summary>
+internal interface IGetVersionedIdentifier
+{
     /// <summary>
     /// Gets the versioned identifier, or null if the identifier is missing.
     /// </summary>
@@ -45,15 +54,10 @@ internal interface IGetNameAndVersion
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
-partial class Library : IGetNameAndVersion
+partial class Library : IGetVersionedIdentifier
 {
     /// <inheritdoc />
-    public string? NameAndVersion(bool throwError = true) =>
-        GetVersionedIdentifier(throwError)!
-            .NameAndVersion(throwError);
-
-    /// <inheritdoc />
-    public VersionedIdentifier? GetVersionedIdentifier(bool throwError = true)
+    VersionedIdentifier? IGetVersionedIdentifier.GetVersionedIdentifier(bool throwError)
     {
         if (identifier != null) return identifier;
 
@@ -62,19 +66,14 @@ partial class Library : IGetNameAndVersion
     }
 
     /// <inheritdoc />
-    public override string? ToString() => NameAndVersion(false);
+    public override string? ToString() => this.GetVersionedIdentifierString(false);
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
-partial class IncludeDef : IGetNameAndVersion
+partial class IncludeDef : IGetVersionedIdentifier
 {
     /// <inheritdoc />
-    public string? NameAndVersion(bool throwError = true) =>
-        GetVersionedIdentifier(throwError)!
-            .NameAndVersion(throwError);
-
-    /// <inheritdoc />
-    public VersionedIdentifier? GetVersionedIdentifier(bool throwError = true)
+    VersionedIdentifier? IGetVersionedIdentifier.GetVersionedIdentifier(bool throwError)
     {
         if (path is {Length:>0})
             return new()
@@ -88,14 +87,13 @@ partial class IncludeDef : IGetNameAndVersion
     }
 
     /// <inheritdoc />
-    public override string? ToString() => NameAndVersion(false);
+    public override string? ToString() => this.GetVersionedIdentifierString(false);
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
-partial class VersionedIdentifier : IGetNameAndVersion
+partial class VersionedIdentifier : IGetVersionedIdentifier
 {
-    /// <inheritdoc />
-    public string? NameAndVersion(bool throwError = true)
+    internal string? GetVersionedIdentifierString(bool throwError = true)
     {
         if (string.IsNullOrEmpty(id))
         {
@@ -112,10 +110,10 @@ partial class VersionedIdentifier : IGetNameAndVersion
     }
 
     /// <inheritdoc />
-    VersionedIdentifier? IGetNameAndVersion.GetVersionedIdentifier(bool throwError) => this;
+    VersionedIdentifier? IGetVersionedIdentifier.GetVersionedIdentifier(bool throwError) => this;
 
     /// <inheritdoc />
-    public override string? ToString() => NameAndVersion(false);
+    public override string? ToString() => GetVersionedIdentifierString(false);
 }
 
 #endregion

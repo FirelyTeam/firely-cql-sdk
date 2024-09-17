@@ -846,8 +846,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 					return af_;
 				};
-				IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiagnoses is Element
-						? (EncounterDiagnoses as Element).Extension
+				IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
+						? ((EncounterDiagnoses as Element).Extension)
 						: default), t_);
 				object v_(Extension @this)
 				{
@@ -857,7 +857,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				};
 				IEnumerable<object> w_ = context.Operators.Select<Extension, object>(u_, v_);
 				object x_ = context.Operators.SingletonFrom<object>(w_);
-				CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept(x_ as CodeableConcept);
+				CqlConcept y_ = FHIRHelpers_4_3_000.ToConcept((x_ as CodeableConcept));
 				CqlValueSet z_ = this.Present_on_Admission_is_No_or_Unable_To_Determine();
 				bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
 				bool? ab_ = context.Operators.And(s_, aa_);
@@ -1135,8 +1135,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return q_;
 			};
-			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiagnoses is Element
-					? (EncounterDiagnoses as Element).Extension
+			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
+					? ((EncounterDiagnoses as Element).Extension)
 					: default), f_);
 			object h_(Extension @this)
 			{
@@ -1146,7 +1146,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<object> i_ = context.Operators.Select<Extension, object>(g_, h_);
 			object j_ = context.Operators.SingletonFrom<object>(i_);
-			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept(j_ as CodeableConcept);
+			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept((j_ as CodeableConcept));
 			CqlValueSet l_ = this.Present_On_Admission_is_Yes_or_Exempt();
 			bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 
@@ -1798,7 +1798,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? an_ = context.Operators.In<string>(al_, am_ as IEnumerable<string>);
+				bool? an_ = context.Operators.In<string>(al_, (am_ as IEnumerable<string>));
 				bool? ao_ = context.Operators.And(ai_, an_);
 				DataType ap_ = Hematocrit?.Value;
 				object aq_ = FHIRHelpers_4_3_000.ToValue(ap_);
@@ -1813,7 +1813,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				Instant at_ = @this?.IssuedElement;
 				DateTimeOffset? au_ = at_?.Value;
 				CqlDateTime av_ = context.Operators.Convert<CqlDateTime>(au_);
-				CqlDateTime aw_ = QICoreCommon_2_0_000.earliest(av_ as object);
+				CqlDateTime aw_ = QICoreCommon_2_0_000.earliest((av_ as object));
 
 				return aw_;
 			};
@@ -1842,7 +1842,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? bl_ = context.Operators.In<string>(bj_, bk_ as IEnumerable<string>);
+				bool? bl_ = context.Operators.In<string>(bj_, (bk_ as IEnumerable<string>));
 				bool? bm_ = context.Operators.And(bg_, bl_);
 				DataType bn_ = Hematocrit?.Value;
 				object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
@@ -1857,7 +1857,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				Instant br_ = @this?.IssuedElement;
 				DateTimeOffset? bs_ = br_?.Value;
 				CqlDateTime bt_ = context.Operators.Convert<CqlDateTime>(bs_);
-				CqlDateTime bu_ = QICoreCommon_2_0_000.earliest(bt_ as object);
+				CqlDateTime bu_ = QICoreCommon_2_0_000.earliest((bt_ as object));
 
 				return bu_;
 			};
@@ -1866,7 +1866,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? y_ = (e_, n_ as CqlQuantity, x_);
+			(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
 			return y_;
 		};
@@ -1908,7 +1908,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? an_ = context.Operators.In<string>(al_, am_ as IEnumerable<string>);
+				bool? an_ = context.Operators.In<string>(al_, (am_ as IEnumerable<string>));
 				bool? ao_ = context.Operators.And(ai_, an_);
 				DataType ap_ = WBC?.Value;
 				object aq_ = FHIRHelpers_4_3_000.ToValue(ap_);
@@ -1923,7 +1923,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				Instant at_ = @this?.IssuedElement;
 				DateTimeOffset? au_ = at_?.Value;
 				CqlDateTime av_ = context.Operators.Convert<CqlDateTime>(au_);
-				CqlDateTime aw_ = QICoreCommon_2_0_000.earliest(av_ as object);
+				CqlDateTime aw_ = QICoreCommon_2_0_000.earliest((av_ as object));
 
 				return aw_;
 			};
@@ -1952,7 +1952,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? bl_ = context.Operators.In<string>(bj_, bk_ as IEnumerable<string>);
+				bool? bl_ = context.Operators.In<string>(bj_, (bk_ as IEnumerable<string>));
 				bool? bm_ = context.Operators.And(bg_, bl_);
 				DataType bn_ = WBC?.Value;
 				object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
@@ -1967,7 +1967,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				Instant br_ = @this?.IssuedElement;
 				DateTimeOffset? bs_ = br_?.Value;
 				CqlDateTime bt_ = context.Operators.Convert<CqlDateTime>(bs_);
-				CqlDateTime bu_ = QICoreCommon_2_0_000.earliest(bt_ as object);
+				CqlDateTime bu_ = QICoreCommon_2_0_000.earliest((bt_ as object));
 
 				return bu_;
 			};
@@ -1976,7 +1976,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? y_ = (e_, n_ as CqlQuantity, x_);
+			(string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? y_ = (e_, (n_ as CqlQuantity), x_);
 
 			return y_;
 		};
@@ -2017,7 +2017,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? al_ = context.Operators.In<string>(aj_, ak_ as IEnumerable<string>);
+				bool? al_ = context.Operators.In<string>(aj_, (ak_ as IEnumerable<string>));
 				bool? am_ = context.Operators.And(ag_, al_);
 
 				return am_;
@@ -2034,7 +2034,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			IEnumerable<Observation> j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation k_ = context.Operators.First<Observation>(j_);
 			DataType l_ = k_?.Value;
-			CqlQuantity m_ = FHIRHelpers_4_3_000.ToQuantity(l_ as Quantity);
+			CqlQuantity m_ = FHIRHelpers_4_3_000.ToQuantity((l_ as Quantity));
 			bool? o_(Observation HeartRate)
 			{
 				DataType aq_ = HeartRate?.Effective;
@@ -2055,7 +2055,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? be_ = context.Operators.In<string>(bc_, bd_ as IEnumerable<string>);
+				bool? be_ = context.Operators.In<string>(bc_, (bd_ as IEnumerable<string>));
 				bool? bf_ = context.Operators.And(az_, be_);
 
 				return bf_;
@@ -2074,7 +2074,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			DataType t_ = s_?.Effective;
 			object u_ = FHIRHelpers_4_3_000.ToValue(t_);
 			CqlDateTime v_ = QICoreCommon_2_0_000.earliest(u_);
-			(string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? w_ = (e_, m_ as CqlQuantity, v_);
+			(string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? w_ = (e_, (m_ as CqlQuantity), v_);
 
 			return w_;
 		};
@@ -2115,7 +2115,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? ao_ = context.Operators.In<string>(am_, an_ as IEnumerable<string>);
+				bool? ao_ = context.Operators.In<string>(am_, (an_ as IEnumerable<string>));
 				bool? ap_ = context.Operators.And(aj_, ao_);
 
 				return ap_;
@@ -2148,7 +2148,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 				DataType ay_ = C?.Value;
 				object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
 
-				return az_ as CqlQuantity;
+				return (az_ as CqlQuantity);
 			};
 			IEnumerable<CqlQuantity> p_ = context.Operators.Select<Observation.ComponentComponent, CqlQuantity>(n_, o_);
 			bool? r_(Observation BP)
@@ -2171,7 +2171,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? bo_ = context.Operators.In<string>(bm_, bn_ as IEnumerable<string>);
+				bool? bo_ = context.Operators.In<string>(bm_, (bn_ as IEnumerable<string>));
 				bool? bp_ = context.Operators.And(bj_, bo_);
 
 				return bp_;
@@ -2218,8 +2218,8 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 
 				return q_;
 			};
-			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiagnoses is Element
-					? (EncounterDiagnoses as Element).Extension
+			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiagnoses is Element)
+					? ((EncounterDiagnoses as Element).Extension)
 					: default), f_);
 			object h_(Extension @this)
 			{
@@ -2229,7 +2229,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			};
 			IEnumerable<object> i_ = context.Operators.Select<Extension, object>(g_, h_);
 			object j_ = context.Operators.SingletonFrom<object>(i_);
-			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept(j_ as CodeableConcept);
+			CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept((j_ as CodeableConcept));
 			CqlValueSet l_ = this.Present_on_Admission_is_No_or_Unable_To_Determine();
 			bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 

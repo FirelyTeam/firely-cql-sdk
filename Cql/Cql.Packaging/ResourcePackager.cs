@@ -50,16 +50,16 @@ internal class ResourcePackager(
         foreach (var (name, asmData) in assembliesByLibraryName)
         {
             var library = librarySet.GetLibrary(name)!;
-            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.GetVersionedIdentifierString()}.json"));
             if (!elmFile.Exists)
                 elmFile = new FileInfo(Path.Combine(elmDirectory.FullName,
                                                     $"{library.identifier?.id ?? string.Empty}.json"));
 
             if (!elmFile.Exists)
-                throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion()}");
+                throw new InvalidOperationException($"Cannot find ELM file for {library.GetVersionedIdentifierString()}");
 
             var cqlFiles =
-                cqlDirectory.GetFiles($"{library.NameAndVersion()}.cql", SearchOption.AllDirectories);
+                cqlDirectory.GetFiles($"{library.GetVersionedIdentifierString()}.cql", SearchOption.AllDirectories);
             if (cqlFiles.Length == 0)
             {
                 cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
@@ -71,11 +71,11 @@ internal class ResourcePackager(
                 throw new InvalidOperationException($"More than 1 CQL file found.");
 
             var cqlFile = cqlFiles[0];
-            if (library.NameAndVersion() is null)
+            if (library.GetVersionedIdentifierString() is null)
                 throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
             var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, resourceCanonicalRootUrl, asmData, typeCrosswalk, library);
-            librariesByNameAndVersion.Add(library.NameAndVersion()!, fhirLibrary);
+            librariesByNameAndVersion.Add(library.GetVersionedIdentifierString()!, fhirLibrary);
 
             // Analyze datarequirements and add to the FHIR Library resource.
             var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, library);
@@ -87,7 +87,7 @@ internal class ResourcePackager(
 
         foreach (var library in librarySet)
         {
-            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion()}.json"));
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.GetVersionedIdentifierString()}.json"));
             foreach (var def in library.statements ?? [])
             {
                 if (def.annotation == null)
@@ -145,10 +145,10 @@ internal class ResourcePackager(
         };
         measure.Group = [];
         measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
-        if (elmLibrary.NameAndVersion() is null)
+        if (elmLibrary.GetVersionedIdentifierString() is null)
             throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
-        if (!librariesByNameAndVersion.TryGetValue(elmLibrary.NameAndVersion()!, out var libForMeasure))
+        if (!librariesByNameAndVersion.TryGetValue(elmLibrary.GetVersionedIdentifierString()!, out var libForMeasure))
             throw new InvalidOperationException(
                 $"We didn't create a measure for library {libForMeasure}");
         measure.Library = new List<string> { libForMeasure!.Url };
@@ -176,7 +176,7 @@ internal class ResourcePackager(
         var bytes = File.ReadAllBytes(elmFile.FullName);
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary.NameAndVersion()}+elm",
+            ElementId = $"{elmLibrary.GetVersionedIdentifierString()}+elm",
             ContentType = Elm.Library.JsonMimeType,
             Data = bytes,
         };
@@ -258,7 +258,7 @@ internal class ResourcePackager(
 
             var cqlAttachment = new Attachment
             {
-                ElementId = $"{elmLibrary!.NameAndVersion()}+cql",
+                ElementId = $"{elmLibrary!.GetVersionedIdentifierString()}+cql",
                 ContentType = "text/cql",
                 Data = cqlBytes,
             };
@@ -270,7 +270,7 @@ internal class ResourcePackager(
             var assemblyBytes = assembly.Binary;
             var assemblyAttachment = new Attachment
             {
-                ElementId = $"{elmLibrary!.NameAndVersion()}+dll",
+                ElementId = $"{elmLibrary!.GetVersionedIdentifierString()}+dll",
                 ContentType = "application/octet-stream",
                 Data = assemblyBytes,
             };
