@@ -101,7 +101,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             LibrarySetExpressionBuilder librarySetExpressionBuilder = ServiceProvider.GetLibrarySetExpressionBuilderScoped();
 
-            LibrarySet librarySet = new LibrarySet(library.GetVersionedIdentifierString()!, library);
+            LibrarySet librarySet = new LibrarySet(library.GetVersionedIdentifier()!, library);
             DefinitionDictionary<LambdaExpression> definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             return new(librarySet, definitions);
         }
@@ -150,7 +150,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var eb = LibraryExpressionBuilder;
             var lambdas = eb.ProcessLibrary(library);
             var delegates = lambdas.CompileAll();
-            var dg = delegates[library.GetVersionedIdentifierString(), definition];
+            var dg = delegates[library.GetVersionedIdentifier(), definition];
             var ctx = ctxFactory(delegates);
             var result = dg.DynamicInvoke(new[] { ctx }.Concat(args).ToArray());
             return result;
@@ -313,7 +313,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var csByNav = new Dictionary<string, string>();
             var callbacks = new CSharpSourceCodeWriterCallbacks(onAfterStep: afterWrite);
             SourceCodeWriter.ProcessDefinitions(lambdas, ls, callbacks);
-            return csByNav[library.GetVersionedIdentifierString()!];
+            return csByNav[library.GetVersionedIdentifier()!];
 
             void afterWrite(CSharpSourceCodeStep step)
             {

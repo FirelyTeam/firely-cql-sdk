@@ -32,7 +32,7 @@ internal partial class LibraryExpressionBuilderContext
         _logger = logger;
         _expressionBuilder = expressionBuilder;
         Library = library;
-        LibraryVersionedIdentifier = Library.GetVersionedIdentifierString()!;
+        LibraryVersionedIdentifier = Library.GetVersionedIdentifier()!;
     }
 
     private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();
@@ -45,7 +45,7 @@ internal partial class LibraryExpressionBuilderContext
     /// <summary>
     /// Gets the versioned identifier of the library, which is the name and version of the library.
     /// </summary>
-    /// <seealso cref="IGetVersionedIdentifierExtensions.GetVersionedIdentifierString"/>
+    /// <seealso cref="IGetVersionedIdentifierExtensions.GetVersionedIdentifier"/>
     public string LibraryVersionedIdentifier { get; }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>

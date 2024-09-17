@@ -107,8 +107,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                         {
                             var library = librarySet.GetLibrary(libraryName)!;
                             var libraryAssembly = CompileNode(stream, results, librarySet, library, _referencesLazy.Value);
-                            results.Add(library.GetVersionedIdentifierString()!, libraryAssembly);
-                            _assemblyDataPostProcessor?.ProcessAssemblyData(library.GetVersionedIdentifierString()!, libraryAssembly);
+                            results.Add(library.GetVersionedIdentifier()!, libraryAssembly);
+                            _assemblyDataPostProcessor?.ProcessAssemblyData(library.GetVersionedIdentifier()!, libraryAssembly);
                         }
                         break;
                 }
@@ -141,15 +141,15 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
             }
-            foreach (var libraryDependency in librarySet.GetLibraryDependencies(library.GetVersionedIdentifierString()!))
+            foreach (var libraryDependency in librarySet.GetLibraryDependencies(library.GetVersionedIdentifier()!))
             {
-                if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifierString()!, out var referencedDll))
+                if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifier()!, out var referencedDll))
                 {
                     metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.Binary));
                 }
             }
             var asmInfo = new StringBuilder();
-            var parts = library.GetVersionedIdentifierString()!.Split('-');
+            var parts = library.GetVersionedIdentifier()!.Split('-');
             string name = parts[0];
             string version = string.Empty;
             if (parts.Length > 1)
@@ -157,7 +157,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
-            var compilation = CSharpCompilation.Create($"{library.GetVersionedIdentifierString()!}")
+            var compilation = CSharpCompilation.Create($"{library.GetVersionedIdentifier()!}")
                 .WithOptions(CreateCSharpCompilationOptions())
                 .WithReferences(metadataReferences)
                 .AddSyntaxTrees(tree, asmInfoTree);
@@ -185,14 +185,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                     sb.AppendLine(diag.ToString());
                 }
-                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {library.GetVersionedIdentifierString()!}:{Environment.NewLine}{sb}");
+                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {library.GetVersionedIdentifier()!}:{Environment.NewLine}{sb}");
                 ex.Data["Errors"] = errors;
                 ex.Data["Warnings"] = warnings;
 
                 throw ex;
             }
             var bytes = codeStream.ToArray();
-            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.GetVersionedIdentifierString()!, sourceCode } });
+            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.GetVersionedIdentifier()!, sourceCode } });
             return asmData;
         }
 

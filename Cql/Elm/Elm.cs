@@ -7,6 +7,7 @@
  */
 #pragma warning disable IDE1006 // Naming violation suppressed.
 
+using System;
 using Hl7.Cql.Abstractions.Exceptions;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
@@ -21,7 +22,7 @@ file static class StringExtensions
     public static string? NullIfEmpty(this string? text) => string.IsNullOrEmpty(text) ? null : text;
 }
 
-#region GetNameAndVersion
+#region GetVersionedIdentifier
 
 internal static class IGetVersionedIdentifierExtensions
 {
@@ -32,12 +33,15 @@ internal static class IGetVersionedIdentifierExtensions
     /// <param name="throwError">Indicates whether to throw an exception if the identifier is missing.</param>
     /// <returns>The identifier with version, or just the identifier if no version exists.</returns>
     /// <remarks>The identifier and version are formatted in CQL style, e.g. "FHIRHelpers-4.0.1".</remarks>
-    public static string? GetVersionedIdentifierString(
+    public static string? GetVersionedIdentifier(
         this IGetVersionedIdentifier getVersionedIdentifier,
         bool throwError = true) =>
-        getVersionedIdentifier
-            .GetVersionedIdentifier(throwError)!
-            .GetVersionedIdentifierString(throwError);
+        getVersionedIdentifier.VersionedIdentifier switch
+        {
+            ({ } result, _)                => result.GetVersionedIdentifier(throwError),
+            (_, { } error) when throwError => throw error,
+            _                              => null
+        };
 }
 
 /// <summary>
@@ -48,52 +52,44 @@ internal interface IGetVersionedIdentifier
     /// <summary>
     /// Gets the versioned identifier, or null if the identifier is missing.
     /// </summary>
-    /// <param name="throwError">Indicates whether to throw an exception if the identifier is missing.</param>
-    /// <returns>The versioned identifier, or null if the identifier is missing.</returns>
-    VersionedIdentifier? GetVersionedIdentifier(bool throwError = true);
+    /// <value>The versioned identifier, or error if the identifier is missing.</value>
+    (VersionedIdentifier? Result, Exception? Error) VersionedIdentifier { get; }
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class Library : IGetVersionedIdentifier
 {
     /// <inheritdoc />
-    VersionedIdentifier? IGetVersionedIdentifier.GetVersionedIdentifier(bool throwError)
-    {
-        if (identifier != null) return identifier;
-
-        if (throwError) throw new MissingIdentifierError(this).ToException();
-        return null;
-    }
+    (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier =>
+        identifier switch
+        {
+            null => (null, new MissingIdentifierError(this).ToException()),
+            _    => (identifier, null)
+        };
 
     /// <inheritdoc />
-    public override string? ToString() => this.GetVersionedIdentifierString(false);
+    public override string? ToString() => this.GetVersionedIdentifier(false);
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class IncludeDef : IGetVersionedIdentifier
 {
     /// <inheritdoc />
-    VersionedIdentifier? IGetVersionedIdentifier.GetVersionedIdentifier(bool throwError)
-    {
-        if (path is {Length:>0})
-            return new()
-            {
-                id = path,
-                version = version is {Length:0} ? null : version
-            };
-
-        if (throwError) throw new MissingIdentifierError(this).ToException();
-        return null;
-    }
+    (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier =>
+        path switch
+        {
+            { Length: > 0 } => (new() { id = path, version = version is { Length: 0 } ? null : version }, null),
+            _               => (null, new MissingIdentifierError(this).ToException())
+        };
 
     /// <inheritdoc />
-    public override string? ToString() => this.GetVersionedIdentifierString(false);
+    public override string? ToString() => this.GetVersionedIdentifier(false);
 }
 
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class VersionedIdentifier : IGetVersionedIdentifier
 {
-    internal string? GetVersionedIdentifierString(bool throwError = true)
+    internal string? GetVersionedIdentifier(bool throwError = true)
     {
         if (string.IsNullOrEmpty(id))
         {
@@ -110,10 +106,10 @@ partial class VersionedIdentifier : IGetVersionedIdentifier
     }
 
     /// <inheritdoc />
-    VersionedIdentifier? IGetVersionedIdentifier.GetVersionedIdentifier(bool throwError) => this;
+    (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier => (this, null);
 
     /// <inheritdoc />
-    public override string? ToString() => GetVersionedIdentifierString(false);
+    public override string? ToString() => GetVersionedIdentifier(false);
 }
 
 #endregion

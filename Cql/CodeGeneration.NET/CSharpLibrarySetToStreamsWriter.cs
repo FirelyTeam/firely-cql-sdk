@@ -171,7 +171,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var library in librarySet)
             {
-                string libraryName = library.GetVersionedIdentifierString()!;
+                string libraryName = library.GetVersionedIdentifier()!;
                 if (!callbacks.ShouldWriteLibrary(libraryName))
                 {
                     _logger.LogInformation($"Skipping library {libraryName} as per callback.");
@@ -224,13 +224,13 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var libraryAttribute = libraryName;
             var versionAttribute = string.Empty;
-            var nameAndVersion = libraryName.Split('-');
-            if (nameAndVersion.Length == 2)
+            var versionedIdentifier = libraryName.Split('-');
+            if (versionedIdentifier.Length == 2)
             {
-                if (Version.TryParse(nameAndVersion[1], out _))
+                if (Version.TryParse(versionedIdentifier[1], out _))
                 {
-                    libraryAttribute = nameAndVersion[0];
-                    versionAttribute = nameAndVersion[1];
+                    libraryAttribute = versionedIdentifier[0];
+                    versionAttribute = versionedIdentifier[1];
                 }
             }
 
@@ -316,7 +316,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var dependentLibrary in requiredLibraries)
             {
-                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifierString()!);
+                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
                 var memberName = typeName;
                 writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
             }
@@ -368,7 +368,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     writer.WriteLine();
                 }
 
-                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifierString()!);
+                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
                 var memberName = typeName;
                 writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
             }

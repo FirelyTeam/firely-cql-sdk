@@ -55,7 +55,7 @@ internal readonly record struct BuilderContextDebuggerInfo(
         string? GetNameText(Element elem)
         {
             StringBuilder sb = new();
-            Append(FromNameAndVersion());
+            Append(FromVersionedIdentifier());
             Append(FromLibraryName());
             Append(FromContext());
             Append(FromName());
@@ -71,7 +71,7 @@ internal readonly record struct BuilderContextDebuggerInfo(
 
             string? FromPath() => (elem as IGetPath)?.path;
             string? FromContext() => (elem as ExpressionDef)?.context;
-            string? FromNameAndVersion() => (elem as IGetVersionedIdentifier)?.GetVersionedIdentifierString(throwError: false);
+            string? FromVersionedIdentifier() => (elem as IGetVersionedIdentifier)?.GetVersionedIdentifier(throwError: false);
             string? FromLibraryName() => (elem as IGetLibraryName)?.libraryName;
             string? FromName() => (elem as IGetName)?.name;
         }
