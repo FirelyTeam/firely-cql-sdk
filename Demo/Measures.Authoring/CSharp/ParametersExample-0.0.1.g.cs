@@ -109,7 +109,7 @@ public class ParametersExample_0_0_1
 			bool? k_ = context.Operators.IsTrue(j_);
 			bool? l_ = context.Operators.And(h_, k_);
 			DataType m_ = P?.Deceased;
-			bool? n_ = FHIRHelpers_4_3_000.ToBoolean((m_ as FhirBoolean));
+			bool? n_ = FHIRHelpers_4_3_000.ToBoolean(m_ as FhirBoolean);
 			bool? o_ = context.Operators.Not(n_);
 			bool? p_ = context.Operators.And(l_, o_);
 			CodeableConcept q_ = P?.MaritalStatus;

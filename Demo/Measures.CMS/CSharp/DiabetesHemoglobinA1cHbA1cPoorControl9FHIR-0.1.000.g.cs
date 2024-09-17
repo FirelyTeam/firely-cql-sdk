@@ -273,21 +273,21 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 					DataType y_ = RecentHbA1c?.Effective;
 					object z_ = FHIRHelpers_4_3_000.ToValue(y_);
 
-					return ((z_ as CqlDateTime) as object);
+					return (z_ as CqlDateTime) as object;
 				}
 				else if (n_())
 				{
 					DataType aa_ = RecentHbA1c?.Effective;
 					object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
 
-					return ((ab_ as CqlInterval<CqlDateTime>) as object);
+					return (ab_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (o_())
 				{
 					DataType ac_ = RecentHbA1c?.Effective;
 					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 
-					return ((ad_ as CqlDateTime) as object);
+					return (ad_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -341,7 +341,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 		DataType b_ = a_?.Value;
 		object c_ = FHIRHelpers_4_3_000.ToValue(b_);
 		CqlQuantity d_ = context.Operators.Quantity(9m, "%");
-		bool? e_ = context.Operators.Greater((c_ as CqlQuantity), d_);
+		bool? e_ = context.Operators.Greater(c_ as CqlQuantity, d_);
 
 		return e_;
 	}
@@ -388,21 +388,21 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 					DataType x_ = NoHbA1c?.Effective;
 					object y_ = FHIRHelpers_4_3_000.ToValue(x_);
 
-					return ((y_ as CqlDateTime) as object);
+					return (y_ as CqlDateTime) as object;
 				}
 				else if (m_())
 				{
 					DataType z_ = NoHbA1c?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
-					return ((aa_ as CqlInterval<CqlDateTime>) as object);
+					return (aa_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (n_())
 				{
 					DataType ab_ = NoHbA1c?.Effective;
 					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
-					return ((ac_ as CqlDateTime) as object);
+					return (ac_ as CqlDateTime) as object;
 				}
 				else
 				{

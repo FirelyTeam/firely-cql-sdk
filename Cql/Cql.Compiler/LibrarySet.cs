@@ -33,11 +33,11 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// </summary>
     public string Name { get; }
 
-    private readonly Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
+    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
 
     private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) _calculatedState;
 
-    private readonly LibraryByNameAndVersionHashSet _librariesNotCalculatedYet;
+    private readonly LibraryByVersionedIdentifierHashSet _librariesNotCalculatedYet;
 
     private static readonly (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries)
         EmptyCached = (EmptySet<Library>.Instance, Array.Empty<Library>());
@@ -54,7 +54,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         Name = name;
         _librariesNotCalculatedYet = [];
         _calculatedState = EmptyCached;
-        _libraryInfosByKey = new Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)>();
+        _libraryInfosByKey = new Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)>();
         AsReadOnlyDictionary = new ReadOnlyDictionaryAdapter(this);
         AddLibraries(libraries);
 
@@ -65,7 +65,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     private bool TryGetLibraryInfoByKey(
         string? nameAndVersion,
         bool throwError,
-        out (Library library, LibraryByNameAndVersionHashSet dependencies) info)
+        out (Library library, LibraryByVersionedIdentifierHashSet dependencies) info)
     {
         RecalculateStateIfNecessary();
 
@@ -184,7 +184,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
             .Values
             .Select(v => v.library);
 
-        var rootLibraries = new LibraryByNameAndVersionHashSet(
+        var rootLibraries = new LibraryByVersionedIdentifierHashSet(
             allLibraries
             .GetRoots(lib => GetLibraryDependencies(lib.GetVersionedIdentifierString()!)));
 

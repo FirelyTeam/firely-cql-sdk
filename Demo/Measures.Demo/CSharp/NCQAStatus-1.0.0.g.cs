@@ -145,7 +145,7 @@ public class NCQAStatus_1_0_0
 			string[] e_ = [
 				"completed",
 			];
-			bool? f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
+			bool? f_ = context.Operators.In<string>(d_, e_ as IEnumerable<string>);
 
 			return f_;
 		};
@@ -181,7 +181,7 @@ public class NCQAStatus_1_0_0
 				"completed",
 				"in-progress",
 			];
-			bool? f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
+			bool? f_ = context.Operators.In<string>(d_, e_ as IEnumerable<string>);
 
 			return f_;
 		};

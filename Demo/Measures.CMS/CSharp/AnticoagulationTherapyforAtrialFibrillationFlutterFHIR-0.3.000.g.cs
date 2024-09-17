@@ -301,7 +301,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					"amended",
 					"corrected",
 				];
-				bool? bm_ = context.Operators.In<string>(bk_, (bl_ as IEnumerable<string>));
+				bool? bm_ = context.Operators.In<string>(bk_, bl_ as IEnumerable<string>);
 				object bn_()
 				{
 					bool bu_()
@@ -333,21 +333,21 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 						DataType cg_ = AtrialAblationObservation?.Effective;
 						object ch_ = FHIRHelpers_4_3_000.ToValue(cg_);
 
-						return ((ch_ as CqlDateTime) as object);
+						return (ch_ as CqlDateTime) as object;
 					}
 					else if (bv_())
 					{
 						DataType ci_ = AtrialAblationObservation?.Effective;
 						object cj_ = FHIRHelpers_4_3_000.ToValue(ci_);
 
-						return ((cj_ as CqlInterval<CqlDateTime>) as object);
+						return (cj_ as CqlInterval<CqlDateTime>) as object;
 					}
 					else if (bw_())
 					{
 						DataType ck_ = AtrialAblationObservation?.Effective;
 						object cl_ = FHIRHelpers_4_3_000.ToValue(ck_);
 
-						return ((cl_ as CqlDateTime) as object);
+						return (cl_ as CqlDateTime) as object;
 					}
 					else
 					{
@@ -472,7 +472,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				object m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				CqlInterval<CqlDateTime> o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
-				bool? p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, default);
+				bool? p_ = context.Operators.In<CqlDateTime>(l_ ?? n_, o_, default);
 
 				return p_;
 			};
@@ -562,7 +562,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					"active",
 					"completed",
 				];
-				bool? t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
+				bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
 				bool? u_ = context.Operators.And(o_, t_);
 				Code<MedicationRequest.MedicationRequestIntent> v_ = DischargeAnticoagulant?.IntentElement;
 				MedicationRequest.MedicationRequestIntent? w_ = v_?.Value;
@@ -574,7 +574,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					"filler-order",
 					"instance-order",
 				];
-				bool? z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
+				bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
 				bool? aa_ = context.Operators.And(u_, z_);
 				FhirBoolean ab_ = DischargeAnticoagulant?.DoNotPerformElement;
 				bool? ac_ = ab_?.Value;
@@ -646,7 +646,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 				"filler-order",
 				"instance-order",
 			];
-			bool? x_ = context.Operators.In<string>(v_, (w_ as IEnumerable<string>));
+			bool? x_ = context.Operators.In<string>(v_, w_ as IEnumerable<string>);
 			bool? y_ = context.Operators.And(s_, x_);
 
 			return y_;

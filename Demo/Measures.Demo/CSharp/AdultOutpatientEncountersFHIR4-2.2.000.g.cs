@@ -139,7 +139,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 			bool? s_ = context.Operators.Equal(r_, "finished");
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
 			Period u_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((u_ as object));
+			CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(u_ as object);
 			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, default);
 			bool? x_ = context.Operators.And(s_, w_);
 
