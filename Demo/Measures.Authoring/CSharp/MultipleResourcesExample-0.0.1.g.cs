@@ -12,67 +12,25 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
-public class MultipleResourcesExample_0_0_1
+public static class MultipleResourcesExample_0_0_1
 {
-
-
-    internal CqlContext context;
-
-    #region Cached values
-
-    internal Lazy<CqlValueSet> __Lung_Cancer;
-    internal Lazy<CqlValueSet> __Condition_Clinical_Status;
-    internal Lazy<CqlCode> __Tobacco_Smoking_Status;
-    internal Lazy<CqlCode[]> __LOINC;
-    internal Lazy<Patient> __Patient;
-    internal Lazy<IEnumerable<Observation>> __Smoking_status_observation;
-    internal Lazy<IEnumerable<Condition>> __Lung_cancer_diagnosis;
-
-    #endregion
-    public MultipleResourcesExample_0_0_1(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-        FHIRHelpers_4_3_000 = new FHIRHelpers_4_3_000(context);
-
-        __Lung_Cancer = new Lazy<CqlValueSet>(this.Lung_Cancer_Value);
-        __Condition_Clinical_Status = new Lazy<CqlValueSet>(this.Condition_Clinical_Status_Value);
-        __Tobacco_Smoking_Status = new Lazy<CqlCode>(this.Tobacco_Smoking_Status_Value);
-        __LOINC = new Lazy<CqlCode[]>(this.LOINC_Value);
-        __Patient = new Lazy<Patient>(this.Patient_Value);
-        __Smoking_status_observation = new Lazy<IEnumerable<Observation>>(this.Smoking_status_observation_Value);
-        __Lung_cancer_diagnosis = new Lazy<IEnumerable<Condition>>(this.Lung_cancer_diagnosis_Value);
-    }
-    #region Dependencies
-
-    public FHIRHelpers_4_3_000 FHIRHelpers_4_3_000 { get; }
-
-    #endregion
-
-	private CqlValueSet Lung_Cancer_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", default);
 
     [CqlDeclaration("Lung Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
-	public CqlValueSet Lung_Cancer() => 
-		__Lung_Cancer.Value;
-
-	private CqlValueSet Condition_Clinical_Status_Value() => 
-		new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", default);
+	public static CqlValueSet Lung_Cancer(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", default);
 
     [CqlDeclaration("Condition Clinical Status")]
     [CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical")]
-	public CqlValueSet Condition_Clinical_Status() => 
-		__Condition_Clinical_Status.Value;
-
-	private CqlCode Tobacco_Smoking_Status_Value() => 
-		new CqlCode("72166-2", "http://loinc.org", default, default);
+	public static CqlValueSet Condition_Clinical_Status(CqlContext context) => 
+		new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", default);
 
     [CqlDeclaration("Tobacco Smoking Status")]
-	public CqlCode Tobacco_Smoking_Status() => 
-		__Tobacco_Smoking_Status.Value;
+	public static CqlCode Tobacco_Smoking_Status(CqlContext context) => 
+		new CqlCode("72166-2", "http://loinc.org", default, default);
 
-	private CqlCode[] LOINC_Value()
+    [CqlDeclaration("LOINC")]
+	public static CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("72166-2", "http://loinc.org", default, default),
@@ -81,11 +39,8 @@ public class MultipleResourcesExample_0_0_1
 		return a_;
 	}
 
-    [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC() => 
-		__LOINC.Value;
-
-	private Patient Patient_Value()
+    [CqlDeclaration("Patient")]
+	public static Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -93,19 +48,16 @@ public class MultipleResourcesExample_0_0_1
 		return b_;
 	}
 
-    [CqlDeclaration("Patient")]
-	public Patient Patient() => 
-		__Patient.Value;
-
-	private IEnumerable<Observation> Smoking_status_observation_Value()
+    [CqlDeclaration("Smoking status observation")]
+	public static IEnumerable<Observation> Smoking_status_observation(CqlContext context)
 	{
-		CqlCode a_ = this.Tobacco_Smoking_Status();
+		CqlCode a_ = MultipleResourcesExample_0_0_1.Tobacco_Smoking_Status(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
 		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
 		bool? d_(Observation O)
 		{
 			Code<ObservationStatus> f_ = O?.StatusElement;
-			string g_ = FHIRHelpers_4_3_000.ToString(f_);
+			string g_ = FHIRHelpers_4_3_000.ToString(context, f_);
 			string[] h_ = [
 				"final",
 				"amended",
@@ -119,19 +71,16 @@ public class MultipleResourcesExample_0_0_1
 		return e_;
 	}
 
-    [CqlDeclaration("Smoking status observation")]
-	public IEnumerable<Observation> Smoking_status_observation() => 
-		__Smoking_status_observation.Value;
-
-	private IEnumerable<Condition> Lung_cancer_diagnosis_Value()
+    [CqlDeclaration("Lung cancer diagnosis")]
+	public static IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context)
 	{
-		CqlValueSet a_ = this.Lung_Cancer();
+		CqlValueSet a_ = MultipleResourcesExample_0_0_1.Lung_Cancer(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition C)
 		{
 			CodeableConcept e_ = C?.ClinicalStatus;
-			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(e_);
-			CqlValueSet g_ = this.Condition_Clinical_Status();
+			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(context, e_);
+			CqlValueSet g_ = MultipleResourcesExample_0_0_1.Condition_Clinical_Status(context);
 			bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
 
 			return h_;
@@ -140,9 +89,5 @@ public class MultipleResourcesExample_0_0_1
 
 		return d_;
 	}
-
-    [CqlDeclaration("Lung cancer diagnosis")]
-	public IEnumerable<Condition> Lung_cancer_diagnosis() => 
-		__Lung_cancer_diagnosis.Value;
 
 }

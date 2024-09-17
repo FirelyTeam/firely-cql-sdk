@@ -12,37 +12,11 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
-public class NCQAEncounter_1_0_0
+public static class NCQAEncounter_1_0_0
 {
 
-
-    internal CqlContext context;
-
-    #region Cached values
-
-
-    #endregion
-    public NCQAEncounter_1_0_0(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-        FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
-        NCQAFHIRBase_1_0_0 = new NCQAFHIRBase_1_0_0(context);
-        NCQAStatus_1_0_0 = new NCQAStatus_1_0_0(context);
-        NCQATerminology_1_0_0 = new NCQATerminology_1_0_0(context);
-
-    }
-    #region Dependencies
-
-    public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
-    public NCQAFHIRBase_1_0_0 NCQAFHIRBase_1_0_0 { get; }
-    public NCQAStatus_1_0_0 NCQAStatus_1_0_0 { get; }
-    public NCQATerminology_1_0_0 NCQATerminology_1_0_0 { get; }
-
-    #endregion
-
     [CqlDeclaration("Encounter Has Diagnosis")]
-	public bool? Encounter_Has_Diagnosis(Encounter Encounter, IEnumerable<Condition> Conditions)
+	public static bool? Encounter_Has_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		FhirString b_(Encounter.DiagnosisComponent D)
@@ -58,9 +32,9 @@ public class NCQAEncounter_1_0_0
 			bool? i_(Condition C)
 			{
 				Id l_ = C?.IdElement;
-				string m_ = FHIRHelpers_4_0_001.ToString(l_);
-				string n_ = FHIRHelpers_4_0_001.ToString(CRef);
-				string o_ = NCQAFHIRBase_1_0_0.GetId(n_);
+				string m_ = FHIRHelpers_4_0_001.ToString(context, l_);
+				string n_ = FHIRHelpers_4_0_001.ToString(context, CRef);
+				string o_ = NCQAFHIRBase_1_0_0.GetId(context, n_);
 				bool? p_ = context.Operators.Equal(m_, o_);
 
 				return p_;
@@ -77,14 +51,14 @@ public class NCQAEncounter_1_0_0
 	}
 
     [CqlDeclaration("Encounter Has Principal Diagnosis")]
-	public bool? Encounter_Has_Principal_Diagnosis(Encounter Encounter, IEnumerable<Condition> Conditions)
+	public static bool? Encounter_Has_Principal_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent D)
 		{
 			PositiveInt i_ = D?.RankElement;
 			Integer j_ = context.Operators.Convert<Integer>(i_);
-			int? k_ = FHIRHelpers_4_0_001.ToInteger(j_);
+			int? k_ = FHIRHelpers_4_0_001.ToInteger(context, j_);
 			bool? l_ = context.Operators.Equal(k_, 1);
 
 			return l_;
@@ -99,11 +73,11 @@ public class NCQAEncounter_1_0_0
 			bool? m_(Condition C)
 			{
 				Id p_ = C?.IdElement;
-				string q_ = FHIRHelpers_4_0_001.ToString(p_);
+				string q_ = FHIRHelpers_4_0_001.ToString(context, p_);
 				ResourceReference r_ = PrincipalDiagnosis?.Condition;
 				FhirString s_ = r_?.ReferenceElement;
-				string t_ = FHIRHelpers_4_0_001.ToString(s_);
-				string u_ = NCQAFHIRBase_1_0_0.GetId(t_);
+				string t_ = FHIRHelpers_4_0_001.ToString(context, s_);
+				string u_ = NCQAFHIRBase_1_0_0.GetId(context, t_);
 				bool? v_ = context.Operators.Equal(q_, u_);
 
 				return v_;
@@ -120,13 +94,13 @@ public class NCQAEncounter_1_0_0
 	}
 
     [CqlDeclaration("Encounter Completed during Period")]
-	public bool? Encounter_Completed_during_Period(IEnumerable<Encounter> Enc, CqlInterval<CqlDateTime> timeperiod)
+	public static bool? Encounter_Completed_during_Period(CqlContext context, IEnumerable<Encounter> Enc, CqlInterval<CqlDateTime> timeperiod)
 	{
-		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Finished_Encounter(Enc);
+		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Finished_Encounter(context, Enc);
 		bool? b_(Encounter EncounterPeriod)
 		{
 			Period e_ = EncounterPeriod?.Period;
-			CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Normalize_Interval(e_ as object);
+			CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, e_ as object);
 			CqlDateTime g_ = context.Operators.End(f_);
 			bool? h_ = context.Operators.In<CqlDateTime>(g_, timeperiod, default);
 
@@ -139,15 +113,15 @@ public class NCQAEncounter_1_0_0
 	}
 
     [CqlDeclaration("Finished Encounter with Telehealth POS")]
-	public IEnumerable<Encounter> Finished_Encounter_with_Telehealth_POS(IEnumerable<Encounter> Encounter)
+	public static IEnumerable<Encounter> Finished_Encounter_with_Telehealth_POS(CqlContext context, IEnumerable<Encounter> Encounter)
 	{
-		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
+		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Finished_Encounter(context, Encounter);
 		bool? b_(Encounter E)
 		{
 			Coding d_ = E?.Class;
 			bool? e_ = context.Operators.Not((bool?)(d_ is null));
-			CqlCode g_ = FHIRHelpers_4_0_001.ToCode(d_);
-			CqlCode h_ = NCQATerminology_1_0_0.@virtual();
+			CqlCode g_ = FHIRHelpers_4_0_001.ToCode(context, d_);
+			CqlCode h_ = NCQATerminology_1_0_0.@virtual(context);
 			bool? i_ = context.Operators.Equivalent(g_, h_);
 			bool? j_ = context.Operators.And(e_, i_);
 
@@ -159,18 +133,18 @@ public class NCQAEncounter_1_0_0
 	}
 
     [CqlDeclaration("Finished Encounter with Outpatient POS")]
-	public IEnumerable<Encounter> Finished_Encounter_with_Outpatient_POS(IEnumerable<Encounter> Encounter)
+	public static IEnumerable<Encounter> Finished_Encounter_with_Outpatient_POS(CqlContext context, IEnumerable<Encounter> Encounter)
 	{
-		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
+		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Finished_Encounter(context, Encounter);
 		bool? b_(Encounter E)
 		{
 			Coding d_ = E?.Class;
 			bool? e_ = context.Operators.Not((bool?)(d_ is null));
-			CqlCode g_ = FHIRHelpers_4_0_001.ToCode(d_);
-			CqlCode h_ = NCQATerminology_1_0_0.ambulatory();
+			CqlCode g_ = FHIRHelpers_4_0_001.ToCode(context, d_);
+			CqlCode h_ = NCQATerminology_1_0_0.ambulatory(context);
 			bool? i_ = context.Operators.Equivalent(g_, h_);
-			CqlCode k_ = FHIRHelpers_4_0_001.ToCode(d_);
-			CqlCode l_ = NCQATerminology_1_0_0.home_health();
+			CqlCode k_ = FHIRHelpers_4_0_001.ToCode(context, d_);
+			CqlCode l_ = NCQATerminology_1_0_0.home_health(context);
 			bool? m_ = context.Operators.Equivalent(k_, l_);
 			bool? n_ = context.Operators.Or(i_, m_);
 			bool? o_ = context.Operators.And(e_, n_);
@@ -183,15 +157,15 @@ public class NCQAEncounter_1_0_0
 	}
 
     [CqlDeclaration("Finished Encounter with Ambulatory POS")]
-	public IEnumerable<Encounter> Finished_Encounter_with_Ambulatory_POS(IEnumerable<Encounter> Encounter)
+	public static IEnumerable<Encounter> Finished_Encounter_with_Ambulatory_POS(CqlContext context, IEnumerable<Encounter> Encounter)
 	{
-		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
+		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Finished_Encounter(context, Encounter);
 		bool? b_(Encounter E)
 		{
 			Coding d_ = E?.Class;
 			bool? e_ = context.Operators.Not((bool?)(d_ is null));
-			CqlCode g_ = FHIRHelpers_4_0_001.ToCode(d_);
-			CqlCode h_ = NCQATerminology_1_0_0.ambulatory();
+			CqlCode g_ = FHIRHelpers_4_0_001.ToCode(context, d_);
+			CqlCode h_ = NCQATerminology_1_0_0.ambulatory(context);
 			bool? i_ = context.Operators.Equivalent(g_, h_);
 			bool? j_ = context.Operators.And(e_, i_);
 

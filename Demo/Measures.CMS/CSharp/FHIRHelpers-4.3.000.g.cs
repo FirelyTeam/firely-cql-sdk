@@ -12,26 +12,13 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FHIRHelpers", "4.3.000")]
-public class FHIRHelpers_4_3_000
+public static class FHIRHelpers_4_3_000
 {
 
-
-    internal CqlContext context;
-
-    #region Cached values
-
-
-    #endregion
-    public FHIRHelpers_4_3_000(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-
-    }
     [CqlDeclaration("ToInterval")]
     [CqlTag("description", "Converts the given [Period](https://hl7.org/fhir/datatypes.html#Period) value to a CQL DateTime Interval")]
     [CqlTag("comment", "If the start value of the given period is unspecified, the starting boundary of the resulting interval will be open (meaning the start of the interval is unknown, as opposed to interpreted as the beginning of time).")]
-	public CqlInterval<CqlDateTime> ToInterval(Period period)
+	public static CqlInterval<CqlDateTime> ToInterval(CqlContext context, Period period)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -67,7 +54,7 @@ public class FHIRHelpers_4_3_000
     [CqlDeclaration("ToInterval")]
     [CqlTag("description", "Converts the given FHIR [Quantity](https://hl7.org/fhir/datatypes.html#Quantity) value to a CQL Interval of Quantity.")]
     [CqlTag("comment", "If the given quantity has a comparator, it is used to construct an interval based on the value of the comparator. If the comparator is less than, the resulting interval will start with a null closed boundary and end with an open boundary on the quantity. If the comparator is less than or equal, the resulting interval will start with a null closed boundary and end with a closed boundary on the quantity. If the comparator is greater or equal, the resulting interval will start with a closed boundary on the quantity and end with a closed null boundary. If the comparator is greatter than, the resulting interval will start with an open boundary on the quantity and end with a closed null boundary. If no comparator is specified, the resulting interval will start and end with a closed boundary on the quantity.")]
-	public CqlInterval<CqlQuantity> ToInterval(Quantity quantity)
+	public static CqlInterval<CqlQuantity> ToInterval(CqlContext context, Quantity quantity)
 	{
 		CqlInterval<CqlQuantity> a_()
 		{
@@ -117,35 +104,35 @@ public class FHIRHelpers_4_3_000
 					};
 					if (c_())
 					{
-						CqlQuantity w_ = this.ToQuantityIgnoringComparator(quantity);
+						CqlQuantity w_ = FHIRHelpers_4_3_000.ToQuantityIgnoringComparator(context, quantity);
 						CqlInterval<CqlQuantity> x_ = context.Operators.Interval(default, w_, true, false);
 
 						return x_;
 					}
 					else if (d_())
 					{
-						CqlQuantity y_ = this.ToQuantityIgnoringComparator(quantity);
+						CqlQuantity y_ = FHIRHelpers_4_3_000.ToQuantityIgnoringComparator(context, quantity);
 						CqlInterval<CqlQuantity> z_ = context.Operators.Interval(default, y_, true, true);
 
 						return z_;
 					}
 					else if (e_())
 					{
-						CqlQuantity aa_ = this.ToQuantityIgnoringComparator(quantity);
+						CqlQuantity aa_ = FHIRHelpers_4_3_000.ToQuantityIgnoringComparator(context, quantity);
 						CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, default, true, true);
 
 						return ab_;
 					}
 					else if (f_())
 					{
-						CqlQuantity ac_ = this.ToQuantityIgnoringComparator(quantity);
+						CqlQuantity ac_ = FHIRHelpers_4_3_000.ToQuantityIgnoringComparator(context, quantity);
 						CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, default, false, true);
 
 						return ad_;
 					}
 					else
 					{
-						CqlQuantity ae_ = this.ToQuantity(quantity);
+						CqlQuantity ae_ = FHIRHelpers_4_3_000.ToQuantity(context, quantity);
 						CqlInterval<CqlQuantity> ag_ = context.Operators.Interval(ae_, ae_, true, true);
 
 						return ag_;
@@ -161,7 +148,7 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("ToInterval")]
     [CqlTag("description", "Converts the given FHIR [Range](https://hl7.org/fhir/datatypes.html#Range) value to a CQL Interval of Quantity")]
-	public CqlInterval<CqlQuantity> ToInterval(Range range)
+	public static CqlInterval<CqlQuantity> ToInterval(CqlContext context, Range range)
 	{
 		CqlInterval<CqlQuantity> a_()
 		{
@@ -172,9 +159,9 @@ public class FHIRHelpers_4_3_000
 			else
 			{
 				Quantity b_ = range?.Low;
-				CqlQuantity c_ = this.ToQuantity(b_);
+				CqlQuantity c_ = FHIRHelpers_4_3_000.ToQuantity(context, b_);
 				Quantity d_ = range?.High;
-				CqlQuantity e_ = this.ToQuantity(d_);
+				CqlQuantity e_ = FHIRHelpers_4_3_000.ToQuantity(context, d_);
 				CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
 
 				return f_;
@@ -187,7 +174,7 @@ public class FHIRHelpers_4_3_000
     [CqlDeclaration("ToCalendarUnit")]
     [CqlTag("description", "Converts a UCUM definite duration unit to a CQL calendar duration unit using conversions specified in the [quantities](https://cql.hl7.org/02-authorsguide.html#quantities) topic of the CQL specification.")]
     [CqlTag("comment", "Note that for durations above days (or weeks), the conversion is understood to be approximate")]
-	public string ToCalendarUnit(string unit)
+	public static string ToCalendarUnit(CqlContext context, string unit)
 	{
 		string a_()
 		{
@@ -236,7 +223,7 @@ public class FHIRHelpers_4_3_000
     [CqlTag("description", "Converts the given FHIR [Quantity](https://hl7.org/fhir/datatypes.html#Quantity) value to a CQL Quantity")]
     [CqlTag("comment", "If the given quantity has a comparator specified, a runtime error is raised. If the given quantity has a system other than UCUM (i.e. `http://unitsofmeasure.org`) or CQL calendar units (i.e. `http://hl7.org/fhirpath/CodeSystem/calendar-units`) an error is raised. For UCUM to calendar units, the `ToCalendarUnit` function is used.")]
     [CqlTag("seealso", "ToCalendarUnit")]
-	public CqlQuantity ToQuantity(Quantity quantity)
+	public static CqlQuantity ToQuantity(CqlContext context, Quantity quantity)
 	{
 		CqlQuantity a_()
 		{
@@ -281,7 +268,7 @@ public class FHIRHelpers_4_3_000
 				string s_ = r_?.Value;
 				FhirString t_ = quantity?.UnitElement;
 				string u_ = t_?.Value;
-				string v_ = this.ToCalendarUnit((s_ ?? u_) ?? "1");
+				string v_ = FHIRHelpers_4_3_000.ToCalendarUnit(context, (s_ ?? u_) ?? "1");
 
 				return new CqlQuantity(q_, v_);
 			}
@@ -312,7 +299,7 @@ public class FHIRHelpers_4_3_000
     [CqlTag("description", "Converts the given FHIR [Quantity](https://hl7.org/fhir/datatypes.html#Quantity) value to a CQL Quantity, ignoring the comparator element. This function should only be used when an application is justified in ignoring the comparator value (i.e. the context is looking for boundary).")]
     [CqlTag("comment", "If the given quantity has a system other than UCUM (i.e. `http://unitsofmeasure.org`) or CQL calendar units (i.e. `http://hl7.org/fhirpath/CodeSystem/calendar-units`) an error is raised. For UCUM to calendar units, the `ToCalendarUnit` function is used.")]
     [CqlTag("seealso", "ToCalendarUnit")]
-	public CqlQuantity ToQuantityIgnoringComparator(Quantity quantity)
+	public static CqlQuantity ToQuantityIgnoringComparator(CqlContext context, Quantity quantity)
 	{
 		CqlQuantity a_()
 		{
@@ -344,7 +331,7 @@ public class FHIRHelpers_4_3_000
 				string o_ = n_?.Value;
 				FhirString p_ = quantity?.UnitElement;
 				string q_ = p_?.Value;
-				string r_ = this.ToCalendarUnit((o_ ?? q_) ?? "1");
+				string r_ = FHIRHelpers_4_3_000.ToCalendarUnit(context, (o_ ?? q_) ?? "1");
 
 				return new CqlQuantity(m_, r_);
 			}
@@ -373,7 +360,7 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("ToRatio")]
     [CqlTag("description", "Converts the given FHIR [Ratio](https://hl7.org/fhir/datatypes.html#Ratio) value to a CQL Ratio.")]
-	public CqlRatio ToRatio(Ratio ratio)
+	public static CqlRatio ToRatio(CqlContext context, Ratio ratio)
 	{
 		CqlRatio a_()
 		{
@@ -384,9 +371,9 @@ public class FHIRHelpers_4_3_000
 			else
 			{
 				Quantity b_ = ratio?.Numerator;
-				CqlQuantity c_ = this.ToQuantity(b_);
+				CqlQuantity c_ = FHIRHelpers_4_3_000.ToQuantity(context, b_);
 				Quantity d_ = ratio?.Denominator;
-				CqlQuantity e_ = this.ToQuantity(d_);
+				CqlQuantity e_ = FHIRHelpers_4_3_000.ToQuantity(context, d_);
 
 				return new CqlRatio(c_, e_);
 			}
@@ -397,7 +384,7 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("ToCode")]
     [CqlTag("description", "Converts the given FHIR [Coding](https://hl7.org/fhir/datatypes.html#Coding) value to a CQL Code.")]
-	public CqlCode ToCode(Coding coding)
+	public static CqlCode ToCode(CqlContext context, Coding coding)
 	{
 		CqlCode a_()
 		{
@@ -425,7 +412,7 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("ToConcept")]
     [CqlTag("description", "Converts the given FHIR [CodeableConcept](https://hl7.org/fhir/datatypes.html#CodeableConcept) value to a CQL Concept.")]
-	public CqlConcept ToConcept(CodeableConcept concept)
+	public static CqlConcept ToConcept(CqlContext context, CodeableConcept concept)
 	{
 		CqlConcept a_()
 		{
@@ -438,7 +425,7 @@ public class FHIRHelpers_4_3_000
 				List<Coding> b_ = concept?.Coding;
 				CqlCode c_(Coding C)
 				{
-					CqlCode g_ = this.ToCode(C);
+					CqlCode g_ = FHIRHelpers_4_3_000.ToCode(context, C);
 
 					return g_;
 				};
@@ -455,7 +442,7 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("ToValueSet")]
     [CqlTag("description", "Converts the given value (assumed to be a URI) to a CQL [ValueSet](https://cql.hl7.org/09-b-cqlreference.html#valueset)")]
-	public CqlValueSet ToValueSet(string uri)
+	public static CqlValueSet ToValueSet(CqlContext context, string uri)
 	{
 		CqlValueSet a_()
 		{
@@ -479,7 +466,7 @@ public class FHIRHelpers_4_3_000
 
     [CqlDeclaration("reference")]
     [CqlTag("description", "Constructs a FHIR [Reference](https://hl7.org/fhir/datatypes.html#Reference) from the given reference (assumed to be a FHIR resource URL)")]
-	public ResourceReference reference(string reference)
+	public static ResourceReference reference(CqlContext context, string reference)
 	{
 		ResourceReference a_()
 		{
@@ -506,13 +493,13 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("reference")]
-	public ResourceReference reference(Resource resource) => 
+	public static ResourceReference reference(CqlContext context, Resource resource) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.reference is not implemented."));
 
     [CqlDeclaration("ToValue")]
     [CqlTag("description", "Converts the given value to a CQL value using the appropriate accessor or conversion function.")]
     [CqlTag("comment", "TODO: document conversion")]
-	public object ToValue(object value)
+	public static object ToValue(CqlContext context, object value)
 	{
 		object a_()
 		{
@@ -636,61 +623,61 @@ public class FHIRHelpers_4_3_000
 			}
 			else if (value is Age)
 			{
-				CqlQuantity y_ = this.ToQuantity(value as Age);
+				CqlQuantity y_ = FHIRHelpers_4_3_000.ToQuantity(context, value as Age);
 
 				return y_ as object;
 			}
 			else if (value is CodeableConcept)
 			{
-				CqlConcept z_ = this.ToConcept(value as CodeableConcept);
+				CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(context, value as CodeableConcept);
 
 				return z_ as object;
 			}
 			else if (value is Coding)
 			{
-				CqlCode aa_ = this.ToCode(value as Coding);
+				CqlCode aa_ = FHIRHelpers_4_3_000.ToCode(context, value as Coding);
 
 				return aa_ as object;
 			}
 			else if (value is Count)
 			{
-				CqlQuantity ab_ = this.ToQuantity(value as Count);
+				CqlQuantity ab_ = FHIRHelpers_4_3_000.ToQuantity(context, value as Count);
 
 				return ab_ as object;
 			}
 			else if (value is Distance)
 			{
-				CqlQuantity ac_ = this.ToQuantity(value as Distance);
+				CqlQuantity ac_ = FHIRHelpers_4_3_000.ToQuantity(context, value as Distance);
 
 				return ac_ as object;
 			}
 			else if (value is Duration)
 			{
-				CqlQuantity ad_ = this.ToQuantity(value as Duration);
+				CqlQuantity ad_ = FHIRHelpers_4_3_000.ToQuantity(context, value as Duration);
 
 				return ad_ as object;
 			}
 			else if (value is Quantity)
 			{
-				CqlQuantity ae_ = this.ToQuantity(value as Quantity);
+				CqlQuantity ae_ = FHIRHelpers_4_3_000.ToQuantity(context, value as Quantity);
 
 				return ae_ as object;
 			}
 			else if (value is Range)
 			{
-				CqlInterval<CqlQuantity> af_ = this.ToInterval(value as Range);
+				CqlInterval<CqlQuantity> af_ = FHIRHelpers_4_3_000.ToInterval(context, value as Range);
 
 				return af_ as object;
 			}
 			else if (value is Period)
 			{
-				CqlInterval<CqlDateTime> ag_ = this.ToInterval(value as Period);
+				CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(context, value as Period);
 
 				return ag_ as object;
 			}
 			else if (value is Ratio)
 			{
-				CqlRatio ah_ = this.ToRatio(value as Ratio);
+				CqlRatio ah_ = FHIRHelpers_4_3_000.ToRatio(context, value as Ratio);
 
 				return ah_ as object;
 			}
@@ -704,111 +691,111 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("resolve")]
-	public Resource resolve(string reference) => 
+	public static Resource resolve(CqlContext context, string reference) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
     [CqlDeclaration("resolve")]
-	public Resource resolve(ResourceReference reference) => 
+	public static Resource resolve(CqlContext context, ResourceReference reference) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.resolve is not implemented."));
 
     [CqlDeclaration("extension")]
-	public IEnumerable<Extension> extension(Element element, string url) => 
+	public static IEnumerable<Extension> extension(CqlContext context, Element element, string url) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
     [CqlDeclaration("extension")]
-	public IEnumerable<Extension> extension(DomainResource resource, string url) => 
+	public static IEnumerable<Extension> extension(CqlContext context, DomainResource resource, string url) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.extension is not implemented."));
 
     [CqlDeclaration("modifierExtension")]
-	public IEnumerable<Extension> modifierExtension(BackboneElement element, string url) => 
+	public static IEnumerable<Extension> modifierExtension(CqlContext context, BackboneElement element, string url) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
     [CqlDeclaration("modifierExtension")]
-	public IEnumerable<Extension> modifierExtension(DomainResource resource, string url) => 
+	public static IEnumerable<Extension> modifierExtension(CqlContext context, DomainResource resource, string url) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.modifierExtension is not implemented."));
 
     [CqlDeclaration("hasValue")]
-	public bool? hasValue(Element element) => 
+	public static bool? hasValue(CqlContext context, Element element) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.hasValue is not implemented."));
 
     [CqlDeclaration("getValue")]
-	public object getValue(Element element) => 
+	public static object getValue(CqlContext context, Element element) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.getValue is not implemented."));
 
     [CqlDeclaration("ofType")]
-	public IEnumerable<object> ofType(string identifier) => 
+	public static IEnumerable<object> ofType(CqlContext context, string identifier) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.ofType is not implemented."));
 
     [CqlDeclaration("is")]
-	public bool? @is(string identifier) => 
+	public static bool? @is(CqlContext context, string identifier) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.is is not implemented."));
 
     [CqlDeclaration("as")]
-	public object @as(string identifier) => 
+	public static object @as(CqlContext context, string identifier) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.as is not implemented."));
 
     [CqlDeclaration("elementDefinition")]
-	public ElementDefinition elementDefinition(Element element) => 
+	public static ElementDefinition elementDefinition(CqlContext context, Element element) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.elementDefinition is not implemented."));
 
     [CqlDeclaration("slice")]
-	public IEnumerable<Element> slice(Element element, string url, string name) => 
+	public static IEnumerable<Element> slice(CqlContext context, Element element, string url, string name) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.slice is not implemented."));
 
     [CqlDeclaration("checkModifiers")]
-	public Resource checkModifiers(Resource resource) => 
+	public static Resource checkModifiers(CqlContext context, Resource resource) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
     [CqlDeclaration("checkModifiers")]
-	public Resource checkModifiers(Resource resource, string modifier) => 
+	public static Resource checkModifiers(CqlContext context, Resource resource, string modifier) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
     [CqlDeclaration("checkModifiers")]
-	public Element checkModifiers(Element element) => 
+	public static Element checkModifiers(CqlContext context, Element element) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
     [CqlDeclaration("checkModifiers")]
-	public Element checkModifiers(Element element, string modifier) => 
+	public static Element checkModifiers(CqlContext context, Element element, string modifier) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.checkModifiers is not implemented."));
 
     [CqlDeclaration("conformsTo")]
-	public bool? conformsTo(Resource resource, string structure) => 
+	public static bool? conformsTo(CqlContext context, Resource resource, string structure) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.conformsTo is not implemented."));
 
     [CqlDeclaration("memberOf")]
-	public bool? memberOf(Code code, string valueSet) => 
+	public static bool? memberOf(CqlContext context, Code code, string valueSet) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
     [CqlDeclaration("memberOf")]
-	public bool? memberOf(Coding coding, string valueSet) => 
+	public static bool? memberOf(CqlContext context, Coding coding, string valueSet) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
     [CqlDeclaration("memberOf")]
-	public bool? memberOf(CodeableConcept concept, string valueSet) => 
+	public static bool? memberOf(CqlContext context, CodeableConcept concept, string valueSet) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.memberOf is not implemented."));
 
     [CqlDeclaration("subsumes")]
-	public bool? subsumes(Coding coding, Coding subsumedCoding) => 
+	public static bool? subsumes(CqlContext context, Coding coding, Coding subsumedCoding) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
     [CqlDeclaration("subsumes")]
-	public bool? subsumes(CodeableConcept concept, CodeableConcept subsumedConcept) => 
+	public static bool? subsumes(CqlContext context, CodeableConcept concept, CodeableConcept subsumedConcept) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumes is not implemented."));
 
     [CqlDeclaration("subsumedBy")]
-	public bool? subsumedBy(Coding coding, Coding subsumingCoding) => 
+	public static bool? subsumedBy(CqlContext context, Coding coding, Coding subsumingCoding) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
     [CqlDeclaration("subsumedBy")]
-	public bool? subsumedBy(CodeableConcept concept, CodeableConcept subsumingConcept) => 
+	public static bool? subsumedBy(CqlContext context, CodeableConcept concept, CodeableConcept subsumingConcept) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.subsumedBy is not implemented."));
 
     [CqlDeclaration("htmlChecks")]
-	public bool? htmlChecks(Element element) => 
+	public static bool? htmlChecks(CqlContext context, Element element) => 
 		throw (new NotImplementedException("External function FHIRHelpers-4.3.000.htmlChecks is not implemented."));
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Account.AccountStatus> value)
+	public static string ToString(CqlContext context, Code<Account.AccountStatus> value)
 	{
 		Account.AccountStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -817,7 +804,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ActionCardinalityBehavior> value)
+	public static string ToString(CqlContext context, Code<ActionCardinalityBehavior> value)
 	{
 		ActionCardinalityBehavior? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -826,7 +813,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ActionConditionKind> value)
+	public static string ToString(CqlContext context, Code<ActionConditionKind> value)
 	{
 		ActionConditionKind? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -835,7 +822,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ActionGroupingBehavior> value)
+	public static string ToString(CqlContext context, Code<ActionGroupingBehavior> value)
 	{
 		ActionGroupingBehavior? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -844,7 +831,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ActionParticipantType> value)
+	public static string ToString(CqlContext context, Code<ActionParticipantType> value)
 	{
 		ActionParticipantType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -853,7 +840,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ActionPrecheckBehavior> value)
+	public static string ToString(CqlContext context, Code<ActionPrecheckBehavior> value)
 	{
 		ActionPrecheckBehavior? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -862,7 +849,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ActionRelationshipType> value)
+	public static string ToString(CqlContext context, Code<ActionRelationshipType> value)
 	{
 		ActionRelationshipType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -871,7 +858,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ActionRequiredBehavior> value)
+	public static string ToString(CqlContext context, Code<ActionRequiredBehavior> value)
 	{
 		ActionRequiredBehavior? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -880,7 +867,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ActionSelectionBehavior> value)
+	public static string ToString(CqlContext context, Code<ActionSelectionBehavior> value)
 	{
 		ActionSelectionBehavior? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -889,7 +876,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ActivityDefinition.RequestResourceType> value)
+	public static string ToString(CqlContext context, Code<ActivityDefinition.RequestResourceType> value)
 	{
 		ActivityDefinition.RequestResourceType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -898,7 +885,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Address.AddressType> value)
+	public static string ToString(CqlContext context, Code<Address.AddressType> value)
 	{
 		Address.AddressType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -907,7 +894,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Address.AddressUse> value)
+	public static string ToString(CqlContext context, Code<Address.AddressUse> value)
 	{
 		Address.AddressUse? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -916,7 +903,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<AdministrativeGender> value)
+	public static string ToString(CqlContext context, Code<AdministrativeGender> value)
 	{
 		AdministrativeGender? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -925,7 +912,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<AdverseEvent.AdverseEventActuality> value)
+	public static string ToString(CqlContext context, Code<AdverseEvent.AdverseEventActuality> value)
 	{
 		AdverseEvent.AdverseEventActuality? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -934,7 +921,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ElementDefinition.AggregationMode> value)
+	public static string ToString(CqlContext context, Code<ElementDefinition.AggregationMode> value)
 	{
 		ElementDefinition.AggregationMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -943,7 +930,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<AllergyIntolerance.AllergyIntoleranceCategory> value)
+	public static string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceCategory> value)
 	{
 		AllergyIntolerance.AllergyIntoleranceCategory? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -952,7 +939,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<AllergyIntolerance.AllergyIntoleranceCriticality> value)
+	public static string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceCriticality> value)
 	{
 		AllergyIntolerance.AllergyIntoleranceCriticality? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -961,7 +948,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<AllergyIntolerance.AllergyIntoleranceSeverity> value)
+	public static string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceSeverity> value)
 	{
 		AllergyIntolerance.AllergyIntoleranceSeverity? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -970,7 +957,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<AllergyIntolerance.AllergyIntoleranceType> value)
+	public static string ToString(CqlContext context, Code<AllergyIntolerance.AllergyIntoleranceType> value)
 	{
 		AllergyIntolerance.AllergyIntoleranceType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -979,7 +966,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Appointment.AppointmentStatus> value)
+	public static string ToString(CqlContext context, Code<Appointment.AppointmentStatus> value)
 	{
 		Appointment.AppointmentStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -988,7 +975,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TestScript.AssertionDirectionType> value)
+	public static string ToString(CqlContext context, Code<TestScript.AssertionDirectionType> value)
 	{
 		TestScript.AssertionDirectionType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -997,7 +984,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TestScript.AssertionOperatorType> value)
+	public static string ToString(CqlContext context, Code<TestScript.AssertionOperatorType> value)
 	{
 		TestScript.AssertionOperatorType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1006,7 +993,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TestScript.AssertionResponseTypes> value)
+	public static string ToString(CqlContext context, Code<TestScript.AssertionResponseTypes> value)
 	{
 		TestScript.AssertionResponseTypes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1015,7 +1002,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<AuditEvent.AuditEventAction> value)
+	public static string ToString(CqlContext context, Code<AuditEvent.AuditEventAction> value)
 	{
 		AuditEvent.AuditEventAction? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1024,7 +1011,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<AuditEvent.AuditEventAgentNetworkType> value)
+	public static string ToString(CqlContext context, Code<AuditEvent.AuditEventAgentNetworkType> value)
 	{
 		AuditEvent.AuditEventAgentNetworkType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1033,7 +1020,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<AuditEvent.AuditEventOutcome> value)
+	public static string ToString(CqlContext context, Code<AuditEvent.AuditEventOutcome> value)
 	{
 		AuditEvent.AuditEventOutcome? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1042,7 +1029,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<BindingStrength> value)
+	public static string ToString(CqlContext context, Code<BindingStrength> value)
 	{
 		BindingStrength? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1051,7 +1038,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> value)
+	public static string ToString(CqlContext context, Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> value)
 	{
 		BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1060,7 +1047,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> value)
+	public static string ToString(CqlContext context, Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> value)
 	{
 		BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1069,7 +1056,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> value)
+	public static string ToString(CqlContext context, Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> value)
 	{
 		BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1078,7 +1065,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Bundle.BundleType> value)
+	public static string ToString(CqlContext context, Code<Bundle.BundleType> value)
 	{
 		Bundle.BundleType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1087,7 +1074,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatementKind> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatementKind> value)
 	{
 		CapabilityStatementKind? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1096,7 +1083,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CarePlan.CarePlanActivityKind> value)
+	public static string ToString(CqlContext context, Code<CarePlan.CarePlanActivityKind> value)
 	{
 		CarePlan.CarePlanActivityKind? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1105,7 +1092,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CarePlan.CarePlanActivityStatus> value)
+	public static string ToString(CqlContext context, Code<CarePlan.CarePlanActivityStatus> value)
 	{
 		CarePlan.CarePlanActivityStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1114,7 +1101,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CarePlan.CarePlanIntent> value)
+	public static string ToString(CqlContext context, Code<CarePlan.CarePlanIntent> value)
 	{
 		CarePlan.CarePlanIntent? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1123,7 +1110,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<RequestStatus> value)
+	public static string ToString(CqlContext context, Code<RequestStatus> value)
 	{
 		RequestStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1132,7 +1119,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CareTeam.CareTeamStatus> value)
+	public static string ToString(CqlContext context, Code<CareTeam.CareTeamStatus> value)
 	{
 		CareTeam.CareTeamStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1141,7 +1128,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CatalogEntry.CatalogEntryRelationType> value)
+	public static string ToString(CqlContext context, Code<CatalogEntry.CatalogEntryRelationType> value)
 	{
 		CatalogEntry.CatalogEntryRelationType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1150,7 +1137,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<InvoicePriceComponentType> value)
+	public static string ToString(CqlContext context, Code<InvoicePriceComponentType> value)
 	{
 		InvoicePriceComponentType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1159,7 +1146,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ChargeItem.ChargeItemStatus> value)
+	public static string ToString(CqlContext context, Code<ChargeItem.ChargeItemStatus> value)
 	{
 		ChargeItem.ChargeItemStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1168,7 +1155,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<FinancialResourceStatusCodes> value)
+	public static string ToString(CqlContext context, Code<FinancialResourceStatusCodes> value)
 	{
 		FinancialResourceStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1177,7 +1164,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ClinicalImpression.ClinicalImpressionStatus> value)
+	public static string ToString(CqlContext context, Code<ClinicalImpression.ClinicalImpressionStatus> value)
 	{
 		ClinicalImpression.ClinicalImpressionStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1186,7 +1173,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TerminologyCapabilities.CodeSearchSupport> value)
+	public static string ToString(CqlContext context, Code<TerminologyCapabilities.CodeSearchSupport> value)
 	{
 		TerminologyCapabilities.CodeSearchSupport? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1195,7 +1182,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CodeSystemContentMode> value)
+	public static string ToString(CqlContext context, Code<CodeSystemContentMode> value)
 	{
 		CodeSystemContentMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1204,7 +1191,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CodeSystem.CodeSystemHierarchyMeaning> value)
+	public static string ToString(CqlContext context, Code<CodeSystem.CodeSystemHierarchyMeaning> value)
 	{
 		CodeSystem.CodeSystemHierarchyMeaning? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1213,7 +1200,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<RequestPriority> value)
+	public static string ToString(CqlContext context, Code<RequestPriority> value)
 	{
 		RequestPriority? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1222,7 +1209,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<EventStatus> value)
+	public static string ToString(CqlContext context, Code<EventStatus> value)
 	{
 		EventStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1231,7 +1218,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CompartmentType> value)
+	public static string ToString(CqlContext context, Code<CompartmentType> value)
 	{
 		CompartmentType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1240,7 +1227,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Composition.CompositionAttestationMode> value)
+	public static string ToString(CqlContext context, Code<Composition.CompositionAttestationMode> value)
 	{
 		Composition.CompositionAttestationMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1249,7 +1236,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CompositionStatus> value)
+	public static string ToString(CqlContext context, Code<CompositionStatus> value)
 	{
 		CompositionStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1258,7 +1245,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ConceptMapEquivalence> value)
+	public static string ToString(CqlContext context, Code<ConceptMapEquivalence> value)
 	{
 		ConceptMapEquivalence? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1267,7 +1254,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ConceptMap.ConceptMapGroupUnmappedMode> value)
+	public static string ToString(CqlContext context, Code<ConceptMap.ConceptMapGroupUnmappedMode> value)
 	{
 		ConceptMap.ConceptMapGroupUnmappedMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1276,7 +1263,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatement.ConditionalDeleteStatus> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatement.ConditionalDeleteStatus> value)
 	{
 		CapabilityStatement.ConditionalDeleteStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1285,7 +1272,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatement.ConditionalReadStatus> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatement.ConditionalReadStatus> value)
 	{
 		CapabilityStatement.ConditionalReadStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1294,7 +1281,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Consent.ConsentDataMeaning> value)
+	public static string ToString(CqlContext context, Code<Consent.ConsentDataMeaning> value)
 	{
 		Consent.ConsentDataMeaning? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1303,7 +1290,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Consent.ConsentProvisionType> value)
+	public static string ToString(CqlContext context, Code<Consent.ConsentProvisionType> value)
 	{
 		Consent.ConsentProvisionType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1312,7 +1299,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Consent.ConsentState> value)
+	public static string ToString(CqlContext context, Code<Consent.ConsentState> value)
 	{
 		Consent.ConsentState? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1321,7 +1308,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ConstraintSeverity> value)
+	public static string ToString(CqlContext context, Code<ConstraintSeverity> value)
 	{
 		ConstraintSeverity? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1330,7 +1317,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ContactPoint.ContactPointSystem> value)
+	public static string ToString(CqlContext context, Code<ContactPoint.ContactPointSystem> value)
 	{
 		ContactPoint.ContactPointSystem? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1339,7 +1326,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ContactPoint.ContactPointUse> value)
+	public static string ToString(CqlContext context, Code<ContactPoint.ContactPointUse> value)
 	{
 		ContactPoint.ContactPointUse? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1348,7 +1335,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Contract.ContractResourcePublicationStatusCodes> value)
+	public static string ToString(CqlContext context, Code<Contract.ContractResourcePublicationStatusCodes> value)
 	{
 		Contract.ContractResourcePublicationStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1357,7 +1344,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Contract.ContractResourceStatusCodes> value)
+	public static string ToString(CqlContext context, Code<Contract.ContractResourceStatusCodes> value)
 	{
 		Contract.ContractResourceStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1366,7 +1353,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Contributor.ContributorType> value)
+	public static string ToString(CqlContext context, Code<Contributor.ContributorType> value)
 	{
 		Contributor.ContributorType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1375,7 +1362,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Money.Currencies> value)
+	public static string ToString(CqlContext context, Code<Money.Currencies> value)
 	{
 		Money.Currencies? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1384,7 +1371,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DaysOfWeek> value)
+	public static string ToString(CqlContext context, Code<DaysOfWeek> value)
 	{
 		DaysOfWeek? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1393,7 +1380,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DetectedIssue.DetectedIssueSeverity> value)
+	public static string ToString(CqlContext context, Code<DetectedIssue.DetectedIssueSeverity> value)
 	{
 		DetectedIssue.DetectedIssueSeverity? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1402,7 +1389,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ObservationStatus> value)
+	public static string ToString(CqlContext context, Code<ObservationStatus> value)
 	{
 		ObservationStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1411,7 +1398,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DeviceMetric.DeviceMetricCalibrationState> value)
+	public static string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricCalibrationState> value)
 	{
 		DeviceMetric.DeviceMetricCalibrationState? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1420,7 +1407,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DeviceMetric.DeviceMetricCalibrationType> value)
+	public static string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricCalibrationType> value)
 	{
 		DeviceMetric.DeviceMetricCalibrationType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1429,7 +1416,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DeviceMetric.DeviceMetricCategory> value)
+	public static string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricCategory> value)
 	{
 		DeviceMetric.DeviceMetricCategory? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1438,7 +1425,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DeviceMetric.DeviceMetricColor> value)
+	public static string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricColor> value)
 	{
 		DeviceMetric.DeviceMetricColor? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1447,7 +1434,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DeviceMetric.DeviceMetricOperationalStatus> value)
+	public static string ToString(CqlContext context, Code<DeviceMetric.DeviceMetricOperationalStatus> value)
 	{
 		DeviceMetric.DeviceMetricOperationalStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1456,7 +1443,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DeviceNameType> value)
+	public static string ToString(CqlContext context, Code<DeviceNameType> value)
 	{
 		DeviceNameType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1465,7 +1452,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DeviceUseStatement.DeviceUseStatementStatus> value)
+	public static string ToString(CqlContext context, Code<DeviceUseStatement.DeviceUseStatementStatus> value)
 	{
 		DeviceUseStatement.DeviceUseStatementStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1474,7 +1461,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DiagnosticReport.DiagnosticReportStatus> value)
+	public static string ToString(CqlContext context, Code<DiagnosticReport.DiagnosticReportStatus> value)
 	{
 		DiagnosticReport.DiagnosticReportStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1483,7 +1470,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ElementDefinition.DiscriminatorType> value)
+	public static string ToString(CqlContext context, Code<ElementDefinition.DiscriminatorType> value)
 	{
 		ElementDefinition.DiscriminatorType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1492,7 +1479,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Composition.V3ConfidentialityClassification> value)
+	public static string ToString(CqlContext context, Code<Composition.V3ConfidentialityClassification> value)
 	{
 		Composition.V3ConfidentialityClassification? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1501,7 +1488,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatement.DocumentMode> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatement.DocumentMode> value)
 	{
 		CapabilityStatement.DocumentMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1510,7 +1497,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DocumentReferenceStatus> value)
+	public static string ToString(CqlContext context, Code<DocumentReferenceStatus> value)
 	{
 		DocumentReferenceStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1519,7 +1506,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DocumentRelationshipType> value)
+	public static string ToString(CqlContext context, Code<DocumentRelationshipType> value)
 	{
 		DocumentRelationshipType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1528,7 +1515,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CoverageEligibilityRequest.EligibilityRequestPurpose> value)
+	public static string ToString(CqlContext context, Code<CoverageEligibilityRequest.EligibilityRequestPurpose> value)
 	{
 		CoverageEligibilityRequest.EligibilityRequestPurpose? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1537,7 +1524,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CoverageEligibilityResponse.EligibilityResponsePurpose> value)
+	public static string ToString(CqlContext context, Code<CoverageEligibilityResponse.EligibilityResponsePurpose> value)
 	{
 		CoverageEligibilityResponse.EligibilityResponsePurpose? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1546,7 +1533,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Questionnaire.EnableWhenBehavior> value)
+	public static string ToString(CqlContext context, Code<Questionnaire.EnableWhenBehavior> value)
 	{
 		Questionnaire.EnableWhenBehavior? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1555,7 +1542,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Encounter.EncounterLocationStatus> value)
+	public static string ToString(CqlContext context, Code<Encounter.EncounterLocationStatus> value)
 	{
 		Encounter.EncounterLocationStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1564,7 +1551,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Encounter.EncounterStatus> value)
+	public static string ToString(CqlContext context, Code<Encounter.EncounterStatus> value)
 	{
 		Encounter.EncounterStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1573,7 +1560,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Endpoint.EndpointStatus> value)
+	public static string ToString(CqlContext context, Code<Endpoint.EndpointStatus> value)
 	{
 		Endpoint.EndpointStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1582,7 +1569,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<EpisodeOfCare.EpisodeOfCareStatus> value)
+	public static string ToString(CqlContext context, Code<EpisodeOfCare.EpisodeOfCareStatus> value)
 	{
 		EpisodeOfCare.EpisodeOfCareStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1591,7 +1578,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatement.EventCapabilityMode> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatement.EventCapabilityMode> value)
 	{
 		CapabilityStatement.EventCapabilityMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1600,7 +1587,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Timing.EventTiming> value)
+	public static string ToString(CqlContext context, Code<Timing.EventTiming> value)
 	{
 		Timing.EventTiming? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1609,7 +1596,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<VariableTypeCode> value)
+	public static string ToString(CqlContext context, Code<VariableTypeCode> value)
 	{
 		VariableTypeCode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1618,7 +1605,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ExampleScenario.ExampleScenarioActorType> value)
+	public static string ToString(CqlContext context, Code<ExampleScenario.ExampleScenarioActorType> value)
 	{
 		ExampleScenario.ExampleScenarioActorType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1627,7 +1614,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> value)
+	public static string ToString(CqlContext context, Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> value)
 	{
 		ExplanationOfBenefit.ExplanationOfBenefitStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1636,7 +1623,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<EffectEvidenceSynthesis.ExposureStateCode> value)
+	public static string ToString(CqlContext context, Code<EffectEvidenceSynthesis.ExposureStateCode> value)
 	{
 		EffectEvidenceSynthesis.ExposureStateCode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1645,7 +1632,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureDefinition.ExtensionContextType> value)
+	public static string ToString(CqlContext context, Code<StructureDefinition.ExtensionContextType> value)
 	{
 		StructureDefinition.ExtensionContextType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1654,7 +1641,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<FHIRAllTypes> value)
+	public static string ToString(CqlContext context, Code<FHIRAllTypes> value)
 	{
 		FHIRAllTypes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1663,7 +1650,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<FHIRDefinedType> value)
+	public static string ToString(CqlContext context, Code<FHIRDefinedType> value)
 	{
 		FHIRDefinedType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1672,7 +1659,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Device.FHIRDeviceStatus> value)
+	public static string ToString(CqlContext context, Code<Device.FHIRDeviceStatus> value)
 	{
 		Device.FHIRDeviceStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1681,7 +1668,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ResourceType> value)
+	public static string ToString(CqlContext context, Code<ResourceType> value)
 	{
 		ResourceType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1690,7 +1677,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Substance.FHIRSubstanceStatus> value)
+	public static string ToString(CqlContext context, Code<Substance.FHIRSubstanceStatus> value)
 	{
 		Substance.FHIRSubstanceStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1699,7 +1686,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<FHIRVersion> value)
+	public static string ToString(CqlContext context, Code<FHIRVersion> value)
 	{
 		FHIRVersion? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1708,7 +1695,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<FamilyMemberHistory.FamilyHistoryStatus> value)
+	public static string ToString(CqlContext context, Code<FamilyMemberHistory.FamilyHistoryStatus> value)
 	{
 		FamilyMemberHistory.FamilyHistoryStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1717,7 +1704,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<FilterOperator> value)
+	public static string ToString(CqlContext context, Code<FilterOperator> value)
 	{
 		FilterOperator? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1726,7 +1713,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Flag.FlagStatus> value)
+	public static string ToString(CqlContext context, Code<Flag.FlagStatus> value)
 	{
 		Flag.FlagStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1735,7 +1722,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Goal.GoalLifecycleStatus> value)
+	public static string ToString(CqlContext context, Code<Goal.GoalLifecycleStatus> value)
 	{
 		Goal.GoalLifecycleStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1744,7 +1731,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<GraphDefinition.GraphCompartmentRule> value)
+	public static string ToString(CqlContext context, Code<GraphDefinition.GraphCompartmentRule> value)
 	{
 		GraphDefinition.GraphCompartmentRule? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1753,7 +1740,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<GraphDefinition.GraphCompartmentUse> value)
+	public static string ToString(CqlContext context, Code<GraphDefinition.GraphCompartmentUse> value)
 	{
 		GraphDefinition.GraphCompartmentUse? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1762,7 +1749,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<GroupMeasureCode> value)
+	public static string ToString(CqlContext context, Code<GroupMeasureCode> value)
 	{
 		GroupMeasureCode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1771,7 +1758,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Group.GroupType> value)
+	public static string ToString(CqlContext context, Code<Group.GroupType> value)
 	{
 		Group.GroupType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1780,7 +1767,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<GuidanceResponse.GuidanceResponseStatus> value)
+	public static string ToString(CqlContext context, Code<GuidanceResponse.GuidanceResponseStatus> value)
 	{
 		GuidanceResponse.GuidanceResponseStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1789,7 +1776,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ImplementationGuide.GuidePageGeneration> value)
+	public static string ToString(CqlContext context, Code<ImplementationGuide.GuidePageGeneration> value)
 	{
 		ImplementationGuide.GuidePageGeneration? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1798,7 +1785,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ImplementationGuide.GuideParameterCode> value)
+	public static string ToString(CqlContext context, Code<ImplementationGuide.GuideParameterCode> value)
 	{
 		ImplementationGuide.GuideParameterCode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1807,7 +1794,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Bundle.HTTPVerb> value)
+	public static string ToString(CqlContext context, Code<Bundle.HTTPVerb> value)
 	{
 		Bundle.HTTPVerb? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1816,7 +1803,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Identifier.IdentifierUse> value)
+	public static string ToString(CqlContext context, Code<Identifier.IdentifierUse> value)
 	{
 		Identifier.IdentifierUse? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1825,7 +1812,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Person.IdentityAssuranceLevel> value)
+	public static string ToString(CqlContext context, Code<Person.IdentityAssuranceLevel> value)
 	{
 		Person.IdentityAssuranceLevel? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1834,7 +1821,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ImagingStudy.ImagingStudyStatus> value)
+	public static string ToString(CqlContext context, Code<ImagingStudy.ImagingStudyStatus> value)
 	{
 		ImagingStudy.ImagingStudyStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1843,7 +1830,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> value)
+	public static string ToString(CqlContext context, Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> value)
 	{
 		ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1852,7 +1839,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Immunization.ImmunizationStatusCodes> value)
+	public static string ToString(CqlContext context, Code<Immunization.ImmunizationStatusCodes> value)
 	{
 		Immunization.ImmunizationStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1861,7 +1848,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Invoice.InvoiceStatus> value)
+	public static string ToString(CqlContext context, Code<Invoice.InvoiceStatus> value)
 	{
 		Invoice.InvoiceStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1870,7 +1857,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<OperationOutcome.IssueSeverity> value)
+	public static string ToString(CqlContext context, Code<OperationOutcome.IssueSeverity> value)
 	{
 		OperationOutcome.IssueSeverity? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1879,7 +1866,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<OperationOutcome.IssueType> value)
+	public static string ToString(CqlContext context, Code<OperationOutcome.IssueType> value)
 	{
 		OperationOutcome.IssueType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1888,7 +1875,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Patient.LinkType> value)
+	public static string ToString(CqlContext context, Code<Patient.LinkType> value)
 	{
 		Patient.LinkType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1897,7 +1884,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Linkage.LinkageType> value)
+	public static string ToString(CqlContext context, Code<Linkage.LinkageType> value)
 	{
 		Linkage.LinkageType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1906,7 +1893,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ListMode> value)
+	public static string ToString(CqlContext context, Code<ListMode> value)
 	{
 		ListMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1915,7 +1902,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<List.ListStatus> value)
+	public static string ToString(CqlContext context, Code<List.ListStatus> value)
 	{
 		List.ListStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1924,7 +1911,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Location.LocationMode> value)
+	public static string ToString(CqlContext context, Code<Location.LocationMode> value)
 	{
 		Location.LocationMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1933,7 +1920,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Location.LocationStatus> value)
+	public static string ToString(CqlContext context, Code<Location.LocationStatus> value)
 	{
 		Location.LocationStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1942,7 +1929,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MeasureReport.MeasureReportStatus> value)
+	public static string ToString(CqlContext context, Code<MeasureReport.MeasureReportStatus> value)
 	{
 		MeasureReport.MeasureReportStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1951,7 +1938,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MeasureReport.MeasureReportType> value)
+	public static string ToString(CqlContext context, Code<MeasureReport.MeasureReportType> value)
 	{
 		MeasureReport.MeasureReportType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1960,7 +1947,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MedicationAdministration.MedicationAdministrationStatusCodes> value)
+	public static string ToString(CqlContext context, Code<MedicationAdministration.MedicationAdministrationStatusCodes> value)
 	{
 		MedicationAdministration.MedicationAdministrationStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1969,7 +1956,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MedicationDispense.MedicationDispenseStatusCodes> value)
+	public static string ToString(CqlContext context, Code<MedicationDispense.MedicationDispenseStatusCodes> value)
 	{
 		MedicationDispense.MedicationDispenseStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1978,7 +1965,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> value)
+	public static string ToString(CqlContext context, Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> value)
 	{
 		MedicationKnowledge.MedicationKnowledgeStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1987,7 +1974,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MedicationRequest.MedicationRequestIntent> value)
+	public static string ToString(CqlContext context, Code<MedicationRequest.MedicationRequestIntent> value)
 	{
 		MedicationRequest.MedicationRequestIntent? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -1996,7 +1983,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MedicationRequest.MedicationrequestStatus> value)
+	public static string ToString(CqlContext context, Code<MedicationRequest.MedicationrequestStatus> value)
 	{
 		MedicationRequest.MedicationrequestStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2005,7 +1992,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MedicationStatement.MedicationStatusCodes> value)
+	public static string ToString(CqlContext context, Code<MedicationStatement.MedicationStatusCodes> value)
 	{
 		MedicationStatement.MedicationStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2014,7 +2001,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Medication.MedicationStatusCodes> value)
+	public static string ToString(CqlContext context, Code<Medication.MedicationStatusCodes> value)
 	{
 		Medication.MedicationStatusCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2023,7 +2010,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MessageDefinition.MessageSignificanceCategory> value)
+	public static string ToString(CqlContext context, Code<MessageDefinition.MessageSignificanceCategory> value)
 	{
 		MessageDefinition.MessageSignificanceCategory? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2032,7 +2019,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MessageheaderResponseRequest> value)
+	public static string ToString(CqlContext context, Code<MessageheaderResponseRequest> value)
 	{
 		MessageheaderResponseRequest? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2041,7 +2028,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code value)
+	public static string ToString(CqlContext context, Code value)
 	{
 		string a_ = value?.Value;
 
@@ -2049,7 +2036,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<HumanName.NameUse> value)
+	public static string ToString(CqlContext context, Code<HumanName.NameUse> value)
 	{
 		HumanName.NameUse? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2058,7 +2045,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<NamingSystem.NamingSystemIdentifierType> value)
+	public static string ToString(CqlContext context, Code<NamingSystem.NamingSystemIdentifierType> value)
 	{
 		NamingSystem.NamingSystemIdentifierType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2067,7 +2054,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<NamingSystem.NamingSystemType> value)
+	public static string ToString(CqlContext context, Code<NamingSystem.NamingSystemType> value)
 	{
 		NamingSystem.NamingSystemType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2076,7 +2063,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Narrative.NarrativeStatus> value)
+	public static string ToString(CqlContext context, Code<Narrative.NarrativeStatus> value)
 	{
 		Narrative.NarrativeStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2085,7 +2072,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<NoteType> value)
+	public static string ToString(CqlContext context, Code<NoteType> value)
 	{
 		NoteType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2094,7 +2081,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<RequestIntent> value)
+	public static string ToString(CqlContext context, Code<RequestIntent> value)
 	{
 		RequestIntent? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2103,7 +2090,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ObservationDefinition.ObservationDataType> value)
+	public static string ToString(CqlContext context, Code<ObservationDefinition.ObservationDataType> value)
 	{
 		ObservationDefinition.ObservationDataType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2112,7 +2099,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ObservationDefinition.ObservationRangeCategory> value)
+	public static string ToString(CqlContext context, Code<ObservationDefinition.ObservationRangeCategory> value)
 	{
 		ObservationDefinition.ObservationRangeCategory? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2121,7 +2108,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<OperationDefinition.OperationKind> value)
+	public static string ToString(CqlContext context, Code<OperationDefinition.OperationKind> value)
 	{
 		OperationDefinition.OperationKind? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2130,7 +2117,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<OperationParameterUse> value)
+	public static string ToString(CqlContext context, Code<OperationParameterUse> value)
 	{
 		OperationParameterUse? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2139,7 +2126,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MolecularSequence.OrientationType> value)
+	public static string ToString(CqlContext context, Code<MolecularSequence.OrientationType> value)
 	{
 		MolecularSequence.OrientationType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2148,7 +2135,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Appointment.ParticipantRequired> value)
+	public static string ToString(CqlContext context, Code<Appointment.ParticipantRequired> value)
 	{
 		Appointment.ParticipantRequired? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2157,7 +2144,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ParticipationStatus> value)
+	public static string ToString(CqlContext context, Code<ParticipationStatus> value)
 	{
 		ParticipationStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2166,7 +2153,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ElementDefinition.PropertyRepresentation> value)
+	public static string ToString(CqlContext context, Code<ElementDefinition.PropertyRepresentation> value)
 	{
 		ElementDefinition.PropertyRepresentation? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2175,7 +2162,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CodeSystem.PropertyType> value)
+	public static string ToString(CqlContext context, Code<CodeSystem.PropertyType> value)
 	{
 		CodeSystem.PropertyType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2184,7 +2171,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Provenance.ProvenanceEntityRole> value)
+	public static string ToString(CqlContext context, Code<Provenance.ProvenanceEntityRole> value)
 	{
 		Provenance.ProvenanceEntityRole? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2193,7 +2180,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<PublicationStatus> value)
+	public static string ToString(CqlContext context, Code<PublicationStatus> value)
 	{
 		PublicationStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2202,7 +2189,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MolecularSequence.QualityType> value)
+	public static string ToString(CqlContext context, Code<MolecularSequence.QualityType> value)
 	{
 		MolecularSequence.QualityType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2211,7 +2198,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Quantity.QuantityComparator> value)
+	public static string ToString(CqlContext context, Code<Quantity.QuantityComparator> value)
 	{
 		Quantity.QuantityComparator? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2220,7 +2207,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Questionnaire.QuestionnaireItemOperator> value)
+	public static string ToString(CqlContext context, Code<Questionnaire.QuestionnaireItemOperator> value)
 	{
 		Questionnaire.QuestionnaireItemOperator? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2229,7 +2216,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Questionnaire.QuestionnaireItemType> value)
+	public static string ToString(CqlContext context, Code<Questionnaire.QuestionnaireItemType> value)
 	{
 		Questionnaire.QuestionnaireItemType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2238,7 +2225,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<QuestionnaireResponse.QuestionnaireResponseStatus> value)
+	public static string ToString(CqlContext context, Code<QuestionnaireResponse.QuestionnaireResponseStatus> value)
 	{
 		QuestionnaireResponse.QuestionnaireResponseStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2247,7 +2234,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatement.ReferenceHandlingPolicy> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatement.ReferenceHandlingPolicy> value)
 	{
 		CapabilityStatement.ReferenceHandlingPolicy? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2256,7 +2243,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ElementDefinition.ReferenceVersionRules> value)
+	public static string ToString(CqlContext context, Code<ElementDefinition.ReferenceVersionRules> value)
 	{
 		ElementDefinition.ReferenceVersionRules? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2265,7 +2252,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<RelatedArtifact.RelatedArtifactType> value)
+	public static string ToString(CqlContext context, Code<RelatedArtifact.RelatedArtifactType> value)
 	{
 		RelatedArtifact.RelatedArtifactType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2274,7 +2261,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ClaimProcessingCodes> value)
+	public static string ToString(CqlContext context, Code<ClaimProcessingCodes> value)
 	{
 		ClaimProcessingCodes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2283,7 +2270,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MolecularSequence.RepositoryType> value)
+	public static string ToString(CqlContext context, Code<MolecularSequence.RepositoryType> value)
 	{
 		MolecularSequence.RepositoryType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2292,7 +2279,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ResearchElementDefinition.ResearchElementType> value)
+	public static string ToString(CqlContext context, Code<ResearchElementDefinition.ResearchElementType> value)
 	{
 		ResearchElementDefinition.ResearchElementType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2301,7 +2288,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ResearchStudy.ResearchStudyStatus> value)
+	public static string ToString(CqlContext context, Code<ResearchStudy.ResearchStudyStatus> value)
 	{
 		ResearchStudy.ResearchStudyStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2310,7 +2297,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ResearchSubject.ResearchSubjectStatus> value)
+	public static string ToString(CqlContext context, Code<ResearchSubject.ResearchSubjectStatus> value)
 	{
 		ResearchSubject.ResearchSubjectStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2319,7 +2306,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatement.ResourceVersionPolicy> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatement.ResourceVersionPolicy> value)
 	{
 		CapabilityStatement.ResourceVersionPolicy? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2328,7 +2315,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MessageHeader.ResponseType> value)
+	public static string ToString(CqlContext context, Code<MessageHeader.ResponseType> value)
 	{
 		MessageHeader.ResponseType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2337,7 +2324,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatement.RestfulCapabilityMode> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatement.RestfulCapabilityMode> value)
 	{
 		CapabilityStatement.RestfulCapabilityMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2346,7 +2333,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ImplementationGuide.SPDXLicense> value)
+	public static string ToString(CqlContext context, Code<ImplementationGuide.SPDXLicense> value)
 	{
 		ImplementationGuide.SPDXLicense? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2355,7 +2342,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<SearchParameter.SearchComparator> value)
+	public static string ToString(CqlContext context, Code<SearchParameter.SearchComparator> value)
 	{
 		SearchParameter.SearchComparator? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2364,7 +2351,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Bundle.SearchEntryMode> value)
+	public static string ToString(CqlContext context, Code<Bundle.SearchEntryMode> value)
 	{
 		Bundle.SearchEntryMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2373,7 +2360,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<SearchParameter.SearchModifierCode> value)
+	public static string ToString(CqlContext context, Code<SearchParameter.SearchModifierCode> value)
 	{
 		SearchParameter.SearchModifierCode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2382,7 +2369,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<SearchParamType> value)
+	public static string ToString(CqlContext context, Code<SearchParamType> value)
 	{
 		SearchParamType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2391,7 +2378,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MolecularSequence.SequenceType> value)
+	public static string ToString(CqlContext context, Code<MolecularSequence.SequenceType> value)
 	{
 		MolecularSequence.SequenceType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2400,7 +2387,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ElementDefinition.SlicingRules> value)
+	public static string ToString(CqlContext context, Code<ElementDefinition.SlicingRules> value)
 	{
 		ElementDefinition.SlicingRules? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2409,7 +2396,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Slot.SlotStatus> value)
+	public static string ToString(CqlContext context, Code<Slot.SlotStatus> value)
 	{
 		Slot.SlotStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2418,7 +2405,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<DataRequirement.SortDirection> value)
+	public static string ToString(CqlContext context, Code<DataRequirement.SortDirection> value)
 	{
 		DataRequirement.SortDirection? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2427,7 +2414,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<SpecimenDefinition.SpecimenContainedPreference> value)
+	public static string ToString(CqlContext context, Code<SpecimenDefinition.SpecimenContainedPreference> value)
 	{
 		SpecimenDefinition.SpecimenContainedPreference? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2436,7 +2423,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Specimen.SpecimenStatus> value)
+	public static string ToString(CqlContext context, Code<Specimen.SpecimenStatus> value)
 	{
 		Specimen.SpecimenStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2445,7 +2432,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<VerificationResult.StatusCode> value)
+	public static string ToString(CqlContext context, Code<VerificationResult.StatusCode> value)
 	{
 		VerificationResult.StatusCode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2454,7 +2441,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<MolecularSequence.StrandType> value)
+	public static string ToString(CqlContext context, Code<MolecularSequence.StrandType> value)
 	{
 		MolecularSequence.StrandType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2463,7 +2450,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureDefinition.StructureDefinitionKind> value)
+	public static string ToString(CqlContext context, Code<StructureDefinition.StructureDefinitionKind> value)
 	{
 		StructureDefinition.StructureDefinitionKind? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2472,7 +2459,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureMap.StructureMapContextType> value)
+	public static string ToString(CqlContext context, Code<StructureMap.StructureMapContextType> value)
 	{
 		StructureMap.StructureMapContextType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2481,7 +2468,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureMap.StructureMapGroupTypeMode> value)
+	public static string ToString(CqlContext context, Code<StructureMap.StructureMapGroupTypeMode> value)
 	{
 		StructureMap.StructureMapGroupTypeMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2490,7 +2477,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureMap.StructureMapInputMode> value)
+	public static string ToString(CqlContext context, Code<StructureMap.StructureMapInputMode> value)
 	{
 		StructureMap.StructureMapInputMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2499,7 +2486,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureMap.StructureMapModelMode> value)
+	public static string ToString(CqlContext context, Code<StructureMap.StructureMapModelMode> value)
 	{
 		StructureMap.StructureMapModelMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2508,7 +2495,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureMap.StructureMapSourceListMode> value)
+	public static string ToString(CqlContext context, Code<StructureMap.StructureMapSourceListMode> value)
 	{
 		StructureMap.StructureMapSourceListMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2517,7 +2504,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureMap.StructureMapTargetListMode> value)
+	public static string ToString(CqlContext context, Code<StructureMap.StructureMapTargetListMode> value)
 	{
 		StructureMap.StructureMapTargetListMode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2526,7 +2513,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureMap.StructureMapTransform> value)
+	public static string ToString(CqlContext context, Code<StructureMap.StructureMapTransform> value)
 	{
 		StructureMap.StructureMapTransform? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2535,7 +2522,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Subscription.SubscriptionChannelType> value)
+	public static string ToString(CqlContext context, Code<Subscription.SubscriptionChannelType> value)
 	{
 		Subscription.SubscriptionChannelType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2544,7 +2531,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Subscription.SubscriptionStatus> value)
+	public static string ToString(CqlContext context, Code<Subscription.SubscriptionStatus> value)
 	{
 		Subscription.SubscriptionStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2553,7 +2540,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<SupplyDelivery.SupplyDeliveryStatus> value)
+	public static string ToString(CqlContext context, Code<SupplyDelivery.SupplyDeliveryStatus> value)
 	{
 		SupplyDelivery.SupplyDeliveryStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2562,7 +2549,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<SupplyRequest.SupplyRequestStatus> value)
+	public static string ToString(CqlContext context, Code<SupplyRequest.SupplyRequestStatus> value)
 	{
 		SupplyRequest.SupplyRequestStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2571,7 +2558,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatement.SystemRestfulInteraction> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatement.SystemRestfulInteraction> value)
 	{
 		CapabilityStatement.SystemRestfulInteraction? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2580,7 +2567,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Task.TaskIntent> value)
+	public static string ToString(CqlContext context, Code<Task.TaskIntent> value)
 	{
 		Task.TaskIntent? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2589,7 +2576,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Task.TaskStatus> value)
+	public static string ToString(CqlContext context, Code<Task.TaskStatus> value)
 	{
 		Task.TaskStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2598,7 +2585,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TestReport.TestReportActionResult> value)
+	public static string ToString(CqlContext context, Code<TestReport.TestReportActionResult> value)
 	{
 		TestReport.TestReportActionResult? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2607,7 +2594,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TestReport.TestReportParticipantType> value)
+	public static string ToString(CqlContext context, Code<TestReport.TestReportParticipantType> value)
 	{
 		TestReport.TestReportParticipantType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2616,7 +2603,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TestReport.TestReportResult> value)
+	public static string ToString(CqlContext context, Code<TestReport.TestReportResult> value)
 	{
 		TestReport.TestReportResult? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2625,7 +2612,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TestReport.TestReportStatus> value)
+	public static string ToString(CqlContext context, Code<TestReport.TestReportStatus> value)
 	{
 		TestReport.TestReportStatus? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2634,7 +2621,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TestScript.TestScriptRequestMethodCode> value)
+	public static string ToString(CqlContext context, Code<TestScript.TestScriptRequestMethodCode> value)
 	{
 		TestScript.TestScriptRequestMethodCode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2643,7 +2630,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<TriggerDefinition.TriggerType> value)
+	public static string ToString(CqlContext context, Code<TriggerDefinition.TriggerType> value)
 	{
 		TriggerDefinition.TriggerType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2652,7 +2639,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<StructureDefinition.TypeDerivationRule> value)
+	public static string ToString(CqlContext context, Code<StructureDefinition.TypeDerivationRule> value)
 	{
 		StructureDefinition.TypeDerivationRule? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2661,7 +2648,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<CapabilityStatement.TypeRestfulInteraction> value)
+	public static string ToString(CqlContext context, Code<CapabilityStatement.TypeRestfulInteraction> value)
 	{
 		CapabilityStatement.TypeRestfulInteraction? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2670,7 +2657,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Device.UDIEntryType> value)
+	public static string ToString(CqlContext context, Code<Device.UDIEntryType> value)
 	{
 		Device.UDIEntryType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2679,7 +2666,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<Timing.UnitsOfTime> value)
+	public static string ToString(CqlContext context, Code<Timing.UnitsOfTime> value)
 	{
 		Timing.UnitsOfTime? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2688,7 +2675,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<ClaimUseCode> value)
+	public static string ToString(CqlContext context, Code<ClaimUseCode> value)
 	{
 		ClaimUseCode? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2697,7 +2684,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<VisionPrescription.VisionBase> value)
+	public static string ToString(CqlContext context, Code<VisionPrescription.VisionBase> value)
 	{
 		VisionPrescription.VisionBase? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2706,7 +2693,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<VisionPrescription.VisionEyes> value)
+	public static string ToString(CqlContext context, Code<VisionPrescription.VisionEyes> value)
 	{
 		VisionPrescription.VisionEyes? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2715,7 +2702,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Code<SearchParameter.XPathUsageType> value)
+	public static string ToString(CqlContext context, Code<SearchParameter.XPathUsageType> value)
 	{
 		SearchParameter.XPathUsageType? a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2724,7 +2711,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(Base64Binary value)
+	public static string ToString(CqlContext context, Base64Binary value)
 	{
 		byte[] a_ = value?.Value;
 		string b_ = context.Operators.Convert<string>(a_);
@@ -2733,7 +2720,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(FhirString value)
+	public static string ToString(CqlContext context, FhirString value)
 	{
 		string a_ = value?.Value;
 
@@ -2741,7 +2728,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(FhirUri value)
+	public static string ToString(CqlContext context, FhirUri value)
 	{
 		string a_ = value?.Value;
 
@@ -2749,7 +2736,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToString")]
-	public string ToString(XHtml value)
+	public static string ToString(CqlContext context, XHtml value)
 	{
 		string a_ = value?.Value;
 
@@ -2757,7 +2744,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToBoolean")]
-	public bool? ToBoolean(FhirBoolean value)
+	public static bool? ToBoolean(CqlContext context, FhirBoolean value)
 	{
 		bool? a_ = value?.Value;
 
@@ -2765,7 +2752,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToDate")]
-	public CqlDate ToDate(Date value)
+	public static CqlDate ToDate(CqlContext context, Date value)
 	{
 		string a_ = value?.Value;
 		CqlDate b_ = context.Operators.ConvertStringToDate(a_);
@@ -2774,7 +2761,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToDateTime")]
-	public CqlDateTime ToDateTime(FhirDateTime value)
+	public static CqlDateTime ToDateTime(CqlContext context, FhirDateTime value)
 	{
 		CqlDateTime a_ = context.Operators.Convert<CqlDateTime>(value);
 
@@ -2782,7 +2769,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToDateTime")]
-	public CqlDateTime ToDateTime(Instant value)
+	public static CqlDateTime ToDateTime(CqlContext context, Instant value)
 	{
 		DateTimeOffset? a_ = value?.Value;
 		CqlDateTime b_ = context.Operators.Convert<CqlDateTime>(a_);
@@ -2791,7 +2778,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToDecimal")]
-	public decimal? ToDecimal(FhirDecimal value)
+	public static decimal? ToDecimal(CqlContext context, FhirDecimal value)
 	{
 		decimal? a_ = value?.Value;
 
@@ -2799,7 +2786,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToInteger")]
-	public int? ToInteger(Integer value)
+	public static int? ToInteger(CqlContext context, Integer value)
 	{
 		int? a_ = value?.Value;
 
@@ -2807,7 +2794,7 @@ public class FHIRHelpers_4_3_000
 	}
 
     [CqlDeclaration("ToTime")]
-	public CqlTime ToTime(Time value)
+	public static CqlTime ToTime(CqlContext context, Time value)
 	{
 		string a_ = value?.Value;
 		CqlTime b_ = context.Operators.ConvertStringToTime(a_);

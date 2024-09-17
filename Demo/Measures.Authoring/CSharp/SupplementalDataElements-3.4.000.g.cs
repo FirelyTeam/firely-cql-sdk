@@ -12,80 +12,31 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("SupplementalDataElements", "3.4.000")]
-public class SupplementalDataElements_3_4_000
+public static class SupplementalDataElements_3_4_000
 {
-
-
-    internal CqlContext context;
-
-    #region Cached values
-
-    internal Lazy<CqlValueSet> __Ethnicity;
-    internal Lazy<CqlValueSet> __ONC_Administrative_Sex;
-    internal Lazy<CqlValueSet> __Payer_Type;
-    internal Lazy<CqlValueSet> __Race;
-    internal Lazy<Patient> __Patient;
-    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>> __SDE_Payer;
-    internal Lazy<(IEnumerable<CqlCode> codes, string display)?> __SDE_Race;
-    internal Lazy<CqlCode> __SDE_Sex;
-
-    #endregion
-    public SupplementalDataElements_3_4_000(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-        FHIRHelpers_4_3_000 = new FHIRHelpers_4_3_000(context);
-
-        __Ethnicity = new Lazy<CqlValueSet>(this.Ethnicity_Value);
-        __ONC_Administrative_Sex = new Lazy<CqlValueSet>(this.ONC_Administrative_Sex_Value);
-        __Payer_Type = new Lazy<CqlValueSet>(this.Payer_Type_Value);
-        __Race = new Lazy<CqlValueSet>(this.Race_Value);
-        __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<(IEnumerable<CqlCode> codes, string display)?>(this.SDE_Race_Value);
-        __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
-    }
-    #region Dependencies
-
-    public FHIRHelpers_4_3_000 FHIRHelpers_4_3_000 { get; }
-
-    #endregion
-
-	private CqlValueSet Ethnicity_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
-	public CqlValueSet Ethnicity() => 
-		__Ethnicity.Value;
-
-	private CqlValueSet ONC_Administrative_Sex_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
+	public static CqlValueSet Ethnicity(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
-	public CqlValueSet ONC_Administrative_Sex() => 
-		__ONC_Administrative_Sex.Value;
-
-	private CqlValueSet Payer_Type_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
+	public static CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
     [CqlDeclaration("Payer Type")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
-	public CqlValueSet Payer_Type() => 
-		__Payer_Type.Value;
-
-	private CqlValueSet Race_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
+	public static CqlValueSet Payer_Type(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
-	public CqlValueSet Race() => 
-		__Race.Value;
+	public static CqlValueSet Race(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
 
-	private Patient Patient_Value()
+    [CqlDeclaration("Patient")]
+	public static Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -93,24 +44,21 @@ public class SupplementalDataElements_3_4_000
 		return b_;
 	}
 
-    [CqlDeclaration("Patient")]
-	public Patient Patient() => 
-		__Patient.Value;
-
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Value()
+    [CqlDeclaration("SDE Ethnicity")]
+	public static (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		List<Extension> a_()
 		{
 			bool i_()
 			{
-				Patient j_ = this.Patient();
+				Patient j_ = SupplementalDataElements_3_4_000.Patient(context);
 				bool k_ = j_ is DomainResource;
 
 				return k_;
 			};
 			if (i_())
 			{
-				Patient l_ = this.Patient();
+				Patient l_ = SupplementalDataElements_3_4_000.Patient(context);
 
 				return (l_ as DomainResource).Extension;
 			}
@@ -123,7 +71,7 @@ public class SupplementalDataElements_3_4_000
 		{
 			string m_ = @this?.Url;
 			FhirString n_ = context.Operators.Convert<FhirString>(m_);
-			string o_ = FHIRHelpers_4_3_000.ToString(n_);
+			string o_ = FHIRHelpers_4_3_000.ToString(context, n_);
 			bool? p_ = context.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
 			return p_;
@@ -139,7 +87,7 @@ public class SupplementalDataElements_3_4_000
 			{
 				string al_ = @this?.Url;
 				FhirString am_ = context.Operators.Convert<FhirString>(al_);
-				string an_ = FHIRHelpers_4_3_000.ToString(am_);
+				string an_ = FHIRHelpers_4_3_000.ToString(context, am_);
 				bool? ao_ = context.Operators.Equal(an_, "ombCategory");
 
 				return ao_;
@@ -155,7 +103,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
 			object u_ = context.Operators.SingletonFrom<object>(t_);
-			CqlCode v_ = FHIRHelpers_4_3_000.ToCode(u_ as Coding);
+			CqlCode v_ = FHIRHelpers_4_3_000.ToCode(context, u_ as Coding);
 			CqlCode[] w_ = [
 				v_,
 			];
@@ -163,7 +111,7 @@ public class SupplementalDataElements_3_4_000
 			{
 				string aq_ = @this?.Url;
 				FhirString ar_ = context.Operators.Convert<FhirString>(aq_);
-				string as_ = FHIRHelpers_4_3_000.ToString(ar_);
+				string as_ = FHIRHelpers_4_3_000.ToString(context, ar_);
 				bool? at_ = context.Operators.Equal(as_, "detailed");
 
 				return at_;
@@ -180,7 +128,7 @@ public class SupplementalDataElements_3_4_000
 			IEnumerable<object> aa_ = context.Operators.Select<Extension, object>(y_, z_);
 			CqlCode ab_(object @this)
 			{
-				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(@this as Coding);
+				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(context, @this as Coding);
 
 				return av_;
 			};
@@ -190,7 +138,7 @@ public class SupplementalDataElements_3_4_000
 			{
 				string aw_ = @this?.Url;
 				FhirString ax_ = context.Operators.Convert<FhirString>(aw_);
-				string ay_ = FHIRHelpers_4_3_000.ToString(ax_);
+				string ay_ = FHIRHelpers_4_3_000.ToString(context, ax_);
 				bool? az_ = context.Operators.Equal(ay_, "text");
 
 				return az_;
@@ -217,20 +165,17 @@ public class SupplementalDataElements_3_4_000
 		return h_;
 	}
 
-    [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity() => 
-		__SDE_Ethnicity.Value;
-
-	private IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Value()
+    [CqlDeclaration("SDE Payer")]
+	public static IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		CqlValueSet a_ = this.Payer_Type();
+		CqlValueSet a_ = SupplementalDataElements_3_4_000.Payer_Type(context);
 		IEnumerable<Coverage> b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, default);
 		(CqlConcept code, CqlInterval<CqlDateTime> period)? c_(Coverage Payer)
 		{
 			CodeableConcept e_ = Payer?.Type;
-			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(e_);
+			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(context, e_);
 			Period g_ = Payer?.Period;
-			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(g_);
+			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(context, g_);
 			(CqlConcept code, CqlInterval<CqlDateTime> period)? i_ = (f_, h_);
 
 			return i_;
@@ -240,24 +185,21 @@ public class SupplementalDataElements_3_4_000
 		return d_;
 	}
 
-    [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer() => 
-		__SDE_Payer.Value;
-
-	private (IEnumerable<CqlCode> codes, string display)? SDE_Race_Value()
+    [CqlDeclaration("SDE Race")]
+	public static (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		List<Extension> a_()
 		{
 			bool i_()
 			{
-				Patient j_ = this.Patient();
+				Patient j_ = SupplementalDataElements_3_4_000.Patient(context);
 				bool k_ = j_ is DomainResource;
 
 				return k_;
 			};
 			if (i_())
 			{
-				Patient l_ = this.Patient();
+				Patient l_ = SupplementalDataElements_3_4_000.Patient(context);
 
 				return (l_ as DomainResource).Extension;
 			}
@@ -270,7 +212,7 @@ public class SupplementalDataElements_3_4_000
 		{
 			string m_ = @this?.Url;
 			FhirString n_ = context.Operators.Convert<FhirString>(m_);
-			string o_ = FHIRHelpers_4_3_000.ToString(n_);
+			string o_ = FHIRHelpers_4_3_000.ToString(context, n_);
 			bool? p_ = context.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
 			return p_;
@@ -286,7 +228,7 @@ public class SupplementalDataElements_3_4_000
 			{
 				string ak_ = @this?.Url;
 				FhirString al_ = context.Operators.Convert<FhirString>(ak_);
-				string am_ = FHIRHelpers_4_3_000.ToString(al_);
+				string am_ = FHIRHelpers_4_3_000.ToString(context, al_);
 				bool? an_ = context.Operators.Equal(am_, "ombCategory");
 
 				return an_;
@@ -303,7 +245,7 @@ public class SupplementalDataElements_3_4_000
 			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
 			CqlCode u_(object @this)
 			{
-				CqlCode ap_ = FHIRHelpers_4_3_000.ToCode(@this as Coding);
+				CqlCode ap_ = FHIRHelpers_4_3_000.ToCode(context, @this as Coding);
 
 				return ap_;
 			};
@@ -312,7 +254,7 @@ public class SupplementalDataElements_3_4_000
 			{
 				string aq_ = @this?.Url;
 				FhirString ar_ = context.Operators.Convert<FhirString>(aq_);
-				string as_ = FHIRHelpers_4_3_000.ToString(ar_);
+				string as_ = FHIRHelpers_4_3_000.ToString(context, ar_);
 				bool? at_ = context.Operators.Equal(as_, "detailed");
 
 				return at_;
@@ -329,7 +271,7 @@ public class SupplementalDataElements_3_4_000
 			IEnumerable<object> z_ = context.Operators.Select<Extension, object>(x_, y_);
 			CqlCode aa_(object @this)
 			{
-				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(@this as Coding);
+				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(context, @this as Coding);
 
 				return av_;
 			};
@@ -339,7 +281,7 @@ public class SupplementalDataElements_3_4_000
 			{
 				string aw_ = @this?.Url;
 				FhirString ax_ = context.Operators.Convert<FhirString>(aw_);
-				string ay_ = FHIRHelpers_4_3_000.ToString(ax_);
+				string ay_ = FHIRHelpers_4_3_000.ToString(context, ax_);
 				bool? az_ = context.Operators.Equal(ay_, "text");
 
 				return az_;
@@ -366,17 +308,14 @@ public class SupplementalDataElements_3_4_000
 		return h_;
 	}
 
-    [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race() => 
-		__SDE_Race.Value;
-
-	private CqlCode SDE_Sex_Value()
+    [CqlDeclaration("SDE Sex")]
+	public static CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_()
 		{
 			bool b_()
 			{
-				Patient d_ = this.Patient();
+				Patient d_ = SupplementalDataElements_3_4_000.Patient(context);
 				Code<AdministrativeGender> e_ = d_?.GenderElement;
 				AdministrativeGender? f_ = e_?.Value;
 				string g_ = context.Operators.Convert<string>(f_);
@@ -386,7 +325,7 @@ public class SupplementalDataElements_3_4_000
 			};
 			bool c_()
 			{
-				Patient i_ = this.Patient();
+				Patient i_ = SupplementalDataElements_3_4_000.Patient(context);
 				Code<AdministrativeGender> j_ = i_?.GenderElement;
 				AdministrativeGender? k_ = j_?.Value;
 				string l_ = context.Operators.Convert<string>(k_);
@@ -410,9 +349,5 @@ public class SupplementalDataElements_3_4_000
 
 		return a_();
 	}
-
-    [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
-		__SDE_Sex.Value;
 
 }

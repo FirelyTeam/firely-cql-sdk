@@ -45,8 +45,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             _logger = logger;
             _typeToCSharpConverter = typeToCSharpConverter;
             _options = options;
-            _contextAccessModifier = AccessModifier.Internal;
-            _definesAccessModifier = AccessModifier.Internal;
+            // _contextAccessModifier = AccessModifier.Internal;
+            // _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
             _version = GetType().Assembly.GetName().Version?.ToString() ?? "1.0.0";
             _tool = GetType()
@@ -91,15 +91,15 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// </summary>
         private bool PartialClass { get; }
 
-        /// <summary>
-        /// The <see cref="AccessModifier"/> to use for the <see cref="CqlContext"/> class member; its default value is <see cref="AccessModifier.Internal"/>.
-        /// </summary>
-        private readonly AccessModifier _contextAccessModifier;
-
-        /// <summary>
-        /// The <see cref="AccessModifier"/> to use for all CQL defines; its default value is <see cref="AccessModifier.Internal"/>.
-        /// </summary>
-        private readonly AccessModifier _definesAccessModifier;
+        // /// <summary>
+        // /// The <see cref="AccessModifier"/> to use for the <see cref="CqlContext"/> class member; its default value is <see cref="AccessModifier.Internal"/>.
+        // /// </summary>
+        // private readonly AccessModifier _contextAccessModifier;
+        //
+        // /// <summary>
+        // /// The <see cref="AccessModifier"/> to use for all CQL defines; its default value is <see cref="AccessModifier.Internal"/>.
+        // /// </summary>
+        // private readonly AccessModifier _definesAccessModifier;
 
         /// <summary>
         /// Gets the <see langword="using"/> statements to be included in the generated code.
@@ -237,37 +237,37 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indentLevel, $"[CqlLibrary({QuoteString(libraryAttribute)}, {QuoteString(versionAttribute)})]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
             if (PartialClass)
-                writer.WriteLine(indentLevel, $"partial class {className}");
+                writer.WriteLine(indentLevel, $"partial static class {className}");
             else
-                writer.WriteLine(indentLevel, $"public class {className}");
+                writer.WriteLine(indentLevel, $"public static class {className}");
             writer.WriteLine(indentLevel, "{");
             writer.WriteLine();
             indentLevel += 1;
             // Class
             {
-                writer.WriteLine();
-
-                writer.WriteLine(indentLevel, $"{AccessModifierString(_contextAccessModifier)} CqlContext context;");
-                writer.WriteLine();
-                WriteCachedValues(definitions, libraryName, writer, indentLevel);
-
-                // Write constructor
-                writer.WriteLine(indentLevel, $"public {className}(CqlContext context)");
-                writer.WriteLine(indentLevel, "{");
-                {
-                    indentLevel += 1;
-
-                    writer.WriteLine(indentLevel, "this.context = context ?? throw new ArgumentNullException(\"context\");");
-                    writer.WriteLine();
-
-                    WriteDependencies(librarySet, libraryNameToClassName, libraryName, writer, indentLevel);
-                    writer.WriteLine();
-                    WriteCachedValueNames(definitions, libraryName, writer, indentLevel);
-                    indentLevel -= 1;
-                }
-                writer.WriteLine(indentLevel, "}");
-
-                WriteLibraryMembers(writer, librarySet, libraryName, libraryNameToClassName!, indentLevel);
+                // writer.WriteLine();
+                //
+                // writer.WriteLine(indentLevel, $"{AccessModifierString(_contextAccessModifier)} CqlContext context;");
+                // writer.WriteLine();
+                // WriteCachedValues(definitions, libraryName, writer, indentLevel);
+                //
+                // // Write constructor
+                // writer.WriteLine(indentLevel, $"public {className}(CqlContext context)");
+                // writer.WriteLine(indentLevel, "{");
+                // {
+                //     indentLevel += 1;
+                //
+                //     writer.WriteLine(indentLevel, "this.context = context ?? throw new ArgumentNullException(\"context\");");
+                //     writer.WriteLine();
+                //
+                //     WriteDependencies(librarySet, libraryNameToClassName, libraryName, writer, indentLevel);
+                //     writer.WriteLine();
+                //     WriteCachedValueNames(definitions, libraryName, writer, indentLevel);
+                //     indentLevel -= 1;
+                // }
+                // writer.WriteLine(indentLevel, "}");
+                //
+                // WriteLibraryMembers(writer, librarySet, libraryName, libraryNameToClassName!, indentLevel);
                 WriteMemoizedInstanceMethods(definitions, libraryName, writer, indentLevel);
                 indentLevel -= 1;
                 writer.WriteLine(indentLevel, "}");
@@ -287,107 +287,107 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteCachedValueNames(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
-        {
-            foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
-            {
-                foreach (var overload in kvp.Value)
-                {
-                    if (IsDefinition(overload.Item2))
-                    {
-                        var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
-                        var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
-                        var returnType = _typeToCSharpConverter.ToCSharp(overload.Item2.ReturnType);
-                        var privateMethodName = PrivateMethodNameFor(methodName!);
-                        writer.WriteLine(indentLevel, $"{cachedValueName} = new Lazy<{returnType}>(this.{privateMethodName});");
-                    }
-                }
-            }
-        }
+        // private void WriteCachedValueNames(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        // {
+        //     foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
+        //     {
+        //         foreach (var overload in kvp.Value)
+        //         {
+        //             if (IsDefinition(overload.Item2))
+        //             {
+        //                 var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
+        //                 var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
+        //                 var returnType = _typeToCSharpConverter.ToCSharp(overload.Item2.ReturnType);
+        //                 var privateMethodName = PrivateMethodNameFor(methodName!);
+        //                 writer.WriteLine(indentLevel, $"{cachedValueName} = new Lazy<{returnType}>(this.{privateMethodName});");
+        //             }
+        //         }
+        //     }
+        // }
 
-        private static void WriteDependencies(
-            LibrarySet librarySet,
-            Func<string, string?> libraryNameToClassName,
-            string libraryName,
-            StreamWriter writer,
-            int indentLevel)
-        {
-            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
+        // private static void WriteDependencies(
+        //     LibrarySet librarySet,
+        //     Func<string, string?> libraryNameToClassName,
+        //     string libraryName,
+        //     StreamWriter writer,
+        //     int indentLevel)
+        // {
+        //     var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
+        //
+        //     foreach (var dependentLibrary in requiredLibraries)
+        //     {
+        //         var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
+        //         var memberName = typeName;
+        //         writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
+        //     }
+        // }
 
-            foreach (var dependentLibrary in requiredLibraries)
-            {
-                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
-                var memberName = typeName;
-                writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
-            }
-        }
-
-        private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions,
-            string libraryName, StreamWriter writer, int indentLevel)
-        {
-            writer.WriteLine(indentLevel, "#region Cached values");
-            writer.WriteLine();
-            var accessModifier = AccessModifierString(_definesAccessModifier);
-            foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
-            {
-                foreach (var overload in kvp.Value)
-                {
-                    if (IsDefinition(overload.T))
-                    {
-                        var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
-                        var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
-                        var returnType = _typeToCSharpConverter.ToCSharp(overload.T.ReturnType);
-                        writer.WriteLine(indentLevel, $"{accessModifier} Lazy<{returnType}> {cachedValueName};");
-                    }
-                }
-            }
-            writer.WriteLine();
-            writer.WriteLine(indentLevel, "#endregion");
-        }
+        // private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions,
+        //     string libraryName, StreamWriter writer, int indentLevel)
+        // {
+        //     writer.WriteLine(indentLevel, "#region Cached values");
+        //     writer.WriteLine();
+        //     var accessModifier = AccessModifierString(_definesAccessModifier);
+        //     foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
+        //     {
+        //         foreach (var overload in kvp.Value)
+        //         {
+        //             if (IsDefinition(overload.T))
+        //             {
+        //                 var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
+        //                 var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
+        //                 var returnType = _typeToCSharpConverter.ToCSharp(overload.T.ReturnType);
+        //                 writer.WriteLine(indentLevel, $"{accessModifier} Lazy<{returnType}> {cachedValueName};");
+        //             }
+        //         }
+        //     }
+        //     writer.WriteLine();
+        //     writer.WriteLine(indentLevel, "#endregion");
+        // }
 
         private static bool IsDefinition(LambdaExpression overload) =>
             overload.Parameters.Count == 1
                 && overload.Parameters[0].Type == typeof(CqlContext);
 
-        private void WriteLibraryMembers(TextWriter writer,
-            LibrarySet librarySet,
-            string libraryName,
-            Func<string, string> libraryNameToClassName,
-            int indent)
-        {
-            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
+        // private void WriteLibraryMembers(TextWriter writer,
+        //     LibrarySet librarySet,
+        //     string libraryName,
+        //     Func<string, string> libraryNameToClassName,
+        //     int indent)
+        // {
+        //     var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
+        //
+        //     bool atFirst = true;
+        //
+        //     foreach (var dependentLibrary in requiredLibraries)
+        //     {
+        //         if (atFirst)
+        //         {
+        //             atFirst = false;
+        //             writer.WriteLine(indent, "#region Dependencies");
+        //             writer.WriteLine();
+        //         }
+        //
+        //         var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
+        //         var memberName = typeName;
+        //         writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
+        //     }
+        //
+        //     if (!atFirst)
+        //     {
+        //         writer.WriteLine();
+        //         writer.WriteLine(indent, "#endregion");
+        //         writer.WriteLine();
+        //     }
+        // }
 
-            bool atFirst = true;
-
-            foreach (var dependentLibrary in requiredLibraries)
-            {
-                if (atFirst)
-                {
-                    atFirst = false;
-                    writer.WriteLine(indent, "#region Dependencies");
-                    writer.WriteLine();
-                }
-
-                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
-                var memberName = typeName;
-                writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
-            }
-
-            if (!atFirst)
-            {
-                writer.WriteLine();
-                writer.WriteLine(indent, "#endregion");
-                writer.WriteLine();
-            }
-        }
-
-        private string DefinitionCacheKeyForMethod(string methodName)
-        {
-            if (methodName[0] == '@')
-                return "__" + methodName[1..];
-            else return "__" + methodName;
-        }
-        private string PrivateMethodNameFor(string methodName) => methodName + "_Value";
+        // private string DefinitionCacheKeyForMethod(string methodName)
+        // {
+        //     if (methodName[0] == '@')
+        //         return "__" + methodName[1..];
+        //     else return "__" + methodName;
+        // }
+        // private string PrivateMethodNameFor(string methodName) => methodName + "_Value";
 
         private void WriteMemoizedInstanceMethod(string libraryName, TextWriter writer, int indentLevel,
             string cqlName,
@@ -420,16 +420,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             if (isDef)
             {
-                // Definitions, which are CQL expressions without parameter, can be memoized,
-                // so we generate a "generator" function (name ending in _Value) and a
-                // getter function, which just calls triggers the lazy to invoke this
-                // first _Value method.
-                var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
-                var privateMethodName = PrivateMethodNameFor(methodName!);
-
-                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, privateMethodName, "private");
-                writer.Write(func);
-                writer.WriteLine();
                 writer.WriteLine(indentLevel, $"[CqlDeclaration({QuoteString(cqlName)})]");
                 WriteTags(writer, indentLevel, tags);
 
@@ -445,20 +435,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                 }
 
-                var lazyType = typeof(Lazy<>).MakeGenericType(visitedBody.Type);
-                var valueFunc =
-                    Expression.Lambda(
-                    Expression.MakeMemberAccess(
-                    Expression.Parameter(lazyType, cachedValueName),
-                    lazyType.GetMember("Value").Single()));
-
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, valueFunc, methodName!, "public"));
+                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public static");
+                writer.Write(func);
             }
             else
             {
                 writer.WriteLine(indentLevel, $"[CqlDeclaration({QuoteString(cqlName)})]");
                 WriteTags(writer, indentLevel, tags);
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
+                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public static"));
             }
         }
 
