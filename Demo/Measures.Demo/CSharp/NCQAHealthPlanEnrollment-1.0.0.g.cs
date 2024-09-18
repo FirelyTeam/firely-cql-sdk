@@ -16,10 +16,10 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAHealthPlanEnrollment", "1.0.0")]
 public class NCQAHealthPlanEnrollment_1_0_0(
-    NCQACQLBase_1_0_0 _NCQACQLBase_1_0_0,
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
-    NCQATerminology_1_0_0 _NCQATerminology_1_0_0,
-    NCQAFHIRBase_1_0_0 _NCQAFHIRBase_1_0_0)
+    NCQACQLBase_1_0_0 ncqacqlBase_1_0_0,
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
+    NCQATerminology_1_0_0 ncqaTerminology_1_0_0,
+    NCQAFHIRBase_1_0_0 ncqafhirBase_1_0_0)
 {
 
     [CqlDeclaration("CoverageIntervals")]
@@ -28,10 +28,10 @@ public class NCQAHealthPlanEnrollment_1_0_0(
 		CqlInterval<CqlDate> a_(Coverage C)
 		{
 			Period c_ = C?.Period;
-			CqlInterval<CqlDateTime> d_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, c_ as object);
+			CqlInterval<CqlDateTime> d_ = ncqafhirBase_1_0_0.Normalize_Interval(context, c_ as object);
 			CqlDateTime e_ = context.Operators.Start(d_);
 			CqlDate f_ = context.Operators.DateFrom(e_);
-			CqlInterval<CqlDateTime> h_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, c_ as object);
+			CqlInterval<CqlDateTime> h_ = ncqafhirBase_1_0_0.Normalize_Interval(context, c_ as object);
 			CqlDateTime i_ = context.Operators.End(h_);
 			CqlDate j_ = context.Operators.DateFrom(i_);
 			CqlInterval<CqlDate> k_ = context.Operators.Interval(f_, j_, true, true);
@@ -50,7 +50,7 @@ public class NCQAHealthPlanEnrollment_1_0_0(
     [CqlDeclaration("Collapsed Coverage Intervals")]
 	public  IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
 	{
-		IEnumerable<CqlInterval<CqlDate>> a_ = _NCQACQLBase_1_0_0.Collapse_Date_Interval_Workaround(context, Intervals);
+		IEnumerable<CqlInterval<CqlDate>> a_ = ncqacqlBase_1_0_0.Collapse_Date_Interval_Workaround(context, Intervals);
 
 		return a_;
 	}
@@ -100,7 +100,7 @@ public class NCQAHealthPlanEnrollment_1_0_0(
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Collapsed_Coverage_Intervals(context, collapsedI);
 		IEnumerable<CqlInterval<CqlDate>> b_ = this.Collapsed_Coverage_Adjacent_Intervals(context, adjacentI);
 		IEnumerable<CqlInterval<CqlDate>> c_ = context.Operators.Union<CqlInterval<CqlDate>>(a_, b_);
-		IEnumerable<CqlInterval<CqlDate>> d_ = _NCQACQLBase_1_0_0.Collapse_Date_Interval_Workaround(context, c_);
+		IEnumerable<CqlInterval<CqlDate>> d_ = ncqacqlBase_1_0_0.Collapse_Date_Interval_Workaround(context, c_);
 
 		return d_;
 	}
@@ -136,13 +136,13 @@ public class NCQAHealthPlanEnrollment_1_0_0(
 			List<Coding> f_ = e_?.Coding;
 			bool? g_(Coding cTypeCoding)
 			{
-				CqlCode j_ = _FHIRHelpers_4_0_001.ToCode(context, cTypeCoding);
-				CqlCode k_ = _NCQATerminology_1_0_0.managed_care_policy(context);
+				CqlCode j_ = fhirHelpers_4_0_001.ToCode(context, cTypeCoding);
+				CqlCode k_ = ncqaTerminology_1_0_0.managed_care_policy(context);
 				bool? l_ = context.Operators.Equivalent(j_, k_);
-				CqlCode n_ = _NCQATerminology_1_0_0.retiree_health_program(context);
+				CqlCode n_ = ncqaTerminology_1_0_0.retiree_health_program(context);
 				bool? o_ = context.Operators.Equivalent(j_, n_);
 				bool? p_ = context.Operators.Or(l_, o_);
-				CqlCode r_ = _NCQATerminology_1_0_0.subsidized_health_program(context);
+				CqlCode r_ = ncqaTerminology_1_0_0.subsidized_health_program(context);
 				bool? s_ = context.Operators.Equivalent(j_, r_);
 				bool? t_ = context.Operators.Or(p_, s_);
 
@@ -226,7 +226,7 @@ public class NCQAHealthPlanEnrollment_1_0_0(
 				IEnumerable<Period> u_ = context.Operators.Select<Coverage, Period>(s_, t_);
 				bool? v_(Period Cperiod)
 				{
-					CqlInterval<CqlDateTime> ab_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, Cperiod as object);
+					CqlInterval<CqlDateTime> ab_ = ncqafhirBase_1_0_0.Normalize_Interval(context, Cperiod as object);
 					CqlDateTime ac_ = context.Operators.Start(ab_);
 					CqlDate ad_ = context.Operators.DateFrom(ac_);
 					CqlDateTime af_ = context.Operators.End(ab_);
@@ -275,7 +275,7 @@ public class NCQAHealthPlanEnrollment_1_0_0(
 		};
 		IEnumerable<IEnumerable<CqlInterval<CqlDate>>> f_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(d_, e_);
 		IEnumerable<CqlInterval<CqlDate>> g_ = context.Operators.Flatten<CqlInterval<CqlDate>>(f_);
-		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = _NCQACQLBase_1_0_0.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, g_);
+		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = ncqacqlBase_1_0_0.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, g_);
 		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?[] i_ = [
 			h_,
 		];
@@ -306,8 +306,8 @@ public class NCQAHealthPlanEnrollment_1_0_0(
 			List<Coding> f_ = e_?.Coding;
 			bool? g_(Coding cTypeCoding)
 			{
-				CqlCode j_ = _FHIRHelpers_4_0_001.ToCode(context, cTypeCoding);
-				CqlCode k_ = _NCQATerminology_1_0_0.drug_policy(context);
+				CqlCode j_ = fhirHelpers_4_0_001.ToCode(context, cTypeCoding);
+				CqlCode k_ = ncqaTerminology_1_0_0.drug_policy(context);
 				bool? l_ = context.Operators.Equivalent(j_, k_);
 
 				return l_;
@@ -350,7 +350,7 @@ public class NCQAHealthPlanEnrollment_1_0_0(
 		};
 		IEnumerable<IEnumerable<CqlInterval<CqlDate>>> f_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(d_, e_);
 		IEnumerable<CqlInterval<CqlDate>> g_ = context.Operators.Flatten<CqlInterval<CqlDate>>(f_);
-		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = _NCQACQLBase_1_0_0.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, g_);
+		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = ncqacqlBase_1_0_0.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, g_);
 		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?[] i_ = [
 			h_,
 		];
@@ -381,8 +381,8 @@ public class NCQAHealthPlanEnrollment_1_0_0(
 			List<Coding> f_ = e_?.Coding;
 			bool? g_(Coding cTypeCoding)
 			{
-				CqlCode j_ = _FHIRHelpers_4_0_001.ToCode(context, cTypeCoding);
-				CqlCode k_ = _NCQATerminology_1_0_0.mental_health_policy(context);
+				CqlCode j_ = fhirHelpers_4_0_001.ToCode(context, cTypeCoding);
+				CqlCode k_ = ncqaTerminology_1_0_0.mental_health_policy(context);
 				bool? l_ = context.Operators.Equivalent(j_, k_);
 
 				return l_;
@@ -425,7 +425,7 @@ public class NCQAHealthPlanEnrollment_1_0_0(
 		};
 		IEnumerable<IEnumerable<CqlInterval<CqlDate>>> f_ = context.Operators.Select<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?, IEnumerable<CqlInterval<CqlDate>>>(d_, e_);
 		IEnumerable<CqlInterval<CqlDate>> g_ = context.Operators.Flatten<CqlInterval<CqlDate>>(f_);
-		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = _NCQACQLBase_1_0_0.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, g_);
+		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? h_ = ncqacqlBase_1_0_0.Date_Interval_Gaps_Relative_to_Base_Interval_Stats(context, participationPeriod, g_);
 		(IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?[] i_ = [
 			h_,
 		];

@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("QICoreCommon", "2.0.000")]
 public class QICoreCommon_2_0_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000)
 {
 
     [CqlDeclaration("Birthdate")]
@@ -458,16 +458,16 @@ public class QICoreCommon_2_0_000(
 	public  bool? isActive(CqlContext context, Condition condition)
 	{
 		CodeableConcept a_ = condition?.ClinicalStatus;
-		CqlConcept b_ = _FHIRHelpers_4_3_000.ToConcept(context, a_);
+		CqlConcept b_ = fhirHelpers_4_3_000.ToConcept(context, a_);
 		CqlCode c_ = this.active(context);
 		CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
 		bool? e_ = context.Operators.Equivalent(b_, d_);
-		CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, a_);
+		CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, a_);
 		CqlCode h_ = this.recurrence(context);
 		CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
 		bool? j_ = context.Operators.Equivalent(g_, i_);
 		bool? k_ = context.Operators.Or(e_, j_);
-		CqlConcept m_ = _FHIRHelpers_4_3_000.ToConcept(context, a_);
+		CqlConcept m_ = fhirHelpers_4_3_000.ToConcept(context, a_);
 		CqlCode n_ = this.relapse(context);
 		CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
 		bool? p_ = context.Operators.Equivalent(m_, o_);
@@ -483,7 +483,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = condition?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -508,7 +508,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -533,7 +533,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = condition?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -559,7 +559,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = condition?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -585,7 +585,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = condition?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -611,7 +611,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -637,7 +637,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -663,7 +663,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -689,7 +689,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -715,7 +715,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -741,7 +741,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -767,7 +767,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -793,7 +793,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -819,7 +819,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -845,7 +845,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = observation?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -871,7 +871,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = medicationRequest?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -897,7 +897,7 @@ public class QICoreCommon_2_0_000(
 		List<CodeableConcept> a_ = medicationRequest?.Category;
 		CqlConcept b_(CodeableConcept @this)
 		{
-			CqlConcept g_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+			CqlConcept g_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 			return g_;
 		};
@@ -935,7 +935,7 @@ public class QICoreCommon_2_0_000(
 		bool? c_(Extension E)
 		{
 			DataType j_ = E?.Value;
-			object k_ = _FHIRHelpers_4_3_000.ToValue(context, j_);
+			object k_ = fhirHelpers_4_3_000.ToValue(context, j_);
 
 			return k_ as bool?;
 		};
@@ -1241,7 +1241,7 @@ public class QICoreCommon_2_0_000(
 			bool b_()
 			{
 				DataType f_ = condition?.Abatement;
-				object g_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
+				object g_ = fhirHelpers_4_3_000.ToValue(context, f_);
 				bool h_ = g_ is CqlDateTime;
 
 				return h_;
@@ -1249,7 +1249,7 @@ public class QICoreCommon_2_0_000(
 			bool c_()
 			{
 				DataType i_ = condition?.Abatement;
-				object j_ = _FHIRHelpers_4_3_000.ToValue(context, i_);
+				object j_ = fhirHelpers_4_3_000.ToValue(context, i_);
 				bool k_ = j_ is CqlQuantity;
 
 				return k_;
@@ -1257,7 +1257,7 @@ public class QICoreCommon_2_0_000(
 			bool d_()
 			{
 				DataType l_ = condition?.Abatement;
-				object m_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
+				object m_ = fhirHelpers_4_3_000.ToValue(context, l_);
 				bool n_ = m_ is CqlInterval<CqlQuantity>;
 
 				return n_;
@@ -1265,7 +1265,7 @@ public class QICoreCommon_2_0_000(
 			bool e_()
 			{
 				DataType o_ = condition?.Abatement;
-				object p_ = _FHIRHelpers_4_3_000.ToValue(context, o_);
+				object p_ = fhirHelpers_4_3_000.ToValue(context, o_);
 				bool q_ = p_ is CqlInterval<CqlDateTime>;
 
 				return q_;
@@ -1273,8 +1273,8 @@ public class QICoreCommon_2_0_000(
 			if (b_())
 			{
 				DataType r_ = condition?.Abatement;
-				object s_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
-				object u_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
+				object s_ = fhirHelpers_4_3_000.ToValue(context, r_);
+				object u_ = fhirHelpers_4_3_000.ToValue(context, r_);
 				CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
 
 				return v_;
@@ -1286,12 +1286,12 @@ public class QICoreCommon_2_0_000(
 				string y_ = x_?.Value;
 				CqlDate z_ = context.Operators.ConvertStringToDate(y_);
 				DataType aa_ = condition?.Abatement;
-				object ab_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object ab_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate ac_ = context.Operators.Add(z_, ab_ as CqlQuantity);
 				Date ae_ = w_?.BirthDateElement;
 				string af_ = ae_?.Value;
 				CqlDate ag_ = context.Operators.ConvertStringToDate(af_);
-				object ai_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object ai_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate aj_ = context.Operators.Add(ag_, ai_ as CqlQuantity);
 				CqlQuantity ak_ = context.Operators.Quantity(1m, "year");
 				CqlDate al_ = context.Operators.Add(aj_, ak_);
@@ -1301,12 +1301,12 @@ public class QICoreCommon_2_0_000(
 				Date aq_ = w_?.BirthDateElement;
 				string ar_ = aq_?.Value;
 				CqlDate as_ = context.Operators.ConvertStringToDate(ar_);
-				object au_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object au_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate av_ = context.Operators.Add(as_, au_ as CqlQuantity);
 				Date ax_ = w_?.BirthDateElement;
 				string ay_ = ax_?.Value;
 				CqlDate az_ = context.Operators.ConvertStringToDate(ay_);
-				object bb_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object bb_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate bc_ = context.Operators.Add(az_, bb_ as CqlQuantity);
 				CqlDate be_ = context.Operators.Add(bc_, ak_);
 				CqlInterval<CqlDate> bf_ = context.Operators.Interval(av_, be_, true, false);
@@ -1315,12 +1315,12 @@ public class QICoreCommon_2_0_000(
 				Date bj_ = w_?.BirthDateElement;
 				string bk_ = bj_?.Value;
 				CqlDate bl_ = context.Operators.ConvertStringToDate(bk_);
-				object bn_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object bn_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate bo_ = context.Operators.Add(bl_, bn_ as CqlQuantity);
 				Date bq_ = w_?.BirthDateElement;
 				string br_ = bq_?.Value;
 				CqlDate bs_ = context.Operators.ConvertStringToDate(br_);
-				object bu_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object bu_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate bv_ = context.Operators.Add(bs_, bu_ as CqlQuantity);
 				CqlDate bx_ = context.Operators.Add(bv_, ak_);
 				CqlInterval<CqlDate> by_ = context.Operators.Interval(bo_, bx_, true, false);
@@ -1328,12 +1328,12 @@ public class QICoreCommon_2_0_000(
 				Date cb_ = w_?.BirthDateElement;
 				string cc_ = cb_?.Value;
 				CqlDate cd_ = context.Operators.ConvertStringToDate(cc_);
-				object cf_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object cf_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate cg_ = context.Operators.Add(cd_, cf_ as CqlQuantity);
 				Date ci_ = w_?.BirthDateElement;
 				string cj_ = ci_?.Value;
 				CqlDate ck_ = context.Operators.ConvertStringToDate(cj_);
-				object cm_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object cm_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate cn_ = context.Operators.Add(ck_, cm_ as CqlQuantity);
 				CqlDate cp_ = context.Operators.Add(cn_, ak_);
 				CqlInterval<CqlDate> cq_ = context.Operators.Interval(cg_, cp_, true, false);
@@ -1349,13 +1349,13 @@ public class QICoreCommon_2_0_000(
 				string cv_ = cu_?.Value;
 				CqlDate cw_ = context.Operators.ConvertStringToDate(cv_);
 				DataType cx_ = condition?.Abatement;
-				object cy_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object cy_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object cz_ = context.Operators.LateBoundProperty<object>(cy_, "low");
 				CqlDate da_ = context.Operators.Add(cw_, cz_ as CqlQuantity);
 				Date dc_ = ct_?.BirthDateElement;
 				string dd_ = dc_?.Value;
 				CqlDate de_ = context.Operators.ConvertStringToDate(dd_);
-				object dg_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object dg_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object dh_ = context.Operators.LateBoundProperty<object>(dg_, "high");
 				CqlDate di_ = context.Operators.Add(de_, dh_ as CqlQuantity);
 				CqlQuantity dj_ = context.Operators.Quantity(1m, "year");
@@ -1366,13 +1366,13 @@ public class QICoreCommon_2_0_000(
 				Date dp_ = ct_?.BirthDateElement;
 				string dq_ = dp_?.Value;
 				CqlDate dr_ = context.Operators.ConvertStringToDate(dq_);
-				object dt_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object dt_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object du_ = context.Operators.LateBoundProperty<object>(dt_, "low");
 				CqlDate dv_ = context.Operators.Add(dr_, du_ as CqlQuantity);
 				Date dx_ = ct_?.BirthDateElement;
 				string dy_ = dx_?.Value;
 				CqlDate dz_ = context.Operators.ConvertStringToDate(dy_);
-				object eb_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object eb_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object ec_ = context.Operators.LateBoundProperty<object>(eb_, "high");
 				CqlDate ed_ = context.Operators.Add(dz_, ec_ as CqlQuantity);
 				CqlDate ef_ = context.Operators.Add(ed_, dj_);
@@ -1382,13 +1382,13 @@ public class QICoreCommon_2_0_000(
 				Date ek_ = ct_?.BirthDateElement;
 				string el_ = ek_?.Value;
 				CqlDate em_ = context.Operators.ConvertStringToDate(el_);
-				object eo_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object eo_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object ep_ = context.Operators.LateBoundProperty<object>(eo_, "low");
 				CqlDate eq_ = context.Operators.Add(em_, ep_ as CqlQuantity);
 				Date es_ = ct_?.BirthDateElement;
 				string et_ = es_?.Value;
 				CqlDate eu_ = context.Operators.ConvertStringToDate(et_);
-				object ew_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object ew_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object ex_ = context.Operators.LateBoundProperty<object>(ew_, "high");
 				CqlDate ey_ = context.Operators.Add(eu_, ex_ as CqlQuantity);
 				CqlDate fa_ = context.Operators.Add(ey_, dj_);
@@ -1397,13 +1397,13 @@ public class QICoreCommon_2_0_000(
 				Date fe_ = ct_?.BirthDateElement;
 				string ff_ = fe_?.Value;
 				CqlDate fg_ = context.Operators.ConvertStringToDate(ff_);
-				object fi_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object fi_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object fj_ = context.Operators.LateBoundProperty<object>(fi_, "low");
 				CqlDate fk_ = context.Operators.Add(fg_, fj_ as CqlQuantity);
 				Date fm_ = ct_?.BirthDateElement;
 				string fn_ = fm_?.Value;
 				CqlDate fo_ = context.Operators.ConvertStringToDate(fn_);
-				object fq_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object fq_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object fr_ = context.Operators.LateBoundProperty<object>(fq_, "high");
 				CqlDate fs_ = context.Operators.Add(fo_, fr_ as CqlQuantity);
 				CqlDate fu_ = context.Operators.Add(fs_, dj_);
@@ -1416,9 +1416,9 @@ public class QICoreCommon_2_0_000(
 			else if (e_())
 			{
 				DataType fy_ = condition?.Abatement;
-				object fz_ = _FHIRHelpers_4_3_000.ToValue(context, fy_);
+				object fz_ = fhirHelpers_4_3_000.ToValue(context, fy_);
 				object ga_ = context.Operators.LateBoundProperty<object>(fz_, "low");
-				object gc_ = _FHIRHelpers_4_3_000.ToValue(context, fy_);
+				object gc_ = fhirHelpers_4_3_000.ToValue(context, fy_);
 				object gd_ = context.Operators.LateBoundProperty<object>(gc_, "high");
 				CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, true, false);
 
@@ -1443,7 +1443,7 @@ public class QICoreCommon_2_0_000(
 			bool b_()
 			{
 				DataType f_ = condition?.Abatement;
-				object g_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
+				object g_ = fhirHelpers_4_3_000.ToValue(context, f_);
 				bool h_ = g_ is CqlDateTime;
 
 				return h_;
@@ -1451,7 +1451,7 @@ public class QICoreCommon_2_0_000(
 			bool c_()
 			{
 				DataType i_ = condition?.Abatement;
-				object j_ = _FHIRHelpers_4_3_000.ToValue(context, i_);
+				object j_ = fhirHelpers_4_3_000.ToValue(context, i_);
 				bool k_ = j_ is CqlQuantity;
 
 				return k_;
@@ -1459,7 +1459,7 @@ public class QICoreCommon_2_0_000(
 			bool d_()
 			{
 				DataType l_ = condition?.Abatement;
-				object m_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
+				object m_ = fhirHelpers_4_3_000.ToValue(context, l_);
 				bool n_ = m_ is CqlInterval<CqlQuantity>;
 
 				return n_;
@@ -1467,7 +1467,7 @@ public class QICoreCommon_2_0_000(
 			bool e_()
 			{
 				DataType o_ = condition?.Abatement;
-				object p_ = _FHIRHelpers_4_3_000.ToValue(context, o_);
+				object p_ = fhirHelpers_4_3_000.ToValue(context, o_);
 				bool q_ = p_ is CqlInterval<CqlDateTime>;
 
 				return q_;
@@ -1475,8 +1475,8 @@ public class QICoreCommon_2_0_000(
 			if (b_())
 			{
 				DataType r_ = condition?.Abatement;
-				object s_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
-				object u_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
+				object s_ = fhirHelpers_4_3_000.ToValue(context, r_);
+				object u_ = fhirHelpers_4_3_000.ToValue(context, r_);
 				CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
 
 				return v_;
@@ -1488,12 +1488,12 @@ public class QICoreCommon_2_0_000(
 				string y_ = x_?.Value;
 				CqlDate z_ = context.Operators.ConvertStringToDate(y_);
 				DataType aa_ = condition?.Abatement;
-				object ab_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object ab_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate ac_ = context.Operators.Add(z_, ab_ as CqlQuantity);
 				Date ae_ = w_?.BirthDateElement;
 				string af_ = ae_?.Value;
 				CqlDate ag_ = context.Operators.ConvertStringToDate(af_);
-				object ai_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object ai_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate aj_ = context.Operators.Add(ag_, ai_ as CqlQuantity);
 				CqlQuantity ak_ = context.Operators.Quantity(1m, "year");
 				CqlDate al_ = context.Operators.Add(aj_, ak_);
@@ -1503,12 +1503,12 @@ public class QICoreCommon_2_0_000(
 				Date aq_ = w_?.BirthDateElement;
 				string ar_ = aq_?.Value;
 				CqlDate as_ = context.Operators.ConvertStringToDate(ar_);
-				object au_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object au_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate av_ = context.Operators.Add(as_, au_ as CqlQuantity);
 				Date ax_ = w_?.BirthDateElement;
 				string ay_ = ax_?.Value;
 				CqlDate az_ = context.Operators.ConvertStringToDate(ay_);
-				object bb_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object bb_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate bc_ = context.Operators.Add(az_, bb_ as CqlQuantity);
 				CqlDate be_ = context.Operators.Add(bc_, ak_);
 				CqlInterval<CqlDate> bf_ = context.Operators.Interval(av_, be_, true, false);
@@ -1517,12 +1517,12 @@ public class QICoreCommon_2_0_000(
 				Date bj_ = w_?.BirthDateElement;
 				string bk_ = bj_?.Value;
 				CqlDate bl_ = context.Operators.ConvertStringToDate(bk_);
-				object bn_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object bn_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate bo_ = context.Operators.Add(bl_, bn_ as CqlQuantity);
 				Date bq_ = w_?.BirthDateElement;
 				string br_ = bq_?.Value;
 				CqlDate bs_ = context.Operators.ConvertStringToDate(br_);
-				object bu_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object bu_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate bv_ = context.Operators.Add(bs_, bu_ as CqlQuantity);
 				CqlDate bx_ = context.Operators.Add(bv_, ak_);
 				CqlInterval<CqlDate> by_ = context.Operators.Interval(bo_, bx_, true, false);
@@ -1530,12 +1530,12 @@ public class QICoreCommon_2_0_000(
 				Date cb_ = w_?.BirthDateElement;
 				string cc_ = cb_?.Value;
 				CqlDate cd_ = context.Operators.ConvertStringToDate(cc_);
-				object cf_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object cf_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate cg_ = context.Operators.Add(cd_, cf_ as CqlQuantity);
 				Date ci_ = w_?.BirthDateElement;
 				string cj_ = ci_?.Value;
 				CqlDate ck_ = context.Operators.ConvertStringToDate(cj_);
-				object cm_ = _FHIRHelpers_4_3_000.ToValue(context, aa_);
+				object cm_ = fhirHelpers_4_3_000.ToValue(context, aa_);
 				CqlDate cn_ = context.Operators.Add(ck_, cm_ as CqlQuantity);
 				CqlDate cp_ = context.Operators.Add(cn_, ak_);
 				CqlInterval<CqlDate> cq_ = context.Operators.Interval(cg_, cp_, true, false);
@@ -1551,13 +1551,13 @@ public class QICoreCommon_2_0_000(
 				string cv_ = cu_?.Value;
 				CqlDate cw_ = context.Operators.ConvertStringToDate(cv_);
 				DataType cx_ = condition?.Abatement;
-				object cy_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object cy_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object cz_ = context.Operators.LateBoundProperty<object>(cy_, "low");
 				CqlDate da_ = context.Operators.Add(cw_, cz_ as CqlQuantity);
 				Date dc_ = ct_?.BirthDateElement;
 				string dd_ = dc_?.Value;
 				CqlDate de_ = context.Operators.ConvertStringToDate(dd_);
-				object dg_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object dg_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object dh_ = context.Operators.LateBoundProperty<object>(dg_, "high");
 				CqlDate di_ = context.Operators.Add(de_, dh_ as CqlQuantity);
 				CqlQuantity dj_ = context.Operators.Quantity(1m, "year");
@@ -1568,13 +1568,13 @@ public class QICoreCommon_2_0_000(
 				Date dp_ = ct_?.BirthDateElement;
 				string dq_ = dp_?.Value;
 				CqlDate dr_ = context.Operators.ConvertStringToDate(dq_);
-				object dt_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object dt_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object du_ = context.Operators.LateBoundProperty<object>(dt_, "low");
 				CqlDate dv_ = context.Operators.Add(dr_, du_ as CqlQuantity);
 				Date dx_ = ct_?.BirthDateElement;
 				string dy_ = dx_?.Value;
 				CqlDate dz_ = context.Operators.ConvertStringToDate(dy_);
-				object eb_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object eb_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object ec_ = context.Operators.LateBoundProperty<object>(eb_, "high");
 				CqlDate ed_ = context.Operators.Add(dz_, ec_ as CqlQuantity);
 				CqlDate ef_ = context.Operators.Add(ed_, dj_);
@@ -1584,13 +1584,13 @@ public class QICoreCommon_2_0_000(
 				Date ek_ = ct_?.BirthDateElement;
 				string el_ = ek_?.Value;
 				CqlDate em_ = context.Operators.ConvertStringToDate(el_);
-				object eo_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object eo_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object ep_ = context.Operators.LateBoundProperty<object>(eo_, "low");
 				CqlDate eq_ = context.Operators.Add(em_, ep_ as CqlQuantity);
 				Date es_ = ct_?.BirthDateElement;
 				string et_ = es_?.Value;
 				CqlDate eu_ = context.Operators.ConvertStringToDate(et_);
-				object ew_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object ew_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object ex_ = context.Operators.LateBoundProperty<object>(ew_, "high");
 				CqlDate ey_ = context.Operators.Add(eu_, ex_ as CqlQuantity);
 				CqlDate fa_ = context.Operators.Add(ey_, dj_);
@@ -1599,13 +1599,13 @@ public class QICoreCommon_2_0_000(
 				Date fe_ = ct_?.BirthDateElement;
 				string ff_ = fe_?.Value;
 				CqlDate fg_ = context.Operators.ConvertStringToDate(ff_);
-				object fi_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object fi_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object fj_ = context.Operators.LateBoundProperty<object>(fi_, "low");
 				CqlDate fk_ = context.Operators.Add(fg_, fj_ as CqlQuantity);
 				Date fm_ = ct_?.BirthDateElement;
 				string fn_ = fm_?.Value;
 				CqlDate fo_ = context.Operators.ConvertStringToDate(fn_);
-				object fq_ = _FHIRHelpers_4_3_000.ToValue(context, cx_);
+				object fq_ = fhirHelpers_4_3_000.ToValue(context, cx_);
 				object fr_ = context.Operators.LateBoundProperty<object>(fq_, "high");
 				CqlDate fs_ = context.Operators.Add(fo_, fr_ as CqlQuantity);
 				CqlDate fu_ = context.Operators.Add(fs_, dj_);
@@ -1618,9 +1618,9 @@ public class QICoreCommon_2_0_000(
 			else if (e_())
 			{
 				DataType fy_ = condition?.Abatement;
-				object fz_ = _FHIRHelpers_4_3_000.ToValue(context, fy_);
+				object fz_ = fhirHelpers_4_3_000.ToValue(context, fy_);
 				object ga_ = context.Operators.LateBoundProperty<object>(fz_, "low");
-				object gc_ = _FHIRHelpers_4_3_000.ToValue(context, fy_);
+				object gc_ = fhirHelpers_4_3_000.ToValue(context, fy_);
 				object gd_ = context.Operators.LateBoundProperty<object>(gc_, "high");
 				CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, true, false);
 
@@ -1646,16 +1646,16 @@ public class QICoreCommon_2_0_000(
 			bool b_()
 			{
 				CodeableConcept c_ = condition?.ClinicalStatus;
-				CqlConcept d_ = _FHIRHelpers_4_3_000.ToConcept(context, c_);
+				CqlConcept d_ = fhirHelpers_4_3_000.ToConcept(context, c_);
 				CqlCode e_ = this.active(context);
 				CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
 				bool? g_ = context.Operators.Equivalent(d_, f_);
-				CqlConcept i_ = _FHIRHelpers_4_3_000.ToConcept(context, c_);
+				CqlConcept i_ = fhirHelpers_4_3_000.ToConcept(context, c_);
 				CqlCode j_ = this.recurrence(context);
 				CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
 				bool? l_ = context.Operators.Equivalent(i_, k_);
 				bool? m_ = context.Operators.Or(g_, l_);
-				CqlConcept o_ = _FHIRHelpers_4_3_000.ToConcept(context, c_);
+				CqlConcept o_ = fhirHelpers_4_3_000.ToConcept(context, c_);
 				CqlCode p_ = this.relapse(context);
 				CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
 				bool? r_ = context.Operators.Equivalent(o_, q_);
@@ -1666,7 +1666,7 @@ public class QICoreCommon_2_0_000(
 			if (b_())
 			{
 				DataType t_ = condition?.Onset;
-				object u_ = _FHIRHelpers_4_3_000.ToValue(context, t_);
+				object u_ = fhirHelpers_4_3_000.ToValue(context, t_);
 				CqlInterval<CqlDateTime> v_ = this.ToInterval(context, u_);
 				CqlDateTime w_ = context.Operators.Start(v_);
 				CqlInterval<CqlDateTime> x_ = this.ToAbatementInterval(context, condition);
@@ -1689,7 +1689,7 @@ public class QICoreCommon_2_0_000(
 						if (abatementDate is null)
 						{
 							DataType ah_ = condition?.Onset;
-							object ai_ = _FHIRHelpers_4_3_000.ToValue(context, ah_);
+							object ai_ = fhirHelpers_4_3_000.ToValue(context, ah_);
 							CqlInterval<CqlDateTime> aj_ = this.ToInterval(context, ai_);
 							CqlDateTime ak_ = context.Operators.Start(aj_);
 							CqlInterval<CqlDateTime> al_ = context.Operators.Interval(ak_, abatementDate, true, false);
@@ -1699,7 +1699,7 @@ public class QICoreCommon_2_0_000(
 						else
 						{
 							DataType am_ = condition?.Onset;
-							object an_ = _FHIRHelpers_4_3_000.ToValue(context, am_);
+							object an_ = fhirHelpers_4_3_000.ToValue(context, am_);
 							CqlInterval<CqlDateTime> ao_ = this.ToInterval(context, an_);
 							CqlDateTime ap_ = context.Operators.Start(ao_);
 							CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(ap_, abatementDate, true, true);
@@ -1730,16 +1730,16 @@ public class QICoreCommon_2_0_000(
 			bool b_()
 			{
 				CodeableConcept c_ = condition?.ClinicalStatus;
-				CqlConcept d_ = _FHIRHelpers_4_3_000.ToConcept(context, c_);
+				CqlConcept d_ = fhirHelpers_4_3_000.ToConcept(context, c_);
 				CqlCode e_ = this.active(context);
 				CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
 				bool? g_ = context.Operators.Equivalent(d_, f_);
-				CqlConcept i_ = _FHIRHelpers_4_3_000.ToConcept(context, c_);
+				CqlConcept i_ = fhirHelpers_4_3_000.ToConcept(context, c_);
 				CqlCode j_ = this.recurrence(context);
 				CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
 				bool? l_ = context.Operators.Equivalent(i_, k_);
 				bool? m_ = context.Operators.Or(g_, l_);
-				CqlConcept o_ = _FHIRHelpers_4_3_000.ToConcept(context, c_);
+				CqlConcept o_ = fhirHelpers_4_3_000.ToConcept(context, c_);
 				CqlCode p_ = this.relapse(context);
 				CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
 				bool? r_ = context.Operators.Equivalent(o_, q_);
@@ -1750,7 +1750,7 @@ public class QICoreCommon_2_0_000(
 			if (b_())
 			{
 				DataType t_ = condition?.Onset;
-				object u_ = _FHIRHelpers_4_3_000.ToValue(context, t_);
+				object u_ = fhirHelpers_4_3_000.ToValue(context, t_);
 				CqlInterval<CqlDateTime> v_ = this.toInterval(context, u_);
 				CqlDateTime w_ = context.Operators.Start(v_);
 				CqlInterval<CqlDateTime> x_ = this.abatementInterval(context, condition);
@@ -1773,7 +1773,7 @@ public class QICoreCommon_2_0_000(
 						if (abatementDate is null)
 						{
 							DataType ah_ = condition?.Onset;
-							object ai_ = _FHIRHelpers_4_3_000.ToValue(context, ah_);
+							object ai_ = fhirHelpers_4_3_000.ToValue(context, ah_);
 							CqlInterval<CqlDateTime> aj_ = this.ToInterval(context, ai_);
 							CqlDateTime ak_ = context.Operators.Start(aj_);
 							CqlInterval<CqlDateTime> al_ = context.Operators.Interval(ak_, abatementDate, true, false);
@@ -1783,7 +1783,7 @@ public class QICoreCommon_2_0_000(
 						else
 						{
 							DataType am_ = condition?.Onset;
-							object an_ = _FHIRHelpers_4_3_000.ToValue(context, am_);
+							object an_ = fhirHelpers_4_3_000.ToValue(context, am_);
 							CqlInterval<CqlDateTime> ao_ = this.ToInterval(context, an_);
 							CqlDateTime ap_ = context.Operators.Start(ao_);
 							CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(ap_, abatementDate, true, true);

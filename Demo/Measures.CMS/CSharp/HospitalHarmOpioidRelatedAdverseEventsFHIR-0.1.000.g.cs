@@ -16,10 +16,10 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HospitalHarmOpioidRelatedAdverseEventsFHIR", "0.1.000")]
 public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000)
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000)
 {
 
     [CqlDeclaration("Emergency Department Visit")]
@@ -112,12 +112,12 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 			string g_ = f_?.Value;
 			CqlDate h_ = context.Operators.ConvertStringToDate(g_);
 			Period i_ = InpatientEncounter?.Period;
-			CqlInterval<CqlDateTime> j_ = _FHIRHelpers_4_3_000.ToInterval(context, i_);
+			CqlInterval<CqlDateTime> j_ = fhirHelpers_4_3_000.ToInterval(context, i_);
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
 			int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
 			bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
-			CqlInterval<CqlDateTime> p_ = _FHIRHelpers_4_3_000.ToInterval(context, i_);
+			CqlInterval<CqlDateTime> p_ = fhirHelpers_4_3_000.ToInterval(context, i_);
 			CqlDateTime q_ = context.Operators.End(p_);
 			CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
 			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
@@ -171,20 +171,20 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 			bool? e_(MedicationAdministration OpioidGiven)
 			{
 				DataType i_ = OpioidGiven?.Effective;
-				object j_ = _FHIRHelpers_4_3_000.ToValue(context, i_);
-				CqlInterval<CqlDateTime> k_ = _QICoreCommon_2_0_000.ToInterval(context, j_);
+				object j_ = fhirHelpers_4_3_000.ToValue(context, i_);
+				CqlInterval<CqlDateTime> k_ = qiCoreCommon_2_0_000.ToInterval(context, j_);
 				CqlDateTime l_ = context.Operators.Start(k_);
-				CqlInterval<CqlDateTime> m_ = _CQMCommon_2_0_000.HospitalizationWithObservation(context, InpatientEncounter);
+				CqlInterval<CqlDateTime> m_ = cqmCommon_2_0_000.HospitalizationWithObservation(context, InpatientEncounter);
 				bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, default);
 				List<Encounter.LocationComponent> o_ = InpatientEncounter?.Location;
 				bool? p_(Encounter.LocationComponent EncounterLocation)
 				{
 					ResourceReference u_ = EncounterLocation?.Location;
-					Location v_ = _CQMCommon_2_0_000.GetLocation(context, u_);
+					Location v_ = cqmCommon_2_0_000.GetLocation(context, u_);
 					List<CodeableConcept> w_ = v_?.Type;
 					CqlConcept x_(CodeableConcept @this)
 					{
-						CqlConcept aj_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+						CqlConcept aj_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 						return aj_;
 					};
@@ -192,11 +192,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 					CqlValueSet z_ = this.Operating_Room_Suite(context);
 					bool? aa_ = context.Operators.ConceptsInValueSet(y_, z_);
 					DataType ab_ = OpioidGiven?.Effective;
-					object ac_ = _FHIRHelpers_4_3_000.ToValue(context, ab_);
-					CqlInterval<CqlDateTime> ad_ = _QICoreCommon_2_0_000.ToInterval(context, ac_);
+					object ac_ = fhirHelpers_4_3_000.ToValue(context, ab_);
+					CqlInterval<CqlDateTime> ad_ = qiCoreCommon_2_0_000.ToInterval(context, ac_);
 					CqlDateTime ae_ = context.Operators.Start(ad_);
 					Period af_ = EncounterLocation?.Period;
-					CqlInterval<CqlDateTime> ag_ = _FHIRHelpers_4_3_000.ToInterval(context, af_);
+					CqlInterval<CqlDateTime> ag_ = fhirHelpers_4_3_000.ToInterval(context, af_);
 					bool? ah_ = context.Operators.In<CqlDateTime>(ae_, ag_, default);
 					bool? ai_ = context.Operators.And(aa_, ah_);
 
@@ -283,11 +283,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 			bool? m_(Encounter.LocationComponent EncounterLocation)
 			{
 				ResourceReference bh_ = EncounterLocation?.Location;
-				Location bi_ = _CQMCommon_2_0_000.GetLocation(context, bh_);
+				Location bi_ = cqmCommon_2_0_000.GetLocation(context, bh_);
 				List<CodeableConcept> bj_ = bi_?.Type;
 				CqlConcept bk_(CodeableConcept @this)
 				{
-					CqlConcept bw_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+					CqlConcept bw_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 					return bw_;
 				};
@@ -295,11 +295,11 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 				CqlValueSet bm_ = this.Operating_Room_Suite(context);
 				bool? bn_ = context.Operators.ConceptsInValueSet(bl_, bm_);
 				DataType bo_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven?.Effective;
-				object bp_ = _FHIRHelpers_4_3_000.ToValue(context, bo_);
-				CqlInterval<CqlDateTime> bq_ = _QICoreCommon_2_0_000.ToInterval(context, bp_);
+				object bp_ = fhirHelpers_4_3_000.ToValue(context, bo_);
+				CqlInterval<CqlDateTime> bq_ = qiCoreCommon_2_0_000.ToInterval(context, bp_);
 				CqlDateTime br_ = context.Operators.Start(bq_);
 				Period bs_ = EncounterLocation?.Period;
-				CqlInterval<CqlDateTime> bt_ = _FHIRHelpers_4_3_000.ToInterval(context, bs_);
+				CqlInterval<CqlDateTime> bt_ = fhirHelpers_4_3_000.ToInterval(context, bs_);
 				bool? bu_ = context.Operators.In<CqlDateTime>(br_, bt_, default);
 				bool? bv_ = context.Operators.And(bn_, bu_);
 
@@ -309,39 +309,39 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 			bool? o_ = context.Operators.Exists<Encounter.LocationComponent>(n_);
 			bool? p_ = context.Operators.Not(o_);
 			DataType q_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven?.Effective;
-			object r_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
-			CqlInterval<CqlDateTime> s_ = _QICoreCommon_2_0_000.ToInterval(context, r_);
+			object r_ = fhirHelpers_4_3_000.ToValue(context, q_);
+			CqlInterval<CqlDateTime> s_ = qiCoreCommon_2_0_000.ToInterval(context, r_);
 			CqlDateTime t_ = context.Operators.Start(s_);
-			CqlInterval<CqlDateTime> u_ = _CQMCommon_2_0_000.HospitalizationWithObservation(context, tuple_dioqpvxlkifmhgtiyeejrusad?.EncounterWithQualifyingAge);
+			CqlInterval<CqlDateTime> u_ = cqmCommon_2_0_000.HospitalizationWithObservation(context, tuple_dioqpvxlkifmhgtiyeejrusad?.EncounterWithQualifyingAge);
 			bool? v_ = context.Operators.In<CqlDateTime>(t_, u_, default);
 			DataType w_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidGiven?.Effective;
-			object x_ = _FHIRHelpers_4_3_000.ToValue(context, w_);
-			CqlInterval<CqlDateTime> y_ = _QICoreCommon_2_0_000.ToInterval(context, x_);
+			object x_ = fhirHelpers_4_3_000.ToValue(context, w_);
+			CqlInterval<CqlDateTime> y_ = qiCoreCommon_2_0_000.ToInterval(context, x_);
 			CqlDateTime z_ = context.Operators.Start(y_);
 			bool? ab_ = context.Operators.In<CqlDateTime>(z_, u_, default);
 			bool? ac_ = context.Operators.And(v_, ab_);
-			object ae_ = _FHIRHelpers_4_3_000.ToValue(context, w_);
-			CqlInterval<CqlDateTime> af_ = _QICoreCommon_2_0_000.ToInterval(context, ae_);
+			object ae_ = fhirHelpers_4_3_000.ToValue(context, w_);
+			CqlInterval<CqlDateTime> af_ = qiCoreCommon_2_0_000.ToInterval(context, ae_);
 			CqlDateTime ag_ = context.Operators.End(af_);
-			object ai_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
-			CqlInterval<CqlDateTime> aj_ = _QICoreCommon_2_0_000.ToInterval(context, ai_);
+			object ai_ = fhirHelpers_4_3_000.ToValue(context, q_);
+			CqlInterval<CqlDateTime> aj_ = qiCoreCommon_2_0_000.ToInterval(context, ai_);
 			CqlDateTime ak_ = context.Operators.Start(aj_);
 			CqlQuantity al_ = context.Operators.Quantity(12m, "hours");
 			CqlDateTime am_ = context.Operators.Subtract(ak_, al_);
-			object ao_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
-			CqlInterval<CqlDateTime> ap_ = _QICoreCommon_2_0_000.ToInterval(context, ao_);
+			object ao_ = fhirHelpers_4_3_000.ToValue(context, q_);
+			CqlInterval<CqlDateTime> ap_ = qiCoreCommon_2_0_000.ToInterval(context, ao_);
 			CqlDateTime aq_ = context.Operators.Start(ap_);
 			CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(am_, aq_, true, false);
 			bool? as_ = context.Operators.In<CqlDateTime>(ag_, ar_, default);
-			object au_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
-			CqlInterval<CqlDateTime> av_ = _QICoreCommon_2_0_000.ToInterval(context, au_);
+			object au_ = fhirHelpers_4_3_000.ToValue(context, q_);
+			CqlInterval<CqlDateTime> av_ = qiCoreCommon_2_0_000.ToInterval(context, au_);
 			CqlDateTime aw_ = context.Operators.Start(av_);
 			bool? ax_ = context.Operators.Not((bool?)(aw_ is null));
 			bool? ay_ = context.Operators.And(as_, ax_);
 			bool? az_ = context.Operators.And(ac_, ay_);
 			MedicationAdministration.DosageComponent ba_ = tuple_dioqpvxlkifmhgtiyeejrusad?.OpioidAntagonistGiven?.Dosage;
 			CodeableConcept bb_ = ba_?.Route;
-			CqlConcept bc_ = _FHIRHelpers_4_3_000.ToConcept(context, bb_);
+			CqlConcept bc_ = fhirHelpers_4_3_000.ToConcept(context, bb_);
 			CqlValueSet bd_ = this.Routes_of_Administration_for_Opioid_Antagonists(context);
 			bool? be_ = context.Operators.ConceptInValueSet(bc_, bd_);
 			bool? bf_ = context.Operators.And(az_, be_);
@@ -368,7 +368,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -376,7 +376,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -384,7 +384,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -392,7 +392,7 @@ public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

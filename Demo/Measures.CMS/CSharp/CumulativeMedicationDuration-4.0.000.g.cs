@@ -16,8 +16,8 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CumulativeMedicationDuration", "4.0.000")]
 public class CumulativeMedicationDuration_4_0_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000)
 {
 
     [CqlDeclaration("HS")]
@@ -1287,7 +1287,7 @@ public class CumulativeMedicationDuration_4_0_000(
 					Timing j_ = i_?.Timing;
 					Timing.RepeatComponent k_ = j_?.Repeat;
 					DataType l_ = k_?.Bounds;
-					object m_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
+					object m_ = fhirHelpers_4_3_000.ToValue(context, l_);
 					CqlDateTime n_ = context.Operators.Start(m_ as CqlInterval<CqlDateTime>);
 					CqlDate o_ = context.Operators.DateFrom(n_);
 					FhirDateTime p_ = R?.AuthoredOnElement;
@@ -1295,28 +1295,28 @@ public class CumulativeMedicationDuration_4_0_000(
 					CqlDate r_ = context.Operators.DateFrom(q_);
 					MedicationRequest.DispenseRequestComponent s_ = R?.DispenseRequest;
 					Period t_ = s_?.ValidityPeriod;
-					CqlInterval<CqlDateTime> u_ = _FHIRHelpers_4_3_000.ToInterval(context, t_);
+					CqlInterval<CqlDateTime> u_ = fhirHelpers_4_3_000.ToInterval(context, t_);
 					CqlDateTime v_ = context.Operators.Start(u_);
 					CqlDate w_ = context.Operators.DateFrom(v_);
 					bool? x_ = context.Operators.Not((bool?)(((o_ ?? r_) ?? w_) is null));
 					Duration z_ = s_?.ExpectedSupplyDuration;
-					CqlQuantity aa_ = _FHIRHelpers_4_3_000.ToQuantity(context, z_);
+					CqlQuantity aa_ = fhirHelpers_4_3_000.ToQuantity(context, z_);
 					CqlQuantity ab_ = context.Operators.ConvertQuantity(aa_, "d");
 					decimal? ac_ = ab_?.value;
 					Quantity ae_ = s_?.Quantity;
-					CqlQuantity af_ = _FHIRHelpers_4_3_000.ToQuantity(context, ae_);
+					CqlQuantity af_ = fhirHelpers_4_3_000.ToQuantity(context, ae_);
 					decimal? ag_ = af_?.value;
 					Dosage ai_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)h_);
 					List<Dosage.DoseAndRateComponent> aj_ = ai_?.DoseAndRate;
 					Dosage.DoseAndRateComponent ak_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)aj_);
 					DataType al_ = ak_?.Dose;
-					object am_ = _FHIRHelpers_4_3_000.ToValue(context, al_);
+					object am_ = fhirHelpers_4_3_000.ToValue(context, al_);
 					CqlQuantity an_ = context.Operators.End(am_ as CqlInterval<CqlQuantity>);
 					Dosage ap_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)h_);
 					List<Dosage.DoseAndRateComponent> aq_ = ap_?.DoseAndRate;
 					Dosage.DoseAndRateComponent ar_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)aq_);
 					DataType as_ = ar_?.Dose;
-					object at_ = _FHIRHelpers_4_3_000.ToValue(context, as_);
+					object at_ = fhirHelpers_4_3_000.ToValue(context, as_);
 					decimal? au_ = (an_ ?? at_ as CqlQuantity)?.value;
 					Dosage aw_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)h_);
 					Timing ax_ = aw_?.Timing;
@@ -1367,7 +1367,7 @@ public class CumulativeMedicationDuration_4_0_000(
 					Timing cq_ = cp_?.Timing;
 					Timing.RepeatComponent cr_ = cq_?.Repeat;
 					DataType cs_ = cr_?.Bounds;
-					object ct_ = _FHIRHelpers_4_3_000.ToValue(context, cs_);
+					object ct_ = fhirHelpers_4_3_000.ToValue(context, cs_);
 					CqlDateTime cu_ = context.Operators.Start(ct_ as CqlInterval<CqlDateTime>);
 					CqlDate cv_ = context.Operators.DateFrom(cu_);
 					FhirDateTime cw_ = R?.AuthoredOnElement;
@@ -1375,7 +1375,7 @@ public class CumulativeMedicationDuration_4_0_000(
 					CqlDate cy_ = context.Operators.DateFrom(cx_);
 					MedicationRequest.DispenseRequestComponent cz_ = R?.DispenseRequest;
 					Period da_ = cz_?.ValidityPeriod;
-					CqlInterval<CqlDateTime> db_ = _FHIRHelpers_4_3_000.ToInterval(context, da_);
+					CqlInterval<CqlDateTime> db_ = fhirHelpers_4_3_000.ToInterval(context, da_);
 					CqlDateTime dc_ = context.Operators.Start(db_);
 					CqlDate dd_ = context.Operators.DateFrom(dc_);
 					bool? de_ = context.Operators.Not((bool?)(((cv_ ?? cy_) ?? dd_) is null));
@@ -1383,7 +1383,7 @@ public class CumulativeMedicationDuration_4_0_000(
 					Timing dh_ = dg_?.Timing;
 					Timing.RepeatComponent di_ = dh_?.Repeat;
 					DataType dj_ = di_?.Bounds;
-					object dk_ = _FHIRHelpers_4_3_000.ToValue(context, dj_);
+					object dk_ = fhirHelpers_4_3_000.ToValue(context, dj_);
 					CqlDateTime dl_ = (dk_ as CqlInterval<CqlDateTime>)?.high;
 					bool? dm_ = context.Operators.Not((bool?)(dl_ is null));
 					bool? dn_ = context.Operators.And(de_, dm_);
@@ -1397,7 +1397,7 @@ public class CumulativeMedicationDuration_4_0_000(
 					Timing dq_ = dp_?.Timing;
 					Timing.RepeatComponent dr_ = dq_?.Repeat;
 					DataType ds_ = dr_?.Bounds;
-					object dt_ = _FHIRHelpers_4_3_000.ToValue(context, ds_);
+					object dt_ = fhirHelpers_4_3_000.ToValue(context, ds_);
 					CqlDateTime du_ = context.Operators.Start(dt_ as CqlInterval<CqlDateTime>);
 					CqlDate dv_ = context.Operators.DateFrom(du_);
 					FhirDateTime dw_ = R?.AuthoredOnElement;
@@ -1405,40 +1405,40 @@ public class CumulativeMedicationDuration_4_0_000(
 					CqlDate dy_ = context.Operators.DateFrom(dx_);
 					MedicationRequest.DispenseRequestComponent dz_ = R?.DispenseRequest;
 					Period ea_ = dz_?.ValidityPeriod;
-					CqlInterval<CqlDateTime> eb_ = _FHIRHelpers_4_3_000.ToInterval(context, ea_);
+					CqlInterval<CqlDateTime> eb_ = fhirHelpers_4_3_000.ToInterval(context, ea_);
 					CqlDateTime ec_ = context.Operators.Start(eb_);
 					CqlDate ed_ = context.Operators.DateFrom(ec_);
 					Dosage ef_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
 					Timing eg_ = ef_?.Timing;
 					Timing.RepeatComponent eh_ = eg_?.Repeat;
 					DataType ei_ = eh_?.Bounds;
-					object ej_ = _FHIRHelpers_4_3_000.ToValue(context, ei_);
+					object ej_ = fhirHelpers_4_3_000.ToValue(context, ei_);
 					CqlDateTime ek_ = context.Operators.Start(ej_ as CqlInterval<CqlDateTime>);
 					CqlDate el_ = context.Operators.DateFrom(ek_);
 					CqlDateTime en_ = context.Operators.Convert<CqlDateTime>(dw_);
 					CqlDate eo_ = context.Operators.DateFrom(en_);
 					Period eq_ = dz_?.ValidityPeriod;
-					CqlInterval<CqlDateTime> er_ = _FHIRHelpers_4_3_000.ToInterval(context, eq_);
+					CqlInterval<CqlDateTime> er_ = fhirHelpers_4_3_000.ToInterval(context, eq_);
 					CqlDateTime es_ = context.Operators.Start(er_);
 					CqlDate et_ = context.Operators.DateFrom(es_);
 					Duration ev_ = dz_?.ExpectedSupplyDuration;
-					CqlQuantity ew_ = _FHIRHelpers_4_3_000.ToQuantity(context, ev_);
+					CqlQuantity ew_ = fhirHelpers_4_3_000.ToQuantity(context, ev_);
 					CqlQuantity ex_ = context.Operators.ConvertQuantity(ew_, "d");
 					decimal? ey_ = ex_?.value;
 					Quantity fa_ = dz_?.Quantity;
-					CqlQuantity fb_ = _FHIRHelpers_4_3_000.ToQuantity(context, fa_);
+					CqlQuantity fb_ = fhirHelpers_4_3_000.ToQuantity(context, fa_);
 					decimal? fc_ = fb_?.value;
 					Dosage fe_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
 					List<Dosage.DoseAndRateComponent> ff_ = fe_?.DoseAndRate;
 					Dosage.DoseAndRateComponent fg_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ff_);
 					DataType fh_ = fg_?.Dose;
-					object fi_ = _FHIRHelpers_4_3_000.ToValue(context, fh_);
+					object fi_ = fhirHelpers_4_3_000.ToValue(context, fh_);
 					CqlQuantity fj_ = context.Operators.End(fi_ as CqlInterval<CqlQuantity>);
 					Dosage fl_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
 					List<Dosage.DoseAndRateComponent> fm_ = fl_?.DoseAndRate;
 					Dosage.DoseAndRateComponent fn_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)fm_);
 					DataType fo_ = fn_?.Dose;
-					object fp_ = _FHIRHelpers_4_3_000.ToValue(context, fo_);
+					object fp_ = fhirHelpers_4_3_000.ToValue(context, fo_);
 					decimal? fq_ = (fj_ ?? fp_ as CqlQuantity)?.value;
 					Dosage fs_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
 					Timing ft_ = fs_?.Timing;
@@ -1492,7 +1492,7 @@ public class CumulativeMedicationDuration_4_0_000(
 					Timing hp_ = ho_?.Timing;
 					Timing.RepeatComponent hq_ = hp_?.Repeat;
 					DataType hr_ = hq_?.Bounds;
-					object hs_ = _FHIRHelpers_4_3_000.ToValue(context, hr_);
+					object hs_ = fhirHelpers_4_3_000.ToValue(context, hr_);
 					CqlDateTime ht_ = context.Operators.Start(hs_ as CqlInterval<CqlDateTime>);
 					CqlDate hu_ = context.Operators.DateFrom(ht_);
 					FhirDateTime hv_ = R?.AuthoredOnElement;
@@ -1500,14 +1500,14 @@ public class CumulativeMedicationDuration_4_0_000(
 					CqlDate hx_ = context.Operators.DateFrom(hw_);
 					MedicationRequest.DispenseRequestComponent hy_ = R?.DispenseRequest;
 					Period hz_ = hy_?.ValidityPeriod;
-					CqlInterval<CqlDateTime> ia_ = _FHIRHelpers_4_3_000.ToInterval(context, hz_);
+					CqlInterval<CqlDateTime> ia_ = fhirHelpers_4_3_000.ToInterval(context, hz_);
 					CqlDateTime ib_ = context.Operators.Start(ia_);
 					CqlDate ic_ = context.Operators.DateFrom(ib_);
 					Dosage ie_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)hn_);
 					Timing if_ = ie_?.Timing;
 					Timing.RepeatComponent ig_ = if_?.Repeat;
 					DataType ih_ = ig_?.Bounds;
-					object ii_ = _FHIRHelpers_4_3_000.ToValue(context, ih_);
+					object ii_ = fhirHelpers_4_3_000.ToValue(context, ih_);
 					CqlDateTime ij_ = context.Operators.End(ii_ as CqlInterval<CqlDateTime>);
 					CqlDate ik_ = context.Operators.DateFrom(ij_);
 					CqlInterval<CqlDate> il_ = context.Operators.Interval((hu_ ?? hx_) ?? ic_, ik_, true, true);
@@ -1548,24 +1548,24 @@ public class CumulativeMedicationDuration_4_0_000(
 					CqlDate l_ = context.Operators.DateFrom(k_);
 					bool? m_ = context.Operators.Not((bool?)((i_ ?? l_) is null));
 					Quantity n_ = D?.DaysSupply;
-					CqlQuantity o_ = _FHIRHelpers_4_3_000.ToQuantity(context, n_);
+					CqlQuantity o_ = fhirHelpers_4_3_000.ToQuantity(context, n_);
 					CqlQuantity p_ = context.Operators.ConvertQuantity(o_, "d");
 					decimal? q_ = p_?.value;
 					Quantity r_ = D?.Quantity;
-					CqlQuantity s_ = _FHIRHelpers_4_3_000.ToQuantity(context, r_);
+					CqlQuantity s_ = fhirHelpers_4_3_000.ToQuantity(context, r_);
 					decimal? t_ = s_?.value;
 					List<Dosage> u_ = D?.DosageInstruction;
 					Dosage v_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)u_);
 					List<Dosage.DoseAndRateComponent> w_ = v_?.DoseAndRate;
 					Dosage.DoseAndRateComponent x_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)w_);
 					DataType y_ = x_?.Dose;
-					object z_ = _FHIRHelpers_4_3_000.ToValue(context, y_);
+					object z_ = fhirHelpers_4_3_000.ToValue(context, y_);
 					CqlQuantity aa_ = context.Operators.End(z_ as CqlInterval<CqlQuantity>);
 					Dosage ac_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)u_);
 					List<Dosage.DoseAndRateComponent> ad_ = ac_?.DoseAndRate;
 					Dosage.DoseAndRateComponent ae_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ad_);
 					DataType af_ = ae_?.Dose;
-					object ag_ = _FHIRHelpers_4_3_000.ToValue(context, af_);
+					object ag_ = fhirHelpers_4_3_000.ToValue(context, af_);
 					decimal? ah_ = (aa_ ?? ag_ as CqlQuantity)?.value;
 					Dosage aj_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)u_);
 					Timing ak_ = aj_?.Timing;
@@ -1617,24 +1617,24 @@ public class CumulativeMedicationDuration_4_0_000(
 					CqlDateTime cf_ = context.Operators.Convert<CqlDateTime>(by_);
 					CqlDate cg_ = context.Operators.DateFrom(cf_);
 					Quantity ch_ = D?.DaysSupply;
-					CqlQuantity ci_ = _FHIRHelpers_4_3_000.ToQuantity(context, ch_);
+					CqlQuantity ci_ = fhirHelpers_4_3_000.ToQuantity(context, ch_);
 					CqlQuantity cj_ = context.Operators.ConvertQuantity(ci_, "d");
 					decimal? ck_ = cj_?.value;
 					Quantity cl_ = D?.Quantity;
-					CqlQuantity cm_ = _FHIRHelpers_4_3_000.ToQuantity(context, cl_);
+					CqlQuantity cm_ = fhirHelpers_4_3_000.ToQuantity(context, cl_);
 					decimal? cn_ = cm_?.value;
 					List<Dosage> co_ = D?.DosageInstruction;
 					Dosage cp_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
 					List<Dosage.DoseAndRateComponent> cq_ = cp_?.DoseAndRate;
 					Dosage.DoseAndRateComponent cr_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)cq_);
 					DataType cs_ = cr_?.Dose;
-					object ct_ = _FHIRHelpers_4_3_000.ToValue(context, cs_);
+					object ct_ = fhirHelpers_4_3_000.ToValue(context, cs_);
 					CqlQuantity cu_ = context.Operators.End(ct_ as CqlInterval<CqlQuantity>);
 					Dosage cw_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
 					List<Dosage.DoseAndRateComponent> cx_ = cw_?.DoseAndRate;
 					Dosage.DoseAndRateComponent cy_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)cx_);
 					DataType cz_ = cy_?.Dose;
-					object da_ = _FHIRHelpers_4_3_000.ToValue(context, cz_);
+					object da_ = fhirHelpers_4_3_000.ToValue(context, cz_);
 					decimal? db_ = (cu_ ?? da_ as CqlQuantity)?.value;
 					Dosage dd_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
 					Timing de_ = dd_?.Timing;
@@ -1711,12 +1711,12 @@ public class CumulativeMedicationDuration_4_0_000(
 				bool f_()
 				{
 					DataType g_ = Administration?.Effective;
-					object h_ = _FHIRHelpers_4_3_000.ToValue(context, g_);
+					object h_ = fhirHelpers_4_3_000.ToValue(context, g_);
 					CqlDateTime i_ = context.Operators.Start(h_ as CqlInterval<CqlDateTime>);
 					CqlDate j_ = context.Operators.DateFrom(i_);
 					bool? k_ = context.Operators.Not((bool?)(j_ is null));
 					DataType l_ = Administration?.Medication;
-					object m_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
+					object m_ = fhirHelpers_4_3_000.ToValue(context, l_);
 					CqlQuantity n_ = this.TherapeuticDuration(context, m_ as CqlConcept);
 					bool? o_ = context.Operators.Not((bool?)(n_ is null));
 					bool? p_ = context.Operators.And(k_, o_);
@@ -1726,14 +1726,14 @@ public class CumulativeMedicationDuration_4_0_000(
 				if (f_())
 				{
 					DataType q_ = Administration?.Effective;
-					object r_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
+					object r_ = fhirHelpers_4_3_000.ToValue(context, q_);
 					CqlDateTime s_ = context.Operators.Start(r_ as CqlInterval<CqlDateTime>);
 					CqlDate t_ = context.Operators.DateFrom(s_);
-					object v_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
+					object v_ = fhirHelpers_4_3_000.ToValue(context, q_);
 					CqlDateTime w_ = context.Operators.Start(v_ as CqlInterval<CqlDateTime>);
 					CqlDate x_ = context.Operators.DateFrom(w_);
 					DataType y_ = Administration?.Medication;
-					object z_ = _FHIRHelpers_4_3_000.ToValue(context, y_);
+					object z_ = fhirHelpers_4_3_000.ToValue(context, y_);
 					CqlQuantity aa_ = this.TherapeuticDuration(context, z_ as CqlConcept);
 					CqlDate ab_ = context.Operators.Add(x_, aa_);
 					CqlQuantity ac_ = context.Operators.ConvertIntegerToQuantity(1);

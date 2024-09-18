@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public class SupplementalDataElementsFHIR4_2_0_000(
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001)
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001)
 {
 
     [CqlDeclaration("Ethnicity")]
@@ -75,7 +75,7 @@ public class SupplementalDataElementsFHIR4_2_0_000(
 		{
 			string o_ = Extension?.Url;
 			FhirUri p_ = context.Operators.Convert<FhirUri>(o_);
-			string q_ = _FHIRHelpers_4_0_001.ToString(context, p_);
+			string q_ = fhirHelpers_4_0_001.ToString(context, p_);
 			bool? r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
 			return r_;
@@ -93,10 +93,10 @@ public class SupplementalDataElementsFHIR4_2_0_000(
 		{
 			string t_ = E?.Url;
 			FhirUri u_ = context.Operators.Convert<FhirUri>(t_);
-			string v_ = _FHIRHelpers_4_0_001.ToString(context, u_);
+			string v_ = fhirHelpers_4_0_001.ToString(context, u_);
 			bool? w_ = context.Operators.Equal(v_, "ombCategory");
 			FhirUri y_ = context.Operators.Convert<FhirUri>(t_);
-			string z_ = _FHIRHelpers_4_0_001.ToString(context, y_);
+			string z_ = fhirHelpers_4_0_001.ToString(context, y_);
 			bool? aa_ = context.Operators.Equal(z_, "detailed");
 			bool? ab_ = context.Operators.Or(w_, aa_);
 
@@ -159,7 +159,7 @@ public class SupplementalDataElementsFHIR4_2_0_000(
 		{
 			string o_ = Extension?.Url;
 			FhirUri p_ = context.Operators.Convert<FhirUri>(o_);
-			string q_ = _FHIRHelpers_4_0_001.ToString(context, p_);
+			string q_ = fhirHelpers_4_0_001.ToString(context, p_);
 			bool? r_ = context.Operators.Equal(q_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
 			return r_;
@@ -177,10 +177,10 @@ public class SupplementalDataElementsFHIR4_2_0_000(
 		{
 			string t_ = E?.Url;
 			FhirUri u_ = context.Operators.Convert<FhirUri>(t_);
-			string v_ = _FHIRHelpers_4_0_001.ToString(context, u_);
+			string v_ = fhirHelpers_4_0_001.ToString(context, u_);
 			bool? w_ = context.Operators.Equal(v_, "ombCategory");
 			FhirUri y_ = context.Operators.Convert<FhirUri>(t_);
-			string z_ = _FHIRHelpers_4_0_001.ToString(context, y_);
+			string z_ = fhirHelpers_4_0_001.ToString(context, y_);
 			bool? aa_ = context.Operators.Equal(z_, "detailed");
 			bool? ab_ = context.Operators.Or(w_, aa_);
 
@@ -207,7 +207,7 @@ public class SupplementalDataElementsFHIR4_2_0_000(
 			{
 				Patient d_ = this.Patient(context);
 				Code<AdministrativeGender> e_ = d_?.GenderElement;
-				string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+				string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 				bool? g_ = context.Operators.Equal(f_, "male");
 
 				return g_ ?? false;
@@ -216,7 +216,7 @@ public class SupplementalDataElementsFHIR4_2_0_000(
 			{
 				Patient h_ = this.Patient(context);
 				Code<AdministrativeGender> i_ = h_?.GenderElement;
-				string j_ = _FHIRHelpers_4_0_001.ToString(context, i_);
+				string j_ = fhirHelpers_4_0_001.ToString(context, i_);
 				bool? k_ = context.Operators.Equal(j_, "female");
 
 				return k_ ?? false;

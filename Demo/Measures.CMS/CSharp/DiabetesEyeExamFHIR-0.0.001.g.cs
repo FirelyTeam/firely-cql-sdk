@@ -16,14 +16,14 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DiabetesEyeExamFHIR", "0.0.001")]
 public class DiabetesEyeExamFHIR_0_0_001(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    Hospice_6_9_000 _Hospice_6_9_000,
-    Status_1_6_000 _Status_1_6_000,
-    PalliativeCare_1_9_000 _PalliativeCare_1_9_000,
-    AdvancedIllnessandFrailty_1_8_000 _AdvancedIllnessandFrailty_1_8_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    Hospice_6_9_000 hospice_6_9_000,
+    Status_1_6_000 status_1_6_000,
+    PalliativeCare_1_9_000 palliativeCare_1_9_000,
+    AdvancedIllnessandFrailty_1_8_000 advancedIllnessandFrailty_1_8_000)
 {
 
     [CqlDeclaration("Annual Wellness Visit")]
@@ -139,12 +139,12 @@ public class DiabetesEyeExamFHIR_0_0_001(
 		CqlValueSet r_ = this.Telephone_Visits(context);
 		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
 		IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
-		IEnumerable<Encounter> u_ = _Status_1_6_000.isEncounterPerformed(context, t_);
+		IEnumerable<Encounter> u_ = status_1_6_000.isEncounterPerformed(context, t_);
 		bool? v_(Encounter ValidEncounters)
 		{
 			CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
 			Period y_ = ValidEncounters?.Period;
-			CqlInterval<CqlDateTime> z_ = _FHIRHelpers_4_3_000.ToInterval(context, y_);
+			CqlInterval<CqlDateTime> z_ = fhirHelpers_4_3_000.ToInterval(context, y_);
 			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
 
 			return aa_;
@@ -174,7 +174,7 @@ public class DiabetesEyeExamFHIR_0_0_001(
 		IEnumerable<Condition> o_ = context.Operators.RetrieveByValueSet<Condition>(n_, default);
 		bool? p_(Condition Diabetes)
 		{
-			CqlInterval<CqlDateTime> t_ = _QICoreCommon_2_0_000.prevalenceInterval(context, Diabetes);
+			CqlInterval<CqlDateTime> t_ = qiCoreCommon_2_0_000.prevalenceInterval(context, Diabetes);
 			CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
 			bool? v_ = context.Operators.Overlaps(t_, u_, default);
 
@@ -198,12 +198,12 @@ public class DiabetesEyeExamFHIR_0_0_001(
     [CqlDeclaration("Denominator Exclusions")]
 	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = _Hospice_6_9_000.Has_Hospice_Services(context);
-		bool? b_ = _AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
+		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
+		bool? b_ = advancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
 		bool? c_ = context.Operators.Or(a_, b_);
-		bool? d_ = _AdvancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
+		bool? d_ = advancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
 		bool? e_ = context.Operators.Or(c_, d_);
-		bool? f_ = _PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period(context);
+		bool? f_ = palliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period(context);
 		bool? g_ = context.Operators.Or(e_, f_);
 
 		return g_;
@@ -216,7 +216,7 @@ public class DiabetesEyeExamFHIR_0_0_001(
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition Retinopathy)
 		{
-			CqlInterval<CqlDateTime> f_ = _QICoreCommon_2_0_000.prevalenceInterval(context, Retinopathy);
+			CqlInterval<CqlDateTime> f_ = qiCoreCommon_2_0_000.prevalenceInterval(context, Retinopathy);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			bool? h_ = context.Operators.Overlaps(f_, g_, default);
 
@@ -233,13 +233,13 @@ public class DiabetesEyeExamFHIR_0_0_001(
 	{
 		CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
-		IEnumerable<Observation> c_ = _Status_1_6_000.isAssessmentPerformed(context, b_);
+		IEnumerable<Observation> c_ = status_1_6_000.isAssessmentPerformed(context, b_);
 		bool? d_(Observation RetinalExam)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
 			DataType g_ = RetinalExam?.Effective;
-			object h_ = _FHIRHelpers_4_3_000.ToValue(context, g_);
-			CqlInterval<CqlDateTime> i_ = _QICoreCommon_2_0_000.toInterval(context, h_);
+			object h_ = fhirHelpers_4_3_000.ToValue(context, g_);
+			CqlInterval<CqlDateTime> i_ = qiCoreCommon_2_0_000.toInterval(context, h_);
 			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
 
 			return j_;
@@ -254,7 +254,7 @@ public class DiabetesEyeExamFHIR_0_0_001(
 	{
 		CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
-		IEnumerable<Observation> c_ = _Status_1_6_000.isAssessmentPerformed(context, b_);
+		IEnumerable<Observation> c_ = status_1_6_000.isAssessmentPerformed(context, b_);
 		bool? d_(Observation RetinalExam)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
@@ -264,8 +264,8 @@ public class DiabetesEyeExamFHIR_0_0_001(
 			CqlDateTime k_ = context.Operators.End(f_);
 			CqlInterval<CqlDateTime> l_ = context.Operators.Interval(i_, k_, true, true);
 			DataType m_ = RetinalExam?.Effective;
-			object n_ = _FHIRHelpers_4_3_000.ToValue(context, m_);
-			CqlInterval<CqlDateTime> o_ = _QICoreCommon_2_0_000.toInterval(context, n_);
+			object n_ = fhirHelpers_4_3_000.ToValue(context, m_);
+			CqlInterval<CqlDateTime> o_ = qiCoreCommon_2_0_000.toInterval(context, n_);
 			bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
 
 			return p_;
@@ -294,7 +294,7 @@ public class DiabetesEyeExamFHIR_0_0_001(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -302,7 +302,7 @@ public class DiabetesEyeExamFHIR_0_0_001(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -310,7 +310,7 @@ public class DiabetesEyeExamFHIR_0_0_001(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -318,7 +318,7 @@ public class DiabetesEyeExamFHIR_0_0_001(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

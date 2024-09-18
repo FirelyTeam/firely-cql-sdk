@@ -16,9 +16,9 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAHospice", "1.0.0")]
 public class NCQAHospice_1_0_0(
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
-    NCQAFHIRBase_1_0_0 _NCQAFHIRBase_1_0_0,
-    NCQAStatus_1_0_0 _NCQAStatus_1_0_0)
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
+    NCQAFHIRBase_1_0_0 ncqafhirBase_1_0_0,
+    NCQAStatus_1_0_0 ncqaStatus_1_0_0)
 {
 
     [CqlDeclaration("Hospice Encounter")]
@@ -53,11 +53,11 @@ public class NCQAHospice_1_0_0(
 	{
 		CqlValueSet a_ = this.Hospice_Intervention(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
-		IEnumerable<Procedure> c_ = _NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(context, b_);
+		IEnumerable<Procedure> c_ = ncqaStatus_1_0_0.Completed_or_Ongoing_Procedure(context, b_);
 		bool? d_(Procedure HospiceInt)
 		{
 			DataType n_ = HospiceInt?.Performed;
-			CqlInterval<CqlDateTime> o_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, n_);
+			CqlInterval<CqlDateTime> o_ = ncqafhirBase_1_0_0.Normalize_Interval(context, n_);
 			CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
 			bool? q_ = context.Operators.Overlaps(o_, p_, default);
 
@@ -67,11 +67,11 @@ public class NCQAHospice_1_0_0(
 		bool? f_ = context.Operators.Exists<Procedure>(e_);
 		CqlValueSet g_ = this.Hospice_Encounter(context);
 		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, default);
-		IEnumerable<Encounter> i_ = _NCQAStatus_1_0_0.Finished_Encounter(context, h_);
+		IEnumerable<Encounter> i_ = ncqaStatus_1_0_0.Finished_Encounter(context, h_);
 		bool? j_(Encounter HospiceEnc)
 		{
 			Period r_ = HospiceEnc?.Period;
-			CqlInterval<CqlDateTime> s_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, r_ as object);
+			CqlInterval<CqlDateTime> s_ = ncqafhirBase_1_0_0.Normalize_Interval(context, r_ as object);
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
 			bool? u_ = context.Operators.Overlaps(s_, t_, default);
 

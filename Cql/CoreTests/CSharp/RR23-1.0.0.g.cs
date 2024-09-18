@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public class RR23_1_0_0(
-    FHIRHelpers_4_0_1 _FHIRHelpers_4_0_1)
+    FHIRHelpers_4_0_1 fhirHelpers_4_0_1)
 {
 
     [CqlDeclaration("Injury due to falling rock")]
@@ -136,7 +136,7 @@ public class RR23_1_0_0(
 		{
 			SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem;
 			DataType e_ = d_?.Item;
-			CqlConcept f_ = _FHIRHelpers_4_0_1.ToConcept(context, e_ as CodeableConcept);
+			CqlConcept f_ = fhirHelpers_4_0_1.ToConcept(context, e_ as CodeableConcept);
 			CqlCode g_ = this.Tiny_Umbrella(context);
 			CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
 			bool? i_ = context.Operators.Equivalent(f_, h_);

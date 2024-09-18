@@ -16,12 +16,12 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("KidneyHealthEvaluationFHIR", "0.1.000")]
 public class KidneyHealthEvaluationFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    Hospice_6_9_000 _Hospice_6_9_000,
-    PalliativeCare_1_9_000 _PalliativeCare_1_9_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    Hospice_6_9_000 hospice_6_9_000,
+    PalliativeCare_1_9_000 palliativeCare_1_9_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000)
 {
 
     [CqlDeclaration("Acute Inpatient")]
@@ -178,11 +178,11 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition Diabetes)
 		{
-			CqlInterval<CqlDateTime> f_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, Diabetes);
+			CqlInterval<CqlDateTime> f_ = qiCoreCommon_2_0_000.ToPrevalenceInterval(context, Diabetes);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			bool? h_ = context.Operators.Overlaps(f_, g_, default);
 			CodeableConcept i_ = Diabetes?.ClinicalStatus;
-			CqlConcept j_ = _FHIRHelpers_4_3_000.ToConcept(context, i_);
+			CqlConcept j_ = fhirHelpers_4_3_000.ToConcept(context, i_);
 			CqlCode k_ = this.active(context);
 			CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
 			bool? m_ = context.Operators.Equivalent(j_, l_);
@@ -223,7 +223,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
 		{
 			CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
 			Period y_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> z_ = _FHIRHelpers_4_3_000.ToInterval(context, y_);
+			CqlInterval<CqlDateTime> z_ = fhirHelpers_4_3_000.ToInterval(context, y_);
 			bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, default);
 			Code<Encounter.EncounterStatus> ab_ = ValidEncounter?.StatusElement;
 			Encounter.EncounterStatus? ac_ = ab_?.Value;
@@ -278,11 +278,11 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
 		IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
 		bool? f_(Condition CKDOrESRD)
 		{
-			CqlInterval<CqlDateTime> h_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, CKDOrESRD);
+			CqlInterval<CqlDateTime> h_ = qiCoreCommon_2_0_000.ToPrevalenceInterval(context, CKDOrESRD);
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
 			bool? j_ = context.Operators.Overlaps(h_, i_, default);
 			CodeableConcept k_ = CKDOrESRD?.ClinicalStatus;
-			CqlConcept l_ = _FHIRHelpers_4_3_000.ToConcept(context, k_);
+			CqlConcept l_ = fhirHelpers_4_3_000.ToConcept(context, k_);
 			CqlCode m_ = this.active(context);
 			CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
 			bool? o_ = context.Operators.Equivalent(l_, n_);
@@ -300,9 +300,9 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
 	{
 		IEnumerable<Condition> a_ = this.Has_CKD_Stage_5_or_ESRD_Diagnosis_Overlaps_Measurement_Period(context);
 		bool? b_ = context.Operators.Exists<Condition>(a_);
-		bool? c_ = _Hospice_6_9_000.Has_Hospice_Services(context);
+		bool? c_ = hospice_6_9_000.Has_Hospice_Services(context);
 		bool? d_ = context.Operators.Or(b_, c_);
-		bool? e_ = _PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period(context);
+		bool? e_ = palliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period(context);
 		bool? f_ = context.Operators.Or(d_, e_);
 
 		return f_;
@@ -317,11 +317,11 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
 		{
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
 			DataType m_ = eGFRTest?.Effective;
-			object n_ = _FHIRHelpers_4_3_000.ToValue(context, m_);
-			CqlInterval<CqlDateTime> o_ = _QICoreCommon_2_0_000.ToInterval(context, n_);
+			object n_ = fhirHelpers_4_3_000.ToValue(context, m_);
+			CqlInterval<CqlDateTime> o_ = qiCoreCommon_2_0_000.ToInterval(context, n_);
 			bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, default);
 			DataType q_ = eGFRTest?.Value;
-			object r_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
+			object r_ = fhirHelpers_4_3_000.ToValue(context, q_);
 			bool? s_ = context.Operators.Not((bool?)(r_ is null));
 			bool? t_ = context.Operators.And(p_, s_);
 			Code<ObservationStatus> u_ = eGFRTest?.StatusElement;
@@ -346,11 +346,11 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
 		{
 			CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
 			DataType ac_ = uACRTest?.Effective;
-			object ad_ = _FHIRHelpers_4_3_000.ToValue(context, ac_);
-			CqlInterval<CqlDateTime> ae_ = _QICoreCommon_2_0_000.ToInterval(context, ad_);
+			object ad_ = fhirHelpers_4_3_000.ToValue(context, ac_);
+			CqlInterval<CqlDateTime> ae_ = qiCoreCommon_2_0_000.ToInterval(context, ad_);
 			bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, ae_, default);
 			DataType ag_ = uACRTest?.Value;
-			object ah_ = _FHIRHelpers_4_3_000.ToValue(context, ag_);
+			object ah_ = fhirHelpers_4_3_000.ToValue(context, ag_);
 			bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
 			bool? aj_ = context.Operators.And(af_, ai_);
 			Code<ObservationStatus> ak_ = uACRTest?.StatusElement;
@@ -385,7 +385,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -393,7 +393,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -401,7 +401,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -409,7 +409,7 @@ public class KidneyHealthEvaluationFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

@@ -16,10 +16,10 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HIVViralSuppressionFHIR", "0.1.000")]
 public class HIVViralSuppressionFHIR_0_1_000(
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000)
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000)
 {
 
     [CqlDeclaration("Annual Wellness Visit")]
@@ -147,7 +147,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition HIVDx)
 		{
-			CqlInterval<CqlDateTime> f_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, HIVDx);
+			CqlInterval<CqlDateTime> f_ = qiCoreCommon_2_0_000.ToPrevalenceInterval(context, HIVDx);
 			CqlDateTime g_ = context.Operators.Start(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
 			CqlDateTime i_ = context.Operators.Start(h_);
@@ -207,7 +207,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
 			CqlDateTime ao_ = context.Operators.Add(am_, an_);
 			CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, true, true);
 			Period aq_ = QualifyingEncounter?.Period;
-			CqlInterval<CqlDateTime> ar_ = _FHIRHelpers_4_3_000.ToInterval(context, aq_);
+			CqlInterval<CqlDateTime> ar_ = fhirHelpers_4_3_000.ToInterval(context, aq_);
 			bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
 
 			return as_;
@@ -239,7 +239,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -247,7 +247,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -255,7 +255,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -263,7 +263,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -280,7 +280,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
 				bool l_()
 				{
 					DataType o_ = ViralLoad?.Effective;
-					object p_ = _FHIRHelpers_4_3_000.ToValue(context, o_);
+					object p_ = fhirHelpers_4_3_000.ToValue(context, o_);
 					bool q_ = p_ is CqlDateTime;
 
 					return q_;
@@ -288,7 +288,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
 				bool m_()
 				{
 					DataType r_ = ViralLoad?.Effective;
-					object s_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
+					object s_ = fhirHelpers_4_3_000.ToValue(context, r_);
 					bool t_ = s_ is CqlInterval<CqlDateTime>;
 
 					return t_;
@@ -296,7 +296,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
 				bool n_()
 				{
 					DataType u_ = ViralLoad?.Effective;
-					object v_ = _FHIRHelpers_4_3_000.ToValue(context, u_);
+					object v_ = fhirHelpers_4_3_000.ToValue(context, u_);
 					bool w_ = v_ is CqlDateTime;
 
 					return w_;
@@ -304,21 +304,21 @@ public class HIVViralSuppressionFHIR_0_1_000(
 				if (l_())
 				{
 					DataType x_ = ViralLoad?.Effective;
-					object y_ = _FHIRHelpers_4_3_000.ToValue(context, x_);
+					object y_ = fhirHelpers_4_3_000.ToValue(context, x_);
 
 					return (y_ as CqlDateTime) as object;
 				}
 				else if (m_())
 				{
 					DataType z_ = ViralLoad?.Effective;
-					object aa_ = _FHIRHelpers_4_3_000.ToValue(context, z_);
+					object aa_ = fhirHelpers_4_3_000.ToValue(context, z_);
 
 					return (aa_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (n_())
 				{
 					DataType ab_ = ViralLoad?.Effective;
-					object ac_ = _FHIRHelpers_4_3_000.ToValue(context, ab_);
+					object ac_ = fhirHelpers_4_3_000.ToValue(context, ab_);
 
 					return (ac_ as CqlDateTime) as object;
 				}
@@ -327,7 +327,7 @@ public class HIVViralSuppressionFHIR_0_1_000(
 					return null;
 				}
 			};
-			CqlDateTime i_ = _QICoreCommon_2_0_000.Latest(context, h_());
+			CqlDateTime i_ = qiCoreCommon_2_0_000.Latest(context, h_());
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
 			bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
 
@@ -337,8 +337,8 @@ public class HIVViralSuppressionFHIR_0_1_000(
 		object e_(Observation @this)
 		{
 			DataType ad_ = @this?.Effective;
-			object ae_ = _FHIRHelpers_4_3_000.ToValue(context, ad_);
-			CqlInterval<CqlDateTime> af_ = _QICoreCommon_2_0_000.ToInterval(context, ae_);
+			object ae_ = fhirHelpers_4_3_000.ToValue(context, ad_);
+			CqlInterval<CqlDateTime> af_ = qiCoreCommon_2_0_000.ToInterval(context, ae_);
 			CqlDateTime ag_ = context.Operators.Start(af_);
 
 			return ag_;
@@ -354,17 +354,17 @@ public class HIVViralSuppressionFHIR_0_1_000(
 	{
 		Observation a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period(context);
 		DataType b_ = a_?.Value;
-		object c_ = _FHIRHelpers_4_3_000.ToValue(context, b_);
+		object c_ = fhirHelpers_4_3_000.ToValue(context, b_);
 		CqlQuantity d_ = context.Operators.Quantity(200m, "{copies}/mL");
 		bool? e_ = context.Operators.Less(c_ as CqlQuantity, d_);
 		DataType g_ = a_?.Value;
-		object h_ = _FHIRHelpers_4_3_000.ToValue(context, g_);
+		object h_ = fhirHelpers_4_3_000.ToValue(context, g_);
 		CqlCode i_ = this.Below_threshold_level__qualifier_value_(context);
 		CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
 		bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
 		bool? l_ = context.Operators.Or(e_, k_);
 		DataType n_ = a_?.Value;
-		object o_ = _FHIRHelpers_4_3_000.ToValue(context, n_);
+		object o_ = fhirHelpers_4_3_000.ToValue(context, n_);
 		CqlCode p_ = this.Not_detected__qualifier_value_(context);
 		CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
 		bool? r_ = context.Operators.Equivalent(o_ as CqlConcept, q_);

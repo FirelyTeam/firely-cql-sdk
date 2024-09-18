@@ -16,10 +16,10 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AppropriateTreatmentforSTEMIFHIR", "1.0.000")]
 public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000)
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000)
 {
 
     [CqlDeclaration("Active Bleeding Excluding Menses or Bleeding Diathesis")]
@@ -250,25 +250,25 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
 			bool? h_ = context.Operators.Equal(g_, "finished");
 			Coding i_ = EDEncounter?.Class;
-			CqlCode j_ = _FHIRHelpers_4_3_000.ToCode(context, i_);
+			CqlCode j_ = fhirHelpers_4_3_000.ToCode(context, i_);
 			CqlCode k_ = this.EMER(context);
 			bool? l_ = context.Operators.Equivalent(j_, k_);
 			bool? m_ = context.Operators.And(h_, l_);
 			List<CodeableConcept> n_ = EDEncounter?.ReasonCode;
 			CqlConcept o_(CodeableConcept @this)
 			{
-				CqlConcept ad_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept ad_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return ad_;
 			};
 			IEnumerable<CqlConcept> p_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)n_, o_);
 			CqlValueSet q_ = this.STEMI(context);
 			bool? r_ = context.Operators.ConceptsInValueSet(p_, q_);
-			IEnumerable<Condition> s_ = _CQMCommon_2_0_000.encounterDiagnosis(context, EDEncounter);
+			IEnumerable<Condition> s_ = cqmCommon_2_0_000.encounterDiagnosis(context, EDEncounter);
 			bool? t_(Condition EncDiagnosis)
 			{
 				CodeableConcept ae_ = EncDiagnosis?.Code;
-				CqlConcept af_ = _FHIRHelpers_4_3_000.ToConcept(context, ae_);
+				CqlConcept af_ = fhirHelpers_4_3_000.ToConcept(context, ae_);
 				CqlValueSet ag_ = this.STEMI(context);
 				bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
 
@@ -280,7 +280,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			bool? x_ = context.Operators.And(m_, w_);
 			CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
 			Period z_ = EDEncounter?.Period;
-			CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, z_);
+			CqlInterval<CqlDateTime> aa_ = fhirHelpers_4_3_000.ToInterval(context, z_);
 			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, default);
 			bool? ac_ = context.Operators.And(x_, ab_);
 
@@ -303,8 +303,8 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			bool? g_(Condition DxSTEMI)
 			{
 				CodeableConcept k_ = DxSTEMI?.ClinicalStatus;
-				CqlConcept l_ = _FHIRHelpers_4_3_000.ToConcept(context, k_);
-				CqlCode m_ = _QICoreCommon_2_0_000.active(context);
+				CqlConcept l_ = fhirHelpers_4_3_000.ToConcept(context, k_);
+				CqlCode m_ = qiCoreCommon_2_0_000.active(context);
 				CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
 				bool? o_ = context.Operators.Equivalent(l_, n_);
 				Code<Encounter.EncounterStatus> p_ = EDEncounter?.StatusElement;
@@ -313,18 +313,18 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 				bool? s_ = context.Operators.Equal(r_, "finished");
 				bool? t_ = context.Operators.And(o_, s_);
 				Coding u_ = EDEncounter?.Class;
-				CqlCode v_ = _FHIRHelpers_4_3_000.ToCode(context, u_);
+				CqlCode v_ = fhirHelpers_4_3_000.ToCode(context, u_);
 				CqlCode w_ = this.EMER(context);
 				bool? x_ = context.Operators.Equivalent(v_, w_);
 				bool? y_ = context.Operators.And(t_, x_);
-				CqlInterval<CqlDateTime> z_ = _QICoreCommon_2_0_000.prevalenceInterval(context, DxSTEMI);
+				CqlInterval<CqlDateTime> z_ = qiCoreCommon_2_0_000.prevalenceInterval(context, DxSTEMI);
 				CqlDateTime aa_ = context.Operators.Start(z_);
 				Period ab_ = EDEncounter?.Period;
-				CqlInterval<CqlDateTime> ac_ = _FHIRHelpers_4_3_000.ToInterval(context, ab_);
+				CqlInterval<CqlDateTime> ac_ = fhirHelpers_4_3_000.ToInterval(context, ab_);
 				bool? ad_ = context.Operators.In<CqlDateTime>(aa_, ac_, default);
 				bool? ae_ = context.Operators.And(y_, ad_);
 				CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-				CqlInterval<CqlDateTime> ah_ = _FHIRHelpers_4_3_000.ToInterval(context, ab_);
+				CqlInterval<CqlDateTime> ah_ = fhirHelpers_4_3_000.ToInterval(context, ab_);
 				bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
 				bool? aj_ = context.Operators.And(ae_, ai_);
 
@@ -363,7 +363,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			string f_ = e_?.Value;
 			CqlDate g_ = context.Operators.ConvertStringToDate(f_);
 			Period h_ = EDwithSTEMI?.Period;
-			CqlInterval<CqlDateTime> i_ = _FHIRHelpers_4_3_000.ToInterval(context, h_);
+			CqlInterval<CqlDateTime> i_ = fhirHelpers_4_3_000.ToInterval(context, h_);
 			CqlDateTime j_ = context.Operators.Start(i_);
 			CqlDate k_ = context.Operators.DateFrom(j_);
 			int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
@@ -395,15 +395,15 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			bool? f_(AllergyIntolerance ThrombolyticAllergy)
 			{
 				CodeableConcept j_ = ThrombolyticAllergy?.ClinicalStatus;
-				CqlConcept k_ = _FHIRHelpers_4_3_000.ToConcept(context, j_);
-				CqlCode l_ = _QICoreCommon_2_0_000.allergy_active(context);
+				CqlConcept k_ = fhirHelpers_4_3_000.ToConcept(context, j_);
+				CqlCode l_ = qiCoreCommon_2_0_000.allergy_active(context);
 				CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
 				bool? n_ = context.Operators.Equivalent(k_, m_);
 				DataType o_ = ThrombolyticAllergy?.Onset;
-				object p_ = _FHIRHelpers_4_3_000.ToValue(context, o_);
-				CqlInterval<CqlDateTime> q_ = _QICoreCommon_2_0_000.toInterval(context, p_);
+				object p_ = fhirHelpers_4_3_000.ToValue(context, o_);
+				CqlInterval<CqlDateTime> q_ = qiCoreCommon_2_0_000.toInterval(context, p_);
 				Period r_ = EDwSTEMI?.Period;
-				CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> s_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 				bool? t_ = context.Operators.Overlaps(q_, s_, default);
 				bool? u_ = context.Operators.And(n_, t_);
 
@@ -434,7 +434,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 				FhirDateTime j_ = ThrombolyticAdverseEvent?.RecordedDateElement;
 				CqlDateTime k_ = context.Operators.Convert<CqlDateTime>(j_);
 				Period l_ = EDwSTEMI?.Period;
-				CqlInterval<CqlDateTime> m_ = _FHIRHelpers_4_3_000.ToInterval(context, l_);
+				CqlInterval<CqlDateTime> m_ = fhirHelpers_4_3_000.ToInterval(context, l_);
 				CqlDateTime n_ = context.Operators.End(m_);
 				bool? o_ = context.Operators.Before(k_, n_, default);
 				Code<AdverseEvent.AdverseEventActuality> p_ = ThrombolyticAdverseEvent?.ActualityElement;
@@ -482,9 +482,9 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			IEnumerable<Condition> t_ = context.Operators.Union<Condition>(n_, s_);
 			bool? u_(Condition ActiveExclusionDx)
 			{
-				CqlInterval<CqlDateTime> y_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ActiveExclusionDx);
+				CqlInterval<CqlDateTime> y_ = qiCoreCommon_2_0_000.prevalenceInterval(context, ActiveExclusionDx);
 				Period z_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, z_);
+				CqlInterval<CqlDateTime> aa_ = fhirHelpers_4_3_000.ToInterval(context, z_);
 				bool? ab_ = context.Operators.OverlapsBefore(y_, aa_, default);
 
 				return ab_;
@@ -525,7 +525,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 				FhirDateTime v_ = OralAnticoagulant?.AuthoredOnElement;
 				CqlDateTime w_ = context.Operators.Convert<CqlDateTime>(v_);
 				Period x_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_3_000.ToInterval(context, x_);
+				CqlInterval<CqlDateTime> y_ = fhirHelpers_4_3_000.ToInterval(context, x_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				bool? aa_ = context.Operators.SameOrBefore(w_, z_, default);
 				bool? ab_ = context.Operators.And(u_, aa_);
@@ -560,21 +560,21 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_, j_);
 			bool? l_(Condition ExclusionDiagnosis)
 			{
-				CqlInterval<CqlDateTime> p_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ExclusionDiagnosis);
+				CqlInterval<CqlDateTime> p_ = qiCoreCommon_2_0_000.prevalenceInterval(context, ExclusionDiagnosis);
 				CqlDateTime q_ = context.Operators.Start(p_);
 				Period r_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> s_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 				CqlDateTime v_ = context.Operators.Start(p_);
-				CqlInterval<CqlDateTime> x_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> x_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 				CqlDateTime y_ = context.Operators.Start(x_);
 				CqlQuantity z_ = context.Operators.Quantity(24m, "hours");
 				CqlDateTime aa_ = context.Operators.Subtract(y_, z_);
-				CqlInterval<CqlDateTime> ac_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> ac_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 				CqlDateTime ad_ = context.Operators.Start(ac_);
 				CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(aa_, ad_, true, false);
 				bool? af_ = context.Operators.In<CqlDateTime>(v_, ae_, default);
-				CqlInterval<CqlDateTime> ah_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> ah_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 				CqlDateTime ai_ = context.Operators.Start(ah_);
 				bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
 				bool? ak_ = context.Operators.And(af_, aj_);
@@ -605,19 +605,19 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			bool? f_(Procedure MajorSurgery)
 			{
 				DataType j_ = MajorSurgery?.Performed;
-				object k_ = _FHIRHelpers_4_3_000.ToValue(context, j_);
-				CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.toInterval(context, k_);
+				object k_ = fhirHelpers_4_3_000.ToValue(context, j_);
+				CqlInterval<CqlDateTime> l_ = qiCoreCommon_2_0_000.toInterval(context, k_);
 				CqlDateTime m_ = context.Operators.Start(l_);
 				Period n_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> o_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> o_ = fhirHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				CqlQuantity q_ = context.Operators.Quantity(21m, "days");
 				CqlDateTime r_ = context.Operators.Subtract(p_, q_);
-				CqlInterval<CqlDateTime> t_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> t_ = fhirHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime u_ = context.Operators.Start(t_);
 				CqlInterval<CqlDateTime> v_ = context.Operators.Interval(r_, u_, true, false);
 				bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, default);
-				CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> y_ = fhirHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				bool? aa_ = context.Operators.Not((bool?)(z_ is null));
 				bool? ab_ = context.Operators.And(w_, aa_);
@@ -655,24 +655,24 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			bool? i_(Procedure AirwayProcedure)
 			{
 				DataType m_ = AirwayProcedure?.Performed;
-				object n_ = _FHIRHelpers_4_3_000.ToValue(context, m_);
-				CqlInterval<CqlDateTime> o_ = _QICoreCommon_2_0_000.toInterval(context, n_);
+				object n_ = fhirHelpers_4_3_000.ToValue(context, m_);
+				CqlInterval<CqlDateTime> o_ = qiCoreCommon_2_0_000.toInterval(context, n_);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				Period q_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> r_ = _FHIRHelpers_4_3_000.ToInterval(context, q_);
+				CqlInterval<CqlDateTime> r_ = fhirHelpers_4_3_000.ToInterval(context, q_);
 				bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, default);
-				object u_ = _FHIRHelpers_4_3_000.ToValue(context, m_);
-				CqlInterval<CqlDateTime> v_ = _QICoreCommon_2_0_000.toInterval(context, u_);
+				object u_ = fhirHelpers_4_3_000.ToValue(context, m_);
+				CqlInterval<CqlDateTime> v_ = qiCoreCommon_2_0_000.toInterval(context, u_);
 				CqlDateTime w_ = context.Operators.Start(v_);
-				CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_3_000.ToInterval(context, q_);
+				CqlInterval<CqlDateTime> y_ = fhirHelpers_4_3_000.ToInterval(context, q_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				CqlQuantity aa_ = context.Operators.Quantity(24m, "hours");
 				CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-				CqlInterval<CqlDateTime> ad_ = _FHIRHelpers_4_3_000.ToInterval(context, q_);
+				CqlInterval<CqlDateTime> ad_ = fhirHelpers_4_3_000.ToInterval(context, q_);
 				CqlDateTime ae_ = context.Operators.Start(ad_);
 				CqlInterval<CqlDateTime> af_ = context.Operators.Interval(ab_, ae_, true, false);
 				bool? ag_ = context.Operators.In<CqlDateTime>(w_, af_, default);
-				CqlInterval<CqlDateTime> ai_ = _FHIRHelpers_4_3_000.ToInterval(context, q_);
+				CqlInterval<CqlDateTime> ai_ = fhirHelpers_4_3_000.ToInterval(context, q_);
 				CqlDateTime aj_ = context.Operators.Start(ai_);
 				bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
 				bool? al_ = context.Operators.And(ag_, ak_);
@@ -716,14 +716,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			IEnumerable<Condition> n_ = context.Operators.Union<Condition>(h_, m_);
 			bool? o_(Condition ExclusionCondition)
 			{
-				CqlInterval<CqlDateTime> s_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ExclusionCondition);
+				CqlInterval<CqlDateTime> s_ = qiCoreCommon_2_0_000.prevalenceInterval(context, ExclusionCondition);
 				CqlDateTime t_ = context.Operators.Start(s_);
 				Period u_ = EDwSTEMI?.Period;
-				CqlInterval<CqlDateTime> v_ = _FHIRHelpers_4_3_000.ToInterval(context, u_);
+				CqlInterval<CqlDateTime> v_ = fhirHelpers_4_3_000.ToInterval(context, u_);
 				CqlDateTime w_ = context.Operators.Start(v_);
 				CqlQuantity x_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime y_ = context.Operators.Subtract(w_, x_);
-				CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, u_);
+				CqlInterval<CqlDateTime> aa_ = fhirHelpers_4_3_000.ToInterval(context, u_);
 				CqlDateTime ab_ = context.Operators.Start(aa_);
 				CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(y_, ab_, true, true);
 				bool? ad_ = context.Operators.In<CqlDateTime>(t_, ac_, default);
@@ -753,19 +753,19 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			bool? f_(Procedure CranialorSpinalSurgery)
 			{
 				DataType j_ = CranialorSpinalSurgery?.Performed;
-				object k_ = _FHIRHelpers_4_3_000.ToValue(context, j_);
-				CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.toInterval(context, k_);
+				object k_ = fhirHelpers_4_3_000.ToValue(context, j_);
+				CqlInterval<CqlDateTime> l_ = qiCoreCommon_2_0_000.toInterval(context, k_);
 				CqlDateTime m_ = context.Operators.Start(l_);
 				Period n_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> o_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> o_ = fhirHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				CqlQuantity q_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime r_ = context.Operators.Subtract(p_, q_);
-				CqlInterval<CqlDateTime> t_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> t_ = fhirHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime u_ = context.Operators.Start(t_);
 				CqlInterval<CqlDateTime> v_ = context.Operators.Interval(r_, u_, true, false);
 				bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, default);
-				CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> y_ = fhirHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				bool? aa_ = context.Operators.Not((bool?)(z_ is null));
 				bool? ab_ = context.Operators.And(w_, aa_);
@@ -797,7 +797,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 		{
 			Encounter.HospitalizationComponent d_ = EDwithSTEMI?.Hospitalization;
 			CodeableConcept e_ = d_?.DischargeDisposition;
-			CqlConcept f_ = _FHIRHelpers_4_3_000.ToConcept(context, e_);
+			CqlConcept f_ = fhirHelpers_4_3_000.ToConcept(context, e_);
 			CqlValueSet g_ = this.Patient_Expired(context);
 			bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
 
@@ -842,11 +842,11 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 		bool? b_(Encounter.LocationComponent EDLocation)
 		{
 			ResourceReference h_ = EDLocation?.Location;
-			Location i_ = _CQMCommon_2_0_000.GetLocation(context, h_);
+			Location i_ = cqmCommon_2_0_000.GetLocation(context, h_);
 			List<CodeableConcept> j_ = i_?.Type;
 			CqlConcept k_(CodeableConcept @this)
 			{
-				CqlConcept o_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept o_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return o_;
 			};
@@ -859,7 +859,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
 		Encounter.LocationComponent d_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(c_);
 		Period e_ = d_?.Period;
-		CqlInterval<CqlDateTime> f_ = _FHIRHelpers_4_3_000.ToInterval(context, e_);
+		CqlInterval<CqlDateTime> f_ = fhirHelpers_4_3_000.ToInterval(context, e_);
 		CqlDateTime g_ = context.Operators.Start(f_);
 
 		return g_;
@@ -882,8 +882,8 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 				Code<MedicationAdministration.MedicationAdministrationStatusCodes> o_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(n_);
 				bool? p_ = context.Operators.Equal(o_, "completed");
 				DataType q_ = Fibrinolytic?.Effective;
-				object r_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
-				CqlInterval<CqlDateTime> s_ = _QICoreCommon_2_0_000.toInterval(context, r_);
+				object r_ = fhirHelpers_4_3_000.ToValue(context, q_);
+				CqlInterval<CqlDateTime> s_ = qiCoreCommon_2_0_000.toInterval(context, r_);
 				CqlDateTime t_ = context.Operators.Start(s_);
 				CqlDateTime u_ = this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
 				CqlQuantity w_ = context.Operators.Quantity(30m, "minutes");
@@ -919,8 +919,8 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 			bool? f_(Procedure PCI)
 			{
 				DataType j_ = PCI?.Performed;
-				object k_ = _FHIRHelpers_4_3_000.ToValue(context, j_);
-				CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.toInterval(context, k_);
+				object k_ = fhirHelpers_4_3_000.ToValue(context, j_);
+				CqlInterval<CqlDateTime> l_ = qiCoreCommon_2_0_000.toInterval(context, k_);
 				CqlDateTime m_ = context.Operators.Start(l_);
 				CqlDateTime n_ = this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
 				CqlQuantity p_ = context.Operators.Quantity(90m, "minutes");
@@ -956,23 +956,23 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 		bool? b_(Encounter EDwithSTEMI)
 		{
 			Period d_ = EDwithSTEMI?.Period;
-			CqlInterval<CqlDateTime> e_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDateTime> e_ = fhirHelpers_4_3_000.ToInterval(context, d_);
 			CqlDateTime f_ = context.Operators.End(e_);
-			CqlInterval<CqlDateTime> h_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDateTime> h_ = fhirHelpers_4_3_000.ToInterval(context, d_);
 			CqlDateTime i_ = context.Operators.Start(h_);
-			CqlInterval<CqlDateTime> k_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDateTime> k_ = fhirHelpers_4_3_000.ToInterval(context, d_);
 			CqlDateTime l_ = context.Operators.Start(k_);
 			CqlQuantity m_ = context.Operators.Quantity(45m, "minutes");
 			CqlDateTime n_ = context.Operators.Add(l_, m_);
 			CqlInterval<CqlDateTime> o_ = context.Operators.Interval(i_, n_, false, true);
 			bool? p_ = context.Operators.In<CqlDateTime>(f_, o_, default);
-			CqlInterval<CqlDateTime> r_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDateTime> r_ = fhirHelpers_4_3_000.ToInterval(context, d_);
 			CqlDateTime s_ = context.Operators.Start(r_);
 			bool? t_ = context.Operators.Not((bool?)(s_ is null));
 			bool? u_ = context.Operators.And(p_, t_);
 			Encounter.HospitalizationComponent v_ = EDwithSTEMI?.Hospitalization;
 			CodeableConcept w_ = v_?.DischargeDisposition;
-			CqlConcept x_ = _FHIRHelpers_4_3_000.ToConcept(context, w_);
+			CqlConcept x_ = fhirHelpers_4_3_000.ToConcept(context, w_);
 			CqlValueSet y_ = this.Discharge_To_Acute_Care_Facility(context);
 			bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
 			bool? aa_ = context.Operators.And(u_, z_);
@@ -999,7 +999,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -1007,7 +1007,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -1015,7 +1015,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -1023,7 +1023,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

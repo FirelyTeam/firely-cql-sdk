@@ -16,8 +16,8 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAStatus", "1.0.0")]
 public class NCQAStatus_1_0_0(
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
-    NCQATerminology_1_0_0 _NCQATerminology_1_0_0)
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
+    NCQATerminology_1_0_0 ncqaTerminology_1_0_0)
 {
 
     [CqlDeclaration("Patient")]
@@ -35,8 +35,8 @@ public class NCQAStatus_1_0_0(
 		bool? a_(AllergyIntolerance A)
 		{
 			CodeableConcept c_ = A?.ClinicalStatus;
-			CqlConcept d_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
-			CqlCode e_ = _NCQATerminology_1_0_0.allergy_active(context);
+			CqlConcept d_ = fhirHelpers_4_0_001.ToConcept(context, c_);
+			CqlCode e_ = ncqaTerminology_1_0_0.allergy_active(context);
 			CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
 			bool? g_ = context.Operators.Equal(d_, f_);
 
@@ -53,8 +53,8 @@ public class NCQAStatus_1_0_0(
 		bool? a_(Condition C)
 		{
 			CodeableConcept c_ = C?.ClinicalStatus;
-			CqlConcept d_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
-			CqlCode e_ = _NCQATerminology_1_0_0.active(context);
+			CqlConcept d_ = fhirHelpers_4_0_001.ToConcept(context, c_);
+			CqlCode e_ = ncqaTerminology_1_0_0.active(context);
 			CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
 			bool? g_ = context.Operators.Equal(d_, f_);
 
@@ -71,7 +71,7 @@ public class NCQAStatus_1_0_0(
 		bool? a_(Encounter E)
 		{
 			Code<Encounter.EncounterStatus> c_ = E?.StatusElement;
-			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = fhirHelpers_4_0_001.ToString(context, c_);
 			bool? e_ = context.Operators.Equal(d_, "finished");
 
 			return e_;
@@ -87,7 +87,7 @@ public class NCQAStatus_1_0_0(
 		bool? a_(Immunization I)
 		{
 			Code<Immunization.ImmunizationStatusCodes> c_ = I?.StatusElement;
-			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = fhirHelpers_4_0_001.ToString(context, c_);
 			bool? e_ = context.Operators.Equal(d_, "completed");
 
 			return e_;
@@ -103,7 +103,7 @@ public class NCQAStatus_1_0_0(
 		bool? a_(MedicationDispense M)
 		{
 			Code<MedicationDispense.MedicationDispenseStatusCodes> c_ = M?.StatusElement;
-			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = fhirHelpers_4_0_001.ToString(context, c_);
 			bool? e_ = context.Operators.Equal(d_, "completed");
 
 			return e_;
@@ -119,7 +119,7 @@ public class NCQAStatus_1_0_0(
 		bool? a_(MedicationRequest M)
 		{
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
-			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = fhirHelpers_4_0_001.ToString(context, c_);
 			string[] e_ = [
 				"completed",
 			];
@@ -138,7 +138,7 @@ public class NCQAStatus_1_0_0(
 		bool? a_(Procedure P)
 		{
 			Code<EventStatus> c_ = P?.StatusElement;
-			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = fhirHelpers_4_0_001.ToString(context, c_);
 			bool? e_ = context.Operators.Equal(d_, "completed");
 
 			return e_;
@@ -154,7 +154,7 @@ public class NCQAStatus_1_0_0(
 		bool? a_(Procedure P)
 		{
 			Code<EventStatus> c_ = P?.StatusElement;
-			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = fhirHelpers_4_0_001.ToString(context, c_);
 			string[] e_ = [
 				"completed",
 				"in-progress",

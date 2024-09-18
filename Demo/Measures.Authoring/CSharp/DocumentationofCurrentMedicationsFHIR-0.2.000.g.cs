@@ -16,9 +16,9 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DocumentationofCurrentMedicationsFHIR", "0.2.000")]
 public class DocumentationofCurrentMedicationsFHIR_0_2_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000)
 {
 
     [CqlDeclaration("Encounter to Document Medications")]
@@ -68,7 +68,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -76,7 +76,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -84,7 +84,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -92,7 +92,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -110,7 +110,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000(
 			bool? h_ = context.Operators.Equal(g_, "finished");
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
 			Period j_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> k_ = _FHIRHelpers_4_3_000.ToInterval(context, j_);
+			CqlInterval<CqlDateTime> k_ = fhirHelpers_4_3_000.ToInterval(context, j_);
 			bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(i_, k_, "day");
 			bool? m_ = context.Operators.And(h_, l_);
 
@@ -149,11 +149,11 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000(
 			bool? g_(Procedure MedicationsDocumented)
 			{
 				DataType k_ = MedicationsDocumented?.Performed;
-				object l_ = _FHIRHelpers_4_3_000.ToValue(context, k_);
-				CqlInterval<CqlDateTime> m_ = _QICoreCommon_2_0_000.toInterval(context, l_);
+				object l_ = fhirHelpers_4_3_000.ToValue(context, k_);
+				CqlInterval<CqlDateTime> m_ = qiCoreCommon_2_0_000.toInterval(context, l_);
 				CqlDateTime n_ = context.Operators.End(m_);
 				Period o_ = QualifyingEncounter?.Period;
-				CqlInterval<CqlDateTime> p_ = _FHIRHelpers_4_3_000.ToInterval(context, o_);
+				CqlInterval<CqlDateTime> p_ = fhirHelpers_4_3_000.ToInterval(context, o_);
 				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, default);
 				Code<EventStatus> r_ = MedicationsDocumented?.StatusElement;
 				EventStatus? s_ = r_?.Value;
@@ -190,7 +190,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000(
 				{
 					string ae_ = @this?.Url;
 					FhirString af_ = context.Operators.Convert<FhirString>(ae_);
-					string ag_ = _FHIRHelpers_4_3_000.ToString(context, af_);
+					string ag_ = fhirHelpers_4_3_000.ToString(context, af_);
 					bool? ah_ = context.Operators.Equal(ag_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
 
 					return ah_;
@@ -208,7 +208,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000(
 				DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
 				CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(o_);
 				Period q_ = QualifyingEncounter?.Period;
-				CqlInterval<CqlDateTime> r_ = _FHIRHelpers_4_3_000.ToInterval(context, q_);
+				CqlInterval<CqlDateTime> r_ = fhirHelpers_4_3_000.ToInterval(context, q_);
 				bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, default);
 				Code<EventStatus> t_ = MedicationsNotDocumented?.StatusElement;
 				EventStatus? u_ = t_?.Value;
@@ -218,7 +218,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000(
 				List<CodeableConcept> y_ = MedicationsNotDocumented?.ReasonCode;
 				CqlConcept z_(CodeableConcept @this)
 				{
-					CqlConcept aj_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+					CqlConcept aj_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 					return aj_;
 				};

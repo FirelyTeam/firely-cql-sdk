@@ -16,8 +16,8 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("VTEFHIR4", "4.8.000")]
 public class VTEFHIR4_4_8_000(
-    MATGlobalCommonFunctionsFHIR4_6_1_000 _MATGlobalCommonFunctionsFHIR4_6_1_000,
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001)
+    MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001)
 {
 
     [CqlDeclaration("Intensive Care Unit")]
@@ -52,11 +52,11 @@ public class VTEFHIR4_4_8_000(
 		bool? b_(Encounter.LocationComponent HospitalLocation)
 		{
 			ResourceReference g_ = HospitalLocation?.Location;
-			Location h_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(context, g_);
+			Location h_ = matGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(context, g_);
 			List<CodeableConcept> i_ = h_?.Type;
 			CqlConcept j_(CodeableConcept X)
 			{
-				CqlConcept t_ = _FHIRHelpers_4_0_001.ToConcept(context, X);
+				CqlConcept t_ = fhirHelpers_4_0_001.ToConcept(context, X);
 
 				return t_;
 			};
@@ -64,9 +64,9 @@ public class VTEFHIR4_4_8_000(
 			CqlValueSet l_ = this.Intensive_Care_Unit(context);
 			bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
 			Period n_ = Encounter?.Period;
-			CqlInterval<CqlDateTime> o_ = _FHIRHelpers_4_0_001.ToInterval(context, n_);
+			CqlInterval<CqlDateTime> o_ = fhirHelpers_4_0_001.ToInterval(context, n_);
 			Period p_ = HospitalLocation?.Period;
-			CqlInterval<CqlDateTime> q_ = _FHIRHelpers_4_0_001.ToInterval(context, p_);
+			CqlInterval<CqlDateTime> q_ = fhirHelpers_4_0_001.ToInterval(context, p_);
 			bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
 			bool? s_ = context.Operators.And(m_, r_);
 
@@ -76,7 +76,7 @@ public class VTEFHIR4_4_8_000(
 		object d_(Encounter.LocationComponent @this)
 		{
 			Period u_ = @this?.Period;
-			CqlInterval<CqlDateTime> v_ = _FHIRHelpers_4_0_001.ToInterval(context, u_);
+			CqlInterval<CqlDateTime> v_ = fhirHelpers_4_0_001.ToInterval(context, u_);
 			CqlDateTime w_ = context.Operators.Start(v_);
 
 			return w_;
@@ -100,7 +100,7 @@ public class VTEFHIR4_4_8_000(
 	public  CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
 	{
 		Period a_ = this.FirstICULocationPeriod(context, Encounter);
-		CqlInterval<CqlDateTime> b_ = _FHIRHelpers_4_0_001.ToInterval(context, a_);
+		CqlInterval<CqlDateTime> b_ = fhirHelpers_4_0_001.ToInterval(context, a_);
 		CqlDateTime c_ = context.Operators.Start(b_);
 
 		return c_;
@@ -120,11 +120,11 @@ public class VTEFHIR4_4_8_000(
     [CqlDeclaration("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
 	public  CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
 	{
-		CqlInterval<CqlDateTime> a_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(context, Encounter);
+		CqlInterval<CqlDateTime> a_ = matGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(context, Encounter);
 		CqlDateTime b_ = context.Operators.Start(a_);
 		CqlDate c_ = context.Operators.DateFrom(b_);
 		Period d_ = Encounter?.Period;
-		CqlInterval<CqlDateTime> e_ = _FHIRHelpers_4_0_001.ToInterval(context, d_);
+		CqlInterval<CqlDateTime> e_ = fhirHelpers_4_0_001.ToInterval(context, d_);
 		CqlDateTime f_ = context.Operators.Start(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		CqlQuantity h_ = context.Operators.Quantity(1m, "day");
@@ -137,7 +137,7 @@ public class VTEFHIR4_4_8_000(
     [CqlDeclaration("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
 	public  CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
 	{
-		CqlInterval<CqlDateTime> a_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(context, Encounter);
+		CqlInterval<CqlDateTime> a_ = matGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(context, Encounter);
 		CqlDateTime b_ = context.Operators.Start(a_);
 		CqlDate c_ = context.Operators.DateFrom(b_);
 		CqlDateTime d_ = this.StartOfFirstICU(context, Encounter);

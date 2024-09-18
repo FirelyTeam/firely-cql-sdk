@@ -16,10 +16,10 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HospitalHarmPressureInjuryFHIR", "0.1.000")]
 public class HospitalHarmPressureInjuryFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000)
 {
 
     [CqlDeclaration("COVID 19")]
@@ -118,12 +118,12 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 			string g_ = f_?.Value;
 			CqlDate h_ = context.Operators.ConvertStringToDate(g_);
 			Period i_ = InpatientEncounter?.Period;
-			CqlInterval<CqlDateTime> j_ = _FHIRHelpers_4_3_000.ToInterval(context, i_);
+			CqlInterval<CqlDateTime> j_ = fhirHelpers_4_3_000.ToInterval(context, i_);
 			CqlDateTime k_ = context.Operators.Start(j_);
 			CqlDate l_ = context.Operators.DateFrom(k_);
 			int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
 			bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
-			CqlInterval<CqlDateTime> p_ = _FHIRHelpers_4_3_000.ToInterval(context, i_);
+			CqlInterval<CqlDateTime> p_ = fhirHelpers_4_3_000.ToInterval(context, i_);
 			CqlDateTime q_ = context.Operators.End(p_);
 			CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
 			bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
@@ -167,16 +167,16 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 			bool? e_(Encounter.DiagnosisComponent EncounterDiag)
 			{
 				ResourceReference h_ = EncounterDiag?.Condition;
-				Condition i_ = _CQMCommon_2_0_000.getCondition(context, h_);
+				Condition i_ = cqmCommon_2_0_000.getCondition(context, h_);
 				CodeableConcept j_ = i_?.Code;
-				CqlConcept k_ = _FHIRHelpers_4_3_000.ToConcept(context, j_);
+				CqlConcept k_ = fhirHelpers_4_3_000.ToConcept(context, j_);
 				CqlValueSet l_ = this.Pressure_Injury_Deep_Tissue_Diagnoses(context);
 				bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 				bool? n_(Extension @this)
 				{
 					string w_ = @this?.Url;
 					FhirString x_ = context.Operators.Convert<FhirString>(w_);
-					string y_ = _FHIRHelpers_4_3_000.ToString(context, x_);
+					string y_ = fhirHelpers_4_3_000.ToString(context, x_);
 					bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return z_;
@@ -192,7 +192,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = _FHIRHelpers_4_3_000.ToConcept(context, r_ as CodeableConcept);
+				CqlConcept s_ = fhirHelpers_4_3_000.ToConcept(context, r_ as CodeableConcept);
 				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -221,10 +221,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 			bool? g_(Observation SkinExam)
 			{
 				DataType k_ = SkinExam?.Effective;
-				object l_ = _FHIRHelpers_4_3_000.ToValue(context, k_);
-				CqlInterval<CqlDateTime> m_ = _QICoreCommon_2_0_000.ToInterval(context, l_);
+				object l_ = fhirHelpers_4_3_000.ToValue(context, k_);
+				CqlInterval<CqlDateTime> m_ = qiCoreCommon_2_0_000.ToInterval(context, l_);
 				CqlDateTime n_ = context.Operators.Start(m_);
-				CqlInterval<CqlDateTime> o_ = _CQMCommon_2_0_000.HospitalizationWithObservation(context, InpatientHospitalization);
+				CqlInterval<CqlDateTime> o_ = cqmCommon_2_0_000.HospitalizationWithObservation(context, InpatientHospitalization);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				CqlDateTime r_ = context.Operators.Start(o_);
 				CqlQuantity s_ = context.Operators.Quantity(72m, "hours");
@@ -243,7 +243,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 				bool? ac_ = context.Operators.And(v_, ab_);
 				CodeableConcept ad_ = SkinExam?.Code;
-				CqlConcept ae_ = _FHIRHelpers_4_3_000.ToConcept(context, ad_);
+				CqlConcept ae_ = fhirHelpers_4_3_000.ToConcept(context, ad_);
 				CqlValueSet af_ = this.Pressure_Injury_Deep_Tissue(context);
 				bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 				bool? ah_ = context.Operators.And(ac_, ag_);
@@ -282,16 +282,16 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 			bool? e_(Encounter.DiagnosisComponent Stage234UnstageablePressureInjury)
 			{
 				ResourceReference h_ = Stage234UnstageablePressureInjury?.Condition;
-				Condition i_ = _CQMCommon_2_0_000.getCondition(context, h_);
+				Condition i_ = cqmCommon_2_0_000.getCondition(context, h_);
 				CodeableConcept j_ = i_?.Code;
-				CqlConcept k_ = _FHIRHelpers_4_3_000.ToConcept(context, j_);
+				CqlConcept k_ = fhirHelpers_4_3_000.ToConcept(context, j_);
 				CqlValueSet l_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses(context);
 				bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 				bool? n_(Extension @this)
 				{
 					string w_ = @this?.Url;
 					FhirString x_ = context.Operators.Convert<FhirString>(w_);
-					string y_ = _FHIRHelpers_4_3_000.ToString(context, x_);
+					string y_ = fhirHelpers_4_3_000.ToString(context, x_);
 					bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return z_;
@@ -307,7 +307,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = _FHIRHelpers_4_3_000.ToConcept(context, r_ as CodeableConcept);
+				CqlConcept s_ = fhirHelpers_4_3_000.ToConcept(context, r_ as CodeableConcept);
 				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -336,10 +336,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 			bool? g_(Observation SkinExam)
 			{
 				DataType k_ = SkinExam?.Effective;
-				object l_ = _FHIRHelpers_4_3_000.ToValue(context, k_);
-				CqlInterval<CqlDateTime> m_ = _QICoreCommon_2_0_000.ToInterval(context, l_);
+				object l_ = fhirHelpers_4_3_000.ToValue(context, k_);
+				CqlInterval<CqlDateTime> m_ = qiCoreCommon_2_0_000.ToInterval(context, l_);
 				CqlDateTime n_ = context.Operators.Start(m_);
-				CqlInterval<CqlDateTime> o_ = _CQMCommon_2_0_000.HospitalizationWithObservation(context, InpatientHospitalization);
+				CqlInterval<CqlDateTime> o_ = cqmCommon_2_0_000.HospitalizationWithObservation(context, InpatientHospitalization);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				CqlDateTime r_ = context.Operators.Start(o_);
 				CqlQuantity s_ = context.Operators.Quantity(24m, "hours");
@@ -358,7 +358,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 				bool? ac_ = context.Operators.And(v_, ab_);
 				CodeableConcept ad_ = SkinExam?.Code;
-				CqlConcept ae_ = _FHIRHelpers_4_3_000.ToConcept(context, ad_);
+				CqlConcept ae_ = fhirHelpers_4_3_000.ToConcept(context, ad_);
 				CqlValueSet af_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
 				bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 				bool? ah_ = context.Operators.And(ac_, ag_);
@@ -393,11 +393,11 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_18_and_Older(context);
 		bool? b_(Encounter InpatientHospitalization)
 		{
-			IEnumerable<Condition> d_ = _CQMCommon_2_0_000.EncounterDiagnosis(context, InpatientHospitalization);
+			IEnumerable<Condition> d_ = cqmCommon_2_0_000.EncounterDiagnosis(context, InpatientHospitalization);
 			bool? e_(Condition EncounterDiag)
 			{
 				CodeableConcept h_ = EncounterDiag?.Code;
-				CqlConcept i_ = _FHIRHelpers_4_3_000.ToConcept(context, h_);
+				CqlConcept i_ = fhirHelpers_4_3_000.ToConcept(context, h_);
 				CqlValueSet j_ = this.COVID_19(context);
 				bool? k_ = context.Operators.ConceptInValueSet(i_, j_);
 
@@ -435,16 +435,16 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 			bool? e_(Encounter.DiagnosisComponent EncounterDiag)
 			{
 				ResourceReference h_ = EncounterDiag?.Condition;
-				Condition i_ = _CQMCommon_2_0_000.getCondition(context, h_);
+				Condition i_ = cqmCommon_2_0_000.getCondition(context, h_);
 				CodeableConcept j_ = i_?.Code;
-				CqlConcept k_ = _FHIRHelpers_4_3_000.ToConcept(context, j_);
+				CqlConcept k_ = fhirHelpers_4_3_000.ToConcept(context, j_);
 				CqlValueSet l_ = this.Pressure_Injury_Deep_Tissue_Diagnoses(context);
 				bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 				bool? n_(Extension @this)
 				{
 					string w_ = @this?.Url;
 					FhirString x_ = context.Operators.Convert<FhirString>(w_);
-					string y_ = _FHIRHelpers_4_3_000.ToString(context, x_);
+					string y_ = fhirHelpers_4_3_000.ToString(context, x_);
 					bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return z_;
@@ -460,7 +460,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = _FHIRHelpers_4_3_000.ToConcept(context, r_ as CodeableConcept);
+				CqlConcept s_ = fhirHelpers_4_3_000.ToConcept(context, r_ as CodeableConcept);
 				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -489,10 +489,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 			bool? g_(Observation SkinExam)
 			{
 				DataType k_ = SkinExam?.Effective;
-				object l_ = _FHIRHelpers_4_3_000.ToValue(context, k_);
-				CqlInterval<CqlDateTime> m_ = _QICoreCommon_2_0_000.ToInterval(context, l_);
+				object l_ = fhirHelpers_4_3_000.ToValue(context, k_);
+				CqlInterval<CqlDateTime> m_ = qiCoreCommon_2_0_000.ToInterval(context, l_);
 				CqlDateTime n_ = context.Operators.Start(m_);
-				CqlInterval<CqlDateTime> o_ = _CQMCommon_2_0_000.HospitalizationWithObservation(context, InpatientHospitalization);
+				CqlInterval<CqlDateTime> o_ = cqmCommon_2_0_000.HospitalizationWithObservation(context, InpatientHospitalization);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				CqlQuantity q_ = context.Operators.Quantity(72m, "hours");
 				CqlDateTime r_ = context.Operators.Add(p_, q_);
@@ -511,14 +511,14 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 				bool? ac_ = context.Operators.And(v_, ab_);
 				DataType ad_ = SkinExam?.Value;
-				object ae_ = _FHIRHelpers_4_3_000.ToValue(context, ad_);
+				object ae_ = fhirHelpers_4_3_000.ToValue(context, ad_);
 				CqlValueSet af_ = this.Pressure_Injury_Deep_Tissue(context);
 				bool? ag_ = context.Operators.ConceptInValueSet(ae_ as CqlConcept, af_);
 				List<Observation.ComponentComponent> ah_ = SkinExam?.Component;
 				bool? ai_(Observation.ComponentComponent @this)
 				{
 					CodeableConcept aq_ = @this?.Code;
-					CqlConcept ar_ = _FHIRHelpers_4_3_000.ToConcept(context, aq_);
+					CqlConcept ar_ = fhirHelpers_4_3_000.ToConcept(context, aq_);
 					bool? as_ = context.Operators.Not((bool?)(ar_ is null));
 
 					return as_;
@@ -527,7 +527,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				CqlConcept ak_(Observation.ComponentComponent @this)
 				{
 					CodeableConcept at_ = @this?.Code;
-					CqlConcept au_ = _FHIRHelpers_4_3_000.ToConcept(context, at_);
+					CqlConcept au_ = fhirHelpers_4_3_000.ToConcept(context, at_);
 
 					return au_;
 				};
@@ -570,16 +570,16 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 			bool? e_(Encounter.DiagnosisComponent Stage234UnstageablePressureInjury)
 			{
 				ResourceReference h_ = Stage234UnstageablePressureInjury?.Condition;
-				Condition i_ = _CQMCommon_2_0_000.getCondition(context, h_);
+				Condition i_ = cqmCommon_2_0_000.getCondition(context, h_);
 				CodeableConcept j_ = i_?.Code;
-				CqlConcept k_ = _FHIRHelpers_4_3_000.ToConcept(context, j_);
+				CqlConcept k_ = fhirHelpers_4_3_000.ToConcept(context, j_);
 				CqlValueSet l_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses(context);
 				bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
 				bool? n_(Extension @this)
 				{
 					string w_ = @this?.Url;
 					FhirString x_ = context.Operators.Convert<FhirString>(w_);
-					string y_ = _FHIRHelpers_4_3_000.ToString(context, x_);
+					string y_ = fhirHelpers_4_3_000.ToString(context, x_);
 					bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 
 					return z_;
@@ -595,7 +595,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = _FHIRHelpers_4_3_000.ToConcept(context, r_ as CodeableConcept);
+				CqlConcept s_ = fhirHelpers_4_3_000.ToConcept(context, r_ as CodeableConcept);
 				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -624,10 +624,10 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 			bool? g_(Observation SkinExam)
 			{
 				DataType k_ = SkinExam?.Effective;
-				object l_ = _FHIRHelpers_4_3_000.ToValue(context, k_);
-				CqlInterval<CqlDateTime> m_ = _QICoreCommon_2_0_000.ToInterval(context, l_);
+				object l_ = fhirHelpers_4_3_000.ToValue(context, k_);
+				CqlInterval<CqlDateTime> m_ = qiCoreCommon_2_0_000.ToInterval(context, l_);
 				CqlDateTime n_ = context.Operators.Start(m_);
-				CqlInterval<CqlDateTime> o_ = _CQMCommon_2_0_000.HospitalizationWithObservation(context, InpatientHospitalization);
+				CqlInterval<CqlDateTime> o_ = cqmCommon_2_0_000.HospitalizationWithObservation(context, InpatientHospitalization);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				CqlQuantity q_ = context.Operators.Quantity(24m, "hours");
 				CqlDateTime r_ = context.Operators.Add(p_, q_);
@@ -646,14 +646,14 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 				bool? ac_ = context.Operators.And(v_, ab_);
 				DataType ad_ = SkinExam?.Value;
-				object ae_ = _FHIRHelpers_4_3_000.ToValue(context, ad_);
+				object ae_ = fhirHelpers_4_3_000.ToValue(context, ad_);
 				CqlValueSet af_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
 				bool? ag_ = context.Operators.ConceptInValueSet(ae_ as CqlConcept, af_);
 				List<Observation.ComponentComponent> ah_ = SkinExam?.Component;
 				bool? ai_(Observation.ComponentComponent @this)
 				{
 					CodeableConcept aq_ = @this?.Code;
-					CqlConcept ar_ = _FHIRHelpers_4_3_000.ToConcept(context, aq_);
+					CqlConcept ar_ = fhirHelpers_4_3_000.ToConcept(context, aq_);
 					bool? as_ = context.Operators.Not((bool?)(ar_ is null));
 
 					return as_;
@@ -662,7 +662,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
 				CqlConcept ak_(Observation.ComponentComponent @this)
 				{
 					CodeableConcept at_ = @this?.Code;
-					CqlConcept au_ = _FHIRHelpers_4_3_000.ToConcept(context, at_);
+					CqlConcept au_ = fhirHelpers_4_3_000.ToConcept(context, at_);
 
 					return au_;
 				};
@@ -708,7 +708,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -716,7 +716,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -724,7 +724,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -732,7 +732,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

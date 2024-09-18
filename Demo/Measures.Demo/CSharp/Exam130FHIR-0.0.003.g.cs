@@ -16,14 +16,14 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Exam130FHIR", "0.0.003")]
 public class Exam130FHIR_0_0_003(
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
-    SupplementalDataElementsFHIR4_2_0_000 _SupplementalDataElementsFHIR4_2_0_000,
-    MATGlobalCommonFunctionsFHIR4_6_1_000 _MATGlobalCommonFunctionsFHIR4_6_1_000,
-    AdultOutpatientEncountersFHIR4_2_2_000 _AdultOutpatientEncountersFHIR4_2_2_000,
-    HospiceFHIR4_2_3_000 _HospiceFHIR4_2_3_000,
-    AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 _AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000,
-    PalliativeCareFHIR_0_6_000 _PalliativeCareFHIR_0_6_000,
-    CumulativeMedicationDurationFHIR4_1_0_000 _CumulativeMedicationDurationFHIR4_1_0_000)
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
+    SupplementalDataElementsFHIR4_2_0_000 supplementalDataElementsFHIR4_2_0_000,
+    MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,
+    AdultOutpatientEncountersFHIR4_2_2_000 adultOutpatientEncountersFHIR4_2_2_000,
+    HospiceFHIR4_2_3_000 hospiceFHIR4_2_3_000,
+    AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 advancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000,
+    PalliativeCareFHIR_0_6_000 palliativeCareFHIR_0_6_000,
+    CumulativeMedicationDurationFHIR4_1_0_000 cumulativeMedicationDurationFHIR4_1_0_000)
 {
 
     [CqlDeclaration("Acute Inpatient")]
@@ -218,7 +218,7 @@ public class Exam130FHIR_0_0_003(
     [CqlDeclaration("SDE Ethnicity")]
 	public  IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
 	{
-		IEnumerable<Coding> a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity(context);
+		IEnumerable<Coding> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -226,7 +226,7 @@ public class Exam130FHIR_0_0_003(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CodeableConcept code, Period period)?> a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Payer(context);
+		IEnumerable<(CodeableConcept code, Period period)?> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -234,7 +234,7 @@ public class Exam130FHIR_0_0_003(
     [CqlDeclaration("SDE Race")]
 	public  IEnumerable<Coding> SDE_Race(CqlContext context)
 	{
-		IEnumerable<Coding> a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Race(context);
+		IEnumerable<Coding> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -242,7 +242,7 @@ public class Exam130FHIR_0_0_003(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -258,11 +258,11 @@ public class Exam130FHIR_0_0_003(
 		bool? f_(Encounter TelehealthEncounter)
 		{
 			Code<Encounter.EncounterStatus> h_ = TelehealthEncounter?.StatusElement;
-			string i_ = _FHIRHelpers_4_0_001.ToString(context, h_);
+			string i_ = fhirHelpers_4_0_001.ToString(context, h_);
 			bool? j_ = context.Operators.Equal(i_, "finished");
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
 			Period l_ = TelehealthEncounter?.Period;
-			CqlInterval<CqlDateTime> m_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, l_ as object);
+			CqlInterval<CqlDateTime> m_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, l_ as object);
 			bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
 			bool? o_ = context.Operators.And(j_, n_);
 
@@ -301,7 +301,7 @@ public class Exam130FHIR_0_0_003(
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(51, 75, true, false);
 		bool? j_ = context.Operators.In<int?>(h_, i_, default);
-		IEnumerable<Encounter> k_ = _AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters(context);
+		IEnumerable<Encounter> k_ = adultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters(context);
 		IEnumerable<Encounter> l_ = this.Telehealth_Services(context);
 		IEnumerable<Encounter> m_ = context.Operators.Union<Encounter>(k_, l_);
 		bool? n_ = context.Operators.Exists<Encounter>(m_);
@@ -325,7 +325,7 @@ public class Exam130FHIR_0_0_003(
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition ColorectalCancer)
 		{
-			CqlInterval<CqlDateTime> e_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(context, ColorectalCancer);
+			CqlInterval<CqlDateTime> e_ = matGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(context, ColorectalCancer);
 			CqlDateTime f_ = context.Operators.Start(e_);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			CqlDateTime h_ = context.Operators.End(g_);
@@ -346,10 +346,10 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Procedure Colectomy)
 		{
 			Code<EventStatus> e_ = Colectomy?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			bool? g_ = context.Operators.Equal(f_, "completed");
 			DataType h_ = Colectomy?.Performed;
-			CqlInterval<CqlDateTime> i_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, h_);
+			CqlInterval<CqlDateTime> i_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, h_);
 			CqlDateTime j_ = context.Operators.End(i_);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
 			CqlDateTime l_ = context.Operators.End(k_);
@@ -370,7 +370,7 @@ public class Exam130FHIR_0_0_003(
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition ColectomyDx)
 		{
-			CqlInterval<CqlDateTime> e_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(context, ColectomyDx);
+			CqlInterval<CqlDateTime> e_ = matGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(context, ColectomyDx);
 			CqlDateTime f_ = context.Operators.Start(e_);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			CqlDateTime h_ = context.Operators.End(g_);
@@ -386,7 +386,7 @@ public class Exam130FHIR_0_0_003(
     [CqlDeclaration("Denominator Exclusions")]
 	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = _HospiceFHIR4_2_3_000.Has_Hospice(context);
+		bool? a_ = hospiceFHIR4_2_3_000.Has_Hospice(context);
 		IEnumerable<Condition> b_ = this.Malignant_Neoplasm(context);
 		bool? c_ = context.Operators.Exists<Condition>(b_);
 		bool? d_ = context.Operators.Or(a_, c_);
@@ -396,7 +396,7 @@ public class Exam130FHIR_0_0_003(
 		IEnumerable<Condition> h_ = this.Total_Colectomy_Condition(context);
 		bool? i_ = context.Operators.Exists<Condition>(h_);
 		bool? j_ = context.Operators.Or(g_, i_);
-		bool? k_ = _AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
+		bool? k_ = advancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
 		bool? l_ = context.Operators.Or(j_, k_);
 		Patient m_ = this.Patient(context);
 		Date n_ = m_?.BirthDateElement;
@@ -407,10 +407,10 @@ public class Exam130FHIR_0_0_003(
 		CqlDate s_ = context.Operators.DateFrom(r_);
 		int? t_ = context.Operators.CalculateAgeAt(p_, s_, "year");
 		bool? u_ = context.Operators.GreaterOrEqual(t_, 65);
-		bool? v_ = _AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
+		bool? v_ = advancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
 		bool? w_ = context.Operators.And(u_, v_);
 		bool? x_ = context.Operators.Or(l_, w_);
-		bool? y_ = _PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period(context);
+		bool? y_ = palliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period(context);
 		bool? z_ = context.Operators.Or(x_, y_);
 
 		return z_;
@@ -424,7 +424,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation FecalOccult)
 		{
 			DataType g_ = FecalOccult?.Effective;
-			CqlDateTime h_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, g_);
+			CqlDateTime h_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, g_);
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
 			CqlDateTime j_ = context.Operators.Start(i_);
 			CqlQuantity k_ = context.Operators.Quantity(1m, "year");
@@ -439,7 +439,7 @@ public class Exam130FHIR_0_0_003(
 		(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FecalOccult)
 		{
 			DataType q_ = FecalOccult?.Effective;
-			CqlDateTime r_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
+			CqlDateTime r_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
 			DataType s_ = FecalOccult?.Value;
 			IEnumerable<Coding> t_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(s_, "coding");
 			bool? u_(Coding @this)
@@ -522,7 +522,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation FecalOccult)
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -577,7 +577,7 @@ public class Exam130FHIR_0_0_003(
 			bool? o_ = context.Operators.Not((bool?)(n_ is null));
 			bool? p_ = context.Operators.And(m_, o_);
 			DataType q_ = FecalOccult?.Effective;
-			CqlDateTime r_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
+			CqlDateTime r_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
 			CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
 			bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, default);
 			bool? u_ = context.Operators.And(p_, t_);
@@ -597,7 +597,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation FecalOccult)
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -652,7 +652,7 @@ public class Exam130FHIR_0_0_003(
 			bool? o_ = context.Operators.Not((bool?)(n_ is null));
 			bool? p_ = context.Operators.And(m_, o_);
 			DataType q_ = FecalOccult?.Effective;
-			CqlDateTime r_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
+			CqlDateTime r_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
 			CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
 			bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
 			bool? u_ = context.Operators.And(p_, t_);
@@ -719,7 +719,7 @@ public class Exam130FHIR_0_0_003(
 			bool? j_ = context.Operators.Not((bool?)(i_ is null));
 			bool? k_ = context.Operators.And(h_, j_);
 			DataType l_ = FecalOccult?.Effective;
-			CqlDateTime m_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, l_);
+			CqlDateTime m_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
 			bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
 			bool? p_ = context.Operators.And(k_, o_);
@@ -739,7 +739,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation FecalOccult)
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -751,7 +751,7 @@ public class Exam130FHIR_0_0_003(
 			bool? k_ = context.Operators.Not((bool?)(j_ is null));
 			bool? l_ = context.Operators.And(i_, k_);
 			DataType m_ = FecalOccult?.Effective;
-			CqlDateTime n_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, m_);
+			CqlDateTime n_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, m_);
 			CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
 			bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, "day");
 			bool? q_ = context.Operators.And(l_, p_);
@@ -771,7 +771,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation FitDNA)
 		{
 			DataType g_ = FitDNA?.Effective;
-			CqlDateTime h_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, g_);
+			CqlDateTime h_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, g_);
 			CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
 			CqlDateTime j_ = context.Operators.End(i_);
 			CqlQuantity k_ = context.Operators.Quantity(4m, "years");
@@ -789,7 +789,7 @@ public class Exam130FHIR_0_0_003(
 		(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FitDNA)
 		{
 			DataType u_ = FitDNA?.Effective;
-			CqlDateTime v_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, u_);
+			CqlDateTime v_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, u_);
 			DataType w_ = FitDNA?.Value;
 			IEnumerable<Coding> x_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(w_, "coding");
 			bool? y_(Coding @this)
@@ -872,7 +872,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation FitDNA)
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -927,7 +927,7 @@ public class Exam130FHIR_0_0_003(
 			bool? o_ = context.Operators.Not((bool?)(n_ is null));
 			bool? p_ = context.Operators.And(m_, o_);
 			DataType q_ = FitDNA?.Effective;
-			CqlDateTime r_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
+			CqlDateTime r_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
 			CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
 			CqlDateTime t_ = context.Operators.End(s_);
 			CqlQuantity u_ = context.Operators.Quantity(3m, "years");
@@ -955,7 +955,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation FitDNA)
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -1010,7 +1010,7 @@ public class Exam130FHIR_0_0_003(
 			bool? o_ = context.Operators.Not((bool?)(n_ is null));
 			bool? p_ = context.Operators.And(m_, o_);
 			DataType q_ = FitDNA?.Effective;
-			CqlDateTime r_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
+			CqlDateTime r_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, q_);
 			CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
 			CqlDateTime t_ = context.Operators.End(s_);
 			CqlQuantity u_ = context.Operators.Quantity(3m, "years");
@@ -1085,7 +1085,7 @@ public class Exam130FHIR_0_0_003(
 			bool? j_ = context.Operators.Not((bool?)(i_ is null));
 			bool? k_ = context.Operators.And(h_, j_);
 			DataType l_ = FitDNA?.Effective;
-			CqlDateTime m_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, l_);
+			CqlDateTime m_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
 			CqlDateTime o_ = context.Operators.End(n_);
 			CqlQuantity p_ = context.Operators.Quantity(3m, "years");
@@ -1113,7 +1113,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation FitDNA)
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -1125,7 +1125,7 @@ public class Exam130FHIR_0_0_003(
 			bool? k_ = context.Operators.Not((bool?)(j_ is null));
 			bool? l_ = context.Operators.And(i_, k_);
 			DataType m_ = FitDNA?.Effective;
-			CqlDateTime n_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, m_);
+			CqlDateTime n_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, m_);
 			CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlQuantity q_ = context.Operators.Quantity(3m, "years");
@@ -1153,7 +1153,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation Colonography)
 		{
 			DataType g_ = Colonography?.Effective;
-			CqlInterval<CqlDateTime> h_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, g_);
+			CqlInterval<CqlDateTime> h_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, g_);
 			CqlDateTime i_ = context.Operators.End(h_);
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
 			CqlDateTime k_ = context.Operators.End(j_);
@@ -1172,7 +1172,7 @@ public class Exam130FHIR_0_0_003(
 		CqlDateTime e_(Observation Colonography)
 		{
 			DataType v_ = Colonography?.Effective;
-			CqlDateTime w_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, v_);
+			CqlDateTime w_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, v_);
 
 			return w_;
 		};
@@ -1189,7 +1189,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation Colonography)
 		{
 			Code<ObservationStatus> e_ = Colonography?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -1198,7 +1198,7 @@ public class Exam130FHIR_0_0_003(
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			DataType i_ = Colonography?.Effective;
-			CqlInterval<CqlDateTime> j_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, i_);
+			CqlInterval<CqlDateTime> j_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, i_);
 			CqlDateTime k_ = context.Operators.End(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
 			CqlDateTime m_ = context.Operators.End(l_);
@@ -1227,7 +1227,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Observation Colonography)
 		{
 			Code<ObservationStatus> e_ = Colonography?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -1237,7 +1237,7 @@ public class Exam130FHIR_0_0_003(
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			bool? i_ = context.Operators.Not(h_);
 			DataType j_ = Colonography?.Effective;
-			CqlInterval<CqlDateTime> k_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, j_);
+			CqlInterval<CqlDateTime> k_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, j_);
 			CqlDateTime l_ = context.Operators.End(k_);
 			CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
 			CqlDateTime n_ = context.Operators.End(m_);
@@ -1266,7 +1266,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Procedure FlexibleSigmoidoscopy)
 		{
 			DataType g_ = FlexibleSigmoidoscopy?.Performed;
-			CqlInterval<CqlDateTime> h_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, g_);
+			CqlInterval<CqlDateTime> h_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, g_);
 			CqlDateTime i_ = context.Operators.End(h_);
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
 			CqlDateTime k_ = context.Operators.End(j_);
@@ -1285,7 +1285,7 @@ public class Exam130FHIR_0_0_003(
 		CqlDateTime e_(Procedure FlexibleSigmoidoscopy)
 		{
 			DataType v_ = FlexibleSigmoidoscopy?.Performed;
-			CqlDateTime w_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, v_);
+			CqlDateTime w_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, v_);
 
 			return w_;
 		};
@@ -1302,10 +1302,10 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Procedure FlexibleSigmoidoscopy)
 		{
 			Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			bool? g_ = context.Operators.Equal(f_, "completed");
 			DataType h_ = FlexibleSigmoidoscopy?.Performed;
-			CqlInterval<CqlDateTime> i_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, h_);
+			CqlInterval<CqlDateTime> i_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, h_);
 			CqlDateTime j_ = context.Operators.End(i_);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
 			CqlDateTime l_ = context.Operators.End(k_);
@@ -1334,11 +1334,11 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Procedure FlexibleSigmoidoscopy)
 		{
 			Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			bool? g_ = context.Operators.Equal(f_, "completed");
 			bool? h_ = context.Operators.Not(g_);
 			DataType i_ = FlexibleSigmoidoscopy?.Performed;
-			CqlInterval<CqlDateTime> j_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, i_);
+			CqlInterval<CqlDateTime> j_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, i_);
 			CqlDateTime k_ = context.Operators.End(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
 			CqlDateTime m_ = context.Operators.End(l_);
@@ -1367,7 +1367,7 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Procedure Colonoscopy)
 		{
 			DataType g_ = Colonoscopy?.Performed;
-			CqlInterval<CqlDateTime> h_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, g_);
+			CqlInterval<CqlDateTime> h_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, g_);
 			CqlDateTime i_ = context.Operators.End(h_);
 			CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
 			CqlDateTime k_ = context.Operators.End(j_);
@@ -1386,7 +1386,7 @@ public class Exam130FHIR_0_0_003(
 		CqlDateTime e_(Procedure Colonoscopy)
 		{
 			DataType v_ = Colonoscopy?.Performed;
-			CqlDateTime w_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, v_);
+			CqlDateTime w_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, v_);
 
 			return w_;
 		};
@@ -1403,10 +1403,10 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Procedure Colonoscopy)
 		{
 			Code<EventStatus> e_ = Colonoscopy?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			bool? g_ = context.Operators.Equal(f_, "completed");
 			DataType h_ = Colonoscopy?.Performed;
-			CqlInterval<CqlDateTime> i_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, h_);
+			CqlInterval<CqlDateTime> i_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, h_);
 			CqlDateTime j_ = context.Operators.End(i_);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
 			CqlDateTime l_ = context.Operators.End(k_);
@@ -1435,11 +1435,11 @@ public class Exam130FHIR_0_0_003(
 		bool? c_(Procedure Colonoscopy)
 		{
 			Code<EventStatus> e_ = Colonoscopy?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			bool? g_ = context.Operators.Equal(f_, "completed");
 			bool? h_ = context.Operators.Not(g_);
 			DataType i_ = Colonoscopy?.Performed;
-			CqlInterval<CqlDateTime> j_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, i_);
+			CqlInterval<CqlDateTime> j_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, i_);
 			CqlDateTime k_ = context.Operators.End(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
 			CqlDateTime m_ = context.Operators.End(l_);

@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DevDays", "2023.0.0")]
 public class DevDays_2023_0_0(
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001)
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001)
 {
 
     [CqlDeclaration("Sucked into jet engine")]
@@ -65,7 +65,7 @@ public class DevDays_2023_0_0(
 			List<Coding> e_ = d_?.Coding;
 			bool? f_(Coding coding)
 			{
-				CqlCode n_ = _FHIRHelpers_4_0_001.ToCode(context, coding);
+				CqlCode n_ = fhirHelpers_4_0_001.ToCode(context, coding);
 				CqlCode o_ = this.Sucked_into_jet_engine(context);
 				bool? p_ = context.Operators.Equivalent(n_, o_);
 
@@ -74,7 +74,7 @@ public class DevDays_2023_0_0(
 			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
-			CqlDateTime j_ = _FHIRHelpers_4_0_001.ToDateTime(context, i_ as FhirDateTime);
+			CqlDateTime j_ = fhirHelpers_4_0_001.ToDateTime(context, i_ as FhirDateTime);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
 			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, default);
 			bool? m_ = context.Operators.And(h_, l_);
@@ -96,7 +96,7 @@ public class DevDays_2023_0_0(
 			List<Coding> e_ = d_?.Coding;
 			bool? f_(Coding coding)
 			{
-				CqlCode n_ = _FHIRHelpers_4_0_001.ToCode(context, coding);
+				CqlCode n_ = fhirHelpers_4_0_001.ToCode(context, coding);
 				CqlCode o_ = this.Sucked_into_jet_engine__subsequent_encounter(context);
 				bool? p_ = context.Operators.Equivalent(n_, o_);
 
@@ -105,7 +105,7 @@ public class DevDays_2023_0_0(
 			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
-			CqlDateTime j_ = _FHIRHelpers_4_0_001.ToDateTime(context, i_ as FhirDateTime);
+			CqlDateTime j_ = fhirHelpers_4_0_001.ToDateTime(context, i_ as FhirDateTime);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
 			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, default);
 			bool? m_ = context.Operators.And(h_, l_);

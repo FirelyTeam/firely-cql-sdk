@@ -16,14 +16,14 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("UseofHighRiskMedicationsintheElderlyFHIR", "0.1.000")]
 public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    Hospice_6_9_000 _Hospice_6_9_000,
-    PalliativeCare_1_9_000 _PalliativeCare_1_9_000,
-    CumulativeMedicationDuration_4_0_000 _CumulativeMedicationDuration_4_0_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    Status_1_6_000 _Status_1_6_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    Hospice_6_9_000 hospice_6_9_000,
+    PalliativeCare_1_9_000 palliativeCare_1_9_000,
+    CumulativeMedicationDuration_4_0_000 cumulativeMedicationDuration_4_0_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    Status_1_6_000 status_1_6_000)
 {
 
     [CqlDeclaration("Alcohol Withdrawal")]
@@ -399,7 +399,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 			List<CodeableConcept> am_ = E?.Type;
 			CqlConcept an_(CodeableConcept @this)
 			{
-				CqlConcept as_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept as_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return as_;
 			};
@@ -424,7 +424,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 		{
 			CqlInterval<CqlDateTime> aw_ = this.Measurement_Period(context);
 			Period ax_ = ValidEncounters?.Period;
-			CqlInterval<CqlDateTime> ay_ = _FHIRHelpers_4_3_000.ToInterval(context, ax_);
+			CqlInterval<CqlDateTime> ay_ = fhirHelpers_4_3_000.ToInterval(context, ax_);
 			bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, default);
 
 			return az_;
@@ -464,8 +464,8 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
     [CqlDeclaration("Denominator Exclusions")]
 	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = _Hospice_6_9_000.Has_Hospice_Services(context);
-		bool? b_ = _PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period(context);
+		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
+		bool? b_ = palliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period(context);
 		bool? c_ = context.Operators.Or(a_, b_);
 
 		return c_;
@@ -474,10 +474,10 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
     [CqlDeclaration("More Than One Order")]
 	public  IEnumerable<MedicationRequest> More_Than_One_Order(CqlContext context, IEnumerable<MedicationRequest> Medication)
 	{
-		IEnumerable<MedicationRequest> a_ = _Status_1_6_000.Active_or_Completed_Medication_Request(context, Medication);
+		IEnumerable<MedicationRequest> a_ = status_1_6_000.Active_or_Completed_Medication_Request(context, Medication);
 		IEnumerable<MedicationRequest> b_(MedicationRequest OrderMedication1)
 		{
-			IEnumerable<MedicationRequest> f_ = _Status_1_6_000.Active_or_Completed_Medication_Request(context, Medication);
+			IEnumerable<MedicationRequest> f_ = status_1_6_000.Active_or_Completed_Medication_Request(context, Medication);
 			bool? g_(MedicationRequest OrderMedication2)
 			{
 				FhirDateTime k_ = OrderMedication1?.AuthoredOnElement;
@@ -511,11 +511,11 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 				CqlDateTime au_ = context.Operators.Convert<CqlDateTime>(k_);
 				bool? aw_ = context.Operators.In<CqlDateTime>(au_, m_, default);
 				bool? ax_ = context.Operators.And(as_, aw_);
-				CqlInterval<CqlDate> ay_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, OrderMedication1);
+				CqlInterval<CqlDate> ay_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, OrderMedication1);
 				CqlDate az_ = context.Operators.Start(ay_);
 				CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
 				CqlDate bb_ = context.Operators.DateFrom(ba_);
-				CqlInterval<CqlDate> bc_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, OrderMedication2);
+				CqlInterval<CqlDate> bc_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, OrderMedication2);
 				CqlDate bd_ = context.Operators.Start(bc_);
 				CqlDateTime be_ = context.Operators.ConvertDateToDateTime(bd_);
 				CqlDate bf_ = context.Operators.DateFrom(be_);
@@ -661,24 +661,24 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 		{
 			MedicationRequest.DispenseRequestComponent e_ = R?.DispenseRequest;
 			Duration f_ = e_?.ExpectedSupplyDuration;
-			CqlQuantity g_ = _FHIRHelpers_4_3_000.ToQuantity(context, f_);
+			CqlQuantity g_ = fhirHelpers_4_3_000.ToQuantity(context, f_);
 			CqlQuantity h_ = context.Operators.ConvertQuantity(g_, "d");
 			decimal? i_ = h_?.value;
 			Quantity k_ = e_?.Quantity;
-			CqlQuantity l_ = _FHIRHelpers_4_3_000.ToQuantity(context, k_);
+			CqlQuantity l_ = fhirHelpers_4_3_000.ToQuantity(context, k_);
 			decimal? m_ = l_?.value;
 			List<Dosage> n_ = R?.DosageInstruction;
 			Dosage o_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			List<Dosage.DoseAndRateComponent> p_ = o_?.DoseAndRate;
 			Dosage.DoseAndRateComponent q_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)p_);
 			DataType r_ = q_?.Dose;
-			object s_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
+			object s_ = fhirHelpers_4_3_000.ToValue(context, r_);
 			CqlQuantity t_ = context.Operators.End(s_ as CqlInterval<CqlQuantity>);
 			Dosage v_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			List<Dosage.DoseAndRateComponent> w_ = v_?.DoseAndRate;
 			Dosage.DoseAndRateComponent x_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)w_);
 			DataType y_ = x_?.Dose;
-			object z_ = _FHIRHelpers_4_3_000.ToValue(context, y_);
+			object z_ = fhirHelpers_4_3_000.ToValue(context, y_);
 			decimal? aa_ = (t_ ?? z_ as CqlQuantity)?.value;
 			Dosage ac_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			Timing ad_ = ac_?.Timing;
@@ -701,8 +701,8 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 			Code<Timing.UnitsOfTime> ax_ = aw_?.PeriodUnitElement;
 			Timing.UnitsOfTime? ay_ = ax_?.Value;
 			string az_ = context.Operators.Convert<string>(ay_);
-			CqlQuantity ba_ = _CumulativeMedicationDuration_4_0_000.Quantity(context, as_, az_);
-			decimal? bb_ = _CumulativeMedicationDuration_4_0_000.ToDaily(context, ag_ ?? am_, ba_);
+			CqlQuantity ba_ = cumulativeMedicationDuration_4_0_000.Quantity(context, as_, az_);
+			decimal? bb_ = cumulativeMedicationDuration_4_0_000.ToDaily(context, ag_ ?? am_, ba_);
 			Dosage bd_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			Timing be_ = bd_?.Timing;
 			Timing.RepeatComponent bf_ = be_?.Repeat;
@@ -1028,7 +1028,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 				{
 					decimal? g_ = this.MedicationRequestPeriodInDays(context, Order);
 					bool? h_ = context.Operators.Not((bool?)(g_ is null));
-					CqlConcept i_ = _CQMCommon_2_0_000.getMedicationCode(context, Order);
+					CqlConcept i_ = cqmCommon_2_0_000.getMedicationCode(context, Order);
 					CqlQuantity j_ = this.MedicationStrengthPerUnit(context, i_);
 					string k_ = j_?.unit;
 					bool? l_ = context.Operators.Equal(k_, "mg");
@@ -1037,7 +1037,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 					bool? p_ = context.Operators.Equal(o_, "mg/mL");
 					MedicationRequest.DispenseRequestComponent q_ = Order?.DispenseRequest;
 					Quantity r_ = q_?.Quantity;
-					CqlQuantity s_ = _FHIRHelpers_4_3_000.ToQuantity(context, r_);
+					CqlQuantity s_ = fhirHelpers_4_3_000.ToQuantity(context, r_);
 					string t_ = s_?.unit;
 					bool? u_ = context.Operators.Equal(t_, "mL");
 					bool? v_ = context.Operators.And(p_, u_);
@@ -1050,8 +1050,8 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 				{
 					MedicationRequest.DispenseRequestComponent y_ = Order?.DispenseRequest;
 					Quantity z_ = y_?.Quantity;
-					CqlQuantity aa_ = _FHIRHelpers_4_3_000.ToQuantity(context, z_);
-					CqlConcept ab_ = _CQMCommon_2_0_000.getMedicationCode(context, Order);
+					CqlQuantity aa_ = fhirHelpers_4_3_000.ToQuantity(context, z_);
+					CqlConcept ab_ = cqmCommon_2_0_000.getMedicationCode(context, Order);
 					CqlQuantity ac_ = this.MedicationStrengthPerUnit(context, ab_);
 					CqlQuantity ad_ = context.Operators.Multiply(aa_, ac_);
 					decimal? ae_ = this.MedicationRequestPeriodInDays(context, Order);
@@ -1160,7 +1160,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = _Status_1_6_000.Active_or_Completed_Medication_Request(context, e_);
+		IEnumerable<MedicationRequest> f_ = status_1_6_000.Active_or_Completed_Medication_Request(context, e_);
 		bool? g_(MedicationRequest AntipsychoticMedication)
 		{
 			FhirDateTime m_ = AntipsychoticMedication?.AuthoredOnElement;
@@ -1205,7 +1205,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = _Status_1_6_000.Active_or_Completed_Medication_Request(context, e_);
+		IEnumerable<MedicationRequest> f_ = status_1_6_000.Active_or_Completed_Medication_Request(context, e_);
 		bool? g_(MedicationRequest BenzodiazepineMedication)
 		{
 			FhirDateTime m_ = BenzodiazepineMedication?.AuthoredOnElement;
@@ -1241,7 +1241,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 		IEnumerable<Condition> f_ = context.Operators.Union<Condition>(c_, e_);
 		bool? g_(Condition AntipsychoticTreatedDiagnoses)
 		{
-			CqlInterval<CqlDateTime> ag_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, AntipsychoticTreatedDiagnoses);
+			CqlInterval<CqlDateTime> ag_ = qiCoreCommon_2_0_000.ToPrevalenceInterval(context, AntipsychoticTreatedDiagnoses);
 			CqlInterval<CqlDateTime> ah_ = this.Measurement_Period(context);
 			CqlDateTime ai_ = context.Operators.Start(ah_);
 			CqlQuantity aj_ = context.Operators.Quantity(1m, "year");
@@ -1273,7 +1273,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 		IEnumerable<Condition> z_ = context.Operators.Union<Condition>(w_, y_);
 		bool? aa_(Condition BenzodiazepineTreatedDiagnoses)
 		{
-			CqlInterval<CqlDateTime> ao_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, BenzodiazepineTreatedDiagnoses);
+			CqlInterval<CqlDateTime> ao_ = qiCoreCommon_2_0_000.ToPrevalenceInterval(context, BenzodiazepineTreatedDiagnoses);
 			CqlInterval<CqlDateTime> ap_ = this.Measurement_Period(context);
 			CqlDateTime aq_ = context.Operators.Start(ap_);
 			CqlQuantity ar_ = context.Operators.Quantity(1m, "year");
@@ -1308,7 +1308,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -1316,7 +1316,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -1324,7 +1324,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -1332,7 +1332,7 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

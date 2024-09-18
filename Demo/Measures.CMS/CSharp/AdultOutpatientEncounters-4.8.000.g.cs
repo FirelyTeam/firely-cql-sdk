@@ -16,9 +16,9 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AdultOutpatientEncounters", "4.8.000")]
 public class AdultOutpatientEncounters_4_8_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    Status_1_6_000 _Status_1_6_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    Status_1_6_000 status_1_6_000)
 {
 
     [CqlDeclaration("Annual Wellness Visit")]
@@ -96,13 +96,13 @@ public class AdultOutpatientEncounters_4_8_000(
 		CqlValueSet r_ = this.Telephone_Visits(context);
 		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
 		IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
-		IEnumerable<Encounter> u_ = _Status_1_6_000.isEncounterPerformed(context, t_);
+		IEnumerable<Encounter> u_ = status_1_6_000.isEncounterPerformed(context, t_);
 		bool? v_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
 			Period y_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> z_ = _FHIRHelpers_4_3_000.ToInterval(context, y_);
-			CqlInterval<CqlDateTime> aa_ = _QICoreCommon_2_0_000.toInterval(context, z_ as object);
+			CqlInterval<CqlDateTime> z_ = fhirHelpers_4_3_000.ToInterval(context, y_);
+			CqlInterval<CqlDateTime> aa_ = qiCoreCommon_2_0_000.toInterval(context, z_ as object);
 			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, aa_, "day");
 
 			return ab_;

@@ -16,8 +16,8 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public class AdultOutpatientEncountersFHIR4_2_2_000(
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
-    MATGlobalCommonFunctionsFHIR4_6_1_000 _MATGlobalCommonFunctionsFHIR4_6_1_000)
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
+    MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000)
 {
 
     [CqlDeclaration("Annual Wellness Visit")]
@@ -82,11 +82,11 @@ public class AdultOutpatientEncountersFHIR4_2_2_000(
 		bool? o_(Encounter ValidEncounter)
 		{
 			Code<Encounter.EncounterStatus> q_ = ValidEncounter?.StatusElement;
-			string r_ = _FHIRHelpers_4_0_001.ToString(context, q_);
+			string r_ = fhirHelpers_4_0_001.ToString(context, q_);
 			bool? s_ = context.Operators.Equal(r_, "finished");
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
 			Period u_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> v_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, u_ as object);
+			CqlInterval<CqlDateTime> v_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, u_ as object);
 			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, default);
 			bool? x_ = context.Operators.And(s_, w_);
 

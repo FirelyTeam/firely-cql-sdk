@@ -16,12 +16,12 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR", "0.1.000")]
 public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    Hospice_6_9_000 _Hospice_6_9_000,
-    CumulativeMedicationDuration_4_0_000 _CumulativeMedicationDuration_4_0_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    Hospice_6_9_000 hospice_6_9_000,
+    CumulativeMedicationDuration_4_0_000 cumulativeMedicationDuration_4_0_000)
 {
 
     [CqlDeclaration("Ambulatory")]
@@ -271,7 +271,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(aq_, av_);
 		bool? ax_(MedicationRequest ADHDMedications)
 		{
-			CqlInterval<CqlDate> df_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ADHDMedications);
+			CqlInterval<CqlDate> df_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ADHDMedications);
 			CqlDate dg_ = context.Operators.Start(df_);
 			CqlDateTime dh_ = context.Operators.ConvertDateToDateTime(dg_);
 			CqlInterval<CqlDateTime> di_ = this.Intake_Period(context);
@@ -315,7 +315,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		IEnumerable<MedicationRequest> cv_ = context.Operators.Union<MedicationRequest>(cp_, cu_);
 		bool? cw_(MedicationRequest ADHDMedications)
 		{
-			CqlInterval<CqlDate> dk_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ADHDMedications);
+			CqlInterval<CqlDate> dk_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ADHDMedications);
 			CqlDate dl_ = context.Operators.Start(dk_);
 			CqlDateTime dm_ = context.Operators.ConvertDateToDateTime(dl_);
 			CqlInterval<CqlDateTime> dn_ = this.Intake_Period(context);
@@ -369,8 +369,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			IEnumerable<MedicationRequest> fl_ = context.Operators.Union<MedicationRequest>(ff_, fk_);
 			bool? fm_(MedicationRequest ActiveADHDMedication)
 			{
-				CqlInterval<CqlDate> fq_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ActiveADHDMedication);
-				CqlInterval<CqlDate> fr_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ADHDMedicationOrder);
+				CqlInterval<CqlDate> fq_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ActiveADHDMedication);
+				CqlInterval<CqlDate> fr_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ADHDMedicationOrder);
 				CqlDate fs_ = context.Operators.Start(fr_);
 				CqlDateTime ft_ = context.Operators.ConvertDateToDateTime(fs_);
 				CqlDate fu_ = context.Operators.DateFrom(ft_);
@@ -395,7 +395,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		IEnumerable<MedicationRequest> da_ = context.Operators.Except<MedicationRequest>(ay_, cz_);
 		(CqlDate startDate, nint _)? db_(MedicationRequest QualifyingMed)
 		{
-			CqlInterval<CqlDate> gd_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, QualifyingMed);
+			CqlInterval<CqlDate> gd_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, QualifyingMed);
 			CqlDate ge_ = context.Operators.Start(gd_);
 			(CqlDate startDate, nint _)? gf_ = (ge_, default);
 
@@ -479,8 +479,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			bool? am_ = al_?.highClosed;
 			CqlInterval<CqlDateTime> an_ = context.Operators.Interval(t_, aa_, ag_, am_);
 			Period ao_ = ValidEncounters?.Period;
-			CqlInterval<CqlDateTime> ap_ = _FHIRHelpers_4_3_000.ToInterval(context, ao_);
-			CqlInterval<CqlDateTime> aq_ = _QICoreCommon_2_0_000.ToInterval(context, ap_ as object);
+			CqlInterval<CqlDateTime> ap_ = fhirHelpers_4_3_000.ToInterval(context, ao_);
+			CqlInterval<CqlDateTime> aq_ = qiCoreCommon_2_0_000.ToInterval(context, ap_ as object);
 			bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, "day");
 
 			return ar_;
@@ -513,7 +513,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 				ResourceReference o_ = PD?.Condition;
 				FhirString p_ = o_?.ReferenceElement;
 				string q_ = p_?.Value;
-				string r_ = _QICoreCommon_2_0_000.getId(context, q_);
+				string r_ = qiCoreCommon_2_0_000.getId(context, q_);
 				bool? s_ = context.Operators.Equal(n_, r_);
 
 				return s_;
@@ -539,7 +539,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			bool? f_(Condition EncounterDiagnosis)
 			{
 				CodeableConcept i_ = EncounterDiagnosis?.Code;
-				CqlConcept j_ = _FHIRHelpers_4_3_000.ToConcept(context, i_);
+				CqlConcept j_ = fhirHelpers_4_3_000.ToConcept(context, i_);
 				CqlValueSet k_ = this.Mental_Behavioral_and_Neurodevelopmental_Disorders(context);
 				bool? l_ = context.Operators.ConceptInValueSet(j_, k_);
 
@@ -562,8 +562,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		bool? b_(Encounter InpatientStay)
 		{
 			Period d_ = InpatientStay?.Period;
-			CqlInterval<CqlDateTime> e_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
-			CqlInterval<CqlDate> f_ = _CQMCommon_2_0_000.ToDateInterval(context, e_);
+			CqlInterval<CqlDateTime> e_ = fhirHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDate> f_ = cqmCommon_2_0_000.ToDateInterval(context, e_);
 			CqlDate g_ = context.Operators.Start(f_);
 			CqlDate h_ = this.IPSD(context);
 			CqlQuantity j_ = context.Operators.Quantity(30m, "days");
@@ -629,7 +629,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition Narcolepsy)
 		{
-			CqlInterval<CqlDateTime> e_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, Narcolepsy);
+			CqlInterval<CqlDateTime> e_ = qiCoreCommon_2_0_000.ToPrevalenceInterval(context, Narcolepsy);
 			CqlDateTime f_ = context.Operators.Start(e_);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			CqlDateTime h_ = context.Operators.End(g_);
@@ -645,7 +645,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
     [CqlDeclaration("Denominator Exclusions")]
 	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = _Hospice_6_9_000.Has_Hospice_Services(context);
+		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
 		IEnumerable<Condition> b_ = this.Narcolepsy_Exclusion(context);
 		bool? c_ = context.Operators.Exists<Condition>(b_);
 		bool? d_ = context.Operators.Or(a_, c_);
@@ -677,11 +677,11 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			bool? ap_(Encounter.LocationComponent Location)
 			{
 				ResourceReference as_ = Location?.Location;
-				Location at_ = _CQMCommon_2_0_000.GetLocation(context, as_);
+				Location at_ = cqmCommon_2_0_000.GetLocation(context, as_);
 				List<CodeableConcept> au_ = at_?.Type;
 				CqlConcept av_(CodeableConcept @this)
 				{
-					CqlConcept az_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+					CqlConcept az_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 					return az_;
 				};
@@ -731,8 +731,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		bool? b_(Encounter ValidNumeratorEncounter)
 		{
 			Period d_ = ValidNumeratorEncounter?.Period;
-			CqlInterval<CqlDateTime> e_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
-			CqlInterval<CqlDate> f_ = _CQMCommon_2_0_000.ToDateInterval(context, e_);
+			CqlInterval<CqlDateTime> e_ = fhirHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDate> f_ = cqmCommon_2_0_000.ToDateInterval(context, e_);
 			CqlDate g_ = context.Operators.Start(f_);
 			CqlDate h_ = this.IPSD(context);
 			CqlQuantity j_ = context.Operators.Quantity(30m, "days");
@@ -767,7 +767,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? f_(MedicationRequest AtomoxetineMed)
 		{
-			CqlInterval<CqlDate> dt_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, AtomoxetineMed);
+			CqlInterval<CqlDate> dt_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, AtomoxetineMed);
 			CqlDate dv_ = context.Operators.Start(dt_);
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? dw_ = (dt_, dv_);
 
@@ -796,14 +796,14 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			return ea_;
 		};
 		IEnumerable<CqlInterval<CqlDate>> m_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(k_, l_);
-		IEnumerable<CqlInterval<CqlDate>> n_ = _CumulativeMedicationDuration_4_0_000.RolloutIntervals(context, m_);
+		IEnumerable<CqlInterval<CqlDate>> n_ = cumulativeMedicationDuration_4_0_000.RolloutIntervals(context, m_);
 		CqlValueSet o_ = this.Clonidine(context);
 		IEnumerable<MedicationRequest> p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, default);
 		IEnumerable<MedicationRequest> r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, default);
 		IEnumerable<MedicationRequest> s_ = context.Operators.Union<MedicationRequest>(p_, r_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? t_(MedicationRequest ClonidineMed)
 		{
-			CqlInterval<CqlDate> eb_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ClonidineMed);
+			CqlInterval<CqlDate> eb_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, ClonidineMed);
 			CqlDate ed_ = context.Operators.Start(eb_);
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? ee_ = (eb_, ed_);
 
@@ -832,7 +832,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			return ei_;
 		};
 		IEnumerable<CqlInterval<CqlDate>> aa_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(y_, z_);
-		IEnumerable<CqlInterval<CqlDate>> ab_ = _CumulativeMedicationDuration_4_0_000.RolloutIntervals(context, aa_);
+		IEnumerable<CqlInterval<CqlDate>> ab_ = cumulativeMedicationDuration_4_0_000.RolloutIntervals(context, aa_);
 		IEnumerable<CqlInterval<CqlDate>> ac_ = context.Operators.Union<CqlInterval<CqlDate>>(n_, ab_);
 		CqlValueSet ad_ = this.Dexmethylphenidate(context);
 		IEnumerable<MedicationRequest> ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, default);
@@ -840,7 +840,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		IEnumerable<MedicationRequest> ah_ = context.Operators.Union<MedicationRequest>(ae_, ag_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? ai_(MedicationRequest DexmethylphenidateMed)
 		{
-			CqlInterval<CqlDate> ej_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, DexmethylphenidateMed);
+			CqlInterval<CqlDate> ej_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, DexmethylphenidateMed);
 			CqlDate el_ = context.Operators.Start(ej_);
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? em_ = (ej_, el_);
 
@@ -869,14 +869,14 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			return eq_;
 		};
 		IEnumerable<CqlInterval<CqlDate>> ap_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(an_, ao_);
-		IEnumerable<CqlInterval<CqlDate>> aq_ = _CumulativeMedicationDuration_4_0_000.RolloutIntervals(context, ap_);
+		IEnumerable<CqlInterval<CqlDate>> aq_ = cumulativeMedicationDuration_4_0_000.RolloutIntervals(context, ap_);
 		CqlValueSet ar_ = this.Dextroamphetamine(context);
 		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
 		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
 		IEnumerable<MedicationRequest> av_ = context.Operators.Union<MedicationRequest>(as_, au_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? aw_(MedicationRequest DextroamphetamineMed)
 		{
-			CqlInterval<CqlDate> er_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, DextroamphetamineMed);
+			CqlInterval<CqlDate> er_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, DextroamphetamineMed);
 			CqlDate et_ = context.Operators.Start(er_);
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? eu_ = (er_, et_);
 
@@ -905,7 +905,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			return ey_;
 		};
 		IEnumerable<CqlInterval<CqlDate>> bd_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(bb_, bc_);
-		IEnumerable<CqlInterval<CqlDate>> be_ = _CumulativeMedicationDuration_4_0_000.RolloutIntervals(context, bd_);
+		IEnumerable<CqlInterval<CqlDate>> be_ = cumulativeMedicationDuration_4_0_000.RolloutIntervals(context, bd_);
 		IEnumerable<CqlInterval<CqlDate>> bf_ = context.Operators.Union<CqlInterval<CqlDate>>(aq_, be_);
 		IEnumerable<CqlInterval<CqlDate>> bg_ = context.Operators.Union<CqlInterval<CqlDate>>(ac_, bf_);
 		CqlValueSet bh_ = this.Lisdexamfetamine(context);
@@ -914,7 +914,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		IEnumerable<MedicationRequest> bl_ = context.Operators.Union<MedicationRequest>(bi_, bk_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? bm_(MedicationRequest LisdexamfetamineMed)
 		{
-			CqlInterval<CqlDate> ez_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, LisdexamfetamineMed);
+			CqlInterval<CqlDate> ez_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, LisdexamfetamineMed);
 			CqlDate fb_ = context.Operators.Start(ez_);
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? fc_ = (ez_, fb_);
 
@@ -943,14 +943,14 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			return fg_;
 		};
 		IEnumerable<CqlInterval<CqlDate>> bt_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(br_, bs_);
-		IEnumerable<CqlInterval<CqlDate>> bu_ = _CumulativeMedicationDuration_4_0_000.RolloutIntervals(context, bt_);
+		IEnumerable<CqlInterval<CqlDate>> bu_ = cumulativeMedicationDuration_4_0_000.RolloutIntervals(context, bt_);
 		CqlValueSet bv_ = this.Methylphenidate(context);
 		IEnumerable<MedicationRequest> bw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, default);
 		IEnumerable<MedicationRequest> by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, default);
 		IEnumerable<MedicationRequest> bz_ = context.Operators.Union<MedicationRequest>(bw_, by_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? ca_(MedicationRequest MethylphenidateMed)
 		{
-			CqlInterval<CqlDate> fh_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, MethylphenidateMed);
+			CqlInterval<CqlDate> fh_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, MethylphenidateMed);
 			CqlDate fj_ = context.Operators.Start(fh_);
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? fk_ = (fh_, fj_);
 
@@ -979,7 +979,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			return fo_;
 		};
 		IEnumerable<CqlInterval<CqlDate>> ch_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cf_, cg_);
-		IEnumerable<CqlInterval<CqlDate>> ci_ = _CumulativeMedicationDuration_4_0_000.RolloutIntervals(context, ch_);
+		IEnumerable<CqlInterval<CqlDate>> ci_ = cumulativeMedicationDuration_4_0_000.RolloutIntervals(context, ch_);
 		IEnumerable<CqlInterval<CqlDate>> cj_ = context.Operators.Union<CqlInterval<CqlDate>>(bu_, ci_);
 		IEnumerable<CqlInterval<CqlDate>> ck_ = context.Operators.Union<CqlInterval<CqlDate>>(bg_, cj_);
 		CqlValueSet cl_ = this.Guanfacine(context);
@@ -988,7 +988,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		IEnumerable<MedicationRequest> cp_ = context.Operators.Union<MedicationRequest>(cm_, co_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? cq_(MedicationRequest GuanfacineMed)
 		{
-			CqlInterval<CqlDate> fp_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, GuanfacineMed);
+			CqlInterval<CqlDate> fp_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, GuanfacineMed);
 			CqlDate fr_ = context.Operators.Start(fp_);
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? fs_ = (fp_, fr_);
 
@@ -1017,7 +1017,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			return fw_;
 		};
 		IEnumerable<CqlInterval<CqlDate>> cx_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cv_, cw_);
-		IEnumerable<CqlInterval<CqlDate>> cy_ = _CumulativeMedicationDuration_4_0_000.RolloutIntervals(context, cx_);
+		IEnumerable<CqlInterval<CqlDate>> cy_ = cumulativeMedicationDuration_4_0_000.RolloutIntervals(context, cx_);
 		CqlCode cz_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
 		IEnumerable<CqlCode> da_ = context.Operators.ToList<CqlCode>(cz_);
 		IEnumerable<MedicationRequest> db_ = context.Operators.RetrieveByCodes<MedicationRequest>(da_, default);
@@ -1026,7 +1026,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		IEnumerable<MedicationRequest> df_ = context.Operators.Union<MedicationRequest>(db_, de_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? dg_(MedicationRequest MethamphetamineMed)
 		{
-			CqlInterval<CqlDate> fx_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, MethamphetamineMed);
+			CqlInterval<CqlDate> fx_ = cumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, MethamphetamineMed);
 			CqlDate fz_ = context.Operators.Start(fx_);
 			(CqlInterval<CqlDate> period, CqlDate periodStart)? ga_ = (fx_, fz_);
 
@@ -1055,7 +1055,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 			return ge_;
 		};
 		IEnumerable<CqlInterval<CqlDate>> dn_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(dl_, dm_);
-		IEnumerable<CqlInterval<CqlDate>> do_ = _CumulativeMedicationDuration_4_0_000.RolloutIntervals(context, dn_);
+		IEnumerable<CqlInterval<CqlDate>> do_ = cumulativeMedicationDuration_4_0_000.RolloutIntervals(context, dn_);
 		IEnumerable<CqlInterval<CqlDate>> dp_ = context.Operators.Union<CqlInterval<CqlDate>>(cy_, do_);
 		IEnumerable<CqlInterval<CqlDate>> dq_ = context.Operators.Union<CqlInterval<CqlDate>>(ck_, dp_);
 		CqlInterval<CqlDate> dr_(CqlInterval<CqlDate> ADHDMedication)
@@ -1077,7 +1077,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 	public  int? ADHD_Cumulative_Medication_Duration(CqlContext context)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase(context);
-		int? b_ = _CumulativeMedicationDuration_4_0_000.CumulativeDuration(context, a_);
+		int? b_ = cumulativeMedicationDuration_4_0_000.CumulativeDuration(context, a_);
 
 		return b_;
 	}
@@ -1098,8 +1098,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		bool? b_(Encounter InpatientStay)
 		{
 			Period d_ = InpatientStay?.Period;
-			CqlInterval<CqlDateTime> e_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
-			CqlInterval<CqlDate> f_ = _CQMCommon_2_0_000.ToDateInterval(context, e_);
+			CqlInterval<CqlDateTime> e_ = fhirHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDate> f_ = cqmCommon_2_0_000.ToDateInterval(context, e_);
 			CqlDate g_ = context.Operators.Start(f_);
 			CqlDate h_ = this.IPSD(context);
 			CqlQuantity j_ = context.Operators.Quantity(300m, "days");
@@ -1167,8 +1167,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		bool? b_(Encounter ValidNumeratorEncounter)
 		{
 			Period f_ = ValidNumeratorEncounter?.Period;
-			CqlInterval<CqlDateTime> g_ = _FHIRHelpers_4_3_000.ToInterval(context, f_);
-			CqlInterval<CqlDate> h_ = _CQMCommon_2_0_000.ToDateInterval(context, g_);
+			CqlInterval<CqlDateTime> g_ = fhirHelpers_4_3_000.ToInterval(context, f_);
+			CqlInterval<CqlDate> h_ = cqmCommon_2_0_000.ToDateInterval(context, g_);
 			CqlDate i_ = context.Operators.Start(h_);
 			CqlDate j_ = this.IPSD(context);
 			CqlQuantity k_ = context.Operators.Quantity(31m, "days");
@@ -1184,7 +1184,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		CqlDate d_(Encounter ValidNumeratorEncounter)
 		{
 			Period r_ = ValidNumeratorEncounter?.Period;
-			CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> s_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 			CqlDateTime t_ = context.Operators.Start(s_);
 			CqlDate u_ = context.Operators.DateFrom(t_);
 
@@ -1213,8 +1213,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		bool? c_(Encounter OnlineAssessment)
 		{
 			Period g_ = OnlineAssessment?.Period;
-			CqlInterval<CqlDateTime> h_ = _FHIRHelpers_4_3_000.ToInterval(context, g_);
-			CqlInterval<CqlDate> i_ = _CQMCommon_2_0_000.ToDateInterval(context, h_);
+			CqlInterval<CqlDateTime> h_ = fhirHelpers_4_3_000.ToInterval(context, g_);
+			CqlInterval<CqlDate> i_ = cqmCommon_2_0_000.ToDateInterval(context, h_);
 			CqlDate j_ = context.Operators.Start(i_);
 			CqlDate k_ = this.IPSD(context);
 			CqlQuantity l_ = context.Operators.Quantity(31m, "days");
@@ -1230,7 +1230,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
 		CqlDate e_(Encounter OnlineAssessment)
 		{
 			Period s_ = OnlineAssessment?.Period;
-			CqlInterval<CqlDateTime> t_ = _FHIRHelpers_4_3_000.ToInterval(context, s_);
+			CqlInterval<CqlDateTime> t_ = fhirHelpers_4_3_000.ToInterval(context, s_);
 			CqlDateTime u_ = context.Operators.Start(t_);
 			CqlDate v_ = context.Operators.DateFrom(u_);
 
@@ -1280,7 +1280,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -1288,7 +1288,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -1296,7 +1296,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -1304,7 +1304,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

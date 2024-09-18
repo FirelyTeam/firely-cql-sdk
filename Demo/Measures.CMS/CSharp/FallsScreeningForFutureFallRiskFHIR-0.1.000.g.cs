@@ -16,12 +16,12 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FallsScreeningForFutureFallRiskFHIR", "0.1.000")]
 public class FallsScreeningForFutureFallRiskFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    Hospice_6_9_000 _Hospice_6_9_000,
-    Status_1_6_000 _Status_1_6_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    Hospice_6_9_000 hospice_6_9_000,
+    Status_1_6_000 status_1_6_000)
 {
 
     [CqlDeclaration("Annual Wellness Visit")]
@@ -127,7 +127,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -135,7 +135,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -143,7 +143,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -151,7 +151,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -203,13 +203,13 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000(
 		CqlValueSet ap_ = this.Occupational_Therapy_Evaluation(context);
 		IEnumerable<Encounter> aq_ = context.Operators.RetrieveByValueSet<Encounter>(ap_, default);
 		IEnumerable<Encounter> ar_ = context.Operators.Union<Encounter>(ao_, aq_);
-		IEnumerable<Encounter> as_ = _Status_1_6_000.Finished_Encounter(context, ar_);
+		IEnumerable<Encounter> as_ = status_1_6_000.Finished_Encounter(context, ar_);
 		bool? at_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> av_ = this.Measurement_Period(context);
 			Period aw_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> ax_ = _FHIRHelpers_4_3_000.ToInterval(context, aw_);
-			CqlInterval<CqlDateTime> ay_ = _QICoreCommon_2_0_000.ToInterval(context, ax_ as object);
+			CqlInterval<CqlDateTime> ax_ = fhirHelpers_4_3_000.ToInterval(context, aw_);
+			CqlInterval<CqlDateTime> ay_ = qiCoreCommon_2_0_000.ToInterval(context, ax_ as object);
 			bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ay_, "day");
 
 			return az_;
@@ -249,7 +249,7 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000(
     [CqlDeclaration("Denominator Exclusions")]
 	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = _Hospice_6_9_000.Has_Hospice_Services(context);
+		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
 
 		return a_;
 	}
@@ -259,13 +259,13 @@ public class FallsScreeningForFutureFallRiskFHIR_0_1_000(
 	{
 		CqlValueSet a_ = this.Falls_Screening(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
-		IEnumerable<Observation> c_ = _Status_1_6_000.isAssessmentPerformed(context, b_);
+		IEnumerable<Observation> c_ = status_1_6_000.isAssessmentPerformed(context, b_);
 		bool? d_(Observation FallsScreening)
 		{
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			DataType h_ = FallsScreening?.Effective;
-			object i_ = _FHIRHelpers_4_3_000.ToValue(context, h_);
-			CqlInterval<CqlDateTime> j_ = _QICoreCommon_2_0_000.ToInterval(context, i_);
+			object i_ = fhirHelpers_4_3_000.ToValue(context, h_);
+			CqlInterval<CqlDateTime> j_ = qiCoreCommon_2_0_000.ToInterval(context, i_);
 			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;

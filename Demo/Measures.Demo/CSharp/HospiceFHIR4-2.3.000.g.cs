@@ -16,8 +16,8 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HospiceFHIR4", "2.3.000")]
 public class HospiceFHIR4_2_3_000(
-    MATGlobalCommonFunctionsFHIR4_6_1_000 _MATGlobalCommonFunctionsFHIR4_6_1_000,
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001)
+    MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001)
 {
 
     [CqlDeclaration("Encounter Inpatient")]
@@ -74,23 +74,23 @@ public class HospiceFHIR4_2_3_000(
 		bool? c_(Encounter DischargeHospice)
 		{
 			Code<Encounter.EncounterStatus> r_ = DischargeHospice?.StatusElement;
-			string s_ = _FHIRHelpers_4_0_001.ToString(context, r_);
+			string s_ = fhirHelpers_4_0_001.ToString(context, r_);
 			bool? t_ = context.Operators.Equal(s_, "finished");
 			Encounter.HospitalizationComponent u_ = DischargeHospice?.Hospitalization;
 			CodeableConcept v_ = u_?.DischargeDisposition;
-			CqlConcept w_ = _FHIRHelpers_4_0_001.ToConcept(context, v_);
+			CqlConcept w_ = fhirHelpers_4_0_001.ToConcept(context, v_);
 			CqlCode x_ = this.Discharge_to_home_for_hospice_care__procedure_(context);
 			CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
 			bool? z_ = context.Operators.Equivalent(w_, y_);
 			CodeableConcept ab_ = u_?.DischargeDisposition;
-			CqlConcept ac_ = _FHIRHelpers_4_0_001.ToConcept(context, ab_);
+			CqlConcept ac_ = fhirHelpers_4_0_001.ToConcept(context, ab_);
 			CqlCode ad_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
 			CqlConcept ae_ = context.Operators.ConvertCodeToConcept(ad_);
 			bool? af_ = context.Operators.Equivalent(ac_, ae_);
 			bool? ag_ = context.Operators.Or(z_, af_);
 			bool? ah_ = context.Operators.And(t_, ag_);
 			Period ai_ = DischargeHospice?.Period;
-			CqlInterval<CqlDateTime> aj_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, ai_ as object);
+			CqlInterval<CqlDateTime> aj_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, ai_ as object);
 			CqlDateTime ak_ = context.Operators.End(aj_);
 			CqlInterval<CqlDateTime> al_ = this.Measurement_Period(context);
 			bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, default);
@@ -105,19 +105,19 @@ public class HospiceFHIR4_2_3_000(
 		bool? h_(ServiceRequest HospiceOrder)
 		{
 			Code<RequestStatus> ao_ = HospiceOrder?.StatusElement;
-			string ap_ = _FHIRHelpers_4_0_001.ToString(context, ao_);
+			string ap_ = fhirHelpers_4_0_001.ToString(context, ao_);
 			string[] aq_ = [
 				"active",
 				"completed",
 			];
 			bool? ar_ = context.Operators.In<string>(ap_, aq_ as IEnumerable<string>);
 			Code<RequestIntent> as_ = HospiceOrder?.IntentElement;
-			string at_ = _FHIRHelpers_4_0_001.ToString(context, as_);
+			string at_ = fhirHelpers_4_0_001.ToString(context, as_);
 			bool? au_ = context.Operators.Equal(at_, "order");
 			bool? av_ = context.Operators.And(ar_, au_);
 			CqlInterval<CqlDateTime> aw_ = this.Measurement_Period(context);
 			FhirDateTime ax_ = HospiceOrder?.AuthoredOnElement;
-			CqlInterval<CqlDateTime> ay_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, ax_ as object);
+			CqlInterval<CqlDateTime> ay_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, ax_ as object);
 			bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, default);
 			bool? ba_ = context.Operators.And(av_, az_);
 
@@ -130,10 +130,10 @@ public class HospiceFHIR4_2_3_000(
 		bool? n_(Procedure HospicePerformed)
 		{
 			Code<EventStatus> bb_ = HospicePerformed?.StatusElement;
-			string bc_ = _FHIRHelpers_4_0_001.ToString(context, bb_);
+			string bc_ = fhirHelpers_4_0_001.ToString(context, bb_);
 			bool? bd_ = context.Operators.Equal(bc_, "completed");
 			DataType be_ = HospicePerformed?.Performed;
-			CqlInterval<CqlDateTime> bf_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, be_);
+			CqlInterval<CqlDateTime> bf_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, be_);
 			CqlInterval<CqlDateTime> bg_ = this.Measurement_Period(context);
 			bool? bh_ = context.Operators.Overlaps(bf_, bg_, default);
 			bool? bi_ = context.Operators.And(bd_, bh_);

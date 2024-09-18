@@ -16,11 +16,11 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HIVRetentionFHIR", "0.1.000")]
 public class HIVRetentionFHIR_0_1_000(
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    CumulativeMedicationDuration_4_0_000 _CumulativeMedicationDuration_4_0_000)
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    CumulativeMedicationDuration_4_0_000 cumulativeMedicationDuration_4_0_000)
 {
 
     [CqlDeclaration("Annual Wellness Visit")]
@@ -120,7 +120,7 @@ public class HIVRetentionFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -152,7 +152,7 @@ public class HIVRetentionFHIR_0_1_000(
 		{
 			string m_ = @this?.Url;
 			FhirString n_ = context.Operators.Convert<FhirString>(m_);
-			string o_ = _FHIRHelpers_4_3_000.ToString(context, n_);
+			string o_ = fhirHelpers_4_3_000.ToString(context, n_);
 			bool? p_ = context.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
 			return p_;
@@ -168,7 +168,7 @@ public class HIVRetentionFHIR_0_1_000(
 			{
 				string al_ = @this?.Url;
 				FhirString am_ = context.Operators.Convert<FhirString>(al_);
-				string an_ = _FHIRHelpers_4_3_000.ToString(context, am_);
+				string an_ = fhirHelpers_4_3_000.ToString(context, am_);
 				bool? ao_ = context.Operators.Equal(an_, "ombCategory");
 
 				return ao_;
@@ -184,7 +184,7 @@ public class HIVRetentionFHIR_0_1_000(
 			};
 			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
 			object u_ = context.Operators.SingletonFrom<object>(t_);
-			CqlCode v_ = _FHIRHelpers_4_3_000.ToCode(context, u_ as Coding);
+			CqlCode v_ = fhirHelpers_4_3_000.ToCode(context, u_ as Coding);
 			CqlCode[] w_ = [
 				v_,
 			];
@@ -192,7 +192,7 @@ public class HIVRetentionFHIR_0_1_000(
 			{
 				string aq_ = @this?.Url;
 				FhirString ar_ = context.Operators.Convert<FhirString>(aq_);
-				string as_ = _FHIRHelpers_4_3_000.ToString(context, ar_);
+				string as_ = fhirHelpers_4_3_000.ToString(context, ar_);
 				bool? at_ = context.Operators.Equal(as_, "detailed");
 
 				return at_;
@@ -209,7 +209,7 @@ public class HIVRetentionFHIR_0_1_000(
 			IEnumerable<object> aa_ = context.Operators.Select<Extension, object>(y_, z_);
 			CqlCode ab_(object @this)
 			{
-				CqlCode av_ = _FHIRHelpers_4_3_000.ToCode(context, @this as Coding);
+				CqlCode av_ = fhirHelpers_4_3_000.ToCode(context, @this as Coding);
 
 				return av_;
 			};
@@ -219,7 +219,7 @@ public class HIVRetentionFHIR_0_1_000(
 			{
 				string aw_ = @this?.Url;
 				FhirString ax_ = context.Operators.Convert<FhirString>(aw_);
-				string ay_ = _FHIRHelpers_4_3_000.ToString(context, ax_);
+				string ay_ = fhirHelpers_4_3_000.ToString(context, ax_);
 				bool? az_ = context.Operators.Equal(ay_, "text");
 
 				return az_;
@@ -273,7 +273,7 @@ public class HIVRetentionFHIR_0_1_000(
 		{
 			string m_ = @this?.Url;
 			FhirString n_ = context.Operators.Convert<FhirString>(m_);
-			string o_ = _FHIRHelpers_4_3_000.ToString(context, n_);
+			string o_ = fhirHelpers_4_3_000.ToString(context, n_);
 			bool? p_ = context.Operators.Equal(o_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
 			return p_;
@@ -289,7 +289,7 @@ public class HIVRetentionFHIR_0_1_000(
 			{
 				string ak_ = @this?.Url;
 				FhirString al_ = context.Operators.Convert<FhirString>(ak_);
-				string am_ = _FHIRHelpers_4_3_000.ToString(context, al_);
+				string am_ = fhirHelpers_4_3_000.ToString(context, al_);
 				bool? an_ = context.Operators.Equal(am_, "ombCategory");
 
 				return an_;
@@ -306,7 +306,7 @@ public class HIVRetentionFHIR_0_1_000(
 			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
 			CqlCode u_(object @this)
 			{
-				CqlCode ap_ = _FHIRHelpers_4_3_000.ToCode(context, @this as Coding);
+				CqlCode ap_ = fhirHelpers_4_3_000.ToCode(context, @this as Coding);
 
 				return ap_;
 			};
@@ -315,7 +315,7 @@ public class HIVRetentionFHIR_0_1_000(
 			{
 				string aq_ = @this?.Url;
 				FhirString ar_ = context.Operators.Convert<FhirString>(aq_);
-				string as_ = _FHIRHelpers_4_3_000.ToString(context, ar_);
+				string as_ = fhirHelpers_4_3_000.ToString(context, ar_);
 				bool? at_ = context.Operators.Equal(as_, "detailed");
 
 				return at_;
@@ -332,7 +332,7 @@ public class HIVRetentionFHIR_0_1_000(
 			IEnumerable<object> z_ = context.Operators.Select<Extension, object>(x_, y_);
 			CqlCode aa_(object @this)
 			{
-				CqlCode av_ = _FHIRHelpers_4_3_000.ToCode(context, @this as Coding);
+				CqlCode av_ = fhirHelpers_4_3_000.ToCode(context, @this as Coding);
 
 				return av_;
 			};
@@ -342,7 +342,7 @@ public class HIVRetentionFHIR_0_1_000(
 			{
 				string aw_ = @this?.Url;
 				FhirString ax_ = context.Operators.Convert<FhirString>(aw_);
-				string ay_ = _FHIRHelpers_4_3_000.ToString(context, ax_);
+				string ay_ = fhirHelpers_4_3_000.ToString(context, ax_);
 				bool? az_ = context.Operators.Equal(ay_, "text");
 
 				return az_;
@@ -372,7 +372,7 @@ public class HIVRetentionFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -384,7 +384,7 @@ public class HIVRetentionFHIR_0_1_000(
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition HIVDx)
 		{
-			CqlInterval<CqlDateTime> f_ = _QICoreCommon_2_0_000.prevalenceInterval(context, HIVDx);
+			CqlInterval<CqlDateTime> f_ = qiCoreCommon_2_0_000.prevalenceInterval(context, HIVDx);
 			CqlDateTime g_ = context.Operators.Start(f_);
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
 			CqlDateTime i_ = context.Operators.Start(h_);
@@ -393,7 +393,7 @@ public class HIVRetentionFHIR_0_1_000(
 			CqlDate l_ = context.Operators.DateFrom(k_);
 			CqlDateTime m_ = context.Operators.ConvertDateToDateTime(l_);
 			bool? n_ = context.Operators.SameOrBefore(g_, m_, default);
-			bool? o_ = _QICoreCommon_2_0_000.isActive(context, HIVDx);
+			bool? o_ = qiCoreCommon_2_0_000.isActive(context, HIVDx);
 			bool? p_ = context.Operators.And(n_, o_);
 
 			return p_;
@@ -448,7 +448,7 @@ public class HIVRetentionFHIR_0_1_000(
 			CqlDateTime ao_ = context.Operators.Add(am_, an_);
 			CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, true, true);
 			Period aq_ = QualifyingEncounter?.Period;
-			CqlInterval<CqlDateTime> ar_ = _FHIRHelpers_4_3_000.ToInterval(context, aq_);
+			CqlInterval<CqlDateTime> ar_ = fhirHelpers_4_3_000.ToInterval(context, aq_);
 			bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
 
 			return as_;
@@ -520,13 +520,13 @@ public class HIVRetentionFHIR_0_1_000(
 			{
 				CqlInterval<CqlDateTime> ao_ = this.Measurement_Period(context);
 				Period ap_ = ValidEncounter?.Period;
-				CqlInterval<CqlDateTime> aq_ = _FHIRHelpers_4_3_000.ToInterval(context, ap_);
+				CqlInterval<CqlDateTime> aq_ = fhirHelpers_4_3_000.ToInterval(context, ap_);
 				bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, default);
 				CqlInterval<CqlDateTime> as_()
 				{
 					bool az_()
 					{
-						CqlInterval<CqlDateTime> ba_ = _QICoreCommon_2_0_000.prevalenceInterval(context, HIVDiagnosis);
+						CqlInterval<CqlDateTime> ba_ = qiCoreCommon_2_0_000.prevalenceInterval(context, HIVDiagnosis);
 						CqlDateTime bb_ = context.Operators.Start(ba_);
 
 						return bb_ is null;
@@ -537,7 +537,7 @@ public class HIVRetentionFHIR_0_1_000(
 					}
 					else
 					{
-						CqlInterval<CqlDateTime> bc_ = _QICoreCommon_2_0_000.prevalenceInterval(context, HIVDiagnosis);
+						CqlInterval<CqlDateTime> bc_ = qiCoreCommon_2_0_000.prevalenceInterval(context, HIVDiagnosis);
 						CqlDateTime bd_ = context.Operators.Start(bc_);
 						CqlDateTime bf_ = context.Operators.Start(bc_);
 						CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(bd_, bf_, true, true);
@@ -545,10 +545,10 @@ public class HIVRetentionFHIR_0_1_000(
 						return bg_;
 					}
 				};
-				CqlInterval<CqlDateTime> au_ = _FHIRHelpers_4_3_000.ToInterval(context, ap_);
+				CqlInterval<CqlDateTime> au_ = fhirHelpers_4_3_000.ToInterval(context, ap_);
 				bool? av_ = context.Operators.SameOrBefore(as_(), au_, "day");
 				bool? aw_ = context.Operators.And(ar_, av_);
-				bool? ax_ = _QICoreCommon_2_0_000.isActive(context, HIVDiagnosis);
+				bool? ax_ = qiCoreCommon_2_0_000.isActive(context, HIVDiagnosis);
 				bool? ay_ = context.Operators.And(aw_, ax_);
 
 				return ay_;
@@ -574,8 +574,8 @@ public class HIVRetentionFHIR_0_1_000(
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
 			DataType g_ = ViralLoadTest?.Effective;
-			object h_ = _FHIRHelpers_4_3_000.ToValue(context, g_);
-			CqlInterval<CqlDateTime> i_ = _QICoreCommon_2_0_000.ToInterval(context, h_);
+			object h_ = fhirHelpers_4_3_000.ToValue(context, g_);
+			CqlInterval<CqlDateTime> i_ = qiCoreCommon_2_0_000.ToInterval(context, h_);
 			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, "day");
 
 			return j_;
@@ -598,22 +598,22 @@ public class HIVRetentionFHIR_0_1_000(
 			{
 				CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
 				DataType l_ = ViralLoadTest?.Effective;
-				object m_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
-				CqlInterval<CqlDateTime> n_ = _QICoreCommon_2_0_000.ToInterval(context, m_);
+				object m_ = fhirHelpers_4_3_000.ToValue(context, l_);
+				CqlInterval<CqlDateTime> n_ = qiCoreCommon_2_0_000.ToInterval(context, m_);
 				bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, default);
-				object q_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
-				CqlInterval<CqlDateTime> r_ = _QICoreCommon_2_0_000.ToInterval(context, q_);
+				object q_ = fhirHelpers_4_3_000.ToValue(context, l_);
+				CqlInterval<CqlDateTime> r_ = qiCoreCommon_2_0_000.ToInterval(context, q_);
 				CqlDateTime s_ = context.Operators.Start(r_);
 				Period t_ = EncounterWithHIV?.Period;
-				CqlInterval<CqlDateTime> u_ = _FHIRHelpers_4_3_000.ToInterval(context, t_);
+				CqlInterval<CqlDateTime> u_ = fhirHelpers_4_3_000.ToInterval(context, t_);
 				CqlDateTime v_ = context.Operators.End(u_);
 				CqlQuantity w_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime x_ = context.Operators.Add(v_, w_);
 				bool? y_ = context.Operators.SameOrAfter(s_, x_, "day");
-				CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, t_);
+				CqlInterval<CqlDateTime> aa_ = fhirHelpers_4_3_000.ToInterval(context, t_);
 				CqlDateTime ab_ = context.Operators.Start(aa_);
-				object ad_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
-				CqlInterval<CqlDateTime> ae_ = _QICoreCommon_2_0_000.ToInterval(context, ad_);
+				object ad_ = fhirHelpers_4_3_000.ToValue(context, l_);
+				CqlInterval<CqlDateTime> ae_ = qiCoreCommon_2_0_000.ToInterval(context, ad_);
 				CqlDateTime af_ = context.Operators.End(ae_);
 				CqlDateTime ah_ = context.Operators.Add(af_, w_);
 				bool? ai_ = context.Operators.SameOrAfter(ab_, ah_, "day");
@@ -647,10 +647,10 @@ public class HIVRetentionFHIR_0_1_000(
 				bool? j_ = context.Operators.Equivalent(EncounterWithHIV, AnotherEncounterWithHIV);
 				bool? k_ = context.Operators.Not(j_);
 				Period l_ = AnotherEncounterWithHIV?.Period;
-				CqlInterval<CqlDateTime> m_ = _FHIRHelpers_4_3_000.ToInterval(context, l_);
+				CqlInterval<CqlDateTime> m_ = fhirHelpers_4_3_000.ToInterval(context, l_);
 				CqlDateTime n_ = context.Operators.Start(m_);
 				Period o_ = EncounterWithHIV?.Period;
-				CqlInterval<CqlDateTime> p_ = _FHIRHelpers_4_3_000.ToInterval(context, o_);
+				CqlInterval<CqlDateTime> p_ = fhirHelpers_4_3_000.ToInterval(context, o_);
 				CqlDateTime q_ = context.Operators.End(p_);
 				CqlQuantity r_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime s_ = context.Operators.Add(q_, r_);

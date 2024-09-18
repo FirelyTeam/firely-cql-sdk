@@ -16,9 +16,9 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.2.000")]
 public class CRLReceiptofSpecialistReportFHIR_0_2_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000)
 {
 
     [CqlDeclaration("Consultant Report")]
@@ -109,7 +109,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000(
 			bool? x_ = context.Operators.Equal(w_, "finished");
 			CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
 			Period z_ = Encounter?.Period;
-			CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, z_);
+			CqlInterval<CqlDateTime> aa_ = fhirHelpers_4_3_000.ToInterval(context, z_);
 			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, "day");
 			bool? ac_ = context.Operators.And(x_, ab_);
 
@@ -202,7 +202,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -210,7 +210,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -218,7 +218,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -226,7 +226,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -239,7 +239,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000(
 		{
 			FhirString d_ = Task?.ReferenceElement;
 			string e_ = d_?.Value;
-			string f_ = _QICoreCommon_2_0_000.GetId(context, e_);
+			string f_ = qiCoreCommon_2_0_000.GetId(context, e_);
 
 			return f_;
 		};
@@ -265,7 +265,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000(
 				IEnumerable<string> m_ = this.TaskGetRequestID(context, ConsultantReportObtained);
 				bool? n_ = context.Operators.In<string>(l_, m_);
 				Period o_ = ConsultantReportObtained?.ExecutionPeriod;
-				CqlInterval<CqlDateTime> p_ = _FHIRHelpers_4_3_000.ToInterval(context, o_);
+				CqlInterval<CqlDateTime> p_ = fhirHelpers_4_3_000.ToInterval(context, o_);
 				CqlDateTime q_ = context.Operators.End(p_);
 				CqlDateTime r_ = FirstReferral?.AuthorDate;
 				bool? s_ = context.Operators.After(q_, r_, default);
@@ -275,7 +275,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000(
 				Code<Task.TaskStatus> w_ = context.Operators.Convert<Code<Task.TaskStatus>>(v_);
 				bool? x_ = context.Operators.Equal(w_, "completed");
 				bool? y_ = context.Operators.And(t_, x_);
-				CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, o_);
+				CqlInterval<CqlDateTime> aa_ = fhirHelpers_4_3_000.ToInterval(context, o_);
 				CqlDateTime ab_ = context.Operators.End(aa_);
 				CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
 				bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");

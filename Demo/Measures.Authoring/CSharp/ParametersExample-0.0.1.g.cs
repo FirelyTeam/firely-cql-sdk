@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public class ParametersExample_0_0_1(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000)
 {
 
     [CqlDeclaration("Marital Status")]
@@ -59,18 +59,18 @@ public class ParametersExample_0_0_1(
 		bool? c_(Patient P)
 		{
 			Code<AdministrativeGender> f_ = P?.GenderElement;
-			string g_ = _FHIRHelpers_4_3_000.ToString(context, f_);
+			string g_ = fhirHelpers_4_3_000.ToString(context, f_);
 			bool? h_ = context.Operators.Equal(g_, "male");
 			FhirBoolean i_ = P?.ActiveElement;
-			bool? j_ = _FHIRHelpers_4_3_000.ToBoolean(context, i_);
+			bool? j_ = fhirHelpers_4_3_000.ToBoolean(context, i_);
 			bool? k_ = context.Operators.IsTrue(j_);
 			bool? l_ = context.Operators.And(h_, k_);
 			DataType m_ = P?.Deceased;
-			bool? n_ = _FHIRHelpers_4_3_000.ToBoolean(context, m_ as FhirBoolean);
+			bool? n_ = fhirHelpers_4_3_000.ToBoolean(context, m_ as FhirBoolean);
 			bool? o_ = context.Operators.Not(n_);
 			bool? p_ = context.Operators.And(l_, o_);
 			CodeableConcept q_ = P?.MaritalStatus;
-			CqlConcept r_ = _FHIRHelpers_4_3_000.ToConcept(context, q_);
+			CqlConcept r_ = fhirHelpers_4_3_000.ToConcept(context, q_);
 			CqlValueSet s_ = this.Marital_Status(context);
 			bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
 			bool? u_ = context.Operators.And(p_, t_);
@@ -96,7 +96,7 @@ public class ParametersExample_0_0_1(
 	public  int? Patient_Age_in_Years(CqlContext context)
 	{
 		Date a_ = this.Patient_Birthdate(context);
-		CqlDate b_ = _FHIRHelpers_4_3_000.ToDate(context, a_);
+		CqlDate b_ = fhirHelpers_4_3_000.ToDate(context, a_);
 		CqlDate c_ = this.CurrentDate(context);
 		int? d_ = context.Operators.DurationBetween(b_, c_, "year");
 

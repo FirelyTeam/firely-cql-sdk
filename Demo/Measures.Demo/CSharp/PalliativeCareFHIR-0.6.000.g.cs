@@ -16,8 +16,8 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
 public class PalliativeCareFHIR_0_6_000(
-    MATGlobalCommonFunctionsFHIR4_6_1_000 _MATGlobalCommonFunctionsFHIR4_6_1_000,
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001)
+    MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001)
 {
 
     [CqlDeclaration("Palliative Care Encounter")]
@@ -84,7 +84,7 @@ public class PalliativeCareFHIR_0_6_000(
 		bool? d_(Observation PalliativeAssessment)
 		{
 			Code<ObservationStatus> s_ = PalliativeAssessment?.StatusElement;
-			string t_ = _FHIRHelpers_4_0_001.ToString(context, s_);
+			string t_ = fhirHelpers_4_0_001.ToString(context, s_);
 			string[] u_ = [
 				"final",
 				"amended",
@@ -95,7 +95,7 @@ public class PalliativeCareFHIR_0_6_000(
 			bool? x_(CodeableConcept PalliativeAssessmentCategory)
 			{
 				CqlCode ag_ = this.survey(context);
-				CqlConcept ah_ = _FHIRHelpers_4_0_001.ToConcept(context, PalliativeAssessmentCategory);
+				CqlConcept ah_ = fhirHelpers_4_0_001.ToConcept(context, PalliativeAssessmentCategory);
 				CqlCode[] ai_ = ah_?.codes;
 				bool? aj_ = context.Operators.In<CqlCode>(ag_, (IEnumerable<CqlCode>)ai_);
 
@@ -105,7 +105,7 @@ public class PalliativeCareFHIR_0_6_000(
 			bool? z_ = context.Operators.Exists<CodeableConcept>(y_);
 			bool? aa_ = context.Operators.And(v_, z_);
 			DataType ab_ = PalliativeAssessment?.Effective;
-			CqlInterval<CqlDateTime> ac_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, ab_);
+			CqlInterval<CqlDateTime> ac_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, ab_);
 			CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
 			bool? ae_ = context.Operators.Overlaps(ac_, ad_, default);
 			bool? af_ = context.Operators.And(aa_, ae_);
@@ -119,10 +119,10 @@ public class PalliativeCareFHIR_0_6_000(
 		bool? i_(Encounter PalliativeEncounter)
 		{
 			Code<Encounter.EncounterStatus> ak_ = PalliativeEncounter?.StatusElement;
-			string al_ = _FHIRHelpers_4_0_001.ToString(context, ak_);
+			string al_ = fhirHelpers_4_0_001.ToString(context, ak_);
 			bool? am_ = context.Operators.Equal(al_, "finished");
 			Period an_ = PalliativeEncounter?.Period;
-			CqlInterval<CqlDateTime> ao_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, an_ as object);
+			CqlInterval<CqlDateTime> ao_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, an_ as object);
 			CqlInterval<CqlDateTime> ap_ = this.Measurement_Period(context);
 			bool? aq_ = context.Operators.Overlaps(ao_, ap_, default);
 			bool? ar_ = context.Operators.And(am_, aq_);
@@ -137,14 +137,14 @@ public class PalliativeCareFHIR_0_6_000(
 		bool? o_(Procedure PalliativeIntervention)
 		{
 			Code<EventStatus> as_ = PalliativeIntervention?.StatusElement;
-			string at_ = _FHIRHelpers_4_0_001.ToString(context, as_);
+			string at_ = fhirHelpers_4_0_001.ToString(context, as_);
 			string[] au_ = [
 				"completed",
 				"in-progress",
 			];
 			bool? av_ = context.Operators.In<string>(at_, au_ as IEnumerable<string>);
 			DataType aw_ = PalliativeIntervention?.Performed;
-			CqlInterval<CqlDateTime> ax_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, aw_);
+			CqlInterval<CqlDateTime> ax_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, aw_);
 			CqlInterval<CqlDateTime> ay_ = this.Measurement_Period(context);
 			bool? az_ = context.Operators.Overlaps(ax_, ay_, default);
 			bool? ba_ = context.Operators.And(av_, az_);

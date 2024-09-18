@@ -16,11 +16,11 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyDentistsFHIR", "0.0.002")]
 public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    Hospice_6_9_000 _Hospice_6_9_000,
-    Status_1_6_000 _Status_1_6_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    Hospice_6_9_000 hospice_6_9_000,
+    Status_1_6_000 status_1_6_000)
 {
 
     [CqlDeclaration("Clinical Oral Evaluation")]
@@ -78,12 +78,12 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	{
 		CqlValueSet a_ = this.Clinical_Oral_Evaluation(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
-		IEnumerable<Encounter> c_ = _Status_1_6_000.isEncounterPerformed(context, b_);
+		IEnumerable<Encounter> c_ = status_1_6_000.isEncounterPerformed(context, b_);
 		bool? d_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
 			Period g_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> h_ = _FHIRHelpers_4_3_000.ToInterval(context, g_);
+			CqlInterval<CqlDateTime> h_ = fhirHelpers_4_3_000.ToInterval(context, g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
 
 			return i_;
@@ -124,7 +124,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
     [CqlDeclaration("Denominator Exclusions")]
 	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = _Hospice_6_9_000.Has_Hospice_Services(context);
+		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
 
 		return a_;
 	}
@@ -134,12 +134,12 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	{
 		CqlValueSet a_ = this.Fluoride_Varnish_Application_for_Children(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
-		IEnumerable<Procedure> c_ = _Status_1_6_000.isProcedurePerformed(context, b_);
+		IEnumerable<Procedure> c_ = status_1_6_000.isProcedurePerformed(context, b_);
 		bool? d_(Procedure FluorideApplication)
 		{
 			DataType j_ = FluorideApplication?.Performed;
-			object k_ = _FHIRHelpers_4_3_000.ToValue(context, j_);
-			CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.toInterval(context, k_);
+			object k_ = fhirHelpers_4_3_000.ToValue(context, j_);
+			CqlInterval<CqlDateTime> l_ = qiCoreCommon_2_0_000.toInterval(context, k_);
 			CqlDateTime m_ = context.Operators.End(l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
 			bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
@@ -150,8 +150,8 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 		CqlDate f_(Procedure FluorideApplication)
 		{
 			DataType p_ = FluorideApplication?.Performed;
-			object q_ = _FHIRHelpers_4_3_000.ToValue(context, p_);
-			CqlInterval<CqlDateTime> r_ = _QICoreCommon_2_0_000.toInterval(context, q_);
+			object q_ = fhirHelpers_4_3_000.ToValue(context, p_);
+			CqlInterval<CqlDateTime> r_ = qiCoreCommon_2_0_000.toInterval(context, q_);
 			CqlDateTime s_ = context.Operators.End(r_);
 			CqlDate t_ = context.Operators.DateFrom(s_);
 
@@ -218,7 +218,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -226,7 +226,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -234,7 +234,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -242,7 +242,7 @@ public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

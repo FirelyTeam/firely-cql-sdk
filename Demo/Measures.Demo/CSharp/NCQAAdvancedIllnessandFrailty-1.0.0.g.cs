@@ -16,11 +16,11 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public class NCQAAdvancedIllnessandFrailty_1_0_0(
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
-    NCQAFHIRBase_1_0_0 _NCQAFHIRBase_1_0_0,
-    NCQAStatus_1_0_0 _NCQAStatus_1_0_0,
-    NCQAEncounter_1_0_0 _NCQAEncounter_1_0_0,
-    NCQAClaims_1_0_0 _NCQAClaims_1_0_0)
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
+    NCQAFHIRBase_1_0_0 ncqafhirBase_1_0_0,
+    NCQAStatus_1_0_0 ncqaStatus_1_0_0,
+    NCQAEncounter_1_0_0 ncqaEncounter_1_0_0,
+    NCQAClaims_1_0_0 ncqaClaims_1_0_0)
 {
 
     [CqlDeclaration("Acute Inpatient")]
@@ -113,7 +113,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 		bool? c_(Observation FrailtyDeviceApplied)
 		{
 			DataType z_ = FrailtyDeviceApplied?.Effective;
-			CqlInterval<CqlDateTime> aa_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, z_);
+			CqlInterval<CqlDateTime> aa_ = ncqafhirBase_1_0_0.Normalize_Interval(context, z_);
 			CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
 			bool? ac_ = context.Operators.Overlaps(aa_, ab_, default);
 
@@ -123,10 +123,10 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 		bool? e_ = context.Operators.Exists<Observation>(d_);
 		CqlValueSet f_ = this.Frailty_Diagnosis(context);
 		IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
-		IEnumerable<Condition> h_ = _NCQAStatus_1_0_0.Active_Condition(context, g_);
+		IEnumerable<Condition> h_ = ncqaStatus_1_0_0.Active_Condition(context, g_);
 		bool? i_(Condition FrailtyDiagnosis)
 		{
-			CqlInterval<CqlDateTime> ad_ = _NCQAFHIRBase_1_0_0.Prevalence_Period(context, FrailtyDiagnosis);
+			CqlInterval<CqlDateTime> ad_ = ncqafhirBase_1_0_0.Prevalence_Period(context, FrailtyDiagnosis);
 			CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
 			bool? af_ = context.Operators.Overlaps(ad_, ae_, default);
 
@@ -137,11 +137,11 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 		bool? l_ = context.Operators.Or(e_, k_);
 		CqlValueSet m_ = this.Frailty_Encounter(context);
 		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, default);
-		IEnumerable<Encounter> o_ = _NCQAStatus_1_0_0.Finished_Encounter(context, n_);
+		IEnumerable<Encounter> o_ = ncqaStatus_1_0_0.Finished_Encounter(context, n_);
 		bool? p_(Encounter FrailtyEncounter)
 		{
 			Period ag_ = FrailtyEncounter?.Period;
-			CqlInterval<CqlDateTime> ah_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, ag_ as object);
+			CqlInterval<CqlDateTime> ah_ = ncqafhirBase_1_0_0.Normalize_Interval(context, ag_ as object);
 			CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
 			bool? aj_ = context.Operators.Overlaps(ah_, ai_, default);
 
@@ -155,7 +155,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 		bool? v_(Observation FrailtySymptom)
 		{
 			DataType ak_ = FrailtySymptom?.Effective;
-			CqlInterval<CqlDateTime> al_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, ak_);
+			CqlInterval<CqlDateTime> al_ = ncqafhirBase_1_0_0.Normalize_Interval(context, ak_);
 			CqlInterval<CqlDateTime> am_ = this.Measurement_Period(context);
 			bool? an_ = context.Operators.Overlaps(al_, am_, default);
 
@@ -188,14 +188,14 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-		IEnumerable<Encounter> r_ = _NCQAStatus_1_0_0.Finished_Encounter(context, q_);
+		IEnumerable<Encounter> r_ = ncqaStatus_1_0_0.Finished_Encounter(context, q_);
 		bool? s_(Encounter OutpatientEncounter)
 		{
 			CqlValueSet w_ = this.Advanced_Illness(context);
 			IEnumerable<Condition> x_ = context.Operators.RetrieveByValueSet<Condition>(w_, default);
-			bool? y_ = _NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(context, OutpatientEncounter, x_);
+			bool? y_ = ncqaEncounter_1_0_0.Encounter_Has_Diagnosis(context, OutpatientEncounter, x_);
 			Period z_ = OutpatientEncounter?.Period;
-			CqlInterval<CqlDateTime> aa_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, z_ as object);
+			CqlInterval<CqlDateTime> aa_ = ncqafhirBase_1_0_0.Normalize_Interval(context, z_ as object);
 			CqlDateTime ab_ = context.Operators.Start(aa_);
 			CqlDate ac_ = context.Operators.DateFrom(ab_);
 			CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
@@ -215,7 +215,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 		CqlDate u_(Encounter EncounterWithDiagnosis)
 		{
 			Period ao_ = EncounterWithDiagnosis?.Period;
-			CqlInterval<CqlDateTime> ap_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, ao_ as object);
+			CqlInterval<CqlDateTime> ap_ = ncqafhirBase_1_0_0.Normalize_Interval(context, ao_ as object);
 			CqlDateTime aq_ = context.Operators.End(ap_);
 			CqlDate ar_ = context.Operators.DateFrom(aq_);
 
@@ -230,11 +230,11 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 	public  IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context)
 	{
 		IEnumerable<Claim> a_ = context.Operators.RetrieveByValueSet<Claim>(default, default);
-		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = _NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
+		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = ncqaClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
 		IEnumerable<Claim> c_ = b_?.NonacuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness(context);
 		IValueSetFacade e_ = context.Operators.CreateValueSetFacade(d_);
-		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = _NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(context, c_, e_);
+		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = ncqaClaims_1_0_0.Medical_Claims_With_Diagnosis(context, c_, e_);
 		IEnumerable<CqlInterval<CqlDateTime>> g_ = f_?.ServicePeriod;
 		bool? h_(CqlInterval<CqlDateTime> DischargeWithDiagnosis)
 		{
@@ -342,14 +342,14 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 	{
 		CqlValueSet a_ = this.Acute_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
-		IEnumerable<Encounter> c_ = _NCQAStatus_1_0_0.Finished_Encounter(context, b_);
+		IEnumerable<Encounter> c_ = ncqaStatus_1_0_0.Finished_Encounter(context, b_);
 		bool? d_(Encounter InpatientEncounter)
 		{
 			CqlValueSet g_ = this.Advanced_Illness(context);
 			IEnumerable<Condition> h_ = context.Operators.RetrieveByValueSet<Condition>(g_, default);
-			bool? i_ = _NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(context, InpatientEncounter, h_);
+			bool? i_ = ncqaEncounter_1_0_0.Encounter_Has_Diagnosis(context, InpatientEncounter, h_);
 			Period j_ = InpatientEncounter?.Period;
-			CqlInterval<CqlDateTime> k_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, j_ as object);
+			CqlInterval<CqlDateTime> k_ = ncqafhirBase_1_0_0.Normalize_Interval(context, j_ as object);
 			CqlDateTime l_ = context.Operators.Start(k_);
 			CqlDate m_ = context.Operators.DateFrom(l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
@@ -375,11 +375,11 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 	public  bool? Acute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context)
 	{
 		IEnumerable<Claim> a_ = context.Operators.RetrieveByValueSet<Claim>(default, default);
-		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = _NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
+		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = ncqaClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
 		IEnumerable<Claim> c_ = b_?.AcuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness(context);
 		IValueSetFacade e_ = context.Operators.CreateValueSetFacade(d_);
-		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = _NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(context, c_, e_);
+		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = ncqaClaims_1_0_0.Medical_Claims_With_Diagnosis(context, c_, e_);
 		IEnumerable<CqlInterval<CqlDateTime>> g_ = f_?.ServicePeriod;
 		bool? h_(CqlInterval<CqlDateTime> InpatientDischarge)
 		{
@@ -410,11 +410,11 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0(
 		IEnumerable<MedicationDispense> b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, default);
 		IEnumerable<MedicationDispense> d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, default);
 		IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
-		IEnumerable<MedicationDispense> f_ = _NCQAStatus_1_0_0.Dispensed_Medication(context, e_);
+		IEnumerable<MedicationDispense> f_ = ncqaStatus_1_0_0.Dispensed_Medication(context, e_);
 		bool? g_(MedicationDispense DementiaMedDispensed)
 		{
 			FhirDateTime j_ = DementiaMedDispensed?.WhenHandedOverElement;
-			CqlInterval<CqlDateTime> k_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, j_ as object);
+			CqlInterval<CqlDateTime> k_ = ncqafhirBase_1_0_0.Normalize_Interval(context, j_ as object);
 			CqlDateTime l_ = context.Operators.Start(k_);
 			CqlDate m_ = context.Operators.DateFrom(l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);

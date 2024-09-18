@@ -16,10 +16,10 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008(
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
-    SupplementalDataElementsFHIR4_2_0_000 _SupplementalDataElementsFHIR4_2_0_000,
-    MATGlobalCommonFunctionsFHIR4_6_1_000 _MATGlobalCommonFunctionsFHIR4_6_1_000,
-    HospiceFHIR4_2_3_000 _HospiceFHIR4_2_3_000)
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
+    SupplementalDataElementsFHIR4_2_0_000 supplementalDataElementsFHIR4_2_0_000,
+    MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,
+    HospiceFHIR4_2_3_000 hospiceFHIR4_2_3_000)
 {
 
     [CqlDeclaration("Clinical Oral Evaluation")]
@@ -101,7 +101,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     [CqlDeclaration("SDE Ethnicity")]
 	public  IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
 	{
-		IEnumerable<Coding> a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity(context);
+		IEnumerable<Coding> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -109,7 +109,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CodeableConcept code, Period period)?> a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Payer(context);
+		IEnumerable<(CodeableConcept code, Period period)?> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -117,7 +117,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     [CqlDeclaration("SDE Race")]
 	public  IEnumerable<Coding> SDE_Race(CqlContext context)
 	{
-		IEnumerable<Coding> a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Race(context);
+		IEnumerable<Coding> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -125,7 +125,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -160,10 +160,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		{
 			CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
 			Period aa_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> ab_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, aa_ as object);
+			CqlInterval<CqlDateTime> ab_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, aa_ as object);
 			bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, default);
 			Code<Encounter.EncounterStatus> ad_ = ValidEncounter?.StatusElement;
-			string ae_ = _FHIRHelpers_4_0_001.ToString(context, ad_);
+			string ae_ = fhirHelpers_4_0_001.ToString(context, ad_);
 			bool? af_ = context.Operators.Equal(ae_, "finished");
 			bool? ag_ = context.Operators.And(ac_, af_);
 
@@ -212,7 +212,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     [CqlDeclaration("Denominator Exclusions")]
 	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = _HospiceFHIR4_2_3_000.Has_Hospice(context);
+		bool? a_ = hospiceFHIR4_2_3_000.Has_Hospice(context);
 
 		return a_;
 	}
@@ -284,10 +284,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
 			DataType g_ = FluorideApplication?.Performed;
-			CqlInterval<CqlDateTime> h_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, g_);
+			CqlInterval<CqlDateTime> h_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, default);
 			Code<EventStatus> j_ = FluorideApplication?.StatusElement;
-			string k_ = _FHIRHelpers_4_0_001.ToString(context, j_);
+			string k_ = fhirHelpers_4_0_001.ToString(context, j_);
 			bool? l_ = context.Operators.Equal(k_, "completed");
 			bool? m_ = context.Operators.And(i_, l_);
 

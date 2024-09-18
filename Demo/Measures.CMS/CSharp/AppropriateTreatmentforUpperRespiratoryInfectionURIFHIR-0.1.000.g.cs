@@ -16,13 +16,13 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR", "0.1.000")]
 public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    Hospice_6_9_000 _Hospice_6_9_000,
-    Status_1_6_000 _Status_1_6_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    Antibiotic_1_5_000 _Antibiotic_1_5_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    Hospice_6_9_000 hospice_6_9_000,
+    Status_1_6_000 status_1_6_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    Antibiotic_1_5_000 antibiotic_1_5_000)
 {
 
     [CqlDeclaration("Antibiotic Medications for Upper Respiratory Infection")]
@@ -157,7 +157,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -165,7 +165,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -173,7 +173,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -181,7 +181,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -238,7 +238,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
 			List<CodeableConcept> az_ = E?.Type;
 			CqlConcept ba_(CodeableConcept @this)
 			{
-				CqlConcept bf_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept bf_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return bf_;
 			};
@@ -259,12 +259,12 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
 		IEnumerable<Encounter> at_ = context.Operators.Where<Encounter>(ar_, as_);
 		IEnumerable<Encounter> au_ = context.Operators.Union<Encounter>(aq_, at_);
 		IEnumerable<Encounter> av_ = context.Operators.Union<Encounter>(ao_, au_);
-		IEnumerable<Encounter> aw_ = _Status_1_6_000.Finished_Encounter(context, av_);
+		IEnumerable<Encounter> aw_ = status_1_6_000.Finished_Encounter(context, av_);
 		bool? ax_(Encounter ValidEncounter)
 		{
 			Period bj_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> bk_ = _FHIRHelpers_4_3_000.ToInterval(context, bj_);
-			CqlInterval<CqlDateTime> bl_ = _QICoreCommon_2_0_000.ToInterval(context, bk_ as object);
+			CqlInterval<CqlDateTime> bk_ = fhirHelpers_4_3_000.ToInterval(context, bj_);
+			CqlInterval<CqlDateTime> bl_ = qiCoreCommon_2_0_000.ToInterval(context, bk_ as object);
 			CqlDateTime bm_ = context.Operators.End(bl_);
 			CqlInterval<CqlDateTime> bn_ = this.Measurement_Period(context);
 			CqlDateTime bo_ = context.Operators.Start(bn_);
@@ -297,14 +297,14 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
 		IEnumerable<(Encounter QualifyingEncounters, Condition URI)?> f_ = context.Operators.Select<ValueTuple<Encounter, Condition>, (Encounter QualifyingEncounters, Condition URI)?>(d_, e_);
 		bool? g_((Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce)
 		{
-			CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, tuple_figmirinmncaavfkbmahdktce?.URI);
+			CqlInterval<CqlDateTime> l_ = qiCoreCommon_2_0_000.ToPrevalenceInterval(context, tuple_figmirinmncaavfkbmahdktce?.URI);
 			CqlDateTime m_ = context.Operators.Start(l_);
 			Period n_ = tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters?.Period;
-			CqlInterval<CqlDateTime> o_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
-			CqlInterval<CqlDateTime> p_ = _QICoreCommon_2_0_000.ToInterval(context, o_ as object);
+			CqlInterval<CqlDateTime> o_ = fhirHelpers_4_3_000.ToInterval(context, n_);
+			CqlInterval<CqlDateTime> p_ = qiCoreCommon_2_0_000.ToInterval(context, o_ as object);
 			bool? q_ = context.Operators.In<CqlDateTime>(m_, p_, "day");
-			CqlInterval<CqlDateTime> t_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
-			CqlInterval<CqlDateTime> u_ = _QICoreCommon_2_0_000.ToInterval(context, t_ as object);
+			CqlInterval<CqlDateTime> t_ = fhirHelpers_4_3_000.ToInterval(context, n_);
+			CqlInterval<CqlDateTime> u_ = qiCoreCommon_2_0_000.ToInterval(context, t_ as object);
 			bool? v_ = context.Operators.OverlapsBefore(l_, u_, default);
 			bool? w_ = context.Operators.Or(q_, v_);
 
@@ -350,7 +350,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
 		IEnumerable<Encounter> a_ = this.Initial_Population(context);
 		bool? b_(Encounter EligibleEncounters)
 		{
-			bool? d_ = _Hospice_6_9_000.Has_Hospice_Services(context);
+			bool? d_ = hospice_6_9_000.Has_Hospice_Services(context);
 
 			return d_;
 		};
@@ -374,16 +374,16 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
 		IEnumerable<Encounter> b_ = this.Encounter_with_Upper_Respiratory_Infection(context);
 		CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
 		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default);
-		IEnumerable<Encounter> e_ = _Antibiotic_1_5_000.Has_Comorbid_Condition_History(context, b_, d_);
+		IEnumerable<Encounter> e_ = antibiotic_1_5_000.Has_Comorbid_Condition_History(context, b_, d_);
 		IEnumerable<Encounter> f_ = context.Operators.Union<Encounter>(a_, e_);
 		CqlValueSet h_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
 		IEnumerable<MedicationRequest> i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(h_, default);
 		IEnumerable<MedicationRequest> k_ = context.Operators.RetrieveByValueSet<MedicationRequest>(h_, default);
 		IEnumerable<MedicationRequest> l_ = context.Operators.Union<MedicationRequest>(i_, k_);
-		IEnumerable<Encounter> m_ = _Antibiotic_1_5_000.Has_Antibiotic_Medication_History(context, b_, l_);
+		IEnumerable<Encounter> m_ = antibiotic_1_5_000.Has_Antibiotic_Medication_History(context, b_, l_);
 		CqlValueSet o_ = this.Competing_Conditions_for_Respiratory_Conditions(context);
 		IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, default);
-		IEnumerable<Encounter> q_ = _Antibiotic_1_5_000.Has_Competing_Diagnosis_History(context, b_, p_);
+		IEnumerable<Encounter> q_ = antibiotic_1_5_000.Has_Competing_Diagnosis_History(context, b_, p_);
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(m_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(f_, r_);
 
@@ -405,18 +405,18 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000(
 				FhirDateTime q_ = OrderedAntibiotic?.AuthoredOnElement;
 				CqlDateTime r_ = context.Operators.Convert<CqlDateTime>(q_);
 				Period s_ = EncounterWithURI?.Period;
-				CqlInterval<CqlDateTime> t_ = _FHIRHelpers_4_3_000.ToInterval(context, s_);
-				CqlInterval<CqlDateTime> u_ = _QICoreCommon_2_0_000.ToInterval(context, t_ as object);
+				CqlInterval<CqlDateTime> t_ = fhirHelpers_4_3_000.ToInterval(context, s_);
+				CqlInterval<CqlDateTime> u_ = qiCoreCommon_2_0_000.ToInterval(context, t_ as object);
 				CqlDateTime v_ = context.Operators.Start(u_);
-				CqlInterval<CqlDateTime> x_ = _FHIRHelpers_4_3_000.ToInterval(context, s_);
-				CqlInterval<CqlDateTime> y_ = _QICoreCommon_2_0_000.ToInterval(context, x_ as object);
+				CqlInterval<CqlDateTime> x_ = fhirHelpers_4_3_000.ToInterval(context, s_);
+				CqlInterval<CqlDateTime> y_ = qiCoreCommon_2_0_000.ToInterval(context, x_ as object);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				CqlQuantity aa_ = context.Operators.Quantity(3m, "days");
 				CqlDateTime ab_ = context.Operators.Add(z_, aa_);
 				CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(v_, ab_, true, true);
 				bool? ad_ = context.Operators.In<CqlDateTime>(r_, ac_, default);
-				CqlInterval<CqlDateTime> af_ = _FHIRHelpers_4_3_000.ToInterval(context, s_);
-				CqlInterval<CqlDateTime> ag_ = _QICoreCommon_2_0_000.ToInterval(context, af_ as object);
+				CqlInterval<CqlDateTime> af_ = fhirHelpers_4_3_000.ToInterval(context, s_);
+				CqlInterval<CqlDateTime> ag_ = qiCoreCommon_2_0_000.ToInterval(context, af_ as object);
 				CqlDateTime ah_ = context.Operators.Start(ag_);
 				bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
 				bool? aj_ = context.Operators.And(ad_, ai_);

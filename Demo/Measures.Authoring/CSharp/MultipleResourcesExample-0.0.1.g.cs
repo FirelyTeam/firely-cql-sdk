@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public class MultipleResourcesExample_0_0_1(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000)
 {
 
     [CqlDeclaration("Lung Cancer")]
@@ -61,7 +61,7 @@ public class MultipleResourcesExample_0_0_1(
 		bool? d_(Observation O)
 		{
 			Code<ObservationStatus> f_ = O?.StatusElement;
-			string g_ = _FHIRHelpers_4_3_000.ToString(context, f_);
+			string g_ = fhirHelpers_4_3_000.ToString(context, f_);
 			string[] h_ = [
 				"final",
 				"amended",
@@ -83,7 +83,7 @@ public class MultipleResourcesExample_0_0_1(
 		bool? c_(Condition C)
 		{
 			CodeableConcept e_ = C?.ClinicalStatus;
-			CqlConcept f_ = _FHIRHelpers_4_3_000.ToConcept(context, e_);
+			CqlConcept f_ = fhirHelpers_4_3_000.ToConcept(context, e_);
 			CqlValueSet g_ = this.Condition_Clinical_Status(context);
 			bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
 

@@ -16,9 +16,9 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DementiaCognitiveAssessmentFHIR", "0.1.000")]
 public class DementiaCognitiveAssessmentFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000)
 {
 
     [CqlDeclaration("Behavioral/Neuropsych Assessment")]
@@ -170,26 +170,26 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
 			{
 				CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
 				Period k_ = EncounterAssessCognition?.Period;
-				CqlInterval<CqlDateTime> l_ = _FHIRHelpers_4_3_000.ToInterval(context, k_);
+				CqlInterval<CqlDateTime> l_ = fhirHelpers_4_3_000.ToInterval(context, k_);
 				bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, default);
-				CqlInterval<CqlDateTime> n_ = _QICoreCommon_2_0_000.prevalenceInterval(context, Dementia);
-				CqlInterval<CqlDateTime> p_ = _FHIRHelpers_4_3_000.ToInterval(context, k_);
+				CqlInterval<CqlDateTime> n_ = qiCoreCommon_2_0_000.prevalenceInterval(context, Dementia);
+				CqlInterval<CqlDateTime> p_ = fhirHelpers_4_3_000.ToInterval(context, k_);
 				bool? q_ = context.Operators.Overlaps(n_, p_, "day");
 				bool? r_ = context.Operators.And(m_, q_);
-				bool? s_ = _QICoreCommon_2_0_000.isActive(context, Dementia);
+				bool? s_ = qiCoreCommon_2_0_000.isActive(context, Dementia);
 				bool? t_ = context.Operators.And(r_, s_);
 				CodeableConcept u_ = Dementia?.VerificationStatus;
-				CqlConcept v_ = _FHIRHelpers_4_3_000.ToConcept(context, u_);
-				CqlCode w_ = _QICoreCommon_2_0_000.unconfirmed(context);
+				CqlConcept v_ = fhirHelpers_4_3_000.ToConcept(context, u_);
+				CqlCode w_ = qiCoreCommon_2_0_000.unconfirmed(context);
 				CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
 				bool? y_ = context.Operators.Equivalent(v_, x_);
-				CqlConcept aa_ = _FHIRHelpers_4_3_000.ToConcept(context, u_);
-				CqlCode ab_ = _QICoreCommon_2_0_000.refuted(context);
+				CqlConcept aa_ = fhirHelpers_4_3_000.ToConcept(context, u_);
+				CqlCode ab_ = qiCoreCommon_2_0_000.refuted(context);
 				CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
 				bool? ad_ = context.Operators.Equivalent(aa_, ac_);
 				bool? ae_ = context.Operators.Or(y_, ad_);
-				CqlConcept ag_ = _FHIRHelpers_4_3_000.ToConcept(context, u_);
-				CqlCode ah_ = _QICoreCommon_2_0_000.entered_in_error(context);
+				CqlConcept ag_ = fhirHelpers_4_3_000.ToConcept(context, u_);
+				CqlCode ah_ = qiCoreCommon_2_0_000.entered_in_error(context);
 				CqlConcept ai_ = context.Operators.ConvertCodeToConcept(ah_);
 				bool? aj_ = context.Operators.Equivalent(ag_, ai_);
 				bool? ak_ = context.Operators.Or(ae_, aj_);
@@ -221,7 +221,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
 		{
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			Period h_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> i_ = _FHIRHelpers_4_3_000.ToInterval(context, h_);
+			CqlInterval<CqlDateTime> i_ = fhirHelpers_4_3_000.ToInterval(context, h_);
 			bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, default);
 			Code<Encounter.EncounterStatus> k_ = ValidEncounter?.StatusElement;
 			Encounter.EncounterStatus? l_ = k_?.Value;
@@ -271,19 +271,19 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
 			bool? k_(Encounter EncounterDementia)
 			{
 				DataType o_ = CognitiveAssessment?.Effective;
-				object p_ = _FHIRHelpers_4_3_000.ToValue(context, o_);
-				CqlInterval<CqlDateTime> q_ = _QICoreCommon_2_0_000.toInterval(context, p_);
+				object p_ = fhirHelpers_4_3_000.ToValue(context, o_);
+				CqlInterval<CqlDateTime> q_ = qiCoreCommon_2_0_000.toInterval(context, p_);
 				CqlDateTime r_ = context.Operators.Start(q_);
 				Period s_ = EncounterDementia?.Period;
-				CqlInterval<CqlDateTime> t_ = _FHIRHelpers_4_3_000.ToInterval(context, s_);
+				CqlInterval<CqlDateTime> t_ = fhirHelpers_4_3_000.ToInterval(context, s_);
 				CqlDateTime u_ = context.Operators.End(t_);
 				CqlQuantity v_ = context.Operators.Quantity(12m, "months");
 				CqlDateTime w_ = context.Operators.Subtract(u_, v_);
-				CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_3_000.ToInterval(context, s_);
+				CqlInterval<CqlDateTime> y_ = fhirHelpers_4_3_000.ToInterval(context, s_);
 				CqlDateTime z_ = context.Operators.End(y_);
 				CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(w_, z_, true, true);
 				bool? ab_ = context.Operators.In<CqlDateTime>(r_, aa_, "day");
-				CqlInterval<CqlDateTime> ad_ = _FHIRHelpers_4_3_000.ToInterval(context, s_);
+				CqlInterval<CqlDateTime> ad_ = fhirHelpers_4_3_000.ToInterval(context, s_);
 				CqlDateTime ae_ = context.Operators.End(ad_);
 				bool? af_ = context.Operators.Not((bool?)(ae_ is null));
 				bool? ag_ = context.Operators.And(ab_, af_);
@@ -301,7 +301,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
 		bool? h_(Observation CognitiveAssessment)
 		{
 			DataType ah_ = CognitiveAssessment?.Value;
-			object ai_ = _FHIRHelpers_4_3_000.ToValue(context, ah_);
+			object ai_ = fhirHelpers_4_3_000.ToValue(context, ah_);
 			bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
 			Code<ObservationStatus> ak_ = CognitiveAssessment?.StatusElement;
 			ObservationStatus? al_ = ak_?.Value;
@@ -349,7 +349,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
 				DateTimeOffset? p_ = o_?.Value;
 				CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
 				Period r_ = EncounterDementia?.Period;
-				CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> s_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 
 				return t_;
@@ -368,7 +368,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
 			{
 				string ac_ = @this?.Url;
 				FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
-				string ae_ = _FHIRHelpers_4_3_000.ToString(context, ad_);
+				string ae_ = fhirHelpers_4_3_000.ToString(context, ad_);
 				bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return af_;
@@ -384,7 +384,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
 			};
 			IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
 			object y_ = context.Operators.SingletonFrom<object>(x_);
-			CqlConcept z_ = _FHIRHelpers_4_3_000.ToConcept(context, y_ as CodeableConcept);
+			CqlConcept z_ = fhirHelpers_4_3_000.ToConcept(context, y_ as CodeableConcept);
 			CqlValueSet aa_ = this.Patient_Reason(context);
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
@@ -407,7 +407,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -415,7 +415,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -423,7 +423,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -431,7 +431,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}

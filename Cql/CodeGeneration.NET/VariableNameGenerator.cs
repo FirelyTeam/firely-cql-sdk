@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
 using System.Linq;
@@ -126,6 +127,37 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         public static string? NormalizePrimaryConstructorIdentifier(string? identifier) =>
-            NormalizeIdentifier(identifier) is { } s ? $"_{s}" : null;
+            NormalizeIdentifier(identifier) is { } s ? $"{LowercaseStartIdentifier(s)}" : null;
+
+        private static string LowercaseStartIdentifier(string identifier)
+        {
+            if (identifier.Length == 0)
+                return identifier;
+
+            var chars = identifier.ToCharArray();
+
+            // Scan and replace the first range of uppercase characters with lowercase
+            if (Char.IsUpper(chars[0]))
+            {
+                for (int i = 1; i < identifier.Length; i++)
+                {
+                    char cPeek = chars[i];
+                    if (!Char.IsLower(cPeek))
+                    {
+                        chars[i-1] = Char.ToLower(chars[i - 1]);
+                        continue;
+                    }
+
+                    if (i == 1)
+                    {
+                        chars[i - 1] = Char.ToLower(chars[i - 1]);
+                    }
+
+                    break;
+                }
+            }
+
+            return new string(chars);
+        }
     }
 }

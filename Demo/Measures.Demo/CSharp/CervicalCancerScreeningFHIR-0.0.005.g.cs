@@ -16,11 +16,11 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CervicalCancerScreeningFHIR", "0.0.005")]
 public class CervicalCancerScreeningFHIR_0_0_005(
-    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
-    SupplementalDataElementsFHIR4_2_0_000 _SupplementalDataElementsFHIR4_2_0_000,
-    MATGlobalCommonFunctionsFHIR4_6_1_000 _MATGlobalCommonFunctionsFHIR4_6_1_000,
-    HospiceFHIR4_2_3_000 _HospiceFHIR4_2_3_000,
-    PalliativeCareFHIR_0_6_000 _PalliativeCareFHIR_0_6_000)
+    FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
+    SupplementalDataElementsFHIR4_2_0_000 supplementalDataElementsFHIR4_2_0_000,
+    MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,
+    HospiceFHIR4_2_3_000 hospiceFHIR4_2_3_000,
+    PalliativeCareFHIR_0_6_000 palliativeCareFHIR_0_6_000)
 {
 
     [CqlDeclaration("Congenital or Acquired Absence of Cervix")]
@@ -110,7 +110,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
     [CqlDeclaration("SDE Ethnicity")]
 	public  IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
 	{
-		IEnumerable<Coding> a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity(context);
+		IEnumerable<Coding> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -118,7 +118,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CodeableConcept code, Period period)?> a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Payer(context);
+		IEnumerable<(CodeableConcept code, Period period)?> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -126,7 +126,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
     [CqlDeclaration("SDE Race")]
 	public  IEnumerable<Coding> SDE_Race(CqlContext context)
 	{
-		IEnumerable<Coding> a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Race(context);
+		IEnumerable<Coding> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -134,7 +134,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElementsFHIR4_2_0_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -162,11 +162,11 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 		bool? r_(Encounter ValidEncounter)
 		{
 			Code<Encounter.EncounterStatus> t_ = ValidEncounter?.StatusElement;
-			string u_ = _FHIRHelpers_4_0_001.ToString(context, t_);
+			string u_ = fhirHelpers_4_0_001.ToString(context, t_);
 			bool? v_ = context.Operators.Equal(u_, "finished");
 			CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
 			Period x_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_0_001.ToInterval(context, x_);
+			CqlInterval<CqlDateTime> y_ = fhirHelpers_4_0_001.ToInterval(context, x_);
 			bool? z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, y_, default);
 			bool? aa_ = context.Operators.And(v_, z_);
 
@@ -191,7 +191,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 		CqlInterval<int?> i_ = context.Operators.Interval(23, 64, true, false);
 		bool? j_ = context.Operators.In<int?>(h_, i_, default);
 		Code<AdministrativeGender> l_ = a_?.GenderElement;
-		string m_ = _FHIRHelpers_4_0_001.ToString(context, l_);
+		string m_ = fhirHelpers_4_0_001.ToString(context, l_);
 		bool? n_ = context.Operators.Equal(m_, "female");
 		bool? o_ = context.Operators.And(j_, n_);
 		IEnumerable<Encounter> p_ = this.Qualifying_Encounters(context);
@@ -217,10 +217,10 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 		bool? c_(Procedure NoCervixProcedure)
 		{
 			Code<EventStatus> j_ = NoCervixProcedure?.StatusElement;
-			string k_ = _FHIRHelpers_4_0_001.ToString(context, j_);
+			string k_ = fhirHelpers_4_0_001.ToString(context, j_);
 			bool? l_ = context.Operators.Equal(k_, "completed");
 			DataType m_ = NoCervixProcedure?.Performed;
-			CqlInterval<CqlDateTime> n_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, m_);
+			CqlInterval<CqlDateTime> n_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, m_);
 			CqlDateTime o_ = context.Operators.End(n_);
 			CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
 			CqlDateTime q_ = context.Operators.End(p_);
@@ -234,7 +234,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 		IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(e_, default);
 		bool? g_(Condition NoCervixDiagnosis)
 		{
-			CqlInterval<CqlDateTime> t_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(context, NoCervixDiagnosis);
+			CqlInterval<CqlDateTime> t_ = matGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(context, NoCervixDiagnosis);
 			CqlDateTime u_ = context.Operators.Start(t_);
 			CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
 			CqlDateTime w_ = context.Operators.End(v_);
@@ -251,11 +251,11 @@ public class CervicalCancerScreeningFHIR_0_0_005(
     [CqlDeclaration("Denominator Exclusions")]
 	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = _HospiceFHIR4_2_3_000.Has_Hospice(context);
+		bool? a_ = hospiceFHIR4_2_3_000.Has_Hospice(context);
 		IEnumerable<object> b_ = this.Absence_of_Cervix(context);
 		bool? c_ = context.Operators.Exists<object>(b_);
 		bool? d_ = context.Operators.Or(a_, c_);
-		bool? e_ = _PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period(context);
+		bool? e_ = palliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period(context);
 		bool? f_ = context.Operators.Or(d_, e_);
 
 		return f_;
@@ -269,7 +269,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 		bool? c_(Observation CervicalCytology)
 		{
 			Code<ObservationStatus> e_ = CervicalCytology?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -280,7 +280,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 			bool? j_(CodeableConcept CervicalCytologyCategory)
 			{
 				CqlCode af_ = this.laboratory(context);
-				CqlConcept ag_ = _FHIRHelpers_4_0_001.ToConcept(context, CervicalCytologyCategory);
+				CqlConcept ag_ = fhirHelpers_4_0_001.ToConcept(context, CervicalCytologyCategory);
 				CqlCode[] ah_ = ag_?.codes;
 				bool? ai_ = context.Operators.In<CqlCode>(af_, (IEnumerable<CqlCode>)ah_);
 
@@ -290,7 +290,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 			bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
 			bool? m_ = context.Operators.And(h_, l_);
 			DataType n_ = CervicalCytology?.Effective;
-			CqlDateTime o_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, n_);
+			CqlDateTime o_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, n_);
 			CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
 			CqlDateTime q_ = context.Operators.End(p_);
 			CqlQuantity r_ = context.Operators.Quantity(3m, "years");
@@ -321,7 +321,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 		bool? c_(Observation HPVTest)
 		{
 			Code<ObservationStatus> e_ = HPVTest?.StatusElement;
-			string f_ = _FHIRHelpers_4_0_001.ToString(context, e_);
+			string f_ = fhirHelpers_4_0_001.ToString(context, e_);
 			string[] g_ = [
 				"final",
 				"amended",
@@ -332,7 +332,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 			bool? j_(CodeableConcept HPVTestCategory)
 			{
 				CqlCode aq_ = this.laboratory(context);
-				CqlConcept ar_ = _FHIRHelpers_4_0_001.ToConcept(context, HPVTestCategory);
+				CqlConcept ar_ = fhirHelpers_4_0_001.ToConcept(context, HPVTestCategory);
 				CqlCode[] as_ = ar_?.codes;
 				bool? at_ = context.Operators.In<CqlCode>(aq_, (IEnumerable<CqlCode>)as_);
 
@@ -346,13 +346,13 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 			string p_ = o_?.Value;
 			CqlDate q_ = context.Operators.ConvertStringToDate(p_);
 			DataType r_ = HPVTest?.Effective;
-			CqlInterval<CqlDateTime> s_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, r_);
+			CqlInterval<CqlDateTime> s_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, r_);
 			CqlDateTime t_ = context.Operators.Start(s_);
 			CqlDate u_ = context.Operators.DateFrom(t_);
 			int? v_ = context.Operators.CalculateAgeAt(q_, u_, "year");
 			bool? w_ = context.Operators.GreaterOrEqual(v_, 30);
 			bool? x_ = context.Operators.And(m_, w_);
-			CqlDateTime z_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, r_);
+			CqlDateTime z_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, r_);
 			CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
 			CqlDateTime ab_ = context.Operators.End(aa_);
 			CqlQuantity ac_ = context.Operators.Quantity(5m, "years");
@@ -391,7 +391,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 	public  bool? isComplete(CqlContext context, Observation observation)
 	{
 		Code<ObservationStatus> a_ = observation?.StatusElement;
-		string b_ = _FHIRHelpers_4_0_001.ToString(context, a_);
+		string b_ = fhirHelpers_4_0_001.ToString(context, a_);
 		string[] c_ = [
 			"final",
 			"amended",
@@ -409,7 +409,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
 		bool? b_(CodeableConcept category)
 		{
 			CqlCode e_ = this.laboratory(context);
-			CqlConcept f_ = _FHIRHelpers_4_0_001.ToConcept(context, category);
+			CqlConcept f_ = fhirHelpers_4_0_001.ToConcept(context, category);
 			CqlCode[] g_ = f_?.codes;
 			bool? h_ = context.Operators.In<CqlCode>(e_, (IEnumerable<CqlCode>)g_);
 
@@ -424,7 +424,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
     [CqlDeclaration("latest")]
 	public  CqlDateTime latest(CqlContext context, object choice)
 	{
-		CqlDateTime a_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, choice);
+		CqlDateTime a_ = matGlobalCommonFunctionsFHIR4_6_1_000.Latest(context, choice);
 
 		return a_;
 	}
@@ -466,7 +466,7 @@ public class CervicalCancerScreeningFHIR_0_0_005(
     [CqlDeclaration("toInterval")]
 	public  CqlInterval<CqlDateTime> toInterval(CqlContext context, object choice)
 	{
-		CqlInterval<CqlDateTime> a_ = _MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, choice);
+		CqlInterval<CqlDateTime> a_ = matGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(context, choice);
 
 		return a_;
 	}

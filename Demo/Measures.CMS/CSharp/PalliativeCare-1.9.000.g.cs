@@ -16,9 +16,9 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PalliativeCare", "1.9.000")]
 public class PalliativeCare_1_9_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    Status_1_6_000 _Status_1_6_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    Status_1_6_000 status_1_6_000)
 {
 
     [CqlDeclaration("Palliative Care Encounter")]
@@ -73,12 +73,12 @@ public class PalliativeCare_1_9_000(
 		CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
 		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
-		IEnumerable<Observation> d_ = _Status_1_6_000.isAssessmentPerformed(context, c_);
+		IEnumerable<Observation> d_ = status_1_6_000.isAssessmentPerformed(context, c_);
 		bool? e_(Observation PalliativeAssessment)
 		{
 			DataType ab_ = PalliativeAssessment?.Effective;
-			object ac_ = _FHIRHelpers_4_3_000.ToValue(context, ab_);
-			CqlInterval<CqlDateTime> ad_ = _QICoreCommon_2_0_000.toInterval(context, ac_);
+			object ac_ = fhirHelpers_4_3_000.ToValue(context, ab_);
+			CqlInterval<CqlDateTime> ad_ = qiCoreCommon_2_0_000.toInterval(context, ac_);
 			CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
 			bool? af_ = context.Operators.Overlaps(ad_, ae_, "day");
 
@@ -90,7 +90,7 @@ public class PalliativeCare_1_9_000(
 		IEnumerable<Condition> i_ = context.Operators.RetrieveByValueSet<Condition>(h_, default);
 		bool? j_(Condition PalliativeDiagnosis)
 		{
-			CqlInterval<CqlDateTime> ag_ = _QICoreCommon_2_0_000.prevalenceInterval(context, PalliativeDiagnosis);
+			CqlInterval<CqlDateTime> ag_ = qiCoreCommon_2_0_000.prevalenceInterval(context, PalliativeDiagnosis);
 			CqlInterval<CqlDateTime> ah_ = this.Measurement_Period(context);
 			bool? ai_ = context.Operators.Overlaps(ag_, ah_, "day");
 
@@ -101,12 +101,12 @@ public class PalliativeCare_1_9_000(
 		bool? m_ = context.Operators.Or(g_, l_);
 		CqlValueSet n_ = this.Palliative_Care_Encounter(context);
 		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
-		IEnumerable<Encounter> p_ = _Status_1_6_000.isEncounterPerformed(context, o_);
+		IEnumerable<Encounter> p_ = status_1_6_000.isEncounterPerformed(context, o_);
 		bool? q_(Encounter PalliativeEncounter)
 		{
 			Period aj_ = PalliativeEncounter?.Period;
-			CqlInterval<CqlDateTime> ak_ = _FHIRHelpers_4_3_000.ToInterval(context, aj_);
-			CqlInterval<CqlDateTime> al_ = _QICoreCommon_2_0_000.toInterval(context, ak_ as object);
+			CqlInterval<CqlDateTime> ak_ = fhirHelpers_4_3_000.ToInterval(context, aj_);
+			CqlInterval<CqlDateTime> al_ = qiCoreCommon_2_0_000.toInterval(context, ak_ as object);
 			CqlInterval<CqlDateTime> am_ = this.Measurement_Period(context);
 			bool? an_ = context.Operators.Overlaps(al_, am_, "day");
 
@@ -117,12 +117,12 @@ public class PalliativeCare_1_9_000(
 		bool? t_ = context.Operators.Or(m_, s_);
 		CqlValueSet u_ = this.Palliative_Care_Intervention(context);
 		IEnumerable<Procedure> v_ = context.Operators.RetrieveByValueSet<Procedure>(u_, default);
-		IEnumerable<Procedure> w_ = _Status_1_6_000.isInterventionPerformed(context, v_);
+		IEnumerable<Procedure> w_ = status_1_6_000.isInterventionPerformed(context, v_);
 		bool? x_(Procedure PalliativeIntervention)
 		{
 			DataType ao_ = PalliativeIntervention?.Performed;
-			object ap_ = _FHIRHelpers_4_3_000.ToValue(context, ao_);
-			CqlInterval<CqlDateTime> aq_ = _QICoreCommon_2_0_000.toInterval(context, ap_);
+			object ap_ = fhirHelpers_4_3_000.ToValue(context, ao_);
+			CqlInterval<CqlDateTime> aq_ = qiCoreCommon_2_0_000.toInterval(context, ap_);
 			CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
 			bool? as_ = context.Operators.Overlaps(aq_, ar_, "day");
 

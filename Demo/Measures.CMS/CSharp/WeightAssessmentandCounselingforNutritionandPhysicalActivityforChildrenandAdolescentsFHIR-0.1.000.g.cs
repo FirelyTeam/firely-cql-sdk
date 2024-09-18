@@ -16,11 +16,11 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR", "0.1.000")]
 public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    Hospice_6_9_000 _Hospice_6_9_000,
-    Status_1_6_000 _Status_1_6_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    Hospice_6_9_000 hospice_6_9_000,
+    Status_1_6_000 status_1_6_000)
 {
 
     [CqlDeclaration("BMI percentile")]
@@ -213,7 +213,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -221,7 +221,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -229,7 +229,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -237,7 +237,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -265,13 +265,13 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 		CqlValueSet r_ = this.Telephone_Visits(context);
 		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
 		IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
-		IEnumerable<Encounter> u_ = _Status_1_6_000.Finished_Encounter(context, t_);
+		IEnumerable<Encounter> u_ = status_1_6_000.Finished_Encounter(context, t_);
 		bool? v_(Encounter ValidEncounters)
 		{
 			CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
 			Period y_ = ValidEncounters?.Period;
-			CqlInterval<CqlDateTime> z_ = _FHIRHelpers_4_3_000.ToInterval(context, y_);
-			CqlInterval<CqlDateTime> aa_ = _QICoreCommon_2_0_000.ToInterval(context, z_ as object);
+			CqlInterval<CqlDateTime> z_ = fhirHelpers_4_3_000.ToInterval(context, y_);
+			CqlInterval<CqlDateTime> aa_ = qiCoreCommon_2_0_000.ToInterval(context, z_ as object);
 			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, aa_, default);
 
 			return ab_;
@@ -314,10 +314,10 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	{
 		CqlValueSet a_ = this.Pregnancy(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
-		IEnumerable<Condition> c_ = _Status_1_6_000.Active_Condition(context, b_);
+		IEnumerable<Condition> c_ = status_1_6_000.Active_Condition(context, b_);
 		bool? d_(Condition Pregnancy)
 		{
-			CqlInterval<CqlDateTime> f_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, Pregnancy);
+			CqlInterval<CqlDateTime> f_ = qiCoreCommon_2_0_000.ToPrevalenceInterval(context, Pregnancy);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			bool? h_ = context.Operators.Overlaps(f_, g_, default);
 
@@ -331,7 +331,7 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
     [CqlDeclaration("Denominator Exclusions")]
 	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = _Hospice_6_9_000.Has_Hospice_Services(context);
+		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
 		IEnumerable<Condition> b_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(context);
 		bool? c_ = context.Operators.Exists<Condition>(b_);
 		bool? d_ = context.Operators.Or(a_, c_);
@@ -343,16 +343,16 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	public  IEnumerable<Observation> BMI_Percentile_in_Measurement_Period(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
-		IEnumerable<Observation> b_ = _Status_1_6_000.BMI(context, a_);
+		IEnumerable<Observation> b_ = status_1_6_000.BMI(context, a_);
 		bool? c_(Observation BMIPercentile)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 			DataType f_ = BMIPercentile?.Effective;
-			object g_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
-			CqlInterval<CqlDateTime> h_ = _QICoreCommon_2_0_000.ToInterval(context, g_);
+			object g_ = fhirHelpers_4_3_000.ToValue(context, f_);
+			CqlInterval<CqlDateTime> h_ = qiCoreCommon_2_0_000.ToInterval(context, g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = BMIPercentile?.Value;
-			CqlQuantity k_ = _FHIRHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
+			CqlQuantity k_ = fhirHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
 			bool? l_ = context.Operators.Not((bool?)(k_ is null));
 			bool? m_ = context.Operators.And(i_, l_);
 
@@ -367,16 +367,16 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	public  IEnumerable<Observation> Height_in_Measurement_Period(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
-		IEnumerable<Observation> b_ = _Status_1_6_000.BodyHeight(context, a_);
+		IEnumerable<Observation> b_ = status_1_6_000.BodyHeight(context, a_);
 		bool? c_(Observation Height)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 			DataType f_ = Height?.Effective;
-			object g_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
-			CqlInterval<CqlDateTime> h_ = _QICoreCommon_2_0_000.ToInterval(context, g_);
+			object g_ = fhirHelpers_4_3_000.ToValue(context, f_);
+			CqlInterval<CqlDateTime> h_ = qiCoreCommon_2_0_000.ToInterval(context, g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Height?.Value;
-			CqlQuantity k_ = _FHIRHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
+			CqlQuantity k_ = fhirHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
 			bool? l_ = context.Operators.Not((bool?)(k_ is null));
 			bool? m_ = context.Operators.And(i_, l_);
 
@@ -391,16 +391,16 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	public  IEnumerable<Observation> Weight_in_Measurement_Period(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
-		IEnumerable<Observation> b_ = _Status_1_6_000.BodyWeight(context, a_);
+		IEnumerable<Observation> b_ = status_1_6_000.BodyWeight(context, a_);
 		bool? c_(Observation Weight)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 			DataType f_ = Weight?.Effective;
-			object g_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
-			CqlInterval<CqlDateTime> h_ = _QICoreCommon_2_0_000.ToInterval(context, g_);
+			object g_ = fhirHelpers_4_3_000.ToValue(context, f_);
+			CqlInterval<CqlDateTime> h_ = qiCoreCommon_2_0_000.ToInterval(context, g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Weight?.Value;
-			CqlQuantity k_ = _FHIRHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
+			CqlQuantity k_ = fhirHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
 			bool? l_ = context.Operators.Not((bool?)(k_ is null));
 			bool? m_ = context.Operators.And(i_, l_);
 
@@ -431,13 +431,13 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	{
 		CqlValueSet a_ = this.Counseling_for_Nutrition(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
-		IEnumerable<Procedure> c_ = _Status_1_6_000.Completed_Procedure(context, b_);
+		IEnumerable<Procedure> c_ = status_1_6_000.Completed_Procedure(context, b_);
 		bool? d_(Procedure NutritionCounseling)
 		{
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			DataType h_ = NutritionCounseling?.Performed;
-			object i_ = _FHIRHelpers_4_3_000.ToValue(context, h_);
-			CqlInterval<CqlDateTime> j_ = _QICoreCommon_2_0_000.ToInterval(context, i_);
+			object i_ = fhirHelpers_4_3_000.ToValue(context, h_);
+			CqlInterval<CqlDateTime> j_ = qiCoreCommon_2_0_000.ToInterval(context, i_);
 			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;
@@ -453,13 +453,13 @@ public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChil
 	{
 		CqlValueSet a_ = this.Counseling_for_Physical_Activity(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
-		IEnumerable<Procedure> c_ = _Status_1_6_000.Completed_Procedure(context, b_);
+		IEnumerable<Procedure> c_ = status_1_6_000.Completed_Procedure(context, b_);
 		bool? d_(Procedure ActivityCounseling)
 		{
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			DataType h_ = ActivityCounseling?.Performed;
-			object i_ = _FHIRHelpers_4_3_000.ToValue(context, h_);
-			CqlInterval<CqlDateTime> j_ = _QICoreCommon_2_0_000.ToInterval(context, i_);
+			object i_ = fhirHelpers_4_3_000.ToValue(context, h_);
+			CqlInterval<CqlDateTime> j_ = qiCoreCommon_2_0_000.ToInterval(context, i_);
 			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;

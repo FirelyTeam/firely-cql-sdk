@@ -16,9 +16,9 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("POAGOpticNerveEvaluationFHIR", "0.1.000")]
 public class POAGOpticNerveEvaluationFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000)
 {
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
@@ -113,7 +113,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -121,7 +121,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -129,7 +129,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -137,7 +137,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -163,7 +163,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 		{
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
 			Period r_ = QualifyingEncounter?.Period;
-			CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> s_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 			bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, default);
 			Code<Encounter.EncounterStatus> u_ = QualifyingEncounter?.StatusElement;
 			Encounter.EncounterStatus? v_ = u_?.Value;
@@ -171,7 +171,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 			bool? x_ = context.Operators.Equal(w_, "finished");
 			bool? y_ = context.Operators.And(t_, x_);
 			Coding z_ = QualifyingEncounter?.Class;
-			CqlCode aa_ = _FHIRHelpers_4_3_000.ToCode(context, z_);
+			CqlCode aa_ = fhirHelpers_4_3_000.ToCode(context, z_);
 			CqlCode ab_ = this.@virtual(context);
 			bool? ac_ = context.Operators.Equivalent(aa_, ab_);
 			bool? ad_ = context.Operators.Not(ac_);
@@ -194,24 +194,24 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
 			bool? f_(Condition PrimaryOpenAngleGlaucoma)
 			{
-				CqlInterval<CqlDateTime> j_ = _QICoreCommon_2_0_000.prevalenceInterval(context, PrimaryOpenAngleGlaucoma);
+				CqlInterval<CqlDateTime> j_ = qiCoreCommon_2_0_000.prevalenceInterval(context, PrimaryOpenAngleGlaucoma);
 				Period k_ = ValidQualifyingEncounter?.Period;
-				CqlInterval<CqlDateTime> l_ = _FHIRHelpers_4_3_000.ToInterval(context, k_);
+				CqlInterval<CqlDateTime> l_ = fhirHelpers_4_3_000.ToInterval(context, k_);
 				bool? m_ = context.Operators.Overlaps(j_, l_, default);
-				bool? n_ = _QICoreCommon_2_0_000.isActive(context, PrimaryOpenAngleGlaucoma);
+				bool? n_ = qiCoreCommon_2_0_000.isActive(context, PrimaryOpenAngleGlaucoma);
 				bool? o_ = context.Operators.And(m_, n_);
 				CodeableConcept p_ = PrimaryOpenAngleGlaucoma?.VerificationStatus;
-				CqlConcept q_ = _FHIRHelpers_4_3_000.ToConcept(context, p_);
-				CqlCode r_ = _QICoreCommon_2_0_000.unconfirmed(context);
+				CqlConcept q_ = fhirHelpers_4_3_000.ToConcept(context, p_);
+				CqlCode r_ = qiCoreCommon_2_0_000.unconfirmed(context);
 				CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
 				bool? t_ = context.Operators.Equivalent(q_, s_);
-				CqlConcept v_ = _FHIRHelpers_4_3_000.ToConcept(context, p_);
-				CqlCode w_ = _QICoreCommon_2_0_000.refuted(context);
+				CqlConcept v_ = fhirHelpers_4_3_000.ToConcept(context, p_);
+				CqlCode w_ = qiCoreCommon_2_0_000.refuted(context);
 				CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
 				bool? y_ = context.Operators.Equivalent(v_, x_);
 				bool? z_ = context.Operators.Or(t_, y_);
-				CqlConcept ab_ = _FHIRHelpers_4_3_000.ToConcept(context, p_);
-				CqlCode ac_ = _QICoreCommon_2_0_000.entered_in_error(context);
+				CqlConcept ab_ = fhirHelpers_4_3_000.ToConcept(context, p_);
+				CqlCode ac_ = qiCoreCommon_2_0_000.entered_in_error(context);
 				CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
 				bool? ae_ = context.Operators.Equivalent(ab_, ad_);
 				bool? af_ = context.Operators.Or(z_, ae_);
@@ -275,7 +275,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 				DateTimeOffset? p_ = o_?.Value;
 				CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
 				Period r_ = EncounterWithPOAG?.Period;
-				CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> s_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 
 				return t_;
@@ -294,7 +294,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 			{
 				string ac_ = @this?.Url;
 				FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
-				string ae_ = _FHIRHelpers_4_3_000.ToString(context, ad_);
+				string ae_ = fhirHelpers_4_3_000.ToString(context, ad_);
 				bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return af_;
@@ -310,7 +310,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 			};
 			IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
 			object y_ = context.Operators.SingletonFrom<object>(x_);
-			CqlConcept z_ = _FHIRHelpers_4_3_000.ToConcept(context, y_ as CodeableConcept);
+			CqlConcept z_ = fhirHelpers_4_3_000.ToConcept(context, y_ as CodeableConcept);
 			CqlValueSet aa_ = this.Medical_Reason(context);
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
@@ -337,7 +337,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 				DateTimeOffset? p_ = o_?.Value;
 				CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
 				Period r_ = EncounterWithPOAG?.Period;
-				CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> s_ = fhirHelpers_4_3_000.ToInterval(context, r_);
 				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 
 				return t_;
@@ -356,7 +356,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 			{
 				string ac_ = @this?.Url;
 				FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
-				string ae_ = _FHIRHelpers_4_3_000.ToString(context, ad_);
+				string ae_ = fhirHelpers_4_3_000.ToString(context, ad_);
 				bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
 
 				return af_;
@@ -372,7 +372,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 			};
 			IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
 			object y_ = context.Operators.SingletonFrom<object>(x_);
-			CqlConcept z_ = _FHIRHelpers_4_3_000.ToConcept(context, y_ as CodeableConcept);
+			CqlConcept z_ = fhirHelpers_4_3_000.ToConcept(context, y_ as CodeableConcept);
 			CqlValueSet aa_ = this.Medical_Reason(context);
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 
@@ -406,10 +406,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 			bool? h_(Encounter EncounterWithPOAG)
 			{
 				Period l_ = EncounterWithPOAG?.Period;
-				CqlInterval<CqlDateTime> m_ = _FHIRHelpers_4_3_000.ToInterval(context, l_);
+				CqlInterval<CqlDateTime> m_ = fhirHelpers_4_3_000.ToInterval(context, l_);
 				DataType n_ = CupToDiscExamPerformed?.Effective;
-				object o_ = _FHIRHelpers_4_3_000.ToValue(context, n_);
-				CqlInterval<CqlDateTime> p_ = _QICoreCommon_2_0_000.toInterval(context, o_);
+				object o_ = fhirHelpers_4_3_000.ToValue(context, n_);
+				CqlInterval<CqlDateTime> p_ = qiCoreCommon_2_0_000.toInterval(context, o_);
 				bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
 
 				return q_;
@@ -425,7 +425,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 		bool? e_(Observation CupToDiscExamPerformed)
 		{
 			DataType r_ = CupToDiscExamPerformed?.Value;
-			object s_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
+			object s_ = fhirHelpers_4_3_000.ToValue(context, r_);
 			bool? t_ = context.Operators.Not((bool?)(s_ is null));
 			Code<ObservationStatus> u_ = CupToDiscExamPerformed?.StatusElement;
 			ObservationStatus? v_ = u_?.Value;
@@ -457,10 +457,10 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 			bool? h_(Encounter EncounterWithPOAG)
 			{
 				Period l_ = EncounterWithPOAG?.Period;
-				CqlInterval<CqlDateTime> m_ = _FHIRHelpers_4_3_000.ToInterval(context, l_);
+				CqlInterval<CqlDateTime> m_ = fhirHelpers_4_3_000.ToInterval(context, l_);
 				DataType n_ = OpticDiscExamPerformed?.Effective;
-				object o_ = _FHIRHelpers_4_3_000.ToValue(context, n_);
-				CqlInterval<CqlDateTime> p_ = _QICoreCommon_2_0_000.toInterval(context, o_);
+				object o_ = fhirHelpers_4_3_000.ToValue(context, n_);
+				CqlInterval<CqlDateTime> p_ = qiCoreCommon_2_0_000.toInterval(context, o_);
 				bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
 
 				return q_;
@@ -476,7 +476,7 @@ public class POAGOpticNerveEvaluationFHIR_0_1_000(
 		bool? e_(Observation OpticDiscExamPerformed)
 		{
 			DataType r_ = OpticDiscExamPerformed?.Value;
-			object s_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
+			object s_ = fhirHelpers_4_3_000.ToValue(context, r_);
 			bool? t_ = context.Operators.Not((bool?)(s_ is null));
 			Code<ObservationStatus> u_ = OpticDiscExamPerformed?.StatusElement;
 			ObservationStatus? v_ = u_?.Value;

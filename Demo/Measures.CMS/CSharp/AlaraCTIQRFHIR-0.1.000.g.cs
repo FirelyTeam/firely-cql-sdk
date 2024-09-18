@@ -16,10 +16,10 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AlaraCTIQRFHIR", "0.1.000")]
 public class AlaraCTIQRFHIR_0_1_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
-    CQMCommon_2_0_000 _CQMCommon_2_0_000,
-    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
-    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
+    CQMCommon_2_0_000 cqmCommon_2_0_000,
+    QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
+    SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000)
 {
 
     [CqlDeclaration("Encounter Inpatient")]
@@ -79,7 +79,7 @@ public class AlaraCTIQRFHIR_0_1_000(
 		bool? c_(Encounter InpatientEncounter)
 		{
 			Period e_ = InpatientEncounter?.Period;
-			CqlInterval<CqlDateTime> f_ = _FHIRHelpers_4_3_000.ToInterval(context, e_);
+			CqlInterval<CqlDateTime> f_ = fhirHelpers_4_3_000.ToInterval(context, e_);
 			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			bool? h_ = context.Operators.Overlaps(f_, g_, default);
 			Patient i_ = this.Patient(context);
@@ -102,7 +102,7 @@ public class AlaraCTIQRFHIR_0_1_000(
     [CqlDeclaration("SDE Ethnicity")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
@@ -110,7 +110,7 @@ public class AlaraCTIQRFHIR_0_1_000(
     [CqlDeclaration("SDE Payer")]
 	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
@@ -118,7 +118,7 @@ public class AlaraCTIQRFHIR_0_1_000(
     [CqlDeclaration("SDE Race")]
 	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
@@ -126,7 +126,7 @@ public class AlaraCTIQRFHIR_0_1_000(
     [CqlDeclaration("SDE Sex")]
 	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
@@ -143,15 +143,15 @@ public class AlaraCTIQRFHIR_0_1_000(
 			bool? g_(Encounter InpatientEncounters)
 			{
 				DataType k_ = CTScan?.Effective;
-				object l_ = _FHIRHelpers_4_3_000.ToValue(context, k_);
-				CqlInterval<CqlDateTime> m_ = _QICoreCommon_2_0_000.ToInterval(context, l_);
+				object l_ = fhirHelpers_4_3_000.ToValue(context, k_);
+				CqlInterval<CqlDateTime> m_ = qiCoreCommon_2_0_000.ToInterval(context, l_);
 				CqlDateTime n_ = context.Operators.Start(m_);
 				Period o_ = InpatientEncounters?.Period;
-				CqlInterval<CqlDateTime> p_ = _FHIRHelpers_4_3_000.ToInterval(context, o_);
+				CqlInterval<CqlDateTime> p_ = fhirHelpers_4_3_000.ToInterval(context, o_);
 				bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, default);
 				CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-				object t_ = _FHIRHelpers_4_3_000.ToValue(context, k_);
-				CqlInterval<CqlDateTime> u_ = _QICoreCommon_2_0_000.ToInterval(context, t_);
+				object t_ = fhirHelpers_4_3_000.ToValue(context, k_);
+				CqlInterval<CqlDateTime> u_ = qiCoreCommon_2_0_000.ToInterval(context, t_);
 				bool? v_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, u_, default);
 				bool? w_ = context.Operators.And(q_, v_);
 
@@ -176,12 +176,12 @@ public class AlaraCTIQRFHIR_0_1_000(
 		bool? b_(Observation.ComponentComponent C)
 		{
 			CodeableConcept g_ = C?.Code;
-			CqlConcept h_ = _FHIRHelpers_4_3_000.ToConcept(context, g_);
+			CqlConcept h_ = fhirHelpers_4_3_000.ToConcept(context, g_);
 			CqlCode i_ = this.Calculated_CT_global_noise(context);
 			CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
 			bool? k_ = context.Operators.Equivalent(h_, j_);
 			DataType l_ = C?.Value;
-			object m_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
+			object m_ = fhirHelpers_4_3_000.ToValue(context, l_);
 			string n_ = (m_ as CqlQuantity)?.unit;
 			bool? o_ = context.Operators.Equal(n_, "[hnsf'U]");
 			bool? p_ = context.Operators.And(k_, o_);
@@ -192,7 +192,7 @@ public class AlaraCTIQRFHIR_0_1_000(
 		decimal? d_(Observation.ComponentComponent C)
 		{
 			DataType q_ = C?.Value;
-			object r_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
+			object r_ = fhirHelpers_4_3_000.ToValue(context, q_);
 			decimal? s_ = (r_ as CqlQuantity)?.value;
 
 			return s_;
@@ -210,12 +210,12 @@ public class AlaraCTIQRFHIR_0_1_000(
 		bool? b_(Observation.ComponentComponent C)
 		{
 			CodeableConcept g_ = C?.Code;
-			CqlConcept h_ = _FHIRHelpers_4_3_000.ToConcept(context, g_);
+			CqlConcept h_ = fhirHelpers_4_3_000.ToConcept(context, g_);
 			CqlCode i_ = this.Calculated_CT_size_adjusted_dose(context);
 			CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
 			bool? k_ = context.Operators.Equivalent(h_, j_);
 			DataType l_ = C?.Value;
-			object m_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
+			object m_ = fhirHelpers_4_3_000.ToValue(context, l_);
 			string n_ = (m_ as CqlQuantity)?.unit;
 			bool? o_ = context.Operators.Equal(n_, "mGy.cm");
 			bool? p_ = context.Operators.And(k_, o_);
@@ -226,7 +226,7 @@ public class AlaraCTIQRFHIR_0_1_000(
 		decimal? d_(Observation.ComponentComponent C)
 		{
 			DataType q_ = C?.Value;
-			object r_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
+			object r_ = fhirHelpers_4_3_000.ToValue(context, q_);
 			decimal? s_ = (r_ as CqlQuantity)?.value;
 
 			return s_;
@@ -249,7 +249,7 @@ public class AlaraCTIQRFHIR_0_1_000(
 			bool? g_ = context.Operators.Not((bool?)(f_ is null));
 			bool? h_ = context.Operators.And(e_, g_);
 			DataType i_ = IP?.Value;
-			object j_ = _FHIRHelpers_4_3_000.ToValue(context, i_);
+			object j_ = fhirHelpers_4_3_000.ToValue(context, i_);
 			bool? k_ = context.Operators.Not((bool?)(j_ is null));
 			bool? l_ = context.Operators.And(h_, k_);
 
@@ -264,7 +264,7 @@ public class AlaraCTIQRFHIR_0_1_000(
 	public  bool? Qualifies(CqlContext context, Observation Obs, string code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
 	{
 		DataType a_ = Obs?.Value;
-		object b_ = _FHIRHelpers_4_3_000.ToValue(context, a_);
+		object b_ = fhirHelpers_4_3_000.ToValue(context, a_);
 		CqlCode[] c_ = (b_ as CqlConcept)?.codes;
 		bool? d_(CqlCode @this)
 		{
@@ -379,7 +379,7 @@ public class AlaraCTIQRFHIR_0_1_000(
 		bool? b_(Observation Denom)
 		{
 			DataType d_ = Denom?.Value;
-			object e_ = _FHIRHelpers_4_3_000.ToValue(context, d_);
+			object e_ = fhirHelpers_4_3_000.ToValue(context, d_);
 			CqlCode[] f_ = (e_ as CqlConcept)?.codes;
 			bool? g_(CqlCode @this)
 			{

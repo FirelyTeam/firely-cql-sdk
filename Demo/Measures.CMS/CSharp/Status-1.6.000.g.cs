@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Status", "1.6.000")]
 public class Status_1_6_000(
-    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000)
+    FHIRHelpers_4_3_000 fhirHelpers_4_3_000)
 {
 
     [CqlDeclaration("laboratory")]
@@ -89,7 +89,7 @@ public class Status_1_6_000(
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
-				CqlConcept p_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept p_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return p_;
 			};
@@ -131,7 +131,7 @@ public class Status_1_6_000(
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
-				CqlConcept p_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept p_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return p_;
 			};
@@ -161,7 +161,7 @@ public class Status_1_6_000(
 		bool? a_(Condition C)
 		{
 			CodeableConcept c_ = C?.ClinicalStatus;
-			CqlConcept d_ = _FHIRHelpers_4_3_000.ToConcept(context, c_);
+			CqlConcept d_ = fhirHelpers_4_3_000.ToConcept(context, c_);
 			CqlCode e_ = this.active(context);
 			CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
 			bool? g_ = context.Operators.Equivalent(d_, f_);
@@ -179,7 +179,7 @@ public class Status_1_6_000(
 		bool? a_(Condition C)
 		{
 			CodeableConcept c_ = C?.ClinicalStatus;
-			CqlConcept d_ = _FHIRHelpers_4_3_000.ToConcept(context, c_);
+			CqlConcept d_ = fhirHelpers_4_3_000.ToConcept(context, c_);
 			CqlCode e_ = this.active(context);
 			CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
 			bool? g_ = context.Operators.Equivalent(d_, f_);
@@ -552,7 +552,7 @@ public class Status_1_6_000(
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
-				CqlConcept p_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept p_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return p_;
 			};
@@ -594,7 +594,7 @@ public class Status_1_6_000(
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
-				CqlConcept p_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept p_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return p_;
 			};
@@ -778,7 +778,7 @@ public class Status_1_6_000(
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
-				CqlConcept p_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept p_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return p_;
 			};
@@ -820,7 +820,7 @@ public class Status_1_6_000(
 			List<CodeableConcept> i_ = O?.Category;
 			CqlConcept j_(CodeableConcept @this)
 			{
-				CqlConcept p_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept p_ = fhirHelpers_4_3_000.ToConcept(context, @this);
 
 				return p_;
 			};
