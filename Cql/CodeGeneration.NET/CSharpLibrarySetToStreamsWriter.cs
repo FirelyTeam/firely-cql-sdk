@@ -24,6 +24,22 @@ using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Options;
 using Expression = System.Linq.Expressions.Expression;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+
+
+/*
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+public static class Status_1_6_000_ServiceCollectionExtensions
+{
+    public static IServiceCollection AddStatus_1_6_000(this IServiceCollection services)
+    {
+        services.TryAddSingleton<Status_1_6_000>();
+        services.AddFHIRHelpers_4_3_000(services);
+        return services;
+    }
+}
+*/
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -74,6 +90,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                 typeof(IValueSetFacade).Namespace!,
                 typeof(Iso8601.DateIso8601).Namespace!,
                 typeof(PropertyInfo).Namespace!,
+                typeof(IServiceCollection).Namespace!,
+                typeof(ServiceCollectionDescriptorExtensions).Namespace!,
             };
 
             foreach (var @using in typeResolver.ModelNamespaces)
@@ -193,7 +211,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                     indentLevel += 1;
                 }
 
-                WriteClass(definitions, librarySet, callbacks.LibraryNameToClassName, libraryName, writer, indentLevel);
+                var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
+                WriteServiceCollectionExtensionsClass(callbacks.LibraryNameToClassName, libraryName, writer, indentLevel, requiredLibraries);
+                WriteClass(definitions, callbacks.LibraryNameToClassName, libraryName, writer, indentLevel, requiredLibraries);
 
                 if (!string.IsNullOrWhiteSpace(Namespace))
                 {
@@ -205,19 +225,66 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteClass(
-            DefinitionDictionary<LambdaExpression> definitions,
-            LibrarySet librarySet,
+        private void WriteServiceCollectionExtensionsClass(
             Func<string, string?> libraryNameToClassName,
             string libraryName,
             StreamWriter writer,
-            int indentLevel)
+            int indentLevel,
+            IReadOnlySet<Library> requiredLibraries)
         {
-            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode({QuoteString(_tool)}, {QuoteString(_version)})]");
+            WriteGeneratedCodeAttribute(writer, indentLevel);
+            var className = $"{libraryNameToClassName(libraryName)}";
+            writer.WriteLine(indentLevel, $"public static {(PartialClass ? "partial " : "")}class {className}ServiceCollectionExtensions");
+            writer.WriteLine(indentLevel, "{");
+            indentLevel += 1;
+            {
+                writer.WriteLine(indentLevel, $"public static IServiceCollection Add{className}(this IServiceCollection services)");
+                writer.WriteLine(indentLevel, "{");
+                indentLevel += 1;
+                {
+                    writer.WriteLine(indentLevel, $"services.TryAddSingleton<{className}>();");
+                    foreach (var dependentLibrary in requiredLibraries)
+                    {
+                        var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
+                        writer.WriteLine(indentLevel, $"services.Add{typeName}();");
+                    }
+                    writer.WriteLine(indentLevel, "return services;");
+                }
+                indentLevel -= 1;
+                writer.WriteLine(indentLevel, "}");
+            }
+            indentLevel -= 1;
+            writer.WriteLine(indentLevel, "}");
+            writer.WriteLine();
+        }
 
-            var libraryAttribute = libraryName;
+        private void WriteClass(
+            DefinitionDictionary<LambdaExpression> definitions,
+            Func<string, string?> libraryNameToClassName,
+            string libraryName,
+            StreamWriter writer,
+            int indentLevel,
+            IReadOnlySet<Library> requiredLibraries)
+        {
+            WriteGeneratedCodeAttribute(writer, indentLevel);
+            var (identifier, version) = ParseVersionedIdentifierParts(libraryName);
+            writer.WriteLine(indentLevel, $"[CqlLibrary({QuoteString(identifier)}, {QuoteString(version)})]");
+            var className = libraryNameToClassName(libraryName);
+            writer.Write(indentLevel, $"public {(PartialClass ? "partial " : "")}class {className}");
+            WritePrimaryConstructor(libraryNameToClassName, writer, indentLevel, requiredLibraries);
+            writer.WriteLine(indentLevel, "{");
+            writer.WriteLine();
+            indentLevel += 1;
+            WriteDefinitionMethods(definitions, libraryName, writer, indentLevel);
+            indentLevel -= 1;
+            writer.WriteLine(indentLevel, "}");
+        }
+
+        private static (string identifier, string version) ParseVersionedIdentifierParts(string versionedIdentifierString)
+        {
+            var libraryAttribute = versionedIdentifierString;
             var versionAttribute = string.Empty;
-            var versionedIdentifier = libraryName.Split('-');
+            var versionedIdentifier = versionedIdentifierString.Split('-');
             if (versionedIdentifier.Length == 2)
             {
                 if (Version.TryParse(versionedIdentifier[1], out _))
@@ -227,23 +294,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
 
-            writer.WriteLine(indentLevel, $"[CqlLibrary({QuoteString(libraryAttribute)}, {QuoteString(versionAttribute)})]");
-            var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
-            if (PartialClass)
-                writer.Write(indentLevel, $"public partial class {className}");
-            else
-                writer.Write(indentLevel, $"public class {className}");
-            WritePrimaryConstructor(librarySet, libraryNameToClassName, libraryName, writer, indentLevel);
-            writer.WriteLine(indentLevel, "{");
-            writer.WriteLine();
-            indentLevel += 1;
-            // Class
-            {
-                WriteDefinitionMethods(definitions, libraryName, writer, indentLevel);
-                indentLevel -= 1;
-                writer.WriteLine(indentLevel, "}");
-            }
+            return (libraryAttribute, versionAttribute);
         }
+
+        private void WriteGeneratedCodeAttribute(StreamWriter writer, int indentLevel) =>
+            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode({QuoteString(_tool)}, {QuoteString(_version)})]");
 
         private void WriteDefinitionMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
@@ -259,13 +314,11 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private static void WritePrimaryConstructor(
-            LibrarySet librarySet,
             Func<string, string?> libraryNameToClassName,
-            string libraryName,
             StreamWriter writer,
-            int indentLevel)
+            int indentLevel,
+            IReadOnlySet<Library> requiredLibraries)
         {
-            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
             if (requiredLibraries.Count == 0)
             {
                 writer.WriteLine();

@@ -7,11 +7,28 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 #pragma warning disable CS9113 // Parameter is unread.
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+public static partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002ServiceCollectionExtensions
+{
+    public static IServiceCollection AddPrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(this IServiceCollection services)
+    {
+        services.TryAddSingleton<PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002>();
+        services.AddFHIRHelpers_4_3_000();
+        services.AddSupplementalDataElements_3_4_000();
+        services.AddQICoreCommon_2_0_000();
+        services.AddHospice_6_9_000();
+        services.AddStatus_1_6_000();
+        return services;
+    }
+}
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyDentistsFHIR", "0.0.002")]

@@ -7,11 +7,24 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 #pragma warning disable CS9113 // Parameter is unread.
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+public static partial class FHIRConversionTest_2023_0_0ServiceCollectionExtensions
+{
+    public static IServiceCollection AddFHIRConversionTest_2023_0_0(this IServiceCollection services)
+    {
+        services.TryAddSingleton<FHIRConversionTest_2023_0_0>();
+        services.AddFHIRHelpers_4_0_1();
+        return services;
+    }
+}
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]

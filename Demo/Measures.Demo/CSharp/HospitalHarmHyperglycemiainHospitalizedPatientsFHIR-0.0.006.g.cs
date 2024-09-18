@@ -7,11 +7,26 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 #pragma warning disable CS9113 // Parameter is unread.
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+public static partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006ServiceCollectionExtensions
+{
+    public static IServiceCollection AddHospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006(this IServiceCollection services)
+    {
+        services.TryAddSingleton<HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006>();
+        services.AddFHIRHelpers_4_0_001();
+        services.AddSupplementalDataElementsFHIR4_2_0_000();
+        services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
+        return services;
+    }
+}
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR", "0.0.006")]

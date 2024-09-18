@@ -7,11 +7,25 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 #pragma warning disable CS9113 // Parameter is unread.
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+public static partial class NCQAStatus_1_0_0ServiceCollectionExtensions
+{
+    public static IServiceCollection AddNCQAStatus_1_0_0(this IServiceCollection services)
+    {
+        services.TryAddSingleton<NCQAStatus_1_0_0>();
+        services.AddFHIRHelpers_4_0_001();
+        services.AddNCQATerminology_1_0_0();
+        return services;
+    }
+}
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAStatus", "1.0.0")]

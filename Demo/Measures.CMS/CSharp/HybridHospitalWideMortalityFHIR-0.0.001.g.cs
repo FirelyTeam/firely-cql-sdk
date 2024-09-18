@@ -7,11 +7,27 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 #pragma warning disable CS9113 // Parameter is unread.
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+public static partial class HybridHospitalWideMortalityFHIR_0_0_001ServiceCollectionExtensions
+{
+    public static IServiceCollection AddHybridHospitalWideMortalityFHIR_0_0_001(this IServiceCollection services)
+    {
+        services.TryAddSingleton<HybridHospitalWideMortalityFHIR_0_0_001>();
+        services.AddCQMCommon_2_0_000();
+        services.AddFHIRHelpers_4_3_000();
+        services.AddSupplementalDataElements_3_4_000();
+        services.AddQICoreCommon_2_0_000();
+        return services;
+    }
+}
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HybridHospitalWideMortalityFHIR", "0.0.001")]

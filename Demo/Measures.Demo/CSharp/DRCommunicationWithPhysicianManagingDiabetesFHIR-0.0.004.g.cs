@@ -7,11 +7,26 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
 #pragma warning disable CS9113 // Parameter is unread.
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+public static partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004ServiceCollectionExtensions
+{
+    public static IServiceCollection AddDRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004(this IServiceCollection services)
+    {
+        services.TryAddSingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>();
+        services.AddFHIRHelpers_4_0_001();
+        services.AddSupplementalDataElementsFHIR4_2_0_000();
+        services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
+        return services;
+    }
+}
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
