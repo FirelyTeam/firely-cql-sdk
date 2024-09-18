@@ -50,161 +50,161 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
-	public  CqlValueSet Ethnicity(CqlContext context) => 
+	public CqlValueSet Ethnicity(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
 
     [CqlDeclaration("Lower Body Fractures Excluding Ankle and Foot")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1178")]
-	public  CqlValueSet Lower_Body_Fractures_Excluding_Ankle_and_Foot(CqlContext context) => 
+	public CqlValueSet Lower_Body_Fractures_Excluding_Ankle_and_Foot(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1178", default);
 
     [CqlDeclaration("Malignant Neoplasms of Lower and Unspecified Limbs")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1180")]
-	public  CqlValueSet Malignant_Neoplasms_of_Lower_and_Unspecified_Limbs(CqlContext context) => 
+	public CqlValueSet Malignant_Neoplasms_of_Lower_and_Unspecified_Limbs(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1180", default);
 
     [CqlDeclaration("Mechanical Complications Excluding Upper Body")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1182")]
-	public  CqlValueSet Mechanical_Complications_Excluding_Upper_Body(CqlContext context) => 
+	public CqlValueSet Mechanical_Complications_Excluding_Upper_Body(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1182", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public  CqlValueSet Office_Visit(CqlContext context) => 
+	public CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
-	public  CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
+	public CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public  CqlValueSet Online_Assessments(CqlContext context) => 
+	public CqlValueSet Online_Assessments(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public  CqlValueSet Outpatient_Consultation(CqlContext context) => 
+	public CqlValueSet Outpatient_Consultation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Partial Arthroplasty of Hip")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1184")]
-	public  CqlValueSet Partial_Arthroplasty_of_Hip(CqlContext context) => 
+	public CqlValueSet Partial_Arthroplasty_of_Hip(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1184", default);
 
     [CqlDeclaration("Payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
-	public  CqlValueSet Payer(CqlContext context) => 
+	public CqlValueSet Payer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
 
     [CqlDeclaration("Primary THA Procedure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1006")]
-	public  CqlValueSet Primary_THA_Procedure(CqlContext context) => 
+	public CqlValueSet Primary_THA_Procedure(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1006", default);
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
-	public  CqlValueSet Race(CqlContext context) => 
+	public CqlValueSet Race(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
 
     [CqlDeclaration("Removal, Revision and Supplement Procedures of the Lower Body and Spine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1189")]
-	public  CqlValueSet Removal__Revision_and_Supplement_Procedures_of_the_Lower_Body_and_Spine(CqlContext context) => 
+	public CqlValueSet Removal__Revision_and_Supplement_Procedures_of_the_Lower_Body_and_Spine(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1189", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public  CqlValueSet Telephone_Visits(CqlContext context) => 
+	public CqlValueSet Telephone_Visits(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Activities of daily living score [HOOS]")]
-	public  CqlCode Activities_of_daily_living_score__HOOS_(CqlContext context) => 
+	public CqlCode Activities_of_daily_living_score__HOOS_(CqlContext context) => 
 		new CqlCode("72095-3", "http://loinc.org", default, default);
 
     [CqlDeclaration("Dead (finding)")]
-	public  CqlCode Dead__finding_(CqlContext context) => 
+	public CqlCode Dead__finding_(CqlContext context) => 
 		new CqlCode("419099009", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
-	public  CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext context) => 
+	public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext context) => 
 		new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
-	public  CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext context) => 
+	public CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext context) => 
 		new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Hospice care [Minimum Data Set]")]
-	public  CqlCode Hospice_care__Minimum_Data_Set_(CqlContext context) => 
+	public CqlCode Hospice_care__Minimum_Data_Set_(CqlContext context) => 
 		new CqlCode("45755-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Pain score [HOOS]")]
-	public  CqlCode Pain_score__HOOS_(CqlContext context) => 
+	public CqlCode Pain_score__HOOS_(CqlContext context) => 
 		new CqlCode("72097-9", "http://loinc.org", default, default);
 
     [CqlDeclaration("Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure")]
-	public  CqlCode Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(CqlContext context) => 
+	public CqlCode Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(CqlContext context) => 
 		new CqlCode("99024", "http://www.ama-assn.org/go/cpt", default, default);
 
     [CqlDeclaration("PROMIS-10 Global Mental Health (GMH) score T-score")]
-	public  CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score(CqlContext context) => 
+	public CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score(CqlContext context) => 
 		new CqlCode("71969-0", "http://loinc.org", default, default);
 
     [CqlDeclaration("PROMIS-10 Global Physical Health (GPH) score T-score")]
-	public  CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score(CqlContext context) => 
+	public CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score(CqlContext context) => 
 		new CqlCode("71971-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Quality of life score [HOOS]")]
-	public  CqlCode Quality_of_life_score__HOOS_(CqlContext context) => 
+	public CqlCode Quality_of_life_score__HOOS_(CqlContext context) => 
 		new CqlCode("72093-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Severe cognitive impairment (finding)")]
-	public  CqlCode Severe_cognitive_impairment__finding_(CqlContext context) => 
+	public CqlCode Severe_cognitive_impairment__finding_(CqlContext context) => 
 		new CqlCode("702956004", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Sport-recreation score [HOOS]")]
-	public  CqlCode Sport_recreation_score__HOOS_(CqlContext context) => 
+	public CqlCode Sport_recreation_score__HOOS_(CqlContext context) => 
 		new CqlCode("72094-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("survey")]
-	public  CqlCode survey(CqlContext context) => 
+	public CqlCode survey(CqlContext context) => 
 		new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/v3-ObservationCategory", default, default);
 
     [CqlDeclaration("Symptoms score [HOOS]")]
-	public  CqlCode Symptoms_score__HOOS_(CqlContext context) => 
+	public CqlCode Symptoms_score__HOOS_(CqlContext context) => 
 		new CqlCode("72096-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Total interval score [HOOSJR]")]
-	public  CqlCode Total_interval_score__HOOSJR_(CqlContext context) => 
+	public CqlCode Total_interval_score__HOOSJR_(CqlContext context) => 
 		new CqlCode("82323-7", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - oblique method T-score")]
-	public  CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(CqlContext context) => 
+	public CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(CqlContext context) => 
 		new CqlCode("72026-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - orthogonal method T-score")]
-	public  CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(CqlContext context) => 
+	public CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(CqlContext context) => 
 		new CqlCode("72028-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - oblique method T-score")]
-	public  CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score(CqlContext context) => 
+	public CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score(CqlContext context) => 
 		new CqlCode("72025-0", "http://loinc.org", default, default);
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - orthogonal method T-score")]
-	public  CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score(CqlContext context) => 
+	public CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score(CqlContext context) => 
 		new CqlCode("72027-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Yes (qualifier value)")]
-	public  CqlCode Yes__qualifier_value_(CqlContext context) => 
+	public CqlCode Yes__qualifier_value_(CqlContext context) => 
 		new CqlCode("373066001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("LOINC")]
-	public  CqlCode[] LOINC(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("72095-3", "http://loinc.org", default, default),
@@ -226,7 +226,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("CPT")]
-	public  CqlCode[] CPT(CqlContext context)
+	public CqlCode[] CPT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("99024", "http://www.ama-assn.org/go/cpt", default, default),
@@ -236,7 +236,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("ConditionCategoryCodes")]
-	public  CqlCode[] ConditionCategoryCodes(CqlContext context)
+	public CqlCode[] ConditionCategoryCodes(CqlContext context)
 	{
 		CqlCode[] a_ = []
 ;
@@ -245,7 +245,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("419099009", "http://snomed.info/sct", default, default),
@@ -259,7 +259,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("ObservationCategoryCodes")]
-	public  CqlCode[] ObservationCategoryCodes(CqlContext context)
+	public CqlCode[] ObservationCategoryCodes(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/v3-ObservationCategory", default, default),
@@ -269,7 +269,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -280,7 +280,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -289,7 +289,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -297,7 +297,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -305,7 +305,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -313,7 +313,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -321,7 +321,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("November 1 Year Prior to the Measurement Period")]
-	public  CqlDateTime November_1_Year_Prior_to_the_Measurement_Period(CqlContext context)
+	public CqlDateTime November_1_Year_Prior_to_the_Measurement_Period(CqlContext context)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -334,7 +334,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has Qualifying Encounter")]
-	public  bool? Has_Qualifying_Encounter(CqlContext context)
+	public bool? Has_Qualifying_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Outpatient_Consultation(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -394,7 +394,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("November 1 Two Years Prior to the Measurement Period")]
-	public  CqlDateTime November_1_Two_Years_Prior_to_the_Measurement_Period(CqlContext context)
+	public CqlDateTime November_1_Two_Years_Prior_to_the_Measurement_Period(CqlContext context)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -407,7 +407,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("October 31 Year Prior to the Measurement Period")]
-	public  CqlDateTime October_31_Year_Prior_to_the_Measurement_Period(CqlContext context)
+	public CqlDateTime October_31_Year_Prior_to_the_Measurement_Period(CqlContext context)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -420,7 +420,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Total Hip Arthroplasty Procedure")]
-	public  IEnumerable<Procedure> Total_Hip_Arthroplasty_Procedure(CqlContext context)
+	public IEnumerable<Procedure> Total_Hip_Arthroplasty_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Primary_THA_Procedure(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -444,7 +444,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		bool? a_ = this.Has_Qualifying_Encounter(context);
 		IEnumerable<Procedure> b_ = this.Total_Hip_Arthroplasty_Procedure(context);
@@ -465,7 +465,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Denominator")]
-	public  bool? Denominator(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -473,7 +473,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has Severe Cognitive Impairment")]
-	public  bool? Has_Severe_Cognitive_Impairment(CqlContext context)
+	public bool? Has_Severe_Cognitive_Impairment(CqlContext context)
 	{
 		CqlCode a_ = this.Severe_cognitive_impairment__finding_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -493,7 +493,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has Total Hip Arthroplasty with 1 or More Lower Body Fractures")]
-	public  bool? Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures(CqlContext context)
+	public bool? Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 		IEnumerable<Procedure> b_(Procedure THAProcedure)
@@ -537,7 +537,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has Partial Hip Arthroplasty Procedure")]
-	public  bool? Has_Partial_Hip_Arthroplasty_Procedure(CqlContext context)
+	public bool? Has_Partial_Hip_Arthroplasty_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Partial_Arthroplasty_of_Hip(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -571,7 +571,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has Revision Hip Arthroplasty Procedure or Implanted Device or Prosthesis Removal Procedure")]
-	public  bool? Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure(CqlContext context)
+	public bool? Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 		IEnumerable<Procedure> b_(Procedure THAProcedure)
@@ -605,7 +605,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has Malignant Neoplasm of Lower and Unspecified Limbs")]
-	public  bool? Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs(CqlContext context)
+	public bool? Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs(CqlContext context)
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasms_of_Lower_and_Unspecified_Limbs(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -636,7 +636,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has Mechanical Complication")]
-	public  bool? Has_Mechanical_Complication(CqlContext context)
+	public bool? Has_Mechanical_Complication(CqlContext context)
 	{
 		CqlValueSet a_ = this.Mechanical_Complications_Excluding_Upper_Body(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -667,7 +667,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has More Than One Elective Primary Total Hip Arthroplasty Performed")]
-	public  bool? Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed(CqlContext context)
+	public bool? Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 		IEnumerable<Procedure> b_(Procedure THAProcedure)
@@ -717,7 +717,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Death Within 300 Days of the THA Procedure")]
-	public  bool? Death_Within_300_Days_of_the_THA_Procedure(CqlContext context)
+	public bool? Death_Within_300_Days_of_the_THA_Procedure(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 		bool? b_(Procedure THAProcedure)
@@ -749,7 +749,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public  bool? Denominator_Exclusions(CqlContext context)
+	public bool? Denominator_Exclusions(CqlContext context)
 	{
 		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
 		bool? b_ = this.Has_Severe_Cognitive_Impairment(context);
@@ -773,7 +773,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Date HOOS Total Assessment Completed")]
-	public  IEnumerable<CqlDate> Date_HOOS_Total_Assessment_Completed(CqlContext context)
+	public IEnumerable<CqlDate> Date_HOOS_Total_Assessment_Completed(CqlContext context)
 	{
 		CqlCode a_ = this.Quality_of_life_score__HOOS_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -917,7 +917,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has THA with Initial and Follow Up HOOS Assessments")]
-	public  bool? Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments(CqlContext context)
+	public bool? Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
@@ -998,7 +998,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Date HOOSJr Total Assessment Completed")]
-	public  IEnumerable<CqlDate> Date_HOOSJr_Total_Assessment_Completed(CqlContext context)
+	public IEnumerable<CqlDate> Date_HOOSJr_Total_Assessment_Completed(CqlContext context)
 	{
 		CqlCode a_ = this.Total_interval_score__HOOSJR_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1028,7 +1028,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has THA with Initial and Follow Up HOOSJr Assessments")]
-	public  bool? Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments(CqlContext context)
+	public bool? Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
@@ -1109,7 +1109,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Date PROMIS10 Total Assessment Completed")]
-	public  IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed(CqlContext context)
+	public IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed(CqlContext context)
 	{
 		CqlCode a_ = this.PROMIS_10_Global_Mental_Health__GMH__score_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1176,7 +1176,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has THA with Initial and Follow Up PROMIS10 Assessments")]
-	public  bool? Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments(CqlContext context)
+	public bool? Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
@@ -1257,7 +1257,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Date VR12 Oblique Total Assessment Completed")]
-	public  IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed(CqlContext context)
+	public IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed(CqlContext context)
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1324,7 +1324,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has THA with Initial and Follow Up VR12 Oblique Assessments")]
-	public  bool? Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(CqlContext context)
+	public bool? Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
@@ -1405,7 +1405,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Date VR12 Orthogonal Total Assessment Completed")]
-	public  IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed(CqlContext context)
+	public IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed(CqlContext context)
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1472,7 +1472,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Has THA with Initial and Follow Up VR12 Orthogonal Assessments")]
-	public  bool? Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(CqlContext context)
+	public bool? Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Total_Hip_Arthroplasty_Procedure(context);
 		CqlInterval<CqlDateTime> b_(Procedure THAProcedure)
@@ -1553,7 +1553,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	}
 
     [CqlDeclaration("Numerator")]
-	public  bool? Numerator(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		bool? a_ = this.Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments(context);
 		bool? b_ = this.Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments(context);

@@ -394,14 +394,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                 }
 
-                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public ");
+                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public");
                 writer.Write(func);
             }
             else
             {
                 writer.WriteLine(indentLevel, $"[CqlDeclaration({QuoteString(cqlName)})]");
                 WriteTags(writer, indentLevel, tags);
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public "));
+                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
             }
         }
 
@@ -452,17 +452,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return body;
         }
 
-        private static string AccessModifierString(AccessModifier modifier) => modifier switch
-        {
-            AccessModifier.Public => "public",
-            AccessModifier.Private => "private",
-            AccessModifier.Internal => "internal",
-            AccessModifier.Protected => "protected",
-            AccessModifier.ProtectedInternal => "protected internal",
-            _ => throw new ArgumentException("Invalid access modifier", nameof(modifier)),
-        };
-
-        private string QuoteString(string literal) =>
+        private static string QuoteString(string literal) =>
             SymbolDisplay.FormatLiteral(literal, true);
     }
 }

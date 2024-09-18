@@ -44,94 +44,94 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public  CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
+	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Diabetic Retinopathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327")]
-	public  CqlValueSet Diabetic_Retinopathy(CqlContext context) => 
+	public CqlValueSet Diabetic_Retinopathy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", default);
 
     [CqlDeclaration("Level of Severity of Retinopathy Findings")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283")]
-	public  CqlValueSet Level_of_Severity_of_Retinopathy_Findings(CqlContext context) => 
+	public CqlValueSet Level_of_Severity_of_Retinopathy_Findings(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283", default);
 
     [CqlDeclaration("Macular Edema Findings Present")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320")]
-	public  CqlValueSet Macular_Edema_Findings_Present(CqlContext context) => 
+	public CqlValueSet Macular_Edema_Findings_Present(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320", default);
 
     [CqlDeclaration("Macular Exam")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251")]
-	public  CqlValueSet Macular_Exam(CqlContext context) => 
+	public CqlValueSet Macular_Exam(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251", default);
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-	public  CqlValueSet Medical_Reason(CqlContext context) => 
+	public CqlValueSet Medical_Reason(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public  CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
+	public CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public  CqlValueSet Office_Visit(CqlContext context) => 
+	public CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
-	public  CqlValueSet Ophthalmological_Services(CqlContext context) => 
+	public CqlValueSet Ophthalmological_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public  CqlValueSet Outpatient_Consultation(CqlContext context) => 
+	public CqlValueSet Outpatient_Consultation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Patient Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008")]
-	public  CqlValueSet Patient_Reason(CqlContext context) => 
+	public CqlValueSet Patient_Reason(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", default);
 
     [CqlDeclaration("Macular edema absent (situation)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.2.1391")]
-	public  CqlValueSet Macular_edema_absent__situation_(CqlContext context) => 
+	public CqlValueSet Macular_edema_absent__situation_(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.2.1391", default);
 
     [CqlDeclaration("Healthcare professional (occupation)")]
-	public  CqlCode Healthcare_professional__occupation_(CqlContext context) => 
+	public CqlCode Healthcare_professional__occupation_(CqlContext context) => 
 		new CqlCode("223366009", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Medical practitioner (occupation)")]
-	public  CqlCode Medical_practitioner__occupation_(CqlContext context) => 
+	public CqlCode Medical_practitioner__occupation_(CqlContext context) => 
 		new CqlCode("158965000", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Ophthalmologist (occupation)")]
-	public  CqlCode Ophthalmologist__occupation_(CqlContext context) => 
+	public CqlCode Ophthalmologist__occupation_(CqlContext context) => 
 		new CqlCode("422234006", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Optometrist (occupation)")]
-	public  CqlCode Optometrist__occupation_(CqlContext context) => 
+	public CqlCode Optometrist__occupation_(CqlContext context) => 
 		new CqlCode("28229004", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Physician (occupation)")]
-	public  CqlCode Physician__occupation_(CqlContext context) => 
+	public CqlCode Physician__occupation_(CqlContext context) => 
 		new CqlCode("309343006", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("virtual")]
-	public  CqlCode @virtual(CqlContext context) => 
+	public CqlCode @virtual(CqlContext context) => 
 		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("AMB")]
-	public  CqlCode AMB(CqlContext context) => 
+	public CqlCode AMB(CqlContext context) => 
 		new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("223366009", "http://snomed.info/sct", default, default),
@@ -145,7 +145,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("ActCode")]
-	public  CqlCode[] ActCode(CqlContext context)
+	public CqlCode[] ActCode(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -156,7 +156,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -167,7 +167,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -176,7 +176,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -184,7 +184,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -192,7 +192,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -200,7 +200,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -208,7 +208,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Qualifying Encounter During Measurement Period")]
-	public  IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -250,7 +250,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Diabetic Retinopathy Encounter")]
-	public  IEnumerable<Encounter> Diabetic_Retinopathy_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Diabetic_Retinopathy_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_During_Measurement_Period(context);
 		IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter)
@@ -298,7 +298,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -317,7 +317,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Macular Exam Performed")]
-	public  IEnumerable<Observation> Macular_Exam_Performed(CqlContext context)
+	public IEnumerable<Observation> Macular_Exam_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Macular_Exam(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -369,7 +369,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  bool? Denominator(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 		IEnumerable<Observation> b_ = this.Macular_Exam_Performed(context);
@@ -380,7 +380,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Level of Severity of Retinopathy Findings Communicated")]
-	public  IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated(CqlContext context)
+	public IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated(CqlContext context)
 	{
 		CqlValueSet a_ = this.Level_of_Severity_of_Retinopathy_Findings(context);
 		PropertyInfo b_ = typeof(Communication).GetProperty("ReasonCode");
@@ -426,7 +426,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Macular Edema Absence Communicated")]
-	public  IEnumerable<Communication> Macular_Edema_Absence_Communicated(CqlContext context)
+	public IEnumerable<Communication> Macular_Edema_Absence_Communicated(CqlContext context)
 	{
 		CqlValueSet a_ = this.Macular_edema_absent__situation_(context);
 		PropertyInfo b_ = typeof(Communication).GetProperty("ReasonCode");
@@ -472,7 +472,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Macular Edema Presence Communicated")]
-	public  IEnumerable<Communication> Macular_Edema_Presence_Communicated(CqlContext context)
+	public IEnumerable<Communication> Macular_Edema_Presence_Communicated(CqlContext context)
 	{
 		CqlValueSet a_ = this.Macular_Edema_Findings_Present(context);
 		PropertyInfo b_ = typeof(Communication).GetProperty("ReasonCode");
@@ -518,7 +518,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  bool? Numerator(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		IEnumerable<Communication> a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated(context);
 		bool? b_ = context.Operators.Exists<Communication>(a_);
@@ -533,7 +533,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy")]
-	public  IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(CqlContext context)
+	public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(CqlContext context)
 	{
 		CqlValueSet a_ = this.Level_of_Severity_of_Retinopathy_Findings(context);
 		PropertyInfo b_ = typeof(Communication).GetProperty("ReasonCode");
@@ -599,7 +599,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Absence of Macular Edema")]
-	public  IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(CqlContext context)
+	public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(CqlContext context)
 	{
 		CqlValueSet a_ = this.Macular_edema_absent__situation_(context);
 		PropertyInfo b_ = typeof(Communication).GetProperty("ReasonCode");
@@ -665,7 +665,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Presence of Macular Edema")]
-	public  IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema(CqlContext context)
+	public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema(CqlContext context)
 	{
 		CqlValueSet a_ = this.Macular_Edema_Findings_Present(context);
 		PropertyInfo b_ = typeof(Communication).GetProperty("ReasonCode");
@@ -731,7 +731,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
-	public  bool? Denominator_Exceptions(CqlContext context)
+	public bool? Denominator_Exceptions(CqlContext context)
 	{
 		IEnumerable<Communication> a_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(context);
 		bool? b_ = context.Operators.Exists<Communication>(a_);
@@ -746,7 +746,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Results of Dilated Macular or Fundus Exam Communicated")]
-	public  bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated(CqlContext context)
+	public bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated(CqlContext context)
 	{
 		IEnumerable<Communication> a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated(context);
 		bool? b_ = context.Operators.Exists<Communication>(a_);

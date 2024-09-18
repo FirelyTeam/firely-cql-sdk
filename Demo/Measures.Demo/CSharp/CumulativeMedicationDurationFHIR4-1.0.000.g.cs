@@ -39,111 +39,111 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 {
 
     [CqlDeclaration("AC")]
-	public  CqlCode AC(CqlContext context) => 
+	public CqlCode AC(CqlContext context) => 
 		new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("ACD")]
-	public  CqlCode ACD(CqlContext context) => 
+	public CqlCode ACD(CqlContext context) => 
 		new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("ACM")]
-	public  CqlCode ACM(CqlContext context) => 
+	public CqlCode ACM(CqlContext context) => 
 		new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("ACV")]
-	public  CqlCode ACV(CqlContext context) => 
+	public CqlCode ACV(CqlContext context) => 
 		new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("AFT")]
-	public  CqlCode AFT(CqlContext context) => 
+	public CqlCode AFT(CqlContext context) => 
 		new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("AFT.early")]
-	public  CqlCode AFT_early(CqlContext context) => 
+	public CqlCode AFT_early(CqlContext context) => 
 		new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("AFT.late")]
-	public  CqlCode AFT_late(CqlContext context) => 
+	public CqlCode AFT_late(CqlContext context) => 
 		new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("C")]
-	public  CqlCode C(CqlContext context) => 
+	public CqlCode C(CqlContext context) => 
 		new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("CD")]
-	public  CqlCode CD(CqlContext context) => 
+	public CqlCode CD(CqlContext context) => 
 		new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("CM")]
-	public  CqlCode CM(CqlContext context) => 
+	public CqlCode CM(CqlContext context) => 
 		new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("CV")]
-	public  CqlCode CV(CqlContext context) => 
+	public CqlCode CV(CqlContext context) => 
 		new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("EVE")]
-	public  CqlCode EVE(CqlContext context) => 
+	public CqlCode EVE(CqlContext context) => 
 		new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("EVE.early")]
-	public  CqlCode EVE_early(CqlContext context) => 
+	public CqlCode EVE_early(CqlContext context) => 
 		new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("EVE.late")]
-	public  CqlCode EVE_late(CqlContext context) => 
+	public CqlCode EVE_late(CqlContext context) => 
 		new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("HS")]
-	public  CqlCode HS(CqlContext context) => 
+	public CqlCode HS(CqlContext context) => 
 		new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("MORN")]
-	public  CqlCode MORN(CqlContext context) => 
+	public CqlCode MORN(CqlContext context) => 
 		new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("MORN.early")]
-	public  CqlCode MORN_early(CqlContext context) => 
+	public CqlCode MORN_early(CqlContext context) => 
 		new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("MORN.late")]
-	public  CqlCode MORN_late(CqlContext context) => 
+	public CqlCode MORN_late(CqlContext context) => 
 		new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("NIGHT")]
-	public  CqlCode NIGHT(CqlContext context) => 
+	public CqlCode NIGHT(CqlContext context) => 
 		new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("NOON")]
-	public  CqlCode NOON(CqlContext context) => 
+	public CqlCode NOON(CqlContext context) => 
 		new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("PC")]
-	public  CqlCode PC(CqlContext context) => 
+	public CqlCode PC(CqlContext context) => 
 		new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("PCD")]
-	public  CqlCode PCD(CqlContext context) => 
+	public CqlCode PCD(CqlContext context) => 
 		new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("PCM")]
-	public  CqlCode PCM(CqlContext context) => 
+	public CqlCode PCM(CqlContext context) => 
 		new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("PCV")]
-	public  CqlCode PCV(CqlContext context) => 
+	public CqlCode PCV(CqlContext context) => 
 		new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("PHS")]
-	public  CqlCode PHS(CqlContext context) => 
+	public CqlCode PHS(CqlContext context) => 
 		new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default, default);
 
     [CqlDeclaration("WAKE")]
-	public  CqlCode WAKE(CqlContext context) => 
+	public CqlCode WAKE(CqlContext context) => 
 		new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
     [CqlDeclaration("V3TimingEvent")]
-	public  CqlCode[] V3TimingEvent(CqlContext context)
+	public CqlCode[] V3TimingEvent(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
@@ -166,7 +166,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("EventTiming")]
-	public  CqlCode[] EventTiming(CqlContext context)
+	public CqlCode[] EventTiming(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default),
@@ -187,7 +187,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("ErrorLevel")]
-	public  string ErrorLevel(CqlContext context)
+	public string ErrorLevel(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("CumulativeMedicationDurationFHIR4-1.0.000", "ErrorLevel", "Warning");
 
@@ -195,7 +195,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -204,7 +204,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("ToDaily")]
-	public  decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
+	public decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
 	{
 		decimal? a_()
 		{
@@ -607,7 +607,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("ToDaily")]
-	public  decimal? ToDaily(CqlContext context, CqlCode frequency)
+	public decimal? ToDaily(CqlContext context, CqlCode frequency)
 	{
 		decimal? a_()
 		{
@@ -637,7 +637,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("MedicationRequestPeriod")]
-	public  CqlInterval<CqlDateTime> MedicationRequestPeriod(CqlContext context, MedicationRequest Request)
+	public CqlInterval<CqlDateTime> MedicationRequestPeriod(CqlContext context, MedicationRequest Request)
 	{
 		MedicationRequest[] a_ = [
 			Request,
@@ -787,7 +787,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("MedicationDispensePeriod")]
-	public  CqlInterval<CqlDateTime> MedicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
+	public CqlInterval<CqlDateTime> MedicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
 	{
 		MedicationDispense[] a_ = [
 			Dispense,
@@ -858,7 +858,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("TherapeuticDuration")]
-	public  CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
+	public CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
 	{
 		CqlQuantity a_ = context.Operators.Quantity(14m, "days");
 
@@ -866,7 +866,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("MedicationAdministrationPeriod")]
-	public  CqlInterval<CqlDateTime> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
+	public CqlInterval<CqlDateTime> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
 	{
 		MedicationAdministration[] a_ = [
 			Administration,
@@ -919,7 +919,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("CumulativeDuration")]
-	public  int? CumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> Intervals)
+	public int? CumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> Intervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_ = context.Operators.Collapse(Intervals, "day");
 		int? b_(CqlInterval<CqlDateTime> X)
@@ -937,7 +937,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("RolloutIntervals")]
-	public  IEnumerable<CqlInterval<CqlDateTime>> RolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> intervals)
+	public IEnumerable<CqlInterval<CqlDateTime>> RolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_(IEnumerable<CqlInterval<CqlDateTime>> R, CqlInterval<CqlDateTime> I)
 		{
@@ -986,7 +986,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("MedicationPeriod")]
-	public  CqlInterval<CqlDateTime> MedicationPeriod(CqlContext context, object medication)
+	public CqlInterval<CqlDateTime> MedicationPeriod(CqlContext context, object medication)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -1018,7 +1018,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000(
 	}
 
     [CqlDeclaration("CumulativeMedicationDuration")]
-	public  int? CumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
+	public int? CumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
 	{
 		bool? a_(object M)
 		{

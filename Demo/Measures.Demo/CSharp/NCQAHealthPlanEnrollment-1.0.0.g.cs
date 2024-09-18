@@ -45,7 +45,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 {
 
     [CqlDeclaration("CoverageIntervals")]
-	public  IEnumerable<CqlInterval<CqlDate>> CoverageIntervals(CqlContext context, IEnumerable<Coverage> Coverage, CqlInterval<CqlDate> participationPeriod)
+	public IEnumerable<CqlInterval<CqlDate>> CoverageIntervals(CqlContext context, IEnumerable<Coverage> Coverage, CqlInterval<CqlDate> participationPeriod)
 	{
 		CqlInterval<CqlDate> a_(Coverage C)
 		{
@@ -70,7 +70,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Collapsed Coverage Intervals")]
-	public  IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
+	public IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = ncqacqlBase_1_0_0.Collapse_Date_Interval_Workaround(context, Intervals);
 
@@ -78,7 +78,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Collapsed Coverage Adjacent Intervals")]
-	public  IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Adjacent_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
+	public IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Adjacent_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
 	{
 		IEnumerable<ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>>> a_ = context.Operators.CrossJoin<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(Intervals, Intervals);
 		(CqlInterval<CqlDate> Coverage1, CqlInterval<CqlDate> Coverage2)? b_(ValueTuple<CqlInterval<CqlDate>, CqlInterval<CqlDate>> _valueTuple)
@@ -117,7 +117,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Collapsed Final Coverage Intervals")]
-	public  IEnumerable<CqlInterval<CqlDate>> Collapsed_Final_Coverage_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> collapsedI, IEnumerable<CqlInterval<CqlDate>> adjacentI)
+	public IEnumerable<CqlInterval<CqlDate>> Collapsed_Final_Coverage_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> collapsedI, IEnumerable<CqlInterval<CqlDate>> adjacentI)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Collapsed_Coverage_Intervals(context, collapsedI);
 		IEnumerable<CqlInterval<CqlDate>> b_ = this.Collapsed_Coverage_Adjacent_Intervals(context, adjacentI);
@@ -128,7 +128,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("All Coverage Info")]
-	public  IEnumerable<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> All_Coverage_Info(CqlContext context, IEnumerable<Coverage> Coverage, CqlInterval<CqlDate> participationPeriod)
+	public IEnumerable<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> All_Coverage_Info(CqlContext context, IEnumerable<Coverage> Coverage, CqlInterval<CqlDate> participationPeriod)
 	{
 		(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? a_(Coverage C)
 		{
@@ -150,7 +150,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Health Plan Coverage Resources")]
-	public  IEnumerable<Coverage> Health_Plan_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
+	public IEnumerable<Coverage> Health_Plan_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
 	{
 		bool? a_(Coverage C)
 		{
@@ -188,7 +188,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Anchor Date Criteria")]
-	public  bool? Anchor_Date_Criteria(CqlContext context, IEnumerable<Coverage> Coverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod)
+	public bool? Anchor_Date_Criteria(CqlContext context, IEnumerable<Coverage> Coverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod)
 	{
 		bool? a_()
 		{
@@ -277,7 +277,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Health Plan Enrollment Criteria")]
-	public  bool? Health_Plan_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> Coverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
+	public bool? Health_Plan_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> Coverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
 	{
 		IEnumerable<Coverage> a_ = this.Health_Plan_Coverage_Resources(context, Coverage);
 		IEnumerable<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> b_ = this.All_Coverage_Info(context, a_, participationPeriod);
@@ -320,7 +320,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Pharmacy Benefit Coverage Resources")]
-	public  IEnumerable<Coverage> Pharmacy_Benefit_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
+	public IEnumerable<Coverage> Pharmacy_Benefit_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
 	{
 		bool? a_(Coverage C)
 		{
@@ -352,7 +352,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Pharmacy Benefit Enrollment Criteria")]
-	public  bool? Pharmacy_Benefit_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> PharmCoverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
+	public bool? Pharmacy_Benefit_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> PharmCoverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
 	{
 		IEnumerable<Coverage> a_ = this.Pharmacy_Benefit_Coverage_Resources(context, PharmCoverage);
 		IEnumerable<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> b_ = this.All_Coverage_Info(context, a_, participationPeriod);
@@ -395,7 +395,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Mental Health Benefit Coverage Resources")]
-	public  IEnumerable<Coverage> Mental_Health_Benefit_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
+	public IEnumerable<Coverage> Mental_Health_Benefit_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
 	{
 		bool? a_(Coverage C)
 		{
@@ -427,7 +427,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0(
 	}
 
     [CqlDeclaration("Mental Health Benefit Enrollment Criteria")]
-	public  bool? Mental_Health_Benefit_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> MHCoverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
+	public bool? Mental_Health_Benefit_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> MHCoverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
 	{
 		IEnumerable<Coverage> a_ = this.Mental_Health_Benefit_Coverage_Resources(context, MHCoverage);
 		IEnumerable<(IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> b_ = this.All_Coverage_Info(context, a_, participationPeriod);

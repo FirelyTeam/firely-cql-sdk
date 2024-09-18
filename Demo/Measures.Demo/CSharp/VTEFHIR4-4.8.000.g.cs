@@ -42,11 +42,11 @@ public partial class VTEFHIR4_4_8_000(
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
-	public  CqlValueSet Intensive_Care_Unit(CqlContext context) => 
+	public CqlValueSet Intensive_Care_Unit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", default);
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
@@ -57,7 +57,7 @@ public partial class VTEFHIR4_4_8_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -66,7 +66,7 @@ public partial class VTEFHIR4_4_8_000(
 	}
 
     [CqlDeclaration("FirstInpatientIntensiveCareUnit")]
-	public  Encounter.LocationComponent FirstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
+	public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
 	{
 		List<Encounter.LocationComponent> a_ = Encounter?.Location;
 		bool? b_(Encounter.LocationComponent HospitalLocation)
@@ -108,7 +108,7 @@ public partial class VTEFHIR4_4_8_000(
 	}
 
     [CqlDeclaration("FirstICULocationPeriod")]
-	public  Period FirstICULocationPeriod(CqlContext context, Encounter Encounter)
+	public Period FirstICULocationPeriod(CqlContext context, Encounter Encounter)
 	{
 		Encounter.LocationComponent a_ = this.FirstInpatientIntensiveCareUnit(context, Encounter);
 		Period b_ = a_?.Period;
@@ -117,7 +117,7 @@ public partial class VTEFHIR4_4_8_000(
 	}
 
     [CqlDeclaration("StartOfFirstICU")]
-	public  CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
+	public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
 	{
 		Period a_ = this.FirstICULocationPeriod(context, Encounter);
 		CqlInterval<CqlDateTime> b_ = fhirHelpers_4_0_001.ToInterval(context, a_);
@@ -127,7 +127,7 @@ public partial class VTEFHIR4_4_8_000(
 	}
 
     [CqlDeclaration("CalendarDayOfOrDayAfter")]
-	public  CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
+	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
 	{
 		CqlDate a_ = context.Operators.DateFrom(StartValue);
 		CqlQuantity c_ = context.Operators.Quantity(1m, "day");
@@ -138,7 +138,7 @@ public partial class VTEFHIR4_4_8_000(
 	}
 
     [CqlDeclaration("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
-	public  CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
+	public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
 	{
 		CqlInterval<CqlDateTime> a_ = matGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(context, Encounter);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -155,7 +155,7 @@ public partial class VTEFHIR4_4_8_000(
 	}
 
     [CqlDeclaration("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
-	public  CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
+	public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
 	{
 		CqlInterval<CqlDateTime> a_ = matGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(context, Encounter);
 		CqlDateTime b_ = context.Operators.Start(a_);

@@ -56,41 +56,41 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 
     [CqlDeclaration("Colonoscopy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020")]
-	public  CqlValueSet Colonoscopy(CqlContext context) => 
+	public CqlValueSet Colonoscopy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020", default);
 
     [CqlDeclaration("CT Colonography")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038")]
-	public  CqlValueSet CT_Colonography(CqlContext context) => 
+	public CqlValueSet CT_Colonography(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038", default);
 
     [CqlDeclaration("Fecal Occult Blood Test (FOBT)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011")]
-	public  CqlValueSet Fecal_Occult_Blood_Test__FOBT_(CqlContext context) => 
+	public CqlValueSet Fecal_Occult_Blood_Test__FOBT_(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011", default);
 
     [CqlDeclaration("sDNA FIT Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039")]
-	public  CqlValueSet sDNA_FIT_Test(CqlContext context) => 
+	public CqlValueSet sDNA_FIT_Test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039", default);
 
     [CqlDeclaration("Flexible Sigmoidoscopy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010")]
-	public  CqlValueSet Flexible_Sigmoidoscopy(CqlContext context) => 
+	public CqlValueSet Flexible_Sigmoidoscopy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010", default);
 
     [CqlDeclaration("Malignant Neoplasm of Colon")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001")]
-	public  CqlValueSet Malignant_Neoplasm_of_Colon(CqlContext context) => 
+	public CqlValueSet Malignant_Neoplasm_of_Colon(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001", default);
 
     [CqlDeclaration("Total Colectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019")]
-	public  CqlValueSet Total_Colectomy(CqlContext context) => 
+	public CqlValueSet Total_Colectomy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019", default);
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -101,7 +101,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -110,7 +110,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -118,7 +118,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -126,7 +126,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -134,7 +134,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -142,7 +142,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -162,7 +162,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  bool? Denominator(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -170,7 +170,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Malignant Neoplasm")]
-	public  IEnumerable<Condition> Malignant_Neoplasm(CqlContext context)
+	public IEnumerable<Condition> Malignant_Neoplasm(CqlContext context)
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasm_of_Colon(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -191,7 +191,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Total Colectomy Performed")]
-	public  IEnumerable<Procedure> Total_Colectomy_Performed(CqlContext context)
+	public IEnumerable<Procedure> Total_Colectomy_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Total_Colectomy(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -214,7 +214,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator Exclusion")]
-	public  bool? Denominator_Exclusion(CqlContext context)
+	public bool? Denominator_Exclusion(CqlContext context)
 	{
 		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
 		IEnumerable<Condition> b_ = this.Malignant_Neoplasm(context);
@@ -234,7 +234,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Performed")]
-	public  IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed(CqlContext context)
+	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -309,7 +309,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Stool DNA with FIT Test Performed")]
-	public  IEnumerable<Observation> Stool_DNA_with_FIT_Test_Performed(CqlContext context)
+	public IEnumerable<Observation> Stool_DNA_with_FIT_Test_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.sDNA_FIT_Test(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -389,7 +389,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Flexible Sigmoidoscopy Performed")]
-	public  IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed(CqlContext context)
+	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -416,7 +416,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("CT Colonography Performed")]
-	public  IEnumerable<Observation> CT_Colonography_Performed(CqlContext context)
+	public IEnumerable<Observation> CT_Colonography_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.CT_Colonography(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -443,7 +443,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Colonoscopy Performed")]
-	public  IEnumerable<Procedure> Colonoscopy_Performed(CqlContext context)
+	public IEnumerable<Procedure> Colonoscopy_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Colonoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -470,7 +470,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  bool? Numerator(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Fecal_Occult_Blood_Test_Performed(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -491,7 +491,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Stratification 1")]
-	public  bool? Stratification_1(CqlContext context)
+	public bool? Stratification_1(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -508,7 +508,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Stratification 2")]
-	public  bool? Stratification_2(CqlContext context)
+	public bool? Stratification_2(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;

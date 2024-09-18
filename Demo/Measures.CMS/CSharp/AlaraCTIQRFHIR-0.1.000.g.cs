@@ -46,23 +46,23 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Calculated CT global noise")]
-	public  CqlCode Calculated_CT_global_noise(CqlContext context) => 
+	public CqlCode Calculated_CT_global_noise(CqlContext context) => 
 		new CqlCode("96912-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Calculated CT size-adjusted dose")]
-	public  CqlCode Calculated_CT_size_adjusted_dose(CqlContext context) => 
+	public CqlCode Calculated_CT_size_adjusted_dose(CqlContext context) => 
 		new CqlCode("96913-9", "http://loinc.org", default, default);
 
     [CqlDeclaration("CT dose and image quality category")]
-	public  CqlCode CT_dose_and_image_quality_category(CqlContext context) => 
+	public CqlCode CT_dose_and_image_quality_category(CqlContext context) => 
 		new CqlCode("96914-7", "http://loinc.org", default, default);
 
     [CqlDeclaration("LOINC")]
-	public  CqlCode[] LOINC(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("96912-1", "http://loinc.org", default, default),
@@ -74,7 +74,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -85,7 +85,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -94,7 +94,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Qualifying Inpatient Encounters")]
-	public  IEnumerable<Encounter> Qualifying_Inpatient_Encounters(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Inpatient_Encounters(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -122,7 +122,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -130,7 +130,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -138,7 +138,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -146,7 +146,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -154,7 +154,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Observation> Initial_Population(CqlContext context)
+	public IEnumerable<Observation> Initial_Population(CqlContext context)
 	{
 		CqlCode a_ = this.CT_dose_and_image_quality_category(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -192,7 +192,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Global Noise Value")]
-	public  decimal? Global_Noise_Value(CqlContext context, Observation Obs)
+	public decimal? Global_Noise_Value(CqlContext context, Observation Obs)
 	{
 		List<Observation.ComponentComponent> a_ = Obs?.Component;
 		bool? b_(Observation.ComponentComponent C)
@@ -226,7 +226,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Size Adjusted Value")]
-	public  decimal? Size_Adjusted_Value(CqlContext context, Observation Obs)
+	public decimal? Size_Adjusted_Value(CqlContext context, Observation Obs)
 	{
 		List<Observation.ComponentComponent> a_ = Obs?.Component;
 		bool? b_(Observation.ComponentComponent C)
@@ -260,7 +260,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Observation> Denominator(CqlContext context)
+	public IEnumerable<Observation> Denominator(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Initial_Population(context);
 		bool? b_(Observation IP)
@@ -283,7 +283,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Qualifies")]
-	public  bool? Qualifies(CqlContext context, Observation Obs, string code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
+	public bool? Qualifies(CqlContext context, Observation Obs, string code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
 	{
 		DataType a_ = Obs?.Value;
 		object b_ = fhirHelpers_4_3_000.ToValue(context, a_);
@@ -315,7 +315,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("CT Scan Qualifies")]
-	public  bool? CT_Scan_Qualifies(CqlContext context, Observation IP)
+	public bool? CT_Scan_Qualifies(CqlContext context, Observation IP)
 	{
 		decimal? a_ = context.Operators.ConvertIntegerToDecimal(64);
 		decimal? b_ = context.Operators.ConvertIntegerToDecimal(598);
@@ -380,7 +380,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Observation> Numerator(CqlContext context)
+	public IEnumerable<Observation> Numerator(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Denominator(context);
 		bool? b_(Observation Denom)
@@ -395,7 +395,7 @@ public partial class AlaraCTIQRFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator Exclusion")]
-	public  IEnumerable<Observation> Denominator_Exclusion(CqlContext context)
+	public IEnumerable<Observation> Denominator_Exclusion(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Denominator(context);
 		bool? b_(Observation Denom)

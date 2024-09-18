@@ -44,16 +44,16 @@ public partial class NCQAHospice_1_0_0(
 
     [CqlDeclaration("Hospice Encounter")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1761")]
-	public  CqlValueSet Hospice_Encounter(CqlContext context) => 
+	public CqlValueSet Hospice_Encounter(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1761", default);
 
     [CqlDeclaration("Hospice Intervention")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1762")]
-	public  CqlValueSet Hospice_Intervention(CqlContext context) => 
+	public CqlValueSet Hospice_Intervention(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1762", default);
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", null);
 
@@ -61,7 +61,7 @@ public partial class NCQAHospice_1_0_0(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -70,7 +70,7 @@ public partial class NCQAHospice_1_0_0(
 	}
 
     [CqlDeclaration("Hospice Intervention or Encounter")]
-	public  bool? Hospice_Intervention_or_Encounter(CqlContext context)
+	public bool? Hospice_Intervention_or_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Hospice_Intervention(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);

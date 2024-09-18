@@ -58,16 +58,16 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
-	public  CqlValueSet Diabetes(CqlContext context) => 
+	public CqlValueSet Diabetes(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", default);
 
     [CqlDeclaration("HbA1c Laboratory Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013")]
-	public  CqlValueSet HbA1c_Laboratory_Test(CqlContext context) => 
+	public CqlValueSet HbA1c_Laboratory_Test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013", default);
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -78,7 +78,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -87,7 +87,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -95,7 +95,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -103,7 +103,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -111,7 +111,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -119,7 +119,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -152,7 +152,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  bool? Denominator(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -160,7 +160,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public  bool? Denominator_Exclusions(CqlContext context)
+	public bool? Denominator_Exclusions(CqlContext context)
 	{
 		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
 		bool? b_ = advancedIllnessandFrailty_1_8_000.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
@@ -174,7 +174,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("Most Recent HbA1c")]
-	public  Observation Most_Recent_HbA1c(CqlContext context)
+	public Observation Most_Recent_HbA1c(CqlContext context)
 	{
 		CqlValueSet a_ = this.HbA1c_Laboratory_Test(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -256,7 +256,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("Has Most Recent HbA1c Without Result")]
-	public  bool? Has_Most_Recent_HbA1c_Without_Result(CqlContext context)
+	public bool? Has_Most_Recent_HbA1c_Without_Result(CqlContext context)
 	{
 		Observation a_ = this.Most_Recent_HbA1c(context);
 		bool? b_ = context.Operators.Not((bool?)(a_ is null));
@@ -268,7 +268,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("Has Most Recent Elevated HbA1c")]
-	public  bool? Has_Most_Recent_Elevated_HbA1c(CqlContext context)
+	public bool? Has_Most_Recent_Elevated_HbA1c(CqlContext context)
 	{
 		Observation a_ = this.Most_Recent_HbA1c(context);
 		DataType b_ = a_?.Value;
@@ -280,7 +280,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("Has No Record Of HbA1c")]
-	public  bool? Has_No_Record_Of_HbA1c(CqlContext context)
+	public bool? Has_No_Record_Of_HbA1c(CqlContext context)
 	{
 		CqlValueSet a_ = this.HbA1c_Laboratory_Test(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -353,7 +353,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  bool? Numerator(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		bool? a_ = this.Has_Most_Recent_HbA1c_Without_Result(context);
 		bool? b_ = this.Has_Most_Recent_Elevated_HbA1c(context);

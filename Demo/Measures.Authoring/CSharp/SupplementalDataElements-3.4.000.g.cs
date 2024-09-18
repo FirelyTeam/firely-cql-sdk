@@ -40,26 +40,26 @@ public partial class SupplementalDataElements_3_4_000(
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
-	public  CqlValueSet Ethnicity(CqlContext context) => 
+	public CqlValueSet Ethnicity(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
-	public  CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
+	public CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
     [CqlDeclaration("Payer Type")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
-	public  CqlValueSet Payer_Type(CqlContext context) => 
+	public CqlValueSet Payer_Type(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
-	public  CqlValueSet Race(CqlContext context) => 
+	public CqlValueSet Race(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -68,7 +68,7 @@ public partial class SupplementalDataElements_3_4_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		List<Extension> a_()
 		{
@@ -189,7 +189,7 @@ public partial class SupplementalDataElements_3_4_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		CqlValueSet a_ = this.Payer_Type(context);
 		IEnumerable<Coverage> b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, default);
@@ -209,7 +209,7 @@ public partial class SupplementalDataElements_3_4_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		List<Extension> a_()
 		{
@@ -332,7 +332,7 @@ public partial class SupplementalDataElements_3_4_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_()
 		{

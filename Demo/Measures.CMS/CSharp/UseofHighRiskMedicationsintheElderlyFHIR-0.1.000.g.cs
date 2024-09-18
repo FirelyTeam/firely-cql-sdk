@@ -54,282 +54,282 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 
     [CqlDeclaration("Alcohol Withdrawal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1209")]
-	public  CqlValueSet Alcohol_Withdrawal(CqlContext context) => 
+	public CqlValueSet Alcohol_Withdrawal(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1209", default);
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-	public  CqlValueSet Annual_Wellness_Visit(CqlContext context) => 
+	public CqlValueSet Annual_Wellness_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
     [CqlDeclaration("Anti Infectives, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1481")]
-	public  CqlValueSet Anti_Infectives__other(CqlContext context) => 
+	public CqlValueSet Anti_Infectives__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1481", default);
 
     [CqlDeclaration("Anticholinergics, anti Parkinson agents")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1049")]
-	public  CqlValueSet Anticholinergics__anti_Parkinson_agents(CqlContext context) => 
+	public CqlValueSet Anticholinergics__anti_Parkinson_agents(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1049", default);
 
     [CqlDeclaration("Anticholinergics, first generation antihistamines")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1043")]
-	public  CqlValueSet Anticholinergics__first_generation_antihistamines(CqlContext context) => 
+	public CqlValueSet Anticholinergics__first_generation_antihistamines(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1043", default);
 
     [CqlDeclaration("Antipsychotic")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1523")]
-	public  CqlValueSet Antipsychotic(CqlContext context) => 
+	public CqlValueSet Antipsychotic(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1523", default);
 
     [CqlDeclaration("Antispasmodics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1050")]
-	public  CqlValueSet Antispasmodics(CqlContext context) => 
+	public CqlValueSet Antispasmodics(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1050", default);
 
     [CqlDeclaration("Antithrombotic")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1051")]
-	public  CqlValueSet Antithrombotic(CqlContext context) => 
+	public CqlValueSet Antithrombotic(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1051", default);
 
     [CqlDeclaration("Benzodiazepine Withdrawal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1208")]
-	public  CqlValueSet Benzodiazepine_Withdrawal(CqlContext context) => 
+	public CqlValueSet Benzodiazepine_Withdrawal(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1208", default);
 
     [CqlDeclaration("Benzodiazepine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1522")]
-	public  CqlValueSet Benzodiazepine(CqlContext context) => 
+	public CqlValueSet Benzodiazepine(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1522", default);
 
     [CqlDeclaration("Bipolar Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1157")]
-	public  CqlValueSet Bipolar_Disorder(CqlContext context) => 
+	public CqlValueSet Bipolar_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1157", default);
 
     [CqlDeclaration("Cardiovascular, alpha agonists, central")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1052")]
-	public  CqlValueSet Cardiovascular__alpha_agonists__central(CqlContext context) => 
+	public CqlValueSet Cardiovascular__alpha_agonists__central(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1052", default);
 
     [CqlDeclaration("Cardiovascular, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1053")]
-	public  CqlValueSet Cardiovascular__other(CqlContext context) => 
+	public CqlValueSet Cardiovascular__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1053", default);
 
     [CqlDeclaration("Care Services in Long Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public  CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
+	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Central nervous system, antidepressants")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1054")]
-	public  CqlValueSet Central_nervous_system__antidepressants(CqlContext context) => 
+	public CqlValueSet Central_nervous_system__antidepressants(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1054", default);
 
     [CqlDeclaration("Central nervous system, barbiturates")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1055")]
-	public  CqlValueSet Central_nervous_system__barbiturates(CqlContext context) => 
+	public CqlValueSet Central_nervous_system__barbiturates(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1055", default);
 
     [CqlDeclaration("Central nervous system, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1057")]
-	public  CqlValueSet Central_nervous_system__other(CqlContext context) => 
+	public CqlValueSet Central_nervous_system__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1057", default);
 
     [CqlDeclaration("Central nervous system, vasodilators")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1056")]
-	public  CqlValueSet Central_nervous_system__vasodilators(CqlContext context) => 
+	public CqlValueSet Central_nervous_system__vasodilators(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1056", default);
 
     [CqlDeclaration("Digoxin")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1065")]
-	public  CqlValueSet Digoxin(CqlContext context) => 
+	public CqlValueSet Digoxin(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1065", default);
 
     [CqlDeclaration("Discharge Services Nursing Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1013")]
-	public  CqlValueSet Discharge_Services_Nursing_Facility(CqlContext context) => 
+	public CqlValueSet Discharge_Services_Nursing_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1013", default);
 
     [CqlDeclaration("Doxepin")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1067")]
-	public  CqlValueSet Doxepin(CqlContext context) => 
+	public CqlValueSet Doxepin(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1067", default);
 
     [CqlDeclaration("Endocrine system, estrogens with or without progestins")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1058")]
-	public  CqlValueSet Endocrine_system__estrogens_with_or_without_progestins(CqlContext context) => 
+	public CqlValueSet Endocrine_system__estrogens_with_or_without_progestins(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1058", default);
 
     [CqlDeclaration("Endocrine system, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1060")]
-	public  CqlValueSet Endocrine_system__other(CqlContext context) => 
+	public CqlValueSet Endocrine_system__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1060", default);
 
     [CqlDeclaration("Endocrine system, sulfonylureas, long duration")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1059")]
-	public  CqlValueSet Endocrine_system__sulfonylureas__long_duration(CqlContext context) => 
+	public CqlValueSet Endocrine_system__sulfonylureas__long_duration(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1059", default);
 
     [CqlDeclaration("Generalized Anxiety Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1210")]
-	public  CqlValueSet Generalized_Anxiety_Disorder(CqlContext context) => 
+	public CqlValueSet Generalized_Anxiety_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1210", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public  CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+	public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Nonbenzodiazepine hypnotics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1480")]
-	public  CqlValueSet Nonbenzodiazepine_hypnotics(CqlContext context) => 
+	public CqlValueSet Nonbenzodiazepine_hypnotics(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1480", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public  CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
+	public CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public  CqlValueSet Office_Visit(CqlContext context) => 
+	public CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public  CqlValueSet Online_Assessments(CqlContext context) => 
+	public CqlValueSet Online_Assessments(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Ophthalmologic Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1206")]
-	public  CqlValueSet Ophthalmologic_Services(CqlContext context) => 
+	public CqlValueSet Ophthalmologic_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1206", default);
 
     [CqlDeclaration("Pain medications, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1063")]
-	public  CqlValueSet Pain_medications__other(CqlContext context) => 
+	public CqlValueSet Pain_medications__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1063", default);
 
     [CqlDeclaration("Pain medications, skeletal muscle relaxants")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1062")]
-	public  CqlValueSet Pain_medications__skeletal_muscle_relaxants(CqlContext context) => 
+	public CqlValueSet Pain_medications__skeletal_muscle_relaxants(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1062", default);
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
+	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("REM Sleep Behavior Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1207")]
-	public  CqlValueSet REM_Sleep_Behavior_Disorder(CqlContext context) => 
+	public CqlValueSet REM_Sleep_Behavior_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1207", default);
 
     [CqlDeclaration("Reserpine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1044")]
-	public  CqlValueSet Reserpine(CqlContext context) => 
+	public CqlValueSet Reserpine(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1044", default);
 
     [CqlDeclaration("Schizophrenia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1205")]
-	public  CqlValueSet Schizophrenia(CqlContext context) => 
+	public CqlValueSet Schizophrenia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1205", default);
 
     [CqlDeclaration("Seizure Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1206")]
-	public  CqlValueSet Seizure_Disorder(CqlContext context) => 
+	public CqlValueSet Seizure_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1206", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public  CqlValueSet Telephone_Visits(CqlContext context) => 
+	public CqlValueSet Telephone_Visits(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("1 ML digoxin 0.1 MG/ML Injection")]
-	public  CqlCode _1_ML_digoxin_0_1_MG_ML_Injection(CqlContext context) => 
+	public CqlCode _1_ML_digoxin_0_1_MG_ML_Injection(CqlContext context) => 
 		new CqlCode("204504", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("2 ML digoxin 0.25 MG/ML Injection")]
-	public  CqlCode _2_ML_digoxin_0_25_MG_ML_Injection(CqlContext context) => 
+	public CqlCode _2_ML_digoxin_0_25_MG_ML_Injection(CqlContext context) => 
 		new CqlCode("104208", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.05 MG/ML Oral Solution")]
-	public  CqlCode digoxin_0_05_MG_ML_Oral_Solution(CqlContext context) => 
+	public CqlCode digoxin_0_05_MG_ML_Oral_Solution(CqlContext context) => 
 		new CqlCode("393245", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.0625 MG Oral Tablet")]
-	public  CqlCode digoxin_0_0625_MG_Oral_Tablet(CqlContext context) => 
+	public CqlCode digoxin_0_0625_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("245273", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.125 MG Oral Tablet")]
-	public  CqlCode digoxin_0_125_MG_Oral_Tablet(CqlContext context) => 
+	public CqlCode digoxin_0_125_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("197604", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.1875 MG Oral Tablet")]
-	public  CqlCode digoxin_0_1875_MG_Oral_Tablet(CqlContext context) => 
+	public CqlCode digoxin_0_1875_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("1441565", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.25 MG Oral Tablet")]
-	public  CqlCode digoxin_0_25_MG_Oral_Tablet(CqlContext context) => 
+	public CqlCode digoxin_0_25_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("197606", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin 3 MG Oral Tablet")]
-	public  CqlCode doxepin_3_MG_Oral_Tablet(CqlContext context) => 
+	public CqlCode doxepin_3_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("966787", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin 6 MG Oral Tablet")]
-	public  CqlCode doxepin_6_MG_Oral_Tablet(CqlContext context) => 
+	public CqlCode doxepin_6_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("966793", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 10 MG Oral Capsule")]
-	public  CqlCode doxepin_hydrochloride_10_MG_Oral_Capsule(CqlContext context) => 
+	public CqlCode doxepin_hydrochloride_10_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000048", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 10 MG/ML Oral Solution")]
-	public  CqlCode doxepin_hydrochloride_10_MG_ML_Oral_Solution(CqlContext context) => 
+	public CqlCode doxepin_hydrochloride_10_MG_ML_Oral_Solution(CqlContext context) => 
 		new CqlCode("1000054", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 100 MG Oral Capsule")]
-	public  CqlCode doxepin_hydrochloride_100_MG_Oral_Capsule(CqlContext context) => 
+	public CqlCode doxepin_hydrochloride_100_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000058", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 150 MG Oral Capsule")]
-	public  CqlCode doxepin_hydrochloride_150_MG_Oral_Capsule(CqlContext context) => 
+	public CqlCode doxepin_hydrochloride_150_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000064", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 25 MG Oral Capsule")]
-	public  CqlCode doxepin_hydrochloride_25_MG_Oral_Capsule(CqlContext context) => 
+	public CqlCode doxepin_hydrochloride_25_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000070", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 50 MG Oral Capsule")]
-	public  CqlCode doxepin_hydrochloride_50_MG_Oral_Capsule(CqlContext context) => 
+	public CqlCode doxepin_hydrochloride_50_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000076", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 75 MG Oral Capsule")]
-	public  CqlCode doxepin_hydrochloride_75_MG_Oral_Capsule(CqlContext context) => 
+	public CqlCode doxepin_hydrochloride_75_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000097", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal.")]
-	public  CqlCode Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_(CqlContext context) => 
+	public CqlCode Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_(CqlContext context) => 
 		new CqlCode("99211", "http://www.ama-assn.org/go/cpt", default, default);
 
     [CqlDeclaration("reserpine 0.1 MG Oral Tablet")]
-	public  CqlCode reserpine_0_1_MG_Oral_Tablet(CqlContext context) => 
+	public CqlCode reserpine_0_1_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("198196", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("reserpine 0.25 MG Oral Tablet")]
-	public  CqlCode reserpine_0_25_MG_Oral_Tablet(CqlContext context) => 
+	public CqlCode reserpine_0_25_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("198197", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("RXNORM")]
-	public  CqlCode[] RXNORM(CqlContext context)
+	public CqlCode[] RXNORM(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("204504", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default),
@@ -356,7 +356,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("CPT")]
-	public  CqlCode[] CPT(CqlContext context)
+	public CqlCode[] CPT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("99211", "http://www.ama-assn.org/go/cpt", default, default),
@@ -366,7 +366,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -377,7 +377,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -386,7 +386,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
-	public  IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -461,7 +461,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -480,7 +480,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  bool? Denominator(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -488,7 +488,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public  bool? Denominator_Exclusions(CqlContext context)
+	public bool? Denominator_Exclusions(CqlContext context)
 	{
 		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
 		bool? b_ = palliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period(context);
@@ -498,7 +498,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("More Than One Order")]
-	public  IEnumerable<MedicationRequest> More_Than_One_Order(CqlContext context, IEnumerable<MedicationRequest> Medication)
+	public IEnumerable<MedicationRequest> More_Than_One_Order(CqlContext context, IEnumerable<MedicationRequest> Medication)
 	{
 		IEnumerable<MedicationRequest> a_ = status_1_6_000.Active_or_Completed_Medication_Request(context, Medication);
 		IEnumerable<MedicationRequest> b_(MedicationRequest OrderMedication1)
@@ -576,7 +576,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Same High Risk Medications Ordered on Different Days")]
-	public  IEnumerable<MedicationRequest> Same_High_Risk_Medications_Ordered_on_Different_Days(CqlContext context)
+	public IEnumerable<MedicationRequest> Same_High_Risk_Medications_Ordered_on_Different_Days(CqlContext context)
 	{
 		CqlValueSet a_ = this.Anticholinergics__first_generation_antihistamines(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -678,7 +678,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("MedicationRequestPeriodInDays")]
-	public  decimal? MedicationRequestPeriodInDays(CqlContext context, MedicationRequest Request)
+	public decimal? MedicationRequestPeriodInDays(CqlContext context, MedicationRequest Request)
 	{
 		MedicationRequest[] a_ = [
 			Request,
@@ -753,7 +753,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Two High Risk Medications with Prolonged Duration")]
-	public  bool? Two_High_Risk_Medications_with_Prolonged_Duration(CqlContext context)
+	public bool? Two_High_Risk_Medications_with_Prolonged_Duration(CqlContext context)
 	{
 		CqlValueSet a_ = this.Anti_Infectives__other(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -775,7 +775,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("MedicationStrengthPerUnit")]
-	public  CqlQuantity MedicationStrengthPerUnit(CqlContext context, CqlConcept Strength)
+	public CqlQuantity MedicationStrengthPerUnit(CqlContext context, CqlConcept Strength)
 	{
 		CqlQuantity a_()
 		{
@@ -1041,7 +1041,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Average Daily Dose")]
-	public  CqlQuantity Average_Daily_Dose(CqlContext context, MedicationRequest MedicationRequest)
+	public CqlQuantity Average_Daily_Dose(CqlContext context, MedicationRequest MedicationRequest)
 	{
 		MedicationRequest[] a_ = [
 			MedicationRequest,
@@ -1100,7 +1100,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("High Risk Medications with Average Daily Dose Criteria")]
-	public  bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria(CqlContext context)
+	public bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria(CqlContext context)
 	{
 		CqlValueSet a_ = this.Reserpine(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -1154,7 +1154,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator 1")]
-	public  bool? Numerator_1(CqlContext context)
+	public bool? Numerator_1(CqlContext context)
 	{
 		IEnumerable<MedicationRequest> a_ = this.Same_High_Risk_Medications_Ordered_on_Different_Days(context);
 		bool? b_ = context.Operators.Exists<MedicationRequest>(a_);
@@ -1167,7 +1167,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("More than One Antipsychotic Order")]
-	public  bool? More_than_One_Antipsychotic_Order(CqlContext context)
+	public bool? More_than_One_Antipsychotic_Order(CqlContext context)
 	{
 		CqlValueSet a_ = this.Antipsychotic(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -1180,7 +1180,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Antipsychotic Index Prescription Start Date")]
-	public  CqlDateTime Antipsychotic_Index_Prescription_Start_Date(CqlContext context)
+	public CqlDateTime Antipsychotic_Index_Prescription_Start_Date(CqlContext context)
 	{
 		CqlValueSet a_ = this.Antipsychotic(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -1212,7 +1212,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("More than One Benzodiazepine Order")]
-	public  bool? More_than_One_Benzodiazepine_Order(CqlContext context)
+	public bool? More_than_One_Benzodiazepine_Order(CqlContext context)
 	{
 		CqlValueSet a_ = this.Benzodiazepine(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -1225,7 +1225,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Benzodiazepine Index Prescription Start Date")]
-	public  CqlDateTime Benzodiazepine_Index_Prescription_Start_Date(CqlContext context)
+	public CqlDateTime Benzodiazepine_Index_Prescription_Start_Date(CqlContext context)
 	{
 		CqlValueSet a_ = this.Benzodiazepine(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -1257,7 +1257,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator 2")]
-	public  bool? Numerator_2(CqlContext context)
+	public bool? Numerator_2(CqlContext context)
 	{
 		bool? a_ = this.More_than_One_Antipsychotic_Order(context);
 		CqlValueSet b_ = this.Schizophrenia(context);
@@ -1320,7 +1320,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator 3")]
-	public  bool? Numerator_3(CqlContext context)
+	public bool? Numerator_3(CqlContext context)
 	{
 		bool? a_ = this.Numerator_2(context);
 		bool? b_ = this.Numerator_1(context);
@@ -1332,7 +1332,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -1340,7 +1340,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -1348,7 +1348,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -1356,7 +1356,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 

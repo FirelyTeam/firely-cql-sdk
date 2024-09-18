@@ -46,104 +46,104 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 
     [CqlDeclaration("Diagnosis of Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263")]
-	public  CqlValueSet Diagnosis_of_Hypertension(CqlContext context) => 
+	public CqlValueSet Diagnosis_of_Hypertension(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.263", default);
 
     [CqlDeclaration("Dietary Recommendations")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515")]
-	public  CqlValueSet Dietary_Recommendations(CqlContext context) => 
+	public CqlValueSet Dietary_Recommendations(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1515", default);
 
     [CqlDeclaration("Encounter to Screen for Blood Pressure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920")]
-	public  CqlValueSet Encounter_to_Screen_for_Blood_Pressure(CqlContext context) => 
+	public CqlValueSet Encounter_to_Screen_for_Blood_Pressure(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920", default);
 
     [CqlDeclaration("Finding of Elevated Blood Pressure or Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514")]
-	public  CqlValueSet Finding_of_Elevated_Blood_Pressure_or_Hypertension(CqlContext context) => 
+	public CqlValueSet Finding_of_Elevated_Blood_Pressure_or_Hypertension(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514", default);
 
     [CqlDeclaration("Follow Up Within 4 Weeks")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578")]
-	public  CqlValueSet Follow_Up_Within_4_Weeks(CqlContext context) => 
+	public CqlValueSet Follow_Up_Within_4_Weeks(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578", default);
 
     [CqlDeclaration("Laboratory Tests for Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482")]
-	public  CqlValueSet Laboratory_Tests_for_Hypertension(CqlContext context) => 
+	public CqlValueSet Laboratory_Tests_for_Hypertension(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482", default);
 
     [CqlDeclaration("Lifestyle Recommendation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581")]
-	public  CqlValueSet Lifestyle_Recommendation(CqlContext context) => 
+	public CqlValueSet Lifestyle_Recommendation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581", default);
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-	public  CqlValueSet Medical_Reason(CqlContext context) => 
+	public CqlValueSet Medical_Reason(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
     [CqlDeclaration("Patient Declined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582")]
-	public  CqlValueSet Patient_Declined(CqlContext context) => 
+	public CqlValueSet Patient_Declined(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", default);
 
     [CqlDeclaration("Pharmacologic Therapy for Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577")]
-	public  CqlValueSet Pharmacologic_Therapy_for_Hypertension(CqlContext context) => 
+	public CqlValueSet Pharmacologic_Therapy_for_Hypertension(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.1577", default);
 
     [CqlDeclaration("Recommendation to Increase Physical Activity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518")]
-	public  CqlValueSet Recommendation_to_Increase_Physical_Activity(CqlContext context) => 
+	public CqlValueSet Recommendation_to_Increase_Physical_Activity(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1518", default);
 
     [CqlDeclaration("Referral or Counseling for Alcohol Consumption")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583")]
-	public  CqlValueSet Referral_or_Counseling_for_Alcohol_Consumption(CqlContext context) => 
+	public CqlValueSet Referral_or_Counseling_for_Alcohol_Consumption(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1583", default);
 
     [CqlDeclaration("Referral to Primary Care or Alternate Provider")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580")]
-	public  CqlValueSet Referral_to_Primary_Care_or_Alternate_Provider(CqlContext context) => 
+	public CqlValueSet Referral_to_Primary_Care_or_Alternate_Provider(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1580", default);
 
     [CqlDeclaration("Weight Reduction Recommended")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510")]
-	public  CqlValueSet Weight_Reduction_Recommended(CqlContext context) => 
+	public CqlValueSet Weight_Reduction_Recommended(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1510", default);
 
     [CqlDeclaration("Diastolic blood pressure")]
-	public  CqlCode Diastolic_blood_pressure(CqlContext context) => 
+	public CqlCode Diastolic_blood_pressure(CqlContext context) => 
 		new CqlCode("8462-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("12 lead EKG panel")]
-	public  CqlCode _12_lead_EKG_panel(CqlContext context) => 
+	public CqlCode _12_lead_EKG_panel(CqlContext context) => 
 		new CqlCode("34534-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("EKG study")]
-	public  CqlCode EKG_study(CqlContext context) => 
+	public CqlCode EKG_study(CqlContext context) => 
 		new CqlCode("11524-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Follow-up 2-3 months (finding)")]
-	public  CqlCode Follow_up_2_3_months__finding_(CqlContext context) => 
+	public CqlCode Follow_up_2_3_months__finding_(CqlContext context) => 
 		new CqlCode("183624006", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Follow-up 4-6 months (finding)")]
-	public  CqlCode Follow_up_4_6_months__finding_(CqlContext context) => 
+	public CqlCode Follow_up_4_6_months__finding_(CqlContext context) => 
 		new CqlCode("183625007", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Systolic blood pressure")]
-	public  CqlCode Systolic_blood_pressure(CqlContext context) => 
+	public CqlCode Systolic_blood_pressure(CqlContext context) => 
 		new CqlCode("8480-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("virtual")]
-	public  CqlCode @virtual(CqlContext context) => 
+	public CqlCode @virtual(CqlContext context) => 
 		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("ActCode")]
-	public  CqlCode[] ActCode(CqlContext context)
+	public CqlCode[] ActCode(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -153,7 +153,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("LOINC")]
-	public  CqlCode[] LOINC(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("8462-4", "http://loinc.org", default, default),
@@ -166,7 +166,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("183624006", "http://snomed.info/sct", default, default),
@@ -177,7 +177,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -188,7 +188,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -197,7 +197,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Qualifying Encounter during Measurement Period")]
-	public  IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_to_Screen_for_Blood_Pressure(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -227,7 +227,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period(context);
 		bool? b_(Encounter QualifyingEncounter)
@@ -249,7 +249,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
@@ -257,7 +257,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public  IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
+	public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period(context);
 		IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
@@ -314,7 +314,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Normal Blood Pressure Reading")]
-	public  IEnumerable<Encounter> Encounter_with_Normal_Blood_Pressure_Reading(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Normal_Blood_Pressure_Reading(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period(context);
 		bool? b_(Encounter QualifyingEncounter)
@@ -449,7 +449,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80")]
-	public  IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period(context);
 		bool? b_(Encounter QualifyingEncounter)
@@ -585,7 +585,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Follow up with Rescreen in 2 to 6 Months")]
-	public  IEnumerable<ServiceRequest> Follow_up_with_Rescreen_in_2_to_6_Months(CqlContext context)
+	public IEnumerable<ServiceRequest> Follow_up_with_Rescreen_in_2_to_6_Months(CqlContext context)
 	{
 		CqlCode a_ = this.Follow_up_2_3_months__finding_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -609,7 +609,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("NonPharmacological Interventions")]
-	public  IEnumerable<ServiceRequest> NonPharmacological_Interventions(CqlContext context)
+	public IEnumerable<ServiceRequest> NonPharmacological_Interventions(CqlContext context)
 	{
 		CqlValueSet a_ = this.Lifestyle_Recommendation(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -640,7 +640,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Referral to Alternate or Primary Healthcare Professional for Hypertensive Reading")]
-	public  IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading(CqlContext context)
+	public IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading(CqlContext context)
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -670,7 +670,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80 and Interventions")]
-	public  IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80(context);
 		IEnumerable<Encounter> b_(Encounter ElevatedEncounter)
@@ -742,7 +742,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Hypertensive Reading Within Year Prior")]
-	public  IEnumerable<Encounter> Encounter_with_Hypertensive_Reading_Within_Year_Prior(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Hypertensive_Reading_Within_Year_Prior(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period(context);
 		bool? b_(Encounter QualifyingEncounter)
@@ -1031,7 +1031,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80")]
-	public  IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period(context);
 		bool? b_(Encounter QualifyingEncounter)
@@ -1242,7 +1242,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("First Hypertensive Reading Interventions or Referral to Alternate Professional")]
-	public  IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional(CqlContext context)
+	public IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional(CqlContext context)
 	{
 		CqlValueSet a_ = this.Follow_Up_Within_4_Weeks(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -1282,7 +1282,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80 and Interventions")]
-	public  IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80(context);
 		IEnumerable<Encounter> b_(Encounter FirstHTNEncounter)
@@ -1311,7 +1311,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89")]
-	public  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period(context);
 		bool? b_(Encounter QualifyingEncounter)
@@ -1569,7 +1569,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Laboratory Test or ECG for Hypertension")]
-	public  IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension(CqlContext context)
+	public IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension(CqlContext context)
 	{
 		CqlCode a_ = this._12_lead_EKG_panel(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -1596,7 +1596,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 and Interventions")]
-	public  IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions(CqlContext context)
+	public IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions(CqlContext context)
 	{
 		IEnumerable<ServiceRequest> a_ = this.Follow_up_with_Rescreen_in_2_to_6_Months(context);
 		IEnumerable<ServiceRequest> b_(ServiceRequest Rescreen2to6)
@@ -1648,7 +1648,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 and Interventions")]
-	public  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89(context);
 		IEnumerable<Encounter> b_(Encounter SecondHTNEncounterReading)
@@ -1699,7 +1699,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90")]
-	public  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period(context);
 		bool? b_(Encounter QualifyingEncounter)
@@ -1951,7 +1951,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 Interventions")]
-	public  IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions(CqlContext context)
+	public IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions(CqlContext context)
 	{
 		CqlValueSet a_ = this.Follow_Up_Within_4_Weeks(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -2042,7 +2042,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 and Interventions")]
-	public  IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90(context);
 		IEnumerable<Encounter> b_(Encounter SecondHTNEncounterReading140Over90)
@@ -2093,7 +2093,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Normal_Blood_Pressure_Reading(context);
 		IEnumerable<Encounter> b_ = this.Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions(context);
@@ -2109,7 +2109,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Medical Reason for Not Obtaining or Patient Declined Blood Pressure Measurement")]
-	public  IEnumerable<Encounter> Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period(context);
 		IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
@@ -2198,7 +2198,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("NonPharmacological Intervention Not Ordered")]
-	public  IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered(CqlContext context)
+	public IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered(CqlContext context)
 	{
 		CqlValueSet a_ = this.Lifestyle_Recommendation(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -2263,7 +2263,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Laboratory Test or ECG for Hypertension Not Ordered")]
-	public  IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered(CqlContext context)
+	public IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered(CqlContext context)
 	{
 		CqlCode a_ = this._12_lead_EKG_panel(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -2311,7 +2311,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 Interventions Declined")]
-	public  IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined(CqlContext context)
+	public IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined(CqlContext context)
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -2368,7 +2368,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 Interventions Declined")]
-	public  IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined(CqlContext context)
+	public IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined(CqlContext context)
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
@@ -2437,7 +2437,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Order for Hypertension Follow Up Declined by Patient")]
-	public  IEnumerable<Encounter> Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80(context);
 		IEnumerable<Encounter> b_(Encounter ElevatedBPEncounter)
@@ -2656,7 +2656,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
-	public  IEnumerable<Encounter> Denominator_Exceptions(CqlContext context)
+	public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement(context);
 		IEnumerable<Encounter> b_ = this.Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient(context);
@@ -2666,7 +2666,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -2674,7 +2674,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -2682,7 +2682,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -2690,7 +2690,7 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 

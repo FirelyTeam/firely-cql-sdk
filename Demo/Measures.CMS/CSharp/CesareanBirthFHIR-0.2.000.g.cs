@@ -48,66 +48,66 @@ public partial class CesareanBirthFHIR_0_2_000(
 
     [CqlDeclaration("Abnormal Presentation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105")]
-	public  CqlValueSet Abnormal_Presentation(CqlContext context) => 
+	public CqlValueSet Abnormal_Presentation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105", default);
 
     [CqlDeclaration("Cesarean Birth")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282")]
-	public  CqlValueSet Cesarean_Birth(CqlContext context) => 
+	public CqlValueSet Cesarean_Birth(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.282", default);
 
     [CqlDeclaration("Delivery of Singleton")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99")]
-	public  CqlValueSet Delivery_of_Singleton(CqlContext context) => 
+	public CqlValueSet Delivery_of_Singleton(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.99", default);
 
     [CqlDeclaration("Delivery Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
-	public  CqlValueSet Delivery_Procedures(CqlContext context) => 
+	public CqlValueSet Delivery_Procedures(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Genital Herpes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049")]
-	public  CqlValueSet Genital_Herpes(CqlContext context) => 
+	public CqlValueSet Genital_Herpes(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049", default);
 
     [CqlDeclaration("Placenta Previa Accreta Increta Percreta or Vasa Previa")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37")]
-	public  CqlValueSet Placenta_Previa_Accreta_Increta_Percreta_or_Vasa_Previa(CqlContext context) => 
+	public CqlValueSet Placenta_Previa_Accreta_Increta_Percreta_or_Vasa_Previa(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37", default);
 
     [CqlDeclaration("37 to 42 Plus Weeks Gestation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68")]
-	public  CqlValueSet _37_to_42_Plus_Weeks_Gestation(CqlContext context) => 
+	public CqlValueSet _37_to_42_Plus_Weeks_Gestation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68", default);
 
     [CqlDeclaration("[#] Births.preterm")]
-	public  CqlCode ____Births_preterm(CqlContext context) => 
+	public CqlCode ____Births_preterm(CqlContext context) => 
 		new CqlCode("11637-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("[#] Births.term")]
-	public  CqlCode ____Births_term(CqlContext context) => 
+	public CqlCode ____Births_term(CqlContext context) => 
 		new CqlCode("11639-2", "http://loinc.org", default, default);
 
     [CqlDeclaration("[#] Parity")]
-	public  CqlCode ____Parity(CqlContext context) => 
+	public CqlCode ____Parity(CqlContext context) => 
 		new CqlCode("11977-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("[#] Pregnancies")]
-	public  CqlCode ____Pregnancies(CqlContext context) => 
+	public CqlCode ____Pregnancies(CqlContext context) => 
 		new CqlCode("11996-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Date and time of obstetric delivery")]
-	public  CqlCode Date_and_time_of_obstetric_delivery(CqlContext context) => 
+	public CqlCode Date_and_time_of_obstetric_delivery(CqlContext context) => 
 		new CqlCode("93857-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("LOINC")]
-	public  CqlCode[] LOINC(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("11637-6", "http://loinc.org", default, default),
@@ -121,7 +121,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -132,7 +132,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -141,7 +141,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Delivery Encounter with Calculated Gestational Age Greater than or Equal to 37 Weeks")]
-	public  IEnumerable<Encounter> Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 		bool? b_(Encounter DeliveryEncounter)
@@ -157,7 +157,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Delivery Encounter with Estimated Gestational Age Greater than or Equal to 37 Weeks")]
-	public  IEnumerable<Encounter> Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 		bool? b_(Encounter DeliveryEncounter)
@@ -176,7 +176,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Delivery Encounter with Gestational Age Greater than or Equal to 37 Weeks Based on Coding")]
-	public  IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks_Based_on_Coding(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 		bool? b_(Encounter DeliveryEncounter)
@@ -206,7 +206,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Delivery Encounter with Gestational Age Greater than or Equal to 37 Weeks")]
-	public  IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(context);
 		IEnumerable<Encounter> b_ = this.Delivery_Encounter_with_Estimated_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(context);
@@ -218,7 +218,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Singleton Delivery")]
-	public  IEnumerable<Encounter> Encounter_with_Singleton_Delivery(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Singleton_Delivery(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 		bool? b_(Encounter DeliveryEncounter)
@@ -244,7 +244,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("lastGravida")]
-	public  int? lastGravida(CqlContext context, Encounter TheEncounter)
+	public int? lastGravida(CqlContext context, Encounter TheEncounter)
 	{
 		CqlCode a_ = this.____Pregnancies(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -397,7 +397,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("lastParity")]
-	public  int? lastParity(CqlContext context, Encounter TheEncounter)
+	public int? lastParity(CqlContext context, Encounter TheEncounter)
 	{
 		CqlCode a_ = this.____Parity(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -550,7 +550,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("lastHistoryPretermBirth")]
-	public  int? lastHistoryPretermBirth(CqlContext context, Encounter TheEncounter)
+	public int? lastHistoryPretermBirth(CqlContext context, Encounter TheEncounter)
 	{
 		CqlCode a_ = this.____Births_preterm(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -703,7 +703,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("lastHistoryTermBirth")]
-	public  int? lastHistoryTermBirth(CqlContext context, Encounter TheEncounter)
+	public int? lastHistoryTermBirth(CqlContext context, Encounter TheEncounter)
 	{
 		CqlCode a_ = this.____Births_term(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -856,7 +856,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Singleton Delivery Encounters at 37 Plus Weeks Gravida 1 Parity 0, No Previous Births")]
-	public  IEnumerable<Encounter> Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(CqlContext context)
+	public IEnumerable<Encounter> Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Gestational_Age_Greater_than_or_Equal_to_37_Weeks(context);
 		IEnumerable<Encounter> b_ = this.Encounter_with_Singleton_Delivery(context);
@@ -883,7 +883,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Abnormal Presentation")]
-	public  IEnumerable<Encounter> Encounter_with_Abnormal_Presentation(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Abnormal_Presentation(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
 		bool? b_(Encounter ThirtysevenWeeksPlusEncounter)
@@ -1770,7 +1770,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Encounter with Genital Herpes, Placenta Previa, Vasa Previa or Placenta Accreta Spectrum")]
-	public  IEnumerable<Encounter> Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
 		bool? b_(Encounter ThirtysevenWeeksPlusEncounter)
@@ -1800,7 +1800,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Delivery Encounter with Abnormal Presentation, Genital Herpes, Placenta Previa, Vasa Previa or Placenta Accreta Spectrum")]
-	public  IEnumerable<Encounter> Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Abnormal_Presentation(context);
 		IEnumerable<Encounter> b_ = this.Encounter_with_Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(context);
@@ -1810,7 +1810,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
 
@@ -1818,7 +1818,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public  IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
+	public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Abnormal_Presentation__Genital_Herpes__Placenta_Previa__Vasa_Previa_or_Placenta_Accreta_Spectrum(context);
 
@@ -1826,7 +1826,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 
@@ -1834,7 +1834,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Delivery Encounter with Cesarean Birth")]
-	public  IEnumerable<Encounter> Delivery_Encounter_with_Cesarean_Birth(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounter_with_Cesarean_Birth(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Singleton_Delivery_Encounters_at_37_Plus_Weeks_Gravida_1_Parity_0__No_Previous_Births(context);
 		IEnumerable<Encounter> b_(Encounter ThirtysevenWeeksPlusEncounter)
@@ -1869,7 +1869,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Cesarean_Birth(context);
 
@@ -1877,7 +1877,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -1885,7 +1885,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -1893,7 +1893,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -1901,7 +1901,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -1909,7 +1909,7 @@ public partial class CesareanBirthFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public  IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context)
+	public IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context)
 	{
 		IEnumerable<(string EncounterID, int? CalculatedCGA)?> a_ = pcMaternal_5_16_000.Variable_Calculated_Gestational_Age(context);
 

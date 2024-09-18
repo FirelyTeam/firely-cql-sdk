@@ -44,20 +44,20 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 
     [CqlDeclaration("Encounter to Document Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834")]
-	public  CqlValueSet Encounter_to_Document_Medications(CqlContext context) => 
+	public CqlValueSet Encounter_to_Document_Medications(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", default);
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-	public  CqlValueSet Medical_Reason(CqlContext context) => 
+	public CqlValueSet Medical_Reason(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
     [CqlDeclaration("Documentation of current medications (procedure)")]
-	public  CqlCode Documentation_of_current_medications__procedure_(CqlContext context) => 
+	public CqlCode Documentation_of_current_medications__procedure_(CqlContext context) => 
 		new CqlCode("428191000124101", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("428191000124101", "http://snomed.info/sct", default, default),
@@ -67,7 +67,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -78,7 +78,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -87,7 +87,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -95,7 +95,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -103,7 +103,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -111,7 +111,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -119,7 +119,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Qualifying Encounter during day of Measurement Period")]
-	public  IEnumerable<Encounter> Qualifying_Encounter_during_day_of_Measurement_Period(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounter_during_day_of_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_to_Document_Medications(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -143,7 +143,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_day_of_Measurement_Period(context);
 
@@ -151,7 +151,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
@@ -159,7 +159,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_day_of_Measurement_Period(context);
 		IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
@@ -197,7 +197,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
-	public  IEnumerable<Encounter> Denominator_Exceptions(CqlContext context)
+	public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_day_of_Measurement_Period(context);
 		IEnumerable<Encounter> b_(Encounter QualifyingEncounter)

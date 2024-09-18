@@ -44,111 +44,111 @@ public partial class HybridHWRFHIR_1_3_005(
 
     [CqlDeclaration("Bicarbonate lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139")]
-	public  CqlValueSet Bicarbonate_lab_test(CqlContext context) => 
+	public CqlValueSet Bicarbonate_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", default);
 
     [CqlDeclaration("Body temperature")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.152")]
-	public  CqlValueSet Body_temperature(CqlContext context) => 
+	public CqlValueSet Body_temperature(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.152", default);
 
     [CqlDeclaration("Body weight")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.159")]
-	public  CqlValueSet Body_weight(CqlContext context) => 
+	public CqlValueSet Body_weight(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.159", default);
 
     [CqlDeclaration("Creatinine lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363")]
-	public  CqlValueSet Creatinine_lab_test(CqlContext context) => 
+	public CqlValueSet Creatinine_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public  CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+	public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
-	public  CqlValueSet Ethnicity(CqlContext context) => 
+	public CqlValueSet Ethnicity(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
 
     [CqlDeclaration("Glucose lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.134")]
-	public  CqlValueSet Glucose_lab_test(CqlContext context) => 
+	public CqlValueSet Glucose_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.134", default);
 
     [CqlDeclaration("Hematocrit lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114")]
-	public  CqlValueSet Hematocrit_lab_test(CqlContext context) => 
+	public CqlValueSet Hematocrit_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", default);
 
     [CqlDeclaration("Medicare payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10")]
-	public  CqlValueSet Medicare_payer(CqlContext context) => 
+	public CqlValueSet Medicare_payer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public  CqlValueSet Observation_Services(CqlContext context) => 
+	public CqlValueSet Observation_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
-	public  CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
+	public CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
     [CqlDeclaration("Payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
-	public  CqlValueSet Payer(CqlContext context) => 
+	public CqlValueSet Payer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
 
     [CqlDeclaration("Potassium lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.117")]
-	public  CqlValueSet Potassium_lab_test(CqlContext context) => 
+	public CqlValueSet Potassium_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.117", default);
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
-	public  CqlValueSet Race(CqlContext context) => 
+	public CqlValueSet Race(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
 
     [CqlDeclaration("Sodium lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119")]
-	public  CqlValueSet Sodium_lab_test(CqlContext context) => 
+	public CqlValueSet Sodium_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119", default);
 
     [CqlDeclaration("White blood cells count lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129")]
-	public  CqlValueSet White_blood_cells_count_lab_test(CqlContext context) => 
+	public CqlValueSet White_blood_cells_count_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", default);
 
     [CqlDeclaration("Birth date")]
-	public  CqlCode Birth_date(CqlContext context) => 
+	public CqlCode Birth_date(CqlContext context) => 
 		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Heart rate")]
-	public  CqlCode Heart_rate(CqlContext context) => 
+	public CqlCode Heart_rate(CqlContext context) => 
 		new CqlCode("8867-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("Oxygen saturation in Arterial blood by Pulse oximetry")]
-	public  CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry(CqlContext context) => 
+	public CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry(CqlContext context) => 
 		new CqlCode("59408-5", "http://loinc.org", default, default);
 
     [CqlDeclaration("Respiratory rate")]
-	public  CqlCode Respiratory_rate(CqlContext context) => 
+	public CqlCode Respiratory_rate(CqlContext context) => 
 		new CqlCode("9279-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Systolic blood pressure")]
-	public  CqlCode Systolic_blood_pressure(CqlContext context) => 
+	public CqlCode Systolic_blood_pressure(CqlContext context) => 
 		new CqlCode("8480-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("LOINC:2.69")]
-	public  CqlCode[] LOINC_2_69(CqlContext context)
+	public CqlCode[] LOINC_2_69(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", default, default),
@@ -162,7 +162,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
@@ -173,7 +173,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -182,7 +182,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
+	public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
 	{
 		IEnumerable<Coding> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity(context);
 
@@ -190,7 +190,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CodeableConcept code, Period period)?> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Payer(context);
 
@@ -198,7 +198,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  IEnumerable<Coding> SDE_Race(CqlContext context)
+	public IEnumerable<Coding> SDE_Race(CqlContext context)
 	{
 		IEnumerable<Coding> a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Race(context);
 
@@ -206,7 +206,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElementsFHIR4_2_0_000.SDE_Sex(context);
 
@@ -214,7 +214,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("HospitalizationWithObservation")]
-	public  CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
+	public CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
@@ -420,7 +420,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("LengthInDays")]
-	public  int? LengthInDays(CqlContext context, CqlInterval<CqlDateTime> Value)
+	public int? LengthInDays(CqlContext context, CqlInterval<CqlDateTime> Value)
 	{
 		CqlDateTime a_ = context.Operators.Start(Value);
 		CqlDateTime b_ = context.Operators.End(Value);
@@ -430,7 +430,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("Inpatient Encounters")]
-	public  IEnumerable<Encounter> Inpatient_Encounters(CqlContext context)
+	public IEnumerable<Encounter> Inpatient_Encounters(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -481,7 +481,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
@@ -489,7 +489,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("FirstPhysicalExamWithEncounterId")]
-	public  IEnumerable<string> FirstPhysicalExamWithEncounterId(CqlContext context, IEnumerable<Observation> ExamList, string CCDE)
+	public IEnumerable<string> FirstPhysicalExamWithEncounterId(CqlContext context, IEnumerable<Observation> ExamList, string CCDE)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 		string b_(Encounter Encounter)
@@ -611,7 +611,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("FirstPhysicalExamWithEncounterIdUsingLabTiming")]
-	public  IEnumerable<string> FirstPhysicalExamWithEncounterIdUsingLabTiming(CqlContext context, IEnumerable<Observation> ExamList, string CCDE)
+	public IEnumerable<string> FirstPhysicalExamWithEncounterIdUsingLabTiming(CqlContext context, IEnumerable<Observation> ExamList, string CCDE)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 		string b_(Encounter Encounter)
@@ -731,7 +731,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("FirstLabTestWithEncounterId")]
-	public  IEnumerable<string> FirstLabTestWithEncounterId(CqlContext context, IEnumerable<Observation> LabList, string CCDE)
+	public IEnumerable<string> FirstLabTestWithEncounterId(CqlContext context, IEnumerable<Observation> LabList, string CCDE)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 		string b_(Encounter Encounter)
@@ -840,7 +840,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("Results")]
-	public  IEnumerable<string> Results(CqlContext context)
+	public IEnumerable<string> Results(CqlContext context)
 	{
 		CqlCode a_ = this.Heart_rate(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -906,7 +906,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("CalendarAgeInYearsAt")]
-	public  int? CalendarAgeInYearsAt(CqlContext context, CqlDateTime BirthDateTime, CqlDateTime AsOf)
+	public int? CalendarAgeInYearsAt(CqlContext context, CqlDateTime BirthDateTime, CqlDateTime AsOf)
 	{
 		CqlDate a_ = context.Operators.ConvertDateTimeToDate(BirthDateTime);
 		CqlDate b_ = context.Operators.ConvertDateTimeToDate(AsOf);
@@ -916,7 +916,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("ToDate")]
-	public  CqlDateTime ToDate(CqlContext context, CqlDateTime Value)
+	public CqlDateTime ToDate(CqlContext context, CqlDateTime Value)
 	{
 		int? a_ = context.Operators.DateTimeComponentFrom(Value, "year");
 		int? b_ = context.Operators.DateTimeComponentFrom(Value, "month");
@@ -928,7 +928,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("LengthOfStay")]
-	public  int? LengthOfStay(CqlContext context, CqlInterval<CqlDateTime> Stay)
+	public int? LengthOfStay(CqlContext context, CqlInterval<CqlDateTime> Stay)
 	{
 		CqlDateTime a_ = context.Operators.Start(Stay);
 		CqlDateTime b_ = context.Operators.End(Stay);
@@ -938,7 +938,7 @@ public partial class HybridHWRFHIR_1_3_005(
 	}
 
     [CqlDeclaration("HospitalizationWithObservationLengthofStay")]
-	public  int? HospitalizationWithObservationLengthofStay(CqlContext context, Encounter Encounter)
+	public int? HospitalizationWithObservationLengthofStay(CqlContext context, Encounter Encounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.HospitalizationWithObservation(context, Encounter);
 		int? b_ = this.LengthInDays(context, a_);

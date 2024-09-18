@@ -46,63 +46,63 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 
     [CqlDeclaration("Group Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1187")]
-	public  CqlValueSet Group_Psychotherapy(CqlContext context) => 
+	public CqlValueSet Group_Psychotherapy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1187", default);
 
     [CqlDeclaration("Major Depressive Disorder Active")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1491")]
-	public  CqlValueSet Major_Depressive_Disorder_Active(CqlContext context) => 
+	public CqlValueSet Major_Depressive_Disorder_Active(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1491", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public  CqlValueSet Office_Visit(CqlContext context) => 
+	public CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public  CqlValueSet Outpatient_Consultation(CqlContext context) => 
+	public CqlValueSet Outpatient_Consultation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
-	public  CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) => 
+	public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
 
     [CqlDeclaration("Psych Visit for Family Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1018")]
-	public  CqlValueSet Psych_Visit_for_Family_Psychotherapy(CqlContext context) => 
+	public CqlValueSet Psych_Visit_for_Family_Psychotherapy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1018", default);
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
-	public  CqlValueSet Psych_Visit_Psychotherapy(CqlContext context) => 
+	public CqlValueSet Psych_Visit_Psychotherapy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
 
     [CqlDeclaration("Psychoanalysis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141")]
-	public  CqlValueSet Psychoanalysis(CqlContext context) => 
+	public CqlValueSet Psychoanalysis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141", default);
 
     [CqlDeclaration("Telehealth Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1031")]
-	public  CqlValueSet Telehealth_Services(CqlContext context) => 
+	public CqlValueSet Telehealth_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1031", default);
 
     [CqlDeclaration("Birth date")]
-	public  CqlCode Birth_date(CqlContext context) => 
+	public CqlCode Birth_date(CqlContext context) => 
 		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Suicide risk assessment (procedure)")]
-	public  CqlCode Suicide_risk_assessment__procedure_(CqlContext context) => 
+	public CqlCode Suicide_risk_assessment__procedure_(CqlContext context) => 
 		new CqlCode("225337009", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("AMB")]
-	public  CqlCode AMB(CqlContext context) => 
+	public CqlCode AMB(CqlContext context) => 
 		new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("LOINC")]
-	public  CqlCode[] LOINC(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", default, default),
@@ -112,7 +112,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("225337009", "http://snomed.info/sct", default, default),
@@ -122,7 +122,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("ActCode")]
-	public  CqlCode[] ActCode(CqlContext context)
+	public CqlCode[] ActCode(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -132,7 +132,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("ICD10CM")]
-	public  CqlCode[] ICD10CM(CqlContext context)
+	public CqlCode[] ICD10CM(CqlContext context)
 	{
 		CqlCode[] a_ = []
 ;
@@ -141,7 +141,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -152,7 +152,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -161,7 +161,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -169,7 +169,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -177,7 +177,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -185,7 +185,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -193,7 +193,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("Major Depressive Disorder Encounter")]
-	public  IEnumerable<Encounter> Major_Depressive_Disorder_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Major_Depressive_Disorder_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -262,7 +262,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
 		bool? b_(Encounter MDDEncounter)
@@ -293,7 +293,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
@@ -301,7 +301,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
 		IEnumerable<Encounter> b_(Encounter MDDEncounter)

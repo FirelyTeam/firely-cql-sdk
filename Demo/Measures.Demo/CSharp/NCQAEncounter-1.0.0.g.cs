@@ -45,7 +45,7 @@ public partial class NCQAEncounter_1_0_0(
 {
 
     [CqlDeclaration("Encounter Has Diagnosis")]
-	public  bool? Encounter_Has_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
+	public bool? Encounter_Has_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		FhirString b_(Encounter.DiagnosisComponent D)
@@ -80,7 +80,7 @@ public partial class NCQAEncounter_1_0_0(
 	}
 
     [CqlDeclaration("Encounter Has Principal Diagnosis")]
-	public  bool? Encounter_Has_Principal_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
+	public bool? Encounter_Has_Principal_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent D)
@@ -123,7 +123,7 @@ public partial class NCQAEncounter_1_0_0(
 	}
 
     [CqlDeclaration("Encounter Completed during Period")]
-	public  bool? Encounter_Completed_during_Period(CqlContext context, IEnumerable<Encounter> Enc, CqlInterval<CqlDateTime> timeperiod)
+	public bool? Encounter_Completed_during_Period(CqlContext context, IEnumerable<Encounter> Enc, CqlInterval<CqlDateTime> timeperiod)
 	{
 		IEnumerable<Encounter> a_ = ncqaStatus_1_0_0.Finished_Encounter(context, Enc);
 		bool? b_(Encounter EncounterPeriod)
@@ -142,7 +142,7 @@ public partial class NCQAEncounter_1_0_0(
 	}
 
     [CqlDeclaration("Finished Encounter with Telehealth POS")]
-	public  IEnumerable<Encounter> Finished_Encounter_with_Telehealth_POS(CqlContext context, IEnumerable<Encounter> Encounter)
+	public IEnumerable<Encounter> Finished_Encounter_with_Telehealth_POS(CqlContext context, IEnumerable<Encounter> Encounter)
 	{
 		IEnumerable<Encounter> a_ = ncqaStatus_1_0_0.Finished_Encounter(context, Encounter);
 		bool? b_(Encounter E)
@@ -162,7 +162,7 @@ public partial class NCQAEncounter_1_0_0(
 	}
 
     [CqlDeclaration("Finished Encounter with Outpatient POS")]
-	public  IEnumerable<Encounter> Finished_Encounter_with_Outpatient_POS(CqlContext context, IEnumerable<Encounter> Encounter)
+	public IEnumerable<Encounter> Finished_Encounter_with_Outpatient_POS(CqlContext context, IEnumerable<Encounter> Encounter)
 	{
 		IEnumerable<Encounter> a_ = ncqaStatus_1_0_0.Finished_Encounter(context, Encounter);
 		bool? b_(Encounter E)
@@ -186,7 +186,7 @@ public partial class NCQAEncounter_1_0_0(
 	}
 
     [CqlDeclaration("Finished Encounter with Ambulatory POS")]
-	public  IEnumerable<Encounter> Finished_Encounter_with_Ambulatory_POS(CqlContext context, IEnumerable<Encounter> Encounter)
+	public IEnumerable<Encounter> Finished_Encounter_with_Ambulatory_POS(CqlContext context, IEnumerable<Encounter> Encounter)
 	{
 		IEnumerable<Encounter> a_ = ncqaStatus_1_0_0.Finished_Encounter(context, Encounter);
 		bool? b_(Encounter E)

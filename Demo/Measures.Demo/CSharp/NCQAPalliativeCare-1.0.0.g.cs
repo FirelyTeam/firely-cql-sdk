@@ -44,25 +44,25 @@ public partial class NCQAPalliativeCare_1_0_0(
 
     [CqlDeclaration("Palliative Care Assessment")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225")]
-	public  CqlValueSet Palliative_Care_Assessment(CqlContext context) => 
+	public CqlValueSet Palliative_Care_Assessment(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", default);
 
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450")]
-	public  CqlValueSet Palliative_Care_Encounter(CqlContext context) => 
+	public CqlValueSet Palliative_Care_Encounter(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450", default);
 
     [CqlDeclaration("Palliative Care Intervention")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224")]
-	public  CqlValueSet Palliative_Care_Intervention(CqlContext context) => 
+	public CqlValueSet Palliative_Care_Intervention(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224", default);
 
     [CqlDeclaration("Encounter for palliative care")]
-	public  CqlCode Encounter_for_palliative_care(CqlContext context) => 
+	public CqlCode Encounter_for_palliative_care(CqlContext context) => 
 		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
 
     [CqlDeclaration("ICD-10")]
-	public  CqlCode[] ICD_10(CqlContext context)
+	public CqlCode[] ICD_10(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", default, default),
@@ -72,7 +72,7 @@ public partial class NCQAPalliativeCare_1_0_0(
 	}
 
     [CqlDeclaration("Palliative Care Overlapping Period")]
-	public  bool? Palliative_Care_Overlapping_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
+	public bool? Palliative_Care_Overlapping_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
 	{
 		CqlValueSet a_ = this.Palliative_Care_Assessment(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);

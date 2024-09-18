@@ -41,7 +41,7 @@ public partial class Antibiotic_1_5_000(
 {
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("Antibiotic-1.5.000", "Measurement Period", null);
 
@@ -49,7 +49,7 @@ public partial class Antibiotic_1_5_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -58,7 +58,7 @@ public partial class Antibiotic_1_5_000(
 	}
 
     [CqlDeclaration("Has Comorbid Condition History")]
-	public  IEnumerable<Encounter> Has_Comorbid_Condition_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> comorbidConditions)
+	public IEnumerable<Encounter> Has_Comorbid_Condition_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> comorbidConditions)
 	{
 		IEnumerable<Encounter> a_(Encounter eDate)
 		{
@@ -99,7 +99,7 @@ public partial class Antibiotic_1_5_000(
 	}
 
     [CqlDeclaration("Has Competing Diagnosis History")]
-	public  IEnumerable<Encounter> Has_Competing_Diagnosis_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
+	public IEnumerable<Encounter> Has_Competing_Diagnosis_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
 	{
 		IEnumerable<Encounter> a_(Encounter eDate)
 		{
@@ -139,7 +139,7 @@ public partial class Antibiotic_1_5_000(
 	}
 
     [CqlDeclaration("Has Antibiotic Medication History")]
-	public  IEnumerable<Encounter> Has_Antibiotic_Medication_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)
+	public IEnumerable<Encounter> Has_Antibiotic_Medication_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)
 	{
 		IEnumerable<Encounter> a_(Encounter DateOfEpisode)
 		{

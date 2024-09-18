@@ -46,161 +46,161 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 
     [CqlDeclaration("Active Bleeding Excluding Menses or Bleeding Diathesis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036")]
-	public  CqlValueSet Active_Bleeding_Excluding_Menses_or_Bleeding_Diathesis(CqlContext context) => 
+	public CqlValueSet Active_Bleeding_Excluding_Menses_or_Bleeding_Diathesis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036", default);
 
     [CqlDeclaration("Active Peptic Ulcer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4031")]
-	public  CqlValueSet Active_Peptic_Ulcer(CqlContext context) => 
+	public CqlValueSet Active_Peptic_Ulcer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4031", default);
 
     [CqlDeclaration("Adverse reaction to thrombolytics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.6")]
-	public  CqlValueSet Adverse_reaction_to_thrombolytics(CqlContext context) => 
+	public CqlValueSet Adverse_reaction_to_thrombolytics(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.6", default);
 
     [CqlDeclaration("Allergy to thrombolytics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.5")]
-	public  CqlValueSet Allergy_to_thrombolytics(CqlContext context) => 
+	public CqlValueSet Allergy_to_thrombolytics(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.5", default);
 
     [CqlDeclaration("Oral Anticoagulant Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4045")]
-	public  CqlValueSet Oral_Anticoagulant_Medications(CqlContext context) => 
+	public CqlValueSet Oral_Anticoagulant_Medications(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4045", default);
 
     [CqlDeclaration("Aortic Dissection and Rupture")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4028")]
-	public  CqlValueSet Aortic_Dissection_and_Rupture(CqlContext context) => 
+	public CqlValueSet Aortic_Dissection_and_Rupture(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4028", default);
 
     [CqlDeclaration("birth date")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4")]
-	public  CqlValueSet birth_date(CqlContext context) => 
+	public CqlValueSet birth_date(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", default);
 
     [CqlDeclaration("Cardiopulmonary Arrest")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4048")]
-	public  CqlValueSet Cardiopulmonary_Arrest(CqlContext context) => 
+	public CqlValueSet Cardiopulmonary_Arrest(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4048", default);
 
     [CqlDeclaration("Cerebral Vascular Lesion")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4025")]
-	public  CqlValueSet Cerebral_Vascular_Lesion(CqlContext context) => 
+	public CqlValueSet Cerebral_Vascular_Lesion(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4025", default);
 
     [CqlDeclaration("Closed Head and Facial Trauma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4026")]
-	public  CqlValueSet Closed_Head_and_Facial_Trauma(CqlContext context) => 
+	public CqlValueSet Closed_Head_and_Facial_Trauma(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4026", default);
 
     [CqlDeclaration("Dementia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4043")]
-	public  CqlValueSet Dementia(CqlContext context) => 
+	public CqlValueSet Dementia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4043", default);
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
-	public  CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) => 
+	public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", default);
 
     [CqlDeclaration("ED")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1085")]
-	public  CqlValueSet ED(CqlContext context) => 
+	public CqlValueSet ED(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1085", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public  CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+	public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Endotracheal Intubation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.69")]
-	public  CqlValueSet Endotracheal_Intubation(CqlContext context) => 
+	public CqlValueSet Endotracheal_Intubation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.69", default);
 
     [CqlDeclaration("Fibrinolytic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4020")]
-	public  CqlValueSet Fibrinolytic_Therapy(CqlContext context) => 
+	public CqlValueSet Fibrinolytic_Therapy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4020", default);
 
     [CqlDeclaration("Intracranial or Intraspinal surgery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.2")]
-	public  CqlValueSet Intracranial_or_Intraspinal_surgery(CqlContext context) => 
+	public CqlValueSet Intracranial_or_Intraspinal_surgery(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.2", default);
 
     [CqlDeclaration("Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.104.12.1024")]
-	public  CqlValueSet Ischemic_Stroke(CqlContext context) => 
+	public CqlValueSet Ischemic_Stroke(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.104.12.1024", default);
 
     [CqlDeclaration("Major Surgical Procedure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4056")]
-	public  CqlValueSet Major_Surgical_Procedure(CqlContext context) => 
+	public CqlValueSet Major_Surgical_Procedure(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4056", default);
 
     [CqlDeclaration("Malignant Intracranial Neoplasm Group")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.3")]
-	public  CqlValueSet Malignant_Intracranial_Neoplasm_Group(CqlContext context) => 
+	public CqlValueSet Malignant_Intracranial_Neoplasm_Group(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.3", default);
 
     [CqlDeclaration("Insertion or Replacement of Mechanical Circulatory Assist Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4052")]
-	public  CqlValueSet Insertion_or_Replacement_of_Mechanical_Circulatory_Assist_Device(CqlContext context) => 
+	public CqlValueSet Insertion_or_Replacement_of_Mechanical_Circulatory_Assist_Device(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4052", default);
 
     [CqlDeclaration("Neurologic impairment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1012")]
-	public  CqlValueSet Neurologic_impairment(CqlContext context) => 
+	public CqlValueSet Neurologic_impairment(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1012", default);
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
-	public  CqlValueSet Patient_Expired(CqlContext context) => 
+	public CqlValueSet Patient_Expired(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
 
     [CqlDeclaration("Percutaneous Coronary Intervention")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.2000.5")]
-	public  CqlValueSet Percutaneous_Coronary_Intervention(CqlContext context) => 
+	public CqlValueSet Percutaneous_Coronary_Intervention(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.2000.5", default);
 
     [CqlDeclaration("Pregnancy ICD10 SNOMEDCT")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4055")]
-	public  CqlValueSet Pregnancy_ICD10_SNOMEDCT(CqlContext context) => 
+	public CqlValueSet Pregnancy_ICD10_SNOMEDCT(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4055", default);
 
     [CqlDeclaration("STEMI")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4017")]
-	public  CqlValueSet STEMI(CqlContext context) => 
+	public CqlValueSet STEMI(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4017", default);
 
     [CqlDeclaration("Thrombolytic medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.4")]
-	public  CqlValueSet Thrombolytic_medications(CqlContext context) => 
+	public CqlValueSet Thrombolytic_medications(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.4", default);
 
     [CqlDeclaration("Birthdate")]
-	public  CqlCode Birthdate(CqlContext context) => 
+	public CqlCode Birthdate(CqlContext context) => 
 		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Emergency Department")]
-	public  CqlCode Emergency_Department(CqlContext context) => 
+	public CqlCode Emergency_Department(CqlContext context) => 
 		new CqlCode("1108-0", "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html", default, default);
 
     [CqlDeclaration("Patient transfer (procedure)")]
-	public  CqlCode Patient_transfer__procedure_(CqlContext context) => 
+	public CqlCode Patient_transfer__procedure_(CqlContext context) => 
 		new CqlCode("107724000", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Streptokinase adverse reaction (disorder)")]
-	public  CqlCode Streptokinase_adverse_reaction__disorder_(CqlContext context) => 
+	public CqlCode Streptokinase_adverse_reaction__disorder_(CqlContext context) => 
 		new CqlCode("293571007", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("EMER")]
-	public  CqlCode EMER(CqlContext context) => 
+	public CqlCode EMER(CqlContext context) => 
 		new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("LOINC")]
-	public  CqlCode[] LOINC(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", default, default),
@@ -210,7 +210,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("HSLOC")]
-	public  CqlCode[] HSLOC(CqlContext context)
+	public CqlCode[] HSLOC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("1108-0", "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html", default, default),
@@ -220,7 +220,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("107724000", "http://snomed.info/sct", default, default),
@@ -231,7 +231,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("ActCode")]
-	public  CqlCode[] ActCode(CqlContext context)
+	public CqlCode[] ActCode(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -241,7 +241,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -252,7 +252,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -261,7 +261,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("ED Encounter with Encounter Diagnosis of STEMI")]
-	public  IEnumerable<Encounter> ED_Encounter_with_Encounter_Diagnosis_of_STEMI(CqlContext context)
+	public IEnumerable<Encounter> ED_Encounter_with_Encounter_Diagnosis_of_STEMI(CqlContext context)
 	{
 		CqlValueSet a_ = this.ED(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -314,7 +314,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("ED Encounter with Diagnosis of STEMI")]
-	public  IEnumerable<Encounter> ED_Encounter_with_Diagnosis_of_STEMI(CqlContext context)
+	public IEnumerable<Encounter> ED_Encounter_with_Diagnosis_of_STEMI(CqlContext context)
 	{
 		CqlValueSet a_ = this.ED(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -365,7 +365,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("ED Encounter with STEMI Diagnosis")]
-	public  IEnumerable<Encounter> ED_Encounter_with_STEMI_Diagnosis(CqlContext context)
+	public IEnumerable<Encounter> ED_Encounter_with_STEMI_Diagnosis(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_Encounter_Diagnosis_of_STEMI(context);
 		IEnumerable<Encounter> b_ = this.ED_Encounter_with_Diagnosis_of_STEMI(context);
@@ -375,7 +375,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		bool? b_(Encounter EDwithSTEMI)
@@ -399,7 +399,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
@@ -407,7 +407,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Allergy or Intolerance to Thrombolytic Medications Overlaps ED Encounter")]
-	public  IEnumerable<Encounter> Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwSTEMI)
@@ -444,7 +444,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Adverse Effect to Thrombolytic Medications Before End of ED Encounter")]
-	public  IEnumerable<Encounter> Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwSTEMI)
@@ -480,7 +480,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Active Exclusion Diagnosis at Start of ED Encounter")]
-	public  IEnumerable<Encounter> Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
@@ -524,7 +524,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Active Oral Anticoagulant Medication at the Start of ED Encounter")]
-	public  IEnumerable<Encounter> Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
@@ -567,7 +567,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Exclusion Diagnosis During ED Encounter or Within 24 Hours of ED Encounter Start")]
-	public  IEnumerable<Encounter> Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context)
+	public IEnumerable<Encounter> Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
@@ -617,7 +617,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Major Surgical Procedure 21 Days or Less Before Start of or Starts During ED Encounter")]
-	public  IEnumerable<Encounter> Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
@@ -664,7 +664,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Intubation or Mechanical Circulatory Assist Procedure During ED Encounter or Within 24 Hours of ED Encounter Start")]
-	public  IEnumerable<Encounter> Intubation_or_Mechanical_Circulatory_Assist_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context)
+	public IEnumerable<Encounter> Intubation_or_Mechanical_Circulatory_Assist_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
@@ -720,7 +720,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Active Exclusion Diagnosis Within 90 Days Before or At the Start of ED Encounter")]
-	public  IEnumerable<Encounter> Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwSTEMI)
@@ -765,7 +765,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Intracranial or Intraspinal Procedure 90 Days or Less Before Start of ED Encounter")]
-	public  IEnumerable<Encounter> Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
@@ -812,7 +812,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("ED Encounter with Discharge Disposition as Patient Expired")]
-	public  IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(CqlContext context)
+	public IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		bool? b_(Encounter EDwithSTEMI)
@@ -831,7 +831,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public  IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
+	public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(context);
 		IEnumerable<Encounter> b_ = this.Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(context);
@@ -858,7 +858,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 
     [CqlDeclaration("currentemergencyDepartmentArrivalTime")]
     [CqlTag("description", "Returns the emergency department arrival time for the encounter.")]
-	public  CqlDateTime currentemergencyDepartmentArrivalTime(CqlContext context, Encounter EDEncounter)
+	public CqlDateTime currentemergencyDepartmentArrivalTime(CqlContext context, Encounter EDEncounter)
 	{
 		List<Encounter.LocationComponent> a_ = EDEncounter?.Location;
 		bool? b_(Encounter.LocationComponent EDLocation)
@@ -888,7 +888,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Fibrinolytic Therapy within 30 Minutes of Arrival")]
-	public  IEnumerable<Encounter> Fibrinolytic_Therapy_within_30_Minutes_of_Arrival(CqlContext context)
+	public IEnumerable<Encounter> Fibrinolytic_Therapy_within_30_Minutes_of_Arrival(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
@@ -931,7 +931,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("PCI within 90 Minutes of Arrival")]
-	public  IEnumerable<Encounter> PCI_within_90_Minutes_of_Arrival(CqlContext context)
+	public IEnumerable<Encounter> PCI_within_90_Minutes_of_Arrival(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
@@ -972,7 +972,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("ED Departure with Transfer to Acute Care Facility Within 45 Minutes of Arrival")]
-	public  IEnumerable<Encounter> ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival(CqlContext context)
+	public IEnumerable<Encounter> ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		bool? b_(Encounter EDwithSTEMI)
@@ -1007,7 +1007,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Fibrinolytic_Therapy_within_30_Minutes_of_Arrival(context);
 		IEnumerable<Encounter> b_ = this.PCI_within_90_Minutes_of_Arrival(context);
@@ -1019,7 +1019,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -1027,7 +1027,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -1035,7 +1035,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -1043,7 +1043,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 

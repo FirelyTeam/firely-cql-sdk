@@ -52,81 +52,81 @@ public partial class BCSEHEDISMY2022_1_0_0(
 
     [CqlDeclaration("Absence of Left Breast")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329")]
-	public  CqlValueSet Absence_of_Left_Breast(CqlContext context) => 
+	public CqlValueSet Absence_of_Left_Breast(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329", default);
 
     [CqlDeclaration("Absence of Right Breast")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330")]
-	public  CqlValueSet Absence_of_Right_Breast(CqlContext context) => 
+	public CqlValueSet Absence_of_Right_Breast(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330", default);
 
     [CqlDeclaration("Bilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042")]
-	public  CqlValueSet Bilateral_Mastectomy(CqlContext context) => 
+	public CqlValueSet Bilateral_Mastectomy(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042", default);
 
     [CqlDeclaration("Bilateral Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043")]
-	public  CqlValueSet Bilateral_Modifier(CqlContext context) => 
+	public CqlValueSet Bilateral_Modifier(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043", default);
 
     [CqlDeclaration("Clinical Bilateral Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951")]
-	public  CqlValueSet Clinical_Bilateral_Modifier(CqlContext context) => 
+	public CqlValueSet Clinical_Bilateral_Modifier(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951", default);
 
     [CqlDeclaration("Clinical Left Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949")]
-	public  CqlValueSet Clinical_Left_Modifier(CqlContext context) => 
+	public CqlValueSet Clinical_Left_Modifier(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949", default);
 
     [CqlDeclaration("Clinical Right Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950")]
-	public  CqlValueSet Clinical_Right_Modifier(CqlContext context) => 
+	public CqlValueSet Clinical_Right_Modifier(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950", default);
 
     [CqlDeclaration("Clinical Unilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948")]
-	public  CqlValueSet Clinical_Unilateral_Mastectomy(CqlContext context) => 
+	public CqlValueSet Clinical_Unilateral_Mastectomy(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948", default);
 
     [CqlDeclaration("History of Bilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331")]
-	public  CqlValueSet History_of_Bilateral_Mastectomy(CqlContext context) => 
+	public CqlValueSet History_of_Bilateral_Mastectomy(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331", default);
 
     [CqlDeclaration("Left Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148")]
-	public  CqlValueSet Left_Modifier(CqlContext context) => 
+	public CqlValueSet Left_Modifier(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148", default);
 
     [CqlDeclaration("Mammography")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168")]
-	public  CqlValueSet Mammography(CqlContext context) => 
+	public CqlValueSet Mammography(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168", default);
 
     [CqlDeclaration("Right Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230")]
-	public  CqlValueSet Right_Modifier(CqlContext context) => 
+	public CqlValueSet Right_Modifier(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230", default);
 
     [CqlDeclaration("Unilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256")]
-	public  CqlValueSet Unilateral_Mastectomy(CqlContext context) => 
+	public CqlValueSet Unilateral_Mastectomy(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256", default);
 
     [CqlDeclaration("Unilateral Mastectomy Left")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334")]
-	public  CqlValueSet Unilateral_Mastectomy_Left(CqlContext context) => 
+	public CqlValueSet Unilateral_Mastectomy_Left(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334", default);
 
     [CqlDeclaration("Unilateral Mastectomy Right")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335")]
-	public  CqlValueSet Unilateral_Mastectomy_Right(CqlContext context) => 
+	public CqlValueSet Unilateral_Mastectomy_Right(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335", default);
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("BCSEHEDISMY2022-1.0.0", "Measurement Period", null);
 
@@ -134,7 +134,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -143,7 +143,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("October 1 Two Years Prior to the Measurement Period")]
-	public  CqlDateTime October_1_Two_Years_Prior_to_the_Measurement_Period(CqlContext context)
+	public CqlDateTime October_1_Two_Years_Prior_to_the_Measurement_Period(CqlContext context)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -156,7 +156,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Participation Period")]
-	public  CqlInterval<CqlDateTime> Participation_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Participation_Period(CqlContext context)
 	{
 		CqlDateTime a_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period(context);
 		CqlInterval<CqlDateTime> b_ = this.Measurement_Period(context);
@@ -167,7 +167,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Member Coverage")]
-	public  IEnumerable<Coverage> Member_Coverage(CqlContext context)
+	public IEnumerable<Coverage> Member_Coverage(CqlContext context)
 	{
 		IEnumerable<Coverage> a_ = context.Operators.RetrieveByValueSet<Coverage>(default, default);
 		bool? b_(Coverage C)
@@ -185,7 +185,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Enrolled During Participation Period")]
-	public  bool? Enrolled_During_Participation_Period(CqlContext context)
+	public bool? Enrolled_During_Participation_Period(CqlContext context)
 	{
 		IEnumerable<Coverage> a_ = this.Member_Coverage(context);
 		CqlInterval<CqlDateTime> b_ = this.Measurement_Period(context);
@@ -225,7 +225,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -249,7 +249,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  bool? Denominator(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -257,7 +257,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Right Mastectomy Diagnosis")]
-	public  IEnumerable<Condition> Right_Mastectomy_Diagnosis(CqlContext context)
+	public IEnumerable<Condition> Right_Mastectomy_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Absence_of_Right_Breast(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -278,7 +278,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Right Mastectomy Procedure")]
-	public  IEnumerable<Procedure> Right_Mastectomy_Procedure(CqlContext context)
+	public IEnumerable<Procedure> Right_Mastectomy_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Unilateral_Mastectomy_Right(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -340,7 +340,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Left Mastectomy Diagnosis")]
-	public  IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context)
+	public IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Absence_of_Left_Breast(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -361,7 +361,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Left Mastectomy Procedure")]
-	public  IEnumerable<Procedure> Left_Mastectomy_Procedure(CqlContext context)
+	public IEnumerable<Procedure> Left_Mastectomy_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Unilateral_Mastectomy_Left(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -423,7 +423,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Bilateral Mastectomy Diagnosis")]
-	public  IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context)
+	public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.History_of_Bilateral_Mastectomy(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -444,7 +444,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Bilateral Mastectomy Procedure")]
-	public  IEnumerable<Procedure> Bilateral_Mastectomy_Procedure(CqlContext context)
+	public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Bilateral_Mastectomy(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -506,7 +506,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Mastectomy Exclusion")]
-	public  bool? Mastectomy_Exclusion(CqlContext context)
+	public bool? Mastectomy_Exclusion(CqlContext context)
 	{
 		IEnumerable<Condition> a_ = this.Right_Mastectomy_Diagnosis(context);
 		bool? b_ = context.Operators.Exists<Condition>(a_);
@@ -530,7 +530,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Exclusions")]
-	public  bool? Exclusions(CqlContext context)
+	public bool? Exclusions(CqlContext context)
 	{
 		bool? a_ = ncqaHospice_1_0_0.Hospice_Intervention_or_Encounter(context);
 		bool? b_ = this.Mastectomy_Exclusion(context);
@@ -545,7 +545,7 @@ public partial class BCSEHEDISMY2022_1_0_0(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  bool? Numerator(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		CqlValueSet a_ = this.Mammography(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);

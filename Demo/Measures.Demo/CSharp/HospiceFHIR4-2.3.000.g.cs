@@ -42,24 +42,24 @@ public partial class HospiceFHIR4_2_3_000(
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
-	public  CqlValueSet Hospice_care_ambulatory(CqlContext context) => 
+	public CqlValueSet Hospice_care_ambulatory(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", default);
 
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
-	public  CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext context) => 
+	public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext context) => 
 		new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
-	public  CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext context) => 
+	public CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext context) => 
 		new CqlCode("428361000124107", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("SNOMEDCT:2017-09")]
-	public  CqlCode[] SNOMEDCT_2017_09(CqlContext context)
+	public CqlCode[] SNOMEDCT_2017_09(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("428371000124100", "http://snomed.info/sct", default, default),
@@ -70,7 +70,7 @@ public partial class HospiceFHIR4_2_3_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("HospiceFHIR4-2.3.000", "Measurement Period", null);
 
@@ -78,7 +78,7 @@ public partial class HospiceFHIR4_2_3_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -87,7 +87,7 @@ public partial class HospiceFHIR4_2_3_000(
 	}
 
     [CqlDeclaration("Has Hospice")]
-	public  bool? Has_Hospice(CqlContext context)
+	public bool? Has_Hospice(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);

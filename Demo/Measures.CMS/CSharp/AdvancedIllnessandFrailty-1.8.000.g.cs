@@ -48,73 +48,73 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083")]
-	public  CqlValueSet Acute_Inpatient(CqlContext context) => 
+	public CqlValueSet Acute_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", default);
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
-	public  CqlValueSet Advanced_Illness(CqlContext context) => 
+	public CqlValueSet Advanced_Illness(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", default);
 
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510")]
-	public  CqlValueSet Dementia_Medications(CqlContext context) => 
+	public CqlValueSet Dementia_Medications(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", default);
 
     [CqlDeclaration("Emergency Department Evaluation and Management Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010")]
-	public  CqlValueSet Emergency_Department_Evaluation_and_Management_Visit(CqlContext context) => 
+	public CqlValueSet Emergency_Department_Evaluation_and_Management_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", default);
 
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300")]
-	public  CqlValueSet Frailty_Device(CqlContext context) => 
+	public CqlValueSet Frailty_Device(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", default);
 
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074")]
-	public  CqlValueSet Frailty_Diagnosis(CqlContext context) => 
+	public CqlValueSet Frailty_Diagnosis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", default);
 
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088")]
-	public  CqlValueSet Frailty_Encounter(CqlContext context) => 
+	public CqlValueSet Frailty_Encounter(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", default);
 
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075")]
-	public  CqlValueSet Frailty_Symptom(CqlContext context) => 
+	public CqlValueSet Frailty_Symptom(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", default);
 
     [CqlDeclaration("Nonacute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084")]
-	public  CqlValueSet Nonacute_Inpatient(CqlContext context) => 
+	public CqlValueSet Nonacute_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084", default);
 
     [CqlDeclaration("Observation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086")]
-	public  CqlValueSet Observation(CqlContext context) => 
+	public CqlValueSet Observation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086", default);
 
     [CqlDeclaration("Outpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087")]
-	public  CqlValueSet Outpatient(CqlContext context) => 
+	public CqlValueSet Outpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087", default);
 
     [CqlDeclaration("Housing status")]
-	public  CqlCode Housing_status(CqlContext context) => 
+	public CqlCode Housing_status(CqlContext context) => 
 		new CqlCode("71802-3", "http://loinc.org", default, default);
 
     [CqlDeclaration("Lives in a nursing home (finding)")]
-	public  CqlCode Lives_in_a_nursing_home__finding_(CqlContext context) => 
+	public CqlCode Lives_in_a_nursing_home__finding_(CqlContext context) => 
 		new CqlCode("160734000", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Medical equipment used")]
-	public  CqlCode Medical_equipment_used(CqlContext context) => 
+	public CqlCode Medical_equipment_used(CqlContext context) => 
 		new CqlCode("98181-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("LOINC")]
-	public  CqlCode[] LOINC(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("71802-3", "http://loinc.org", default, default),
@@ -125,7 +125,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("160734000", "http://snomed.info/sct", default, default),
@@ -135,7 +135,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.8.000", "Measurement Period", null);
 
@@ -143,7 +143,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -152,7 +152,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Has Criteria Indicating Frailty")]
-	public  bool? Has_Criteria_Indicating_Frailty(CqlContext context)
+	public bool? Has_Criteria_Indicating_Frailty(CqlContext context)
 	{
 		CqlValueSet a_ = this.Frailty_Device(context);
 		IEnumerable<DeviceRequest> b_ = context.Operators.RetrieveByValueSet<DeviceRequest>(a_, default);
@@ -248,7 +248,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Outpatient Encounters with Advanced Illness")]
-	public  IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness(CqlContext context)
+	public IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness(CqlContext context)
 	{
 		CqlValueSet a_ = this.Outpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -297,7 +297,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Has Two Outpatient Encounters with Advanced Illness on Different Dates of Service")]
-	public  bool? Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service(CqlContext context)
+	public bool? Has_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
 		IEnumerable<ValueTuple<Encounter, Encounter>> c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
@@ -332,7 +332,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Has Inpatient Encounter with Advanced Illness")]
-	public  bool? Has_Inpatient_Encounter_with_Advanced_Illness(CqlContext context)
+	public bool? Has_Inpatient_Encounter_with_Advanced_Illness(CqlContext context)
 	{
 		CqlValueSet a_ = this.Acute_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -373,7 +373,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Has Dementia Medications in Year Before or During Measurement Period")]
-	public  bool? Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(CqlContext context)
+	public bool? Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Dementia_Medications(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -412,7 +412,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Is Age 66 or Older with Advanced Illness and Frailty")]
-	public  bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(CqlContext context)
+	public bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -436,7 +436,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Is Age 66 to 80 with Advanced Illness and Frailty or Is Age 81 or Older with Frailty")]
-	public  bool? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(CqlContext context)
+	public bool? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -470,7 +470,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000(
 	}
 
     [CqlDeclaration("Is Age 66 or Older Living Long Term in a Nursing Home")]
-	public  bool? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(CqlContext context)
+	public bool? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;

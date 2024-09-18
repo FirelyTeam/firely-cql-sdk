@@ -42,84 +42,84 @@ public partial class AHAOverall_2_6_000(
 
     [CqlDeclaration("Care Services in Long Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public  CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
+	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Ejection Fraction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134")]
-	public  CqlValueSet Ejection_Fraction(CqlContext context) => 
+	public CqlValueSet Ejection_Fraction(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134", default);
 
     [CqlDeclaration("Heart Failure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376")]
-	public  CqlValueSet Heart_Failure(CqlContext context) => 
+	public CqlValueSet Heart_Failure(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", default);
 
     [CqlDeclaration("Heart Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33")]
-	public  CqlValueSet Heart_Transplant(CqlContext context) => 
+	public CqlValueSet Heart_Transplant(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33", default);
 
     [CqlDeclaration("Heart Transplant Complications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56")]
-	public  CqlValueSet Heart_Transplant_Complications(CqlContext context) => 
+	public CqlValueSet Heart_Transplant_Complications(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public  CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+	public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Left Ventricular Assist Device Complications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58")]
-	public  CqlValueSet Left_Ventricular_Assist_Device_Complications(CqlContext context) => 
+	public CqlValueSet Left_Ventricular_Assist_Device_Complications(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58", default);
 
     [CqlDeclaration("Left Ventricular Assist Device Placement")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61")]
-	public  CqlValueSet Left_Ventricular_Assist_Device_Placement(CqlContext context) => 
+	public CqlValueSet Left_Ventricular_Assist_Device_Placement(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61", default);
 
     [CqlDeclaration("Moderate or Severe")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092")]
-	public  CqlValueSet Moderate_or_Severe(CqlContext context) => 
+	public CqlValueSet Moderate_or_Severe(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092", default);
 
     [CqlDeclaration("Moderate or Severe LVSD")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090")]
-	public  CqlValueSet Moderate_or_Severe_LVSD(CqlContext context) => 
+	public CqlValueSet Moderate_or_Severe_LVSD(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public  CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
+	public CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public  CqlValueSet Office_Visit(CqlContext context) => 
+	public CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public  CqlValueSet Outpatient_Consultation(CqlContext context) => 
+	public CqlValueSet Outpatient_Consultation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Patient Provider Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012")]
-	public  CqlValueSet Patient_Provider_Interaction(CqlContext context) => 
+	public CqlValueSet Patient_Provider_Interaction(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", default);
 
     [CqlDeclaration("Left ventricular systolic dysfunction (disorder)")]
-	public  CqlCode Left_ventricular_systolic_dysfunction__disorder_(CqlContext context) => 
+	public CqlCode Left_ventricular_systolic_dysfunction__disorder_(CqlContext context) => 
 		new CqlCode("134401001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("allergy-entered-in-error")]
-	public  CqlCode allergy_entered_in_error(CqlContext context) => 
+	public CqlCode allergy_entered_in_error(CqlContext context) => 
 		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("134401001", "http://snomed.info/sct", default, default),
@@ -129,7 +129,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
-	public  CqlCode[] AllergyIntoleranceVerificationStatusCodes(CqlContext context)
+	public CqlCode[] AllergyIntoleranceVerificationStatusCodes(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default),
@@ -139,7 +139,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -150,7 +150,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -159,7 +159,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("isConfirmedActiveDiagnosis")]
-	public  bool? isConfirmedActiveDiagnosis(CqlContext context, Condition Condition)
+	public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition Condition)
 	{
 		Condition[] a_ = [
 			Condition,
@@ -199,7 +199,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("isFinished")]
-	public  bool? isFinished(CqlContext context, Encounter Visit)
+	public bool? isFinished(CqlContext context, Encounter Visit)
 	{
 		Code<Encounter.EncounterStatus> a_ = Visit?.StatusElement;
 		Encounter.EncounterStatus? b_ = a_?.Value;
@@ -210,7 +210,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Heart Failure Outpatient Encounter")]
-	public  IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -266,7 +266,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Moderate or Severe LVSD Findings")]
-	public  IEnumerable<object> Moderate_or_Severe_LVSD_Findings(CqlContext context)
+	public IEnumerable<object> Moderate_or_Severe_LVSD_Findings(CqlContext context)
 	{
 		CqlValueSet a_ = this.Ejection_Fraction(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -313,7 +313,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD")]
-	public  IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(CqlContext context)
+	public IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Heart_Failure_Outpatient_Encounter(context);
 		IEnumerable<Encounter> b_(Encounter HFOutpatientEncounter)
@@ -346,7 +346,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Has Heart Transplant Complications")]
-	public  bool? Has_Heart_Transplant_Complications(CqlContext context)
+	public bool? Has_Heart_Transplant_Complications(CqlContext context)
 	{
 		CqlValueSet a_ = this.Heart_Transplant_Complications(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -388,7 +388,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Has Left Ventricular Assist Device")]
-	public  bool? Has_Left_Ventricular_Assist_Device(CqlContext context)
+	public bool? Has_Left_Ventricular_Assist_Device(CqlContext context)
 	{
 		CqlValueSet a_ = this.Left_Ventricular_Assist_Device_Placement(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -432,7 +432,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Has Left Ventricular Assist Device Complications")]
-	public  bool? Has_Left_Ventricular_Assist_Device_Complications(CqlContext context)
+	public bool? Has_Left_Ventricular_Assist_Device_Complications(CqlContext context)
 	{
 		CqlValueSet a_ = this.Left_Ventricular_Assist_Device_Complications(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
@@ -474,7 +474,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Qualifying Outpatient Encounter During Measurement Period")]
-	public  IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -510,7 +510,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Has Two Qualifying Outpatient Encounters and Heart Failure Outpatient Encounter During the Measurement Period")]
-	public  bool? Has_Two_Qualifying_Outpatient_Encounters_and_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period(CqlContext context)
+	public bool? Has_Two_Qualifying_Outpatient_Encounters_and_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -554,7 +554,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("Has Heart Transplant")]
-	public  bool? Has_Heart_Transplant(CqlContext context)
+	public bool? Has_Heart_Transplant(CqlContext context)
 	{
 		CqlValueSet a_ = this.Heart_Transplant(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -598,7 +598,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("isOrderedDuringHeartFailureOutpatientEncounter")]
-	public  bool? isOrderedDuringHeartFailureOutpatientEncounter(CqlContext context, MedicationRequest Order)
+	public bool? isOrderedDuringHeartFailureOutpatientEncounter(CqlContext context, MedicationRequest Order)
 	{
 		IEnumerable<Encounter> a_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
 		bool? b_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
@@ -644,7 +644,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("overlapsHeartFailureOutpatientEncounter")]
-	public  bool? overlapsHeartFailureOutpatientEncounter(CqlContext context, Condition Diagnosis)
+	public bool? overlapsHeartFailureOutpatientEncounter(CqlContext context, Condition Diagnosis)
 	{
 		IEnumerable<Encounter> a_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
 		bool? b_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
@@ -665,7 +665,7 @@ public partial class AHAOverall_2_6_000(
 	}
 
     [CqlDeclaration("overlapsAfterHeartFailureOutpatientEncounter")]
-	public  bool? overlapsAfterHeartFailureOutpatientEncounter(CqlContext context, object Event)
+	public bool? overlapsAfterHeartFailureOutpatientEncounter(CqlContext context, object Event)
 	{
 		IEnumerable<Encounter> a_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
 		bool? b_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)

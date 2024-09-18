@@ -48,61 +48,61 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 
     [CqlDeclaration("Anticoagulant Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200")]
-	public  CqlValueSet Anticoagulant_Therapy(CqlContext context) => 
+	public CqlValueSet Anticoagulant_Therapy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200", default);
 
     [CqlDeclaration("Atrial Ablation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203")]
-	public  CqlValueSet Atrial_Ablation(CqlContext context) => 
+	public CqlValueSet Atrial_Ablation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203", default);
 
     [CqlDeclaration("Atrial Fibrillation or Flutter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202")]
-	public  CqlValueSet Atrial_Fibrillation_or_Flutter(CqlContext context) => 
+	public CqlValueSet Atrial_Fibrillation_or_Flutter(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202", default);
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
-	public  CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) => 
+	public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", default);
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
-	public  CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) => 
+	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
-	public  CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) => 
+	public CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
     [CqlDeclaration("History of Atrial Ablation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76")]
-	public  CqlValueSet History_of_Atrial_Ablation(CqlContext context) => 
+	public CqlValueSet History_of_Atrial_Ablation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76", default);
 
     [CqlDeclaration("Left Against Medical Advice")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308")]
-	public  CqlValueSet Left_Against_Medical_Advice(CqlContext context) => 
+	public CqlValueSet Left_Against_Medical_Advice(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", default);
 
     [CqlDeclaration("Medical Reason For Not Providing Treatment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473")]
-	public  CqlValueSet Medical_Reason_For_Not_Providing_Treatment(CqlContext context) => 
+	public CqlValueSet Medical_Reason_For_Not_Providing_Treatment(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", default);
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
-	public  CqlValueSet Patient_Expired(CqlContext context) => 
+	public CqlValueSet Patient_Expired(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
 
     [CqlDeclaration("Patient Refusal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93")]
-	public  CqlValueSet Patient_Refusal(CqlContext context) => 
+	public CqlValueSet Patient_Refusal(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", default);
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -113,7 +113,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -122,7 +122,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = tjcOverall_8_11_000.Encounter_with_Principal_Diagnosis_and_Age(context);
 
@@ -130,7 +130,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Encounter with a History of Atrial Ablation")]
-	public  IEnumerable<Encounter> Encounter_with_a_History_of_Atrial_Ablation(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_a_History_of_Atrial_Ablation(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = tjcOverall_8_11_000.Ischemic_Stroke_Encounter(context);
 		bool? b_(Encounter IschemicStrokeEncounter)
@@ -287,7 +287,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Encounter with Prior or Present Diagnosis of Atrial Fibrillation or Flutter")]
-	public  IEnumerable<Encounter> Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = tjcOverall_8_11_000.Ischemic_Stroke_Encounter(context);
 		IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
@@ -348,7 +348,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_a_History_of_Atrial_Ablation(context);
 		IEnumerable<Encounter> b_ = this.Encounter_with_Prior_or_Present_Diagnosis_of_Atrial_Fibrillation_or_Flutter(context);
@@ -358,7 +358,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Encounter with Comfort Measures during Hospitalization for Patients with Documented Atrial Fibrillation or Flutter")]
-	public  IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization_for_Patients_with_Documented_Atrial_Fibrillation_or_Flutter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		IEnumerable<Encounter> b_(Encounter Encounter)
@@ -390,7 +390,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public  IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
+	public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		bool? b_(Encounter Encounter)
@@ -436,7 +436,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		IEnumerable<Encounter> b_(Encounter Encounter)
@@ -498,7 +498,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Documented Reason for Not Giving Anticoagulant at Discharge")]
-	public  IEnumerable<MedicationRequest> Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge(CqlContext context)
+	public IEnumerable<MedicationRequest> Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge(CqlContext context)
 	{
 		CqlValueSet a_ = this.Anticoagulant_Therapy(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
@@ -549,7 +549,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
-	public  IEnumerable<Encounter> Denominator_Exceptions(CqlContext context)
+	public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		IEnumerable<Encounter> b_(Encounter Encounter)
@@ -578,7 +578,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -586,7 +586,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -594,7 +594,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -602,7 +602,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 

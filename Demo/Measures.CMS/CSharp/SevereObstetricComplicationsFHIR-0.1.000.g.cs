@@ -48,239 +48,239 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 
     [CqlDeclaration("20 to 42 Plus Weeks Gestation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67")]
-	public  CqlValueSet _20_to_42_Plus_Weeks_Gestation(CqlContext context) => 
+	public CqlValueSet _20_to_42_Plus_Weeks_Gestation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", default);
 
     [CqlDeclaration("Acute or Persistent Asthma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271")]
-	public  CqlValueSet Acute_or_Persistent_Asthma(CqlContext context) => 
+	public CqlValueSet Acute_or_Persistent_Asthma(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271", default);
 
     [CqlDeclaration("Anemia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323")]
-	public  CqlValueSet Anemia(CqlContext context) => 
+	public CqlValueSet Anemia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323", default);
 
     [CqlDeclaration("Autoimmune Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311")]
-	public  CqlValueSet Autoimmune_Disease(CqlContext context) => 
+	public CqlValueSet Autoimmune_Disease(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311", default);
 
     [CqlDeclaration("Bariatric Surgery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317")]
-	public  CqlValueSet Bariatric_Surgery(CqlContext context) => 
+	public CqlValueSet Bariatric_Surgery(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317", default);
 
     [CqlDeclaration("Bleeding Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287")]
-	public  CqlValueSet Bleeding_Disorder(CqlContext context) => 
+	public CqlValueSet Bleeding_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287", default);
 
     [CqlDeclaration("Blood Transfusion")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213")]
-	public  CqlValueSet Blood_Transfusion(CqlContext context) => 
+	public CqlValueSet Blood_Transfusion(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213", default);
 
     [CqlDeclaration("Cardiac Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341")]
-	public  CqlValueSet Cardiac_Disease(CqlContext context) => 
+	public CqlValueSet Cardiac_Disease(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341", default);
 
     [CqlDeclaration("COVID 19 Confirmed")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373")]
-	public  CqlValueSet COVID_19_Confirmed(CqlContext context) => 
+	public CqlValueSet COVID_19_Confirmed(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.373", default);
 
     [CqlDeclaration("Delivery Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
-	public  CqlValueSet Delivery_Procedures(CqlContext context) => 
+	public CqlValueSet Delivery_Procedures(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
 
     [CqlDeclaration("Economic Housing Instability")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292")]
-	public  CqlValueSet Economic_Housing_Instability(CqlContext context) => 
+	public CqlValueSet Economic_Housing_Instability(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292", default);
 
     [CqlDeclaration("ED Visit and OB Triage")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369")]
-	public  CqlValueSet ED_Visit_and_OB_Triage(CqlContext context) => 
+	public CqlValueSet ED_Visit_and_OB_Triage(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public  CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+	public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Gastrointestinal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338")]
-	public  CqlValueSet Gastrointestinal_Disease(CqlContext context) => 
+	public CqlValueSet Gastrointestinal_Disease(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338", default);
 
     [CqlDeclaration("Gestational Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269")]
-	public  CqlValueSet Gestational_Diabetes(CqlContext context) => 
+	public CqlValueSet Gestational_Diabetes(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269", default);
 
     [CqlDeclaration("Hematocrit lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114")]
-	public  CqlValueSet Hematocrit_lab_test(CqlContext context) => 
+	public CqlValueSet Hematocrit_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", default);
 
     [CqlDeclaration("HIV in Pregnancy Childbirth and Puerperium")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272")]
-	public  CqlValueSet HIV_in_Pregnancy_Childbirth_and_Puerperium(CqlContext context) => 
+	public CqlValueSet HIV_in_Pregnancy_Childbirth_and_Puerperium(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272", default);
 
     [CqlDeclaration("Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332")]
-	public  CqlValueSet Hypertension(CqlContext context) => 
+	public CqlValueSet Hypertension(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332", default);
 
     [CqlDeclaration("Long Term Anticoagulant Use")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366")]
-	public  CqlValueSet Long_Term_Anticoagulant_Use(CqlContext context) => 
+	public CqlValueSet Long_Term_Anticoagulant_Use(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366", default);
 
     [CqlDeclaration("Mental Health Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314")]
-	public  CqlValueSet Mental_Health_Disorder(CqlContext context) => 
+	public CqlValueSet Mental_Health_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314", default);
 
     [CqlDeclaration("Mild or Moderate Preeclampsia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329")]
-	public  CqlValueSet Mild_or_Moderate_Preeclampsia(CqlContext context) => 
+	public CqlValueSet Mild_or_Moderate_Preeclampsia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329", default);
 
     [CqlDeclaration("Morbid or Severe Obesity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290")]
-	public  CqlValueSet Morbid_or_Severe_Obesity(CqlContext context) => 
+	public CqlValueSet Morbid_or_Severe_Obesity(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290", default);
 
     [CqlDeclaration("Multiple Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284")]
-	public  CqlValueSet Multiple_Pregnancy(CqlContext context) => 
+	public CqlValueSet Multiple_Pregnancy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284", default);
 
     [CqlDeclaration("Neuromuscular Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308")]
-	public  CqlValueSet Neuromuscular_Disease(CqlContext context) => 
+	public CqlValueSet Neuromuscular_Disease(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public  CqlValueSet Observation_Services(CqlContext context) => 
+	public CqlValueSet Observation_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
-	public  CqlValueSet Patient_Expired(CqlContext context) => 
+	public CqlValueSet Patient_Expired(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
 
     [CqlDeclaration("Placenta Previa")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.35")]
-	public  CqlValueSet Placenta_Previa(CqlContext context) => 
+	public CqlValueSet Placenta_Previa(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.35", default);
 
     [CqlDeclaration("Placental Abruption")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305")]
-	public  CqlValueSet Placental_Abruption(CqlContext context) => 
+	public CqlValueSet Placental_Abruption(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305", default);
 
     [CqlDeclaration("Placental Accreta Spectrum")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302")]
-	public  CqlValueSet Placental_Accreta_Spectrum(CqlContext context) => 
+	public CqlValueSet Placental_Accreta_Spectrum(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", default);
 
     [CqlDeclaration("Preexisting Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275")]
-	public  CqlValueSet Preexisting_Diabetes(CqlContext context) => 
+	public CqlValueSet Preexisting_Diabetes(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275", default);
 
     [CqlDeclaration("Present on Admission is No or Unable To Determine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370")]
-	public  CqlValueSet Present_on_Admission_is_No_or_Unable_To_Determine(CqlContext context) => 
+	public CqlValueSet Present_on_Admission_is_No_or_Unable_To_Determine(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370", default);
 
     [CqlDeclaration("Present On Admission is Yes or Exempt")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63")]
-	public  CqlValueSet Present_On_Admission_is_Yes_or_Exempt(CqlContext context) => 
+	public CqlValueSet Present_On_Admission_is_Yes_or_Exempt(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63", default);
 
     [CqlDeclaration("Preterm Birth")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299")]
-	public  CqlValueSet Preterm_Birth(CqlContext context) => 
+	public CqlValueSet Preterm_Birth(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299", default);
 
     [CqlDeclaration("Previous Cesarean")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278")]
-	public  CqlValueSet Previous_Cesarean(CqlContext context) => 
+	public CqlValueSet Previous_Cesarean(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278", default);
 
     [CqlDeclaration("Pulmonary Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281")]
-	public  CqlValueSet Pulmonary_Hypertension(CqlContext context) => 
+	public CqlValueSet Pulmonary_Hypertension(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281", default);
 
     [CqlDeclaration("Renal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335")]
-	public  CqlValueSet Renal_Disease(CqlContext context) => 
+	public CqlValueSet Renal_Disease(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", default);
 
     [CqlDeclaration("Respiratory Conditions Related to COVID 19")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376")]
-	public  CqlValueSet Respiratory_Conditions_Related_to_COVID_19(CqlContext context) => 
+	public CqlValueSet Respiratory_Conditions_Related_to_COVID_19(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.376", default);
 
     [CqlDeclaration("Respiratory Support Procedures Related to COVID 19")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379")]
-	public  CqlValueSet Respiratory_Support_Procedures_Related_to_COVID_19(CqlContext context) => 
+	public CqlValueSet Respiratory_Support_Procedures_Related_to_COVID_19(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.379", default);
 
     [CqlDeclaration("Severe Maternal Morbidity Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255")]
-	public  CqlValueSet Severe_Maternal_Morbidity_Diagnoses(CqlContext context) => 
+	public CqlValueSet Severe_Maternal_Morbidity_Diagnoses(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255", default);
 
     [CqlDeclaration("Severe Maternal Morbidity Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256")]
-	public  CqlValueSet Severe_Maternal_Morbidity_Procedures(CqlContext context) => 
+	public CqlValueSet Severe_Maternal_Morbidity_Procedures(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256", default);
 
     [CqlDeclaration("Severe Preeclampsia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327")]
-	public  CqlValueSet Severe_Preeclampsia(CqlContext context) => 
+	public CqlValueSet Severe_Preeclampsia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327", default);
 
     [CqlDeclaration("Substance Abuse")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320")]
-	public  CqlValueSet Substance_Abuse(CqlContext context) => 
+	public CqlValueSet Substance_Abuse(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320", default);
 
     [CqlDeclaration("Thyrotoxicosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296")]
-	public  CqlValueSet Thyrotoxicosis(CqlContext context) => 
+	public CqlValueSet Thyrotoxicosis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296", default);
 
     [CqlDeclaration("Venous Thromboembolism in Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363")]
-	public  CqlValueSet Venous_Thromboembolism_in_Pregnancy(CqlContext context) => 
+	public CqlValueSet Venous_Thromboembolism_in_Pregnancy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363", default);
 
     [CqlDeclaration("White blood cells count lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129")]
-	public  CqlValueSet White_blood_cells_count_lab_test(CqlContext context) => 
+	public CqlValueSet White_blood_cells_count_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", default);
 
     [CqlDeclaration("Heart rate")]
-	public  CqlCode Heart_rate(CqlContext context) => 
+	public CqlCode Heart_rate(CqlContext context) => 
 		new CqlCode("8867-4", "http://loinc.org", default, default);
 
     [CqlDeclaration("Systolic blood pressure")]
-	public  CqlCode Systolic_blood_pressure(CqlContext context) => 
+	public CqlCode Systolic_blood_pressure(CqlContext context) => 
 		new CqlCode("8480-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("LOINC")]
-	public  CqlCode[] LOINC(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("8867-4", "http://loinc.org", default, default),
@@ -291,7 +291,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = []
 ;
@@ -300,7 +300,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -311,7 +311,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -320,7 +320,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 
@@ -328,7 +328,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -336,7 +336,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -344,7 +344,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -352,7 +352,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -360,7 +360,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters with Calculated Gestational Age Greater than or Equal to 20 Weeks")]
-	public  IEnumerable<Encounter> Delivery_Encounters_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_20_Weeks(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_20_Weeks(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 		bool? b_(Encounter DeliveryEncounter)
@@ -376,7 +376,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters with Estimated Gestational Age Assessment Greater than or Equal to 20 Weeks")]
-	public  IEnumerable<Encounter> Delivery_Encounters_with_Estimated_Gestational_Age_Assessment_Greater_than_or_Equal_to_20_Weeks(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_with_Estimated_Gestational_Age_Assessment_Greater_than_or_Equal_to_20_Weeks(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 		bool? b_(Encounter DeliveryEncounter)
@@ -395,7 +395,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters with Gestational Age Greater than or Equal to 20 Weeks Based on Coding")]
-	public  IEnumerable<Encounter> Delivery_Encounters_with_Gestational_Age_Greater_than_or_Equal_to_20_Weeks_Based_on_Coding(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_with_Gestational_Age_Greater_than_or_Equal_to_20_Weeks_Based_on_Coding(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 		bool? b_(Encounter DeliveryEncounter)
@@ -425,7 +425,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters At Greater than or Equal to 20 Weeks Gestation")]
-	public  IEnumerable<Encounter> Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Calculated_Gestational_Age_Greater_than_or_Equal_to_20_Weeks(context);
 		IEnumerable<Encounter> b_ = this.Delivery_Encounters_with_Estimated_Gestational_Age_Assessment_Greater_than_or_Equal_to_20_Weeks(context);
@@ -437,7 +437,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters with Severe Obstetric Complications Diagnosis or Procedure Excluding Blood Transfusion")]
-	public  IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications_Diagnosis_or_Procedure_Excluding_Blood_Transfusion(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications_Diagnosis_or_Procedure_Excluding_Blood_Transfusion(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -510,7 +510,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters with Expiration")]
-	public  IEnumerable<Encounter> Delivery_Encounters_with_Expiration(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_with_Expiration(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -529,7 +529,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters with Blood Transfusion")]
-	public  IEnumerable<Encounter> Delivery_Encounters_with_Blood_Transfusion(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_with_Blood_Transfusion(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		IEnumerable<Encounter> b_(Encounter TwentyWeeksPlusEncounter)
@@ -565,7 +565,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters with Severe Obstetric Complications")]
-	public  IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Diagnosis_or_Procedure_Excluding_Blood_Transfusion(context);
 		IEnumerable<Encounter> b_ = this.Delivery_Encounters_with_Expiration(context);
@@ -577,7 +577,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications(context);
 
@@ -585,7 +585,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters with COVID and Respiratory Condition or Procedure")]
-	public  IEnumerable<Encounter> Delivery_Encounters_with_COVID_and_Respiratory_Condition_or_Procedure(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_with_COVID_and_Respiratory_Condition_or_Procedure(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -644,7 +644,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator Exclusion")]
-	public  IEnumerable<Encounter> Denominator_Exclusion(CqlContext context)
+	public IEnumerable<Encounter> Denominator_Exclusion(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_COVID_and_Respiratory_Condition_or_Procedure(context);
 
@@ -652,7 +652,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Stratification Encounter")]
-	public  IEnumerable<Encounter> Stratification_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Stratification_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Numerator(context);
 		IEnumerable<Encounter> b_ = this.Denominator_Exclusion(context);
@@ -662,7 +662,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Delivery Encounters with Severe Obstetric Complications Excluding Blood Transfusions")]
-	public  IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Diagnosis_or_Procedure_Excluding_Blood_Transfusion(context);
 		IEnumerable<Encounter> b_ = this.Delivery_Encounters_with_Expiration(context);
@@ -672,7 +672,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Stratum 1")]
-	public  IEnumerable<Encounter> Stratum_1(CqlContext context)
+	public IEnumerable<Encounter> Stratum_1(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Stratification_Encounter(context);
 		IEnumerable<Encounter> b_ = this.Delivery_Encounters_with_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(context);
@@ -682,7 +682,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public  IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context)
+	public IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context)
 	{
 		IEnumerable<(string EncounterID, int? CalculatedCGA)?> a_ = pcMaternal_5_16_000.Variable_Calculated_Gestational_Age(context);
 
@@ -690,7 +690,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 
@@ -698,7 +698,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("pOAIsYesOrExempt")]
-	public  IEnumerable<CqlConcept> pOAIsYesOrExempt(CqlContext context, Encounter TheEncounter)
+	public IEnumerable<CqlConcept> pOAIsYesOrExempt(CqlContext context, Encounter TheEncounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = TheEncounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent EncounterDiagnoses)
@@ -745,7 +745,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Anemia")]
-	public  IEnumerable<Encounter> Risk_Variable_Anemia(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Anemia(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -762,7 +762,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Asthma")]
-	public  IEnumerable<Encounter> Risk_Variable_Asthma(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Asthma(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -779,7 +779,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Autoimmune Disease")]
-	public  IEnumerable<Encounter> Risk_Variable_Autoimmune_Disease(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Autoimmune_Disease(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -796,7 +796,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Bariatric Surgery")]
-	public  IEnumerable<Encounter> Risk_Variable_Bariatric_Surgery(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Bariatric_Surgery(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -813,7 +813,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Bleeding Disorder")]
-	public  IEnumerable<Encounter> Risk_Variable_Bleeding_Disorder(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Bleeding_Disorder(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -830,7 +830,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Morbid Obesity")]
-	public  IEnumerable<Encounter> Risk_Variable_Morbid_Obesity(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Morbid_Obesity(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -847,7 +847,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Cardiac Disease")]
-	public  IEnumerable<Encounter> Risk_Variable_Cardiac_Disease(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Cardiac_Disease(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -864,7 +864,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Economic Housing Instability")]
-	public  IEnumerable<Encounter> Risk_Variable_Economic_Housing_Instability(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Economic_Housing_Instability(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -881,7 +881,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Gastrointestinal Disease")]
-	public  IEnumerable<Encounter> Risk_Variable_Gastrointestinal_Disease(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Gastrointestinal_Disease(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -898,7 +898,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Gestational Diabetes")]
-	public  IEnumerable<Encounter> Risk_Variable_Gestational_Diabetes(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Gestational_Diabetes(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -915,7 +915,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable HIV")]
-	public  IEnumerable<Encounter> Risk_Variable_HIV(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_HIV(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -932,7 +932,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Hypertension")]
-	public  IEnumerable<Encounter> Risk_Variable_Hypertension(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Hypertension(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -949,7 +949,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Long Term Anticoagulant Use")]
-	public  IEnumerable<Encounter> Risk_Variable_Long_Term_Anticoagulant_Use(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Long_Term_Anticoagulant_Use(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -966,7 +966,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Mental Health Disorder")]
-	public  IEnumerable<Encounter> Risk_Variable_Mental_Health_Disorder(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Mental_Health_Disorder(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -983,7 +983,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Multiple Pregnancy")]
-	public  IEnumerable<Encounter> Risk_Variable_Multiple_Pregnancy(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Multiple_Pregnancy(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1000,7 +1000,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Neuromuscular")]
-	public  IEnumerable<Encounter> Risk_Variable_Neuromuscular(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Neuromuscular(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1017,7 +1017,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Obstetrical VTE")]
-	public  IEnumerable<Encounter> Risk_Variable_Obstetrical_VTE(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Obstetrical_VTE(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1034,7 +1034,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Placenta Previa")]
-	public  IEnumerable<Encounter> Risk_Variable_Placenta_Previa(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Placenta_Previa(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1051,7 +1051,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Placental Abruption")]
-	public  IEnumerable<Encounter> Risk_Variable_Placental_Abruption(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Placental_Abruption(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1068,7 +1068,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Placental Accreta Spectrum")]
-	public  IEnumerable<Encounter> Risk_Variable_Placental_Accreta_Spectrum(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Placental_Accreta_Spectrum(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1085,7 +1085,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Preexisting Diabetes")]
-	public  IEnumerable<Encounter> Risk_Variable_Preexisting_Diabetes(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Preexisting_Diabetes(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1102,7 +1102,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Previous Cesarean")]
-	public  IEnumerable<Encounter> Risk_Variable_Previous_Cesarean(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Previous_Cesarean(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1119,7 +1119,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Pulmonary Hypertension")]
-	public  IEnumerable<Encounter> Risk_Variable_Pulmonary_Hypertension(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Pulmonary_Hypertension(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1136,7 +1136,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Renal Disease")]
-	public  IEnumerable<Encounter> Risk_Variable_Renal_Disease(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Renal_Disease(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1153,7 +1153,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Severe Preeclampsia")]
-	public  IEnumerable<Encounter> Risk_Variable_Severe_Preeclampsia(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Severe_Preeclampsia(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1170,7 +1170,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Substance Abuse")]
-	public  IEnumerable<Encounter> Risk_Variable_Substance_Abuse(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Substance_Abuse(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1187,7 +1187,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Thyrotoxicosis")]
-	public  IEnumerable<Encounter> Risk_Variable_Thyrotoxicosis(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Thyrotoxicosis(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1204,7 +1204,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Other Preeclampsia")]
-	public  IEnumerable<Encounter> Risk_Variable_Other_Preeclampsia(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Other_Preeclampsia(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		bool? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1221,7 +1221,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Preterm Birth")]
-	public  IEnumerable<Encounter> Risk_Variable_Preterm_Birth(CqlContext context)
+	public IEnumerable<Encounter> Risk_Variable_Preterm_Birth(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = pcMaternal_5_16_000.Delivery_Encounter_with_Age_Range(context);
 		bool? b_(Encounter DeliveryEncounter)
@@ -1260,7 +1260,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable First Hematocrit Lab Test")]
-	public  IEnumerable<(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Risk_Variable_First_Hematocrit_Lab_Test(CqlContext context)
+	public IEnumerable<(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Risk_Variable_First_Hematocrit_Lab_Test(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		(string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1367,7 +1367,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable First White Blood Cell Count Lab Test")]
-	public  IEnumerable<(string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test(CqlContext context)
+	public IEnumerable<(string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		(string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1474,7 +1474,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Heart Rate")]
-	public  IEnumerable<(string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?> Risk_Variable_Heart_Rate(CqlContext context)
+	public IEnumerable<(string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?> Risk_Variable_Heart_Rate(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		(string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1569,7 +1569,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Risk Variable Systolic Blood Pressure")]
-	public  IEnumerable<(string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?> Risk_Variable_Systolic_Blood_Pressure(CqlContext context)
+	public IEnumerable<(string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?> Risk_Variable_Systolic_Blood_Pressure(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_than_or_Equal_to_20_Weeks_Gestation(context);
 		(string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter)
@@ -1682,7 +1682,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("pOAIsNoOrUTD")]
-	public  IEnumerable<CqlConcept> pOAIsNoOrUTD(CqlContext context, Encounter TheEncounter)
+	public IEnumerable<CqlConcept> pOAIsNoOrUTD(CqlContext context, Encounter TheEncounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = TheEncounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent EncounterDiagnoses)

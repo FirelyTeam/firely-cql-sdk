@@ -44,81 +44,81 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 
     [CqlDeclaration("Behavioral/Neuropsych Assessment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1023")]
-	public  CqlValueSet Behavioral_Neuropsych_Assessment(CqlContext context) => 
+	public CqlValueSet Behavioral_Neuropsych_Assessment(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1023", default);
 
     [CqlDeclaration("Care Services in Long Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public  CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
+	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Cognitive Assessment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1332")]
-	public  CqlValueSet Cognitive_Assessment(CqlContext context) => 
+	public CqlValueSet Cognitive_Assessment(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1332", default);
 
     [CqlDeclaration("Dementia & Mental Degenerations")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1005")]
-	public  CqlValueSet Dementia_and_Mental_Degenerations(CqlContext context) => 
+	public CqlValueSet Dementia_and_Mental_Degenerations(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1005", default);
 
     [CqlDeclaration("Face-to-Face Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048")]
-	public  CqlValueSet Face_to_Face_Interaction(CqlContext context) => 
+	public CqlValueSet Face_to_Face_Interaction(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public  CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+	public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public  CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
+	public CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Occupational Therapy Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011")]
-	public  CqlValueSet Occupational_Therapy_Evaluation(CqlContext context) => 
+	public CqlValueSet Occupational_Therapy_Evaluation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public  CqlValueSet Office_Visit(CqlContext context) => 
+	public CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public  CqlValueSet Outpatient_Consultation(CqlContext context) => 
+	public CqlValueSet Outpatient_Consultation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
     [CqlDeclaration("Patient Provider Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012")]
-	public  CqlValueSet Patient_Provider_Interaction(CqlContext context) => 
+	public CqlValueSet Patient_Provider_Interaction(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", default);
 
     [CqlDeclaration("Patient Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008")]
-	public  CqlValueSet Patient_Reason(CqlContext context) => 
+	public CqlValueSet Patient_Reason(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", default);
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
-	public  CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) => 
+	public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
-	public  CqlValueSet Psych_Visit_Psychotherapy(CqlContext context) => 
+	public CqlValueSet Psych_Visit_Psychotherapy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
 
     [CqlDeclaration("Standardized Tools Score for Assessment of Cognition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1006")]
-	public  CqlValueSet Standardized_Tools_Score_for_Assessment_of_Cognition(CqlContext context) => 
+	public CqlValueSet Standardized_Tools_Score_for_Assessment_of_Cognition(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1006", default);
 
     [CqlDeclaration("ActCode")]
-	public  CqlCode[] ActCode(CqlContext context)
+	public CqlCode[] ActCode(CqlContext context)
 	{
 		CqlCode[] a_ = []
 ;
@@ -127,7 +127,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -138,7 +138,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -147,7 +147,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Encounter to Assess Cognition")]
-	public  IEnumerable<Encounter> Encounter_to_Assess_Cognition(CqlContext context)
+	public IEnumerable<Encounter> Encounter_to_Assess_Cognition(CqlContext context)
 	{
 		CqlValueSet a_ = this.Psych_Visit_Diagnostic_Evaluation(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -180,7 +180,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Dementia Encounter During Measurement Period")]
-	public  IEnumerable<Encounter> Dementia_Encounter_During_Measurement_Period(CqlContext context)
+	public IEnumerable<Encounter> Dementia_Encounter_During_Measurement_Period(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_to_Assess_Cognition(context);
 		IEnumerable<Encounter> b_(Encounter EncounterAssessCognition)
@@ -232,7 +232,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Qualifying Encounter During Measurement Period")]
-	public  IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_to_Assess_Cognition(context);
 		CqlValueSet b_ = this.Patient_Provider_Interaction(context);
@@ -258,7 +258,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Dementia_Encounter_During_Measurement_Period(context);
 		bool? b_ = context.Operators.Exists<Encounter>(a_);
@@ -271,7 +271,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  bool? Denominator(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -279,7 +279,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Assessment of Cognition Using Standardized Tools or Alternate Methods")]
-	public  IEnumerable<Observation> Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(CqlContext context)
+	public IEnumerable<Observation> Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(CqlContext context)
 	{
 		CqlValueSet a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -345,7 +345,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  bool? Numerator(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -354,7 +354,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient Reason for Not Performing Assessment of Cognition Using Standardized Tools or Alternate Methods")]
-	public  IEnumerable<Observation> Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(CqlContext context)
+	public IEnumerable<Observation> Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(CqlContext context)
 	{
 		CqlValueSet a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
@@ -417,7 +417,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
-	public  bool? Denominator_Exceptions(CqlContext context)
+	public bool? Denominator_Exceptions(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -426,7 +426,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -434,7 +434,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -442,7 +442,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 
@@ -450,7 +450,7 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 

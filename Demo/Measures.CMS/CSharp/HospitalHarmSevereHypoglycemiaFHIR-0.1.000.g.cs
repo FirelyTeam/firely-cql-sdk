@@ -46,36 +46,36 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 
     [CqlDeclaration("birth date")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4")]
-	public  CqlValueSet birth_date(CqlContext context) => 
+	public CqlValueSet birth_date(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public  CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+	public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Glucose Lab Test Mass Per Volume")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.34")]
-	public  CqlValueSet Glucose_Lab_Test_Mass_Per_Volume(CqlContext context) => 
+	public CqlValueSet Glucose_Lab_Test_Mass_Per_Volume(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.34", default);
 
     [CqlDeclaration("Hypoglycemics Severe Hypoglycemia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.393")]
-	public  CqlValueSet Hypoglycemics_Severe_Hypoglycemia(CqlContext context) => 
+	public CqlValueSet Hypoglycemics_Severe_Hypoglycemia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.393", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public  CqlValueSet Observation_Services(CqlContext context) => 
+	public CqlValueSet Observation_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -86,7 +86,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -95,7 +95,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Qualifying Encounter")]
-	public  IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -130,7 +130,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Hypoglycemic Medication Administration")]
-	public  IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration(CqlContext context)
+	public IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration(CqlContext context)
 	{
 		CqlValueSet a_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
 		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default);
@@ -156,7 +156,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Encounter with Hypoglycemic Medication Administration")]
-	public  IEnumerable<Encounter> Encounter_with_Hypoglycemic_Medication_Administration(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Hypoglycemic_Medication_Administration(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 		IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
@@ -186,7 +186,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Hypoglycemic_Medication_Administration(context);
 
@@ -194,7 +194,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
@@ -202,7 +202,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Glucose Test with Result Less Than 40")]
-	public  IEnumerable<Observation> Glucose_Test_with_Result_Less_Than_40(CqlContext context)
+	public IEnumerable<Observation> Glucose_Test_with_Result_Less_Than_40(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		IEnumerable<MedicationAdministration> b_ = this.Hypoglycemic_Medication_Administration(context);
@@ -471,7 +471,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Low Glucose Test Followed By Glucose Test Result Greater Than 80")]
-	public  IEnumerable<Observation> Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80(CqlContext context)
+	public IEnumerable<Observation> Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		IEnumerable<Observation> b_ = this.Glucose_Test_with_Result_Less_Than_40(context);
@@ -851,7 +851,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Severe Hypoglycemic Harm Event")]
-	public  IEnumerable<Observation> Severe_Hypoglycemic_Harm_Event(CqlContext context)
+	public IEnumerable<Observation> Severe_Hypoglycemic_Harm_Event(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Glucose_Test_with_Result_Less_Than_40(context);
 		bool? b_(Observation LowGlucoseTest)
@@ -889,7 +889,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Encounter with Severe Hypoglycemic Harm Event")]
-	public  IEnumerable<Encounter> Encounter_with_Severe_Hypoglycemic_Harm_Event(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Severe_Hypoglycemic_Harm_Event(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		IEnumerable<Observation> b_ = this.Severe_Hypoglycemic_Harm_Event(context);
@@ -970,7 +970,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Severe_Hypoglycemic_Harm_Event(context);
 
@@ -978,7 +978,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -986,7 +986,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -994,7 +994,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -1002,7 +1002,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 

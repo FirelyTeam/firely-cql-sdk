@@ -41,7 +41,7 @@ public partial class NCQAStatus_1_0_0(
 {
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -50,7 +50,7 @@ public partial class NCQAStatus_1_0_0(
 	}
 
     [CqlDeclaration("Active Allergy")]
-	public  IEnumerable<AllergyIntolerance> Active_Allergy(CqlContext context, IEnumerable<AllergyIntolerance> Allergy)
+	public IEnumerable<AllergyIntolerance> Active_Allergy(CqlContext context, IEnumerable<AllergyIntolerance> Allergy)
 	{
 		bool? a_(AllergyIntolerance A)
 		{
@@ -68,7 +68,7 @@ public partial class NCQAStatus_1_0_0(
 	}
 
     [CqlDeclaration("Active Condition")]
-	public  IEnumerable<Condition> Active_Condition(CqlContext context, IEnumerable<Condition> Condition)
+	public IEnumerable<Condition> Active_Condition(CqlContext context, IEnumerable<Condition> Condition)
 	{
 		bool? a_(Condition C)
 		{
@@ -86,7 +86,7 @@ public partial class NCQAStatus_1_0_0(
 	}
 
     [CqlDeclaration("Finished Encounter")]
-	public  IEnumerable<Encounter> Finished_Encounter(CqlContext context, IEnumerable<Encounter> Enc)
+	public IEnumerable<Encounter> Finished_Encounter(CqlContext context, IEnumerable<Encounter> Enc)
 	{
 		bool? a_(Encounter E)
 		{
@@ -102,7 +102,7 @@ public partial class NCQAStatus_1_0_0(
 	}
 
     [CqlDeclaration("Completed Immunization")]
-	public  IEnumerable<Immunization> Completed_Immunization(CqlContext context, IEnumerable<Immunization> Immunization)
+	public IEnumerable<Immunization> Completed_Immunization(CqlContext context, IEnumerable<Immunization> Immunization)
 	{
 		bool? a_(Immunization I)
 		{
@@ -118,7 +118,7 @@ public partial class NCQAStatus_1_0_0(
 	}
 
     [CqlDeclaration("Dispensed Medication")]
-	public  IEnumerable<MedicationDispense> Dispensed_Medication(CqlContext context, IEnumerable<MedicationDispense> Med)
+	public IEnumerable<MedicationDispense> Dispensed_Medication(CqlContext context, IEnumerable<MedicationDispense> Med)
 	{
 		bool? a_(MedicationDispense M)
 		{
@@ -134,7 +134,7 @@ public partial class NCQAStatus_1_0_0(
 	}
 
     [CqlDeclaration("Active Medication")]
-	public  IEnumerable<MedicationRequest> Active_Medication(CqlContext context, IEnumerable<MedicationRequest> Med)
+	public IEnumerable<MedicationRequest> Active_Medication(CqlContext context, IEnumerable<MedicationRequest> Med)
 	{
 		bool? a_(MedicationRequest M)
 		{
@@ -153,7 +153,7 @@ public partial class NCQAStatus_1_0_0(
 	}
 
     [CqlDeclaration("Completed Procedure")]
-	public  IEnumerable<Procedure> Completed_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
+	public IEnumerable<Procedure> Completed_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{
@@ -169,7 +169,7 @@ public partial class NCQAStatus_1_0_0(
 	}
 
     [CqlDeclaration("Completed or Ongoing Procedure")]
-	public  IEnumerable<Procedure> Completed_or_Ongoing_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
+	public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{

@@ -39,7 +39,7 @@ public partial class NCQAFHIRBase_1_0_0(
 {
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -48,7 +48,7 @@ public partial class NCQAFHIRBase_1_0_0(
 	}
 
     [CqlDeclaration("Normalize Onset")]
-	public  CqlInterval<CqlDateTime> Normalize_Onset(CqlContext context, object onset)
+	public CqlInterval<CqlDateTime> Normalize_Onset(CqlContext context, object onset)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -261,7 +261,7 @@ public partial class NCQAFHIRBase_1_0_0(
 	}
 
     [CqlDeclaration("Normalize Abatement")]
-	public  CqlInterval<CqlDateTime> Normalize_Abatement(CqlContext context, object abatement)
+	public CqlInterval<CqlDateTime> Normalize_Abatement(CqlContext context, object abatement)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -474,7 +474,7 @@ public partial class NCQAFHIRBase_1_0_0(
 	}
 
     [CqlDeclaration("Prevalence Period")]
-	public  CqlInterval<CqlDateTime> Prevalence_Period(CqlContext context, Condition condition)
+	public CqlInterval<CqlDateTime> Prevalence_Period(CqlContext context, Condition condition)
 	{
 		DataType a_ = condition?.Onset;
 		CqlInterval<CqlDateTime> b_ = this.Normalize_Onset(context, a_);
@@ -488,7 +488,7 @@ public partial class NCQAFHIRBase_1_0_0(
 	}
 
     [CqlDeclaration("Normalize Interval")]
-	public  CqlInterval<CqlDateTime> Normalize_Interval(CqlContext context, object choice)
+	public CqlInterval<CqlDateTime> Normalize_Interval(CqlContext context, object choice)
 	{
 		CqlInterval<CqlDateTime> a_()
 		{
@@ -650,7 +650,7 @@ public partial class NCQAFHIRBase_1_0_0(
 	}
 
     [CqlDeclaration("GetId")]
-	public  string GetId(CqlContext context, string uri)
+	public string GetId(CqlContext context, string uri)
 	{
 		string a_()
 		{
@@ -678,11 +678,11 @@ public partial class NCQAFHIRBase_1_0_0(
 	}
 
     [CqlDeclaration("VS Cast Function")]
-	public  IEnumerable<CqlCode> VS_Cast_Function(CqlContext context, IEnumerable<CqlCode> VSet) => 
+	public IEnumerable<CqlCode> VS_Cast_Function(CqlContext context, IEnumerable<CqlCode> VSet) => 
 		VSet;
 
     [CqlDeclaration("First Dates per 31 Day Periods")]
-	public  (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? First_Dates_per_31_Day_Periods(CqlContext context, IEnumerable<CqlDate> DateList)
+	public (CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? First_Dates_per_31_Day_Periods(CqlContext context, IEnumerable<CqlDate> DateList)
 	{
 		CqlDate a_(CqlDate d) => 
 			d;

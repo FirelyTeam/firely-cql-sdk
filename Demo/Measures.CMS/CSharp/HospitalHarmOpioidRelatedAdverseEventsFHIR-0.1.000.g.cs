@@ -46,45 +46,45 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public  CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+	public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public  CqlValueSet Observation_Services(CqlContext context) => 
+	public CqlValueSet Observation_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Operating Room Suite")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.141")]
-	public  CqlValueSet Operating_Room_Suite(CqlContext context) => 
+	public CqlValueSet Operating_Room_Suite(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.141", default);
 
     [CqlDeclaration("Opioid Antagonist")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.119")]
-	public  CqlValueSet Opioid_Antagonist(CqlContext context) => 
+	public CqlValueSet Opioid_Antagonist(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.119", default);
 
     [CqlDeclaration("Opioids, All")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.226")]
-	public  CqlValueSet Opioids__All(CqlContext context) => 
+	public CqlValueSet Opioids__All(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.226", default);
 
     [CqlDeclaration("Routes of Administration for Opioid Antagonists")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.187")]
-	public  CqlValueSet Routes_of_Administration_for_Opioid_Antagonists(CqlContext context) => 
+	public CqlValueSet Routes_of_Administration_for_Opioid_Antagonists(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.187", default);
 
     [CqlDeclaration("Dead")]
-	public  CqlCode Dead(CqlContext context) => 
+	public CqlCode Dead(CqlContext context) => 
 		new CqlCode("419099009", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("SNOMEDCT")]
-	public  CqlCode[] SNOMEDCT(CqlContext context)
+	public CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("419099009", "http://snomed.info/sct", default, default),
@@ -94,7 +94,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("HSLOC")]
-	public  CqlCode[] HSLOC(CqlContext context)
+	public CqlCode[] HSLOC(CqlContext context)
 	{
 		CqlCode[] a_ = []
 ;
@@ -103,7 +103,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -114,7 +114,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -123,7 +123,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Qualifying Encounter")]
-	public  IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -158,7 +158,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Opioid Administration")]
-	public  IEnumerable<MedicationAdministration> Opioid_Administration(CqlContext context)
+	public IEnumerable<MedicationAdministration> Opioid_Administration(CqlContext context)
 	{
 		CqlValueSet a_ = this.Opioids__All(context);
 		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default);
@@ -184,7 +184,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Encounter with Opioid Administration Outside of Operating Room")]
-	public  IEnumerable<Encounter> Encounter_with_Opioid_Administration_Outside_of_Operating_Room(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Opioid_Administration_Outside_of_Operating_Room(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 		IEnumerable<Encounter> b_(Encounter InpatientEncounter)
@@ -244,7 +244,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Opioid_Administration_Outside_of_Operating_Room(context);
 
@@ -252,7 +252,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
@@ -260,7 +260,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Opioid Antagonist Administration")]
-	public  IEnumerable<MedicationAdministration> Opioid_Antagonist_Administration(CqlContext context)
+	public IEnumerable<MedicationAdministration> Opioid_Antagonist_Administration(CqlContext context)
 	{
 		CqlValueSet a_ = this.Opioid_Antagonist(context);
 		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default);
@@ -286,7 +286,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Encounter with Non Enteral Opioid Antagonist Administration Outside of Operating Room and within 12 Hrs After Opioid")]
-	public  IEnumerable<Encounter> Encounter_with_Non_Enteral_Opioid_Antagonist_Administration_Outside_of_Operating_Room_and_within_12_Hrs_After_Opioid(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Non_Enteral_Opioid_Antagonist_Administration_Outside_of_Operating_Room_and_within_12_Hrs_After_Opioid(CqlContext context)
 	{
 		IEnumerable<MedicationAdministration> a_ = this.Opioid_Antagonist_Administration(context);
 		IEnumerable<MedicationAdministration> b_ = this.Opioid_Administration(context);
@@ -380,7 +380,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Non_Enteral_Opioid_Antagonist_Administration_Outside_of_Operating_Room_and_within_12_Hrs_After_Opioid(context);
 
@@ -388,7 +388,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -396,7 +396,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -404,7 +404,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -412,7 +412,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 

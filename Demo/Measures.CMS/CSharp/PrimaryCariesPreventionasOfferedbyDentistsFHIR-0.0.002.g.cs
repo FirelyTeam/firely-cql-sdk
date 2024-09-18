@@ -48,36 +48,36 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]
-	public  CqlValueSet Clinical_Oral_Evaluation(CqlContext context) => 
+	public CqlValueSet Clinical_Oral_Evaluation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", default);
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
-	public  CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) => 
+	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
     [CqlDeclaration("Discharged to Home for Hosice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
-	public  CqlValueSet Discharged_to_Home_for_Hosice_Care(CqlContext context) => 
+	public CqlValueSet Discharged_to_Home_for_Hosice_Care(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Fluoride Varnish Application for Children")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002")]
-	public  CqlValueSet Fluoride_Varnish_Application_for_Children(CqlContext context) => 
+	public CqlValueSet Fluoride_Varnish_Application_for_Children(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002", default);
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
-	public  CqlValueSet Hospice_care_ambulatory(CqlContext context) => 
+	public CqlValueSet Hospice_care_ambulatory(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", default);
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -88,7 +88,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -97,7 +97,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
-	public  IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
 	{
 		CqlValueSet a_ = this.Clinical_Oral_Evaluation(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
@@ -117,7 +117,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("Initial Population")]
-	public  bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -137,7 +137,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("Denominator")]
-	public  bool? Denominator(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -145,7 +145,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public  bool? Denominator_Exclusions(CqlContext context)
+	public bool? Denominator_Exclusions(CqlContext context)
 	{
 		bool? a_ = hospice_6_9_000.Has_Hospice_Services(context);
 
@@ -153,7 +153,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("Numerator")]
-	public  bool? Numerator(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		CqlValueSet a_ = this.Fluoride_Varnish_Application_for_Children(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
@@ -188,7 +188,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("Stratification 1")]
-	public  bool? Stratification_1(CqlContext context)
+	public bool? Stratification_1(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -205,7 +205,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("Stratification 2")]
-	public  bool? Stratification_2(CqlContext context)
+	public bool? Stratification_2(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -222,7 +222,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("Stratification 3")]
-	public  bool? Stratification_3(CqlContext context)
+	public bool? Stratification_3(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -239,7 +239,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
@@ -247,7 +247,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = supplementalDataElements_3_4_000.SDE_Payer(context);
 
@@ -255,7 +255,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("SDE Race")]
-	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = supplementalDataElements_3_4_000.SDE_Race(context);
 
@@ -263,7 +263,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public  CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = supplementalDataElements_3_4_000.SDE_Sex(context);
 

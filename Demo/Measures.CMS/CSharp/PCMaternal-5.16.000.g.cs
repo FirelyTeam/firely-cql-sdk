@@ -44,39 +44,39 @@ public partial class PCMaternal_5_16_000(
 
     [CqlDeclaration("Delivery Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
-	public  CqlValueSet Delivery_Procedures(CqlContext context) => 
+	public CqlValueSet Delivery_Procedures(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
 
     [CqlDeclaration("ED Visit and OB Triage")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369")]
-	public  CqlValueSet ED_Visit_and_OB_Triage(CqlContext context) => 
+	public CqlValueSet ED_Visit_and_OB_Triage(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Estimated Gestational Age at Delivery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26")]
-	public  CqlValueSet Estimated_Gestational_Age_at_Delivery(CqlContext context) => 
+	public CqlValueSet Estimated_Gestational_Age_at_Delivery(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26", default);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public  CqlValueSet Observation_Services(CqlContext context) => 
+	public CqlValueSet Observation_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
     [CqlDeclaration("Date and time of obstetric delivery")]
-	public  CqlCode Date_and_time_of_obstetric_delivery(CqlContext context) => 
+	public CqlCode Date_and_time_of_obstetric_delivery(CqlContext context) => 
 		new CqlCode("93857-1", "http://loinc.org", default, default);
 
     [CqlDeclaration("Delivery date Estimated")]
-	public  CqlCode Delivery_date_Estimated(CqlContext context) => 
+	public CqlCode Delivery_date_Estimated(CqlContext context) => 
 		new CqlCode("11778-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("LOINC")]
-	public  CqlCode[] LOINC(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("93857-1", "http://loinc.org", default, default),
@@ -87,7 +87,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -98,7 +98,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("Patient")]
-	public  Patient Patient(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -107,7 +107,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("Encounter with Age Range")]
-	public  IEnumerable<Encounter> Encounter_with_Age_Range(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Age_Range(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = cqmCommon_2_0_000.Inpatient_Encounter(context);
 		bool? b_(Encounter InpatientEncounter)
@@ -132,7 +132,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("hospitalizationWithEDOBTriageObservation")]
-	public  CqlInterval<CqlDateTime> hospitalizationWithEDOBTriageObservation(CqlContext context, Encounter TheEncounter)
+	public CqlInterval<CqlDateTime> hospitalizationWithEDOBTriageObservation(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
@@ -363,7 +363,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("Delivery Encounter with Age Range")]
-	public  IEnumerable<Encounter> Delivery_Encounter_with_Age_Range(CqlContext context)
+	public IEnumerable<Encounter> Delivery_Encounter_with_Age_Range(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_Range(context);
 		IEnumerable<Encounter> b_(Encounter EncounterWithAge)
@@ -399,7 +399,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("lastTimeOfDelivery")]
-	public  CqlDateTime lastTimeOfDelivery(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime lastTimeOfDelivery(CqlContext context, Encounter TheEncounter)
 	{
 		CqlCode a_ = this.Date_and_time_of_obstetric_delivery(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -550,7 +550,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("lastEstimatedDeliveryDate")]
-	public  CqlDateTime lastEstimatedDeliveryDate(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime lastEstimatedDeliveryDate(CqlContext context, Encounter TheEncounter)
 	{
 		CqlCode a_ = this.Delivery_date_Estimated(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
@@ -703,7 +703,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("calculatedGestationalAge")]
-	public  int? calculatedGestationalAge(CqlContext context, Encounter TheEncounter)
+	public int? calculatedGestationalAge(CqlContext context, Encounter TheEncounter)
 	{
 		CqlDateTime a_ = this.lastTimeOfDelivery(context, TheEncounter);
 		CqlDateTime b_ = this.lastEstimatedDeliveryDate(context, TheEncounter);
@@ -715,7 +715,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public  IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context)
+	public IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Age_Range(context);
 		(string EncounterID, int? CalculatedCGA)? b_(Encounter DeliveryEncounter)
@@ -733,7 +733,7 @@ public partial class PCMaternal_5_16_000(
 	}
 
     [CqlDeclaration("lastEstimatedGestationalAge")]
-	public  CqlQuantity lastEstimatedGestationalAge(CqlContext context, Encounter TheEncounter)
+	public CqlQuantity lastEstimatedGestationalAge(CqlContext context, Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Estimated_Gestational_Age_at_Delivery(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
