@@ -35,9 +35,9 @@ public static partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000Se
     }
 }
 
-partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibraryService
+partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddDiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000();
 }
 

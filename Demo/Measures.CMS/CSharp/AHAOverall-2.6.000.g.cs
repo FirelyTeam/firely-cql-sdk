@@ -27,9 +27,9 @@ public static partial class AHAOverall_2_6_000ServiceCollectionExtensions
     }
 }
 
-partial class AHAOverall_2_6_000 : ILibraryService
+partial class AHAOverall_2_6_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAHAOverall_2_6_000();
 }
 

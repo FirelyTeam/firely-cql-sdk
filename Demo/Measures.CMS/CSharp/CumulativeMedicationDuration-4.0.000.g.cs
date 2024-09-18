@@ -27,9 +27,9 @@ public static partial class CumulativeMedicationDuration_4_0_000ServiceCollectio
     }
 }
 
-partial class CumulativeMedicationDuration_4_0_000 : ILibraryService
+partial class CumulativeMedicationDuration_4_0_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddCumulativeMedicationDuration_4_0_000();
 }
 

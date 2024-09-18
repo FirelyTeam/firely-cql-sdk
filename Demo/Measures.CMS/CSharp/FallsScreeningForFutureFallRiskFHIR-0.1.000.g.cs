@@ -31,9 +31,9 @@ public static partial class FallsScreeningForFutureFallRiskFHIR_0_1_000ServiceCo
     }
 }
 
-partial class FallsScreeningForFutureFallRiskFHIR_0_1_000 : ILibraryService
+partial class FallsScreeningForFutureFallRiskFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddFallsScreeningForFutureFallRiskFHIR_0_1_000();
 }
 

@@ -29,9 +29,9 @@ public static partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000ServiceCollec
     }
 }
 
-partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000 : ILibraryService
+partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddHFBetaBlockerTherapyforLVSDFHIR_1_3_000();
 }
 

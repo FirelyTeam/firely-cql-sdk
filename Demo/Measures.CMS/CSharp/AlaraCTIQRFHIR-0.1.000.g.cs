@@ -29,9 +29,9 @@ public static partial class AlaraCTIQRFHIR_0_1_000ServiceCollectionExtensions
     }
 }
 
-partial class AlaraCTIQRFHIR_0_1_000 : ILibraryService
+partial class AlaraCTIQRFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAlaraCTIQRFHIR_0_1_000();
 }
 

@@ -24,6 +24,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Elm;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -58,6 +60,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                             typeof(CqlContext),                  // Cql.Runtime
                             typeof(IValueSetDictionary),         // Cql.ValueSets
                             typeof(Iso8601.DateIso8601),         // Iso8601
+                            typeof(IServiceCollection),
+                            typeof(ServiceCollectionDescriptorExtensions),
+                            typeof(ICqlLibrary),
 
                         }                                        // @formatter on
                         .Select(type => type.Assembly)

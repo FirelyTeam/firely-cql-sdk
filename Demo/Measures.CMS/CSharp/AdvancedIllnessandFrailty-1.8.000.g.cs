@@ -30,9 +30,9 @@ public static partial class AdvancedIllnessandFrailty_1_8_000ServiceCollectionEx
     }
 }
 
-partial class AdvancedIllnessandFrailty_1_8_000 : ILibraryService
+partial class AdvancedIllnessandFrailty_1_8_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAdvancedIllnessandFrailty_1_8_000();
 }
 

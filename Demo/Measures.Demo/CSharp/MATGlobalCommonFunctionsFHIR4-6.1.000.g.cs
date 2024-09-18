@@ -26,9 +26,9 @@ public static partial class MATGlobalCommonFunctionsFHIR4_6_1_000ServiceCollecti
     }
 }
 
-partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibraryService
+partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
 }
 

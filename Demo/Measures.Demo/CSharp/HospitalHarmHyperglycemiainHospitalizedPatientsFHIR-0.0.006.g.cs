@@ -28,9 +28,9 @@ public static partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_
     }
 }
 
-partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 : ILibraryService
+partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddHospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006();
 }
 

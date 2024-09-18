@@ -27,9 +27,9 @@ public static partial class HospiceFHIR4_2_3_000ServiceCollectionExtensions
     }
 }
 
-partial class HospiceFHIR4_2_3_000 : ILibraryService
+partial class HospiceFHIR4_2_3_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddHospiceFHIR4_2_3_000();
 }
 

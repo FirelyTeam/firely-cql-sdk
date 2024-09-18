@@ -29,9 +29,9 @@ public static partial class HIVViralSuppressionFHIR_0_1_000ServiceCollectionExte
     }
 }
 
-partial class HIVViralSuppressionFHIR_0_1_000 : ILibraryService
+partial class HIVViralSuppressionFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddHIVViralSuppressionFHIR_0_1_000();
 }
 

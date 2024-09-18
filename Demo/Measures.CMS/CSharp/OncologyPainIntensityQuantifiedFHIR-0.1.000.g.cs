@@ -30,9 +30,9 @@ public static partial class OncologyPainIntensityQuantifiedFHIR_0_1_000ServiceCo
     }
 }
 
-partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibraryService
+partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddOncologyPainIntensityQuantifiedFHIR_0_1_000();
 }
 

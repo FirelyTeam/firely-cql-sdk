@@ -31,9 +31,9 @@ public static partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_0
     }
 }
 
-partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : ILibraryService
+partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddFunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000();
 }
 

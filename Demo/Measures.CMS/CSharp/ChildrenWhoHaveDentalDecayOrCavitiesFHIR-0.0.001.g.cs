@@ -30,9 +30,9 @@ public static partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001Serv
     }
 }
 
-partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibraryService
+partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001();
 }
 

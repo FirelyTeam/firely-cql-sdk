@@ -30,9 +30,9 @@ public static partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_0
     }
 }
 
-partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : ILibraryService
+partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddPrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002();
 }
 

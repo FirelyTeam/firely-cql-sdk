@@ -31,9 +31,9 @@ public static partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR
     }
 }
 
-partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008 : ILibraryService
+partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddFunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008();
 }
 

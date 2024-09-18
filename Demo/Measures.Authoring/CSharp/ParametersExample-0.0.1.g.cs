@@ -26,9 +26,9 @@ public static partial class ParametersExample_0_0_1ServiceCollectionExtensions
     }
 }
 
-partial class ParametersExample_0_0_1 : ILibraryService
+partial class ParametersExample_0_0_1 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddParametersExample_0_0_1();
 }
 

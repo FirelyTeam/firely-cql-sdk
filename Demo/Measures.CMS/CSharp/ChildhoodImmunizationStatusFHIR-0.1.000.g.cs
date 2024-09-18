@@ -31,9 +31,9 @@ public static partial class ChildhoodImmunizationStatusFHIR_0_1_000ServiceCollec
     }
 }
 
-partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibraryService
+partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddChildhoodImmunizationStatusFHIR_0_1_000();
 }
 

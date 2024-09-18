@@ -29,9 +29,9 @@ public static partial class GlobalMalnutritionCompositeFHIR_0_1_000ServiceCollec
     }
 }
 
-partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibraryService
+partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddGlobalMalnutritionCompositeFHIR_0_1_000();
 }
 

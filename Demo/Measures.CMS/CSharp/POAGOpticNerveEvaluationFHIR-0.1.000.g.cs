@@ -28,9 +28,9 @@ public static partial class POAGOpticNerveEvaluationFHIR_0_1_000ServiceCollectio
     }
 }
 
-partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibraryService
+partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddPOAGOpticNerveEvaluationFHIR_0_1_000();
 }
 

@@ -30,9 +30,9 @@ public static partial class AnticoagulationTherapyforAtrialFibrillationFlutterFH
     }
 }
 
-partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000 : ILibraryService
+partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000();
 }
 

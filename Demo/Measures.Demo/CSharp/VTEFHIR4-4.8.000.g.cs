@@ -27,9 +27,9 @@ public static partial class VTEFHIR4_4_8_000ServiceCollectionExtensions
     }
 }
 
-partial class VTEFHIR4_4_8_000 : ILibraryService
+partial class VTEFHIR4_4_8_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddVTEFHIR4_4_8_000();
 }
 

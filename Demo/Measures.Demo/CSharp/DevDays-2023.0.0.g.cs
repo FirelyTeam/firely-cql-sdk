@@ -26,9 +26,9 @@ public static partial class DevDays_2023_0_0ServiceCollectionExtensions
     }
 }
 
-partial class DevDays_2023_0_0 : ILibraryService
+partial class DevDays_2023_0_0 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddDevDays_2023_0_0();
 }
 

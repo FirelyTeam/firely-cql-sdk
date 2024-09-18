@@ -28,9 +28,9 @@ public static partial class AdultOutpatientEncounters_4_8_000ServiceCollectionEx
     }
 }
 
-partial class AdultOutpatientEncounters_4_8_000 : ILibraryService
+partial class AdultOutpatientEncounters_4_8_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAdultOutpatientEncounters_4_8_000();
 }
 

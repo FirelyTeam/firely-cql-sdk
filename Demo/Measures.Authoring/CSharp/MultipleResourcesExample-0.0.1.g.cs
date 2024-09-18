@@ -26,9 +26,9 @@ public static partial class MultipleResourcesExample_0_0_1ServiceCollectionExten
     }
 }
 
-partial class MultipleResourcesExample_0_0_1 : ILibraryService
+partial class MultipleResourcesExample_0_0_1 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddMultipleResourcesExample_0_0_1();
 }
 

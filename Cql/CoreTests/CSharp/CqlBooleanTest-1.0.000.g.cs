@@ -25,9 +25,9 @@ public static partial class CqlBooleanTest_1_0_000ServiceCollectionExtensions
     }
 }
 
-partial class CqlBooleanTest_1_0_000 : ILibraryService
+partial class CqlBooleanTest_1_0_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddCqlBooleanTest_1_0_000();
 }
 

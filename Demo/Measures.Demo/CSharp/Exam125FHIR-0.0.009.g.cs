@@ -33,9 +33,9 @@ public static partial class Exam125FHIR_0_0_009ServiceCollectionExtensions
     }
 }
 
-partial class Exam125FHIR_0_0_009 : ILibraryService
+partial class Exam125FHIR_0_0_009 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddExam125FHIR_0_0_009();
 }
 

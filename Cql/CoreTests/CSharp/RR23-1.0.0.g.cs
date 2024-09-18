@@ -26,9 +26,9 @@ public static partial class RR23_1_0_0ServiceCollectionExtensions
     }
 }
 
-partial class RR23_1_0_0 : ILibraryService
+partial class RR23_1_0_0 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddRR23_1_0_0();
 }
 

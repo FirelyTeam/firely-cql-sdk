@@ -26,9 +26,9 @@ public static partial class SupplementalDataElements_3_4_000ServiceCollectionExt
     }
 }
 
-partial class SupplementalDataElements_3_4_000 : ILibraryService
+partial class SupplementalDataElements_3_4_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddSupplementalDataElements_3_4_000();
 }
 

@@ -28,9 +28,9 @@ public static partial class DocumentationofCurrentMedicationsFHIR_0_2_000Service
     }
 }
 
-partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibraryService
+partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddDocumentationofCurrentMedicationsFHIR_0_2_000();
 }
 

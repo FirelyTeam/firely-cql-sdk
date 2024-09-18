@@ -32,9 +32,9 @@ public static partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000Servic
     }
 }
 
-partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000 : ILibraryService
+partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAppropriateDXAScansForWomenUnder65FHIR_0_0_000();
 }
 

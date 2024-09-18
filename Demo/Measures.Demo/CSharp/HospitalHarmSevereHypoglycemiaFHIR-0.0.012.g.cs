@@ -28,9 +28,9 @@ public static partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012ServiceCol
     }
 }
 
-partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibraryService
+partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddHospitalHarmSevereHypoglycemiaFHIR_0_0_012();
 }
 

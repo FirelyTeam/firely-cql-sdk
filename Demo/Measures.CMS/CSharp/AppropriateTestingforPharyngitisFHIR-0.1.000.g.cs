@@ -32,9 +32,9 @@ public static partial class AppropriateTestingforPharyngitisFHIR_0_1_000ServiceC
     }
 }
 
-partial class AppropriateTestingforPharyngitisFHIR_0_1_000 : ILibraryService
+partial class AppropriateTestingforPharyngitisFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAppropriateTestingforPharyngitisFHIR_0_1_000();
 }
 

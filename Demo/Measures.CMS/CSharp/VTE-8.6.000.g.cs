@@ -27,9 +27,9 @@ public static partial class VTE_8_6_000ServiceCollectionExtensions
     }
 }
 
-partial class VTE_8_6_000 : ILibraryService
+partial class VTE_8_6_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddVTE_8_6_000();
 }
 

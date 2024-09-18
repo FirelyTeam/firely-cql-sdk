@@ -28,9 +28,9 @@ public static partial class PalliativeCare_1_9_000ServiceCollectionExtensions
     }
 }
 
-partial class PalliativeCare_1_9_000 : ILibraryService
+partial class PalliativeCare_1_9_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddPalliativeCare_1_9_000();
 }
 

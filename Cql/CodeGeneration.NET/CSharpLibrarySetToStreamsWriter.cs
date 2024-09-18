@@ -78,7 +78,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 typeof(PropertyInfo).Namespace!,
                 typeof(IServiceCollection).Namespace!,
                 typeof(ServiceCollectionDescriptorExtensions).Namespace!,
-                typeof(ILibraryService).Namespace!,
+                typeof(ICqlLibrary).Namespace!,
             };
 
             foreach (var @using in typeResolver.ModelNamespaces)
@@ -239,11 +239,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indentLevel, "}");
             writer.WriteLine();
 
-            writer.WriteLine(indentLevel, $"partial class {className} : ILibraryService");
+            writer.WriteLine(indentLevel, $"partial class {className} : ICqlLibrary");
             writer.WriteLine(indentLevel, "{");
             indentLevel += 1;
             {
-                writer.WriteLine(indentLevel, $"static void ILibraryService.AddLibraryService(IServiceCollection services) =>");
+                //writer.WriteLine(indentLevel, "static void ICqlLibrary.AddLibraryService(IServiceCollection services) =>");
+                writer.WriteLine(indentLevel, "public static void AddLibraryService(IServiceCollection services) =>");
                 writer.WriteLine(indentLevel+1, $"services.Add{className}();");
             }
             indentLevel -= 1;

@@ -29,9 +29,9 @@ public static partial class DischargedonAntithromboticTherapyFHIR_0_0_010Service
     }
 }
 
-partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibraryService
+partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddDischargedonAntithromboticTherapyFHIR_0_0_010();
 }
 

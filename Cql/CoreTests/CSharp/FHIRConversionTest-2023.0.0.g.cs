@@ -26,9 +26,9 @@ public static partial class FHIRConversionTest_2023_0_0ServiceCollectionExtensio
     }
 }
 
-partial class FHIRConversionTest_2023_0_0 : ILibraryService
+partial class FHIRConversionTest_2023_0_0 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddFHIRConversionTest_2023_0_0();
 }
 

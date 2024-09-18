@@ -29,9 +29,9 @@ public static partial class PCSBPScreeningFollowUpFHIR_0_2_000ServiceCollectionE
     }
 }
 
-partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibraryService
+partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddPCSBPScreeningFollowUpFHIR_0_2_000();
 }
 

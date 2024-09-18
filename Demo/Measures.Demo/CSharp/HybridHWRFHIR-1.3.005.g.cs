@@ -28,9 +28,9 @@ public static partial class HybridHWRFHIR_1_3_005ServiceCollectionExtensions
     }
 }
 
-partial class HybridHWRFHIR_1_3_005 : ILibraryService
+partial class HybridHWRFHIR_1_3_005 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddHybridHWRFHIR_1_3_005();
 }
 

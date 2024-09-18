@@ -31,9 +31,9 @@ public static partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFH
     }
 }
 
-partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000 : ILibraryService
+partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddFollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000();
 }
 

@@ -32,9 +32,9 @@ public static partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCess
     }
 }
 
-partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001 : ILibraryService
+partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddPreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001();
 }
 

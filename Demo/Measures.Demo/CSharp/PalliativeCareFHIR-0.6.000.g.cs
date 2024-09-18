@@ -27,9 +27,9 @@ public static partial class PalliativeCareFHIR_0_6_000ServiceCollectionExtension
     }
 }
 
-partial class PalliativeCareFHIR_0_6_000 : ILibraryService
+partial class PalliativeCareFHIR_0_6_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddPalliativeCareFHIR_0_6_000();
 }
 

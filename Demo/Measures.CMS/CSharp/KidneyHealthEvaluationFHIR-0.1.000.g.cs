@@ -31,9 +31,9 @@ public static partial class KidneyHealthEvaluationFHIR_0_1_000ServiceCollectionE
     }
 }
 
-partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibraryService
+partial class KidneyHealthEvaluationFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddKidneyHealthEvaluationFHIR_0_1_000();
 }
 

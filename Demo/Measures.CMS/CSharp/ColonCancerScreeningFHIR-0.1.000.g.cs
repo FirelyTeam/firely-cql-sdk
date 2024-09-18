@@ -34,9 +34,9 @@ public static partial class ColonCancerScreeningFHIR_0_1_000ServiceCollectionExt
     }
 }
 
-partial class ColonCancerScreeningFHIR_0_1_000 : ILibraryService
+partial class ColonCancerScreeningFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddColonCancerScreeningFHIR_0_1_000();
 }
 

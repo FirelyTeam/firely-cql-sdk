@@ -28,9 +28,9 @@ public static partial class PCMaternal_5_16_000ServiceCollectionExtensions
     }
 }
 
-partial class PCMaternal_5_16_000 : ILibraryService
+partial class PCMaternal_5_16_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddPCMaternal_5_16_000();
 }
 

@@ -28,9 +28,9 @@ public static partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012Ser
     }
 }
 
-partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibraryService
+partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddSafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012();
 }
 

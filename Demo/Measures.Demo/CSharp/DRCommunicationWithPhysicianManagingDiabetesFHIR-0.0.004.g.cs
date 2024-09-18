@@ -28,9 +28,9 @@ public static partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0
     }
 }
 
-partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : ILibraryService
+partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddDRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004();
 }
 

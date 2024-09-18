@@ -29,9 +29,9 @@ public static partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000Se
     }
 }
 
-partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ILibraryService
+partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddHospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000();
 }
 

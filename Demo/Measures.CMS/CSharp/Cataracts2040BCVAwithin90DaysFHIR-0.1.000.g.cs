@@ -28,9 +28,9 @@ public static partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000ServiceColl
     }
 }
 
-partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibraryService
+partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddCataracts2040BCVAwithin90DaysFHIR_0_1_000();
 }
 

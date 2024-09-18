@@ -27,9 +27,9 @@ public static partial class TJCOverallFHIR_1_8_000ServiceCollectionExtensions
     }
 }
 
-partial class TJCOverallFHIR_1_8_000 : ILibraryService
+partial class TJCOverallFHIR_1_8_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddTJCOverallFHIR_1_8_000();
 }
 

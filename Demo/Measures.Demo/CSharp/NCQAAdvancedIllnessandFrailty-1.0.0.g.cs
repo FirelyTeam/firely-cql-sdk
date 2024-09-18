@@ -30,9 +30,9 @@ public static partial class NCQAAdvancedIllnessandFrailty_1_0_0ServiceCollection
     }
 }
 
-partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibraryService
+partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddNCQAAdvancedIllnessandFrailty_1_0_0();
 }
 

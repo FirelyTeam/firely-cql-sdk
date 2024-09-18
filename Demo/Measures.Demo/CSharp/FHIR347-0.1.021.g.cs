@@ -28,9 +28,9 @@ public static partial class FHIR347_0_1_021ServiceCollectionExtensions
     }
 }
 
-partial class FHIR347_0_1_021 : ILibraryService
+partial class FHIR347_0_1_021 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddFHIR347_0_1_021();
 }
 

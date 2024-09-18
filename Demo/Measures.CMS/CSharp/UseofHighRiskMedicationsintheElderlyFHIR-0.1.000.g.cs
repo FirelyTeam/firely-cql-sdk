@@ -33,9 +33,9 @@ public static partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000Serv
     }
 }
 
-partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000 : ILibraryService
+partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddUseofHighRiskMedicationsintheElderlyFHIR_0_1_000();
 }
 

@@ -29,9 +29,9 @@ public static partial class AppropriateTreatmentforSTEMIFHIR_1_0_000ServiceColle
     }
 }
 
-partial class AppropriateTreatmentforSTEMIFHIR_1_0_000 : ILibraryService
+partial class AppropriateTreatmentforSTEMIFHIR_1_0_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAppropriateTreatmentforSTEMIFHIR_1_0_000();
 }
 

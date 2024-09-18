@@ -25,9 +25,9 @@ public static partial class FHIRHelpers_4_0_001ServiceCollectionExtensions
     }
 }
 
-partial class FHIRHelpers_4_0_001 : ILibraryService
+partial class FHIRHelpers_4_0_001 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddFHIRHelpers_4_0_001();
 }
 

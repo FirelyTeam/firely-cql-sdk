@@ -28,9 +28,9 @@ public static partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     }
 }
 
-partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILibraryService
+partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000();
 }
 

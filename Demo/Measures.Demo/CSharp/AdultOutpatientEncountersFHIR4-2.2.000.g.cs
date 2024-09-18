@@ -27,9 +27,9 @@ public static partial class AdultOutpatientEncountersFHIR4_2_2_000ServiceCollect
     }
 }
 
-partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibraryService
+partial class AdultOutpatientEncountersFHIR4_2_2_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddAdultOutpatientEncountersFHIR4_2_2_000();
 }
 

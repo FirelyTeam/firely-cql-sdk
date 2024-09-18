@@ -33,9 +33,9 @@ public static partial class BreastCancerScreeningsFHIR_0_0_009ServiceCollectionE
     }
 }
 
-partial class BreastCancerScreeningsFHIR_0_0_009 : ILibraryService
+partial class BreastCancerScreeningsFHIR_0_0_009 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddBreastCancerScreeningsFHIR_0_0_009();
 }
 

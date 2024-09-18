@@ -29,9 +29,9 @@ public static partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDenti
     }
 }
 
-partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 : ILibraryService
+partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddPrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008();
 }
 

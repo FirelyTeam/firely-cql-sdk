@@ -26,9 +26,9 @@ public static partial class NCQAFHIRBase_1_0_0ServiceCollectionExtensions
     }
 }
 
-partial class NCQAFHIRBase_1_0_0 : ILibraryService
+partial class NCQAFHIRBase_1_0_0 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddNCQAFHIRBase_1_0_0();
 }
 

@@ -27,9 +27,9 @@ public static partial class CQMCommon_2_0_000ServiceCollectionExtensions
     }
 }
 
-partial class CQMCommon_2_0_000 : ILibraryService
+partial class CQMCommon_2_0_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddCQMCommon_2_0_000();
 }
 

@@ -28,9 +28,9 @@ public static partial class CRLReceiptofSpecialistReportFHIR_0_2_000ServiceColle
     }
 }
 
-partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibraryService
+partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddCRLReceiptofSpecialistReportFHIR_0_2_000();
 }
 

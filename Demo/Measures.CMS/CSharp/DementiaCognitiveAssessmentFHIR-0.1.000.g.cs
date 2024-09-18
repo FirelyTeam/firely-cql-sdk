@@ -28,9 +28,9 @@ public static partial class DementiaCognitiveAssessmentFHIR_0_1_000ServiceCollec
     }
 }
 
-partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibraryService
+partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddDementiaCognitiveAssessmentFHIR_0_1_000();
 }
 

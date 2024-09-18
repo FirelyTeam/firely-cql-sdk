@@ -29,9 +29,9 @@ public static partial class HospitalHarmPressureInjuryFHIR_0_1_000ServiceCollect
     }
 }
 
-partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibraryService
+partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddHospitalHarmPressureInjuryFHIR_0_1_000();
 }
 

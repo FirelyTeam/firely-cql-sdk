@@ -32,9 +32,9 @@ public static partial class ChlamydiaScreeninginWomenFHIR_0_1_000ServiceCollecti
     }
 }
 
-partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibraryService
+partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddChlamydiaScreeninginWomenFHIR_0_1_000();
 }
 

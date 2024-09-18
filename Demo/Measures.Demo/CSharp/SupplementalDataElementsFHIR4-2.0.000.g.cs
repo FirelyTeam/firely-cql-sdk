@@ -26,9 +26,9 @@ public static partial class SupplementalDataElementsFHIR4_2_0_000ServiceCollecti
     }
 }
 
-partial class SupplementalDataElementsFHIR4_2_0_000 : ILibraryService
+partial class SupplementalDataElementsFHIR4_2_0_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddSupplementalDataElementsFHIR4_2_0_000();
 }
 

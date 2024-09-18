@@ -28,9 +28,9 @@ public static partial class NCQAClaims_1_0_0ServiceCollectionExtensions
     }
 }
 
-partial class NCQAClaims_1_0_0 : ILibraryService
+partial class NCQAClaims_1_0_0 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddNCQAClaims_1_0_0();
 }
 

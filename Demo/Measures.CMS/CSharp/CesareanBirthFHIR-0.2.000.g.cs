@@ -30,9 +30,9 @@ public static partial class CesareanBirthFHIR_0_2_000ServiceCollectionExtensions
     }
 }
 
-partial class CesareanBirthFHIR_0_2_000 : ILibraryService
+partial class CesareanBirthFHIR_0_2_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddCesareanBirthFHIR_0_2_000();
 }
 

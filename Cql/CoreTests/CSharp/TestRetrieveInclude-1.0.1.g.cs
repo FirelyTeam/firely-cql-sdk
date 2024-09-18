@@ -25,9 +25,9 @@ public static partial class TestRetrieveInclude_1_0_1ServiceCollectionExtensions
     }
 }
 
-partial class TestRetrieveInclude_1_0_1 : ILibraryService
+partial class TestRetrieveInclude_1_0_1 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddTestRetrieveInclude_1_0_1();
 }
 

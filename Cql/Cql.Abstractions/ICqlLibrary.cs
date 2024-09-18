@@ -5,7 +5,7 @@ namespace Hl7.Cql.Abstractions;
 /// <summary>
 /// Represents a library service.
 /// </summary>
-public interface ILibraryService
+public interface ICqlLibrary
 {
     /// <summary>
     /// Adds the library service to the specified service collection.

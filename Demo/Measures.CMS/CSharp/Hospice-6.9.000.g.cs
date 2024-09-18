@@ -28,9 +28,9 @@ public static partial class Hospice_6_9_000ServiceCollectionExtensions
     }
 }
 
-partial class Hospice_6_9_000 : ILibraryService
+partial class Hospice_6_9_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddHospice_6_9_000();
 }
 

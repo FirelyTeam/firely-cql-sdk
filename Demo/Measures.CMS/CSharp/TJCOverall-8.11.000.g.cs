@@ -28,9 +28,9 @@ public static partial class TJCOverall_8_11_000ServiceCollectionExtensions
     }
 }
 
-partial class TJCOverall_8_11_000 : ILibraryService
+partial class TJCOverall_8_11_000 : ICqlLibrary
 {
-    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+    public static void AddLibraryService(IServiceCollection services) =>
         services.AddTJCOverall_8_11_000();
 }
 
