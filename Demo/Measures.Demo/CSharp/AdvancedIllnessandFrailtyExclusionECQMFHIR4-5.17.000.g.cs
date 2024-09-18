@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
-public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000(
+public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000(
     FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
     MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,
     CumulativeMedicationDurationFHIR4_1_0_000 cumulativeMedicationDurationFHIR4_1_0_000)

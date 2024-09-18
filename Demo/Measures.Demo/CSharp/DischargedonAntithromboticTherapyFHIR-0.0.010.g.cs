@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
-public class DischargedonAntithromboticTherapyFHIR_0_0_010(
+public partial class DischargedonAntithromboticTherapyFHIR_0_0_010(
     FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
     SupplementalDataElementsFHIR4_2_0_000 supplementalDataElementsFHIR4_2_0_000,
     MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,

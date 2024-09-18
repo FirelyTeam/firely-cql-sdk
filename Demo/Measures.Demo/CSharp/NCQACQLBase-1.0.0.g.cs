@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQACQLBase", "1.0.0")]
-public class NCQACQLBase_1_0_0
+public partial class NCQACQLBase_1_0_0
 {
 
     [CqlDeclaration("Sort Date Intervals")]

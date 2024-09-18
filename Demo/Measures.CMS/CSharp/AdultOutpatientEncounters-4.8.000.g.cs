@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AdultOutpatientEncounters", "4.8.000")]
-public class AdultOutpatientEncounters_4_8_000(
+public partial class AdultOutpatientEncounters_4_8_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
     Status_1_6_000 status_1_6_000)

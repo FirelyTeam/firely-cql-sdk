@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("KidneyHealthEvaluationFHIR", "0.1.000")]
-public class KidneyHealthEvaluationFHIR_0_1_000(
+public partial class KidneyHealthEvaluationFHIR_0_1_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
     CQMCommon_2_0_000 cqmCommon_2_0_000,

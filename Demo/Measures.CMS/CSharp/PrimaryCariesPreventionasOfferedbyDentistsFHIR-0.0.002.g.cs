@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyDentistsFHIR", "0.0.002")]
-public class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
+public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000,

@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
-public class FHIRConversionTest_2023_0_0(
+public partial class FHIRConversionTest_2023_0_0(
     FHIRHelpers_4_0_1 fhirHelpers_4_0_1)
 {
 

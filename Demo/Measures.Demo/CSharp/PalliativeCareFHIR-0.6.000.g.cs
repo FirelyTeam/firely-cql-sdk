@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
-public class PalliativeCareFHIR_0_6_000(
+public partial class PalliativeCareFHIR_0_6_000(
     MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,
     FHIRHelpers_4_0_001 fhirHelpers_4_0_001)
 {

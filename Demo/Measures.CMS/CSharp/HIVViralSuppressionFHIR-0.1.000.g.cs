@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HIVViralSuppressionFHIR", "0.1.000")]
-public class HIVViralSuppressionFHIR_0_1_000(
+public partial class HIVViralSuppressionFHIR_0_1_000(
     CQMCommon_2_0_000 cqmCommon_2_0_000,
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000,

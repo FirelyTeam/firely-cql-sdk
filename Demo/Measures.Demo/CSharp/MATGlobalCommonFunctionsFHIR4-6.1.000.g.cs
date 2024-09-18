@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
-public class MATGlobalCommonFunctionsFHIR4_6_1_000(
+public partial class MATGlobalCommonFunctionsFHIR4_6_1_000(
     FHIRHelpers_4_0_001 fhirHelpers_4_0_001)
 {
 

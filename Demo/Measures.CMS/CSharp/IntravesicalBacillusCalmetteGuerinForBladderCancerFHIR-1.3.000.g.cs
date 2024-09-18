@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR", "1.3.000")]
-public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000(
+public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
     SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,

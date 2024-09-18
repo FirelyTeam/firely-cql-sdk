@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AppropriateDXAScansForWomenUnder65FHIR", "0.0.000")]
-public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000(
+public partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
     CQMCommon_2_0_000 cqmCommon_2_0_000,

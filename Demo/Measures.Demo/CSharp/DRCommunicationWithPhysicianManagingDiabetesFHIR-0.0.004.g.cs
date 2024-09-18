@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
-public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004(
+public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004(
     FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
     SupplementalDataElementsFHIR4_2_0_000 supplementalDataElementsFHIR4_2_0_000,
     MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000)

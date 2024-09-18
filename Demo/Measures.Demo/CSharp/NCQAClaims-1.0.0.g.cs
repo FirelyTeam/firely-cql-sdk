@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
-public class NCQAClaims_1_0_0(
+public partial class NCQAClaims_1_0_0(
     FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
     NCQAFHIRBase_1_0_0 ncqafhirBase_1_0_0,
     NCQATerminology_1_0_0 ncqaTerminology_1_0_0)

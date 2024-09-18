@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR", "0.0.001")]
-public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001(
+public partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001(
     CQMCommon_2_0_000 cqmCommon_2_0_000,
     Status_1_6_000 status_1_6_000,
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,

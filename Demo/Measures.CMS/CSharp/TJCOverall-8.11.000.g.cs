@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("TJCOverall", "8.11.000")]
-public class TJCOverall_8_11_000(
+public partial class TJCOverall_8_11_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     CQMCommon_2_0_000 cqmCommon_2_0_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000)

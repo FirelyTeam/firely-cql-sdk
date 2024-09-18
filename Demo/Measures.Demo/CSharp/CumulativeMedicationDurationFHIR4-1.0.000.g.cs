@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CumulativeMedicationDurationFHIR4", "1.0.000")]
-public class CumulativeMedicationDurationFHIR4_1_0_000(
+public partial class CumulativeMedicationDurationFHIR4_1_0_000(
     FHIRHelpers_4_0_001 fhirHelpers_4_0_001)
 {
 

@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HybridHWMFHIR", "0.102.005")]
-public class HybridHWMFHIR_0_102_005(
+public partial class HybridHWMFHIR_0_102_005(
     FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
     SupplementalDataElementsFHIR4_2_0_000 supplementalDataElementsFHIR4_2_0_000,
     MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000)

@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Status", "1.6.000")]
-public class Status_1_6_000(
+public partial class Status_1_6_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000)
 {
 

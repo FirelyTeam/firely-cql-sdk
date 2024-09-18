@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("ColorectalCancerScreeningsFHIR", "0.0.003")]
-public class ColorectalCancerScreeningsFHIR_0_0_003(
+public partial class ColorectalCancerScreeningsFHIR_0_0_003(
     FHIRHelpers_4_0_001 fhirHelpers_4_0_001,
     SupplementalDataElementsFHIR4_2_0_000 supplementalDataElementsFHIR4_2_0_000,
     MATGlobalCommonFunctionsFHIR4_6_1_000 matGlobalCommonFunctionsFHIR4_6_1_000,

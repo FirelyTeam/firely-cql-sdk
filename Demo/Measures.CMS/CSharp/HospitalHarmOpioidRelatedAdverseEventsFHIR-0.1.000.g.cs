@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HospitalHarmOpioidRelatedAdverseEventsFHIR", "0.1.000")]
-public class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
+public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(
     SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
     CQMCommon_2_0_000 cqmCommon_2_0_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000,

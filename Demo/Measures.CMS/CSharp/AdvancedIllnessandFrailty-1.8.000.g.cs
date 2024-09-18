@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AdvancedIllnessandFrailty", "1.8.000")]
-public class AdvancedIllnessandFrailty_1_8_000(
+public partial class AdvancedIllnessandFrailty_1_8_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
     CQMCommon_2_0_000 cqmCommon_2_0_000,

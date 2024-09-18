@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.2.000")]
-public class CRLReceiptofSpecialistReportFHIR_0_2_000(
+public partial class CRLReceiptofSpecialistReportFHIR_0_2_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000)

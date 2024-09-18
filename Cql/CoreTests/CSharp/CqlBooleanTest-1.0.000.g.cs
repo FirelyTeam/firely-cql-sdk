@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CqlBooleanTest", "1.0.000")]
-public class CqlBooleanTest_1_0_000
+public partial class CqlBooleanTest_1_0_000
 {
 
     [CqlDeclaration("SomethingTrueEqualsTrue")]

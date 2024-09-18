@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FHIRHelpers", "4.3.000")]
-public class FHIRHelpers_4_3_000
+public partial class FHIRHelpers_4_3_000
 {
 
     [CqlDeclaration("ToInterval")]

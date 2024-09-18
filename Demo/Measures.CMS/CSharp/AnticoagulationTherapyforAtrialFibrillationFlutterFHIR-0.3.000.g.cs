@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR", "0.3.000")]
-public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000(
+public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     CQMCommon_2_0_000 cqmCommon_2_0_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000,

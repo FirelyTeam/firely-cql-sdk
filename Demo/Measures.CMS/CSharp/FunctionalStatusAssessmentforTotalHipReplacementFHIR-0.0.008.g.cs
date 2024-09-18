@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FunctionalStatusAssessmentforTotalHipReplacementFHIR", "0.0.008")]
-public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008(
+public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     QICoreCommon_2_0_000 qiCoreCommon_2_0_000,
     SupplementalDataElements_3_4_000 supplementalDataElements_3_4_000,

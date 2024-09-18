@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("VTE", "8.6.000")]
-public class VTE_8_6_000(
+public partial class VTE_8_6_000(
     FHIRHelpers_4_3_000 fhirHelpers_4_3_000,
     CQMCommon_2_0_000 cqmCommon_2_0_000)
 {
