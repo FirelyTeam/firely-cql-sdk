@@ -17,7 +17,7 @@ public class CqlBooleanTest
     public void SomethingTrueEqualsTrue_ShouldBeTrue()
     {
         CqlContext ctx = FhirCqlContext.ForBundle();
-        var lib = new CqlBooleanTest_1_0_000(ctx);
-        Assert.IsTrue(lib.SomethingTrueEqualsTrue());
+        var lib = new CqlBooleanTest_1_0_000();
+        Assert.IsTrue(lib.SomethingTrueEqualsTrue(ctx));
     }
 }

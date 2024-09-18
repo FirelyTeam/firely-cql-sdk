@@ -36,8 +36,11 @@ namespace Test
         {
             var patientEverything = new Bundle();  // add some data
             var context = FhirCqlContext.ForBundle(patientEverything, MY2023);
-            var bcs = new BCSEHEDISMY2022_1_0_0(context);
-            var numerator = bcs.Numerator();
+            var bcs = new ServiceCollection()
+                      .AddBCSEHEDISMY2022_1_0_0()
+                      .BuildServiceProvider()
+                      .GetRequiredService<BCSEHEDISMY2022_1_0_0>();
+            var numerator = bcs.Numerator(context);
             Assert.IsFalse(numerator);
         }
 
@@ -59,8 +62,11 @@ namespace Test
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
 
-            var lib2 = new BCSEHEDISMY2022_1_0_0(context);
-            var num = lib2.Numerator();
+            var lib2 = new ServiceCollection()
+                      .AddBCSEHEDISMY2022_1_0_0()
+                      .BuildServiceProvider()
+                      .GetRequiredService<BCSEHEDISMY2022_1_0_0>();
+            var num = lib2.Numerator(context);
             Assert.IsFalse((bool?)num);
         }
 
