@@ -31,8 +31,8 @@ namespace Test
         {
             var patientEverything = new Bundle();  // add some data
             var context = FhirCqlContext.ForBundle(patientEverything, MY2022);
-            var bcs = new BCSEHEDISMY2022_1_0_0(context);
-            var numerator = bcs.Numerator();
+            var bcs = BCSEHEDISMY2022_1_0_0.Instance;
+            var numerator = bcs.Numerator(context);
             Assert.IsFalse(numerator);
         }
 
@@ -43,24 +43,24 @@ namespace Test
             var version = "1.0.0";
             var dir = new DirectoryInfo("Resources");
             var asmContext = LibraryPackager.LoadResources(dir, lib, version);
-            
+
             byte[] byteArray = File.ReadAllBytes("Inputs/Bundles/95029_pass.json");
             using var stream = new MemoryStream(byteArray);
             var patientBundle = LoadBundle(stream);
 
             var directory = new DirectoryInfo("Inputs/ValueSets");
             var valueSets = LoadValueSets(directory);// Add valuesets
-            
+
             var context = FhirCqlContext.ForBundle(patientBundle, MY2022, valueSets);
-            
+
             var results = asmContext.Run(lib, version, context);
 
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsTrue((bool?)numerator);
 
-            var lib2 = new BCSEHEDISMY2022_1_0_0(context);
-            var num = lib2.Numerator();
+            var lib2 = BCSEHEDISMY2022_1_0_0.Instance;
+            var num = lib2.Numerator(context);
             Assert.IsTrue((bool?)num);
         }
 
@@ -87,8 +87,8 @@ namespace Test
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
 
-            var lib2 = new BCSEHEDISMY2022_1_0_0(context);
-            var num = lib2.Numerator();
+            var lib2 = BCSEHEDISMY2022_1_0_0.Instance;
+            var num = lib2.Numerator(context);
             Assert.IsFalse((bool?)num);
         }
 

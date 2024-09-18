@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
@@ -65,8 +65,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
-            
-            var target = VariableNameGenerator.NormalizeIdentifier(dce.LibraryName);
+
+            var target = dce.LibraryName == LibraryName ? "this" : $"{VariableNameGenerator.NormalizeIdentifier(dce.LibraryName)}.Instance";
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(dce.DefinitionName);
 
             sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}(context)");
@@ -79,7 +79,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
 
-            var target = VariableNameGenerator.NormalizeIdentifier(fce.LibraryName);
+            var target = fce.LibraryName == LibraryName ? "this" : $"{VariableNameGenerator.NormalizeIdentifier(fce.LibraryName)}.Instance";
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(fce.FunctionName);
 
             sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}");
@@ -478,7 +478,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         // Linq.Expressions needs an explicit conversion from a value type
         // type to object, but the C# compiler will insert that boxing,
-        // so we can remove those casts. 
+        // so we can remove those casts.
         private static Expression StripBoxing(Expression node)
         {
             // (x as object) => x

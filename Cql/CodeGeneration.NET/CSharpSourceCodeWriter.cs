@@ -1,7 +1,7 @@
-﻿/* 
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
- * 
+ *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
@@ -103,7 +103,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// <param name="libraryNameToStream">A function that provides a <see cref="Stream"/> to write the source code given the name of the library being generated.</param>
         /// <param name="closeStream">When <see langword="true"/>, <see cref="Stream"/>s provided by <paramref name="libraryNameToStream"/> will be closed when writing is done.  Default value is <see langword="true"/></param>
         /// <param name="writeFile">A function that determines whether the given library should be generated or not; default is <see langword="null" />.  When <see langword="null" />, all libraries are written.</param>
-        /// 
+        ///
         public void Write(DefinitionDictionary<LambdaExpression> definitions,
             IEnumerable<Type> tupleTypes,
             DirectedGraph dependencyGraph,
@@ -198,14 +198,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indentLevel, $"[CqlLibrary(\"{libraryAttribute}\", \"{versionAttribute}\")]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
             if (PartialClass)
-                writer.WriteLine(indentLevel, $"partial static class {className}");
+                writer.WriteLine(indentLevel, $"public partial class {className}");
             else
-                writer.WriteLine(indentLevel, $"public static class {className}");
+                writer.WriteLine(indentLevel, $"public class {className}");
             writer.WriteLine(indentLevel, "{");
             writer.WriteLine();
             indentLevel += 1;
             // Class
             {
+                writer.WriteLine(indentLevel, $"public static {className} Instance {{ get; }}  = new();");
+                writer.WriteLine();
                 writeMethods(definitions, libraryName, writer, indentLevel);
                 indentLevel -= 1;
                 writer.WriteLine(indentLevel, "}");
@@ -219,12 +221,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                 foreach (var overload in kvp.Value)
                 {
                     definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
-                    WriteMemoizedInstanceMethod(libraryName, writer, indentLevel, kvp.Key, overload.T, tags);
+                    writeMethod(libraryName, writer, indentLevel, kvp.Key, overload.T, tags);
                     writer.WriteLine();
                 }
             }
         }
-        
+
         private void writeTupleTypes(IEnumerable<Type> tupleTypes, Func<string, Stream> libraryNameToStream, bool closeStream)
         {
             if (tupleTypes.Any())
@@ -277,7 +279,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return sorted;
         }
 
-        private void WriteMemoizedInstanceMethod(string libraryName, TextWriter writer, int indentLevel,
+        private void writeMethod(string libraryName, TextWriter writer, int indentLevel,
             string cqlName,
             LambdaExpression overload,
             ILookup<string, string>? tags)
@@ -321,14 +323,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                 }
 
-                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public static");
+                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public");
                 writer.Write(func);
             }
             else
             {
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public static"));
+                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
                 //      writer.WriteLine();
             }
         }
