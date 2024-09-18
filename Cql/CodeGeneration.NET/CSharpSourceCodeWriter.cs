@@ -198,7 +198,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indentLevel, $"[CqlLibrary(\"{libraryAttribute}\", \"{versionAttribute}\")]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
             if (PartialClass)
-                writer.WriteLine(indentLevel, $"partial class {className}");
+                writer.WriteLine(indentLevel, $"partial static class {className}");
             else
                 writer.WriteLine(indentLevel, $"public static class {className}");
             writer.WriteLine(indentLevel, "{");
@@ -206,13 +206,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             indentLevel += 1;
             // Class
             {
-                writeMemoizedInstanceMethods(definitions, libraryName, writer, indentLevel);
+                writeMethods(definitions, libraryName, writer, indentLevel);
                 indentLevel -= 1;
                 writer.WriteLine(indentLevel, "}");
             }
         }
 
-        private void writeMemoizedInstanceMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void writeMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
