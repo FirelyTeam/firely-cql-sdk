@@ -29,6 +29,12 @@ public static partial class PCSBPScreeningFollowUpFHIR_0_2_000ServiceCollectionE
     }
 }
 
+partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddPCSBPScreeningFollowUpFHIR_0_2_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PCSBPScreeningFollowUpFHIR", "0.2.000")]
 public partial class PCSBPScreeningFollowUpFHIR_0_2_000(

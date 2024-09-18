@@ -27,6 +27,12 @@ public static partial class AdultOutpatientEncountersFHIR4_2_2_000ServiceCollect
     }
 }
 
+partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAdultOutpatientEncountersFHIR4_2_2_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public partial class AdultOutpatientEncountersFHIR4_2_2_000(

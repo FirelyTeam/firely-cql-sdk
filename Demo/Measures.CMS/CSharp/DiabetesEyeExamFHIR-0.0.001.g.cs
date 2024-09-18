@@ -33,6 +33,12 @@ public static partial class DiabetesEyeExamFHIR_0_0_001ServiceCollectionExtensio
     }
 }
 
+partial class DiabetesEyeExamFHIR_0_0_001 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddDiabetesEyeExamFHIR_0_0_001();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DiabetesEyeExamFHIR", "0.0.001")]
 public partial class DiabetesEyeExamFHIR_0_0_001(

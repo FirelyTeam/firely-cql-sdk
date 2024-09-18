@@ -30,6 +30,12 @@ public static partial class SevereObstetricComplicationsFHIR_0_1_000ServiceColle
     }
 }
 
+partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddSevereObstetricComplicationsFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("SevereObstetricComplicationsFHIR", "0.1.000")]
 public partial class SevereObstetricComplicationsFHIR_0_1_000(

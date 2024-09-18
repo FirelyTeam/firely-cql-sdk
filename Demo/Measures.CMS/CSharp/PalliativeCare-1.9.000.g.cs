@@ -28,6 +28,12 @@ public static partial class PalliativeCare_1_9_000ServiceCollectionExtensions
     }
 }
 
+partial class PalliativeCare_1_9_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddPalliativeCare_1_9_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PalliativeCare", "1.9.000")]
 public partial class PalliativeCare_1_9_000(

@@ -29,6 +29,12 @@ public static partial class NCQAEncounter_1_0_0ServiceCollectionExtensions
     }
 }
 
+partial class NCQAEncounter_1_0_0 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddNCQAEncounter_1_0_0();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
 public partial class NCQAEncounter_1_0_0(

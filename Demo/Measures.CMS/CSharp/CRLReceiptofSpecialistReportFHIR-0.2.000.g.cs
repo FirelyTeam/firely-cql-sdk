@@ -28,6 +28,12 @@ public static partial class CRLReceiptofSpecialistReportFHIR_0_2_000ServiceColle
     }
 }
 
+partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddCRLReceiptofSpecialistReportFHIR_0_2_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.2.000")]
 public partial class CRLReceiptofSpecialistReportFHIR_0_2_000(

@@ -27,6 +27,12 @@ public static partial class NCQAStatus_1_0_0ServiceCollectionExtensions
     }
 }
 
+partial class NCQAStatus_1_0_0 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddNCQAStatus_1_0_0();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAStatus", "1.0.0")]
 public partial class NCQAStatus_1_0_0(

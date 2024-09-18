@@ -32,6 +32,12 @@ public static partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000Servic
     }
 }
 
+partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAppropriateDXAScansForWomenUnder65FHIR_0_0_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AppropriateDXAScansForWomenUnder65FHIR", "0.0.000")]
 public partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000(

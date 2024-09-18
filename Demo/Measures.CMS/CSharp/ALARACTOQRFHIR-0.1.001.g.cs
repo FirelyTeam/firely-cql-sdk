@@ -29,6 +29,12 @@ public static partial class ALARACTOQRFHIR_0_1_001ServiceCollectionExtensions
     }
 }
 
+partial class ALARACTOQRFHIR_0_1_001 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddALARACTOQRFHIR_0_1_001();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("ALARACTOQRFHIR", "0.1.001")]
 public partial class ALARACTOQRFHIR_0_1_001(

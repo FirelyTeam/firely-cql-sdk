@@ -29,6 +29,12 @@ public static partial class HospitalHarmPressureInjuryFHIR_0_1_000ServiceCollect
     }
 }
 
+partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHospitalHarmPressureInjuryFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HospitalHarmPressureInjuryFHIR", "0.1.000")]
 public partial class HospitalHarmPressureInjuryFHIR_0_1_000(

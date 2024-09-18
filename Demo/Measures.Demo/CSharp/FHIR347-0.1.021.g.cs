@@ -28,6 +28,12 @@ public static partial class FHIR347_0_1_021ServiceCollectionExtensions
     }
 }
 
+partial class FHIR347_0_1_021 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddFHIR347_0_1_021();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public partial class FHIR347_0_1_021(

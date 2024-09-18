@@ -26,6 +26,12 @@ public static partial class MultipleResourcesExample_0_0_1ServiceCollectionExten
     }
 }
 
+partial class MultipleResourcesExample_0_0_1 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddMultipleResourcesExample_0_0_1();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1(

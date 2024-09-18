@@ -30,6 +30,12 @@ public static partial class AnticoagulationTherapyforAtrialFibrillationFlutterFH
     }
 }
 
+partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR", "0.3.000")]
 public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000(

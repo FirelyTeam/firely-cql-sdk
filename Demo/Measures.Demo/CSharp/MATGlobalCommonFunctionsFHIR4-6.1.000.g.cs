@@ -26,6 +26,12 @@ public static partial class MATGlobalCommonFunctionsFHIR4_6_1_000ServiceCollecti
     }
 }
 
+partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
 public partial class MATGlobalCommonFunctionsFHIR4_6_1_000(

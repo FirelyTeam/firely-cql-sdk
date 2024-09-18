@@ -28,6 +28,12 @@ public static partial class TJCOverall_8_11_000ServiceCollectionExtensions
     }
 }
 
+partial class TJCOverall_8_11_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddTJCOverall_8_11_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("TJCOverall", "8.11.000")]
 public partial class TJCOverall_8_11_000(

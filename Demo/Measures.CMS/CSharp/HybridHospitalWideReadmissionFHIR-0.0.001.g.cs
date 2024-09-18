@@ -29,6 +29,12 @@ public static partial class HybridHospitalWideReadmissionFHIR_0_0_001ServiceColl
     }
 }
 
+partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHybridHospitalWideReadmissionFHIR_0_0_001();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HybridHospitalWideReadmissionFHIR", "0.0.001")]
 public partial class HybridHospitalWideReadmissionFHIR_0_0_001(

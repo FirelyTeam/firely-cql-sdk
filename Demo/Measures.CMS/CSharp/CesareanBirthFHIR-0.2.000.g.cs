@@ -30,6 +30,12 @@ public static partial class CesareanBirthFHIR_0_2_000ServiceCollectionExtensions
     }
 }
 
+partial class CesareanBirthFHIR_0_2_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddCesareanBirthFHIR_0_2_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CesareanBirthFHIR", "0.2.000")]
 public partial class CesareanBirthFHIR_0_2_000(

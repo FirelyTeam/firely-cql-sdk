@@ -32,6 +32,12 @@ public static partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCess
     }
 }
 
+partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddPreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR", "0.0.001")]
 public partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001(

@@ -29,6 +29,12 @@ public static partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000Se
     }
 }
 
+partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HospitalHarmOpioidRelatedAdverseEventsFHIR", "0.1.000")]
 public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000(

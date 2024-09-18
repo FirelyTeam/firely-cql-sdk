@@ -29,6 +29,12 @@ public static partial class HIVViralSuppressionFHIR_0_1_000ServiceCollectionExte
     }
 }
 
+partial class HIVViralSuppressionFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHIVViralSuppressionFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HIVViralSuppressionFHIR", "0.1.000")]
 public partial class HIVViralSuppressionFHIR_0_1_000(

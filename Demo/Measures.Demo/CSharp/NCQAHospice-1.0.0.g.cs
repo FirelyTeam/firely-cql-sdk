@@ -28,6 +28,12 @@ public static partial class NCQAHospice_1_0_0ServiceCollectionExtensions
     }
 }
 
+partial class NCQAHospice_1_0_0 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddNCQAHospice_1_0_0();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAHospice", "1.0.0")]
 public partial class NCQAHospice_1_0_0(

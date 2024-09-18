@@ -30,6 +30,12 @@ public static partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_0
     }
 }
 
+partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddPrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyDentistsFHIR", "0.0.002")]
 public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(

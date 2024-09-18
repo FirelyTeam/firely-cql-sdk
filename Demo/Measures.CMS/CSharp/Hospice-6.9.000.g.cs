@@ -28,6 +28,12 @@ public static partial class Hospice_6_9_000ServiceCollectionExtensions
     }
 }
 
+partial class Hospice_6_9_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHospice_6_9_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Hospice", "6.9.000")]
 public partial class Hospice_6_9_000(

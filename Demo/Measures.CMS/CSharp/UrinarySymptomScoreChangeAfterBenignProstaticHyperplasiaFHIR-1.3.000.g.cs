@@ -28,6 +28,12 @@ public static partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperpl
     }
 }
 
+partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddUrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR", "1.3.000")]
 public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000(

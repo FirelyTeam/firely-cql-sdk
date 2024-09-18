@@ -26,6 +26,12 @@ public static partial class SupplementalDataElementsFHIR4_2_0_000ServiceCollecti
     }
 }
 
+partial class SupplementalDataElementsFHIR4_2_0_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddSupplementalDataElementsFHIR4_2_0_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public partial class SupplementalDataElementsFHIR4_2_0_000(

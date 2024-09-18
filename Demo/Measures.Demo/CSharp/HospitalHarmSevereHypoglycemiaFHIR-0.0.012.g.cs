@@ -28,6 +28,12 @@ public static partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012ServiceCol
     }
 }
 
+partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHospitalHarmSevereHypoglycemiaFHIR_0_0_012();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
 public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012(

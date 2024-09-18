@@ -27,6 +27,12 @@ public static partial class VTEFHIR4_4_8_000ServiceCollectionExtensions
     }
 }
 
+partial class VTEFHIR4_4_8_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddVTEFHIR4_4_8_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("VTEFHIR4", "4.8.000")]
 public partial class VTEFHIR4_4_8_000(

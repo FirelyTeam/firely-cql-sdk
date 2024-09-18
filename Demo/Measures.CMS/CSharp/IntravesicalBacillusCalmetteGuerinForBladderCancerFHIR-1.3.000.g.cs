@@ -29,6 +29,12 @@ public static partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFH
     }
 }
 
+partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddIntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR", "1.3.000")]
 public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000(

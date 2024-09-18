@@ -30,6 +30,12 @@ public static partial class AdvancedIllnessandFrailty_1_8_000ServiceCollectionEx
     }
 }
 
+partial class AdvancedIllnessandFrailty_1_8_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAdvancedIllnessandFrailty_1_8_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AdvancedIllnessandFrailty", "1.8.000")]
 public partial class AdvancedIllnessandFrailty_1_8_000(

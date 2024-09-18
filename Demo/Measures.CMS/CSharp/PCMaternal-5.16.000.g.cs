@@ -28,6 +28,12 @@ public static partial class PCMaternal_5_16_000ServiceCollectionExtensions
     }
 }
 
+partial class PCMaternal_5_16_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddPCMaternal_5_16_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PCMaternal", "5.16.000")]
 public partial class PCMaternal_5_16_000(

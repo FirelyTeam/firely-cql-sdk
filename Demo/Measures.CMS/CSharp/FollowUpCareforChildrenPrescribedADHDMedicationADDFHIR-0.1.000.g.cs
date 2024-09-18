@@ -31,6 +31,12 @@ public static partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFH
     }
 }
 
+partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddFollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR", "0.1.000")]
 public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000(

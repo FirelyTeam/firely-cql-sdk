@@ -25,6 +25,12 @@ public static partial class FHIRHelpers_4_0_1ServiceCollectionExtensions
     }
 }
 
+partial class FHIRHelpers_4_0_1 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddFHIRHelpers_4_0_1();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FHIRHelpers", "4.0.1")]
 public partial class FHIRHelpers_4_0_1

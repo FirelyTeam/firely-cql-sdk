@@ -27,20 +27,6 @@ using Expression = System.Linq.Expressions.Expression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-
-/*
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
-public static class Status_1_6_000_ServiceCollectionExtensions
-{
-    public static IServiceCollection AddStatus_1_6_000(this IServiceCollection services)
-    {
-        services.TryAddSingleton<Status_1_6_000>();
-        services.AddFHIRHelpers_4_3_000(services);
-        return services;
-    }
-}
-*/
-
 namespace Hl7.Cql.CodeGeneration.NET
 {
     /// <summary>
@@ -92,6 +78,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 typeof(PropertyInfo).Namespace!,
                 typeof(IServiceCollection).Namespace!,
                 typeof(ServiceCollectionDescriptorExtensions).Namespace!,
+                typeof(ILibraryService).Namespace!,
             };
 
             foreach (var @using in typeResolver.ModelNamespaces)
@@ -104,11 +91,6 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// Gets or sets the namespace for generated .NET types.
         /// </summary>
         private string? Namespace { get; }
-
-        /// <summary>
-        /// If <see langword="true"/>, classes will be declared with the <see langword="partial"/> keyword.
-        /// </summary>
-        private bool PartialClass { get; } = true;
 
         /// <summary>
         /// Gets the <see langword="using"/> statements to be included in the generated code.
@@ -234,7 +216,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             WriteGeneratedCodeAttribute(writer, indentLevel);
             var className = $"{libraryNameToClassName(libraryName)}";
-            writer.WriteLine(indentLevel, $"public static {(PartialClass ? "partial " : "")}class {className}ServiceCollectionExtensions");
+            writer.WriteLine(indentLevel, $"public static partial class {className}ServiceCollectionExtensions");
             writer.WriteLine(indentLevel, "{");
             indentLevel += 1;
             {
@@ -256,6 +238,17 @@ namespace Hl7.Cql.CodeGeneration.NET
             indentLevel -= 1;
             writer.WriteLine(indentLevel, "}");
             writer.WriteLine();
+
+            writer.WriteLine(indentLevel, $"partial class {className} : ILibraryService");
+            writer.WriteLine(indentLevel, "{");
+            indentLevel += 1;
+            {
+                writer.WriteLine(indentLevel, $"static void ILibraryService.AddLibraryService(IServiceCollection services) =>");
+                writer.WriteLine(indentLevel+1, $"services.Add{className}();");
+            }
+            indentLevel -= 1;
+            writer.WriteLine(indentLevel, "}");
+            writer.WriteLine();
         }
 
         private void WriteClass(
@@ -270,7 +263,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var (identifier, version) = ParseVersionedIdentifierParts(libraryName);
             writer.WriteLine(indentLevel, $"[CqlLibrary({QuoteString(identifier)}, {QuoteString(version)})]");
             var className = libraryNameToClassName(libraryName);
-            writer.Write(indentLevel, $"public {(PartialClass ? "partial " : "")}class {className}");
+            writer.Write(indentLevel, $"public partial class {className}");
             WritePrimaryConstructor(libraryNameToClassName, writer, indentLevel, requiredLibraries);
             writer.WriteLine(indentLevel, "{");
             writer.WriteLine();

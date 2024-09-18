@@ -31,6 +31,12 @@ public static partial class KidneyHealthEvaluationFHIR_0_1_000ServiceCollectionE
     }
 }
 
+partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddKidneyHealthEvaluationFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("KidneyHealthEvaluationFHIR", "0.1.000")]
 public partial class KidneyHealthEvaluationFHIR_0_1_000(

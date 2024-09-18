@@ -26,6 +26,12 @@ public static partial class SupplementalDataElements_3_4_000ServiceCollectionExt
     }
 }
 
+partial class SupplementalDataElements_3_4_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddSupplementalDataElements_3_4_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("SupplementalDataElements", "3.4.000")]
 public partial class SupplementalDataElements_3_4_000(

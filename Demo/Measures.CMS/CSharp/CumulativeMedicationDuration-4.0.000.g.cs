@@ -27,6 +27,12 @@ public static partial class CumulativeMedicationDuration_4_0_000ServiceCollectio
     }
 }
 
+partial class CumulativeMedicationDuration_4_0_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddCumulativeMedicationDuration_4_0_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CumulativeMedicationDuration", "4.0.000")]
 public partial class CumulativeMedicationDuration_4_0_000(

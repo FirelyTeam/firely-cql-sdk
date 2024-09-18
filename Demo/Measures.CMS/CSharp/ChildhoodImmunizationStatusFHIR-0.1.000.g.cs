@@ -31,6 +31,12 @@ public static partial class ChildhoodImmunizationStatusFHIR_0_1_000ServiceCollec
     }
 }
 
+partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddChildhoodImmunizationStatusFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("ChildhoodImmunizationStatusFHIR", "0.1.000")]
 public partial class ChildhoodImmunizationStatusFHIR_0_1_000(

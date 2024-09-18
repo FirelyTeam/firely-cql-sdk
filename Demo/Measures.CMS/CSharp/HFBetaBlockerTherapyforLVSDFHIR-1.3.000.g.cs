@@ -29,6 +29,12 @@ public static partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000ServiceCollec
     }
 }
 
+partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHFBetaBlockerTherapyforLVSDFHIR_1_3_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HFBetaBlockerTherapyforLVSDFHIR", "1.3.000")]
 public partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000(

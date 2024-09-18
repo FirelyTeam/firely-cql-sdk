@@ -33,6 +33,12 @@ public static partial class Exam125FHIR_0_0_009ServiceCollectionExtensions
     }
 }
 
+partial class Exam125FHIR_0_0_009 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddExam125FHIR_0_0_009();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Exam125FHIR", "0.0.009")]
 public partial class Exam125FHIR_0_0_009(

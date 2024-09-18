@@ -29,6 +29,12 @@ public static partial class GlobalMalnutritionCompositeFHIR_0_1_000ServiceCollec
     }
 }
 
+partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddGlobalMalnutritionCompositeFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("GlobalMalnutritionCompositeFHIR", "0.1.000")]
 public partial class GlobalMalnutritionCompositeFHIR_0_1_000(

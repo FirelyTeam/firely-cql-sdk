@@ -26,6 +26,12 @@ public static partial class ParametersExample_0_0_1ServiceCollectionExtensions
     }
 }
 
+partial class ParametersExample_0_0_1 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddParametersExample_0_0_1();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1(

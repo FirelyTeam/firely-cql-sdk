@@ -28,6 +28,12 @@ public static partial class HybridHWMFHIR_0_102_005ServiceCollectionExtensions
     }
 }
 
+partial class HybridHWMFHIR_0_102_005 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHybridHWMFHIR_0_102_005();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HybridHWMFHIR", "0.102.005")]
 public partial class HybridHWMFHIR_0_102_005(

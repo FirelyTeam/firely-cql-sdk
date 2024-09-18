@@ -28,6 +28,12 @@ public static partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012Ser
     }
 }
 
+partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddSafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("SafeUseofOpioidsConcurrentPrescribingFHIR", "0.0.012")]
 public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012(

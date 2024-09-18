@@ -32,6 +32,12 @@ public static partial class AppropriateTestingforPharyngitisFHIR_0_1_000ServiceC
     }
 }
 
+partial class AppropriateTestingforPharyngitisFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAppropriateTestingforPharyngitisFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AppropriateTestingforPharyngitisFHIR", "0.1.000")]
 public partial class AppropriateTestingforPharyngitisFHIR_0_1_000(

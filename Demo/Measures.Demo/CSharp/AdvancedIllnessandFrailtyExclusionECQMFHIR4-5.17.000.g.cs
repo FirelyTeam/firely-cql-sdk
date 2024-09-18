@@ -28,6 +28,12 @@ public static partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     }
 }
 
+partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
 public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000(

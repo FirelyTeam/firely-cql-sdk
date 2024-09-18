@@ -46,6 +46,8 @@ Hl7.Cql.Abstractions.IEquivalenceComparer<T>
 Hl7.Cql.Abstractions.IEquivalenceComparer<T>.Equivalent(T x, T y, string? precision) -> bool
 Hl7.Cql.Abstractions.IEquivalentable<T>
 Hl7.Cql.Abstractions.IEquivalentable<T>.Equivalent(T? other, string? precision) -> bool
+Hl7.Cql.Abstractions.ILibraryService
+Hl7.Cql.Abstractions.ILibraryService.AddLibraryService(Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> void
 Hl7.Cql.Abstractions.TypeResolver
 Hl7.Cql.Abstractions.TypeResolver.TypeResolver() -> void
 Hl7.Cql.Abstractions.UCUMUnits

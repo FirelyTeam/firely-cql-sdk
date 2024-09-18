@@ -28,6 +28,12 @@ public static partial class AdultOutpatientEncounters_4_8_000ServiceCollectionEx
     }
 }
 
+partial class AdultOutpatientEncounters_4_8_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAdultOutpatientEncounters_4_8_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AdultOutpatientEncounters", "4.8.000")]
 public partial class AdultOutpatientEncounters_4_8_000(

@@ -26,6 +26,12 @@ public static partial class DevDays_2023_0_0ServiceCollectionExtensions
     }
 }
 
+partial class DevDays_2023_0_0 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddDevDays_2023_0_0();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DevDays", "2023.0.0")]
 public partial class DevDays_2023_0_0(

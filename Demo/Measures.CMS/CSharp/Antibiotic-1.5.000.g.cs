@@ -27,6 +27,12 @@ public static partial class Antibiotic_1_5_000ServiceCollectionExtensions
     }
 }
 
+partial class Antibiotic_1_5_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAntibiotic_1_5_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Antibiotic", "1.5.000")]
 public partial class Antibiotic_1_5_000(

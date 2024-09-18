@@ -30,6 +30,12 @@ public static partial class DischargedonAntithromboticTherapyFHIR_0_9_000Service
     }
 }
 
+partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddDischargedonAntithromboticTherapyFHIR_0_9_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.9.000")]
 public partial class DischargedonAntithromboticTherapyFHIR_0_9_000(

@@ -30,6 +30,12 @@ public static partial class HIVRetentionFHIR_0_1_000ServiceCollectionExtensions
     }
 }
 
+partial class HIVRetentionFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHIVRetentionFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HIVRetentionFHIR", "0.1.000")]
 public partial class HIVRetentionFHIR_0_1_000(

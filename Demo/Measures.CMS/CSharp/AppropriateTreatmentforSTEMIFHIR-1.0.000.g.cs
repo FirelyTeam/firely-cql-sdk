@@ -29,6 +29,12 @@ public static partial class AppropriateTreatmentforSTEMIFHIR_1_0_000ServiceColle
     }
 }
 
+partial class AppropriateTreatmentforSTEMIFHIR_1_0_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAppropriateTreatmentforSTEMIFHIR_1_0_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AppropriateTreatmentforSTEMIFHIR", "1.0.000")]
 public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000(

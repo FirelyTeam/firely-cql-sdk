@@ -26,6 +26,12 @@ public static partial class FHIRConversionTest_2023_0_0ServiceCollectionExtensio
     }
 }
 
+partial class FHIRConversionTest_2023_0_0 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddFHIRConversionTest_2023_0_0();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
 public partial class FHIRConversionTest_2023_0_0(

@@ -30,6 +30,12 @@ public static partial class OncologyPainIntensityQuantifiedFHIR_0_1_000ServiceCo
     }
 }
 
+partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddOncologyPainIntensityQuantifiedFHIR_0_1_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("OncologyPainIntensityQuantifiedFHIR", "0.1.000")]
 public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000(

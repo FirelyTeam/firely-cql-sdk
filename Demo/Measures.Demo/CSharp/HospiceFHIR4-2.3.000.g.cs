@@ -27,6 +27,12 @@ public static partial class HospiceFHIR4_2_3_000ServiceCollectionExtensions
     }
 }
 
+partial class HospiceFHIR4_2_3_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddHospiceFHIR4_2_3_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("HospiceFHIR4", "2.3.000")]
 public partial class HospiceFHIR4_2_3_000(

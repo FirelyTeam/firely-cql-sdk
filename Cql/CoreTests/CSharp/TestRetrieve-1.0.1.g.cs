@@ -27,6 +27,12 @@ public static partial class TestRetrieve_1_0_1ServiceCollectionExtensions
     }
 }
 
+partial class TestRetrieve_1_0_1 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddTestRetrieve_1_0_1();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("TestRetrieve", "1.0.1")]
 public partial class TestRetrieve_1_0_1(

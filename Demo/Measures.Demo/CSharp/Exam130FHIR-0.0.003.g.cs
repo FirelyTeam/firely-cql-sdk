@@ -33,6 +33,12 @@ public static partial class Exam130FHIR_0_0_003ServiceCollectionExtensions
     }
 }
 
+partial class Exam130FHIR_0_0_003 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddExam130FHIR_0_0_003();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Exam130FHIR", "0.0.003")]
 public partial class Exam130FHIR_0_0_003(

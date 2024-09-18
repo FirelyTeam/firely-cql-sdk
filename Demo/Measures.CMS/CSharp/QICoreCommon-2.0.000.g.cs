@@ -26,6 +26,12 @@ public static partial class QICoreCommon_2_0_000ServiceCollectionExtensions
     }
 }
 
+partial class QICoreCommon_2_0_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddQICoreCommon_2_0_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("QICoreCommon", "2.0.000")]
 public partial class QICoreCommon_2_0_000(

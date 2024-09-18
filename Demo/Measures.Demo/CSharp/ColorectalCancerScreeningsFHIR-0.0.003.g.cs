@@ -33,6 +33,12 @@ public static partial class ColorectalCancerScreeningsFHIR_0_0_003ServiceCollect
     }
 }
 
+partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddColorectalCancerScreeningsFHIR_0_0_003();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("ColorectalCancerScreeningsFHIR", "0.0.003")]
 public partial class ColorectalCancerScreeningsFHIR_0_0_003(

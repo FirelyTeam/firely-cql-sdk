@@ -27,6 +27,12 @@ public static partial class PalliativeCareFHIR_0_6_000ServiceCollectionExtension
     }
 }
 
+partial class PalliativeCareFHIR_0_6_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddPalliativeCareFHIR_0_6_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
 public partial class PalliativeCareFHIR_0_6_000(

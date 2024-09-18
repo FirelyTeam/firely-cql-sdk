@@ -31,6 +31,12 @@ public static partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR
     }
 }
 
+partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddFunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("FunctionalStatusAssessmentforTotalHipReplacementFHIR", "0.0.008")]
 public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008(

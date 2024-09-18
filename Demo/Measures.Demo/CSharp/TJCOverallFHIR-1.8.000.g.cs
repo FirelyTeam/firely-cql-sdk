@@ -27,6 +27,12 @@ public static partial class TJCOverallFHIR_1_8_000ServiceCollectionExtensions
     }
 }
 
+partial class TJCOverallFHIR_1_8_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddTJCOverallFHIR_1_8_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
 public partial class TJCOverallFHIR_1_8_000(

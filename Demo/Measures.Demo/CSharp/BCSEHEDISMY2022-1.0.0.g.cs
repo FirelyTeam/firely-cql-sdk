@@ -32,6 +32,12 @@ public static partial class BCSEHEDISMY2022_1_0_0ServiceCollectionExtensions
     }
 }
 
+partial class BCSEHEDISMY2022_1_0_0 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddBCSEHEDISMY2022_1_0_0();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public partial class BCSEHEDISMY2022_1_0_0(

@@ -33,6 +33,12 @@ public static partial class BreastCancerScreeningsFHIR_0_0_009ServiceCollectionE
     }
 }
 
+partial class BreastCancerScreeningsFHIR_0_0_009 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddBreastCancerScreeningsFHIR_0_0_009();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("BreastCancerScreeningsFHIR", "0.0.009")]
 public partial class BreastCancerScreeningsFHIR_0_0_009(

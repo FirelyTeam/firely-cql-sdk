@@ -27,6 +27,12 @@ public static partial class AHAOverall_2_6_000ServiceCollectionExtensions
     }
 }
 
+partial class AHAOverall_2_6_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddAHAOverall_2_6_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AHAOverall", "2.6.000")]
 public partial class AHAOverall_2_6_000(

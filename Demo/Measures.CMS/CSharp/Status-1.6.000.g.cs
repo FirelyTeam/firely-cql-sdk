@@ -26,6 +26,12 @@ public static partial class Status_1_6_000ServiceCollectionExtensions
     }
 }
 
+partial class Status_1_6_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddStatus_1_6_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Status", "1.6.000")]
 public partial class Status_1_6_000(

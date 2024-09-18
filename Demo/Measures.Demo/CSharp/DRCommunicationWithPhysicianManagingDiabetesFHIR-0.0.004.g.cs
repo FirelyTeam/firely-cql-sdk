@@ -28,6 +28,12 @@ public static partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0
     }
 }
 
+partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddDRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004(

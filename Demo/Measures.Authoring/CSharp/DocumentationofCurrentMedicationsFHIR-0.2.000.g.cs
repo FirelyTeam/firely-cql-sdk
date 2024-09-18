@@ -28,6 +28,12 @@ public static partial class DocumentationofCurrentMedicationsFHIR_0_2_000Service
     }
 }
 
+partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddDocumentationofCurrentMedicationsFHIR_0_2_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("DocumentationofCurrentMedicationsFHIR", "0.2.000")]
 public partial class DocumentationofCurrentMedicationsFHIR_0_2_000(

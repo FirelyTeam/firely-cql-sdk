@@ -26,6 +26,12 @@ public static partial class NCQATerminology_1_0_0ServiceCollectionExtensions
     }
 }
 
+partial class NCQATerminology_1_0_0 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddNCQATerminology_1_0_0();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQATerminology", "1.0.0")]
 public partial class NCQATerminology_1_0_0(

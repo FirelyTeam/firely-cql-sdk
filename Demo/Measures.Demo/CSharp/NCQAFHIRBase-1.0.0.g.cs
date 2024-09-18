@@ -26,6 +26,12 @@ public static partial class NCQAFHIRBase_1_0_0ServiceCollectionExtensions
     }
 }
 
+partial class NCQAFHIRBase_1_0_0 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddNCQAFHIRBase_1_0_0();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAFHIRBase", "1.0.0")]
 public partial class NCQAFHIRBase_1_0_0(

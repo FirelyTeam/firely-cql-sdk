@@ -27,6 +27,12 @@ public static partial class VTE_8_6_000ServiceCollectionExtensions
     }
 }
 
+partial class VTE_8_6_000 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddVTE_8_6_000();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("VTE", "8.6.000")]
 public partial class VTE_8_6_000(

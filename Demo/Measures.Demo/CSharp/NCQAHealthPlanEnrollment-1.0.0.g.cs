@@ -29,6 +29,12 @@ public static partial class NCQAHealthPlanEnrollment_1_0_0ServiceCollectionExten
     }
 }
 
+partial class NCQAHealthPlanEnrollment_1_0_0 : ILibraryService
+{
+    static void ILibraryService.AddLibraryService(IServiceCollection services) =>
+        services.AddNCQAHealthPlanEnrollment_1_0_0();
+}
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAHealthPlanEnrollment", "1.0.0")]
 public partial class NCQAHealthPlanEnrollment_1_0_0(
