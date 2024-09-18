@@ -191,6 +191,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
                 int indentLevel = 0;
                 WriteUsings(writer);
+                WritePragmas(writer);
 
                 // Namespace
                 if (!string.IsNullOrWhiteSpace(Namespace))
@@ -213,7 +214,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteClass(DefinitionDictionary<LambdaExpression> definitions,
+        private void WriteClass(
+            DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
             Func<string, string?> libraryNameToClassName,
             string libraryName,
@@ -237,9 +239,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indentLevel, $"[CqlLibrary({QuoteString(libraryAttribute)}, {QuoteString(versionAttribute)})]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
             if (PartialClass)
-                writer.WriteLine(indentLevel, $"partial static class {className}");
+                writer.Write(indentLevel, $"public partial class {className}");
             else
-                writer.WriteLine(indentLevel, $"public static class {className}");
+                writer.Write(indentLevel, $"public class {className}");
+            WritePrimaryConstructor(librarySet, libraryNameToClassName, libraryName, writer, indentLevel);
             writer.WriteLine(indentLevel, "{");
             writer.WriteLine();
             indentLevel += 1;
@@ -305,22 +308,41 @@ namespace Hl7.Cql.CodeGeneration.NET
         //     }
         // }
 
-        // private static void WriteDependencies(
-        //     LibrarySet librarySet,
-        //     Func<string, string?> libraryNameToClassName,
-        //     string libraryName,
-        //     StreamWriter writer,
-        //     int indentLevel)
-        // {
-        //     var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
-        //
-        //     foreach (var dependentLibrary in requiredLibraries)
-        //     {
-        //         var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
-        //         var memberName = typeName;
-        //         writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
-        //     }
-        // }
+        private static void WritePrimaryConstructor(
+            LibrarySet librarySet,
+            Func<string, string?> libraryNameToClassName,
+            string libraryName,
+            StreamWriter writer,
+            int indentLevel)
+        {
+            var requiredLibraries = librarySet.GetLibraryDependencies(libraryName, throwError: true);
+            if (requiredLibraries.Count == 0)
+            {
+                writer.WriteLine();
+                return;
+            }
+
+            writer.WriteLine("(");
+            indentLevel++;
+            bool atFirst = true;
+            foreach (var dependentLibrary in requiredLibraries)
+            {
+                if (atFirst)
+                {
+                    atFirst = false;
+                }
+                else
+                {
+                    writer.WriteLine(",");
+                }
+
+                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
+                var memberName = VariableNameGenerator.NormalizePrimaryConstructorIdentifier(typeName);
+                writer.Write(indentLevel,$"{typeName} {memberName}");
+            }
+            indentLevel--;
+            writer.WriteLine(")");
+        }
 
         // private void WriteCachedValues(DefinitionDictionary<LambdaExpression> definitions,
         //     string libraryName, StreamWriter writer, int indentLevel)
@@ -435,14 +457,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                 }
 
-                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public static");
+                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public ");
                 writer.Write(func);
             }
             else
             {
                 writer.WriteLine(indentLevel, $"[CqlDeclaration({QuoteString(cqlName)})]");
                 WriteTags(writer, indentLevel, tags);
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public static"));
+                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public "));
             }
         }
 
@@ -469,10 +491,18 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 writer.WriteLine($"using {@using};");
             }
+
             foreach (var @using in _aliasedUsings)
             {
                 writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
             }
+        }
+
+        private void WritePragmas(TextWriter writer)
+        {
+            writer.WriteLine();
+            writer.WriteLine("#pragma warning disable CS9113 // Parameter is unread.");
+            writer.WriteLine();
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)

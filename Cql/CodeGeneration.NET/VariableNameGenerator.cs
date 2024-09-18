@@ -125,5 +125,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return identifier;
         }
 
+        public static string? NormalizePrimaryConstructorIdentifier(string? identifier) =>
+            NormalizeIdentifier(identifier) is { } s ? $"_{s}" : null;
     }
 }

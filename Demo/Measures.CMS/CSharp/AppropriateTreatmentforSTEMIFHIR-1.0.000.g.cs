@@ -10,168 +10,175 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("AppropriateTreatmentforSTEMIFHIR", "1.0.000")]
-public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
+public class AppropriateTreatmentforSTEMIFHIR_1_0_000(
+    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
+    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
+    CQMCommon_2_0_000 _CQMCommon_2_0_000)
 {
 
     [CqlDeclaration("Active Bleeding Excluding Menses or Bleeding Diathesis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036")]
-	public static CqlValueSet Active_Bleeding_Excluding_Menses_or_Bleeding_Diathesis(CqlContext context) => 
+	public  CqlValueSet Active_Bleeding_Excluding_Menses_or_Bleeding_Diathesis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036", default);
 
     [CqlDeclaration("Active Peptic Ulcer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4031")]
-	public static CqlValueSet Active_Peptic_Ulcer(CqlContext context) => 
+	public  CqlValueSet Active_Peptic_Ulcer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4031", default);
 
     [CqlDeclaration("Adverse reaction to thrombolytics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.6")]
-	public static CqlValueSet Adverse_reaction_to_thrombolytics(CqlContext context) => 
+	public  CqlValueSet Adverse_reaction_to_thrombolytics(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.6", default);
 
     [CqlDeclaration("Allergy to thrombolytics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.5")]
-	public static CqlValueSet Allergy_to_thrombolytics(CqlContext context) => 
+	public  CqlValueSet Allergy_to_thrombolytics(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.5", default);
 
     [CqlDeclaration("Oral Anticoagulant Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4045")]
-	public static CqlValueSet Oral_Anticoagulant_Medications(CqlContext context) => 
+	public  CqlValueSet Oral_Anticoagulant_Medications(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4045", default);
 
     [CqlDeclaration("Aortic Dissection and Rupture")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4028")]
-	public static CqlValueSet Aortic_Dissection_and_Rupture(CqlContext context) => 
+	public  CqlValueSet Aortic_Dissection_and_Rupture(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4028", default);
 
     [CqlDeclaration("birth date")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4")]
-	public static CqlValueSet birth_date(CqlContext context) => 
+	public  CqlValueSet birth_date(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", default);
 
     [CqlDeclaration("Cardiopulmonary Arrest")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4048")]
-	public static CqlValueSet Cardiopulmonary_Arrest(CqlContext context) => 
+	public  CqlValueSet Cardiopulmonary_Arrest(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4048", default);
 
     [CqlDeclaration("Cerebral Vascular Lesion")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4025")]
-	public static CqlValueSet Cerebral_Vascular_Lesion(CqlContext context) => 
+	public  CqlValueSet Cerebral_Vascular_Lesion(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4025", default);
 
     [CqlDeclaration("Closed Head and Facial Trauma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4026")]
-	public static CqlValueSet Closed_Head_and_Facial_Trauma(CqlContext context) => 
+	public  CqlValueSet Closed_Head_and_Facial_Trauma(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4026", default);
 
     [CqlDeclaration("Dementia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4043")]
-	public static CqlValueSet Dementia(CqlContext context) => 
+	public  CqlValueSet Dementia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4043", default);
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
-	public static CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) => 
+	public  CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", default);
 
     [CqlDeclaration("ED")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1085")]
-	public static CqlValueSet ED(CqlContext context) => 
+	public  CqlValueSet ED(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1085", default);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public static CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+	public  CqlValueSet Emergency_Department_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
     [CqlDeclaration("Endotracheal Intubation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.69")]
-	public static CqlValueSet Endotracheal_Intubation(CqlContext context) => 
+	public  CqlValueSet Endotracheal_Intubation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.69", default);
 
     [CqlDeclaration("Fibrinolytic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4020")]
-	public static CqlValueSet Fibrinolytic_Therapy(CqlContext context) => 
+	public  CqlValueSet Fibrinolytic_Therapy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4020", default);
 
     [CqlDeclaration("Intracranial or Intraspinal surgery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.2")]
-	public static CqlValueSet Intracranial_or_Intraspinal_surgery(CqlContext context) => 
+	public  CqlValueSet Intracranial_or_Intraspinal_surgery(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.2", default);
 
     [CqlDeclaration("Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.104.12.1024")]
-	public static CqlValueSet Ischemic_Stroke(CqlContext context) => 
+	public  CqlValueSet Ischemic_Stroke(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.104.12.1024", default);
 
     [CqlDeclaration("Major Surgical Procedure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4056")]
-	public static CqlValueSet Major_Surgical_Procedure(CqlContext context) => 
+	public  CqlValueSet Major_Surgical_Procedure(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4056", default);
 
     [CqlDeclaration("Malignant Intracranial Neoplasm Group")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.3")]
-	public static CqlValueSet Malignant_Intracranial_Neoplasm_Group(CqlContext context) => 
+	public  CqlValueSet Malignant_Intracranial_Neoplasm_Group(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.3", default);
 
     [CqlDeclaration("Insertion or Replacement of Mechanical Circulatory Assist Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4052")]
-	public static CqlValueSet Insertion_or_Replacement_of_Mechanical_Circulatory_Assist_Device(CqlContext context) => 
+	public  CqlValueSet Insertion_or_Replacement_of_Mechanical_Circulatory_Assist_Device(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4052", default);
 
     [CqlDeclaration("Neurologic impairment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1012")]
-	public static CqlValueSet Neurologic_impairment(CqlContext context) => 
+	public  CqlValueSet Neurologic_impairment(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1012", default);
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
-	public static CqlValueSet Patient_Expired(CqlContext context) => 
+	public  CqlValueSet Patient_Expired(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
 
     [CqlDeclaration("Percutaneous Coronary Intervention")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.2000.5")]
-	public static CqlValueSet Percutaneous_Coronary_Intervention(CqlContext context) => 
+	public  CqlValueSet Percutaneous_Coronary_Intervention(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.2000.5", default);
 
     [CqlDeclaration("Pregnancy ICD10 SNOMEDCT")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4055")]
-	public static CqlValueSet Pregnancy_ICD10_SNOMEDCT(CqlContext context) => 
+	public  CqlValueSet Pregnancy_ICD10_SNOMEDCT(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4055", default);
 
     [CqlDeclaration("STEMI")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4017")]
-	public static CqlValueSet STEMI(CqlContext context) => 
+	public  CqlValueSet STEMI(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4017", default);
 
     [CqlDeclaration("Thrombolytic medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.4")]
-	public static CqlValueSet Thrombolytic_medications(CqlContext context) => 
+	public  CqlValueSet Thrombolytic_medications(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.4", default);
 
     [CqlDeclaration("Birthdate")]
-	public static CqlCode Birthdate(CqlContext context) => 
+	public  CqlCode Birthdate(CqlContext context) => 
 		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Emergency Department")]
-	public static CqlCode Emergency_Department(CqlContext context) => 
+	public  CqlCode Emergency_Department(CqlContext context) => 
 		new CqlCode("1108-0", "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html", default, default);
 
     [CqlDeclaration("Patient transfer (procedure)")]
-	public static CqlCode Patient_transfer__procedure_(CqlContext context) => 
+	public  CqlCode Patient_transfer__procedure_(CqlContext context) => 
 		new CqlCode("107724000", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Streptokinase adverse reaction (disorder)")]
-	public static CqlCode Streptokinase_adverse_reaction__disorder_(CqlContext context) => 
+	public  CqlCode Streptokinase_adverse_reaction__disorder_(CqlContext context) => 
 		new CqlCode("293571007", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("EMER")]
-	public static CqlCode EMER(CqlContext context) => 
+	public  CqlCode EMER(CqlContext context) => 
 		new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
     [CqlDeclaration("LOINC")]
-	public static CqlCode[] LOINC(CqlContext context)
+	public  CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", default, default),
@@ -181,7 +188,7 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("HSLOC")]
-	public static CqlCode[] HSLOC(CqlContext context)
+	public  CqlCode[] HSLOC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("1108-0", "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html", default, default),
@@ -191,7 +198,7 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public static CqlCode[] SNOMEDCT(CqlContext context)
+	public  CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("107724000", "http://snomed.info/sct", default, default),
@@ -202,7 +209,7 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("ActCode")]
-	public static CqlCode[] ActCode(CqlContext context)
+	public  CqlCode[] ActCode(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -212,7 +219,7 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public static CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -223,7 +230,7 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -232,9 +239,9 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("ED Encounter with Encounter Diagnosis of STEMI")]
-	public static IEnumerable<Encounter> ED_Encounter_with_Encounter_Diagnosis_of_STEMI(CqlContext context)
+	public  IEnumerable<Encounter> ED_Encounter_with_Encounter_Diagnosis_of_STEMI(CqlContext context)
 	{
-		CqlValueSet a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED(context);
+		CqlValueSet a_ = this.ED(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		bool? c_(Encounter EDEncounter)
 		{
@@ -243,26 +250,26 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
 			bool? h_ = context.Operators.Equal(g_, "finished");
 			Coding i_ = EDEncounter?.Class;
-			CqlCode j_ = FHIRHelpers_4_3_000.ToCode(context, i_);
-			CqlCode k_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.EMER(context);
+			CqlCode j_ = _FHIRHelpers_4_3_000.ToCode(context, i_);
+			CqlCode k_ = this.EMER(context);
 			bool? l_ = context.Operators.Equivalent(j_, k_);
 			bool? m_ = context.Operators.And(h_, l_);
 			List<CodeableConcept> n_ = EDEncounter?.ReasonCode;
 			CqlConcept o_(CodeableConcept @this)
 			{
-				CqlConcept ad_ = FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept ad_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
 
 				return ad_;
 			};
 			IEnumerable<CqlConcept> p_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)n_, o_);
-			CqlValueSet q_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.STEMI(context);
+			CqlValueSet q_ = this.STEMI(context);
 			bool? r_ = context.Operators.ConceptsInValueSet(p_, q_);
-			IEnumerable<Condition> s_ = CQMCommon_2_0_000.encounterDiagnosis(context, EDEncounter);
+			IEnumerable<Condition> s_ = _CQMCommon_2_0_000.encounterDiagnosis(context, EDEncounter);
 			bool? t_(Condition EncDiagnosis)
 			{
 				CodeableConcept ae_ = EncDiagnosis?.Code;
-				CqlConcept af_ = FHIRHelpers_4_3_000.ToConcept(context, ae_);
-				CqlValueSet ag_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.STEMI(context);
+				CqlConcept af_ = _FHIRHelpers_4_3_000.ToConcept(context, ae_);
+				CqlValueSet ag_ = this.STEMI(context);
 				bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
 
 				return ah_;
@@ -271,9 +278,9 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 			bool? v_ = context.Operators.Exists<Condition>(u_);
 			bool? w_ = context.Operators.Or(r_, v_);
 			bool? x_ = context.Operators.And(m_, w_);
-			CqlInterval<CqlDateTime> y_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
 			Period z_ = EDEncounter?.Period;
-			CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(context, z_);
+			CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, z_);
 			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, default);
 			bool? ac_ = context.Operators.And(x_, ab_);
 
@@ -285,19 +292,19 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("ED Encounter with Diagnosis of STEMI")]
-	public static IEnumerable<Encounter> ED_Encounter_with_Diagnosis_of_STEMI(CqlContext context)
+	public  IEnumerable<Encounter> ED_Encounter_with_Diagnosis_of_STEMI(CqlContext context)
 	{
-		CqlValueSet a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED(context);
+		CqlValueSet a_ = this.ED(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		IEnumerable<Encounter> c_(Encounter EDEncounter)
 		{
-			CqlValueSet e_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.STEMI(context);
+			CqlValueSet e_ = this.STEMI(context);
 			IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(e_, default);
 			bool? g_(Condition DxSTEMI)
 			{
 				CodeableConcept k_ = DxSTEMI?.ClinicalStatus;
-				CqlConcept l_ = FHIRHelpers_4_3_000.ToConcept(context, k_);
-				CqlCode m_ = QICoreCommon_2_0_000.active(context);
+				CqlConcept l_ = _FHIRHelpers_4_3_000.ToConcept(context, k_);
+				CqlCode m_ = _QICoreCommon_2_0_000.active(context);
 				CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
 				bool? o_ = context.Operators.Equivalent(l_, n_);
 				Code<Encounter.EncounterStatus> p_ = EDEncounter?.StatusElement;
@@ -306,18 +313,18 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				bool? s_ = context.Operators.Equal(r_, "finished");
 				bool? t_ = context.Operators.And(o_, s_);
 				Coding u_ = EDEncounter?.Class;
-				CqlCode v_ = FHIRHelpers_4_3_000.ToCode(context, u_);
-				CqlCode w_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.EMER(context);
+				CqlCode v_ = _FHIRHelpers_4_3_000.ToCode(context, u_);
+				CqlCode w_ = this.EMER(context);
 				bool? x_ = context.Operators.Equivalent(v_, w_);
 				bool? y_ = context.Operators.And(t_, x_);
-				CqlInterval<CqlDateTime> z_ = QICoreCommon_2_0_000.prevalenceInterval(context, DxSTEMI);
+				CqlInterval<CqlDateTime> z_ = _QICoreCommon_2_0_000.prevalenceInterval(context, DxSTEMI);
 				CqlDateTime aa_ = context.Operators.Start(z_);
 				Period ab_ = EDEncounter?.Period;
-				CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_3_000.ToInterval(context, ab_);
+				CqlInterval<CqlDateTime> ac_ = _FHIRHelpers_4_3_000.ToInterval(context, ab_);
 				bool? ad_ = context.Operators.In<CqlDateTime>(aa_, ac_, default);
 				bool? ae_ = context.Operators.And(y_, ad_);
-				CqlInterval<CqlDateTime> af_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Measurement_Period(context);
-				CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_3_000.ToInterval(context, ab_);
+				CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
+				CqlInterval<CqlDateTime> ah_ = _FHIRHelpers_4_3_000.ToInterval(context, ab_);
 				bool? ai_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(af_, ah_, "day");
 				bool? aj_ = context.Operators.And(ae_, ai_);
 
@@ -336,27 +343,27 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("ED Encounter with STEMI Diagnosis")]
-	public static IEnumerable<Encounter> ED_Encounter_with_STEMI_Diagnosis(CqlContext context)
+	public  IEnumerable<Encounter> ED_Encounter_with_STEMI_Diagnosis(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_Encounter_Diagnosis_of_STEMI(context);
-		IEnumerable<Encounter> b_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_Diagnosis_of_STEMI(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_Encounter_Diagnosis_of_STEMI(context);
+		IEnumerable<Encounter> b_ = this.ED_Encounter_with_Diagnosis_of_STEMI(context);
 		IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Initial Population")]
-	public static IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public  IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		bool? b_(Encounter EDwithSTEMI)
 		{
-			Patient d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Patient(context);
+			Patient d_ = this.Patient(context);
 			Date e_ = d_?.BirthDateElement;
 			string f_ = e_?.Value;
 			CqlDate g_ = context.Operators.ConvertStringToDate(f_);
 			Period h_ = EDwithSTEMI?.Period;
-			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.ToInterval(context, h_);
+			CqlInterval<CqlDateTime> i_ = _FHIRHelpers_4_3_000.ToInterval(context, h_);
 			CqlDateTime j_ = context.Operators.Start(i_);
 			CqlDate k_ = context.Operators.DateFrom(j_);
 			int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
@@ -370,33 +377,33 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public static IEnumerable<Encounter> Denominator(CqlContext context)
+	public  IEnumerable<Encounter> Denominator(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Initial_Population(context);
+		IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Allergy or Intolerance to Thrombolytic Medications Overlaps ED Encounter")]
-	public static IEnumerable<Encounter> Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(CqlContext context)
+	public  IEnumerable<Encounter> Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Thrombolytic_medications(context);
+			CqlValueSet d_ = this.Thrombolytic_medications(context);
 			IEnumerable<AllergyIntolerance> e_ = context.Operators.RetrieveByValueSet<AllergyIntolerance>(d_, default);
 			bool? f_(AllergyIntolerance ThrombolyticAllergy)
 			{
 				CodeableConcept j_ = ThrombolyticAllergy?.ClinicalStatus;
-				CqlConcept k_ = FHIRHelpers_4_3_000.ToConcept(context, j_);
-				CqlCode l_ = QICoreCommon_2_0_000.allergy_active(context);
+				CqlConcept k_ = _FHIRHelpers_4_3_000.ToConcept(context, j_);
+				CqlCode l_ = _QICoreCommon_2_0_000.allergy_active(context);
 				CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
 				bool? n_ = context.Operators.Equivalent(k_, m_);
 				DataType o_ = ThrombolyticAllergy?.Onset;
-				object p_ = FHIRHelpers_4_3_000.ToValue(context, o_);
-				CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.toInterval(context, p_);
+				object p_ = _FHIRHelpers_4_3_000.ToValue(context, o_);
+				CqlInterval<CqlDateTime> q_ = _QICoreCommon_2_0_000.toInterval(context, p_);
 				Period r_ = EDwSTEMI?.Period;
-				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 				bool? t_ = context.Operators.Overlaps(q_, s_, default);
 				bool? u_ = context.Operators.And(n_, t_);
 
@@ -415,19 +422,19 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Adverse Effect to Thrombolytic Medications Before End of ED Encounter")]
-	public static IEnumerable<Encounter> Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(CqlContext context)
+	public  IEnumerable<Encounter> Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Adverse_reaction_to_thrombolytics(context);
+			CqlValueSet d_ = this.Adverse_reaction_to_thrombolytics(context);
 			IEnumerable<AdverseEvent> e_ = context.Operators.RetrieveByValueSet<AdverseEvent>(d_, default);
 			bool? f_(AdverseEvent ThrombolyticAdverseEvent)
 			{
 				FhirDateTime j_ = ThrombolyticAdverseEvent?.RecordedDateElement;
 				CqlDateTime k_ = context.Operators.Convert<CqlDateTime>(j_);
 				Period l_ = EDwSTEMI?.Period;
-				CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(context, l_);
+				CqlInterval<CqlDateTime> m_ = _FHIRHelpers_4_3_000.ToInterval(context, l_);
 				CqlDateTime n_ = context.Operators.End(m_);
 				bool? o_ = context.Operators.Before(k_, n_, default);
 				Code<AdverseEvent.AdverseEventActuality> p_ = ThrombolyticAdverseEvent?.ActualityElement;
@@ -451,33 +458,33 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Active Exclusion Diagnosis at Start of ED Encounter")]
-	public static IEnumerable<Encounter> Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter(CqlContext context)
+	public  IEnumerable<Encounter> Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Active_Bleeding_Excluding_Menses_or_Bleeding_Diathesis(context);
+			CqlValueSet d_ = this.Active_Bleeding_Excluding_Menses_or_Bleeding_Diathesis(context);
 			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
-			CqlValueSet f_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Malignant_Intracranial_Neoplasm_Group(context);
+			CqlValueSet f_ = this.Malignant_Intracranial_Neoplasm_Group(context);
 			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
 			IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
-			CqlValueSet i_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Cerebral_Vascular_Lesion(context);
+			CqlValueSet i_ = this.Cerebral_Vascular_Lesion(context);
 			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, default);
-			CqlValueSet k_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Dementia(context);
+			CqlValueSet k_ = this.Dementia(context);
 			IEnumerable<Condition> l_ = context.Operators.RetrieveByValueSet<Condition>(k_, default);
 			IEnumerable<Condition> m_ = context.Operators.Union<Condition>(j_, l_);
 			IEnumerable<Condition> n_ = context.Operators.Union<Condition>(h_, m_);
-			CqlValueSet o_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Pregnancy_ICD10_SNOMEDCT(context);
+			CqlValueSet o_ = this.Pregnancy_ICD10_SNOMEDCT(context);
 			IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, default);
-			CqlValueSet q_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Allergy_to_thrombolytics(context);
+			CqlValueSet q_ = this.Allergy_to_thrombolytics(context);
 			IEnumerable<Condition> r_ = context.Operators.RetrieveByValueSet<Condition>(q_, default);
 			IEnumerable<Condition> s_ = context.Operators.Union<Condition>(p_, r_);
 			IEnumerable<Condition> t_ = context.Operators.Union<Condition>(n_, s_);
 			bool? u_(Condition ActiveExclusionDx)
 			{
-				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.prevalenceInterval(context, ActiveExclusionDx);
+				CqlInterval<CqlDateTime> y_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ActiveExclusionDx);
 				Period z_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(context, z_);
+				CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, z_);
 				bool? ab_ = context.Operators.OverlapsBefore(y_, aa_, default);
 
 				return ab_;
@@ -495,12 +502,12 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Active Oral Anticoagulant Medication at the Start of ED Encounter")]
-	public static IEnumerable<Encounter> Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(CqlContext context)
+	public  IEnumerable<Encounter> Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Oral_Anticoagulant_Medications(context);
+			CqlValueSet d_ = this.Oral_Anticoagulant_Medications(context);
 			IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default);
 			IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default);
 			IEnumerable<MedicationRequest> h_ = context.Operators.Union<MedicationRequest>(e_, g_);
@@ -518,7 +525,7 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				FhirDateTime v_ = OralAnticoagulant?.AuthoredOnElement;
 				CqlDateTime w_ = context.Operators.Convert<CqlDateTime>(v_);
 				Period x_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_3_000.ToInterval(context, x_);
+				CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_3_000.ToInterval(context, x_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				bool? aa_ = context.Operators.SameOrBefore(w_, z_, default);
 				bool? ab_ = context.Operators.And(u_, aa_);
@@ -538,36 +545,36 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Exclusion Diagnosis During ED Encounter or Within 24 Hours of ED Encounter Start")]
-	public static IEnumerable<Encounter> Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context)
+	public  IEnumerable<Encounter> Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Aortic_Dissection_and_Rupture(context);
+			CqlValueSet d_ = this.Aortic_Dissection_and_Rupture(context);
 			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
-			CqlValueSet f_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Neurologic_impairment(context);
+			CqlValueSet f_ = this.Neurologic_impairment(context);
 			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
 			IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
-			CqlValueSet i_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Cardiopulmonary_Arrest(context);
+			CqlValueSet i_ = this.Cardiopulmonary_Arrest(context);
 			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, default);
 			IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_, j_);
 			bool? l_(Condition ExclusionDiagnosis)
 			{
-				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.prevalenceInterval(context, ExclusionDiagnosis);
+				CqlInterval<CqlDateTime> p_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ExclusionDiagnosis);
 				CqlDateTime q_ = context.Operators.Start(p_);
 				Period r_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 				bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
 				CqlDateTime v_ = context.Operators.Start(p_);
-				CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> x_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 				CqlDateTime y_ = context.Operators.Start(x_);
 				CqlQuantity z_ = context.Operators.Quantity(24m, "hours");
 				CqlDateTime aa_ = context.Operators.Subtract(y_, z_);
-				CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> ac_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 				CqlDateTime ad_ = context.Operators.Start(ac_);
 				CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(aa_, ad_, true, false);
 				bool? af_ = context.Operators.In<CqlDateTime>(v_, ae_, default);
-				CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+				CqlInterval<CqlDateTime> ah_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 				CqlDateTime ai_ = context.Operators.Start(ah_);
 				bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
 				bool? ak_ = context.Operators.And(af_, aj_);
@@ -588,29 +595,29 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Major Surgical Procedure 21 Days or Less Before Start of or Starts During ED Encounter")]
-	public static IEnumerable<Encounter> Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(CqlContext context)
+	public  IEnumerable<Encounter> Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Major_Surgical_Procedure(context);
+			CqlValueSet d_ = this.Major_Surgical_Procedure(context);
 			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
 			bool? f_(Procedure MajorSurgery)
 			{
 				DataType j_ = MajorSurgery?.Performed;
-				object k_ = FHIRHelpers_4_3_000.ToValue(context, j_);
-				CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(context, k_);
+				object k_ = _FHIRHelpers_4_3_000.ToValue(context, j_);
+				CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.toInterval(context, k_);
 				CqlDateTime m_ = context.Operators.Start(l_);
 				Period n_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> o_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				CqlQuantity q_ = context.Operators.Quantity(21m, "days");
 				CqlDateTime r_ = context.Operators.Subtract(p_, q_);
-				CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> t_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime u_ = context.Operators.Start(t_);
 				CqlInterval<CqlDateTime> v_ = context.Operators.Interval(r_, u_, true, false);
 				bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, default);
-				CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				bool? aa_ = context.Operators.Not((bool?)(z_ is null));
 				bool? ab_ = context.Operators.And(w_, aa_);
@@ -635,37 +642,37 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Intubation or Mechanical Circulatory Assist Procedure During ED Encounter or Within 24 Hours of ED Encounter Start")]
-	public static IEnumerable<Encounter> Intubation_or_Mechanical_Circulatory_Assist_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context)
+	public  IEnumerable<Encounter> Intubation_or_Mechanical_Circulatory_Assist_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Endotracheal_Intubation(context);
+			CqlValueSet d_ = this.Endotracheal_Intubation(context);
 			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
-			CqlValueSet f_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Insertion_or_Replacement_of_Mechanical_Circulatory_Assist_Device(context);
+			CqlValueSet f_ = this.Insertion_or_Replacement_of_Mechanical_Circulatory_Assist_Device(context);
 			IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
 			IEnumerable<Procedure> h_ = context.Operators.Union<Procedure>(e_, g_);
 			bool? i_(Procedure AirwayProcedure)
 			{
 				DataType m_ = AirwayProcedure?.Performed;
-				object n_ = FHIRHelpers_4_3_000.ToValue(context, m_);
-				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(context, n_);
+				object n_ = _FHIRHelpers_4_3_000.ToValue(context, m_);
+				CqlInterval<CqlDateTime> o_ = _QICoreCommon_2_0_000.toInterval(context, n_);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				Period q_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(context, q_);
+				CqlInterval<CqlDateTime> r_ = _FHIRHelpers_4_3_000.ToInterval(context, q_);
 				bool? s_ = context.Operators.In<CqlDateTime>(p_, r_, default);
-				object u_ = FHIRHelpers_4_3_000.ToValue(context, m_);
-				CqlInterval<CqlDateTime> v_ = QICoreCommon_2_0_000.toInterval(context, u_);
+				object u_ = _FHIRHelpers_4_3_000.ToValue(context, m_);
+				CqlInterval<CqlDateTime> v_ = _QICoreCommon_2_0_000.toInterval(context, u_);
 				CqlDateTime w_ = context.Operators.Start(v_);
-				CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_3_000.ToInterval(context, q_);
+				CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_3_000.ToInterval(context, q_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				CqlQuantity aa_ = context.Operators.Quantity(24m, "hours");
 				CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-				CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(context, q_);
+				CqlInterval<CqlDateTime> ad_ = _FHIRHelpers_4_3_000.ToInterval(context, q_);
 				CqlDateTime ae_ = context.Operators.Start(ad_);
 				CqlInterval<CqlDateTime> af_ = context.Operators.Interval(ab_, ae_, true, false);
 				bool? ag_ = context.Operators.In<CqlDateTime>(w_, af_, default);
-				CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_3_000.ToInterval(context, q_);
+				CqlInterval<CqlDateTime> ai_ = _FHIRHelpers_4_3_000.ToInterval(context, q_);
 				CqlDateTime aj_ = context.Operators.Start(ai_);
 				bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
 				bool? al_ = context.Operators.And(ag_, ak_);
@@ -691,32 +698,32 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Active Exclusion Diagnosis Within 90 Days Before or At the Start of ED Encounter")]
-	public static IEnumerable<Encounter> Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(CqlContext context)
+	public  IEnumerable<Encounter> Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Ischemic_Stroke(context);
+			CqlValueSet d_ = this.Ischemic_Stroke(context);
 			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
-			CqlValueSet f_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Closed_Head_and_Facial_Trauma(context);
+			CqlValueSet f_ = this.Closed_Head_and_Facial_Trauma(context);
 			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
 			IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
-			CqlValueSet i_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Active_Peptic_Ulcer(context);
+			CqlValueSet i_ = this.Active_Peptic_Ulcer(context);
 			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, default);
-			CqlValueSet k_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Cardiopulmonary_Arrest(context);
+			CqlValueSet k_ = this.Cardiopulmonary_Arrest(context);
 			IEnumerable<Condition> l_ = context.Operators.RetrieveByValueSet<Condition>(k_, default);
 			IEnumerable<Condition> m_ = context.Operators.Union<Condition>(j_, l_);
 			IEnumerable<Condition> n_ = context.Operators.Union<Condition>(h_, m_);
 			bool? o_(Condition ExclusionCondition)
 			{
-				CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.prevalenceInterval(context, ExclusionCondition);
+				CqlInterval<CqlDateTime> s_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ExclusionCondition);
 				CqlDateTime t_ = context.Operators.Start(s_);
 				Period u_ = EDwSTEMI?.Period;
-				CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_3_000.ToInterval(context, u_);
+				CqlInterval<CqlDateTime> v_ = _FHIRHelpers_4_3_000.ToInterval(context, u_);
 				CqlDateTime w_ = context.Operators.Start(v_);
 				CqlQuantity x_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime y_ = context.Operators.Subtract(w_, x_);
-				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(context, u_);
+				CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, u_);
 				CqlDateTime ab_ = context.Operators.Start(aa_);
 				CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(y_, ab_, true, true);
 				bool? ad_ = context.Operators.In<CqlDateTime>(t_, ac_, default);
@@ -736,29 +743,29 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Intracranial or Intraspinal Procedure 90 Days or Less Before Start of ED Encounter")]
-	public static IEnumerable<Encounter> Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter(CqlContext context)
+	public  IEnumerable<Encounter> Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Intracranial_or_Intraspinal_surgery(context);
+			CqlValueSet d_ = this.Intracranial_or_Intraspinal_surgery(context);
 			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
 			bool? f_(Procedure CranialorSpinalSurgery)
 			{
 				DataType j_ = CranialorSpinalSurgery?.Performed;
-				object k_ = FHIRHelpers_4_3_000.ToValue(context, j_);
-				CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(context, k_);
+				object k_ = _FHIRHelpers_4_3_000.ToValue(context, j_);
+				CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.toInterval(context, k_);
 				CqlDateTime m_ = context.Operators.Start(l_);
 				Period n_ = EDwithSTEMI?.Period;
-				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> o_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				CqlQuantity q_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime r_ = context.Operators.Subtract(p_, q_);
-				CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> t_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime u_ = context.Operators.Start(t_);
 				CqlInterval<CqlDateTime> v_ = context.Operators.Interval(r_, u_, true, false);
 				bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, default);
-				CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> y_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				bool? aa_ = context.Operators.Not((bool?)(z_ is null));
 				bool? ab_ = context.Operators.And(w_, aa_);
@@ -783,15 +790,15 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("ED Encounter with Discharge Disposition as Patient Expired")]
-	public static IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(CqlContext context)
+	public  IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		bool? b_(Encounter EDwithSTEMI)
 		{
 			Encounter.HospitalizationComponent d_ = EDwithSTEMI?.Hospitalization;
 			CodeableConcept e_ = d_?.DischargeDisposition;
-			CqlConcept f_ = FHIRHelpers_4_3_000.ToConcept(context, e_);
-			CqlValueSet g_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Patient_Expired(context);
+			CqlConcept f_ = _FHIRHelpers_4_3_000.ToConcept(context, e_);
+			CqlValueSet g_ = this.Patient_Expired(context);
 			bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
 
 			return h_;
@@ -802,25 +809,25 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public static IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
+	public  IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(context);
-		IEnumerable<Encounter> b_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(context);
+		IEnumerable<Encounter> a_ = this.Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(context);
+		IEnumerable<Encounter> b_ = this.Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(context);
 		IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
-		IEnumerable<Encounter> d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter(context);
-		IEnumerable<Encounter> e_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(context);
+		IEnumerable<Encounter> d_ = this.Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter(context);
+		IEnumerable<Encounter> e_ = this.Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(context);
 		IEnumerable<Encounter> f_ = context.Operators.Union<Encounter>(d_, e_);
 		IEnumerable<Encounter> g_ = context.Operators.Union<Encounter>(c_, f_);
-		IEnumerable<Encounter> h_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(context);
-		IEnumerable<Encounter> i_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(context);
+		IEnumerable<Encounter> h_ = this.Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(context);
+		IEnumerable<Encounter> i_ = this.Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(context);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(h_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(g_, j_);
-		IEnumerable<Encounter> l_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Intubation_or_Mechanical_Circulatory_Assist_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(context);
-		IEnumerable<Encounter> m_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(context);
+		IEnumerable<Encounter> l_ = this.Intubation_or_Mechanical_Circulatory_Assist_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(context);
+		IEnumerable<Encounter> m_ = this.Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(context);
 		IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(l_, m_);
 		IEnumerable<Encounter> o_ = context.Operators.Union<Encounter>(k_, n_);
-		IEnumerable<Encounter> p_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter(context);
-		IEnumerable<Encounter> q_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(context);
+		IEnumerable<Encounter> p_ = this.Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter(context);
+		IEnumerable<Encounter> q_ = this.ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(context);
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(p_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(o_, r_);
 
@@ -829,22 +836,22 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
     [CqlDeclaration("currentemergencyDepartmentArrivalTime")]
     [CqlTag("description", "Returns the emergency department arrival time for the encounter.")]
-	public static CqlDateTime currentemergencyDepartmentArrivalTime(CqlContext context, Encounter EDEncounter)
+	public  CqlDateTime currentemergencyDepartmentArrivalTime(CqlContext context, Encounter EDEncounter)
 	{
 		List<Encounter.LocationComponent> a_ = EDEncounter?.Location;
 		bool? b_(Encounter.LocationComponent EDLocation)
 		{
 			ResourceReference h_ = EDLocation?.Location;
-			Location i_ = CQMCommon_2_0_000.GetLocation(context, h_);
+			Location i_ = _CQMCommon_2_0_000.GetLocation(context, h_);
 			List<CodeableConcept> j_ = i_?.Type;
 			CqlConcept k_(CodeableConcept @this)
 			{
-				CqlConcept o_ = FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept o_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
 
 				return o_;
 			};
 			IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
-			CqlValueSet m_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Emergency_Department_Visit(context);
+			CqlValueSet m_ = this.Emergency_Department_Visit(context);
 			bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
 
 			return n_;
@@ -852,19 +859,19 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
 		Encounter.LocationComponent d_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(c_);
 		Period e_ = d_?.Period;
-		CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_3_000.ToInterval(context, e_);
+		CqlInterval<CqlDateTime> f_ = _FHIRHelpers_4_3_000.ToInterval(context, e_);
 		CqlDateTime g_ = context.Operators.Start(f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Fibrinolytic Therapy within 30 Minutes of Arrival")]
-	public static IEnumerable<Encounter> Fibrinolytic_Therapy_within_30_Minutes_of_Arrival(CqlContext context)
+	public  IEnumerable<Encounter> Fibrinolytic_Therapy_within_30_Minutes_of_Arrival(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Fibrinolytic_Therapy(context);
+			CqlValueSet d_ = this.Fibrinolytic_Therapy(context);
 			IEnumerable<MedicationAdministration> e_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(d_, default);
 			IEnumerable<MedicationAdministration> g_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(d_, default);
 			IEnumerable<MedicationAdministration> h_ = context.Operators.Union<MedicationAdministration>(e_, g_);
@@ -875,10 +882,10 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 				Code<MedicationAdministration.MedicationAdministrationStatusCodes> o_ = context.Operators.Convert<Code<MedicationAdministration.MedicationAdministrationStatusCodes>>(n_);
 				bool? p_ = context.Operators.Equal(o_, "completed");
 				DataType q_ = Fibrinolytic?.Effective;
-				object r_ = FHIRHelpers_4_3_000.ToValue(context, q_);
-				CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.toInterval(context, r_);
+				object r_ = _FHIRHelpers_4_3_000.ToValue(context, q_);
+				CqlInterval<CqlDateTime> s_ = _QICoreCommon_2_0_000.toInterval(context, r_);
 				CqlDateTime t_ = context.Operators.Start(s_);
-				CqlDateTime u_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
+				CqlDateTime u_ = this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
 				CqlQuantity w_ = context.Operators.Quantity(30m, "minutes");
 				CqlDateTime x_ = context.Operators.Add(u_, w_);
 				CqlInterval<CqlDateTime> y_ = context.Operators.Interval(u_, x_, false, true);
@@ -902,20 +909,20 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("PCI within 90 Minutes of Arrival")]
-	public static IEnumerable<Encounter> PCI_within_90_Minutes_of_Arrival(CqlContext context)
+	public  IEnumerable<Encounter> PCI_within_90_Minutes_of_Arrival(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
-			CqlValueSet d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Percutaneous_Coronary_Intervention(context);
+			CqlValueSet d_ = this.Percutaneous_Coronary_Intervention(context);
 			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
 			bool? f_(Procedure PCI)
 			{
 				DataType j_ = PCI?.Performed;
-				object k_ = FHIRHelpers_4_3_000.ToValue(context, j_);
-				CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(context, k_);
+				object k_ = _FHIRHelpers_4_3_000.ToValue(context, j_);
+				CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.toInterval(context, k_);
 				CqlDateTime m_ = context.Operators.Start(l_);
-				CqlDateTime n_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
+				CqlDateTime n_ = this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
 				CqlQuantity p_ = context.Operators.Quantity(90m, "minutes");
 				CqlDateTime q_ = context.Operators.Add(n_, p_);
 				CqlInterval<CqlDateTime> r_ = context.Operators.Interval(n_, q_, false, true);
@@ -943,30 +950,30 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("ED Departure with Transfer to Acute Care Facility Within 45 Minutes of Arrival")]
-	public static IEnumerable<Encounter> ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival(CqlContext context)
+	public  IEnumerable<Encounter> ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Encounter_with_STEMI_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 		bool? b_(Encounter EDwithSTEMI)
 		{
 			Period d_ = EDwithSTEMI?.Period;
-			CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDateTime> e_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
 			CqlDateTime f_ = context.Operators.End(e_);
-			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDateTime> h_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
 			CqlDateTime i_ = context.Operators.Start(h_);
-			CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDateTime> k_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
 			CqlDateTime l_ = context.Operators.Start(k_);
 			CqlQuantity m_ = context.Operators.Quantity(45m, "minutes");
 			CqlDateTime n_ = context.Operators.Add(l_, m_);
 			CqlInterval<CqlDateTime> o_ = context.Operators.Interval(i_, n_, false, true);
 			bool? p_ = context.Operators.In<CqlDateTime>(f_, o_, default);
-			CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_3_000.ToInterval(context, d_);
+			CqlInterval<CqlDateTime> r_ = _FHIRHelpers_4_3_000.ToInterval(context, d_);
 			CqlDateTime s_ = context.Operators.Start(r_);
 			bool? t_ = context.Operators.Not((bool?)(s_ is null));
 			bool? u_ = context.Operators.And(p_, t_);
 			Encounter.HospitalizationComponent v_ = EDwithSTEMI?.Hospitalization;
 			CodeableConcept w_ = v_?.DischargeDisposition;
-			CqlConcept x_ = FHIRHelpers_4_3_000.ToConcept(context, w_);
-			CqlValueSet y_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Discharge_To_Acute_Care_Facility(context);
+			CqlConcept x_ = _FHIRHelpers_4_3_000.ToConcept(context, w_);
+			CqlValueSet y_ = this.Discharge_To_Acute_Care_Facility(context);
 			bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
 			bool? aa_ = context.Operators.And(u_, z_);
 
@@ -978,45 +985,45 @@ public static class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public static IEnumerable<Encounter> Numerator(CqlContext context)
+	public  IEnumerable<Encounter> Numerator(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.Fibrinolytic_Therapy_within_30_Minutes_of_Arrival(context);
-		IEnumerable<Encounter> b_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.PCI_within_90_Minutes_of_Arrival(context);
+		IEnumerable<Encounter> a_ = this.Fibrinolytic_Therapy_within_30_Minutes_of_Arrival(context);
+		IEnumerable<Encounter> b_ = this.PCI_within_90_Minutes_of_Arrival(context);
 		IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
-		IEnumerable<Encounter> d_ = AppropriateTreatmentforSTEMIFHIR_1_0_000.ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival(context);
+		IEnumerable<Encounter> d_ = this.ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival(context);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public static IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public static CqlCode SDE_Sex(CqlContext context)
+	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

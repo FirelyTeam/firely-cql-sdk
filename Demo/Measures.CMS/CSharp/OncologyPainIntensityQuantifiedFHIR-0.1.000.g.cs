@@ -10,42 +10,50 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("OncologyPainIntensityQuantifiedFHIR", "0.1.000")]
-public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
+public class OncologyPainIntensityQuantifiedFHIR_0_1_000(
+    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
+    CQMCommon_2_0_000 _CQMCommon_2_0_000,
+    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
+    Status_1_6_000 _Status_1_6_000,
+    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000)
 {
 
     [CqlDeclaration("Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1010")]
-	public static CqlValueSet Cancer(CqlContext context) => 
+	public  CqlValueSet Cancer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1010", default);
 
     [CqlDeclaration("Chemotherapy Administration")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1027")]
-	public static CqlValueSet Chemotherapy_Administration(CqlContext context) => 
+	public  CqlValueSet Chemotherapy_Administration(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1027", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public static CqlValueSet Office_Visit(CqlContext context) => 
+	public  CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Radiation Treatment Management")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1026")]
-	public static CqlValueSet Radiation_Treatment_Management(CqlContext context) => 
+	public  CqlValueSet Radiation_Treatment_Management(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1026", default);
 
     [CqlDeclaration("Standardized Pain Assessment Tool")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1028")]
-	public static CqlValueSet Standardized_Pain_Assessment_Tool(CqlContext context) => 
+	public  CqlValueSet Standardized_Pain_Assessment_Tool(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1028", default);
 
     [CqlDeclaration("Radiation treatment management, 5 treatments")]
-	public static CqlCode Radiation_treatment_management__5_treatments(CqlContext context) => 
+	public  CqlCode Radiation_treatment_management__5_treatments(CqlContext context) => 
 		new CqlCode("77427", "http://www.ama-assn.org/go/cpt", default, default);
 
     [CqlDeclaration("CPT")]
-	public static CqlCode[] CPT(CqlContext context)
+	public  CqlCode[] CPT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("77427", "http://www.ama-assn.org/go/cpt", default, default),
@@ -55,7 +63,7 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public static CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -66,7 +74,7 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -75,22 +83,22 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Chemotherapy Within 31 Days Prior and During Measurement Period")]
-	public static IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period(CqlContext context)
+	public  IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period(CqlContext context)
 	{
-		CqlValueSet a_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Chemotherapy_Administration(context);
+		CqlValueSet a_ = this.Chemotherapy_Administration(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
-		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(context, b_);
+		IEnumerable<Procedure> c_ = _Status_1_6_000.Completed_Procedure(context, b_);
 		bool? d_(Procedure ChemoAdministration)
 		{
-			CqlInterval<CqlDateTime> f_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
 			CqlDateTime g_ = context.Operators.Start(f_);
 			CqlQuantity h_ = context.Operators.Quantity(31m, "days");
 			CqlDateTime i_ = context.Operators.Subtract(g_, h_);
 			CqlDateTime k_ = context.Operators.End(f_);
 			CqlInterval<CqlDateTime> l_ = context.Operators.Interval(i_, k_, true, true);
 			DataType m_ = ChemoAdministration?.Performed;
-			object n_ = FHIRHelpers_4_3_000.ToValue(context, m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.toInterval(context, n_);
+			object n_ = _FHIRHelpers_4_3_000.ToValue(context, m_);
+			CqlInterval<CqlDateTime> o_ = _QICoreCommon_2_0_000.toInterval(context, n_);
 			bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, default);
 
 			return p_;
@@ -101,13 +109,13 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Face to Face or Telehealth Encounter with Ongoing Chemotherapy")]
-	public static IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(CqlContext context)
+	public  IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(CqlContext context)
 	{
-		CqlValueSet a_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Office_Visit(context);
+		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
-		IEnumerable<Encounter> c_ = Status_1_6_000.Finished_Encounter(context, b_);
-		IEnumerable<Procedure> d_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period(context);
-		CqlValueSet f_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Cancer(context);
+		IEnumerable<Encounter> c_ = _Status_1_6_000.Finished_Encounter(context, b_);
+		IEnumerable<Procedure> d_ = this.Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period(context);
+		CqlValueSet f_ = this.Cancer(context);
 		IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
 		IEnumerable<ValueTuple<Encounter, Procedure, Procedure, Condition>> h_ = context.Operators.CrossJoin<Encounter, Procedure, Procedure, Condition>(c_, d_, d_, g_);
 		(Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)? i_(ValueTuple<Encounter, Procedure, Procedure, Condition> _valueTuple)
@@ -119,54 +127,54 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 		IEnumerable<(Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)?> j_ = context.Operators.Select<ValueTuple<Encounter, Procedure, Procedure, Condition>, (Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)?>(h_, i_);
 		bool? k_((Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)? tuple_cibligzrihjljqmithporoase)
 		{
-			bool? p_ = QICoreCommon_2_0_000.isActive(context, tuple_cibligzrihjljqmithporoase?.Cancer);
-			CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.prevalenceInterval(context, tuple_cibligzrihjljqmithporoase?.Cancer);
+			bool? p_ = _QICoreCommon_2_0_000.isActive(context, tuple_cibligzrihjljqmithporoase?.Cancer);
+			CqlInterval<CqlDateTime> q_ = _QICoreCommon_2_0_000.prevalenceInterval(context, tuple_cibligzrihjljqmithporoase?.Cancer);
 			Period r_ = tuple_cibligzrihjljqmithporoase?.FaceToFaceOrTelehealthEncounter?.Period;
-			CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> s_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 			bool? t_ = context.Operators.Overlaps(q_, s_, default);
 			bool? u_ = context.Operators.And(p_, t_);
 			DataType v_ = tuple_cibligzrihjljqmithporoase?.ChemoBeforeEncounter?.Performed;
-			object w_ = FHIRHelpers_4_3_000.ToValue(context, v_);
-			CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval(context, w_);
+			object w_ = _FHIRHelpers_4_3_000.ToValue(context, v_);
+			CqlInterval<CqlDateTime> x_ = _QICoreCommon_2_0_000.toInterval(context, w_);
 			CqlDateTime y_ = context.Operators.Start(x_);
-			CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 			CqlDateTime ab_ = context.Operators.End(aa_);
 			CqlQuantity ac_ = context.Operators.Quantity(30m, "days");
 			CqlDateTime ad_ = context.Operators.Subtract(ab_, ac_);
-			CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> af_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 			CqlDateTime ag_ = context.Operators.End(af_);
 			CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ad_, ag_, true, true);
 			bool? ai_ = context.Operators.In<CqlDateTime>(y_, ah_, "day");
-			CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> ak_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ai_, am_);
 			bool? ao_ = context.Operators.And(u_, an_);
 			DataType ap_ = tuple_cibligzrihjljqmithporoase?.ChemoAfterEncounter?.Performed;
-			object aq_ = FHIRHelpers_4_3_000.ToValue(context, ap_);
-			CqlInterval<CqlDateTime> ar_ = QICoreCommon_2_0_000.toInterval(context, aq_);
+			object aq_ = _FHIRHelpers_4_3_000.ToValue(context, ap_);
+			CqlInterval<CqlDateTime> ar_ = _QICoreCommon_2_0_000.toInterval(context, aq_);
 			CqlDateTime as_ = context.Operators.Start(ar_);
-			CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> au_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 			CqlDateTime av_ = context.Operators.End(au_);
-			CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> ax_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 			CqlDateTime ay_ = context.Operators.End(ax_);
 			CqlDateTime ba_ = context.Operators.Add(ay_, ac_);
 			CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(av_, ba_, true, true);
 			bool? bc_ = context.Operators.In<CqlDateTime>(as_, bb_, "day");
-			CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> be_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 			CqlDateTime bf_ = context.Operators.End(be_);
 			bool? bg_ = context.Operators.Not((bool?)(bf_ is null));
 			bool? bh_ = context.Operators.And(bc_, bg_);
 			bool? bi_ = context.Operators.And(ao_, bh_);
-			object bk_ = FHIRHelpers_4_3_000.ToValue(context, ap_);
-			CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_0_000.toInterval(context, bk_);
-			object bn_ = FHIRHelpers_4_3_000.ToValue(context, v_);
-			CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_0_000.toInterval(context, bn_);
+			object bk_ = _FHIRHelpers_4_3_000.ToValue(context, ap_);
+			CqlInterval<CqlDateTime> bl_ = _QICoreCommon_2_0_000.toInterval(context, bk_);
+			object bn_ = _FHIRHelpers_4_3_000.ToValue(context, v_);
+			CqlInterval<CqlDateTime> bo_ = _QICoreCommon_2_0_000.toInterval(context, bn_);
 			bool? bp_ = context.Operators.SameAs<CqlDateTime>(bl_, bo_, "day");
 			bool? bq_ = context.Operators.Not(bp_);
 			bool? br_ = context.Operators.And(bi_, bq_);
-			CqlInterval<CqlDateTime> bs_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Measurement_Period(context);
-			CqlInterval<CqlDateTime> bu_ = FHIRHelpers_4_3_000.ToInterval(context, r_);
+			CqlInterval<CqlDateTime> bs_ = this.Measurement_Period(context);
+			CqlInterval<CqlDateTime> bu_ = _FHIRHelpers_4_3_000.ToInterval(context, r_);
 			bool? bv_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bs_, bu_, default);
 			bool? bw_ = context.Operators.And(br_, bv_);
 
@@ -181,41 +189,41 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population 1")]
-	public static IEnumerable<Encounter> Initial_Population_1(CqlContext context)
+	public  IEnumerable<Encounter> Initial_Population_1(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(context);
+		IEnumerable<Encounter> a_ = this.Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Denominator 1")]
-	public static IEnumerable<Encounter> Denominator_1(CqlContext context)
+	public  IEnumerable<Encounter> Denominator_1(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Initial_Population_1(context);
+		IEnumerable<Encounter> a_ = this.Initial_Population_1(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Radiation Treatment Management During Measurement Period with Cancer Diagnosis")]
-	public static IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(CqlContext context)
+	public  IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(CqlContext context)
 	{
-		CqlValueSet a_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Radiation_Treatment_Management(context);
+		CqlValueSet a_ = this.Radiation_Treatment_Management(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
-		IEnumerable<Encounter> c_ = Status_1_6_000.Finished_Encounter(context, b_);
+		IEnumerable<Encounter> c_ = _Status_1_6_000.Finished_Encounter(context, b_);
 		IEnumerable<Encounter> d_(Encounter RadiationTreatmentManagement)
 		{
-			CqlValueSet f_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Cancer(context);
+			CqlValueSet f_ = this.Cancer(context);
 			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
 			bool? h_(Condition Cancer)
 			{
-				bool? l_ = QICoreCommon_2_0_000.isActive(context, Cancer);
-				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.prevalenceInterval(context, Cancer);
+				bool? l_ = _QICoreCommon_2_0_000.isActive(context, Cancer);
+				CqlInterval<CqlDateTime> m_ = _QICoreCommon_2_0_000.prevalenceInterval(context, Cancer);
 				Period n_ = RadiationTreatmentManagement?.Period;
-				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> o_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
 				bool? p_ = context.Operators.Overlaps(m_, o_, default);
 				bool? q_ = context.Operators.And(l_, p_);
-				CqlInterval<CqlDateTime> r_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Measurement_Period(context);
-				CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_3_000.ToInterval(context, n_);
+				CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+				CqlInterval<CqlDateTime> t_ = _FHIRHelpers_4_3_000.ToInterval(context, n_);
 				bool? u_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(r_, t_, default);
 				bool? v_ = context.Operators.And(q_, u_);
 
@@ -234,39 +242,39 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population 2")]
-	public static IEnumerable<Encounter> Initial_Population_2(CqlContext context)
+	public  IEnumerable<Encounter> Initial_Population_2(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Denominator 2")]
-	public static IEnumerable<Encounter> Denominator_2(CqlContext context)
+	public  IEnumerable<Encounter> Denominator_2(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Initial_Population_2(context);
+		IEnumerable<Encounter> a_ = this.Initial_Population_2(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Numerator 1")]
-	public static IEnumerable<Encounter> Numerator_1(CqlContext context)
+	public  IEnumerable<Encounter> Numerator_1(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(context);
+		IEnumerable<Encounter> a_ = this.Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(context);
 		IEnumerable<Encounter> b_(Encounter FaceToFaceOrTelehealthEncounterWithChemo)
 		{
-			CqlValueSet d_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Standardized_Pain_Assessment_Tool(context);
+			CqlValueSet d_ = this.Standardized_Pain_Assessment_Tool(context);
 			IEnumerable<Observation> e_ = context.Operators.RetrieveByValueSet<Observation>(d_, default);
 			bool? f_(Observation PainAssessed)
 			{
 				Period j_ = FaceToFaceOrTelehealthEncounterWithChemo?.Period;
-				CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_3_000.ToInterval(context, j_);
+				CqlInterval<CqlDateTime> k_ = _FHIRHelpers_4_3_000.ToInterval(context, j_);
 				DataType l_ = PainAssessed?.Effective;
-				object m_ = FHIRHelpers_4_3_000.ToValue(context, l_);
-				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.toInterval(context, m_);
+				object m_ = _FHIRHelpers_4_3_000.ToValue(context, l_);
+				CqlInterval<CqlDateTime> n_ = _QICoreCommon_2_0_000.toInterval(context, m_);
 				bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, n_, default);
 				DataType p_ = PainAssessed?.Value;
-				object q_ = FHIRHelpers_4_3_000.ToValue(context, p_);
+				object q_ = _FHIRHelpers_4_3_000.ToValue(context, p_);
 				bool? r_ = context.Operators.Not((bool?)(q_ is null));
 				bool? s_ = context.Operators.And(o_, r_);
 				Code<ObservationStatus> t_ = PainAssessed?.StatusElement;
@@ -290,12 +298,12 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator 2")]
-	public static IEnumerable<Encounter> Numerator_2(CqlContext context)
+	public  IEnumerable<Encounter> Numerator_2(CqlContext context)
 	{
-		IEnumerable<Encounter> a_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(context);
+		IEnumerable<Encounter> a_ = this.Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(context);
 		IEnumerable<Encounter> b_(Encounter RadiationManagementEncounter)
 		{
-			CqlValueSet d_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Standardized_Pain_Assessment_Tool(context);
+			CqlValueSet d_ = this.Standardized_Pain_Assessment_Tool(context);
 			IEnumerable<Observation> e_ = context.Operators.RetrieveByValueSet<Observation>(d_, default);
 			bool? f_(Observation PainAssessed)
 			{
@@ -306,14 +314,14 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 						List<CodeableConcept> u_ = RadiationManagementEncounter?.Type;
 						CqlConcept v_(CodeableConcept @this)
 						{
-							CqlConcept aa_ = FHIRHelpers_4_3_000.ToConcept(context, @this);
+							CqlConcept aa_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
 
 							return aa_;
 						};
 						IEnumerable<CqlConcept> w_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)u_, v_);
 						bool? x_(CqlConcept RadiationManagement)
 						{
-							CqlCode ab_ = OncologyPainIntensityQuantifiedFHIR_0_1_000.Radiation_treatment_management__5_treatments(context);
+							CqlCode ab_ = this.Radiation_treatment_management__5_treatments(context);
 							CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
 							bool? ad_ = context.Operators.Equivalent(RadiationManagement, ac_);
 
@@ -327,19 +335,19 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 					if (t_())
 					{
 						DataType ae_ = PainAssessed?.Effective;
-						object af_ = FHIRHelpers_4_3_000.ToValue(context, ae_);
-						CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.toInterval(context, af_);
+						object af_ = _FHIRHelpers_4_3_000.ToValue(context, ae_);
+						CqlInterval<CqlDateTime> ag_ = _QICoreCommon_2_0_000.toInterval(context, af_);
 						CqlDateTime ah_ = context.Operators.End(ag_);
 						Period ai_ = RadiationManagementEncounter?.Period;
-						CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(context, ai_);
+						CqlInterval<CqlDateTime> aj_ = _FHIRHelpers_4_3_000.ToInterval(context, ai_);
 						CqlDateTime ak_ = context.Operators.Start(aj_);
 						CqlQuantity al_ = context.Operators.Quantity(6m, "days");
 						CqlDateTime am_ = context.Operators.Subtract(ak_, al_);
-						CqlInterval<CqlDateTime> ao_ = FHIRHelpers_4_3_000.ToInterval(context, ai_);
+						CqlInterval<CqlDateTime> ao_ = _FHIRHelpers_4_3_000.ToInterval(context, ai_);
 						CqlDateTime ap_ = context.Operators.Start(ao_);
 						CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(am_, ap_, true, true);
 						bool? ar_ = context.Operators.In<CqlDateTime>(ah_, aq_, "day");
-						CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_3_000.ToInterval(context, ai_);
+						CqlInterval<CqlDateTime> at_ = _FHIRHelpers_4_3_000.ToInterval(context, ai_);
 						CqlDateTime au_ = context.Operators.Start(at_);
 						bool? av_ = context.Operators.Not((bool?)(au_ is null));
 						bool? aw_ = context.Operators.And(ar_, av_);
@@ -349,17 +357,17 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 					else
 					{
 						Period ax_ = RadiationManagementEncounter?.Period;
-						CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_3_000.ToInterval(context, ax_);
+						CqlInterval<CqlDateTime> ay_ = _FHIRHelpers_4_3_000.ToInterval(context, ax_);
 						DataType az_ = PainAssessed?.Effective;
-						object ba_ = FHIRHelpers_4_3_000.ToValue(context, az_);
-						CqlInterval<CqlDateTime> bb_ = QICoreCommon_2_0_000.toInterval(context, ba_);
+						object ba_ = _FHIRHelpers_4_3_000.ToValue(context, az_);
+						CqlInterval<CqlDateTime> bb_ = _QICoreCommon_2_0_000.toInterval(context, ba_);
 						bool? bc_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ay_, bb_, "day");
 
 						return bc_;
 					}
 				};
 				DataType k_ = PainAssessed?.Value;
-				object l_ = FHIRHelpers_4_3_000.ToValue(context, k_);
+				object l_ = _FHIRHelpers_4_3_000.ToValue(context, k_);
 				bool? m_ = context.Operators.Not((bool?)(l_ is null));
 				bool? n_ = context.Operators.And(j_(), m_);
 				Code<ObservationStatus> o_ = PainAssessed?.StatusElement;
@@ -383,33 +391,33 @@ public static class OncologyPainIntensityQuantifiedFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public static IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public static CqlCode SDE_Sex(CqlContext context)
+	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

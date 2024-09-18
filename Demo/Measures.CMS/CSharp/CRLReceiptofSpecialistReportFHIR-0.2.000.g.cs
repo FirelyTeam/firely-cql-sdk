@@ -10,53 +10,59 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.2.000")]
-public static class CRLReceiptofSpecialistReportFHIR_0_2_000
+public class CRLReceiptofSpecialistReportFHIR_0_2_000(
+    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 _QICoreCommon_2_0_000)
 {
 
     [CqlDeclaration("Consultant Report")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1006")]
-	public static CqlValueSet Consultant_Report(CqlContext context) => 
+	public  CqlValueSet Consultant_Report(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1006", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public static CqlValueSet Office_Visit(CqlContext context) => 
+	public  CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
-	public static CqlValueSet Ophthalmological_Services(CqlContext context) => 
+	public  CqlValueSet Ophthalmological_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public static CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) => 
+	public  CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-	public static CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) => 
+	public  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public static CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+	public  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-	public static CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) => 
+	public  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
     [CqlDeclaration("Referral")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1046")]
-	public static CqlValueSet Referral(CqlContext context) => 
+	public  CqlValueSet Referral(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1046", default);
 
     [CqlDeclaration("Measurement Period")]
-	public static CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -67,7 +73,7 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -76,22 +82,22 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("Has Encounter during Measurement Period")]
-	public static bool? Has_Encounter_during_Measurement_Period(CqlContext context)
+	public  bool? Has_Encounter_during_Measurement_Period(CqlContext context)
 	{
-		CqlValueSet a_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Office_Visit(context);
+		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
-		CqlValueSet c_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Ophthalmological_Services(context);
+		CqlValueSet c_ = this.Ophthalmological_Services(context);
 		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-		CqlValueSet f_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Preventive_Care_Services___Established_Office_Visit__18_and_Up(context);
+		CqlValueSet f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up(context);
 		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
-		CqlValueSet h_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
+		CqlValueSet h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
 		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-		CqlValueSet l_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
+		CqlValueSet l_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
 		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
-		CqlValueSet n_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Preventive_Care__Established_Office_Visit__0_to_17(context);
+		CqlValueSet n_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
 		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
@@ -101,9 +107,9 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 			Encounter.EncounterStatus? v_ = u_?.Value;
 			Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
 			bool? x_ = context.Operators.Equal(w_, "finished");
-			CqlInterval<CqlDateTime> y_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
 			Period z_ = Encounter?.Period;
-			CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(context, z_);
+			CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, z_);
 			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, "day");
 			bool? ac_ = context.Operators.And(x_, ab_);
 
@@ -116,9 +122,9 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("First Referral during First 10 Months of Measurement Period")]
-	public static (string ID, CqlDateTime AuthorDate)? First_Referral_during_First_10_Months_of_Measurement_Period(CqlContext context)
+	public  (string ID, CqlDateTime AuthorDate)? First_Referral_during_First_10_Months_of_Measurement_Period(CqlContext context)
 	{
-		CqlValueSet a_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Referral(context);
+		CqlValueSet a_ = this.Referral(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
 		bool? c_(ServiceRequest ReferralOrder)
 		{
@@ -138,7 +144,7 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 			bool? t_ = context.Operators.And(o_, s_);
 			FhirDateTime u_ = ReferralOrder?.AuthoredOnElement;
 			CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
-			CqlInterval<CqlDateTime> w_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
 			CqlDateTime x_ = context.Operators.Start(w_);
 			CqlDateTime z_ = context.Operators.Start(w_);
 			int? aa_ = context.Operators.DateTimeComponentFrom(z_, "year");
@@ -175,10 +181,10 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public static bool? Initial_Population(CqlContext context)
+	public  bool? Initial_Population(CqlContext context)
 	{
-		bool? a_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Has_Encounter_during_Measurement_Period(context);
-		(string ID, CqlDateTime AuthorDate)? b_ = CRLReceiptofSpecialistReportFHIR_0_2_000.First_Referral_during_First_10_Months_of_Measurement_Period(context);
+		bool? a_ = this.Has_Encounter_during_Measurement_Period(context);
+		(string ID, CqlDateTime AuthorDate)? b_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
 		bool? c_ = context.Operators.Not((bool?)(b_ is null));
 		bool? d_ = context.Operators.And(a_, c_);
 
@@ -186,54 +192,54 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public static bool? Denominator(CqlContext context)
+	public  bool? Denominator(CqlContext context)
 	{
-		bool? a_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Initial_Population(context);
+		bool? a_ = this.Initial_Population(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public static IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public static CqlCode SDE_Sex(CqlContext context)
+	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("TaskGetRequestID")]
-	public static IEnumerable<string> TaskGetRequestID(CqlContext context, Task task)
+	public  IEnumerable<string> TaskGetRequestID(CqlContext context, Task task)
 	{
 		List<ResourceReference> a_ = task?.BasedOn;
 		string b_(ResourceReference Task)
 		{
 			FhirString d_ = Task?.ReferenceElement;
 			string e_ = d_?.Value;
-			string f_ = QICoreCommon_2_0_000.GetId(context, e_);
+			string f_ = _QICoreCommon_2_0_000.GetId(context, e_);
 
 			return f_;
 		};
@@ -243,23 +249,23 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("Referring Clinician Receives Consultant Report to Close Referral Loop")]
-	public static bool? Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop(CqlContext context)
+	public  bool? Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop(CqlContext context)
 	{
-		CqlValueSet a_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Consultant_Report(context);
+		CqlValueSet a_ = this.Consultant_Report(context);
 		IEnumerable<Task> b_ = context.Operators.RetrieveByValueSet<Task>(a_, default);
 		IEnumerable<Task> c_(Task ConsultantReportObtained)
 		{
-			(string ID, CqlDateTime AuthorDate)? f_ = CRLReceiptofSpecialistReportFHIR_0_2_000.First_Referral_during_First_10_Months_of_Measurement_Period(context);
+			(string ID, CqlDateTime AuthorDate)? f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
 			(string ID, CqlDateTime AuthorDate)?[] g_ = [
 				f_,
 			];
 			bool? h_((string ID, CqlDateTime AuthorDate)? FirstReferral)
 			{
 				string l_ = FirstReferral?.ID;
-				IEnumerable<string> m_ = CRLReceiptofSpecialistReportFHIR_0_2_000.TaskGetRequestID(context, ConsultantReportObtained);
+				IEnumerable<string> m_ = this.TaskGetRequestID(context, ConsultantReportObtained);
 				bool? n_ = context.Operators.In<string>(l_, m_);
 				Period o_ = ConsultantReportObtained?.ExecutionPeriod;
-				CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(context, o_);
+				CqlInterval<CqlDateTime> p_ = _FHIRHelpers_4_3_000.ToInterval(context, o_);
 				CqlDateTime q_ = context.Operators.End(p_);
 				CqlDateTime r_ = FirstReferral?.AuthorDate;
 				bool? s_ = context.Operators.After(q_, r_, default);
@@ -269,9 +275,9 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 				Code<Task.TaskStatus> w_ = context.Operators.Convert<Code<Task.TaskStatus>>(v_);
 				bool? x_ = context.Operators.Equal(w_, "completed");
 				bool? y_ = context.Operators.And(t_, x_);
-				CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_3_000.ToInterval(context, o_);
+				CqlInterval<CqlDateTime> aa_ = _FHIRHelpers_4_3_000.ToInterval(context, o_);
 				CqlDateTime ab_ = context.Operators.End(aa_);
-				CqlInterval<CqlDateTime> ac_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Measurement_Period(context);
+				CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
 				bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, "day");
 				bool? ae_ = context.Operators.And(y_, ad_);
 
@@ -291,9 +297,9 @@ public static class CRLReceiptofSpecialistReportFHIR_0_2_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public static bool? Numerator(CqlContext context)
+	public  bool? Numerator(CqlContext context)
 	{
-		bool? a_ = CRLReceiptofSpecialistReportFHIR_0_2_000.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop(context);
+		bool? a_ = this.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop(context);
 
 		return a_;
 	}

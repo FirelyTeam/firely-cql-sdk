@@ -89,9 +89,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
 
-            // var target = dce.LibraryName == LibraryName ? "this" :
-            //     VariableNameGenerator.NormalizeIdentifier(dce.LibraryName);
-            var target = VariableNameGenerator.NormalizeIdentifier(dce.LibraryName);
+            var target = dce.LibraryName == LibraryName ? "this" : VariableNameGenerator.NormalizePrimaryConstructorIdentifier(dce.LibraryName);
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(dce.DefinitionName);
 
             // sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}()");
@@ -104,10 +102,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
-
-            // var target = fce.LibraryName == LibraryName ? "this" :
-            //     VariableNameGenerator.NormalizeIdentifier(fce.LibraryName);
-            var target = VariableNameGenerator.NormalizeIdentifier(fce.LibraryName);
+            var target = fce.LibraryName == LibraryName ? "this" : VariableNameGenerator.NormalizePrimaryConstructorIdentifier(fce.LibraryName);
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(fce.FunctionName);
 
             sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}");

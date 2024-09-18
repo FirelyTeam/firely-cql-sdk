@@ -10,71 +10,77 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("ProstateCaAvoidanceBoneScanOveruseFHIR", "0.2.000")]
-public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
+public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000(
+    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 _QICoreCommon_2_0_000)
 {
 
     [CqlDeclaration("Bone Scan")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.320")]
-	public static CqlValueSet Bone_Scan(CqlContext context) => 
+	public  CqlValueSet Bone_Scan(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.320", default);
 
     [CqlDeclaration("Pain Warranting Further Investigation for Prostate Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.451")]
-	public static CqlValueSet Pain_Warranting_Further_Investigation_for_Prostate_Cancer(CqlContext context) => 
+	public  CqlValueSet Pain_Warranting_Further_Investigation_for_Prostate_Cancer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.451", default);
 
     [CqlDeclaration("Prostate Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319")]
-	public static CqlValueSet Prostate_Cancer(CqlContext context) => 
+	public  CqlValueSet Prostate_Cancer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319", default);
 
     [CqlDeclaration("Prostate Cancer Treatment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.398")]
-	public static CqlValueSet Prostate_Cancer_Treatment(CqlContext context) => 
+	public  CqlValueSet Prostate_Cancer_Treatment(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.398", default);
 
     [CqlDeclaration("Prostate Specific Antigen Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.401")]
-	public static CqlValueSet Prostate_Specific_Antigen_Test(CqlContext context) => 
+	public  CqlValueSet Prostate_Specific_Antigen_Test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.401", default);
 
     [CqlDeclaration("Salvage Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.399")]
-	public static CqlValueSet Salvage_Therapy(CqlContext context) => 
+	public  CqlValueSet Salvage_Therapy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.399", default);
 
     [CqlDeclaration("Gleason score in Specimen Qualitative")]
-	public static CqlCode Gleason_score_in_Specimen_Qualitative(CqlContext context) => 
+	public  CqlCode Gleason_score_in_Specimen_Qualitative(CqlContext context) => 
 		new CqlCode("35266-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)")]
-	public static CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_(CqlContext context) => 
+	public  CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_(CqlContext context) => 
 		new CqlCode("433351000124101", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)")]
-	public static CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(CqlContext context) => 
+	public  CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(CqlContext context) => 
 		new CqlCode("433361000124104", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Procedure reason record (record artifact)")]
-	public static CqlCode Procedure_reason_record__record_artifact_(CqlContext context) => 
+	public  CqlCode Procedure_reason_record__record_artifact_(CqlContext context) => 
 		new CqlCode("433611000124109", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)")]
-	public static CqlCode T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(CqlContext context) => 
+	public  CqlCode T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(CqlContext context) => 
 		new CqlCode("369833007", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)")]
-	public static CqlCode T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_(CqlContext context) => 
+	public  CqlCode T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_(CqlContext context) => 
 		new CqlCode("369834001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Tumor staging (tumor staging)")]
-	public static CqlCode Tumor_staging__tumor_staging_(CqlContext context) => 
+	public  CqlCode Tumor_staging__tumor_staging_(CqlContext context) => 
 		new CqlCode("254292007", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("LOINC")]
-	public static CqlCode[] LOINC(CqlContext context)
+	public  CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("35266-6", "http://loinc.org", default, default),
@@ -84,7 +90,7 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public static CqlCode[] SNOMEDCT(CqlContext context)
+	public  CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("433351000124101", "http://snomed.info/sct", default, default),
@@ -99,7 +105,7 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public static CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -110,7 +116,7 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -119,52 +125,52 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public static IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public static CqlCode SDE_Sex(CqlContext context)
+	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Prostate Cancer Diagnosis")]
-	public static IEnumerable<Condition> Prostate_Cancer_Diagnosis(CqlContext context)
+	public  IEnumerable<Condition> Prostate_Cancer_Diagnosis(CqlContext context)
 	{
-		CqlValueSet a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Prostate_Cancer(context);
+		CqlValueSet a_ = this.Prostate_Cancer(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition ProstateCancer)
 		{
-			CqlInterval<CqlDateTime> e_ = QICoreCommon_2_0_000.prevalenceInterval(context, ProstateCancer);
-			CqlInterval<CqlDateTime> f_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> e_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ProstateCancer);
+			CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
 			bool? g_ = context.Operators.Overlaps(e_, f_, "day");
-			bool? h_ = QICoreCommon_2_0_000.isProblemListItem(context, ProstateCancer);
-			bool? i_ = QICoreCommon_2_0_000.isHealthConcern(context, ProstateCancer);
+			bool? h_ = _QICoreCommon_2_0_000.isProblemListItem(context, ProstateCancer);
+			bool? i_ = _QICoreCommon_2_0_000.isHealthConcern(context, ProstateCancer);
 			bool? j_ = context.Operators.Or(h_, i_);
 			bool? k_ = context.Operators.And(g_, j_);
-			bool? l_ = QICoreCommon_2_0_000.isActive(context, ProstateCancer);
+			bool? l_ = _QICoreCommon_2_0_000.isActive(context, ProstateCancer);
 			bool? m_ = context.Operators.And(k_, l_);
 
 			return m_;
@@ -175,25 +181,25 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Has Diagnosis of Pain related to Prostate Cancer")]
-	public static bool? Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(CqlContext context)
+	public  bool? Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(CqlContext context)
 	{
-		CqlValueSet a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Pain_Warranting_Further_Investigation_for_Prostate_Cancer(context);
+		CqlValueSet a_ = this.Pain_Warranting_Further_Investigation_for_Prostate_Cancer(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		IEnumerable<Condition> c_(Condition ProstateCancerPain)
 		{
-			IEnumerable<Condition> f_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Prostate_Cancer_Diagnosis(context);
+			IEnumerable<Condition> f_ = this.Prostate_Cancer_Diagnosis(context);
 			bool? g_(Condition ActiveProstateCancer)
 			{
-				CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.prevalenceInterval(context, ProstateCancerPain);
+				CqlInterval<CqlDateTime> k_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ProstateCancerPain);
 				CqlDateTime l_ = context.Operators.Start(k_);
-				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.prevalenceInterval(context, ActiveProstateCancer);
+				CqlInterval<CqlDateTime> m_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ActiveProstateCancer);
 				CqlDateTime n_ = context.Operators.Start(m_);
 				bool? o_ = context.Operators.After(l_, n_, default);
-				bool? p_ = QICoreCommon_2_0_000.isProblemListItem(context, ProstateCancerPain);
-				bool? q_ = QICoreCommon_2_0_000.isHealthConcern(context, ProstateCancerPain);
+				bool? p_ = _QICoreCommon_2_0_000.isProblemListItem(context, ProstateCancerPain);
+				bool? q_ = _QICoreCommon_2_0_000.isHealthConcern(context, ProstateCancerPain);
 				bool? r_ = context.Operators.Or(p_, q_);
 				bool? s_ = context.Operators.And(o_, r_);
-				bool? t_ = QICoreCommon_2_0_000.isActive(context, ProstateCancerPain);
+				bool? t_ = _QICoreCommon_2_0_000.isActive(context, ProstateCancerPain);
 				bool? u_ = context.Operators.And(s_, t_);
 
 				return u_;
@@ -212,20 +218,20 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Has Salvage Therapy Performed after Prostate Cancer Diagnosis")]
-	public static bool? Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(CqlContext context)
+	public  bool? Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(CqlContext context)
 	{
-		CqlValueSet a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Salvage_Therapy(context);
+		CqlValueSet a_ = this.Salvage_Therapy(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
 		IEnumerable<Procedure> c_(Procedure SalvageTherapy)
 		{
-			IEnumerable<Condition> f_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Prostate_Cancer_Diagnosis(context);
+			IEnumerable<Condition> f_ = this.Prostate_Cancer_Diagnosis(context);
 			bool? g_(Condition ActiveProstateCancer)
 			{
 				DataType k_ = SalvageTherapy?.Performed;
-				object l_ = FHIRHelpers_4_3_000.ToValue(context, k_);
-				CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.toInterval(context, l_);
+				object l_ = _FHIRHelpers_4_3_000.ToValue(context, k_);
+				CqlInterval<CqlDateTime> m_ = _QICoreCommon_2_0_000.toInterval(context, l_);
 				CqlDateTime n_ = context.Operators.Start(m_);
-				CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.prevalenceInterval(context, ActiveProstateCancer);
+				CqlInterval<CqlDateTime> o_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ActiveProstateCancer);
 				CqlDateTime p_ = context.Operators.Start(o_);
 				bool? q_ = context.Operators.After(n_, p_, default);
 				Code<EventStatus> r_ = SalvageTherapy?.StatusElement;
@@ -250,20 +256,20 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Bone Scan Study Performed")]
-	public static IEnumerable<Observation> Bone_Scan_Study_Performed(CqlContext context)
+	public  IEnumerable<Observation> Bone_Scan_Study_Performed(CqlContext context)
 	{
-		CqlValueSet a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Bone_Scan(context);
+		CqlValueSet a_ = this.Bone_Scan(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		IEnumerable<Observation> c_(Observation BoneScan)
 		{
-			IEnumerable<Condition> e_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Prostate_Cancer_Diagnosis(context);
+			IEnumerable<Condition> e_ = this.Prostate_Cancer_Diagnosis(context);
 			bool? f_(Condition ActiveProstateCancer)
 			{
 				DataType j_ = BoneScan?.Effective;
-				object k_ = FHIRHelpers_4_3_000.ToValue(context, j_);
-				CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(context, k_);
+				object k_ = _FHIRHelpers_4_3_000.ToValue(context, j_);
+				CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.toInterval(context, k_);
 				CqlDateTime m_ = context.Operators.Start(l_);
-				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.prevalenceInterval(context, ActiveProstateCancer);
+				CqlInterval<CqlDateTime> n_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ActiveProstateCancer);
 				CqlDateTime o_ = context.Operators.Start(n_);
 				bool? p_ = context.Operators.After(m_, o_, default);
 
@@ -282,14 +288,14 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Has Bone Scan Study Performed with Documented Reason")]
-	public static bool? Has_Bone_Scan_Study_Performed_with_Documented_Reason(CqlContext context)
+	public  bool? Has_Bone_Scan_Study_Performed_with_Documented_Reason(CqlContext context)
 	{
-		IEnumerable<Observation> a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Bone_Scan_Study_Performed(context);
+		IEnumerable<Observation> a_ = this.Bone_Scan_Study_Performed(context);
 		bool? b_(Observation BoneScanAfterDiagnosis)
 		{
 			DataType e_ = BoneScanAfterDiagnosis?.Value;
-			object f_ = FHIRHelpers_4_3_000.ToValue(context, e_);
-			CqlCode g_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Procedure_reason_record__record_artifact_(context);
+			object f_ = _FHIRHelpers_4_3_000.ToValue(context, e_);
+			CqlCode g_ = this.Procedure_reason_record__record_artifact_(context);
 			CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
 			bool? i_ = context.Operators.Equivalent(f_ as CqlConcept, h_);
 
@@ -302,29 +308,29 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
-	public static bool? Denominator_Exceptions(CqlContext context)
+	public  bool? Denominator_Exceptions(CqlContext context)
 	{
-		bool? a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(context);
-		bool? b_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(context);
+		bool? a_ = this.Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(context);
+		bool? b_ = this.Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(context);
 		bool? c_ = context.Operators.Or(a_, b_);
-		bool? d_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Has_Bone_Scan_Study_Performed_with_Documented_Reason(context);
+		bool? d_ = this.Has_Bone_Scan_Study_Performed_with_Documented_Reason(context);
 		bool? e_ = context.Operators.Or(c_, d_);
 
 		return e_;
 	}
 
     [CqlDeclaration("First Prostate Cancer Treatment during day of Measurement Period")]
-	public static Procedure First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(CqlContext context)
+	public  Procedure First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(CqlContext context)
 	{
-		CqlValueSet a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Prostate_Cancer_Treatment(context);
+		CqlValueSet a_ = this.Prostate_Cancer_Treatment(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
 		bool? c_(Procedure ProstateCancerTreatment)
 		{
 			DataType h_ = ProstateCancerTreatment?.Performed;
-			object i_ = FHIRHelpers_4_3_000.ToValue(context, h_);
-			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.toInterval(context, i_);
+			object i_ = _FHIRHelpers_4_3_000.ToValue(context, h_);
+			CqlInterval<CqlDateTime> j_ = _QICoreCommon_2_0_000.toInterval(context, i_);
 			CqlDateTime k_ = context.Operators.End(j_);
-			CqlInterval<CqlDateTime> l_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
 			bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
 			Code<EventStatus> n_ = ProstateCancerTreatment?.StatusElement;
 			EventStatus? o_ = n_?.Value;
@@ -338,8 +344,8 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		object e_(Procedure @this)
 		{
 			DataType s_ = @this?.Performed;
-			object t_ = FHIRHelpers_4_3_000.ToValue(context, s_);
-			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(context, t_);
+			object t_ = _FHIRHelpers_4_3_000.ToValue(context, s_);
+			CqlInterval<CqlDateTime> u_ = _QICoreCommon_2_0_000.toInterval(context, t_);
 			CqlDateTime v_ = context.Operators.Start(u_);
 
 			return v_;
@@ -351,35 +357,35 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public static bool? Initial_Population(CqlContext context)
+	public  bool? Initial_Population(CqlContext context)
 	{
-		IEnumerable<Condition> a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Prostate_Cancer_Diagnosis(context);
+		IEnumerable<Condition> a_ = this.Prostate_Cancer_Diagnosis(context);
 		bool? b_ = context.Operators.Exists<Condition>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Most Recent Gleason Score is Low")]
-	public static bool? Most_Recent_Gleason_Score_is_Low(CqlContext context)
+	public  bool? Most_Recent_Gleason_Score_is_Low(CqlContext context)
 	{
-		CqlCode a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Gleason_score_in_Specimen_Qualitative(context);
+		CqlCode a_ = this.Gleason_score_in_Specimen_Qualitative(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
 		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
 		IEnumerable<Observation> d_(Observation GleasonScore)
 		{
-			Procedure m_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
+			Procedure m_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
 			Procedure[] n_ = [
 				m_,
 			];
 			bool? o_(Procedure FirstProstateCancerTreatment)
 			{
 				DataType s_ = GleasonScore?.Effective;
-				object t_ = FHIRHelpers_4_3_000.ToValue(context, s_);
-				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(context, t_);
+				object t_ = _FHIRHelpers_4_3_000.ToValue(context, s_);
+				CqlInterval<CqlDateTime> u_ = _QICoreCommon_2_0_000.toInterval(context, t_);
 				CqlDateTime v_ = context.Operators.Start(u_);
 				DataType w_ = FirstProstateCancerTreatment?.Performed;
-				object x_ = FHIRHelpers_4_3_000.ToValue(context, w_);
-				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(context, x_);
+				object x_ = _FHIRHelpers_4_3_000.ToValue(context, w_);
+				CqlInterval<CqlDateTime> y_ = _QICoreCommon_2_0_000.toInterval(context, x_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				bool? aa_ = context.Operators.Before(v_, z_, default);
 				Code<ObservationStatus> ab_ = GleasonScore?.StatusElement;
@@ -407,8 +413,8 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		object f_(Observation @this)
 		{
 			DataType ai_ = @this?.Effective;
-			object aj_ = FHIRHelpers_4_3_000.ToValue(context, ai_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.toInterval(context, aj_);
+			object aj_ = _FHIRHelpers_4_3_000.ToValue(context, ai_);
+			CqlInterval<CqlDateTime> ak_ = _QICoreCommon_2_0_000.toInterval(context, aj_);
 			CqlDateTime al_ = context.Operators.Start(ak_);
 
 			return al_;
@@ -421,7 +427,7 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		bool? j_(Observation LastGleasonScore)
 		{
 			DataType am_ = LastGleasonScore?.Value;
-			object an_ = FHIRHelpers_4_3_000.ToValue(context, am_);
+			object an_ = _FHIRHelpers_4_3_000.ToValue(context, am_);
 			bool? ao_ = context.Operators.LessOrEqual(an_ as int?, 6);
 
 			return ao_;
@@ -433,26 +439,26 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Most Recent Prostate Cancer Staging Tumor Size T1a to T2a")]
-	public static Observation Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(CqlContext context)
+	public  Observation Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(CqlContext context)
 	{
-		CqlCode a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Tumor_staging__tumor_staging_(context);
+		CqlCode a_ = this.Tumor_staging__tumor_staging_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
 		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
 		IEnumerable<Observation> d_(Observation ProstateCancerStaging)
 		{
-			Procedure m_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
+			Procedure m_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
 			Procedure[] n_ = [
 				m_,
 			];
 			bool? o_(Procedure FirstProstateCancerTreatment)
 			{
 				DataType s_ = ProstateCancerStaging?.Effective;
-				object t_ = FHIRHelpers_4_3_000.ToValue(context, s_);
-				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(context, t_);
+				object t_ = _FHIRHelpers_4_3_000.ToValue(context, s_);
+				CqlInterval<CqlDateTime> u_ = _QICoreCommon_2_0_000.toInterval(context, t_);
 				CqlDateTime v_ = context.Operators.Start(u_);
 				DataType w_ = FirstProstateCancerTreatment?.Performed;
-				object x_ = FHIRHelpers_4_3_000.ToValue(context, w_);
-				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.toInterval(context, x_);
+				object x_ = _FHIRHelpers_4_3_000.ToValue(context, w_);
+				CqlInterval<CqlDateTime> y_ = _QICoreCommon_2_0_000.toInterval(context, x_);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				bool? aa_ = context.Operators.Before(v_, z_, default);
 				Code<ObservationStatus> ab_ = ProstateCancerStaging?.StatusElement;
@@ -480,8 +486,8 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		object f_(Observation @this)
 		{
 			DataType ai_ = @this?.Effective;
-			object aj_ = FHIRHelpers_4_3_000.ToValue(context, ai_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.toInterval(context, aj_);
+			object aj_ = _FHIRHelpers_4_3_000.ToValue(context, ai_);
+			CqlInterval<CqlDateTime> ak_ = _QICoreCommon_2_0_000.toInterval(context, aj_);
 			CqlDateTime al_ = context.Operators.Start(ak_);
 
 			return al_;
@@ -494,22 +500,22 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		bool? j_(Observation LastProstateCancerStaging)
 		{
 			DataType am_ = LastProstateCancerStaging?.Value;
-			object an_ = FHIRHelpers_4_3_000.ToValue(context, am_);
-			CqlCode ao_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(context);
+			object an_ = _FHIRHelpers_4_3_000.ToValue(context, am_);
+			CqlCode ao_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(context);
 			CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
 			bool? aq_ = context.Operators.Equivalent(an_ as CqlConcept, ap_);
-			object as_ = FHIRHelpers_4_3_000.ToValue(context, am_);
-			CqlCode at_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_(context);
+			object as_ = _FHIRHelpers_4_3_000.ToValue(context, am_);
+			CqlCode at_ = this.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_(context);
 			CqlConcept au_ = context.Operators.ConvertCodeToConcept(at_);
 			bool? av_ = context.Operators.Equivalent(as_ as CqlConcept, au_);
 			bool? aw_ = context.Operators.Or(aq_, av_);
-			object ay_ = FHIRHelpers_4_3_000.ToValue(context, am_);
-			CqlCode az_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_(context);
+			object ay_ = _FHIRHelpers_4_3_000.ToValue(context, am_);
+			CqlCode az_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_(context);
 			CqlConcept ba_ = context.Operators.ConvertCodeToConcept(az_);
 			bool? bb_ = context.Operators.Equivalent(ay_ as CqlConcept, ba_);
 			bool? bc_ = context.Operators.Or(aw_, bb_);
-			object be_ = FHIRHelpers_4_3_000.ToValue(context, am_);
-			CqlCode bf_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(context);
+			object be_ = _FHIRHelpers_4_3_000.ToValue(context, am_);
+			CqlCode bf_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(context);
 			CqlConcept bg_ = context.Operators.ConvertCodeToConcept(bf_);
 			bool? bh_ = context.Operators.Equivalent(be_ as CqlConcept, bg_);
 			bool? bi_ = context.Operators.Or(bc_, bh_);
@@ -523,9 +529,9 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public static bool? Numerator(CqlContext context)
+	public  bool? Numerator(CqlContext context)
 	{
-		IEnumerable<Observation> a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Bone_Scan_Study_Performed(context);
+		IEnumerable<Observation> a_ = this.Bone_Scan_Study_Performed(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
 		bool? c_ = context.Operators.Not(b_);
 
@@ -533,13 +539,13 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Most Recent PSA Test Result is Low")]
-	public static bool? Most_Recent_PSA_Test_Result_is_Low(CqlContext context)
+	public  bool? Most_Recent_PSA_Test_Result_is_Low(CqlContext context)
 	{
-		CqlValueSet a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Prostate_Specific_Antigen_Test(context);
+		CqlValueSet a_ = this.Prostate_Specific_Antigen_Test(context);
 		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
 		IEnumerable<Observation> c_(Observation PSATest)
 		{
-			Observation l_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);
+			Observation l_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);
 			Observation[] m_ = [
 				l_,
 			];
@@ -550,8 +556,8 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 					bool ad_()
 					{
 						DataType ae_ = PSATest?.Effective;
-						object af_ = FHIRHelpers_4_3_000.ToValue(context, ae_);
-						CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.toInterval(context, af_);
+						object af_ = _FHIRHelpers_4_3_000.ToValue(context, ae_);
+						CqlInterval<CqlDateTime> ag_ = _QICoreCommon_2_0_000.toInterval(context, af_);
 						CqlDateTime ah_ = context.Operators.Start(ag_);
 
 						return ah_ is null;
@@ -563,11 +569,11 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 					else
 					{
 						DataType ai_ = PSATest?.Effective;
-						object aj_ = FHIRHelpers_4_3_000.ToValue(context, ai_);
-						CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.toInterval(context, aj_);
+						object aj_ = _FHIRHelpers_4_3_000.ToValue(context, ai_);
+						CqlInterval<CqlDateTime> ak_ = _QICoreCommon_2_0_000.toInterval(context, aj_);
 						CqlDateTime al_ = context.Operators.Start(ak_);
-						object an_ = FHIRHelpers_4_3_000.ToValue(context, ai_);
-						CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.toInterval(context, an_);
+						object an_ = _FHIRHelpers_4_3_000.ToValue(context, ai_);
+						CqlInterval<CqlDateTime> ao_ = _QICoreCommon_2_0_000.toInterval(context, an_);
 						CqlDateTime ap_ = context.Operators.Start(ao_);
 						CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(al_, ap_, true, true);
 
@@ -575,8 +581,8 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 					}
 				};
 				DataType s_ = MostRecentProstateCancerStaging?.Effective;
-				object t_ = FHIRHelpers_4_3_000.ToValue(context, s_);
-				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.toInterval(context, t_);
+				object t_ = _FHIRHelpers_4_3_000.ToValue(context, s_);
+				CqlInterval<CqlDateTime> u_ = _QICoreCommon_2_0_000.toInterval(context, t_);
 				bool? v_ = context.Operators.Before(r_(), u_, default);
 				Code<ObservationStatus> w_ = PSATest?.StatusElement;
 				ObservationStatus? x_ = w_?.Value;
@@ -603,8 +609,8 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		object e_(Observation @this)
 		{
 			DataType ar_ = @this?.Effective;
-			object as_ = FHIRHelpers_4_3_000.ToValue(context, ar_);
-			CqlInterval<CqlDateTime> at_ = QICoreCommon_2_0_000.toInterval(context, as_);
+			object as_ = _FHIRHelpers_4_3_000.ToValue(context, ar_);
+			CqlInterval<CqlDateTime> at_ = _QICoreCommon_2_0_000.toInterval(context, as_);
 			CqlDateTime au_ = context.Operators.Start(at_);
 
 			return au_;
@@ -617,7 +623,7 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		bool? i_(Observation LastPSATest)
 		{
 			DataType av_ = LastPSATest?.Value;
-			object aw_ = FHIRHelpers_4_3_000.ToValue(context, av_);
+			object aw_ = _FHIRHelpers_4_3_000.ToValue(context, av_);
 			CqlQuantity ax_ = context.Operators.Quantity(10m, "ng/mL");
 			bool? ay_ = context.Operators.Less(aw_ as CqlQuantity, ax_);
 
@@ -630,18 +636,18 @@ public static class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public static bool? Denominator(CqlContext context)
+	public  bool? Denominator(CqlContext context)
 	{
-		bool? a_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Initial_Population(context);
-		Procedure b_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
+		bool? a_ = this.Initial_Population(context);
+		Procedure b_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
 		bool? c_ = context.Operators.Not((bool?)(b_ is null));
 		bool? d_ = context.Operators.And(a_, c_);
-		Observation e_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);
+		Observation e_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);
 		bool? f_ = context.Operators.Not((bool?)(e_ is null));
 		bool? g_ = context.Operators.And(d_, f_);
-		bool? h_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Most_Recent_PSA_Test_Result_is_Low(context);
+		bool? h_ = this.Most_Recent_PSA_Test_Result_is_Low(context);
 		bool? i_ = context.Operators.And(g_, h_);
-		bool? j_ = ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000.Most_Recent_Gleason_Score_is_Low(context);
+		bool? j_ = this.Most_Recent_Gleason_Score_is_Low(context);
 		bool? k_ = context.Operators.And(i_, j_);
 
 		return k_;

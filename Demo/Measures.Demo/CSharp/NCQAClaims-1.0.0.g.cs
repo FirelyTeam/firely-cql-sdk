@@ -10,34 +10,40 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
-public static class NCQAClaims_1_0_0
+public class NCQAClaims_1_0_0(
+    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
+    NCQAFHIRBase_1_0_0 _NCQAFHIRBase_1_0_0,
+    NCQATerminology_1_0_0 _NCQATerminology_1_0_0)
 {
 
     [CqlDeclaration("Inpatient Stay")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1395")]
-	public static CqlValueSet Inpatient_Stay(CqlContext context) => 
+	public  CqlValueSet Inpatient_Stay(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1395", default);
 
     [CqlDeclaration("Nonacute Inpatient Stay")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1398")]
-	public static CqlValueSet Nonacute_Inpatient_Stay(CqlContext context) => 
+	public  CqlValueSet Nonacute_Inpatient_Stay(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1398", default);
 
     [CqlDeclaration("Professional or Institutional Claims")]
-	public static IEnumerable<Claim> Professional_or_Institutional_Claims(CqlContext context, IEnumerable<Claim> claim)
+	public  IEnumerable<Claim> Professional_or_Institutional_Claims(CqlContext context, IEnumerable<Claim> claim)
 	{
 		bool? a_(Claim MedicalClaim)
 		{
 			CodeableConcept c_ = MedicalClaim?.Type;
-			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(context, c_);
+			CqlConcept d_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
 			CqlCode[] e_ = d_?.codes;
-			CqlCode f_ = NCQATerminology_1_0_0.Professional(context);
+			CqlCode f_ = _NCQATerminology_1_0_0.Professional(context);
 			bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
-			CqlConcept i_ = FHIRHelpers_4_0_001.ToConcept(context, c_);
+			CqlConcept i_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
 			CqlCode[] j_ = i_?.codes;
-			CqlCode k_ = NCQATerminology_1_0_0.Institutional(context);
+			CqlCode k_ = _NCQATerminology_1_0_0.Institutional(context);
 			bool? l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
 			bool? m_ = context.Operators.Or(g_, l_);
 
@@ -49,14 +55,14 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Pharmacy Claims")]
-	public static IEnumerable<Claim> Pharmacy_Claims(CqlContext context, IEnumerable<Claim> claim)
+	public  IEnumerable<Claim> Pharmacy_Claims(CqlContext context, IEnumerable<Claim> claim)
 	{
 		bool? a_(Claim PharmacyClaim)
 		{
 			CodeableConcept c_ = PharmacyClaim?.Type;
-			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(context, c_);
+			CqlConcept d_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
 			CqlCode[] e_ = d_?.codes;
-			CqlCode f_ = NCQATerminology_1_0_0.Pharmacy(context);
+			CqlCode f_ = _NCQATerminology_1_0_0.Pharmacy(context);
 			bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
 			return g_;
@@ -67,18 +73,18 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Professional or Institutional Claims Response")]
-	public static IEnumerable<ClaimResponse> Professional_or_Institutional_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
+	public  IEnumerable<ClaimResponse> Professional_or_Institutional_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
 	{
 		bool? a_(ClaimResponse MedicalResponse)
 		{
 			CodeableConcept c_ = MedicalResponse?.Type;
-			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(context, c_);
+			CqlConcept d_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
 			CqlCode[] e_ = d_?.codes;
-			CqlCode f_ = NCQATerminology_1_0_0.Professional(context);
+			CqlCode f_ = _NCQATerminology_1_0_0.Professional(context);
 			bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
-			CqlConcept i_ = FHIRHelpers_4_0_001.ToConcept(context, c_);
+			CqlConcept i_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
 			CqlCode[] j_ = i_?.codes;
-			CqlCode k_ = NCQATerminology_1_0_0.Institutional(context);
+			CqlCode k_ = _NCQATerminology_1_0_0.Institutional(context);
 			bool? l_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)j_, k_);
 			bool? m_ = context.Operators.Or(g_, l_);
 
@@ -90,14 +96,14 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Pharmacy Claims Response")]
-	public static IEnumerable<ClaimResponse> Pharmacy_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
+	public  IEnumerable<ClaimResponse> Pharmacy_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
 	{
 		bool? a_(ClaimResponse PharmacyResponse)
 		{
 			CodeableConcept c_ = PharmacyResponse?.Type;
-			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(context, c_);
+			CqlConcept d_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
 			CqlCode[] e_ = d_?.codes;
-			CqlCode f_ = NCQATerminology_1_0_0.Pharmacy(context);
+			CqlCode f_ = _NCQATerminology_1_0_0.Pharmacy(context);
 			bool? g_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)e_, f_);
 
 			return g_;
@@ -108,9 +114,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Procedure and POS")]
-	public static IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Procedure_and_POS(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> posCodes, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public  IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Procedure_and_POS(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> posCodes, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		IEnumerable<Claim> a_ = NCQAClaims_1_0_0.Professional_or_Institutional_Claims(context, claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode p)
 		{
 			string k_ = p?.code;
@@ -146,7 +152,7 @@ public static class NCQAClaims_1_0_0
 						bool? y_(Claim.ItemComponent ItemOnLine)
 						{
 							CodeableConcept aa_ = ItemOnLine?.ProductOrService;
-							CqlConcept ab_ = FHIRHelpers_4_0_001.ToConcept(context, aa_);
+							CqlConcept ab_ = _FHIRHelpers_4_0_001.ToConcept(context, aa_);
 							CqlCode[] ac_ = ab_?.codes;
 							bool? ad_(CqlCode LineCode)
 							{
@@ -159,7 +165,7 @@ public static class NCQAClaims_1_0_0
 							IEnumerable<CqlCode> ae_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ac_, ad_);
 							bool? af_ = context.Operators.Exists<CqlCode>(ae_);
 							DataType ag_ = ItemOnLine?.Location;
-							CqlConcept ah_ = FHIRHelpers_4_0_001.ToConcept(context, ag_ as CodeableConcept);
+							CqlConcept ah_ = _FHIRHelpers_4_0_001.ToConcept(context, ag_ as CodeableConcept);
 							CqlCode[] ai_ = ah_?.codes;
 							bool? aj_(CqlCode PosCode)
 							{
@@ -216,7 +222,7 @@ public static class NCQAClaims_1_0_0
 							IEnumerable<object> bc_ = context.Operators.Select<Claim.ItemComponent, object>(ba_, bb_);
 							CqlInterval<CqlDateTime> bd_(object NormalDate)
 							{
-								CqlInterval<CqlDateTime> bj_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, NormalDate);
+								CqlInterval<CqlDateTime> bj_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, NormalDate);
 
 								return bj_;
 							};
@@ -256,9 +262,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Procedure in Header or on Line Item")]
-	public static IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Procedure_in_Header_or_on_Line_Item(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public  IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Procedure_in_Header_or_on_Line_Item(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		IEnumerable<Claim> a_ = NCQAClaims_1_0_0.Professional_or_Institutional_Claims(context, claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode p)
 		{
 			string i_ = p?.code;
@@ -287,7 +293,7 @@ public static class NCQAClaims_1_0_0
 						bool? v_(Claim.ItemComponent ItemOnLine)
 						{
 							CodeableConcept x_ = ItemOnLine?.ProductOrService;
-							CqlConcept y_ = FHIRHelpers_4_0_001.ToConcept(context, x_);
+							CqlConcept y_ = _FHIRHelpers_4_0_001.ToConcept(context, x_);
 							CqlCode[] z_ = y_?.codes;
 							bool? aa_(CqlCode LineCode)
 							{
@@ -390,7 +396,7 @@ public static class NCQAClaims_1_0_0
 							IEnumerable<object> bp_ = context.Operators.Select<Claim.ItemComponent, object>(bn_, bo_);
 							CqlInterval<CqlDateTime> bq_(object NormalDate)
 							{
-								CqlInterval<CqlDateTime> bw_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, NormalDate);
+								CqlInterval<CqlDateTime> bw_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, NormalDate);
 
 								return bw_;
 							};
@@ -430,9 +436,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Diagnosis")]
-	public static (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Medical_Claims_With_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
+	public  (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Medical_Claims_With_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		IEnumerable<Claim> a_ = NCQAClaims_1_0_0.Professional_or_Institutional_Claims(context, claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode d)
 		{
 			string i_ = d?.code;
@@ -548,7 +554,7 @@ public static class NCQAClaims_1_0_0
 						CqlInterval<CqlDateTime> bg_(Claim.ItemComponent NormalDate)
 						{
 							DataType bm_ = NormalDate?.Serviced;
-							CqlInterval<CqlDateTime> bn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, bm_);
+							CqlInterval<CqlDateTime> bn_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, bm_);
 
 							return bn_;
 						};
@@ -588,9 +594,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Pharmacy Claim With Medication")]
-	public static IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> Pharmacy_Claim_With_Medication(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> MedicationCodes)
+	public  IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> Pharmacy_Claim_With_Medication(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> MedicationCodes)
 	{
-		IEnumerable<Claim> a_ = NCQAClaims_1_0_0.Pharmacy_Claims(context, claim);
+		IEnumerable<Claim> a_ = this.Pharmacy_Claims(context, claim);
 		string b_(CqlCode p)
 		{
 			string i_ = p?.code;
@@ -611,7 +617,7 @@ public static class NCQAClaims_1_0_0
 				bool? p_(Claim.ItemComponent ItemOnLine)
 				{
 					CodeableConcept w_ = ItemOnLine?.ProductOrService;
-					CqlConcept x_ = FHIRHelpers_4_0_001.ToConcept(context, w_);
+					CqlConcept x_ = _FHIRHelpers_4_0_001.ToConcept(context, w_);
 					CqlCode[] y_ = x_?.codes;
 					bool? z_(CqlCode LineCode)
 					{
@@ -643,7 +649,7 @@ public static class NCQAClaims_1_0_0
 						bool? al_(Claim.ItemComponent i)
 						{
 							CodeableConcept au_ = i?.ProductOrService;
-							CqlConcept av_ = FHIRHelpers_4_0_001.ToConcept(context, au_);
+							CqlConcept av_ = _FHIRHelpers_4_0_001.ToConcept(context, au_);
 							CqlCode[] aw_ = av_?.codes;
 							bool? ax_(CqlCode LineCode)
 							{
@@ -684,13 +690,13 @@ public static class NCQAClaims_1_0_0
 										if (bj_())
 										{
 											DataType bm_ = i?.Serviced;
-											CqlInterval<CqlDateTime> bn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, bm_);
+											CqlInterval<CqlDateTime> bn_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, bm_);
 											CqlDateTime bo_ = context.Operators.Start(bn_);
-											CqlInterval<CqlDateTime> bq_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, bm_);
+											CqlInterval<CqlDateTime> bq_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, bm_);
 											CqlDateTime br_ = context.Operators.Start(bq_);
 											Quantity bs_ = i?.Quantity;
 											FhirDecimal bt_ = bs_?.ValueElement;
-											decimal? bu_ = FHIRHelpers_4_0_001.ToDecimal(context, bt_);
+											decimal? bu_ = _FHIRHelpers_4_0_001.ToDecimal(context, bt_);
 											CqlDateTime bv_ = context.Operators.Add(br_, new CqlQuantity(bu_, "day"));
 											CqlQuantity bw_ = context.Operators.Quantity(1m, "day");
 											CqlDateTime bx_ = context.Operators.Subtract(bv_, bw_);
@@ -701,38 +707,38 @@ public static class NCQAClaims_1_0_0
 										else
 										{
 											DataType bz_ = i?.Serviced;
-											CqlDate ca_ = FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
-											CqlDate cc_ = FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
+											CqlDate ca_ = _FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
+											CqlDate cc_ = _FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
 											Quantity cd_ = i?.Quantity;
 											FhirDecimal ce_ = cd_?.ValueElement;
-											decimal? cf_ = FHIRHelpers_4_0_001.ToDecimal(context, ce_);
+											decimal? cf_ = _FHIRHelpers_4_0_001.ToDecimal(context, ce_);
 											CqlDate cg_ = context.Operators.Add(cc_, new CqlQuantity(cf_, "day"));
 											CqlQuantity ch_ = context.Operators.Quantity(1m, "day");
 											CqlDate ci_ = context.Operators.Subtract(cg_, ch_);
 											CqlInterval<CqlDate> cj_ = context.Operators.Interval(ca_, ci_, true, true);
 											CqlDate ck_ = cj_?.low;
 											CqlDateTime cl_ = context.Operators.ConvertDateToDateTime(ck_);
-											CqlDate cn_ = FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
-											CqlDate cp_ = FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
+											CqlDate cn_ = _FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
+											CqlDate cp_ = _FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
 											FhirDecimal cr_ = cd_?.ValueElement;
-											decimal? cs_ = FHIRHelpers_4_0_001.ToDecimal(context, cr_);
+											decimal? cs_ = _FHIRHelpers_4_0_001.ToDecimal(context, cr_);
 											CqlDate ct_ = context.Operators.Add(cp_, new CqlQuantity(cs_, "day"));
 											CqlDate cv_ = context.Operators.Subtract(ct_, ch_);
 											CqlInterval<CqlDate> cw_ = context.Operators.Interval(cn_, cv_, true, true);
 											CqlDate cx_ = cw_?.high;
 											CqlDateTime cy_ = context.Operators.ConvertDateToDateTime(cx_);
-											CqlDate da_ = FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
-											CqlDate dc_ = FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
+											CqlDate da_ = _FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
+											CqlDate dc_ = _FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
 											FhirDecimal de_ = cd_?.ValueElement;
-											decimal? df_ = FHIRHelpers_4_0_001.ToDecimal(context, de_);
+											decimal? df_ = _FHIRHelpers_4_0_001.ToDecimal(context, de_);
 											CqlDate dg_ = context.Operators.Add(dc_, new CqlQuantity(df_, "day"));
 											CqlDate di_ = context.Operators.Subtract(dg_, ch_);
 											CqlInterval<CqlDate> dj_ = context.Operators.Interval(da_, di_, true, true);
 											bool? dk_ = dj_?.lowClosed;
-											CqlDate dm_ = FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
-											CqlDate do_ = FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
+											CqlDate dm_ = _FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
+											CqlDate do_ = _FHIRHelpers_4_0_001.ToDate(context, bz_ as Date);
 											FhirDecimal dq_ = cd_?.ValueElement;
-											decimal? dr_ = FHIRHelpers_4_0_001.ToDecimal(context, dq_);
+											decimal? dr_ = _FHIRHelpers_4_0_001.ToDecimal(context, dq_);
 											CqlDate ds_ = context.Operators.Add(do_, new CqlQuantity(dr_, "day"));
 											CqlDate du_ = context.Operators.Subtract(ds_, ch_);
 											CqlInterval<CqlDate> dv_ = context.Operators.Interval(dm_, du_, true, true);
@@ -791,7 +797,7 @@ public static class NCQAClaims_1_0_0
 									IEnumerable<object> ei_ = context.Operators.Select<Claim.ItemComponent, object>(eg_, eh_);
 									CqlInterval<CqlDateTime> ej_(object NormalDate)
 									{
-										CqlInterval<CqlDateTime> es_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, NormalDate);
+										CqlInterval<CqlDateTime> es_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, NormalDate);
 
 										return es_;
 									};
@@ -849,9 +855,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Diagnosis and Procedure")]
-	public static IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public  IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		IEnumerable<Claim> a_ = NCQAClaims_1_0_0.Professional_or_Institutional_Claims(context, claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode d)
 		{
 			string k_ = d?.code;
@@ -1080,7 +1086,7 @@ public static class NCQAClaims_1_0_0
 								CqlInterval<CqlDateTime> dn_(Claim.ItemComponent NormalDate)
 								{
 									DataType dq_ = NormalDate?.Serviced;
-									CqlInterval<CqlDateTime> dr_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, dq_);
+									CqlInterval<CqlDateTime> dr_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, dq_);
 
 									return dr_;
 								};
@@ -1125,9 +1131,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Principal Diagnosis and Procedure")]
-	public static IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Principal_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public  IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Principal_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		IEnumerable<Claim> a_ = NCQAClaims_1_0_0.Professional_or_Institutional_Claims(context, claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode d)
 		{
 			string k_ = d?.code;
@@ -1294,7 +1300,7 @@ public static class NCQAClaims_1_0_0
 									{
 										PositiveInt cs_ = RightDiagnosis?.SequenceElement;
 										Integer ct_ = context.Operators.Convert<Integer>(cs_);
-										int? cu_ = FHIRHelpers_4_0_001.ToInteger(context, ct_);
+										int? cu_ = _FHIRHelpers_4_0_001.ToInteger(context, ct_);
 										bool? cv_ = context.Operators.Equal(cu_, 1);
 										DataType cw_ = RightDiagnosis?.Diagnosis;
 										IEnumerable<Coding> cx_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(cw_, "coding");
@@ -1348,7 +1354,7 @@ public static class NCQAClaims_1_0_0
 									CqlInterval<CqlDateTime> dp_(Claim.ItemComponent NormalDate)
 									{
 										DataType ds_ = NormalDate?.Serviced;
-										CqlInterval<CqlDateTime> dt_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, ds_);
+										CqlInterval<CqlDateTime> dt_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, ds_);
 
 										return dt_;
 									};
@@ -1398,9 +1404,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Principal Diagnosis")]
-	public static IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Principal_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
+	public  IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> Medical_Claims_With_Principal_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		IEnumerable<Claim> a_ = NCQAClaims_1_0_0.Professional_or_Institutional_Claims(context, claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode d)
 		{
 			string i_ = d?.code;
@@ -1430,7 +1436,7 @@ public static class NCQAClaims_1_0_0
 						{
 							PositiveInt w_ = RightDiagnosis?.SequenceElement;
 							Integer x_ = context.Operators.Convert<Integer>(w_);
-							int? y_ = FHIRHelpers_4_0_001.ToInteger(context, x_);
+							int? y_ = _FHIRHelpers_4_0_001.ToInteger(context, x_);
 							bool? z_ = context.Operators.Equal(y_, 1);
 							DataType aa_ = RightDiagnosis?.Diagnosis;
 							IEnumerable<Coding> ab_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(aa_, "coding");
@@ -1492,7 +1498,7 @@ public static class NCQAClaims_1_0_0
 							CqlInterval<CqlDateTime> ax_(Claim.ItemComponent NormalDate)
 							{
 								DataType bd_ = NormalDate?.Serviced;
-								CqlInterval<CqlDateTime> be_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, bd_);
+								CqlInterval<CqlDateTime> be_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, bd_);
 
 								return be_;
 							};
@@ -1532,22 +1538,22 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Professional and Institutional Claims and Claim Responses")]
-	public static (IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
+	public  (IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
 	{
-		IEnumerable<ClaimResponse> a_ = NCQAClaims_1_0_0.Professional_or_Institutional_Claims_Response(context, claimResponse);
-		IEnumerable<Claim> b_ = NCQAClaims_1_0_0.Professional_or_Institutional_Claims(context, claim);
+		IEnumerable<ClaimResponse> a_ = this.Professional_or_Institutional_Claims_Response(context, claimResponse);
+		IEnumerable<Claim> b_ = this.Professional_or_Institutional_Claims(context, claim);
 		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? c_ = (a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Get All Paid Claim Reponses")]
-	public static IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> Get_All_Paid_Claim_Reponses(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
+	public  IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> Get_All_Paid_Claim_Reponses(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
 	{
 		bool? a_(ClaimResponse ResponseItem)
 		{
 			Code<ClaimProcessingCodes> h_ = ResponseItem?.OutcomeElement;
-			string i_ = FHIRHelpers_4_0_001.ToString(context, h_);
+			string i_ = _FHIRHelpers_4_0_001.ToString(context, h_);
 			string[] j_ = [
 				"complete",
 				"partial",
@@ -1568,8 +1574,8 @@ public static class NCQAClaims_1_0_0
 			{
 				ResourceReference o_ = ClmResp?.Request;
 				FhirString p_ = o_?.ReferenceElement;
-				string q_ = FHIRHelpers_4_0_001.ToString(context, p_);
-				string r_ = NCQAFHIRBase_1_0_0.GetId(context, q_);
+				string q_ = _FHIRHelpers_4_0_001.ToString(context, p_);
+				string r_ = _NCQAFHIRBase_1_0_0.GetId(context, q_);
 				List<ClaimResponse.ItemComponent> s_ = ClmResp?.Item;
 				bool? t_(ClaimResponse.ItemComponent ResponseItem)
 				{
@@ -1633,7 +1639,7 @@ public static class NCQAClaims_1_0_0
 					bool? ao_(Money DollarAmount)
 					{
 						FhirDecimal be_ = DollarAmount?.ValueElement;
-						decimal? bf_ = FHIRHelpers_4_0_001.ToDecimal(context, be_);
+						decimal? bf_ = _FHIRHelpers_4_0_001.ToDecimal(context, be_);
 						decimal? bg_ = context.Operators.ConvertIntegerToDecimal(0);
 						bool? bh_ = context.Operators.Greater(bf_, bg_);
 
@@ -1661,7 +1667,7 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Claims With Procedure and Diagnosis")]
-	public static IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_and_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public  IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_and_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
 		bool? a_(Claim AllClaims)
 		{
@@ -1699,7 +1705,7 @@ public static class NCQAClaims_1_0_0
 			IEnumerable<Coding> n_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)m_);
 			bool? o_(Coding ProductOrServiceCode)
 			{
-				CqlCode an_ = FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
+				CqlCode an_ = _FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
 				bool? ao_ = context.Operators.In<CqlCode>(an_, ProductOrServiceValueSet);
 
 				return ao_;
@@ -1743,7 +1749,7 @@ public static class NCQAClaims_1_0_0
 			IEnumerable<Coding> ac_ = context.Operators.Select<object, Coding>(aa_, ab_);
 			bool? ad_(Coding DiagnosisCode)
 			{
-				CqlCode av_ = FHIRHelpers_4_0_001.ToCode(context, DiagnosisCode);
+				CqlCode av_ = _FHIRHelpers_4_0_001.ToCode(context, DiagnosisCode);
 				bool? aw_ = context.Operators.In<CqlCode>(av_, DiagnosisValueSet);
 
 				return aw_;
@@ -1765,7 +1771,7 @@ public static class NCQAClaims_1_0_0
 				List<Coding> bd_ = bc_?.Coding;
 				bool? be_(Coding ProductOrServiceCode)
 				{
-					CqlCode bh_ = FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
+					CqlCode bh_ = _FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
 					bool? bi_ = context.Operators.In<CqlCode>(bh_, ProductOrServiceValueSet);
 
 					return bi_;
@@ -1786,10 +1792,10 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Corresponding Claim for Services and Conditions")]
-	public static (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_and_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public  (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_and_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = NCQAClaims_1_0_0.Get_All_Paid_Claim_Reponses(context, claimResponse);
-		IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> b_ = NCQAClaims_1_0_0.Get_All_Claims_With_Procedure_and_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
+		IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+		IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> b_ = this.Get_All_Claims_With_Procedure_and_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
 		(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? c_ = (a_, b_);
 		(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?[] d_ = [
 			c_,
@@ -1828,12 +1834,12 @@ public static class NCQAClaims_1_0_0
 									return default;
 								}
 							};
-							string ad_ = FHIRHelpers_4_0_001.ToString(context, ac_());
+							string ad_ = _FHIRHelpers_4_0_001.ToString(context, ac_());
 							ClaimResponse ae_ = pClaim?.Response;
 							ResourceReference af_ = ae_?.Request;
 							FhirString ag_ = af_?.ReferenceElement;
-							string ah_ = FHIRHelpers_4_0_001.ToString(context, ag_);
-							string ai_ = NCQAFHIRBase_1_0_0.GetId(context, ah_);
+							string ah_ = _FHIRHelpers_4_0_001.ToString(context, ag_);
+							string ai_ = _NCQAFHIRBase_1_0_0.GetId(context, ah_);
 							bool? aj_ = context.Operators.Equal(ad_, ai_);
 							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
 							Integer al_ = context.Operators.Convert<Integer>(ak_);
@@ -1930,7 +1936,7 @@ public static class NCQAClaims_1_0_0
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
 							DataType ce_ = PaidItem?.Serviced;
-							CqlInterval<CqlDateTime> cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, ce_);
+							CqlInterval<CqlDateTime> cf_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, ce_);
 
 							return cf_;
 						};
@@ -1970,9 +1976,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Paid Claims for Provided Service and Condition")]
-	public static (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Service_and_Condition(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public  (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Service_and_Condition(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? a_ = NCQAClaims_1_0_0.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
+		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
 		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?[] b_ = [
 			a_,
 		];
@@ -1996,7 +2002,7 @@ public static class NCQAClaims_1_0_0
 				{
 					IEnumerable<ClaimResponse> o_ = MedicalClaimAndResponse?.MedicalClaimResponse;
 					IEnumerable<Claim> p_ = MedicalClaimAndResponse?.MedicalClaim;
-					(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? q_ = NCQAClaims_1_0_0.Get_Corresponding_Claim_for_Services_and_Conditions(context, o_, p_, ProductOrServiceValueSet, DiagnosisValueSet);
+					(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? q_ = this.Get_Corresponding_Claim_for_Services_and_Conditions(context, o_, p_, ProductOrServiceValueSet, DiagnosisValueSet);
 
 					return q_;
 				}
@@ -2022,7 +2028,7 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Claims With Procedure or Diagnosis")]
-	public static IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_or_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public  IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_or_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
 		bool? a_(Claim AllClaims)
 		{
@@ -2060,7 +2066,7 @@ public static class NCQAClaims_1_0_0
 			IEnumerable<Coding> n_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)m_);
 			bool? o_(Coding ProductOrServiceCode)
 			{
-				CqlCode an_ = FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
+				CqlCode an_ = _FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
 				bool? ao_ = context.Operators.In<CqlCode>(an_, ProductOrServiceValueSet);
 
 				return ao_;
@@ -2104,7 +2110,7 @@ public static class NCQAClaims_1_0_0
 			IEnumerable<Coding> ac_ = context.Operators.Select<object, Coding>(aa_, ab_);
 			bool? ad_(Coding DiagnosisCode)
 			{
-				CqlCode av_ = FHIRHelpers_4_0_001.ToCode(context, DiagnosisCode);
+				CqlCode av_ = _FHIRHelpers_4_0_001.ToCode(context, DiagnosisCode);
 				bool? aw_ = context.Operators.In<CqlCode>(av_, DiagnosisValueSet);
 
 				return aw_;
@@ -2129,7 +2135,7 @@ public static class NCQAClaims_1_0_0
 						List<Coding> be_ = bd_?.Coding;
 						bool? bf_(Coding ProductOrServiceCode)
 						{
-							CqlCode bi_ = FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
+							CqlCode bi_ = _FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
 							bool? bj_ = context.Operators.In<CqlCode>(bi_, ProductOrServiceValueSet);
 
 							return bj_;
@@ -2154,7 +2160,7 @@ public static class NCQAClaims_1_0_0
 						List<Coding> bq_ = bp_?.Coding;
 						bool? br_(Coding ProductOrServiceCode)
 						{
-							CqlCode bu_ = FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
+							CqlCode bu_ = _FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
 							bool? bv_ = context.Operators.In<CqlCode>(bu_, ProductOrServiceValueSet);
 
 							return bv_;
@@ -2197,10 +2203,10 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Corresponding Claim for Services or Conditions")]
-	public static (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public  (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = NCQAClaims_1_0_0.Get_All_Paid_Claim_Reponses(context, claimResponse);
-		IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> b_ = NCQAClaims_1_0_0.Get_All_Claims_With_Procedure_or_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
+		IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+		IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> b_ = this.Get_All_Claims_With_Procedure_or_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
 		(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? c_ = (a_, b_);
 		(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?[] d_ = [
 			c_,
@@ -2239,12 +2245,12 @@ public static class NCQAClaims_1_0_0
 									return default;
 								}
 							};
-							string ad_ = FHIRHelpers_4_0_001.ToString(context, ac_());
+							string ad_ = _FHIRHelpers_4_0_001.ToString(context, ac_());
 							ClaimResponse ae_ = pClaim?.Response;
 							ResourceReference af_ = ae_?.Request;
 							FhirString ag_ = af_?.ReferenceElement;
-							string ah_ = FHIRHelpers_4_0_001.ToString(context, ag_);
-							string ai_ = NCQAFHIRBase_1_0_0.GetId(context, ah_);
+							string ah_ = _FHIRHelpers_4_0_001.ToString(context, ag_);
+							string ai_ = _NCQAFHIRBase_1_0_0.GetId(context, ah_);
 							bool? aj_ = context.Operators.Equal(ad_, ai_);
 							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
 							Integer al_ = context.Operators.Convert<Integer>(ak_);
@@ -2341,7 +2347,7 @@ public static class NCQAClaims_1_0_0
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
 							DataType ce_ = PaidItem?.Serviced;
-							CqlInterval<CqlDateTime> cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, ce_);
+							CqlInterval<CqlDateTime> cf_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, ce_);
 
 							return cf_;
 						};
@@ -2381,9 +2387,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Paid Claims for Provided Services or Conditions")]
-	public static (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public  (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? a_ = NCQAClaims_1_0_0.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
+		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
 		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?[] b_ = [
 			a_,
 		];
@@ -2407,7 +2413,7 @@ public static class NCQAClaims_1_0_0
 				{
 					IEnumerable<ClaimResponse> k_ = MedicalClaimAndResponse?.MedicalClaimResponse;
 					IEnumerable<Claim> l_ = MedicalClaimAndResponse?.MedicalClaim;
-					(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? m_ = NCQAClaims_1_0_0.Get_Corresponding_Claim_for_Services_or_Conditions(context, k_, l_, ProductOrServiceValueSet, DiagnosisValueSet);
+					(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? m_ = this.Get_Corresponding_Claim_for_Services_or_Conditions(context, k_, l_, ProductOrServiceValueSet, DiagnosisValueSet);
 
 					return m_;
 				}
@@ -2422,7 +2428,7 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Claims With Procedure Only")]
-	public static IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_Only(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public  IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> Get_All_Claims_With_Procedure_Only(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
 		bool? a_(Claim AllClaims)
 		{
@@ -2460,7 +2466,7 @@ public static class NCQAClaims_1_0_0
 			IEnumerable<Coding> n_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)m_);
 			bool? o_(Coding ProductOrServiceCode)
 			{
-				CqlCode x_ = FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
+				CqlCode x_ = _FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
 				bool? y_ = context.Operators.In<CqlCode>(x_, ProductOrServiceValueSet);
 
 				return y_;
@@ -2481,7 +2487,7 @@ public static class NCQAClaims_1_0_0
 				List<Coding> af_ = ae_?.Coding;
 				bool? ag_(Coding ProductOrServiceCode)
 				{
-					CqlCode aj_ = FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
+					CqlCode aj_ = _FHIRHelpers_4_0_001.ToCode(context, ProductOrServiceCode);
 					bool? ak_ = context.Operators.In<CqlCode>(aj_, ProductOrServiceValueSet);
 
 					return ak_;
@@ -2502,10 +2508,10 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Corresponding Claim for Services Only")]
-	public static (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public  (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Corresponding_Claim_for_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = NCQAClaims_1_0_0.Get_All_Paid_Claim_Reponses(context, claimResponse);
-		IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> b_ = NCQAClaims_1_0_0.Get_All_Claims_With_Procedure_Only(context, claim, ProductOrServiceValueSet);
+		IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+		IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> b_ = this.Get_All_Claims_With_Procedure_Only(context, claim, ProductOrServiceValueSet);
 		(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)? c_ = (a_, b_);
 		(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?[] d_ = [
 			c_,
@@ -2544,12 +2550,12 @@ public static class NCQAClaims_1_0_0
 									return default;
 								}
 							};
-							string ad_ = FHIRHelpers_4_0_001.ToString(context, ac_());
+							string ad_ = _FHIRHelpers_4_0_001.ToString(context, ac_());
 							ClaimResponse ae_ = pClaim?.Response;
 							ResourceReference af_ = ae_?.Request;
 							FhirString ag_ = af_?.ReferenceElement;
-							string ah_ = FHIRHelpers_4_0_001.ToString(context, ag_);
-							string ai_ = NCQAFHIRBase_1_0_0.GetId(context, ah_);
+							string ah_ = _FHIRHelpers_4_0_001.ToString(context, ag_);
+							string ai_ = _NCQAFHIRBase_1_0_0.GetId(context, ah_);
 							bool? aj_ = context.Operators.Equal(ad_, ai_);
 							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
 							Integer al_ = context.Operators.Convert<Integer>(ak_);
@@ -2646,7 +2652,7 @@ public static class NCQAClaims_1_0_0
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
 							DataType ce_ = PaidItem?.Serviced;
-							CqlInterval<CqlDateTime> cf_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, ce_);
+							CqlInterval<CqlDateTime> cf_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, ce_);
 
 							return cf_;
 						};
@@ -2686,9 +2692,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Paid Claims for Provided Services Only")]
-	public static (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public  (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? Get_Paid_Claims_for_Provided_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? a_ = NCQAClaims_1_0_0.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
+		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)? a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
 		(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?[] b_ = [
 			a_,
 		];
@@ -2712,7 +2718,7 @@ public static class NCQAClaims_1_0_0
 				{
 					IEnumerable<ClaimResponse> k_ = MedicalClaimAndResponse?.MedicalClaimResponse;
 					IEnumerable<Claim> l_ = MedicalClaimAndResponse?.MedicalClaim;
-					(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? m_ = NCQAClaims_1_0_0.Get_Corresponding_Claim_for_Services_Only(context, k_, l_, ProductOrServiceValueSet);
+					(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? m_ = this.Get_Corresponding_Claim_for_Services_Only(context, k_, l_, ProductOrServiceValueSet);
 
 					return m_;
 				}
@@ -2727,20 +2733,20 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Pharmacy Claims and Claim Responses")]
-	public static (IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? Get_All_Pharmacy_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
+	public  (IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? Get_All_Pharmacy_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
 	{
-		IEnumerable<ClaimResponse> a_ = NCQAClaims_1_0_0.Pharmacy_Claims_Response(context, claimResponse);
-		IEnumerable<Claim> b_ = NCQAClaims_1_0_0.Pharmacy_Claims(context, claim);
+		IEnumerable<ClaimResponse> a_ = this.Pharmacy_Claims_Response(context, claimResponse);
+		IEnumerable<Claim> b_ = this.Pharmacy_Claims(context, claim);
 		(IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? c_ = (a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("Get Corresponding Claim for Pharmacy Services")]
-	public static (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? Get_Corresponding_Claim_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public  (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? Get_Corresponding_Claim_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = NCQAClaims_1_0_0.Get_All_Paid_Claim_Reponses(context, claimResponse);
-		IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> b_ = NCQAClaims_1_0_0.Pharmacy_Claim_With_Medication(context, claim, ProductOrServiceValueSet);
+		IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+		IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> b_ = this.Pharmacy_Claim_With_Medication(context, claim, ProductOrServiceValueSet);
 		(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)? c_ = (a_, b_);
 		(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?[] d_ = [
 			c_,
@@ -2779,12 +2785,12 @@ public static class NCQAClaims_1_0_0
 									return default;
 								}
 							};
-							string ad_ = FHIRHelpers_4_0_001.ToString(context, ac_());
+							string ad_ = _FHIRHelpers_4_0_001.ToString(context, ac_());
 							ClaimResponse ae_ = pClaim?.Response;
 							ResourceReference af_ = ae_?.Request;
 							FhirString ag_ = af_?.ReferenceElement;
-							string ah_ = FHIRHelpers_4_0_001.ToString(context, ag_);
-							string ai_ = NCQAFHIRBase_1_0_0.GetId(context, ah_);
+							string ah_ = _FHIRHelpers_4_0_001.ToString(context, ag_);
+							string ai_ = _NCQAFHIRBase_1_0_0.GetId(context, ah_);
 							bool? aj_ = context.Operators.Equal(ad_, ai_);
 							PositiveInt ak_ = medClaimLineItem?.SequenceElement;
 							Integer al_ = context.Operators.Convert<Integer>(ak_);
@@ -2881,7 +2887,7 @@ public static class NCQAClaims_1_0_0
 						CqlInterval<CqlDateTime> bv_(Claim.ItemComponent PaidItem)
 						{
 							DataType cm_ = PaidItem?.Serviced;
-							CqlInterval<CqlDateTime> cn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, cm_);
+							CqlInterval<CqlDateTime> cn_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, cm_);
 
 							return cn_;
 						};
@@ -2916,14 +2922,14 @@ public static class NCQAClaims_1_0_0
 								if (cs_())
 								{
 									DataType cv_ = i?.Serviced;
-									CqlInterval<CqlDateTime> cw_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, cv_);
+									CqlInterval<CqlDateTime> cw_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, cv_);
 									CqlDateTime cx_ = context.Operators.Start(cw_);
 									CqlDate cy_ = context.Operators.ConvertDateTimeToDate(cx_);
-									CqlInterval<CqlDateTime> da_ = NCQAFHIRBase_1_0_0.Normalize_Interval(context, cv_);
+									CqlInterval<CqlDateTime> da_ = _NCQAFHIRBase_1_0_0.Normalize_Interval(context, cv_);
 									CqlDateTime db_ = context.Operators.Start(da_);
 									Quantity dc_ = i?.Quantity;
 									FhirDecimal dd_ = dc_?.ValueElement;
-									decimal? de_ = FHIRHelpers_4_0_001.ToDecimal(context, dd_);
+									decimal? de_ = _FHIRHelpers_4_0_001.ToDecimal(context, dd_);
 									CqlDateTime df_ = context.Operators.Add(db_, new CqlQuantity(de_, "day"));
 									CqlQuantity dg_ = context.Operators.Quantity(1m, "day");
 									CqlDateTime dh_ = context.Operators.Subtract(df_, dg_);
@@ -2976,9 +2982,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Paid Claims for Pharmacy Services")]
-	public static (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? Get_Paid_Claims_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public  (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? Get_Paid_Claims_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		(IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? a_ = NCQAClaims_1_0_0.Get_All_Pharmacy_Claims_and_Claim_Responses(context, claimResponse, claim);
+		(IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)? a_ = this.Get_All_Pharmacy_Claims_and_Claim_Responses(context, claimResponse, claim);
 		(IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?[] b_ = [
 			a_,
 		];
@@ -3002,7 +3008,7 @@ public static class NCQAClaims_1_0_0
 				{
 					IEnumerable<ClaimResponse> k_ = PharmacyClaimAndResponse?.PharmacyClaimResponse;
 					IEnumerable<Claim> l_ = PharmacyClaimAndResponse?.PharmacyClaim;
-					(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? m_ = NCQAClaims_1_0_0.Get_Corresponding_Claim_for_Pharmacy_Services(context, k_, l_, ProductOrServiceValueSet);
+					(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? m_ = this.Get_Corresponding_Claim_for_Pharmacy_Services(context, k_, l_, ProductOrServiceValueSet);
 
 					return m_;
 				}
@@ -3017,18 +3023,18 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Claim With Corresponding Claim Response")]
-	public static IEnumerable<(IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?> Get_Claim_With_Corresponding_Claim_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
+	public  IEnumerable<(IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)?> Get_Claim_With_Corresponding_Claim_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
 	{
 		(IEnumerable<ClaimResponse> ClaimResponse, IEnumerable<Claim> OriginalClaim)? a_(Claim Claim)
 		{
 			bool? c_(ClaimResponse CR)
 			{
 				Id h_ = Claim?.IdElement;
-				string i_ = FHIRHelpers_4_0_001.ToString(context, h_);
+				string i_ = _FHIRHelpers_4_0_001.ToString(context, h_);
 				ResourceReference j_ = CR?.Request;
 				FhirString k_ = j_?.ReferenceElement;
-				string l_ = FHIRHelpers_4_0_001.ToString(context, k_);
-				string m_ = NCQAFHIRBase_1_0_0.GetId(context, l_);
+				string l_ = _FHIRHelpers_4_0_001.ToString(context, k_);
+				string m_ = _NCQAFHIRBase_1_0_0.GetId(context, l_);
 				bool? n_ = context.Operators.Equal(i_, m_);
 
 				return n_;
@@ -3037,15 +3043,15 @@ public static class NCQAClaims_1_0_0
 			bool? e_(Claim C)
 			{
 				Id o_ = Claim?.IdElement;
-				string p_ = FHIRHelpers_4_0_001.ToString(context, o_);
+				string p_ = _FHIRHelpers_4_0_001.ToString(context, o_);
 				bool? q_(ClaimResponse CR)
 				{
 					Id ae_ = Claim?.IdElement;
-					string af_ = FHIRHelpers_4_0_001.ToString(context, ae_);
+					string af_ = _FHIRHelpers_4_0_001.ToString(context, ae_);
 					ResourceReference ag_ = CR?.Request;
 					FhirString ah_ = ag_?.ReferenceElement;
-					string ai_ = FHIRHelpers_4_0_001.ToString(context, ah_);
-					string aj_ = NCQAFHIRBase_1_0_0.GetId(context, ai_);
+					string ai_ = _FHIRHelpers_4_0_001.ToString(context, ah_);
+					string aj_ = _NCQAFHIRBase_1_0_0.GetId(context, ai_);
 					bool? ak_ = context.Operators.Equal(af_, aj_);
 
 					return ak_;
@@ -3082,8 +3088,8 @@ public static class NCQAClaims_1_0_0
 				};
 				IEnumerable<FhirString> z_ = context.Operators.Select<ResourceReference, FhirString>(x_, y_);
 				FhirString aa_ = context.Operators.SingletonFrom<FhirString>(z_);
-				string ab_ = FHIRHelpers_4_0_001.ToString(context, aa_);
-				string ac_ = NCQAFHIRBase_1_0_0.GetId(context, ab_);
+				string ab_ = _FHIRHelpers_4_0_001.ToString(context, aa_);
+				string ac_ = _NCQAFHIRBase_1_0_0.GetId(context, ab_);
 				bool? ad_ = context.Operators.Equal(p_, ac_);
 
 				return ad_;
@@ -3099,9 +3105,9 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Nonacute or Acute Inpatient Discharge")]
-	public static (IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(CqlContext context, IEnumerable<Claim> claim)
+	public  (IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(CqlContext context, IEnumerable<Claim> claim)
 	{
-		IEnumerable<Claim> a_ = NCQAClaims_1_0_0.Professional_or_Institutional_Claims(context, claim);
+		IEnumerable<Claim> a_ = this.Professional_or_Institutional_Claims(context, claim);
 		(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)? b_ = (a_, default, default);
 		(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?[] c_ = [
 			b_,
@@ -3123,12 +3129,12 @@ public static class NCQAClaims_1_0_0
 						bool? r_(Claim.ItemComponent i)
 						{
 							CodeableConcept u_ = i?.Revenue;
-							CqlConcept v_ = FHIRHelpers_4_0_001.ToConcept(context, u_);
+							CqlConcept v_ = _FHIRHelpers_4_0_001.ToConcept(context, u_);
 							CqlCode[] w_ = v_?.codes;
 							bool? x_(CqlCode rev)
 							{
 								string aa_ = rev?.code;
-								CqlValueSet ab_ = NCQAClaims_1_0_0.Inpatient_Stay(context);
+								CqlValueSet ab_ = this.Inpatient_Stay(context);
 								bool? ac_ = context.Operators.StringInValueSet(aa_, ab_);
 
 								return ac_;
@@ -3163,12 +3169,12 @@ public static class NCQAClaims_1_0_0
 						bool? ah_(Claim.ItemComponent i)
 						{
 							CodeableConcept aq_ = i?.Revenue;
-							CqlConcept ar_ = FHIRHelpers_4_0_001.ToConcept(context, aq_);
+							CqlConcept ar_ = _FHIRHelpers_4_0_001.ToConcept(context, aq_);
 							CqlCode[] as_ = ar_?.codes;
 							bool? at_(CqlCode rev)
 							{
 								string aw_ = rev?.code;
-								CqlValueSet ax_ = NCQAClaims_1_0_0.Nonacute_Inpatient_Stay(context);
+								CqlValueSet ax_ = this.Nonacute_Inpatient_Stay(context);
 								bool? ay_ = context.Operators.StringInValueSet(aw_, ax_);
 
 								return ay_;
@@ -3186,7 +3192,7 @@ public static class NCQAClaims_1_0_0
 						{
 							Code az_ = tob?.CodeElement;
 							string ba_ = az_?.Value;
-							CqlValueSet bb_ = NCQAClaims_1_0_0.Nonacute_Inpatient_Stay(context);
+							CqlValueSet bb_ = this.Nonacute_Inpatient_Stay(context);
 							bool? bc_ = context.Operators.StringInValueSet(ba_, bb_);
 
 							return bc_;
@@ -3265,7 +3271,7 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Prescriber NPI from Claims")]
-	public static (int? IdentifierCount, nint _)? Get_Prescriber_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
+	public  (int? IdentifierCount, nint _)? Get_Prescriber_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
 	{
 		(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? a_(Claim C)
 		{
@@ -3274,7 +3280,7 @@ public static class NCQAClaims_1_0_0
 			{
 				PositiveInt y_ = ct?.SequenceElement;
 				Integer z_ = context.Operators.Convert<Integer>(y_);
-				int? aa_ = FHIRHelpers_4_0_001.ToInteger(context, z_);
+				int? aa_ = _FHIRHelpers_4_0_001.ToInteger(context, z_);
 				bool? ab_ = context.Operators.Equal(aa_, 1);
 
 				return ab_;
@@ -3299,7 +3305,7 @@ public static class NCQAClaims_1_0_0
 			{
 				PositiveInt af_ = ct?.SequenceElement;
 				Integer ag_ = context.Operators.Convert<Integer>(af_);
-				int? ah_ = FHIRHelpers_4_0_001.ToInteger(context, ag_);
+				int? ah_ = _FHIRHelpers_4_0_001.ToInteger(context, ag_);
 				bool? ai_ = context.Operators.Equal(ah_, 1);
 
 				return ai_;
@@ -3328,8 +3334,8 @@ public static class NCQAClaims_1_0_0
 				];
 				string ao_(FhirString r)
 				{
-					string ar_ = FHIRHelpers_4_0_001.ToString(context, r);
-					string as_ = NCQAFHIRBase_1_0_0.GetId(context, ar_);
+					string ar_ = _FHIRHelpers_4_0_001.ToString(context, r);
+					string as_ = _NCQAFHIRBase_1_0_0.GetId(context, ar_);
 
 					return as_;
 				};
@@ -3354,7 +3360,7 @@ public static class NCQAClaims_1_0_0
 			bool? au_(Practitioner p)
 			{
 				Id bb_ = p?.IdElement;
-				string bc_ = FHIRHelpers_4_0_001.ToString(context, bb_);
+				string bc_ = _FHIRHelpers_4_0_001.ToString(context, bb_);
 				IEnumerable<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> bd_ = ClaimProperties?.CareTeams;
 				bool? be_((Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)? @this)
 				{
@@ -3400,8 +3406,8 @@ public static class NCQAClaims_1_0_0
 						string ck_ = cj_?.Value;
 						bool? cl_ = context.Operators.Equal(ck_, "http://hl7.org/fhir/sid/us-npi");
 						CodeableConcept cm_ = l?.Type;
-						CqlConcept cn_ = FHIRHelpers_4_0_001.ToConcept(context, cm_);
-						CqlCode co_ = NCQATerminology_1_0_0.Provider_number(context);
+						CqlConcept cn_ = _FHIRHelpers_4_0_001.ToConcept(context, cm_);
+						CqlCode co_ = _NCQATerminology_1_0_0.Provider_number(context);
 						CqlConcept cp_ = context.Operators.ConvertCodeToConcept(co_);
 						bool? cq_ = context.Operators.Equivalent(cn_, cp_);
 						bool? cr_ = context.Operators.And(cl_, cq_);
@@ -3426,8 +3432,8 @@ public static class NCQAClaims_1_0_0
 						string cy_ = cx_?.Value;
 						bool? cz_ = context.Operators.Equal(cy_, "http://hl7.org/fhir/sid/us-npi");
 						CodeableConcept da_ = l?.Type;
-						CqlConcept db_ = FHIRHelpers_4_0_001.ToConcept(context, da_);
-						CqlCode dc_ = NCQATerminology_1_0_0.Provider_number(context);
+						CqlConcept db_ = _FHIRHelpers_4_0_001.ToConcept(context, da_);
+						CqlCode dc_ = _NCQATerminology_1_0_0.Provider_number(context);
 						CqlConcept dd_ = context.Operators.ConvertCodeToConcept(dc_);
 						bool? de_ = context.Operators.Equivalent(db_, dd_);
 						bool? df_ = context.Operators.And(cz_, de_);
@@ -3555,7 +3561,7 @@ public static class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Pharmacy NPI from Claims")]
-	public static (int? IdentifierCount, nint _)? Get_Pharmacy_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
+	public  (int? IdentifierCount, nint _)? Get_Pharmacy_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
 	{
 		(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? a_(Claim C)
 		{
@@ -3564,7 +3570,7 @@ public static class NCQAClaims_1_0_0
 			{
 				PositiveInt ab_ = i?.SequenceElement;
 				Integer ac_ = context.Operators.Convert<Integer>(ab_);
-				int? ad_ = FHIRHelpers_4_0_001.ToInteger(context, ac_);
+				int? ad_ = _FHIRHelpers_4_0_001.ToInteger(context, ac_);
 				bool? ae_ = context.Operators.Equal(ad_, 1);
 
 				return ae_;
@@ -3592,7 +3598,7 @@ public static class NCQAClaims_1_0_0
 			{
 				PositiveInt ai_ = i?.SequenceElement;
 				Integer aj_ = context.Operators.Convert<Integer>(ai_);
-				int? ak_ = FHIRHelpers_4_0_001.ToInteger(context, aj_);
+				int? ak_ = _FHIRHelpers_4_0_001.ToInteger(context, aj_);
 				bool? al_ = context.Operators.Equal(ak_, 1);
 
 				return al_;
@@ -3621,8 +3627,8 @@ public static class NCQAClaims_1_0_0
 				];
 				string ar_(FhirString r)
 				{
-					string au_ = FHIRHelpers_4_0_001.ToString(context, r);
-					string av_ = NCQAFHIRBase_1_0_0.GetId(context, au_);
+					string au_ = _FHIRHelpers_4_0_001.ToString(context, r);
+					string av_ = _NCQAFHIRBase_1_0_0.GetId(context, au_);
 
 					return av_;
 				};
@@ -3647,7 +3653,7 @@ public static class NCQAClaims_1_0_0
 			bool? ax_(Location l)
 			{
 				Id be_ = l?.IdElement;
-				string bf_ = FHIRHelpers_4_0_001.ToString(context, be_);
+				string bf_ = _FHIRHelpers_4_0_001.ToString(context, be_);
 				IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> bg_ = ClaimProperties?.ItemsLocationReferences;
 				bool? bh_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
 				{
@@ -3693,8 +3699,8 @@ public static class NCQAClaims_1_0_0
 						string cn_ = cm_?.Value;
 						bool? co_ = context.Operators.Equal(cn_, "http://hl7.org/fhir/sid/us-npi");
 						CodeableConcept cp_ = l?.Type;
-						CqlConcept cq_ = FHIRHelpers_4_0_001.ToConcept(context, cp_);
-						CqlCode cr_ = NCQATerminology_1_0_0.Provider_number(context);
+						CqlConcept cq_ = _FHIRHelpers_4_0_001.ToConcept(context, cp_);
+						CqlCode cr_ = _NCQATerminology_1_0_0.Provider_number(context);
 						CqlConcept cs_ = context.Operators.ConvertCodeToConcept(cr_);
 						bool? ct_ = context.Operators.Equivalent(cq_, cs_);
 						bool? cu_ = context.Operators.And(co_, ct_);
@@ -3719,8 +3725,8 @@ public static class NCQAClaims_1_0_0
 						string db_ = da_?.Value;
 						bool? dc_ = context.Operators.Equal(db_, "http://hl7.org/fhir/sid/us-npi");
 						CodeableConcept dd_ = l?.Type;
-						CqlConcept de_ = FHIRHelpers_4_0_001.ToConcept(context, dd_);
-						CqlCode df_ = NCQATerminology_1_0_0.Provider_number(context);
+						CqlConcept de_ = _FHIRHelpers_4_0_001.ToConcept(context, dd_);
+						CqlCode df_ = _NCQATerminology_1_0_0.Provider_number(context);
 						CqlConcept dg_ = context.Operators.ConvertCodeToConcept(df_);
 						bool? dh_ = context.Operators.Equivalent(de_, dg_);
 						bool? di_ = context.Operators.And(dc_, dh_);

@@ -10,31 +10,35 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("RR23", "1.0.0")]
-public static class RR23_1_0_0
+public class RR23_1_0_0(
+    FHIRHelpers_4_0_1 _FHIRHelpers_4_0_1)
 {
 
     [CqlDeclaration("Injury due to falling rock")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
-	public static CqlValueSet Injury_due_to_falling_rock(CqlContext context) => 
+	public  CqlValueSet Injury_due_to_falling_rock(CqlContext context) => 
 		new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", default);
 
     [CqlDeclaration("Roadrunners Syndrome Indicators")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome")]
-	public static CqlValueSet Roadrunners_Syndrome_Indicators(CqlContext context) => 
+	public  CqlValueSet Roadrunners_Syndrome_Indicators(CqlContext context) => 
 		new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome", default);
 
     [CqlDeclaration("Tiny Umbrella")]
-	public static CqlCode Tiny_Umbrella(CqlContext context) => 
+	public  CqlCode Tiny_Umbrella(CqlContext context) => 
 		new CqlCode("U707", "http://acme.org/product-catalog", default, default);
 
     [CqlDeclaration("entered-in-error")]
-	public static CqlCode entered_in_error(CqlContext context) => 
+	public  CqlCode entered_in_error(CqlContext context) => 
 		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("ACME Product Catalog")]
-	public static CqlCode[] ACME_Product_Catalog(CqlContext context)
+	public  CqlCode[] ACME_Product_Catalog(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("U707", "http://acme.org/product-catalog", default, default),
@@ -44,7 +48,7 @@ public static class RR23_1_0_0
 	}
 
     [CqlDeclaration("ConditionVerificationStatusCodes")]
-	public static CqlCode[] ConditionVerificationStatusCodes(CqlContext context)
+	public  CqlCode[] ConditionVerificationStatusCodes(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
@@ -54,7 +58,7 @@ public static class RR23_1_0_0
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public static object Measurement_Period(CqlContext context)
+	public  object Measurement_Period(CqlContext context)
 	{
 		CqlDate a_ = context.Operators.Date(2023, 1, 1);
 		CqlDate b_ = context.Operators.Date(2023, 12, 31);
@@ -65,7 +69,7 @@ public static class RR23_1_0_0
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -78,15 +82,15 @@ public static class RR23_1_0_0
     [CqlTag("fhirquery", "akin to Condition?code:in=http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock&onset-date=sa[Period-start]&onset-date=eb[Period-end]")]
     [CqlTag("datarequirement", "\"code\",\"onset.ofType(DateTime)\",\"subject.ofType(Patient)\"]")]
     [CqlTag("coderequirement", "Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
-	public static IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context)
+	public  IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context)
 	{
-		CqlValueSet a_ = RR23_1_0_0.Injury_due_to_falling_rock(context);
+		CqlValueSet a_ = this.Injury_due_to_falling_rock(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
 		bool? c_(Condition C)
 		{
 			DataType e_ = C?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
-			object g_ = RR23_1_0_0.Measurement_Period(context);
+			object g_ = this.Measurement_Period(context);
 			CqlDate h_ = ((CqlInterval<CqlDate>)g_)?.low;
 			CqlDateTime i_ = context.Operators.ConvertDateToDateTime(h_);
 			CqlDate k_ = ((CqlInterval<CqlDate>)g_)?.high;
@@ -104,9 +108,9 @@ public static class RR23_1_0_0
 	}
 
     [CqlDeclaration("Latest injury due to falling rock")]
-	public static Condition Latest_injury_due_to_falling_rock(CqlContext context)
+	public  Condition Latest_injury_due_to_falling_rock(CqlContext context)
 	{
-		IEnumerable<Condition> a_ = RR23_1_0_0.Injury_due_to_falling_rock_within_measurement_period(context);
+		IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
 		object b_(Condition @this)
 		{
 			DataType e_ = @this?.Onset;
@@ -125,18 +129,18 @@ public static class RR23_1_0_0
     [CqlTag("fhirquery", "akin to /SupplyDelivery?supplied-item=http://acme.org/product-catalog|U707&ocurrence-datetime=lt[Condition onset date+7 days]")]
     [CqlTag("datarequirement", "\"suppliedItem.item.ofType(CodeableConcept)\",\"occurrenceDateTime\",\"patient\"]")]
     [CqlTag("coderequirement", "SupplyDelivery.item.orfType(CodeableConcept) http://acme.org/product-catalog|U707")]
-	public static IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context)
+	public  IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context)
 	{
 		IEnumerable<SupplyDelivery> a_ = context.Operators.RetrieveByValueSet<SupplyDelivery>(default, default);
 		bool? b_(SupplyDelivery SD)
 		{
 			SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem;
 			DataType e_ = d_?.Item;
-			CqlConcept f_ = FHIRHelpers_4_0_1.ToConcept(context, e_ as CodeableConcept);
-			CqlCode g_ = RR23_1_0_0.Tiny_Umbrella(context);
+			CqlConcept f_ = _FHIRHelpers_4_0_1.ToConcept(context, e_ as CodeableConcept);
+			CqlCode g_ = this.Tiny_Umbrella(context);
 			CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
 			bool? i_ = context.Operators.Equivalent(f_, h_);
-			Condition j_ = RR23_1_0_0.Latest_injury_due_to_falling_rock(context);
+			Condition j_ = this.Latest_injury_due_to_falling_rock(context);
 			Condition[] k_ = [
 				j_,
 			];

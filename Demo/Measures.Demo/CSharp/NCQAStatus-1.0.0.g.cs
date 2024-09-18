@@ -10,13 +10,18 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("NCQAStatus", "1.0.0")]
-public static class NCQAStatus_1_0_0
+public class NCQAStatus_1_0_0(
+    FHIRHelpers_4_0_001 _FHIRHelpers_4_0_001,
+    NCQATerminology_1_0_0 _NCQATerminology_1_0_0)
 {
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -25,13 +30,13 @@ public static class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Active Allergy")]
-	public static IEnumerable<AllergyIntolerance> Active_Allergy(CqlContext context, IEnumerable<AllergyIntolerance> Allergy)
+	public  IEnumerable<AllergyIntolerance> Active_Allergy(CqlContext context, IEnumerable<AllergyIntolerance> Allergy)
 	{
 		bool? a_(AllergyIntolerance A)
 		{
 			CodeableConcept c_ = A?.ClinicalStatus;
-			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(context, c_);
-			CqlCode e_ = NCQATerminology_1_0_0.allergy_active(context);
+			CqlConcept d_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
+			CqlCode e_ = _NCQATerminology_1_0_0.allergy_active(context);
 			CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
 			bool? g_ = context.Operators.Equal(d_, f_);
 
@@ -43,13 +48,13 @@ public static class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Active Condition")]
-	public static IEnumerable<Condition> Active_Condition(CqlContext context, IEnumerable<Condition> Condition)
+	public  IEnumerable<Condition> Active_Condition(CqlContext context, IEnumerable<Condition> Condition)
 	{
 		bool? a_(Condition C)
 		{
 			CodeableConcept c_ = C?.ClinicalStatus;
-			CqlConcept d_ = FHIRHelpers_4_0_001.ToConcept(context, c_);
-			CqlCode e_ = NCQATerminology_1_0_0.active(context);
+			CqlConcept d_ = _FHIRHelpers_4_0_001.ToConcept(context, c_);
+			CqlCode e_ = _NCQATerminology_1_0_0.active(context);
 			CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
 			bool? g_ = context.Operators.Equal(d_, f_);
 
@@ -61,12 +66,12 @@ public static class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Finished Encounter")]
-	public static IEnumerable<Encounter> Finished_Encounter(CqlContext context, IEnumerable<Encounter> Enc)
+	public  IEnumerable<Encounter> Finished_Encounter(CqlContext context, IEnumerable<Encounter> Enc)
 	{
 		bool? a_(Encounter E)
 		{
 			Code<Encounter.EncounterStatus> c_ = E?.StatusElement;
-			string d_ = FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
 			bool? e_ = context.Operators.Equal(d_, "finished");
 
 			return e_;
@@ -77,12 +82,12 @@ public static class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Completed Immunization")]
-	public static IEnumerable<Immunization> Completed_Immunization(CqlContext context, IEnumerable<Immunization> Immunization)
+	public  IEnumerable<Immunization> Completed_Immunization(CqlContext context, IEnumerable<Immunization> Immunization)
 	{
 		bool? a_(Immunization I)
 		{
 			Code<Immunization.ImmunizationStatusCodes> c_ = I?.StatusElement;
-			string d_ = FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
 			bool? e_ = context.Operators.Equal(d_, "completed");
 
 			return e_;
@@ -93,12 +98,12 @@ public static class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Dispensed Medication")]
-	public static IEnumerable<MedicationDispense> Dispensed_Medication(CqlContext context, IEnumerable<MedicationDispense> Med)
+	public  IEnumerable<MedicationDispense> Dispensed_Medication(CqlContext context, IEnumerable<MedicationDispense> Med)
 	{
 		bool? a_(MedicationDispense M)
 		{
 			Code<MedicationDispense.MedicationDispenseStatusCodes> c_ = M?.StatusElement;
-			string d_ = FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
 			bool? e_ = context.Operators.Equal(d_, "completed");
 
 			return e_;
@@ -109,12 +114,12 @@ public static class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Active Medication")]
-	public static IEnumerable<MedicationRequest> Active_Medication(CqlContext context, IEnumerable<MedicationRequest> Med)
+	public  IEnumerable<MedicationRequest> Active_Medication(CqlContext context, IEnumerable<MedicationRequest> Med)
 	{
 		bool? a_(MedicationRequest M)
 		{
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
-			string d_ = FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
 			string[] e_ = [
 				"completed",
 			];
@@ -128,12 +133,12 @@ public static class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Completed Procedure")]
-	public static IEnumerable<Procedure> Completed_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
+	public  IEnumerable<Procedure> Completed_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{
 			Code<EventStatus> c_ = P?.StatusElement;
-			string d_ = FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
 			bool? e_ = context.Operators.Equal(d_, "completed");
 
 			return e_;
@@ -144,12 +149,12 @@ public static class NCQAStatus_1_0_0
 	}
 
     [CqlDeclaration("Completed or Ongoing Procedure")]
-	public static IEnumerable<Procedure> Completed_or_Ongoing_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
+	public  IEnumerable<Procedure> Completed_or_Ongoing_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
 	{
 		bool? a_(Procedure P)
 		{
 			Code<EventStatus> c_ = P?.StatusElement;
-			string d_ = FHIRHelpers_4_0_001.ToString(context, c_);
+			string d_ = _FHIRHelpers_4_0_001.ToString(context, c_);
 			string[] e_ = [
 				"completed",
 				"in-progress",

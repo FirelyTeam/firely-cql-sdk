@@ -10,142 +10,150 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR", "0.1.000")]
-public static class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000
+public class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000(
+    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
+    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
+    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
+    Hospice_6_9_000 _Hospice_6_9_000,
+    Status_1_6_000 _Status_1_6_000)
 {
 
     [CqlDeclaration("BMI percentile")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1012")]
-	public static CqlValueSet BMI_percentile(CqlContext context) => 
+	public  CqlValueSet BMI_percentile(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1012", default);
 
     [CqlDeclaration("Counseling for Nutrition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.195.12.1003")]
-	public static CqlValueSet Counseling_for_Nutrition(CqlContext context) => 
+	public  CqlValueSet Counseling_for_Nutrition(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.195.12.1003", default);
 
     [CqlDeclaration("Counseling for Physical Activity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1035")]
-	public static CqlValueSet Counseling_for_Physical_Activity(CqlContext context) => 
+	public  CqlValueSet Counseling_for_Physical_Activity(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1035", default);
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
-	public static CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) => 
+	public  CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
-	public static CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) => 
+	public  CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public static CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Height")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1014")]
-	public static CqlValueSet Height(CqlContext context) => 
+	public  CqlValueSet Height(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1014", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public static CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+	public  CqlValueSet Home_Healthcare_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
-	public static CqlValueSet Hospice_care_ambulatory(CqlContext context) => 
+	public  CqlValueSet Hospice_care_ambulatory(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public static CqlValueSet Office_Visit(CqlContext context) => 
+	public  CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378")]
-	public static CqlValueSet Pregnancy(CqlContext context) => 
+	public  CqlValueSet Pregnancy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378", default);
 
     [CqlDeclaration("Preventive Care Services - Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
-	public static CqlValueSet Preventive_Care_Services___Group_Counseling(CqlContext context) => 
+	public  CqlValueSet Preventive_Care_Services___Group_Counseling(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default);
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-	public static CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) => 
+	public  CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
     [CqlDeclaration("Preventive Care Services-Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
-	public static CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) => 
+	public  CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-	public static CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) => 
+	public  CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public static CqlValueSet Telephone_Visits(CqlContext context) => 
+	public  CqlValueSet Telephone_Visits(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("Weight")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1015")]
-	public static CqlValueSet Weight(CqlContext context) => 
+	public  CqlValueSet Weight(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1015", default);
 
     [CqlDeclaration("[in_i]")]
-	public static CqlCode _in_i_(CqlContext context) => 
+	public  CqlCode _in_i_(CqlContext context) => 
 		new CqlCode("[in_i]", "http://unitsofmeasure.org", default, default);
 
     [CqlDeclaration("[lb_av]")]
-	public static CqlCode _lb_av_(CqlContext context) => 
+	public  CqlCode _lb_av_(CqlContext context) => 
 		new CqlCode("[lb_av]", "http://unitsofmeasure.org", default, default);
 
     [CqlDeclaration("Birth date")]
-	public static CqlCode Birth_date(CqlContext context) => 
+	public  CqlCode Birth_date(CqlContext context) => 
 		new CqlCode("21112-8", "http://loinc.org", default, default);
 
     [CqlDeclaration("Body height")]
-	public static CqlCode Body_height(CqlContext context) => 
+	public  CqlCode Body_height(CqlContext context) => 
 		new CqlCode("8302-2", "http://loinc.org", default, default);
 
     [CqlDeclaration("Body mass index (BMI) [Ratio]")]
-	public static CqlCode Body_mass_index__BMI___Ratio_(CqlContext context) => 
+	public  CqlCode Body_mass_index__BMI___Ratio_(CqlContext context) => 
 		new CqlCode("39156-5", "http://loinc.org", default, default);
 
     [CqlDeclaration("Body weight")]
-	public static CqlCode Body_weight(CqlContext context) => 
+	public  CqlCode Body_weight(CqlContext context) => 
 		new CqlCode("29463-7", "http://loinc.org", default, default);
 
     [CqlDeclaration("cm")]
-	public static CqlCode cm(CqlContext context) => 
+	public  CqlCode cm(CqlContext context) => 
 		new CqlCode("cm", "http://unitsofmeasure.org", default, default);
 
     [CqlDeclaration("exam")]
-	public static CqlCode exam(CqlContext context) => 
+	public  CqlCode exam(CqlContext context) => 
 		new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("g")]
-	public static CqlCode g(CqlContext context) => 
+	public  CqlCode g(CqlContext context) => 
 		new CqlCode("g", "http://unitsofmeasure.org", default, default);
 
     [CqlDeclaration("kg")]
-	public static CqlCode kg(CqlContext context) => 
+	public  CqlCode kg(CqlContext context) => 
 		new CqlCode("kg", "http://unitsofmeasure.org", default, default);
 
     [CqlDeclaration("vital-signs")]
-	public static CqlCode vital_signs(CqlContext context) => 
+	public  CqlCode vital_signs(CqlContext context) => 
 		new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
     [CqlDeclaration("UCUM")]
-	public static CqlCode[] UCUM(CqlContext context)
+	public  CqlCode[] UCUM(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("[in_i]", "http://unitsofmeasure.org", default, default),
@@ -159,7 +167,7 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("LOINC")]
-	public static CqlCode[] LOINC(CqlContext context)
+	public  CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", default, default),
@@ -172,7 +180,7 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("ObservationCategoryCodes")]
-	public static CqlCode[] ObservationCategoryCodes(CqlContext context)
+	public  CqlCode[] ObservationCategoryCodes(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
@@ -183,7 +191,7 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public static CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -194,7 +202,7 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -203,67 +211,67 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public static IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public static CqlCode SDE_Sex(CqlContext context)
+	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Qualifying Encounter")]
-	public static IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
+	public  IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
 	{
-		CqlValueSet a_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Office_Visit(context);
+		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
-		CqlValueSet c_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Preventive_Care_Services_Individual_Counseling(context);
+		CqlValueSet c_ = this.Preventive_Care_Services_Individual_Counseling(context);
 		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-		CqlValueSet f_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
+		CqlValueSet f_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
 		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
-		CqlValueSet h_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Preventive_Care__Established_Office_Visit__0_to_17(context);
+		CqlValueSet h_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
 		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-		CqlValueSet l_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Preventive_Care_Services___Group_Counseling(context);
+		CqlValueSet l_ = this.Preventive_Care_Services___Group_Counseling(context);
 		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
-		CqlValueSet n_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Home_Healthcare_Services(context);
+		CqlValueSet n_ = this.Home_Healthcare_Services(context);
 		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-		CqlValueSet r_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Telephone_Visits(context);
+		CqlValueSet r_ = this.Telephone_Visits(context);
 		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
 		IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
-		IEnumerable<Encounter> u_ = Status_1_6_000.Finished_Encounter(context, t_);
+		IEnumerable<Encounter> u_ = _Status_1_6_000.Finished_Encounter(context, t_);
 		bool? v_(Encounter ValidEncounters)
 		{
-			CqlInterval<CqlDateTime> x_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
 			Period y_ = ValidEncounters?.Period;
-			CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.ToInterval(context, y_);
-			CqlInterval<CqlDateTime> aa_ = QICoreCommon_2_0_000.ToInterval(context, z_ as object);
+			CqlInterval<CqlDateTime> z_ = _FHIRHelpers_4_3_000.ToInterval(context, y_);
+			CqlInterval<CqlDateTime> aa_ = _QICoreCommon_2_0_000.ToInterval(context, z_ as object);
 			bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, aa_, default);
 
 			return ab_;
@@ -274,19 +282,19 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Initial Population")]
-	public static bool? Initial_Population(CqlContext context)
+	public  bool? Initial_Population(CqlContext context)
 	{
-		Patient a_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Patient(context);
+		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
 		string c_ = b_?.Value;
 		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-		CqlInterval<CqlDateTime> e_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		CqlInterval<int?> i_ = context.Operators.Interval(3, 17, true, true);
 		bool? j_ = context.Operators.In<int?>(h_, i_, default);
-		IEnumerable<Encounter> k_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Qualifying_Encounter(context);
+		IEnumerable<Encounter> k_ = this.Qualifying_Encounter(context);
 		bool? l_ = context.Operators.Exists<Encounter>(k_);
 		bool? m_ = context.Operators.And(j_, l_);
 
@@ -294,23 +302,23 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Denominator")]
-	public static bool? Denominator(CqlContext context)
+	public  bool? Denominator(CqlContext context)
 	{
-		bool? a_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Initial_Population(context);
+		bool? a_ = this.Initial_Population(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Pregnancy Diagnosis Which Overlaps Measurement Period")]
-	public static IEnumerable<Condition> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(CqlContext context)
+	public  IEnumerable<Condition> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(CqlContext context)
 	{
-		CqlValueSet a_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Pregnancy(context);
+		CqlValueSet a_ = this.Pregnancy(context);
 		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
-		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(context, b_);
+		IEnumerable<Condition> c_ = _Status_1_6_000.Active_Condition(context, b_);
 		bool? d_(Condition Pregnancy)
 		{
-			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(context, Pregnancy);
-			CqlInterval<CqlDateTime> g_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> f_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, Pregnancy);
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			bool? h_ = context.Operators.Overlaps(f_, g_, default);
 
 			return h_;
@@ -321,10 +329,10 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public static bool? Denominator_Exclusions(CqlContext context)
+	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = Hospice_6_9_000.Has_Hospice_Services(context);
-		IEnumerable<Condition> b_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(context);
+		bool? a_ = _Hospice_6_9_000.Has_Hospice_Services(context);
+		IEnumerable<Condition> b_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(context);
 		bool? c_ = context.Operators.Exists<Condition>(b_);
 		bool? d_ = context.Operators.Or(a_, c_);
 
@@ -332,19 +340,19 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("BMI Percentile in Measurement Period")]
-	public static IEnumerable<Observation> BMI_Percentile_in_Measurement_Period(CqlContext context)
+	public  IEnumerable<Observation> BMI_Percentile_in_Measurement_Period(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
-		IEnumerable<Observation> b_ = Status_1_6_000.BMI(context, a_);
+		IEnumerable<Observation> b_ = _Status_1_6_000.BMI(context, a_);
 		bool? c_(Observation BMIPercentile)
 		{
-			CqlInterval<CqlDateTime> e_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 			DataType f_ = BMIPercentile?.Effective;
-			object g_ = FHIRHelpers_4_3_000.ToValue(context, f_);
-			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(context, g_);
+			object g_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
+			CqlInterval<CqlDateTime> h_ = _QICoreCommon_2_0_000.ToInterval(context, g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = BMIPercentile?.Value;
-			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
+			CqlQuantity k_ = _FHIRHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
 			bool? l_ = context.Operators.Not((bool?)(k_ is null));
 			bool? m_ = context.Operators.And(i_, l_);
 
@@ -356,19 +364,19 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Height in Measurement Period")]
-	public static IEnumerable<Observation> Height_in_Measurement_Period(CqlContext context)
+	public  IEnumerable<Observation> Height_in_Measurement_Period(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
-		IEnumerable<Observation> b_ = Status_1_6_000.BodyHeight(context, a_);
+		IEnumerable<Observation> b_ = _Status_1_6_000.BodyHeight(context, a_);
 		bool? c_(Observation Height)
 		{
-			CqlInterval<CqlDateTime> e_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 			DataType f_ = Height?.Effective;
-			object g_ = FHIRHelpers_4_3_000.ToValue(context, f_);
-			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(context, g_);
+			object g_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
+			CqlInterval<CqlDateTime> h_ = _QICoreCommon_2_0_000.ToInterval(context, g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Height?.Value;
-			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
+			CqlQuantity k_ = _FHIRHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
 			bool? l_ = context.Operators.Not((bool?)(k_ is null));
 			bool? m_ = context.Operators.And(i_, l_);
 
@@ -380,19 +388,19 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Weight in Measurement Period")]
-	public static IEnumerable<Observation> Weight_in_Measurement_Period(CqlContext context)
+	public  IEnumerable<Observation> Weight_in_Measurement_Period(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
-		IEnumerable<Observation> b_ = Status_1_6_000.BodyWeight(context, a_);
+		IEnumerable<Observation> b_ = _Status_1_6_000.BodyWeight(context, a_);
 		bool? c_(Observation Weight)
 		{
-			CqlInterval<CqlDateTime> e_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 			DataType f_ = Weight?.Effective;
-			object g_ = FHIRHelpers_4_3_000.ToValue(context, f_);
-			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.ToInterval(context, g_);
+			object g_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
+			CqlInterval<CqlDateTime> h_ = _QICoreCommon_2_0_000.ToInterval(context, g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, "day");
 			DataType j_ = Weight?.Value;
-			CqlQuantity k_ = FHIRHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
+			CqlQuantity k_ = _FHIRHelpers_4_3_000.ToQuantity(context, j_ as Quantity);
 			bool? l_ = context.Operators.Not((bool?)(k_ is null));
 			bool? m_ = context.Operators.And(i_, l_);
 
@@ -404,14 +412,14 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Numerator 1")]
-	public static bool? Numerator_1(CqlContext context)
+	public  bool? Numerator_1(CqlContext context)
 	{
-		IEnumerable<Observation> a_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.BMI_Percentile_in_Measurement_Period(context);
+		IEnumerable<Observation> a_ = this.BMI_Percentile_in_Measurement_Period(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
-		IEnumerable<Observation> c_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Height_in_Measurement_Period(context);
+		IEnumerable<Observation> c_ = this.Height_in_Measurement_Period(context);
 		bool? d_ = context.Operators.Exists<Observation>(c_);
 		bool? e_ = context.Operators.And(b_, d_);
-		IEnumerable<Observation> f_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Weight_in_Measurement_Period(context);
+		IEnumerable<Observation> f_ = this.Weight_in_Measurement_Period(context);
 		bool? g_ = context.Operators.Exists<Observation>(f_);
 		bool? h_ = context.Operators.And(e_, g_);
 
@@ -419,17 +427,17 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Numerator 2")]
-	public static bool? Numerator_2(CqlContext context)
+	public  bool? Numerator_2(CqlContext context)
 	{
-		CqlValueSet a_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Counseling_for_Nutrition(context);
+		CqlValueSet a_ = this.Counseling_for_Nutrition(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
-		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(context, b_);
+		IEnumerable<Procedure> c_ = _Status_1_6_000.Completed_Procedure(context, b_);
 		bool? d_(Procedure NutritionCounseling)
 		{
-			CqlInterval<CqlDateTime> g_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			DataType h_ = NutritionCounseling?.Performed;
-			object i_ = FHIRHelpers_4_3_000.ToValue(context, h_);
-			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(context, i_);
+			object i_ = _FHIRHelpers_4_3_000.ToValue(context, h_);
+			CqlInterval<CqlDateTime> j_ = _QICoreCommon_2_0_000.ToInterval(context, i_);
 			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;
@@ -441,17 +449,17 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Numerator 3")]
-	public static bool? Numerator_3(CqlContext context)
+	public  bool? Numerator_3(CqlContext context)
 	{
-		CqlValueSet a_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Counseling_for_Physical_Activity(context);
+		CqlValueSet a_ = this.Counseling_for_Physical_Activity(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
-		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(context, b_);
+		IEnumerable<Procedure> c_ = _Status_1_6_000.Completed_Procedure(context, b_);
 		bool? d_(Procedure ActivityCounseling)
 		{
-			CqlInterval<CqlDateTime> g_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
 			DataType h_ = ActivityCounseling?.Performed;
-			object i_ = FHIRHelpers_4_3_000.ToValue(context, h_);
-			CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.ToInterval(context, i_);
+			object i_ = _FHIRHelpers_4_3_000.ToValue(context, h_);
+			CqlInterval<CqlDateTime> j_ = _QICoreCommon_2_0_000.ToInterval(context, i_);
 			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
 
 			return k_;
@@ -463,13 +471,13 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Stratifaction 1")]
-	public static bool? Stratifaction_1(CqlContext context)
+	public  bool? Stratifaction_1(CqlContext context)
 	{
-		Patient a_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Patient(context);
+		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
 		string c_ = b_?.Value;
 		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-		CqlInterval<CqlDateTime> e_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
@@ -480,13 +488,13 @@ public static class WeightAssessmentandCounselingforNutritionandPhysicalActivity
 	}
 
     [CqlDeclaration("Stratifaction 2")]
-	public static bool? Stratifaction_2(CqlContext context)
+	public  bool? Stratifaction_2(CqlContext context)
 	{
-		Patient a_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Patient(context);
+		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
 		string c_ = b_?.Value;
 		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-		CqlInterval<CqlDateTime> e_ = WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000.Measurement_Period(context);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");

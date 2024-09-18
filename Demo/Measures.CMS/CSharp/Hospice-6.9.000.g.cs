@@ -10,49 +10,55 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Hospice", "6.9.000")]
-public static class Hospice_6_9_000
+public class Hospice_6_9_000(
+    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
+    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
+    Status_1_6_000 _Status_1_6_000)
 {
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public static CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public  CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
     [CqlDeclaration("Hospice Care Ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584")]
-	public static CqlValueSet Hospice_Care_Ambulatory(CqlContext context) => 
+	public  CqlValueSet Hospice_Care_Ambulatory(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", default);
 
     [CqlDeclaration("Hospice Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003")]
-	public static CqlValueSet Hospice_Encounter(CqlContext context) => 
+	public  CqlValueSet Hospice_Encounter(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", default);
 
     [CqlDeclaration("Hospice Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165")]
-	public static CqlValueSet Hospice_Diagnosis(CqlContext context) => 
+	public  CqlValueSet Hospice_Diagnosis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", default);
 
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
-	public static CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext context) => 
+	public  CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext context) => 
 		new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
-	public static CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext context) => 
+	public  CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext context) => 
 		new CqlCode("428361000124107", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("Hospice care [Minimum Data Set]")]
-	public static CqlCode Hospice_care__Minimum_Data_Set_(CqlContext context) => 
+	public  CqlCode Hospice_care__Minimum_Data_Set_(CqlContext context) => 
 		new CqlCode("45755-6", "http://loinc.org", default, default);
 
     [CqlDeclaration("Yes (qualifier value)")]
-	public static CqlCode Yes__qualifier_value_(CqlContext context) => 
+	public  CqlCode Yes__qualifier_value_(CqlContext context) => 
 		new CqlCode("373066001", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("LOINC")]
-	public static CqlCode[] LOINC(CqlContext context)
+	public  CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("45755-6", "http://loinc.org", default, default),
@@ -62,7 +68,7 @@ public static class Hospice_6_9_000
 	}
 
     [CqlDeclaration("SNOMEDCT")]
-	public static CqlCode[] SNOMEDCT(CqlContext context)
+	public  CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("428371000124100", "http://snomed.info/sct", default, default),
@@ -74,7 +80,7 @@ public static class Hospice_6_9_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public static CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -85,7 +91,7 @@ public static class Hospice_6_9_000
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -94,30 +100,30 @@ public static class Hospice_6_9_000
 	}
 
     [CqlDeclaration("Has Hospice Services")]
-	public static bool? Has_Hospice_Services(CqlContext context)
+	public  bool? Has_Hospice_Services(CqlContext context)
 	{
-		CqlValueSet a_ = Hospice_6_9_000.Encounter_Inpatient(context);
+		CqlValueSet a_ = this.Encounter_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
-		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(context, b_);
+		IEnumerable<Encounter> c_ = _Status_1_6_000.isEncounterPerformed(context, b_);
 		bool? d_(Encounter InpatientEncounter)
 		{
 			Encounter.HospitalizationComponent ap_ = InpatientEncounter?.Hospitalization;
 			CodeableConcept aq_ = ap_?.DischargeDisposition;
-			CqlConcept ar_ = FHIRHelpers_4_3_000.ToConcept(context, aq_);
-			CqlCode as_ = Hospice_6_9_000.Discharge_to_home_for_hospice_care__procedure_(context);
+			CqlConcept ar_ = _FHIRHelpers_4_3_000.ToConcept(context, aq_);
+			CqlCode as_ = this.Discharge_to_home_for_hospice_care__procedure_(context);
 			CqlConcept at_ = context.Operators.ConvertCodeToConcept(as_);
 			bool? au_ = context.Operators.Equivalent(ar_, at_);
 			CodeableConcept aw_ = ap_?.DischargeDisposition;
-			CqlConcept ax_ = FHIRHelpers_4_3_000.ToConcept(context, aw_);
-			CqlCode ay_ = Hospice_6_9_000.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
+			CqlConcept ax_ = _FHIRHelpers_4_3_000.ToConcept(context, aw_);
+			CqlCode ay_ = this.Discharge_to_healthcare_facility_for_hospice_care__procedure_(context);
 			CqlConcept az_ = context.Operators.ConvertCodeToConcept(ay_);
 			bool? ba_ = context.Operators.Equivalent(ax_, az_);
 			bool? bb_ = context.Operators.Or(au_, ba_);
 			Period bc_ = InpatientEncounter?.Period;
-			CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_3_000.ToInterval(context, bc_);
-			CqlInterval<CqlDateTime> be_ = QICoreCommon_2_0_000.toInterval(context, bd_ as object);
+			CqlInterval<CqlDateTime> bd_ = _FHIRHelpers_4_3_000.ToInterval(context, bc_);
+			CqlInterval<CqlDateTime> be_ = _QICoreCommon_2_0_000.toInterval(context, bd_ as object);
 			CqlDateTime bf_ = context.Operators.End(be_);
-			CqlInterval<CqlDateTime> bg_ = Hospice_6_9_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> bg_ = this.Measurement_Period(context);
 			bool? bh_ = context.Operators.In<CqlDateTime>(bf_, bg_, "day");
 			bool? bi_ = context.Operators.And(bb_, bh_);
 
@@ -125,15 +131,15 @@ public static class Hospice_6_9_000
 		};
 		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
 		bool? f_ = context.Operators.Exists<Encounter>(e_);
-		CqlValueSet g_ = Hospice_6_9_000.Hospice_Encounter(context);
+		CqlValueSet g_ = this.Hospice_Encounter(context);
 		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, default);
-		IEnumerable<Encounter> i_ = Status_1_6_000.isEncounterPerformed(context, h_);
+		IEnumerable<Encounter> i_ = _Status_1_6_000.isEncounterPerformed(context, h_);
 		bool? j_(Encounter HospiceEncounter)
 		{
 			Period bj_ = HospiceEncounter?.Period;
-			CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_3_000.ToInterval(context, bj_);
-			CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_0_000.toInterval(context, bk_ as object);
-			CqlInterval<CqlDateTime> bm_ = Hospice_6_9_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> bk_ = _FHIRHelpers_4_3_000.ToInterval(context, bj_);
+			CqlInterval<CqlDateTime> bl_ = _QICoreCommon_2_0_000.toInterval(context, bk_ as object);
+			CqlInterval<CqlDateTime> bm_ = this.Measurement_Period(context);
 			bool? bn_ = context.Operators.Overlaps(bl_, bm_, "day");
 
 			return bn_;
@@ -141,21 +147,21 @@ public static class Hospice_6_9_000
 		IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
 		bool? l_ = context.Operators.Exists<Encounter>(k_);
 		bool? m_ = context.Operators.Or(f_, l_);
-		CqlCode n_ = Hospice_6_9_000.Hospice_care__Minimum_Data_Set_(context);
+		CqlCode n_ = this.Hospice_care__Minimum_Data_Set_(context);
 		IEnumerable<CqlCode> o_ = context.Operators.ToList<CqlCode>(n_);
 		IEnumerable<Observation> p_ = context.Operators.RetrieveByCodes<Observation>(o_, default);
-		IEnumerable<Observation> q_ = Status_1_6_000.isAssessmentPerformed(context, p_);
+		IEnumerable<Observation> q_ = _Status_1_6_000.isAssessmentPerformed(context, p_);
 		bool? r_(Observation HospiceAssessment)
 		{
 			DataType bo_ = HospiceAssessment?.Value;
-			object bp_ = FHIRHelpers_4_3_000.ToValue(context, bo_);
-			CqlCode bq_ = Hospice_6_9_000.Yes__qualifier_value_(context);
+			object bp_ = _FHIRHelpers_4_3_000.ToValue(context, bo_);
+			CqlCode bq_ = this.Yes__qualifier_value_(context);
 			CqlConcept br_ = context.Operators.ConvertCodeToConcept(bq_);
 			bool? bs_ = context.Operators.Equivalent(bp_ as CqlConcept, br_);
 			DataType bt_ = HospiceAssessment?.Effective;
-			object bu_ = FHIRHelpers_4_3_000.ToValue(context, bt_);
-			CqlInterval<CqlDateTime> bv_ = QICoreCommon_2_0_000.toInterval(context, bu_);
-			CqlInterval<CqlDateTime> bw_ = Hospice_6_9_000.Measurement_Period(context);
+			object bu_ = _FHIRHelpers_4_3_000.ToValue(context, bt_);
+			CqlInterval<CqlDateTime> bv_ = _QICoreCommon_2_0_000.toInterval(context, bu_);
+			CqlInterval<CqlDateTime> bw_ = this.Measurement_Period(context);
 			bool? bx_ = context.Operators.Overlaps(bv_, bw_, "day");
 			bool? by_ = context.Operators.And(bs_, bx_);
 
@@ -164,15 +170,15 @@ public static class Hospice_6_9_000
 		IEnumerable<Observation> s_ = context.Operators.Where<Observation>(q_, r_);
 		bool? t_ = context.Operators.Exists<Observation>(s_);
 		bool? u_ = context.Operators.Or(m_, t_);
-		CqlValueSet v_ = Hospice_6_9_000.Hospice_Care_Ambulatory(context);
+		CqlValueSet v_ = this.Hospice_Care_Ambulatory(context);
 		IEnumerable<ServiceRequest> w_ = context.Operators.RetrieveByValueSet<ServiceRequest>(v_, default);
-		IEnumerable<ServiceRequest> x_ = Status_1_6_000.isInterventionOrder(context, w_);
+		IEnumerable<ServiceRequest> x_ = _Status_1_6_000.isInterventionOrder(context, w_);
 		bool? y_(ServiceRequest HospiceOrder)
 		{
-			CqlInterval<CqlDateTime> bz_ = Hospice_6_9_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> bz_ = this.Measurement_Period(context);
 			FhirDateTime ca_ = HospiceOrder?.AuthoredOnElement;
 			CqlDateTime cb_ = context.Operators.Convert<CqlDateTime>(ca_);
-			CqlInterval<CqlDateTime> cc_ = QICoreCommon_2_0_000.toInterval(context, cb_ as object);
+			CqlInterval<CqlDateTime> cc_ = _QICoreCommon_2_0_000.toInterval(context, cb_ as object);
 			bool? cd_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bz_, cc_, "day");
 
 			return cd_;
@@ -181,13 +187,13 @@ public static class Hospice_6_9_000
 		bool? aa_ = context.Operators.Exists<ServiceRequest>(z_);
 		bool? ab_ = context.Operators.Or(u_, aa_);
 		IEnumerable<Procedure> ad_ = context.Operators.RetrieveByValueSet<Procedure>(v_, default);
-		IEnumerable<Procedure> ae_ = Status_1_6_000.isInterventionPerformed(context, ad_);
+		IEnumerable<Procedure> ae_ = _Status_1_6_000.isInterventionPerformed(context, ad_);
 		bool? af_(Procedure HospicePerformed)
 		{
 			DataType ce_ = HospicePerformed?.Performed;
-			object cf_ = FHIRHelpers_4_3_000.ToValue(context, ce_);
-			CqlInterval<CqlDateTime> cg_ = QICoreCommon_2_0_000.toInterval(context, cf_);
-			CqlInterval<CqlDateTime> ch_ = Hospice_6_9_000.Measurement_Period(context);
+			object cf_ = _FHIRHelpers_4_3_000.ToValue(context, ce_);
+			CqlInterval<CqlDateTime> cg_ = _QICoreCommon_2_0_000.toInterval(context, cf_);
+			CqlInterval<CqlDateTime> ch_ = this.Measurement_Period(context);
 			bool? ci_ = context.Operators.Overlaps(cg_, ch_, "day");
 
 			return ci_;
@@ -195,12 +201,12 @@ public static class Hospice_6_9_000
 		IEnumerable<Procedure> ag_ = context.Operators.Where<Procedure>(ae_, af_);
 		bool? ah_ = context.Operators.Exists<Procedure>(ag_);
 		bool? ai_ = context.Operators.Or(ab_, ah_);
-		CqlValueSet aj_ = Hospice_6_9_000.Hospice_Diagnosis(context);
+		CqlValueSet aj_ = this.Hospice_Diagnosis(context);
 		IEnumerable<Condition> ak_ = context.Operators.RetrieveByValueSet<Condition>(aj_, default);
 		bool? al_(Condition HospiceCareDiagnosis)
 		{
-			CqlInterval<CqlDateTime> cj_ = QICoreCommon_2_0_000.prevalenceInterval(context, HospiceCareDiagnosis);
-			CqlInterval<CqlDateTime> ck_ = Hospice_6_9_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> cj_ = _QICoreCommon_2_0_000.prevalenceInterval(context, HospiceCareDiagnosis);
+			CqlInterval<CqlDateTime> ck_ = this.Measurement_Period(context);
 			bool? cl_ = context.Operators.Overlaps(cj_, ck_, "day");
 
 			return cl_;

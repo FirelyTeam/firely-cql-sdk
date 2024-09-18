@@ -10,289 +10,300 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("UseofHighRiskMedicationsintheElderlyFHIR", "0.1.000")]
-public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
+public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000(
+    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
+    CQMCommon_2_0_000 _CQMCommon_2_0_000,
+    Hospice_6_9_000 _Hospice_6_9_000,
+    PalliativeCare_1_9_000 _PalliativeCare_1_9_000,
+    CumulativeMedicationDuration_4_0_000 _CumulativeMedicationDuration_4_0_000,
+    QICoreCommon_2_0_000 _QICoreCommon_2_0_000,
+    Status_1_6_000 _Status_1_6_000)
 {
 
     [CqlDeclaration("Alcohol Withdrawal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1209")]
-	public static CqlValueSet Alcohol_Withdrawal(CqlContext context) => 
+	public  CqlValueSet Alcohol_Withdrawal(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1209", default);
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-	public static CqlValueSet Annual_Wellness_Visit(CqlContext context) => 
+	public  CqlValueSet Annual_Wellness_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
     [CqlDeclaration("Anti Infectives, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1481")]
-	public static CqlValueSet Anti_Infectives__other(CqlContext context) => 
+	public  CqlValueSet Anti_Infectives__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1481", default);
 
     [CqlDeclaration("Anticholinergics, anti Parkinson agents")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1049")]
-	public static CqlValueSet Anticholinergics__anti_Parkinson_agents(CqlContext context) => 
+	public  CqlValueSet Anticholinergics__anti_Parkinson_agents(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1049", default);
 
     [CqlDeclaration("Anticholinergics, first generation antihistamines")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1043")]
-	public static CqlValueSet Anticholinergics__first_generation_antihistamines(CqlContext context) => 
+	public  CqlValueSet Anticholinergics__first_generation_antihistamines(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1043", default);
 
     [CqlDeclaration("Antipsychotic")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1523")]
-	public static CqlValueSet Antipsychotic(CqlContext context) => 
+	public  CqlValueSet Antipsychotic(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1523", default);
 
     [CqlDeclaration("Antispasmodics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1050")]
-	public static CqlValueSet Antispasmodics(CqlContext context) => 
+	public  CqlValueSet Antispasmodics(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1050", default);
 
     [CqlDeclaration("Antithrombotic")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1051")]
-	public static CqlValueSet Antithrombotic(CqlContext context) => 
+	public  CqlValueSet Antithrombotic(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1051", default);
 
     [CqlDeclaration("Benzodiazepine Withdrawal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1208")]
-	public static CqlValueSet Benzodiazepine_Withdrawal(CqlContext context) => 
+	public  CqlValueSet Benzodiazepine_Withdrawal(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1208", default);
 
     [CqlDeclaration("Benzodiazepine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1522")]
-	public static CqlValueSet Benzodiazepine(CqlContext context) => 
+	public  CqlValueSet Benzodiazepine(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1522", default);
 
     [CqlDeclaration("Bipolar Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1157")]
-	public static CqlValueSet Bipolar_Disorder(CqlContext context) => 
+	public  CqlValueSet Bipolar_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1157", default);
 
     [CqlDeclaration("Cardiovascular, alpha agonists, central")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1052")]
-	public static CqlValueSet Cardiovascular__alpha_agonists__central(CqlContext context) => 
+	public  CqlValueSet Cardiovascular__alpha_agonists__central(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1052", default);
 
     [CqlDeclaration("Cardiovascular, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1053")]
-	public static CqlValueSet Cardiovascular__other(CqlContext context) => 
+	public  CqlValueSet Cardiovascular__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1053", default);
 
     [CqlDeclaration("Care Services in Long Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public static CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
+	public  CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
     [CqlDeclaration("Central nervous system, antidepressants")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1054")]
-	public static CqlValueSet Central_nervous_system__antidepressants(CqlContext context) => 
+	public  CqlValueSet Central_nervous_system__antidepressants(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1054", default);
 
     [CqlDeclaration("Central nervous system, barbiturates")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1055")]
-	public static CqlValueSet Central_nervous_system__barbiturates(CqlContext context) => 
+	public  CqlValueSet Central_nervous_system__barbiturates(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1055", default);
 
     [CqlDeclaration("Central nervous system, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1057")]
-	public static CqlValueSet Central_nervous_system__other(CqlContext context) => 
+	public  CqlValueSet Central_nervous_system__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1057", default);
 
     [CqlDeclaration("Central nervous system, vasodilators")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1056")]
-	public static CqlValueSet Central_nervous_system__vasodilators(CqlContext context) => 
+	public  CqlValueSet Central_nervous_system__vasodilators(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1056", default);
 
     [CqlDeclaration("Digoxin")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1065")]
-	public static CqlValueSet Digoxin(CqlContext context) => 
+	public  CqlValueSet Digoxin(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1065", default);
 
     [CqlDeclaration("Discharge Services Nursing Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1013")]
-	public static CqlValueSet Discharge_Services_Nursing_Facility(CqlContext context) => 
+	public  CqlValueSet Discharge_Services_Nursing_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1013", default);
 
     [CqlDeclaration("Doxepin")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1067")]
-	public static CqlValueSet Doxepin(CqlContext context) => 
+	public  CqlValueSet Doxepin(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1067", default);
 
     [CqlDeclaration("Endocrine system, estrogens with or without progestins")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1058")]
-	public static CqlValueSet Endocrine_system__estrogens_with_or_without_progestins(CqlContext context) => 
+	public  CqlValueSet Endocrine_system__estrogens_with_or_without_progestins(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1058", default);
 
     [CqlDeclaration("Endocrine system, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1060")]
-	public static CqlValueSet Endocrine_system__other(CqlContext context) => 
+	public  CqlValueSet Endocrine_system__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1060", default);
 
     [CqlDeclaration("Endocrine system, sulfonylureas, long duration")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1059")]
-	public static CqlValueSet Endocrine_system__sulfonylureas__long_duration(CqlContext context) => 
+	public  CqlValueSet Endocrine_system__sulfonylureas__long_duration(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1059", default);
 
     [CqlDeclaration("Generalized Anxiety Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1210")]
-	public static CqlValueSet Generalized_Anxiety_Disorder(CqlContext context) => 
+	public  CqlValueSet Generalized_Anxiety_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1210", default);
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public static CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+	public  CqlValueSet Home_Healthcare_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
     [CqlDeclaration("Nonbenzodiazepine hypnotics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1480")]
-	public static CqlValueSet Nonbenzodiazepine_hypnotics(CqlContext context) => 
+	public  CqlValueSet Nonbenzodiazepine_hypnotics(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1480", default);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public static CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
+	public  CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public static CqlValueSet Office_Visit(CqlContext context) => 
+	public  CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public static CqlValueSet Online_Assessments(CqlContext context) => 
+	public  CqlValueSet Online_Assessments(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
     [CqlDeclaration("Ophthalmologic Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1206")]
-	public static CqlValueSet Ophthalmologic_Services(CqlContext context) => 
+	public  CqlValueSet Ophthalmologic_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1206", default);
 
     [CqlDeclaration("Pain medications, other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1063")]
-	public static CqlValueSet Pain_medications__other(CqlContext context) => 
+	public  CqlValueSet Pain_medications__other(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1063", default);
 
     [CqlDeclaration("Pain medications, skeletal muscle relaxants")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1062")]
-	public static CqlValueSet Pain_medications__skeletal_muscle_relaxants(CqlContext context) => 
+	public  CqlValueSet Pain_medications__skeletal_muscle_relaxants(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1062", default);
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public static CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
+	public  CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public static CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+	public  CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
     [CqlDeclaration("REM Sleep Behavior Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1207")]
-	public static CqlValueSet REM_Sleep_Behavior_Disorder(CqlContext context) => 
+	public  CqlValueSet REM_Sleep_Behavior_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1207", default);
 
     [CqlDeclaration("Reserpine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1044")]
-	public static CqlValueSet Reserpine(CqlContext context) => 
+	public  CqlValueSet Reserpine(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1044", default);
 
     [CqlDeclaration("Schizophrenia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1205")]
-	public static CqlValueSet Schizophrenia(CqlContext context) => 
+	public  CqlValueSet Schizophrenia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1205", default);
 
     [CqlDeclaration("Seizure Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1206")]
-	public static CqlValueSet Seizure_Disorder(CqlContext context) => 
+	public  CqlValueSet Seizure_Disorder(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1206", default);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public static CqlValueSet Telephone_Visits(CqlContext context) => 
+	public  CqlValueSet Telephone_Visits(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
     [CqlDeclaration("1 ML digoxin 0.1 MG/ML Injection")]
-	public static CqlCode _1_ML_digoxin_0_1_MG_ML_Injection(CqlContext context) => 
+	public  CqlCode _1_ML_digoxin_0_1_MG_ML_Injection(CqlContext context) => 
 		new CqlCode("204504", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("2 ML digoxin 0.25 MG/ML Injection")]
-	public static CqlCode _2_ML_digoxin_0_25_MG_ML_Injection(CqlContext context) => 
+	public  CqlCode _2_ML_digoxin_0_25_MG_ML_Injection(CqlContext context) => 
 		new CqlCode("104208", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.05 MG/ML Oral Solution")]
-	public static CqlCode digoxin_0_05_MG_ML_Oral_Solution(CqlContext context) => 
+	public  CqlCode digoxin_0_05_MG_ML_Oral_Solution(CqlContext context) => 
 		new CqlCode("393245", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.0625 MG Oral Tablet")]
-	public static CqlCode digoxin_0_0625_MG_Oral_Tablet(CqlContext context) => 
+	public  CqlCode digoxin_0_0625_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("245273", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.125 MG Oral Tablet")]
-	public static CqlCode digoxin_0_125_MG_Oral_Tablet(CqlContext context) => 
+	public  CqlCode digoxin_0_125_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("197604", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.1875 MG Oral Tablet")]
-	public static CqlCode digoxin_0_1875_MG_Oral_Tablet(CqlContext context) => 
+	public  CqlCode digoxin_0_1875_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("1441565", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("digoxin 0.25 MG Oral Tablet")]
-	public static CqlCode digoxin_0_25_MG_Oral_Tablet(CqlContext context) => 
+	public  CqlCode digoxin_0_25_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("197606", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin 3 MG Oral Tablet")]
-	public static CqlCode doxepin_3_MG_Oral_Tablet(CqlContext context) => 
+	public  CqlCode doxepin_3_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("966787", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin 6 MG Oral Tablet")]
-	public static CqlCode doxepin_6_MG_Oral_Tablet(CqlContext context) => 
+	public  CqlCode doxepin_6_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("966793", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 10 MG Oral Capsule")]
-	public static CqlCode doxepin_hydrochloride_10_MG_Oral_Capsule(CqlContext context) => 
+	public  CqlCode doxepin_hydrochloride_10_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000048", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 10 MG/ML Oral Solution")]
-	public static CqlCode doxepin_hydrochloride_10_MG_ML_Oral_Solution(CqlContext context) => 
+	public  CqlCode doxepin_hydrochloride_10_MG_ML_Oral_Solution(CqlContext context) => 
 		new CqlCode("1000054", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 100 MG Oral Capsule")]
-	public static CqlCode doxepin_hydrochloride_100_MG_Oral_Capsule(CqlContext context) => 
+	public  CqlCode doxepin_hydrochloride_100_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000058", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 150 MG Oral Capsule")]
-	public static CqlCode doxepin_hydrochloride_150_MG_Oral_Capsule(CqlContext context) => 
+	public  CqlCode doxepin_hydrochloride_150_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000064", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 25 MG Oral Capsule")]
-	public static CqlCode doxepin_hydrochloride_25_MG_Oral_Capsule(CqlContext context) => 
+	public  CqlCode doxepin_hydrochloride_25_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000070", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 50 MG Oral Capsule")]
-	public static CqlCode doxepin_hydrochloride_50_MG_Oral_Capsule(CqlContext context) => 
+	public  CqlCode doxepin_hydrochloride_50_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000076", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("doxepin hydrochloride 75 MG Oral Capsule")]
-	public static CqlCode doxepin_hydrochloride_75_MG_Oral_Capsule(CqlContext context) => 
+	public  CqlCode doxepin_hydrochloride_75_MG_Oral_Capsule(CqlContext context) => 
 		new CqlCode("1000097", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("Office or other outpatient visit for the evaluation and management of an established patient, that may not require the presence of a physician or other qualified health care professional. Usually, the presenting problem(s) are minimal.")]
-	public static CqlCode Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_(CqlContext context) => 
+	public  CqlCode Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_(CqlContext context) => 
 		new CqlCode("99211", "http://www.ama-assn.org/go/cpt", default, default);
 
     [CqlDeclaration("reserpine 0.1 MG Oral Tablet")]
-	public static CqlCode reserpine_0_1_MG_Oral_Tablet(CqlContext context) => 
+	public  CqlCode reserpine_0_1_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("198196", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("reserpine 0.25 MG Oral Tablet")]
-	public static CqlCode reserpine_0_25_MG_Oral_Tablet(CqlContext context) => 
+	public  CqlCode reserpine_0_25_MG_Oral_Tablet(CqlContext context) => 
 		new CqlCode("198197", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
     [CqlDeclaration("RXNORM")]
-	public static CqlCode[] RXNORM(CqlContext context)
+	public  CqlCode[] RXNORM(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("204504", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default),
@@ -319,7 +330,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("CPT")]
-	public static CqlCode[] CPT(CqlContext context)
+	public  CqlCode[] CPT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("99211", "http://www.ama-assn.org/go/cpt", default, default),
@@ -329,7 +340,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public static CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -340,7 +351,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -349,38 +360,38 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
-	public static IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
+	public  IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
 	{
-		CqlValueSet a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Office_Visit(context);
+		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
-		CqlValueSet c_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Ophthalmologic_Services(context);
+		CqlValueSet c_ = this.Ophthalmologic_Services(context);
 		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-		CqlValueSet f_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
+		CqlValueSet f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
 		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
-		CqlValueSet h_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Discharge_Services_Nursing_Facility(context);
+		CqlValueSet h_ = this.Discharge_Services_Nursing_Facility(context);
 		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-		CqlValueSet l_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Nursing_Facility_Visit(context);
+		CqlValueSet l_ = this.Nursing_Facility_Visit(context);
 		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
-		CqlValueSet n_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Care_Services_in_Long_Term_Residential_Facility(context);
+		CqlValueSet n_ = this.Care_Services_in_Long_Term_Residential_Facility(context);
 		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-		CqlValueSet r_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
+		CqlValueSet r_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
 		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
-		CqlValueSet t_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Annual_Wellness_Visit(context);
+		CqlValueSet t_ = this.Annual_Wellness_Visit(context);
 		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default);
 		IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
 		IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
-		CqlValueSet x_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Home_Healthcare_Services(context);
+		CqlValueSet x_ = this.Home_Healthcare_Services(context);
 		IEnumerable<Encounter> y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, default);
-		CqlValueSet z_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Telephone_Visits(context);
+		CqlValueSet z_ = this.Telephone_Visits(context);
 		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, default);
 		IEnumerable<Encounter> ab_ = context.Operators.Union<Encounter>(y_, aa_);
 		IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(w_, ab_);
-		CqlValueSet ad_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Online_Assessments(context);
+		CqlValueSet ad_ = this.Online_Assessments(context);
 		IEnumerable<Encounter> ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, default);
 		IEnumerable<Encounter> af_ = context.Operators.RetrieveByValueSet<Encounter>(default, default);
 		bool? ag_(Encounter E)
@@ -388,14 +399,14 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			List<CodeableConcept> am_ = E?.Type;
 			CqlConcept an_(CodeableConcept @this)
 			{
-				CqlConcept as_ = FHIRHelpers_4_3_000.ToConcept(context, @this);
+				CqlConcept as_ = _FHIRHelpers_4_3_000.ToConcept(context, @this);
 
 				return as_;
 			};
 			IEnumerable<CqlConcept> ao_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)am_, an_);
 			bool? ap_(CqlConcept T)
 			{
-				CqlCode at_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_(context);
+				CqlCode at_ = this.Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient__that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional__Usually__the_presenting_problem_s__are_minimal_(context);
 				CqlConcept au_ = context.Operators.ConvertCodeToConcept(at_);
 				bool? av_ = context.Operators.Equivalent(T, au_);
 
@@ -411,9 +422,9 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ac_, ai_);
 		bool? ak_(Encounter ValidEncounters)
 		{
-			CqlInterval<CqlDateTime> aw_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> aw_ = this.Measurement_Period(context);
 			Period ax_ = ValidEncounters?.Period;
-			CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_3_000.ToInterval(context, ax_);
+			CqlInterval<CqlDateTime> ay_ = _FHIRHelpers_4_3_000.ToInterval(context, ax_);
 			bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, default);
 
 			return az_;
@@ -424,18 +435,18 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public static bool? Initial_Population(CqlContext context)
+	public  bool? Initial_Population(CqlContext context)
 	{
-		Patient a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Patient(context);
+		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
 		string c_ = b_?.Value;
 		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-		CqlInterval<CqlDateTime> e_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Measurement_Period(context);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 		CqlDateTime f_ = context.Operators.End(e_);
 		CqlDate g_ = context.Operators.DateFrom(f_);
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 65);
-		IEnumerable<Encounter> j_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Qualifying_Encounters(context);
+		IEnumerable<Encounter> j_ = this.Qualifying_Encounters(context);
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 		bool? l_ = context.Operators.And(i_, k_);
 
@@ -443,35 +454,35 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public static bool? Denominator(CqlContext context)
+	public  bool? Denominator(CqlContext context)
 	{
-		bool? a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Initial_Population(context);
+		bool? a_ = this.Initial_Population(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public static bool? Denominator_Exclusions(CqlContext context)
+	public  bool? Denominator_Exclusions(CqlContext context)
 	{
-		bool? a_ = Hospice_6_9_000.Has_Hospice_Services(context);
-		bool? b_ = PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period(context);
+		bool? a_ = _Hospice_6_9_000.Has_Hospice_Services(context);
+		bool? b_ = _PalliativeCare_1_9_000.Has_Palliative_Care_in_the_Measurement_Period(context);
 		bool? c_ = context.Operators.Or(a_, b_);
 
 		return c_;
 	}
 
     [CqlDeclaration("More Than One Order")]
-	public static IEnumerable<MedicationRequest> More_Than_One_Order(CqlContext context, IEnumerable<MedicationRequest> Medication)
+	public  IEnumerable<MedicationRequest> More_Than_One_Order(CqlContext context, IEnumerable<MedicationRequest> Medication)
 	{
-		IEnumerable<MedicationRequest> a_ = Status_1_6_000.Active_or_Completed_Medication_Request(context, Medication);
+		IEnumerable<MedicationRequest> a_ = _Status_1_6_000.Active_or_Completed_Medication_Request(context, Medication);
 		IEnumerable<MedicationRequest> b_(MedicationRequest OrderMedication1)
 		{
-			IEnumerable<MedicationRequest> f_ = Status_1_6_000.Active_or_Completed_Medication_Request(context, Medication);
+			IEnumerable<MedicationRequest> f_ = _Status_1_6_000.Active_or_Completed_Medication_Request(context, Medication);
 			bool? g_(MedicationRequest OrderMedication2)
 			{
 				FhirDateTime k_ = OrderMedication1?.AuthoredOnElement;
 				CqlDateTime l_ = context.Operators.Convert<CqlDateTime>(k_);
-				CqlInterval<CqlDateTime> m_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Measurement_Period(context);
+				CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
 				bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, default);
 				MedicationRequest.DispenseRequestComponent o_ = OrderMedication1?.DispenseRequest;
 				UnsignedInt p_ = o_?.NumberOfRepeatsAllowedElement;
@@ -500,11 +511,11 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				CqlDateTime au_ = context.Operators.Convert<CqlDateTime>(k_);
 				bool? aw_ = context.Operators.In<CqlDateTime>(au_, m_, default);
 				bool? ax_ = context.Operators.And(as_, aw_);
-				CqlInterval<CqlDate> ay_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, OrderMedication1);
+				CqlInterval<CqlDate> ay_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, OrderMedication1);
 				CqlDate az_ = context.Operators.Start(ay_);
 				CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
 				CqlDate bb_ = context.Operators.DateFrom(ba_);
-				CqlInterval<CqlDate> bc_ = CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, OrderMedication2);
+				CqlInterval<CqlDate> bc_ = _CumulativeMedicationDuration_4_0_000.MedicationRequestPeriod(context, OrderMedication2);
 				CqlDate bd_ = context.Operators.Start(bc_);
 				CqlDateTime be_ = context.Operators.ConvertDateToDateTime(bd_);
 				CqlDate bf_ = context.Operators.DateFrom(be_);
@@ -539,101 +550,101 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Same High Risk Medications Ordered on Different Days")]
-	public static IEnumerable<MedicationRequest> Same_High_Risk_Medications_Ordered_on_Different_Days(CqlContext context)
+	public  IEnumerable<MedicationRequest> Same_High_Risk_Medications_Ordered_on_Different_Days(CqlContext context)
 	{
-		CqlValueSet a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Anticholinergics__first_generation_antihistamines(context);
+		CqlValueSet a_ = this.Anticholinergics__first_generation_antihistamines(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, e_);
-		CqlValueSet g_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Anticholinergics__anti_Parkinson_agents(context);
+		IEnumerable<MedicationRequest> f_ = this.More_Than_One_Order(context, e_);
+		CqlValueSet g_ = this.Anticholinergics__anti_Parkinson_agents(context);
 		IEnumerable<MedicationRequest> h_ = context.Operators.RetrieveByValueSet<MedicationRequest>(g_, default);
 		IEnumerable<MedicationRequest> j_ = context.Operators.RetrieveByValueSet<MedicationRequest>(g_, default);
 		IEnumerable<MedicationRequest> k_ = context.Operators.Union<MedicationRequest>(h_, j_);
-		IEnumerable<MedicationRequest> l_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, k_);
+		IEnumerable<MedicationRequest> l_ = this.More_Than_One_Order(context, k_);
 		IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(f_, l_);
-		CqlValueSet n_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Antispasmodics(context);
+		CqlValueSet n_ = this.Antispasmodics(context);
 		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, default);
 		IEnumerable<MedicationRequest> q_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, default);
 		IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(o_, q_);
-		IEnumerable<MedicationRequest> s_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, r_);
-		CqlValueSet t_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Antithrombotic(context);
+		IEnumerable<MedicationRequest> s_ = this.More_Than_One_Order(context, r_);
+		CqlValueSet t_ = this.Antithrombotic(context);
 		IEnumerable<MedicationRequest> u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, default);
 		IEnumerable<MedicationRequest> w_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, default);
 		IEnumerable<MedicationRequest> x_ = context.Operators.Union<MedicationRequest>(u_, w_);
-		IEnumerable<MedicationRequest> y_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, x_);
+		IEnumerable<MedicationRequest> y_ = this.More_Than_One_Order(context, x_);
 		IEnumerable<MedicationRequest> z_ = context.Operators.Union<MedicationRequest>(s_, y_);
 		IEnumerable<MedicationRequest> aa_ = context.Operators.Union<MedicationRequest>(m_, z_);
-		CqlValueSet ab_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Cardiovascular__alpha_agonists__central(context);
+		CqlValueSet ab_ = this.Cardiovascular__alpha_agonists__central(context);
 		IEnumerable<MedicationRequest> ac_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ab_, default);
 		IEnumerable<MedicationRequest> ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ab_, default);
 		IEnumerable<MedicationRequest> af_ = context.Operators.Union<MedicationRequest>(ac_, ae_);
-		IEnumerable<MedicationRequest> ag_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, af_);
-		CqlValueSet ah_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Cardiovascular__other(context);
+		IEnumerable<MedicationRequest> ag_ = this.More_Than_One_Order(context, af_);
+		CqlValueSet ah_ = this.Cardiovascular__other(context);
 		IEnumerable<MedicationRequest> ai_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ah_, default);
 		IEnumerable<MedicationRequest> ak_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ah_, default);
 		IEnumerable<MedicationRequest> al_ = context.Operators.Union<MedicationRequest>(ai_, ak_);
-		IEnumerable<MedicationRequest> am_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, al_);
+		IEnumerable<MedicationRequest> am_ = this.More_Than_One_Order(context, al_);
 		IEnumerable<MedicationRequest> an_ = context.Operators.Union<MedicationRequest>(ag_, am_);
 		IEnumerable<MedicationRequest> ao_ = context.Operators.Union<MedicationRequest>(aa_, an_);
-		CqlValueSet ap_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Central_nervous_system__antidepressants(context);
+		CqlValueSet ap_ = this.Central_nervous_system__antidepressants(context);
 		IEnumerable<MedicationRequest> aq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, default);
 		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, default);
 		IEnumerable<MedicationRequest> at_ = context.Operators.Union<MedicationRequest>(aq_, as_);
-		IEnumerable<MedicationRequest> au_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, at_);
-		CqlValueSet av_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Central_nervous_system__barbiturates(context);
+		IEnumerable<MedicationRequest> au_ = this.More_Than_One_Order(context, at_);
+		CqlValueSet av_ = this.Central_nervous_system__barbiturates(context);
 		IEnumerable<MedicationRequest> aw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, default);
 		IEnumerable<MedicationRequest> ay_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, default);
 		IEnumerable<MedicationRequest> az_ = context.Operators.Union<MedicationRequest>(aw_, ay_);
-		IEnumerable<MedicationRequest> ba_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, az_);
+		IEnumerable<MedicationRequest> ba_ = this.More_Than_One_Order(context, az_);
 		IEnumerable<MedicationRequest> bb_ = context.Operators.Union<MedicationRequest>(au_, ba_);
 		IEnumerable<MedicationRequest> bc_ = context.Operators.Union<MedicationRequest>(ao_, bb_);
-		CqlValueSet bd_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Central_nervous_system__vasodilators(context);
+		CqlValueSet bd_ = this.Central_nervous_system__vasodilators(context);
 		IEnumerable<MedicationRequest> be_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bd_, default);
 		IEnumerable<MedicationRequest> bg_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bd_, default);
 		IEnumerable<MedicationRequest> bh_ = context.Operators.Union<MedicationRequest>(be_, bg_);
-		IEnumerable<MedicationRequest> bi_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, bh_);
-		CqlValueSet bj_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Central_nervous_system__other(context);
+		IEnumerable<MedicationRequest> bi_ = this.More_Than_One_Order(context, bh_);
+		CqlValueSet bj_ = this.Central_nervous_system__other(context);
 		IEnumerable<MedicationRequest> bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bj_, default);
 		IEnumerable<MedicationRequest> bm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bj_, default);
 		IEnumerable<MedicationRequest> bn_ = context.Operators.Union<MedicationRequest>(bk_, bm_);
-		IEnumerable<MedicationRequest> bo_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, bn_);
+		IEnumerable<MedicationRequest> bo_ = this.More_Than_One_Order(context, bn_);
 		IEnumerable<MedicationRequest> bp_ = context.Operators.Union<MedicationRequest>(bi_, bo_);
 		IEnumerable<MedicationRequest> bq_ = context.Operators.Union<MedicationRequest>(bc_, bp_);
-		CqlValueSet br_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Endocrine_system__estrogens_with_or_without_progestins(context);
+		CqlValueSet br_ = this.Endocrine_system__estrogens_with_or_without_progestins(context);
 		IEnumerable<MedicationRequest> bs_ = context.Operators.RetrieveByValueSet<MedicationRequest>(br_, default);
 		IEnumerable<MedicationRequest> bu_ = context.Operators.RetrieveByValueSet<MedicationRequest>(br_, default);
 		IEnumerable<MedicationRequest> bv_ = context.Operators.Union<MedicationRequest>(bs_, bu_);
-		IEnumerable<MedicationRequest> bw_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, bv_);
-		CqlValueSet bx_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Endocrine_system__sulfonylureas__long_duration(context);
+		IEnumerable<MedicationRequest> bw_ = this.More_Than_One_Order(context, bv_);
+		CqlValueSet bx_ = this.Endocrine_system__sulfonylureas__long_duration(context);
 		IEnumerable<MedicationRequest> by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bx_, default);
 		IEnumerable<MedicationRequest> ca_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bx_, default);
 		IEnumerable<MedicationRequest> cb_ = context.Operators.Union<MedicationRequest>(by_, ca_);
-		IEnumerable<MedicationRequest> cc_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, cb_);
+		IEnumerable<MedicationRequest> cc_ = this.More_Than_One_Order(context, cb_);
 		IEnumerable<MedicationRequest> cd_ = context.Operators.Union<MedicationRequest>(bw_, cc_);
 		IEnumerable<MedicationRequest> ce_ = context.Operators.Union<MedicationRequest>(bq_, cd_);
-		CqlValueSet cf_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Endocrine_system__other(context);
+		CqlValueSet cf_ = this.Endocrine_system__other(context);
 		IEnumerable<MedicationRequest> cg_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cf_, default);
 		IEnumerable<MedicationRequest> ci_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cf_, default);
 		IEnumerable<MedicationRequest> cj_ = context.Operators.Union<MedicationRequest>(cg_, ci_);
-		IEnumerable<MedicationRequest> ck_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, cj_);
-		CqlValueSet cl_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Nonbenzodiazepine_hypnotics(context);
+		IEnumerable<MedicationRequest> ck_ = this.More_Than_One_Order(context, cj_);
+		CqlValueSet cl_ = this.Nonbenzodiazepine_hypnotics(context);
 		IEnumerable<MedicationRequest> cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, default);
 		IEnumerable<MedicationRequest> co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, default);
 		IEnumerable<MedicationRequest> cp_ = context.Operators.Union<MedicationRequest>(cm_, co_);
-		IEnumerable<MedicationRequest> cq_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, cp_);
+		IEnumerable<MedicationRequest> cq_ = this.More_Than_One_Order(context, cp_);
 		IEnumerable<MedicationRequest> cr_ = context.Operators.Union<MedicationRequest>(ck_, cq_);
 		IEnumerable<MedicationRequest> cs_ = context.Operators.Union<MedicationRequest>(ce_, cr_);
-		CqlValueSet ct_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Pain_medications__skeletal_muscle_relaxants(context);
+		CqlValueSet ct_ = this.Pain_medications__skeletal_muscle_relaxants(context);
 		IEnumerable<MedicationRequest> cu_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ct_, default);
 		IEnumerable<MedicationRequest> cw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ct_, default);
 		IEnumerable<MedicationRequest> cx_ = context.Operators.Union<MedicationRequest>(cu_, cw_);
-		IEnumerable<MedicationRequest> cy_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, cx_);
-		CqlValueSet cz_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Pain_medications__other(context);
+		IEnumerable<MedicationRequest> cy_ = this.More_Than_One_Order(context, cx_);
+		CqlValueSet cz_ = this.Pain_medications__other(context);
 		IEnumerable<MedicationRequest> da_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cz_, default);
 		IEnumerable<MedicationRequest> dc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cz_, default);
 		IEnumerable<MedicationRequest> dd_ = context.Operators.Union<MedicationRequest>(da_, dc_);
-		IEnumerable<MedicationRequest> de_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, dd_);
+		IEnumerable<MedicationRequest> de_ = this.More_Than_One_Order(context, dd_);
 		IEnumerable<MedicationRequest> df_ = context.Operators.Union<MedicationRequest>(cy_, de_);
 		IEnumerable<MedicationRequest> dg_ = context.Operators.Union<MedicationRequest>(cs_, df_);
 
@@ -641,7 +652,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("MedicationRequestPeriodInDays")]
-	public static decimal? MedicationRequestPeriodInDays(CqlContext context, MedicationRequest Request)
+	public  decimal? MedicationRequestPeriodInDays(CqlContext context, MedicationRequest Request)
 	{
 		MedicationRequest[] a_ = [
 			Request,
@@ -650,24 +661,24 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		{
 			MedicationRequest.DispenseRequestComponent e_ = R?.DispenseRequest;
 			Duration f_ = e_?.ExpectedSupplyDuration;
-			CqlQuantity g_ = FHIRHelpers_4_3_000.ToQuantity(context, f_);
+			CqlQuantity g_ = _FHIRHelpers_4_3_000.ToQuantity(context, f_);
 			CqlQuantity h_ = context.Operators.ConvertQuantity(g_, "d");
 			decimal? i_ = h_?.value;
 			Quantity k_ = e_?.Quantity;
-			CqlQuantity l_ = FHIRHelpers_4_3_000.ToQuantity(context, k_);
+			CqlQuantity l_ = _FHIRHelpers_4_3_000.ToQuantity(context, k_);
 			decimal? m_ = l_?.value;
 			List<Dosage> n_ = R?.DosageInstruction;
 			Dosage o_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			List<Dosage.DoseAndRateComponent> p_ = o_?.DoseAndRate;
 			Dosage.DoseAndRateComponent q_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)p_);
 			DataType r_ = q_?.Dose;
-			object s_ = FHIRHelpers_4_3_000.ToValue(context, r_);
+			object s_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
 			CqlQuantity t_ = context.Operators.End(s_ as CqlInterval<CqlQuantity>);
 			Dosage v_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			List<Dosage.DoseAndRateComponent> w_ = v_?.DoseAndRate;
 			Dosage.DoseAndRateComponent x_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)w_);
 			DataType y_ = x_?.Dose;
-			object z_ = FHIRHelpers_4_3_000.ToValue(context, y_);
+			object z_ = _FHIRHelpers_4_3_000.ToValue(context, y_);
 			decimal? aa_ = (t_ ?? z_ as CqlQuantity)?.value;
 			Dosage ac_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			Timing ad_ = ac_?.Timing;
@@ -690,8 +701,8 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			Code<Timing.UnitsOfTime> ax_ = aw_?.PeriodUnitElement;
 			Timing.UnitsOfTime? ay_ = ax_?.Value;
 			string az_ = context.Operators.Convert<string>(ay_);
-			CqlQuantity ba_ = CumulativeMedicationDuration_4_0_000.Quantity(context, as_, az_);
-			decimal? bb_ = CumulativeMedicationDuration_4_0_000.ToDaily(context, ag_ ?? am_, ba_);
+			CqlQuantity ba_ = _CumulativeMedicationDuration_4_0_000.Quantity(context, as_, az_);
+			decimal? bb_ = _CumulativeMedicationDuration_4_0_000.ToDaily(context, ag_ ?? am_, ba_);
 			Dosage bd_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			Timing be_ = bd_?.Timing;
 			Timing.RepeatComponent bf_ = be_?.Repeat;
@@ -716,16 +727,16 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Two High Risk Medications with Prolonged Duration")]
-	public static bool? Two_High_Risk_Medications_with_Prolonged_Duration(CqlContext context)
+	public  bool? Two_High_Risk_Medications_with_Prolonged_Duration(CqlContext context)
 	{
-		CqlValueSet a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Anti_Infectives__other(context);
+		CqlValueSet a_ = this.Anti_Infectives__other(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, e_);
+		IEnumerable<MedicationRequest> f_ = this.More_Than_One_Order(context, e_);
 		decimal? g_(MedicationRequest AntiInfectives)
 		{
-			decimal? l_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.MedicationRequestPeriodInDays(context, AntiInfectives);
+			decimal? l_ = this.MedicationRequestPeriodInDays(context, AntiInfectives);
 
 			return l_;
 		};
@@ -738,13 +749,13 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("MedicationStrengthPerUnit")]
-	public static CqlQuantity MedicationStrengthPerUnit(CqlContext context, CqlConcept Strength)
+	public  CqlQuantity MedicationStrengthPerUnit(CqlContext context, CqlConcept Strength)
 	{
 		CqlQuantity a_()
 		{
 			bool b_()
 			{
-				CqlCode t_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.reserpine_0_1_MG_Oral_Tablet(context);
+				CqlCode t_ = this.reserpine_0_1_MG_Oral_Tablet(context);
 				CqlConcept u_ = context.Operators.ConvertCodeToConcept(t_);
 				bool? v_ = context.Operators.Equivalent(Strength, u_);
 
@@ -752,7 +763,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool c_()
 			{
-				CqlCode w_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.reserpine_0_25_MG_Oral_Tablet(context);
+				CqlCode w_ = this.reserpine_0_25_MG_Oral_Tablet(context);
 				CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
 				bool? y_ = context.Operators.Equivalent(Strength, x_);
 
@@ -760,7 +771,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool d_()
 			{
-				CqlCode z_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.digoxin_0_05_MG_ML_Oral_Solution(context);
+				CqlCode z_ = this.digoxin_0_05_MG_ML_Oral_Solution(context);
 				CqlConcept aa_ = context.Operators.ConvertCodeToConcept(z_);
 				bool? ab_ = context.Operators.Equivalent(Strength, aa_);
 
@@ -768,7 +779,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool e_()
 			{
-				CqlCode ac_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.digoxin_0_0625_MG_Oral_Tablet(context);
+				CqlCode ac_ = this.digoxin_0_0625_MG_Oral_Tablet(context);
 				CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
 				bool? ae_ = context.Operators.Equivalent(Strength, ad_);
 
@@ -776,7 +787,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool f_()
 			{
-				CqlCode af_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000._1_ML_digoxin_0_1_MG_ML_Injection(context);
+				CqlCode af_ = this._1_ML_digoxin_0_1_MG_ML_Injection(context);
 				CqlConcept ag_ = context.Operators.ConvertCodeToConcept(af_);
 				bool? ah_ = context.Operators.Equivalent(Strength, ag_);
 
@@ -784,7 +795,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool g_()
 			{
-				CqlCode ai_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.digoxin_0_125_MG_Oral_Tablet(context);
+				CqlCode ai_ = this.digoxin_0_125_MG_Oral_Tablet(context);
 				CqlConcept aj_ = context.Operators.ConvertCodeToConcept(ai_);
 				bool? ak_ = context.Operators.Equivalent(Strength, aj_);
 
@@ -792,7 +803,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool h_()
 			{
-				CqlCode al_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.digoxin_0_1875_MG_Oral_Tablet(context);
+				CqlCode al_ = this.digoxin_0_1875_MG_Oral_Tablet(context);
 				CqlConcept am_ = context.Operators.ConvertCodeToConcept(al_);
 				bool? an_ = context.Operators.Equivalent(Strength, am_);
 
@@ -800,7 +811,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool i_()
 			{
-				CqlCode ao_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.digoxin_0_25_MG_Oral_Tablet(context);
+				CqlCode ao_ = this.digoxin_0_25_MG_Oral_Tablet(context);
 				CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
 				bool? aq_ = context.Operators.Equivalent(Strength, ap_);
 
@@ -808,7 +819,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool j_()
 			{
-				CqlCode ar_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000._2_ML_digoxin_0_25_MG_ML_Injection(context);
+				CqlCode ar_ = this._2_ML_digoxin_0_25_MG_ML_Injection(context);
 				CqlConcept as_ = context.Operators.ConvertCodeToConcept(ar_);
 				bool? at_ = context.Operators.Equivalent(Strength, as_);
 
@@ -816,7 +827,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool k_()
 			{
-				CqlCode au_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.doxepin_3_MG_Oral_Tablet(context);
+				CqlCode au_ = this.doxepin_3_MG_Oral_Tablet(context);
 				CqlConcept av_ = context.Operators.ConvertCodeToConcept(au_);
 				bool? aw_ = context.Operators.Equivalent(Strength, av_);
 
@@ -824,7 +835,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool l_()
 			{
-				CqlCode ax_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.doxepin_6_MG_Oral_Tablet(context);
+				CqlCode ax_ = this.doxepin_6_MG_Oral_Tablet(context);
 				CqlConcept ay_ = context.Operators.ConvertCodeToConcept(ax_);
 				bool? az_ = context.Operators.Equivalent(Strength, ay_);
 
@@ -832,7 +843,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool m_()
 			{
-				CqlCode ba_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.doxepin_hydrochloride_10_MG_Oral_Capsule(context);
+				CqlCode ba_ = this.doxepin_hydrochloride_10_MG_Oral_Capsule(context);
 				CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
 				bool? bc_ = context.Operators.Equivalent(Strength, bb_);
 
@@ -840,7 +851,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool n_()
 			{
-				CqlCode bd_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.doxepin_hydrochloride_10_MG_ML_Oral_Solution(context);
+				CqlCode bd_ = this.doxepin_hydrochloride_10_MG_ML_Oral_Solution(context);
 				CqlConcept be_ = context.Operators.ConvertCodeToConcept(bd_);
 				bool? bf_ = context.Operators.Equivalent(Strength, be_);
 
@@ -848,7 +859,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool o_()
 			{
-				CqlCode bg_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.doxepin_hydrochloride_25_MG_Oral_Capsule(context);
+				CqlCode bg_ = this.doxepin_hydrochloride_25_MG_Oral_Capsule(context);
 				CqlConcept bh_ = context.Operators.ConvertCodeToConcept(bg_);
 				bool? bi_ = context.Operators.Equivalent(Strength, bh_);
 
@@ -856,7 +867,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool p_()
 			{
-				CqlCode bj_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.doxepin_hydrochloride_50_MG_Oral_Capsule(context);
+				CqlCode bj_ = this.doxepin_hydrochloride_50_MG_Oral_Capsule(context);
 				CqlConcept bk_ = context.Operators.ConvertCodeToConcept(bj_);
 				bool? bl_ = context.Operators.Equivalent(Strength, bk_);
 
@@ -864,7 +875,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool q_()
 			{
-				CqlCode bm_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.doxepin_hydrochloride_75_MG_Oral_Capsule(context);
+				CqlCode bm_ = this.doxepin_hydrochloride_75_MG_Oral_Capsule(context);
 				CqlConcept bn_ = context.Operators.ConvertCodeToConcept(bm_);
 				bool? bo_ = context.Operators.Equivalent(Strength, bn_);
 
@@ -872,7 +883,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool r_()
 			{
-				CqlCode bp_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.doxepin_hydrochloride_100_MG_Oral_Capsule(context);
+				CqlCode bp_ = this.doxepin_hydrochloride_100_MG_Oral_Capsule(context);
 				CqlConcept bq_ = context.Operators.ConvertCodeToConcept(bp_);
 				bool? br_ = context.Operators.Equivalent(Strength, bq_);
 
@@ -880,7 +891,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			};
 			bool s_()
 			{
-				CqlCode bs_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.doxepin_hydrochloride_150_MG_Oral_Capsule(context);
+				CqlCode bs_ = this.doxepin_hydrochloride_150_MG_Oral_Capsule(context);
 				CqlConcept bt_ = context.Operators.ConvertCodeToConcept(bs_);
 				bool? bu_ = context.Operators.Equivalent(Strength, bt_);
 
@@ -1004,7 +1015,7 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Average Daily Dose")]
-	public static CqlQuantity Average_Daily_Dose(CqlContext context, MedicationRequest MedicationRequest)
+	public  CqlQuantity Average_Daily_Dose(CqlContext context, MedicationRequest MedicationRequest)
 	{
 		MedicationRequest[] a_ = [
 			MedicationRequest,
@@ -1015,18 +1026,18 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			{
 				bool f_()
 				{
-					decimal? g_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.MedicationRequestPeriodInDays(context, Order);
+					decimal? g_ = this.MedicationRequestPeriodInDays(context, Order);
 					bool? h_ = context.Operators.Not((bool?)(g_ is null));
-					CqlConcept i_ = CQMCommon_2_0_000.getMedicationCode(context, Order);
-					CqlQuantity j_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.MedicationStrengthPerUnit(context, i_);
+					CqlConcept i_ = _CQMCommon_2_0_000.getMedicationCode(context, Order);
+					CqlQuantity j_ = this.MedicationStrengthPerUnit(context, i_);
 					string k_ = j_?.unit;
 					bool? l_ = context.Operators.Equal(k_, "mg");
-					CqlQuantity n_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.MedicationStrengthPerUnit(context, i_);
+					CqlQuantity n_ = this.MedicationStrengthPerUnit(context, i_);
 					string o_ = n_?.unit;
 					bool? p_ = context.Operators.Equal(o_, "mg/mL");
 					MedicationRequest.DispenseRequestComponent q_ = Order?.DispenseRequest;
 					Quantity r_ = q_?.Quantity;
-					CqlQuantity s_ = FHIRHelpers_4_3_000.ToQuantity(context, r_);
+					CqlQuantity s_ = _FHIRHelpers_4_3_000.ToQuantity(context, r_);
 					string t_ = s_?.unit;
 					bool? u_ = context.Operators.Equal(t_, "mL");
 					bool? v_ = context.Operators.And(p_, u_);
@@ -1039,11 +1050,11 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 				{
 					MedicationRequest.DispenseRequestComponent y_ = Order?.DispenseRequest;
 					Quantity z_ = y_?.Quantity;
-					CqlQuantity aa_ = FHIRHelpers_4_3_000.ToQuantity(context, z_);
-					CqlConcept ab_ = CQMCommon_2_0_000.getMedicationCode(context, Order);
-					CqlQuantity ac_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.MedicationStrengthPerUnit(context, ab_);
+					CqlQuantity aa_ = _FHIRHelpers_4_3_000.ToQuantity(context, z_);
+					CqlConcept ab_ = _CQMCommon_2_0_000.getMedicationCode(context, Order);
+					CqlQuantity ac_ = this.MedicationStrengthPerUnit(context, ab_);
 					CqlQuantity ad_ = context.Operators.Multiply(aa_, ac_);
-					decimal? ae_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.MedicationRequestPeriodInDays(context, Order);
+					decimal? ae_ = this.MedicationRequestPeriodInDays(context, Order);
 					CqlQuantity af_ = context.Operators.Divide(ad_, new CqlQuantity(ae_, "d"));
 
 					return af_;
@@ -1063,53 +1074,53 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("High Risk Medications with Average Daily Dose Criteria")]
-	public static bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria(CqlContext context)
+	public  bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria(CqlContext context)
 	{
-		CqlValueSet a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Reserpine(context);
+		CqlValueSet a_ = this.Reserpine(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest ReserpineOrdered)
 		{
-			CqlQuantity ad_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Average_Daily_Dose(context, ReserpineOrdered);
+			CqlQuantity ad_ = this.Average_Daily_Dose(context, ReserpineOrdered);
 			CqlQuantity ae_ = context.Operators.Quantity(0.1m, "mg/d");
 			bool? af_ = context.Operators.Greater(ad_, ae_);
 
 			return af_;
 		};
 		IEnumerable<MedicationRequest> g_ = context.Operators.Where<MedicationRequest>(e_, f_);
-		IEnumerable<MedicationRequest> h_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, g_);
+		IEnumerable<MedicationRequest> h_ = this.More_Than_One_Order(context, g_);
 		bool? i_ = context.Operators.Exists<MedicationRequest>(h_);
-		CqlValueSet j_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Digoxin(context);
+		CqlValueSet j_ = this.Digoxin(context);
 		IEnumerable<MedicationRequest> k_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, default);
 		IEnumerable<MedicationRequest> m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(j_, default);
 		IEnumerable<MedicationRequest> n_ = context.Operators.Union<MedicationRequest>(k_, m_);
 		bool? o_(MedicationRequest DigoxinOrdered)
 		{
-			CqlQuantity ag_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Average_Daily_Dose(context, DigoxinOrdered);
+			CqlQuantity ag_ = this.Average_Daily_Dose(context, DigoxinOrdered);
 			CqlQuantity ah_ = context.Operators.Quantity(0.125m, "mg/d");
 			bool? ai_ = context.Operators.Greater(ag_, ah_);
 
 			return ai_;
 		};
 		IEnumerable<MedicationRequest> p_ = context.Operators.Where<MedicationRequest>(n_, o_);
-		IEnumerable<MedicationRequest> q_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, p_);
+		IEnumerable<MedicationRequest> q_ = this.More_Than_One_Order(context, p_);
 		bool? r_ = context.Operators.Exists<MedicationRequest>(q_);
 		bool? s_ = context.Operators.Or(i_, r_);
-		CqlValueSet t_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Doxepin(context);
+		CqlValueSet t_ = this.Doxepin(context);
 		IEnumerable<MedicationRequest> u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, default);
 		IEnumerable<MedicationRequest> w_ = context.Operators.RetrieveByValueSet<MedicationRequest>(t_, default);
 		IEnumerable<MedicationRequest> x_ = context.Operators.Union<MedicationRequest>(u_, w_);
 		bool? y_(MedicationRequest DoxepinOrdered)
 		{
-			CqlQuantity aj_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Average_Daily_Dose(context, DoxepinOrdered);
+			CqlQuantity aj_ = this.Average_Daily_Dose(context, DoxepinOrdered);
 			CqlQuantity ak_ = context.Operators.Quantity(6m, "mg/d");
 			bool? al_ = context.Operators.Greater(aj_, ak_);
 
 			return al_;
 		};
 		IEnumerable<MedicationRequest> z_ = context.Operators.Where<MedicationRequest>(x_, y_);
-		IEnumerable<MedicationRequest> aa_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, z_);
+		IEnumerable<MedicationRequest> aa_ = this.More_Than_One_Order(context, z_);
 		bool? ab_ = context.Operators.Exists<MedicationRequest>(aa_);
 		bool? ac_ = context.Operators.Or(s_, ab_);
 
@@ -1117,44 +1128,44 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator 1")]
-	public static bool? Numerator_1(CqlContext context)
+	public  bool? Numerator_1(CqlContext context)
 	{
-		IEnumerable<MedicationRequest> a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Same_High_Risk_Medications_Ordered_on_Different_Days(context);
+		IEnumerable<MedicationRequest> a_ = this.Same_High_Risk_Medications_Ordered_on_Different_Days(context);
 		bool? b_ = context.Operators.Exists<MedicationRequest>(a_);
-		bool? c_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Two_High_Risk_Medications_with_Prolonged_Duration(context);
+		bool? c_ = this.Two_High_Risk_Medications_with_Prolonged_Duration(context);
 		bool? d_ = context.Operators.Or(b_, c_);
-		bool? e_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.High_Risk_Medications_with_Average_Daily_Dose_Criteria(context);
+		bool? e_ = this.High_Risk_Medications_with_Average_Daily_Dose_Criteria(context);
 		bool? f_ = context.Operators.Or(d_, e_);
 
 		return f_;
 	}
 
     [CqlDeclaration("More than One Antipsychotic Order")]
-	public static bool? More_than_One_Antipsychotic_Order(CqlContext context)
+	public  bool? More_than_One_Antipsychotic_Order(CqlContext context)
 	{
-		CqlValueSet a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Antipsychotic(context);
+		CqlValueSet a_ = this.Antipsychotic(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, e_);
+		IEnumerable<MedicationRequest> f_ = this.More_Than_One_Order(context, e_);
 		bool? g_ = context.Operators.Exists<MedicationRequest>(f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Antipsychotic Index Prescription Start Date")]
-	public static CqlDateTime Antipsychotic_Index_Prescription_Start_Date(CqlContext context)
+	public  CqlDateTime Antipsychotic_Index_Prescription_Start_Date(CqlContext context)
 	{
-		CqlValueSet a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Antipsychotic(context);
+		CqlValueSet a_ = this.Antipsychotic(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = Status_1_6_000.Active_or_Completed_Medication_Request(context, e_);
+		IEnumerable<MedicationRequest> f_ = _Status_1_6_000.Active_or_Completed_Medication_Request(context, e_);
 		bool? g_(MedicationRequest AntipsychoticMedication)
 		{
 			FhirDateTime m_ = AntipsychoticMedication?.AuthoredOnElement;
 			CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
-			CqlInterval<CqlDateTime> o_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
 			bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, default);
 
 			return p_;
@@ -1175,31 +1186,31 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("More than One Benzodiazepine Order")]
-	public static bool? More_than_One_Benzodiazepine_Order(CqlContext context)
+	public  bool? More_than_One_Benzodiazepine_Order(CqlContext context)
 	{
-		CqlValueSet a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Benzodiazepine(context);
+		CqlValueSet a_ = this.Benzodiazepine(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_Than_One_Order(context, e_);
+		IEnumerable<MedicationRequest> f_ = this.More_Than_One_Order(context, e_);
 		bool? g_ = context.Operators.Exists<MedicationRequest>(f_);
 
 		return g_;
 	}
 
     [CqlDeclaration("Benzodiazepine Index Prescription Start Date")]
-	public static CqlDateTime Benzodiazepine_Index_Prescription_Start_Date(CqlContext context)
+	public  CqlDateTime Benzodiazepine_Index_Prescription_Start_Date(CqlContext context)
 	{
-		CqlValueSet a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Benzodiazepine(context);
+		CqlValueSet a_ = this.Benzodiazepine(context);
 		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
-		IEnumerable<MedicationRequest> f_ = Status_1_6_000.Active_or_Completed_Medication_Request(context, e_);
+		IEnumerable<MedicationRequest> f_ = _Status_1_6_000.Active_or_Completed_Medication_Request(context, e_);
 		bool? g_(MedicationRequest BenzodiazepineMedication)
 		{
 			FhirDateTime m_ = BenzodiazepineMedication?.AuthoredOnElement;
 			CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
-			CqlInterval<CqlDateTime> o_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
 			bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, default);
 
 			return p_;
@@ -1220,22 +1231,22 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator 2")]
-	public static bool? Numerator_2(CqlContext context)
+	public  bool? Numerator_2(CqlContext context)
 	{
-		bool? a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_than_One_Antipsychotic_Order(context);
-		CqlValueSet b_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Schizophrenia(context);
+		bool? a_ = this.More_than_One_Antipsychotic_Order(context);
+		CqlValueSet b_ = this.Schizophrenia(context);
 		IEnumerable<Condition> c_ = context.Operators.RetrieveByValueSet<Condition>(b_, default);
-		CqlValueSet d_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Bipolar_Disorder(context);
+		CqlValueSet d_ = this.Bipolar_Disorder(context);
 		IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
 		IEnumerable<Condition> f_ = context.Operators.Union<Condition>(c_, e_);
 		bool? g_(Condition AntipsychoticTreatedDiagnoses)
 		{
-			CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.ToPrevalenceInterval(context, AntipsychoticTreatedDiagnoses);
-			CqlInterval<CqlDateTime> ah_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> ag_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, AntipsychoticTreatedDiagnoses);
+			CqlInterval<CqlDateTime> ah_ = this.Measurement_Period(context);
 			CqlDateTime ai_ = context.Operators.Start(ah_);
 			CqlQuantity aj_ = context.Operators.Quantity(1m, "year");
 			CqlDateTime ak_ = context.Operators.Subtract(ai_, aj_);
-			CqlDateTime al_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Antipsychotic_Index_Prescription_Start_Date(context);
+			CqlDateTime al_ = this.Antipsychotic_Index_Prescription_Start_Date(context);
 			CqlInterval<CqlDateTime> am_ = context.Operators.Interval(ak_, al_, true, true);
 			bool? an_ = context.Operators.Overlaps(ag_, am_, default);
 
@@ -1245,29 +1256,29 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 		bool? i_ = context.Operators.Exists<Condition>(h_);
 		bool? j_ = context.Operators.Not(i_);
 		bool? k_ = context.Operators.And(a_, j_);
-		bool? l_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.More_than_One_Benzodiazepine_Order(context);
-		CqlValueSet m_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Seizure_Disorder(context);
+		bool? l_ = this.More_than_One_Benzodiazepine_Order(context);
+		CqlValueSet m_ = this.Seizure_Disorder(context);
 		IEnumerable<Condition> n_ = context.Operators.RetrieveByValueSet<Condition>(m_, default);
-		CqlValueSet o_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.REM_Sleep_Behavior_Disorder(context);
+		CqlValueSet o_ = this.REM_Sleep_Behavior_Disorder(context);
 		IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, default);
 		IEnumerable<Condition> q_ = context.Operators.Union<Condition>(n_, p_);
-		CqlValueSet r_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Benzodiazepine_Withdrawal(context);
+		CqlValueSet r_ = this.Benzodiazepine_Withdrawal(context);
 		IEnumerable<Condition> s_ = context.Operators.RetrieveByValueSet<Condition>(r_, default);
-		CqlValueSet t_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Alcohol_Withdrawal(context);
+		CqlValueSet t_ = this.Alcohol_Withdrawal(context);
 		IEnumerable<Condition> u_ = context.Operators.RetrieveByValueSet<Condition>(t_, default);
 		IEnumerable<Condition> v_ = context.Operators.Union<Condition>(s_, u_);
 		IEnumerable<Condition> w_ = context.Operators.Union<Condition>(q_, v_);
-		CqlValueSet x_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Generalized_Anxiety_Disorder(context);
+		CqlValueSet x_ = this.Generalized_Anxiety_Disorder(context);
 		IEnumerable<Condition> y_ = context.Operators.RetrieveByValueSet<Condition>(x_, default);
 		IEnumerable<Condition> z_ = context.Operators.Union<Condition>(w_, y_);
 		bool? aa_(Condition BenzodiazepineTreatedDiagnoses)
 		{
-			CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.ToPrevalenceInterval(context, BenzodiazepineTreatedDiagnoses);
-			CqlInterval<CqlDateTime> ap_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> ao_ = _QICoreCommon_2_0_000.ToPrevalenceInterval(context, BenzodiazepineTreatedDiagnoses);
+			CqlInterval<CqlDateTime> ap_ = this.Measurement_Period(context);
 			CqlDateTime aq_ = context.Operators.Start(ap_);
 			CqlQuantity ar_ = context.Operators.Quantity(1m, "year");
 			CqlDateTime as_ = context.Operators.Subtract(aq_, ar_);
-			CqlDateTime at_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Benzodiazepine_Index_Prescription_Start_Date(context);
+			CqlDateTime at_ = this.Benzodiazepine_Index_Prescription_Start_Date(context);
 			CqlInterval<CqlDateTime> au_ = context.Operators.Interval(as_, at_, true, true);
 			bool? av_ = context.Operators.Overlaps(ao_, au_, default);
 
@@ -1283,10 +1294,10 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator 3")]
-	public static bool? Numerator_3(CqlContext context)
+	public  bool? Numerator_3(CqlContext context)
 	{
-		bool? a_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Numerator_2(context);
-		bool? b_ = UseofHighRiskMedicationsintheElderlyFHIR_0_1_000.Numerator_1(context);
+		bool? a_ = this.Numerator_2(context);
+		bool? b_ = this.Numerator_1(context);
 		bool? d_ = context.Operators.Not(a_);
 		bool? e_ = context.Operators.And(b_, d_);
 		bool? f_ = context.Operators.Or(a_, e_);
@@ -1295,33 +1306,33 @@ public static class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public static IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public static CqlCode SDE_Sex(CqlContext context)
+	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}

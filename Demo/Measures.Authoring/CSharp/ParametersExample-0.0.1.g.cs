@@ -10,18 +10,22 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
-public static class ParametersExample_0_0_1
+public class ParametersExample_0_0_1(
+    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000)
 {
 
     [CqlDeclaration("Marital Status")]
     [CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status")]
-	public static CqlValueSet Marital_Status(CqlContext context) => 
+	public  CqlValueSet Marital_Status(CqlContext context) => 
 		new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", default);
 
     [CqlDeclaration("AgeThreshold")]
-	public static int? AgeThreshold(CqlContext context)
+	public  int? AgeThreshold(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
 
@@ -29,7 +33,7 @@ public static class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -38,7 +42,7 @@ public static class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("CurrentDate")]
-	public static CqlDate CurrentDate(CqlContext context)
+	public  CqlDate CurrentDate(CqlContext context)
 	{
 		CqlDate a_ = context.Operators.Today();
 
@@ -46,28 +50,28 @@ public static class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("Patient Filter")]
-	public static Patient Patient_Filter(CqlContext context)
+	public  Patient Patient_Filter(CqlContext context)
 	{
-		Patient a_ = ParametersExample_0_0_1.Patient(context);
+		Patient a_ = this.Patient(context);
 		Patient[] b_ = [
 			a_,
 		];
 		bool? c_(Patient P)
 		{
 			Code<AdministrativeGender> f_ = P?.GenderElement;
-			string g_ = FHIRHelpers_4_3_000.ToString(context, f_);
+			string g_ = _FHIRHelpers_4_3_000.ToString(context, f_);
 			bool? h_ = context.Operators.Equal(g_, "male");
 			FhirBoolean i_ = P?.ActiveElement;
-			bool? j_ = FHIRHelpers_4_3_000.ToBoolean(context, i_);
+			bool? j_ = _FHIRHelpers_4_3_000.ToBoolean(context, i_);
 			bool? k_ = context.Operators.IsTrue(j_);
 			bool? l_ = context.Operators.And(h_, k_);
 			DataType m_ = P?.Deceased;
-			bool? n_ = FHIRHelpers_4_3_000.ToBoolean(context, m_ as FhirBoolean);
+			bool? n_ = _FHIRHelpers_4_3_000.ToBoolean(context, m_ as FhirBoolean);
 			bool? o_ = context.Operators.Not(n_);
 			bool? p_ = context.Operators.And(l_, o_);
 			CodeableConcept q_ = P?.MaritalStatus;
-			CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept(context, q_);
-			CqlValueSet s_ = ParametersExample_0_0_1.Marital_Status(context);
+			CqlConcept r_ = _FHIRHelpers_4_3_000.ToConcept(context, q_);
+			CqlValueSet s_ = this.Marital_Status(context);
 			bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
 			bool? u_ = context.Operators.And(p_, t_);
 
@@ -80,30 +84,30 @@ public static class ParametersExample_0_0_1
 	}
 
     [CqlDeclaration("Patient Birthdate")]
-	public static Date Patient_Birthdate(CqlContext context)
+	public  Date Patient_Birthdate(CqlContext context)
 	{
-		Patient a_ = ParametersExample_0_0_1.Patient_Filter(context);
+		Patient a_ = this.Patient_Filter(context);
 		Date b_ = a_?.BirthDateElement;
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient Age in Years")]
-	public static int? Patient_Age_in_Years(CqlContext context)
+	public  int? Patient_Age_in_Years(CqlContext context)
 	{
-		Date a_ = ParametersExample_0_0_1.Patient_Birthdate(context);
-		CqlDate b_ = FHIRHelpers_4_3_000.ToDate(context, a_);
-		CqlDate c_ = ParametersExample_0_0_1.CurrentDate(context);
+		Date a_ = this.Patient_Birthdate(context);
+		CqlDate b_ = _FHIRHelpers_4_3_000.ToDate(context, a_);
+		CqlDate c_ = this.CurrentDate(context);
 		int? d_ = context.Operators.DurationBetween(b_, c_, "year");
 
 		return d_;
 	}
 
     [CqlDeclaration("Patient Older Than AgeThreshold")]
-	public static bool? Patient_Older_Than_AgeThreshold(CqlContext context)
+	public  bool? Patient_Older_Than_AgeThreshold(CqlContext context)
 	{
-		int? a_ = ParametersExample_0_0_1.Patient_Age_in_Years(context);
-		int? b_ = ParametersExample_0_0_1.AgeThreshold(context);
+		int? a_ = this.Patient_Age_in_Years(context);
+		int? b_ = this.AgeThreshold(context);
 		bool? c_ = context.Operators.Greater(a_, b_);
 
 		return c_;

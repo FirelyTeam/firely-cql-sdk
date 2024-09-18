@@ -10,39 +10,42 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
-public static class TestRetrieveInclude_1_0_1
+public class TestRetrieveInclude_1_0_1
 {
 
     [CqlDeclaration("Female Administrative Sex")]
     [CqlValueSet("2.16.840.1.113883.3.560.100.2")]
-	public static CqlValueSet Female_Administrative_Sex(CqlContext context) => 
+	public  CqlValueSet Female_Administrative_Sex(CqlContext context) => 
 		new CqlValueSet("2.16.840.1.113883.3.560.100.2", default);
 
     [CqlDeclaration("Other Female Reproductive Conditions")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006")]
-	public static CqlValueSet Other_Female_Reproductive_Conditions(CqlContext context) => 
+	public  CqlValueSet Other_Female_Reproductive_Conditions(CqlContext context) => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006", default);
 
     [CqlDeclaration("Genital Herpes")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049")]
-	public static CqlValueSet Genital_Herpes(CqlContext context) => 
+	public  CqlValueSet Genital_Herpes(CqlContext context) => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049", default);
 
     [CqlDeclaration("Genococcal Infections and Venereal Diseases")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001")]
-	public static CqlValueSet Genococcal_Infections_and_Venereal_Diseases(CqlContext context) => 
+	public  CqlValueSet Genococcal_Infections_and_Venereal_Diseases(CqlContext context) => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001", default);
 
     [CqlDeclaration("Inflammatory Diseases of Female Reproductive Organs")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004")]
-	public static CqlValueSet Inflammatory_Diseases_of_Female_Reproductive_Organs(CqlContext context) => 
+	public  CqlValueSet Inflammatory_Diseases_of_Female_Reproductive_Organs(CqlContext context) => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004", default);
 
     [CqlDeclaration("Chlamydia")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003")]
-	public static CqlValueSet Chlamydia(CqlContext context) => 
+	public  CqlValueSet Chlamydia(CqlContext context) => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003", default);
 
 }

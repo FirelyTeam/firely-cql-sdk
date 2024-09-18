@@ -10,307 +10,313 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
+#pragma warning disable CS9113 // Parameter is unread.
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
 [CqlLibrary("Cataracts2040BCVAwithin90DaysFHIR", "0.1.000")]
-public static class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
+public class Cataracts2040BCVAwithin90DaysFHIR_0_1_000(
+    FHIRHelpers_4_3_000 _FHIRHelpers_4_3_000,
+    SupplementalDataElements_3_4_000 _SupplementalDataElements_3_4_000,
+    QICoreCommon_2_0_000 _QICoreCommon_2_0_000)
 {
 
     [CqlDeclaration("Acute and Subacute Iridocyclitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1241")]
-	public static CqlValueSet Acute_and_Subacute_Iridocyclitis(CqlContext context) => 
+	public  CqlValueSet Acute_and_Subacute_Iridocyclitis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1241", default);
 
     [CqlDeclaration("Amblyopia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1448")]
-	public static CqlValueSet Amblyopia(CqlContext context) => 
+	public  CqlValueSet Amblyopia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1448", default);
 
     [CqlDeclaration("Best Corrected Visual Acuity Exam Using Snellen Chart")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1560")]
-	public static CqlValueSet Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart(CqlContext context) => 
+	public  CqlValueSet Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1560", default);
 
     [CqlDeclaration("Burn Confined to Eye and Adnexa")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1409")]
-	public static CqlValueSet Burn_Confined_to_Eye_and_Adnexa(CqlContext context) => 
+	public  CqlValueSet Burn_Confined_to_Eye_and_Adnexa(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1409", default);
 
     [CqlDeclaration("Cataract Congenital")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1412")]
-	public static CqlValueSet Cataract_Congenital(CqlContext context) => 
+	public  CqlValueSet Cataract_Congenital(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1412", default);
 
     [CqlDeclaration("Cataract Mature or Hypermature")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1413")]
-	public static CqlValueSet Cataract_Mature_or_Hypermature(CqlContext context) => 
+	public  CqlValueSet Cataract_Mature_or_Hypermature(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1413", default);
 
     [CqlDeclaration("Cataract Posterior Polar")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1414")]
-	public static CqlValueSet Cataract_Posterior_Polar(CqlContext context) => 
+	public  CqlValueSet Cataract_Posterior_Polar(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1414", default);
 
     [CqlDeclaration("Cataract Secondary to Ocular Disorders")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1410")]
-	public static CqlValueSet Cataract_Secondary_to_Ocular_Disorders(CqlContext context) => 
+	public  CqlValueSet Cataract_Secondary_to_Ocular_Disorders(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1410", default);
 
     [CqlDeclaration("Cataract Surgery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1411")]
-	public static CqlValueSet Cataract_Surgery(CqlContext context) => 
+	public  CqlValueSet Cataract_Surgery(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1411", default);
 
     [CqlDeclaration("Central Corneal Ulcer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1428")]
-	public static CqlValueSet Central_Corneal_Ulcer(CqlContext context) => 
+	public  CqlValueSet Central_Corneal_Ulcer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1428", default);
 
     [CqlDeclaration("Certain Types of Iridocyclitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1415")]
-	public static CqlValueSet Certain_Types_of_Iridocyclitis(CqlContext context) => 
+	public  CqlValueSet Certain_Types_of_Iridocyclitis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1415", default);
 
     [CqlDeclaration("Choroidal Degenerations")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1450")]
-	public static CqlValueSet Choroidal_Degenerations(CqlContext context) => 
+	public  CqlValueSet Choroidal_Degenerations(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1450", default);
 
     [CqlDeclaration("Choroidal Detachment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1451")]
-	public static CqlValueSet Choroidal_Detachment(CqlContext context) => 
+	public  CqlValueSet Choroidal_Detachment(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1451", default);
 
     [CqlDeclaration("Choroidal Hemorrhage and Rupture")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1452")]
-	public static CqlValueSet Choroidal_Hemorrhage_and_Rupture(CqlContext context) => 
+	public  CqlValueSet Choroidal_Hemorrhage_and_Rupture(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1452", default);
 
     [CqlDeclaration("Chronic Iridocyclitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1416")]
-	public static CqlValueSet Chronic_Iridocyclitis(CqlContext context) => 
+	public  CqlValueSet Chronic_Iridocyclitis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1416", default);
 
     [CqlDeclaration("Cloudy Cornea")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1417")]
-	public static CqlValueSet Cloudy_Cornea(CqlContext context) => 
+	public  CqlValueSet Cloudy_Cornea(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1417", default);
 
     [CqlDeclaration("Corneal Edema")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1418")]
-	public static CqlValueSet Corneal_Edema(CqlContext context) => 
+	public  CqlValueSet Corneal_Edema(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1418", default);
 
     [CqlDeclaration("Degeneration of Macula and Posterior Pole")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1453")]
-	public static CqlValueSet Degeneration_of_Macula_and_Posterior_Pole(CqlContext context) => 
+	public  CqlValueSet Degeneration_of_Macula_and_Posterior_Pole(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1453", default);
 
     [CqlDeclaration("Degenerative Disorders of Globe")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1454")]
-	public static CqlValueSet Degenerative_Disorders_of_Globe(CqlContext context) => 
+	public  CqlValueSet Degenerative_Disorders_of_Globe(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1454", default);
 
     [CqlDeclaration("Diabetic Macular Edema")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1455")]
-	public static CqlValueSet Diabetic_Macular_Edema(CqlContext context) => 
+	public  CqlValueSet Diabetic_Macular_Edema(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1455", default);
 
     [CqlDeclaration("Diabetic Retinopathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327")]
-	public static CqlValueSet Diabetic_Retinopathy(CqlContext context) => 
+	public  CqlValueSet Diabetic_Retinopathy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", default);
 
     [CqlDeclaration("Disorders of Cornea Including Corneal Opacity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1419")]
-	public static CqlValueSet Disorders_of_Cornea_Including_Corneal_Opacity(CqlContext context) => 
+	public  CqlValueSet Disorders_of_Cornea_Including_Corneal_Opacity(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1419", default);
 
     [CqlDeclaration("Disorders of Optic Chiasm")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1457")]
-	public static CqlValueSet Disorders_of_Optic_Chiasm(CqlContext context) => 
+	public  CqlValueSet Disorders_of_Optic_Chiasm(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1457", default);
 
     [CqlDeclaration("Disorders of Visual Cortex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1458")]
-	public static CqlValueSet Disorders_of_Visual_Cortex(CqlContext context) => 
+	public  CqlValueSet Disorders_of_Visual_Cortex(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1458", default);
 
     [CqlDeclaration("Disseminated Chorioretinitis and Disseminated Retinochoroiditis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1459")]
-	public static CqlValueSet Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis(CqlContext context) => 
+	public  CqlValueSet Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1459", default);
 
     [CqlDeclaration("Focal Chorioretinitis and Focal Retinochoroiditis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1460")]
-	public static CqlValueSet Focal_Chorioretinitis_and_Focal_Retinochoroiditis(CqlContext context) => 
+	public  CqlValueSet Focal_Chorioretinitis_and_Focal_Retinochoroiditis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1460", default);
 
     [CqlDeclaration("Glaucoma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1423")]
-	public static CqlValueSet Glaucoma(CqlContext context) => 
+	public  CqlValueSet Glaucoma(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1423", default);
 
     [CqlDeclaration("Glaucoma Associated with Congenital Anomalies and Dystrophies and Systemic Syndromes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1461")]
-	public static CqlValueSet Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes(CqlContext context) => 
+	public  CqlValueSet Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1461", default);
 
     [CqlDeclaration("Hereditary Choroidal Dystrophies")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1462")]
-	public static CqlValueSet Hereditary_Choroidal_Dystrophies(CqlContext context) => 
+	public  CqlValueSet Hereditary_Choroidal_Dystrophies(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1462", default);
 
     [CqlDeclaration("Hereditary Corneal Dystrophies")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1424")]
-	public static CqlValueSet Hereditary_Corneal_Dystrophies(CqlContext context) => 
+	public  CqlValueSet Hereditary_Corneal_Dystrophies(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1424", default);
 
     [CqlDeclaration("Hereditary Retinal Dystrophies")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1463")]
-	public static CqlValueSet Hereditary_Retinal_Dystrophies(CqlContext context) => 
+	public  CqlValueSet Hereditary_Retinal_Dystrophies(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1463", default);
 
     [CqlDeclaration("Hypotony of Eye")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1426")]
-	public static CqlValueSet Hypotony_of_Eye(CqlContext context) => 
+	public  CqlValueSet Hypotony_of_Eye(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1426", default);
 
     [CqlDeclaration("Injury to Optic Nerve and Pathways")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1427")]
-	public static CqlValueSet Injury_to_Optic_Nerve_and_Pathways(CqlContext context) => 
+	public  CqlValueSet Injury_to_Optic_Nerve_and_Pathways(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1427", default);
 
     [CqlDeclaration("Macular Scar of Posterior Polar")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1559")]
-	public static CqlValueSet Macular_Scar_of_Posterior_Polar(CqlContext context) => 
+	public  CqlValueSet Macular_Scar_of_Posterior_Polar(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1559", default);
 
     [CqlDeclaration("Morgagnian Cataract")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1558")]
-	public static CqlValueSet Morgagnian_Cataract(CqlContext context) => 
+	public  CqlValueSet Morgagnian_Cataract(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1558", default);
 
     [CqlDeclaration("Nystagmus and Other Irregular Eye Movements")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1465")]
-	public static CqlValueSet Nystagmus_and_Other_Irregular_Eye_Movements(CqlContext context) => 
+	public  CqlValueSet Nystagmus_and_Other_Irregular_Eye_Movements(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1465", default);
 
     [CqlDeclaration("Open Wound of Eyeball")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1430")]
-	public static CqlValueSet Open_Wound_of_Eyeball(CqlContext context) => 
+	public  CqlValueSet Open_Wound_of_Eyeball(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1430", default);
 
     [CqlDeclaration("Optic Atrophy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1466")]
-	public static CqlValueSet Optic_Atrophy(CqlContext context) => 
+	public  CqlValueSet Optic_Atrophy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1466", default);
 
     [CqlDeclaration("Optic Neuritis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1467")]
-	public static CqlValueSet Optic_Neuritis(CqlContext context) => 
+	public  CqlValueSet Optic_Neuritis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1467", default);
 
     [CqlDeclaration("Other and Unspecified Forms of Chorioretinitis and Retinochoroiditis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1468")]
-	public static CqlValueSet Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis(CqlContext context) => 
+	public  CqlValueSet Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1468", default);
 
     [CqlDeclaration("Other Background Retinopathy and Retinal Vascular Changes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1469")]
-	public static CqlValueSet Other_Background_Retinopathy_and_Retinal_Vascular_Changes(CqlContext context) => 
+	public  CqlValueSet Other_Background_Retinopathy_and_Retinal_Vascular_Changes(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1469", default);
 
     [CqlDeclaration("Other Disorders of Optic Nerve")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1471")]
-	public static CqlValueSet Other_Disorders_of_Optic_Nerve(CqlContext context) => 
+	public  CqlValueSet Other_Disorders_of_Optic_Nerve(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1471", default);
 
     [CqlDeclaration("Other Endophthalmitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1473")]
-	public static CqlValueSet Other_Endophthalmitis(CqlContext context) => 
+	public  CqlValueSet Other_Endophthalmitis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1473", default);
 
     [CqlDeclaration("Other Proliferative Retinopathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1480")]
-	public static CqlValueSet Other_Proliferative_Retinopathy(CqlContext context) => 
+	public  CqlValueSet Other_Proliferative_Retinopathy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1480", default);
 
     [CqlDeclaration("Pathologic Myopia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1432")]
-	public static CqlValueSet Pathologic_Myopia(CqlContext context) => 
+	public  CqlValueSet Pathologic_Myopia(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1432", default);
 
     [CqlDeclaration("Posterior Lenticonus")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1433")]
-	public static CqlValueSet Posterior_Lenticonus(CqlContext context) => 
+	public  CqlValueSet Posterior_Lenticonus(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1433", default);
 
     [CqlDeclaration("Prior Penetrating Keratoplasty")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1475")]
-	public static CqlValueSet Prior_Penetrating_Keratoplasty(CqlContext context) => 
+	public  CqlValueSet Prior_Penetrating_Keratoplasty(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1475", default);
 
     [CqlDeclaration("Purulent Endophthalmitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1477")]
-	public static CqlValueSet Purulent_Endophthalmitis(CqlContext context) => 
+	public  CqlValueSet Purulent_Endophthalmitis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1477", default);
 
     [CqlDeclaration("Retinal Detachment with Retinal Defect")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1478")]
-	public static CqlValueSet Retinal_Detachment_with_Retinal_Defect(CqlContext context) => 
+	public  CqlValueSet Retinal_Detachment_with_Retinal_Defect(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1478", default);
 
     [CqlDeclaration("Retinal Vascular Occlusion")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1479")]
-	public static CqlValueSet Retinal_Vascular_Occlusion(CqlContext context) => 
+	public  CqlValueSet Retinal_Vascular_Occlusion(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1479", default);
 
     [CqlDeclaration("Retrolental Fibroplasias")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1438")]
-	public static CqlValueSet Retrolental_Fibroplasias(CqlContext context) => 
+	public  CqlValueSet Retrolental_Fibroplasias(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1438", default);
 
     [CqlDeclaration("Scleritis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1226.1")]
-	public static CqlValueSet Scleritis(CqlContext context) => 
+	public  CqlValueSet Scleritis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1226.1", default);
 
     [CqlDeclaration("Separation of Retinal Layers")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1482")]
-	public static CqlValueSet Separation_of_Retinal_Layers(CqlContext context) => 
+	public  CqlValueSet Separation_of_Retinal_Layers(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1482", default);
 
     [CqlDeclaration("Traumatic Cataract")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1443")]
-	public static CqlValueSet Traumatic_Cataract(CqlContext context) => 
+	public  CqlValueSet Traumatic_Cataract(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1443", default);
 
     [CqlDeclaration("Uveitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1444")]
-	public static CqlValueSet Uveitis(CqlContext context) => 
+	public  CqlValueSet Uveitis(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1444", default);
 
     [CqlDeclaration("Vascular Disorders of Iris and Ciliary Body")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1445")]
-	public static CqlValueSet Vascular_Disorders_of_Iris_and_Ciliary_Body(CqlContext context) => 
+	public  CqlValueSet Vascular_Disorders_of_Iris_and_Ciliary_Body(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1445", default);
 
     [CqlDeclaration("Visual Acuity 20/40 or Better")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1483")]
-	public static CqlValueSet Visual_Acuity_20_40_or_Better(CqlContext context) => 
+	public  CqlValueSet Visual_Acuity_20_40_or_Better(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1483", default);
 
     [CqlDeclaration("Visual Field Defects")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1446")]
-	public static CqlValueSet Visual_Field_Defects(CqlContext context) => 
+	public  CqlValueSet Visual_Field_Defects(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1446", default);
 
     [CqlDeclaration("Best corrected visual acuity (observable entity)")]
-	public static CqlCode Best_corrected_visual_acuity__observable_entity_(CqlContext context) => 
+	public  CqlCode Best_corrected_visual_acuity__observable_entity_(CqlContext context) => 
 		new CqlCode("419775003", "http://snomed.info/sct", default, default);
 
     [CqlDeclaration("SNOMEDCT")]
-	public static CqlCode[] SNOMEDCT(CqlContext context)
+	public  CqlCode[] SNOMEDCT(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("419775003", "http://snomed.info/sct", default, default),
@@ -320,7 +326,7 @@ public static class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public static CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public  CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -331,7 +337,7 @@ public static class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("Patient")]
-	public static Patient Patient(CqlContext context)
+	public  Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -340,19 +346,19 @@ public static class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("Cataract Surgery Between January and September of Measurement Period")]
-	public static IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period(CqlContext context)
+	public  IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period(CqlContext context)
 	{
-		CqlValueSet a_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Cataract_Surgery(context);
+		CqlValueSet a_ = this.Cataract_Surgery(context);
 		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
 		bool? c_(Procedure CataractSurgery)
 		{
-			CqlInterval<CqlDateTime> e_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
 			DataType f_ = CataractSurgery?.Performed;
-			object g_ = FHIRHelpers_4_3_000.ToValue(context, f_);
-			CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.toInterval(context, g_);
+			object g_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
+			CqlInterval<CqlDateTime> h_ = _QICoreCommon_2_0_000.toInterval(context, g_);
 			bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, default);
-			object k_ = FHIRHelpers_4_3_000.ToValue(context, f_);
-			CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.toInterval(context, k_);
+			object k_ = _FHIRHelpers_4_3_000.ToValue(context, f_);
+			CqlInterval<CqlDateTime> l_ = _QICoreCommon_2_0_000.toInterval(context, k_);
 			CqlDateTime m_ = context.Operators.Start(l_);
 			CqlDateTime o_ = context.Operators.End(e_);
 			CqlQuantity p_ = context.Operators.Quantity(92m, "days");
@@ -373,16 +379,16 @@ public static class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("Initial Population")]
-	public static IEnumerable<Procedure> Initial_Population(CqlContext context)
+	public  IEnumerable<Procedure> Initial_Population(CqlContext context)
 	{
-		IEnumerable<Procedure> a_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
+		IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
 		bool? b_(Procedure CataractSurgeryPerformed)
 		{
-			Patient d_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Patient(context);
+			Patient d_ = this.Patient(context);
 			Date e_ = d_?.BirthDateElement;
 			string f_ = e_?.Value;
 			CqlDate g_ = context.Operators.ConvertStringToDate(f_);
-			CqlInterval<CqlDateTime> h_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Measurement_Period(context);
+			CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
 			CqlDateTime i_ = context.Operators.Start(h_);
 			CqlDate j_ = context.Operators.DateFrom(i_);
 			int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
@@ -396,191 +402,191 @@ public static class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("Denominator")]
-	public static IEnumerable<Procedure> Denominator(CqlContext context)
+	public  IEnumerable<Procedure> Denominator(CqlContext context)
 	{
-		IEnumerable<Procedure> a_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Initial_Population(context);
+		IEnumerable<Procedure> a_ = this.Initial_Population(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-	public static IEnumerable<Procedure> Denominator_Exclusions(CqlContext context)
+	public  IEnumerable<Procedure> Denominator_Exclusions(CqlContext context)
 	{
-		IEnumerable<Procedure> a_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
+		IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
 		IEnumerable<Procedure> b_(Procedure CataractSurgeryPerformed)
 		{
-			CqlValueSet d_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Acute_and_Subacute_Iridocyclitis(context);
+			CqlValueSet d_ = this.Acute_and_Subacute_Iridocyclitis(context);
 			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
-			CqlValueSet f_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Amblyopia(context);
+			CqlValueSet f_ = this.Amblyopia(context);
 			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
 			IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
-			CqlValueSet i_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Burn_Confined_to_Eye_and_Adnexa(context);
+			CqlValueSet i_ = this.Burn_Confined_to_Eye_and_Adnexa(context);
 			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, default);
-			CqlValueSet k_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Cataract_Secondary_to_Ocular_Disorders(context);
+			CqlValueSet k_ = this.Cataract_Secondary_to_Ocular_Disorders(context);
 			IEnumerable<Condition> l_ = context.Operators.RetrieveByValueSet<Condition>(k_, default);
 			IEnumerable<Condition> m_ = context.Operators.Union<Condition>(j_, l_);
 			IEnumerable<Condition> n_ = context.Operators.Union<Condition>(h_, m_);
-			CqlValueSet o_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Cataract_Congenital(context);
+			CqlValueSet o_ = this.Cataract_Congenital(context);
 			IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, default);
-			CqlValueSet q_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Cataract_Mature_or_Hypermature(context);
+			CqlValueSet q_ = this.Cataract_Mature_or_Hypermature(context);
 			IEnumerable<Condition> r_ = context.Operators.RetrieveByValueSet<Condition>(q_, default);
 			IEnumerable<Condition> s_ = context.Operators.Union<Condition>(p_, r_);
 			IEnumerable<Condition> t_ = context.Operators.Union<Condition>(n_, s_);
-			CqlValueSet u_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Cataract_Posterior_Polar(context);
+			CqlValueSet u_ = this.Cataract_Posterior_Polar(context);
 			IEnumerable<Condition> v_ = context.Operators.RetrieveByValueSet<Condition>(u_, default);
-			CqlValueSet w_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Central_Corneal_Ulcer(context);
+			CqlValueSet w_ = this.Central_Corneal_Ulcer(context);
 			IEnumerable<Condition> x_ = context.Operators.RetrieveByValueSet<Condition>(w_, default);
 			IEnumerable<Condition> y_ = context.Operators.Union<Condition>(v_, x_);
 			IEnumerable<Condition> z_ = context.Operators.Union<Condition>(t_, y_);
-			CqlValueSet aa_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Certain_Types_of_Iridocyclitis(context);
+			CqlValueSet aa_ = this.Certain_Types_of_Iridocyclitis(context);
 			IEnumerable<Condition> ab_ = context.Operators.RetrieveByValueSet<Condition>(aa_, default);
-			CqlValueSet ac_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Choroidal_Degenerations(context);
+			CqlValueSet ac_ = this.Choroidal_Degenerations(context);
 			IEnumerable<Condition> ad_ = context.Operators.RetrieveByValueSet<Condition>(ac_, default);
 			IEnumerable<Condition> ae_ = context.Operators.Union<Condition>(ab_, ad_);
 			IEnumerable<Condition> af_ = context.Operators.Union<Condition>(z_, ae_);
-			CqlValueSet ag_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Choroidal_Detachment(context);
+			CqlValueSet ag_ = this.Choroidal_Detachment(context);
 			IEnumerable<Condition> ah_ = context.Operators.RetrieveByValueSet<Condition>(ag_, default);
-			CqlValueSet ai_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Choroidal_Hemorrhage_and_Rupture(context);
+			CqlValueSet ai_ = this.Choroidal_Hemorrhage_and_Rupture(context);
 			IEnumerable<Condition> aj_ = context.Operators.RetrieveByValueSet<Condition>(ai_, default);
 			IEnumerable<Condition> ak_ = context.Operators.Union<Condition>(ah_, aj_);
 			IEnumerable<Condition> al_ = context.Operators.Union<Condition>(af_, ak_);
-			CqlValueSet am_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Chronic_Iridocyclitis(context);
+			CqlValueSet am_ = this.Chronic_Iridocyclitis(context);
 			IEnumerable<Condition> an_ = context.Operators.RetrieveByValueSet<Condition>(am_, default);
-			CqlValueSet ao_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Cloudy_Cornea(context);
+			CqlValueSet ao_ = this.Cloudy_Cornea(context);
 			IEnumerable<Condition> ap_ = context.Operators.RetrieveByValueSet<Condition>(ao_, default);
 			IEnumerable<Condition> aq_ = context.Operators.Union<Condition>(an_, ap_);
 			IEnumerable<Condition> ar_ = context.Operators.Union<Condition>(al_, aq_);
-			CqlValueSet as_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Corneal_Edema(context);
+			CqlValueSet as_ = this.Corneal_Edema(context);
 			IEnumerable<Condition> at_ = context.Operators.RetrieveByValueSet<Condition>(as_, default);
-			CqlValueSet au_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Disorders_of_Cornea_Including_Corneal_Opacity(context);
+			CqlValueSet au_ = this.Disorders_of_Cornea_Including_Corneal_Opacity(context);
 			IEnumerable<Condition> av_ = context.Operators.RetrieveByValueSet<Condition>(au_, default);
 			IEnumerable<Condition> aw_ = context.Operators.Union<Condition>(at_, av_);
 			IEnumerable<Condition> ax_ = context.Operators.Union<Condition>(ar_, aw_);
-			CqlValueSet ay_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Degeneration_of_Macula_and_Posterior_Pole(context);
+			CqlValueSet ay_ = this.Degeneration_of_Macula_and_Posterior_Pole(context);
 			IEnumerable<Condition> az_ = context.Operators.RetrieveByValueSet<Condition>(ay_, default);
-			CqlValueSet ba_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Degenerative_Disorders_of_Globe(context);
+			CqlValueSet ba_ = this.Degenerative_Disorders_of_Globe(context);
 			IEnumerable<Condition> bb_ = context.Operators.RetrieveByValueSet<Condition>(ba_, default);
 			IEnumerable<Condition> bc_ = context.Operators.Union<Condition>(az_, bb_);
 			IEnumerable<Condition> bd_ = context.Operators.Union<Condition>(ax_, bc_);
-			CqlValueSet be_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Diabetic_Macular_Edema(context);
+			CqlValueSet be_ = this.Diabetic_Macular_Edema(context);
 			IEnumerable<Condition> bf_ = context.Operators.RetrieveByValueSet<Condition>(be_, default);
-			CqlValueSet bg_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Diabetic_Retinopathy(context);
+			CqlValueSet bg_ = this.Diabetic_Retinopathy(context);
 			IEnumerable<Condition> bh_ = context.Operators.RetrieveByValueSet<Condition>(bg_, default);
 			IEnumerable<Condition> bi_ = context.Operators.Union<Condition>(bf_, bh_);
 			IEnumerable<Condition> bj_ = context.Operators.Union<Condition>(bd_, bi_);
-			CqlValueSet bk_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Disorders_of_Optic_Chiasm(context);
+			CqlValueSet bk_ = this.Disorders_of_Optic_Chiasm(context);
 			IEnumerable<Condition> bl_ = context.Operators.RetrieveByValueSet<Condition>(bk_, default);
-			CqlValueSet bm_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Disorders_of_Visual_Cortex(context);
+			CqlValueSet bm_ = this.Disorders_of_Visual_Cortex(context);
 			IEnumerable<Condition> bn_ = context.Operators.RetrieveByValueSet<Condition>(bm_, default);
 			IEnumerable<Condition> bo_ = context.Operators.Union<Condition>(bl_, bn_);
 			IEnumerable<Condition> bp_ = context.Operators.Union<Condition>(bj_, bo_);
-			CqlValueSet bq_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis(context);
+			CqlValueSet bq_ = this.Disseminated_Chorioretinitis_and_Disseminated_Retinochoroiditis(context);
 			IEnumerable<Condition> br_ = context.Operators.RetrieveByValueSet<Condition>(bq_, default);
-			CqlValueSet bs_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Focal_Chorioretinitis_and_Focal_Retinochoroiditis(context);
+			CqlValueSet bs_ = this.Focal_Chorioretinitis_and_Focal_Retinochoroiditis(context);
 			IEnumerable<Condition> bt_ = context.Operators.RetrieveByValueSet<Condition>(bs_, default);
 			IEnumerable<Condition> bu_ = context.Operators.Union<Condition>(br_, bt_);
 			IEnumerable<Condition> bv_ = context.Operators.Union<Condition>(bp_, bu_);
-			CqlValueSet bw_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Glaucoma(context);
+			CqlValueSet bw_ = this.Glaucoma(context);
 			IEnumerable<Condition> bx_ = context.Operators.RetrieveByValueSet<Condition>(bw_, default);
-			CqlValueSet by_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes(context);
+			CqlValueSet by_ = this.Glaucoma_Associated_with_Congenital_Anomalies_and_Dystrophies_and_Systemic_Syndromes(context);
 			IEnumerable<Condition> bz_ = context.Operators.RetrieveByValueSet<Condition>(by_, default);
 			IEnumerable<Condition> ca_ = context.Operators.Union<Condition>(bx_, bz_);
 			IEnumerable<Condition> cb_ = context.Operators.Union<Condition>(bv_, ca_);
-			CqlValueSet cc_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Hereditary_Choroidal_Dystrophies(context);
+			CqlValueSet cc_ = this.Hereditary_Choroidal_Dystrophies(context);
 			IEnumerable<Condition> cd_ = context.Operators.RetrieveByValueSet<Condition>(cc_, default);
-			CqlValueSet ce_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Hereditary_Corneal_Dystrophies(context);
+			CqlValueSet ce_ = this.Hereditary_Corneal_Dystrophies(context);
 			IEnumerable<Condition> cf_ = context.Operators.RetrieveByValueSet<Condition>(ce_, default);
 			IEnumerable<Condition> cg_ = context.Operators.Union<Condition>(cd_, cf_);
 			IEnumerable<Condition> ch_ = context.Operators.Union<Condition>(cb_, cg_);
-			CqlValueSet ci_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Hereditary_Retinal_Dystrophies(context);
+			CqlValueSet ci_ = this.Hereditary_Retinal_Dystrophies(context);
 			IEnumerable<Condition> cj_ = context.Operators.RetrieveByValueSet<Condition>(ci_, default);
-			CqlValueSet ck_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Hypotony_of_Eye(context);
+			CqlValueSet ck_ = this.Hypotony_of_Eye(context);
 			IEnumerable<Condition> cl_ = context.Operators.RetrieveByValueSet<Condition>(ck_, default);
 			IEnumerable<Condition> cm_ = context.Operators.Union<Condition>(cj_, cl_);
 			IEnumerable<Condition> cn_ = context.Operators.Union<Condition>(ch_, cm_);
-			CqlValueSet co_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Injury_to_Optic_Nerve_and_Pathways(context);
+			CqlValueSet co_ = this.Injury_to_Optic_Nerve_and_Pathways(context);
 			IEnumerable<Condition> cp_ = context.Operators.RetrieveByValueSet<Condition>(co_, default);
-			CqlValueSet cq_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Macular_Scar_of_Posterior_Polar(context);
+			CqlValueSet cq_ = this.Macular_Scar_of_Posterior_Polar(context);
 			IEnumerable<Condition> cr_ = context.Operators.RetrieveByValueSet<Condition>(cq_, default);
 			IEnumerable<Condition> cs_ = context.Operators.Union<Condition>(cp_, cr_);
 			IEnumerable<Condition> ct_ = context.Operators.Union<Condition>(cn_, cs_);
-			CqlValueSet cu_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Morgagnian_Cataract(context);
+			CqlValueSet cu_ = this.Morgagnian_Cataract(context);
 			IEnumerable<Condition> cv_ = context.Operators.RetrieveByValueSet<Condition>(cu_, default);
-			CqlValueSet cw_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Nystagmus_and_Other_Irregular_Eye_Movements(context);
+			CqlValueSet cw_ = this.Nystagmus_and_Other_Irregular_Eye_Movements(context);
 			IEnumerable<Condition> cx_ = context.Operators.RetrieveByValueSet<Condition>(cw_, default);
 			IEnumerable<Condition> cy_ = context.Operators.Union<Condition>(cv_, cx_);
 			IEnumerable<Condition> cz_ = context.Operators.Union<Condition>(ct_, cy_);
-			CqlValueSet da_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Open_Wound_of_Eyeball(context);
+			CqlValueSet da_ = this.Open_Wound_of_Eyeball(context);
 			IEnumerable<Condition> db_ = context.Operators.RetrieveByValueSet<Condition>(da_, default);
-			CqlValueSet dc_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Optic_Atrophy(context);
+			CqlValueSet dc_ = this.Optic_Atrophy(context);
 			IEnumerable<Condition> dd_ = context.Operators.RetrieveByValueSet<Condition>(dc_, default);
 			IEnumerable<Condition> de_ = context.Operators.Union<Condition>(db_, dd_);
 			IEnumerable<Condition> df_ = context.Operators.Union<Condition>(cz_, de_);
-			CqlValueSet dg_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Optic_Neuritis(context);
+			CqlValueSet dg_ = this.Optic_Neuritis(context);
 			IEnumerable<Condition> dh_ = context.Operators.RetrieveByValueSet<Condition>(dg_, default);
-			CqlValueSet di_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis(context);
+			CqlValueSet di_ = this.Other_and_Unspecified_Forms_of_Chorioretinitis_and_Retinochoroiditis(context);
 			IEnumerable<Condition> dj_ = context.Operators.RetrieveByValueSet<Condition>(di_, default);
 			IEnumerable<Condition> dk_ = context.Operators.Union<Condition>(dh_, dj_);
 			IEnumerable<Condition> dl_ = context.Operators.Union<Condition>(df_, dk_);
-			CqlValueSet dm_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Other_Background_Retinopathy_and_Retinal_Vascular_Changes(context);
+			CqlValueSet dm_ = this.Other_Background_Retinopathy_and_Retinal_Vascular_Changes(context);
 			IEnumerable<Condition> dn_ = context.Operators.RetrieveByValueSet<Condition>(dm_, default);
-			CqlValueSet do_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Other_Disorders_of_Optic_Nerve(context);
+			CqlValueSet do_ = this.Other_Disorders_of_Optic_Nerve(context);
 			IEnumerable<Condition> dp_ = context.Operators.RetrieveByValueSet<Condition>(do_, default);
 			IEnumerable<Condition> dq_ = context.Operators.Union<Condition>(dn_, dp_);
 			IEnumerable<Condition> dr_ = context.Operators.Union<Condition>(dl_, dq_);
-			CqlValueSet ds_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Other_Endophthalmitis(context);
+			CqlValueSet ds_ = this.Other_Endophthalmitis(context);
 			IEnumerable<Condition> dt_ = context.Operators.RetrieveByValueSet<Condition>(ds_, default);
-			CqlValueSet du_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Other_Proliferative_Retinopathy(context);
+			CqlValueSet du_ = this.Other_Proliferative_Retinopathy(context);
 			IEnumerable<Condition> dv_ = context.Operators.RetrieveByValueSet<Condition>(du_, default);
 			IEnumerable<Condition> dw_ = context.Operators.Union<Condition>(dt_, dv_);
 			IEnumerable<Condition> dx_ = context.Operators.Union<Condition>(dr_, dw_);
-			CqlValueSet dy_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Pathologic_Myopia(context);
+			CqlValueSet dy_ = this.Pathologic_Myopia(context);
 			IEnumerable<Condition> dz_ = context.Operators.RetrieveByValueSet<Condition>(dy_, default);
-			CqlValueSet ea_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Posterior_Lenticonus(context);
+			CqlValueSet ea_ = this.Posterior_Lenticonus(context);
 			IEnumerable<Condition> eb_ = context.Operators.RetrieveByValueSet<Condition>(ea_, default);
 			IEnumerable<Condition> ec_ = context.Operators.Union<Condition>(dz_, eb_);
 			IEnumerable<Condition> ed_ = context.Operators.Union<Condition>(dx_, ec_);
-			CqlValueSet ee_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Prior_Penetrating_Keratoplasty(context);
+			CqlValueSet ee_ = this.Prior_Penetrating_Keratoplasty(context);
 			IEnumerable<Condition> ef_ = context.Operators.RetrieveByValueSet<Condition>(ee_, default);
-			CqlValueSet eg_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Purulent_Endophthalmitis(context);
+			CqlValueSet eg_ = this.Purulent_Endophthalmitis(context);
 			IEnumerable<Condition> eh_ = context.Operators.RetrieveByValueSet<Condition>(eg_, default);
 			IEnumerable<Condition> ei_ = context.Operators.Union<Condition>(ef_, eh_);
 			IEnumerable<Condition> ej_ = context.Operators.Union<Condition>(ed_, ei_);
-			CqlValueSet ek_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Retinal_Detachment_with_Retinal_Defect(context);
+			CqlValueSet ek_ = this.Retinal_Detachment_with_Retinal_Defect(context);
 			IEnumerable<Condition> el_ = context.Operators.RetrieveByValueSet<Condition>(ek_, default);
-			CqlValueSet em_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Retinal_Vascular_Occlusion(context);
+			CqlValueSet em_ = this.Retinal_Vascular_Occlusion(context);
 			IEnumerable<Condition> en_ = context.Operators.RetrieveByValueSet<Condition>(em_, default);
 			IEnumerable<Condition> eo_ = context.Operators.Union<Condition>(el_, en_);
 			IEnumerable<Condition> ep_ = context.Operators.Union<Condition>(ej_, eo_);
-			CqlValueSet eq_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Retrolental_Fibroplasias(context);
+			CqlValueSet eq_ = this.Retrolental_Fibroplasias(context);
 			IEnumerable<Condition> er_ = context.Operators.RetrieveByValueSet<Condition>(eq_, default);
-			CqlValueSet es_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Scleritis(context);
+			CqlValueSet es_ = this.Scleritis(context);
 			IEnumerable<Condition> et_ = context.Operators.RetrieveByValueSet<Condition>(es_, default);
 			IEnumerable<Condition> eu_ = context.Operators.Union<Condition>(er_, et_);
 			IEnumerable<Condition> ev_ = context.Operators.Union<Condition>(ep_, eu_);
-			CqlValueSet ew_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Separation_of_Retinal_Layers(context);
+			CqlValueSet ew_ = this.Separation_of_Retinal_Layers(context);
 			IEnumerable<Condition> ex_ = context.Operators.RetrieveByValueSet<Condition>(ew_, default);
-			CqlValueSet ey_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Traumatic_Cataract(context);
+			CqlValueSet ey_ = this.Traumatic_Cataract(context);
 			IEnumerable<Condition> ez_ = context.Operators.RetrieveByValueSet<Condition>(ey_, default);
 			IEnumerable<Condition> fa_ = context.Operators.Union<Condition>(ex_, ez_);
 			IEnumerable<Condition> fb_ = context.Operators.Union<Condition>(ev_, fa_);
-			CqlValueSet fc_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Uveitis(context);
+			CqlValueSet fc_ = this.Uveitis(context);
 			IEnumerable<Condition> fd_ = context.Operators.RetrieveByValueSet<Condition>(fc_, default);
-			CqlValueSet fe_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Vascular_Disorders_of_Iris_and_Ciliary_Body(context);
+			CqlValueSet fe_ = this.Vascular_Disorders_of_Iris_and_Ciliary_Body(context);
 			IEnumerable<Condition> ff_ = context.Operators.RetrieveByValueSet<Condition>(fe_, default);
 			IEnumerable<Condition> fg_ = context.Operators.Union<Condition>(fd_, ff_);
 			IEnumerable<Condition> fh_ = context.Operators.Union<Condition>(fb_, fg_);
-			CqlValueSet fi_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Visual_Field_Defects(context);
+			CqlValueSet fi_ = this.Visual_Field_Defects(context);
 			IEnumerable<Condition> fj_ = context.Operators.RetrieveByValueSet<Condition>(fi_, default);
 			IEnumerable<Condition> fk_ = context.Operators.Union<Condition>(fh_, fj_);
 			bool? fl_(Condition ComorbidDiagnosis)
 			{
-				CqlInterval<CqlDateTime> fp_ = QICoreCommon_2_0_000.prevalenceInterval(context, ComorbidDiagnosis);
+				CqlInterval<CqlDateTime> fp_ = _QICoreCommon_2_0_000.prevalenceInterval(context, ComorbidDiagnosis);
 				DataType fq_ = CataractSurgeryPerformed?.Performed;
-				object fr_ = FHIRHelpers_4_3_000.ToValue(context, fq_);
-				CqlInterval<CqlDateTime> fs_ = QICoreCommon_2_0_000.toInterval(context, fr_);
+				object fr_ = _FHIRHelpers_4_3_000.ToValue(context, fq_);
+				CqlInterval<CqlDateTime> fs_ = _QICoreCommon_2_0_000.toInterval(context, fr_);
 				bool? ft_ = context.Operators.OverlapsBefore(fp_, fs_, default);
-				bool? fu_ = QICoreCommon_2_0_000.isActive(context, ComorbidDiagnosis);
+				bool? fu_ = _QICoreCommon_2_0_000.isActive(context, ComorbidDiagnosis);
 				bool? fv_ = context.Operators.And(ft_, fu_);
 
 				return fv_;
@@ -598,36 +604,36 @@ public static class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("Numerator")]
-	public static IEnumerable<Procedure> Numerator(CqlContext context)
+	public  IEnumerable<Procedure> Numerator(CqlContext context)
 	{
-		IEnumerable<Procedure> a_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
+		IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
 		IEnumerable<Procedure> b_(Procedure CataractSurgeryPerformed)
 		{
-			CqlCode d_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Best_corrected_visual_acuity__observable_entity_(context);
+			CqlCode d_ = this.Best_corrected_visual_acuity__observable_entity_(context);
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
 			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default);
-			CqlValueSet g_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart(context);
+			CqlValueSet g_ = this.Best_Corrected_Visual_Acuity_Exam_Using_Snellen_Chart(context);
 			IEnumerable<Observation> h_ = context.Operators.RetrieveByValueSet<Observation>(g_, default);
 			IEnumerable<Observation> i_ = context.Operators.Union<Observation>(f_, h_);
 			bool? j_(Observation VisualAcuityExamPerformed)
 			{
 				DataType n_ = VisualAcuityExamPerformed?.Effective;
-				object o_ = FHIRHelpers_4_3_000.ToValue(context, n_);
-				CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.toInterval(context, o_);
+				object o_ = _FHIRHelpers_4_3_000.ToValue(context, n_);
+				CqlInterval<CqlDateTime> p_ = _QICoreCommon_2_0_000.toInterval(context, o_);
 				CqlDateTime q_ = context.Operators.Start(p_);
 				DataType r_ = CataractSurgeryPerformed?.Performed;
-				object s_ = FHIRHelpers_4_3_000.ToValue(context, r_);
-				CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.toInterval(context, s_);
+				object s_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
+				CqlInterval<CqlDateTime> t_ = _QICoreCommon_2_0_000.toInterval(context, s_);
 				CqlDateTime u_ = context.Operators.End(t_);
-				object w_ = FHIRHelpers_4_3_000.ToValue(context, r_);
-				CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.toInterval(context, w_);
+				object w_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
+				CqlInterval<CqlDateTime> x_ = _QICoreCommon_2_0_000.toInterval(context, w_);
 				CqlDateTime y_ = context.Operators.End(x_);
 				CqlQuantity z_ = context.Operators.Quantity(90m, "days");
 				CqlDateTime aa_ = context.Operators.Add(y_, z_);
 				CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(u_, aa_, false, true);
 				bool? ac_ = context.Operators.In<CqlDateTime>(q_, ab_, "day");
-				object ae_ = FHIRHelpers_4_3_000.ToValue(context, r_);
-				CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.toInterval(context, ae_);
+				object ae_ = _FHIRHelpers_4_3_000.ToValue(context, r_);
+				CqlInterval<CqlDateTime> af_ = _QICoreCommon_2_0_000.toInterval(context, ae_);
 				CqlDateTime ag_ = context.Operators.End(af_);
 				bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
 				bool? ai_ = context.Operators.And(ac_, ah_);
@@ -644,8 +650,8 @@ public static class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 				bool? ao_ = context.Operators.In<string>(am_, an_ as IEnumerable<string>);
 				bool? ap_ = context.Operators.And(ai_, ao_);
 				DataType aq_ = VisualAcuityExamPerformed?.Value;
-				object ar_ = FHIRHelpers_4_3_000.ToValue(context, aq_);
-				CqlValueSet as_ = Cataracts2040BCVAwithin90DaysFHIR_0_1_000.Visual_Acuity_20_40_or_Better(context);
+				object ar_ = _FHIRHelpers_4_3_000.ToValue(context, aq_);
+				CqlValueSet as_ = this.Visual_Acuity_20_40_or_Better(context);
 				bool? at_ = context.Operators.ConceptInValueSet(ar_ as CqlConcept, as_);
 				bool? au_ = context.Operators.And(ap_, at_);
 
@@ -664,33 +670,33 @@ public static class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public static IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public  IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.SDE_Payer(context);
+		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = _SupplementalDataElements_3_4_000.SDE_Payer(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public static (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public  (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.SDE_Race(context);
+		(IEnumerable<CqlCode> codes, string display)? a_ = _SupplementalDataElements_3_4_000.SDE_Race(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public static CqlCode SDE_Sex(CqlContext context)
+	public  CqlCode SDE_Sex(CqlContext context)
 	{
-		CqlCode a_ = SupplementalDataElements_3_4_000.SDE_Sex(context);
+		CqlCode a_ = _SupplementalDataElements_3_4_000.SDE_Sex(context);
 
 		return a_;
 	}
