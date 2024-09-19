@@ -198,14 +198,17 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indentLevel, $"[CqlLibrary(\"{libraryAttribute}\", \"{versionAttribute}\")]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
             if (PartialClass)
-                writer.WriteLine(indentLevel, $"partial static class {className}");
+                writer.WriteLine(indentLevel, $"public partial class {className}");
             else
-                writer.WriteLine(indentLevel, $"public static class {className}");
+                writer.WriteLine(indentLevel, $"public class {className}");
             writer.WriteLine(indentLevel, "{");
             writer.WriteLine();
             indentLevel += 1;
             // Class
             {
+                writer.WriteLine(indentLevel, $"public static {className} Instance {{ get; }}  = new();");
+                writer.WriteLine();
+
                 writeMethods(definitions, libraryName, writer, indentLevel);
                 indentLevel -= 1;
                 writer.WriteLine(indentLevel, "}");
@@ -219,7 +222,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 foreach (var overload in kvp.Value)
                 {
                     definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
-                    WriteMemoizedInstanceMethod(libraryName, writer, indentLevel, kvp.Key, overload.T, tags);
+                    writeMethod(libraryName, writer, indentLevel, kvp.Key, overload.T, tags);
                     writer.WriteLine();
                 }
             }
@@ -277,7 +280,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return sorted;
         }
 
-        private void WriteMemoizedInstanceMethod(string libraryName, TextWriter writer, int indentLevel,
+        private void writeMethod(string libraryName, TextWriter writer, int indentLevel,
             string cqlName,
             LambdaExpression overload,
             ILookup<string, string>? tags)
@@ -321,14 +324,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                 }
 
-                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public static");
-                writer.Write(func);
+                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
             }
             else
             {
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public static"));
+                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
                 //      writer.WriteLine();
             }
         }
