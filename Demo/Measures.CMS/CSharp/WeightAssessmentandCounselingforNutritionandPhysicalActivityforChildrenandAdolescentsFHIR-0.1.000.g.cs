@@ -20,7 +20,11 @@ public static partial class WeightAssessmentandCounselingforNutritionandPhysical
 {
     public static IServiceCollection AddWeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000>();
+        services.TryAddSingleton<WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();
         services.AddSupplementalDataElements_3_4_000();

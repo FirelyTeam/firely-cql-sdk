@@ -20,7 +20,11 @@ public static partial class SupplementalDataElements_3_4_000ServiceCollectionExt
 {
     public static IServiceCollection AddSupplementalDataElements_3_4_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<SupplementalDataElements_3_4_000>();
+        services.TryAddSingleton<SupplementalDataElements_3_4_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["SupplementalDataElements_3_4_000"]);
+            return ActivatorUtilities.CreateInstance<SupplementalDataElements_3_4_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         return services;
     }

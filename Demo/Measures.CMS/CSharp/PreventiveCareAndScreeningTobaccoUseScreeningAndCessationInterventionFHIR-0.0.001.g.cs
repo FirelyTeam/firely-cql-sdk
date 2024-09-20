@@ -20,7 +20,11 @@ public static partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCess
 {
     public static IServiceCollection AddPreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001(this IServiceCollection services)
     {
-        services.TryAddSingleton<PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001>();
+        services.TryAddSingleton<PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001"]);
+            return ActivatorUtilities.CreateInstance<PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001>(sp);
+        });
         services.AddCQMCommon_2_0_000();
         services.AddStatus_1_6_000();
         services.AddFHIRHelpers_4_3_000();

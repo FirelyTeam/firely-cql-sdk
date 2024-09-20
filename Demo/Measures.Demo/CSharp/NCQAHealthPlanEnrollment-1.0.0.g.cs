@@ -20,7 +20,11 @@ public static partial class NCQAHealthPlanEnrollment_1_0_0ServiceCollectionExten
 {
     public static IServiceCollection AddNCQAHealthPlanEnrollment_1_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<NCQAHealthPlanEnrollment_1_0_0>();
+        services.TryAddSingleton<NCQAHealthPlanEnrollment_1_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["NCQAHealthPlanEnrollment_1_0_0"]);
+            return ActivatorUtilities.CreateInstance<NCQAHealthPlanEnrollment_1_0_0>(sp);
+        });
         services.AddNCQACQLBase_1_0_0();
         services.AddFHIRHelpers_4_0_001();
         services.AddNCQATerminology_1_0_0();

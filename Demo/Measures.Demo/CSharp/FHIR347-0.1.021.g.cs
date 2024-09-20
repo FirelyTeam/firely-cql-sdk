@@ -20,7 +20,11 @@ public static partial class FHIR347_0_1_021ServiceCollectionExtensions
 {
     public static IServiceCollection AddFHIR347_0_1_021(this IServiceCollection services)
     {
-        services.TryAddSingleton<FHIR347_0_1_021>();
+        services.TryAddSingleton<FHIR347_0_1_021>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["FHIR347_0_1_021"]);
+            return ActivatorUtilities.CreateInstance<FHIR347_0_1_021>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddSupplementalDataElementsFHIR4_2_0_000();
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();

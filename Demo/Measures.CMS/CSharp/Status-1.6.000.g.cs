@@ -20,7 +20,11 @@ public static partial class Status_1_6_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddStatus_1_6_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<Status_1_6_000>();
+        services.TryAddSingleton<Status_1_6_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["Status_1_6_000"]);
+            return ActivatorUtilities.CreateInstance<Status_1_6_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         return services;
     }

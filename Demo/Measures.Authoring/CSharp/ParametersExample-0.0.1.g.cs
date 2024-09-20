@@ -20,7 +20,11 @@ public static partial class ParametersExample_0_0_1ServiceCollectionExtensions
 {
     public static IServiceCollection AddParametersExample_0_0_1(this IServiceCollection services)
     {
-        services.TryAddSingleton<ParametersExample_0_0_1>();
+        services.TryAddSingleton<ParametersExample_0_0_1>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["ParametersExample_0_0_1"]);
+            return ActivatorUtilities.CreateInstance<ParametersExample_0_0_1>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         return services;
     }

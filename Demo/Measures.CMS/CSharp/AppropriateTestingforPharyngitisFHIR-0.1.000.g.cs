@@ -20,7 +20,11 @@ public static partial class AppropriateTestingforPharyngitisFHIR_0_1_000ServiceC
 {
     public static IServiceCollection AddAppropriateTestingforPharyngitisFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<AppropriateTestingforPharyngitisFHIR_0_1_000>();
+        services.TryAddSingleton<AppropriateTestingforPharyngitisFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AppropriateTestingforPharyngitisFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<AppropriateTestingforPharyngitisFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddCQMCommon_2_0_000();

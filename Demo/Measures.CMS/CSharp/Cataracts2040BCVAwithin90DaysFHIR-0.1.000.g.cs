@@ -20,7 +20,11 @@ public static partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000ServiceColl
 {
     public static IServiceCollection AddCataracts2040BCVAwithin90DaysFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<Cataracts2040BCVAwithin90DaysFHIR_0_1_000>();
+        services.TryAddSingleton<Cataracts2040BCVAwithin90DaysFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["Cataracts2040BCVAwithin90DaysFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<Cataracts2040BCVAwithin90DaysFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddQICoreCommon_2_0_000();

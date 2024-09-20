@@ -20,7 +20,11 @@ public static partial class RR23_1_0_0ServiceCollectionExtensions
 {
     public static IServiceCollection AddRR23_1_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<RR23_1_0_0>();
+        services.TryAddSingleton<RR23_1_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["RR23_1_0_0"]);
+            return ActivatorUtilities.CreateInstance<RR23_1_0_0>(sp);
+        });
         services.AddFHIRHelpers_4_0_1();
         return services;
     }

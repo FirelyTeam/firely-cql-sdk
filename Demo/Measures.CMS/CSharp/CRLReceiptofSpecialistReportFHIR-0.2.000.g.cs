@@ -20,7 +20,11 @@ public static partial class CRLReceiptofSpecialistReportFHIR_0_2_000ServiceColle
 {
     public static IServiceCollection AddCRLReceiptofSpecialistReportFHIR_0_2_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<CRLReceiptofSpecialistReportFHIR_0_2_000>();
+        services.TryAddSingleton<CRLReceiptofSpecialistReportFHIR_0_2_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["CRLReceiptofSpecialistReportFHIR_0_2_000"]);
+            return ActivatorUtilities.CreateInstance<CRLReceiptofSpecialistReportFHIR_0_2_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddQICoreCommon_2_0_000();

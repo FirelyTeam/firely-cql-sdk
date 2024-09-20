@@ -20,7 +20,11 @@ public static partial class DementiaCognitiveAssessmentFHIR_0_1_000ServiceCollec
 {
     public static IServiceCollection AddDementiaCognitiveAssessmentFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<DementiaCognitiveAssessmentFHIR_0_1_000>();
+        services.TryAddSingleton<DementiaCognitiveAssessmentFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["DementiaCognitiveAssessmentFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<DementiaCognitiveAssessmentFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddQICoreCommon_2_0_000();

@@ -20,7 +20,11 @@ public static partial class PCMaternal_5_16_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddPCMaternal_5_16_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<PCMaternal_5_16_000>();
+        services.TryAddSingleton<PCMaternal_5_16_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["PCMaternal_5_16_000"]);
+            return ActivatorUtilities.CreateInstance<PCMaternal_5_16_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddCQMCommon_2_0_000();
         services.AddQICoreCommon_2_0_000();

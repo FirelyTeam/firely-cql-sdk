@@ -20,7 +20,11 @@ public static partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 {
     public static IServiceCollection AddAdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000>();
+        services.TryAddSingleton<AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000"]);
+            return ActivatorUtilities.CreateInstance<AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
         services.AddCumulativeMedicationDurationFHIR4_1_0_000();

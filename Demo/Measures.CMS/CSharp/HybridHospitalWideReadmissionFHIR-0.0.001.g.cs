@@ -20,7 +20,11 @@ public static partial class HybridHospitalWideReadmissionFHIR_0_0_001ServiceColl
 {
     public static IServiceCollection AddHybridHospitalWideReadmissionFHIR_0_0_001(this IServiceCollection services)
     {
-        services.TryAddSingleton<HybridHospitalWideReadmissionFHIR_0_0_001>();
+        services.TryAddSingleton<HybridHospitalWideReadmissionFHIR_0_0_001>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["HybridHospitalWideReadmissionFHIR_0_0_001"]);
+            return ActivatorUtilities.CreateInstance<HybridHospitalWideReadmissionFHIR_0_0_001>(sp);
+        });
         services.AddCQMCommon_2_0_000();
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();

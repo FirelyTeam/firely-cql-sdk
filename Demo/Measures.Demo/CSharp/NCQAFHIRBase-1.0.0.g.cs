@@ -20,7 +20,11 @@ public static partial class NCQAFHIRBase_1_0_0ServiceCollectionExtensions
 {
     public static IServiceCollection AddNCQAFHIRBase_1_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<NCQAFHIRBase_1_0_0>();
+        services.TryAddSingleton<NCQAFHIRBase_1_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["NCQAFHIRBase_1_0_0"]);
+            return ActivatorUtilities.CreateInstance<NCQAFHIRBase_1_0_0>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         return services;
     }

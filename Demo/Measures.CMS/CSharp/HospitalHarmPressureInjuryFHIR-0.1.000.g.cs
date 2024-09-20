@@ -20,7 +20,11 @@ public static partial class HospitalHarmPressureInjuryFHIR_0_1_000ServiceCollect
 {
     public static IServiceCollection AddHospitalHarmPressureInjuryFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<HospitalHarmPressureInjuryFHIR_0_1_000>();
+        services.TryAddSingleton<HospitalHarmPressureInjuryFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["HospitalHarmPressureInjuryFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<HospitalHarmPressureInjuryFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddCQMCommon_2_0_000();

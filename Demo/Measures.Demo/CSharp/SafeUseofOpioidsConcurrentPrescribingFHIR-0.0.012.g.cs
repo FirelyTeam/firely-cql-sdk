@@ -20,7 +20,11 @@ public static partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012Ser
 {
     public static IServiceCollection AddSafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012(this IServiceCollection services)
     {
-        services.TryAddSingleton<SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012>();
+        services.TryAddSingleton<SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012"]);
+            return ActivatorUtilities.CreateInstance<SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddSupplementalDataElementsFHIR4_2_0_000();
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();

@@ -20,7 +20,11 @@ public static partial class BreastCancerScreeningsFHIR_0_0_009ServiceCollectionE
 {
     public static IServiceCollection AddBreastCancerScreeningsFHIR_0_0_009(this IServiceCollection services)
     {
-        services.TryAddSingleton<BreastCancerScreeningsFHIR_0_0_009>();
+        services.TryAddSingleton<BreastCancerScreeningsFHIR_0_0_009>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["BreastCancerScreeningsFHIR_0_0_009"]);
+            return ActivatorUtilities.CreateInstance<BreastCancerScreeningsFHIR_0_0_009>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddSupplementalDataElementsFHIR4_2_0_000();
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();

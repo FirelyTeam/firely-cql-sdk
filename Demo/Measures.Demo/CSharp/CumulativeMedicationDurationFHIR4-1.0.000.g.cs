@@ -20,7 +20,11 @@ public static partial class CumulativeMedicationDurationFHIR4_1_0_000ServiceColl
 {
     public static IServiceCollection AddCumulativeMedicationDurationFHIR4_1_0_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<CumulativeMedicationDurationFHIR4_1_0_000>();
+        services.TryAddSingleton<CumulativeMedicationDurationFHIR4_1_0_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["CumulativeMedicationDurationFHIR4_1_0_000"]);
+            return ActivatorUtilities.CreateInstance<CumulativeMedicationDurationFHIR4_1_0_000>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         return services;
     }

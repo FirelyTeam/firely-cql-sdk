@@ -20,7 +20,11 @@ public static partial class DiabetesEyeExamFHIR_0_0_001ServiceCollectionExtensio
 {
     public static IServiceCollection AddDiabetesEyeExamFHIR_0_0_001(this IServiceCollection services)
     {
-        services.TryAddSingleton<DiabetesEyeExamFHIR_0_0_001>();
+        services.TryAddSingleton<DiabetesEyeExamFHIR_0_0_001>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["DiabetesEyeExamFHIR_0_0_001"]);
+            return ActivatorUtilities.CreateInstance<DiabetesEyeExamFHIR_0_0_001>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddQICoreCommon_2_0_000();

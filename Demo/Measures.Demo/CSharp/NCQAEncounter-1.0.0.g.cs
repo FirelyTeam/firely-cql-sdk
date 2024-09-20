@@ -20,7 +20,11 @@ public static partial class NCQAEncounter_1_0_0ServiceCollectionExtensions
 {
     public static IServiceCollection AddNCQAEncounter_1_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<NCQAEncounter_1_0_0>();
+        services.TryAddSingleton<NCQAEncounter_1_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["NCQAEncounter_1_0_0"]);
+            return ActivatorUtilities.CreateInstance<NCQAEncounter_1_0_0>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddNCQAFHIRBase_1_0_0();
         services.AddNCQAStatus_1_0_0();

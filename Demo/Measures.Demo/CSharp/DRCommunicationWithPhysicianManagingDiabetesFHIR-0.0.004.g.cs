@@ -20,7 +20,11 @@ public static partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0
 {
     public static IServiceCollection AddDRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004(this IServiceCollection services)
     {
-        services.TryAddSingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>();
+        services.TryAddSingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004"]);
+            return ActivatorUtilities.CreateInstance<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddSupplementalDataElementsFHIR4_2_0_000();
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();

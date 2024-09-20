@@ -20,7 +20,11 @@ public static partial class Hospice_6_9_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddHospice_6_9_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<Hospice_6_9_000>();
+        services.TryAddSingleton<Hospice_6_9_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["Hospice_6_9_000"]);
+            return ActivatorUtilities.CreateInstance<Hospice_6_9_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();
         services.AddStatus_1_6_000();

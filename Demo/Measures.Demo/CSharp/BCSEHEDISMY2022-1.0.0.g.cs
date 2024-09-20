@@ -20,7 +20,11 @@ public static partial class BCSEHEDISMY2022_1_0_0ServiceCollectionExtensions
 {
     public static IServiceCollection AddBCSEHEDISMY2022_1_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<BCSEHEDISMY2022_1_0_0>();
+        services.TryAddSingleton<BCSEHEDISMY2022_1_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["BCSEHEDISMY2022_1_0_0"]);
+            return ActivatorUtilities.CreateInstance<BCSEHEDISMY2022_1_0_0>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddNCQAHealthPlanEnrollment_1_0_0();
         services.AddNCQAStatus_1_0_0();

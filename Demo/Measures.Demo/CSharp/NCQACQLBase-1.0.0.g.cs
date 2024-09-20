@@ -20,7 +20,11 @@ public static partial class NCQACQLBase_1_0_0ServiceCollectionExtensions
 {
     public static IServiceCollection AddNCQACQLBase_1_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<NCQACQLBase_1_0_0>();
+        services.TryAddSingleton<NCQACQLBase_1_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["NCQACQLBase_1_0_0"]);
+            return ActivatorUtilities.CreateInstance<NCQACQLBase_1_0_0>(sp);
+        });
         return services;
     }
 }

@@ -20,7 +20,11 @@ public static partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001Serv
 {
     public static IServiceCollection AddChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001(this IServiceCollection services)
     {
-        services.TryAddSingleton<ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001>();
+        services.TryAddSingleton<ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001"]);
+            return ActivatorUtilities.CreateInstance<ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001>(sp);
+        });
         services.AddQICoreCommon_2_0_000();
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();

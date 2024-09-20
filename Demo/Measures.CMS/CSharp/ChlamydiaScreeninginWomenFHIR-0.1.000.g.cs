@@ -20,7 +20,11 @@ public static partial class ChlamydiaScreeninginWomenFHIR_0_1_000ServiceCollecti
 {
     public static IServiceCollection AddChlamydiaScreeninginWomenFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<ChlamydiaScreeninginWomenFHIR_0_1_000>();
+        services.TryAddSingleton<ChlamydiaScreeninginWomenFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["ChlamydiaScreeninginWomenFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<ChlamydiaScreeninginWomenFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();
         services.AddCQMCommon_2_0_000();

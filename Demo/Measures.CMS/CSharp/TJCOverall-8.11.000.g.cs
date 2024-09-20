@@ -20,7 +20,11 @@ public static partial class TJCOverall_8_11_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddTJCOverall_8_11_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<TJCOverall_8_11_000>();
+        services.TryAddSingleton<TJCOverall_8_11_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["TJCOverall_8_11_000"]);
+            return ActivatorUtilities.CreateInstance<TJCOverall_8_11_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddCQMCommon_2_0_000();
         services.AddQICoreCommon_2_0_000();

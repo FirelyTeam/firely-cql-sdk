@@ -20,7 +20,11 @@ public static partial class AppropriateTreatmentforSTEMIFHIR_1_0_000ServiceColle
 {
     public static IServiceCollection AddAppropriateTreatmentforSTEMIFHIR_1_0_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<AppropriateTreatmentforSTEMIFHIR_1_0_000>();
+        services.TryAddSingleton<AppropriateTreatmentforSTEMIFHIR_1_0_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AppropriateTreatmentforSTEMIFHIR_1_0_000"]);
+            return ActivatorUtilities.CreateInstance<AppropriateTreatmentforSTEMIFHIR_1_0_000>(sp);
+        });
         services.AddSupplementalDataElements_3_4_000();
         services.AddQICoreCommon_2_0_000();
         services.AddFHIRHelpers_4_3_000();

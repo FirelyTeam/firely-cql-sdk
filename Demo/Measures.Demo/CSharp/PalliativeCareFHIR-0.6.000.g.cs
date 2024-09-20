@@ -20,7 +20,11 @@ public static partial class PalliativeCareFHIR_0_6_000ServiceCollectionExtension
 {
     public static IServiceCollection AddPalliativeCareFHIR_0_6_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<PalliativeCareFHIR_0_6_000>();
+        services.TryAddSingleton<PalliativeCareFHIR_0_6_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["PalliativeCareFHIR_0_6_000"]);
+            return ActivatorUtilities.CreateInstance<PalliativeCareFHIR_0_6_000>(sp);
+        });
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
         services.AddFHIRHelpers_4_0_001();
         return services;

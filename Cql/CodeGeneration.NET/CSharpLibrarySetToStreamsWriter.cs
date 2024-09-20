@@ -224,7 +224,27 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine(indentLevel, "{");
                 indentLevel += 1;
                 {
-                    writer.WriteLine(indentLevel, $"services.TryAddSingleton<{className}>();");
+                    //writer.WriteLine(indentLevel, $"services.TryAddSingleton<{className}>();");
+
+                    writer.WriteLine(indentLevel, $"services.TryAddSingleton<{className}>(sp =>");
+                    writer.WriteLine(indentLevel, "{");
+                    indentLevel += 1;
+                    {
+                        writer.WriteLine(indentLevel, $"System.IO.File.AppendAllLines(\"C:\\\\temp\\\\library.txt\", [\"{className}\"]);");
+                        writer.WriteLine(indentLevel, $"return ActivatorUtilities.CreateInstance<{className}>(sp);");
+                    }
+                    indentLevel -= 1;
+                    writer.WriteLine(indentLevel, "});");
+
+                    /*
+                             services.TryAddSingleton<AdultOutpatientEncounters_4_8_000>(sp =>
+                               {
+                                System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AdultOutpatientEncounters_4_8_000"]);
+                                   return ActivatorUtilities.CreateInstance<AdultOutpatientEncounters_4_8_000>(sp);
+                               });
+                     */
+
+
                     foreach (var dependentLibrary in requiredLibraries)
                     {
                         var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);

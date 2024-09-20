@@ -20,7 +20,11 @@ public static partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR
 {
     public static IServiceCollection AddFunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008(this IServiceCollection services)
     {
-        services.TryAddSingleton<FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008>();
+        services.TryAddSingleton<FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008"]);
+            return ActivatorUtilities.CreateInstance<FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();
         services.AddSupplementalDataElements_3_4_000();

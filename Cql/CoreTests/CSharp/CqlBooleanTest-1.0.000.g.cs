@@ -20,7 +20,11 @@ public static partial class CqlBooleanTest_1_0_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddCqlBooleanTest_1_0_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<CqlBooleanTest_1_0_000>();
+        services.TryAddSingleton<CqlBooleanTest_1_0_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["CqlBooleanTest_1_0_000"]);
+            return ActivatorUtilities.CreateInstance<CqlBooleanTest_1_0_000>(sp);
+        });
         return services;
     }
 }

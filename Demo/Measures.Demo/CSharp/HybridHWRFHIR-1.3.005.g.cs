@@ -20,7 +20,11 @@ public static partial class HybridHWRFHIR_1_3_005ServiceCollectionExtensions
 {
     public static IServiceCollection AddHybridHWRFHIR_1_3_005(this IServiceCollection services)
     {
-        services.TryAddSingleton<HybridHWRFHIR_1_3_005>();
+        services.TryAddSingleton<HybridHWRFHIR_1_3_005>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["HybridHWRFHIR_1_3_005"]);
+            return ActivatorUtilities.CreateInstance<HybridHWRFHIR_1_3_005>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddSupplementalDataElementsFHIR4_2_0_000();
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();

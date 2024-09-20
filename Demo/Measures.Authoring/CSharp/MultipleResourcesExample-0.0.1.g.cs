@@ -20,7 +20,11 @@ public static partial class MultipleResourcesExample_0_0_1ServiceCollectionExten
 {
     public static IServiceCollection AddMultipleResourcesExample_0_0_1(this IServiceCollection services)
     {
-        services.TryAddSingleton<MultipleResourcesExample_0_0_1>();
+        services.TryAddSingleton<MultipleResourcesExample_0_0_1>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["MultipleResourcesExample_0_0_1"]);
+            return ActivatorUtilities.CreateInstance<MultipleResourcesExample_0_0_1>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         return services;
     }

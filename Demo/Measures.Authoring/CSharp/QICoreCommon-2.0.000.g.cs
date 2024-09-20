@@ -20,7 +20,11 @@ public static partial class QICoreCommon_2_0_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddQICoreCommon_2_0_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<QICoreCommon_2_0_000>();
+        services.TryAddSingleton<QICoreCommon_2_0_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["QICoreCommon_2_0_000"]);
+            return ActivatorUtilities.CreateInstance<QICoreCommon_2_0_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         return services;
     }

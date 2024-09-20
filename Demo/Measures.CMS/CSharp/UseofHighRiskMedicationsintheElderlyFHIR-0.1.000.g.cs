@@ -20,7 +20,11 @@ public static partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000Serv
 {
     public static IServiceCollection AddUseofHighRiskMedicationsintheElderlyFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<UseofHighRiskMedicationsintheElderlyFHIR_0_1_000>();
+        services.TryAddSingleton<UseofHighRiskMedicationsintheElderlyFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["UseofHighRiskMedicationsintheElderlyFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<UseofHighRiskMedicationsintheElderlyFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddCQMCommon_2_0_000();

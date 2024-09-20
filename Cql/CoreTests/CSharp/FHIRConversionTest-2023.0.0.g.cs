@@ -20,7 +20,11 @@ public static partial class FHIRConversionTest_2023_0_0ServiceCollectionExtensio
 {
     public static IServiceCollection AddFHIRConversionTest_2023_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<FHIRConversionTest_2023_0_0>();
+        services.TryAddSingleton<FHIRConversionTest_2023_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["FHIRConversionTest_2023_0_0"]);
+            return ActivatorUtilities.CreateInstance<FHIRConversionTest_2023_0_0>(sp);
+        });
         services.AddFHIRHelpers_4_0_1();
         return services;
     }

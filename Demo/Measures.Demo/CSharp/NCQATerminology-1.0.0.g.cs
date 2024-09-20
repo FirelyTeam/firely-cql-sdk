@@ -20,7 +20,11 @@ public static partial class NCQATerminology_1_0_0ServiceCollectionExtensions
 {
     public static IServiceCollection AddNCQATerminology_1_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<NCQATerminology_1_0_0>();
+        services.TryAddSingleton<NCQATerminology_1_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["NCQATerminology_1_0_0"]);
+            return ActivatorUtilities.CreateInstance<NCQATerminology_1_0_0>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         return services;
     }

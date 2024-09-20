@@ -20,7 +20,11 @@ public static partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_0
 {
     public static IServiceCollection AddPrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002(this IServiceCollection services)
     {
-        services.TryAddSingleton<PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002>();
+        services.TryAddSingleton<PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002"]);
+            return ActivatorUtilities.CreateInstance<PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddQICoreCommon_2_0_000();

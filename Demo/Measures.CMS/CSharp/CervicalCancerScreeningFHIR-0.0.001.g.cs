@@ -20,7 +20,11 @@ public static partial class CervicalCancerScreeningFHIR_0_0_001ServiceCollection
 {
     public static IServiceCollection AddCervicalCancerScreeningFHIR_0_0_001(this IServiceCollection services)
     {
-        services.TryAddSingleton<CervicalCancerScreeningFHIR_0_0_001>();
+        services.TryAddSingleton<CervicalCancerScreeningFHIR_0_0_001>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["CervicalCancerScreeningFHIR_0_0_001"]);
+            return ActivatorUtilities.CreateInstance<CervicalCancerScreeningFHIR_0_0_001>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddQICoreCommon_2_0_000();

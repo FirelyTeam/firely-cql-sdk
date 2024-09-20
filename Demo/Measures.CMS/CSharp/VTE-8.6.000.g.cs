@@ -20,7 +20,11 @@ public static partial class VTE_8_6_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddVTE_8_6_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<VTE_8_6_000>();
+        services.TryAddSingleton<VTE_8_6_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["VTE_8_6_000"]);
+            return ActivatorUtilities.CreateInstance<VTE_8_6_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddCQMCommon_2_0_000();
         return services;

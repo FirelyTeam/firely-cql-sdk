@@ -20,7 +20,11 @@ public static partial class VTEFHIR4_4_8_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddVTEFHIR4_4_8_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<VTEFHIR4_4_8_000>();
+        services.TryAddSingleton<VTEFHIR4_4_8_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["VTEFHIR4_4_8_000"]);
+            return ActivatorUtilities.CreateInstance<VTEFHIR4_4_8_000>(sp);
+        });
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
         services.AddFHIRHelpers_4_0_001();
         return services;

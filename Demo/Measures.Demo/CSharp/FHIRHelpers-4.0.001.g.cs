@@ -20,7 +20,11 @@ public static partial class FHIRHelpers_4_0_001ServiceCollectionExtensions
 {
     public static IServiceCollection AddFHIRHelpers_4_0_001(this IServiceCollection services)
     {
-        services.TryAddSingleton<FHIRHelpers_4_0_001>();
+        services.TryAddSingleton<FHIRHelpers_4_0_001>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["FHIRHelpers_4_0_001"]);
+            return ActivatorUtilities.CreateInstance<FHIRHelpers_4_0_001>(sp);
+        });
         return services;
     }
 }

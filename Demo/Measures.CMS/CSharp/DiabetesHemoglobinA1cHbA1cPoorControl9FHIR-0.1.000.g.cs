@@ -20,7 +20,11 @@ public static partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000Se
 {
     public static IServiceCollection AddDiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000>();
+        services.TryAddSingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();
         services.AddCQMCommon_2_0_000();

@@ -20,7 +20,11 @@ public static partial class CesareanBirthFHIR_0_2_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddCesareanBirthFHIR_0_2_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<CesareanBirthFHIR_0_2_000>();
+        services.TryAddSingleton<CesareanBirthFHIR_0_2_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["CesareanBirthFHIR_0_2_000"]);
+            return ActivatorUtilities.CreateInstance<CesareanBirthFHIR_0_2_000>(sp);
+        });
         services.AddCQMCommon_2_0_000();
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();

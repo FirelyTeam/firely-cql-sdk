@@ -20,7 +20,11 @@ public static partial class AntidepressantMedicationManagementFHIR_0_1_000Servic
 {
     public static IServiceCollection AddAntidepressantMedicationManagementFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<AntidepressantMedicationManagementFHIR_0_1_000>();
+        services.TryAddSingleton<AntidepressantMedicationManagementFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AntidepressantMedicationManagementFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<AntidepressantMedicationManagementFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddHospice_6_9_000();

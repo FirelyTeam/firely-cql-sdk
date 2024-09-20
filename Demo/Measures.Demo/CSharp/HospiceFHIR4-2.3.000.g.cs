@@ -20,7 +20,11 @@ public static partial class HospiceFHIR4_2_3_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddHospiceFHIR4_2_3_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<HospiceFHIR4_2_3_000>();
+        services.TryAddSingleton<HospiceFHIR4_2_3_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["HospiceFHIR4_2_3_000"]);
+            return ActivatorUtilities.CreateInstance<HospiceFHIR4_2_3_000>(sp);
+        });
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
         services.AddFHIRHelpers_4_0_001();
         return services;

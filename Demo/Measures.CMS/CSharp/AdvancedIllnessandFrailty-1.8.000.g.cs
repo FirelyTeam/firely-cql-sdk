@@ -20,7 +20,11 @@ public static partial class AdvancedIllnessandFrailty_1_8_000ServiceCollectionEx
 {
     public static IServiceCollection AddAdvancedIllnessandFrailty_1_8_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<AdvancedIllnessandFrailty_1_8_000>();
+        services.TryAddSingleton<AdvancedIllnessandFrailty_1_8_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AdvancedIllnessandFrailty_1_8_000"]);
+            return ActivatorUtilities.CreateInstance<AdvancedIllnessandFrailty_1_8_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();
         services.AddCQMCommon_2_0_000();

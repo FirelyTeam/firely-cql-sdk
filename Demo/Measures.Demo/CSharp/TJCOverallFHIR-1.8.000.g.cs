@@ -20,7 +20,11 @@ public static partial class TJCOverallFHIR_1_8_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddTJCOverallFHIR_1_8_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<TJCOverallFHIR_1_8_000>();
+        services.TryAddSingleton<TJCOverallFHIR_1_8_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["TJCOverallFHIR_1_8_000"]);
+            return ActivatorUtilities.CreateInstance<TJCOverallFHIR_1_8_000>(sp);
+        });
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
         services.AddFHIRHelpers_4_0_001();
         return services;

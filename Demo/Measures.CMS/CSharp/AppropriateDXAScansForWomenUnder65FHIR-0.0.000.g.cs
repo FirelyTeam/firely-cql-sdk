@@ -20,7 +20,11 @@ public static partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000Servic
 {
     public static IServiceCollection AddAppropriateDXAScansForWomenUnder65FHIR_0_0_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<AppropriateDXAScansForWomenUnder65FHIR_0_0_000>();
+        services.TryAddSingleton<AppropriateDXAScansForWomenUnder65FHIR_0_0_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AppropriateDXAScansForWomenUnder65FHIR_0_0_000"]);
+            return ActivatorUtilities.CreateInstance<AppropriateDXAScansForWomenUnder65FHIR_0_0_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddCQMCommon_2_0_000();

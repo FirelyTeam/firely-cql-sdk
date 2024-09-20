@@ -20,7 +20,11 @@ public static partial class DocumentationofCurrentMedicationsFHIR_0_2_000Service
 {
     public static IServiceCollection AddDocumentationofCurrentMedicationsFHIR_0_2_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<DocumentationofCurrentMedicationsFHIR_0_2_000>();
+        services.TryAddSingleton<DocumentationofCurrentMedicationsFHIR_0_2_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["DocumentationofCurrentMedicationsFHIR_0_2_000"]);
+            return ActivatorUtilities.CreateInstance<DocumentationofCurrentMedicationsFHIR_0_2_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();
         services.AddSupplementalDataElements_3_4_000();

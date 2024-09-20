@@ -20,7 +20,11 @@ public static partial class GlobalMalnutritionCompositeFHIR_0_1_000ServiceCollec
 {
     public static IServiceCollection AddGlobalMalnutritionCompositeFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<GlobalMalnutritionCompositeFHIR_0_1_000>();
+        services.TryAddSingleton<GlobalMalnutritionCompositeFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["GlobalMalnutritionCompositeFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<GlobalMalnutritionCompositeFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddQICoreCommon_2_0_000();

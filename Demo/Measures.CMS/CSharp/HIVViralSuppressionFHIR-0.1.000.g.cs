@@ -20,7 +20,11 @@ public static partial class HIVViralSuppressionFHIR_0_1_000ServiceCollectionExte
 {
     public static IServiceCollection AddHIVViralSuppressionFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<HIVViralSuppressionFHIR_0_1_000>();
+        services.TryAddSingleton<HIVViralSuppressionFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["HIVViralSuppressionFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<HIVViralSuppressionFHIR_0_1_000>(sp);
+        });
         services.AddCQMCommon_2_0_000();
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();

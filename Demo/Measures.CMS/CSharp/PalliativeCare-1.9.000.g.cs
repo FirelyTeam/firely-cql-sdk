@@ -20,7 +20,11 @@ public static partial class PalliativeCare_1_9_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddPalliativeCare_1_9_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<PalliativeCare_1_9_000>();
+        services.TryAddSingleton<PalliativeCare_1_9_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["PalliativeCare_1_9_000"]);
+            return ActivatorUtilities.CreateInstance<PalliativeCare_1_9_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();
         services.AddStatus_1_6_000();

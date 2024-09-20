@@ -20,7 +20,11 @@ public static partial class SevereObstetricComplicationsFHIR_0_1_000ServiceColle
 {
     public static IServiceCollection AddSevereObstetricComplicationsFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<SevereObstetricComplicationsFHIR_0_1_000>();
+        services.TryAddSingleton<SevereObstetricComplicationsFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["SevereObstetricComplicationsFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<SevereObstetricComplicationsFHIR_0_1_000>(sp);
+        });
         services.AddCQMCommon_2_0_000();
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();

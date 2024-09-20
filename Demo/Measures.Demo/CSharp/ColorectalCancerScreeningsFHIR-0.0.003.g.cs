@@ -20,7 +20,11 @@ public static partial class ColorectalCancerScreeningsFHIR_0_0_003ServiceCollect
 {
     public static IServiceCollection AddColorectalCancerScreeningsFHIR_0_0_003(this IServiceCollection services)
     {
-        services.TryAddSingleton<ColorectalCancerScreeningsFHIR_0_0_003>();
+        services.TryAddSingleton<ColorectalCancerScreeningsFHIR_0_0_003>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["ColorectalCancerScreeningsFHIR_0_0_003"]);
+            return ActivatorUtilities.CreateInstance<ColorectalCancerScreeningsFHIR_0_0_003>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddSupplementalDataElementsFHIR4_2_0_000();
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();

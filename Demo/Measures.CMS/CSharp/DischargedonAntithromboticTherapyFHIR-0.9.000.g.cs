@@ -20,7 +20,11 @@ public static partial class DischargedonAntithromboticTherapyFHIR_0_9_000Service
 {
     public static IServiceCollection AddDischargedonAntithromboticTherapyFHIR_0_9_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<DischargedonAntithromboticTherapyFHIR_0_9_000>();
+        services.TryAddSingleton<DischargedonAntithromboticTherapyFHIR_0_9_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["DischargedonAntithromboticTherapyFHIR_0_9_000"]);
+            return ActivatorUtilities.CreateInstance<DischargedonAntithromboticTherapyFHIR_0_9_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddCQMCommon_2_0_000();
         services.AddQICoreCommon_2_0_000();

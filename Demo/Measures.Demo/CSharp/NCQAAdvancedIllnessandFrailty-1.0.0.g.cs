@@ -20,7 +20,11 @@ public static partial class NCQAAdvancedIllnessandFrailty_1_0_0ServiceCollection
 {
     public static IServiceCollection AddNCQAAdvancedIllnessandFrailty_1_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<NCQAAdvancedIllnessandFrailty_1_0_0>();
+        services.TryAddSingleton<NCQAAdvancedIllnessandFrailty_1_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["NCQAAdvancedIllnessandFrailty_1_0_0"]);
+            return ActivatorUtilities.CreateInstance<NCQAAdvancedIllnessandFrailty_1_0_0>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddNCQAFHIRBase_1_0_0();
         services.AddNCQAStatus_1_0_0();

@@ -20,7 +20,11 @@ public static partial class Exam125FHIR_0_0_009ServiceCollectionExtensions
 {
     public static IServiceCollection AddExam125FHIR_0_0_009(this IServiceCollection services)
     {
-        services.TryAddSingleton<Exam125FHIR_0_0_009>();
+        services.TryAddSingleton<Exam125FHIR_0_0_009>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["Exam125FHIR_0_0_009"]);
+            return ActivatorUtilities.CreateInstance<Exam125FHIR_0_0_009>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddSupplementalDataElementsFHIR4_2_0_000();
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();

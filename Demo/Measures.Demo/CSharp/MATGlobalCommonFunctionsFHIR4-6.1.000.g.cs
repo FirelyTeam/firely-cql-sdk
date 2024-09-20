@@ -20,7 +20,11 @@ public static partial class MATGlobalCommonFunctionsFHIR4_6_1_000ServiceCollecti
 {
     public static IServiceCollection AddMATGlobalCommonFunctionsFHIR4_6_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<MATGlobalCommonFunctionsFHIR4_6_1_000>();
+        services.TryAddSingleton<MATGlobalCommonFunctionsFHIR4_6_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["MATGlobalCommonFunctionsFHIR4_6_1_000"]);
+            return ActivatorUtilities.CreateInstance<MATGlobalCommonFunctionsFHIR4_6_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         return services;
     }

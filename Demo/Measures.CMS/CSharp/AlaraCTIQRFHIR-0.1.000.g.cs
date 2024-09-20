@@ -20,7 +20,11 @@ public static partial class AlaraCTIQRFHIR_0_1_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddAlaraCTIQRFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<AlaraCTIQRFHIR_0_1_000>();
+        services.TryAddSingleton<AlaraCTIQRFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AlaraCTIQRFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<AlaraCTIQRFHIR_0_1_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddCQMCommon_2_0_000();
         services.AddQICoreCommon_2_0_000();

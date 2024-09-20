@@ -20,7 +20,11 @@ public static partial class AdultOutpatientEncountersFHIR4_2_2_000ServiceCollect
 {
     public static IServiceCollection AddAdultOutpatientEncountersFHIR4_2_2_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<AdultOutpatientEncountersFHIR4_2_2_000>();
+        services.TryAddSingleton<AdultOutpatientEncountersFHIR4_2_2_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AdultOutpatientEncountersFHIR4_2_2_000"]);
+            return ActivatorUtilities.CreateInstance<AdultOutpatientEncountersFHIR4_2_2_000>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddMATGlobalCommonFunctionsFHIR4_6_1_000();
         return services;

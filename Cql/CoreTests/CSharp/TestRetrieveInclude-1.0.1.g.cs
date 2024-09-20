@@ -20,7 +20,11 @@ public static partial class TestRetrieveInclude_1_0_1ServiceCollectionExtensions
 {
     public static IServiceCollection AddTestRetrieveInclude_1_0_1(this IServiceCollection services)
     {
-        services.TryAddSingleton<TestRetrieveInclude_1_0_1>();
+        services.TryAddSingleton<TestRetrieveInclude_1_0_1>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["TestRetrieveInclude_1_0_1"]);
+            return ActivatorUtilities.CreateInstance<TestRetrieveInclude_1_0_1>(sp);
+        });
         return services;
     }
 }

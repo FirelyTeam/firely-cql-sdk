@@ -20,7 +20,11 @@ public static partial class NCQAHospice_1_0_0ServiceCollectionExtensions
 {
     public static IServiceCollection AddNCQAHospice_1_0_0(this IServiceCollection services)
     {
-        services.TryAddSingleton<NCQAHospice_1_0_0>();
+        services.TryAddSingleton<NCQAHospice_1_0_0>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["NCQAHospice_1_0_0"]);
+            return ActivatorUtilities.CreateInstance<NCQAHospice_1_0_0>(sp);
+        });
         services.AddFHIRHelpers_4_0_001();
         services.AddNCQAFHIRBase_1_0_0();
         services.AddNCQAStatus_1_0_0();

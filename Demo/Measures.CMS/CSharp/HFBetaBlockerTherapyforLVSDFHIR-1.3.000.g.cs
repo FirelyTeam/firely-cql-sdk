@@ -20,7 +20,11 @@ public static partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000ServiceCollec
 {
     public static IServiceCollection AddHFBetaBlockerTherapyforLVSDFHIR_1_3_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<HFBetaBlockerTherapyforLVSDFHIR_1_3_000>();
+        services.TryAddSingleton<HFBetaBlockerTherapyforLVSDFHIR_1_3_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["HFBetaBlockerTherapyforLVSDFHIR_1_3_000"]);
+            return ActivatorUtilities.CreateInstance<HFBetaBlockerTherapyforLVSDFHIR_1_3_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddSupplementalDataElements_3_4_000();
         services.AddQICoreCommon_2_0_000();

@@ -20,7 +20,11 @@ public static partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000ServiceCol
 {
     public static IServiceCollection AddHospitalHarmSevereHypoglycemiaFHIR_0_1_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<HospitalHarmSevereHypoglycemiaFHIR_0_1_000>();
+        services.TryAddSingleton<HospitalHarmSevereHypoglycemiaFHIR_0_1_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["HospitalHarmSevereHypoglycemiaFHIR_0_1_000"]);
+            return ActivatorUtilities.CreateInstance<HospitalHarmSevereHypoglycemiaFHIR_0_1_000>(sp);
+        });
         services.AddSupplementalDataElements_3_4_000();
         services.AddCQMCommon_2_0_000();
         services.AddQICoreCommon_2_0_000();

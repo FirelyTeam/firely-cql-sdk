@@ -20,7 +20,11 @@ public static partial class AHAOverall_2_6_000ServiceCollectionExtensions
 {
     public static IServiceCollection AddAHAOverall_2_6_000(this IServiceCollection services)
     {
-        services.TryAddSingleton<AHAOverall_2_6_000>();
+        services.TryAddSingleton<AHAOverall_2_6_000>(sp =>
+        {
+            System.IO.File.AppendAllLines("C:\\temp\\library.txt", ["AHAOverall_2_6_000"]);
+            return ActivatorUtilities.CreateInstance<AHAOverall_2_6_000>(sp);
+        });
         services.AddFHIRHelpers_4_3_000();
         services.AddQICoreCommon_2_0_000();
         return services;
