@@ -6,7 +6,7 @@
 
 	<PropertyGroup>
 		<!-- Keep this in sync between cql-sdk.props and cql-demo.props -->
-		<FirelySdkVersion>5.10.1</FirelySdkVersion>
+		<FirelySdkVersion>5.10.3</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Solution-wide properties for NuGet packaging -->
@@ -14,7 +14,7 @@
 		<!--
 			Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
 			-->
-		<VersionPrefix>2.0.3</VersionPrefix>
+		<VersionPrefix>2.0.4</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
