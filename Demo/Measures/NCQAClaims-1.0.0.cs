@@ -14,59 +14,27 @@ using Task = Hl7.Fhir.Model.Task;
 public class NCQAClaims_1_0_0
 {
 
-
-    internal CqlContext context;
-
-    #region Cached values
-
-    internal Lazy<CqlValueSet> __Inpatient_Stay;
-    internal Lazy<CqlValueSet> __Nonacute_Inpatient_Stay;
-
-    #endregion
-    public NCQAClaims_1_0_0(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-        FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
-        NCQAFHIRBase_1_0_0 = new NCQAFHIRBase_1_0_0(context);
-        NCQATerminology_1_0_0 = new NCQATerminology_1_0_0(context);
-
-        __Inpatient_Stay = new Lazy<CqlValueSet>(this.Inpatient_Stay_Value);
-        __Nonacute_Inpatient_Stay = new Lazy<CqlValueSet>(this.Nonacute_Inpatient_Stay_Value);
-    }
-    #region Dependencies
-
-    public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
-    public NCQAFHIRBase_1_0_0 NCQAFHIRBase_1_0_0 { get; }
-    public NCQATerminology_1_0_0 NCQATerminology_1_0_0 { get; }
-
-    #endregion
-
-	private CqlValueSet Inpatient_Stay_Value() => 
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1395", null);
+    public static NCQAClaims_1_0_0 Instance { get; }  = new();
 
     [CqlDeclaration("Inpatient Stay")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1395")]
-	public CqlValueSet Inpatient_Stay() => 
-		__Inpatient_Stay.Value;
-
-	private CqlValueSet Nonacute_Inpatient_Stay_Value() => 
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1398", null);
+	public CqlValueSet Inpatient_Stay(CqlContext context) => 
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1395", null);
 
     [CqlDeclaration("Nonacute Inpatient Stay")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1398")]
-	public CqlValueSet Nonacute_Inpatient_Stay() => 
-		__Nonacute_Inpatient_Stay.Value;
+	public CqlValueSet Nonacute_Inpatient_Stay(CqlContext context) => 
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1398", null);
 
     [CqlDeclaration("Professional or Institutional Claims")]
-	public IEnumerable<Claim> Professional_or_Institutional_Claims(IEnumerable<Claim> claim)
+	public IEnumerable<Claim> Professional_or_Institutional_Claims(CqlContext context, IEnumerable<Claim> claim)
 	{
 		bool? a_(Claim MedicalClaim)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToConcept(MedicalClaim?.Type);
-			var d_ = NCQATerminology_1_0_0.Professional();
+			var c_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, MedicalClaim?.Type);
+			var d_ = NCQATerminology_1_0_0.Instance.Professional(context);
 			var e_ = context.Operators.ListContains<CqlCode>((c_?.codes as IEnumerable<CqlCode>), d_);
-			var g_ = NCQATerminology_1_0_0.Institutional();
+			var g_ = NCQATerminology_1_0_0.Instance.Institutional(context);
 			var h_ = context.Operators.ListContains<CqlCode>((c_?.codes as IEnumerable<CqlCode>), g_);
 			var i_ = context.Operators.Or(e_, h_);
 
@@ -78,12 +46,12 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Pharmacy Claims")]
-	public IEnumerable<Claim> Pharmacy_Claims(IEnumerable<Claim> claim)
+	public IEnumerable<Claim> Pharmacy_Claims(CqlContext context, IEnumerable<Claim> claim)
 	{
 		bool? a_(Claim PharmacyClaim)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToConcept(PharmacyClaim?.Type);
-			var d_ = NCQATerminology_1_0_0.Pharmacy();
+			var c_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, PharmacyClaim?.Type);
+			var d_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
 			var e_ = context.Operators.ListContains<CqlCode>((c_?.codes as IEnumerable<CqlCode>), d_);
 
 			return e_;
@@ -94,14 +62,14 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Professional or Institutional Claims Response")]
-	public IEnumerable<ClaimResponse> Professional_or_Institutional_Claims_Response(IEnumerable<ClaimResponse> claimResponse)
+	public IEnumerable<ClaimResponse> Professional_or_Institutional_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
 	{
 		bool? a_(ClaimResponse MedicalResponse)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToConcept(MedicalResponse?.Type);
-			var d_ = NCQATerminology_1_0_0.Professional();
+			var c_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, MedicalResponse?.Type);
+			var d_ = NCQATerminology_1_0_0.Instance.Professional(context);
 			var e_ = context.Operators.ListContains<CqlCode>((c_?.codes as IEnumerable<CqlCode>), d_);
-			var g_ = NCQATerminology_1_0_0.Institutional();
+			var g_ = NCQATerminology_1_0_0.Instance.Institutional(context);
 			var h_ = context.Operators.ListContains<CqlCode>((c_?.codes as IEnumerable<CqlCode>), g_);
 			var i_ = context.Operators.Or(e_, h_);
 
@@ -113,12 +81,12 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Pharmacy Claims Response")]
-	public IEnumerable<ClaimResponse> Pharmacy_Claims_Response(IEnumerable<ClaimResponse> claimResponse)
+	public IEnumerable<ClaimResponse> Pharmacy_Claims_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
 	{
 		bool? a_(ClaimResponse PharmacyResponse)
 		{
-			var c_ = FHIRHelpers_4_0_001.ToConcept(PharmacyResponse?.Type);
-			var d_ = NCQATerminology_1_0_0.Pharmacy();
+			var c_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, PharmacyResponse?.Type);
+			var d_ = NCQATerminology_1_0_0.Instance.Pharmacy(context);
 			var e_ = context.Operators.ListContains<CqlCode>((c_?.codes as IEnumerable<CqlCode>), d_);
 
 			return e_;
@@ -129,9 +97,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Procedure and POS")]
-	public IEnumerable<Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA> Medical_Claims_With_Procedure_and_POS(IEnumerable<Claim> claim, IEnumerable<CqlCode> posCodes, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public IEnumerable<Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA> Medical_Claims_With_Procedure_and_POS(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> posCodes, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		var a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode p) => 
 			p?.code;
 		var c_ = context.Operators.SelectOrNull<CqlCode, string>(ProductOrServiceValueSet, b_);
@@ -164,7 +132,7 @@ public class NCQAClaims_1_0_0
 					{
 						bool? v_(Claim.ItemComponent ItemOnLine)
 						{
-							var x_ = FHIRHelpers_4_0_001.ToConcept(ItemOnLine?.ProductOrService);
+							var x_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ItemOnLine?.ProductOrService);
 							bool? y_(CqlCode LineCode)
 							{
 								var ag_ = context.Operators.InList<string>(LineCode?.code, ClaimWithPosCode?.ProceduresAsStrings);
@@ -173,7 +141,7 @@ public class NCQAClaims_1_0_0
 							};
 							var z_ = context.Operators.WhereOrNull<CqlCode>((x_?.codes as IEnumerable<CqlCode>), y_);
 							var aa_ = context.Operators.ExistsInList<CqlCode>(z_);
-							var ab_ = FHIRHelpers_4_0_001.ToConcept((ItemOnLine?.Location as CodeableConcept));
+							var ab_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, (ItemOnLine?.Location as CodeableConcept));
 							bool? ac_(CqlCode PosCode)
 							{
 								var ah_ = context.Operators.InList<string>(PosCode?.code, ClaimWithPosCode?.POSAsString);
@@ -218,7 +186,7 @@ public class NCQAClaims_1_0_0
 							var am_ = context.Operators.SelectOrNull<Claim.ItemComponent, DataType>(ak_, al_);
 							CqlInterval<CqlDateTime> an_(DataType NormalDate)
 							{
-								var ar_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
+								var ar_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
 
 								return ar_;
 							};
@@ -264,9 +232,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Procedure in Header or on Line Item")]
-	public IEnumerable<Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA> Medical_Claims_With_Procedure_in_Header_or_on_Line_Item(IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public IEnumerable<Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA> Medical_Claims_With_Procedure_in_Header_or_on_Line_Item(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		var a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode p) => 
 			p?.code;
 		var c_ = context.Operators.SelectOrNull<CqlCode, string>(ProductOrServiceValueSet, b_);
@@ -295,7 +263,7 @@ public class NCQAClaims_1_0_0
 					{
 						bool? t_(Claim.ItemComponent ItemOnLine)
 						{
-							var v_ = FHIRHelpers_4_0_001.ToConcept(ItemOnLine?.ProductOrService);
+							var v_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ItemOnLine?.ProductOrService);
 							bool? w_(CqlCode LineCode)
 							{
 								var ao_ = context.Operators.InList<string>(LineCode?.code, ClaimWithProcedure?.ProceduresAsStrings);
@@ -377,7 +345,7 @@ public class NCQAClaims_1_0_0
 							var ay_ = context.Operators.SelectOrNull<Claim.ItemComponent, DataType>(aw_, ax_);
 							CqlInterval<CqlDateTime> az_(DataType NormalDate)
 							{
-								var bd_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
+								var bd_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
 
 								return bd_;
 							};
@@ -423,9 +391,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Diagnosis")]
-	public Tuples.Tuple_HLLRUdKceDPKeIXGFiiNKjMKI Medical_Claims_With_Diagnosis(IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
+	public Tuples.Tuple_HLLRUdKceDPKeIXGFiiNKjMKI Medical_Claims_With_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		var a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode d) => 
 			d?.code;
 		var c_ = context.Operators.SelectOrNull<CqlCode, string>(DiagnosisValueSet, b_);
@@ -524,7 +492,7 @@ public class NCQAClaims_1_0_0
 						var at_ = context.Operators.FlattenList<Claim.ItemComponent>(as_);
 						CqlInterval<CqlDateTime> au_(Claim.ItemComponent NormalDate)
 						{
-							var ay_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate?.Serviced);
+							var ay_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate?.Serviced);
 
 							return ay_;
 						};
@@ -571,9 +539,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Pharmacy Claim With Medication")]
-	public IEnumerable<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> Pharmacy_Claim_With_Medication(IEnumerable<Claim> claim, IEnumerable<CqlCode> MedicationCodes)
+	public IEnumerable<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> Pharmacy_Claim_With_Medication(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> MedicationCodes)
 	{
-		var a_ = this.Pharmacy_Claims(claim);
+		var a_ = this.Pharmacy_Claims(context, claim);
 		string b_(CqlCode p) => 
 			p?.code;
 		var c_ = context.Operators.SelectOrNull<CqlCode, string>(MedicationCodes, b_);
@@ -592,7 +560,7 @@ public class NCQAClaims_1_0_0
 			{
 				bool? m_(Claim.ItemComponent ItemOnLine)
 				{
-					var t_ = FHIRHelpers_4_0_001.ToConcept(ItemOnLine?.ProductOrService);
+					var t_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ItemOnLine?.ProductOrService);
 					bool? u_(CqlCode LineCode)
 					{
 						var x_ = context.Operators.InList<string>(LineCode?.code, ClaimWithMedication?.MedicationsAsStrings);
@@ -624,7 +592,7 @@ public class NCQAClaims_1_0_0
 					{
 						bool? ac_(Claim.ItemComponent i)
 						{
-							var al_ = FHIRHelpers_4_0_001.ToConcept(i?.ProductOrService);
+							var al_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, i?.ProductOrService);
 							bool? am_(CqlCode LineCode)
 							{
 								var ap_ = context.Operators.InList<string>(LineCode?.code, ClaimWithMedication?.MedicationsAsStrings);
@@ -647,10 +615,10 @@ public class NCQAClaims_1_0_0
 									{
 										if (i?.Serviced is Period)
 										{
-											var at_ = NCQAFHIRBase_1_0_0.Normalize_Interval(i?.Serviced);
+											var at_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, i?.Serviced);
 											var au_ = context.Operators.Start(at_);
 											var aw_ = context.Operators.Start(at_);
-											var ax_ = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement);
+											var ax_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, i?.Quantity?.ValueElement);
 											var ay_ = context.Operators.Add(aw_, new CqlQuantity(ax_, "day"));
 											var az_ = context.Operators.Quantity(1m, "day");
 											var ba_ = context.Operators.Subtract(ay_, az_);
@@ -660,8 +628,8 @@ public class NCQAClaims_1_0_0
 										}
 										else
 										{
-											var bc_ = FHIRHelpers_4_0_001.ToDate((i?.Serviced as Date));
-											var be_ = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement);
+											var bc_ = FHIRHelpers_4_0_001.Instance.ToDate(context, (i?.Serviced as Date));
+											var be_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, i?.Quantity?.ValueElement);
 											var bf_ = context.Operators.Add(bc_, new CqlQuantity(be_, "day"));
 											var bg_ = context.Operators.Quantity(1m, "day");
 											var bh_ = context.Operators.Subtract(bf_, bg_);
@@ -726,7 +694,7 @@ public class NCQAClaims_1_0_0
 									var cm_ = context.Operators.SelectOrNull<Claim.ItemComponent, DataType>(ck_, cl_);
 									CqlInterval<CqlDateTime> cn_(DataType NormalDate)
 									{
-										var ct_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
+										var ct_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate);
 
 										return ct_;
 									};
@@ -787,9 +755,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Diagnosis and Procedure")]
-	public IEnumerable<Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA> Medical_Claims_With_Diagnosis_and_Procedure(IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public IEnumerable<Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA> Medical_Claims_With_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		var a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode d) => 
 			d?.code;
 		var c_ = context.Operators.SelectOrNull<CqlCode, string>(DiagnosisValueSet, b_);
@@ -983,7 +951,7 @@ public class NCQAClaims_1_0_0
 							{
 								CqlInterval<CqlDateTime> ck_(Claim.ItemComponent NormalDate)
 								{
-									var cn_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate?.Serviced);
+									var cn_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate?.Serviced);
 
 									return cn_;
 								};
@@ -1034,9 +1002,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Principal Diagnosis and Procedure")]
-	public IEnumerable<Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA> Medical_Claims_With_Principal_Diagnosis_and_Procedure(IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public IEnumerable<Tuples.Tuple_DTeHhjMPXBSEFRBcdiBHhKQDA> Medical_Claims_With_Principal_Diagnosis_and_Procedure(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		var a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode d) => 
 			d?.code;
 		var c_ = context.Operators.SelectOrNull<CqlCode, string>(DiagnosisValueSet, b_);
@@ -1181,7 +1149,7 @@ public class NCQAClaims_1_0_0
 									bool? bv_(Claim.DiagnosisComponent RightDiagnosis)
 									{
 										var by_ = context.Operators.Convert<Integer>(RightDiagnosis?.SequenceElement);
-										var bz_ = FHIRHelpers_4_0_001.ToInteger(by_);
+										var bz_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, by_);
 										var ca_ = context.Operators.Equal(bz_, (int?)1);
 										var cb_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(RightDiagnosis?.Diagnosis, "coding");
 										bool? cc_(Coding DiagnosisCode)
@@ -1224,7 +1192,7 @@ public class NCQAClaims_1_0_0
 								{
 									CqlInterval<CqlDateTime> ci_(Claim.ItemComponent NormalDate)
 									{
-										var cl_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate?.Serviced);
+										var cl_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate?.Serviced);
 
 										return cl_;
 									};
@@ -1280,9 +1248,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Principal Diagnosis")]
-	public IEnumerable<Tuples.Tuple_HLLRUdKceDPKeIXGFiiNKjMKI> Medical_Claims_With_Principal_Diagnosis(IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
+	public IEnumerable<Tuples.Tuple_HLLRUdKceDPKeIXGFiiNKjMKI> Medical_Claims_With_Principal_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		var a_ = this.Professional_or_Institutional_Claims(context, claim);
 		string b_(CqlCode d) => 
 			d?.code;
 		var c_ = context.Operators.SelectOrNull<CqlCode, string>(DiagnosisValueSet, b_);
@@ -1312,7 +1280,7 @@ public class NCQAClaims_1_0_0
 						bool? r_(Claim.DiagnosisComponent RightDiagnosis)
 						{
 							var u_ = context.Operators.Convert<Integer>(RightDiagnosis?.SequenceElement);
-							var v_ = FHIRHelpers_4_0_001.ToInteger(u_);
+							var v_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, u_);
 							var w_ = context.Operators.Equal(v_, (int?)1);
 							var x_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(RightDiagnosis?.Diagnosis, "coding");
 							bool? y_(Coding DiagnosisCode)
@@ -1366,7 +1334,7 @@ public class NCQAClaims_1_0_0
 							var am_ = context.Operators.FlattenList<Claim.ItemComponent>(al_);
 							CqlInterval<CqlDateTime> an_(Claim.ItemComponent NormalDate)
 							{
-								var ar_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate?.Serviced);
+								var ar_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, NormalDate?.Serviced);
 
 								return ar_;
 							};
@@ -1412,10 +1380,10 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Professional and Institutional Claims and Claim Responses")]
-	public Tuples.Tuple_GjTATZbNccdVYWChGHHdRUXSM Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
+	public Tuples.Tuple_GjTATZbNccdVYWChGHHdRUXSM Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
 	{
-		var a_ = this.Professional_or_Institutional_Claims_Response(claimResponse);
-		var b_ = this.Professional_or_Institutional_Claims(claim);
+		var a_ = this.Professional_or_Institutional_Claims_Response(context, claimResponse);
+		var b_ = this.Professional_or_Institutional_Claims(context, claim);
 		var c_ = new Tuples.Tuple_GjTATZbNccdVYWChGHHdRUXSM
 		{
 			MedicalClaimResponse = a_,
@@ -1426,7 +1394,7 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Paid Claim Reponses")]
-	public IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL> Get_All_Paid_Claim_Reponses(IEnumerable<ClaimResponse> claimResponse)
+	public IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL> Get_All_Paid_Claim_Reponses(CqlContext context, IEnumerable<ClaimResponse> claimResponse)
 	{
 		bool? a_(ClaimResponse ResponseItem)
 		{
@@ -1454,7 +1422,7 @@ public class NCQAClaims_1_0_0
 			Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL k_(ClaimResponse ClmResp)
 			{
 				var m_ = context.Operators.Convert<string>(ClmResp?.Request?.ReferenceElement);
-				var n_ = NCQAFHIRBase_1_0_0.GetId(m_);
+				var n_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, m_);
 				bool? o_(ClaimResponse.ItemComponent ResponseItem)
 				{
 					bool? r_(ClaimResponse.AdjudicationComponent @this)
@@ -1498,7 +1466,7 @@ public class NCQAClaims_1_0_0
 					var ag_ = context.Operators.SelectOrNull<ClaimResponse.AdjudicationComponent, Money>(ae_, af_);
 					bool? ah_(Money DollarAmount)
 					{
-						var ap_ = FHIRHelpers_4_0_001.ToDecimal(DollarAmount?.ValueElement);
+						var ap_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, DollarAmount?.ValueElement);
 						var aq_ = context.Operators.ConvertIntegerToDecimal((int?)0);
 						var ar_ = context.Operators.Greater(ap_, aq_);
 
@@ -1531,7 +1499,7 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Claims With Procedure and Diagnosis")]
-	public IEnumerable<Tuples.Tuple_DXaYeZVOEAELKIhLMVHZBeASM> Get_All_Claims_With_Procedure_and_Diagnosis(IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public IEnumerable<Tuples.Tuple_DXaYeZVOEAELKIhLMVHZBeASM> Get_All_Claims_With_Procedure_and_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
 		bool? a_(Claim AllClaims)
 		{
@@ -1558,7 +1526,7 @@ public class NCQAClaims_1_0_0
 			var m_ = context.Operators.FlattenList<Coding>(l_);
 			bool? n_(Coding ProductOrServiceCode)
 			{
-				var ah_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+				var ah_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
 				var ai_ = context.Operators.CodeInList(ah_, ProductOrServiceValueSet);
 
 				return ai_;
@@ -1596,7 +1564,7 @@ public class NCQAClaims_1_0_0
 			var aa_ = context.Operators.SelectOrNull<object, Coding>(y_, z_);
 			bool? ab_(Coding DiagnosisCode)
 			{
-				var an_ = FHIRHelpers_4_0_001.ToCode(DiagnosisCode);
+				var an_ = FHIRHelpers_4_0_001.Instance.ToCode(context, DiagnosisCode);
 				var ao_ = context.Operators.CodeInList(an_, DiagnosisValueSet);
 
 				return ao_;
@@ -1614,7 +1582,7 @@ public class NCQAClaims_1_0_0
 			{
 				bool? as_(Coding ProductOrServiceCode)
 				{
-					var av_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+					var av_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
 					var aw_ = context.Operators.CodeInList(av_, ProductOrServiceValueSet);
 
 					return aw_;
@@ -1640,10 +1608,10 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Corresponding Claim for Services and Conditions")]
-	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Corresponding_Claim_for_Services_and_Conditions(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Corresponding_Claim_for_Services_and_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
-		var b_ = this.Get_All_Claims_With_Procedure_and_Diagnosis(claim, ProductOrServiceValueSet, DiagnosisValueSet);
+		var a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+		var b_ = this.Get_All_Claims_With_Procedure_and_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
 		var c_ = new Tuples.Tuple_ELXXNjRZXJcQDXjEEQXFeNQKZ
 		{
 			PaidMedicalClaimResponse = a_,
@@ -1667,7 +1635,7 @@ public class NCQAClaims_1_0_0
 									? ((medClaim?.ClaimofInterest as Resource).IdElement)
 									: null));
 							var z_ = context.Operators.Convert<string>(pClaim?.Response?.Request?.ReferenceElement);
-							var aa_ = NCQAFHIRBase_1_0_0.GetId(z_);
+							var aa_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, z_);
 							var ab_ = context.Operators.Equal(y_, aa_);
 							var ac_ = context.Operators.Convert<Integer>(medClaimLineItem?.SequenceElement);
 							var ad_ = context.Operators.Convert<Integer>(pClaimLineItem?.ItemSequenceElement);
@@ -1737,7 +1705,7 @@ public class NCQAClaims_1_0_0
 						var at_ = context.Operators.FlattenList<Claim.ItemComponent>(as_);
 						CqlInterval<CqlDateTime> au_(Claim.ItemComponent PaidItem)
 						{
-							var az_ = NCQAFHIRBase_1_0_0.Normalize_Interval(PaidItem?.Serviced);
+							var az_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, PaidItem?.Serviced);
 
 							return az_;
 						};
@@ -1784,9 +1752,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Paid Claims for Provided Service and Condition")]
-	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Paid_Claims_for_Provided_Service_and_Condition(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Paid_Claims_for_Provided_Service_and_Condition(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(claimResponse, claim);
+		var a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
 		var b_ = new Tuples.Tuple_GjTATZbNccdVYWChGHHdRUXSM[]
 		{
 			a_,
@@ -1803,7 +1771,7 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var l_ = this.Get_Corresponding_Claim_for_Services_and_Conditions(MedicalClaimAndResponse?.MedicalClaimResponse, MedicalClaimAndResponse?.MedicalClaim, ProductOrServiceValueSet, DiagnosisValueSet);
+					var l_ = this.Get_Corresponding_Claim_for_Services_and_Conditions(context, MedicalClaimAndResponse?.MedicalClaimResponse, MedicalClaimAndResponse?.MedicalClaim, ProductOrServiceValueSet, DiagnosisValueSet);
 
 					return l_;
 				};
@@ -1830,7 +1798,7 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Claims With Procedure or Diagnosis")]
-	public IEnumerable<Tuples.Tuple_DXaYeZVOEAELKIhLMVHZBeASM> Get_All_Claims_With_Procedure_or_Diagnosis(IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public IEnumerable<Tuples.Tuple_DXaYeZVOEAELKIhLMVHZBeASM> Get_All_Claims_With_Procedure_or_Diagnosis(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
 		bool? a_(Claim AllClaims)
 		{
@@ -1857,7 +1825,7 @@ public class NCQAClaims_1_0_0
 			var m_ = context.Operators.FlattenList<Coding>(l_);
 			bool? n_(Coding ProductOrServiceCode)
 			{
-				var ah_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+				var ah_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
 				var ai_ = context.Operators.CodeInList(ah_, ProductOrServiceValueSet);
 
 				return ai_;
@@ -1895,7 +1863,7 @@ public class NCQAClaims_1_0_0
 			var aa_ = context.Operators.SelectOrNull<object, Coding>(y_, z_);
 			bool? ab_(Coding DiagnosisCode)
 			{
-				var an_ = FHIRHelpers_4_0_001.ToCode(DiagnosisCode);
+				var an_ = FHIRHelpers_4_0_001.Instance.ToCode(context, DiagnosisCode);
 				var ao_ = context.Operators.CodeInList(an_, DiagnosisValueSet);
 
 				return ao_;
@@ -1913,13 +1881,13 @@ public class NCQAClaims_1_0_0
 			{
 				if ((context.Operators.ExistsInList<Claim.ItemComponent>(context.Operators.WhereOrNull<Claim.ItemComponent>((ProcedureClaims?.Item as IEnumerable<Claim.ItemComponent>), (Claim.ItemComponent ResponseItem) => 
 								context.Operators.ExistsInList<Coding>(context.Operators.WhereOrNull<Coding>((ResponseItem?.ProductOrService?.Coding as IEnumerable<Coding>), (Coding ProductOrServiceCode) => 
-											context.Operators.CodeInList(FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode), ProductOrServiceValueSet))))) ?? false))
+											context.Operators.CodeInList(FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode), ProductOrServiceValueSet))))) ?? false))
 				{
 					bool? aq_(Claim.ItemComponent ResponseItem)
 					{
 						bool? at_(Coding ProductOrServiceCode)
 						{
-							var aw_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+							var aw_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
 							var ax_ = context.Operators.CodeInList(aw_, ProductOrServiceValueSet);
 
 							return ax_;
@@ -1968,10 +1936,10 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Corresponding Claim for Services or Conditions")]
-	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Corresponding_Claim_for_Services_or_Conditions(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Corresponding_Claim_for_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
-		var b_ = this.Get_All_Claims_With_Procedure_or_Diagnosis(claim, ProductOrServiceValueSet, DiagnosisValueSet);
+		var a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+		var b_ = this.Get_All_Claims_With_Procedure_or_Diagnosis(context, claim, ProductOrServiceValueSet, DiagnosisValueSet);
 		var c_ = new Tuples.Tuple_ELXXNjRZXJcQDXjEEQXFeNQKZ
 		{
 			PaidMedicalClaimResponse = a_,
@@ -1995,7 +1963,7 @@ public class NCQAClaims_1_0_0
 									? ((medClaim?.ClaimofInterest as Resource).IdElement)
 									: null));
 							var z_ = context.Operators.Convert<string>(pClaim?.Response?.Request?.ReferenceElement);
-							var aa_ = NCQAFHIRBase_1_0_0.GetId(z_);
+							var aa_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, z_);
 							var ab_ = context.Operators.Equal(y_, aa_);
 							var ac_ = context.Operators.Convert<Integer>(medClaimLineItem?.SequenceElement);
 							var ad_ = context.Operators.Convert<Integer>(pClaimLineItem?.ItemSequenceElement);
@@ -2065,7 +2033,7 @@ public class NCQAClaims_1_0_0
 						var at_ = context.Operators.FlattenList<Claim.ItemComponent>(as_);
 						CqlInterval<CqlDateTime> au_(Claim.ItemComponent PaidItem)
 						{
-							var az_ = NCQAFHIRBase_1_0_0.Normalize_Interval(PaidItem?.Serviced);
+							var az_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, PaidItem?.Serviced);
 
 							return az_;
 						};
@@ -2112,9 +2080,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Paid Claims for Provided Services or Conditions")]
-	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Paid_Claims_for_Provided_Services_or_Conditions(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
+	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Paid_Claims_for_Provided_Services_or_Conditions(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet, IEnumerable<CqlCode> DiagnosisValueSet)
 	{
-		var a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(claimResponse, claim);
+		var a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
 		var b_ = new Tuples.Tuple_GjTATZbNccdVYWChGHHdRUXSM[]
 		{
 			a_,
@@ -2131,7 +2099,7 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var h_ = this.Get_Corresponding_Claim_for_Services_or_Conditions(MedicalClaimAndResponse?.MedicalClaimResponse, MedicalClaimAndResponse?.MedicalClaim, ProductOrServiceValueSet, DiagnosisValueSet);
+					var h_ = this.Get_Corresponding_Claim_for_Services_or_Conditions(context, MedicalClaimAndResponse?.MedicalClaimResponse, MedicalClaimAndResponse?.MedicalClaim, ProductOrServiceValueSet, DiagnosisValueSet);
 
 					return h_;
 				};
@@ -2146,7 +2114,7 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Claims With Procedure Only")]
-	public IEnumerable<Tuples.Tuple_DXaYeZVOEAELKIhLMVHZBeASM> Get_All_Claims_With_Procedure_Only(IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public IEnumerable<Tuples.Tuple_DXaYeZVOEAELKIhLMVHZBeASM> Get_All_Claims_With_Procedure_Only(CqlContext context, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
 		bool? a_(Claim AllClaims)
 		{
@@ -2173,7 +2141,7 @@ public class NCQAClaims_1_0_0
 			var m_ = context.Operators.FlattenList<Coding>(l_);
 			bool? n_(Coding ProductOrServiceCode)
 			{
-				var s_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+				var s_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
 				var t_ = context.Operators.CodeInList(s_, ProductOrServiceValueSet);
 
 				return t_;
@@ -2190,7 +2158,7 @@ public class NCQAClaims_1_0_0
 			{
 				bool? x_(Coding ProductOrServiceCode)
 				{
-					var aa_ = FHIRHelpers_4_0_001.ToCode(ProductOrServiceCode);
+					var aa_ = FHIRHelpers_4_0_001.Instance.ToCode(context, ProductOrServiceCode);
 					var ab_ = context.Operators.CodeInList(aa_, ProductOrServiceValueSet);
 
 					return ab_;
@@ -2216,10 +2184,10 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Corresponding Claim for Services Only")]
-	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Corresponding_Claim_for_Services_Only(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Corresponding_Claim_for_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
-		var b_ = this.Get_All_Claims_With_Procedure_Only(claim, ProductOrServiceValueSet);
+		var a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+		var b_ = this.Get_All_Claims_With_Procedure_Only(context, claim, ProductOrServiceValueSet);
 		var c_ = new Tuples.Tuple_ELXXNjRZXJcQDXjEEQXFeNQKZ
 		{
 			PaidMedicalClaimResponse = a_,
@@ -2243,7 +2211,7 @@ public class NCQAClaims_1_0_0
 									? ((medClaim?.ClaimofInterest as Resource).IdElement)
 									: null));
 							var z_ = context.Operators.Convert<string>(pClaim?.Response?.Request?.ReferenceElement);
-							var aa_ = NCQAFHIRBase_1_0_0.GetId(z_);
+							var aa_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, z_);
 							var ab_ = context.Operators.Equal(y_, aa_);
 							var ac_ = context.Operators.Convert<Integer>(medClaimLineItem?.SequenceElement);
 							var ad_ = context.Operators.Convert<Integer>(pClaimLineItem?.ItemSequenceElement);
@@ -2313,7 +2281,7 @@ public class NCQAClaims_1_0_0
 						var at_ = context.Operators.FlattenList<Claim.ItemComponent>(as_);
 						CqlInterval<CqlDateTime> au_(Claim.ItemComponent PaidItem)
 						{
-							var az_ = NCQAFHIRBase_1_0_0.Normalize_Interval(PaidItem?.Serviced);
+							var az_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, PaidItem?.Serviced);
 
 							return az_;
 						};
@@ -2360,9 +2328,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Paid Claims for Provided Services Only")]
-	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Paid_Claims_for_Provided_Services_Only(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO Get_Paid_Claims_for_Provided_Services_Only(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(claimResponse, claim);
+		var a_ = this.Get_All_Professional_and_Institutional_Claims_and_Claim_Responses(context, claimResponse, claim);
 		var b_ = new Tuples.Tuple_GjTATZbNccdVYWChGHHdRUXSM[]
 		{
 			a_,
@@ -2379,7 +2347,7 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var h_ = this.Get_Corresponding_Claim_for_Services_Only(MedicalClaimAndResponse?.MedicalClaimResponse, MedicalClaimAndResponse?.MedicalClaim, ProductOrServiceValueSet);
+					var h_ = this.Get_Corresponding_Claim_for_Services_Only(context, MedicalClaimAndResponse?.MedicalClaimResponse, MedicalClaimAndResponse?.MedicalClaim, ProductOrServiceValueSet);
 
 					return h_;
 				};
@@ -2394,10 +2362,10 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get All Pharmacy Claims and Claim Responses")]
-	public Tuples.Tuple_ENRfaLDabXeaNdJYVdOfebBTR Get_All_Pharmacy_Claims_and_Claim_Responses(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
+	public Tuples.Tuple_ENRfaLDabXeaNdJYVdOfebBTR Get_All_Pharmacy_Claims_and_Claim_Responses(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
 	{
-		var a_ = this.Pharmacy_Claims_Response(claimResponse);
-		var b_ = this.Pharmacy_Claims(claim);
+		var a_ = this.Pharmacy_Claims_Response(context, claimResponse);
+		var b_ = this.Pharmacy_Claims(context, claim);
 		var c_ = new Tuples.Tuple_ENRfaLDabXeaNdJYVdOfebBTR
 		{
 			PharmacyClaimResponse = a_,
@@ -2408,10 +2376,10 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Corresponding Claim for Pharmacy Services")]
-	public Tuples.Tuple_BOANHMYNiCIfFjRZRMEXCcXTO Get_Corresponding_Claim_for_Pharmacy_Services(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public Tuples.Tuple_BOANHMYNiCIfFjRZRMEXCcXTO Get_Corresponding_Claim_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Get_All_Paid_Claim_Reponses(claimResponse);
-		var b_ = this.Pharmacy_Claim_With_Medication(claim, ProductOrServiceValueSet);
+		var a_ = this.Get_All_Paid_Claim_Reponses(context, claimResponse);
+		var b_ = this.Pharmacy_Claim_With_Medication(context, claim, ProductOrServiceValueSet);
 		var c_ = new Tuples.Tuple_EDASHZgEHSQJbecPJIZegfOIB
 		{
 			PaidPharmacyClaimResponse = a_,
@@ -2435,7 +2403,7 @@ public class NCQAClaims_1_0_0
 									? ((medClaim?.Claim as Resource).IdElement)
 									: null));
 							var z_ = context.Operators.Convert<string>(pClaim?.Response?.Request?.ReferenceElement);
-							var aa_ = NCQAFHIRBase_1_0_0.GetId(z_);
+							var aa_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, z_);
 							var ab_ = context.Operators.Equal(y_, aa_);
 							var ac_ = context.Operators.Convert<Integer>(medClaimLineItem?.SequenceElement);
 							var ad_ = context.Operators.Convert<Integer>(pClaimLineItem?.ItemSequenceElement);
@@ -2505,7 +2473,7 @@ public class NCQAClaims_1_0_0
 						var at_ = context.Operators.FlattenList<Claim.ItemComponent>(as_);
 						CqlInterval<CqlDateTime> au_(Claim.ItemComponent PaidItem)
 						{
-							var bg_ = NCQAFHIRBase_1_0_0.Normalize_Interval(PaidItem?.Serviced);
+							var bg_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, PaidItem?.Serviced);
 
 							return bg_;
 						};
@@ -2525,11 +2493,11 @@ public class NCQAClaims_1_0_0
 							{
 								if ((context.Operators.Not((bool?)(i?.Quantity is null)) ?? false))
 								{
-									var bj_ = NCQAFHIRBase_1_0_0.Normalize_Interval(i?.Serviced);
+									var bj_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, i?.Serviced);
 									var bk_ = context.Operators.Start(bj_);
 									var bl_ = context.Operators.ConvertDateTimeToDate(bk_);
 									var bn_ = context.Operators.Start(bj_);
-									var bo_ = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement);
+									var bo_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, i?.Quantity?.ValueElement);
 									var bp_ = context.Operators.Add(bn_, new CqlQuantity(bo_, "day"));
 									var bq_ = context.Operators.Quantity(1m, "day");
 									var br_ = context.Operators.Subtract(bp_, bq_);
@@ -2592,9 +2560,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Paid Claims for Pharmacy Services")]
-	public Tuples.Tuple_BOANHMYNiCIfFjRZRMEXCcXTO Get_Paid_Claims_for_Pharmacy_Services(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
+	public Tuples.Tuple_BOANHMYNiCIfFjRZRMEXCcXTO Get_Paid_Claims_for_Pharmacy_Services(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim, IEnumerable<CqlCode> ProductOrServiceValueSet)
 	{
-		var a_ = this.Get_All_Pharmacy_Claims_and_Claim_Responses(claimResponse, claim);
+		var a_ = this.Get_All_Pharmacy_Claims_and_Claim_Responses(context, claimResponse, claim);
 		var b_ = new Tuples.Tuple_ENRfaLDabXeaNdJYVdOfebBTR[]
 		{
 			a_,
@@ -2611,7 +2579,7 @@ public class NCQAClaims_1_0_0
 				}
 				else
 				{
-					var h_ = this.Get_Corresponding_Claim_for_Pharmacy_Services(PharmacyClaimAndResponse?.PharmacyClaimResponse, PharmacyClaimAndResponse?.PharmacyClaim, ProductOrServiceValueSet);
+					var h_ = this.Get_Corresponding_Claim_for_Pharmacy_Services(context, PharmacyClaimAndResponse?.PharmacyClaimResponse, PharmacyClaimAndResponse?.PharmacyClaim, ProductOrServiceValueSet);
 
 					return h_;
 				};
@@ -2626,7 +2594,7 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Claim With Corresponding Claim Response")]
-	public IEnumerable<Tuples.Tuple_HQUdYchKGNXjEWMCbcWSEKdVI> Get_Claim_With_Corresponding_Claim_Response(IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
+	public IEnumerable<Tuples.Tuple_HQUdYchKGNXjEWMCbcWSEKdVI> Get_Claim_With_Corresponding_Claim_Response(CqlContext context, IEnumerable<ClaimResponse> claimResponse, IEnumerable<Claim> claim)
 	{
 		Tuples.Tuple_HQUdYchKGNXjEWMCbcWSEKdVI a_(Claim Claim)
 		{
@@ -2634,7 +2602,7 @@ public class NCQAClaims_1_0_0
 			{
 				var h_ = context.Operators.Convert<string>(Claim?.IdElement);
 				var i_ = context.Operators.Convert<string>(CR?.Request?.ReferenceElement);
-				var j_ = NCQAFHIRBase_1_0_0.GetId(i_);
+				var j_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, i_);
 				var k_ = context.Operators.Equal(h_, j_);
 
 				return k_;
@@ -2647,7 +2615,7 @@ public class NCQAClaims_1_0_0
 				{
 					var aa_ = context.Operators.Convert<string>(Claim?.IdElement);
 					var ab_ = context.Operators.Convert<string>(CR?.Request?.ReferenceElement);
-					var ac_ = NCQAFHIRBase_1_0_0.GetId(ab_);
+					var ac_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ab_);
 					var ad_ = context.Operators.Equal(aa_, ac_);
 
 					return ad_;
@@ -2675,7 +2643,7 @@ public class NCQAClaims_1_0_0
 				var v_ = context.Operators.SelectOrNull<ResourceReference, FhirString>(t_, u_);
 				var w_ = context.Operators.SingleOrNull<FhirString>(v_);
 				var x_ = context.Operators.Convert<string>(w_);
-				var y_ = NCQAFHIRBase_1_0_0.GetId(x_);
+				var y_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, x_);
 				var z_ = context.Operators.Equal(l_, y_);
 
 				return z_;
@@ -2695,9 +2663,9 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Medical Claims With Nonacute or Acute Inpatient Discharge")]
-	public Tuples.Tuple_CYfZbbEjJgLODachBhLiZaXQE Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(IEnumerable<Claim> claim)
+	public Tuples.Tuple_CYfZbbEjJgLODachBhLiZaXQE Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(CqlContext context, IEnumerable<Claim> claim)
 	{
-		var a_ = this.Professional_or_Institutional_Claims(claim);
+		var a_ = this.Professional_or_Institutional_Claims(context, claim);
 		var b_ = new Tuples.Tuple_EWMRhBHgcOUGZLgIBDbjPHISO
 		{
 			MedicalClaim = a_,
@@ -2722,10 +2690,10 @@ public class NCQAClaims_1_0_0
 					{
 						bool? q_(Claim.ItemComponent i)
 						{
-							var t_ = FHIRHelpers_4_0_001.ToConcept(i?.Revenue);
+							var t_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, i?.Revenue);
 							bool? u_(CqlCode rev)
 							{
-								var x_ = this.Inpatient_Stay();
+								var x_ = this.Inpatient_Stay(context);
 								var y_ = context.Operators.StringInValueSet(rev?.code, x_);
 
 								return y_;
@@ -2759,10 +2727,10 @@ public class NCQAClaims_1_0_0
 					{
 						bool? ac_(Claim.ItemComponent i)
 						{
-							var aj_ = FHIRHelpers_4_0_001.ToConcept(i?.Revenue);
+							var aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, i?.Revenue);
 							bool? ak_(CqlCode rev)
 							{
-								var an_ = this.Nonacute_Inpatient_Stay();
+								var an_ = this.Nonacute_Inpatient_Stay(context);
 								var ao_ = context.Operators.StringInValueSet(rev?.code, an_);
 
 								return ao_;
@@ -2776,7 +2744,7 @@ public class NCQAClaims_1_0_0
 						var ae_ = context.Operators.ExistsInList<Claim.ItemComponent>(ad_);
 						bool? af_(Coding tob)
 						{
-							var ap_ = this.Nonacute_Inpatient_Stay();
+							var ap_ = this.Nonacute_Inpatient_Stay(context);
 							var aq_ = context.Operators.StringInValueSet(tob?.CodeElement?.Value, ap_);
 
 							return aq_;
@@ -2857,14 +2825,14 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Prescriber NPI from Claims")]
-	public Tuples.Tuple_CEXhgaFKbhdeeAYTYBhHTGXUY Get_Prescriber_NPI_from_Claims(IEnumerable<Claim> claim)
+	public Tuples.Tuple_CEXhgaFKbhdeeAYTYBhHTGXUY Get_Prescriber_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
 	{
 		Tuples.Tuple_GIfhUVACThMQNGPGjYhYHEfGS a_(Claim C)
 		{
 			bool? h_(Claim.CareTeamComponent ct)
 			{
 				var w_ = context.Operators.Convert<Integer>(ct?.SequenceElement);
-				var x_ = FHIRHelpers_4_0_001.ToInteger(w_);
+				var x_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, w_);
 				var y_ = context.Operators.Equal(x_, (int?)1);
 
 				return y_;
@@ -2883,7 +2851,7 @@ public class NCQAClaims_1_0_0
 			bool? n_(Claim.CareTeamComponent ct)
 			{
 				var aa_ = context.Operators.Convert<Integer>(ct?.SequenceElement);
-				var ab_ = FHIRHelpers_4_0_001.ToInteger(aa_);
+				var ab_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, aa_);
 				var ac_ = context.Operators.Equal(ab_, (int?)1);
 
 				return ac_;
@@ -2906,7 +2874,7 @@ public class NCQAClaims_1_0_0
 				string af_(FhirString r)
 				{
 					var ai_ = context.Operators.Convert<string>(r);
-					var aj_ = NCQAFHIRBase_1_0_0.GetId(ai_);
+					var aj_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ai_);
 
 					return aj_;
 				};
@@ -2978,8 +2946,8 @@ public class NCQAClaims_1_0_0
 					bool? bk_(Identifier l)
 					{
 						var bt_ = context.Operators.Equal(l?.SystemElement?.Value, "http://hl7.org/fhir/sid/us-npi");
-						var bu_ = FHIRHelpers_4_0_001.ToConcept(l?.Type);
-						var bv_ = NCQATerminology_1_0_0.Provider_number();
+						var bu_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, l?.Type);
+						var bv_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
 						var bw_ = context.Operators.ConvertCodeToConcept(bv_);
 						var bx_ = context.Operators.Equivalent(bu_, bw_);
 						var by_ = context.Operators.And(bt_, bx_);
@@ -2995,8 +2963,8 @@ public class NCQAClaims_1_0_0
 					bool? bo_(Identifier l)
 					{
 						var cb_ = context.Operators.Equal(l?.SystemElement?.Value, "http://hl7.org/fhir/sid/us-npi");
-						var cc_ = FHIRHelpers_4_0_001.ToConcept(l?.Type);
-						var cd_ = NCQATerminology_1_0_0.Provider_number();
+						var cc_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, l?.Type);
+						var cd_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
 						var ce_ = context.Operators.ConvertCodeToConcept(cd_);
 						var cf_ = context.Operators.Equivalent(cc_, ce_);
 						var cg_ = context.Operators.And(cb_, cf_);
@@ -3094,14 +3062,14 @@ public class NCQAClaims_1_0_0
 	}
 
     [CqlDeclaration("Get Pharmacy NPI from Claims")]
-	public Tuples.Tuple_CEXhgaFKbhdeeAYTYBhHTGXUY Get_Pharmacy_NPI_from_Claims(IEnumerable<Claim> claim)
+	public Tuples.Tuple_CEXhgaFKbhdeeAYTYBhHTGXUY Get_Pharmacy_NPI_from_Claims(CqlContext context, IEnumerable<Claim> claim)
 	{
 		Tuples.Tuple_FPCXihcEeChSjIUJHVXRcEXMI a_(Claim C)
 		{
 			bool? h_(Claim.ItemComponent i)
 			{
 				var y_ = context.Operators.Convert<Integer>(i?.SequenceElement);
-				var z_ = FHIRHelpers_4_0_001.ToInteger(y_);
+				var z_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, y_);
 				var aa_ = context.Operators.Equal(z_, (int?)1);
 
 				return aa_;
@@ -3123,7 +3091,7 @@ public class NCQAClaims_1_0_0
 			bool? p_(Claim.ItemComponent i)
 			{
 				var ac_ = context.Operators.Convert<Integer>(i?.SequenceElement);
-				var ad_ = FHIRHelpers_4_0_001.ToInteger(ac_);
+				var ad_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, ac_);
 				var ae_ = context.Operators.Equal(ad_, (int?)1);
 
 				return ae_;
@@ -3146,7 +3114,7 @@ public class NCQAClaims_1_0_0
 				string ah_(FhirString r)
 				{
 					var ak_ = context.Operators.Convert<string>(r);
-					var al_ = NCQAFHIRBase_1_0_0.GetId(ak_);
+					var al_ = NCQAFHIRBase_1_0_0.Instance.GetId(context, ak_);
 
 					return al_;
 				};
@@ -3218,8 +3186,8 @@ public class NCQAClaims_1_0_0
 					bool? bm_(Identifier l)
 					{
 						var bv_ = context.Operators.Equal(l?.SystemElement?.Value, "http://hl7.org/fhir/sid/us-npi");
-						var bw_ = FHIRHelpers_4_0_001.ToConcept(l?.Type);
-						var bx_ = NCQATerminology_1_0_0.Provider_number();
+						var bw_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, l?.Type);
+						var bx_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
 						var by_ = context.Operators.ConvertCodeToConcept(bx_);
 						var bz_ = context.Operators.Equivalent(bw_, by_);
 						var ca_ = context.Operators.And(bv_, bz_);
@@ -3235,8 +3203,8 @@ public class NCQAClaims_1_0_0
 					bool? bq_(Identifier l)
 					{
 						var cd_ = context.Operators.Equal(l?.SystemElement?.Value, "http://hl7.org/fhir/sid/us-npi");
-						var ce_ = FHIRHelpers_4_0_001.ToConcept(l?.Type);
-						var cf_ = NCQATerminology_1_0_0.Provider_number();
+						var ce_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, l?.Type);
+						var cf_ = NCQATerminology_1_0_0.Instance.Provider_number(context);
 						var cg_ = context.Operators.ConvertCodeToConcept(cf_);
 						var ch_ = context.Operators.Equivalent(ce_, cg_);
 						var ci_ = context.Operators.And(cd_, ch_);

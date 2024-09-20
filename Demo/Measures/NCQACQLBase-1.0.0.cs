@@ -14,26 +14,10 @@ using Task = Hl7.Fhir.Model.Task;
 public class NCQACQLBase_1_0_0
 {
 
-
-    internal CqlContext context;
-
-    #region Cached values
-
-
-    #endregion
-    public NCQACQLBase_1_0_0(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-
-    }
-    #region Dependencies
-
-
-    #endregion
+    public static NCQACQLBase_1_0_0 Instance { get; }  = new();
 
     [CqlDeclaration("Sort Date Intervals")]
-	public IEnumerable<CqlInterval<CqlDate>> Sort_Date_Intervals(IEnumerable<CqlInterval<CqlDate>> intervals)
+	public IEnumerable<CqlInterval<CqlDate>> Sort_Date_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_()
 		{
@@ -94,7 +78,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Sort DateTime Intervals")]
-	public IEnumerable<CqlInterval<CqlDateTime>> Sort_DateTime_Intervals(IEnumerable<CqlInterval<CqlDateTime>> intervals)
+	public IEnumerable<CqlInterval<CqlDateTime>> Sort_DateTime_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_()
 		{
@@ -155,7 +139,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Collapse Date Interval Workaround")]
-	public IEnumerable<CqlInterval<CqlDate>> Collapse_Date_Interval_Workaround(IEnumerable<CqlInterval<CqlDate>> intervals)
+	public IEnumerable<CqlInterval<CqlDate>> Collapse_Date_Interval_Workaround(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_()
 		{
@@ -200,7 +184,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Collapse DateTime Interval Workaround")]
-	public IEnumerable<CqlInterval<CqlDateTime>> Collapse_DateTime_Interval_Workaround(IEnumerable<CqlInterval<CqlDateTime>> intervals)
+	public IEnumerable<CqlInterval<CqlDateTime>> Collapse_DateTime_Interval_Workaround(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDateTime>> a_()
 		{
@@ -245,9 +229,9 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Date Interval Covering Relative to Base Interval")]
-	public IEnumerable<CqlInterval<CqlDate>> Date_Interval_Covering_Relative_to_Base_Interval(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+	public IEnumerable<CqlInterval<CqlDate>> Date_Interval_Covering_Relative_to_Base_Interval(CqlContext context, CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
-		var a_ = this.Sort_Date_Intervals(coveringIntervals);
+		var a_ = this.Sort_Date_Intervals(context, coveringIntervals);
 		CqlInterval<CqlDate> b_(CqlInterval<CqlDate> sortedInterval)
 		{
 			var e_ = context.Operators.IntervalIntersectsInterval<CqlDate>(baseInterval, sortedInterval);
@@ -255,15 +239,15 @@ public class NCQACQLBase_1_0_0
 			return e_;
 		};
 		var c_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(a_, b_);
-		var d_ = this.Collapse_Date_Interval_Workaround(c_);
+		var d_ = this.Collapse_Date_Interval_Workaround(context, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("DateTime Interval Covering Relative to Base Interval")]
-	public IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Covering_Relative_to_Base_Interval(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+	public IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Covering_Relative_to_Base_Interval(CqlContext context, CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
-		var a_ = this.Sort_DateTime_Intervals(coveringIntervals);
+		var a_ = this.Sort_DateTime_Intervals(context, coveringIntervals);
 		CqlInterval<CqlDateTime> b_(CqlInterval<CqlDateTime> sortedInterval)
 		{
 			var e_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(baseInterval, sortedInterval);
@@ -271,15 +255,15 @@ public class NCQACQLBase_1_0_0
 			return e_;
 		};
 		var c_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(a_, b_);
-		var d_ = this.Collapse_DateTime_Interval_Workaround(c_);
+		var d_ = this.Collapse_DateTime_Interval_Workaround(context, c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Date Interval Gaps Relative to Base Interval")]
-	public IEnumerable<CqlInterval<CqlDate>> Date_Interval_Gaps_Relative_to_Base_Interval(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+	public IEnumerable<CqlInterval<CqlDate>> Date_Interval_Gaps_Relative_to_Base_Interval(CqlContext context, CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
-		var a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
 		var b_ = new Tuples.Tuple_EHUBiUYZGHNGdhCYfLiYVfUdS
 		{
 			sortedCoverings = a_,
@@ -378,7 +362,7 @@ public class NCQACQLBase_1_0_0
 			IEnumerable<CqlInterval<CqlDate>> k_(Tuples.Tuple_FXGMiYhHaiIMEGdRUYMPEAHCR calculations)
 			{
 				var aq_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(calculations?.frontgaps, calculations?.endgap);
-				var ar_ = this.Collapse_Date_Interval_Workaround(aq_);
+				var ar_ = this.Collapse_Date_Interval_Workaround(context, aq_);
 
 				return ar_;
 			};
@@ -394,9 +378,9 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("DateTime Interval Gaps Relative to Base Interval")]
-	public IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Gaps_Relative_to_Base_Interval(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+	public IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Gaps_Relative_to_Base_Interval(CqlContext context, CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
-		var a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
 		var b_ = new Tuples.Tuple_CUJFCVgQUNRcdHdTeVDjJcYaZ
 		{
 			sortedCoverings = a_,
@@ -495,7 +479,7 @@ public class NCQACQLBase_1_0_0
 			IEnumerable<CqlInterval<CqlDateTime>> k_(Tuples.Tuple_HAejSJNFdWPBCHgSSZUeVRIHA calculations)
 			{
 				var aq_ = context.Operators.ListUnion<CqlInterval<CqlDateTime>>(calculations?.frontgaps, calculations?.endgap);
-				var ar_ = this.Collapse_DateTime_Interval_Workaround(aq_);
+				var ar_ = this.Collapse_DateTime_Interval_Workaround(context, aq_);
 
 				return ar_;
 			};
@@ -511,7 +495,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Collapsed Date Interval Stats")]
-	public Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD Collapsed_Date_Interval_Stats(IEnumerable<CqlInterval<CqlDate>> collapsedIntervals)
+	public Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD Collapsed_Date_Interval_Stats(CqlContext context, IEnumerable<CqlInterval<CqlDate>> collapsedIntervals)
 	{
 		var a_ = context.Operators.CountOrNull<CqlInterval<CqlDate>>(collapsedIntervals);
 		int? b_()
@@ -665,9 +649,9 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Date Interval Covering Relative to Base Interval Stats")]
-	public Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD Date_Interval_Covering_Relative_to_Base_Interval_Stats(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+	public Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD Date_Interval_Covering_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
-		var a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
 		var b_ = new Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU
 		{
 			Covering_Intervals = a_,
@@ -678,7 +662,7 @@ public class NCQACQLBase_1_0_0
 		};
 		Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD d_(Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU variableDeclarations)
 		{
-			var g_ = this.Collapsed_Date_Interval_Stats(variableDeclarations?.Covering_Intervals);
+			var g_ = this.Collapsed_Date_Interval_Stats(context, variableDeclarations?.Covering_Intervals);
 
 			return g_;
 		};
@@ -689,9 +673,9 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Date Interval Gaps Relative to Base Interval Stats")]
-	public Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD Date_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+	public Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD Date_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
-		var a_ = this.Date_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var a_ = this.Date_Interval_Gaps_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
 		var b_ = new Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG
 		{
 			Gap_Intervals = a_,
@@ -702,7 +686,7 @@ public class NCQACQLBase_1_0_0
 		};
 		Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD d_(Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG variableDeclarations)
 		{
-			var g_ = this.Collapsed_Date_Interval_Stats(variableDeclarations?.Gap_Intervals);
+			var g_ = this.Collapsed_Date_Interval_Stats(context, variableDeclarations?.Gap_Intervals);
 
 			return g_;
 		};
@@ -713,7 +697,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("DateTime Interval Set Nulls to Zero")]
-	public CqlInterval<CqlDateTime> DateTime_Interval_Set_Nulls_to_Zero(CqlInterval<CqlDateTime> interval)
+	public CqlInterval<CqlDateTime> DateTime_Interval_Set_Nulls_to_Zero(CqlContext context, CqlInterval<CqlDateTime> interval)
 	{
 		var a_ = context.Operators.Start(interval);
 		var b_ = context.Operators.ComponentFrom(a_, "year");
@@ -924,7 +908,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Collapsed DateTime Interval Stats")]
-	public Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO Collapsed_DateTime_Interval_Stats(IEnumerable<CqlInterval<CqlDateTime>> collapsedIntervals)
+	public Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO Collapsed_DateTime_Interval_Stats(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> collapsedIntervals)
 	{
 		var a_ = context.Operators.CountOrNull<CqlInterval<CqlDateTime>>(collapsedIntervals);
 		int? b_()
@@ -937,7 +921,7 @@ public class NCQACQLBase_1_0_0
 			{
 				int? f_(CqlInterval<CqlDateTime> I)
 				{
-					var i_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
+					var i_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
 					var j_ = context.Operators.Start(i_);
 					var l_ = context.Operators.End(i_);
 					var m_ = context.Operators.DurationBetween(j_, l_, "day");
@@ -969,7 +953,7 @@ public class NCQACQLBase_1_0_0
 			{
 				Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW r_(CqlInterval<CqlDateTime> I)
 				{
-					var w_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
+					var w_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
 					var x_ = context.Operators.Start(w_);
 					var z_ = context.Operators.End(w_);
 					var aa_ = context.Operators.DurationBetween(x_, z_, "day");
@@ -1007,7 +991,7 @@ public class NCQACQLBase_1_0_0
 			{
 				Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW af_(CqlInterval<CqlDateTime> I)
 				{
-					var ax_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
+					var ax_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
 					var ay_ = context.Operators.Start(ax_);
 					var ba_ = context.Operators.End(ax_);
 					var bb_ = context.Operators.DurationBetween(ay_, ba_, "day");
@@ -1031,11 +1015,11 @@ public class NCQACQLBase_1_0_0
 @this?.days;
 				var ai_ = context.Operators.ListSortBy<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(ag_, ah_, System.ComponentModel.ListSortDirection.Descending);
 				var aj_ = context.Operators.FirstOfList<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(ai_);
-				var ak_ = this.DateTime_Interval_Set_Nulls_to_Zero(aj_?.interval);
+				var ak_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, aj_?.interval);
 				var al_ = context.Operators.Start(ak_);
 				Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW am_(CqlInterval<CqlDateTime> I)
 				{
-					var bg_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
+					var bg_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
 					var bh_ = context.Operators.Start(bg_);
 					var bj_ = context.Operators.End(bg_);
 					var bk_ = context.Operators.DurationBetween(bh_, bj_, "day");
@@ -1057,7 +1041,7 @@ public class NCQACQLBase_1_0_0
 				var an_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(collapsedIntervals, am_);
 				var ap_ = context.Operators.ListSortBy<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(an_, ah_, System.ComponentModel.ListSortDirection.Descending);
 				var aq_ = context.Operators.FirstOfList<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(ap_);
-				var ar_ = this.DateTime_Interval_Set_Nulls_to_Zero(aq_?.interval);
+				var ar_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, aq_?.interval);
 				var as_ = context.Operators.End(ar_);
 				var at_ = context.Operators.DurationBetween(al_, as_, "day");
 				var au_ = context.Operators.Add(at_, (int?)1);
@@ -1084,9 +1068,9 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("DateTime Interval Covering Relative to Base Interval Stats")]
-	public Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO DateTime_Interval_Covering_Relative_to_Base_Interval_Stats(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+	public Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO DateTime_Interval_Covering_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
-		var a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
 		var b_ = new Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY
 		{
 			Covering_Intervals = a_,
@@ -1097,7 +1081,7 @@ public class NCQACQLBase_1_0_0
 		};
 		Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO d_(Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY variableDeclarations)
 		{
-			var g_ = this.Collapsed_DateTime_Interval_Stats(variableDeclarations?.Covering_Intervals);
+			var g_ = this.Collapsed_DateTime_Interval_Stats(context, variableDeclarations?.Covering_Intervals);
 
 			return g_;
 		};
@@ -1108,9 +1092,9 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("DateTime Interval Gaps Relative to Base Interval Stats")]
-	public Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO DateTime_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+	public Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO DateTime_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
-		var a_ = this.DateTime_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var a_ = this.DateTime_Interval_Gaps_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
 		var b_ = new Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB
 		{
 			Gap_Intervals = a_,
@@ -1121,7 +1105,7 @@ public class NCQACQLBase_1_0_0
 		};
 		Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO d_(Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB variableDeclarations)
 		{
-			var g_ = this.Collapsed_DateTime_Interval_Stats(variableDeclarations?.Gap_Intervals);
+			var g_ = this.Collapsed_DateTime_Interval_Stats(context, variableDeclarations?.Gap_Intervals);
 
 			return g_;
 		};
@@ -1132,7 +1116,7 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Convert To UTC DateTime")]
-	public CqlDateTime Convert_To_UTC_DateTime(CqlDate d)
+	public CqlDateTime Convert_To_UTC_DateTime(CqlContext context, CqlDate d)
 	{
 		var a_ = context.Operators.ComponentFrom(d, "year");
 		int? b_()
@@ -1185,12 +1169,12 @@ public class NCQACQLBase_1_0_0
 	}
 
     [CqlDeclaration("Convert Interval Date to UTC Interval DateTime")]
-	public CqlInterval<CqlDateTime> Convert_Interval_Date_to_UTC_Interval_DateTime(CqlInterval<CqlDate> interval)
+	public CqlInterval<CqlDateTime> Convert_Interval_Date_to_UTC_Interval_DateTime(CqlContext context, CqlInterval<CqlDate> interval)
 	{
 		var a_ = context.Operators.Start(interval);
-		var b_ = this.Convert_To_UTC_DateTime(a_);
+		var b_ = this.Convert_To_UTC_DateTime(context, a_);
 		var c_ = context.Operators.End(interval);
-		var d_ = this.Convert_To_UTC_DateTime(c_);
+		var d_ = this.Convert_To_UTC_DateTime(context, c_);
 		var e_ = context.Operators.Interval(b_, d_, true, true);
 
 		return e_;
