@@ -23,6 +23,16 @@ trigger:
     - develop-2.0*
     - release*
     - refs/tags/v*
+  paths:
+    include:
+    - build/
+    - LibrarySets/
+    - Cql/
+    - Demo/
+    - submodules/
+    exclude:
+    - /**/docs/
+    - /**/*.md
 
 stages:
 - stage: build
