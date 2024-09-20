@@ -6,7 +6,7 @@
 
 	<PropertyGroup>
 		<!-- Keep this in sync between cql-sdk.props and cql-demo.props -->
-		<FirelySdkVersion>5.10.1</FirelySdkVersion>
+		<FirelySdkVersion>5.10.3</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Solution-wide properties for NuGet packaging -->
