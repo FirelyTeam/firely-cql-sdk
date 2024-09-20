@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("Exam130FHIR", "0.0.003")]
 public class Exam130FHIR_0_0_003
 {
