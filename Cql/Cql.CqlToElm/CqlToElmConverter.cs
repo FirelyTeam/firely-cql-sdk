@@ -11,7 +11,7 @@ using System.Linq;
 namespace Hl7.Cql.CqlToElm
 {
     /// <summary>
-    /// Converts CQL To ELM.
+    /// Converts CQL To ELM
     /// </summary>
     public class CqlToElmConverter
     {

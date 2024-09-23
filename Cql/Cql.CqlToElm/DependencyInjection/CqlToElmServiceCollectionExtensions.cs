@@ -17,7 +17,7 @@ using Hl7.Cql.CqlToElm.LibraryProviders;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// CqlToElmServiceCollectionExtensions.
+/// CqlToElmServiceCollectionExtensions
 /// </summary>
 public static class CqlToElmServiceCollectionExtensions
 {
