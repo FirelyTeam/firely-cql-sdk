@@ -12,7 +12,7 @@ Hl7.Cql.Runtime.CqlContext.MessageReceived -> System.EventHandler<Hl7.Cql.Operat
 Hl7.Cql.Runtime.CqlContext.Operators.get -> Hl7.Cql.Operators.ICqlOperators!
 Hl7.Cql.Runtime.CqlContext.Parameters.get -> System.Collections.Generic.IDictionary<string!, object!>!
 Hl7.Cql.Runtime.CqlContext.RaiseContextEvent(Hl7.Cql.Runtime.ContextEventArgs! eventData) -> Hl7.Cql.Runtime.CqlContext!
-Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryNameAndVersion, string! parameterName, object? defaultValue) -> object?
+Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryVersionedIdentifier, string! parameterName, object? defaultValue) -> object?
 Hl7.Cql.Runtime.DefinitionDictionary<T>
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, System.Type![]! signature, T! expression) -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, T! expression) -> void

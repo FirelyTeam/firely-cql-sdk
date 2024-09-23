@@ -676,7 +676,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             term = term.Trim();
 
-            if (term.StartsWith('(') && term.EndsWith(')'))
+            if (IsSingleParenthesizedTerm(term))
                 return term; // No need to parenthesize if already parenthesized
 
             // Handles cases such as:
@@ -687,11 +687,36 @@ namespace Hl7.Cql.CodeGeneration.NET
             if (term.StartsWith('(') ^ term.EndsWith(')'))
                 return $"({term})";
 
-            if (term.Any(Char.IsWhiteSpace))
+            if (term.Any(char.IsWhiteSpace))
                 return $"({term})";
 
             return term;
         }
+
+
+        // Check whether the term has matching opening and closing parentheses.
+        // (so this matches "(a)" but not "(x) + (y)" nor "a + (b) + c").
+        private static bool IsSingleParenthesizedTerm(string term)
+        {
+            var opens = 0;
+            for(var index = 0; index < term.Length; index++)
+            {
+                opens = term[index] switch
+                {
+                    '(' => opens + 1,
+                    ')' => opens - 1,
+                    _   => opens
+                };
+
+                if(opens == 0)
+                {
+                    return index == term.Length-1;
+                }
+            }
+
+            throw new InvalidOperationException($"Unbalanced parentheses in expression '{term}'");
+        }
+
 
         private static string EscapeKeywords(string symbol)
         {

@@ -33,7 +33,7 @@ partial class ExpressionBuilderContext
         {
             case ExpressionRef expressionRef:
             {
-                var libraryName = expressionRef.libraryName ?? _libraryContext.LibraryKey;
+                var libraryName = expressionRef.libraryName ?? _libraryContext.LibraryVersionedIdentifier;
                 if (!_libraryContext.LibraryDefinitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                 {
                     if (throwIfNotFound)
