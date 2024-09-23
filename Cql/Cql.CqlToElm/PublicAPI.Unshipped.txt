@@ -3,6 +3,13 @@ Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.Error = 0 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.PreferModel = 2 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.PreferSystem = 1 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
+Hl7.Cql.CqlToElm.CqlToElmConverter
+Hl7.Cql.CqlToElm.CqlToElmConverter.ConvertLibrary(string! cql) -> Hl7.Cql.Elm.Library!
+Hl7.Cql.CqlToElm.CqlToElmConverter.ConvertLibrary(System.IO.Stream! cqlLibrary) -> Hl7.Cql.Elm.Library!
+Hl7.Cql.CqlToElm.CqlToElmConverter.ConvertLibrary(System.IO.TextReader! cqlLibrary) -> Hl7.Cql.Elm.Library!
+Hl7.Cql.CqlToElm.CqlToElmConverter.CqlToElmConverter(System.IServiceProvider! services, Microsoft.Extensions.Logging.ILogger<Hl7.Cql.CqlToElm.CqlToElmConverter!>! logger) -> void
+Hl7.Cql.CqlToElm.CqlToElmConverter.Logger.get -> Microsoft.Extensions.Logging.ILogger<Hl7.Cql.CqlToElm.CqlToElmConverter!>!
+Hl7.Cql.CqlToElm.CqlToElmConverter.Services.get -> System.IServiceProvider!
 Hl7.Cql.CqlToElm.CqlToElmOptions
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.set -> void
