@@ -23,6 +23,7 @@ trigger:
     - develop-2.0*
     - release*
     - refs/tags/v*
+    - spike*
 
 stages:
 - stage: build
