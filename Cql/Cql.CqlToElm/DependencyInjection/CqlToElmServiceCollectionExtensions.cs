@@ -16,7 +16,10 @@ using Hl7.Cql.CqlToElm.LibraryProviders;
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace Microsoft.Extensions.DependencyInjection;
 
-internal static class CqlToElmServiceCollectionExtensions
+/// <summary>
+/// CqlToElmServiceCollectionExtensions.
+/// </summary>
+public static class CqlToElmServiceCollectionExtensions
 {
     // For unit testing, there is no need to create the options, then put it into an in-memory collection, only to bind it to a new options object.
     // We can just create the options object directly and pass it to the configureOptions action in the AddCqlToElmOptions method.
@@ -57,6 +60,9 @@ internal static class CqlToElmServiceCollectionExtensions
     //     return services;
     // }
 
+    /// <summary>
+    /// AddCqlToElmOptions
+    /// </summary>
     public static IServiceCollection AddCqlToElmOptions(
         this IServiceCollection services,
         Action<CqlToElmOptions>? configureOptions)
@@ -67,6 +73,9 @@ internal static class CqlToElmServiceCollectionExtensions
         return services;
     }
 
+    /// <summary>
+    /// AddCqlToElmModels
+    /// </summary>
     public static IServiceCollection AddCqlToElmModels(
         this IServiceCollection services,
         Action<IModelProvider> builder)
@@ -81,6 +90,9 @@ internal static class CqlToElmServiceCollectionExtensions
         return services;
     }
 
+    /// <summary>
+    /// AddCqlToElmServices
+    /// </summary>
     public static IServiceCollection AddCqlToElmServices(this IServiceCollection services) =>
         services
             .AddSingleton<CqlToElmConverter>()
@@ -91,6 +103,9 @@ internal static class CqlToElmServiceCollectionExtensions
             .AddSingleton<InvocationBuilder>()
             .AddTransient<LocalIdentifierProvider>();
 
+    /// <summary>
+    /// AddCqlToElmMessaging
+    /// </summary>
     public static IServiceCollection AddCqlToElmMessaging(
         this IServiceCollection services,
         CultureInfo? culture = null) =>
