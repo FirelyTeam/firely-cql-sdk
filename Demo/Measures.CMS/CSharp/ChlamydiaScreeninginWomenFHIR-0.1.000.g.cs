@@ -973,15 +973,16 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				{
 					DataType ac_ = ChlamydiaTest?.Effective;
 					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
+					CqlInterval<CqlDateTime> ae_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(ad_);
 
-					return (ad_ as CqlInterval<CqlDateTime>) as object;
+					return ae_ as object;
 				}
 				else if (q_())
 				{
-					DataType ae_ = ChlamydiaTest?.Effective;
-					object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+					DataType af_ = ChlamydiaTest?.Effective;
+					object ag_ = FHIRHelpers_4_3_000.ToValue(af_);
 
-					return (af_ as CqlDateTime) as object;
+					return (ag_ as CqlDateTime) as object;
 				}
 				else
 				{

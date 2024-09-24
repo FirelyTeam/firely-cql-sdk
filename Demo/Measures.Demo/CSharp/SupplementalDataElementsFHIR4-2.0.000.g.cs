@@ -154,8 +154,9 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		Coding i_(Extension E)
 		{
 			DataType ac_ = E?.Value;
+			Coding ad_ = context.Operators.Convert<Coding>(ac_);
 
-			return ac_ as Coding;
+			return ad_;
 		};
 		IEnumerable<Coding> j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 
@@ -244,8 +245,9 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		Coding i_(Extension E)
 		{
 			DataType ac_ = E?.Value;
+			Coding ad_ = context.Operators.Convert<Coding>(ac_);
 
-			return ac_ as Coding;
+			return ad_;
 		};
 		IEnumerable<Coding> j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 

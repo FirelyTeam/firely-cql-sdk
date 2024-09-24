@@ -735,45 +735,53 @@ public class NCQAClaims_1_0_0
 										else
 										{
 											DataType bz_ = i?.Serviced;
-											CqlDate ca_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
-											CqlDate cc_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
-											Quantity cd_ = i?.Quantity;
-											FhirDecimal ce_ = cd_?.ValueElement;
-											decimal? cf_ = FHIRHelpers_4_0_001.ToDecimal(ce_);
-											CqlDate cg_ = context.Operators.Add(cc_, new CqlQuantity(cf_, "day"));
-											CqlQuantity ch_ = context.Operators.Quantity(1m, "day");
-											CqlDate ci_ = context.Operators.Subtract(cg_, ch_);
-											CqlInterval<CqlDate> cj_ = context.Operators.Interval(ca_, ci_, true, true);
-											CqlDate ck_ = cj_?.low;
-											CqlDateTime cl_ = context.Operators.ConvertDateToDateTime(ck_);
-											CqlDate cn_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
-											CqlDate cp_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
-											FhirDecimal cr_ = cd_?.ValueElement;
-											decimal? cs_ = FHIRHelpers_4_0_001.ToDecimal(cr_);
-											CqlDate ct_ = context.Operators.Add(cp_, new CqlQuantity(cs_, "day"));
-											CqlDate cv_ = context.Operators.Subtract(ct_, ch_);
-											CqlInterval<CqlDate> cw_ = context.Operators.Interval(cn_, cv_, true, true);
-											CqlDate cx_ = cw_?.high;
-											CqlDateTime cy_ = context.Operators.ConvertDateToDateTime(cx_);
-											CqlDate da_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
-											CqlDate dc_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
-											FhirDecimal de_ = cd_?.ValueElement;
-											decimal? df_ = FHIRHelpers_4_0_001.ToDecimal(de_);
-											CqlDate dg_ = context.Operators.Add(dc_, new CqlQuantity(df_, "day"));
-											CqlDate di_ = context.Operators.Subtract(dg_, ch_);
-											CqlInterval<CqlDate> dj_ = context.Operators.Interval(da_, di_, true, true);
-											bool? dk_ = dj_?.lowClosed;
-											CqlDate dm_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
-											CqlDate do_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
-											FhirDecimal dq_ = cd_?.ValueElement;
-											decimal? dr_ = FHIRHelpers_4_0_001.ToDecimal(dq_);
-											CqlDate ds_ = context.Operators.Add(do_, new CqlQuantity(dr_, "day"));
-											CqlDate du_ = context.Operators.Subtract(ds_, ch_);
-											CqlInterval<CqlDate> dv_ = context.Operators.Interval(dm_, du_, true, true);
-											bool? dw_ = dv_?.highClosed;
-											CqlInterval<CqlDateTime> dx_ = context.Operators.Interval(cl_, cy_, dk_, dw_);
+											Date ca_ = context.Operators.Convert<Date>(bz_);
+											CqlDate cb_ = FHIRHelpers_4_0_001.ToDate(ca_);
+											Date cd_ = context.Operators.Convert<Date>(bz_);
+											CqlDate ce_ = FHIRHelpers_4_0_001.ToDate(cd_);
+											Quantity cf_ = i?.Quantity;
+											FhirDecimal cg_ = cf_?.ValueElement;
+											decimal? ch_ = FHIRHelpers_4_0_001.ToDecimal(cg_);
+											CqlDate ci_ = context.Operators.Add(ce_, new CqlQuantity(ch_, "day"));
+											CqlQuantity cj_ = context.Operators.Quantity(1m, "day");
+											CqlDate ck_ = context.Operators.Subtract(ci_, cj_);
+											CqlInterval<CqlDate> cl_ = context.Operators.Interval(cb_, ck_, true, true);
+											CqlDate cm_ = cl_?.low;
+											CqlDateTime cn_ = context.Operators.ConvertDateToDateTime(cm_);
+											Date cp_ = context.Operators.Convert<Date>(bz_);
+											CqlDate cq_ = FHIRHelpers_4_0_001.ToDate(cp_);
+											Date cs_ = context.Operators.Convert<Date>(bz_);
+											CqlDate ct_ = FHIRHelpers_4_0_001.ToDate(cs_);
+											FhirDecimal cv_ = cf_?.ValueElement;
+											decimal? cw_ = FHIRHelpers_4_0_001.ToDecimal(cv_);
+											CqlDate cx_ = context.Operators.Add(ct_, new CqlQuantity(cw_, "day"));
+											CqlDate cz_ = context.Operators.Subtract(cx_, cj_);
+											CqlInterval<CqlDate> da_ = context.Operators.Interval(cq_, cz_, true, true);
+											CqlDate db_ = da_?.high;
+											CqlDateTime dc_ = context.Operators.ConvertDateToDateTime(db_);
+											Date de_ = context.Operators.Convert<Date>(bz_);
+											CqlDate df_ = FHIRHelpers_4_0_001.ToDate(de_);
+											Date dh_ = context.Operators.Convert<Date>(bz_);
+											CqlDate di_ = FHIRHelpers_4_0_001.ToDate(dh_);
+											FhirDecimal dk_ = cf_?.ValueElement;
+											decimal? dl_ = FHIRHelpers_4_0_001.ToDecimal(dk_);
+											CqlDate dm_ = context.Operators.Add(di_, new CqlQuantity(dl_, "day"));
+											CqlDate do_ = context.Operators.Subtract(dm_, cj_);
+											CqlInterval<CqlDate> dp_ = context.Operators.Interval(df_, do_, true, true);
+											bool? dq_ = dp_?.lowClosed;
+											Date ds_ = context.Operators.Convert<Date>(bz_);
+											CqlDate dt_ = FHIRHelpers_4_0_001.ToDate(ds_);
+											Date dv_ = context.Operators.Convert<Date>(bz_);
+											CqlDate dw_ = FHIRHelpers_4_0_001.ToDate(dv_);
+											FhirDecimal dy_ = cf_?.ValueElement;
+											decimal? dz_ = FHIRHelpers_4_0_001.ToDecimal(dy_);
+											CqlDate ea_ = context.Operators.Add(dw_, new CqlQuantity(dz_, "day"));
+											CqlDate ec_ = context.Operators.Subtract(ea_, cj_);
+											CqlInterval<CqlDate> ed_ = context.Operators.Interval(dt_, ec_, true, true);
+											bool? ee_ = ed_?.highClosed;
+											CqlInterval<CqlDateTime> ef_ = context.Operators.Interval(cn_, dc_, dq_, ee_);
 
-											return dx_;
+											return ef_;
 										}
 									};
 
@@ -795,52 +803,52 @@ public class NCQAClaims_1_0_0
 						];
 						(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? ar_((IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> CoveredDays, nint _)? ItemCalculation)
 						{
-							(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? dy_()
+							(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? eg_()
 							{
-								bool dz_()
+								bool eh_()
 								{
-									IEnumerable<Claim.ItemComponent> ea_ = LineItemDefinition?.LineItems;
-									bool? eb_ = context.Operators.Exists<Claim.ItemComponent>(ea_);
+									IEnumerable<Claim.ItemComponent> ei_ = LineItemDefinition?.LineItems;
+									bool? ej_ = context.Operators.Exists<Claim.ItemComponent>(ei_);
 
-									return eb_ ?? false;
+									return ej_ ?? false;
 								};
-								if (dz_())
+								if (eh_())
 								{
-									Claim ec_ = LineItemDefinition?.Claim;
-									IEnumerable<Claim.ItemComponent> ed_ = LineItemDefinition?.LineItems;
-									bool? ef_(Claim.ItemComponent @this)
+									Claim ek_ = LineItemDefinition?.Claim;
+									IEnumerable<Claim.ItemComponent> el_ = LineItemDefinition?.LineItems;
+									bool? en_(Claim.ItemComponent @this)
 									{
-										DataType ep_ = @this?.Serviced;
-										bool? eq_ = context.Operators.Not((bool?)(ep_ is null));
+										DataType ex_ = @this?.Serviced;
+										bool? ey_ = context.Operators.Not((bool?)(ex_ is null));
 
-										return eq_;
+										return ey_;
 									};
-									IEnumerable<Claim.ItemComponent> eg_ = context.Operators.Where<Claim.ItemComponent>(ed_, ef_);
-									object eh_(Claim.ItemComponent @this)
+									IEnumerable<Claim.ItemComponent> eo_ = context.Operators.Where<Claim.ItemComponent>(el_, en_);
+									object ep_(Claim.ItemComponent @this)
 									{
-										DataType er_ = @this?.Serviced;
+										DataType ez_ = @this?.Serviced;
 
-										return er_;
+										return ez_;
 									};
-									IEnumerable<object> ei_ = context.Operators.Select<Claim.ItemComponent, object>(eg_, eh_);
-									CqlInterval<CqlDateTime> ej_(object NormalDate)
+									IEnumerable<object> eq_ = context.Operators.Select<Claim.ItemComponent, object>(eo_, ep_);
+									CqlInterval<CqlDateTime> er_(object NormalDate)
 									{
-										CqlInterval<CqlDateTime> es_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
+										CqlInterval<CqlDateTime> fa_ = NCQAFHIRBase_1_0_0.Normalize_Interval(NormalDate);
 
-										return es_;
+										return fa_;
 									};
-									IEnumerable<CqlInterval<CqlDateTime>> ek_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(ei_, ej_);
-									IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> el_ = ItemCalculation?.CoveredDays;
-									CqlInterval<CqlDateTime> em_((CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)? d)
+									IEnumerable<CqlInterval<CqlDateTime>> es_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(eq_, er_);
+									IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> et_ = ItemCalculation?.CoveredDays;
+									CqlInterval<CqlDateTime> eu_((CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)? d)
 									{
-										CqlInterval<CqlDateTime> et_ = d?.DaysSupplyInterval;
+										CqlInterval<CqlDateTime> fb_ = d?.DaysSupplyInterval;
 
-										return et_;
+										return fb_;
 									};
-									IEnumerable<CqlInterval<CqlDateTime>> en_ = context.Operators.Select<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?, CqlInterval<CqlDateTime>>(el_, em_);
-									(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? eo_ = (ec_, ed_, ek_, en_);
+									IEnumerable<CqlInterval<CqlDateTime>> ev_ = context.Operators.Select<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?, CqlInterval<CqlDateTime>>(et_, eu_);
+									(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? ew_ = (ek_, el_, es_, ev_);
 
-									return eo_;
+									return ew_;
 								}
 								else
 								{
@@ -848,7 +856,7 @@ public class NCQAClaims_1_0_0
 								}
 							};
 
-							return dy_();
+							return eg_();
 						};
 						IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> as_ = context.Operators.Select<(IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> CoveredDays, nint _)?, (Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>((IEnumerable<(IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> CoveredDays, nint _)?>)aq_, ar_);
 						(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? at_ = context.Operators.SingletonFrom<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(as_);
@@ -868,9 +876,9 @@ public class NCQAClaims_1_0_0
 			IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> l_ = context.Operators.Select<Claim, (Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(j_, k_);
 			bool? m_((Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? FinalList)
 			{
-				bool? eu_ = context.Operators.Not((bool?)(FinalList is null));
+				bool? fc_ = context.Operators.Not((bool?)(FinalList is null));
 
-				return eu_;
+				return fc_;
 			};
 			IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> n_ = context.Operators.Where<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(l_, m_);
 
@@ -3619,51 +3627,56 @@ public class NCQAClaims_1_0_0
 				return ah_;
 			};
 			IEnumerable<object> o_ = context.Operators.Select<Claim.ItemComponent, object>(m_, n_);
-			ResourceReference p_(object l) => 
-				l as ResourceReference;
+			ResourceReference p_(object l)
+			{
+				ResourceReference ai_ = context.Operators.Convert<ResourceReference>(l);
+
+				return ai_;
+			};
 			IEnumerable<ResourceReference> q_ = context.Operators.Select<object, ResourceReference>(o_, p_);
 			bool? s_(Claim.ItemComponent i)
 			{
-				PositiveInt ai_ = i?.SequenceElement;
-				Integer aj_ = context.Operators.Convert<Integer>(ai_);
-				int? ak_ = FHIRHelpers_4_0_001.ToInteger(aj_);
-				bool? al_ = context.Operators.Equal(ak_, 1);
+				PositiveInt aj_ = i?.SequenceElement;
+				Integer ak_ = context.Operators.Convert<Integer>(aj_);
+				int? al_ = FHIRHelpers_4_0_001.ToInteger(ak_);
+				bool? am_ = context.Operators.Equal(al_, 1);
 
-				return al_;
+				return am_;
 			};
 			IEnumerable<Claim.ItemComponent> t_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)h_, s_);
 			bool? u_(Claim.ItemComponent @this)
 			{
-				DataType am_ = @this?.Location;
-				bool? an_ = context.Operators.Not((bool?)(am_ is null));
+				DataType an_ = @this?.Location;
+				bool? ao_ = context.Operators.Not((bool?)(an_ is null));
 
-				return an_;
+				return ao_;
 			};
 			IEnumerable<Claim.ItemComponent> v_ = context.Operators.Where<Claim.ItemComponent>(t_, u_);
 			object w_(Claim.ItemComponent @this)
 			{
-				DataType ao_ = @this?.Location;
+				DataType ap_ = @this?.Location;
 
-				return ao_;
+				return ap_;
 			};
 			IEnumerable<object> x_ = context.Operators.Select<Claim.ItemComponent, object>(v_, w_);
 			string y_(object l)
 			{
-				FhirString ap_ = (l as ResourceReference)?.ReferenceElement;
-				FhirString[] aq_ = [
-					ap_,
+				ResourceReference aq_ = context.Operators.Convert<ResourceReference>(l);
+				FhirString ar_ = aq_?.ReferenceElement;
+				FhirString[] as_ = [
+					ar_,
 				];
-				string ar_(FhirString r)
+				string at_(FhirString r)
 				{
-					string au_ = FHIRHelpers_4_0_001.ToString(r);
-					string av_ = NCQAFHIRBase_1_0_0.GetId(au_);
+					string aw_ = FHIRHelpers_4_0_001.ToString(r);
+					string ax_ = NCQAFHIRBase_1_0_0.GetId(aw_);
 
-					return av_;
+					return ax_;
 				};
-				IEnumerable<string> as_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)aq_, ar_);
-				string at_ = context.Operators.SingletonFrom<string>(as_);
+				IEnumerable<string> au_ = context.Operators.Select<FhirString, string>((IEnumerable<FhirString>)as_, at_);
+				string av_ = context.Operators.SingletonFrom<string>(au_);
 
-				return at_;
+				return av_;
 			};
 			IEnumerable<string> z_ = context.Operators.Select<object, string>(x_, y_);
 			(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? aa_ = ((IEnumerable<Claim.ItemComponent>)h_, q_, z_);
@@ -3677,206 +3690,206 @@ public class NCQAClaims_1_0_0
 		];
 		(int? IdentifierCount, nint _)? e_((IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)? ClaimProperties)
 		{
-			IEnumerable<Location> aw_ = context.Operators.RetrieveByValueSet<Location>(default, default);
-			bool? ax_(Location l)
+			IEnumerable<Location> ay_ = context.Operators.RetrieveByValueSet<Location>(default, default);
+			bool? az_(Location l)
 			{
-				Id be_ = l?.IdElement;
-				string bf_ = FHIRHelpers_4_0_001.ToString(be_);
-				IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> bg_ = ClaimProperties?.ItemsLocationReferences;
-				bool? bh_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
-				{
-					IEnumerable<string> bn_ = @this?.ItemLocationID;
-					bool? bo_ = context.Operators.Not((bool?)(bn_ is null));
-
-					return bo_;
-				};
-				IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> bi_ = context.Operators.Where<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(bg_, bh_);
-				IEnumerable<string> bj_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+				Id bg_ = l?.IdElement;
+				string bh_ = FHIRHelpers_4_0_001.ToString(bg_);
+				IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> bi_ = ClaimProperties?.ItemsLocationReferences;
+				bool? bj_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
 				{
 					IEnumerable<string> bp_ = @this?.ItemLocationID;
+					bool? bq_ = context.Operators.Not((bool?)(bp_ is null));
 
-					return bp_;
+					return bq_;
 				};
-				IEnumerable<IEnumerable<string>> bk_ = context.Operators.Select<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<string>>(bi_, bj_);
-				IEnumerable<string> bl_ = context.Operators.Flatten<string>(bk_);
-				bool? bm_ = context.Operators.In<string>(bf_, bl_);
+				IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> bk_ = context.Operators.Where<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(bi_, bj_);
+				IEnumerable<string> bl_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+				{
+					IEnumerable<string> br_ = @this?.ItemLocationID;
 
-				return bm_;
+					return br_;
+				};
+				IEnumerable<IEnumerable<string>> bm_ = context.Operators.Select<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<string>>(bk_, bl_);
+				IEnumerable<string> bn_ = context.Operators.Flatten<string>(bm_);
+				bool? bo_ = context.Operators.In<string>(bh_, bn_);
+
+				return bo_;
 			};
-			IEnumerable<Location> ay_ = context.Operators.Where<Location>(aw_, ax_);
-			(IEnumerable<Location> CorrespondingLocations, nint _)? az_ = (ay_, default);
-			(IEnumerable<Location> CorrespondingLocations, nint _)?[] ba_ = [
-				az_,
+			IEnumerable<Location> ba_ = context.Operators.Where<Location>(ay_, az_);
+			(IEnumerable<Location> CorrespondingLocations, nint _)? bb_ = (ba_, default);
+			(IEnumerable<Location> CorrespondingLocations, nint _)?[] bc_ = [
+				bb_,
 			];
-			(int? IdentifierCount, nint _)? bb_((IEnumerable<Location> CorrespondingLocations, nint _)? GetLocation)
+			(int? IdentifierCount, nint _)? bd_((IEnumerable<Location> CorrespondingLocations, nint _)? GetLocation)
 			{
-				IEnumerable<Location> bq_ = GetLocation?.CorrespondingLocations;
-				bool? br_(Location C)
+				IEnumerable<Location> bs_ = GetLocation?.CorrespondingLocations;
+				bool? bt_(Location C)
 				{
-					bool? ca_ = context.Operators.Not((bool?)(C is null));
+					bool? cc_ = context.Operators.Not((bool?)(C is null));
 
-					return ca_;
+					return cc_;
 				};
-				IEnumerable<Location> bs_ = context.Operators.Where<Location>(bq_, br_);
-				(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? bt_(Location C)
+				IEnumerable<Location> bu_ = context.Operators.Where<Location>(bs_, bt_);
+				(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? bv_(Location C)
 				{
-					List<Identifier> cb_ = C?.Identifier;
-					bool? cc_(Identifier l)
+					List<Identifier> cd_ = C?.Identifier;
+					bool? ce_(Identifier l)
 					{
-						FhirUri cm_ = l?.SystemElement;
-						string cn_ = cm_?.Value;
-						bool? co_ = context.Operators.Equal(cn_, "http://hl7.org/fhir/sid/us-npi");
-						CodeableConcept cp_ = l?.Type;
-						CqlConcept cq_ = FHIRHelpers_4_0_001.ToConcept(cp_);
-						CqlCode cr_ = NCQATerminology_1_0_0.Provider_number();
-						CqlConcept cs_ = context.Operators.ConvertCodeToConcept(cr_);
-						bool? ct_ = context.Operators.Equivalent(cq_, cs_);
-						bool? cu_ = context.Operators.And(co_, ct_);
-						FhirString cv_ = l?.ValueElement;
-						string cw_ = cv_?.Value;
-						bool? cx_ = context.Operators.Not((bool?)(cw_ is null));
-						bool? cy_ = context.Operators.And(cu_, cx_);
+						FhirUri co_ = l?.SystemElement;
+						string cp_ = co_?.Value;
+						bool? cq_ = context.Operators.Equal(cp_, "http://hl7.org/fhir/sid/us-npi");
+						CodeableConcept cr_ = l?.Type;
+						CqlConcept cs_ = FHIRHelpers_4_0_001.ToConcept(cr_);
+						CqlCode ct_ = NCQATerminology_1_0_0.Provider_number();
+						CqlConcept cu_ = context.Operators.ConvertCodeToConcept(ct_);
+						bool? cv_ = context.Operators.Equivalent(cs_, cu_);
+						bool? cw_ = context.Operators.And(cq_, cv_);
+						FhirString cx_ = l?.ValueElement;
+						string cy_ = cx_?.Value;
+						bool? cz_ = context.Operators.Not((bool?)(cy_ is null));
+						bool? da_ = context.Operators.And(cw_, cz_);
 
-						return cy_;
+						return da_;
 					};
-					IEnumerable<Identifier> cd_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cb_, cc_);
-					FhirString ce_(Identifier l)
+					IEnumerable<Identifier> cf_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cd_, ce_);
+					FhirString cg_(Identifier l)
 					{
-						FhirString cz_ = l?.ValueElement;
+						FhirString db_ = l?.ValueElement;
 
-						return cz_;
+						return db_;
 					};
-					IEnumerable<FhirString> cf_ = context.Operators.Select<Identifier, FhirString>(cd_, ce_);
-					bool? ch_(Identifier l)
+					IEnumerable<FhirString> ch_ = context.Operators.Select<Identifier, FhirString>(cf_, cg_);
+					bool? cj_(Identifier l)
 					{
-						FhirUri da_ = l?.SystemElement;
-						string db_ = da_?.Value;
-						bool? dc_ = context.Operators.Equal(db_, "http://hl7.org/fhir/sid/us-npi");
-						CodeableConcept dd_ = l?.Type;
-						CqlConcept de_ = FHIRHelpers_4_0_001.ToConcept(dd_);
-						CqlCode df_ = NCQATerminology_1_0_0.Provider_number();
-						CqlConcept dg_ = context.Operators.ConvertCodeToConcept(df_);
-						bool? dh_ = context.Operators.Equivalent(de_, dg_);
-						bool? di_ = context.Operators.And(dc_, dh_);
-						FhirString dj_ = l?.ValueElement;
-						string dk_ = dj_?.Value;
-						bool? dl_ = context.Operators.And(di_, (bool?)(dk_ is null));
+						FhirUri dc_ = l?.SystemElement;
+						string dd_ = dc_?.Value;
+						bool? de_ = context.Operators.Equal(dd_, "http://hl7.org/fhir/sid/us-npi");
+						CodeableConcept df_ = l?.Type;
+						CqlConcept dg_ = FHIRHelpers_4_0_001.ToConcept(df_);
+						CqlCode dh_ = NCQATerminology_1_0_0.Provider_number();
+						CqlConcept di_ = context.Operators.ConvertCodeToConcept(dh_);
+						bool? dj_ = context.Operators.Equivalent(dg_, di_);
+						bool? dk_ = context.Operators.And(de_, dj_);
+						FhirString dl_ = l?.ValueElement;
+						string dm_ = dl_?.Value;
+						bool? dn_ = context.Operators.And(dk_, (bool?)(dm_ is null));
 
-						return dl_;
+						return dn_;
 					};
-					IEnumerable<Identifier> ci_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cb_, ch_);
-					Identifier cj_(Identifier l) => 
+					IEnumerable<Identifier> ck_ = context.Operators.Where<Identifier>((IEnumerable<Identifier>)cd_, cj_);
+					Identifier cl_(Identifier l) => 
 						l;
-					IEnumerable<Identifier> ck_ = context.Operators.Select<Identifier, Identifier>(ci_, cj_);
-					(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? cl_ = (cf_, ck_);
+					IEnumerable<Identifier> cm_ = context.Operators.Select<Identifier, Identifier>(ck_, cl_);
+					(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? cn_ = (ch_, cm_);
 
-					return cl_;
+					return cn_;
 				};
-				IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> bu_ = context.Operators.Select<Location, (IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>(bs_, bt_);
-				(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)? bv_ = (bu_, default);
-				(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?[] bw_ = [
-					bv_,
+				IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> bw_ = context.Operators.Select<Location, (IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>(bu_, bv_);
+				(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)? bx_ = (bw_, default);
+				(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?[] by_ = [
+					bx_,
 				];
-				(int? IdentifierCount, nint _)? bx_((IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)? GetIdentifiers)
+				(int? IdentifierCount, nint _)? bz_((IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)? GetIdentifiers)
 				{
-					int? dm_()
+					int? do_()
 					{
-						bool do_()
+						bool dq_()
 						{
-							IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> dp_ = ClaimProperties?.ItemsLocationReferences;
-							bool? dq_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
-							{
-								IEnumerable<Claim.ItemComponent> dw_ = @this?.SingleItem;
-								bool? dx_ = context.Operators.Not((bool?)(dw_ is null));
-
-								return dx_;
-							};
-							IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> dr_ = context.Operators.Where<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(dp_, dq_);
-							IEnumerable<Claim.ItemComponent> ds_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+							IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> dr_ = ClaimProperties?.ItemsLocationReferences;
+							bool? ds_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
 							{
 								IEnumerable<Claim.ItemComponent> dy_ = @this?.SingleItem;
+								bool? dz_ = context.Operators.Not((bool?)(dy_ is null));
 
-								return dy_;
+								return dz_;
 							};
-							IEnumerable<IEnumerable<Claim.ItemComponent>> dt_ = context.Operators.Select<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<Claim.ItemComponent>>(dr_, ds_);
-							IEnumerable<Claim.ItemComponent> du_ = context.Operators.Flatten<Claim.ItemComponent>(dt_);
-							bool? dv_ = context.Operators.Exists<Claim.ItemComponent>(du_);
-
-							return dv_ ?? false;
-						};
-						if (do_())
-						{
-							IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> dz_ = ClaimProperties?.ItemsLocationReferences;
-							bool? ea_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+							IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> dt_ = context.Operators.Where<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(dr_, ds_);
+							IEnumerable<Claim.ItemComponent> du_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
 							{
-								IEnumerable<ResourceReference> ew_ = @this?.ItemLocation;
-								bool? ex_ = context.Operators.Not((bool?)(ew_ is null));
+								IEnumerable<Claim.ItemComponent> ea_ = @this?.SingleItem;
 
-								return ex_;
+								return ea_;
 							};
-							IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> eb_ = context.Operators.Where<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(dz_, ea_);
-							IEnumerable<ResourceReference> ec_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
+							IEnumerable<IEnumerable<Claim.ItemComponent>> dv_ = context.Operators.Select<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<Claim.ItemComponent>>(dt_, du_);
+							IEnumerable<Claim.ItemComponent> dw_ = context.Operators.Flatten<Claim.ItemComponent>(dv_);
+							bool? dx_ = context.Operators.Exists<Claim.ItemComponent>(dw_);
+
+							return dx_ ?? false;
+						};
+						if (dq_())
+						{
+							IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> eb_ = ClaimProperties?.ItemsLocationReferences;
+							bool? ec_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
 							{
 								IEnumerable<ResourceReference> ey_ = @this?.ItemLocation;
+								bool? ez_ = context.Operators.Not((bool?)(ey_ is null));
 
-								return ey_;
+								return ez_;
 							};
-							IEnumerable<IEnumerable<ResourceReference>> ed_ = context.Operators.Select<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<ResourceReference>>(eb_, ec_);
-							IEnumerable<ResourceReference> ee_ = context.Operators.Flatten<ResourceReference>(ed_);
-							bool? ef_(ResourceReference X)
+							IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ed_ = context.Operators.Where<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>(eb_, ec_);
+							IEnumerable<ResourceReference> ee_((IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)? @this)
 							{
-								FhirString ez_ = X?.ReferenceElement;
-								string fa_ = ez_?.Value;
+								IEnumerable<ResourceReference> fa_ = @this?.ItemLocation;
 
-								return (bool?)(fa_ is null);
+								return fa_;
 							};
-							IEnumerable<ResourceReference> eg_ = context.Operators.Where<ResourceReference>(ee_, ef_);
-							int? eh_ = context.Operators.Count<ResourceReference>(eg_);
-							IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> ei_ = GetIdentifiers?.IdentifierTuple;
-							IEnumerable<FhirString> ej_((IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
+							IEnumerable<IEnumerable<ResourceReference>> ef_ = context.Operators.Select<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?, IEnumerable<ResourceReference>>(ed_, ee_);
+							IEnumerable<ResourceReference> eg_ = context.Operators.Flatten<ResourceReference>(ef_);
+							bool? eh_(ResourceReference X)
 							{
-								IEnumerable<FhirString> fb_ = X?.AllIdentifiers;
+								FhirString fb_ = X?.ReferenceElement;
+								string fc_ = fb_?.Value;
 
-								return fb_;
+								return (bool?)(fc_ is null);
 							};
-							IEnumerable<IEnumerable<FhirString>> ek_ = context.Operators.Select<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<FhirString>>(ei_, ej_);
-							IEnumerable<FhirString> el_ = context.Operators.Flatten<FhirString>(ek_);
-							FhirString em_(FhirString X) => 
+							IEnumerable<ResourceReference> ei_ = context.Operators.Where<ResourceReference>(eg_, eh_);
+							int? ej_ = context.Operators.Count<ResourceReference>(ei_);
+							IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> ek_ = GetIdentifiers?.IdentifierTuple;
+							IEnumerable<FhirString> el_((IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
+							{
+								IEnumerable<FhirString> fd_ = X?.AllIdentifiers;
+
+								return fd_;
+							};
+							IEnumerable<IEnumerable<FhirString>> em_ = context.Operators.Select<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<FhirString>>(ek_, el_);
+							IEnumerable<FhirString> en_ = context.Operators.Flatten<FhirString>(em_);
+							FhirString eo_(FhirString X) => 
 								X;
-							IEnumerable<FhirString> en_ = context.Operators.Select<FhirString, FhirString>(el_, em_);
-							int? eo_ = context.Operators.Count<FhirString>(en_);
-							int? ep_ = context.Operators.Add(eh_, eo_);
-							IEnumerable<Identifier> er_((IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
+							IEnumerable<FhirString> ep_ = context.Operators.Select<FhirString, FhirString>(en_, eo_);
+							int? eq_ = context.Operators.Count<FhirString>(ep_);
+							int? er_ = context.Operators.Add(ej_, eq_);
+							IEnumerable<Identifier> et_((IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)? X)
 							{
-								IEnumerable<Identifier> fc_ = X?.NullIdentifiers;
+								IEnumerable<Identifier> fe_ = X?.NullIdentifiers;
 
-								return fc_;
+								return fe_;
 							};
-							IEnumerable<IEnumerable<Identifier>> es_ = context.Operators.Select<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<Identifier>>(ei_, er_);
-							IEnumerable<Identifier> et_ = context.Operators.Flatten<Identifier>(es_);
-							int? eu_ = context.Operators.Count<Identifier>(et_);
-							int? ev_ = context.Operators.Add(ep_, eu_);
+							IEnumerable<IEnumerable<Identifier>> eu_ = context.Operators.Select<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?, IEnumerable<Identifier>>(ek_, et_);
+							IEnumerable<Identifier> ev_ = context.Operators.Flatten<Identifier>(eu_);
+							int? ew_ = context.Operators.Count<Identifier>(ev_);
+							int? ex_ = context.Operators.Add(er_, ew_);
 
-							return ev_;
+							return ex_;
 						}
 						else
 						{
 							return 0;
 						}
 					};
-					(int? IdentifierCount, nint _)? dn_ = (dm_(), default);
+					(int? IdentifierCount, nint _)? dp_ = (do_(), default);
 
-					return dn_;
+					return dp_;
 				};
-				IEnumerable<(int? IdentifierCount, nint _)?> by_ = context.Operators.Select<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?>)bw_, bx_);
-				(int? IdentifierCount, nint _)? bz_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(by_);
+				IEnumerable<(int? IdentifierCount, nint _)?> ca_ = context.Operators.Select<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?>)by_, bz_);
+				(int? IdentifierCount, nint _)? cb_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(ca_);
 
-				return bz_;
+				return cb_;
 			};
-			IEnumerable<(int? IdentifierCount, nint _)?> bc_ = context.Operators.Select<(IEnumerable<Location> CorrespondingLocations, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<Location> CorrespondingLocations, nint _)?>)ba_, bb_);
-			(int? IdentifierCount, nint _)? bd_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(bc_);
+			IEnumerable<(int? IdentifierCount, nint _)?> be_ = context.Operators.Select<(IEnumerable<Location> CorrespondingLocations, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<Location> CorrespondingLocations, nint _)?>)bc_, bd_);
+			(int? IdentifierCount, nint _)? bf_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(be_);
 
-			return bd_;
+			return bf_;
 		};
 		IEnumerable<(int? IdentifierCount, nint _)?> f_ = context.Operators.Select<(IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)?>)d_, e_);
 		(int? IdentifierCount, nint _)? g_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(f_);

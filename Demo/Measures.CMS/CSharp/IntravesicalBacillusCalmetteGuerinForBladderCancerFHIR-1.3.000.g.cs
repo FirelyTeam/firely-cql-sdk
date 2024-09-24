@@ -630,38 +630,42 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? h_ = context.Operators.Not((bool?)(g_ is null));
 			DataType i_ = StagingObservation?.Value;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
-			CqlCode k_ = this.T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_();
-			CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-			bool? m_ = context.Operators.Equivalent(j_ as CqlConcept, l_);
-			object o_ = FHIRHelpers_4_3_000.ToValue(i_);
-			CqlCode p_ = this.Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding_();
-			CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-			bool? r_ = context.Operators.Equivalent(o_ as CqlConcept, q_);
-			bool? s_ = context.Operators.Or(m_, r_);
-			object u_ = FHIRHelpers_4_3_000.ToValue(i_);
-			CqlCode v_ = this.Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding_();
-			CqlConcept w_ = context.Operators.ConvertCodeToConcept(v_);
-			bool? x_ = context.Operators.Equivalent(u_ as CqlConcept, w_);
-			bool? y_ = context.Operators.Or(s_, x_);
-			object aa_ = FHIRHelpers_4_3_000.ToValue(i_);
-			CqlCode ab_ = this.Carcinoma_in_situ_of_bladder();
-			CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
-			bool? ad_ = context.Operators.Equivalent(aa_ as CqlConcept, ac_);
-			bool? ae_ = context.Operators.Or(y_, ad_);
-			bool? af_ = context.Operators.And(h_, ae_);
-			Code<ObservationStatus> ag_ = StagingObservation?.StatusElement;
-			ObservationStatus? ah_ = ag_?.Value;
-			Code<ObservationStatus> ai_ = context.Operators.Convert<Code<ObservationStatus>>(ah_);
-			string aj_ = context.Operators.Convert<string>(ai_);
-			string[] ak_ = [
+			CqlConcept k_ = context.Operators.Convert<CqlConcept>(j_);
+			CqlCode l_ = this.T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_();
+			CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
+			bool? n_ = context.Operators.Equivalent(k_, m_);
+			object p_ = FHIRHelpers_4_3_000.ToValue(i_);
+			CqlConcept q_ = context.Operators.Convert<CqlConcept>(p_);
+			CqlCode r_ = this.Ta__Noninvasive_papillary_carcinoma__urinary_tract___finding_();
+			CqlConcept s_ = context.Operators.ConvertCodeToConcept(r_);
+			bool? t_ = context.Operators.Equivalent(q_, s_);
+			bool? u_ = context.Operators.Or(n_, t_);
+			object w_ = FHIRHelpers_4_3_000.ToValue(i_);
+			CqlConcept x_ = context.Operators.Convert<CqlConcept>(w_);
+			CqlCode y_ = this.Tis__Carcinoma_in_situ__flat_tumor_of_urinary_bladder___finding_();
+			CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
+			bool? aa_ = context.Operators.Equivalent(x_, z_);
+			bool? ab_ = context.Operators.Or(u_, aa_);
+			object ad_ = FHIRHelpers_4_3_000.ToValue(i_);
+			CqlConcept ae_ = context.Operators.Convert<CqlConcept>(ad_);
+			CqlCode af_ = this.Carcinoma_in_situ_of_bladder();
+			CqlConcept ag_ = context.Operators.ConvertCodeToConcept(af_);
+			bool? ah_ = context.Operators.Equivalent(ae_, ag_);
+			bool? ai_ = context.Operators.Or(ab_, ah_);
+			bool? aj_ = context.Operators.And(h_, ai_);
+			Code<ObservationStatus> ak_ = StagingObservation?.StatusElement;
+			ObservationStatus? al_ = ak_?.Value;
+			Code<ObservationStatus> am_ = context.Operators.Convert<Code<ObservationStatus>>(al_);
+			string an_ = context.Operators.Convert<string>(am_);
+			string[] ao_ = [
 				"final",
 				"amended",
 				"corrected",
 			];
-			bool? al_ = context.Operators.In<string>(aj_, ak_ as IEnumerable<string>);
-			bool? am_ = context.Operators.And(af_, al_);
+			bool? ap_ = context.Operators.In<string>(an_, ao_ as IEnumerable<string>);
+			bool? aq_ = context.Operators.And(aj_, ap_);
 
-			return am_;
+			return aq_;
 		};
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		bool? f_ = context.Operators.Exists<Observation>(e_);

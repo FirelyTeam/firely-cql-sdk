@@ -699,10 +699,11 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		{
 			DataType v_ = MostRecentTobaccoUseScreening?.Value;
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
-			CqlValueSet x_ = this.Tobacco_User();
-			bool? y_ = context.Operators.ConceptInValueSet(w_ as CqlConcept, x_);
+			CqlConcept x_ = context.Operators.Convert<CqlConcept>(w_);
+			CqlValueSet y_ = this.Tobacco_User();
+			bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
 
-			return y_;
+			return z_;
 		};
 		IEnumerable<Observation> k_ = context.Operators.Where<Observation>((IEnumerable<Observation>)i_, j_);
 		Observation l_ = context.Operators.SingletonFrom<Observation>(k_);
@@ -773,10 +774,11 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		{
 			DataType v_ = MostRecentTobaccoUseScreening?.Value;
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
-			CqlValueSet x_ = this.Tobacco_Non_User();
-			bool? y_ = context.Operators.ConceptInValueSet(w_ as CqlConcept, x_);
+			CqlConcept x_ = context.Operators.Convert<CqlConcept>(w_);
+			CqlValueSet y_ = this.Tobacco_Non_User();
+			bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
 
-			return y_;
+			return z_;
 		};
 		IEnumerable<Observation> k_ = context.Operators.Where<Observation>((IEnumerable<Observation>)i_, j_);
 		Observation l_ = context.Operators.SingletonFrom<Observation>(k_);

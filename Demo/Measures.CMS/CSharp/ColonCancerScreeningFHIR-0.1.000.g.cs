@@ -383,15 +383,16 @@ public class ColonCancerScreeningFHIR_0_1_000
 				{
 					DataType ab_ = FecalOccultResult?.Effective;
 					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
+					CqlInterval<CqlDateTime> ad_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(ac_);
 
-					return (ac_ as CqlInterval<CqlDateTime>) as object;
+					return ad_ as object;
 				}
 				else if (p_())
 				{
-					DataType ad_ = FecalOccultResult?.Effective;
-					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+					DataType ae_ = FecalOccultResult?.Effective;
+					object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
 
-					return (ae_ as CqlDateTime) as object;
+					return (af_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -461,15 +462,16 @@ public class ColonCancerScreeningFHIR_0_1_000
 				{
 					DataType ah_ = sDNATest?.Effective;
 					object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
+					CqlInterval<CqlDateTime> aj_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(ai_);
 
-					return (ai_ as CqlInterval<CqlDateTime>) as object;
+					return aj_ as object;
 				}
 				else if (v_())
 				{
-					DataType aj_ = sDNATest?.Effective;
-					object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
+					DataType ak_ = sDNATest?.Effective;
+					object al_ = FHIRHelpers_4_3_000.ToValue(ak_);
 
-					return (ak_ as CqlDateTime) as object;
+					return (al_ as CqlDateTime) as object;
 				}
 				else
 				{
