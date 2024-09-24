@@ -20,9 +20,30 @@ code "entered-in-error": 'entered-in-error' from ConditionVerificationStatusCode
 /*
 @parameter: in
 */
-parameter "Measurement Period" default Interval[@2023-01-01, @2023-12-31]
+parameter "Measurement Period" default Interval[@2023-01-01T, @2023-12-31T]
 
 context Patient
+
+/*
+@description: Is Patient in Initial Population ? Patients aged 16 and older who have sustained injuries due to falling rock.
+@parameter: out
+*/
+define "Initial Population":
+  (AgeInYearsAt(start of "Measurement Period") >= 16) and exists("Injury due to falling rock within measurement period")
+
+/*
+@description: Is Patient in Denominator ? Denominator equals the initial population.
+@parameter: out
+*/
+define "Denominator":
+    "Initial Population"
+
+/*
+@description: In Numerator ? Supply of 'ACME Umbrella' within 7 days of "recording of the (latestmost recent) rock fall condition within the measurement period"
+@parameter: out
+*/
+define "Numerator":
+    exists "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock"
 
 /*
 @description: Conditions of type 'Injury due to falling rock' within the measurement period
@@ -34,8 +55,11 @@ define "Injury due to falling rock within measurement period":
     [Condition: "Injury due to falling rock"] C
        where (C.onset.value as DateTime) during "Measurement Period"
 
-define "Latest injury due to falling rock":
+define "Last injury due to falling rock":
       Last( "Injury due to falling rock within measurement period" C sort by (onset.value as DateTime) )
+
+define "Date of last injury due to falling rock":
+      "Last injury due to falling rock".onset.value as DateTime
 /*
 @description: Is there a supply of a 'ACME Umbrella' within 7 days of "recording of the (latest) rock fall condition within the measurement period"
 @fhirquery: akin to /SupplyDelivery?supplied-item=http://acme.org/product-catalog|U707&ocurrence-datetime=lt[Condition onset date+7 days]
@@ -45,10 +69,4 @@ define "Latest injury due to falling rock":
 define "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock":
     [SupplyDelivery] SD
       where (SD.suppliedItem.item ~ "Tiny Umbrella")
-       and (("Latest injury due to falling rock" C where (C.onset.value as DateTime) 7 days or less before SD.occurrence.value) is not null)
-
-
-
-
-
-
+       and ("Date of last injury due to falling rock" 7 days or less before (SD.occurrence.value as DateTime))
