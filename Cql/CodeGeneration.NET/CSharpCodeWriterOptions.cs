@@ -60,7 +60,7 @@ public partial class CSharpCodeWriterOptions
 /// <summary>
 /// How to format types in C# output
 /// </summary>
-public enum CSharpCodeWriterTypeFormat
+internal enum CSharpCodeWriterTypeFormat
 {
     /// <summary>
     /// Use 'var' over explicit types.
