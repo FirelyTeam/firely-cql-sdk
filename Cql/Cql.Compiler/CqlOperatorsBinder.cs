@@ -63,7 +63,8 @@ namespace Hl7.Cql.Compiler
             var result = methodName switch
             {
                 // @formatter:off
-                "Convert"           => BindConvert(args[0], args[1]),
+                "Convert" when args is [{}a0, {}a1] => BindConvert(a0, a1),
+                "Convert" when args is [{}a0] && typeArgs is [{}t0] => BindConvertGeneric(a0, t0),
                 "Aggregate"         => BindToBestMethodOverload(nameof(ICqlOperators.Aggregate), args, [_typeResolver.GetListElementType(args[0].Type, true)!, args[2].Type])!,
                 "CrossJoin"         => BindToBestMethodOverload(nameof(ICqlOperators.CrossJoin), args, args.SelectToArray(s => _typeResolver.GetListElementType(s.Type, true)!))!,
                 "Message"           => BindToBestMethodOverload(nameof(ICqlOperators.Message), args, [args[0].Type])!,
