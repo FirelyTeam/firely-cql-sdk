@@ -14,7 +14,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Include="$(OutputPath)\build.log" Link="build.log" />
+		<None Remove="..\..\README.md" />
+		<None Include="README.md" Pack="true" PackagePath=""/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="$(OutputPath)\build.log" Link="build.log" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -44,9 +49,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="CqlPackagingPipelineOptions.*.cs">
-	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
-	  </Compile>
+		<Compile Update="CqlPackagingPipelineOptions.*.cs">
+			<DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 </Project>
