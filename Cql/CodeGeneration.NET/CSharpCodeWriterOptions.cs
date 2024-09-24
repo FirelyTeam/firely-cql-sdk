@@ -34,7 +34,7 @@ public partial class CSharpCodeWriterOptions
     /// <summary>
     /// Gets or sets a value indicating whether to prefer 'var' over explicit types.
     /// </summary>
-    public CSharpCodeWriterTypeFormat TypeFormat { get; set; }
+    internal CSharpCodeWriterTypeFormat TypeFormat => CSharpCodeWriterTypeFormat.Explicit; // We only support explicit
 
     /// <summary>
     /// Binds the configuration values to the <see cref="CSharpCodeWriterOptions"/> object.

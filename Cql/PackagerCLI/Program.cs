@@ -73,7 +73,6 @@ public class Program
                      {CqlToResourcePackagingOptions.ArgNameCqlDirectory,-26} {"<directory>",-19} Required: CQL root directory
                      {Optional(FhirResourceWriterOptions.ArgNameOutDirectory),-26} {"<directory>",-19} Resource directory
                      {Optional(CSharpCodeWriterOptions.ArgNameOutDirectory),-26} {"<directory>",-19} C# output directory
-                     {Optional(CSharpCodeWriterOptions.ArgNameTypeFormat),-26} {"<var|explicit>",-19} Whether to use var (default) or explicit types in the C# output
                      {Optional(AssemblyDataWriterOptions.ArgNameOutDirectory),-26}{"<directory>",-19} DLL output directory
                      {Optional(CqlToResourcePackagingOptions.ArgNameLogDebugEnabled),-26} {"<true|false>",-19} Enable debug logging or not (default)
                      {Optional(CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl),-26} {"<url>",-19} The root url used for the resource canonical
@@ -82,6 +81,9 @@ public class Program
                      {"",-26 - 19 - 1} (example: 2000-12-31T23:59:59.99Z)
                      {"",-26 - 19 - 1} If omitted the current date time will be used
                  """;
+                 // Removed from documentation. We will only support explicit type format
+                 // {Optional(CSharpCodeWriterOptions.ArgNameTypeFormat),-26} {"<var|explicit>",-19} Whether to use explicit (default) or var types in the C# output
+
 
         static string Optional(string s) => $"[{s}]";
     }
