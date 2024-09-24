@@ -33,7 +33,7 @@ public class TestRetrieve_1_0_1
     internal Lazy<CqlValueSet> __Palliative_Care_Intervention;
     internal Lazy<CqlCode> __Encounter_for_palliative_care;
     internal Lazy<CqlCode[]> __ICD_10;
-    internal Lazy<object> __MeasurementPeriod;
+    internal Lazy<CqlInterval<CqlDateTime>> __MeasurementPeriod;
     internal Lazy<Patient> __Patient;
 
     #endregion
@@ -57,7 +57,7 @@ public class TestRetrieve_1_0_1
         __Palliative_Care_Intervention = new Lazy<CqlValueSet>(this.Palliative_Care_Intervention_Value);
         __Encounter_for_palliative_care = new Lazy<CqlCode>(this.Encounter_for_palliative_care_Value);
         __ICD_10 = new Lazy<CqlCode[]>(this.ICD_10_Value);
-        __MeasurementPeriod = new Lazy<object>(this.MeasurementPeriod_Value);
+        __MeasurementPeriod = new Lazy<CqlInterval<CqlDateTime>>(this.MeasurementPeriod_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
     }
     #region Dependencies
@@ -175,18 +175,18 @@ public class TestRetrieve_1_0_1
 	public CqlCode[] ICD_10() => 
 		__ICD_10.Value;
 
-	private object MeasurementPeriod_Value()
+	private CqlInterval<CqlDateTime> MeasurementPeriod_Value()
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, default);
 		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
 		object d_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", c_);
 
-		return d_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("MeasurementPeriod")]
-	public object MeasurementPeriod() => 
+	public CqlInterval<CqlDateTime> MeasurementPeriod() => 
 		__MeasurementPeriod.Value;
 
 	private Patient Patient_Value()

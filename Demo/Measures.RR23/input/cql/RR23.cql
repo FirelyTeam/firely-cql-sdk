@@ -20,7 +20,7 @@ code "entered-in-error": 'entered-in-error' from ConditionVerificationStatusCode
 /*
 @parameter: in
 */
-parameter "Measurement Period" default Interval[@2023-01-01, @2023-12-31]
+parameter "Measurement Period" default Interval[@2023-01-01T, @2023-12-31T]
 
 context Patient
 

@@ -26,7 +26,7 @@ public class RR23_1_0_0
     internal Lazy<CqlCode> __entered_in_error;
     internal Lazy<CqlCode[]> __ACME_Product_Catalog;
     internal Lazy<CqlCode[]> __ConditionVerificationStatusCodes;
-    internal Lazy<CqlInterval<CqlDate>> __Measurement_Period;
+    internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
     internal Lazy<Patient> __Patient;
     internal Lazy<IEnumerable<Condition>> __Injury_due_to_falling_rock_within_measurement_period;
     internal Lazy<bool?> __Initial_Population;
@@ -49,7 +49,7 @@ public class RR23_1_0_0
         __entered_in_error = new Lazy<CqlCode>(this.entered_in_error_Value);
         __ACME_Product_Catalog = new Lazy<CqlCode[]>(this.ACME_Product_Catalog_Value);
         __ConditionVerificationStatusCodes = new Lazy<CqlCode[]>(this.ConditionVerificationStatusCodes_Value);
-        __Measurement_Period = new Lazy<CqlInterval<CqlDate>>(this.Measurement_Period_Value);
+        __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
         __Patient = new Lazy<Patient>(this.Patient_Value);
         __Injury_due_to_falling_rock_within_measurement_period = new Lazy<IEnumerable<Condition>>(this.Injury_due_to_falling_rock_within_measurement_period_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
@@ -121,18 +121,18 @@ public class RR23_1_0_0
 	public CqlCode[] ConditionVerificationStatusCodes() => 
 		__ConditionVerificationStatusCodes.Value;
 
-	private CqlInterval<CqlDate> Measurement_Period_Value()
+	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		CqlDate a_ = context.Operators.Date(2023, 1, 1);
-		CqlDate b_ = context.Operators.Date(2023, 12, 31);
-		CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, true, true);
+		CqlDateTime a_ = context.Operators.DateTime(2023, 1, 1, default, default, default, default, default);
+		CqlDateTime b_ = context.Operators.DateTime(2023, 12, 31, default, default, default, default, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
 		object d_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDate>)d_;
+		return (CqlInterval<CqlDateTime>)d_;
 	}
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDate> Measurement_Period() => 
+	public CqlInterval<CqlDateTime> Measurement_Period() => 
 		__Measurement_Period.Value;
 
 	private Patient Patient_Value()
@@ -155,17 +155,10 @@ public class RR23_1_0_0
 		{
 			DataType e_ = C?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
-			CqlInterval<CqlDate> g_ = this.Measurement_Period();
-			CqlDate h_ = g_?.low;
-			CqlDateTime i_ = context.Operators.ConvertDateToDateTime(h_);
-			CqlDate k_ = g_?.high;
-			CqlDateTime l_ = context.Operators.ConvertDateToDateTime(k_);
-			bool? n_ = g_?.lowClosed;
-			bool? p_ = g_?.highClosed;
-			CqlInterval<CqlDateTime> q_ = context.Operators.Interval(i_, l_, n_, p_);
-			bool? r_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, q_, default);
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
+			bool? h_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, g_, default);
 
-			return r_;
+			return h_;
 		};
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
@@ -185,9 +178,9 @@ public class RR23_1_0_0
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
 		string c_ = b_?.Value;
-		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-		CqlInterval<CqlDate> e_ = this.Measurement_Period();
-		CqlDate f_ = context.Operators.Start(e_);
+		CqlDateTime d_ = context.Operators.ConvertStringToDateTime(c_);
+		CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
+		CqlDateTime f_ = context.Operators.Start(e_);
 		int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
 		bool? h_ = context.Operators.GreaterOrEqual(g_, 16);
 		IEnumerable<Condition> i_ = this.Injury_due_to_falling_rock_within_measurement_period();

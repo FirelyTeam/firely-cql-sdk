@@ -44,7 +44,7 @@
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "23:1-23:73",
+            "locator" : "23:1-23:75",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -57,26 +57,26 @@
             "resultTypeSpecifier" : {
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
-                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "default" : {
-               "locator" : "23:40-23:73",
+               "locator" : "23:40-23:75",
                "lowClosed" : true,
                "highClosed" : true,
                "type" : "Interval",
                "resultTypeSpecifier" : {
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "low" : {
-                  "locator" : "23:49-23:59",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
-                  "type" : "Date",
+                  "locator" : "23:49-23:60",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2023",
@@ -94,9 +94,9 @@
                   }
                },
                "high" : {
-                  "locator" : "23:62-23:72",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
-                  "type" : "Date",
+                  "locator" : "23:63-23:74",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2023",
@@ -333,83 +333,14 @@
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "type" : "Interval",
-                     "low" : {
-                        "type" : "ToDateTime",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "locator" : "56:49-56:68",
+                     "name" : "Measurement Period",
+                     "type" : "ParameterRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : {
-                           "path" : "low",
-                           "type" : "Property",
-                           "source" : {
-                              "locator" : "56:49-56:68",
-                              "name" : "Measurement Period",
-                              "type" : "ParameterRef",
-                              "resultTypeSpecifier" : {
-                                 "type" : "IntervalTypeSpecifier",
-                                 "pointType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Date",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              }
-                           }
-                        }
-                     },
-                     "lowClosedExpression" : {
-                        "path" : "lowClosed",
-                        "type" : "Property",
-                        "source" : {
-                           "locator" : "56:49-56:68",
-                           "name" : "Measurement Period",
-                           "type" : "ParameterRef",
-                           "resultTypeSpecifier" : {
-                              "type" : "IntervalTypeSpecifier",
-                              "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Date",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           }
-                        }
-                     },
-                     "high" : {
-                        "type" : "ToDateTime",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : {
-                           "path" : "high",
-                           "type" : "Property",
-                           "source" : {
-                              "locator" : "56:49-56:68",
-                              "name" : "Measurement Period",
-                              "type" : "ParameterRef",
-                              "resultTypeSpecifier" : {
-                                 "type" : "IntervalTypeSpecifier",
-                                 "pointType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Date",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              }
-                           }
-                        }
-                     },
-                     "highClosedExpression" : {
-                        "path" : "highClosed",
-                        "type" : "Property",
-                        "source" : {
-                           "locator" : "56:49-56:68",
-                           "name" : "Measurement Period",
-                           "type" : "ParameterRef",
-                           "resultTypeSpecifier" : {
-                              "type" : "IntervalTypeSpecifier",
-                              "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Date",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           }
                         }
                      }
                   } ]
@@ -459,27 +390,34 @@
                      "precision" : "Year",
                      "type" : "CalculateAgeAt",
                      "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Date",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Date",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "path" : "birthDate.value",
-                        "type" : "Property",
-                        "source" : {
-                           "name" : "Patient",
-                           "type" : "ExpressionRef"
+                        "type" : "ToDateTime",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Date",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : {
+                           "path" : "birthDate.value",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "Patient",
+                              "type" : "ExpressionRef"
+                           }
                         }
                      }, {
                         "locator" : "32:17-32:45",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
                         "signature" : [ {
                            "type" : "IntervalTypeSpecifier",
                            "pointType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}Date",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ],
@@ -490,7 +428,7 @@
                            "resultTypeSpecifier" : {
                               "type" : "IntervalTypeSpecifier",
                               "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "NamedTypeSpecifier"
                               }
                            }
