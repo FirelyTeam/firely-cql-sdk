@@ -1,7 +1,21 @@
-"..\..\Cql\PackagerCLI\bin\Debug\net8.0\Hl7.Cql.Packager.exe" \
-  --cql "./input/cql"
-  --elm "./Elm"
-  --cq "./CSharp"
-  --fhir "./Resources"
-  --override-utc-date-time "1970-01-01T00:00:00.000Z" \
-  --canonical-root-url "https://fire.ly/fhir/"
+::@echo off
+setlocal ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
+
+set IN_DIR_CQL=./input/cql
+set OUT_DIR_ELM=./Elm
+set DIR_TARGET_DEPENDENCIES=../Cql/Build/target/dependency
+
+del "%OUT_DIR_ELM%" /F /Q /S
+
+java ^
+   -Djakarta.xml.bind.JAXBContextFactory=org.eclipse.persistence.jaxb.XMLBindingContextFactory ^
+   -classpath %DIR_TARGET_DEPENDENCIES%/* org.cqframework.cql.cql2elm.cli.Main ^
+   -input %IN_DIR_CQL% ^
+   -f JSON ^
+   -output %OUT_DIR_ELM% ^
+   -locators true ^
+   -result-types true ^
+   -signatures All
+
+
+endlocal
