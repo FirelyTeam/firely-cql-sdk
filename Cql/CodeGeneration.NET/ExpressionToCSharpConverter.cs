@@ -595,11 +595,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return ConvertLocalFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
 
                 var rightCode = ConvertExpression(indent, right, false);
-
-                string typeDeclaration = "var";
-                if (rightCode is "null" or "default")
-                    typeDeclaration = _typeToCSharpConverter.ToCSharp(left.Type);
-
+                var typeDeclaration = _typeToCSharpConverter.ToCSharp(left.Type);
                 var assignment = $"{leadingIndentString}{typeDeclaration} {ParamName(parameter)} = {rightCode}";
                 return assignment;
             }
