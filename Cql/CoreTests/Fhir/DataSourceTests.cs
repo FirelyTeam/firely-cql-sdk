@@ -6,6 +6,7 @@ using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using FluentAssertions.Execution;
 
 namespace CoreTests.Fhir
 {
@@ -55,8 +56,8 @@ namespace CoreTests.Fhir
             results.Should().AllBeOfType<Patient>().And.AllSatisfy(p => p.Gender.Should().Be(AdministrativeGender.Male));
 
             var activeProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Patient"), "active");
-            Assert.ThrowsException<NotSupportedException>(() =>
-                dr.RetrieveByCodes<Patient>(new[] { new CqlCode("male", "http://hl7.org/fhir/administrative-gender", null, null) }, activeProp).ToList());
+            var codes = dr.RetrieveByCodes<Patient>([new CqlCode("male", "http://hl7.org/fhir/administrative-gender", null, null)], activeProp).ToList();
+            Assert.AreEqual(0, codes.Count);
         }
 
         private BundleDataSource buildDataSource()
