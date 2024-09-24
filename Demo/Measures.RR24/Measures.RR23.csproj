@@ -17,7 +17,7 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<LibrarySet>RR24</LibrarySet>
+		<LibrarySet>RR23</LibrarySet>
 		<CqlDirectory>$(MSBuildProjectDirectory)/input/cql</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/Elm</ElmDirectory>
 		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
