@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -173,6 +174,23 @@ partial class CqlOperatorsBinder
         return TryConvert(source, toType, out var t)
             ? t.arg!
             : throw new ArgumentException($"Cannot convert {source.Type} to {toType}", nameof(source));
+    }
+
+    private Expression BindConvertGeneric(
+        Expression source,
+        Type type)
+    {
+        var methodName = CqlOperators.ConversionFunctionName(source.Type, type);
+        if (methodName != null)
+        {
+            var call = BindToDirectMethod(methodName, source);
+            return call;
+        }
+
+        var methodInfo = ReflectionUtility
+                         .GenericMethodDefinitionOf(() => default(ICqlOperators)!.Convert<object>(default(object)))
+                         .MakeGenericMethod(type);
+        return BindToDirectMethod(methodInfo, source);
     }
 
 

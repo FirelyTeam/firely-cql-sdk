@@ -2157,6 +2157,12 @@ partial class ExpressionBuilderContext
                     var defaultExpression = Expression.Default(type);
                     return new ElmAsExpression(defaultExpression, type, @as.strict);
                 }
+                else if (@as.operand.resultTypeSpecifier is ChoiceTypeSpecifier)
+                {
+                    var type = TypeFor(@as.asTypeSpecifier!)!;
+                    var operand = TranslateArg(@as.operand!);
+                    return _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.Convert), [operand], [type]);
+                }
                 else
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
