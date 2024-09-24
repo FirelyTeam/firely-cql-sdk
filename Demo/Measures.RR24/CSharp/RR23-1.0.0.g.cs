@@ -31,7 +31,8 @@ public class RR23_1_0_0
     internal Lazy<IEnumerable<Condition>> __Injury_due_to_falling_rock_within_measurement_period;
     internal Lazy<bool?> __Initial_Population;
     internal Lazy<bool?> __Denominator;
-    internal Lazy<Condition> __Latest_injury_due_to_falling_rock;
+    internal Lazy<Condition> __Last_injury_due_to_falling_rock;
+    internal Lazy<CqlDateTime> __Date_of_last_injury_due_to_falling_rock;
     internal Lazy<IEnumerable<SupplyDelivery>> __Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock;
     internal Lazy<bool?> __Numerator;
 
@@ -53,7 +54,8 @@ public class RR23_1_0_0
         __Injury_due_to_falling_rock_within_measurement_period = new Lazy<IEnumerable<Condition>>(this.Injury_due_to_falling_rock_within_measurement_period_Value);
         __Initial_Population = new Lazy<bool?>(this.Initial_Population_Value);
         __Denominator = new Lazy<bool?>(this.Denominator_Value);
-        __Latest_injury_due_to_falling_rock = new Lazy<Condition>(this.Latest_injury_due_to_falling_rock_Value);
+        __Last_injury_due_to_falling_rock = new Lazy<Condition>(this.Last_injury_due_to_falling_rock_Value);
+        __Date_of_last_injury_due_to_falling_rock = new Lazy<CqlDateTime>(this.Date_of_last_injury_due_to_falling_rock_Value);
         __Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = new Lazy<IEnumerable<SupplyDelivery>>(this.Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Value);
         __Numerator = new Lazy<bool?>(this.Numerator_Value);
     }
@@ -121,9 +123,9 @@ public class RR23_1_0_0
 
 	private object Measurement_Period_Value()
 	{
-		CqlDate a_ = context.Operators.Date(2023, 1, 1);
-		CqlDate b_ = context.Operators.Date(2023, 12, 31);
-		CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, true, true);
+		CqlDateTime a_ = context.Operators.DateTime(2023, 1, 1, default, default, default, default, default);
+		CqlDateTime b_ = context.Operators.DateTime(2023, 12, 31, default, default, default, default, default);
+		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
 		object d_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", c_);
 
 		return d_;
@@ -154,16 +156,9 @@ public class RR23_1_0_0
 			DataType e_ = C?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
 			object g_ = this.Measurement_Period();
-			CqlDate h_ = ((CqlInterval<CqlDate>)g_)?.low;
-			CqlDateTime i_ = context.Operators.ConvertDateToDateTime(h_);
-			CqlDate k_ = ((CqlInterval<CqlDate>)g_)?.high;
-			CqlDateTime l_ = context.Operators.ConvertDateToDateTime(k_);
-			bool? n_ = ((CqlInterval<CqlDate>)g_)?.lowClosed;
-			bool? p_ = ((CqlInterval<CqlDate>)g_)?.highClosed;
-			CqlInterval<CqlDateTime> q_ = context.Operators.Interval(i_, l_, n_, p_);
-			bool? r_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, q_, default);
+			bool? h_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, (CqlInterval<CqlDateTime>)g_, default);
 
-			return r_;
+			return h_;
 		};
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
@@ -183,9 +178,9 @@ public class RR23_1_0_0
 		Patient a_ = this.Patient();
 		Date b_ = a_?.BirthDateElement;
 		string c_ = b_?.Value;
-		CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+		CqlDateTime d_ = context.Operators.ConvertStringToDateTime(c_);
 		object e_ = this.Measurement_Period();
-		CqlDate f_ = context.Operators.Start((CqlInterval<CqlDate>)e_);
+		CqlDateTime f_ = context.Operators.Start((CqlInterval<CqlDateTime>)e_);
 		int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
 		bool? h_ = context.Operators.GreaterOrEqual(g_, 16);
 		IEnumerable<Condition> i_ = this.Injury_due_to_falling_rock_within_measurement_period();
@@ -214,7 +209,7 @@ public class RR23_1_0_0
 	public bool? Denominator() => 
 		__Denominator.Value;
 
-	private Condition Latest_injury_due_to_falling_rock_Value()
+	private Condition Last_injury_due_to_falling_rock_Value()
 	{
 		IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period();
 		object b_(Condition @this)
@@ -230,9 +225,22 @@ public class RR23_1_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("Latest injury due to falling rock")]
-	public Condition Latest_injury_due_to_falling_rock() => 
-		__Latest_injury_due_to_falling_rock.Value;
+    [CqlDeclaration("Last injury due to falling rock")]
+	public Condition Last_injury_due_to_falling_rock() => 
+		__Last_injury_due_to_falling_rock.Value;
+
+	private CqlDateTime Date_of_last_injury_due_to_falling_rock_Value()
+	{
+		Condition a_ = this.Last_injury_due_to_falling_rock();
+		DataType b_ = a_?.Onset;
+		object c_ = context.Operators.LateBoundProperty<object>(b_, "value");
+
+		return c_ as CqlDateTime;
+	}
+
+    [CqlDeclaration("Date of last injury due to falling rock")]
+	public CqlDateTime Date_of_last_injury_due_to_falling_rock() => 
+		__Date_of_last_injury_due_to_falling_rock.Value;
 
 	private IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Value()
 	{
@@ -245,33 +253,20 @@ public class RR23_1_0_0
 			CqlCode g_ = this.Tiny_Umbrella();
 			CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
 			bool? i_ = context.Operators.Equivalent(f_, h_);
-			Condition j_ = this.Latest_injury_due_to_falling_rock();
-			Condition[] k_ = [
-				j_,
-			];
-			bool? l_(Condition C)
-			{
-				DataType q_ = C?.Onset;
-				object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
-				DataType s_ = SD?.Occurrence;
-				CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-				CqlQuantity u_ = context.Operators.Quantity(7m, "days");
-				CqlDateTime v_ = context.Operators.Subtract(t_, u_);
-				CqlDateTime x_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-				CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, false);
-				bool? z_ = context.Operators.In<CqlDateTime>(r_ as CqlDateTime, y_, default);
-				CqlDateTime ab_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-				bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
-				bool? ad_ = context.Operators.And(z_, ac_);
+			CqlDateTime j_ = this.Date_of_last_injury_due_to_falling_rock();
+			DataType k_ = SD?.Occurrence;
+			CqlDateTime l_ = context.Operators.LateBoundProperty<CqlDateTime>(k_, "value");
+			CqlQuantity m_ = context.Operators.Quantity(7m, "days");
+			CqlDateTime n_ = context.Operators.Subtract(l_ as CqlDateTime, m_);
+			CqlDateTime p_ = context.Operators.LateBoundProperty<CqlDateTime>(k_, "value");
+			CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_ as CqlDateTime, true, false);
+			bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
+			CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(k_, "value");
+			bool? u_ = context.Operators.Not((bool?)((t_ as CqlDateTime) is null));
+			bool? v_ = context.Operators.And(r_, u_);
+			bool? w_ = context.Operators.And(i_, v_);
 
-				return ad_;
-			};
-			IEnumerable<Condition> m_ = context.Operators.Where<Condition>((IEnumerable<Condition>)k_, l_);
-			Condition n_ = context.Operators.SingletonFrom<Condition>(m_);
-			bool? o_ = context.Operators.Not((bool?)(n_ is null));
-			bool? p_ = context.Operators.And(i_, o_);
-
-			return p_;
+			return w_;
 		};
 		IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);
 
