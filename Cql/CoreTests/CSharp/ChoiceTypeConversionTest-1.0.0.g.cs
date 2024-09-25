@@ -61,14 +61,13 @@ public class ChoiceTypeConversionTest_1_0_0
 	private bool? ReturnDateAsChoiceInRangeMustBeTrue_Value()
 	{
 		object a_ = this.ReturnDateAsChoice();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_);
-		CqlDateTime c_ = context.Operators.ConvertDateToDateTime(b_);
-		CqlDateTime d_ = context.Operators.DateTime(2019, 1, 1, default, default, default, default, default);
-		CqlDateTime e_ = context.Operators.DateTime(2019, 12, 31, default, default, default, default, default);
-		CqlInterval<CqlDateTime> f_ = context.Operators.Interval(d_, e_, true, true);
-		bool? g_ = context.Operators.In<CqlDateTime>(c_, f_, default);
+		CqlDateTime b_ = context.Operators.ConvertDateToDateTime(a_ as CqlDate);
+		CqlDateTime c_ = context.Operators.DateTime(2019, 1, 1, default, default, default, default, default);
+		CqlDateTime d_ = context.Operators.DateTime(2019, 12, 31, default, default, default, default, default);
+		CqlInterval<CqlDateTime> e_ = context.Operators.Interval(c_, d_, true, true);
+		bool? f_ = context.Operators.In<CqlDateTime>(b_, e_, default);
 
-		return g_;
+		return f_;
 	}
 
     [CqlDeclaration("ReturnDateAsChoiceInRangeMustBeTrue")]
@@ -78,14 +77,13 @@ public class ChoiceTypeConversionTest_1_0_0
 	private bool? ReturnDateAsChoiceOutOfRangeMustBeFalse_Value()
 	{
 		object a_ = this.ReturnDateAsChoice();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_);
-		CqlDateTime c_ = context.Operators.ConvertDateToDateTime(b_);
-		CqlDateTime d_ = context.Operators.DateTime(2018, 1, 1, default, default, default, default, default);
-		CqlDateTime e_ = context.Operators.DateTime(2018, 12, 31, default, default, default, default, default);
-		CqlInterval<CqlDateTime> f_ = context.Operators.Interval(d_, e_, true, true);
-		bool? g_ = context.Operators.In<CqlDateTime>(c_, f_, default);
+		CqlDateTime b_ = context.Operators.ConvertDateToDateTime(a_ as CqlDate);
+		CqlDateTime c_ = context.Operators.DateTime(2018, 1, 1, default, default, default, default, default);
+		CqlDateTime d_ = context.Operators.DateTime(2018, 12, 31, default, default, default, default, default);
+		CqlInterval<CqlDateTime> e_ = context.Operators.Interval(c_, d_, true, true);
+		bool? f_ = context.Operators.In<CqlDateTime>(b_, e_, default);
 
-		return g_;
+		return f_;
 	}
 
     [CqlDeclaration("ReturnDateAsChoiceOutOfRangeMustBeFalse")]
@@ -95,14 +93,13 @@ public class ChoiceTypeConversionTest_1_0_0
 	private bool? ReturnStringAsChoiceInRangeMustBeNull_Value()
 	{
 		object a_ = this.ReturnStringAsChoice();
-		CqlDate b_ = context.Operators.Convert<CqlDate>(a_);
-		CqlDateTime c_ = context.Operators.ConvertDateToDateTime(b_);
-		CqlDateTime d_ = context.Operators.DateTime(2019, 1, 1, default, default, default, default, default);
-		CqlDateTime e_ = context.Operators.DateTime(2019, 12, 31, default, default, default, default, default);
-		CqlInterval<CqlDateTime> f_ = context.Operators.Interval(d_, e_, true, true);
-		bool? g_ = context.Operators.In<CqlDateTime>(c_, f_, default);
+		CqlDateTime b_ = context.Operators.ConvertDateToDateTime(a_ as CqlDate);
+		CqlDateTime c_ = context.Operators.DateTime(2019, 1, 1, default, default, default, default, default);
+		CqlDateTime d_ = context.Operators.DateTime(2019, 12, 31, default, default, default, default, default);
+		CqlInterval<CqlDateTime> e_ = context.Operators.Interval(c_, d_, true, true);
+		bool? f_ = context.Operators.In<CqlDateTime>(b_, e_, default);
 
-		return g_;
+		return f_;
 	}
 
     [CqlDeclaration("ReturnStringAsChoiceInRangeMustBeNull")]

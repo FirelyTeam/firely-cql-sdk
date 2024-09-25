@@ -381,13 +381,12 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 				bool? s_ = context.Operators.Equal(r_, "final");
 				bool? t_ = context.Operators.And(p_, s_);
 				DataType u_ = BloodGlucoseLab?.Value;
-				Quantity v_ = context.Operators.Convert<Quantity>(u_);
-				CqlQuantity w_ = FHIRHelpers_4_0_001.ToQuantity(v_);
-				CqlQuantity x_ = context.Operators.Quantity(200m, "mg/dL");
-				bool? y_ = context.Operators.GreaterOrEqual(w_, x_);
-				bool? z_ = context.Operators.And(t_, y_);
+				CqlQuantity v_ = FHIRHelpers_4_0_001.ToQuantity(u_ as Quantity);
+				CqlQuantity w_ = context.Operators.Quantity(200m, "mg/dL");
+				bool? x_ = context.Operators.GreaterOrEqual(v_, w_);
+				bool? y_ = context.Operators.And(t_, x_);
 
-				return z_;
+				return y_;
 			};
 			IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
 			(Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? j_(Observation BloodGlucoseLab) => 
@@ -399,9 +398,9 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		IEnumerable<(Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> c_ = context.Operators.SelectMany<(Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, (Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(a_, b_);
 		Encounter d_((Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization)
 		{
-			Encounter aa_ = EncounterWithHospitalization?.encounter;
+			Encounter z_ = EncounterWithHospitalization?.encounter;
 
-			return aa_;
+			return z_;
 		};
 		IEnumerable<Encounter> e_ = context.Operators.Select<(Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, Encounter>(c_, d_);
 
@@ -579,59 +578,57 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					string ad_ = FHIRHelpers_4_0_001.ToString(ac_);
 					bool? ae_ = context.Operators.Equal(ad_, "final");
 					DataType af_ = BloodGlucoseLab1?.Value;
-					Quantity ag_ = context.Operators.Convert<Quantity>(af_);
-					CqlQuantity ah_ = FHIRHelpers_4_0_001.ToQuantity(ag_);
-					CqlQuantity ai_ = context.Operators.Quantity(300m, "mg/dL");
-					bool? aj_ = context.Operators.Greater(ah_, ai_);
-					bool? ak_ = context.Operators.And(ae_, aj_);
-					DataType al_ = BloodGlucoseLab1?.Effective;
-					FhirDateTime am_ = context.Operators.Convert<FhirDateTime>(al_);
-					CqlDateTime an_ = FHIRHelpers_4_0_001.ToDateTime(am_);
-					CqlInterval<CqlDateTime> ao_ = EncounterDay?.dayPeriod;
-					bool? ap_ = context.Operators.In<CqlDateTime>(an_, ao_, default);
-					bool? aq_ = context.Operators.And(ak_, ap_);
+					CqlQuantity ag_ = FHIRHelpers_4_0_001.ToQuantity(af_ as Quantity);
+					CqlQuantity ah_ = context.Operators.Quantity(300m, "mg/dL");
+					bool? ai_ = context.Operators.Greater(ag_, ah_);
+					bool? aj_ = context.Operators.And(ae_, ai_);
+					DataType ak_ = BloodGlucoseLab1?.Effective;
+					FhirDateTime al_ = context.Operators.Convert<FhirDateTime>(ak_);
+					CqlDateTime am_ = FHIRHelpers_4_0_001.ToDateTime(al_);
+					CqlInterval<CqlDateTime> an_ = EncounterDay?.dayPeriod;
+					bool? ao_ = context.Operators.In<CqlDateTime>(am_, an_, default);
+					bool? ap_ = context.Operators.And(aj_, ao_);
 
-					return aq_;
+					return ap_;
 				};
 				IEnumerable<Observation> o_ = context.Operators.Where<Observation>(m_, n_);
 				bool? p_ = context.Operators.Exists<Observation>(o_);
 				IEnumerable<Observation> r_ = context.Operators.RetrieveByValueSet<Observation>(l_, default);
 				bool? s_(Observation BloodGlucoseLab2)
 				{
-					Code<ObservationStatus> ar_ = BloodGlucoseLab2?.StatusElement;
-					string as_ = FHIRHelpers_4_0_001.ToString(ar_);
-					bool? at_ = context.Operators.Equal(as_, "final");
-					DataType au_ = BloodGlucoseLab2?.Value;
-					Quantity av_ = context.Operators.Convert<Quantity>(au_);
-					CqlQuantity aw_ = FHIRHelpers_4_0_001.ToQuantity(av_);
-					CqlQuantity ax_ = context.Operators.Quantity(200m, "mg/dL");
-					bool? ay_ = context.Operators.GreaterOrEqual(aw_, ax_);
-					bool? az_ = context.Operators.And(at_, ay_);
-					DataType ba_ = BloodGlucoseLab2?.Effective;
-					FhirDateTime bb_ = context.Operators.Convert<FhirDateTime>(ba_);
-					CqlDateTime bc_ = FHIRHelpers_4_0_001.ToDateTime(bb_);
-					CqlInterval<CqlDateTime> bd_ = EncounterDay?.dayPeriod;
-					bool? be_ = context.Operators.In<CqlDateTime>(bc_, bd_, default);
-					bool? bf_ = context.Operators.And(az_, be_);
+					Code<ObservationStatus> aq_ = BloodGlucoseLab2?.StatusElement;
+					string ar_ = FHIRHelpers_4_0_001.ToString(aq_);
+					bool? as_ = context.Operators.Equal(ar_, "final");
+					DataType at_ = BloodGlucoseLab2?.Value;
+					CqlQuantity au_ = FHIRHelpers_4_0_001.ToQuantity(at_ as Quantity);
+					CqlQuantity av_ = context.Operators.Quantity(200m, "mg/dL");
+					bool? aw_ = context.Operators.GreaterOrEqual(au_, av_);
+					bool? ax_ = context.Operators.And(as_, aw_);
+					DataType ay_ = BloodGlucoseLab2?.Effective;
+					FhirDateTime az_ = context.Operators.Convert<FhirDateTime>(ay_);
+					CqlDateTime ba_ = FHIRHelpers_4_0_001.ToDateTime(az_);
+					CqlInterval<CqlDateTime> bb_ = EncounterDay?.dayPeriod;
+					bool? bc_ = context.Operators.In<CqlDateTime>(ba_, bb_, default);
+					bool? bd_ = context.Operators.And(ax_, bc_);
 
-					return bf_;
+					return bd_;
 				};
 				IEnumerable<Observation> t_ = context.Operators.Where<Observation>(r_, s_);
 				bool? u_ = context.Operators.Exists<Observation>(t_);
 				IEnumerable<Observation> w_ = context.Operators.RetrieveByValueSet<Observation>(l_, default);
 				bool? x_(Observation BloodGlucoseLab3)
 				{
-					Code<ObservationStatus> bg_ = BloodGlucoseLab3?.StatusElement;
-					string bh_ = FHIRHelpers_4_0_001.ToString(bg_);
-					bool? bi_ = context.Operators.Equal(bh_, "final");
-					DataType bj_ = BloodGlucoseLab3?.Effective;
-					FhirDateTime bk_ = context.Operators.Convert<FhirDateTime>(bj_);
-					CqlDateTime bl_ = FHIRHelpers_4_0_001.ToDateTime(bk_);
-					CqlInterval<CqlDateTime> bm_ = EncounterDay?.dayPeriod;
-					bool? bn_ = context.Operators.In<CqlDateTime>(bl_, bm_, default);
-					bool? bo_ = context.Operators.And(bi_, bn_);
+					Code<ObservationStatus> be_ = BloodGlucoseLab3?.StatusElement;
+					string bf_ = FHIRHelpers_4_0_001.ToString(be_);
+					bool? bg_ = context.Operators.Equal(bf_, "final");
+					DataType bh_ = BloodGlucoseLab3?.Effective;
+					FhirDateTime bi_ = context.Operators.Convert<FhirDateTime>(bh_);
+					CqlDateTime bj_ = FHIRHelpers_4_0_001.ToDateTime(bi_);
+					CqlInterval<CqlDateTime> bk_ = EncounterDay?.dayPeriod;
+					bool? bl_ = context.Operators.In<CqlDateTime>(bj_, bk_, default);
+					bool? bm_ = context.Operators.And(bg_, bl_);
 
-					return bo_;
+					return bm_;
 				};
 				IEnumerable<Observation> y_ = context.Operators.Where<Observation>(w_, x_);
 				bool? z_ = context.Operators.Exists<Observation>(y_);

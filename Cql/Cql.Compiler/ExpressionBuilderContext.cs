@@ -2200,12 +2200,6 @@ partial class ExpressionBuilderContext
                        ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
 
             var operand = TranslateArg(@as.operand);
-
-            if (@as.operand.resultTypeSpecifier is ChoiceTypeSpecifier)
-            {
-                return _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.Convert), [operand], [type]);
-            }
-
             if (!type.IsAssignableTo(operand.Type))
             {
                 _logger.LogWarning(FormatMessage(
