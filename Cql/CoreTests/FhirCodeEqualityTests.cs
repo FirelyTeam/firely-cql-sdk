@@ -1,7 +1,11 @@
 ﻿#nullable enable
 
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using FluentAssertions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -116,11 +120,11 @@ public class CqlContextOperatorTests
         isEqualLessOnRightConcept.Should().BeTrue();
     }
 
-    #endregion
+	#endregion
 
-    #region Convert
+	#region Convert (FHIR Code <--> String)
 
-    [TestMethod]
+	[TestMethod]
 	public void Convert_FhirCodeToString_MustReturnValueFromEnumLiteral()
 	{
 		// Arrange
@@ -151,6 +155,48 @@ public class CqlContextOperatorTests
 		act.Should().Throw<InvalidOperationException>()
 		   .WithMessage("No conversion from * to * is defined.");
 	}
+
+    #endregion
+
+    #region Convert (String --> XXX)
+
+    [TestMethod]
+    [DynamicData(nameof(TestDataFor_Convert_StringTo), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(TestDataNameFor_Convert_StringTo))]
+    public void Convert_StringToCqlDate_ThrowNoConversionIsDefined(string input, object expectedConvertOutput)
+    {
+        // Arrange
+        var rtx = GetNewContext();
+
+        // Act
+        var converted = ReflectionUtility
+                        .GenericMethodDefinitionOf(() => rtx.Operators.Convert<object>(default))
+                        .MakeGenericMethod(expectedConvertOutput.GetType())
+                        .Invoke(rtx.Operators, [input]);
+
+        // Assert
+        converted.Should().Be(expectedConvertOutput);
+    }
+
+    private static string TestDataNameFor_Convert_StringTo(MethodInfo _, object[] input) =>
+        $"Converting string '{input[0]}' to {input[1].GetType().ToCSharpString()}";
+
+    private static IEnumerable<object[]> TestDataFor_Convert_StringTo()
+    {
+        object[][] testData =
+        [
+            ["2024-02-03", CqlDate(2024, 2, 3)],
+            ["2024-02", CqlDate(2024, 2)],
+            ["2024", CqlDate(2024)],
+            ["2024-02-03", CqlDateTime(2024, 2, 3)],
+            ["2024-02", CqlDateTime(2024, 2)],
+            ["2024", CqlDateTime(2024)],
+        ];
+        return testData;
+
+        CqlDate CqlDate(int year, int? month = null, int? day = null) => new(year, month, day);
+
+        CqlDateTime CqlDateTime(int year, int? month = null, int? day = null) => new(year, month, day, null, null, null, null, null, null);
+    }
 
 	#endregion
 }
