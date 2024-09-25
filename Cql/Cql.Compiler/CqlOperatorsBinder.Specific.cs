@@ -180,13 +180,6 @@ partial class CqlOperatorsBinder
         Expression source,
         Type type)
     {
-        var methodName = CqlOperators.ConversionFunctionName(source.Type, type);
-        if (methodName != null)
-        {
-            var call = BindToDirectMethod(methodName, source);
-            return call;
-        }
-
         var methodInfo = ReflectionUtility
                          .GenericMethodDefinitionOf(() => default(ICqlOperators)!.Convert<object>(default(object)))
                          .MakeGenericMethod(type);
