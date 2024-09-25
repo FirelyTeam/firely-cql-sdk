@@ -1,0 +1,471 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "3.1.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "ChoiceTypeConversionTest",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "8:1-9:39",
+            "name" : "ReturnDateAsChoice",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "publisher",
+                  "value" : "Firely"
+               }, {
+                  "name" : "description",
+                  "value" : "Library used to test conversions on choice types"
+               } ]
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ChoiceTypeSpecifier",
+               "choice" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ]
+            },
+            "expression" : {
+               "locator" : "9:5-9:39",
+               "strict" : false,
+               "type" : "As",
+               "resultTypeSpecifier" : {
+                  "type" : "ChoiceTypeSpecifier",
+                  "choice" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ]
+               },
+               "operand" : {
+                  "locator" : "9:5-9:15",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2019",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               },
+               "asTypeSpecifier" : {
+                  "locator" : "9:20-9:39",
+                  "type" : "ChoiceTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ChoiceTypeSpecifier",
+                     "choice" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Date",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ]
+                  },
+                  "choice" : [ {
+                     "locator" : "9:27-9:30",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "locator" : "9:33-9:38",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "11:1-12:40",
+            "name" : "ReturnStringAsChoice",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ChoiceTypeSpecifier",
+               "choice" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ]
+            },
+            "expression" : {
+               "locator" : "12:5-12:40",
+               "strict" : false,
+               "type" : "As",
+               "resultTypeSpecifier" : {
+                  "type" : "ChoiceTypeSpecifier",
+                  "choice" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ]
+               },
+               "operand" : {
+                  "locator" : "12:5-12:16",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "2019-01-01",
+                  "type" : "Literal"
+               },
+               "asTypeSpecifier" : {
+                  "locator" : "12:21-12:40",
+                  "type" : "ChoiceTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ChoiceTypeSpecifier",
+                     "choice" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Date",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ]
+                  },
+                  "choice" : [ {
+                     "locator" : "12:28-12:31",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "locator" : "12:34-12:39",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "14:1-15:66",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "ReturnDateAsChoiceInRangeMustBeTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "15:5-15:66",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "In",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "operand" : [ {
+                  "type" : "ToDateTime",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "operand" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "As",
+                     "operand" : {
+                        "locator" : "15:5-15:22",
+                        "name" : "ReturnDateAsChoice",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Date",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        }
+                     }
+                  }
+               }, {
+                  "locator" : "15:31-15:66",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "resultTypeSpecifier" : {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "low" : {
+                     "locator" : "15:40-15:51",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "year" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2019",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "locator" : "15:54-15:65",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "year" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2019",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "31",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "17:1-18:66",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "ReturnDateAsChoiceOutOfRangeMustBeFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "18:5-18:66",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "In",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "operand" : [ {
+                  "type" : "ToDateTime",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "operand" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "As",
+                     "operand" : {
+                        "locator" : "18:5-18:22",
+                        "name" : "ReturnDateAsChoice",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Date",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        }
+                     }
+                  }
+               }, {
+                  "locator" : "18:31-18:66",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "resultTypeSpecifier" : {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "low" : {
+                     "locator" : "18:40-18:51",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "year" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2018",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "locator" : "18:54-18:65",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "year" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2018",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "31",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "20:1-21:68",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "ReturnStringAsChoiceInRangeMustBeNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "21:5-21:68",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "In",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "operand" : [ {
+                  "type" : "ToDateTime",
+                  "signature" : [ {
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "operand" : {
+                     "asType" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "As",
+                     "operand" : {
+                        "locator" : "21:5-21:24",
+                        "name" : "ReturnStringAsChoice",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Date",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        }
+                     }
+                  }
+               }, {
+                  "locator" : "21:33-21:68",
+                  "lowClosed" : true,
+                  "highClosed" : true,
+                  "type" : "Interval",
+                  "resultTypeSpecifier" : {
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "low" : {
+                     "locator" : "21:42-21:53",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "year" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2019",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }
+                  },
+                  "high" : {
+                     "locator" : "21:56-21:67",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "year" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2019",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "31",
+                        "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

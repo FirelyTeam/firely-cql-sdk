@@ -162,7 +162,7 @@ public class CqlContextOperatorTests
 
     [TestMethod]
     [DynamicData(nameof(TestDataFor_Convert_StringTo), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(TestDataNameFor_Convert_StringTo))]
-    public void Convert_StringToCqlDate_ThrowNoConversionIsDefined(string input, object expectedConvertOutput)
+    public void Convert_StringToCqlDate_ReturnsConvertedValue(string input, object expectedConvertOutput)
     {
         // Arrange
         var rtx = GetNewContext();
@@ -198,5 +198,5 @@ public class CqlContextOperatorTests
         CqlDateTime CqlDateTime(int year, int? month = null, int? day = null) => new(year, month, day, null, null, null, null, null, null);
     }
 
-	#endregion
+    #endregion
 }
