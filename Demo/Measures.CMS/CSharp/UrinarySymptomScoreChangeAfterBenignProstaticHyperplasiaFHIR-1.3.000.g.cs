@@ -472,7 +472,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				{
 					DataType aj_ = IPSSAssessment?.Effective;
 					object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
-					CqlDateTime al_ = ak_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime al_ = ak_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return al_ as object;
 				}
@@ -480,7 +480,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				{
 					DataType am_ = IPSSAssessment?.Effective;
 					object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-					CqlInterval<CqlDateTime> ao_ = an_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ao_ = an_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ao_ as object;
 				}
@@ -488,7 +488,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				{
 					DataType ap_ = IPSSAssessment?.Effective;
 					object aq_ = FHIRHelpers_4_3_000.ToValue(ap_);
-					CqlDateTime ar_ = aq_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ar_ = aq_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ar_ as object;
 				}
@@ -500,7 +500,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			CqlDateTime s_ = QICoreCommon_2_0_000.earliest(r_());
 			DataType t_ = IPSSAssessment?.Value;
 			object u_ = FHIRHelpers_4_3_000.ToValue(t_);
-			int? v_ = u_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			int? v_ = u_ switch { null => null , int? d => context.Operators.ConvertStringToInteger(d)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			(CqlDateTime effectiveDatetime, int? valueInteger)? w_ = (s_, v_);
 
 			return w_;
@@ -590,7 +590,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				{
 					DataType bg_ = AUASIAssessment?.Effective;
 					object bh_ = FHIRHelpers_4_3_000.ToValue(bg_);
-					CqlDateTime bi_ = bh_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bi_ = bh_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bi_ as object;
 				}
@@ -598,7 +598,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				{
 					DataType bj_ = AUASIAssessment?.Effective;
 					object bk_ = FHIRHelpers_4_3_000.ToValue(bj_);
-					CqlInterval<CqlDateTime> bl_ = bk_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bl_ = bk_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bl_ as object;
 				}
@@ -606,7 +606,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				{
 					DataType bm_ = AUASIAssessment?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
-					CqlDateTime bo_ = bn_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bo_ = bn_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bo_ as object;
 				}
@@ -618,7 +618,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			CqlDateTime ad_ = QICoreCommon_2_0_000.earliest(ac_());
 			DataType ae_ = AUASIAssessment?.Value;
 			object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
-			int? ag_ = af_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			int? ag_ = af_ switch { null => null , int? d => context.Operators.ConvertStringToInteger(d)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlCode ah_ = this.If_you_were_to_spend_the_rest_of_your_life_with_your_urinary_condition_just_the_way_it_is_now__how_would_you_feel_about_that__IPSS_();
 			IEnumerable<CqlCode> ai_ = context.Operators.ToList<CqlCode>(ah_);
 			IEnumerable<Observation> aj_ = context.Operators.RetrieveByCodes<Observation>(ai_, default);
@@ -654,7 +654,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					{
 						DataType cy_ = QOLAssessment?.Effective;
 						object cz_ = FHIRHelpers_4_3_000.ToValue(cy_);
-						CqlDateTime da_ = cz_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime da_ = cz_ switch { null => null , CqlDateTime e => e/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return da_ as object;
 					}
@@ -662,7 +662,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					{
 						DataType db_ = QOLAssessment?.Effective;
 						object dc_ = FHIRHelpers_4_3_000.ToValue(db_);
-						CqlInterval<CqlDateTime> dd_ = dc_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlInterval<CqlDateTime> dd_ = dc_ switch { null => null , CqlInterval<CqlDateTime> f => f/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return dd_ as object;
 					}
@@ -670,7 +670,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					{
 						DataType de_ = QOLAssessment?.Effective;
 						object df_ = FHIRHelpers_4_3_000.ToValue(de_);
-						CqlDateTime dg_ = df_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime dg_ = df_ switch { null => null , CqlDateTime g => g/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return dg_ as object;
 					}
@@ -710,7 +710,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					{
 						DataType dt_ = QOLAssessment?.Effective;
 						object du_ = FHIRHelpers_4_3_000.ToValue(dt_);
-						CqlDateTime dv_ = du_ switch { null => null , CqlDateTime e => e, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime dv_ = du_ switch { null => null , CqlDateTime h => h/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return dv_ as object;
 					}
@@ -718,7 +718,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					{
 						DataType dw_ = QOLAssessment?.Effective;
 						object dx_ = FHIRHelpers_4_3_000.ToValue(dw_);
-						CqlInterval<CqlDateTime> dy_ = dx_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlInterval<CqlDateTime> dy_ = dx_ switch { null => null , CqlInterval<CqlDateTime> i => i/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return dy_ as object;
 					}
@@ -726,7 +726,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					{
 						DataType dz_ = QOLAssessment?.Effective;
 						object ea_ = FHIRHelpers_4_3_000.ToValue(dz_);
-						CqlDateTime eb_ = ea_ switch { null => null , CqlDateTime f => f, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime eb_ = ea_ switch { null => null , CqlDateTime j => j/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return eb_ as object;
 					}
@@ -807,7 +807,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					{
 						DataType eu_ = @this?.Effective;
 						object ev_ = FHIRHelpers_4_3_000.ToValue(eu_);
-						CqlDateTime ew_ = ev_ switch { null => null , CqlDateTime g => g, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime ew_ = ev_ switch { null => null , CqlDateTime k => k/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return ew_ as object;
 					}
@@ -815,7 +815,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					{
 						DataType ex_ = @this?.Effective;
 						object ey_ = FHIRHelpers_4_3_000.ToValue(ex_);
-						CqlInterval<CqlDateTime> ez_ = ey_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlInterval<CqlDateTime> ez_ = ey_ switch { null => null , CqlInterval<CqlDateTime> l => l/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return ez_ as object;
 					}
@@ -823,7 +823,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					{
 						DataType fa_ = @this?.Effective;
 						object fb_ = FHIRHelpers_4_3_000.ToValue(fa_);
-						CqlDateTime fc_ = fb_ switch { null => null , CqlDateTime h => h, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime fc_ = fb_ switch { null => null , CqlDateTime m => m/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return fc_ as object;
 					}

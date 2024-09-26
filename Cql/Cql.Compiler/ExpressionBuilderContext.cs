@@ -38,6 +38,7 @@ using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
 using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
 using Tuple = Hl7.Cql.Elm.Tuple;
 using TupleTypeSpecifier = Hl7.Cql.Elm.TupleTypeSpecifier;
+using TypeExtensions = Hl7.Cql.Abstractions.Infrastructure.TypeExtensions;
 
 namespace Hl7.Cql.Compiler;
 
@@ -2193,21 +2194,18 @@ partial class ExpressionBuilderContext
         Debug.Assert(operand.Type == typeof(object));
         var expressionChoiceTypes =
             operandChoiceTypeSpecifier.choice
-                                      .Select(ts => TypeFor(ts)!);
+                                      .Select(ts => TypeFor(ts) switch
+                                      {
+                                          Type t => Nullable.GetUnderlyingType(t) ?? t, // Nullable types are unwrapped
+                                          _ => throw new UnreachableException()
+                                      });
 
         StringBuilder sbError = new();
-        HashSet<Type> typeSet = new();
         List<Type> missingConversionTypes = new();
         var caseExpressions = expressionChoiceTypes
                               .Select(type =>
                                 {
-                                    if (typeSet.Add(type))
-                                    {
-                                        // There are duplicate types in some choice types. Somehow calling Distinct doesn't work
-                                        return null;
-                                    }
-
-                                    ParameterExpression parameter = Expression.Parameter(type, ElmChoiceAsExpression.SwitchCaseExpressionParamPlaceholderName);
+                                    ParameterExpression parameter = Expression.Parameter(type , ElmChoiceAsExpression.SwitchCaseExpressionParamPlaceholderName);
                                     Expression body = ChangeType(parameter, toType, out var conversion);
                                     if (conversion == TypeConversion.NoMatch)
                                     {

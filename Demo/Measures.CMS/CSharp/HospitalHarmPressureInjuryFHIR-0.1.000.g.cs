@@ -680,7 +680,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? ac_ = context.Operators.And(v_, ab_);
 				DataType ad_ = SkinExam?.Value;
 				object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-				CqlConcept af_ = ae_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlConcept af_ = ae_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlValueSet ag_ = this.Pressure_Injury_Deep_Tissue();
 				bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
 				List<Observation.ComponentComponent> ai_ = SkinExam?.Component;
@@ -825,7 +825,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? ac_ = context.Operators.And(v_, ab_);
 				DataType ad_ = SkinExam?.Value;
 				object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-				CqlConcept af_ = ae_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlConcept af_ = ae_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlValueSet ag_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();
 				bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
 				List<Observation.ComponentComponent> ai_ = SkinExam?.Component;

@@ -659,7 +659,7 @@ public class FHIR347_0_1_021
 		bool? c_(Observation LDL)
 		{
 			DataType e_ = LDL?.Value;
-			Quantity f_ = e_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			Quantity f_ = e_ switch { null => null , Quantity a => a/* , CodeableConcept => ???, FhirString => ???, FhirBoolean => ???, Integer => ???, Range => ???, Ratio => ???, SampledData => ???, Time => ???, FhirDateTime => ???, Period => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity g_ = FHIRHelpers_4_0_001.ToQuantity(f_);
 			CqlQuantity h_ = context.Operators.Quantity(190m, "mg/dL");
 			bool? i_ = context.Operators.GreaterOrEqual(g_, h_);
@@ -1241,7 +1241,7 @@ public class FHIR347_0_1_021
 					{
 						Timing.RepeatComponent av_ = T?.Repeat;
 						DataType aw_ = av_?.Bounds;
-						Range ax_ = aw_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Range ax_ = aw_ switch { null => null , Range a => a/* , Duration => ???, Period => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return ax_ as object;
 					}
@@ -1249,7 +1249,7 @@ public class FHIR347_0_1_021
 					{
 						Timing.RepeatComponent ay_ = T?.Repeat;
 						DataType az_ = ay_?.Bounds;
-						Period ba_ = az_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Period ba_ = az_ switch { null => null , Period b => b/* , Duration => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return ba_ as object;
 					}

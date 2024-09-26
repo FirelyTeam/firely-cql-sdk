@@ -487,7 +487,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					bool? ea_ = context.Operators.Not(dz_);
 					bool? eb_ = context.Operators.And(dw_, ea_);
 					DataType ec_ = FollowupBloodGlucoseLab?.Value;
-					Quantity ed_ = ec_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					Quantity ed_ = ec_ switch { null => null , Quantity a => a/* , CodeableConcept => ???, FhirString => ???, FhirBoolean => ???, Integer => ???, Range => ???, Ratio => ???, SampledData => ???, Time => ???, FhirDateTime => ???, Period => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlQuantity ee_ = FHIRHelpers_4_0_001.ToQuantity(ed_);
 					CqlQuantity ef_ = context.Operators.Quantity(80m, "mg/dL");
 					bool? eg_ = context.Operators.Greater(ee_, ef_);
@@ -512,7 +512,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 				CqlInterval<CqlDateTime> el_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
 				bool? em_ = context.Operators.In<CqlDateTime>(ek_, el_, default);
 				DataType en_ = BloodGlucoseLab?.Value;
-				Quantity eo_ = en_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Quantity eo_ = en_ switch { null => null , Quantity b => b/* , CodeableConcept => ???, FhirString => ???, FhirBoolean => ???, Integer => ???, Range => ???, Ratio => ???, SampledData => ???, Time => ???, FhirDateTime => ???, Period => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlQuantity ep_ = FHIRHelpers_4_0_001.ToQuantity(eo_);
 				CqlQuantity eq_ = context.Operators.Quantity(40m, "mg/dL");
 				bool? er_ = context.Operators.Less(ep_, eq_);

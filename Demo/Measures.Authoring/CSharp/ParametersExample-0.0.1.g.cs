@@ -109,7 +109,7 @@ public class ParametersExample_0_0_1
 			bool? k_ = context.Operators.IsTrue(j_);
 			bool? l_ = context.Operators.And(h_, k_);
 			DataType m_ = P?.Deceased;
-			FhirBoolean n_ = m_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			FhirBoolean n_ = m_ switch { null => null , FhirBoolean a => a/* , FhirDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? o_ = FHIRHelpers_4_3_000.ToBoolean(n_);
 			bool? p_ = context.Operators.Not(o_);
 			bool? q_ = context.Operators.And(l_, p_);

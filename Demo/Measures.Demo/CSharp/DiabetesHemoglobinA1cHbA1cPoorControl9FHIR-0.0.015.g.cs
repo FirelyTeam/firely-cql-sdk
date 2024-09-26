@@ -424,7 +424,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		Observation a_ = this.Most_Recent_HbA1c();
 		DataType b_ = a_?.Value;
-		Quantity c_ = b_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		Quantity c_ = b_ switch { null => null , Quantity a => a/* , CodeableConcept => ???, FhirString => ???, FhirBoolean => ???, Integer => ???, Range => ???, Ratio => ???, SampledData => ???, Time => ???, FhirDateTime => ???, Period => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 		CqlQuantity d_ = FHIRHelpers_4_0_001.ToQuantity(c_);
 		CqlQuantity e_ = context.Operators.Quantity(9m, "%");
 		bool? f_ = context.Operators.Greater(d_, e_);

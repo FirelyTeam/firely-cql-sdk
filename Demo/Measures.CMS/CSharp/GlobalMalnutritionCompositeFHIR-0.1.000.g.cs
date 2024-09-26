@@ -510,7 +510,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept ae_ = ad_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlValueSet af_ = this.Malnutrition_Screening_Not_At_Risk_Result();
 			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 			object ai_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -596,7 +596,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept ae_ = ad_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlValueSet af_ = this.Malnutrition_Screening_Not_At_Risk_Result();
 			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 			bool? ah_ = context.Operators.And(ab_, ag_);
@@ -679,7 +679,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept ae_ = ad_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlValueSet af_ = this.Malnutrition_Screening_At_Risk_Result();
 			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 			bool? ah_ = context.Operators.And(ab_, ag_);
@@ -761,7 +761,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept ae_ = ad_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlValueSet af_ = this.Nutrition_Assessment_Status_Moderately_Malnourished();
 			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 			object ai_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -826,7 +826,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept ae_ = ad_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlValueSet af_ = this.Nutrition_Assessment_Status_Moderately_Malnourished();
 			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 			object ai_ = FHIRHelpers_4_3_000.ToValue(ac_);
@@ -887,7 +887,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept ae_ = ad_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlValueSet af_ = this.Nutrition_Assessment_Status_Not_or_Mildly_Malnourished();
 			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
 			bool? ah_ = context.Operators.And(ab_, ag_);

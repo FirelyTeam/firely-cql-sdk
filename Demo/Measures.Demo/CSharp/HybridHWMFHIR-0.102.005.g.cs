@@ -466,7 +466,7 @@ public class HybridHWMFHIR_0_102_005
 			IEnumerable<Observation> m_ = context.Operators.SortBy<Observation>(k_, l_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation n_ = context.Operators.First<Observation>(m_);
 			DataType o_ = n_?.Value;
-			Quantity p_ = o_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			Quantity p_ = o_ switch { null => null , Quantity a => a/* , CodeableConcept => ???, FhirString => ???, FhirBoolean => ???, Integer => ???, Range => ???, Ratio => ???, SampledData => ???, Time => ???, FhirDateTime => ???, Period => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity q_ = FHIRHelpers_4_0_001.ToQuantity(p_);
 			string r_ = context.Operators.ConvertQuantityToString(q_);
 			string s_ = context.Operators.Concatenate(i_ ?? "", r_ ?? "");
@@ -583,7 +583,7 @@ public class HybridHWMFHIR_0_102_005
 			IEnumerable<Observation> m_ = context.Operators.SortBy<Observation>(k_, l_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation n_ = context.Operators.First<Observation>(m_);
 			DataType o_ = n_?.Value;
-			Quantity p_ = o_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			Quantity p_ = o_ switch { null => null , Quantity a => a/* , CodeableConcept => ???, FhirString => ???, FhirBoolean => ???, Integer => ???, Range => ???, Ratio => ???, SampledData => ???, Time => ???, FhirDateTime => ???, Period => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity q_ = FHIRHelpers_4_0_001.ToQuantity(p_);
 			string r_ = context.Operators.ConvertQuantityToString(q_);
 			string s_ = context.Operators.Concatenate(i_ ?? "", r_ ?? "");

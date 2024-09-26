@@ -332,7 +332,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					{
 						DataType cg_ = AtrialAblationObservation?.Effective;
 						object ch_ = FHIRHelpers_4_3_000.ToValue(cg_);
-						CqlDateTime ci_ = ch_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime ci_ = ch_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return ci_ as object;
 					}
@@ -340,7 +340,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					{
 						DataType cj_ = AtrialAblationObservation?.Effective;
 						object ck_ = FHIRHelpers_4_3_000.ToValue(cj_);
-						CqlInterval<CqlDateTime> cl_ = ck_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlInterval<CqlDateTime> cl_ = ck_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return cl_ as object;
 					}
@@ -348,7 +348,7 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					{
 						DataType cm_ = AtrialAblationObservation?.Effective;
 						object cn_ = FHIRHelpers_4_3_000.ToValue(cm_);
-						CqlDateTime co_ = cn_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime co_ = cn_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return co_ as object;
 					}

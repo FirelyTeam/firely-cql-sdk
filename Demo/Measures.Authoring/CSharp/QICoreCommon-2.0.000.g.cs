@@ -1322,7 +1322,7 @@ public class QICoreCommon_2_0_000
 		{
 			DataType j_ = E?.Value;
 			object k_ = FHIRHelpers_4_3_000.ToValue(j_);
-			bool? l_ = k_ switch { null => null , bool? a => context.Operators.ConvertStringToBoolean(a), bool? b => context.Operators.ConvertStringToBoolean(b), bool? c => context.Operators.ConvertStringToBoolean(c), bool? d => context.Operators.ConvertStringToBoolean(d), bool? e => context.Operators.ConvertStringToBoolean(e), bool? f => context.Operators.ConvertIntegerToBoolean(f), bool? g => context.Operators.ConvertStringToBoolean(g), bool? h => context.Operators.ConvertIntegerToBoolean(h), bool? i => context.Operators.ConvertStringToBoolean(i), bool? j => context.Operators.ConvertStringToBoolean(j), bool? k => context.Operators.ConvertStringToBoolean(k), bool? l => context.Operators.ConvertDecimalToBoolean(l), _ => throw new System.Diagnostics.UnreachableException(), };
+			bool? l_ = k_ switch { null => null , bool? a => context.Operators.ConvertStringToBoolean(a)/* , CqlDate => ???, CqlDateTime => ???, CqlDateTime => ???, CqlTime => ???, Address => ???, CqlQuantity => ???, Annotation => ???, Attachment => ???, CqlConcept => ???, CqlCode => ???, ContactPoint => ???, CqlQuantity => ???, CqlQuantity => ???, CqlQuantity => ???, HumanName => ???, Identifier => ???, CqlInterval<CqlDateTime> => ???, CqlQuantity => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, ResourceReference => ???, SampledData => ???, Signature => ???, Timing => ???, ContactDetail => ???, Contributor => ???, DataRequirement => ???, Expression => ???, ParameterDefinition => ???, RelatedArtifact => ???, TriggerDefinition => ???, UsageContext => ???, Dosage => ???, Meta => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 			return l_;
 		};
@@ -1342,14 +1342,14 @@ public class QICoreCommon_2_0_000
 		{
 			if (choice is CqlDateTime)
 			{
-				CqlDateTime b_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlDateTime b_ = choice switch { null => null , CqlDateTime a => a/* , CqlQuantity => ???, CqlInterval<CqlDateTime> => ???, CqlInterval<CqlQuantity> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
 
 				return d_;
 			}
 			else if (choice is CqlInterval<CqlDateTime>)
 			{
-				CqlInterval<CqlDateTime> e_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlInterval<CqlDateTime> e_ = choice switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, CqlQuantity => ???, CqlInterval<CqlQuantity> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 				return e_;
 			}
@@ -1359,7 +1359,7 @@ public class QICoreCommon_2_0_000
 				Date g_ = f_?.BirthDateElement;
 				string h_ = g_?.Value;
 				CqlDate i_ = context.Operators.ConvertStringToDate(h_);
-				CqlQuantity j_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity j_ = choice switch { null => null , CqlQuantity c => c/* , CqlDateTime => ???, CqlInterval<CqlDateTime> => ???, CqlInterval<CqlQuantity> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDate k_ = context.Operators.Add(i_, j_);
 				Date m_ = f_?.BirthDateElement;
 				string n_ = m_?.Value;
@@ -1415,7 +1415,7 @@ public class QICoreCommon_2_0_000
 				string bw_ = bv_?.Value;
 				CqlDate bx_ = context.Operators.ConvertStringToDate(bw_);
 				object by_ = context.Operators.LateBoundProperty<object>(choice, "low");
-				CqlQuantity bz_ = by_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity bz_ = by_ switch { null => null , CqlQuantity d => d/* , CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDate ca_ = context.Operators.Add(bx_, bz_);
 				Date cc_ = bu_?.BirthDateElement;
 				string cd_ = cc_?.Value;
@@ -1489,14 +1489,14 @@ public class QICoreCommon_2_0_000
 		{
 			if (choice is CqlDateTime)
 			{
-				CqlDateTime b_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlDateTime b_ = choice switch { null => null , CqlDateTime a => a/* , CqlQuantity => ???, CqlInterval<CqlDateTime> => ???, CqlInterval<CqlQuantity> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
 
 				return d_;
 			}
 			else if (choice is CqlInterval<CqlDateTime>)
 			{
-				CqlInterval<CqlDateTime> e_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlInterval<CqlDateTime> e_ = choice switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, CqlQuantity => ???, CqlInterval<CqlQuantity> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 				return e_;
 			}
@@ -1506,7 +1506,7 @@ public class QICoreCommon_2_0_000
 				Date g_ = f_?.BirthDateElement;
 				string h_ = g_?.Value;
 				CqlDate i_ = context.Operators.ConvertStringToDate(h_);
-				CqlQuantity j_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity j_ = choice switch { null => null , CqlQuantity c => c/* , CqlDateTime => ???, CqlInterval<CqlDateTime> => ???, CqlInterval<CqlQuantity> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDate k_ = context.Operators.Add(i_, j_);
 				Date m_ = f_?.BirthDateElement;
 				string n_ = m_?.Value;
@@ -1562,7 +1562,7 @@ public class QICoreCommon_2_0_000
 				string bw_ = bv_?.Value;
 				CqlDate bx_ = context.Operators.ConvertStringToDate(bw_);
 				object by_ = context.Operators.LateBoundProperty<object>(choice, "low");
-				CqlQuantity bz_ = by_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity bz_ = by_ switch { null => null , CqlQuantity d => d/* , CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDate ca_ = context.Operators.Add(bx_, bz_);
 				Date cc_ = bu_?.BirthDateElement;
 				string cd_ = cc_?.Value;
@@ -1671,7 +1671,7 @@ public class QICoreCommon_2_0_000
 			{
 				DataType r_ = condition?.Abatement;
 				object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-				CqlDateTime t_ = s_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlDateTime t_ = s_ switch { null => null , CqlDateTime a => a/* , CqlQuantity => ???, CqlInterval<CqlDateTime> => ???, CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				object v_ = FHIRHelpers_4_3_000.ToValue(r_);
 				CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, t_, true, true);
 
@@ -1685,7 +1685,7 @@ public class QICoreCommon_2_0_000
 				CqlDate ab_ = context.Operators.ConvertStringToDate(aa_);
 				DataType ac_ = condition?.Abatement;
 				object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-				CqlQuantity ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity ae_ = ad_ switch { null => null , CqlQuantity b => b/* , CqlDateTime => ???, CqlInterval<CqlDateTime> => ???, CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDate af_ = context.Operators.Add(ab_, ae_);
 				Date ah_ = y_?.BirthDateElement;
 				string ai_ = ah_?.Value;
@@ -1750,7 +1750,7 @@ public class QICoreCommon_2_0_000
 				DataType dh_ = condition?.Abatement;
 				object di_ = FHIRHelpers_4_3_000.ToValue(dh_);
 				object dj_ = context.Operators.LateBoundProperty<object>(di_, "low");
-				CqlQuantity dk_ = dj_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity dk_ = dj_ switch { null => null , CqlQuantity c => c/* , CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDate dl_ = context.Operators.Add(dg_, dk_);
 				Date dn_ = dd_?.BirthDateElement;
 				string do_ = dn_?.Value;
@@ -1818,7 +1818,7 @@ public class QICoreCommon_2_0_000
 				DataType gq_ = condition?.Abatement;
 				object gr_ = FHIRHelpers_4_3_000.ToValue(gq_);
 				object gs_ = context.Operators.LateBoundProperty<object>(gr_, "low");
-				CqlDateTime gt_ = gs_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlDateTime gt_ = gs_ switch { null => null , CqlDateTime d => d/* , CqlQuantity => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				object gv_ = FHIRHelpers_4_3_000.ToValue(gq_);
 				object gw_ = context.Operators.LateBoundProperty<object>(gv_, "high");
 				CqlInterval<CqlDateTime> gy_ = context.Operators.Interval(gt_, gt_, true, false);
@@ -1877,7 +1877,7 @@ public class QICoreCommon_2_0_000
 			{
 				DataType r_ = condition?.Abatement;
 				object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-				CqlDateTime t_ = s_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlDateTime t_ = s_ switch { null => null , CqlDateTime a => a/* , CqlQuantity => ???, CqlInterval<CqlDateTime> => ???, CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				object v_ = FHIRHelpers_4_3_000.ToValue(r_);
 				CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, t_, true, true);
 
@@ -1891,7 +1891,7 @@ public class QICoreCommon_2_0_000
 				CqlDate ab_ = context.Operators.ConvertStringToDate(aa_);
 				DataType ac_ = condition?.Abatement;
 				object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-				CqlQuantity ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity ae_ = ad_ switch { null => null , CqlQuantity b => b/* , CqlDateTime => ???, CqlInterval<CqlDateTime> => ???, CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDate af_ = context.Operators.Add(ab_, ae_);
 				Date ah_ = y_?.BirthDateElement;
 				string ai_ = ah_?.Value;
@@ -1956,7 +1956,7 @@ public class QICoreCommon_2_0_000
 				DataType dh_ = condition?.Abatement;
 				object di_ = FHIRHelpers_4_3_000.ToValue(dh_);
 				object dj_ = context.Operators.LateBoundProperty<object>(di_, "low");
-				CqlQuantity dk_ = dj_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity dk_ = dj_ switch { null => null , CqlQuantity c => c/* , CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDate dl_ = context.Operators.Add(dg_, dk_);
 				Date dn_ = dd_?.BirthDateElement;
 				string do_ = dn_?.Value;
@@ -2024,7 +2024,7 @@ public class QICoreCommon_2_0_000
 				DataType gq_ = condition?.Abatement;
 				object gr_ = FHIRHelpers_4_3_000.ToValue(gq_);
 				object gs_ = context.Operators.LateBoundProperty<object>(gr_, "low");
-				CqlDateTime gt_ = gs_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlDateTime gt_ = gs_ switch { null => null , CqlDateTime d => d/* , CqlQuantity => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				object gv_ = FHIRHelpers_4_3_000.ToValue(gq_);
 				object gw_ = context.Operators.LateBoundProperty<object>(gv_, "high");
 				CqlInterval<CqlDateTime> gy_ = context.Operators.Interval(gt_, gt_, true, false);

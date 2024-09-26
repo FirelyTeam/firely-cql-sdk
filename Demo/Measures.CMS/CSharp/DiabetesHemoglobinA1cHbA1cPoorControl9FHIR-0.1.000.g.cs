@@ -272,7 +272,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 				{
 					DataType y_ = RecentHbA1c?.Effective;
 					object z_ = FHIRHelpers_4_3_000.ToValue(y_);
-					CqlDateTime aa_ = z_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime aa_ = z_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return aa_ as object;
 				}
@@ -280,7 +280,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 				{
 					DataType ab_ = RecentHbA1c?.Effective;
 					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
-					CqlInterval<CqlDateTime> ad_ = ac_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ad_ = ac_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ad_ as object;
 				}
@@ -288,7 +288,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 				{
 					DataType ae_ = RecentHbA1c?.Effective;
 					object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
-					CqlDateTime ag_ = af_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ag_ = af_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ag_ as object;
 				}
@@ -343,7 +343,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 		Observation a_ = this.Most_Recent_HbA1c();
 		DataType b_ = a_?.Value;
 		object c_ = FHIRHelpers_4_3_000.ToValue(b_);
-		CqlQuantity d_ = c_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlQuantity d_ = c_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 		CqlQuantity e_ = context.Operators.Quantity(9m, "%");
 		bool? f_ = context.Operators.Greater(d_, e_);
 
@@ -391,7 +391,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 				{
 					DataType x_ = NoHbA1c?.Effective;
 					object y_ = FHIRHelpers_4_3_000.ToValue(x_);
-					CqlDateTime z_ = y_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime z_ = y_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return z_ as object;
 				}
@@ -399,7 +399,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 				{
 					DataType aa_ = NoHbA1c?.Effective;
 					object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
-					CqlInterval<CqlDateTime> ac_ = ab_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ac_ = ab_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ac_ as object;
 				}
@@ -407,7 +407,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 				{
 					DataType ad_ = NoHbA1c?.Effective;
 					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-					CqlDateTime af_ = ae_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime af_ = ae_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return af_ as object;
 				}

@@ -92,10 +92,15 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var sb = new StringBuilder();
             sb.Append(Invariant( $$"""{{((ParameterExpression)cae.Expression).Name}} switch { null => null """));
+            HashSet<string> previousTypes = new();
             foreach (var e in cae.SwitchCaseExpressions)
             {
-                var convertExpressionParamName = nameGenerator.Next();
                 var convertExpressionParamType = _typeToCSharpConverter.ToCSharp(e.Type);
+                if (!previousTypes.Add(convertExpressionParamType))
+                {
+                    continue;
+                }
+                var convertExpressionParamName = nameGenerator.Next();
                 var convertExpression = ConvertExpression(0, e);
                 convertExpression = convertExpression.Replace(ElmChoiceAsExpression.SwitchCaseExpressionParamPlaceholderName, convertExpressionParamName);
                 sb.Append(Invariant($$""", {{convertExpressionParamType}} {{convertExpressionParamName}} => {{convertExpression}}"""));
@@ -111,7 +116,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             if (cae.MissingConversionTypes.Any())
                 sb.Append(" */");
 
-            sb.Append(Invariant($", _ => throw new {typeof(UnreachableException).FullName}(), }}"));
+            if (!previousTypes.Contains("object"))
+                sb.Append(Invariant($", _ => throw new {typeof(UnreachableException).FullName}()"));
+
+            sb.Append(" }");
+
             return sb.ToString();
         }
 

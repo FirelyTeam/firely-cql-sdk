@@ -498,7 +498,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		{
 			DataType h_ = SexualActivityAssessment?.Value;
 			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
-			CqlConcept j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept j_ = i_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlCode k_ = this.Yes__qualifier_value_();
 			CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
 			bool? m_ = context.Operators.Equivalent(j_, l_);
@@ -967,7 +967,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				{
 					DataType aa_ = ChlamydiaTest?.Effective;
 					object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
-					CqlDateTime ac_ = ab_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ac_ = ab_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ac_ as object;
 				}
@@ -975,7 +975,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				{
 					DataType ad_ = ChlamydiaTest?.Effective;
 					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-					CqlInterval<CqlDateTime> af_ = ae_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> af_ = ae_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return af_ as object;
 				}
@@ -983,7 +983,7 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				{
 					DataType ag_ = ChlamydiaTest?.Effective;
 					object ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
-					CqlDateTime ai_ = ah_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ai_ = ah_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ai_ as object;
 				}

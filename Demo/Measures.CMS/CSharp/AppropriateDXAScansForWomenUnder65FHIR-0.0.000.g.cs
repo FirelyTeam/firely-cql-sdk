@@ -933,7 +933,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 			bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, default);
 			DataType p_ = AverageDrinks?.Value;
 			object q_ = FHIRHelpers_4_3_000.ToValue(p_);
-			CqlQuantity r_ = q_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity r_ = q_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity s_ = context.Operators.Quantity(2m, "{drinks}/d");
 			bool? t_ = context.Operators.Greater(r_, s_);
 			bool? u_ = context.Operators.And(o_, t_);
@@ -1508,7 +1508,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		{
 			DataType ad_ = FRAX?.Value;
 			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-			CqlQuantity af_ = ae_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity af_ = ae_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity ag_ = context.Operators.Quantity(8.4m, "%");
 			bool? ah_ = context.Operators.GreaterOrEqual(af_, ag_);
 
@@ -1523,7 +1523,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		{
 			DataType ai_ = ORAI?.Value;
 			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-			int? ak_ = aj_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			int? ak_ = aj_ switch { null => null , int? b => context.Operators.ConvertStringToInteger(b)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? al_ = context.Operators.GreaterOrEqual(ak_, 9);
 
 			return al_;
@@ -1538,7 +1538,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		{
 			DataType am_ = OSIRIS?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			CqlQuantity ao_ = an_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity ao_ = an_ switch { null => null , CqlQuantity c => c/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity ap_ = context.Operators.ConvertDecimalToQuantity(1.0m);
 			bool? aq_ = context.Operators.Less(ao_, ap_);
 
@@ -1553,7 +1553,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		{
 			DataType ar_ = OST?.Value;
 			object as_ = FHIRHelpers_4_3_000.ToValue(ar_);
-			CqlQuantity at_ = as_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity at_ = as_ switch { null => null , CqlQuantity d => d/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity au_ = context.Operators.ConvertDecimalToQuantity(2.0m);
 			bool? av_ = context.Operators.Less(at_, au_);
 

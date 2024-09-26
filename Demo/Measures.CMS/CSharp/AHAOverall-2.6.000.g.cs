@@ -391,7 +391,7 @@ public class AHAOverall_2_6_000
 		{
 			DataType n_ = EjectionFraction?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
-			CqlQuantity p_ = o_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity p_ = o_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity q_ = context.Operators.Quantity(40m, "%");
 			bool? r_ = context.Operators.LessOrEqual(p_, q_);
 			Code<ObservationStatus> s_ = EjectionFraction?.StatusElement;
@@ -442,7 +442,7 @@ public class AHAOverall_2_6_000
 			IEnumerable<object> d_ = this.Moderate_or_Severe_LVSD_Findings();
 			bool? e_(object LVSDFindings)
 			{
-				Condition i_ = LVSDFindings switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Condition i_ = LVSDFindings switch { null => null , Condition a => a/* , Observation => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.prevalenceInterval(i_);
 				object k_ = context.Operators.LateBoundProperty<object>(LVSDFindings, "effective");
 				object l_ = FHIRHelpers_4_3_000.ToValue(k_);
@@ -818,7 +818,7 @@ public class AHAOverall_2_6_000
 			{
 				if (Event is Condition)
 				{
-					Condition f_ = Event switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					Condition f_ = Event switch { null => null , Condition a => a/* , Procedure => ???, AllergyIntolerance => ???, MedicationRequest => ???, Observation => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.prevalenceInterval(f_);
 					Period h_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 					CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.ToInterval(h_);
@@ -830,7 +830,7 @@ public class AHAOverall_2_6_000
 				}
 				else if (Event is Procedure)
 				{
-					Procedure n_ = Event switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					Procedure n_ = Event switch { null => null , Procedure b => b/* , Condition => ???, AllergyIntolerance => ???, MedicationRequest => ???, Observation => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					DataType o_ = n_?.Performed;
 					object p_ = FHIRHelpers_4_3_000.ToValue(o_);
 					CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.toInterval(p_);
@@ -847,7 +847,7 @@ public class AHAOverall_2_6_000
 				}
 				else if (Event is AllergyIntolerance)
 				{
-					AllergyIntolerance aa_ = Event switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					AllergyIntolerance aa_ = Event switch { null => null , AllergyIntolerance c => c/* , Condition => ???, Procedure => ???, MedicationRequest => ???, Observation => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					DataType ab_ = aa_?.Onset;
 					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 					CqlInterval<CqlDateTime> ad_ = QICoreCommon_2_0_000.toInterval(ac_);
@@ -970,7 +970,7 @@ public class AHAOverall_2_6_000
 					Period cp_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
 					CqlInterval<CqlDateTime> cq_ = FHIRHelpers_4_3_000.ToInterval(cp_);
 					bool? cr_ = context.Operators.OverlapsAfter(co_, cq_, "day");
-					MedicationRequest cs_ = Event switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					MedicationRequest cs_ = Event switch { null => null , MedicationRequest d => d/* , Condition => ???, Procedure => ???, AllergyIntolerance => ???, Observation => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					Code<MedicationRequest.MedicationrequestStatus> ct_ = cs_?.StatusElement;
 					MedicationRequest.MedicationrequestStatus? cu_ = ct_?.Value;
 					string cv_ = context.Operators.Convert<string>(cu_);
@@ -1002,7 +1002,7 @@ public class AHAOverall_2_6_000
 				}
 				else if (Event is Observation)
 				{
-					Observation dz_ = Event switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					Observation dz_ = Event switch { null => null , Observation e => e/* , Condition => ???, Procedure => ???, AllergyIntolerance => ???, MedicationRequest => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					DataType ea_ = dz_?.Effective;
 					object eb_ = FHIRHelpers_4_3_000.ToValue(ea_);
 					CqlInterval<CqlDateTime> ec_ = QICoreCommon_2_0_000.toInterval(eb_);

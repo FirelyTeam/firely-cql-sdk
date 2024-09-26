@@ -467,7 +467,7 @@ public class PCMaternal_5_16_000
 		{
 			DataType l_ = TimeOfDelivery?.Value;
 			object m_ = FHIRHelpers_4_3_000.ToValue(l_);
-			CqlDateTime n_ = m_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlDateTime n_ = m_ switch { null => null , CqlDateTime a => context.Operators.ConvertStringToDateTime(a)/* , CqlQuantity => ???, CqlConcept => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? o_ = context.Operators.Not((bool?)(n_ is null));
 			Code<ObservationStatus> p_ = TimeOfDelivery?.StatusElement;
 			ObservationStatus? q_ = p_?.Value;
@@ -510,7 +510,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType at_ = TimeOfDelivery?.Effective;
 					object au_ = FHIRHelpers_4_3_000.ToValue(at_);
-					CqlDateTime av_ = au_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime av_ = au_ switch { null => null , CqlDateTime b => b/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return av_ as object;
 				}
@@ -518,7 +518,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType aw_ = TimeOfDelivery?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
-					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , CqlInterval<CqlDateTime> c => c/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ay_ as object;
 				}
@@ -526,7 +526,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType az_ = TimeOfDelivery?.Effective;
 					object ba_ = FHIRHelpers_4_3_000.ToValue(az_);
-					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bb_ as object;
 				}
@@ -578,7 +578,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
-					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime e => e/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bs_ as object;
 				}
@@ -586,7 +586,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType bt_ = @this?.Effective;
 					object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
-					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , CqlInterval<CqlDateTime> f => f/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bv_ as object;
 				}
@@ -594,7 +594,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType bw_ = @this?.Effective;
 					object bx_ = FHIRHelpers_4_3_000.ToValue(bw_);
-					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime g => g/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return by_ as object;
 				}
@@ -611,7 +611,7 @@ public class PCMaternal_5_16_000
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
-		CqlDateTime k_ = j_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlDateTime k_ = j_ switch { null => null , CqlDateTime h => context.Operators.ConvertStringToDateTime(h)/* , CqlQuantity => ???, CqlConcept => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 		return k_;
 	}
@@ -626,7 +626,7 @@ public class PCMaternal_5_16_000
 		{
 			DataType l_ = EstimatedDateOfDelivery?.Value;
 			object m_ = FHIRHelpers_4_3_000.ToValue(l_);
-			CqlDateTime n_ = m_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlDateTime n_ = m_ switch { null => null , CqlDateTime a => context.Operators.ConvertStringToDateTime(a)/* , CqlQuantity => ???, CqlConcept => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? o_ = context.Operators.Not((bool?)(n_ is null));
 			Code<ObservationStatus> p_ = EstimatedDateOfDelivery?.StatusElement;
 			ObservationStatus? q_ = p_?.Value;
@@ -669,7 +669,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType au_ = EstimatedDateOfDelivery?.Effective;
 					object av_ = FHIRHelpers_4_3_000.ToValue(au_);
-					CqlDateTime aw_ = av_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime aw_ = av_ switch { null => null , CqlDateTime b => b/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return aw_ as object;
 				}
@@ -677,7 +677,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType ax_ = EstimatedDateOfDelivery?.Effective;
 					object ay_ = FHIRHelpers_4_3_000.ToValue(ax_);
-					CqlInterval<CqlDateTime> az_ = ay_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> az_ = ay_ switch { null => null , CqlInterval<CqlDateTime> c => c/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return az_ as object;
 				}
@@ -685,7 +685,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType ba_ = EstimatedDateOfDelivery?.Effective;
 					object bb_ = FHIRHelpers_4_3_000.ToValue(ba_);
-					CqlDateTime bc_ = bb_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bc_ = bb_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bc_ as object;
 				}
@@ -739,7 +739,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType br_ = @this?.Effective;
 					object bs_ = FHIRHelpers_4_3_000.ToValue(br_);
-					CqlDateTime bt_ = bs_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bt_ = bs_ switch { null => null , CqlDateTime e => e/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bt_ as object;
 				}
@@ -747,7 +747,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType bu_ = @this?.Effective;
 					object bv_ = FHIRHelpers_4_3_000.ToValue(bu_);
-					CqlInterval<CqlDateTime> bw_ = bv_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bw_ = bv_ switch { null => null , CqlInterval<CqlDateTime> f => f/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bw_ as object;
 				}
@@ -755,7 +755,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType bx_ = @this?.Effective;
 					object by_ = FHIRHelpers_4_3_000.ToValue(bx_);
-					CqlDateTime bz_ = by_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bz_ = by_ switch { null => null , CqlDateTime g => g/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bz_ as object;
 				}
@@ -772,7 +772,7 @@ public class PCMaternal_5_16_000
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
-		CqlDateTime k_ = j_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlDateTime k_ = j_ switch { null => null , CqlDateTime h => context.Operators.ConvertStringToDateTime(h)/* , CqlQuantity => ???, CqlConcept => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 		return k_;
 	}
@@ -847,7 +847,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType bg_ = EstimatedGestationalAge?.Effective;
 					object bh_ = FHIRHelpers_4_3_000.ToValue(bg_);
-					CqlDateTime bi_ = bh_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bi_ = bh_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bi_ as object;
 				}
@@ -855,7 +855,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType bj_ = EstimatedGestationalAge?.Effective;
 					object bk_ = FHIRHelpers_4_3_000.ToValue(bj_);
-					CqlInterval<CqlDateTime> bl_ = bk_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bl_ = bk_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bl_ as object;
 				}
@@ -863,7 +863,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType bm_ = EstimatedGestationalAge?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
-					CqlDateTime bo_ = bn_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bo_ = bn_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bo_ as object;
 				}
@@ -925,7 +925,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType cb_ = EstimatedGestationalAge?.Effective;
 					object cc_ = FHIRHelpers_4_3_000.ToValue(cb_);
-					CqlDateTime cd_ = cc_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime cd_ = cc_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cd_ as object;
 				}
@@ -933,7 +933,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType ce_ = EstimatedGestationalAge?.Effective;
 					object cf_ = FHIRHelpers_4_3_000.ToValue(ce_);
-					CqlInterval<CqlDateTime> cg_ = cf_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> cg_ = cf_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cg_ as object;
 				}
@@ -941,7 +941,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType ch_ = EstimatedGestationalAge?.Effective;
 					object ci_ = FHIRHelpers_4_3_000.ToValue(ch_);
-					CqlDateTime cj_ = ci_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime cj_ = ci_ switch { null => null , CqlDateTime f => f/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cj_ as object;
 				}
@@ -982,7 +982,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType cw_ = EstimatedGestationalAge?.Effective;
 					object cx_ = FHIRHelpers_4_3_000.ToValue(cw_);
-					CqlDateTime cy_ = cx_ switch { null => null , CqlDateTime e => e, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime cy_ = cx_ switch { null => null , CqlDateTime g => g/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cy_ as object;
 				}
@@ -990,7 +990,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType cz_ = EstimatedGestationalAge?.Effective;
 					object da_ = FHIRHelpers_4_3_000.ToValue(cz_);
-					CqlInterval<CqlDateTime> db_ = da_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> db_ = da_ switch { null => null , CqlInterval<CqlDateTime> h => h/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return db_ as object;
 				}
@@ -998,7 +998,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType dc_ = EstimatedGestationalAge?.Effective;
 					object dd_ = FHIRHelpers_4_3_000.ToValue(dc_);
-					CqlDateTime de_ = dd_ switch { null => null , CqlDateTime f => f, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime de_ = dd_ switch { null => null , CqlDateTime i => i/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return de_ as object;
 				}
@@ -1051,7 +1051,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType dt_ = @this?.Effective;
 					object du_ = FHIRHelpers_4_3_000.ToValue(dt_);
-					CqlDateTime dv_ = du_ switch { null => null , CqlDateTime g => g, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime dv_ = du_ switch { null => null , CqlDateTime j => j/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return dv_ as object;
 				}
@@ -1059,7 +1059,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType dw_ = @this?.Effective;
 					object dx_ = FHIRHelpers_4_3_000.ToValue(dw_);
-					CqlInterval<CqlDateTime> dy_ = dx_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> dy_ = dx_ switch { null => null , CqlInterval<CqlDateTime> k => k/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return dy_ as object;
 				}
@@ -1067,7 +1067,7 @@ public class PCMaternal_5_16_000
 				{
 					DataType dz_ = @this?.Effective;
 					object ea_ = FHIRHelpers_4_3_000.ToValue(dz_);
-					CqlDateTime eb_ = ea_ switch { null => null , CqlDateTime h => h, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime eb_ = ea_ switch { null => null , CqlDateTime l => l/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return eb_ as object;
 				}
@@ -1084,7 +1084,7 @@ public class PCMaternal_5_16_000
 		Observation g_ = context.Operators.Last<Observation>(f_);
 		DataType h_ = g_?.Value;
 		object i_ = FHIRHelpers_4_3_000.ToValue(h_);
-		CqlQuantity j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlQuantity j_ = i_ switch { null => null , CqlQuantity m => m/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 		return j_;
 	}

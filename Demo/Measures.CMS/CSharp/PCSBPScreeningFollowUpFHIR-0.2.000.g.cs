@@ -580,7 +580,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
-			CqlQuantity p_ = o_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity p_ = o_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity q_ = context.Operators.Quantity(1m, "mm[Hg]");
 			CqlQuantity r_ = context.Operators.Quantity(120m, "mm[Hg]");
 			CqlInterval<CqlQuantity> s_ = context.Operators.Interval(q_, r_, true, false);
@@ -719,7 +719,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
-			CqlQuantity p_ = o_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity p_ = o_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity q_ = context.Operators.Quantity(120m, "mm[Hg]");
 			CqlQuantity r_ = context.Operators.Quantity(129m, "mm[Hg]");
 			CqlInterval<CqlQuantity> s_ = context.Operators.Interval(q_, r_, true, true);
@@ -1038,7 +1038,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
-			CqlQuantity p_ = o_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity p_ = o_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity q_ = context.Operators.Quantity(0m, "mm[Hg]");
 			bool? r_ = context.Operators.Greater(p_, q_);
 			bool? t_(Observation BloodPressure)
@@ -1311,7 +1311,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			Observation.ComponentComponent o_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(n_);
 			DataType p_ = o_?.Value;
 			object q_ = FHIRHelpers_4_3_000.ToValue(p_);
-			CqlQuantity r_ = q_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity r_ = q_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity s_ = context.Operators.Quantity(0m, "mm[Hg]");
 			bool? t_ = context.Operators.Greater(r_, s_);
 			bool? v_(Observation BloodPressure)
@@ -1611,7 +1611,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
-			CqlQuantity p_ = o_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity p_ = o_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity q_ = context.Operators.Quantity(130m, "mm[Hg]");
 			CqlQuantity r_ = context.Operators.Quantity(139m, "mm[Hg]");
 			CqlInterval<CqlQuantity> s_ = context.Operators.Interval(q_, r_, true, true);
@@ -2012,7 +2012,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 			Observation.ComponentComponent m_ = context.Operators.SingletonFrom<Observation.ComponentComponent>(l_);
 			DataType n_ = m_?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
-			CqlQuantity p_ = o_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity p_ = o_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity q_ = context.Operators.Quantity(0m, "mm[Hg]");
 			bool? r_ = context.Operators.Greater(p_, q_);
 			bool? t_(Observation BloodPressure)

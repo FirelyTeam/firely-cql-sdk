@@ -272,7 +272,7 @@ public class AlaraCTIQRFHIR_0_1_000
 			bool? k_ = context.Operators.Equivalent(h_, j_);
 			DataType l_ = C?.Value;
 			object m_ = FHIRHelpers_4_3_000.ToValue(l_);
-			CqlQuantity n_ = m_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity n_ = m_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			string o_ = n_?.unit;
 			bool? p_ = context.Operators.Equal(o_, "[hnsf'U]");
 			bool? q_ = context.Operators.And(k_, p_);
@@ -284,7 +284,7 @@ public class AlaraCTIQRFHIR_0_1_000
 		{
 			DataType r_ = C?.Value;
 			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			CqlQuantity t_ = s_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity t_ = s_ switch { null => null , CqlQuantity b => b/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			decimal? u_ = t_?.value;
 
 			return u_;
@@ -308,7 +308,7 @@ public class AlaraCTIQRFHIR_0_1_000
 			bool? k_ = context.Operators.Equivalent(h_, j_);
 			DataType l_ = C?.Value;
 			object m_ = FHIRHelpers_4_3_000.ToValue(l_);
-			CqlQuantity n_ = m_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity n_ = m_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			string o_ = n_?.unit;
 			bool? p_ = context.Operators.Equal(o_, "mGy.cm");
 			bool? q_ = context.Operators.And(k_, p_);
@@ -320,7 +320,7 @@ public class AlaraCTIQRFHIR_0_1_000
 		{
 			DataType r_ = C?.Value;
 			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			CqlQuantity t_ = s_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity t_ = s_ switch { null => null , CqlQuantity b => b/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			decimal? u_ = t_?.value;
 
 			return u_;
@@ -362,7 +362,7 @@ public class AlaraCTIQRFHIR_0_1_000
 	{
 		DataType a_ = Obs?.Value;
 		object b_ = FHIRHelpers_4_3_000.ToValue(a_);
-		CqlConcept c_ = b_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlConcept c_ = b_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 		CqlCode[] d_ = c_?.codes;
 		bool? e_(CqlCode @this)
 		{
@@ -480,7 +480,7 @@ public class AlaraCTIQRFHIR_0_1_000
 		{
 			DataType d_ = Denom?.Value;
 			object e_ = FHIRHelpers_4_3_000.ToValue(d_);
-			CqlConcept f_ = e_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept f_ = e_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlCode[] g_ = f_?.codes;
 			bool? h_(CqlCode @this)
 			{

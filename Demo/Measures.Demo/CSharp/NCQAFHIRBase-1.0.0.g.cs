@@ -56,7 +56,7 @@ public class NCQAFHIRBase_1_0_0
 		{
 			if (onset is FhirDateTime)
 			{
-				FhirDateTime b_ = onset switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				FhirDateTime b_ = onset switch { null => null , FhirDateTime a => a/* , Age => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDateTime c_ = FHIRHelpers_4_0_001.ToDateTime(b_);
 				CqlDateTime e_ = FHIRHelpers_4_0_001.ToDateTime(b_);
 				CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
@@ -88,7 +88,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient x_ = this.Patient();
 						Date y_ = x_?.BirthDateElement;
 						CqlDate z_ = FHIRHelpers_4_0_001.ToDate(y_);
-						Age aa_ = onset switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Age aa_ = onset switch { null => null , Age b => b/* , FhirDateTime => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						CqlQuantity ab_ = FHIRHelpers_4_0_001.ToQuantity(aa_);
 						CqlDate ac_ = context.Operators.Add(z_, ab_);
 						Date ae_ = x_?.BirthDateElement;
@@ -106,7 +106,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient am_ = this.Patient();
 						Date an_ = am_?.BirthDateElement;
 						CqlDate ao_ = FHIRHelpers_4_0_001.ToDate(an_);
-						Range ap_ = onset switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Range ap_ = onset switch { null => null , Range c => c/* , FhirDateTime => ???, Age => ???, Period => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						Quantity aq_ = ap_?.Low;
 						CqlQuantity ar_ = FHIRHelpers_4_0_001.ToQuantity(aq_);
 						CqlDate as_ = context.Operators.Add(ao_, ar_);
@@ -135,7 +135,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient bd_ = this.Patient();
 						Date be_ = bd_?.BirthDateElement;
 						CqlDate bf_ = FHIRHelpers_4_0_001.ToDate(be_);
-						Age bg_ = onset switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Age bg_ = onset switch { null => null , Age d => d/* , FhirDateTime => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						CqlQuantity bh_ = FHIRHelpers_4_0_001.ToQuantity(bg_);
 						CqlDate bi_ = context.Operators.Add(bf_, bh_);
 						Date bk_ = bd_?.BirthDateElement;
@@ -153,7 +153,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient bs_ = this.Patient();
 						Date bt_ = bs_?.BirthDateElement;
 						CqlDate bu_ = FHIRHelpers_4_0_001.ToDate(bt_);
-						Range bv_ = onset switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Range bv_ = onset switch { null => null , Range e => e/* , FhirDateTime => ???, Age => ???, Period => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						Quantity bw_ = bv_?.Low;
 						CqlQuantity bx_ = FHIRHelpers_4_0_001.ToQuantity(bw_);
 						CqlDate by_ = context.Operators.Add(bu_, bx_);
@@ -182,7 +182,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient cj_ = this.Patient();
 						Date ck_ = cj_?.BirthDateElement;
 						CqlDate cl_ = FHIRHelpers_4_0_001.ToDate(ck_);
-						Age cm_ = onset switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Age cm_ = onset switch { null => null , Age f => f/* , FhirDateTime => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						CqlQuantity cn_ = FHIRHelpers_4_0_001.ToQuantity(cm_);
 						CqlDate co_ = context.Operators.Add(cl_, cn_);
 						Date cq_ = cj_?.BirthDateElement;
@@ -200,7 +200,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient cy_ = this.Patient();
 						Date cz_ = cy_?.BirthDateElement;
 						CqlDate da_ = FHIRHelpers_4_0_001.ToDate(cz_);
-						Range db_ = onset switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Range db_ = onset switch { null => null , Range g => g/* , FhirDateTime => ???, Age => ???, Period => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						Quantity dc_ = db_?.Low;
 						CqlQuantity dd_ = FHIRHelpers_4_0_001.ToQuantity(dc_);
 						CqlDate de_ = context.Operators.Add(da_, dd_);
@@ -228,7 +228,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient dp_ = this.Patient();
 						Date dq_ = dp_?.BirthDateElement;
 						CqlDate dr_ = FHIRHelpers_4_0_001.ToDate(dq_);
-						Age ds_ = onset switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Age ds_ = onset switch { null => null , Age h => h/* , FhirDateTime => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						CqlQuantity dt_ = FHIRHelpers_4_0_001.ToQuantity(ds_);
 						CqlDate du_ = context.Operators.Add(dr_, dt_);
 						Date dw_ = dp_?.BirthDateElement;
@@ -246,7 +246,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient ee_ = this.Patient();
 						Date ef_ = ee_?.BirthDateElement;
 						CqlDate eg_ = FHIRHelpers_4_0_001.ToDate(ef_);
-						Range eh_ = onset switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Range eh_ = onset switch { null => null , Range i => i/* , FhirDateTime => ???, Age => ???, Period => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						Quantity ei_ = eh_?.Low;
 						CqlQuantity ej_ = FHIRHelpers_4_0_001.ToQuantity(ei_);
 						CqlDate ek_ = context.Operators.Add(eg_, ej_);
@@ -283,7 +283,7 @@ public class NCQAFHIRBase_1_0_0
 		{
 			if (abatement is FhirDateTime)
 			{
-				FhirDateTime b_ = abatement switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				FhirDateTime b_ = abatement switch { null => null , FhirDateTime a => a/* , Age => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDateTime c_ = FHIRHelpers_4_0_001.ToDateTime(b_);
 				CqlDateTime e_ = FHIRHelpers_4_0_001.ToDateTime(b_);
 				CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
@@ -315,7 +315,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient x_ = this.Patient();
 						Date y_ = x_?.BirthDateElement;
 						CqlDate z_ = FHIRHelpers_4_0_001.ToDate(y_);
-						Age aa_ = abatement switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Age aa_ = abatement switch { null => null , Age b => b/* , FhirDateTime => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						CqlQuantity ab_ = FHIRHelpers_4_0_001.ToQuantity(aa_);
 						CqlDate ac_ = context.Operators.Add(z_, ab_);
 						Date ae_ = x_?.BirthDateElement;
@@ -333,7 +333,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient am_ = this.Patient();
 						Date an_ = am_?.BirthDateElement;
 						CqlDate ao_ = FHIRHelpers_4_0_001.ToDate(an_);
-						Range ap_ = abatement switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Range ap_ = abatement switch { null => null , Range c => c/* , FhirDateTime => ???, Age => ???, Period => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						Quantity aq_ = ap_?.Low;
 						CqlQuantity ar_ = FHIRHelpers_4_0_001.ToQuantity(aq_);
 						CqlDate as_ = context.Operators.Add(ao_, ar_);
@@ -362,7 +362,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient bd_ = this.Patient();
 						Date be_ = bd_?.BirthDateElement;
 						CqlDate bf_ = FHIRHelpers_4_0_001.ToDate(be_);
-						Age bg_ = abatement switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Age bg_ = abatement switch { null => null , Age d => d/* , FhirDateTime => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						CqlQuantity bh_ = FHIRHelpers_4_0_001.ToQuantity(bg_);
 						CqlDate bi_ = context.Operators.Add(bf_, bh_);
 						Date bk_ = bd_?.BirthDateElement;
@@ -380,7 +380,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient bs_ = this.Patient();
 						Date bt_ = bs_?.BirthDateElement;
 						CqlDate bu_ = FHIRHelpers_4_0_001.ToDate(bt_);
-						Range bv_ = abatement switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Range bv_ = abatement switch { null => null , Range e => e/* , FhirDateTime => ???, Age => ???, Period => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						Quantity bw_ = bv_?.Low;
 						CqlQuantity bx_ = FHIRHelpers_4_0_001.ToQuantity(bw_);
 						CqlDate by_ = context.Operators.Add(bu_, bx_);
@@ -409,7 +409,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient cj_ = this.Patient();
 						Date ck_ = cj_?.BirthDateElement;
 						CqlDate cl_ = FHIRHelpers_4_0_001.ToDate(ck_);
-						Age cm_ = abatement switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Age cm_ = abatement switch { null => null , Age f => f/* , FhirDateTime => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						CqlQuantity cn_ = FHIRHelpers_4_0_001.ToQuantity(cm_);
 						CqlDate co_ = context.Operators.Add(cl_, cn_);
 						Date cq_ = cj_?.BirthDateElement;
@@ -427,7 +427,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient cy_ = this.Patient();
 						Date cz_ = cy_?.BirthDateElement;
 						CqlDate da_ = FHIRHelpers_4_0_001.ToDate(cz_);
-						Range db_ = abatement switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Range db_ = abatement switch { null => null , Range g => g/* , FhirDateTime => ???, Age => ???, Period => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						Quantity dc_ = db_?.Low;
 						CqlQuantity dd_ = FHIRHelpers_4_0_001.ToQuantity(dc_);
 						CqlDate de_ = context.Operators.Add(da_, dd_);
@@ -455,7 +455,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient dp_ = this.Patient();
 						Date dq_ = dp_?.BirthDateElement;
 						CqlDate dr_ = FHIRHelpers_4_0_001.ToDate(dq_);
-						Age ds_ = abatement switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Age ds_ = abatement switch { null => null , Age h => h/* , FhirDateTime => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						CqlQuantity dt_ = FHIRHelpers_4_0_001.ToQuantity(ds_);
 						CqlDate du_ = context.Operators.Add(dr_, dt_);
 						Date dw_ = dp_?.BirthDateElement;
@@ -473,7 +473,7 @@ public class NCQAFHIRBase_1_0_0
 						Patient ee_ = this.Patient();
 						Date ef_ = ee_?.BirthDateElement;
 						CqlDate eg_ = FHIRHelpers_4_0_001.ToDate(ef_);
-						Range eh_ = abatement switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						Range eh_ = abatement switch { null => null , Range i => i/* , FhirDateTime => ???, Age => ???, Period => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 						Quantity ei_ = eh_?.Low;
 						CqlQuantity ej_ = FHIRHelpers_4_0_001.ToQuantity(ei_);
 						CqlDate ek_ = context.Operators.Add(eg_, ej_);
@@ -524,7 +524,7 @@ public class NCQAFHIRBase_1_0_0
 		{
 			if (choice is FhirDateTime)
 			{
-				FhirDateTime b_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				FhirDateTime b_ = choice switch { null => null , FhirDateTime a => a/* , Date => ???, Period => ???, Timing => ???, Instant => ???, FhirString => ???, Age => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDateTime c_ = FHIRHelpers_4_0_001.ToDateTime(b_);
 				CqlDateTime e_ = FHIRHelpers_4_0_001.ToDateTime(b_);
 				CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
@@ -533,7 +533,7 @@ public class NCQAFHIRBase_1_0_0
 			}
 			else if (choice is Date)
 			{
-				Date g_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Date g_ = choice switch { null => null , Date b => b/* , FhirDateTime => ???, Period => ???, Timing => ???, Instant => ???, FhirString => ???, Age => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDate h_ = FHIRHelpers_4_0_001.ToDate(g_);
 				CqlDateTime i_ = context.Operators.ConvertDateToDateTime(h_);
 				CqlDate k_ = FHIRHelpers_4_0_001.ToDate(g_);
@@ -554,7 +554,7 @@ public class NCQAFHIRBase_1_0_0
 			}
 			else if (choice is Instant)
 			{
-				Instant s_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Instant s_ = choice switch { null => null , Instant c => c/* , FhirDateTime => ???, Date => ???, Period => ???, Timing => ???, FhirString => ???, Age => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDateTime t_ = FHIRHelpers_4_0_001.ToDateTime(s_);
 				CqlDateTime v_ = FHIRHelpers_4_0_001.ToDateTime(s_);
 				CqlInterval<CqlDateTime> w_ = context.Operators.Interval(t_, v_, true, true);
@@ -566,7 +566,7 @@ public class NCQAFHIRBase_1_0_0
 				Patient x_ = this.Patient();
 				Date y_ = x_?.BirthDateElement;
 				CqlDate z_ = FHIRHelpers_4_0_001.ToDate(y_);
-				Age aa_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Age aa_ = choice switch { null => null , Age d => d/* , FhirDateTime => ???, Date => ???, Period => ???, Timing => ???, Instant => ???, FhirString => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlQuantity ab_ = FHIRHelpers_4_0_001.ToQuantity(aa_);
 				CqlDate ac_ = context.Operators.Add(z_, ab_);
 				Date ae_ = x_?.BirthDateElement;
@@ -621,7 +621,7 @@ public class NCQAFHIRBase_1_0_0
 				Patient cm_ = this.Patient();
 				Date cn_ = cm_?.BirthDateElement;
 				CqlDate co_ = FHIRHelpers_4_0_001.ToDate(cn_);
-				Range cp_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Range cp_ = choice switch { null => null , Range e => e/* , FhirDateTime => ???, Date => ???, Period => ???, Timing => ???, Instant => ???, FhirString => ???, Age => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				Quantity cq_ = cp_?.Low;
 				CqlQuantity cr_ = FHIRHelpers_4_0_001.ToQuantity(cq_);
 				CqlDate cs_ = context.Operators.Add(co_, cr_);

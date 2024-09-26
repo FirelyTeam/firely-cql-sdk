@@ -370,7 +370,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType af_ = CervicalCytology?.Effective;
 					object ag_ = FHIRHelpers_4_3_000.ToValue(af_);
-					CqlDateTime ah_ = ag_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ah_ = ag_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ah_ as object;
 				}
@@ -378,7 +378,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType ai_ = CervicalCytology?.Effective;
 					object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-					CqlInterval<CqlDateTime> ak_ = aj_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ak_ = aj_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ak_ as object;
 				}
@@ -386,7 +386,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType al_ = CervicalCytology?.Effective;
 					object am_ = FHIRHelpers_4_3_000.ToValue(al_);
-					CqlDateTime an_ = am_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime an_ = am_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return an_ as object;
 				}
@@ -460,7 +460,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType ap_ = HPVTest?.Effective;
 					object aq_ = FHIRHelpers_4_3_000.ToValue(ap_);
-					CqlDateTime ar_ = aq_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ar_ = aq_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ar_ as object;
 				}
@@ -468,7 +468,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType as_ = HPVTest?.Effective;
 					object at_ = FHIRHelpers_4_3_000.ToValue(as_);
-					CqlInterval<CqlDateTime> au_ = at_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> au_ = at_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return au_ as object;
 				}
@@ -476,7 +476,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType av_ = HPVTest?.Effective;
 					object aw_ = FHIRHelpers_4_3_000.ToValue(av_);
-					CqlDateTime ax_ = aw_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ax_ = aw_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ax_ as object;
 				}
@@ -519,7 +519,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType bk_ = HPVTest?.Effective;
 					object bl_ = FHIRHelpers_4_3_000.ToValue(bk_);
-					CqlDateTime bm_ = bl_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bm_ = bl_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bm_ as object;
 				}
@@ -527,7 +527,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType bn_ = HPVTest?.Effective;
 					object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
-					CqlInterval<CqlDateTime> bp_ = bo_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bp_ = bo_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bp_ as object;
 				}
@@ -535,7 +535,7 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType bq_ = HPVTest?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
-					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime f => f/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bs_ as object;
 				}

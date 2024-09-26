@@ -327,7 +327,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType bg_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object bh_ = FHIRHelpers_4_3_000.ToValue(bg_);
-					CqlDateTime bi_ = bh_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bi_ = bh_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bi_ as object;
 				}
@@ -335,7 +335,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType bj_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object bk_ = FHIRHelpers_4_3_000.ToValue(bj_);
-					CqlInterval<CqlDateTime> bl_ = bk_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bl_ = bk_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bl_ as object;
 				}
@@ -343,7 +343,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType bm_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.ToValue(bm_);
-					CqlDateTime bo_ = bn_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bo_ = bn_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bo_ as object;
 				}
@@ -368,7 +368,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			bool? w_ = context.Operators.And(p_, v_);
 			DataType x_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Value;
 			object y_ = FHIRHelpers_4_3_000.ToValue(x_);
-			CqlQuantity z_ = y_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity z_ = y_ switch { null => null , CqlQuantity d => d/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity aa_ = context.Operators.Quantity(40m, "mg/dL");
 			bool? ab_ = context.Operators.Less(z_, aa_);
 			bool? ac_ = context.Operators.And(w_, ab_);
@@ -406,7 +406,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType cb_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object cc_ = FHIRHelpers_4_3_000.ToValue(cb_);
-					CqlDateTime cd_ = cc_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime cd_ = cc_ switch { null => null , CqlDateTime e => e/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cd_ as object;
 				}
@@ -414,7 +414,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType ce_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object cf_ = FHIRHelpers_4_3_000.ToValue(ce_);
-					CqlInterval<CqlDateTime> cg_ = cf_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> cg_ = cf_ switch { null => null , CqlInterval<CqlDateTime> f => f/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cg_ as object;
 				}
@@ -422,7 +422,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType ch_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object ci_ = FHIRHelpers_4_3_000.ToValue(ch_);
-					CqlDateTime cj_ = ci_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime cj_ = ci_ switch { null => null , CqlDateTime g => g/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cj_ as object;
 				}
@@ -464,7 +464,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType cw_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object cx_ = FHIRHelpers_4_3_000.ToValue(cw_);
-					CqlDateTime cy_ = cx_ switch { null => null , CqlDateTime e => e, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime cy_ = cx_ switch { null => null , CqlDateTime h => h/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cy_ as object;
 				}
@@ -472,7 +472,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType cz_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object da_ = FHIRHelpers_4_3_000.ToValue(cz_);
-					CqlInterval<CqlDateTime> db_ = da_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> db_ = da_ switch { null => null , CqlInterval<CqlDateTime> i => i/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return db_ as object;
 				}
@@ -480,7 +480,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType dc_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object dd_ = FHIRHelpers_4_3_000.ToValue(dc_);
-					CqlDateTime de_ = dd_ switch { null => null , CqlDateTime f => f, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime de_ = dd_ switch { null => null , CqlDateTime j => j/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return de_ as object;
 				}
@@ -522,7 +522,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType dr_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object ds_ = FHIRHelpers_4_3_000.ToValue(dr_);
-					CqlDateTime dt_ = ds_ switch { null => null , CqlDateTime g => g, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime dt_ = ds_ switch { null => null , CqlDateTime k => k/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return dt_ as object;
 				}
@@ -530,7 +530,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType du_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object dv_ = FHIRHelpers_4_3_000.ToValue(du_);
-					CqlInterval<CqlDateTime> dw_ = dv_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> dw_ = dv_ switch { null => null , CqlInterval<CqlDateTime> l => l/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return dw_ as object;
 				}
@@ -538,7 +538,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType dx_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object dy_ = FHIRHelpers_4_3_000.ToValue(dx_);
-					CqlDateTime dz_ = dy_ switch { null => null , CqlDateTime h => h, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime dz_ = dy_ switch { null => null , CqlDateTime m => m/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return dz_ as object;
 				}
@@ -612,7 +612,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType bq_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
-					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bs_ as object;
 				}
@@ -620,7 +620,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType bt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
-					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bv_ as object;
 				}
@@ -628,7 +628,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType bw_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object bx_ = FHIRHelpers_4_3_000.ToValue(bw_);
-					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return by_ as object;
 				}
@@ -668,7 +668,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType cl_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object cm_ = FHIRHelpers_4_3_000.ToValue(cl_);
-					CqlDateTime cn_ = cm_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime cn_ = cm_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cn_ as object;
 				}
@@ -676,7 +676,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType co_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object cp_ = FHIRHelpers_4_3_000.ToValue(co_);
-					CqlInterval<CqlDateTime> cq_ = cp_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> cq_ = cp_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return cq_ as object;
 				}
@@ -684,7 +684,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType cr_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object cs_ = FHIRHelpers_4_3_000.ToValue(cr_);
-					CqlDateTime ct_ = cs_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ct_ = cs_ switch { null => null , CqlDateTime f => f/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ct_ as object;
 				}
@@ -724,7 +724,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType dg_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object dh_ = FHIRHelpers_4_3_000.ToValue(dg_);
-					CqlDateTime di_ = dh_ switch { null => null , CqlDateTime e => e, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime di_ = dh_ switch { null => null , CqlDateTime g => g/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return di_ as object;
 				}
@@ -732,7 +732,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType dj_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object dk_ = FHIRHelpers_4_3_000.ToValue(dj_);
-					CqlInterval<CqlDateTime> dl_ = dk_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> dl_ = dk_ switch { null => null , CqlInterval<CqlDateTime> h => h/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return dl_ as object;
 				}
@@ -740,7 +740,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType dm_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object dn_ = FHIRHelpers_4_3_000.ToValue(dm_);
-					CqlDateTime do_ = dn_ switch { null => null , CqlDateTime f => f, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime do_ = dn_ switch { null => null , CqlDateTime i => i/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return do_ as object;
 				}
@@ -784,7 +784,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType eb_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object ec_ = FHIRHelpers_4_3_000.ToValue(eb_);
-					CqlDateTime ed_ = ec_ switch { null => null , CqlDateTime g => g, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ed_ = ec_ switch { null => null , CqlDateTime j => j/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ed_ as object;
 				}
@@ -792,7 +792,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType ee_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object ef_ = FHIRHelpers_4_3_000.ToValue(ee_);
-					CqlInterval<CqlDateTime> eg_ = ef_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> eg_ = ef_ switch { null => null , CqlInterval<CqlDateTime> k => k/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return eg_ as object;
 				}
@@ -800,7 +800,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType eh_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object ei_ = FHIRHelpers_4_3_000.ToValue(eh_);
-					CqlDateTime ej_ = ei_ switch { null => null , CqlDateTime h => h, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ej_ = ei_ switch { null => null , CqlDateTime l => l/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ej_ as object;
 				}
@@ -842,7 +842,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType ew_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object ex_ = FHIRHelpers_4_3_000.ToValue(ew_);
-					CqlDateTime ey_ = ex_ switch { null => null , CqlDateTime i => i, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ey_ = ex_ switch { null => null , CqlDateTime m => m/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ey_ as object;
 				}
@@ -850,7 +850,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType ez_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object fa_ = FHIRHelpers_4_3_000.ToValue(ez_);
-					CqlInterval<CqlDateTime> fb_ = fa_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> fb_ = fa_ switch { null => null , CqlInterval<CqlDateTime> n => n/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return fb_ as object;
 				}
@@ -858,7 +858,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType fc_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object fd_ = FHIRHelpers_4_3_000.ToValue(fc_);
-					CqlDateTime fe_ = fd_ switch { null => null , CqlDateTime j => j, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime fe_ = fd_ switch { null => null , CqlDateTime o => o/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return fe_ as object;
 				}
@@ -901,7 +901,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType fr_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object fs_ = FHIRHelpers_4_3_000.ToValue(fr_);
-					CqlDateTime ft_ = fs_ switch { null => null , CqlDateTime k => k, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ft_ = fs_ switch { null => null , CqlDateTime p => p/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ft_ as object;
 				}
@@ -909,7 +909,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType fu_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object fv_ = FHIRHelpers_4_3_000.ToValue(fu_);
-					CqlInterval<CqlDateTime> fw_ = fv_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> fw_ = fv_ switch { null => null , CqlInterval<CqlDateTime> q => q/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return fw_ as object;
 				}
@@ -917,7 +917,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType fx_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object fy_ = FHIRHelpers_4_3_000.ToValue(fx_);
-					CqlDateTime fz_ = fy_ switch { null => null , CqlDateTime l => l, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime fz_ = fy_ switch { null => null , CqlDateTime r => r/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return fz_ as object;
 				}
@@ -949,7 +949,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 			bool? ax_ = context.Operators.And(aq_, aw_);
 			DataType ay_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Value;
 			object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
-			CqlQuantity ba_ = az_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity ba_ = az_ switch { null => null , CqlQuantity s => s/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity bb_ = context.Operators.Quantity(80m, "mg/dL");
 			bool? bc_ = context.Operators.Greater(ba_, bb_);
 			bool? bd_ = context.Operators.And(ax_, bc_);
@@ -1053,7 +1053,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType aa_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
 					object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
-					CqlDateTime ac_ = ab_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ac_ = ab_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ac_ as object;
 				}
@@ -1061,7 +1061,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType ad_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
 					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-					CqlInterval<CqlDateTime> af_ = ae_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> af_ = ae_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return af_ as object;
 				}
@@ -1069,7 +1069,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_1_000
 				{
 					DataType ag_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
 					object ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
-					CqlDateTime ai_ = ah_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ai_ = ah_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ai_ as object;
 				}

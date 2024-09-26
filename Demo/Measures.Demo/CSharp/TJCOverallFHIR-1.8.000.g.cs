@@ -436,7 +436,7 @@ public class TJCOverallFHIR_1_8_000
 			bool? e_(object ComfortMeasure)
 			{
 				object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-				FhirDateTime j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				FhirDateTime j_ = i_ switch { null => null , FhirDateTime a => a/* , Period => ???, FhirString => ???, Age => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				FhirDateTime k_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
 				CqlDateTime l_ = FHIRHelpers_4_0_001.ToDateTime(j_ ?? k_);
 				CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(IschemicStrokeEncounter);

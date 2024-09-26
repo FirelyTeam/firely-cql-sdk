@@ -472,7 +472,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			];
 			CqlInterval<CqlDateTime> u_(object Meds)
 			{
-				CqlInterval<CqlDateTime> af_ = Meds switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlInterval<CqlDateTime> af_ = Meds switch { null => null , CqlInterval<CqlDateTime> a => a/* , CqlQuantity => ???, CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDateTime> ag_ = this.Intake_Period();
 				CqlDateTime ah_ = context.Operators.Start(ag_);
 				CqlInterval<CqlDateTime> ai_ = this.Measurement_Period();

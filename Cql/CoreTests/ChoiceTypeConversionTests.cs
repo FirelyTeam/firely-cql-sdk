@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System.Diagnostics;
 using FluentAssertions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
@@ -40,16 +41,16 @@ public class ChoiceTypeConversionTests
     }
 
     [TestMethod]
-    public void ChoiceTypeConversionTest_1_0_0_ReturnStringAsChoiceInRangeMustBeNull_MustReturnNull()
+    public void ChoiceTypeConversionTest_1_0_0_ReturnStringAsChoiceInRangeMustBeNull_MustThrowUnreachableException()
     {
         // Arrange
         var rtx = GetNewContext();
         var choiceTypeConversionTest = new ChoiceTypeConversionTest_1_0_0(rtx);
 
         // Act
-        var result = choiceTypeConversionTest.ReturnStringAsChoiceInRangeMustBeNull();
+        var act = () => choiceTypeConversionTest.ReturnStringAsChoiceInRangeMustBeNull();
 
         // Assert
-        result.Should().BeNull();
+        act.Should().Throw<UnreachableException>();
     }
 }

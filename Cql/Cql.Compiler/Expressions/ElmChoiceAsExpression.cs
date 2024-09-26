@@ -27,5 +27,8 @@ internal class ElmChoiceAsExpression(
     public Expression Update(Expression expression) =>
         expression != Expression
             ? new ElmChoiceAsExpression(expression, SwitchCaseExpressions, AsType, Strict)
+            {
+                MissingConversionTypes = MissingConversionTypes,
+            }
             : this;
 }

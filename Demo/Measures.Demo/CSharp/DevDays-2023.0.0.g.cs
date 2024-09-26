@@ -122,7 +122,7 @@ public class DevDays_2023_0_0
 			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
-			FhirDateTime j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			FhirDateTime j_ = i_ switch { null => null , FhirDateTime a => a/* , Age => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlDateTime k_ = FHIRHelpers_4_0_001.ToDateTime(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
 			bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
@@ -157,7 +157,7 @@ public class DevDays_2023_0_0
 			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
-			FhirDateTime j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			FhirDateTime j_ = i_ switch { null => null , FhirDateTime a => a/* , Age => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlDateTime k_ = FHIRHelpers_4_0_001.ToDateTime(j_);
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
 			bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);

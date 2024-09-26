@@ -3273,7 +3273,7 @@ public class CQMCommon_2_0_000
 			{
 				DataType f_ = request?.Medication;
 				object g_ = FHIRHelpers_4_3_000.ToValue(f_);
-				CqlConcept h_ = g_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlConcept h_ = g_ switch { null => null , CqlConcept a => a/* , ResourceReference => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 				return h_;
 			}
@@ -3286,7 +3286,7 @@ public class CQMCommon_2_0_000
 					string p_ = o_?.Value;
 					DataType q_ = request?.Medication;
 					object r_ = FHIRHelpers_4_3_000.ToValue(q_);
-					ResourceReference s_ = r_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					ResourceReference s_ = r_ switch { null => null , ResourceReference b => b/* , CqlConcept => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					FhirString t_ = s_?.ReferenceElement;
 					string u_ = t_?.Value;
 					string v_ = QICoreCommon_2_0_000.getId(u_);
@@ -3324,7 +3324,7 @@ public class CQMCommon_2_0_000
 			{
 				DataType f_ = request?.Medication;
 				object g_ = FHIRHelpers_4_3_000.ToValue(f_);
-				CqlConcept h_ = g_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlConcept h_ = g_ switch { null => null , CqlConcept a => a/* , ResourceReference => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 				return h_;
 			}
@@ -3337,7 +3337,7 @@ public class CQMCommon_2_0_000
 					string p_ = o_?.Value;
 					DataType q_ = request?.Medication;
 					object r_ = FHIRHelpers_4_3_000.ToValue(q_);
-					ResourceReference s_ = r_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					ResourceReference s_ = r_ switch { null => null , ResourceReference b => b/* , CqlConcept => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					FhirString t_ = s_?.ReferenceElement;
 					string u_ = t_?.Value;
 					string v_ = QICoreCommon_2_0_000.getId(u_);

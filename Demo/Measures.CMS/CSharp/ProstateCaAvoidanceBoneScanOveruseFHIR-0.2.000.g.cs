@@ -455,7 +455,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType e_ = BoneScanAfterDiagnosis?.Value;
 			object f_ = FHIRHelpers_4_3_000.ToValue(e_);
-			CqlConcept g_ = f_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept g_ = f_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlCode h_ = this.Procedure_reason_record__record_artifact_();
 			CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
 			bool? j_ = context.Operators.Equivalent(g_, i_);
@@ -601,7 +601,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType am_ = LastGleasonScore?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			int? ao_ = an_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			int? ao_ = an_ switch { null => null , int? a => context.Operators.ConvertStringToInteger(a)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? ap_ = context.Operators.LessOrEqual(ao_, 6);
 
 			return ap_;
@@ -678,7 +678,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType am_ = LastProstateCancerStaging?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			CqlConcept ao_ = an_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept ao_ = an_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlCode ap_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_();
 			CqlConcept aq_ = context.Operators.ConvertCodeToConcept(ap_);
 			bool? ar_ = context.Operators.Equivalent(ao_, aq_);
@@ -808,7 +808,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType av_ = LastPSATest?.Value;
 			object aw_ = FHIRHelpers_4_3_000.ToValue(av_);
-			CqlQuantity ax_ = aw_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity ax_ = aw_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity ay_ = context.Operators.Quantity(10m, "ng/mL");
 			bool? az_ = context.Operators.Less(ax_, ay_);
 

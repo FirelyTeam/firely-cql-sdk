@@ -629,7 +629,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					{
 						DataType bd_ = O2Saturation?.Effective;
 						object be_ = FHIRHelpers_4_3_000.ToValue(bd_);
-						CqlDateTime bf_ = be_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime bf_ = be_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return bf_ as object;
 					}
@@ -637,7 +637,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					{
 						DataType bg_ = O2Saturation?.Effective;
 						object bh_ = FHIRHelpers_4_3_000.ToValue(bg_);
-						CqlInterval<CqlDateTime> bi_ = bh_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlInterval<CqlDateTime> bi_ = bh_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return bi_ as object;
 					}
@@ -645,7 +645,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					{
 						DataType bj_ = O2Saturation?.Effective;
 						object bk_ = FHIRHelpers_4_3_000.ToValue(bj_);
-						CqlDateTime bl_ = bk_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime bl_ = bk_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return bl_ as object;
 					}
@@ -717,7 +717,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					{
 						DataType ca_ = @this?.Effective;
 						object cb_ = FHIRHelpers_4_3_000.ToValue(ca_);
-						CqlDateTime cc_ = cb_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime cc_ = cb_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return cc_ as object;
 					}
@@ -725,7 +725,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					{
 						DataType cd_ = @this?.Effective;
 						object ce_ = FHIRHelpers_4_3_000.ToValue(cd_);
-						CqlInterval<CqlDateTime> cf_ = ce_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlInterval<CqlDateTime> cf_ = ce_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return cf_ as object;
 					}
@@ -733,7 +733,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					{
 						DataType cg_ = @this?.Effective;
 						object ch_ = FHIRHelpers_4_3_000.ToValue(cg_);
-						CqlDateTime ci_ = ch_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+						CqlDateTime ci_ = ch_ switch { null => null , CqlDateTime f => f/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 						return ci_ as object;
 					}
@@ -750,7 +750,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity g => g/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			object p_()
 			{
 				bool cj_()
@@ -789,7 +789,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType eh_ = O2Saturation?.Effective;
 								object ei_ = FHIRHelpers_4_3_000.ToValue(eh_);
-								CqlDateTime ej_ = ei_ switch { null => null , CqlDateTime e => e, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ej_ = ei_ switch { null => null , CqlDateTime h => h/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ej_ as object;
 							}
@@ -797,7 +797,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType ek_ = O2Saturation?.Effective;
 								object el_ = FHIRHelpers_4_3_000.ToValue(ek_);
-								CqlInterval<CqlDateTime> em_ = el_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> em_ = el_ switch { null => null , CqlInterval<CqlDateTime> i => i/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return em_ as object;
 							}
@@ -805,7 +805,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType en_ = O2Saturation?.Effective;
 								object eo_ = FHIRHelpers_4_3_000.ToValue(en_);
-								CqlDateTime ep_ = eo_ switch { null => null , CqlDateTime f => f, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ep_ = eo_ switch { null => null , CqlDateTime j => j/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ep_ as object;
 							}
@@ -877,7 +877,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType fe_ = @this?.Effective;
 								object ff_ = FHIRHelpers_4_3_000.ToValue(fe_);
-								CqlDateTime fg_ = ff_ switch { null => null , CqlDateTime g => g, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime fg_ = ff_ switch { null => null , CqlDateTime k => k/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return fg_ as object;
 							}
@@ -885,7 +885,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType fh_ = @this?.Effective;
 								object fi_ = FHIRHelpers_4_3_000.ToValue(fh_);
-								CqlInterval<CqlDateTime> fj_ = fi_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> fj_ = fi_ switch { null => null , CqlInterval<CqlDateTime> l => l/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return fj_ as object;
 							}
@@ -893,7 +893,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType fk_ = @this?.Effective;
 								object fl_ = FHIRHelpers_4_3_000.ToValue(fk_);
-								CqlDateTime fm_ = fl_ switch { null => null , CqlDateTime h => h, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime fm_ = fl_ switch { null => null , CqlDateTime m => m/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return fm_ as object;
 							}
@@ -950,7 +950,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType hi_ = O2Saturation?.Effective;
 								object hj_ = FHIRHelpers_4_3_000.ToValue(hi_);
-								CqlDateTime hk_ = hj_ switch { null => null , CqlDateTime i => i, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime hk_ = hj_ switch { null => null , CqlDateTime n => n/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return hk_ as object;
 							}
@@ -958,7 +958,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType hl_ = O2Saturation?.Effective;
 								object hm_ = FHIRHelpers_4_3_000.ToValue(hl_);
-								CqlInterval<CqlDateTime> hn_ = hm_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> hn_ = hm_ switch { null => null , CqlInterval<CqlDateTime> o => o/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return hn_ as object;
 							}
@@ -966,7 +966,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType ho_ = O2Saturation?.Effective;
 								object hp_ = FHIRHelpers_4_3_000.ToValue(ho_);
-								CqlDateTime hq_ = hp_ switch { null => null , CqlDateTime j => j, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime hq_ = hp_ switch { null => null , CqlDateTime p => p/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return hq_ as object;
 							}
@@ -1038,7 +1038,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType if_ = @this?.Effective;
 								object ig_ = FHIRHelpers_4_3_000.ToValue(if_);
-								CqlDateTime ih_ = ig_ switch { null => null , CqlDateTime k => k, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ih_ = ig_ switch { null => null , CqlDateTime q => q/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ih_ as object;
 							}
@@ -1046,7 +1046,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType ii_ = @this?.Effective;
 								object ij_ = FHIRHelpers_4_3_000.ToValue(ii_);
-								CqlInterval<CqlDateTime> ik_ = ij_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> ik_ = ij_ switch { null => null , CqlInterval<CqlDateTime> r => r/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ik_ as object;
 							}
@@ -1054,7 +1054,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType il_ = @this?.Effective;
 								object im_ = FHIRHelpers_4_3_000.ToValue(il_);
-								CqlDateTime in_ = im_ switch { null => null , CqlDateTime l => l, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime in_ = im_ switch { null => null , CqlDateTime s => s/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return in_ as object;
 							}
@@ -1111,7 +1111,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType kj_ = O2Saturation?.Effective;
 								object kk_ = FHIRHelpers_4_3_000.ToValue(kj_);
-								CqlDateTime kl_ = kk_ switch { null => null , CqlDateTime m => m, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime kl_ = kk_ switch { null => null , CqlDateTime t => t/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return kl_ as object;
 							}
@@ -1119,7 +1119,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType km_ = O2Saturation?.Effective;
 								object kn_ = FHIRHelpers_4_3_000.ToValue(km_);
-								CqlInterval<CqlDateTime> ko_ = kn_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> ko_ = kn_ switch { null => null , CqlInterval<CqlDateTime> u => u/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ko_ as object;
 							}
@@ -1127,7 +1127,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType kp_ = O2Saturation?.Effective;
 								object kq_ = FHIRHelpers_4_3_000.ToValue(kp_);
-								CqlDateTime kr_ = kq_ switch { null => null , CqlDateTime n => n, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime kr_ = kq_ switch { null => null , CqlDateTime v => v/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return kr_ as object;
 							}
@@ -1199,7 +1199,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType lg_ = @this?.Effective;
 								object lh_ = FHIRHelpers_4_3_000.ToValue(lg_);
-								CqlDateTime li_ = lh_ switch { null => null , CqlDateTime o => o, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime li_ = lh_ switch { null => null , CqlDateTime w => w/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return li_ as object;
 							}
@@ -1207,7 +1207,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType lj_ = @this?.Effective;
 								object lk_ = FHIRHelpers_4_3_000.ToValue(lj_);
-								CqlInterval<CqlDateTime> ll_ = lk_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> ll_ = lk_ switch { null => null , CqlInterval<CqlDateTime> x => x/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ll_ as object;
 							}
@@ -1215,7 +1215,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType lm_ = @this?.Effective;
 								object ln_ = FHIRHelpers_4_3_000.ToValue(lm_);
-								CqlDateTime lo_ = ln_ switch { null => null , CqlDateTime p => p, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime lo_ = ln_ switch { null => null , CqlDateTime y => y/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return lo_ as object;
 							}
@@ -1272,7 +1272,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType nk_ = O2Saturation?.Effective;
 								object nl_ = FHIRHelpers_4_3_000.ToValue(nk_);
-								CqlDateTime nm_ = nl_ switch { null => null , CqlDateTime q => q, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime nm_ = nl_ switch { null => null , CqlDateTime z => z/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return nm_ as object;
 							}
@@ -1280,7 +1280,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType nn_ = O2Saturation?.Effective;
 								object no_ = FHIRHelpers_4_3_000.ToValue(nn_);
-								CqlInterval<CqlDateTime> np_ = no_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> np_ = no_ switch { null => null , CqlInterval<CqlDateTime> aa => aa/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return np_ as object;
 							}
@@ -1288,7 +1288,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType nq_ = O2Saturation?.Effective;
 								object nr_ = FHIRHelpers_4_3_000.ToValue(nq_);
-								CqlDateTime ns_ = nr_ switch { null => null , CqlDateTime r => r, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ns_ = nr_ switch { null => null , CqlDateTime ab => ab/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ns_ as object;
 							}
@@ -1360,7 +1360,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType oh_ = @this?.Effective;
 								object oi_ = FHIRHelpers_4_3_000.ToValue(oh_);
-								CqlDateTime oj_ = oi_ switch { null => null , CqlDateTime s => s, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime oj_ = oi_ switch { null => null , CqlDateTime ac => ac/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return oj_ as object;
 							}
@@ -1368,7 +1368,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType ok_ = @this?.Effective;
 								object ol_ = FHIRHelpers_4_3_000.ToValue(ok_);
-								CqlInterval<CqlDateTime> om_ = ol_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> om_ = ol_ switch { null => null , CqlInterval<CqlDateTime> ad => ad/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return om_ as object;
 							}
@@ -1376,7 +1376,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType on_ = @this?.Effective;
 								object oo_ = FHIRHelpers_4_3_000.ToValue(on_);
-								CqlDateTime op_ = oo_ switch { null => null , CqlDateTime t => t, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime op_ = oo_ switch { null => null , CqlDateTime ae => ae/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return op_ as object;
 							}
@@ -1393,7 +1393,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					Observation lv_ = context.Operators.First<Observation>(lu_);
 					DataType lw_ = lv_?.Effective;
 					object lx_ = FHIRHelpers_4_3_000.ToValue(lw_);
-					CqlDateTime ly_ = lx_ switch { null => null , CqlDateTime u => u, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ly_ = lx_ switch { null => null , CqlDateTime af => af/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ly_ as object;
 				}
@@ -1433,7 +1433,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType ql_ = O2Saturation?.Effective;
 								object qm_ = FHIRHelpers_4_3_000.ToValue(ql_);
-								CqlDateTime qn_ = qm_ switch { null => null , CqlDateTime v => v, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime qn_ = qm_ switch { null => null , CqlDateTime ag => ag/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return qn_ as object;
 							}
@@ -1441,7 +1441,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType qo_ = O2Saturation?.Effective;
 								object qp_ = FHIRHelpers_4_3_000.ToValue(qo_);
-								CqlInterval<CqlDateTime> qq_ = qp_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> qq_ = qp_ switch { null => null , CqlInterval<CqlDateTime> ah => ah/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return qq_ as object;
 							}
@@ -1449,7 +1449,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType qr_ = O2Saturation?.Effective;
 								object qs_ = FHIRHelpers_4_3_000.ToValue(qr_);
-								CqlDateTime qt_ = qs_ switch { null => null , CqlDateTime w => w, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime qt_ = qs_ switch { null => null , CqlDateTime ai => ai/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return qt_ as object;
 							}
@@ -1521,7 +1521,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType ri_ = @this?.Effective;
 								object rj_ = FHIRHelpers_4_3_000.ToValue(ri_);
-								CqlDateTime rk_ = rj_ switch { null => null , CqlDateTime x => x, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime rk_ = rj_ switch { null => null , CqlDateTime aj => aj/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return rk_ as object;
 							}
@@ -1529,7 +1529,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType rl_ = @this?.Effective;
 								object rm_ = FHIRHelpers_4_3_000.ToValue(rl_);
-								CqlInterval<CqlDateTime> rn_ = rm_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> rn_ = rm_ switch { null => null , CqlInterval<CqlDateTime> ak => ak/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return rn_ as object;
 							}
@@ -1537,7 +1537,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType ro_ = @this?.Effective;
 								object rp_ = FHIRHelpers_4_3_000.ToValue(ro_);
-								CqlDateTime rq_ = rp_ switch { null => null , CqlDateTime y => y, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime rq_ = rp_ switch { null => null , CqlDateTime al => al/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return rq_ as object;
 							}
@@ -1554,7 +1554,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					Observation ow_ = context.Operators.First<Observation>(ov_);
 					DataType ox_ = ow_?.Effective;
 					object oy_ = FHIRHelpers_4_3_000.ToValue(ox_);
-					CqlInterval<CqlDateTime> oz_ = oy_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> oz_ = oy_ switch { null => null , CqlInterval<CqlDateTime> am => am/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return oz_ as object;
 				}
@@ -1594,7 +1594,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType tm_ = O2Saturation?.Effective;
 								object tn_ = FHIRHelpers_4_3_000.ToValue(tm_);
-								CqlDateTime to_ = tn_ switch { null => null , CqlDateTime z => z, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime to_ = tn_ switch { null => null , CqlDateTime an => an/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return to_ as object;
 							}
@@ -1602,7 +1602,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType tp_ = O2Saturation?.Effective;
 								object tq_ = FHIRHelpers_4_3_000.ToValue(tp_);
-								CqlInterval<CqlDateTime> tr_ = tq_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> tr_ = tq_ switch { null => null , CqlInterval<CqlDateTime> ao => ao/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return tr_ as object;
 							}
@@ -1610,7 +1610,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType ts_ = O2Saturation?.Effective;
 								object tt_ = FHIRHelpers_4_3_000.ToValue(ts_);
-								CqlDateTime tu_ = tt_ switch { null => null , CqlDateTime aa => aa, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime tu_ = tt_ switch { null => null , CqlDateTime ap => ap/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return tu_ as object;
 							}
@@ -1682,7 +1682,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType uj_ = @this?.Effective;
 								object uk_ = FHIRHelpers_4_3_000.ToValue(uj_);
-								CqlDateTime ul_ = uk_ switch { null => null , CqlDateTime ab => ab, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ul_ = uk_ switch { null => null , CqlDateTime aq => aq/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ul_ as object;
 							}
@@ -1690,7 +1690,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType um_ = @this?.Effective;
 								object un_ = FHIRHelpers_4_3_000.ToValue(um_);
-								CqlInterval<CqlDateTime> uo_ = un_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> uo_ = un_ switch { null => null , CqlInterval<CqlDateTime> ar => ar/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return uo_ as object;
 							}
@@ -1698,7 +1698,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 							{
 								DataType up_ = @this?.Effective;
 								object uq_ = FHIRHelpers_4_3_000.ToValue(up_);
-								CqlDateTime ur_ = uq_ switch { null => null , CqlDateTime ac => ac, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ur_ = uq_ switch { null => null , CqlDateTime at => at/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ur_ as object;
 							}
@@ -1715,7 +1715,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 					Observation rx_ = context.Operators.First<Observation>(rw_);
 					DataType ry_ = rx_?.Effective;
 					object rz_ = FHIRHelpers_4_3_000.ToValue(ry_);
-					CqlDateTime sa_ = rz_ switch { null => null , CqlDateTime ad => ad, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime sa_ = rz_ switch { null => null , CqlDateTime au => au/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return sa_ as object;
 				}
@@ -1953,7 +1953,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			IEnumerable<Observation> q_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? r_(Observation bicarbonatelab)
 			{
@@ -2072,7 +2072,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			IEnumerable<Observation> q_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? r_(Observation CreatinineLab)
 			{
@@ -2191,7 +2191,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			IEnumerable<Observation> q_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? r_(Observation GlucoseLab)
 			{
@@ -2310,7 +2310,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			IEnumerable<Observation> q_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? r_(Observation HematocritLab)
 			{
@@ -2429,7 +2429,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			IEnumerable<Observation> q_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? r_(Observation PotassiumLab)
 			{
@@ -2548,7 +2548,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			IEnumerable<Observation> q_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? r_(Observation SodiumLab)
 			{
@@ -2667,7 +2667,7 @@ public class HybridHospitalWideReadmissionFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			IEnumerable<Observation> q_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? r_(Observation WhiteBloodCellLab)
 			{

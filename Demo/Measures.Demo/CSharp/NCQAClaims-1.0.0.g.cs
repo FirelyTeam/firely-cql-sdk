@@ -193,7 +193,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<CqlCode> ae_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ac_, ad_);
 							bool? af_ = context.Operators.Exists<CqlCode>(ae_);
 							DataType ag_ = ItemOnLine?.Location;
-							CodeableConcept ah_ = ag_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+							CodeableConcept ah_ = ag_ switch { null => null , CodeableConcept a => a/* , Address => ???, ResourceReference => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 							CqlConcept ai_ = FHIRHelpers_4_0_001.ToConcept(ah_);
 							CqlCode[] aj_ = ai_?.codes;
 							bool? ak_(CqlCode PosCode)
@@ -736,7 +736,7 @@ public class NCQAClaims_1_0_0
 										else
 										{
 											DataType bz_ = i?.Serviced;
-											Date ca_ = bz_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+											Date ca_ = bz_ switch { null => null , Date a => a/* , Period => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 											CqlDate cb_ = FHIRHelpers_4_0_001.ToDate(ca_);
 											CqlDate ce_ = FHIRHelpers_4_0_001.ToDate(ca_);
 											Quantity cf_ = i?.Quantity;
@@ -3623,7 +3623,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<object> o_ = context.Operators.Select<Claim.ItemComponent, object>(m_, n_);
 			ResourceReference p_(object l)
 			{
-				ResourceReference ai_ = l switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				ResourceReference ai_ = l switch { null => null , ResourceReference a => a/* , CodeableConcept => ???, Address => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 				return ai_;
 			};
@@ -3655,7 +3655,7 @@ public class NCQAClaims_1_0_0
 			IEnumerable<object> x_ = context.Operators.Select<Claim.ItemComponent, object>(v_, w_);
 			string y_(object l)
 			{
-				ResourceReference aq_ = l switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				ResourceReference aq_ = l switch { null => null , ResourceReference b => b/* , CodeableConcept => ???, Address => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				FhirString ar_ = aq_?.ReferenceElement;
 				FhirString[] as_ = [
 					ar_,

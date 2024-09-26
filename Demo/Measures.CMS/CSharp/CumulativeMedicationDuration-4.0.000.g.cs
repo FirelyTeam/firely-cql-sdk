@@ -1565,7 +1565,7 @@ public class CumulativeMedicationDuration_4_0_000
 					Timing.RepeatComponent k_ = j_?.Repeat;
 					DataType l_ = k_?.Bounds;
 					object m_ = FHIRHelpers_4_3_000.ToValue(l_);
-					CqlInterval<CqlDateTime> n_ = m_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> n_ = m_ switch { null => null , CqlInterval<CqlDateTime> a => a/* , CqlQuantity => ???, CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlDateTime o_ = context.Operators.Start(n_);
 					CqlDate p_ = context.Operators.DateFrom(o_);
 					FhirDateTime q_ = R?.AuthoredOnElement;
@@ -1589,14 +1589,14 @@ public class CumulativeMedicationDuration_4_0_000
 					Dosage.DoseAndRateComponent al_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ak_);
 					DataType am_ = al_?.Dose;
 					object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-					CqlInterval<CqlQuantity> ao_ = an_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlQuantity> ao_ = an_ switch { null => null , CqlInterval<CqlQuantity> b => b/* , CqlQuantity => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlQuantity ap_ = context.Operators.End(ao_);
 					Dosage ar_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)h_);
 					List<Dosage.DoseAndRateComponent> as_ = ar_?.DoseAndRate;
 					Dosage.DoseAndRateComponent at_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)as_);
 					DataType au_ = at_?.Dose;
 					object av_ = FHIRHelpers_4_3_000.ToValue(au_);
-					CqlQuantity aw_ = av_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlQuantity aw_ = av_ switch { null => null , CqlQuantity c => c/* , CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					decimal? ax_ = (ap_ ?? aw_)?.value;
 					Dosage az_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)h_);
 					Timing ba_ = az_?.Timing;
@@ -1648,7 +1648,7 @@ public class CumulativeMedicationDuration_4_0_000
 					Timing.RepeatComponent cu_ = ct_?.Repeat;
 					DataType cv_ = cu_?.Bounds;
 					object cw_ = FHIRHelpers_4_3_000.ToValue(cv_);
-					CqlInterval<CqlDateTime> cx_ = cw_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> cx_ = cw_ switch { null => null , CqlInterval<CqlDateTime> d => d/* , CqlQuantity => ???, CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlDateTime cy_ = context.Operators.Start(cx_);
 					CqlDate cz_ = context.Operators.DateFrom(cy_);
 					FhirDateTime da_ = R?.AuthoredOnElement;
@@ -1679,7 +1679,7 @@ public class CumulativeMedicationDuration_4_0_000
 					Timing.RepeatComponent dw_ = dv_?.Repeat;
 					DataType dx_ = dw_?.Bounds;
 					object dy_ = FHIRHelpers_4_3_000.ToValue(dx_);
-					CqlInterval<CqlDateTime> dz_ = dy_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> dz_ = dy_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlQuantity => ???, CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlDateTime ea_ = context.Operators.Start(dz_);
 					CqlDate eb_ = context.Operators.DateFrom(ea_);
 					FhirDateTime ec_ = R?.AuthoredOnElement;
@@ -1715,14 +1715,14 @@ public class CumulativeMedicationDuration_4_0_000
 					Dosage.DoseAndRateComponent fn_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)fm_);
 					DataType fo_ = fn_?.Dose;
 					object fp_ = FHIRHelpers_4_3_000.ToValue(fo_);
-					CqlInterval<CqlQuantity> fq_ = fp_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlQuantity> fq_ = fp_ switch { null => null , CqlInterval<CqlQuantity> f => f/* , CqlQuantity => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlQuantity fr_ = context.Operators.End(fq_);
 					Dosage ft_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)dt_);
 					List<Dosage.DoseAndRateComponent> fu_ = ft_?.DoseAndRate;
 					Dosage.DoseAndRateComponent fv_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)fu_);
 					DataType fw_ = fv_?.Dose;
 					object fx_ = FHIRHelpers_4_3_000.ToValue(fw_);
-					CqlQuantity fy_ = fx_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlQuantity fy_ = fx_ switch { null => null , CqlQuantity g => g/* , CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					decimal? fz_ = (fr_ ?? fy_)?.value;
 					Dosage gb_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)dt_);
 					Timing gc_ = gb_?.Timing;
@@ -1777,7 +1777,7 @@ public class CumulativeMedicationDuration_4_0_000
 					Timing.RepeatComponent hz_ = hy_?.Repeat;
 					DataType ia_ = hz_?.Bounds;
 					object ib_ = FHIRHelpers_4_3_000.ToValue(ia_);
-					CqlInterval<CqlDateTime> ic_ = ib_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ic_ = ib_ switch { null => null , CqlInterval<CqlDateTime> h => h/* , CqlQuantity => ???, CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlDateTime id_ = context.Operators.Start(ic_);
 					CqlDate ie_ = context.Operators.DateFrom(id_);
 					FhirDateTime if_ = R?.AuthoredOnElement;
@@ -1845,14 +1845,14 @@ public class CumulativeMedicationDuration_4_0_000
 					Dosage.DoseAndRateComponent x_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)w_);
 					DataType y_ = x_?.Dose;
 					object z_ = FHIRHelpers_4_3_000.ToValue(y_);
-					CqlInterval<CqlQuantity> aa_ = z_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlQuantity> aa_ = z_ switch { null => null , CqlInterval<CqlQuantity> a => a/* , CqlQuantity => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlQuantity ab_ = context.Operators.End(aa_);
 					Dosage ad_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)u_);
 					List<Dosage.DoseAndRateComponent> ae_ = ad_?.DoseAndRate;
 					Dosage.DoseAndRateComponent af_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ae_);
 					DataType ag_ = af_?.Dose;
 					object ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
-					CqlQuantity ai_ = ah_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlQuantity ai_ = ah_ switch { null => null , CqlQuantity b => b/* , CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					decimal? aj_ = (ab_ ?? ai_)?.value;
 					Dosage al_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)u_);
 					Timing am_ = al_?.Timing;
@@ -1916,14 +1916,14 @@ public class CumulativeMedicationDuration_4_0_000
 					Dosage.DoseAndRateComponent ct_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)cs_);
 					DataType cu_ = ct_?.Dose;
 					object cv_ = FHIRHelpers_4_3_000.ToValue(cu_);
-					CqlInterval<CqlQuantity> cw_ = cv_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlQuantity> cw_ = cv_ switch { null => null , CqlInterval<CqlQuantity> c => c/* , CqlQuantity => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlQuantity cx_ = context.Operators.End(cw_);
 					Dosage cz_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)cq_);
 					List<Dosage.DoseAndRateComponent> da_ = cz_?.DoseAndRate;
 					Dosage.DoseAndRateComponent db_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)da_);
 					DataType dc_ = db_?.Dose;
 					object dd_ = FHIRHelpers_4_3_000.ToValue(dc_);
-					CqlQuantity de_ = dd_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlQuantity de_ = dd_ switch { null => null , CqlQuantity d => d/* , CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					decimal? df_ = (cx_ ?? de_)?.value;
 					Dosage dh_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)cq_);
 					Timing di_ = dh_?.Timing;
@@ -2001,13 +2001,13 @@ public class CumulativeMedicationDuration_4_0_000
 				{
 					DataType g_ = Administration?.Effective;
 					object h_ = FHIRHelpers_4_3_000.ToValue(g_);
-					CqlInterval<CqlDateTime> i_ = h_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> i_ = h_ switch { null => null , CqlInterval<CqlDateTime> a => a/* , CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlDateTime j_ = context.Operators.Start(i_);
 					CqlDate k_ = context.Operators.DateFrom(j_);
 					bool? l_ = context.Operators.Not((bool?)(k_ is null));
 					DataType m_ = Administration?.Medication;
 					object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-					CqlConcept o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlConcept o_ = n_ switch { null => null , CqlConcept b => b/* , ResourceReference => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlQuantity p_ = this.TherapeuticDuration(o_);
 					bool? q_ = context.Operators.Not((bool?)(p_ is null));
 					bool? r_ = context.Operators.And(l_, q_);
@@ -2018,7 +2018,7 @@ public class CumulativeMedicationDuration_4_0_000
 				{
 					DataType s_ = Administration?.Effective;
 					object t_ = FHIRHelpers_4_3_000.ToValue(s_);
-					CqlInterval<CqlDateTime> u_ = t_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> u_ = t_ switch { null => null , CqlInterval<CqlDateTime> c => c/* , CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlDateTime v_ = context.Operators.Start(u_);
 					CqlDate w_ = context.Operators.DateFrom(v_);
 					object y_ = FHIRHelpers_4_3_000.ToValue(s_);
@@ -2026,7 +2026,7 @@ public class CumulativeMedicationDuration_4_0_000
 					CqlDate ab_ = context.Operators.DateFrom(aa_);
 					DataType ac_ = Administration?.Medication;
 					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-					CqlConcept ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlConcept ae_ = ad_ switch { null => null , CqlConcept d => d/* , ResourceReference => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					CqlQuantity af_ = this.TherapeuticDuration(ae_);
 					CqlDate ag_ = context.Operators.Add(ab_, af_);
 					CqlQuantity ah_ = context.Operators.ConvertIntegerToQuantity(1);
@@ -2137,14 +2137,14 @@ public class CumulativeMedicationDuration_4_0_000
 		{
 			if (medication is MedicationRequest)
 			{
-				MedicationRequest b_ = medication switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				MedicationRequest b_ = medication switch { null => null , MedicationRequest a => a/* , MedicationDispense => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDate> c_ = this.MedicationRequestPeriod(b_);
 
 				return c_;
 			}
 			else if (medication is MedicationDispense)
 			{
-				MedicationDispense d_ = medication switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				MedicationDispense d_ = medication switch { null => null , MedicationDispense b => b/* , MedicationRequest => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDate> e_ = this.MedicationDispensePeriod(d_);
 
 				return e_;
@@ -2170,7 +2170,7 @@ public class CumulativeMedicationDuration_4_0_000
 		IEnumerable<object> b_ = context.Operators.Where<object>(Medications, a_);
 		CqlInterval<CqlDate> c_(object M)
 		{
-			MedicationRequest m_ = M switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			MedicationRequest m_ = M switch { null => null , MedicationRequest a => a/* , MedicationDispense => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlInterval<CqlDate> n_ = this.MedicationRequestPeriod(m_);
 
 			return n_;
@@ -2185,7 +2185,7 @@ public class CumulativeMedicationDuration_4_0_000
 		IEnumerable<object> f_ = context.Operators.Where<object>(Medications, e_);
 		CqlInterval<CqlDate> g_(object M)
 		{
-			MedicationDispense p_ = M switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			MedicationDispense p_ = M switch { null => null , MedicationDispense b => b/* , MedicationRequest => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlInterval<CqlDate> q_ = this.MedicationDispensePeriod(p_);
 
 			return q_;

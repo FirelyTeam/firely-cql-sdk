@@ -376,7 +376,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				{
 					DataType z_ = FecalOccultResult?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
-					CqlDateTime ab_ = aa_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ab_ = aa_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ab_ as object;
 				}
@@ -384,7 +384,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				{
 					DataType ac_ = FecalOccultResult?.Effective;
 					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-					CqlInterval<CqlDateTime> ae_ = ad_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ae_ = ad_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ae_ as object;
 				}
@@ -392,7 +392,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				{
 					DataType af_ = FecalOccultResult?.Effective;
 					object ag_ = FHIRHelpers_4_3_000.ToValue(af_);
-					CqlDateTime ah_ = ag_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ah_ = ag_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ah_ as object;
 				}
@@ -457,7 +457,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				{
 					DataType af_ = sDNATest?.Effective;
 					object ag_ = FHIRHelpers_4_3_000.ToValue(af_);
-					CqlDateTime ah_ = ag_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime ah_ = ag_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ah_ as object;
 				}
@@ -465,7 +465,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				{
 					DataType ai_ = sDNATest?.Effective;
 					object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-					CqlInterval<CqlDateTime> ak_ = aj_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ak_ = aj_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ak_ as object;
 				}
@@ -473,7 +473,7 @@ public class ColonCancerScreeningFHIR_0_1_000
 				{
 					DataType al_ = sDNATest?.Effective;
 					object am_ = FHIRHelpers_4_3_000.ToValue(al_);
-					CqlDateTime an_ = am_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime an_ = am_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return an_ as object;
 				}

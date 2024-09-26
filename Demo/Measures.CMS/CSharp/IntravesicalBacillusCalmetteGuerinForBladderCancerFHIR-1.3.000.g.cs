@@ -630,7 +630,7 @@ public class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000
 			bool? h_ = context.Operators.Not((bool?)(g_ is null));
 			DataType i_ = StagingObservation?.Value;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
-			CqlConcept k_ = j_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept k_ = j_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlCode l_ = this.T1__Urinary_tract_tumor_invades_subepithelial_connective_tissue__finding_();
 			CqlConcept m_ = context.Operators.ConvertCodeToConcept(l_);
 			bool? n_ = context.Operators.Equivalent(k_, m_);

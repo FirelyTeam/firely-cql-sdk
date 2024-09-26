@@ -1821,7 +1821,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			IEnumerable<Observation> q_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? r_(Observation Hematocrit)
 			{
@@ -1932,7 +1932,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlQuantity o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity o_ = n_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			IEnumerable<Observation> q_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
 			bool? r_(Observation WBC)
 			{
@@ -2149,7 +2149,7 @@ public class SevereObstetricComplicationsFHIR_0_1_000
 			{
 				DataType ay_ = C?.Value;
 				object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
-				CqlQuantity ba_ = az_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity ba_ = az_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 				return ba_;
 			};

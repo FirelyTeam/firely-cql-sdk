@@ -1062,14 +1062,14 @@ public class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000
 			Dosage.DoseAndRateComponent q_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)p_);
 			DataType r_ = q_?.Dose;
 			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			CqlInterval<CqlQuantity> t_ = s_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlInterval<CqlQuantity> t_ = s_ switch { null => null , CqlInterval<CqlQuantity> a => a/* , CqlQuantity => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlQuantity u_ = context.Operators.End(t_);
 			Dosage w_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			List<Dosage.DoseAndRateComponent> x_ = w_?.DoseAndRate;
 			Dosage.DoseAndRateComponent y_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)x_);
 			DataType z_ = y_?.Dose;
 			object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
-			CqlQuantity ab_ = aa_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity ab_ = aa_ switch { null => null , CqlQuantity b => b/* , CqlInterval<CqlQuantity> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			decimal? ac_ = (u_ ?? ab_)?.value;
 			Dosage ae_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)n_);
 			Timing af_ = ae_?.Timing;

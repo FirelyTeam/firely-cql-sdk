@@ -234,7 +234,7 @@ public class Hospice_6_9_000
 		{
 			DataType bo_ = HospiceAssessment?.Value;
 			object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
-			CqlConcept bq_ = bp_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept bq_ = bp_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlCode br_ = this.Yes__qualifier_value_();
 			CqlConcept bs_ = context.Operators.ConvertCodeToConcept(br_);
 			bool? bt_ = context.Operators.Equivalent(bq_, bs_);

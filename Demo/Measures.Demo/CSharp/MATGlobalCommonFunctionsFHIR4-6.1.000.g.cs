@@ -910,7 +910,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		{
 			if (choice is FhirDateTime)
 			{
-				FhirDateTime b_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				FhirDateTime b_ = choice switch { null => null , FhirDateTime a => a/* , Period => ???, Timing => ???, Instant => ???, FhirString => ???, Age => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDateTime c_ = FHIRHelpers_4_0_001.ToDateTime(b_);
 				CqlDateTime e_ = FHIRHelpers_4_0_001.ToDateTime(b_);
 				CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
@@ -919,14 +919,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			}
 			else if (choice is Period)
 			{
-				Period g_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Period g_ = choice switch { null => null , Period b => b/* , FhirDateTime => ???, Timing => ???, Instant => ???, FhirString => ???, Age => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_0_001.ToInterval(g_);
 
 				return h_;
 			}
 			else if (choice is Instant)
 			{
-				Instant i_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Instant i_ = choice switch { null => null , Instant c => c/* , FhirDateTime => ???, Period => ???, Timing => ???, FhirString => ???, Age => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime(i_);
 				CqlDateTime l_ = FHIRHelpers_4_0_001.ToDateTime(i_);
 				CqlInterval<CqlDateTime> m_ = context.Operators.Interval(j_, l_, true, true);
@@ -938,7 +938,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				Patient n_ = this.Patient();
 				Date o_ = n_?.BirthDateElement;
 				CqlDate p_ = FHIRHelpers_4_0_001.ToDate(o_);
-				Age q_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Age q_ = choice switch { null => null , Age d => d/* , FhirDateTime => ???, Period => ???, Timing => ???, Instant => ???, FhirString => ???, Range => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlQuantity r_ = FHIRHelpers_4_0_001.ToQuantity(q_);
 				CqlDate s_ = context.Operators.Add(p_, r_);
 				Date u_ = n_?.BirthDateElement;
@@ -993,7 +993,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				Patient cc_ = this.Patient();
 				Date cd_ = cc_?.BirthDateElement;
 				CqlDate ce_ = FHIRHelpers_4_0_001.ToDate(cd_);
-				Range cf_ = choice switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Range cf_ = choice switch { null => null , Range e => e/* , FhirDateTime => ???, Period => ???, Timing => ???, Instant => ???, FhirString => ???, Age => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				Quantity cg_ = cf_?.Low;
 				CqlQuantity ch_ = FHIRHelpers_4_0_001.ToQuantity(cg_);
 				CqlDate ci_ = context.Operators.Add(ce_, ch_);
@@ -1122,7 +1122,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			if (b_())
 			{
 				DataType t_ = condition?.Abatement;
-				FhirDateTime u_ = t_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				FhirDateTime u_ = t_ switch { null => null , FhirDateTime a => a/* , Age => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlDateTime v_ = FHIRHelpers_4_0_001.ToDateTime(u_);
 				CqlDateTime y_ = FHIRHelpers_4_0_001.ToDateTime(u_);
 				CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
@@ -1132,7 +1132,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			else if (c_())
 			{
 				DataType aa_ = condition?.Abatement;
-				Period ab_ = aa_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Period ab_ = aa_ switch { null => null , Period b => b/* , FhirDateTime => ???, Age => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_0_001.ToInterval(ab_);
 
 				return ac_;
@@ -1149,7 +1149,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				Date af_ = ae_?.BirthDateElement;
 				CqlDate ag_ = FHIRHelpers_4_0_001.ToDate(af_);
 				DataType ah_ = condition?.Abatement;
-				Age ai_ = ah_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Age ai_ = ah_ switch { null => null , Age c => c/* , FhirDateTime => ???, Period => ???, Range => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlQuantity aj_ = FHIRHelpers_4_0_001.ToQuantity(ai_);
 				CqlDate ak_ = context.Operators.Add(ag_, aj_);
 				Date am_ = ae_?.BirthDateElement;
@@ -1205,7 +1205,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				Date dc_ = db_?.BirthDateElement;
 				CqlDate dd_ = FHIRHelpers_4_0_001.ToDate(dc_);
 				DataType de_ = condition?.Abatement;
-				Range df_ = de_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Range df_ = de_ switch { null => null , Range d => d/* , FhirDateTime => ???, Age => ???, Period => ???, FhirString => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				Quantity dg_ = df_?.Low;
 				CqlQuantity dh_ = FHIRHelpers_4_0_001.ToQuantity(dg_);
 				CqlDate di_ = context.Operators.Add(dd_, dh_);
@@ -1460,7 +1460,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	{
 		Extension a_ = this.GetExtension(element, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter-diagnosisPresentOnAdmission");
 		DataType b_ = a_?.Value;
-		CodeableConcept c_ = b_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CodeableConcept c_ = b_ switch { null => null , CodeableConcept a => a/* , Base64Binary => ???, FhirBoolean => ???, Canonical => ???, Code => ???, Date => ???, FhirDateTime => ???, FhirDecimal => ???, Id => ???, Instant => ???, Integer => ???, Markdown => ???, Oid => ???, Integer => ???, FhirString => ???, Time => ???, Integer => ???, FhirUri => ???, FhirUrl => ???, Uuid => ???, Address => ???, Age => ???, Annotation => ???, Attachment => ???, Coding => ???, ContactPoint => ???, Count => ???, Distance => ???, Duration => ???, HumanName => ???, Identifier => ???, Money => ???, Period => ???, Quantity => ???, Range => ???, Ratio => ???, ResourceReference => ???, SampledData => ???, Signature => ???, Timing => ???, ContactDetail => ???, Contributor => ???, DataRequirement => ???, Expression => ???, ParameterDefinition => ???, RelatedArtifact => ???, TriggerDefinition => ???, UsageContext => ???, Dosage => ???, Meta => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 		return c_;
 	}
@@ -1611,7 +1611,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			if (b_())
 			{
 				DataType e_ = request?.Medication;
-				CodeableConcept f_ = e_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CodeableConcept f_ = e_ switch { null => null , CodeableConcept a => a/* , ResourceReference => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 				return f_;
 			}
@@ -1623,7 +1623,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					Id l_ = M?.IdElement;
 					string m_ = FHIRHelpers_4_0_001.ToString(l_);
 					DataType n_ = request?.Medication;
-					ResourceReference o_ = n_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					ResourceReference o_ = n_ switch { null => null , ResourceReference b => b/* , CodeableConcept => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 					FhirString p_ = o_?.ReferenceElement;
 					string q_ = FHIRHelpers_4_0_001.ToString(p_);
 					string r_ = this.GetId(q_);

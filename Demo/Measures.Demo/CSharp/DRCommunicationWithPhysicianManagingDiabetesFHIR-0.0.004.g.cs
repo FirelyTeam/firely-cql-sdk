@@ -475,7 +475,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.ToInterval(m_);
 				Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(LevelOfSeverityNotCommunicated, "qicore-recorded");
 				DataType p_ = o_?.Value;
-				Period q_ = p_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Period q_ = p_ switch { null => null , Period a => a/* , Base64Binary => ???, FhirBoolean => ???, Canonical => ???, Code => ???, Date => ???, FhirDateTime => ???, FhirDecimal => ???, Id => ???, Instant => ???, Integer => ???, Markdown => ???, Oid => ???, Integer => ???, FhirString => ???, Time => ???, Integer => ???, FhirUri => ???, FhirUrl => ???, Uuid => ???, Address => ???, Age => ???, Annotation => ???, Attachment => ???, CodeableConcept => ???, Coding => ???, ContactPoint => ???, Count => ???, Distance => ???, Duration => ???, HumanName => ???, Identifier => ???, Money => ???, Quantity => ???, Range => ???, Ratio => ???, ResourceReference => ???, SampledData => ???, Signature => ???, Timing => ???, ContactDetail => ???, Contributor => ???, DataRequirement => ???, Expression => ???, ParameterDefinition => ???, RelatedArtifact => ???, TriggerDefinition => ???, UsageContext => ???, Dosage => ???, Meta => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_0_001.ToInterval(q_);
 				bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, r_, default);
 
@@ -496,7 +496,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			bool? v_ = context.Operators.Equal(u_, "not-done");
 			Extension w_ = this.GetModifierExtension(LevelOfSeverityNotCommunicated, "qicore-notDone");
 			DataType x_ = w_?.Value;
-			FhirBoolean y_ = x_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			FhirBoolean y_ = x_ switch { null => null , FhirBoolean b => b/* , Base64Binary => ???, Canonical => ???, Code => ???, Date => ???, FhirDateTime => ???, FhirDecimal => ???, Id => ???, Instant => ???, Integer => ???, Markdown => ???, Oid => ???, Integer => ???, FhirString => ???, Time => ???, Integer => ???, FhirUri => ???, FhirUrl => ???, Uuid => ???, Address => ???, Age => ???, Annotation => ???, Attachment => ???, CodeableConcept => ???, Coding => ???, ContactPoint => ???, Count => ???, Distance => ???, Duration => ???, HumanName => ???, Identifier => ???, Money => ???, Period => ???, Quantity => ???, Range => ???, Ratio => ???, ResourceReference => ???, SampledData => ???, Signature => ???, Timing => ???, ContactDetail => ???, Contributor => ???, DataRequirement => ???, Expression => ???, ParameterDefinition => ???, RelatedArtifact => ???, TriggerDefinition => ???, UsageContext => ???, Dosage => ???, Meta => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? z_ = FHIRHelpers_4_0_001.ToBoolean(y_);
 			bool? aa_ = context.Operators.IsTrue(z_);
 			bool? ab_ = context.Operators.And(v_, aa_);
@@ -536,7 +536,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.ToInterval(n_);
 				Extension p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(MacularEdemaAbsentNotCommunicated, "qicore-recorded");
 				DataType q_ = p_?.Value;
-				Period r_ = q_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Period r_ = q_ switch { null => null , Period a => a/* , Base64Binary => ???, FhirBoolean => ???, Canonical => ???, Code => ???, Date => ???, FhirDateTime => ???, FhirDecimal => ???, Id => ???, Instant => ???, Integer => ???, Markdown => ???, Oid => ???, Integer => ???, FhirString => ???, Time => ???, Integer => ???, FhirUri => ???, FhirUrl => ???, Uuid => ???, Address => ???, Age => ???, Annotation => ???, Attachment => ???, CodeableConcept => ???, Coding => ???, ContactPoint => ???, Count => ???, Distance => ???, Duration => ???, HumanName => ???, Identifier => ???, Money => ???, Quantity => ???, Range => ???, Ratio => ???, ResourceReference => ???, SampledData => ???, Signature => ???, Timing => ???, ContactDetail => ???, Contributor => ???, DataRequirement => ???, Expression => ???, ParameterDefinition => ???, RelatedArtifact => ???, TriggerDefinition => ???, UsageContext => ???, Dosage => ???, Meta => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_0_001.ToInterval(r_);
 				bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, s_, default);
 
@@ -557,7 +557,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			bool? w_ = context.Operators.Equal(v_, "not-done");
 			Extension x_ = this.GetModifierExtension(MacularEdemaAbsentNotCommunicated, "qicore-notDone");
 			DataType y_ = x_?.Value;
-			FhirBoolean z_ = y_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			FhirBoolean z_ = y_ switch { null => null , FhirBoolean b => b/* , Base64Binary => ???, Canonical => ???, Code => ???, Date => ???, FhirDateTime => ???, FhirDecimal => ???, Id => ???, Instant => ???, Integer => ???, Markdown => ???, Oid => ???, Integer => ???, FhirString => ???, Time => ???, Integer => ???, FhirUri => ???, FhirUrl => ???, Uuid => ???, Address => ???, Age => ???, Annotation => ???, Attachment => ???, CodeableConcept => ???, Coding => ???, ContactPoint => ???, Count => ???, Distance => ???, Duration => ???, HumanName => ???, Identifier => ???, Money => ???, Period => ???, Quantity => ???, Range => ???, Ratio => ???, ResourceReference => ???, SampledData => ???, Signature => ???, Timing => ???, ContactDetail => ???, Contributor => ???, DataRequirement => ???, Expression => ???, ParameterDefinition => ???, RelatedArtifact => ???, TriggerDefinition => ???, UsageContext => ???, Dosage => ???, Meta => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? aa_ = FHIRHelpers_4_0_001.ToBoolean(z_);
 			bool? ab_ = context.Operators.IsTrue(aa_);
 			bool? ac_ = context.Operators.And(w_, ab_);
@@ -596,7 +596,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.ToInterval(m_);
 				Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(MacularEdemaPresentNotCommunicated, "qicore-recorded");
 				DataType p_ = o_?.Value;
-				Period q_ = p_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				Period q_ = p_ switch { null => null , Period a => a/* , Base64Binary => ???, FhirBoolean => ???, Canonical => ???, Code => ???, Date => ???, FhirDateTime => ???, FhirDecimal => ???, Id => ???, Instant => ???, Integer => ???, Markdown => ???, Oid => ???, Integer => ???, FhirString => ???, Time => ???, Integer => ???, FhirUri => ???, FhirUrl => ???, Uuid => ???, Address => ???, Age => ???, Annotation => ???, Attachment => ???, CodeableConcept => ???, Coding => ???, ContactPoint => ???, Count => ???, Distance => ???, Duration => ???, HumanName => ???, Identifier => ???, Money => ???, Quantity => ???, Range => ???, Ratio => ???, ResourceReference => ???, SampledData => ???, Signature => ???, Timing => ???, ContactDetail => ???, Contributor => ???, DataRequirement => ???, Expression => ???, ParameterDefinition => ???, RelatedArtifact => ???, TriggerDefinition => ???, UsageContext => ???, Dosage => ???, Meta => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_0_001.ToInterval(q_);
 				bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, r_, default);
 
@@ -617,7 +617,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			bool? v_ = context.Operators.Equal(u_, "not-done");
 			Extension w_ = this.GetModifierExtension(MacularEdemaPresentNotCommunicated, "qicore-notDone");
 			DataType x_ = w_?.Value;
-			FhirBoolean y_ = x_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			FhirBoolean y_ = x_ switch { null => null , FhirBoolean b => b/* , Base64Binary => ???, Canonical => ???, Code => ???, Date => ???, FhirDateTime => ???, FhirDecimal => ???, Id => ???, Instant => ???, Integer => ???, Markdown => ???, Oid => ???, Integer => ???, FhirString => ???, Time => ???, Integer => ???, FhirUri => ???, FhirUrl => ???, Uuid => ???, Address => ???, Age => ???, Annotation => ???, Attachment => ???, CodeableConcept => ???, Coding => ???, ContactPoint => ???, Count => ???, Distance => ???, Duration => ???, HumanName => ???, Identifier => ???, Money => ???, Period => ???, Quantity => ???, Range => ???, Ratio => ???, ResourceReference => ???, SampledData => ???, Signature => ???, Timing => ???, ContactDetail => ???, Contributor => ???, DataRequirement => ???, Expression => ???, ParameterDefinition => ???, RelatedArtifact => ???, TriggerDefinition => ???, UsageContext => ???, Dosage => ???, Meta => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? z_ = FHIRHelpers_4_0_001.ToBoolean(y_);
 			bool? aa_ = context.Operators.IsTrue(z_);
 			bool? ab_ = context.Operators.And(v_, aa_);

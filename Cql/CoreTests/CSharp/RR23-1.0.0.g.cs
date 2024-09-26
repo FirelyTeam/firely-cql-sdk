@@ -155,7 +155,7 @@ public class RR23_1_0_0
 		{
 			DataType e_ = C?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
-			CqlDateTime g_ = f_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlDateTime g_ = f_ switch { null => null , CqlDateTime a => a/* , FhirDecimal => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, default);
 
@@ -217,7 +217,7 @@ public class RR23_1_0_0
 		{
 			DataType e_ = @this?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
-			CqlDateTime g_ = f_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlDateTime g_ = f_ switch { null => null , CqlDateTime a => a/* , FhirDecimal => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 			return g_;
 		};
@@ -236,7 +236,7 @@ public class RR23_1_0_0
 		Condition a_ = this.Last_injury_due_to_falling_rock();
 		DataType b_ = a_?.Onset;
 		object c_ = context.Operators.LateBoundProperty<object>(b_, "value");
-		CqlDateTime d_ = c_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlDateTime d_ = c_ switch { null => null , CqlDateTime a => a/* , FhirDecimal => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 		return d_;
 	}
@@ -252,7 +252,7 @@ public class RR23_1_0_0
 		{
 			SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem;
 			DataType e_ = d_?.Item;
-			CodeableConcept f_ = e_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CodeableConcept f_ = e_ switch { null => null , CodeableConcept a => a/* , ResourceReference => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlConcept g_ = FHIRHelpers_4_0_1.ToConcept(f_);
 			CqlCode h_ = this.Tiny_Umbrella();
 			CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);

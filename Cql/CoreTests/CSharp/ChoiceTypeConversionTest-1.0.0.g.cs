@@ -61,7 +61,7 @@ public class ChoiceTypeConversionTest_1_0_0
 	private bool? ReturnDateAsChoiceInRangeMustBeTrue_Value()
 	{
 		object a_ = this.ReturnDateAsChoice();
-		CqlDate b_ = a_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlDate b_ = a_ switch { null => null , CqlDate a => a, _ => throw new System.Diagnostics.UnreachableException() };
 		CqlDateTime c_ = context.Operators.ConvertDateToDateTime(b_);
 		CqlDateTime d_ = context.Operators.DateTime(2019, 1, 1, default, default, default, default, default);
 		CqlDateTime e_ = context.Operators.DateTime(2019, 12, 31, default, default, default, default, default);
@@ -78,7 +78,7 @@ public class ChoiceTypeConversionTest_1_0_0
 	private bool? ReturnDateAsChoiceOutOfRangeMustBeFalse_Value()
 	{
 		object a_ = this.ReturnDateAsChoice();
-		CqlDate b_ = a_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlDate b_ = a_ switch { null => null , CqlDate a => a, _ => throw new System.Diagnostics.UnreachableException() };
 		CqlDateTime c_ = context.Operators.ConvertDateToDateTime(b_);
 		CqlDateTime d_ = context.Operators.DateTime(2018, 1, 1, default, default, default, default, default);
 		CqlDateTime e_ = context.Operators.DateTime(2018, 12, 31, default, default, default, default, default);
@@ -95,7 +95,7 @@ public class ChoiceTypeConversionTest_1_0_0
 	private bool? ReturnStringAsChoiceInRangeMustBeNull_Value()
 	{
 		object a_ = this.ReturnStringAsChoice();
-		CqlDate b_ = a_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlDate b_ = a_ switch { null => null , CqlDate a => a, _ => throw new System.Diagnostics.UnreachableException() };
 		CqlDateTime c_ = context.Operators.ConvertDateToDateTime(b_);
 		CqlDateTime d_ = context.Operators.DateTime(2019, 1, 1, default, default, default, default, default);
 		CqlDateTime e_ = context.Operators.DateTime(2019, 12, 31, default, default, default, default, default);

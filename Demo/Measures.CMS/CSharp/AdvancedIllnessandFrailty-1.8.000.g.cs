@@ -285,7 +285,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		{
 			DataType au_ = EquipmentUsed?.Value;
 			object av_ = FHIRHelpers_4_3_000.ToValue(au_);
-			CqlConcept aw_ = av_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept aw_ = av_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlValueSet ax_ = this.Frailty_Device();
 			bool? ay_ = context.Operators.ConceptInValueSet(aw_, ax_);
 			DataType az_ = EquipmentUsed?.Effective;
@@ -640,7 +640,7 @@ public class AdvancedIllnessandFrailty_1_8_000
 		{
 			DataType aj_ = LastHousingStatus?.Value;
 			object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
-			CqlConcept al_ = ak_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept al_ = ak_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlCode am_ = this.Lives_in_a_nursing_home__finding_();
 			CqlConcept an_ = context.Operators.ConvertCodeToConcept(am_);
 			bool? ao_ = context.Operators.Equivalent(al_, an_);

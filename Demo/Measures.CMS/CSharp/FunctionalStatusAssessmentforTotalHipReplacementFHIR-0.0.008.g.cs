@@ -1047,7 +1047,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			Patient e_ = this.Patient();
 			DataType f_ = e_?.Deceased;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
-			CqlDateTime h_ = g_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlDateTime h_ = g_ switch { null => null , CqlDateTime a => a/* , bool => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlDate i_ = context.Operators.DateFrom(h_);
 			DataType j_ = THAProcedure?.Performed;
 			object k_ = FHIRHelpers_4_3_000.ToValue(j_);

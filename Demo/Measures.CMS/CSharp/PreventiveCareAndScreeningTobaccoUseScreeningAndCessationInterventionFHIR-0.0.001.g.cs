@@ -699,7 +699,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		{
 			DataType v_ = MostRecentTobaccoUseScreening?.Value;
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
-			CqlConcept x_ = w_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept x_ = w_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlValueSet y_ = this.Tobacco_User();
 			bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
 
@@ -774,7 +774,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		{
 			DataType v_ = MostRecentTobaccoUseScreening?.Value;
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
-			CqlConcept x_ = w_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept x_ = w_ switch { null => null , CqlConcept a => a/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			CqlValueSet y_ = this.Tobacco_Non_User();
 			bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
 

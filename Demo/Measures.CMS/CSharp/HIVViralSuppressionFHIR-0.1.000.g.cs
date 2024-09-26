@@ -467,7 +467,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 				{
 					DataType x_ = ViralLoad?.Effective;
 					object y_ = FHIRHelpers_4_3_000.ToValue(x_);
-					CqlDateTime z_ = y_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime z_ = y_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return z_ as object;
 				}
@@ -475,7 +475,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 				{
 					DataType aa_ = ViralLoad?.Effective;
 					object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
-					CqlInterval<CqlDateTime> ac_ = ab_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ac_ = ab_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ac_ as object;
 				}
@@ -483,7 +483,7 @@ public class HIVViralSuppressionFHIR_0_1_000
 				{
 					DataType ad_ = ViralLoad?.Effective;
 					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-					CqlDateTime af_ = ae_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime af_ = ae_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return af_ as object;
 				}
@@ -523,12 +523,12 @@ public class HIVViralSuppressionFHIR_0_1_000
 		Observation a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period();
 		DataType b_ = a_?.Value;
 		object c_ = FHIRHelpers_4_3_000.ToValue(b_);
-		CqlQuantity d_ = c_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlQuantity d_ = c_ switch { null => null , CqlQuantity a => a/* , CqlConcept => ???, bool => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 		CqlQuantity e_ = context.Operators.Quantity(200m, "{copies}/mL");
 		bool? f_ = context.Operators.Less(d_, e_);
 		DataType h_ = a_?.Value;
 		object i_ = FHIRHelpers_4_3_000.ToValue(h_);
-		CqlConcept j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlConcept j_ = i_ switch { null => null , CqlConcept b => b/* , CqlQuantity => ???, string => ???, bool => ???, int => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 		CqlCode k_ = this.Below_threshold_level__qualifier_value_();
 		CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
 		bool? m_ = context.Operators.Equivalent(j_, l_);

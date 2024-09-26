@@ -425,7 +425,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType at_ = Gravida?.Effective;
 					object au_ = FHIRHelpers_4_3_000.ToValue(at_);
-					CqlDateTime av_ = au_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime av_ = au_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return av_ as object;
 				}
@@ -433,7 +433,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType aw_ = Gravida?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
-					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ay_ as object;
 				}
@@ -441,7 +441,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType az_ = Gravida?.Effective;
 					object ba_ = FHIRHelpers_4_3_000.ToValue(az_);
-					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bb_ as object;
 				}
@@ -495,7 +495,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
-					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bs_ as object;
 				}
@@ -503,7 +503,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bt_ = @this?.Effective;
 					object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
-					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bv_ as object;
 				}
@@ -511,7 +511,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bw_ = @this?.Effective;
 					object bx_ = FHIRHelpers_4_3_000.ToValue(bw_);
-					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime f => f/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return by_ as object;
 				}
@@ -528,7 +528,7 @@ public class CesareanBirthFHIR_0_2_000
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
-		int? k_ = j_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		int? k_ = j_ switch { null => null , int? g => context.Operators.ConvertStringToInteger(g)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 		return k_;
 	}
@@ -571,7 +571,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType at_ = Parity?.Effective;
 					object au_ = FHIRHelpers_4_3_000.ToValue(at_);
-					CqlDateTime av_ = au_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime av_ = au_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return av_ as object;
 				}
@@ -579,7 +579,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType aw_ = Parity?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
-					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ay_ as object;
 				}
@@ -587,7 +587,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType az_ = Parity?.Effective;
 					object ba_ = FHIRHelpers_4_3_000.ToValue(az_);
-					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bb_ as object;
 				}
@@ -655,7 +655,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
-					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bs_ as object;
 				}
@@ -663,7 +663,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bt_ = @this?.Effective;
 					object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
-					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bv_ as object;
 				}
@@ -671,7 +671,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bw_ = @this?.Effective;
 					object bx_ = FHIRHelpers_4_3_000.ToValue(bw_);
-					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime f => f/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return by_ as object;
 				}
@@ -688,7 +688,7 @@ public class CesareanBirthFHIR_0_2_000
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
-		int? k_ = j_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		int? k_ = j_ switch { null => null , int? g => context.Operators.ConvertStringToInteger(g)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 		return k_;
 	}
@@ -731,7 +731,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType at_ = PretermBirth?.Effective;
 					object au_ = FHIRHelpers_4_3_000.ToValue(at_);
-					CqlDateTime av_ = au_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime av_ = au_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return av_ as object;
 				}
@@ -739,7 +739,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType aw_ = PretermBirth?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
-					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ay_ as object;
 				}
@@ -747,7 +747,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType az_ = PretermBirth?.Effective;
 					object ba_ = FHIRHelpers_4_3_000.ToValue(az_);
-					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bb_ as object;
 				}
@@ -815,7 +815,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
-					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bs_ as object;
 				}
@@ -823,7 +823,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bt_ = @this?.Effective;
 					object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
-					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bv_ as object;
 				}
@@ -831,7 +831,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bw_ = @this?.Effective;
 					object bx_ = FHIRHelpers_4_3_000.ToValue(bw_);
-					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime f => f/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return by_ as object;
 				}
@@ -848,7 +848,7 @@ public class CesareanBirthFHIR_0_2_000
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
-		int? k_ = j_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		int? k_ = j_ switch { null => null , int? g => context.Operators.ConvertStringToInteger(g)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 		return k_;
 	}
@@ -891,7 +891,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType at_ = TermBirth?.Effective;
 					object au_ = FHIRHelpers_4_3_000.ToValue(at_);
-					CqlDateTime av_ = au_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime av_ = au_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return av_ as object;
 				}
@@ -899,7 +899,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType aw_ = TermBirth?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.ToValue(aw_);
-					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> ay_ = ax_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return ay_ as object;
 				}
@@ -907,7 +907,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType az_ = TermBirth?.Effective;
 					object ba_ = FHIRHelpers_4_3_000.ToValue(az_);
-					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bb_ = ba_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bb_ as object;
 				}
@@ -975,7 +975,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bq_ = @this?.Effective;
 					object br_ = FHIRHelpers_4_3_000.ToValue(bq_);
-					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime bs_ = br_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bs_ as object;
 				}
@@ -983,7 +983,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bt_ = @this?.Effective;
 					object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
-					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> bv_ = bu_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return bv_ as object;
 				}
@@ -991,7 +991,7 @@ public class CesareanBirthFHIR_0_2_000
 				{
 					DataType bw_ = @this?.Effective;
 					object bx_ = FHIRHelpers_4_3_000.ToValue(bw_);
-					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime by_ = bx_ switch { null => null , CqlDateTime f => f/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return by_ as object;
 				}
@@ -1008,7 +1008,7 @@ public class CesareanBirthFHIR_0_2_000
 		Observation h_ = context.Operators.Last<Observation>(g_);
 		DataType i_ = h_?.Value;
 		object j_ = FHIRHelpers_4_3_000.ToValue(i_);
-		int? k_ = j_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		int? k_ = j_ switch { null => null , int? g => context.Operators.ConvertStringToInteger(g)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 		return k_;
 	}
@@ -1086,7 +1086,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ax_ = AbnormalPresentation?.Effective;
 								object ay_ = FHIRHelpers_4_3_000.ToValue(ax_);
-								CqlDateTime az_ = ay_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime az_ = ay_ switch { null => null , CqlDateTime a => a/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return az_ as object;
 							}
@@ -1094,7 +1094,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ba_ = AbnormalPresentation?.Effective;
 								object bb_ = FHIRHelpers_4_3_000.ToValue(ba_);
-								CqlInterval<CqlDateTime> bc_ = bb_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> bc_ = bb_ switch { null => null , CqlInterval<CqlDateTime> b => b/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return bc_ as object;
 							}
@@ -1102,7 +1102,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType bd_ = AbnormalPresentation?.Effective;
 								object be_ = FHIRHelpers_4_3_000.ToValue(bd_);
-								CqlDateTime bf_ = be_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime bf_ = be_ switch { null => null , CqlDateTime c => c/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return bf_ as object;
 							}
@@ -1161,7 +1161,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType bu_ = @this?.Effective;
 								object bv_ = FHIRHelpers_4_3_000.ToValue(bu_);
-								CqlDateTime bw_ = bv_ switch { null => null , CqlDateTime c => c, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime bw_ = bv_ switch { null => null , CqlDateTime d => d/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return bw_ as object;
 							}
@@ -1169,7 +1169,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType bx_ = @this?.Effective;
 								object by_ = FHIRHelpers_4_3_000.ToValue(bx_);
-								CqlInterval<CqlDateTime> bz_ = by_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> bz_ = by_ switch { null => null , CqlInterval<CqlDateTime> e => e/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return bz_ as object;
 							}
@@ -1177,7 +1177,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ca_ = @this?.Effective;
 								object cb_ = FHIRHelpers_4_3_000.ToValue(ca_);
-								CqlDateTime cc_ = cb_ switch { null => null , CqlDateTime d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime cc_ = cb_ switch { null => null , CqlDateTime f => f/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return cc_ as object;
 							}
@@ -1234,7 +1234,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType dk_ = AbnormalPresentation?.Effective;
 								object dl_ = FHIRHelpers_4_3_000.ToValue(dk_);
-								CqlDateTime dm_ = dl_ switch { null => null , CqlDateTime e => e, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime dm_ = dl_ switch { null => null , CqlDateTime g => g/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return dm_ as object;
 							}
@@ -1242,7 +1242,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType dn_ = AbnormalPresentation?.Effective;
 								object do_ = FHIRHelpers_4_3_000.ToValue(dn_);
-								CqlInterval<CqlDateTime> dp_ = do_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> dp_ = do_ switch { null => null , CqlInterval<CqlDateTime> h => h/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return dp_ as object;
 							}
@@ -1250,7 +1250,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType dq_ = AbnormalPresentation?.Effective;
 								object dr_ = FHIRHelpers_4_3_000.ToValue(dq_);
-								CqlDateTime ds_ = dr_ switch { null => null , CqlDateTime f => f, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ds_ = dr_ switch { null => null , CqlDateTime i => i/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ds_ as object;
 							}
@@ -1309,7 +1309,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType eh_ = @this?.Effective;
 								object ei_ = FHIRHelpers_4_3_000.ToValue(eh_);
-								CqlDateTime ej_ = ei_ switch { null => null , CqlDateTime g => g, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ej_ = ei_ switch { null => null , CqlDateTime j => j/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ej_ as object;
 							}
@@ -1317,7 +1317,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ek_ = @this?.Effective;
 								object el_ = FHIRHelpers_4_3_000.ToValue(ek_);
-								CqlInterval<CqlDateTime> em_ = el_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> em_ = el_ switch { null => null , CqlInterval<CqlDateTime> k => k/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return em_ as object;
 							}
@@ -1325,7 +1325,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType en_ = @this?.Effective;
 								object eo_ = FHIRHelpers_4_3_000.ToValue(en_);
-								CqlDateTime ep_ = eo_ switch { null => null , CqlDateTime h => h, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ep_ = eo_ switch { null => null , CqlDateTime l => l/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ep_ as object;
 							}
@@ -1382,7 +1382,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType fx_ = AbnormalPresentation?.Effective;
 								object fy_ = FHIRHelpers_4_3_000.ToValue(fx_);
-								CqlDateTime fz_ = fy_ switch { null => null , CqlDateTime i => i, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime fz_ = fy_ switch { null => null , CqlDateTime m => m/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return fz_ as object;
 							}
@@ -1390,7 +1390,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ga_ = AbnormalPresentation?.Effective;
 								object gb_ = FHIRHelpers_4_3_000.ToValue(ga_);
-								CqlInterval<CqlDateTime> gc_ = gb_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> gc_ = gb_ switch { null => null , CqlInterval<CqlDateTime> n => n/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return gc_ as object;
 							}
@@ -1398,7 +1398,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType gd_ = AbnormalPresentation?.Effective;
 								object ge_ = FHIRHelpers_4_3_000.ToValue(gd_);
-								CqlDateTime gf_ = ge_ switch { null => null , CqlDateTime j => j, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime gf_ = ge_ switch { null => null , CqlDateTime o => o/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return gf_ as object;
 							}
@@ -1457,7 +1457,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType gu_ = @this?.Effective;
 								object gv_ = FHIRHelpers_4_3_000.ToValue(gu_);
-								CqlDateTime gw_ = gv_ switch { null => null , CqlDateTime k => k, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime gw_ = gv_ switch { null => null , CqlDateTime p => p/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return gw_ as object;
 							}
@@ -1465,7 +1465,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType gx_ = @this?.Effective;
 								object gy_ = FHIRHelpers_4_3_000.ToValue(gx_);
-								CqlInterval<CqlDateTime> gz_ = gy_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> gz_ = gy_ switch { null => null , CqlInterval<CqlDateTime> q => q/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return gz_ as object;
 							}
@@ -1473,7 +1473,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ha_ = @this?.Effective;
 								object hb_ = FHIRHelpers_4_3_000.ToValue(ha_);
-								CqlDateTime hc_ = hb_ switch { null => null , CqlDateTime l => l, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime hc_ = hb_ switch { null => null , CqlDateTime r => r/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return hc_ as object;
 							}
@@ -1530,7 +1530,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ik_ = AbnormalPresentation?.Effective;
 								object il_ = FHIRHelpers_4_3_000.ToValue(ik_);
-								CqlDateTime im_ = il_ switch { null => null , CqlDateTime m => m, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime im_ = il_ switch { null => null , CqlDateTime s => s/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return im_ as object;
 							}
@@ -1538,7 +1538,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType in_ = AbnormalPresentation?.Effective;
 								object io_ = FHIRHelpers_4_3_000.ToValue(in_);
-								CqlInterval<CqlDateTime> ip_ = io_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> ip_ = io_ switch { null => null , CqlInterval<CqlDateTime> t => t/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ip_ as object;
 							}
@@ -1546,7 +1546,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType iq_ = AbnormalPresentation?.Effective;
 								object ir_ = FHIRHelpers_4_3_000.ToValue(iq_);
-								CqlDateTime is_ = ir_ switch { null => null , CqlDateTime n => n, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime is_ = ir_ switch { null => null , CqlDateTime u => u/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return is_ as object;
 							}
@@ -1605,7 +1605,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType jh_ = @this?.Effective;
 								object ji_ = FHIRHelpers_4_3_000.ToValue(jh_);
-								CqlDateTime jj_ = ji_ switch { null => null , CqlDateTime o => o, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime jj_ = ji_ switch { null => null , CqlDateTime v => v/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return jj_ as object;
 							}
@@ -1613,7 +1613,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType jk_ = @this?.Effective;
 								object jl_ = FHIRHelpers_4_3_000.ToValue(jk_);
-								CqlInterval<CqlDateTime> jm_ = jl_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> jm_ = jl_ switch { null => null , CqlInterval<CqlDateTime> w => w/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return jm_ as object;
 							}
@@ -1621,7 +1621,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType jn_ = @this?.Effective;
 								object jo_ = FHIRHelpers_4_3_000.ToValue(jn_);
-								CqlDateTime jp_ = jo_ switch { null => null , CqlDateTime p => p, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime jp_ = jo_ switch { null => null , CqlDateTime x => x/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return jp_ as object;
 							}
@@ -1638,7 +1638,7 @@ public class CesareanBirthFHIR_0_2_000
 					Observation hj_ = context.Operators.Last<Observation>(hi_);
 					DataType hk_ = hj_?.Effective;
 					object hl_ = FHIRHelpers_4_3_000.ToValue(hk_);
-					CqlDateTime hm_ = hl_ switch { null => null , CqlDateTime q => q, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime hm_ = hl_ switch { null => null , CqlDateTime y => y/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return hm_ as object;
 				}
@@ -1678,7 +1678,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType kx_ = AbnormalPresentation?.Effective;
 								object ky_ = FHIRHelpers_4_3_000.ToValue(kx_);
-								CqlDateTime kz_ = ky_ switch { null => null , CqlDateTime r => r, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime kz_ = ky_ switch { null => null , CqlDateTime z => z/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return kz_ as object;
 							}
@@ -1686,7 +1686,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType la_ = AbnormalPresentation?.Effective;
 								object lb_ = FHIRHelpers_4_3_000.ToValue(la_);
-								CqlInterval<CqlDateTime> lc_ = lb_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> lc_ = lb_ switch { null => null , CqlInterval<CqlDateTime> aa => aa/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return lc_ as object;
 							}
@@ -1694,7 +1694,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ld_ = AbnormalPresentation?.Effective;
 								object le_ = FHIRHelpers_4_3_000.ToValue(ld_);
-								CqlDateTime lf_ = le_ switch { null => null , CqlDateTime s => s, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime lf_ = le_ switch { null => null , CqlDateTime ab => ab/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return lf_ as object;
 							}
@@ -1753,7 +1753,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType lu_ = @this?.Effective;
 								object lv_ = FHIRHelpers_4_3_000.ToValue(lu_);
-								CqlDateTime lw_ = lv_ switch { null => null , CqlDateTime t => t, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime lw_ = lv_ switch { null => null , CqlDateTime ac => ac/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return lw_ as object;
 							}
@@ -1761,7 +1761,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType lx_ = @this?.Effective;
 								object ly_ = FHIRHelpers_4_3_000.ToValue(lx_);
-								CqlInterval<CqlDateTime> lz_ = ly_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> lz_ = ly_ switch { null => null , CqlInterval<CqlDateTime> ad => ad/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return lz_ as object;
 							}
@@ -1769,7 +1769,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ma_ = @this?.Effective;
 								object mb_ = FHIRHelpers_4_3_000.ToValue(ma_);
-								CqlDateTime mc_ = mb_ switch { null => null , CqlDateTime u => u, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime mc_ = mb_ switch { null => null , CqlDateTime ae => ae/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return mc_ as object;
 							}
@@ -1786,7 +1786,7 @@ public class CesareanBirthFHIR_0_2_000
 					Observation jw_ = context.Operators.Last<Observation>(jv_);
 					DataType jx_ = jw_?.Effective;
 					object jy_ = FHIRHelpers_4_3_000.ToValue(jx_);
-					CqlInterval<CqlDateTime> jz_ = jy_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlInterval<CqlDateTime> jz_ = jy_ switch { null => null , CqlInterval<CqlDateTime> af => af/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return jz_ as object;
 				}
@@ -1826,7 +1826,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType nk_ = AbnormalPresentation?.Effective;
 								object nl_ = FHIRHelpers_4_3_000.ToValue(nk_);
-								CqlDateTime nm_ = nl_ switch { null => null , CqlDateTime v => v, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime nm_ = nl_ switch { null => null , CqlDateTime ag => ag/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return nm_ as object;
 							}
@@ -1834,7 +1834,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType nn_ = AbnormalPresentation?.Effective;
 								object no_ = FHIRHelpers_4_3_000.ToValue(nn_);
-								CqlInterval<CqlDateTime> np_ = no_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> np_ = no_ switch { null => null , CqlInterval<CqlDateTime> ah => ah/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return np_ as object;
 							}
@@ -1842,7 +1842,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType nq_ = AbnormalPresentation?.Effective;
 								object nr_ = FHIRHelpers_4_3_000.ToValue(nq_);
-								CqlDateTime ns_ = nr_ switch { null => null , CqlDateTime w => w, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime ns_ = nr_ switch { null => null , CqlDateTime ai => ai/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return ns_ as object;
 							}
@@ -1901,7 +1901,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType oh_ = @this?.Effective;
 								object oi_ = FHIRHelpers_4_3_000.ToValue(oh_);
-								CqlDateTime oj_ = oi_ switch { null => null , CqlDateTime x => x, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime oj_ = oi_ switch { null => null , CqlDateTime aj => aj/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return oj_ as object;
 							}
@@ -1909,7 +1909,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType ok_ = @this?.Effective;
 								object ol_ = FHIRHelpers_4_3_000.ToValue(ok_);
-								CqlInterval<CqlDateTime> om_ = ol_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlInterval<CqlDateTime> om_ = ol_ switch { null => null , CqlInterval<CqlDateTime> ak => ak/* , CqlDateTime => ???, Timing => ???, CqlDateTime => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return om_ as object;
 							}
@@ -1917,7 +1917,7 @@ public class CesareanBirthFHIR_0_2_000
 							{
 								DataType on_ = @this?.Effective;
 								object oo_ = FHIRHelpers_4_3_000.ToValue(on_);
-								CqlDateTime op_ = oo_ switch { null => null , CqlDateTime y => y, _ => throw new System.Diagnostics.UnreachableException(), };
+								CqlDateTime op_ = oo_ switch { null => null , CqlDateTime al => al/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 								return op_ as object;
 							}
@@ -1934,7 +1934,7 @@ public class CesareanBirthFHIR_0_2_000
 					Observation mj_ = context.Operators.Last<Observation>(mi_);
 					DataType mk_ = mj_?.Effective;
 					object ml_ = FHIRHelpers_4_3_000.ToValue(mk_);
-					CqlDateTime mm_ = ml_ switch { null => null , CqlDateTime z => z, _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlDateTime mm_ = ml_ switch { null => null , CqlDateTime am => am/* , CqlInterval<CqlDateTime> => ???, Timing => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 
 					return mm_ as object;
 				}
