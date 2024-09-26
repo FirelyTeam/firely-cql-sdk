@@ -498,39 +498,40 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 		{
 			DataType h_ = SexualActivityAssessment?.Value;
 			object i_ = FHIRHelpers_4_3_000.ToValue(h_);
-			CqlCode j_ = this.Yes__qualifier_value_();
-			CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-			bool? l_ = context.Operators.Equivalent(i_ as CqlConcept, k_);
-			DataType m_ = SexualActivityAssessment?.Effective;
-			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_);
-			CqlInterval<CqlDateTime> p_()
+			CqlConcept j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlCode k_ = this.Yes__qualifier_value_();
+			CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
+			bool? m_ = context.Operators.Equivalent(j_, l_);
+			DataType n_ = SexualActivityAssessment?.Effective;
+			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
+			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.ToInterval(o_);
+			CqlInterval<CqlDateTime> q_()
 			{
-				bool s_()
+				bool t_()
 				{
-					CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
-					CqlDateTime u_ = context.Operators.End(t_);
+					CqlInterval<CqlDateTime> u_ = this.Measurement_Period();
+					CqlDateTime v_ = context.Operators.End(u_);
 
-					return u_ is null;
+					return v_ is null;
 				};
-				if (s_())
+				if (t_())
 				{
 					return default;
 				}
 				else
 				{
-					CqlInterval<CqlDateTime> v_ = this.Measurement_Period();
-					CqlDateTime w_ = context.Operators.End(v_);
-					CqlDateTime y_ = context.Operators.End(v_);
-					CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, true, true);
+					CqlInterval<CqlDateTime> w_ = this.Measurement_Period();
+					CqlDateTime x_ = context.Operators.End(w_);
+					CqlDateTime z_ = context.Operators.End(w_);
+					CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 
-					return z_;
+					return aa_;
 				}
 			};
-			bool? q_ = context.Operators.SameOrBefore(o_, p_(), default);
-			bool? r_ = context.Operators.And(l_, q_);
+			bool? r_ = context.Operators.SameOrBefore(p_, q_(), default);
+			bool? s_ = context.Operators.And(m_, r_);
 
-			return r_;
+			return s_;
 		};
 		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 		bool? g_ = context.Operators.Exists<Observation>(f_);
@@ -966,22 +967,25 @@ public class ChlamydiaScreeninginWomenFHIR_0_1_000
 				{
 					DataType aa_ = ChlamydiaTest?.Effective;
 					object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
+					CqlDateTime ac_ = ab_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
 
-					return (ab_ as CqlDateTime) as object;
+					return ac_ as object;
 				}
 				else if (p_())
 				{
-					DataType ac_ = ChlamydiaTest?.Effective;
-					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
+					DataType ad_ = ChlamydiaTest?.Effective;
+					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+					CqlInterval<CqlDateTime> af_ = ae_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-					return (ad_ as CqlInterval<CqlDateTime>) as object;
+					return af_ as object;
 				}
 				else if (q_())
 				{
-					DataType ae_ = ChlamydiaTest?.Effective;
-					object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+					DataType ag_ = ChlamydiaTest?.Effective;
+					object ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
+					CqlDateTime ai_ = ah_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
 
-					return (af_ as CqlDateTime) as object;
+					return ai_ as object;
 				}
 				else
 				{

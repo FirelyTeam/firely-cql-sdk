@@ -659,28 +659,29 @@ public class FHIR347_0_1_021
 		bool? c_(Observation LDL)
 		{
 			DataType e_ = LDL?.Value;
-			CqlQuantity f_ = FHIRHelpers_4_0_001.ToQuantity(e_ as Quantity);
-			CqlQuantity g_ = context.Operators.Quantity(190m, "mg/dL");
-			bool? h_ = context.Operators.GreaterOrEqual(f_, g_);
-			DataType i_ = LDL?.Effective;
-			CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(i_);
-			CqlDateTime k_ = context.Operators.Start(j_);
-			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
-			CqlDateTime m_ = context.Operators.End(l_);
-			bool? n_ = context.Operators.Before(k_, m_, default);
-			bool? o_ = context.Operators.And(h_, n_);
-			Code<ObservationStatus> p_ = LDL?.StatusElement;
-			string q_ = FHIRHelpers_4_0_001.ToString(p_);
-			string[] r_ = [
+			Quantity f_ = e_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity g_ = FHIRHelpers_4_0_001.ToQuantity(f_);
+			CqlQuantity h_ = context.Operators.Quantity(190m, "mg/dL");
+			bool? i_ = context.Operators.GreaterOrEqual(g_, h_);
+			DataType j_ = LDL?.Effective;
+			CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
+			CqlDateTime l_ = context.Operators.Start(k_);
+			CqlInterval<CqlDateTime> m_ = this.Measurement_Period();
+			CqlDateTime n_ = context.Operators.End(m_);
+			bool? o_ = context.Operators.Before(l_, n_, default);
+			bool? p_ = context.Operators.And(i_, o_);
+			Code<ObservationStatus> q_ = LDL?.StatusElement;
+			string r_ = FHIRHelpers_4_0_001.ToString(q_);
+			string[] s_ = [
 				"final",
 				"amended",
 				"corrected",
 				"appended",
 			];
-			bool? s_ = context.Operators.In<string>(q_, r_ as IEnumerable<string>);
-			bool? t_ = context.Operators.And(o_, s_);
+			bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
+			bool? u_ = context.Operators.And(p_, t_);
 
-			return t_;
+			return u_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 
@@ -1240,15 +1241,17 @@ public class FHIR347_0_1_021
 					{
 						Timing.RepeatComponent av_ = T?.Repeat;
 						DataType aw_ = av_?.Bounds;
+						Range ax_ = aw_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-						return (aw_ as Range) as object;
+						return ax_ as object;
 					}
 					else if (ao_())
 					{
-						Timing.RepeatComponent ax_ = T?.Repeat;
-						DataType ay_ = ax_?.Bounds;
+						Timing.RepeatComponent ay_ = T?.Repeat;
+						DataType az_ = ay_?.Bounds;
+						Period ba_ = az_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-						return (ay_ as Period) as object;
+						return ba_ as object;
 					}
 					else
 					{

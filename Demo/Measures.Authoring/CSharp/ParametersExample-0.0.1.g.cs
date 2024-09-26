@@ -109,16 +109,17 @@ public class ParametersExample_0_0_1
 			bool? k_ = context.Operators.IsTrue(j_);
 			bool? l_ = context.Operators.And(h_, k_);
 			DataType m_ = P?.Deceased;
-			bool? n_ = FHIRHelpers_4_3_000.ToBoolean(m_ as FhirBoolean);
-			bool? o_ = context.Operators.Not(n_);
-			bool? p_ = context.Operators.And(l_, o_);
-			CodeableConcept q_ = P?.MaritalStatus;
-			CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept(q_);
-			CqlValueSet s_ = this.Marital_Status();
-			bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-			bool? u_ = context.Operators.And(p_, t_);
+			FhirBoolean n_ = m_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			bool? o_ = FHIRHelpers_4_3_000.ToBoolean(n_);
+			bool? p_ = context.Operators.Not(o_);
+			bool? q_ = context.Operators.And(l_, p_);
+			CodeableConcept r_ = P?.MaritalStatus;
+			CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_);
+			CqlValueSet t_ = this.Marital_Status();
+			bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
+			bool? v_ = context.Operators.And(q_, u_);
 
-			return u_;
+			return v_;
 		};
 		IEnumerable<Patient> d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);
 		Patient e_ = context.Operators.SingletonFrom<Patient>(d_);

@@ -455,11 +455,12 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType e_ = BoneScanAfterDiagnosis?.Value;
 			object f_ = FHIRHelpers_4_3_000.ToValue(e_);
-			CqlCode g_ = this.Procedure_reason_record__record_artifact_();
-			CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-			bool? i_ = context.Operators.Equivalent(f_ as CqlConcept, h_);
+			CqlConcept g_ = f_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlCode h_ = this.Procedure_reason_record__record_artifact_();
+			CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+			bool? j_ = context.Operators.Equivalent(g_, i_);
 
-			return i_;
+			return j_;
 		};
 		IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
 		bool? d_ = context.Operators.Exists<Observation>(c_);
@@ -600,9 +601,10 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType am_ = LastGleasonScore?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			bool? ao_ = context.Operators.LessOrEqual(an_ as int?, 6);
+			int? ao_ = an_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			bool? ap_ = context.Operators.LessOrEqual(ao_, 6);
 
-			return ao_;
+			return ap_;
 		};
 		IEnumerable<bool?> k_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)i_, j_);
 		bool? l_ = context.Operators.SingletonFrom<bool?>(k_);
@@ -676,26 +678,27 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType am_ = LastProstateCancerStaging?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			CqlCode ao_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_();
-			CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
-			bool? aq_ = context.Operators.Equivalent(an_ as CqlConcept, ap_);
-			object as_ = FHIRHelpers_4_3_000.ToValue(am_);
-			CqlCode at_ = this.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_();
-			CqlConcept au_ = context.Operators.ConvertCodeToConcept(at_);
-			bool? av_ = context.Operators.Equivalent(as_ as CqlConcept, au_);
-			bool? aw_ = context.Operators.Or(aq_, av_);
-			object ay_ = FHIRHelpers_4_3_000.ToValue(am_);
-			CqlCode az_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_();
-			CqlConcept ba_ = context.Operators.ConvertCodeToConcept(az_);
-			bool? bb_ = context.Operators.Equivalent(ay_ as CqlConcept, ba_);
-			bool? bc_ = context.Operators.Or(aw_, bb_);
-			object be_ = FHIRHelpers_4_3_000.ToValue(am_);
-			CqlCode bf_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_();
-			CqlConcept bg_ = context.Operators.ConvertCodeToConcept(bf_);
-			bool? bh_ = context.Operators.Equivalent(be_ as CqlConcept, bg_);
-			bool? bi_ = context.Operators.Or(bc_, bh_);
+			CqlConcept ao_ = an_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlCode ap_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_();
+			CqlConcept aq_ = context.Operators.ConvertCodeToConcept(ap_);
+			bool? ar_ = context.Operators.Equivalent(ao_, aq_);
+			object at_ = FHIRHelpers_4_3_000.ToValue(am_);
+			CqlCode av_ = this.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_();
+			CqlConcept aw_ = context.Operators.ConvertCodeToConcept(av_);
+			bool? ax_ = context.Operators.Equivalent(ao_, aw_);
+			bool? ay_ = context.Operators.Or(ar_, ax_);
+			object ba_ = FHIRHelpers_4_3_000.ToValue(am_);
+			CqlCode bc_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_();
+			CqlConcept bd_ = context.Operators.ConvertCodeToConcept(bc_);
+			bool? be_ = context.Operators.Equivalent(ao_, bd_);
+			bool? bf_ = context.Operators.Or(ay_, be_);
+			object bh_ = FHIRHelpers_4_3_000.ToValue(am_);
+			CqlCode bj_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_();
+			CqlConcept bk_ = context.Operators.ConvertCodeToConcept(bj_);
+			bool? bl_ = context.Operators.Equivalent(ao_, bk_);
+			bool? bm_ = context.Operators.Or(bf_, bl_);
 
-			return bi_;
+			return bm_;
 		};
 		IEnumerable<Observation> k_ = context.Operators.Where<Observation>((IEnumerable<Observation>)i_, j_);
 		Observation l_ = context.Operators.SingletonFrom<Observation>(k_);
@@ -805,10 +808,11 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType av_ = LastPSATest?.Value;
 			object aw_ = FHIRHelpers_4_3_000.ToValue(av_);
-			CqlQuantity ax_ = context.Operators.Quantity(10m, "ng/mL");
-			bool? ay_ = context.Operators.Less(aw_ as CqlQuantity, ax_);
+			CqlQuantity ax_ = aw_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlQuantity ay_ = context.Operators.Quantity(10m, "ng/mL");
+			bool? az_ = context.Operators.Less(ax_, ay_);
 
-			return ay_;
+			return az_;
 		};
 		IEnumerable<bool?> j_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)h_, i_);
 		bool? k_ = context.Operators.SingletonFrom<bool?>(j_);

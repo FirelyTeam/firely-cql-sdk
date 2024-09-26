@@ -487,12 +487,13 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					bool? ea_ = context.Operators.Not(dz_);
 					bool? eb_ = context.Operators.And(dw_, ea_);
 					DataType ec_ = FollowupBloodGlucoseLab?.Value;
-					CqlQuantity ed_ = FHIRHelpers_4_0_001.ToQuantity(ec_ as Quantity);
-					CqlQuantity ee_ = context.Operators.Quantity(80m, "mg/dL");
-					bool? ef_ = context.Operators.Greater(ed_, ee_);
-					bool? eg_ = context.Operators.And(eb_, ef_);
+					Quantity ed_ = ec_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					CqlQuantity ee_ = FHIRHelpers_4_0_001.ToQuantity(ed_);
+					CqlQuantity ef_ = context.Operators.Quantity(80m, "mg/dL");
+					bool? eg_ = context.Operators.Greater(ee_, ef_);
+					bool? eh_ = context.Operators.And(eb_, eg_);
 
-					return eg_;
+					return eh_;
 				};
 				IEnumerable<Observation> cs_ = context.Operators.Where<Observation>(cq_, cr_);
 				Observation ct_(Observation FollowupBloodGlucoseLab) => 
@@ -505,18 +506,19 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 			IEnumerable<Observation> n_ = context.Operators.Except<Observation>(g_, m_);
 			bool? o_(Observation BloodGlucoseLab)
 			{
-				DataType eh_ = BloodGlucoseLab?.Effective;
-				CqlInterval<CqlDateTime> ei_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(eh_);
-				CqlDateTime ej_ = context.Operators.Start(ei_);
-				CqlInterval<CqlDateTime> ek_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
-				bool? el_ = context.Operators.In<CqlDateTime>(ej_, ek_, default);
-				DataType em_ = BloodGlucoseLab?.Value;
-				CqlQuantity en_ = FHIRHelpers_4_0_001.ToQuantity(em_ as Quantity);
-				CqlQuantity eo_ = context.Operators.Quantity(40m, "mg/dL");
-				bool? ep_ = context.Operators.Less(en_, eo_);
-				bool? eq_ = context.Operators.And(el_, ep_);
+				DataType ei_ = BloodGlucoseLab?.Effective;
+				CqlInterval<CqlDateTime> ej_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ei_);
+				CqlDateTime ek_ = context.Operators.Start(ej_);
+				CqlInterval<CqlDateTime> el_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
+				bool? em_ = context.Operators.In<CqlDateTime>(ek_, el_, default);
+				DataType en_ = BloodGlucoseLab?.Value;
+				Quantity eo_ = en_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity ep_ = FHIRHelpers_4_0_001.ToQuantity(eo_);
+				CqlQuantity eq_ = context.Operators.Quantity(40m, "mg/dL");
+				bool? er_ = context.Operators.Less(ep_, eq_);
+				bool? es_ = context.Operators.And(em_, er_);
 
-				return eq_;
+				return es_;
 			};
 			IEnumerable<Observation> p_ = context.Operators.Where<Observation>(n_, o_);
 			bool? q_ = context.Operators.Exists<Observation>(p_);

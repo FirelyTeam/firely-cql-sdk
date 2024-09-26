@@ -13,7 +13,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// Describes settings to control the behavior of <see cref="ExpressionBuilder"/>
     /// </summary>
-    internal class ExpressionBuilderSettings
+    internal class ExpressionBuilderOptions
     {
         /// <summary>
         /// Allows a child scope to redefine an existing parent scope.  Default is <see langword="true" />
@@ -52,6 +52,11 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         public bool AllowUnresolvedExternals { get; init; } = true;
 
-        public static readonly ExpressionBuilderSettings Default = new ExpressionBuilderSettings();
+
+        /// <summary>
+        /// Whether to ignore missing conversion on choice switch cases, or to throw an error.
+        /// The default value is <see langword="true"/>.
+        /// </summary>
+        public bool IgnoreMissingChoiceSwitchCaseConversions { get; init; } = true;
     }
 }

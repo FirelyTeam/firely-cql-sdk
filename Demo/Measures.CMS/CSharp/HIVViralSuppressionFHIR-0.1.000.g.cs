@@ -467,22 +467,25 @@ public class HIVViralSuppressionFHIR_0_1_000
 				{
 					DataType x_ = ViralLoad?.Effective;
 					object y_ = FHIRHelpers_4_3_000.ToValue(x_);
+					CqlDateTime z_ = y_ switch { null => null , CqlDateTime a => a, _ => throw new System.Diagnostics.UnreachableException(), };
 
-					return (y_ as CqlDateTime) as object;
+					return z_ as object;
 				}
 				else if (m_())
 				{
-					DataType z_ = ViralLoad?.Effective;
-					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
+					DataType aa_ = ViralLoad?.Effective;
+					object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
+					CqlInterval<CqlDateTime> ac_ = ab_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-					return (aa_ as CqlInterval<CqlDateTime>) as object;
+					return ac_ as object;
 				}
 				else if (n_())
 				{
-					DataType ab_ = ViralLoad?.Effective;
-					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
+					DataType ad_ = ViralLoad?.Effective;
+					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+					CqlDateTime af_ = ae_ switch { null => null , CqlDateTime b => b, _ => throw new System.Diagnostics.UnreachableException(), };
 
-					return (ac_ as CqlDateTime) as object;
+					return af_ as object;
 				}
 				else
 				{
@@ -498,12 +501,12 @@ public class HIVViralSuppressionFHIR_0_1_000
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			DataType ad_ = @this?.Effective;
-			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
-			CqlDateTime ag_ = context.Operators.Start(af_);
+			DataType ag_ = @this?.Effective;
+			object ah_ = FHIRHelpers_4_3_000.ToValue(ag_);
+			CqlInterval<CqlDateTime> ai_ = QICoreCommon_2_0_000.ToInterval(ah_);
+			CqlDateTime aj_ = context.Operators.Start(ai_);
 
-			return ag_;
+			return aj_;
 		};
 		IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation g_ = context.Operators.Last<Observation>(f_);
@@ -520,22 +523,24 @@ public class HIVViralSuppressionFHIR_0_1_000
 		Observation a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period();
 		DataType b_ = a_?.Value;
 		object c_ = FHIRHelpers_4_3_000.ToValue(b_);
-		CqlQuantity d_ = context.Operators.Quantity(200m, "{copies}/mL");
-		bool? e_ = context.Operators.Less(c_ as CqlQuantity, d_);
-		DataType g_ = a_?.Value;
-		object h_ = FHIRHelpers_4_3_000.ToValue(g_);
-		CqlCode i_ = this.Below_threshold_level__qualifier_value_();
-		CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
-		bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
-		bool? l_ = context.Operators.Or(e_, k_);
-		DataType n_ = a_?.Value;
-		object o_ = FHIRHelpers_4_3_000.ToValue(n_);
-		CqlCode p_ = this.Not_detected__qualifier_value_();
-		CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-		bool? r_ = context.Operators.Equivalent(o_ as CqlConcept, q_);
-		bool? s_ = context.Operators.Or(l_, r_);
+		CqlQuantity d_ = c_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlQuantity e_ = context.Operators.Quantity(200m, "{copies}/mL");
+		bool? f_ = context.Operators.Less(d_, e_);
+		DataType h_ = a_?.Value;
+		object i_ = FHIRHelpers_4_3_000.ToValue(h_);
+		CqlConcept j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlCode k_ = this.Below_threshold_level__qualifier_value_();
+		CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
+		bool? m_ = context.Operators.Equivalent(j_, l_);
+		bool? n_ = context.Operators.Or(f_, m_);
+		DataType p_ = a_?.Value;
+		object q_ = FHIRHelpers_4_3_000.ToValue(p_);
+		CqlCode s_ = this.Not_detected__qualifier_value_();
+		CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
+		bool? u_ = context.Operators.Equivalent(j_, t_);
+		bool? v_ = context.Operators.Or(n_, u_);
 
-		return s_;
+		return v_;
 	}
 
     [CqlDeclaration("Numerator")]

@@ -49,8 +49,6 @@ internal static class CqlCompilerServiceCollectionExtensions
 
         services.TryAddScoped<LibraryExpressionBuilder>();
 
-        services.TryAddSingleton<ExpressionBuilderSettings>(_ => ExpressionBuilderSettings.Default); // TODO: Must move to configuration
-
         services.TryAddScoped<ExpressionBuilder>();
 
         return services;

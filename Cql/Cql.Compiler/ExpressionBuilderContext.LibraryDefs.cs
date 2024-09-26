@@ -171,7 +171,7 @@ partial class ExpressionBuilderContext
 
                     if (function?.external ?? false)
                     {
-                        if (_expressionBuilderSettings.AllowUnresolvedExternals)
+                        if (_expressionBuilderOptions.AllowUnresolvedExternals)
                         {
                             var returnType = TypeFor(expressionDef)!;
                             var funcOps = function.operand ?? Array.Empty<OperandDef>();

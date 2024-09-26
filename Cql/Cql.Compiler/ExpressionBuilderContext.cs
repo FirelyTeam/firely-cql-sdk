@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using System.Xml;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
@@ -50,7 +51,7 @@ namespace Hl7.Cql.Compiler;
 /// </remarks>
 partial class ExpressionBuilderContext(
     ILogger<ExpressionBuilder> logger,
-    ExpressionBuilderSettings expressionBuilderSettings,
+    ExpressionBuilderOptions expressionBuilderOptions,
     CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
@@ -60,7 +61,7 @@ partial class ExpressionBuilderContext(
     )
 {
     private readonly ILogger<ExpressionBuilder> _logger = logger;
-    private readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
+    private readonly ExpressionBuilderOptions _expressionBuilderOptions = expressionBuilderOptions;
     private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
@@ -2117,7 +2118,6 @@ partial class ExpressionBuilderContext
     protected Expression As(As @as) //@ TODO: Cast - As
     {
         using var _ = PushElement(@as.operand);
-        var operandTypeSpecifier = @as.operand.GetTypeSpecifier()!;
         // asTypeSpecifier is an expression with its own resulttypespecifier that actually contains the real type
         var asTypeSpecifier = (@as switch
                                   {
@@ -2156,12 +2156,14 @@ partial class ExpressionBuilderContext
                 var defaultExpression = Expression.Default(type);
                 return defaultExpression;
             }
-            default:
+            case { } op when op.GetTypeSpecifier() is ChoiceTypeSpecifier operandChoiceTypeSpecifier:
             {
-                var operand = TranslateArg(@as.operand!);
-                // if (operandTypeSpecifier is ChoiceTypeSpecifier operandChoiceTypeSpecifier)
-                //     return ChangeTypeOnChoice(operand, operandChoiceTypeSpecifier, type, @as.strict);
-
+                var operand = TranslateArg(op);
+                return ChangeTypeOnChoice(operand, operandChoiceTypeSpecifier, type, @as.strict);
+            }
+            case { } op:
+            {
+                var operand = TranslateArg(op);
                 var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast:true);
                 switch (typeConversion)
                 {
@@ -2181,6 +2183,7 @@ partial class ExpressionBuilderContext
                         return new ElmAsExpression(operand, type, @as.strict);
                 }
             }
+            default: throw new UnreachableException(); // The above switch should cover all cases.
         }
 
     }
@@ -2188,22 +2191,55 @@ partial class ExpressionBuilderContext
     private Expression ChangeTypeOnChoice(Expression operand, ChoiceTypeSpecifier operandChoiceTypeSpecifier, Type toType, bool strict)
     {
         Debug.Assert(operand.Type == typeof(object));
-        var expressionChoiceTypes = operandChoiceTypeSpecifier.choice.SelectToArray(ts => TypeFor(ts)!);
-        var caseExpressions = expressionChoiceTypes.Select(type =>
-        {
-            ParameterExpression parameter = Expression.Parameter(type, "o");
-            Expression body = ChangeType(parameter, toType, out var conversion);
-            if (conversion == TypeConversion.NoMatch)
-            {
-                _logger.Log(LogLevel.Warning, $"Choice type conversion omitted, there is no conversion from {type.ToCSharpString()} to {toType.ToCSharpString()}.");
-                return null;
-            }
-            return body;
-        })
-        .OfType<Expression>()
-        .ToArray();
+        var expressionChoiceTypes =
+            operandChoiceTypeSpecifier.choice
+                                      .Select(ts => TypeFor(ts)!);
 
-        var elmChoiceAsExpression = new ElmChoiceAsExpression(operand, caseExpressions, toType, strict);
+        StringBuilder sbError = new();
+        HashSet<Type> typeSet = new();
+        List<Type> missingConversionTypes = new();
+        var caseExpressions = expressionChoiceTypes
+                              .Select(type =>
+                                {
+                                    if (typeSet.Add(type))
+                                    {
+                                        // There are duplicate types in some choice types. Somehow calling Distinct doesn't work
+                                        return null;
+                                    }
+
+                                    ParameterExpression parameter = Expression.Parameter(type, ElmChoiceAsExpression.SwitchCaseExpressionParamPlaceholderName);
+                                    Expression body = ChangeType(parameter, toType, out var conversion);
+                                    if (conversion == TypeConversion.NoMatch)
+                                    {
+                                        missingConversionTypes.Add(type);
+                                        sbError.Append(FormattableString.Invariant($"\n- {type.ToCSharpString()} to {toType.ToCSharpString()}"));
+                                        return null;
+                                    }
+                                    return body;
+                                })
+                              .OfType<Expression>()
+                              .ToArray();
+
+        if (missingConversionTypes.Any())
+        {
+            if (_expressionBuilderOptions.IgnoreMissingChoiceSwitchCaseConversions)
+            {
+                _logger.LogWarning(
+                    FormatMessage(
+                        $"Could not resolve on or more case expressions for Choice type {operandChoiceTypeSpecifier}.\nThese conversions could not be resolved:{sbError}\n{DebuggerView}",
+                        operandChoiceTypeSpecifier));
+            }
+            else
+            {
+                throw this.NewExpressionBuildingException(
+                    $"Could not resolve on or more case expressions for Choice type {operandChoiceTypeSpecifier}.\nThese conversions could not be resolved:{sbError}");
+            }
+        }
+
+        var elmChoiceAsExpression = new ElmChoiceAsExpression(operand, caseExpressions, toType, strict)
+        {
+            MissingConversionTypes = missingConversionTypes.ToArray(),
+        };
         return elmChoiceAsExpression;
     }
 

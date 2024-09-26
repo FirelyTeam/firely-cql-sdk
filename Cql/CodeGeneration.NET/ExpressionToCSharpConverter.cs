@@ -10,6 +10,7 @@ using Hl7.Cql.Compiler.Expressions;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -93,10 +94,24 @@ namespace Hl7.Cql.CodeGeneration.NET
             sb.Append(Invariant( $$"""{{((ParameterExpression)cae.Expression).Name}} switch { null => null """));
             foreach (var e in cae.SwitchCaseExpressions)
             {
-                sb.Append(Invariant($$""", {{e.Type.ToCSharpString()}} {{nameGenerator.Next()}} => {{ConvertExpression(0, e)}}"""));
+                var convertExpressionParamName = nameGenerator.Next();
+                var convertExpressionParamType = _typeToCSharpConverter.ToCSharp(e.Type);
+                var convertExpression = ConvertExpression(0, e);
+                convertExpression = convertExpression.Replace(ElmChoiceAsExpression.SwitchCaseExpressionParamPlaceholderName, convertExpressionParamName);
+                sb.Append(Invariant($$""", {{convertExpressionParamType}} {{convertExpressionParamName}} => {{convertExpression}}"""));
             }
 
-            sb.Append(" }");
+            if (cae.MissingConversionTypes.Any())
+                sb.Append("/* ");
+            foreach (var type in cae.MissingConversionTypes)
+            {
+                var convertExpressionParamType = _typeToCSharpConverter.ToCSharp(type);
+                sb.Append(Invariant($$""", {{convertExpressionParamType}} => ???"""));
+            }
+            if (cae.MissingConversionTypes.Any())
+                sb.Append(" */");
+
+            sb.Append(Invariant($", _ => throw new {typeof(UnreachableException).FullName}(), }}"));
             return sb.ToString();
         }
 

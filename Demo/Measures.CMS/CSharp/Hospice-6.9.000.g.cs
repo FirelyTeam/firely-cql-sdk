@@ -234,17 +234,18 @@ public class Hospice_6_9_000
 		{
 			DataType bo_ = HospiceAssessment?.Value;
 			object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
-			CqlCode bq_ = this.Yes__qualifier_value_();
-			CqlConcept br_ = context.Operators.ConvertCodeToConcept(bq_);
-			bool? bs_ = context.Operators.Equivalent(bp_ as CqlConcept, br_);
-			DataType bt_ = HospiceAssessment?.Effective;
-			object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
-			CqlInterval<CqlDateTime> bv_ = QICoreCommon_2_0_000.toInterval(bu_);
-			CqlInterval<CqlDateTime> bw_ = this.Measurement_Period();
-			bool? bx_ = context.Operators.Overlaps(bv_, bw_, "day");
-			bool? by_ = context.Operators.And(bs_, bx_);
+			CqlConcept bq_ = bp_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlCode br_ = this.Yes__qualifier_value_();
+			CqlConcept bs_ = context.Operators.ConvertCodeToConcept(br_);
+			bool? bt_ = context.Operators.Equivalent(bq_, bs_);
+			DataType bu_ = HospiceAssessment?.Effective;
+			object bv_ = FHIRHelpers_4_3_000.ToValue(bu_);
+			CqlInterval<CqlDateTime> bw_ = QICoreCommon_2_0_000.toInterval(bv_);
+			CqlInterval<CqlDateTime> bx_ = this.Measurement_Period();
+			bool? by_ = context.Operators.Overlaps(bw_, bx_, "day");
+			bool? bz_ = context.Operators.And(bt_, by_);
 
-			return by_;
+			return bz_;
 		};
 		IEnumerable<Observation> s_ = context.Operators.Where<Observation>(q_, r_);
 		bool? t_ = context.Operators.Exists<Observation>(s_);
@@ -254,13 +255,13 @@ public class Hospice_6_9_000
 		IEnumerable<ServiceRequest> x_ = Status_1_6_000.isInterventionOrder(w_);
 		bool? y_(ServiceRequest HospiceOrder)
 		{
-			CqlInterval<CqlDateTime> bz_ = this.Measurement_Period();
-			FhirDateTime ca_ = HospiceOrder?.AuthoredOnElement;
-			CqlDateTime cb_ = context.Operators.Convert<CqlDateTime>(ca_);
-			CqlInterval<CqlDateTime> cc_ = QICoreCommon_2_0_000.toInterval(cb_ as object);
-			bool? cd_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bz_, cc_, "day");
+			CqlInterval<CqlDateTime> ca_ = this.Measurement_Period();
+			FhirDateTime cb_ = HospiceOrder?.AuthoredOnElement;
+			CqlDateTime cc_ = context.Operators.Convert<CqlDateTime>(cb_);
+			CqlInterval<CqlDateTime> cd_ = QICoreCommon_2_0_000.toInterval(cc_ as object);
+			bool? ce_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ca_, cd_, "day");
 
-			return cd_;
+			return ce_;
 		};
 		IEnumerable<ServiceRequest> z_ = context.Operators.Where<ServiceRequest>(x_, y_);
 		bool? aa_ = context.Operators.Exists<ServiceRequest>(z_);
@@ -269,13 +270,13 @@ public class Hospice_6_9_000
 		IEnumerable<Procedure> ae_ = Status_1_6_000.isInterventionPerformed(ad_);
 		bool? af_(Procedure HospicePerformed)
 		{
-			DataType ce_ = HospicePerformed?.Performed;
-			object cf_ = FHIRHelpers_4_3_000.ToValue(ce_);
-			CqlInterval<CqlDateTime> cg_ = QICoreCommon_2_0_000.toInterval(cf_);
-			CqlInterval<CqlDateTime> ch_ = this.Measurement_Period();
-			bool? ci_ = context.Operators.Overlaps(cg_, ch_, "day");
+			DataType cf_ = HospicePerformed?.Performed;
+			object cg_ = FHIRHelpers_4_3_000.ToValue(cf_);
+			CqlInterval<CqlDateTime> ch_ = QICoreCommon_2_0_000.toInterval(cg_);
+			CqlInterval<CqlDateTime> ci_ = this.Measurement_Period();
+			bool? cj_ = context.Operators.Overlaps(ch_, ci_, "day");
 
-			return ci_;
+			return cj_;
 		};
 		IEnumerable<Procedure> ag_ = context.Operators.Where<Procedure>(ae_, af_);
 		bool? ah_ = context.Operators.Exists<Procedure>(ag_);
@@ -284,11 +285,11 @@ public class Hospice_6_9_000
 		IEnumerable<Condition> ak_ = context.Operators.RetrieveByValueSet<Condition>(aj_, default);
 		bool? al_(Condition HospiceCareDiagnosis)
 		{
-			CqlInterval<CqlDateTime> cj_ = QICoreCommon_2_0_000.prevalenceInterval(HospiceCareDiagnosis);
-			CqlInterval<CqlDateTime> ck_ = this.Measurement_Period();
-			bool? cl_ = context.Operators.Overlaps(cj_, ck_, "day");
+			CqlInterval<CqlDateTime> ck_ = QICoreCommon_2_0_000.prevalenceInterval(HospiceCareDiagnosis);
+			CqlInterval<CqlDateTime> cl_ = this.Measurement_Period();
+			bool? cm_ = context.Operators.Overlaps(ck_, cl_, "day");
 
-			return cl_;
+			return cm_;
 		};
 		IEnumerable<Condition> am_ = context.Operators.Where<Condition>(ak_, al_);
 		bool? an_ = context.Operators.Exists<Condition>(am_);

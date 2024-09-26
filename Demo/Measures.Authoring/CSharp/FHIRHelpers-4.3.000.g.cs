@@ -518,185 +518,216 @@ public class FHIRHelpers_4_3_000
 		{
 			if (value is Base64Binary)
 			{
-				byte[] b_ = (value as Base64Binary)?.Value;
-				string c_ = context.Operators.Convert<string>(b_);
+				Base64Binary b_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				byte[] c_ = b_?.Value;
+				string d_ = context.Operators.Convert<string>(c_);
 
-				return c_ as object;
+				return d_ as object;
 			}
 			else if (value is FhirBoolean)
 			{
-				bool? d_ = (value as FhirBoolean)?.Value;
+				FhirBoolean e_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				bool? f_ = e_?.Value;
 
-				return d_;
+				return f_;
 			}
 			else if (value is Canonical)
 			{
-				string e_ = (value as Canonical)?.Value;
-
-				return e_ as object;
-			}
-			else if (value is Code)
-			{
-				string f_ = (value as Code)?.Value;
-
-				return f_ as object;
-			}
-			else if (value is Date)
-			{
-				string g_ = (value as Date)?.Value;
-				CqlDate h_ = context.Operators.ConvertStringToDate(g_);
+				Canonical g_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string h_ = g_?.Value;
 
 				return h_ as object;
 			}
-			else if (value is FhirDateTime)
+			else if (value is Code)
 			{
-				CqlDateTime i_ = context.Operators.Convert<CqlDateTime>(value as FhirDateTime);
+				Code i_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string j_ = i_?.Value;
 
-				return i_ as object;
+				return j_ as object;
 			}
-			else if (value is FhirDecimal)
+			else if (value is Date)
 			{
-				decimal? j_ = (value as FhirDecimal)?.Value;
-
-				return j_;
-			}
-			else if (value is Id)
-			{
-				string k_ = (value as Id)?.Value;
-
-				return k_ as object;
-			}
-			else if (value is Instant)
-			{
-				DateTimeOffset? l_ = (value as Instant)?.Value;
-				CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(l_);
+				Date k_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string l_ = k_?.Value;
+				CqlDate m_ = context.Operators.ConvertStringToDate(l_);
 
 				return m_ as object;
 			}
-			else if (value is Integer)
+			else if (value is FhirDateTime)
 			{
-				int? n_ = (value as Integer)?.Value;
-
-				return n_;
-			}
-			else if (value is Markdown)
-			{
-				string o_ = (value as Markdown)?.Value;
+				FhirDateTime n_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(n_);
 
 				return o_ as object;
 			}
-			else if (value is Oid)
+			else if (value is FhirDecimal)
 			{
-				string p_ = (value as Oid)?.Value;
-
-				return p_ as object;
-			}
-			else if (value is Integer)
-			{
-				int? q_ = (value as Integer)?.Value;
+				FhirDecimal p_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				decimal? q_ = p_?.Value;
 
 				return q_;
 			}
-			else if (value is FhirString)
+			else if (value is Id)
 			{
-				string r_ = (value as FhirString)?.Value;
+				Id r_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string s_ = r_?.Value;
 
-				return r_ as object;
+				return s_ as object;
 			}
-			else if (value is Time)
+			else if (value is Instant)
 			{
-				string s_ = (value as Time)?.Value;
-				CqlTime t_ = context.Operators.ConvertStringToTime(s_);
-
-				return t_ as object;
-			}
-			else if (value is Integer)
-			{
-				int? u_ = (value as Integer)?.Value;
-
-				return u_;
-			}
-			else if (value is FhirUri)
-			{
-				string v_ = (value as FhirUri)?.Value;
+				Instant t_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				DateTimeOffset? u_ = t_?.Value;
+				CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
 
 				return v_ as object;
 			}
-			else if (value is FhirUrl)
+			else if (value is Integer)
 			{
-				string w_ = (value as FhirUrl)?.Value;
+				Integer w_ = value switch { null => null , Integer a => a, Integer b => b, _ => throw new System.Diagnostics.UnreachableException(), };
+				int? x_ = w_?.Value;
 
-				return w_ as object;
+				return x_;
 			}
-			else if (value is Uuid)
+			else if (value is Markdown)
 			{
-				string x_ = (value as Uuid)?.Value;
-
-				return x_ as object;
-			}
-			else if (value is Age)
-			{
-				CqlQuantity y_ = this.ToQuantity(value as Age);
-
-				return y_ as object;
-			}
-			else if (value is CodeableConcept)
-			{
-				CqlConcept z_ = this.ToConcept(value as CodeableConcept);
+				Markdown y_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string z_ = y_?.Value;
 
 				return z_ as object;
 			}
-			else if (value is Coding)
+			else if (value is Oid)
 			{
-				CqlCode aa_ = this.ToCode(value as Coding);
-
-				return aa_ as object;
-			}
-			else if (value is Count)
-			{
-				CqlQuantity ab_ = this.ToQuantity(value as Count);
+				Oid aa_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string ab_ = aa_?.Value;
 
 				return ab_ as object;
 			}
-			else if (value is Distance)
+			else if (value is Integer)
 			{
-				CqlQuantity ac_ = this.ToQuantity(value as Distance);
+				Integer ac_ = value switch { null => null , Integer c => c, Integer d => d, _ => throw new System.Diagnostics.UnreachableException(), };
+				int? ad_ = ac_?.Value;
 
-				return ac_ as object;
+				return ad_;
 			}
-			else if (value is Duration)
+			else if (value is FhirString)
 			{
-				CqlQuantity ad_ = this.ToQuantity(value as Duration);
-
-				return ad_ as object;
-			}
-			else if (value is Quantity)
-			{
-				CqlQuantity ae_ = this.ToQuantity(value as Quantity);
-
-				return ae_ as object;
-			}
-			else if (value is Range)
-			{
-				CqlInterval<CqlQuantity> af_ = this.ToInterval(value as Range);
+				FhirString ae_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string af_ = ae_?.Value;
 
 				return af_ as object;
 			}
+			else if (value is Time)
+			{
+				Time ag_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string ah_ = ag_?.Value;
+				CqlTime ai_ = context.Operators.ConvertStringToTime(ah_);
+
+				return ai_ as object;
+			}
+			else if (value is Integer)
+			{
+				Integer aj_ = value switch { null => null , Integer e => e, Integer f => f, _ => throw new System.Diagnostics.UnreachableException(), };
+				int? ak_ = aj_?.Value;
+
+				return ak_;
+			}
+			else if (value is FhirUri)
+			{
+				FhirUri al_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string am_ = al_?.Value;
+
+				return am_ as object;
+			}
+			else if (value is FhirUrl)
+			{
+				FhirUrl an_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string ao_ = an_?.Value;
+
+				return ao_ as object;
+			}
+			else if (value is Uuid)
+			{
+				Uuid ap_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				string aq_ = ap_?.Value;
+
+				return aq_ as object;
+			}
+			else if (value is Age)
+			{
+				Age ar_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity as_ = this.ToQuantity(ar_);
+
+				return as_ as object;
+			}
+			else if (value is CodeableConcept)
+			{
+				CodeableConcept at_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlConcept au_ = this.ToConcept(at_);
+
+				return au_ as object;
+			}
+			else if (value is Coding)
+			{
+				Coding av_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlCode aw_ = this.ToCode(av_);
+
+				return aw_ as object;
+			}
+			else if (value is Count)
+			{
+				Count ax_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity ay_ = this.ToQuantity(ax_);
+
+				return ay_ as object;
+			}
+			else if (value is Distance)
+			{
+				Distance az_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity ba_ = this.ToQuantity(az_);
+
+				return ba_ as object;
+			}
+			else if (value is Duration)
+			{
+				Duration bb_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity bc_ = this.ToQuantity(bb_);
+
+				return bc_ as object;
+			}
+			else if (value is Quantity)
+			{
+				Quantity bd_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlQuantity be_ = this.ToQuantity(bd_);
+
+				return be_ as object;
+			}
+			else if (value is Range)
+			{
+				Range bf_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlInterval<CqlQuantity> bg_ = this.ToInterval(bf_);
+
+				return bg_ as object;
+			}
 			else if (value is Period)
 			{
-				CqlInterval<CqlDateTime> ag_ = this.ToInterval(value as Period);
+				Period bh_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlInterval<CqlDateTime> bi_ = this.ToInterval(bh_);
 
-				return ag_ as object;
+				return bi_ as object;
 			}
 			else if (value is Ratio)
 			{
-				CqlRatio ah_ = this.ToRatio(value as Ratio);
+				Ratio bj_ = value switch { null => null /* , Integer => ???, Integer => ??? */, _ => throw new System.Diagnostics.UnreachableException(), };
+				CqlRatio bk_ = this.ToRatio(bj_);
 
-				return ah_ as object;
+				return bk_ as object;
 			}
 			else
 			{
-				return value as object;
+				object bl_ = value switch { null => null , object g => (object)g, object h => (object)h, _ => throw new System.Diagnostics.UnreachableException(), };
+
+				return bl_;
 			}
 		};
 

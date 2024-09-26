@@ -424,11 +424,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		Observation a_ = this.Most_Recent_HbA1c();
 		DataType b_ = a_?.Value;
-		CqlQuantity c_ = FHIRHelpers_4_0_001.ToQuantity(b_ as Quantity);
-		CqlQuantity d_ = context.Operators.Quantity(9m, "%");
-		bool? e_ = context.Operators.Greater(c_, d_);
+		Quantity c_ = b_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+		CqlQuantity d_ = FHIRHelpers_4_0_001.ToQuantity(c_);
+		CqlQuantity e_ = context.Operators.Quantity(9m, "%");
+		bool? f_ = context.Operators.Greater(d_, e_);
 
-		return e_;
+		return f_;
 	}
 
     [CqlDeclaration("Has Most Recent Elevated HbA1c")]

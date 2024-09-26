@@ -155,10 +155,11 @@ public class RR23_1_0_0
 		{
 			DataType e_ = C?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
-			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
-			bool? h_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, g_, default);
+			CqlDateTime g_ = f_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
+			bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, default);
 
-			return h_;
+			return i_;
 		};
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
@@ -216,8 +217,9 @@ public class RR23_1_0_0
 		{
 			DataType e_ = @this?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
+			CqlDateTime g_ = f_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-			return f_ as CqlDateTime;
+			return g_;
 		};
 		IEnumerable<Condition> c_ = context.Operators.SortBy<Condition>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
 		Condition d_ = context.Operators.Last<Condition>(c_);
@@ -234,8 +236,9 @@ public class RR23_1_0_0
 		Condition a_ = this.Last_injury_due_to_falling_rock();
 		DataType b_ = a_?.Onset;
 		object c_ = context.Operators.LateBoundProperty<object>(b_, "value");
+		CqlDateTime d_ = c_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-		return c_ as CqlDateTime;
+		return d_;
 	}
 
     [CqlDeclaration("Date of last injury due to falling rock")]
@@ -249,24 +252,25 @@ public class RR23_1_0_0
 		{
 			SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem;
 			DataType e_ = d_?.Item;
-			CqlConcept f_ = FHIRHelpers_4_0_1.ToConcept(e_ as CodeableConcept);
-			CqlCode g_ = this.Tiny_Umbrella();
-			CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-			bool? i_ = context.Operators.Equivalent(f_, h_);
-			CqlDateTime j_ = this.Date_of_last_injury_due_to_falling_rock();
-			DataType k_ = SD?.Occurrence;
-			CqlDateTime l_ = context.Operators.LateBoundProperty<CqlDateTime>(k_, "value");
-			CqlQuantity m_ = context.Operators.Quantity(7m, "days");
-			CqlDateTime n_ = context.Operators.Subtract(l_ as CqlDateTime, m_);
-			CqlDateTime p_ = context.Operators.LateBoundProperty<CqlDateTime>(k_, "value");
-			CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_ as CqlDateTime, true, false);
-			bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
-			CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(k_, "value");
-			bool? u_ = context.Operators.Not((bool?)((t_ as CqlDateTime) is null));
-			bool? v_ = context.Operators.And(r_, u_);
-			bool? w_ = context.Operators.And(i_, v_);
+			CodeableConcept f_ = e_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlConcept g_ = FHIRHelpers_4_0_1.ToConcept(f_);
+			CqlCode h_ = this.Tiny_Umbrella();
+			CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+			bool? j_ = context.Operators.Equivalent(g_, i_);
+			CqlDateTime k_ = this.Date_of_last_injury_due_to_falling_rock();
+			DataType l_ = SD?.Occurrence;
+			CqlDateTime m_ = context.Operators.LateBoundProperty<CqlDateTime>(l_, "value");
+			CqlQuantity n_ = context.Operators.Quantity(7m, "days");
+			CqlDateTime o_ = context.Operators.Subtract(m_ as CqlDateTime, n_);
+			CqlDateTime q_ = context.Operators.LateBoundProperty<CqlDateTime>(l_, "value");
+			CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_ as CqlDateTime, true, false);
+			bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, default);
+			CqlDateTime u_ = context.Operators.LateBoundProperty<CqlDateTime>(l_, "value");
+			bool? v_ = context.Operators.Not((bool?)((u_ as CqlDateTime) is null));
+			bool? w_ = context.Operators.And(s_, v_);
+			bool? x_ = context.Operators.And(j_, w_);
 
-			return w_;
+			return x_;
 		};
 		IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);
 

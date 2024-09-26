@@ -113,21 +113,22 @@ public class DevDays_2023_0_0
 			List<Coding> e_ = d_?.Coding;
 			bool? f_(Coding coding)
 			{
-				CqlCode n_ = FHIRHelpers_4_0_001.ToCode(coding);
-				CqlCode o_ = this.Sucked_into_jet_engine();
-				bool? p_ = context.Operators.Equivalent(n_, o_);
+				CqlCode o_ = FHIRHelpers_4_0_001.ToCode(coding);
+				CqlCode p_ = this.Sucked_into_jet_engine();
+				bool? q_ = context.Operators.Equivalent(o_, p_);
 
-				return p_;
+				return q_;
 			};
 			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
-			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime(i_ as FhirDateTime);
-			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
-			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, default);
-			bool? m_ = context.Operators.And(h_, l_);
+			FhirDateTime j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlDateTime k_ = FHIRHelpers_4_0_001.ToDateTime(j_);
+			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
+			bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
+			bool? n_ = context.Operators.And(h_, m_);
 
-			return m_;
+			return n_;
 		};
 		IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
 
@@ -147,21 +148,22 @@ public class DevDays_2023_0_0
 			List<Coding> e_ = d_?.Coding;
 			bool? f_(Coding coding)
 			{
-				CqlCode n_ = FHIRHelpers_4_0_001.ToCode(coding);
-				CqlCode o_ = this.Sucked_into_jet_engine__subsequent_encounter();
-				bool? p_ = context.Operators.Equivalent(n_, o_);
+				CqlCode o_ = FHIRHelpers_4_0_001.ToCode(coding);
+				CqlCode p_ = this.Sucked_into_jet_engine__subsequent_encounter();
+				bool? q_ = context.Operators.Equivalent(o_, p_);
 
-				return p_;
+				return q_;
 			};
 			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
-			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime(i_ as FhirDateTime);
-			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
-			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, default);
-			bool? m_ = context.Operators.And(h_, l_);
+			FhirDateTime j_ = i_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+			CqlDateTime k_ = FHIRHelpers_4_0_001.ToDateTime(j_);
+			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
+			bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
+			bool? n_ = context.Operators.And(h_, m_);
 
-			return m_;
+			return n_;
 		};
 		IEnumerable<Condition> c_ = context.Operators.Where<Condition>(a_, b_);
 

@@ -3273,31 +3273,33 @@ public class CQMCommon_2_0_000
 			{
 				DataType f_ = request?.Medication;
 				object g_ = FHIRHelpers_4_3_000.ToValue(f_);
+				CqlConcept h_ = g_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-				return g_ as CqlConcept;
+				return h_;
 			}
 			else
 			{
-				IEnumerable<Medication> h_ = context.Operators.RetrieveByValueSet<Medication>(default, default);
-				bool? i_(Medication M)
+				IEnumerable<Medication> i_ = context.Operators.RetrieveByValueSet<Medication>(default, default);
+				bool? j_(Medication M)
 				{
-					Id n_ = M?.IdElement;
-					string o_ = n_?.Value;
-					DataType p_ = request?.Medication;
-					object q_ = FHIRHelpers_4_3_000.ToValue(p_);
-					FhirString r_ = (q_ as ResourceReference)?.ReferenceElement;
-					string s_ = r_?.Value;
-					string t_ = QICoreCommon_2_0_000.getId(s_);
-					bool? u_ = context.Operators.Equal(o_, t_);
+					Id o_ = M?.IdElement;
+					string p_ = o_?.Value;
+					DataType q_ = request?.Medication;
+					object r_ = FHIRHelpers_4_3_000.ToValue(q_);
+					ResourceReference s_ = r_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					FhirString t_ = s_?.ReferenceElement;
+					string u_ = t_?.Value;
+					string v_ = QICoreCommon_2_0_000.getId(u_);
+					bool? w_ = context.Operators.Equal(p_, v_);
 
-					return u_;
+					return w_;
 				};
-				IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
-				Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
-				CodeableConcept l_ = k_?.Code;
-				CqlConcept m_ = FHIRHelpers_4_3_000.ToConcept(l_);
+				IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
+				Medication l_ = context.Operators.SingletonFrom<Medication>(k_);
+				CodeableConcept m_ = l_?.Code;
+				CqlConcept n_ = FHIRHelpers_4_3_000.ToConcept(m_);
 
-				return m_;
+				return n_;
 			}
 		};
 
@@ -3322,31 +3324,33 @@ public class CQMCommon_2_0_000
 			{
 				DataType f_ = request?.Medication;
 				object g_ = FHIRHelpers_4_3_000.ToValue(f_);
+				CqlConcept h_ = g_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-				return g_ as CqlConcept;
+				return h_;
 			}
 			else
 			{
-				IEnumerable<Medication> h_ = context.Operators.RetrieveByValueSet<Medication>(default, default);
-				bool? i_(Medication M)
+				IEnumerable<Medication> i_ = context.Operators.RetrieveByValueSet<Medication>(default, default);
+				bool? j_(Medication M)
 				{
-					Id n_ = M?.IdElement;
-					string o_ = n_?.Value;
-					DataType p_ = request?.Medication;
-					object q_ = FHIRHelpers_4_3_000.ToValue(p_);
-					FhirString r_ = (q_ as ResourceReference)?.ReferenceElement;
-					string s_ = r_?.Value;
-					string t_ = QICoreCommon_2_0_000.getId(s_);
-					bool? u_ = context.Operators.Equal(o_, t_);
+					Id o_ = M?.IdElement;
+					string p_ = o_?.Value;
+					DataType q_ = request?.Medication;
+					object r_ = FHIRHelpers_4_3_000.ToValue(q_);
+					ResourceReference s_ = r_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
+					FhirString t_ = s_?.ReferenceElement;
+					string u_ = t_?.Value;
+					string v_ = QICoreCommon_2_0_000.getId(u_);
+					bool? w_ = context.Operators.Equal(p_, v_);
 
-					return u_;
+					return w_;
 				};
-				IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
-				Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
-				CodeableConcept l_ = k_?.Code;
-				CqlConcept m_ = FHIRHelpers_4_3_000.ToConcept(l_);
+				IEnumerable<Medication> k_ = context.Operators.Where<Medication>(i_, j_);
+				Medication l_ = context.Operators.SingletonFrom<Medication>(k_);
+				CodeableConcept m_ = l_?.Code;
+				CqlConcept n_ = FHIRHelpers_4_3_000.ToConcept(m_);
 
-				return m_;
+				return n_;
 			}
 		};
 

@@ -6,26 +6,25 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Compiler;
 
 internal class ExpressionBuilder(
     ILogger<ExpressionBuilder> logger,
-    ExpressionBuilderSettings expressionBuilderSettings,
+    IOptions<ExpressionBuilderOptions> expressionBuilderOptions,
     CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
     CqlContextBinder cqlContextBinder)
 {
     private readonly ILogger<ExpressionBuilder> _logger = logger;
-    private readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
+    private readonly ExpressionBuilderOptions _expressionBuilderOptions = expressionBuilderOptions.Value;
     private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
@@ -46,7 +45,7 @@ internal class ExpressionBuilder(
     internal ExpressionBuilderContext NewExpressionBuilderContext(
         LibraryExpressionBuilderContext libCtx,
         Dictionary<string, ParameterExpression>? operands = null) =>
-        new(_logger, _expressionBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _cqlContextBinder, libCtx, operands);
+        new(_logger, _expressionBuilderOptions, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _cqlContextBinder, libCtx, operands);
 
     public void ProcessValueSetDef(LibraryExpressionBuilderContext libCtx, ValueSetDef valueSetDef) =>
         NewExpressionBuilderContext(libCtx)

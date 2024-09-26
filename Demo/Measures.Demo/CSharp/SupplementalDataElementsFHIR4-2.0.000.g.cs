@@ -154,8 +154,9 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		Coding i_(Extension E)
 		{
 			DataType ac_ = E?.Value;
+			Coding ad_ = ac_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-			return ac_ as Coding;
+			return ad_;
 		};
 		IEnumerable<Coding> j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 
@@ -244,8 +245,9 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		Coding i_(Extension E)
 		{
 			DataType ac_ = E?.Value;
+			Coding ad_ = ac_ switch { null => null , _ => throw new System.Diagnostics.UnreachableException(), };
 
-			return ac_ as Coding;
+			return ad_;
 		};
 		IEnumerable<Coding> j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 
