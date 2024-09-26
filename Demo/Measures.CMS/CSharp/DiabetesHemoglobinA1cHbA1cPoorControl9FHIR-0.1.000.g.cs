@@ -279,16 +279,15 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 				{
 					DataType aa_ = RecentHbA1c?.Effective;
 					object ab_ = FHIRHelpers_4_3_000.ToValue(aa_);
-					CqlInterval<CqlDateTime> ac_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(ab_);
 
-					return ac_ as object;
+					return (ab_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (o_())
 				{
-					DataType ad_ = RecentHbA1c?.Effective;
-					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+					DataType ac_ = RecentHbA1c?.Effective;
+					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
 
-					return (ae_ as CqlDateTime) as object;
+					return (ad_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -304,12 +303,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 		object f_(Observation @this)
 		{
-			DataType af_ = @this?.Effective;
-			object ag_ = FHIRHelpers_4_3_000.ToValue(af_);
-			CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_0_000.ToInterval(ag_);
-			CqlDateTime ai_ = context.Operators.Start(ah_);
+			DataType ae_ = @this?.Effective;
+			object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
+			CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.ToInterval(af_);
+			CqlDateTime ah_ = context.Operators.Start(ag_);
 
-			return ai_;
+			return ah_;
 		};
 		IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation h_ = context.Operators.Last<Observation>(g_);
@@ -341,11 +340,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 		Observation a_ = this.Most_Recent_HbA1c();
 		DataType b_ = a_?.Value;
 		object c_ = FHIRHelpers_4_3_000.ToValue(b_);
-		CqlQuantity d_ = context.Operators.Convert<CqlQuantity>(c_);
-		CqlQuantity e_ = context.Operators.Quantity(9m, "%");
-		bool? f_ = context.Operators.Greater(d_, e_);
+		CqlQuantity d_ = context.Operators.Quantity(9m, "%");
+		bool? e_ = context.Operators.Greater(c_ as CqlQuantity, d_);
 
-		return f_;
+		return e_;
 	}
 
     [CqlDeclaration("Has Most Recent Elevated HbA1c")]
@@ -396,16 +394,15 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000
 				{
 					DataType z_ = NoHbA1c?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
-					CqlInterval<CqlDateTime> ab_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(aa_);
 
-					return ab_ as object;
+					return (aa_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (n_())
 				{
-					DataType ac_ = NoHbA1c?.Effective;
-					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
+					DataType ab_ = NoHbA1c?.Effective;
+					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
-					return (ad_ as CqlDateTime) as object;
+					return (ac_ as CqlDateTime) as object;
 				}
 				else
 				{

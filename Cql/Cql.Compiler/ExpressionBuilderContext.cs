@@ -2116,99 +2116,75 @@ partial class ExpressionBuilderContext
 {
     protected Expression As(As @as) //@ TODO: Cast - As
     {
-        if (@as.operand is List list)
-        {
-            using (PushElement(list))
-            {
-                // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
-                if ((list.element?.Length ?? 0) == 0)
-                {
-                    var type = TypeFor(@as.asTypeSpecifier!)!;
-                    if (_typeResolver.IsListType(type))
-                    {
-                        var listElementType = _typeResolver.GetListElementType(type) ??
-                                              throw this.NewExpressionBuildingException(
-                                                  $"{type} was expected to be a list type.");
-                        var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
-                        var elmAs = new ElmAsExpression(newArray, type, @as.strict);
-                        return elmAs;
-                    }
-                    else if (type == _typeResolver.AnyType) // handles untyped empty lists whose type is Any
-                    {
-                        var newArray = Expression.NewArrayBounds(_typeResolver.AnyType, Expression.Constant(0));
-                        var elmAs = new ElmAsExpression(newArray, type, @as.strict);
-                        return elmAs;
-                    }
-
-                    throw this.NewExpressionBuildingException(
-                        "Cannot use as operator on a list if the as type is not also a list type.");
-                }
-            }
-        }
-
+        using var _ = PushElement(@as.operand);
+        var operandTypeSpecifier = @as.operand.GetTypeSpecifier()!;
         // asTypeSpecifier is an expression with its own resulttypespecifier that actually contains the real type
-        if (@as.asTypeSpecifier != null)
+        var asTypeSpecifier = (@as switch
+                                  {
+                                      { asTypeSpecifier: { } s, asType: null } => s,
+                                      { asType: { } t }                        => t.ToNamedType(),
+                                      _                                        => null,
+                                  }) ?? throw this.NewExpressionBuildingException("The 'as' operator has no type name.");
+        var type = TypeFor(asTypeSpecifier!)!;
+
+        switch (@as.operand)
         {
-            using (PushElement(@as.asTypeSpecifier))
+            // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
+            case List list when (list.element?.Length ?? 0) == 0:
             {
-                if (@as.operand is Null)
+                if (_typeResolver.IsListType(type))
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!)!;
-                    var defaultExpression = Expression.Default(type);
-                    return new ElmAsExpression(defaultExpression, type, @as.strict);
+                    var listElementType = _typeResolver.GetListElementType(type) ??
+                                          throw this.NewExpressionBuildingException(
+                                              $"{type} was expected to be a list type.");
+                    var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
+                    var elmAs = new ElmAsExpression(newArray, type, @as.strict);
+                    return elmAs;
                 }
-                else if (@as.operand.resultTypeSpecifier is ChoiceTypeSpecifier)
+                else if (type == _typeResolver.AnyType) // handles untyped empty lists whose type is Any
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!)!;
-                    var operand = TranslateArg(@as.operand!);
-                    return _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.Convert), [operand], [type]);
+                    var newArray = Expression.NewArrayBounds(_typeResolver.AnyType, Expression.Constant(0));
+                    var elmAs = new ElmAsExpression(newArray, type, @as.strict);
+                    return elmAs;
                 }
-                else
+
+                throw this.NewExpressionBuildingException(
+                    "Cannot use as operator on a list if the as type is not also a list type.");
+            }
+            case Null:
+            {
+                var defaultExpression = Expression.Default(type);
+                return defaultExpression;
+            }
+            default:
+            {
+                var operand = TranslateArg(@as.operand!);
+                // if (operandTypeSpecifier is ChoiceTypeSpecifier
+                //     && operand.Type == typeof(object))
+                // {
+                //     return _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.Convert), [operand], [type]);
+                // }
+                var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast:true);
+                switch (typeConversion)
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!)!;
-                    var operand = TranslateArg(@as.operand!);
-                    var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast:true);
-                    switch (typeConversion)
-                    {
-                        case TypeConversion.NoMatch:
-                            // log an unsafe cast
-                            _logger.LogWarning(
-                                FormatMessage(
-                                    $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
-                                    @as.operand));
-                            return Expression.Default(type);
+                    case TypeConversion.NoMatch:
+                        // log an unsafe cast
+                        _logger.LogWarning(
+                            FormatMessage(
+                                $"{operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} as {type.ToCSharpString(Defaults.TypeCSharpFormat)} will always result in null.",
+                                @as.operand));
+                        return Expression.Default(type);
 
-                        case TypeConversion.OperatorConvert:
-                            return converted;
+                    case TypeConversion.OperatorConvert:
+                        return converted;
 
-                        case TypeConversion.ExpressionTypeAs:
-                        default:
-                            return new ElmAsExpression(operand, type, @as.strict);
-                    }
+                    case TypeConversion.ExpressionTypeAs:
+                    default:
+                        return new ElmAsExpression(operand, type, @as.strict);
                 }
             }
         }
 
-        {
-            if (string.IsNullOrWhiteSpace(@as.asType.Name))
-                throw this.NewExpressionBuildingException("The 'as' operator has no type name.");
-
-            if (@as.operand is null)
-                throw this.NewExpressionBuildingException("Operand cannot be null");
-
-            var type = _typeResolver.ResolveType(@as.asType.Name!)
-                       ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
-
-            var operand = TranslateArg(@as.operand);
-            if (!type.IsAssignableTo(operand.Type))
-            {
-                _logger.LogWarning(FormatMessage(
-                                       $"Potentially unsafe cast from {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to type {type.ToCSharpString(Defaults.TypeCSharpFormat)}",
-                                       @as.operand));
-            }
-
-            return new ElmAsExpression(operand, type, @as.strict);
-        }
     }
 
     protected Expression Is(Is @is) // @TODO: Cast - Is

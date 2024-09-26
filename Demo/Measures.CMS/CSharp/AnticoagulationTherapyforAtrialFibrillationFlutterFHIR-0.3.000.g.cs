@@ -339,16 +339,15 @@ public class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
 					{
 						DataType ci_ = AtrialAblationObservation?.Effective;
 						object cj_ = FHIRHelpers_4_3_000.ToValue(ci_);
-						CqlInterval<CqlDateTime> ck_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(cj_);
 
-						return ck_ as object;
+						return (cj_ as CqlInterval<CqlDateTime>) as object;
 					}
 					else if (bw_())
 					{
-						DataType cl_ = AtrialAblationObservation?.Effective;
-						object cm_ = FHIRHelpers_4_3_000.ToValue(cl_);
+						DataType ck_ = AtrialAblationObservation?.Effective;
+						object cl_ = FHIRHelpers_4_3_000.ToValue(ck_);
 
-						return (cm_ as CqlDateTime) as object;
+						return (cl_ as CqlDateTime) as object;
 					}
 					else
 					{

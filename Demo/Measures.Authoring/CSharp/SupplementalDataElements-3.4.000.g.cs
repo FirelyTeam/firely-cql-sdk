@@ -404,7 +404,7 @@ public class SupplementalDataElements_3_4_000
 			}
 			else
 			{
-				return default;
+				return null;
 			}
 		};
 

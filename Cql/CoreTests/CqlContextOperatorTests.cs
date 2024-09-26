@@ -161,7 +161,7 @@ public class CqlContextOperatorTests
     #region Convert (String --> XXX)
 
     [TestMethod]
-    [DynamicData(nameof(TestDataFor_Convert_StringTo), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(TestDataNameFor_Convert_StringTo))]
+    [DynamicData(nameof(TestDataFor_Convert_StringTo), DynamicDataSourceType.Method/*, DynamicDataDisplayName = nameof(TestDataNameFor_Convert_StringTo)*/)]
     public void Convert_StringToCqlDate_ReturnsConvertedValue(string input, object expectedConvertOutput)
     {
         // Arrange
@@ -177,7 +177,7 @@ public class CqlContextOperatorTests
         converted.Should().Be(expectedConvertOutput);
     }
 
-    private static string TestDataNameFor_Convert_StringTo(MethodInfo _, object[] input) =>
+    private static string TestDataNameFor_Convert_StringTo(MethodInfo methodInfo, object[] input) =>
         $"Converting string '{input[0]}' to {input[1].GetType().ToCSharpString()}";
 
     private static IEnumerable<object[]> TestDataFor_Convert_StringTo()

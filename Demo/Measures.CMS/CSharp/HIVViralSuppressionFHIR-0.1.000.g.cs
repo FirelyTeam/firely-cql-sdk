@@ -474,16 +474,15 @@ public class HIVViralSuppressionFHIR_0_1_000
 				{
 					DataType z_ = ViralLoad?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
-					CqlInterval<CqlDateTime> ab_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(aa_);
 
-					return ab_ as object;
+					return (aa_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (n_())
 				{
-					DataType ac_ = ViralLoad?.Effective;
-					object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
+					DataType ab_ = ViralLoad?.Effective;
+					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
-					return (ad_ as CqlDateTime) as object;
+					return (ac_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -499,12 +498,12 @@ public class HIVViralSuppressionFHIR_0_1_000
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		object e_(Observation @this)
 		{
-			DataType ae_ = @this?.Effective;
-			object af_ = FHIRHelpers_4_3_000.ToValue(ae_);
-			CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.ToInterval(af_);
-			CqlDateTime ah_ = context.Operators.Start(ag_);
+			DataType ad_ = @this?.Effective;
+			object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
+			CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.ToInterval(ae_);
+			CqlDateTime ag_ = context.Operators.Start(af_);
 
-			return ah_;
+			return ag_;
 		};
 		IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
 		Observation g_ = context.Operators.Last<Observation>(f_);

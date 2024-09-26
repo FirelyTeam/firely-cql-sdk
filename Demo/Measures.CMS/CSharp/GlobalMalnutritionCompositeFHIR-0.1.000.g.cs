@@ -510,17 +510,15 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = context.Operators.Convert<CqlConcept>(ad_);
-			CqlValueSet af_ = this.Malnutrition_Screening_Not_At_Risk_Result();
-			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-			object ai_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept aj_ = context.Operators.Convert<CqlConcept>(ai_);
-			CqlValueSet ak_ = this.Malnutrition_Screening_At_Risk_Result();
-			bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
-			bool? am_ = context.Operators.Or(ag_, al_);
-			bool? an_ = context.Operators.And(ab_, am_);
+			CqlValueSet ae_ = this.Malnutrition_Screening_Not_At_Risk_Result();
+			bool? af_ = context.Operators.ConceptInValueSet(ad_ as CqlConcept, ae_);
+			object ah_ = FHIRHelpers_4_3_000.ToValue(ac_);
+			CqlValueSet ai_ = this.Malnutrition_Screening_At_Risk_Result();
+			bool? aj_ = context.Operators.ConceptInValueSet(ah_ as CqlConcept, ai_);
+			bool? ak_ = context.Operators.Or(af_, aj_);
+			bool? al_ = context.Operators.And(ab_, ak_);
 
-			return an_;
+			return al_;
 		};
 		IEnumerable<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? tuple_bejjtwegpxjsnajsodybefddb) => 
@@ -597,12 +595,11 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = context.Operators.Convert<CqlConcept>(ad_);
-			CqlValueSet af_ = this.Malnutrition_Screening_Not_At_Risk_Result();
-			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-			bool? ah_ = context.Operators.And(ab_, ag_);
+			CqlValueSet ae_ = this.Malnutrition_Screening_Not_At_Risk_Result();
+			bool? af_ = context.Operators.ConceptInValueSet(ad_ as CqlConcept, ae_);
+			bool? ag_ = context.Operators.And(ab_, af_);
 
-			return ah_;
+			return ag_;
 		};
 		IEnumerable<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? tuple_bejjtwegpxjsnajsodybefddb) => 
@@ -680,12 +677,11 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_bejjtwegpxjsnajsodybefddb?.MalnutritionRiskScreening?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = context.Operators.Convert<CqlConcept>(ad_);
-			CqlValueSet af_ = this.Malnutrition_Screening_At_Risk_Result();
-			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-			bool? ah_ = context.Operators.And(ab_, ag_);
+			CqlValueSet ae_ = this.Malnutrition_Screening_At_Risk_Result();
+			bool? af_ = context.Operators.ConceptInValueSet(ad_ as CqlConcept, ae_);
+			bool? ag_ = context.Operators.And(ab_, af_);
 
-			return ah_;
+			return ag_;
 		};
 		IEnumerable<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? tuple_bejjtwegpxjsnajsodybefddb) => 
@@ -762,22 +758,19 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = context.Operators.Convert<CqlConcept>(ad_);
-			CqlValueSet af_ = this.Nutrition_Assessment_Status_Moderately_Malnourished();
-			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-			object ai_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept aj_ = context.Operators.Convert<CqlConcept>(ai_);
-			CqlValueSet ak_ = this.Nutrition_Assessment_Status_Not_or_Mildly_Malnourished();
-			bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
-			bool? am_ = context.Operators.Or(ag_, al_);
-			object ao_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ap_ = context.Operators.Convert<CqlConcept>(ao_);
-			CqlValueSet aq_ = this.Nutrition_Assessment_Status_Severely_Malnourished();
-			bool? ar_ = context.Operators.ConceptInValueSet(ap_, aq_);
-			bool? as_ = context.Operators.Or(am_, ar_);
-			bool? at_ = context.Operators.And(ab_, as_);
+			CqlValueSet ae_ = this.Nutrition_Assessment_Status_Moderately_Malnourished();
+			bool? af_ = context.Operators.ConceptInValueSet(ad_ as CqlConcept, ae_);
+			object ah_ = FHIRHelpers_4_3_000.ToValue(ac_);
+			CqlValueSet ai_ = this.Nutrition_Assessment_Status_Not_or_Mildly_Malnourished();
+			bool? aj_ = context.Operators.ConceptInValueSet(ah_ as CqlConcept, ai_);
+			bool? ak_ = context.Operators.Or(af_, aj_);
+			object am_ = FHIRHelpers_4_3_000.ToValue(ac_);
+			CqlValueSet an_ = this.Nutrition_Assessment_Status_Severely_Malnourished();
+			bool? ao_ = context.Operators.ConceptInValueSet(am_ as CqlConcept, an_);
+			bool? ap_ = context.Operators.Or(ak_, ao_);
+			bool? aq_ = context.Operators.And(ab_, ap_);
 
-			return at_;
+			return aq_;
 		};
 		IEnumerable<(Encounter QualifyingEncounter, Observation NutritionAssessment)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation NutritionAssessment)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation NutritionAssessment)? tuple_hhhypfjvjujitmizocefugcne) => 
@@ -829,17 +822,15 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = context.Operators.Convert<CqlConcept>(ad_);
-			CqlValueSet af_ = this.Nutrition_Assessment_Status_Moderately_Malnourished();
-			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-			object ai_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept aj_ = context.Operators.Convert<CqlConcept>(ai_);
-			CqlValueSet ak_ = this.Nutrition_Assessment_Status_Severely_Malnourished();
-			bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
-			bool? am_ = context.Operators.Or(ag_, al_);
-			bool? an_ = context.Operators.And(ab_, am_);
+			CqlValueSet ae_ = this.Nutrition_Assessment_Status_Moderately_Malnourished();
+			bool? af_ = context.Operators.ConceptInValueSet(ad_ as CqlConcept, ae_);
+			object ah_ = FHIRHelpers_4_3_000.ToValue(ac_);
+			CqlValueSet ai_ = this.Nutrition_Assessment_Status_Severely_Malnourished();
+			bool? aj_ = context.Operators.ConceptInValueSet(ah_ as CqlConcept, ai_);
+			bool? ak_ = context.Operators.Or(af_, aj_);
+			bool? al_ = context.Operators.And(ab_, ak_);
 
-			return an_;
+			return al_;
 		};
 		IEnumerable<(Encounter QualifyingEncounter, Observation NutritionAssessment)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation NutritionAssessment)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation NutritionAssessment)? tuple_hhhypfjvjujitmizocefugcne) => 
@@ -891,12 +882,11 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 			bool? ab_ = context.Operators.And(v_, aa_);
 			DataType ac_ = tuple_hhhypfjvjujitmizocefugcne?.NutritionAssessment?.Value;
 			object ad_ = FHIRHelpers_4_3_000.ToValue(ac_);
-			CqlConcept ae_ = context.Operators.Convert<CqlConcept>(ad_);
-			CqlValueSet af_ = this.Nutrition_Assessment_Status_Not_or_Mildly_Malnourished();
-			bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
-			bool? ah_ = context.Operators.And(ab_, ag_);
+			CqlValueSet ae_ = this.Nutrition_Assessment_Status_Not_or_Mildly_Malnourished();
+			bool? af_ = context.Operators.ConceptInValueSet(ad_ as CqlConcept, ae_);
+			bool? ag_ = context.Operators.And(ab_, af_);
 
-			return ah_;
+			return ag_;
 		};
 		IEnumerable<(Encounter QualifyingEncounter, Observation NutritionAssessment)?> h_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation NutritionAssessment)?>(f_, g_);
 		Encounter i_((Encounter QualifyingEncounter, Observation NutritionAssessment)? tuple_hhhypfjvjujitmizocefugcne) => 

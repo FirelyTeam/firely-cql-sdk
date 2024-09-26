@@ -377,16 +377,15 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType ah_ = CervicalCytology?.Effective;
 					object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
-					CqlInterval<CqlDateTime> aj_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(ai_);
 
-					return aj_ as object;
+					return (ai_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (v_())
 				{
-					DataType ak_ = CervicalCytology?.Effective;
-					object al_ = FHIRHelpers_4_3_000.ToValue(ak_);
+					DataType aj_ = CervicalCytology?.Effective;
+					object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
 
-					return (al_ as CqlDateTime) as object;
+					return (ak_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -465,16 +464,15 @@ public class CervicalCancerScreeningFHIR_0_0_001
 				{
 					DataType ar_ = HPVTest?.Effective;
 					object as_ = FHIRHelpers_4_3_000.ToValue(ar_);
-					CqlInterval<CqlDateTime> at_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(as_);
 
-					return at_ as object;
+					return (as_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (af_())
 				{
-					DataType au_ = HPVTest?.Effective;
-					object av_ = FHIRHelpers_4_3_000.ToValue(au_);
+					DataType at_ = HPVTest?.Effective;
+					object au_ = FHIRHelpers_4_3_000.ToValue(at_);
 
-					return (av_ as CqlDateTime) as object;
+					return (au_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -487,51 +485,50 @@ public class CervicalCancerScreeningFHIR_0_0_001
 			bool? n_ = context.Operators.GreaterOrEqual(m_, 30);
 			object o_()
 			{
+				bool av_()
+				{
+					DataType ay_ = HPVTest?.Effective;
+					object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
+					bool ba_ = az_ is CqlDateTime;
+
+					return ba_;
+				};
 				bool aw_()
 				{
-					DataType az_ = HPVTest?.Effective;
-					object ba_ = FHIRHelpers_4_3_000.ToValue(az_);
-					bool bb_ = ba_ is CqlDateTime;
+					DataType bb_ = HPVTest?.Effective;
+					object bc_ = FHIRHelpers_4_3_000.ToValue(bb_);
+					bool bd_ = bc_ is CqlInterval<CqlDateTime>;
 
-					return bb_;
+					return bd_;
 				};
 				bool ax_()
 				{
-					DataType bc_ = HPVTest?.Effective;
-					object bd_ = FHIRHelpers_4_3_000.ToValue(bc_);
-					bool be_ = bd_ is CqlInterval<CqlDateTime>;
+					DataType be_ = HPVTest?.Effective;
+					object bf_ = FHIRHelpers_4_3_000.ToValue(be_);
+					bool bg_ = bf_ is CqlDateTime;
 
-					return be_;
+					return bg_;
 				};
-				bool ay_()
+				if (av_())
 				{
-					DataType bf_ = HPVTest?.Effective;
-					object bg_ = FHIRHelpers_4_3_000.ToValue(bf_);
-					bool bh_ = bg_ is CqlDateTime;
+					DataType bh_ = HPVTest?.Effective;
+					object bi_ = FHIRHelpers_4_3_000.ToValue(bh_);
 
-					return bh_;
-				};
-				if (aw_())
+					return (bi_ as CqlDateTime) as object;
+				}
+				else if (aw_())
 				{
-					DataType bi_ = HPVTest?.Effective;
-					object bj_ = FHIRHelpers_4_3_000.ToValue(bi_);
+					DataType bj_ = HPVTest?.Effective;
+					object bk_ = FHIRHelpers_4_3_000.ToValue(bj_);
 
-					return (bj_ as CqlDateTime) as object;
+					return (bk_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ax_())
 				{
-					DataType bk_ = HPVTest?.Effective;
-					object bl_ = FHIRHelpers_4_3_000.ToValue(bk_);
-					CqlInterval<CqlDateTime> bm_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(bl_);
+					DataType bl_ = HPVTest?.Effective;
+					object bm_ = FHIRHelpers_4_3_000.ToValue(bl_);
 
-					return bm_ as object;
-				}
-				else if (ay_())
-				{
-					DataType bn_ = HPVTest?.Effective;
-					object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
-
-					return (bo_ as CqlDateTime) as object;
+					return (bm_ as CqlDateTime) as object;
 				}
 				else
 				{

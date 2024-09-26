@@ -680,32 +680,31 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? ac_ = context.Operators.And(v_, ab_);
 				DataType ad_ = SkinExam?.Value;
 				object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-				CqlConcept af_ = context.Operators.Convert<CqlConcept>(ae_);
-				CqlValueSet ag_ = this.Pressure_Injury_Deep_Tissue();
-				bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
-				List<Observation.ComponentComponent> ai_ = SkinExam?.Component;
-				bool? aj_(Observation.ComponentComponent @this)
+				CqlValueSet af_ = this.Pressure_Injury_Deep_Tissue();
+				bool? ag_ = context.Operators.ConceptInValueSet(ae_ as CqlConcept, af_);
+				List<Observation.ComponentComponent> ah_ = SkinExam?.Component;
+				bool? ai_(Observation.ComponentComponent @this)
 				{
-					CodeableConcept ar_ = @this?.Code;
-					CqlConcept as_ = FHIRHelpers_4_3_000.ToConcept(ar_);
-					bool? at_ = context.Operators.Not((bool?)(as_ is null));
+					CodeableConcept aq_ = @this?.Code;
+					CqlConcept ar_ = FHIRHelpers_4_3_000.ToConcept(aq_);
+					bool? as_ = context.Operators.Not((bool?)(ar_ is null));
 
-					return at_;
+					return as_;
 				};
-				IEnumerable<Observation.ComponentComponent> ak_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ai_, aj_);
-				CqlConcept al_(Observation.ComponentComponent @this)
+				IEnumerable<Observation.ComponentComponent> aj_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ah_, ai_);
+				CqlConcept ak_(Observation.ComponentComponent @this)
 				{
-					CodeableConcept au_ = @this?.Code;
-					CqlConcept av_ = FHIRHelpers_4_3_000.ToConcept(au_);
+					CodeableConcept at_ = @this?.Code;
+					CqlConcept au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 
-					return av_;
+					return au_;
 				};
-				IEnumerable<CqlConcept> am_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(ak_, al_);
-				bool? ao_ = context.Operators.ConceptsInValueSet(am_, ag_);
-				bool? ap_ = context.Operators.Or(ah_, ao_);
-				bool? aq_ = context.Operators.And(ac_, ap_);
+				IEnumerable<CqlConcept> al_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(aj_, ak_);
+				bool? an_ = context.Operators.ConceptsInValueSet(al_, af_);
+				bool? ao_ = context.Operators.Or(ag_, an_);
+				bool? ap_ = context.Operators.And(ac_, ao_);
 
-				return aq_;
+				return ap_;
 			};
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 
@@ -825,32 +824,31 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				bool? ac_ = context.Operators.And(v_, ab_);
 				DataType ad_ = SkinExam?.Value;
 				object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
-				CqlConcept af_ = context.Operators.Convert<CqlConcept>(ae_);
-				CqlValueSet ag_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();
-				bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
-				List<Observation.ComponentComponent> ai_ = SkinExam?.Component;
-				bool? aj_(Observation.ComponentComponent @this)
+				CqlValueSet af_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();
+				bool? ag_ = context.Operators.ConceptInValueSet(ae_ as CqlConcept, af_);
+				List<Observation.ComponentComponent> ah_ = SkinExam?.Component;
+				bool? ai_(Observation.ComponentComponent @this)
 				{
-					CodeableConcept ar_ = @this?.Code;
-					CqlConcept as_ = FHIRHelpers_4_3_000.ToConcept(ar_);
-					bool? at_ = context.Operators.Not((bool?)(as_ is null));
+					CodeableConcept aq_ = @this?.Code;
+					CqlConcept ar_ = FHIRHelpers_4_3_000.ToConcept(aq_);
+					bool? as_ = context.Operators.Not((bool?)(ar_ is null));
 
-					return at_;
+					return as_;
 				};
-				IEnumerable<Observation.ComponentComponent> ak_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ai_, aj_);
-				CqlConcept al_(Observation.ComponentComponent @this)
+				IEnumerable<Observation.ComponentComponent> aj_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ah_, ai_);
+				CqlConcept ak_(Observation.ComponentComponent @this)
 				{
-					CodeableConcept au_ = @this?.Code;
-					CqlConcept av_ = FHIRHelpers_4_3_000.ToConcept(au_);
+					CodeableConcept at_ = @this?.Code;
+					CqlConcept au_ = FHIRHelpers_4_3_000.ToConcept(at_);
 
-					return av_;
+					return au_;
 				};
-				IEnumerable<CqlConcept> am_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(ak_, al_);
-				bool? ao_ = context.Operators.ConceptsInValueSet(am_, ag_);
-				bool? ap_ = context.Operators.Or(ah_, ao_);
-				bool? aq_ = context.Operators.And(ac_, ap_);
+				IEnumerable<CqlConcept> al_ = context.Operators.Select<Observation.ComponentComponent, CqlConcept>(aj_, ak_);
+				bool? an_ = context.Operators.ConceptsInValueSet(al_, af_);
+				bool? ao_ = context.Operators.Or(ag_, an_);
+				bool? ap_ = context.Operators.And(ac_, ao_);
 
-				return aq_;
+				return ap_;
 			};
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
 			Encounter i_(Observation SkinExam) => 

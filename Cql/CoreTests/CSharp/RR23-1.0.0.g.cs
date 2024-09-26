@@ -155,11 +155,10 @@ public class RR23_1_0_0
 		{
 			DataType e_ = C?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
-			CqlDateTime g_ = context.Operators.Convert<CqlDateTime>(f_);
-			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
-			bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, default);
+			CqlInterval<CqlDateTime> g_ = this.Measurement_Period();
+			bool? h_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, g_, default);
 
-			return i_;
+			return h_;
 		};
 		IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
 
@@ -217,9 +216,8 @@ public class RR23_1_0_0
 		{
 			DataType e_ = @this?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
-			CqlDateTime g_ = context.Operators.Convert<CqlDateTime>(f_);
 
-			return g_;
+			return f_ as CqlDateTime;
 		};
 		IEnumerable<Condition> c_ = context.Operators.SortBy<Condition>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
 		Condition d_ = context.Operators.Last<Condition>(c_);
@@ -236,9 +234,8 @@ public class RR23_1_0_0
 		Condition a_ = this.Last_injury_due_to_falling_rock();
 		DataType b_ = a_?.Onset;
 		object c_ = context.Operators.LateBoundProperty<object>(b_, "value");
-		CqlDateTime d_ = context.Operators.Convert<CqlDateTime>(c_);
 
-		return d_;
+		return c_ as CqlDateTime;
 	}
 
     [CqlDeclaration("Date of last injury due to falling rock")]

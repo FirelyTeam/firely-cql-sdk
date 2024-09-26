@@ -472,15 +472,14 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 			];
 			CqlInterval<CqlDateTime> u_(object Meds)
 			{
-				CqlInterval<CqlDateTime> af_ = context.Operators.Convert<CqlInterval<CqlDateTime>>(Meds);
-				CqlInterval<CqlDateTime> ag_ = this.Intake_Period();
-				CqlDateTime ah_ = context.Operators.Start(ag_);
-				CqlInterval<CqlDateTime> ai_ = this.Measurement_Period();
-				CqlDateTime aj_ = context.Operators.End(ai_);
-				CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ah_, aj_, true, true);
-				CqlInterval<CqlDateTime> al_ = context.Operators.Intersect<CqlDateTime>(af_, ak_);
+				CqlInterval<CqlDateTime> af_ = this.Intake_Period();
+				CqlDateTime ag_ = context.Operators.Start(af_);
+				CqlInterval<CqlDateTime> ah_ = this.Measurement_Period();
+				CqlDateTime ai_ = context.Operators.End(ah_);
+				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ag_, ai_, true, true);
+				CqlInterval<CqlDateTime> ak_ = context.Operators.Intersect<CqlDateTime>(Meds as CqlInterval<CqlDateTime>, aj_);
 
-				return al_;
+				return ak_;
 			};
 			IEnumerable<CqlInterval<CqlDateTime>> v_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>((IEnumerable<object>)t_, u_);
 			CqlInterval<CqlDateTime> w_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(v_);

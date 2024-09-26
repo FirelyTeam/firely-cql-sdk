@@ -272,22 +272,20 @@ public class AlaraCTIQRFHIR_0_1_000
 			bool? k_ = context.Operators.Equivalent(h_, j_);
 			DataType l_ = C?.Value;
 			object m_ = FHIRHelpers_4_3_000.ToValue(l_);
-			CqlQuantity n_ = context.Operators.Convert<CqlQuantity>(m_);
-			string o_ = n_?.unit;
-			bool? p_ = context.Operators.Equal(o_, "[hnsf'U]");
-			bool? q_ = context.Operators.And(k_, p_);
+			string n_ = (m_ as CqlQuantity)?.unit;
+			bool? o_ = context.Operators.Equal(n_, "[hnsf'U]");
+			bool? p_ = context.Operators.And(k_, o_);
 
-			return q_;
+			return p_;
 		};
 		IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
 		decimal? d_(Observation.ComponentComponent C)
 		{
-			DataType r_ = C?.Value;
-			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			CqlQuantity t_ = context.Operators.Convert<CqlQuantity>(s_);
-			decimal? u_ = t_?.value;
+			DataType q_ = C?.Value;
+			object r_ = FHIRHelpers_4_3_000.ToValue(q_);
+			decimal? s_ = (r_ as CqlQuantity)?.value;
 
-			return u_;
+			return s_;
 		};
 		IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
 		decimal? f_ = context.Operators.SingletonFrom<decimal?>(e_);
@@ -308,22 +306,20 @@ public class AlaraCTIQRFHIR_0_1_000
 			bool? k_ = context.Operators.Equivalent(h_, j_);
 			DataType l_ = C?.Value;
 			object m_ = FHIRHelpers_4_3_000.ToValue(l_);
-			CqlQuantity n_ = context.Operators.Convert<CqlQuantity>(m_);
-			string o_ = n_?.unit;
-			bool? p_ = context.Operators.Equal(o_, "mGy.cm");
-			bool? q_ = context.Operators.And(k_, p_);
+			string n_ = (m_ as CqlQuantity)?.unit;
+			bool? o_ = context.Operators.Equal(n_, "mGy.cm");
+			bool? p_ = context.Operators.And(k_, o_);
 
-			return q_;
+			return p_;
 		};
 		IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
 		decimal? d_(Observation.ComponentComponent C)
 		{
-			DataType r_ = C?.Value;
-			object s_ = FHIRHelpers_4_3_000.ToValue(r_);
-			CqlQuantity t_ = context.Operators.Convert<CqlQuantity>(s_);
-			decimal? u_ = t_?.value;
+			DataType q_ = C?.Value;
+			object r_ = FHIRHelpers_4_3_000.ToValue(q_);
+			decimal? s_ = (r_ as CqlQuantity)?.value;
 
-			return u_;
+			return s_;
 		};
 		IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
 		decimal? f_ = context.Operators.SingletonFrom<decimal?>(e_);
@@ -362,32 +358,31 @@ public class AlaraCTIQRFHIR_0_1_000
 	{
 		DataType a_ = Obs?.Value;
 		object b_ = FHIRHelpers_4_3_000.ToValue(a_);
-		CqlConcept c_ = context.Operators.Convert<CqlConcept>(b_);
-		CqlCode[] d_ = c_?.codes;
-		bool? e_(CqlCode @this)
+		CqlCode[] c_ = (b_ as CqlConcept)?.codes;
+		bool? d_(CqlCode @this)
 		{
-			string p_ = @this?.code;
-			bool? q_ = context.Operators.Not((bool?)(p_ is null));
+			string o_ = @this?.code;
+			bool? p_ = context.Operators.Not((bool?)(o_ is null));
+
+			return p_;
+		};
+		IEnumerable<CqlCode> e_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)c_, d_);
+		string f_(CqlCode @this)
+		{
+			string q_ = @this?.code;
 
 			return q_;
 		};
-		IEnumerable<CqlCode> f_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)d_, e_);
-		string g_(CqlCode @this)
-		{
-			string r_ = @this?.code;
+		IEnumerable<string> g_ = context.Operators.Select<CqlCode, string>(e_, f_);
+		bool? h_ = context.Operators.Contains<string>(g_, code);
+		decimal? i_ = this.Global_Noise_Value(Obs);
+		bool? j_ = context.Operators.GreaterOrEqual(i_, noiseThreshold);
+		decimal? k_ = this.Size_Adjusted_Value(Obs);
+		bool? l_ = context.Operators.GreaterOrEqual(k_, sizeDoseThreshold);
+		bool? m_ = context.Operators.Or(j_, l_);
+		bool? n_ = context.Operators.And(h_, m_);
 
-			return r_;
-		};
-		IEnumerable<string> h_ = context.Operators.Select<CqlCode, string>(f_, g_);
-		bool? i_ = context.Operators.Contains<string>(h_, code);
-		decimal? j_ = this.Global_Noise_Value(Obs);
-		bool? k_ = context.Operators.GreaterOrEqual(j_, noiseThreshold);
-		decimal? l_ = this.Size_Adjusted_Value(Obs);
-		bool? m_ = context.Operators.GreaterOrEqual(l_, sizeDoseThreshold);
-		bool? n_ = context.Operators.Or(k_, m_);
-		bool? o_ = context.Operators.And(i_, n_);
-
-		return o_;
+		return n_;
 	}
 
     [CqlDeclaration("CT Scan Qualifies")]
@@ -480,26 +475,25 @@ public class AlaraCTIQRFHIR_0_1_000
 		{
 			DataType d_ = Denom?.Value;
 			object e_ = FHIRHelpers_4_3_000.ToValue(d_);
-			CqlConcept f_ = context.Operators.Convert<CqlConcept>(e_);
-			CqlCode[] g_ = f_?.codes;
-			bool? h_(CqlCode @this)
+			CqlCode[] f_ = (e_ as CqlConcept)?.codes;
+			bool? g_(CqlCode @this)
 			{
-				string m_ = @this?.code;
-				bool? n_ = context.Operators.Not((bool?)(m_ is null));
+				string l_ = @this?.code;
+				bool? m_ = context.Operators.Not((bool?)(l_ is null));
+
+				return m_;
+			};
+			IEnumerable<CqlCode> h_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)f_, g_);
+			string i_(CqlCode @this)
+			{
+				string n_ = @this?.code;
 
 				return n_;
 			};
-			IEnumerable<CqlCode> i_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)g_, h_);
-			string j_(CqlCode @this)
-			{
-				string o_ = @this?.code;
+			IEnumerable<string> j_ = context.Operators.Select<CqlCode, string>(h_, i_);
+			bool? k_ = context.Operators.Contains<string>(j_, "FULLBODY");
 
-				return o_;
-			};
-			IEnumerable<string> k_ = context.Operators.Select<CqlCode, string>(i_, j_);
-			bool? l_ = context.Operators.Contains<string>(k_, "FULLBODY");
-
-			return l_;
+			return k_;
 		};
 		IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
 

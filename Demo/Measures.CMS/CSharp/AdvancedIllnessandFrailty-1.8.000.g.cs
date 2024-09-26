@@ -285,18 +285,17 @@ public class AdvancedIllnessandFrailty_1_8_000
 		{
 			DataType au_ = EquipmentUsed?.Value;
 			object av_ = FHIRHelpers_4_3_000.ToValue(au_);
-			CqlConcept aw_ = context.Operators.Convert<CqlConcept>(av_);
-			CqlValueSet ax_ = this.Frailty_Device();
-			bool? ay_ = context.Operators.ConceptInValueSet(aw_, ax_);
-			DataType az_ = EquipmentUsed?.Effective;
-			object ba_ = FHIRHelpers_4_3_000.ToValue(az_);
-			CqlInterval<CqlDateTime> bb_ = QICoreCommon_2_0_000.toInterval(ba_);
-			CqlDateTime bc_ = context.Operators.End(bb_);
-			CqlInterval<CqlDateTime> bd_ = this.Measurement_Period();
-			bool? be_ = context.Operators.In<CqlDateTime>(bc_, bd_, "day");
-			bool? bf_ = context.Operators.And(ay_, be_);
+			CqlValueSet aw_ = this.Frailty_Device();
+			bool? ax_ = context.Operators.ConceptInValueSet(av_ as CqlConcept, aw_);
+			DataType ay_ = EquipmentUsed?.Effective;
+			object az_ = FHIRHelpers_4_3_000.ToValue(ay_);
+			CqlInterval<CqlDateTime> ba_ = QICoreCommon_2_0_000.toInterval(az_);
+			CqlDateTime bb_ = context.Operators.End(ba_);
+			CqlInterval<CqlDateTime> bc_ = this.Measurement_Period();
+			bool? bd_ = context.Operators.In<CqlDateTime>(bb_, bc_, "day");
+			bool? be_ = context.Operators.And(ax_, bd_);
 
-			return bf_;
+			return be_;
 		};
 		IEnumerable<Observation> o_ = context.Operators.Where<Observation>(m_, n_);
 		bool? p_ = context.Operators.Exists<Observation>(o_);
@@ -305,11 +304,11 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<Condition> s_ = context.Operators.RetrieveByValueSet<Condition>(r_, default);
 		bool? t_(Condition FrailtyDiagnosis)
 		{
-			CqlInterval<CqlDateTime> bg_ = QICoreCommon_2_0_000.prevalenceInterval(FrailtyDiagnosis);
-			CqlInterval<CqlDateTime> bh_ = this.Measurement_Period();
-			bool? bi_ = context.Operators.Overlaps(bg_, bh_, "day");
+			CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_0_000.prevalenceInterval(FrailtyDiagnosis);
+			CqlInterval<CqlDateTime> bg_ = this.Measurement_Period();
+			bool? bh_ = context.Operators.Overlaps(bf_, bg_, "day");
 
-			return bi_;
+			return bh_;
 		};
 		IEnumerable<Condition> u_ = context.Operators.Where<Condition>(s_, t_);
 		bool? v_ = context.Operators.Exists<Condition>(u_);
@@ -319,13 +318,13 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<Encounter> z_ = Status_1_6_000.isEncounterPerformed(y_);
 		bool? aa_(Encounter FrailtyEncounter)
 		{
-			Period bj_ = FrailtyEncounter?.Period;
-			CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_3_000.ToInterval(bj_);
-			CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_0_000.toInterval(bk_ as object);
-			CqlInterval<CqlDateTime> bm_ = this.Measurement_Period();
-			bool? bn_ = context.Operators.Overlaps(bl_, bm_, "day");
+			Period bi_ = FrailtyEncounter?.Period;
+			CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_3_000.ToInterval(bi_);
+			CqlInterval<CqlDateTime> bk_ = QICoreCommon_2_0_000.toInterval(bj_ as object);
+			CqlInterval<CqlDateTime> bl_ = this.Measurement_Period();
+			bool? bm_ = context.Operators.Overlaps(bk_, bl_, "day");
 
-			return bn_;
+			return bm_;
 		};
 		IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
 		bool? ac_ = context.Operators.Exists<Encounter>(ab_);
@@ -335,13 +334,13 @@ public class AdvancedIllnessandFrailty_1_8_000
 		IEnumerable<Observation> ag_ = Status_1_6_000.isSymptom(af_);
 		bool? ah_(Observation FrailtySymptom)
 		{
-			DataType bo_ = FrailtySymptom?.Effective;
-			object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
-			CqlInterval<CqlDateTime> bq_ = QICoreCommon_2_0_000.toInterval(bp_);
-			CqlInterval<CqlDateTime> br_ = this.Measurement_Period();
-			bool? bs_ = context.Operators.Overlaps(bq_, br_, "day");
+			DataType bn_ = FrailtySymptom?.Effective;
+			object bo_ = FHIRHelpers_4_3_000.ToValue(bn_);
+			CqlInterval<CqlDateTime> bp_ = QICoreCommon_2_0_000.toInterval(bo_);
+			CqlInterval<CqlDateTime> bq_ = this.Measurement_Period();
+			bool? br_ = context.Operators.Overlaps(bp_, bq_, "day");
 
-			return bs_;
+			return br_;
 		};
 		IEnumerable<Observation> ai_ = context.Operators.Where<Observation>(ag_, ah_);
 		bool? aj_ = context.Operators.Exists<Observation>(ai_);

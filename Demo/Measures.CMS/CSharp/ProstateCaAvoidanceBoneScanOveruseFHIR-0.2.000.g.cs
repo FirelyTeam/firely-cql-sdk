@@ -600,10 +600,9 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType am_ = LastGleasonScore?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			int? ao_ = context.Operators.Convert<int?>(an_);
-			bool? ap_ = context.Operators.LessOrEqual(ao_, 6);
+			bool? ao_ = context.Operators.LessOrEqual(an_ as int?, 6);
 
-			return ap_;
+			return ao_;
 		};
 		IEnumerable<bool?> k_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)i_, j_);
 		bool? l_ = context.Operators.SingletonFrom<bool?>(k_);
@@ -806,11 +805,10 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType av_ = LastPSATest?.Value;
 			object aw_ = FHIRHelpers_4_3_000.ToValue(av_);
-			CqlQuantity ax_ = context.Operators.Convert<CqlQuantity>(aw_);
-			CqlQuantity ay_ = context.Operators.Quantity(10m, "ng/mL");
-			bool? az_ = context.Operators.Less(ax_, ay_);
+			CqlQuantity ax_ = context.Operators.Quantity(10m, "ng/mL");
+			bool? ay_ = context.Operators.Less(aw_ as CqlQuantity, ax_);
 
-			return az_;
+			return ay_;
 		};
 		IEnumerable<bool?> j_ = context.Operators.Select<Observation, bool?>((IEnumerable<Observation>)h_, i_);
 		bool? k_ = context.Operators.SingletonFrom<bool?>(j_);

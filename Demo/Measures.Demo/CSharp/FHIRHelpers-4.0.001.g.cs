@@ -49,7 +49,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if (period is null)
 			{
-				return null as CqlInterval<CqlDateTime>;
+				return null;
 			}
 			else
 			{
@@ -73,7 +73,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if (range is null)
 			{
-				return null as CqlInterval<CqlQuantity>;
+				return null;
 			}
 			else
 			{
@@ -97,7 +97,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if (quantity is null)
 			{
-				return default;
+				return null;
 			}
 			else
 			{
@@ -120,7 +120,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if (ratio is null)
 			{
-				return default;
+				return null;
 			}
 			else
 			{
@@ -143,7 +143,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if (coding is null)
 			{
-				return default;
+				return null;
 			}
 			else
 			{
@@ -170,7 +170,7 @@ public class FHIRHelpers_4_0_001
 		{
 			if (concept is null)
 			{
-				return default;
+				return null;
 			}
 			else
 			{
