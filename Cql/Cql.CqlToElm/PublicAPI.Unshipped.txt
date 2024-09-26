@@ -65,3 +65,4 @@ static Microsoft.Extensions.DependencyInjection.CqlToElmServiceCollectionExtensi
 static Microsoft.Extensions.DependencyInjection.CqlToElmServiceCollectionExtensions.AddCqlToElmOptions(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, System.Action<Hl7.Cql.CqlToElm.CqlToElmOptions!>? configureOptions) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
 static Microsoft.Extensions.DependencyInjection.CqlToElmServiceCollectionExtensions.AddCqlToElmServices(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!
 static readonly Hl7.Cql.CqlToElm.CqlToElmOptions.Default -> Hl7.Cql.CqlToElm.CqlToElmOptions!
+
