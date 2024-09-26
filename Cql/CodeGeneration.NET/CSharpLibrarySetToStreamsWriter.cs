@@ -463,7 +463,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private ExpressionToCSharpConverter NewExpressionToCSharpConverter(string libraryName) =>
-            new(_options, _typeToCSharpConverter, libraryName);
+            new(_options, _typeToCSharpConverter, new(), libraryName);
 
         private void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
         {

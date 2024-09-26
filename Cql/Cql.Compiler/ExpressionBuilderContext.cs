@@ -2159,11 +2159,9 @@ partial class ExpressionBuilderContext
             default:
             {
                 var operand = TranslateArg(@as.operand!);
-                // if (operandTypeSpecifier is ChoiceTypeSpecifier
-                //     && operand.Type == typeof(object))
-                // {
-                //     return _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.Convert), [operand], [type]);
-                // }
+                // if (operandTypeSpecifier is ChoiceTypeSpecifier operandChoiceTypeSpecifier)
+                //     return ChangeTypeOnChoice(operand, operandChoiceTypeSpecifier, type, @as.strict);
+
                 var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast:true);
                 switch (typeConversion)
                 {
@@ -2185,6 +2183,28 @@ partial class ExpressionBuilderContext
             }
         }
 
+    }
+
+    private Expression ChangeTypeOnChoice(Expression operand, ChoiceTypeSpecifier operandChoiceTypeSpecifier, Type toType, bool strict)
+    {
+        Debug.Assert(operand.Type == typeof(object));
+        var expressionChoiceTypes = operandChoiceTypeSpecifier.choice.SelectToArray(ts => TypeFor(ts)!);
+        var caseExpressions = expressionChoiceTypes.Select(type =>
+        {
+            ParameterExpression parameter = Expression.Parameter(type, "o");
+            Expression body = ChangeType(parameter, toType, out var conversion);
+            if (conversion == TypeConversion.NoMatch)
+            {
+                _logger.Log(LogLevel.Warning, $"Choice type conversion omitted, there is no conversion from {type.ToCSharpString()} to {toType.ToCSharpString()}.");
+                return null;
+            }
+            return body;
+        })
+        .OfType<Expression>()
+        .ToArray();
+
+        var elmChoiceAsExpression = new ElmChoiceAsExpression(operand, caseExpressions, toType, strict);
+        return elmChoiceAsExpression;
     }
 
     protected Expression Is(Is @is) // @TODO: Cast - Is
