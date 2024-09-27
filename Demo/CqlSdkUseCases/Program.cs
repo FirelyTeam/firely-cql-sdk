@@ -20,23 +20,23 @@ Console.WriteLine("Generate LibrarySet to C#");
 ServiceCollection services = new ServiceCollection();
 services.AddLogging(lb => lb.ClearProviders());
 services.AddCqlCodeGenerationServices();
-services.AddScoped<ElmToCSharp>();
-services.AddScoped<CSharpToBinary>();
+services.AddScoped<ElmToCSharpFactory>();
+services.AddScoped<CSharpToBinaryFactory>();
 await using var sp = services.BuildServiceProvider(true);
 using var spScope = sp.CreateScope();
-var cqlToCSharp = spScope.ServiceProvider.GetRequiredService<ElmToCSharp>();
-var csharpToBinary = spScope.ServiceProvider.GetRequiredService<CSharpToBinary>();
+var elmToCSharpFactory = spScope.ServiceProvider.GetRequiredService<ElmToCSharpFactory>();
+var cSharpToBinaryFactory = spScope.ServiceProvider.GetRequiredService<CSharpToBinaryFactory>();
 csharpDir.Create();
 dllDir.Create();
-ElmToCSharpContext elmToCSharpContext = cqlToCSharp.ForLibrarySet(librarySet);
-CSharpToBinaryContext librarySetCompileContext = csharpToBinary.ForLibrarySet(librarySet);
-await foreach (var (library, csharpCodeStream) in elmToCSharpContext.GenerateCSharp(CancellationToken.None))
+ElmToCSharp elmToCSharp = elmToCSharpFactory.ForLibrarySet(librarySet);
+CSharpToBinary cSharpToBinary = cSharpToBinaryFactory.ForLibrarySet(librarySet);
+await foreach (var (library, csharpCodeStream) in elmToCSharp.GenerateCSharp(CancellationToken.None))
 {
     Console.WriteLine($"Library: {library.GetVersionedIdentifier()}");
     await using var fileWriter = File.OpenWrite(Path.Combine(csharpDir.FullName, $"{library.identifier}.g.cs"));
     csharpCodeStream.CopyTo(fileWriter);
 
-    var assemblyStream = librarySetCompileContext.CompileToAssembly(library, csharpCodeStream);
+    var assemblyStream = cSharpToBinary.CompileToAssembly(library, csharpCodeStream);
     await using var dllWriter = File.OpenWrite(Path.Combine(dllDir.FullName, $"{library.identifier}.dll"));
     assemblyStream.CopyTo(dllWriter);
 }
@@ -45,12 +45,12 @@ await foreach (var (library, csharpCodeStream) in elmToCSharpContext.GenerateCSh
 Console.WriteLine("Goodbye");
 
 
-public class CSharpToBinaryContext
+public class CSharpToBinary
 {
     private readonly AssemblyCompiler _assemblyCompiler;
     private readonly Dictionary<string, AssemblyData> _results;
 
-    internal CSharpToBinaryContext(
+    internal CSharpToBinary(
         AssemblyCompiler assemblyCompiler,
         LibrarySet librarySet)
     {
@@ -70,20 +70,20 @@ public class CSharpToBinaryContext
 }
 
 
-internal class CSharpToBinary(
+internal class CSharpToBinaryFactory(
     AssemblyCompiler assemblyCompiler)
 {
-    public CSharpToBinaryContext ForLibrarySet(LibrarySet librarySet) =>
-        new CSharpToBinaryContext(assemblyCompiler, librarySet);
+    public CSharpToBinary ForLibrarySet(LibrarySet librarySet) =>
+        new CSharpToBinary(assemblyCompiler, librarySet);
 }
 
-public class ElmToCSharpContext
+public class ElmToCSharp
 {
     private readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
     private readonly CSharpLibrarySetToStreamsWriter _cSharpLibrarySetToStreamsWriter;
     private readonly LibrarySet _librarySet;
 
-    internal ElmToCSharpContext(
+    internal ElmToCSharp(
         LibrarySetExpressionBuilder librarySetExpressionBuilder,
         CSharpLibrarySetToStreamsWriter cSharpLibrarySetToStreamsWriter,
         LibrarySet librarySet)
@@ -142,10 +142,10 @@ public class ElmToCSharpContext
 
 }
 
-internal class ElmToCSharp(
+internal class ElmToCSharpFactory(
     LibrarySetExpressionBuilder librarySetExpressionBuilder,
     CSharpLibrarySetToStreamsWriter cSharpLibrarySetToStreamsWriter)
 {
-    public ElmToCSharpContext ForLibrarySet(LibrarySet librarySet) =>
-        new ElmToCSharpContext(librarySetExpressionBuilder, cSharpLibrarySetToStreamsWriter, librarySet);
+    public ElmToCSharp ForLibrarySet(LibrarySet librarySet) =>
+        new ElmToCSharp(librarySetExpressionBuilder, cSharpLibrarySetToStreamsWriter, librarySet);
 }
