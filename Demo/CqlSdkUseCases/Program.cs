@@ -32,17 +32,20 @@ ElmToCSharp elmToCSharp = elmToCSharpFactory.ForLibrarySet(librarySet);
 CSharpToBinary cSharpToBinary = cSharpToBinaryFactory.ForLibrarySet(librarySet);
 await foreach (var (library, csharpCodeStream) in elmToCSharp.GenerateCSharp(CancellationToken.None))
 {
-    Console.WriteLine($"Library: {library.GetVersionedIdentifier()}");
-    await using var fileWriter = File.OpenWrite(Path.Combine(csharpDir.FullName, $"{library.identifier}.g.cs"));
+    var libraryVersionedIdentifier = library.GetVersionedIdentifier();
+
+    Console.WriteLine($"Library: {libraryVersionedIdentifier}");
+    await using var fileWriter = File.OpenWrite(Path.Combine(csharpDir.FullName, $"{libraryVersionedIdentifier}.g.cs"));
     csharpCodeStream.CopyTo(fileWriter);
 
     var assemblyStream = cSharpToBinary.CompileToAssembly(library, csharpCodeStream);
-    await using var dllWriter = File.OpenWrite(Path.Combine(dllDir.FullName, $"{library.identifier}.dll"));
+    await using var dllWriter = File.OpenWrite(Path.Combine(dllDir.FullName, $"{libraryVersionedIdentifier}.dll"));
     assemblyStream.CopyTo(dllWriter);
 }
 
 
 Console.WriteLine("Goodbye");
+
 
 
 public class CSharpToBinary
