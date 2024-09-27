@@ -95,7 +95,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             HashSet<string> previousTypes = new();
             foreach (var e in cae.SwitchCaseExpressions)
             {
-                var convertExpressionParamType = _typeToCSharpConverter.ToCSharp(e.Type);
+                var convertExpressionParamType = _typeToCSharpConverter.ToCSharp(e.Type)
+                                                                       .TrimEnd('?') //Make non-nullable
+                                                                       ;
                 if (!previousTypes.Add(convertExpressionParamType))
                 {
                     continue;

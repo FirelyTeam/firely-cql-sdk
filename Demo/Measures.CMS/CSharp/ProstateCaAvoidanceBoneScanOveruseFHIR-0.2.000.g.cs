@@ -601,7 +601,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType am_ = LastGleasonScore?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			int? ao_ = an_ switch { null => null , int? a => context.Operators.ConvertStringToInteger(a)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
+			int? ao_ = an_ switch { null => null , int a => context.Operators.ConvertStringToInteger(a)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? ap_ = context.Operators.LessOrEqual(ao_, 6);
 
 			return ap_;

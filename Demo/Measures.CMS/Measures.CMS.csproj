@@ -23,8 +23,8 @@
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 
-	<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="../Cql/Build/CqlToElm.Targets.xml" />
-	<Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="../Cql/Build/ElmToCSharp.Targets.xml" />
+	<!-- <Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="../Cql/Build/CqlToElm.Targets.xml" /> -->
+	<!-- <Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="../Cql/Build/ElmToCSharp.Targets.xml" /> -->
 
   <ItemGroup>
     <Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />

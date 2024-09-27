@@ -1523,7 +1523,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		{
 			DataType ai_ = ORAI?.Value;
 			object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
-			int? ak_ = aj_ switch { null => null , int? b => context.Operators.ConvertStringToInteger(b)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
+			int? ak_ = aj_ switch { null => null , int b => context.Operators.ConvertStringToInteger(b)/* , CqlQuantity => ???, CqlConcept => ???, CqlInterval<CqlQuantity> => ???, CqlRatio => ???, SampledData => ???, CqlTime => ???, CqlDateTime => ???, CqlInterval<CqlDateTime> => ??? */, _ => throw new System.Diagnostics.UnreachableException() };
 			bool? al_ = context.Operators.GreaterOrEqual(ak_, 9);
 
 			return al_;
