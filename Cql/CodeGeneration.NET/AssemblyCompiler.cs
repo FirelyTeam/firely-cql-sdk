@@ -106,7 +106,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         foreach (var (libraryName, stream) in items)
                         {
                             var library = librarySet.GetLibrary(libraryName)!;
-                            var libraryAssembly = CompileNode(stream, results, librarySet, library, _referencesLazy.Value);
+                            var libraryAssembly = CompileNode(stream, results, librarySet, library);
                             results.Add(library.GetVersionedIdentifier()!, libraryAssembly);
                             _assemblyDataPostProcessor?.ProcessAssemblyData(library.GetVersionedIdentifier()!, libraryAssembly);
                         }
@@ -123,13 +123,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 
-        private static AssemblyData CompileNode(
+        internal AssemblyData CompileNode(
             Stream sourceCodeStream,
             Dictionary<string, AssemblyData> assemblies,
             LibrarySet librarySet,
-            Elm.Library library,
-            IEnumerable<Assembly> assemblyReferences)
+            Elm.Library library)
         {
+            var referenceAssemblies = _referencesLazy.Value;
             sourceCodeStream.Flush();
             sourceCodeStream.Seek(0, SeekOrigin.Begin);
             var reader = new StreamReader(sourceCodeStream);
@@ -137,7 +137,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var tree = SyntaxFactory.ParseSyntaxTree(sourceCode);
             var metadataReferences = new List<MetadataReference>();
             AddNetCoreReferences(metadataReferences);
-            foreach (var asm in assemblyReferences)
+            foreach (var asm in referenceAssemblies)
             {
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
             }

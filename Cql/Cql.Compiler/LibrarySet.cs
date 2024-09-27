@@ -33,7 +33,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// </summary>
     public string Name { get; }
 
-    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)> _libraryInfosByVersionedIdentifier; 
+    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)> _libraryInfosByVersionedIdentifier;
 
     private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) _calculatedState;
 
@@ -109,7 +109,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// <exception cref="CouldNotDeserializeFileError"></exception>
     /// <exception cref="CouldNotValidateLibraryError"></exception>
     /// <exception cref="LibraryMissingIncludeDefPathError"></exception>
-    public IReadOnlyCollection<Library> LoadLibraries(IReadOnlyCollection<FileInfo> files)
+    public IReadOnlyCollection<Library> LoadLibrariesFromFiles(IReadOnlyCollection<FileInfo> files)
     {
         // Loading libraries in parallel
 
@@ -350,5 +350,27 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
                 .TopologicallySortedLibraries
                 .Select(lib => KeyValuePair.Create(lib.GetVersionedIdentifier(true)!, lib))
                 .GetEnumerator();
+    }
+
+    /// <summary>
+    /// Loads the libraries from the specified directory.
+    /// </summary>
+    /// <param name="elmInDirectory">The directory to load ELM json files from.</param>
+    /// <param name="elmFileSearchEnumerationOptions">The directory search options.</param>
+    /// <param name="includeFile">A selector on file info.</param>
+    /// <param name="includeLibrary">A selector on library.</param>
+    public void LoadLibrariesFromDirectory(
+        DirectoryInfo elmInDirectory,
+        EnumerationOptions? elmFileSearchEnumerationOptions = null,
+        Func<FileInfo, bool>? includeFile = null,
+        Func<Library, bool>? includeLibrary = null)
+    {
+        IEnumerable<FileInfo> elmFiles = elmInDirectory.GetFiles("*.json", elmFileSearchEnumerationOptions ?? new EnumerationOptions { });
+        if (includeFile is not null)
+            elmFiles = elmFiles.Where(includeFile);
+        IEnumerable<Library> elmLibraries = elmFiles.Select(elmFile => Library.LoadFromJson(elmFile, validate: true));
+        if (includeLibrary is not null)
+            elmLibraries = elmLibraries.Where(includeLibrary);
+        AddLibraries(elmLibraries);
     }
 }

@@ -65,7 +65,7 @@ namespace CoreTests
                 new(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json")
             ];
             var librarySet = new LibrarySet();
-            librarySet.LoadLibraries(files);
+            librarySet.LoadLibrariesFromFiles(files);
 
             var fdt = new FhirDateTime(2023, 12, 11, 9, 41, 30, TimeSpan.FromHours(-5));
             var fdts = fdt.ToString();
