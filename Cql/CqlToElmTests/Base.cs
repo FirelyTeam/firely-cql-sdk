@@ -25,7 +25,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static CqlToElmConverter DefaultConverter => ServiceProvider.GetCqlToElmConverter();
 
-        internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilderScoped();
+        internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilder();
 
         internal static CSharpLibrarySetToStreamsWriter SourceCodeWriter => ServiceProvider.GetCSharpLibrarySetToStreamsWriter();
 
@@ -99,7 +99,7 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static LibrarySetDefinitions BuildLibrarySetDefinitions(
             Library library)
         {
-            LibrarySetExpressionBuilder librarySetExpressionBuilder = ServiceProvider.GetLibrarySetExpressionBuilderScoped();
+            LibrarySetExpressionBuilder librarySetExpressionBuilder = ServiceProvider.GetLibrarySetExpressionBuilder();
 
             LibrarySet librarySet = new LibrarySet(library.GetVersionedIdentifier()!, library);
             DefinitionDictionary<LambdaExpression> definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);

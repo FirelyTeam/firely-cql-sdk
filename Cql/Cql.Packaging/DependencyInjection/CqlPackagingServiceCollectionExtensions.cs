@@ -38,7 +38,7 @@ internal static class CqlPackagingServiceCollectionExtensions
 
         services.TryAddSingleton<ResourcePackager>();
 
-        services.TryAddScoped<CqlToResourcePackagingPipeline>();
+        services.TryAddSingleton<CqlToResourcePackagingPipeline>();
 
         return services;
     }

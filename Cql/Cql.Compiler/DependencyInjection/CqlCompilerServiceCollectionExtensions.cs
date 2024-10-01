@@ -43,15 +43,15 @@ internal static class CqlCompilerServiceCollectionExtensions
 
         services.TryAddSingleton<CqlContextBinder>();
 
-        services.TryAddScoped<TupleBuilderCache>();
+        services.TryAddSingleton<TupleBuilderCache>();
 
-        services.TryAddScoped<LibrarySetExpressionBuilder>();
+        services.TryAddSingleton<LibrarySetExpressionBuilder>();
 
-        services.TryAddScoped<LibraryExpressionBuilder>();
+        services.TryAddSingleton<LibraryExpressionBuilder>();
 
         services.TryAddSingleton<ExpressionBuilderSettings>(_ => ExpressionBuilderSettings.Default); // TODO: Must move to configuration
 
-        services.TryAddScoped<ExpressionBuilder>();
+        services.TryAddSingleton<ExpressionBuilder>();
 
         return services;
     }

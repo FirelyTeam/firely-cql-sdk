@@ -8,44 +8,77 @@ using Microsoft.Extensions.Logging;
 using static Hl7.Cql.CodeGeneration.NET.CSharpSourceCodeStep;
 
 // Load the ELM files from the directory
-Console.WriteLine("Loading ELM into LibrarySet");
-DirectoryInfo elmDir = new DirectoryInfo("C:\\Dev\\firely-cql-sdk\\LibrarySets\\Demo\\Elm");
-DirectoryInfo csharpDir = new DirectoryInfo("CSharp");
-DirectoryInfo dllDir = new DirectoryInfo("Dll");
-LibrarySet librarySet = new LibrarySet("Example Library");
-librarySet.LoadLibrariesFromDirectory(elmDir);
 
-// ELM -> C#
-Console.WriteLine("Generate LibrarySet to C#");
+CqlExampleInputArgs[] exampleInputArgs = [
+    new ("Demo", "C:\\Dev\\firely-cql-sdk\\LibrarySets\\Demo\\Elm", "Demo\\CSharp", "Demo\\Dll"),
+    new ("CMS", "C:\\Dev\\firely-cql-sdk\\LibrarySets\\CMS\\Elm", "CMS\\CSharp", "CSM\\Dll", FileFilter:IncludeFilesForCms()),
+];
+
 ServiceCollection services = new ServiceCollection();
 services.AddLogging(lb => lb.ClearProviders());
 services.AddCqlCodeGenerationServices();
-services.AddScoped<ElmToCSharpFactory>();
-services.AddScoped<CSharpToBinaryFactory>();
-await using var sp = services.BuildServiceProvider(true);
-using var spScope = sp.CreateScope();
-var elmToCSharpFactory = spScope.ServiceProvider.GetRequiredService<ElmToCSharpFactory>();
-var cSharpToBinaryFactory = spScope.ServiceProvider.GetRequiredService<CSharpToBinaryFactory>();
-csharpDir.Create();
-dllDir.Create();
-ElmToCSharp elmToCSharp = elmToCSharpFactory.ForLibrarySet(librarySet);
-CSharpToBinary cSharpToBinary = cSharpToBinaryFactory.ForLibrarySet(librarySet);
-await foreach (var (library, csharpCodeStream) in elmToCSharp.GenerateCSharp(CancellationToken.None))
+services.AddSingleton<ElmToCSharpFactory>();
+services.AddSingleton<CSharpToBinaryFactory>();
+var sp = services.BuildServiceProvider();
+var elmToCSharpFactory = sp.GetRequiredService<ElmToCSharpFactory>();
+var cSharpToBinaryFactory = sp.GetRequiredService<CSharpToBinaryFactory>();
+
+foreach (var cqlExampleInputArg in exampleInputArgs)
 {
-    var libraryVersionedIdentifier = library.GetVersionedIdentifier();
+    Console.WriteLine($"Loading ELM into LibrarySet '{cqlExampleInputArg.Name}'");
+    DirectoryInfo elmDir = new DirectoryInfo(cqlExampleInputArg.ElmDir);
+    DirectoryInfo csharpDir = new DirectoryInfo(cqlExampleInputArg.CSharpDir);
+    DirectoryInfo dllDir = new DirectoryInfo(cqlExampleInputArg.DllDir);
+    LibrarySet librarySet = new LibrarySet(cqlExampleInputArg.Name);
+    librarySet.LoadLibrariesFromDirectory(elmDir, includeFile:cqlExampleInputArg.FileFilter);
 
-    Console.WriteLine($"Library: {libraryVersionedIdentifier}");
-    await using var fileWriter = File.OpenWrite(Path.Combine(csharpDir.FullName, $"{libraryVersionedIdentifier}.g.cs"));
-    csharpCodeStream.CopyTo(fileWriter);
+    ElmToCSharp elmToCSharp = elmToCSharpFactory.ForLibrarySet(librarySet);
+    CSharpToBinary cSharpToBinary = cSharpToBinaryFactory.ForLibrarySet(librarySet);
 
-    var assemblyStream = cSharpToBinary.CompileToAssembly(library, csharpCodeStream);
-    await using var dllWriter = File.OpenWrite(Path.Combine(dllDir.FullName, $"{libraryVersionedIdentifier}.dll"));
-    assemblyStream.CopyTo(dllWriter);
+    // ELM -> C#
+    Console.WriteLine("Generate LibrarySet to C#");
+    csharpDir.Create();
+    dllDir.Create();
+    await foreach (var (library, csharpCodeStream) in elmToCSharp.GenerateCSharp(CancellationToken.None))
+    {
+        var libraryVersionedIdentifier = library.GetVersionedIdentifier();
+
+        Console.WriteLine($"Library: {libraryVersionedIdentifier}");
+        await using var fileWriter = File.OpenWrite(Path.Combine(csharpDir.FullName, $"{libraryVersionedIdentifier}.g.cs"));
+        csharpCodeStream.CopyTo(fileWriter);
+
+        var assemblyStream = cSharpToBinary.CompileToAssembly(library, csharpCodeStream);
+        await using var dllWriter = File.OpenWrite(Path.Combine(dllDir.FullName, $"{libraryVersionedIdentifier}.dll"));
+        assemblyStream.CopyTo(dllWriter);
+    }
 }
-
 
 Console.WriteLine("Goodbye");
 
+Func<FileInfo, bool> IncludeFilesForCms()
+{
+    HashSet<string> hardcodedSkipCmsFiles =
+    [
+
+        // These contain a union between incompatible tuples,
+        // see https://chat.fhir.org/#narrow/stream/179220-cql/topic/Union.20of.20tuples.20with.20convertible.20types
+        "AntithromboticTherapyByEndofHospitalDay2FHIR.json",
+        "IntensiveCareUnitVenousThromboembolismProphylaxisFHIR.json",
+        "VenousThromboembolismProphylaxisFHIR.json",
+
+        // These uses choice types, move into a property on such a choice, and then calls an
+        // overloaded function, so we cannot find out which overload to call.
+        // A solution is to either a) Introduce choice types in our system instead of object,
+        // b) introduce runtime resolution, based on the runtime types of the arguments when one of
+        // the arguments is a choice (=object).
+        "InitiationandEngagementofSubstanceUseDisorderTreatmentFHIR.json",
+        "PCSBMIScreenAndFollowUpFHIR.json",
+    ];
+
+    return file => !hardcodedSkipCmsFiles.Contains(file.Name);
+}
+
+public record CqlExampleInputArgs(string Name, string ElmDir, string CSharpDir, string DllDir, Func<FileInfo, bool>? FileFilter = null);
 
 
 public class CSharpToBinary
@@ -71,7 +104,6 @@ public class CSharpToBinary
         return new MemoryStream(assemblyData.Binary);
     }
 }
-
 
 internal class CSharpToBinaryFactory(
     AssemblyCompiler assemblyCompiler)
