@@ -14,14 +14,7 @@ CqlExampleInputArgs[] exampleInputArgs = [
     new ("CMS", "C:\\Dev\\firely-cql-sdk\\LibrarySets\\CMS\\Elm", "CMS\\CSharp", "CSM\\Dll", FileFilter:IncludeFilesForCms()),
 ];
 
-ServiceCollection services = new ServiceCollection();
-services.AddLogging(lb => lb.ClearProviders());
-services.AddCqlCodeGenerationServices();
-services.AddSingleton<ElmToCSharpFactory>();
-services.AddSingleton<CSharpToBinaryFactory>();
-var sp = services.BuildServiceProvider();
-var elmToCSharpFactory = sp.GetRequiredService<ElmToCSharpFactory>();
-var cSharpToBinaryFactory = sp.GetRequiredService<CSharpToBinaryFactory>();
+CqlSdk cqlSdk = CqlSdk.Build();
 
 foreach (var cqlExampleInputArg in exampleInputArgs)
 {
@@ -32,8 +25,8 @@ foreach (var cqlExampleInputArg in exampleInputArgs)
     LibrarySet librarySet = new LibrarySet(cqlExampleInputArg.Name);
     librarySet.LoadLibrariesFromDirectory(elmDir, includeFile:cqlExampleInputArg.FileFilter);
 
-    ElmToCSharp elmToCSharp = elmToCSharpFactory.ForLibrarySet(librarySet);
-    CSharpToBinary cSharpToBinary = cSharpToBinaryFactory.ForLibrarySet(librarySet);
+    ElmToCSharp elmToCSharp = cqlSdk.ElmToCSharpFactory.ForLibrarySet(librarySet);
+    CSharpToBinary cSharpToBinary = cqlSdk.CSharpToBinaryFactory.ForLibrarySet(librarySet);
 
     // ELM -> C#
     Console.WriteLine("Generate LibrarySet to C#");
@@ -78,8 +71,33 @@ Func<FileInfo, bool> IncludeFilesForCms()
     return file => !hardcodedSkipCmsFiles.Contains(file.Name);
 }
 
-public record CqlExampleInputArgs(string Name, string ElmDir, string CSharpDir, string DllDir, Func<FileInfo, bool>? FileFilter = null);
+internal class CqlSdk
+{
+    public ElmToCSharpFactory ElmToCSharpFactory { get; }
+    public CSharpToBinaryFactory CSharpToBinaryFactory { get; }
 
+    public CqlSdk(
+        ElmToCSharpFactory elmToCSharpFactory,
+        CSharpToBinaryFactory cSharpToBinaryFactory)
+    {
+        ElmToCSharpFactory = elmToCSharpFactory;
+        CSharpToBinaryFactory = cSharpToBinaryFactory;
+    }
+
+    public static CqlSdk Build()
+    {
+        ServiceCollection services = new ServiceCollection();
+        services.AddLogging(lb => lb.ClearProviders());
+        services.AddCqlCodeGenerationServices();
+        services.AddSingleton<ElmToCSharpFactory>();
+        services.AddSingleton<CSharpToBinaryFactory>();
+        services.AddSingleton<CqlSdk>();
+        var sp = services.BuildServiceProvider();
+        return sp.GetRequiredService<CqlSdk>();
+    }
+}
+
+public record CqlExampleInputArgs(string Name, string ElmDir, string CSharpDir, string DllDir, Func<FileInfo, bool>? FileFilter = null);
 
 public class CSharpToBinary
 {
