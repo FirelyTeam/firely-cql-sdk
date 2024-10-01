@@ -1,46 +1,35 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Reactive.Linq;
 using CqlSdkUseCases;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 
 // Load the ELM files from the directory
 
-ProgramInputArgs[] exampleInputArgs = [
+ProgramInputArgs[] inputArgsArr = [
     new ("Demo", "C:\\Dev\\firely-cql-sdk\\LibrarySets\\Demo\\Elm", "Demo\\CSharp", "Demo\\Dll"),
     new ("CMS", "C:\\Dev\\firely-cql-sdk\\LibrarySets\\CMS\\Elm", "CMS\\CSharp", "CSM\\Dll", FileFilter:IncludeFilesForCms()),
 ];
 
+var ct = CancellationToken.None;
 CqlSdk cqlSdk = CqlSdk.Build();
 
-foreach (var cqlExampleInputArg in exampleInputArgs)
+foreach (var inputArgs in inputArgsArr)
 {
-    Console.WriteLine($"Loading ELM into LibrarySet '{cqlExampleInputArg.Name}'");
-    DirectoryInfo elmDir = new DirectoryInfo(cqlExampleInputArg.ElmDir);
-    DirectoryInfo csharpDir = new DirectoryInfo(cqlExampleInputArg.CSharpDir);
-    DirectoryInfo dllDir = new DirectoryInfo(cqlExampleInputArg.DllDir);
-    LibrarySet librarySet = new LibrarySet(cqlExampleInputArg.Name);
-    librarySet.LoadLibrariesFromDirectory(elmDir, includeFile:cqlExampleInputArg.FileFilter);
+    Console.WriteLine($"Loading ELM into LibrarySet '{inputArgs.Name}'");
+    DirectoryInfo elmDir = new DirectoryInfo(inputArgs.ElmDir);
+    DirectoryInfo csharpDir = new DirectoryInfo(inputArgs.CSharpDir);
+    DirectoryInfo dllDir = new DirectoryInfo(inputArgs.DllDir);
 
-    ElmToCSharpSdk elmToCSharpSdk = cqlSdk.ElmToCSharpSdkProvider.ForLibrarySet(librarySet);
-    CSharpToBinarySdk cSharpToBinarySdk = cqlSdk.CSharpToBinarySdkProvider.ForLibrarySet(librarySet);
+    csharpDir.Recreate();
+    dllDir.Recreate();
 
-    // ELM -> C#
-    Console.WriteLine("Generate LibrarySet to C#");
-    csharpDir.Create();
-    dllDir.Create();
-    await foreach (var (library, csharpCodeStream) in elmToCSharpSdk.GenerateCSharp(CancellationToken.None))
-    {
-        var libraryVersionedIdentifier = library.GetVersionedIdentifier();
+    LibrarySet librarySet = new LibrarySet(inputArgs.Name);
+    librarySet.LoadLibrariesFromDirectory(elmDir, includeFile: inputArgs.FileFilter);
 
-        Console.WriteLine($"Library: {libraryVersionedIdentifier}");
-        await using var fileWriter = File.OpenWrite(Path.Combine(csharpDir.FullName, $"{libraryVersionedIdentifier}.g.cs"));
-        csharpCodeStream.CopyTo(fileWriter);
-
-        var assemblyStream = cSharpToBinarySdk.CompileToAssembly(library, csharpCodeStream);
-        await using var dllWriter = File.OpenWrite(Path.Combine(dllDir.FullName, $"{libraryVersionedIdentifier}.dll"));
-        assemblyStream.CopyTo(dllWriter);
-    }
+    //await ExampleWithAsyncEnumerable(librarySet, cqlSdk, csharpDir, dllDir);
+    await ExampleWithAsyncObservable(librarySet, cqlSdk, csharpDir, dllDir);
 }
 
 Console.WriteLine("Goodbye");
@@ -66,4 +55,57 @@ Func<FileInfo, bool> IncludeFilesForCms()
     ];
 
     return file => !hardcodedSkipCmsFiles.Contains(file.Name);
+}
+
+
+async Task ExampleWithAsyncObservable(LibrarySet librarySet, CqlSdk cqlSdk, DirectoryInfo csharpDir, DirectoryInfo dllDir)
+{
+    ElmToCSharpSdk elmToCSharpSdk = cqlSdk.ElmToCSharpSdkProvider.ForLibrarySet(librarySet);
+    CSharpToBinarySdk cSharpToBinarySdk = cqlSdk.CSharpToBinarySdkProvider.ForLibrarySet(librarySet);
+
+    await elmToCSharpSdk
+        .GenerateCSharpObservable(ct)
+        .ForEachAsync(async item =>
+        {
+            var libraryVersionedIdentifier = item.library.GetVersionedIdentifier();
+
+            Console.WriteLine($"Library: {libraryVersionedIdentifier}");
+            await using var fileWriter = File.OpenWrite(Path.Combine(csharpDir.FullName, $"{libraryVersionedIdentifier}.g.cs"));
+            item.csharpCodeStream.CopyTo(fileWriter);
+
+            var assemblyStream = cSharpToBinarySdk.CompileToAssembly(item.library, item.csharpCodeStream);
+            await using var dllWriter = File.OpenWrite(Path.Combine(dllDir.FullName, $"{libraryVersionedIdentifier}.dll"));
+            assemblyStream.CopyTo(dllWriter);
+        }, ct);
+}
+
+async Task ExampleWithAsyncEnumerable(LibrarySet librarySet, CqlSdk cqlSdk, DirectoryInfo csharpDir, DirectoryInfo dllDir)
+{
+    ElmToCSharpSdk elmToCSharpSdk = cqlSdk.ElmToCSharpSdkProvider.ForLibrarySet(librarySet);
+    CSharpToBinarySdk cSharpToBinarySdk = cqlSdk.CSharpToBinarySdkProvider.ForLibrarySet(librarySet);
+
+    // ELM -> C#
+    Console.WriteLine("Generate LibrarySet to C#");
+    await foreach (var (library, csharpCodeStream) in elmToCSharpSdk.GenerateCSharpAsyncEnumerable(ct))
+    {
+        var libraryVersionedIdentifier = library.GetVersionedIdentifier();
+
+        Console.WriteLine($"Library: {libraryVersionedIdentifier}");
+        await using var fileWriter = File.OpenWrite(Path.Combine(csharpDir.FullName, $"{libraryVersionedIdentifier}.g.cs"));
+        csharpCodeStream.CopyTo(fileWriter);
+
+        var assemblyStream = cSharpToBinarySdk.CompileToAssembly(library, csharpCodeStream);
+        await using var dllWriter = File.OpenWrite(Path.Combine(dllDir.FullName, $"{libraryVersionedIdentifier}.dll"));
+        assemblyStream.CopyTo(dllWriter);
+    }
+}
+
+file static class LocalExtensions
+{
+    public static void Recreate(this DirectoryInfo d)
+    {
+        if (d.Exists)
+            d.Delete(true);
+        d.Create();
+    }
 }
