@@ -13,8 +13,11 @@ namespace Hl7.Cql.CqlToElm
     /// <summary>
     /// Converts CQL To ELM.
     /// </summary>
-    internal class CqlToElmConverter
+    public class CqlToElmConverter
     {
+        /// <summary>
+        /// Converts CQL To ELM.
+        /// </summary>
         public CqlToElmConverter(
             IServiceProvider services,
             ILogger<CqlToElmConverter> logger)
@@ -23,9 +26,15 @@ namespace Hl7.Cql.CqlToElm
             Logger = logger;
         }
 
+        /// <summary>
+        /// CQL to Elm IServiceProvider
+        /// </summary>
         public IServiceProvider Services { get; }
+        /// <summary>
+        /// CQL to Elm Logger
+        /// </summary>
         public ILogger<CqlToElmConverter> Logger { get; }
-
+            
         /// <summary>
         /// Converts the CQL contained in <paramref name="cqlLibrary"/> to an ELM <see cref="Library"/>.
         /// </summary>
