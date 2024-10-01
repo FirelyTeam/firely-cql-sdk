@@ -14,266 +14,115 @@ using Task = Hl7.Fhir.Model.Task;
 public class HybridHWRFHIR_1_3_005
 {
 
-
-    internal CqlContext context;
-
-    #region Cached values
-
-    internal Lazy<CqlValueSet> __Bicarbonate_lab_test;
-    internal Lazy<CqlValueSet> __Body_temperature;
-    internal Lazy<CqlValueSet> __Body_weight;
-    internal Lazy<CqlValueSet> __Creatinine_lab_test;
-    internal Lazy<CqlValueSet> __Emergency_Department_Visit;
-    internal Lazy<CqlValueSet> __Encounter_Inpatient;
-    internal Lazy<CqlValueSet> __Ethnicity;
-    internal Lazy<CqlValueSet> __Glucose_lab_test;
-    internal Lazy<CqlValueSet> __Hematocrit_lab_test;
-    internal Lazy<CqlValueSet> __Medicare_payer;
-    internal Lazy<CqlValueSet> __Observation_Services;
-    internal Lazy<CqlValueSet> __ONC_Administrative_Sex;
-    internal Lazy<CqlValueSet> __Payer;
-    internal Lazy<CqlValueSet> __Potassium_lab_test;
-    internal Lazy<CqlValueSet> __Race;
-    internal Lazy<CqlValueSet> __Sodium_lab_test;
-    internal Lazy<CqlValueSet> __White_blood_cells_count_lab_test;
-    internal Lazy<CqlCode> __Birth_date;
-    internal Lazy<CqlCode> __Heart_rate;
-    internal Lazy<CqlCode> __Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry;
-    internal Lazy<CqlCode> __Respiratory_rate;
-    internal Lazy<CqlCode> __Systolic_blood_pressure;
-    internal Lazy<CqlCode[]> __LOINC_2_69;
-    internal Lazy<CqlInterval<CqlDateTime>> __Measurement_Period;
-    internal Lazy<Patient> __Patient;
-    internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
-    internal Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
-    internal Lazy<IEnumerable<Coding>> __SDE_Race;
-    internal Lazy<CqlCode> __SDE_Sex;
-    internal Lazy<IEnumerable<Encounter>> __Inpatient_Encounters;
-    internal Lazy<IEnumerable<Encounter>> __Initial_Population;
-    internal Lazy<IEnumerable<string>> __Results;
-
-    #endregion
-    public HybridHWRFHIR_1_3_005(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-        FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
-        SupplementalDataElementsFHIR4_2_0_000 = new SupplementalDataElementsFHIR4_2_0_000(context);
-        MATGlobalCommonFunctionsFHIR4_6_1_000 = new MATGlobalCommonFunctionsFHIR4_6_1_000(context);
-
-        __Bicarbonate_lab_test = new Lazy<CqlValueSet>(this.Bicarbonate_lab_test_Value);
-        __Body_temperature = new Lazy<CqlValueSet>(this.Body_temperature_Value);
-        __Body_weight = new Lazy<CqlValueSet>(this.Body_weight_Value);
-        __Creatinine_lab_test = new Lazy<CqlValueSet>(this.Creatinine_lab_test_Value);
-        __Emergency_Department_Visit = new Lazy<CqlValueSet>(this.Emergency_Department_Visit_Value);
-        __Encounter_Inpatient = new Lazy<CqlValueSet>(this.Encounter_Inpatient_Value);
-        __Ethnicity = new Lazy<CqlValueSet>(this.Ethnicity_Value);
-        __Glucose_lab_test = new Lazy<CqlValueSet>(this.Glucose_lab_test_Value);
-        __Hematocrit_lab_test = new Lazy<CqlValueSet>(this.Hematocrit_lab_test_Value);
-        __Medicare_payer = new Lazy<CqlValueSet>(this.Medicare_payer_Value);
-        __Observation_Services = new Lazy<CqlValueSet>(this.Observation_Services_Value);
-        __ONC_Administrative_Sex = new Lazy<CqlValueSet>(this.ONC_Administrative_Sex_Value);
-        __Payer = new Lazy<CqlValueSet>(this.Payer_Value);
-        __Potassium_lab_test = new Lazy<CqlValueSet>(this.Potassium_lab_test_Value);
-        __Race = new Lazy<CqlValueSet>(this.Race_Value);
-        __Sodium_lab_test = new Lazy<CqlValueSet>(this.Sodium_lab_test_Value);
-        __White_blood_cells_count_lab_test = new Lazy<CqlValueSet>(this.White_blood_cells_count_lab_test_Value);
-        __Birth_date = new Lazy<CqlCode>(this.Birth_date_Value);
-        __Heart_rate = new Lazy<CqlCode>(this.Heart_rate_Value);
-        __Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry = new Lazy<CqlCode>(this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry_Value);
-        __Respiratory_rate = new Lazy<CqlCode>(this.Respiratory_rate_Value);
-        __Systolic_blood_pressure = new Lazy<CqlCode>(this.Systolic_blood_pressure_Value);
-        __LOINC_2_69 = new Lazy<CqlCode[]>(this.LOINC_2_69_Value);
-        __Measurement_Period = new Lazy<CqlInterval<CqlDateTime>>(this.Measurement_Period_Value);
-        __Patient = new Lazy<Patient>(this.Patient_Value);
-        __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value);
-        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value);
-        __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value);
-        __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value);
-        __Inpatient_Encounters = new Lazy<IEnumerable<Encounter>>(this.Inpatient_Encounters_Value);
-        __Initial_Population = new Lazy<IEnumerable<Encounter>>(this.Initial_Population_Value);
-        __Results = new Lazy<IEnumerable<string>>(this.Results_Value);
-    }
-    #region Dependencies
-
-    public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
-    public SupplementalDataElementsFHIR4_2_0_000 SupplementalDataElementsFHIR4_2_0_000 { get; }
-    public MATGlobalCommonFunctionsFHIR4_6_1_000 MATGlobalCommonFunctionsFHIR4_6_1_000 { get; }
-
-    #endregion
-
-	private CqlValueSet Bicarbonate_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", null);
+    public static HybridHWRFHIR_1_3_005 Instance { get; }  = new();
 
     [CqlDeclaration("Bicarbonate lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139")]
-	public CqlValueSet Bicarbonate_lab_test() => 
-		__Bicarbonate_lab_test.Value;
-
-	private CqlValueSet Body_temperature_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.152", null);
+	public CqlValueSet Bicarbonate_lab_test(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", null);
 
     [CqlDeclaration("Body temperature")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.152")]
-	public CqlValueSet Body_temperature() => 
-		__Body_temperature.Value;
-
-	private CqlValueSet Body_weight_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.159", null);
+	public CqlValueSet Body_temperature(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.152", null);
 
     [CqlDeclaration("Body weight")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.159")]
-	public CqlValueSet Body_weight() => 
-		__Body_weight.Value;
-
-	private CqlValueSet Creatinine_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363", null);
+	public CqlValueSet Body_weight(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.159", null);
 
     [CqlDeclaration("Creatinine lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363")]
-	public CqlValueSet Creatinine_lab_test() => 
-		__Creatinine_lab_test.Value;
-
-	private CqlValueSet Emergency_Department_Visit_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+	public CqlValueSet Creatinine_lab_test(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363", null);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public CqlValueSet Emergency_Department_Visit() => 
-		__Emergency_Department_Visit.Value;
-
-	private CqlValueSet Encounter_Inpatient_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+	public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient() => 
-		__Encounter_Inpatient.Value;
-
-	private CqlValueSet Ethnicity_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
-	public CqlValueSet Ethnicity() => 
-		__Ethnicity.Value;
-
-	private CqlValueSet Glucose_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.134", null);
+	public CqlValueSet Ethnicity(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
 
     [CqlDeclaration("Glucose lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.134")]
-	public CqlValueSet Glucose_lab_test() => 
-		__Glucose_lab_test.Value;
-
-	private CqlValueSet Hematocrit_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", null);
+	public CqlValueSet Glucose_lab_test(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.134", null);
 
     [CqlDeclaration("Hematocrit lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114")]
-	public CqlValueSet Hematocrit_lab_test() => 
-		__Hematocrit_lab_test.Value;
-
-	private CqlValueSet Medicare_payer_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10", null);
+	public CqlValueSet Hematocrit_lab_test(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", null);
 
     [CqlDeclaration("Medicare payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10")]
-	public CqlValueSet Medicare_payer() => 
-		__Medicare_payer.Value;
-
-	private CqlValueSet Observation_Services_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
+	public CqlValueSet Medicare_payer(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10", null);
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public CqlValueSet Observation_Services() => 
-		__Observation_Services.Value;
-
-	private CqlValueSet ONC_Administrative_Sex_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
+	public CqlValueSet Observation_Services(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
-	public CqlValueSet ONC_Administrative_Sex() => 
-		__ONC_Administrative_Sex.Value;
-
-	private CqlValueSet Payer_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
+	public CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
 
     [CqlDeclaration("Payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
-	public CqlValueSet Payer() => 
-		__Payer.Value;
-
-	private CqlValueSet Potassium_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.117", null);
+	public CqlValueSet Payer(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
 
     [CqlDeclaration("Potassium lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.117")]
-	public CqlValueSet Potassium_lab_test() => 
-		__Potassium_lab_test.Value;
-
-	private CqlValueSet Race_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
+	public CqlValueSet Potassium_lab_test(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.117", null);
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
-	public CqlValueSet Race() => 
-		__Race.Value;
-
-	private CqlValueSet Sodium_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119", null);
+	public CqlValueSet Race(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
 
     [CqlDeclaration("Sodium lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119")]
-	public CqlValueSet Sodium_lab_test() => 
-		__Sodium_lab_test.Value;
-
-	private CqlValueSet White_blood_cells_count_lab_test_Value() => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", null);
+	public CqlValueSet Sodium_lab_test(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119", null);
 
     [CqlDeclaration("White blood cells count lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129")]
-	public CqlValueSet White_blood_cells_count_lab_test() => 
-		__White_blood_cells_count_lab_test.Value;
-
-	private CqlCode Birth_date_Value() => 
-		new CqlCode("21112-8", "http://loinc.org", null, null);
+	public CqlValueSet White_blood_cells_count_lab_test(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", null);
 
     [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date() => 
-		__Birth_date.Value;
-
-	private CqlCode Heart_rate_Value() => 
-		new CqlCode("8867-4", "http://loinc.org", null, null);
+	public CqlCode Birth_date(CqlContext context) => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
 
     [CqlDeclaration("Heart rate")]
-	public CqlCode Heart_rate() => 
-		__Heart_rate.Value;
-
-	private CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry_Value() => 
-		new CqlCode("59408-5", "http://loinc.org", null, null);
+	public CqlCode Heart_rate(CqlContext context) => 
+		new CqlCode("8867-4", "http://loinc.org", null, null);
 
     [CqlDeclaration("Oxygen saturation in Arterial blood by Pulse oximetry")]
-	public CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry() => 
-		__Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry.Value;
-
-	private CqlCode Respiratory_rate_Value() => 
-		new CqlCode("9279-1", "http://loinc.org", null, null);
+	public CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry(CqlContext context) => 
+		new CqlCode("59408-5", "http://loinc.org", null, null);
 
     [CqlDeclaration("Respiratory rate")]
-	public CqlCode Respiratory_rate() => 
-		__Respiratory_rate.Value;
-
-	private CqlCode Systolic_blood_pressure_Value() => 
-		new CqlCode("8480-6", "http://loinc.org", null, null);
+	public CqlCode Respiratory_rate(CqlContext context) => 
+		new CqlCode("9279-1", "http://loinc.org", null, null);
 
     [CqlDeclaration("Systolic blood pressure")]
-	public CqlCode Systolic_blood_pressure() => 
-		__Systolic_blood_pressure.Value;
+	public CqlCode Systolic_blood_pressure(CqlContext context) => 
+		new CqlCode("8480-6", "http://loinc.org", null, null);
 
-	private CqlCode[] LOINC_2_69_Value()
+    [CqlDeclaration("LOINC:2.69")]
+	public CqlCode[] LOINC_2_69(CqlContext context)
 	{
 		var a_ = new CqlCode[]
 		{
@@ -287,11 +136,8 @@ public class HybridHWRFHIR_1_3_005
 		return a_;
 	}
 
-    [CqlDeclaration("LOINC:2.69")]
-	public CqlCode[] LOINC_2_69() => 
-		__LOINC_2_69.Value;
-
-	private CqlInterval<CqlDateTime> Measurement_Period_Value()
+    [CqlDeclaration("Measurement Period")]
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		var a_ = context.Operators.ConvertIntegerToDecimal(default);
 		var b_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
@@ -302,11 +148,8 @@ public class HybridHWRFHIR_1_3_005
 		return (CqlInterval<CqlDateTime>)f_;
 	}
 
-    [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period() => 
-		__Measurement_Period.Value;
-
-	private Patient Patient_Value()
+    [CqlDeclaration("Patient")]
+	public Patient Patient(CqlContext context)
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
 		var b_ = context.Operators.SingleOrNull<Patient>(a_);
@@ -314,56 +157,40 @@ public class HybridHWRFHIR_1_3_005
 		return b_;
 	}
 
-    [CqlDeclaration("Patient")]
-	public Patient Patient() => 
-		__Patient.Value;
-
-	private IEnumerable<Coding> SDE_Ethnicity_Value()
-	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
-
-		return a_;
-	}
-
     [CqlDeclaration("SDE Ethnicity")]
-	public IEnumerable<Coding> SDE_Ethnicity() => 
-		__SDE_Ethnicity.Value;
-
-	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+		var a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
-		__SDE_Payer.Value;
-
-	private IEnumerable<Coding> SDE_Race_Value()
+	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer(CqlContext context)
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
+		var a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Race")]
-	public IEnumerable<Coding> SDE_Race() => 
-		__SDE_Race.Value;
-
-	private CqlCode SDE_Sex_Value()
+	public IEnumerable<Coding> SDE_Race(CqlContext context)
 	{
-		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
+		var a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
 
 		return a_;
 	}
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex() => 
-		__SDE_Sex.Value;
+	public CqlCode SDE_Sex(CqlContext context)
+	{
+		var a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
+
+		return a_;
+	}
 
     [CqlDeclaration("HospitalizationWithObservation")]
-	public CqlInterval<CqlDateTime> HospitalizationWithObservation(Encounter TheEncounter)
+	public CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
 	{
 		var a_ = new Encounter[]
 		{
@@ -371,19 +198,19 @@ public class HybridHWRFHIR_1_3_005
 		};
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
-			var e_ = this.Emergency_Department_Visit();
+			var e_ = this.Emergency_Department_Visit(context);
 			var f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, null);
 			bool? g_(Encounter LastED)
 			{
-				var ab_ = FHIRHelpers_4_0_001.ToInterval(LastED?.Period);
+				var ab_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, LastED?.Period);
 				var ac_ = context.Operators.End(ab_);
-				var ad_ = this.Observation_Services();
+				var ad_ = this.Observation_Services(context);
 				var ae_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? af_(Encounter LastObs)
 				{
-					var bq_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
+					var bq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, LastObs?.Period);
 					var br_ = context.Operators.End(bq_);
-					var bs_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+					var bs_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Visit?.Period);
 					var bt_ = context.Operators.Start(bs_);
 					var bu_ = context.Operators.Quantity(1m, "hour");
 					var bv_ = context.Operators.Subtract(bt_, bu_);
@@ -399,25 +226,25 @@ public class HybridHWRFHIR_1_3_005
 				var ag_ = context.Operators.WhereOrNull<Encounter>(ae_, af_);
 				object ah_(Encounter @this)
 				{
-					var ce_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+					var ce_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, @this?.Period);
 					var cf_ = context.Operators.End(ce_);
 
 					return cf_;
 				};
 				var ai_ = context.Operators.ListSortBy<Encounter>(ag_, ah_, System.ComponentModel.ListSortDirection.Ascending);
 				var aj_ = context.Operators.LastOfList<Encounter>(ai_);
-				var ak_ = FHIRHelpers_4_0_001.ToInterval(aj_?.Period);
+				var ak_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aj_?.Period);
 				var al_ = context.Operators.Start(ak_);
-				var am_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+				var am_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Visit?.Period);
 				var an_ = context.Operators.Start(am_);
 				var ao_ = context.Operators.Quantity(1m, "hour");
 				var ap_ = context.Operators.Subtract((al_ ?? an_), ao_);
 				var ar_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? as_(Encounter LastObs)
 				{
-					var cg_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
+					var cg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, LastObs?.Period);
 					var ch_ = context.Operators.End(cg_);
-					var ci_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+					var ci_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Visit?.Period);
 					var cj_ = context.Operators.Start(ci_);
 					var ck_ = context.Operators.Quantity(1m, "hour");
 					var cl_ = context.Operators.Subtract(cj_, ck_);
@@ -433,14 +260,14 @@ public class HybridHWRFHIR_1_3_005
 				var at_ = context.Operators.WhereOrNull<Encounter>(ar_, as_);
 				object au_(Encounter @this)
 				{
-					var cu_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+					var cu_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, @this?.Period);
 					var cv_ = context.Operators.End(cu_);
 
 					return cv_;
 				};
 				var av_ = context.Operators.ListSortBy<Encounter>(at_, au_, System.ComponentModel.ListSortDirection.Ascending);
 				var aw_ = context.Operators.LastOfList<Encounter>(av_);
-				var ax_ = FHIRHelpers_4_0_001.ToInterval(aw_?.Period);
+				var ax_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aw_?.Period);
 				var ay_ = context.Operators.Start(ax_);
 				var ba_ = context.Operators.Start(am_);
 				var bb_ = context.Operators.Interval(ap_, (ay_ ?? ba_), true, true);
@@ -448,9 +275,9 @@ public class HybridHWRFHIR_1_3_005
 				var be_ = context.Operators.RetrieveByValueSet<Encounter>(ad_, null);
 				bool? bf_(Encounter LastObs)
 				{
-					var cw_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
+					var cw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, LastObs?.Period);
 					var cx_ = context.Operators.End(cw_);
-					var cy_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+					var cy_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Visit?.Period);
 					var cz_ = context.Operators.Start(cy_);
 					var da_ = context.Operators.Quantity(1m, "hour");
 					var db_ = context.Operators.Subtract(cz_, da_);
@@ -466,14 +293,14 @@ public class HybridHWRFHIR_1_3_005
 				var bg_ = context.Operators.WhereOrNull<Encounter>(be_, bf_);
 				object bh_(Encounter @this)
 				{
-					var dk_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+					var dk_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, @this?.Period);
 					var dl_ = context.Operators.End(dk_);
 
 					return dl_;
 				};
 				var bi_ = context.Operators.ListSortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
 				var bj_ = context.Operators.LastOfList<Encounter>(bi_);
-				var bk_ = FHIRHelpers_4_0_001.ToInterval(bj_?.Period);
+				var bk_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bj_?.Period);
 				var bl_ = context.Operators.Start(bk_);
 				var bn_ = context.Operators.Start(am_);
 				var bo_ = context.Operators.Not((bool?)((bl_ ?? bn_) is null));
@@ -484,22 +311,22 @@ public class HybridHWRFHIR_1_3_005
 			var h_ = context.Operators.WhereOrNull<Encounter>(f_, g_);
 			object i_(Encounter @this)
 			{
-				var dm_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+				var dm_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, @this?.Period);
 				var dn_ = context.Operators.End(dm_);
 
 				return dn_;
 			};
 			var j_ = context.Operators.ListSortBy<Encounter>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
 			var k_ = context.Operators.LastOfList<Encounter>(j_);
-			var l_ = FHIRHelpers_4_0_001.ToInterval(k_?.Period);
+			var l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_?.Period);
 			var m_ = context.Operators.Start(l_);
-			var n_ = this.Observation_Services();
+			var n_ = this.Observation_Services(context);
 			var o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, null);
 			bool? p_(Encounter LastObs)
 			{
-				var do_ = FHIRHelpers_4_0_001.ToInterval(LastObs?.Period);
+				var do_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, LastObs?.Period);
 				var dp_ = context.Operators.End(do_);
-				var dq_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+				var dq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Visit?.Period);
 				var dr_ = context.Operators.Start(dq_);
 				var ds_ = context.Operators.Quantity(1m, "hour");
 				var dt_ = context.Operators.Subtract(dr_, ds_);
@@ -515,16 +342,16 @@ public class HybridHWRFHIR_1_3_005
 			var q_ = context.Operators.WhereOrNull<Encounter>(o_, p_);
 			object r_(Encounter @this)
 			{
-				var ec_ = FHIRHelpers_4_0_001.ToInterval(@this?.Period);
+				var ec_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, @this?.Period);
 				var ed_ = context.Operators.End(ec_);
 
 				return ed_;
 			};
 			var s_ = context.Operators.ListSortBy<Encounter>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
 			var t_ = context.Operators.LastOfList<Encounter>(s_);
-			var u_ = FHIRHelpers_4_0_001.ToInterval(t_?.Period);
+			var u_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, t_?.Period);
 			var v_ = context.Operators.Start(u_);
-			var w_ = FHIRHelpers_4_0_001.ToInterval(Visit?.Period);
+			var w_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Visit?.Period);
 			var x_ = context.Operators.Start(w_);
 			var z_ = context.Operators.End(w_);
 			var aa_ = context.Operators.Interval((m_ ?? (v_ ?? x_)), z_, true, true);
@@ -538,7 +365,7 @@ public class HybridHWRFHIR_1_3_005
 	}
 
     [CqlDeclaration("LengthInDays")]
-	public int? LengthInDays(CqlInterval<CqlDateTime> Value)
+	public int? LengthInDays(CqlContext context, CqlInterval<CqlDateTime> Value)
 	{
 		var a_ = context.Operators.Start(Value);
 		var b_ = context.Operators.End(Value);
@@ -547,13 +374,14 @@ public class HybridHWRFHIR_1_3_005
 		return c_;
 	}
 
-	private IEnumerable<Encounter> Inpatient_Encounters_Value()
+    [CqlDeclaration("Inpatient Encounters")]
+	public IEnumerable<Encounter> Inpatient_Encounters(CqlContext context)
 	{
-		var a_ = this.Encounter_Inpatient();
+		var a_ = this.Encounter_Inpatient(context);
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		IEnumerable<Coverage> c_(Encounter _InpatientEncounter)
 		{
-			var j_ = this.Medicare_payer();
+			var j_ = this.Medicare_payer(context);
 			var k_ = context.Operators.RetrieveByValueSet<Coverage>(j_, null);
 
 			return k_;
@@ -573,16 +401,16 @@ public class HybridHWRFHIR_1_3_005
 		{
 			var m_ = context.Operators.Convert<string>(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.StatusElement);
 			var n_ = context.Operators.Equal(m_, "finished");
-			var o_ = this.HospitalizationWithObservation(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter);
-			var p_ = this.LengthInDays(o_);
+			var o_ = this.HospitalizationWithObservation(context, tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter);
+			var p_ = this.LengthInDays(context, o_);
 			var q_ = context.Operators.Less(p_, (int?)365);
 			var r_ = context.Operators.And(n_, q_);
-			var s_ = FHIRHelpers_4_0_001.ToInterval(tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.Period);
+			var s_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, tuple_czdryxljaejapsirauhdxvhpv.InpatientEncounter?.Period);
 			var t_ = context.Operators.End(s_);
-			var u_ = this.Measurement_Period();
+			var u_ = this.Measurement_Period(context);
 			var v_ = context.Operators.ElementInInterval<CqlDateTime>(t_, u_, "day");
 			var w_ = context.Operators.And(r_, v_);
-			var x_ = this.Patient();
+			var x_ = this.Patient(context);
 			var y_ = context.Operators.Convert<CqlDate>(x_?.BirthDateElement?.Value);
 			var aa_ = context.Operators.Start(s_);
 			var ab_ = context.Operators.DateFrom(aa_);
@@ -600,25 +428,18 @@ public class HybridHWRFHIR_1_3_005
 		return i_;
 	}
 
-    [CqlDeclaration("Inpatient Encounters")]
-	public IEnumerable<Encounter> Inpatient_Encounters() => 
-		__Inpatient_Encounters.Value;
-
-	private IEnumerable<Encounter> Initial_Population_Value()
+    [CqlDeclaration("Initial Population")]
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
-		var a_ = this.Inpatient_Encounters();
+		var a_ = this.Inpatient_Encounters(context);
 
 		return a_;
 	}
 
-    [CqlDeclaration("Initial Population")]
-	public IEnumerable<Encounter> Initial_Population() => 
-		__Initial_Population.Value;
-
     [CqlDeclaration("FirstPhysicalExamWithEncounterId")]
-	public IEnumerable<string> FirstPhysicalExamWithEncounterId(IEnumerable<Observation> ExamList, string CCDE)
+	public IEnumerable<string> FirstPhysicalExamWithEncounterId(CqlContext context, IEnumerable<Observation> ExamList, string CCDE)
 	{
-		var a_ = this.Inpatient_Encounters();
+		var a_ = this.Inpatient_Encounters(context);
 		string b_(Encounter Encounter)
 		{
 			var d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
@@ -628,11 +449,11 @@ public class HybridHWRFHIR_1_3_005
 			var h_ = context.Operators.Concatenate((g_ ?? ""), ",");
 			bool? i_(Observation Exam)
 			{
-				var aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
+				var aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, Exam?.Effective);
 				var ab_ = context.Operators.Start(aa_);
 				var ac_ = context.Operators.Not((bool?)(ab_ is null));
 				var ae_ = context.Operators.Start(aa_);
-				var af_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				var af_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Encounter?.Period);
 				var ag_ = context.Operators.Start(af_);
 				var ah_ = context.Operators.Quantity(1440m, "minutes");
 				var ai_ = context.Operators.Subtract(ag_, ah_);
@@ -659,24 +480,24 @@ public class HybridHWRFHIR_1_3_005
 			var j_ = context.Operators.WhereOrNull<Observation>(ExamList, i_);
 			object k_(Observation @this)
 			{
-				var aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
+				var aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, @this?.Effective);
 				var ax_ = context.Operators.Start(aw_);
 
 				return ax_;
 			};
 			var l_ = context.Operators.ListSortBy<Observation>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
 			var m_ = context.Operators.FirstOfList<Observation>(l_);
-			var n_ = FHIRHelpers_4_0_001.ToQuantity((m_?.Value as Quantity));
+			var n_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, (m_?.Value as Quantity));
 			var o_ = context.Operators.ConvertQuantityToString(n_);
 			var p_ = context.Operators.Concatenate((h_ ?? ""), (o_ ?? ""));
 			var q_ = context.Operators.Concatenate((p_ ?? ""), ",");
 			bool? r_(Observation Exam)
 			{
-				var ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
+				var ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, Exam?.Effective);
 				var az_ = context.Operators.Start(ay_);
 				var ba_ = context.Operators.Not((bool?)(az_ is null));
 				var bc_ = context.Operators.Start(ay_);
-				var bd_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				var bd_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Encounter?.Period);
 				var be_ = context.Operators.Start(bd_);
 				var bf_ = context.Operators.Quantity(1440m, "minutes");
 				var bg_ = context.Operators.Subtract(be_, bf_);
@@ -703,14 +524,14 @@ public class HybridHWRFHIR_1_3_005
 			var s_ = context.Operators.WhereOrNull<Observation>(ExamList, r_);
 			object t_(Observation @this)
 			{
-				var bu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
+				var bu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, @this?.Effective);
 				var bv_ = context.Operators.Start(bu_);
 
 				return bv_;
 			};
 			var u_ = context.Operators.ListSortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
 			var v_ = context.Operators.FirstOfList<Observation>(u_);
-			var w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(v_?.Effective);
+			var w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, v_?.Effective);
 			var x_ = context.Operators.Start(w_);
 			var y_ = context.Operators.ConvertDateTimeToString(x_);
 			var z_ = context.Operators.Concatenate((q_ ?? ""), (y_ ?? ""));
@@ -723,9 +544,9 @@ public class HybridHWRFHIR_1_3_005
 	}
 
     [CqlDeclaration("FirstPhysicalExamWithEncounterIdUsingLabTiming")]
-	public IEnumerable<string> FirstPhysicalExamWithEncounterIdUsingLabTiming(IEnumerable<Observation> ExamList, string CCDE)
+	public IEnumerable<string> FirstPhysicalExamWithEncounterIdUsingLabTiming(CqlContext context, IEnumerable<Observation> ExamList, string CCDE)
 	{
-		var a_ = this.Inpatient_Encounters();
+		var a_ = this.Inpatient_Encounters(context);
 		string b_(Encounter Encounter)
 		{
 			var d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
@@ -735,11 +556,11 @@ public class HybridHWRFHIR_1_3_005
 			var h_ = context.Operators.Concatenate((g_ ?? ""), ",");
 			bool? i_(Observation Exam)
 			{
-				var aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
+				var aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, Exam?.Effective);
 				var ab_ = context.Operators.Start(aa_);
 				var ac_ = context.Operators.Not((bool?)(ab_ is null));
 				var ae_ = context.Operators.Start(aa_);
-				var af_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				var af_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Encounter?.Period);
 				var ag_ = context.Operators.Start(af_);
 				var ah_ = context.Operators.Quantity(1440m, "minutes");
 				var ai_ = context.Operators.Subtract(ag_, ah_);
@@ -765,24 +586,24 @@ public class HybridHWRFHIR_1_3_005
 			var j_ = context.Operators.WhereOrNull<Observation>(ExamList, i_);
 			object k_(Observation @this)
 			{
-				var aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
+				var aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, @this?.Effective);
 				var ax_ = context.Operators.Start(aw_);
 
 				return ax_;
 			};
 			var l_ = context.Operators.ListSortBy<Observation>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
 			var m_ = context.Operators.FirstOfList<Observation>(l_);
-			var n_ = FHIRHelpers_4_0_001.ToQuantity((m_?.Value as Quantity));
+			var n_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, (m_?.Value as Quantity));
 			var o_ = context.Operators.ConvertQuantityToString(n_);
 			var p_ = context.Operators.Concatenate((h_ ?? ""), (o_ ?? ""));
 			var q_ = context.Operators.Concatenate((p_ ?? ""), ",");
 			bool? r_(Observation Exam)
 			{
-				var ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Exam?.Effective);
+				var ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, Exam?.Effective);
 				var az_ = context.Operators.Start(ay_);
 				var ba_ = context.Operators.Not((bool?)(az_ is null));
 				var bc_ = context.Operators.Start(ay_);
-				var bd_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				var bd_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Encounter?.Period);
 				var be_ = context.Operators.Start(bd_);
 				var bf_ = context.Operators.Quantity(1440m, "minutes");
 				var bg_ = context.Operators.Subtract(be_, bf_);
@@ -808,14 +629,14 @@ public class HybridHWRFHIR_1_3_005
 			var s_ = context.Operators.WhereOrNull<Observation>(ExamList, r_);
 			object t_(Observation @this)
 			{
-				var bu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(@this?.Effective);
+				var bu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, @this?.Effective);
 				var bv_ = context.Operators.Start(bu_);
 
 				return bv_;
 			};
 			var u_ = context.Operators.ListSortBy<Observation>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
 			var v_ = context.Operators.FirstOfList<Observation>(u_);
-			var w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(v_?.Effective);
+			var w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, v_?.Effective);
 			var x_ = context.Operators.Start(w_);
 			var y_ = context.Operators.ConvertDateTimeToString(x_);
 			var z_ = context.Operators.Concatenate((q_ ?? ""), (y_ ?? ""));
@@ -828,9 +649,9 @@ public class HybridHWRFHIR_1_3_005
 	}
 
     [CqlDeclaration("FirstLabTestWithEncounterId")]
-	public IEnumerable<string> FirstLabTestWithEncounterId(IEnumerable<Observation> LabList, string CCDE)
+	public IEnumerable<string> FirstLabTestWithEncounterId(CqlContext context, IEnumerable<Observation> LabList, string CCDE)
 	{
-		var a_ = this.Inpatient_Encounters();
+		var a_ = this.Inpatient_Encounters(context);
 		string b_(Encounter Encounter)
 		{
 			var d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
@@ -841,8 +662,8 @@ public class HybridHWRFHIR_1_3_005
 			bool? i_(Observation Lab)
 			{
 				var z_ = context.Operators.Not((bool?)(Lab?.IssuedElement is null));
-				var aa_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
-				var ab_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				var aa_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, Lab?.IssuedElement);
+				var ab_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Encounter?.Period);
 				var ac_ = context.Operators.Start(ab_);
 				var ad_ = context.Operators.Quantity(1440m, "minutes");
 				var ae_ = context.Operators.Subtract(ac_, ad_);
@@ -870,15 +691,15 @@ public class HybridHWRFHIR_1_3_005
 				@this?.IssuedElement;
 			var l_ = context.Operators.ListSortBy<Observation>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
 			var m_ = context.Operators.FirstOfList<Observation>(l_);
-			var n_ = FHIRHelpers_4_0_001.ToQuantity((m_?.Value as Quantity));
+			var n_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, (m_?.Value as Quantity));
 			var o_ = context.Operators.ConvertQuantityToString(n_);
 			var p_ = context.Operators.Concatenate((h_ ?? ""), (o_ ?? ""));
 			var q_ = context.Operators.Concatenate((p_ ?? ""), ",");
 			bool? r_(Observation Lab)
 			{
 				var as_ = context.Operators.Not((bool?)(Lab?.IssuedElement is null));
-				var at_ = FHIRHelpers_4_0_001.ToDateTime(Lab?.IssuedElement);
-				var au_ = FHIRHelpers_4_0_001.ToInterval(Encounter?.Period);
+				var at_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, Lab?.IssuedElement);
+				var au_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, Encounter?.Period);
 				var av_ = context.Operators.Start(au_);
 				var aw_ = context.Operators.Quantity(1440m, "minutes");
 				var ax_ = context.Operators.Subtract(av_, aw_);
@@ -904,7 +725,7 @@ public class HybridHWRFHIR_1_3_005
 			var s_ = context.Operators.WhereOrNull<Observation>(LabList, r_);
 			var u_ = context.Operators.ListSortBy<Observation>(s_, k_, System.ComponentModel.ListSortDirection.Ascending);
 			var v_ = context.Operators.FirstOfList<Observation>(u_);
-			var w_ = FHIRHelpers_4_0_001.ToDateTime(v_?.IssuedElement);
+			var w_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, v_?.IssuedElement);
 			var x_ = context.Operators.ConvertDateTimeToString(w_);
 			var y_ = context.Operators.Concatenate((q_ ?? ""), (x_ ?? ""));
 
@@ -915,51 +736,52 @@ public class HybridHWRFHIR_1_3_005
 		return c_;
 	}
 
-	private IEnumerable<string> Results_Value()
+    [CqlDeclaration("Results")]
+	public IEnumerable<string> Results(CqlContext context)
 	{
-		var a_ = this.Heart_rate();
+		var a_ = this.Heart_rate(context);
 		var b_ = context.Operators.ToList<CqlCode>(a_);
 		var c_ = context.Operators.RetrieveByCodes<Observation>(b_, null);
-		var d_ = this.FirstPhysicalExamWithEncounterId(c_, "FirstHeartRate");
-		var e_ = this.Systolic_blood_pressure();
+		var d_ = this.FirstPhysicalExamWithEncounterId(context, c_, "FirstHeartRate");
+		var e_ = this.Systolic_blood_pressure(context);
 		var f_ = context.Operators.ToList<CqlCode>(e_);
 		var g_ = context.Operators.RetrieveByCodes<Observation>(f_, null);
-		var h_ = this.FirstPhysicalExamWithEncounterId(g_, "FirstSystolicBP");
-		var i_ = this.Respiratory_rate();
+		var h_ = this.FirstPhysicalExamWithEncounterId(context, g_, "FirstSystolicBP");
+		var i_ = this.Respiratory_rate(context);
 		var j_ = context.Operators.ToList<CqlCode>(i_);
 		var k_ = context.Operators.RetrieveByCodes<Observation>(j_, null);
-		var l_ = this.FirstPhysicalExamWithEncounterId(k_, "FirstRespRate");
-		var m_ = this.Body_temperature();
+		var l_ = this.FirstPhysicalExamWithEncounterId(context, k_, "FirstRespRate");
+		var m_ = this.Body_temperature(context);
 		var n_ = context.Operators.RetrieveByValueSet<Observation>(m_, null);
-		var o_ = this.FirstPhysicalExamWithEncounterId(n_, "FirstTemperature");
-		var p_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry();
+		var o_ = this.FirstPhysicalExamWithEncounterId(context, n_, "FirstTemperature");
+		var p_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry(context);
 		var q_ = context.Operators.ToList<CqlCode>(p_);
 		var r_ = context.Operators.RetrieveByCodes<Observation>(q_, null);
-		var s_ = this.FirstPhysicalExamWithEncounterId(r_, "FirstO2Saturation");
-		var t_ = this.Body_weight();
+		var s_ = this.FirstPhysicalExamWithEncounterId(context, r_, "FirstO2Saturation");
+		var t_ = this.Body_weight(context);
 		var u_ = context.Operators.RetrieveByValueSet<Observation>(t_, null);
-		var v_ = this.FirstPhysicalExamWithEncounterIdUsingLabTiming(u_, "FirstWeight");
-		var w_ = this.Hematocrit_lab_test();
+		var v_ = this.FirstPhysicalExamWithEncounterIdUsingLabTiming(context, u_, "FirstWeight");
+		var w_ = this.Hematocrit_lab_test(context);
 		var x_ = context.Operators.RetrieveByValueSet<Observation>(w_, null);
-		var y_ = this.FirstLabTestWithEncounterId(x_, "FirstHematocrit");
-		var z_ = this.White_blood_cells_count_lab_test();
+		var y_ = this.FirstLabTestWithEncounterId(context, x_, "FirstHematocrit");
+		var z_ = this.White_blood_cells_count_lab_test(context);
 		var aa_ = context.Operators.RetrieveByValueSet<Observation>(z_, null);
-		var ab_ = this.FirstLabTestWithEncounterId(aa_, "FirstWhiteBloodCell");
-		var ac_ = this.Potassium_lab_test();
+		var ab_ = this.FirstLabTestWithEncounterId(context, aa_, "FirstWhiteBloodCell");
+		var ac_ = this.Potassium_lab_test(context);
 		var ad_ = context.Operators.RetrieveByValueSet<Observation>(ac_, null);
-		var ae_ = this.FirstLabTestWithEncounterId(ad_, "FirstPotassium");
-		var af_ = this.Sodium_lab_test();
+		var ae_ = this.FirstLabTestWithEncounterId(context, ad_, "FirstPotassium");
+		var af_ = this.Sodium_lab_test(context);
 		var ag_ = context.Operators.RetrieveByValueSet<Observation>(af_, null);
-		var ah_ = this.FirstLabTestWithEncounterId(ag_, "FirstSodium");
-		var ai_ = this.Bicarbonate_lab_test();
+		var ah_ = this.FirstLabTestWithEncounterId(context, ag_, "FirstSodium");
+		var ai_ = this.Bicarbonate_lab_test(context);
 		var aj_ = context.Operators.RetrieveByValueSet<Observation>(ai_, null);
-		var ak_ = this.FirstLabTestWithEncounterId(aj_, "FirstBicarbonate");
-		var al_ = this.Creatinine_lab_test();
+		var ak_ = this.FirstLabTestWithEncounterId(context, aj_, "FirstBicarbonate");
+		var al_ = this.Creatinine_lab_test(context);
 		var am_ = context.Operators.RetrieveByValueSet<Observation>(al_, null);
-		var an_ = this.FirstLabTestWithEncounterId(am_, "FirstCreatinine");
-		var ao_ = this.Glucose_lab_test();
+		var an_ = this.FirstLabTestWithEncounterId(context, am_, "FirstCreatinine");
+		var ao_ = this.Glucose_lab_test(context);
 		var ap_ = context.Operators.RetrieveByValueSet<Observation>(ao_, null);
-		var aq_ = this.FirstLabTestWithEncounterId(ap_, "FirstGlucose");
+		var aq_ = this.FirstLabTestWithEncounterId(context, ap_, "FirstGlucose");
 		var ar_ = new IEnumerable<string>[]
 		{
 			d_,
@@ -981,12 +803,8 @@ public class HybridHWRFHIR_1_3_005
 		return as_;
 	}
 
-    [CqlDeclaration("Results")]
-	public IEnumerable<string> Results() => 
-		__Results.Value;
-
     [CqlDeclaration("CalendarAgeInYearsAt")]
-	public int? CalendarAgeInYearsAt(CqlDateTime BirthDateTime, CqlDateTime AsOf)
+	public int? CalendarAgeInYearsAt(CqlContext context, CqlDateTime BirthDateTime, CqlDateTime AsOf)
 	{
 		var a_ = context.Operators.ConvertDateTimeToDate(BirthDateTime);
 		var b_ = context.Operators.ConvertDateTimeToDate(AsOf);
@@ -996,7 +814,7 @@ public class HybridHWRFHIR_1_3_005
 	}
 
     [CqlDeclaration("ToDate")]
-	public CqlDateTime ToDate(CqlDateTime Value)
+	public CqlDateTime ToDate(CqlContext context, CqlDateTime Value)
 	{
 		var a_ = context.Operators.ComponentFrom(Value, "year");
 		var b_ = context.Operators.ComponentFrom(Value, "month");
@@ -1008,7 +826,7 @@ public class HybridHWRFHIR_1_3_005
 	}
 
     [CqlDeclaration("LengthOfStay")]
-	public int? LengthOfStay(CqlInterval<CqlDateTime> Stay)
+	public int? LengthOfStay(CqlContext context, CqlInterval<CqlDateTime> Stay)
 	{
 		var a_ = context.Operators.Start(Stay);
 		var b_ = context.Operators.End(Stay);
@@ -1018,10 +836,10 @@ public class HybridHWRFHIR_1_3_005
 	}
 
     [CqlDeclaration("HospitalizationWithObservationLengthofStay")]
-	public int? HospitalizationWithObservationLengthofStay(Encounter Encounter)
+	public int? HospitalizationWithObservationLengthofStay(CqlContext context, Encounter Encounter)
 	{
-		var a_ = this.HospitalizationWithObservation(Encounter);
-		var b_ = this.LengthInDays(a_);
+		var a_ = this.HospitalizationWithObservation(context, Encounter);
+		var b_ = this.LengthInDays(context, a_);
 
 		return b_;
 	}

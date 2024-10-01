@@ -66,11 +66,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
 
-            var target = dce.LibraryName == LibraryName ? "this" :
-                VariableNameGenerator.NormalizeIdentifier(dce.LibraryName);
+            var target = dce.LibraryName == LibraryName ? "this" : $"{VariableNameGenerator.NormalizeIdentifier(dce.LibraryName)}.Instance";
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(dce.DefinitionName);
 
-            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}()");
+            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}(context)");
 
             return sb.ToString();
         }
@@ -80,12 +79,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
 
-            var target = fce.LibraryName == LibraryName ? "this" :
-                VariableNameGenerator.NormalizeIdentifier(fce.LibraryName);
+            var target = fce.LibraryName == LibraryName ? "this" : $"{VariableNameGenerator.NormalizeIdentifier(fce.LibraryName)}.Instance";
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(fce.FunctionName);
 
             sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}");
-            sb.Append(convertArguments(indent, fce.Arguments.Skip(1)));  // skip cqlContext
+            sb.Append(convertArguments(indent, fce.Arguments));
 
             return sb.ToString();
         }
@@ -417,7 +415,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
 
-            var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => $"{PrettyTypeName(p.Type)} {escapeKeywords(p.Name!)}"))})";
+            var parameters = lambda.Parameters.Select(p => $"{PrettyTypeName(p.Type)} {escapeKeywords(p.Name!)}").ToList();
+            // inserts the context parameter in the start of the lambda expression
+            if (indent == 1)
+                parameters.Insert(0, "CqlContext context");
+
+            var lambdaParameters = $"({string.Join(", ", parameters)})";
             lambdaSb.Append(lambdaParameters);
 
             if (lambda.Body is BlockExpression)
