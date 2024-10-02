@@ -34,15 +34,15 @@ internal static class CqlCompilerServiceProviderExtensions
     public static CqlContextBinder GetCqlContextBinder(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<CqlContextBinder>();
 
-    public static TupleBuilderCache GetTupleBuilderCacheScoped(this IServiceProvider serviceProvider) =>
+    public static TupleBuilderCache GetTupleBuilderCache(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<TupleBuilderCache>();
 
-    public static LibrarySetExpressionBuilder GetLibrarySetExpressionBuilderScoped(this IServiceProvider serviceProvider) =>
+    public static LibrarySetExpressionBuilder GetLibrarySetExpressionBuilder(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 
-    public static LibraryExpressionBuilder GetLibraryExpressionBuilderScoped(this IServiceProvider serviceProvider) =>
+    public static LibraryExpressionBuilder GetLibraryExpressionBuilder(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<LibraryExpressionBuilder>();
 
-    public static ExpressionBuilder GetExpressionBuilderScoped(this IServiceProvider serviceProvider) =>
+    public static ExpressionBuilder GetExpressionBuilder(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<ExpressionBuilder>();
 }

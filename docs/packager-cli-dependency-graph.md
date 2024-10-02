@@ -64,11 +64,11 @@ classDiagram
 
     %% Style Scoped Types as Cyan
 
-    style LibrarySetExpressionBuilder fill:#055
-    style LibraryExpressionBuilder fill:#055
-    style ExpressionBuilder fill:#055
-    style TupleBuilderCache fill:#055
-    style CqlToResourcePackagingPipeline fill:#055
+    %% style LibrarySetExpressionBuilder fill:#055
+    %% style LibraryExpressionBuilder fill:#055
+    %% style ExpressionBuilder fill:#055
+    %% style TupleBuilderCache fill:#055
+    %% style CqlToResourcePackagingPipeline fill:#055
 
     %% Inheritance  
 

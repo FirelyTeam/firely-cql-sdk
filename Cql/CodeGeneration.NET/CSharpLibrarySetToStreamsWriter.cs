@@ -140,6 +140,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 foreach (var (name, stream) in WriteLibraries(definitions, librarySet, callbacks))
                 {
+                    stream.Position = 0L;
                     streamsToDispose.Add(stream);
                     callbacks.Step(name, stream);
                 }

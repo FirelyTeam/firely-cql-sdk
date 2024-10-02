@@ -32,22 +32,8 @@ internal class CqlToResourcePackagingPipeline(
     protected readonly CqlToResourcePackagingOptions _options = options.Value;
     protected readonly ILogger<CqlToResourcePackagingPipeline> _logger = logger;
 
-    public IReadOnlyCollection<Resource> ProcessCqlToResources()
+    public IReadOnlyCollection<Resource> ProcessLibrarySet(LibrarySet librarySet)
     {
-        //
-        // 1. LOAD ELM FILES
-        //
-
-        LibrarySet librarySet;
-        try
-        {
-            librarySet = LoadElmFiles();
-        }
-        catch (Exception e1)
-        {
-            throw new CqlToResourcePackagingPipelineErrors(LoadElmFilesException: e1).ToException();
-        }
-
         //
         // 2. BUILD EXPRESSIONS
         //      Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
@@ -105,7 +91,7 @@ internal class CqlToResourcePackagingPipeline(
             if (expressionBuildingExceptionInfo is not null)
             {
                 throw new CqlToResourcePackagingPipelineErrors(
-                        LoadElmFilesException: expressionBuildingExceptionInfo.SourceException)
+                        ResourceBuildingException: expressionBuildingExceptionInfo.SourceException)
                     .ToException();
             }
 
@@ -118,7 +104,6 @@ internal class CqlToResourcePackagingPipeline(
         catch (Exception e)
         {
             throw new CqlToResourcePackagingPipelineErrors(
-                LoadElmFilesException: expressionBuildingExceptionInfo?.SourceException,
                 ResourceBuildingException: e).ToException();
         }
     }
@@ -136,38 +121,9 @@ internal class CqlToResourcePackagingPipeline(
 
     protected virtual void BuildExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
         _LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
-
-    protected virtual LibrarySet LoadElmFiles()
-    {
-        string[] hardcodedSkipFiles = [
-
-            // These contain a union between incompatible tuples,
-            // see https://chat.fhir.org/#narrow/stream/179220-cql/topic/Union.20of.20tuples.20with.20convertible.20types
-            "AntithromboticTherapyByEndofHospitalDay2FHIR.json",
-            "IntensiveCareUnitVenousThromboembolismProphylaxisFHIR.json",
-            "VenousThromboembolismProphylaxisFHIR.json",
-
-            // These uses choice types, move into a property on such a choice, and then calls an
-            // overloaded function, so we cannot find out which overload to call.
-            // A solution is to either a) Introduce choice types in our system instead of object,
-            // b) introduce runtime resolution, based on the runtime types of the arguments when one of
-            // the arguments is a choice (=object).
-            "InitiationandEngagementofSubstanceUseDisorderTreatmentFHIR.json",
-            "PCSBMIScreenAndFollowUpFHIR.json",
-        ];
-
-        LibrarySet librarySet = new(_options.ElmDirectory.FullName);
-        var files = _options.ElmDirectory
-            .GetFiles("*.json", SearchOption.AllDirectories)
-            .Where(fi => !hardcodedSkipFiles.Contains(fi.Name))
-            .ToArray();
-        librarySet.LoadLibraries(files);
-        return librarySet;
-    }
 }
 
-internal readonly record struct CqlToResourcePackagingPipelineErrors(
-    Exception? LoadElmFilesException = null,
+internal readonly record struct CqlToResourcePackagingPipelineErrors (
     Exception? ExpressionBuildingException = null,
     Exception? AssemblyCompilingException = null,
     Exception? ResourceBuildingException = null) : ICqlError
@@ -177,12 +133,6 @@ internal readonly record struct CqlToResourcePackagingPipelineErrors(
         StringBuilder sb = new();
         int i = 1;
         sb.Append("The following exceptions occurred during Library Packaging:");
-        if (LoadElmFilesException is { } lefe)
-        {
-            if (sb.Length > 0) sb.AppendLine().AppendLine();
-            sb.AppendLine(Invariant($"{i++}. LoadElmFilesException"));
-            sb.Append(lefe);
-        }
         if (ExpressionBuildingException is { } ebe)
         {
             if (sb.Length > 0) sb.AppendLine().AppendLine();

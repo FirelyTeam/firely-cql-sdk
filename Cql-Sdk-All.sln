@@ -121,6 +121,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.DeckTests", "submod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.MeasuresTests", "submodules\Ncqa.DQIC\Ncqa.HT.MeasuresTests\Ncqa.HT.MeasuresTests.csproj", "{584116D7-4E88-401E-8089-BAA6A35DB591}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqlSdkUseCases", "Demo\CqlSdkUseCases\CqlSdkUseCases.csproj", "{2AC22421-8262-4833-B3A2-3DD16B8D8D41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -385,6 +387,14 @@ Global
 		{584116D7-4E88-401E-8089-BAA6A35DB591}.Generate-CQL-to-ELM|Any CPU.Build.0 = Debug|Any CPU
 		{584116D7-4E88-401E-8089-BAA6A35DB591}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{584116D7-4E88-401E-8089-BAA6A35DB591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC22421-8262-4833-B3A2-3DD16B8D8D41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC22421-8262-4833-B3A2-3DD16B8D8D41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC22421-8262-4833-B3A2-3DD16B8D8D41}.FullDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC22421-8262-4833-B3A2-3DD16B8D8D41}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC22421-8262-4833-B3A2-3DD16B8D8D41}.Generate-CQL-to-ELM|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC22421-8262-4833-B3A2-3DD16B8D8D41}.Generate-CQL-to-ELM|Any CPU.Build.0 = Debug|Any CPU
+		{2AC22421-8262-4833-B3A2-3DD16B8D8D41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC22421-8262-4833-B3A2-3DD16B8D8D41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -432,6 +442,7 @@ Global
 		{B5BF0EDC-D95F-4368-A74B-B5794FB34F9E} = {1AF2E4B2-99C5-4678-B926-D224CC83A8F7}
 		{C573B0CB-733A-4E22-9693-4581E683109C} = {1AF2E4B2-99C5-4678-B926-D224CC83A8F7}
 		{584116D7-4E88-401E-8089-BAA6A35DB591} = {1AF2E4B2-99C5-4678-B926-D224CC83A8F7}
+		{2AC22421-8262-4833-B3A2-3DD16B8D8D41} = {B00E560D-AE0C-48E1-9013-57115AF05F41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}

@@ -156,7 +156,7 @@ namespace Test
                                         .AddCqlCodeGenerationServices()
                                         .BuildServiceProvider(validateScopes: true);
             using var serviceScope = serviceProvider.CreateScope();
-            var definitions = serviceScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
+            var definitions = serviceScope.ServiceProvider.GetLibrarySetExpressionBuilder().ProcessLibrarySet(librarySet);
             var assemblyData = serviceProvider.GetAssemblyCompiler().Compile(librarySet, definitions);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             foreach (var (_, asmData) in assemblyData)

@@ -24,7 +24,7 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = servicesScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var definitions = servicesScope.ServiceProvider.GetLibraryExpressionBuilder().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -36,7 +36,7 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = servicesScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var definitions = servicesScope.ServiceProvider.GetLibraryExpressionBuilder().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -48,7 +48,7 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = servicesScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var definitions = servicesScope.ServiceProvider.GetLibraryExpressionBuilder().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -65,14 +65,14 @@ namespace CoreTests
                 new(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json")
             ];
             var librarySet = new LibrarySet();
-            librarySet.LoadLibraries(files);
+            librarySet.LoadLibrariesFromFiles(files);
 
             var fdt = new FhirDateTime(2023, 12, 11, 9, 41, 30, TimeSpan.FromHours(-5));
             var fdts = fdt.ToString();
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
+            var definitions = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilder().ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
