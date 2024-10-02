@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -149,7 +150,7 @@ public class PCMaternal_5_16_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -196,14 +197,14 @@ public class PCMaternal_5_16_000
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.ED_Visit_and_OB_Triage();
-			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
+			IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 			bool? g_(Encounter LastEDOBTriage)
 			{
 				Period af_ = LastEDOBTriage?.Period;
 				CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
 				CqlDateTime ah_ = context.Operators.End(ag_);
 				CqlValueSet ai_ = this.Observation_Services();
-				IEnumerable<Encounter> aj_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
+				IEnumerable<Encounter> aj_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 				bool? ak_(Encounter LastObs)
 				{
 					Period cg_ = LastObs?.Period;
@@ -249,7 +250,7 @@ public class PCMaternal_5_16_000
 				CqlDateTime au_ = context.Operators.Start(at_);
 				CqlQuantity av_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime aw_ = context.Operators.Subtract(ar_ ?? au_, av_);
-				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
+				IEnumerable<Encounter> ay_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 				bool? az_(Encounter LastObs)
 				{
 					Period dg_ = LastObs?.Period;
@@ -294,7 +295,7 @@ public class PCMaternal_5_16_000
 				CqlDateTime bj_ = context.Operators.Start(bi_);
 				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, bg_ ?? bj_, true, true);
 				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default);
-				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
+				IEnumerable<Encounter> bn_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 				bool? bo_(Encounter LastObs)
 				{
 					Period eg_ = LastObs?.Period;
@@ -362,7 +363,7 @@ public class PCMaternal_5_16_000
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services();
-			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
+			IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 			bool? q_(Encounter LastObs)
 			{
 				Period fj_ = LastObs?.Period;
@@ -424,7 +425,7 @@ public class PCMaternal_5_16_000
 		IEnumerable<Encounter> b_(Encounter EncounterWithAge)
 		{
 			CqlValueSet d_ = this.Delivery_Procedures();
-			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+			IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? f_(Procedure DeliveryProcedure)
 			{
 				Code<EventStatus> j_ = DeliveryProcedure?.StatusElement;
@@ -462,7 +463,7 @@ public class PCMaternal_5_16_000
 	{
 		CqlCode a_ = this.Date_and_time_of_obstetric_delivery();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		bool? d_(Observation TimeOfDelivery)
 		{
 			DataType k_ = TimeOfDelivery?.Value;
@@ -613,7 +614,7 @@ public class PCMaternal_5_16_000
 	{
 		CqlCode a_ = this.Delivery_date_Estimated();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		bool? d_(Observation EstimatedDateOfDelivery)
 		{
 			DataType k_ = EstimatedDateOfDelivery?.Value;
@@ -798,7 +799,7 @@ public class PCMaternal_5_16_000
 	public CqlQuantity lastEstimatedGestationalAge(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Estimated_Gestational_Age_at_Delivery();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		bool? c_(Observation EstimatedGestationalAge)
 		{
 			object j_()

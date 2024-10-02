@@ -38,7 +38,6 @@ using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
 using Tuple = Hl7.Cql.Elm.Tuple;
 using TupleTypeSpecifier = Hl7.Cql.Elm.TupleTypeSpecifier;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
-using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 
 namespace Hl7.Cql.Compiler;
 
