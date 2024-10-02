@@ -33,18 +33,15 @@ namespace Hl7.Cql.CodeGeneration.NET
     internal class CSharpLibrarySetToStreamsWriter
     {
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
-        private readonly IOptions<CSharpCodeWriterOptions> _options;
         private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
         public CSharpLibrarySetToStreamsWriter(
             ILogger<CSharpLibrarySetToStreamsWriter> logger,
-            IOptions<CSharpCodeWriterOptions> options,
             TypeResolver typeResolver,
             TypeToCSharpConverter typeToCSharpConverter)
         {
             _logger = logger;
             _typeToCSharpConverter = typeToCSharpConverter;
-            _options = options;
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
@@ -399,14 +396,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
-            var simplifyNullConditionalMemberExpression = _options.Value.TypeFormat == CSharpCodeWriterTypeFormat.Var;
             var visitedBody = Transform(
                 overload.Body,
                 new RedundantCastsTransformer(),
-                new SimplifyExpressionsVisitor()
-                {
-                    SimplifyNullConditionalMemberExpression = simplifyNullConditionalMemberExpression
-                },
+                new SimplifyExpressionsVisitor(),
                 new RenameVariablesVisitor(vng),
                 new LocalVariableDeduper(_typeToCSharpConverter)
             );
@@ -463,7 +456,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private ExpressionToCSharpConverter NewExpressionToCSharpConverter(string libraryName) =>
-            new(_options, _typeToCSharpConverter, libraryName);
+            new(_typeToCSharpConverter, libraryName);
 
         private void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
         {

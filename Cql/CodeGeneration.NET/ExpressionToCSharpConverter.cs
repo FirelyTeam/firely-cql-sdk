@@ -16,22 +16,17 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Text.RegularExpressions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class ExpressionToCSharpConverter(
-        IOptions<CSharpCodeWriterOptions> csharpCodeWriterOptions,
         TypeToCSharpConverter typeToCSharpConverter,
         string libraryName)
     {
         public string LibraryName { get; } = libraryName;
 
         private readonly TypeToCSharpConverter _typeToCSharpConverter = typeToCSharpConverter;
-        private bool UseExplicitTypeFormat => csharpCodeWriterOptions.Value.TypeFormat is CSharpCodeWriterTypeFormat.Explicit;
-
 
         public string ConvertExpression(int indent, Expression expression, bool leadingIndent = true)
         {
@@ -600,11 +595,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return ConvertLocalFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
 
                 var rightCode = ConvertExpression(indent, right, false);
-
-                string typeDeclaration = "var";
-                if (UseExplicitTypeFormat || rightCode is "null" or "default")
-                    typeDeclaration = _typeToCSharpConverter.ToCSharp(left.Type);
-
+                var typeDeclaration = _typeToCSharpConverter.ToCSharp(left.Type);
                 var assignment = $"{leadingIndentString}{typeDeclaration} {ParamName(parameter)} = {rightCode}";
                 return assignment;
             }
