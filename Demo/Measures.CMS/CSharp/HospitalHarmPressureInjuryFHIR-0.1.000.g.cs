@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("HospitalHarmPressureInjuryFHIR", "0.1.000")]
 public class HospitalHarmPressureInjuryFHIR_0_1_000
 {
@@ -323,8 +323,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return z_;
 				};
-				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
-						? ((EncounterDiag as Element).Extension)
+				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiag is Element
+						? (EncounterDiag as Element).Extension
 						: default), n_);
 				object p_(Extension @this)
 				{
@@ -334,7 +334,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept((r_ as CodeableConcept));
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_ as CodeableConcept);
 				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -385,7 +385,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 				bool? ac_ = context.Operators.And(v_, ab_);
 				CodeableConcept ad_ = SkinExam?.Code;
 				CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
@@ -447,8 +447,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return z_;
 				};
-				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
-						? ((Stage234UnstageablePressureInjury as Element).Extension)
+				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Stage234UnstageablePressureInjury is Element
+						? (Stage234UnstageablePressureInjury as Element).Extension
 						: default), n_);
 				object p_(Extension @this)
 				{
@@ -458,7 +458,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept((r_ as CodeableConcept));
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_ as CodeableConcept);
 				CqlValueSet t_ = this.Present_on_Admission_or_Clinically_Undetermined();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -509,7 +509,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 				bool? ac_ = context.Operators.And(v_, ab_);
 				CodeableConcept ad_ = SkinExam?.Code;
 				CqlConcept ae_ = FHIRHelpers_4_3_000.ToConcept(ad_);
@@ -615,8 +615,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return z_;
 				};
-				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((EncounterDiag is Element)
-						? ((EncounterDiag as Element).Extension)
+				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiag is Element
+						? (EncounterDiag as Element).Extension
 						: default), n_);
 				object p_(Extension @this)
 				{
@@ -626,7 +626,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept((r_ as CodeableConcept));
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_ as CodeableConcept);
 				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -677,12 +677,12 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 				bool? ac_ = context.Operators.And(v_, ab_);
 				DataType ad_ = SkinExam?.Value;
 				object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 				CqlValueSet af_ = this.Pressure_Injury_Deep_Tissue();
-				bool? ag_ = context.Operators.ConceptInValueSet((ae_ as CqlConcept), af_);
+				bool? ag_ = context.Operators.ConceptInValueSet(ae_ as CqlConcept, af_);
 				List<Observation.ComponentComponent> ah_ = SkinExam?.Component;
 				bool? ai_(Observation.ComponentComponent @this)
 				{
@@ -759,8 +759,8 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 
 					return z_;
 				};
-				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((Stage234UnstageablePressureInjury is Element)
-						? ((Stage234UnstageablePressureInjury as Element).Extension)
+				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Stage234UnstageablePressureInjury is Element
+						? (Stage234UnstageablePressureInjury as Element).Extension
 						: default), n_);
 				object p_(Extension @this)
 				{
@@ -770,7 +770,7 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 				};
 				IEnumerable<object> q_ = context.Operators.Select<Extension, object>(o_, p_);
 				object r_ = context.Operators.SingletonFrom<object>(q_);
-				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept((r_ as CodeableConcept));
+				CqlConcept s_ = FHIRHelpers_4_3_000.ToConcept(r_ as CodeableConcept);
 				CqlValueSet t_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine();
 				bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
 				bool? v_ = context.Operators.And(m_, u_);
@@ -821,12 +821,12 @@ public class HospitalHarmPressureInjuryFHIR_0_1_000
 					"amended",
 					"corrected",
 				];
-				bool? ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 				bool? ac_ = context.Operators.And(v_, ab_);
 				DataType ad_ = SkinExam?.Value;
 				object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 				CqlValueSet af_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable();
-				bool? ag_ = context.Operators.ConceptInValueSet((ae_ as CqlConcept), af_);
+				bool? ag_ = context.Operators.ConceptInValueSet(ae_ as CqlConcept, af_);
 				List<Observation.ComponentComponent> ah_ = SkinExam?.Component;
 				bool? ai_(Observation.ComponentComponent @this)
 				{

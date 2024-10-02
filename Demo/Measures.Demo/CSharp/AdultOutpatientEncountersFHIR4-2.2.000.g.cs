@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public class AdultOutpatientEncountersFHIR4_2_2_000
 {
@@ -140,7 +140,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 			bool? s_ = context.Operators.Equal(r_, "finished");
 			CqlInterval<CqlDateTime> t_ = this.Measurement_Period();
 			Period u_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((u_ as object));
+			CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(u_ as object);
 			bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, default);
 			bool? x_ = context.Operators.And(s_, w_);
 

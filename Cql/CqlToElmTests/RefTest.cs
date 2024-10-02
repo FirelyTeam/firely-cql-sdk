@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var eb = LibraryExpressionBuilder;
             var lambdas = eb.ProcessLibrary(library);
             var delegates = lambdas.CompileAll();
-            var dg = delegates[library.NameAndVersion()!, member];
+            var dg = delegates[library.GetVersionedIdentifier()!, member];
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: delegates);
             var result = dg.DynamicInvoke(ctx);
             Assert.IsInstanceOfType(result, typeof(T));

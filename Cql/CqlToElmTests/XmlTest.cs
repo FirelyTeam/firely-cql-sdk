@@ -28,8 +28,8 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static CqlContext CqlContext = FhirCqlContext.ForBundle(now: NowValue);
-        private static InvocationBuilder InvocationBuilder = CqlToElmServices.InvocationBuilder;
-        private static ElmFactory ElmFactory = CqlToElmServices.ElmFactory;
+        private static InvocationBuilder InvocationBuilder = ServiceProvider.GetInvocationBuilder();
+        private static ElmFactory ElmFactory = ServiceProvider.GetElmFactory();
 
 
         [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]

@@ -53,7 +53,6 @@ internal class OptionsConsoleDumper
             ArgFor("Fhir, OutDirectory", _fhirResourceWriterOptions.OutDirectory),
             ArgFor("Fhir, OverrideDate", _fhirResourceWriterOptions.OverrideDate),
             ArgFor("CSharp, OutDirectory", _csharpCodeWriterOptions.OutDirectory),
-            ArgFor("CSharp, TypeFormat", _csharpCodeWriterOptions.TypeFormat),
         }.Where(t => t.value is not null)
         .ToArray();
 

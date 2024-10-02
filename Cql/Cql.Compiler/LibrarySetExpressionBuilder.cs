@@ -11,21 +11,19 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
-internal class LibrarySetExpressionBuilder
+internal class LibrarySetExpressionBuilder(
+    LibraryExpressionBuilder libraryExpressionBuilder)
 {
-    internal readonly LibraryExpressionBuilder _libraryExpressionBuilder;
-
-    public LibrarySetExpressionBuilder(
-        LibraryExpressionBuilder libraryExpressionBuilder)
-    {
-        _libraryExpressionBuilder = libraryExpressionBuilder;
-    }
+    private readonly LibraryExpressionBuilder _libraryExpressionBuilder = libraryExpressionBuilder;
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null)
-    {
-        LibrarySetExpressionBuilderContext context = new(this, librarySetDefinitions ?? new(), librarySet);
-        return context.ProcessLibrarySet();
-    }
+        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
+        NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
+            .ProcessLibrarySet();
+
+    private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
+        LibrarySet librarySet,
+        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
+        new(_libraryExpressionBuilder, librarySet, librarySetDefinitions ?? new());
 }

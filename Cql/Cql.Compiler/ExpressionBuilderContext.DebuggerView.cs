@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 
@@ -34,8 +35,8 @@ partial class ExpressionBuilderContext : IBuilderContext
         var locator = element?.locator;
 
         return string.IsNullOrWhiteSpace(locator)
-            ? $"{_libraryContext.LibraryKey}: {message}"
-            : $"{_libraryContext.LibraryKey} line {locator}: {message}";
+            ? $"{_libraryContext.LibraryVersionedIdentifier}: {message}"
+            : $"{_libraryContext.LibraryVersionedIdentifier} line {locator}: {message}";
     }
 
     public string DebuggerView => this.GetDebuggerView();
@@ -52,7 +53,7 @@ partial class ExpressionBuilderContext : IBuilderContext
 
     private readonly record struct ExpressionBuilderNode : IBuilderContext
     {
-        public ILibraryExpressionBuilderContext LibraryExpressionBuilder { get; init; }
+        public LibraryExpressionBuilderContext LibraryExpressionBuilder { get; init; }
         public IReadOnlyList<Elm.Element> ElementStackList { get; init; }
         public int ElementStackPosition { get; init; }
 

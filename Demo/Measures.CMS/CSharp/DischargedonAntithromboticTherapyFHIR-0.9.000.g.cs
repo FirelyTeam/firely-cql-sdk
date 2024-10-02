@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.9.000")]
 public class DischargedonAntithromboticTherapyFHIR_0_9_000
 {
@@ -181,7 +181,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				object m_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
 				CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
 				CqlInterval<CqlDateTime> o_ = CQMCommon_2_0_000.hospitalizationWithObservation(Encounter);
-				bool? p_ = context.Operators.In<CqlDateTime>((l_ ?? n_), o_, default);
+				bool? p_ = context.Operators.In<CqlDateTime>(l_ ?? n_, o_, default);
 
 				return p_;
 			};
@@ -267,7 +267,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				"active",
 				"completed",
 			];
-			bool? o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
+			bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
 			bool? p_ = context.Operators.And(j_, o_);
 			Code<MedicationRequest.MedicationRequestIntent> q_ = Antithrombotic?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? r_ = q_?.Value;
@@ -279,7 +279,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				"filler-order",
 				"instance-order",
 			];
-			bool? u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
+			bool? u_ = context.Operators.In<string>(s_, t_ as IEnumerable<string>);
 			bool? v_ = context.Operators.And(p_, u_);
 			FhirBoolean w_ = Antithrombotic?.DoNotPerformElement;
 			bool? x_ = w_?.Value;
@@ -340,7 +340,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				"filler-order",
 				"instance-order",
 			];
-			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
+			bool? aa_ = context.Operators.In<string>(y_, z_ as IEnumerable<string>);
 			bool? ab_ = context.Operators.And(v_, aa_);
 
 			return ab_;
@@ -404,7 +404,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				"active",
 				"completed",
 			];
-			bool? o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
+			bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
 			bool? p_ = context.Operators.And(j_, o_);
 			Code<MedicationRequest.MedicationRequestIntent> q_ = Pharmacological?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? r_ = q_?.Value;
@@ -416,7 +416,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_9_000
 				"filler-order",
 				"instance-order",
 			];
-			bool? u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
+			bool? u_ = context.Operators.In<string>(s_, t_ as IEnumerable<string>);
 			bool? v_ = context.Operators.And(p_, u_);
 			FhirBoolean w_ = Pharmacological?.DoNotPerformElement;
 			bool? x_ = w_?.Value;

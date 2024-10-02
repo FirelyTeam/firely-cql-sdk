@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
 public class NCQAClaims_1_0_0
 {
@@ -171,9 +171,9 @@ public class NCQAClaims_1_0_0
 			{
 				IEnumerable<Claim.ItemComponent> r_()
 				{
-					if ((ClaimofInterest is null))
+					if (ClaimofInterest is null)
 					{
-						return (null as IEnumerable<Claim.ItemComponent>);
+						return null as IEnumerable<Claim.ItemComponent>;
 					}
 					else
 					{
@@ -194,7 +194,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<CqlCode> ae_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)ac_, ad_);
 							bool? af_ = context.Operators.Exists<CqlCode>(ae_);
 							DataType ag_ = ItemOnLine?.Location;
-							CqlConcept ah_ = FHIRHelpers_4_0_001.ToConcept((ag_ as CodeableConcept));
+							CqlConcept ah_ = FHIRHelpers_4_0_001.ToConcept(ag_ as CodeableConcept);
 							CqlCode[] ai_ = ah_?.codes;
 							bool? aj_(CqlCode PosCode)
 							{
@@ -228,7 +228,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ItemComponent> av_ = LineItemDefinition?.LineItems;
 							bool? aw_ = context.Operators.Exists<Claim.ItemComponent>(av_);
 
-							return (aw_ ?? false);
+							return aw_ ?? false;
 						};
 						if (au_())
 						{
@@ -262,13 +262,13 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return (null as (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+							return null as (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 						}
 					};
 
 					return at_();
 				};
-				IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> v_ = context.Operators.Select<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)t_), u_);
+				IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> v_ = context.Operators.Select<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)t_, u_);
 				(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? w_ = context.Operators.SingletonFrom<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(v_);
 
 				return w_;
@@ -284,7 +284,7 @@ public class NCQAClaims_1_0_0
 
 			return q_;
 		};
-		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> i_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)g_), h_);
+		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> i_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)g_, h_);
 		IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> j_ = context.Operators.SingletonFrom<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(i_);
 
 		return j_;
@@ -312,9 +312,9 @@ public class NCQAClaims_1_0_0
 			{
 				IEnumerable<Claim.ItemComponent> o_()
 				{
-					if ((ClaimofInterest is null))
+					if (ClaimofInterest is null)
 					{
-						return (null as IEnumerable<Claim.ItemComponent>);
+						return null as IEnumerable<Claim.ItemComponent>;
 					}
 					else
 					{
@@ -402,7 +402,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ItemComponent> bi_ = LineItemDefinition?.LineItems;
 							bool? bj_ = context.Operators.Exists<Claim.ItemComponent>(bi_);
 
-							return (bj_ ?? false);
+							return bj_ ?? false;
 						};
 						if (bh_())
 						{
@@ -436,13 +436,13 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return (null as (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+							return null as (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 						}
 					};
 
 					return bg_();
 				};
-				IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> s_ = context.Operators.Select<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)q_), r_);
+				IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> s_ = context.Operators.Select<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)q_, r_);
 				(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? t_ = context.Operators.SingletonFrom<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(s_);
 
 				return t_;
@@ -458,7 +458,7 @@ public class NCQAClaims_1_0_0
 
 			return n_;
 		};
-		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> g_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)e_), f_);
+		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> g_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)e_, f_);
 		IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> h_ = context.Operators.SingletonFrom<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(g_);
 
 		return h_;
@@ -483,9 +483,9 @@ public class NCQAClaims_1_0_0
 		{
 			IEnumerable<Claim> j_()
 			{
-				if ((ClaimWithDiagnosis?.MedicalClaim is null))
+				if (ClaimWithDiagnosis?.MedicalClaim is null)
 				{
-					return (null as IEnumerable<Claim>);
+					return null as IEnumerable<Claim>;
 				}
 				else
 				{
@@ -559,7 +559,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim> ax_ = HeaderDefinition?.DiagnosisItems;
 						bool? ay_ = context.Operators.Exists<Claim>(ax_);
 
-						return (ay_ ?? false);
+						return ay_ ?? false;
 					};
 					if (aw_())
 					{
@@ -594,7 +594,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return (null as (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+						return null as (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 					}
 				};
 				(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] as_ = [
@@ -606,17 +606,17 @@ public class NCQAClaims_1_0_0
 
 					return bo_;
 				};
-				IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> au_ = context.Operators.Where<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)as_), at_);
+				IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> au_ = context.Operators.Where<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)as_, at_);
 				(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? av_ = context.Operators.SingletonFrom<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(au_);
 
 				return av_;
 			};
-			IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> n_ = context.Operators.Select<(IEnumerable<Claim> DiagnosisItems, nint _)?, (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<Claim> DiagnosisItems, nint _)?>)l_), m_);
+			IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> n_ = context.Operators.Select<(IEnumerable<Claim> DiagnosisItems, nint _)?, (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<Claim> DiagnosisItems, nint _)?>)l_, m_);
 			(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? o_ = context.Operators.SingletonFrom<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(n_);
 
 			return o_;
 		};
-		IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> g_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?, (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?>)e_), f_);
+		IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> g_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?, (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?>)e_, f_);
 		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? h_ = context.Operators.SingletonFrom<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(g_);
 
 		return h_;
@@ -703,7 +703,7 @@ public class NCQAClaims_1_0_0
 									Quantity bg_ = i?.Quantity;
 									bool? bh_ = context.Operators.Not((bool?)(bg_ is null));
 
-									return (bh_ ?? false);
+									return bh_ ?? false;
 								};
 								if (bf_())
 								{
@@ -736,8 +736,8 @@ public class NCQAClaims_1_0_0
 										else
 										{
 											DataType bz_ = i?.Serviced;
-											CqlDate ca_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											CqlDate cc_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											CqlDate ca_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
+											CqlDate cc_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
 											Quantity cd_ = i?.Quantity;
 											FhirDecimal ce_ = cd_?.ValueElement;
 											decimal? cf_ = FHIRHelpers_4_0_001.ToDecimal(ce_);
@@ -747,8 +747,8 @@ public class NCQAClaims_1_0_0
 											CqlInterval<CqlDate> cj_ = context.Operators.Interval(ca_, ci_, true, true);
 											CqlDate ck_ = cj_?.low;
 											CqlDateTime cl_ = context.Operators.ConvertDateToDateTime(ck_);
-											CqlDate cn_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											CqlDate cp_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											CqlDate cn_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
+											CqlDate cp_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
 											FhirDecimal cr_ = cd_?.ValueElement;
 											decimal? cs_ = FHIRHelpers_4_0_001.ToDecimal(cr_);
 											CqlDate ct_ = context.Operators.Add(cp_, new CqlQuantity(cs_, "day"));
@@ -756,16 +756,16 @@ public class NCQAClaims_1_0_0
 											CqlInterval<CqlDate> cw_ = context.Operators.Interval(cn_, cv_, true, true);
 											CqlDate cx_ = cw_?.high;
 											CqlDateTime cy_ = context.Operators.ConvertDateToDateTime(cx_);
-											CqlDate da_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											CqlDate dc_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											CqlDate da_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
+											CqlDate dc_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
 											FhirDecimal de_ = cd_?.ValueElement;
 											decimal? df_ = FHIRHelpers_4_0_001.ToDecimal(de_);
 											CqlDate dg_ = context.Operators.Add(dc_, new CqlQuantity(df_, "day"));
 											CqlDate di_ = context.Operators.Subtract(dg_, ch_);
 											CqlInterval<CqlDate> dj_ = context.Operators.Interval(da_, di_, true, true);
 											bool? dk_ = dj_?.lowClosed;
-											CqlDate dm_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
-											CqlDate do_ = FHIRHelpers_4_0_001.ToDate((bz_ as Date));
+											CqlDate dm_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
+											CqlDate do_ = FHIRHelpers_4_0_001.ToDate(bz_ as Date);
 											FhirDecimal dq_ = cd_?.ValueElement;
 											decimal? dr_ = FHIRHelpers_4_0_001.ToDecimal(dq_);
 											CqlDate ds_ = context.Operators.Add(do_, new CqlQuantity(dr_, "day"));
@@ -782,7 +782,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return (null as CqlInterval<CqlDateTime>);
+									return null as CqlInterval<CqlDateTime>;
 								}
 							};
 							(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)? be_ = (bd_(), default);
@@ -803,7 +803,7 @@ public class NCQAClaims_1_0_0
 									IEnumerable<Claim.ItemComponent> ea_ = LineItemDefinition?.LineItems;
 									bool? eb_ = context.Operators.Exists<Claim.ItemComponent>(ea_);
 
-									return (eb_ ?? false);
+									return eb_ ?? false;
 								};
 								if (dz_())
 								{
@@ -845,13 +845,13 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return (null as (Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?);
+									return null as (Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?;
 								}
 							};
 
 							return dy_();
 						};
-						IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> as_ = context.Operators.Select<(IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> CoveredDays, nint _)?, (Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(((IEnumerable<(IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> CoveredDays, nint _)?>)aq_), ar_);
+						IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> as_ = context.Operators.Select<(IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> CoveredDays, nint _)?, (Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>((IEnumerable<(IEnumerable<(CqlInterval<CqlDateTime> DaysSupplyInterval, nint _)?> CoveredDays, nint _)?>)aq_, ar_);
 						(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? at_ = context.Operators.SingletonFrom<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(as_);
 
 						return at_;
@@ -861,7 +861,7 @@ public class NCQAClaims_1_0_0
 
 					return aj_;
 				};
-				IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> u_ = context.Operators.Select<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(((IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)s_), t_);
+				IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> u_ = context.Operators.Select<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?, (Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>((IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItems)?>)s_, t_);
 				(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? v_ = context.Operators.SingletonFrom<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>(u_);
 
 				return v_;
@@ -877,7 +877,7 @@ public class NCQAClaims_1_0_0
 
 			return n_;
 		};
-		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>> g_ = context.Operators.Select<(IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?, IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>>(((IEnumerable<(IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?>)e_), f_);
+		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>> g_ = context.Operators.Select<(IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?, IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>>((IEnumerable<(IEnumerable<Claim> PharmacyClaim, IEnumerable<string> MedicationsAsStrings)?>)e_, f_);
 		IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> h_ = context.Operators.SingletonFrom<IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>>(g_);
 
 		return h_;
@@ -909,9 +909,9 @@ public class NCQAClaims_1_0_0
 		{
 			IEnumerable<Claim> m_()
 			{
-				if ((ClaimWithDiagnosis?.MedicalClaim is null))
+				if (ClaimWithDiagnosis?.MedicalClaim is null)
 				{
-					return (null as IEnumerable<Claim>);
+					return null as IEnumerable<Claim>;
 				}
 				else
 				{
@@ -983,7 +983,7 @@ public class NCQAClaims_1_0_0
 				{
 					Claim az_()
 					{
-						if ((ClaimofInterest is null))
+						if (ClaimofInterest is null)
 						{
 							return default;
 						}
@@ -1106,7 +1106,7 @@ public class NCQAClaims_1_0_0
 								Claim di_ = HeaderDefinition?.ProcedureItems;
 								bool? dj_ = context.Operators.Not((bool?)(di_ is null));
 
-								return (dj_ ?? false);
+								return dj_ ?? false;
 							};
 							if (dh_())
 							{
@@ -1126,13 +1126,13 @@ public class NCQAClaims_1_0_0
 							}
 							else
 							{
-								return (null as (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+								return null as (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 							}
 						};
 
 						return dg_();
 					};
-					IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> bd_ = context.Operators.Select<(Claim ProcedureItems, nint _)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(Claim ProcedureItems, nint _)?>)bb_), bc_);
+					IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> bd_ = context.Operators.Select<(Claim ProcedureItems, nint _)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(Claim ProcedureItems, nint _)?>)bb_, bc_);
 					(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? be_ = context.Operators.SingletonFrom<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(bd_);
 
 					return be_;
@@ -1148,12 +1148,12 @@ public class NCQAClaims_1_0_0
 
 				return ay_;
 			};
-			IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> q_ = context.Operators.Select<(IEnumerable<Claim> DiagnosisItems, nint _)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(((IEnumerable<(IEnumerable<Claim> DiagnosisItems, nint _)?>)o_), p_);
+			IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> q_ = context.Operators.Select<(IEnumerable<Claim> DiagnosisItems, nint _)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(IEnumerable<Claim> DiagnosisItems, nint _)?>)o_, p_);
 			IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> r_ = context.Operators.SingletonFrom<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(q_);
 
 			return r_;
 		};
-		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> i_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?>)g_), h_);
+		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> i_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?>)g_, h_);
 		IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> j_ = context.Operators.SingletonFrom<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(i_);
 
 		return j_;
@@ -1188,7 +1188,7 @@ public class NCQAClaims_1_0_0
 			{
 				Claim r_()
 				{
-					if ((ClaimofInterest is null))
+					if (ClaimofInterest is null)
 					{
 						return default;
 					}
@@ -1313,7 +1313,7 @@ public class NCQAClaims_1_0_0
 						List<Claim.ItemComponent> cd_ = ClaimforDiagnosis?.Item;
 						Claim ce_()
 						{
-							if ((ClaimforDiagnosis is null))
+							if (ClaimforDiagnosis is null)
 							{
 								return default;
 							}
@@ -1374,7 +1374,7 @@ public class NCQAClaims_1_0_0
 									bool? dk_ = context.Operators.Not((bool?)(dj_ is null));
 									bool? dl_ = context.Operators.And(di_, dk_);
 
-									return (dl_ ?? false);
+									return dl_ ?? false;
 								};
 								if (dh_())
 								{
@@ -1394,13 +1394,13 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return (null as (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+									return null as (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 								}
 							};
 
 							return dg_();
 						};
-						IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ci_ = context.Operators.Select<(IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?>)cg_), ch_);
+						IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ci_ = context.Operators.Select<(IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<Claim.ItemComponent> Procedure, Claim LineItems)?>)cg_, ch_);
 						(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? cj_ = context.Operators.SingletonFrom<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(ci_);
 
 						return cj_;
@@ -1410,7 +1410,7 @@ public class NCQAClaims_1_0_0
 
 					return cc_;
 				};
-				IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> v_ = context.Operators.Select<(Claim Claim, Claim ProcedureItems)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(Claim Claim, Claim ProcedureItems)?>)t_), u_);
+				IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> v_ = context.Operators.Select<(Claim Claim, Claim ProcedureItems)?, (Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(Claim Claim, Claim ProcedureItems)?>)t_, u_);
 				(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? w_ = context.Operators.SingletonFrom<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(v_);
 
 				return w_;
@@ -1426,7 +1426,7 @@ public class NCQAClaims_1_0_0
 
 			return q_;
 		};
-		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> i_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?>)g_), h_);
+		IEnumerable<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> i_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?, IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings, IEnumerable<string> ProceduresAsStrings)?>)g_, h_);
 		IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> j_ = context.Operators.SingletonFrom<IEnumerable<(Claim Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(i_);
 
 		return j_;
@@ -1451,9 +1451,9 @@ public class NCQAClaims_1_0_0
 		{
 			IEnumerable<Claim> j_()
 			{
-				if ((ClaimWithDiagnosis?.MedicalClaim is null))
+				if (ClaimWithDiagnosis?.MedicalClaim is null)
 				{
-					return (null as IEnumerable<Claim>);
+					return null as IEnumerable<Claim>;
 				}
 				else
 				{
@@ -1505,7 +1505,7 @@ public class NCQAClaims_1_0_0
 				{
 					(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ap_()
 					{
-						if ((context.Operators.Not((bool?)(ClaimWithDiagnosis is null)) ?? false))
+						if ((context.Operators.Not((bool?)(ClaimWithDiagnosis is null))) ?? false)
 						{
 							IEnumerable<Claim> aq_ = LineItemDefinition?.LineItems;
 							bool? as_(Claim @this)
@@ -1538,7 +1538,7 @@ public class NCQAClaims_1_0_0
 						}
 						else
 						{
-							return (null as (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+							return null as (IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 						}
 					};
 
@@ -1555,12 +1555,12 @@ public class NCQAClaims_1_0_0
 
 				return ao_;
 			};
-			IEnumerable<IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> n_ = context.Operators.Select<(IEnumerable<Claim> LineItems, nint _)?, IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(((IEnumerable<(IEnumerable<Claim> LineItems, nint _)?>)l_), m_);
+			IEnumerable<IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> n_ = context.Operators.Select<(IEnumerable<Claim> LineItems, nint _)?, IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(IEnumerable<Claim> LineItems, nint _)?>)l_, m_);
 			IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> o_ = context.Operators.SingletonFrom<IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(n_);
 
 			return o_;
 		};
-		IEnumerable<IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> g_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?, IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?>)e_), f_);
+		IEnumerable<IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>> g_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?, IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> DiagnosesAsStrings)?>)e_, f_);
 		IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> h_ = context.Operators.SingletonFrom<IEnumerable<(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>>(g_);
 
 		return h_;
@@ -1587,7 +1587,7 @@ public class NCQAClaims_1_0_0
 				"complete",
 				"partial",
 			];
-			bool? k_ = context.Operators.In<string>(i_, (j_ as IEnumerable<string>));
+			bool? k_ = context.Operators.In<string>(i_, j_ as IEnumerable<string>);
 
 			return k_;
 		};
@@ -1689,7 +1689,7 @@ public class NCQAClaims_1_0_0
 
 			return n_;
 		};
-		IEnumerable<IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>> f_ = context.Operators.Select<(IEnumerable<ClaimResponse> PaidResponse, nint _)?, IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>>(((IEnumerable<(IEnumerable<ClaimResponse> PaidResponse, nint _)?>)d_), e_);
+		IEnumerable<IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>> f_ = context.Operators.Select<(IEnumerable<ClaimResponse> PaidResponse, nint _)?, IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>>((IEnumerable<(IEnumerable<ClaimResponse> PaidResponse, nint _)?>)d_, e_);
 		IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> g_ = context.Operators.SingletonFrom<IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>>(f_);
 
 		return g_;
@@ -1926,7 +1926,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.ItemComponent> bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
 						bool? bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
 
-						return (bg_ ?? false);
+						return bg_ ?? false;
 					};
 					if (az_())
 					{
@@ -1976,7 +1976,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return (null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+						return null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 					}
 				};
 				(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] av_ = [
@@ -1988,17 +1988,17 @@ public class NCQAClaims_1_0_0
 
 					return cg_;
 				};
-				IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ax_ = context.Operators.Where<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)av_), aw_);
+				IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ax_ = context.Operators.Where<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)av_, aw_);
 				(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ay_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(ax_);
 
 				return ay_;
 			};
-			IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> n_ = context.Operators.Select<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?>)l_), m_);
+			IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> n_ = context.Operators.Select<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?>)l_, m_);
 			(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? o_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(n_);
 
 			return o_;
 		};
-		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> f_ = context.Operators.Select<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)d_), e_);
+		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> f_ = context.Operators.Select<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)d_, e_);
 		(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? g_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(f_);
 
 		return g_;
@@ -2021,11 +2021,11 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> m_ = MedicalClaimAndResponse?.MedicalClaim;
 					bool? n_ = context.Operators.And((bool?)(l_ is null), (bool?)(m_ is null));
 
-					return (n_ ?? false);
+					return n_ ?? false;
 				};
 				if (k_())
 				{
-					return (null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+					return null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 				}
 				else
 				{
@@ -2039,7 +2039,7 @@ public class NCQAClaims_1_0_0
 
 			return j_();
 		};
-		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> d_ = context.Operators.Select<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)b_), c_);
+		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> d_ = context.Operators.Select<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)b_, c_);
 		(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? e_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(d_);
 		(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] f_ = [
 			e_,
@@ -2050,7 +2050,7 @@ public class NCQAClaims_1_0_0
 
 			return r_;
 		};
-		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> h_ = context.Operators.Where<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)f_), g_);
+		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> h_ = context.Operators.Where<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)f_, g_);
 		(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? i_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(h_);
 
 		return i_;
@@ -2177,7 +2177,7 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim.ItemComponent> bb_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)az_, ba_);
 					bool? bc_ = context.Operators.Exists<Claim.ItemComponent>(bb_);
 
-					return (bc_ ?? false);
+					return bc_ ?? false;
 				};
 				if (ay_())
 				{
@@ -2337,7 +2337,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.ItemComponent> bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
 						bool? bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
 
-						return (bg_ ?? false);
+						return bg_ ?? false;
 					};
 					if (az_())
 					{
@@ -2387,7 +2387,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return (null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+						return null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 					}
 				};
 				(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] av_ = [
@@ -2399,17 +2399,17 @@ public class NCQAClaims_1_0_0
 
 					return cg_;
 				};
-				IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ax_ = context.Operators.Where<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)av_), aw_);
+				IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ax_ = context.Operators.Where<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)av_, aw_);
 				(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ay_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(ax_);
 
 				return ay_;
 			};
-			IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> n_ = context.Operators.Select<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?>)l_), m_);
+			IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> n_ = context.Operators.Select<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?>)l_, m_);
 			(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? o_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(n_);
 
 			return o_;
 		};
-		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> f_ = context.Operators.Select<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)d_), e_);
+		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> f_ = context.Operators.Select<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)d_, e_);
 		(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? g_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(f_);
 
 		return g_;
@@ -2432,11 +2432,11 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> i_ = MedicalClaimAndResponse?.MedicalClaim;
 					bool? j_ = context.Operators.And((bool?)(h_ is null), (bool?)(i_ is null));
 
-					return (j_ ?? false);
+					return j_ ?? false;
 				};
 				if (g_())
 				{
-					return (null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+					return null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 				}
 				else
 				{
@@ -2450,7 +2450,7 @@ public class NCQAClaims_1_0_0
 
 			return f_();
 		};
-		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> d_ = context.Operators.Select<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)b_), c_);
+		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> d_ = context.Operators.Select<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)b_, c_);
 		(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? e_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(d_);
 
 		return e_;
@@ -2642,7 +2642,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.ItemComponent> bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
 						bool? bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
 
-						return (bg_ ?? false);
+						return bg_ ?? false;
 					};
 					if (az_())
 					{
@@ -2692,7 +2692,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return (null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+						return null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 					}
 				};
 				(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?[] av_ = [
@@ -2704,17 +2704,17 @@ public class NCQAClaims_1_0_0
 
 					return cg_;
 				};
-				IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ax_ = context.Operators.Where<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)av_), aw_);
+				IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> ax_ = context.Operators.Where<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>)av_, aw_);
 				(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? ay_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(ax_);
 
 				return ay_;
 			};
-			IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> n_ = context.Operators.Select<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?>)l_), m_);
+			IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> n_ = context.Operators.Select<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<((Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?>)l_, m_);
 			(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? o_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(n_);
 
 			return o_;
 		};
-		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> f_ = context.Operators.Select<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)d_), e_);
+		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> f_ = context.Operators.Select<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidMedicalClaimResponse, IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> MedicalClaim)?>)d_, e_);
 		(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? g_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(f_);
 
 		return g_;
@@ -2737,11 +2737,11 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> i_ = MedicalClaimAndResponse?.MedicalClaim;
 					bool? j_ = context.Operators.And((bool?)(h_ is null), (bool?)(i_ is null));
 
-					return (j_ ?? false);
+					return j_ ?? false;
 				};
 				if (g_())
 				{
-					return (null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?);
+					return null as (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?;
 				}
 				else
 				{
@@ -2755,7 +2755,7 @@ public class NCQAClaims_1_0_0
 
 			return f_();
 		};
-		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> d_ = context.Operators.Select<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(((IEnumerable<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)b_), c_);
+		IEnumerable<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?> d_ = context.Operators.Select<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?, (IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>((IEnumerable<(IEnumerable<ClaimResponse> MedicalClaimResponse, IEnumerable<Claim> MedicalClaim)?>)b_, c_);
 		(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? e_ = context.Operators.SingletonFrom<(IEnumerable<(Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)?>(d_);
 
 		return e_;
@@ -2877,7 +2877,7 @@ public class NCQAClaims_1_0_0
 						IEnumerable<Claim.ItemComponent> bf_ = context.Operators.Flatten<Claim.ItemComponent>(be_);
 						bool? bg_ = context.Operators.Exists<Claim.ItemComponent>(bf_);
 
-						return (bg_ ?? false);
+						return bg_ ?? false;
 					};
 					if (az_())
 					{
@@ -2946,7 +2946,7 @@ public class NCQAClaims_1_0_0
 									Quantity ct_ = i?.Quantity;
 									bool? cu_ = context.Operators.Not((bool?)(ct_ is null));
 
-									return (cu_ ?? false);
+									return cu_ ?? false;
 								};
 								if (cs_())
 								{
@@ -2969,7 +2969,7 @@ public class NCQAClaims_1_0_0
 								}
 								else
 								{
-									return (null as CqlInterval<CqlDate>);
+									return null as CqlInterval<CqlDate>;
 								}
 							};
 
@@ -2982,7 +2982,7 @@ public class NCQAClaims_1_0_0
 					}
 					else
 					{
-						return (null as (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?);
+						return null as (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?;
 					}
 				};
 				(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?[] av_ = [
@@ -2994,17 +2994,17 @@ public class NCQAClaims_1_0_0
 
 					return dk_;
 				};
-				IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> ax_ = context.Operators.Where<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(((IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>)av_), aw_);
+				IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> ax_ = context.Operators.Where<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>)av_, aw_);
 				(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? ay_ = context.Operators.SingletonFrom<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(ax_);
 
 				return ay_;
 			};
-			IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> n_ = context.Operators.Select<(IEnumerable<((Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?, (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(((IEnumerable<(IEnumerable<((Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?>)l_), m_);
+			IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> n_ = context.Operators.Select<(IEnumerable<((Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?, (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(IEnumerable<((Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?> AggregateClaim, nint _)?>)l_, m_);
 			(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? o_ = context.Operators.SingletonFrom<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(n_);
 
 			return o_;
 		};
-		IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> f_ = context.Operators.Select<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?, (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(((IEnumerable<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?>)d_), e_);
+		IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> f_ = context.Operators.Select<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?, (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(IEnumerable<(ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?> PaidPharmacyClaimResponse, IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> MedicalClaim)?>)d_, e_);
 		(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? g_ = context.Operators.SingletonFrom<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(f_);
 
 		return g_;
@@ -3027,11 +3027,11 @@ public class NCQAClaims_1_0_0
 					IEnumerable<Claim> i_ = PharmacyClaimAndResponse?.PharmacyClaim;
 					bool? j_ = context.Operators.And((bool?)(h_ is null), (bool?)(i_ is null));
 
-					return (j_ ?? false);
+					return j_ ?? false;
 				};
 				if (g_())
 				{
-					return (null as (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?);
+					return null as (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?;
 				}
 				else
 				{
@@ -3045,7 +3045,7 @@ public class NCQAClaims_1_0_0
 
 			return f_();
 		};
-		IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> d_ = context.Operators.Select<(IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?, (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(((IEnumerable<(IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?>)b_), c_);
+		IEnumerable<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?> d_ = context.Operators.Select<(IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?, (IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>((IEnumerable<(IEnumerable<ClaimResponse> PharmacyClaimResponse, IEnumerable<Claim> PharmacyClaim)?>)b_, c_);
 		(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)? e_ = context.Operators.SingletonFrom<(IEnumerable<(Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?> originalClaim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDate>> CoveredDays)?>(d_);
 
 		return e_;
@@ -3145,9 +3145,9 @@ public class NCQAClaims_1_0_0
 		{
 			IEnumerable<Claim> g_()
 			{
-				if ((ClaimWithInpatientStay?.MedicalClaim is null))
+				if (ClaimWithInpatientStay?.MedicalClaim is null)
 				{
-					return (null as IEnumerable<Claim>);
+					return null as IEnumerable<Claim>;
 				}
 				else
 				{
@@ -3185,9 +3185,9 @@ public class NCQAClaims_1_0_0
 			};
 			IEnumerable<Claim> h_()
 			{
-				if ((ClaimWithInpatientStay?.MedicalClaim is null))
+				if (ClaimWithInpatientStay?.MedicalClaim is null)
 				{
-					return (null as IEnumerable<Claim>);
+					return null as IEnumerable<Claim>;
 				}
 				else
 				{
@@ -3288,12 +3288,12 @@ public class NCQAClaims_1_0_0
 
 				return bm_;
 			};
-			IEnumerable<(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> l_ = context.Operators.Select<(IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?, (IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(((IEnumerable<(IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?>)j_), k_);
+			IEnumerable<(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> l_ = context.Operators.Select<(IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?, (IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>((IEnumerable<(IEnumerable<Claim> InpatientStayLineItems, IEnumerable<Claim> NonacuteInpatientLineItems)?>)j_, k_);
 			(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? m_ = context.Operators.SingletonFrom<(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(l_);
 
 			return m_;
 		};
-		IEnumerable<(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> e_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, (IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)c_), d_);
+		IEnumerable<(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?> e_ = context.Operators.Select<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?, (IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>((IEnumerable<(IEnumerable<Claim> MedicalClaim, IEnumerable<string> ProceduresAsStrings, IEnumerable<string> POSAsString)?>)c_, d_);
 		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? f_ = context.Operators.SingletonFrom<(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)?>(e_);
 
 		return f_;
@@ -3509,7 +3509,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim> dq_ = context.Operators.Select<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?, Claim>(do_, dp_);
 							bool? dr_ = context.Operators.Exists<Claim>(dq_);
 
-							return (dr_ ?? false);
+							return dr_ ?? false;
 						};
 						if (dl_())
 						{
@@ -3533,7 +3533,7 @@ public class NCQAClaims_1_0_0
 							{
 								List<Claim.CareTeamComponent> eu_ = X?.CareTeam;
 
-								return (bool?)((IEnumerable<Claim.CareTeamComponent>)eu_ is null);
+								return (bool?)(((IEnumerable<Claim.CareTeamComponent>)eu_) is null);
 							};
 							IEnumerable<Claim> eb_ = context.Operators.Where<Claim>(dz_, ea_);
 							int? ec_ = context.Operators.Count<Claim>(eb_);
@@ -3573,17 +3573,17 @@ public class NCQAClaims_1_0_0
 
 					return dk_;
 				};
-				IEnumerable<(int? IdentifierCount, nint _)?> bv_ = context.Operators.Select<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?, (int? IdentifierCount, nint _)?>(((IEnumerable<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?>)bt_), bu_);
+				IEnumerable<(int? IdentifierCount, nint _)?> bv_ = context.Operators.Select<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?>)bt_, bu_);
 				(int? IdentifierCount, nint _)? bw_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(bv_);
 
 				return bw_;
 			};
-			IEnumerable<(int? IdentifierCount, nint _)?> az_ = context.Operators.Select<(IEnumerable<Practitioner> Practitioners, nint _)?, (int? IdentifierCount, nint _)?>(((IEnumerable<(IEnumerable<Practitioner> Practitioners, nint _)?>)ax_), ay_);
+			IEnumerable<(int? IdentifierCount, nint _)?> az_ = context.Operators.Select<(IEnumerable<Practitioner> Practitioners, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<Practitioner> Practitioners, nint _)?>)ax_, ay_);
 			(int? IdentifierCount, nint _)? ba_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(az_);
 
 			return ba_;
 		};
-		IEnumerable<(int? IdentifierCount, nint _)?> f_ = context.Operators.Select<(IEnumerable<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams, nint _)?, (int? IdentifierCount, nint _)?>(((IEnumerable<(IEnumerable<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams, nint _)?>)d_), e_);
+		IEnumerable<(int? IdentifierCount, nint _)?> f_ = context.Operators.Select<(IEnumerable<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams, nint _)?>)d_, e_);
 		(int? IdentifierCount, nint _)? g_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(f_);
 
 		return g_;
@@ -3621,7 +3621,7 @@ public class NCQAClaims_1_0_0
 			};
 			IEnumerable<object> o_ = context.Operators.Select<Claim.ItemComponent, object>(m_, n_);
 			ResourceReference p_(object l) => 
-				(l as ResourceReference);
+				l as ResourceReference;
 			IEnumerable<ResourceReference> q_ = context.Operators.Select<object, ResourceReference>(o_, p_);
 			bool? s_(Claim.ItemComponent i)
 			{
@@ -3803,7 +3803,7 @@ public class NCQAClaims_1_0_0
 							IEnumerable<Claim.ItemComponent> du_ = context.Operators.Flatten<Claim.ItemComponent>(dt_);
 							bool? dv_ = context.Operators.Exists<Claim.ItemComponent>(du_);
 
-							return (dv_ ?? false);
+							return dv_ ?? false;
 						};
 						if (do_())
 						{
@@ -3869,17 +3869,17 @@ public class NCQAClaims_1_0_0
 
 					return dn_;
 				};
-				IEnumerable<(int? IdentifierCount, nint _)?> by_ = context.Operators.Select<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?, (int? IdentifierCount, nint _)?>(((IEnumerable<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?>)bw_), bx_);
+				IEnumerable<(int? IdentifierCount, nint _)?> by_ = context.Operators.Select<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<(IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?> IdentifierTuple, nint _)?>)bw_, bx_);
 				(int? IdentifierCount, nint _)? bz_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(by_);
 
 				return bz_;
 			};
-			IEnumerable<(int? IdentifierCount, nint _)?> bc_ = context.Operators.Select<(IEnumerable<Location> CorrespondingLocations, nint _)?, (int? IdentifierCount, nint _)?>(((IEnumerable<(IEnumerable<Location> CorrespondingLocations, nint _)?>)ba_), bb_);
+			IEnumerable<(int? IdentifierCount, nint _)?> bc_ = context.Operators.Select<(IEnumerable<Location> CorrespondingLocations, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<Location> CorrespondingLocations, nint _)?>)ba_, bb_);
 			(int? IdentifierCount, nint _)? bd_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(bc_);
 
 			return bd_;
 		};
-		IEnumerable<(int? IdentifierCount, nint _)?> f_ = context.Operators.Select<(IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)?, (int? IdentifierCount, nint _)?>(((IEnumerable<(IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)?>)d_), e_);
+		IEnumerable<(int? IdentifierCount, nint _)?> f_ = context.Operators.Select<(IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)?, (int? IdentifierCount, nint _)?>((IEnumerable<(IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)?>)d_, e_);
 		(int? IdentifierCount, nint _)? g_ = context.Operators.SingletonFrom<(int? IdentifierCount, nint _)?>(f_);
 
 		return g_;

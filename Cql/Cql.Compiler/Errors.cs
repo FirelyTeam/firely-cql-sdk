@@ -32,9 +32,9 @@ internal readonly record struct LibraryIdentifierMustBeUniqueError(Library Libra
     public string GetMessage() => $"Library did not have a unique name and version in the set. Duplicate Identifier: '{Library}'";
 }
 
-internal readonly record struct CouldNotResolveAliasFromTheLibraryNameAndVersionError(Library Library) : ILibraryError
+internal readonly record struct CouldNotResolveAliasFromTheLibraryVersionedIdentifierError(Library Library) : ILibraryError
 {
-    public string GetMessage() => $"Could not resolve alias from the Library name and version. Library Identifier: '{Library}'";
+    public string GetMessage() => $"Could not resolve alias from the Library versioned identifier. Library Identifier: '{Library}'";
 }
 
 internal readonly record struct LibraryAliasUnresolvedError(Library Library, string Alias) : ILibraryError

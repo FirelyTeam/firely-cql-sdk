@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public class SupplementalDataElementsFHIR4_2_0_000
 {
@@ -113,7 +113,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			{
 				Patient n_ = this.Patient();
 
-				return ((IEnumerable<Extension>)(n_ as DomainResource).Extension);
+				return (IEnumerable<Extension>)((n_ as DomainResource).Extension);
 			}
 			else
 			{
@@ -156,7 +156,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		{
 			DataType ac_ = E?.Value;
 
-			return (ac_ as Coding);
+			return ac_ as Coding;
 		};
 		IEnumerable<Coding> j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 
@@ -203,7 +203,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			{
 				Patient n_ = this.Patient();
 
-				return ((IEnumerable<Extension>)(n_ as DomainResource).Extension);
+				return (IEnumerable<Extension>)((n_ as DomainResource).Extension);
 			}
 			else
 			{
@@ -246,7 +246,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		{
 			DataType ac_ = E?.Value;
 
-			return (ac_ as Coding);
+			return ac_ as Coding;
 		};
 		IEnumerable<Coding> j_ = context.Operators.Select<Extension, Coding>(h_, i_);
 
@@ -268,7 +268,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 				string f_ = FHIRHelpers_4_0_001.ToString(e_);
 				bool? g_ = context.Operators.Equal(f_, "male");
 
-				return (g_ ?? false);
+				return g_ ?? false;
 			};
 			bool c_()
 			{
@@ -277,7 +277,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 				string j_ = FHIRHelpers_4_0_001.ToString(i_);
 				bool? k_ = context.Operators.Equal(j_, "female");
 
-				return (k_ ?? false);
+				return k_ ?? false;
 			};
 			if (b_())
 			{

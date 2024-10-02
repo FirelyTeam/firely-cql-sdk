@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR", "0.0.001")]
 public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001
 {
@@ -525,7 +525,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			CqlInterval<CqlDateTime> bl_ = this.Measurement_Period();
 			Period bm_ = OfficeBasedEncounter?.Period;
 			CqlInterval<CqlDateTime> bn_ = FHIRHelpers_4_3_000.ToInterval(bm_);
-			CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_0_000.toInterval((bn_ as object));
+			CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_0_000.toInterval(bn_ as object);
 			bool? bp_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bl_, bo_, "day");
 
 			return bp_;
@@ -615,7 +615,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			CqlInterval<CqlDateTime> aw_ = this.Measurement_Period();
 			Period ax_ = PreventiveEncounter?.Period;
 			CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_3_000.ToInterval(ax_);
-			CqlInterval<CqlDateTime> az_ = QICoreCommon_2_0_000.toInterval((ay_ as object));
+			CqlInterval<CqlDateTime> az_ = QICoreCommon_2_0_000.toInterval(ay_ as object);
 			bool? ba_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, az_, "day");
 
 			return ba_;
@@ -701,7 +701,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			DataType v_ = MostRecentTobaccoUseScreening?.Value;
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
 			CqlValueSet x_ = this.Tobacco_User();
-			bool? y_ = context.Operators.ConceptInValueSet((w_ as CqlConcept), x_);
+			bool? y_ = context.Operators.ConceptInValueSet(w_ as CqlConcept, x_);
 
 			return y_;
 		};
@@ -775,7 +775,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			DataType v_ = MostRecentTobaccoUseScreening?.Value;
 			object w_ = FHIRHelpers_4_3_000.ToValue(v_);
 			CqlValueSet x_ = this.Tobacco_Non_User();
-			bool? y_ = context.Operators.ConceptInValueSet((w_ as CqlConcept), x_);
+			bool? y_ = context.Operators.ConceptInValueSet(w_ as CqlConcept, x_);
 
 			return y_;
 		};
@@ -843,7 +843,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 			return af_;
 		};
 		IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
-		IEnumerable<object> k_ = context.Operators.Union<object>((e_ as IEnumerable<object>), (j_ as IEnumerable<object>));
+		IEnumerable<object> k_ = context.Operators.Union<object>(e_ as IEnumerable<object>, j_ as IEnumerable<object>);
 
 		return k_;
 	}

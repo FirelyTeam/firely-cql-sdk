@@ -10,7 +10,7 @@ using System.Diagnostics;
 namespace Hl7.Cql.Compiler;
 
 [DebuggerDisplay("{DebuggerView}")]
-partial class LibraryExpressionBuilderContext : ILibraryExpressionBuilderContext
+partial class LibraryExpressionBuilderContext : IBuilderContext
 {
     IBuilderContext? IBuilderContext.OuterBuilderContext => LibrarySetContext;
 

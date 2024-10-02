@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("Exam130FHIR", "0.0.003")]
 public class Exam130FHIR_0_0_003
 {
@@ -538,7 +538,7 @@ public class Exam130FHIR_0_0_003
 			bool? j_ = context.Operators.Equal(i_, "finished");
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
 			Period l_ = TelehealthEncounter?.Period;
-			CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((l_ as object));
+			CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(l_ as object);
 			bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
 			bool? o_ = context.Operators.And(j_, n_);
 
@@ -831,7 +831,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = FecalOccult?.Category;
 			bool? j_(CodeableConcept FecalOccultCategory)
 			{
@@ -869,7 +869,7 @@ public class Exam130FHIR_0_0_003
 				string[] ae_ = [
 					"laboratory",
 				];
-				bool? af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
+				bool? af_ = context.Operators.Equivalent<string>(ad_, ae_ as IEnumerable<string>);
 
 				return af_;
 			};
@@ -909,7 +909,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = FecalOccult?.Category;
 			bool? j_(CodeableConcept FecalOccultCategory)
 			{
@@ -947,7 +947,7 @@ public class Exam130FHIR_0_0_003
 				string[] ae_ = [
 					"laboratory",
 				];
-				bool? af_ = context.Operators.Equivalent<string>(ad_, (ae_ as IEnumerable<string>));
+				bool? af_ = context.Operators.Equivalent<string>(ad_, ae_ as IEnumerable<string>);
 
 				return af_;
 			};
@@ -1017,7 +1017,7 @@ public class Exam130FHIR_0_0_003
 				string[] z_ = [
 					"laboratory",
 				];
-				bool? aa_ = context.Operators.Equivalent<string>(y_, (z_ as IEnumerable<string>));
+				bool? aa_ = context.Operators.Equivalent<string>(y_, z_ as IEnumerable<string>);
 				bool? ab_ = context.Operators.Not(aa_);
 
 				return ab_;
@@ -1057,7 +1057,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			bool? i_ = context.Operators.Not(h_);
 			DataType j_ = FecalOccult?.Value;
 			bool? k_ = context.Operators.Not((bool?)(j_ is null));
@@ -1196,7 +1196,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = FitDNA?.Category;
 			bool? j_(CodeableConcept FitDNACategory)
 			{
@@ -1234,7 +1234,7 @@ public class Exam130FHIR_0_0_003
 				string[] ao_ = [
 					"laboratory",
 				];
-				bool? ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
+				bool? ap_ = context.Operators.Equivalent<string>(an_, ao_ as IEnumerable<string>);
 
 				return ap_;
 			};
@@ -1282,7 +1282,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = FitDNA?.Category;
 			bool? j_(CodeableConcept FitDNACategory)
 			{
@@ -1320,7 +1320,7 @@ public class Exam130FHIR_0_0_003
 				string[] ao_ = [
 					"laboratory",
 				];
-				bool? ap_ = context.Operators.Equivalent<string>(an_, (ao_ as IEnumerable<string>));
+				bool? ap_ = context.Operators.Equivalent<string>(an_, ao_ as IEnumerable<string>);
 
 				return ap_;
 			};
@@ -1398,7 +1398,7 @@ public class Exam130FHIR_0_0_003
 				string[] aj_ = [
 					"laboratory",
 				];
-				bool? ak_ = context.Operators.Equivalent<string>(ai_, (aj_ as IEnumerable<string>));
+				bool? ak_ = context.Operators.Equivalent<string>(ai_, aj_ as IEnumerable<string>);
 				bool? al_ = context.Operators.Not(ak_);
 
 				return al_;
@@ -1446,7 +1446,7 @@ public class Exam130FHIR_0_0_003
 				"amended",
 				"corrected",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			bool? i_ = context.Operators.Not(h_);
 			DataType j_ = FitDNA?.Value;
 			bool? k_ = context.Operators.Not((bool?)(j_ is null));
@@ -1529,7 +1529,7 @@ public class Exam130FHIR_0_0_003
 				"corrected",
 				"appended",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			DataType i_ = Colonography?.Effective;
 			CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(i_);
 			CqlDateTime k_ = context.Operators.End(j_);
@@ -1570,7 +1570,7 @@ public class Exam130FHIR_0_0_003
 				"corrected",
 				"appended",
 			];
-			bool? h_ = context.Operators.In<string>(f_, (g_ as IEnumerable<string>));
+			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			bool? i_ = context.Operators.Not(h_);
 			DataType j_ = Colonography?.Effective;
 			CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);

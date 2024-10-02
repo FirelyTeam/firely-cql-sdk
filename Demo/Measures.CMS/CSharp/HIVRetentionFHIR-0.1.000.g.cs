@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("HIVRetentionFHIR", "0.1.000")]
 public class HIVRetentionFHIR_0_1_000
 {
@@ -286,7 +286,7 @@ public class HIVRetentionFHIR_0_1_000
 
 			return p_;
 		};
-		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
+		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(a_()), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
 		Extension[] e_ = [
 			d_,
@@ -302,8 +302,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return ao_;
 			};
-			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
-					? ((E as Element).Extension)
+			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
+					? (E as Element).Extension
 					: default), q_);
 			object s_(Extension @this)
 			{
@@ -313,7 +313,7 @@ public class HIVRetentionFHIR_0_1_000
 			};
 			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
 			object u_ = context.Operators.SingletonFrom<object>(t_);
-			CqlCode v_ = FHIRHelpers_4_3_000.ToCode((u_ as Coding));
+			CqlCode v_ = FHIRHelpers_4_3_000.ToCode(u_ as Coding);
 			CqlCode[] w_ = [
 				v_,
 			];
@@ -326,8 +326,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return at_;
 			};
-			IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
-					? ((E as Element).Extension)
+			IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
+					? (E as Element).Extension
 					: default), x_);
 			object z_(Extension @this)
 			{
@@ -338,12 +338,12 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<object> aa_ = context.Operators.Select<Extension, object>(y_, z_);
 			CqlCode ab_(object @this)
 			{
-				CqlCode av_ = FHIRHelpers_4_3_000.ToCode((@this as Coding));
+				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(@this as Coding);
 
 				return av_;
 			};
 			IEnumerable<CqlCode> ac_ = context.Operators.Select<object, CqlCode>(aa_, ab_);
-			IEnumerable<CqlCode> ad_ = context.Operators.Union<CqlCode>((w_ as IEnumerable<CqlCode>), ac_);
+			IEnumerable<CqlCode> ad_ = context.Operators.Union<CqlCode>(w_ as IEnumerable<CqlCode>, ac_);
 			bool? ae_(Extension @this)
 			{
 				string aw_ = @this?.Url;
@@ -353,8 +353,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return az_;
 			};
-			IEnumerable<Extension> af_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((E is Element)
-					? ((E as Element).Extension)
+			IEnumerable<Extension> af_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
+					? (E as Element).Extension
 					: default), ae_);
 			DataType ag_(Extension @this)
 			{
@@ -410,7 +410,7 @@ public class HIVRetentionFHIR_0_1_000
 
 			return p_;
 		};
-		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_(), b_);
+		IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(a_()), b_);
 		Extension d_ = context.Operators.SingletonFrom<Extension>(c_);
 		Extension[] e_ = [
 			d_,
@@ -426,8 +426,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return an_;
 			};
-			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
-					? ((R as Element).Extension)
+			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
+					? (R as Element).Extension
 					: default), q_);
 			object s_(Extension @this)
 			{
@@ -438,7 +438,7 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
 			CqlCode u_(object @this)
 			{
-				CqlCode ap_ = FHIRHelpers_4_3_000.ToCode((@this as Coding));
+				CqlCode ap_ = FHIRHelpers_4_3_000.ToCode(@this as Coding);
 
 				return ap_;
 			};
@@ -452,8 +452,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return at_;
 			};
-			IEnumerable<Extension> x_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
-					? ((R as Element).Extension)
+			IEnumerable<Extension> x_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
+					? (R as Element).Extension
 					: default), w_);
 			object y_(Extension @this)
 			{
@@ -464,7 +464,7 @@ public class HIVRetentionFHIR_0_1_000
 			IEnumerable<object> z_ = context.Operators.Select<Extension, object>(x_, y_);
 			CqlCode aa_(object @this)
 			{
-				CqlCode av_ = FHIRHelpers_4_3_000.ToCode((@this as Coding));
+				CqlCode av_ = FHIRHelpers_4_3_000.ToCode(@this as Coding);
 
 				return av_;
 			};
@@ -479,8 +479,8 @@ public class HIVRetentionFHIR_0_1_000
 
 				return az_;
 			};
-			IEnumerable<Extension> ae_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((R is Element)
-					? ((R as Element).Extension)
+			IEnumerable<Extension> ae_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
+					? (R as Element).Extension
 					: default), ad_);
 			DataType af_(Extension @this)
 			{
@@ -679,7 +679,7 @@ public class HIVRetentionFHIR_0_1_000
 						CqlInterval<CqlDateTime> ba_ = QICoreCommon_2_0_000.prevalenceInterval(HIVDiagnosis);
 						CqlDateTime bb_ = context.Operators.Start(ba_);
 
-						return (bb_ is null);
+						return bb_ is null;
 					};
 					if (az_())
 					{

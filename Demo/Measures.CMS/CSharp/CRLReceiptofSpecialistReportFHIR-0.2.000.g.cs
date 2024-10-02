@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.2.000")]
 public class CRLReceiptofSpecialistReportFHIR_0_2_000
 {
@@ -227,7 +227,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 				"active",
 				"completed",
 			];
-			bool? o_ = context.Operators.In<string>(m_, (n_ as IEnumerable<string>));
+			bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
 			Code<RequestIntent> p_ = ReferralOrder?.IntentElement;
 			RequestIntent? q_ = p_?.Value;
 			Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
@@ -395,7 +395,7 @@ public class CRLReceiptofSpecialistReportFHIR_0_2_000
 
 				return ae_;
 			};
-			IEnumerable<(string ID, CqlDateTime AuthorDate)?> i_ = context.Operators.Where<(string ID, CqlDateTime AuthorDate)?>(((IEnumerable<(string ID, CqlDateTime AuthorDate)?>)g_), h_);
+			IEnumerable<(string ID, CqlDateTime AuthorDate)?> i_ = context.Operators.Where<(string ID, CqlDateTime AuthorDate)?>((IEnumerable<(string ID, CqlDateTime AuthorDate)?>)g_, h_);
 			Task j_((string ID, CqlDateTime AuthorDate)? FirstReferral) => 
 				ConsultantReportObtained;
 			IEnumerable<Task> k_ = context.Operators.Select<(string ID, CqlDateTime AuthorDate)?, Task>(i_, j_);

@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public class ParametersExample_0_0_1
 {
@@ -110,7 +110,7 @@ public class ParametersExample_0_0_1
 			bool? k_ = context.Operators.IsTrue(j_);
 			bool? l_ = context.Operators.And(h_, k_);
 			DataType m_ = P?.Deceased;
-			bool? n_ = FHIRHelpers_4_3_000.ToBoolean((m_ as FhirBoolean));
+			bool? n_ = FHIRHelpers_4_3_000.ToBoolean(m_ as FhirBoolean);
 			bool? o_ = context.Operators.Not(n_);
 			bool? p_ = context.Operators.And(l_, o_);
 			CodeableConcept q_ = P?.MaritalStatus;

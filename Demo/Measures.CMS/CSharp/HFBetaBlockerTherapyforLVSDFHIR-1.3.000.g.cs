@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("HFBetaBlockerTherapyforLVSDFHIR", "1.3.000")]
 public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 {
@@ -355,7 +355,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				"active",
 				"completed",
 			];
-			bool? n_ = context.Operators.In<string>(l_, (m_ as IEnumerable<string>));
+			bool? n_ = context.Operators.In<string>(l_, m_ as IEnumerable<string>);
 			bool? o_ = context.Operators.And(i_, n_);
 			Code<MedicationRequest.MedicationRequestIntent> p_ = BetaBlockerOrdered?.IntentElement;
 			MedicationRequest.MedicationRequestIntent? q_ = p_?.Value;
@@ -367,7 +367,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				"filler-order",
 				"instance-order",
 			];
-			bool? t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
+			bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
 			bool? u_ = context.Operators.And(o_, t_);
 
 			return u_;
@@ -390,7 +390,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		bool? f_(MedicationRequest ActiveBetaBlocker)
 		{
-			bool? i_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((ActiveBetaBlocker as object));
+			bool? i_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter(ActiveBetaBlocker as object);
 
 			return i_;
 		};
@@ -445,10 +445,10 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 				"amended",
 				"corrected",
 			];
-			bool? v_ = context.Operators.In<string>(t_, (u_ as IEnumerable<string>));
+			bool? v_ = context.Operators.In<string>(t_, u_ as IEnumerable<string>);
 			bool? w_ = context.Operators.And(q_, v_);
 			DataType x_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Value;
-			CqlQuantity y_ = FHIRHelpers_4_3_000.ToQuantity((x_ as Quantity));
+			CqlQuantity y_ = FHIRHelpers_4_3_000.ToQuantity(x_ as Quantity);
 			CqlQuantity z_ = context.Operators.Quantity(50m, "/min");
 			bool? aa_ = context.Operators.Less(y_, z_);
 			bool? ab_ = context.Operators.And(w_, aa_);
@@ -484,7 +484,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 			IEnumerable<Observation> ag_ = context.Operators.SortBy<Observation>(ae_, af_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation ah_ = context.Operators.Last<Observation>(ag_);
 			DataType ai_ = ah_?.Value;
-			CqlQuantity aj_ = FHIRHelpers_4_3_000.ToQuantity((ai_ as Quantity));
+			CqlQuantity aj_ = FHIRHelpers_4_3_000.ToQuantity(ai_ as Quantity);
 			bool? al_ = context.Operators.Less(aj_, z_);
 			bool? am_ = context.Operators.And(ab_, al_);
 
@@ -530,7 +530,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		bool? d_(MedicationRequest NoBetaBlockerOrdered)
 		{
 			DataType q_ = NoBetaBlockerOrdered?.Medication;
-			CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept((q_ as CodeableConcept));
+			CqlConcept r_ = FHIRHelpers_4_3_000.ToConcept(q_ as CodeableConcept);
 			CqlValueSet s_ = this.Beta_Blocker_Therapy_for_LVSD();
 			bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
 			List<CodeableConcept> u_ = NoBetaBlockerOrdered?.ReasonCode;
@@ -660,7 +660,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
 		bool? f_(Condition BetaBlockerAllergyOrIntoleranceDiagnosis)
 		{
-			bool? i_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((BetaBlockerAllergyOrIntoleranceDiagnosis as object));
+			bool? i_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter(BetaBlockerAllergyOrIntoleranceDiagnosis as object);
 			bool? j_ = QICoreCommon_2_0_000.isActive(BetaBlockerAllergyOrIntoleranceDiagnosis);
 			bool? k_ = context.Operators.And(i_, j_);
 			CodeableConcept l_ = BetaBlockerAllergyOrIntoleranceDiagnosis?.VerificationStatus;
@@ -720,7 +720,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		IEnumerable<AllergyIntolerance> f_ = context.Operators.Union<AllergyIntolerance>(b_, e_);
 		bool? g_(AllergyIntolerance BetaBlockerAllergyIntolerance)
 		{
-			bool? j_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((BetaBlockerAllergyIntolerance as object));
+			bool? j_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter(BetaBlockerAllergyIntolerance as object);
 			CodeableConcept k_ = BetaBlockerAllergyIntolerance?.ClinicalStatus;
 			CqlConcept l_ = FHIRHelpers_4_3_000.ToConcept(k_);
 			CqlConcept n_ = FHIRHelpers_4_3_000.ToConcept(k_);
@@ -776,7 +776,7 @@ public class HFBetaBlockerTherapyforLVSDFHIR_1_3_000
 		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? c_(Condition CardiacPacerDiagnosis)
 		{
-			bool? f_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter((CardiacPacerDiagnosis as object));
+			bool? f_ = AHAOverall_2_6_000.overlapsAfterHeartFailureOutpatientEncounter(CardiacPacerDiagnosis as object);
 			bool? g_ = QICoreCommon_2_0_000.isActive(CardiacPacerDiagnosis);
 			bool? h_ = context.Operators.And(f_, g_);
 			CodeableConcept i_ = CardiacPacerDiagnosis?.VerificationStatus;

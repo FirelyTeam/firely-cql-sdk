@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("FunctionalStatusAssessmentforTotalHipReplacementFHIR", "0.0.008")]
 public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 {
@@ -666,7 +666,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ad_, af_, true, true);
 			Period ah_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_3_000.ToInterval(ah_);
-			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval((ai_ as object));
+			CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_0_000.toInterval(ai_ as object);
 			bool? ak_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ag_, aj_, "day");
 
 			return ak_;
@@ -1048,7 +1048,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 			Patient e_ = this.Patient();
 			DataType f_ = e_?.Deceased;
 			object g_ = FHIRHelpers_4_3_000.ToValue(f_);
-			CqlDate h_ = context.Operators.DateFrom((g_ as CqlDateTime));
+			CqlDate h_ = context.Operators.DateFrom(g_ as CqlDateTime);
 			DataType i_ = THAProcedure?.Performed;
 			object j_ = FHIRHelpers_4_3_000.ToValue(i_);
 			CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.toInterval(j_);
@@ -1236,7 +1236,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				dk_,
 				dp_,
 			];
-			CqlDate dr_ = context.Operators.Max<CqlDate>((dq_ as IEnumerable<CqlDate>));
+			CqlDate dr_ = context.Operators.Max<CqlDate>(dq_ as IEnumerable<CqlDate>);
 
 			return dr_;
 		};
@@ -1507,7 +1507,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				al_,
 				aq_,
 			];
-			CqlDate as_ = context.Operators.Max<CqlDate>((ar_ as IEnumerable<CqlDate>));
+			CqlDate as_ = context.Operators.Max<CqlDate>(ar_ as IEnumerable<CqlDate>);
 
 			return as_;
 		};
@@ -1661,7 +1661,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				al_,
 				aq_,
 			];
-			CqlDate as_ = context.Operators.Max<CqlDate>((ar_ as IEnumerable<CqlDate>));
+			CqlDate as_ = context.Operators.Max<CqlDate>(ar_ as IEnumerable<CqlDate>);
 
 			return as_;
 		};
@@ -1815,7 +1815,7 @@ public class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
 				al_,
 				aq_,
 			];
-			CqlDate as_ = context.Operators.Max<CqlDate>((ar_ as IEnumerable<CqlDate>));
+			CqlDate as_ = context.Operators.Max<CqlDate>(ar_ as IEnumerable<CqlDate>);
 
 			return as_;
 		};

@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
 public class TJCOverallFHIR_1_8_000
 {
@@ -414,12 +414,12 @@ public class TJCOverallFHIR_1_8_000
 				"completed",
 				"in-progress",
 			];
-			bool? p_ = context.Operators.In<string>(n_, (o_ as IEnumerable<string>));
+			bool? p_ = context.Operators.In<string>(n_, o_ as IEnumerable<string>);
 
 			return p_;
 		};
 		IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-		IEnumerable<object> i_ = context.Operators.Union<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));
+		IEnumerable<object> i_ = context.Operators.Union<object>(d_ as IEnumerable<object>, h_ as IEnumerable<object>);
 
 		return i_;
 	}
@@ -438,7 +438,7 @@ public class TJCOverallFHIR_1_8_000
 			{
 				object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
 				FhirDateTime j_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
-				CqlDateTime k_ = FHIRHelpers_4_0_001.ToDateTime(((i_ as FhirDateTime) ?? j_));
+				CqlDateTime k_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime) ?? j_);
 				CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(IschemicStrokeEncounter);
 				bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
 
@@ -474,7 +474,7 @@ public class TJCOverallFHIR_1_8_000
 				FhirDateTime l_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
 				CqlDateTime m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
 				CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(IschemicStrokeEncounter);
-				bool? o_ = context.Operators.In<CqlDateTime>((k_ ?? m_), n_, default);
+				bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, default);
 
 				return o_;
 			};

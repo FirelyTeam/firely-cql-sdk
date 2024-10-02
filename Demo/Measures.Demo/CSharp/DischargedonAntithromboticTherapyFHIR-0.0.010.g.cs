@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
 public class DischargedonAntithromboticTherapyFHIR_0_0_010
 {
@@ -301,7 +301,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 				"completed",
 				"cancelled",
 			];
-			bool? ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+			bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 			bool? ac_ = context.Operators.And(x_, ab_);
 			Code<MedicationRequest.MedicationRequestIntent> ad_ = NoAntithromboticDischarge?.IntentElement;
 			string ae_ = FHIRHelpers_4_0_001.ToString(ad_);
@@ -384,7 +384,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 				"active",
 				"completed",
 			];
-			bool? q_ = context.Operators.In<string>(o_, (p_ as IEnumerable<string>));
+			bool? q_ = context.Operators.In<string>(o_, p_ as IEnumerable<string>);
 			bool? r_ = context.Operators.And(m_, q_);
 			Code<MedicationRequest.MedicationRequestIntent> s_ = Pharmacological?.IntentElement;
 			string t_ = FHIRHelpers_4_0_001.ToString(s_);
@@ -504,7 +504,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 				"active",
 				"completed",
 			];
-			bool? q_ = context.Operators.In<string>(o_, (p_ as IEnumerable<string>));
+			bool? q_ = context.Operators.In<string>(o_, p_ as IEnumerable<string>);
 			bool? r_ = context.Operators.And(m_, q_);
 			Code<MedicationRequest.MedicationRequestIntent> s_ = Antithrombotic?.IntentElement;
 			string t_ = FHIRHelpers_4_0_001.ToString(s_);

@@ -7,11 +7,10 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
-using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("HybridHWRFHIR", "1.3.005")]
 public class HybridHWRFHIR_1_3_005
 {
@@ -308,7 +307,7 @@ public class HybridHWRFHIR_1_3_005
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -371,14 +370,14 @@ public class HybridHWRFHIR_1_3_005
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit();
-			IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
 			bool? g_(Encounter LastED)
 			{
 				Period af_ = LastED?.Period;
 				CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_0_001.ToInterval(af_);
 				CqlDateTime ah_ = context.Operators.End(ag_);
 				CqlValueSet ai_ = this.Observation_Services();
-				IEnumerable<Encounter> aj_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+				IEnumerable<Encounter> aj_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? ak_(Encounter LastObs)
 				{
 					Period cb_ = LastObs?.Period;
@@ -418,8 +417,8 @@ public class HybridHWRFHIR_1_3_005
 				CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_0_001.ToInterval(as_);
 				CqlDateTime au_ = context.Operators.Start(at_);
 				CqlQuantity av_ = context.Operators.Quantity(1m, "hour");
-				CqlDateTime aw_ = context.Operators.Subtract((ar_ ?? au_), av_);
-				IEnumerable<Encounter> ay_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+				CqlDateTime aw_ = context.Operators.Subtract(ar_ ?? au_, av_);
+				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? az_(Encounter LastObs)
 				{
 					Period cw_ = LastObs?.Period;
@@ -457,9 +456,9 @@ public class HybridHWRFHIR_1_3_005
 				CqlDateTime bg_ = context.Operators.Start(bf_);
 				CqlInterval<CqlDateTime> bi_ = FHIRHelpers_4_0_001.ToInterval(as_);
 				CqlDateTime bj_ = context.Operators.Start(bi_);
-				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, (bg_ ?? bj_), true, true);
+				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, bg_ ?? bj_, true, true);
 				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default);
-				IEnumerable<Encounter> bn_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
 				bool? bo_(Encounter LastObs)
 				{
 					Period dr_ = LastObs?.Period;
@@ -517,7 +516,7 @@ public class HybridHWRFHIR_1_3_005
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_0_001.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services();
-			IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
 			bool? q_(Encounter LastObs)
 			{
 				Period ep_ = LastObs?.Period;
@@ -558,7 +557,7 @@ public class HybridHWRFHIR_1_3_005
 			CqlDateTime aa_ = context.Operators.Start(z_);
 			CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_0_001.ToInterval(y_);
 			CqlDateTime ad_ = context.Operators.End(ac_);
-			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval((n_ ?? (x_ ?? aa_)), ad_, true, true);
+			CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(n_ ?? x_ ?? aa_, ad_, true, true);
 
 			return ae_;
 		};
@@ -581,9 +580,9 @@ public class HybridHWRFHIR_1_3_005
 	private IEnumerable<Encounter> Inpatient_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
 		CqlValueSet c_ = this.Medicare_payer();
-		IEnumerable<Coverage> d_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Coverage"));
+		IEnumerable<Coverage> d_ = context.Operators.RetrieveByValueSet<Coverage>(c_, default);
 		IEnumerable<ValueTuple<Encounter, Coverage>> e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
 		(Encounter InpatientEncounter, Coverage Payer)? f_(ValueTuple<Encounter, Coverage> _valueTuple)
 		{
@@ -649,12 +648,12 @@ public class HybridHWRFHIR_1_3_005
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
 		string b_(Encounter Encounter)
 		{
-			string d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
-			string e_ = context.Operators.Concatenate((d_ ?? ""), ",");
+			string d_ = context.Operators.Concatenate("\r\n", CCDE ?? "");
+			string e_ = context.Operators.Concatenate(d_ ?? "", ",");
 			Id f_ = Encounter?.IdElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string h_ = context.Operators.Concatenate((e_ ?? ""), (g_ ?? ""));
-			string i_ = context.Operators.Concatenate((h_ ?? ""), ",");
+			string h_ = context.Operators.Concatenate(e_ ?? "", g_ ?? "");
+			string i_ = context.Operators.Concatenate(h_ ?? "", ",");
 			bool? j_(Observation Exam)
 			{
 				DataType ad_ = Exam?.Effective;
@@ -682,7 +681,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				];
-				bool? ba_ = context.Operators.In<string>(ay_, (az_ as IEnumerable<string>));
+				bool? ba_ = context.Operators.In<string>(ay_, az_ as IEnumerable<string>);
 				bool? bb_ = context.Operators.And(aw_, ba_);
 				DataType bc_ = Exam?.Value;
 				bool? bd_ = context.Operators.Not((bool?)(bc_ is null));
@@ -702,10 +701,10 @@ public class HybridHWRFHIR_1_3_005
 			IEnumerable<Observation> m_ = context.Operators.SortBy<Observation>(k_, l_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation n_ = context.Operators.First<Observation>(m_);
 			DataType o_ = n_?.Value;
-			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity((o_ as Quantity));
+			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity(o_ as Quantity);
 			string q_ = context.Operators.ConvertQuantityToString(p_);
-			string r_ = context.Operators.Concatenate((i_ ?? ""), (q_ ?? ""));
-			string s_ = context.Operators.Concatenate((r_ ?? ""), ",");
+			string r_ = context.Operators.Concatenate(i_ ?? "", q_ ?? "");
+			string s_ = context.Operators.Concatenate(r_ ?? "", ",");
 			bool? t_(Observation Exam)
 			{
 				DataType bi_ = Exam?.Effective;
@@ -733,7 +732,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				];
-				bool? cf_ = context.Operators.In<string>(cd_, (ce_ as IEnumerable<string>));
+				bool? cf_ = context.Operators.In<string>(cd_, ce_ as IEnumerable<string>);
 				bool? cg_ = context.Operators.And(cb_, cf_);
 				DataType ch_ = Exam?.Value;
 				bool? ci_ = context.Operators.Not((bool?)(ch_ is null));
@@ -756,7 +755,7 @@ public class HybridHWRFHIR_1_3_005
 			CqlInterval<CqlDateTime> z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(y_);
 			CqlDateTime aa_ = context.Operators.Start(z_);
 			string ab_ = context.Operators.ConvertDateTimeToString(aa_);
-			string ac_ = context.Operators.Concatenate((s_ ?? ""), (ab_ ?? ""));
+			string ac_ = context.Operators.Concatenate(s_ ?? "", ab_ ?? "");
 
 			return ac_;
 		};
@@ -771,12 +770,12 @@ public class HybridHWRFHIR_1_3_005
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
 		string b_(Encounter Encounter)
 		{
-			string d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
-			string e_ = context.Operators.Concatenate((d_ ?? ""), ",");
+			string d_ = context.Operators.Concatenate("\r\n", CCDE ?? "");
+			string e_ = context.Operators.Concatenate(d_ ?? "", ",");
 			Id f_ = Encounter?.IdElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string h_ = context.Operators.Concatenate((e_ ?? ""), (g_ ?? ""));
-			string i_ = context.Operators.Concatenate((h_ ?? ""), ",");
+			string h_ = context.Operators.Concatenate(e_ ?? "", g_ ?? "");
+			string i_ = context.Operators.Concatenate(h_ ?? "", ",");
 			bool? j_(Observation Exam)
 			{
 				DataType ad_ = Exam?.Effective;
@@ -803,7 +802,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				];
-				bool? ba_ = context.Operators.In<string>(ay_, (az_ as IEnumerable<string>));
+				bool? ba_ = context.Operators.In<string>(ay_, az_ as IEnumerable<string>);
 				bool? bb_ = context.Operators.And(aw_, ba_);
 				DataType bc_ = Exam?.Value;
 				bool? bd_ = context.Operators.Not((bool?)(bc_ is null));
@@ -823,10 +822,10 @@ public class HybridHWRFHIR_1_3_005
 			IEnumerable<Observation> m_ = context.Operators.SortBy<Observation>(k_, l_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation n_ = context.Operators.First<Observation>(m_);
 			DataType o_ = n_?.Value;
-			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity((o_ as Quantity));
+			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity(o_ as Quantity);
 			string q_ = context.Operators.ConvertQuantityToString(p_);
-			string r_ = context.Operators.Concatenate((i_ ?? ""), (q_ ?? ""));
-			string s_ = context.Operators.Concatenate((r_ ?? ""), ",");
+			string r_ = context.Operators.Concatenate(i_ ?? "", q_ ?? "");
+			string s_ = context.Operators.Concatenate(r_ ?? "", ",");
 			bool? t_(Observation Exam)
 			{
 				DataType bi_ = Exam?.Effective;
@@ -853,7 +852,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				];
-				bool? cf_ = context.Operators.In<string>(cd_, (ce_ as IEnumerable<string>));
+				bool? cf_ = context.Operators.In<string>(cd_, ce_ as IEnumerable<string>);
 				bool? cg_ = context.Operators.And(cb_, cf_);
 				DataType ch_ = Exam?.Value;
 				bool? ci_ = context.Operators.Not((bool?)(ch_ is null));
@@ -876,7 +875,7 @@ public class HybridHWRFHIR_1_3_005
 			CqlInterval<CqlDateTime> z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(y_);
 			CqlDateTime aa_ = context.Operators.Start(z_);
 			string ab_ = context.Operators.ConvertDateTimeToString(aa_);
-			string ac_ = context.Operators.Concatenate((s_ ?? ""), (ab_ ?? ""));
+			string ac_ = context.Operators.Concatenate(s_ ?? "", ab_ ?? "");
 
 			return ac_;
 		};
@@ -891,12 +890,12 @@ public class HybridHWRFHIR_1_3_005
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters();
 		string b_(Encounter Encounter)
 		{
-			string d_ = context.Operators.Concatenate("\r\n", (CCDE ?? ""));
-			string e_ = context.Operators.Concatenate((d_ ?? ""), ",");
+			string d_ = context.Operators.Concatenate("\r\n", CCDE ?? "");
+			string e_ = context.Operators.Concatenate(d_ ?? "", ",");
 			Id f_ = Encounter?.IdElement;
 			string g_ = FHIRHelpers_4_0_001.ToString(f_);
-			string h_ = context.Operators.Concatenate((e_ ?? ""), (g_ ?? ""));
-			string i_ = context.Operators.Concatenate((h_ ?? ""), ",");
+			string h_ = context.Operators.Concatenate(e_ ?? "", g_ ?? "");
+			string i_ = context.Operators.Concatenate(h_ ?? "", ",");
 			bool? j_(Observation Lab)
 			{
 				Instant ac_ = Lab?.IssuedElement;
@@ -920,7 +919,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				];
-				bool? aw_ = context.Operators.In<string>(au_, (av_ as IEnumerable<string>));
+				bool? aw_ = context.Operators.In<string>(au_, av_ as IEnumerable<string>);
 				bool? ax_ = context.Operators.And(as_, aw_);
 				DataType ay_ = Lab?.Value;
 				bool? az_ = context.Operators.Not((bool?)(ay_ is null));
@@ -938,10 +937,10 @@ public class HybridHWRFHIR_1_3_005
 			IEnumerable<Observation> m_ = context.Operators.SortBy<Observation>(k_, l_, System.ComponentModel.ListSortDirection.Ascending);
 			Observation n_ = context.Operators.First<Observation>(m_);
 			DataType o_ = n_?.Value;
-			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity((o_ as Quantity));
+			CqlQuantity p_ = FHIRHelpers_4_0_001.ToQuantity(o_ as Quantity);
 			string q_ = context.Operators.ConvertQuantityToString(p_);
-			string r_ = context.Operators.Concatenate((i_ ?? ""), (q_ ?? ""));
-			string s_ = context.Operators.Concatenate((r_ ?? ""), ",");
+			string r_ = context.Operators.Concatenate(i_ ?? "", q_ ?? "");
+			string s_ = context.Operators.Concatenate(r_ ?? "", ",");
 			bool? t_(Observation Lab)
 			{
 				Instant bc_ = Lab?.IssuedElement;
@@ -965,7 +964,7 @@ public class HybridHWRFHIR_1_3_005
 					"amended",
 					"preliminary",
 				];
-				bool? bw_ = context.Operators.In<string>(bu_, (bv_ as IEnumerable<string>));
+				bool? bw_ = context.Operators.In<string>(bu_, bv_ as IEnumerable<string>);
 				bool? bx_ = context.Operators.And(bs_, bw_);
 				DataType by_ = Lab?.Value;
 				bool? bz_ = context.Operators.Not((bool?)(by_ is null));
@@ -985,7 +984,7 @@ public class HybridHWRFHIR_1_3_005
 			Instant y_ = x_?.IssuedElement;
 			CqlDateTime z_ = FHIRHelpers_4_0_001.ToDateTime(y_);
 			string aa_ = context.Operators.ConvertDateTimeToString(z_);
-			string ab_ = context.Operators.Concatenate((s_ ?? ""), (aa_ ?? ""));
+			string ab_ = context.Operators.Concatenate(s_ ?? "", aa_ ?? "");
 
 			return ab_;
 		};
@@ -998,46 +997,46 @@ public class HybridHWRFHIR_1_3_005
 	{
 		CqlCode a_ = this.Heart_rate();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
 		IEnumerable<string> d_ = this.FirstPhysicalExamWithEncounterId(c_, "FirstHeartRate");
 		CqlCode e_ = this.Systolic_blood_pressure();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
 		IEnumerable<string> h_ = this.FirstPhysicalExamWithEncounterId(g_, "FirstSystolicBP");
 		CqlCode i_ = this.Respiratory_rate();
 		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
-		IEnumerable<Observation> k_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, default);
 		IEnumerable<string> l_ = this.FirstPhysicalExamWithEncounterId(k_, "FirstRespRate");
 		CqlValueSet m_ = this.Body_temperature();
-		IEnumerable<Observation> n_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> n_ = context.Operators.RetrieveByValueSet<Observation>(m_, default);
 		IEnumerable<string> o_ = this.FirstPhysicalExamWithEncounterId(n_, "FirstTemperature");
 		CqlCode p_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry();
 		IEnumerable<CqlCode> q_ = context.Operators.ToList<CqlCode>(p_);
-		IEnumerable<Observation> r_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, q_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> r_ = context.Operators.RetrieveByCodes<Observation>(q_, default);
 		IEnumerable<string> s_ = this.FirstPhysicalExamWithEncounterId(r_, "FirstO2Saturation");
 		CqlValueSet t_ = this.Body_weight();
-		IEnumerable<Observation> u_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> u_ = context.Operators.RetrieveByValueSet<Observation>(t_, default);
 		IEnumerable<string> v_ = this.FirstPhysicalExamWithEncounterIdUsingLabTiming(u_, "FirstWeight");
 		CqlValueSet w_ = this.Hematocrit_lab_test();
-		IEnumerable<Observation> x_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, w_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> x_ = context.Operators.RetrieveByValueSet<Observation>(w_, default);
 		IEnumerable<string> y_ = this.FirstLabTestWithEncounterId(x_, "FirstHematocrit");
 		CqlValueSet z_ = this.White_blood_cells_count_lab_test();
-		IEnumerable<Observation> aa_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> aa_ = context.Operators.RetrieveByValueSet<Observation>(z_, default);
 		IEnumerable<string> ab_ = this.FirstLabTestWithEncounterId(aa_, "FirstWhiteBloodCell");
 		CqlValueSet ac_ = this.Potassium_lab_test();
-		IEnumerable<Observation> ad_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ac_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> ad_ = context.Operators.RetrieveByValueSet<Observation>(ac_, default);
 		IEnumerable<string> ae_ = this.FirstLabTestWithEncounterId(ad_, "FirstPotassium");
 		CqlValueSet af_ = this.Sodium_lab_test();
-		IEnumerable<Observation> ag_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, af_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> ag_ = context.Operators.RetrieveByValueSet<Observation>(af_, default);
 		IEnumerable<string> ah_ = this.FirstLabTestWithEncounterId(ag_, "FirstSodium");
 		CqlValueSet ai_ = this.Bicarbonate_lab_test();
-		IEnumerable<Observation> aj_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> aj_ = context.Operators.RetrieveByValueSet<Observation>(ai_, default);
 		IEnumerable<string> ak_ = this.FirstLabTestWithEncounterId(aj_, "FirstBicarbonate");
 		CqlValueSet al_ = this.Creatinine_lab_test();
-		IEnumerable<Observation> am_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> am_ = context.Operators.RetrieveByValueSet<Observation>(al_, default);
 		IEnumerable<string> an_ = this.FirstLabTestWithEncounterId(am_, "FirstCreatinine");
 		CqlValueSet ao_ = this.Glucose_lab_test();
-		IEnumerable<Observation> ap_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ao_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+		IEnumerable<Observation> ap_ = context.Operators.RetrieveByValueSet<Observation>(ao_, default);
 		IEnumerable<string> aq_ = this.FirstLabTestWithEncounterId(ap_, "FirstGlucose");
 		IEnumerable<string>[] ar_ = [
 			d_,
@@ -1054,7 +1053,7 @@ public class HybridHWRFHIR_1_3_005
 			an_,
 			aq_,
 		];
-		IEnumerable<string> as_ = context.Operators.Flatten<string>((ar_ as IEnumerable<IEnumerable<string>>));
+		IEnumerable<string> as_ = context.Operators.Flatten<string>(ar_ as IEnumerable<IEnumerable<string>>);
 
 		return as_;
 	}

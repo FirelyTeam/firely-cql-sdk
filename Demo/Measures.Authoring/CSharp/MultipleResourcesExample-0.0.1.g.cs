@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public class MultipleResourcesExample_0_0_1
 {
@@ -111,7 +111,7 @@ public class MultipleResourcesExample_0_0_1
 				"final",
 				"amended",
 			];
-			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
+			bool? i_ = context.Operators.In<string>(g_, h_ as IEnumerable<string>);
 
 			return i_;
 		};

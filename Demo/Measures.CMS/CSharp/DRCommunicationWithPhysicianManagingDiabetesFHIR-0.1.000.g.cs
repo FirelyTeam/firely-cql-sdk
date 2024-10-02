@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.1.000")]
 public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 {
@@ -527,7 +527,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 				"corrected",
 				"preliminary",
 			];
-			bool? z_ = context.Operators.In<string>(x_, (y_ as IEnumerable<string>));
+			bool? z_ = context.Operators.In<string>(x_, y_ as IEnumerable<string>);
 			bool? aa_ = context.Operators.And(t_, z_);
 
 			return aa_;
@@ -741,8 +741,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 
 					return ac_;
 				};
-				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((LevelOfSeverityNotCommunicated is DomainResource)
-						? ((LevelOfSeverityNotCommunicated as DomainResource).Extension)
+				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(LevelOfSeverityNotCommunicated is DomainResource
+						? (LevelOfSeverityNotCommunicated as DomainResource).Extension
 						: default), q_);
 				DataType s_(Extension @this)
 				{
@@ -810,8 +810,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 
 					return ac_;
 				};
-				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MacularEdemaAbsentNotCommunicated is DomainResource)
-						? ((MacularEdemaAbsentNotCommunicated as DomainResource).Extension)
+				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MacularEdemaAbsentNotCommunicated is DomainResource
+						? (MacularEdemaAbsentNotCommunicated as DomainResource).Extension
 						: default), q_);
 				DataType s_(Extension @this)
 				{
@@ -879,8 +879,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000
 
 					return ac_;
 				};
-				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MacularEdemaPresentNotCommunicated is DomainResource)
-						? ((MacularEdemaPresentNotCommunicated as DomainResource).Extension)
+				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MacularEdemaPresentNotCommunicated is DomainResource
+						? (MacularEdemaPresentNotCommunicated as DomainResource).Extension
 						: default), q_);
 				DataType s_(Extension @this)
 				{

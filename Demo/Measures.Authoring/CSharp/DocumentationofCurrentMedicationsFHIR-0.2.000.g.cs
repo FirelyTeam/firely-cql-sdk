@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("DocumentationofCurrentMedicationsFHIR", "0.2.000")]
 public class DocumentationofCurrentMedicationsFHIR_0_2_000
 {
@@ -285,8 +285,8 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 
 					return ah_;
 				};
-				IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((MedicationsNotDocumented is DomainResource)
-						? ((MedicationsNotDocumented as DomainResource).Extension)
+				IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MedicationsNotDocumented is DomainResource
+						? (MedicationsNotDocumented as DomainResource).Extension
 						: default), k_);
 				DataType m_(Extension @this)
 				{

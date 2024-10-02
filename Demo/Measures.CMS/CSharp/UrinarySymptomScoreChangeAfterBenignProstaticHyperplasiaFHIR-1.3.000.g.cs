@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR", "1.3.000")]
 public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000
 {
@@ -432,7 +432,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				"amended",
 				"corrected",
 			];
-			bool? m_ = context.Operators.In<string>(k_, (l_ as IEnumerable<string>));
+			bool? m_ = context.Operators.In<string>(k_, l_ as IEnumerable<string>);
 			DataType n_ = IPSSAssessment?.Value;
 			object o_ = FHIRHelpers_4_3_000.ToValue(n_);
 			bool? p_ = context.Operators.Not((bool?)(o_ is null));
@@ -474,21 +474,21 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					DataType ai_ = IPSSAssessment?.Effective;
 					object aj_ = FHIRHelpers_4_3_000.ToValue(ai_);
 
-					return ((aj_ as CqlDateTime) as object);
+					return (aj_ as CqlDateTime) as object;
 				}
 				else if (x_())
 				{
 					DataType ak_ = IPSSAssessment?.Effective;
 					object al_ = FHIRHelpers_4_3_000.ToValue(ak_);
 
-					return ((al_ as CqlInterval<CqlDateTime>) as object);
+					return (al_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (y_())
 				{
 					DataType am_ = IPSSAssessment?.Effective;
 					object an_ = FHIRHelpers_4_3_000.ToValue(am_);
 
-					return ((an_ as CqlDateTime) as object);
+					return (an_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -498,7 +498,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			CqlDateTime s_ = QICoreCommon_2_0_000.earliest(r_());
 			DataType t_ = IPSSAssessment?.Value;
 			object u_ = FHIRHelpers_4_3_000.ToValue(t_);
-			(CqlDateTime effectiveDatetime, int? valueInteger)? v_ = (s_, (u_ as int?));
+			(CqlDateTime effectiveDatetime, int? valueInteger)? v_ = (s_, u_ as int?);
 
 			return v_;
 		};
@@ -545,7 +545,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 				"amended",
 				"corrected",
 			];
-			bool? s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
+			bool? s_ = context.Operators.In<string>(q_, r_ as IEnumerable<string>);
 			bool? t_ = context.Operators.And(m_, s_);
 			DataType u_ = AUASIAssessment?.Value;
 			object v_ = FHIRHelpers_4_3_000.ToValue(u_);
@@ -588,21 +588,21 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					DataType be_ = AUASIAssessment?.Effective;
 					object bf_ = FHIRHelpers_4_3_000.ToValue(be_);
 
-					return ((bf_ as CqlDateTime) as object);
+					return (bf_ as CqlDateTime) as object;
 				}
 				else if (at_())
 				{
 					DataType bg_ = AUASIAssessment?.Effective;
 					object bh_ = FHIRHelpers_4_3_000.ToValue(bg_);
 
-					return ((bh_ as CqlInterval<CqlDateTime>) as object);
+					return (bh_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (au_())
 				{
 					DataType bi_ = AUASIAssessment?.Effective;
 					object bj_ = FHIRHelpers_4_3_000.ToValue(bi_);
 
-					return ((bj_ as CqlDateTime) as object);
+					return (bj_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -648,21 +648,21 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 						DataType ct_ = QOLAssessment?.Effective;
 						object cu_ = FHIRHelpers_4_3_000.ToValue(ct_);
 
-						return ((cu_ as CqlDateTime) as object);
+						return (cu_ as CqlDateTime) as object;
 					}
 					else if (ci_())
 					{
 						DataType cv_ = QOLAssessment?.Effective;
 						object cw_ = FHIRHelpers_4_3_000.ToValue(cv_);
 
-						return ((cw_ as CqlInterval<CqlDateTime>) as object);
+						return (cw_ as CqlInterval<CqlDateTime>) as object;
 					}
 					else if (cj_())
 					{
 						DataType cx_ = QOLAssessment?.Effective;
 						object cy_ = FHIRHelpers_4_3_000.ToValue(cx_);
 
-						return ((cy_ as CqlDateTime) as object);
+						return (cy_ as CqlDateTime) as object;
 					}
 					else
 					{
@@ -701,21 +701,21 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 						DataType dl_ = QOLAssessment?.Effective;
 						object dm_ = FHIRHelpers_4_3_000.ToValue(dl_);
 
-						return ((dm_ as CqlDateTime) as object);
+						return (dm_ as CqlDateTime) as object;
 					}
 					else if (da_())
 					{
 						DataType dn_ = QOLAssessment?.Effective;
 						object do_ = FHIRHelpers_4_3_000.ToValue(dn_);
 
-						return ((do_ as CqlInterval<CqlDateTime>) as object);
+						return (do_ as CqlInterval<CqlDateTime>) as object;
 					}
 					else if (db_())
 					{
 						DataType dp_ = QOLAssessment?.Effective;
 						object dq_ = FHIRHelpers_4_3_000.ToValue(dp_);
 
-						return ((dq_ as CqlDateTime) as object);
+						return (dq_ as CqlDateTime) as object;
 					}
 					else
 					{
@@ -752,7 +752,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					"amended",
 					"corrected",
 				];
-				bool? cb_ = context.Operators.In<string>(bz_, (ca_ as IEnumerable<string>));
+				bool? cb_ = context.Operators.In<string>(bz_, ca_ as IEnumerable<string>);
 				bool? cc_ = context.Operators.And(bv_, cb_);
 				DataType cd_ = QOLAssessment?.Value;
 				object ce_ = FHIRHelpers_4_3_000.ToValue(cd_);
@@ -795,21 +795,21 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 						DataType ej_ = @this?.Effective;
 						object ek_ = FHIRHelpers_4_3_000.ToValue(ej_);
 
-						return ((ek_ as CqlDateTime) as object);
+						return (ek_ as CqlDateTime) as object;
 					}
 					else if (dy_())
 					{
 						DataType el_ = @this?.Effective;
 						object em_ = FHIRHelpers_4_3_000.ToValue(el_);
 
-						return ((em_ as CqlInterval<CqlDateTime>) as object);
+						return (em_ as CqlInterval<CqlDateTime>) as object;
 					}
 					else if (dz_())
 					{
 						DataType en_ = @this?.Effective;
 						object eo_ = FHIRHelpers_4_3_000.ToValue(en_);
 
-						return ((eo_ as CqlDateTime) as object);
+						return (eo_ as CqlDateTime) as object;
 					}
 					else
 					{
@@ -824,7 +824,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			Observation an_ = context.Operators.Last<Observation>(am_);
 			DataType ao_ = an_?.Value;
 			object ap_ = FHIRHelpers_4_3_000.ToValue(ao_);
-			int? aq_ = context.Operators.Add((af_ as int?), (ap_ as int?));
+			int? aq_ = context.Operators.Add(af_ as int?, ap_ as int?);
 			(CqlDateTime effectiveDatetime, int? valueInteger)? ar_ = (ad_, aq_);
 
 			return ar_;
@@ -1098,7 +1098,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 				return t_;
 			};
-			IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?> h_ = context.Operators.Where<(CqlDateTime effectiveDatetime, int? valueInteger)?>(((IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?>)f_), g_);
+			IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?> h_ = context.Operators.Where<(CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?>)f_, g_);
 			Condition i_((CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) => 
 				MorbidObesity;
 			IEnumerable<Condition> j_ = context.Operators.Select<(CqlDateTime effectiveDatetime, int? valueInteger)?, Condition>(h_, i_);
@@ -1126,7 +1126,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 			bool? i_((CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)
 			{
 				DataType m_ = BMIExam?.Value;
-				CqlQuantity n_ = FHIRHelpers_4_3_000.ToQuantity((m_ as Quantity));
+				CqlQuantity n_ = FHIRHelpers_4_3_000.ToQuantity(m_ as Quantity);
 				CqlQuantity o_ = context.Operators.Quantity(40m, "kg/m2");
 				bool? p_ = context.Operators.Greater(n_, o_);
 				Code<ObservationStatus> q_ = BMIExam?.StatusElement;
@@ -1137,7 +1137,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 					"amended",
 					"corrected",
 				];
-				bool? u_ = context.Operators.In<string>(s_, (t_ as IEnumerable<string>));
+				bool? u_ = context.Operators.In<string>(s_, t_ as IEnumerable<string>);
 				bool? v_ = context.Operators.And(p_, u_);
 				DataType w_ = BMIExam?.Effective;
 				object x_ = FHIRHelpers_4_3_000.ToValue(w_);
@@ -1153,7 +1153,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 
 				return ah_;
 			};
-			IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?> j_ = context.Operators.Where<(CqlDateTime effectiveDatetime, int? valueInteger)?>(((IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?>)h_), i_);
+			IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?> j_ = context.Operators.Where<(CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?>)h_, i_);
 			Observation k_((CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) => 
 				BMIExam;
 			IEnumerable<Observation> l_ = context.Operators.Select<(CqlDateTime effectiveDatetime, int? valueInteger)?, Observation>(j_, k_);
@@ -1220,7 +1220,7 @@ public class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_00
 		(CqlDateTime effectiveDatetime, int? valueInteger)?[] d_ = [
 			c_,
 		];
-		IEnumerable<ValueTuple<(CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlDateTime effectiveDatetime, int? valueInteger)?>> e_ = context.Operators.CrossJoin<(CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlDateTime effectiveDatetime, int? valueInteger)?>(((IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?>)b_), ((IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?>)d_));
+		IEnumerable<ValueTuple<(CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlDateTime effectiveDatetime, int? valueInteger)?>> e_ = context.Operators.CrossJoin<(CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?>)b_, (IEnumerable<(CqlDateTime effectiveDatetime, int? valueInteger)?>)d_);
 		((CqlDateTime effectiveDatetime, int? valueInteger)? FirstUSSAssessment, (CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)? f_(ValueTuple<(CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlDateTime effectiveDatetime, int? valueInteger)?> _valueTuple)
 		{
 			((CqlDateTime effectiveDatetime, int? valueInteger)? FirstUSSAssessment, (CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)? k_ = (_valueTuple.Item1, _valueTuple.Item2);

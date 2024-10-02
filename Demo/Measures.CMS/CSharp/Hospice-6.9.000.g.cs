@@ -11,7 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("Hospice", "6.9.000")]
 public class Hospice_6_9_000
 {
@@ -201,7 +201,7 @@ public class Hospice_6_9_000
 			bool? bb_ = context.Operators.Or(au_, ba_);
 			Period bc_ = InpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_3_000.ToInterval(bc_);
-			CqlInterval<CqlDateTime> be_ = QICoreCommon_2_0_000.toInterval((bd_ as object));
+			CqlInterval<CqlDateTime> be_ = QICoreCommon_2_0_000.toInterval(bd_ as object);
 			CqlDateTime bf_ = context.Operators.End(be_);
 			CqlInterval<CqlDateTime> bg_ = this.Measurement_Period();
 			bool? bh_ = context.Operators.In<CqlDateTime>(bf_, bg_, "day");
@@ -218,7 +218,7 @@ public class Hospice_6_9_000
 		{
 			Period bj_ = HospiceEncounter?.Period;
 			CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_3_000.ToInterval(bj_);
-			CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_0_000.toInterval((bk_ as object));
+			CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_0_000.toInterval(bk_ as object);
 			CqlInterval<CqlDateTime> bm_ = this.Measurement_Period();
 			bool? bn_ = context.Operators.Overlaps(bl_, bm_, "day");
 
@@ -237,7 +237,7 @@ public class Hospice_6_9_000
 			object bp_ = FHIRHelpers_4_3_000.ToValue(bo_);
 			CqlCode bq_ = this.Yes__qualifier_value_();
 			CqlConcept br_ = context.Operators.ConvertCodeToConcept(bq_);
-			bool? bs_ = context.Operators.Equivalent((bp_ as CqlConcept), br_);
+			bool? bs_ = context.Operators.Equivalent(bp_ as CqlConcept, br_);
 			DataType bt_ = HospiceAssessment?.Effective;
 			object bu_ = FHIRHelpers_4_3_000.ToValue(bt_);
 			CqlInterval<CqlDateTime> bv_ = QICoreCommon_2_0_000.toInterval(bu_);
@@ -258,7 +258,7 @@ public class Hospice_6_9_000
 			CqlInterval<CqlDateTime> bz_ = this.Measurement_Period();
 			FhirDateTime ca_ = HospiceOrder?.AuthoredOnElement;
 			CqlDateTime cb_ = context.Operators.Convert<CqlDateTime>(ca_);
-			CqlInterval<CqlDateTime> cc_ = QICoreCommon_2_0_000.toInterval((cb_ as object));
+			CqlInterval<CqlDateTime> cc_ = QICoreCommon_2_0_000.toInterval(cb_ as object);
 			bool? cd_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(bz_, cc_, "day");
 
 			return cd_;
