@@ -18,7 +18,8 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// Converts CQL To ELM.
         /// </summary>
-        public CqlToElmConverter(IServiceProvider services,
+        public CqlToElmConverter(
+            IServiceProvider services,
             ILogger<CqlToElmConverter> logger)
         {
             Services = services;

@@ -1,5 +1,4 @@
-﻿using Hl7.Cql.Elm;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.CqlToElm
 {
