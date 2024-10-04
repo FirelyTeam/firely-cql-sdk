@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("DevDays", "2023.0.0")]
 public class DevDays_2023_0_0
 {
@@ -122,7 +122,7 @@ public class DevDays_2023_0_0
 			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
-			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
+			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime(i_ as FhirDateTime);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
 			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, default);
 			bool? m_ = context.Operators.And(h_, l_);
@@ -156,7 +156,7 @@ public class DevDays_2023_0_0
 			IEnumerable<Coding> g_ = context.Operators.Where<Coding>((IEnumerable<Coding>)e_, f_);
 			bool? h_ = context.Operators.Exists<Coding>(g_);
 			DataType i_ = c?.Onset;
-			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
+			CqlDateTime j_ = FHIRHelpers_4_0_001.ToDateTime(i_ as FhirDateTime);
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
 			bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, default);
 			bool? m_ = context.Operators.And(h_, l_);

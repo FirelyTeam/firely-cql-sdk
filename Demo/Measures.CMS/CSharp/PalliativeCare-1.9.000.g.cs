@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("PalliativeCare", "1.9.000")]
 public class PalliativeCare_1_9_000
 {
@@ -160,7 +160,7 @@ public class PalliativeCare_1_9_000
 		{
 			Period aj_ = PalliativeEncounter?.Period;
 			CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_3_000.ToInterval(aj_);
-			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.toInterval((ak_ as object));
+			CqlInterval<CqlDateTime> al_ = QICoreCommon_2_0_000.toInterval(ak_ as object);
 			CqlInterval<CqlDateTime> am_ = this.Measurement_Period();
 			bool? an_ = context.Operators.Overlaps(al_, am_, "day");
 

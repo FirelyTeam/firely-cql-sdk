@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("AntidepressantMedicationManagementFHIR", "0.1.000")]
 public class AntidepressantMedicationManagementFHIR_0_1_000
 {
@@ -392,7 +392,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 		{
 			Period af_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.ToInterval(af_);
-			CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_0_000.ToInterval((ag_ as object));
+			CqlInterval<CqlDateTime> ah_ = QICoreCommon_2_0_000.ToInterval(ag_ as object);
 			CqlDateTime ai_ = context.Operators.Start(ah_);
 			CqlDate aj_ = context.Operators.DateFrom(ai_);
 			CqlDate ak_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period();
@@ -477,7 +477,7 @@ public class AntidepressantMedicationManagementFHIR_0_1_000
 				CqlInterval<CqlDateTime> ah_ = this.Measurement_Period();
 				CqlDateTime ai_ = context.Operators.End(ah_);
 				CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ag_, ai_, true, true);
-				CqlInterval<CqlDateTime> ak_ = context.Operators.Intersect<CqlDateTime>((Meds as CqlInterval<CqlDateTime>), aj_);
+				CqlInterval<CqlDateTime> ak_ = context.Operators.Intersect<CqlDateTime>(Meds as CqlInterval<CqlDateTime>, aj_);
 
 				return ak_;
 			};

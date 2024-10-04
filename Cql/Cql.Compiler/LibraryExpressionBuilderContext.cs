@@ -13,27 +13,40 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-internal partial class LibraryExpressionBuilderContext(
-    ILogger<LibraryExpressionBuilder> logger,
-    ExpressionBuilder expressionBuilder,
-    Library library,
-    DefinitionDictionary<LambdaExpression> libraryDefinitions,
-    LibrarySetExpressionBuilderContext? libsCtx = null)
+internal partial class LibraryExpressionBuilderContext
 {
-    private readonly ILogger<LibraryExpressionBuilder> _logger = logger;
-    private readonly ExpressionBuilder _expressionBuilder = expressionBuilder;
+    private readonly ILogger<LibraryExpressionBuilder> _logger;
+    private readonly ExpressionBuilder _expressionBuilder;
+    private readonly DefinitionDictionary<LambdaExpression> _libraryDefinitions;
+    private readonly LibrarySetExpressionBuilderContext? _libsCtx;
+
+    public LibraryExpressionBuilderContext(
+        ILogger<LibraryExpressionBuilder> logger,
+        ExpressionBuilder expressionBuilder,
+        Library library,
+        DefinitionDictionary<LambdaExpression> libraryDefinitions,
+        LibrarySetExpressionBuilderContext? libsCtx = null)
+    {
+        _libraryDefinitions = libraryDefinitions;
+        _libsCtx = libsCtx;
+        _logger = logger;
+        _expressionBuilder = expressionBuilder;
+        Library = library;
+        LibraryVersionedIdentifier = Library.GetVersionedIdentifier()!;
+    }
+
     private static readonly AmbiguousOverloadCorrector AmbiguousOverloadCorrector = new AmbiguousOverloadCorrector();
 
     /// <summary>
     /// Gets the library associated with the expression builder context.
     /// </summary>
-    public Library Library => library;
+    public Library Library { get; }
 
     /// <summary>
-    /// Gets the key of the library, which is the name and version of the library.
+    /// Gets the versioned identifier of the library, which is the name and version of the library.
     /// </summary>
-    /// <seealso cref="Library.NameAndVersion"/>
-    public string LibraryKey => Library.NameAndVersion()!;
+    /// <seealso cref="IGetVersionedIdentifierExtensions.GetVersionedIdentifier"/>
+    public string LibraryVersionedIdentifier { get; }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary() =>
         this.CatchRethrowExpressionBuildingException(_ =>
@@ -42,15 +55,15 @@ internal partial class LibraryExpressionBuilderContext(
             // This is a fix for QICore-based CQL, where the functions only differ by profiles on the same resource.
             // We should remove this when the compiler is fixed.
             // See https://github.com/FirelyTeam/firely-cql-sdk/issues/438.
-            _logger.LogInformation("Preprocessing library '{library}' - AmbiguousOverloadCorrector", LibraryKey);
+            _logger.LogInformation("Preprocessing library '{library}' - AmbiguousOverloadCorrector", LibraryVersionedIdentifier);
             AmbiguousOverloadCorrector.Fix(Library);
 
-            _logger.LogInformation("Preprocessing library '{library}' - ElmPreprocessor", LibraryKey);
-            var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryKey, Library);
+            _logger.LogInformation("Preprocessing library '{library}' - ElmPreprocessor", LibraryVersionedIdentifier);
+            var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryVersionedIdentifier, Library);
             var processor = new ElmPreprocessor(ls);
             processor.Preprocess(Library);
 
-            _logger.LogInformation("Building expressions for '{library}'", LibraryKey);
+            _logger.LogInformation("Building expressions for '{library}'", LibraryVersionedIdentifier);
 
             if (Library.includes is { Length: > 0 } includeDefs)
             {

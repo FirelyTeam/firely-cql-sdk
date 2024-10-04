@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public class FHIR347_0_1_021
 {
@@ -552,7 +552,7 @@ public class FHIR347_0_1_021
 			return as_;
 		};
 		IEnumerable<Procedure> ac_ = context.Operators.Where<Procedure>(aa_, ab_);
-		IEnumerable<object> ad_ = context.Operators.Union<object>((p_ as IEnumerable<object>), (ac_ as IEnumerable<object>));
+		IEnumerable<object> ad_ = context.Operators.Union<object>(p_ as IEnumerable<object>, ac_ as IEnumerable<object>);
 
 		return ad_;
 	}
@@ -659,7 +659,7 @@ public class FHIR347_0_1_021
 		bool? c_(Observation LDL)
 		{
 			DataType e_ = LDL?.Value;
-			CqlQuantity f_ = FHIRHelpers_4_0_001.ToQuantity((e_ as Quantity));
+			CqlQuantity f_ = FHIRHelpers_4_0_001.ToQuantity(e_ as Quantity);
 			CqlQuantity g_ = context.Operators.Quantity(190m, "mg/dL");
 			bool? h_ = context.Operators.GreaterOrEqual(f_, g_);
 			DataType i_ = LDL?.Effective;
@@ -677,7 +677,7 @@ public class FHIR347_0_1_021
 				"corrected",
 				"appended",
 			];
-			bool? s_ = context.Operators.In<string>(q_, (r_ as IEnumerable<string>));
+			bool? s_ = context.Operators.In<string>(q_, r_ as IEnumerable<string>);
 			bool? t_ = context.Operators.And(o_, s_);
 
 			return t_;
@@ -719,7 +719,7 @@ public class FHIR347_0_1_021
 		bool? a_ = this.Patients_Age_20_or_Older_at_Start_of_Measurement_Period();
 		IEnumerable<Observation> b_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
 		IEnumerable<Condition> c_ = this.Hypercholesterolemia_Diagnosis();
-		IEnumerable<object> d_ = context.Operators.Union<object>((b_ as IEnumerable<object>), (c_ as IEnumerable<object>));
+		IEnumerable<object> d_ = context.Operators.Union<object>(b_ as IEnumerable<object>, c_ as IEnumerable<object>);
 		bool? e_ = context.Operators.Exists<object>(d_);
 		bool? f_ = context.Operators.And(a_, e_);
 		IEnumerable<object> g_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
@@ -929,7 +929,7 @@ public class FHIR347_0_1_021
 				"on-hold",
 				"completed",
 			];
-			bool? ag_ = context.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
+			bool? ag_ = context.Operators.In<string>(ae_, af_ as IEnumerable<string>);
 			bool? ah_ = context.Operators.And(ac_, ag_);
 			Code<RequestIntent> ai_ = PalliativeOrHospiceCareOrder?.IntentElement;
 			string aj_ = FHIRHelpers_4_0_001.ToString(ai_);
@@ -1164,7 +1164,7 @@ public class FHIR347_0_1_021
 				"active",
 				"completed",
 			];
-			bool? aa_ = context.Operators.In<string>(y_, (z_ as IEnumerable<string>));
+			bool? aa_ = context.Operators.In<string>(y_, z_ as IEnumerable<string>);
 			bool? ab_ = context.Operators.And(w_, aa_);
 			Code<MedicationRequest.MedicationRequestIntent> ac_ = StatinOrdered?.IntentElement;
 			string ad_ = FHIRHelpers_4_0_001.ToString(ac_);
@@ -1241,14 +1241,14 @@ public class FHIR347_0_1_021
 						Timing.RepeatComponent av_ = T?.Repeat;
 						DataType aw_ = av_?.Bounds;
 
-						return ((aw_ as Range) as object);
+						return (aw_ as Range) as object;
 					}
 					else if (ao_())
 					{
 						Timing.RepeatComponent ax_ = T?.Repeat;
 						DataType ay_ = ax_?.Bounds;
 
-						return ((ay_ as Period) as object);
+						return (ay_ as Period) as object;
 					}
 					else
 					{
@@ -1269,7 +1269,7 @@ public class FHIR347_0_1_021
 				"active",
 				"completed",
 			];
-			bool? ae_ = context.Operators.In<string>(ac_, (ad_ as IEnumerable<string>));
+			bool? ae_ = context.Operators.In<string>(ac_, ad_ as IEnumerable<string>);
 			bool? af_ = context.Operators.And(aa_, ae_);
 
 			return af_;

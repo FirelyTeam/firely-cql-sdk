@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR", "0.1.000")]
 public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 {
@@ -440,7 +440,7 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 		{
 			Period bj_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_3_000.ToInterval(bj_);
-			CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_0_000.ToInterval((bk_ as object));
+			CqlInterval<CqlDateTime> bl_ = QICoreCommon_2_0_000.ToInterval(bk_ as object);
 			CqlDateTime bm_ = context.Operators.End(bl_);
 			CqlInterval<CqlDateTime> bn_ = this.Measurement_Period();
 			CqlDateTime bo_ = context.Operators.Start(bn_);
@@ -480,10 +480,10 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 			CqlDateTime m_ = context.Operators.Start(l_);
 			Period n_ = tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters?.Period;
 			CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.ToInterval(n_);
-			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.ToInterval((o_ as object));
+			CqlInterval<CqlDateTime> p_ = QICoreCommon_2_0_000.ToInterval(o_ as object);
 			bool? q_ = context.Operators.In<CqlDateTime>(m_, p_, "day");
 			CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_3_000.ToInterval(n_);
-			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
+			CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_ as object);
 			bool? v_ = context.Operators.OverlapsBefore(l_, u_, default);
 			bool? w_ = context.Operators.Or(q_, v_);
 
@@ -600,17 +600,17 @@ public class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000
 				CqlDateTime r_ = context.Operators.Convert<CqlDateTime>(q_);
 				Period s_ = EncounterWithURI?.Period;
 				CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_3_000.ToInterval(s_);
-				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
+				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_ as object);
 				CqlDateTime v_ = context.Operators.Start(u_);
 				CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(s_);
-				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+				CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 				CqlDateTime z_ = context.Operators.Start(y_);
 				CqlQuantity aa_ = context.Operators.Quantity(3m, "days");
 				CqlDateTime ab_ = context.Operators.Add(z_, aa_);
 				CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(v_, ab_, true, true);
 				bool? ad_ = context.Operators.In<CqlDateTime>(r_, ac_, default);
 				CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_3_000.ToInterval(s_);
-				CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.ToInterval((af_ as object));
+				CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.ToInterval(af_ as object);
 				CqlDateTime ah_ = context.Operators.Start(ag_);
 				bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
 				bool? aj_ = context.Operators.And(ad_, ai_);

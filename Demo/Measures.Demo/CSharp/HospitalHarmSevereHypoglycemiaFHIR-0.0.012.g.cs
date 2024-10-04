@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
 public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 {
@@ -487,7 +487,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 					bool? ea_ = context.Operators.Not(dz_);
 					bool? eb_ = context.Operators.And(dw_, ea_);
 					DataType ec_ = FollowupBloodGlucoseLab?.Value;
-					CqlQuantity ed_ = FHIRHelpers_4_0_001.ToQuantity((ec_ as Quantity));
+					CqlQuantity ed_ = FHIRHelpers_4_0_001.ToQuantity(ec_ as Quantity);
 					CqlQuantity ee_ = context.Operators.Quantity(80m, "mg/dL");
 					bool? ef_ = context.Operators.Greater(ed_, ee_);
 					bool? eg_ = context.Operators.And(eb_, ef_);
@@ -511,7 +511,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 				CqlInterval<CqlDateTime> ek_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
 				bool? el_ = context.Operators.In<CqlDateTime>(ej_, ek_, default);
 				DataType em_ = BloodGlucoseLab?.Value;
-				CqlQuantity en_ = FHIRHelpers_4_0_001.ToQuantity((em_ as Quantity));
+				CqlQuantity en_ = FHIRHelpers_4_0_001.ToQuantity(em_ as Quantity);
 				CqlQuantity eo_ = context.Operators.Quantity(40m, "mg/dL");
 				bool? ep_ = context.Operators.Less(en_, eo_);
 				bool? eq_ = context.Operators.And(el_, ep_);

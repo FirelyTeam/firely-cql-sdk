@@ -4,12 +4,17 @@
 		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<!-- Keep this in sync between cql-sdk.props and cql-demo.props -->
+		<FirelySdkVersion>5.10.3</FirelySdkVersion>
+	</PropertyGroup>
+
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
 		<!--
 			Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
 			-->
-		<VersionPrefix>2.0.3</VersionPrefix>
+		<VersionPrefix>2.0.4</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
@@ -32,10 +37,6 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
 	</ItemGroup>
-
-	<PropertyGroup>
-    <FirelySdkVersion>5.9.1</FirelySdkVersion>
-	</PropertyGroup>
 
 	<!-- Compiler settings -->
 	<PropertyGroup>
@@ -78,7 +79,6 @@
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
 		<PackageReference Include="JetBrains.Annotations" Version="2024.2.0" />
-
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24318.1" PrivateAssets="All" />
 	</ItemGroup>
 

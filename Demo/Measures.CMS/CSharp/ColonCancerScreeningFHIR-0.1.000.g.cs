@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("ColonCancerScreeningFHIR", "0.1.000")]
 public class ColonCancerScreeningFHIR_0_1_000
 {
@@ -377,21 +377,21 @@ public class ColonCancerScreeningFHIR_0_1_000
 					DataType z_ = FecalOccultResult?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.ToValue(z_);
 
-					return ((aa_ as CqlDateTime) as object);
+					return (aa_ as CqlDateTime) as object;
 				}
 				else if (o_())
 				{
 					DataType ab_ = FecalOccultResult?.Effective;
 					object ac_ = FHIRHelpers_4_3_000.ToValue(ab_);
 
-					return ((ac_ as CqlInterval<CqlDateTime>) as object);
+					return (ac_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (p_())
 				{
 					DataType ad_ = FecalOccultResult?.Effective;
 					object ae_ = FHIRHelpers_4_3_000.ToValue(ad_);
 
-					return ((ae_ as CqlDateTime) as object);
+					return (ae_ as CqlDateTime) as object;
 				}
 				else
 				{
@@ -455,21 +455,21 @@ public class ColonCancerScreeningFHIR_0_1_000
 					DataType af_ = sDNATest?.Effective;
 					object ag_ = FHIRHelpers_4_3_000.ToValue(af_);
 
-					return ((ag_ as CqlDateTime) as object);
+					return (ag_ as CqlDateTime) as object;
 				}
 				else if (u_())
 				{
 					DataType ah_ = sDNATest?.Effective;
 					object ai_ = FHIRHelpers_4_3_000.ToValue(ah_);
 
-					return ((ai_ as CqlInterval<CqlDateTime>) as object);
+					return (ai_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (v_())
 				{
 					DataType aj_ = sDNATest?.Effective;
 					object ak_ = FHIRHelpers_4_3_000.ToValue(aj_);
 
-					return ((ak_ as CqlDateTime) as object);
+					return (ak_ as CqlDateTime) as object;
 				}
 				else
 				{

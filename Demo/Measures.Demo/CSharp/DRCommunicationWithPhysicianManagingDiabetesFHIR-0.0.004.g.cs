@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 {
@@ -475,7 +475,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.ToInterval(m_);
 				Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(LevelOfSeverityNotCommunicated, "qicore-recorded");
 				DataType p_ = o_?.Value;
-				CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.ToInterval((p_ as Period));
+				CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.ToInterval(p_ as Period);
 				bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, default);
 
 				return r_;
@@ -495,7 +495,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			bool? u_ = context.Operators.Equal(t_, "not-done");
 			Extension v_ = this.GetModifierExtension(LevelOfSeverityNotCommunicated, "qicore-notDone");
 			DataType w_ = v_?.Value;
-			bool? x_ = FHIRHelpers_4_0_001.ToBoolean((w_ as FhirBoolean));
+			bool? x_ = FHIRHelpers_4_0_001.ToBoolean(w_ as FhirBoolean);
 			bool? y_ = context.Operators.IsTrue(x_);
 			bool? z_ = context.Operators.And(u_, y_);
 			CodeableConcept aa_ = LevelOfSeverityNotCommunicated?.StatusReason;
@@ -534,7 +534,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.ToInterval(n_);
 				Extension p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(MacularEdemaAbsentNotCommunicated, "qicore-recorded");
 				DataType q_ = p_?.Value;
-				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_0_001.ToInterval((q_ as Period));
+				CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_0_001.ToInterval(q_ as Period);
 				bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, default);
 
 				return s_;
@@ -554,7 +554,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			bool? v_ = context.Operators.Equal(u_, "not-done");
 			Extension w_ = this.GetModifierExtension(MacularEdemaAbsentNotCommunicated, "qicore-notDone");
 			DataType x_ = w_?.Value;
-			bool? y_ = FHIRHelpers_4_0_001.ToBoolean((x_ as FhirBoolean));
+			bool? y_ = FHIRHelpers_4_0_001.ToBoolean(x_ as FhirBoolean);
 			bool? z_ = context.Operators.IsTrue(y_);
 			bool? aa_ = context.Operators.And(v_, z_);
 			CodeableConcept ab_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
@@ -592,7 +592,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.ToInterval(m_);
 				Extension o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(MacularEdemaPresentNotCommunicated, "qicore-recorded");
 				DataType p_ = o_?.Value;
-				CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.ToInterval((p_ as Period));
+				CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.ToInterval(p_ as Period);
 				bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, default);
 
 				return r_;
@@ -612,7 +612,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			bool? u_ = context.Operators.Equal(t_, "not-done");
 			Extension v_ = this.GetModifierExtension(MacularEdemaPresentNotCommunicated, "qicore-notDone");
 			DataType w_ = v_?.Value;
-			bool? x_ = FHIRHelpers_4_0_001.ToBoolean((w_ as FhirBoolean));
+			bool? x_ = FHIRHelpers_4_0_001.ToBoolean(w_ as FhirBoolean);
 			bool? y_ = context.Operators.IsTrue(x_);
 			bool? z_ = context.Operators.And(u_, y_);
 			CodeableConcept aa_ = MacularEdemaPresentNotCommunicated?.StatusReason;
@@ -709,7 +709,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				"amended",
 				"corrected",
 			];
-			bool? t_ = context.Operators.In<string>(r_, (s_ as IEnumerable<string>));
+			bool? t_ = context.Operators.In<string>(r_, s_ as IEnumerable<string>);
 			DataType u_ = MacularExam?.Value;
 			bool? v_ = context.Operators.Not((bool?)(u_ is null));
 			bool? w_ = context.Operators.And(t_, v_);

@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("ProstateCaAvoidanceBoneScanOveruseFHIR", "0.2.000")]
 public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 {
@@ -457,7 +457,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			object f_ = FHIRHelpers_4_3_000.ToValue(e_);
 			CqlCode g_ = this.Procedure_reason_record__record_artifact_();
 			CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-			bool? i_ = context.Operators.Equivalent((f_ as CqlConcept), h_);
+			bool? i_ = context.Operators.Equivalent(f_ as CqlConcept, h_);
 
 			return i_;
 		};
@@ -569,7 +569,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 					"amended",
 					"corrected",
 				];
-				bool? ag_ = context.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
+				bool? ag_ = context.Operators.In<string>(ae_, af_ as IEnumerable<string>);
 				bool? ah_ = context.Operators.And(aa_, ag_);
 
 				return ah_;
@@ -600,7 +600,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 		{
 			DataType am_ = LastGleasonScore?.Value;
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
-			bool? ao_ = context.Operators.LessOrEqual((an_ as int?), 6);
+			bool? ao_ = context.Operators.LessOrEqual(an_ as int?, 6);
 
 			return ao_;
 		};
@@ -645,7 +645,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 					"amended",
 					"corrected",
 				];
-				bool? ag_ = context.Operators.In<string>(ae_, (af_ as IEnumerable<string>));
+				bool? ag_ = context.Operators.In<string>(ae_, af_ as IEnumerable<string>);
 				bool? ah_ = context.Operators.And(aa_, ag_);
 
 				return ah_;
@@ -678,21 +678,21 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			object an_ = FHIRHelpers_4_3_000.ToValue(am_);
 			CqlCode ao_ = this.T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_();
 			CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
-			bool? aq_ = context.Operators.Equivalent((an_ as CqlConcept), ap_);
+			bool? aq_ = context.Operators.Equivalent(an_ as CqlConcept, ap_);
 			object as_ = FHIRHelpers_4_3_000.ToValue(am_);
 			CqlCode at_ = this.T1b__Prostate_tumor_incidental_histologic_finding_in_greater_than_5_percent_of_tissue_resected__finding_();
 			CqlConcept au_ = context.Operators.ConvertCodeToConcept(at_);
-			bool? av_ = context.Operators.Equivalent((as_ as CqlConcept), au_);
+			bool? av_ = context.Operators.Equivalent(as_ as CqlConcept, au_);
 			bool? aw_ = context.Operators.Or(aq_, av_);
 			object ay_ = FHIRHelpers_4_3_000.ToValue(am_);
 			CqlCode az_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T1c__Tumor_identified_by_needle_biopsy__finding_();
 			CqlConcept ba_ = context.Operators.ConvertCodeToConcept(az_);
-			bool? bb_ = context.Operators.Equivalent((ay_ as CqlConcept), ba_);
+			bool? bb_ = context.Operators.Equivalent(ay_ as CqlConcept, ba_);
 			bool? bc_ = context.Operators.Or(aw_, bb_);
 			object be_ = FHIRHelpers_4_3_000.ToValue(am_);
 			CqlCode bf_ = this.Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_();
 			CqlConcept bg_ = context.Operators.ConvertCodeToConcept(bf_);
-			bool? bh_ = context.Operators.Equivalent((be_ as CqlConcept), bg_);
+			bool? bh_ = context.Operators.Equivalent(be_ as CqlConcept, bg_);
 			bool? bi_ = context.Operators.Or(bc_, bh_);
 
 			return bi_;
@@ -741,7 +741,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 						CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.toInterval(af_);
 						CqlDateTime ah_ = context.Operators.Start(ag_);
 
-						return (ah_ is null);
+						return ah_ is null;
 					};
 					if (ad_())
 					{
@@ -774,7 +774,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 					"amended",
 					"corrected",
 				];
-				bool? ab_ = context.Operators.In<string>(z_, (aa_ as IEnumerable<string>));
+				bool? ab_ = context.Operators.In<string>(z_, aa_ as IEnumerable<string>);
 				bool? ac_ = context.Operators.And(v_, ab_);
 
 				return ac_;
@@ -806,7 +806,7 @@ public class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
 			DataType av_ = LastPSATest?.Value;
 			object aw_ = FHIRHelpers_4_3_000.ToValue(av_);
 			CqlQuantity ax_ = context.Operators.Quantity(10m, "ng/mL");
-			bool? ay_ = context.Operators.Less((aw_ as CqlQuantity), ax_);
+			bool? ay_ = context.Operators.Less(aw_ as CqlQuantity, ax_);
 
 			return ay_;
 		};

@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public class BCSEHEDISMY2022_1_0_0
 {
@@ -290,7 +290,7 @@ public class BCSEHEDISMY2022_1_0_0
 		bool? b_(Coverage C)
 		{
 			Period d_ = C?.Period;
-			CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_1_0_0.Normalize_Interval((d_ as object));
+			CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_1_0_0.Normalize_Interval(d_ as object);
 			CqlInterval<CqlDateTime> f_ = this.Participation_Period();
 			bool? g_ = context.Operators.Overlaps(e_, f_, default);
 

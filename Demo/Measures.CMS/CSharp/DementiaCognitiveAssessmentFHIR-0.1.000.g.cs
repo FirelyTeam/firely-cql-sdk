@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("DementiaCognitiveAssessmentFHIR", "0.1.000")]
 public class DementiaCognitiveAssessmentFHIR_0_1_000
 {
@@ -461,7 +461,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 				"corrected",
 				"preliminary",
 			];
-			bool? ap_ = context.Operators.In<string>(an_, (ao_ as IEnumerable<string>));
+			bool? ap_ = context.Operators.In<string>(an_, ao_ as IEnumerable<string>);
 			bool? aq_ = context.Operators.And(aj_, ap_);
 
 			return aq_;
@@ -527,8 +527,8 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 				return af_;
 			};
-			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)((NoCognitiveAssessment is DomainResource)
-					? ((NoCognitiveAssessment as DomainResource).Extension)
+			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoCognitiveAssessment is DomainResource
+					? (NoCognitiveAssessment as DomainResource).Extension
 					: default), u_);
 			object w_(Extension @this)
 			{
@@ -538,7 +538,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 			};
 			IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
 			object y_ = context.Operators.SingletonFrom<object>(x_);
-			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept((y_ as CodeableConcept));
+			CqlConcept z_ = FHIRHelpers_4_3_000.ToConcept(y_ as CodeableConcept);
 			CqlValueSet aa_ = this.Patient_Reason();
 			bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
 

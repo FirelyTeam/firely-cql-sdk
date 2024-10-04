@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("NCQAStatus", "1.0.0")]
 public class NCQAStatus_1_0_0
 {
@@ -145,7 +145,7 @@ public class NCQAStatus_1_0_0
 			string[] e_ = [
 				"completed",
 			];
-			bool? f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
+			bool? f_ = context.Operators.In<string>(d_, e_ as IEnumerable<string>);
 
 			return f_;
 		};
@@ -181,7 +181,7 @@ public class NCQAStatus_1_0_0
 				"completed",
 				"in-progress",
 			];
-			bool? f_ = context.Operators.In<string>(d_, (e_ as IEnumerable<string>));
+			bool? f_ = context.Operators.In<string>(d_, e_ as IEnumerable<string>);
 
 			return f_;
 		};

@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR", "0.0.006")]
 public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 {
@@ -372,7 +372,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			bool? h_(Observation BloodGlucoseLab)
 			{
 				DataType l_ = BloodGlucoseLab?.Effective;
-				CqlDateTime m_ = FHIRHelpers_4_0_001.ToDateTime((l_ as FhirDateTime));
+				CqlDateTime m_ = FHIRHelpers_4_0_001.ToDateTime(l_ as FhirDateTime);
 				CqlInterval<CqlDateTime> n_ = EncounterWithHospitalization?.hospitalizationPeriod;
 				bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, default);
 				Code<ObservationStatus> p_ = BloodGlucoseLab?.StatusElement;
@@ -380,7 +380,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 				bool? r_ = context.Operators.Equal(q_, "final");
 				bool? s_ = context.Operators.And(o_, r_);
 				DataType t_ = BloodGlucoseLab?.Value;
-				CqlQuantity u_ = FHIRHelpers_4_0_001.ToQuantity((t_ as Quantity));
+				CqlQuantity u_ = FHIRHelpers_4_0_001.ToQuantity(t_ as Quantity);
 				CqlQuantity v_ = context.Operators.Quantity(200m, "mg/dL");
 				bool? w_ = context.Operators.GreaterOrEqual(u_, v_);
 				bool? x_ = context.Operators.And(s_, w_);
@@ -447,7 +447,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 			b_,
 			e_,
 		];
-		CqlDateTime g_ = context.Operators.Min<CqlDateTime>((f_ as IEnumerable<CqlDateTime>));
+		CqlDateTime g_ = context.Operators.Min<CqlDateTime>(f_ as IEnumerable<CqlDateTime>);
 		CqlInterval<CqlDateTime> h_ = context.Operators.Interval(a_, g_, true, true);
 
 		return h_;
@@ -463,7 +463,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 		CqlInterval<int?>[] e_ = [
 			d_,
 		];
-		IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((e_ as IEnumerable<CqlInterval<int?>>), default);
+		IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand(e_ as IEnumerable<CqlInterval<int?>>, default);
 		int? g_(CqlInterval<int?> DayExpand)
 		{
 			int? i_ = context.Operators.End(DayExpand);
@@ -501,7 +501,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					int? u_ = context.Operators.DurationBetween(s_, t_, "hour");
 					bool? v_ = context.Operators.Less(u_, 24);
 
-					return (v_ ?? false);
+					return v_ ?? false;
 				};
 				if (m_())
 				{
@@ -577,12 +577,12 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					string ad_ = FHIRHelpers_4_0_001.ToString(ac_);
 					bool? ae_ = context.Operators.Equal(ad_, "final");
 					DataType af_ = BloodGlucoseLab1?.Value;
-					CqlQuantity ag_ = FHIRHelpers_4_0_001.ToQuantity((af_ as Quantity));
+					CqlQuantity ag_ = FHIRHelpers_4_0_001.ToQuantity(af_ as Quantity);
 					CqlQuantity ah_ = context.Operators.Quantity(300m, "mg/dL");
 					bool? ai_ = context.Operators.Greater(ag_, ah_);
 					bool? aj_ = context.Operators.And(ae_, ai_);
 					DataType ak_ = BloodGlucoseLab1?.Effective;
-					CqlDateTime al_ = FHIRHelpers_4_0_001.ToDateTime((ak_ as FhirDateTime));
+					CqlDateTime al_ = FHIRHelpers_4_0_001.ToDateTime(ak_ as FhirDateTime);
 					CqlInterval<CqlDateTime> am_ = EncounterDay?.dayPeriod;
 					bool? an_ = context.Operators.In<CqlDateTime>(al_, am_, default);
 					bool? ao_ = context.Operators.And(aj_, an_);
@@ -598,12 +598,12 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					string aq_ = FHIRHelpers_4_0_001.ToString(ap_);
 					bool? ar_ = context.Operators.Equal(aq_, "final");
 					DataType as_ = BloodGlucoseLab2?.Value;
-					CqlQuantity at_ = FHIRHelpers_4_0_001.ToQuantity((as_ as Quantity));
+					CqlQuantity at_ = FHIRHelpers_4_0_001.ToQuantity(as_ as Quantity);
 					CqlQuantity au_ = context.Operators.Quantity(200m, "mg/dL");
 					bool? av_ = context.Operators.GreaterOrEqual(at_, au_);
 					bool? aw_ = context.Operators.And(ar_, av_);
 					DataType ax_ = BloodGlucoseLab2?.Effective;
-					CqlDateTime ay_ = FHIRHelpers_4_0_001.ToDateTime((ax_ as FhirDateTime));
+					CqlDateTime ay_ = FHIRHelpers_4_0_001.ToDateTime(ax_ as FhirDateTime);
 					CqlInterval<CqlDateTime> az_ = EncounterDay?.dayPeriod;
 					bool? ba_ = context.Operators.In<CqlDateTime>(ay_, az_, default);
 					bool? bb_ = context.Operators.And(aw_, ba_);
@@ -619,7 +619,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					string bd_ = FHIRHelpers_4_0_001.ToString(bc_);
 					bool? be_ = context.Operators.Equal(bd_, "final");
 					DataType bf_ = BloodGlucoseLab3?.Effective;
-					CqlDateTime bg_ = FHIRHelpers_4_0_001.ToDateTime((bf_ as FhirDateTime));
+					CqlDateTime bg_ = FHIRHelpers_4_0_001.ToDateTime(bf_ as FhirDateTime);
 					CqlInterval<CqlDateTime> bh_ = EncounterDay?.dayPeriod;
 					bool? bi_ = context.Operators.In<CqlDateTime>(bg_, bh_, default);
 					bool? bj_ = context.Operators.And(be_, bi_);

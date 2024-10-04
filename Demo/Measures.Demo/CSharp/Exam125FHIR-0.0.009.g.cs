@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("Exam125FHIR", "0.0.009")]
 public class Exam125FHIR_0_0_009
 {
@@ -299,7 +299,7 @@ public class Exam125FHIR_0_0_009
 			bool? j_ = context.Operators.Equal(i_, "finished");
 			CqlInterval<CqlDateTime> k_ = this.Measurement_Period();
 			Period l_ = TelehealthEncounter?.Period;
-			CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((l_ as object));
+			CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(l_ as object);
 			bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
 			bool? o_ = context.Operators.And(j_, n_);
 
@@ -622,7 +622,7 @@ public class Exam125FHIR_0_0_009
 				"corrected",
 				"appended",
 			];
-			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
+			bool? i_ = context.Operators.In<string>(g_, h_ as IEnumerable<string>);
 			DataType j_ = Mammogram?.Effective;
 			CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
 			CqlDateTime l_ = context.Operators.End(k_);
@@ -664,7 +664,7 @@ public class Exam125FHIR_0_0_009
 				"corrected",
 				"appended",
 			];
-			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
+			bool? i_ = context.Operators.In<string>(g_, h_ as IEnumerable<string>);
 			DataType j_ = Mammogram?.Effective;
 			CqlInterval<CqlDateTime> k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
 			CqlDateTime l_ = context.Operators.End(k_);
@@ -737,7 +737,7 @@ public class Exam125FHIR_0_0_009
 				"corrected",
 				"appended",
 			];
-			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
+			bool? i_ = context.Operators.In<string>(g_, h_ as IEnumerable<string>);
 			bool? j_ = context.Operators.Not(i_);
 			DataType k_ = Mammogram?.Effective;
 			CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(k_);
@@ -780,7 +780,7 @@ public class Exam125FHIR_0_0_009
 				"corrected",
 				"appended",
 			];
-			bool? i_ = context.Operators.In<string>(g_, (h_ as IEnumerable<string>));
+			bool? i_ = context.Operators.In<string>(g_, h_ as IEnumerable<string>);
 			bool? j_ = context.Operators.Not(i_);
 			DataType k_ = Mammogram?.Effective;
 			CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(k_);

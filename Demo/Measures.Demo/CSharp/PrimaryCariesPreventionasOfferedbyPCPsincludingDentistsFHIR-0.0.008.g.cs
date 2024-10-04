@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 {
@@ -279,7 +279,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		{
 			CqlInterval<CqlDateTime> z_ = this.Measurement_Period();
 			Period aa_ = ValidEncounter?.Period;
-			CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((aa_ as object));
+			CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aa_ as object);
 			bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, default);
 			Code<Encounter.EncounterStatus> ad_ = ValidEncounter?.StatusElement;
 			string ae_ = FHIRHelpers_4_0_001.ToString(ad_);

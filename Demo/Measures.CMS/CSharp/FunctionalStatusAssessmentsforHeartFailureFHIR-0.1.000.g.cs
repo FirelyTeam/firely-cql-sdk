@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("FunctionalStatusAssessmentsforHeartFailureFHIR", "0.1.000")]
 public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 {
@@ -563,7 +563,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlInterval<CqlDateTime> l_ = this.Measurement_Period();
 			Period m_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
 
 			return p_;
@@ -592,11 +592,11 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period k_ = tuple_dbnmmzbtissrtndishcesfvih?.OfficeVisit2?.Period;
 			CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_3_000.ToInterval(k_);
-			CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.ToInterval((l_ as object));
+			CqlInterval<CqlDateTime> m_ = QICoreCommon_2_0_000.ToInterval(l_ as object);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			Period o_ = tuple_dbnmmzbtissrtndishcesfvih?.OfficeVisit1?.Period;
 			CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.ToInterval(o_);
-			CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.ToInterval((p_ as object));
+			CqlInterval<CqlDateTime> q_ = QICoreCommon_2_0_000.ToInterval(p_ as object);
 			CqlDateTime r_ = context.Operators.End(q_);
 			CqlQuantity s_ = context.Operators.Quantity(1m, "day");
 			CqlDateTime t_ = context.Operators.Add(r_, s_);
@@ -746,7 +746,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				an_,
 				as_,
 			];
-			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
+			CqlDate au_ = context.Operators.Max<CqlDate>(at_ as IEnumerable<CqlDate>);
 
 			return au_;
 		};
@@ -775,7 +775,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -784,17 +784,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_dzhwgxhmbfavmzfaszbeksohj?.InitialPROMIS10Date);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);
@@ -1009,7 +1009,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				fi_,
 				fn_,
 			];
-			CqlDate fp_ = context.Operators.Max<CqlDate>((fo_ as IEnumerable<CqlDate>));
+			CqlDate fp_ = context.Operators.Max<CqlDate>(fo_ as IEnumerable<CqlDate>);
 
 			return fp_;
 		};
@@ -1038,7 +1038,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -1047,17 +1047,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_kmpntxjuhkpbcwgftqigieao?.InitialPROMIS29Date);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);
@@ -1147,7 +1147,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				an_,
 				as_,
 			];
-			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
+			CqlDate au_ = context.Operators.Max<CqlDate>(at_ as IEnumerable<CqlDate>);
 
 			return au_;
 		};
@@ -1176,7 +1176,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -1185,17 +1185,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_fppktdiagiekhptnsbacpswh?.InitialVR12ObliqueDate);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);
@@ -1285,7 +1285,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				an_,
 				as_,
 			];
-			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
+			CqlDate au_ = context.Operators.Max<CqlDate>(at_ as IEnumerable<CqlDate>);
 
 			return au_;
 		};
@@ -1314,7 +1314,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -1323,17 +1323,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_fansvmjaedmvsdoyrozxdlsai?.InitialVR12OrthogonalDate);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);
@@ -1423,7 +1423,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				an_,
 				as_,
 			];
-			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
+			CqlDate au_ = context.Operators.Max<CqlDate>(at_ as IEnumerable<CqlDate>);
 
 			return au_;
 		};
@@ -1452,7 +1452,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -1461,17 +1461,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_elxicyhrdpyzpqyjphdifbiga?.InitialVR36ObliqueDate);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);
@@ -1561,7 +1561,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				an_,
 				as_,
 			];
-			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
+			CqlDate au_ = context.Operators.Max<CqlDate>(at_ as IEnumerable<CqlDate>);
 
 			return au_;
 		};
@@ -1590,7 +1590,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_fucqujadjizabihdffformht?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -1599,17 +1599,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_fucqujadjizabihdffformht?.InitialVR36OrthogonalDate);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);
@@ -1699,7 +1699,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				an_,
 				as_,
 			];
-			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
+			CqlDate au_ = context.Operators.Max<CqlDate>(at_ as IEnumerable<CqlDate>);
 
 			return au_;
 		};
@@ -1728,7 +1728,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -1737,17 +1737,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_ncdawctnmbfmtibmihsfbaig?.InitialMLHFQDate);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);
@@ -1837,7 +1837,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				an_,
 				as_,
 			];
-			CqlDate au_ = context.Operators.Max<CqlDate>((at_ as IEnumerable<CqlDate>));
+			CqlDate au_ = context.Operators.Max<CqlDate>(at_ as IEnumerable<CqlDate>);
 
 			return au_;
 		};
@@ -1866,7 +1866,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -1875,17 +1875,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_eoahgtwwdfqijhcjzqnvidvuo?.InitialKCCQ12Date);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);
@@ -2075,7 +2075,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 				ej_,
 				eo_,
 			];
-			CqlDate eq_ = context.Operators.Max<CqlDate>((ep_ as IEnumerable<CqlDate>));
+			CqlDate eq_ = context.Operators.Max<CqlDate>(ep_ as IEnumerable<CqlDate>);
 
 			return eq_;
 		};
@@ -2104,7 +2104,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -2113,17 +2113,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_hrluhbcfcsvnvrrnjajahdcea?.InitialKCCQAssessmentDate);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);
@@ -2179,7 +2179,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			CqlDate[] q_ = [
 				p_,
 			];
-			CqlDate r_ = context.Operators.Max<CqlDate>((q_ as IEnumerable<CqlDate>));
+			CqlDate r_ = context.Operators.Max<CqlDate>(q_ as IEnumerable<CqlDate>);
 
 			return r_;
 		};
@@ -2208,7 +2208,7 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 		{
 			Period m_ = tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval((n_ as object));
+			CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.ToInterval(n_ as object);
 			CqlDateTime p_ = context.Operators.End(o_);
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period();
 			CqlDateTime r_ = context.Operators.End(q_);
@@ -2217,17 +2217,17 @@ public class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000
 			bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_dgrojeekdvizsvyisepdjhjgj?.InitialKCCQTotalScore);
 			CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval((x_ as object));
+			CqlInterval<CqlDateTime> y_ = QICoreCommon_2_0_000.ToInterval(x_ as object);
 			CqlDateTime z_ = context.Operators.End(y_);
 			CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
 			CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
 			CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 			CqlDateTime af_ = context.Operators.End(ae_);
 			CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
 			bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
 			CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.ToInterval(m_);
-			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval((aj_ as object));
+			CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_0_000.ToInterval(aj_ as object);
 			CqlDateTime al_ = context.Operators.End(ak_);
 			bool? am_ = context.Operators.Not((bool?)(al_ is null));
 			bool? an_ = context.Operators.And(ah_, am_);

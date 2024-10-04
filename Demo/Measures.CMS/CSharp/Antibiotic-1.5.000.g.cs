@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("Antibiotic", "1.5.000")]
 public class Antibiotic_1_5_000
 {
@@ -76,13 +76,13 @@ public class Antibiotic_1_5_000
 				CqlDate k_ = context.Operators.DateFrom(j_);
 				Period l_ = eDate?.Period;
 				CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.ToInterval(l_);
-				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.ToInterval((m_ as object));
+				CqlInterval<CqlDateTime> n_ = QICoreCommon_2_0_000.ToInterval(m_ as object);
 				CqlDateTime o_ = context.Operators.Start(n_);
 				CqlDate p_ = context.Operators.DateFrom(o_);
 				CqlQuantity q_ = context.Operators.Quantity(1m, "year");
 				CqlDate r_ = context.Operators.Subtract(p_, q_);
 				CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_3_000.ToInterval(l_);
-				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval((t_ as object));
+				CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_ as object);
 				CqlDateTime v_ = context.Operators.Start(u_);
 				CqlDate w_ = context.Operators.DateFrom(v_);
 				CqlInterval<CqlDate> x_ = context.Operators.Interval(r_, w_, true, true);
@@ -176,13 +176,13 @@ public class Antibiotic_1_5_000
 					CqlInterval<CqlDateTime> u_ = QICoreCommon_2_0_000.ToInterval(t_);
 					Period v_ = DateOfEpisode?.Period;
 					CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_3_000.ToInterval(v_);
-					CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval((w_ as object));
+					CqlInterval<CqlDateTime> x_ = QICoreCommon_2_0_000.ToInterval(w_ as object);
 					CqlDateTime y_ = context.Operators.Start(x_);
 					CqlDate z_ = context.Operators.DateFrom(y_);
 					CqlQuantity aa_ = context.Operators.Quantity(30m, "days");
 					CqlDate ab_ = context.Operators.Subtract(z_, aa_);
 					CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_3_000.ToInterval(v_);
-					CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval((ad_ as object));
+					CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.ToInterval(ad_ as object);
 					CqlDateTime af_ = context.Operators.Start(ae_);
 					CqlDate ag_ = context.Operators.DateFrom(af_);
 					CqlQuantity ah_ = context.Operators.Quantity(1m, "day");
@@ -191,12 +191,12 @@ public class Antibiotic_1_5_000
 					CqlDate ak_ = aj_?.low;
 					CqlDateTime al_ = context.Operators.ConvertDateToDateTime(ak_);
 					CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_3_000.ToInterval(v_);
-					CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.ToInterval((an_ as object));
+					CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_0_000.ToInterval(an_ as object);
 					CqlDateTime ap_ = context.Operators.Start(ao_);
 					CqlDate aq_ = context.Operators.DateFrom(ap_);
 					CqlDate as_ = context.Operators.Subtract(aq_, aa_);
 					CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_3_000.ToInterval(v_);
-					CqlInterval<CqlDateTime> av_ = QICoreCommon_2_0_000.ToInterval((au_ as object));
+					CqlInterval<CqlDateTime> av_ = QICoreCommon_2_0_000.ToInterval(au_ as object);
 					CqlDateTime aw_ = context.Operators.Start(av_);
 					CqlDate ax_ = context.Operators.DateFrom(aw_);
 					CqlDate az_ = context.Operators.Subtract(ax_, ah_);
@@ -204,24 +204,24 @@ public class Antibiotic_1_5_000
 					CqlDate bb_ = ba_?.high;
 					CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
 					CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_3_000.ToInterval(v_);
-					CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_0_000.ToInterval((be_ as object));
+					CqlInterval<CqlDateTime> bf_ = QICoreCommon_2_0_000.ToInterval(be_ as object);
 					CqlDateTime bg_ = context.Operators.Start(bf_);
 					CqlDate bh_ = context.Operators.DateFrom(bg_);
 					CqlDate bj_ = context.Operators.Subtract(bh_, aa_);
 					CqlInterval<CqlDateTime> bl_ = FHIRHelpers_4_3_000.ToInterval(v_);
-					CqlInterval<CqlDateTime> bm_ = QICoreCommon_2_0_000.ToInterval((bl_ as object));
+					CqlInterval<CqlDateTime> bm_ = QICoreCommon_2_0_000.ToInterval(bl_ as object);
 					CqlDateTime bn_ = context.Operators.Start(bm_);
 					CqlDate bo_ = context.Operators.DateFrom(bn_);
 					CqlDate bq_ = context.Operators.Subtract(bo_, ah_);
 					CqlInterval<CqlDate> br_ = context.Operators.Interval(bj_, bq_, true, true);
 					bool? bs_ = br_?.lowClosed;
 					CqlInterval<CqlDateTime> bu_ = FHIRHelpers_4_3_000.ToInterval(v_);
-					CqlInterval<CqlDateTime> bv_ = QICoreCommon_2_0_000.ToInterval((bu_ as object));
+					CqlInterval<CqlDateTime> bv_ = QICoreCommon_2_0_000.ToInterval(bu_ as object);
 					CqlDateTime bw_ = context.Operators.Start(bv_);
 					CqlDate bx_ = context.Operators.DateFrom(bw_);
 					CqlDate bz_ = context.Operators.Subtract(bx_, aa_);
 					CqlInterval<CqlDateTime> cb_ = FHIRHelpers_4_3_000.ToInterval(v_);
-					CqlInterval<CqlDateTime> cc_ = QICoreCommon_2_0_000.ToInterval((cb_ as object));
+					CqlInterval<CqlDateTime> cc_ = QICoreCommon_2_0_000.ToInterval(cb_ as object);
 					CqlDateTime cd_ = context.Operators.Start(cc_);
 					CqlDate ce_ = context.Operators.DateFrom(cd_);
 					CqlDate cg_ = context.Operators.Subtract(ce_, ah_);

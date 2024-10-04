@@ -20,8 +20,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Options;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -31,18 +33,15 @@ namespace Hl7.Cql.CodeGeneration.NET
     internal class CSharpLibrarySetToStreamsWriter
     {
         private readonly ILogger<CSharpLibrarySetToStreamsWriter> _logger;
-        private readonly IOptions<CSharpCodeWriterOptions> _options;
         private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
         public CSharpLibrarySetToStreamsWriter(
             ILogger<CSharpLibrarySetToStreamsWriter> logger,
-            IOptions<CSharpCodeWriterOptions> options,
             TypeResolver typeResolver,
             TypeToCSharpConverter typeToCSharpConverter)
         {
             _logger = logger;
             _typeToCSharpConverter = typeToCSharpConverter;
-            _options = options;
             _contextAccessModifier = AccessModifier.Internal;
             _definesAccessModifier = AccessModifier.Internal;
             _usings = BuildUsings(typeResolver);
@@ -169,7 +168,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var library in librarySet)
             {
-                string libraryName = library.NameAndVersion()!;
+                string libraryName = library.GetVersionedIdentifier()!;
                 if (!callbacks.ShouldWriteLibrary(libraryName))
                 {
                     _logger.LogInformation($"Skipping library {libraryName} as per callback.");
@@ -222,13 +221,13 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var libraryAttribute = libraryName;
             var versionAttribute = string.Empty;
-            var nameAndVersion = libraryName.Split('-');
-            if (nameAndVersion.Length == 2)
+            var versionedIdentifier = libraryName.Split('-');
+            if (versionedIdentifier.Length == 2)
             {
-                if (Version.TryParse(nameAndVersion[1], out _))
+                if (Version.TryParse(versionedIdentifier[1], out _))
                 {
-                    libraryAttribute = nameAndVersion[0];
-                    versionAttribute = nameAndVersion[1];
+                    libraryAttribute = versionedIdentifier[0];
+                    versionAttribute = versionedIdentifier[1];
                 }
             }
 
@@ -314,7 +313,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var dependentLibrary in requiredLibraries)
             {
-                var typeName = libraryNameToClassName(dependentLibrary.NameAndVersion()!);
+                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
                 var memberName = typeName;
                 writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
             }
@@ -366,7 +365,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     writer.WriteLine();
                 }
 
-                var typeName = libraryNameToClassName(dependentLibrary.NameAndVersion()!);
+                var typeName = libraryNameToClassName(dependentLibrary.GetVersionedIdentifier()!);
                 var memberName = typeName;
                 writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
             }
@@ -397,14 +396,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
-            var simplifyNullConditionalMemberExpression = _options.Value.TypeFormat == CSharpCodeWriterTypeFormat.Var;
             var visitedBody = Transform(
                 overload.Body,
                 new RedundantCastsTransformer(),
-                new SimplifyExpressionsVisitor()
-                {
-                    SimplifyNullConditionalMemberExpression = simplifyNullConditionalMemberExpression
-                },
+                new SimplifyExpressionsVisitor(),
                 new RenameVariablesVisitor(vng),
                 new LocalVariableDeduper(_typeToCSharpConverter)
             );
@@ -461,7 +456,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private ExpressionToCSharpConverter NewExpressionToCSharpConverter(string libraryName) =>
-            new(_options, _typeToCSharpConverter, libraryName);
+            new(_typeToCSharpConverter, libraryName);
 
         private void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
         {

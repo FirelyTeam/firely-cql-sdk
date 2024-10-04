@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR", "0.1.000")]
 public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 {
@@ -728,7 +728,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			CqlInterval<CqlDateTime> an_ = context.Operators.Interval(t_, aa_, ag_, am_);
 			Period ao_ = ValidEncounters?.Period;
 			CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_3_000.ToInterval(ao_);
-			CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_0_000.ToInterval((ap_ as object));
+			CqlInterval<CqlDateTime> aq_ = QICoreCommon_2_0_000.ToInterval(ap_ as object);
 			bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(an_, aq_, "day");
 
 			return ar_;

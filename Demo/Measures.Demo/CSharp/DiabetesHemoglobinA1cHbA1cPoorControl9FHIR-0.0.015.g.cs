@@ -10,7 +10,7 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.0.015")]
 public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 {
@@ -301,7 +301,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			bool? g_ = context.Operators.Equal(f_, "finished");
 			CqlInterval<CqlDateTime> h_ = this.Measurement_Period();
 			Period i_ = TelehealthEncounter?.Period;
-			CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((i_ as object));
+			CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(i_ as object);
 			bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, default);
 			bool? l_ = context.Operators.And(g_, k_);
 
@@ -378,7 +378,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 				"amended",
 				"corrected",
 			];
-			bool? k_ = context.Operators.In<string>(i_, (j_ as IEnumerable<string>));
+			bool? k_ = context.Operators.In<string>(i_, j_ as IEnumerable<string>);
 			DataType l_ = RecentHbA1c?.Effective;
 			CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(l_);
 			CqlInterval<CqlDateTime> n_ = this.Measurement_Period();
@@ -424,7 +424,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		Observation a_ = this.Most_Recent_HbA1c();
 		DataType b_ = a_?.Value;
-		CqlQuantity c_ = FHIRHelpers_4_0_001.ToQuantity((b_ as Quantity));
+		CqlQuantity c_ = FHIRHelpers_4_0_001.ToQuantity(b_ as Quantity);
 		CqlQuantity d_ = context.Operators.Quantity(9m, "%");
 		bool? e_ = context.Operators.Greater(c_, d_);
 
@@ -448,7 +448,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 				"amended",
 				"corrected",
 			];
-			bool? j_ = context.Operators.In<string>(h_, (i_ as IEnumerable<string>));
+			bool? j_ = context.Operators.In<string>(h_, i_ as IEnumerable<string>);
 			DataType k_ = NoHbA1c?.Effective;
 			CqlDateTime l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(k_);
 			CqlInterval<CqlDateTime> m_ = this.Measurement_Period();
