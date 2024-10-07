@@ -12,31 +12,13 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
-public class FHIRConversionTest_2023_0_0
+public partial class FHIRConversionTest_2023_0_0
 {
+    private FHIRConversionTest_2023_0_0() {}
 
+    public static FHIRConversionTest_2023_0_0 Instance { get; } = new();
 
-    internal CqlContext context;
-
-    #region Cached values
-
-
-    #endregion
-    public FHIRConversionTest_2023_0_0(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-        FHIRHelpers_4_0_1 = new FHIRHelpers_4_0_1(context);
-
-    }
-    #region Dependencies
-
-    public FHIRHelpers_4_0_1 FHIRHelpers_4_0_1 { get; }
-
-    #endregion
-
-    [CqlDeclaration("AccountResource")]
-	public Account AccountResource(Account arg)
+	public Account AccountResource(CqlContext context, Account arg)
 	{
 		Account[] a_ = [
 			arg,
@@ -77,8 +59,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ActivityDefinitionResource")]
-	public ActivityDefinition ActivityDefinitionResource(ActivityDefinition arg)
+	public ActivityDefinition ActivityDefinitionResource(CqlContext context, ActivityDefinition arg)
 	{
 		ActivityDefinition[] a_ = [
 			arg,
@@ -189,8 +170,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("AdverseEventResource")]
-	public AdverseEvent AdverseEventResource(AdverseEvent arg)
+	public AdverseEvent AdverseEventResource(CqlContext context, AdverseEvent arg)
 	{
 		AdverseEvent[] a_ = [
 			arg,
@@ -249,8 +229,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("AllergyIntoleranceResource")]
-	public AllergyIntolerance AllergyIntoleranceResource(AllergyIntolerance arg)
+	public AllergyIntolerance AllergyIntoleranceResource(CqlContext context, AllergyIntolerance arg)
 	{
 		AllergyIntolerance[] a_ = [
 			arg,
@@ -301,8 +280,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("AppointmentResource")]
-	public Appointment AppointmentResource(Appointment arg)
+	public Appointment AppointmentResource(CqlContext context, Appointment arg)
 	{
 		Appointment[] a_ = [
 			arg,
@@ -369,8 +347,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("AppointmentResponseResource")]
-	public AppointmentResponse AppointmentResponseResource(AppointmentResponse arg)
+	public AppointmentResponse AppointmentResponseResource(CqlContext context, AppointmentResponse arg)
 	{
 		AppointmentResponse[] a_ = [
 			arg,
@@ -405,8 +382,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("AuditEventResource")]
-	public AuditEvent AuditEventResource(AuditEvent arg)
+	public AuditEvent AuditEventResource(CqlContext context, AuditEvent arg)
 	{
 		AuditEvent[] a_ = [
 			arg,
@@ -447,8 +423,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("BasicResource")]
-	public Basic BasicResource(Basic arg)
+	public Basic BasicResource(CqlContext context, Basic arg)
 	{
 		Basic[] a_ = [
 			arg,
@@ -477,8 +452,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("BiologicallyDerivedProductResource")]
-	public BiologicallyDerivedProduct BiologicallyDerivedProductResource(BiologicallyDerivedProduct arg)
+	public BiologicallyDerivedProduct BiologicallyDerivedProductResource(CqlContext context, BiologicallyDerivedProduct arg)
 	{
 		BiologicallyDerivedProduct[] a_ = [
 			arg,
@@ -519,8 +493,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("BodyStructureResource")]
-	public BodyStructure BodyStructureResource(BodyStructure arg)
+	public BodyStructure BodyStructureResource(CqlContext context, BodyStructure arg)
 	{
 		BodyStructure[] a_ = [
 			arg,
@@ -555,8 +528,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CarePlanResource")]
-	public CarePlan CarePlanResource(CarePlan arg)
+	public CarePlan CarePlanResource(CqlContext context, CarePlan arg)
 	{
 		CarePlan[] a_ = [
 			arg,
@@ -621,8 +593,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CareTeamResource")]
-	public CareTeam CareTeamResource(CareTeam arg)
+	public CareTeam CareTeamResource(CqlContext context, CareTeam arg)
 	{
 		CareTeam[] a_ = [
 			arg,
@@ -667,8 +638,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CatalogEntryResource")]
-	public CatalogEntry CatalogEntryResource(CatalogEntry arg)
+	public CatalogEntry CatalogEntryResource(CqlContext context, CatalogEntry arg)
 	{
 		CatalogEntry[] a_ = [
 			arg,
@@ -713,8 +683,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ChargeItemResource")]
-	public ChargeItem ChargeItemResource(ChargeItem arg)
+	public ChargeItem ChargeItemResource(CqlContext context, ChargeItem arg)
 	{
 		ChargeItem[] a_ = [
 			arg,
@@ -785,8 +754,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ChargeItemDefinitionResource")]
-	public ChargeItemDefinition ChargeItemDefinitionResource(ChargeItemDefinition arg)
+	public ChargeItemDefinition ChargeItemDefinitionResource(CqlContext context, ChargeItemDefinition arg)
 	{
 		ChargeItemDefinition[] a_ = [
 			arg,
@@ -851,8 +819,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ClaimResource")]
-	public Claim ClaimResource(Claim arg)
+	public Claim ClaimResource(CqlContext context, Claim arg)
 	{
 		Claim[] a_ = [
 			arg,
@@ -925,8 +892,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ClaimResponseResource")]
-	public ClaimResponse ClaimResponseResource(ClaimResponse arg)
+	public ClaimResponse ClaimResponseResource(CqlContext context, ClaimResponse arg)
 	{
 		ClaimResponse[] a_ = [
 			arg,
@@ -999,8 +965,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ClinicalImpressionResource")]
-	public ClinicalImpression ClinicalImpressionResource(ClinicalImpression arg)
+	public ClinicalImpression ClinicalImpressionResource(CqlContext context, ClinicalImpression arg)
 	{
 		ClinicalImpression[] a_ = [
 			arg,
@@ -1059,8 +1024,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CodeSystemResource")]
-	public CodeSystem CodeSystemResource(CodeSystem arg)
+	public CodeSystem CodeSystemResource(CqlContext context, CodeSystem arg)
 	{
 		CodeSystem[] a_ = [
 			arg,
@@ -1133,8 +1097,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CommunicationResource")]
-	public Communication CommunicationResource(Communication arg)
+	public Communication CommunicationResource(CqlContext context, Communication arg)
 	{
 		Communication[] a_ = [
 			arg,
@@ -1199,8 +1162,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CommunicationRequestResource")]
-	public CommunicationRequest CommunicationRequestResource(CommunicationRequest arg)
+	public CommunicationRequest CommunicationRequestResource(CqlContext context, CommunicationRequest arg)
 	{
 		CommunicationRequest[] a_ = [
 			arg,
@@ -1263,8 +1225,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CompositionResource")]
-	public Composition CompositionResource(Composition arg)
+	public Composition CompositionResource(CqlContext context, Composition arg)
 	{
 		Composition[] a_ = [
 			arg,
@@ -1313,8 +1274,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ConceptMapResource")]
-	public ConceptMap ConceptMapResource(ConceptMap arg)
+	public ConceptMap ConceptMapResource(CqlContext context, ConceptMap arg)
 	{
 		ConceptMap[] a_ = [
 			arg,
@@ -1369,8 +1329,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ConditionResource")]
-	public Condition ConditionResource(Condition arg)
+	public Condition ConditionResource(CqlContext context, Condition arg)
 	{
 		Condition[] a_ = [
 			arg,
@@ -1423,8 +1382,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ConsentResource")]
-	public Consent ConsentResource(Consent arg)
+	public Consent ConsentResource(CqlContext context, Consent arg)
 	{
 		Consent[] a_ = [
 			arg,
@@ -1469,8 +1427,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ContractResource")]
-	public Contract ContractResource(Contract arg)
+	public Contract ContractResource(CqlContext context, Contract arg)
 	{
 		Contract[] a_ = [
 			arg,
@@ -1555,8 +1512,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CoverageResource")]
-	public Coverage CoverageResource(Coverage arg)
+	public Coverage CoverageResource(CqlContext context, Coverage arg)
 	{
 		Coverage[] a_ = [
 			arg,
@@ -1611,8 +1567,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CoverageEligibilityRequestResource")]
-	public CoverageEligibilityRequest CoverageEligibilityRequestResource(CoverageEligibilityRequest arg)
+	public CoverageEligibilityRequest CoverageEligibilityRequestResource(CqlContext context, CoverageEligibilityRequest arg)
 	{
 		CoverageEligibilityRequest[] a_ = [
 			arg,
@@ -1659,8 +1614,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("CoverageEligibilityResponseResource")]
-	public CoverageEligibilityResponse CoverageEligibilityResponseResource(CoverageEligibilityResponse arg)
+	public CoverageEligibilityResponse CoverageEligibilityResponseResource(CqlContext context, CoverageEligibilityResponse arg)
 	{
 		CoverageEligibilityResponse[] a_ = [
 			arg,
@@ -1709,8 +1663,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("DetectedIssueResource")]
-	public DetectedIssue DetectedIssueResource(DetectedIssue arg)
+	public DetectedIssue DetectedIssueResource(CqlContext context, DetectedIssue arg)
 	{
 		DetectedIssue[] a_ = [
 			arg,
@@ -1753,8 +1706,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("DeviceResource")]
-	public Device DeviceResource(Device arg)
+	public Device DeviceResource(CqlContext context, Device arg)
 	{
 		Device[] a_ = [
 			arg,
@@ -1825,8 +1777,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("DeviceDefinitionResource")]
-	public DeviceDefinition DeviceDefinitionResource(DeviceDefinition arg)
+	public DeviceDefinition DeviceDefinitionResource(CqlContext context, DeviceDefinition arg)
 	{
 		DeviceDefinition[] a_ = [
 			arg,
@@ -1889,8 +1840,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("DeviceMetricResource")]
-	public DeviceMetric DeviceMetricResource(DeviceMetric arg)
+	public DeviceMetric DeviceMetricResource(CqlContext context, DeviceMetric arg)
 	{
 		DeviceMetric[] a_ = [
 			arg,
@@ -1929,8 +1879,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("DeviceRequestResource")]
-	public DeviceRequest DeviceRequestResource(DeviceRequest arg)
+	public DeviceRequest DeviceRequestResource(CqlContext context, DeviceRequest arg)
 	{
 		DeviceRequest[] a_ = [
 			arg,
@@ -1997,8 +1946,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("DeviceUseStatementResource")]
-	public DeviceUseStatement DeviceUseStatementResource(DeviceUseStatement arg)
+	public DeviceUseStatement DeviceUseStatementResource(CqlContext context, DeviceUseStatement arg)
 	{
 		DeviceUseStatement[] a_ = [
 			arg,
@@ -2043,8 +1991,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("DiagnosticReportResource")]
-	public DiagnosticReport DiagnosticReportResource(DiagnosticReport arg)
+	public DiagnosticReport DiagnosticReportResource(CqlContext context, DiagnosticReport arg)
 	{
 		DiagnosticReport[] a_ = [
 			arg,
@@ -2099,8 +2046,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("DocumentManifestResource")]
-	public DocumentManifest DocumentManifestResource(DocumentManifest arg)
+	public DocumentManifest DocumentManifestResource(CqlContext context, DocumentManifest arg)
 	{
 		DocumentManifest[] a_ = [
 			arg,
@@ -2143,8 +2089,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("DocumentReferenceResource")]
-	public DocumentReference DocumentReferenceResource(DocumentReference arg)
+	public DocumentReference DocumentReferenceResource(CqlContext context, DocumentReference arg)
 	{
 		DocumentReference[] a_ = [
 			arg,
@@ -2195,8 +2140,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("EffectEvidenceSynthesisResource")]
-	public EffectEvidenceSynthesis EffectEvidenceSynthesisResource(EffectEvidenceSynthesis arg)
+	public EffectEvidenceSynthesis EffectEvidenceSynthesisResource(CqlContext context, EffectEvidenceSynthesis arg)
 	{
 		EffectEvidenceSynthesis[] a_ = [
 			arg,
@@ -2281,8 +2225,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("EncounterResource")]
-	public Encounter EncounterResource(Encounter arg)
+	public Encounter EncounterResource(CqlContext context, Encounter arg)
 	{
 		Encounter[] a_ = [
 			arg,
@@ -2347,8 +2290,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("EndpointResource")]
-	public Endpoint EndpointResource(Endpoint arg)
+	public Endpoint EndpointResource(CqlContext context, Endpoint arg)
 	{
 		Endpoint[] a_ = [
 			arg,
@@ -2389,8 +2331,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("EnrollmentRequestResource")]
-	public EnrollmentRequest EnrollmentRequestResource(EnrollmentRequest arg)
+	public EnrollmentRequest EnrollmentRequestResource(CqlContext context, EnrollmentRequest arg)
 	{
 		EnrollmentRequest[] a_ = [
 			arg,
@@ -2423,8 +2364,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("EnrollmentResponseResource")]
-	public EnrollmentResponse EnrollmentResponseResource(EnrollmentResponse arg)
+	public EnrollmentResponse EnrollmentResponseResource(CqlContext context, EnrollmentResponse arg)
 	{
 		EnrollmentResponse[] a_ = [
 			arg,
@@ -2459,8 +2399,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("EpisodeOfCareResource")]
-	public EpisodeOfCare EpisodeOfCareResource(EpisodeOfCare arg)
+	public EpisodeOfCare EpisodeOfCareResource(CqlContext context, EpisodeOfCare arg)
 	{
 		EpisodeOfCare[] a_ = [
 			arg,
@@ -2503,8 +2442,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("EventDefinitionResource")]
-	public EventDefinition EventDefinitionResource(EventDefinition arg)
+	public EventDefinition EventDefinitionResource(CqlContext context, EventDefinition arg)
 	{
 		EventDefinition[] a_ = [
 			arg,
@@ -2579,8 +2517,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("EvidenceResource")]
-	public Evidence EvidenceResource(Evidence arg)
+	public Evidence EvidenceResource(CqlContext context, Evidence arg)
 	{
 		Evidence[] a_ = [
 			arg,
@@ -2655,8 +2592,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("EvidenceVariableResource")]
-	public EvidenceVariable EvidenceVariableResource(EvidenceVariable arg)
+	public EvidenceVariable EvidenceVariableResource(CqlContext context, EvidenceVariable arg)
 	{
 		EvidenceVariable[] a_ = [
 			arg,
@@ -2729,8 +2665,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ExplanationOfBenefitResource")]
-	public ExplanationOfBenefit ExplanationOfBenefitResource(ExplanationOfBenefit arg)
+	public ExplanationOfBenefit ExplanationOfBenefitResource(CqlContext context, ExplanationOfBenefit arg)
 	{
 		ExplanationOfBenefit[] a_ = [
 			arg,
@@ -2837,8 +2772,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("FamilyMemberHistoryResource")]
-	public FamilyMemberHistory FamilyMemberHistoryResource(FamilyMemberHistory arg)
+	public FamilyMemberHistory FamilyMemberHistoryResource(CqlContext context, FamilyMemberHistory arg)
 	{
 		FamilyMemberHistory[] a_ = [
 			arg,
@@ -2893,8 +2827,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("FlagResource")]
-	public Flag FlagResource(Flag arg)
+	public Flag FlagResource(CqlContext context, Flag arg)
 	{
 		Flag[] a_ = [
 			arg,
@@ -2929,8 +2862,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("GoalResource")]
-	public Goal GoalResource(Goal arg)
+	public Goal GoalResource(CqlContext context, Goal arg)
 	{
 		Goal[] a_ = [
 			arg,
@@ -2981,8 +2913,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("GroupResource")]
-	public Group GroupResource(Group arg)
+	public Group GroupResource(CqlContext context, Group arg)
 	{
 		Group[] a_ = [
 			arg,
@@ -3023,8 +2954,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("GuidanceResponseResource")]
-	public GuidanceResponse GuidanceResponseResource(GuidanceResponse arg)
+	public GuidanceResponse GuidanceResponseResource(CqlContext context, GuidanceResponse arg)
 	{
 		GuidanceResponse[] a_ = [
 			arg,
@@ -3073,8 +3003,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("HealthcareServiceResource")]
-	public HealthcareService HealthcareServiceResource(HealthcareService arg)
+	public HealthcareService HealthcareServiceResource(CqlContext context, HealthcareService arg)
 	{
 		HealthcareService[] a_ = [
 			arg,
@@ -3141,8 +3070,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ImagingStudyResource")]
-	public ImagingStudy ImagingStudyResource(ImagingStudy arg)
+	public ImagingStudy ImagingStudyResource(CqlContext context, ImagingStudy arg)
 	{
 		ImagingStudy[] a_ = [
 			arg,
@@ -3205,8 +3133,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ImmunizationResource")]
-	public Immunization ImmunizationResource(Immunization arg)
+	public Immunization ImmunizationResource(CqlContext context, Immunization arg)
 	{
 		Immunization[] a_ = [
 			arg,
@@ -3281,8 +3208,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ImmunizationEvaluationResource")]
-	public ImmunizationEvaluation ImmunizationEvaluationResource(ImmunizationEvaluation arg)
+	public ImmunizationEvaluation ImmunizationEvaluationResource(CqlContext context, ImmunizationEvaluation arg)
 	{
 		ImmunizationEvaluation[] a_ = [
 			arg,
@@ -3327,8 +3253,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ImmunizationRecommendationResource")]
-	public ImmunizationRecommendation ImmunizationRecommendationResource(ImmunizationRecommendation arg)
+	public ImmunizationRecommendation ImmunizationRecommendationResource(CqlContext context, ImmunizationRecommendation arg)
 	{
 		ImmunizationRecommendation[] a_ = [
 			arg,
@@ -3357,8 +3282,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("InsurancePlanResource")]
-	public InsurancePlan InsurancePlanResource(InsurancePlan arg)
+	public InsurancePlan InsurancePlanResource(CqlContext context, InsurancePlan arg)
 	{
 		InsurancePlan[] a_ = [
 			arg,
@@ -3405,8 +3329,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("InvoiceResource")]
-	public Invoice InvoiceResource(Invoice arg)
+	public Invoice InvoiceResource(CqlContext context, Invoice arg)
 	{
 		Invoice[] a_ = [
 			arg,
@@ -3457,8 +3380,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("LibraryResource")]
-	public Library LibraryResource(Library arg)
+	public Library LibraryResource(CqlContext context, Library arg)
 	{
 		Library[] a_ = [
 			arg,
@@ -3539,8 +3461,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("LinkageResource")]
-	public Linkage LinkageResource(Linkage arg)
+	public Linkage LinkageResource(CqlContext context, Linkage arg)
 	{
 		Linkage[] a_ = [
 			arg,
@@ -3565,8 +3486,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("LocationResource")]
-	public Location LocationResource(Location arg)
+	public Location LocationResource(CqlContext context, Location arg)
 	{
 		Location[] a_ = [
 			arg,
@@ -3619,8 +3539,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MeasureResource")]
-	public Measure MeasureResource(Measure arg)
+	public Measure MeasureResource(CqlContext context, Measure arg)
 	{
 		Measure[] a_ = [
 			arg,
@@ -3721,8 +3640,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MeasureReportResource")]
-	public MeasureReport MeasureReportResource(MeasureReport arg)
+	public MeasureReport MeasureReportResource(CqlContext context, MeasureReport arg)
 	{
 		MeasureReport[] a_ = [
 			arg,
@@ -3763,8 +3681,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicationResource")]
-	public Medication MedicationResource(Medication arg)
+	public Medication MedicationResource(CqlContext context, Medication arg)
 	{
 		Medication[] a_ = [
 			arg,
@@ -3799,8 +3716,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicationAdministrationResource")]
-	public MedicationAdministration MedicationAdministrationResource(MedicationAdministration arg)
+	public MedicationAdministration MedicationAdministrationResource(CqlContext context, MedicationAdministration arg)
 	{
 		MedicationAdministration[] a_ = [
 			arg,
@@ -3857,8 +3773,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicationDispenseResource")]
-	public MedicationDispense MedicationDispenseResource(MedicationDispense arg)
+	public MedicationDispense MedicationDispenseResource(CqlContext context, MedicationDispense arg)
 	{
 		MedicationDispense[] a_ = [
 			arg,
@@ -3925,8 +3840,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicationKnowledgeResource")]
-	public MedicationKnowledge MedicationKnowledgeResource(MedicationKnowledge arg)
+	public MedicationKnowledge MedicationKnowledgeResource(CqlContext context, MedicationKnowledge arg)
 	{
 		MedicationKnowledge[] a_ = [
 			arg,
@@ -3989,8 +3903,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicationRequestResource")]
-	public MedicationRequest MedicationRequestResource(MedicationRequest arg)
+	public MedicationRequest MedicationRequestResource(CqlContext context, MedicationRequest arg)
 	{
 		MedicationRequest[] a_ = [
 			arg,
@@ -4073,8 +3986,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicationStatementResource")]
-	public MedicationStatement MedicationStatementResource(MedicationStatement arg)
+	public MedicationStatement MedicationStatementResource(CqlContext context, MedicationStatement arg)
 	{
 		MedicationStatement[] a_ = [
 			arg,
@@ -4127,8 +4039,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicinalProductResource")]
-	public MedicinalProduct MedicinalProductResource(MedicinalProduct arg)
+	public MedicinalProduct MedicinalProductResource(CqlContext context, MedicinalProduct arg)
 	{
 		MedicinalProduct[] a_ = [
 			arg,
@@ -4187,8 +4098,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicinalProductAuthorizationResource")]
-	public MedicinalProductAuthorization MedicinalProductAuthorizationResource(MedicinalProductAuthorization arg)
+	public MedicinalProductAuthorization MedicinalProductAuthorizationResource(CqlContext context, MedicinalProductAuthorization arg)
 	{
 		MedicinalProductAuthorization[] a_ = [
 			arg,
@@ -4239,8 +4149,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicinalProductContraindicationResource")]
-	public MedicinalProductContraindication MedicinalProductContraindicationResource(MedicinalProductContraindication arg)
+	public MedicinalProductContraindication MedicinalProductContraindicationResource(CqlContext context, MedicinalProductContraindication arg)
 	{
 		MedicinalProductContraindication[] a_ = [
 			arg,
@@ -4273,8 +4182,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicinalProductIngredientResource")]
-	public MedicinalProductIngredient MedicinalProductIngredientResource(MedicinalProductIngredient arg)
+	public MedicinalProductIngredient MedicinalProductIngredientResource(CqlContext context, MedicinalProductIngredient arg)
 	{
 		MedicinalProductIngredient[] a_ = [
 			arg,
@@ -4305,8 +4213,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicinalProductInteractionResource")]
-	public MedicinalProductInteraction MedicinalProductInteractionResource(MedicinalProductInteraction arg)
+	public MedicinalProductInteraction MedicinalProductInteractionResource(CqlContext context, MedicinalProductInteraction arg)
 	{
 		MedicinalProductInteraction[] a_ = [
 			arg,
@@ -4339,8 +4246,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicinalProductManufacturedResource")]
-	public MedicinalProductManufactured MedicinalProductManufacturedResource(MedicinalProductManufactured arg)
+	public MedicinalProductManufactured MedicinalProductManufacturedResource(CqlContext context, MedicinalProductManufactured arg)
 	{
 		MedicinalProductManufactured[] a_ = [
 			arg,
@@ -4373,8 +4279,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicinalProductPackagedResource")]
-	public MedicinalProductPackaged MedicinalProductPackagedResource(MedicinalProductPackaged arg)
+	public MedicinalProductPackaged MedicinalProductPackagedResource(CqlContext context, MedicinalProductPackaged arg)
 	{
 		MedicinalProductPackaged[] a_ = [
 			arg,
@@ -4411,8 +4316,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicinalProductPharmaceuticalResource")]
-	public MedicinalProductPharmaceutical MedicinalProductPharmaceuticalResource(MedicinalProductPharmaceutical arg)
+	public MedicinalProductPharmaceutical MedicinalProductPharmaceuticalResource(CqlContext context, MedicinalProductPharmaceutical arg)
 	{
 		MedicinalProductPharmaceutical[] a_ = [
 			arg,
@@ -4445,8 +4349,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MedicinalProductUndesirableEffectResource")]
-	public MedicinalProductUndesirableEffect MedicinalProductUndesirableEffectResource(MedicinalProductUndesirableEffect arg)
+	public MedicinalProductUndesirableEffect MedicinalProductUndesirableEffectResource(CqlContext context, MedicinalProductUndesirableEffect arg)
 	{
 		MedicinalProductUndesirableEffect[] a_ = [
 			arg,
@@ -4475,8 +4378,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MessageHeaderResource")]
-	public MessageHeader MessageHeaderResource(MessageHeader arg)
+	public MessageHeader MessageHeaderResource(CqlContext context, MessageHeader arg)
 	{
 		MessageHeader[] a_ = [
 			arg,
@@ -4517,8 +4419,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("MolecularSequenceResource")]
-	public MolecularSequence MolecularSequenceResource(MolecularSequence arg)
+	public MolecularSequence MolecularSequenceResource(CqlContext context, MolecularSequence arg)
 	{
 		MolecularSequence[] a_ = [
 			arg,
@@ -4569,8 +4470,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("NamingSystemResource")]
-	public NamingSystem NamingSystemResource(NamingSystem arg)
+	public NamingSystem NamingSystemResource(CqlContext context, NamingSystem arg)
 	{
 		NamingSystem[] a_ = [
 			arg,
@@ -4615,8 +4515,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("NutritionOrderResource")]
-	public NutritionOrder NutritionOrderResource(NutritionOrder arg)
+	public NutritionOrder NutritionOrderResource(CqlContext context, NutritionOrder arg)
 	{
 		NutritionOrder[] a_ = [
 			arg,
@@ -4669,8 +4568,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ObservationResource")]
-	public Observation ObservationResource(Observation arg)
+	public Observation ObservationResource(CqlContext context, Observation arg)
 	{
 		Observation[] a_ = [
 			arg,
@@ -4737,8 +4635,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ObservationDefinitionResource")]
-	public ObservationDefinition ObservationDefinitionResource(ObservationDefinition arg)
+	public ObservationDefinition ObservationDefinitionResource(CqlContext context, ObservationDefinition arg)
 	{
 		ObservationDefinition[] a_ = [
 			arg,
@@ -4783,8 +4680,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("OperationOutcomeResource")]
-	public OperationOutcome OperationOutcomeResource(OperationOutcome arg)
+	public OperationOutcome OperationOutcomeResource(CqlContext context, OperationOutcome arg)
 	{
 		OperationOutcome[] a_ = [
 			arg,
@@ -4805,8 +4701,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("OrganizationResource")]
-	public Organization OrganizationResource(Organization arg)
+	public Organization OrganizationResource(CqlContext context, Organization arg)
 	{
 		Organization[] a_ = [
 			arg,
@@ -4845,8 +4740,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("OrganizationAffiliationResource")]
-	public OrganizationAffiliation OrganizationAffiliationResource(OrganizationAffiliation arg)
+	public OrganizationAffiliation OrganizationAffiliationResource(CqlContext context, OrganizationAffiliation arg)
 	{
 		OrganizationAffiliation[] a_ = [
 			arg,
@@ -4889,8 +4783,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("PatientResource")]
-	public Patient PatientResource(Patient arg)
+	public Patient PatientResource(CqlContext context, Patient arg)
 	{
 		Patient[] a_ = [
 			arg,
@@ -4941,8 +4834,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("PaymentNoticeResource")]
-	public PaymentNotice PaymentNoticeResource(PaymentNotice arg)
+	public PaymentNotice PaymentNoticeResource(CqlContext context, PaymentNotice arg)
 	{
 		PaymentNotice[] a_ = [
 			arg,
@@ -4985,8 +4877,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("PaymentReconciliationResource")]
-	public PaymentReconciliation PaymentReconciliationResource(PaymentReconciliation arg)
+	public PaymentReconciliation PaymentReconciliationResource(CqlContext context, PaymentReconciliation arg)
 	{
 		PaymentReconciliation[] a_ = [
 			arg,
@@ -5035,8 +4926,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("PersonResource")]
-	public Person PersonResource(Person arg)
+	public Person PersonResource(CqlContext context, Person arg)
 	{
 		Person[] a_ = [
 			arg,
@@ -5075,8 +4965,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("PlanDefinitionResource")]
-	public PlanDefinition PlanDefinitionResource(PlanDefinition arg)
+	public PlanDefinition PlanDefinitionResource(CqlContext context, PlanDefinition arg)
 	{
 		PlanDefinition[] a_ = [
 			arg,
@@ -5157,8 +5046,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("PractitionerResource")]
-	public Practitioner PractitionerResource(Practitioner arg)
+	public Practitioner PractitionerResource(CqlContext context, Practitioner arg)
 	{
 		Practitioner[] a_ = [
 			arg,
@@ -5197,8 +5085,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("PractitionerRoleResource")]
-	public PractitionerRole PractitionerRoleResource(PractitionerRole arg)
+	public PractitionerRole PractitionerRoleResource(CqlContext context, PractitionerRole arg)
 	{
 		PractitionerRole[] a_ = [
 			arg,
@@ -5245,8 +5132,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ProcedureResource")]
-	public Procedure ProcedureResource(Procedure arg)
+	public Procedure ProcedureResource(CqlContext context, Procedure arg)
 	{
 		Procedure[] a_ = [
 			arg,
@@ -5321,8 +5207,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ProvenanceResource")]
-	public Provenance ProvenanceResource(Provenance arg)
+	public Provenance ProvenanceResource(CqlContext context, Provenance arg)
 	{
 		Provenance[] a_ = [
 			arg,
@@ -5361,8 +5246,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("QuestionnaireResponseResource")]
-	public QuestionnaireResponse QuestionnaireResponseResource(QuestionnaireResponse arg)
+	public QuestionnaireResponse QuestionnaireResponseResource(CqlContext context, QuestionnaireResponse arg)
 	{
 		QuestionnaireResponse[] a_ = [
 			arg,
@@ -5403,8 +5287,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("RelatedPersonResource")]
-	public RelatedPerson RelatedPersonResource(RelatedPerson arg)
+	public RelatedPerson RelatedPersonResource(CqlContext context, RelatedPerson arg)
 	{
 		RelatedPerson[] a_ = [
 			arg,
@@ -5447,8 +5330,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("RequestGroupResource")]
-	public RequestGroup RequestGroupResource(RequestGroup arg)
+	public RequestGroup RequestGroupResource(CqlContext context, RequestGroup arg)
 	{
 		RequestGroup[] a_ = [
 			arg,
@@ -5503,8 +5385,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ResearchDefinitionResource")]
-	public ResearchDefinition ResearchDefinitionResource(ResearchDefinition arg)
+	public ResearchDefinition ResearchDefinitionResource(CqlContext context, ResearchDefinition arg)
 	{
 		ResearchDefinition[] a_ = [
 			arg,
@@ -5591,8 +5472,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ResearchElementDefinitionResource")]
-	public ResearchElementDefinition ResearchElementDefinitionResource(ResearchElementDefinition arg)
+	public ResearchElementDefinition ResearchElementDefinitionResource(CqlContext context, ResearchElementDefinition arg)
 	{
 		ResearchElementDefinition[] a_ = [
 			arg,
@@ -5677,8 +5557,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ResearchStudyResource")]
-	public ResearchStudy ResearchStudyResource(ResearchStudy arg)
+	public ResearchStudy ResearchStudyResource(CqlContext context, ResearchStudy arg)
 	{
 		ResearchStudy[] a_ = [
 			arg,
@@ -5745,8 +5624,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ResearchSubjectResource")]
-	public ResearchSubject ResearchSubjectResource(ResearchSubject arg)
+	public ResearchSubject ResearchSubjectResource(CqlContext context, ResearchSubject arg)
 	{
 		ResearchSubject[] a_ = [
 			arg,
@@ -5781,8 +5659,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("RiskAssessmentResource")]
-	public RiskAssessment RiskAssessmentResource(RiskAssessment arg)
+	public RiskAssessment RiskAssessmentResource(CqlContext context, RiskAssessment arg)
 	{
 		RiskAssessment[] a_ = [
 			arg,
@@ -5835,8 +5712,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("RiskEvidenceSynthesisResource")]
-	public RiskEvidenceSynthesis RiskEvidenceSynthesisResource(RiskEvidenceSynthesis arg)
+	public RiskEvidenceSynthesis RiskEvidenceSynthesisResource(CqlContext context, RiskEvidenceSynthesis arg)
 	{
 		RiskEvidenceSynthesis[] a_ = [
 			arg,
@@ -5917,8 +5793,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ScheduleResource")]
-	public Schedule ScheduleResource(Schedule arg)
+	public Schedule ScheduleResource(CqlContext context, Schedule arg)
 	{
 		Schedule[] a_ = [
 			arg,
@@ -5953,8 +5828,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ServiceRequestResource")]
-	public ServiceRequest ServiceRequestResource(ServiceRequest arg)
+	public ServiceRequest ServiceRequestResource(CqlContext context, ServiceRequest arg)
 	{
 		ServiceRequest[] a_ = [
 			arg,
@@ -6039,8 +5913,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SlotResource")]
-	public Slot SlotResource(Slot arg)
+	public Slot SlotResource(CqlContext context, Slot arg)
 	{
 		Slot[] a_ = [
 			arg,
@@ -6081,8 +5954,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SpecimenResource")]
-	public Specimen SpecimenResource(Specimen arg)
+	public Specimen SpecimenResource(CqlContext context, Specimen arg)
 	{
 		Specimen[] a_ = [
 			arg,
@@ -6127,8 +5999,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SpecimenDefinitionResource")]
-	public SpecimenDefinition SpecimenDefinitionResource(SpecimenDefinition arg)
+	public SpecimenDefinition SpecimenDefinitionResource(CqlContext context, SpecimenDefinition arg)
 	{
 		SpecimenDefinition[] a_ = [
 			arg,
@@ -6159,8 +6030,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("StructureDefinitionResource")]
-	public StructureDefinition StructureDefinitionResource(StructureDefinition arg)
+	public StructureDefinition StructureDefinitionResource(CqlContext context, StructureDefinition arg)
 	{
 		StructureDefinition[] a_ = [
 			arg,
@@ -6233,8 +6103,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("StructureMapResource")]
-	public StructureMap StructureMapResource(StructureMap arg)
+	public StructureMap StructureMapResource(CqlContext context, StructureMap arg)
 	{
 		StructureMap[] a_ = [
 			arg,
@@ -6289,8 +6158,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SubscriptionResource")]
-	public Subscription SubscriptionResource(Subscription arg)
+	public Subscription SubscriptionResource(CqlContext context, Subscription arg)
 	{
 		Subscription[] a_ = [
 			arg,
@@ -6323,8 +6191,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SubstanceResource")]
-	public Substance SubstanceResource(Substance arg)
+	public Substance SubstanceResource(CqlContext context, Substance arg)
 	{
 		Substance[] a_ = [
 			arg,
@@ -6357,8 +6224,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SubstanceNucleicAcidResource")]
-	public SubstanceNucleicAcid SubstanceNucleicAcidResource(SubstanceNucleicAcid arg)
+	public SubstanceNucleicAcid SubstanceNucleicAcidResource(CqlContext context, SubstanceNucleicAcid arg)
 	{
 		SubstanceNucleicAcid[] a_ = [
 			arg,
@@ -6387,8 +6253,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SubstancePolymerResource")]
-	public SubstancePolymer SubstancePolymerResource(SubstancePolymer arg)
+	public SubstancePolymer SubstancePolymerResource(CqlContext context, SubstancePolymer arg)
 	{
 		SubstancePolymer[] a_ = [
 			arg,
@@ -6419,8 +6284,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SubstanceProteinResource")]
-	public SubstanceProtein SubstanceProteinResource(SubstanceProtein arg)
+	public SubstanceProtein SubstanceProteinResource(CqlContext context, SubstanceProtein arg)
 	{
 		SubstanceProtein[] a_ = [
 			arg,
@@ -6447,8 +6311,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SubstanceReferenceInformationResource")]
-	public SubstanceReferenceInformation SubstanceReferenceInformationResource(SubstanceReferenceInformation arg)
+	public SubstanceReferenceInformation SubstanceReferenceInformationResource(CqlContext context, SubstanceReferenceInformation arg)
 	{
 		SubstanceReferenceInformation[] a_ = [
 			arg,
@@ -6477,8 +6340,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SubstanceSourceMaterialResource")]
-	public SubstanceSourceMaterial SubstanceSourceMaterialResource(SubstanceSourceMaterial arg)
+	public SubstanceSourceMaterial SubstanceSourceMaterialResource(CqlContext context, SubstanceSourceMaterial arg)
 	{
 		SubstanceSourceMaterial[] a_ = [
 			arg,
@@ -6523,8 +6385,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SubstanceSpecificationResource")]
-	public SubstanceSpecification SubstanceSpecificationResource(SubstanceSpecification arg)
+	public SubstanceSpecification SubstanceSpecificationResource(CqlContext context, SubstanceSpecification arg)
 	{
 		SubstanceSpecification[] a_ = [
 			arg,
@@ -6581,8 +6442,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SupplyDeliveryResource")]
-	public SupplyDelivery SupplyDeliveryResource(SupplyDelivery arg)
+	public SupplyDelivery SupplyDeliveryResource(CqlContext context, SupplyDelivery arg)
 	{
 		SupplyDelivery[] a_ = [
 			arg,
@@ -6623,8 +6483,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("SupplyRequestResource")]
-	public SupplyRequest SupplyRequestResource(SupplyRequest arg)
+	public SupplyRequest SupplyRequestResource(CqlContext context, SupplyRequest arg)
 	{
 		SupplyRequest[] a_ = [
 			arg,
@@ -6673,8 +6532,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("TaskResource")]
-	public Task TaskResource(Task arg)
+	public Task TaskResource(CqlContext context, Task arg)
 	{
 		Task[] a_ = [
 			arg,
@@ -6755,8 +6613,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("TerminologyCapabilitiesResource")]
-	public TerminologyCapabilities TerminologyCapabilitiesResource(TerminologyCapabilities arg)
+	public TerminologyCapabilities TerminologyCapabilitiesResource(CqlContext context, TerminologyCapabilities arg)
 	{
 		TerminologyCapabilities[] a_ = [
 			arg,
@@ -6823,8 +6680,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("TestReportResource")]
-	public TestReport TestReportResource(TestReport arg)
+	public TestReport TestReportResource(CqlContext context, TestReport arg)
 	{
 		TestReport[] a_ = [
 			arg,
@@ -6867,8 +6723,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("TestScriptResource")]
-	public TestScript TestScriptResource(TestScript arg)
+	public TestScript TestScriptResource(CqlContext context, TestScript arg)
 	{
 		TestScript[] a_ = [
 			arg,
@@ -6935,8 +6790,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("ValueSetResource")]
-	public ValueSet ValueSetResource(ValueSet arg)
+	public ValueSet ValueSetResource(CqlContext context, ValueSet arg)
 	{
 		ValueSet[] a_ = [
 			arg,
@@ -6991,8 +6845,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("VerificationResultResource")]
-	public VerificationResult VerificationResultResource(VerificationResult arg)
+	public VerificationResult VerificationResultResource(CqlContext context, VerificationResult arg)
 	{
 		VerificationResult[] a_ = [
 			arg,
@@ -7039,8 +6892,7 @@ public class FHIRConversionTest_2023_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("VisionPrescriptionResource")]
-	public VisionPrescription VisionPrescriptionResource(VisionPrescription arg)
+	public VisionPrescription VisionPrescriptionResource(CqlContext context, VisionPrescription arg)
 	{
 		VisionPrescription[] a_ = [
 			arg,
