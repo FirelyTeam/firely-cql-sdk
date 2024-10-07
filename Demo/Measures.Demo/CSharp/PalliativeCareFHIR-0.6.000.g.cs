@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
-public partial class PalliativeCareFHIR_0_6_000
+public partial class PalliativeCareFHIR_0_6_000 : ISingleton<PalliativeCareFHIR_0_6_000>
 {
     private PalliativeCareFHIR_0_6_000() {}
 

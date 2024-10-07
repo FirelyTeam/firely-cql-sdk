@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
-public partial class TJCOverallFHIR_1_8_000
+public partial class TJCOverallFHIR_1_8_000 : ISingleton<TJCOverallFHIR_1_8_000>
 {
     private TJCOverallFHIR_1_8_000() {}
 

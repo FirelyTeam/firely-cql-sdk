@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("Cataracts2040BCVAwithin90DaysFHIR", "0.1.000")]
-public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000
+public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ISingleton<Cataracts2040BCVAwithin90DaysFHIR_0_1_000>
 {
     private Cataracts2040BCVAwithin90DaysFHIR_0_1_000() {}
 

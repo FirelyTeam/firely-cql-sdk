@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("ProstateCaAvoidanceBoneScanOveruseFHIR", "0.2.000")]
-public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000
+public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ISingleton<ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000>
 {
     private ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000() {}
 

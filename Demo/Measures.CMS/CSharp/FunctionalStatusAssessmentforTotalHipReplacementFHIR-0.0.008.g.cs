@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("FunctionalStatusAssessmentforTotalHipReplacementFHIR", "0.0.008")]
-public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008
+public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008 : ISingleton<FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008>
 {
     private FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_008() {}
 

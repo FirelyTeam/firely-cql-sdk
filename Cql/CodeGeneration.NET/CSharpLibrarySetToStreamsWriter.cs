@@ -217,7 +217,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             writer.WriteLine(indentLevel, $"[CqlLibrary({QuoteString(libraryAttribute)}, {QuoteString(versionAttribute)})]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
-            writer.WriteLine(indentLevel, $"public partial class {className}");
+            writer.WriteLine(indentLevel, $"public partial class {className} : ISingleton<{className}>");
             writer.WriteLine(indentLevel, "{");
             indentLevel += 1;
             // Class

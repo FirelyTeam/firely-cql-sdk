@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("AppropriateDXAScansForWomenUnder65FHIR", "0.0.000")]
-public partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
+public partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000 : ISingleton<AppropriateDXAScansForWomenUnder65FHIR_0_0_000>
 {
     private AppropriateDXAScansForWomenUnder65FHIR_0_0_000() {}
 

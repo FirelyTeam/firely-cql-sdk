@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("POAGOpticNerveEvaluationFHIR", "0.1.000")]
-public partial class POAGOpticNerveEvaluationFHIR_0_1_000
+public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ISingleton<POAGOpticNerveEvaluationFHIR_0_1_000>
 {
     private POAGOpticNerveEvaluationFHIR_0_1_000() {}
 

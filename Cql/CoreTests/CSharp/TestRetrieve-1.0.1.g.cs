@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("TestRetrieve", "1.0.1")]
-public partial class TestRetrieve_1_0_1
+public partial class TestRetrieve_1_0_1 : ISingleton<TestRetrieve_1_0_1>
 {
     private TestRetrieve_1_0_1() {}
 

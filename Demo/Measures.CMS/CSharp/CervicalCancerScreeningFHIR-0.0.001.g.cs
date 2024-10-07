@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("CervicalCancerScreeningFHIR", "0.0.001")]
-public partial class CervicalCancerScreeningFHIR_0_0_001
+public partial class CervicalCancerScreeningFHIR_0_0_001 : ISingleton<CervicalCancerScreeningFHIR_0_0_001>
 {
     private CervicalCancerScreeningFHIR_0_0_001() {}
 

@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("AHAOverall", "2.6.000")]
-public partial class AHAOverall_2_6_000
+public partial class AHAOverall_2_6_000 : ISingleton<AHAOverall_2_6_000>
 {
     private AHAOverall_2_6_000() {}
 

@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
-public partial class AdultOutpatientEncountersFHIR4_2_2_000
+public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ISingleton<AdultOutpatientEncountersFHIR4_2_2_000>
 {
     private AdultOutpatientEncountersFHIR4_2_2_000() {}
 

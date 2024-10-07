@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("NCQATerminology", "1.0.0")]
-public partial class NCQATerminology_1_0_0
+public partial class NCQATerminology_1_0_0 : ISingleton<NCQATerminology_1_0_0>
 {
     private NCQATerminology_1_0_0() {}
 

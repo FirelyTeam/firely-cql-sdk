@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.2.000")]
-public partial class CRLReceiptofSpecialistReportFHIR_0_2_000
+public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ISingleton<CRLReceiptofSpecialistReportFHIR_0_2_000>
 {
     private CRLReceiptofSpecialistReportFHIR_0_2_000() {}
 

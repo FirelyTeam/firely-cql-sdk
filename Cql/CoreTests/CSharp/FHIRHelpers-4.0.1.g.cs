@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("FHIRHelpers", "4.0.1")]
-public partial class FHIRHelpers_4_0_1
+public partial class FHIRHelpers_4_0_1 : ISingleton<FHIRHelpers_4_0_1>
 {
     private FHIRHelpers_4_0_1() {}
 

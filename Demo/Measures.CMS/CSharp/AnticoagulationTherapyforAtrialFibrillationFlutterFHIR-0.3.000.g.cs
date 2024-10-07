@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR", "0.3.000")]
-public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000
+public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000 : ISingleton<AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000>
 {
     private AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000() {}
 

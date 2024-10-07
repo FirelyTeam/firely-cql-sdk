@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("VTEFHIR4", "4.8.000")]
-public partial class VTEFHIR4_4_8_000
+public partial class VTEFHIR4_4_8_000 : ISingleton<VTEFHIR4_4_8_000>
 {
     private VTEFHIR4_4_8_000() {}
 

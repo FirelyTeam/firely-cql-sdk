@@ -12,7 +12,7 @@ using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
-public partial class FHIRConversionTest_2023_0_0
+public partial class FHIRConversionTest_2023_0_0 : ISingleton<FHIRConversionTest_2023_0_0>
 {
     private FHIRConversionTest_2023_0_0() {}
 
