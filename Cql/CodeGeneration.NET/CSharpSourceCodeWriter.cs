@@ -201,33 +201,119 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine(indentLevel, $"public partial class {className}");
             else
                 writer.WriteLine(indentLevel, $"public class {className}");
+
             writer.WriteLine(indentLevel, "{");
             writer.WriteLine();
             indentLevel += 1;
+
+            var hasContext = false;
+            var node = dependencyGraph.Nodes[libraryName];
+            if (node.Properties != null && node.Properties.ContainsKey("Library"))
+            {
+                hasContext = ((Elm.Library)node.Properties["Library"])?.contexts != null;
+            }
+
             // Class
             {
-                writer.WriteLine(indentLevel, $"public static {className} Instance {{ get; }}  = new();");
-                writer.WriteLine();
+                // singleton for libraries, constructors for measures
+                if (!hasContext)
+                {
+                    writer.WriteLine(indentLevel, $"public static {className} Instance {{ get; }}  = new();");
+                    writer.WriteLine();
+                }
+                else
+                {
+                    writeCachedValues(definitions, libraryName, writer, indentLevel);
 
-                writeMethods(definitions, libraryName, writer, indentLevel);
+                    // Write constructor
+                    writer.WriteLine(indentLevel, $"public {className}(CqlContext context)");
+                    writer.WriteLine(indentLevel, "{");
+                    {
+                        indentLevel += 1;
+
+                        writeCachedValueNames(definitions, libraryName, writer, indentLevel);
+                        indentLevel -= 1;
+                    }
+
+                    writer.WriteLine(indentLevel, "}");
+                }
+
+                writeMethods(definitions, libraryName, writer, indentLevel, hasContext);
+
                 indentLevel -= 1;
                 writer.WriteLine(indentLevel, "}");
             }
         }
 
-        private void writeMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void writeMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel, bool useLazy)
         {
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
                 foreach (var overload in kvp.Value)
                 {
                     definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
-                    writeMethod(libraryName, writer, indentLevel, kvp.Key, overload.T, tags);
+                    writeMethod(libraryName, writer, indentLevel, useLazy, kvp.Key, overload.T, tags);
                     writer.WriteLine();
                 }
             }
         }
-        
+
+        private void writeCachedValueNames(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        {
+            foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
+            {
+                foreach (var overload in kvp.Value)
+                {
+                    if (isDefinition(overload.Item2))
+                    {
+                        var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
+                        var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
+                        var returnType = ExpressionConverter.PrettyTypeName(overload.Item2.ReturnType);
+                        var privateMethodName = PrivateMethodNameFor(methodName!);
+                        writer.WriteLine(indentLevel, $"{cachedValueName} = new Lazy<{returnType}>(this.{privateMethodName}(context));");
+                    }
+                }
+            }
+        }
+
+        private static void writeDependencies(DirectedGraph dependencyGraph, Func<string?, string?> libraryNameToClassName, string libraryName, StreamWriter writer, int indentLevel)
+        {
+            var node = dependencyGraph.Nodes[libraryName];
+            var requiredLibraries = node.ForwardEdges?
+                .Select(edge => edge.ToId)
+                .Except(new[] { dependencyGraph.EndNode.NodeId })
+                .Distinct();
+
+            foreach (var dependentLibrary in requiredLibraries!)
+            {
+                var typeName = libraryNameToClassName!(dependentLibrary);
+                var memberName = typeName;
+                writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
+            }
+        }
+
+        private void writeCachedValues(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        {
+            writer.WriteLine(indentLevel, "#region Cached values");
+            writer.WriteLine();
+            var accessModifier = AccessModifierString(DefinesAccessModifier);
+            foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
+            {
+                foreach (var overload in kvp.Value)
+                {
+                    if (isDefinition(overload.T))
+                    {
+                        var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
+                        var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
+                        var returnType = ExpressionConverter.PrettyTypeName(overload.T.ReturnType);
+                        writer.WriteLine(indentLevel, $"{accessModifier} Lazy<{returnType}> {cachedValueName};");
+                    }
+                }
+            }
+            writer.WriteLine();
+            writer.WriteLine(indentLevel, "#endregion");
+        }
+
         private void writeTupleTypes(IEnumerable<Type> tupleTypes, Func<string, Stream> libraryNameToStream, bool closeStream)
         {
             if (tupleTypes.Any())
@@ -280,7 +366,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             return sorted;
         }
 
+        private string DefinitionCacheKeyForMethod(string methodName)
+        {
+            if (methodName[0] == '@')
+                return "__" + methodName.Substring(1);
+            else return "__" + methodName;
+        }
+        private string PrivateMethodNameFor(string methodName) => methodName + "_Value";
+
         private void writeMethod(string libraryName, TextWriter writer, int indentLevel,
+            bool useLazy,
             string cqlName,
             LambdaExpression overload,
             ILookup<string, string>? tags)
@@ -306,6 +401,13 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             if (isDef)
             {
+                var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
+                var privateMethodName = PrivateMethodNameFor(methodName!);
+
+                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, privateMethodName, "private");
+                writer.Write(func);
+                writer.WriteLine();
+
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
 
@@ -324,7 +426,21 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                 }
 
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
+                var lazyType = typeof(Lazy<>).MakeGenericType(visitedBody.Type);
+                var valueFunc =
+                    Expression.Lambda(
+                        Expression.MakeMemberAccess(
+                            Expression.Parameter(lazyType, cachedValueName),
+                            lazyType.GetMember("Value").Single()));
+
+                if (useLazy)
+                {
+                    writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, valueFunc, methodName!, "public"));
+                }
+                else
+                {
+                    writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
+                }
             }
             else
             {
